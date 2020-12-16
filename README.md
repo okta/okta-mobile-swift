@@ -5,6 +5,18 @@
 <!-- TOC depthFrom:2 depthTo:3 -->
 <!-- /TOC -->
 
+## Design Principles
+
+Since the Identity Engine library is new, and built in Swift, there is an opportunity to create a best-in-class experience for developers that can streamline the process, simplify the developer experience, and provide maximum compatability with existing applications.
+
+As a result, a multi-tiered approach will be made to reach the following goals:
+
+* Full Swift and Objective-C support, with "Swifty" and Objective-C naming conventions.
+* Traditional Delegation / block-based patterns used in Objective-C.
+* Streamlined Combine extension that can leverage Promises and Futures.
+* Overridden `description` and `debugDescription` implementations to aid in debugging.
+* Unified Logging and Activity Tracing support for simpler crash log reporting.
+
 ## Getting Started
 
 ## Supported Platforms

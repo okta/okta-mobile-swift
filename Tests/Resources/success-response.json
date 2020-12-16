@@ -1,0 +1,67 @@
+{
+  "stateHandle": "02tYS1NHhCPLcOpT3GByBBRHmGU63p7LGRXJx5cOvp",
+  "version": "1.0.0",
+  "expiresAt": "2020-10-30T23:49:21.000Z",
+  "intent": "LOGIN",
+  "user": {
+    "type": "object",
+    "value": {
+      "id": "00u3iyi3x06D2aWUR1d6"
+    }
+  },
+  "cancel": {
+    "rel": [
+      "create-form"
+    ],
+    "name": "cancel",
+    "href": "https://foo.oktapreview.com/idp/idx/cancel",
+    "method": "POST",
+    "value": [
+      {
+        "name": "stateHandle",
+        "required": true,
+        "value": "02tYS1NHhCPLcOpT3GByBBRHmGU63p7LGRXJx5cOvp",
+        "visible": false,
+        "mutable": false
+      }
+    ],
+    "accepts": "application/ion+json; okta-version=1.0.0"
+  },
+  "app": {
+    "type": "object",
+    "value": {
+      "name": "okta_enduser",
+      "label": "okta_enduser",
+      "id": "DEFAULT_APP"
+    }
+  },
+  "successWithInteractionCode": {
+    "rel": [
+      "create-form"
+    ],
+    "name": "issue",
+    "href": "https://foo.oktapreview.com/oauth2/v1/token",
+    "method": "POST",
+    "value": [
+      {
+        "name": "grant_type",
+        "label": "Grant Type",
+        "required": true,
+        "value": "interaction_code"
+      },
+      {
+        "name": "interaction_code",
+        "label": "Interaction Code",
+        "required": true,
+        "value": "Txd_5odx08kzZ_oxeEbBk8PNjI5UDnTM2P1rMCmHDyA"
+      },
+      {
+        "name": "client_id",
+        "label": "Client Id",
+        "required": true,
+        "value": "0oa3jxy2kpqZs9fOU0g7"
+      }
+    ],
+    "accepts": "application/x-www-form-urlencoded"
+  }
+}
