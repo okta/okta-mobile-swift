@@ -7,6 +7,8 @@
 
 import Foundation
 
+/// Represent mixed JSON values as instances of AnyObject. This is used to expose API response values to NSObject-based class instances
+/// where Swift enums are not supported.
 enum JSONValue: Equatable {
     case string(String)
     case number(Double)

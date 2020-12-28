@@ -8,12 +8,26 @@
 import Foundation
 
 extension IDXClient.APIVersion1: IDXClientAPIImpl {
+    enum AcceptType: String {
+        case ionJson = "application/ion+json; okta-version=1.0.0"
+        case formEncoded = "application/x-www-form-urlencoded"
+    }
+
     func interact(completion: @escaping(String?, Error?) -> Void) {
         let request = InteractRequest()
         request.send(to: session, using: configuration) { (response, error) in
             guard error == nil else {
                 completion(nil, error)
                 return
+            }
+            
+            if let response = response {
+                do {
+                    try self.consumeResponse(response)
+                } catch {
+                    completion(nil, error)
+                    return
+                }
             }
             
             completion(response?.interactionHandle, nil)
@@ -30,8 +44,17 @@ extension IDXClient.APIVersion1: IDXClientAPIImpl {
                 return
             }
             
+            if let response = response {
+                do {
+                    try self.consumeResponse(response)
+                } catch {
+                    completion(nil, error)
+                    return
+                }
+            }
+
             guard let response = response else {
-                completion(nil, IDXClientAPIError.invalidResponseData)
+                completion(nil, IDXClientError.invalidResponseData)
                 return
             }
             
@@ -45,7 +68,7 @@ extension IDXClient.APIVersion1: IDXClientAPIImpl {
                   completion: @escaping (IDXClient.Response?, Error?) -> Void)
     {
         guard let stateHandle = stateHandle else {
-            completion(nil, IDXClientAPIError.invalidClient)
+            completion(nil, IDXClientError.stateHandleMissing)
             return
         }
         let request = IdentifyRequest(stateHandle: stateHandle,
@@ -59,7 +82,7 @@ extension IDXClient.APIVersion1: IDXClientAPIImpl {
                 completion: @escaping (IDXClient.Response?, Error?) -> Void)
     {
         guard let stateHandle = stateHandle else {
-            completion(nil, IDXClientAPIError.invalidClient)
+            completion(nil, IDXClientError.stateHandleMissing)
             return
         }
         let request = EnrollRequest(stateHandle: stateHandle,
@@ -71,7 +94,7 @@ extension IDXClient.APIVersion1: IDXClientAPIImpl {
                    completion: @escaping (IDXClient.Response?, Error?) -> Void)
     {
         guard let stateHandle = stateHandle else {
-            completion(nil, IDXClientAPIError.invalidClient)
+            completion(nil, IDXClientError.stateHandleMissing)
             return
         }
         let request = ChallengeRequest(stateHandle: stateHandle,
@@ -83,7 +106,7 @@ extension IDXClient.APIVersion1: IDXClientAPIImpl {
                          completion: @escaping (IDXClient.Response?, Error?) -> Void)
     {
         guard let stateHandle = stateHandle else {
-            completion(nil, IDXClientAPIError.invalidClient)
+            completion(nil, IDXClientError.stateHandleMissing)
             return
         }
         let request = AnswerChallengeRequest(stateHandle: stateHandle,
@@ -93,12 +116,14 @@ extension IDXClient.APIVersion1: IDXClientAPIImpl {
     
     func cancel(completion: @escaping (Error?) -> Void)
     {
-        guard let stateHandle = stateHandle else {
-            completion(IDXClientAPIError.invalidClient)
+        guard let cancelOption = cancelRemediationOption else {
+            completion(IDXClientError.unknownRemediationOption(name: "cancel"))
             return
         }
-        let request = CancelRequest(stateHandle: stateHandle)
-
+        
+        cancelOption.proceed(with: [:]) { (_, error) in
+            completion(error)
+        }
     }
     
     func token(url: String,
@@ -111,14 +136,50 @@ extension IDXClient.APIVersion1: IDXClientAPIImpl {
     }
     
     func proceed(remediation option: IDXClient.Remediation.Option,
-                 data: [String : Any],
+                 data: [String : Any]? = nil,
                  completion: @escaping (IDXClient.Response?, Error?) -> Void)
     {
-        guard let stateHandle = stateHandle else {
-            completion(nil, IDXClientAPIError.invalidClient)
+        let request: RemediationRequest
+        do {
+            request = try RemediationRequest(remediation: option, parameters: data)
+        } catch {
+            completion(nil, IDXClientError.cannotCreateRequest)
             return
         }
-        let request = RemediationRequest(stateHandle: stateHandle)
+
+        request.send(to: session, using: configuration) { (response, error) in
+            guard error == nil else {
+                completion(nil, error)
+                return
+            }
+            
+            if let response = response {
+                do {
+                    try self.consumeResponse(response)
+                } catch {
+                    completion(nil, error)
+                    return
+                }
+            }
+
+            completion(nil, nil)
+        }
+    }
+}
+
+extension IDXClient.APIVersion1 {
+    func consumeResponse(_ response: InteractRequest.Response) throws {
+        self.interactionHandle = response.interactionHandle
+    }
+
+    func consumeResponse(_ response: IntrospectRequest.ResponseType) throws {
+        self.stateHandle = response.stateHandle
+        self.cancelRemediationOption = IDXClient.Remediation.Option(client: self, v1: response.cancel)
+    }
+    
+    func consumeResponse(_ response: IDXClient.Response) throws  {
+        self.stateHandle = response.stateHandle
+        self.cancelRemediationOption = response.cancelRemediationOption
     }
 }
 

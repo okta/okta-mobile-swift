@@ -109,7 +109,7 @@ public class IDXClient: NSObject, IDXClientAPI {
     }
     
     public func proceed(remediation option: Remediation.Option,
-                        data: [String : Any],
+                        data: [String : Any]? = nil,
                         completion: @escaping (IDXClient.Response?, Error?) -> Void)
     {
         self.api.proceed(remediation: option, data: data, completion: completion)
@@ -128,7 +128,22 @@ extension IDXClient {
                 } else if let handle = handle {
                     promise(.success(handle))
                 } else {
-                    promise(.failure(IDXClientAPIError.invalidResponseData))
+                    promise(.failure(IDXClientError.invalidResponseData))
+                }
+            }
+        }
+    }
+    
+    public func introspect(_ interactionHandle: String) -> Future<IDXClient.Response, Error>
+    {
+        return Future<IDXClient.Response, Error> { (promise) in
+            self.introspect(interactionHandle) { (response, error) in
+                if let error = error {
+                    promise(.failure(error))
+                } else if let response = response {
+                    promise(.success(response))
+                } else {
+                    promise(.failure(IDXClientError.invalidResponseData))
                 }
             }
         }

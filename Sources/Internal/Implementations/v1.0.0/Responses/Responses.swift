@@ -43,7 +43,10 @@ extension IDXClient.APIVersion1 {
     }
     
     struct RemediationRequest {
-        let stateHandle: String
+        let method: String
+        let href: URL
+        let accepts: AcceptType
+        let parameters: [String:Any]
     }
 
     class Response: NSObject, Codable {
@@ -92,39 +95,5 @@ extension IDXClient.APIVersion1 {
             let options: [FormValue]?
             let relatesTo: String?
         }
-
-//        struct Messages: Codable {
-//        }
-//
-//        struct AuthenticatorEnrollments: Codable {
-//        }
-//
-//        struct User: Codable {
-//            let type: String
-//            let value: UserValue
-//
-//            struct UserValue: Codable {
-//                let name: String
-//                let label: String
-//                let id: String
-//            }
-//        }
-//
-//        struct App: Codable {
-//            let type: String
-//            let value: AppValue
-//
-//            struct AppValue: Codable {
-//                let name: String
-//                let label: String
-//                let id: String
-//            }
-//        }
-//
-//        struct SuccessResponse: Codable {
-//        }
-//
-//        struct Cancel: Codable {
-//        }
     }
 }

@@ -1,0 +1,843 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 50;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		961BE4272583E73300DCE8AC /* IDXClientRequestTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 961BE4262583E73300DCE8AC /* IDXClientRequestTests.swift */; };
+		961BE42F2583EC6300DCE8AC /* TestExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 961BE42B2583EC6000DCE8AC /* TestExtensions.swift */; };
+		961BE43A2583F8E900DCE8AC /* RequestHTTPHeaders.swift in Sources */ = {isa = PBXBuildFile; fileRef = 961BE4392583F8E900DCE8AC /* RequestHTTPHeaders.swift */; };
+		961BE43E258406EC00DCE8AC /* PKCEExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 961BE43D258406EC00DCE8AC /* PKCEExtensions.swift */; };
+		961BE4492584184700DCE8AC /* PKCETests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 961BE4482584184700DCE8AC /* PKCETests.swift */; };
+		961DE96325897C6B007CAB16 /* Responses.swift in Sources */ = {isa = PBXBuildFile; fileRef = 961DE96225897C6B007CAB16 /* Responses.swift */; };
+		964A44AC259A6285002CB250 /* AcceptType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 964A44AB259A6285002CB250 /* AcceptType.swift */; };
+		966A1E76258BDB1B00864DB7 /* URLSessionProtocolTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 966A1E75258BDB1B00864DB7 /* URLSessionProtocolTests.swift */; };
+		966A1E80258BEADB00864DB7 /* IDXClientError+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 966A1E7F258BEADB00864DB7 /* IDXClientError+Extensions.swift */; };
+		967102CA2587F93E00D5D85F /* URLSessionMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 967102C92587F93D00D5D85F /* URLSessionMock.swift */; };
+		9696A40825892C74005D6E9D /* IDXClient+Response.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9696A40725892C74005D6E9D /* IDXClient+Response.swift */; };
+		96C584E8258A982400E79975 /* JSONValue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96C584E7258A982400E79975 /* JSONValue.swift */; };
+		96C584EE258ACEB200E79975 /* JSONValueTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96C584ED258ACEB200E79975 /* JSONValueTests.swift */; };
+		96DCDCEC25882263009487CB /* IDXClientAPIVersion1Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96DCDCEB25882263009487CB /* IDXClientAPIVersion1Tests.swift */; };
+		96DCDCF62588354E009487CB /* IDXClientCombineTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96DCDCF52588354E009487CB /* IDXClientCombineTests.swift */; };
+		96DCDCFC258844AD009487CB /* ReceivesIONJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96DCDCFB258844AD009487CB /* ReceivesIONJSON.swift */; };
+		96F5417D258A843300D3995F /* IDXClient+V1Responses.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96F5417C258A843300D3995F /* IDXClient+V1Responses.swift */; };
+		96F8F18E25802FAD00DA2701 /* OktaIdx.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 96F8F18425802FAD00DA2701 /* OktaIdx.framework */; };
+		96F8F1BA258049B000DA2701 /* IDXVersion+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96F8F1B9258049B000DA2701 /* IDXVersion+Extension.swift */; };
+		96F8F1C125804A0C00DA2701 /* IDXClientVersionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96F8F1C025804A0C00DA2701 /* IDXClientVersionTests.swift */; };
+		96F8F20B25815AFD00DA2701 /* IDXClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96F8F20A25815AFD00DA2701 /* IDXClient.swift */; };
+		96F8F2112581973F00DA2701 /* IDXClientAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96F8F2102581973F00DA2701 /* IDXClientAPI.swift */; };
+		96F8F215258197D000DA2701 /* IDXClientAPIv1.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96F8F214258197D000DA2701 /* IDXClientAPIv1.swift */; };
+		96F8F21925828F1300DA2701 /* IDXClient+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96F8F21825828F1300DA2701 /* IDXClient+Extension.swift */; };
+		96F8F22B2582C2DE00DA2701 /* IDXClientTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96F8F22A2582C2DE00DA2701 /* IDXClientTests.swift */; };
+		96F8F2302582C33A00DA2701 /* IDXClientAPIMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96F8F22F2582C33A00DA2701 /* IDXClientAPIMock.swift */; };
+		96F8F2422582D77700DA2701 /* token-error-response.json in Resources */ = {isa = PBXBuildFile; fileRef = 96F8F2362582D77600DA2701 /* token-error-response.json */; };
+		96F8F2432582D77700DA2701 /* challenge-response.json in Resources */ = {isa = PBXBuildFile; fileRef = 96F8F2372582D77600DA2701 /* challenge-response.json */; };
+		96F8F2442582D77700DA2701 /* cancel-response.json in Resources */ = {isa = PBXBuildFile; fileRef = 96F8F2382582D77600DA2701 /* cancel-response.json */; };
+		96F8F2452582D77700DA2701 /* okta.yaml in Resources */ = {isa = PBXBuildFile; fileRef = 96F8F2392582D77600DA2701 /* okta.yaml */; };
+		96F8F2462582D77700DA2701 /* interact-error-response.json in Resources */ = {isa = PBXBuildFile; fileRef = 96F8F23A2582D77700DA2701 /* interact-error-response.json */; };
+		96F8F2472582D77700DA2701 /* answer-challenge-response.json in Resources */ = {isa = PBXBuildFile; fileRef = 96F8F23B2582D77700DA2701 /* answer-challenge-response.json */; };
+		96F8F2482582D77700DA2701 /* introspect-error-response.json in Resources */ = {isa = PBXBuildFile; fileRef = 96F8F23C2582D77700DA2701 /* introspect-error-response.json */; };
+		96F8F2492582D77700DA2701 /* introspect-response.json in Resources */ = {isa = PBXBuildFile; fileRef = 96F8F23D2582D77700DA2701 /* introspect-response.json */; };
+		96F8F24A2582D77700DA2701 /* interact-response.json in Resources */ = {isa = PBXBuildFile; fileRef = 96F8F23E2582D77700DA2701 /* interact-response.json */; };
+		96F8F24B2582D77700DA2701 /* token-response.json in Resources */ = {isa = PBXBuildFile; fileRef = 96F8F23F2582D77700DA2701 /* token-response.json */; };
+		96F8F24C2582D77700DA2701 /* success-response.json in Resources */ = {isa = PBXBuildFile; fileRef = 96F8F2402582D77700DA2701 /* success-response.json */; };
+		96F8F24D2582D77700DA2701 /* identify-response.json in Resources */ = {isa = PBXBuildFile; fileRef = 96F8F2412582D77700DA2701 /* identify-response.json */; };
+		96F8F2522582D7BF00DA2701 /* URLSessionProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96F8F2512582D7BF00DA2701 /* URLSessionProtocol.swift */; };
+		96F8F25B2582E96B00DA2701 /* InteractRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96F8F25A2582E96B00DA2701 /* InteractRequest.swift */; };
+		96F8F2662582E9C900DA2701 /* IdentifyRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96F8F25E2582E9C900DA2701 /* IdentifyRequest.swift */; };
+		96F8F2672582E9C900DA2701 /* ChallengeRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96F8F25F2582E9C900DA2701 /* ChallengeRequest.swift */; };
+		96F8F2682582E9C900DA2701 /* EnrollRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96F8F2602582E9C900DA2701 /* EnrollRequest.swift */; };
+		96F8F2692582E9C900DA2701 /* RemediationRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96F8F2612582E9C900DA2701 /* RemediationRequest.swift */; };
+		96F8F26A2582E9C900DA2701 /* AnswerChallengeRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96F8F2622582E9C900DA2701 /* AnswerChallengeRequest.swift */; };
+		96F8F26B2582E9C900DA2701 /* TokenRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96F8F2632582E9C900DA2701 /* TokenRequest.swift */; };
+		96F8F26C2582E9C900DA2701 /* IntrospectRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96F8F2642582E9C900DA2701 /* IntrospectRequest.swift */; };
+		96F8F26D2582E9C900DA2701 /* CancelRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96F8F2652582E9C900DA2701 /* CancelRequest.swift */; };
+		96F8F2722583E31800DA2701 /* IDXClientAPIImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96F8F2712583E31800DA2701 /* IDXClientAPIImpl.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		96F8F18F25802FAD00DA2701 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 96F8F17925802F9100DA2701 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 96F8F18325802FAD00DA2701;
+			remoteInfo = "okta-idx-ios";
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		961BE4262583E73300DCE8AC /* IDXClientRequestTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IDXClientRequestTests.swift; sourceTree = "<group>"; };
+		961BE42B2583EC6000DCE8AC /* TestExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestExtensions.swift; sourceTree = "<group>"; };
+		961BE4392583F8E900DCE8AC /* RequestHTTPHeaders.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestHTTPHeaders.swift; sourceTree = "<group>"; };
+		961BE43D258406EC00DCE8AC /* PKCEExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PKCEExtensions.swift; sourceTree = "<group>"; };
+		961BE4482584184700DCE8AC /* PKCETests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PKCETests.swift; sourceTree = "<group>"; };
+		961DE96225897C6B007CAB16 /* Responses.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Responses.swift; sourceTree = "<group>"; };
+		964A44AB259A6285002CB250 /* AcceptType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AcceptType.swift; sourceTree = "<group>"; };
+		966A1E75258BDB1B00864DB7 /* URLSessionProtocolTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLSessionProtocolTests.swift; sourceTree = "<group>"; };
+		966A1E7F258BEADB00864DB7 /* IDXClientError+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "IDXClientError+Extensions.swift"; sourceTree = "<group>"; };
+		967102C92587F93D00D5D85F /* URLSessionMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLSessionMock.swift; sourceTree = "<group>"; };
+		9696A40725892C74005D6E9D /* IDXClient+Response.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "IDXClient+Response.swift"; sourceTree = "<group>"; };
+		96C584E7258A982400E79975 /* JSONValue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSONValue.swift; sourceTree = "<group>"; };
+		96C584ED258ACEB200E79975 /* JSONValueTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSONValueTests.swift; sourceTree = "<group>"; };
+		96DCDCEB25882263009487CB /* IDXClientAPIVersion1Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IDXClientAPIVersion1Tests.swift; sourceTree = "<group>"; };
+		96DCDCF52588354E009487CB /* IDXClientCombineTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IDXClientCombineTests.swift; sourceTree = "<group>"; };
+		96DCDCFB258844AD009487CB /* ReceivesIONJSON.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReceivesIONJSON.swift; sourceTree = "<group>"; };
+		96F5417C258A843300D3995F /* IDXClient+V1Responses.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "IDXClient+V1Responses.swift"; sourceTree = "<group>"; };
+		96F8F18425802FAD00DA2701 /* OktaIdx.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = OktaIdx.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		96F8F18D25802FAD00DA2701 /* okta-idx-ios-tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "okta-idx-ios-tests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		96F8F1AC25803BE100DA2701 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		96F8F1B9258049B000DA2701 /* IDXVersion+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "IDXVersion+Extension.swift"; sourceTree = "<group>"; };
+		96F8F1BF25804A0C00DA2701 /* okta-idx-ios-tests-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "okta-idx-ios-tests-Bridging-Header.h"; sourceTree = "<group>"; };
+		96F8F1C025804A0C00DA2701 /* IDXClientVersionTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IDXClientVersionTests.swift; sourceTree = "<group>"; };
+		96F8F1CD25804B5B00DA2701 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		96F8F20A25815AFD00DA2701 /* IDXClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IDXClient.swift; sourceTree = "<group>"; };
+		96F8F2102581973F00DA2701 /* IDXClientAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IDXClientAPI.swift; sourceTree = "<group>"; };
+		96F8F214258197D000DA2701 /* IDXClientAPIv1.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IDXClientAPIv1.swift; sourceTree = "<group>"; };
+		96F8F21825828F1300DA2701 /* IDXClient+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "IDXClient+Extension.swift"; sourceTree = "<group>"; };
+		96F8F22A2582C2DE00DA2701 /* IDXClientTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IDXClientTests.swift; sourceTree = "<group>"; };
+		96F8F22F2582C33A00DA2701 /* IDXClientAPIMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IDXClientAPIMock.swift; sourceTree = "<group>"; };
+		96F8F2362582D77600DA2701 /* token-error-response.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "token-error-response.json"; sourceTree = "<group>"; };
+		96F8F2372582D77600DA2701 /* challenge-response.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "challenge-response.json"; sourceTree = "<group>"; };
+		96F8F2382582D77600DA2701 /* cancel-response.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "cancel-response.json"; sourceTree = "<group>"; };
+		96F8F2392582D77600DA2701 /* okta.yaml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.yaml; path = okta.yaml; sourceTree = "<group>"; };
+		96F8F23A2582D77700DA2701 /* interact-error-response.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "interact-error-response.json"; sourceTree = "<group>"; };
+		96F8F23B2582D77700DA2701 /* answer-challenge-response.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "answer-challenge-response.json"; sourceTree = "<group>"; };
+		96F8F23C2582D77700DA2701 /* introspect-error-response.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "introspect-error-response.json"; sourceTree = "<group>"; };
+		96F8F23D2582D77700DA2701 /* introspect-response.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "introspect-response.json"; sourceTree = "<group>"; };
+		96F8F23E2582D77700DA2701 /* interact-response.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "interact-response.json"; sourceTree = "<group>"; };
+		96F8F23F2582D77700DA2701 /* token-response.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "token-response.json"; sourceTree = "<group>"; };
+		96F8F2402582D77700DA2701 /* success-response.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "success-response.json"; sourceTree = "<group>"; };
+		96F8F2412582D77700DA2701 /* identify-response.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "identify-response.json"; sourceTree = "<group>"; };
+		96F8F2512582D7BF00DA2701 /* URLSessionProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLSessionProtocol.swift; sourceTree = "<group>"; };
+		96F8F25A2582E96B00DA2701 /* InteractRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InteractRequest.swift; sourceTree = "<group>"; };
+		96F8F25E2582E9C900DA2701 /* IdentifyRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IdentifyRequest.swift; sourceTree = "<group>"; };
+		96F8F25F2582E9C900DA2701 /* ChallengeRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChallengeRequest.swift; sourceTree = "<group>"; };
+		96F8F2602582E9C900DA2701 /* EnrollRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EnrollRequest.swift; sourceTree = "<group>"; };
+		96F8F2612582E9C900DA2701 /* RemediationRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RemediationRequest.swift; sourceTree = "<group>"; };
+		96F8F2622582E9C900DA2701 /* AnswerChallengeRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AnswerChallengeRequest.swift; sourceTree = "<group>"; };
+		96F8F2632582E9C900DA2701 /* TokenRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TokenRequest.swift; sourceTree = "<group>"; };
+		96F8F2642582E9C900DA2701 /* IntrospectRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IntrospectRequest.swift; sourceTree = "<group>"; };
+		96F8F2652582E9C900DA2701 /* CancelRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CancelRequest.swift; sourceTree = "<group>"; };
+		96F8F2712583E31800DA2701 /* IDXClientAPIImpl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IDXClientAPIImpl.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		96F8F18125802FAD00DA2701 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		96F8F18A25802FAD00DA2701 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				96F8F18E25802FAD00DA2701 /* OktaIdx.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		961BE42A2583EC4C00DCE8AC /* Utilities */ = {
+			isa = PBXGroup;
+			children = (
+				961BE42B2583EC6000DCE8AC /* TestExtensions.swift */,
+			);
+			path = Utilities;
+			sourceTree = "<group>";
+		};
+		961BE4362583F53100DCE8AC /* Responses */ = {
+			isa = PBXGroup;
+			children = (
+				961DE96225897C6B007CAB16 /* Responses.swift */,
+				96F5417C258A843300D3995F /* IDXClient+V1Responses.swift */,
+			);
+			path = Responses;
+			sourceTree = "<group>";
+		};
+		961BE443258411B200DCE8AC /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				961BE43D258406EC00DCE8AC /* PKCEExtensions.swift */,
+				96C584E7258A982400E79975 /* JSONValue.swift */,
+				964A44AB259A6285002CB250 /* AcceptType.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
+		96F8F17825802F9100DA2701 = {
+			isa = PBXGroup;
+			children = (
+				96F8F1A125803B8500DA2701 /* Sources */,
+				96F8F1A025803B8500DA2701 /* Tests */,
+				96F8F18525802FAD00DA2701 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		96F8F18525802FAD00DA2701 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				96F8F18425802FAD00DA2701 /* OktaIdx.framework */,
+				96F8F18D25802FAD00DA2701 /* okta-idx-ios-tests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		96F8F1A025803B8500DA2701 /* Tests */ = {
+			isa = PBXGroup;
+			children = (
+				96F8F22E2582C32400DA2701 /* Mocks */,
+				961BE42A2583EC4C00DCE8AC /* Utilities */,
+				96F8F2352582D76400DA2701 /* Resources */,
+				96F8F1CD25804B5B00DA2701 /* Info.plist */,
+				96F8F22A2582C2DE00DA2701 /* IDXClientTests.swift */,
+				96DCDCEB25882263009487CB /* IDXClientAPIVersion1Tests.swift */,
+				961BE4262583E73300DCE8AC /* IDXClientRequestTests.swift */,
+				96DCDCF52588354E009487CB /* IDXClientCombineTests.swift */,
+				96F8F1C025804A0C00DA2701 /* IDXClientVersionTests.swift */,
+				961BE4482584184700DCE8AC /* PKCETests.swift */,
+				96F8F1BF25804A0C00DA2701 /* okta-idx-ios-tests-Bridging-Header.h */,
+				96C584ED258ACEB200E79975 /* JSONValueTests.swift */,
+				966A1E75258BDB1B00864DB7 /* URLSessionProtocolTests.swift */,
+			);
+			path = Tests;
+			sourceTree = "<group>";
+		};
+		96F8F1A125803B8500DA2701 /* Sources */ = {
+			isa = PBXGroup;
+			children = (
+				96F8F2702583E2F800DA2701 /* Internal */,
+				96F8F1AC25803BE100DA2701 /* Info.plist */,
+				96F8F20A25815AFD00DA2701 /* IDXClient.swift */,
+				96F8F2102581973F00DA2701 /* IDXClientAPI.swift */,
+				9696A40725892C74005D6E9D /* IDXClient+Response.swift */,
+			);
+			path = Sources;
+			sourceTree = "<group>";
+		};
+		96F8F1B82580499900DA2701 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				96F8F21825828F1300DA2701 /* IDXClient+Extension.swift */,
+				966A1E7F258BEADB00864DB7 /* IDXClientError+Extensions.swift */,
+				96F8F1B9258049B000DA2701 /* IDXVersion+Extension.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
+		96F8F20925815AD700DA2701 /* Implementations */ = {
+			isa = PBXGroup;
+			children = (
+				96F8F2582582E93B00DA2701 /* v1.0.0 */,
+			);
+			path = Implementations;
+			sourceTree = "<group>";
+		};
+		96F8F22E2582C32400DA2701 /* Mocks */ = {
+			isa = PBXGroup;
+			children = (
+				96F8F22F2582C33A00DA2701 /* IDXClientAPIMock.swift */,
+				967102C92587F93D00D5D85F /* URLSessionMock.swift */,
+			);
+			path = Mocks;
+			sourceTree = "<group>";
+		};
+		96F8F2352582D76400DA2701 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				96F8F23B2582D77700DA2701 /* answer-challenge-response.json */,
+				96F8F2382582D77600DA2701 /* cancel-response.json */,
+				96F8F2372582D77600DA2701 /* challenge-response.json */,
+				96F8F2412582D77700DA2701 /* identify-response.json */,
+				96F8F23A2582D77700DA2701 /* interact-error-response.json */,
+				96F8F23E2582D77700DA2701 /* interact-response.json */,
+				96F8F23C2582D77700DA2701 /* introspect-error-response.json */,
+				96F8F23D2582D77700DA2701 /* introspect-response.json */,
+				96F8F2392582D77600DA2701 /* okta.yaml */,
+				96F8F2402582D77700DA2701 /* success-response.json */,
+				96F8F2362582D77600DA2701 /* token-error-response.json */,
+				96F8F23F2582D77700DA2701 /* token-response.json */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		96F8F2502582D7AC00DA2701 /* Protocols */ = {
+			isa = PBXGroup;
+			children = (
+				96F8F2512582D7BF00DA2701 /* URLSessionProtocol.swift */,
+				961BE4392583F8E900DCE8AC /* RequestHTTPHeaders.swift */,
+				96DCDCFB258844AD009487CB /* ReceivesIONJSON.swift */,
+			);
+			path = Protocols;
+			sourceTree = "<group>";
+		};
+		96F8F2582582E93B00DA2701 /* v1.0.0 */ = {
+			isa = PBXGroup;
+			children = (
+				961BE443258411B200DCE8AC /* Extensions */,
+				96F8F2592582E94A00DA2701 /* Requests */,
+				961BE4362583F53100DCE8AC /* Responses */,
+				96F8F2502582D7AC00DA2701 /* Protocols */,
+				96F8F214258197D000DA2701 /* IDXClientAPIv1.swift */,
+			);
+			path = v1.0.0;
+			sourceTree = "<group>";
+		};
+		96F8F2592582E94A00DA2701 /* Requests */ = {
+			isa = PBXGroup;
+			children = (
+				96F8F2622582E9C900DA2701 /* AnswerChallengeRequest.swift */,
+				96F8F2652582E9C900DA2701 /* CancelRequest.swift */,
+				96F8F25F2582E9C900DA2701 /* ChallengeRequest.swift */,
+				96F8F2602582E9C900DA2701 /* EnrollRequest.swift */,
+				96F8F25E2582E9C900DA2701 /* IdentifyRequest.swift */,
+				96F8F2642582E9C900DA2701 /* IntrospectRequest.swift */,
+				96F8F2612582E9C900DA2701 /* RemediationRequest.swift */,
+				96F8F2632582E9C900DA2701 /* TokenRequest.swift */,
+				96F8F25A2582E96B00DA2701 /* InteractRequest.swift */,
+			);
+			path = Requests;
+			sourceTree = "<group>";
+		};
+		96F8F2702583E2F800DA2701 /* Internal */ = {
+			isa = PBXGroup;
+			children = (
+				96F8F20925815AD700DA2701 /* Implementations */,
+				96F8F1B82580499900DA2701 /* Extensions */,
+				96F8F2712583E31800DA2701 /* IDXClientAPIImpl.swift */,
+			);
+			path = Internal;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXHeadersBuildPhase section */
+		96F8F17F25802FAD00DA2701 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXHeadersBuildPhase section */
+
+/* Begin PBXNativeTarget section */
+		96F8F18325802FAD00DA2701 /* okta-idx-ios */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 96F8F19625802FAD00DA2701 /* Build configuration list for PBXNativeTarget "okta-idx-ios" */;
+			buildPhases = (
+				96F8F17F25802FAD00DA2701 /* Headers */,
+				96F8F18025802FAD00DA2701 /* Sources */,
+				96F8F18125802FAD00DA2701 /* Frameworks */,
+				96F8F18225802FAD00DA2701 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "okta-idx-ios";
+			productName = "okta-idx-ios";
+			productReference = 96F8F18425802FAD00DA2701 /* OktaIdx.framework */;
+			productType = "com.apple.product-type.framework";
+		};
+		96F8F18C25802FAD00DA2701 /* okta-idx-ios-tests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 96F8F19925802FAD00DA2701 /* Build configuration list for PBXNativeTarget "okta-idx-ios-tests" */;
+			buildPhases = (
+				96F8F18925802FAD00DA2701 /* Sources */,
+				96F8F18A25802FAD00DA2701 /* Frameworks */,
+				96F8F18B25802FAD00DA2701 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				96F8F19025802FAD00DA2701 /* PBXTargetDependency */,
+			);
+			name = "okta-idx-ios-tests";
+			productName = "okta-idx-iosTests";
+			productReference = 96F8F18D25802FAD00DA2701 /* okta-idx-ios-tests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		96F8F17925802F9100DA2701 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 1220;
+				LastUpgradeCheck = 1220;
+				TargetAttributes = {
+					96F8F18325802FAD00DA2701 = {
+						CreatedOnToolsVersion = 12.2;
+					};
+					96F8F18C25802FAD00DA2701 = {
+						CreatedOnToolsVersion = 12.2;
+						LastSwiftMigration = 1220;
+					};
+				};
+			};
+			buildConfigurationList = 96F8F17C25802F9100DA2701 /* Build configuration list for PBXProject "okta-idx" */;
+			compatibilityVersion = "Xcode 9.3";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 96F8F17825802F9100DA2701;
+			productRefGroup = 96F8F18525802FAD00DA2701 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				96F8F18325802FAD00DA2701 /* okta-idx-ios */,
+				96F8F18C25802FAD00DA2701 /* okta-idx-ios-tests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		96F8F18225802FAD00DA2701 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		96F8F18B25802FAD00DA2701 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				96F8F2432582D77700DA2701 /* challenge-response.json in Resources */,
+				96F8F24C2582D77700DA2701 /* success-response.json in Resources */,
+				96F8F2452582D77700DA2701 /* okta.yaml in Resources */,
+				96F8F2472582D77700DA2701 /* answer-challenge-response.json in Resources */,
+				96F8F24A2582D77700DA2701 /* interact-response.json in Resources */,
+				96F8F2482582D77700DA2701 /* introspect-error-response.json in Resources */,
+				96F8F2422582D77700DA2701 /* token-error-response.json in Resources */,
+				96F8F2442582D77700DA2701 /* cancel-response.json in Resources */,
+				96F8F2462582D77700DA2701 /* interact-error-response.json in Resources */,
+				96F8F24B2582D77700DA2701 /* token-response.json in Resources */,
+				96F8F24D2582D77700DA2701 /* identify-response.json in Resources */,
+				96F8F2492582D77700DA2701 /* introspect-response.json in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		96F8F18025802FAD00DA2701 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				96F8F2522582D7BF00DA2701 /* URLSessionProtocol.swift in Sources */,
+				9696A40825892C74005D6E9D /* IDXClient+Response.swift in Sources */,
+				96F8F26A2582E9C900DA2701 /* AnswerChallengeRequest.swift in Sources */,
+				96F8F2112581973F00DA2701 /* IDXClientAPI.swift in Sources */,
+				96F8F20B25815AFD00DA2701 /* IDXClient.swift in Sources */,
+				96F8F2662582E9C900DA2701 /* IdentifyRequest.swift in Sources */,
+				96F8F25B2582E96B00DA2701 /* InteractRequest.swift in Sources */,
+				96DCDCFC258844AD009487CB /* ReceivesIONJSON.swift in Sources */,
+				96F8F2672582E9C900DA2701 /* ChallengeRequest.swift in Sources */,
+				96C584E8258A982400E79975 /* JSONValue.swift in Sources */,
+				96F8F215258197D000DA2701 /* IDXClientAPIv1.swift in Sources */,
+				964A44AC259A6285002CB250 /* AcceptType.swift in Sources */,
+				961DE96325897C6B007CAB16 /* Responses.swift in Sources */,
+				96F8F2722583E31800DA2701 /* IDXClientAPIImpl.swift in Sources */,
+				96F8F26C2582E9C900DA2701 /* IntrospectRequest.swift in Sources */,
+				961BE43E258406EC00DCE8AC /* PKCEExtensions.swift in Sources */,
+				961BE43A2583F8E900DCE8AC /* RequestHTTPHeaders.swift in Sources */,
+				96F8F2682582E9C900DA2701 /* EnrollRequest.swift in Sources */,
+				96F8F26B2582E9C900DA2701 /* TokenRequest.swift in Sources */,
+				96F5417D258A843300D3995F /* IDXClient+V1Responses.swift in Sources */,
+				966A1E80258BEADB00864DB7 /* IDXClientError+Extensions.swift in Sources */,
+				96F8F1BA258049B000DA2701 /* IDXVersion+Extension.swift in Sources */,
+				96F8F2692582E9C900DA2701 /* RemediationRequest.swift in Sources */,
+				96F8F26D2582E9C900DA2701 /* CancelRequest.swift in Sources */,
+				96F8F21925828F1300DA2701 /* IDXClient+Extension.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		96F8F18925802FAD00DA2701 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				961BE4492584184700DCE8AC /* PKCETests.swift in Sources */,
+				966A1E76258BDB1B00864DB7 /* URLSessionProtocolTests.swift in Sources */,
+				96F8F2302582C33A00DA2701 /* IDXClientAPIMock.swift in Sources */,
+				96DCDCEC25882263009487CB /* IDXClientAPIVersion1Tests.swift in Sources */,
+				96F8F22B2582C2DE00DA2701 /* IDXClientTests.swift in Sources */,
+				96DCDCF62588354E009487CB /* IDXClientCombineTests.swift in Sources */,
+				96C584EE258ACEB200E79975 /* JSONValueTests.swift in Sources */,
+				961BE4272583E73300DCE8AC /* IDXClientRequestTests.swift in Sources */,
+				961BE42F2583EC6300DCE8AC /* TestExtensions.swift in Sources */,
+				96F8F1C125804A0C00DA2701 /* IDXClientVersionTests.swift in Sources */,
+				967102CA2587F93E00D5D85F /* URLSessionMock.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		96F8F19025802FAD00DA2701 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 96F8F18325802FAD00DA2701 /* okta-idx-ios */;
+			targetProxy = 96F8F18F25802FAD00DA2701 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		96F8F17D25802F9100DA2701 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+			};
+			name = Debug;
+		};
+		96F8F17E25802F9100DA2701 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+			};
+			name = Release;
+		};
+		96F8F19725802FAD00DA2701 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				APPLICATION_EXTENSION_API_ONLY = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_STYLE = Automatic;
+				COPY_PHASE_STRIP = NO;
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				INFOPLIST_FILE = Sources/Info.plist;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				"IPHONEOS_DEPLOYMENT_TARGET[sdk=macosx*]" = 13.1;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.okta.okta-idx";
+				PRODUCT_NAME = OktaIdx;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+		96F8F19825802FAD00DA2701 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				APPLICATION_EXTENSION_API_ONLY = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_STYLE = Automatic;
+				COPY_PHASE_STRIP = NO;
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				INFOPLIST_FILE = Sources/Info.plist;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				"IPHONEOS_DEPLOYMENT_TARGET[sdk=macosx*]" = 13.1;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.okta.okta-idx";
+				PRODUCT_NAME = OktaIdx;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
+		96F8F19A25802FAD00DA2701 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_STYLE = Automatic;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				INFOPLIST_FILE = Tests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 10.15;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.okta.okta-idx-iosTests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OBJC_BRIDGING_HEADER = "Tests/okta-idx-ios-tests-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		96F8F19B25802FAD00DA2701 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_STYLE = Automatic;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				INFOPLIST_FILE = Tests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 10.15;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.okta.okta-idx-iosTests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OBJC_BRIDGING_HEADER = "Tests/okta-idx-ios-tests-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		96F8F17C25802F9100DA2701 /* Build configuration list for PBXProject "okta-idx" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				96F8F17D25802F9100DA2701 /* Debug */,
+				96F8F17E25802F9100DA2701 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		96F8F19625802FAD00DA2701 /* Build configuration list for PBXNativeTarget "okta-idx-ios" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				96F8F19725802FAD00DA2701 /* Debug */,
+				96F8F19825802FAD00DA2701 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		96F8F19925802FAD00DA2701 /* Build configuration list for PBXNativeTarget "okta-idx-ios-tests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				96F8F19A25802FAD00DA2701 /* Debug */,
+				96F8F19B25802FAD00DA2701 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 96F8F17925802F9100DA2701 /* Project object */;
+}

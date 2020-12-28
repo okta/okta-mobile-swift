@@ -39,7 +39,7 @@ extension IDXClient.APIVersion1.IntrospectRequest: IDXClientAPIRequest, Receives
               completion: @escaping (ResponseType?, Error?) -> Void)
     {
         guard let request = urlRequest(using: configuration) else {
-            completion(nil, IDXClientAPIError.cannotCreateRequest)
+            completion(nil, IDXClientError.cannotCreateRequest)
             return
         }
         
@@ -50,7 +50,7 @@ extension IDXClient.APIVersion1.IntrospectRequest: IDXClientAPIRequest, Receives
             }
             
             guard let data = data else {
-                completion(nil, IDXClientAPIError.invalidResponseData)
+                completion(nil, IDXClientError.invalidResponseData)
                 return
             }
             

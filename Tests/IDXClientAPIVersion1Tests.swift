@@ -9,7 +9,7 @@ import XCTest
 @testable import OktaIdx
 
 class IDXClientAPIVersion1Tests: XCTestCase {
-    let configuration = IDXClient.Configuration(issuer: "https://example.com",
+    let configuration = IDXClient.Configuration(issuer: "https://foo.oktapreview.com",
                                                 clientId: "clientId",
                                                 clientSecret: "clientSecret",
                                                 scopes: ["all"],
@@ -24,7 +24,7 @@ class IDXClientAPIVersion1Tests: XCTestCase {
     }
 
     func testInteractSuccess() throws {
-        try session.expect("https://example.com/v1/interact", fileName: "interact-response")
+        try session.expect("https://foo.oktapreview.com/v1/interact", fileName: "interact-response")
         
         let completion = expectation(description: "Response")
         api.interact { (handle, error) in
@@ -36,7 +36,7 @@ class IDXClientAPIVersion1Tests: XCTestCase {
     }
 
     func testInteractFailure() throws {
-        try session.expect("https://example.com/v1/interact",
+        try session.expect("https://foo.oktapreview.com/v1/interact",
                            fileName: "interact-error-response",
                            statusCode: 400)
         
@@ -50,10 +50,11 @@ class IDXClientAPIVersion1Tests: XCTestCase {
     }
 
     func testIntrospectSuccess() throws {
-        try session.expect("https://example.com/idp/idx/introspect", fileName: "introspect-response")
-        
+        try session.expect("https://foo.oktapreview.com/idp/idx/introspect", fileName: "introspect-response")
+        try session.expect("https://foo.oktapreview.com/idp/idx/cancel", fileName: "cancel-response")
+
         var response: IDXClient.Response!
-        let completion = expectation(description: "Response")
+        var completion = expectation(description: "Response")
         api.introspect("ABCeasyas123") { (responseValue, error) in
             XCTAssertNotNil(responseValue)
             XCTAssertNil(error)
@@ -99,12 +100,25 @@ class IDXClientAPIVersion1Tests: XCTestCase {
         if let stringValue = form?.value as? String {
             XCTAssertEqual(stringValue, "02tYS1NHhCPLcOpT3GByBBRHmGU63p7LGRXJx5cOvp")
         } else {
-            XCTFail("Form value \(form?.value) is not a string")
+            XCTFail("Form value \(String(describing: form?.value)) is not a string")
         }
+        
+        XCTAssertNotNil(api.cancelRemediationOption)
+        XCTAssertEqual(api.cancelRemediationOption?.name, "cancel")
+        XCTAssertEqual(api.cancelRemediationOption?.href.absoluteString, "https://foo.oktapreview.com/idp/idx/cancel")
+        XCTAssertEqual(api.cancelRemediationOption?.method, "POST")
+        XCTAssertEqual(api.cancelRemediationOption?.accepts, "application/ion+json; okta-version=1.0.0")
+        
+        completion = expectation(description: "Cancel response")
+        api.cancel { (error) in
+            XCTAssertNil(error)
+            completion.fulfill()
+        }
+        wait(for: [completion], timeout: 1)
     }
 
     func testIntrospectFailure() throws {
-        try session.expect("https://example.com/v1/introspect",
+        try session.expect("https://foo.oktapreview.com/v1/introspect",
                            fileName: "introspect-error-response",
                            statusCode: 400)
         
@@ -112,6 +126,8 @@ class IDXClientAPIVersion1Tests: XCTestCase {
         api.introspect("ABCeasyas123") { (response, error) in
             XCTAssertNil(response)
             XCTAssertNotNil(error)
+            XCTAssertTrue(error is IDXClientError)
+            
             completion.fulfill()
         }
         wait(for: [completion], timeout: 1)

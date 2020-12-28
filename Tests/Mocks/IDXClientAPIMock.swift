@@ -42,10 +42,25 @@ class IDXClientAPIv1Mock: IDXClientAPIImpl {
         completion(result?["handle"] as? String, result?["error"] as? Error)
     }
     
-    func introspect(_ interactionHandle: String?, completion: @escaping (IDXClient.Response?, Error?) -> Void) {
+    func introspect(_ interactionHandle: String, completion: @escaping (IDXClient.Response?, Error?) -> Void) {
         recordedCalls.append(RecordedCall(function: #function,
                                           arguments: ["interactionHandle": interactionHandle as Any]))
-        completion(nil, nil)
+        completion(IDXClient.Response(client: nil,
+                                      stateHandle: "handle",
+                                      version: "version",
+                                      expiresAt: Date(),
+                                      intent: "intent",
+                                      remediation: IDXClient.Remediation(client: self,
+                                                                         type: "type",
+                                                                         remediationOptions: []),
+                                      cancel: IDXClient.Remediation.Option(client: self,
+                                                                           rel: [],
+                                                                           name: "cancel",
+                                                                           method: "POST",
+                                                                           href: URL(string: "https://example.com/cancel")!,
+                                                                           accepts: "accepts",
+                                                                           form: [])),
+                   nil)
     }
     
     func identify(identifier: String, credentials: IDXClient.Credentials, rememberMe: Bool, completion: @escaping (IDXClient.Response?, Error?) -> Void) {
@@ -91,11 +106,11 @@ class IDXClientAPIv1Mock: IDXClientAPIImpl {
         completion(nil, nil)
     }
     
-    func proceed(remediation option: IDXClient.Remediation.Option, data: [String : Any], completion: @escaping (IDXClient.Response?, Error?) -> Void) {
+    func proceed(remediation option: IDXClient.Remediation.Option, data: [String : Any]?, completion: @escaping (IDXClient.Response?, Error?) -> Void) {
         recordedCalls.append(RecordedCall(function: #function,
                                           arguments: [
                                             "remediation": option as Any,
-                                            "data": data as Any
+                                            "data": data ?? [:] as Any
                                           ]))
         completion(nil, nil)
     }

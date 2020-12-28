@@ -174,7 +174,7 @@ class IDXClientTests: XCTestCase {
         
         // Option.proceed()
         expect = expectation(description: "Option.proceed")
-        remedationOption.proceed(with: ["foo": "bar" as! AnyObject]) { (_, _) in
+        remedationOption.proceed(with: ["foo": "bar" as AnyObject]) { (_, _) in
             called = true
             expect.fulfill()
         }

@@ -19,23 +19,30 @@ protocol URLSessionDataTaskProtocol {
 extension URLSession: URLSessionProtocol {
     func dataTaskWithRequest(with request: URLRequest, completionHandler: @escaping DataTaskResult) -> URLSessionDataTaskProtocol {
         return dataTask(with: request, completionHandler: { (data, response, error) in
-            guard let httpResponse = response as? HTTPURLResponse else {
-                completionHandler(data, nil, IDXClientAPIError.invalidHTTPResponse)
-                return
-            }
-            
-            guard error == nil else {
-                completionHandler(data, httpResponse, error)
-                return
-            }
-            
-            guard httpResponse.statusCode == 200 else {
-                completionHandler(data, httpResponse, IDXClientAPIError.invalidHTTPResponse)
-                return
-            }
-
-            completionHandler(data, httpResponse, nil)
+            self.handleDataTaskRequest(data: data,
+                                       response: response,
+                                       error: error,
+                                       completionHandler: completionHandler)
         }) as URLSessionDataTaskProtocol
+    }
+    
+    internal func handleDataTaskRequest(data: Data?, response: URLResponse?, error: Error?, completionHandler: @escaping DataTaskResult) {
+        guard let httpResponse = response as? HTTPURLResponse else {
+            completionHandler(data, nil, IDXClientError.invalidHTTPResponse)
+            return
+        }
+        
+        guard error == nil else {
+            completionHandler(data, httpResponse, error)
+            return
+        }
+        
+        guard httpResponse.statusCode == 200 else {
+            completionHandler(data, httpResponse, IDXClientError.invalidHTTPResponse)
+            return
+        }
+
+        completionHandler(data, httpResponse, nil)
     }
 }
 
@@ -43,10 +50,25 @@ extension URLSessionDataTask: URLSessionDataTaskProtocol {}
 
 extension URLRequest {
     static func idxURLFormEncodedString(for params: [String:String]) -> String? {
-        var components = URLComponents()
-        components.queryItems = params.keys.compactMap {
-            URLQueryItem(name: $0, value: params[$0])
+        func escape(_ str: String) -> String {
+            return str.replacingOccurrences(of: "\n", with: "\r\n")
+                .addingPercentEncoding(withAllowedCharacters: idxQueryCharacters)!
+                .replacingOccurrences(of: " ", with: "+")
         }
-        return components.query
+
+        return params.keys.sorted().compactMap {
+            escape($0) + "=" + escape(params[$0]!)
+        }.joined(separator: "&")
     }
+    
+    private static let idxQueryCharacters: CharacterSet = {
+        var allowed = CharacterSet.urlQueryAllowed
+        allowed.insert(" ")
+        allowed.remove("+")
+        allowed.remove("/")
+        allowed.remove("&")
+        allowed.remove("=")
+        allowed.remove("?")
+        return allowed
+    }()
 }

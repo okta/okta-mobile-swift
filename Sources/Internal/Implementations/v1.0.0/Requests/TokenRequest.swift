@@ -8,7 +8,7 @@
 import Foundation
 
 extension IDXClient.APIVersion1.TokenRequest: IDXClientAPIRequest {
-    typealias ResponseType = Decodable
+    typealias ResponseType = IDXClient.Token
 
     func urlRequest(using configuration: IDXClient.Configuration) -> URLRequest? {
         return nil

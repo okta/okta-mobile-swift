@@ -17,21 +17,27 @@ public extension IDXClient {
         public let expiresAt: Date
         public let intent: String
         public let remediation: Remediation
+        internal let cancelRemediationOption: Remediation.Option
         
-        internal init(client: IDXClientAPIImpl?, stateHandle: String, version: String, expiresAt: Date, intent: String, remediation: Remediation) {
+        internal init(client: IDXClientAPIImpl?, stateHandle: String, version: String, expiresAt: Date, intent: String, remediation: Remediation, cancel: Remediation.Option) {
             self.client = client
             self.stateHandle = stateHandle
             self.version = version
             self.expiresAt = expiresAt
             self.intent = intent
             self.remediation = remediation
+            self.cancelRemediationOption = cancel
+            
             super.init()
         }
         
         public func cancel(completionHandler: @escaping(Response?, Error?) -> Void) {
+            cancelRemediationOption.proceed(with: [:], completionHandler: completionHandler)
         }
+        
         public func successWithInteractionCode(completionHandler: @escaping(SuccessResponse?, Error?) -> Void) {
         }
+        
         public func loginSuccess() -> Bool {
             return false
         }
@@ -138,11 +144,48 @@ public extension IDXClient {
 
             public func proceed(with dataFromUI: [String:Any], completionHandler: @escaping (Response?, Error?) -> Void) {
                 guard let client = client else {
-                    completionHandler(nil, IDXClientAPIError.invalidClient)
+                    completionHandler(nil, IDXClientError.invalidClient)
                     return
                 }
                 
                 client.proceed(remediation: self, data: dataFromUI, completion: completionHandler)
+            }
+            
+            /// Apply the remediation option parameters, reconciling default values and mutability requirements.
+            /// - Parameter params: Optional parameters supplied by the user.
+            /// - Throws::
+            ///   - IDXClientError.invalidParameter
+            ///   - IDXClientError.parameterImmutable
+            ///   - IDXClientError.missingRequiredParameter
+            /// - Returns: Dictionary of key/value pairs to send to the remediation endpoint
+            internal func formValues(with params: [String:Any]? = nil) throws -> [String:Any] {
+                var result: [String:Any] = form.filter { $0.value != nil }.reduce(into: [:]) { (result, formValue) in
+                    result[formValue.name] = formValue.value
+                }
+                
+                let allFormValues = form.reduce(into: [String:FormValue]()) { (result, value) in
+                    result[value.name] = value
+                }
+                
+                try params?.forEach { (key, value) in
+                    guard let formValue = allFormValues[key] else {
+                        throw IDXClientError.invalidParameter(name: key)
+                    }
+                    
+                    guard formValue.mutable == false else {
+                        throw IDXClientError.parameterImmutable(name: key)
+                    }
+                    
+                    result[key] = value
+                }
+                
+                try allFormValues.values.filter { $0.required }.forEach {
+                    guard result[$0.name] != nil else {
+                        throw IDXClientError.missingRequiredParameter(name: $0.name)
+                    }
+                }
+                
+                return result
             }
         }
     }

@@ -28,15 +28,9 @@ class IDXClientCombineTests: XCTestCase {
                            api: api)
     }
 
-    func testInteractSuccess() throws {
-        XCTAssertEqual(api.recordedCalls.count, 0)
-        
-        var completion: XCTestExpectation!
-        var call: IDXClientAPIv1Mock.RecordedCall?
+    func testInteract() throws {
         var called = false
-        
-        // interact()
-        completion = expectation(description: "interact")
+        let completion = expectation(description: "interact")
         api.expect(function: "interact(completion:)", arguments: ["handle": "ABCeasyas123"])
         let _ = client.interact().sink { (value) in
             completion.fulfill()
@@ -46,9 +40,25 @@ class IDXClientCombineTests: XCTestCase {
         }
         wait(for: [completion], timeout: 1)
         XCTAssertTrue(called)
-        call = api.recordedCalls.last
+        let call = api.recordedCalls.last
         XCTAssertEqual(call?.function, "interact(completion:)")
         XCTAssertNil(call?.arguments)
-        api.reset()
+    }
+
+    func testIntrospect() throws {
+        var called = false
+        let completion = expectation(description: "interact")
+        api.expect(function: "introspect(_:completion:)", arguments: ["interactionHandle": "handle"])
+        let _ = client.introspect("ABCeasyas123").sink { (value) in
+            completion.fulfill()
+        } receiveValue: { value in
+            called = true
+            XCTAssertEqual(value.stateHandle, "handle")
+        }
+        wait(for: [completion], timeout: 1)
+        XCTAssertTrue(called)
+        let call = api.recordedCalls.last
+        XCTAssertEqual(call?.function, "introspect(_:completion:)")
+        XCTAssertEqual(call?.arguments!["interactionHandle"] as? String, "ABCeasyas123")
     }
 }

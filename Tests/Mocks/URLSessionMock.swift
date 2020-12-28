@@ -23,12 +23,13 @@ class URLSessionMock: URLSessionProtocol {
     func expect(_ url: String,
                 data: Data?,
                 statusCode: Int = 200,
+                contentType: String = "application/x-www-form-urlencoded",
                 error: Error? = nil)
     {
         let response = HTTPURLResponse(url: URL(string: url)!,
                                        statusCode: statusCode,
                                        httpVersion: "http/1.1",
-                                       headerFields: nil)
+                                       headerFields: ["Content-Type": contentType])
         
         expect(url, call: Call(data: data,
                                response: response,
@@ -38,6 +39,7 @@ class URLSessionMock: URLSessionProtocol {
     func expect(_ url: String,
                 fileName: String,
                 statusCode: Int = 200,
+                contentType: String = "application/x-www-form-urlencoded",
                 error: Error? = nil) throws
     {
         let bundle = Bundle(for: type(of: self))
@@ -50,6 +52,7 @@ class URLSessionMock: URLSessionProtocol {
         expect(url,
                data: data,
                statusCode: statusCode,
+               contentType: contentType,
                error: error)
     }
 

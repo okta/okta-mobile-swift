@@ -14,7 +14,8 @@ extension IDXClient.Response {
                   version: object.version,
                   expiresAt: object.expiresAt,
                   intent: object.intent,
-                  remediation: IDXClient.Remediation(client: client, v1: object.remediation))
+                  remediation: IDXClient.Remediation(client: client, v1: object.remediation),
+                  cancel: IDXClient.Remediation.Option(client: client, v1: object.cancel))
     }
 }
 

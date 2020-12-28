@@ -12,6 +12,8 @@ extension IDXClient {
         static let version = Version.v1_0_0
         var stateHandle: String? = nil
         var interactionHandle: String? = nil
+        var cancelRemediationOption: IDXClient.Remediation.Option? = nil
+        
         let queue: DispatchQueue
         let configuration: IDXClient.Configuration
         let session: URLSessionProtocol
@@ -84,3 +86,4 @@ extension IDXClient: IDXClientAPIDelegate {
         print("State handle changed to \(stateHandle)")
     }
 }
+
