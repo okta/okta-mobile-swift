@@ -108,6 +108,22 @@ public class IDXClient: NSObject, IDXClientAPI {
         self.api.delegate = self
     }
     
+    public func start(completion: @escaping (IDXClient.Response?, Error?) -> Void) {
+        interact { (interactionHandle, error) in
+            guard error == nil else {
+                completion(nil, error)
+                return
+            }
+            
+            guard let interactionHandle = interactionHandle else {
+                completion(nil, IDXClientError.invalidResponseData)
+                return
+            }
+            
+            self.introspect(interactionHandle, completion: completion)
+        }
+    }
+    
     public func proceed(remediation option: Remediation.Option,
                         data: [String : Any]? = nil,
                         completion: @escaping (IDXClient.Response?, Error?) -> Void)

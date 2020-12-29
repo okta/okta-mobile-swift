@@ -17,9 +17,14 @@ public extension IDXClient {
         public let expiresAt: Date
         public let intent: String
         public let remediation: Remediation
-        internal let cancelRemediationOption: Remediation.Option
+        public var isLoginSuccessful: Bool {
+            return successResponse != nil
+        }
         
-        internal init(client: IDXClientAPIImpl?, stateHandle: String, version: String, expiresAt: Date, intent: String, remediation: Remediation, cancel: Remediation.Option) {
+        internal let cancelRemediationOption: Remediation.Option?
+        internal let successResponse: SuccessResponse?
+        
+        internal init(client: IDXClientAPIImpl?, stateHandle: String, version: String, expiresAt: Date, intent: String, remediation: Remediation, cancel: Remediation.Option?, success: SuccessResponse?) {
             self.client = client
             self.stateHandle = stateHandle
             self.version = version
@@ -27,19 +32,25 @@ public extension IDXClient {
             self.intent = intent
             self.remediation = remediation
             self.cancelRemediationOption = cancel
+            self.successResponse = success
             
             super.init()
         }
         
         public func cancel(completionHandler: @escaping(Response?, Error?) -> Void) {
-            cancelRemediationOption.proceed(with: [:], completionHandler: completionHandler)
+            guard let cancelOption = cancelRemediationOption else {
+                completionHandler(nil, IDXClientError.unknownRemediationOption(name: "cancel"))
+                return
+            }
+            cancelOption.proceed(with: [:], completionHandler: completionHandler)
         }
         
-        public func successWithInteractionCode(completionHandler: @escaping(SuccessResponse?, Error?) -> Void) {
-        }
-        
-        public func loginSuccess() -> Bool {
-            return false
+        public func exchangeCode(completionHandler: @escaping(Token?, Error?) -> Void) {
+            guard let successResponse = successResponse else {
+                completionHandler(nil, IDXClientError.successResponseMissing)
+                return
+            }
+            successResponse.exchangeCode(completionHandler: completionHandler)
         }
     }
     
@@ -159,8 +170,10 @@ public extension IDXClient {
             ///   - IDXClientError.missingRequiredParameter
             /// - Returns: Dictionary of key/value pairs to send to the remediation endpoint
             internal func formValues(with params: [String:Any]? = nil) throws -> [String:Any] {
-                var result: [String:Any] = form.filter { $0.value != nil }.reduce(into: [:]) { (result, formValue) in
-                    result[formValue.name] = formValue.value
+                var result: [String:Any] = form
+                    .filter { $0.value != nil && $0.name != nil }
+                    .reduce(into: [:]) { (result, formValue) in
+                    result[formValue.name!] = formValue.value
                 }
                 
                 let allFormValues = form.reduce(into: [String:FormValue]()) { (result, value) in
@@ -172,7 +185,7 @@ public extension IDXClient {
                         throw IDXClientError.invalidParameter(name: key)
                     }
                     
-                    guard formValue.mutable == false else {
+                    guard formValue.mutable == true else {
                         throw IDXClientError.parameterImmutable(name: key)
                     }
                     
@@ -180,8 +193,9 @@ public extension IDXClient {
                 }
                 
                 try allFormValues.values.filter { $0.required }.forEach {
-                    guard result[$0.name] != nil else {
-                        throw IDXClientError.missingRequiredParameter(name: $0.name)
+                    /// TODO: Fix compound field support and relatesTo
+                    guard result[$0.name!] != nil else {
+                        throw IDXClientError.missingRequiredParameter(name: $0.name!)
                     }
                 }
                 
@@ -192,7 +206,7 @@ public extension IDXClient {
         
     @objc(IDXFormValue)
     class FormValue: NSObject {
-        public let name: String
+        public let name: String?
         public let label: String?
         public let type: String?
         public let value: AnyObject?
@@ -200,27 +214,23 @@ public extension IDXClient {
         public let mutable: Bool
         public let required: Bool
         public let secret: Bool
-        
+        public let form: [FormValue]?
+        public let options: [FormValue]?
+
         public func relatesTo() -> AnyObject? {
             return nil
         }
         
-        public func form() -> [FormValue] {
-            return []
-        }
-        
-        public func options() -> [FormValue]? {
-            return nil
-        }
-        
-        internal init(name: String,
+        internal init(name: String?,
                       label: String?,
                       type: String?,
                       value: AnyObject?,
                       visible: Bool,
                       mutable: Bool,
                       required: Bool,
-                      secret: Bool)
+                      secret: Bool,
+                      form: [FormValue]?,
+                      options: [FormValue]?)
         {
             self.name = name
             self.label = label
@@ -230,6 +240,8 @@ public extension IDXClient {
             self.mutable = mutable
             self.required = required
             self.secret = secret
+            self.form = form
+            self.options = options
             
             super.init()
         }

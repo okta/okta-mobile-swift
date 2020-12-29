@@ -32,7 +32,7 @@ extension IDXClient.APIVersion1.RemediationRequest: IDXClientAPIRequest, Receive
         var request = URLRequest(url: href)
         request.httpMethod = method
         request.httpBody = data
-        request.addValue(accepts.rawValue, forHTTPHeaderField: "Content-Type")
+        request.addValue(accepts.stringValue(), forHTTPHeaderField: "Content-Type")
 
         if let requestHasHeaders = self as? HasHTTPHeaders {
             requestHasHeaders.httpHeaders.forEach { (key, value) in

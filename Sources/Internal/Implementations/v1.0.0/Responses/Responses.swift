@@ -84,7 +84,7 @@ extension IDXClient.APIVersion1 {
         }
         
         struct FormValue: Codable {
-            let name: String
+            let name: String?
             let required: Bool?
             let label: String?
             let type: String?
@@ -92,6 +92,7 @@ extension IDXClient.APIVersion1 {
             let secret: Bool?
             let visible: Bool?
             let mutable: Bool?
+            let form: [FormValue]?
             let options: [FormValue]?
             let relatesTo: String?
         }

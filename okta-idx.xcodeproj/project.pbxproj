@@ -14,6 +14,9 @@
 		961BE4492584184700DCE8AC /* PKCETests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 961BE4482584184700DCE8AC /* PKCETests.swift */; };
 		961DE96325897C6B007CAB16 /* Responses.swift in Sources */ = {isa = PBXBuildFile; fileRef = 961DE96225897C6B007CAB16 /* Responses.swift */; };
 		964A44AC259A6285002CB250 /* AcceptType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 964A44AB259A6285002CB250 /* AcceptType.swift */; };
+		964A44B2259A90BE002CB250 /* IDXClientErrorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 964A44B1259A90BE002CB250 /* IDXClientErrorTests.swift */; };
+		964A44B8259A9772002CB250 /* ScenarioTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 964A44B7259A9772002CB250 /* ScenarioTests.swift */; };
+		964A44BE259BB8FC002CB250 /* IDXAcceptTypeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 964A44BD259BB8FC002CB250 /* IDXAcceptTypeTests.swift */; };
 		966A1E76258BDB1B00864DB7 /* URLSessionProtocolTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 966A1E75258BDB1B00864DB7 /* URLSessionProtocolTests.swift */; };
 		966A1E80258BEADB00864DB7 /* IDXClientError+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 966A1E7F258BEADB00864DB7 /* IDXClientError+Extensions.swift */; };
 		967102CA2587F93E00D5D85F /* URLSessionMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 967102C92587F93D00D5D85F /* URLSessionMock.swift */; };
@@ -76,6 +79,9 @@
 		961BE4482584184700DCE8AC /* PKCETests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PKCETests.swift; sourceTree = "<group>"; };
 		961DE96225897C6B007CAB16 /* Responses.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Responses.swift; sourceTree = "<group>"; };
 		964A44AB259A6285002CB250 /* AcceptType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AcceptType.swift; sourceTree = "<group>"; };
+		964A44B1259A90BE002CB250 /* IDXClientErrorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IDXClientErrorTests.swift; sourceTree = "<group>"; };
+		964A44B7259A9772002CB250 /* ScenarioTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScenarioTests.swift; sourceTree = "<group>"; };
+		964A44BD259BB8FC002CB250 /* IDXAcceptTypeTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IDXAcceptTypeTests.swift; sourceTree = "<group>"; };
 		966A1E75258BDB1B00864DB7 /* URLSessionProtocolTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLSessionProtocolTests.swift; sourceTree = "<group>"; };
 		966A1E7F258BEADB00864DB7 /* IDXClientError+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "IDXClientError+Extensions.swift"; sourceTree = "<group>"; };
 		967102C92587F93D00D5D85F /* URLSessionMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLSessionMock.swift; sourceTree = "<group>"; };
@@ -197,13 +203,16 @@
 				96F8F1CD25804B5B00DA2701 /* Info.plist */,
 				96F8F22A2582C2DE00DA2701 /* IDXClientTests.swift */,
 				96DCDCEB25882263009487CB /* IDXClientAPIVersion1Tests.swift */,
+				964A44BD259BB8FC002CB250 /* IDXAcceptTypeTests.swift */,
 				961BE4262583E73300DCE8AC /* IDXClientRequestTests.swift */,
 				96DCDCF52588354E009487CB /* IDXClientCombineTests.swift */,
+				964A44B1259A90BE002CB250 /* IDXClientErrorTests.swift */,
 				96F8F1C025804A0C00DA2701 /* IDXClientVersionTests.swift */,
 				961BE4482584184700DCE8AC /* PKCETests.swift */,
 				96F8F1BF25804A0C00DA2701 /* okta-idx-ios-tests-Bridging-Header.h */,
 				96C584ED258ACEB200E79975 /* JSONValueTests.swift */,
 				966A1E75258BDB1B00864DB7 /* URLSessionProtocolTests.swift */,
+				964A44B7259A9772002CB250 /* ScenarioTests.swift */,
 			);
 			path = Tests;
 			sourceTree = "<group>";
@@ -467,15 +476,18 @@
 			buildActionMask = 2147483647;
 			files = (
 				961BE4492584184700DCE8AC /* PKCETests.swift in Sources */,
+				964A44B8259A9772002CB250 /* ScenarioTests.swift in Sources */,
 				966A1E76258BDB1B00864DB7 /* URLSessionProtocolTests.swift in Sources */,
 				96F8F2302582C33A00DA2701 /* IDXClientAPIMock.swift in Sources */,
 				96DCDCEC25882263009487CB /* IDXClientAPIVersion1Tests.swift in Sources */,
 				96F8F22B2582C2DE00DA2701 /* IDXClientTests.swift in Sources */,
+				964A44B2259A90BE002CB250 /* IDXClientErrorTests.swift in Sources */,
 				96DCDCF62588354E009487CB /* IDXClientCombineTests.swift in Sources */,
 				96C584EE258ACEB200E79975 /* JSONValueTests.swift in Sources */,
 				961BE4272583E73300DCE8AC /* IDXClientRequestTests.swift in Sources */,
 				961BE42F2583EC6300DCE8AC /* TestExtensions.swift in Sources */,
 				96F8F1C125804A0C00DA2701 /* IDXClientVersionTests.swift in Sources */,
+				964A44BE259BB8FC002CB250 /* IDXAcceptTypeTests.swift in Sources */,
 				967102CA2587F93E00D5D85F /* URLSessionMock.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

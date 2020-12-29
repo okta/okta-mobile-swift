@@ -20,6 +20,7 @@ public enum IDXClientError: Error {
     case parameterImmutable(name: String)
     case missingRequiredParameter(name: String)
     case unknownRemediationOption(name: String)
+    case successResponseMissing
 }
 
 @objc

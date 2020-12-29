@@ -59,7 +59,8 @@ class IDXClientAPIv1Mock: IDXClientAPIImpl {
                                                                            method: "POST",
                                                                            href: URL(string: "https://example.com/cancel")!,
                                                                            accepts: "accepts",
-                                                                           form: [])),
+                                                                           form: []),
+                                      success: nil),
                    nil)
     }
     

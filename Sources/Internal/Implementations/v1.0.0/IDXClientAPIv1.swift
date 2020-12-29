@@ -8,9 +8,39 @@
 import Foundation
 
 extension IDXClient.APIVersion1: IDXClientAPIImpl {
-    enum AcceptType: String {
-        case ionJson = "application/ion+json; okta-version=1.0.0"
-        case formEncoded = "application/x-www-form-urlencoded"
+    enum AcceptType: Equatable {
+        private static let urlEncodedString = "application/x-www-form-urlencoded"
+        private static let ionJsonString = "application/ion+json"
+        
+        case ionJson(version: String?)
+        case formEncoded
+        
+        init?(rawValue: String) {
+            if rawValue == AcceptType.urlEncodedString {
+                self = .formEncoded
+            } else if rawValue.hasPrefix(AcceptType.ionJsonString) {
+                var version: String? = nil
+                if let range = rawValue.range(of: "okta-version=") {
+                    version = String(rawValue.suffix(from: range.upperBound))
+                }
+                self = .ionJson(version: version)
+            } else {
+                return nil
+            }
+        }
+        
+        public func stringValue() -> String {
+            switch self {
+            case .formEncoded:
+                return AcceptType.urlEncodedString
+            case .ionJson(version: let version):
+                if version == nil {
+                    return AcceptType.ionJsonString
+                } else {
+                    return "\(AcceptType.ionJsonString); okta-version=\(version!)"
+                }
+            }
+        }
     }
 
     func interact(completion: @escaping(String?, Error?) -> Void) {
@@ -153,16 +183,19 @@ extension IDXClient.APIVersion1: IDXClientAPIImpl {
                 return
             }
             
-            if let response = response {
-                do {
-                    try self.consumeResponse(response)
-                } catch {
-                    completion(nil, error)
-                    return
-                }
+            guard let response = response else {
+                completion(nil, IDXClientError.invalidResponseData)
+                return
+            }
+            
+            do {
+                try self.consumeResponse(response)
+            } catch {
+                completion(nil, error)
+                return
             }
 
-            completion(nil, nil)
+            completion(IDXClient.Response(client: self, v1: response), nil)
         }
     }
 }

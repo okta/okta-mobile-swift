@@ -15,7 +15,8 @@ extension IDXClient.Response {
                   expiresAt: object.expiresAt,
                   intent: object.intent,
                   remediation: IDXClient.Remediation(client: client, v1: object.remediation),
-                  cancel: IDXClient.Remediation.Option(client: client, v1: object.cancel))
+                  cancel: IDXClient.Remediation.Option(client: client, v1: object.cancel),
+                  success: nil)
     }
 }
 
@@ -52,6 +53,8 @@ extension IDXClient.FormValue {
                   visible: object.visible ?? true,
                   mutable: object.mutable ?? true,
                   required: object.required ?? false,
-                  secret: object.secret ?? false)
+                  secret: object.secret ?? false,
+                  form: object.form?.map { IDXClient.FormValue(client: client, v1: $0) },
+                  options: object.options?.map { IDXClient.FormValue(client: client, v1: $0) })
     }
 }

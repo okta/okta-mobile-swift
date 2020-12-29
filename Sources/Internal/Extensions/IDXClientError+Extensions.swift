@@ -15,6 +15,7 @@ extension IDXClientError: Equatable {
         case (.cannotCreateRequest, .cannotCreateRequest): return true
         case (.invalidHTTPResponse, .invalidHTTPResponse): return true
         case (.invalidResponseData, .invalidResponseData): return true
+        case (.invalidRequestData, .invalidRequestData): return true
         case (.serverError(message: let lhsMessage, localizationKey: let lhsLocalizationKey, type: let lhsType),
               .serverError(message: let rhsMessage, localizationKey: let rhsLocalizationKey, type: let rhsType)):
             return (lhsMessage == rhsMessage && lhsLocalizationKey == rhsLocalizationKey && lhsType == rhsType)
@@ -28,6 +29,7 @@ extension IDXClientError: Equatable {
             return lhsName == rhsName
         case (.unknownRemediationOption(name: let lhsName), .unknownRemediationOption(name: let rhsName)):
             return lhsName == rhsName
+        case (.successResponseMissing, .successResponseMissing): return true
         default:
             return false
         }
@@ -76,6 +78,9 @@ extension IDXClientError: LocalizedError {
         case .unknownRemediationOption(name: let name):
             return NSLocalizedString("Unknown remediation option \"\(name)\".",
                                      comment: "Error message thrown when a remediation option is invoked that doesn't exist.")
+        case .successResponseMissing:
+            return NSLocalizedString("Success response is missing or unavailable.",
+                                     comment: "Error message thrown when a success response is not yet ready.")
         }
     }
 }
@@ -99,6 +104,7 @@ extension IDXClientError: CustomNSError {
         case .parameterImmutable(name: _): return 10
         case .missingRequiredParameter(name: _): return 11
         case .unknownRemediationOption(name: _): return 12
+        case .successResponseMissing: return 13
         }
     }
 
@@ -109,7 +115,8 @@ extension IDXClientError: CustomNSError {
         case .cannotCreateRequest: fallthrough
         case .invalidHTTPResponse: fallthrough
         case .invalidResponseData: fallthrough
-        case .invalidRequestData:
+        case .invalidRequestData: fallthrough
+        case .successResponseMissing:
             return [:]
         case .serverError(message: let message, localizationKey: let localizationKey, type: let type):
             return [
