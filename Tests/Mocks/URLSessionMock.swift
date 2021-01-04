@@ -37,13 +37,14 @@ class URLSessionMock: URLSessionProtocol {
     }
 
     func expect(_ url: String,
+                folderName: String? = nil,
                 fileName: String,
                 statusCode: Int = 200,
                 contentType: String = "application/x-www-form-urlencoded",
                 error: Error? = nil) throws
     {
         let bundle = Bundle(for: type(of: self))
-        guard let path = bundle.url(forResource: fileName, withExtension: "json") else {
+        guard let path = bundle.url(forResource: fileName, withExtension: "json", subdirectory: folderName) else {
             return
         }
         

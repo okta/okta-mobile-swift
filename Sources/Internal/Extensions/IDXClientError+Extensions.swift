@@ -63,6 +63,8 @@ extension IDXClientError: LocalizedError {
                 return message
             }
             return result
+        case .internalError(message: let message):
+            return message
         case .invalidParameter(name: let name):
             return NSLocalizedString("Invalid parameter \"\(name)\" supplied to a remediation option.",
                                      comment: "Error message thrown when an invalid parameter is supplied.")
@@ -105,6 +107,7 @@ extension IDXClientError: CustomNSError {
         case .missingRequiredParameter(name: _): return 11
         case .unknownRemediationOption(name: _): return 12
         case .successResponseMissing: return 13
+        case .internalError(message: _): return 14
         }
     }
 
@@ -123,6 +126,10 @@ extension IDXClientError: CustomNSError {
                 "message": message,
                 "type": type,
                 "localizationKey": localizationKey
+            ]
+        case .internalError(message: let message):
+            return [
+                "message": message
             ]
         case .invalidParameter(name: let name):
             return [

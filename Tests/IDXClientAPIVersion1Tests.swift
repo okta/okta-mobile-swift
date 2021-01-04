@@ -71,10 +71,10 @@ class IDXClientAPIVersion1Tests: XCTestCase {
         XCTAssertEqual(response.stateHandle, "02tYS1NHhCPLcOpT3GByBBRHmGU63p7LGRXJx5cOvp")
         XCTAssertEqual(response.intent, "LOGIN")
         
-        XCTAssertEqual(response.remediation.type, "array")
-        XCTAssertEqual(response.remediation.remediationOptions.count, 1)
+        XCTAssertEqual(response.remediation?.type, "array")
+        XCTAssertEqual(response.remediation?.remediationOptions.count, 1)
         
-        let remediation = response.remediation.remediationOptions.first
+        let remediation = response.remediation?.remediationOptions.first
         XCTAssertEqual(remediation?.name, "identify")
         XCTAssertEqual(remediation?.href.absoluteString, "https://foo.oktapreview.com/idp/idx/identify")
         XCTAssertEqual(remediation?.method, "POST")

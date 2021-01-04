@@ -13,8 +13,9 @@ enum JSONValue: Equatable {
     case string(String)
     case number(Double)
     case bool(Bool)
-    case object([String:JSONValue])
+    case dictionary([String:JSONValue])
     case array([JSONValue])
+    case object(Any)
     case null
     
     func toAnyObject() -> AnyObject? {
@@ -25,7 +26,7 @@ enum JSONValue: Equatable {
             return NSNumber(floatLiteral: value)
         case let .bool(value):
             return NSNumber(booleanLiteral: value)
-        case let .object(value):
+        case let .dictionary(value):
             return value.reduce(into: [String:AnyObject]()) {
                 $0[$1.key] = $1.value.toAnyObject()
             } as AnyObject
@@ -33,10 +34,40 @@ enum JSONValue: Equatable {
             return value.map {
                 $0.toAnyObject()
             } as AnyObject
+        case let .object(value):
+            return value as AnyObject
         case .null:
             return NSNull()
         }
     }
+    
+    static func == (lhs: JSONValue, rhs: JSONValue) -> Bool {
+        switch (lhs, rhs) {
+        case (.string(let lhsValue), .string(let rhsValue)):
+            return lhsValue == rhsValue
+        case (.number(let lhsValue), .number(let rhsValue)):
+            return lhsValue == rhsValue
+        case (.bool(let lhsValue), .bool(let rhsValue)):
+            return lhsValue == rhsValue
+        case (.dictionary(let lhsValue), .dictionary(let rhsValue)):
+            return lhsValue == rhsValue
+        case (.array(let lhsValue), .array(let rhsValue)):
+            return lhsValue == rhsValue
+        case (.object(let lhsValue), .object(let rhsValue)):
+            if let lhsValue = lhsValue as? AnyHashable,
+               let rhsValue = rhsValue as? AnyHashable
+            {
+                return lhsValue == rhsValue
+            } else {
+                return false
+            }
+        case (.null, .null):
+            return true
+        default:
+            return false
+        }
+    }
+    
 }
 
 extension JSONValue: Codable {
@@ -49,7 +80,7 @@ extension JSONValue: Codable {
         } else if let value = try? container.decode(Bool.self) {
             self = .bool(value)
         } else if let value = try? container.decode([String: JSONValue].self) {
-            self = .object(value)
+            self = .dictionary(value)
         } else if let value = try? container.decode([JSONValue].self) {
             self = .array(value)
         } else if container.decodeNil() {
@@ -69,10 +100,12 @@ extension JSONValue: Codable {
             try container.encode(value)
         case let .bool(value):
             try container.encode(value)
-        case let .object(value):
+        case let .dictionary(value):
             try container.encode(value)
         case let .array(value):
             try container.encode(value)
+        case .object(_):
+            throw IDXClientError.internalError(message: "Unable to encode object as JSON")
         case .null:
             try container.encodeNil()
         }
@@ -90,6 +123,12 @@ extension JSONValue: CustomDebugStringConvertible {
             return bool ? "true" : "false"
         case .null:
             return "null"
+        case .object(let obj):
+            if let obj = obj as? CustomDebugStringConvertible {
+                return obj.debugDescription
+            } else {
+                return "Custom object \(String(describing: obj))"
+            }
         default:
             let encoder = JSONEncoder()
             encoder.outputFormatting = [.prettyPrinted]
@@ -98,4 +137,4 @@ extension JSONValue: CustomDebugStringConvertible {
     }
 }
 
-extension JSONValue: Hashable {}
+//extension JSONValue: Hashable {}

@@ -103,9 +103,9 @@ class JSONValueTests: XCTestCase {
         XCTAssertEqual(decoded, value)
     }
     
-    func testObject() throws {
-        let value = JSONValue.object(
-            ["foo": JSONValue.object(
+    func testDictionary() throws {
+        let value = JSONValue.dictionary(
+            ["foo": JSONValue.dictionary(
                 ["bar": JSONValue.array(
                     [JSONValue.string("woof")])
                 ])
@@ -130,5 +130,21 @@ class JSONValueTests: XCTestCase {
         XCTAssertNotNil(encoded)
         let decoded = try decoder.decode(JSONValue.self, from: encoded)
         XCTAssertEqual(decoded, value)
+    }
+    
+    func testObject() throws {
+        let object = URL(string: "https://example.com")!
+        let value = JSONValue.object(object)
+        XCTAssertNotNil(value)
+        XCTAssertEqual(value.debugDescription, "https://example.com")
+
+        if let urlValue = value.toAnyObject() as? URL {
+            XCTAssertEqual(urlValue, URL(string: "https://example.com"))
+        } else {
+            XCTFail("Object not a URL")
+        }
+        
+        XCTAssertEqual(value, JSONValue.object(URL(string: "https://example.com")!))
+        XCTAssertThrowsError(try encoder.encode(value))
     }
 }

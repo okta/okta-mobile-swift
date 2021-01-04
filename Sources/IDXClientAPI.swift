@@ -15,6 +15,7 @@ public enum IDXClientError: Error {
     case invalidResponseData
     case invalidRequestData
     case serverError(message: String, localizationKey: String, type: String)
+    case internalError(message: String)
     case invalidParameter(name: String)
     case invalidParameterValue(name: String, type: String)
     case parameterImmutable(name: String)
@@ -25,26 +26,11 @@ public enum IDXClientError: Error {
 
 @objc
 public protocol IDXClientAPI {
-    func interact(completion: @escaping(String?, Error?) -> Void)
-    func introspect(_ interactionHandle: String,
-                    completion: @escaping (IDXClient.Response?, Error?) -> Void)
-    func identify(identifier: String,
-                  credentials: IDXClient.Credentials,
-                  rememberMe: Bool,
-                  completion: @escaping (IDXClient.Response?, Error?) -> Void)
-    func enroll(authenticator: IDXClient.Authenticator,
-                completion: @escaping (IDXClient.Response?, Error?) -> Void)
-    func challenge(authenticator: IDXClient.Authenticator,
-                   completion: @escaping (IDXClient.Response?, Error?) -> Void)
-    func answerChallenge(credentials: IDXClient.Credentials,
-                         completion: @escaping (IDXClient.Response?, Error?) -> Void)
+    func start(completion: @escaping (IDXClient.Response?, Error?) -> Void)
     func cancel(completion: @escaping (Error?) -> Void)
-    func token(url: String,
-               grantType: String,
-               interactionCode: String,
-               completion: @escaping(IDXClient.Token?, Error?) -> Void)
-
     func proceed(remediation option: IDXClient.Remediation.Option,
                  data: [String : Any]?,
                  completion: @escaping (IDXClient.Response?, Swift.Error?) -> Void)
+    func exchangeCode(using successResponse: IDXClient.Remediation.Option,
+                      completion: @escaping (IDXClient.Token?, Swift.Error?) -> Void)
 }

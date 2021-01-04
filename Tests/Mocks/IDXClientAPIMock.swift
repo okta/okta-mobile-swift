@@ -36,75 +36,15 @@ class IDXClientAPIv1Mock: IDXClientAPIImpl {
         self.configuration = configuration
     }
     
-    func interact(completion: @escaping (String?, Error?) -> Void) {
+    func start(completion: @escaping (IDXClient.Response?, Error?) -> Void) {
         recordedCalls.append(RecordedCall(function: #function, arguments: nil))
         let result = response(for: #function)
-        completion(result?["handle"] as? String, result?["error"] as? Error)
+        completion(result?["response"] as? IDXClient.Response, result?["error"] as? Error)
     }
-    
-    func introspect(_ interactionHandle: String, completion: @escaping (IDXClient.Response?, Error?) -> Void) {
-        recordedCalls.append(RecordedCall(function: #function,
-                                          arguments: ["interactionHandle": interactionHandle as Any]))
-        completion(IDXClient.Response(client: nil,
-                                      stateHandle: "handle",
-                                      version: "version",
-                                      expiresAt: Date(),
-                                      intent: "intent",
-                                      remediation: IDXClient.Remediation(client: self,
-                                                                         type: "type",
-                                                                         remediationOptions: []),
-                                      cancel: IDXClient.Remediation.Option(client: self,
-                                                                           rel: [],
-                                                                           name: "cancel",
-                                                                           method: "POST",
-                                                                           href: URL(string: "https://example.com/cancel")!,
-                                                                           accepts: "accepts",
-                                                                           form: []),
-                                      success: nil),
-                   nil)
-    }
-    
-    func identify(identifier: String, credentials: IDXClient.Credentials, rememberMe: Bool, completion: @escaping (IDXClient.Response?, Error?) -> Void) {
-        recordedCalls.append(RecordedCall(function: #function,
-                                          arguments: [
-                                            "identifier": identifier as Any,
-                                            "credentials": credentials as Any,
-                                            "rememberMe": rememberMe as Any
-                                          ]))
-        completion(nil, nil)
-    }
-    
-    func enroll(authenticator: IDXClient.Authenticator, completion: @escaping (IDXClient.Response?, Error?) -> Void) {
-        recordedCalls.append(RecordedCall(function: #function,
-                                          arguments: ["authenticator": authenticator as Any]))
-        completion(nil, nil)
-    }
-    
-    func challenge(authenticator: IDXClient.Authenticator, completion: @escaping (IDXClient.Response?, Error?) -> Void) {
-        recordedCalls.append(RecordedCall(function: #function,
-                                          arguments: ["authenticator": authenticator as Any]))
-        completion(nil, nil)
-    }
-    
-    func answerChallenge(credentials: IDXClient.Credentials, completion: @escaping (IDXClient.Response?, Error?) -> Void) {
-        recordedCalls.append(RecordedCall(function: #function,
-                                          arguments: ["credentials": credentials as Any]))
-        completion(nil, nil)
-    }
-    
+        
     func cancel(completion: @escaping (Error?) -> Void) {
         recordedCalls.append(RecordedCall(function: #function, arguments: nil))
         completion(nil)
-    }
-    
-    func token(url: String, grantType: String, interactionCode: String, completion: @escaping (IDXClient.Token?, Error?) -> Void) {
-        recordedCalls.append(RecordedCall(function: #function,
-                                          arguments: [
-                                            "url": url as Any,
-                                            "grantType": grantType as Any,
-                                            "interactionCode": interactionCode as Any
-                                          ]))
-        completion(nil, nil)
     }
     
     func proceed(remediation option: IDXClient.Remediation.Option, data: [String : Any]?, completion: @escaping (IDXClient.Response?, Error?) -> Void) {
@@ -113,6 +53,16 @@ class IDXClientAPIv1Mock: IDXClientAPIImpl {
                                             "remediation": option as Any,
                                             "data": data ?? [:] as Any
                                           ]))
-        completion(nil, nil)
+        let result = response(for: #function)
+        completion(result?["response"] as? IDXClient.Response, result?["error"] as? Error)
+    }
+
+    func exchangeCode(using successResponse: IDXClient.Remediation.Option, completion: @escaping (IDXClient.Token?, Error?) -> Void) {
+        recordedCalls.append(RecordedCall(function: #function,
+                                          arguments: [
+                                            "using": successResponse as Any
+                                          ]))
+        let result = response(for: #function)
+        completion(result?["token"] as? IDXClient.Token, result?["error"] as? Error)
     }
 }

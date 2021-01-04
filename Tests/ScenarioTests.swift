@@ -10,7 +10,7 @@ import XCTest
 
 // https://oktawiki.atlassian.net/wiki/spaces/eng/pages/1364860951/Test+Plan+-+Interaction+code+grant+support+for+DevEx+SDKs#TestPlan-InteractioncodegrantsupportforDevExSDKs-TestScenarios:
 class ScenarioTests: XCTestCase {
-    let configuration = IDXClient.Configuration(issuer: "https://foo.oktapreview.com",
+    let configuration = IDXClient.Configuration(issuer: "https://example.com",
                                                 clientId: "clientId",
                                                 clientSecret: "clientSecret",
                                                 scopes: ["all"],
@@ -29,16 +29,18 @@ class ScenarioTests: XCTestCase {
     
     func testScenario1() throws {
         let completion = expectation(description: "Start")
-        try session.expect("https://foo.oktapreview.com/v1/interact", fileName: "interact-response")
-        try session.expect("https://foo.oktapreview.com/idp/idx/introspect", fileName: "introspect-response")
-        try session.expect("https://foo.oktapreview.com/idp/idx/identify", fileName: "identify-response")
+        try session.expect("https://example.com/v1/interact", folderName: "Passcode", fileName: "01-interact-response")
+        try session.expect("https://example.com/idp/idx/introspect", folderName: "Passcode", fileName: "02-introspect-response")
+        try session.expect("https://example.com/idp/idx/identify", folderName: "Passcode", fileName: "03-identify-response")
+        try session.expect("https://example.com/idp/idx/challenge/answer", folderName: "Passcode", fileName: "04-challenge-answer-response")
+        try session.expect("https://example.com/oauth2/auszsfkYrgGCTilsV2o4/v1/token", folderName: "Passcode", fileName: "05-token-response")
 
         idx.start { (response, error) in
             XCTAssertNotNil(response)
             XCTAssertNil(error)
             XCTAssertFalse(response!.isLoginSuccessful)
             
-            let remediation = response?.remediation.remediationOptions.first
+            let remediation = response?.remediation?.remediationOptions.first
             XCTAssertNotNil(remediation)
             XCTAssertEqual(remediation?.name, "identify")
             XCTAssertEqual(remediation?.form.count, 3)
@@ -51,30 +53,32 @@ class ScenarioTests: XCTestCase {
                 XCTAssertNil(error)
                 XCTAssertFalse(response!.isLoginSuccessful)
 
-                let remediation = response?.remediation.remediationOptions.first
+                let remediation = response?.remediation?.remediationOptions.first
                 XCTAssertNotNil(remediation)
-                XCTAssertEqual(remediation?.name, "select-authenticator-authenticate")
+                XCTAssertEqual(remediation?.name, "challenge-authenticator")
                 XCTAssertEqual(remediation?.form.count, 2)
                 
-                XCTAssertEqual(remediation?.form[0].name, "authenticator")
+                XCTAssertEqual(remediation?.form[0].name, "credentials")
                 XCTAssertEqual(remediation?.form[1].name, "stateHandle")
 
-                let authenticatorForm = remediation?.form[0]
-                XCTAssertEqual(authenticatorForm?.options?.count, 3)
+                let credentials = remediation?.form[0]
+                XCTAssertTrue(credentials!.required)
                 
-                let emailField = authenticatorForm?.options?[0]
-                XCTAssertEqual(emailField?.label, "Email")
-                XCTAssertNil(emailField?.name)
-                
-                let passwordField = authenticatorForm?.options?[1]
-                XCTAssertEqual(passwordField?.label, "Password")
-                XCTAssertNil(passwordField?.name)
-                
-                let questionField = authenticatorForm?.options?[2]
-                XCTAssertEqual(questionField?.label, "Security Question")
-                XCTAssertNil(questionField?.name)
-                
-                completion.fulfill()
+                remediation?.proceed(with: ["credentials": [ "passcode": "password" ]]) { (response, error) in
+                    XCTAssertNotNil(response)
+                    XCTAssertNil(error)
+                    XCTAssertTrue(response!.isLoginSuccessful)
+
+                    response?.exchangeCode(completionHandler: { (token, error) in
+                        XCTAssertNotNil(token)
+                        XCTAssertNil(error)
+                        
+                        XCTAssertEqual(token?.tokenType, "Bearer")
+                        XCTAssertEqual(token?.expiresIn, 3600)
+                        XCTAssertEqual(token?.refreshToken, "WQcGbvjBpm2EA30-rPR7m6vGSzI8YMqNGYY9Qe14fT0")
+                        completion.fulfill()
+                    })
+                }
             }
         }
         wait(for: [completion], timeout: 1)

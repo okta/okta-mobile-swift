@@ -31,40 +31,8 @@ extension IDXClient {
         }
     }
     
-    public func interact(completion: @escaping(String?, Error?) -> Void) {
-        self.api.interact(completion: completion)
-    }
-    
-    public func introspect(_ interactionHandle: String,
-                           completion: @escaping (IDXClient.Response?, Error?) -> Void)
-    {
-        self.api.introspect(interactionHandle, completion: completion)
-    }
-    
-    public func identify(identifier: String,
-                         credentials: IDXClient.Credentials,
-                         rememberMe: Bool,
-                         completion: @escaping (IDXClient.Response?, Error?) -> Void)
-    {
-        self.api.identify(identifier: identifier, credentials: credentials, rememberMe: rememberMe, completion: completion)
-    }
-    
-    public func enroll(authenticator: IDXClient.Authenticator,
-                       completion: @escaping (IDXClient.Response?, Error?) -> Void)
-    {
-        self.api.enroll(authenticator: authenticator, completion: completion)
-    }
-    
-    public func challenge(authenticator: IDXClient.Authenticator,
-                          completion: @escaping (IDXClient.Response?, Error?) -> Void)
-    {
-        self.api.challenge(authenticator: authenticator, completion: completion)
-    }
-    
-    public func answerChallenge(credentials: IDXClient.Credentials,
-                                completion: @escaping (IDXClient.Response?, Error?) -> Void)
-    {
-        self.api.answerChallenge(credentials: credentials, completion: completion)
+    public func start(completion: @escaping (Response?, Error?) -> Void) {
+        self.api.start(completion: completion)
     }
     
     public func cancel(completion: @escaping (Error?) -> Void)
@@ -72,12 +40,15 @@ extension IDXClient {
         self.api.cancel(completion: completion)
     }
     
-    public func token(url: String,
-                      grantType: String,
-                      interactionCode: String,
-                      completion: @escaping(IDXClient.Token?, Error?) -> Void)
+    public func proceed(remediation option: Remediation.Option,
+                        data: [String : Any]? = nil,
+                        completion: @escaping (IDXClient.Response?, Error?) -> Void)
     {
-        self.api.token(url: url, grantType: grantType, interactionCode: interactionCode, completion: completion)
+        self.api.proceed(remediation: option, data: data, completion: completion)
+    }
+    
+    public func exchangeCode(using successResponse: Remediation.Option, completion: @escaping (Token?, Error?) -> Void) {
+        self.api.exchangeCode(using: successResponse, completion: completion)
     }
 }
 

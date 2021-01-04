@@ -1,0 +1,60 @@
+{
+	"stateHandle": "ahc52KautBHCANs3ScZjLfRcxFjP_N5mqOTYouqHFP",
+	"version": "1.0.0",
+	"expiresAt": "2020-12-30T17:18:29.000Z",
+	"intent": "LOGIN",
+	"user": {
+		"type": "object",
+		"value": {
+			"id": "9ET1Z6TaxBAxzbL0Z0bb"
+		}
+	},
+	"cancel": {
+		"rel": ["create-form"],
+		"name": "cancel",
+		"href": "https://example.com/idp/idx/cancel",
+		"method": "POST",
+		"value": [{
+			"name": "stateHandle",
+			"required": true,
+			"value": "ahc52KautBHCANs3ScZjLfRcxFjP_N5mqOTYouqHFP",
+			"visible": false,
+			"mutable": false
+		}],
+		"accepts": "application/ion+json; okta-version=1.0.0"
+	},
+	"app": {
+		"type": "object",
+		"value": {
+			"name": "oidc_client",
+			"label": "ak-test-oie-app",
+			"id": "0ZczewGCFPlxNYYcLq5i"
+		}
+	},
+	"successWithInteractionCode": {
+		"rel": ["create-form"],
+		"name": "issue",
+		"href": "https://example.com/oauth2/auszsfkYrgGCTilsV2o4/v1/token",
+		"method": "POST",
+		"value": [{
+			"name": "grant_type",
+			"required": true,
+			"value": "interaction_code"
+		}, {
+			"name": "interaction_code",
+			"required": true,
+			"value": "o9lcUQyfC0u6htHRipWDLtDG5vJc8sLK7ptqI8isQ-Q"
+		}, {
+			"name": "client_id",
+			"required": true,
+			"value": "0ZczewGCFPlxNYYcLq5i"
+		}, {
+			"name": "client_secret",
+			"required": true
+		}, {
+			"name": "code_verifier",
+			"required": true
+		}],
+		"accepts": "application/x-www-form-urlencoded"
+	}
+}
