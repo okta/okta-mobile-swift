@@ -42,9 +42,10 @@ class IDXClientAPIv1Mock: IDXClientAPIImpl {
         completion(result?["response"] as? IDXClient.Response, result?["error"] as? Error)
     }
         
-    func cancel(completion: @escaping (Error?) -> Void) {
+    func cancel(completion: @escaping (IDXClient.Response?, Error?) -> Void) {
         recordedCalls.append(RecordedCall(function: #function, arguments: nil))
-        completion(nil)
+        let result = response(for: #function)
+        completion(result?["response"] as? IDXClient.Response, result?["error"] as? Error)
     }
     
     func proceed(remediation option: IDXClient.Remediation.Option, data: [String : Any]?, completion: @escaping (IDXClient.Response?, Error?) -> Void) {

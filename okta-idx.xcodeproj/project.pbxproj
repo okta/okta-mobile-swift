@@ -194,22 +194,22 @@
 			isa = PBXGroup;
 			children = (
 				96F8F22E2582C32400DA2701 /* Mocks */,
-				961BE42A2583EC4C00DCE8AC /* Utilities */,
 				96F8F2352582D76400DA2701 /* Resources */,
+				961BE42A2583EC4C00DCE8AC /* Utilities */,
 				96F8F1CD25804B5B00DA2701 /* Info.plist */,
-				96F8F22A2582C2DE00DA2701 /* IDXClientTests.swift */,
-				96DCDCEB25882263009487CB /* IDXClientAPIVersion1Tests.swift */,
+				96F8F1BF25804A0C00DA2701 /* okta-idx-ios-tests-Bridging-Header.h */,
 				964A44BD259BB8FC002CB250 /* IDXAcceptTypeTests.swift */,
-				961BE4262583E73300DCE8AC /* IDXClientRequestTests.swift */,
+				96DCDCEB25882263009487CB /* IDXClientAPIVersion1Tests.swift */,
 				96DCDCF52588354E009487CB /* IDXClientCombineTests.swift */,
 				964A44B1259A90BE002CB250 /* IDXClientErrorTests.swift */,
-				96F8F1C025804A0C00DA2701 /* IDXClientVersionTests.swift */,
-				961BE4482584184700DCE8AC /* PKCETests.swift */,
-				96F8F1BF25804A0C00DA2701 /* okta-idx-ios-tests-Bridging-Header.h */,
-				96C584ED258ACEB200E79975 /* JSONValueTests.swift */,
-				966A1E75258BDB1B00864DB7 /* URLSessionProtocolTests.swift */,
-				964A44B7259A9772002CB250 /* ScenarioTests.swift */,
+				961BE4262583E73300DCE8AC /* IDXClientRequestTests.swift */,
+				96F8F22A2582C2DE00DA2701 /* IDXClientTests.swift */,
 				964A44E0259D3331002CB250 /* IDXClientV1ResponseTests.swift */,
+				96F8F1C025804A0C00DA2701 /* IDXClientVersionTests.swift */,
+				96C584ED258ACEB200E79975 /* JSONValueTests.swift */,
+				961BE4482584184700DCE8AC /* PKCETests.swift */,
+				964A44B7259A9772002CB250 /* ScenarioTests.swift */,
+				966A1E75258BDB1B00864DB7 /* URLSessionProtocolTests.swift */,
 			);
 			path = Tests;
 			sourceTree = "<group>";
@@ -221,8 +221,6 @@
 				96F8F1AC25803BE100DA2701 /* Info.plist */,
 				96F8F20A25815AFD00DA2701 /* IDXClient.swift */,
 				96F8F2102581973F00DA2701 /* IDXClientAPI.swift */,
-				964A44E4259E6870002CB250 /* IDXClient+Combine.swift */,
-				9696A40725892C74005D6E9D /* IDXClient+Response.swift */,
 			);
 			path = Sources;
 			sourceTree = "<group>";
@@ -230,7 +228,9 @@
 		96F8F1B82580499900DA2701 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
+				964A44E4259E6870002CB250 /* IDXClient+Combine.swift */,
 				96F8F21825828F1300DA2701 /* IDXClient+Extension.swift */,
+				9696A40725892C74005D6E9D /* IDXClient+Response.swift */,
 				966A1E7F258BEADB00864DB7 /* IDXClientError+Extensions.swift */,
 				96F8F1B9258049B000DA2701 /* IDXVersion+Extension.swift */,
 			);
@@ -241,6 +241,7 @@
 			isa = PBXGroup;
 			children = (
 				96F8F2582582E93B00DA2701 /* v1.0.0 */,
+				96F8F2712583E31800DA2701 /* IDXClientAPIImpl.swift */,
 			);
 			path = Implementations;
 			sourceTree = "<group>";
@@ -312,7 +313,6 @@
 			children = (
 				96F8F20925815AD700DA2701 /* Implementations */,
 				96F8F1B82580499900DA2701 /* Extensions */,
-				96F8F2712583E31800DA2701 /* IDXClientAPIImpl.swift */,
 			);
 			path = Internal;
 			sourceTree = "<group>";

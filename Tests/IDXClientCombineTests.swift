@@ -28,7 +28,8 @@ class IDXClientCombineTests: XCTestCase {
 
         api = IDXClientAPIv1Mock(configuration: configuration)
         client = IDXClient(configuration: configuration,
-                           api: api)
+                           api: api,
+                           queue: DispatchQueue.global())
         remedationOption = IDXClient.Remediation.Option(client: api,
                                                         rel: ["foo"],
                                                         name: "name",
@@ -85,7 +86,7 @@ class IDXClientCombineTests: XCTestCase {
         api.expect(function: "start(completion:)", arguments: ["response": response as Any])
 
         var called = false
-        let completion = expectation(description: "interact")
+        let completion = expectation(description: "start")
         let _ = client.start().sink { value in
             completion.fulfill()
         } receiveValue: { value in

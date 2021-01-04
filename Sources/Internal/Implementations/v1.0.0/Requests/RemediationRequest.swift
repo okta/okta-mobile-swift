@@ -63,15 +63,15 @@ extension IDXClient.APIVersion1.RemediationRequest: IDXClientAPIRequest, Receive
                 return
             }
             
-            let response: ResponseType!
+            let result: ResponseType!
             do {
-                response = try idxResponse(from: data)
+                result = try idxResponse(from: data)
             } catch {
                 completion(nil, error)
                 return
             }
 
-            completion(response, nil)
+            completion(result, nil)
         }
         task.resume()
     }

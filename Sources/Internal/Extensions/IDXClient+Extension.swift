@@ -14,41 +14,50 @@ extension IDXClient {
         var interactionHandle: String? = nil
         var cancelRemediationOption: IDXClient.Remediation.Option? = nil
         
-        let queue: DispatchQueue
         let configuration: IDXClient.Configuration
         let session: URLSessionProtocol
         weak var delegate: IDXClientAPIDelegate?
 
-        init(with configuration: Configuration, queue: DispatchQueue? = nil, session: URLSessionProtocol? = nil) {
+        init(with configuration: Configuration, session: URLSessionProtocol? = nil) {
             self.configuration = configuration
-            
-            self.queue = queue ?? DispatchQueue(label: "com.okta.idx.v1",
-                                                qos: .userInteractive,
-                                                attributes: [],
-                                                autoreleaseFrequency: .workItem,
-                                                target: nil)
             self.session = session ?? URLSession(configuration: URLSessionConfiguration.ephemeral)
         }
     }
     
     public func start(completion: @escaping (Response?, Error?) -> Void) {
-        self.api.start(completion: completion)
+        self.api.start { (response, error) in
+            self.queue.async {
+                completion(response, error)
+            }
+        }
     }
     
-    public func cancel(completion: @escaping (Error?) -> Void)
+    public func cancel(completion: @escaping (Response?, Error?) -> Void)
     {
-        self.api.cancel(completion: completion)
+        self.api.cancel { (response, error) in
+            self.queue.async {
+                completion(response, error)
+            }
+        }
     }
     
     public func proceed(remediation option: Remediation.Option,
                         data: [String : Any]? = nil,
                         completion: @escaping (IDXClient.Response?, Error?) -> Void)
     {
-        self.api.proceed(remediation: option, data: data, completion: completion)
+        self.api.proceed(remediation: option, data: data) { (response, error) in
+            self.queue.async {
+                completion(response, error)
+            }
+        }
     }
     
     public func exchangeCode(using successResponse: Remediation.Option, completion: @escaping (Token?, Error?) -> Void) {
-        self.api.exchangeCode(using: successResponse, completion: completion)
+        self.api.exchangeCode(using: successResponse) { (token, error) in
+            self.queue.async {
+                completion(token, error)
+            }
+        }
     }
 }
 

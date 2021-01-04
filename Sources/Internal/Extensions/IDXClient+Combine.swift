@@ -12,8 +12,9 @@ import Combine
 
 @available(iOS 13.0, *)
 extension IDXClient {
-    public func start() -> Future<Response, Error> {
-        return Future<Response, Error> { (promise) in
+    /// Starts the authentication workflow, returning a Future.
+    public func start() -> Future<IDXClient.Response, Error> {
+        return Future<IDXClient.Response, Error> { (promise) in
             self.start { (response, error) in
                 if let error = error {
                     promise(.failure(error))
@@ -29,6 +30,10 @@ extension IDXClient {
 
 @available(iOS 13.0, *)
 extension IDXClient.Remediation.Option {
+    /// Proceeds to the given remediation option, returning a Future.
+    /// - Parameters:
+    ///   - option: Remediation option to proceed to.
+    ///   - data: Optional data to supply to the remediation step.
     public func proceed(with dataFromUI: [String:Any] = [:]) -> Future<IDXClient.Response, Error> {
         return Future<IDXClient.Response, Error> { (promise) in
             self.proceed(with: dataFromUI) { (response, error) in
@@ -46,6 +51,7 @@ extension IDXClient.Remediation.Option {
 
 @available(iOS 13.0, *)
 extension IDXClient.Response {
+    /// Exchanges the successful remediation response with a token, returning a Future.
     public func exchangeCode() -> Future<IDXClient.Token, Error> {
         return Future<IDXClient.Token, Error> { (promise) in
             self.exchangeCode() { (token, error) in

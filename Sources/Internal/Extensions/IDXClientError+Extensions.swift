@@ -10,7 +10,6 @@ import Foundation
 extension IDXClientError: Equatable {
     public static func ==(lhs: IDXClientError, rhs: IDXClientError) -> Bool {
         switch (lhs, rhs) {
-        case (.stateHandleMissing, .stateHandleMissing): return true
         case (.invalidClient, .invalidClient): return true
         case (.cannotCreateRequest, .cannotCreateRequest): return true
         case (.invalidHTTPResponse, .invalidHTTPResponse): return true
@@ -39,9 +38,6 @@ extension IDXClientError: Equatable {
 extension IDXClientError: LocalizedError {
     public var errorDescription: String? {
         switch self {
-        case .stateHandleMissing:
-            return NSLocalizedString("State handle missing.",
-                                     comment: "Error message thrown when an IDX state handle is missing.")
         case .invalidClient:
             return NSLocalizedString("IDXClient instance is invalid.",
                                      comment: "Error message thrown when an IDXClient object is missing or becomes invalid.")
@@ -95,7 +91,6 @@ extension IDXClientError: CustomNSError {
     public var errorCode: Int {
         switch self {
         case .invalidClient: return 1
-        case .stateHandleMissing: return 2
         case .cannotCreateRequest: return 3
         case .invalidHTTPResponse: return 4
         case .invalidResponseData: return 5
@@ -114,7 +109,6 @@ extension IDXClientError: CustomNSError {
     public var errorUserInfo: [String : Any] {
         switch self {
         case .invalidClient: fallthrough
-        case .stateHandleMissing: fallthrough
         case .cannotCreateRequest: fallthrough
         case .invalidHTTPResponse: fallthrough
         case .invalidResponseData: fallthrough

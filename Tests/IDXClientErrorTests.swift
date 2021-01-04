@@ -12,7 +12,6 @@ class IDXClientErrorTests: XCTestCase {
 
     func testEquality() {
         XCTAssertEqual(IDXClientError.invalidClient,          IDXClientError.invalidClient)
-        XCTAssertEqual(IDXClientError.stateHandleMissing,     IDXClientError.stateHandleMissing)
         XCTAssertEqual(IDXClientError.cannotCreateRequest,    IDXClientError.cannotCreateRequest)
         XCTAssertEqual(IDXClientError.invalidHTTPResponse,    IDXClientError.invalidHTTPResponse)
         XCTAssertEqual(IDXClientError.invalidResponseData,    IDXClientError.invalidResponseData)
@@ -50,8 +49,6 @@ class IDXClientErrorTests: XCTestCase {
     func testDescription() {
         XCTAssertEqual(IDXClientError.invalidClient.localizedDescription,
                        "IDXClient instance is invalid.")
-        XCTAssertEqual(IDXClientError.stateHandleMissing.localizedDescription,
-                       "State handle missing.")
         XCTAssertEqual(IDXClientError.cannotCreateRequest.localizedDescription,
                        "Could not create a URL request for this action.")
         XCTAssertEqual(IDXClientError.invalidHTTPResponse.localizedDescription,

@@ -8,36 +8,37 @@
 import Foundation
 
 public extension IDXClient {
+    /// Describes the response from an Okta Identity Engine workflow stage. This is used to determine the current state of the workflow, the set of available remediation steps to proceed through the workflow, actions that can be performed, and other information relevant to the authentication of a user.
     @objc(IDXResponse)
     class Response: NSObject {
         private weak var client: IDXClientAPIImpl?
         
+        /// The current state handle for the IDX workflow.
         public let stateHandle: String
+        
+        /// The API version used.
         public let version: String
+        
+        /// The date at which this stage of the workflow expires, after which the authentication process should be restarted.
         public let expiresAt: Date
+        
+        /// A string describing the intent of the workflow, e.g. "LOGIN".
         public let intent: String
+        
+        /// An object describing the sort of remediation steps available to the user, or `nil` if the workflow is ended.
         public let remediation: Remediation?
+        
+        /// Indicates whether or not the user has logged in successfully. If this is `true`, this response object should be exchanged for access tokens utilizing the `exchangeCode` method.
         public var isLoginSuccessful: Bool {
             return successResponse != nil
         }
         
-        internal let cancelRemediationOption: Remediation.Option?
-        internal let successResponse: Remediation.Option?
-        
-        internal init(client: IDXClientAPIImpl?, stateHandle: String, version: String, expiresAt: Date, intent: String, remediation: Remediation?, cancel: Remediation.Option?, success: Remediation.Option?) {
-            self.client = client
-            self.stateHandle = stateHandle
-            self.version = version
-            self.expiresAt = expiresAt
-            self.intent = intent
-            self.remediation = remediation
-            self.cancelRemediationOption = cancel
-            self.successResponse = success
-            
-            super.init()
-        }
-        
-        public func cancel(completionHandler: @escaping(Response?, Error?) -> Void) {
+        /// Cancels the current workflow.
+        /// - Parameters:
+        ///   - completion: Invoked when the operation is cancelled.
+        ///   - response: The response describing the new workflow next steps, or `nil` if an error occurred.
+        ///   - error: Describes the error that occurred, or `nil` if successful.
+        public func cancel(completionHandler: @escaping(_ response: Response?, _ error: Error?) -> Void) {
             guard let cancelOption = cancelRemediationOption else {
                 completionHandler(nil, IDXClientError.unknownRemediationOption(name: "cancel"))
                 return
@@ -46,7 +47,13 @@ public extension IDXClient {
             cancelOption.proceed(with: [:], completionHandler: completionHandler)
         }
         
-        public func exchangeCode(completionHandler: @escaping(Token?, Error?) -> Void) {
+        /// Exchanges the successful remediation response with a token.
+        /// - Parameters:
+        ///   - successResponse: Successful remediation option to exchange.
+        ///   - completion: Completion handler invoked when a token, or error, is received.
+        ///   - token: The token that was exchanged, or `nil` if an error occurred.
+        ///   - error: Describes the error that occurred, or `nil` if successful.
+        public func exchangeCode(completionHandler: @escaping(_ token: Token?, _ error: Error?) -> Void) {
             guard let successResponse = successResponse else {
                 completionHandler(nil, IDXClientError.successResponseMissing)
                 return
@@ -59,15 +66,41 @@ public extension IDXClient {
             
             client.exchangeCode(using: successResponse, completion: completionHandler)
         }
+        
+        internal let cancelRemediationOption: Remediation.Option?
+        internal let successResponse: Remediation.Option?
+        internal init(client: IDXClientAPIImpl?, stateHandle: String, version: String, expiresAt: Date, intent: String, remediation: Remediation?, cancel: Remediation.Option?, success: Remediation.Option?) {
+            self.client = client
+            self.stateHandle = stateHandle
+            self.version = version
+            self.expiresAt = expiresAt
+            self.intent = intent
+            self.remediation = remediation
+            self.cancelRemediationOption = cancel
+            self.successResponse = success
+            
+            super.init()
+        }
     }
     
+    /// Access tokens created as a result of exchanging a successful workflow response.
     @objc(IDXToken)
     class Token: NSObject {
+        /// The access token to use.
         public let accessToken: String
+        
+        /// The refresh token, if available.
         public let refreshToken: String?
+        
+        /// The time interval after which this token will expire.
         public let expiresIn: TimeInterval
+        
         public let idToken: String?
+        
+        /// The access scopes for this token.
         public let scope: String
+        
+        /// The type of this token.
         public let tokenType: String
 
         internal init(accessToken: String,
@@ -88,9 +121,13 @@ public extension IDXClient {
         }
     }
 
+    /// The `IDXClient.Remediation` object describes the remediation steps the user, and application, can follow to proceed through the workflow.
     @objc(IDXRemediation)
     class Remediation: NSObject {
-        public var type: String
+        /// The remediation type, described in the response payload.
+        public var type: String // TODO: Is this really necessary? Is it every not `array`?
+        
+        /// The array of remediation options available to the developer to proceed through the authentication workflow.
         public let remediationOptions: [Option]
         
         private weak var client: IDXClientAPIImpl?
@@ -103,17 +140,37 @@ public extension IDXClient {
             super.init()
         }
         
+        /// Describes an individual value within a form, used to collect and submit information from the user to proceed through the authentication workflow.
         @objc(IDXFormValue)
         public class FormValue: NSObject {
+            /// The programmatic name for this form value.
             public let name: String?
+            
+            /// The user-readable label describing this form value.
             public let label: String?
+            
+            /// The type of value expected from the client.
             public let type: String?
+            
+            /// The value to send, if a default is provided from the Identity Engine.
             public let value: AnyObject?
+            
+            /// Indicates if the form value is intended to be seen by the user.
             public let visible: Bool
+            
+            /// Indicates whether or not the form value is read-only.
             public let mutable: Bool
+            
+            /// Indicates whether or not the form value is required to successfully proceed through this remediation option.
             public let required: Bool
+            
+            /// Indicates whether or not the value supplied in this form value should be considered secret, and not presented to the user.
             public let secret: Bool
+            
+            /// For composite form fields, this contains the nested array of form values to group together.
             public let form: [FormValue]?
+            
+            /// For form fields that have specific options the user can choose from (e.g. security question, passcode, etc), this indicates the different form options that should be displayed to the user.
             public let options: [FormValue]?
             
             public func relatesTo() -> AnyObject? {
@@ -146,13 +203,27 @@ public extension IDXClient {
             }
         }
 
+        /// Instances of `IDXClient.Remediation.Option` describe choices the user can make to proceed through the authentication workflow.
+        ///
+        /// Either simple or complex authentication scenarios consist of a set of steps that may be followed, but at some times the user may have a choice in what they use to verify their identity. For example, a user may have multiple choices in verifying their account, such as:
+        ///
+        /// 1. Password
+        /// 2. Security Questions
+        /// 3. Email verification
+        /// 4. Other, customizable, verification steps.
+        ///
+        /// Each of the remediation options includes details about what form values should be collected from the user, and a description of the resulting request that should be sent to Okta to proceed to the next step.
         @objc(IDXRemediationOption)
         public class Option: NSObject {
-            public let rel: [String]
+            public let rel: [String] // TODO: Is this necessary to expose to the developer?
+
+            /// The name of this remediation step, which can be used to control how the form is presented to the user.
             public let name: String
-            public let method: String
+            public let method: String // TODO: Are method, href, accepts, etc necessary to the developer if they're using our SDK? Those should be internal implementation details. The developer can't really do anything with this information after all.
             public let href: URL
             public let accepts: String
+            
+            /// A description of the form values that this remediation option supports and expects.
             public let form: [FormValue]
             
             private weak var client: IDXClientAPIImpl?
@@ -175,8 +246,14 @@ public extension IDXClient {
                 
                 super.init()
             }
-
-            public func proceed(with dataFromUI: [String:Any], completionHandler: @escaping (Response?, Error?) -> Void) {
+            
+            /// Executes the remediation option and proceeds through the workflow using the supplied form parameters.
+            /// - Parameters:
+            ///   - dataFromUI: Form data collected from the user.
+            ///   - completionHandler: Completion handler invoked when a response is received.
+            ///   - response: `IDXClient.Response` object describing the next step in the remediation workflow, or `nil` if an error occurred.
+            ///   - error: A description of the error that occurred, or `nil` if the request was successful.
+            public func proceed(with dataFromUI: [String:Any], completionHandler: @escaping (_ response: Response?, _ error: Error?) -> Void) {
                 guard let client = client else {
                     completionHandler(nil, IDXClientError.invalidClient)
                     return

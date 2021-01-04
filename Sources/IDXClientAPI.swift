@@ -7,9 +7,9 @@
 
 import Foundation
 
+/// Errors reported from IDXClient
 public enum IDXClientError: Error {
     case invalidClient
-    case stateHandleMissing
     case cannotCreateRequest
     case invalidHTTPResponse
     case invalidResponseData
@@ -26,11 +26,37 @@ public enum IDXClientError: Error {
 
 @objc
 public protocol IDXClientAPI {
-    func start(completion: @escaping (IDXClient.Response?, Error?) -> Void)
-    func cancel(completion: @escaping (Error?) -> Void)
+    /// Starts the authentication workflow.
+    /// - Parameters:
+    ///   - completion: Invoked when a response, or error, is received.
+    ///   - response: The response describing the next steps available in this workflow.
+    ///   - error: Describes the error that occurred, or `nil` if successful.
+    func start(completion: @escaping (_ response: IDXClient.Response?, _ error: Error?) -> Void)
+    
+    /// Cancels the current workflow.
+    /// - Parameters:
+    ///   - completion: Invoked when the operation is cancelled.
+    ///   - response: The response describing the new workflow next steps, or `nil` if an error occurred.
+    ///   - error: Describes the error that occurred, or `nil` if successful.
+    func cancel(completion: @escaping (_ response: IDXClient.Response?, _ error: Error?) -> Void)
+    
+    /// Proceeds to the given remediation option.
+    /// - Parameters:
+    ///   - option: Remediation option to proceed to.
+    ///   - data: Optional data to supply to the remediation step.
+    ///   - completion: Invoked when a response, or error, is received.
+    ///   - response: The response describing the next steps available in this workflow.
+    ///   - error: Describes the error that occurred, or `nil` if successful.
     func proceed(remediation option: IDXClient.Remediation.Option,
                  data: [String : Any]?,
-                 completion: @escaping (IDXClient.Response?, Swift.Error?) -> Void)
+                 completion: @escaping (_ response: IDXClient.Response?, _ error: Swift.Error?) -> Void)
+    
+    /// Exchanges the successful remediation response with a token.
+    /// - Parameters:
+    ///   - successResponse: Successful remediation option to exchange.
+    ///   - completion: Completion handler invoked when a token, or error, is received.
+    ///   - token: The token that was exchanged, or `nil` if an error occurred.
+    ///   - error: Describes the error that occurred, or `nil` if successful.
     func exchangeCode(using successResponse: IDXClient.Remediation.Option,
-                      completion: @escaping (IDXClient.Token?, Swift.Error?) -> Void)
+                      completion: @escaping (_ token: IDXClient.Token?, _ error: Swift.Error?) -> Void)
 }

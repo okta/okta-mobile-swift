@@ -60,32 +60,47 @@ extension IDXClient.APIVersion1: IDXClientAPIImpl {
                 return
             }
             
-            if let response = response {
-                do {
-                    try self.consumeResponse(response)
-                } catch {
-                    completion(nil, error)
-                    return
-                }
+            guard let response = response else {
+                completion(nil, IDXClientError.invalidResponseData)
+                return
+            }
+            
+            do {
+                try self.consumeResponse(response)
+            } catch {
+                completion(nil, error)
+                return
+            }
+
+            completion(IDXClient.Response(client: self, v1: response), nil)
+        }
+    }
+        
+    func cancel(completion: @escaping (IDXClient.Response?, Error?) -> Void) {
+        guard let cancelOption = cancelRemediationOption else {
+            completion(nil, IDXClientError.unknownRemediationOption(name: "cancel"))
+            return
+        }
+        
+        cancelOption.proceed(with: [:]) { (response, error) in
+            guard error == nil else {
+                completion(nil, error)
+                return
             }
 
             guard let response = response else {
                 completion(nil, IDXClientError.invalidResponseData)
                 return
             }
-            
-            completion(IDXClient.Response(client: self, v1: response), nil)
-        }
-    }
-        
-    func cancel(completion: @escaping (Error?) -> Void) {
-        guard let cancelOption = cancelRemediationOption else {
-            completion(IDXClientError.unknownRemediationOption(name: "cancel"))
-            return
-        }
-        
-        cancelOption.proceed(with: [:]) { (_, error) in
-            completion(error)
+
+            do {
+                try self.consumeResponse(response)
+            } catch {
+                completion(nil, error)
+                return
+            }
+
+            completion(response, nil)
         }
     }
     

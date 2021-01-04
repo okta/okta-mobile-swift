@@ -65,15 +65,15 @@ extension IDXClient.APIVersion1.InteractRequest: IDXClientAPIRequest {
             let decoder = JSONDecoder()
             decoder.keyDecodingStrategy = .convertFromSnakeCase
             
-            let response: ResponseType!
+            let result: ResponseType!
             do {
-                response = try decoder.decode(ResponseType.self, from: data)
+                result = try decoder.decode(ResponseType.self, from: data)
             } catch {
                 completion(nil, error)
                 return
             }
 
-            completion(response, nil)
+            completion(result, nil)
         }
         task.resume()
     }

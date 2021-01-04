@@ -20,7 +20,8 @@ class IDXClientTests: XCTestCase {
     override func setUpWithError() throws {
         api = IDXClientAPIv1Mock(configuration: configuration)
         client = IDXClient(configuration: configuration,
-                           api: api)
+                           api: api,
+                           queue: DispatchQueue.main)
     }
 
     func testConstructors() {
@@ -61,7 +62,7 @@ class IDXClientTests: XCTestCase {
         
         // cancel()
         expect = expectation(description: "cancel")
-        client.cancel { (_) in
+        client.cancel { (_, _) in
             called = true
             expect.fulfill()
         }

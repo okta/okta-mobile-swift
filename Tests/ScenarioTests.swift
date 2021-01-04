@@ -24,7 +24,8 @@ class ScenarioTests: XCTestCase {
         api = IDXClient.APIVersion1(with: configuration,
                                     session: session)
         idx = IDXClient(configuration: configuration,
-                        api: api)
+                        api: api,
+                        queue: DispatchQueue.main)
     }
     
     func testScenario1() throws {

@@ -110,7 +110,8 @@ class IDXClientAPIVersion1Tests: XCTestCase {
         XCTAssertEqual(api.cancelRemediationOption?.accepts, "application/ion+json; okta-version=1.0.0")
         
         completion = expectation(description: "Cancel response")
-        api.cancel { (error) in
+        api.cancel { (response, error) in
+            XCTAssertNotNil(response)
             XCTAssertNil(error)
             completion.fulfill()
         }

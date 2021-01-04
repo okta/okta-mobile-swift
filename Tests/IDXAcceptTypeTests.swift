@@ -31,5 +31,10 @@ class IDXClientAPIVersion1AcceptTypeTests: XCTestCase {
 
         XCTAssertEqual(type, .ionJson(version: "1.0.0"))
         XCTAssertEqual(try type?.encodedData(with: ["foo": "bar"]), "{\"foo\":\"bar\"}".data(using: .utf8))
+        
+        let client = IDXClient(configuration: IDXClient.Configuration(issuer: "", clientId: "", clientSecret: "", scopes: [], redirectUri: ""))
+        client.start() { (response, error) in
+            
+        }
     }
 }
