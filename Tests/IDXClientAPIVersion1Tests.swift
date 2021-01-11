@@ -24,7 +24,7 @@ class IDXClientAPIVersion1Tests: XCTestCase {
     }
 
     func testInteractSuccess() throws {
-        try session.expect("https://foo.oktapreview.com/v1/interact", fileName: "interact-response")
+        try session.expect("https://foo.oktapreview.com/oauth2/default/v1/interact", fileName: "interact-response")
         
         let completion = expectation(description: "Response")
         api.interact { (handle, error) in

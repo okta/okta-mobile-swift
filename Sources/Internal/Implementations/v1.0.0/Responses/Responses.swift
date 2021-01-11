@@ -129,7 +129,7 @@ extension IDXClient.APIVersion1 {
     }
     
     /// Internal OIE API v1.0.0 token response.
-    class Token: NSObject, Decodable {
+    final class Token: NSObject, Decodable {
         let tokenType: String
         let expiresIn: Int  // TODO: Do we need to represent the token expiration using a combination of the `expires_in` duration and the HTTP Date header field?
         let accessToken: String

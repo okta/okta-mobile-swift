@@ -10,7 +10,7 @@ import Foundation
 public extension IDXClient {
     /// Describes the response from an Okta Identity Engine workflow stage. This is used to determine the current state of the workflow, the set of available remediation steps to proceed through the workflow, actions that can be performed, and other information relevant to the authentication of a user.
     @objc(IDXResponse)
-    class Response: NSObject {
+    final class Response: NSObject {
         private let client: IDXClientAPIImpl
         
         /// The current state handle for the IDX workflow.
@@ -80,7 +80,7 @@ public extension IDXClient {
     
     /// Access tokens created as a result of exchanging a successful workflow response.
     @objc(IDXToken)
-    class Token: NSObject {
+    final class Token: NSObject {
         /// The access token to use.
         public let accessToken: String
         
@@ -119,7 +119,7 @@ public extension IDXClient {
 
     /// The `IDXClient.Remediation` object describes the remediation steps the user, and application, can follow to proceed through the workflow.
     @objc(IDXRemediation)
-    class Remediation: NSObject {
+    final class Remediation: NSObject {
         /// The remediation type, described in the response payload.
         public var type: String // TODO: Is this really necessary? Is it every not `array`?
         
@@ -138,7 +138,7 @@ public extension IDXClient {
         
         /// Describes an individual value within a form, used to collect and submit information from the user to proceed through the authentication workflow.
         @objc(IDXFormValue)
-        public class FormValue: NSObject {
+        final public class FormValue: NSObject {
             /// The programmatic name for this form value.
             public let name: String?
             
@@ -210,7 +210,7 @@ public extension IDXClient {
         ///
         /// Each of the remediation options includes details about what form values should be collected from the user, and a description of the resulting request that should be sent to Okta to proceed to the next step.
         @objc(IDXRemediationOption)
-        public class Option: NSObject {
+        final public class Option: NSObject {
             public let rel: [String] // TODO: Is this necessary to expose to the developer?
 
             /// The name of this remediation step, which can be used to control how the form is presented to the user.

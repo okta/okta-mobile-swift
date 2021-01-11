@@ -23,7 +23,7 @@ class IDXClientRequestTests: XCTestCase {
         XCTAssertEqual(urlRequest?.httpMethod, "POST")
 
         let url = urlRequest?.url?.absoluteString
-        XCTAssertEqual(url, "https://example.com/issuer/v1/interact")
+        XCTAssertEqual(url, "https://example.com/issuer/oauth2/default/v1/interact")
         
         XCTAssertEqual(urlRequest?.allHTTPHeaderFields, [
             "Content-Type": "application/x-www-form-urlencoded",

@@ -29,7 +29,7 @@ class ScenarioTests: XCTestCase {
     
     func testScenario1() throws {
         let completion = expectation(description: "Start")
-        try session.expect("https://example.com/v1/interact", folderName: "Passcode", fileName: "01-interact-response")
+        try session.expect("https://example.com/oauth2/default/v1/interact", folderName: "Passcode", fileName: "01-interact-response")
         try session.expect("https://example.com/idp/idx/introspect", folderName: "Passcode", fileName: "02-introspect-response")
         try session.expect("https://example.com/idp/idx/identify", folderName: "Passcode", fileName: "03-identify-response")
         try session.expect("https://example.com/idp/idx/challenge/answer", folderName: "Passcode", fileName: "04-challenge-answer-response")

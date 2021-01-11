@@ -11,7 +11,7 @@ import Foundation
 ///
 /// The `IDXClient.Configuration` class is used to communicate which application, defined within Okta, the user is being authenticated with. From this point a workflow is initiated, consisting of a series of authentication "Remediation" steps. At each step, your application can introspect the `IDXClient.Response` object to determine which UI should be presented to your user to guide them through to login.
 @objc
-public class IDXClient: NSObject, IDXClientAPI {
+public final class IDXClient: NSObject, IDXClientAPI {
     @objc(OKTIdentityEngineVersion)
     /// The Okta Identity Engine API version to use.
     public enum Version: Int {
@@ -21,7 +21,7 @@ public class IDXClient: NSObject, IDXClientAPI {
     
     /// Configuration options for an IDXClient.
     @objc(IDXClientConfiguration)
-    public class Configuration: NSObject {
+    public final class Configuration: NSObject {
         /// The issuer URL.
         public let issuer: String
         
