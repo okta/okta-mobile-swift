@@ -9,6 +9,7 @@ import Foundation
 
 extension IDXClient.APIVersion1: IDXClientAPIImpl {
     enum AcceptType: Equatable {
+        case json(version: String?)
         case ionJson(version: String?)
         case formEncoded
     }

@@ -31,10 +31,17 @@ class IDXClientAPIVersion1AcceptTypeTests: XCTestCase {
 
         XCTAssertEqual(type, .ionJson(version: "1.0.0"))
         XCTAssertEqual(try type?.encodedData(with: ["foo": "bar"]), "{\"foo\":\"bar\"}".data(using: .utf8))
+    }
+
+    func testJson() throws {
+        var type = IDXClient.APIVersion1.AcceptType(rawValue: "application/json")
+        XCTAssertEqual(type?.stringValue(), "application/json")
+        XCTAssertEqual(type, .json(version: nil))
         
-        let client = IDXClient(configuration: IDXClient.Configuration(issuer: "", clientId: "", clientSecret: "", scopes: [], redirectUri: ""))
-        client.start() { (response, error) in
-            
-        }
+        type = IDXClient.APIVersion1.AcceptType(rawValue: "application/json; okta-version=1.0.0")
+        XCTAssertEqual(type?.stringValue(), "application/json; okta-version=1.0.0")
+
+        XCTAssertEqual(type, .json(version: "1.0.0"))
+        XCTAssertEqual(try type?.encodedData(with: ["foo": "bar"]), "{\"foo\":\"bar\"}".data(using: .utf8))
     }
 }

@@ -11,7 +11,7 @@ public extension IDXClient {
     /// Describes the response from an Okta Identity Engine workflow stage. This is used to determine the current state of the workflow, the set of available remediation steps to proceed through the workflow, actions that can be performed, and other information relevant to the authentication of a user.
     @objc(IDXResponse)
     class Response: NSObject {
-        private weak var client: IDXClientAPIImpl?
+        private let client: IDXClientAPIImpl
         
         /// The current state handle for the IDX workflow.
         public let stateHandle: String
@@ -59,17 +59,12 @@ public extension IDXClient {
                 return
             }
             
-            guard let client = client else {
-                completionHandler(nil, IDXClientError.invalidClient)
-                return
-            }
-            
             client.exchangeCode(using: successResponse, completion: completionHandler)
         }
         
         internal let cancelRemediationOption: Remediation.Option?
         internal let successResponse: Remediation.Option?
-        internal init(client: IDXClientAPIImpl?, stateHandle: String, version: String, expiresAt: Date, intent: String, remediation: Remediation?, cancel: Remediation.Option?, success: Remediation.Option?) {
+        internal init(client: IDXClientAPIImpl, stateHandle: String, version: String, expiresAt: Date, intent: String, remediation: Remediation?, cancel: Remediation.Option?, success: Remediation.Option?) {
             self.client = client
             self.stateHandle = stateHandle
             self.version = version
@@ -95,6 +90,7 @@ public extension IDXClient {
         /// The time interval after which this token will expire.
         public let expiresIn: TimeInterval
         
+        /// The ID token JWT string.
         public let idToken: String?
         
         /// The access scopes for this token.

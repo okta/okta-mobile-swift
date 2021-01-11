@@ -13,7 +13,7 @@ extension IDXClient.APIVersion1.InteractRequest: IDXClientAPIRequest {
     typealias ResponseType = Response
     
     func urlRequest(using configuration:IDXClient.Configuration) -> URLRequest? {
-        guard let url = configuration.issuerUrl(with: "v1/interact") else { return nil }
+        guard let url = configuration.issuerUrl(with: "oauth2/default/v1/interact") else { return nil }
 
         guard let codeVerifier = String.pkceCodeVerifier(),
               let codeChallenge = codeVerifier.pkceCodeChallenge() else

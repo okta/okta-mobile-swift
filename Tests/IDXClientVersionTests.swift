@@ -9,15 +9,6 @@ import XCTest
 @testable import OktaIdx
 
 class IDXClientVersionTests: XCTestCase {
-
-    override func setUpWithError() throws {
-        // Put setup code here. This method is called before the invocation of each test method in the class.
-    }
-
-    override func tearDownWithError() throws {
-        // Put teardown code here. This method is called after the invocation of each test method in the class.
-    }
-
     func testVersionEnum() throws {
         var value: IDXClient.Version? = nil
             

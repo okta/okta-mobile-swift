@@ -8,7 +8,6 @@
 import XCTest
 @testable import OktaIdx
 
-// https://oktawiki.atlassian.net/wiki/spaces/eng/pages/1364860951/Test+Plan+-+Interaction+code+grant+support+for+DevEx+SDKs#TestPlan-InteractioncodegrantsupportforDevExSDKs-TestScenarios:
 class ScenarioTests: XCTestCase {
     let configuration = IDXClient.Configuration(issuer: "https://example.com",
                                                 clientId: "clientId",
