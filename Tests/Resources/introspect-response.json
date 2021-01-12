@@ -1,0 +1,64 @@
+{
+  "stateHandle": "02tYS1NHhCPLcOpT3GByBBRHmGU63p7LGRXJx5cOvp",
+  "version": "1.0.0",
+  "expiresAt": "2020-10-31T01:42:02.000Z",
+  "intent": "LOGIN",
+  "remediation": {
+    "type": "array",
+    "value": [
+      {
+        "rel": [
+          "create-form"
+        ],
+        "name": "identify",
+        "href": "https://foo.oktapreview.com/idp/idx/identify",
+        "method": "POST",
+        "value": [
+          {
+            "name": "identifier",
+            "label": "Username"
+          },
+          {
+            "name": "rememberMe",
+            "type": "boolean",
+            "label": "Remember this device"
+          },
+          {
+            "name": "stateHandle",
+            "required": true,
+            "value": "02tYS1NHhCPLcOpT3GByBBRHmGU63p7LGRXJx5cOvp",
+            "visible": false,
+            "mutable": false
+          }
+        ],
+        "accepts": "application/ion+json; okta-version=1.0.0"
+      }
+    ]
+  },
+  "cancel": {
+    "rel": [
+      "create-form"
+    ],
+    "name": "cancel",
+    "href": "https://foo.oktapreview.com/idp/idx/cancel",
+    "method": "POST",
+    "value": [
+      {
+        "name": "stateHandle",
+        "required": true,
+        "value": "02tYS1NHhCPLcOpT3GByBBRHmGU63p7LGRXJx5cOvp",
+        "visible": false,
+        "mutable": false
+      }
+    ],
+    "accepts": "application/ion+json; okta-version=1.0.0"
+  },
+  "app": {
+    "type": "object",
+    "value": {
+      "name": "okta_enduser",
+      "label": "okta_enduser",
+      "id": "DEFAULT_APP"
+    }
+  }
+}
