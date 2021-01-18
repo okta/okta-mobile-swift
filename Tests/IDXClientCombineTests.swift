@@ -44,7 +44,8 @@ class IDXClientCombineTests: XCTestCase {
                                       intent: "Login",
                                       remediation: nil,
                                       cancel: remedationOption,
-                                      success: remedationOption)
+                                      success: remedationOption,
+                                      messages: nil)
         token = IDXClient.Token(accessToken: "accessToken", refreshToken: nil, expiresIn: 800, idToken: nil, scope: "", tokenType: "bear")
     }
 
@@ -94,7 +95,7 @@ class IDXClientCombineTests: XCTestCase {
             XCTAssertNotNil(value)
             XCTAssertEqual(value, self.response)
         }
-        wait(for: [completion], timeout: 1)
+        wait(for: [completion], timeout: 2)
         XCTAssertTrue(called)
     }
 }

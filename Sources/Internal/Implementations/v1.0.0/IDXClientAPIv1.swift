@@ -77,6 +77,10 @@ extension IDXClient.APIVersion1: IDXClientAPIImpl {
         }
     }
         
+    var canCancel: Bool {
+        return (cancelRemediationOption != nil)
+    }
+    
     func cancel(completion: @escaping (IDXClient.Response?, Error?) -> Void) {
         guard let cancelOption = cancelRemediationOption else {
             completion(nil, IDXClientError.unknownRemediationOption(name: "cancel"))

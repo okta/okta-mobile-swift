@@ -55,7 +55,7 @@ extension IDXClient.APIVersion1 {
         let expiresAt: Date
         let intent: String
         let remediation: FormCollection?
-//        let messages: Messages
+        let messages: MessageCollection?
 //        let authenticatorEnrollments: AuthenticatorEnrollments
 //        let currentAuthenticatorEnrollment: FormCollection?
 //        let user: User
@@ -100,11 +100,13 @@ extension IDXClient.APIVersion1 {
             let secret: Bool?
             let visible: Bool?
             let mutable: Bool?
+            let form: CompositeFormValue?
             let options: [FormValue]?
             let relatesTo: String?
+            let messages: MessageCollection?
             
             private enum CodingKeys: String, CodingKey {
-                case name, required, label, type, value, secret, visible, mutable, options, relatesTo
+                case name, required, label, type, value, secret, visible, mutable, options, form, relatesTo, messages
             }
 
             init(from decoder: Decoder) throws {
@@ -118,14 +120,52 @@ extension IDXClient.APIVersion1 {
                 mutable = try container.decodeIfPresent(Bool.self, forKey: .mutable)
                 relatesTo = try container.decodeIfPresent(String.self, forKey: .relatesTo)
                 options = try container.decodeIfPresent([FormValue].self, forKey: .options)
+                messages = try container.decodeIfPresent(MessageCollection.self, forKey: .messages)
+
+                let formObj = try? container.decodeIfPresent(CompositeFormValue.self, forKey: .form)
+                let valueAsCompositeObj = try? container.decodeIfPresent(CompositeForm.self, forKey: .value)
+                let valueAsJsonObj = try? container.decodeIfPresent(JSONValue.self, forKey: .value)
                 
-                if let obj = try? container.decodeIfPresent(CompositeForm.self, forKey: .value) {
-                    value = .object(obj)
+                if formObj == nil && valueAsCompositeObj != nil {
+                    form = valueAsCompositeObj?.form
                 } else {
-                    value = try? container.decodeIfPresent(JSONValue.self, forKey: .value)
+                    form = formObj
+                }
+                
+                if let valueAsCompositeObj = valueAsCompositeObj {
+                    value = .object(valueAsCompositeObj)
+                } else {
+                    value = valueAsJsonObj
                 }
             }
         }
+        
+        struct MessageCollection: Codable {
+            let type: String
+            let value: [Message]
+        }
+        
+        struct Message: Codable {
+            let type: String
+            let i18n: Localization
+            let message: String
+
+            struct Localization: Codable {
+                let key: String
+            }
+            
+            private enum CodingKeys: String, CodingKey {
+                case type = "class", i18n, message
+            }
+            
+            init(from decoder: Decoder) throws {
+                let container = try decoder.container(keyedBy: CodingKeys.self)
+                type = try container.decode(String.self, forKey: .type)
+                i18n = try container.decode(Localization.self, forKey: .i18n)
+                message = try container.decode(String.self, forKey: .message)
+            }
+        }
+        
     }
     
     /// Internal OIE API v1.0.0 token response.

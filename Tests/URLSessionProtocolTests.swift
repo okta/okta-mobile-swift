@@ -17,7 +17,7 @@ class URLSessionProtocolTests: XCTestCase {
                                               httpVersion: nil,
                                               headerFields: nil)
     let httpFailureResponse = HTTPURLResponse(url: URL(string: "https://example.com/")!,
-                                              statusCode: 400,
+                                              statusCode: 401,
                                               httpVersion: nil,
                                               headerFields: nil)
 

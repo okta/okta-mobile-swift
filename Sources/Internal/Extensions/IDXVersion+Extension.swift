@@ -1,8 +1,8 @@
 //
-//  IdentityEngineVersion+Extension.swift
+//  IDXVersion+Extension.swift
 //  okta-idx-ios
 //
-//  Created by Mike Nachbaur on 2020-12-08.
+//  Created by Mike Nachbaur on 2021-01-11.
 //
 
 import Foundation
@@ -25,13 +25,6 @@ extension IDXClient.Version: RawRepresentable {
                 self = .v1_0_0
             default:
                 return nil
-        }
-    }
-    
-    internal func clientImplementation(with configuration: IDXClient.Configuration) -> IDXClientAPIImpl {
-        switch self {
-        case .v1_0_0:
-            return IDXClient.APIVersion1(with: configuration)
         }
     }
 }

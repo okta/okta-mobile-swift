@@ -16,7 +16,17 @@ extension IDXClient.Response {
                   intent: object.intent,
                   remediation: IDXClient.Remediation(client: client, v1: object.remediation),
                   cancel: IDXClient.Remediation.Option(client: client, v1: object.cancel),
-                  success: IDXClient.Remediation.Option(client: client, v1: object.successWithInteractionCode))
+                  success: IDXClient.Remediation.Option(client: client, v1: object.successWithInteractionCode),
+                  messages: object.messages?.value.compactMap { IDXClient.Message(client: client, v1: $0) })
+    }
+}
+
+extension IDXClient.Message {
+    internal convenience init?(client: IDXClientAPIImpl, v1 object: IDXClient.APIVersion1.Response.Message?) {
+        guard let object = object else { return nil }
+        self.init(type: object.type,
+                  localizationKey: object.i18n.key,
+                  message: object.message)
     }
 }
 
@@ -56,8 +66,9 @@ extension IDXClient.Remediation.FormValue {
                   mutable: object.mutable ?? true,
                   required: object.required ?? false,
                   secret: object.secret ?? false,
-                  form: nil/*object.form?.map { IDXClient.FormValue(client: client, v1: $0) }*/,
-                  options: nil/*object.options?.map { IDXClient.FormValue(client: client, v1: $0) }*/)
+                  form: object.form?.value.map { IDXClient.Remediation.FormValue(client: client, v1: $0) },
+                  options: object.options?.map { IDXClient.Remediation.FormValue(client: client, v1: $0) },
+                  messages: object.messages?.value.compactMap { IDXClient.Message(client: client, v1: $0) })
     }
 }
 
