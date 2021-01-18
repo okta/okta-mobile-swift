@@ -50,7 +50,6 @@ Once you initialize an `IDXClient`, you can call methods to make requests to the
 
 ### Create the Client
 
-[//]: #(method: createClient)
 ```swift
 let config = IDXClient.Configuration(issuer: "<#issuer#>",
                                      clientId: "<#clientId#>",
@@ -59,11 +58,9 @@ let config = IDXClient.Configuration(issuer: "<#issuer#>",
                                      redirectUri: "<#redirectUri#>")
 let client = IDXClient(configuration: config)
 ```
-[//]: # (end: createClient)
 
 ### Start the authentication session
 
-[//]: #(method: start)
 ```swift
 client.start { (response, error) in
     guard let response = response else {
@@ -74,11 +71,9 @@ client.start { (response, error) in
     // Use response
 }
 ```
-[//]: # (end: start)
 
 ### Get new tokens using username & password
 
-[//]: #(method: getNewTokens)
 ```swift
 client.start { (response, error) in
     guard let response = response,
@@ -125,7 +120,6 @@ client.start { (response, error) in
     }
 }
 ```
-[//]: # (end: getNewTokens)
 
 
 ## Supported Platforms
