@@ -54,7 +54,8 @@ class IDXClientTests: XCTestCase {
                                           intent: "Login",
                                           remediation: nil,
                                           cancel: remedationOption,
-                                          success: remedationOption)
+                                          success: remedationOption,
+                                          messages: nil)
 
         var expect: XCTestExpectation!
         var call: IDXClientAPIv1Mock.RecordedCall?

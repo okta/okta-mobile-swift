@@ -10,6 +10,11 @@ import XCTest
 
 class IDXClientV1ResponseTests: XCTestCase {
     typealias API = IDXClient.APIVersion1
+    let clientMock = IDXClientAPIv1Mock(configuration: IDXClient.Configuration(issuer: "https://example.com",
+                                                                               clientId: "Bar",
+                                                                               clientSecret: nil,
+                                                                               scopes: ["scope"],
+                                                                               redirectUri: "redirect:/"))
     
     func data(for json: String) -> Data {
         return json.data(using: .utf8)!
@@ -81,7 +86,7 @@ class IDXClientV1ResponseTests: XCTestCase {
         }
     }
     
-    func testFormValue() throws {
+    func testFormValueWithLabel() throws {
         try decode(type: API.Response.FormValue.self, """
         {
             "name": "identifier",
@@ -98,7 +103,9 @@ class IDXClientV1ResponseTests: XCTestCase {
             XCTAssertNil(obj.visible)
             XCTAssertNil(obj.value)
         }
-        
+    }
+    
+    func testFormValueWithNoLabel() throws {
         try decode(type: API.Response.FormValue.self, """
         {
             "name": "stateHandle",
@@ -118,7 +125,9 @@ class IDXClientV1ResponseTests: XCTestCase {
             XCTAssertFalse(obj.secret!)
             XCTAssertFalse(obj.mutable!)
         }
-
+    }
+    
+    func testFormValueWithCompositeValue() throws {
         try decode(type: API.Response.FormValue.self, """
           {
             "label": "Email",
@@ -149,8 +158,39 @@ class IDXClientV1ResponseTests: XCTestCase {
             let form = obj.value?.toAnyObject() as? API.Response.CompositeForm
             XCTAssertNotNil(form)
             XCTAssertEqual(form?.form.value.count, 2)
+            
+            XCTAssertNotNil(obj.form)
+            XCTAssertEqual(obj.form?.value.count ?? 0, 2)
         }
-
+    }
+    
+    func testFormValueWithNestedForm() throws {
+        try decode(type: API.Response.FormValue.self, """
+        {
+            "name": "credentials",
+            "type": "object",
+            "form": {
+                "value": [{
+                    "name": "passcode",
+                    "label": "Password",
+                    "secret": true
+                }]
+            },
+            "required": true
+        }
+        """) { (obj) in
+            XCTAssertNotNil(obj)
+            XCTAssertEqual(obj.name, "credentials")
+            XCTAssertEqual(obj.type, "object")
+            
+            let form = obj.form?.value
+            XCTAssertNotNil(form)
+            XCTAssertEqual(form?.count, 1)
+            XCTAssertEqual(form?.first?.name, "passcode")
+        }
+    }
+    
+    func testFormValueWithOptions() throws {
         try decode(type: API.Response.FormValue.self, """
           {
             "name": "authenticator",
@@ -168,6 +208,169 @@ class IDXClientV1ResponseTests: XCTestCase {
             XCTAssertNotNil(obj.options)
             XCTAssertEqual(obj.options?.count, 1)
         }
-
+    }
+    
+    func testFormValueWithOptionsContainingCompositeValue() throws {
+        try decode(type: API.Response.FormValue.self, """
+        {
+           "name" : "authenticator",
+           "options" : [
+              {
+                 "label" : "Email",
+                 "relatesTo" : "$.authenticatorEnrollments.value[0]",
+                 "value" : {
+                    "form" : {
+                       "value" : [
+                          {
+                             "mutable" : false,
+                             "name" : "id",
+                             "required" : true,
+                             "value" : "aut3jya5v1oIgaLuV0g7"
+                          },
+                          {
+                             "mutable" : false,
+                             "name" : "methodType",
+                             "required" : false,
+                             "value" : "email"
+                          }
+                       ]
+                    }
+                 }
+              }
+           ],
+           "type" : "object"
+        }
+        """) { (obj) in
+            XCTAssertNotNil(obj)
+            XCTAssertEqual(obj.name, "authenticator")
+            XCTAssertEqual(obj.type, "object")
+            XCTAssertNotNil(obj.options)
+            XCTAssertEqual(obj.options?.count, 1)
+            
+            let option = obj.options?[0]
+            XCTAssertEqual(option?.label, "Email")
+            XCTAssertEqual(option?.form?.value.count, 2)
+            XCTAssertEqual(option?.form?.value[0].name, "id")
+            XCTAssertEqual(option?.form?.value[1].name, "methodType")
+            
+            let publicObj = IDXClient.Remediation.FormValue(client: clientMock, v1: obj)
+            XCTAssertNotNil(publicObj)
+            XCTAssertEqual(publicObj.name, "authenticator")
+            XCTAssertEqual(publicObj.type, "object")
+            XCTAssertNotNil(publicObj.options)
+            XCTAssertEqual(publicObj.options?.count, 1)
+            
+            let publicOption = publicObj.options?[0]
+            XCTAssertNotNil(publicOption)
+            XCTAssertEqual(publicOption?.label, "Email")
+            XCTAssertEqual(publicOption?.form?.count, 2)
+            XCTAssertEqual(publicOption?.form?[0].name, "id")
+            XCTAssertEqual(publicOption?.form?[1].name, "methodType")
+        }
+    }
+    
+    func testFormValueWithMessages() throws {
+        try decode(type: API.Response.FormValue.self, """
+        {
+           "label" : "Answer",
+           "messages" : {
+              "type" : "array",
+              "value" : [
+                 {
+                    "class" : "ERROR",
+                    "i18n" : {
+                       "key" : "authfactor.challenge.question_factor.answer_invalid"
+                    },
+                    "message" : "Your answer doesn't match our records. Please try again."
+                 }
+              ]
+           },
+           "name" : "answer",
+           "required" : true
+        }
+        """) { (obj) in
+            XCTAssertNotNil(obj)
+            XCTAssertEqual(obj.name, "answer")
+            XCTAssertNotNil(obj.messages)
+            XCTAssertEqual(obj.messages?.type, "array")
+            XCTAssertEqual(obj.messages?.value.count, 1)
+            XCTAssertEqual(obj.messages?.value[0].type, "ERROR")
+            XCTAssertEqual(obj.messages?.value[0].i18n.key, "authfactor.challenge.question_factor.answer_invalid")
+            XCTAssertEqual(obj.messages?.value[0].message, "Your answer doesn't match our records. Please try again.")
+            
+            let publicObj = IDXClient.Remediation.FormValue(client: clientMock, v1: obj)
+            XCTAssertNotNil(publicObj)
+            XCTAssertNotNil(publicObj.messages)
+            XCTAssertEqual(publicObj.messages?.count, 1)
+            XCTAssertEqual(publicObj.messages?.first?.type, .error)
+            XCTAssertEqual(publicObj.messages?.first?.localizationKey, "authfactor.challenge.question_factor.answer_invalid")
+            XCTAssertEqual(publicObj.messages?.first?.message, "Your answer doesn't match our records. Please try again.")
+        }
+    }
+    
+    func testResponseWithMessages() throws {
+        try decode(type: API.Response.self, """
+        {
+           "app" : {
+              "type" : "object",
+              "value" : {
+                 "id" : "0ZczewGCFPlxNYYcLq5i",
+                 "label" : "Test App",
+                 "name" : "test_app"
+              }
+           },
+           "cancel" : {
+              "accepts" : "application/json; okta-version=1.0.0",
+              "href" : "https://example.com/idp/idx/cancel",
+              "method" : "POST",
+              "name" : "cancel",
+              "produces" : "application/ion+json; okta-version=1.0.0",
+              "rel" : [
+                 "create-form"
+              ],
+              "value" : [
+                 {
+                    "mutable" : false,
+                    "name" : "stateHandle",
+                    "required" : true,
+                    "value" : "02n3QHV5ebMjjkDiCD53Iq439zXToRrX4QATZw4mEm",
+                    "visible" : false
+                 }
+              ]
+           },
+           "expiresAt" : "2021-01-15T19:25:47.000Z",
+           "intent" : "LOGIN",
+           "messages" : {
+              "type" : "array",
+              "value" : [
+                 {
+                    "class" : "ERROR",
+                    "i18n" : {
+                       "key" : "errors.E0000004"
+                    },
+                    "message" : "Authentication failed"
+                 }
+              ]
+           },
+           "stateHandle" : "02n3QHV5ebMjjkDiCD53Iq439zXToRrX4QATZw4mEm",
+           "version" : "1.0.0"
+        }
+        """) { (obj) in
+            XCTAssertNotNil(obj)
+            XCTAssertNotNil(obj.messages)
+            XCTAssertEqual(obj.messages?.type, "array")
+            XCTAssertEqual(obj.messages?.value.count, 1)
+            XCTAssertEqual(obj.messages?.value[0].type, "ERROR")
+            XCTAssertEqual(obj.messages?.value[0].i18n.key, "errors.E0000004")
+            XCTAssertEqual(obj.messages?.value[0].message, "Authentication failed")
+            
+            let publicObj = IDXClient.Response(client: clientMock, v1: obj)
+            XCTAssertNotNil(publicObj)
+            XCTAssertNotNil(publicObj.messages)
+            XCTAssertEqual(publicObj.messages?.count, 1)
+            XCTAssertEqual(publicObj.messages?.first?.type, .error)
+            XCTAssertEqual(publicObj.messages?.first?.localizationKey, "errors.E0000004")
+            XCTAssertEqual(publicObj.messages?.first?.message, "Authentication failed")
+        }
     }
 }

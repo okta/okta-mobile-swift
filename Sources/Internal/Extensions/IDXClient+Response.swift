@@ -28,10 +28,18 @@ public extension IDXClient {
         /// An object describing the sort of remediation steps available to the user, or `nil` if the workflow is ended.
         public let remediation: Remediation?
         
+        /// The list of messages sent from the server, or `nil` if no messages are available at the response level.
+        ///
+        /// Messages reported from the server are usually errors, but may include other information relevant to the user. They should be displayed to the user in the context of the remediation form itself.
+        public let messages: [Message]?
+
         /// Indicates whether or not the user has logged in successfully. If this is `true`, this response object should be exchanged for access tokens utilizing the `exchangeCode` method.
         public var isLoginSuccessful: Bool {
             return successResponse != nil
         }
+        
+        /// Indicates whether or not the response can be cancelled.
+        public let canCancel: Bool
         
         /// Cancels the current workflow.
         /// - Parameters:
@@ -64,7 +72,7 @@ public extension IDXClient {
         
         internal let cancelRemediationOption: Remediation.Option?
         internal let successResponse: Remediation.Option?
-        internal init(client: IDXClientAPIImpl, stateHandle: String, version: String, expiresAt: Date, intent: String, remediation: Remediation?, cancel: Remediation.Option?, success: Remediation.Option?) {
+        internal init(client: IDXClientAPIImpl, stateHandle: String, version: String, expiresAt: Date, intent: String, remediation: Remediation?, cancel: Remediation.Option?, success: Remediation.Option?, messages: [Message]?) {
             self.client = client
             self.stateHandle = stateHandle
             self.version = version
@@ -73,6 +81,8 @@ public extension IDXClient {
             self.remediation = remediation
             self.cancelRemediationOption = cancel
             self.successResponse = success
+            self.messages = messages
+            self.canCancel = (cancel != nil)
             
             super.init()
         }
@@ -169,10 +179,31 @@ public extension IDXClient {
             /// For form fields that have specific options the user can choose from (e.g. security question, passcode, etc), this indicates the different form options that should be displayed to the user.
             public let options: [FormValue]?
             
+            /// The list of messages sent from the server, or `nil` if no messages are available at the form value level.
+            ///
+            /// Messages reported from the server at the FormValue level should be considered relevant to the individual form field, and as a result should be displayed to the user alongside any UI elements associated with it.
+            public let messages: [Message]?
+            
             public func relatesTo() -> AnyObject? {
                 return nil
             }
             
+            /// For composite or nested forms, this method composes the list of form values, merging the supplied parameters along with the defaults included in the form.
+            ///
+            /// Validation checks for required and immutable values are performed, which will throw exceptions if any of those parameters fail validation.
+            /// - Parameter params: User-supplied parameters, `nil` to simply retrieve the defaults.
+            /// - Throws:
+            ///   - IDXClientError.invalidParameter
+            ///   - IDXClientError.parameterImmutable
+            ///   - IDXClientError.missingRequiredParameter
+            /// - Returns: Collection of key/value pairs, or `nil` if this form value does not contain a nested form.
+            /// - SeeAlso: IDXClient.Remediation.Option.formValues(with:)
+            public func formValues(with params: [String:Any]? = nil) throws -> [String:Any]? {
+                guard let form = form else { return nil }
+                
+                return try IDXClient.extractFormValues(from: form, with: params)
+            }
+
             internal init(name: String?,
                           label: String?,
                           type: String?,
@@ -182,7 +213,8 @@ public extension IDXClient {
                           required: Bool,
                           secret: Bool,
                           form: [FormValue]?,
-                          options: [FormValue]?)
+                          options: [FormValue]?,
+                          messages: [Message]?)
             {
                 self.name = name
                 self.label = label
@@ -194,11 +226,12 @@ public extension IDXClient {
                 self.secret = secret
                 self.form = form
                 self.options = options
+                self.messages = messages
                 
                 super.init()
             }
         }
-
+        
         /// Instances of `IDXClient.Remediation.Option` describe choices the user can make to proceed through the authentication workflow.
         ///
         /// Either simple or complex authentication scenarios consist of a set of steps that may be followed, but at some times the user may have a choice in what they use to verify their identity. For example, a user may have multiple choices in verifying their account, such as:
@@ -259,44 +292,51 @@ public extension IDXClient {
             }
             
             /// Apply the remediation option parameters, reconciling default values and mutability requirements.
-            /// - Parameter params: Optional parameters supplied by the user.
-            /// - Throws::
+            ///
+            /// Validation checks for required and immutable values are performed, which will throw exceptions if any of those parameters fail validation.
+            /// - Parameter params: User-supplied parameters, `nil` to simply retrieve the defaults.
+            /// - Throws:
             ///   - IDXClientError.invalidParameter
             ///   - IDXClientError.parameterImmutable
             ///   - IDXClientError.missingRequiredParameter
-            /// - Returns: Dictionary of key/value pairs to send to the remediation endpoint
-            internal func formValues(with params: [String:Any]? = nil) throws -> [String:Any] {
-                var result: [String:Any] = form
-                    .filter { $0.value != nil && $0.name != nil }
-                    .reduce(into: [:]) { (result, formValue) in
-                    result[formValue.name!] = formValue.value
-                }
-                
-                let allFormValues = form.reduce(into: [String:FormValue]()) { (result, value) in
-                    result[value.name] = value
-                }
-                
-                try params?.forEach { (key, value) in
-                    guard let formValue = allFormValues[key] else {
-                        throw IDXClientError.invalidParameter(name: key)
-                    }
-                    
-                    guard formValue.mutable == true else {
-                        throw IDXClientError.parameterImmutable(name: key)
-                    }
-                    
-                    result[key] = value
-                }
-                
-                try allFormValues.values.filter { $0.required }.forEach {
-                    /// TODO: Fix compound field support and relatesTo
-                    guard result[$0.name!] != nil else {
-                        throw IDXClientError.missingRequiredParameter(name: $0.name!)
-                    }
-                }
-                
-                return result
+            /// - Returns: Collection of key/value pairs, or `nil` if this form value does not contain a nested form.
+            /// - SeeAlso: IDXClient.Remediation.FormValue.formValues(with:)
+            public func formValues(with params: [String:Any]? = nil) throws -> [String:Any] {
+                return try IDXClient.extractFormValues(from: form, with: params)
             }
+        }
+    }
+    
+    /// Represents messages sent from the server to indicate error or warning conditions related to responses or form values.
+    @objc(IDXMessage)
+    final class Message: NSObject {
+        /// Enumeration describing the type of message.
+        public enum MessageClass: String {
+            case error = "ERROR"
+            case info = "INFO"
+            case unknown
+        }
+        
+        /// The type of message received from the server
+        public let type: MessageClass
+        
+        /// A localization key representing this message.
+        ///
+        /// This allows the text represented by this message to be customized or localized as needed.
+        public let localizationKey: String
+        
+        /// The default text for this message.
+        public let message: String
+        
+        internal init(type: String,
+                      localizationKey: String,
+                      message: String)
+        {
+            self.type = MessageClass(rawValue: type) ?? .unknown
+            self.localizationKey = localizationKey
+            self.message = message
+            
+            super.init()
         }
     }
 }

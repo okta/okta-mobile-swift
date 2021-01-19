@@ -40,3 +40,45 @@ internal protocol IDXClientAPIRequest {
               using configuration: IDXClient.Configuration,
               completion: @escaping (ResponseType?, Error?) -> Void)
 }
+
+internal extension IDXClient {
+    class func extractFormValues(from form: [IDXClient.Remediation.FormValue], with params: [String:Any]? = nil) throws -> [String:Any] {
+        var result: [String:Any] = try form
+            .filter { $0.value != nil && $0.name != nil }
+            .reduce(into: [:]) { (result, formValue) in
+                guard let name = formValue.name else { throw IDXClientError.invalidParameter(name: "") }
+                result[name] = formValue.value
+            }
+        
+        let allFormValues = form.reduce(into: [String:IDXClient.Remediation.FormValue]()) { (result, value) in
+            result[value.name] = value
+        }
+        
+        try params?.forEach { (key, value) in
+            guard let formValue = allFormValues[key] else {
+                throw IDXClientError.invalidParameter(name: key)
+            }
+            
+            guard formValue.mutable == true else {
+                throw IDXClientError.parameterImmutable(name: key)
+            }
+            
+
+            if let nestedForm = value as? IDXClient.Remediation.FormValue {
+                result[key] = try nestedForm.formValues()
+            } else {
+                result[key] = value
+            }
+        }
+        
+        try allFormValues.values.filter { $0.required }.forEach {
+            /// TODO: Fix compound field support and relatesTo
+            guard result[$0.name!] != nil else {
+                throw IDXClientError.missingRequiredParameter(name: $0.name!)
+            }
+        }
+        
+        return result
+    }
+
+}

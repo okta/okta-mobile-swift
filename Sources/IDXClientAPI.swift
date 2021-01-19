@@ -33,6 +33,9 @@ public protocol IDXClientAPI {
     ///   - error: Describes the error that occurred, or `nil` if successful.
     func start(completion: @escaping (_ response: IDXClient.Response?, _ error: Error?) -> Void)
     
+    /// Indicates whether or not the current stage in the workflow can be cancelled.
+    var canCancel: Bool { get }
+    
     /// Cancels the current workflow.
     /// - Parameters:
     ///   - completion: Invoked when the operation is cancelled.

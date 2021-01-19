@@ -65,5 +65,20 @@ extension IDXClient.Response {
             }
         }
     }
+
+    /// Requests to cancel a remediation step, returning a Future.
+    public func cancel() -> Future<IDXClient.Response, Error> {
+        return Future<IDXClient.Response, Error> { (promise) in
+            self.cancel() { (response, error) in
+                if let error = error {
+                    promise(.failure(error))
+                } else if let response = response {
+                    promise(.success(response))
+                } else {
+                    promise(.failure(IDXClientError.invalidResponseData))
+                }
+            }
+        }
+    }
 }
 #endif

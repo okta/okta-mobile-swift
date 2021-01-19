@@ -32,6 +32,10 @@ extension IDXClient {
         }
     }
     
+    public var canCancel: Bool {
+        return self.api.canCancel
+    }
+    
     public func cancel(completion: @escaping (Response?, Error?) -> Void)
     {
         self.api.cancel { (response, error) in

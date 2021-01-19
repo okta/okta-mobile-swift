@@ -37,7 +37,7 @@ extension URLSession: URLSessionProtocol {
             return
         }
         
-        guard httpResponse.statusCode == 200 else {
+        guard httpResponse.statusCode <= 400 else {
             completionHandler(data, httpResponse, IDXClientError.invalidHTTPResponse)
             return
         }
