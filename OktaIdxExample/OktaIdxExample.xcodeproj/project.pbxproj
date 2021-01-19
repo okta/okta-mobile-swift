@@ -1,0 +1,734 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 50;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		964F745325A3E5F0003EE300 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 964F745225A3E5F0003EE300 /* AppDelegate.swift */; };
+		964F745525A3E5F0003EE300 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 964F745425A3E5F0003EE300 /* SceneDelegate.swift */; };
+		964F745725A3E5F0003EE300 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 964F745625A3E5F0003EE300 /* ViewController.swift */; };
+		964F745A25A3E5F0003EE300 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 964F745825A3E5F0003EE300 /* Main.storyboard */; };
+		964F745C25A3E5F2003EE300 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 964F745B25A3E5F2003EE300 /* Assets.xcassets */; };
+		964F745F25A3E5F2003EE300 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 964F745D25A3E5F2003EE300 /* LaunchScreen.storyboard */; };
+		964F746A25A3E5F3003EE300 /* OktaIdxExampleTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 964F746925A3E5F3003EE300 /* OktaIdxExampleTests.swift */; };
+		964F747525A3E5F3003EE300 /* OktaIdxExampleUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 964F747425A3E5F3003EE300 /* OktaIdxExampleUITests.swift */; };
+		964F748725A3E602003EE300 /* OktaIdx.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 964F748625A3E602003EE300 /* OktaIdx.framework */; };
+		964F748825A3E602003EE300 /* OktaIdx.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 964F748625A3E602003EE300 /* OktaIdx.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		9652D9CA25A9142600927FA5 /* UIView+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9652D9C925A9142600927FA5 /* UIView+Extensions.swift */; };
+		96576C5025A91EEA00B02E3B /* IDXStartViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96576C4F25A91EEA00B02E3B /* IDXStartViewController.swift */; };
+		96576C6225ACC53200B02E3B /* IDXGetTokenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96576C6125ACC53200B02E3B /* IDXGetTokenViewController.swift */; };
+		96576C6F25ACDD8A00B02E3B /* IDXSigninController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96576C6E25ACDD8A00B02E3B /* IDXSigninController.swift */; };
+		96576C7F25ACF64B00B02E3B /* IDXSignin.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 96576C7E25ACF64B00B02E3B /* IDXSignin.storyboard */; };
+		96576C8325ACFBEC00B02E3B /* Signin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96576C8225ACFBEC00B02E3B /* Signin.swift */; };
+		96576C8725ACFC5900B02E3B /* TokenResultViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96576C8625ACFC5900B02E3B /* TokenResultViewController.swift */; };
+		9691E6BF25AF727A000CD02C /* IDXRemediationTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9691E6BE25AF7279000CD02C /* IDXRemediationTableViewController.swift */; };
+		9691E6C425AF73C4000CD02C /* IDXTextTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9691E6C325AF73C4000CD02C /* IDXTextTableViewCell.swift */; };
+		9691E6C825AF73D9000CD02C /* IDXToggleTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9691E6C725AF73D9000CD02C /* IDXToggleTableViewCell.swift */; };
+		9691E6CE25AF73F0000CD02C /* IDXButtonTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9691E6CD25AF73F0000CD02C /* IDXButtonTableViewCell.swift */; };
+		9691E6D225AF740A000CD02C /* IDXOptionTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9691E6D125AF740A000CD02C /* IDXOptionTableViewCell.swift */; };
+		96ADA06125B0D173008BF50D /* FormRows.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96ADA06025B0D173008BF50D /* FormRows.swift */; };
+		96ADA06725B0F5D5008BF50D /* IDXLabelTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96ADA06625B0F5D5008BF50D /* IDXLabelTableViewCell.swift */; };
+		96ADA06D25B111AA008BF50D /* IDXMessageTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96ADA06C25B111AA008BF50D /* IDXMessageTableViewCell.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		964F746625A3E5F3003EE300 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 964F744725A3E5F0003EE300 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 964F744E25A3E5F0003EE300;
+			remoteInfo = OktaIdxExample;
+		};
+		964F747125A3E5F3003EE300 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 964F744725A3E5F0003EE300 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 964F744E25A3E5F0003EE300;
+			remoteInfo = OktaIdxExample;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		964F748925A3E602003EE300 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				964F748825A3E602003EE300 /* OktaIdx.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
+/* Begin PBXFileReference section */
+		964F744F25A3E5F0003EE300 /* OktaIdxExample.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = OktaIdxExample.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		964F745225A3E5F0003EE300 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		964F745425A3E5F0003EE300 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
+		964F745625A3E5F0003EE300 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		964F745925A3E5F0003EE300 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		964F745B25A3E5F2003EE300 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		964F745E25A3E5F2003EE300 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		964F746025A3E5F2003EE300 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		964F746525A3E5F3003EE300 /* OktaIdxExampleTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = OktaIdxExampleTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		964F746925A3E5F3003EE300 /* OktaIdxExampleTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OktaIdxExampleTests.swift; sourceTree = "<group>"; };
+		964F746B25A3E5F3003EE300 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		964F747025A3E5F3003EE300 /* OktaIdxExampleUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = OktaIdxExampleUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		964F747425A3E5F3003EE300 /* OktaIdxExampleUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OktaIdxExampleUITests.swift; sourceTree = "<group>"; };
+		964F747625A3E5F3003EE300 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		964F748625A3E602003EE300 /* OktaIdx.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = OktaIdx.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		9652D9C925A9142600927FA5 /* UIView+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Extensions.swift"; sourceTree = "<group>"; };
+		96576C4F25A91EEA00B02E3B /* IDXStartViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IDXStartViewController.swift; sourceTree = "<group>"; };
+		96576C6125ACC53200B02E3B /* IDXGetTokenViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IDXGetTokenViewController.swift; sourceTree = "<group>"; };
+		96576C6E25ACDD8A00B02E3B /* IDXSigninController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IDXSigninController.swift; sourceTree = "<group>"; };
+		96576C7E25ACF64B00B02E3B /* IDXSignin.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = IDXSignin.storyboard; sourceTree = "<group>"; };
+		96576C8225ACFBEC00B02E3B /* Signin.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Signin.swift; sourceTree = "<group>"; };
+		96576C8625ACFC5900B02E3B /* TokenResultViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TokenResultViewController.swift; sourceTree = "<group>"; };
+		9691E6BE25AF7279000CD02C /* IDXRemediationTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IDXRemediationTableViewController.swift; sourceTree = "<group>"; };
+		9691E6C325AF73C4000CD02C /* IDXTextTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IDXTextTableViewCell.swift; sourceTree = "<group>"; };
+		9691E6C725AF73D9000CD02C /* IDXToggleTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IDXToggleTableViewCell.swift; sourceTree = "<group>"; };
+		9691E6CD25AF73F0000CD02C /* IDXButtonTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IDXButtonTableViewCell.swift; sourceTree = "<group>"; };
+		9691E6D125AF740A000CD02C /* IDXOptionTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IDXOptionTableViewCell.swift; sourceTree = "<group>"; };
+		96ADA06025B0D173008BF50D /* FormRows.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormRows.swift; sourceTree = "<group>"; };
+		96ADA06625B0F5D5008BF50D /* IDXLabelTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IDXLabelTableViewCell.swift; sourceTree = "<group>"; };
+		96ADA06C25B111AA008BF50D /* IDXMessageTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IDXMessageTableViewCell.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		964F744C25A3E5F0003EE300 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				964F748725A3E602003EE300 /* OktaIdx.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		964F746225A3E5F3003EE300 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		964F746D25A3E5F3003EE300 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		964F744625A3E5F0003EE300 = {
+			isa = PBXGroup;
+			children = (
+				964F745125A3E5F0003EE300 /* OktaIdxExample */,
+				964F746825A3E5F3003EE300 /* OktaIdxExampleTests */,
+				964F747325A3E5F3003EE300 /* OktaIdxExampleUITests */,
+				964F745025A3E5F0003EE300 /* Products */,
+				964F748525A3E602003EE300 /* Frameworks */,
+			);
+			sourceTree = "<group>";
+		};
+		964F745025A3E5F0003EE300 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				964F744F25A3E5F0003EE300 /* OktaIdxExample.app */,
+				964F746525A3E5F3003EE300 /* OktaIdxExampleTests.xctest */,
+				964F747025A3E5F3003EE300 /* OktaIdxExampleUITests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		964F745125A3E5F0003EE300 /* OktaIdxExample */ = {
+			isa = PBXGroup;
+			children = (
+				96576C6B25ACDD4F00B02E3B /* Signin */,
+				9652D9C625A90F8F00927FA5 /* Views */,
+				964F745225A3E5F0003EE300 /* AppDelegate.swift */,
+				964F745425A3E5F0003EE300 /* SceneDelegate.swift */,
+				964F745625A3E5F0003EE300 /* ViewController.swift */,
+				964F745825A3E5F0003EE300 /* Main.storyboard */,
+				964F745B25A3E5F2003EE300 /* Assets.xcassets */,
+				964F745D25A3E5F2003EE300 /* LaunchScreen.storyboard */,
+				964F746025A3E5F2003EE300 /* Info.plist */,
+				96576C8625ACFC5900B02E3B /* TokenResultViewController.swift */,
+			);
+			path = OktaIdxExample;
+			sourceTree = "<group>";
+		};
+		964F746825A3E5F3003EE300 /* OktaIdxExampleTests */ = {
+			isa = PBXGroup;
+			children = (
+				964F746925A3E5F3003EE300 /* OktaIdxExampleTests.swift */,
+				964F746B25A3E5F3003EE300 /* Info.plist */,
+			);
+			path = OktaIdxExampleTests;
+			sourceTree = "<group>";
+		};
+		964F747325A3E5F3003EE300 /* OktaIdxExampleUITests */ = {
+			isa = PBXGroup;
+			children = (
+				964F747425A3E5F3003EE300 /* OktaIdxExampleUITests.swift */,
+				964F747625A3E5F3003EE300 /* Info.plist */,
+			);
+			path = OktaIdxExampleUITests;
+			sourceTree = "<group>";
+		};
+		964F748525A3E602003EE300 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				964F748625A3E602003EE300 /* OktaIdx.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		9652D9C625A90F8F00927FA5 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				9652D9C925A9142600927FA5 /* UIView+Extensions.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		96576C6B25ACDD4F00B02E3B /* Signin */ = {
+			isa = PBXGroup;
+			children = (
+				96ADA05F25B0D15D008BF50D /* View Model */,
+				9691E6C225AF7328000CD02C /* TableView Cells */,
+				96576C6D25ACDD6C00B02E3B /* View Controllers */,
+				96576C6C25ACDD5A00B02E3B /* Protocols */,
+				96576C8225ACFBEC00B02E3B /* Signin.swift */,
+			);
+			path = Signin;
+			sourceTree = "<group>";
+		};
+		96576C6C25ACDD5A00B02E3B /* Protocols */ = {
+			isa = PBXGroup;
+			children = (
+				96576C6E25ACDD8A00B02E3B /* IDXSigninController.swift */,
+			);
+			path = Protocols;
+			sourceTree = "<group>";
+		};
+		96576C6D25ACDD6C00B02E3B /* View Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				96576C7E25ACF64B00B02E3B /* IDXSignin.storyboard */,
+				96576C4F25A91EEA00B02E3B /* IDXStartViewController.swift */,
+				96576C6125ACC53200B02E3B /* IDXGetTokenViewController.swift */,
+				9691E6BE25AF7279000CD02C /* IDXRemediationTableViewController.swift */,
+			);
+			path = "View Controllers";
+			sourceTree = "<group>";
+		};
+		9691E6C225AF7328000CD02C /* TableView Cells */ = {
+			isa = PBXGroup;
+			children = (
+				96ADA06625B0F5D5008BF50D /* IDXLabelTableViewCell.swift */,
+				9691E6C325AF73C4000CD02C /* IDXTextTableViewCell.swift */,
+				9691E6C725AF73D9000CD02C /* IDXToggleTableViewCell.swift */,
+				9691E6CD25AF73F0000CD02C /* IDXButtonTableViewCell.swift */,
+				9691E6D125AF740A000CD02C /* IDXOptionTableViewCell.swift */,
+				96ADA06C25B111AA008BF50D /* IDXMessageTableViewCell.swift */,
+			);
+			path = "TableView Cells";
+			sourceTree = "<group>";
+		};
+		96ADA05F25B0D15D008BF50D /* View Model */ = {
+			isa = PBXGroup;
+			children = (
+				96ADA06025B0D173008BF50D /* FormRows.swift */,
+			);
+			path = "View Model";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		964F744E25A3E5F0003EE300 /* OktaIdxExample */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 964F747925A3E5F3003EE300 /* Build configuration list for PBXNativeTarget "OktaIdxExample" */;
+			buildPhases = (
+				964F744B25A3E5F0003EE300 /* Sources */,
+				964F744C25A3E5F0003EE300 /* Frameworks */,
+				964F744D25A3E5F0003EE300 /* Resources */,
+				964F748925A3E602003EE300 /* Embed Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = OktaIdxExample;
+			packageProductDependencies = (
+			);
+			productName = OktaIdxExample;
+			productReference = 964F744F25A3E5F0003EE300 /* OktaIdxExample.app */;
+			productType = "com.apple.product-type.application";
+		};
+		964F746425A3E5F3003EE300 /* OktaIdxExampleTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 964F747C25A3E5F3003EE300 /* Build configuration list for PBXNativeTarget "OktaIdxExampleTests" */;
+			buildPhases = (
+				964F746125A3E5F3003EE300 /* Sources */,
+				964F746225A3E5F3003EE300 /* Frameworks */,
+				964F746325A3E5F3003EE300 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				964F746725A3E5F3003EE300 /* PBXTargetDependency */,
+			);
+			name = OktaIdxExampleTests;
+			productName = OktaIdxExampleTests;
+			productReference = 964F746525A3E5F3003EE300 /* OktaIdxExampleTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		964F746F25A3E5F3003EE300 /* OktaIdxExampleUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 964F747F25A3E5F3003EE300 /* Build configuration list for PBXNativeTarget "OktaIdxExampleUITests" */;
+			buildPhases = (
+				964F746C25A3E5F3003EE300 /* Sources */,
+				964F746D25A3E5F3003EE300 /* Frameworks */,
+				964F746E25A3E5F3003EE300 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				964F747225A3E5F3003EE300 /* PBXTargetDependency */,
+			);
+			name = OktaIdxExampleUITests;
+			productName = OktaIdxExampleUITests;
+			productReference = 964F747025A3E5F3003EE300 /* OktaIdxExampleUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		964F744725A3E5F0003EE300 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 1220;
+				LastUpgradeCheck = 1220;
+				TargetAttributes = {
+					964F744E25A3E5F0003EE300 = {
+						CreatedOnToolsVersion = 12.2;
+					};
+					964F746425A3E5F3003EE300 = {
+						CreatedOnToolsVersion = 12.2;
+						TestTargetID = 964F744E25A3E5F0003EE300;
+					};
+					964F746F25A3E5F3003EE300 = {
+						CreatedOnToolsVersion = 12.2;
+						TestTargetID = 964F744E25A3E5F0003EE300;
+					};
+				};
+			};
+			buildConfigurationList = 964F744A25A3E5F0003EE300 /* Build configuration list for PBXProject "OktaIdxExample" */;
+			compatibilityVersion = "Xcode 9.3";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 964F744625A3E5F0003EE300;
+			packageReferences = (
+			);
+			productRefGroup = 964F745025A3E5F0003EE300 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				964F744E25A3E5F0003EE300 /* OktaIdxExample */,
+				964F746425A3E5F3003EE300 /* OktaIdxExampleTests */,
+				964F746F25A3E5F3003EE300 /* OktaIdxExampleUITests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		964F744D25A3E5F0003EE300 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				96576C7F25ACF64B00B02E3B /* IDXSignin.storyboard in Resources */,
+				964F745F25A3E5F2003EE300 /* LaunchScreen.storyboard in Resources */,
+				964F745C25A3E5F2003EE300 /* Assets.xcassets in Resources */,
+				964F745A25A3E5F0003EE300 /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		964F746325A3E5F3003EE300 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		964F746E25A3E5F3003EE300 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		964F744B25A3E5F0003EE300 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				9652D9CA25A9142600927FA5 /* UIView+Extensions.swift in Sources */,
+				964F745725A3E5F0003EE300 /* ViewController.swift in Sources */,
+				9691E6C825AF73D9000CD02C /* IDXToggleTableViewCell.swift in Sources */,
+				9691E6CE25AF73F0000CD02C /* IDXButtonTableViewCell.swift in Sources */,
+				96576C5025A91EEA00B02E3B /* IDXStartViewController.swift in Sources */,
+				964F745325A3E5F0003EE300 /* AppDelegate.swift in Sources */,
+				96ADA06725B0F5D5008BF50D /* IDXLabelTableViewCell.swift in Sources */,
+				96ADA06125B0D173008BF50D /* FormRows.swift in Sources */,
+				9691E6D225AF740A000CD02C /* IDXOptionTableViewCell.swift in Sources */,
+				964F745525A3E5F0003EE300 /* SceneDelegate.swift in Sources */,
+				9691E6BF25AF727A000CD02C /* IDXRemediationTableViewController.swift in Sources */,
+				96576C6225ACC53200B02E3B /* IDXGetTokenViewController.swift in Sources */,
+				9691E6C425AF73C4000CD02C /* IDXTextTableViewCell.swift in Sources */,
+				96576C8725ACFC5900B02E3B /* TokenResultViewController.swift in Sources */,
+				96576C6F25ACDD8A00B02E3B /* IDXSigninController.swift in Sources */,
+				96ADA06D25B111AA008BF50D /* IDXMessageTableViewCell.swift in Sources */,
+				96576C8325ACFBEC00B02E3B /* Signin.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		964F746125A3E5F3003EE300 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				964F746A25A3E5F3003EE300 /* OktaIdxExampleTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		964F746C25A3E5F3003EE300 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				964F747525A3E5F3003EE300 /* OktaIdxExampleUITests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		964F746725A3E5F3003EE300 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 964F744E25A3E5F0003EE300 /* OktaIdxExample */;
+			targetProxy = 964F746625A3E5F3003EE300 /* PBXContainerItemProxy */;
+		};
+		964F747225A3E5F3003EE300 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 964F744E25A3E5F0003EE300 /* OktaIdxExample */;
+			targetProxy = 964F747125A3E5F3003EE300 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		964F745825A3E5F0003EE300 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				964F745925A3E5F0003EE300 /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		964F745D25A3E5F2003EE300 /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				964F745E25A3E5F2003EE300 /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		964F747725A3E5F3003EE300 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.2;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		964F747825A3E5F3003EE300 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.2;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		964F747A25A3E5F3003EE300 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = UW6GDZ98ND;
+				INFOPLIST_FILE = OktaIdxExample/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.okta.OktaIdxExample;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		964F747B25A3E5F3003EE300 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = UW6GDZ98ND;
+				INFOPLIST_FILE = OktaIdxExample/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.okta.OktaIdxExample;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		964F747D25A3E5F3003EE300 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				INFOPLIST_FILE = OktaIdxExampleTests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.2;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.okta.OktaIdxExampleTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/OktaIdxExample.app/OktaIdxExample";
+			};
+			name = Debug;
+		};
+		964F747E25A3E5F3003EE300 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				INFOPLIST_FILE = OktaIdxExampleTests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.2;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.okta.OktaIdxExampleTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/OktaIdxExample.app/OktaIdxExample";
+			};
+			name = Release;
+		};
+		964F748025A3E5F3003EE300 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				INFOPLIST_FILE = OktaIdxExampleUITests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.okta.OktaIdxExampleUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = OktaIdxExample;
+			};
+			name = Debug;
+		};
+		964F748125A3E5F3003EE300 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				INFOPLIST_FILE = OktaIdxExampleUITests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.okta.OktaIdxExampleUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = OktaIdxExample;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		964F744A25A3E5F0003EE300 /* Build configuration list for PBXProject "OktaIdxExample" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				964F747725A3E5F3003EE300 /* Debug */,
+				964F747825A3E5F3003EE300 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		964F747925A3E5F3003EE300 /* Build configuration list for PBXNativeTarget "OktaIdxExample" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				964F747A25A3E5F3003EE300 /* Debug */,
+				964F747B25A3E5F3003EE300 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		964F747C25A3E5F3003EE300 /* Build configuration list for PBXNativeTarget "OktaIdxExampleTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				964F747D25A3E5F3003EE300 /* Debug */,
+				964F747E25A3E5F3003EE300 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		964F747F25A3E5F3003EE300 /* Build configuration list for PBXNativeTarget "OktaIdxExampleUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				964F748025A3E5F3003EE300 /* Debug */,
+				964F748125A3E5F3003EE300 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 964F744725A3E5F0003EE300 /* Project object */;
+}
