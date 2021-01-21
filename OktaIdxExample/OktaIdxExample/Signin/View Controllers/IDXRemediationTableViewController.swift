@@ -33,7 +33,16 @@ class IDXRemediationTableViewController: UITableViewController, IDXRemediationCo
             formSections = response.remediationForm(form: remediationOption.form, delegate: self)
         }
     }
-
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        navigationController?.setNavigationBarHidden(true, animated: animated)
+        if let inputView = view.allInputFields().first {
+            inputView.becomeFirstResponder()
+        }
+    }
+    
     @IBAction func continueAction(_ sender: Any) {
         guard let signin = signin else {
             showError(SigninError.genericError(message: "Signin session deallocated"))
@@ -160,8 +169,10 @@ extension Signin.Row {
                let fieldName = field.name
             {
                 cell.fieldLabel.text = field.label
+                cell.fieldLabel.accessibilityIdentifier = "\(fieldName).label"
                 cell.textField.isSecureTextEntry = field.secret
                 cell.textField.text = (delegate?.value(for: fieldName) ?? field.value as Any) as? String
+                cell.textField.accessibilityIdentifier = "\(fieldName).field"
                 cell.update = { value in
                     self.delegate?.row(row: self, changedValue: (fieldName, value))
                 }
@@ -172,6 +183,7 @@ extension Signin.Row {
                let fieldName = field.name
              {
                 cell.fieldLabel.text = field.label
+                cell.fieldLabel.accessibilityIdentifier = "\(fieldName).label"
                 cell.switchView.isOn = (delegate?.value(for: fieldName) ?? field.value as Any) as? Bool ?? false
             }
             
@@ -181,6 +193,7 @@ extension Signin.Row {
                 let currentValue = self.delegate?.value(for: fieldName) as? IDXClient.Remediation.FormValue
                 
                 cell.fieldLabel.text = option.label
+                cell.fieldLabel.accessibilityIdentifier = "\(fieldName).label"
                 cell.state = (currentValue == option) ? .checked : .unchecked
                 cell.update = {
                     self.delegate?.row(row: self, changedValue: (fieldName, option))

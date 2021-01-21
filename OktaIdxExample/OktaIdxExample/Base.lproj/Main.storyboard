@@ -58,6 +58,9 @@
                                                 <rect key="frame" x="0.0" y="20.5" width="366" height="34"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                 <textInputTraits key="textInputTraits" keyboardType="URL" returnKeyType="next" textContentType="url"/>
+                                                <connections>
+                                                    <outlet property="delegate" destination="BYZ-38-t0r" id="cGV-G4-jEV"/>
+                                                </connections>
                                             </textField>
                                         </subviews>
                                     </stackView>
@@ -74,6 +77,9 @@
                                                 <rect key="frame" x="0.0" y="20.5" width="366" height="34"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                 <textInputTraits key="textInputTraits" returnKeyType="next"/>
+                                                <connections>
+                                                    <outlet property="delegate" destination="BYZ-38-t0r" id="3pM-nj-gND"/>
+                                                </connections>
                                             </textField>
                                         </subviews>
                                     </stackView>
@@ -90,6 +96,9 @@
                                                 <rect key="frame" x="0.0" y="20.5" width="366" height="34"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                 <textInputTraits key="textInputTraits" keyboardType="URL" returnKeyType="done" textContentType="url"/>
+                                                <connections>
+                                                    <outlet property="delegate" destination="BYZ-38-t0r" id="vQK-xP-MKp"/>
+                                                </connections>
                                             </textField>
                                         </subviews>
                                     </stackView>

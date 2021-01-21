@@ -14,7 +14,7 @@
 		964F745C25A3E5F2003EE300 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 964F745B25A3E5F2003EE300 /* Assets.xcassets */; };
 		964F745F25A3E5F2003EE300 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 964F745D25A3E5F2003EE300 /* LaunchScreen.storyboard */; };
 		964F746A25A3E5F3003EE300 /* OktaIdxExampleTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 964F746925A3E5F3003EE300 /* OktaIdxExampleTests.swift */; };
-		964F747525A3E5F3003EE300 /* OktaIdxExampleUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 964F747425A3E5F3003EE300 /* OktaIdxExampleUITests.swift */; };
+		964F747525A3E5F3003EE300 /* PasscodeScenarioTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 964F747425A3E5F3003EE300 /* PasscodeScenarioTests.swift */; };
 		964F748725A3E602003EE300 /* OktaIdx.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 964F748625A3E602003EE300 /* OktaIdx.framework */; };
 		964F748825A3E602003EE300 /* OktaIdx.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 964F748625A3E602003EE300 /* OktaIdx.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		9652D9CA25A9142600927FA5 /* UIView+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9652D9C925A9142600927FA5 /* UIView+Extensions.swift */; };
@@ -24,6 +24,8 @@
 		96576C7F25ACF64B00B02E3B /* IDXSignin.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 96576C7E25ACF64B00B02E3B /* IDXSignin.storyboard */; };
 		96576C8325ACFBEC00B02E3B /* Signin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96576C8225ACFBEC00B02E3B /* Signin.swift */; };
 		96576C8725ACFC5900B02E3B /* TokenResultViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96576C8625ACFC5900B02E3B /* TokenResultViewController.swift */; };
+		96749AF825B8AC3B002849A0 /* ClientConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96749AF725B8AC3B002849A0 /* ClientConfiguration.swift */; };
+		96749B0625B8EAAD002849A0 /* XCTest+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96749B0525B8EAAD002849A0 /* XCTest+Extensions.swift */; };
 		9691E6BF25AF727A000CD02C /* IDXRemediationTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9691E6BE25AF7279000CD02C /* IDXRemediationTableViewController.swift */; };
 		9691E6C425AF73C4000CD02C /* IDXTextTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9691E6C325AF73C4000CD02C /* IDXTextTableViewCell.swift */; };
 		9691E6C825AF73D9000CD02C /* IDXToggleTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9691E6C725AF73D9000CD02C /* IDXToggleTableViewCell.swift */; };
@@ -78,7 +80,7 @@
 		964F746925A3E5F3003EE300 /* OktaIdxExampleTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OktaIdxExampleTests.swift; sourceTree = "<group>"; };
 		964F746B25A3E5F3003EE300 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		964F747025A3E5F3003EE300 /* OktaIdxExampleUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = OktaIdxExampleUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		964F747425A3E5F3003EE300 /* OktaIdxExampleUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OktaIdxExampleUITests.swift; sourceTree = "<group>"; };
+		964F747425A3E5F3003EE300 /* PasscodeScenarioTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasscodeScenarioTests.swift; sourceTree = "<group>"; };
 		964F747625A3E5F3003EE300 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		964F748625A3E602003EE300 /* OktaIdx.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = OktaIdx.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		9652D9C925A9142600927FA5 /* UIView+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Extensions.swift"; sourceTree = "<group>"; };
@@ -88,6 +90,9 @@
 		96576C7E25ACF64B00B02E3B /* IDXSignin.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = IDXSignin.storyboard; sourceTree = "<group>"; };
 		96576C8225ACFBEC00B02E3B /* Signin.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Signin.swift; sourceTree = "<group>"; };
 		96576C8625ACFC5900B02E3B /* TokenResultViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TokenResultViewController.swift; sourceTree = "<group>"; };
+		96749AF725B8AC3B002849A0 /* ClientConfiguration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClientConfiguration.swift; sourceTree = "<group>"; };
+		96749B0525B8EAAD002849A0 /* XCTest+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "XCTest+Extensions.swift"; sourceTree = "<group>"; };
+		96749B5325B8F2B6002849A0 /* TestEnvironment.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; name = TestEnvironment.xcconfig; path = ../../TestEnvironment.xcconfig; sourceTree = "<group>"; };
 		9691E6BE25AF7279000CD02C /* IDXRemediationTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IDXRemediationTableViewController.swift; sourceTree = "<group>"; };
 		9691E6C325AF73C4000CD02C /* IDXTextTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IDXTextTableViewCell.swift; sourceTree = "<group>"; };
 		9691E6C725AF73D9000CD02C /* IDXToggleTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IDXToggleTableViewCell.swift; sourceTree = "<group>"; };
@@ -153,11 +158,12 @@
 				964F745225A3E5F0003EE300 /* AppDelegate.swift */,
 				964F745425A3E5F0003EE300 /* SceneDelegate.swift */,
 				964F745625A3E5F0003EE300 /* ViewController.swift */,
+				96576C8625ACFC5900B02E3B /* TokenResultViewController.swift */,
+				96749AF725B8AC3B002849A0 /* ClientConfiguration.swift */,
 				964F745825A3E5F0003EE300 /* Main.storyboard */,
 				964F745B25A3E5F2003EE300 /* Assets.xcassets */,
 				964F745D25A3E5F2003EE300 /* LaunchScreen.storyboard */,
 				964F746025A3E5F2003EE300 /* Info.plist */,
-				96576C8625ACFC5900B02E3B /* TokenResultViewController.swift */,
 			);
 			path = OktaIdxExample;
 			sourceTree = "<group>";
@@ -174,7 +180,9 @@
 		964F747325A3E5F3003EE300 /* OktaIdxExampleUITests */ = {
 			isa = PBXGroup;
 			children = (
-				964F747425A3E5F3003EE300 /* OktaIdxExampleUITests.swift */,
+				96749B5325B8F2B6002849A0 /* TestEnvironment.xcconfig */,
+				96749B0425B8EA9D002849A0 /* Extensions */,
+				964F747425A3E5F3003EE300 /* PasscodeScenarioTests.swift */,
 				964F747625A3E5F3003EE300 /* Info.plist */,
 			);
 			path = OktaIdxExampleUITests;
@@ -225,6 +233,14 @@
 				9691E6BE25AF7279000CD02C /* IDXRemediationTableViewController.swift */,
 			);
 			path = "View Controllers";
+			sourceTree = "<group>";
+		};
+		96749B0425B8EA9D002849A0 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				96749B0525B8EAAD002849A0 /* XCTest+Extensions.swift */,
+			);
+			path = Extensions;
 			sourceTree = "<group>";
 		};
 		9691E6C225AF7328000CD02C /* TableView Cells */ = {
@@ -399,6 +415,7 @@
 				9691E6C425AF73C4000CD02C /* IDXTextTableViewCell.swift in Sources */,
 				96576C8725ACFC5900B02E3B /* TokenResultViewController.swift in Sources */,
 				96576C6F25ACDD8A00B02E3B /* IDXSigninController.swift in Sources */,
+				96749AF825B8AC3B002849A0 /* ClientConfiguration.swift in Sources */,
 				96ADA06D25B111AA008BF50D /* IDXMessageTableViewCell.swift in Sources */,
 				96576C8325ACFBEC00B02E3B /* Signin.swift in Sources */,
 			);
@@ -416,7 +433,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				964F747525A3E5F3003EE300 /* OktaIdxExampleUITests.swift in Sources */,
+				96749B0625B8EAAD002849A0 /* XCTest+Extensions.swift in Sources */,
+				964F747525A3E5F3003EE300 /* PasscodeScenarioTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -573,6 +591,7 @@
 		};
 		964F747A25A3E5F3003EE300 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 96749B5325B8F2B6002849A0 /* TestEnvironment.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -592,6 +611,7 @@
 		};
 		964F747B25A3E5F3003EE300 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 96749B5325B8F2B6002849A0 /* TestEnvironment.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -653,6 +673,7 @@
 		};
 		964F748025A3E5F3003EE300 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 96749B5325B8F2B6002849A0 /* TestEnvironment.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
@@ -672,6 +693,7 @@
 		};
 		964F748125A3E5F3003EE300 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 96749B5325B8F2B6002849A0 /* TestEnvironment.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;

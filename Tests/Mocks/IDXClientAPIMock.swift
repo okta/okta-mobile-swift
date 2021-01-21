@@ -9,7 +9,10 @@ import Foundation
 @testable import OktaIdx
 
 class IDXClientAPIv1Mock: IDXClientAPIImpl {
-    var canCancel: Bool = true
+    var canCancel: Bool {
+        recordedCalls.append(RecordedCall(function: #function, arguments: nil))
+        return false
+    }
     
     let configuration: IDXClient.Configuration
     

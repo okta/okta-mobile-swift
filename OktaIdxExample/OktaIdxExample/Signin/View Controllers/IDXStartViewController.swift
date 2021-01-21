@@ -22,6 +22,8 @@ class IDXStartViewController: UIViewController, IDXSigninController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
+        navigationController?.setNavigationBarHidden(true, animated: animated)
+        
         guard let signin = signin else {
             showError(SigninError.genericError(message: "Signin session deallocated"))
             return

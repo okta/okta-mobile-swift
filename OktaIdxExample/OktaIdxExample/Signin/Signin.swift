@@ -63,7 +63,16 @@ public class Signin {
             return
         }
         
-        navigationController.setViewControllers([controller], animated: true)
+        // Don't animate between controllers of the same type, to avoid
+        // annoing animations
+        var animated = true
+        if let previousController = navigationController.topViewController {
+            if type(of: previousController) === type(of: controller) {
+                animated = false
+            }
+        }
+        
+        navigationController.setViewControllers([controller], animated: animated)
     }
     
     /// Initializes the appropriate view controller for this response.

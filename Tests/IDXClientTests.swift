@@ -61,6 +61,13 @@ class IDXClientTests: XCTestCase {
         var call: IDXClientAPIv1Mock.RecordedCall?
         var called = false
         
+        // canCancel
+        XCTAssertFalse(client.canCancel)
+        call = api.recordedCalls.last
+        XCTAssertEqual(call?.function, "canCancel")
+        XCTAssertNil(call?.arguments)
+        api.reset()
+
         // cancel()
         expect = expectation(description: "cancel")
         client.cancel { (_, _) in

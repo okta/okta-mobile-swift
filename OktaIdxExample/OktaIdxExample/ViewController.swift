@@ -9,15 +9,22 @@ import UIKit
 import Combine
 import OktaIdx
 
-class ViewController: UIViewController {
-    private static let issuerUrlKey = "issuerUrl"
-    private static let clientIdKey = "clientId"
-    private static let redirectUrlKey = "redirectUrl"
+extension ClientConfiguration {
+    var idxConfiguration: IDXClient.Configuration {
+        return IDXClient.Configuration(issuer: issuer,
+                                       clientId: clientId,
+                                       clientSecret: nil,
+                                       scopes: ["openid", "profile", "offline_access"],
+                                       redirectUri: redirectUri)
+    }
+}
 
+class ViewController: UIViewController {
     @IBOutlet weak var issuerField: UITextField!
     @IBOutlet weak var clientIdField: UITextField!
     @IBOutlet weak var redirectField: UITextField!
     private var cancelObject: AnyCancellable?
+    var configuration: ClientConfiguration? = nil
     
     deinit {
         cancelObject?.cancel()
@@ -26,30 +33,28 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        issuerField.text = UserDefaults.standard.string(forKey: type(of: self).issuerUrlKey)
-        clientIdField.text = UserDefaults.standard.string(forKey: type(of: self).clientIdKey)
-        redirectField.text = UserDefaults.standard.string(forKey: type(of: self).redirectUrlKey)
+        configuration = ClientConfiguration.launchConfiguration ?? ClientConfiguration.userDefaults
+        issuerField.text = configuration?.issuer
+        clientIdField.text = configuration?.clientId
+        redirectField.text = configuration?.redirectUri
+        
+        issuerField.accessibilityIdentifier = "issuerField"
+        clientIdField.accessibilityIdentifier = "clientIdField"
+        redirectField.accessibilityIdentifier = "redirectField"
+        
+        view.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(backgroundTapped)))
+    }
+    
+    @objc func backgroundTapped() {
+        view.allInputFields()
+            .filter { $0.isFirstResponder }
+            .forEach { $0.resignFirstResponder() }
     }
     
     func loginComplete(with token: IDXClient.Token) {
         print("Authenticated with \(token)")
     }
 
-    func configuration() -> IDXClient.Configuration? {
-        guard let issuerUrl = issuerField.text,
-              let clientId = clientIdField.text,
-              let redirectUri = redirectField.text else
-        {
-            return nil
-        }
-        
-        return IDXClient.Configuration(issuer: issuerUrl,
-                                       clientId: clientId,
-                                       clientSecret: nil,
-                                       scopes: ["openid", "profile", "offline_access"],
-                                       redirectUri: redirectUri)
-    }
-    
     @IBAction func logIn(_ sender: Any) {
         guard let issuerUrl = issuerField.text,
               let clientId = clientIdField.text,
@@ -63,12 +68,13 @@ class ViewController: UIViewController {
             return
         }
 
-        UserDefaults.standard.setValue(issuerUrl, forKey: type(of: self).issuerUrlKey)
-        UserDefaults.standard.setValue(clientId, forKey: type(of: self).clientIdKey)
-        UserDefaults.standard.setValue(redirectUri, forKey: type(of: self).redirectUrlKey)
-        UserDefaults.standard.synchronize()
+        configuration = ClientConfiguration(clientId: clientId,
+                                            issuer: issuerUrl,
+                                            redirectUri: redirectUri,
+                                            shouldSave: true)
+        configuration?.save()
         
-        guard let config = configuration() else {
+        guard let config = configuration?.idxConfiguration else {
             return
         }
         
@@ -83,5 +89,22 @@ class ViewController: UIViewController {
             controller.token = token
             self.navigationController?.pushViewController(controller, animated: true)
         }
+    }
+}
+
+extension ViewController: UITextFieldDelegate {
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        switch textField {
+        case issuerField:
+            clientIdField.becomeFirstResponder()
+        case clientIdField:
+            redirectField.becomeFirstResponder()
+        case redirectField:
+            redirectField.resignFirstResponder()
+            logIn(redirectField as Any)
+            
+        default: break
+        }
+        return false
     }
 }
