@@ -121,6 +121,37 @@ client.start { (response, error) in
 }
 ```
 
+### Cancel the OIE transaction and restart after that
+
+```swift
+client.start { (response, error) in
+    guard let response = response,
+          let remediation = response.remediation?.remediationOptions.first else {
+        // Handle error
+        return
+    }
+    
+    // Proceed with a specific identifier
+    remediation.proceed(with: ["identifier": "<#username#>"]) { (response, error) in
+        guard let response = response,
+              let remediation = response.remediation?.remediationOptions.first else {
+            // Handle error
+            return
+        }
+
+        // Cancel the current response, and begin fresh
+        response.cancel() { (response, error) in
+            guard let response = response else {
+                // Handle error
+                return
+            }
+
+            // Continue the remediation flow ... 
+        }
+    }
+}
+```
+
 
 ## Supported Platforms
 
