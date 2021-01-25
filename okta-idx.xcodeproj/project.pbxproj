@@ -32,6 +32,7 @@
 		96DCDCFC258844AD009487CB /* ReceivesIONJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96DCDCFB258844AD009487CB /* ReceivesIONJSON.swift */; };
 		96E36E2C25B630F1003F0B3B /* MFA-Email in Resources */ = {isa = PBXBuildFile; fileRef = 96E36E2B25B630F1003F0B3B /* MFA-Email */; };
 		96F5417D258A843300D3995F /* IDXClient+V1ResponseConstructors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96F5417C258A843300D3995F /* IDXClient+V1ResponseConstructors.swift */; };
+		96F8B35125BF480200DAECDC /* RestartTransaction in Resources */ = {isa = PBXBuildFile; fileRef = 96F8B35025BF480200DAECDC /* RestartTransaction */; };
 		96F8F18E25802FAD00DA2701 /* OktaIdx.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 96F8F18425802FAD00DA2701 /* OktaIdx.framework */; };
 		96F8F1BA258049B000DA2701 /* IDXVersion+InternalExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96F8F1B9258049B000DA2701 /* IDXVersion+InternalExtension.swift */; };
 		96F8F1C125804A0C00DA2701 /* IDXClientVersionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96F8F1C025804A0C00DA2701 /* IDXClientVersionTests.swift */; };
@@ -97,6 +98,7 @@
 		96DCDCFB258844AD009487CB /* ReceivesIONJSON.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReceivesIONJSON.swift; sourceTree = "<group>"; };
 		96E36E2B25B630F1003F0B3B /* MFA-Email */ = {isa = PBXFileReference; lastKnownFileType = folder; path = "MFA-Email"; sourceTree = "<group>"; };
 		96F5417C258A843300D3995F /* IDXClient+V1ResponseConstructors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "IDXClient+V1ResponseConstructors.swift"; sourceTree = "<group>"; };
+		96F8B35025BF480200DAECDC /* RestartTransaction */ = {isa = PBXFileReference; lastKnownFileType = folder; path = RestartTransaction; sourceTree = "<group>"; };
 		96F8F18425802FAD00DA2701 /* OktaIdx.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = OktaIdx.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		96F8F18D25802FAD00DA2701 /* okta-idx-ios-tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "okta-idx-ios-tests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		96F8F1AC25803BE100DA2701 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -273,6 +275,7 @@
 			children = (
 				964A44D3259D017A002CB250 /* Passcode */,
 				96E36E2B25B630F1003F0B3B /* MFA-Email */,
+				96F8B35025BF480200DAECDC /* RestartTransaction */,
 				96F8F23B2582D77700DA2701 /* answer-challenge-response.json */,
 				96F8F2382582D77600DA2701 /* cancel-response.json */,
 				96F8F2372582D77600DA2701 /* challenge-response.json */,
@@ -438,6 +441,7 @@
 				96F8F24A2582D77700DA2701 /* interact-response.json in Resources */,
 				96F8F2482582D77700DA2701 /* introspect-error-response.json in Resources */,
 				96F8F2422582D77700DA2701 /* token-error-response.json in Resources */,
+				96F8B35125BF480200DAECDC /* RestartTransaction in Resources */,
 				96F8F2442582D77700DA2701 /* cancel-response.json in Resources */,
 				96F8F2462582D77700DA2701 /* interact-error-response.json in Resources */,
 				96F8F24B2582D77700DA2701 /* token-response.json in Resources */,

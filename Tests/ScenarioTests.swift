@@ -168,4 +168,74 @@ class ScenarioTests: XCTestCase {
         }
         wait(for: [completion], timeout: 1)
     }
+    
+    /// Tests restarting a transaction
+    func testScenario4() throws {
+        let completion = expectation(description: "Start")
+        try session.expect("https://example.com/oauth2/default/v1/interact", folderName: "RestartTransaction", fileName: "01-interact-response")
+        try session.expect("https://example.com/idp/idx/introspect", folderName: "RestartTransaction", fileName: "02-introspect-response")
+        try session.expect("https://example.com/idp/idx/identify", folderName: "RestartTransaction", fileName: "03-identify-response")
+        try session.expect("https://example.com/idp/idx/challenge", folderName: "RestartTransaction", fileName: "04-challenge-response")
+        try session.expect("https://example.com/idp/idx/challenge/answer", folderName: "RestartTransaction", fileName: "05-challenge-answer-response")
+        try session.expect("https://example.com/idp/idx/cancel", folderName: "RestartTransaction", fileName: "06-cancel-response")
+
+        idx.start { (response, error) in
+            XCTAssertNotNil(response)
+            XCTAssertNil(error)
+            XCTAssertTrue(response?.canCancel ?? false)
+
+            let remediation = response?.remediation?.remediationOptions.first
+            XCTAssertEqual(remediation?.name, "identify")
+
+            remediation?.proceed(with: ["identifier": "user@example.com"]) { (response, error) in
+                XCTAssertNotNil(response)
+                XCTAssertNil(error)
+                XCTAssertTrue(response?.canCancel ?? false)
+
+                let remediation = response?.remediation?.remediationOptions.first
+                XCTAssertEqual(remediation?.name, "select-authenticator-authenticate")
+                
+                let passcodeOption = remediation?.form
+                    .filter { $0.name == "authenticator" }.first?
+                    .options?.filter { $0.label == "Password" }.first
+                XCTAssertNotNil(passcodeOption)
+
+                remediation?.proceed(with: ["authenticator": passcodeOption!]) { (response, error) in
+                    XCTAssertNotNil(response)
+                    XCTAssertNil(error)
+                    XCTAssertTrue(response?.canCancel ?? false)
+
+                    let remediation = response?.remediation?.remediationOptions.first
+                    XCTAssertEqual(remediation?.name, "challenge-authenticator")
+
+                    remediation?.proceed(with: ["credentials": [ "passcode": "password" ]]) { (response, error) in
+                        XCTAssertNotNil(response)
+                        XCTAssertNil(error)
+                        XCTAssertTrue(response?.canCancel ?? false)
+                        
+                        let remediation = response?.remediation?.remediationOptions.first
+                        XCTAssertEqual(remediation?.name, "select-authenticator-authenticate")
+                        
+                        let emailOption = remediation?.form
+                            .filter { $0.name == "authenticator" }.first?
+                            .options?.filter { $0.label == "Email" }.first
+                        XCTAssertNotNil(emailOption)
+
+                        response?.cancel() { (response, error) in
+                            XCTAssertNotNil(response)
+                            XCTAssertNil(error)
+                            XCTAssertTrue(response?.canCancel ?? false)
+
+                            let remediation = response?.remediation?.remediationOptions.first
+                            XCTAssertEqual(remediation?.name, "identify")
+                            
+                            completion.fulfill()
+                        }
+                    }
+                }
+            }
+        }
+        wait(for: [completion], timeout: 1)
+    }
+
 }
