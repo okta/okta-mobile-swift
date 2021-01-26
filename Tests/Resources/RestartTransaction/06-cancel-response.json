@@ -1,0 +1,66 @@
+{
+   "app" : {
+      "type" : "object",
+      "value" : {
+         "id" : "0ZczewGCFPlxNYYcLq5i",
+         "label" : "Test App",
+         "name" : "oidc_client"
+      }
+   },
+   "cancel" : {
+      "accepts" : "application/json; okta-version=1.0.0",
+      "href" : "https://example.com/idp/idx/cancel",
+      "method" : "POST",
+      "name" : "cancel",
+      "produces" : "application/ion+json; okta-version=1.0.0",
+      "rel" : [
+         "create-form"
+      ],
+      "value" : [
+         {
+            "mutable" : false,
+            "name" : "stateHandle",
+            "required" : true,
+            "value" : "02iWwxk5ieRnLpOtISAEKe0qB5LlTxDhTZndVHfwBh",
+            "visible" : false
+         }
+      ]
+   },
+   "expiresAt" : "2021-01-25T20:37:25.000Z",
+   "intent" : "LOGIN",
+   "remediation" : {
+      "type" : "array",
+      "value" : [
+         {
+            "accepts" : "application/json; okta-version=1.0.0",
+            "href" : "https://example.com/idp/idx/identify",
+            "method" : "POST",
+            "name" : "identify",
+            "produces" : "application/ion+json; okta-version=1.0.0",
+            "rel" : [
+               "create-form"
+            ],
+            "value" : [
+               {
+                  "label" : "Username",
+                  "name" : "identifier"
+               },
+               {
+                  "label" : "Remember this device",
+                  "name" : "rememberMe",
+                  "type" : "boolean"
+               },
+               {
+                  "mutable" : false,
+                  "name" : "stateHandle",
+                  "required" : true,
+                  "value" : "02iWwxk5ieRnLpOtISAEKe0qB5LlTxDhTZndVHfwBh",
+                  "visible" : false
+               }
+            ]
+         }
+      ]
+   },
+   "stateHandle" : "02iWwxk5ieRnLpOtISAEKe0qB5LlTxDhTZndVHfwBh",
+   "version" : "1.0.0"
+}

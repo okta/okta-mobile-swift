@@ -161,6 +161,7 @@ extension Signin.Row {
         case .message(message: let message):
             if let cell = cell as? IDXMessageTableViewCell {
                 cell.messageLabel.text = message.message
+                cell.messageLabel.accessibilityIdentifier = message.localizationKey
                 cell.type = IDXMessageTableViewCell.MessageType(rawValue: message.type.rawValue)
             }
             

@@ -26,7 +26,7 @@
       buildConfiguration = "Debug"
       selectedDebuggerIdentifier = "Xcode.DebuggerFoundation.Debugger.LLDB"
       selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
-      shouldUseLaunchSchemeArgsEnv = "YES">
+      shouldUseLaunchSchemeArgsEnv = "NO">
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
@@ -43,8 +43,8 @@
             isEnabled = "YES">
          </EnvironmentVariable>
          <EnvironmentVariable
-            key = "ISSUER"
-            value = "$(ISSUER)"
+            key = "ISSUER_DOMAIN"
+            value = "$(ISSUER_DOMAIN)"
             isEnabled = "YES">
          </EnvironmentVariable>
          <EnvironmentVariable
@@ -53,13 +53,23 @@
             isEnabled = "YES">
          </EnvironmentVariable>
          <EnvironmentVariable
-            key = "USERNAME"
-            value = "$(USERNAME)"
+            key = "PASSCODE_USERNAME"
+            value = "$(PASSCODE_USERNAME)"
             isEnabled = "YES">
          </EnvironmentVariable>
          <EnvironmentVariable
-            key = "PASSWORD"
-            value = "$(PASSWORD)"
+            key = "PASSCODE_PASSWORD"
+            value = "$(PASSCODE_PASSWORD)"
+            isEnabled = "YES">
+         </EnvironmentVariable>
+         <EnvironmentVariable
+            key = "MFASOP_USERNAME"
+            value = "$(MFASOP_USERNAME)"
+            isEnabled = "YES">
+         </EnvironmentVariable>
+         <EnvironmentVariable
+            key = "MFASOP_PASSWORD"
+            value = "$(MFASOP_PASSWORD)"
             isEnabled = "YES">
          </EnvironmentVariable>
       </EnvironmentVariables>
@@ -107,16 +117,6 @@
          </BuildableReference>
       </BuildableProductRunnable>
       <EnvironmentVariables>
-         <EnvironmentVariable
-            key = "USERNAME"
-            value = "$(USERNAME)"
-            isEnabled = "YES">
-         </EnvironmentVariable>
-         <EnvironmentVariable
-            key = "PASSWORD"
-            value = "$(PASSWORD)"
-            isEnabled = "YES">
-         </EnvironmentVariable>
          <EnvironmentVariable
             key = "ISSUER_DOMAIN"
             value = "$(ISSUER_DOMAIN)"
