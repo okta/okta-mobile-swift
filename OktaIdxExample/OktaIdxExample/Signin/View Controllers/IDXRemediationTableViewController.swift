@@ -24,14 +24,18 @@ class IDXRemediationTableViewController: UITableViewController, IDXRemediationCo
         cancelObject?.cancel()
     }
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
-
+    func rebuildForm() {
         if let response = response,
            let remediationOption = remediationOption
         {
             formSections = response.remediationForm(form: remediationOption.form, delegate: self)
         }
+    }
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+
+        rebuildForm()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -130,7 +134,10 @@ extension IDXRemediationTableViewController: SigninRowDelegate {
             formValues[changedValue.0] = changedValue.1
         }
 
-        if type(of: changedValue.1) == IDXClient.Remediation.FormValue.self {
+        if let changedFormValue = changedValue.1 as? IDXClient.Remediation.FormValue {
+            if changedFormValue.hasVisibleFields {
+                rebuildForm()
+            }
             tableView.reloadData()
         }
     }
@@ -145,6 +152,8 @@ extension Signin.Row.Kind {
         case .toggle(field: _):    return "Toggle"
         case .option(field: _,
                      option: _):   return "Option"
+        case .select(field: _,
+                     values: _):   return "Picker"
         case .button:              return "Button"
         }
     }
@@ -162,7 +171,7 @@ extension Signin.Row {
             if let cell = cell as? IDXMessageTableViewCell {
                 cell.messageLabel.text = message.message
                 cell.messageLabel.accessibilityIdentifier = message.localizationKey
-                cell.type = IDXMessageTableViewCell.MessageType(rawValue: message.type.rawValue)
+                cell.type = message.type
             }
             
         case .text(field: let field):
@@ -205,6 +214,25 @@ extension Signin.Row {
             if let cell = cell as? IDXButtonTableViewCell {
                 cell.displayKinds = kind
             }
+            
+        case .select(field: let field, values: let values):
+            if let cell = cell as? IDXPickerTableViewCell,
+               let fieldName = field.name {
+                let currentValue = self.delegate?.value(for: fieldName) as? String
+                
+                cell.fieldLabel.text = field.label
+                cell.fieldLabel.accessibilityIdentifier = "\(fieldName).label"
+                cell.options = values.compactMap { field in
+                    guard let value = field.value as? String,
+                          let label = field.label else { return nil }
+                    return (value, label)
+                }
+                cell.selectedValue = currentValue
+                cell.update = { value in
+                    self.delegate?.row(row: self, changedValue: (fieldName, value))
+                }
+            }
+            
         }
     }
 }

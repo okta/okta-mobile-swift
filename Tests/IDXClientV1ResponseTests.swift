@@ -262,10 +262,17 @@ class IDXClientV1ResponseTests: XCTestCase {
             
             let publicOption = publicObj.options?[0]
             XCTAssertNotNil(publicOption)
-            XCTAssertEqual(publicOption?.label, "Email")
-            XCTAssertEqual(publicOption?.form?.count, 2)
-            XCTAssertEqual(publicOption?.form?[0].name, "id")
-            XCTAssertEqual(publicOption?.form?[1].name, "methodType")
+            if let publicOption = publicOption {
+                XCTAssertEqual(publicOption.label, "Email")
+                XCTAssertEqual(publicOption.form?.count, 2)
+                XCTAssertEqual(publicOption.form?[0].name, "id")
+                XCTAssertEqual(publicOption.form?[1].name, "methodType")
+                XCTAssertTrue(publicOption.visible)
+
+                if let idValue = publicOption.form?[0] {
+                    XCTAssertFalse(idValue.visible)
+                }
+            }
         }
     }
     
@@ -373,4 +380,49 @@ class IDXClientV1ResponseTests: XCTestCase {
             XCTAssertEqual(publicObj.messages?.first?.message, "Authentication failed")
         }
     }
+
+    func testApplication() throws {
+        try decode(type: API.Response.IonObject<API.Response.App>.self, """
+           {
+              "type" : "object",
+              "value" : {
+                 "id" : "0ZczewGCFPlxNYYcLq5i",
+                 "label" : "Test App",
+                 "name" : "client"
+              }
+           }
+        """) { (obj) in
+            XCTAssertNotNil(obj)
+            XCTAssertEqual(obj.type, "object")
+            XCTAssertEqual(obj.value.id, "0ZczewGCFPlxNYYcLq5i")
+            XCTAssertEqual(obj.value.label, "Test App")
+            XCTAssertEqual(obj.value.name, "client")
+
+            let publicObj = IDXClient.Application(v1: obj.value)
+            XCTAssertNotNil(publicObj)
+            XCTAssertEqual(publicObj?.id, "0ZczewGCFPlxNYYcLq5i")
+            XCTAssertEqual(publicObj?.label, "Test App")
+            XCTAssertEqual(publicObj?.name, "client")
+        }
+    }
+
+    func testUser() throws {
+        try decode(type: API.Response.IonObject<API.Response.User>.self, """
+           {
+              "type" : "object",
+              "value" : {
+                 "id" : "0ZczewGCFPlxNYYcLq5i",
+              }
+           }
+        """) { (obj) in
+            XCTAssertNotNil(obj)
+            XCTAssertEqual(obj.type, "object")
+            XCTAssertEqual(obj.value.id, "0ZczewGCFPlxNYYcLq5i")
+
+            let publicObj = IDXClient.User(v1: obj.value)
+            XCTAssertNotNil(publicObj)
+            XCTAssertEqual(publicObj?.id, "0ZczewGCFPlxNYYcLq5i")
+        }
+    }
+    
 }

@@ -46,16 +46,22 @@ class IDXClientTests: XCTestCase {
                                                             method: "GET",
                                                             href: URL(string: "some://url")!,
                                                             accepts: "application/json",
-                                                            form: [])
+                                                            form: [],
+                                                            refresh: nil)
         let response = IDXClient.Response(client: api,
                                           stateHandle: "handle",
                                           version: "1",
                                           expiresAt: Date(),
                                           intent: "Login",
+                                          authenticators: nil,
+                                          authenticatorEnrollments: nil,
+                                          currentAuthenticatorEnrollment: nil,
                                           remediation: nil,
                                           cancel: remedationOption,
                                           success: remedationOption,
-                                          messages: nil)
+                                          messages: nil,
+                                          app: nil,
+                                          user: nil)
 
         var expect: XCTestExpectation!
         var call: IDXClientAPIv1Mock.RecordedCall?

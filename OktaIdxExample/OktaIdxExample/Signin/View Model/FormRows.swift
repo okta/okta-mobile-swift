@@ -32,6 +32,7 @@ extension Signin {
             case text(field: IDXClient.Remediation.FormValue)
             case toggle(field: IDXClient.Remediation.FormValue)
             case option(field: IDXClient.Remediation.FormValue, option: IDXClient.Remediation.FormValue)
+            case select(field: IDXClient.Remediation.FormValue, values: [IDXClient.Remediation.FormValue])
             case button(kind: [IDXButtonTableViewCell.Kind])
         }
     }
@@ -78,6 +79,17 @@ extension IDXClient.Remediation.FormValue {
                     rows.append(Row(kind: .option(field: self, option: option),
                                     parent: parent,
                                     delegate: delegate))
+
+                    if let optionForm = option.form,
+                       let fieldName = name,
+                       let chosenValue = delegate.value(for: fieldName) as? FormValue
+                    {
+                        if chosenValue == option {
+                            optionForm.forEach { childValue in
+                                rows.append(contentsOf: childValue.remediationRow(parent: self, delegate: delegate))
+                            }
+                        }
+                    }
                 }
             } else if let form = form {
                 rows.append(contentsOf: form.flatMap { nested in
@@ -86,9 +98,15 @@ extension IDXClient.Remediation.FormValue {
             }
             
         default:
-            rows.append(Row(kind: .text(field: self),
-                            parent: parent,
-                            delegate: delegate))
+            if let options = options {
+                rows.append(Row(kind: .select(field: self, values: options),
+                                parent: parent,
+                                delegate: delegate))
+            } else {
+                rows.append(Row(kind: .text(field: self),
+                                parent: parent,
+                                delegate: delegate))
+            }
         }
         
         self.messages?.forEach { message in
@@ -98,6 +116,16 @@ extension IDXClient.Remediation.FormValue {
         }
         
         return rows
+    }
+
+    var hasVisibleFields: Bool {
+        get {
+            if visible {
+                return true
+            }
+            
+            return (options?.filter { $0.hasVisibleFields }.count ?? 0 > 0)
+        }
     }
 }
 

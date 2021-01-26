@@ -54,25 +54,72 @@ extension IDXClient.APIVersion1 {
         let version: String
         let expiresAt: Date
         let intent: String
-        let remediation: FormCollection?
-        let messages: MessageCollection?
-//        let authenticatorEnrollments: AuthenticatorEnrollments
-//        let currentAuthenticatorEnrollment: FormCollection?
-//        let user: User
-        let app: FormObject
+        let remediation: IonCollection<Form>?
+        let messages: IonCollection<Message>?
+        let authenticators: IonCollection<Authenticator>?
+        let authenticatorEnrollments: IonCollection<AuthenticatorEnrollment>?
+        let currentAuthenticatorEnrollment: IonObject<CurrentAuthenticatorEnrollment>?
+        let currentAuthenticator: IonObject<CurrentAuthenticator>?
+        let user: IonObject<User>?
+        let app: IonObject<App>?
         let successWithInteractionCode: Form?
         let cancel: Form
         
-        struct FormObject: Decodable {
-            let type: String
-            let value: FormValue
+        struct IonObject<T>: Decodable where T: Decodable {
+            let type: String?
+            let value: T
         }
 
-        struct FormCollection: Decodable {
-            let type: String
-            let value: [Form]
+        struct IonCollection<T>: Decodable where T: Decodable {
+            let type: String?
+            let value: [T]
         }
 
+        struct User: Decodable {
+            let id: String
+        }
+        
+        struct App: Decodable {
+            let id: String
+            let label: String
+            let name: String
+        }
+        
+        struct Authenticator: Decodable {
+            let displayName: String
+            let id: String
+            let type: String
+            let methods: [[String:String]]
+        }
+        
+        struct AuthenticatorEnrollment: Decodable {
+            let displayName: String
+            let id: String
+            let type: String
+            let methods: [[String:String]]
+            let profile: [String:String]?
+        }
+        
+        struct CurrentAuthenticator: Decodable {
+            let displayName: String
+            let id: String
+            let type: String
+            let methods: [[String:String]]
+            let contextualData: [String:JSONValue]?
+        }
+        
+        struct CurrentAuthenticatorEnrollment: Decodable {
+            let displayName: String
+            let id: String
+            let type: String
+            let methods: [[String:String]]
+            let profile: [String:String]?
+            let send: Form?
+            let resend: Form?
+            let poll: Form?
+            let recover: Form?
+        }
+        
         struct Form: Decodable {
             let rel: [String]
             let name: String
@@ -81,6 +128,7 @@ extension IDXClient.APIVersion1 {
             let value: [FormValue]
             let accepts: String
             let relatesTo: [String]?
+            let refresh: Double?
         }
         
         struct CompositeForm: Decodable {
@@ -92,6 +140,7 @@ extension IDXClient.APIVersion1 {
         }
         
         struct FormValue: Decodable {
+            let id: String?
             let name: String?
             let label: String?
             let type: String?
@@ -103,14 +152,15 @@ extension IDXClient.APIVersion1 {
             let form: CompositeFormValue?
             let options: [FormValue]?
             let relatesTo: String?
-            let messages: MessageCollection?
+            let messages: IonCollection<Message>?
             
             private enum CodingKeys: String, CodingKey {
-                case name, required, label, type, value, secret, visible, mutable, options, form, relatesTo, messages
+                case id, name, required, label, type, value, secret, visible, mutable, options, form, relatesTo, messages
             }
 
             init(from decoder: Decoder) throws {
                 let container = try decoder.container(keyedBy: CodingKeys.self)
+                id = try container.decodeIfPresent(String.self, forKey: .id)
                 name = try container.decodeIfPresent(String.self, forKey: .name)
                 label = try container.decodeIfPresent(String.self, forKey: .label)
                 type = try container.decodeIfPresent(String.self, forKey: .type)
@@ -120,7 +170,7 @@ extension IDXClient.APIVersion1 {
                 mutable = try container.decodeIfPresent(Bool.self, forKey: .mutable)
                 relatesTo = try container.decodeIfPresent(String.self, forKey: .relatesTo)
                 options = try container.decodeIfPresent([FormValue].self, forKey: .options)
-                messages = try container.decodeIfPresent(MessageCollection.self, forKey: .messages)
+                messages = try container.decodeIfPresent(IonCollection<Message>.self, forKey: .messages)
 
                 let formObj = try? container.decodeIfPresent(CompositeFormValue.self, forKey: .form)
                 let valueAsCompositeObj = try? container.decodeIfPresent(CompositeForm.self, forKey: .value)
@@ -138,11 +188,6 @@ extension IDXClient.APIVersion1 {
                     value = valueAsJsonObj
                 }
             }
-        }
-        
-        struct MessageCollection: Codable {
-            let type: String
-            let value: [Message]
         }
         
         struct Message: Codable {

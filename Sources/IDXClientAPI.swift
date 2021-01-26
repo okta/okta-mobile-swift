@@ -31,17 +31,17 @@ public protocol IDXClientAPI {
     ///   - completion: Invoked when a response, or error, is received.
     ///   - response: The response describing the next steps available in this workflow.
     ///   - error: Describes the error that occurred, or `nil` if successful.
-    func start(completion: @escaping (_ response: IDXClient.Response?, _ error: Error?) -> Void)
+    @objc func start(completion: @escaping (_ response: IDXClient.Response?, _ error: Error?) -> Void)
     
     /// Indicates whether or not the current stage in the workflow can be cancelled.
-    var canCancel: Bool { get }
+    @objc var canCancel: Bool { get }
     
     /// Cancels the current workflow.
     /// - Parameters:
     ///   - completion: Invoked when the operation is cancelled.
     ///   - response: The response describing the new workflow next steps, or `nil` if an error occurred.
     ///   - error: Describes the error that occurred, or `nil` if successful.
-    func cancel(completion: @escaping (_ response: IDXClient.Response?, _ error: Error?) -> Void)
+    @objc func cancel(completion: @escaping (_ response: IDXClient.Response?, _ error: Error?) -> Void)
     
     /// Proceeds to the given remediation option.
     /// - Parameters:
@@ -50,9 +50,9 @@ public protocol IDXClientAPI {
     ///   - completion: Invoked when a response, or error, is received.
     ///   - response: The response describing the next steps available in this workflow.
     ///   - error: Describes the error that occurred, or `nil` if successful.
-    func proceed(remediation option: IDXClient.Remediation.Option,
-                 data: [String : Any]?,
-                 completion: @escaping (_ response: IDXClient.Response?, _ error: Swift.Error?) -> Void)
+    @objc func proceed(remediation option: IDXClient.Remediation.Option,
+                       data: [String : Any]?,
+                       completion: @escaping (_ response: IDXClient.Response?, _ error: Swift.Error?) -> Void)
     
     /// Exchanges the successful remediation response with a token.
     /// - Parameters:
@@ -60,6 +60,6 @@ public protocol IDXClientAPI {
     ///   - completion: Completion handler invoked when a token, or error, is received.
     ///   - token: The token that was exchanged, or `nil` if an error occurred.
     ///   - error: Describes the error that occurred, or `nil` if successful.
-    func exchangeCode(using successResponse: IDXClient.Remediation.Option,
-                      completion: @escaping (_ token: IDXClient.Token?, _ error: Swift.Error?) -> Void)
+    @objc func exchangeCode(using successResponse: IDXClient.Remediation.Option,
+                            completion: @escaping (_ token: IDXClient.Token?, _ error: Swift.Error?) -> Void)
 }

@@ -36,6 +36,8 @@
 		96ADA06D25B111AA008BF50D /* IDXMessageTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96ADA06C25B111AA008BF50D /* IDXMessageTableViewCell.swift */; };
 		96C51E9A25BA5A3F007A2519 /* Credentials.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96C51E9925BA5A3F007A2519 /* Credentials.swift */; };
 		96F8B35F25BF5A9400DAECDC /* ResetTransactionScenarioTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96F8B35E25BF5A9400DAECDC /* ResetTransactionScenarioTests.swift */; };
+		96C51E9325BA591F007A2519 /* MFAOktaSOPScenarioTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96C51E9225BA591F007A2519 /* MFAOktaSOPScenarioTests.swift */; };
+		96F8B34925BB556500DAECDC /* IDXPickerTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96F8B34825BB556500DAECDC /* IDXPickerTableViewCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -105,6 +107,8 @@
 		96C51E7E25BA578F007A2519 /* TestCredentials.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; name = TestCredentials.xcconfig; path = ../../TestCredentials.xcconfig; sourceTree = "<group>"; };
 		96C51E9925BA5A3F007A2519 /* Credentials.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Credentials.swift; sourceTree = "<group>"; };
 		96F8B35E25BF5A9400DAECDC /* ResetTransactionScenarioTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResetTransactionScenarioTests.swift; sourceTree = "<group>"; };
+		96C51E9225BA591F007A2519 /* MFAOktaSOPScenarioTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MFAOktaSOPScenarioTests.swift; sourceTree = "<group>"; };
+		96F8B34825BB556500DAECDC /* IDXPickerTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IDXPickerTableViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -188,6 +192,7 @@
 				96749B0425B8EA9D002849A0 /* Extensions */,
 				964F747425A3E5F3003EE300 /* PasscodeScenarioTests.swift */,
 				96F8B35E25BF5A9400DAECDC /* ResetTransactionScenarioTests.swift */,
+				96C51E9225BA591F007A2519 /* MFAOktaSOPScenarioTests.swift */,
 				964F747625A3E5F3003EE300 /* Info.plist */,
 			);
 			path = OktaIdxExampleUITests;
@@ -258,6 +263,7 @@
 				9691E6CD25AF73F0000CD02C /* IDXButtonTableViewCell.swift */,
 				9691E6D125AF740A000CD02C /* IDXOptionTableViewCell.swift */,
 				96ADA06C25B111AA008BF50D /* IDXMessageTableViewCell.swift */,
+				96F8B34825BB556500DAECDC /* IDXPickerTableViewCell.swift */,
 			);
 			path = "TableView Cells";
 			sourceTree = "<group>";
@@ -446,6 +452,7 @@
 				96576C6F25ACDD8A00B02E3B /* IDXSigninController.swift in Sources */,
 				96749AF825B8AC3B002849A0 /* ClientConfiguration.swift in Sources */,
 				96ADA06D25B111AA008BF50D /* IDXMessageTableViewCell.swift in Sources */,
+				96F8B34925BB556500DAECDC /* IDXPickerTableViewCell.swift in Sources */,
 				96576C8325ACFBEC00B02E3B /* Signin.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -462,6 +469,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				96C51E9325BA591F007A2519 /* MFAOktaSOPScenarioTests.swift in Sources */,
 				96749B0625B8EAAD002849A0 /* XCTest+Extensions.swift in Sources */,
 				96C51E9A25BA5A3F007A2519 /* Credentials.swift in Sources */,
 				96F8B35F25BF5A9400DAECDC /* ResetTransactionScenarioTests.swift in Sources */,

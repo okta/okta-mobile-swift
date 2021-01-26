@@ -23,19 +23,19 @@ public final class IDXClient: NSObject, IDXClientAPI {
     @objc(IDXClientConfiguration)
     public final class Configuration: NSObject {
         /// The issuer URL.
-        public let issuer: String
+        @objc public let issuer: String
         
         /// The application's client ID.
-        public let clientId: String
+        @objc public let clientId: String
         
         /// The application's client secret, if required.
-        public let clientSecret: String?
+        @objc public let clientSecret: String?
         
         /// The access scopes required by the client.
-        public let scopes: [String]
+        @objc public let scopes: [String]
         
         /// The application's redirect URI.
-        public let redirectUri: String
+        @objc public let redirectUri: String
 
         /// Initializes an IDX configuration object.
         /// - Parameters:
@@ -44,11 +44,11 @@ public final class IDXClient: NSObject, IDXClientAPI {
         ///   - clientSecret: The application's client secret, if required.
         ///   - scopes: The application's access scopes.
         ///   - redirectUri: The application's redirect URI.
-        public init(issuer: String,
-                    clientId: String,
-                    clientSecret: String?,
-                    scopes: [String],
-                    redirectUri: String)
+        @objc public init(issuer: String,
+                          clientId: String,
+                          clientSecret: String?,
+                          scopes: [String],
+                          redirectUri: String)
         {
             self.issuer = issuer
             self.clientId = clientId
@@ -63,7 +63,7 @@ public final class IDXClient: NSObject, IDXClientAPI {
     }
     
     /// Configuration used to create the IDX client.
-    public let configuration: Configuration
+    @objc public let configuration: Configuration
     
     /// Initializes an IDXClient instance with the given configuration values.
     /// - Parameters:
@@ -73,12 +73,12 @@ public final class IDXClient: NSObject, IDXClientAPI {
     ///   - scopes: The application's access scopes.
     ///   - redirectUri: The application's redirect URI.
     ///   - version: The API version to use, or `latest` if not supplied.
-    public convenience init(issuer: String,
-         clientId: String,
-         clientSecret: String? = nil,
-         scopes: [String],
-         redirectUri: String,
-         version: Version = Version.latest)
+    @objc public convenience init(issuer: String,
+                                  clientId: String,
+                                  clientSecret: String? = nil,
+                                  scopes: [String],
+                                  redirectUri: String,
+                                  version: Version = Version.latest)
     {
         self.init(configuration: Configuration(issuer: issuer,
                                                clientId: clientId,
@@ -93,9 +93,9 @@ public final class IDXClient: NSObject, IDXClientAPI {
     ///   - configuration: Configuration object describing the application.
     ///   - version: The API version to use, or `latest` if not supplied.
     ///   - queue: The DispatchQueue to send responses on, defaults to `DispatchQueue.main`.
-    public convenience init(configuration: Configuration,
-                            version: Version = Version.latest,
-                            queue: DispatchQueue = DispatchQueue.main)
+    @objc public convenience init(configuration: Configuration,
+                                  version: Version = Version.latest,
+                                  queue: DispatchQueue = DispatchQueue.main)
     {
         self.init(configuration: configuration,
                   api: version.clientImplementation(with: configuration),
