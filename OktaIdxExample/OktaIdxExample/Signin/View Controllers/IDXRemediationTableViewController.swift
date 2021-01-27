@@ -47,7 +47,7 @@ class IDXRemediationTableViewController: UITableViewController, IDXRemediationCo
         }
     }
     
-    @IBAction func continueAction(_ sender: Any) {
+    func proceed(to remediationOption: IDXClient.Remediation.Option?, from sender: Any? = nil) {
         guard let signin = signin else {
             showError(SigninError.genericError(message: "Signin session deallocated"))
             return
@@ -70,6 +70,10 @@ class IDXRemediationTableViewController: UITableViewController, IDXRemediationCo
             } receiveValue: { (response) in
                 signin.proceed(to: response)
             }
+    }
+    
+    @IBAction func continueAction(_ sender: Any) {
+        proceed(to: remediationOption, from: sender)
     }
     
     @IBAction func cancelAction(_ sender: Any) {
@@ -141,20 +145,34 @@ extension IDXRemediationTableViewController: SigninRowDelegate {
             tableView.reloadData()
         }
     }
+
+    func enrollment(action: Signin.EnrollmentAction) {
+        var remediationOption: IDXClient.Remediation.Option?
+        switch action {
+        case .send:
+            remediationOption = response?.currentAuthenticatorEnrollment?.send
+        case .resend:
+            remediationOption = response?.currentAuthenticatorEnrollment?.resend
+        case .recover:
+            remediationOption = response?.currentAuthenticatorEnrollment?.recover
+        }
+        
+        proceed(to: remediationOption)
+    }
 }
 
 extension Signin.Row.Kind {
     var reuseIdentifier: String {
         switch self {
-        case .label(field: _):     return "Label"
-        case .message(message: _): return "Message"
-        case .text(field: _):      return "Text"
-        case .toggle(field: _):    return "Toggle"
+        case .label(field: _):   return "Label"
+        case .message(style: _): return "Message"
+        case .text(field: _):    return "Text"
+        case .toggle(field: _):  return "Toggle"
         case .option(field: _,
-                     option: _):   return "Option"
+                     option: _): return "Option"
         case .select(field: _,
-                     values: _):   return "Picker"
-        case .button:              return "Button"
+                     values: _): return "Picker"
+        case .button:            return "Button"
         }
     }
 }
@@ -167,11 +185,16 @@ extension Signin.Row {
                 cell.fieldLabel.text = field.label
             }
             
-        case .message(message: let message):
+        case .message(style: let style):
             if let cell = cell as? IDXMessageTableViewCell {
-                cell.messageLabel.text = message.message
-                cell.messageLabel.accessibilityIdentifier = message.localizationKey
-                cell.type = message.type
+                cell.type = style
+                cell.update = {
+                    switch style {
+                    case .enrollment(action: let action):
+                        self.delegate?.enrollment(action: action)
+                    default: break
+                    }
+                }
             }
             
         case .text(field: let field):

@@ -225,7 +225,7 @@ extension IDXClient.APIVersion1 {
         
         struct Message: Codable {
             let type: String
-            let i18n: Localization
+            let i18n: Localization?
             let message: String
 
             struct Localization: Codable {
@@ -239,7 +239,7 @@ extension IDXClient.APIVersion1 {
             init(from decoder: Decoder) throws {
                 let container = try decoder.container(keyedBy: CodingKeys.self)
                 type = try container.decode(String.self, forKey: .type)
-                i18n = try container.decode(Localization.self, forKey: .i18n)
+                i18n = try container.decodeIfPresent(Localization.self, forKey: .i18n)
                 message = try container.decode(String.self, forKey: .message)
             }
         }

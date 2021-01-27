@@ -32,12 +32,14 @@ public class URLSessionAudit: CustomStringConvertible {
         let method: String?
         let headers: [AnyHashable:Any]?
         let statusCode: Int?
-        let body: Data?
+        let requestBody: Data?
+        let responseBody: Data?
         
         init(with request: URLRequest, response: URLResponse?, body data: Data?) {
             date = Date()
             url = request.url
             method = request.httpMethod
+            requestBody = request.httpBody
             if let httpResponse = response as? HTTPURLResponse {
                 headers = httpResponse.allHeaderFields
                 statusCode = httpResponse.statusCode
@@ -45,17 +47,25 @@ public class URLSessionAudit: CustomStringConvertible {
                 headers = nil
                 statusCode = nil
             }
-            body = data
+            responseBody = data
         }
 
         var description: String {
-            let bodyString: String
-            if let body = body {
-                bodyString = String(data: body, encoding: .utf8) ?? "<invalid data>"
+            let requestString: String
+            if let body = requestBody {
+                requestString = String(data: body, encoding: .utf8) ?? "<invalid data>"
             } else {
-                bodyString = "<no body>"
+                requestString = "<no request body>"
             }
-            return "\(method ?? "<null>") \(url?.absoluteString ?? "<null>")\nStatus code: \(statusCode ?? 0)\n\(bodyString)\n"
+
+            let responseString: String
+            if let body = responseBody {
+                responseString = String(data: body, encoding: .utf8) ?? "<invalid data>"
+            } else {
+                responseString = "<no response body>"
+            }
+            
+            return "\(method ?? "<null>") \(url?.absoluteString ?? "<null>")\nRequest Body:\n\(requestString)\nStatus code: \(statusCode ?? 0)\n\(responseString)\n"
         }
     }
     

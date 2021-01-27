@@ -9,12 +9,12 @@ import UIKit
 
 class IDXButtonTableViewCell: UITableViewCell {
     enum Kind: CaseIterable {
-        case cancel
+        case restart
         case next
         
         var index: Int {
             switch self {
-            case .cancel:
+            case .restart:
                 return 0
             case .next:
                 return 1
@@ -33,7 +33,7 @@ class IDXButtonTableViewCell: UITableViewCell {
 
     private func button(for kind: Kind) -> UIButton {
         switch kind {
-        case .cancel:
+        case .restart:
             return cancelButton
         case .next:
             return continueButton
@@ -62,7 +62,7 @@ class IDXButtonTableViewCell: UITableViewCell {
     
     @IBAction func cancelAction(_ sender: Any) {
         if let updateFunc = update {
-            updateFunc(sender, .cancel)
+            updateFunc(sender, .restart)
         }
     }
     

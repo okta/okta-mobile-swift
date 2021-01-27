@@ -504,13 +504,13 @@ public extension IDXClient {
         /// A localization key representing this message.
         ///
         /// This allows the text represented by this message to be customized or localized as needed.
-        @objc public let localizationKey: String
+        @objc public let localizationKey: String?
         
         /// The default text for this message.
         @objc public let message: String
         
         internal init(type: String,
-                      localizationKey: String,
+                      localizationKey: String?,
                       message: String)
         {
             self.type = MessageClass(string: type)

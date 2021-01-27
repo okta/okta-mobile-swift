@@ -323,7 +323,7 @@ class IDXClientV1ResponseTests: XCTestCase {
             XCTAssertEqual(obj.messages?.type, "array")
             XCTAssertEqual(obj.messages?.value.count, 1)
             XCTAssertEqual(obj.messages?.value[0].type, "ERROR")
-            XCTAssertEqual(obj.messages?.value[0].i18n.key, "authfactor.challenge.question_factor.answer_invalid")
+            XCTAssertEqual(obj.messages?.value[0].i18n?.key, "authfactor.challenge.question_factor.answer_invalid")
             XCTAssertEqual(obj.messages?.value[0].message, "Your answer doesn't match our records. Please try again.")
             
             let publicObj = IDXClient.Remediation.FormValue(client: clientMock, v1: obj)
@@ -389,7 +389,7 @@ class IDXClientV1ResponseTests: XCTestCase {
             XCTAssertEqual(obj.messages?.type, "array")
             XCTAssertEqual(obj.messages?.value.count, 1)
             XCTAssertEqual(obj.messages?.value[0].type, "ERROR")
-            XCTAssertEqual(obj.messages?.value[0].i18n.key, "errors.E0000004")
+            XCTAssertEqual(obj.messages?.value[0].i18n?.key, "errors.E0000004")
             XCTAssertEqual(obj.messages?.value[0].message, "Authentication failed")
             
             let publicObj = IDXClient.Response(client: clientMock, v1: obj)
@@ -399,6 +399,47 @@ class IDXClientV1ResponseTests: XCTestCase {
             XCTAssertEqual(publicObj.messages?.first?.type, .error)
             XCTAssertEqual(publicObj.messages?.first?.localizationKey, "errors.E0000004")
             XCTAssertEqual(publicObj.messages?.first?.message, "Authentication failed")
+        }
+    }
+
+    func testMessage() throws {
+        try decode(type: API.Response.Message.self, """
+         {
+            "class" : "ERROR",
+            "i18n" : {
+               "key" : "errors.E0000004"
+            },
+            "message" : "Authentication failed"
+         }
+        """) { (obj) in
+            XCTAssertEqual(obj.type, "ERROR")
+            XCTAssertEqual(obj.i18n?.key, "errors.E0000004")
+            XCTAssertEqual(obj.message, "Authentication failed")
+            
+            let publicObj = IDXClient.Message(client: clientMock, v1: obj)
+            XCTAssertNotNil(publicObj)
+            XCTAssertEqual(publicObj?.type, .error)
+            XCTAssertEqual(publicObj?.localizationKey, "errors.E0000004")
+            XCTAssertEqual(publicObj?.message, "Authentication failed")
+        }
+    }
+
+    func testMessageWithEmptyLocKey() throws {
+        try decode(type: API.Response.Message.self, """
+         {
+            "class" : "INFO",
+            "message" : "Authentication failed"
+         }
+        """) { (obj) in
+            XCTAssertEqual(obj.type, "INFO")
+            XCTAssertNil(obj.i18n)
+            XCTAssertEqual(obj.message, "Authentication failed")
+            
+            let publicObj = IDXClient.Message(client: clientMock, v1: obj)
+            XCTAssertNotNil(publicObj)
+            XCTAssertEqual(publicObj?.type, .info)
+            XCTAssertNil(publicObj?.localizationKey)
+            XCTAssertEqual(publicObj?.message, "Authentication failed")
         }
     }
 

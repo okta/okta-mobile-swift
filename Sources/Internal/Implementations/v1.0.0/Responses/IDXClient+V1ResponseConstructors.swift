@@ -90,7 +90,7 @@ extension IDXClient.Message {
     internal convenience init?(client: IDXClientAPIImpl, v1 object: V1.Response.Message?) {
         guard let object = object else { return nil }
         self.init(type: object.type,
-                  localizationKey: object.i18n.key,
+                  localizationKey: object.i18n?.key,
                   message: object.message)
     }
 }

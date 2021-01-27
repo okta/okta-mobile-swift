@@ -59,7 +59,30 @@ public class Signin {
         }
         
         guard let controller = controller(for: response) else {
-            failure(with: SigninError.genericError(message: "Could not find a controller for this response"))
+            if let message = response.messages?.first {
+                let alert = UIAlertController(title: "Error",
+                                              message: message.message,
+                                              preferredStyle: .alert)
+                alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: { (action) in
+                    self.failure(with: SigninError.genericError(message: "Cancelled login"))
+                }))
+                alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { (action) in
+                    if response.canCancel {
+                        response.cancel { (response, error) in
+                            guard let response = response else {
+                                self.failure(with: SigninError.genericError(message: "Something went horribly wrong"))
+                                return
+                            }
+                            DispatchQueue.main.async {
+                                self.proceed(to: response)
+                            }
+                        }
+                    }
+                }))
+                navigationController.present(alert, animated: true, completion: nil)
+            } else {
+                failure(with: SigninError.genericError(message: "Could not find a controller for this response"))
+            }
             return
         }
         
