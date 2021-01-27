@@ -75,6 +75,39 @@ extension IDXClient.APIVersion1 {
             let value: [T]
         }
 
+        struct RelatesTo: Decodable {
+            enum Path: Equatable {
+                init(string: String) {
+                    if string == "$" {
+                        self = .root
+                    } else if let index = Int(string) {
+                        self = .array(index: index)
+                    } else {
+                        self = .property(name: string)
+                    }
+                }
+                
+                case root
+                case property(name: String)
+                case array(index: Int)
+            }
+            
+            let path: [Path]
+            init(from decoder: Decoder) throws {
+                let container = try decoder.singleValueContainer()
+                guard let value = try? container.decode(String.self) else {
+                    throw DecodingError.dataCorrupted(.init(codingPath: decoder.codingPath,
+                                                            debugDescription: "Invalid relatesTo value \(decoder.codingPath)"))
+                }
+                
+                let charset = CharacterSet(charactersIn: ".[]")
+                path = value
+                    .components(separatedBy: charset)
+                    .filter { !$0.isEmpty }
+                    .compactMap { Path(string: $0) }
+            }
+        }
+        
         struct User: Decodable {
             let id: String
         }
@@ -127,7 +160,7 @@ extension IDXClient.APIVersion1 {
             let href: URL
             let value: [FormValue]
             let accepts: String
-            let relatesTo: [String]?
+            let relatesTo: [RelatesTo]?
             let refresh: Double?
         }
         
@@ -151,7 +184,7 @@ extension IDXClient.APIVersion1 {
             let mutable: Bool?
             let form: CompositeFormValue?
             let options: [FormValue]?
-            let relatesTo: String?
+            let relatesTo: RelatesTo?
             let messages: IonCollection<Message>?
             
             private enum CodingKeys: String, CodingKey {
@@ -168,7 +201,7 @@ extension IDXClient.APIVersion1 {
                 secret = try container.decodeIfPresent(Bool.self, forKey: .secret)
                 visible = try container.decodeIfPresent(Bool.self, forKey: .visible)
                 mutable = try container.decodeIfPresent(Bool.self, forKey: .mutable)
-                relatesTo = try container.decodeIfPresent(String.self, forKey: .relatesTo)
+                relatesTo = try container.decodeIfPresent(RelatesTo.self, forKey: .relatesTo)
                 options = try container.decodeIfPresent([FormValue].self, forKey: .options)
                 messages = try container.decodeIfPresent(IonCollection<Message>.self, forKey: .messages)
 
@@ -216,7 +249,7 @@ extension IDXClient.APIVersion1 {
     /// Internal OIE API v1.0.0 token response.
     final class Token: NSObject, Decodable {
         let tokenType: String
-        let expiresIn: Int  // TODO: Do we need to represent the token expiration using a combination of the `expires_in` duration and the HTTP Date header field?
+        let expiresIn: Int
         let accessToken: String
         let scope: String
         let refreshToken: String?

@@ -24,6 +24,7 @@
 		966A1E76258BDB1B00864DB7 /* URLSessionProtocolTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 966A1E75258BDB1B00864DB7 /* URLSessionProtocolTests.swift */; };
 		966A1E80258BEADB00864DB7 /* IDXClientError+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 966A1E7F258BEADB00864DB7 /* IDXClientError+Extensions.swift */; };
 		967102CA2587F93E00D5D85F /* URLSessionMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 967102C92587F93D00D5D85F /* URLSessionMock.swift */; };
+		96A21F3225C0A5D7006C7BBB /* IDXRelatesToParserTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96A21F3125C0A5D7006C7BBB /* IDXRelatesToParserTests.swift */; };
 		96C51E6A25BA050D007A2519 /* IDXClient+Response.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96C51E6825BA050D007A2519 /* IDXClient+Response.swift */; };
 		96C51E6B25BA050D007A2519 /* IDXClient+ResponseTypes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96C51E6925BA050D007A2519 /* IDXClient+ResponseTypes.swift */; };
 		96C51E7325BA09CB007A2519 /* IDXResponseTypeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96C51E7225BA09CB007A2519 /* IDXResponseTypeTests.swift */; };
@@ -34,9 +35,9 @@
 		96DCDCFC258844AD009487CB /* ReceivesIONJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96DCDCFB258844AD009487CB /* ReceivesIONJSON.swift */; };
 		96E36E2C25B630F1003F0B3B /* MFA-Email in Resources */ = {isa = PBXBuildFile; fileRef = 96E36E2B25B630F1003F0B3B /* MFA-Email */; };
 		96F5417D258A843300D3995F /* IDXClient+V1ResponseConstructors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96F5417C258A843300D3995F /* IDXClient+V1ResponseConstructors.swift */; };
-		96F8B35125BF480200DAECDC /* RestartTransaction in Resources */ = {isa = PBXBuildFile; fileRef = 96F8B35025BF480200DAECDC /* RestartTransaction */; };
 		96F8B33F25BB446300DAECDC /* URLSessionAudit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96F8B33E25BB446300DAECDC /* URLSessionAudit.swift */; };
 		96F8B34325BB46C200DAECDC /* MFA-SOP in Resources */ = {isa = PBXBuildFile; fileRef = 96F8B34225BB46C200DAECDC /* MFA-SOP */; };
+		96F8B35125BF480200DAECDC /* RestartTransaction in Resources */ = {isa = PBXBuildFile; fileRef = 96F8B35025BF480200DAECDC /* RestartTransaction */; };
 		96F8F18E25802FAD00DA2701 /* OktaIdx.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 96F8F18425802FAD00DA2701 /* OktaIdx.framework */; };
 		96F8F1BA258049B000DA2701 /* IDXVersion+InternalExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96F8F1B9258049B000DA2701 /* IDXVersion+InternalExtension.swift */; };
 		96F8F1C125804A0C00DA2701 /* IDXClientVersionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96F8F1C025804A0C00DA2701 /* IDXClientVersionTests.swift */; };
@@ -94,6 +95,7 @@
 		966A1E75258BDB1B00864DB7 /* URLSessionProtocolTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLSessionProtocolTests.swift; sourceTree = "<group>"; };
 		966A1E7F258BEADB00864DB7 /* IDXClientError+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "IDXClientError+Extensions.swift"; sourceTree = "<group>"; };
 		967102C92587F93D00D5D85F /* URLSessionMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLSessionMock.swift; sourceTree = "<group>"; };
+		96A21F3125C0A5D7006C7BBB /* IDXRelatesToParserTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IDXRelatesToParserTests.swift; sourceTree = "<group>"; };
 		96C51E6825BA050D007A2519 /* IDXClient+Response.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "IDXClient+Response.swift"; sourceTree = "<group>"; };
 		96C51E6925BA050D007A2519 /* IDXClient+ResponseTypes.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "IDXClient+ResponseTypes.swift"; sourceTree = "<group>"; };
 		96C51E7225BA09CB007A2519 /* IDXResponseTypeTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IDXResponseTypeTests.swift; sourceTree = "<group>"; };
@@ -104,9 +106,9 @@
 		96DCDCFB258844AD009487CB /* ReceivesIONJSON.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReceivesIONJSON.swift; sourceTree = "<group>"; };
 		96E36E2B25B630F1003F0B3B /* MFA-Email */ = {isa = PBXFileReference; lastKnownFileType = folder; path = "MFA-Email"; sourceTree = "<group>"; };
 		96F5417C258A843300D3995F /* IDXClient+V1ResponseConstructors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "IDXClient+V1ResponseConstructors.swift"; sourceTree = "<group>"; };
-		96F8B35025BF480200DAECDC /* RestartTransaction */ = {isa = PBXFileReference; lastKnownFileType = folder; path = RestartTransaction; sourceTree = "<group>"; };
 		96F8B33E25BB446300DAECDC /* URLSessionAudit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLSessionAudit.swift; sourceTree = "<group>"; };
 		96F8B34225BB46C200DAECDC /* MFA-SOP */ = {isa = PBXFileReference; lastKnownFileType = folder; path = "MFA-SOP"; sourceTree = "<group>"; };
+		96F8B35025BF480200DAECDC /* RestartTransaction */ = {isa = PBXFileReference; lastKnownFileType = folder; path = RestartTransaction; sourceTree = "<group>"; };
 		96F8F18425802FAD00DA2701 /* OktaIdx.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = OktaIdx.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		96F8F18D25802FAD00DA2701 /* okta-idx-ios-tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "okta-idx-ios-tests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		96F8F1AC25803BE100DA2701 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -245,6 +247,7 @@
 				964A44B7259A9772002CB250 /* ScenarioTests.swift */,
 				966A1E75258BDB1B00864DB7 /* URLSessionProtocolTests.swift */,
 				96C51E7225BA09CB007A2519 /* IDXResponseTypeTests.swift */,
+				96A21F3125C0A5D7006C7BBB /* IDXRelatesToParserTests.swift */,
 			);
 			path = Tests;
 			sourceTree = "<group>";
@@ -523,6 +526,7 @@
 				964A44E1259D3331002CB250 /* IDXClientV1ResponseTests.swift in Sources */,
 				96F8F1C125804A0C00DA2701 /* IDXClientVersionTests.swift in Sources */,
 				964A44BE259BB8FC002CB250 /* IDXAcceptTypeTests.swift in Sources */,
+				96A21F3225C0A5D7006C7BBB /* IDXRelatesToParserTests.swift in Sources */,
 				96C51E7325BA09CB007A2519 /* IDXResponseTypeTests.swift in Sources */,
 				967102CA2587F93E00D5D85F /* URLSessionMock.swift in Sources */,
 			);

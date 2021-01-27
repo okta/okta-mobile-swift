@@ -45,7 +45,7 @@
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <color key="sectionIndexBackgroundColor" systemColor="systemBackgroundColor"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" restorationIdentifier="IDXTextTableViewCell" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="Label" id="FSc-td-4m7" userLabel="Label" customClass="IDXLabelTableViewCell" customModule="OktaIdxExample" customModuleProvider="target">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="Label" id="FSc-td-4m7" userLabel="Label" customClass="IDXLabelTableViewCell" customModule="OktaIdxExample" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="55.5" width="414" height="35.5"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="FSc-td-4m7" id="p5C-ye-pSm">
@@ -75,7 +75,7 @@
                                     <outlet property="fieldLabel" destination="zXp-iJ-XmK" id="13t-EG-7xa"/>
                                 </connections>
                             </tableViewCell>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" restorationIdentifier="IDXTextTableViewCell" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="Message" id="QHP-mb-W6C" userLabel="Message" customClass="IDXMessageTableViewCell" customModule="OktaIdxExample" customModuleProvider="target">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="Message" id="QHP-mb-W6C" userLabel="Message" customClass="IDXMessageTableViewCell" customModule="OktaIdxExample" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="91" width="414" height="28"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="QHP-mb-W6C" id="ByI-2B-YcO">
@@ -110,7 +110,7 @@
                                     <outlet property="messageTypeImageView" destination="fUD-cq-FWv" id="oeW-qZ-n4j"/>
                                 </connections>
                             </tableViewCell>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" restorationIdentifier="IDXTextTableViewCell" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="Text" id="PHo-rh-7fp" customClass="IDXTextTableViewCell" customModule="OktaIdxExample" customModuleProvider="target">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="Text" id="PHo-rh-7fp" customClass="IDXTextTableViewCell" customModule="OktaIdxExample" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="119" width="414" height="70.5"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="PHo-rh-7fp" id="Lka-8Z-dZA">
@@ -149,7 +149,7 @@
                                     <outlet property="textField" destination="ecT-xC-Xz4" id="qVU-sG-suB"/>
                                 </connections>
                             </tableViewCell>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" restorationIdentifier="IDXTextTableViewCell" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="Picker" id="Hf3-jo-VMq" customClass="IDXPickerTableViewCell" customModule="OktaIdxExample" customModuleProvider="target">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="Picker" id="Hf3-jo-VMq" customClass="IDXPickerTableViewCell" customModule="OktaIdxExample" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="189.5" width="414" height="252.5"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Hf3-jo-VMq" id="0Gu-Nx-S4T">
@@ -187,7 +187,7 @@
                                     <outlet property="pickerView" destination="96l-TI-rhE" id="hwZ-fZ-w8O"/>
                                 </connections>
                             </tableViewCell>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" restorationIdentifier="IDXTextTableViewCell" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="Toggle" id="ASg-OQ-1dX" customClass="IDXToggleTableViewCell" customModule="OktaIdxExample" customModuleProvider="target">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="Toggle" id="ASg-OQ-1dX" customClass="IDXToggleTableViewCell" customModule="OktaIdxExample" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="442" width="414" height="67.5"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="ASg-OQ-1dX" id="5PE-a9-gxz">
@@ -224,23 +224,29 @@
                                     <outlet property="switchView" destination="Uc9-RO-ou7" id="xtE-8b-BUY"/>
                                 </connections>
                             </tableViewCell>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" restorationIdentifier="IDXTextTableViewCell" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="Option" id="PVy-An-OEY" customClass="IDXOptionTableViewCell" customModule="OktaIdxExample" customModuleProvider="target">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="Option" id="PVy-An-OEY" customClass="IDXOptionTableViewCell" customModule="OktaIdxExample" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="509.5" width="414" height="36.5"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="PVy-An-OEY" id="8sr-2B-Tnf">
                                     <rect key="frame" x="0.0" y="0.0" width="414" height="36.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
+                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="smallcircle.fill.circle" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="JgE-iq-xRC">
+                                            <rect key="frame" x="16" y="9" width="20" height="19"/>
+                                        </imageView>
                                         <stackView opaque="NO" contentMode="scaleToFill" distribution="equalSpacing" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="d3Q-KH-HiX">
-                                            <rect key="frame" x="16" y="8" width="129" height="20.5"/>
+                                            <rect key="frame" x="44" y="8" width="172" height="20.5"/>
                                             <subviews>
-                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="smallcircle.fill.circle" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="JgE-iq-xRC">
-                                                    <rect key="frame" x="0.0" y="0.5" width="20" height="19.5"/>
-                                                </imageView>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Option Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="a5M-hu-XrB">
-                                                    <rect key="frame" x="28" y="0.0" width="101" height="20.5"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="101" height="20.5"/>
                                                     <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
                                                     <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Detail label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="k2H-5N-hWG">
+                                                    <rect key="frame" x="109" y="0.0" width="63" height="20.5"/>
+                                                    <fontDescription key="fontDescription" style="UICTFontTextStyleCaption1"/>
+                                                    <color key="textColor" systemColor="secondaryLabelColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                             </subviews>
@@ -248,14 +254,17 @@
                                     </subviews>
                                     <gestureRecognizers/>
                                     <constraints>
-                                        <constraint firstItem="d3Q-KH-HiX" firstAttribute="leading" secondItem="8sr-2B-Tnf" secondAttribute="leading" constant="16" id="2sX-J8-lBa"/>
                                         <constraint firstAttribute="bottom" secondItem="d3Q-KH-HiX" secondAttribute="bottom" constant="8" id="4yr-5j-YGj"/>
                                         <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="d3Q-KH-HiX" secondAttribute="trailing" constant="16" id="Qag-5c-ZEY"/>
+                                        <constraint firstItem="d3Q-KH-HiX" firstAttribute="leading" secondItem="JgE-iq-xRC" secondAttribute="trailing" constant="8" id="eti-pp-tlE"/>
                                         <constraint firstItem="d3Q-KH-HiX" firstAttribute="top" secondItem="8sr-2B-Tnf" secondAttribute="top" constant="8" id="gx7-ua-ThS"/>
+                                        <constraint firstItem="JgE-iq-xRC" firstAttribute="leading" secondItem="8sr-2B-Tnf" secondAttribute="leading" constant="16" id="irM-dz-GVQ"/>
+                                        <constraint firstItem="JgE-iq-xRC" firstAttribute="centerY" secondItem="8sr-2B-Tnf" secondAttribute="centerY" id="z92-jJ-Asf"/>
                                     </constraints>
                                 </tableViewCellContentView>
                                 <connections>
                                     <outlet property="checkmarkView" destination="JgE-iq-xRC" id="E7L-sV-Dr0"/>
+                                    <outlet property="detailLabel" destination="k2H-5N-hWG" id="sSx-Yq-Aml"/>
                                     <outlet property="fieldLabel" destination="a5M-hu-XrB" id="Mdo-C1-0K9"/>
                                 </connections>
                             </tableViewCell>
@@ -352,6 +361,9 @@
         </namedColor>
         <systemColor name="labelColor">
             <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+        <systemColor name="secondaryLabelColor">
+            <color red="0.23529411764705882" green="0.23529411764705882" blue="0.2627450980392157" alpha="0.59999999999999998" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>

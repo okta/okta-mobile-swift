@@ -208,6 +208,10 @@ class ScenarioTests: XCTestCase {
                     let remediation = response?.remediation?.remediationOptions.first
                     XCTAssertEqual(remediation?.name, "challenge-authenticator")
 
+                    let currentEnrollment = response?.currentAuthenticatorEnrollment
+                    let related = remediation?.relatesTo?.first as? IDXClient.Authenticator.CurrentEnrollment
+                    XCTAssertEqual(related, currentEnrollment)
+
                     remediation?.proceed(with: ["credentials": [ "passcode": "password" ]]) { (response, error) in
                         XCTAssertNotNil(response)
                         XCTAssertNil(error)
@@ -220,6 +224,10 @@ class ScenarioTests: XCTestCase {
                             .filter { $0.name == "authenticator" }.first?
                             .options?.filter { $0.label == "Email" }.first
                         XCTAssertNotNil(emailOption)
+                        
+                        let authenticator = response?.authenticatorEnrollments?.first
+                        let related = emailOption?.relatesTo as? IDXClient.Authenticator
+                        XCTAssertEqual(related, authenticator)
 
                         response?.cancel() { (response, error) in
                             XCTAssertNotNil(response)

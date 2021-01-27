@@ -15,6 +15,27 @@ class IDXClientV1ResponseTests: XCTestCase {
                                                                                clientSecret: nil,
                                                                                scopes: ["scope"],
                                                                                redirectUri: "redirect:/"))
+    var response: API.Response {
+        return try! decode(type: API.Response.self, """
+            {
+               "cancel" : {
+                  "accepts" : "application/json; okta-version=1.0.0",
+                  "href" : "https://example.com/idp/idx/cancel",
+                  "method" : "POST",
+                  "name" : "cancel",
+                  "produces" : "application/ion+json; okta-version=1.0.0",
+                  "rel" : [
+                     "create-form"
+                  ],
+                  "value" : []
+               },
+               "expiresAt" : "2021-01-22T19:37:32.000Z",
+               "intent" : "LOGIN",
+               "stateHandle" : "ahc52KautBHCANs3ScZjLfRcxFjP_N5mqOTYouqHFP",
+               "version" : "1.0.0"
+            }
+        """)
+    }
     
     func data(for json: String) -> Data {
         return json.data(using: .utf8)!
@@ -419,7 +440,7 @@ class IDXClientV1ResponseTests: XCTestCase {
             XCTAssertEqual(obj.type, "object")
             XCTAssertEqual(obj.value.id, "0ZczewGCFPlxNYYcLq5i")
 
-            let publicObj = IDXClient.User(v1: obj.value)
+            let publicObj = IDXClient.User(v1:  obj.value)
             XCTAssertNotNil(publicObj)
             XCTAssertEqual(publicObj?.id, "0ZczewGCFPlxNYYcLq5i")
         }

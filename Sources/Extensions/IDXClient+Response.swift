@@ -197,7 +197,7 @@ public extension IDXClient {
     
     /// Represents information describing the available authenticators and enrolled authenticators.
     @objc(IDXAuthenticator)
-    final class Authenticator: NSObject {
+    class Authenticator: NSObject {
         @objc(IDXAuthenticatorType)
         public enum AuthenticatorType: Int {
             case unknown
@@ -228,22 +228,7 @@ public extension IDXClient {
         
         /// Describes details about the current authenticator enrollment being verified, and any extra actions that may be taken.
         @objc(IDXCurrentAuthenticatorEnrollment)
-        public final class CurrentEnrollment: NSObject {
-            /// Unique identifier for this enrollment
-            @objc(identifier)
-            public let id: String
-            
-            /// The user-visible name to use for this authenticator enrollment.
-            @objc public let displayName: String
-            
-            /// The type of this authenticator, or `unknown` if the type isn't represented by this enumeration.
-            @objc public let type: AuthenticatorType
-            
-            /// The string representation of this type.
-            @objc public let typeName: String
-            @objc public let profile: [String:String]?
-            @nonobjc public let methods: [AuthenticatorMethodType]?
-            @objc public let methodNames: [String]?
+        public final class CurrentEnrollment: Authenticator {
             @objc public let send: Remediation.Option?
             @objc public let resend: Remediation.Option?
             @objc public let poll: Remediation.Option?
@@ -259,22 +244,12 @@ public extension IDXClient {
                           poll: Remediation.Option?,
                           recover: Remediation.Option?)
             {
-                self.id = id
-                self.displayName = displayName
-                self.type = AuthenticatorType(string: type)
-                self.typeName = type
-                self.methods = methods?.compactMap {
-                    guard let type = $0["type"] else { return nil }
-                    return AuthenticatorMethodType(string: type)
-                }
-                self.methodNames = methods?.compactMap { $0["type"] }
-                self.profile = profile
                 self.send = send
                 self.resend = resend
                 self.poll = poll
                 self.recover = recover
              
-                super.init()
+                super.init(id: id, displayName: displayName, type: type, methods: methods, profile: profile)
             }
         }
         
@@ -321,7 +296,7 @@ public extension IDXClient {
     @objc(IDXRemediation)
     final class Remediation: NSObject {
         /// The remediation type, described in the response payload.
-        public var type: String // TODO: Is this really necessary? Is it every not `array`?
+        public var type: String
         
         /// The array of remediation options available to the developer to proceed through the authentication workflow.
         public let remediationOptions: [Option]
@@ -374,10 +349,9 @@ public extension IDXClient {
             /// Messages reported from the server at the FormValue level should be considered relevant to the individual form field, and as a result should be displayed to the user alongside any UI elements associated with it.
             @objc public let messages: [Message]?
             
-            public func relatesTo() -> AnyObject? {
-                return nil
-            }
-            
+            @objc public internal(set) var relatesTo: AnyObject?
+            internal let v1RelatesTo: APIVersion1.Response.RelatesTo?
+
             /// For composite or nested forms, this method composes the list of form values, merging the supplied parameters along with the defaults included in the form.
             ///
             /// Validation checks for required and immutable values are performed, which will throw exceptions if any of those parameters fail validation.
@@ -403,6 +377,7 @@ public extension IDXClient {
                           required: Bool,
                           secret: Bool,
                           form: [FormValue]?,
+                          relatesTo:APIVersion1.Response.RelatesTo?,
                           options: [FormValue]?,
                           messages: [Message]?)
             {
@@ -415,6 +390,7 @@ public extension IDXClient {
                 self.required = required
                 self.secret = secret
                 self.form = form
+                self.v1RelatesTo = relatesTo
                 self.options = options
                 self.messages = messages
                 
@@ -442,13 +418,16 @@ public extension IDXClient {
             /// The enumeration type of this remediation step, based on the `name` value.
             @objc public let type: RemediationType
             
-            @objc public let method: String // TODO: Are method, href, accepts, etc necessary to the developer if they're using our SDK? Those should be internal implementation details. The developer can't really do anything with this information after all.
+            @objc public let method: String
             @objc public let href: URL
             @objc public let accepts: String
             
             /// A description of the form values that this remediation option supports and expects.
             @objc public let form: [FormValue]
             
+            @objc public internal(set) var relatesTo: [AnyObject]?
+            internal let v1RelatesTo: [APIVersion1.Response.RelatesTo]?
+
             public let refresh: TimeInterval?
             
             private weak var client: IDXClientAPIImpl?
@@ -460,6 +439,7 @@ public extension IDXClient {
                           href: URL,
                           accepts: String,
                           form: [FormValue],
+                          relatesTo: [APIVersion1.Response.RelatesTo]?,
                           refresh: TimeInterval?)
             {
                 self.client = client
@@ -470,6 +450,7 @@ public extension IDXClient {
                 self.href = href
                 self.accepts = accepts
                 self.form = form
+                self.v1RelatesTo = relatesTo
                 self.refresh = refresh
                 
                 super.init()

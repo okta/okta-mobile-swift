@@ -37,6 +37,7 @@ class IDXClientCombineTests: XCTestCase {
                                                         href: URL(string: "some://url")!,
                                                         accepts: "application/json",
                                                         form: [],
+                                                        relatesTo: nil,
                                                         refresh: nil)
         response = IDXClient.Response(client: api,
                                       stateHandle: "handle",

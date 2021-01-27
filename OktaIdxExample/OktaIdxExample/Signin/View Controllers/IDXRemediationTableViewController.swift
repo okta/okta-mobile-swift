@@ -202,6 +202,14 @@ extension Signin.Row {
                let fieldName = field.name {
                 let currentValue = self.delegate?.value(for: fieldName) as? IDXClient.Remediation.FormValue
                 
+                if let authenticator = option.relatesTo as? IDXClient.Authenticator,
+                   let profile = authenticator.profile
+                {
+                    cell.detailLabel.text = profile[authenticator.typeName]
+                } else {
+                    cell.detailLabel.text = nil
+                }
+                
                 cell.fieldLabel.text = option.label
                 cell.fieldLabel.accessibilityIdentifier = "\(fieldName).label"
                 cell.state = (currentValue == option) ? .checked : .unchecked
