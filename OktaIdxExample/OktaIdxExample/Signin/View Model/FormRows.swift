@@ -9,8 +9,8 @@ import Foundation
 import OktaIdx
 
 protocol SigninRowDelegate {
-    func row(row: Signin.Row, changedValue: (String,Any))
-    func value(for key: String) -> Any?
+    func row(row: Signin.Row, changedValue: (IDXClient.Remediation.FormValue,Any))
+    func value(for value: IDXClient.Remediation.FormValue) -> Any?
     func enrollment(action: Signin.EnrollmentAction)
 }
 
@@ -86,8 +86,7 @@ extension IDXClient.Remediation.FormValue {
                                     delegate: delegate))
 
                     if let optionForm = option.form,
-                       let fieldName = name,
-                       let chosenValue = delegate.value(for: fieldName) as? FormValue
+                       let chosenValue = delegate.value(for: self) as? FormValue
                     {
                         if chosenValue == option {
                             optionForm.forEach { childValue in

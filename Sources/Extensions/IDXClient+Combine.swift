@@ -47,6 +47,20 @@ extension IDXClient.Remediation.Option {
             }
         }
     }
+
+    public func proceed(using parameters: IDXClient.Remediation.Parameters) -> Future<IDXClient.Response, Error> {
+        return Future<IDXClient.Response, Error> { (promise) in
+            self.proceed(using: parameters) { (response, error) in
+                if let error = error {
+                    promise(.failure(error))
+                } else if let response = response {
+                    promise(.success(response))
+                } else {
+                    promise(.failure(IDXClientError.invalidResponseData))
+                }
+            }
+        }
+    }
 }
 
 @available(iOS 13.0, *)

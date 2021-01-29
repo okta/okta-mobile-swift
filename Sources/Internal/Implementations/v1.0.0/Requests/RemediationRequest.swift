@@ -10,7 +10,7 @@ import Foundation
 extension IDXClient.APIVersion1.RemediationRequest: IDXClientAPIRequest, ReceivesIDXResponse {
     typealias ResponseType = IDXClient.APIVersion1.Response
     
-    init(remediation option: IDXClient.Remediation.Option, parameters: [String:Any]? = nil) throws {
+    init(remediation option: IDXClient.Remediation.Option, parameters: [String:Any]) throws {
         guard let acceptType = IDXClient.APIVersion1.AcceptType(rawValue: option.accepts) else {
             throw IDXClientError.invalidRequestData
         }
@@ -18,7 +18,7 @@ extension IDXClient.APIVersion1.RemediationRequest: IDXClientAPIRequest, Receive
         self.init(method: option.method,
                   href: option.href,
                   accepts: acceptType,
-                  parameters: try option.formValues(with: parameters))
+                  parameters: parameters)
     }
     
     func urlRequest(using configuration: IDXClient.Configuration) -> URLRequest? {

@@ -14,6 +14,7 @@
 		961BE43E258406EC00DCE8AC /* PKCEExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 961BE43D258406EC00DCE8AC /* PKCEExtensions.swift */; };
 		961BE4492584184700DCE8AC /* PKCETests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 961BE4482584184700DCE8AC /* PKCETests.swift */; };
 		961DE96325897C6B007CAB16 /* Responses.swift in Sources */ = {isa = PBXBuildFile; fileRef = 961DE96225897C6B007CAB16 /* Responses.swift */; };
+		962C3BD125C33EE70066987C /* IDXRemediationParameterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 962C3BD025C33EE70066987C /* IDXRemediationParameterTests.swift */; };
 		964A44AC259A6285002CB250 /* AcceptType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 964A44AB259A6285002CB250 /* AcceptType.swift */; };
 		964A44B2259A90BE002CB250 /* IDXClientErrorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 964A44B1259A90BE002CB250 /* IDXClientErrorTests.swift */; };
 		964A44B8259A9772002CB250 /* ScenarioTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 964A44B7259A9772002CB250 /* ScenarioTests.swift */; };
@@ -21,6 +22,7 @@
 		964A44D4259D017A002CB250 /* Passcode in Resources */ = {isa = PBXBuildFile; fileRef = 964A44D3259D017A002CB250 /* Passcode */; };
 		964A44E1259D3331002CB250 /* IDXClientV1ResponseTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 964A44E0259D3331002CB250 /* IDXClientV1ResponseTests.swift */; };
 		964A44E5259E6870002CB250 /* IDXClient+Combine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 964A44E4259E6870002CB250 /* IDXClient+Combine.swift */; };
+		96549E2225C1FAF8007FCF29 /* IDXExtractFormValueTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96549E2125C1FAF8007FCF29 /* IDXExtractFormValueTests.swift */; };
 		966A1E76258BDB1B00864DB7 /* URLSessionProtocolTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 966A1E75258BDB1B00864DB7 /* URLSessionProtocolTests.swift */; };
 		966A1E80258BEADB00864DB7 /* IDXClientError+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 966A1E7F258BEADB00864DB7 /* IDXClientError+Extensions.swift */; };
 		967102CA2587F93E00D5D85F /* URLSessionMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 967102C92587F93D00D5D85F /* URLSessionMock.swift */; };
@@ -85,6 +87,7 @@
 		961BE43D258406EC00DCE8AC /* PKCEExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PKCEExtensions.swift; sourceTree = "<group>"; };
 		961BE4482584184700DCE8AC /* PKCETests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PKCETests.swift; sourceTree = "<group>"; };
 		961DE96225897C6B007CAB16 /* Responses.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Responses.swift; sourceTree = "<group>"; };
+		962C3BD025C33EE70066987C /* IDXRemediationParameterTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IDXRemediationParameterTests.swift; sourceTree = "<group>"; };
 		964A44AB259A6285002CB250 /* AcceptType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AcceptType.swift; sourceTree = "<group>"; };
 		964A44B1259A90BE002CB250 /* IDXClientErrorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IDXClientErrorTests.swift; sourceTree = "<group>"; };
 		964A44B7259A9772002CB250 /* ScenarioTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScenarioTests.swift; sourceTree = "<group>"; };
@@ -92,6 +95,7 @@
 		964A44D3259D017A002CB250 /* Passcode */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Passcode; sourceTree = "<group>"; };
 		964A44E0259D3331002CB250 /* IDXClientV1ResponseTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IDXClientV1ResponseTests.swift; sourceTree = "<group>"; };
 		964A44E4259E6870002CB250 /* IDXClient+Combine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "IDXClient+Combine.swift"; sourceTree = "<group>"; };
+		96549E2125C1FAF8007FCF29 /* IDXExtractFormValueTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IDXExtractFormValueTests.swift; sourceTree = "<group>"; };
 		966A1E75258BDB1B00864DB7 /* URLSessionProtocolTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLSessionProtocolTests.swift; sourceTree = "<group>"; };
 		966A1E7F258BEADB00864DB7 /* IDXClientError+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "IDXClientError+Extensions.swift"; sourceTree = "<group>"; };
 		967102C92587F93D00D5D85F /* URLSessionMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLSessionMock.swift; sourceTree = "<group>"; };
@@ -248,6 +252,8 @@
 				966A1E75258BDB1B00864DB7 /* URLSessionProtocolTests.swift */,
 				96C51E7225BA09CB007A2519 /* IDXResponseTypeTests.swift */,
 				96A21F3125C0A5D7006C7BBB /* IDXRelatesToParserTests.swift */,
+				96549E2125C1FAF8007FCF29 /* IDXExtractFormValueTests.swift */,
+				962C3BD025C33EE70066987C /* IDXRemediationParameterTests.swift */,
 			);
 			path = Tests;
 			sourceTree = "<group>";
@@ -513,6 +519,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				961BE4492584184700DCE8AC /* PKCETests.swift in Sources */,
+				962C3BD125C33EE70066987C /* IDXRemediationParameterTests.swift in Sources */,
 				964A44B8259A9772002CB250 /* ScenarioTests.swift in Sources */,
 				966A1E76258BDB1B00864DB7 /* URLSessionProtocolTests.swift in Sources */,
 				96F8F2302582C33A00DA2701 /* IDXClientAPIMock.swift in Sources */,
@@ -527,6 +534,7 @@
 				96F8F1C125804A0C00DA2701 /* IDXClientVersionTests.swift in Sources */,
 				964A44BE259BB8FC002CB250 /* IDXAcceptTypeTests.swift in Sources */,
 				96A21F3225C0A5D7006C7BBB /* IDXRelatesToParserTests.swift in Sources */,
+				96549E2225C1FAF8007FCF29 /* IDXExtractFormValueTests.swift in Sources */,
 				96C51E7325BA09CB007A2519 /* IDXResponseTypeTests.swift in Sources */,
 				967102CA2587F93E00D5D85F /* URLSessionMock.swift in Sources */,
 			);

@@ -46,7 +46,7 @@ extension IDXClient {
     }
     
     public func proceed(remediation option: Remediation.Option,
-                        data: [String : Any]? = nil,
+                        data: [String : Any] = [:],
                         completion: @escaping (IDXClient.Response?, Error?) -> Void)
     {
         self.api.proceed(remediation: option, data: data) { (response, error) in

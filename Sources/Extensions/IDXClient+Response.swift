@@ -293,6 +293,14 @@ public extension IDXClient {
     }
 
     /// The `IDXClient.Remediation` object describes the remediation steps the user, and application, can follow to proceed through the workflow.
+    ///
+    /// Nested remediation options can be accessed through keyed subscripting, for example:
+    ///
+    ///    response.remediation["select-authenticator-enroll"]
+    ///
+    /// This can be chained through to form values as well, such as:
+    ///
+    ///    response.remediation["identify"]["identifier"]
     @objc(IDXRemediation)
     final class Remediation: NSObject {
         /// The remediation type, described in the response payload.
@@ -300,6 +308,10 @@ public extension IDXClient {
         
         /// The array of remediation options available to the developer to proceed through the authentication workflow.
         public let remediationOptions: [Option]
+        
+        @objc public subscript(name: String) -> Option? {
+            get { remediationOptions.filter { $0.name == name }.first }
+        }
         
         private weak var client: IDXClientAPIImpl?
 
@@ -311,7 +323,53 @@ public extension IDXClient {
             super.init()
         }
         
+        /// Value object that stores the user-supplied values with their associated remediation FormValues.
+        /// This simplifies the way data can be supplied to remediation forms without requiring state management
+        /// to keep track of nested options, hierarchial data, required values, and so on.
+        ///
+        /// Example:
+        ///    parameters.setValue("user@okta.com", identifierFormValue)
+        ///    parameters[identifierFormValue] = "user@okta.com"
+        @objc(IDXRemediationParameters)
+        final public class Parameters: NSObject {
+            internal var storage: [FormValue:Any] = [:]
+            
+            /// Sets the user-supplied value for the given form Value.
+            /// - Parameters:
+            ///   - value: Value to set, or `nil` to unset.
+            ///   - formValue: `FormValue` instance to associate this value with.
+            public func setValue(_ value: Any?, for formValue: FormValue) {
+                if let value = value {
+                    storage[formValue] = value
+                } else {
+                    storage.removeValue(forKey: formValue)
+                }
+            }
+            
+            /// Returns the user-supplied value for the given value.
+            /// *Note:* This will not show default values implicitly associated with the FormValue instance, only the values supplied to `setValue(:for:)`.
+            /// - Parameter formValue: The form value to find a value for.
+            /// - Returns: The assigned form value, or `nil` if none has been set yet.
+            public func value(for formValue: FormValue) -> Any? {
+                return storage[formValue] as Any?
+            }
+            
+            @objc public subscript(formValue: FormValue) -> Any? {
+                get {
+                    value(for: formValue)
+                }
+                
+                set (newValue) {
+                    setValue(newValue, for: formValue)
+                }
+            }
+        }
+        
         /// Describes an individual value within a form, used to collect and submit information from the user to proceed through the authentication workflow.
+        ///
+        /// Nested form values can be accessed through keyed subscripting, for example:
+        ///
+        ///    credentialsFormValue["passcode"]
         @objc(IDXFormValue)
         final public class FormValue: NSObject {
             /// The programmatic name for this form value.
@@ -349,6 +407,10 @@ public extension IDXClient {
             /// Messages reported from the server at the FormValue level should be considered relevant to the individual form field, and as a result should be displayed to the user alongside any UI elements associated with it.
             @objc public let messages: [Message]?
             
+            @objc public subscript(name: String) -> FormValue? {
+                get { form?.filter { $0.name == name }.first }
+            }
+            
             @objc public internal(set) var relatesTo: AnyObject?
             internal let v1RelatesTo: APIVersion1.Response.RelatesTo?
 
@@ -368,18 +430,19 @@ public extension IDXClient {
                 return try IDXClient.extractFormValues(from: form, with: params)
             }
             
-            internal init(name: String?,
-                          label: String?,
-                          type: String?,
-                          value: AnyObject?,
+
+            internal init(name: String? = nil,
+                          label: String? = nil,
+                          type: String? = nil,
+                          value: AnyObject? = nil,
                           visible: Bool,
                           mutable: Bool,
                           required: Bool,
                           secret: Bool,
-                          form: [FormValue]?,
-                          relatesTo:APIVersion1.Response.RelatesTo?,
-                          options: [FormValue]?,
-                          messages: [Message]?)
+                          form: [FormValue]? = nil,
+                          relatesTo:APIVersion1.Response.RelatesTo? = nil,
+                          options: [FormValue]? = nil,
+                          messages: [Message]? = nil)
             {
                 self.name = name
                 self.label = label
@@ -408,6 +471,10 @@ public extension IDXClient {
         /// 4. Other, customizable, verification steps.
         ///
         /// Each of the remediation options includes details about what form values should be collected from the user, and a description of the resulting request that should be sent to Okta to proceed to the next step.
+        ///
+        /// Nested form values can be accessed through keyed subscripting, for example:
+        ///
+        ///    remediationOption["identifier"]
         @objc(IDXRemediationOption)
         final public class Option: NSObject {
             @objc public let rel: [String] // TODO: Is this necessary to expose to the developer?
@@ -430,6 +497,10 @@ public extension IDXClient {
 
             public let refresh: TimeInterval?
             
+            @objc public subscript(name: String) -> FormValue? {
+                get { form.filter { $0.name == name }.first }
+            }
+
             private weak var client: IDXClientAPIImpl?
             
             internal init(client: IDXClientAPIImpl,
@@ -468,9 +539,30 @@ public extension IDXClient {
                     return
                 }
                 
-                client.proceed(remediation: self, data: dataFromUI, completion: completionHandler)
+                do {
+                    client.proceed(remediation: self,
+                                   data: try self.formValues(with: dataFromUI),
+                                   completion: completionHandler)
+                } catch {
+                    completionHandler(nil, error)
+                }
             }
-            
+
+            @objc public func proceed(using parameters: Parameters, completionHandler: @escaping (_ response: Response?, _ error: Error?) -> Void) {
+                guard let client = client else {
+                    completionHandler(nil, IDXClientError.invalidClient)
+                    return
+                }
+                
+                do {
+                    client.proceed(remediation: self,
+                                   data: try formValues(using: parameters) ?? [:],
+                                   completion: completionHandler)
+                } catch {
+                    completionHandler(nil, error)
+                }
+            }
+
             /// Apply the remediation option parameters, reconciling default values and mutability requirements.
             ///
             /// Validation checks for required and immutable values are performed, which will throw exceptions if any of those parameters fail validation.

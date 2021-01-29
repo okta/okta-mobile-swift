@@ -110,7 +110,7 @@ extension IDXClient.APIVersion1: IDXClientAPIImpl {
     }
     
     func proceed(remediation option: IDXClient.Remediation.Option,
-                 data: [String : Any]? = nil,
+                 data: [String : Any],
                  completion: @escaping (IDXClient.Response?, Error?) -> Void)
     {
         let request: RemediationRequest

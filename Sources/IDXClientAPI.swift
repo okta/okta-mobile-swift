@@ -46,12 +46,12 @@ public protocol IDXClientAPI {
     /// Proceeds to the given remediation option.
     /// - Parameters:
     ///   - option: Remediation option to proceed to.
-    ///   - data: Optional data to supply to the remediation step.
+    ///   - data: Data to supply to the remediation step.
     ///   - completion: Invoked when a response, or error, is received.
     ///   - response: The response describing the next steps available in this workflow.
     ///   - error: Describes the error that occurred, or `nil` if successful.
     @objc func proceed(remediation option: IDXClient.Remediation.Option,
-                       data: [String : Any]?,
+                       data: [String : Any],
                        completion: @escaping (_ response: IDXClient.Response?, _ error: Swift.Error?) -> Void)
     
     /// Exchanges the successful remediation response with a token.
