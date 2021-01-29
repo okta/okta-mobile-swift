@@ -68,7 +68,7 @@ class ResetTransactionScenarioTests: XCTestCase {
         
         // Cancel remediation
         XCTAssertTrue(app.tables.staticTexts["authenticator.label"].waitForExistence(timeout: 5.0))
-        app.buttons["Cancel"].tap()
+        app.buttons["Restart"].tap()
 
         // Back to the Username screen
         XCTAssertTrue(app.staticTexts["identifier.label"].waitForExistence(timeout: 5.0))

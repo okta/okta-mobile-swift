@@ -32,6 +32,7 @@ class IDXOptionTableViewCell: UITableViewCell {
     }
     
     @IBOutlet weak var fieldLabel: UILabel!
+    @IBOutlet weak var detailLabel: UILabel!
     @IBOutlet weak var checkmarkView: UIImageView!
     var update: (() -> Void)? = nil
     

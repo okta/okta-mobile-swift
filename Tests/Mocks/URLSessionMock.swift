@@ -8,6 +8,25 @@
 import Foundation
 @testable import OktaIdx
 
+extension IDXClient.Response {
+    class func response(client: IDXClientAPIImpl,
+                        folderName: String? = nil,
+                        fileName: String) throws -> IDXClient.Response
+    {
+        let bundle = Bundle(for: URLSessionMock.self)
+        guard let path = bundle.url(forResource: fileName,
+                                    withExtension: "json",
+                                    subdirectory: folderName) else {
+            throw IDXClientError.invalidHTTPResponse
+        }
+        
+        let data = try Data(contentsOf: path)
+        
+        let response = try JSONDecoder.idxResponseDecoder.decode(IDXClient.APIVersion1.Response.self, from: data)
+        return IDXClient.Response(client: client, v1: response)
+    }
+}
+
 class URLSessionMock: URLSessionProtocol {
     struct Call {
         let data: Data?

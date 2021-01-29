@@ -9,8 +9,9 @@ import Foundation
 import OktaIdx
 
 protocol SigninRowDelegate {
-    func row(row: Signin.Row, changedValue: (String,Any))
-    func value(for key: String) -> Any?
+    func row(row: Signin.Row, changedValue: (IDXClient.Remediation.FormValue,Any))
+    func value(for value: IDXClient.Remediation.FormValue) -> Any?
+    func enrollment(action: Signin.EnrollmentAction)
 }
 
 extension Signin {
@@ -28,10 +29,11 @@ extension Signin {
         /// Row element kinds.
         enum Kind {
             case label(field: IDXClient.Remediation.FormValue)
-            case message(message: IDXClient.Message)
+            case message(style: IDXMessageTableViewCell.Style)
             case text(field: IDXClient.Remediation.FormValue)
             case toggle(field: IDXClient.Remediation.FormValue)
             case option(field: IDXClient.Remediation.FormValue, option: IDXClient.Remediation.FormValue)
+            case select(field: IDXClient.Remediation.FormValue, values: [IDXClient.Remediation.FormValue])
             case button(kind: [IDXButtonTableViewCell.Kind])
         }
     }
@@ -40,6 +42,10 @@ extension Signin {
     struct Section {
         /// Array of rows to show in this section.
         let rows: [Row]
+    }
+    
+    enum EnrollmentAction {
+        case send, resend, recover
     }
 }
 
@@ -78,6 +84,16 @@ extension IDXClient.Remediation.FormValue {
                     rows.append(Row(kind: .option(field: self, option: option),
                                     parent: parent,
                                     delegate: delegate))
+
+                    if let optionForm = option.form,
+                       let chosenValue = delegate.value(for: self) as? FormValue
+                    {
+                        if chosenValue == option {
+                            optionForm.forEach { childValue in
+                                rows.append(contentsOf: childValue.remediationRow(parent: self, delegate: delegate))
+                            }
+                        }
+                    }
                 }
             } else if let form = form {
                 rows.append(contentsOf: form.flatMap { nested in
@@ -86,18 +102,34 @@ extension IDXClient.Remediation.FormValue {
             }
             
         default:
-            rows.append(Row(kind: .text(field: self),
-                            parent: parent,
-                            delegate: delegate))
+            if let options = options {
+                rows.append(Row(kind: .select(field: self, values: options),
+                                parent: parent,
+                                delegate: delegate))
+            } else {
+                rows.append(Row(kind: .text(field: self),
+                                parent: parent,
+                                delegate: delegate))
+            }
         }
         
         self.messages?.forEach { message in
-            rows.append(Row(kind: .message(message: message),
+            rows.append(Row(kind: .message(style: .message(message: message)),
                             parent: parent,
                             delegate: delegate))
         }
         
         return rows
+    }
+
+    var hasVisibleFields: Bool {
+        get {
+            if visible {
+                return true
+            }
+            
+            return (options?.filter { $0.hasVisibleFields }.count ?? 0 > 0)
+        }
     }
 }
 
@@ -116,7 +148,7 @@ extension IDXClient.Response {
         
         if let messages = messages {
             sections.append(Section(rows: messages.map { message in
-                Row(kind: .message(message: message),
+                Row(kind: .message(style: .message(message: message)),
                     parent: nil,
                     delegate: delegate)
             }))
@@ -125,10 +157,36 @@ extension IDXClient.Response {
         sections.append(Section(rows: form.flatMap { nested in
             nested.remediationRow(delegate: delegate)
         }))
+        
+        if let enrollment = currentAuthenticatorEnrollment {
+            var rows: [Row] = []
+
+            if enrollment.send != nil {
+                rows.append(Row(kind: .message(style: .enrollment(action: .send)),
+                                parent: nil,
+                                delegate: delegate))
+            }
+
+            if enrollment.resend != nil {
+                rows.append(Row(kind: .message(style: .enrollment(action: .resend)),
+                                parent: nil,
+                                delegate: delegate))
+            }
+
+            if enrollment.recover != nil {
+                rows.append(Row(kind: .message(style: .enrollment(action: .recover)),
+                                parent: nil,
+                                delegate: delegate))
+            }
+            
+            if rows.count > 0 {
+                sections.append(Section(rows: rows))
+            }
+        }
 
         var buttons: [IDXButtonTableViewCell.Kind] = []
         if canCancel {
-            buttons.append(.cancel)
+            buttons.append(.restart)
         }
         
         if remediation?.remediationOptions.count ?? 0 > 0 {

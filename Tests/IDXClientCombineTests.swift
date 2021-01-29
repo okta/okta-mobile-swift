@@ -36,16 +36,23 @@ class IDXClientCombineTests: XCTestCase {
                                                         method: "GET",
                                                         href: URL(string: "some://url")!,
                                                         accepts: "application/json",
-                                                        form: [])
+                                                        form: [],
+                                                        relatesTo: nil,
+                                                        refresh: nil)
         response = IDXClient.Response(client: api,
                                       stateHandle: "handle",
                                       version: "1",
                                       expiresAt: Date(),
                                       intent: "Login",
+                                      authenticators: nil,
+                                      authenticatorEnrollments: nil,
+                                      currentAuthenticatorEnrollment: nil,
                                       remediation: nil,
                                       cancel: remedationOption,
                                       success: remedationOption,
-                                      messages: nil)
+                                      messages: nil,
+                                      app: nil,
+                                      user: nil)
         token = IDXClient.Token(accessToken: "accessToken", refreshToken: nil, expiresIn: 800, idToken: nil, scope: "", tokenType: "bear")
     }
 

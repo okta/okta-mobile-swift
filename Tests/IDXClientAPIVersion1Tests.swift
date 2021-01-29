@@ -71,7 +71,6 @@ class IDXClientAPIVersion1Tests: XCTestCase {
         XCTAssertEqual(response.stateHandle, "02tYS1NHhCPLcOpT3GByBBRHmGU63p7LGRXJx5cOvp")
         XCTAssertEqual(response.intent, "LOGIN")
         
-        XCTAssertEqual(response.remediation?.type, "array")
         XCTAssertEqual(response.remediation?.remediationOptions.count, 1)
         
         let remediation = response.remediation?.remediationOptions.first

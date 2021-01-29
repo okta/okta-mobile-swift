@@ -82,3 +82,95 @@ internal extension IDXClient {
     }
 
 }
+
+internal extension IDXClient.Remediation.Option {
+    func formValues(using parameters: IDXClient.Remediation.Parameters) throws -> [String:Any] {
+        return try form.reduce(into: [:]) { (result, formValue) in
+            guard let nestedResult = try formValue.formValues(using: parameters, in: self) else {
+                return
+            }
+            
+            if let nestedObject = nestedResult as? [String:Any] {
+                result.merge(nestedObject, uniquingKeysWith: { (old, new) in
+                    return new
+                })
+            } else if let name = formValue.name {
+                result[name] = nestedResult
+            } else {
+                throw IDXClientError.invalidRequestData
+            }
+        }
+    }
+}
+
+internal extension IDXClient.Remediation.FormValue {
+    func formValues(using parameters: IDXClient.Remediation.Parameters, in remediationOption: IDXClient.Remediation.Option) throws -> Any? {
+        // Unnamed FormValues, which may contain nested options
+        guard let name = name else {
+            if let form = form {
+                let result: [String:Any] = try form.reduce(into: [:]) { (result, formValue) in
+                    let nestedObject = try formValue.formValues(using: parameters, in: remediationOption)
+                    
+                    if let name = formValue.name {
+                        result[name] = nestedObject
+                    } else if let nestedObject = nestedObject as? [String:Any] {
+                        result.merge(nestedObject, uniquingKeysWith: { (old, new) in
+                            return new
+                        })
+                    } else {
+                        throw IDXClientError.invalidParameter(name: formValue.name ?? "")
+                    }
+                }
+                return result
+            } else {
+                return nil
+            }
+        }
+        
+        if !mutable && parameters[self] != nil {
+            throw IDXClientError.parameterImmutable(name: name)
+        }
+        
+        var result: Any? = nil
+        // Named FormValues with nested forms
+        if let form = form {
+            let childValues: [String:Any] = try form.reduce(into: [:]) { (result, formValue) in
+                guard let nestedResult = try formValue.formValues(using: parameters,
+                                                                  in: remediationOption) else
+                {
+                    return
+                }
+                
+                if let name = formValue.name {
+                    result[name] = nestedResult
+                } else if let nestedObject = nestedResult as? [String:Any] {
+                    result.merge(nestedObject, uniquingKeysWith: { (old, new) in
+                        return new
+                    })
+                } else {
+                    throw IDXClientError.invalidRequestData
+                }
+            }
+            result = [name: childValues]
+        }
+        
+        // Named form values that consist of multiple child options
+        else if let _ = options,
+                let selectedOption = parameters[self] as? IDXClient.Remediation.FormValue
+        {
+            let nestedResult = try selectedOption.formValues(using: parameters, in: remediationOption)
+            result = [name: nestedResult]
+        }
+        
+        // Other..
+        else {
+            // lots 'o stuff here
+            result = parameters[self] ?? value
+        }
+        
+        if required && result == nil {
+            throw IDXClientError.missingRequiredParameter(name: name)
+        }
+        return result
+    }
+}

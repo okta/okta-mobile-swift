@@ -54,25 +54,105 @@ extension IDXClient.APIVersion1 {
         let version: String
         let expiresAt: Date
         let intent: String
-        let remediation: FormCollection?
-        let messages: MessageCollection?
-//        let authenticatorEnrollments: AuthenticatorEnrollments
-//        let currentAuthenticatorEnrollment: FormCollection?
-//        let user: User
-        let app: FormObject
+        let remediation: IonCollection<Form>?
+        let messages: IonCollection<Message>?
+        let authenticators: IonCollection<Authenticator>?
+        let authenticatorEnrollments: IonCollection<AuthenticatorEnrollment>?
+        let currentAuthenticatorEnrollment: IonObject<CurrentAuthenticatorEnrollment>?
+        let currentAuthenticator: IonObject<CurrentAuthenticator>?
+        let user: IonObject<User>?
+        let app: IonObject<App>?
         let successWithInteractionCode: Form?
         let cancel: Form
         
-        struct FormObject: Decodable {
-            let type: String
-            let value: FormValue
+        struct IonObject<T>: Decodable where T: Decodable {
+            let type: String?
+            let value: T
         }
 
-        struct FormCollection: Decodable {
-            let type: String
-            let value: [Form]
+        struct IonCollection<T>: Decodable where T: Decodable {
+            let type: String?
+            let value: [T]
         }
 
+        struct RelatesTo: Decodable {
+            enum Path: Equatable {
+                init(string: String) {
+                    if string == "$" {
+                        self = .root
+                    } else if let index = Int(string) {
+                        self = .array(index: index)
+                    } else {
+                        self = .property(name: string)
+                    }
+                }
+                
+                case root
+                case property(name: String)
+                case array(index: Int)
+            }
+            
+            let path: [Path]
+            init(from decoder: Decoder) throws {
+                let container = try decoder.singleValueContainer()
+                guard let value = try? container.decode(String.self) else {
+                    throw DecodingError.dataCorrupted(.init(codingPath: decoder.codingPath,
+                                                            debugDescription: "Invalid relatesTo value \(decoder.codingPath)"))
+                }
+                
+                let charset = CharacterSet(charactersIn: ".[]")
+                path = value
+                    .components(separatedBy: charset)
+                    .filter { !$0.isEmpty }
+                    .compactMap { Path(string: $0) }
+            }
+        }
+        
+        struct User: Decodable {
+            let id: String
+        }
+        
+        struct App: Decodable {
+            let id: String
+            let label: String
+            let name: String
+        }
+        
+        struct Authenticator: Decodable {
+            let displayName: String
+            let id: String
+            let type: String
+            let methods: [[String:String]]
+        }
+        
+        struct AuthenticatorEnrollment: Decodable {
+            let displayName: String
+            let id: String
+            let type: String
+            let methods: [[String:String]]
+            let profile: [String:String]?
+        }
+        
+        struct CurrentAuthenticator: Decodable {
+            let displayName: String
+            let id: String
+            let type: String
+            let methods: [[String:String]]
+            let contextualData: [String:JSONValue]?
+        }
+        
+        struct CurrentAuthenticatorEnrollment: Decodable {
+            let displayName: String
+            let id: String
+            let type: String
+            let methods: [[String:String]]
+            let profile: [String:String]?
+            let send: Form?
+            let resend: Form?
+            let poll: Form?
+            let recover: Form?
+        }
+        
         struct Form: Decodable {
             let rel: [String]
             let name: String
@@ -80,7 +160,8 @@ extension IDXClient.APIVersion1 {
             let href: URL
             let value: [FormValue]
             let accepts: String
-            let relatesTo: [String]?
+            let relatesTo: [RelatesTo]?
+            let refresh: Double?
         }
         
         struct CompositeForm: Decodable {
@@ -92,6 +173,7 @@ extension IDXClient.APIVersion1 {
         }
         
         struct FormValue: Decodable {
+            let id: String?
             let name: String?
             let label: String?
             let type: String?
@@ -102,15 +184,16 @@ extension IDXClient.APIVersion1 {
             let mutable: Bool?
             let form: CompositeFormValue?
             let options: [FormValue]?
-            let relatesTo: String?
-            let messages: MessageCollection?
+            let relatesTo: RelatesTo?
+            let messages: IonCollection<Message>?
             
             private enum CodingKeys: String, CodingKey {
-                case name, required, label, type, value, secret, visible, mutable, options, form, relatesTo, messages
+                case id, name, required, label, type, value, secret, visible, mutable, options, form, relatesTo, messages
             }
 
             init(from decoder: Decoder) throws {
                 let container = try decoder.container(keyedBy: CodingKeys.self)
+                id = try container.decodeIfPresent(String.self, forKey: .id)
                 name = try container.decodeIfPresent(String.self, forKey: .name)
                 label = try container.decodeIfPresent(String.self, forKey: .label)
                 type = try container.decodeIfPresent(String.self, forKey: .type)
@@ -118,9 +201,9 @@ extension IDXClient.APIVersion1 {
                 secret = try container.decodeIfPresent(Bool.self, forKey: .secret)
                 visible = try container.decodeIfPresent(Bool.self, forKey: .visible)
                 mutable = try container.decodeIfPresent(Bool.self, forKey: .mutable)
-                relatesTo = try container.decodeIfPresent(String.self, forKey: .relatesTo)
+                relatesTo = try container.decodeIfPresent(RelatesTo.self, forKey: .relatesTo)
                 options = try container.decodeIfPresent([FormValue].self, forKey: .options)
-                messages = try container.decodeIfPresent(MessageCollection.self, forKey: .messages)
+                messages = try container.decodeIfPresent(IonCollection<Message>.self, forKey: .messages)
 
                 let formObj = try? container.decodeIfPresent(CompositeFormValue.self, forKey: .form)
                 let valueAsCompositeObj = try? container.decodeIfPresent(CompositeForm.self, forKey: .value)
@@ -140,14 +223,9 @@ extension IDXClient.APIVersion1 {
             }
         }
         
-        struct MessageCollection: Codable {
-            let type: String
-            let value: [Message]
-        }
-        
         struct Message: Codable {
             let type: String
-            let i18n: Localization
+            let i18n: Localization?
             let message: String
 
             struct Localization: Codable {
@@ -161,7 +239,7 @@ extension IDXClient.APIVersion1 {
             init(from decoder: Decoder) throws {
                 let container = try decoder.container(keyedBy: CodingKeys.self)
                 type = try container.decode(String.self, forKey: .type)
-                i18n = try container.decode(Localization.self, forKey: .i18n)
+                i18n = try container.decodeIfPresent(Localization.self, forKey: .i18n)
                 message = try container.decode(String.self, forKey: .message)
             }
         }
@@ -171,7 +249,7 @@ extension IDXClient.APIVersion1 {
     /// Internal OIE API v1.0.0 token response.
     final class Token: NSObject, Decodable {
         let tokenType: String
-        let expiresIn: Int  // TODO: Do we need to represent the token expiration using a combination of the `expires_in` duration and the HTTP Date header field?
+        let expiresIn: Int
         let accessToken: String
         let scope: String
         let refreshToken: String?
