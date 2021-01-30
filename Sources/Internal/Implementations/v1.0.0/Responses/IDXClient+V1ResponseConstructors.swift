@@ -177,7 +177,7 @@ extension IDXClient.Remediation.Option: IDXHasRelatedObjects {
                     IDXClient.Remediation.FormValue(client: client, v1: value)
                   },
                   relatesTo: object.relatesTo,
-                  refresh: object.refresh)
+                  refresh: (object.refresh != nil) ? Double(object.refresh!) / 1000.0 : nil)
     }
     
     func nestedRelatableObjects() -> [IDXHasRelatedObjects] {

@@ -275,45 +275,27 @@
                                     <rect key="frame" x="0.0" y="0.0" width="414" height="52"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="8vk-BN-vB7">
+                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1Hv-8K-4Ks">
                                             <rect key="frame" x="16" y="8" width="382" height="36"/>
-                                            <subviews>
-                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="O2r-ww-WaS">
-                                                    <rect key="frame" x="0.0" y="0.0" width="183" height="36"/>
-                                                    <color key="backgroundColor" systemColor="systemGray5Color"/>
-                                                    <fontDescription key="fontDescription" style="UICTFontTextStyleTitle3"/>
-                                                    <state key="normal" title="Restart">
-                                                        <color key="titleColor" systemColor="labelColor"/>
-                                                    </state>
-                                                    <connections>
-                                                        <action selector="cancelAction:" destination="uUT-nS-xEk" eventType="touchUpInside" id="fHy-zo-N4D"/>
-                                                    </connections>
-                                                </button>
-                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1Hv-8K-4Ks">
-                                                    <rect key="frame" x="199" y="0.0" width="183" height="36"/>
-                                                    <color key="backgroundColor" name="AccentColor"/>
-                                                    <fontDescription key="fontDescription" style="UICTFontTextStyleTitle3"/>
-                                                    <state key="normal" title="Continue">
-                                                        <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                    </state>
-                                                    <connections>
-                                                        <action selector="continueAction:" destination="uUT-nS-xEk" eventType="touchUpInside" id="1oP-rd-ez4"/>
-                                                    </connections>
-                                                </button>
-                                            </subviews>
-                                        </stackView>
+                                            <color key="backgroundColor" name="AccentColor"/>
+                                            <fontDescription key="fontDescription" style="UICTFontTextStyleTitle3"/>
+                                            <state key="normal" title="Continue">
+                                                <color key="titleColor" systemColor="tertiarySystemBackgroundColor"/>
+                                            </state>
+                                            <connections>
+                                                <action selector="buttonAction:" destination="cJh-nH-d1y" eventType="touchUpInside" id="Gt0-kZ-8Cz"/>
+                                            </connections>
+                                        </button>
                                     </subviews>
                                     <constraints>
-                                        <constraint firstItem="8vk-BN-vB7" firstAttribute="top" secondItem="JDt-u0-IBf" secondAttribute="top" constant="8" id="GRR-5i-r58"/>
-                                        <constraint firstAttribute="trailing" secondItem="8vk-BN-vB7" secondAttribute="trailing" constant="16" id="Lny-SY-aN0"/>
-                                        <constraint firstAttribute="bottom" secondItem="8vk-BN-vB7" secondAttribute="bottom" constant="8" id="V0m-z4-tlL"/>
-                                        <constraint firstItem="8vk-BN-vB7" firstAttribute="leading" secondItem="JDt-u0-IBf" secondAttribute="leading" constant="16" id="aMp-U8-eRk"/>
+                                        <constraint firstItem="1Hv-8K-4Ks" firstAttribute="leading" secondItem="JDt-u0-IBf" secondAttribute="leading" constant="16" id="4OA-Jr-M7h"/>
+                                        <constraint firstItem="1Hv-8K-4Ks" firstAttribute="top" secondItem="JDt-u0-IBf" secondAttribute="top" constant="8" id="FGN-lP-SX4"/>
+                                        <constraint firstAttribute="trailing" secondItem="1Hv-8K-4Ks" secondAttribute="trailing" constant="16" id="Lnt-vA-bGe"/>
+                                        <constraint firstAttribute="bottom" secondItem="1Hv-8K-4Ks" secondAttribute="bottom" constant="8" id="dJc-RH-Ikq"/>
                                     </constraints>
                                 </tableViewCellContentView>
                                 <connections>
-                                    <outlet property="cancelButton" destination="O2r-ww-WaS" id="xxu-fD-yMc"/>
-                                    <outlet property="continueButton" destination="1Hv-8K-4Ks" id="xAt-3p-CXa"/>
-                                    <outlet property="stackView" destination="8vk-BN-vB7" id="3PQ-fR-J0R"/>
+                                    <outlet property="buttonView" destination="1Hv-8K-4Ks" id="RVn-tN-GM4"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
@@ -359,17 +341,14 @@
         <namedColor name="AccentColor">
             <color red="0.0" green="0.46000000000000002" blue="0.89000000000000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
-        <systemColor name="labelColor">
-            <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-        </systemColor>
         <systemColor name="secondaryLabelColor">
             <color red="0.23529411764705882" green="0.23529411764705882" blue="0.2627450980392157" alpha="0.59999999999999998" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
-        <systemColor name="systemGray5Color">
-            <color red="0.89803921568627454" green="0.89803921568627454" blue="0.91764705882352937" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        <systemColor name="tertiarySystemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
     </resources>
 </document>

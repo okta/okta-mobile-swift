@@ -112,13 +112,10 @@ public class Signin {
             return controller
         }
         
-        // Attempt to instantiate a view controller to represent the remediation option.
-        guard let option = response.remediation?.remediationOptions.first else { return nil }
-        
+        // Attempt to instantiate a view controller to represent the remediation options in this response.
         if let controller = storyboard.instantiateViewController(identifier: "remediation") as? IDXRemediationTableViewController {
             controller.signin = self
             controller.response = response
-            controller.remediationOption = option
             return controller
         }
 
