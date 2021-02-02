@@ -76,20 +76,27 @@ client.start { (response, error) in
 
 ```swift
 client.start { (response, error) in
-    guard let response = response,
-          let remediation = response.remediation?.remediationOptions.first else {
+    guard let identifyOption = response?.remediation?["identify"],
+          let identifierField = identifyOption["identifier"] else
+    {
         // Handle error
         return
     }
     
-    remediation.proceed(with: ["identifier": "<#username#>"]) { (response, error) in
-        guard let response = response,
-              let remediation = response.remediation?.remediationOptions.first else {
+    var params = IDXClient.Remediation.Parameters()
+    params[identifierField] = "<#username#>"
+
+    remediation.proceed(using: params) { (response, error) in
+        guard let authenticatorOption = response?.remediation?["challenge-authenticator"],
+              let passcodeField = authenticatorOption["credentials"]?["passcode"] else
+        {
             // Handle error
             return
         }
 
-        remediation.proceed(with: ["credentials": [ "passcode": "<#password#>" ]]) { (response, error) in
+        let params = IDXClient.Remediation.Parameters()
+        params[passcodeField] = "<#password#>"
+        remediation.proceed(using: params) { (response, error) in
             guard let response = response else {
                 // Handle error
                 return
@@ -121,20 +128,149 @@ client.start { (response, error) in
 }
 ```
 
-### Cancel the OIE transaction and restart after that
+### Remediation - Multifactor authentication with Okta Sign-on Policy
 
-```swift
-client.start { (response, error) in
-    guard let response = response,
-          let remediation = response.remediation?.remediationOptions.first else {
+```
+client.start() { (response, error) in
+    guard let identifyOption = response?.remediation?["identify"],
+          let identifierField = identifyOption["identifier"] else
+    {
         // Handle error
         return
     }
     
-    // Proceed with a specific identifier
-    remediation.proceed(with: ["identifier": "<#username#>"]) { (response, error) in
-        guard let response = response,
-              let remediation = response.remediation?.remediationOptions.first else {
+    let params = IDXClient.Remediation.Parameters()
+    params[identifierField] = "<#username#>"
+    
+    identifyOption.proceed(using: params) { (response, error) in
+        guard let authenticatorOption = response?.remediation?["select-authenticator-authenticate"],
+              let authenticatorField = authenticatorOption["authenticator"],
+              let passcodeOption = authenticatorField.options?.filter({ $0.label == "Password" }).first else
+        {
+            // Handle error
+            return
+        }
+        
+        let params = IDXClient.Remediation.Parameters()
+        params[authenticatorField] = passcodeOption
+        
+        authenticatorOption.proceed(using: params) { (responseObj, error) in
+            guard let authenticatorOption = response?.remediation?["challenge-authenticator"],
+                  let passcodeField = authenticatorOption["credentials"]?["passcode"] else
+            {
+                // Handle error
+                return
+            }
+            
+            let params = IDXClient.Remediation.Parameters()
+            params[passcodeField] = "<#password#>"
+            
+            authenticatorOption.proceed(using: params) { (responseObj, error) in
+                guard let authenticatorOption = response?.remediation?["select-authenticator-authenticate"],
+                      let authenticatorField = authenticatorOption["authenticator"],
+                      let emailOption = authenticatorField.options?.filter({ $0.label == "Email" }).first else
+                {
+                    // Handle error
+                    return
+                }
+                
+                let params = IDXClient.Remediation.Parameters()
+                params[authenticatorField] = emailOption
+                
+                authenticatorOption.proceed(using: params) { (response, error) in
+                    guard let authenticatorOption = response?.remediation?["challenge-authenticator"],
+                          let passcodeField = authenticatorOption["credentials"]?["passcode"] else
+                    {
+                        // Handle error
+                        return
+                    }
+                    
+                    let params = IDXClient.Remediation.Parameters()
+                    params[passcodeField] = "<#email verification code#>"
+                    
+                    authenticatorOption.proceed(using: params) { (response, error) in
+                        guard let authenticatorOption = response?.remediation?["select-authenticator-enroll"],
+                              let authenticatorField = authenticatorOption["authenticator"],
+                              let questionOption = authenticatorField.options?.filter({ $0.label == "Security Question" }).first else
+                        {
+                            // Handle error
+                            return
+                        }
+                        
+                        let params = IDXClient.Remediation.Parameters()
+                        params[authenticatorField] = questionOption
+                        
+                        authenticatorOption.proceed(using: params) { (response, error) in
+                            guard let enrollOption = response?.remediation?["enroll-authenticator"],
+                                  let credentials = enrollOption["credentials"],
+                                  let questionOption = credentials.options?.filter({ $0.label == "Create my own security question" }).first,
+                                  let questionField = questionOption["question"],
+                                  let answerField = questionOption["answer"] else
+                            {
+                                // Handle error
+                                return
+                            }
+                            
+                            let params = IDXClient.Remediation.Parameters()
+                            params[credentials] = questionOption
+                            params[questionField] = "What is my favorite CIAM service?"
+                            params[answerField] = "Okta"
+                            
+                            enrollOption.proceed(using: params) { (response, error) in
+                                guard let skipOption = response?.remediation?["skip"] else {
+                                    // Handle error
+                                    return
+                                }
+                                
+                                skipOption.proceed() { (response, error) in
+                                    guard response?.isLoginSuccessful ?? false else {
+                                        // Handle error
+                                        return
+                                    }
+                                    
+                                    response?.exchangeCode { (token, error) in
+                                        guard let token = token else {
+                                            // Handle error
+                                            return
+                                        }
+                                        
+                                        print("""
+                                        Exchanged interaction code for token:
+                                            accessToken:  \(token.accessToken)
+                                            refreshToken: \(token.refreshToken ?? "Unavailable")
+                                            idToken:      \(token.idToken ?? "Unavailable")
+                                            tokenType:    \(token.tokenType)
+                                            scope:        \(token.scope)
+                                            expiresIn:    \(token.expiresIn) seconds
+                                        """)
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+```
+
+### Cancel the OIE transaction and restart after that
+
+```swift
+client.start { (response, error) in
+    guard let identifyOption = response?.remediation?["identify"],
+          let identifierField = identifyOption["identifier"] else
+    {
+        // Handle error
+        return
+    }
+
+    var params = IDXClient.Remediation.Parameters()
+    params[identifierField] = "<#username#>"
+
+    remediation.proceed(using: params) { (response, error) in
+        guard let response = response else {
             // Handle error
             return
         }
