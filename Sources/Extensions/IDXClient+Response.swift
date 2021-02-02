@@ -556,7 +556,7 @@ public extension IDXClient {
                 
                 do {
                     client.proceed(remediation: self,
-                                   data: try formValues(using: parameters) ?? [:],
+                                   data: try formValues(using: parameters),
                                    completion: completionHandler)
                 } catch {
                     completionHandler(nil, error)
