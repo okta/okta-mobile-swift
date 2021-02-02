@@ -12,6 +12,7 @@ protocol SigninRowDelegate {
     func row(row: Signin.Row, changedValue: (IDXClient.Remediation.FormValue,Any))
     func value(for value: IDXClient.Remediation.FormValue) -> Any?
     func enrollment(action: Signin.EnrollmentAction)
+    func buttonSelected(remediationOption: IDXClient.Remediation.Option?, sender: Any?)
 }
 
 extension Signin {
@@ -34,12 +35,14 @@ extension Signin {
             case toggle(field: IDXClient.Remediation.FormValue)
             case option(field: IDXClient.Remediation.FormValue, option: IDXClient.Remediation.FormValue)
             case select(field: IDXClient.Remediation.FormValue, values: [IDXClient.Remediation.FormValue])
-            case button(kind: [IDXButtonTableViewCell.Kind])
+            case button(remediationOption: IDXClient.Remediation.Option?)
         }
     }
     
     /// Represents a section of rows for the remediation form's signin process
     struct Section {
+        let remediationOption: IDXClient.Remediation.Option?
+        
         /// Array of rows to show in this section.
         let rows: [Row]
     }
@@ -106,10 +109,14 @@ extension IDXClient.Remediation.FormValue {
                 rows.append(Row(kind: .select(field: self, values: options),
                                 parent: parent,
                                 delegate: delegate))
-            } else {
+            } else if visible {
                 rows.append(Row(kind: .text(field: self),
                                 parent: parent,
                                 delegate: delegate))
+            } else if let form = form {
+                rows.append(contentsOf: form.flatMap { formValue in
+                    formValue.remediationRow(parent: self, delegate: delegate)
+                })
             }
         }
         
@@ -133,34 +140,95 @@ extension IDXClient.Remediation.FormValue {
     }
 }
 
+extension IDXClient.Remediation.Option {
+    class func title(for type: IDXClient.Remediation.RemediationType?) -> String {
+        guard let type = type else { return "Restart" }
+        switch type {
+        case .selectEnrollProfile: fallthrough
+        case .enrollProfile:
+            return "Create profile"
+            
+        case .selectIdentify: fallthrough
+        case .identify:
+            return "Sign in"
+            
+        case .selectAuthenticatorAuthenticate:
+            return "Choose method"
+            
+        case .skip:
+            return "Skip"
+            
+        default:
+            return "Continue"
+        }
+    }
+    
+    var title: String {
+        return IDXClient.Remediation.Option.title(for: type)
+    }
+}
+
 extension IDXClient.Response {
     typealias Section = Signin.Section
     typealias Row = Signin.Row
     typealias FormValue = IDXClient.Remediation.FormValue
     
+    /// Converts the response to a series of remediation forms to display in the UI
+    /// - Parameter delegate: A delegate object to receive updates as the form is changed.
+    /// - Returns: Array of sections to be shown in the table view.
+    func remediationForm(delegate: AnyObject & SigninRowDelegate) -> [Section] {
+        var result: [Section] = []
+        
+        if let messages = messages {
+            result.append(Section(remediationOption: nil,
+                                  rows: messages.map { message in
+                                    Row(kind: .message(style: .message(message: message)),
+                                        parent: nil,
+                                        delegate: delegate)
+                                  }))
+        }
+        
+        if let remediationOptions = remediation?.remediationOptions {
+            result.append(contentsOf: remediationOptions.map { option in
+                self.remediationForm(remediationOption: option, delegate: delegate)
+            })
+        }
+        
+        if canCancel {
+            result.append(Section(remediationOption: nil,
+                                  rows: [
+                                    Row(kind: .button(remediationOption: nil),
+                                        parent: nil,
+                                        delegate: delegate)]))
+        }
+
+        return result
+    }
+
     /// Converts a remediation option into a set of objects representing the form, so it can be rendered in the table view.
     /// - Parameters:
     ///   - response: Response object that is the parent for this remediation option
     ///   - delegate: A delegate object to receive updates as the form is changed.
     /// - Returns: Array of sections to be shown in the table view.
-    func remediationForm(form: [FormValue], delegate: AnyObject & SigninRowDelegate) -> [Section] {
-        var sections: [Section] = []
+    func remediationForm(remediationOption: IDXClient.Remediation.Option, delegate: AnyObject & SigninRowDelegate) -> Section {
+        var rows: [Row] = []
         
         if let messages = messages {
-            sections.append(Section(rows: messages.map { message in
+            rows.append(contentsOf: messages.map { message in
                 Row(kind: .message(style: .message(message: message)),
                     parent: nil,
                     delegate: delegate)
-            }))
+            })
         }
         
-        sections.append(Section(rows: form.flatMap { nested in
+        rows.append(contentsOf: remediationOption.form.flatMap { nested in
             nested.remediationRow(delegate: delegate)
-        }))
-        
-        if let enrollment = currentAuthenticatorEnrollment {
-            var rows: [Row] = []
+        })
+        rows.append(Row(kind: .button(remediationOption: remediationOption),
+                            parent: nil,
+                            delegate: delegate))
 
+        if let enrollment = currentAuthenticatorEnrollment {
             if enrollment.send != nil {
                 rows.append(Row(kind: .message(style: .enrollment(action: .send)),
                                 parent: nil,
@@ -178,25 +246,8 @@ extension IDXClient.Response {
                                 parent: nil,
                                 delegate: delegate))
             }
-            
-            if rows.count > 0 {
-                sections.append(Section(rows: rows))
-            }
         }
 
-        var buttons: [IDXButtonTableViewCell.Kind] = []
-        if canCancel {
-            buttons.append(.restart)
-        }
-        
-        if remediation?.remediationOptions.count ?? 0 > 0 {
-            buttons.append(.next)
-        }
-        
-        sections.append(Section(rows: [Row(kind: .button(kind: buttons),
-                                           parent: nil,
-                                           delegate: delegate)]))
-        
-        return sections
+        return Section(remediationOption: remediationOption, rows: rows)
     }
 }

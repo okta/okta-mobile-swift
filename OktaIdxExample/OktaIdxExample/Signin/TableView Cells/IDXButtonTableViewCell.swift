@@ -6,69 +6,61 @@
 //
 
 import UIKit
+import OktaIdx
 
 class IDXButtonTableViewCell: UITableViewCell {
-    enum Kind: CaseIterable {
-        case restart
-        case next
+    enum Style {
+        case cancel
+        case remediation(type: IDXClient.Remediation.RemediationType)
         
-        var index: Int {
+        var backgroundColor: UIColor {
             switch self {
-            case .restart:
-                return 0
-            case .next:
-                return 1
+            case .cancel:
+                return UIColor.secondarySystemBackground
+            case .remediation(type: _):
+                return UIColor.link
+            }
+        }
+
+        var textColor: UIColor {
+            switch self {
+            case .cancel:
+                return UIColor.secondaryLabel
+            case .remediation(type: _):
+                return UIColor.white
+            }
+        }
+        
+        var text: String {
+            switch self {
+            case .cancel:
+                return "Restart"
+            case .remediation(type: let type):
+                return IDXClient.Remediation.Option.title(for: type)
             }
         }
     }
     
-    @IBOutlet weak var stackView: UIStackView!
-    @IBOutlet var cancelButton: UIButton!
-    @IBOutlet var continueButton: UIButton!
-    var update: ((Any, Kind) -> Void)? = nil
+    @IBOutlet var buttonView: UIButton!
+    var update: ((Any,Style) -> Void)? = nil
     
     override func prepareForReuse() {
         update = nil
+        buttonView.isEnabled = true
     }
 
-    private func button(for kind: Kind) -> UIButton {
-        switch kind {
-        case .restart:
-            return cancelButton
-        case .next:
-            return continueButton
-        }
-    }
-    
-    private func setButtonVisibility(button kind: Kind, visible: Bool) {
-        let buttonView = button(for: kind)
-        let isAlreadyVisible = stackView.arrangedSubviews.contains(buttonView)
-        if isAlreadyVisible && !visible {
-            stackView.removeArrangedSubview(buttonView)
-        } else if !isAlreadyVisible && visible {
-            stackView.insertArrangedSubview(buttonView,
-                                            at: min(kind.index, stackView.arrangedSubviews.count))
-        }
-    }
-    
-    var displayKinds: [Kind] = [] {
+    var style: Style = .cancel {
         didSet {
-            Kind.allCases.forEach { kind in
-                let visible = displayKinds.contains(kind)
-                setButtonVisibility(button: kind, visible: visible)
-            }
+            buttonView.backgroundColor = style.backgroundColor
+            buttonView.setTitleColor(style.textColor, for: .normal)
+            buttonView.setTitle(style.text, for: .normal)
+            buttonView.accessibilityIdentifier = "button.\(style.text)"
         }
     }
     
-    @IBAction func cancelAction(_ sender: Any) {
+    @IBAction func buttonAction(_ sender: Any) {
         if let updateFunc = update {
-            updateFunc(sender, .restart)
-        }
-    }
-    
-    @IBAction func continueAction(_ sender: Any) {
-        if let updateFunc = update {
-            updateFunc(sender, .next)
+            updateFunc(sender, style)
         }
     }
 }
