@@ -46,12 +46,12 @@ class ResetTransactionScenarioTests: XCTestCase {
         }
         usernameField.typeText(credentials.username)
 
-        app.buttons["Continue"].tap()
+        app.buttons["Sign in"].tap()
         
         // Select remediation type
         XCTAssertTrue(app.tables.staticTexts["authenticator.label"].waitForExistence(timeout: 5.0))
         app.tables.staticTexts["Password"].tap()
-        app.buttons["Continue"].tap()
+        app.buttons["Choose method"].tap()
 
         // Password
         let passwordField = app.secureTextFields["passcode.field"]

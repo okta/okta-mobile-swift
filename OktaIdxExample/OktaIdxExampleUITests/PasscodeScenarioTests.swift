@@ -46,7 +46,7 @@ class PasscodeScenarioTests: XCTestCase {
         }
         usernameField.typeText(credentials.username)
 
-        app.buttons["Continue"].tap()
+        app.buttons["Sign in"].tap()
         
         // Password
         XCTAssertTrue(app.staticTexts["passcode.label"].waitForExistence(timeout: 5.0))
@@ -84,7 +84,7 @@ class PasscodeScenarioTests: XCTestCase {
         }
         usernameField.typeText(credentials.username)
 
-        app.buttons["Continue"].tap()
+        app.buttons["Sign in"].tap()
         
         // Password
         XCTAssertTrue(app.staticTexts["passcode.label"].waitForExistence(timeout: 5.0))
