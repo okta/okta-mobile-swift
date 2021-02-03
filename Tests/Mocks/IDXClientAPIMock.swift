@@ -15,6 +15,8 @@ class IDXClientAPIv1Mock: IDXClientAPIImpl {
     }
     
     let configuration: IDXClient.Configuration
+    var interactionHandle: String?
+    var codeVerifier: String?
     
     struct RecordedCall {
         let function: String
@@ -41,23 +43,29 @@ class IDXClientAPIv1Mock: IDXClientAPIImpl {
         self.configuration = configuration
     }
     
-    func start(completion: @escaping (IDXClient.Response?, Error?) -> Void) {
+    func interact(completion: @escaping (IDXClient.Context?, Error?) -> Void) {
+        recordedCalls.append(RecordedCall(function: #function, arguments: nil))
+        let result = response(for: #function)
+        completion(result?["context"] as? IDXClient.Context, result?["error"] as? Error)
+    }
+    
+    func introspect(_ interactionHandle: String, completion: @escaping (IDXClient.Response?, Error?) -> Void) {
         recordedCalls.append(RecordedCall(function: #function, arguments: nil))
         let result = response(for: #function)
         completion(result?["response"] as? IDXClient.Response, result?["error"] as? Error)
     }
-        
+    
     func cancel(completion: @escaping (IDXClient.Response?, Error?) -> Void) {
         recordedCalls.append(RecordedCall(function: #function, arguments: nil))
         let result = response(for: #function)
         completion(result?["response"] as? IDXClient.Response, result?["error"] as? Error)
     }
     
-    func proceed(remediation option: IDXClient.Remediation.Option, data: [String : Any]?, completion: @escaping (IDXClient.Response?, Error?) -> Void) {
+    func proceed(remediation option: IDXClient.Remediation.Option, data: [String : Any], completion: @escaping (IDXClient.Response?, Error?) -> Void) {
         recordedCalls.append(RecordedCall(function: #function,
                                           arguments: [
                                             "remediation": option as Any,
-                                            "data": data ?? [:] as Any
+                                            "data": data 
                                           ]))
         let result = response(for: #function)
         completion(result?["response"] as? IDXClient.Response, result?["error"] as? Error)

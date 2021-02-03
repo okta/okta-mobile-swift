@@ -29,7 +29,9 @@ extension IDXClient.APIVersion1 {
         let interactionHandle: String
     }
 
-    struct InteractRequest: HasOAuthHTTPHeaders {}
+    struct InteractRequest: HasOAuthHTTPHeaders {
+        let codeChallenge: String
+    }
     
     struct IntrospectRequest: HasIDPHTTPHeaders {
         let requestBody: RequestBody

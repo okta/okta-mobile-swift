@@ -23,6 +23,7 @@ class ScenarioTests: XCTestCase {
         api = IDXClient.APIVersion1(with: configuration,
                                     session: session)
         idx = IDXClient(configuration: configuration,
+                        context: nil,
                         api: api,
                         queue: DispatchQueue.main)
     }

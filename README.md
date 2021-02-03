@@ -62,6 +62,26 @@ let client = IDXClient(configuration: config)
 ### Start the authentication session
 
 ```swift
+client.interact { (context, error) in
+    guard let context = context else {
+        // Handle error
+        return
+    }
+    
+    client.introspect(context.interactionHandle) { (response, error) in
+        guard let response = response else {
+            // Handle error
+            return
+        }
+        
+        // Use response
+    }
+}
+```
+
+For convenience, when direct access to the `interact` and `introspect` methods aren't necessary, a `start` method is provided that encapsulates the two previous calls.
+
+```swift
 client.start { (response, error) in
     guard let response = response else {
         // Handle error

@@ -16,7 +16,7 @@ class IDXClientRequestTests: XCTestCase {
                                                 redirectUri: "redirect:/uri")
 
     func testInteractRequest() throws {
-        let request = IDXClient.APIVersion1.InteractRequest()
+        let request = IDXClient.APIVersion1.InteractRequest(codeChallenge: "ABCEasyas123")
         let urlRequest = request.urlRequest(using: configuration)
         
         XCTAssertNotNil(urlRequest)
@@ -35,11 +35,9 @@ class IDXClientRequestTests: XCTestCase {
         XCTAssertEqual(data?.keys.sorted(), ["client_id", "code_challenge", "code_challenge_method", "redirect_uri", "scope", "state"])
         XCTAssertEqual(data?["client_id"], "clientId")
         XCTAssertEqual(data?["scope"], "all")
+        XCTAssertEqual(data?["code_challenge"], "ABCEasyas123")
         XCTAssertEqual(data?["code_challenge_method"], "S256")
         XCTAssertEqual(data?["redirect_uri"], "redirect:/uri")
-
-        let codeChallenge = data?["code_challenge"]
-        XCTAssertTrue(codeChallenge!!.isBase64URLEncoded())
 
         // Ensure state is a UUID
         let state = data?["state"]

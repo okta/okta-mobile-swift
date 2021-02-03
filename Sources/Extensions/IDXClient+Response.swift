@@ -8,6 +8,23 @@
 import Foundation
 
 public extension IDXClient {
+    /// Object that defines the context for the current authentication session, which is required when a session needs to be resumed.
+    @objc(IDXContext)
+    final class Context: NSObject, Codable {
+        /// The interaction handle returned from the `interact` response from the server.
+        @objc public let interactionHandle: String
+        
+        /// The PKCE code verifier value used when initiating the session using the `interact` method.
+        @objc public let codeVerifier: String
+
+        internal init(interactionHandle: String,
+                      codeVerifier: String)
+        {
+            self.interactionHandle = interactionHandle
+            self.codeVerifier = codeVerifier
+        }
+    }
+    
     /// Describes the response from an Okta Identity Engine workflow stage. This is used to determine the current state of the workflow, the set of available remediation steps to proceed through the workflow, actions that can be performed, and other information relevant to the authentication of a user.
     @objc(IDXResponse)
     final class Response: NSObject {
@@ -122,7 +139,7 @@ public extension IDXClient {
     
     /// Access tokens created as a result of exchanging a successful workflow response.
     @objc(IDXToken)
-    final class Token: NSObject {
+    final class Token: NSObject, Codable {
         /// The access token to use.
         @objc public let accessToken: String
         

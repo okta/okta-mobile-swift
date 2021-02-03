@@ -12,6 +12,7 @@ extension IDXClient {
         static let version = Version.v1_0_0
         var stateHandle: String? = nil
         var interactionHandle: String? = nil
+        var codeVerifier: String? = nil
         var cancelRemediationOption: IDXClient.Remediation.Option? = nil
         
         let configuration: IDXClient.Configuration
@@ -25,7 +26,32 @@ extension IDXClient {
     }
     
     public func start(completion: @escaping (Response?, Error?) -> Void) {
-        self.api.start { (response, error) in
+        interact { (context, error) in
+            guard error == nil else {
+                completion(nil, error)
+                return
+            }
+            
+            guard let context = context else {
+                completion(nil, IDXClientError.missingRequiredParameter(name: "context"))
+                return
+            }
+            
+            self.introspect(context.interactionHandle, completion: completion)
+        }
+    }
+    
+    public func interact(completion: @escaping (Context?, Error?) -> Void) {
+        self.api.interact { (context, error) in
+            self.queue.async {
+                self.context = context
+                completion(context, error)
+            }
+        }
+    }
+    
+    public func introspect(_ interactionHandle: String, completion: @escaping (Response?, Error?) -> Void) {
+        self.api.introspect(interactionHandle) { (response, error) in
             self.queue.async {
                 completion(response, error)
             }
@@ -36,8 +62,7 @@ extension IDXClient {
         return self.api.canCancel
     }
     
-    public func cancel(completion: @escaping (Response?, Error?) -> Void)
-    {
+    public func cancel(completion: @escaping (Response?, Error?) -> Void) {
         self.api.cancel { (response, error) in
             self.queue.async {
                 completion(response, error)

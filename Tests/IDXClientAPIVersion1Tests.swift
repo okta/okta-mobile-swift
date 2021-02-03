@@ -27,8 +27,9 @@ class IDXClientAPIVersion1Tests: XCTestCase {
         try session.expect("https://foo.oktapreview.com/oauth2/default/v1/interact", fileName: "interact-response")
         
         let completion = expectation(description: "Response")
-        api.interact { (handle, error) in
-            XCTAssertEqual(handle, "003Q14X7li")
+        api.interact { (context, error) in
+            XCTAssertNotNil(context)
+            XCTAssertEqual(context?.interactionHandle, "003Q14X7li")
             XCTAssertNil(error)
             completion.fulfill()
         }
