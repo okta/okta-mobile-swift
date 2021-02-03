@@ -14,40 +14,32 @@ extension IDXClient.APIVersion1: IDXClientAPIImpl {
         case formEncoded
     }
 
-    func start(completion: @escaping (IDXClient.Response?, Error?) -> Void) {
-        interact { (interactionHandle, error) in
-            guard error == nil else {
-                completion(nil, error)
-                return
-            }
-            
-            guard let interactionHandle = interactionHandle else {
-                completion(nil, IDXClientError.invalidResponseData)
-                return
-            }
-            
-            self.introspect(interactionHandle, completion: completion)
+    func interact(completion: @escaping(IDXClient.Context?, Error?) -> Void) {
+        guard let codeVerifier = String.pkceCodeVerifier(),
+              let codeChallenge = codeVerifier.pkceCodeChallenge() else
+        {
+            completion(nil, IDXClientError.internalError(message: "Cannot create a PKCE Code Verifier"))
+            return
         }
-    }
-
-    func interact(completion: @escaping(String?, Error?) -> Void) {
-        let request = InteractRequest()
+        
+        let request = InteractRequest(codeChallenge: codeChallenge)
         request.send(to: session, using: configuration) { (response, error) in
             guard error == nil else {
                 completion(nil, error)
                 return
             }
             
-            if let response = response {
-                do {
-                    try self.consumeResponse(response)
-                } catch {
-                    completion(nil, error)
-                    return
-                }
+            guard let response = response else {
+                completion(nil, IDXClientError.invalidResponseData)
+                return
             }
             
-            completion(response?.interactionHandle, nil)
+            self.interactionHandle = response.interactionHandle
+            self.codeVerifier = codeVerifier
+            
+            completion(IDXClient.Context(interactionHandle: response.interactionHandle,
+                                         codeVerifier: codeVerifier),
+                       nil)
         }
     }
     
@@ -157,7 +149,7 @@ extension IDXClient.APIVersion1: IDXClientAPIImpl {
                 case "client_id":
                     result[name] = configuration.clientId
                 case "code_verifier":
-                    result[name] = configuration.codeVerifier
+                    result[name] = self.codeVerifier
                 default: break
                 }
         }
@@ -194,10 +186,6 @@ extension IDXClient.APIVersion1: IDXClientAPIImpl {
 }
 
 extension IDXClient.APIVersion1 {
-    func consumeResponse(_ response: InteractRequest.Response) throws {
-        self.interactionHandle = response.interactionHandle
-    }
-
     func consumeResponse(_ response: IntrospectRequest.ResponseType) throws {
         self.stateHandle = response.stateHandle
         self.cancelRemediationOption = IDXClient.Remediation.Option(client: self, v1: response.cancel)

@@ -19,6 +19,7 @@ class IDXClientCombineTests: XCTestCase {
     var api: IDXClientAPIv1Mock!
     var remedationOption: IDXClient.Remediation.Option!
     var response: IDXClient.Response!
+    var context: IDXClient.Context!
     var token: IDXClient.Token!
 
     override func setUpWithError() throws {
@@ -28,6 +29,7 @@ class IDXClientCombineTests: XCTestCase {
 
         api = IDXClientAPIv1Mock(configuration: configuration)
         client = IDXClient(configuration: configuration,
+                           context: nil,
                            api: api,
                            queue: DispatchQueue.global())
         remedationOption = IDXClient.Remediation.Option(client: api,
@@ -39,6 +41,8 @@ class IDXClientCombineTests: XCTestCase {
                                                         form: [],
                                                         relatesTo: nil,
                                                         refresh: nil)
+        context = IDXClient.Context(interactionHandle: "interactionHandle",
+                                    codeVerifier: "verifier")
         response = IDXClient.Response(client: api,
                                       stateHandle: "handle",
                                       version: "1",
@@ -91,7 +95,8 @@ class IDXClientCombineTests: XCTestCase {
     }
 
     func testStart() throws {
-        api.expect(function: "start(completion:)", arguments: ["response": response as Any])
+        api.expect(function: "interact(completion:)", arguments: ["context": context as Any])
+        api.expect(function: "introspect(_:completion:)", arguments: ["response": response as Any])
 
         var called = false
         let completion = expectation(description: "start")

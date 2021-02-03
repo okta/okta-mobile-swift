@@ -58,46 +58,27 @@ public final class IDXClient: NSObject, IDXClientAPI {
             
             super.init()
         }
-
-        internal var codeVerifier: String?
     }
     
     /// Configuration used to create the IDX client.
     @objc public let configuration: Configuration
     
-    /// Initializes an IDXClient instance with the given configuration values.
-    /// - Parameters:
-    ///   - issuer: The issuer URL.
-    ///   - clientId: The application's client ID.
-    ///   - clientSecret: The application's client secret, if required.
-    ///   - scopes: The application's access scopes.
-    ///   - redirectUri: The application's redirect URI.
-    ///   - version: The API version to use, or `latest` if not supplied.
-    @objc public convenience init(issuer: String,
-                                  clientId: String,
-                                  clientSecret: String? = nil,
-                                  scopes: [String],
-                                  redirectUri: String,
-                                  version: Version = Version.latest)
-    {
-        self.init(configuration: Configuration(issuer: issuer,
-                                               clientId: clientId,
-                                               clientSecret: clientSecret,
-                                               scopes: scopes,
-                                               redirectUri: redirectUri),
-                  version: version)
-    }
+    /// The current context for the authentication session.
+    @objc public internal(set) var context: Context?
     
     /// Initializes an IDX client instance with the given configuration object.
     /// - Parameters:
     ///   - configuration: Configuration object describing the application.
+    ///   - context: Context object to use when resuming a session.
     ///   - version: The API version to use, or `latest` if not supplied.
     ///   - queue: The DispatchQueue to send responses on, defaults to `DispatchQueue.main`.
     @objc public convenience init(configuration: Configuration,
+                                  context: Context? = nil,
                                   version: Version = Version.latest,
                                   queue: DispatchQueue = DispatchQueue.main)
     {
         self.init(configuration: configuration,
+                  context: context,
                   api: version.clientImplementation(with: configuration),
                   queue: queue)
     }
@@ -105,15 +86,19 @@ public final class IDXClient: NSObject, IDXClientAPI {
     internal let api: IDXClientAPIImpl
     internal let queue: DispatchQueue
     internal required init(configuration: Configuration,
+                           context: Context?,
                            api: IDXClientAPIImpl,
                            queue: DispatchQueue)
     {
         self.configuration = configuration
+        self.context = context
         self.api = api
         self.queue = queue
 
         super.init()
 
         self.api.delegate = self
+        self.api.interactionHandle = context?.interactionHandle
+        self.api.codeVerifier = context?.codeVerifier
     }
 }

@@ -17,6 +17,9 @@ internal protocol IDXClientAPIImpl: class, IDXClientAPI {
     
     /// The delegate used to coordinate messages to the public-facing client API instance.
     var delegate: IDXClientAPIDelegate? { get set }
+    
+    var interactionHandle: String? { get set }
+    var codeVerifier: String? { get set }
 }
 
 /// Delegate protocol used to receive messages and updates from IDXClientAPIImpl instances.

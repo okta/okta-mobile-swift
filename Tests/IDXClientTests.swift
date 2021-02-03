@@ -20,6 +20,7 @@ class IDXClientTests: XCTestCase {
     override func setUpWithError() throws {
         api = IDXClientAPIv1Mock(configuration: configuration)
         client = IDXClient(configuration: configuration,
+                           context: nil,
                            api: api,
                            queue: DispatchQueue.main)
     }
@@ -28,13 +29,13 @@ class IDXClientTests: XCTestCase {
         var idx = IDXClient(configuration: configuration)
         XCTAssertNotNil(idx)
         XCTAssertEqual(idx.configuration, configuration)
+        XCTAssertNil(idx.context)
         
-        idx = IDXClient(issuer: "https://example.com", clientId: "bar", scopes: ["baz"], redirectUri: "boo")
+        let context = IDXClient.Context(interactionHandle: "foo", codeVerifier: "bar")
+        idx = IDXClient(configuration: configuration, context: context)
         XCTAssertNotNil(idx)
-        XCTAssertEqual(idx.configuration.issuer, "https://example.com")
-        XCTAssertEqual(idx.configuration.clientId, "bar")
-        XCTAssertEqual(idx.configuration.scopes, ["baz"])
-        XCTAssertEqual(idx.configuration.redirectUri, "boo")
+        XCTAssertEqual(idx.configuration, configuration)
+        XCTAssertEqual(idx.context, context)
     }
     
     func testApiDelegation() {
@@ -46,7 +47,13 @@ class IDXClientTests: XCTestCase {
                                                             method: "GET",
                                                             href: URL(string: "some://url")!,
                                                             accepts: "application/json",
-                                                            form: [],
+                                                            form: [
+                                                                IDXClient.Remediation.FormValue(name: "foo",
+                                                                                                visible: false,
+                                                                                                mutable: true,
+                                                                                                required: false,
+                                                                                                secret: false)
+                                                            ],
                                                             relatesTo: nil,
                                                             refresh: nil)
         let response = IDXClient.Response(client: api,
@@ -85,6 +92,32 @@ class IDXClientTests: XCTestCase {
         XCTAssertTrue(called)
         call = api.recordedCalls.last
         XCTAssertEqual(call?.function, "cancel(completion:)")
+        XCTAssertNil(call?.arguments)
+        api.reset()
+
+        // interact()
+        expect = expectation(description: "interact")
+        client.interact { (_, _) in
+            called = true
+            expect.fulfill()
+        }
+        wait(for: [ expect ], timeout: 1)
+        XCTAssertTrue(called)
+        call = api.recordedCalls.last
+        XCTAssertEqual(call?.function, "interact(completion:)")
+        XCTAssertNil(call?.arguments)
+        api.reset()
+
+        // introspect()
+        expect = expectation(description: "introspect")
+        client.introspect("foo") { (_, _) in
+            called = true
+            expect.fulfill()
+        }
+        wait(for: [ expect ], timeout: 1)
+        XCTAssertTrue(called)
+        call = api.recordedCalls.last
+        XCTAssertEqual(call?.function, "introspect(_:completion:)")
         XCTAssertNil(call?.arguments)
         api.reset()
 
@@ -127,7 +160,7 @@ class IDXClientTests: XCTestCase {
         call = api.recordedCalls.last
         XCTAssertEqual(call?.function, "proceed(remediation:data:completion:)")
         XCTAssertEqual(call?.arguments?.count, 2)
-        XCTAssertEqual(call?.arguments?["remediation"] as! IDXClient.Remediation.Option, remedationOption)
+        XCTAssertEqual(call?.arguments?["remediation"] as? IDXClient.Remediation.Option, remedationOption)
         api.reset()
 
         // Response.cancel()

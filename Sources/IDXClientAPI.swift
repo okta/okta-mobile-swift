@@ -26,13 +26,22 @@ public enum IDXClientError: Error {
 
 @objc
 public protocol IDXClientAPI {
-    /// Starts the authentication workflow.
+    /// Performs a request to interact with IDX, based on configured client options.
     /// - Parameters:
+    ///   - completion: Invoked when a response, or error, is received.
+    ///   - context: An object describing the context of the IDX interaction, or `nil` if the client configuration was invalid.
+    ///   - error: Describes the error that occurred, or `nil` if successful.
+    @objc func interact(completion: @escaping(_ context: IDXClient.Context?, _ error: Error?) -> Void)
+    
+    /// Introspects the authentication state to identify the available remediation steps.
+    /// - Parameters:
+    ///   - interactionHandle: Interaction handle used to introspect the state.
     ///   - completion: Invoked when a response, or error, is received.
     ///   - response: The response describing the next steps available in this workflow.
     ///   - error: Describes the error that occurred, or `nil` if successful.
-    @objc func start(completion: @escaping (_ response: IDXClient.Response?, _ error: Error?) -> Void)
-    
+    @objc func introspect(_ interactionHandle: String,
+                          completion: @escaping (_ reponse: IDXClient.Response?, _ error: Error?) -> Void)
+
     /// Indicates whether or not the current stage in the workflow can be cancelled.
     @objc var canCancel: Bool { get }
     

@@ -15,14 +15,6 @@ extension IDXClient.APIVersion1.InteractRequest: IDXClientAPIRequest {
     func urlRequest(using configuration:IDXClient.Configuration) -> URLRequest? {
         guard let url = configuration.issuerUrl(with: "oauth2/default/v1/interact") else { return nil }
 
-        guard let codeVerifier = String.pkceCodeVerifier(),
-              let codeChallenge = codeVerifier.pkceCodeChallenge() else
-        {
-            return nil
-        }
-        
-        configuration.codeVerifier = codeVerifier
-
         let params = [
             "client_id": configuration.clientId,
             "scope": configuration.scopes.joined(separator: " "),
