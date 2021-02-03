@@ -58,8 +58,6 @@ public final class IDXClient: NSObject, IDXClientAPI {
             
             super.init()
         }
-
-        internal var codeVerifier: String?
     }
     
     /// Configuration used to create the IDX client.
