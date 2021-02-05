@@ -66,6 +66,8 @@ public final class IDXClient: NSObject, IDXClientAPI {
     /// The current context for the authentication session.
     @objc public internal(set) var context: Context?
     
+    @objc public weak var delegate: IDXClientDelegate? = nil
+    
     /// Initializes an IDX client instance with the given configuration object.
     /// - Parameters:
     ///   - configuration: Configuration object describing the application.
@@ -97,8 +99,30 @@ public final class IDXClient: NSObject, IDXClientAPI {
 
         super.init()
 
-        self.api.delegate = self
+        self.api.client = self
         self.api.interactionHandle = context?.interactionHandle
         self.api.codeVerifier = context?.codeVerifier
     }
+}
+
+/// Delegate protocol that can be used to receive updates from the IDXClient through the process of a user's authentication.
+@objc
+public protocol IDXClientDelegate {
+    /// Message sent when an error is received at any point during the authentication process.
+    /// - Parameters:
+    ///   - client: IDXClient sending the error.
+    ///   - receivedError: The error that was received.
+    @objc func idx(client: IDXClient, receivedError error: Error)
+    
+    /// Informs the delegate when an IDX response is received, either through an `introspect` or `proceed` call.
+    /// - Parameters:
+    ///   - client: IDXClient receiving the response.
+    ///   - response: The response that was received.
+    @objc func idx(client: IDXClient, didReceive response: IDXClient.Response)
+    
+    /// Informs the delegate when authentication is successful, and the token is returned.
+    /// - Parameters:
+    ///   - client: IDXClient receiving the token.
+    ///   - token: The IDX token object describing the user's credentials.
+    @objc func idx(client: IDXClient, didExchangeToken token: IDXClient.Token)
 }

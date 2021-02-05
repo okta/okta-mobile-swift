@@ -34,7 +34,7 @@ extension IDXClient.Remediation.Option {
     /// - Parameters:
     ///   - option: Remediation option to proceed to.
     ///   - data: Optional data to supply to the remediation step.
-    public func proceed(with dataFromUI: [String:Any] = [:]) -> Future<IDXClient.Response, Error> {
+    public func proceed(_ dataFromUI: [String:Any] = [:]) -> Future<IDXClient.Response, Error> {
         return Future<IDXClient.Response, Error> { (promise) in
             self.proceed(with: dataFromUI) { (response, error) in
                 if let error = error {
@@ -48,9 +48,9 @@ extension IDXClient.Remediation.Option {
         }
     }
 
-    public func proceed(using parameters: IDXClient.Remediation.Parameters) -> Future<IDXClient.Response, Error> {
+    public func proceed(_ parameters: IDXClient.Remediation.Parameters) -> Future<IDXClient.Response, Error> {
         return Future<IDXClient.Response, Error> { (promise) in
-            self.proceed(using: parameters) { (response, error) in
+            self.proceed(with: parameters) { (response, error) in
                 if let error = error {
                     promise(.failure(error))
                 } else if let response = response {

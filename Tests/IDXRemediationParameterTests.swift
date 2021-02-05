@@ -18,7 +18,7 @@ class IDXRemediationParameterTests: XCTestCase {
 
     func testFlatForm() throws {
         let response = try IDXClient.Response.response(
-            client: clientMock,
+            api: clientMock,
             folderName: "Passcode",
             fileName: "02-introspect-response")
         XCTAssertNotNil(response)
@@ -50,7 +50,7 @@ class IDXRemediationParameterTests: XCTestCase {
     
     func testNestedForm() throws {
         let response = try IDXClient.Response.response(
-            client: clientMock,
+            api: clientMock,
             folderName: "Passcode",
             fileName: "03-identify-response")
         XCTAssertNotNil(response)
@@ -76,7 +76,7 @@ class IDXRemediationParameterTests: XCTestCase {
 
     func testNestedFormWithUnnamedOption() throws {
         let response = try IDXClient.Response.response(
-            client: clientMock,
+            api: clientMock,
             folderName: "MFA-Email",
             fileName: "03-identify-response")
         XCTAssertNotNil(response)
@@ -103,7 +103,7 @@ class IDXRemediationParameterTests: XCTestCase {
 
     func testNestedFormWithCustomizedOption() throws {
         let response = try IDXClient.Response.response(
-            client: clientMock,
+            api: clientMock,
             folderName: "MFA-SOP",
             fileName: "10-credential-enroll")
         XCTAssertNotNil(response)

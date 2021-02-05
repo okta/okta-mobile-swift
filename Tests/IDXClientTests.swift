@@ -41,7 +41,7 @@ class IDXClientTests: XCTestCase {
     func testApiDelegation() {
         XCTAssertEqual(api.recordedCalls.count, 0)
         
-        let remedationOption = IDXClient.Remediation.Option(client: api,
+        let remedationOption = IDXClient.Remediation.Option(api: api,
                                                             rel: ["foo"],
                                                             name: "name",
                                                             method: "GET",
@@ -56,7 +56,7 @@ class IDXClientTests: XCTestCase {
                                                             ],
                                                             relatesTo: nil,
                                                             refresh: nil)
-        let response = IDXClient.Response(client: api,
+        let response = IDXClient.Response(api: api,
                                           stateHandle: "handle",
                                           version: "1",
                                           expiresAt: Date(),
@@ -137,7 +137,7 @@ class IDXClientTests: XCTestCase {
         
         // exchangeCode()
         expect = expectation(description: "exchangeCode")
-        client.exchangeCode(using: remedationOption) { (_, _) in
+        client.exchangeCode(using: response) { (_, _) in
             called = true
             expect.fulfill()
         }
@@ -146,7 +146,7 @@ class IDXClientTests: XCTestCase {
         call = api.recordedCalls.last
         XCTAssertEqual(call?.function, "exchangeCode(using:completion:)")
         XCTAssertEqual(call?.arguments?.count, 1)
-        XCTAssertEqual(call?.arguments?["using"] as! IDXClient.Remediation.Option, remedationOption)
+        XCTAssertEqual(call?.arguments?["using"] as! IDXClient.Response, response)
         api.reset()
         
         // Option.proceed()
@@ -188,7 +188,7 @@ class IDXClientTests: XCTestCase {
         call = api.recordedCalls.last
         XCTAssertEqual(call?.function, "exchangeCode(using:completion:)")
         XCTAssertEqual(call?.arguments?.count, 1)
-        XCTAssertEqual(call?.arguments?["using"] as! IDXClient.Remediation.Option, remedationOption)
+        XCTAssertEqual(call?.arguments?["using"] as! IDXClient.Response, response)
         api.reset()
     }
 }

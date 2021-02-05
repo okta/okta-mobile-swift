@@ -9,7 +9,7 @@ import Foundation
 @testable import OktaIdx
 
 extension IDXClient.Response {
-    class func response(client: IDXClientAPIImpl,
+    class func response(api: IDXClientAPIImpl,
                         folderName: String? = nil,
                         fileName: String) throws -> IDXClient.Response
     {
@@ -23,7 +23,7 @@ extension IDXClient.Response {
         let data = try Data(contentsOf: path)
         
         let response = try JSONDecoder.idxResponseDecoder.decode(IDXClient.APIVersion1.Response.self, from: data)
-        return IDXClient.Response(client: client, v1: response)
+        return IDXClient.Response(api: api, v1: response)
     }
 }
 

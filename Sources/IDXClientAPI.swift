@@ -63,12 +63,12 @@ public protocol IDXClientAPI {
                        data: [String : Any],
                        completion: @escaping (_ response: IDXClient.Response?, _ error: Swift.Error?) -> Void)
     
-    /// Exchanges the successful remediation response with a token.
+    /// Exchanges the successful response with a token.
     /// - Parameters:
-    ///   - successResponse: Successful remediation option to exchange.
+    ///   - response: Successful response.
     ///   - completion: Completion handler invoked when a token, or error, is received.
     ///   - token: The token that was exchanged, or `nil` if an error occurred.
     ///   - error: Describes the error that occurred, or `nil` if successful.
-    @objc func exchangeCode(using successResponse: IDXClient.Remediation.Option,
+    @objc func exchangeCode(using response: IDXClient.Response,
                             completion: @escaping (_ token: IDXClient.Token?, _ error: Swift.Error?) -> Void)
 }
