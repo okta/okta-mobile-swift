@@ -1,7 +1,7 @@
 /*:
  [Previous](@previous)
 
- # Remediation / MFA scenarios with Okta sign-on policy
+ # Remediation: MFA scenarios with Okta sign-on policy
  
  Complicated remediation scenarios, including authenticator enrolment, is possible with IDX. This process is more involved than simple username/password authentication since many mnore steps are required to proceed through the workflow. The process is highly metadata-driven, and real-world uses will involve the client building out UI elements to collect data from the user.
  
@@ -39,13 +39,13 @@ var expectation = helper.expectation(for: "Start")
 
 var response: IDXClient.Response?
 client.start() { (responseObj, error) in
+    defer { expectation.fulfill() }
     guard let responseObj = responseObj else {
-        helper.handle(expectation, error: error)
+        helper.handle(error: error)
         return
     }
 
     response = responseObj
-    expectation.fulfill()
 }
 helper.wait(for: expectation)
 
@@ -73,13 +73,13 @@ params[identifierField] = helper.showPrompt(for: "Username")
  */
 expectation = helper.expectation(for: "Identify")
 identifyOption.proceed(with: params) { (responseObj, error) in
+    defer { expectation.fulfill() }
     guard let responseObj = responseObj else {
-        helper.handle(expectation, error: error)
+        helper.handle(error: error)
         return
     }
     
     response = responseObj
-    expectation.fulfill()
 }
 helper.wait(for: expectation)
 
@@ -103,13 +103,13 @@ params[selectAuthenticatorField] = passcodeOption
 
 expectation = helper.expectation(for: "Select authenticator option")
 selectAuthenticator.proceed(with: params) { (responseObj, error) in
+    defer { expectation.fulfill() }
     guard let responseObj = responseObj else {
-        helper.handle(expectation, error: error)
+        helper.handle(error: error)
         return
     }
     
     response = responseObj
-    expectation.fulfill()
 }
 helper.wait(for: expectation)
 
@@ -129,13 +129,13 @@ params[passcodeField] = helper.showPrompt(for: "Password")
 
 expectation = helper.expectation(for: "Challenge")
 passcodeAuthenticator.proceed(with: params) { (responseObj, error) in
+    defer { expectation.fulfill() }
     guard let responseObj = responseObj else {
-        helper.handle(expectation, error: error)
+        helper.handle(error: error)
         return
     }
     
     response = responseObj
-    expectation.fulfill()
 }
 helper.wait(for: expectation)
 
@@ -157,13 +157,13 @@ params[selectEmailAuthenticatorField] = emailOption
 
 expectation = helper.expectation(for: "Select authenticator option")
 selectEmailAuthenticator.proceed(with: params) { (responseObj, error) in
+    defer { expectation.fulfill() }
     guard let responseObj = responseObj else {
-        helper.handle(expectation, error: error)
+        helper.handle(error: error)
         return
     }
     
     response = responseObj
-    expectation.fulfill()
 }
 helper.wait(for: expectation)
 
@@ -183,13 +183,13 @@ params[emailPasscodeField] = helper.showPrompt(for: "Email code")
 
 expectation = helper.expectation(for: "Challenge")
 emailAuthenticator.proceed(with: params) { (responseObj, error) in
+    defer { expectation.fulfill() }
     guard let responseObj = responseObj else {
-        helper.handle(expectation, error: error)
+        helper.handle(error: error)
         return
     }
     
     response = responseObj
-    expectation.fulfill()
 }
 helper.wait(for: expectation)
 
@@ -215,13 +215,13 @@ params[selectEnrollmentField] = questionOption
 
 expectation = helper.expectation(for: "Select security question enrollment option")
 selectEnrollmentAuthenticator.proceed(with: params) { (responseObj, error) in
+    defer { expectation.fulfill() }
     guard let responseObj = responseObj else {
-        helper.handle(expectation, error: error)
+        helper.handle(error: error)
         return
     }
     
     response = responseObj
-    expectation.fulfill()
 }
 helper.wait(for: expectation)
 
@@ -247,13 +247,13 @@ params[answerField] = "Okta"
 
 expectation = helper.expectation(for: "Select security question enrollment option")
 enrollOption.proceed(with: params) { (responseObj, error) in
+    defer { expectation.fulfill() }
     guard let responseObj = responseObj else {
-        helper.handle(expectation, error: error)
+        helper.handle(error: error)
         return
     }
     
     response = responseObj
-    expectation.fulfill()
 }
 helper.wait(for: expectation)
 
@@ -268,13 +268,13 @@ guard let skipOption = response?.remediation?["skip"] else {
 
 expectation = helper.expectation(for: "Skip subsequent enrollments")
 skipOption.proceed() { (responseObj, error) in
+    defer { expectation.fulfill() }
     guard let responseObj = responseObj else {
-        helper.handle(expectation, error: error)
+        helper.handle(error: error)
         return
     }
     
     response = responseObj
-    expectation.fulfill()
 }
 helper.wait(for: expectation)
 
@@ -287,18 +287,18 @@ guard response?.isLoginSuccessful ?? false else {
     throw helper.handle(error: "Login was unsuccessful")
 }
 
-let exchangeExpectation = helper.expectation(for: "Exchange code")
+expectation = helper.expectation(for: "Exchange code")
 var token: IDXClient.Token?
 response?.exchangeCode { (tokenObj, error) in
+    defer { expectation.fulfill() }
     guard let tokenObj = tokenObj else {
-        helper.handle(exchangeExpectation, error: error)
+        helper.handle(error: error)
         return
     }
 
     token = tokenObj
-    exchangeExpectation.fulfill()
 }
-helper.wait(for: exchangeExpectation)
+helper.wait(for: expectation)
 
 /*:
  ## Using the Token response

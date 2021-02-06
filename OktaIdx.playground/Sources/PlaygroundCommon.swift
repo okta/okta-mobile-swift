@@ -23,20 +23,20 @@ public class PlaygroundHelper: NSObject {
         XCTWaiter().wait(for: [expectation], timeout: timeout)
     }
     
-    public func handle(_ waiter: XCTestExpectation? = nil, error: Swift.Error?) -> Swift.Error {
+    public func handle(error: Swift.Error?) -> Swift.Error {
         print("Error: \(String(describing: error))")
         
         finish()
         return error ?? Error.error(message: "Unknown error")
     }
     
-    public func handle(_ waiter: XCTestExpectation? = nil, error message: String) -> Swift.Error {
+    public func handle(error message: String) -> Swift.Error {
         print(message)
         finish()
         return Error.error(message: message)
     }
     
-    public func finish(_ waiter: XCTestExpectation? = nil, with token: IDXClient.Token? = nil) {
+    public func finish(with token: IDXClient.Token? = nil) {
         if let token = token {
             print("Received a successful token \(token)")
         } else {
