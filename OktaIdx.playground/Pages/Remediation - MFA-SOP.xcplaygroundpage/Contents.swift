@@ -72,7 +72,7 @@ params[identifierField] = helper.showPrompt(for: "Username")
  Once you have the parameters ready, you can proceed to the next remediation step. This allows the server to process our user's response, and will then return a new response object that describes the next steps available. In this case, the next step should hopefully be a remediation step where a user can supply their password.
  */
 expectation = helper.expectation(for: "Identify")
-identifyOption.proceed(using: params) { (responseObj, error) in
+identifyOption.proceed(with: params) { (responseObj, error) in
     guard let responseObj = responseObj else {
         helper.handle(expectation, error: error)
         return
@@ -102,7 +102,7 @@ params = IDXClient.Remediation.Parameters()
 params[selectAuthenticatorField] = passcodeOption
 
 expectation = helper.expectation(for: "Select authenticator option")
-selectAuthenticator.proceed(using: params) { (responseObj, error) in
+selectAuthenticator.proceed(with: params) { (responseObj, error) in
     guard let responseObj = responseObj else {
         helper.handle(expectation, error: error)
         return
@@ -128,7 +128,7 @@ params = IDXClient.Remediation.Parameters()
 params[passcodeField] = helper.showPrompt(for: "Password")
 
 expectation = helper.expectation(for: "Challenge")
-passcodeAuthenticator.proceed(using: params) { (responseObj, error) in
+passcodeAuthenticator.proceed(with: params) { (responseObj, error) in
     guard let responseObj = responseObj else {
         helper.handle(expectation, error: error)
         return
@@ -156,7 +156,7 @@ params = IDXClient.Remediation.Parameters()
 params[selectEmailAuthenticatorField] = emailOption
 
 expectation = helper.expectation(for: "Select authenticator option")
-selectEmailAuthenticator.proceed(using: params) { (responseObj, error) in
+selectEmailAuthenticator.proceed(with: params) { (responseObj, error) in
     guard let responseObj = responseObj else {
         helper.handle(expectation, error: error)
         return
@@ -182,7 +182,7 @@ params = IDXClient.Remediation.Parameters()
 params[emailPasscodeField] = helper.showPrompt(for: "Email code")
 
 expectation = helper.expectation(for: "Challenge")
-emailAuthenticator.proceed(using: params) { (responseObj, error) in
+emailAuthenticator.proceed(with: params) { (responseObj, error) in
     guard let responseObj = responseObj else {
         helper.handle(expectation, error: error)
         return
@@ -214,7 +214,7 @@ params = IDXClient.Remediation.Parameters()
 params[selectEnrollmentField] = questionOption
 
 expectation = helper.expectation(for: "Select security question enrollment option")
-selectEnrollmentAuthenticator.proceed(using: params) { (responseObj, error) in
+selectEnrollmentAuthenticator.proceed(with: params) { (responseObj, error) in
     guard let responseObj = responseObj else {
         helper.handle(expectation, error: error)
         return
@@ -246,7 +246,7 @@ params[questionField] = "What is my favorite CIAM service?"
 params[answerField] = "Okta"
 
 expectation = helper.expectation(for: "Select security question enrollment option")
-enrollOption.proceed(using: params) { (responseObj, error) in
+enrollOption.proceed(with: params) { (responseObj, error) in
     guard let responseObj = responseObj else {
         helper.handle(expectation, error: error)
         return

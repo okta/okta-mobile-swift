@@ -26,6 +26,8 @@
 		964A44E1259D3331002CB250 /* IDXClientV1ResponseTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 964A44E0259D3331002CB250 /* IDXClientV1ResponseTests.swift */; };
 		964A44E5259E6870002CB250 /* IDXClient+Combine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 964A44E4259E6870002CB250 /* IDXClient+Combine.swift */; };
 		96549E2225C1FAF8007FCF29 /* IDXExtractFormValueTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96549E2125C1FAF8007FCF29 /* IDXExtractFormValueTests.swift */; };
+		9664F82E25CC7C0C00F6CB21 /* IDXClientDelegateRecorder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9664F82D25CC7C0C00F6CB21 /* IDXClientDelegateRecorder.swift */; };
+		9664F83225CC7E3F00F6CB21 /* IDXClientDelegateTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9664F83125CC7E3F00F6CB21 /* IDXClientDelegateTests.swift */; };
 		966A1E76258BDB1B00864DB7 /* URLSessionProtocolTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 966A1E75258BDB1B00864DB7 /* URLSessionProtocolTests.swift */; };
 		966A1E80258BEADB00864DB7 /* IDXClientError+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 966A1E7F258BEADB00864DB7 /* IDXClientError+Extensions.swift */; };
 		967102CA2587F93E00D5D85F /* URLSessionMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 967102C92587F93D00D5D85F /* URLSessionMock.swift */; };
@@ -102,6 +104,8 @@
 		964A44E0259D3331002CB250 /* IDXClientV1ResponseTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IDXClientV1ResponseTests.swift; sourceTree = "<group>"; };
 		964A44E4259E6870002CB250 /* IDXClient+Combine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "IDXClient+Combine.swift"; sourceTree = "<group>"; };
 		96549E2125C1FAF8007FCF29 /* IDXExtractFormValueTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IDXExtractFormValueTests.swift; sourceTree = "<group>"; };
+		9664F82D25CC7C0C00F6CB21 /* IDXClientDelegateRecorder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IDXClientDelegateRecorder.swift; sourceTree = "<group>"; };
+		9664F83125CC7E3F00F6CB21 /* IDXClientDelegateTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IDXClientDelegateTests.swift; sourceTree = "<group>"; };
 		966A1E75258BDB1B00864DB7 /* URLSessionProtocolTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLSessionProtocolTests.swift; sourceTree = "<group>"; };
 		966A1E7F258BEADB00864DB7 /* IDXClientError+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "IDXClientError+Extensions.swift"; sourceTree = "<group>"; };
 		967102C92587F93D00D5D85F /* URLSessionMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLSessionMock.swift; sourceTree = "<group>"; };
@@ -188,6 +192,7 @@
 			isa = PBXGroup;
 			children = (
 				961BE42B2583EC6000DCE8AC /* TestExtensions.swift */,
+				9664F82D25CC7C0C00F6CB21 /* IDXClientDelegateRecorder.swift */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -250,6 +255,7 @@
 				96DCDCF52588354E009487CB /* IDXClientCombineTests.swift */,
 				964A44B1259A90BE002CB250 /* IDXClientErrorTests.swift */,
 				961BE4262583E73300DCE8AC /* IDXClientRequestTests.swift */,
+				9664F83125CC7E3F00F6CB21 /* IDXClientDelegateTests.swift */,
 				96F8F22A2582C2DE00DA2701 /* IDXClientTests.swift */,
 				964A44E0259D3331002CB250 /* IDXClientV1ResponseTests.swift */,
 				96F8F1C025804A0C00DA2701 /* IDXClientVersionTests.swift */,
@@ -547,8 +553,10 @@
 				96A21F3225C0A5D7006C7BBB /* IDXRelatesToParserTests.swift in Sources */,
 				96549E2225C1FAF8007FCF29 /* IDXExtractFormValueTests.swift in Sources */,
 				96437C1E25CB17E100ED7E11 /* IDXResponseCodableTests.swift in Sources */,
+				9664F83225CC7E3F00F6CB21 /* IDXClientDelegateTests.swift in Sources */,
 				96C51E7325BA09CB007A2519 /* IDXResponseTypeTests.swift in Sources */,
 				967102CA2587F93E00D5D85F /* URLSessionMock.swift in Sources */,
+				9664F82E25CC7C0C00F6CB21 /* IDXClientDelegateRecorder.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

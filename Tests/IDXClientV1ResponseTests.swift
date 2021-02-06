@@ -274,7 +274,7 @@ class IDXClientV1ResponseTests: XCTestCase {
             XCTAssertEqual(option?.form?.value[0].name, "id")
             XCTAssertEqual(option?.form?.value[1].name, "methodType")
             
-            let publicObj = IDXClient.Remediation.FormValue(client: clientMock, v1: obj)
+            let publicObj = IDXClient.Remediation.FormValue(api: clientMock, v1: obj)
             XCTAssertNotNil(publicObj)
             XCTAssertEqual(publicObj.name, "authenticator")
             XCTAssertEqual(publicObj.type, "object")
@@ -326,7 +326,7 @@ class IDXClientV1ResponseTests: XCTestCase {
             XCTAssertEqual(obj.messages?.value[0].i18n?.key, "authfactor.challenge.question_factor.answer_invalid")
             XCTAssertEqual(obj.messages?.value[0].message, "Your answer doesn't match our records. Please try again.")
             
-            let publicObj = IDXClient.Remediation.FormValue(client: clientMock, v1: obj)
+            let publicObj = IDXClient.Remediation.FormValue(api: clientMock, v1: obj)
             XCTAssertNotNil(publicObj)
             XCTAssertNotNil(publicObj.messages)
             XCTAssertEqual(publicObj.messages?.count, 1)
@@ -392,7 +392,7 @@ class IDXClientV1ResponseTests: XCTestCase {
             XCTAssertEqual(obj.messages?.value[0].i18n?.key, "errors.E0000004")
             XCTAssertEqual(obj.messages?.value[0].message, "Authentication failed")
             
-            let publicObj = IDXClient.Response(client: clientMock, v1: obj)
+            let publicObj = IDXClient.Response(api: clientMock, v1: obj)
             XCTAssertNotNil(publicObj)
             XCTAssertNotNil(publicObj.messages)
             XCTAssertEqual(publicObj.messages?.count, 1)
@@ -416,7 +416,7 @@ class IDXClientV1ResponseTests: XCTestCase {
             XCTAssertEqual(obj.i18n?.key, "errors.E0000004")
             XCTAssertEqual(obj.message, "Authentication failed")
             
-            let publicObj = IDXClient.Message(client: clientMock, v1: obj)
+            let publicObj = IDXClient.Message(api: clientMock, v1: obj)
             XCTAssertNotNil(publicObj)
             XCTAssertEqual(publicObj?.type, .error)
             XCTAssertEqual(publicObj?.localizationKey, "errors.E0000004")
@@ -435,7 +435,7 @@ class IDXClientV1ResponseTests: XCTestCase {
             XCTAssertNil(obj.i18n)
             XCTAssertEqual(obj.message, "Authentication failed")
             
-            let publicObj = IDXClient.Message(client: clientMock, v1: obj)
+            let publicObj = IDXClient.Message(api: clientMock, v1: obj)
             XCTAssertNotNil(publicObj)
             XCTAssertEqual(publicObj?.type, .info)
             XCTAssertNil(publicObj?.localizationKey)

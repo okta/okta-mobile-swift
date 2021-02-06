@@ -56,19 +56,19 @@ protocol IDXHasRelatedObjects: IDXContainsRelatableObjects {
 }
 
 extension IDXClient.Response: IDXContainsRelatableObjects {
-    internal convenience init(client: IDXClientAPIImpl, v1 response: V1.Response) {
-        self.init(client: client,
+    internal convenience init(api: IDXClientAPIImpl, v1 response: V1.Response) {
+        self.init(api: api,
                   stateHandle: response.stateHandle,
                   version: response.version,
                   expiresAt: response.expiresAt,
                   intent: response.intent,
                   authenticators: response.authenticators?.value.compactMap { IDXClient.Authenticator(v1: $0) },
                   authenticatorEnrollments: response.authenticatorEnrollments?.value.compactMap { IDXClient.Authenticator(v1: $0) },
-                  currentAuthenticatorEnrollment: IDXClient.Authenticator.CurrentEnrollment(client: client, v1: response.currentAuthenticatorEnrollment?.value),
-                  remediation: IDXClient.Remediation(client: client, v1: response.remediation),
-                  cancel: IDXClient.Remediation.Option(client: client, v1: response.cancel),
-                  success: IDXClient.Remediation.Option(client: client, v1:  response.successWithInteractionCode),
-                  messages: response.messages?.value.compactMap { IDXClient.Message(client: client, v1: $0) },
+                  currentAuthenticatorEnrollment: IDXClient.Authenticator.CurrentEnrollment(api: api, v1: response.currentAuthenticatorEnrollment?.value),
+                  remediation: IDXClient.Remediation(api: api, v1: response.remediation),
+                  cancel: IDXClient.Remediation.Option(api: api, v1: response.cancel),
+                  success: IDXClient.Remediation.Option(api: api, v1:  response.successWithInteractionCode),
+                  messages: response.messages?.value.compactMap { IDXClient.Message(api: api, v1: $0) },
                   app: IDXClient.Application(v1: response.app?.value),
                   user: IDXClient.User(v1: response.user?.value))
 
@@ -87,7 +87,7 @@ extension IDXClient.Response: IDXContainsRelatableObjects {
 }
 
 extension IDXClient.Message {
-    internal convenience init?(client: IDXClientAPIImpl, v1 object: V1.Response.Message?) {
+    internal convenience init?(api: IDXClientAPIImpl, v1 object: V1.Response.Message?) {
         guard let object = object else { return nil }
         self.init(type: object.type,
                   localizationKey: object.i18n?.key,
@@ -132,30 +132,30 @@ extension IDXClient.Authenticator {
 }
 
 extension IDXClient.Authenticator.CurrentEnrollment {
-    internal convenience init?(client: IDXClientAPIImpl, v1 object: V1.Response.CurrentAuthenticatorEnrollment?) {
+    internal convenience init?(api: IDXClientAPIImpl, v1 object: V1.Response.CurrentAuthenticatorEnrollment?) {
         guard let object = object else { return nil }
         self.init(id: object.id,
                   displayName: object.displayName,
                   type: object.type,
                   methods: object.methods,
                   profile: object.profile,
-                  send: IDXClient.Remediation.Option(client: client, v1: object.send),
-                  resend: IDXClient.Remediation.Option(client: client, v1: object.resend),
-                  poll: IDXClient.Remediation.Option(client: client, v1: object.poll),
-                  recover: IDXClient.Remediation.Option(client: client, v1: object.recover))
+                  send: IDXClient.Remediation.Option(api: api, v1: object.send),
+                  resend: IDXClient.Remediation.Option(api: api, v1: object.resend),
+                  poll: IDXClient.Remediation.Option(api: api, v1: object.poll),
+                  recover: IDXClient.Remediation.Option(api: api, v1: object.recover))
     }
 }
 
 extension IDXClient.Remediation: IDXContainsRelatableObjects {
-    internal convenience init?(client: IDXClientAPIImpl, v1 object: V1.Response.IonCollection<V1.Response.Form>?) {
+    internal convenience init?(api: IDXClientAPIImpl, v1 object: V1.Response.IonCollection<V1.Response.Form>?) {
         guard let object = object,
               let type = object.type else {
             return nil
         }
-        self.init(client: client,
+        self.init(api: api,
                   type: type,
                   remediationOptions: object.value.compactMap { (value) in
-                    IDXClient.Remediation.Option(client: client, v1: value)
+                    IDXClient.Remediation.Option(api: api, v1: value)
                   })
     }
     
@@ -165,16 +165,16 @@ extension IDXClient.Remediation: IDXContainsRelatableObjects {
 }
 
 extension IDXClient.Remediation.Option: IDXHasRelatedObjects {
-    internal convenience init?(client: IDXClientAPIImpl, v1 object: V1.Response.Form?) {
+    internal convenience init?(api: IDXClientAPIImpl, v1 object: V1.Response.Form?) {
         guard let object = object else { return nil }
-        self.init(client: client,
+        self.init(api: api,
                   rel: object.rel,
                   name: object.name,
                   method: object.method,
                   href: object.href,
                   accepts: object.accepts,
                   form: object.value.map { (value) in
-                    IDXClient.Remediation.FormValue(client: client, v1: value)
+                    IDXClient.Remediation.FormValue(api: api, v1: value)
                   },
                   relatesTo: object.relatesTo,
                   refresh: (object.refresh != nil) ? Double(object.refresh!) / 1000.0 : nil)
@@ -192,7 +192,7 @@ extension IDXClient.Remediation.Option: IDXHasRelatedObjects {
 }
 
 extension IDXClient.Remediation.FormValue: IDXHasRelatedObjects {
-    internal convenience init(client: IDXClientAPIImpl, v1 object: V1.Response.FormValue) {
+    internal convenience init(api: IDXClientAPIImpl, v1 object: V1.Response.FormValue) {
         self.init(name: object.name,
                   label: object.label,
                   type: object.type,
@@ -201,10 +201,10 @@ extension IDXClient.Remediation.FormValue: IDXHasRelatedObjects {
                   mutable: object.mutable ?? true,
                   required: object.required ?? false,
                   secret: object.secret ?? false,
-                  form: object.form?.value.map { IDXClient.Remediation.FormValue(client: client, v1: $0) },
+                  form: object.form?.value.map { IDXClient.Remediation.FormValue(api: api, v1: $0) },
                   relatesTo: object.relatesTo,
-                  options: object.options?.map { IDXClient.Remediation.FormValue(client: client, v1: $0) },
-                  messages: object.messages?.value.compactMap { IDXClient.Message(client: client, v1: $0) })
+                  options: object.options?.map { IDXClient.Remediation.FormValue(api: api, v1: $0) },
+                  messages: object.messages?.value.compactMap { IDXClient.Message(api: api, v1: $0) })
     }
     
     func nestedRelatableObjects() -> [IDXHasRelatedObjects] {
@@ -220,7 +220,7 @@ extension IDXClient.Remediation.FormValue: IDXHasRelatedObjects {
 }
 
 extension IDXClient.Token {
-    internal convenience init(client: IDXClientAPIImpl, v1 object: V1.Token) {
+    internal convenience init(api: IDXClientAPIImpl, v1 object: V1.Token) {
         self.init(accessToken: object.accessToken,
                   refreshToken: object.refreshToken,
                   expiresIn: TimeInterval(object.expiresIn),

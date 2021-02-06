@@ -55,7 +55,7 @@ class IDXClientAPIVersion1Tests: XCTestCase {
         try session.expect("https://foo.oktapreview.com/idp/idx/cancel", fileName: "cancel-response")
 
         var response: IDXClient.Response!
-        var completion = expectation(description: "Response")
+        let completion = expectation(description: "Response")
         api.introspect("ABCeasyas123") { (responseValue, error) in
             XCTAssertNotNil(responseValue)
             XCTAssertNil(error)
@@ -108,14 +108,6 @@ class IDXClientAPIVersion1Tests: XCTestCase {
         XCTAssertEqual(api.cancelRemediationOption?.href.absoluteString, "https://foo.oktapreview.com/idp/idx/cancel")
         XCTAssertEqual(api.cancelRemediationOption?.method, "POST")
         XCTAssertEqual(api.cancelRemediationOption?.accepts, "application/ion+json; okta-version=1.0.0")
-        
-        completion = expectation(description: "Cancel response")
-        api.cancel { (response, error) in
-            XCTAssertNotNil(response)
-            XCTAssertNil(error)
-            completion.fulfill()
-        }
-        wait(for: [completion], timeout: 1)
     }
 
     func testIntrospectFailure() throws {

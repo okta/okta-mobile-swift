@@ -9,6 +9,8 @@ import Foundation
 @testable import OktaIdx
 
 class IDXClientAPIv1Mock: IDXClientAPIImpl {
+    var client: IDXClientAPI?
+    
     var canCancel: Bool {
         recordedCalls.append(RecordedCall(function: #function, arguments: nil))
         return false
@@ -36,8 +38,6 @@ class IDXClientAPIv1Mock: IDXClientAPIImpl {
     private func response(for name: String) -> [String:Any]? {
         return expectations.removeValue(forKey: name)
     }
-    
-    weak var delegate: IDXClientAPIDelegate?
     
     init(configuration: IDXClient.Configuration) {
         self.configuration = configuration
@@ -71,12 +71,12 @@ class IDXClientAPIv1Mock: IDXClientAPIImpl {
         completion(result?["response"] as? IDXClient.Response, result?["error"] as? Error)
     }
 
-    func exchangeCode(using successResponse: IDXClient.Remediation.Option, completion: @escaping (IDXClient.Token?, Error?) -> Void) {
+    func exchangeCode(using response: IDXClient.Response, completion: @escaping (IDXClient.Token?, Error?) -> Void) {
         recordedCalls.append(RecordedCall(function: #function,
                                           arguments: [
-                                            "using": successResponse as Any
+                                            "using": response as Any
                                           ]))
-        let result = response(for: #function)
+        let result = self.response(for: #function)
         completion(result?["token"] as? IDXClient.Token, result?["error"] as? Error)
     }
 }

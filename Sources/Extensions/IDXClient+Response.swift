@@ -28,7 +28,7 @@ public extension IDXClient {
     /// Describes the response from an Okta Identity Engine workflow stage. This is used to determine the current state of the workflow, the set of available remediation steps to proceed through the workflow, actions that can be performed, and other information relevant to the authentication of a user.
     @objc(IDXResponse)
     final class Response: NSObject {
-        private let client: IDXClientAPIImpl
+        private let api: IDXClientAPIImpl
         
         /// The current state handle for the IDX workflow.
         @objc public let stateHandle: String
@@ -76,33 +76,32 @@ public extension IDXClient {
         ///   - completion: Invoked when the operation is cancelled.
         ///   - response: The response describing the new workflow next steps, or `nil` if an error occurred.
         ///   - error: Describes the error that occurred, or `nil` if successful.
-        @objc public func cancel(completionHandler: @escaping(_ response: Response?, _ error: Error?) -> Void) {
+        @objc public func cancel(completion: @escaping(_ response: Response?, _ error: Error?) -> Void) {
             guard let cancelOption = cancelRemediationOption else {
-                completionHandler(nil, IDXClientError.unknownRemediationOption(name: "cancel"))
+                completion(nil, IDXClientError.unknownRemediationOption(name: "cancel"))
                 return
             }
             
-            cancelOption.proceed(with: [:], completionHandler: completionHandler)
+            cancelOption.proceed(with: [:], completion: completion)
         }
         
         /// Exchanges the successful remediation response with a token.
         /// - Parameters:
-        ///   - successResponse: Successful remediation option to exchange.
         ///   - completion: Completion handler invoked when a token, or error, is received.
         ///   - token: The token that was exchanged, or `nil` if an error occurred.
         ///   - error: Describes the error that occurred, or `nil` if successful.
-        @objc public func exchangeCode(completionHandler: @escaping(_ token: Token?, _ error: Error?) -> Void) {
-            guard let successResponse = successResponse else {
-                completionHandler(nil, IDXClientError.successResponseMissing)
+        @objc public func exchangeCode(completion: @escaping(_ token: Token?, _ error: Error?) -> Void) {
+            guard let client = api.client else {
+                completion(nil, IDXClientError.invalidClient)
                 return
             }
             
-            client.exchangeCode(using: successResponse, completion: completionHandler)
+            client.exchangeCode(using: self, completion: completion)
         }
         
         internal let cancelRemediationOption: Remediation.Option?
         internal let successResponse: Remediation.Option?
-        internal init(client: IDXClientAPIImpl,
+        internal init(api: IDXClientAPIImpl,
                       stateHandle: String,
                       version: String,
                       expiresAt: Date,
@@ -117,7 +116,7 @@ public extension IDXClient {
                       app: Application?,
                       user: User?)
         {
-            self.client = client
+            self.api = api
             self.stateHandle = stateHandle
             self.version = version
             self.expiresAt = expiresAt
@@ -330,10 +329,14 @@ public extension IDXClient {
             get { remediationOptions.filter { $0.name == name }.first }
         }
         
-        private weak var client: IDXClientAPIImpl?
+        @nonobjc public subscript(type: RemediationType) -> Option? {
+            get { remediationOptions.filter { $0.type == type }.first }
+        }
+        
+        private weak var api: IDXClientAPIImpl?
 
-        internal init(client: IDXClientAPIImpl, type: String, remediationOptions: [Option]) {
-            self.client = client
+        internal init(api: IDXClientAPIImpl, type: String, remediationOptions: [Option]) {
+            self.api = api
             self.type = type
             self.remediationOptions = remediationOptions
          
@@ -350,6 +353,12 @@ public extension IDXClient {
         @objc(IDXRemediationParameters)
         final public class Parameters: NSObject {
             internal var storage: [FormValue:Any] = [:]
+            
+            convenience public init(_ parameters: [FormValue:Any]) {
+                self.init()
+                
+                storage.merge(parameters, uniquingKeysWith: { return $1 })
+            }
             
             /// Sets the user-supplied value for the given form Value.
             /// - Parameters:
@@ -518,9 +527,9 @@ public extension IDXClient {
                 get { form.filter { $0.name == name }.first }
             }
 
-            private weak var client: IDXClientAPIImpl?
+            private weak var api: IDXClientAPIImpl?
             
-            internal init(client: IDXClientAPIImpl,
+            internal init(api: IDXClientAPIImpl,
                           rel: [String],
                           name: String,
                           method: String,
@@ -530,7 +539,7 @@ public extension IDXClient {
                           relatesTo: [APIVersion1.Response.RelatesTo]?,
                           refresh: TimeInterval?)
             {
-                self.client = client
+                self.api = api
                 self.rel = rel
                 self.name = name
                 self.type = RemediationType(string: name)
@@ -547,36 +556,38 @@ public extension IDXClient {
             /// Executes the remediation option and proceeds through the workflow using the supplied form parameters.
             /// - Parameters:
             ///   - dataFromUI: Form data collected from the user.
-            ///   - completionHandler: Completion handler invoked when a response is received.
+            ///   - completion: Completion handler invoked when a response is received.
             ///   - response: `IDXClient.Response` object describing the next step in the remediation workflow, or `nil` if an error occurred.
             ///   - error: A description of the error that occurred, or `nil` if the request was successful.
-            @objc public func proceed(with dataFromUI: [String:Any], completionHandler: @escaping (_ response: Response?, _ error: Error?) -> Void) {
-                guard let client = client else {
-                    completionHandler(nil, IDXClientError.invalidClient)
+            @objc(proceedWithData:completion:)
+            public func proceed(with dataFromUI: [String:Any] = [:], completion: @escaping (_ response: Response?, _ error: Error?) -> Void) {
+                guard let client = api?.client else {
+                    completion(nil, IDXClientError.invalidClient)
                     return
                 }
                 
                 do {
                     client.proceed(remediation: self,
                                    data: try self.formValues(with: dataFromUI),
-                                   completion: completionHandler)
+                                   completion: completion)
                 } catch {
-                    completionHandler(nil, error)
+                    completion(nil, error)
                 }
             }
 
-            @objc public func proceed(using parameters: Parameters, completionHandler: @escaping (_ response: Response?, _ error: Error?) -> Void) {
-                guard let client = client else {
-                    completionHandler(nil, IDXClientError.invalidClient)
+            @objc(proceedWithParameters:completion:)
+            public func proceed(with parameters: Parameters, completion: @escaping (_ response: Response?, _ error: Error?) -> Void) {
+                guard let client = api?.client else {
+                    completion(nil, IDXClientError.invalidClient)
                     return
                 }
                 
                 do {
                     client.proceed(remediation: self,
                                    data: try formValues(using: parameters),
-                                   completion: completionHandler)
+                                   completion: completion)
                 } catch {
-                    completionHandler(nil, error)
+                    completion(nil, error)
                 }
             }
 

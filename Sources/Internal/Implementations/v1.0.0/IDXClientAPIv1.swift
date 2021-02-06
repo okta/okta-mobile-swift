@@ -65,7 +65,7 @@ extension IDXClient.APIVersion1: IDXClientAPIImpl {
                 return
             }
 
-            completion(IDXClient.Response(client: self, v1: response), nil)
+            completion(IDXClient.Response(api: self, v1: response), nil)
         }
     }
         
@@ -131,13 +131,18 @@ extension IDXClient.APIVersion1: IDXClientAPIImpl {
                 return
             }
 
-            completion(IDXClient.Response(client: self, v1: response), nil)
+            completion(IDXClient.Response(api: self, v1: response), nil)
         }
     }
 
-    func exchangeCode(using successResponse: IDXClient.Remediation.Option,
+    func exchangeCode(using response: IDXClient.Response,
                       completion: @escaping (IDXClient.Token?, Error?) -> Void)
     {
+        guard let successResponse = response.successResponse else {
+            completion(nil, IDXClientError.successResponseMissing)
+            return
+        }
+
         let data: [String:Any] = successResponse.form
             .filter { $0.name != nil && $0.required && $0.value == nil }
             .reduce(into: [:]) { (result, formValue) in
@@ -180,7 +185,7 @@ extension IDXClient.APIVersion1: IDXClientAPIImpl {
                 return
             }
 
-            completion(IDXClient.Token(client: self, v1: response), nil)
+            completion(IDXClient.Token(api: self, v1: response), nil)
         }
     }
 }
@@ -188,7 +193,7 @@ extension IDXClient.APIVersion1: IDXClientAPIImpl {
 extension IDXClient.APIVersion1 {
     func consumeResponse(_ response: IntrospectRequest.ResponseType) throws {
         self.stateHandle = response.stateHandle
-        self.cancelRemediationOption = IDXClient.Remediation.Option(client: self, v1: response.cancel)
+        self.cancelRemediationOption = IDXClient.Remediation.Option(api: self, v1: response.cancel)
     }
     
     func consumeResponse(_ response: IDXClient.Response) throws  {

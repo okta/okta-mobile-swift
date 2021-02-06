@@ -15,16 +15,11 @@ internal protocol IDXClientAPIImpl: class, IDXClientAPI {
     /// The client configuration used when constructing the API implementation.
     var configuration: IDXClient.Configuration { get }
     
-    /// The delegate used to coordinate messages to the public-facing client API instance.
-    var delegate: IDXClientAPIDelegate? { get set }
+    /// The upstream client to communicate critical events to
+    var client: IDXClientAPI? { get set }
     
     var interactionHandle: String? { get set }
     var codeVerifier: String? { get set }
-}
-
-/// Delegate protocol used to receive messages and updates from IDXClientAPIImpl instances.
-internal protocol IDXClientAPIDelegate: class {
-    func clientAPIStateHandleChanged(stateHandle: String?)
 }
 
 /// Protocol used to represent IDX API requests, and their expected response types.

@@ -32,7 +32,7 @@ class IDXClientCombineTests: XCTestCase {
                            context: nil,
                            api: api,
                            queue: DispatchQueue.global())
-        remedationOption = IDXClient.Remediation.Option(client: api,
+        remedationOption = IDXClient.Remediation.Option(api: api,
                                                         rel: ["foo"],
                                                         name: "name",
                                                         method: "GET",
@@ -43,7 +43,7 @@ class IDXClientCombineTests: XCTestCase {
                                                         refresh: nil)
         context = IDXClient.Context(interactionHandle: "interactionHandle",
                                     codeVerifier: "verifier")
-        response = IDXClient.Response(client: api,
+        response = IDXClient.Response(api: api,
                                       stateHandle: "handle",
                                       version: "1",
                                       expiresAt: Date(),
@@ -91,7 +91,7 @@ class IDXClientCombineTests: XCTestCase {
         XCTAssertTrue(called)
         let call = api.recordedCalls.last
         XCTAssertEqual(call?.function, "exchangeCode(using:completion:)")
-        XCTAssertEqual(call?.arguments!["using"] as? IDXClient.Remediation.Option, remedationOption)
+        XCTAssertEqual(call?.arguments!["using"] as? IDXClient.Response, response)
     }
 
     func testStart() throws {

@@ -10,6 +10,7 @@ import Foundation
 extension IDXClient {
     internal class APIVersion1 {
         static let version = Version.v1_0_0
+        weak var client: IDXClientAPI?
         var stateHandle: String? = nil
         var interactionHandle: String? = nil
         var codeVerifier: String? = nil
@@ -17,7 +18,6 @@ extension IDXClient {
         
         let configuration: IDXClient.Configuration
         let session: URLSessionProtocol
-        weak var delegate: IDXClientAPIDelegate?
 
         init(with configuration: Configuration, session: URLSessionProtocol? = nil) {
             self.configuration = configuration
@@ -25,6 +25,29 @@ extension IDXClient {
         }
     }
     
+    internal func handleResponse<T>(_ response: T?, error: Error?, completion: ((T?, Error?) -> Void)?) {
+        self.queue.async {
+            self.informDelegate(self.delegate, response: response, error: error)
+            
+            if let completion = completion {
+                completion(response, error)
+            }
+        }
+    }
+    
+    internal func informDelegate<T>(_ delegate: IDXClientDelegate?, response: T?, error: Error?) {
+        guard let delegate = delegate else { return }
+        if let error = error {
+            delegate.idx(client: self, receivedError: error)
+        }
+        
+        if let response = response as? Response {
+            delegate.idx(client: self, didReceive: response)
+        } else if let response = response as? Token {
+            delegate.idx(client: self, didExchangeToken: response)
+        }
+    }
+
     public func start(completion: @escaping (Response?, Error?) -> Void) {
         interact { (context, error) in
             guard error == nil else {
@@ -43,18 +66,14 @@ extension IDXClient {
     
     public func interact(completion: @escaping (Context?, Error?) -> Void) {
         self.api.interact { (context, error) in
-            self.queue.async {
-                self.context = context
-                completion(context, error)
-            }
+            self.context = context
+            self.handleResponse(context, error: error, completion: completion)
         }
     }
     
     public func introspect(_ interactionHandle: String, completion: @escaping (Response?, Error?) -> Void) {
         self.api.introspect(interactionHandle) { (response, error) in
-            self.queue.async {
-                completion(response, error)
-            }
+            self.handleResponse(response, error: error, completion: completion)
         }
     }
     
@@ -64,9 +83,7 @@ extension IDXClient {
     
     public func cancel(completion: @escaping (Response?, Error?) -> Void) {
         self.api.cancel { (response, error) in
-            self.queue.async {
-                completion(response, error)
-            }
+            self.handleResponse(response, error: error, completion: completion)
         }
     }
     
@@ -75,17 +92,13 @@ extension IDXClient {
                         completion: @escaping (IDXClient.Response?, Error?) -> Void)
     {
         self.api.proceed(remediation: option, data: data) { (response, error) in
-            self.queue.async {
-                completion(response, error)
-            }
+            self.handleResponse(response, error: error, completion: completion)
         }
     }
     
-    public func exchangeCode(using successResponse: Remediation.Option, completion: @escaping (Token?, Error?) -> Void) {
-        self.api.exchangeCode(using: successResponse) { (token, error) in
-            self.queue.async {
-                completion(token, error)
-            }
+    public func exchangeCode(using response: Response, completion: @escaping (Token?, Error?) -> Void) {
+        self.api.exchangeCode(using: response) { (token, error) in
+            self.handleResponse(token, error: error, completion: completion)
         }
     }
 }
@@ -181,10 +194,3 @@ extension IDXClient.Message.MessageClass {
         }
     }
 }
-
-extension IDXClient: IDXClientAPIDelegate {
-    func clientAPIStateHandleChanged(stateHandle: String?) {
-        print("State handle changed to \(stateHandle)")
-    }
-}
-

@@ -71,7 +71,7 @@ class IDXRemediationTableViewController: UITableViewController, IDXResponseContr
         }
         
         cancelObject = remediationOption?
-            .proceed(using: formValues)
+            .proceed(formValues)
             .receive(on: RunLoop.main)
             .sink { (completion) in
                 switch completion {
