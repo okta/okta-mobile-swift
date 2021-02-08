@@ -33,19 +33,19 @@ let client = IDXClient(configuration: config)
  To begin authenticating a user, you first call the `start()` method on the `IDXClient`. This asynchronously calls the IDX API, and if the client configuration is valid, you will get an `IDXClient.Response` object that describes the available remediation steps to authenticate the user.
  */
 let helper = PlaygroundHelper()
-let startExpectation = helper.expectation(for: "Start")
+var expectation = helper.expectation(for: "Start")
 
 var response: IDXClient.Response?
 client.start() { (responseObj, error) in
+    defer { expectation.fulfill() }
     guard let responseObj = responseObj else {
-        helper.handle(startExpectation, error: error)
+        helper.handle(error: error)
         return
     }
 
     response = responseObj
-    startExpectation.fulfill()
 }
-helper.wait(for: startExpectation)
+helper.wait(for: expectation)
 
 /*:
  ## Identifying the user with their username
@@ -69,17 +69,17 @@ params[identifierField] = helper.showPrompt(for: "Username")
  
  Once you have the parameters ready, you can proceed to the next remediation step. This allows the server to process our user's response, and will then return a new response object that describes the next steps available. In this case, the next step should hopefully be a remediation step where a user can supply their password.
  */
-let identifyExpectation = helper.expectation(for: "Identify")
+expectation = helper.expectation(for: "Identify")
 identifyOption.proceed(with: params) { (responseObj, error) in
+    defer { expectation.fulfill() }
     guard let responseObj = responseObj else {
-        helper.handle(identifyExpectation, error: error)
+        helper.handle(error: error)
         return
     }
 
     response = responseObj
-    identifyExpectation.fulfill()
 }
-helper.wait(for: identifyExpectation)
+helper.wait(for: expectation)
 
 /*:
  ## Submitting the user's password
@@ -98,17 +98,17 @@ guard let authenticatorOption = response?.remediation?["challenge-authenticator"
 params = IDXClient.Remediation.Parameters()
 params[passcodeField] = helper.showPrompt(for: "Password")
     
-let challengeExpectation = helper.expectation(for: "Challenge")
+expectation = helper.expectation(for: "Challenge")
 authenticatorOption.proceed(with: params) { (responseObj, error) in
+    defer { expectation.fulfill() }
     guard let responseObj = responseObj else {
-        helper.handle(challengeExpectation, error: error)
+        helper.handle(error: error)
         return
     }
     
     response = responseObj
-    challengeExpectation.fulfill()
 }
-helper.wait(for: challengeExpectation)
+helper.wait(for: expectation)
 
 /*:
  ## Exchanging the successful response with access tokens
@@ -121,18 +121,18 @@ guard response?.isLoginSuccessful ?? false else {
     throw helper.handle(error: "Login was unsuccessful")
 }
 
-let exchangeExpectation = helper.expectation(for: "Exchange code")
+expectation = helper.expectation(for: "Exchange code")
 var token: IDXClient.Token?
 response?.exchangeCode { (tokenObj, error) in
+    defer { expectation.fulfill() }
     guard let tokenObj = tokenObj else {
-        helper.handle(exchangeExpectation, error: error)
+        helper.handle(error: error)
         return
     }
     
     token = tokenObj
-    exchangeExpectation.fulfill()
 }
-helper.wait(for: exchangeExpectation)
+helper.wait(for: expectation)
 
 /*:
  ## Using the Token response
