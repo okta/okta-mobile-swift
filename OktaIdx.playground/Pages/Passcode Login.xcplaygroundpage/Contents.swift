@@ -20,7 +20,7 @@
 
 import OktaIdx
 
-let config = IDXClient.Configuration(issuer: "https://<#domaion#>/",
+let config = IDXClient.Configuration(issuer: "https://<#domain#>/",
                                      clientId: "<#client id#>",
                                      clientSecret: nil,
                                      scopes: ["openid", "email"],
