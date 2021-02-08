@@ -20,11 +20,11 @@
 
 import OktaIdx
 
-let config = IDXClient.Configuration(issuer: "https://idx-devex.trexcloud.com/",
-                                     clientId: "0oa3kwpkybLg4AQHH0g7",
+let config = IDXClient.Configuration(issuer: "https://<#domaion#>/",
+                                     clientId: "<#client id#>",
                                      clientSecret: nil,
                                      scopes: ["openid", "email"],
-                                     redirectUri: "com.trexcloud.idx-devex:/callback")
+                                     redirectUri: "<#redirect uri#>")
 let client = IDXClient(configuration: config)
 
 /*:
