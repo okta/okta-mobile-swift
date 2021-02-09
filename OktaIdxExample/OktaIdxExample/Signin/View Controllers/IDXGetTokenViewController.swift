@@ -7,19 +7,12 @@
 
 import UIKit
 import OktaIdx
-import Combine
 
 /// Sign in view controller used when login is successful, and encapsulates the `IDXClient.Response.getToken()` method.
 class IDXGetTokenViewController: UIViewController, IDXResponseController {
     var signin: Signin?
     var response: IDXClient.Response?
 
-    private var cancelObject: AnyCancellable?
-    
-    deinit {
-        cancelObject?.cancel()
-    }
-    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
@@ -32,15 +25,17 @@ class IDXGetTokenViewController: UIViewController, IDXResponseController {
             return
         }
         
-        cancelObject = response.exchangeCode().receive(on: RunLoop.main).sink { (completion) in
-            switch completion {
-            case .failure(let error):
-                self.showError(error)
-                signin.failure(with: error)
-            case .finished: break
+        response.exchangeCode { [weak self] (token, error) in
+            guard let token = token else {
+                if let error = error {
+                    self?.showError(error)
+                    
+                    signin.failure(with: error)
+                }
+                return
             }
-        } receiveValue: { (response) in
-            signin.success(with: response)
+            
+            signin.success(with: token)
         }
     }
 }

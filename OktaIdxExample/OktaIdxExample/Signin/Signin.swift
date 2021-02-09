@@ -6,7 +6,6 @@
 //
 
 import UIKit
-import Combine
 import OktaIdx
 
 enum SigninError: Error {
@@ -18,7 +17,7 @@ enum SigninError: Error {
 /// of remediation steps necessary to sign a user in.
 public class Signin {
     private let storyboard: UIStoryboard
-    private var promise: Future<IDXClient.Token, Error>.Promise?
+    private var completion: ((IDXClient.Token?, Error?) -> Void)?
     private var navigationController: UINavigationController?
     
     internal let idx: IDXClient
@@ -33,21 +32,19 @@ public class Signin {
     /// Begins the signin UI, presented from the given presenting view controller.
     /// - Parameter viewController: View controller to modally present the sign in navigation controller from.
     /// - Returns: Future to represent the completion of the signin process.
-    public func signin(from viewController: UIViewController) -> Future<IDXClient.Token, Error> {
-        return Future<IDXClient.Token, Error> { (promise) in
-            guard let controller = self.storyboard.instantiateViewController(identifier: "start") as? IDXStartViewController else {
-                promise(.failure(SigninError.genericError(message: "Cannot find story board controller \"start\"")))
-                return
-            }
-            
-            controller.signin = self
-            self.promise = promise
-            
-            let navigationController = UINavigationController(rootViewController: controller)
-            self.navigationController = navigationController
-            
-            viewController.present(navigationController, animated: true, completion: nil)
+    public func signin(from viewController: UIViewController, completion: @escaping (IDXClient.Token?, Error?) -> Void) {
+        guard let controller = self.storyboard.instantiateViewController(identifier: "start") as? IDXStartViewController else {
+            completion(nil, SigninError.genericError(message: "Cannot find story board controller \"start\""))
+            return
         }
+        
+        controller.signin = self
+        self.completion = completion
+        
+        let navigationController = UINavigationController(rootViewController: controller)
+        self.navigationController = navigationController
+        
+        viewController.present(navigationController, animated: true, completion: nil)
     }
     
     /// Called by each view controller once their remediation step has been completed, allowing it to proceed to the next step of the workflow.
@@ -126,17 +123,19 @@ public class Signin {
     /// - Parameter error: The error to pass to the future.
     internal func failure(with error: Error) {
         navigationController?.dismiss(animated: true) {
-            defer { self.promise = nil }
-            self.promise?(.failure(error))
+            guard let completion = self.completion else { return }
+            defer { self.completion = nil }
+            completion(nil, error)
         }
     }
     
     /// Called by the signin view controllers when the Future should succeed.
     /// - Parameter token: The token produced at the end of the signin process.
     internal func success(with token: IDXClient.Token) {
+        guard let completion = self.completion else { return }
+        defer { self.completion = nil }
         navigationController?.dismiss(animated: true) {
-            defer { self.promise = nil }
-            self.promise?(.success(token))
+            completion(token, nil)
         }
     }
 }

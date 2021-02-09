@@ -6,7 +6,6 @@
 //
 
 import UIKit
-import Combine
 import OktaIdx
 
 extension ClientConfiguration {
@@ -23,13 +22,9 @@ class ViewController: UIViewController {
     @IBOutlet weak var issuerField: UITextField!
     @IBOutlet weak var clientIdField: UITextField!
     @IBOutlet weak var redirectField: UITextField!
-    private var cancelObject: AnyCancellable?
+    private var signin: Signin?
     var configuration: ClientConfiguration? = nil
     
-    deinit {
-        cancelObject?.cancel()
-    }
-
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -78,16 +73,15 @@ class ViewController: UIViewController {
             return
         }
         
-        cancelObject = Signin(using: config).signin(from: self).sink { (completion) in
-            switch completion {
-            case .failure(let error):
+        signin = Signin(using: config)
+        signin?.signin(from: self) { [weak self] (token, error) in
+            if let error = error {
                 print("Could not sign in: \(error)")
-            case .finished: break
+            } else {
+                guard let controller = self?.storyboard?.instantiateViewController(identifier: "TokenResult") as? TokenResultViewController else { return }
+                controller.token = token
+                self?.navigationController?.pushViewController(controller, animated: true)
             }
-        } receiveValue: { (token) in
-            guard let controller = self.storyboard?.instantiateViewController(identifier: "TokenResult") as? TokenResultViewController else { return }
-            controller.token = token
-            self.navigationController?.pushViewController(controller, animated: true)
         }
     }
 }

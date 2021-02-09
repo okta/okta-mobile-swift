@@ -7,18 +7,11 @@
 
 import UIKit
 import OktaIdx
-import Combine
 
 /// Sign in controller used when initializing the signin process. This encapsulates the `IDXClient.start()` API call.
 class IDXStartViewController: UIViewController, IDXSigninController {
     var signin: Signin?
 
-    private var cancelObject: AnyCancellable?
-    
-    deinit {
-        cancelObject?.cancel()
-    }
-    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
@@ -29,14 +22,16 @@ class IDXStartViewController: UIViewController, IDXSigninController {
             return
         }
         
-        cancelObject = signin.idx.start().receive(on: RunLoop.main).sink { (completion) in
-            switch completion {
-            case .failure(let error):
-                self.showError(error)
-                signin.failure(with: error)
-            case .finished: break
+        signin.idx.start { [weak self] (response, error) in
+            guard let response = response else {
+                if let error = error {
+                    self?.showError(error)
+                    
+                    signin.failure(with: error)
+                }
+                return
             }
-        } receiveValue: { (response) in
+            
             signin.proceed(to: response)
         }
     }

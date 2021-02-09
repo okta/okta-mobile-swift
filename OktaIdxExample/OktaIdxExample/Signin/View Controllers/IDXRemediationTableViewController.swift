@@ -7,7 +7,6 @@
 
 import UIKit
 import OktaIdx
-import Combine
 
 class IDXRemediationTableViewController: UITableViewController, IDXResponseController {
     var response: IDXClient.Response?
@@ -21,12 +20,6 @@ class IDXRemediationTableViewController: UITableViewController, IDXResponseContr
         result.hidesWhenStopped = true
         return result
     }()
-    
-    private var cancelObject: AnyCancellable?
-    
-    deinit {
-        cancelObject?.cancel()
-    }
     
     func rebuildForm() {
         if let response = response {
@@ -70,19 +63,18 @@ class IDXRemediationTableViewController: UITableViewController, IDXResponseContr
             button.isEnabled = false
         }
         
-        cancelObject = remediationOption?
-            .proceed(formValues)
-            .receive(on: RunLoop.main)
-            .sink { (completion) in
-                switch completion {
-                case .failure(let error):
-                    self.showError(error)
+        remediationOption?.proceed(with: formValues) { [weak self] (response, error) in
+            guard let response = response else {
+                if let error = error {
+                    self?.showError(error)
+                    
                     signin.failure(with: error)
-                case .finished: break
                 }
-            } receiveValue: { (response) in
-                signin.proceed(to: response)
+                return
             }
+            
+            signin.proceed(to: response)
+        }
     }
     
     func cancelAction(_ sender: Any?) {
@@ -95,19 +87,18 @@ class IDXRemediationTableViewController: UITableViewController, IDXResponseContr
             button.isEnabled = false
         }
 
-        cancelObject = response?
-            .cancel()
-            .receive(on: RunLoop.main)
-            .sink { (completion) in
-                switch completion {
-                case .failure(let error):
-                    self.showError(error)
+        response?.cancel { [weak self] (response, error) in
+            guard let response = response else {
+                if let error = error {
+                    self?.showError(error)
+                    
                     signin.failure(with: error)
-                case .finished: break
                 }
-            } receiveValue: { (response) in
-                signin.proceed(to: response)
+                return
             }
+            
+            signin.proceed(to: response)
+        }
     }
     
     func beginPolling(using poll: IDXClient.Remediation.Option) {
