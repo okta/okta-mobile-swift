@@ -26,7 +26,7 @@ extension IDXClient {
             self.session = session ?? URLSession(configuration: URLSessionConfiguration.ephemeral)
         }
 
-        enum AcceptType: Equatable {
+        internal enum AcceptType: Equatable {
             case json(version: String?)
             case ionJson(version: String?)
             case formEncoded

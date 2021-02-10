@@ -43,7 +43,12 @@ extension IDXClient.APIVersion1.AcceptType {
             return URLRequest.idxURLFormEncodedString(for: parameters)?.data(using: .utf8)
         case .json: fallthrough
         case .ionJson:
-            return try JSONSerialization.data(withJSONObject: parameters, options: .sortedKeys)
+            var opts: JSONSerialization.WritingOptions = []
+            if #available(iOSApplicationExtension 11.0, *) {
+                opts.insert(.sortedKeys)
+            }
+            
+            return try JSONSerialization.data(withJSONObject: parameters, options: opts)
         }
     }
     

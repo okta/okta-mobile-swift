@@ -17,8 +17,8 @@ import Foundation
 /// The `IDXClient.Configuration` class is used to communicate which application, defined within Okta, the user is being authenticated with. From this point a workflow is initiated, consisting of a series of authentication "Remediation" steps. At each step, your application can introspect the `IDXClient.Response` object to determine which UI should be presented to your user to guide them through to login.
 @objc
 public final class IDXClient: NSObject {
-    @objc(OKTIdentityEngineVersion)
     /// The Okta Identity Engine API version to use.
+    @objc(OKTIdentityEngineVersion)
     public enum Version: Int {
         /// API version 1.0.0
         case v1_0_0
@@ -67,6 +67,31 @@ public final class IDXClient: NSObject {
         }
     }
     
+    /// The type used for the completion handler result from the `start()` method
+    /// - Parameters:
+    ///   - context: The `IDXClient.Context` object created when the session was initiated.
+    ///   - response: The `IDXClient.Response` object that describes the next workflow steps.
+    ///   - error: Describes the error that occurred, or `nil` if the request was successful.
+    public typealias StartResult = (_ context: Context?, _ response: Response?, _ error: Error?) -> Void
+    
+    /// The type used for the completion handler result from the `interact()` method.
+    /// - Parameters:
+    ///   - context: The `IDXClient.Context` object created when the session was initiated.
+    ///   - error: Describes the error that occurred, or `nil` if the request was successful.
+    public typealias ContextResult = (_ context: Context?, _ error: Error?) -> Void
+    
+    /// The type used for the completion  handler result from any method that returns an `IDXClient.Response`.
+    /// - Parameters:
+    ///   - response: The `IDXClient.Response` object that describes the next workflow steps.
+    ///   - error: Describes the error that occurred, or `nil` if the request was successful.
+    public typealias ResponseResult = (_ response: Response?, _ error: Error?) -> Void
+    
+    /// The type used for the completion  handler result from any method that returns an `IDXClient.Token`.
+    /// - Parameters:
+    ///   - token: The `IDXClient.Token` object created when the token is successfully exchanged.
+    ///   - error: Describes the error that occurred, or `nil` if the request was successful.
+    public typealias TokenResult = (_ token: Token?, _ error: Error?) -> Void
+
     /// Configuration used to create the IDX client.
     @objc public let configuration: Configuration
     
@@ -103,7 +128,7 @@ public final class IDXClient: NSObject {
     ///
     /// This is a convenience method that wraps the `interact` and `introspect` API calls, since for the majority of scenarios a developer would not need to explicitly call one or the other.
     /// - Parameter completion: Invoked when a context and response are received, or if an error occurs.
-    @objc public func start(completion: ((Context?, Response?, Error?) -> Void)?) {
+    @objc public func start(completion: StartResult?) {
         interact { (context, error) in
             guard error == nil else {
                 completion?(nil, nil, error)
@@ -126,8 +151,8 @@ public final class IDXClient: NSObject {
     ///   - completion: Invoked when a response, or error, is received.
     ///   - context: An object describing the context of the IDX interaction, or `nil` if the client configuration was invalid.
     ///   - error: Describes the error that occurred, or `nil` if successful.
-    @objc public func interact(completion: ((Context?, Error?) -> Void)?) {
-        self.api.interact { (context, error) in
+    @objc public func interact(completion: ContextResult?) {
+        api.interact { (context, error) in
             self.context = context
             self.handleResponse(context, error: error, completion: completion)
         }
@@ -144,7 +169,7 @@ public final class IDXClient: NSObject {
     ///   - response: The response describing the new workflow next steps, or `nil` if an error occurred.
     ///   - error: Describes the error that occurred, or `nil` if successful.
     @objc public func introspect(_ context: Context? = nil,
-                                 completion: ((Response?, Error?) -> Void)?)
+                                 completion: ResponseResult?)
     {
         guard let context = context ?? self.context else {
             handleResponse(nil,
@@ -153,14 +178,14 @@ public final class IDXClient: NSObject {
             return
         }
         
-        self.api.introspect(context) { (response, error) in
+        api.introspect(context) { (response, error) in
             self.handleResponse(response, error: error, completion: completion)
         }
     }
     
     /// Indicates whether or not the current stage in the workflow can be cancelled.
     @objc public var canCancel: Bool {
-        return self.api.canCancel
+        return api.canCancel
     }
     
     /// Cancels and restarts the current workflow.
@@ -170,8 +195,8 @@ public final class IDXClient: NSObject {
     ///   - completion: Invoked when the operation is cancelled.
     ///   - response: The response describing the new workflow next steps, or `nil` if an error occurred.
     ///   - error: Describes the error that occurred, or `nil` if successful.
-    @objc public func cancel(completion: ((Response?, Error?) -> Void)?) {
-        self.api.cancel { (response, error) in
+    @objc public func cancel(completion: ResponseResult?) {
+        api.cancel { (response, error) in
             self.handleResponse(response, error: error, completion: completion)
         }
     }
@@ -185,9 +210,9 @@ public final class IDXClient: NSObject {
     ///   - error: Describes the error that occurred, or `nil` if successful.
     @objc public func proceed(remediation option: Remediation.Option,
                               data: [String : Any] = [:],
-                              completion: ((IDXClient.Response?, Error?) -> Void)?)
+                              completion: ResponseResult?)
     {
-        self.api.proceed(remediation: option, data: data) { (response, error) in
+        api.proceed(remediation: option, data: data) { (response, error) in
             self.handleResponse(response, error: error, completion: completion)
         }
     }
@@ -205,7 +230,7 @@ public final class IDXClient: NSObject {
     ///   - error: Describes the error that occurred, or `nil` if successful.
     @objc public func exchangeCode(with context: Context? = nil,
                                    using response: Response,
-                                   completion: ((Token?, Error?) -> Void)?)
+                                   completion: TokenResult?)
     {
         guard let context = context ?? self.context else {
             handleResponse(nil,
@@ -214,7 +239,7 @@ public final class IDXClient: NSObject {
             return
         }
         
-        self.api.exchangeCode(with: context, using: response) { (token, error) in
+        api.exchangeCode(with: context, using: response) { (token, error) in
             self.handleResponse(token, error: error, completion: completion)
         }
     }

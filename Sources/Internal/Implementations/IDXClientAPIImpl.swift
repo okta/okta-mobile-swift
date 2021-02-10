@@ -13,23 +13,23 @@
 import Foundation
 
 /// Internal protocol that defines the interface for the public IDXClient
-internal protocol IDXClientAPI: class {
+protocol IDXClientAPI: class {
     var context: IDXClient.Context? { get }
     var canCancel: Bool { get }
-    func interact(completion: ((_ context: IDXClient.Context?, _ error: Error?) -> Void)?)
+    func interact(completion: IDXClient.ContextResult?)
     func introspect(_ context: IDXClient.Context?,
-                    completion: ((_ reponse: IDXClient.Response?, _ error: Error?) -> Void)?)
-    func cancel(completion: ((_ response: IDXClient.Response?, _ error: Error?) -> Void)?)
+                    completion: IDXClient.ResponseResult?)
+    func cancel(completion: IDXClient.ResponseResult?)
     func proceed(remediation option: IDXClient.Remediation.Option,
                  data: [String : Any],
-                 completion: ((_ response: IDXClient.Response?, _ error: Swift.Error?) -> Void)?)
+                 completion: IDXClient.ResponseResult?)
     func exchangeCode(with context: IDXClient.Context?,
                       using response: IDXClient.Response,
-                      completion: ((_ token: IDXClient.Token?, _ error: Swift.Error?) -> Void)?)
+                      completion: IDXClient.TokenResult?)
 }
 
 /// Internal protocol used to implement the IDXClientAPI protocol.
-internal protocol IDXClientAPIImpl: class {
+protocol IDXClientAPIImpl: class {
     /// The client version for this API implementation.
     static var version: IDXClient.Version { get }
     
@@ -53,7 +53,7 @@ internal protocol IDXClientAPIImpl: class {
 }
 
 /// Protocol used to represent IDX API requests, and their expected response types.
-internal protocol IDXClientAPIRequest {
+protocol IDXClientAPIRequest {
     associatedtype ResponseType
     /// Produces a URLRequest suitable for performing the request.
     /// - Parameter configuration: Client configuration.
@@ -69,7 +69,7 @@ internal protocol IDXClientAPIRequest {
               completion: @escaping (ResponseType?, Error?) -> Void)
 }
 
-internal extension IDXClient {
+extension IDXClient {
     class func extractFormValues(from form: [IDXClient.Remediation.FormValue], with params: [String:Any]? = nil) throws -> [String:Any] {
         var result: [String:Any] = try form
             .filter { $0.value != nil && $0.name != nil }
@@ -111,7 +111,7 @@ internal extension IDXClient {
 
 }
 
-internal extension IDXClient.Remediation.Option {
+extension IDXClient.Remediation.Option {
     func formValues(using parameters: IDXClient.Remediation.Parameters) throws -> [String:Any] {
         return try form.reduce(into: [:]) { (result, formValue) in
             guard let nestedResult = try formValue.formValues(using: parameters, in: self) else {
@@ -131,7 +131,7 @@ internal extension IDXClient.Remediation.Option {
     }
 }
 
-internal extension IDXClient.Remediation.FormValue {
+extension IDXClient.Remediation.FormValue {
     func formValues(using parameters: IDXClient.Remediation.Parameters, in remediationOption: IDXClient.Remediation.Option) throws -> Any? {
         // Unnamed FormValues, which may contain nested options
         guard let name = name else {
