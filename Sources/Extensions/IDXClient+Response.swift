@@ -76,28 +76,36 @@ public extension IDXClient {
         /// Indicates whether or not the response can be cancelled.
         @objc public let canCancel: Bool
         
-        /// Cancels the current workflow.
+        /// Cancels the current workflow, and restats the session.
+        /// 
+        /// - Important:
+        /// If a completion handler is not provided, you should ensure that you implement the `IDXClientDelegate.idx(client:didReceive:)` methods to process any response or error returned from this call.
         /// - Parameters:
-        ///   - completion: Invoked when the operation is cancelled.
+        ///   - completion: Optional completion handler invoked when the operation is cancelled.
         ///   - response: The response describing the new workflow next steps, or `nil` if an error occurred.
         ///   - error: Describes the error that occurred, or `nil` if successful.
-        @objc public func cancel(completion: @escaping(_ response: Response?, _ error: Error?) -> Void) {
+        @objc public func cancel(completion: ((_ response: Response?, _ error: Error?) -> Void)?) {
             guard let cancelOption = cancelRemediationOption else {
-                completion(nil, IDXClientError.unknownRemediationOption(name: "cancel"))
+                completion?(nil, IDXClientError.unknownRemediationOption(name: "cancel"))
                 return
             }
             
             cancelOption.proceed(with: [:], completion: completion)
         }
         
-        /// Exchanges the successful remediation response with a token.
+        /// Exchanges the successful response with a token.
+        ///
+        /// Once the `isLoginSuccessful` property is `true`, the developer can exchange the response for a valid token by using this method.
+        /// - Important:
+        /// If a completion handler is not provided, you should ensure that you implement the `IDXClientDelegate.idx(client:didExchangeToken:)` method to receive the token or to handle any errors.
         /// - Parameters:
-        ///   - completion: Completion handler invoked when a token, or error, is received.
+        ///   - response: Successful response.
+        ///   - completion: Optional completion handler invoked when a token, or error, is received.
         ///   - token: The token that was exchanged, or `nil` if an error occurred.
         ///   - error: Describes the error that occurred, or `nil` if successful.
-        @objc public func exchangeCode(completion: @escaping(_ token: Token?, _ error: Error?) -> Void) {
+        @objc public func exchangeCode(completion: ((_ token: Token?, _ error: Error?) -> Void)?) {
             guard let client = api.client else {
-                completion(nil, IDXClientError.invalidClient)
+                completion?(nil, IDXClientError.invalidClient)
                 return
             }
             
@@ -559,15 +567,19 @@ public extension IDXClient {
             }
             
             /// Executes the remediation option and proceeds through the workflow using the supplied form parameters.
+            ///
+            /// This method is used to proceed through the authentication flow, using the given data to make the user's selection.
+            /// - Important:
+            /// If a completion handler is not provided, you should ensure that you implement the `IDXClientDelegate.idx(client:didReceive:)` methods to process any response or error returned from this call.
             /// - Parameters:
             ///   - dataFromUI: Form data collected from the user.
-            ///   - completion: Completion handler invoked when a response is received.
+            ///   - completion: Optional completion handler invoked when a response is received.
             ///   - response: `IDXClient.Response` object describing the next step in the remediation workflow, or `nil` if an error occurred.
             ///   - error: A description of the error that occurred, or `nil` if the request was successful.
             @objc(proceedWithData:completion:)
-            public func proceed(with dataFromUI: [String:Any] = [:], completion: @escaping (_ response: Response?, _ error: Error?) -> Void) {
+            public func proceed(with dataFromUI: [String:Any] = [:], completion: ((_ response: Response?, _ error: Error?) -> Void)? = nil) {
                 guard let client = api?.client else {
-                    completion(nil, IDXClientError.invalidClient)
+                    completion?(nil, IDXClientError.invalidClient)
                     return
                 }
                 
@@ -576,14 +588,24 @@ public extension IDXClient {
                                    data: try self.formValues(with: dataFromUI),
                                    completion: completion)
                 } catch {
-                    completion(nil, error)
+                    completion?(nil, error)
                 }
             }
 
+            /// Executes the remediation option and proceeds through the workflow using the supplied form parameters.
+            ///
+            /// This method is used to proceed through the authentication flow, using the given data to make the user's selection. It accepts the user data as a `IDXClient.Remediation.Parameters` object to associate individual `IDXClient.Remediation.FormValue` fields to the associated user-supplied data to submit to the request.
+            /// - Important:
+            /// If a completion handler is not provided, you should ensure that you implement the `IDXClientDelegate.idx(client:didReceive:)` methods to process any response or error returned from this call.
+            /// - Parameters:
+            ///   - parameters: `IDXClient.Parameters` object representing the data to submit to the remediation option.
+            ///   - completion: Optional completion handler invoked when a response is received.
+            ///   - response: `IDXClient.Response` object describing the next step in the remediation workflow, or `nil` if an error occurred.
+            ///   - error: A description of the error that occurred, or `nil` if the request was successful.
             @objc(proceedWithParameters:completion:)
-            public func proceed(with parameters: Parameters, completion: @escaping (_ response: Response?, _ error: Error?) -> Void) {
+            public func proceed(with parameters: Parameters, completion: ((_ response: Response?, _ error: Error?) -> Void)?) {
                 guard let client = api?.client else {
-                    completion(nil, IDXClientError.invalidClient)
+                    completion?(nil, IDXClientError.invalidClient)
                     return
                 }
                 
@@ -592,7 +614,7 @@ public extension IDXClient {
                                    data: try formValues(using: parameters),
                                    completion: completion)
                 } catch {
-                    completion(nil, error)
+                    completion?(nil, error)
                 }
             }
 

@@ -44,7 +44,7 @@ class DelegateRecorder: IDXClientDelegate {
         calls.removeAll()
     }
     
-    func idx(client: IDXClient, receivedError: Error) {
+    func idx(client: IDXClient, didReceive error: Error) {
         calls.append(Call(type: .error, object: nil))
     }
     

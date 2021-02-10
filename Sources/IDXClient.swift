@@ -117,13 +117,15 @@ public protocol IDXClientDelegate {
     /// - Parameters:
     ///   - client: IDXClient sending the error.
     ///   - receivedError: The error that was received.
-    @objc func idx(client: IDXClient, receivedError error: Error)
+    @objc(idxClient:didReceiveError:)
+    func idx(client: IDXClient, didReceive error: Error)
     
     /// Informs the delegate when an IDX response is received, either through an `introspect` or `proceed` call.
     /// - Parameters:
     ///   - client: IDXClient receiving the response.
     ///   - response: The response that was received.
-    @objc func idx(client: IDXClient, didReceive response: IDXClient.Response)
+    @objc(idxClient:didReceiveResponse:)
+    func idx(client: IDXClient, didReceive response: IDXClient.Response)
     
     /// Informs the delegate when authentication is successful, and the token is returned.
     /// - Parameters:

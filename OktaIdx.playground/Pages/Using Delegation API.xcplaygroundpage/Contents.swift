@@ -30,13 +30,13 @@ class LoginSession: IDXClientDelegate {
         self.completion = completion
     }
     
-    func idx(client: IDXClient, receivedError error: Error) {
+    func idx(client: IDXClient, didReceive error: Error) {
         completion(nil, error)
     }
     
     func idx(client: IDXClient, didReceive response: IDXClient.Response) {
         guard response.isLoginSuccessful == false else {
-            response.exchangeCode() { _,_ in }
+            response.exchangeCode(completion: nil)
             return
         }
         
@@ -48,13 +48,13 @@ class LoginSession: IDXClientDelegate {
         if let option = response.remediation?[.identify],
            let field = option["identifier"]
         {
-            option.proceed(with: .init([field: username])) { _,_ in }
+            option.proceed(with: .init([field: username]), completion: nil)
         }
         
         else if let option = response.remediation?[.challengeAuthenticator],
                 let field = option["credentials"]?["passcode"]
         {
-            option.proceed(with: .init([field: password])) { _,_ in }
+            option.proceed(with: .init([field: password]), completion: nil)
         }
         
         else {
@@ -104,7 +104,7 @@ client.delegate = loginDelegate
 
  Once you initiate the sign in flow, the individual completion handlers don't need to directly process the responses. This can be left to the delegate, if necessary. Furthermore, any intermediate responses will be handled by the delegate in this instance, so no further async waits are required in this playground page. Additionally, the completion handler isn't necessary in this instance, because all response handling is handled by the delegate.
  */
-client.start() { _,_ in }
+client.start(completion: nil)
 helper.wait(for: expectation)
 
 /*:

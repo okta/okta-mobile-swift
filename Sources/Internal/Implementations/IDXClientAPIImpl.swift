@@ -13,7 +13,7 @@
 import Foundation
 
 /// Internal protocol used to implement the IDXClientAPI protocol.
-internal protocol IDXClientAPIImpl: class, IDXClientAPI {
+internal protocol IDXClientAPIImpl: class {
     /// The client version for this API implementation.
     static var version: IDXClient.Version { get }
     
@@ -25,6 +25,17 @@ internal protocol IDXClientAPIImpl: class, IDXClientAPI {
     
     var interactionHandle: String? { get set }
     var codeVerifier: String? { get set }
+    
+    var canCancel: Bool { get }
+    func interact(completion: @escaping (IDXClient.Context?, Error?) -> Void)
+    func introspect(_ interactionHandle: String,
+                    completion: @escaping (_ reponse: IDXClient.Response?, _ error: Error?) -> Void)
+    func cancel(completion: @escaping (_ response: IDXClient.Response?, _ error: Error?) -> Void)
+    func proceed(remediation option: IDXClient.Remediation.Option,
+                 data: [String : Any],
+                 completion: @escaping (_ response: IDXClient.Response?, _ error: Swift.Error?) -> Void)
+    func exchangeCode(using response: IDXClient.Response,
+                      completion: @escaping (_ token: IDXClient.Token?, _ error: Swift.Error?) -> Void)
 }
 
 /// Protocol used to represent IDX API requests, and their expected response types.

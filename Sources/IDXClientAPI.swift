@@ -39,23 +39,29 @@ public protocol IDXClientAPI {
     @objc func interact(completion: @escaping(_ context: IDXClient.Context?, _ error: Error?) -> Void)
     
     /// Introspects the authentication state to identify the available remediation steps.
+    ///
+    /// Once an interaction handle is received, this method can be used to determine what remedation options are available to the user to authenticate.
+    /// - Important:
+    /// If a completion handler is not provided, you should ensure that you implement the `IDXClientDelegate.idx(client:didReceive:)` methods to process any response or error returned from this call.
     /// - Parameters:
     ///   - interactionHandle: Interaction handle used to introspect the state.
-    ///   - completion: Invoked when a response, or error, is received.
-    ///   - response: The response describing the next steps available in this workflow.
+    ///   - completion: Optional completion handler invoked when a response is received.
+    ///   - response: The response describing the new workflow next steps, or `nil` if an error occurred.
     ///   - error: Describes the error that occurred, or `nil` if successful.
     @objc func introspect(_ interactionHandle: String,
-                          completion: @escaping (_ reponse: IDXClient.Response?, _ error: Error?) -> Void)
+                          completion: ((_ reponse: IDXClient.Response?, _ error: Error?) -> Void)?)
 
     /// Indicates whether or not the current stage in the workflow can be cancelled.
     @objc var canCancel: Bool { get }
     
-    /// Cancels the current workflow.
+    /// Cancels and restarts the current workflow.
+    /// - Important:
+    /// If a completion handler is not provided, you should ensure that you implement the `IDXClientDelegate.idx(client:didReceive:)` method to process any response or error returned from this call.
     /// - Parameters:
     ///   - completion: Invoked when the operation is cancelled.
     ///   - response: The response describing the new workflow next steps, or `nil` if an error occurred.
     ///   - error: Describes the error that occurred, or `nil` if successful.
-    @objc func cancel(completion: @escaping (_ response: IDXClient.Response?, _ error: Error?) -> Void)
+    @objc func cancel(completion: ((_ response: IDXClient.Response?, _ error: Error?) -> Void)?)
     
     /// Proceeds to the given remediation option.
     /// - Parameters:
@@ -66,14 +72,18 @@ public protocol IDXClientAPI {
     ///   - error: Describes the error that occurred, or `nil` if successful.
     @objc func proceed(remediation option: IDXClient.Remediation.Option,
                        data: [String : Any],
-                       completion: @escaping (_ response: IDXClient.Response?, _ error: Swift.Error?) -> Void)
+                       completion: ((_ response: IDXClient.Response?, _ error: Swift.Error?) -> Void)?)
     
     /// Exchanges the successful response with a token.
+    ///
+    /// Once the `IDXClient.Response.isLoginSuccessful` property is `true`, the developer can exchange that response for a valid token by using this method.
+    /// - Important:
+    /// If a completion handler is not provided, you should ensure that you implement the `IDXClientDelegate.idx(client:didExchangeToken:)` method to receive the token or to handle any errors.
     /// - Parameters:
     ///   - response: Successful response.
-    ///   - completion: Completion handler invoked when a token, or error, is received.
+    ///   - completion: Optional completion handler invoked when a token, or error, is received.
     ///   - token: The token that was exchanged, or `nil` if an error occurred.
     ///   - error: Describes the error that occurred, or `nil` if successful.
     @objc func exchangeCode(using response: IDXClient.Response,
-                            completion: @escaping (_ token: IDXClient.Token?, _ error: Swift.Error?) -> Void)
+                            completion: ((_ token: IDXClient.Token?, _ error: Swift.Error?) -> Void)?)
 }
