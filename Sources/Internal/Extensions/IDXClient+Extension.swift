@@ -12,24 +12,7 @@
 
 import Foundation
 
-extension IDXClient {
-    internal class APIVersion1 {
-        static let version = Version.v1_0_0
-        weak var client: IDXClientAPI?
-        var stateHandle: String? = nil
-        var interactionHandle: String? = nil
-        var codeVerifier: String? = nil
-        var cancelRemediationOption: IDXClient.Remediation.Option? = nil
-        
-        let configuration: IDXClient.Configuration
-        let session: URLSessionProtocol
-
-        init(with configuration: Configuration, session: URLSessionProtocol? = nil) {
-            self.configuration = configuration
-            self.session = session ?? URLSession(configuration: URLSessionConfiguration.ephemeral)
-        }
-    }
-    
+extension IDXClient: IDXClientAPI {
     internal func handleResponse<T>(_ response: T?, error: Error?, completion: ((T?, Error?) -> Void)?) {
         self.queue.async {
             self.informDelegate(self.delegate, response: response, error: error)
@@ -44,64 +27,12 @@ extension IDXClient {
             delegate.idx(client: self, didReceive: error)
         }
         
-        if let response = response as? Response {
+        if let response = response as? Context {
+            delegate.idx(client: self, didReceive: response)
+        } else if let response = response as? Response {
             delegate.idx(client: self, didReceive: response)
         } else if let response = response as? Token {
             delegate.idx(client: self, didExchangeToken: response)
-        }
-    }
-
-    public func start(completion: ((Response?, Error?) -> Void)?) {
-        interact { (context, error) in
-            guard error == nil else {
-                completion?(nil, error)
-                return
-            }
-            
-            guard let context = context else {
-                completion?(nil, IDXClientError.missingRequiredParameter(name: "context"))
-                return
-            }
-            
-            self.introspect(context.interactionHandle, completion: completion)
-        }
-    }
-    
-    public func interact(completion: @escaping (Context?, Error?) -> Void) {
-        self.api.interact { (context, error) in
-            self.context = context
-            self.handleResponse(context, error: error, completion: completion)
-        }
-    }
-    
-    public func introspect(_ interactionHandle: String, completion: ((Response?, Error?) -> Void)?) {
-        self.api.introspect(interactionHandle) { (response, error) in
-            self.handleResponse(response, error: error, completion: completion)
-        }
-    }
-    
-    public var canCancel: Bool {
-        return self.api.canCancel
-    }
-    
-    public func cancel(completion: ((Response?, Error?) -> Void)?) {
-        self.api.cancel { (response, error) in
-            self.handleResponse(response, error: error, completion: completion)
-        }
-    }
-    
-    public func proceed(remediation option: Remediation.Option,
-                        data: [String : Any] = [:],
-                        completion: ((IDXClient.Response?, Error?) -> Void)?)
-    {
-        self.api.proceed(remediation: option, data: data) { (response, error) in
-            self.handleResponse(response, error: error, completion: completion)
-        }
-    }
-    
-    public func exchangeCode(using response: Response, completion: ((Token?, Error?) -> Void)?) {
-        self.api.exchangeCode(using: response) { (token, error) in
-            self.handleResponse(token, error: error, completion: completion)
         }
     }
 }

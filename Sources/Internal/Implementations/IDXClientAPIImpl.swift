@@ -12,6 +12,22 @@
 
 import Foundation
 
+/// Internal protocol that defines the interface for the public IDXClient
+internal protocol IDXClientAPI: class {
+    var context: IDXClient.Context? { get }
+    var canCancel: Bool { get }
+    func interact(completion: ((_ context: IDXClient.Context?, _ error: Error?) -> Void)?)
+    func introspect(_ context: IDXClient.Context?,
+                    completion: ((_ reponse: IDXClient.Response?, _ error: Error?) -> Void)?)
+    func cancel(completion: ((_ response: IDXClient.Response?, _ error: Error?) -> Void)?)
+    func proceed(remediation option: IDXClient.Remediation.Option,
+                 data: [String : Any],
+                 completion: ((_ response: IDXClient.Response?, _ error: Swift.Error?) -> Void)?)
+    func exchangeCode(with context: IDXClient.Context?,
+                      using response: IDXClient.Response,
+                      completion: ((_ token: IDXClient.Token?, _ error: Swift.Error?) -> Void)?)
+}
+
 /// Internal protocol used to implement the IDXClientAPI protocol.
 internal protocol IDXClientAPIImpl: class {
     /// The client version for this API implementation.
@@ -23,18 +39,16 @@ internal protocol IDXClientAPIImpl: class {
     /// The upstream client to communicate critical events to
     var client: IDXClientAPI? { get set }
     
-    var interactionHandle: String? { get set }
-    var codeVerifier: String? { get set }
-    
     var canCancel: Bool { get }
     func interact(completion: @escaping (IDXClient.Context?, Error?) -> Void)
-    func introspect(_ interactionHandle: String,
+    func introspect(_ context: IDXClient.Context,
                     completion: @escaping (_ reponse: IDXClient.Response?, _ error: Error?) -> Void)
     func cancel(completion: @escaping (_ response: IDXClient.Response?, _ error: Error?) -> Void)
     func proceed(remediation option: IDXClient.Remediation.Option,
                  data: [String : Any],
                  completion: @escaping (_ response: IDXClient.Response?, _ error: Swift.Error?) -> Void)
-    func exchangeCode(using response: IDXClient.Response,
+    func exchangeCode(with context: IDXClient.Context,
+                      using response: IDXClient.Response,
                       completion: @escaping (_ token: IDXClient.Token?, _ error: Swift.Error?) -> Void)
 }
 

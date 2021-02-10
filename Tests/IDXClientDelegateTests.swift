@@ -19,6 +19,7 @@ class IDXClientDelegateTests: XCTestCase {
                                                 clientSecret: "clientSecret",
                                                 scopes: ["all"],
                                                 redirectUri: "redirect:/uri")
+    let context = IDXClient.Context(interactionHandle: "foo", codeVerifier: "bar")
     var client: IDXClient!
     var api: IDXClientAPIv1Mock!
     var remediationOption: IDXClient.Remediation.Option!
@@ -104,7 +105,20 @@ class IDXClientDelegateTests: XCTestCase {
     func testIntrospectError() {
         api.expect(function: "introspect(_:completion:)", arguments: ["error": error])
         waitFor { expectation in
-            self.client.introspect("foo") { (_, _) in
+            self.client.introspect(self.context) { (_, _) in
+                XCTAssertTrue(Thread.isMainThread)
+                expectation.fulfill()
+            }
+        }
+        XCTAssertEqual(delegate.calls.count, 1)
+        XCTAssertEqual(delegate.calls.first?.type, .error)
+        XCTAssertEqual(delegate.calls.first?.isMainThread, true)
+    }
+    
+    func testIntrospectWithoutContextError() {
+        api.expect(function: "introspect(_:completion:)", arguments: ["error": error])
+        waitFor { expectation in
+            self.client.introspect(nil) { (_, _) in
                 XCTAssertTrue(Thread.isMainThread)
                 expectation.fulfill()
             }
@@ -141,9 +155,22 @@ class IDXClientDelegateTests: XCTestCase {
     }
     
     func testExchangeCodeError() {
-        api.expect(function: "exchangeCode(using:completion:)", arguments: ["error": error])
+        api.expect(function: "exchangeCode(with:using:completion:)", arguments: ["error": error])
         waitFor { expectation in
-            self.client.exchangeCode(using: self.response) { (_, _) in
+            self.client.exchangeCode(with: self.context, using: self.response) { (_, _) in
+                XCTAssertTrue(Thread.isMainThread)
+                expectation.fulfill()
+            }
+        }
+        XCTAssertEqual(delegate.calls.count, 1)
+        XCTAssertEqual(delegate.calls.first?.type, .error)
+        XCTAssertEqual(delegate.calls.first?.isMainThread, true)
+    }
+
+    func testExchangeCodeWithoutContextError() {
+        api.expect(function: "exchangeCode(with:using:completion:)", arguments: ["error": error])
+        waitFor { expectation in
+            self.client.exchangeCode(with: nil, using: self.response) { (_, _) in
                 XCTAssertTrue(Thread.isMainThread)
                 expectation.fulfill()
             }
@@ -155,9 +182,9 @@ class IDXClientDelegateTests: XCTestCase {
 
     func testToken() {
         // exchangeCode()
-        api.expect(function: "exchangeCode(using:completion:)", arguments: ["token": token as Any])
+        api.expect(function: "exchangeCode(with:using:completion:)", arguments: ["token": token as Any])
         waitFor { expectation in
-            self.client.exchangeCode(using: self.response) { (_, _) in
+            self.client.exchangeCode(with: self.context, using: self.response) { (_, _) in
                 XCTAssertTrue(Thread.isMainThread)
                 expectation.fulfill()
             }
@@ -169,9 +196,9 @@ class IDXClientDelegateTests: XCTestCase {
     }
 
     func testExchangeCodeFromClient() {
-        api.expect(function: "exchangeCode(using:completion:)", arguments: ["token": token as Any])
+        api.expect(function: "exchangeCode(with:using:completion:)", arguments: ["token": token as Any])
         waitFor { expectation in
-            self.client.exchangeCode(using: self.response) { (_, _) in
+            self.client.exchangeCode(with: self.context, using: self.response) { (_, _) in
                 XCTAssertTrue(Thread.isMainThread)
                 expectation.fulfill()
             }
@@ -183,9 +210,9 @@ class IDXClientDelegateTests: XCTestCase {
     }
 
     func testExchangeCodeFromResponse() {
-        api.expect(function: "exchangeCode(using:completion:)", arguments: ["token": token as Any])
+        api.expect(function: "exchangeCode(with:using:completion:)", arguments: ["token": token as Any])
         waitFor { expectation in
-            self.response.exchangeCode { (_, _) in
+            self.response.exchangeCode(with: self.context) { (_, _) in
                 XCTAssertTrue(Thread.isMainThread)
                 expectation.fulfill()
             }
@@ -197,11 +224,26 @@ class IDXClientDelegateTests: XCTestCase {
     }
     
 
+    func testInteract() {
+        // introspect()
+        api.expect(function: "interact(completion:)", arguments: ["context": context as Any])
+        waitFor { expectation in
+            self.client.interact { (_, _) in
+                XCTAssertTrue(Thread.isMainThread)
+                expectation.fulfill()
+            }
+        }
+        XCTAssertEqual(delegate.calls.count, 1)
+        XCTAssertEqual(delegate.calls.first?.type, .context)
+        XCTAssertEqual(delegate.calls.first?.context, context)
+        XCTAssertEqual(delegate.calls.first?.isMainThread, true)
+    }
+    
     func testIntrospect() {
         // introspect()
         api.expect(function: "introspect(_:completion:)", arguments: ["response": response as Any])
         waitFor { expectation in
-            self.client.introspect("foo") { (_, _) in
+            self.client.introspect(self.context) { (_, _) in
                 XCTAssertTrue(Thread.isMainThread)
                 expectation.fulfill()
             }
@@ -268,11 +310,41 @@ class IDXClientDelegateTests: XCTestCase {
         XCTAssertEqual(delegate.calls.first?.isMainThread, true)
     }
     
+    func testInteractWithoutCompletionBlock() {
+        // introspect()
+        api.expect(function: "interact(completion:)", arguments: ["context": context as Any])
+        waitFor { expectation in
+            self.client.interact(completion: nil)
+            self.client.queue.async {
+                expectation.fulfill()
+            }
+        }
+        XCTAssertEqual(delegate.calls.count, 1)
+        XCTAssertEqual(delegate.calls.first?.type, .context)
+        XCTAssertEqual(delegate.calls.first?.context, context)
+        XCTAssertEqual(delegate.calls.first?.isMainThread, true)
+    }
+    
+    func testTokenWithoutContext() {
+        self.client.context = context
+        api.expect(function: "exchangeCode(with:using:completion:)", arguments: ["token": token as Any])
+        waitFor { expectation in
+            self.client.exchangeCode(with: nil, using: self.response, completion: nil)
+            self.client.queue.async {
+                expectation.fulfill()
+            }
+        }
+        XCTAssertEqual(delegate.calls.count, 1)
+        XCTAssertEqual(delegate.calls.first?.type, .token)
+        XCTAssertEqual(delegate.calls.first?.token, token)
+        XCTAssertEqual(delegate.calls.first?.isMainThread, true)
+    }
+    
     func testTokenWithoutCompletionBlock() {
         // exchangeCode()
-        api.expect(function: "exchangeCode(using:completion:)", arguments: ["token": token as Any])
+        api.expect(function: "exchangeCode(with:using:completion:)", arguments: ["token": token as Any])
         waitFor { expectation in
-            self.client.exchangeCode(using: self.response, completion: nil)
+            self.client.exchangeCode(with: self.context, using: self.response, completion: nil)
             self.client.queue.async {
                 expectation.fulfill()
             }
@@ -284,9 +356,9 @@ class IDXClientDelegateTests: XCTestCase {
     }
     
     func testExchangeCodeFromClientWithoutCompletionBlock() {
-        api.expect(function: "exchangeCode(using:completion:)", arguments: ["token": token as Any])
+        api.expect(function: "exchangeCode(with:using:completion:)", arguments: ["token": token as Any])
         waitFor { expectation in
-            self.client.exchangeCode(using: self.response, completion: nil)
+            self.client.exchangeCode(with: self.context, using: self.response, completion: nil)
             self.client.queue.async {
                 expectation.fulfill()
             }
@@ -298,9 +370,9 @@ class IDXClientDelegateTests: XCTestCase {
     }
     
     func testExchangeCodeFromResponseWithoutCompletionBlock() {
-        api.expect(function: "exchangeCode(using:completion:)", arguments: ["token": token as Any])
+        api.expect(function: "exchangeCode(with:using:completion:)", arguments: ["token": token as Any])
         waitFor { expectation in
-            self.response.exchangeCode(completion: nil)
+            self.response.exchangeCode(with: self.context, completion: nil)
             self.client.queue.async {
                 expectation.fulfill()
             }
@@ -311,12 +383,26 @@ class IDXClientDelegateTests: XCTestCase {
         XCTAssertEqual(delegate.calls.first?.isMainThread, true)
     }
     
-    
+    func testIntrospectWithoutContext() {
+        self.client.context = context
+        api.expect(function: "introspect(_:completion:)", arguments: ["response": response as Any])
+        waitFor { expectation in
+            self.client.introspect(nil, completion: nil)
+            self.client.queue.async {
+                expectation.fulfill()
+            }
+        }
+        XCTAssertEqual(delegate.calls.count, 1)
+        XCTAssertEqual(delegate.calls.first?.type, .response)
+        XCTAssertEqual(delegate.calls.first?.response, response)
+        XCTAssertEqual(delegate.calls.first?.isMainThread, true)
+    }
+
     func testIntrospectWithoutCompletionBlock() {
         // introspect()
         api.expect(function: "introspect(_:completion:)", arguments: ["response": response as Any])
         waitFor { expectation in
-            self.client.introspect("foo", completion: nil)
+            self.client.introspect(self.context, completion: nil)
             self.client.queue.async {
                 expectation.fulfill()
             }

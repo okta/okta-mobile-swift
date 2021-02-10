@@ -17,6 +17,7 @@ class DelegateRecorder: IDXClientDelegate {
     struct Call {
         enum CallType {
             case error
+            case context
             case response
             case token
         }
@@ -27,6 +28,11 @@ class DelegateRecorder: IDXClientDelegate {
             Thread.isMainThread
         }()
         
+        var context: IDXClient.Context? {
+            guard let result = object as? IDXClient.Context else { return nil }
+            return result
+        }
+
         var response: IDXClient.Response? {
             guard let result = object as? IDXClient.Response else { return nil }
             return result
@@ -46,6 +52,10 @@ class DelegateRecorder: IDXClientDelegate {
     
     func idx(client: IDXClient, didReceive error: Error) {
         calls.append(Call(type: .error, object: nil))
+    }
+    
+    func idx(client: IDXClient, didReceive context: IDXClient.Context) {
+        calls.append(Call(type: .context, object: context))
     }
     
     func idx(client: IDXClient, didReceive response: IDXClient.Response) {

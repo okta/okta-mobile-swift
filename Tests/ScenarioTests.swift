@@ -19,6 +19,7 @@ class ScenarioTests: XCTestCase {
                                                 clientSecret: "clientSecret",
                                                 scopes: ["all"],
                                                 redirectUri: "redirect:/uri")
+    let context = IDXClient.Context(interactionHandle: "foo", codeVerifier: "bar")
     var session: URLSessionMock!
     var api: IDXClient.APIVersion1!
     var idx: IDXClient!
@@ -41,7 +42,8 @@ class ScenarioTests: XCTestCase {
         try session.expect("https://example.com/idp/idx/challenge/answer", folderName: "Passcode", fileName: "04-challenge-answer-response")
         try session.expect("https://example.com/oauth2/auszsfkYrgGCTilsV2o4/v1/token", folderName: "Passcode", fileName: "05-token-response")
 
-        idx.start { (response, error) in
+        idx.start { (context, response, error) in
+            XCTAssertNotNil(context)
             XCTAssertNotNil(response)
             XCTAssertNil(error)
             XCTAssertFalse(response!.isLoginSuccessful)
@@ -75,7 +77,7 @@ class ScenarioTests: XCTestCase {
                     XCTAssertNil(error)
                     XCTAssertTrue(response!.isLoginSuccessful)
 
-                    response?.exchangeCode { (token, error) in
+                    response?.exchangeCode(with: self.context) { (token, error) in
                         XCTAssertNotNil(token)
                         XCTAssertNil(error)
                         
@@ -100,7 +102,8 @@ class ScenarioTests: XCTestCase {
 //        try session.expect("https://example.com/oauth2/auszsfkYrgGCTilsV2o4/v1/token", folderName: "MFA-Email", fileName: "05-challenge-answer-invalid")
 
         // Start, takes us through interact & introspect
-        idx.start { (response, error) in
+        idx.start { (context, response, error) in
+            XCTAssertNotNil(context)
             XCTAssertNotNil(response)
             XCTAssertNil(error)
             XCTAssertFalse(response!.isLoginSuccessful)
@@ -185,7 +188,8 @@ class ScenarioTests: XCTestCase {
         try session.expect("https://example.com/idp/idx/challenge/answer", folderName: "RestartTransaction", fileName: "05-challenge-answer-response")
         try session.expect("https://example.com/idp/idx/cancel", folderName: "RestartTransaction", fileName: "06-cancel-response")
 
-        idx.start { (response, error) in
+        idx.start { (context, response, error) in
+            XCTAssertNotNil(context)
             XCTAssertNotNil(response)
             XCTAssertNil(error)
             XCTAssertTrue(response?.canCancel ?? false)

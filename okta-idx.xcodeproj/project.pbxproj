@@ -47,7 +47,6 @@
 		96F8F1BA258049B000DA2701 /* IDXVersion+InternalExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96F8F1B9258049B000DA2701 /* IDXVersion+InternalExtension.swift */; };
 		96F8F1C125804A0C00DA2701 /* IDXClientVersionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96F8F1C025804A0C00DA2701 /* IDXClientVersionTests.swift */; };
 		96F8F20B25815AFD00DA2701 /* IDXClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96F8F20A25815AFD00DA2701 /* IDXClient.swift */; };
-		96F8F2112581973F00DA2701 /* IDXClientAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96F8F2102581973F00DA2701 /* IDXClientAPI.swift */; };
 		96F8F215258197D000DA2701 /* IDXClientAPIv1.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96F8F214258197D000DA2701 /* IDXClientAPIv1.swift */; };
 		96F8F21925828F1300DA2701 /* IDXClient+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96F8F21825828F1300DA2701 /* IDXClient+Extension.swift */; };
 		96F8F22B2582C2DE00DA2701 /* IDXClientTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96F8F22A2582C2DE00DA2701 /* IDXClientTests.swift */; };
@@ -127,7 +126,6 @@
 		96F8F1C025804A0C00DA2701 /* IDXClientVersionTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IDXClientVersionTests.swift; sourceTree = "<group>"; };
 		96F8F1CD25804B5B00DA2701 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		96F8F20A25815AFD00DA2701 /* IDXClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IDXClient.swift; sourceTree = "<group>"; };
-		96F8F2102581973F00DA2701 /* IDXClientAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IDXClientAPI.swift; sourceTree = "<group>"; };
 		96F8F214258197D000DA2701 /* IDXClientAPIv1.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IDXClientAPIv1.swift; sourceTree = "<group>"; };
 		96F8F21825828F1300DA2701 /* IDXClient+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "IDXClient+Extension.swift"; sourceTree = "<group>"; };
 		96F8F22A2582C2DE00DA2701 /* IDXClientTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IDXClientTests.swift; sourceTree = "<group>"; };
@@ -274,7 +272,6 @@
 				9617090B25AD104E000E9552 /* Extensions */,
 				96F8F1AC25803BE100DA2701 /* Info.plist */,
 				96F8F20A25815AFD00DA2701 /* IDXClient.swift */,
-				96F8F2102581973F00DA2701 /* IDXClientAPI.swift */,
 			);
 			path = Sources;
 			sourceTree = "<group>";
@@ -497,7 +494,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				96F8F2522582D7BF00DA2701 /* URLSessionProtocol.swift in Sources */,
-				96F8F2112581973F00DA2701 /* IDXClientAPI.swift in Sources */,
 				96C51E6A25BA050D007A2519 /* IDXClient+Response.swift in Sources */,
 				96F8F20B25815AFD00DA2701 /* IDXClient.swift in Sources */,
 				96F8F25B2582E96B00DA2701 /* InteractRequest.swift in Sources */,

@@ -12,13 +12,29 @@
 
 import Foundation
 
-extension IDXClient.APIVersion1: IDXClientAPIImpl {
-    enum AcceptType: Equatable {
-        case json(version: String?)
-        case ionJson(version: String?)
-        case formEncoded
-    }
+extension IDXClient {
+    internal class APIVersion1 {
+        static let version = Version.v1_0_0
+        weak var client: IDXClientAPI?
+        var cancelRemediationOption: IDXClient.Remediation.Option? = nil
+        
+        let configuration: IDXClient.Configuration
+        let session: URLSessionProtocol
 
+        init(with configuration: Configuration, session: URLSessionProtocol? = nil) {
+            self.configuration = configuration
+            self.session = session ?? URLSession(configuration: URLSessionConfiguration.ephemeral)
+        }
+
+        enum AcceptType: Equatable {
+            case json(version: String?)
+            case ionJson(version: String?)
+            case formEncoded
+        }
+    }
+}
+
+extension IDXClient.APIVersion1: IDXClientAPIImpl {
     func interact(completion: @escaping(IDXClient.Context?, Error?) -> Void) {
         guard let codeVerifier = String.pkceCodeVerifier(),
               let codeChallenge = codeVerifier.pkceCodeChallenge() else
@@ -39,19 +55,16 @@ extension IDXClient.APIVersion1: IDXClientAPIImpl {
                 return
             }
             
-            self.interactionHandle = response.interactionHandle
-            self.codeVerifier = codeVerifier
-            
             completion(IDXClient.Context(interactionHandle: response.interactionHandle,
                                          codeVerifier: codeVerifier),
                        nil)
         }
     }
     
-    func introspect(_ interactionHandle: String,
+    func introspect(_ context: IDXClient.Context,
                     completion: @escaping (IDXClient.Response?, Error?) -> Void)
     {
-        let request = IntrospectRequest(interactionHandle: interactionHandle)
+        let request = IntrospectRequest(interactionHandle: context.interactionHandle)
         request.send(to: session, using: configuration) { (response, error) in
             guard error == nil else {
                 completion(nil, error)
@@ -140,7 +153,8 @@ extension IDXClient.APIVersion1: IDXClientAPIImpl {
         }
     }
 
-    func exchangeCode(using response: IDXClient.Response,
+    func exchangeCode(with context: IDXClient.Context,
+                      using response: IDXClient.Response,
                       completion: @escaping (IDXClient.Token?, Error?) -> Void)
     {
         guard let successResponse = response.successResponse else {
@@ -159,7 +173,7 @@ extension IDXClient.APIVersion1: IDXClientAPIImpl {
                 case "client_id":
                     result[name] = configuration.clientId
                 case "code_verifier":
-                    result[name] = self.codeVerifier
+                    result[name] = context.codeVerifier
                 default: break
                 }
         }
@@ -197,12 +211,10 @@ extension IDXClient.APIVersion1: IDXClientAPIImpl {
 
 extension IDXClient.APIVersion1 {
     func consumeResponse(_ response: IntrospectRequest.ResponseType) throws {
-        self.stateHandle = response.stateHandle
         self.cancelRemediationOption = IDXClient.Remediation.Option(api: self, v1: response.cancel)
     }
     
     func consumeResponse(_ response: IDXClient.Response) throws  {
-        self.stateHandle = response.stateHandle
         self.cancelRemediationOption = response.cancelRemediationOption
     }
 

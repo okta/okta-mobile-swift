@@ -22,8 +22,6 @@ class IDXClientAPIv1Mock: IDXClientAPIImpl {
     }
     
     let configuration: IDXClient.Configuration
-    var interactionHandle: String?
-    var codeVerifier: String?
     
     struct RecordedCall {
         let function: String
@@ -54,7 +52,7 @@ class IDXClientAPIv1Mock: IDXClientAPIImpl {
         completion(result?["context"] as? IDXClient.Context, result?["error"] as? Error)
     }
     
-    func introspect(_ interactionHandle: String, completion: @escaping (IDXClient.Response?, Error?) -> Void) {
+    func introspect(_ context: IDXClient.Context, completion: @escaping (IDXClient.Response?, Error?) -> Void) {
         recordedCalls.append(RecordedCall(function: #function, arguments: nil))
         let result = response(for: #function)
         completion(result?["response"] as? IDXClient.Response, result?["error"] as? Error)
@@ -76,9 +74,10 @@ class IDXClientAPIv1Mock: IDXClientAPIImpl {
         completion(result?["response"] as? IDXClient.Response, result?["error"] as? Error)
     }
 
-    func exchangeCode(using response: IDXClient.Response, completion: @escaping (IDXClient.Token?, Error?) -> Void) {
+    func exchangeCode(with context: IDXClient.Context, using response: IDXClient.Response, completion: @escaping (IDXClient.Token?, Error?) -> Void) {
         recordedCalls.append(RecordedCall(function: #function,
                                           arguments: [
+                                            "with": context as Any,
                                             "using": response as Any
                                           ]))
         let result = self.response(for: #function)

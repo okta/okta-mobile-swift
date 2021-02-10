@@ -27,7 +27,7 @@ class IDXStartViewController: UIViewController, IDXSigninController {
             return
         }
         
-        signin.idx.start { [weak self] (response, error) in
+        signin.idx.start { [weak self] (_, response, error) in
             guard let response = response else {
                 if let error = error {
                     self?.showError(error)

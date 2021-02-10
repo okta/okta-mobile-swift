@@ -19,6 +19,7 @@ class IDXClientTests: XCTestCase {
                                                 clientSecret: "clientSecret",
                                                 scopes: ["all"],
                                                 redirectUri: "redirect:/uri")
+    let context = IDXClient.Context(interactionHandle: "foo", codeVerifier: "bar")
     var client: IDXClient!
     var api: IDXClientAPIv1Mock!
     
@@ -36,7 +37,6 @@ class IDXClientTests: XCTestCase {
         XCTAssertEqual(idx.configuration, configuration)
         XCTAssertNil(idx.context)
         
-        let context = IDXClient.Context(interactionHandle: "foo", codeVerifier: "bar")
         idx = IDXClient(configuration: configuration, context: context)
         XCTAssertNotNil(idx)
         XCTAssertEqual(idx.configuration, configuration)
@@ -115,7 +115,7 @@ class IDXClientTests: XCTestCase {
 
         // introspect()
         expect = expectation(description: "introspect")
-        client.introspect("foo") { (_, _) in
+        client.introspect(context) { (_, _) in
             called = true
             expect.fulfill()
         }
@@ -142,15 +142,16 @@ class IDXClientTests: XCTestCase {
         
         // exchangeCode()
         expect = expectation(description: "exchangeCode")
-        client.exchangeCode(using: response) { (_, _) in
+        client.exchangeCode(with: context, using: response) { (_, _) in
             called = true
             expect.fulfill()
         }
         wait(for: [ expect ], timeout: 1)
         XCTAssertTrue(called)
         call = api.recordedCalls.last
-        XCTAssertEqual(call?.function, "exchangeCode(using:completion:)")
-        XCTAssertEqual(call?.arguments?.count, 1)
+        XCTAssertEqual(call?.function, "exchangeCode(with:using:completion:)")
+        XCTAssertEqual(call?.arguments?.count, 2)
+        XCTAssertEqual(call?.arguments?["with"] as! IDXClient.Context, context)
         XCTAssertEqual(call?.arguments?["using"] as! IDXClient.Response, response)
         api.reset()
         
@@ -184,15 +185,16 @@ class IDXClientTests: XCTestCase {
 
         // Response.exchangeCode()
         expect = expectation(description: "Response.exchangeCode")
-        response.exchangeCode() { (_, _) in
+        response.exchangeCode(with: context) { (_, _) in
             called = true
             expect.fulfill()
         }
         wait(for: [ expect ], timeout: 1)
         XCTAssertTrue(called)
         call = api.recordedCalls.last
-        XCTAssertEqual(call?.function, "exchangeCode(using:completion:)")
-        XCTAssertEqual(call?.arguments?.count, 1)
+        XCTAssertEqual(call?.function, "exchangeCode(with:using:completion:)")
+        XCTAssertEqual(call?.arguments?.count, 2)
+        XCTAssertEqual(call?.arguments?["with"] as! IDXClient.Context, context)
         XCTAssertEqual(call?.arguments?["using"] as! IDXClient.Response, response)
         api.reset()
     }

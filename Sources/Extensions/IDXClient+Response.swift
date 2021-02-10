@@ -99,17 +99,18 @@ public extension IDXClient {
         /// - Important:
         /// If a completion handler is not provided, you should ensure that you implement the `IDXClientDelegate.idx(client:didExchangeToken:)` method to receive the token or to handle any errors.
         /// - Parameters:
+        ///   - context: Context object returned from the initial response to `interact`, or `nil` to use the value stored in the IDXClient.
         ///   - response: Successful response.
         ///   - completion: Optional completion handler invoked when a token, or error, is received.
         ///   - token: The token that was exchanged, or `nil` if an error occurred.
         ///   - error: Describes the error that occurred, or `nil` if successful.
-        @objc public func exchangeCode(completion: ((_ token: Token?, _ error: Error?) -> Void)?) {
+        @objc public func exchangeCode(with context: Context? = nil, completion: ((_ token: Token?, _ error: Error?) -> Void)?) {
             guard let client = api.client else {
                 completion?(nil, IDXClientError.invalidClient)
                 return
             }
             
-            client.exchangeCode(using: self, completion: completion)
+            client.exchangeCode(with: context, using: self, completion: completion)
         }
         
         internal let cancelRemediationOption: Remediation.Option?

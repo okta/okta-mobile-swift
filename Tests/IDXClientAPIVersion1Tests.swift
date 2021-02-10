@@ -19,6 +19,7 @@ class IDXClientAPIVersion1Tests: XCTestCase {
                                                 clientSecret: "clientSecret",
                                                 scopes: ["all"],
                                                 redirectUri: "redirect:/uri")
+    let context = IDXClient.Context(interactionHandle: "foo", codeVerifier: "bar")
     var session: URLSessionMock!
     var api: IDXClient.APIVersion1!
     
@@ -61,7 +62,7 @@ class IDXClientAPIVersion1Tests: XCTestCase {
 
         var response: IDXClient.Response!
         let completion = expectation(description: "Response")
-        api.introspect("ABCeasyas123") { (responseValue, error) in
+        api.introspect(context) { (responseValue, error) in
             XCTAssertNotNil(responseValue)
             XCTAssertNil(error)
             response = responseValue
@@ -121,7 +122,7 @@ class IDXClientAPIVersion1Tests: XCTestCase {
                            statusCode: 400)
         
         let completion = expectation(description: "Response")
-        api.introspect("ABCeasyas123") { (response, error) in
+        api.introspect(context) { (response, error) in
             XCTAssertNil(response)
             XCTAssertNotNil(error)
             XCTAssertTrue(error is IDXClientError)
