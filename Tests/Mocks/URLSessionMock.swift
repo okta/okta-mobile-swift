@@ -18,14 +18,13 @@ extension IDXClient.Response {
                         folderName: String? = nil,
                         fileName: String) throws -> IDXClient.Response
     {
-        let bundle = Bundle(for: URLSessionMock.self)
-        guard let path = bundle.url(forResource: fileName,
-                                    withExtension: "json",
-                                    subdirectory: folderName) else {
+        let path = Bundle.testResource(folderName: folderName, fileName: fileName)
+        let data: Data!
+        do {
+            data = try Data(contentsOf: path)
+        } catch {
             throw IDXClientError.invalidHTTPResponse
         }
-        
-        let data = try Data(contentsOf: path)
         
         let response = try JSONDecoder.idxResponseDecoder.decode(IDXClient.APIVersion1.Response.self, from: data)
         return IDXClient.Response(api: api, v1: response)
@@ -67,11 +66,7 @@ class URLSessionMock: URLSessionProtocol {
                 contentType: String = "application/x-www-form-urlencoded",
                 error: Error? = nil) throws
     {
-        let bundle = Bundle(for: type(of: self))
-        guard let path = bundle.url(forResource: fileName, withExtension: "json", subdirectory: folderName) else {
-            return
-        }
-        
+        let path = Bundle.testResource(folderName: folderName, fileName: fileName)
         let data = try Data(contentsOf: path)
         
         expect(url,

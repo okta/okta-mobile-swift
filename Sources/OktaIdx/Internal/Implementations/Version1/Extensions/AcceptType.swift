@@ -34,7 +34,7 @@ extension IDXClient.APIVersion1.AcceptType {
         }
     }
     
-    func encodedData(with parameters: [String:Any]) throws -> Data?{
+    func encodedData(with parameters: [String:Any]) throws -> Data? {
         switch self {
         case .formEncoded:
             guard let parameters = parameters as? [String:String] else {
@@ -44,7 +44,7 @@ extension IDXClient.APIVersion1.AcceptType {
         case .json: fallthrough
         case .ionJson:
             var opts: JSONSerialization.WritingOptions = []
-            if #available(iOSApplicationExtension 11.0, *) {
+            if #available(iOS 11.0, iOSApplicationExtension 11.0, macOS 10.13, *) {
                 opts.insert(.sortedKeys)
             }
             

@@ -98,8 +98,8 @@ class ScenarioTests: XCTestCase {
         try session.expect("https://example.com/idp/idx/introspect", folderName: "MFA-Email", fileName: "02-introspect-response")
         try session.expect("https://example.com/idp/idx/identify", folderName: "MFA-Email", fileName: "03-identify-response")
         try session.expect("https://example.com/idp/idx/challenge", folderName: "MFA-Email", fileName: "04-challenge-authenticator")
-        try session.expect("https://example.com/idp/idx/challenge/answer", folderName: "MFA-Email", fileName: "05-challenge-authenticator")
-//        try session.expect("https://example.com/oauth2/auszsfkYrgGCTilsV2o4/v1/token", folderName: "MFA-Email", fileName: "05-challenge-answer-invalid")
+//        try session.expect("https://example.com/idp/idx/challenge/answer", folderName: "MFA-Email", fileName: "05-challenge-authenticator")
+        try session.expect("https://example.com/oauth2/auszsfkYrgGCTilsV2o4/v1/token", folderName: "MFA-Email", fileName: "05-challenge-answer-invalid")
 
         // Start, takes us through interact & introspect
         idx.start { (context, response, error) in

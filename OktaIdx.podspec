@@ -1,11 +1,11 @@
-Pod::Spec.new do |s|
+Pod::Spec.new do |spec|
   spec.name             = 'OktaIdx'
-  spec.version          = '0.0.1'
+  spec.version          = '0.1.0'
   spec.summary          = 'SDK to easily integrate the Okta Identity Engine'
   spec.description      = <<-DESC
 Integrate your native app with Okta using the Okta Identity Engine library.
                        DESC
-  spec.platforms    = { :ios => "11.0", :tvos => "11.0", :osx => "10.10"}
+  spec.platforms    = { :ios => "10.0", :tvos => "10.0", :osx => "10.10"}
   spec.homepage         = 'https://github.com/okta/okta-idx-swift'
   spec.license          = { :type => 'APACHE2', :file => 'LICENSE' }
   spec.authors          = { "Okta Developers" => "developer@okta.com"}
@@ -14,7 +14,7 @@ Integrate your native app with Okta using the Okta Identity Engine library.
 
   spec.source_files = 'Sources/OktaIdx/**/*.{h,swift}'
   spec.exclude_files = 'Sources/OktaIdx/Common/Exports.swift'
-  spec.ios.deployment_target = '11.0'
+  spec.ios.deployment_target = '10.0'
   spec.osx.deployment_target = '10.10'
 
   spec.xcconfig = { 'USER_HEADER_SEARCH_PATHS' => '${SRCROOT}/Sources/**' }
