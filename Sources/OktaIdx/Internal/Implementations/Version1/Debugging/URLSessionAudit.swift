@@ -16,8 +16,8 @@ import Foundation
 
 public class URLSessionAudit: CustomStringConvertible {
     static let shared = URLSessionAudit()
-    private let queue = DispatchQueue(label: "com.okta.urlsession.audit")
-    private var logs: [Log] = []
+    internal let queue = DispatchQueue(label: "com.okta.urlsession.audit", qos: .utility)
+    public private(set) var logs: [Log] = []
     
     func reset() {
         queue.sync {
@@ -31,7 +31,7 @@ public class URLSessionAudit: CustomStringConvertible {
         }
     }
     
-    struct Log: CustomStringConvertible {
+    public struct Log: CustomStringConvertible {
         let date: Date
         let url: URL?
         let method: String?
@@ -55,7 +55,7 @@ public class URLSessionAudit: CustomStringConvertible {
             responseBody = data
         }
 
-        var description: String {
+        public var description: String {
             let requestString: String
             if let body = requestBody {
                 requestString = String(data: body, encoding: .utf8) ?? "<invalid data>"

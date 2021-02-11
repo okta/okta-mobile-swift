@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		960CD20825D5B02600523192 /* UserAgent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 960CD20725D5B02600523192 /* UserAgent.swift */; };
+		960CD20E25D5B77A00523192 /* UserAgentTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 960CD20D25D5B77A00523192 /* UserAgentTests.swift */; };
+		960CD21225D5BC2D00523192 /* URLSessionAuditTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 960CD21125D5BC2D00523192 /* URLSessionAuditTests.swift */; };
 		960F853F25D4988000CAB52A /* Resources in Resources */ = {isa = PBXBuildFile; fileRef = 960F853E25D4988000CAB52A /* Resources */; };
 		960F854525D4A13B00CAB52A /* Bundle+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 960F854425D4A13B00CAB52A /* Bundle+Extensions.swift */; };
 		9617090F25AD109C000E9552 /* IDXVersion+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9617090E25AD109C000E9552 /* IDXVersion+Extension.swift */; };
@@ -68,6 +71,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		960CD20725D5B02600523192 /* UserAgent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserAgent.swift; sourceTree = "<group>"; };
+		960CD20D25D5B77A00523192 /* UserAgentTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserAgentTests.swift; sourceTree = "<group>"; };
+		960CD21125D5BC2D00523192 /* URLSessionAuditTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLSessionAuditTests.swift; sourceTree = "<group>"; };
 		960F853E25D4988000CAB52A /* Resources */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Resources; sourceTree = "<group>"; };
 		960F854425D4A13B00CAB52A /* Bundle+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Bundle+Extensions.swift"; sourceTree = "<group>"; };
 		9617090E25AD109C000E9552 /* IDXVersion+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "IDXVersion+Extension.swift"; sourceTree = "<group>"; };
@@ -141,6 +147,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		960CD20625D5B01C00523192 /* Utilities */ = {
+			isa = PBXGroup;
+			children = (
+				960CD20725D5B02600523192 /* UserAgent.swift */,
+			);
+			path = Utilities;
+			sourceTree = "<group>";
+		};
 		9617090B25AD104E000E9552 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
@@ -234,6 +248,8 @@
 				96A21F3125C0A5D7006C7BBB /* IDXRelatesToParserTests.swift */,
 				96549E2125C1FAF8007FCF29 /* IDXExtractFormValueTests.swift */,
 				962C3BD025C33EE70066987C /* IDXRemediationParameterTests.swift */,
+				960CD20D25D5B77A00523192 /* UserAgentTests.swift */,
+				960CD21125D5BC2D00523192 /* URLSessionAuditTests.swift */,
 			);
 			path = Tests;
 			sourceTree = "<group>";
@@ -290,6 +306,7 @@
 		96F8F2582582E93B00DA2701 /* Version1 */ = {
 			isa = PBXGroup;
 			children = (
+				960CD20625D5B01C00523192 /* Utilities */,
 				96F8B33D25BB445100DAECDC /* Debugging */,
 				961BE443258411B200DCE8AC /* Extensions */,
 				96F8F2592582E94A00DA2701 /* Requests */,
@@ -445,6 +462,7 @@
 				96F8F26C2582E9C900DA2701 /* IntrospectRequest.swift in Sources */,
 				961BE43E258406EC00DCE8AC /* PKCEExtensions.swift in Sources */,
 				961BE43A2583F8E900DCE8AC /* RequestHTTPHeaders.swift in Sources */,
+				960CD20825D5B02600523192 /* UserAgent.swift in Sources */,
 				96F8F26B2582E9C900DA2701 /* TokenRequest.swift in Sources */,
 				96F5417D258A843300D3995F /* IDXClient+V1ResponseConstructors.swift in Sources */,
 				966A1E80258BEADB00864DB7 /* IDXClientError+Extensions.swift in Sources */,
@@ -467,11 +485,13 @@
 				96F8F2302582C33A00DA2701 /* IDXClientAPIMock.swift in Sources */,
 				96DCDCEC25882263009487CB /* IDXClientAPIVersion1Tests.swift in Sources */,
 				96F8F22B2582C2DE00DA2701 /* IDXClientTests.swift in Sources */,
+				960CD20E25D5B77A00523192 /* UserAgentTests.swift in Sources */,
 				96437C2825CB266B00ED7E11 /* IDXResponseEqualityTests.swift in Sources */,
 				964A44B2259A90BE002CB250 /* IDXClientErrorTests.swift in Sources */,
 				96C584EE258ACEB200E79975 /* JSONValueTests.swift in Sources */,
 				961BE4272583E73300DCE8AC /* IDXClientRequestTests.swift in Sources */,
 				961BE42F2583EC6300DCE8AC /* TestExtensions.swift in Sources */,
+				960CD21225D5BC2D00523192 /* URLSessionAuditTests.swift in Sources */,
 				964A44E1259D3331002CB250 /* IDXClientV1ResponseTests.swift in Sources */,
 				96F8F1C125804A0C00DA2701 /* IDXClientVersionTests.swift in Sources */,
 				964A44BE259BB8FC002CB250 /* IDXAcceptTypeTests.swift in Sources */,

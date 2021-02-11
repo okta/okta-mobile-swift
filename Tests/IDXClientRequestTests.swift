@@ -30,10 +30,9 @@ class IDXClientRequestTests: XCTestCase {
         let url = urlRequest?.url?.absoluteString
         XCTAssertEqual(url, "https://example.com/issuer/oauth2/default/v1/interact")
         
-        XCTAssertEqual(urlRequest?.allHTTPHeaderFields, [
-            "Content-Type": "application/x-www-form-urlencoded",
-            "Accept": "application/json"
-        ])
+        XCTAssertEqual(urlRequest?.allHTTPHeaderFields?["Content-Type"], "application/x-www-form-urlencoded")
+        XCTAssertEqual(urlRequest?.allHTTPHeaderFields?["Accept"], "application/json")
+        XCTAssertNotNil(urlRequest?.allHTTPHeaderFields?["User-Agent"])
 
         let data = urlRequest?.httpBody?.urlFormEncoded()
         XCTAssertNotNil(data)

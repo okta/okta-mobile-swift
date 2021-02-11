@@ -13,18 +13,40 @@
 import Foundation
 
 protocol HasHTTPHeaders {
+    var userAgent: String { get }
     var httpHeaders: [String:String] { get }
 }
 
 protocol HasOAuthHTTPHeaders: HasHTTPHeaders {}
 protocol HasIDPHTTPHeaders: HasHTTPHeaders {}
 
+private let SharedUserAgent: String = {
+    return buildUserAgent()
+}()
+
+extension HasHTTPHeaders {
+    var userAgent: String {
+        get {
+            return SharedUserAgent
+        }
+    }
+    
+    var httpHeaders: [String : String] {
+        get {
+            return [
+                "User-Agent": userAgent
+            ]
+        }
+    }
+}
+
 extension HasOAuthHTTPHeaders {
     var httpHeaders: [String : String] {
         get {
             return [
                 "Content-Type": "application/x-www-form-urlencoded",
-                "Accept": "application/json"
+                "Accept": "application/json",
+                "User-Agent": userAgent
             ]
         }
     }
@@ -35,7 +57,8 @@ extension HasIDPHTTPHeaders {
         get {
             return [
                 "Content-Type": "application/ion+json; okta-version=1.0.0",
-                "Accept": "application/ion+json; okta-version=1.0.0"
+                "Accept": "application/ion+json; okta-version=1.0.0",
+                "User-Agent": userAgent
             ]
         }
     }

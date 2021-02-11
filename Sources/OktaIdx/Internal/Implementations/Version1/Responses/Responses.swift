@@ -49,7 +49,7 @@ extension IDXClient.APIVersion1 {
         let parameters: [String:Any]
     }
     
-    struct RemediationRequest {
+    struct RemediationRequest: HasHTTPHeaders {
         let method: String
         let href: URL
         let accepts: AcceptType
