@@ -14,6 +14,7 @@ import Foundation
 
 extension IDXClient.Context: NSSecureCoding {
     private enum Keys: String {
+        case state
         case interactionHandle
         case codeVerifier
     }
@@ -27,18 +28,22 @@ extension IDXClient.Context: NSSecureCoding {
             return false
         }
         
-        guard interactionHandle == object.interactionHandle,
+        guard state == object.state,
+              interactionHandle == object.interactionHandle,
               codeVerifier == object.codeVerifier else { return false }
         return true
     }
     
     public func encode(with coder: NSCoder) {
+        coder.encode(state, forKey: Keys.state.rawValue)
         coder.encode(interactionHandle, forKey: Keys.interactionHandle.rawValue)
         coder.encode(codeVerifier, forKey: Keys.codeVerifier.rawValue)
     }
     
     public convenience init?(coder: NSCoder) {
-        guard let interactionHandle = coder.decodeObject(of: [NSString.self],
+        guard let state = coder.decodeObject(of: [NSString.self],
+                                             forKey: Keys.state.rawValue) as? String,
+              let interactionHandle = coder.decodeObject(of: [NSString.self],
                                                          forKey: Keys.interactionHandle.rawValue) as? String,
               let codeVerifier = coder.decodeObject(of: [NSString.self],
                                                     forKey: Keys.codeVerifier.rawValue) as? String else
@@ -46,7 +51,9 @@ extension IDXClient.Context: NSSecureCoding {
             return nil
         }
         
-        self.init(interactionHandle: interactionHandle, codeVerifier: codeVerifier)
+        self.init(state: state,
+                  interactionHandle: interactionHandle,
+                  codeVerifier: codeVerifier)
     }
 }
 

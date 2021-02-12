@@ -26,6 +26,31 @@ extension IDXClient.APIVersion1.TokenRequest: IDXClientAPIRequest {
                   parameters: try option.formValues(with: parameters))
     }
     
+    init(issuer url: URL, clientId: String, clientSecret: String?, codeVerifier: String?, grantType: String, code: String) {
+        var urlComponents = URLComponents(url: url, resolvingAgainstBaseURL: false)
+        urlComponents?.path = "/oauth2/v1/token"
+        let tokenUrl = urlComponents?.url ?? url
+        
+        var parameters = [
+            "client_id": clientId,
+            "grant_type": grantType,
+            grantType: code
+        ]
+        
+        if let clientSecret = clientSecret {
+            parameters["client_secret"] = clientSecret
+        }
+        
+        if let codeVerifier = codeVerifier {
+            parameters["code_verifier"] = codeVerifier
+        }
+        
+        self.init(method: "POST",
+                  href: tokenUrl,
+                  accepts: .formEncoded,
+                  parameters: parameters)
+    }
+    
     func urlRequest(using configuration: IDXClient.Configuration) -> URLRequest? {
         let data: Data?
         do {

@@ -16,7 +16,7 @@ import Foundation
 protocol IDXClientAPI: class {
     var context: IDXClient.Context? { get }
     var canCancel: Bool { get }
-    func interact(completion: IDXClient.ContextResult?)
+    func interact(state: String?, completion: IDXClient.ContextResult?)
     func introspect(_ context: IDXClient.Context?,
                     completion: IDXClient.ResponseResult?)
     func cancel(completion: IDXClient.ResponseResult?)
@@ -40,7 +40,7 @@ protocol IDXClientAPIImpl: class {
     var client: IDXClientAPI? { get set }
     
     var canCancel: Bool { get }
-    func interact(completion: @escaping (IDXClient.Context?, Error?) -> Void)
+    func interact(state: String?, completion: @escaping (IDXClient.Context?, Error?) -> Void)
     func introspect(_ context: IDXClient.Context,
                     completion: @escaping (_ reponse: IDXClient.Response?, _ error: Error?) -> Void)
     func cancel(completion: @escaping (_ response: IDXClient.Response?, _ error: Error?) -> Void)

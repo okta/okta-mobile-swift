@@ -15,7 +15,8 @@ import XCTest
 
 class IDXResponseCodableTests: XCTestCase {
     func testContextCodable() throws {
-        let object = IDXClient.Context(interactionHandle: "handle",
+        let object = IDXClient.Context(state: "state",
+                                       interactionHandle: "handle",
                                        codeVerifier: "verifier")
         let data = try JSONEncoder().encode(object)
         let result = try JSONDecoder().decode(IDXClient.Context.self, from: data)
@@ -35,7 +36,8 @@ class IDXResponseCodableTests: XCTestCase {
     }
 
     func testContextSecureCoding() throws {
-        let object = IDXClient.Context(interactionHandle: "handle",
+        let object = IDXClient.Context(state: "state",
+                                       interactionHandle: "handle",
                                        codeVerifier: "verifier")
         let data = try NSKeyedArchiver.archivedData(withRootObject: object,
                                                     requiringSecureCoding: true)

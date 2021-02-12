@@ -148,11 +148,12 @@ public final class IDXClient: NSObject {
     
     /// Performs a request to interact with IDX, based on configured client options.
     /// - Parameters:
+    ///   - state: Optional value to use as the state argument when initiating the authentication flow. This is used to provide contextual information to survive redirects.
     ///   - completion: Invoked when a response, or error, is received.
     ///   - context: An object describing the context of the IDX interaction, or `nil` if the client configuration was invalid.
     ///   - error: Describes the error that occurred, or `nil` if successful.
-    @objc public func interact(completion: ContextResult?) {
-        api.interact { (context, error) in
+    @objc public func interact(state: String? = nil, completion: ContextResult?) {
+        api.interact(state: state) { (context, error) in
             self.context = context
             self.handleResponse(context, error: error, completion: completion)
         }

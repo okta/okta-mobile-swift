@@ -19,7 +19,7 @@ class ScenarioTests: XCTestCase {
                                                 clientSecret: "clientSecret",
                                                 scopes: ["all"],
                                                 redirectUri: "redirect:/uri")
-    let context = IDXClient.Context(interactionHandle: "foo", codeVerifier: "bar")
+    let context = IDXClient.Context(state: "state", interactionHandle: "foo", codeVerifier: "bar")
     var session: URLSessionMock!
     var api: IDXClient.APIVersion1!
     var idx: IDXClient!

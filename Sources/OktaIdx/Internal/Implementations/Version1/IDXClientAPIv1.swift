@@ -35,7 +35,7 @@ extension IDXClient {
 }
 
 extension IDXClient.APIVersion1: IDXClientAPIImpl {
-    func interact(completion: @escaping(IDXClient.Context?, Error?) -> Void) {
+    func interact(state: String?, completion: @escaping(IDXClient.Context?, Error?) -> Void) {
         guard let codeVerifier = String.pkceCodeVerifier(),
               let codeChallenge = codeVerifier.pkceCodeChallenge() else
         {
@@ -43,7 +43,7 @@ extension IDXClient.APIVersion1: IDXClientAPIImpl {
             return
         }
         
-        let request = InteractRequest(codeChallenge: codeChallenge)
+        let request = InteractRequest(state: state, codeChallenge: codeChallenge)
         request.send(to: session, using: configuration) { (response, error) in
             guard error == nil else {
                 completion(nil, error)
@@ -55,7 +55,8 @@ extension IDXClient.APIVersion1: IDXClientAPIImpl {
                 return
             }
             
-            completion(IDXClient.Context(interactionHandle: response.interactionHandle,
+            completion(IDXClient.Context(state: request.state,
+                                         interactionHandle: response.interactionHandle,
                                          codeVerifier: codeVerifier),
                        nil)
         }

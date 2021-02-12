@@ -46,7 +46,7 @@ class IDXClientAPIv1Mock: IDXClientAPIImpl {
         self.configuration = configuration
     }
     
-    func interact(completion: @escaping (IDXClient.Context?, Error?) -> Void) {
+    func interact(state: String?, completion: @escaping (IDXClient.Context?, Error?) -> Void) {
         recordedCalls.append(RecordedCall(function: #function, arguments: nil))
         let result = response(for: #function)
         completion(result?["context"] as? IDXClient.Context, result?["error"] as? Error)

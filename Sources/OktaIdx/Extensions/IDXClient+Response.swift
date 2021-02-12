@@ -16,15 +16,22 @@ public extension IDXClient {
     /// Object that defines the context for the current authentication session, which is required when a session needs to be resumed.
     @objc(IDXContext)
     final class Context: NSObject, Codable {
+        /// The state value used when the `interact` call was initially made.
+        ///
+        /// This value can be used to associate a redirect URI to the associated Context that can be used to resume an authentication session.
+        @objc public let state: String
+        
         /// The interaction handle returned from the `interact` response from the server.
         @objc public let interactionHandle: String
         
         /// The PKCE code verifier value used when initiating the session using the `interact` method.
         @objc public let codeVerifier: String
 
-        internal init(interactionHandle: String,
+        internal init(state: String,
+                      interactionHandle: String,
                       codeVerifier: String)
         {
+            self.state = state
             self.interactionHandle = interactionHandle
             self.codeVerifier = codeVerifier
         }

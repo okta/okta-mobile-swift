@@ -19,7 +19,7 @@ class IDXClientAPIVersion1Tests: XCTestCase {
                                                 clientSecret: "clientSecret",
                                                 scopes: ["all"],
                                                 redirectUri: "redirect:/uri")
-    let context = IDXClient.Context(interactionHandle: "foo", codeVerifier: "bar")
+    let context = IDXClient.Context(state: "state", interactionHandle: "foo", codeVerifier: "bar")
     var session: URLSessionMock!
     var api: IDXClient.APIVersion1!
     
@@ -33,7 +33,7 @@ class IDXClientAPIVersion1Tests: XCTestCase {
         try session.expect("https://foo.oktapreview.com/oauth2/default/v1/interact", fileName: "interact-response")
         
         let completion = expectation(description: "Response")
-        api.interact { (context, error) in
+        api.interact(state: nil) { (context, error) in
             XCTAssertNotNil(context)
             XCTAssertEqual(context?.interactionHandle, "003Q14X7li")
             XCTAssertNil(error)
@@ -48,7 +48,7 @@ class IDXClientAPIVersion1Tests: XCTestCase {
                            statusCode: 400)
         
         let completion = expectation(description: "Response")
-        api.interact { (handle, error) in
+        api.interact(state: nil) { (handle, error) in
             XCTAssertNil(handle)
             XCTAssertNotNil(error)
             completion.fulfill()

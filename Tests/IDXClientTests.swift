@@ -19,7 +19,7 @@ class IDXClientTests: XCTestCase {
                                                 clientSecret: "clientSecret",
                                                 scopes: ["all"],
                                                 redirectUri: "redirect:/uri")
-    let context = IDXClient.Context(interactionHandle: "foo", codeVerifier: "bar")
+    let context = IDXClient.Context(state: "state", interactionHandle: "foo", codeVerifier: "bar")
     var client: IDXClient!
     var api: IDXClientAPIv1Mock!
     
@@ -109,7 +109,7 @@ class IDXClientTests: XCTestCase {
         wait(for: [ expect ], timeout: 1)
         XCTAssertTrue(called)
         call = api.recordedCalls.last
-        XCTAssertEqual(call?.function, "interact(completion:)")
+        XCTAssertEqual(call?.function, "interact(state:completion:)")
         XCTAssertNil(call?.arguments)
         api.reset()
 

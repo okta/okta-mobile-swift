@@ -15,20 +15,30 @@ import XCTest
 
 class IDXResponseEqualityTests: XCTestCase {
     func testContextEquality() {
-        let compare = IDXClient.Context(interactionHandle: "handle",
-                                       codeVerifier: "verifier")
+        let compare = IDXClient.Context(state: "state",
+                                        interactionHandle: "handle",
+                                        codeVerifier: "verifier")
         XCTAssertNotEqual(compare as NSObject, "Foo" as NSObject)
-
-        var object = IDXClient.Context(interactionHandle: "handle2",
+        
+        var object = IDXClient.Context(state: "state",
+                                       interactionHandle: "handle2",
                                        codeVerifier: "verifier2")
         XCTAssertNotEqual(compare, object)
-
-        object = IDXClient.Context(interactionHandle: "handle",
-                                       codeVerifier: "verifier2")
+        
+        object = IDXClient.Context(state: "state",
+                                   interactionHandle: "handle",
+                                   codeVerifier: "verifier2")
         XCTAssertNotEqual(compare, object)
+        
 
-        object = IDXClient.Context(interactionHandle: "handle",
-                                       codeVerifier: "verifier")
+        object = IDXClient.Context(state: "state2",
+                                   interactionHandle: "handle",
+                                   codeVerifier: "verifier")
+        XCTAssertNotEqual(compare, object)
+        
+        object = IDXClient.Context(state: "state",
+                                   interactionHandle: "handle",
+                                   codeVerifier: "verifier")
         XCTAssertEqual(compare, object)
     }
 

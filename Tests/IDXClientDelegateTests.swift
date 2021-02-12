@@ -19,7 +19,7 @@ class IDXClientDelegateTests: XCTestCase {
                                                 clientSecret: "clientSecret",
                                                 scopes: ["all"],
                                                 redirectUri: "redirect:/uri")
-    let context = IDXClient.Context(interactionHandle: "foo", codeVerifier: "bar")
+    let context = IDXClient.Context(state: "state", interactionHandle: "foo", codeVerifier: "bar")
     var client: IDXClient!
     var api: IDXClientAPIv1Mock!
     var remediationOption: IDXClient.Remediation.Option!
@@ -90,7 +90,7 @@ class IDXClientDelegateTests: XCTestCase {
 
     func testInteractError() {
         // interact
-        api.expect(function: "interact(completion:)", arguments: ["error": error])
+        api.expect(function: "interact(state:completion:)", arguments: ["error": error])
         waitFor { expectation in
             self.client.interact { (_, _) in
                 XCTAssertTrue(Thread.isMainThread)
@@ -226,7 +226,7 @@ class IDXClientDelegateTests: XCTestCase {
 
     func testInteract() {
         // introspect()
-        api.expect(function: "interact(completion:)", arguments: ["context": context as Any])
+        api.expect(function: "interact(state:completion:)", arguments: ["context": context as Any])
         waitFor { expectation in
             self.client.interact { (_, _) in
                 XCTAssertTrue(Thread.isMainThread)
@@ -312,7 +312,7 @@ class IDXClientDelegateTests: XCTestCase {
     
     func testInteractWithoutCompletionBlock() {
         // introspect()
-        api.expect(function: "interact(completion:)", arguments: ["context": context as Any])
+        api.expect(function: "interact(state:completion:)", arguments: ["context": context as Any])
         waitFor { expectation in
             self.client.interact(completion: nil)
             self.client.queue.async {

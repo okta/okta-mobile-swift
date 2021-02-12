@@ -17,6 +17,11 @@ extension IDXClient.APIVersion1.InteractRequest: IDXClientAPIRequest {
     
     typealias ResponseType = Response
     
+    init(state: String?, codeChallenge: String) {
+        self.state = state ?? UUID().uuidString
+        self.codeChallenge = codeChallenge
+    }
+    
     func urlRequest(using configuration:IDXClient.Configuration) -> URLRequest? {
         guard let url = configuration.issuerUrl(with: "v1/interact") else { return nil }
 
@@ -26,7 +31,7 @@ extension IDXClient.APIVersion1.InteractRequest: IDXClientAPIRequest {
             "code_challenge": codeChallenge,
             "code_challenge_method": "S256",
             "redirect_uri": configuration.redirectUri,
-            "state": UUID().uuidString
+            "state": state
         ]
         
         var request = URLRequest(url: url)
