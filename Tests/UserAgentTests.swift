@@ -12,7 +12,7 @@ class UserAgentTests: XCTestCase {
     var regex: NSRegularExpression!
     
     override func setUpWithError() throws {
-        let pattern = "okta-idx-swift/[\\d\\.]+ xctest/\\d+ CFNetwork/\\d+ Device/\\S+ (iOS|watchOS|tvOS|macOS)/[\\d\\.]+"
+        let pattern = "okta-idx-swift/[\\d\\.]+ xctest/[\\d+\\.]+ CFNetwork/[\\d+\\.]+ Device/\\S+ (iOS|watchOS|tvOS|macOS)/[\\d\\.]+"
         regex = try NSRegularExpression(pattern: pattern, options: [])
     }
     

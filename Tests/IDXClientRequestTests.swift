@@ -14,7 +14,7 @@ import XCTest
 @testable import OktaIdx
 
 class IDXClientRequestTests: XCTestCase {
-    let configuration = IDXClient.Configuration(issuer: "https://example.com/issuer/",
+    let configuration = IDXClient.Configuration(issuer: "https://example.com/oauth2/default",
                                                 clientId: "clientId",
                                                 clientSecret: "clientSecret",
                                                 scopes: ["all"],
@@ -28,7 +28,7 @@ class IDXClientRequestTests: XCTestCase {
         XCTAssertEqual(urlRequest?.httpMethod, "POST")
 
         let url = urlRequest?.url?.absoluteString
-        XCTAssertEqual(url, "https://example.com/issuer/oauth2/default/v1/interact")
+        XCTAssertEqual(url, "https://example.com/oauth2/default/v1/interact")
         
         XCTAssertEqual(urlRequest?.allHTTPHeaderFields?["Content-Type"], "application/x-www-form-urlencoded")
         XCTAssertEqual(urlRequest?.allHTTPHeaderFields?["Accept"], "application/json")

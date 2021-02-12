@@ -20,7 +20,10 @@ extension IDXClient.APIVersion1.IntrospectRequest: IDXClientAPIRequest, Receives
     }
     
     func urlRequest(using configuration:IDXClient.Configuration) -> URLRequest? {
-        guard let url = configuration.issuerUrl(with: "idp/idx/introspect") else { return nil }
+        guard var urlComponents = URLComponents(string: configuration.issuer) else { return nil }
+        urlComponents.path = "/idp/idx/introspect"
+        
+        guard let url = urlComponents.url else { return nil }
 
         let data: Data
         do {

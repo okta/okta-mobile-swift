@@ -14,7 +14,7 @@ import XCTest
 @testable import OktaIdx
 
 class ScenarioTests: XCTestCase {
-    let configuration = IDXClient.Configuration(issuer: "https://example.com",
+    let configuration = IDXClient.Configuration(issuer: "https://example.com/oauth2/default",
                                                 clientId: "clientId",
                                                 clientSecret: "clientSecret",
                                                 scopes: ["all"],

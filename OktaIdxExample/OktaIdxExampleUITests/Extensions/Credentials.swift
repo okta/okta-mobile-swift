@@ -37,7 +37,7 @@ struct TestCredentials {
     let issuer: String
     let redirectUri: String
     var issuerUrl: String {
-        return "https://\(issuer)"
+        return "https://\(issuer)/oauth2/default"
     }
 
     init?(with scenario: Scenario) {

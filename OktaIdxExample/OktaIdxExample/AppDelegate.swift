@@ -16,6 +16,7 @@ import UIKit
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
+        // Note: This is a workaround to address problems when running XCUI automated tests.
         #if targetEnvironment(simulator)
         let setHardwareLayout = NSSelectorFromString("setHardwareLayout:")
         UITextInputMode.activeInputModes
