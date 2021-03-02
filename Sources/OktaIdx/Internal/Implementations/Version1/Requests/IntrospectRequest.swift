@@ -64,7 +64,7 @@ extension IDXClient.APIVersion1.IntrospectRequest: IDXClientAPIRequest, Receives
             
             let result: ResponseType!
             do {
-                result = try idxResponse(from: data)
+                result = try self.idxResponse(from: data)
             } catch {
                 completion(nil, error)
                 return

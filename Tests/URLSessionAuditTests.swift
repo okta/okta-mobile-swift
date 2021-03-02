@@ -8,6 +8,7 @@
 import XCTest
 @testable import OktaIdx
 
+#if targetEnvironment(simulator) && DEBUG
 class URLSessionAuditTests: XCTestCase {
     func testAuditLog() {
         let audit = URLSessionAudit()
@@ -45,3 +46,4 @@ class URLSessionAuditTests: XCTestCase {
         XCTAssertEqual(audit.logs.count, 0)
     }
 }
+#endif

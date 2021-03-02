@@ -44,7 +44,7 @@ extension IDXClient.APIVersion1.AcceptType {
         case .json: fallthrough
         case .ionJson:
             var opts: JSONSerialization.WritingOptions = []
-            if #available(iOS 11.0, iOSApplicationExtension 11.0, macOS 10.13, *) {
+            if #available(iOS 11.0, iOSApplicationExtension 11.0, tvOS 11.0, macOS 10.13, *) {
                 opts.insert(.sortedKeys)
             }
             
