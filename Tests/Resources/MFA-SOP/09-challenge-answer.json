@@ -72,7 +72,7 @@
    },
    "cancel" : {
       "accepts" : "application/json; okta-version=1.0.0",
-      "href" : "https://idx-devex.trexcloud.com/idp/idx/cancel",
+      "href" : "https://example.com/idp/idx/cancel",
       "method" : "POST",
       "name" : "cancel",
       "produces" : "application/ion+json; okta-version=1.0.0",
@@ -96,7 +96,7 @@
       "value" : [
          {
             "accepts" : "application/json; okta-version=1.0.0",
-            "href" : "https://idx-devex.trexcloud.com/idp/idx/credential/enroll",
+            "href" : "https://example.com/idp/idx/credential/enroll",
             "method" : "POST",
             "name" : "select-authenticator-enroll",
             "produces" : "application/ion+json; okta-version=1.0.0",
@@ -179,7 +179,7 @@
          },
          {
             "accepts" : "application/json; okta-version=1.0.0",
-            "href" : "https://idx-devex.trexcloud.com/idp/idx/skip",
+            "href" : "https://example.com/idp/idx/skip",
             "method" : "POST",
             "name" : "skip",
             "produces" : "application/ion+json; okta-version=1.0.0",

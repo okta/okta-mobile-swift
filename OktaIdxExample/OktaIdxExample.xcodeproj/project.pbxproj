@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		92BB11B525E6B51F005D13FA /* IDXWebSessionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92BB11B425E6B51F005D13FA /* IDXWebSessionViewController.swift */; };
 		964F745325A3E5F0003EE300 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 964F745225A3E5F0003EE300 /* AppDelegate.swift */; };
 		964F745525A3E5F0003EE300 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 964F745425A3E5F0003EE300 /* SceneDelegate.swift */; };
 		964F745725A3E5F0003EE300 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 964F745625A3E5F0003EE300 /* ViewController.swift */; };
@@ -72,6 +73,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		92BB11B425E6B51F005D13FA /* IDXWebSessionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IDXWebSessionViewController.swift; sourceTree = "<group>"; };
 		964F744F25A3E5F0003EE300 /* OktaIdxExample.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = OktaIdxExample.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		964F745225A3E5F0003EE300 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		964F745425A3E5F0003EE300 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -241,6 +243,7 @@
 				96576C4F25A91EEA00B02E3B /* IDXStartViewController.swift */,
 				96576C6125ACC53200B02E3B /* IDXGetTokenViewController.swift */,
 				9691E6BE25AF7279000CD02C /* IDXRemediationTableViewController.swift */,
+				92BB11B425E6B51F005D13FA /* IDXWebSessionViewController.swift */,
 			);
 			path = "View Controllers";
 			sourceTree = "<group>";
@@ -449,6 +452,7 @@
 				96576C6225ACC53200B02E3B /* IDXGetTokenViewController.swift in Sources */,
 				9691E6C425AF73C4000CD02C /* IDXTextTableViewCell.swift in Sources */,
 				96576C8725ACFC5900B02E3B /* TokenResultViewController.swift in Sources */,
+				92BB11B525E6B51F005D13FA /* IDXWebSessionViewController.swift in Sources */,
 				96576C6F25ACDD8A00B02E3B /* IDXSigninController.swift in Sources */,
 				96749AF825B8AC3B002849A0 /* ClientConfiguration.swift in Sources */,
 				96ADA06D25B111AA008BF50D /* IDXMessageTableViewCell.swift in Sources */,

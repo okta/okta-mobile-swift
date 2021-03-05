@@ -57,7 +57,7 @@ extension IDXClient.APIVersion1 {
         let parameters: [String:Any]
     }
 
-    class Response: NSObject, Decodable {
+    final class Response: NSObject, Decodable {
         let stateHandle: String
         let version: String
         let expiresAt: Date
@@ -162,12 +162,12 @@ extension IDXClient.APIVersion1 {
         }
         
         struct Form: Decodable {
-            let rel: [String]
+            let rel: [String]?
             let name: String
             let method: String
             let href: URL
-            let value: [FormValue]
-            let accepts: String
+            let value: [FormValue]?
+            let accepts: String?
             let relatesTo: [RelatesTo]?
             let refresh: Double?
         }
@@ -262,5 +262,65 @@ extension IDXClient.APIVersion1 {
         let scope: String
         let refreshToken: String?
         let idToken: String?
+    }
+
+    struct Redirect {
+        enum Query {
+            enum Key {
+                static let interactionCode = "interaction_code"
+                static let state = "state"
+                static let error = "error"
+                static let errorDescription = "error_description"
+            }
+            
+            enum Value {
+                static let interactionRequired = "interaction_required"
+            }
+        }
+        
+        let url: URL
+        let scheme: String
+        let path: String
+        
+        let interactionCode: String?
+        let state: String?
+        let error: String?
+        let errorDescription: String?
+        
+        let interactionRequired: Bool
+        
+        init?(url: String) {
+            guard let url = URL(string: url) else {
+                return nil
+            }
+            
+            self.init(url: url)
+        }
+
+        init?(url: URL) {
+            self.url = url
+            
+            guard let urlComponents = URLComponents(string: url.absoluteString),
+                  let scheme = urlComponents.scheme else
+            {
+                return nil
+            }
+
+            self.scheme = scheme
+            self.path = urlComponents.path
+            
+            let queryItems = urlComponents.queryItems
+            
+            let queryValue: (String) -> String? = { name in
+                queryItems?.first { $0.name == name }?.value?.removingPercentEncoding
+            }
+
+            self.interactionCode = queryValue(Query.Key.interactionCode)
+            self.state = queryValue(Query.Key.state)
+            
+            self.error = queryValue(Query.Key.error)
+            self.errorDescription = queryValue(Query.Key.errorDescription)
+            self.interactionRequired = (self.error == Query.Value.interactionRequired)
+        }
     }
 }

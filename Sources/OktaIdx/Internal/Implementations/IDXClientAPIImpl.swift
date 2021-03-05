@@ -23,6 +23,14 @@ protocol IDXClientAPI: class {
     func proceed(remediation option: IDXClient.Remediation.Option,
                  data: [String : Any],
                  completion: IDXClient.ResponseResult?)
+    
+    func redirectResult(with context: IDXClient.Context?,
+                        redirect url: URL) -> IDXClient.RedirectResult
+    
+    func exchangeCode(with context: IDXClient.Context?,
+                      redirect url: URL,
+                      completion: IDXClient.TokenResult?)
+    
     func exchangeCode(with context: IDXClient.Context?,
                       using response: IDXClient.Response,
                       completion: IDXClient.TokenResult?)
@@ -47,6 +55,14 @@ protocol IDXClientAPIImpl: class {
     func proceed(remediation option: IDXClient.Remediation.Option,
                  data: [String : Any],
                  completion: @escaping (_ response: IDXClient.Response?, _ error: Swift.Error?) -> Void)
+    
+    func redirectResult(with context: IDXClient.Context,
+                        redirect url: URL) -> IDXClient.RedirectResult
+    
+    func exchangeCode(with context: IDXClient.Context,
+                      redirect url: URL,
+                      completion: @escaping (_ token: IDXClient.Token?, _ error: Swift.Error?) -> Void)
+    
     func exchangeCode(with context: IDXClient.Context,
                       using response: IDXClient.Response,
                       completion: @escaping (_ token: IDXClient.Token?, _ error: Swift.Error?) -> Void)

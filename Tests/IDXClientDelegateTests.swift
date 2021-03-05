@@ -24,6 +24,7 @@ class IDXClientDelegateTests: XCTestCase {
     var api: IDXClientAPIv1Mock!
     var remediationOption: IDXClient.Remediation.Option!
     var response: IDXClient.Response!
+    var redirectUrl: URL!
     var token: IDXClient.Token!
     let delegate = DelegateRecorder()
     let error = IDXClientError.cannotCreateRequest
@@ -81,6 +82,8 @@ class IDXClientDelegateTests: XCTestCase {
                                       messages: nil,
                                       app: nil,
                                       user: nil)
+        
+        redirectUrl = URL(string: "com.scheme://path")
     }
 
     override func tearDown() {
@@ -154,10 +157,36 @@ class IDXClientDelegateTests: XCTestCase {
         XCTAssertEqual(delegate.calls.first?.isMainThread, true)
     }
     
+    func testExchangeRedirectCodeError() {
+        api.expect(function: "exchangeCode(with:redirect:completion:)", arguments: ["error": error])
+        waitFor { expectation in
+            self.client.exchangeCode(with: self.context, redirect: self.redirectUrl) { (_, _) in
+                XCTAssertTrue(Thread.isMainThread)
+                expectation.fulfill()
+            }
+        }
+        XCTAssertEqual(delegate.calls.count, 1)
+        XCTAssertEqual(delegate.calls.first?.type, .error)
+        XCTAssertEqual(delegate.calls.first?.isMainThread, true)
+    }
+
     func testExchangeCodeError() {
         api.expect(function: "exchangeCode(with:using:completion:)", arguments: ["error": error])
         waitFor { expectation in
             self.client.exchangeCode(with: self.context, using: self.response) { (_, _) in
+                XCTAssertTrue(Thread.isMainThread)
+                expectation.fulfill()
+            }
+        }
+        XCTAssertEqual(delegate.calls.count, 1)
+        XCTAssertEqual(delegate.calls.first?.type, .error)
+        XCTAssertEqual(delegate.calls.first?.isMainThread, true)
+    }
+    
+    func testExchangeRedirectCodeWithoutContextError() {
+        api.expect(function: "exchangeCode(with:redirect:completion:)", arguments: ["error": error])
+        waitFor { expectation in
+            self.client.exchangeCode(with: nil, redirect: self.redirectUrl) { (_, _) in
                 XCTAssertTrue(Thread.isMainThread)
                 expectation.fulfill()
             }
@@ -185,6 +214,20 @@ class IDXClientDelegateTests: XCTestCase {
         api.expect(function: "exchangeCode(with:using:completion:)", arguments: ["token": token as Any])
         waitFor { expectation in
             self.client.exchangeCode(with: self.context, using: self.response) { (_, _) in
+                XCTAssertTrue(Thread.isMainThread)
+                expectation.fulfill()
+            }
+        }
+        XCTAssertEqual(delegate.calls.count, 1)
+        XCTAssertEqual(delegate.calls.first?.type, .token)
+        XCTAssertEqual(delegate.calls.first?.token, token)
+        XCTAssertEqual(delegate.calls.first?.isMainThread, true)
+    }
+    
+    func testExchangeCodeRedirectUrlFromClient() {
+        api.expect(function: "exchangeCode(with:redirect:completion:)", arguments: ["token": token as Any])
+        waitFor { expectation in
+            self.client.exchangeCode(with: self.context, redirect: self.redirectUrl) { (_, _) in
                 XCTAssertTrue(Thread.isMainThread)
                 expectation.fulfill()
             }
@@ -345,6 +388,21 @@ class IDXClientDelegateTests: XCTestCase {
         api.expect(function: "exchangeCode(with:using:completion:)", arguments: ["token": token as Any])
         waitFor { expectation in
             self.client.exchangeCode(with: self.context, using: self.response, completion: nil)
+            self.client.queue.async {
+                expectation.fulfill()
+            }
+        }
+        XCTAssertEqual(delegate.calls.count, 1)
+        XCTAssertEqual(delegate.calls.first?.type, .token)
+        XCTAssertEqual(delegate.calls.first?.token, token)
+        XCTAssertEqual(delegate.calls.first?.isMainThread, true)
+    }
+    
+    func testExchangeCodeRedirectWithoutCompletionBlock() {
+        // exchangeCode()
+        api.expect(function: "exchangeCode(with:redirect:completion:)", arguments: ["token": token as Any])
+        waitFor { expectation in
+            self.client.exchangeCode(with: self.context, redirect: self.redirectUrl, completion: nil)
             self.client.queue.async {
                 expectation.fulfill()
             }

@@ -68,7 +68,7 @@ class IDXClientRequestTests: XCTestCase {
         XCTAssertEqual(urlRequest.httpMethod, "POST")
 
         let url = try XCTUnwrap(urlRequest.url?.absoluteString)
-        XCTAssertEqual(url, "https://example.com/oauth2/v1/token")
+        XCTAssertEqual(url, "https://example.com/oauth2/default/v1/token")
         
         XCTAssertEqual(urlRequest.allHTTPHeaderFields?["Content-Type"], "application/x-www-form-urlencoded")
         XCTAssertEqual(urlRequest.allHTTPHeaderFields?["Accept"], "application/json")

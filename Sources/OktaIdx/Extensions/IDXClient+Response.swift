@@ -524,7 +524,7 @@ public extension IDXClient {
         ///    remediationOption["identifier"]
         @objc(IDXRemediationOption)
         final public class Option: NSObject {
-            @objc public let rel: [String] // TODO: Is this necessary to expose to the developer?
+            @objc public let rel: [String]? // TODO: Is this necessary to expose to the developer?
             
             /// The name of this remediation step, which can be used to control how the form is presented to the user.
             @objc public let name: String
@@ -534,7 +534,7 @@ public extension IDXClient {
             
             @objc public let method: String
             @objc public let href: URL
-            @objc public let accepts: String
+            @objc public let accepts: String?
             
             /// A description of the form values that this remediation option supports and expects.
             @objc public let form: [FormValue]
@@ -551,11 +551,11 @@ public extension IDXClient {
             private weak var api: IDXClientAPIImpl?
             
             internal init(api: IDXClientAPIImpl,
-                          rel: [String],
+                          rel: [String]?,
                           name: String,
                           method: String,
                           href: URL,
-                          accepts: String,
+                          accepts: String?,
                           form: [FormValue],
                           relatesTo: [APIVersion1.Response.RelatesTo]?,
                           refresh: TimeInterval?)

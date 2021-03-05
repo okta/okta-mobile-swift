@@ -153,6 +153,63 @@ extension IDXClient.APIVersion1: IDXClientAPIImpl {
             completion(IDXClient.Response(api: self, v1: response), nil)
         }
     }
+    
+    func redirectResult(with context: IDXClient.Context, redirect url: URL) -> IDXClient.RedirectResult {
+        guard let redirect = Redirect(url: url),
+              let originalRedirect = Redirect(url: configuration.redirectUri) else
+        {
+            return .invalidRedirectUrl
+        }
+        
+        guard originalRedirect.scheme == redirect.scheme &&
+                originalRedirect.path == redirect.path else
+        {
+            return .invalidRedirectUrl
+        }
+        
+        if context.state != redirect.state {
+            return .invalidContext
+        }
+        
+        if redirect.interactionCode != nil {
+            return .authenticated
+        }
+        
+        if redirect.interactionRequired {
+            return .remediationRequired
+        }
+        
+        return .invalidContext
+    }
+    
+    func exchangeCode(with context: IDXClient.Context,
+                      redirect url: URL,
+                      completion: @escaping (IDXClient.Token?, Error?) -> Void)
+    {
+        guard let redirect = Redirect(url: url) else {
+            completion(nil, IDXClientError.internalError(message: "Invalid redirect url"))
+            return
+        }
+        
+        guard let issuerUrl = URL(string: configuration.issuer) else {
+            completion(nil, IDXClientError.internalError(message: "Cannot create URL from issuer"))
+            return
+        }
+        
+        guard let interactionCode = redirect.interactionCode else {
+            completion(nil, IDXClientError.internalError(message: "Interaction code is missed"))
+            return
+        }
+        
+        let request = TokenRequest(issuer: issuerUrl,
+                                   clientId: configuration.clientId,
+                                   clientSecret: configuration.clientSecret,
+                                   codeVerifier: context.codeVerifier,
+                                   grantType: "interaction_code",
+                                   code: interactionCode)
+
+        send(request, completion)
+    }
 
     func exchangeCode(with context: IDXClient.Context,
                       using response: IDXClient.Response,
@@ -186,7 +243,11 @@ extension IDXClient.APIVersion1: IDXClientAPIImpl {
             completion(nil, error)
             return
         }
-
+        
+        send(request, completion)
+    }
+    
+    private func send(_ request: IDXClient.APIVersion1.TokenRequest, _ completion: @escaping (IDXClient.Token?, Error?) -> Void) {
         request.send(to: session, using: configuration) { (response, error) in
             guard error == nil else {
                 completion(nil, error)
@@ -204,7 +265,7 @@ extension IDXClient.APIVersion1: IDXClientAPIImpl {
                 completion(nil, error)
                 return
             }
-
+            
             completion(IDXClient.Token(api: self, v1: response), nil)
         }
     }

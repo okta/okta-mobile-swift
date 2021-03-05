@@ -14,6 +14,7 @@ import Foundation
 @testable import OktaIdx
 
 class IDXClientAPIv1Mock: IDXClientAPIImpl {
+    
     var client: IDXClientAPI?
     
     var canCancel: Bool {
@@ -72,6 +73,26 @@ class IDXClientAPIv1Mock: IDXClientAPIImpl {
                                           ]))
         let result = response(for: #function)
         completion(result?["response"] as? IDXClient.Response, result?["error"] as? Error)
+    }
+    
+    func redirectResult(with context: IDXClient.Context, redirect url: URL) -> IDXClient.RedirectResult {
+        recordedCalls.append(RecordedCall(function: #function,
+                                          arguments: [
+                                            "context": context as Any,
+                                            "redirect": url as Any
+                                          ]))
+        
+        return client?.redirectResult(with: context, redirect: url) ?? .invalidContext
+    }
+    
+    @objc func exchangeCode(with context: IDXClient.Context, redirect url: URL, completion: @escaping (IDXClient.Token?, Error?) -> Void) {
+        recordedCalls.append(RecordedCall(function: #function,
+                                          arguments: [
+                                            "with": context as Any,
+                                            "redirect": url as Any
+                                          ]))
+        let result = self.response(for: #function)
+        completion(result?["token"] as? IDXClient.Token, result?["error"] as? Error)
     }
 
     func exchangeCode(with context: IDXClient.Context, using response: IDXClient.Response, completion: @escaping (IDXClient.Token?, Error?) -> Void) {

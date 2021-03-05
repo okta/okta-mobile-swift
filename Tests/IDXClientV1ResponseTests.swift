@@ -78,7 +78,7 @@ class IDXClientV1ResponseTests: XCTestCase {
         XCTAssertEqual(obj.method, "POST")
         XCTAssertEqual(obj.accepts, "application/ion+json; okta-version=1.0.0")
         
-        XCTAssertEqual(obj.value.count, 1)
+        XCTAssertEqual(try XCTUnwrap(obj.value).count, 1)
     }
     
     func testCompositeForm() throws {
@@ -491,5 +491,4 @@ class IDXClientV1ResponseTests: XCTestCase {
             XCTAssertEqual(publicObj?.id, "0ZczewGCFPlxNYYcLq5i")
         }
     }
-    
 }

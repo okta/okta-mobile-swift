@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		9291B40A25E90FC500450BBE /* IDXRedirectTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9291B40925E90FC500450BBE /* IDXRedirectTests.swift */; };
 		960CD20825D5B02600523192 /* UserAgent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 960CD20725D5B02600523192 /* UserAgent.swift */; };
 		960CD20E25D5B77A00523192 /* UserAgentTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 960CD20D25D5B77A00523192 /* UserAgentTests.swift */; };
 		960CD21225D5BC2D00523192 /* URLSessionAuditTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 960CD21125D5BC2D00523192 /* URLSessionAuditTests.swift */; };
@@ -71,6 +72,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		9291B40925E90FC500450BBE /* IDXRedirectTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IDXRedirectTests.swift; sourceTree = "<group>"; };
 		960CD20725D5B02600523192 /* UserAgent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserAgent.swift; sourceTree = "<group>"; };
 		960CD20D25D5B77A00523192 /* UserAgentTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserAgentTests.swift; sourceTree = "<group>"; };
 		960CD21125D5BC2D00523192 /* URLSessionAuditTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLSessionAuditTests.swift; sourceTree = "<group>"; };
@@ -248,6 +250,7 @@
 				96A21F3125C0A5D7006C7BBB /* IDXRelatesToParserTests.swift */,
 				96549E2125C1FAF8007FCF29 /* IDXExtractFormValueTests.swift */,
 				962C3BD025C33EE70066987C /* IDXRemediationParameterTests.swift */,
+				9291B40925E90FC500450BBE /* IDXRedirectTests.swift */,
 				960CD20D25D5B77A00523192 /* UserAgentTests.swift */,
 				960CD21125D5BC2D00523192 /* URLSessionAuditTests.swift */,
 			);
@@ -480,6 +483,7 @@
 				960F854525D4A13B00CAB52A /* Bundle+Extensions.swift in Sources */,
 				961BE4492584184700DCE8AC /* PKCETests.swift in Sources */,
 				962C3BD125C33EE70066987C /* IDXRemediationParameterTests.swift in Sources */,
+				9291B40A25E90FC500450BBE /* IDXRedirectTests.swift in Sources */,
 				964A44B8259A9772002CB250 /* ScenarioTests.swift in Sources */,
 				966A1E76258BDB1B00864DB7 /* URLSessionProtocolTests.swift in Sources */,
 				96F8F2302582C33A00DA2701 /* IDXClientAPIMock.swift in Sources */,

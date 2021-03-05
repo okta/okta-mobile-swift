@@ -1,0 +1,48 @@
+{
+    "app": {
+        "type": "object",
+        "value": {
+            "id": "Ooa5cdrlgjv2B21m53w6",
+            "label": "Facebook idp SPA",
+            "name": "oidc_client"
+        }
+    },
+    "cancel": {
+        "accepts": "application/json; okta-version=1.0.0",
+        "href": "https://example.com/idp/idx/cancel",
+        "method": "POST",
+        "name": "cancel",
+        "produces": "application/ion+json; okta-version=1.0.0",
+        "rel": [
+            "create-form"
+        ],
+        "value": [
+            {
+                "mutable": false,
+                "name": "stateHandle",
+                "required": true,
+                "value": "ahc52KautBHCANs3ScZjLfRcxFjP_N5mqOTYouqHFP",
+                "visible": false
+            }
+        ]
+    },
+    "expiresAt": "2021-02-26T16:34:37.000Z",
+    "intent": "LOGIN",
+    "remediation": {
+        "type": "array",
+        "value": [
+            {
+                "href": "https://example.com/oauth2/avs2s4i2b4Cwi9PiG4k8/v1/authorize?client_id=O0a4ckjhvkcq2B88m54w9&request_uri=urn:okta:repLWTdpRjdldDJWaVNRMnVKY3pBV0pVeDB5IOI3SFJhVmE0UTlzTEwzdzowb2E0Y2V2TzZ3bGNxQzZtdDR3NA",
+                "idp": {
+                    "id": "0oa4ccvO6wlbsC6mt4a4",
+                    "name": "Facebook IdP"
+                },
+                "method": "GET",
+                "name": "redirect-idp",
+                "type": "FACEBOOK"
+            }
+        ]
+    },
+    "stateHandle": "04G8HuicZInY4QaPhfd0KF7yV9-vQzAFsi2WNLDz1U",
+    "version": "1.0.0"
+}

@@ -13,7 +13,7 @@
 import UIKit
 import OktaIdx
 
-protocol IDXSigninController {
+protocol IDXSigninController: class {
     var signin: Signin? { get set }
     func showError(_ error: Error)
 }
@@ -36,6 +36,6 @@ protocol IDXResponseController: IDXSigninController {
     var response: IDXClient.Response? { get set }
 }
 
-protocol IDXRemediationController: IDXResponseController {
-    var remediationOption: IDXClient.Remediation.Option? { get set }
+protocol IDXWebSessionController: IDXResponseController {
+    var redirectUrl: URL? { get set }
 }

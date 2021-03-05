@@ -16,7 +16,9 @@ extension IDXClient.APIVersion1.TokenRequest: IDXClientAPIRequest {
     typealias ResponseType = IDXClient.APIVersion1.Token
     
     init(successResponse option: IDXClient.Remediation.Option, parameters: [String:Any]? = nil) throws {
-        guard let acceptType = IDXClient.APIVersion1.AcceptType(rawValue: option.accepts) else {
+        guard let accepts = option.accepts,
+              let acceptType = IDXClient.APIVersion1.AcceptType(rawValue: accepts) else
+        {
             throw IDXClientError.invalidRequestData
         }
         
@@ -28,7 +30,10 @@ extension IDXClient.APIVersion1.TokenRequest: IDXClientAPIRequest {
     
     init(issuer url: URL, clientId: String, clientSecret: String?, codeVerifier: String?, grantType: String, code: String) {
         var urlComponents = URLComponents(url: url, resolvingAgainstBaseURL: false)
-        urlComponents?.path = "/oauth2/v1/token"
+
+        let path = urlComponents?.path ?? ""
+        urlComponents?.path = path + "/v1/token"
+        
         let tokenUrl = urlComponents?.url ?? url
         
         var parameters = [

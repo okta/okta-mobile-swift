@@ -12,6 +12,7 @@
 
 import UIKit
 import OktaIdx
+import AuthenticationServices
 
 enum SigninError: Error {
     case genericError(message: String)
@@ -107,15 +108,27 @@ public class Signin {
         // If the login is successful, there are no remediation options left. In this case,
         // we create a view controller to show the progress as a token is exchanged.
         if response.isLoginSuccessful {
-            guard let controller = storyboard.instantiateViewController(identifier: "get-token") as? IDXGetTokenViewController else { return nil }
+            guard let controller = storyboard.instantiateViewController(identifier: "get-token") as? UIViewController & IDXResponseController else { return nil }
             controller.signin = self
             controller.response = response
             
             return controller
         }
         
+        if let remediationOption = response.remediation?[.redirectIdp] {
+            guard let controller = storyboard.instantiateViewController(identifier: "idp-redirect") as? UIViewController & IDXWebSessionController else {
+                return nil
+            }
+            
+            controller.signin = self
+            controller.response = response
+            controller.redirectUrl = remediationOption.href
+            
+            return controller
+        }
+        
         // Attempt to instantiate a view controller to represent the remediation options in this response.
-        if let controller = storyboard.instantiateViewController(identifier: "remediation") as? IDXRemediationTableViewController {
+        if let controller = storyboard.instantiateViewController(identifier: "remediation") as? UIViewController & IDXResponseController {
             controller.signin = self
             controller.response = response
             return controller

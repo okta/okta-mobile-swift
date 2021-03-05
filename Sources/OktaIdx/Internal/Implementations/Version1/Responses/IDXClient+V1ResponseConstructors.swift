@@ -178,7 +178,7 @@ extension IDXClient.Remediation.Option: IDXHasRelatedObjects {
                   method: object.method,
                   href: object.href,
                   accepts: object.accepts,
-                  form: object.value.map { (value) in
+                  form: (object.value ?? []).map { (value) in
                     IDXClient.Remediation.FormValue(api: api, v1: value)
                   },
                   relatesTo: object.relatesTo,

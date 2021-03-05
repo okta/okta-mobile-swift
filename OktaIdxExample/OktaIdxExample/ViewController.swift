@@ -47,9 +47,7 @@ class ViewController: UIViewController {
     }
     
     @objc func backgroundTapped() {
-        view.allInputFields()
-            .filter { $0.isFirstResponder }
-            .forEach { $0.resignFirstResponder() }
+        view.endEditing(true)
     }
     
     func loginComplete(with token: IDXClient.Token) {
