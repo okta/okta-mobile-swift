@@ -83,7 +83,7 @@ class ScenarioTests: XCTestCase {
                         
                         XCTAssertEqual(token?.tokenType, "Bearer")
                         XCTAssertEqual(token?.expiresIn, 3600)
-                        XCTAssertEqual(token?.refreshToken, "WQcGbvjBpm2EA30-rPR7m6vGSzI8YMqNGYY9Qe14fT0")
+                        XCTAssertEqual(token?.refreshToken, "CCY4M4fR3")
                         completion.fulfill()
                     }
                 }
