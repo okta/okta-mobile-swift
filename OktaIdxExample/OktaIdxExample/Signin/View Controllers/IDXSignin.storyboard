@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17506" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17505"/>
         <capability name="Image references" minToolsVersion="12.0"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
@@ -64,25 +64,25 @@
         <scene sceneID="7bK-lk-qiJ">
             <objects>
                 <tableViewController storyboardIdentifier="remediation" id="uUT-nS-xEk" customClass="IDXRemediationTableViewController" customModule="OktaIdxExample" customModuleProvider="target" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="18" sectionFooterHeight="18" id="yd9-sU-imG">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="1" sectionFooterHeight="1" id="yd9-sU-imG">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <color key="sectionIndexBackgroundColor" systemColor="systemBackgroundColor"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="Label" id="FSc-td-4m7" userLabel="Label" customClass="IDXLabelTableViewCell" customModule="OktaIdxExample" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="55.5" width="414" height="35.5"/>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="Title" id="FSc-td-4m7" userLabel="Label" customClass="IDXTitleTableViewCell" customModule="OktaIdxExample" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="55.5" width="414" height="42.5"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="FSc-td-4m7" id="p5C-ye-pSm">
-                                    <rect key="frame" x="0.0" y="0.0" width="414" height="35.5"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="414" height="42.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="J0O-aH-rZB">
-                                            <rect key="frame" x="16" y="8" width="382" height="19.5"/>
+                                            <rect key="frame" x="16" y="8" width="382" height="26.5"/>
                                             <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Field Label" textAlignment="natural" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zXp-iJ-XmK">
-                                                    <rect key="frame" x="0.0" y="0.0" width="382" height="19.5"/>
-                                                    <fontDescription key="fontDescription" style="UICTFontTextStyleCallout"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Field Label" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zXp-iJ-XmK">
+                                                    <rect key="frame" x="0.0" y="0.0" width="382" height="26.5"/>
+                                                    <fontDescription key="fontDescription" style="UICTFontTextStyleTitle2"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
@@ -97,11 +97,41 @@
                                     </constraints>
                                 </tableViewCellContentView>
                                 <connections>
-                                    <outlet property="fieldLabel" destination="zXp-iJ-XmK" id="13t-EG-7xa"/>
+                                    <outlet property="titleLabel" destination="zXp-iJ-XmK" id="r32-lF-xgS"/>
+                                </connections>
+                            </tableViewCell>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="Label" id="7oI-85-feY" userLabel="Label" customClass="IDXLabelTableViewCell" customModule="OktaIdxExample" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="98" width="414" height="35.5"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="7oI-85-feY" id="QI0-2o-bSt">
+                                    <rect key="frame" x="0.0" y="0.0" width="414" height="35.5"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="UW1-bW-inP">
+                                            <rect key="frame" x="16" y="8" width="382" height="19.5"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Field Label" textAlignment="natural" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XRw-Zr-YHj">
+                                                    <rect key="frame" x="0.0" y="0.0" width="382" height="19.5"/>
+                                                    <fontDescription key="fontDescription" style="UICTFontTextStyleCallout"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                        </stackView>
+                                    </subviews>
+                                    <constraints>
+                                        <constraint firstItem="UW1-bW-inP" firstAttribute="top" secondItem="QI0-2o-bSt" secondAttribute="top" constant="8" id="4yT-Sn-xlc"/>
+                                        <constraint firstAttribute="trailing" secondItem="UW1-bW-inP" secondAttribute="trailing" constant="16" id="UHG-Zi-m6f"/>
+                                        <constraint firstItem="UW1-bW-inP" firstAttribute="leading" secondItem="QI0-2o-bSt" secondAttribute="leading" constant="16" id="fet-RI-B8X"/>
+                                        <constraint firstAttribute="bottom" secondItem="UW1-bW-inP" secondAttribute="bottom" constant="8" id="hUU-QC-eFA"/>
+                                    </constraints>
+                                </tableViewCellContentView>
+                                <connections>
+                                    <outlet property="fieldLabel" destination="XRw-Zr-YHj" id="1FM-vm-sd3"/>
                                 </connections>
                             </tableViewCell>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="Message" id="QHP-mb-W6C" userLabel="Message" customClass="IDXMessageTableViewCell" customModule="OktaIdxExample" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="91" width="414" height="28"/>
+                                <rect key="frame" x="0.0" y="133.5" width="414" height="28"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="QHP-mb-W6C" id="ByI-2B-YcO">
                                     <rect key="frame" x="0.0" y="0.0" width="414" height="28"/>
@@ -136,7 +166,7 @@
                                 </connections>
                             </tableViewCell>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="Text" id="PHo-rh-7fp" customClass="IDXTextTableViewCell" customModule="OktaIdxExample" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="119" width="414" height="70.5"/>
+                                <rect key="frame" x="0.0" y="161.5" width="414" height="70.5"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="PHo-rh-7fp" id="Lka-8Z-dZA">
                                     <rect key="frame" x="0.0" y="0.0" width="414" height="70.5"/>
@@ -175,7 +205,7 @@
                                 </connections>
                             </tableViewCell>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="Picker" id="Hf3-jo-VMq" customClass="IDXPickerTableViewCell" customModule="OktaIdxExample" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="189.5" width="414" height="252.5"/>
+                                <rect key="frame" x="0.0" y="232" width="414" height="252.5"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Hf3-jo-VMq" id="0Gu-Nx-S4T">
                                     <rect key="frame" x="0.0" y="0.0" width="414" height="252.5"/>
@@ -213,27 +243,27 @@
                                 </connections>
                             </tableViewCell>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="Toggle" id="ASg-OQ-1dX" customClass="IDXToggleTableViewCell" customModule="OktaIdxExample" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="442" width="414" height="67.5"/>
+                                <rect key="frame" x="0.0" y="484.5" width="414" height="47"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="ASg-OQ-1dX" id="5PE-a9-gxz">
-                                    <rect key="frame" x="0.0" y="0.0" width="414" height="67.5"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="414" height="47"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="Poe-Tn-TCG">
-                                            <rect key="frame" x="16" y="8" width="382" height="51.5"/>
+                                        <stackView opaque="NO" contentMode="scaleToFill" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="Poe-Tn-TCG">
+                                            <rect key="frame" x="16" y="8" width="382" height="31"/>
                                             <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Toggle Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Nfc-ds-Ijb">
-                                                    <rect key="frame" x="0.0" y="0.0" width="382" height="20.5"/>
-                                                    <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
-                                                    <nil key="textColor"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
                                                 <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Uc9-RO-ou7">
-                                                    <rect key="frame" x="0.0" y="20.5" width="384" height="31"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="51" height="31"/>
                                                     <connections>
                                                         <action selector="valueChanged:" destination="ASg-OQ-1dX" eventType="valueChanged" id="01S-du-JTj"/>
                                                     </connections>
                                                 </switch>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Toggle Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Nfc-ds-Ijb">
+                                                    <rect key="frame" x="57" y="0.0" width="325" height="31"/>
+                                                    <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
                                             </subviews>
                                         </stackView>
                                     </subviews>
@@ -250,7 +280,7 @@
                                 </connections>
                             </tableViewCell>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="Option" id="PVy-An-OEY" customClass="IDXOptionTableViewCell" customModule="OktaIdxExample" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="509.5" width="414" height="36.5"/>
+                                <rect key="frame" x="0.0" y="531.5" width="414" height="36.5"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="PVy-An-OEY" id="8sr-2B-Tnf">
                                     <rect key="frame" x="0.0" y="0.0" width="414" height="36.5"/>
@@ -293,17 +323,18 @@
                                     <outlet property="fieldLabel" destination="a5M-hu-XrB" id="Mdo-C1-0K9"/>
                                 </connections>
                             </tableViewCell>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" restorationIdentifier="IDXTextTableViewCell" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="Button" id="cJh-nH-d1y" customClass="IDXButtonTableViewCell" customModule="OktaIdxExample" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="546" width="414" height="52"/>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="Button" id="cJh-nH-d1y" customClass="IDXButtonTableViewCell" customModule="OktaIdxExample" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="568" width="414" height="56"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="cJh-nH-d1y" id="JDt-u0-IBf">
-                                    <rect key="frame" x="0.0" y="0.0" width="414" height="52"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="414" height="56"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1Hv-8K-4Ks">
-                                            <rect key="frame" x="16" y="8" width="382" height="36"/>
+                                            <rect key="frame" x="16" y="8" width="382" height="40"/>
                                             <color key="backgroundColor" name="AccentColor"/>
                                             <fontDescription key="fontDescription" style="UICTFontTextStyleTitle3"/>
+                                            <inset key="contentEdgeInsets" minX="0.0" minY="8" maxX="0.0" maxY="8"/>
                                             <state key="normal" title="Continue">
                                                 <color key="titleColor" systemColor="tertiarySystemBackgroundColor"/>
                                             </state>
@@ -323,16 +354,69 @@
                                     <outlet property="buttonView" destination="1Hv-8K-4Ks" id="RVn-tN-GM4"/>
                                 </connections>
                             </tableViewCell>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" restorationIdentifier="IDXTextTableViewCell" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="Separator" id="tv2-dR-I0u" customClass="IDXSeparatorTableViewCell" customModule="OktaIdxExample" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="624" width="414" height="46"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="tv2-dR-I0u" id="CfB-tX-hMs">
+                                    <rect key="frame" x="0.0" y="0.0" width="414" height="46"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="aoB-HC-ZCk">
+                                            <rect key="frame" x="16" y="22.5" width="166" height="1"/>
+                                            <color key="backgroundColor" systemColor="opaqueSeparatorColor"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="1" id="Cn9-4v-Abm"/>
+                                            </constraints>
+                                        </view>
+                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="c0o-dN-BSA">
+                                            <rect key="frame" x="232.5" y="22.5" width="165.5" height="1"/>
+                                            <color key="backgroundColor" systemColor="opaqueSeparatorColor"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="1" id="vNi-cr-cWy"/>
+                                            </constraints>
+                                        </view>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="750" verticalHuggingPriority="251" horizontalCompressionResistancePriority="1000" text="OR" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AUh-So-t6n">
+                                            <rect key="frame" x="198" y="15" width="18.5" height="16"/>
+                                            <fontDescription key="fontDescription" style="UICTFontTextStyleFootnote"/>
+                                            <color key="textColor" systemColor="opaqueSeparatorColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
+                                    <constraints>
+                                        <constraint firstItem="AUh-So-t6n" firstAttribute="top" secondItem="CfB-tX-hMs" secondAttribute="topMargin" constant="4" id="0xk-6m-y1o"/>
+                                        <constraint firstItem="AUh-So-t6n" firstAttribute="centerX" secondItem="CfB-tX-hMs" secondAttribute="centerX" id="6nd-69-7vr"/>
+                                        <constraint firstItem="aoB-HC-ZCk" firstAttribute="centerY" secondItem="CfB-tX-hMs" secondAttribute="centerY" id="EJs-lh-SZZ"/>
+                                        <constraint firstAttribute="bottomMargin" secondItem="AUh-So-t6n" secondAttribute="bottom" constant="4" id="EqA-yZ-M48"/>
+                                        <constraint firstAttribute="trailing" secondItem="c0o-dN-BSA" secondAttribute="trailing" constant="16" id="HO5-9G-wo1"/>
+                                        <constraint firstItem="AUh-So-t6n" firstAttribute="centerY" secondItem="CfB-tX-hMs" secondAttribute="centerY" id="YGa-bT-877"/>
+                                        <constraint firstItem="c0o-dN-BSA" firstAttribute="leading" secondItem="AUh-So-t6n" secondAttribute="trailing" constant="16" id="n1w-Vg-EuV"/>
+                                        <constraint firstItem="c0o-dN-BSA" firstAttribute="centerY" secondItem="CfB-tX-hMs" secondAttribute="centerY" id="pi6-Ib-Nzn"/>
+                                        <constraint firstItem="AUh-So-t6n" firstAttribute="leading" secondItem="aoB-HC-ZCk" secondAttribute="trailing" constant="16" id="y3z-Ok-b9X"/>
+                                        <constraint firstItem="aoB-HC-ZCk" firstAttribute="leading" secondItem="CfB-tX-hMs" secondAttribute="leading" constant="16" id="zwf-dj-xkm"/>
+                                    </constraints>
+                                </tableViewCellContentView>
+                                <connections>
+                                    <outlet property="titleLabel" destination="AUh-So-t6n" id="hLm-ox-tAn"/>
+                                </connections>
+                            </tableViewCell>
                         </prototypes>
                         <connections>
                             <outlet property="dataSource" destination="uUT-nS-xEk" id="BhU-oe-esa"/>
                             <outlet property="delegate" destination="uUT-nS-xEk" id="xAe-lk-ZlN"/>
                         </connections>
                     </tableView>
+                    <navigationItem key="navigationItem" id="plb-wJ-tLs">
+                        <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="bon-ko-vt9">
+                            <connections>
+                                <action selector="cancelAction" destination="uUT-nS-xEk" id="gDu-bm-ycS"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="5QZ-fm-nzj" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1296" y="214"/>
+            <point key="canvasLocation" x="1295.6521739130435" y="213.61607142857142"/>
         </scene>
         <!--Finishing up-->
         <scene sceneID="d8n-ID-zlK">
@@ -366,6 +450,9 @@
         <namedColor name="AccentColor">
             <color red="0.0" green="0.46000000000000002" blue="0.89000000000000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
+        <systemColor name="opaqueSeparatorColor">
+            <color red="0.77647058823529413" green="0.77647058823529413" blue="0.78431372549019607" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
         <systemColor name="secondaryLabelColor">
             <color red="0.23529411764705882" green="0.23529411764705882" blue="0.2627450980392157" alpha="0.59999999999999998" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>

@@ -75,6 +75,7 @@ class IDXClientDelegateTests: XCTestCase {
                                       intent: "Login",
                                       authenticators: nil,
                                       authenticatorEnrollments: nil,
+                                      currentAuthenticator: nil,
                                       currentAuthenticatorEnrollment: nil,
                                       remediation: nil,
                                       cancel: remediationOption,

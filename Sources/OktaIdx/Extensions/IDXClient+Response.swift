@@ -65,9 +65,14 @@ public extension IDXClient {
         
         /// Contains information about the available authenticators, if available.
         @objc public let authenticators: [Authenticator]?
-
+        
+        /// The authenticators this user is enrolled with.
         @objc public let authenticatorEnrollments: [Authenticator]?
         
+        /// Contains information about the authenticator currently being authenticated.
+        @objc public let currentAuthenticator: Authenticator?
+        
+        /// Contains information about the current authenticator currently being enrolled.
         @objc public let currentAuthenticatorEnrollment: Authenticator.CurrentEnrollment?
 
         /// The list of messages sent from the server, or `nil` if no messages are available at the response level.
@@ -129,6 +134,7 @@ public extension IDXClient {
                       intent: String,
                       authenticators: [Authenticator]?,
                       authenticatorEnrollments: [Authenticator]?,
+                      currentAuthenticator: Authenticator?,
                       currentAuthenticatorEnrollment: Authenticator.CurrentEnrollment?,
                       remediation: Remediation?,
                       cancel: Remediation.Option?,
@@ -144,6 +150,7 @@ public extension IDXClient {
             self.intent = intent
             self.authenticators = authenticators
             self.authenticatorEnrollments = authenticatorEnrollments
+            self.currentAuthenticator = currentAuthenticator
             self.currentAuthenticatorEnrollment = currentAuthenticatorEnrollment
             self.remediation = remediation
             self.cancelRemediationOption = cancel
@@ -274,8 +281,10 @@ public extension IDXClient {
             internal init(id: String,
                           displayName: String,
                           type: String,
+                          key: String?,
                           methods: [[String:String]]?,
                           profile: [String:String]?,
+                          contextualData: [String:Any]?,
                           send: Remediation.Option?,
                           resend: Remediation.Option?,
                           poll: Remediation.Option?,
@@ -286,7 +295,7 @@ public extension IDXClient {
                 self.poll = poll
                 self.recover = recover
              
-                super.init(id: id, displayName: displayName, type: type, methods: methods, profile: profile)
+                super.init(id: id, displayName: displayName, type: type, key: key, methods: methods, profile: profile, settings: nil, contextualData: contextualData)
             }
         }
         
@@ -299,6 +308,9 @@ public extension IDXClient {
 
         /// The type of this authenticator, or `unknown` if the type isn't represented by this enumeration.
         @objc public let type: AuthenticatorType
+        
+        /// The key name for the authenticator
+        @objc public let key: String?
 
         /// The string representation of this type.
         @objc public let typeName: String
@@ -307,24 +319,36 @@ public extension IDXClient {
         /// Describes the various
         @nonobjc public let methods: [AuthenticatorMethodType]?
         @objc public let methodNames: [String]?
+        
+        /// Any settings relevant to this authenticator, if applicable.
+        @objc public let settings: Any?
+
+        /// Data that is relevant within the context of this authenticator, such as security questions or WebAuthN.
+        @objc public let contextualData: Any?
 
         internal init(id: String,
                       displayName: String,
                       type: String,
+                      key: String?,
                       methods: [[String:String]]?,
-                      profile: [String:String]?)
+                      profile: [String:String]?,
+                      settings: Any?,
+                      contextualData: Any?)
         {
             self.id = id
             self.displayName = displayName
             self.type = AuthenticatorType(string: type)
             self.typeName = type
+            self.key = key
             self.methods = methods?.compactMap {
                 guard let type = $0["type"] else { return nil }
                 return AuthenticatorMethodType(string: type)
             }
             self.methodNames = methods?.compactMap { $0["type"] }
             self.profile = profile
-         
+            self.settings = settings
+            self.contextualData = contextualData
+            
             super.init()
         }
     }
@@ -523,7 +547,7 @@ public extension IDXClient {
         ///
         ///    remediationOption["identifier"]
         @objc(IDXRemediationOption)
-        final public class Option: NSObject {
+        public class Option: NSObject {
             @objc public let rel: [String]? // TODO: Is this necessary to expose to the developer?
             
             /// The name of this remediation step, which can be used to control how the form is presented to the user.

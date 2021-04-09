@@ -51,8 +51,8 @@ class IDXClientV1ResponseTests: XCTestCase {
         return try JSONDecoder.idxResponseDecoder.decode(T.self, from: jsonData)
     }
 
-    func decode<T>(type: T.Type, _ json: String, _ test: ((T) -> Void)) throws where T : Decodable {
-        test(try decode(type: type, json))
+    func decode<T>(type: T.Type, _ json: String, _ test: ((T) throws -> Void)) throws where T : Decodable {
+        try test(try decode(type: type, json))
     }
 
     func testForm() throws {
@@ -489,6 +489,53 @@ class IDXClientV1ResponseTests: XCTestCase {
             let publicObj = IDXClient.User(v1:  obj.value)
             XCTAssertNotNil(publicObj)
             XCTAssertEqual(publicObj?.id, "0ZczewGCFPlxNYYcLq5i")
+        }
+    }
+
+    func testAuthenticatorWithSettings() throws {
+        try decode(type: API.Response.IonObject<API.Response.Authenticator>.self, """
+        {
+          "type" : "object",
+          "value" : {
+             "displayName" : "Password",
+             "id" : "lae8wj8nnjB3BrbcH0g6",
+             "key" : "okta_password",
+             "methods" : [
+                {
+                   "type" : "password"
+                }
+             ],
+             "settings" : {
+                "age" : {
+                   "historyCount" : 4,
+                   "minAgeMinutes" : 0
+                },
+                "complexity" : {
+                   "excludeAttributes" : [],
+                   "excludeUsername" : true,
+                   "minLength" : 8,
+                   "minLowerCase" : 1,
+                   "minNumber" : 1,
+                   "minSymbol" : 0,
+                   "minUpperCase" : 1
+                }
+             },
+             "type" : "password"
+          }
+        }
+        """) { (obj) in
+            XCTAssertEqual(obj.type, "object")
+            XCTAssertEqual(obj.value.id, "lae8wj8nnjB3BrbcH0g6")
+
+            let publicObj = try XCTUnwrap(IDXClient.Authenticator(v1: obj.value))
+            XCTAssertEqual(publicObj.id, "lae8wj8nnjB3BrbcH0g6")
+            
+            let settings = try XCTUnwrap(publicObj.settings as? [String:Any])
+            let age = try XCTUnwrap(settings["age"] as? [String:Any])
+            let complexity = try XCTUnwrap(settings["complexity"] as? [String:Any])
+
+            XCTAssertEqual(age["historyCount"] as? Int, 4)
+            XCTAssertTrue(complexity["excludeUsername"] as? Bool ?? false)
         }
     }
 }

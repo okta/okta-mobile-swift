@@ -37,6 +37,8 @@
 		96ADA06D25B111AA008BF50D /* IDXMessageTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96ADA06C25B111AA008BF50D /* IDXMessageTableViewCell.swift */; };
 		96C51E9325BA591F007A2519 /* MFAOktaSOPScenarioTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96C51E9225BA591F007A2519 /* MFAOktaSOPScenarioTests.swift */; };
 		96C51E9A25BA5A3F007A2519 /* Credentials.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96C51E9925BA5A3F007A2519 /* Credentials.swift */; };
+		96E0A78D260500080002933C /* IDXSeparatorTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96E0A78C260500080002933C /* IDXSeparatorTableViewCell.swift */; };
+		96E0A791260505F30002933C /* IDXTitleTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96E0A790260505F30002933C /* IDXTitleTableViewCell.swift */; };
 		96F8B34925BB556500DAECDC /* IDXPickerTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96F8B34825BB556500DAECDC /* IDXPickerTableViewCell.swift */; };
 		96F8B35F25BF5A9400DAECDC /* ResetTransactionScenarioTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96F8B35E25BF5A9400DAECDC /* ResetTransactionScenarioTests.swift */; };
 /* End PBXBuildFile section */
@@ -109,6 +111,8 @@
 		96C51E7E25BA578F007A2519 /* TestCredentials.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; name = TestCredentials.xcconfig; path = ../../TestCredentials.xcconfig; sourceTree = "<group>"; };
 		96C51E9225BA591F007A2519 /* MFAOktaSOPScenarioTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MFAOktaSOPScenarioTests.swift; sourceTree = "<group>"; };
 		96C51E9925BA5A3F007A2519 /* Credentials.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Credentials.swift; sourceTree = "<group>"; };
+		96E0A78C260500080002933C /* IDXSeparatorTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IDXSeparatorTableViewCell.swift; sourceTree = "<group>"; };
+		96E0A790260505F30002933C /* IDXTitleTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IDXTitleTableViewCell.swift; sourceTree = "<group>"; };
 		96F8B34825BB556500DAECDC /* IDXPickerTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IDXPickerTableViewCell.swift; sourceTree = "<group>"; };
 		96F8B35E25BF5A9400DAECDC /* ResetTransactionScenarioTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResetTransactionScenarioTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -267,6 +271,8 @@
 				9691E6D125AF740A000CD02C /* IDXOptionTableViewCell.swift */,
 				96ADA06C25B111AA008BF50D /* IDXMessageTableViewCell.swift */,
 				96F8B34825BB556500DAECDC /* IDXPickerTableViewCell.swift */,
+				96E0A78C260500080002933C /* IDXSeparatorTableViewCell.swift */,
+				96E0A790260505F30002933C /* IDXTitleTableViewCell.swift */,
 			);
 			path = "TableView Cells";
 			sourceTree = "<group>";
@@ -441,6 +447,8 @@
 				9652D9CA25A9142600927FA5 /* UIView+Extensions.swift in Sources */,
 				964F745725A3E5F0003EE300 /* ViewController.swift in Sources */,
 				9691E6C825AF73D9000CD02C /* IDXToggleTableViewCell.swift in Sources */,
+				96E0A78D260500080002933C /* IDXSeparatorTableViewCell.swift in Sources */,
+				96E0A791260505F30002933C /* IDXTitleTableViewCell.swift in Sources */,
 				9691E6CE25AF73F0000CD02C /* IDXButtonTableViewCell.swift in Sources */,
 				96576C5025A91EEA00B02E3B /* IDXStartViewController.swift in Sources */,
 				964F745325A3E5F0003EE300 /* AppDelegate.swift in Sources */,

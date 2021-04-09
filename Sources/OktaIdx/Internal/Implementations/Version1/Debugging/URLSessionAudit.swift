@@ -15,11 +15,11 @@ import Foundation
 #if targetEnvironment(simulator) && DEBUG
 
 public class URLSessionAudit: CustomStringConvertible {
-    static let shared = URLSessionAudit()
+    public static let shared = URLSessionAudit()
     internal let queue = DispatchQueue(label: "com.okta.urlsession.audit", qos: .utility)
     public private(set) var logs: [Log] = []
     
-    func reset() {
+    public func reset() {
         queue.sync {
             self.logs.removeAll()
         }

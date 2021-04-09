@@ -35,13 +35,6 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Y07-yK-vIs">
-                                <rect key="frame" x="186" y="460" width="42" height="30"/>
-                                <state key="normal" title="Log in"/>
-                                <connections>
-                                    <action selector="logIn:" destination="BYZ-38-t0r" eventType="touchUpInside" id="IM3-nf-Wyr"/>
-                                </connections>
-                            </button>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="12" translatesAutoresizingMaskIntoConstraints="NO" id="4WF-jK-s7Q">
                                 <rect key="frame" x="8" y="96" width="398" height="219.5"/>
                                 <subviews>
@@ -105,16 +98,44 @@
                                 </subviews>
                                 <edgeInsets key="layoutMargins" top="16" left="16" bottom="16" right="16"/>
                             </stackView>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="i7l-Cm-eFq">
+                                <rect key="frame" x="141.5" y="323" width="131" height="109"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Y07-yK-vIs">
+                                        <rect key="frame" x="0.0" y="0.0" width="131" height="33"/>
+                                        <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
+                                        <state key="normal" title="Log in"/>
+                                        <connections>
+                                            <action selector="logIn:" destination="BYZ-38-t0r" eventType="touchUpInside" id="IM3-nf-Wyr"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3t3-qq-dOs">
+                                        <rect key="frame" x="0.0" y="41" width="131" height="30"/>
+                                        <fontDescription key="fontDescription" style="UICTFontTextStyleSubhead"/>
+                                        <state key="normal" title="Dump Request Log"/>
+                                        <connections>
+                                            <action selector="dumpRequestLog:" destination="BYZ-38-t0r" eventType="touchUpInside" id="5LB-zw-2dg"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Hli-Aa-frR">
+                                        <rect key="frame" x="0.0" y="79" width="131" height="30"/>
+                                        <fontDescription key="fontDescription" style="UICTFontTextStyleSubhead"/>
+                                        <state key="normal" title="Reset request log"/>
+                                        <connections>
+                                            <action selector="resetRequestLog:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Egi-ln-Svn"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                            </stackView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="4WF-jK-s7Q" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="8" id="0Lp-sd-ymd"/>
-                            <constraint firstItem="Y07-yK-vIs" firstAttribute="top" relation="greaterThanOrEqual" secondItem="4WF-jK-s7Q" secondAttribute="bottom" constant="35" id="AjH-LQ-r55"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="4WF-jK-s7Q" secondAttribute="trailing" constant="8" id="HHg-x6-KN8"/>
                             <constraint firstItem="4WF-jK-s7Q" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="8" id="OIO-vf-wuf"/>
-                            <constraint firstItem="Y07-yK-vIs" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="f65-lI-zhY"/>
-                            <constraint firstItem="Y07-yK-vIs" firstAttribute="centerY" secondItem="6Tk-OE-BBY" secondAttribute="centerY" priority="250" id="zTK-LS-wOg"/>
+                            <constraint firstItem="i7l-Cm-eFq" firstAttribute="centerX" secondItem="6Tk-OE-BBY" secondAttribute="centerX" id="Zic-4h-yja"/>
+                            <constraint firstItem="i7l-Cm-eFq" firstAttribute="top" secondItem="4WF-jK-s7Q" secondAttribute="bottom" constant="7.5" id="gpU-jS-eH0"/>
                         </constraints>
                     </view>
                     <toolbarItems/>

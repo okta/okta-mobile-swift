@@ -69,6 +69,7 @@ extension IDXClient.Response: IDXContainsRelatableObjects {
                   intent: response.intent,
                   authenticators: response.authenticators?.value.compactMap { IDXClient.Authenticator(v1: $0) },
                   authenticatorEnrollments: response.authenticatorEnrollments?.value.compactMap { IDXClient.Authenticator(v1: $0) },
+                  currentAuthenticator: IDXClient.Authenticator(v1: response.currentAuthenticator?.value),
                   currentAuthenticatorEnrollment: IDXClient.Authenticator.CurrentEnrollment(api: api, v1: response.currentAuthenticatorEnrollment?.value),
                   remediation: IDXClient.Remediation(api: api, v1: response.remediation),
                   cancel: IDXClient.Remediation.Option(api: api, v1: response.cancel),
@@ -122,8 +123,15 @@ extension IDXClient.Authenticator {
         self.init(id: object.id,
                   displayName: object.displayName,
                   type: object.type,
+                  key: object.key,
                   methods: object.methods,
-                  profile: nil)
+                  profile: nil,
+                  settings: object.settings?.reduce(into: [String:Any]()) {
+                    $0[$1.key] = $1.value.toAnyObject()
+                  },
+                  contextualData: object.contextualData?.reduce(into: [String:Any]()) {
+                    $0[$1.key] = $1.value.toAnyObject()
+                  })
     }
 
     internal convenience init?(v1 object: V1.Response.AuthenticatorEnrollment?) {
@@ -131,8 +139,15 @@ extension IDXClient.Authenticator {
         self.init(id: object.id,
                   displayName: object.displayName,
                   type: object.type,
+                  key: object.key,
                   methods: object.methods,
-                  profile: object.profile)
+                  profile: object.profile,
+                  settings: object.settings?.reduce(into: [String:Any]()) {
+                    $0[$1.key] = $1.value.toAnyObject()
+                  },
+                  contextualData: object.contextualData?.reduce(into: [String:Any]()) {
+                    $0[$1.key] = $1.value.toAnyObject()
+                  })
     }
 }
 
@@ -142,8 +157,12 @@ extension IDXClient.Authenticator.CurrentEnrollment {
         self.init(id: object.id,
                   displayName: object.displayName,
                   type: object.type,
+                  key: object.key,
                   methods: object.methods,
                   profile: object.profile,
+                  contextualData: object.contextualData?.reduce(into: [String:Any]()) {
+                    $0[$1.key] = $1.value.toAnyObject()
+                  },
                   send: IDXClient.Remediation.Option(api: api, v1: object.send),
                   resend: IDXClient.Remediation.Option(api: api, v1: object.resend),
                   poll: IDXClient.Remediation.Option(api: api, v1: object.poll),

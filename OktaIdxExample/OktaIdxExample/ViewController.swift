@@ -88,6 +88,14 @@ class ViewController: UIViewController {
             }
         }
     }
+    
+    @IBAction func dumpRequestLog(_ sender: Any) {
+        print(URLSessionAudit.shared)
+    }
+
+    @IBAction func resetRequestLog(_ sender: Any) {
+        URLSessionAudit.shared.reset()
+    }
 }
 
 extension ViewController: UITextFieldDelegate {

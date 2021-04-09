@@ -67,11 +67,12 @@ extension IDXClient.APIVersion1 {
         let authenticators: IonCollection<Authenticator>?
         let authenticatorEnrollments: IonCollection<AuthenticatorEnrollment>?
         let currentAuthenticatorEnrollment: IonObject<CurrentAuthenticatorEnrollment>?
-        let currentAuthenticator: IonObject<CurrentAuthenticator>?
+        let currentAuthenticator: IonObject<Authenticator>?
+        let recoveryAuthenticator: IonObject<Authenticator>?
         let user: IonObject<User>?
         let app: IonObject<App>?
         let successWithInteractionCode: Form?
-        let cancel: Form
+        let cancel: Form?
         
         struct IonObject<T>: Decodable where T: Decodable {
             let type: String?
@@ -130,22 +131,20 @@ extension IDXClient.APIVersion1 {
             let displayName: String
             let id: String
             let type: String
+            let key: String?
             let methods: [[String:String]]
+            let settings: [String:JSONValue]?
+            let contextualData: [String:JSONValue]?
         }
         
         struct AuthenticatorEnrollment: Decodable {
             let displayName: String
             let id: String
             let type: String
+            let key: String?
             let methods: [[String:String]]
             let profile: [String:String]?
-        }
-        
-        struct CurrentAuthenticator: Decodable {
-            let displayName: String
-            let id: String
-            let type: String
-            let methods: [[String:String]]
+            let settings: [String:JSONValue]?
             let contextualData: [String:JSONValue]?
         }
         
@@ -153,8 +152,10 @@ extension IDXClient.APIVersion1 {
             let displayName: String
             let id: String
             let type: String
+            let key: String?
             let methods: [[String:String]]
             let profile: [String:String]?
+            let contextualData: [String:JSONValue]?
             let send: Form?
             let resend: Form?
             let poll: Form?

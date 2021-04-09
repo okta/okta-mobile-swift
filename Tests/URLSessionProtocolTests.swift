@@ -21,10 +21,14 @@ class URLSessionProtocolTests: XCTestCase {
                                               statusCode: 200,
                                               httpVersion: nil,
                                               headerFields: nil)
-    let httpFailureResponse = HTTPURLResponse(url: URL(string: "https://example.com/")!,
+    let httpFailureResponses = [401: HTTPURLResponse(url: URL(string: "https://example.com/")!,
                                               statusCode: 401,
                                               httpVersion: nil,
-                                              headerFields: nil)
+                                              headerFields: nil),
+                                500: HTTPURLResponse(url: URL(string: "https://example.com/")!,
+                                                     statusCode: 500,
+                                                     httpVersion: nil,
+                                                     headerFields: nil)]
 
     func testDataTaskWithRequest() {
         var called = false
@@ -52,9 +56,9 @@ class URLSessionProtocolTests: XCTestCase {
     func testHTTPErrorResponse() {
         var called = false
         let expectedError = NSError(domain: "Foo", code: 1, userInfo: nil)
-        session.handleDataTaskRequest(data: responseData, response: httpFailureResponse, error: expectedError) {  (data, response, error) in
+        session.handleDataTaskRequest(data: responseData, response: httpFailureResponses[401]!, error: expectedError) {  (data, response, error) in
             XCTAssertEqual(data, self.responseData)
-            XCTAssertEqual(response, self.httpFailureResponse)
+            XCTAssertEqual(response, self.httpFailureResponses[401])
             XCTAssertEqual(error as NSError?, expectedError)
             called = true
         }
@@ -63,9 +67,9 @@ class URLSessionProtocolTests: XCTestCase {
 
     func testErrorCodeResponse() {
         var called = false
-        session.handleDataTaskRequest(data: responseData, response: httpFailureResponse, error: nil) {  (data, response, error) in
+        session.handleDataTaskRequest(data: responseData, response: httpFailureResponses[500]!, error: nil) {  (data, response, error) in
             XCTAssertEqual(data, self.responseData)
-            XCTAssertEqual(response, self.httpFailureResponse)
+            XCTAssertEqual(response, self.httpFailureResponses[500])
             XCTAssertTrue(error is IDXClientError)
             XCTAssertEqual(error as? IDXClientError, .invalidHTTPResponse)
             called = true

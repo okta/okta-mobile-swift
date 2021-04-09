@@ -43,11 +43,9 @@ class IDXRemediationTableViewController: UITableViewController, IDXResponseContr
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        if let appTitle = response?.app?.label {
-            title = appTitle
-        }
-        
-        navigationController?.setNavigationBarHidden(title?.isEmpty ?? true, animated: animated)
+        title = response?.app?.label
+        navigationController?.setNavigationBarHidden(!shouldShowNavigationBar,
+                                                     animated: animated)
 
         if let inputView = view.allInputFields().first {
             inputView.becomeFirstResponder()
@@ -56,6 +54,21 @@ class IDXRemediationTableViewController: UITableViewController, IDXResponseContr
         if let poll = response?.currentAuthenticatorEnrollment?.poll {
             beginPolling(using: poll)
         }
+    }
+    
+    var shouldShowNavigationBar: Bool {
+        guard let response = response,
+              let app = response.app,
+              let remediation = response.remediation
+        else {
+            return true
+        }
+        
+        return !app.label.isEmpty && !remediation.remediationOptions.isEmpty
+    }
+    
+    @IBAction @objc func cancelAction() {
+        signin?.failure(with: SigninError.genericError(message: "Cancelled"))
     }
     
     func proceed(to remediationOption: IDXClient.Remediation.Option?, from sender: Any? = nil) {
@@ -137,26 +150,6 @@ class IDXRemediationTableViewController: UITableViewController, IDXResponseContr
         return formSections.count
     }
 
-    override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        let formSection = formSections[section]
-        if formSection.rows.count <= 1 {
-            return nil
-        }
-        
-        return formSection.remediationOption?.title
-    }
-    
-    override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        guard section < formSections.count else { return UITableView.automaticDimension }
-        let formSection = formSections[section]
-
-        if formSection.remediationOption?.title != nil {
-            return UITableView.automaticDimension
-        } else {
-            return 0
-        }
-    }
-    
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         let formSection = formSections[section]
         return formSection.rows.count
@@ -166,7 +159,7 @@ class IDXRemediationTableViewController: UITableViewController, IDXResponseContr
         let row = formSections[indexPath.section].rows[indexPath.row]
         let cell = tableView.dequeueReusableCell(withIdentifier: row.kind.reuseIdentifier, for: indexPath)
 
-        row.configure(cell: cell, at: indexPath)
+        row.configure(signin: signin, cell: cell, at: indexPath)
 
         return cell
     }
@@ -214,22 +207,34 @@ extension IDXRemediationTableViewController: SigninRowDelegate {
 extension Signin.Row.Kind {
     var reuseIdentifier: String {
         switch self {
-        case .label(field: _):   return "Label"
-        case .message(style: _): return "Message"
-        case .text(field: _):    return "Text"
-        case .toggle(field: _):  return "Toggle"
+        case .separator:                   return "Separator"
+        case .title(remediationOption: _): return "Title"
+        case .label(field: _):             return "Label"
+        case .message(style: _):           return "Message"
+        case .text(field: _):              return "Text"
+        case .toggle(field: _):            return "Toggle"
         case .option(field: _,
-                     option: _): return "Option"
+                     option: _):           return "Option"
         case .select(field: _,
-                     values: _): return "Picker"
-        case .button:            return "Button"
+                     values: _):           return "Picker"
+        case .button:                      return "Button"
         }
     }
 }
 
 extension Signin.Row {
-    func configure(cell: UITableViewCell, at indexPath: IndexPath) {
+    func configure(signin: Signin?, cell: UITableViewCell, at indexPath: IndexPath) {
         switch self.kind {
+        case .separator:
+            if let cell = cell as? IDXSeparatorTableViewCell {
+                // TODO:
+            }
+
+        case .title(remediationOption: let option):
+            if let cell = cell as? IDXTitleTableViewCell {
+                cell.titleLabel.text = option.title
+            }
+
         case .label(field: let field):
             if let cell = cell as? IDXLabelTableViewCell {
                 cell.fieldLabel.text = field.label
@@ -278,7 +283,7 @@ extension Signin.Row {
                 if let authenticator = option.relatesTo as? IDXClient.Authenticator,
                    let profile = authenticator.profile
                 {
-                    cell.detailLabel.text = profile[authenticator.typeName]
+                    cell.detailLabel.text = profile.values.first
                 } else {
                     cell.detailLabel.text = nil
                 }
@@ -298,7 +303,7 @@ extension Signin.Row {
                     style = .remediation(type: option.type)
                 }
                 cell.style = style
-                cell.buttonView.setTitle(option?.title ?? "Restart", for: .normal)
+                cell.buttonView.setTitle(signin?.buttonTitle(for: option), for: .normal)
                 cell.update = { (sender, _) in
                     self.delegate?.buttonSelected(remediationOption: option, sender: sender)
                 }

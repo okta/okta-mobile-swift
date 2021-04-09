@@ -53,6 +53,36 @@ public class Signin {
         viewController.present(navigationController, animated: true, completion: nil)
     }
     
+    internal func buttonTitle(for option: IDXClient.Remediation.Option?) -> String? {
+        guard let option = option else {
+            return "Restart"
+        }
+        
+        switch option.type {
+        case .identify:
+            return "Next"
+        
+        case .skip:
+            return "Skip"
+            
+        case .selectEnrollProfile: fallthrough
+        case .enrollProfile:
+            return "Create profile"
+            
+        case .selectIdentify:
+            return "Sign in"
+            
+        case .selectAuthenticatorAuthenticate:
+            return "Choose"
+            
+        case .launchAuthenticator:
+            return "Launch Authenticator"
+            
+        default:
+            return "Continue"
+        }
+    }
+    
     /// Called by each view controller once their remediation step has been completed, allowing it to proceed to the next step of the workflow.
     /// - Parameter response: IDX response object received from the API.
     internal func proceed(to response: IDXClient.Response) {
@@ -127,6 +157,10 @@ public class Signin {
             return controller
         }
         
+        // If no remediation options are available, this response probably just contains
+        // error messages, so we should remain on our current form.
+        guard response.remediation != nil else { return nil }
+
         // Attempt to instantiate a view controller to represent the remediation options in this response.
         if let controller = storyboard.instantiateViewController(identifier: "remediation") as? UIViewController & IDXResponseController {
             controller.signin = self

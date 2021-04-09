@@ -34,6 +34,8 @@ extension Signin {
         
         /// Row element kinds.
         enum Kind {
+            case separator
+            case title(remediationOption: IDXClient.Remediation.Option)
             case label(field: IDXClient.Remediation.FormValue)
             case message(style: IDXMessageTableViewCell.Style)
             case text(field: IDXClient.Remediation.FormValue)
@@ -156,6 +158,9 @@ extension IDXClient.Remediation.Option {
         case .selectIdentify: fallthrough
         case .identify:
             return "Sign in"
+        
+        case .challengeAuthenticator:
+            return "Password"
             
         case .selectAuthenticatorAuthenticate:
             return "Choose method"
@@ -164,7 +169,7 @@ extension IDXClient.Remediation.Option {
             return "Skip"
             
         default:
-            return "Continue"
+            return "Next"
         }
     }
     
@@ -195,7 +200,7 @@ extension IDXClient.Response {
         
         if let remediationOptions = remediation?.remediationOptions {
             result.append(contentsOf: remediationOptions.map { option in
-                self.remediationForm(remediationOption: option, delegate: delegate)
+                self.remediationForm(remediationOption: option, in: self, delegate: delegate)
             })
         }
         
@@ -215,8 +220,14 @@ extension IDXClient.Response {
     ///   - response: Response object that is the parent for this remediation option
     ///   - delegate: A delegate object to receive updates as the form is changed.
     /// - Returns: Array of sections to be shown in the table view.
-    func remediationForm(remediationOption: IDXClient.Remediation.Option, delegate: AnyObject & SigninRowDelegate) -> Section {
+    func remediationForm(remediationOption: IDXClient.Remediation.Option, in response: IDXClient.Response, delegate: AnyObject & SigninRowDelegate) -> Section {
         var rows: [Row] = []
+        
+        if response.remediation?.remediationOptions.first == remediationOption {
+            rows.append(Row(kind: .title(remediationOption: remediationOption), parent: nil, delegate: nil))
+        } else {
+            rows.append(Row(kind: .separator, parent: nil, delegate: nil))
+        }
         
         if let messages = messages {
             rows.append(contentsOf: messages.map { message in
