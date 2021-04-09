@@ -4,24 +4,24 @@ before_install:
   - touch TestCredentials.xcconfig
 jobs:
   include:
-    - stage: Unit tests iOS
-      name: iOS
+    - stage: Test
+      name: iOS Unit Tests
       script:
       - xcodebuild -workspace okta-idx.xcworkspace -scheme "okta-idx-ios" -destination "platform=iOS Simulator,OS=latest,name=iPhone 11" clean test
-    - stage: Swift Package Manager validation
-      name: MacOS
-      script:
-      - swift test
-    - stage: UI tests iOS
-      name: iOS
+    - stage: Test
+      name: iOS Automated Tests
       script:
       - xcodebuild -workspace okta-idx.xcworkspace -scheme "OktaIdxExample" -destination "platform=iOS Simulator,OS=latest,name=iPhone 11" clean test
-    - stage: Cocoapods validation
-      name: iOS
+    - stage: Package Management
+      name: Swift Package Manager
+      script:
+      - swift test
+    - stage: Package Management
+      name: Cocoapods
       script:
       - pod lib lint
     # Disable Carthage validation until we can get it working
-    #- stage: Carthage validation
-    #  name: iOS
+    #- stage: Package Management
+    #  name: Carthage
     #  script:
     #  - carthage build --use-xcframeworks --no-skip-current
