@@ -18,6 +18,7 @@ public class URLSessionAudit: CustomStringConvertible {
     public static let shared = URLSessionAudit()
     internal let queue = DispatchQueue(label: "com.okta.urlsession.audit", qos: .utility)
     public private(set) var logs: [Log] = []
+    public var logToConsole = false
     
     public func reset() {
         queue.sync {
@@ -28,6 +29,10 @@ public class URLSessionAudit: CustomStringConvertible {
     internal func add(log item: Log) {
         queue.async {
             self.logs.append(item)
+
+            if self.logToConsole {
+                print(item)
+            }
         }
     }
     

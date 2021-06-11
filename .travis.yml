@@ -1,4 +1,5 @@
 language: swift
+os: osx
 osx_image: xcode12.2
 before_install:
   - touch TestCredentials.xcconfig
@@ -8,10 +9,17 @@ jobs:
       name: iOS Unit Tests
       script:
       - xcodebuild -workspace okta-idx.xcworkspace -scheme "okta-idx-ios" -destination "platform=iOS Simulator,OS=latest,name=iPhone 11" clean test
-    - stage: Test
-      name: iOS Automated Tests
-      script:
-      - xcodebuild -workspace okta-idx.xcworkspace -scheme "OktaIdxExample" -destination "platform=iOS Simulator,OS=latest,name=iPhone 11" clean test
+    # Disable UI tests in Travis until OktaSdk is public
+    #- stage: Test
+    #  name: iOS Automated Tests
+    #  before_script:
+    #  - ./scripts/setup-automation.sh
+    #  - ./scripts/setup-passcode.sh
+    #  script:
+    #  - xcodebuild -workspace okta-idx.xcworkspace -scheme "OktaIdxExample" -destination "platform=iOS Simulator,OS=latest,name=iPhone 11" clean test
+    #  after_script:
+    #  - ./scripts/teardown-automation.sh
+    #  - ./scripts/teardown-passcode.sh
     - stage: Package Management
       name: Swift Package Manager
       script:

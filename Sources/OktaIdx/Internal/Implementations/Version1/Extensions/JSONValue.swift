@@ -73,6 +73,13 @@ enum JSONValue: Equatable {
         }
     }
     
+    func numberValue() -> NSNumber? {
+        return toAnyObject() as? NSNumber
+    }
+
+    func stringValue() -> String? {
+        return toAnyObject() as? String
+    }
 }
 
 extension JSONValue: Codable {

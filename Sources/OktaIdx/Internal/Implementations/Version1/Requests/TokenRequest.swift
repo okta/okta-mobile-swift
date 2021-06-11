@@ -15,7 +15,7 @@ import Foundation
 extension IDXClient.APIVersion1.TokenRequest: IDXClientAPIRequest {
     typealias ResponseType = IDXClient.APIVersion1.Token
     
-    init(successResponse option: IDXClient.Remediation.Option, parameters: [String:Any]? = nil) throws {
+    init(successResponse option: IDXClient.Remediation) throws {
         guard let accepts = option.accepts,
               let acceptType = IDXClient.APIVersion1.AcceptType(rawValue: accepts) else
         {
@@ -25,7 +25,7 @@ extension IDXClient.APIVersion1.TokenRequest: IDXClientAPIRequest {
         self.init(method: option.method,
                   href: option.href,
                   accepts: acceptType,
-                  parameters: try option.formValues(with: parameters))
+                  parameters: try option.form.formValues())
     }
     
     init(issuer url: URL, clientId: String, clientSecret: String?, codeVerifier: String?, grantType: String, code: String) {

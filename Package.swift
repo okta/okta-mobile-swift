@@ -11,16 +11,17 @@ let package = Package(
     ],
     products: [
         .library(name: "OktaIdx",
-                 type: .dynamic,
                  targets: [ "OktaIdx" ])
     ],
     targets: [
         .target(name: "OktaIdx",
                 exclude: ["Info.plist"]),
+        .target(name: "TestCommon",
+                dependencies: [ "OktaIdx" ],
+                path: "Tests/TestCommon",
+                resources: [ .copy("Resources") ]),
         .testTarget(name: "OktaIdxTests",
-                    dependencies: [ "OktaIdx" ],
-                    path: "Tests",
-                    exclude: ["Info.plist"],
-                    resources: [ .copy("Resources") ])
+                    dependencies: [ "OktaIdx", "TestCommon" ],
+                    exclude: ["Info.plist"])
     ]
 )

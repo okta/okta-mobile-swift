@@ -13,26 +13,18 @@
 import Foundation
 
 /// Internal protocol that defines the interface for the public IDXClient
-protocol IDXClientAPI: class {
-    var context: IDXClient.Context? { get }
-    var canCancel: Bool { get }
-    func interact(state: String?, completion: IDXClient.ContextResult?)
-    func introspect(_ context: IDXClient.Context?,
-                    completion: IDXClient.ResponseResult?)
-    func cancel(completion: IDXClient.ResponseResult?)
-    func proceed(remediation option: IDXClient.Remediation.Option,
-                 data: [String : Any],
+public protocol IDXClientAPI: class {
+    var context: IDXClient.Context { get }
+    func resume(completion: IDXClient.ResponseResult?)
+    func proceed(remediation option: IDXClient.Remediation,
                  completion: IDXClient.ResponseResult?)
-    
-    func redirectResult(with context: IDXClient.Context?,
-                        redirect url: URL) -> IDXClient.RedirectResult
-    
-    func exchangeCode(with context: IDXClient.Context?,
-                      redirect url: URL,
+
+    func redirectResult(for url: URL) -> IDXClient.RedirectResult
+
+    func exchangeCode(redirect url: URL,
                       completion: IDXClient.TokenResult?)
-    
-    func exchangeCode(with context: IDXClient.Context?,
-                      using response: IDXClient.Response,
+
+    func exchangeCode(using remediation: IDXClient.Remediation,
                       completion: IDXClient.TokenResult?)
 }
 
@@ -47,25 +39,22 @@ protocol IDXClientAPIImpl: class {
     /// The upstream client to communicate critical events to
     var client: IDXClientAPI? { get set }
     
-    var canCancel: Bool { get }
-    func interact(state: String?, completion: @escaping (IDXClient.Context?, Error?) -> Void)
-    func introspect(_ context: IDXClient.Context,
-                    completion: @escaping (_ reponse: IDXClient.Response?, _ error: Error?) -> Void)
-    func cancel(completion: @escaping (_ response: IDXClient.Response?, _ error: Error?) -> Void)
-    func proceed(remediation option: IDXClient.Remediation.Option,
-                 data: [String : Any],
+    func start(state: String?, completion: @escaping (IDXClient.Context?, Error?) -> Void)
+    func resume(completion: @escaping (_ reponse: IDXClient.Response?, _ error: Error?) -> Void)
+    func proceed(remediation option: IDXClient.Remediation,
                  completion: @escaping (_ response: IDXClient.Response?, _ error: Swift.Error?) -> Void)
     
-    func redirectResult(with context: IDXClient.Context,
-                        redirect url: URL) -> IDXClient.RedirectResult
+    func redirectResult(for url: URL) -> IDXClient.RedirectResult
     
-    func exchangeCode(with context: IDXClient.Context,
-                      redirect url: URL,
+    func exchangeCode(redirect url: URL,
                       completion: @escaping (_ token: IDXClient.Token?, _ error: Swift.Error?) -> Void)
     
-    func exchangeCode(with context: IDXClient.Context,
-                      using response: IDXClient.Response,
+    func exchangeCode(using remediation: IDXClient.Remediation,
                       completion: @escaping (_ token: IDXClient.Token?, _ error: Swift.Error?) -> Void)
+
+    func revoke(token: String,
+                type: String,
+                completion: @escaping(_ successful: Bool, _ error: Error?) -> Void)
 }
 
 /// Protocol used to represent IDX API requests, and their expected response types.
@@ -85,136 +74,6 @@ protocol IDXClientAPIRequest {
               completion: @escaping (ResponseType?, Error?) -> Void)
 }
 
-extension IDXClient {
-    class func extractFormValues(from form: [IDXClient.Remediation.FormValue], with params: [String:Any]? = nil) throws -> [String:Any] {
-        var result: [String:Any] = try form
-            .filter { $0.value != nil && $0.name != nil }
-            .reduce(into: [:]) { (result, formValue) in
-                guard let name = formValue.name else { throw IDXClientError.invalidParameter(name: "") }
-                result[name] = formValue.value
-            }
-        
-        let allFormValues = form.reduce(into: [String:IDXClient.Remediation.FormValue]()) { (result, value) in
-            result[value.name] = value
-        }
-        
-        try params?.forEach { (key, value) in
-            guard let formValue = allFormValues[key] else {
-                throw IDXClientError.invalidParameter(name: key)
-            }
-            
-            guard formValue.mutable == true else {
-                throw IDXClientError.parameterImmutable(name: key)
-            }
-            
-
-            if let nestedForm = value as? IDXClient.Remediation.FormValue {
-                result[key] = try nestedForm.formValues()
-            } else {
-                result[key] = value
-            }
-        }
-        
-        try allFormValues.values.filter { $0.required }.forEach {
-            /// TODO: Fix compound field support and relatesTo
-            guard result[$0.name!] != nil else {
-                throw IDXClientError.missingRequiredParameter(name: $0.name!)
-            }
-        }
-        
-        return result
-    }
-
-}
-
-extension IDXClient.Remediation.Option {
-    func formValues(using parameters: IDXClient.Remediation.Parameters) throws -> [String:Any] {
-        return try form.reduce(into: [:]) { (result, formValue) in
-            guard let nestedResult = try formValue.formValues(using: parameters, in: self) else {
-                return
-            }
-            
-            if let nestedObject = nestedResult as? [String:Any] {
-                result.merge(nestedObject, uniquingKeysWith: { (old, new) in
-                    return new
-                })
-            } else if let name = formValue.name {
-                result[name] = nestedResult
-            } else {
-                throw IDXClientError.invalidRequestData
-            }
-        }
-    }
-}
-
-extension IDXClient.Remediation.FormValue {
-    func formValues(using parameters: IDXClient.Remediation.Parameters, in remediationOption: IDXClient.Remediation.Option) throws -> Any? {
-        // Unnamed FormValues, which may contain nested options
-        guard let name = name else {
-            if let form = form {
-                let result: [String:Any] = try form.reduce(into: [:]) { (result, formValue) in
-                    let nestedObject = try formValue.formValues(using: parameters, in: remediationOption)
-                    
-                    if let name = formValue.name {
-                        result[name] = nestedObject
-                    } else if let nestedObject = nestedObject as? [String:Any] {
-                        result.merge(nestedObject, uniquingKeysWith: { (old, new) in
-                            return new
-                        })
-                    } else {
-                        throw IDXClientError.invalidParameter(name: formValue.name ?? "")
-                    }
-                }
-                return result
-            } else {
-                return nil
-            }
-        }
-        
-        if !mutable && parameters[self] != nil {
-            throw IDXClientError.parameterImmutable(name: name)
-        }
-        
-        var result: Any? = nil
-        // Named FormValues with nested forms
-        if let form = form {
-            let childValues: [String:Any] = try form.reduce(into: [:]) { (result, formValue) in
-                guard let nestedResult = try formValue.formValues(using: parameters,
-                                                                  in: remediationOption) else
-                {
-                    return
-                }
-                
-                if let name = formValue.name {
-                    result[name] = nestedResult
-                } else if let nestedObject = nestedResult as? [String:Any] {
-                    result.merge(nestedObject, uniquingKeysWith: { (old, new) in
-                        return new
-                    })
-                } else {
-                    throw IDXClientError.invalidRequestData
-                }
-            }
-            result = [name: childValues]
-        }
-        
-        // Named form values that consist of multiple child options
-        else if let _ = options,
-                let selectedOption = parameters[self] as? IDXClient.Remediation.FormValue
-        {
-            let nestedResult = try selectedOption.formValues(using: parameters, in: remediationOption)
-            result = [name: nestedResult]
-        }
-        
-        // Other..
-        else {
-            // lots 'o stuff here
-            result = parameters[self] ?? value
-        }
-        
-        if required && result == nil {
-            throw IDXClientError.missingRequiredParameter(name: name)
-        }
-        return result
-    }
+protocol IDXResponseJSONPath {
+    func matchesV1(jsonPath: String) -> Bool
 }

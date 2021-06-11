@@ -3,13 +3,15 @@
 [![Support](https://img.shields.io/badge/support-Developer%20Forum-blue.svg)][devforum]
 [![API Reference](https://img.shields.io/badge/docs-reference-lightgrey.svg)][swiftdocs]
 
-# Okta Swift IDX SDK
+# Okta IDX Swift SDK
 
-This repository contains the Okta IDX SDK for Swift. This SDK can be used in your native client code (iOS, macOS) to assist in authenticating users against the Okta Identity Engine.
-
-> :grey_exclamation: The use of this SDK requires you to be a part of our limited general availability (LGA) program with access to Okta Identity Engine. If you want to request to be a part of our LGA program for Okta Identity Engine, please reach out to your account manager. If you do not have an account manager, please reach out to oie@okta.com for more information.
+> :grey_exclamation: The use of this SDK requires usage of the Okta Identity Engine. This functionality is in general availability but is being gradually rolled out to customers. If you want to request to gain access to the Okta Identity Engine, please reach out to your account manager. If you do not have an account manager, please reach out to oie@okta.com for more information.
 
 > :warning: Beta alert! This library is in beta. See [release status](#release-status) for more information.
+
+This library is built for projects written in Swift to communicate with Okta as an OAuth 2.0 + OpenID Connect provider. It works with [Okta's Identity Engine](https://developer.okta.com/docs/concepts/ie-intro/) to authenticate and register users.
+
+To see this library working in a sample, check out our [iOS Sample Application](Samples/EmbeddedAuthWithSDKs)
 
 **Table of Contents**
 
@@ -33,23 +35,14 @@ If you run into problems using the SDK, you can
 * Ask questions on the [Okta Developer Forums][devforum]
 * Post [issues][github-issues] here on GitHub (for code errors)
 
-## Getting Started
+## Installation
 
-### Prerequisites
-
-You will need:
+To get started, you will need:
 
 * An Okta account, called an _organization_ (sign up for a free [developer organization](https://developer.okta.com/signup) if you need one).
+* Xcode targeting iOS 10 and above.
 
-### Supported Platforms
-
-#### iOS
-
-OktaIdx supports iOS 10 and above.
-
-### Install
-
-#### Swift Package Manager
+### Swift Package Manager
 
 Add the following to the `dependencies` attribute defined in your `Package.swift` file. You can select the version using the `majorVersion` and `minor` parameters. For example:
 
@@ -59,71 +52,39 @@ dependencies: [
 ]
 ```
 
-#### Cocoapods
+## Usage
 
-Simply add the following line to your `Podfile`:
+The below code snippets will help you understand how to use this library.
 
-```ruby
-pod 'OktaIdx'
+Once you initialize an `IDXClient`, you can call methods to make requests to the Okta IDX API. Please see the [configuration reference](#configuration-reference) section for more details.
+
+### Create the client configuration
+
+```swift
+let config = IDXClient.Configuration(
+    issuer: "<#issuer#>", // e.g. https://foo.okta.com/oauth2/default, https://foo.okta.com/oauth2/ausar5vgt5TSDsfcJ0h7
+    clientId: "<#clientId#>",
+    clientSecret: nil, // Optional, only required for confidential clients.
+    scopes: ["openid", "email", "offline_access", "<#otherScopes#>"],
+    redirectUri: "<#redirectUri#>") // Must match the redirect uri in client app settings/console
 ```
-
-Then install it into your project:
-
-```bash
-pod install
-```
-
-#### Carthage
-
-To integrate this SDK into your Xcode project using [Carthage](https://github.com/Carthage/Carthage), specify it in your Cartfile:
-```ruby
-github "okta/okta-idx-swift"
-```
-
-## Usage guide
-
-The below code snippets will help you understand how to use this library. For more a more detailed introduction, you can also see the companion Xcode Playground.
-
-Once you initialize an `IDXClient`, you can call methods to make requests to the Okta API. Please see the [configuration reference](#configuration-reference) section for more details.
 
 ### Create the Client
 
 ```swift
-let config = IDXClient.Configuration(issuer: "<#issuer#>", // e.g. https://foo.okta.com/oauth2/default, https://foo.okta.com/oauth2/ausar5vgt5TSDsfcJ0h7
-                                     clientId: "<#clientId#>",
-                                     clientSecret: nil, // Optional, only required for confidential clients.
-                                     scopes: ["openid", "email", "offline_access", "<#otherScopes#>"],
-                                     redirectUri: "<#redirectUri#>" // // Must match the redirect uri in client app settings/console)
-let client = IDXClient(configuration: config)
-```
-
-### Start the authentication session
-
-```swift
-client.interact { (context, error) in
-    guard let context = context else {
-        // Handle error
+IDXClient.start(with: configuration) { (client, error) in
+    guard let client = client else {
+        // Handle the error
         return
-    }
-    
-    client.introspect(context) { (response, error) in
-        guard let response = response else {
-            // Handle error
-            return
-        }
-        
-        // Use response
     }
 }
 ```
 
-For convenience, when direct access to the `interact` and `introspect` methods aren't necessary, a `start` method is provided that encapsulates the two previous calls.
+### Start / continue the authentication session
 
 ```swift
-client.start { (context, response, error) in
-    guard let context = context,
-          let response = response else
-    {
+client.resume { (response, error) in
+    guard let response = response else {
         // Handle error
         return
     }
@@ -139,54 +100,46 @@ In this example the sign-on policy has no authenticators required.
 > **Note:** Steps to identify the user might change based on your Org configuration.
 
 ```swift
-// Use the client created above
-client.start { (context, response, error) in
-    guard let identifyOption = response?.remediation?[.identify],
-          let identifierField = identifyOption["identifier"] else
-    {
-        // Handle error
-        return
-    }
-    
-    var params = IDXClient.Remediation.Parameters()
-    params[identifierField] = "<#username#>"
-
-    remediation.proceed(using: params) { (response, error) in
-        guard let authenticatorOption = response?.remediation?[.challengeAuthenticator],
-              let passcodeField = authenticatorOption["credentials"]?["passcode"] else
-        {
-            // Handle error
+func signIn(username: String, password: String, completion: @escaping(IDXClient.Token?, Error?) -> Void) {
+    // Start the IDX authentication session
+    IDXClient.start { (client, error) in
+        guard let client = client else {
+            completion(nil, error)
             return
         }
 
-        let params = IDXClient.Remediation.Parameters()
-        params[passcodeField] = "<#password#>"
-        remediation.proceed(using: params) { (response, error) in
+        // Call `resume` to load the initial response
+        client.resume { (response, error) in {
             guard let response = response else {
-                // Handle error
-                return
-            }
-            
-            guard response.isLoginSuccessful else {
-                // Handle error
+                completion(nil, error)
                 return
             }
 
-            response.exchangeCode(with: context) { (token, error) in
-                guard let token = token else {
-                    // Handle error
-                    return
+            // Use the `identify` remediation option, and find the relevant form fields
+            guard let remediation = response.remediations[.identify],
+                  let usernameField = remediation["identifier"],
+                  let passwordField = remediation["credentials.passcode"],
+            else {
+                completion(nil, error)
+                return
+            }
+            
+            // Populate the form fields with the user's supplied values
+            usernameField.value = username
+            passwordField.value = password
+            
+            // Proceed through the remediation option
+            remediation.proceed { (response, error) in 
+                guard let response = response,
+                      response.isLoginSuccessful
+                else {
+                    completion(nil, error)
                 }
                 
-                print("""
-                Exchanged interaction code for token:
-                    accessToken:  \(token.accessToken)
-                    refreshToken: \(token.refreshToken ?? "Unavailable")
-                    idToken:      \(token.idToken ?? "Unavailable")
-                    tokenType:    \(token.tokenType)
-                    scope:        \(token.scope)
-                    expiresIn:    \(token.expiresIn) seconds
-                """)
+                // Exchange the successful response for tokens
+                response.exchangeCode { (token, error) in
+                    completion(token, error)
+                }
             }
         }
     }
@@ -195,226 +148,123 @@ client.start { (context, response, error) in
 
 ### Cancel the OIE transaction and start a new one
 
+*Note:* This example assumes this code is being called in response to a previous IDX API call.
+
 ```swift
-client.start { (_, response, error) in
-    guard let identifyOption = response?.remediation?[.identify],
-          let identifierField = identifyOption["identifier"] else
-    {
-        // Handle error
-        return
-    }
-
-    var params = IDXClient.Remediation.Parameters()
-    params[identifierField] = "<#username#>"
-
-    remediation.proceed(using: params) { (response, error) in
-        guard let response = response else {
-            // Handle error
-            return
-        }
-
-        // Cancel the current response, and begin fresh
-        response.cancel() { (response, error) in
-            guard let response = response else {
-                // Handle error
-                return
-            }
-
-            // Continue the remediation flow ... 
-        }
-    }
+response.cancel { (response, error) in
+    // Handle the newly-restarted IDX session
 }
 ```
 
 ### Remediation/MFA scenarios with sign-on policy
 
-#### Login using password, and enroll a Security Question authenticator
+#### Selecting an authenticator factor during authentication or enrollment
+
+When a user is asked to either enroll in a new authentication factor, or to authenticate against a previously-enrolled factor, a response may contain either the `.selectAuthenticatorEnroll` or `.selectAuthenticatorAuthenticate` remediation types. The usage patterns are similar for both.
+
+##### Displaying the possible enrollment options to the user
+
+```swift
+if let remediation = response.remediations[.selectAuthenticatorEnroll],
+   let authenticatorOptions = remediation["authenticator"]?.options
+{
+    for option in authenticatorOptions {
+        guard let authenticator = option.authenticator else { continue }
+
+        // Display a UI choice for this choice, optionally using
+        // the `authenticator` associated with this option to provide
+        // more context.
+        self.showChoice(label: option.label)
+    }
+}
+```
+
+##### Selecting an authenticator
+
+Once a user has made their choice, your application can apply that choice and proceed through the remediation.
+
+```swift
+let selectedChoice = "Security Question"
+if let remediation = response.remediations[.selectAuthenticatorEnroll],
+   let authenticator = remediation["authenticator"],
+   let option = authenticator.options?.first(where: { field -> Bool in
+    field.label == selectedChoice
+   })
+{
+    authenticator.selectedOption = option
+    remediation.proceed { (response, error) in
+        // Handle the response to enroll in the authenticator
+    }
+}
+```
+
+#### Enrolling a Security Question authenticator
 
 In this example, the org is configured to require a security question as a second authenticator. After answering the password challenge, users have to select *security question*, select a question, and enter an answer to finish the process.
 
-> **Note:** In this example, it is assumed that the session has already been initiated, and the username and password have been submitted.  Please see the above section for more details.
->
-> Additionally, this org is configured to allow additional optional authenticators, which is being skipped in this example.
+> **Note:** In this example, it is assumed that the session has already been initiated, the username and password have been submitted, and the Security Question authenticator has been selected.  Please see the above section for more details.
 
 ```swift
-guard let response = response,
-      let authenticatorOption = response.remediation?[.selectAuthenticatorEnroll],
-      let authenticatorField = authenticatorOption["authenticator"],
-      let questionOption = authenticatorField.options?.filter({ option in
-          option.label == "Security Question"
-      }).first else
-{
+guard let remediation = response.remediations[.enrollAuthenticator],
+      let credentials = remediation["credentials"],
+      let createQuestionOption = credentials.options?.first(where: { option in
+        option.label == "Create my own security question"
+      }),
+      let questionField = createQuestionOption["question"],
+      let answerField = createQuestionOption["answer"]
+else {
     // Handle error
     return
 }
 
-authenticatorOption.proceed(using: .init([authenticatorField: questionOption])) { (response, error) in
-    guard let response = response,
-          let enrollOption = response.remediation?["enroll-authenticator"],
-          let credentials = enrollOption["credentials"],
-          let questionOption = credentials.options?.filter({ option in
-              option.label == "Create my own security question"
-          }).first,
-          let questionField = questionOption["question"],
-          let answerField = questionOption["answer"] else
-    {
-        // Handle error
-        return
-    }
-    
-    let params = IDXClient.Remediation.Parameters()
-    params[credentials] = questionOption
-    params[questionField] = "What is my favorite CIAM service?"
-    params[answerField] = "Okta"
-    
-    enrollOption.proceed(using: params) { (response, error) in
-        guard let skipOption = response?.remediation?["skip"] else {
-            // Handle error
-            return
-        }
-        
-        // Skip other optional factors if applicable
-        skipOption.proceed() { (response, error) in
-            guard let response = response else {
-                // Handle error
-                return
-            }
-            guard response.isLoginSuccessful else {
-                // Handle error
-                return
-            }
-            
-            // Using the `context` value stored in the IDXClient, so the value is being omitted here.
-            response.exchangeCode { (token, error) in
-                guard let token = token else {
-                    // Handle error
-                    return
-                }
-                
-                print("""
-                Exchanged interaction code for token:
-                    accessToken:  \(token.accessToken)
-                    refreshToken: \(token.refreshToken ?? "Unavailable")
-                    idToken:      \(token.idToken ?? "Unavailable")
-                    tokenType:    \(token.tokenType)
-                    scope:        \(token.scope)
-                    expiresIn:    \(token.expiresIn) seconds
-                """)
-            }
-        }
-    }
+credentials.selectedOption = createQuestionOption
+questionField.value = "What is Trillian's real name?"
+answerField.value = "Tricia MacMillan"
+
+remediation.proceed { (response, error) in
+    // Handle the response
 }
 ```
 
-#### Login using password and email authenticator
+#### Authenticating using an Email authenticator
 
 In this example, the Org is configured to require an email as a second authenticator. After answering the password challenge, users have to select *email* and enter the code to finish the process.
 
-> **Note:** Steps to identify the user might change based on your Org configuration.
+When the email authenticator is selected by the user, a message is sent to their address containing a code. Out of band of your application, the user will load the email and will either copy & paste the code, or will input it by hand.
+
+> **Note:** This example assumes the username and password have been submitted, and the Email authenticator has been selected.
 
 ```swift
-client.start { (_, response, error) in
-    guard let identifyOption = response?.remediation?[.identify],
-          let identifierField = identifyOption["identifier"] else
-    {
-        // Handle error
-        return
-    }
-    
-    remediation.proceed(using: .init([identifierField: "<#username#>") { (response, error) in
-        guard let response = response,
-              let authenticatorOption = response.remediation?[.selectAuthenticatorAuthenticate],
-              let authenticatorField = authenticatorOption["authenticator"],
-              let passwordOption = authenticatorField.options?.filter({ option in
-                  option.label == "Password"
-              }).first else
-        {
-            // Handle error
-            return
-        }
+guard let remediation = response.remediations[.challengeAuthenticator],
+      let passcodeField = remediation["credentials.passcode"]
+else {
+    // Handle error
+    return
+}
 
-        // Select the password authenticator option
-        authenticatorOption.proceed(using: .init([authenticatorField: passwordOption]))
-            guard let authenticatorOption = response?.remediation?[.challengeAuthenticator],
-                  let passcodeField = authenticatorOption["credentials"]?["passcode"] else
-            {
-                // Handle error
-                return
-            }
-
-            remediation.proceed(using: .init([passcodeField: "<#password#>"])) { (response, error) in
-                guard let response = response,
-                      let authenticatorOption = response.remediation?[.selectAuthenticatorAuthenticate],
-                      let authenticatorField = authenticatorOption["authenticator"],
-                      let emailOption = authenticatorField.options?.filter({ option in
-                          option.label == "Email"
-                      }).first else
-                {
-                    // Handle error
-                    return
-                }
-                
-                authenticatorOption.proceed(using: .init([authenticatorField: emailOption])) { (response, error) in
-                    guard let authenticatorOption = response?.remediation?[.challengeAuthenticator],
-                          let passcodeField = authenticatorOption["credentials"]?["passcode"] else
-                    {
-                        // Handle error
-                        return
-                    }
-
-                    // Proceed to the email challenge
-                    remediation.proceed(using: .init([passcodeField: "<#email code#>"])) { (response, error) in
-                        guard let response = response else {
-                            // Handle error
-                            return
-                        }
-                        guard response.isLoginSuccessful else {
-                            // Handle error
-                            return
-                        }
-                        
-                        response.exchangeCode { (token, error) in
-                            guard let token = token else {
-                                // Handle error
-                                return
-                            }
-                            
-                            print("""
-                            Exchanged interaction code for token:
-                                accessToken:  \(token.accessToken)
-                                refreshToken: \(token.refreshToken ?? "Unavailable")
-                                idToken:      \(token.idToken ?? "Unavailable")
-                                tokenType:    \(token.tokenType)
-                                scope:        \(token.scope)
-                                expiresIn:    \(token.expiresIn) seconds
-                            """)
-                        }
-                    }
-                }    
-            }
-        }
-    }
+passcodeField.value = "123456"
+remediation.proceed { (response, error) in
+    // Handle response
 }
 ```
 
-#### Login using password, and enroll a phone authenticator (SMS/Voice)
+#### Enrolling a phone authenticator (SMS/Voice)
 
 In this example, the Org is configured with phone as a second authenticator. After answering the password challenge, users have to provide a phone number and then enter a code to finish the process.
 
-> **Note:** Steps to identify the user might change based on your Org configuration.
+##### Selecting the SMS or Voice option
 
-> **Note:** This example assumes the identifier has been supplied, and the first authenticator challenge has already been performed.
+> **Note:** This example assumes the username and password have been submitted.
 
 ```swift
-guard let response = response,
-      let authenticatorOption = response.remediation?[.selectAuthenticatorEnroll],
-      let authenticatorField = authenticatorOption["authenticator"],
-      let phoneOption = authenticatorField.options?.filter({ option in
+guard let remediation = response.remediations[.selectAuthenticatorEnroll],
+      let authenticatorField = remediation["authenticator"],
+      let phoneOption = authenticatorField.options?.first(where: { option in
           option.label == "Phone"
-      }).first,
+      }),
       let phoneNumberField = phoneOption["phoneNumber"],
       let methodTypeField = phoneOption["methodType"],
-      let smsMethod = methodTypeField.options?.filter({ option in
+      let smsMethod = methodTypeField.options?.first(where: { option in
           option.label == "SMS"
       }) else
 {
@@ -422,148 +272,58 @@ guard let response = response,
     return
 }
 
-var params = IDXClient.Remediation.Parameters()
-params[phoneNumberField] = "+15551234567"
-params[methodTypeField] = smsMethod
+authenticatorField.selectedOption = phoneOption
+methodTypeField.selectedOption = smsMethod
+phoneNumberField.value = "+15551234567"
 
-authenticatorOption.proceed(using: params) { (response, error) in
-    guard let response = response,
-          let enrollOption = response.remediation?["enroll-authenticator"],
-          let credentials = enrollOption["credentials"],
-          let codeField = credentials.options?.filter({ option in
-              option.label == "Create my own security question"
-          }).first,
-          let questionField = questionOption["question"],
-          let answerField = questionOption["answer"] else
-    {
-        // Handle error
-        return
-    }
-    
-    guard let authenticatorOption = response?.remediation?[.challengeAuthenticator],
-          let passcodeField = authenticatorOption["credentials"]?["passcode"] else
-    {
-        // Handle error
-        return
-    }
+remediation.proceed { (response, error) in
+    // Use this response to present the verification code UI to the user
+}
+```
 
-    // Proceed to the SMS code challenge
-    remediation.proceed(using: .init([passcodeField: "<#sms code#>"])) { (response, error) in
-        guard let response = response else {
-            // Handle error
-            return
-        }
-        guard response.isLoginSuccessful else {
-            // Handle error
-            return
-        }
-        
-        response.exchangeCode { (token, error) in
-            guard let token = token else {
-                // Handle error
-                return
-            }
-            
-            print("""
-            Exchanged interaction code for token:
-                accessToken:  \(token.accessToken)
-                refreshToken: \(token.refreshToken ?? "Unavailable")
-                idToken:      \(token.idToken ?? "Unavailable")
-                tokenType:    \(token.tokenType)
-                scope:        \(token.scope)
-                expiresIn:    \(token.expiresIn) seconds
-            """)
-        }
-    }
-}    
+##### Responding with the verification code
+
+```swift
+guard let remediation = response.remediations[.challengeAuthenticator],
+      let passcodeField = remediation["credentials.passcode"],
+else {
+    // Handle error
+    return
+}
+
+passcodeField.value = "123456"
+remediation.proceed { (response, error) in
+    // Handle response
+}
 ```
 
 ### Email verification polling
 
+When using an email authenticator, the user will receive both a numeric code and a link to verify their identity. If the user clicks this link, it will verify the authenticator and the application can immediately proceed to the next remediation step.
+
+*Note:* This code assumes that it is running in the same UI where the user is asked for their verification code.
+
 ```swift
-func poll(response: IDXClient.Response,
-          completion: @escaping(IDXClient.Response?, Error?) -> Void)
-{
-    guard let poll = response.currentAuthenticatorEnrollment?.poll,
-          let refreshTime = poll.refresh else
-    {
-        completion(response, nil)
-        return
-    }
-    
-    DispatchQueue.global().asyncAfter(deadline: DispatchTime.now() + refreshTime) {
-        poll.proceed { (response, error) in
-            guard let response = response else {
-                completion(nil, error)
-                return
-            }
-            
-            self.poll(response: response, completion: completion)
-        }
-    }
+guard let remediation = response.remediations[.challengeAuthenticator],
+      let authenticator = remediation.authenticators[.email] as? IDXClient.Authenticator.Email
+else {
+    // Handle error
+    return
 }
 
-client.start() { (_, response, error) in
-    guard let identify = response?.remediation?[.identify],
-          let identifierField = identify["identifier"] else
-    {
-        // Handle error
-        return
-    }
-    
-    identify.proceed(with: .init([identifierField: "<#username#>"])) { (response, error) in
-        guard let selectAuthenticator = response?.remediation?[.selectAuthenticatorAuthenticate],
-              let authenticatorField = selectAuthenticator["authenticator"],
-              let passcodeOption = authenticatorField.options?.filter({ $0.label == "Password" }).first else
-        {
+if authenticator.canPoll {
+    authenticator.startPolling { (response, error) in
+        guard let response = response else {
             // Handle error
             return
         }
         
-        selectAuthenticator.proceed(with: .init([authenticatorField: passcodeOption])) { (response, error) in
-            guard let passcodeChallenge = response?.remediation?[.challengeAuthenticator],
-                  let passcodeField = passcodeChallenge["credentials"]?["passcode"] else
-            {
-                // Handle error
-                return
-            }
-            
-            passcodeChallenge.proceed(with: .init([passcodeField: "<#password#>"])) { (response, error) in
-                if let selectEmail = response?.remediation?[.selectAuthenticatorAuthenticate],
-                   let authenticatorField = selectEmail["authenticator"],
-                   let emailOption = authenticatorField.options?.filter({ $0.label == "Email" }).first
-                {
-                    selectEmail.proceed(with: .init([authenticatorField: emailOption])) { (response, error) in
-                        guard let response = response else {
-                            // Handle error
-                            return
-                        }
-                        self.poll(response: response) { (response, error) in
-                            guard let response = response else {
-                                // Handle error
-                                return
-                            }
-
-                            guard response.isLoginSuccessful else {
-                                // Handle error
-                                return
-                            }
-
-                            response.exchangeCode { (token, error) in
-                                guard let token = token else {
-                                    // Handle error
-                                    return
-                                }
-                                
-                                // Use the token
-                            }
-                        }
-                    }
-                }
-            }
-        }
+        // Use the response to display the UI for the next step
+        // in the user's authentication
     }
 }
+
+// Or, call `stopPolling()` to stop polling for the magic link.
 ```
 
 ### Check remediation options
@@ -572,147 +332,91 @@ Responses may contain multiple remediation options. There are multiple ways to i
 
 ```swift
 // Select the option by its name using subscripting.
-let option = response.remediation?["challenge-authenticator"]
+let remediation = response.remediations["challenge-authenticator"]
 
 // Select the option by its enum type using subscripting.
-let option = response.remediation?[.challengeAuthenticator]
+let remediation = response.remediations[.challengeAuthenticator]
 
-// Select the option by iterating over the array of options
-let option = response.remediation?.remediationOptions.filter { $0.name == "challenge-authenticator" }.first
+// Select the option by iterating over the options
+let remediation = response.remediations.first(where: { $0.name == "challenge-authenticator" })
 ```
 
-From this point, you can access the form values associated with it.
+From this point, you can access the form values associated with it. 
+
+### Working with remediation option forms
+
+A remediation contains a form which may contain fields to display to the user or to accept user-input to submit to the server. 
 
 ```swift
-option.form?.forEach { formValue in
-    // Do something with the form value
+remediation.form.forEach { formField in
+    // Do something with the form fie.d
 }
+```
+
+For convenience, keyed subscripting is supported to access fields by name, using dot-notation to retrieve nested fields.
+
+```swift
+let identifierField = remediation["identifier"]
+let passcodeField = remediation["credentials"]?.form?["passcode"]
+
+// Or
+let passcodeField = remediation["credentials.passcode"]
 ```
 
 ### Supplying values to remediation options
 
-The purpose of using remediation options is to enable a user to make selections and supply user-data in response to these requests. These forms sometimes involve nested structures of values that require the data to be structured in a specific way. To this end, this SDK provides two primary ways to supply data and user selections to remediation options:
+The purpose of using remediation options is to enable a user to make selections and supply user-data in response to these requests. The fields contain only two mutable properties that can be used to supply user data and make selections in the API.
 
-1. Using key/value dictionary values, which may potentially contain nested data;
-2. Using the `IDXClient.Remediation.Parameters` object to store responses associated with their `FormValue`.
+#### Field values
 
-#### Using key/value dictionaries
-
-When using this approach, you must be careful to ensure that all required values are populated, and in the correct structure.
+When inputting user information, the field's `value` property can be used to pass this data into the API.
 
 ```swift
-// Simple shallow structure
-option.proceed(with: ["identifier": "<#username#>"]) { (response, error) in
-    // Handle the response
-}
-
-// Nested structure
-option.proceed(with: ["challenge": ["passcode": "<#password#>"]]) { (response, error) in
-    // Handle the response
-}
+let identifierField = remediation["identifier"]
+identifierField.value = "arthur.dent@example.com"
 ```
 
-For convenience, any read-only form values that are pre-populated with a value (for example, the `stateHandle` value) will automatically be merged and sent along with the data supplied through this API.
+#### Multiple-choice selections
 
-> **Note:** The automatic merging of read-only form data does not work when user-supplied data is sent along with nested optional form values. For these more complicated scenarios, the next approach is recommended.
+When multiple choices are presented to the user (e.g. selecting an authenticator, choosing from a predefined list of security questions, etc), a form field will contain a nested `options` array of fields defining the choices made.
 
-#### Using the `Parameters` object
+To select a choice, simply assign the nested option to the `selectedOption` property of its parent.
 
-When submitting data to remediation options using the `Parameters` object, you don't need to be concerned about the nesting of values. Instead, user-supplied data is associated with the `FormValue` as the key.
-
-```swift
-// Simple shallow structure
-let params = IDXClient.Remediation.Parameters()
-
-guard let field = option["identifier"] else { return }
-params[field] = "<#username#>"
-
-option.proceed(with: params) { (response, error) in
-    // Handle the response
+```
+guard let remediation = response.remediations[.selectAuthenticatorAuthenticate],
+      let authenticatorField = remediation["authenticator"],
+      let chosenOption = authenticatorField.options?.first(where: { option in
+          option.label == "Email"
+      })
+{
+    // Handle error
+    return
 }
 
-// Nested structure
-let params = IDXClient.Remediation.Parameters()
-
-guard let field = option["challenge"]?["passcode"] else { return }
-params[field] = "<#password#>"
-
-option.proceed(with: params) { (response, error) in
-    // Handle the response
-}
-
-// Using the initializer inline
-guard let field = option["identifier"] else { return }
-option.proceed(with: .init([field: "<#username#>"])) { (response, error) in
-    // Handle the response
-}
+authenticatorField.selectedOption = chosenOption
 ```
 
-The `Parameters` object can be a convenient placeholder for user-supplied data while they populate their information into forms. Once all selections have been made, the object 
+#### Using fields in your application
+
+Since the fields not only describe how you can render your UI, but also accepts the values provided by the user, this lends itself as a convenient placeholder for user-supplied data while they populate their information into forms. Once all selections have been made, you can call the `proceed` method on the remediation option to submit their form data. 
 
 ```swift
 import SwiftUI
 
 struct UsernameView: View {
     @State var username: String = ""
-    let parameters = IDXClient.Remediation.Parameters()
-    var remediationOption: IDXClient.Remediation.Option
+    var remediation: IDXClient.Remediation
     var body: some View {
         Form {
             TextField("Username", text: $username, onCommit: {
-                guard let field = self.remediationOption["identifier"] else { return }
-                parameters[field] = self.username
+                guard let field = self.remediation["identifier"] else { return }
+                field.value = self.username
             })
             Button("Continue") {
-                remediationOption.proceed(with: self.parameters)
+                remediation.proceed()
             }
         }
     }
-}
-```
-
-### Check remediation options and select an authenticator
-
-Many times a user may have choices that they can select. For example, they may choose which type of authenticator they wish to authenticate or enroll with, or they may select a sub-option (such as "SMS" vs "Voice" when using a "Phone" authenticator).
-
-When using the `Parameters` object, this selection can be made by assigning the chosen option to the enclosing form value.
-
-```swift
-let params = IDXClient.Remediation.Parameters()
-
-if let remediationOption = response.remediation?[.selectAuthenticatorAuthenticate],
-   let authenticatorField = remediationOption["authenticator"],
-   let emailOption = authenticatorField.options?.filter({ $0.label == "Email" }).first
-{
-    remediationOption.proceed(with: .init([authenticatorField: emailOption])) { (response, error) in
-        // Handle the response
-    }
-}
-```
-
-When combining options with nested sub-options, the same approach as above can be used, which is convenient especially when mixing option selections with user-supplied data. In the following example, the user is selecting the Phone authenticator, is then selecting the `SMS` authenticator method, and is supplying the phone number to send the SMS code to.
-
-```swift
-guard let authenticatorOption = response.remediation?[.selectAuthenticatorEnroll],
-      let authenticatorField = authenticatorOption["authenticator"],
-      let phoneOption = authenticatorField.options?.filter({ option in
-          option.label == "Phone"
-      }).first,
-      let phoneNumberField = phoneOption["phoneNumber"],
-      let methodTypeField = phoneOption["methodType"],
-      let smsMethod = methodTypeField.options?.filter({ option in
-          option.label == "SMS"
-      }) else
-{
-    return
-}
-
-var params = IDXClient.Remediation.Parameters()
-params[phoneNumberField] = "+15551234567"
-params[methodTypeField] = smsMethod
-
-authenticatorOption.proceed(using: params) { (response, error) in
-    // Handle the response
 }
 ```
 
@@ -737,7 +441,7 @@ if response.isLoginSuccessful {
 
 ### Running Tests
 
-To perform an end-to-end test, copy the `TestCredentials.xcconfig.example` file to `TestCredentials.xcconfig`, and update its contents to match your configuration as specified in the [prerequisites](#prerequisites). Next, you can run the test targets for both `okta-idx-ios` and `OktaIdxExample`.
+To perform an end-to-end test, copy the `TestCredentials.xcconfig.example` file to `TestCredentials.xcconfig`, and update its contents to match your configuration as specified in the [prerequisites](#prerequisites). Next, you can run the test targets for both `okta-idx-ios` and `EmbeddedAuth` (in the [Samples/EmbeddedAuthWithSDKs](Samples/EmbeddedAuthWithSDKs) directory).
 
 ## Known issues
 
