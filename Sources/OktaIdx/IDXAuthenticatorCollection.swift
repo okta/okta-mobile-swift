@@ -18,48 +18,42 @@ extension IDXClient {
     public class AuthenticatorCollection: NSObject {
         /// The current authenticator, if one is actively being enrolled or authenticated.
         @objc public var current: Authenticator? {
-            allAuthenticators.values.first { $0.state == .authenticating || $0.state == .enrolling }
+            allAuthenticators.first { $0.state == .authenticating || $0.state == .enrolling }
         }
         
         /// The array of currently-enrolled authenticators.
         @objc public var enrolled: [Authenticator] {
-            allAuthenticators.values.filter { $0.state == .enrolled }
+            allAuthenticators.filter { $0.state == .enrolled }
         }
         
         /// Access authenticators based on their type.
         @objc public subscript(type: Authenticator.Kind) -> Authenticator? {
-            allAuthenticators[type]
+            allAuthenticators.first(where: { $0.type == type })
         }
         
-        public typealias DictionaryType = [IDXClient.Authenticator.Kind: IDXClient.Authenticator]
-        
-        var allAuthenticators: DictionaryType {
+        var allAuthenticators: [IDXClient.Authenticator] {
             authenticators
         }
         
-        let authenticators: DictionaryType
-        init(authenticators: DictionaryType?) {
-            self.authenticators = authenticators ?? DictionaryType()
+        let authenticators: [IDXClient.Authenticator]
+        init(authenticators: [IDXClient.Authenticator]?) {
+            self.authenticators = authenticators ?? []
 
             super.init()
         }
     }
     
     class WeakAuthenticatorCollection: AuthenticatorCollection {
-        typealias DictionaryType = [IDXClient.Authenticator.Kind: Weak<IDXClient.Authenticator>]
-
-        override var allAuthenticators: AuthenticatorCollection.DictionaryType {
-            weakAuthenticators.reduce(into: [IDXClient.Authenticator.Kind:IDXClient.Authenticator]()) { (result, item) in
-                result[item.key] = item.value.object
-            }
+        override var allAuthenticators: [IDXClient.Authenticator] {
+            weakAuthenticators.compactMap { $0.object }
         }
         
-        let weakAuthenticators: DictionaryType
-        override init(authenticators: AuthenticatorCollection.DictionaryType?) {
-            weakAuthenticators = authenticators?.reduce(into: DictionaryType(), { (result, item) in
-                result[item.key] = Weak(object: item.value)
-            }) ?? DictionaryType()
-
+        let weakAuthenticators: [Weak<IDXClient.Authenticator>]
+        override init(authenticators: [IDXClient.Authenticator]?) {
+            weakAuthenticators = authenticators?.map({ (authenticator) in
+                Weak(object: authenticator)
+            }) ?? []
+            
             super.init(authenticators: nil)
         }
     }

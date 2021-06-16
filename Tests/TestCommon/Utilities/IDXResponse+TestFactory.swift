@@ -178,7 +178,7 @@ extension IDXClient.Token {
 
 extension IDXClient.Remediation.Form.Field {
     enum TestField {
-        case stateHandle, identifier, rememberMe
+        case stateHandle, identifier, rememberMe, passcode, passwordCredentials
     }
     
     convenience init(_ type: TestField) {
@@ -205,6 +205,21 @@ extension IDXClient.Remediation.Form.Field {
                       mutable: true,
                       required: false,
                       secret: false)
+        case .passcode:
+            self.init(name: "passcode",
+                      label: "Password",
+                      visible: true,
+                      mutable: true,
+                      required: true,
+                      secret: true)
+        case .passwordCredentials:
+            self.init(name: "credentials",
+                      type: "object",
+                      visible: true,
+                      mutable: true,
+                      required: true,
+                      secret: true,
+                      form: IDXClient.Remediation.Form([.passcode]))
         }
     }
 }

@@ -40,7 +40,7 @@ class IDXMessageTableViewCell: UITableViewCell {
     @IBOutlet weak var messageLabel: UILabel!
     var update: (() -> Void)? = nil
     
-    enum Style {
+    enum Style: Hashable {
         case message(message: IDXClient.Message)
         case enrollment(action: Signin.EnrollmentAction)
         
@@ -97,6 +97,17 @@ class IDXMessageTableViewCell: UITableViewCell {
                 case .recover:
                     return "Recover your account"
                 }
+            }
+        }
+        
+        static func == (lhs: Style, rhs: Style) -> Bool {
+            switch (lhs, rhs) {
+            case (.message(message: let lhsValue), .message(message: let rhsValue)):
+                return lhsValue == rhsValue
+            case (.enrollment(action: let lhsValue), .enrollment(action: let rhsValue)):
+                return lhsValue == rhsValue
+            default:
+                return false
             }
         }
     }

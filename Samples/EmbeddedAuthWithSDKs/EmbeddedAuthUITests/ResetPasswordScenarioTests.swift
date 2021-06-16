@@ -15,14 +15,9 @@ import XCTest
 final class ResetPasswordScenarioTests: ScenarioTestCase {
     class override var category: Scenario.Category { .passcodeOnly }
 
-    override static func setUp() {
-        super.setUp()
-        
-        do {
-            try scenario.createUser()
-        } catch {
-            XCTFail(error.localizedDescription)
-        }
+    override func setUpWithError() throws {
+        try super.setUpWithError()
+        try scenario.createUser()
     }
     
     func testResetSuccessful() throws {
@@ -60,7 +55,7 @@ final class ResetPasswordScenarioTests: ScenarioTestCase {
         XCTAssertTrue(codePage.resendButton.exists)
         XCTAssertTrue(codePage.continueButton.exists)
         
-        let emailCode = try scenario.receive(code: .email)
+        let emailCode = try receive(code: .email)
 
         if !codePage.passcodeField.isFocused {
             codePage.passcodeField.tap()

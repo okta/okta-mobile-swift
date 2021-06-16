@@ -20,6 +20,7 @@
 		961BE43E258406EC00DCE8AC /* PKCEExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 961BE43D258406EC00DCE8AC /* PKCEExtensions.swift */; };
 		961BE4492584184700DCE8AC /* PKCETests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 961BE4482584184700DCE8AC /* PKCETests.swift */; };
 		961DE96325897C6B007CAB16 /* Responses.swift in Sources */ = {isa = PBXBuildFile; fileRef = 961DE96225897C6B007CAB16 /* Responses.swift */; };
+		962A81A82674419A003BC5E7 /* IDXFormTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 962A81A72674419A003BC5E7 /* IDXFormTests.swift */; };
 		962ABD41263CD4420049B0C4 /* IDXResponse+InternalExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 962ABD40263CD4420049B0C4 /* IDXResponse+InternalExtensions.swift */; };
 		962ABD46263CD47C0049B0C4 /* IDXAuthenticator+InternalExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 962ABD45263CD47C0049B0C4 /* IDXAuthenticator+InternalExtensions.swift */; };
 		962ABD4C264075050049B0C4 /* Weak.swift in Sources */ = {isa = PBXBuildFile; fileRef = 962ABD4B264075050049B0C4 /* Weak.swift */; };
@@ -123,6 +124,8 @@
 		961BE43D258406EC00DCE8AC /* PKCEExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PKCEExtensions.swift; sourceTree = "<group>"; };
 		961BE4482584184700DCE8AC /* PKCETests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PKCETests.swift; sourceTree = "<group>"; };
 		961DE96225897C6B007CAB16 /* Responses.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Responses.swift; sourceTree = "<group>"; };
+		962A81A72674419A003BC5E7 /* IDXFormTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IDXFormTests.swift; sourceTree = "<group>"; };
+		962A81AD2677C93A003BC5E7 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		962ABD40263CD4420049B0C4 /* IDXResponse+InternalExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "IDXResponse+InternalExtensions.swift"; sourceTree = "<group>"; };
 		962ABD45263CD47C0049B0C4 /* IDXAuthenticator+InternalExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "IDXAuthenticator+InternalExtensions.swift"; sourceTree = "<group>"; };
 		962ABD4B264075050049B0C4 /* Weak.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Weak.swift; sourceTree = "<group>"; };
@@ -336,6 +339,7 @@
 				968CD88F264CA119003F0B44 /* IDXFormValueTests.swift */,
 				962CE9CB266002E10059F7E3 /* IDXMessageCollectionTests.swift */,
 				96681F4B26656C51003DD158 /* IDXAuthenticatorCollectionTests.swift */,
+				962A81A72674419A003BC5E7 /* IDXFormTests.swift */,
 			);
 			path = OktaIdxTests;
 			sourceTree = "<group>";
@@ -361,6 +365,7 @@
 		96F8F17825802F9100DA2701 = {
 			isa = PBXGroup;
 			children = (
+				962A81AD2677C93A003BC5E7 /* README.md */,
 				965C3B9C2620EFEC00EBD800 /* Sources */,
 				96F8F1A025803B8500DA2701 /* Tests */,
 				96F8F18525802FAD00DA2701 /* Products */,
@@ -697,6 +702,7 @@
 				96C51E7325BA09CB007A2519 /* IDXResponseTypeTests.swift in Sources */,
 				967102CA2587F93E00D5D85F /* URLSessionMock.swift in Sources */,
 				9664F82E25CC7C0C00F6CB21 /* IDXClientDelegateRecorder.swift in Sources */,
+				962A81A82674419A003BC5E7 /* IDXFormTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

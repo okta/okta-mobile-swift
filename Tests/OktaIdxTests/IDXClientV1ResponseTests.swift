@@ -559,7 +559,7 @@ class IDXClientV1ResponseTests: XCTestCase {
             let publicObj = try XCTUnwrap(IDXClient.Authenticator.makeAuthenticator(client: clientMock,
                                                                                     v1: [obj.value],
                                                                                     jsonPaths: [],
-                                                                                    in: response) as? IDXClient.Authenticator)
+                                                                                    in: response))
             XCTAssertEqual(publicObj.id, "lae8wj8nnjB3BrbcH0g6")
             XCTAssertNil(publicObj.displayName)
             XCTAssertNil(publicObj.methods)

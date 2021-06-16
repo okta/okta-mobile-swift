@@ -255,7 +255,7 @@ class ScenarioTests: XCTestCase {
                         XCTAssertEqual(remediation?.name, "challenge-authenticator")
                         
                         let currentEnrollment = response?.authenticators.current
-                        let related = remediation?.authenticators.first?.value
+                        let related = remediation?.authenticators.first
                         XCTAssertEqual(related, currentEnrollment)
                         
                         remediation?.form["credentials.passcode"]?.value = "password"

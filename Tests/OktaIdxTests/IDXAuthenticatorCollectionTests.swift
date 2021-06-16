@@ -41,10 +41,10 @@ class IDXAuthenticatorCollectionTests: XCTestCase {
         let response = try XCTUnwrap(IDXClient.Response.response(client: client,
                                                                  fileName: "identify-single-form-response"))
         XCTAssertEqual(response.authenticators.count, 1)
-        XCTAssertEqual(response.authenticators.first?.key, .password)
+        XCTAssertEqual(response.authenticators.first?.type, .password)
         
         let remediation = try XCTUnwrap(response.remediations[.identify])
         XCTAssertEqual(remediation.authenticators.count, 1)
-        XCTAssertEqual(remediation.authenticators.first?.key, .password)
+        XCTAssertEqual(remediation.authenticators.first?.type, .password)
     }
 }

@@ -59,7 +59,7 @@ extension IDXClient.Response: IDXRelatedObjectRoot {
 
 extension IDXClient.AuthenticatorCollection: IDXContainsRelatableObjects {
     func nestedRelatableObjects() -> [IDXHasRelatedObjects] {
-        return authenticators.values.flatMap { $0.nestedRelatableObjects() }
+        return authenticators.flatMap { $0.nestedRelatableObjects() }
     }
 }
 

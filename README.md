@@ -349,7 +349,7 @@ A remediation contains a form which may contain fields to display to the user or
 
 ```swift
 remediation.form.forEach { formField in
-    // Do something with the form fie.d
+    // Do something with the form field
 }
 ```
 
@@ -361,6 +361,12 @@ let passcodeField = remediation["credentials"]?.form?["passcode"]
 
 // Or
 let passcodeField = remediation["credentials.passcode"]
+```
+
+Finally, the Form and FormField classes support Swift `@dynamicMemberLookup`, enabling you to access fields using standard property notation.
+
+```swift
+let passcodeField = remediation.credentials?.passcode
 ```
 
 ### Supplying values to remediation options

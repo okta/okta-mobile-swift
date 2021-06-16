@@ -19,8 +19,9 @@ class IDXRemediationTableViewController: UITableViewController, IDXResponseContr
     var signin: Signin?
 
     private var webAuthSession: ASWebAuthenticationSession?
-    private var formSections: [Signin.Section] = []
     private weak var poll: Pollable?
+    
+    private var dataSource: UITableViewDiffableDataSource<Signin.Section, Signin.Row>!
 
     private let pollActivityIndicator: UIActivityIndicatorView = {
         let result = UIActivityIndicatorView(style: .medium)
@@ -28,9 +29,11 @@ class IDXRemediationTableViewController: UITableViewController, IDXResponseContr
         return result
     }()
     
-    func rebuildForm() {
+    func rebuildForm(animated: Bool = false) {
         if let response = response {
-            formSections = response.remediationForm(delegate: self)
+            var snapshot = NSDiffableDataSourceSnapshot<Signin.Section, Signin.Row>()
+            response.buildFormSnapshot(&snapshot, delegate: self)
+            dataSource.apply(snapshot, animatingDifferences: animated, completion: nil)
         }
     }
     
@@ -38,6 +41,15 @@ class IDXRemediationTableViewController: UITableViewController, IDXResponseContr
         super.viewDidLoad()
         
         navigationItem.rightBarButtonItem = UIBarButtonItem(customView: pollActivityIndicator)
+        tableView.dataSource = dataSource
+        
+        dataSource = UITableViewDiffableDataSource(tableView: tableView, cellProvider: { [weak self] (tableView, indexPath, row) -> UITableViewCell? in
+            let cell = tableView.dequeueReusableCell(withIdentifier: row.kind.reuseIdentifier, for: indexPath)
+
+            row.configure(signin: self?.signin, cell: cell, at: indexPath)
+
+            return cell
+        })
         
         rebuildForm()
     }
@@ -194,26 +206,6 @@ class IDXRemediationTableViewController: UITableViewController, IDXResponseContr
             signin.proceed(to: response)
         }
     }
-    
-    // MARK: - Table view data source
-
-    override func numberOfSections(in tableView: UITableView) -> Int {
-        return formSections.count
-    }
-
-    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        let formSection = formSections[section]
-        return formSection.rows.count
-    }
-
-    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let row = formSections[indexPath.section].rows[indexPath.row]
-        let cell = tableView.dequeueReusableCell(withIdentifier: row.kind.reuseIdentifier, for: indexPath)
-
-        row.configure(signin: signin, cell: cell, at: indexPath)
-
-        return cell
-    }
 }
 
 extension IDXRemediationTableViewController: ASWebAuthenticationPresentationContextProviding {
@@ -228,9 +220,7 @@ extension IDXRemediationTableViewController: SigninRowDelegate {
     }
     
     func formNeedsUpdate() {
-        guard let response = response else { return }
-        formSections = response.remediationForm(delegate: self)
-        tableView.reloadData()
+        rebuildForm(animated: true)
     }
 
     func enrollment(action: Signin.EnrollmentAction) {

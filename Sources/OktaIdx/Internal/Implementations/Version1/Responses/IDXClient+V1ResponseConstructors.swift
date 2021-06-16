@@ -159,24 +159,16 @@ extension IDXClient.AuthenticatorCollection {
                 result[mapping.authenticator.type] = collection
             }
         
-        let authenticators: [IDXClient.Authenticator.Kind: IDXClient.Authenticator] = try authenticatorMapping
+        let authenticators: [IDXClient.Authenticator] = try authenticatorMapping
             .values
-            .reduce(into: [:]) { (result, mappingArray) in
-                guard let authenticator = try IDXClient.Authenticator.makeAuthenticator(client: client,
-                                                                                        v1: mappingArray.map { $0.authenticator },
-                                                                                        jsonPaths: mappingArray.map { $0.jsonPath },
-                                                                                        in: object)
-                else { return }
-                result[authenticator.type] = authenticator
-            }
+            .compactMap({ (mappingArray) in
+                return try IDXClient.Authenticator.makeAuthenticator(client: client,
+                                                                     v1: mappingArray.map { $0.authenticator },
+                                                                     jsonPaths: mappingArray.map { $0.jsonPath },
+                                                                     in: object)
+            })
         
         self.init(authenticators: authenticators)
-    }
-    
-    convenience init(authenticators: [IDXClient.Authenticator]) {
-        self.init(authenticators: authenticators.reduce(into: DictionaryType(), { (result, authenticator) in
-            result[authenticator.type] = authenticator
-        }))
     }
 }
 

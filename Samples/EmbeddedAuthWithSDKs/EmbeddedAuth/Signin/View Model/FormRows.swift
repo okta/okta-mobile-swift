@@ -12,6 +12,7 @@
 
 import Foundation
 import OktaIdx
+import UIKit
 
 protocol SigninRowDelegate {
     func formNeedsUpdate()
@@ -21,7 +22,17 @@ protocol SigninRowDelegate {
 
 extension Signin {
     /// Represents a visual row in the remediation form's signin process.
-    struct Row {
+    struct Row: Hashable {
+        static func == (lhs: Signin.Row, rhs: Signin.Row) -> Bool {
+            return lhs.kind == rhs.kind &&
+                lhs.parent == rhs.parent
+        }
+        
+        func hash(into hasher: inout Hasher) {
+            hasher.combine(kind)
+            hasher.combine(parent)
+        }
+        
         /// The kind of element to display in this row
         let kind: Kind
         
@@ -32,7 +43,32 @@ extension Signin {
         weak private(set) var delegate: (AnyObject & SigninRowDelegate)?
         
         /// Row element kinds.
-        enum Kind {
+        enum Kind: Hashable {
+            static func == (lhs: Signin.Row.Kind, rhs: Signin.Row.Kind) -> Bool {
+                switch (lhs, rhs) {
+                case (.separator, .separator):
+                    return true
+                case (.title(remediationOption: let lhsValue), .title(remediationOption: let rhsValue)):
+                    return lhsValue == rhsValue
+                case (.label(field: let lhsValue), .label(field: let rhsValue)):
+                    return lhsValue == rhsValue
+                case (.message(style: let lhsValue), .message(style: let rhsValue)):
+                    return lhsValue == rhsValue
+                case (.text(field: let lhsValue), .text(field: let rhsValue)):
+                    return lhsValue == rhsValue
+                case (.toggle(field: let lhsValue), .toggle(field: let rhsValue)):
+                    return lhsValue == rhsValue
+                case (.option(field: let lhsValue, option: let lhsOption), .option(field: let rhsValue, option: let rhsOption)):
+                    return lhsValue == rhsValue && lhsOption == rhsOption
+                case (.select(field: let lhsValue, values: let lhsOption), .select(field: let rhsValue, values: let rhsOption)):
+                    return lhsValue == rhsValue && lhsOption == rhsOption
+                case (.button(remediationOption: let lhsValue), .button(remediationOption: let rhsValue)):
+                    return lhsValue == rhsValue
+                default:
+                    return false
+                }
+            }
+            
             case separator
             case title(remediationOption: IDXClient.Remediation)
             case label(field: IDXClient.Remediation.Form.Field)
@@ -46,11 +82,8 @@ extension Signin {
     }
     
     /// Represents a section of rows for the remediation form's signin process
-    struct Section {
+    struct Section: Hashable {
         let remediationOption: IDXClient.Remediation?
-        
-        /// Array of rows to show in this section.
-        let rows: [Row]
     }
     
     enum EnrollmentAction {
@@ -174,23 +207,23 @@ extension IDXClient.Response {
     /// Converts the response to a series of remediation forms to display in the UI
     /// - Parameter delegate: A delegate object to receive updates as the form is changed.
     /// - Returns: Array of sections to be shown in the table view.
-    func remediationForm(delegate: AnyObject & SigninRowDelegate) -> [Section] {
-        var result: [Section] = []
-        
+    func buildFormSnapshot(_ snapshot: inout NSDiffableDataSourceSnapshot<Signin.Section, Signin.Row>,
+                           delegate: AnyObject & SigninRowDelegate)
+    {
         if !messages.isEmpty {
-            result.append(Section(remediationOption: nil,
-                                  rows: messages.map { message in
-                                    Row(kind: .message(style: .message(message: message)),
-                                        parent: nil,
-                                        delegate: delegate)
-                                  }))
+            let section = Section(remediationOption: nil)
+            let rows = messages.map { message in
+                Row(kind: .message(style: .message(message: message)),
+                    parent: nil,
+                    delegate: delegate)
+              }
+            snapshot.appendSections([ section ])
+            snapshot.appendItems(rows, toSection: section)
         }
         
-        result.append(contentsOf: remediations.map { option in
-            self.remediationForm(remediationOption: option, in: self, delegate: delegate)
-        })
-
-        return result
+        remediations.forEach { option in
+            self.buildFormSnapshot(&snapshot, remediationOption: option, in: self, delegate: delegate)
+        }
     }
 
     /// Converts a remediation option into a set of objects representing the form, so it can be rendered in the table view.
@@ -198,7 +231,11 @@ extension IDXClient.Response {
     ///   - response: Response object that is the parent for this remediation option
     ///   - delegate: A delegate object to receive updates as the form is changed.
     /// - Returns: Array of sections to be shown in the table view.
-    func remediationForm(remediationOption: IDXClient.Remediation, in response: IDXClient.Response, delegate: AnyObject & SigninRowDelegate) -> Section {
+    func buildFormSnapshot(_ snapshot: inout NSDiffableDataSourceSnapshot<Signin.Section, Signin.Row>,
+                           remediationOption: IDXClient.Remediation,
+                           in response: IDXClient.Response,
+                           delegate: AnyObject & SigninRowDelegate)
+    {
         var rows: [Row] = []
         
         // Based on which remediation option we're in, show either a title or separator
@@ -225,7 +262,7 @@ extension IDXClient.Response {
                         parent: nil,
                         delegate: delegate))
 
-        for (_,authenticator) in remediationOption.authenticators {
+        for authenticator in remediationOption.authenticators {
             if let sendable = authenticator as? Sendable,
                sendable.canSend
             {
@@ -250,7 +287,9 @@ extension IDXClient.Response {
                                 delegate: delegate))
             }
         }
-
-        return Section(remediationOption: remediationOption, rows: rows)
+        
+        let section = Section(remediationOption: remediationOption)
+        snapshot.appendSections([ section ])
+        snapshot.appendItems(rows, toSection: section)
     }
 }

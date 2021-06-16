@@ -63,26 +63,12 @@ extension Scenario {
                     
                     var factor = SmsUserFactor()
                     factor.profile = SmsUserFactorProfile(phoneNumber: phoneNumber)
-                    UserFactorAPI.enrollFactor(userId: userId, body: factor) { (factor, error) in
-                        guard let factor = factor,
-                              let factorId = factor.id
-                        else {
+                    UserFactorAPI.enrollFactor(userId: userId, body: factor, activate: true) { (factor, error) in
+                        if let error = error {
                             asyncError = error
-                            group.leave()
-                            return
                         }
                         
-                        // Get SMS code
-                        let code = try? self.receive(code: .sms)
-                        let request = ActivateFactorRequest(passCode: code)
-                        UserFactorAPI.activateFactor(userId: userId,
-                                                     factorId: factorId,
-                                                     body: request) { (factor, error) in
-                            if let error = error {
-                                asyncError = error
-                            }
-                            group.leave()
-                        }
+                        group.leave()
                     }
                 }
                 

@@ -15,14 +15,9 @@ import XCTest
 final class EmailMFALoginScenarioTests: ScenarioTestCase {
     class override var category: Scenario.Category { .selfServiceRegistration }
 
-    override class func setUp() {
-        super.setUp()
-        
-        do {
-            try scenario.createUser(groups: [.mfa])
-        } catch {
-            XCTFail(error.localizedDescription)
-        }
+    override func setUpWithError() throws {
+        try super.setUpWithError()
+        try scenario.createUser(groups: [.mfa])
     }
     
     func testLoginWithEmail() throws {
@@ -41,7 +36,7 @@ final class EmailMFALoginScenarioTests: ScenarioTestCase {
         XCTAssertTrue(codePage.passcodeLabel.waitForExistence(timeout: .regular))
         XCTAssertTrue(codePage.passcodeField.exists)
         
-        let emailCode = try scenario.receive(code: .email)
+        let emailCode = try receive(code: .email)
         
         codePage.passcodeField.tap()
         codePage.passcodeField.typeText(emailCode)

@@ -28,6 +28,7 @@ extension IDXClient {
     ///
     ///    response.remediations[.identifier]
     @objc(IDXRemediation)
+    @dynamicMemberLookup
     public class Remediation: NSObject {
         /// The type of this remediation, which is used for keyed subscripting from a `IDXClient.RemediationCollection`.
         @objc public let type: RemediationType
@@ -48,6 +49,10 @@ extension IDXClient {
         ///    response.remediations[.identifier]["credentials.passcode"]
         @objc public subscript(name: String) -> Form.Field? {
             get { form[name] }
+        }
+        
+        public subscript(dynamicMember name: String) -> Form.Field? {
+            form[dynamicMember: name]
         }
         
         /// Collection of messages for all fields within this remedation.

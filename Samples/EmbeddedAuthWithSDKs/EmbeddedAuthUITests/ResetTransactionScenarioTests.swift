@@ -15,14 +15,9 @@ import XCTest
 class ResetTransactionScenarioTests: ScenarioTestCase {
     class override var category: Scenario.Category { .passcodeOnly }
 
-    override class func setUp() {
-        super.setUp()
-        
-        do {
-            try scenario.createUser()
-        } catch {
-            XCTFail(error.localizedDescription)
-        }
+    override func setUpWithError() throws {
+        try super.setUpWithError()
+        try scenario.createUser()
     }
 
     func DISABLED_testCancelMFARemediation() throws {
