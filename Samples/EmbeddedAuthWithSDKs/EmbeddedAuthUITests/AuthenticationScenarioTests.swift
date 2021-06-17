@@ -22,7 +22,7 @@ final class AuthenticationScenarioTests: ScenarioTestCase {
         shouldResetUser = true
     }
     
-    func testAuthenticationSession() throws {
+    func test_Authentication_Session() throws {
         let credentials = try XCTUnwrap(scenario.credentials)
         let signInPage = SignInFormPage(app: app)
         signInPage.signIn(username: credentials.username, password: credentials.password)
@@ -31,21 +31,35 @@ final class AuthenticationScenarioTests: ScenarioTestCase {
         let userInfoPage = UserInfoPage(app: app)
         userInfoPage.assert(with: credentials)
         
-        XCTAssertTrue(app.staticTexts["Sign Out"].exists)
+        test("AND Mary sees a logout button") {
+            XCTAssertTrue(app.staticTexts["Sign Out"].exists)
+        }
     }
     
-    func testSignOut() throws {
-        try testAuthenticationSession()
-        shouldResetUser = false
-
-        app.terminate()
-        app.launch()
+    func test_Sign_Out() throws {
+        try test("GIVEN Mary has an authenticated session") {
+            try test_Authentication_Session()
+            shouldResetUser = false
+            
+            test("AND Mary navigates to the Root View") {
+                app.terminate()
+                app.launch()
+            }
+        }
         
-        XCTAssertTrue(app.staticTexts["Sign Out"].waitForExistence(timeout: .regular))
-        app.staticTexts["Sign Out"].tap()
-        app.buttons["Clear tokens"].tap()
+        test("WHEN Mary clicks the logout button") {
+            XCTAssertTrue(app.staticTexts["Sign Out"].waitForExistence(timeout: .regular))
+            app.staticTexts["Sign Out"].tap()
+            app.buttons["Clear tokens"].tap()
+        }
         
-        XCTAssertTrue(app.staticTexts["clientIdLabel"].waitForExistence(timeout: .regular))
-        XCTAssertEqual(app.staticTexts["clientIdLabel"].label, "Client ID: \(scenario.configuration.clientId)")
+        test("THEN she is redirected back to the Root View") {
+            XCTAssertTrue(app.buttons["Sign In"].waitForExistence(timeout: .regular))
+            
+            test("AND Mary sees login, registration buttons") {
+                XCTAssertTrue(app.staticTexts["clientIdLabel"].exists)
+                XCTAssertEqual(app.staticTexts["clientIdLabel"].label, "Client ID: \(scenario.configuration.clientId)")
+            }
+        }
     }
 }

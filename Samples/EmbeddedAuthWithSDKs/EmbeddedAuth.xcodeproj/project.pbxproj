@@ -18,6 +18,9 @@
 		922820F526650FAA00AC66E9 /* PasscodeScenarioTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 964F747425A3E5F3003EE300 /* PasscodeScenarioTests.swift */; };
 		9234CCEE2668D5E90033564D /* PhoneMFAScenarioTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9234CCED2668D5E90033564D /* PhoneMFAScenarioTests.swift */; };
 		9234CCFB266A4D650033564D /* EmailMFALoginScenarioTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9234CCFA266A4D650033564D /* EmailMFALoginScenarioTests.swift */; };
+		923EF0242677A39E0020011A /* SocialAuthTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 923EF0232677A39E0020011A /* SocialAuthTests.swift */; };
+		923EF0262677B60E0020011A /* AuthorizationWebPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 923EF0252677B60E0020011A /* AuthorizationWebPage.swift */; };
+		92638C9E2678DC3600C98CE5 /* SocialAuthScenarioValidator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92638C9D2678DC3600C98CE5 /* SocialAuthScenarioValidator.swift */; };
 		928B7C72266A7F2D006DF45A /* SignInFormPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 928B7C71266A7F2D006DF45A /* SignInFormPage.swift */; };
 		928CF05E2670F53600DAAB4C /* AuthenticationScenarioTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 928CF05D2670F53600DAAB4C /* AuthenticationScenarioTests.swift */; };
 		92B559C5266628D600AB566F /* SelfServiceRegistrationScenarioTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96C51E9225BA591F007A2519 /* SelfServiceRegistrationScenarioTests.swift */; };
@@ -132,6 +135,9 @@
 		920B9DD3266A90B800D38A8C /* PhoneFormPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhoneFormPage.swift; sourceTree = "<group>"; };
 		9234CCED2668D5E90033564D /* PhoneMFAScenarioTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhoneMFAScenarioTests.swift; sourceTree = "<group>"; };
 		9234CCFA266A4D650033564D /* EmailMFALoginScenarioTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmailMFALoginScenarioTests.swift; sourceTree = "<group>"; };
+		923EF0232677A39E0020011A /* SocialAuthTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SocialAuthTests.swift; sourceTree = "<group>"; };
+		923EF0252677B60E0020011A /* AuthorizationWebPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthorizationWebPage.swift; sourceTree = "<group>"; };
+		92638C9D2678DC3600C98CE5 /* SocialAuthScenarioValidator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SocialAuthScenarioValidator.swift; sourceTree = "<group>"; };
 		928B7C71266A7F2D006DF45A /* SignInFormPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInFormPage.swift; sourceTree = "<group>"; };
 		928CF05D2670F53600DAAB4C /* AuthenticationScenarioTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationScenarioTests.swift; sourceTree = "<group>"; };
 		92B559D126667A7D00AB566F /* ResetPasswordScenarioTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResetPasswordScenarioTests.swift; sourceTree = "<group>"; };
@@ -239,6 +245,7 @@
 				928B7C71266A7F2D006DF45A /* SignInFormPage.swift */,
 				920B9DB7266A861F00D38A8C /* UsernameRecoveryFormPage.swift */,
 				9209C13E26724C8600CC1DD5 /* UserInfoPage.swift */,
+				923EF0252677B60E0020011A /* AuthorizationWebPage.swift */,
 			);
 			path = Pages;
 			sourceTree = "<group>";
@@ -316,6 +323,7 @@
 				92B559D126667A7D00AB566F /* ResetPasswordScenarioTests.swift */,
 				96F8B35E25BF5A9400DAECDC /* ResetTransactionScenarioTests.swift */,
 				96C51E9225BA591F007A2519 /* SelfServiceRegistrationScenarioTests.swift */,
+				923EF0232677A39E0020011A /* SocialAuthTests.swift */,
 				964F747625A3E5F3003EE300 /* Info.plist */,
 				96C51E7E25BA578F007A2519 /* TestCredentials.xcconfig */,
 			);
@@ -443,9 +451,10 @@
 		96E3368F26699ADB000E0B0F /* Scenario Configurations */ = {
 			isa = PBXGroup;
 			children = (
+				96E339C5266A9B57000E0B0F /* Configuration.swift */,
 				96E339B8266A9151000E0B0F /* PasscodeScenarioValidator.swift */,
 				96F79494266AC67000D340CD /* SelfServiceRegistrationScenarioValidator.swift */,
-				96E339C5266A9B57000E0B0F /* Configuration.swift */,
+				92638C9D2678DC3600C98CE5 /* SocialAuthScenarioValidator.swift */,
 			);
 			path = "Scenario Configurations";
 			sourceTree = "<group>";
@@ -669,12 +678,14 @@
 			files = (
 				920B9DC0266A867E00D38A8C /* PasscodeFormPage.swift in Sources */,
 				92B559D226667A7D00AB566F /* ResetPasswordScenarioTests.swift in Sources */,
+				923EF0262677B60E0020011A /* AuthorizationWebPage.swift in Sources */,
 				9234CCEE2668D5E90033564D /* PhoneMFAScenarioTests.swift in Sources */,
 				96F79495266AC67000D340CD /* SelfServiceRegistrationScenarioValidator.swift in Sources */,
 				92B559C5266628D600AB566F /* SelfServiceRegistrationScenarioTests.swift in Sources */,
 				96E339C6266A9B57000E0B0F /* Configuration.swift in Sources */,
 				9209C14026725FD000CC1DD5 /* UserInfoPage.swift in Sources */,
 				96749B0625B8EAAD002849A0 /* XCTest+Extensions.swift in Sources */,
+				923EF0242677A39E0020011A /* SocialAuthTests.swift in Sources */,
 				961B713A266D901400A3A4A2 /* ActivateDeactivatePolicy.swift in Sources */,
 				920B9DCA266A887E00D38A8C /* FactorsEnrollmentPage.swift in Sources */,
 				96E339B9266A9151000E0B0F /* PasscodeScenarioValidator.swift in Sources */,
@@ -688,6 +699,7 @@
 				928CF05E2670F53600DAAB4C /* AuthenticationScenarioTests.swift in Sources */,
 				9234CCFB266A4D650033564D /* EmailMFALoginScenarioTests.swift in Sources */,
 				92B559C826662AA300AB566F /* ResetTransactionScenarioTests.swift in Sources */,
+				92638C9E2678DC3600C98CE5 /* SocialAuthScenarioValidator.swift in Sources */,
 				920B9DB8266A861F00D38A8C /* UsernameRecoveryFormPage.swift in Sources */,
 				96E339B4266A9136000E0B0F /* Scenario.swift in Sources */,
 				965A112F26547EC1006B784F /* A18NProfile.swift in Sources */,

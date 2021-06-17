@@ -80,19 +80,5 @@ final class PasscodeScenarioTests: ScenarioTestCase {
             XCTAssertTrue(emailRecoveryPage.continueButton.exists)
         }
     }
-    
-    func testForgotPasswordRedirection() throws {
-        let signInPage = SignInFormPage(app: app)
-        XCTAssertTrue(signInPage.initialSignInButton.waitForExistence(timeout: .regular))
-        signInPage.initialSignInButton.tap()
-        
-        XCTAssertTrue(signInPage.recoveryButton.waitForExistence(timeout: .regular))
-        signInPage.recoveryButton.tap()
-        
-        let emailRecoveryPage = UsernameRecoveryFormPage(app: app)
-        XCTAssertTrue(emailRecoveryPage.usernameLabel.waitForExistence(timeout: .regular))
-        XCTAssertTrue(emailRecoveryPage.usernameField.exists)
-        XCTAssertTrue(emailRecoveryPage.continueButton.exists)
-    }
 }
 

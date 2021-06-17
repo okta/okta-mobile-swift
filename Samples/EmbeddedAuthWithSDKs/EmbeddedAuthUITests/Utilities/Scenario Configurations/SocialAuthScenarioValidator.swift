@@ -13,11 +13,8 @@
 import Foundation
 import OktaSdk
 
-struct PasscodeScenarioValidator: ScenarioValidator {
+struct SocialAuthScenarioValidator: ScenarioValidator {
     func configure(completion: @escaping (Error?) -> Void) {
-        deactivatePolicies(OktaPolicy.allCases.filter { $0 != .selfServiceRegistration }) { _ in
-            activatePolicy(.selfServiceRegistration,
-                           completion: completion)
-        }
+        deactivatePolicies(OktaPolicy.allCases, completion: completion)
     }
 }

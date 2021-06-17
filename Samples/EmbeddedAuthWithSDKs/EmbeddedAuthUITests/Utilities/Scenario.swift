@@ -22,6 +22,24 @@ class Scenario {
 
     private static var sharedProfileId: String?
     private(set) var credentials: Credentials?
+    
+    var socialAuthCredentials: Credentials? {
+        let env = ProcessInfo.processInfo.environment
+        
+        guard let username = env["SOCIAL_AUTH_USERNAME"],
+              let password = env["SOCIAL_AUTH_PASSWORD"],
+              !username.isEmpty,
+              !password.isEmpty
+        else {
+            return nil
+        }
+        
+        return Credentials(username: username,
+                           password: password,
+                           firstName: "ios",
+                           lastName: "User")
+    }
+    
     private(set) var profile: A18NProfile? {
         didSet {
             guard let emailAddress = profile?.emailAddress else {
@@ -289,10 +307,12 @@ class Scenario {
     enum Category {
         case passcodeOnly
         case selfServiceRegistration
+        case socialAuth
     }
     
     enum Error: Swift.Error {
         case missingClientCredentials
+        case missingIDPCredentials
         case cannotCreateA18NProfile
         case profileValuesInvalid
         case noA18NProfile
@@ -307,11 +327,14 @@ enum OktaGroup: String, CaseIterable {
 
 enum OktaPolicy: String, CaseIterable {
     case selfServiceRegistration = "Self Service Registration"
+    case socialAuthMFA = "MFA Required (Social Auth)"
     
     var policyType: PolicyType {
         switch self {
         case .selfServiceRegistration:
             return .oktaProfileEnrollment
+        case .socialAuthMFA:
+            return .oktaSignOn
         }
     }
 }
@@ -322,6 +345,8 @@ protocol ScenarioValidator {
                         completion: @escaping(Error?) -> Void)
     func deactivatePolicy(_ policy: OktaPolicy,
                           completion: @escaping(Error?) -> Void)
+    func deactivatePolicies(_ policies: [OktaPolicy],
+                            completion: @escaping(Error?) -> Void)
 }
 
 extension Scenario.Category {    
@@ -331,6 +356,8 @@ extension Scenario.Category {
             return PasscodeScenarioValidator()
         case .selfServiceRegistration:
             return SelfServiceRegistrationScenarioValidator()
+        case .socialAuth:
+            return SocialAuthScenarioValidator()
         }
     }
 }

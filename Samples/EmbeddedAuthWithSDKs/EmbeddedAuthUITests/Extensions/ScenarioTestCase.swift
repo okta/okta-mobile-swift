@@ -96,8 +96,10 @@ class ScenarioTestCase: XCTestCase {
         }
         
         continueAfterFailure = false
-
-        XCTAssertEqual(app.staticTexts["clientIdLabel"].label, "Client ID: \(scenario.configuration.clientId)")
+        
+        test("GIVEN Mary navigates to the Basic Login View") {
+            XCTAssertEqual(app.staticTexts["clientIdLabel"].label, "Client ID: \(scenario.configuration.clientId)")
+        }
     }
     
     override class func tearDown() {

@@ -20,54 +20,76 @@ final class EmailMFALoginScenarioTests: ScenarioTestCase {
         try scenario.createUser(groups: [.mfa])
     }
     
-    func testLoginWithEmail() throws {
+    func test_Login_With_MFA_Email() throws {
         let credentials = try XCTUnwrap(scenario.credentials)
         let signInPage = SignInFormPage(app: app)
         signInPage.signIn(username: credentials.username, password: credentials.password)
         
-        let factorsPage = FactorsEnrollmentPage(app: app)
-        XCTAssertTrue(factorsPage.emailLabel.waitForExistence(timeout: .regular))
-        XCTAssertTrue(factorsPage.chooseButton.exists)
+        test("THEN she is presented with an option to select Email to verify") {
+            let factorsPage = FactorsEnrollmentPage(app: app)
+            XCTAssertTrue(factorsPage.emailLabel.waitForExistence(timeout: .regular))
+            XCTAssertTrue(factorsPage.chooseButton.exists)
+            
+            test("WHEN She selects Email from the list") {
+                factorsPage.emailLabel.tap()
+            }
+            
+            test("AND She selects 'Receive a Code'") {
+                factorsPage.chooseButton.tap()
+            }
+        }
         
-        factorsPage.emailLabel.tap()
-        factorsPage.chooseButton.tap()
-        
-        let codePage = PasscodeFormPage(app: app)
-        XCTAssertTrue(codePage.passcodeLabel.waitForExistence(timeout: .regular))
-        XCTAssertTrue(codePage.passcodeField.exists)
-        
-        let emailCode = try receive(code: .email)
-        
-        codePage.passcodeField.tap()
-        codePage.passcodeField.typeText(emailCode)
-        
-        codePage.continueButton.tap()
+        try test("THEN the screen changes to receive an input for a code") {
+            let codePage = PasscodeFormPage(app: app)
+            XCTAssertTrue(codePage.passcodeLabel.waitForExistence(timeout: .regular))
+            XCTAssertTrue(codePage.passcodeField.exists)
+            
+            let emailCode = try receive(code: .email)
+            
+            test("WHEN She inputs the correct code from the Email") {
+                codePage.passcodeField.tap()
+                codePage.passcodeField.typeText(emailCode)
+            }
+            
+            test("AND She selects 'Verify'") {
+                codePage.continueButton.tap()
+            }
+        }
         
         let userInfoPage = UserInfoPage(app: app)
         userInfoPage.assert(with: credentials)
     }
     
-    func testLoginWithInvalidCode() throws {
+    func test_Login_With_Invalid_Code() throws {
         let credentials = try XCTUnwrap(scenario.credentials)
         let signInPage = SignInFormPage(app: app)
         signInPage.signIn(username: credentials.username, password: credentials.password)
         
-        let factorsPage = FactorsEnrollmentPage(app: app)
-        XCTAssertTrue(factorsPage.emailLabel.waitForExistence(timeout: .regular))
-        XCTAssertTrue(factorsPage.chooseButton.exists)
+        test("THEN She sees a list of factors") {
+            let factorsPage = FactorsEnrollmentPage(app: app)
+            XCTAssertTrue(factorsPage.emailLabel.waitForExistence(timeout: .regular))
+            XCTAssertTrue(factorsPage.chooseButton.exists)
+            
+            test("WHEN She has selected Email from the list of factors") {
+                
+                factorsPage.emailLabel.tap()
+                factorsPage.chooseButton.tap()
+            }
+        }
         
-        factorsPage.emailLabel.tap()
-        factorsPage.chooseButton.tap()
+        test("THEN She inputs the incorrect code from the email") {
+            let codePage = PasscodeFormPage(app: app)
+            XCTAssertTrue(codePage.passcodeLabel.waitForExistence(timeout: .regular))
+            XCTAssertTrue(codePage.passcodeField.exists)
+            
+            codePage.passcodeField.tap()
+            codePage.passcodeField.typeText("12345")
+            
+            codePage.continueButton.tap()
+        }
         
-        let codePage = PasscodeFormPage(app: app)
-        XCTAssertTrue(codePage.passcodeLabel.waitForExistence(timeout: .regular))
-        XCTAssertTrue(codePage.passcodeField.exists)
-
-        codePage.passcodeField.tap()
-        codePage.passcodeField.typeText("12345")
-        
-        codePage.continueButton.tap()
-        
-        XCTAssertTrue(app.staticTexts["Invalid code. Try again."].waitForExistence(timeout: .regular))
+        test("THEN she sees shows an error message") {
+            XCTAssertTrue(app.staticTexts["Invalid code. Try again."].waitForExistence(timeout: .regular))
+        }
     }
 }

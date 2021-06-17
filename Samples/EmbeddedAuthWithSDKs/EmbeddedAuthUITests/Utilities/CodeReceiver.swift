@@ -21,7 +21,7 @@ protocol CodeReceiver {
 }
 
 extension CodeReceiver {
-    func waitForCode(timeout: TimeInterval = 30,
+    func waitForCode(timeout: TimeInterval = 45,
                      pollInterval: TimeInterval = 1,
                      completion: @escaping (String?) -> Void)
     {

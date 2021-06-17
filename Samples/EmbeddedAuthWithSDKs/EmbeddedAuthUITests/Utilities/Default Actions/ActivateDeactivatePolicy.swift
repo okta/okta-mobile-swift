@@ -25,6 +25,24 @@ extension ScenarioValidator {
     {
         setPolicy(named: policy.rawValue, type: policy.policyType, isActive: false, completion: completion)
     }
+    
+    func deactivatePolicies(_ policies: [OktaPolicy],
+                            completion: @escaping(Error?) -> Void)
+    {
+        var errors: [Error?] = []
+        
+        for policy in policies {
+            deactivatePolicy(policy) { error in
+                errors.append(error)
+                
+                if policy == policies.last {
+                    completion(
+                        errors.compactMap { $0 }.first
+                    )
+                }
+            }
+        }
+    }
 
     private func setPolicy(named: String,
                            type: PolicyType,

@@ -20,87 +20,125 @@ final class ResetPasswordScenarioTests: ScenarioTestCase {
         try scenario.createUser()
     }
     
-    func testResetSuccessful() throws {
+    func test_Reset_Password() throws {
         let credentials = try XCTUnwrap(scenario.credentials)
-        let signInPage = SignInFormPage(app: app)
-        XCTAssertTrue(signInPage.initialSignInButton.waitForExistence(timeout: .regular))
-        signInPage.initialSignInButton.tap()
-
-        XCTAssertTrue(signInPage.recoveryButton.waitForExistence(timeout: .regular))
-        signInPage.recoveryButton.tap()
         
-        let emailRecoveryPage = UsernameRecoveryFormPage(app: app)
-        XCTAssertTrue(emailRecoveryPage.usernameLabel.waitForExistence(timeout: .regular))
-        XCTAssertTrue(emailRecoveryPage.usernameField.exists)
-        XCTAssertTrue(emailRecoveryPage.continueButton.exists)
-        
-        if !emailRecoveryPage.usernameField.isFocused {
-            emailRecoveryPage.usernameField.tap()
+        test("GIVEN Mary navigates to the Self Service Registration View") {
+            let emailRecoveryPage = UsernameRecoveryFormPage(app: app)
+            let signInPage = SignInFormPage(app: app)
+            XCTAssertTrue(signInPage.initialSignInButton.waitForExistence(timeout: .regular))
+            signInPage.initialSignInButton.tap()
+            
+            XCTAssertTrue(signInPage.recoveryButton.waitForExistence(timeout: .regular))
+            signInPage.recoveryButton.tap()
+            
+            XCTAssertTrue(emailRecoveryPage.usernameLabel.waitForExistence(timeout: .regular))
+            XCTAssertTrue(emailRecoveryPage.usernameField.exists)
+            XCTAssertTrue(emailRecoveryPage.continueButton.exists)
+            
+            test("WHEN she inputs her correct Username") {
+                if !emailRecoveryPage.usernameField.isFocused {
+                    emailRecoveryPage.usernameField.tap()
+                }
+                
+                emailRecoveryPage.usernameField.typeText(credentials.username)
+            }
+            
+            test("AND she submits the Username form") {
+                emailRecoveryPage.continueButton.tap()
+            }
         }
         
-        emailRecoveryPage.usernameField.typeText(credentials.username)
-        emailRecoveryPage.continueButton.tap()
-        
-        
-        let methodPage = RecoveryMethodPage(app: app)
-        XCTAssertTrue(methodPage.emailButton.waitForExistence(timeout: .regular))
-        XCTAssertTrue(methodPage.continueButton.waitForExistence(timeout: .regular))
-        
-        methodPage.emailButton.tap()
-        methodPage.continueButton.tap()
-        
-        let codePage = PasscodeFormPage(app: app)
-        XCTAssertTrue(codePage.passcodeLabel.waitForExistence(timeout: .regular))
-        XCTAssertTrue(codePage.passcodeField.exists)
-        XCTAssertTrue(codePage.resendButton.exists)
-        XCTAssertTrue(codePage.continueButton.exists)
-        
-        let emailCode = try receive(code: .email)
-
-        if !codePage.passcodeField.isFocused {
-            codePage.passcodeField.tap()
+        test("THEN she sees recovery option form") {
+            let methodPage = RecoveryMethodPage(app: app)
+            XCTAssertTrue(methodPage.emailButton.waitForExistence(timeout: .regular))
+            XCTAssertTrue(methodPage.continueButton.waitForExistence(timeout: .regular))
+            
+            test("AND she selects Email option") {
+                methodPage.emailButton.tap()
+            }
+            
+            test("THEN she submits the choice") {
+                methodPage.continueButton.tap()
+            }
         }
         
-        codePage.passcodeField.typeText(emailCode)
-        codePage.continueButton.tap()
-        
-        let passwordPage = NewPasswordFormPage(app: app)
-        XCTAssertTrue(passwordPage.passwordField.waitForExistence(timeout: .regular))
-        XCTAssertTrue(passwordPage.passwordLabel.exists)
-        XCTAssertTrue(passwordPage.continueButton.exists)
-        
-        if !passwordPage.passwordField.isFocused {
-            passwordPage.passwordField.tap()
+        try test("THEN she sees a page to input her code") {
+            let codePage = PasscodeFormPage(app: app)
+            XCTAssertTrue(codePage.passcodeLabel.waitForExistence(timeout: .regular))
+            XCTAssertTrue(codePage.passcodeField.exists)
+            XCTAssertTrue(codePage.resendButton.exists)
+            XCTAssertTrue(codePage.continueButton.exists)
+            
+            let emailCode = try receive(code: .email)
+            
+            test("WHEN she fills in the correct code") {
+                if !codePage.passcodeField.isFocused {
+                    codePage.passcodeField.tap()
+                }
+                
+                codePage.passcodeField.typeText(emailCode)
+                codePage.continueButton.tap()
+            }
         }
         
-        passwordPage.passwordField.typeText("Abcd123\(Int.random(in: 1...1000))")
-        
-        passwordPage.continueButton.tap()
+        test("THEN she sees a page to set her password") {
+            let passwordPage = NewPasswordFormPage(app: app)
+            XCTAssertTrue(passwordPage.passwordField.waitForExistence(timeout: .regular))
+            XCTAssertTrue(passwordPage.passwordLabel.exists)
+            XCTAssertTrue(passwordPage.continueButton.exists)
+            
+            test("WHEN she fills a password that fits within the password policy") {
+                if !passwordPage.passwordField.isFocused {
+                    passwordPage.passwordField.tap()
+                }
+                
+                passwordPage.passwordField.typeText("Abcd123\(Int.random(in: 1...1000))")
+            }
+            
+            test("AND she submits the form") {
+                passwordPage.continueButton.tap()
+            }
+        }
         
         let userInfoPage = UserInfoPage(app: app)
         userInfoPage.assert(with: credentials)
     }
     
     func testResetWithIncorrectUsername() throws {
-        let signInPage = SignInFormPage(app: app)
-        signInPage.initialSignInButton.tap()
-        
-        XCTAssertTrue(signInPage.recoveryButton.waitForExistence(timeout: .regular))
-        signInPage.recoveryButton.tap()
-        
-        let emailRecoveryPage = UsernameRecoveryFormPage(app: app)
-        XCTAssertTrue(emailRecoveryPage.usernameLabel.waitForExistence(timeout: .regular))
-        XCTAssertTrue(emailRecoveryPage.usernameField.exists)
-        XCTAssertTrue(emailRecoveryPage.continueButton.exists)
-        
-        if !emailRecoveryPage.usernameField.isFocused {
-            emailRecoveryPage.usernameField.tap()
+        test("GIVEN Mary navigates to the Self Service Password Reset View") {
+            let signInPage = SignInFormPage(app: app)
+            signInPage.initialSignInButton.tap()
+            
+            test("WHEN she selects 'Forgot Password'") {
+                XCTAssertTrue(signInPage.recoveryButton.waitForExistence(timeout: .regular))
+                signInPage.recoveryButton.tap()
+            }
         }
         
         let incorrectUsername = "incorrect.username"
-        emailRecoveryPage.usernameField.typeText(incorrectUsername)
-        emailRecoveryPage.continueButton.tap()
         
-        XCTAssertTrue(app.staticTexts["There is no account with the Username \(incorrectUsername)."].waitForExistence(timeout: .regular))
+        test("THEN she sees the Password Recovery Page") {
+            let emailRecoveryPage = UsernameRecoveryFormPage(app: app)
+            XCTAssertTrue(emailRecoveryPage.usernameLabel.waitForExistence(timeout: .regular))
+            XCTAssertTrue(emailRecoveryPage.usernameField.exists)
+            XCTAssertTrue(emailRecoveryPage.continueButton.exists)
+            
+            test("WHEN she inputs an Email that doesn't exist") {
+                if !emailRecoveryPage.usernameField.isFocused {
+                    emailRecoveryPage.usernameField.tap()
+                }
+                
+                emailRecoveryPage.usernameField.typeText(incorrectUsername)
+            }
+            
+            test("AND she submits the form") {
+                emailRecoveryPage.continueButton.tap()
+            }
+        }
+        
+        test("THEN she sees an error message") {
+            XCTAssertTrue(app.staticTexts["There is no account with the Username \(incorrectUsername)."].waitForExistence(timeout: .regular))
+        }
     }
 }

@@ -138,7 +138,7 @@ class IDXRemediationTableViewController: UITableViewController, IDXResponseContr
             }
             
             session.presentationContextProvider = self
-            session.prefersEphemeralWebBrowserSession = false
+            session.prefersEphemeralWebBrowserSession = true
             session.start()
             
             self.webAuthSession = session

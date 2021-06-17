@@ -19,7 +19,14 @@ struct SignInFormPage {
         self.app = app
     }
     
+    private let springboard = XCUIApplication(bundleIdentifier: "com.apple.springboard")
+    
     var initialSignInButton: XCUIElement { app.buttons["Sign In"] }
+    var facebookSignInButton: XCUIElement { app.buttons["Login with Facebook"] }
+    
+    var socialAuthContinueButton: XCUIElement {
+        springboard.buttons["Continue"]
+    }
     
     var usernameLabel: XCUIElement { app.staticTexts["identifier.label"] }
     var usernameField: XCUIElement { app.textFields["identifier.field"] }
@@ -46,7 +53,7 @@ struct SignInFormPage {
             XCTAssertTrue(recoveryButton.exists)
             XCTAssertTrue(signInButton.exists)
             
-            test("WHEN she fills in her correct username") {
+            test("AND she fills in her correct username") {
                 usernameField.tap()
                 usernameField.typeText(username)
             }

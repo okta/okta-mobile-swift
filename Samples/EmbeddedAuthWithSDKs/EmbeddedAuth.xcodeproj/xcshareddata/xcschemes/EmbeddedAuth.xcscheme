@@ -52,6 +52,16 @@
             isEnabled = "YES">
          </EnvironmentVariable>
          <EnvironmentVariable
+            key = "SOCIAL_AUTH_USERNAME"
+            value = "$(SOCIAL_AUTH_USERNAME)"
+            isEnabled = "YES">
+         </EnvironmentVariable>
+         <EnvironmentVariable
+            key = "SOCIAL_AUTH_PASSWORD"
+            value = "$(SOCIAL_AUTH_PASSWORD)"
+            isEnabled = "YES">
+         </EnvironmentVariable>
+         <EnvironmentVariable
             key = "OKTA_DOMAIN"
             value = "$(OKTA_DOMAIN)"
             isEnabled = "YES">
