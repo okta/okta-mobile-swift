@@ -62,12 +62,14 @@ Once you initialize an `IDXClient`, you can call methods to make requests to the
 
 ```swift
 let config = IDXClient.Configuration(
-    issuer: "<#issuer#>", // e.g. https://foo.okta.com/oauth2/default, https://foo.okta.com/oauth2/ausar5vgt5TSDsfcJ0h7
+    issuer: "https:///<#oktaDomain#>/oauth2/default", // e.g. https://foo.okta.com/oauth2/default, https://foo.okta.com/oauth2/ausar5vgt5TSDsfcJ0h7
     clientId: "<#clientId#>",
     clientSecret: nil, // Optional, only required for confidential clients.
     scopes: ["openid", "email", "offline_access", "<#otherScopes#>"],
     redirectUri: "<#redirectUri#>") // Must match the redirect uri in client app settings/console
 ```
+
+> **Note:** While your issuer URL may vary for advanced configurations, for most uses it will be your Okta Domain, followed by `/oauth2/default`.
 
 ### Create the Client
 
