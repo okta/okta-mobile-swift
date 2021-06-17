@@ -1,20 +1,20 @@
 # Embedded Auth with SDKs
 
 ## Introduction
-> :grey_exclamation: The use of this Sample uses an SDK that requires usage of the Okta Identity Engine. 
-This functionality is in general availability but is being gradually rolled out to customers. If you want
-to request to gain access to the Okta Identity Engine, please reach out to your account manager. If you 
+> :grey_exclamation: This Sample uses an SDK that requires usage of the Okta Identity Engine. 
+This functionality is in [General Availability](https://developer.okta.com/docs/reference/releases-at-okta/#general-availability-ga) but is being gradually rolled out to customers. If you want to gain access to the Okta Identity Engine, please reach out to your account manager. If you 
 do not have an account manager, please reach out to oie@okta.com for more information.
 
 This Sample Application will show you the best practices for integrating Authentication into your app
 using [Okta's Identity Engine](https://developer.okta.com/docs/concepts/ie-intro/). Specifically, this 
-application will cover some basic needed use cases to get you up and running quickly with Okta.
-These Examples are:
+application will cover some basic use cases to get you up and running quickly with Okta.
+These examples are:
 1. Sign In
 2. Sign Out
 3. Sign Up
 4. Sign In/Sign Up with Social Identity Providers
 5. Sign In with Multifactor Authentication using Email or Phone
+6. Password reset using Email
 
 ## Installation & Running The App
 
