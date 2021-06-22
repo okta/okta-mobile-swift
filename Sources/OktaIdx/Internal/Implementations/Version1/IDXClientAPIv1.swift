@@ -220,6 +220,46 @@ extension IDXClient.APIVersion1: IDXClientAPIImpl {
         }
     }
     
+    func refresh(token: IDXClient.Token,
+                 completion: @escaping(_ token: IDXClient.Token?, _ error: Error?) -> Void)
+    {
+        guard let url = token.configuration.issuerUrl(with: "v1/token") else {
+            completion(nil, IDXClientError.invalidClient)
+            return
+        }
+        
+        guard let refreshToken = token.refreshToken else {
+            completion(nil, IDXClientError.missingRefreshToken)
+            return
+        }
+        
+        var parameters = [
+            "grant_type": "refresh_token",
+            "scope": configuration.scopes.joined(separator: " "),
+            "redirect_uri": configuration.redirectUri,
+            "client_id": configuration.clientId,
+            "refresh_token": refreshToken,
+            "authorization": token.accessToken
+        ]
+        
+        if let clientSecret = configuration.clientSecret {
+            parameters["client_secret"] = clientSecret
+        }
+        
+        let request = TokenRequest(method: "POST",
+                                   href: url,
+                                   accepts: .formEncoded,
+                                   parameters: parameters)
+        request.send(to: session,
+                     using: configuration) { (response, error) in
+            guard let response = response else {
+                completion(nil, error)
+                return
+            }
+            completion(IDXClient.Token(v1: response, configuration: self.configuration), nil)
+        }
+    }
+
     private func send(_ request: IDXClient.APIVersion1.TokenRequest, _ completion: @escaping (IDXClient.Token?, Error?) -> Void) {
         request.send(to: session, using: configuration) { (response, error) in
             guard error == nil else {

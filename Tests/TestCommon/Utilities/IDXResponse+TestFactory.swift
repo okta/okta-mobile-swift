@@ -42,10 +42,10 @@ extension IDXClient.Response {
              intent: IDXClient.Response.Intent = .login,
              with options: [Option])
         {
-            var authenticators = [IDXClient.Authenticator]()
+            let authenticators = [IDXClient.Authenticator]()
             var remediations = [IDXClient.Remediation]()
             var successRemediation: IDXClient.Remediation?
-            var messages = [IDXClient.Message]()
+            let messages = [IDXClient.Message]()
             
             for option in options {
                 switch option {
@@ -64,7 +64,7 @@ extension IDXClient.Response {
                                                                    href: URL(string: "https://example.com/idp/idx/identify")!,
                                                                    accepts: "application/ion+json; okta-version=1.0.0",
                                                                    form: IDXClient.Remediation.Form([ .identifier, .rememberMe, .stateHandle ])))
-                case .challengeAuthenticator(state: let state):
+                case .challengeAuthenticator(state: _):
                     remediations.append(IDXClient.Remediation.Test(client: client,
                                                                    name: "challenge-authenticator",
                                                                    method: "POST",
@@ -108,7 +108,7 @@ extension IDXClient.Response {
                                                                               secret: false)
                                                                     ])!)
                     
-                case .selectAuthenticatorAuthenticate(authenticators: let authenticators): break
+                case .selectAuthenticatorAuthenticate(authenticators: _): break
                     
                 case .skip:
                     remediations.append(IDXClient.Remediation.Test(client: client,

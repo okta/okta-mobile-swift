@@ -55,6 +55,8 @@ protocol IDXClientAPIImpl: class {
     func revoke(token: String,
                 type: String,
                 completion: @escaping(_ successful: Bool, _ error: Error?) -> Void)
+    func refresh(token: IDXClient.Token,
+                 completion: @escaping(_ token: IDXClient.Token?, _ error: Error?) -> Void)
 }
 
 /// Protocol used to represent IDX API requests, and their expected response types.

@@ -154,4 +154,13 @@ class IDXClientAPIv1Mock: MockBase, IDXClientAPIImpl {
         let result = self.response(for: #function)
         completion(result?["success"] as? Bool ?? true, result?["error"] as? Error)
     }
+    
+    func refresh(token: IDXClient.Token, completion: @escaping (IDXClient.Token?, Error?) -> Void) {
+        recordedCalls.append(RecordedCall(function: #function,
+                                          arguments: [
+                                            "token": token as Any
+                                          ]))
+        let result = self.response(for: #function)
+        completion(result?["token"] as? IDXClient.Token, result?["error"] as? Error)
+    }
 }

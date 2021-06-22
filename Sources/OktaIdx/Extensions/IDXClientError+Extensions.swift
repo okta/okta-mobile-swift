@@ -34,6 +34,7 @@ extension IDXClientError: Equatable {
         case (.unknownRemediationOption(name: let lhsName), .unknownRemediationOption(name: let rhsName)):
             return lhsName == rhsName
         case (.successResponseMissing, .successResponseMissing): return true
+        case (.missingRefreshToken, .missingRefreshToken): return true
         default:
             return false
         }
@@ -84,6 +85,9 @@ extension IDXClientError: LocalizedError {
         case .successResponseMissing:
             return NSLocalizedString("Success response is missing or unavailable.",
                                      comment: "Error message thrown when a success response is not yet ready.")
+        case .missingRefreshToken:
+            return NSLocalizedString("Cannot perform a refresh when no refresh token is available.",
+                                     comment: "Cannot perform a refresh when no refresh token is available.")
         }
     }
 }
@@ -108,6 +112,7 @@ extension IDXClientError: CustomNSError {
         case .unknownRemediationOption(name: _): return 12
         case .successResponseMissing: return 13
         case .internalError(message: _): return 14
+        case .missingRefreshToken: return 15
         }
     }
 
@@ -118,6 +123,7 @@ extension IDXClientError: CustomNSError {
         case .invalidHTTPResponse: fallthrough
         case .invalidResponseData: fallthrough
         case .invalidRequestData: fallthrough
+        case .missingRefreshToken: fallthrough
         case .successResponseMissing:
             return [:]
         case .serverError(message: let message, localizationKey: let localizationKey, type: let type):

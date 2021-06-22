@@ -164,4 +164,5 @@ public enum IDXClientError: Error {
     case missingRequiredParameter(name: String)
     case unknownRemediationOption(name: String)
     case successResponseMissing
+    case missingRefreshToken
 }

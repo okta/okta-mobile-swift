@@ -15,7 +15,7 @@ import XCTest
 
 class IDXFormValueTests: XCTestCase {
     func testProtocolConformance() throws {
-        let field = IDXClient.Remediation.Form.Field(name: "foo",
+        _ = IDXClient.Remediation.Form.Field(name: "foo",
                                                      value: "StateHandle" as AnyObject,
                                                      visible: true,
                                                      mutable: true,

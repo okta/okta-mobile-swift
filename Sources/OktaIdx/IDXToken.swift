@@ -80,6 +80,23 @@ extension IDXClient {
             let api = IDXClient.Version.latest.clientImplementation(with: configuration)
             revoke(token: token, type: type, api: api, completion: completion)
         }
+        
+        /// Refreshes the token.
+        ///
+        /// If no refresh token is available, or the tokens have been revoked, an error will be returned.
+        ///
+        /// > *Note:* Depending on organization or policy settings, the values contained within the token may or may not differ once the token is refreshed. Therefore, it may be necessary to save the newly-refeshed object for use in future requests.
+        /// - Parameters:
+        ///   - token: The new token object if the refresh was successful.
+        ///   - error: An error object if the refresh was unsuccessful.
+        ///   - completion: Completion handler for when the token is revoked.
+        @objc public func refresh(completion: @escaping(_ token: Token?, _ error: Error?) -> Void)
+        {
+            let api = IDXClient.Version.latest.clientImplementation(with: configuration)
+            api.refresh(token: self) { (token, error) in
+                completion(token, error)
+            }
+        }
 
         static func revoke(token: String,
                            type: Token.RevokeType,

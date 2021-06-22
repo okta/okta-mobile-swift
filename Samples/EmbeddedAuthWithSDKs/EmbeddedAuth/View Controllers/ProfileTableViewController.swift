@@ -15,12 +15,12 @@ import OktaIdx
 
 class ProfileTableViewController: UITableViewController {
     enum Section: Int {
-        case profile = 0, details, signOut, count
+        case profile = 0, details, actions, count
     }
     
     struct Row {
         enum Kind: String {
-            case destructive, disclosure, leftDetail, rightDetail
+            case destructive, action, disclosure, leftDetail, rightDetail
         }
         
         let kind: Kind
@@ -87,14 +87,23 @@ class ProfileTableViewController: UITableViewController {
                 .init(kind: .rightDetail, id: "username", title: "Username", detail: user.info.preferredUsername),
                 .init(kind: .rightDetail, id: "userId", title: "User ID", detail: user.info.sub),
                 .init(kind: .rightDetail, id: "createdAt", title: "Created at", detail: dateFormatter.string(from: user.info.updatedAt)),
-                .init(kind: .disclosure, id: "details", title: "Token details")
+                .init(kind: .disclosure, id: "details", title: "Token details"),
+                .init(kind: .action, id: "refresh", title: "Refresh")
             ],
-            .signOut: [
+            .actions: [
                 .init(kind: .destructive, id: "signout", title: "Sign Out")
             ]
         ]
 
         tableView.reloadData()
+    }
+    
+    func show(error: Error) {
+        DispatchQueue.main.async {
+            let alert = UIAlertController(title: nil, message: error.localizedDescription, preferredStyle: .alert)
+            alert.addAction(.init(title: "OK", style: .default))
+            self.show(alert, sender: nil)
+        }
     }
     
     func signout() {
@@ -121,6 +130,17 @@ class ProfileTableViewController: UITableViewController {
         present(alert, animated: true)
     }
 
+    func refresh() {
+        guard let user = UserManager.shared.current else { return }
+        user.token.refresh { (token, error) in
+            if let token = token {
+                UserManager.shared.current = User(token: token, info: user.info)
+            } else if let error = error {
+                self.show(error: error)
+            }
+        }
+    }
+    
     // MARK: - Table view data source
 
     override func numberOfSections(in tableView: UITableView) -> Int {
@@ -154,6 +174,9 @@ class ProfileTableViewController: UITableViewController {
         case "signout":
             signout()
 
+        case "refresh":
+            refresh()
+            
         case "details":
             performSegue(withIdentifier: "TokenDetail", sender: tableView)
 
