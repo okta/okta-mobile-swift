@@ -592,4 +592,19 @@ class IDXClientV1ResponseTests: XCTestCase {
             XCTAssertEqual(publicObj?.idpName, "Facebook IdP")
         }
     }
+    
+    func testMultipleRelatedAuthenticators() throws {
+        let obj = try decode(type: API.Response.self,
+                             Bundle.testResource(fileName: "multiple-select-authenticator-authenticate"))
+        let publicObj = try IDXClient.Response(client: clientMock, v1: obj)
+        let remediation = try XCTUnwrap(publicObj.remediations[.selectAuthenticatorAuthenticate])
+        let firstOption = try XCTUnwrap(remediation["authenticator"]?.options?[0])
+        let secondOption = try XCTUnwrap(remediation["authenticator"]?.options?[1])
+        
+        let firstAuthenticator = try XCTUnwrap(firstOption.authenticator as? IDXClient.Authenticator.Email)
+        let secondAuthenticator = try XCTUnwrap(secondOption.authenticator as? IDXClient.Authenticator.Email)
+        XCTAssertNotEqual(firstAuthenticator, secondAuthenticator)
+        XCTAssertEqual(firstAuthenticator.profile?["email"], "t***l@mailinator.com")
+        XCTAssertEqual(secondAuthenticator.profile?["email"], "e***t@okta.com")
+    }
 }

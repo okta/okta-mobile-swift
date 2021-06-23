@@ -40,6 +40,20 @@ extension XCTestCase {
         return json.data(using: .utf8)!
     }
     
+    func data(for file: URL) throws -> Data {
+        return try Data(contentsOf: file)
+    }
+    
+    func decode<T>(type: T.Type, _ file: URL) throws -> T where T : Decodable {
+        let json = String(data: try data(for: file), encoding: .utf8)
+        return try decode(type: type, json!)
+    }
+
+    func decode<T>(type: T.Type, _ file: URL, _ test: ((T) throws -> Void)) throws where T : Decodable {
+        let json = String(data: try data(for: file), encoding: .utf8)
+        try test(try decode(type: type, json!))
+    }
+
     func decode<T>(type: T.Type, _ json: String) throws -> T where T : Decodable {
         let jsonData = data(for: json)
         return try JSONDecoder.idxResponseDecoder.decode(T.self, from: jsonData)

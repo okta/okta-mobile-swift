@@ -154,9 +154,10 @@ extension IDXClient.AuthenticatorCollection {
         let authenticatorMapping: [String:[V1.Response.AuthenticatorMapping]] = object
             .allAuthenticators()
             .reduce(into: [:]) { (result, mapping) in
-                var collection: [V1.Response.AuthenticatorMapping] = result[mapping.authenticator.type] ?? []
+                guard let authenticatorId = mapping.authenticator.id else { return }
+                var collection: [V1.Response.AuthenticatorMapping] = result[authenticatorId] ?? []
                 collection.append(mapping)
-                result[mapping.authenticator.type] = collection
+                result[authenticatorId] = collection
             }
         
         let authenticators: [IDXClient.Authenticator] = try authenticatorMapping
