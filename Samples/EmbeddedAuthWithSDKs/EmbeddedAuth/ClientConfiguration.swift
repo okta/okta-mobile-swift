@@ -24,6 +24,43 @@ struct ClientConfiguration {
     let scopes: String
     let shouldSave: Bool
     
+    init(clientId: String, issuer: String, redirectUri: String, scopes: String, shouldSave: Bool) throws {
+        guard let issuerUrl = URL(string: issuer) else {
+            throw ConfigurationError.invalidUrl(name: "issuer")
+        }
+        
+        guard issuerUrl.path.hasPrefix("/oauth2") else {
+            throw ConfigurationError.issuerMissingPath
+        }
+        
+        guard clientId.count > 0 else {
+            throw ConfigurationError.missingValue(name: "clientId")
+        }
+        
+        guard URL(string: redirectUri) != nil else {
+            throw ConfigurationError.invalidUrl(name: "redirectUri")
+        }
+
+        let scopeArray = scopes.components(separatedBy: " ")
+        guard scopes.count > 0,
+              scopeArray.count > 0
+        else {
+            throw ConfigurationError.missingValue(name: "scopes")
+        }
+        
+        guard scopeArray.contains("openid"),
+              scopeArray.contains("profile")
+        else {
+            throw ConfigurationError.missingRecommendedScopes
+        }
+        
+        self.issuer = issuer
+        self.clientId = clientId
+        self.scopes = scopes
+        self.redirectUri = redirectUri
+        self.shouldSave = shouldSave
+    }
+    
     static var launchConfiguration: ClientConfiguration? {
         let arguments = [
             "--issuer", "-i",
@@ -64,15 +101,15 @@ struct ClientConfiguration {
             }
             key = nil
         }
-
+        
         guard issuer != nil,
               clientId != nil,
               redirectUri != nil else { return nil }
-        return ClientConfiguration(clientId: clientId!,
-                                   issuer: issuer!,
-                                   redirectUri: redirectUri!,
-                                   scopes: scopes,
-                                   shouldSave: false)
+        return try? ClientConfiguration(clientId: clientId!,
+                                        issuer: issuer!,
+                                        redirectUri: redirectUri!,
+                                        scopes: scopes,
+                                        shouldSave: false)
     }
     
     static var plistConfiguration: ClientConfiguration? {
@@ -89,12 +126,12 @@ struct ClientConfiguration {
         else {
             return nil
         }
-
-        return ClientConfiguration(clientId: clientId,
-                                   issuer: issuer,
-                                   redirectUri: redirectUri,
-                                   scopes: scopes,
-                                   shouldSave: false)
+        
+        return try? ClientConfiguration(clientId: clientId,
+                                        issuer: issuer,
+                                        redirectUri: redirectUri,
+                                        scopes: scopes,
+                                        shouldSave: false)
     }
     
     static var userDefaults: ClientConfiguration? {
@@ -112,11 +149,11 @@ struct ClientConfiguration {
             return nil
         }
         
-        return ClientConfiguration(clientId: clientId,
-                                   issuer: issuer,
-                                   redirectUri: redirectUri,
-                                   scopes: scopes,
-                                   shouldSave: false)
+        return try? ClientConfiguration(clientId: clientId,
+                                        issuer: issuer,
+                                        redirectUri: redirectUri,
+                                        scopes: scopes,
+                                        shouldSave: false)
     }
     
     static var active: ClientConfiguration? {
@@ -134,5 +171,25 @@ struct ClientConfiguration {
         defaults.synchronize()
         
         NotificationCenter.default.post(name: .configurationChanged, object: self.idxConfiguration)
+    }
+    
+    enum ConfigurationError: Error, LocalizedError {
+        case invalidUrl(name: String)
+        case missingValue(name: String)
+        case missingRecommendedScopes
+        case issuerMissingPath
+        
+        var errorDescription: String? {
+            switch self {
+            case .invalidUrl(name: let name):
+                return "Invalid URL \(name)"
+            case .missingValue(name: let name):
+                return "Missing required value \(name)"
+            case .missingRecommendedScopes:
+                return "Missing recommended scopes \"openid\" and \"profile\".\n\nYou may want to include \"offline_access\" to support refresh tokens."
+            case .issuerMissingPath:
+                return "The issuer URL should include an OAuth2 path, such as \"/oauth2/default\""
+            }
+        }
     }
 }

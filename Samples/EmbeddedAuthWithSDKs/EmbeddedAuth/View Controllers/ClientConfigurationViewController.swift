@@ -65,13 +65,21 @@ class ClientConfigurationViewController: UIViewController {
             return
         }
 
-        configuration = ClientConfiguration(clientId: clientId,
-                                            issuer: issuerUrl,
-                                            redirectUri: redirectUri,
-                                            scopes: scopes,
-                                            shouldSave: true)
-        configuration?.save()
-        dismiss(animated: true)
+        do {
+            configuration = try ClientConfiguration(clientId: clientId,
+                                                    issuer: issuerUrl,
+                                                    redirectUri: redirectUri,
+                                                    scopes: scopes,
+                                                    shouldSave: true)
+            configuration?.save()
+            dismiss(animated: true)
+        } catch {
+            let alert = UIAlertController(title: "Configuration error",
+                                          message: error.localizedDescription,
+                                          preferredStyle: .alert)
+            alert.addAction(.init(title: "OK", style: .default))
+            present(alert, animated: true)
+        }
     }
     
     @objc func backgroundTapped() {
