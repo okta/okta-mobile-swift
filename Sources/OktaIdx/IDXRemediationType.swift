@@ -18,6 +18,7 @@ extension IDXClient.Remediation {
     public enum RemediationType: Int {
         case unknown
         case identify
+        case identifyRecovery
         case selectIdentify
         case selectEnrollProfile
         case cancel

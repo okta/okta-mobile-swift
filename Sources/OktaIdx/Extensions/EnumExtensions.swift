@@ -50,6 +50,7 @@ extension IDXClient.Remediation.RemediationType {
     internal init(string value: String) {
         switch value {
         case "identify":                          self = .identify
+        case "identify-recovery":                 self = .identifyRecovery
         case "select-identify":                   self = .selectIdentify
         case "select-enroll-profile":             self = .selectEnrollProfile
         case "cancel":                            self = .cancel

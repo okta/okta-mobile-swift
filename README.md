@@ -30,7 +30,7 @@ The latest release can always be found on the [releases page][github-releases].
 
 ## Need help?
  
-If you run into problems using the SDK, you can
+If you run into problems using the SDK, you can:
  
 * Ask questions on the [Okta Developer Forums][devforum]
 * Post [issues][github-issues] here on GitHub (for code errors)
@@ -51,6 +51,14 @@ dependencies: [
     .Package(url: "https://github.com/okta/okta-idx-swift.git", majorVersion: <majorVersion>, minor: <minor>)
 ]
 ```
+
+## API patterns
+
+The IDX SDK enables dynamic user authentication through a cyclical call-and-response pattern. A user is presented with a series of choices in how they can iteratively step through the authentication process, with each step giving way to additional choices until they can either successfully authenticate or receive actionable error messages.
+
+Each step in the authentication process is represented by an `IDXClient.Response` object, which contains the choices they can take, represented by the `IDXClient.Remediation` class. Remediations provides metadata about its type, a form object tree that describes the fields and values that should be presented to the user, and other related data that helps you, the developer, build a UI capable of prompting the user to take action.
+
+When a remediation is selected and its inputs have been supplied by the user, the `proceed()` method can be called on the remediation to proceed to the next step of the authentication process.  This returns another `IDXClient.Response` object, which causes the process to continue. 
 
 ## Usage
 
@@ -299,6 +307,81 @@ remediation.proceed { (response, error) in
 }
 ```
 
+### Sign up / Register
+
+When you [configure and enable a self-service registration policy](https://developer.okta.com/docs/guides/set-up-self-service-registration/configure-self-service-registration-policy/), the initial response will include a `.selectEnrollProfile` remediation option. Proceeding through this remediation option will return a remediation that will allow the user to supply their name and email address, allowing them to proceed through to creating a new user profile.
+
+```swift
+guard let remediation = response.remediations[.selectEnrollProfile] else {
+    // Handle error
+    return
+}
+
+remediation.proceed { (response, error) in
+    guard let remediation = response?.remediations[.enrollProfile],
+          let firstNameField = remediation.userProfile?.firstName,
+          let lastNameField = remediation.userProfile?.lastName,
+          let emailField = remediation.userProfile?.email
+    else {
+        return
+    }
+    
+    firstNameField.value = "Mary"
+    lastNameField.value = "Smith"
+    emailField.value = "msmith@example.com"
+    remediation.proceed { (response, error) in
+        // Handle response
+    }
+}
+```
+
+After the `.enrollProfile` remediation is successful, you can follow the subsequent remediations to enroll in authenticators to select a password, enroll in factors, and subsequently exchange a successful response for a token.
+
+### Password recovery
+
+Password recovery is supported through the use of the current authenticator's associated actions.  This can be accessed through the use of the response's `authenticators` collection. Not all authenticators have the same set of capabilities, so these additional features are exposed through the use of protocols.  So those authenticators that can support account recovery, you can check to see if provides that capability
+
+```swift
+if let authenticator = response.authenticators.current as? IDXClient.Authenticator & Recoverable,
+   authenticator.canRecover
+{
+    authenticator.recover { (response, error) in
+        // Handle the response
+    }
+}
+```
+
+Alternatively, if you want to explicitly check for the Password authenticator, that class already implements support for the `Recoverable` protocol.
+
+```swift
+if let authenticator = response.authenticators.current as? IDXClient.Authenticator.Password {,
+   authenticator.canRecover
+{
+    authenticator.recover { (response, error) in
+        // Handle response
+    }
+}
+```
+
+Once you perform the `recover` action, the response you receive will contain a `.identifyRecovery` remediation option, which you can use to supply the user's identifier.
+
+```swift
+guard let response = response,
+      let remediation = response.remediations[.identifyRecovery],
+      let identifierField = remediation.identifier
+else {
+    // Handle error
+    return
+}
+
+identifierField.value = "mary.smith@example.com"
+remediation.proceed { (response, error) in
+    // Handle the response
+}
+```
+
+The subsequent responses will prompt the user to respond to different factor challenges to verify their account, and reset their password.
+ 
 ### Email verification polling
 
 When using an email authenticator, the user will receive both a numeric code and a link to verify their identity. If the user clicks this link, it will verify the authenticator and the application can immediately proceed to the next remediation step.
@@ -442,6 +525,55 @@ if response.isLoginSuccessful {
 
         // Use the token
     }
+}
+```
+
+### Error handling
+
+Errors are a natural part of authenticating a user, especially since there may be times where a username is mistyped, a password is forgotten, or the incorrect SMS verification code is provided. These sorts of errors _do not_ result in an `Error` object being returned to method closures. These are considered successful responses, because no error occurred in communicating with Okta, processing client credentials, or formulating `URLRequest`s.  Errors returned to these closures are typically errors in either a) network request handling, or b) incomplete form data supplied to remediations.  The `errorDescription` for these errors should describe the error that occurred.
+
+All other non-fatal errors are reported through the use of the `MessageCollection` object that is associated with a) the Response, b) the Remediation, or c) individual Fields.  These can be considered to be user-facing error messages, and convey what the problem is, and potential steps the user can take to proceed.
+
+#### Message collections
+
+Since errors may occur at various places within the flow and a remediation form, the placement of these messages can vary; for example, if an email address is invalid when signing up for a new user, the error message may be tied to the form field itself. 
+
+For convenience, the root-level message collection (accessible via the `IDXClient.Response.messages` property), aggregates all nested messages into the `allMessages` property.
+
+```swift
+response.messages.allMessages.forEach { message in
+    // Display / process the message
+}
+```
+
+Otherwise, root-level error messages (e.g. messages that are applicable to the entire authentication session, and not constrained to an individual remediation or form field), can be accessed generally through the messages collection.
+
+```swift
+response.messages.forEach { message in
+    // Display the root-level message
+}
+```
+
+If a message is tied to an individual form field, it will exist within the `allMessages` property of the root-level message collection, as well as in the field's `messages` property.
+
+```swift
+guard let identifierField = response?.remediations[.identify]?.identifier else { return }
+if !identifierField.messages.isEmpty {
+    identifierField.messages.forEach { message in
+        // Display the field-level message
+    }
+}
+```
+
+#### Non-recoverable error states
+
+There are circumstances when the authentication session may no longer be valid, and an error state is unrecoverable. For example, if the session has expired.
+
+This situation can be determined when there are no remaining remediations. This essentially means that there are no actions the user can take to remediate their authentication session, and a new session should be created.
+
+```swift
+if response.remediations.isEmpty {
+    // Handle non-recoverable error
 }
 ```
 
