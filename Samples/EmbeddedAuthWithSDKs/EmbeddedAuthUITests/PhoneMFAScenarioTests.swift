@@ -114,7 +114,7 @@ final class PhoneMFAEnrollScenarioTests: ScenarioTestCase {
         }
         
         test("THEN she should see a message") {
-            XCTAssertTrue(app.staticTexts["Unable to initiate factor enrollment: Invalid Phone Number."].waitForExistence(timeout: .regular))
+            XCTAssertTrue(app.staticTexts["Invalid Phone Number."].waitForExistence(timeout: .regular))
         }
     }
 }
