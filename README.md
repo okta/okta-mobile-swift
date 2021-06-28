@@ -528,6 +528,34 @@ if response.isLoginSuccessful {
 }
 ```
 
+### Logout / revoking tokens
+
+Logging a user out is as simple as revoking the token. As a developer, you have the choice to either revoke just the refresh token, or to revoke both access and refresh tokens. There are two ways one can revoke tokens, depending on how you implement the IDX SDK.
+
+#### Revoking a token using an `IDXClient.Token` object
+
+```swift
+token.revoke(type: .accessAndRefreshToken) { (success, error) in
+    if !success {
+        // Handle error
+    }
+}
+```
+
+#### Revoking a token using a plain token string
+
+If you don't store the `IDXClient.Token` object, you can make requests to revoke tokens with the raw string value of the token in question.
+
+```swift
+IDXClient.Token.revoke(token: tokenString,
+                       type: .accessAndRefreshToken,
+                       configuration: configuration) { (success, error) in
+    if !success {
+        // Handle error
+    }
+}
+```
+
 ### Error handling
 
 Errors are a natural part of authenticating a user, especially since there may be times where a username is mistyped, a password is forgotten, or the incorrect SMS verification code is provided. These sorts of errors _do not_ result in an `Error` object being returned to method closures. These are considered successful responses, because no error occurred in communicating with Okta, processing client credentials, or formulating `URLRequest`s.  Errors returned to these closures are typically errors in either a) network request handling, or b) incomplete form data supplied to remediations.  The `errorDescription` for these errors should describe the error that occurred.
