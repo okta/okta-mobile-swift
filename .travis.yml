@@ -1,6 +1,6 @@
 language: swift
 os: osx
-osx_image: xcode12.2
+osx_image: xcode12.5
 before_install:
   - touch TestCredentials.xcconfig
 jobs:
@@ -12,14 +12,8 @@ jobs:
     # Disable UI tests in Travis until OktaSdk is public
     #- stage: Test
     #  name: iOS Automated Tests
-    #  before_script:
-    #  - ./scripts/setup-automation.sh
-    #  - ./scripts/setup-passcode.sh
     #  script:
     #  - xcodebuild -workspace okta-idx.xcworkspace -scheme "OktaIdxExample" -destination "platform=iOS Simulator,OS=latest,name=iPhone 11" clean test
-    #  after_script:
-    #  - ./scripts/teardown-automation.sh
-    #  - ./scripts/teardown-passcode.sh
     - stage: Package Management
       name: Swift Package Manager
       script:
@@ -28,8 +22,7 @@ jobs:
       name: Cocoapods
       script:
       - pod lib lint
-    # Disable Carthage validation until we can get it working
-    #- stage: Package Management
-    #  name: Carthage
-    #  script:
-    #  - carthage build --use-xcframeworks --no-skip-current
+    - stage: Package Management
+      name: Carthage
+      script:
+      - carthage build --use-xcframeworks --no-skip-current

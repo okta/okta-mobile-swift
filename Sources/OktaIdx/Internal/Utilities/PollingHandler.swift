@@ -12,7 +12,7 @@
 
 import Foundation
 
-protocol PollingHandlerDelegate: class {
+protocol PollingHandlerDelegate: AnyObject {
     func pollingRefreshTime(handler: PollingHandler) -> TimeInterval
     func pollingRemediation(handler: PollingHandler) -> IDXClient.Remediation?
 }

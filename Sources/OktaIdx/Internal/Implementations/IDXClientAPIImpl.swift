@@ -13,7 +13,7 @@
 import Foundation
 
 /// Internal protocol that defines the interface for the public IDXClient
-public protocol IDXClientAPI: class {
+public protocol IDXClientAPI: AnyObject {
     var context: IDXClient.Context { get }
     func resume(completion: IDXClient.ResponseResult?)
     func proceed(remediation option: IDXClient.Remediation,
@@ -29,7 +29,7 @@ public protocol IDXClientAPI: class {
 }
 
 /// Internal protocol used to implement the IDXClientAPI protocol.
-protocol IDXClientAPIImpl: class {
+protocol IDXClientAPIImpl: AnyObject {
     /// The client version for this API implementation.
     static var version: IDXClient.Version { get }
     
