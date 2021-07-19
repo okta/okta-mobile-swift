@@ -88,6 +88,9 @@ extension IDXClientError: LocalizedError {
         case .missingRefreshToken:
             return NSLocalizedString("Cannot perform a refresh when no refresh token is available.",
                                      comment: "Cannot perform a refresh when no refresh token is available.")
+        case .missingRelatedObject:
+            return NSLocalizedString("Could not find an object within the response related from another object.",
+                                     comment: "Cannot find a related object in the response.")
         }
     }
 }
@@ -113,6 +116,7 @@ extension IDXClientError: CustomNSError {
         case .successResponseMissing: return 13
         case .internalError(message: _): return 14
         case .missingRefreshToken: return 15
+        case .missingRelatedObject: return 16
         }
     }
 
@@ -124,6 +128,7 @@ extension IDXClientError: CustomNSError {
         case .invalidResponseData: fallthrough
         case .invalidRequestData: fallthrough
         case .missingRefreshToken: fallthrough
+        case .missingRelatedObject: fallthrough
         case .successResponseMissing:
             return [:]
         case .serverError(message: let message, localizationKey: let localizationKey, type: let type):

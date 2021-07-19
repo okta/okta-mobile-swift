@@ -32,7 +32,7 @@ extension IDXClient.Response {
                   app: IDXClient.Application(v1: response.app?.value),
                   user: IDXClient.User(v1: response.user?.value))
 
-        loadRelatedObjects()
+        try loadRelatedObjects()
     }
 }
 
@@ -69,28 +69,33 @@ extension V1.Response {
         let authenticator: V1.Response.Authenticator
     }
 
-    func authenticatorState(for authenticatorId: String?) -> IDXClient.Authenticator.State {
-        guard let authenticatorId = authenticatorId else {
-            return .normal
-        }
+    func authenticatorState(for authenticators: [Authenticator],
+                            in jsonPaths: [String]) -> IDXClient.Authenticator.State
+    {
+        var state = [IDXClient.Authenticator.State]()
+        state = jsonPaths.reduce(into: state, { state, jsonPath in
+            switch jsonPath {
+            case "$.currentAuthenticatorEnrollment":
+                state.append(.enrolling)
+                
+            case "$.currentAuthenticator":
+                state.append(.authenticating)
+                
+            case "$.recoveryAuthenticator":
+                state.append(.recovery)
+                
+            default:
+                if jsonPath.hasPrefix("$.authenticatorEnrollments") {
+                    state.append(.enrolled)
+                }
+                
+                else if jsonPath.hasPrefix("$.authenticators") {
+                    state.append(.normal)
+                }
+            }
+        })
         
-        if currentAuthenticatorEnrollment?.value.id == authenticatorId {
-            return .enrolling
-        }
-        
-        else if currentAuthenticator?.value.id == authenticatorId {
-            return .authenticating
-        }
-        
-        else if authenticatorEnrollments?.value.first(where: { (authenticator) -> Bool in
-            authenticator.id == authenticatorId
-        }) != nil {
-            return .enrolled
-        }
-        
-        else {
-            return .normal
-        }
+        return state.sorted(by: { $0.rawValue > $1.rawValue }).first ?? .normal
     }
     
     func allAuthenticators() -> [AuthenticatorMapping] {
@@ -151,13 +156,14 @@ extension IDXClient.Authenticator.Password.Settings {
 
 extension IDXClient.AuthenticatorCollection {
     convenience init(client: IDXClientAPI, v1 object: V1.Response) throws {
-        let authenticatorMapping: [String:[V1.Response.AuthenticatorMapping]] = object
+        let authenticatorMapping: [String:[V1.Response.AuthenticatorMapping]]
+        authenticatorMapping = object
             .allAuthenticators()
             .reduce(into: [:]) { (result, mapping) in
-                guard let authenticatorId = mapping.authenticator.id else { return }
-                var collection: [V1.Response.AuthenticatorMapping] = result[authenticatorId] ?? []
+                let authenticatorType = "\(mapping.authenticator.type):\(mapping.authenticator.id ?? "-")"
+                var collection: [V1.Response.AuthenticatorMapping] = result[authenticatorType] ?? []
                 collection.append(mapping)
-                result[authenticatorId] = collection
+                result[authenticatorType] = collection
             }
         
         let authenticators: [IDXClient.Authenticator] = try authenticatorMapping
@@ -205,7 +211,7 @@ extension IDXClient.Authenticator {
         }
         
         let type = IDXClient.Authenticator.Kind(string: first.type)
-        let state = response.authenticatorState(for: first.id)
+        let state = response.authenticatorState(for: authenticators, in: jsonPaths)
         let key = authenticators.compactMap { $0.key }.first
         let methods = authenticators.compactMap { $0.methods }.first
         let settings = authenticators.compactMap { $0.settings }.first

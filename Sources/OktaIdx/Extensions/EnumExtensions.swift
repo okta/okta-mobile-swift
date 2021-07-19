@@ -130,3 +130,32 @@ extension IDXClient.Remediation.SocialAuth.Service {
         }
     }
 }
+
+extension IDXClient.Authenticator.Method {
+    public var stringValue: String? {
+        switch self {
+        case .sms:
+            return "sms"
+        case .voice:
+            return "voice"
+        case .email:
+            return "email"
+        case .push:
+            return "push"
+        case .crypto:
+            return "crypto"
+        case .signedNonce:
+            return "signedNonce"
+        case .totp:
+            return "totp"
+        case .password:
+            return "password"
+        case .webAuthN:
+            return "webAuthN"
+        case .securityQuestion:
+            return "securityQuestion"
+        case .unknown:
+            return nil
+        }
+    }
+}

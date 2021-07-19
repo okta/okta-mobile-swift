@@ -21,7 +21,7 @@ protocol IDXContainsRelatableObjects {
 /// Represents the root of a relatable object tree.
 protocol IDXRelatedObjectRoot: IDXContainsRelatableObjects {
     /// Iterates through all nested relatable objects, and asks each one to find and assign their related objects.
-    func loadRelatedObjects()
+    func loadRelatedObjects() throws
 }
 
 /// Indicates this relatable object is one that can directly reference other objects, through jsonPath keys.
@@ -31,11 +31,11 @@ protocol IDXHasRelatedObjects: IDXContainsRelatableObjects {
     
     /// Asks this object to find, and assign, objects given the accumulated JSON keypath mapping
     /// - Parameter jsonMapping: JSON key path mapping table, relating JSON keys to their associated objects.
-    func findRelatedObjects(using jsonMapping: [String: IDXHasRelatedObjects])
+    func findRelatedObjects(using jsonMapping: [String: IDXHasRelatedObjects]) throws
 }
 
 extension IDXRelatedObjectRoot {
-    func loadRelatedObjects() {
+    func loadRelatedObjects() throws {
         let nestedObjects = nestedRelatableObjects()
         let jsonMapping: [String: IDXHasRelatedObjects] = nestedObjects
             .reduce(into: [String:IDXHasRelatedObjects]()) { (result, object) in
@@ -44,8 +44,8 @@ extension IDXRelatedObjectRoot {
                 }
             }
         
-        nestedObjects.forEach { (object) in
-            object.findRelatedObjects(using: jsonMapping)
+        try nestedObjects.forEach { (object) in
+            try object.findRelatedObjects(using: jsonMapping)
         }
     }
 }
@@ -70,7 +70,7 @@ extension IDXClient.RemediationCollection: IDXContainsRelatableObjects {
 }
 
 extension IDXClient.Authenticator: IDXHasRelatedObjects {
-    func findRelatedObjects(using jsonMapping: [String : IDXHasRelatedObjects]) {
+    func findRelatedObjects(using jsonMapping: [String : IDXHasRelatedObjects]) throws {
         return
     }
     
@@ -88,11 +88,15 @@ extension IDXClient.Remediation: IDXHasRelatedObjects {
 
     var jsonPaths: [String] { [] }
     
-    func findRelatedObjects(using jsonMapping: [String: IDXHasRelatedObjects]) {
+    func findRelatedObjects(using jsonMapping: [String: IDXHasRelatedObjects]) throws {
         var authenticatorObjects = relatesTo?.compactMap({ (jsonPath) -> IDXClient.Authenticator? in
             guard let authenticator = jsonMapping[jsonPath] as? IDXClient.Authenticator else { return nil }
             return authenticator
         }) ?? []
+        
+        guard authenticatorObjects.count == relatesTo?.count ?? 0 else {
+            throw IDXClientError.missingRelatedObject
+        }
         
         // Work-around for 
         if let currentAuthenticator = jsonMapping["$.currentAuthenticator"] as? IDXClient.Authenticator,
@@ -124,8 +128,11 @@ extension IDXClient.Remediation.Form.Field: IDXHasRelatedObjects {
 
     var jsonPaths: [String] { [] }
     
-    func findRelatedObjects(using jsonMapping: [String: IDXHasRelatedObjects]) {
+    func findRelatedObjects(using jsonMapping: [String: IDXHasRelatedObjects]) throws {
         guard let relatesTo = relatesTo else { return }
-        authenticator = jsonMapping[relatesTo] as? IDXClient.Authenticator
+        guard let mappedAuthenticator = jsonMapping[relatesTo] as? IDXClient.Authenticator else {
+            throw IDXClientError.missingRelatedObject
+        }
+        authenticator = mappedAuthenticator
     }
 }

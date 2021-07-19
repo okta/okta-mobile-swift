@@ -165,4 +165,5 @@ public enum IDXClientError: Error {
     case unknownRemediationOption(name: String)
     case successResponseMissing
     case missingRefreshToken
+    case missingRelatedObject
 }

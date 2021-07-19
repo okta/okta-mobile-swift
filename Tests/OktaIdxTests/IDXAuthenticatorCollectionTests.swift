@@ -47,4 +47,18 @@ class IDXAuthenticatorCollectionTests: XCTestCase {
         XCTAssertEqual(remediation.authenticators.count, 1)
         XCTAssertEqual(remediation.authenticators.first?.type, .password)
     }
+    
+    func testAuthenticatorEnrollmentWithoutId() throws {
+        let response = try XCTUnwrap(IDXClient.Response.response(client: client,
+                                                                 fileName: "account-recovery"))
+        
+        let remediation = try XCTUnwrap(response.remediations[.selectAuthenticatorAuthenticate])
+        let emailOption = try XCTUnwrap(remediation["authenticator"]?.options?.first)
+        
+        XCTAssertEqual(emailOption.label, "Email")
+        
+        let authenticator = try XCTUnwrap(emailOption.authenticator)
+        XCTAssertEqual(authenticator.type, .email)
+        XCTAssertEqual(authenticator.state, .enrolled)
+    }
 }
