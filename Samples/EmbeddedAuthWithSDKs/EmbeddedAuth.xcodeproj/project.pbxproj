@@ -53,9 +53,6 @@
 		96576C8725ACFC5900B02E3B /* TokenDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96576C8625ACFC5900B02E3B /* TokenDetailViewController.swift */; };
 		965A112F26547EC1006B784F /* A18NProfile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 965A112E26547EC1006B784F /* A18NProfile.swift */; };
 		965A113326547EE9006B784F /* CodeReceiver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 965A113226547EE9006B784F /* CodeReceiver.swift */; };
-		9671EF76269CC7BA00BBE409 /* BasicLogin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9671EF75269CC7BA00BBE409 /* BasicLogin.swift */; };
-		9671EF7A269CF21B00BBE409 /* MultifactorLogin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9671EF79269CF21B00BBE409 /* MultifactorLogin.swift */; };
-		9671EF7E269E8D9D00BBE409 /* SocialLogin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9671EF7D269E8D9D00BBE409 /* SocialLogin.swift */; };
 		96749AF825B8AC3B002849A0 /* ClientConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96749AF725B8AC3B002849A0 /* ClientConfiguration.swift */; };
 		96749B0625B8EAAD002849A0 /* XCTest+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96749B0525B8EAAD002849A0 /* XCTest+Extensions.swift */; };
 		9691E6BF25AF727A000CD02C /* IDXRemediationTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9691E6BE25AF7279000CD02C /* IDXRemediationTableViewController.swift */; };
@@ -410,7 +407,8 @@
 				9671EF79269CF21B00BBE409 /* MultifactorLogin.swift */,
 				9671EF7D269E8D9D00BBE409 /* SocialLogin.swift */,
 			);
-			path = "Signin Samples";
+			name = "Signin Samples";
+			path = "../Signin Samples";
 			sourceTree = "<group>";
 		};
 		96749B0425B8EA9D002849A0 /* Extensions */ = {
@@ -653,14 +651,12 @@
 				96AA247C2656E2A6000649ED /* FooterView.swift in Sources */,
 				96E0A78D260500080002933C /* IDXSeparatorTableViewCell.swift in Sources */,
 				96E0A791260505F30002933C /* IDXTitleTableViewCell.swift in Sources */,
-				9671EF76269CC7BA00BBE409 /* BasicLogin.swift in Sources */,
 				96AA246F2656DD5A000649ED /* IDXClient+Extensions.swift in Sources */,
 				9691E6CE25AF73F0000CD02C /* IDXButtonTableViewCell.swift in Sources */,
 				96576C5025A91EEA00B02E3B /* IDXStartViewController.swift in Sources */,
 				964D5A03265819A900DDBCBB /* ProfileTableViewController.swift in Sources */,
 				96AA246A2656D29F000649ED /* UserManager.swift in Sources */,
 				964F745325A3E5F0003EE300 /* AppDelegate.swift in Sources */,
-				9671EF7A269CF21B00BBE409 /* MultifactorLogin.swift in Sources */,
 				96ADA06725B0F5D5008BF50D /* IDXLabelTableViewCell.swift in Sources */,
 				96ADA06125B0D173008BF50D /* FormRows.swift in Sources */,
 				9691E6D225AF740A000CD02C /* IDXOptionTableViewCell.swift in Sources */,
@@ -669,7 +665,6 @@
 				964F745525A3E5F0003EE300 /* SceneDelegate.swift in Sources */,
 				9691E6BF25AF727A000CD02C /* IDXRemediationTableViewController.swift in Sources */,
 				96576C6225ACC53200B02E3B /* IDXGetTokenViewController.swift in Sources */,
-				9671EF7E269E8D9D00BBE409 /* SocialLogin.swift in Sources */,
 				9691E6C425AF73C4000CD02C /* IDXTextTableViewCell.swift in Sources */,
 				96576C8725ACFC5900B02E3B /* TokenDetailViewController.swift in Sources */,
 				96576C6F25ACDD8A00B02E3B /* IDXSigninController.swift in Sources */,
