@@ -25,5 +25,19 @@ extension IDXClient {
          
             super.init()
         }
+        
+        public override var description: String {
+            let logger = DebugDescription(self)
+            let components = [
+                logger.address(),
+                "\(#keyPath(id)): \(id)"
+            ]
+
+            return logger.brace(components.joined(separator: "; "))
+        }
+        
+        public override var debugDescription: String {
+            description
+        }
     }
 }

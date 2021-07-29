@@ -122,6 +122,26 @@ public final class IDXClient: NSObject {
 
         self.api.client = self
     }
+    
+    public override var description: String {
+        let logger = DebugDescription(self)
+        let components = [logger.address()]
+        
+        return logger.brace(components.joined(separator: "; "))
+    }
+    
+    public override var debugDescription: String {
+        let components = [
+            context.debugDescription,
+            api.configuration.debugDescription
+        ]
+        
+        return """
+        \(description) {
+        \(DebugDescription(self).format(components, indent: 4))
+        }
+        """
+    }
 }
 
 /// Delegate protocol that can be used to receive updates from the IDXClient through the process of a user's authentication.

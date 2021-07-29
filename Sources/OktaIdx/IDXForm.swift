@@ -49,5 +49,24 @@ extension IDXClient.Remediation {
             
             super.init()
         }
+        
+        public override var description: String {
+            let logger = DebugDescription(self)
+            let components = [logger.address()]
+
+            return logger.brace(components.joined(separator: "; "))
+        }
+        
+        public override var debugDescription: String {
+            let components = [
+                fields.map(\.debugDescription).joined(separator: ";\n")
+            ]
+            
+            return """
+            \(description) {
+            \(DebugDescription(self).format(components, indent: 4))
+            }
+            """
+        }
     }
 }

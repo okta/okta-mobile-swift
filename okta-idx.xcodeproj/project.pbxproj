@@ -7,7 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		92598AB9269C59B50086C362 /* DebugDescription.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92598AB8269C59B50086C362 /* DebugDescription.swift */; };
 		9291B40A25E90FC500450BBE /* IDXRedirectTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9291B40925E90FC500450BBE /* IDXRedirectTests.swift */; };
+		92C9429B26B19A81001FE606 /* DebugDescriptionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92C9429A26B19A81001FE606 /* DebugDescriptionTests.swift */; };
 		960CD20825D5B02600523192 /* UserAgent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 960CD20725D5B02600523192 /* UserAgent.swift */; };
 		960CD20E25D5B77A00523192 /* UserAgentTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 960CD20D25D5B77A00523192 /* UserAgentTests.swift */; };
 		960CD21225D5BC2D00523192 /* URLSessionAuditTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 960CD21125D5BC2D00523192 /* URLSessionAuditTests.swift */; };
@@ -111,7 +113,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		92598AB8269C59B50086C362 /* DebugDescription.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DebugDescription.swift; sourceTree = "<group>"; };
 		9291B40925E90FC500450BBE /* IDXRedirectTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IDXRedirectTests.swift; sourceTree = "<group>"; };
+		92C9429A26B19A81001FE606 /* DebugDescriptionTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DebugDescriptionTests.swift; sourceTree = "<group>"; };
 		960CD20725D5B02600523192 /* UserAgent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserAgent.swift; sourceTree = "<group>"; };
 		960CD20D25D5B77A00523192 /* UserAgentTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserAgentTests.swift; sourceTree = "<group>"; };
 		960CD21125D5BC2D00523192 /* URLSessionAuditTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLSessionAuditTests.swift; sourceTree = "<group>"; };
@@ -290,8 +294,9 @@
 		962ABD4A264074FB0049B0C4 /* Utilities */ = {
 			isa = PBXGroup;
 			children = (
-				962ABD4B264075050049B0C4 /* Weak.swift */,
+				92598AB8269C59B50086C362 /* DebugDescription.swift */,
 				96C6B21626421D8500D75766 /* PollingHandler.swift */,
+				962ABD4B264075050049B0C4 /* Weak.swift */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -327,6 +332,7 @@
 				96C584ED258ACEB200E79975 /* JSONValueTests.swift */,
 				961BE4482584184700DCE8AC /* PKCETests.swift */,
 				964A44B7259A9772002CB250 /* ScenarioTests.swift */,
+				92C9429A26B19A81001FE606 /* DebugDescriptionTests.swift */,
 				966A1E75258BDB1B00864DB7 /* URLSessionProtocolTests.swift */,
 				96C51E7225BA09CB007A2519 /* IDXResponseTypeTests.swift */,
 				96437C1D25CB17E100ED7E11 /* IDXResponseCodableTests.swift */,
@@ -655,6 +661,7 @@
 				962ABD46263CD47C0049B0C4 /* IDXAuthenticator+InternalExtensions.swift in Sources */,
 				964773F42638C6C70059EBC4 /* IDXFormField.swift in Sources */,
 				96F8F1BA258049B000DA2701 /* IDXVersion+InternalExtension.swift in Sources */,
+				92598AB9269C59B50086C362 /* DebugDescription.swift in Sources */,
 				964773E82638C5A10059EBC4 /* IDXRemediationCollection.swift in Sources */,
 				96A21F3E25C1E4F0006C7BBB /* URLSessionAudit.swift in Sources */,
 				962ABD41263CD4420049B0C4 /* IDXResponse+InternalExtensions.swift in Sources */,
@@ -701,6 +708,7 @@
 				9664F83225CC7E3F00F6CB21 /* IDXClientDelegateTests.swift in Sources */,
 				96C51E7325BA09CB007A2519 /* IDXResponseTypeTests.swift in Sources */,
 				967102CA2587F93E00D5D85F /* URLSessionMock.swift in Sources */,
+				92C9429B26B19A81001FE606 /* DebugDescriptionTests.swift in Sources */,
 				9664F82E25CC7C0C00F6CB21 /* IDXClientDelegateRecorder.swift in Sources */,
 				962A81A82674419A003BC5E7 /* IDXFormTests.swift in Sources */,
 			);

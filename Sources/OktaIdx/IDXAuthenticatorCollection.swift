@@ -41,6 +41,25 @@ extension IDXClient {
 
             super.init()
         }
+        
+        public override var description: String {
+            let logger = DebugDescription(self)
+            let components = [logger.address()]
+
+            return logger.brace(components.joined(separator: "; "))
+        }
+        
+        public override var debugDescription: String {
+            let components = [
+                DebugDescription(self).format(allAuthenticators.map(\.debugDescription), indent: .zero)
+            ]
+            
+            return """
+            \(description) {
+            \(DebugDescription(self).format(components, indent: 4))
+            }
+            """
+        }
     }
     
     class WeakAuthenticatorCollection: AuthenticatorCollection {

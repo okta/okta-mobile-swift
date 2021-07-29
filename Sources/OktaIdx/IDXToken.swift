@@ -126,5 +126,32 @@ extension IDXClient {
             
             super.init()
         }
+        
+        public override var description: String {
+            let logger = DebugDescription(self)
+            let components = [
+                logger.address(),
+                "\(#keyPath(accessToken)): \(accessToken)",
+                "\(#keyPath(idToken)): \(idToken ?? "-")",
+                "\(#keyPath(refreshToken)): \(refreshToken ?? "-")"
+            ]
+
+            return logger.brace(components.joined(separator: "; "))
+        }
+        
+        public override var debugDescription: String {
+            let components = [
+                "\(#keyPath(expiresIn)): \(expiresIn)",
+                "\(#keyPath(scope)): \(scope)",
+                "\(#keyPath(tokenType)): \(tokenType)",
+                "\(#keyPath(configuration)): \(configuration.debugDescription)",
+            ]
+            
+            return """
+            \(description) {
+            \(DebugDescription(self).format(components, indent: 4))
+            }
+            """
+        }
     }
 }

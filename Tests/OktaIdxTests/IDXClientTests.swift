@@ -36,6 +36,7 @@ class IDXClientTests: XCTestCase {
 
     func testConstructors() {
         let idx = IDXClient(context: context, api: api)
+        
         XCTAssertNotNil(idx)
         XCTAssertEqual(idx.context, context)
     }

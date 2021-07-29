@@ -106,5 +106,33 @@ extension IDXClient {
             
             super.init()
         }
+        
+        public override var description: String {
+            let logger = DebugDescription(self)
+            let components = [
+                logger.address(),
+                "\(#keyPath(intent)): \(intent.rawValue)",
+                "\(#keyPath(isLoginSuccessful)): \(isLoginSuccessful)",
+                "\(#keyPath(expiresAt)): \(expiresAt?.debugDescription ?? "-")",
+            ]
+
+            return logger.brace(components.joined(separator: "; "))
+        }
+        
+        public override var debugDescription: String {
+            let components = [
+                "\(#keyPath(remediations)): \(remediations.debugDescription)",
+                "\(#keyPath(authenticators)): \(authenticators.debugDescription)",
+                "\(#keyPath(app)): \(app?.debugDescription ?? "-")",
+                "\(#keyPath(messages)): \(messages.debugDescription)"
+            ]
+            
+            return """
+            \(description) {
+            \(DebugDescription(self).format(components, indent: 4))
+            }
+            """
+        }
+        
     }
 }

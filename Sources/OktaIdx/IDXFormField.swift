@@ -146,6 +146,36 @@ extension IDXClient.Remediation.Form {
             
             super.init()
         }
+        
+        public override var description: String {
+            let logger = DebugDescription(self)
+            let components = [
+                logger.address(),
+                "\(#keyPath(name)): \(name ?? "-")",
+                "\(#keyPath(label)): \(label ?? "-")",
+                "\(#keyPath(type)): \(type ?? "-")",
+                "value: \(value ?? "-")"
+            ]
+
+            return logger.brace(components.joined(separator: "; "))
+        }
+        
+        public override var debugDescription: String {
+            let components = [
+                "isVisible: \(isVisible)",
+                "\(#keyPath(isMutable)): \(isMutable)",
+                "\(#keyPath(isRequired)): \(isRequired)",
+                "\(#keyPath(isSecret)): \(isSecret)",
+                "\(#keyPath(options)): \n\(DebugDescription(self).format(options?.map(\.debugDescription) ?? [], indent: 4))",
+                "\(#keyPath(messages)): \(messages.debugDescription)"
+            ]
+            
+            return """
+            \(description) {
+            \(DebugDescription(self).format(components, indent: 4))
+            }
+            """
+        }
     }
     
 }
