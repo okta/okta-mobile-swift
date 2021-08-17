@@ -79,21 +79,21 @@ extension IDXClient.APIVersion1.TokenRequest: IDXClientAPIRequest {
 
     func send(to session: URLSessionProtocol,
               using configuration: IDXClient.Configuration,
-              completion: @escaping (ResponseType?, Error?) -> Void)
+              completion: @escaping (Result<ResponseType, IDXClientError>) -> Void)
     {
         guard let request = urlRequest(using: configuration) else {
-            completion(nil, IDXClientError.cannotCreateRequest)
+            completion(.failure(.cannotCreateRequest))
             return
         }
         
         let task = session.dataTaskWithRequest(with: request) { (data, response, error) in
             guard error == nil else {
-                completion(nil, error)
+                completion(.failure(.internalError(error!)))
                 return
             }
             
             guard let data = data else {
-                completion(nil, IDXClientError.invalidResponseData)
+                completion(.failure(.invalidResponseData))
                 return
             }
             
@@ -104,11 +104,11 @@ extension IDXClient.APIVersion1.TokenRequest: IDXClientAPIRequest {
             do {
                 result = try decoder.decode(ResponseType.self, from: data)
             } catch {
-                completion(nil, error)
+                completion(.failure(.internalError(error)))
                 return
             }
 
-            completion(result, nil)
+            completion(.success(result))
         }
         task.resume()
     }

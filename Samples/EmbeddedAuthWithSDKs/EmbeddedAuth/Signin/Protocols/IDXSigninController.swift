@@ -13,7 +13,7 @@
 import UIKit
 import OktaIdx
 
-protocol IDXSigninController: class {
+protocol IDXSigninController: AnyObject {
     var signin: Signin? { get set }
     func showError(_ error: Error, recoverable: Bool)
 }

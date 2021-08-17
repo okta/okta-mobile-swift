@@ -117,7 +117,7 @@ extension JSONValue: Codable {
         case let .array(value):
             try container.encode(value)
         case .object(_):
-            throw IDXClientError.internalError(message: "Unable to encode object as JSON")
+            throw IDXClientError.internalMessage("Unable to encode object as JSON")
         case .null:
             try container.encodeNil()
         }

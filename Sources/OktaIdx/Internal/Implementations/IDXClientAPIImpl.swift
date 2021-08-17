@@ -39,24 +39,24 @@ protocol IDXClientAPIImpl: AnyObject {
     /// The upstream client to communicate critical events to
     var client: IDXClientAPI? { get set }
     
-    func start(state: String?, completion: @escaping (IDXClient.Context?, Error?) -> Void)
-    func resume(completion: @escaping (_ reponse: IDXClient.Response?, _ error: Error?) -> Void)
+    func start(state: String?, completion: @escaping (Result<IDXClient.Context, IDXClientError>) -> Void)
+    func resume(completion: @escaping (Result<IDXClient.Response, IDXClientError>) -> Void)
     func proceed(remediation option: IDXClient.Remediation,
-                 completion: @escaping (_ response: IDXClient.Response?, _ error: Swift.Error?) -> Void)
+                 completion: @escaping (Result<IDXClient.Response, IDXClientError>) -> Void)
     
     func redirectResult(for url: URL) -> IDXClient.RedirectResult
     
     func exchangeCode(redirect url: URL,
-                      completion: @escaping (_ token: IDXClient.Token?, _ error: Swift.Error?) -> Void)
+                      completion: @escaping (Result<IDXClient.Token, IDXClientError>) -> Void)
     
     func exchangeCode(using remediation: IDXClient.Remediation,
-                      completion: @escaping (_ token: IDXClient.Token?, _ error: Swift.Error?) -> Void)
+                      completion: @escaping (Result<IDXClient.Token, IDXClientError>) -> Void)
 
     func revoke(token: String,
                 type: String,
-                completion: @escaping(_ successful: Bool, _ error: Error?) -> Void)
+                completion: @escaping(Result<Void, IDXClientError>) -> Void)
     func refresh(token: IDXClient.Token,
-                 completion: @escaping(_ token: IDXClient.Token?, _ error: Error?) -> Void)
+                 completion: @escaping(Result<IDXClient.Token, IDXClientError>) -> Void)
 }
 
 /// Protocol used to represent IDX API requests, and their expected response types.
@@ -73,7 +73,7 @@ protocol IDXClientAPIRequest {
     ///   - completion: Completion handler to receive the response.
     func send(to session: URLSessionProtocol,
               using configuration: IDXClient.Configuration,
-              completion: @escaping (ResponseType?, Error?) -> Void)
+              completion: @escaping (Result<ResponseType, IDXClientError>) -> Void)
 }
 
 protocol IDXResponseJSONPath {

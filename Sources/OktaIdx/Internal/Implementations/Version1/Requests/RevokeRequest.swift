@@ -13,7 +13,7 @@
 import Foundation
 
 extension IDXClient.APIVersion1.RevokeRequest: IDXClientAPIRequest {
-    typealias ResponseType = Bool
+    typealias ResponseType = Void
     
     func urlRequest(using configuration: IDXClient.Configuration) -> URLRequest? {
         let parameters = [
@@ -42,31 +42,36 @@ extension IDXClient.APIVersion1.RevokeRequest: IDXClientAPIRequest {
 
     func send(to session: URLSessionProtocol,
               using configuration: IDXClient.Configuration,
-              completion: @escaping (ResponseType?, Error?) -> Void)
+              completion: @escaping (Result<ResponseType, IDXClientError>) -> Void)
     {
         guard let request = urlRequest(using: configuration) else {
-            completion(false, IDXClientError.cannotCreateRequest)
+            completion(.failure(.cannotCreateRequest))
             return
         }
         
         let task = session.dataTaskWithRequest(with: request) { (data, response, error) in
             guard error == nil else {
-                completion(false, error)
+                completion(.failure(.internalError(error!)))
                 return
             }
             
             guard let data = data else {
-                completion(false, IDXClientError.invalidResponseData)
+                completion(.failure(.invalidResponseData))
                 return
             }
             
             guard response?.statusCode == 200 else {
-                let oauthError = try? JSONDecoder().decode(IDXClient.APIVersion1.OAuth2Error.self, from: data)
-                completion(false, oauthError ?? error)
+                if let oauthError = try? JSONDecoder().decode(IDXClient.APIVersion1.OAuth2Error.self, from: data) {
+                    completion(.failure(.oauthError(summary: oauthError.errorSummary,
+                                                    code: oauthError.errorCode,
+                                                    errorId: oauthError.errorId)))
+                } else {
+                    completion(.failure(.invalidHTTPResponse))
+                }
                 return
             }
             
-            completion(true, nil)
+            completion(.success(()))
         }
         task.resume()
     }

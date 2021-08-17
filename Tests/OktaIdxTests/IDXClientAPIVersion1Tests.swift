@@ -41,10 +41,13 @@ class IDXClientAPIVersion1Tests: XCTestCase {
         try session.expect("https://foo.oktapreview.com/oauth2/default/v1/interact", fileName: "interact-response")
         
         let completion = expectation(description: "Response")
-        api.start(state: nil) { (context, error) in
-            XCTAssertNotNil(context)
-            XCTAssertEqual(context?.interactionHandle, "003Q14X7li")
-            XCTAssertNil(error)
+        api.start(state: nil) { result in
+            if case let Result.success(context) = result {
+                XCTAssertNotNil(context)
+                XCTAssertEqual(context.interactionHandle, "003Q14X7li")
+            } else {
+                XCTFail("Not successful")
+            }
             completion.fulfill()
         }
         wait(for: [completion], timeout: 1)
@@ -56,9 +59,12 @@ class IDXClientAPIVersion1Tests: XCTestCase {
                            statusCode: 400)
         
         let completion = expectation(description: "Response")
-        api.start(state: nil) { (context, error) in
-            XCTAssertNil(context)
-            XCTAssertNotNil(error)
+        api.start(state: nil) { result in
+            if case let Result.failure(error) = result {
+                XCTAssertEqual(error, .invalidResponseData)
+            } else {
+                XCTFail("Received success response when a failure was expected")
+            }
             completion.fulfill()
         }
         wait(for: [completion], timeout: 1)
@@ -70,10 +76,12 @@ class IDXClientAPIVersion1Tests: XCTestCase {
 
         var response: IDXClient.Response!
         let completion = expectation(description: "Response")
-        api.resume { (responseValue, error) in
-            XCTAssertNotNil(responseValue)
-            XCTAssertNil(error)
-            response = responseValue
+        api.resume { result in
+            if case let Result.success(responseValue) = result {
+                response = responseValue
+            } else {
+                XCTFail("Error received when a success was expected")
+            }
             completion.fulfill()
         }
         wait(for: [completion], timeout: 1)
@@ -130,11 +138,12 @@ class IDXClientAPIVersion1Tests: XCTestCase {
                            statusCode: 400)
         
         let completion = expectation(description: "Response")
-        api.resume { (response, error) in
-            XCTAssertNil(response)
-            XCTAssertNotNil(error)
-            XCTAssertTrue(error is IDXClientError)
-            
+        api.resume { result in
+            if case let Result.failure(error) = result {
+                XCTAssertEqual(error, .invalidResponseData)
+            } else {
+                XCTFail("Received success response when a failure was expected")
+            }
             completion.fulfill()
         }
         wait(for: [completion], timeout: 1)

@@ -41,7 +41,7 @@ class PollingHandler {
         guard let refreshTime = delegate?.pollingRefreshTime(handler: self),
               refreshTime > 0
         else {
-            if !completion(nil, IDXClientError.internalError(message: "Missing polling information")) {
+            if !completion(nil, IDXClientError.internalMessage("Missing polling information")) {
                 stopPolling()
             }
             return

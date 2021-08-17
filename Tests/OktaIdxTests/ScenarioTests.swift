@@ -47,16 +47,20 @@ class ScenarioTests: XCTestCase {
         try session.expect("https://example.com/idp/idx/challenge/answer", folderName: "Passcode", fileName: "04-challenge-answer-response")
         try session.expect("https://example.com/oauth2/auszsfkYrgGCTilsV2o4/v1/token", folderName: "Passcode", fileName: "05-token-response")
 
-        IDXClient.start(with: api) { (client, error) in
-            XCTAssertNotNil(client)
-            XCTAssertNil(error)
-            client?.resume { (response, error) in
-                XCTAssertNotNil(response)
-                XCTAssertNil(error)
-                XCTAssertFalse(response!.isLoginSuccessful)
+        IDXClient.start(with: api) { result in
+            guard case let Result.success(client) = result else {
+                XCTFail("Received a failure when a success was expected")
+                return
+            }
+            
+            client.resume { result in
+                guard case let Result.success(response) = result else {
+                    XCTFail("Received a failure when a success was expected")
+                    return
+                }
+                XCTAssertFalse(response.isLoginSuccessful)
                 
-                let remediation = response?.remediations.first
-                XCTAssertNotNil(remediation)
+                let remediation = response.remediations.first
                 XCTAssertEqual(remediation?.name, "identify")
                 XCTAssertEqual(remediation?.form.count, 2)
                 XCTAssertEqual(remediation?.form.allFields.count, 3)
@@ -65,12 +69,15 @@ class ScenarioTests: XCTestCase {
                 XCTAssertEqual(remediation?.form.allFields[2].name, "stateHandle")
                 remediation?.form["identifier"]?.value = "user@example.com"
                 
-                remediation?.proceed { (response, error) in
-                    XCTAssertNotNil(response)
-                    XCTAssertNil(error)
-                    XCTAssertFalse(response?.isLoginSuccessful ?? true)
+                remediation?.proceed { result in
+                    guard case let Result.success(response) = result else {
+                        XCTFail("Received a failure when a success was expected")
+                        return
+                    }
+
+                    XCTAssertFalse(response.isLoginSuccessful)
                     
-                    let remediation = response?.remediations.first
+                    let remediation = response.remediations.first
                     XCTAssertNotNil(remediation)
                     XCTAssertEqual(remediation?.name, "challenge-authenticator")
                     XCTAssertEqual(remediation?.form.count, 1)
@@ -113,15 +120,21 @@ class ScenarioTests: XCTestCase {
         try session.expect("https://example.com/oauth2/auszsfkYrgGCTilsV2o4/v1/token", folderName: "MFA-Email", fileName: "05-challenge-answer-invalid")
         
         // Start, takes us through interact & introspect
-        IDXClient.start(with: api) { (client, error) in
-            XCTAssertNotNil(client)
-            XCTAssertNil(error)
-            client?.resume { (response, error) in
-                XCTAssertNotNil(response)
-                XCTAssertNil(error)
-                XCTAssertFalse(response!.isLoginSuccessful)
+        IDXClient.start(with: api) { result in
+            guard case let Result.success(client) = result else {
+                XCTFail("Received a failure when a success was expected")
+                return
+            }
+            
+            client.resume { result in
+                guard case let Result.success(response) = result else {
+                    XCTFail("Received a failure when a success was expected")
+                    return
+                }
                 
-                let remediation = response?.remediations.first
+                XCTAssertFalse(response.isLoginSuccessful)
+                
+                let remediation = response.remediations.first
                 XCTAssertNotNil(remediation)
                 XCTAssertEqual(remediation?.name, "identify")
                 XCTAssertEqual(remediation?.form.count, 2)
@@ -217,15 +230,21 @@ class ScenarioTests: XCTestCase {
         try session.expect("https://example.com/idp/idx/challenge/answer", folderName: "RestartTransaction", fileName: "05-challenge-answer-response")
         try session.expect("https://example.com/idp/idx/cancel", folderName: "RestartTransaction", fileName: "06-cancel-response")
 
-        IDXClient.start(with: api) { (client, error) in
-            XCTAssertNotNil(client)
-            XCTAssertNil(error)
-            client?.resume { (response, error) in
-                XCTAssertNotNil(response)
-                XCTAssertNil(error)
-                XCTAssertTrue(response?.canCancel ?? false)
+        IDXClient.start(with: api) { result in
+            guard case let Result.success(client) = result else {
+                XCTFail("Received a failure when a success was expected")
+                return
+            }
+
+            client.resume { result in
+                guard case let Result.success(response) = result else {
+                    XCTFail("Received a failure when a success was expected")
+                    return
+                }
+
+                XCTAssertTrue(response.canCancel)
                 
-                let remediation = response?.remediations.first
+                let remediation = response.remediations.first
                 XCTAssertEqual(remediation?.name, "identify")
                 
                 remediation?["identify"]?.value = "user@example.com"
@@ -302,30 +321,38 @@ class ScenarioTests: XCTestCase {
         try session.expect("https://example.com/idp/idx/introspect", folderName: "IdP", fileName: "02-introspect-response")
         try session.expect("https://example.com/oauth2/default/v1/token", folderName: "IdP", fileName: "03-token-response")
 
-        IDXClient.start(with: api) { (client, error) in
-            XCTAssertNotNil(client)
-            XCTAssertNil(error)
-            client?.resume { (response, error) in
-                XCTAssertNotNil(response)
-                XCTAssertNil(error)
-                
+        IDXClient.start(with: api) { result in
+            guard case let Result.success(client) = result else {
+                XCTFail("Received a failure when a success was expected")
+                return
+            }
+
+            client.resume { result in
+                guard case let Result.success(response) = result else {
+                    XCTFail("Received a failure when a success was expected")
+                    return
+                }
+
                 let redirectUrl = URL(string: """
                         redirect:///uri?\
                         interaction_code=qwe4xJaJF897EbEKL0LLbNUI-QwXZa8YOkY8QkWUlpXxU&\
-                        state=\(client!.context.state)#_=_
+                        state=\(client.context.state)#_=_
                         """)!
                 
-                XCTAssertTrue(response?.canCancel ?? false)
-                XCTAssertNotNil(response?.remediations[.redirectIdp])
-                XCTAssertNotNil(response?.remediations[.redirectIdp]?.href)
-                XCTAssertFalse(response?.isLoginSuccessful ?? true)
-                XCTAssertEqual(client?.redirectResult(for: redirectUrl), .authenticated)
+                XCTAssertTrue(response.canCancel)
+                XCTAssertNotNil(response.remediations[.redirectIdp])
+                XCTAssertNotNil(response.remediations[.redirectIdp]?.href)
+                XCTAssertFalse(response.isLoginSuccessful)
+                XCTAssertEqual(client.redirectResult(for: redirectUrl), .authenticated)
                 
-                client?.exchangeCode(redirect: redirectUrl) { (token, error) in
-                    XCTAssertNotNil(token)
-                    XCTAssertNotNil(token?.idToken)
-                    XCTAssertNotNil(token?.refreshToken)
-                    XCTAssertNil(error)
+                client.exchangeCode(redirect: redirectUrl) { result in
+                    guard case let Result.success(token) = result else {
+                        XCTFail("Received a failure when a success was expected")
+                        return
+                    }
+                    
+                    XCTAssertNotNil(token.idToken)
+                    XCTAssertNotNil(token.refreshToken)
                     
                     completion.fulfill()
                 }
@@ -340,25 +367,30 @@ class ScenarioTests: XCTestCase {
         try session.expect("https://example.com/oauth2/default/v1/interact", folderName: "IdP", fileName: "01-interact-response")
         try session.expect("https://example.com/idp/idx/introspect", folderName: "IdP", fileName: "02-introspect-response")
 
-        IDXClient.start(with: api) { (client, error) in
-            XCTAssertNotNil(client)
-            XCTAssertNil(error)
-            client?.resume { (response, error) in
-                XCTAssertNotNil(response)
-                XCTAssertNil(error)
-                
+        IDXClient.start(with: api) { result in
+            guard case let Result.success(client) = result else {
+                XCTFail("Received a failure when a success was expected")
+                return
+            }
+
+            client.resume { result in
+                guard case let Result.success(response) = result else {
+                    XCTFail("Received a failure when a success was expected")
+                    return
+                }
+
                 let redirectUrl = URL(string: """
                     redirect:///uri?\
-                    state=\(client!.context.state)&\
+                    state=\(client.context.state)&\
                     error=interaction_required&\
                     error_description=Your+client+is+configured+to+use+the+interaction+code+flow+and+user+interaction+is+required+to+complete+the+request.#_=_
                     """)!
                 
-                XCTAssertTrue(response?.canCancel ?? false)
-                XCTAssertNotNil(response?.remediations[.redirectIdp])
-                XCTAssertNotNil(response?.remediations[.redirectIdp]?.href)
-                XCTAssertFalse(response?.isLoginSuccessful ?? true)
-                XCTAssertEqual(client?.redirectResult(for: redirectUrl), .remediationRequired)
+                XCTAssertTrue(response.canCancel)
+                XCTAssertNotNil(response.remediations[.redirectIdp])
+                XCTAssertNotNil(response.remediations[.redirectIdp]?.href)
+                XCTAssertFalse(response.isLoginSuccessful)
+                XCTAssertEqual(client.redirectResult(for: redirectUrl), .remediationRequired)
                 
                 completion.fulfill()
             }

@@ -45,7 +45,22 @@ extension IDXClient {
         /// Indicates whether or not the response can be cancelled.
         @objc public let canCancel: Bool
         
-        /// Cancels the current workflow, and restats the session.
+        /// Cancels the current workflow, and restarts the session.
+        ///
+        /// - Important:
+        /// If a completion handler is not provided, you should ensure that you implement the `IDXClientDelegate.idx(client:didReceive:)` methods to process any response or error returned from this call.
+        /// - Parameters:
+        ///   - completion: Optional completion handler invoked when the operation is cancelled.
+        public func cancel(completion: ResponseResult? = nil) {
+            guard let cancelOption = remediations[.cancel] else {
+                completion?(.failure(.unknownRemediationOption(name: "cancel")))
+                return
+            }
+            
+            cancelOption.proceed(completion: completion)
+        }
+        
+        /// Cancels the current workflow, and restarts the session.
         ///
         /// - Important:
         /// If a completion handler is not provided, you should ensure that you implement the `IDXClientDelegate.idx(client:didReceive:)` methods to process any response or error returned from this call.
@@ -53,13 +68,31 @@ extension IDXClient {
         ///   - completion: Optional completion handler invoked when the operation is cancelled.
         ///   - response: The response describing the new workflow next steps, or `nil` if an error occurred.
         ///   - error: Describes the error that occurred, or `nil` if successful.
-        @objc public func cancel(completion: ((_ response: Response?, _ error: Error?) -> Void)?) {
-            guard let cancelOption = remediations[.cancel] else {
-                completion?(nil, IDXClientError.unknownRemediationOption(name: "cancel"))
+        @objc public func cancel(completion: ResponseResultCallback?) {
+            cancel { result in
+                switch result {
+                case .success(let response):
+                    completion?(response, nil)
+                case .failure(let error):
+                    completion?(nil, error)
+                }
+            }
+        }
+
+        /// Exchanges the successful response with a token.
+        ///
+        /// Once the `isLoginSuccessful` property is `true`, the developer can exchange the response for a valid token by using this method.
+        /// - Important:
+        /// If a completion handler is not provided, you should ensure that you implement the `IDXClientDelegate.idx(client:didReceive:)` method to receive the token or to handle any errors.
+        /// - Parameters:
+        ///   - completion: Optional completion handler invoked when a token, or error, is received.
+        public func exchangeCode(completion: TokenResult? = nil) {
+            guard let successOption = successRemediationOption else {
+                completion?(.failure(.successResponseMissing))
                 return
             }
             
-            cancelOption.proceed(completion: completion)
+            client.exchangeCode(using: successOption, completion: completion)
         }
         
         /// Exchanges the successful response with a token.
@@ -71,13 +104,15 @@ extension IDXClient {
         ///   - completion: Optional completion handler invoked when a token, or error, is received.
         ///   - token: The token that was exchanged, or `nil` if an error occurred.
         ///   - error: Describes the error that occurred, or `nil` if successful.
-        @objc public func exchangeCode(completion: ((_ token: Token?, _ error: Error?) -> Void)?) {
-            guard let successOption = successRemediationOption else {
-                completion?(nil, IDXClientError.successResponseMissing)
-                return
+        @objc public func exchangeCode(completion: TokenResultCallback?) {
+            exchangeCode { result in
+                switch result {
+                case .success(let token):
+                    completion?(token, nil)
+                case .failure(let error):
+                    completion?(nil, error)
+                }
             }
-            
-            client.exchangeCode(using: successOption, completion: completion)
         }
         
         private let client: IDXClientAPI

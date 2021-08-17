@@ -137,7 +137,7 @@ extension IDXClient.Response {
             return self
         }
         
-        func when(_ type: IDXClient.Remediation.RemediationType, send error: Error) -> Test {
+        func when(_ type: IDXClient.Remediation.RemediationType, send error: IDXClientError) -> Test {
             guard let remediation = remediations[type] as? IDXClient.Remediation.Test else { return self }
             remediation.proceedError = error
             return self
@@ -148,10 +148,14 @@ extension IDXClient.Response {
 extension IDXClient.Remediation {
     class Test: IDXClient.Remediation {
         fileprivate var proceedResponse: IDXClient.Response.Test?
-        fileprivate var proceedError: Error?
+        fileprivate var proceedError: IDXClientError?
         
         override func proceed(completion: IDXClient.ResponseResult?) {
-            completion?(proceedResponse, proceedError)
+            if let proceedResponse = proceedResponse {
+                completion?(.success(proceedResponse))
+            } else if let proceedError = proceedError {
+                completion?(.failure(proceedError))
+            }
         }
     }
 }

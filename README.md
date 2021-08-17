@@ -65,6 +65,8 @@ Each step in the authentication process is represented by an `IDXClient.Response
 
 When a remediation is selected and its inputs have been supplied by the user, the `proceed()` method can be called on the remediation to proceed to the next step of the authentication process.  This returns another `IDXClient.Response` object, which causes the process to continue. 
 
+> **Note:** Unless documented otherwise, all asynchronous functions accept either a Swift `Result` completion handler, or a conventional completion block that provides the response and error as separate values in the argument tuple.
+
 ## Usage
 
 The below code snippets will help you understand how to use this library.
@@ -87,10 +89,12 @@ let config = IDXClient.Configuration(
 ### Create the Client
 
 ```swift
-IDXClient.start(with: configuration) { (client, error) in
-    guard let client = client else {
+IDXClient.start(with: configuration) { result in
+    switch result {
+    case .success(let response):
+        // Handle the response
+    case .failure(let error):
         // Handle the error
-        return
     }
 }
 ```
@@ -98,13 +102,13 @@ IDXClient.start(with: configuration) { (client, error) in
 ### Start / continue the authentication session
 
 ```swift
-client.resume { (response, error) in
-    guard let response = response else {
-        // Handle error
-        return
+client.resume { result in
+    switch result {
+    case .success(let response):
+        // Use the response
+    case .failure(let error):
+        // Handle the error
     }
-    
-    // Use response
 }
 ```
 

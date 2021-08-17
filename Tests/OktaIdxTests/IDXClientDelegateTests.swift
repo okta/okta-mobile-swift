@@ -114,7 +114,7 @@ class IDXClientDelegateTests: XCTestCase {
     func testProceedError() {
         api.expect(function: "proceed(remediation:completion:)", arguments: ["error": error])
         waitFor { expectation in
-            self.client.proceed(remediation: self.remediationOption) { (_, _) in
+            self.client.proceed(remediation: self.remediationOption) { result in
                 expectation.fulfill()
             }
         }
@@ -136,7 +136,7 @@ class IDXClientDelegateTests: XCTestCase {
     func testExchangeCodeError() {
         api.expect(function: "exchangeCode(using:completion:)", arguments: ["error": error])
         waitFor { expectation in
-            self.client.exchangeCode(using: self.remediationOption) { (_, _) in
+            self.client.exchangeCode(using: self.remediationOption) { result in
                 expectation.fulfill()
             }
         }
@@ -146,9 +146,9 @@ class IDXClientDelegateTests: XCTestCase {
     
     func testToken() {
         // exchangeCode()
-        api.expect(function: "exchangeCode(using:completion:)", arguments: ["token": token as Any])
+        api.expect(function: "exchangeCode(using:completion:)", arguments: ["response": token as Any])
         waitFor { expectation in
-            self.client.exchangeCode(using: self.remediationOption) { (_, _) in
+            self.client.exchangeCode(using: self.remediationOption) { result in
                 expectation.fulfill()
             }
         }
@@ -158,7 +158,7 @@ class IDXClientDelegateTests: XCTestCase {
     }
     
     func testExchangeCodeRedirectUrlFromClient() {
-        api.expect(function: "exchangeCode(redirect:completion:)", arguments: ["token": token as Any])
+        api.expect(function: "exchangeCode(redirect:completion:)", arguments: ["response": token as Any])
         waitFor { expectation in
             self.client.exchangeCode(redirect: self.redirectUrl) { (_, _) in
                 expectation.fulfill()
@@ -170,7 +170,7 @@ class IDXClientDelegateTests: XCTestCase {
     }
 
     func testExchangeCodeFromResponse() {
-        api.expect(function: "exchangeCode(using:completion:)", arguments: ["token": token as Any])
+        api.expect(function: "exchangeCode(using:completion:)", arguments: ["response": token as Any])
         waitFor { expectation in
             self.response.exchangeCode { (_, _) in
                 expectation.fulfill()
@@ -221,7 +221,7 @@ class IDXClientDelegateTests: XCTestCase {
     func testResumeWithoutCompletionBlock() {
         api.expect(function: "resume(completion:)", arguments: ["response": response as Any])
         waitFor { expectation in
-            self.client.resume(completion: nil)
+            self.client.resume { response, error in }
             expectation.fulfill()
         }
         XCTAssertEqual(delegate.calls.count, 1)
@@ -231,9 +231,9 @@ class IDXClientDelegateTests: XCTestCase {
     
     func testExchangeCodeRedirectWithoutCompletionBlock() {
         // exchangeCode()
-        api.expect(function: "exchangeCode(redirect:completion:)", arguments: ["token": token as Any])
+        api.expect(function: "exchangeCode(redirect:completion:)", arguments: ["response": token as Any])
         waitFor { expectation in
-            self.client.exchangeCode(redirect: self.redirectUrl, completion: nil)
+            self.client.exchangeCode(redirect: self.redirectUrl) { token, error in }
             expectation.fulfill()
         }
         XCTAssertEqual(delegate.calls.count, 1)
@@ -242,9 +242,9 @@ class IDXClientDelegateTests: XCTestCase {
     }
     
     func testExchangeCodeWithoutCompletionBlock() {
-        api.expect(function: "exchangeCode(using:completion:)", arguments: ["token": token as Any])
+        api.expect(function: "exchangeCode(using:completion:)", arguments: ["response": token as Any])
         waitFor { expectation in
-            self.response.exchangeCode(completion: nil)
+            self.response.exchangeCode { token, error in }
             expectation.fulfill()
         }
         XCTAssertEqual(delegate.calls.count, 1)
@@ -255,7 +255,7 @@ class IDXClientDelegateTests: XCTestCase {
     func testCancelWithoutCompletionBlock() {
         api.expect(function: "proceed(remediation:completion:)", arguments: ["response": response as Any])
         waitFor { expectation in
-            self.response.cancel(completion: nil)
+            self.response.cancel { response, error in }
             expectation.fulfill()
         }
         XCTAssertEqual(delegate.calls.count, 1)
@@ -266,7 +266,7 @@ class IDXClientDelegateTests: XCTestCase {
     func testProceedWithoutCompletionBlock() {
         api.expect(function: "proceed(remediation:completion:)", arguments: ["response": response as Any])
         waitFor { expectation in
-            self.remediationOption.proceed(completion: nil)
+            self.remediationOption.proceed { response, error in }
             expectation.fulfill()
         }
         XCTAssertEqual(delegate.calls.count, 1)

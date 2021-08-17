@@ -68,7 +68,7 @@ extension IDXClient {
         let refresh: TimeInterval?
         let relatesTo: [String]?
 
-        internal init(client: IDXClientAPI,
+        required internal init(client: IDXClientAPI,
                       name: String,
                       method: String,
                       href: URL,
@@ -120,18 +120,35 @@ extension IDXClient {
         /// If a completion handler is not provided, you should ensure that you implement the `IDXClientDelegate.idx(client:didReceive:)` methods to process any response or error returned from this call.
         /// - Parameters:
         ///   - completion: Optional completion handler invoked when a response is received.
-        ///   - response: `IDXClient.Response` object describing the next step in the remediation workflow, or `nil` if an error occurred.
-        ///   - error: A description of the error that occurred, or `nil` if the request was successful.
-        @objc
         public func proceed(completion: IDXClient.ResponseResult?) {
             guard let client = client else {
-                completion?(nil, IDXClientError.invalidClient)
+                completion?(.failure(.invalidClient))
                 return
             }
             
             client.proceed(remediation: self, completion: completion)
         }
-        
+
+        /// Executes the remediation option and proceeds through the workflow using the supplied form parameters.
+        ///
+        /// This method is used to proceed through the authentication flow, using the data assigned to the nested fields' `value` to make selections.
+        /// - Important:
+        /// If a completion handler is not provided, you should ensure that you implement the `IDXClientDelegate.idx(client:didReceive:)` methods to process any response or error returned from this call.
+        /// - Parameters:
+        ///   - completion: Optional completion handler invoked when a response is received.
+        ///   - response: `IDXClient.Response` object describing the next step in the remediation workflow, or `nil` if an error occurred.
+        ///   - error: A description of the error that occurred, or `nil` if the request was successful.
+        @objc public func proceed(completion: IDXClient.ResponseResultCallback?) {
+            proceed { result in
+                switch result {
+                case .success(let response):
+                    completion?(response, nil)
+                case .failure(let error):
+                    completion?(nil, error)
+                }
+            }
+        }
+
         /// Remediation subclass used to represent social authentication remediations (e.g. IDP authentication).
         @objc(IDXSocialAuthRemediation)
         public class SocialAuth: Remediation {
@@ -183,6 +200,10 @@ extension IDXClient {
             
             public override var debugDescription: String {
                 super.debugDescription
+            }
+
+            required internal init(client: IDXClientAPI, name: String, method: String, href: URL, accepts: String?, form: Form, refresh: TimeInterval? = nil, relatesTo: [String]? = nil) {
+                fatalError("init(client:name:method:href:accepts:form:refresh:relatesTo:) has not been implemented")
             }
             
             /// The list of services that are possible within a social authentication workflow.

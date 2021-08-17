@@ -207,7 +207,7 @@ extension IDXClient.Authenticator {
 
         let filteredTypes = Set(authenticators.map({ $0.type }))
         guard filteredTypes.count == 1 else {
-            throw IDXClientError.internalError(message: "Some mapped authenticators have differing types: \(filteredTypes.joined(separator: ", "))")
+            throw IDXClientError.internalMessage("Some mapped authenticators have differing types: \(filteredTypes.joined(separator: ", "))")
         }
         
         let type = IDXClient.Authenticator.Kind(string: first.type)

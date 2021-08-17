@@ -14,33 +14,34 @@ import Foundation
 
 extension IDXClient: IDXClientAPI {
     public func proceed(remediation option: Remediation, completion: ResponseResult?) {
-        api.proceed(remediation: option) { (response, error) in
-            self.handleResponse(response, error: error, completion: completion)
+        api.proceed(remediation: option) { result in
+            self.handleResponse(result, completion: completion)
         }
     }
 
     public func exchangeCode(using remediation: Remediation, completion: TokenResult?) {
-        api.exchangeCode(using: remediation) { (token, error) in
-            self.handleResponse(token, error: error, completion: completion)
+        api.exchangeCode(using: remediation) { result in
+            self.handleResponse(result, completion: completion)
         }
     }
     
-    internal func handleResponse<T>(_ response: T?, error: Error?, completion: ((T?, Error?) -> Void)?) {
-        self.informDelegate(self.delegate, response: response, error: error)
+    internal func handleResponse<T>(_ result: Result<T, IDXClientError>, completion: ((Result<T, IDXClientError>) -> Void)?) {
+        self.informDelegate(self.delegate, result: result)
         
-        completion?(response, error)
+        completion?(result)
     }
     
-    internal func informDelegate<T>(_ delegate: IDXClientDelegate?, response: T?, error: Error?) {
+    internal func informDelegate<T>(_ delegate: IDXClientDelegate?, result: Result<T, IDXClientError>) {
         guard let delegate = delegate else { return }
-        if let error = error {
+        switch result {
+        case .success(let response):
+            if let response = response as? Response {
+                delegate.idx(client: self, didReceive: response)
+            } else if let response = response as? Token {
+                delegate.idx(client: self, didReceive: response)
+            }
+        case .failure(let error):
             delegate.idx(client: self, didReceive: error)
-        }
-        
-        if let response = response as? Response {
-            delegate.idx(client: self, didReceive: response)
-        } else if let response = response as? Token {
-            delegate.idx(client: self, didReceive: response)
         }
     }
 }

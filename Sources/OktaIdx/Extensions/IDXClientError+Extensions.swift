@@ -65,8 +65,10 @@ extension IDXClientError: LocalizedError {
                 return message
             }
             return result
-        case .internalError(message: let message):
+        case .internalMessage(let message):
             return message
+        case .internalError(let error):
+            return error.localizedDescription
         case .invalidParameter(name: let name):
             return NSLocalizedString("Invalid parameter \"\(name)\" supplied to a remediation option.",
                                      comment: "Error message thrown when an invalid parameter is supplied.")
@@ -91,6 +93,12 @@ extension IDXClientError: LocalizedError {
         case .missingRelatedObject:
             return NSLocalizedString("Could not find an object within the response related from another object.",
                                      comment: "Cannot find a related object in the response.")
+        case .missingRemediationOption(name: let name):
+            return NSLocalizedString("The remediation option \"\(name)\" was expected, but not found..",
+                                     comment: "Cannot find a required remediation option.")
+        case .oauthError(summary: let summary, code: let code, errorId: _):
+            return NSLocalizedString("\(summary). Error code \(code ?? "unknown").",
+                                     comment: "OAuth error reported from the server.")
         }
     }
 }
@@ -114,9 +122,12 @@ extension IDXClientError: CustomNSError {
         case .missingRequiredParameter(name: _): return 11
         case .unknownRemediationOption(name: _): return 12
         case .successResponseMissing: return 13
-        case .internalError(message: _): return 14
+        case .internalMessage(_): return 14
         case .missingRefreshToken: return 15
         case .missingRelatedObject: return 16
+        case .internalError(_): return 17
+        case .oauthError(summary: _, code: _, errorId: _): return 18
+        case .missingRemediationOption(name: _): return 19
         }
     }
 
@@ -137,9 +148,13 @@ extension IDXClientError: CustomNSError {
                 "type": type,
                 "localizationKey": localizationKey
             ]
-        case .internalError(message: let message):
+        case .internalMessage(let message):
             return [
                 "message": message
+            ]
+        case .internalError(let error):
+            return [
+                NSUnderlyingErrorKey: error
             ]
         case .invalidParameter(name: let name):
             return [
@@ -158,10 +173,28 @@ extension IDXClientError: CustomNSError {
             return [
                 "name": name
             ]
+        case .missingRemediationOption(name: let name):
+            return [
+                "name": name
+            ]
         case .unknownRemediationOption(name: let name):
             return [
                 "name": name
             ]
+        case .oauthError(summary: let summary, code: let code, errorId: let errorId):
+            var result = [
+                "summary": summary
+            ]
+            
+            if let code = code {
+                result["code"] = code
+            }
+            
+            if let errorId = errorId {
+                result["errorId"] = errorId
+            }
+            
+            return result
         }
     }
 }

@@ -66,7 +66,7 @@ class IDXClientErrorTests: XCTestCase {
                        "Message")
         XCTAssertEqual(IDXClientError.invalidParameter(name: "name").localizedDescription,
                        "Invalid parameter \"name\" supplied to a remediation option.")
-        XCTAssertEqual(IDXClientError.internalError(message: "name").localizedDescription,
+        XCTAssertEqual(IDXClientError.internalMessage("name").localizedDescription,
                        "name")
         XCTAssertEqual(IDXClientError.invalidParameterValue(name: "name", type: "string").localizedDescription,
                        "Parameter \"name\" was supplied a string value which is unsupported.")

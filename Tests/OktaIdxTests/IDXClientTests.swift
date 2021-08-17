@@ -76,7 +76,7 @@ class IDXClientTests: XCTestCase {
         
         // start()
         expect = expectation(description: "start")
-        IDXClient.start(with: api, state: "state") { (_, _) in
+        IDXClient.start(with: api, state: "state") { result in
             called = true
             expect.fulfill()
         }
@@ -103,7 +103,7 @@ class IDXClientTests: XCTestCase {
 
         // proceed()
         expect = expectation(description: "proceed")
-        client.proceed(remediation: remedationOption) { (_, _) in
+        client.proceed(remediation: remedationOption) { result in
             called = true
             expect.fulfill()
         }
@@ -117,7 +117,7 @@ class IDXClientTests: XCTestCase {
         
         // exchangeCode()
         expect = expectation(description: "exchangeCode")
-        client.exchangeCode(using: remedationOption) { (_, _) in
+        client.exchangeCode(using: remedationOption) { result in
             called = true
             expect.fulfill()
         }
@@ -145,7 +145,7 @@ class IDXClientTests: XCTestCase {
         
         // revoke()
         expect = expectation(description: "revoke(token:type:completion:)")
-        IDXClient.Token.revoke(token: "token", type: .refreshToken, api: api) { (_, _) in
+        IDXClient.Token.revoke(token: "token", type: .refreshToken, api: api) { result in
             called = true
             expect.fulfill()
         }

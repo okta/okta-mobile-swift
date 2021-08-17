@@ -34,65 +34,54 @@ extension IDXClient {
 }
 
 extension IDXClient.APIVersion1: IDXClientAPIImpl {
-    func start(state: String?, completion: @escaping (IDXClient.Context?, Error?) -> Void) {
+    func start(state: String?, completion: @escaping (Result<IDXClient.Context, IDXClientError>) -> Void) {
         guard let codeVerifier = String.pkceCodeVerifier(),
               let codeChallenge = codeVerifier.pkceCodeChallenge() else
         {
-            completion(nil, IDXClientError.internalError(message: "Cannot create a PKCE Code Verifier"))
+            completion(.failure(.internalMessage("Cannot create a PKCE Code Verifier")))
             return
         }
         
         let request = InteractRequest(state: state, codeChallenge: codeChallenge)
-        request.send(to: session, using: configuration) { (response, error) in
-            guard error == nil else {
-                completion(nil, error)
-                return
+        request.send(to: session, using: configuration) { result in
+            switch result {
+            case .failure(let error):
+                completion(.failure(error))
+            case .success(let response):
+                completion(.success(IDXClient.Context(configuration: self.configuration,
+                                                      state: request.state,
+                                                      interactionHandle: response.interactionHandle,
+                                                      codeVerifier: codeVerifier)))
             }
-            
-            guard let response = response else {
-                completion(nil, IDXClientError.invalidResponseData)
-                return
-            }
-            
-            completion(IDXClient.Context(configuration: self.configuration,
-                                         state: request.state,
-                                         interactionHandle: response.interactionHandle,
-                                         codeVerifier: codeVerifier),
-                       nil)
         }
     }
     
-    func resume(completion: @escaping (IDXClient.Response?, Error?) -> Void) {
+    func resume(completion: @escaping (Result<IDXClient.Response, IDXClientError>) -> Void) {
         guard let client = client else {
-            completion(nil, IDXClientError.invalidClient)
+            completion(.failure(.invalidClient))
             return
         }
         
         let request = IntrospectRequest(interactionHandle: client.context.interactionHandle)
-        request.send(to: session, using: configuration) { (response, error) in
-            guard error == nil else {
-                completion(nil, error)
-                return
-            }
-            
-            guard let response = response else {
-                completion(nil, IDXClientError.invalidResponseData)
-                return
-            }
-            
-            do {
-                completion(try IDXClient.Response(client: client, v1: response), nil)
-            } catch {
-                completion(nil, error)
+        request.send(to: session, using: configuration) { result in
+            switch result {
+            case .failure(let error):
+                completion(.failure(error))
+            case .success(let response):
+                do {
+                    completion(.success(try IDXClient.Response(client: client, v1: response)))
+                } catch {
+                    completion(.failure(.internalError(error)))
+                }
             }
         }
     }
 
     func proceed(remediation option: IDXClient.Remediation,
-                 completion: @escaping (IDXClient.Response?, Error?) -> Void)
+                 completion: @escaping (Result<IDXClient.Response, IDXClientError>) -> Void)
     {
         guard let client = client else {
-            completion(nil, IDXClientError.invalidClient)
+            completion(.failure(.invalidClient))
             return
         }
 
@@ -100,25 +89,20 @@ extension IDXClient.APIVersion1: IDXClientAPIImpl {
         do {
             request = try RemediationRequest(remediation: option)
         } catch {
-            completion(nil, error)
+            completion(.failure(.internalError(error)))
             return
         }
 
-        request.send(to: session, using: configuration) { (response, error) in
-            guard error == nil else {
-                completion(nil, error)
-                return
-            }
-            
-            guard let response = response else {
-                completion(nil, IDXClientError.invalidResponseData)
-                return
-            }
-            
-            do {
-                completion(try IDXClient.Response(client: client, v1: response), nil)
-            } catch {
-                completion(nil, error)
+        request.send(to: session, using: configuration) { result in
+            switch result {
+            case .failure(let error):
+                completion(.failure(error))
+            case .success(let response):
+                do {
+                    completion(.success(try IDXClient.Response(client: client, v1: response)))
+                } catch {
+                    completion(.failure(.internalError(error)))
+                }
             }
         }
     }
@@ -155,24 +139,24 @@ extension IDXClient.APIVersion1: IDXClientAPIImpl {
         return .invalidContext
     }
     
-    func exchangeCode(redirect url: URL, completion: @escaping (IDXClient.Token?, Error?) -> Void) {
+    func exchangeCode(redirect url: URL, completion: @escaping (Result<IDXClient.Token, IDXClientError>) -> Void) {
         guard let context = client?.context else {
-            completion(nil, IDXClientError.invalidClient)
+            completion(.failure(.invalidClient))
             return
         }
         
         guard let redirect = Redirect(url: url) else {
-            completion(nil, IDXClientError.internalError(message: "Invalid redirect url"))
+            completion(.failure(.internalMessage("Invalid redirect url")))
             return
         }
         
         guard let issuerUrl = URL(string: configuration.issuer) else {
-            completion(nil, IDXClientError.internalError(message: "Cannot create URL from issuer"))
+            completion(.failure(.internalMessage("Cannot create URL from issuer")))
             return
         }
         
         guard let interactionCode = redirect.interactionCode else {
-            completion(nil, IDXClientError.internalError(message: "Interaction code is missed"))
+            completion(.failure(.internalMessage("Interaction code is missed")))
             return
         }
         
@@ -186,14 +170,14 @@ extension IDXClient.APIVersion1: IDXClientAPIImpl {
         send(request, completion)
     }
 
-    func exchangeCode(using remediation: IDXClient.Remediation, completion: @escaping (IDXClient.Token?, Error?) -> Void) {
+    func exchangeCode(using remediation: IDXClient.Remediation, completion: @escaping (Result<IDXClient.Token, IDXClientError>) -> Void) {
         guard let context = client?.context else {
-            completion(nil, IDXClientError.invalidClient)
+            completion(.failure(.invalidClient))
             return
         }
         
         guard remediation.name == "issue" else {
-            completion(nil, IDXClientError.successResponseMissing)
+            completion(.failure(.successResponseMissing))
             return
         }
 
@@ -205,31 +189,31 @@ extension IDXClient.APIVersion1: IDXClientAPIImpl {
         do {
             request = try TokenRequest(successResponse: remediation)
         } catch {
-            completion(nil, error)
+            completion(.failure(.internalError(error)))
             return
         }
         
         send(request, completion)
     }
     
-    func revoke(token: String, type: String, completion: @escaping (Bool, Error?) -> Void) {
+    func revoke(token: String, type: String, completion: @escaping (Result<Void, IDXClientError>) -> Void) {
         let request = RevokeRequest(token: token, tokenTypeHint: type)
         request.send(to: session,
-                     using: configuration) { (response, error) in
-            completion(response ?? false, error)
+                     using: configuration) { result in
+            completion(result)
         }
     }
     
     func refresh(token: IDXClient.Token,
-                 completion: @escaping(_ token: IDXClient.Token?, _ error: Error?) -> Void)
+                 completion: @escaping(Result<IDXClient.Token, IDXClientError>) -> Void)
     {
         guard let url = token.configuration.issuerUrl(with: "v1/token") else {
-            completion(nil, IDXClientError.invalidClient)
+            completion(.failure(.invalidClient))
             return
         }
         
         guard let refreshToken = token.refreshToken else {
-            completion(nil, IDXClientError.missingRefreshToken)
+            completion(.failure(.missingRefreshToken))
             return
         }
         
@@ -251,28 +235,24 @@ extension IDXClient.APIVersion1: IDXClientAPIImpl {
                                    accepts: .formEncoded,
                                    parameters: parameters)
         request.send(to: session,
-                     using: configuration) { (response, error) in
-            guard let response = response else {
-                completion(nil, error)
-                return
+                     using: configuration) { result in
+            switch result {
+            case .failure(let error):
+                completion(.failure(error))
+            case .success(let response):
+                completion(.success(IDXClient.Token(v1: response, configuration: self.configuration)))
             }
-            completion(IDXClient.Token(v1: response, configuration: self.configuration), nil)
         }
     }
 
-    private func send(_ request: IDXClient.APIVersion1.TokenRequest, _ completion: @escaping (IDXClient.Token?, Error?) -> Void) {
-        request.send(to: session, using: configuration) { (response, error) in
-            guard error == nil else {
-                completion(nil, error)
-                return
+    private func send(_ request: IDXClient.APIVersion1.TokenRequest, _ completion: @escaping (Result<IDXClient.Token, IDXClientError>) -> Void) {
+        request.send(to: session, using: configuration) { result in
+            switch result {
+            case .failure(let error):
+                completion(.failure(error))
+            case .success(let response):
+                completion(.success(IDXClient.Token(v1: response, configuration: self.configuration)))
             }
-            
-            guard let response = response else {
-                completion(nil, IDXClientError.invalidResponseData)
-                return
-            }
-            
-            completion(IDXClient.Token(v1: response, configuration: self.configuration), nil)
         }
     }
 }
