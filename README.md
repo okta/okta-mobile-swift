@@ -13,7 +13,7 @@ This library is built for projects written in Swift to communicate with Okta as 
 
 To see this library working in a sample, check out our [iOS Sample Application](Samples/EmbeddedAuthWithSDKs). You can also check out our guides for step-by-step instructions:
 
- * [Build with the embedded SDK](https://developer.okta.com/docs/guides/oie-embedded-sdk-run-sample/ios/main/)
+ * [Build with the embedded SDK](https://developer.okta.com/docs/guides/oie-embedded-common-run-samples/ios/main/#run-the-embedded-sdk-sample-app)
 
 
 **Table of Contents**
