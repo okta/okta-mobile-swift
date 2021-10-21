@@ -16,7 +16,7 @@ These examples are:
 5. Sign In with Multifactor Authentication using Email or Phone
 6. Password reset using Email
 
-For information and guides on how to build your app with this sample, please take a look at the [iOS guides for Embedded Authentication](https://developer.okta.com/docs/guides/oie-embedded-sdk-use-cases/ios/oie-embedded-sdk-use-case-overview/#start-with-a-use-case)
+For information and guides on how to build your app with this sample, please take a look at the [iOS guides for Embedded Authentication](https://developer.okta.com/docs/guides/oie-embedded-common-org-setup/ios/main/)
 
 ## Installation & Running The App
 
