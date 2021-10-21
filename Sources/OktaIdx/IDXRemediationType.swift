@@ -22,41 +22,41 @@ extension IDXClient.Remediation {
         case selectIdentify
         case selectEnrollProfile
         case cancel
-        case activateFactor
         case sendChallenge
         case resendChallenge
-        case selectFactorAuthenticate
-        case selectFactorEnroll
-        case challengeFactor
         case selectAuthenticatorAuthenticate
+        case selectAuthenticatorUnlockAccount
         case selectAuthenticatorEnroll
         case selectEnrollmentChannel
         case authenticatorVerificationData
         case authenticatorEnrollmentData
         case enrollmentChannelData
         case challengeAuthenticator
-        case poll
         case enrollPoll
-        case recover
-        case enrollFactor
         case enrollAuthenticator
         case reenrollAuthenticator
         case reenrollAuthenticatorWarning
         case resetAuthenticator
         case enrollProfile
-        case profileAttributes
-        case selectIdp
-        case selectPlatform
-        case factorPollVerification
-        case qrRefresh
+        case unlockAccount
         case deviceChallengePoll
-        case cancelPolling
         case deviceAppleSsoExtension
         case launchAuthenticator
-        case redirect
         case redirectIdp
         case cancelTransaction
         case skip
         case challengePoll
+        case consent
+        case adminConsent
+        case emailChallengeConsent
+        case requestActivationEmail
+        case userCode
+
+        // Remediations contained within authenticators.
+        case poll
+        case recover
+        case send
+        case resend
+        case cancelPolling
     }
 }

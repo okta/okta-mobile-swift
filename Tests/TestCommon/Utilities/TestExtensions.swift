@@ -63,3 +63,30 @@ extension XCTestCase {
         try test(try decode(type: type, json))
     }
 }
+
+enum TestDataSource {
+    case file(_ name: String, folder: String? = nil)
+    case url(_ fileURL: URL)
+    case json(_ json: String)
+}
+
+protocol TestResponse {
+    static func data(from source: TestDataSource) throws -> Self
+}
+
+extension TestResponse where Self : Decodable {
+    static func data(from source: TestDataSource) throws -> Self {
+        switch source {
+        case .file(let name, let folder):
+            let fileUrl = Bundle.testResource(folderName: folder, fileName: name)
+            return try data(from: .url(fileUrl))
+        case .url(let url):
+            return try data(from: .json(try String(contentsOf: url)))
+        case .json(let json):
+            let data = json.data(using: .utf8)!
+            return try JSONDecoder.idxResponseDecoder.decode(Self.self, from: data)
+        }
+    }
+}
+
+extension IDXClient.APIVersion1.Response: TestResponse {}

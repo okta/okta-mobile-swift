@@ -614,6 +614,66 @@ if response.remediations.isEmpty {
 }
 ```
 
+### Responding to events using the IDXClientDelegate
+
+IDXClient supports the use of a delegate to centralize response handling and processing. This enables a single delegate object to intercept all responses, errors, and tokens that are received by the client, regardless of where the initial call is made within your application.
+
+The following example highlights how simple username/password authentication can be implemented using a delegate.
+
+```swift
+class LoginManager: IDXClientDelegate {
+    private var client: IDXClient?
+    let username: String
+    let password: String
+    
+    func start() {
+        IDXClient.start(configuration: config) { result in
+            switch result {
+            case .failure(let error):
+                // Handle the error
+            case .success(let client):
+                self.client = client
+                client.delegate = self
+                client.resume()
+            }
+        }
+    }
+    
+    func idx(client: IDXClient, didReceive response: IDXClient.Response) {
+        // If login is successful, immediately exchange it for a token.
+        guard !response.isLoginSuccessful else {
+            response.exchangeCode()
+            return
+        }
+        
+        // Identify the user
+        if let remediation = response.remediations[.identify] {
+            remediation["identifier"]?.value = username
+            remediation["credentials.passcode"]?.value = password
+            remediation.proceed() 
+        }
+        
+        // If the password is requested on a separate "page", supply it there.
+        else if let remediation = response.remediations[.challengeAuthenticator],
+                response.authenticators.current.type == .password
+        {
+            remediation["credentials.passcode"]?.value = password
+            remediation.proceed()
+        }
+        
+        // Handle other scenarios / remediation states here...
+    }
+
+    func idx(client: IDXClient, didReceive token: IDXClient.Token) {
+        // Login succeeded, with the given token.
+    }
+
+    func idx(client: IDXClient, didReceive error: Error) {
+        // Handle the error
+    }
+}
+```
+
 ## Development
 
 ### Running Tests

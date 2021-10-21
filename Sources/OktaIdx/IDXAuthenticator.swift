@@ -362,7 +362,7 @@ extension IDXClient {
             @objc public var canResend: Bool { resendOption != nil }
             @objc public var canPoll: Bool { pollOption != nil }
 
-            public func startPolling(completion: IDXClient.ResponseResult?) {
+            public func startPolling(completion: IDXClient.ResponseResult? = nil) {
                 // Stop any previous polling
                 stopPolling()
                 
@@ -381,7 +381,7 @@ extension IDXClient {
                     // If we don't get another email authenticator back, we know the
                     // magic link was clicked, and we can proceed to the completion block.
                     guard let emailAuthenticator = response.authenticators.current as? Email else {
-                        completion?(.failure(.missingRelatedObject))
+                        completion?(.success(response))
                         return false
                     }
                     
@@ -401,14 +401,13 @@ extension IDXClient {
                     }
                 }
             }
-            
 
-            public func stopPolling() {
+            @objc public func stopPolling() {
                 pollHandler?.stopPolling()
                 pollHandler = nil
             }
             
-            public func resend(completion: IDXClient.ResponseResult?) {
+            public func resend(completion: IDXClient.ResponseResult? = nil) {
                 guard let client = client else {
                     completion?(.failure(.invalidClient))
                     return
@@ -488,7 +487,7 @@ extension IDXClient {
             @objc public var canSend: Bool { sendOption != nil }
             @objc public var canResend: Bool { resendOption != nil }
 
-            public func send(completion: IDXClient.ResponseResult?) {
+            public func send(completion: IDXClient.ResponseResult? = nil) {
                 guard let client = client else {
                     completion?(.failure(.invalidClient))
                     return
@@ -513,7 +512,7 @@ extension IDXClient {
                 }
             }
             
-            public func resend(completion: IDXClient.ResponseResult?) {
+            public func resend(completion: IDXClient.ResponseResult? = nil) {
                 guard let client = client else {
                     completion?(.failure(.invalidClient))
                     return

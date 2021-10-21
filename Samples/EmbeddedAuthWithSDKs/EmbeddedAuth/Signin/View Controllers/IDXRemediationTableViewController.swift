@@ -196,8 +196,10 @@ class IDXRemediationTableViewController: UITableViewController, IDXResponseContr
         poll.startPolling { [weak self] (response, error) in
             guard let response = response else {
                 if let error = error {
-                    self?.showError(error, recoverable: true)
-                    self?.pollActivityIndicator.stopAnimating()
+                    DispatchQueue.main.async {
+                        self?.showError(error, recoverable: true)
+                        self?.pollActivityIndicator.stopAnimating()
+                    }
                     poll.stopPolling()
                 }
                 return

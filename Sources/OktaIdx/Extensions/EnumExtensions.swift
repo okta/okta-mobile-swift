@@ -49,48 +49,46 @@ extension IDXClient.Authenticator.Method {
 extension IDXClient.Remediation.RemediationType {
     internal init(string value: String) {
         switch value {
-        case "identify":                          self = .identify
-        case "identify-recovery":                 self = .identifyRecovery
-        case "select-identify":                   self = .selectIdentify
-        case "select-enroll-profile":             self = .selectEnrollProfile
-        case "cancel":                            self = .cancel
-        case "activate-factor":                   self = .activateFactor
-        case "send":                              self = .sendChallenge
-        case "resend":                            self = .resendChallenge
-        case "select-factor-authenticate":        self = .selectFactorAuthenticate
-        case "select-factor-enroll":              self = .selectFactorEnroll
-        case "challenge-factor":                  self = .challengeFactor
-        case "select-authenticator-authenticate": self = .selectAuthenticatorAuthenticate
-        case "select-authenticator-enroll":       self = .selectAuthenticatorEnroll
-        case "select-enrollment-channel":         self = .selectEnrollmentChannel
-        case "authenticator-verification-data":   self = .authenticatorVerificationData
-        case "authenticator-enrollment-data":     self = .authenticatorEnrollmentData
-        case "enrollment-channel-data":           self = .enrollmentChannelData
-        case "challenge-authenticator":           self = .challengeAuthenticator
-        case "poll":                              self = .poll
-        case "enroll-poll":                       self = .enrollPoll
-        case "recover":                           self = .recover
-        case "enroll-factor":                     self = .enrollFactor
-        case "enroll-authenticator":              self = .enrollAuthenticator
-        case "reenroll-authenticator":            self = .reenrollAuthenticator
-        case "reenroll-authenticator-warning":    self = .reenrollAuthenticatorWarning
-        case "reset-authenticator":               self = .resetAuthenticator
-        case "enroll-profile":                    self = .enrollProfile
-        case "profile-attributes":                self = .profileAttributes
-        case "select-idp":                        self = .selectIdp
-        case "select-platform":                   self = .selectPlatform
-        case "factor-poll-verification":          self = .factorPollVerification
-        case "qr-refresh":                        self = .qrRefresh
-        case "device-challenge-poll":             self = .deviceChallengePoll
-        case "cancel-polling":                    self = .cancelPolling
-        case "device-apple-sso-extension":        self = .deviceAppleSsoExtension
-        case "launch-authenticator":              self = .launchAuthenticator
-        case "redirect":                          self = .redirect
-        case "redirect-idp":                      self = .redirectIdp
-        case "cancel-transaction":                self = .cancelTransaction
-        case "skip":                              self = .skip
-        case "challenge-poll":                    self = .challengePoll
-        default:                                  self = .unknown
+        case "identify":                            self = .identify
+        case "identify-recovery":                   self = .identifyRecovery
+        case "select-identify":                     self = .selectIdentify
+        case "select-enroll-profile":               self = .selectEnrollProfile
+        case "cancel":                              self = .cancel
+        case "send-challenge":                      self = .sendChallenge
+        case "resend-challenge":                    self = .resendChallenge
+        case "send":                                self = .send
+        case "resend":                              self = .resend
+        case "select-authenticator-authenticate":   self = .selectAuthenticatorAuthenticate
+        case "select-authenticator-unlock-account": self = .selectAuthenticatorUnlockAccount
+        case "select-authenticator-enroll":         self = .selectAuthenticatorEnroll
+        case "select-enrollment-channel":           self = .selectEnrollmentChannel
+        case "authenticator-verification-data":     self = .authenticatorVerificationData
+        case "authenticator-enrollment-data":       self = .authenticatorEnrollmentData
+        case "enrollment-channel-data":             self = .enrollmentChannelData
+        case "challenge-authenticator":             self = .challengeAuthenticator
+        case "poll":                                self = .poll
+        case "enroll-poll":                         self = .enrollPoll
+        case "recover":                             self = .recover
+        case "enroll-authenticator":                self = .enrollAuthenticator
+        case "reenroll-authenticator":              self = .reenrollAuthenticator
+        case "reenroll-authenticator-warning":      self = .reenrollAuthenticatorWarning
+        case "reset-authenticator":                 self = .resetAuthenticator
+        case "enroll-profile":                      self = .enrollProfile
+        case "unlock-account":                      self = .unlockAccount
+        case "device-challenge-poll":               self = .deviceChallengePoll
+        case "cancel-polling":                      self = .cancelPolling
+        case "device-apple-sso-extension":          self = .deviceAppleSsoExtension
+        case "launch-authenticator":                self = .launchAuthenticator
+        case "redirect-idp":                        self = .redirectIdp
+        case "cancel-transaction":                  self = .cancelTransaction
+        case "skip":                                self = .skip
+        case "challenge-poll":                      self = .challengePoll
+        case "consent":                             self = .consent
+        case "admin-consent":                       self = .adminConsent
+        case "email-challenge-consent":             self = .emailChallengeConsent
+        case "request-activation-email":            self = .requestActivationEmail
+        case "user-code":                           self = .userCode
+        default:                                    self = .unknown
         }
     }
 }
@@ -119,14 +117,19 @@ extension IDXClient.Response.Intent {
 extension IDXClient.Remediation.SocialAuth.Service {
     public init(string: String) {
         switch string {
-        case "FACEBOOK":
-            self = .facebook
-        case "GOOGLE":
-            self = .google
-        case "LINKEDIN":
-            self = .linkedin
-        default:
-            self = .other
+        case "SAML2":        self = .saml         
+        case "GOOGLE":       self = .google       
+        case "FACEBOOK":     self = .facebook     
+        case "LINKEDIN":     self = .linkedin     
+        case "MICROSOFT":    self = .microsoft    
+        case "OIDC":         self = .oidc         
+        case "OKTA":         self = .okta         
+        case "IWA":          self = .iwa          
+        case "AgentlessDSSO":self = .agentless_iwa
+        case "X509":         self = .x509         
+        case "APPLE":        self = .apple        
+        case "OIN_SOCIAL":   self = .oin_social   
+        default:             self = .other
         }
     }
 }

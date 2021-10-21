@@ -44,20 +44,21 @@ class IDXClientTests: XCTestCase {
     func testApiDelegation() throws {
         XCTAssertEqual(api.recordedCalls.count, 0)
         
-        let remedationOption = IDXClient.Remediation(client: client,
-                                                     name: "cancel",
-                                                     method: "GET",
-                                                     href: URL(string: "some://url")!,
-                                                     accepts: "application/json",
-                                                     form: IDXClient.Remediation.Form(fields: [
-                                                        IDXClient.Remediation.Form.Field(name: "foo",
-                                                                                         visible: false,
-                                                                                         mutable: true,
-                                                                                         required: false,
-                                                                                         secret: false)
-                                                     ])!,
-                                                     refresh: nil,
-                                                     relatesTo: nil)
+        let remedationOption = try XCTUnwrap(IDXClient.Remediation(
+                                                client: client,
+                                                name: "cancel",
+                                                method: "GET",
+                                                href: URL(string: "some://url")!,
+                                                accepts: "application/json",
+                                                form: IDXClient.Remediation.Form(fields: [
+                                                    IDXClient.Remediation.Form.Field(name: "foo",
+                                                                                     visible: false,
+                                                                                     mutable: true,
+                                                                                     required: false,
+                                                                                     secret: false)
+                                                ])!,
+                                                refresh: nil,
+                                                relatesTo: nil))
         let response = IDXClient.Response(client: client,
                                           expiresAt: Date(),
                                           intent: .login,

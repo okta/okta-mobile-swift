@@ -62,6 +62,10 @@ class LandingViewController: UIViewController {
         actionsheet.addAction(.init(title: "Reset request log", style: .destructive, handler: { _ in
             URLSessionAudit.shared.reset()
         }))
+        actionsheet.addAction(.init(title: "Toggle automatic logging to console", style: .default, handler: { _ in
+            URLSessionAudit.shared.logToConsole = !URLSessionAudit.shared.logToConsole
+        }))
+        
         actionsheet.addAction(.init(title: "Cancel", style: .cancel))
         
         present(actionsheet, animated: true)

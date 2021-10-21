@@ -27,6 +27,8 @@ extension IDXClient {
     /// Nested form values can be accessed through keyed subscripting, for example:
     ///
     ///    response.remediations[.identifier]
+    ///
+    /// Some remediations are represented by subclasses of `IDXClient.Remediation` when specific behaviors or common patterns are available. These represent optional conveniences that simplify access to these types of objects.
     @objc(IDXRemediation)
     @dynamicMemberLookup
     public class Remediation: NSObject {
@@ -68,14 +70,14 @@ extension IDXClient {
         let refresh: TimeInterval?
         let relatesTo: [String]?
 
-        required internal init(client: IDXClientAPI,
-                      name: String,
-                      method: String,
-                      href: URL,
-                      accepts: String?,
-                      form: Form,
-                      refresh: TimeInterval? = nil,
-                      relatesTo: [String]? = nil)
+        required internal init?(client: IDXClientAPI,
+                                name: String,
+                                method: String,
+                                href: URL,
+                                accepts: String?,
+                                form: Form,
+                                refresh: TimeInterval? = nil,
+                                relatesTo: [String]? = nil)
         {
             self.client = client
             self.name = name
@@ -120,7 +122,7 @@ extension IDXClient {
         /// If a completion handler is not provided, you should ensure that you implement the `IDXClientDelegate.idx(client:didReceive:)` methods to process any response or error returned from this call.
         /// - Parameters:
         ///   - completion: Optional completion handler invoked when a response is received.
-        public func proceed(completion: IDXClient.ResponseResult?) {
+        public func proceed(completion: IDXClient.ResponseResult? = nil) {
             guard let client = client else {
                 completion?(.failure(.invalidClient))
                 return
@@ -146,73 +148,6 @@ extension IDXClient {
                 case .failure(let error):
                     completion?(nil, error)
                 }
-            }
-        }
-
-        /// Remediation subclass used to represent social authentication remediations (e.g. IDP authentication).
-        @objc(IDXSocialAuthRemediation)
-        public class SocialAuth: Remediation {
-            /// The URL an application should load or redirect to in order to continue authentication with the IDP service.
-            @objc public var redirectUrl: URL { href }
-            
-            /// The service for this social authentication remediation.
-            @objc public let service: Service
-
-            /// The developer-assigned IDP name within the Okta admin dashboard.
-            @objc public let idpName: String
-            
-            init(client: IDXClientAPI,
-                 name: String,
-                 method: String,
-                 href: URL,
-                 accepts: String?,
-                 form: IDXClient.Remediation.Form,
-                 refresh: TimeInterval?,
-                 relatesTo: [String]?,
-                 id: String,
-                 idpName: String,
-                 service: Service)
-            {
-                self.idpName = idpName
-                self.service = service
-                
-                super.init(client: client,
-                           name: name,
-                           method: method,
-                           href: href,
-                           accepts: accepts,
-                           form: form,
-                           refresh: refresh,
-                           relatesTo: relatesTo)
-            }
-            
-            public override var description: String {
-                let logger = DebugDescription(self)
-                let components = [
-                    "\(#keyPath(redirectUrl)): \(redirectUrl)",
-                    "\(#keyPath(idpName)): \(idpName)"
-                ]
-                
-                let superDescription = logger.unbrace(super.description)
-                
-                return logger.brace(superDescription.appending(components.joined(separator: "; ")))
-            }
-            
-            public override var debugDescription: String {
-                super.debugDescription
-            }
-
-            required internal init(client: IDXClientAPI, name: String, method: String, href: URL, accepts: String?, form: Form, refresh: TimeInterval? = nil, relatesTo: [String]? = nil) {
-                fatalError("init(client:name:method:href:accepts:form:refresh:relatesTo:) has not been implemented")
-            }
-            
-            /// The list of services that are possible within a social authentication workflow.
-            @objc(IDXSocialAuthRemediationService)
-            public enum Service: Int {
-                case facebook
-                case google
-                case linkedin
-                case other
             }
         }
     }

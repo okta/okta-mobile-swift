@@ -304,16 +304,31 @@ extension IDXClient.Remediation {
                                                     relatesTo: object.relatesTo,
                                                     id: idpId,
                                                     idpName: idpName,
+                                                    idpType: idpType,
                                                     service: .init(string: idpType))
+            
         default:
-            return IDXClient.Remediation(client: client,
-                                         name: object.name,
-                                         method: object.method,
-                                         href: object.href,
-                                         accepts: object.accepts,
-                                         form: form,
-                                         refresh: refresh,
-                                         relatesTo: object.relatesTo)
+            let classType = type.remediationClass
+            if let result = classType.init(client: client,
+                                           name: object.name,
+                                           method: object.method,
+                                           href: object.href,
+                                           accepts: object.accepts,
+                                           form: form,
+                                           refresh: refresh,
+                                           relatesTo: object.relatesTo)
+            {
+                return result
+            } else {
+                return IDXClient.Remediation(client: client,
+                                             name: object.name,
+                                             method: object.method,
+                                             href: object.href,
+                                             accepts: object.accepts,
+                                             form: form,
+                                             refresh: refresh,
+                                             relatesTo: object.relatesTo)
+            }
         }
     }
 

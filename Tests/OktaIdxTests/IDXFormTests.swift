@@ -28,15 +28,51 @@ class IDXFormTests: XCTestCase {
                                                      codeVerifier: "verifier"))
 
     func testSubscripts() throws {
-        let form = IDXClient.Remediation.Form([.identifier, .stateHandle, .passwordCredentials])
-        let remediation = IDXClient.Remediation.Test(client: clientMock,
-                                                     name: "LOGIN",
-                                                     method: "POST",
-                                                     href: URL(string: "https://example.com")!,
-                                                     accepts: nil,
-                                                     form: form)
-        XCTAssertEqual(form.fields.count, 2)
-        XCTAssertEqual(form.allFields.count, 3)
+        let data = try XCTUnwrap("""
+        {
+            "rel": ["create-form"],
+            "name": "identify",
+            "href": "https://example.com/idp/idx/identify",
+            "method": "POST",
+            "value": [{
+                "name": "identifier",
+                "label": "Username"
+            },
+            {
+               "form" : {
+                  "value" : [
+                     {
+                        "label" : "Password",
+                        "name" : "passcode",
+                        "secret" : true
+                     }
+                  ]
+               },
+               "name" : "credentials",
+               "required" : true,
+               "type" : "object"
+            },
+            {
+                "name": "rememberMe",
+                "type": "boolean",
+                "label": "Remember this device"
+            }, {
+                "name": "stateHandle",
+                "required": true,
+                "value": "ahc52KautBHCANs3ScZjLfRcxFjP_N5mqOTYouqHFP",
+                "visible": false,
+                "mutable": false
+            }],
+            "accepts": "application/ion+json; okta-version=1.0.0"
+        }
+        """.data(using: .utf8))
+        
+        let v1Form = try JSONDecoder().decode(V1.Response.Form.self, from: data)
+        let remediation = try XCTUnwrap(IDXClient.Remediation.makeRemediation(client: clientMock, v1: v1Form))
+        let form = remediation.form
+        
+        XCTAssertEqual(form.fields.count, 3)
+        XCTAssertEqual(form.allFields.count, 4)
         
         // Ensure private fields aren't accessible
         XCTAssertNil(form["stateHandle"])
