@@ -34,6 +34,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
         return true
     }
+    
+    // Preventing 3rd party keyboards is considered best practice for apps that handle sensitive data.
+    //
+    // Malicious third party keyboards (given full access permissions) are capable of recording and exfiltrating keystrokes. In this case of our app, that would include username/password data.
+    func application(_ application: UIApplication, shouldAllowExtensionPointIdentifier extensionPointIdentifier: UIApplication.ExtensionPointIdentifier) -> Bool {
+        return extensionPointIdentifier != .keyboard
+    }
 
     // MARK: UISceneSession Lifecycle
 
