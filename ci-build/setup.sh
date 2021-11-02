@@ -1,14 +1,8 @@
 #!/bin/bash
 
-# Install any missing gems
-bundle install
-
 # Constants
 PROJECT_NAME="OktaIdx"
 IDX_ROOT="${CI_DIRECTORY}"/..
-FASTLANE_DIRECTORY="fastlane"
-TEST_OUTPUT_DIR="${FASTLANE_DIRECTORY}/test_output"
-LINT_RESULTS_DIR="${FASTLANE_DIRECTORY}/lint"
 DERIVED_DATA="${IDX_ROOT}/DerivedData"
 DART_DIR="${HOME}/dart"
 export LOGDIRECTORY=${DART_DIR}
@@ -55,25 +49,15 @@ function runTests() {
   echo ${TEST_SUITE_TYPE} > ${TEST_SUITE_TYPE_FILE}
   echo ${TEST_RESULT_FILE_DIR} > ${TEST_RESULT_FILE_DIR_FILE}
 
-  # Clean old test results
-  if [[ -d "${TEST_OUTPUT_DIR}" ]]; then
-    echo "Removing: ${TEST_OUTPUT_DIR}"
-    rm -rf ${TEST_OUTPUT_DIR}
-  fi
-
   if [[ $2 == "OktaSdk" ]]; then
     buildOktaSdk
   fi
 
   aws s3 --quiet --region us-east-1 cp s3://ci-secret-stash/test/devex/okta-idx-swift/TestCredentials.xcconfig $IDX_ROOT/TestCredentials.xcconfig
-  #bundle exec fastlane test scheme:"$1"
   xcodebuild -workspace $IDX_ROOT/okta-idx.xcworkspace -scheme $1 -destination "platform=iOS Simulator,name=iPhone 12" test
 
   FOUND_ERROR=$?
 
-  echo "CI-INFO: Archiving Test Results to $TEST_OUTPUT_DIR"
-  tar zcvf ${DART_DIR}/testResults.zip -C ${FASTLANE_DIRECTORY} test_output
-  cp ${TEST_OUTPUT_DIR}/test-result.xml ${DART_DIR}
   ### Failure! One or other test suites exit non-zero
   if [[ "$FOUND_ERROR" -ne 0 ]] ; then
     echo "error: $FOUND_ERROR"
@@ -98,42 +82,6 @@ function buildOktaSdk() {
     cp -r $IDX_ROOT/okta-sdk-swift/build/Release-iphonesimulator/OktaSdk.framework $IDX_ROOT/Samples/EmbeddedAuthWithSDKs/EmbeddedAuthUITests/ExternalDependencies
   else
     echo "Skipping OktaSdk since it's already built locally"
-  fi
-}
-
-function runSwiftLint() {
-  echo "===================="
-  echo "Lint"
-  xcodebuild -version
-  pwd
-  echo "===================="
-
-
-  export TEST_SUITE_TYPE="junit"
-  export TEST_RESULT_FILE_DIR="${DART_DIR}"
-  echo ${TEST_SUITE_TYPE} > ${TEST_SUITE_TYPE_FILE}
-  echo ${TEST_RESULT_FILE_DIR} > ${TEST_RESULT_FILE_DIR_FILE}
-
-  # Clean out old test results
-  if [[ -d "$LINT_RESULTS_DIR" ]]; then
-    echo "Removing: $LINT_RESULTS_DIR"
-    rm -rf "$LINT_RESULTS_DIR"
-  fi
-
-  bundle exec fastlane lint action:$1
-  LINT_ERROR=$?
-  if [[ -d "$LINT_RESULTS_DIR" ]]; then
-    echo "CI-INFO: Copy Lint output to $DART_DIR"
-    pwd
-    cp ${LINT_RESULTS_DIR}/*.xml ${DART_DIR}
-  fi
-
-  if [[ "$LINT_ERROR" -ne 0 ]]; then
-	  echo "error: $LINT_ERROR"
-	  return -1
-  else
-    echo "No Error."
-    return 0
   fi
 }
 
