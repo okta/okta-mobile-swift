@@ -21,17 +21,26 @@ internal extension Data {
     /// Produces a SHA256 hash of the supplied data.
     /// - Returns: SHA256 representation of the data.
     func sha256() -> Data {
+        #if canImport(CryptoKit)
         if #available(iOS 13.0, macCatalyst 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *) {
             return Data(SHA256.hash(data: self))
         } else {
-            var hash = [UInt8](repeating: 0, count: Int(CC_SHA256_DIGEST_LENGTH))
-            self.withUnsafeBytes {
-                _ = CC_SHA256($0.baseAddress, CC_LONG(self.count), &hash)
-            }
-            return Data(hash)
+            return commonCryptoSHA256()
         }
+        #else
+        return commonCryptoSHA256()
+        #endif
     }
     
+    private func commonCryptoSHA256() -> Data {
+        var hash = [UInt8](repeating: 0, count: Int(CC_SHA256_DIGEST_LENGTH))
+        self.withUnsafeBytes {
+            _ = CC_SHA256($0.baseAddress, CC_LONG(self.count), &hash)
+        }
+        return Data(hash)
+    }
+    
+
     /// Encodes the data as a URL-safe Base64 string.
     /// - Returns: Base64 URL-encoded string.
     func base64URLEncodedString() -> String {

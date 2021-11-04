@@ -34,12 +34,12 @@ class MockBase {
     }
     
     func result<T>(for name: String) -> Result<T, IDXClientError> {
-        let response = response(for: name)
-        if let result = response?["response"] as? T {
+        let responseData = response(for: name)
+        if let result = responseData?["response"] as? T {
             return .success(result)
         }
         
-        let error = response?["error"] as? IDXClientError ?? IDXClientError.invalidClient
+        let error = responseData?["error"] as? IDXClientError ?? IDXClientError.invalidClient
         return .failure(error)
     }
 }
@@ -54,8 +54,7 @@ class IDXClientAPIMock: MockBase, IDXClientAPI {
     func resume(completion: IDXClient.ResponseResult?) {
         recordedCalls.append(RecordedCall(function: #function,
                                           arguments: [:]))
-        let result: Result<IDXClient.Response, IDXClientError> = result(for: #function)
-        completion?(result)
+        completion?(result(for: #function))
     }
     
     func proceed(remediation option: IDXClient.Remediation, completion: IDXClient.ResponseResult?) {
@@ -63,8 +62,7 @@ class IDXClientAPIMock: MockBase, IDXClientAPI {
                                           arguments: [
                                             "remediation": option as Any,
                                           ]))
-        let result: Result<IDXClient.Response, IDXClientError> = result(for: #function)
-        completion?(result)
+        completion?(result(for: #function))
     }
     
     func exchangeCode(redirect url: URL, completion: IDXClient.TokenResult?) {
@@ -72,8 +70,7 @@ class IDXClientAPIMock: MockBase, IDXClientAPI {
                                           arguments: [
                                             "redirect": url as Any
                                           ]))
-        let result: Result<IDXClient.Token, IDXClientError> = result(for: #function)
-        completion?(result)
+        completion?(result(for: #function))
     }
     
     func exchangeCode(using remediation: IDXClient.Remediation, completion: IDXClient.TokenResult?) {
@@ -81,8 +78,7 @@ class IDXClientAPIMock: MockBase, IDXClientAPI {
                                           arguments: [
                                             "using": response as Any
                                           ]))
-        let result: Result<IDXClient.Token, IDXClientError> = result(for: #function)
-        completion?(result)
+        completion?(result(for: #function))
     }
     
     func redirectResult(for url: URL) -> IDXClient.RedirectResult {
@@ -109,14 +105,12 @@ class IDXClientAPIv1Mock: MockBase, IDXClientAPIImpl {
                                           arguments: [
                                             "state": state as Any
                                           ]))
-        let result: Result<IDXClient.Context, IDXClientError> = result(for: #function)
-        completion(result)
+        completion(result(for: #function))
     }
     
     func resume(completion: @escaping (Result<IDXClient.Response, IDXClientError>) -> Void) {
         recordedCalls.append(RecordedCall(function: #function, arguments: nil))
-        let result: Result<IDXClient.Response, IDXClientError> = result(for: #function)
-        completion(result)
+        completion(result(for: #function))
     }
     
     func proceed(remediation option: IDXClient.Remediation, completion: @escaping (Result<IDXClient.Response, IDXClientError>) -> Void) {
@@ -124,8 +118,7 @@ class IDXClientAPIv1Mock: MockBase, IDXClientAPIImpl {
                                           arguments: [
                                             "remediation": option as Any,
                                           ]))
-        let result: Result<IDXClient.Response, IDXClientError> = result(for: #function)
-        completion(result)
+        completion(result(for: #function))
     }
     
     func redirectResult(for url: URL) -> IDXClient.RedirectResult {
@@ -142,8 +135,7 @@ class IDXClientAPIv1Mock: MockBase, IDXClientAPIImpl {
                                           arguments: [
                                             "redirect": url as Any
                                           ]))
-        let result: Result<IDXClient.Token, IDXClientError> = result(for: #function)
-        completion(result)
+        completion(result(for: #function))
     }
 
     func exchangeCode(using remediation: IDXClient.Remediation, completion: @escaping (Result<IDXClient.Token, IDXClientError>) -> Void) {
@@ -151,8 +143,7 @@ class IDXClientAPIv1Mock: MockBase, IDXClientAPIImpl {
                                           arguments: [
                                             "using": remediation as Any
                                           ]))
-        let result: Result<IDXClient.Token, IDXClientError> = result(for: #function)
-        completion(result)
+        completion(result(for: #function))
     }
 
     func revoke(token: String, type: String, completion: @escaping (Result<Void, IDXClientError>) -> Void) {
@@ -161,8 +152,7 @@ class IDXClientAPIv1Mock: MockBase, IDXClientAPIImpl {
                                             "token": token as Any,
                                             "type": type as Any
                                           ]))
-        let result: Result<Void, IDXClientError> = result(for: #function)
-        completion(result)
+        completion(result(for: #function))
     }
     
     func refresh(token: IDXClient.Token, completion: @escaping (Result<IDXClient.Token, IDXClientError>) -> Void) {
@@ -170,7 +160,6 @@ class IDXClientAPIv1Mock: MockBase, IDXClientAPIImpl {
                                           arguments: [
                                             "token": token as Any
                                           ]))
-        let result: Result<IDXClient.Token, IDXClientError> = result(for: #function)
-        completion(result)
+        completion(result(for: #function))
     }
 }

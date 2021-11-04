@@ -1,0 +1,30 @@
+name: OktaIdx
+
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
+
+jobs:
+  UnitTests:
+    runs-on: macos-11
+    strategy:
+      matrix:
+        xcode: [ "13.1", "12.4" ]
+    env:
+      DEVELOPER_DIR: /Applications/Xcode_${{ matrix.xcode }}.app/Contents/Developer
+    steps:
+    - uses: actions/checkout@v2
+    - name: Xcode iOS Unit Tests
+      run: xcodebuild -workspace okta-idx.xcworkspace -scheme "okta-idx-ios" -destination "platform=iOS Simulator,OS=latest,name=iPhone 11" clean test
+    - name: Swift Tests
+      run: swift test -v
+  PackageValidation:
+    runs-on: macos-11
+    env:
+      DEVELOPER_DIR: /Applications/Xcode_13.1.app/Contents/Developer
+    steps:
+    - uses: actions/checkout@v2
+    - name: Cocoapods
+      run: pod lib lint

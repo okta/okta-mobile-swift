@@ -61,8 +61,8 @@ struct DebugDescription<T: Any> {
 extension String {
     func indentingNewlines(by spaceCount: Int) -> String {
         let spaces = String(repeating: " ", count: spaceCount)
-        let components = components(separatedBy: "\n")
+        let items = components(separatedBy: "\n")
 
-        return String(components.map { "\n" + spaces + $0 }.joined().dropFirst())
+        return String(items.map { "\n" + spaces + $0 }.joined().dropFirst())
     }
 }

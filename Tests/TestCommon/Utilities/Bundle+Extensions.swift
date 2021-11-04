@@ -31,7 +31,14 @@ extension Bundle {
     }
     
     static func testResource(folderName: String? = nil, fileName: String) -> URL {
-        var path = resourcesPath.appendingPathComponent("Resources")
+        var path = resourcesPath
+        
+        // Handle differences when run in macOS targets.
+        if FileManager.default.fileExists(atPath: "\(path.path)/Contents/Resources") {
+            path.appendPathComponent("Contents/Resources")
+        }
+
+        path.appendPathComponent("Resources")
         if let folderName = folderName {
             path.appendPathComponent(folderName)
         }

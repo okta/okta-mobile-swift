@@ -50,20 +50,21 @@ class IDXClientDelegateTests: XCTestCase {
         client = IDXClient(context: context, api: api)
         client.delegate = delegate
         
-        remediationOption = .init(client: client,
-                                  name: "cancel",
-                                  method: "GET",
-                                  href: URL(string: "some://url")!,
-                                  accepts: "application/json",
-                                  form: IDXClient.Remediation.Form(fields: [
-                                    IDXClient.Remediation.Form.Field(name: "foo",
-                                                                     visible: false,
-                                                                     mutable: true,
-                                                                     required: false,
-                                                                     secret: false)
-                                  ])!,
-                                  refresh: nil,
-                                  relatesTo: nil)
+        remediationOption = IDXClient.Remediation(
+            client: client,
+            name: "cancel",
+            method: "GET",
+            href: URL(string: "some://url")!,
+            accepts: "application/json",
+            form: IDXClient.Remediation.Form(fields: [
+                IDXClient.Remediation.Form.Field(name: "foo",
+                                                 visible: false,
+                                                 mutable: true,
+                                                 required: false,
+                                                 secret: false)
+            ])!,
+            refresh: nil,
+            relatesTo: nil)
         token = IDXClient.Token(accessToken: "access",
                                 refreshToken: "refresh",
                                 expiresIn: 10,
