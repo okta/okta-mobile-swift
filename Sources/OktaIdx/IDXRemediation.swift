@@ -30,7 +30,6 @@ extension IDXClient {
     ///
     /// Some remediations are represented by subclasses of `IDXClient.Remediation` when specific behaviors or common patterns are available. These represent optional conveniences that simplify access to these types of objects.
     @objc(IDXRemediation)
-    @dynamicMemberLookup
     public class Remediation: NSObject {
         /// The type of this remediation, which is used for keyed subscripting from a `IDXClient.RemediationCollection`.
         @objc public let type: RemediationType
@@ -44,6 +43,8 @@ extension IDXClient {
         /// The set of authenticators associated with this remediation.
         @objc public internal(set) var authenticators: AuthenticatorCollection = .init(authenticators: nil)
 
+        public let capabilities: [RemediationCapability]
+        
         /// Returns the field within this remedation with the given name or key-path.
         ///
         /// To retrieve nested fields, keyPath "." notation can be used to select fields within child forms, for example:
@@ -51,10 +52,6 @@ extension IDXClient {
         ///    response.remediations[.identifier]["credentials.passcode"]
         @objc public subscript(name: String) -> Form.Field? {
             get { form[name] }
-        }
-        
-        public subscript(dynamicMember name: String) -> Form.Field? {
-            form[dynamicMember: name]
         }
         
         /// Collection of messages for all fields within this remedation.
@@ -77,7 +74,8 @@ extension IDXClient {
                                 accepts: String?,
                                 form: Form,
                                 refresh: TimeInterval? = nil,
-                                relatesTo: [String]? = nil)
+                                relatesTo: [String]? = nil,
+                                capabilities: [RemediationCapability])
         {
             self.client = client
             self.name = name
@@ -88,6 +86,7 @@ extension IDXClient {
             self.form = form
             self.refresh = refresh
             self.relatesTo = relatesTo
+            self.capabilities = capabilities
             
             super.init()
         }

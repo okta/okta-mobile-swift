@@ -12,21 +12,19 @@
 
 import Foundation
 
-protocol PollingHandlerDelegate: AnyObject {
-    func pollingRefreshTime(handler: PollingHandler) -> TimeInterval
-    func pollingRemediation(handler: PollingHandler) -> IDXClient.Remediation?
-}
-
 class PollingHandler {
-    weak var delegate: PollingHandlerDelegate?
-
     private(set) var isPolling: Bool = false
+    internal private(set) var pollOption: IDXClient.Remediation
+
+    init(pollOption: IDXClient.Remediation) {
+        self.pollOption = pollOption
+    }
     
     deinit {
         isPolling = false
     }
     
-    func start(completion: @escaping (IDXClient.Response?, Error?) -> Bool) {
+    func start(completion: @escaping (IDXClient.Response?, Error?) -> IDXClient.Remediation?) {
         guard !isPolling else { return }
         
         isPolling = true
@@ -37,21 +35,18 @@ class PollingHandler {
         isPolling = false
     }
     
-    func nextPoll(completion: @escaping (IDXClient.Response?, Error?) -> Bool) {
-        guard let refreshTime = delegate?.pollingRefreshTime(handler: self),
+    func nextPoll(completion: @escaping (IDXClient.Response?, Error?) -> IDXClient.Remediation?) {
+        guard let refreshTime = pollOption.refresh,
               refreshTime > 0
         else {
-            if !completion(nil, IDXClientError.internalMessage("Missing polling information")) {
-                stopPolling()
-            }
+            let _ = completion(nil, IDXClientError.internalMessage("Missing polling information"))
+            stopPolling()
             return
         }
         
         let deadlineTime = DispatchTime.now() + refreshTime
         DispatchQueue.global().asyncAfter(deadline: deadlineTime) { [weak self] in
-            guard let self = self,
-                  let remediation = self.delegate?.pollingRemediation(handler: self)
-            else {
+            guard let self = self else {
                 return
             }
             
@@ -59,14 +54,15 @@ class PollingHandler {
                 return
             }
             
-            remediation.proceed { [weak self] (response, error) in
+            self.pollOption.proceed { [weak self] (response, error) in
                 guard let self = self else { return }
                 
                 if self.isPolling == false {
                     return
                 }
                 
-                if completion(response, error) {
+                if let nextPollingOption = completion(response, error) {
+                    self.pollOption = nextPollingOption
                     self.nextPoll(completion: completion)
                 } else {
                     self.isPolling = false

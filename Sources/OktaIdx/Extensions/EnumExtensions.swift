@@ -114,7 +114,7 @@ extension IDXClient.Response.Intent {
     }
 }
 
-extension IDXClient.Remediation.SocialAuth.Service {
+extension Capability.SocialIDP.Service {
     public init(string: String) {
         switch string {
         case "SAML2":        self = .saml         
@@ -125,10 +125,10 @@ extension IDXClient.Remediation.SocialAuth.Service {
         case "OIDC":         self = .oidc         
         case "OKTA":         self = .okta         
         case "IWA":          self = .iwa          
-        case "AgentlessDSSO":self = .agentless_iwa
+        case "AgentlessDSSO":self = .agentlessIwa
         case "X509":         self = .x509         
         case "APPLE":        self = .apple        
-        case "OIN_SOCIAL":   self = .oin_social   
+        case "OIN_SOCIAL":   self = .oinSocial   
         default:             self = .other
         }
     }

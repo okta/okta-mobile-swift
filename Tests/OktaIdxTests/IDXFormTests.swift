@@ -77,29 +77,18 @@ class IDXFormTests: XCTestCase {
         // Ensure private fields aren't accessible
         XCTAssertNil(form["stateHandle"])
         XCTAssertNil(remediation["stateHandle"])
-        XCTAssertNil(form.stateHandle)
-        XCTAssertNil(remediation.stateHandle)
 
         // Check top-level fields
         XCTAssertEqual(form["identifier"]?.name, "identifier")
         XCTAssertEqual(remediation["identifier"]?.name, "identifier")
-        XCTAssertEqual(form.identifier?.name, "identifier")
-        XCTAssertEqual(remediation.identifier?.name, "identifier")
 
         // Check top-level object fields
         XCTAssertEqual(form["credentials"]?.name, "credentials")
         XCTAssertEqual(remediation["credentials"]?.name, "credentials")
-        XCTAssertEqual(form.credentials?.name, "credentials")
-        XCTAssertEqual(remediation.credentials?.name, "credentials")
-        XCTAssertEqual(form.credentials?.form?.fields.count, 1)
-        XCTAssertEqual(form.credentials?.form?.allFields.count, 1)
         
         // Check nested fields
         XCTAssertEqual(form["credentials"]?["passcode"]?.name, "passcode")
         XCTAssertEqual(form["credentials.passcode"]?.name, "passcode")
         XCTAssertEqual(remediation["credentials.passcode"]?.name, "passcode")
-        XCTAssertEqual(form.credentials?.form?.passcode?.name, "passcode")
-        XCTAssertEqual(form.credentials?.passcode?.name, "passcode")
-        XCTAssertEqual(remediation.credentials?.passcode?.name, "passcode")
     }
 }

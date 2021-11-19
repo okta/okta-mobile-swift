@@ -19,7 +19,6 @@ extension IDXClient.Remediation.Form {
     ///
     ///    credentials.form["passcode"]
     @objc(IDXRemediationFormField)
-    @dynamicMemberLookup
     final public class Field: NSObject {
         /// The programmatic name for this form value.
         @objc public let name: String?
@@ -88,10 +87,6 @@ extension IDXClient.Remediation.Form {
         /// Returns the nested `form` field with the given name.
         @objc public subscript(name: String) -> Field? {
             form?[name]
-        }
-        
-        public subscript(dynamicMember name: String) -> Field? {
-            form?[dynamicMember: name]
         }
         
         let isVisible: Bool

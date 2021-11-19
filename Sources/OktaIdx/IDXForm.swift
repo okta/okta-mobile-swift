@@ -15,7 +15,6 @@ import Foundation
 extension IDXClient.Remediation {
     /// Object that represents a form of fields associated with a remediation.
     @objc(IDXRemediationForm)
-    @dynamicMemberLookup
     public class Form: NSObject {
         @objc public subscript(index: Int) -> Field? {
             fields[index]
@@ -27,14 +26,10 @@ extension IDXClient.Remediation {
             let name = components.removeFirst()
             var result = fields.first { $0.name == name }
             if result != nil && !components.isEmpty {
-                result = result?.form?[dynamicMember: components.joined(separator: ".")]
+                result = result?.form?[components.joined(separator: ".")]
             }
             
             return result
-        }
-        
-        public subscript(dynamicMember name: String) -> Field? {
-            return self[name]
         }
         
         /// The array of ordered user-visible fields within this form. Each field may also contain nested forms for collections of related fields.

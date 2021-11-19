@@ -50,23 +50,9 @@ if let identify = response.remediations[.identify],
 Password recovery is supported through the use of the current authenticator's associated actions.  This can be accessed through the use of the response's `authenticators` collection. Not all authenticators have the same set of capabilities, so these additional features are exposed through the use of protocols.  So those authenticators that can support account recovery, you can check to see if provides that capability
 
 ```swift
-if let authenticator = response.authenticators.current as? IDXClient.Authenticator & Recoverable,
-   authenticator.canRecover
-{
-    authenticator.recover { (response, error) in
+if let recoverable = response.authenticators.current?.recoverable {
+    recoverable.recover { (response, error) in
         // Handle the response
-    }
-}
-```
-
-Alternatively, if you want to explicitly check for the Password authenticator, that class already implements support for the `Recoverable` protocol.
-
-```swift
-if let authenticator = response.authenticators.current as? IDXClient.Authenticator.Password,
-   authenticator.canRecover
-{
-    authenticator.recover { (response, error) in
-        // Handle response
     }
 }
 ```
@@ -76,7 +62,7 @@ Once you perform the `recover` action, the response you receive will contain a `
 ```swift
 guard let response = response,
       let remediation = response.remediations[.identifyRecovery],
-      let identifierField = remediation.identifier
+      let identifierField = remediation["identifier"]
 else {
     // Handle error
     return

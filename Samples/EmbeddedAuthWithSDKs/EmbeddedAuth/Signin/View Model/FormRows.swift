@@ -263,25 +263,19 @@ extension IDXClient.Response {
                         delegate: delegate))
 
         for authenticator in remediationOption.authenticators {
-            if let sendable = authenticator as? Sendable,
-               sendable.canSend
-            {
+            if authenticator.sendable != nil {
                 rows.append(Row(kind: .message(style: .enrollment(action: .send)),
                                 parent: nil,
                                 delegate: delegate))
             }
             
-            if let resendable = authenticator as? Resendable,
-               resendable.canResend
-            {
+            if authenticator.resendable != nil {
                 rows.append(Row(kind: .message(style: .enrollment(action: .resend)),
                                 parent: nil,
                                 delegate: delegate))
             }
             
-            if let recoverable = authenticator as? Recoverable,
-               recoverable.canRecover
-            {
+            if authenticator.recoverable != nil {
                 rows.append(Row(kind: .message(style: .enrollment(action: .recover)),
                                 parent: nil,
                                 delegate: delegate))

@@ -19,7 +19,7 @@ class IDXRemediationTableViewController: UITableViewController, IDXResponseContr
     var signin: Signin?
 
     private var webAuthSession: ASWebAuthenticationSession?
-    private weak var poll: Pollable?
+    private weak var poll: Capability.Pollable?
     
     private var dataSource: UITableViewDiffableDataSource<Signin.Section, Signin.Row>!
 
@@ -65,9 +65,7 @@ class IDXRemediationTableViewController: UITableViewController, IDXResponseContr
             inputView.becomeFirstResponder()
         }
         
-        if let poll = response?.authenticators.current as? IDXClient.Authenticator & Pollable,
-           poll.canPoll
-        {
+        if let poll = response?.authenticators.current?.pollable {
             beginPolling(using: poll)
         }
     }
@@ -97,7 +95,7 @@ class IDXRemediationTableViewController: UITableViewController, IDXResponseContr
         //}
         
         poll?.stopPolling()
-        if let socialAuth = remediationOption as? IDXClient.Remediation.SocialAuth,
+        if let socialAuth = remediationOption?.socialIdp,
            let idx = signin.idx,
            let scheme = URL(string: idx.context.configuration.redirectUri)?.scheme
         {
@@ -182,7 +180,7 @@ class IDXRemediationTableViewController: UITableViewController, IDXResponseContr
         }
     }
     
-    func beginPolling(using poll: IDXClient.Authenticator & Pollable) {
+    func beginPolling(using poll: Capability.Pollable) {
         guard let signin = signin else {
             showError(SigninError.genericError(message: "Signin session deallocated"))
             return
@@ -193,19 +191,18 @@ class IDXRemediationTableViewController: UITableViewController, IDXResponseContr
         }
 
         self.poll = poll
-        poll.startPolling { [weak self] (response, error) in
-            guard let response = response else {
-                if let error = error {
-                    DispatchQueue.main.async {
-                        self?.showError(error, recoverable: true)
-                        self?.pollActivityIndicator.stopAnimating()
-                    }
-                    poll.stopPolling()
+        poll.startPolling { result in
+            poll.stopPolling()
+            switch result {
+            case .success(let response):
+                signin.proceed(to: response)
+                
+            case .failure(let error):
+                DispatchQueue.main.async {
+                    self.showError(error, recoverable: true)
+                    self.pollActivityIndicator.stopAnimating()
                 }
-                return
             }
-            
-            signin.proceed(to: response)
         }
     }
 }
@@ -229,42 +226,36 @@ extension IDXRemediationTableViewController: SigninRowDelegate {
         guard let signin = signin else { return }
         switch action {
         case .send:
-            if let authenticator = response?.authenticators.current as? Sendable,
-               authenticator.canSend
-            {
-                authenticator.send { (response, error) in
-                    guard let response = response else {
-                        signin.failure(with: error ?? SigninError.stepUnsupported)
-                        return
+            if let sendable = response?.authenticators.current?.sendable {
+                sendable.send { result in
+                    switch result {
+                    case .failure(let error):
+                        signin.failure(with: error)
+                    case .success(let response):
+                        signin.proceed(to: response)
                     }
-                    
-                    signin.proceed(to: response)
                 }
             }
         case .resend:
-            if let authenticator = response?.authenticators.current as? Resendable,
-               authenticator.canResend
-            {
-                authenticator.resend { (response, error) in
-                    guard let response = response else {
-                        signin.failure(with: error ?? SigninError.stepUnsupported)
-                        return
+            if let resendable = response?.authenticators.current?.resendable {
+                resendable.resend { result in
+                    switch result {
+                    case .failure(let error):
+                        signin.failure(with: error)
+                    case .success(let response):
+                        signin.proceed(to: response)
                     }
-                    
-                    signin.proceed(to: response)
                 }
             }
         case .recover:
-            if let authenticator = response?.authenticators.current as? Recoverable,
-               authenticator.canRecover
-            {
-                authenticator.recover { (response, error) in
-                    guard let response = response else {
-                        signin.failure(with: error ?? SigninError.stepUnsupported)
-                        return
+            if let recoverable = response?.authenticators.current?.recoverable {
+                recoverable.recover { result in
+                    switch result {
+                    case .failure(let error):
+                        signin.failure(with: error)
+                    case .success(let response):
+                        signin.proceed(to: response)
                     }
-                    
-                    signin.proceed(to: response)
                 }
             }
         }
@@ -353,10 +344,8 @@ extension Signin.Row {
             if let cell = cell as? IDXOptionTableViewCell,
                let fieldName = field.name
             {
-                if let authenticator = option.authenticator as? IDXClient.Authenticator & HasProfile,
-                   let profile = authenticator.profile
-                {
-                    cell.detailLabel.text = profile.values.first
+                if let profile = option.authenticator?.profile?.values.values.first {
+                    cell.detailLabel.text = profile
                 } else {
                     cell.detailLabel.text = nil
                 }

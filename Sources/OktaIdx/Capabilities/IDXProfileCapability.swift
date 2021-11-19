@@ -12,12 +12,21 @@
 
 import Foundation
 
-extension IDXClient.Authenticator.Email: PollingHandlerDelegate {
-    func pollingRefreshTime(handler: PollingHandler) -> TimeInterval {
-        self.refreshTime
-    }
-    
-    func pollingRemediation(handler: PollingHandler) -> IDXClient.Remediation? {
-        pollOption
+extension Capability {
+    /// Capability when an authenticator or rememediation contains related profile information.
+    public struct Profile: AuthenticatorCapability {
+        /// Profile information describing the authenticator.
+        ///
+        /// This usually contains redacted information relevant to display to the user.
+        public let values: [String:String]
+        
+        /// Returns the nested `profile` field with the given name.
+        public subscript(name: String) -> String? {
+            values[name]
+        }
+
+        internal init(profile: [String:String]) {
+            self.values = profile
+        }
     }
 }

@@ -137,8 +137,8 @@ extension V1.Response {
     }
 }
 
-extension IDXClient.Authenticator.Password.Settings {
-    convenience init?(with settings: [String:JSONValue]?) {
+extension Capability.PasswordSettings {
+    init?(with settings: [String:JSONValue]?) {
         guard let settings = settings,
               let complexity = settings["complexity"]?.toAnyObject() as? [String: Any]
         else { return nil }
@@ -197,6 +197,100 @@ extension IDXClient.RemediationCollection {
     }
 }
 
+extension Capability.Sendable {
+    init?(client: IDXClientAPI, v1 authenticators: [V1.Response.Authenticator]) {
+        guard let authenticator = authenticators.compactMap({ $0.send }).first,
+              let remediation = IDXClient.Remediation.makeRemediation(client: client, v1: authenticator)
+        else {
+            return nil
+        }
+        self.init(client: client, remediation: remediation)
+    }
+}
+
+extension Capability.Resendable {
+    init?(client: IDXClientAPI, v1 authenticators: [V1.Response.Authenticator]) {
+        guard let authenticator = authenticators.compactMap({ $0.resend }).first,
+              let remediation = IDXClient.Remediation.makeRemediation(client: client, v1: authenticator)
+        else {
+            return nil
+        }
+        self.init(client: client, remediation: remediation)
+    }
+}
+
+extension Capability.Recoverable {
+    init?(client: IDXClientAPI, v1 authenticators: [V1.Response.Authenticator]) {
+        guard let authenticator = authenticators.compactMap({ $0.recover }).first,
+              let remediation = IDXClient.Remediation.makeRemediation(client: client, v1: authenticator)
+        else {
+            return nil
+        }
+        self.init(client: client, remediation: remediation)
+    }
+}
+
+extension Capability.Pollable {
+    convenience init?(client: IDXClientAPI, v1 authenticators: [V1.Response.Authenticator]) {
+        guard let typeName = authenticators.first?.type,
+              let authenticator = authenticators.compactMap({ $0.poll }).first,
+              let remediation = IDXClient.Remediation.makeRemediation(client: client, v1: authenticator)
+        else {
+            return nil
+        }
+        
+        let type = IDXClient.Authenticator.Kind(string: typeName)
+        self.init(client: client,
+                  authenticatorType: type,
+                  remediation: remediation)
+    }
+}
+
+extension Capability.Profile {
+    init?(client: IDXClientAPI, v1 authenticators: [V1.Response.Authenticator]) {
+        guard let profile = authenticators.compactMap({ $0.profile }).first
+        else {
+            return nil
+        }
+        
+        self.init(profile: profile)
+    }
+}
+
+extension Capability.PasswordSettings {
+    init?(client: IDXClientAPI, v1 authenticators: [V1.Response.Authenticator]) {
+        guard let typeName = authenticators.first?.type,
+              IDXClient.Authenticator.Kind(string: typeName) == .password,
+              let settings = authenticators.compactMap({ $0.settings }).first
+        else {
+            return nil
+        }
+        
+        self.init(with: settings)
+    }
+}
+
+extension Capability.SocialIDP {
+    init?(client: IDXClientAPI, v1 object: V1.Response.Form) {
+        let type = IDXClient.Remediation.RemediationType(string: object.name)
+        guard type == .redirectIdp,
+              let idpObject = object.idp,
+              let idpId = idpObject["id"],
+              let idpName = idpObject["name"],
+              let idpType = object.type
+        else {
+            return nil
+        }
+
+        self.init(client: client,
+                  redirectUrl: object.href,
+                  id: idpId,
+                  idpName: idpName,
+                  idpType: idpType,
+                  service: .init(string: idpType))
+    }
+}
+
 extension IDXClient.Authenticator {
     static func makeAuthenticator(client: IDXClientAPI,
                                   v1 authenticators: [V1.Response.Authenticator],
@@ -210,68 +304,28 @@ extension IDXClient.Authenticator {
             throw IDXClientError.internalMessage("Some mapped authenticators have differing types: \(filteredTypes.joined(separator: ", "))")
         }
         
-        let type = IDXClient.Authenticator.Kind(string: first.type)
         let state = response.authenticatorState(for: authenticators, in: jsonPaths)
         let key = authenticators.compactMap { $0.key }.first
         let methods = authenticators.compactMap { $0.methods }.first
-        let settings = authenticators.compactMap { $0.settings }.first
-        let profile = authenticators.compactMap { $0.profile }.first
-//        let contextualData = authenticators.compactMap { $0.contextualData }.first
-        let sendOption = IDXClient.Remediation.makeRemediation(client: client, v1: authenticators.compactMap { $0.send }.first )
-        let resendOption = IDXClient.Remediation.makeRemediation(client: client, v1: authenticators.compactMap { $0.resend }.first)
-        let pollOption = IDXClient.Remediation.makeRemediation(client: client, v1: authenticators.compactMap { $0.poll }.first)
-        let recoverOption = IDXClient.Remediation.makeRemediation(client: client, v1: authenticators.compactMap { $0.recover }.first)
 
-        switch type {
-        case .password:
-            let password = IDXClient.Authenticator.Password.Settings(with: settings)
-            return IDXClient.Authenticator.Password(client: client,
-                                                    v1JsonPaths: jsonPaths,
-                                                    state: state,
-                                                    id: first.id,
-                                                    displayName: first.displayName,
-                                                    type: first.type,
-                                                    key: key,
-                                                    methods: methods,
-                                                    settings: password,
-                                                    recoverOption: recoverOption)
-            
-        case .phone:
-            return IDXClient.Authenticator.Phone(client: client,
-                                                 v1JsonPaths: jsonPaths,
-                                                 state: state,
-                                                 id: first.id,
-                                                 displayName: first.displayName,
-                                                 type: first.type,
-                                                 key: key,
-                                                 methods: methods,
-                                                 profile: profile,
-                                                 sendOption: sendOption,
-                                                 resendOption: resendOption)
-            
-        case .email:
-            return IDXClient.Authenticator.Email(client: client,
-                                                 v1JsonPaths: jsonPaths,
-                                                 state: state,
-                                                 id: first.id,
-                                                 displayName: first.displayName,
-                                                 type: first.type,
-                                                 key: key,
-                                                 methods: methods,
-                                                 profile: profile,
-                                                 resendOption: resendOption,
-                                                 pollOption: pollOption)
-
-        default:
-            return IDXClient.Authenticator(client: client,
-                                           v1JsonPaths: jsonPaths,
-                                           state: state,
-                                           id: first.id,
-                                           displayName: first.displayName,
-                                           type: first.type,
-                                           key: key,
-                                           methods: methods)
-        }
+        let capabilities: [AuthenticatorCapability?] = [
+            Capability.Profile(client: client, v1: authenticators),
+            Capability.Sendable(client: client, v1: authenticators),
+            Capability.Resendable(client: client, v1: authenticators),
+            Capability.Pollable(client: client, v1: authenticators),
+            Capability.Recoverable(client: client, v1: authenticators),
+            Capability.PasswordSettings(client: client, v1: authenticators)
+        ]
+        
+        return IDXClient.Authenticator(client: client,
+                                       v1JsonPaths: jsonPaths,
+                                       state: state,
+                                       id: first.id,
+                                       displayName: first.displayName,
+                                       type: first.type,
+                                       key: key,
+                                       methods: methods,
+                                       capabilities: capabilities.compactMap { $0 })
     }
 }
 
@@ -284,52 +338,19 @@ extension IDXClient.Remediation {
           .init(client: client, v1: value)
         })) ?? Form(fields: [])!
         let refresh = (object.refresh != nil) ? Double(object.refresh!) / 1000.0 : nil
-        let type = IDXClient.Remediation.RemediationType(string: object.name)
+        let capabilities: [RemediationCapability?] = [
+            Capability.SocialIDP(client: client, v1: object)
+        ]
         
-        switch type {
-        case .redirectIdp:
-            guard let idpObject = object.idp,
-                  let idpId = idpObject["id"],
-                  let idpName = idpObject["name"],
-                  let idpType = object.type
-            else { return nil }
-
-            return IDXClient.Remediation.SocialAuth(client: client,
-                                                    name: object.name,
-                                                    method: object.method,
-                                                    href: object.href,
-                                                    accepts: object.accepts,
-                                                    form: form,
-                                                    refresh: refresh,
-                                                    relatesTo: object.relatesTo,
-                                                    id: idpId,
-                                                    idpName: idpName,
-                                                    idpType: idpType,
-                                                    service: .init(string: idpType))
-            
-        default:
-            let classType = type.remediationClass
-            if let result = classType.init(client: client,
-                                           name: object.name,
-                                           method: object.method,
-                                           href: object.href,
-                                           accepts: object.accepts,
-                                           form: form,
-                                           refresh: refresh,
-                                           relatesTo: object.relatesTo)
-            {
-                return result
-            } else {
-                return IDXClient.Remediation(client: client,
-                                             name: object.name,
-                                             method: object.method,
-                                             href: object.href,
-                                             accepts: object.accepts,
-                                             form: form,
-                                             refresh: refresh,
-                                             relatesTo: object.relatesTo)
-            }
-        }
+        return IDXClient.Remediation(client: client,
+                                     name: object.name,
+                                     method: object.method,
+                                     href: object.href,
+                                     accepts: object.accepts,
+                                     form: form,
+                                     refresh: refresh,
+                                     relatesTo: object.relatesTo,
+                                     capabilities: capabilities.compactMap { $0 })
     }
 
     internal convenience init?(client: IDXClientAPI, v1 object: V1.Response.Form?) {
@@ -346,7 +367,8 @@ extension IDXClient.Remediation {
                   accepts: object.accepts,
                   form: form,
                   refresh: (object.refresh != nil) ? Double(object.refresh!) / 1000.0 : nil,
-                  relatesTo: object.relatesTo)
+                  relatesTo: object.relatesTo,
+                  capabilities: [])
     }
 }
 

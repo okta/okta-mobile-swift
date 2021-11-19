@@ -64,7 +64,8 @@ class IDXClientDelegateTests: XCTestCase {
                                                  secret: false)
             ])!,
             refresh: nil,
-            relatesTo: nil)
+            relatesTo: nil,
+            capabilities: [])
         token = IDXClient.Token(accessToken: "access",
                                 refreshToken: "refresh",
                                 expiresIn: 10,

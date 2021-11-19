@@ -19,7 +19,7 @@ let package = Package(
         .target(name: "TestCommon",
                 dependencies: [ "OktaIdx" ],
                 path: "Tests/TestCommon",
-                resources: [ .copy("Resources") ]),
+                resources: [ .copy("SampleResponses") ]),
         .testTarget(name: "OktaIdxTests",
                     dependencies: [ "OktaIdx", "TestCommon" ],
                     exclude: ["Info.plist"])

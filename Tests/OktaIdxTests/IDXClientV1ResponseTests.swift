@@ -530,10 +530,10 @@ class IDXClientV1ResponseTests: XCTestCase {
             let publicObj = try XCTUnwrap(IDXClient.Authenticator.makeAuthenticator(client: clientMock,
                                                                                     v1: [obj.value],
                                                                                     jsonPaths: [],
-                                                                                    in: response) as? IDXClient.Authenticator.Password)
+                                                                                    in: response))
             XCTAssertEqual(publicObj.id, "lae8wj8nnjB3BrbcH0g6")
             
-            let settings = try XCTUnwrap(publicObj.settings)
+            let settings = try XCTUnwrap(publicObj.passwordSettings)
 
             XCTAssertEqual(settings.minLength, 8)
             XCTAssertTrue(settings.excludeUsername)
@@ -585,11 +585,10 @@ class IDXClientV1ResponseTests: XCTestCase {
             XCTAssertEqual(obj.name, "redirect-idp")
             XCTAssertEqual(obj.type, "FACEBOOK")
 
-            let publicObj = IDXClient.Remediation.makeRemediation(client: clientMock, v1: obj) as? IDXClient.Remediation.SocialAuth
-            XCTAssertNotNil(publicObj)
-            XCTAssertEqual(publicObj?.redirectUrl, URL(string: "https://example.com/oauth2/avs2s4i2b4Cwi9PiG4k8/v1/authorize?client_id=O0a4ckjhvkcq2B88m54w9&request_uri=urn:okta:repLWTdpRjdldDJWaVNRMnVKY3pBV0pVeDB5IOI3SFJhVmE0UTlzTEwzdzowb2E0Y2V2TzZ3bGNxQzZtdDR3NA"))
-            XCTAssertEqual(publicObj?.service, .facebook)
-            XCTAssertEqual(publicObj?.idpName, "Facebook IdP")
+            let publicObj = try XCTUnwrap(IDXClient.Remediation.makeRemediation(client: clientMock, v1: obj))
+            XCTAssertEqual(publicObj.socialIdp?.redirectUrl, URL(string: "https://example.com/oauth2/avs2s4i2b4Cwi9PiG4k8/v1/authorize?client_id=O0a4ckjhvkcq2B88m54w9&request_uri=urn:okta:repLWTdpRjdldDJWaVNRMnVKY3pBV0pVeDB5IOI3SFJhVmE0UTlzTEwzdzowb2E0Y2V2TzZ3bGNxQzZtdDR3NA"))
+            XCTAssertEqual(publicObj.socialIdp?.service, .facebook)
+            XCTAssertEqual(publicObj.socialIdp?.idpName, "Facebook IdP")
         }
     }
     
@@ -601,8 +600,8 @@ class IDXClientV1ResponseTests: XCTestCase {
         let firstOption = try XCTUnwrap(remediation["authenticator"]?.options?[0])
         let secondOption = try XCTUnwrap(remediation["authenticator"]?.options?[1])
         
-        let firstAuthenticator = try XCTUnwrap(firstOption.authenticator as? IDXClient.Authenticator.Email)
-        let secondAuthenticator = try XCTUnwrap(secondOption.authenticator as? IDXClient.Authenticator.Email)
+        let firstAuthenticator = try XCTUnwrap(firstOption.authenticator)
+        let secondAuthenticator = try XCTUnwrap(secondOption.authenticator)
         XCTAssertNotEqual(firstAuthenticator, secondAuthenticator)
         XCTAssertEqual(firstAuthenticator.profile?["email"], "t***l@mailinator.com")
         XCTAssertEqual(secondAuthenticator.profile?["email"], "e***t@okta.com")

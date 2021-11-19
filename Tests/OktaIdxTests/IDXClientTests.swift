@@ -58,7 +58,8 @@ class IDXClientTests: XCTestCase {
                                                                                      secret: false)
                                                 ])!,
                                                 refresh: nil,
-                                                relatesTo: nil))
+                                                relatesTo: nil,
+                                                capabilities: []))
         let response = IDXClient.Response(client: client,
                                           expiresAt: Date(),
                                           intent: .login,

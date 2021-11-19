@@ -80,7 +80,7 @@ public class Signin {
             return "Sign In"
             
         case .redirectIdp:
-            guard let socialOption = option as? IDXClient.Remediation.SocialAuth else {
+            guard let socialOption = option.socialIdp else {
                 return "Social Login"
             }
 

@@ -43,6 +43,7 @@ class IDXResponseCodableTests: XCTestCase {
         XCTAssertEqual(object, result)
     }
 
+    @available(iOS 11.0, *)
     func testContextSecureCoding() throws {
         let object = IDXClient.Context(configuration: configuration,
                                        state: "state",
@@ -53,7 +54,8 @@ class IDXResponseCodableTests: XCTestCase {
         let result = try NSKeyedUnarchiver.unarchiveTopLevelObjectWithData(data) as? IDXClient.Context
         XCTAssertEqual(object, result)
     }
-
+    
+    @available(iOS 11.0, *)
     func testTokenSecureCoding() throws {
         let object = IDXClient.Token(accessToken: "access",
                                      refreshToken: "refresh",
