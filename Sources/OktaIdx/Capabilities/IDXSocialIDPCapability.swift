@@ -14,6 +14,7 @@ import Foundation
 
 extension Capability {
     public struct SocialIDP: RemediationCapability {
+        /// The unique identifier for this social IDP.
         public let id: String
         
         /// The URL an application should load or redirect to in order to continue authentication with the IDP service.

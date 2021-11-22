@@ -492,7 +492,7 @@ class IDXClientV1ResponseTests: XCTestCase {
         }
     }
 
-    func testAuthenticatorWithSettings() throws {
+    func testPasswordAuthenticatorWithSettings() throws {
         try decode(type: API.Response.IonObject<API.Response.Authenticator>.self, """
         {
           "type" : "object",
@@ -592,6 +592,85 @@ class IDXClientV1ResponseTests: XCTestCase {
         }
     }
     
+    func testNumberChallengeCapability() throws {
+        try decode(type: API.Response.IonObject<API.Response.Authenticator>.self, """
+        {
+          "type" : "object",
+          "value" : {
+             "contextualData" : {
+                "correctAnswer" : "90"
+             },
+             "displayName" : "Okta Verify",
+             "id" : "auttcd6clasdflwbTD5d6",
+             "key" : "okta_verify",
+             "methods" : [
+                {
+                   "type" : "push"
+                }
+             ],
+             "type" : "app"
+          }
+        }
+        """) { (obj) in
+            let publicObj = try XCTUnwrap(IDXClient.Authenticator.makeAuthenticator(client: clientMock,
+                                                                                    v1: [obj.value],
+                                                                                    jsonPaths: [],
+                                                                                    in: response))
+            XCTAssertEqual(publicObj.type, .app)
+            let otp = try XCTUnwrap(publicObj.numberChallenge)
+
+            XCTAssertEqual(otp.correctAnswer, "90")
+        }
+    }
+    
+    func testOTPAuthenticatorWithSettings() throws {
+        try decode(type: API.Response.IonObject<API.Response.Authenticator>.self, """
+        {
+          "type" : "object",
+          "value" : {
+             "contextualData" : {
+                "qrcode" : {
+                   "href" : "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAMgAAADICAYAAACtWK6eAAAE9UlEQVR42u3dwa7bMAwEwPz/T7f3Aj1F4i6VWaCn5KWJrTFAWaY+f0Tkv/k4BCKAiAAiAogIICKAiAAiAogIICKAiAggIoCIACICiAggIoCIACICyL8f9PmM/jv9fU+///Txavs+3x6/9vEBCCCAAAIIIIAAAsg+IMeLpeEB8+0J//b7nx6Q09+/bXwAAggggAACCCCAAPJ7QNqL0ttF9Wlw0wM4DTYFEBBAAAEEEEAAAQQQQE4doLYi+DTQlgEGCCCAAAIIIIAAAgggivQzN8ra/r7t9wECCCCAAAIIIIAAAkgayDTA9OdPPdDTMonQPj4AAQQQQAABBBBAAHkfyPRD+V7f9bquJoB4HRBAvA4IIF4H5PW0TyK0LeZsn4QYGzeAAAIIIIAAAggggNQCmS7Cpxfv3R5A6SL329//WiM6QAABBBBAAAEEEED2A5k+AG2N3KabU6cBnr7ApSYJAAEEEEAAAQQQQAB5Zy1WutFb2+K56U1Lp5tjp4psQAABBBBAAAEEEEB+B8j0hjPtkwjpATR9Y7D9+AICCCCAAAIIIIAAsh9I++K36d83Dah9cWL6/wMEEEAAAQQQQAAB5D0g0wOqDXD7gG6/IE2DAwQQQAABBBBAAAHkfSDpG4Pbfl/b56fBpAIIIIAAAggggAACSC+Q243c2ovubZMYbUV+241hQAABBBBAAAEEEED2FemnB0RbY7P0ppPpxnTTRXSqaAcEEEAAAQQQQAABZE+RfvsEbNmA5VRR2zZA2xZfrm/aAAgggAACCCCAAAJIfZGeTlsz6/Tx3T4JAAgggAACCCCAAALI+0DaNvmcXjx4+8Zl64C7dX6fK9IBAQQQQAABBBBAALlepKWL9PYiM7048vYF6vYFFRBAAAEEEEAAAQSQ94G81sRh+oGs23+fnvSYBgcIIIAAAggggAACyHtAthXF2xcbpovs00V362JVQAABBBBAAAEEEED2AJkuKtsnAaaL/tvfv+3G33ObeAICCCCAAAIIIIAAEi+625pVT5/QbY35bl9gAQEEEEAAAQQQQAABpL1InR4AaeDTF7jpIh4QQAABBBBAAAEEEECmB0y6ufO2DXpuf790Y71rxxEQQAABBBBAAAEEkDVA2psItC+Wm2781vbA0/Mb6AACCCCAAAIIIIAAEk/b4sO2Ij79gFTbBkJToAABBBBAAAEEEEAA2du8Ol3kTg/A2wOubfFf+2JJQAABBBBAAAEEEEDeBzL9/rYisv2BprYbd62LPwEBBBBAAAEEEEAA2QukfbHgdNGbfiArfT62PJAGCCCAAAIIIIAAAsi7QLY3s2670ZjeoCd9fgABBBBAAAEEEEAAeR9IOm2bYLY1wrt9oy49aQAIIIAAAggggAACyO8BaW9OnQZ5+vilPz8NeuzCCwgggAACCCCAAALIGiC3B+T0+7cXxe0b2vz8LreAAAIIIIAAAggggFw/gOlmzO3ApydB2iZpWs4fIIAAAggggAACCCCAtAzw7QOiDVR6EgIQQAABBBBAAAEEEEBuf35bI7v2TTLT4yMVQAABBBBAAAEEEED2AmkDmC4625pKvPZ7AQEEEEAAAQQQQAD5PSCvN4NO3whrP97TTSEAAQQQQAABBBBAAPk9ICIvBhARQEQAEQFEBBARQEQAEQFEBBARQEQEEBFARAARAUQEEBFARAAReSZ/AaIblR2teF18AAAAAElFTkSuQmCC",
+                   "method" : "embedded",
+                   "type" : "image/png"
+                },
+                "sharedSecret" : "64UBAAAM6GGG4AD"
+             },
+             "displayName" : "Google Authenticator",
+             "id" : "aut12345678o5d7",
+             "key" : "google_otp",
+             "methods" : [
+                {
+                   "type" : "otp"
+                }
+             ],
+             "type" : "app"
+          }
+        }
+        """) { (obj) in
+            let publicObj = try XCTUnwrap(IDXClient.Authenticator.makeAuthenticator(client: clientMock,
+                                                                                    v1: [obj.value],
+                                                                                    jsonPaths: [],
+                                                                                    in: response))
+            XCTAssertEqual(publicObj.type, .app)
+            let otp = try XCTUnwrap(publicObj.otp)
+
+            XCTAssertEqual(otp.sharedSecret, "64UBAAAM6GGG4AD")
+            XCTAssertEqual(otp.mimeType, "image/png")
+            XCTAssertNotNil(otp.image)
+        }
+    }
+    
+    func testEnrollPollWithoutRelatedAuthenticators() throws {
+        let obj = try decode(type: API.Response.self,
+                             Bundle.testResource(fileName: "enroll-poll-response"))
+        let publicObj = try IDXClient.Response(client: clientMock, v1: obj)
+        let remediation = try XCTUnwrap(publicObj.remediations[.enrollPoll])
+        XCTAssertEqual(publicObj.authenticators.current, remediation.authenticators.current)
+        
+        let _ = try XCTUnwrap(remediation.pollable)
+    }
+
     func testMultipleRelatedAuthenticators() throws {
         let obj = try decode(type: API.Response.self,
                              Bundle.testResource(fileName: "multiple-select-authenticator-authenticate"))

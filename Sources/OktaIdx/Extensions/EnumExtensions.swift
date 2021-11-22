@@ -35,12 +35,15 @@ extension IDXClient.Authenticator.Method {
         case "voice":             self = .voice
         case "email":             self = .email
         case "push":              self = .push
-        case "crypto":            self = .crypto
         case "signedNonce":       self = .signedNonce
         case "totp":              self = .totp
+        case "otp":               self = .otp
         case "password":          self = .password
         case "webauthn":          self = .webAuthN
         case "security_question": self = .securityQuestion
+        case "idp": self = .idp
+        case "duo": self = .duo
+        case "federated": self = .federated // TODO: This is shown as deprecated; should we care about it?
         default:                  self = .unknown
         }
     }
@@ -145,18 +148,24 @@ extension IDXClient.Authenticator.Method {
             return "email"
         case .push:
             return "push"
-        case .crypto:
-            return "crypto"
         case .signedNonce:
             return "signedNonce"
         case .totp:
             return "totp"
+        case .otp:
+            return "otp"
         case .password:
             return "password"
         case .webAuthN:
             return "webAuthN"
         case .securityQuestion:
             return "securityQuestion"
+        case .idp:
+            return "idp"
+        case .duo:
+            return "duo"
+        case .federated:
+            return "federated"
         case .unknown:
             return nil
         }

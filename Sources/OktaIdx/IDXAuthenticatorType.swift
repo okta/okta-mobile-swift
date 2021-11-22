@@ -40,11 +40,14 @@ extension IDXClient.Authenticator {
         case voice
         case email
         case push
-        case crypto
         case signedNonce
         case totp
+        case otp
         case password
         case webAuthN
         case securityQuestion
+        case idp
+        case duo
+        case federated
     }
 }

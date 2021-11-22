@@ -170,8 +170,8 @@ extension IDXClient.AuthenticatorCollection {
             .values
             .compactMap({ (mappingArray) in
                 return try IDXClient.Authenticator.makeAuthenticator(client: client,
-                                                                     v1: mappingArray.map { $0.authenticator },
-                                                                     jsonPaths: mappingArray.map { $0.jsonPath },
+                                                                     v1: mappingArray.map(\.authenticator),
+                                                                     jsonPaths: mappingArray.map(\.jsonPath),
                                                                      in: object)
             })
         
@@ -199,7 +199,7 @@ extension IDXClient.RemediationCollection {
 
 extension Capability.Sendable {
     init?(client: IDXClientAPI, v1 authenticators: [V1.Response.Authenticator]) {
-        guard let authenticator = authenticators.compactMap({ $0.send }).first,
+        guard let authenticator = authenticators.compactMap(\.send).first,
               let remediation = IDXClient.Remediation.makeRemediation(client: client, v1: authenticator)
         else {
             return nil
@@ -210,7 +210,7 @@ extension Capability.Sendable {
 
 extension Capability.Resendable {
     init?(client: IDXClientAPI, v1 authenticators: [V1.Response.Authenticator]) {
-        guard let authenticator = authenticators.compactMap({ $0.resend }).first,
+        guard let authenticator = authenticators.compactMap(\.resend).first,
               let remediation = IDXClient.Remediation.makeRemediation(client: client, v1: authenticator)
         else {
             return nil
@@ -221,7 +221,7 @@ extension Capability.Resendable {
 
 extension Capability.Recoverable {
     init?(client: IDXClientAPI, v1 authenticators: [V1.Response.Authenticator]) {
-        guard let authenticator = authenticators.compactMap({ $0.recover }).first,
+        guard let authenticator = authenticators.compactMap(\.recover).first,
               let remediation = IDXClient.Remediation.makeRemediation(client: client, v1: authenticator)
         else {
             return nil
@@ -233,7 +233,7 @@ extension Capability.Recoverable {
 extension Capability.Pollable {
     convenience init?(client: IDXClientAPI, v1 authenticators: [V1.Response.Authenticator]) {
         guard let typeName = authenticators.first?.type,
-              let authenticator = authenticators.compactMap({ $0.poll }).first,
+              let authenticator = authenticators.compactMap(\.poll).first,
               let remediation = IDXClient.Remediation.makeRemediation(client: client, v1: authenticator)
         else {
             return nil
@@ -244,11 +244,40 @@ extension Capability.Pollable {
                   authenticatorType: type,
                   remediation: remediation)
     }
+
+    convenience init?(client: IDXClientAPI, v1 form: V1.Response.Form) {
+        guard form.name == "enroll-poll" ||
+                form.name == "challenge-poll"
+        else {
+            return nil
+        }
+        guard let remediation = IDXClient.Remediation.makeRemediation(client: client,
+                                                                      v1: form,
+                                                                      createCapabilities: false)
+        else {
+            return nil
+        }
+        
+        self.init(client: client,
+                  authenticatorType: .app,
+                  remediation: remediation)
+    }
+}
+
+extension Capability.NumberChallenge {
+    init?(client: IDXClientAPI, v1 authenticators: [V1.Response.Authenticator]) {
+        guard let answer = authenticators.compactMap(\.contextualData?["correctAnswer"]).first?.stringValue()
+        else {
+            return nil
+        }
+        
+        self.init(correctAnswer: answer)
+    }
 }
 
 extension Capability.Profile {
     init?(client: IDXClientAPI, v1 authenticators: [V1.Response.Authenticator]) {
-        guard let profile = authenticators.compactMap({ $0.profile }).first
+        guard let profile = authenticators.compactMap(\.profile).first
         else {
             return nil
         }
@@ -261,12 +290,42 @@ extension Capability.PasswordSettings {
     init?(client: IDXClientAPI, v1 authenticators: [V1.Response.Authenticator]) {
         guard let typeName = authenticators.first?.type,
               IDXClient.Authenticator.Kind(string: typeName) == .password,
-              let settings = authenticators.compactMap({ $0.settings }).first
+              let settings = authenticators.compactMap(\.settings).first
         else {
             return nil
         }
         
         self.init(with: settings)
+    }
+}
+
+extension Capability.OTP {
+    init?(client: IDXClientAPI, v1 authenticators: [V1.Response.Authenticator]) {
+        let methods = methodTypes(from: authenticators)
+        guard methods.contains(.otp) || methods.contains(.totp)
+        else {
+            return nil
+        }
+        
+        guard let typeName = authenticators.first?.type else { return nil }
+        let type = IDXClient.Authenticator.Kind(string: typeName)
+        
+        guard type == .app,
+              let contextualData = authenticators.compactMap(\.contextualData).first,
+              let qrcode = contextualData["qrcode"]?.toAnyObject() as? [String:String],
+              qrcode["method"] == "embedded",
+              let mimeType = qrcode["type"],
+              let imageUrlString = qrcode["href"],
+              let imageData = imageUrlString.base64ImageData
+        else {
+            return nil
+        }
+        
+        let sharedSecret = contextualData["sharedSecret"]?.stringValue()
+
+        self.init(mimeType: mimeType,
+                  imageData: imageData,
+                  sharedSecret: sharedSecret)
     }
 }
 
@@ -291,6 +350,27 @@ extension Capability.SocialIDP {
     }
 }
 
+private func methodTypes(from authenticators: [V1.Response.Authenticator]) -> [IDXClient.Authenticator.Method]
+{
+    let methods = authenticators
+        .compactMap(\.methods)
+        .reduce(into: [String:String]()) { (partialResult, items: [[String:String]]) in
+            items.forEach { item in
+                item.forEach { (key: String, value: String) in
+                    partialResult[key] = value
+                }
+            }
+        }
+    let methodTypes: [IDXClient.Authenticator.Method] = methods
+        .filter { (key, value) in
+            key == "type"
+        }
+        .map { (key, value) in
+            return IDXClient.Authenticator.Method(string: value)
+        }
+    return methodTypes
+}
+
 extension IDXClient.Authenticator {
     static func makeAuthenticator(client: IDXClientAPI,
                                   v1 authenticators: [V1.Response.Authenticator],
@@ -299,14 +379,14 @@ extension IDXClient.Authenticator {
     {
         guard let first = authenticators.first else { return nil }
 
-        let filteredTypes = Set(authenticators.map({ $0.type }))
+        let filteredTypes = Set(authenticators.map(\.type))
         guard filteredTypes.count == 1 else {
             throw IDXClientError.internalMessage("Some mapped authenticators have differing types: \(filteredTypes.joined(separator: ", "))")
         }
         
         let state = response.authenticatorState(for: authenticators, in: jsonPaths)
-        let key = authenticators.compactMap { $0.key }.first
-        let methods = authenticators.compactMap { $0.methods }.first
+        let key = authenticators.compactMap(\.key).first
+        let methods = authenticators.compactMap(\.methods).first
 
         let capabilities: [AuthenticatorCapability?] = [
             Capability.Profile(client: client, v1: authenticators),
@@ -314,7 +394,9 @@ extension IDXClient.Authenticator {
             Capability.Resendable(client: client, v1: authenticators),
             Capability.Pollable(client: client, v1: authenticators),
             Capability.Recoverable(client: client, v1: authenticators),
-            Capability.PasswordSettings(client: client, v1: authenticators)
+            Capability.PasswordSettings(client: client, v1: authenticators),
+            Capability.NumberChallenge(client: client, v1: authenticators),
+            Capability.OTP(client: client, v1: authenticators)
         ]
         
         return IDXClient.Authenticator(client: client,
@@ -331,16 +413,19 @@ extension IDXClient.Authenticator {
 
 extension IDXClient.Remediation {
     static func makeRemediation(client: IDXClientAPI,
-                                v1 object: V1.Response.Form?) -> IDXClient.Remediation?
+                                v1 object: V1.Response.Form?,
+                                createCapabilities: Bool = true) -> IDXClient.Remediation?
     {
         guard let object = object else { return nil }
         let form = Form(fields: object.value?.map({ (value) in
           .init(client: client, v1: value)
         })) ?? Form(fields: [])!
         let refresh = (object.refresh != nil) ? Double(object.refresh!) / 1000.0 : nil
-        let capabilities: [RemediationCapability?] = [
-            Capability.SocialIDP(client: client, v1: object)
-        ]
+        
+        let capabilities: [RemediationCapability?] = createCapabilities ? [
+            Capability.SocialIDP(client: client, v1: object),
+            Capability.Pollable(client: client, v1: object)
+        ] : []
         
         return IDXClient.Remediation(client: client,
                                      name: object.name,

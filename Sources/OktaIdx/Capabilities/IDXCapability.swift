@@ -72,6 +72,12 @@ extension IDXClient.Authenticator: CapabilityCollection {
     ///
     /// If no profile information is associated with this authenticator, or is unavailable at this time, the value will be `nil`.
     public var profile: Capability.Profile? { capability(Capability.Profile.self) }
+    
+    /// Exposes data assocated with one-time-password authenticator enrollment handling.
+    public var otp: Capability.OTP? { capability(Capability.OTP.self) }
+
+    /// Exposes information related to multiple-choice number challenges.
+    public var numberChallenge: Capability.NumberChallenge? { capability(Capability.NumberChallenge.self) }
 }
 
 extension IDXClient.Remediation: CapabilityCollection {

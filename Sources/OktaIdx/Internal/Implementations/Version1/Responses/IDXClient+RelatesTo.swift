@@ -89,16 +89,25 @@ extension IDXClient.Remediation: IDXHasRelatedObjects {
     var jsonPaths: [String] { [] }
     
     func findRelatedObjects(using jsonMapping: [String: IDXHasRelatedObjects]) throws {
-        var authenticatorObjects = relatesTo?.compactMap({ (jsonPath) -> IDXClient.Authenticator? in
+        // Work around defects where some remediations don't
+        // properly relate to their corresponding authenticator.
+        var calculatedRelatesTo = relatesTo
+        switch type {
+        case .enrollPoll:
+            calculatedRelatesTo = ["$.currentAuthenticator"]
+        default: break
+        }
+        
+        var authenticatorObjects = calculatedRelatesTo?.compactMap({ (jsonPath) -> IDXClient.Authenticator? in
             guard let authenticator = jsonMapping[jsonPath] as? IDXClient.Authenticator else { return nil }
             return authenticator
         }) ?? []
         
-        guard authenticatorObjects.count == relatesTo?.count ?? 0 else {
+        guard authenticatorObjects.count == calculatedRelatesTo?.count ?? 0 else {
             throw IDXClientError.missingRelatedObject
         }
         
-        // Work-around for 
+        // Work-around for the password authenticator not being associated with the identify remediation.
         if let currentAuthenticator = jsonMapping["$.currentAuthenticator"] as? IDXClient.Authenticator,
            currentAuthenticator.type == .password,
            type == .identify
