@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="19455" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="IiQ-U1-iKI">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19454"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Okta Web Sign In-->
+        <scene sceneID="NON-4U-CVw">
+            <objects>
+                <viewController title="Okta Web Sign In" id="oA1-3v-UXn" customClass="ViewController" customModule="WebSignIn" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="Nag-m8-t7U">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Have an account?" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qYK-wq-WOb">
+                                <rect key="frame" x="88" y="204" width="238.5" height="37"/>
+                                <fontDescription key="fontDescription" style="UICTFontTextStyleTitle0"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" role="primary" translatesAutoresizingMaskIntoConstraints="NO" id="oZI-Lq-sTN">
+                                <rect key="frame" x="172" y="265" width="70" height="31"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="filled" title="Sign In"/>
+                                <connections>
+                                    <action selector="signIn:" destination="oA1-3v-UXn" eventType="touchUpInside" id="iUT-F4-Vn1"/>
+                                </connections>
+                            </button>
+                            <stackView opaque="NO" contentMode="scaleToFill" spacing="6" translatesAutoresizingMaskIntoConstraints="NO" id="hng-Fi-9UO">
+                                <rect key="frame" x="165.5" y="840.5" width="83" height="13.5"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Client ID:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="p8a-Qh-1W8">
+                                        <rect key="frame" x="0.0" y="0.0" width="48.5" height="13.5"/>
+                                        <fontDescription key="fontDescription" style="UICTFontTextStyleCaption1"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QTg-J0-M7a">
+                                        <rect key="frame" x="54.5" y="0.0" width="28.5" height="13.5"/>
+                                        <fontDescription key="fontDescription" style="UICTFontTextStyleCaption1"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                            </stackView>
+                            <stackView opaque="NO" contentMode="scaleToFill" spacing="12" translatesAutoresizingMaskIntoConstraints="NO" id="gMW-B0-lKN">
+                                <rect key="frame" x="104" y="785" width="206" height="31"/>
+                                <subviews>
+                                    <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="I1r-V4-AlX">
+                                        <rect key="frame" x="0.0" y="0.0" width="51" height="31"/>
+                                        <connections>
+                                            <action selector="ephemeralSwitchChanged:" destination="oA1-3v-UXn" eventType="valueChanged" id="lM4-Ft-TgJ"/>
+                                        </connections>
+                                    </switch>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Ephemeral Session" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Cxo-tt-mvD">
+                                        <rect key="frame" x="61" y="0.0" width="145" height="31"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                            </stackView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="scU-IK-zcF"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="qYK-wq-WOb" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="scU-IK-zcF" secondAttribute="leading" constant="24" id="4pH-hB-1Uh"/>
+                            <constraint firstItem="qYK-wq-WOb" firstAttribute="top" secondItem="scU-IK-zcF" secondAttribute="top" constant="64" id="YdN-DH-IkO"/>
+                            <constraint firstItem="scU-IK-zcF" firstAttribute="bottom" secondItem="hng-Fi-9UO" secondAttribute="bottom" constant="8" id="Zdh-VZ-cU8"/>
+                            <constraint firstItem="oZI-Lq-sTN" firstAttribute="top" secondItem="qYK-wq-WOb" secondAttribute="bottom" constant="24" id="chr-S3-jUS"/>
+                            <constraint firstItem="scU-IK-zcF" firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="qYK-wq-WOb" secondAttribute="trailing" constant="24" id="ed4-06-RkB"/>
+                            <constraint firstItem="hng-Fi-9UO" firstAttribute="top" secondItem="gMW-B0-lKN" secondAttribute="bottom" constant="24.5" id="fSB-9c-gpm"/>
+                            <constraint firstItem="qYK-wq-WOb" firstAttribute="centerX" secondItem="Nag-m8-t7U" secondAttribute="centerX" id="q0b-YF-Fgb"/>
+                            <constraint firstItem="oZI-Lq-sTN" firstAttribute="centerX" secondItem="scU-IK-zcF" secondAttribute="centerX" id="rfI-AL-eou"/>
+                            <constraint firstItem="hng-Fi-9UO" firstAttribute="centerX" secondItem="scU-IK-zcF" secondAttribute="centerX" id="si6-UB-1Qd"/>
+                            <constraint firstItem="gMW-B0-lKN" firstAttribute="centerX" secondItem="scU-IK-zcF" secondAttribute="centerX" id="uo0-8F-5DO"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" title="Okta Web Sign In" id="tjy-j0-hZu"/>
+                    <connections>
+                        <outlet property="clientIdLabel" destination="QTg-J0-M7a" id="0fx-Sg-j1e"/>
+                        <outlet property="signInButton" destination="oZI-Lq-sTN" id="FOW-Tb-nBB"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Cuh-LB-yv5" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-68" y="-6"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="QfH-9S-0fP">
+            <objects>
+                <navigationController id="IiQ-U1-iKI" sceneMemberID="viewController">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" largeTitles="YES" id="2cG-tS-WJT">
+                        <rect key="frame" x="0.0" y="44" width="414" height="96"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="oA1-3v-UXn" kind="relationship" relationship="rootViewController" id="kEg-TX-iM9"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Rce-dZ-qdX" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-1062" y="-6"/>
+        </scene>
+    </scenes>
+    <resources>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+    </resources>
+</document>
