@@ -1,0 +1,69 @@
+//
+// Copyright (c) 2021-Present, Okta, Inc. and/or its affiliates. All rights reserved.
+// The Okta software accompanied by this notice is provided pursuant to the Apache License, Version 2.0 (the "License.")
+//
+// You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0.
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
+// WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+//
+// See the License for the specific language governing permissions and limitations under the License.
+//
+
+import Foundation
+
+public protocol UsesDelegateCollection {
+    associatedtype Delegate
+    func add(delegate: Delegate)
+    func remove(delegate: Delegate)
+
+    var delegateCollection: DelegateCollection<Delegate> { get }
+}
+
+extension UsesDelegateCollection {
+    public func add(delegate: Delegate) { delegateCollection += delegate }
+    public func remove(delegate: Delegate) { delegateCollection -= delegate }
+}
+
+public class DelegateCollection<D> {
+    private let delegates: NSHashTable<AnyObject>
+    
+    public init() {
+        delegates = .weakObjects()
+    }
+}
+
+extension DelegateCollection {
+    public func add(_ delegate: D) {
+        delegates.add(delegate as AnyObject)
+    }
+    
+    public func remove(_ delegate: D) {
+        delegates.remove(delegate as AnyObject)
+    }
+    
+    public func invoke(_ block: (D) -> Void) {
+        delegates.allObjects.forEach {
+            guard let delegate = $0 as? D else { return }
+            block(delegate)
+        }
+    }
+}
+
+public func +=<D>(left: DelegateCollection<D>, right: D) {
+    left.add(right)
+}
+
+public func -=<D>(left: DelegateCollection<D>, right: D) {
+    left.remove(right)
+}
+
+precedencegroup MulticastPrecedence {
+    associativity: left
+    higherThan: TernaryPrecedence
+}
+
+infix operator |> : MulticastPrecedence
+public func |><D>(left: DelegateCollection<D>, right: (D) -> Void) {
+    left.invoke(right)
+}
