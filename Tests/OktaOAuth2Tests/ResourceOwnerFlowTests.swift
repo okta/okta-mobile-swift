@@ -11,10 +11,3 @@
 //
 
 import Foundation
-
-public protocol TelemetryService {
-}
-
-public protocol Loggable {
-    func logEvent(_ name: String, parameters: [String:Any]?)
-}

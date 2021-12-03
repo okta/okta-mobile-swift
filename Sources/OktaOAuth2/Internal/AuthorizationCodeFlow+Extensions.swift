@@ -47,7 +47,7 @@ extension AuthorizationCodeFlow.Configuration {
 extension AuthorizationCodeFlow {
     func createAuthenticationURL(using context: AuthorizationCodeFlow.Context) throws -> URL {
         var components = try configuration.authenticationUrlComponents(using: context)
-        delegate?.authentication(flow: self, customize: &components)
+        delegateCollection.invoke { $0.authentication(flow: self, customizeUrl: &components) }
 
         guard let url = components.url else {
             throw OAuth2Error.cannotComposeUrl

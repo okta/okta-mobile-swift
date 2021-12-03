@@ -20,6 +20,11 @@ public protocol UsesDelegateCollection {
     var delegateCollection: DelegateCollection<Delegate> { get }
 }
 
+extension UsesDelegateCollection {
+    public func add(delegate: Delegate) { delegateCollection += delegate }
+    public func remove(delegate: Delegate) { delegateCollection -= delegate }
+}
+
 public class DelegateCollection<D> {
     private let delegates: NSHashTable<AnyObject>
     

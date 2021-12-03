@@ -20,8 +20,8 @@ public protocol AuthenticationConfiguration {
 public protocol AuthenticationDelegate: AnyObject {
     func authenticationStarted<Flow>(flow: Flow)
     func authenticationFinished<Flow>(flow: Flow)
-    func authentication<Flow>(flow: Flow, received: Token)
-    func authentication<Flow>(flow: Flow, received: OAuth2Error)
+    func authentication<Flow>(flow: Flow, received token: Token)
+    func authentication<Flow>(flow: Flow, received error: OAuth2Error)
 }
 
 public protocol AuthenticationFlow: AnyObject, UsesDelegateCollection {

@@ -12,9 +12,12 @@
 
 import Foundation
 
-public protocol TelemetryService {
+extension AuthenticationDelegate {
+    public func authenticationStarted<Flow>(flow: Flow) {}
+    public func authenticationFinished<Flow>(flow: Flow) {}
 }
 
-public protocol Loggable {
-    func logEvent(_ name: String, parameters: [String:Any]?)
+extension AuthorizationCodeFlowDelegate {
+    public func authentication<Flow: AuthorizationCodeFlow>(flow: Flow, customizeUrl urlComponents: inout URLComponents) {}
+    public func authentication<Flow: AuthorizationCodeFlow>(flow: Flow, shouldAuthenticateUsing url: URL) {}
 }

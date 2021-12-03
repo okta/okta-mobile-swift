@@ -75,7 +75,7 @@ public class OAuth2Client: APIClient {
 
     // MARK: Private properties / methods
     private let delegates = DelegateCollection<OAuth2ClientDelegate>()
-}
+}         
 
 extension OAuth2Client: UsesDelegateCollection {
     public typealias Delegate = OAuth2ClientDelegate
@@ -86,92 +86,3 @@ extension OAuth2Client: UsesDelegateCollection {
         delegates
     }
 }
-
-/*
-public func authenticate(username: String,
-                         password: String,
-                         domain: String,
-                         completion: @escaping(Result<Credential, OAuth2Error>) -> Void)
-{
-//    let flow = Authentication.ResourceOwnerFlow(username: username,
-//                                                password: password,
-//                                                domain: domain)
-//    let client = Client(flow: flow)
-}
-    */
-
-/*
-extension Client {
-    public func authenticate<Flow: AuthenticationFlow>(
-        using flow: Flow,
-        completion: @escaping (Result<Credential, OAuth2Error>) -> Void)
-    {
-        
-    }
-    
-    func exchangeCode<Flow: AuthenticationFlow>(from flow: Flow,
-                                                using redirectUri: URL,
-                                                completion: @escaping(Result<Credential, OAuth2Error>) -> Void)
-    {
-        guard var urlComponents = URLComponents(url: flow.configuration.baseUrl, resolvingAgainstBaseURL: true) else {
-            completion(.failure(.invalidUrl))
-            return
-        }
-        
-        var formParameters = [
-            "client_id": flow.configuration.clientId,
-            "scope": configuration.scopes,
-            "code_challenge": codeChallenge,
-            "code_challenge_method": "S256",
-            "redirect_uri": configuration.redirectUri.absoluteString,
-            "state": state
-        ]
-
-        do {
-            formParameters = try queryParameters()
-        } catch {
-            completion(.failure(error as? OAuth2Error ?? .error(error)))
-            return
-        }
-
-        urlComponents.path = "/v1/token"
-
-        delegate?.authentication(flow: self, customizeUrl: &urlComponents)
-        
-        guard let authorizeUrl = urlComponents.url else {
-            completion(.failure(.invalidUrl))
-            return
-        }
-        
-        var request = URLRequest(url: authorizeUrl,
-                                 cachePolicy: .reloadIgnoringLocalAndRemoteCacheData,
-                                 timeoutInterval: 30)
-        request.httpMethod = "POST"
-        request.httpBody = URLRequest.oktaURLFormEncodedString(for: formParameters)?.data(using: .utf8)
-
-//        let task = session.dataTask(with: request) { data, response, error in
-//            <#code#>
-//        }
-//        task.resume()
-
-    }
-}
-
-@available(iOS 15.0.0, tvOS 15.0.0, watchOS 8.0.0, macOS 12.0.0, *)
-public func authenticate(username: String,
-                         password: String,
-                         domain: String) async throws  -> Credential
-{
-    try await withCheckedThrowingContinuation({ continuation in
-        authenticate(username: username, password: password, domain: domain) { result in
-            continuation.resume(with: result)
-        }
-    })
-}
-
-extension Client {
-    public enum Endpoint {
-        case authorize, requestToken
-    }
-}
-*/

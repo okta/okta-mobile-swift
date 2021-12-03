@@ -14,8 +14,6 @@ import Foundation
 import AuthFoundation
 
 public protocol ResourceOwnerFlowDelegate: AuthenticationDelegate {
-//    public typealias Flow = ResourceOwnerFlow.Configuration
-
 }
 
 public class ResourceOwnerFlow: AuthenticationFlow {
@@ -29,19 +27,10 @@ public class ResourceOwnerFlow: AuthenticationFlow {
         public var baseURL: URL { URL(string: "https://\(domain)")! }
     }
     
-//    public struct Challenge {
-//        public let deviceCode: String
-//        public let userCode: String
-//        public let expiresAt: Date
-//        public let interval: TimeInterval
-//        public let verificationUrl: URL
-//    }
-    
     public let configuration: Configuration
     public weak var delegate: ResourceOwnerFlowDelegate?
     private(set) public var isAuthenticating: Bool = false
     
-//    private(set) public var challenge: Challenge?
     private(set) public var waitingForAuthorization: Bool = false
     
     public convenience init(username: String, password: String, domain: String) {
@@ -63,15 +52,15 @@ public class ResourceOwnerFlow: AuthenticationFlow {
     }
 
     // MARK: Private properties / methods
-    private let delegates = DelegateCollection<ResourceOwnerFlowDelegate>()
+    public let delegateCollection = DelegateCollection<ResourceOwnerFlowDelegate>()
 }
 
 extension ResourceOwnerFlow: UsesDelegateCollection {
     public typealias Delegate = ResourceOwnerFlowDelegate
-    public func add(delegate: Delegate) { delegates += delegate }
-    public func remove(delegate: Delegate) { delegates -= delegate }
-
-    public var delegateCollection: DelegateCollection<Delegate> {
-        delegates
-    }
+//    public func add(delegate: Delegate) { delegateCollection += delegate }
+//    public func remove(delegate: Delegate) { delegateCollection -= delegate }
 }
+
+//extension DelegateCollection: ResourceOwnerFlowDelegate where D: ResourceOwnerFlowDelegate {
+//}
+//

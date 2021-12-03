@@ -17,19 +17,7 @@ public protocol AuthorizationCodeFlowDelegate: AuthenticationDelegate {
     func authenticationStarted<Flow: AuthorizationCodeFlow>(flow: Flow)
     func authenticationFinished<Flow: AuthorizationCodeFlow>(flow: Flow)
     func authentication<Flow: AuthorizationCodeFlow>(flow: Flow, customizeUrl urlComponents: inout URLComponents)
-    func authentication<Flow: AuthorizationCodeFlow>(flow: Flow, shouldAuthenticate using: URL)
-}
-
-extension AuthorizationCodeFlowDelegate {
-    func authentication(flow: AuthorizationCodeFlow, customize url: inout URLComponents) {}
-
-    func authentication(flow: AuthorizationCodeFlow, pkceCodeVerifier shaLength: Int) -> String? {
-        String.pkceCodeVerifier()
-    }
-    
-    func authentication(flow: AuthorizationCodeFlow, pkceCodeChallengeFor verifier: String) -> String? {
-        verifier.pkceCodeChallenge()
-    }
+    func authentication<Flow: AuthorizationCodeFlow>(flow: Flow, shouldAuthenticateUsing url: URL)
 }
 
 public class AuthorizationCodeFlow: AuthenticationFlow {
@@ -82,7 +70,7 @@ public class AuthorizationCodeFlow: AuthenticationFlow {
     
     public let client: OAuth2Client
     public let configuration: Configuration
-    public weak var delegate: AuthorizationCodeFlowDelegate?
+
     private(set) public var isAuthenticating: Bool = false {
         didSet {
             guard oldValue != isAuthenticating else {
@@ -90,9 +78,9 @@ public class AuthorizationCodeFlow: AuthenticationFlow {
             }
             
             if isAuthenticating {
-                delegate?.authenticationStarted(flow: self)
+                delegateCollection.invoke { $0.authenticationStarted(flow: self) }
             } else {
-                delegate?.authenticationFinished(flow: self)
+                delegateCollection.invoke { $0.authenticationFinished(flow: self) }
             }
         }
     }
@@ -104,7 +92,7 @@ public class AuthorizationCodeFlow: AuthenticationFlow {
                 return
             }
 
-            delegate?.authentication(flow: self, shouldAuthenticate: url)
+            delegateCollection.invoke { $0.authentication(flow: self, shouldAuthenticateUsing: url) }
         }
     }
     private(set) public var context: Context?
@@ -157,9 +145,9 @@ public class AuthorizationCodeFlow: AuthenticationFlow {
         client.exchange(token: request) { result in
             switch result {
             case .success(let response):
-                self.delegate?.authentication(flow: self, received: response.result)
+                self.delegateCollection.invoke { $0.authentication(flow: self, received: response.result) }
             case .failure(let error):
-                self.delegate?.authentication(flow: self, received: .network(error: error))
+                self.delegateCollection.invoke { $0.authentication(flow: self, received: .network(error: error)) }
             }
             
             self.isAuthenticating = false
@@ -173,45 +161,11 @@ public class AuthorizationCodeFlow: AuthenticationFlow {
     }
 
     // MARK: Private properties / methods
-    private let delegates = DelegateCollection<AuthorizationCodeFlowDelegate>()
+    public let delegateCollection = DelegateCollection<AuthorizationCodeFlowDelegate>()
 }
 
 extension AuthorizationCodeFlow: UsesDelegateCollection {
     public typealias Delegate = AuthorizationCodeFlowDelegate
-    public func add(delegate: Delegate) { delegates += delegate }
-    public func remove(delegate: Delegate) { delegates -= delegate }
-
-    public var delegateCollection: DelegateCollection<Delegate> {
-        delegates
-    }
-}
-
-extension DelegateCollection: AuthenticationDelegate where D: AuthenticationDelegate {
-    public func authentication<Flow>(flow: Flow, received token: Token) {
-        invoke { $0.authentication(flow: flow, received: token) }
-    }
-    
-    public func authentication<Flow>(flow: Flow, received error: OAuth2Error) {
-        invoke { $0.authentication(flow: flow, received: error) }
-    }
-    
-    public func authenticationStarted<Flow>(flow: Flow) {
-        invoke { $0.authenticationStarted(flow: flow) }
-    }
-    
-    public func authenticationFinished<Flow>(flow: Flow) {
-        invoke { $0.authenticationFinished(flow: flow) }
-    }
-}
-
-extension DelegateCollection: AuthorizationCodeFlowDelegate where D: AuthorizationCodeFlowDelegate {
-    public func authentication<Flow>(flow: Flow, shouldAuthenticate using: URL) where Flow : AuthorizationCodeFlow {
-        invoke { $0.authentication(flow: flow, shouldAuthenticate: using) }
-    }
-    
-    public func authentication<Flow>(flow: Flow, customizeUrl urlComponents: inout URLComponents) where Flow : AuthorizationCodeFlow {
-        invoke { $0.authentication(flow: flow, customizeUrl: &urlComponents) }
-    }
 }
 
 extension AuthorizationCodeFlow {

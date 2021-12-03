@@ -41,15 +41,24 @@ public class WebAuthentication {
     public typealias WindowAnchor = UIWindow
     #endif
     
-    private(set) public static var shared: WebAuthentication?
+    private(set) public static var shared: WebAuthentication? {
+        set {
+            _shared = newValue
+        }
+        get {
+            guard let result = _shared else {
+                _shared = try? WebAuthentication()
+                return _shared
+            }
+            return result
+        }
+    }
     
     public let flow: AuthorizationCodeFlow
+    public let context: AuthorizationCodeFlow.Context?
     public var canStart: Bool { provider?.canStart ?? false }
     public var ephemeralSession: Bool = false
     
-    var provider: WebAuthenticationProvider?
-    private var completionBlock: ((Result<Token, WebAuthenticationError>) -> Void)?
-
     #if swift(>=5.5.1) && !os(Linux)
     @available(iOS 15.0, tvOS 15.0, macOS 12.0, *)
     public static func signIn(from window: WindowAnchor?) async throws -> Token {
@@ -66,21 +75,19 @@ public class WebAuthentication {
         }
         
         let provider = WebAuthentication.createWebAuthenticationProvider(flow: flow,
+                                                                         from: window,
                                                                          delegate: self)
         self.completionBlock = completion
         self.provider = provider
 
-        provider?.start(from: window)
+        provider?.start(context: context)
     }
     
     #if swift(>=5.5.1) && !os(Linux)
     @available(iOS 15.0, tvOS 15.0, macOS 12.0, *)
-    @MainActor
     public func start(from window: WindowAnchor?) async throws -> Token {
         try await withCheckedThrowingContinuation { continuation in
-            DispatchQueue.main.async {
-                self.start(from: window) { continuation.resume(with: $0) }
-            }
+            self.start(from: window) { continuation.resume(with: $0) }
         }
     }
     #endif
@@ -122,17 +129,6 @@ public class WebAuthentication {
         let provider = provider
         self.provider = nil
         provider?.cancel()
-    }
-    
-    private func complete(with result: Result<Token, WebAuthenticationError>) {
-        guard let completion = completionBlock else {
-            return
-        }
-
-        completion(result)
-        completionBlock = nil
-        provider = nil
-        flow.reset()
     }
     
     public convenience init() throws {
@@ -220,26 +216,15 @@ public class WebAuthentication {
                                             session: session)))
     }
     
-    public init(flow: AuthorizationCodeFlow) {
+    public init(flow: AuthorizationCodeFlow, context: AuthorizationCodeFlow.Context? = nil) {
         self.flow = flow
+        self.context = context
         WebAuthentication.shared = self
     }
+    
+    // MARK: Internal members
+    private static var _shared: WebAuthentication?
+    var provider: WebAuthenticationProvider?
+    var completionBlock: ((Result<Token, WebAuthenticationError>) -> Void)?
 }
 
-extension WebAuthentication: WebAuthenticationProviderDelegate {
-    func authentication(provider: WebAuthenticationProvider, received result: Token) {
-        complete(with: .success(result))
-    }
-    
-    func authentication(provider: WebAuthenticationProvider, received error: Error) {
-        let webError: WebAuthenticationError
-        if let error = error as? WebAuthenticationError {
-            webError = error
-        } else if let error = error as? OAuth2Error {
-            webError = .oauth2(error: error)
-        } else {
-            webError = .generic(error: error)
-        }
-        complete(with: .failure(webError))
-    }
-}

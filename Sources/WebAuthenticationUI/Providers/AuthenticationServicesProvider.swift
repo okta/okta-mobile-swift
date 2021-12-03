@@ -28,39 +28,43 @@ class AuthenticationServicesProvider: NSObject, WebAuthenticationProvider {
             return true
         }
     }
-    private(set) var anchor: ASPresentationAnchor?
+    let anchor: ASPresentationAnchor?
     
-    init(flow: AuthorizationCodeFlow, delegate: WebAuthenticationProviderDelegate) {
+    init(flow: AuthorizationCodeFlow,
+         from window: WebAuthentication.WindowAnchor?,
+         delegate: WebAuthenticationProviderDelegate) 
+    {
         self.flow = flow
+        self.anchor = window
         self.delegate = delegate
+        
+        super.init()
+        
+        self.flow.add(delegate: self)
+    }
+    
+    deinit {
+        self.flow.remove(delegate: self)
     }
 
-    func start(from anchor: WebAuthentication.WindowAnchor?) {
-        let delegate = self.delegate
-
+    func start(context: AuthorizationCodeFlow.Context? = nil) {
         do {
-            try flow.resume(with: nil)
+            try flow.resume(with: context)
         } catch {
             delegate.authentication(provider: self, received: error)
-            
-            return
         }
-
-        guard let url = flow.authenticationURL else {
-            delegate.authentication(provider: self,
-                                    received: WebAuthenticationError.cannotComposeAuthenticationURL)
-            return
-        }
-        
+    }
+    
+    func authenticate(using url: URL) {
         authenticationSession = ASWebAuthenticationSession(
             url:url,
             callbackURLScheme: flow.callbackScheme,
             completionHandler: { url, error in
                 self.process(url: url, error: error)
             })
-
-        self.anchor = anchor
+        
         if #available(iOS 13.0, *) {
+            authenticationSession?.prefersEphemeralWebBrowserSession = delegate.authenticationShouldUseEphemeralSession(provider: self)
             authenticationSession?.presentationContextProvider = self
         }
 
@@ -102,6 +106,21 @@ class AuthenticationServicesProvider: NSObject, WebAuthenticationProvider {
         } catch {
             received(error: .authenticationProviderError(error))
         }
+    }
+}
+
+@available(iOS 12.0, *)
+extension AuthenticationServicesProvider: AuthenticationDelegate, AuthorizationCodeFlowDelegate {
+    func authentication<Flow>(flow: Flow, shouldAuthenticateUsing url: URL) where Flow : AuthorizationCodeFlow {
+        authenticate(using: url)
+    }
+    
+    func authentication<AuthorizationCodeFlow>(flow: AuthorizationCodeFlow, received token: Token) {
+        received(token: token)
+    }
+    
+    func authentication<AuthorizationCodeFlow>(flow: AuthorizationCodeFlow, received error: OAuth2Error) {
+        received(error: .oauth2(error: error))
     }
 }
     

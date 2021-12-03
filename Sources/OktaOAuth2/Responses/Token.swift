@@ -12,11 +12,11 @@
 
 import Foundation
 
-public struct Token: Decodable {
-    let tokenType: String
-    let expiresIn: Int
-    let accessToken: String
-    let scope: String
-    let refreshToken: String?
-    let idToken: String?
+public struct Token: Codable {
+    public let tokenType: String
+    public let expiresIn: Int
+    public let accessToken: String
+    public let scope: String
+    public let refreshToken: String?
+    public let idToken: String?
 }

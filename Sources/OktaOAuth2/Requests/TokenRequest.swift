@@ -24,7 +24,7 @@ struct TokenRequest {
 
 extension TokenRequest: APIRequest, APIRequestBody {
     var httpMethod: APIHTTPMethod { .post }
-    var path: String { "token" }
+    var path: String { "/oauth2/v1/token" }
     var contentType: APIContentType? { .formEncoded }
     var bodyParameters: [String : Any]? {
         var result = [
