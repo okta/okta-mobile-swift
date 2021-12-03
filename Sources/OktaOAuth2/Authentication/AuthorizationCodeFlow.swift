@@ -58,7 +58,7 @@ public class AuthorizationCodeFlow: AuthenticationFlow {
         }
     }
     
-    public struct Context {
+    public struct Context: Codable {
         public let pkce: PKCE?
         public let state: String
 
