@@ -198,11 +198,13 @@ extension APIClient {
         if let dateString = httpResponse.allHeaderFields["Date"] as? String {
             date = httpDateFormatter.date(from: dateString)
         }
-
+        
+        let rateInfo = APIResponse<T>.RateLimit(with: httpResponse.allHeaderFields)
+        
         return APIResponse(result: try decode(T.self, from: data),
                            date: date ?? Date(),
                            links: relatedLinks(from: httpResponse.allHeaderFields["Link"] as? String),
-                           rateInfo: .init(with: httpResponse.allHeaderFields),
+                           rateInfo: rateInfo,
                            requestId: requestId)
     }
 }

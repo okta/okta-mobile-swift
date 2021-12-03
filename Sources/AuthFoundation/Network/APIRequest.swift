@@ -97,11 +97,11 @@ extension APIRequest {
             .map { URLQueryItem(name: $0.0, value: $0.1) }
             .sorted(by: { $0.name < $1.name })
 
-        guard let url = components.url else {
+        guard let requestUrl = components.url else {
             throw APIClientError.invalidUrl
         }
         
-        var request = URLRequest(url: url,
+        var request = URLRequest(url: requestUrl,
                                  cachePolicy: cachePolicy,
                                  timeoutInterval: timeoutInterval)
         request.httpMethod = httpMethod.rawValue

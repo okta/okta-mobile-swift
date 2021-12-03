@@ -34,7 +34,7 @@ public class ResourceOwnerFlow: AuthenticationFlow {
     private(set) public var waitingForAuthorization: Bool = false
     
     public convenience init(username: String, password: String, domain: String) {
-        self.init(.init(username: username, password: password, domain: domain))
+        self.init(Configuration(username: username, password: password, domain: domain))
     }
     
     public init(_ configuration: Configuration) {

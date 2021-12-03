@@ -109,7 +109,7 @@ class AuthenticationServicesProvider: NSObject, WebAuthenticationProvider {
     }
 }
 
-@available(iOS 12.0, *)
+@available(iOS 12.0, macOS 10.15, *)
 extension AuthenticationServicesProvider: AuthenticationDelegate, AuthorizationCodeFlowDelegate {
     func authentication<Flow>(flow: Flow, shouldAuthenticateUsing url: URL) where Flow : AuthorizationCodeFlow {
         authenticate(using: url)

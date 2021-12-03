@@ -125,10 +125,9 @@ public class WebAuthentication {
         }
         
         try flow.resume(with: url)
-        
-        let provider = provider
-        self.provider = nil
+
         provider?.cancel()
+        provider = nil
     }
     
     public convenience init() throws {

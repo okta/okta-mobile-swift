@@ -107,12 +107,12 @@ public class AuthorizationCodeFlow: AuthenticationFlow {
                             responseType: Authentication.ResponseType = .code,
                             redirectUri: URL)
     {
-        self.init(.init(issuer: issuer,
-                        clientId: clientId,
-                        clientSecret: nil,
-                        scopes: scopes,
-                        responseType: responseType,
-                        redirectUri: redirectUri),
+        self.init(Configuration(issuer: issuer,
+                                clientId: clientId,
+                                clientSecret: nil,
+                                scopes: scopes,
+                                responseType: responseType,
+                                redirectUri: redirectUri),
                   client: OAuth2Client(baseURL: issuer))
     }
     
