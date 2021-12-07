@@ -71,5 +71,4 @@ extension XCTestCase {
         let jsonData = data(for: json)
         return try decoder.decode(T.self, from: jsonData)
     }
-
 }

@@ -44,7 +44,7 @@ final class OAuth2ClientTests: XCTestCase {
                           contentType: "application/json")
         
         var token: Token?
-        let expectation = expectation(description: "network request")
+        let expect = expectation(description: "network request")
         client.exchange(token: request) { result in
             guard case let .success(apiResponse) = result else {
                 XCTFail()
@@ -52,7 +52,7 @@ final class OAuth2ClientTests: XCTestCase {
             }
             
             token = apiResponse.result
-            expectation.fulfill()
+            expect.fulfill()
         }
         waitForExpectations(timeout: 1.0) { error in
             XCTAssertNil(error)
@@ -73,7 +73,7 @@ final class OAuth2ClientTests: XCTestCase {
                               contentType: "application/json")
         
         var config: OpenIdConfiguration?
-        let expectation = expectation(description: "network request")
+        let expect = expectation(description: "network request")
         client.fetchOpenIdConfiguration() { result in
             guard case let .success(apiResponse) = result else {
                 XCTFail()
@@ -81,7 +81,7 @@ final class OAuth2ClientTests: XCTestCase {
             }
             
             config = apiResponse.result
-            expectation.fulfill()
+            expect.fulfill()
         }
         waitForExpectations(timeout: 1.0) { error in
             XCTAssertNil(error)
