@@ -12,13 +12,9 @@
 
 import Foundation
 
-#if canImport(Combine)
-import Combine
-#endif
-
 public protocol APIClient {
     var baseURL: URL { get }
-    var session: URLSession { get }
+    var session: URLSessionProtocol { get }
     var additionalHttpHeaders: [String:String]? { get }
     var requestIdHeader: String? { get }
     var userAgent: String { get }
@@ -31,11 +27,6 @@ public protocol APIClient {
     #if swift(>=5.5.1) && !os(Linux)
     @available(iOS 15.0, macOS 12.0, *)
     func send<T: Decodable>(_ request: URLRequest) async throws -> APIResponse<T>
-    #endif
-    
-    #if canImport(Combine)
-    @available(iOS 13.0, macOS 10.15, *)
-    func publish<T: Decodable>(_ request: URLRequest) -> AnyPublisher<APIResponse<T>, Error>
     #endif
 }
 
@@ -78,7 +69,7 @@ extension APIClient {
         var urlRequest = request
         
 //        delegate?.api(client: self, willSendRequest: &urlRequest)
-        session.dataTask(with: urlRequest) { data, response, error in
+        session.dataTaskWithRequest(urlRequest) { data, response, error in
             guard let data = data,
                   let response = response
             else {
@@ -119,7 +110,7 @@ extension APIClient {
         var urlRequest = request
 //        delegate?.api(client: self, willSendRequest: &urlRequest)
 
-        let (data, response) = try await session.data(for: urlRequest)
+        let (data, response) = try await session.data(for: urlRequest, delegate: nil)
         let result: APIResponse<T> = try validate(data, response)
 //        delegate?.api(client: self, request: urlRequest, received: result)
 
@@ -130,25 +121,6 @@ extension APIClient {
     public func send<T: Decodable>(_ request: APIRequest) async throws -> APIResponse<T> {
         try await send(try request.request(for: self))
     }
-    #endif
-
-    #if canImport(Combine)
-    @available(iOS 13.0, tvOS 13.0, macOS 10.15, *)
-    public func publish<T: Decodable>(_ request: URLRequest) -> AnyPublisher<APIResponse<T>, Error> {
-        session.dataTaskPublisher(for: request)
-            .tryMap {
-                try self.validate($0.data, $0.response)
-            }
-            .eraseToAnyPublisher()
-    }
-
-    /* TODO
-    @available(iOS 13.0, tvOS 13.0, macOS 10.15, *)
-    public func publish<T: Decodable>(_ request: APIRequest) -> AnyPublisher<APIResponse<T>, Error> {
-     let urlRequest = try request.request(for: self)
-     return publish(urlRequest)
-    }
-     */
     #endif
 }
 

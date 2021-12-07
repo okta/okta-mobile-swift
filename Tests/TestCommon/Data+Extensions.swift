@@ -11,11 +11,17 @@
 //
 
 import Foundation
-import AuthFoundation
 
-struct OpenIdConfigurationRequest {}
+extension Data {
+    func urlFormEncoded() -> [String:String?]? {
+        guard let string = String(data: self, encoding: .utf8),
+              let url = URL(string: "?\(string)"),
+              let components = URLComponents(url: url, resolvingAgainstBaseURL: false),
+              let queryItems = components.queryItems
+        else { return nil }
 
-extension OpenIdConfigurationRequest: APIRequest {
-    var httpMethod: APIHTTPMethod { .get }
-    var path: String { ".well-known/openid-configuration" }
+        return queryItems.reduce(into: [String:String?]()) {
+            $0[$1.name] = $1.value
+        }
+    }
 }

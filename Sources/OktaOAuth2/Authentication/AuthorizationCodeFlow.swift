@@ -96,7 +96,8 @@ public class AuthorizationCodeFlow: AuthenticationFlow {
         }
     }
     private(set) public var context: Context?
-    
+    private(set) public var openIdConfiguration: OpenIdConfiguration?
+
     public lazy var callbackScheme: String? = {
         configuration.redirectUri.scheme
     }()
@@ -125,12 +126,28 @@ public class AuthorizationCodeFlow: AuthenticationFlow {
     
     public func resume(with context: Context?) throws {
         let context = context ?? Context()
-
-        let url = try createAuthenticationURL(using: context)
-        self.context = context
-        
         isAuthenticating = true
-        authenticationURL = url
+
+        client.fetchOpenIdConfiguration(completion: { result in
+            switch result {
+            case .failure(let error):
+                self.delegateCollection.invoke { $0.authentication(flow: self, received: .network(error: error)) }
+            case .success(let response):
+                let configuration = response.result
+                self.openIdConfiguration = configuration
+                
+                do {
+                    let url = try self.createAuthenticationURL(from: configuration.authorizationEndpoint,
+                                                                                   using: context)
+                    self.context = context
+                    
+                    self.authenticationURL = url
+                } catch {
+                    let apiError = error as? APIClientError ?? .serverError(error)
+                    self.delegateCollection.invoke { $0.authentication(flow: self, received: .network(error: apiError)) }
+                }
+            }
+        })
     }
     
     public func resume(with url: URL) throws {

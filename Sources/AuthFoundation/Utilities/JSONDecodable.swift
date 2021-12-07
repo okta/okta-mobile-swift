@@ -11,11 +11,7 @@
 //
 
 import Foundation
-import AuthFoundation
 
-struct OpenIdConfigurationRequest {}
-
-extension OpenIdConfigurationRequest: APIRequest {
-    var httpMethod: APIHTTPMethod { .get }
-    var path: String { ".well-known/openid-configuration" }
+public protocol JSONDecodable {
+    static var jsonDecoder: JSONDecoder { get }
 }

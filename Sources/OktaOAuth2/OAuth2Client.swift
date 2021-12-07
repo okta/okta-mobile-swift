@@ -35,11 +35,11 @@ public protocol OAuth2ClientDelegate: APIClientDelegate {
 }
 
 public class OAuth2Client: APIClient {
-    public let session: URLSession
+    public let session: URLSessionProtocol
     public let baseURL: URL
     public var additionalHttpHeaders: [String:String]? = nil
     
-    convenience public init(domain: String, session: URLSession = URLSession.shared) throws {
+    convenience public init(domain: String, session: URLSessionProtocol = URLSession.shared) throws {
         guard let url = URL(string: "https://\(domain)") else {
             throw OAuth2Error.invalidUrl
         }
@@ -47,7 +47,7 @@ public class OAuth2Client: APIClient {
         self.init(baseURL: url, session: session)
     }
     
-    public init(baseURL: URL, session: URLSession = URLSession.shared) {
+    public init(baseURL: URL, session: URLSessionProtocol = URLSession.shared) {
         self.baseURL = baseURL
         self.session = session
     }
@@ -71,6 +71,10 @@ public class OAuth2Client: APIClient {
     
     func exchange(token request: TokenRequest, completion: @escaping (Result<APIResponse<Token>, APIClientError>) -> Void) {
         send(request, completion: completion)
+    }
+    
+    func fetchOpenIdConfiguration(completion: @escaping (Result<APIResponse<OpenIdConfiguration>, APIClientError>) -> Void) {
+        send(OpenIdConfigurationRequest(), completion: completion)
     }
 
     // MARK: Private properties / methods
