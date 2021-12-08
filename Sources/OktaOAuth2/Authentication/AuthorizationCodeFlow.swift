@@ -58,13 +58,19 @@ public class AuthorizationCodeFlow: AuthenticationFlow {
         }
     }
     
-    public struct Context: Codable {
+    public struct Context: Codable, Equatable {
         public let pkce: PKCE?
         public let state: String
+        internal(set) public var authenticationURL: URL?
 
         public init(state: String? = nil) {
-            self.state = state ?? UUID().uuidString
-            pkce = PKCE()
+            self.init(state: state ?? UUID().uuidString,
+                      pkce: PKCE())
+        }
+        
+        init(state: String, pkce: PKCE?) {
+            self.state = state
+            self.pkce = pkce
         }
     }
     
@@ -86,16 +92,16 @@ public class AuthorizationCodeFlow: AuthenticationFlow {
     }
     
     private(set) public var waitingForAuthorization: Bool = false
-    private(set) public var authenticationURL: URL? {
+    private(set) public var authenticationURL: URL?
+    private(set) public var context: Context? {
         didSet {
-            guard let url = authenticationURL else {
+            guard let url = context?.authenticationURL else {
                 return
             }
 
             delegateCollection.invoke { $0.authentication(flow: self, shouldAuthenticateUsing: url) }
         }
     }
-    private(set) public var context: Context?
     private(set) public var openIdConfiguration: OpenIdConfiguration?
 
     public lazy var callbackScheme: String? = {
@@ -125,7 +131,7 @@ public class AuthorizationCodeFlow: AuthenticationFlow {
     }
     
     public func resume(with context: Context?) throws {
-        let context = context ?? Context()
+        var context = context ?? Context()
         isAuthenticating = true
 
         client.fetchOpenIdConfiguration(completion: { result in
@@ -139,9 +145,8 @@ public class AuthorizationCodeFlow: AuthenticationFlow {
                 do {
                     let url = try self.createAuthenticationURL(from: configuration.authorizationEndpoint,
                                                                                    using: context)
+                    context.authenticationURL = url
                     self.context = context
-                    
-                    self.authenticationURL = url
                 } catch {
                     let apiError = error as? APIClientError ?? .serverError(error)
                     self.delegateCollection.invoke { $0.authentication(flow: self, received: .network(error: apiError)) }
@@ -167,6 +172,8 @@ public class AuthorizationCodeFlow: AuthenticationFlow {
                 self.delegateCollection.invoke { $0.authentication(flow: self, received: .network(error: error)) }
             }
             
+            self.context = nil
+            self.authenticationURL = nil
             self.isAuthenticating = false
         }
     }

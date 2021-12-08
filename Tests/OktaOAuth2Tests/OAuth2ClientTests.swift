@@ -31,16 +31,7 @@ final class OAuth2ClientTests: XCTestCase {
                                    pkce: pkce)
         
         urlSession.expect("https://example.com/oauth2/v1/token",
-                          data: """
-                            {
-                               "token_type": "Bearer",
-                               "expires_in": 3600,
-                               "access_token": "theaccesstoken",
-                               "scope": "openid profile offline_access",
-                               "refresh_token": "therefreshtoken",
-                               "id_token": "theidtoken"
-                             }
-                            """.data(using: .utf8),
+                          data: try data(for: "token", in: "MockResponses"),
                           contentType: "application/json")
         
         var token: Token?
@@ -68,9 +59,9 @@ final class OAuth2ClientTests: XCTestCase {
     }
 
     func testOpenIDConfiguration() throws {
-        try urlSession.expect("https://example.com/.well-known/openid-configuration",
-                              data: data(for: "openid-configuration", in: "MockResponses"),
-                              contentType: "application/json")
+        urlSession.expect("https://example.com/.well-known/openid-configuration",
+                          data: try data(for: "openid-configuration", in: "MockResponses"),
+                          contentType: "application/json")
         
         var config: OpenIdConfiguration?
         let expect = expectation(description: "network request")

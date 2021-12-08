@@ -13,7 +13,7 @@
 import Foundation
 
 /// Object defining the structure and settings of a PKCE challenge, including the verifier code, the encoded challenge, and the method used to exchange this information with the server.
-public struct PKCE: Codable {
+public struct PKCE: Codable, Equatable {
     /// The auto-generated code verifier data, randmonly-generated.
     public let codeVerifier: String
     

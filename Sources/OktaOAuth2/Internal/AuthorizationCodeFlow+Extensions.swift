@@ -21,7 +21,9 @@ extension AuthorizationCodeFlow.Configuration {
         
         components.queryItems = queryParameters(using: context).map { (key, value) in
             URLQueryItem(name: key, value: value)
-        }
+        }.sorted(by: { lhs, rhs in
+            lhs.name < rhs.name
+        })
 
         return components
     }
