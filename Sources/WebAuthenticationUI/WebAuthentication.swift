@@ -37,6 +37,14 @@ public enum WebAuthenticationError: Error {
 /// Authentication coordinator that simplifies signing users in using browser-based OIDC authentication flows.
 ///
 /// This simple class encapsulates the details of managing browser instances across iOS/macOS versions, coordinating with OAuth2 endpoints, and supporting a variety of conveniences when signing users into your application.
+///
+/// The simplest way to authenticate a user is to use the ``shared`` property to access your default session, and calling ``start(from:)`` to present the browser to the user.
+///
+/// ```swift
+/// let token = try await WebAuthentication.shared.signIn(from: view.window)
+/// ```
+///
+/// To customize the authentication flow, please read more about the underlying OAuth2 client within the OktaOAuth2 library, and how that relates to the ``flow`` property.
 public class WebAuthentication {
     #if os(macOS)
     public typealias WindowAnchor = NSWindow

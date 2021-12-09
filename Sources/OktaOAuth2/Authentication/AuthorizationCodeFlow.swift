@@ -32,7 +32,7 @@ public protocol AuthorizationCodeFlowDelegate: AuthenticationDelegate {
     /// The authorization URL is generated from a combination of configuration sources, as well as the issuer's OpenID configuration. When specific values need to be added to the URL, such as custom query string or other URL parameters, this delegate method enables you to manipulate the URL before it is passed to a web browser.
     /// - Parameters:
     ///   - flow: The authentication flow.
-    ///   - urlComponents: A ``URLComponents`` instance that represents the authorization URL, prior to conversion to a URL.
+    ///   - urlComponents: A `URLComponents` instance that represents the authorization URL, prior to conversion to a URL.
     func authentication<Flow: AuthorizationCodeFlow>(flow: Flow, customizeUrl urlComponents: inout URLComponents)
     
     /// Called when the authorization URL has been created, indicating the URL should be presented to the user.
