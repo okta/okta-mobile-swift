@@ -42,8 +42,14 @@ extension GrantType: RawRepresentable {
         switch self {
         case .other(let name):
             return name
-        default:
-            return Mapping.first { $0.value == self }?.key ?? ""
+        case .authorizationCode:
+            return "authorization_code"
+        case .implicit:
+            return "implicit"
+        case .refreshToken:
+            return "refresh_token"
+        case .password:
+            return "password"
         }
     }
 }

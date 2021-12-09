@@ -13,32 +13,106 @@
 import Foundation
 import AuthFoundation
 
+/// The delegate of a ``AuthorizationCodeFlow`` may adopt some, or all, of the methods described here. These allow a developer to customize or interact with the authentication flow during authentication.
+///
+/// This protocol extends the basic ``AuthenticationDelegate`` which all authentication flows support.
 public protocol AuthorizationCodeFlowDelegate: AuthenticationDelegate {
+    /// Called before authentication begins.
+    /// - Parameters:
+    ///   - flow: The authentication flow that has started.
     func authenticationStarted<Flow: AuthorizationCodeFlow>(flow: Flow)
+
+    /// Called after authentication completes.
+    /// - Parameters:
+    ///   - flow: The authentication flow that has finished.
     func authenticationFinished<Flow: AuthorizationCodeFlow>(flow: Flow)
+
+    /// Provides the opportunity to customize the authorization URL.
+    ///
+    /// The authorization URL is generated from a combination of configuration sources, as well as the issuer's OpenID configuration. When specific values need to be added to the URL, such as custom query string or other URL parameters, this delegate method enables you to manipulate the URL before it is passed to a web browser.
+    /// - Parameters:
+    ///   - flow: The authentication flow.
+    ///   - urlComponents: A ``URLComponents`` instance that represents the authorization URL, prior to conversion to a URL.
     func authentication<Flow: AuthorizationCodeFlow>(flow: Flow, customizeUrl urlComponents: inout URLComponents)
+    
+    /// Called when the authorization URL has been created, indicating the URL should be presented to the user.
+    /// - Parameters:
+    ///   - flow: The authentication flow.
+    ///   - url: The authorization URL to display in a browser to the user.
     func authentication<Flow: AuthorizationCodeFlow>(flow: Flow, shouldAuthenticateUsing url: URL)
 }
 
+/// An authentication flow class that implements the Authorization Code Flow exchange.
+///
+/// The Authorization Code Flow permits a user to authenticate using a web browser redirect model, where an initial authentication URL is loaded in a browser, they sign in through some external service, after which their browser is redirected to a URL whose scheme matches the one defined in the client configuration. An authorization code is included in that URL's query string parameters. This code can then be exchanged against the authorization server for access tokens.
+///
+/// You can create an instance of  ``Configuration-swift.struct`` to define your client's settings, and supply that to the initializer, along with a reference to your ``OAuth2Client`` for performing key operations and requests. Alternatively, you can use any of the convenience initializers to simplify the process.
+///
+/// As an example, we'll use Swift Concurrency, since these asynchronous methods can be used inline easily, though ``AuthorizationCodeFlow`` can just as easily be used with completion blocks or through the use of the ``AuthorizationCodeFlowDelegate``.
+///
+/// ```swift
+/// let flow = AuthorizationCodeFlow(
+///     issuer: URL(string: "https://example.okta.com")!,
+///     clientId: "abc123client",
+///     scopes: "openid offline_access email profile",
+///     redirectUri: URL(string: "com.example.app:/callback"))
+///
+/// // Create the authorization URL. Open this in a browser.
+/// let authorizeUrl = try await flow.resume()
+///
+/// // Once the browser redirects to the callback scheme
+/// // from the redirect URI, use that to resume the flow.
+/// let redirectUri: URL
+/// let token = try await flow.resume(with: redirectUri)
+/// ```
 public class AuthorizationCodeFlow: AuthenticationFlow {
+    /// Configuration settings that define the OAuth2 client to be authenticated against.
+    
     public struct Configuration: AuthenticationConfiguration {
+        /// The client's issuer URL.
         public let issuer: URL
-        public let clientId: String
-        public let clientSecret: String?
-        public let scopes: String
-        public let responseType: Authentication.ResponseType
-        public let redirectUri: URL
-        public let logoutRedirectUri: URL?
-        public let additionalParameters: [String:String]?
 
+        /// The client's ID.
+        public let clientId: String
+        
+        /// The client secret, if applicable to your application.
+        public let clientSecret: String?
+        
+        /// The scopes requested.
+        public let scopes: String
+        
+        /// The response type expected.
+        public let responseType: ResponseType
+        
+        /// The redirect URI defined for your client.
+        public let redirectUri: URL
+        
+        /// The logout redirect URI, if applicable.
+        public let logoutRedirectUri: URL?
+        
+        /// Any additional query string parameters you would like to supply to the authorization server.
+        public let additionalParameters: [String:String]?
+        
+        /// The calculated base URL to use for requests.
         public let baseURL: URL
         
+        /// Convenience initializer for constructing an authorization code flow configuration using the supplied values.
+        /// - Parameters:
+        ///   - issuer: The client's issuer URL
+        ///   - clientId: The client's ID
+        ///   - clientSecret: The client's secret, if applicable
+        ///   - state: The state to use in the authorization URL, or `nil` to accept an auto-generated value.
+        ///   - scopes: The scopes to request
+        ///   - responseType: The response type expected, which defaults to `.code`
+        ///   - redirectUri: The redirect URI for the client
+        ///   - logoutRedirectUri: The logout redirect URI, if applicable
+        ///   - additionalParameters: Additional query string parameters to provide, or `nil` for no custom parameters.
         public init(issuer: URL,
                     clientId: String,
                     clientSecret: String? = nil,
                     state: String? = nil,
                     scopes: String,
-                    responseType: Authentication.ResponseType = .code,
+                    responseType: ResponseType = .code,
                     redirectUri: URL,
                     logoutRedirectUri: URL? = nil,
                     additionalParameters: [String:String]? = nil)
@@ -58,11 +132,21 @@ public class AuthorizationCodeFlow: AuthenticationFlow {
         }
     }
     
+    /// A model representing the context and current state for an authorization session.
     public struct Context: Codable, Equatable {
+        /// The ``PKCE`` credentials to use in the authorization request.
+        ///
+        /// This value may be `nil` on platforms that do not support PKCE.
         public let pkce: PKCE?
+        
+        /// The state string to use when creating an authentication URL.
         public let state: String
+        
+        /// The current authentication URL, or `nil` if one has not yet been generated.
         internal(set) public var authenticationURL: URL?
-
+        
+        /// Initializer for creating a context with a custom state string.
+        /// - Parameter state: State string to use, or `nil` to accept an automatically generated default.
         public init(state: String? = nil) {
             self.init(state: state ?? UUID().uuidString,
                       pkce: PKCE())
@@ -74,9 +158,13 @@ public class AuthorizationCodeFlow: AuthenticationFlow {
         }
     }
     
+    /// The ``OAuth2Client`` this authentication flow will use.
     public let client: OAuth2Client
+    
+    /// The configuration used when constructing this authentication flow.
     public let configuration: Configuration
-
+    
+    /// Indicates whether or not this flow is currently in the process of authenticating a user.
     private(set) public var isAuthenticating: Bool = false {
         didSet {
             guard oldValue != isAuthenticating else {
@@ -91,8 +179,7 @@ public class AuthorizationCodeFlow: AuthenticationFlow {
         }
     }
     
-    private(set) public var waitingForAuthorization: Bool = false
-    private(set) public var authenticationURL: URL?
+    /// The context that stores the state for the current authentication session.
     private(set) public var context: Context? {
         didSet {
             guard let url = context?.authenticationURL else {
@@ -102,16 +189,28 @@ public class AuthorizationCodeFlow: AuthenticationFlow {
             delegateCollection.invoke { $0.authentication(flow: self, shouldAuthenticateUsing: url) }
         }
     }
+    
+    /// The OpenID configuration retrieved from the authorization server.
+    ///
+    /// This value may be `nil` if the authentication session hasn't been started.
     private(set) public var openIdConfiguration: OpenIdConfiguration?
-
+    
+    /// The callback URL scheme this client expects to see when a redirection occurs.
     public lazy var callbackScheme: String? = {
         configuration.redirectUri.scheme
     }()
-
+    
+    /// Convenience initializer to construct an authentication flow from variables.
+    /// - Parameters:
+    ///   - issuer: The issuer URL.
+    ///   - clientId: The client ID
+    ///   - scopes: The scopes to request
+    ///   - responseType: The response type to expect, or ``ResponseType/code`` if not specified.
+    ///   - redirectUri: The redirect URI for the client.
     public convenience init(issuer: URL,
                             clientId: String,
                             scopes: String,
-                            responseType: Authentication.ResponseType = .code,
+                            responseType: ResponseType = .code,
                             redirectUri: URL)
     {
         self.init(Configuration(issuer: issuer,
@@ -123,6 +222,10 @@ public class AuthorizationCodeFlow: AuthenticationFlow {
                   client: OAuth2Client(baseURL: issuer))
     }
     
+    /// Initializer to construct an authentication flow from a pre-defined configuration and client.
+    /// - Parameters:
+    ///   - configuration: The configuration to use for this authentication flow.
+    ///   - client: The `OAuth2Client` to use with this flow.
     public init(_ configuration: Configuration, client: OAuth2Client) {
         self.client = client
         self.configuration = configuration
@@ -130,16 +233,21 @@ public class AuthorizationCodeFlow: AuthenticationFlow {
         client.add(delegate: self)
     }
     
-    public func resume(with context: Context?) throws {
+    /// Initiates an authentication flow, with an optional ``Context-swift.struct``.
+    ///
+    /// This method is used to begin an authentication session. It is asynchronous, and will invoke the appropriate delegate methods when a response is received.
+    /// - Parameters:
+    ///   - context: Optional context to provide when customizing the state parameter.
+    ///   - completion: Optional completion block for receiving the response. If `nil`, you may rely upon the appropriate delegate API methods.
+    public func resume(with context: Context? = nil, completion: ((Result<URL,APIClientError>) -> Void)? = nil) throws {
         var context = context ?? Context()
         isAuthenticating = true
 
-        client.fetchOpenIdConfiguration(completion: { result in
+        client.openIdConfiguration { result in
             switch result {
             case .failure(let error):
                 self.delegateCollection.invoke { $0.authentication(flow: self, received: .network(error: error)) }
-            case .success(let response):
-                let configuration = response.result
+            case .success(let configuration):
                 self.openIdConfiguration = configuration
                 
                 do {
@@ -147,15 +255,26 @@ public class AuthorizationCodeFlow: AuthenticationFlow {
                                                                                    using: context)
                     context.authenticationURL = url
                     self.context = context
+                    
+                    completion?(.success(url))
                 } catch {
                     let apiError = error as? APIClientError ?? .serverError(error)
                     self.delegateCollection.invoke { $0.authentication(flow: self, received: .network(error: apiError)) }
+                    completion?(.failure(apiError))
                 }
             }
-        })
+        }
     }
     
-    public func resume(with url: URL) throws {
+    /// Continues an authentication flow using the given authentication redirect URI.
+    ///
+    /// Once the user completes authorization, using the URL provided by the ``resume(with:completion:)-7qe02`` method within a browser, the browser will redirect to a URL that matches the scheme provided in the client configuration's ``Configuration-swift.struct/redirectUri``. This URI will contain either an error response from the authorization server, or an authorization code which can be used to exchange a token.
+    ///
+    /// This method takes the returned redirect URI, and communicates with Okta to exchange that for a token.
+    /// - Parameters:
+    ///   - url: Authorization redirect URI
+    ///   - completion: Optional completion block to retrieve the returned result.
+    public func resume(with url: URL, completion: ((Result<Token,APIClientError>) -> Void)? = nil) throws {
         let code = try authorizationCode(from: url)
 
         let request = TokenRequest(clientId: configuration.clientId,
@@ -168,12 +287,13 @@ public class AuthorizationCodeFlow: AuthenticationFlow {
             switch result {
             case .success(let response):
                 self.delegateCollection.invoke { $0.authentication(flow: self, received: response.result) }
+                completion?(.success(response.result))
             case .failure(let error):
                 self.delegateCollection.invoke { $0.authentication(flow: self, received: .network(error: error)) }
+                completion?(.failure(error))
             }
             
             self.context = nil
-            self.authenticationURL = nil
             self.isAuthenticating = false
         }
     }
@@ -187,6 +307,51 @@ public class AuthorizationCodeFlow: AuthenticationFlow {
     // MARK: Private properties / methods
     public let delegateCollection = DelegateCollection<AuthorizationCodeFlowDelegate>()
 }
+
+#if swift(>=5.5.1) && !os(Linux)
+@available(iOS 15.0, tvOS 15.0, macOS 12.0, *)
+extension AuthorizationCodeFlow {
+    /// Asynchronously initiates an authentication flow, with an optional ``Context-swift.struct``, using Swift Concurrency.
+    ///
+    /// This method is used to begin an authentication session.
+    /// - Parameters:
+    ///   - context: Optional context to provide when customizing the state parameter.
+    /// - Returns: The URL a user should be presented with within a browser, to continue authorization.
+    public func resume(with context: Context? = nil) async throws -> URL {
+        try await withCheckedThrowingContinuation { continuation in
+            do {
+                try resume(with: context) { result in
+                    continuation.resume(with: result)
+                }
+            } catch {
+                let apiError = error as? APIClientError ?? .serverError(error)
+                continuation.resume(with: .failure(apiError))
+            }
+        }
+    }
+    
+    /// Asynchronously continues an authentication flow using the given authentication redirect URI, using Swift Concurrency.
+    ///
+    /// Once the user completes authorization, using the URL provided by the ``resume(with:)-5lent`` method within a browser, the browser will redirect to a URL that matches the scheme provided in the client configuration's ``Configuration-swift.struct/redirectUri``. This URI will contain either an error response from the authorization server, or an authorization code which can be used to exchange a token.
+    ///
+    /// This method takes the returned redirect URI, and communicates with Okta to exchange that for a token.
+    /// - Parameters:
+    ///   - url: Authorization redirect URI.
+    /// - Returns: The Token created as a result of exchanging an authorization code.
+    public func resume(with url: URL) async throws -> Token {
+        try await withCheckedThrowingContinuation { continuation in
+            do {
+                try resume(with: url) { result in
+                    continuation.resume(with: result)
+                }
+            } catch {
+                let apiError = error as? APIClientError ?? .serverError(error)
+                continuation.resume(with: .failure(apiError))
+            }
+        }
+    }
+}
+#endif
 
 extension AuthorizationCodeFlow: UsesDelegateCollection {
     public typealias Delegate = AuthorizationCodeFlowDelegate

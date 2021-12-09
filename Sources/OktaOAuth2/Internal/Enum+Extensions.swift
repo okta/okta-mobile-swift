@@ -12,19 +12,13 @@
 
 import Foundation
 
-enum OAuth2GrantType: String {
-    case clientCredentials = "client_credentials"
-}
-
-public struct AccessTokenRequest {
-    let grantType: OAuth2GrantType
-    let scope: [String]
-    
-}
-
-public struct AccessTokenResponse {
-    let accessToken: String
-    let tokenType: String
-    let expiresIn: TimeInterval
-    
+extension GrantType {
+    var responseKey: String {
+        switch self {
+        case .authorizationCode:
+            return "code"
+        default:
+            return rawValue
+        }
+    }
 }

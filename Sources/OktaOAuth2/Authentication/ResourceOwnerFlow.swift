@@ -31,8 +31,6 @@ public class ResourceOwnerFlow: AuthenticationFlow {
     public weak var delegate: ResourceOwnerFlowDelegate?
     private(set) public var isAuthenticating: Bool = false
     
-    private(set) public var waitingForAuthorization: Bool = false
-    
     public convenience init(username: String, password: String, domain: String) {
         self.init(Configuration(username: username, password: password, domain: domain))
     }
