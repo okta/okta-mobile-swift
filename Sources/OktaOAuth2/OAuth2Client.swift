@@ -107,12 +107,17 @@ public class OAuth2Client: APIClient {
         }
     }
     
-    #if swift(>=5.5.1) && !os(Linux)
+    // MARK: Private properties / methods
+    private let delegates = DelegateCollection<OAuth2ClientDelegate>()
+}
+
+#if swift(>=5.5.1) && !os(Linux)
+@available(iOS 15.0, tvOS 15.0, macOS 12.0, *)
+extension OAuth2Client {
     /// Asynchronously retrieves the org's OpenID configuration.
     ///
     /// If this value has recently been retrieved, the cached result is returned.
     /// - Returns: The OpenID configuration for the org identified by the client's base URL.
-    @available(iOS 15.0.0, *)
     public func openIdConfiguration() async throws -> OpenIdConfiguration {
         try await withCheckedThrowingContinuation { continuation in
             openIdConfiguration() { result in
@@ -120,11 +125,8 @@ public class OAuth2Client: APIClient {
             }
         }
     }
-    #endif
-
-    // MARK: Private properties / methods
-    private let delegates = DelegateCollection<OAuth2ClientDelegate>()
-}         
+}
+#endif
 
 extension OAuth2Client {
     func exchange(token request: TokenRequest, completion: @escaping (Result<APIResponse<Token>, APIClientError>) -> Void) {
