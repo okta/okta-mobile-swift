@@ -1,4 +1,4 @@
-// swift-tools-version:5.3
+// swift-tools-version:5.5
 // The swift-tools-version declares the minimum version of Swift required to build this package.
 
 import PackageDescription
@@ -30,11 +30,15 @@ let package = Package(
                     .target(name: "OktaOAuth2")
                 ]),
     ] + [
+        .target(name: "TestCommon",
+                dependencies: ["AuthFoundation"],
+                path: "Tests/TestCommon"),
         .testTarget(name: "AuthFoundationTests",
                     dependencies: ["AuthFoundation"]),
         .testTarget(name: "OktaOAuth2Tests",
-                    dependencies: ["OktaOAuth2"]),
-            .testTarget(name: "WebAuthenticationUITests",
-                        dependencies: ["WebAuthenticationUI"])
+                    dependencies: ["OktaOAuth2", "TestCommon"],
+                    resources: [ .copy("MockResponses") ]),
+        .testTarget(name: "WebAuthenticationUITests",
+                    dependencies: ["WebAuthenticationUI"])
     ]
 )

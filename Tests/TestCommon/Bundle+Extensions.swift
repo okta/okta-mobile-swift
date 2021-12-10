@@ -11,11 +11,22 @@
 //
 
 import Foundation
-import AuthFoundation
-
-struct OpenIdConfigurationRequest {}
-
-extension OpenIdConfigurationRequest: APIRequest {
-    var httpMethod: APIHTTPMethod { .get }
-    var path: String { ".well-known/openid-configuration" }
+extension Bundle {
+    var resourceBundle: Bundle? {
+        guard let resourcePath = resourcePath else { return nil }
+        let legacyBuildPath = (bundlePath as NSString).deletingLastPathComponent
+        
+        var bundle: Bundle?
+        for directory in [resourcePath, legacyBuildPath] {
+            bundle = try? FileManager.default.contentsOfDirectory(atPath: directory)
+                .filter { $0.hasSuffix(".bundle") }
+                .compactMap { Bundle(path: "\(directory)/\($0)") }
+                .first
+            
+            if bundle != nil {
+                break
+            }
+        }
+        return bundle
+    }
 }

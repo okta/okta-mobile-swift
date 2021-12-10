@@ -11,11 +11,10 @@
 //
 
 import Foundation
-import AuthFoundation
 
-struct OpenIdConfigurationRequest {}
-
-extension OpenIdConfigurationRequest: APIRequest {
-    var httpMethod: APIHTTPMethod { .get }
-    var path: String { ".well-known/openid-configuration" }
+extension String {
+    func isBase64URLEncoded() -> Bool {
+        let charset = CharacterSet(charactersIn: "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789-_").inverted
+        return (rangeOfCharacter(from: charset) == nil)
+    }
 }

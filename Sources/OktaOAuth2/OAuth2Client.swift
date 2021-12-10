@@ -34,12 +34,35 @@ public protocol OAuth2ClientDelegate: APIClientDelegate {
 //    func oauth(client: Client<T>, customize url: inout URL, for endpoint: Client<T>.Endpoint)
 }
 
+/// An OAuth2 client, used to interact with a given authorization server.
+///
+/// This class serves two purposes:
+/// 1. Expose high-level actions a client can perform against an OAuth2 service.
+/// 2. Connect authentication flows to the OAuth2 servers they intend to authenticate against.
+///
+/// Authentication flows represent the variety of ways authentication can occur, and in many cases involves multiple discrete steps. These often require interaction with individual actions (such as fetching OpenID configuration, accessing JWKS keys, and exchanging tokens), so these are encapsulated within the OAuth2Client for code sharing and ease of use.
+///
+/// The OAuth2Client is itself an APIClient, defined from within the AuthFoundation framework, and provides extensibility hooks.
 public class OAuth2Client: APIClient {
-    public let session: URLSession
+    /// The URLSession used by this client for network requests.
+    public let session: URLSessionProtocol
+    
+    /// The base URL that identifies this OAuth2 org.
     public let baseURL: URL
+    
+    /// Additional HTTP headers to include in outgoing network requests.
     public var additionalHttpHeaders: [String:String]? = nil
     
-    convenience public init(domain: String, session: URLSession = URLSession.shared) throws {
+    /// The OpenID configuration for this org.
+    ///
+    /// This value will be `nil` until the configuration has been retrieved through the ``openIdConfiguration(completion:)`` or ``openIdConfiguration()`` functions.
+    private(set) public var openIdConfiguration: OpenIdConfiguration?
+    
+    /// Constructs an OAuth2Client for the given domain.
+    /// - Parameters:
+    ///   - domain: Okta domain to use for the base URL.
+    ///   - session: Optional URLSession to use for network requests.
+    convenience public init(domain: String, session: URLSessionProtocol = URLSession.shared) throws {
         guard let url = URL(string: "https://\(domain)") else {
             throw OAuth2Error.invalidUrl
         }
@@ -47,7 +70,11 @@ public class OAuth2Client: APIClient {
         self.init(baseURL: url, session: session)
     }
     
-    public init(baseURL: URL, session: URLSession = URLSession.shared) {
+    /// Constructs an OAuth2Client for the given base URL.
+    /// - Parameters:
+    ///   - baseURL: Base URL representing the Okta domain to use.
+    ///   - session: Optional URLSession to use for network requests.
+    public init(baseURL: URL, session: URLSessionProtocol = URLSession.shared) {
         self.baseURL = baseURL
         self.session = session
     }
@@ -69,13 +96,55 @@ public class OAuth2Client: APIClient {
         print(response.result)
     }
     
+    /// Retrieves the org's OpenID configuration.
+    ///
+    /// If this value has recently been retrieved, the cached result is returned.
+    /// - Parameter completion: Completion block invoked with the result.
+    public func openIdConfiguration(completion: @escaping (Result<OpenIdConfiguration, APIClientError>) -> Void) {
+        if let openIdConfiguration = openIdConfiguration {
+            completion(.success(openIdConfiguration))
+        } else {
+            fetchOpenIdConfiguration { result in
+                switch result {
+                case .success(let response):
+                    completion(.success(response.result))
+                case .failure(let error):
+                    completion(.failure(error))
+                }
+            }
+        }
+    }
+    
+    // MARK: Private properties / methods
+    private let delegates = DelegateCollection<OAuth2ClientDelegate>()
+}
+
+#if swift(>=5.5.1) && !os(Linux)
+@available(iOS 15.0, tvOS 15.0, macOS 12.0, *)
+extension OAuth2Client {
+    /// Asynchronously retrieves the org's OpenID configuration.
+    ///
+    /// If this value has recently been retrieved, the cached result is returned.
+    /// - Returns: The OpenID configuration for the org identified by the client's base URL.
+    public func openIdConfiguration() async throws -> OpenIdConfiguration {
+        try await withCheckedThrowingContinuation { continuation in
+            openIdConfiguration() { result in
+                continuation.resume(with: result)
+            }
+        }
+    }
+}
+#endif
+
+extension OAuth2Client {
     func exchange(token request: TokenRequest, completion: @escaping (Result<APIResponse<Token>, APIClientError>) -> Void) {
         send(request, completion: completion)
     }
-
-    // MARK: Private properties / methods
-    private let delegates = DelegateCollection<OAuth2ClientDelegate>()
-}         
+    
+    func fetchOpenIdConfiguration(completion: @escaping (Result<APIResponse<OpenIdConfiguration>, APIClientError>) -> Void) {
+        send(OpenIdConfigurationRequest(), completion: completion)
+    }
+}
 
 extension OAuth2Client: UsesDelegateCollection {
     public typealias Delegate = OAuth2ClientDelegate

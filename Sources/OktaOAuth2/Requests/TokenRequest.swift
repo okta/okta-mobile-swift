@@ -17,7 +17,7 @@ struct TokenRequest {
     let clientId: String
     let clientSecret: String?
     let redirectUri: String
-    let grantType: Authentication.GrantType
+    let grantType: GrantType
     let grantValue: String
     let pkce: PKCE?
 }

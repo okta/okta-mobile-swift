@@ -17,57 +17,40 @@ public protocol AuthenticationConfiguration {
     var baseURL: URL { get }
 }
 
+/// A common delegate protocol that all authentication flows should support.
 public protocol AuthenticationDelegate: AnyObject {
+    /// Sent when an authentication session starts.
     func authenticationStarted<Flow>(flow: Flow)
+    
+    /// Sent when an authentication session finishes.
     func authenticationFinished<Flow>(flow: Flow)
+    
+    /// Sent when an authentication session receives a token.
     func authentication<Flow>(flow: Flow, received token: Token)
+    
+    /// Sent when an authentication session receives an error.
     func authentication<Flow>(flow: Flow, received error: OAuth2Error)
 }
 
+/// A protocol defining a type of authentication flow.
+///
+/// OAuth2 supports a variety of authentication flows, each with its own capabilities, configuration, and limitations. To normalize these differences, the AuthenticationFlow protocol is used to represent the common capabilities provided by all flows.
 public protocol AuthenticationFlow: AnyObject, UsesDelegateCollection {
     associatedtype AuthConfiguration where AuthConfiguration: AuthenticationConfiguration
-
+    
+    /// The client configuration for this flow.
     var configuration: AuthConfiguration { get }
+    
+    /// Indicates if this flow is currently authenticating.
     var isAuthenticating: Bool { get }
     
+    /// Cancels the authentication session.
     func cancel()
+    
+    /// Resets the authentication session.
     func reset()
 }
 
-internal protocol TokenExchangeable {
-    var tokenExchangeParameters: [String:String] { get }
+public enum ResponseType: String {
+    case token, code
 }
-
-public struct Authentication {
-    public enum Flow {
-        case authorizationCode
-        case interactionCode
-        case clientCredential
-        case deviceAuthorization
-        case implicit
-        case hybrid
-        case resourceOwner
-    }
-
-    public enum ResponseType: String {
-        case token, code
-    }
-    
-    public enum GrantType: String {
-        case authorizationCode = "authorization_code"
-        case interactionCode = "interaction_code"
-        case password
-        case clientCredentials = "client_credentials"
-        case refreshToken = "refresh_token"
-        
-        var responseKey: String {
-            switch self {
-            case .authorizationCode:
-                return "code"
-            default:
-                return rawValue
-            }
-        }
-    }
-}
-        

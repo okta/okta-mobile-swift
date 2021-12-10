@@ -12,11 +12,23 @@
 
 import Foundation
 
+/// Token information representing a user's access to a resource server, including access token, refresh token, and other related information.
 public struct Token: Codable {
+    /// The string type of the token (e.g. `Bearer`).
     public let tokenType: String
-    public let expiresIn: Int
+    
+    /// The expiration duration for this token.
+    public let expiresIn: TimeInterval
+    
+    /// Access token.
     public let accessToken: String
+    
+    /// The scopes requested when this token was generated.
     public let scope: String
+    
+    /// The refresh token, if requested.
     public let refreshToken: String?
+    
+    /// The ID token, if requested.
     public let idToken: String?
 }

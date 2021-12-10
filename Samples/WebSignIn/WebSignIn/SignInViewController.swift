@@ -24,7 +24,12 @@ class SignInViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        clientIdLabel.text = auth?.flow.configuration.clientId ?? "Not configured"
+        if let clientId = auth?.flow.configuration.clientId {
+            clientIdLabel.text = clientId
+        } else {
+            clientIdLabel.text = "Not configured"
+            signInButton.isEnabled = false
+        }
     }
     
     @IBAction func ephemeralSwitchChanged(_ sender: Any) {

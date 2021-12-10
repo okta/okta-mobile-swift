@@ -13,16 +13,17 @@
 import Foundation
 
 extension AuthorizationCodeFlow.Configuration {
-    func authenticationUrlComponents(using context: AuthorizationCodeFlow.Context) throws -> URLComponents {
-        guard let url = URL(string: "authorize", relativeTo: baseURL),
-              var components = URLComponents(url: url, resolvingAgainstBaseURL: true)
+    func authenticationUrlComponents(from authenticationUrl: URL, using context: AuthorizationCodeFlow.Context) throws -> URLComponents {
+        guard var components = URLComponents(url: authenticationUrl, resolvingAgainstBaseURL: true)
         else {
             throw OAuth2Error.invalidUrl
         }
         
         components.queryItems = queryParameters(using: context).map { (key, value) in
             URLQueryItem(name: key, value: value)
-        }
+        }.sorted(by: { lhs, rhs in
+            lhs.name < rhs.name
+        })
 
         return components
     }
@@ -45,8 +46,8 @@ extension AuthorizationCodeFlow.Configuration {
 }
 
 extension AuthorizationCodeFlow {
-    func createAuthenticationURL(using context: AuthorizationCodeFlow.Context) throws -> URL {
-        var components = try configuration.authenticationUrlComponents(using: context)
+    func createAuthenticationURL(from authenticationUrl: URL, using context: AuthorizationCodeFlow.Context) throws -> URL {
+        var components = try configuration.authenticationUrlComponents(from: authenticationUrl, using: context)
         delegateCollection.invoke { $0.authentication(flow: self, customizeUrl: &components) }
 
         guard let url = components.url else {

@@ -11,14 +11,19 @@
 //
 
 import XCTest
+@testable import TestCommon
+@testable import AuthFoundation
 @testable import OktaOAuth2
 
-final class AuthorizationCodeFlowTests: XCTestCase {
+final class AuthorizationCodeFlowConfigurationTests: XCTestCase {
     let issuer = URL(string: "https://example.com")!
     let redirectUri = URL(string: "com.example:/callback")!
     let clientMock = OAuth2ClientMock()
     var configuration: AuthorizationCodeFlow.Configuration!
-    
+    let urlSession = URLSessionMock()
+    var client: OAuth2Client!
+    var flow: AuthorizationCodeFlow!
+
     override func setUpWithError() throws {
         configuration = AuthorizationCodeFlow.Configuration(issuer: issuer,
                                                             clientId: "clientId",
@@ -29,15 +34,19 @@ final class AuthorizationCodeFlowTests: XCTestCase {
                                                             redirectUri: redirectUri,
                                                             logoutRedirectUri: nil,
                                                             additionalParameters: ["additional": "param"])
+        client = OAuth2Client(baseURL: issuer, session: urlSession)
+        
+        urlSession.expect("https://example.com/.well-known/openid-configuration",
+                          data: try data(for: "openid-configuration", in: "MockResponses"),
+                          contentType: "application/json")
+        urlSession.expect("https://example.com/oauth2/v1/token",
+                          data: try data(for: "token", in: "MockResponses"),
+                          contentType: "application/json")
+        flow = AuthorizationCodeFlow(configuration, client: client)
     }
     
     func testConfiguration() throws {
         XCTAssertEqual(configuration.baseURL.absoluteString,
                        "https://example.com/oauth2/v1/")
-    }
-    
-    func testAuthorizationCodeConstructor() throws {
-//        let flow = AuthorizationCodeFlow(configuration, client: clientMock)
-//        XCTAssertNotNil(flow)
     }
 }
