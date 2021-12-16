@@ -13,7 +13,7 @@
 import Foundation
 
 protocol ReceivesIDXResponse {
-    func idxResponse(from data: Data) throws -> IDXClient.APIVersion1.Response
+    func idxResponse(from data: Data) throws -> IDXClient.APIVersion1.IonResponse
 }
 
 extension DateFormatter {
@@ -37,7 +37,7 @@ extension JSONDecoder {
 }
 
 extension ReceivesIDXResponse {
-    func idxResponse(from data: Data) throws -> IDXClient.APIVersion1.Response {
-        return try JSONDecoder.idxResponseDecoder.decode(IDXClient.APIVersion1.Response.self, from: data)
+    func idxResponse(from data: Data) throws -> IDXClient.APIVersion1.IonResponse {
+        return try JSONDecoder.idxResponseDecoder.decode(IDXClient.APIVersion1.IonResponse.self, from: data)
     }
 }

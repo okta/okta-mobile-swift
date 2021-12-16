@@ -18,6 +18,9 @@ final class EmailMFALoginScenarioTests: ScenarioTestCase {
     override func setUpWithError() throws {
         try super.setUpWithError()
         try scenario.createUser(groups: [.mfa])
+
+        XCTAssertTrue(initialSignInButton.waitForExistence(timeout: .regular))
+        initialSignInButton.tap()
     }
     
     func test_Login_With_MFA_Email() throws {
@@ -40,7 +43,7 @@ final class EmailMFALoginScenarioTests: ScenarioTestCase {
         }
         
         try test("THEN the screen changes to receive an input for a code") {
-            let codePage = PasscodeFormPage(app: app)
+            let codePage = PasscodeFormPage(app: app, scenario: scenario)
             XCTAssertTrue(codePage.passcodeLabel.waitForExistence(timeout: .regular))
             XCTAssertTrue(codePage.passcodeField.exists)
             
@@ -78,7 +81,7 @@ final class EmailMFALoginScenarioTests: ScenarioTestCase {
         }
         
         test("THEN She inputs the incorrect code from the email") {
-            let codePage = PasscodeFormPage(app: app)
+            let codePage = PasscodeFormPage(app: app, scenario: scenario)
             XCTAssertTrue(codePage.passcodeLabel.waitForExistence(timeout: .regular))
             XCTAssertTrue(codePage.passcodeField.exists)
             

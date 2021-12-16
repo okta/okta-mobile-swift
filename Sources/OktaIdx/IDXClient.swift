@@ -14,20 +14,20 @@ import Foundation
 
 /// The IDXClient class is used to define and initiate an authentication workflow utilizing the Okta Identity Engine. Your app can use this to begin a customizable workflow to authenticate and verify the identity of a user using your application.
 ///
-/// The `IDXClient.Configuration` class is used to communicate which application, defined within Okta, the user is being authenticated with. From this point a workflow is initiated, consisting of a series of authentication "Remediation" steps. At each step, your application can introspect the `IDXClient.Response` object to determine which UI should be presented to your user to guide them through to login.
+/// The `IDXClient.Configuration` class is used to communicate which application, defined within Okta, the user is being authenticated with. From this point a workflow is initiated, consisting of a series of authentication "Remediation" steps. At each step, your application can introspect the `Response` object to determine which UI should be presented to your user to guide them through to login.
 @objc
 public final class IDXClient: NSObject {
     
-    /// The type used for the completion  handler result from any method that returns an `IDXClient.Response`.
+    /// The type used for the completion  handler result from any method that returns an `Response`.
     /// - Parameters:
-    ///   - response: The `IDXClient.Response` object that describes the next workflow steps.
+    ///   - response: The `Response` object that describes the next workflow steps.
     ///   - error: Describes the error that occurred, or `nil` if the request was successful.
     public typealias ResponseResultCallback = (_ response: Response?, _ error: Error?) -> Void
-    public typealias ResponseResult = (Result<IDXClient.Response, IDXClientError>) -> Void
+    public typealias ResponseResult = (Result<Response, IDXClientError>) -> Void
 
-    /// The type used for the completion  handler result from any method that returns an `IDXClient.Token`.
+    /// The type used for the completion  handler result from any method that returns an `Token`.
     /// - Parameters:
-    ///   - token: The `IDXClient.Token` object created when the token is successfully exchanged.
+    ///   - token: The `Token` object created when the token is successfully exchanged.
     ///   - error: Describes the error that occurred, or `nil` if the request was successful.
     public typealias TokenResultCallback = (_ token: Token?, _ error: Error?) -> Void
     public typealias TokenResult = (Result<Token, IDXClientError>) -> Void
@@ -200,6 +200,58 @@ public final class IDXClient: NSObject {
     }
 }
 
+#if swift(>=5.5.1) && !os(Linux)
+@available(iOS 15.0, tvOS 15.0, macOS 12.0, *)
+extension IDXClient {
+    /// Starts a new authentication session using the given configuration values. If the client is able to successfully interact with Okta Identity Engine, a new client instance is returned to the caller.
+    /// - Parameters:
+    ///   - configuration: Configuration describing the app settings to contact.
+    ///   - state: Optional state string to use within the OAuth2 transaction.
+    /// - Returns: An IDXClient instance for this session.
+    public static func start(with configuration: Configuration,
+                             state: String? = nil) async throws -> IDXClient
+    {
+        let api = Version.latest.clientImplementation(with: configuration)
+        return try await start(with: api, state: state)
+    }
+
+    static func start(with api: IDXClientAPIImpl,
+                      state: String? = nil) async throws -> IDXClient
+    {
+        try await withCheckedThrowingContinuation { continuation in
+            start(with: api, state: state) { result in
+                continuation.resume(with: result)
+            }
+        }
+    }
+
+    /// Resumes the authentication state to identify the available remediation steps.
+    ///
+    /// This method is usually performed after an IDXClient is created in ``IDXClient.start(with:state:)``, but can also be called at any time to identify what next remediation steps are available to the user.
+    /// - Returns: A response showing the user's next steps.
+    public func resume() async throws -> Response {
+        try await withCheckedThrowingContinuation { continuation in
+            resume() { result in
+                continuation.resume(with: result)
+            }
+        }
+    }
+    
+    /// Exchanges the redirect URL with a token.
+    ///
+    /// Once the `redirectResult` method returns `authenticated`, the developer can exchange that redirect URL for a valid token by using this method.
+    /// - Parameters:
+    ///   - url: URL with the app’s custom scheme. The value must match one of the authorized redirect URIs, which are configured in Okta Admin Console.
+    public func exchangeCode(redirect url: URL) async throws -> Token {
+        try await withCheckedThrowingContinuation { continuation in
+            exchangeCode(redirect: url) { result in
+                continuation.resume(with: result)
+            }
+        }
+    }
+}
+#endif
+
 /// Delegate protocol that can be used to receive updates from the IDXClient through the process of a user's authentication.
 @objc
 public protocol IDXClientDelegate {
@@ -215,14 +267,14 @@ public protocol IDXClientDelegate {
     ///   - client: IDXClient receiving the response.
     ///   - response: The response that was received.
     @objc(idxClient:didReceiveResponse:)
-    func idx(client: IDXClient, didReceive response: IDXClient.Response)
+    func idx(client: IDXClient, didReceive response: Response)
     
     /// Informs the delegate when authentication is successful, and the token is returned.
     /// - Parameters:
     ///   - client: IDXClient receiving the token.
     ///   - token: The IDX token object describing the user's credentials.
     @objc(idxClient:didReceiveToken:)
-    func idx(client: IDXClient, didReceive token: IDXClient.Token)
+    func idx(client: IDXClient, didReceive token: Token)
 }
 
 /// Errors reported from IDXClient

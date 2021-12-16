@@ -23,6 +23,9 @@ final class PasscodeScenarioTests: ScenarioTestCase {
     override func setUpWithError() throws {
         try super.setUpWithError()
         try scenario.createUser()
+
+        XCTAssertTrue(initialSignInButton.waitForExistence(timeout: .regular))
+        initialSignInButton.tap()        
     }
     
     func test_Login_with_a_Password() throws {
@@ -62,16 +65,10 @@ final class PasscodeScenarioTests: ScenarioTestCase {
     func test_Forgot_Password_Redirection() throws {
         let signInPage = SignInFormPage(app: app)
         
-        test("GIVEN Mary navigates to the Basic Login View") {
-            XCTAssertTrue(signInPage.initialSignInButton.waitForExistence(timeout: .regular))
-            signInPage.initialSignInButton.tap()
-        }
-        
         test("WHEN she clicks on the Forgot Password button") {
             XCTAssertTrue(signInPage.recoveryButton.waitForExistence(timeout: .regular))
             signInPage.recoveryButton.tap()
         }
-        
         
         test("THEN she is redirected to the Self Service Password Reset View") {
             let emailRecoveryPage = UsernameRecoveryFormPage(app: app)

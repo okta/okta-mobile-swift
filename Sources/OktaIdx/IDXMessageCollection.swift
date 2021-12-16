@@ -12,31 +12,31 @@
 
 import Foundation
 
-extension IDXClient {
+extension IDXClient.Message {
     /// Represents a collection of messages.
     @objc(IDXMessageCollection)
-    public class MessageCollection: NSObject {
+    public class Collection: NSObject {
         /// Convenience to return the message associated with the given field.
         @objc(messageForField:)
-        public func message(for field: IDXClient.Remediation.Form.Field) -> Message? {
+        public func message(for field: Remediation.Form.Field) -> IDXClient.Message? {
             return allMessages.first(where: { $0.field == field })
         }
         
         /// Convenience method to return the message for a field with the given name.
         @objc(messageForFieldNamed:)
-        public func message(for fieldName: String) -> Message? {
+        public func message(for fieldName: String) -> IDXClient.Message? {
             return allMessages.first(where: { $0.field?.name == fieldName })
         }
         
-        @objc public var allMessages: [Message] {
+        @objc public var allMessages: [IDXClient.Message] {
             guard let nestedMessages = nestedMessages else { return messages }
             return messages + nestedMessages.compactMap { $0.object }
         }
         
-        var nestedMessages: [Weak<Message>]?
+        var nestedMessages: [Weak<IDXClient.Message>]?
 
-        let messages: [Message]
-        init(messages: [Message]?, nestedMessages: [Message]? = nil) {
+        let messages: [IDXClient.Message]
+        init(messages: [IDXClient.Message]?, nestedMessages: [IDXClient.Message]? = nil) {
             self.messages = messages ?? []
             self.nestedMessages = nestedMessages?.map { Weak(object: $0) }
 

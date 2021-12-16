@@ -12,12 +12,14 @@
 
 import XCTest
 
-struct PasscodeFormPage {
+struct PasscodeFormPage: ReceivesCode {
     private let app: XCUIApplication
+    private let scenario: Scenario
     private let isSecure: Bool
     
-    init(app: XCUIApplication, isSecure: Bool = false) {
+    init(app: XCUIApplication, scenario: Scenario, isSecure: Bool = false) {
         self.app = app
+        self.scenario = scenario
         self.isSecure = isSecure
     }
     
@@ -31,6 +33,18 @@ struct PasscodeFormPage {
             .allElementsBoundByIndex
             .first { $0.identifier == "button.Next" }
             ?? app.staticTexts["Continue"] // strange bug from response
+    }
+    
+    func verify(factor: A18NProfile.MessageType) throws {
+        let code = try receive(code: factor, scenario: scenario, app: app)
         
+        test("WHEN She inputs the correct code from the \(factor.rawValue)") {
+            passcodeField.tap()
+            passcodeField.typeText(code)
+        }
+        
+        test("AND She selects 'Continue'") {
+            continueButton.tap()
+        }
     }
 }

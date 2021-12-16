@@ -12,7 +12,7 @@
 
 import Foundation
 
-/// Defines the types of properties that can be assigned to an `IDXClient.Remediation.Form.Field` value.
+/// Defines the types of properties that can be assigned to an `Remediation.Form.Field` value.
 public protocol IDXFormValue {
 }
 

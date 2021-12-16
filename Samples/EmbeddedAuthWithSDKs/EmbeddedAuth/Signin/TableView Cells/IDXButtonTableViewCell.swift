@@ -16,7 +16,7 @@ import OktaIdx
 class IDXButtonTableViewCell: UITableViewCell {
     enum Style {
         case cancel
-        case remediation(type: IDXClient.Remediation.RemediationType)
+        case remediation(type: Remediation.RemediationType)
         
         var backgroundColor: UIColor {
             switch self {
@@ -41,7 +41,7 @@ class IDXButtonTableViewCell: UITableViewCell {
             case .cancel:
                 return "Restart"
             case .remediation(type: let type):
-                return IDXClient.Remediation.title(for: type)
+                return Remediation.title(for: type)
             }
         }
     }

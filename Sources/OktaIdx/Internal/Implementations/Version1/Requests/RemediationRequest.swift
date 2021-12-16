@@ -13,9 +13,9 @@
 import Foundation
 
 extension IDXClient.APIVersion1.RemediationRequest: IDXClientAPIRequest, ReceivesIDXResponse {
-    typealias ResponseType = IDXClient.APIVersion1.Response
+    typealias ResponseType = IDXClient.APIVersion1.IonResponse
     
-    init(remediation option: IDXClient.Remediation) throws {
+    init(remediation option: Remediation) throws {
         guard let accepts = option.accepts,
               let acceptType = IDXClient.APIVersion1.AcceptType(rawValue: accepts) else
         {

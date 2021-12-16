@@ -12,7 +12,7 @@
 
 import Foundation
 
-extension IDXClient.Token.RevokeType {
+extension Token.RevokeType {
     var tokenTypeHint: String {
         switch self {
         case .refreshToken:

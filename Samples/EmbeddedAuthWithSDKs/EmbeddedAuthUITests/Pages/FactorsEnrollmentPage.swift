@@ -27,8 +27,11 @@ struct FactorsEnrollmentPage {
     var emailLabel: XCUIElement { app.staticTexts["Email"] }
     var phoneLabel: XCUIElement { app.staticTexts["Phone"] }
     var passwordLabel: XCUIElement { app.staticTexts["Password"] }
+    var googleAuthenticatorLabel: XCUIElement { app.staticTexts["Google Authenticator"] }
+    var securityQuestionLabel: XCUIElement { app.staticTexts["Security Question"] }
     var continueButton: XCUIElement { app.buttons["button.Next"] }
     var chooseButton: XCUIElement { app.buttons["button.Choose Method"] }
+    var skipButton: XCUIElement { app.buttons["button.Skip"] }
     
     var phonePicker: XCUIElement { app.pickers.firstMatch }
     var phoneNumberLabel: XCUIElement { app.staticTexts["phoneNumber.label"] }

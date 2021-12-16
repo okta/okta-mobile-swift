@@ -59,7 +59,7 @@ class IDXResponseEqualityTests: XCTestCase {
                                                     clientSecret: nil,
                                                     scopes: ["scope"],
                                                     redirectUri: "redirect")
-        let compare = IDXClient.Token(accessToken: "access",
+        let compare = Token(accessToken: "access",
                                      refreshToken: "refresh",
                                      expiresIn: 10,
                                      idToken: "foo",
@@ -68,7 +68,7 @@ class IDXResponseEqualityTests: XCTestCase {
                                      configuration: configuration)
         XCTAssertNotEqual(compare as NSObject, "Foo" as NSObject)
 
-        var object = IDXClient.Token(accessToken: "access2",
+        var object = Token(accessToken: "access2",
                                      refreshToken: "refresh2",
                                      expiresIn: 100,
                                      idToken: "foo2",
@@ -77,7 +77,7 @@ class IDXResponseEqualityTests: XCTestCase {
                                      configuration: configuration)
         XCTAssertNotEqual(compare, object)
 
-        object = IDXClient.Token(accessToken: "access",
+        object = Token(accessToken: "access",
                                      refreshToken: nil,
                                      expiresIn: 10,
                                      idToken: nil,
@@ -86,7 +86,7 @@ class IDXResponseEqualityTests: XCTestCase {
                                      configuration: configuration)
         XCTAssertNotEqual(compare, object)
 
-        object = IDXClient.Token(accessToken: "access",
+        object = Token(accessToken: "access",
                                  refreshToken: "refresh",
                                      expiresIn: 10,
                                      idToken: "foo",

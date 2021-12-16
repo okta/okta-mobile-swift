@@ -35,7 +35,7 @@ extension IDXClient {
         @objc public let message: String
         
         /// The field where this error occurred, or `nil` if this message is not scoped to a particular field.
-        @objc weak internal(set) public var field: IDXClient.Remediation.Form.Field?
+        @objc weak internal(set) public var field: Remediation.Form.Field?
         
         internal init(type: String,
                       localizationKey: String?,
@@ -56,7 +56,7 @@ extension IDXClient {
                 "\(#keyPath(message)): \(message)",
                 "\(#keyPath(localizationKey)): \(localizationKey ?? "-")"
             ]
-
+            
             return logger.brace(components.joined(separator: "; "))
         }
         

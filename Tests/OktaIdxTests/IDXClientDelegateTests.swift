@@ -28,10 +28,10 @@ class IDXClientDelegateTests: XCTestCase {
                                     codeVerifier: "bar")
     var client: IDXClient!
     var api: IDXClientAPIv1Mock!
-    var remediationOption: IDXClient.Remediation!
-    var response: IDXClient.Response!
+    var remediationOption: Remediation!
+    var response: Response!
     var redirectUrl: URL!
-    var token: IDXClient.Token!
+    var token: Token!
     let delegate = DelegateRecorder()
     let error = IDXClientError.cannotCreateRequest
     
@@ -50,14 +50,14 @@ class IDXClientDelegateTests: XCTestCase {
         client = IDXClient(context: context, api: api)
         client.delegate = delegate
         
-        remediationOption = IDXClient.Remediation(
+        remediationOption = Remediation(
             client: client,
             name: "cancel",
             method: "GET",
             href: URL(string: "some://url")!,
             accepts: "application/json",
-            form: IDXClient.Remediation.Form(fields: [
-                IDXClient.Remediation.Form.Field(name: "foo",
+            form: Remediation.Form(fields: [
+                Remediation.Form.Field(name: "foo",
                                                  visible: false,
                                                  mutable: true,
                                                  required: false,
@@ -66,14 +66,14 @@ class IDXClientDelegateTests: XCTestCase {
             refresh: nil,
             relatesTo: nil,
             capabilities: [])
-        token = IDXClient.Token(accessToken: "access",
+        token = Token(accessToken: "access",
                                 refreshToken: "refresh",
                                 expiresIn: 10,
                                 idToken: "id",
                                 scope: "scope",
                                 tokenType: "type",
                                 configuration: context.configuration)
-        response = IDXClient.Response(client: client,
+        response = Response(client: client,
                                       expiresAt: Date(),
                                       intent: .login,
                                       authenticators: .init(authenticators: nil),

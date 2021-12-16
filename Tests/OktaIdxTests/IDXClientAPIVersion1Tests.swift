@@ -74,7 +74,7 @@ class IDXClientAPIVersion1Tests: XCTestCase {
         try session.expect("https://foo.oktapreview.com/idp/idx/introspect", fileName: "introspect-response")
         try session.expect("https://foo.oktapreview.com/idp/idx/cancel", fileName: "cancel-response")
 
-        var response: IDXClient.Response!
+        var response: Response!
         let completion = expectation(description: "Response")
         api.resume { result in
             if case let Result.success(responseValue) = result {

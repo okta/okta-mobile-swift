@@ -75,7 +75,9 @@ public class URLSessionAudit: CustomStringConvertible {
                 responseString = "<no response body>"
             }
             
-            return "\(method ?? "<null>") \(url?.absoluteString ?? "<null>")\nRequest Body:\n\(requestString)\nStatus code: \(statusCode ?? 0)\n\(responseString)\n"
+            let requestId = headers?["x-okta-request-id"] as? String ?? "<null>"
+            
+            return "\(method ?? "<null>") \(url?.absoluteString ?? "<null>")\nRequest Body:\n\(requestString)\nStatus code: \(statusCode ?? 0)\nRequest ID: \(requestId)\n\(responseString)\n"
         }
     }
     

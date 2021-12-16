@@ -15,7 +15,7 @@ import OktaIdx
 import AuthenticationServices
 
 class IDXRemediationTableViewController: UITableViewController, IDXResponseController {
-    var response: IDXClient.Response?
+    var response: Response?
     var signin: Signin?
 
     private var webAuthSession: ASWebAuthenticationSession?
@@ -88,7 +88,7 @@ class IDXRemediationTableViewController: UITableViewController, IDXResponseContr
         signin?.failure(with: SigninError.genericError(message: "Cancelled"))
     }
     
-    func proceed(to remediationOption: IDXClient.Remediation?, from sender: Any? = nil) {
+    func proceed(to remediationOption: Remediation?, from sender: Any? = nil) {
         guard let signin = signin else {
             showError(SigninError.genericError(message: "Signin session deallocated"))
             return
@@ -218,7 +218,7 @@ extension IDXRemediationTableViewController: ASWebAuthenticationPresentationCont
 }
 
 extension IDXRemediationTableViewController: SigninRowDelegate {
-    func value(for value: IDXClient.Remediation.Form.Field) -> Any? {
+    func value(for value: Remediation.Form.Field) -> Any? {
         return value.value
     }
     
@@ -265,7 +265,7 @@ extension IDXRemediationTableViewController: SigninRowDelegate {
         }
     }
     
-    func buttonSelected(remediationOption: IDXClient.Remediation, sender: Any?) {
+    func buttonSelected(remediationOption: Remediation, sender: Any?) {
         proceed(to: remediationOption, from: sender)
     }
 }

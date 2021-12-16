@@ -38,7 +38,7 @@ public class BasicLogin {
     var password: String?
     
     var client: IDXClient?
-    var completion: ((Result<IDXClient.Token, LoginError>) -> Void)?
+    var completion: ((Result<Token, LoginError>) -> Void)?
     
     public init(configuration: IDXClient.Configuration) {
         self.configuration = configuration
@@ -49,7 +49,7 @@ public class BasicLogin {
     ///   - username: Username to log in with.
     ///   - password: Password for the given username.
     ///   - completion: Comletion block invoked when login completes.
-    public func login(username: String, password: String, completion: @escaping (Result<IDXClient.Token, LoginError>) -> Void) {
+    public func login(username: String, password: String, completion: @escaping (Result<Token, LoginError>) -> Void) {
         self.username = username
         self.password = password
         self.completion = completion
@@ -88,13 +88,13 @@ extension BasicLogin: IDXClientDelegate {
     }
     
     // Delegate method sent when a token is successfully exchanged.
-    public func idx(client: IDXClient, didReceive token: IDXClient.Token) {
+    public func idx(client: IDXClient, didReceive token: Token) {
         finish(with: token)
     }
     
     // Delegate method invoked whenever an IDX response is received, regardless
     // of what action or remediation is called.
-    public func idx(client: IDXClient, didReceive response: IDXClient.Response) {
+    public func idx(client: IDXClient, didReceive response: Response) {
         // If a response is successful, immediately exchange it for a token.
         guard !response.isLoginSuccessful else {
             response.exchangeCode(completion: nil)
@@ -151,7 +151,7 @@ extension BasicLogin {
         completion = nil
     }
     
-    func finish(with token: IDXClient.Token) {
+    func finish(with token: Token) {
         completion?(.success(token))
         completion = nil
     }

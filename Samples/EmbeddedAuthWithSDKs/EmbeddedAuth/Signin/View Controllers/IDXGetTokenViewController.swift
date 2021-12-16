@@ -13,10 +13,10 @@
 import UIKit
 import OktaIdx
 
-/// Sign in view controller used when login is successful, and encapsulates the `IDXClient.Response.getToken()` method.
+/// Sign in view controller used when login is successful, and encapsulates the `Response.getToken()` method.
 class IDXGetTokenViewController: UIViewController, IDXResponseController {
     var signin: Signin?
-    var response: IDXClient.Response?
+    var response: Response?
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)

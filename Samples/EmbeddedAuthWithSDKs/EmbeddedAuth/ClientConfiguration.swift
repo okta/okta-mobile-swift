@@ -81,20 +81,16 @@ struct ClientConfiguration {
             }
             
             switch key {
-            case "--issuer": fallthrough
-            case "-i":
+            case "--issuer", "-i":
                 issuer = argument
                 
-            case "--redirectUri": fallthrough
-            case "-r":
+            case "--redirectUri", "-r":
                 redirectUri = argument
                 
-            case "--clientId": fallthrough
-            case "-c":
+            case "--clientId", "-c":
                 clientId = argument
                 
-            case "--scopes": fallthrough
-            case "-s":
+            case "--scopes", "-s":
                 scopes = argument
                 
             default: break

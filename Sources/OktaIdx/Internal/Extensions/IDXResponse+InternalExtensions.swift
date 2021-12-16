@@ -12,7 +12,7 @@
 
 import Foundation
 
-extension IDXClient.Response: IDXResponseJSONPath {
+extension Response: IDXResponseJSONPath {
     func matchesV1(jsonPath: String) -> Bool {
         jsonPath == "$"
     }

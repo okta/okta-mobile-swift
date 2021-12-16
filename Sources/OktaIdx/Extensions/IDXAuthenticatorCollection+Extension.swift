@@ -12,9 +12,9 @@
 
 import Foundation
 
-extension IDXClient.AuthenticatorCollection: Collection {
+extension Authenticator.Collection: Collection {
     public typealias Index = Int
-    public typealias Element = IDXClient.Authenticator
+    public typealias Element = Authenticator
 
     public var startIndex: Index {
         allAuthenticators.startIndex

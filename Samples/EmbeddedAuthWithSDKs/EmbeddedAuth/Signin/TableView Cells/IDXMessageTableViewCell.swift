@@ -12,6 +12,7 @@
 
 import UIKit
 import OktaIdx
+
 extension IDXClient.Message.Severity {
     var image: UIImage? {
         switch self {

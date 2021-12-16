@@ -67,8 +67,8 @@ class IDXFormTests: XCTestCase {
         }
         """.data(using: .utf8))
         
-        let v1Form = try JSONDecoder().decode(V1.Response.Form.self, from: data)
-        let remediation = try XCTUnwrap(IDXClient.Remediation.makeRemediation(client: clientMock, v1: v1Form))
+        let v1Form = try JSONDecoder().decode(V1.IonForm.self, from: data)
+        let remediation = try XCTUnwrap(Remediation.makeRemediation(client: clientMock, v1: v1Form))
         let form = remediation.form
         
         XCTAssertEqual(form.fields.count, 3)

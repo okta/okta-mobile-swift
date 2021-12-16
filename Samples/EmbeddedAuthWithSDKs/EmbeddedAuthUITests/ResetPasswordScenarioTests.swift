@@ -18,6 +18,9 @@ final class ResetPasswordScenarioTests: ScenarioTestCase {
     override func setUpWithError() throws {
         try super.setUpWithError()
         try scenario.createUser()
+
+        XCTAssertTrue(initialSignInButton.waitForExistence(timeout: .regular))
+        initialSignInButton.tap()
     }
     
     func test_Reset_Password() throws {
@@ -26,8 +29,6 @@ final class ResetPasswordScenarioTests: ScenarioTestCase {
         test("GIVEN Mary navigates to the Self Service Registration View") {
             let emailRecoveryPage = UsernameRecoveryFormPage(app: app)
             let signInPage = SignInFormPage(app: app)
-            XCTAssertTrue(signInPage.initialSignInButton.waitForExistence(timeout: .regular))
-            signInPage.initialSignInButton.tap()
             
             XCTAssertTrue(signInPage.recoveryButton.waitForExistence(timeout: .regular))
             signInPage.recoveryButton.tap()
@@ -64,7 +65,7 @@ final class ResetPasswordScenarioTests: ScenarioTestCase {
         }
         
         try test("THEN she sees a page to input her code") {
-            let codePage = PasscodeFormPage(app: app)
+            let codePage = PasscodeFormPage(app: app, scenario: scenario)
             XCTAssertTrue(codePage.passcodeLabel.waitForExistence(timeout: .regular))
             XCTAssertTrue(codePage.passcodeField.exists)
             XCTAssertTrue(codePage.resendButton.exists)
@@ -108,7 +109,6 @@ final class ResetPasswordScenarioTests: ScenarioTestCase {
     func testResetWithIncorrectUsername() throws {
         test("GIVEN Mary navigates to the Self Service Password Reset View") {
             let signInPage = SignInFormPage(app: app)
-            signInPage.initialSignInButton.tap()
             
             test("WHEN she selects 'Forgot Password'") {
                 XCTAssertTrue(signInPage.recoveryButton.waitForExistence(timeout: .regular))

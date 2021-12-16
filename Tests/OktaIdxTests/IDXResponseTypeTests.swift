@@ -14,7 +14,7 @@ import XCTest
 @testable import OktaIdx
 
 class IDXResponseTypeTests: XCTestCase {
-    typealias RemediationType = IDXClient.Remediation.RemediationType
+    typealias RemediationType = Remediation.RemediationType
     func testInitializer() throws {
         XCTAssertEqual(RemediationType(string: "identify"), .identify)
         XCTAssertEqual(RemediationType(string: "identify-recovery"), .identifyRecovery)

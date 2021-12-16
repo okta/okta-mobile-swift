@@ -26,12 +26,12 @@ class IDXCapabilityTests: XCTestCase {
                                                      state: "state",
                                                      interactionHandle: "handle",
                                                      codeVerifier: "verifier"))
-    var remediation: IDXClient.Remediation!
-    var response: IDXClient.Response!
+    var remediation: Remediation!
+    var response: Response!
 
     override func setUpWithError() throws {
-        let fields = try XCTUnwrap(IDXClient.Remediation.Form(fields: []))
-        remediation = IDXClient.Remediation(client: clientMock,
+        let fields = try XCTUnwrap(Remediation.Form(fields: []))
+        remediation = Remediation(client: clientMock,
                                             name: "remediation",
                                             method: "POST",
                                             href: URL(string: "https://example.com/idp/path")!,
@@ -40,7 +40,7 @@ class IDXCapabilityTests: XCTestCase {
                                             refresh: nil,
                                             relatesTo: nil,
                                             capabilities: [])
-        response = try IDXClient.Response.response(client: clientMock,
+        response = try Response.response(client: clientMock,
                                                    fileName: "introspect-response")
     }
 

@@ -41,7 +41,7 @@ class SelfServiceRegistrationScenarioTests: ScenarioTestCase {
     }
     
     override func tearDownWithError() throws {
-        try super.setUpWithError()
+        try super.tearDownWithError()
         try scenario.deleteUser()
     }
     
@@ -95,7 +95,7 @@ class SelfServiceRegistrationScenarioTests: ScenarioTestCase {
         fillInPhonePage(phone: "1230871234567")
         
         test("THEN she should see an error message") {
-            XCTAssertTrue(app.tables.staticTexts["Unable to initiate factor enrollment: Invalid Phone Number."].waitForExistence(timeout: .regular))
+            XCTAssertTrue(app.tables.staticTexts["Invalid Phone Number."].waitForExistence(timeout: .regular))
         }
     }
     
@@ -105,7 +105,7 @@ class SelfServiceRegistrationScenarioTests: ScenarioTestCase {
         fillInPhonePage(phone: phone)
         
         try test("THEN the screen changes to receive an input for a code") {
-            let phonePasscodePage = PasscodeFormPage(app: app)
+            let phonePasscodePage = PasscodeFormPage(app: app, scenario: scenario)
             XCTAssertTrue(phonePasscodePage.passcodeLabel.waitForExistence(timeout: .regular))
             XCTAssertTrue(phonePasscodePage.passcodeField.exists)
             XCTAssertTrue(phonePasscodePage.continueButton.exists)
@@ -122,6 +122,11 @@ class SelfServiceRegistrationScenarioTests: ScenarioTestCase {
             
             test("AND She selects 'Verify'") {
                 phonePasscodePage.continueButton.tap()
+            }
+            
+            test("THEN selects skip to bypass additional authenticators") {
+                let factorsPage = FactorsEnrollmentPage(app: app)
+                factorsPage.skipButton.tap()
             }
         }
     }
@@ -146,7 +151,7 @@ class SelfServiceRegistrationScenarioTests: ScenarioTestCase {
         }
         
         try test("THEN she sees the set new password form") {
-            let passwordPage = PasscodeFormPage(app: app, isSecure: true)
+            let passwordPage = PasscodeFormPage(app: app, scenario: scenario, isSecure: true)
             XCTAssertTrue(passwordPage.passcodeLabel.waitForExistence(timeout: .regular))
             XCTAssertTrue(passwordPage.securityPasscodeField.exists)
             
@@ -179,7 +184,7 @@ class SelfServiceRegistrationScenarioTests: ScenarioTestCase {
         }
         
         try test("THEN she sees a page to input a code") {
-            let codePage = PasscodeFormPage(app: app)
+            let codePage = PasscodeFormPage(app: app, scenario: scenario)
             XCTAssertTrue(codePage.passcodeLabel.waitForExistence(timeout: .regular))
             XCTAssertTrue(codePage.passcodeField.exists)
             
@@ -242,6 +247,11 @@ class SelfServiceRegistrationScenarioTests: ScenarioTestCase {
             
             test("WHEN she selects Phone from the list") {
                 factorsPage.phoneLabel.tap()
+                
+                // NOTE: There's currently a bug that prevents the select-authenticator form
+                //       from working when filling out the phone number at that time.
+                //       OKTA-453278
+                factorsPage.continueButton.tap()
                 
                 // Picker issue
                 Thread.sleep(forTimeInterval: 2)

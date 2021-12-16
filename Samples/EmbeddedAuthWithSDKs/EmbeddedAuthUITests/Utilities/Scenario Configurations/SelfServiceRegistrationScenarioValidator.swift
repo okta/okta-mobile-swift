@@ -15,8 +15,6 @@ import OktaSdk
 
 struct SelfServiceRegistrationScenarioValidator: ScenarioValidator {
     func configure(completion: @escaping (Error?) -> Void) {
-        activatePolicy(.selfServiceRegistration) { (error) in
-            deactivatePolicy(.socialAuthMFA, completion: completion)
-        }
+        completion(nil)
     }
 }

@@ -45,5 +45,5 @@ extension IDXSigninController where Self: UIViewController {
 }
 
 protocol IDXResponseController: IDXSigninController {
-    var response: IDXClient.Response? { get set }
+    var response: Response? { get set }
 }

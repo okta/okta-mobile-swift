@@ -14,9 +14,9 @@ import Foundation
 
 class PollingHandler {
     private(set) var isPolling: Bool = false
-    internal private(set) var pollOption: IDXClient.Remediation
+    internal private(set) var pollOption: Remediation
 
-    init(pollOption: IDXClient.Remediation) {
+    init(pollOption: Remediation) {
         self.pollOption = pollOption
     }
     
@@ -24,7 +24,7 @@ class PollingHandler {
         isPolling = false
     }
     
-    func start(completion: @escaping (IDXClient.Response?, Error?) -> IDXClient.Remediation?) {
+    func start(completion: @escaping (Response?, Error?) -> Remediation?) {
         guard !isPolling else { return }
         
         isPolling = true
@@ -35,7 +35,7 @@ class PollingHandler {
         isPolling = false
     }
     
-    func nextPoll(completion: @escaping (IDXClient.Response?, Error?) -> IDXClient.Remediation?) {
+    func nextPoll(completion: @escaping (Response?, Error?) -> Remediation?) {
         guard let refreshTime = pollOption.refresh,
               refreshTime > 0
         else {

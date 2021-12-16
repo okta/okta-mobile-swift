@@ -22,15 +22,7 @@ struct AuthorizationWebPage {
     private let springboard = XCUIApplication(bundleIdentifier: "com.apple.springboard")
     
     var webView: XCUIElement { app.webViews.firstMatch }
-    var facebookSignInButton: XCUIElement { app.buttons["Login with Facebook"] }
     var usernameTextField: XCUIElement { webView.textFields.firstMatch }
     var passwordTextField: XCUIElement { webView.secureTextFields.firstMatch.firstMatch }
-    var signInButton: XCUIElement? {
-        webView.buttons.allElementsBoundByIndex.first { $0.label.contains("Log In") } ??
-            webView.buttons.allElementsBoundByIndex.first { $0.frame.width == usernameTextField.frame.width }
-    }
-
-    var englishLanguageButton: XCUIElement? {
-        webView.links.allElementsBoundByIndex.first { $0.label.contains("English") }
-    }
+    var signInButton: XCUIElement? { webView.buttons["Sign in"].firstMatch }
 }

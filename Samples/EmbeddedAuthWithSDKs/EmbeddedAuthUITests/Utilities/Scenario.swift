@@ -36,8 +36,8 @@ class Scenario {
         
         return Credentials(username: username,
                            password: password,
-                           firstName: "ios",
-                           lastName: "User")
+                           firstName: "Mary",
+                           lastName: "Acme")
     }
     
     private(set) var profile: A18NProfile? {
@@ -47,7 +47,7 @@ class Scenario {
             }
             
             credentials = .init(username: emailAddress,
-                                password: "Abcd1234",
+                                password: "Abcd1234!",
                                 firstName: "Mary",
                                 lastName: "Tester")
         }
@@ -256,7 +256,7 @@ class Scenario {
         }
     }
     
-    func receive(code type: A18NProfile.MessageType, timeout: TimeInterval = 30, pollInterval: TimeInterval = 1) throws -> String {
+    func receive(code type: A18NProfile.MessageType, magicLink: Bool = false, timeout: TimeInterval = 30, pollInterval: TimeInterval = 1) throws -> String {
         guard let profile = profile else {
             throw Error.noA18NProfile
         }
@@ -264,7 +264,11 @@ class Scenario {
         let receiver: CodeReceiver
         switch type {
         case .email:
-            receiver = EmailCodeReceiver(profile: profile)
+            if magicLink {
+                receiver = EmailLinkReceiver(profile: profile)
+            } else {
+                receiver = EmailCodeReceiver(profile: profile)
+            }
         case .sms:
             receiver = SMSReceiver(profile: profile)
         case .voice:
@@ -308,6 +312,7 @@ class Scenario {
         case passcodeOnly
         case selfServiceRegistration
         case socialAuth
+        case accountUnlock
     }
     
     enum Error: Swift.Error {
@@ -326,15 +331,39 @@ enum OktaGroup: String, CaseIterable {
 }
 
 enum OktaPolicy: String, CaseIterable {
-    case selfServiceRegistration = "Self Service Registration"
+//    case selfServiceRegistration = "Self Service Registration"
     case socialAuthMFA = "MFA Required (Social Auth)"
+    case accountUnlock = "Allow account unlock"
+    case identifierFirst = "Identifier-First"
+
+    var isRule: Bool {
+        switch self {
+        case .accountUnlock:
+            return true
+        default:
+            return false
+        }
+    }
+    
+    var policyName: String? {
+        switch self {
+        case .accountUnlock:
+            return "Default Policy"
+        default:
+            return nil
+        }
+    }
     
     var policyType: PolicyType {
         switch self {
-        case .selfServiceRegistration:
-            return .oktaProfileEnrollment
+//        case .selfServiceRegistration:
+//            return .oktaProfileEnrollment
         case .socialAuthMFA:
             return .oktaSignOn
+        case .identifierFirst:
+            return .oktaSignOn
+        case .accountUnlock:
+            return .password
         }
     }
 }
@@ -358,6 +387,8 @@ extension Scenario.Category {
             return SelfServiceRegistrationScenarioValidator()
         case .socialAuth:
             return SocialAuthScenarioValidator()
+        case .accountUnlock:
+            return AccountUnlockScenarioValidator()
         }
     }
 }

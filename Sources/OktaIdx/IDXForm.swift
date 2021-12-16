@@ -12,7 +12,7 @@
 
 import Foundation
 
-extension IDXClient.Remediation {
+extension Remediation {
     /// Object that represents a form of fields associated with a remediation.
     @objc(IDXRemediationForm)
     public class Form: NSObject {

@@ -23,6 +23,9 @@ final class AuthenticationScenarioTests: ScenarioTestCase {
     }
     
     func test_Authentication_Session() throws {
+        XCTAssertTrue(initialSignInButton.waitForExistence(timeout: .regular))
+        initialSignInButton.tap()
+        
         let credentials = try XCTUnwrap(scenario.credentials)
         let signInPage = SignInFormPage(app: app)
         signInPage.signIn(username: credentials.username, password: credentials.password)

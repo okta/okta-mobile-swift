@@ -12,7 +12,7 @@
 
 import Foundation
 
-extension IDXClient.Remediation.Form {
+extension Remediation.Form {
     /// Describes an individual field within a form, used to collect and submit information from the user to proceed through the authentication workflow.
     ///
     /// Nested form values can be accessed through keyed subscripting, for example:
@@ -56,10 +56,10 @@ extension IDXClient.Remediation.Form {
         @objc public let isSecret: Bool
         
         /// For composite form fields, this contains the nested array of form values to group together.
-        @objc public let form: IDXClient.Remediation.Form?
+        @objc public let form: Remediation.Form?
         
         /// For form fields that have specific options the user can choose from (e.g. security question, passcode, etc), this indicates the different form options that should be displayed to the user.
-        @objc public let options: [IDXClient.Remediation.Form.Field]?
+        @objc public let options: [Remediation.Form.Field]?
         
         /// Indicates if this field is the selected option within a parent field's `options` array.
         @objc public internal(set) var isSelectedOption: Bool
@@ -67,7 +67,7 @@ extension IDXClient.Remediation.Form {
         /// Allows a developer to set the selected option for a field that contains multiple `options`.
         ///
         /// This will update the `isSelectedOption` on all relevant fields.
-        @objc public weak var selectedOption: IDXClient.Remediation.Form.Field? {
+        @objc public weak var selectedOption: Remediation.Form.Field? {
             didSet {
                 guard let options = options else { return }
                 for option in options {
@@ -79,10 +79,10 @@ extension IDXClient.Remediation.Form {
         /// The list of messages sent from the server.
         ///
         /// Messages reported from the server at the FormValue level should be considered relevant to the individual form field, and as a result should be displayed to the user alongside any UI elements associated with it.
-        @objc public let messages: IDXClient.MessageCollection
+        @objc public let messages: IDXClient.Message.Collection
         
         /// Relates this field to an authenticator, when a field is used to represent an authenticator. For example, when a field is used within a series of `options` to identify which authenticator to select.
-        @objc public internal(set) weak var authenticator: IDXClient.Authenticator?
+        @objc public internal(set) weak var authenticator: Authenticator?
 
         /// Returns the nested `form` field with the given name.
         @objc public subscript(name: String) -> Field? {
@@ -121,9 +121,9 @@ extension IDXClient.Remediation.Form {
                       required: Bool,
                       secret: Bool,
                       relatesTo: String? = nil,
-                      form: IDXClient.Remediation.Form? = nil,
-                      options: [IDXClient.Remediation.Form.Field]? = nil,
-                      messages: IDXClient.MessageCollection = .init(messages: nil))
+                      form: Remediation.Form? = nil,
+                      options: [Remediation.Form.Field]? = nil,
+                      messages: IDXClient.Message.Collection = .init(messages: nil))
         {
             self.name = name
             self.label = label

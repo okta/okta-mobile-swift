@@ -12,7 +12,7 @@
 
 import Foundation
 
-extension IDXClient.Authenticator.Kind {
+extension Authenticator.Kind {
     internal init(string value: String) {
         switch value {
         case "app":               self = .app
@@ -28,7 +28,7 @@ extension IDXClient.Authenticator.Kind {
     }
 }
 
-extension IDXClient.Authenticator.Method {
+extension Authenticator.Method {
     internal init(string value: String) {
         switch value {
         case "sms":               self = .sms
@@ -49,7 +49,7 @@ extension IDXClient.Authenticator.Method {
     }
 }
 
-extension IDXClient.Remediation.RemediationType {
+extension Remediation.RemediationType {
     internal init(string value: String) {
         switch value {
         case "identify":                            self = .identify
@@ -96,7 +96,7 @@ extension IDXClient.Remediation.RemediationType {
     }
 }
 
-extension IDXClient.Response.Intent {
+extension Response.Intent {
     public init(string: String?) {
         switch string {
         case "ENROLL_NEW_USER":
@@ -137,7 +137,7 @@ extension Capability.SocialIDP.Service {
     }
 }
 
-extension IDXClient.Authenticator.Method {
+extension Authenticator.Method {
     public var stringValue: String? {
         switch self {
         case .sms:

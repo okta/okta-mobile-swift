@@ -62,7 +62,7 @@ public class Signin {
         viewController.present(navigationController, animated: true, completion: nil)
     }
     
-    internal func buttonTitle(for option: IDXClient.Remediation?) -> String? {
+    internal func buttonTitle(for option: Remediation?) -> String? {
         guard let option = option else {
             return "Restart"
         }
@@ -71,12 +71,10 @@ public class Signin {
         case .skip:
             return "Skip"
             
-        case .selectEnrollProfile: fallthrough
-        case .enrollProfile:
+        case .selectEnrollProfile, .enrollProfile:
             return "Sign Up"
             
-        case .selectIdentify: fallthrough
-        case .identify:
+        case .selectIdentify, .identify:
             return "Sign In"
             
         case .redirectIdp:
@@ -102,6 +100,9 @@ public class Signin {
         case .cancel:
             return "Restart"
             
+        case .unlockAccount:
+            return "Unlock Account"
+            
         default:
             return "Continue"
         }
@@ -109,7 +110,7 @@ public class Signin {
     
     /// Called by each view controller once their remediation step has been completed, allowing it to proceed to the next step of the workflow.
     /// - Parameter response: IDX response object received from the API.
-    func proceed(to response: IDXClient.Response) {
+    func proceed(to response: Response) {
         if !Thread.isMainThread {
             DispatchQueue.main.async {
                 self.proceed(to: response)
@@ -165,7 +166,7 @@ public class Signin {
     /// Initializes the appropriate view controller for this response.
     /// - Parameter response: IDX client response that needs a view controller.
     /// - Returns: View controller to display, or `nil` if no controller was available
-    private func controller(for response: IDXClient.Response) -> UIViewController? {
+    private func controller(for response: Response) -> UIViewController? {
         // If the login is successful, there are no remediation options left. In this case,
         // we create a view controller to show the progress as a token is exchanged.
         if response.isLoginSuccessful {
@@ -209,7 +210,7 @@ public class Signin {
     
     /// Called by the signin view controllers when the Future should succeed.
     /// - Parameter token: The token produced at the end of the signin process.
-    internal func success(with token: IDXClient.Token) {
+    internal func success(with token: Token) {
         let userinfoUrl: URL
         do {
             userinfoUrl = try configuration.url(for: "/v1/userinfo")

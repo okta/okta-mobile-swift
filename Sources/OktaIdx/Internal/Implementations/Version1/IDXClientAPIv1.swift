@@ -56,7 +56,7 @@ extension IDXClient.APIVersion1: IDXClientAPIImpl {
         }
     }
     
-    func resume(completion: @escaping (Result<IDXClient.Response, IDXClientError>) -> Void) {
+    func resume(completion: @escaping (Result<Response, IDXClientError>) -> Void) {
         guard let client = client else {
             completion(.failure(.invalidClient))
             return
@@ -69,7 +69,7 @@ extension IDXClient.APIVersion1: IDXClientAPIImpl {
                 completion(.failure(error))
             case .success(let response):
                 do {
-                    completion(.success(try IDXClient.Response(client: client, v1: response)))
+                    completion(.success(try Response(client: client, v1: response)))
                 } catch {
                     completion(.failure(.internalError(error)))
                 }
@@ -77,8 +77,8 @@ extension IDXClient.APIVersion1: IDXClientAPIImpl {
         }
     }
 
-    func proceed(remediation option: IDXClient.Remediation,
-                 completion: @escaping (Result<IDXClient.Response, IDXClientError>) -> Void)
+    func proceed(remediation option: Remediation,
+                 completion: @escaping (Result<Response, IDXClientError>) -> Void)
     {
         guard let client = client else {
             completion(.failure(.invalidClient))
@@ -99,7 +99,7 @@ extension IDXClient.APIVersion1: IDXClientAPIImpl {
                 completion(.failure(error))
             case .success(let response):
                 do {
-                    completion(.success(try IDXClient.Response(client: client, v1: response)))
+                    completion(.success(try Response(client: client, v1: response)))
                 } catch {
                     completion(.failure(.internalError(error)))
                 }
@@ -139,7 +139,7 @@ extension IDXClient.APIVersion1: IDXClientAPIImpl {
         return .invalidContext
     }
     
-    func exchangeCode(redirect url: URL, completion: @escaping (Result<IDXClient.Token, IDXClientError>) -> Void) {
+    func exchangeCode(redirect url: URL, completion: @escaping (Result<Token, IDXClientError>) -> Void) {
         guard let context = client?.context else {
             completion(.failure(.invalidClient))
             return
@@ -170,7 +170,7 @@ extension IDXClient.APIVersion1: IDXClientAPIImpl {
         send(request, completion)
     }
 
-    func exchangeCode(using remediation: IDXClient.Remediation, completion: @escaping (Result<IDXClient.Token, IDXClientError>) -> Void) {
+    func exchangeCode(using remediation: Remediation, completion: @escaping (Result<Token, IDXClientError>) -> Void) {
         guard let context = client?.context else {
             completion(.failure(.invalidClient))
             return
@@ -204,8 +204,8 @@ extension IDXClient.APIVersion1: IDXClientAPIImpl {
         }
     }
     
-    func refresh(token: IDXClient.Token,
-                 completion: @escaping(Result<IDXClient.Token, IDXClientError>) -> Void)
+    func refresh(token: Token,
+                 completion: @escaping(Result<Token, IDXClientError>) -> Void)
     {
         guard let url = token.configuration.issuerUrl(with: "v1/token") else {
             completion(.failure(.invalidClient))
@@ -240,18 +240,18 @@ extension IDXClient.APIVersion1: IDXClientAPIImpl {
             case .failure(let error):
                 completion(.failure(error))
             case .success(let response):
-                completion(.success(IDXClient.Token(v1: response, configuration: self.configuration)))
+                completion(.success(Token(v1: response, configuration: self.configuration)))
             }
         }
     }
 
-    private func send(_ request: IDXClient.APIVersion1.TokenRequest, _ completion: @escaping (Result<IDXClient.Token, IDXClientError>) -> Void) {
+    private func send(_ request: IDXClient.APIVersion1.TokenRequest, _ completion: @escaping (Result<Token, IDXClientError>) -> Void) {
         request.send(to: session, using: configuration) { result in
             switch result {
             case .failure(let error):
                 completion(.failure(error))
             case .success(let response):
-                completion(.success(IDXClient.Token(v1: response, configuration: self.configuration)))
+                completion(.success(Token(v1: response, configuration: self.configuration)))
             }
         }
     }

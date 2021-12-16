@@ -44,14 +44,14 @@ class IDXClientTests: XCTestCase {
     func testApiDelegation() throws {
         XCTAssertEqual(api.recordedCalls.count, 0)
         
-        let remedationOption = try XCTUnwrap(IDXClient.Remediation(
+        let remedationOption = try XCTUnwrap(Remediation(
                                                 client: client,
                                                 name: "cancel",
                                                 method: "GET",
                                                 href: URL(string: "some://url")!,
                                                 accepts: "application/json",
-                                                form: IDXClient.Remediation.Form(fields: [
-                                                    IDXClient.Remediation.Form.Field(name: "foo",
+                                                form: Remediation.Form(fields: [
+                                                    Remediation.Form.Field(name: "foo",
                                                                                      visible: false,
                                                                                      mutable: true,
                                                                                      required: false,
@@ -60,7 +60,7 @@ class IDXClientTests: XCTestCase {
                                                 refresh: nil,
                                                 relatesTo: nil,
                                                 capabilities: []))
-        let response = IDXClient.Response(client: client,
+        let response = Response(client: client,
                                           expiresAt: Date(),
                                           intent: .login,
                                           authenticators: .init(authenticators: nil),
@@ -114,7 +114,7 @@ class IDXClientTests: XCTestCase {
         call = api.recordedCalls.last
         XCTAssertEqual(call?.function, "proceed(remediation:completion:)")
         XCTAssertEqual(call?.arguments?.count, 1)
-        XCTAssertEqual(call?.arguments?["remediation"] as! IDXClient.Remediation, remedationOption)
+        XCTAssertEqual(call?.arguments?["remediation"] as! Remediation, remedationOption)
         api.reset()
         
         // exchangeCode()
@@ -128,7 +128,7 @@ class IDXClientTests: XCTestCase {
         call = api.recordedCalls.last
         XCTAssertEqual(call?.function, "exchangeCode(using:completion:)")
         XCTAssertEqual(call?.arguments?.count, 1)
-        XCTAssertEqual(call?.arguments?["using"] as! IDXClient.Remediation, remedationOption)
+        XCTAssertEqual(call?.arguments?["using"] as! Remediation, remedationOption)
         api.reset()
         
         // exchangeCodeRedirect()
@@ -147,7 +147,7 @@ class IDXClientTests: XCTestCase {
         
         // revoke()
         expect = expectation(description: "revoke(token:type:completion:)")
-        IDXClient.Token.revoke(token: "token", type: .refreshToken, api: api) { result in
+        Token.revoke(token: "token", type: .refreshToken, api: api) { result in
             called = true
             expect.fulfill()
         }
@@ -181,7 +181,7 @@ class IDXClientTests: XCTestCase {
         call = api.recordedCalls.last
         XCTAssertEqual(call?.function, "proceed(remediation:completion:)")
         XCTAssertEqual(call?.arguments?.count, 1)
-        XCTAssertEqual(call?.arguments?["remediation"] as? IDXClient.Remediation, remedationOption)
+        XCTAssertEqual(call?.arguments?["remediation"] as? Remediation, remedationOption)
         api.reset()
 
         // Response.cancel()
@@ -195,7 +195,7 @@ class IDXClientTests: XCTestCase {
         call = api.recordedCalls.last
         XCTAssertEqual(call?.function, "proceed(remediation:completion:)")
         XCTAssertEqual(call?.arguments?.count, 1)
-        XCTAssertEqual(call?.arguments?["remediation"] as! IDXClient.Remediation, remedationOption)
+        XCTAssertEqual(call?.arguments?["remediation"] as! Remediation, remedationOption)
         api.reset()
 
         // Response.exchangeCode()
@@ -209,7 +209,7 @@ class IDXClientTests: XCTestCase {
         call = api.recordedCalls.last
         XCTAssertEqual(call?.function, "exchangeCode(using:completion:)")
         XCTAssertEqual(call?.arguments?.count, 1)
-        XCTAssertEqual(call?.arguments?["using"] as! IDXClient.Remediation, remedationOption)
+        XCTAssertEqual(call?.arguments?["using"] as! Remediation, remedationOption)
         api.reset()
     }
 }

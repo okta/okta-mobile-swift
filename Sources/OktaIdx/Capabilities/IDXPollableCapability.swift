@@ -60,12 +60,12 @@ extension Capability {
         }
         
         internal private(set) weak var client: IDXClientAPI?
-        internal private(set) var remediation: IDXClient.Remediation
-        internal let authenticatorType: IDXClient.Authenticator.Kind
+        internal private(set) var remediation: Remediation
+        internal let authenticatorType: Authenticator.Kind
         private var pollHandler: PollingHandler?
         internal init(client: IDXClientAPI,
-                      authenticatorType: IDXClient.Authenticator.Kind,
-                      remediation: IDXClient.Remediation)
+                      authenticatorType: Authenticator.Kind,
+                      remediation: Remediation)
         {
             self.client = client
             self.authenticatorType = authenticatorType
@@ -73,3 +73,20 @@ extension Capability {
         }
     }
 }
+
+#if swift(>=5.5.1) && !os(Linux)
+@available(iOS 15.0, tvOS 15.0, macOS 12.0, *)
+extension Capability.Pollable {
+    /// Starts the polling process asynchronously.
+    ///
+    /// The action will be continually polled in the background either until `stopPolling` is called, or when the authenticator has finished.
+    /// - Returns: The next response after polling completes successfully
+    public func startPolling() async throws -> Response {
+        try await withCheckedThrowingContinuation { continuation in
+            startPolling() { result in
+                continuation.resume(with: result)
+            }
+        }
+    }
+}
+#endif

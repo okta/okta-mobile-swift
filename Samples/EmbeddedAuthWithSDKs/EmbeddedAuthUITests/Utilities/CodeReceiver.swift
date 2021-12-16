@@ -83,7 +83,7 @@ struct EmailLinkReceiver: CodeReceiver {
         profile.message { (message: A18NProfile.EmailMessage?, error) in
             guard error == nil,
                   let message = message,
-                  let code = try? message.content?.firstMatch(for: "URL: (https://\\S+)")
+                  let code = try? message.content?.firstMatch(for: "href=\"(https://[^\"]+)\"")
             else {
                 completion(nil)
                 return
@@ -147,7 +147,7 @@ fileprivate extension String {
         let regex = try NSRegularExpression(pattern: pattern, options: .caseInsensitive)
         let range = NSRange(startIndex..., in: self)
         return regex.matches(in: self, options: [], range: range).map {
-            String(self[Range($0.range, in: self)!])
+            String(self[Range($0.range(at: 1), in: self)!])
         }.first
     }
 }

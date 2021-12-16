@@ -12,7 +12,7 @@
 
 import Foundation
 
-extension IDXClient.Remediation {
+extension Remediation {
     /// Enumeration describing the possible remedation types. This is expanded from the possible option values that may be present in the `name` property.
     @objc(IDXRemediationType)
     public enum RemediationType: Int {

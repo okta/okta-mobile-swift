@@ -61,9 +61,9 @@ dependencies: [
 
 The IDX SDK enables dynamic user authentication through a cyclical call-and-response pattern. A user is presented with a series of choices in how they can iteratively step through the authentication process, with each step giving way to additional choices until they can either successfully authenticate or receive actionable error messages.
 
-Each step in the authentication process is represented by an `IDXClient.Response` object, which contains the choices they can take, represented by the `IDXClient.Remediation` class. Remediations provides metadata about its type, a form object tree that describes the fields and values that should be presented to the user, and other related data that helps you, the developer, build a UI capable of prompting the user to take action.
+Each step in the authentication process is represented by an `Response` object, which contains the choices they can take, represented by the `Remediation` class. Remediations provides metadata about its type, a form object tree that describes the fields and values that should be presented to the user, and other related data that helps you, the developer, build a UI capable of prompting the user to take action.
 
-When a remediation is selected and its inputs have been supplied by the user, the `proceed()` method can be called on the remediation to proceed to the next step of the authentication process.  This returns another `IDXClient.Response` object, which causes the process to continue. 
+When a remediation is selected and its inputs have been supplied by the user, the `proceed()` method can be called on the remediation to proceed to the next step of the authentication process.  This returns another `Response` object, which causes the process to continue. 
 
 > **Note:** Unless documented otherwise, all asynchronous functions accept either a Swift `Result` completion handler, or a conventional completion block that provides the response and error as separate values in the argument tuple.
 
@@ -119,7 +119,7 @@ In this example the sign-on policy has no authenticators required.
 > **Note:** Steps to identify the user might change based on your Org configuration.
 
 ```swift
-func signIn(username: String, password: String, completion: @escaping(IDXClient.Token?, Error?) -> Void) {
+func signIn(username: String, password: String, completion: @escaping(Token?, Error?) -> Void) {
     // Start the IDX authentication session
     IDXClient.start { (client, error) in
         guard let client = client else {
@@ -480,7 +480,7 @@ import SwiftUI
 
 struct UsernameView: View {
     @State var username: String = ""
-    var remediation: IDXClient.Remediation
+    var remediation: Remediation
     var body: some View {
         Form {
             TextField("Username", text: $username, onCommit: {
@@ -516,7 +516,7 @@ if response.isLoginSuccessful {
 
 Logging a user out is as simple as revoking the token. As a developer, you have the choice to either revoke just the refresh token, or to revoke both access and refresh tokens. There are two ways one can revoke tokens, depending on how you implement the IDX SDK.
 
-#### Revoking a token using an `IDXClient.Token` object
+#### Revoking a token using an `Token` object
 
 ```swift
 token.revoke(type: .accessAndRefreshToken) { (success, error) in
@@ -528,10 +528,10 @@ token.revoke(type: .accessAndRefreshToken) { (success, error) in
 
 #### Revoking a token using a plain token string
 
-If you don't store the `IDXClient.Token` object, you can make requests to revoke tokens with the raw string value of the token in question.
+If you don't store the `Token` object, you can make requests to revoke tokens with the raw string value of the token in question.
 
 ```swift
-IDXClient.Token.revoke(token: tokenString,
+Token.revoke(token: tokenString,
                        type: .accessAndRefreshToken,
                        configuration: configuration) { (success, error) in
     if !success {
@@ -550,7 +550,7 @@ All other non-fatal errors are reported through the use of the `MessageCollectio
 
 Since errors may occur at various places within the flow and a remediation form, the placement of these messages can vary; for example, if an email address is invalid when signing up for a new user, the error message may be tied to the form field itself. 
 
-For convenience, the root-level message collection (accessible via the `IDXClient.Response.messages` property), aggregates all nested messages into the `allMessages` property.
+For convenience, the root-level message collection (accessible via the `Response.messages` property), aggregates all nested messages into the `allMessages` property.
 
 ```swift
 response.messages.allMessages.forEach { message in
@@ -614,7 +614,7 @@ class LoginManager: IDXClientDelegate {
         }
     }
     
-    func idx(client: IDXClient, didReceive response: IDXClient.Response) {
+    func idx(client: IDXClient, didReceive response: Response) {
         // If login is successful, immediately exchange it for a token.
         guard !response.isLoginSuccessful else {
             response.exchangeCode()
@@ -639,7 +639,7 @@ class LoginManager: IDXClientDelegate {
         // Handle other scenarios / remediation states here...
     }
 
-    func idx(client: IDXClient, didReceive token: IDXClient.Token) {
+    func idx(client: IDXClient, didReceive token: Token) {
         // Login succeeded, with the given token.
     }
 

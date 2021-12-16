@@ -21,17 +21,18 @@ final class SocialAuthTests: ScenarioTestCase {
         
         try XCTSkipIf(scenario.socialAuthCredentials == nil,
                       "Skipping social auth tests since no user credentials are defined")
+
     }
     
     func test_Sign_In() throws {
         let credentials = try XCTUnwrap(scenario.socialAuthCredentials)
-        let policyDeactivatedExpaction = expectation(description: "Social MFA policy deactivated.")
+        let policyDeactivatedExpectation = expectation(description: "Social MFA policy deactivated.")
         
         scenario.validator.deactivatePolicy(.socialAuthMFA) { _ in
-            policyDeactivatedExpaction.fulfill()
+            policyDeactivatedExpectation.fulfill()
         }
         
-        wait(for: [policyDeactivatedExpaction], timeout: .regular)
+        wait(for: [policyDeactivatedExpectation], timeout: .regular)
         
         try signInSocialAuth(with: credentials)
                 
@@ -48,33 +49,21 @@ final class SocialAuthTests: ScenarioTestCase {
     }
     
     private func signInSocialAuth(with credentials: Scenario.Credentials) throws {
+        XCTAssertTrue(initialSignInButton.waitForExistence(timeout: .regular))
+        initialSignInButton.tap()
+
         let signInPage = SignInFormPage(app: app)
         
-        test("WHEN she clicks the 'Login with Facebook' button") {
-            XCTAssertTrue(signInPage.initialSignInButton.waitForExistence(timeout: .regular))
-            signInPage.initialSignInButton.tap()
+        test("WHEN she clicks the 'Social Login' button") {
             
-            test("AND logs in to Facebook") {
-                XCTAssertTrue(signInPage.facebookSignInButton.waitForExistence(timeout: .regular))
-                signInPage.facebookSignInButton.tap()
-                
-                if signInPage.socialAuthContinueButton.waitForExistence(timeout: .minimal) {
-                    signInPage.socialAuthContinueButton.tap()
-                }
+            test("AND logs in to an IdP") {
+                XCTAssertTrue(signInPage.socialLoginButton.waitForExistence(timeout: .regular))
+                signInPage.socialLoginButton.tap()
                 
                 let authorizationPage = AuthorizationWebPage(app: app)
                 XCTAssertTrue(authorizationPage.webView.waitForExistence(timeout: .regular))
                 XCTAssertTrue(authorizationPage.usernameTextField.firstMatch.waitForExistence(timeout: .regular))
                 XCTAssertTrue(authorizationPage.passwordTextField.firstMatch.waitForExistence(timeout: .regular))
-                
-                // When FB web page is open, it localizes the page according to your IP location.
-                // So the language can be anything, that's why we are looking for english button to localize it.
-                if authorizationPage.signInButton?.exists == true {
-                    authorizationPage.englishLanguageButton?.tap()
-                }
-                
-                // Wait for page localization
-                Thread.sleep(forTimeInterval: 2)
                 
                 authorizationPage.usernameTextField.tap()
                 authorizationPage.usernameTextField.typeText(credentials.username)

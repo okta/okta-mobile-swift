@@ -50,26 +50,26 @@ extension IDXRelatedObjectRoot {
     }
 }
 
-extension IDXClient.Response: IDXRelatedObjectRoot {
+extension Response: IDXRelatedObjectRoot {
     func nestedRelatableObjects() -> [IDXHasRelatedObjects] {
         return [remediations.nestedRelatableObjects(),
                 authenticators.nestedRelatableObjects()].flatMap { $0 }
     }
 }
 
-extension IDXClient.AuthenticatorCollection: IDXContainsRelatableObjects {
+extension Authenticator.Collection: IDXContainsRelatableObjects {
     func nestedRelatableObjects() -> [IDXHasRelatedObjects] {
         return authenticators.flatMap { $0.nestedRelatableObjects() }
     }
 }
 
-extension IDXClient.RemediationCollection: IDXContainsRelatableObjects {
+extension Remediation.Collection: IDXContainsRelatableObjects {
     func nestedRelatableObjects() -> [IDXHasRelatedObjects] {
         return remediations.flatMap { $0.nestedRelatableObjects() }
     }
 }
 
-extension IDXClient.Authenticator: IDXHasRelatedObjects {
+extension Authenticator: IDXHasRelatedObjects {
     func findRelatedObjects(using jsonMapping: [String : IDXHasRelatedObjects]) throws {
         return
     }
@@ -79,7 +79,7 @@ extension IDXClient.Authenticator: IDXHasRelatedObjects {
     }
 }
 
-extension IDXClient.Remediation: IDXHasRelatedObjects {
+extension Remediation: IDXHasRelatedObjects {
     func nestedRelatableObjects() -> [IDXHasRelatedObjects] {
         var result = form.flatMap { $0.nestedRelatableObjects() }
         result.append(self)
@@ -98,8 +98,8 @@ extension IDXClient.Remediation: IDXHasRelatedObjects {
         default: break
         }
         
-        var authenticatorObjects = calculatedRelatesTo?.compactMap({ (jsonPath) -> IDXClient.Authenticator? in
-            guard let authenticator = jsonMapping[jsonPath] as? IDXClient.Authenticator else { return nil }
+        var authenticatorObjects = calculatedRelatesTo?.compactMap({ (jsonPath) -> Authenticator? in
+            guard let authenticator = jsonMapping[jsonPath] as? Authenticator else { return nil }
             return authenticator
         }) ?? []
         
@@ -108,7 +108,7 @@ extension IDXClient.Remediation: IDXHasRelatedObjects {
         }
         
         // Work-around for the password authenticator not being associated with the identify remediation.
-        if let currentAuthenticator = jsonMapping["$.currentAuthenticator"] as? IDXClient.Authenticator,
+        if let currentAuthenticator = jsonMapping["$.currentAuthenticator"] as? Authenticator,
            currentAuthenticator.type == .password,
            type == .identify
         {
@@ -117,17 +117,17 @@ extension IDXClient.Remediation: IDXHasRelatedObjects {
         
         guard !authenticatorObjects.isEmpty else { return }
         
-        authenticators = IDXClient.WeakAuthenticatorCollection(authenticators: authenticatorObjects)
+        authenticators = Authenticator.WeakCollection(authenticators: authenticatorObjects)
     }
 }
 
-extension IDXClient.Remediation.Form: IDXContainsRelatableObjects {
+extension Remediation.Form: IDXContainsRelatableObjects {
     func nestedRelatableObjects() -> [IDXHasRelatedObjects] {
         return fields.flatMap { $0.nestedRelatableObjects() }
     }
 }
 
-extension IDXClient.Remediation.Form.Field: IDXHasRelatedObjects {
+extension Remediation.Form.Field: IDXHasRelatedObjects {
     func nestedRelatableObjects() -> [IDXHasRelatedObjects] {
         var result: [IDXHasRelatedObjects] = [self]
         result.append(contentsOf: form?.nestedRelatableObjects() ?? [])
@@ -139,7 +139,7 @@ extension IDXClient.Remediation.Form.Field: IDXHasRelatedObjects {
     
     func findRelatedObjects(using jsonMapping: [String: IDXHasRelatedObjects]) throws {
         guard let relatesTo = relatesTo else { return }
-        guard let mappedAuthenticator = jsonMapping[relatesTo] as? IDXClient.Authenticator else {
+        guard let mappedAuthenticator = jsonMapping[relatesTo] as? Authenticator else {
             throw IDXClientError.missingRelatedObject
         }
         authenticator = mappedAuthenticator

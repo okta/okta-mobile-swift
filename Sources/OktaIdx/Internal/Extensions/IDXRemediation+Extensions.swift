@@ -12,7 +12,7 @@
 
 import Foundation
 
-extension IDXClient.Remediation.Form {
+extension Remediation.Form {
     func formValues() throws -> [String:Any] {
         return try allFields.reduce(into: [:]) { (result, field) in
             guard let nestedResult = try field.formValues() else {
@@ -32,7 +32,7 @@ extension IDXClient.Remediation.Form {
     }
 }
 
-extension IDXClient.Remediation.Form.Field {
+extension Remediation.Form.Field {
     func formValues() throws -> Any? {
         // Unnamed FormValues, which may contain nested options
         guard let name = name else {

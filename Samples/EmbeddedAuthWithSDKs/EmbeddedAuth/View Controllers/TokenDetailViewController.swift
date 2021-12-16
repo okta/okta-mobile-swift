@@ -15,7 +15,7 @@ import OktaIdx
 
 class TokenDetailViewController: UIViewController {
     var client: IDXClient?
-    var token: IDXClient.Token?
+    var token: Token?
     
     @IBOutlet weak var textView: UITextView!
     

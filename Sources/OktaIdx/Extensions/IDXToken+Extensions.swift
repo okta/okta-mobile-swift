@@ -12,7 +12,7 @@
 
 import Foundation
 
-extension IDXClient.Token: NSSecureCoding {
+extension Token: NSSecureCoding {
     private enum Keys: String {
         case accessToken
         case refreshToken
@@ -28,7 +28,7 @@ extension IDXClient.Token: NSSecureCoding {
     }
     
     public override func isEqual(_ object: Any?) -> Bool {
-        guard let object = object as? IDXClient.Token else {
+        guard let object = object as? Token else {
             return false
         }
         

@@ -14,7 +14,7 @@ import XCTest
 @testable import OktaIdx
 
 class IDXExtractFormValueTests: XCTestCase {
-    typealias Form = IDXClient.Remediation.Form
+    typealias Form = Remediation.Form
 
     func testPlainDefaultValues() throws {
         let form = try XCTUnwrap(Form(fields: [

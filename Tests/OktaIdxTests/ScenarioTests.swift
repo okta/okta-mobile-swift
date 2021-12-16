@@ -110,6 +110,40 @@ class ScenarioTests: XCTestCase {
         wait(for: [completion], timeout: 1)
     }
 
+    #if swift(>=5.5.1) && !os(Linux)
+    @available(iOS 15.0, tvOS 15.0, macOS 12.0, *)
+    func testScenario1Async() async throws {
+        try session.expect("https://example.com/oauth2/default/v1/interact", folderName: "Passcode", fileName: "01-interact-response")
+        try session.expect("https://example.com/idp/idx/introspect", folderName: "Passcode", fileName: "02-introspect-response")
+        try session.expect("https://example.com/idp/idx/identify", folderName: "Passcode", fileName: "03-identify-response")
+        try session.expect("https://example.com/idp/idx/challenge/answer", folderName: "Passcode", fileName: "04-challenge-answer-response")
+        try session.expect("https://example.com/oauth2/auszsfkYrgGCTilsV2o4/v1/token", folderName: "Passcode", fileName: "05-token-response")
+
+        let client = try await IDXClient.start(with: api)
+        var response = try await client.resume()
+        
+        XCTAssertFalse(response.isLoginSuccessful)
+                
+        var remediation = try XCTUnwrap(response.remediations[.identify])
+        remediation["identifier"]?.value = "user@example.com"
+                
+        response = try await remediation.proceed()
+        XCTAssertFalse(response.isLoginSuccessful)
+                    
+        remediation = try XCTUnwrap(response.remediations[.challengeAuthenticator])
+        remediation["credentials.passcode"]?.value = "password"
+        response = try await remediation.proceed()
+        
+        XCTAssertTrue(response.isLoginSuccessful)
+                        
+        let token = try await response.exchangeCode()
+
+        XCTAssertEqual(token.tokenType, "Bearer")
+        XCTAssertEqual(token.expiresIn, 3600)
+        XCTAssertEqual(token.refreshToken, "CCY4M4fR3")
+    }
+    #endif
+
     func testScenario2() throws {
         let completion = expectation(description: "Start")
         try session.expect("https://example.com/oauth2/default/v1/interact", folderName: "MFA-Email", fileName: "01-interact-response")

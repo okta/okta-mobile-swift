@@ -13,10 +13,10 @@
 import Foundation
 @testable import OktaIdx
 
-extension IDXClient.Response {
+extension Response {
     class func response(client: IDXClientAPI,
                         folderName: String? = nil,
-                        fileName: String) throws -> IDXClient.Response
+                        fileName: String) throws -> Response
     {
         let path = Bundle.testResource(folderName: folderName, fileName: fileName)
         let data: Data!
@@ -26,8 +26,8 @@ extension IDXClient.Response {
             throw IDXClientError.invalidHTTPResponse
         }
         
-        let response = try JSONDecoder.idxResponseDecoder.decode(IDXClient.APIVersion1.Response.self, from: data)
-        return try IDXClient.Response(client: client, v1: response)
+        let response = try JSONDecoder.idxResponseDecoder.decode(IDXClient.APIVersion1.IonResponse.self, from: data)
+        return try Response(client: client, v1: response)
     }
 }
 

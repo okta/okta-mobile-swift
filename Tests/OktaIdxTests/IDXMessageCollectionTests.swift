@@ -38,7 +38,7 @@ class IDXMessageCollectionTests: XCTestCase {
     }
 
     func testResponse() throws {
-        let response = try XCTUnwrap(IDXClient.Response.response(client: client,
+        let response = try XCTUnwrap(Response.response(client: client,
                                                                  fileName: "invalid-password-response"))
         XCTAssertEqual(response.messages.count, 0)
         XCTAssertEqual(response.messages.allMessages.count, 1)

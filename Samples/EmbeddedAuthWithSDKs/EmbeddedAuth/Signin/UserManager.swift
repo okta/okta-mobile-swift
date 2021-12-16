@@ -14,10 +14,10 @@ import Foundation
 import OktaIdx
 
 public struct User: Codable {
-    let token: IDXClient.Token
+    let token: Token
     let info: Info
     
-    init(token: IDXClient.Token, info: Info) {
+    init(token: Token, info: Info) {
         self.token = token
         self.info = info
     }

@@ -12,9 +12,9 @@
 
 import Foundation
 
-extension IDXClient.Remediation.Form: Collection {
+extension Remediation.Form: Collection {
     public typealias Index = Int
-    public typealias Element = IDXClient.Remediation.Form.Field
+    public typealias Element = Remediation.Form.Field
 
     public var startIndex: Index {
         fields.startIndex

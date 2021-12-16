@@ -89,4 +89,4 @@ extension TestResponse where Self : Decodable {
     }
 }
 
-extension IDXClient.APIVersion1.Response: TestResponse {}
+extension IDXClient.APIVersion1.IonResponse: TestResponse {}

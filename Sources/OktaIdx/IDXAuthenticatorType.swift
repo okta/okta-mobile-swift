@@ -12,7 +12,7 @@
 
 import Foundation
 
-extension IDXClient.Authenticator {
+extension Authenticator {
     @objc(IDXAuthenticatorState)
     public enum State: Int {
         case normal, enrolled, authenticating, enrolling, recovery

@@ -17,13 +17,13 @@ extension ScenarioValidator {
     func activatePolicy(_ policy: OktaPolicy,
                         completion: @escaping(Error?) -> Void)
     {
-        setPolicy(named: policy.rawValue, type: policy.policyType, isActive: true, completion: completion)
+        setPolicy(policy: policy, isActive: true, completion: completion)
     }
     
     func deactivatePolicy(_ policy: OktaPolicy,
                           completion: @escaping(Error?) -> Void)
     {
-        setPolicy(named: policy.rawValue, type: policy.policyType, isActive: false, completion: completion)
+        setPolicy(policy: policy, isActive: false, completion: completion)
     }
     
     func deactivatePolicies(_ policies: [OktaPolicy],
@@ -44,21 +44,45 @@ extension ScenarioValidator {
         }
     }
 
-    private func setPolicy(named: String,
-                           type: PolicyType,
+    private func setPolicy(policy: OktaPolicy,
                            isActive: Bool,
                            completion: @escaping(Error?) -> Void)
     {
-        PolicyAPI.listPolicies(type: type.rawValue) { (policies, error) in
+        guard let named = policy.isRule ? policy.policyName : policy.rawValue else {
+            completion(nil)
+            return
+        }
+        
+        PolicyAPI.listPolicies(type: policy.policyType.rawValue) { (policies, error) in
             guard let policies = policies,
-                  let policy = policies.first(where: { $0.name == named }),
-                  let policyId = policy.id
+                  let policyObj = policies.first(where: { $0.name == named }),
+                  let policyId = policyObj.id
             else {
                 completion(error)
                 return
             }
             
-            if isActive {
+            if policy.isRule {
+                PolicyAPI.listPolicyRules(policyId: policyId) { (rules, error) in
+                    guard let rules = rules,
+                          let ruleObj = rules.first(where: { $0.name == policy.rawValue }),
+                          let ruleId = ruleObj.id
+                    else {
+                        completion(error)
+                        return
+                    }
+
+                    if isActive {
+                        PolicyAPI.activatePolicyRule(policyId: policyId, ruleId: ruleId) { _, error in
+                            completion(error)
+                        }
+                    } else {
+                        PolicyAPI.deactivatePolicyRule(policyId: policyId, ruleId: ruleId)  { (_, error) in
+                            completion(error)
+                        }
+                    }
+                }
+            } else if isActive {
                 PolicyAPI.activatePolicy(policyId: policyId) { (_, error) in
                     completion(error)
                 }

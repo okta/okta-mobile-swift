@@ -40,7 +40,7 @@ public extension CapabilityCollection {
     }
 }
 
-extension IDXClient.Authenticator: CapabilityCollection {
+extension Authenticator: CapabilityCollection {
     public typealias CapabilityType = AuthenticatorCapability
     
     /// Exposes the authenticator's capability to send a code.
@@ -80,7 +80,7 @@ extension IDXClient.Authenticator: CapabilityCollection {
     public var numberChallenge: Capability.NumberChallenge? { capability(Capability.NumberChallenge.self) }
 }
 
-extension IDXClient.Remediation: CapabilityCollection {
+extension Remediation: CapabilityCollection {
     public typealias CapabilityType = RemediationCapability
     
     /// Exposes the remediation's ability to poll for an out-of-band result.

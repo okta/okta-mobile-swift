@@ -71,6 +71,10 @@
 		96ADA06125B0D173008BF50D /* FormRows.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96ADA06025B0D173008BF50D /* FormRows.swift */; };
 		96ADA06725B0F5D5008BF50D /* IDXLabelTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96ADA06625B0F5D5008BF50D /* IDXLabelTableViewCell.swift */; };
 		96ADA06D25B111AA008BF50D /* IDXMessageTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96ADA06C25B111AA008BF50D /* IDXMessageTableViewCell.swift */; };
+		96D82B7F2763D70700F8C622 /* AccountUnlockScenarioTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96D82B7E2763D70700F8C622 /* AccountUnlockScenarioTests.swift */; };
+		96D82B812763DF3000F8C622 /* AccountUnlockScenarioValidator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96D82B802763DF3000F8C622 /* AccountUnlockScenarioValidator.swift */; };
+		96D82B842763F06D00F8C622 /* UnlockAccountPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96D82B832763F06D00F8C622 /* UnlockAccountPage.swift */; };
+		96D82B862763FBD200F8C622 /* LockUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96D82B852763FBD200F8C622 /* LockUser.swift */; };
 		96E0A78D260500080002933C /* IDXSeparatorTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96E0A78C260500080002933C /* IDXSeparatorTableViewCell.swift */; };
 		96E0A791260505F30002933C /* IDXTitleTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96E0A790260505F30002933C /* IDXTitleTableViewCell.swift */; };
 		96E339B4266A9136000E0B0F /* Scenario.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96E339B3266A9136000E0B0F /* Scenario.swift */; };
@@ -197,6 +201,10 @@
 		96ADA06C25B111AA008BF50D /* IDXMessageTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IDXMessageTableViewCell.swift; sourceTree = "<group>"; };
 		96C51E7E25BA578F007A2519 /* TestCredentials.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; name = TestCredentials.xcconfig; path = ../../../TestCredentials.xcconfig; sourceTree = "<group>"; };
 		96C51E9225BA591F007A2519 /* SelfServiceRegistrationScenarioTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelfServiceRegistrationScenarioTests.swift; sourceTree = "<group>"; };
+		96D82B7E2763D70700F8C622 /* AccountUnlockScenarioTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountUnlockScenarioTests.swift; sourceTree = "<group>"; };
+		96D82B802763DF3000F8C622 /* AccountUnlockScenarioValidator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountUnlockScenarioValidator.swift; sourceTree = "<group>"; };
+		96D82B832763F06D00F8C622 /* UnlockAccountPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnlockAccountPage.swift; sourceTree = "<group>"; };
+		96D82B852763FBD200F8C622 /* LockUser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LockUser.swift; sourceTree = "<group>"; };
 		96E0A78C260500080002933C /* IDXSeparatorTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IDXSeparatorTableViewCell.swift; sourceTree = "<group>"; };
 		96E0A790260505F30002933C /* IDXTitleTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IDXTitleTableViewCell.swift; sourceTree = "<group>"; };
 		96E339B3266A9136000E0B0F /* Scenario.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Scenario.swift; sourceTree = "<group>"; };
@@ -251,6 +259,7 @@
 				920B9DB7266A861F00D38A8C /* UsernameRecoveryFormPage.swift */,
 				9209C13E26724C8600CC1DD5 /* UserInfoPage.swift */,
 				923EF0252677B60E0020011A /* AuthorizationWebPage.swift */,
+				96D82B832763F06D00F8C622 /* UnlockAccountPage.swift */,
 			);
 			path = Pages;
 			sourceTree = "<group>";
@@ -329,6 +338,7 @@
 				92B559D126667A7D00AB566F /* ResetPasswordScenarioTests.swift */,
 				96F8B35E25BF5A9400DAECDC /* ResetTransactionScenarioTests.swift */,
 				96C51E9225BA591F007A2519 /* SelfServiceRegistrationScenarioTests.swift */,
+				96D82B7E2763D70700F8C622 /* AccountUnlockScenarioTests.swift */,
 				923EF0232677A39E0020011A /* SocialAuthTests.swift */,
 				964F747625A3E5F3003EE300 /* Info.plist */,
 				96C51E7E25BA578F007A2519 /* TestCredentials.xcconfig */,
@@ -473,6 +483,7 @@
 				96E339B8266A9151000E0B0F /* PasscodeScenarioValidator.swift */,
 				96F79494266AC67000D340CD /* SelfServiceRegistrationScenarioValidator.swift */,
 				92638C9D2678DC3600C98CE5 /* SocialAuthScenarioValidator.swift */,
+				96D82B802763DF3000F8C622 /* AccountUnlockScenarioValidator.swift */,
 			);
 			path = "Scenario Configurations";
 			sourceTree = "<group>";
@@ -482,6 +493,7 @@
 			children = (
 				96E339E3266AAE4C000E0B0F /* CreateUser.swift */,
 				96E339EB266AAF7F000E0B0F /* DeleteUser.swift */,
+				96D82B852763FBD200F8C622 /* LockUser.swift */,
 				961B7139266D901400A3A4A2 /* ActivateDeactivatePolicy.swift */,
 			);
 			path = "Default Actions";
@@ -713,8 +725,10 @@
 				96E339E4266AAE4C000E0B0F /* CreateUser.swift in Sources */,
 				965A113326547EE9006B784F /* CodeReceiver.swift in Sources */,
 				920B9DD4266A90B800D38A8C /* PhoneFormPage.swift in Sources */,
+				96D82B812763DF3000F8C622 /* AccountUnlockScenarioValidator.swift in Sources */,
 				928B7C72266A7F2D006DF45A /* SignInFormPage.swift in Sources */,
 				920B9DCE266A8E0E00D38A8C /* RegistrationFormPage.swift in Sources */,
+				96D82B7F2763D70700F8C622 /* AccountUnlockScenarioTests.swift in Sources */,
 				928CF05E2670F53600DAAB4C /* AuthenticationScenarioTests.swift in Sources */,
 				9234CCFB266A4D650033564D /* EmailMFALoginScenarioTests.swift in Sources */,
 				92B559C826662AA300AB566F /* ResetTransactionScenarioTests.swift in Sources */,
@@ -724,7 +738,9 @@
 				965A112F26547EC1006B784F /* A18NProfile.swift in Sources */,
 				922820F526650FAA00AC66E9 /* PasscodeScenarioTests.swift in Sources */,
 				920B9DBC266A863600D38A8C /* RecoveryMethodPage.swift in Sources */,
+				96D82B862763FBD200F8C622 /* LockUser.swift in Sources */,
 				920B9DC6266A87C600D38A8C /* NewPasswordFormPage.swift in Sources */,
+				96D82B842763F06D00F8C622 /* UnlockAccountPage.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -881,6 +897,7 @@
 		};
 		964F747A25A3E5F3003EE300 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 96C51E7E25BA578F007A2519 /* TestCredentials.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -900,6 +917,7 @@
 		};
 		964F747B25A3E5F3003EE300 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 96C51E7E25BA578F007A2519 /* TestCredentials.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -961,7 +979,6 @@
 		};
 		964F748025A3E5F3003EE300 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 96C51E7E25BA578F007A2519 /* TestCredentials.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
@@ -985,7 +1002,6 @@
 		};
 		964F748125A3E5F3003EE300 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 96C51E7E25BA578F007A2519 /* TestCredentials.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;

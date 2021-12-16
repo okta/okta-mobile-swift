@@ -25,13 +25,13 @@ class DelegateRecorder: IDXClientDelegate {
         let type: CallType
         let object: AnyObject?
         
-        var response: IDXClient.Response? {
-            guard let result = object as? IDXClient.Response else { return nil }
+        var response: Response? {
+            guard let result = object as? Response else { return nil }
             return result
         }
 
-        var token: IDXClient.Token? {
-            guard let result = object as? IDXClient.Token else { return nil }
+        var token: Token? {
+            guard let result = object as? Token else { return nil }
             return result
         }
     }
@@ -46,11 +46,11 @@ class DelegateRecorder: IDXClientDelegate {
         calls.append(Call(type: .error, object: nil))
     }
     
-    func idx(client: IDXClient, didReceive response: IDXClient.Response) {
+    func idx(client: IDXClient, didReceive response: Response) {
         calls.append(Call(type: .response, object: response))
     }
     
-    func idx(client: IDXClient, didReceive token: IDXClient.Token) {
+    func idx(client: IDXClient, didReceive token: Token) {
         calls.append(Call(type: .token, object: token))
     }
 }

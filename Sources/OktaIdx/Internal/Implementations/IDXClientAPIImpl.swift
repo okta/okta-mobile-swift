@@ -16,7 +16,7 @@ import Foundation
 public protocol IDXClientAPI: AnyObject {
     var context: IDXClient.Context { get }
     func resume(completion: IDXClient.ResponseResult?)
-    func proceed(remediation option: IDXClient.Remediation,
+    func proceed(remediation option: Remediation,
                  completion: IDXClient.ResponseResult?)
 
     func redirectResult(for url: URL) -> IDXClient.RedirectResult
@@ -24,7 +24,7 @@ public protocol IDXClientAPI: AnyObject {
     func exchangeCode(redirect url: URL,
                       completion: IDXClient.TokenResult?)
 
-    func exchangeCode(using remediation: IDXClient.Remediation,
+    func exchangeCode(using remediation: Remediation,
                       completion: IDXClient.TokenResult?)
 }
 
@@ -40,23 +40,23 @@ protocol IDXClientAPIImpl: AnyObject {
     var client: IDXClientAPI? { get set }
     
     func start(state: String?, completion: @escaping (Result<IDXClient.Context, IDXClientError>) -> Void)
-    func resume(completion: @escaping (Result<IDXClient.Response, IDXClientError>) -> Void)
-    func proceed(remediation option: IDXClient.Remediation,
-                 completion: @escaping (Result<IDXClient.Response, IDXClientError>) -> Void)
+    func resume(completion: @escaping (Result<Response, IDXClientError>) -> Void)
+    func proceed(remediation option: Remediation,
+                 completion: @escaping (Result<Response, IDXClientError>) -> Void)
     
     func redirectResult(for url: URL) -> IDXClient.RedirectResult
     
     func exchangeCode(redirect url: URL,
-                      completion: @escaping (Result<IDXClient.Token, IDXClientError>) -> Void)
+                      completion: @escaping (Result<Token, IDXClientError>) -> Void)
     
-    func exchangeCode(using remediation: IDXClient.Remediation,
-                      completion: @escaping (Result<IDXClient.Token, IDXClientError>) -> Void)
+    func exchangeCode(using remediation: Remediation,
+                      completion: @escaping (Result<Token, IDXClientError>) -> Void)
 
     func revoke(token: String,
                 type: String,
                 completion: @escaping(Result<Void, IDXClientError>) -> Void)
-    func refresh(token: IDXClient.Token,
-                 completion: @escaping(Result<IDXClient.Token, IDXClientError>) -> Void)
+    func refresh(token: Token,
+                 completion: @escaping(Result<Token, IDXClientError>) -> Void)
 }
 
 /// Protocol used to represent IDX API requests, and their expected response types.

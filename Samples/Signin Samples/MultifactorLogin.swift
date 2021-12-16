@@ -96,8 +96,8 @@ public class MultifactorLogin {
     var profile: [ProfileField: String]?
 
     var client: IDXClient?
-    var response: IDXClient.Response?
-    var completion: ((Result<IDXClient.Token, LoginError>) -> Void)?
+    var response: Response?
+    var completion: ((Result<Token, LoginError>) -> Void)?
     
     /// Initializer used to create a multifactor login session.
     /// - Parameters:
@@ -132,7 +132,7 @@ public class MultifactorLogin {
     ///   - username: Username to log in with.
     ///   - password: Password for the given username.
     ///   - completion: Comletion block invoked when login completes.
-    public func login(username: String, password: String, completion: @escaping (Result<IDXClient.Token, LoginError>) -> Void) {
+    public func login(username: String, password: String, completion: @escaping (Result<Token, LoginError>) -> Void) {
         self.username = username
         self.password = password
         self.completion = completion
@@ -146,7 +146,7 @@ public class MultifactorLogin {
     ///   - password: Password to select.
     ///   - profile: Profile information (e.g. firstname / lastname) for the new user.
     ///   - completion: Completion block invoked when registration completes.
-    public func register(username: String, password: String, profile: [ProfileField: String], completion: @escaping (Result<IDXClient.Token, LoginError>) -> Void) {
+    public func register(username: String, password: String, profile: [ProfileField: String], completion: @escaping (Result<Token, LoginError>) -> Void) {
         self.username = username
         self.password = password
         self.profile = profile
@@ -161,7 +161,7 @@ public class MultifactorLogin {
     /// - Parameters:
     ///   - username: Username to reset.
     ///   - completion: Completion block invoked when registration completes.
-    public func resetPassword(username: String, completion: @escaping (Result<IDXClient.Token, LoginError>) -> Void) {
+    public func resetPassword(username: String, completion: @escaping (Result<Token, LoginError>) -> Void) {
         self.username = username
         self.completion = completion
        
@@ -170,7 +170,7 @@ public class MultifactorLogin {
     
     /// Method called by you to select an authenticator. This can be used in response to a `Step.chooseFactor` stepHandler call.
     /// - Parameter factor: Factor to select, or `nil` to skip.
-    public func select(factor: IDXClient.Authenticator.Kind?) {
+    public func select(factor: Authenticator.Kind?) {
         guard let remediation = response?.remediations[.selectAuthenticatorAuthenticate] ?? response?.remediations[.selectAuthenticatorEnroll],
               let authenticatorsField = remediation["authenticator"]
         else {
@@ -203,8 +203,8 @@ public class MultifactorLogin {
     ///   - factor: Factor being selected.
     ///   - method: Factor method (e.g. SMS or Voice) to select.
     ///   - phoneNumber: Optional phone number to supply, when enrolling in a new factor.
-    public func select(factor: IDXClient.Authenticator.Kind,
-                       method: IDXClient.Authenticator.Method,
+    public func select(factor: Authenticator.Kind,
+                       method: Authenticator.Method,
                        phoneNumber: String? = nil)
     {
         // Retrieve the appropriate remedation, authentication factor field and method, to
@@ -248,9 +248,9 @@ public class MultifactorLogin {
     ///
     /// You can use these values to determine what UI to present to the user to select factors, authenticator methods, and to verify authenticator verification codes.
     public enum Step {
-        case chooseFactor(_ factors: [IDXClient.Authenticator.Kind])
-        case chooseMethod(_ methods: [IDXClient.Authenticator.Method])
-        case verifyCode(factor: IDXClient.Authenticator.Kind)
+        case chooseFactor(_ factors: [Authenticator.Kind])
+        case chooseMethod(_ methods: [Authenticator.Method])
+        case verifyCode(factor: Authenticator.Kind)
     }
     
     public enum ProfileField: String {
@@ -274,13 +274,13 @@ extension MultifactorLogin: IDXClientDelegate {
     }
     
     // Delegate method sent when a token is successfully exchanged.
-    public func idx(client: IDXClient, didReceive token: IDXClient.Token) {
+    public func idx(client: IDXClient, didReceive token: Token) {
         finish(with: token)
     }
     
     // Delegate method invoked whenever an IDX response is received, regardless
     // of what action or remediation is called.
-    public func idx(client: IDXClient, didReceive response: IDXClient.Response) {
+    public func idx(client: IDXClient, didReceive response: Response) {
         self.response = response
         
         // If a response is successful, immediately exchange it for a token.
@@ -312,7 +312,7 @@ extension MultifactorLogin: IDXClientDelegate {
         // If we have no password, we assume we're performing an account recovery.
         if password == nil,
            (remediation.type == .identify || remediation.type == .challengeAuthenticator),
-           let passwordAuthenticator = response.authenticators.current as? IDXClient.Authenticator.Password
+           let passwordAuthenticator = response.authenticators.current as? Authenticator.Password
         {
             passwordAuthenticator.recover(completion: nil)
             return
@@ -360,7 +360,7 @@ extension MultifactorLogin: IDXClientDelegate {
         case .selectAuthenticatorEnroll: fallthrough
         case .selectAuthenticatorAuthenticate:
             // Find the factor types available to the user at this time.
-            let factors: [IDXClient.Authenticator.Kind]
+            let factors: [Authenticator.Kind]
             factors = remediation["authenticator"]?
                 .options?.compactMap({ field in
                     field.authenticator?.type
@@ -386,7 +386,7 @@ extension MultifactorLogin: IDXClientDelegate {
             }
 
             // Find the methods available to the user.
-            let methods: [IDXClient.Authenticator.Method]
+            let methods: [Authenticator.Method]
             methods = remediation.authenticators.flatMap({ authenticator in
                 authenticator.methods ?? []
             })
@@ -420,7 +420,7 @@ extension MultifactorLogin {
         completion = nil
     }
     
-    func finish(with token: IDXClient.Token) {
+    func finish(with token: Token) {
         completion?(.success(token))
         completion = nil
     }

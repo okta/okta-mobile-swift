@@ -13,7 +13,7 @@
 import Foundation
 import OktaIdx
 
-extension IDXClient.Token {
+extension Token {
     func authorize(request: inout URLRequest) {
         request.addValue("Bearer \(accessToken)", forHTTPHeaderField: "Authorization")
     }

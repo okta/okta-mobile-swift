@@ -17,7 +17,7 @@ import UIKit
 protocol SigninRowDelegate {
     func formNeedsUpdate()
     func enrollment(action: Signin.EnrollmentAction)
-    func buttonSelected(remediationOption: IDXClient.Remediation, sender: Any?)
+    func buttonSelected(remediationOption: Remediation, sender: Any?)
 }
 
 extension Signin {
@@ -37,7 +37,7 @@ extension Signin {
         let kind: Kind
         
         /// The parent form value, if present, that this row's value should be submitted under.
-        let parent: IDXClient.Remediation.Form.Field?
+        let parent: Remediation.Form.Field?
         
         /// Delegate to notfiy about user interactions and value changes
         weak private(set) var delegate: (AnyObject & SigninRowDelegate)?
@@ -74,22 +74,22 @@ extension Signin {
             }
             
             case separator
-            case title(remediationOption: IDXClient.Remediation)
-            case label(field: IDXClient.Remediation.Form.Field)
+            case title(remediationOption: Remediation)
+            case label(field: Remediation.Form.Field)
             case image(_ image: UIImage)
             case message(style: IDXMessageTableViewCell.Style)
             case numberChallenge(answer: String)
-            case text(field: IDXClient.Remediation.Form.Field)
-            case toggle(field: IDXClient.Remediation.Form.Field)
-            case option(field: IDXClient.Remediation.Form.Field, option: IDXClient.Remediation.Form.Field)
-            case select(field: IDXClient.Remediation.Form.Field, values: [IDXClient.Remediation.Form.Field])
-            case button(remediationOption: IDXClient.Remediation)
+            case text(field: Remediation.Form.Field)
+            case toggle(field: Remediation.Form.Field)
+            case option(field: Remediation.Form.Field, option: Remediation.Form.Field)
+            case select(field: Remediation.Form.Field, values: [Remediation.Form.Field])
+            case button(remediationOption: Remediation)
         }
     }
     
     /// Represents a section of rows for the remediation form's signin process
     struct Section: Hashable {
-        let remediationOption: IDXClient.Remediation?
+        let remediationOption: Remediation?
     }
     
     enum EnrollmentAction {
@@ -97,10 +97,10 @@ extension Signin {
     }
 }
 
-extension IDXClient.Remediation.Form.Field {
+extension Remediation.Form.Field {
     typealias Section = Signin.Section
     typealias Row = Signin.Row
-    typealias Form = IDXClient.Remediation.Form
+    typealias Form = Remediation.Form
     
     /// Returns an array of row elements to represent this form value's input.
     /// - Parameters:
@@ -172,15 +172,13 @@ extension IDXClient.Remediation.Form.Field {
     }
 }
 
-extension IDXClient.Remediation {
-    class func title(for type: IDXClient.Remediation.RemediationType) -> String {
+extension Remediation {
+    class func title(for type: Remediation.RemediationType) -> String {
         switch type {
-        case .selectEnrollProfile: fallthrough
-        case .enrollProfile:
+        case .selectEnrollProfile, .enrollProfile:
             return "Sign Up"
             
-        case .selectIdentify: fallthrough
-        case .identify:
+        case .selectIdentify, .identify:
             return "Sign In"
         
         case .challengeAuthenticator:
@@ -195,9 +193,11 @@ extension IDXClient.Remediation {
         case .cancel:
             return "Restart"
             
-        case .enrollPoll: fallthrough
-        case .challengePoll:
+        case .enrollPoll, .challengePoll:
             return "Verify"
+            
+        case .unlockAccount, .selectAuthenticatorUnlockAccount:
+            return "Unlock Account"
             
         default:
             return "Next"
@@ -205,14 +205,14 @@ extension IDXClient.Remediation {
     }
     
     var title: String {
-        return IDXClient.Remediation.title(for: type)
+        Remediation.title(for: type)
     }
 }
 
-extension IDXClient.Response {
+extension Response {
     typealias Section = Signin.Section
     typealias Row = Signin.Row
-    typealias Form = IDXClient.Remediation.Form
+    typealias Form = Remediation.Form
     
     /// Converts the response to a series of remediation forms to display in the UI
     /// - Parameter delegate: A delegate object to receive updates as the form is changed.
@@ -242,8 +242,8 @@ extension IDXClient.Response {
     ///   - delegate: A delegate object to receive updates as the form is changed.
     /// - Returns: Array of sections to be shown in the table view.
     func buildFormSnapshot(_ snapshot: inout NSDiffableDataSourceSnapshot<Signin.Section, Signin.Row>,
-                           remediationOption: IDXClient.Remediation,
-                           in response: IDXClient.Response,
+                           remediationOption: Remediation,
+                           in response: Response,
                            delegate: AnyObject & SigninRowDelegate)
     {
         var rows: [Row] = []

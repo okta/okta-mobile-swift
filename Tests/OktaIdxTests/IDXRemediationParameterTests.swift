@@ -28,7 +28,7 @@ class IDXRemediationParameterTests: XCTestCase {
                                                      codeVerifier: "verifier"))
 
     func testFlatForm() throws {
-        let response = try IDXClient.Response.response(
+        let response = try Response.response(
             client: clientMock,
             folderName: "Passcode",
             fileName: "02-introspect-response")
@@ -52,7 +52,7 @@ class IDXRemediationParameterTests: XCTestCase {
     }
     
     func testNestedForm() throws {
-        let response = try IDXClient.Response.response(
+        let response = try Response.response(
             client: clientMock,
             folderName: "Passcode",
             fileName: "03-identify-response")
@@ -77,7 +77,7 @@ class IDXRemediationParameterTests: XCTestCase {
     }
 
     func testNestedFormWithUnnamedOption() throws {
-        let response = try IDXClient.Response.response(
+        let response = try Response.response(
             client: clientMock,
             folderName: "MFA-Email",
             fileName: "03-identify-response")
@@ -103,7 +103,7 @@ class IDXRemediationParameterTests: XCTestCase {
     }
 
     func testNestedFormWithCustomizedOption() throws {
-        let response = try IDXClient.Response.response(
+        let response = try Response.response(
             client: clientMock,
             folderName: "MFA-SOP",
             fileName: "10-credential-enroll")

@@ -13,7 +13,31 @@
 import Foundation
 import XCTest
 
-class ScenarioTestCase: XCTestCase {
+protocol ReceivesCode {
+    func receive(code type: A18NProfile.MessageType, timeout: TimeInterval, pollInterval: TimeInterval, scenario: Scenario, app: XCUIApplication) throws -> String
+}
+
+extension ReceivesCode {
+    func receive(code type: A18NProfile.MessageType, timeout: TimeInterval = 30, pollInterval: TimeInterval = 1, scenario: Scenario, app: XCUIApplication) throws -> String {
+        do {
+            return try scenario.receive(code: type,
+                                        timeout: timeout,
+                                        pollInterval: pollInterval)
+        } catch {
+            let sendAgain = app.tables.staticTexts["Send again"]
+            guard sendAgain.exists else {
+                throw error
+            }
+            
+            sendAgain.tap()
+            return try scenario.receive(code: type,
+                                        timeout: timeout,
+                                        pollInterval: pollInterval)
+        }
+    }
+}
+
+class ScenarioTestCase: XCTestCase, ReceivesCode {
     private(set) var app: XCUIApplication!
     private static var scenario: Scenario?
     var scenario: Scenario!
@@ -25,6 +49,8 @@ class ScenarioTestCase: XCTestCase {
             app.launchArguments = launchArguments()
         }
     }
+    
+    var initialSignInButton: XCUIElement { app.buttons["Sign In"] }
     
     func launchArguments() -> [String] {
         var result = [
@@ -42,21 +68,7 @@ class ScenarioTestCase: XCTestCase {
     }
     
     func receive(code type: A18NProfile.MessageType, timeout: TimeInterval = 30, pollInterval: TimeInterval = 1) throws -> String {
-        do {
-            return try scenario.receive(code: type,
-                                        timeout: timeout,
-                                        pollInterval: pollInterval)
-        } catch {
-            let sendAgain = app.tables.staticTexts["Send again"]
-            guard sendAgain.exists else {
-                throw error
-            }
-            
-            sendAgain.tap()
-            return try scenario.receive(code: type,
-                                        timeout: timeout,
-                                        pollInterval: pollInterval)
-        }
+        try receive(code: type, timeout: timeout, pollInterval: pollInterval, scenario: scenario, app: app)
     }
 
     override func setUpWithError() throws {

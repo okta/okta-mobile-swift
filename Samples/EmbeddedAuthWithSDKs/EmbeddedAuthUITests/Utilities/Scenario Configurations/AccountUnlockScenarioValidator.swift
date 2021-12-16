@@ -13,8 +13,11 @@
 import Foundation
 import OktaSdk
 
-struct PasscodeScenarioValidator: ScenarioValidator {
+struct AccountUnlockScenarioValidator: ScenarioValidator {
     func configure(completion: @escaping (Error?) -> Void) {
-        deactivatePolicies(OktaPolicy.allCases, completion: completion)
+        deactivatePolicies(OktaPolicy.allCases.filter { $0 != .accountUnlock }) { _ in
+            activatePolicy(.accountUnlock,
+                           completion: completion)
+        }
     }
 }

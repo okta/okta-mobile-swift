@@ -25,7 +25,10 @@ class URLSessionAuditTests: XCTestCase {
         let response = HTTPURLResponse(url: url,
                                        statusCode: 200,
                                        httpVersion: "1.1",
-                                       headerFields: [ "foo": "bar" ])
+                                       headerFields: [
+                                        "foo": "bar",
+                                        "x-okta-request-id": "request123"
+                                       ])
         let data = "Response".data(using: .utf8)
         
         audit.add(log: .init(with: request, response: response, body: data))
@@ -43,6 +46,7 @@ class URLSessionAuditTests: XCTestCase {
             Request Body:
             <no request body>
             Status code: 200
+            Request ID: request123
             Response
 
             """)

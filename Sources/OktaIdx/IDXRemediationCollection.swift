@@ -12,10 +12,10 @@
 
 import Foundation
 
-extension IDXClient {
+extension Remediation {
     /// Represents a collection of remediation options.
     @objc(IDXRemediationCollection)
-    public class RemediationCollection: NSObject {
+    public class Collection: NSObject {
         /// Returns a remediation based on its string name.
         @objc public subscript(name: String) -> Remediation? {
             remediations.first { $0.name == name }

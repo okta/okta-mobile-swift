@@ -31,7 +31,7 @@ class IDXResponseCodableTests: XCTestCase {
     }
 
     func testTokenCodable() throws {
-        let object = IDXClient.Token(accessToken: "access",
+        let object = Token(accessToken: "access",
                                      refreshToken: "refresh",
                                      expiresIn: 10,
                                      idToken: "foo",
@@ -39,7 +39,7 @@ class IDXResponseCodableTests: XCTestCase {
                                      tokenType: "type",
                                      configuration: configuration)
         let data = try JSONEncoder().encode(object)
-        let result = try JSONDecoder().decode(IDXClient.Token.self, from: data)
+        let result = try JSONDecoder().decode(Token.self, from: data)
         XCTAssertEqual(object, result)
     }
 
@@ -57,7 +57,7 @@ class IDXResponseCodableTests: XCTestCase {
     
     @available(iOS 11.0, *)
     func testTokenSecureCoding() throws {
-        let object = IDXClient.Token(accessToken: "access",
+        let object = Token(accessToken: "access",
                                      refreshToken: "refresh",
                                      expiresIn: 10,
                                      idToken: "foo",
@@ -66,7 +66,7 @@ class IDXResponseCodableTests: XCTestCase {
                                      configuration: configuration)
         let data = try NSKeyedArchiver.archivedData(withRootObject: object,
                                                     requiringSecureCoding: true)
-        let result = try NSKeyedUnarchiver.unarchiveTopLevelObjectWithData(data) as? IDXClient.Token
+        let result = try NSKeyedUnarchiver.unarchiveTopLevelObjectWithData(data) as? Token
         XCTAssertEqual(object, result)
     }
 }

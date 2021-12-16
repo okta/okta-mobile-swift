@@ -12,7 +12,7 @@
 
 import Foundation
 
-extension IDXClient.MessageCollection: Collection {
+extension IDXClient.Message.Collection: Collection {
     public typealias Index = Int
     public typealias Element = IDXClient.Message
 

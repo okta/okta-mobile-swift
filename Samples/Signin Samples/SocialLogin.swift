@@ -40,7 +40,7 @@ public class SocialLogin {
     private var webAuthSession: ASWebAuthenticationSession?
 
     private var client: IDXClient?
-    private var completion: ((Result<IDXClient.Token, LoginError>) -> Void)?
+    private var completion: ((Result<Token, LoginError>) -> Void)?
     
     public init(configuration: IDXClient.Configuration) {
         self.configuration = configuration
@@ -53,7 +53,7 @@ public class SocialLogin {
     ///   - service: Social service to authenticate against.
     ///   - presentationContext: Optional presentation context to present login from.
     ///   - completion: Completion handler called when authentication completes.
-    public func login(service: IDXClient.Remediation.SocialAuth.Service, from presentationContext: ASWebAuthenticationPresentationContextProviding? = nil, completion: @escaping (Result<IDXClient.Token, LoginError>) -> Void) {
+    public func login(service: Remediation.SocialAuth.Service, from presentationContext: ASWebAuthenticationPresentationContextProviding? = nil, completion: @escaping (Result<Token, LoginError>) -> Void) {
         self.presentationContext = presentationContext
         self.completion = completion
         
@@ -75,9 +75,9 @@ public class SocialLogin {
                 
                 // Find the Social IDP remediation that matches the requested social auth service.
                 guard let remediation = response.remediations.first(where: { remediation in
-                    let socialRemediation = remediation as? IDXClient.Remediation.SocialAuth
+                    let socialRemediation = remediation as? Remediation.SocialAuth
                     return socialRemediation?.service == service
-                }) as? IDXClient.Remediation.SocialAuth
+                }) as? Remediation.SocialAuth
                 else {
                     self.finish(with: .cannotProceed)
                     return
@@ -91,7 +91,7 @@ public class SocialLogin {
         }
     }
     
-    func login(with remediation: IDXClient.Remediation.SocialAuth) {
+    func login(with remediation: Remediation.SocialAuth) {
         // Retrieve the Redirect URL scheme from our configuration, to
          // supply it to the ASWebAuthenticationSession instance.
         guard let client = client,
@@ -166,7 +166,7 @@ extension SocialLogin {
         completion = nil
     }
     
-    func finish(with token: IDXClient.Token) {
+    func finish(with token: Token) {
         completion?(.success(token))
         completion = nil
     }

@@ -13,7 +13,7 @@
 import Foundation
 
 extension IDXClient.APIVersion1.IntrospectRequest: IDXClientAPIRequest, ReceivesIDXResponse {
-    typealias ResponseType = IDXClient.APIVersion1.Response
+    typealias ResponseType = IDXClient.APIVersion1.IonResponse
     
     init(interactionHandle: String) {
         requestBody = RequestBody(interactionHandle: interactionHandle)

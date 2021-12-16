@@ -12,10 +12,10 @@
 
 import Foundation
 
-extension IDXClient {
+extension Authenticator {
     /// Container that represents a collection of authenticators, providing conveniences for quickly accessing relevant objects.
     @objc(IDXAuthenticatorCollection)
-    public class AuthenticatorCollection: NSObject {
+    public class Collection: NSObject {
         /// The current authenticator, if one is actively being enrolled or authenticated.
         @objc public var current: Authenticator? {
             allAuthenticators.first { $0.state == .authenticating || $0.state == .enrolling }
@@ -31,12 +31,12 @@ extension IDXClient {
             allAuthenticators.first(where: { $0.type == type })
         }
         
-        var allAuthenticators: [IDXClient.Authenticator] {
+        var allAuthenticators: [Authenticator] {
             authenticators
         }
         
-        let authenticators: [IDXClient.Authenticator]
-        init(authenticators: [IDXClient.Authenticator]?) {
+        let authenticators: [Authenticator]
+        init(authenticators: [Authenticator]?) {
             self.authenticators = authenticators ?? []
 
             super.init()
@@ -62,13 +62,13 @@ extension IDXClient {
         }
     }
     
-    class WeakAuthenticatorCollection: AuthenticatorCollection {
-        override var allAuthenticators: [IDXClient.Authenticator] {
+    class WeakCollection: Collection {
+        override var allAuthenticators: [Authenticator] {
             weakAuthenticators.compactMap { $0.object }
         }
         
-        let weakAuthenticators: [Weak<IDXClient.Authenticator>]
-        override init(authenticators: [IDXClient.Authenticator]?) {
+        let weakAuthenticators: [Weak<Authenticator>]
+        override init(authenticators: [Authenticator]?) {
             weakAuthenticators = authenticators?.map({ (authenticator) in
                 Weak(object: authenticator)
             }) ?? []

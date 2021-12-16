@@ -16,7 +16,7 @@ protocol ContainsNestedMessages {
     func nestedMessages() -> [IDXClient.Message]
 }
 
-extension IDXClient.RemediationCollection: ContainsNestedMessages {
+extension Remediation.Collection: ContainsNestedMessages {
     func nestedMessages() -> [IDXClient.Message] {
         remediations.reduce(into: [IDXClient.Message]()) { (result, remediation) in
             result.append(contentsOf: remediation.nestedMessages())
@@ -24,13 +24,13 @@ extension IDXClient.RemediationCollection: ContainsNestedMessages {
     }
 }
 
-extension IDXClient.Remediation: ContainsNestedMessages {
+extension Remediation: ContainsNestedMessages {
     func nestedMessages() -> [IDXClient.Message] {
         form.nestedMessages()
     }
 }
 
-extension IDXClient.Remediation.Form: ContainsNestedMessages {
+extension Remediation.Form: ContainsNestedMessages {
     func nestedMessages() -> [IDXClient.Message] {
         allFields.reduce(into: [IDXClient.Message]()) { (result, field) in
             result.append(contentsOf: field.nestedMessages())
@@ -38,7 +38,7 @@ extension IDXClient.Remediation.Form: ContainsNestedMessages {
     }
 }
 
-extension IDXClient.Remediation.Form.Field: ContainsNestedMessages {
+extension Remediation.Form.Field: ContainsNestedMessages {
     func nestedMessages() -> [IDXClient.Message] {
         var result = messages.allMessages
         if let form = form {
