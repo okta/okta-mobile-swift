@@ -25,11 +25,8 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-//        flow = DeviceAuthorizationFlow(issuer: URL(string: "https://{domain}")!,
-//                                       clientId: "{client_id}",
-//                                       scopes: "openid profile email offline_access")
-        flow = DeviceAuthorizationFlow(issuer: URL(string: "https://idx-devex.trexcloud.com")!,
-                                       clientId: "0oa3kwpkybLg4AQHH0g7",
+        flow = DeviceAuthorizationFlow(issuer: URL(string: "https://{domain}")!,
+                                       clientId: "{client_id}",
                                        scopes: "openid profile email offline_access")
 
         codeStackView.isHidden = true
