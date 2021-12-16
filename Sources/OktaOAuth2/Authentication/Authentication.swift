@@ -13,9 +13,7 @@
 import Foundation
 import AuthFoundation
 
-public protocol AuthenticationConfiguration {
-    var baseURL: URL { get }
-}
+public protocol AuthenticationConfiguration {}
 
 /// A common delegate protocol that all authentication flows should support.
 public protocol AuthenticationDelegate: AnyObject {

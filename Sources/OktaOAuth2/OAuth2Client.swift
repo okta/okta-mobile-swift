@@ -75,6 +75,17 @@ public class OAuth2Client: APIClient {
     ///   - baseURL: Base URL representing the Okta domain to use.
     ///   - session: Optional URLSession to use for network requests.
     public init(baseURL: URL, session: URLSessionProtocol = URLSession.shared) {
+        var baseURL = baseURL
+        
+        // Ensure the base URL includes the path to the OAuth2 API
+        if !baseURL.path.contains("/oauth2/") {
+            var components = URLComponents(url: baseURL, resolvingAgainstBaseURL: true)
+            components?.path = "/oauth2/default/"
+            if let url = components?.url {
+                baseURL = url
+            }
+        }
+        
         self.baseURL = baseURL
         self.session = session
     }
@@ -137,7 +148,11 @@ extension OAuth2Client {
 #endif
 
 extension OAuth2Client {
-    func exchange(token request: TokenRequest, completion: @escaping (Result<APIResponse<Token>, APIClientError>) -> Void) {
+    func exchange(token request: TokenRequest & APIRequest, completion: @escaping (Result<APIResponse<Token>, APIClientError>) -> Void) {
+        send(request, completion: completion)
+    }
+    
+    func device(authorize request: DeviceAuthorizationFlow.AuthorizeRequest, completion: @escaping (Result<APIResponse<DeviceAuthorizationFlow.Context>, APIClientError>) -> Void) {
         send(request, completion: completion)
     }
     

@@ -57,8 +57,7 @@ final class AuthorizationCodeFlowSuccessTests: XCTestCase {
     var flow: AuthorizationCodeFlow!
 
     override func setUpWithError() throws {
-        configuration = AuthorizationCodeFlow.Configuration(issuer: issuer,
-                                                            clientId: "clientId",
+        configuration = AuthorizationCodeFlow.Configuration(clientId: "clientId",
                                                             clientSecret: nil,
                                                             state: nil,
                                                             scopes: "openid profile",
@@ -68,15 +67,20 @@ final class AuthorizationCodeFlowSuccessTests: XCTestCase {
                                                             additionalParameters: ["additional": "param"])
         client = OAuth2Client(baseURL: issuer, session: urlSession)
         
-        urlSession.expect("https://example.com/.well-known/openid-configuration",
+        urlSession.expect("https://example.com/oauth2/default/.well-known/openid-configuration",
                           data: try data(for: "openid-configuration", in: "MockResponses"),
                           contentType: "application/json")
-        urlSession.expect("https://example.com/oauth2/v1/token",
+        urlSession.expect("https://example.com/oauth2/default/v1/token",
                           data: try data(for: "token", in: "MockResponses"),
                           contentType: "application/json")
         flow = AuthorizationCodeFlow(configuration, client: client)
     }
     
+    func testConfiguration() throws {
+        XCTAssertEqual(client.baseURL.absoluteString,
+                       "https://example.com/oauth2/default/")
+    }
+
     func testWithDelegate() throws {
         let delegate = AuthorizationCodeFlowDelegateRecorder()
         flow.add(delegate: delegate)

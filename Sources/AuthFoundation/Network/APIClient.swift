@@ -25,7 +25,7 @@ public protocol APIClient {
     func send<T: Decodable>(_ request: URLRequest, completion: @escaping (Result<APIResponse<T>, APIClientError>) -> Void)
 
     #if swift(>=5.5.1) && !os(Linux)
-    @available(iOS 15.0, macOS 12.0, *)
+    @available(iOS 15.0, tvOS 15.0, macOS 12.0, *)
     func send<T: Decodable>(_ request: URLRequest) async throws -> APIResponse<T>
     #endif
 }
