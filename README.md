@@ -25,11 +25,12 @@ To see this library working in a sample, check out our [iOS Sample Application](
 
 This library uses semantic versioning and follows Okta's [Library Version Policy][okta-library-versioning].
 
-✔️ The current stable major version series is: 1.x
+✔️ The current stable major version series is: 2.x
 
 | Version | Status                             |
 | ------- | ---------------------------------- |
-| 1.0.0   | ✔️ Stable                           |
+| 1.0.0   |                                    |
+| 2.0.0   | ✔️ Stable                           |
 
 The latest release can always be found on the [releases page][github-releases].
 
