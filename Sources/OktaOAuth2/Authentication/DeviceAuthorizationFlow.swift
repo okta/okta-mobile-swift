@@ -167,8 +167,10 @@ public class DeviceAuthorizationFlow: AuthenticationFlow {
             switch result {
             case .failure(let error):
                 self.delegateCollection.invoke { $0.authentication(flow: self, received: .network(error: error)) }
+                completion?(.failure(error))
             case .success(let response):
                 self.context = response.result
+                self.delegateCollection.invoke { $0.authentication(flow: self, received: response.result) }
                 completion?(.success(response.result))
             }
         }
@@ -181,29 +183,48 @@ public class DeviceAuthorizationFlow: AuthenticationFlow {
     ///   - context: Device authorization context object.
     ///   - completion: Optional completion block for receiving the token, or error result. If `nil`, you may rely upon the ``DeviceAuthorizationFlowDelegate/authentication(flow:received:)`` method instead.
     public func resume(with context: Context, completion: ((Result<Token,APIClientError>) -> Void)? = nil) {
-        timer?.invalidate()
-        timer = Timer.scheduledTimer(timeInterval: context.interval,
-                                     target: self,
-                                     selector: #selector(timerFired(_:)),
-                                     userInfo: TimerInfo(context: context, completion: completion),
-                                     repeats: true)
+        timer?.cancel()
+        
+        let timerSource = DispatchSource.makeTimerSource()
+        timerSource.schedule(deadline: .now() + context.interval, repeating: context.interval)
+        timerSource.setEventHandler {
+            self.getToken(using: context) { result in
+                switch result {
+                case .failure(let error):
+                    completion?(.failure(error))
+                    
+                case .success(let token):
+                    if let token = token {
+                        completion?(.success(token))
+                    } else {
+                        // Return early, so we don't reset the timer
+                        return
+                    }
+                }
+                
+                self.reset()
+                self.isAuthenticating = false
+            }
+        }
+        timer = timerSource
+        timerSource.resume()
     }
     
     /// Cancels the current authorization session.
     public func cancel() {
         reset()
-        isAuthenticating = false
     }
     
     /// Resets the flow for later reuse.
     public func reset() {
-        context = nil
-        timer?.invalidate()
+        timer?.cancel()
         timer = nil
+        context = nil
+        isAuthenticating = false
     }
 
     // MARK: Private properties / methods
-    var timer: Timer?
+    var timer: DispatchSourceTimer?
     public let delegateCollection = DelegateCollection<DeviceAuthorizationFlowDelegate>()
 }
 
@@ -250,13 +271,9 @@ extension DeviceAuthorizationFlow {
         let completion: ((Result<Token,APIClientError>) -> Void)?
     }
     
-    @objc func timerFired(_ timer: Timer) {
-        guard let userInfo = timer.userInfo as? TimerInfo else {
-            return
-        }
-
+    func getToken(using context: Context, completion: @escaping(Result<Token?,APIClientError>) -> Void) {
         let request = TokenRequest(clientId: configuration.clientId,
-                                   deviceCode: userInfo.context.deviceCode)
+                                   deviceCode: context.deviceCode)
         client.exchange(token: request) { result in
             switch result {
             case .failure(let error):
@@ -264,18 +281,15 @@ extension DeviceAuthorizationFlow {
                    let oauthError = serverError as? OAuth2ServerError,
                    oauthError.code == "authorization_pending"
                 {
-                    // Do nothing, since this is an expected error
+                    completion(.success(nil))
                 } else {
                     self.delegateCollection.invoke { $0.authentication(flow: self, received: .network(error: error)) }
-                    userInfo.completion?(.failure(error))
+                    completion(.failure(error))
                 }
             case .success(let response):
                 self.delegateCollection.invoke { $0.authentication(flow: self, received: response.result) }
-                userInfo.completion?(.success(response.result))
+                completion(.success(response.result))
             }
-            
-            self.reset()
-            self.isAuthenticating = false
         }
     }
 }

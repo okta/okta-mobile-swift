@@ -144,7 +144,7 @@ final class DeviceAuthorizationFlowSuccessTests: XCTestCase {
             }
             wait.fulfill()
         }
-        waitForExpectations(timeout: 1) { error in
+        waitForExpectations(timeout: 2) { error in
             XCTAssertNil(error)
         }
 
@@ -155,7 +155,7 @@ final class DeviceAuthorizationFlowSuccessTests: XCTestCase {
 
     #if swift(>=5.5.1) && !os(Linux)
     @available(iOS 15.0, tvOS 15.0, macOS 12.0, *)
-    func SKIPPED_testWithAsync() async throws {
+    func testWithAsync() async throws {
         // Ensure the initial state
         XCTAssertNil(flow.context)
         XCTAssertFalse(flow.isAuthenticating)
