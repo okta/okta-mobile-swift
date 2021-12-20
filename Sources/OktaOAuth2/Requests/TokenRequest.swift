@@ -11,37 +11,5 @@
 //
 
 import Foundation
-import AuthFoundation
 
-struct TokenRequest {
-    let clientId: String
-    let clientSecret: String?
-    let redirectUri: String
-    let grantType: GrantType
-    let grantValue: String
-    let pkce: PKCE?
-}
-
-extension TokenRequest: APIRequest, APIRequestBody {
-    var httpMethod: APIHTTPMethod { .post }
-    var path: String { "/oauth2/v1/token" }
-    var contentType: APIContentType? { .formEncoded }
-    var bodyParameters: [String : Any]? {
-        var result = [
-            "client_id": clientId,
-            "redirect_uri": redirectUri,
-            "grant_type": grantType.rawValue,
-            grantType.responseKey: grantValue
-        ]
-        
-        if let clientSecret = clientSecret {
-            result["client_secret"] = clientSecret
-        }
-        
-        if let pkce = pkce {
-            result["code_verifier"] = pkce.codeVerifier
-        }
-        
-        return result
-    }
-}
+protocol TokenRequest {}

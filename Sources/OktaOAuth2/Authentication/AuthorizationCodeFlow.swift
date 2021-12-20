@@ -46,7 +46,7 @@ public protocol AuthorizationCodeFlowDelegate: AuthenticationDelegate {
 ///
 /// The Authorization Code Flow permits a user to authenticate using a web browser redirect model, where an initial authentication URL is loaded in a browser, they sign in through some external service, after which their browser is redirected to a URL whose scheme matches the one defined in the client configuration. An authorization code is included in that URL's query string parameters. This code can then be exchanged against the authorization server for access tokens.
 ///
-/// You can create an instance of  ``Configuration-swift.struct`` to define your client's settings, and supply that to the initializer, along with a reference to your ``OAuth2Client`` for performing key operations and requests. Alternatively, you can use any of the convenience initializers to simplify the process.
+/// You can create an instance of  ``AuthorizationCodeFlow/Configuration-swift.struct`` to define your client's settings, and supply that to the initializer, along with a reference to your ``OAuth2Client`` for performing key operations and requests. Alternatively, you can use any of the convenience initializers to simplify the process.
 ///
 /// As an example, we'll use Swift Concurrency, since these asynchronous methods can be used inline easily, though ``AuthorizationCodeFlow`` can just as easily be used with completion blocks or through the use of the ``AuthorizationCodeFlowDelegate``.
 ///
@@ -69,9 +69,6 @@ public class AuthorizationCodeFlow: AuthenticationFlow {
     /// Configuration settings that define the OAuth2 client to be authenticated against.
     
     public struct Configuration: AuthenticationConfiguration {
-        /// The client's issuer URL.
-        public let issuer: URL
-
         /// The client's ID.
         public let clientId: String
         
@@ -93,12 +90,8 @@ public class AuthorizationCodeFlow: AuthenticationFlow {
         /// Any additional query string parameters you would like to supply to the authorization server.
         public let additionalParameters: [String:String]?
         
-        /// The calculated base URL to use for requests.
-        public let baseURL: URL
-        
         /// Convenience initializer for constructing an authorization code flow configuration using the supplied values.
         /// - Parameters:
-        ///   - issuer: The client's issuer URL
         ///   - clientId: The client's ID
         ///   - clientSecret: The client's secret, if applicable
         ///   - state: The state to use in the authorization URL, or `nil` to accept an auto-generated value.
@@ -107,8 +100,7 @@ public class AuthorizationCodeFlow: AuthenticationFlow {
         ///   - redirectUri: The redirect URI for the client
         ///   - logoutRedirectUri: The logout redirect URI, if applicable
         ///   - additionalParameters: Additional query string parameters to provide, or `nil` for no custom parameters.
-        public init(issuer: URL,
-                    clientId: String,
+        public init(clientId: String,
                     clientSecret: String? = nil,
                     state: String? = nil,
                     scopes: String,
@@ -117,7 +109,6 @@ public class AuthorizationCodeFlow: AuthenticationFlow {
                     logoutRedirectUri: URL? = nil,
                     additionalParameters: [String:String]? = nil)
         {
-            self.issuer = issuer
             self.clientId = clientId
             self.clientSecret = clientSecret
             self.scopes = scopes
@@ -125,10 +116,6 @@ public class AuthorizationCodeFlow: AuthenticationFlow {
             self.redirectUri = redirectUri
             self.logoutRedirectUri = logoutRedirectUri
             self.additionalParameters = additionalParameters
-            
-            var urlComponents = URLComponents(url: issuer, resolvingAgainstBaseURL: false)
-            urlComponents?.path = "/oauth2/v1/"
-            baseURL = urlComponents?.url ?? issuer
         }
     }
     
@@ -213,8 +200,7 @@ public class AuthorizationCodeFlow: AuthenticationFlow {
                             responseType: ResponseType = .code,
                             redirectUri: URL)
     {
-        self.init(Configuration(issuer: issuer,
-                                clientId: clientId,
+        self.init(Configuration(clientId: clientId,
                                 clientSecret: nil,
                                 scopes: scopes,
                                 responseType: responseType,
@@ -247,6 +233,7 @@ public class AuthorizationCodeFlow: AuthenticationFlow {
             switch result {
             case .failure(let error):
                 self.delegateCollection.invoke { $0.authentication(flow: self, received: .network(error: error)) }
+                completion?(.failure(error))
             case .success(let configuration):
                 self.openIdConfiguration = configuration
                 

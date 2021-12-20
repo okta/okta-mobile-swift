@@ -24,6 +24,6 @@ public struct OAuth2ServerError: Decodable, Error {
 
     enum CodingKeys: String, CodingKey, CaseIterable {
         case code = "error"
-        case description = "error_description"
+        case description = "errorDescription"
     }
 }

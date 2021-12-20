@@ -220,8 +220,8 @@ public class WebAuthentication {
                             logoutRedirectUri: URL? = nil,
                             additionalParameters: [String:String]? = nil)
     {
-        self.init(configuration: .init(issuer: issuer,
-                                       clientId: clientId,
+        self.init(issuer: issuer,
+                  configuration: .init(clientId: clientId,
                                        clientSecret: clientSecret,
                                        scopes: scopes,
                                        responseType: responseType,
@@ -236,9 +236,12 @@ public class WebAuthentication {
     /// - Parameters:
     ///   - configuration: Authorization code flow configuration describing the OAuth2 client.
     ///   - session: The URLSession instance to use; defaults to `.shared`.
-    public convenience init(configuration: AuthorizationCodeFlow.Configuration, session: URLSession = URLSession.shared) {
+    public convenience init(issuer: URL,
+                            configuration: AuthorizationCodeFlow.Configuration,
+                            session: URLSession = URLSession.shared)
+    {
         self.init(flow: .init(configuration,
-                              client: .init(baseURL: configuration.issuer,
+                              client: .init(baseURL: issuer,
                                             session: session)))
     }
     

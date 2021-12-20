@@ -79,6 +79,7 @@ extension APIRequest {
     public var httpMethod: APIHTTPMethod { .get }
     public var query: [String:APIRequestArgument?]? { nil }
     public var headers: [String:APIRequestArgument?]? { nil }
+    public var acceptsType: APIContentType? { nil }
     public var contentType: APIContentType? { nil }
     public var cachePolicy: URLRequest.CachePolicy { .reloadIgnoringLocalAndRemoteCacheData }
     public var timeoutInterval: TimeInterval { 60 }
@@ -112,6 +113,10 @@ extension APIRequest {
         
         if let contentType = contentType {
             request.setValue(contentType.rawValue, forHTTPHeaderField: "Content-Type")
+        }
+        
+        if let acceptsType = acceptsType {
+            request.setValue(acceptsType.rawValue, forHTTPHeaderField: "Accepts")
         }
         
         request.setValue(client.userAgent, forHTTPHeaderField: "User-Agent")
@@ -160,9 +165,5 @@ extension APIContentType {
             return nil
         }
     }
-
-//    func decodedData<T: Decodable>(from data: Data) throws -> T {
-//
-//    }
 }
 

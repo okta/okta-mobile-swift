@@ -23,14 +23,14 @@ final class OAuth2ClientTests: XCTestCase {
     
     func testExchange() throws {
         let pkce = PKCE()
-        let request = TokenRequest(clientId: "client_id",
-                                   clientSecret: nil,
-                                   redirectUri: redirectUri.absoluteString,
-                                   grantType: .authorizationCode,
-                                   grantValue: "abc123",
-                                   pkce: pkce)
+        let request = AuthorizationCodeFlow.TokenRequest(clientId: "client_id",
+                                                         clientSecret: nil,
+                                                         redirectUri: redirectUri.absoluteString,
+                                                         grantType: .authorizationCode,
+                                                         grantValue: "abc123",
+                                                         pkce: pkce)
         
-        urlSession.expect("https://example.com/oauth2/v1/token",
+        urlSession.expect("https://example.com/oauth2/default/v1/token",
                           data: try data(for: "token", in: "MockResponses"),
                           contentType: "application/json")
         
@@ -59,7 +59,7 @@ final class OAuth2ClientTests: XCTestCase {
     }
 
     func testOpenIDConfiguration() throws {
-        urlSession.expect("https://example.com/.well-known/openid-configuration",
+        urlSession.expect("https://example.com/oauth2/default/.well-known/openid-configuration",
                           data: try data(for: "openid-configuration", in: "MockResponses"),
                           contentType: "application/json")
         
