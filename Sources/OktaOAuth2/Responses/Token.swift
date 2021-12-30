@@ -31,4 +31,7 @@ public struct Token: Codable {
     
     /// The ID token, if requested.
     public let idToken: String?
+    
+    /// The Device secret, if requested.
+    public let deviceSecret: String?
 }

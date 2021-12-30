@@ -35,7 +35,7 @@ public protocol APIClientDelegate: AnyObject {
     func api<T>(client: APIClient, request: URLRequest, received response: APIResponse<T>)
 }
 
-public enum APIClientError: Error {
+public enum APIClientError: LocalizedError {
     case invalidUrl
     case missingResponse
     case invalidResponse
@@ -45,6 +45,15 @@ public enum APIClientError: Error {
     case serverError(_ error: Error)
     case statusCode(_ statusCode: Int)
     case unknown
+    
+    public var errorDescription: String? {
+        switch self {
+        case .serverError(let underlyingError):
+            return underlyingError.localizedDescription
+        default:
+            return localizedDescription
+        }
+    }
 }
 
 extension APIClientDelegate {
@@ -67,7 +76,7 @@ extension APIClient {
 
     public func send<T: Decodable>(_ request: URLRequest, completion: @escaping (Result<APIResponse<T>, APIClientError>) -> Void) where T : Decodable {
         var urlRequest = request
-        
+
 //        delegate?.api(client: self, willSendRequest: &urlRequest)
         session.dataTaskWithRequest(urlRequest) { data, response, error in
             guard let data = data,

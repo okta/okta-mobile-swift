@@ -7,6 +7,26 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		922CDFA0277C7B3000D65DCD /* AuthFoundation in Frameworks */ = {isa = PBXBuildFile; productRef = 922CDF9F277C7B3000D65DCD /* AuthFoundation */; };
+		922CDFA2277C7B3000D65DCD /* OktaOAuth2 in Frameworks */ = {isa = PBXBuildFile; productRef = 922CDFA1277C7B3000D65DCD /* OktaOAuth2 */; };
+		922CDFA4277C7B3000D65DCD /* WebAuthenticationUI in Frameworks */ = {isa = PBXBuildFile; productRef = 922CDFA3277C7B3000D65DCD /* WebAuthenticationUI */; };
+		92C83415277B72F0008B9642 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92C83414277B72F0008B9642 /* AppDelegate.swift */; };
+		92C83417277B72F0008B9642 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92C83416277B72F0008B9642 /* SceneDelegate.swift */; };
+		92C83419277B72F0008B9642 /* SingleSignOnViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92C83418277B72F0008B9642 /* SingleSignOnViewController.swift */; };
+		92C8341C277B72F0008B9642 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 92C8341A277B72F0008B9642 /* Main.storyboard */; };
+		92C8341E277B72F2008B9642 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 92C8341D277B72F2008B9642 /* Assets.xcassets */; };
+		92C83421277B72F2008B9642 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 92C8341F277B72F2008B9642 /* LaunchScreen.storyboard */; };
+		92C8342C277B72F2008B9642 /* SingleSignOnTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92C8342B277B72F2008B9642 /* SingleSignOnTests.swift */; };
+		92C83436277B72F3008B9642 /* SingleSignOnUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92C83435277B72F3008B9642 /* SingleSignOnUITests.swift */; };
+		92C83438277B72F3008B9642 /* SingleSignOnUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92C83437277B72F3008B9642 /* SingleSignOnUITestsLaunchTests.swift */; };
+		92C83442277B7630008B9642 /* Okta.plist in Resources */ = {isa = PBXBuildFile; fileRef = 9653DCFB274FF407003C6E20 /* Okta.plist */; };
+		92C8344A277C70B6008B9642 /* Keychain.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92C83449277C70B6008B9642 /* Keychain.swift */; };
+		92C8344B277C70B6008B9642 /* Keychain.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92C83449277C70B6008B9642 /* Keychain.swift */; };
+		92C8344C277C762C008B9642 /* UserManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 962B2477275800D6007ABC1A /* UserManager.swift */; };
+		92C8344D277C7633008B9642 /* ProfileTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 962B24732757FBF0007ABC1A /* ProfileTableViewController.swift */; };
+		92C8344E277C7633008B9642 /* TokenDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 962B24752757FEAC007ABC1A /* TokenDetailViewController.swift */; };
+		92C83450277C7668008B9642 /* Profile.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 92C8344F277C7668008B9642 /* Profile.storyboard */; };
+		92C83451277C7668008B9642 /* Profile.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 92C8344F277C7668008B9642 /* Profile.storyboard */; };
 		962B24742757FBF0007ABC1A /* ProfileTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 962B24732757FBF0007ABC1A /* ProfileTableViewController.swift */; };
 		962B24762757FEAC007ABC1A /* TokenDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 962B24752757FEAC007ABC1A /* TokenDetailViewController.swift */; };
 		962B2478275800D6007ABC1A /* UserManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 962B2477275800D6007ABC1A /* UserManager.swift */; };
@@ -26,6 +46,20 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		92C83428277B72F2008B9642 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 9653DCB2274C3008003C6E20 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 92C83411277B72F0008B9642;
+			remoteInfo = SingleSignOn;
+		};
+		92C83432277B72F3008B9642 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 9653DCB2274C3008003C6E20 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 92C83411277B72F0008B9642;
+			remoteInfo = SingleSignOn;
+		};
 		9653DCD1274C3009003C6E20 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 9653DCB2274C3008003C6E20 /* Project object */;
@@ -43,6 +77,23 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		922CDFA6277CB26300D65DCD /* WebSignIn.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = WebSignIn.entitlements; sourceTree = "<group>"; };
+		922CDFA7277CB28200D65DCD /* SingleSignOn.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = SingleSignOn.entitlements; sourceTree = "<group>"; };
+		92C83412277B72F0008B9642 /* SingleSignOn.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SingleSignOn.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		92C83414277B72F0008B9642 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		92C83416277B72F0008B9642 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
+		92C83418277B72F0008B9642 /* SingleSignOnViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SingleSignOnViewController.swift; sourceTree = "<group>"; };
+		92C8341B277B72F0008B9642 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		92C8341D277B72F2008B9642 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		92C83420277B72F2008B9642 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		92C83422277B72F2008B9642 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		92C83427277B72F2008B9642 /* SingleSignOnTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SingleSignOnTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		92C8342B277B72F2008B9642 /* SingleSignOnTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SingleSignOnTests.swift; sourceTree = "<group>"; };
+		92C83431277B72F2008B9642 /* SingleSignOnUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SingleSignOnUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		92C83435277B72F3008B9642 /* SingleSignOnUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SingleSignOnUITests.swift; sourceTree = "<group>"; };
+		92C83437277B72F3008B9642 /* SingleSignOnUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SingleSignOnUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		92C83449277C70B6008B9642 /* Keychain.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Keychain.swift; sourceTree = "<group>"; };
+		92C8344F277C7668008B9642 /* Profile.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Profile.storyboard; sourceTree = "<group>"; };
 		962B24732757FBF0007ABC1A /* ProfileTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileTableViewController.swift; sourceTree = "<group>"; };
 		962B24752757FEAC007ABC1A /* TokenDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TokenDetailViewController.swift; sourceTree = "<group>"; };
 		962B2477275800D6007ABC1A /* UserManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserManager.swift; sourceTree = "<group>"; };
@@ -65,6 +116,30 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		92C8340F277B72F0008B9642 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				922CDFA4277C7B3000D65DCD /* WebAuthenticationUI in Frameworks */,
+				922CDFA2277C7B3000D65DCD /* OktaOAuth2 in Frameworks */,
+				922CDFA0277C7B3000D65DCD /* AuthFoundation in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		92C83424277B72F2008B9642 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		92C8342E277B72F2008B9642 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		9653DCB7274C3008003C6E20 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -92,6 +167,39 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		92C83413277B72F0008B9642 /* SingleSignOn */ = {
+			isa = PBXGroup;
+			children = (
+				922CDFA7277CB28200D65DCD /* SingleSignOn.entitlements */,
+				92C83449277C70B6008B9642 /* Keychain.swift */,
+				92C83414277B72F0008B9642 /* AppDelegate.swift */,
+				92C83416277B72F0008B9642 /* SceneDelegate.swift */,
+				92C83418277B72F0008B9642 /* SingleSignOnViewController.swift */,
+				92C8341A277B72F0008B9642 /* Main.storyboard */,
+				92C8341D277B72F2008B9642 /* Assets.xcassets */,
+				92C8341F277B72F2008B9642 /* LaunchScreen.storyboard */,
+				92C83422277B72F2008B9642 /* Info.plist */,
+			);
+			path = SingleSignOn;
+			sourceTree = "<group>";
+		};
+		92C8342A277B72F2008B9642 /* SingleSignOnTests */ = {
+			isa = PBXGroup;
+			children = (
+				92C8342B277B72F2008B9642 /* SingleSignOnTests.swift */,
+			);
+			path = SingleSignOnTests;
+			sourceTree = "<group>";
+		};
+		92C83434277B72F3008B9642 /* SingleSignOnUITests */ = {
+			isa = PBXGroup;
+			children = (
+				92C83435277B72F3008B9642 /* SingleSignOnUITests.swift */,
+				92C83437277B72F3008B9642 /* SingleSignOnUITestsLaunchTests.swift */,
+			);
+			path = SingleSignOnUITests;
+			sourceTree = "<group>";
+		};
 		9653DCB1274C3008003C6E20 = {
 			isa = PBXGroup;
 			children = (
@@ -99,6 +207,9 @@
 				9653DCBC274C3008003C6E20 /* WebSignIn */,
 				9653DCD3274C3009003C6E20 /* WebSignInTests */,
 				9653DCDD274C300A003C6E20 /* WebSignInUITests */,
+				92C83413277B72F0008B9642 /* SingleSignOn */,
+				92C8342A277B72F2008B9642 /* SingleSignOnTests */,
+				92C83434277B72F3008B9642 /* SingleSignOnUITests */,
 				9653DCBB274C3008003C6E20 /* Products */,
 				9653DCF0274C355E003C6E20 /* Frameworks */,
 			);
@@ -110,6 +221,9 @@
 				9653DCBA274C3008003C6E20 /* WebSignIn.app */,
 				9653DCD0274C3009003C6E20 /* WebSignInTests.xctest */,
 				9653DCDA274C3009003C6E20 /* WebSignInUITests.xctest */,
+				92C83412277B72F0008B9642 /* SingleSignOn.app */,
+				92C83427277B72F2008B9642 /* SingleSignOnTests.xctest */,
+				92C83431277B72F2008B9642 /* SingleSignOnUITests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -117,10 +231,12 @@
 		9653DCBC274C3008003C6E20 /* WebSignIn */ = {
 			isa = PBXGroup;
 			children = (
+				922CDFA6277CB26300D65DCD /* WebSignIn.entitlements */,
 				9653DCBD274C3008003C6E20 /* AppDelegate.swift */,
 				9653DCBF274C3008003C6E20 /* SceneDelegate.swift */,
 				9653DCC1274C3008003C6E20 /* SignInViewController.swift */,
 				9653DCC3274C3008003C6E20 /* Main.storyboard */,
+				92C8344F277C7668008B9642 /* Profile.storyboard */,
 				9653DCC6274C3009003C6E20 /* Assets.xcassets */,
 				9653DCC8274C3009003C6E20 /* LaunchScreen.storyboard */,
 				9653DCCB274C3009003C6E20 /* Info.plist */,
@@ -168,6 +284,64 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		92C83411277B72F0008B9642 /* SingleSignOn */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 92C8343F277B72F3008B9642 /* Build configuration list for PBXNativeTarget "SingleSignOn" */;
+			buildPhases = (
+				92C8340E277B72F0008B9642 /* Sources */,
+				92C8340F277B72F0008B9642 /* Frameworks */,
+				92C83410277B72F0008B9642 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = SingleSignOn;
+			packageProductDependencies = (
+				922CDF9F277C7B3000D65DCD /* AuthFoundation */,
+				922CDFA1277C7B3000D65DCD /* OktaOAuth2 */,
+				922CDFA3277C7B3000D65DCD /* WebAuthenticationUI */,
+			);
+			productName = SingleSignOn;
+			productReference = 92C83412277B72F0008B9642 /* SingleSignOn.app */;
+			productType = "com.apple.product-type.application";
+		};
+		92C83426277B72F2008B9642 /* SingleSignOnTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 92C83440277B72F3008B9642 /* Build configuration list for PBXNativeTarget "SingleSignOnTests" */;
+			buildPhases = (
+				92C83423277B72F2008B9642 /* Sources */,
+				92C83424277B72F2008B9642 /* Frameworks */,
+				92C83425277B72F2008B9642 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				92C83429277B72F2008B9642 /* PBXTargetDependency */,
+			);
+			name = SingleSignOnTests;
+			productName = SingleSignOnTests;
+			productReference = 92C83427277B72F2008B9642 /* SingleSignOnTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		92C83430277B72F2008B9642 /* SingleSignOnUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 92C83441277B72F3008B9642 /* Build configuration list for PBXNativeTarget "SingleSignOnUITests" */;
+			buildPhases = (
+				92C8342D277B72F2008B9642 /* Sources */,
+				92C8342E277B72F2008B9642 /* Frameworks */,
+				92C8342F277B72F2008B9642 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				92C83433277B72F3008B9642 /* PBXTargetDependency */,
+			);
+			name = SingleSignOnUITests;
+			productName = SingleSignOnUITests;
+			productReference = 92C83431277B72F2008B9642 /* SingleSignOnUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
 		9653DCB9274C3008003C6E20 /* WebSignIn */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 9653DCE4274C300A003C6E20 /* Build configuration list for PBXNativeTarget "WebSignIn" */;
@@ -179,6 +353,7 @@
 			buildRules = (
 			);
 			dependencies = (
+				92C83448277B78E7008B9642 /* PBXTargetDependency */,
 			);
 			name = WebSignIn;
 			packageProductDependencies = (
@@ -236,6 +411,17 @@
 				LastSwiftUpdateCheck = 1310;
 				LastUpgradeCheck = 1310;
 				TargetAttributes = {
+					92C83411277B72F0008B9642 = {
+						CreatedOnToolsVersion = 13.1;
+					};
+					92C83426277B72F2008B9642 = {
+						CreatedOnToolsVersion = 13.1;
+						TestTargetID = 92C83411277B72F0008B9642;
+					};
+					92C83430277B72F2008B9642 = {
+						CreatedOnToolsVersion = 13.1;
+						TestTargetID = 92C83411277B72F0008B9642;
+					};
 					9653DCB9274C3008003C6E20 = {
 						CreatedOnToolsVersion = 13.1;
 					};
@@ -265,17 +451,47 @@
 				9653DCB9274C3008003C6E20 /* WebSignIn */,
 				9653DCCF274C3009003C6E20 /* WebSignInTests */,
 				9653DCD9274C3009003C6E20 /* WebSignInUITests */,
+				92C83411277B72F0008B9642 /* SingleSignOn */,
+				92C83426277B72F2008B9642 /* SingleSignOnTests */,
+				92C83430277B72F2008B9642 /* SingleSignOnUITests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		92C83410277B72F0008B9642 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				92C83421277B72F2008B9642 /* LaunchScreen.storyboard in Resources */,
+				92C8341E277B72F2008B9642 /* Assets.xcassets in Resources */,
+				92C83451277C7668008B9642 /* Profile.storyboard in Resources */,
+				92C8341C277B72F0008B9642 /* Main.storyboard in Resources */,
+				92C83442277B7630008B9642 /* Okta.plist in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		92C83425277B72F2008B9642 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		92C8342F277B72F2008B9642 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		9653DCB8274C3008003C6E20 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 				9653DCFC274FF407003C6E20 /* Okta.plist in Resources */,
 				9653DCCA274C3009003C6E20 /* LaunchScreen.storyboard in Resources */,
+				92C83450277C7668008B9642 /* Profile.storyboard in Resources */,
 				9653DCC7274C3009003C6E20 /* Assets.xcassets in Resources */,
 				9653DCC5274C3008003C6E20 /* Main.storyboard in Resources */,
 			);
@@ -298,6 +514,37 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		92C8340E277B72F0008B9642 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				92C8344D277C7633008B9642 /* ProfileTableViewController.swift in Sources */,
+				92C83419277B72F0008B9642 /* SingleSignOnViewController.swift in Sources */,
+				92C83415277B72F0008B9642 /* AppDelegate.swift in Sources */,
+				92C83417277B72F0008B9642 /* SceneDelegate.swift in Sources */,
+				92C8344E277C7633008B9642 /* TokenDetailViewController.swift in Sources */,
+				92C8344C277C762C008B9642 /* UserManager.swift in Sources */,
+				92C8344B277C70B6008B9642 /* Keychain.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		92C83423277B72F2008B9642 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				92C8342C277B72F2008B9642 /* SingleSignOnTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		92C8342D277B72F2008B9642 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				92C83438277B72F3008B9642 /* SingleSignOnUITestsLaunchTests.swift in Sources */,
+				92C83436277B72F3008B9642 /* SingleSignOnUITests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		9653DCB6274C3008003C6E20 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -306,6 +553,7 @@
 				962B24762757FEAC007ABC1A /* TokenDetailViewController.swift in Sources */,
 				9653DCC2274C3008003C6E20 /* SignInViewController.swift in Sources */,
 				9653DCBE274C3008003C6E20 /* AppDelegate.swift in Sources */,
+				92C8344A277C70B6008B9642 /* Keychain.swift in Sources */,
 				962B24742757FBF0007ABC1A /* ProfileTableViewController.swift in Sources */,
 				9653DCC0274C3008003C6E20 /* SceneDelegate.swift in Sources */,
 			);
@@ -331,6 +579,20 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		92C83429277B72F2008B9642 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 92C83411277B72F0008B9642 /* SingleSignOn */;
+			targetProxy = 92C83428277B72F2008B9642 /* PBXContainerItemProxy */;
+		};
+		92C83433277B72F3008B9642 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 92C83411277B72F0008B9642 /* SingleSignOn */;
+			targetProxy = 92C83432277B72F3008B9642 /* PBXContainerItemProxy */;
+		};
+		92C83448277B78E7008B9642 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			productRef = 92C83447277B78E7008B9642 /* WebAuthenticationUI */;
+		};
 		9653DCD2274C3009003C6E20 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 9653DCB9274C3008003C6E20 /* WebSignIn */;
@@ -344,6 +606,22 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
+		92C8341A277B72F0008B9642 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				92C8341B277B72F0008B9642 /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		92C8341F277B72F2008B9642 /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				92C83420277B72F2008B9642 /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
 		9653DCC3274C3008003C6E20 /* Main.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -363,6 +641,156 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
+		92C83439277B72F3008B9642 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = SingleSignOn/SingleSignOn.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = "";
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = SingleSignOn/Info.plist;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
+				INFOPLIST_KEY_UIMainStoryboardFile = Main;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = okta.com.SingleSignOn;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		92C8343A277B72F3008B9642 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = SingleSignOn/SingleSignOn.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = "";
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = SingleSignOn/Info.plist;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
+				INFOPLIST_KEY_UIMainStoryboardFile = Main;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = okta.com.SingleSignOn;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		92C8343B277B72F3008B9642 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = okta.com.SingleSignOnTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/SingleSignOn.app/SingleSignOn";
+			};
+			name = Debug;
+		};
+		92C8343C277B72F3008B9642 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = okta.com.SingleSignOnTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/SingleSignOn.app/SingleSignOn";
+			};
+			name = Release;
+		};
+		92C8343D277B72F3008B9642 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = okta.com.SingleSignOnUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = SingleSignOn;
+			};
+			name = Debug;
+		};
+		92C8343E277B72F3008B9642 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = okta.com.SingleSignOnUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = SingleSignOn;
+			};
+			name = Release;
+		};
 		9653DCE2274C300A003C6E20 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -484,9 +912,10 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = WebSignIn/WebSignIn.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = UW6GDZ98ND;
+				DEVELOPMENT_TEAM = "";
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = WebSignIn/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -499,7 +928,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = "com.okta.mobile-sdk.mikenachbaur.WebSignIn";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.okta.mobile-sdk.WebSignIn";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
@@ -512,9 +941,10 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = WebSignIn/WebSignIn.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = UW6GDZ98ND;
+				DEVELOPMENT_TEAM = "";
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = WebSignIn/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -527,7 +957,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = "com.okta.mobile-sdk.mikenachbaur.WebSignIn";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.okta.mobile-sdk.WebSignIn";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
@@ -630,6 +1060,33 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		92C8343F277B72F3008B9642 /* Build configuration list for PBXNativeTarget "SingleSignOn" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				92C83439277B72F3008B9642 /* Debug */,
+				92C8343A277B72F3008B9642 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		92C83440277B72F3008B9642 /* Build configuration list for PBXNativeTarget "SingleSignOnTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				92C8343B277B72F3008B9642 /* Debug */,
+				92C8343C277B72F3008B9642 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		92C83441277B72F3008B9642 /* Build configuration list for PBXNativeTarget "SingleSignOnUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				92C8343D277B72F3008B9642 /* Debug */,
+				92C8343E277B72F3008B9642 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		9653DCB5274C3008003C6E20 /* Build configuration list for PBXProject "WebSignIn" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
@@ -669,6 +1126,22 @@
 /* End XCConfigurationList section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		922CDF9F277C7B3000D65DCD /* AuthFoundation */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = AuthFoundation;
+		};
+		922CDFA1277C7B3000D65DCD /* OktaOAuth2 */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = OktaOAuth2;
+		};
+		922CDFA3277C7B3000D65DCD /* WebAuthenticationUI */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = WebAuthenticationUI;
+		};
+		92C83447277B78E7008B9642 /* WebAuthenticationUI */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = WebAuthenticationUI;
+		};
 		9653DCF1274C355E003C6E20 /* WebAuthenticationUI */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = WebAuthenticationUI;

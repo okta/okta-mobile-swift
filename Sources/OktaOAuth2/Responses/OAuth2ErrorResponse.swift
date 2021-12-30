@@ -12,9 +12,11 @@
 
 import Foundation
 
-public struct OAuth2ServerError: Decodable, Error {
+public struct OAuth2ServerError: Decodable, LocalizedError {
     public let code: String
     public let description: String
+    
+    public var errorDescription: String? { description }
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)

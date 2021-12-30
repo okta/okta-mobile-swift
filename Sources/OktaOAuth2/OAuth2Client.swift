@@ -118,6 +118,8 @@ public class OAuth2Client: APIClient {
             fetchOpenIdConfiguration { result in
                 switch result {
                 case .success(let response):
+                    self.openIdConfiguration = response.result
+                    
                     completion(.success(response.result))
                 case .failure(let error):
                     completion(.failure(error))
