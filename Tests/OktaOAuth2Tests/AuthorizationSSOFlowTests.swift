@@ -59,7 +59,7 @@ final class AuthorizationSSOFlowTests: XCTestCase {
                                                            scopes: "profile device_sso",
                                                            deviceSecret: "secret",
                                                            idToken: "id_token",
-                                                           audience: "auth://default")
+                                                           audience: .default)
         client = OAuth2Client(baseURL: issuer, session: urlSession)
         
         urlSession.expect("https://example.com/oauth2/default/.well-known/openid-configuration",
