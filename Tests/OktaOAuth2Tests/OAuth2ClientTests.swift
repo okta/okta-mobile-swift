@@ -57,29 +57,4 @@ final class OAuth2ClientTests: XCTestCase {
         XCTAssertEqual(token?.idToken, "theidtoken")
         XCTAssertEqual(token?.scope, "openid profile offline_access")
     }
-
-    func testOpenIDConfiguration() throws {
-        urlSession.expect("https://example.com/oauth2/default/.well-known/openid-configuration",
-                          data: try data(for: "openid-configuration", in: "MockResponses"),
-                          contentType: "application/json")
-        
-        var config: OpenIdConfiguration?
-        let expect = expectation(description: "network request")
-        client.fetchOpenIdConfiguration() { result in
-            guard case let .success(apiResponse) = result else {
-                XCTFail()
-                return
-            }
-            
-            config = apiResponse.result
-            expect.fulfill()
-        }
-        waitForExpectations(timeout: 1.0) { error in
-            XCTAssertNil(error)
-        }
-        
-        XCTAssertNotNil(config)
-        XCTAssertEqual(config?.authorizationEndpoint.absoluteString,
-                       "https://example.okta.com/oauth2/v1/authorize")
-    }
 }

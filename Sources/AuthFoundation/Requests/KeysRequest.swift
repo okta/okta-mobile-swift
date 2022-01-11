@@ -11,11 +11,18 @@
 //
 
 import Foundation
-import AuthFoundation
 
-struct OpenIdConfigurationRequest {}
+extension OAuth2Client {
+    struct KeysRequest {
+        let clientId: String
+    }
+}
 
-extension OpenIdConfigurationRequest: APIRequest {
+extension OAuth2Client.KeysRequest: APIRequest {
     var httpMethod: APIHTTPMethod { .get }
-    var path: String { ".well-known/openid-configuration" }
+    var path: String { "v1/keys" }
+    var acceptsType: APIContentType? { .json }
+    var query: [String : APIRequestArgument?]? {
+        [ "client_id": clientId ]
+    }
 }

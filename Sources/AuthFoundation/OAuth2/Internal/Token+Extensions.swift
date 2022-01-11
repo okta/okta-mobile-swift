@@ -12,7 +12,15 @@
 
 import Foundation
 
-@objc(OktaContainer)
-public class Container: NSObject {
-    public private(set) var credentials: [Credential] = []
+extension Token.RevokeType {
+    var tokenType: Token.Kind {
+        switch self {
+        case .accessToken:
+            return .accessToken
+        case .refreshToken:
+            return .refreshToken
+        case .deviceSecret:
+            return .deviceSecret
+        }
+    }
 }

@@ -11,15 +11,14 @@
 //
 
 import Foundation
-import AuthFoundation
+@_exported import AuthFoundation
 
-extension GrantType {
-    var responseKey: String {
-        switch self {
-        case .authorizationCode:
-            return "code"
-        default:
-            return rawValue
-        }
+extension OAuth2Client {
+    func exchange(token request: TokenRequest & APIRequest, completion: @escaping (Result<APIResponse<Token>, APIClientError>) -> Void) {
+        send(request, completion: completion)
+    }
+    
+    func device(authorize request: DeviceAuthorizationFlow.AuthorizeRequest, completion: @escaping (Result<APIResponse<DeviceAuthorizationFlow.Context>, APIClientError>) -> Void) {
+        send(request, completion: completion)
     }
 }

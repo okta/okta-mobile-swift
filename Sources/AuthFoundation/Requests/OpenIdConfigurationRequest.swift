@@ -1,10 +1,5 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
-<plist version="1.0">
-<dict>
-    <key>FILEHEADER</key>
-		<string>
-// Copyright (c) 2022-Present, Okta, Inc. and/or its affiliates. All rights reserved.
+//
+// Copyright (c) 2021-Present, Okta, Inc. and/or its affiliates. All rights reserved.
 // The Okta software accompanied by this notice is provided pursuant to the Apache License, Version 2.0 (the "License.")
 //
 // You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0.
@@ -13,6 +8,13 @@
 // WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 //
 // See the License for the specific language governing permissions and limitations under the License.
-//</string>
-</dict>
-</plist>
+//
+
+import Foundation
+
+struct OpenIdConfigurationRequest {}
+
+extension OpenIdConfigurationRequest: APIRequest {
+    var httpMethod: APIHTTPMethod { .get }
+    var path: String { ".well-known/openid-configuration" }
+}

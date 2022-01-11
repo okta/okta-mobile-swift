@@ -11,7 +11,6 @@
 //
 
 import Foundation
-import AuthFoundation
 
 public protocol OAuth2Configuration {}
 
@@ -27,6 +26,7 @@ public enum OAuth2Error: Error {
     case flowNotReady(message: String)
     case missingResultCode
     case noResultReturned
+    case missingToken(type: Token.Kind)
     case error(_ error: Error)
 }
 
@@ -62,7 +62,7 @@ public class OAuth2Client: APIClient {
     /// - Parameters:
     ///   - domain: Okta domain to use for the base URL.
     ///   - session: Optional URLSession to use for network requests.
-    convenience public init(domain: String, session: URLSessionProtocol = URLSession.shared) throws {
+    convenience public init(domain: String, session: URLSessionProtocol? = nil) throws {
         guard let url = URL(string: "https://\(domain)") else {
             throw OAuth2Error.invalidUrl
         }
@@ -74,7 +74,7 @@ public class OAuth2Client: APIClient {
     /// - Parameters:
     ///   - baseURL: Base URL representing the Okta domain to use.
     ///   - session: Optional URLSession to use for network requests.
-    public init(baseURL: URL, session: URLSessionProtocol = URLSession.shared) {
+    public init(baseURL: URL, session: URLSessionProtocol? = nil) {
         var baseURL = baseURL
         
         // Ensure the base URL includes the path to the OAuth2 API
@@ -87,7 +87,9 @@ public class OAuth2Client: APIClient {
         }
         
         self.baseURL = baseURL
-        self.session = session
+        self.session = session ?? URLSession.shared
+        
+        NotificationCenter.default.post(name: .oauth2ClientCreated, object: self)
     }
     
     public func error(from data: Data) -> Error? {
@@ -102,6 +104,14 @@ public class OAuth2Client: APIClient {
         return nil
     }
 
+    public func willSend(request: inout URLRequest) {
+        delegateCollection.invoke { $0.api(client: self, willSend: &request) }
+    }
+    
+    public func didSend<T>(request: URLRequest, received response: APIResponse<T>) where T : Decodable {
+        delegateCollection.invoke { $0.api(client: self, didSend: request, received: response) }
+    }
+    
     func received(_ response: APIResponse<Token>) {
         // Do something with the token
         print(response.result)
@@ -111,7 +121,7 @@ public class OAuth2Client: APIClient {
     ///
     /// If this value has recently been retrieved, the cached result is returned.
     /// - Parameter completion: Completion block invoked with the result.
-    public func openIdConfiguration(completion: @escaping (Result<OpenIdConfiguration, APIClientError>) -> Void) {
+    public func openIdConfiguration(completion: @escaping (Result<OpenIdConfiguration, OAuth2Error>) -> Void) {
         if let openIdConfiguration = openIdConfiguration {
             completion(.success(openIdConfiguration))
         } else {
@@ -120,8 +130,75 @@ public class OAuth2Client: APIClient {
                 case .success(let response):
                     completion(.success(response.result))
                 case .failure(let error):
-                    completion(.failure(error))
+                    completion(.failure(.network(error: error)))
                 }
+            }
+        }
+    }
+    
+    public func refresh(_ token: Token, completion: @escaping (Result<Token, OAuth2Error>) -> Void) {
+        guard let refreshSettings = token.configuration.refreshSettings else {
+            completion(.failure(.missingToken(type: .refreshToken)))
+            return
+        }
+        
+        refresh(Token.RefreshRequest(token: token, configuration: refreshSettings)) { result in
+            switch result {
+            case .success(let response):
+                completion(.success(response.result))
+            case .failure(let error):
+                completion(.failure(.network(error: error)))
+            }
+        }
+    }
+    
+    public func revoke(_ token: Token, type: Token.RevokeType, completion: @escaping (Result<Void, OAuth2Error>) -> Void) {
+        let tokenType = type.tokenType
+        guard let tokenString = token.token(of: tokenType) else {
+            completion(.failure(.missingToken(type: tokenType)))
+            return
+        }
+        
+        let request = Token.RevokeRequest(token: tokenString, hint: tokenType)
+        revoke(request) { result in
+            switch result {
+            case .success(_):
+                completion(.success(()))
+            case .failure(let error):
+                completion(.failure(.network(error: error)))
+            }
+        }
+    }
+    
+    public func introspect(token: Token, type: Token.Kind, completion: @escaping (Result<[String:Claim], OAuth2Error>) -> Void) {
+        introspect(Token.IntrospectRequest(token: token, type: type)) { result in
+            switch result {
+            case .success(let response):
+                completion(.success(response.result))
+            case .failure(let error):
+                completion(.failure(.network(error: error)))
+            }
+        }
+    }
+    
+    public func userInfo(token: Token, completion: @escaping (Result<UserInfo, OAuth2Error>) -> Void) {
+        userInfo(UserInfo.Request(token: token)) { result in
+            switch result {
+            case .success(let response):
+                completion(.success(response.result))
+            case .failure(let error):
+                completion(.failure(.network(error: error)))
+            }
+        }
+    }
+    
+    public func keys(clientId: String, completion: @escaping (Result<JWKS, OAuth2Error>) -> Void) {
+        keys(KeysRequest(clientId: clientId)) { result in
+            switch result {
+            case .success(let response):
+                completion(.success(response.result))
+            case .failure(let error):
+                completion(.failure(.network(error: error)))
             }
         }
     }
@@ -147,20 +224,6 @@ extension OAuth2Client {
 }
 #endif
 
-extension OAuth2Client {
-    func exchange(token request: TokenRequest & APIRequest, completion: @escaping (Result<APIResponse<Token>, APIClientError>) -> Void) {
-        send(request, completion: completion)
-    }
-    
-    func device(authorize request: DeviceAuthorizationFlow.AuthorizeRequest, completion: @escaping (Result<APIResponse<DeviceAuthorizationFlow.Context>, APIClientError>) -> Void) {
-        send(request, completion: completion)
-    }
-    
-    func fetchOpenIdConfiguration(completion: @escaping (Result<APIResponse<OpenIdConfiguration>, APIClientError>) -> Void) {
-        send(OpenIdConfigurationRequest(), completion: completion)
-    }
-}
-
 extension OAuth2Client: UsesDelegateCollection {
     public typealias Delegate = OAuth2ClientDelegate
     public func add(delegate: Delegate) { delegates += delegate }
@@ -169,4 +232,8 @@ extension OAuth2Client: UsesDelegateCollection {
     public var delegateCollection: DelegateCollection<OAuth2ClientDelegate> {
         delegates
     }
+}
+
+extension Notification.Name {
+    public static let oauth2ClientCreated = Notification.Name("com.okta.oauth2client.created")
 }

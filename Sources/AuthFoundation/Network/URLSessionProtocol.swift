@@ -12,6 +12,7 @@
 
 import Foundation
 
+/// Protocol defining the interface for interacting with a URLSession. This is used to provide mocking for unit tests.
 public protocol URLSessionProtocol {
     typealias DataTaskResult = (Data?, HTTPURLResponse?, Error?) -> Void
     func dataTaskWithRequest(_ request: URLRequest, completionHandler: @escaping (Data?, URLResponse?, Error?) -> Void) -> URLSessionDataTaskProtocol
@@ -22,6 +23,7 @@ public protocol URLSessionProtocol {
     #endif
 }
 
+/// Protocol defining the interface for interacting with a URLSession. This is used to provide mocking for unit tests.
 public protocol URLSessionDataTaskProtocol {
     func resume()
 }

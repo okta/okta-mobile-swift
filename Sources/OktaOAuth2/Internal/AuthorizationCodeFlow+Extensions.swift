@@ -11,6 +11,7 @@
 //
 
 import Foundation
+import AuthFoundation
 
 extension AuthorizationCodeFlow.Configuration {
     func authenticationUrlComponents(from authenticationUrl: URL, using context: AuthorizationCodeFlow.Context) throws -> URLComponents {

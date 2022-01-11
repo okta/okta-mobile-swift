@@ -19,8 +19,11 @@ public protocol APIClient {
     var requestIdHeader: String? { get }
     var userAgent: String { get }
 
-    func decode<T: Decodable>(_ type: T.Type, from data: Data) throws -> T
+    func decode<T: Decodable>(_ type: T.Type, from data: Data, userInfo: [CodingUserInfoKey:Any]?) throws -> T
     func error(from data: Data) -> Error?
+
+    func willSend(request: inout URLRequest)
+    func didSend<T>(request: URLRequest, received response: APIResponse<T>)
 
     func send<T: Decodable>(_ request: URLRequest, completion: @escaping (Result<APIResponse<T>, APIClientError>) -> Void)
 
@@ -31,8 +34,8 @@ public protocol APIClient {
 }
 
 public protocol APIClientDelegate: AnyObject {
-    func api(client: APIClient, willSendRequest: inout URLRequest)
-    func api<T>(client: APIClient, request: URLRequest, received response: APIResponse<T>)
+    func api(client: APIClient, willSend request: inout URLRequest)
+    func api<T>(client: APIClient, didSend request: URLRequest, received response: APIResponse<T>)
 }
 
 public enum APIClientError: Error {
@@ -41,6 +44,7 @@ public enum APIClientError: Error {
     case invalidResponse
     case cannotParseResponse
     case invalidRequestData
+    case missingRefreshSettings
     case unsupportedContentType(_ type: APIContentType)
     case serverError(_ error: Error)
     case statusCode(_ statusCode: Int)
@@ -48,8 +52,8 @@ public enum APIClientError: Error {
 }
 
 extension APIClientDelegate {
-    public func api(client: APIClient, willSendRequest: inout URLRequest) {}
-    public func api<T>(client: APIClient, request: URLRequest, received response: APIResponse<T>) {}
+    public func api(client: APIClient, willSend request: inout URLRequest) {}
+    public func api<T>(client: APIClient, didSend request: URLRequest, received response: APIResponse<T>) {}
 }
 
 extension APIClient {
@@ -57,18 +61,35 @@ extension APIClient {
     public var requestIdHeader: String? { "x-okta-request-id" }
     public var userAgent: String { SDKVersion.userAgent }
     
-    public func decode<T: Decodable>(_ type: T.Type, from data: Data) throws -> T {
-        try defaultJSONDecoder.decode(type, from: data)
+    public func decode<T>(_ type: T.Type, from data: Data, userInfo: [CodingUserInfoKey:Any]? = nil) throws -> T where T: Decodable {
+        var info: [CodingUserInfoKey:Any] = userInfo ?? [:]
+        info[.baseURL] = baseURL
+        
+        let jsonDecoder: JSONDecoder
+        if let jsonType = type as? JSONDecodable.Type {
+            jsonDecoder = jsonType.jsonDecoder
+        } else {
+            jsonDecoder = defaultJSONDecoder
+        }
+        
+        jsonDecoder.userInfo = info
+        
+        return try jsonDecoder.decode(type, from: data)
     }
     
     public func error(from data: Data) -> Error? {
-        try? defaultJSONDecoder.decode(OktaAPIError.self, from: data)
+        defaultJSONDecoder.userInfo = [:]
+        return try? defaultJSONDecoder.decode(OktaAPIError.self, from: data)
     }
+
+    public func willSend(request: inout URLRequest) {}
+    
+    public func didSend<T>(request: URLRequest, received response: APIResponse<T>) {}
 
     public func send<T: Decodable>(_ request: URLRequest, completion: @escaping (Result<APIResponse<T>, APIClientError>) -> Void) where T : Decodable {
         var urlRequest = request
         
-//        delegate?.api(client: self, willSendRequest: &urlRequest)
+        willSend(request: &urlRequest)
         session.dataTaskWithRequest(urlRequest) { data, response, error in
             guard let data = data,
                   let response = response
@@ -86,7 +107,7 @@ extension APIClient {
 
             do {
                 let response: APIResponse<T> = try self.validate(data, response)
-//                self.delegate?.api(client: self, request: urlRequest, received: response)
+                self.didSend(request: request, received: response)
                 
                 completion(.success(response))
             } catch {
@@ -108,11 +129,11 @@ extension APIClient {
     @available(iOS 15.0, tvOS 15.0, macOS 12.0, *)
     public func send<T: Decodable>(_ request: URLRequest) async throws -> APIResponse<T> {
         var urlRequest = request
-//        delegate?.api(client: self, willSendRequest: &urlRequest)
+        willSend(request: &urlRequest)
 
         let (data, response) = try await session.data(for: urlRequest, delegate: nil)
         let result: APIResponse<T> = try validate(data, response)
-//        delegate?.api(client: self, request: urlRequest, received: result)
+        self.didSend(request: request, received: result)
 
         return result
     }
@@ -181,6 +202,7 @@ extension APIClient {
     }
 }
 
+
 fileprivate let linkRegex = try? NSRegularExpression(pattern: "<([^>]+)>; rel=\"([^\"]+)\"", options: [])
 
 fileprivate let httpDateFormatter: DateFormatter = {
@@ -191,7 +213,7 @@ fileprivate let httpDateFormatter: DateFormatter = {
     return dateFormatter
 }()
 
-fileprivate let defaultIsoDateFormatter: DateFormatter = {
+let defaultIsoDateFormatter: DateFormatter = {
     let formatter = DateFormatter()
     formatter.calendar = Calendar(identifier: .iso8601)
     formatter.locale = Locale(identifier: "en_US_POSIX")

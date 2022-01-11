@@ -11,6 +11,7 @@
 //
 
 import Foundation
+import AuthFoundation
 import OktaOAuth2
 
 extension WebAuthentication {

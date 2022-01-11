@@ -33,7 +33,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         guard let scene = (scene as? UIWindowScene) else { return }
         windowScene = scene
         
-        NotificationCenter.default.addObserver(forName: .userChanged, object: nil, queue: .main) { notification in
+        NotificationCenter.default.addObserver(forName: .defaultUserChanged, object: nil, queue: .main) { notification in
             if notification.object == nil {
                 self.signIn()
             }
@@ -45,7 +45,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
     func sceneDidBecomeActive(_ scene: UIScene) {
         guard signInViewController == nil,
-              UserManager.shared.current == nil
+              User.default == nil
         else {
             return
         }

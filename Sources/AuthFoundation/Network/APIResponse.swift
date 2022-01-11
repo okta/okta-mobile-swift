@@ -62,5 +62,5 @@ public struct APIResponse<T: Decodable>: Decodable {
         }
     }
     
-    public struct Empty: Decodable {}
 }
+public struct Empty: Decodable {}

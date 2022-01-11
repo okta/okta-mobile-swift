@@ -225,14 +225,14 @@ public class AuthorizationCodeFlow: AuthenticationFlow {
     /// - Parameters:
     ///   - context: Optional context to provide when customizing the state parameter.
     ///   - completion: Optional completion block for receiving the response. If `nil`, you may rely upon the appropriate delegate API methods.
-    public func resume(with context: Context? = nil, completion: ((Result<URL,APIClientError>) -> Void)? = nil) throws {
+    public func resume(with context: Context? = nil, completion: ((Result<URL,OAuth2Error>) -> Void)? = nil) throws {
         var context = context ?? Context()
         isAuthenticating = true
 
         client.openIdConfiguration { result in
             switch result {
             case .failure(let error):
-                self.delegateCollection.invoke { $0.authentication(flow: self, received: .network(error: error)) }
+                self.delegateCollection.invoke { $0.authentication(flow: self, received: error) }
                 completion?(.failure(error))
             case .success(let configuration):
                 self.openIdConfiguration = configuration
@@ -245,9 +245,9 @@ public class AuthorizationCodeFlow: AuthenticationFlow {
                     
                     completion?(.success(url))
                 } catch {
-                    let apiError = error as? APIClientError ?? .serverError(error)
-                    self.delegateCollection.invoke { $0.authentication(flow: self, received: .network(error: apiError)) }
-                    completion?(.failure(apiError))
+                    let oauthError = error as? OAuth2Error ?? .error(error)
+                    self.delegateCollection.invoke { $0.authentication(flow: self, received: oauthError) }
+                    completion?(.failure(oauthError))
                 }
             }
         }

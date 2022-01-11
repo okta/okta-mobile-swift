@@ -13,13 +13,27 @@
 import Foundation
 import AuthFoundation
 
-extension GrantType {
-    var responseKey: String {
-        switch self {
-        case .authorizationCode:
-            return "code"
-        default:
-            return rawValue
-        }
+extension ResourceOwnerFlow {
+    struct TokenRequest {
+        let clientId: String
+        let scope: String
+        let username: String
+        let password: String
+    }
+}
+
+extension ResourceOwnerFlow.TokenRequest: TokenRequest, APIRequest, APIRequestBody {
+    var httpMethod: APIHTTPMethod { .post }
+    var path: String { "v1/token" }
+    var contentType: APIContentType? { .formEncoded }
+    var acceptsType: APIContentType? { .json }
+    var bodyParameters: [String : Any]? {
+        [
+            "client_id": clientId,
+            "scope": scope,
+            "grant_type": "password",
+            "username": username,
+            "password": password
+        ]
     }
 }
