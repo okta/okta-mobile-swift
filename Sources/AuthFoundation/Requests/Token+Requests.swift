@@ -33,7 +33,7 @@ extension Token: APIAuthorization {
 }
 
 extension Token.RevokeRequest: APIRequest, APIRequestBody {
-    var httpMethod: APIHTTPMethod { .post }
+    var httpMethod: APIRequestMethod { .post }
     var path: String { "v1/revoke" }
     var contentType: APIContentType? { .formEncoded }
     var acceptsType: APIContentType? { .json }
@@ -51,7 +51,7 @@ extension Token.RevokeRequest: APIRequest, APIRequestBody {
 }
 
 extension Token.IntrospectRequest: APIRequest, APIRequestBody {
-    var httpMethod: APIHTTPMethod { .post }
+    var httpMethod: APIRequestMethod { .post }
     var path: String { "v1/introspect" }
     var contentType: APIContentType? { .formEncoded }
     var acceptsType: APIContentType? { .json }
@@ -65,7 +65,7 @@ extension Token.IntrospectRequest: APIRequest, APIRequestBody {
 }
 
 extension Token.RefreshRequest: APIRequest, APIRequestBody {
-    var httpMethod: APIHTTPMethod { .post }
+    var httpMethod: APIRequestMethod { .post }
     var path: String { "v1/token" }
     var contentType: APIContentType? { .formEncoded }
     var acceptsType: APIContentType? { .json }

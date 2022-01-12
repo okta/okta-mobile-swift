@@ -26,7 +26,7 @@ extension DeviceAuthorizationFlow {
 }
 
 extension DeviceAuthorizationFlow.AuthorizeRequest: APIRequest, APIRequestBody {
-    var httpMethod: APIHTTPMethod { .post }
+    var httpMethod: APIRequestMethod { .post }
     var path: String { "v1/device/authorize" }
     var contentType: APIContentType? { .formEncoded }
     var acceptsType: APIContentType? { .json }
@@ -39,7 +39,7 @@ extension DeviceAuthorizationFlow.AuthorizeRequest: APIRequest, APIRequestBody {
 }
 
 extension DeviceAuthorizationFlow.TokenRequest: TokenRequest, APIRequest, APIRequestBody {
-    var httpMethod: APIHTTPMethod { .post }
+    var httpMethod: APIRequestMethod { .post }
     var path: String { "v1/token" }
     var contentType: APIContentType? { .formEncoded }
     var acceptsType: APIContentType? { .json }

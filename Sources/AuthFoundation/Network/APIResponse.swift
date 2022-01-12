@@ -63,4 +63,6 @@ public struct APIResponse<T: Decodable>: Decodable {
     }
     
 }
+
+/// Describes an empty server response when a ``APIResponse`` is received without a response body.
 public struct Empty: Decodable {}

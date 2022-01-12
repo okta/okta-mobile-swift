@@ -25,8 +25,8 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        flow = DeviceAuthorizationFlow(issuer: URL(string: "https://{domain}")!,
-                                       clientId: "{client_id}",
+        flow = DeviceAuthorizationFlow(issuer: URL(string: "https://<#domain#>")!,
+                                       clientId: "<#client_id#>",
                                        scopes: "openid profile email offline_access")
 
         codeStackView.isHidden = true
@@ -73,15 +73,7 @@ class ViewController: UIViewController {
                 case .failure(let error):
                     self.show(error)
                 case .success(let token):
-//                    UserManager.shared.current = User(token: token,
-//                                                      info: User.Info(familyName: "Nachbaur",
-//                                                                      givenName: "Mike",
-//                                                                      name: "Mike Nachbaur",
-//                                                                      preferredUsername: "Mike",
-//                                                                      sub: "foo",
-//                                                                      updatedAt: Date(),
-//                                                                      locale: "en-US",
-//                                                                      zoneinfo: "foo"))
+                    print("Received token \(token)")
                     self.dismiss(animated: true)
                 }
             }

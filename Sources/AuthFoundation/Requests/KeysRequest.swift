@@ -19,7 +19,7 @@ extension OAuth2Client {
 }
 
 extension OAuth2Client.KeysRequest: APIRequest {
-    var httpMethod: APIHTTPMethod { .get }
+    var httpMethod: APIRequestMethod { .get }
     var path: String { "v1/keys" }
     var acceptsType: APIContentType? { .json }
     var query: [String : APIRequestArgument?]? {

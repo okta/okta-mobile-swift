@@ -13,7 +13,11 @@
 import Foundation
 
 class UserCoordinator {
-    var userDataSource: UserDataSource
+    var userDataSource: UserDataSource {
+        didSet {
+            userDataSource.delegate = self
+        }
+    }
     
     var tokenStorage: TokenStorage {
         didSet {
@@ -47,6 +51,8 @@ class UserCoordinator {
     {
         self.userDataSource = userDataSource
         self.tokenStorage = tokenStorage
+
+        self.userDataSource.delegate = self
         self.tokenStorage.delegate = self
 
         if let defaultToken = tokenStorage.defaultToken {
@@ -70,6 +76,10 @@ class UserCoordinator {
 }
 
 extension UserCoordinator: OAuth2ClientDelegate {
+    func api(client: APIClient, didSend request: URLRequest, received error: APIClientError) {
+        print("Error happened: \(error)")
+    }
+
     func api<T>(client: APIClient, didSend request: URLRequest, received response: APIResponse<T>) where T : Decodable {
         guard let token = response.result as? Token else { return }
         do {

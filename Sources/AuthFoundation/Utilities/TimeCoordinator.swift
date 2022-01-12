@@ -16,7 +16,11 @@ import Foundation
 ///
 /// This can be used to customize the behavior of how dates and times are calculated, when used on devices that may have skewed or incorrect clocks.
 public protocol TimeCoordinator {
+    /// Return the current coordinated date.
     var now: Date { get }
+    
+    /// Returns a coordinated version of the given date.
+    /// - Returns: Date instance, adjusted to the appropriate time offset.
     func date(from date: Date) -> Date
 }
 
@@ -27,10 +31,12 @@ extension Date {
         set { SharedTimeCoordinator = newValue }
     }
     
+    /// Returns the current coordinated date.
     public static var nowCoordinated: Date {
         coordinator.now
     }
     
+    /// Returns the coordinated version of this date.
     public var coordinated: Date {
         Date.coordinator.date(from: self)
     }

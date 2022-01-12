@@ -15,33 +15,8 @@ import Foundation
 public enum TokenError: Error {
     case tokenTypeMissing(_: Token.RevokeType)
     case refreshTokenMissing
-    case baseURLMissing
+    case contextMissing
     case tokenNotFound(_: Token)
-}
-
-public struct TokenConfiguration: Codable, Equatable, Hashable {
-    let baseURL: URL
-    let refreshSettings: [String:String]?
-}
-
-public protocol Expires {
-    var expiresIn: TimeInterval { get }
-    var expiresAt: Date { get }
-    var issuedAt: Date { get }
-    var isExpired: Bool { get }
-    var isValid: Bool { get }
-}
-
-extension Expires {
-    public var expiresAt: Date {
-        return issuedAt.coordinated.addingTimeInterval(expiresIn)
-    }
-    
-    public var isExpired: Bool {
-        return Date.nowCoordinated > expiresAt
-    }
-    
-    public var isValid: Bool { !isExpired }
 }
 
 /// Token information representing a user's access to a resource server, including access token, refresh token, and other related information.
@@ -67,9 +42,12 @@ public class Token: Codable, Equatable, Hashable, Expires {
     /// The ID token, if requested.
     public let idToken: String?
     
-    /// The base URL for operations related to this token.
-    public let configuration: TokenConfiguration
+    /// Defines the context this token was issued from.
+    public let context: Context
     
+    /// Return the relevant token string for the given type.
+    /// - Parameter kind: Type of token string to return
+    /// - Returns: Token string, or `nil` if this token doesn't contain the requested type.
     public func token(of kind: Kind) -> String? {
         switch kind {
         case .accessToken:
@@ -84,13 +62,13 @@ public class Token: Codable, Equatable, Hashable, Expires {
     }
     
     public static func == (lhs: Token, rhs: Token) -> Bool {
-        lhs.configuration == rhs.configuration &&
+        lhs.context == rhs.context &&
         lhs.accessToken == rhs.accessToken &&
         lhs.scope == rhs.scope
     }
     
     public func hash(into hasher: inout Hasher) {
-        hasher.combine(configuration)
+        hasher.combine(context)
         hasher.combine(accessToken)
         hasher.combine(scope)
     }
@@ -102,7 +80,7 @@ public class Token: Codable, Equatable, Hashable, Expires {
                   scope: String,
                   refreshToken: String?,
                   idToken: String?,
-                  configuration: TokenConfiguration)
+                  context: Context)
     {
         self.issuedAt = issuedAt
         self.tokenType = tokenType
@@ -111,16 +89,21 @@ public class Token: Codable, Equatable, Hashable, Expires {
         self.scope = scope
         self.refreshToken = refreshToken
         self.idToken = idToken
-        self.configuration = configuration
+        self.context = context
     }
     
     required public convenience init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        guard let baseUrl = decoder.userInfo[.baseURL] as? URL else {
-            throw TokenError.baseURLMissing
-        }
         
-        let refreshSettings = decoder.userInfo[.refreshSettings] as? [String:String]
+        let context: Context
+        if container.contains(.context) {
+            context = try container.decode(Context.self, forKey: .context)
+        } else if let baseUrl = decoder.userInfo[.baseURL] as? URL {
+            context = Context(baseURL: baseUrl,
+                              refreshSettings: decoder.userInfo[.refreshSettings] as? [String:String])
+        } else {
+            throw TokenError.contextMissing
+        }
         
         self.init(issuedAt: Date.nowCoordinated,
                   tokenType: try container.decode(String.self, forKey: .tokenType),
@@ -129,20 +112,20 @@ public class Token: Codable, Equatable, Hashable, Expires {
                   scope: try container.decode(String.self, forKey: .scope),
                   refreshToken: try container.decodeIfPresent(String.self, forKey: .refreshToken),
                   idToken: try container.decodeIfPresent(String.self, forKey: .idToken),
-                  configuration: TokenConfiguration(baseURL: baseUrl,
-                                                    refreshSettings: refreshSettings))
+                  context: context)
     }
+}
 
-    public func encode(to encoder: Encoder) throws {
-        var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encode(issuedAt, forKey: .issuedAt)
-        try container.encode(tokenType, forKey: .tokenType)
-        try container.encode(expiresIn, forKey: .expiresIn)
-        try container.encode(accessToken, forKey: .accessToken)
-        try container.encode(scope, forKey: .scope)
-        try container.encodeIfPresent(refreshToken, forKey: .refreshToken)
-        try container.encodeIfPresent(idToken, forKey: .idToken)
-        try container.encodeIfPresent(configuration, forKey: .configuration)
+extension Token {
+    /// Summarizes the context in which a token is valid.
+    ///
+    /// This includes information such as the ``baseURL`` where operations related to this token should be performed.
+    public struct Context: Codable, Equatable, Hashable {
+        /// The base URL from which this token was issued.
+        public let baseURL: URL
+        
+        /// Settings required to be supplied to the authorization server when refreshing this token.
+        let refreshSettings: [String:String]?
     }
 }
 
@@ -155,7 +138,7 @@ extension Token {
         case scope
         case refreshToken
         case idToken
-        case configuration
+        case context
     }
 }
 
@@ -178,64 +161,4 @@ public extension Token {
         case idToken      = "id_token"
         case deviceSecret = "device_secret"
     }
-    
-//    /// Revokes the token.
-//    /// - Parameters:
-//    ///   - type: The type to revoke (e.g. access token, or refresh token).
-//    ///   - completion: Completion handler for when the token is revoked.
-//    func revoke(type: Token.RevokeType = .accessToken, completion: @escaping(Result<Void,TokenError>) -> Void) {
-//
-//    }
-//
-//    /// Refreshes the token.
-//    ///
-//    /// If no ailable, or  != nilthe tokens have been revoked, an error will be returned.
-//    ///
-//    /// > *Note:* Depending on organization or policy settings, the values contained within the token may or may not differ once the token is refreshed. Therefore, it may be necessary to save the newly-refeshed object for use in future requests.
-//    /// - Parameters:
-//    ///   - completion: Completion handler for when the token is revoked.
-//    func refresh(completion: ((Result<Token,TokenError>) -> Void)?) {
-//        guard refreshToken != nil else {
-//            completion?(.failure(.refreshTokenMissing))
-//            return
-//        }
-//
-////        let request = RefreshRequest(token: refreshToken, configuration: <#T##TokenConfiguration#>)
-//
-////        let api = IDXClient.Version.latest.clientImplementation(with: configuration)
-////        api.refresh(token: self) { result in
-////            completion(result)
-////        }
-//    }
 }
-/*
-#if swift(>=5.5.1) && !os(Linux)
-@available(iOS 15.0, tvOS 15.0, macOS 12.0, *)
-extension Token {
-    /// Refreshes the token.
-    ///
-    /// If no refresh token is available, or the tokens have been revoked, an error will be returned.
-    ///
-    /// > *Note:* Depending on organization or policy settings, the values contained within the token may or may not differ once the token is refreshed. Therefore, it may be necessary to save the newly-refeshed object for use in future requests.
-    @discardableResult
-    public func refresh() async throws -> Token {
-        try await withCheckedThrowingContinuation { continuation in
-            refresh() { result in
-                continuation.resume(with: result)
-            }
-        }
-    }
-
-    /// Revokes the token.
-    /// - Parameters:
-    ///   - type: The type to revoke (e.g. access token, or refresh token).
-    public func revoke(type: Token.RevokeType = .accessAndRefreshToken) async throws {
-        try await withCheckedThrowingContinuation { continuation in
-            revoke(type: type) { result in
-                continuation.resume(with: result)
-            }
-        }
-    }
-}
-#endif
-*/

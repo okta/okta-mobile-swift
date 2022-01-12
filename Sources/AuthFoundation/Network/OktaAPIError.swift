@@ -35,6 +35,4 @@ public struct OktaAPIError: Decodable, Error {
         case id = "errorId"
         case causes = "errorCauses"
     }
-  
-//    \":\"E0000022\",\"errorSummary\":\"The endpoint does not support the provided HTTP method\",\"errorLink\":\"E0000022\",\"errorId\":\"oaeETxG54arRqqlYNbfbm7Yyw\",\"errorCauses\":[]}"
 }

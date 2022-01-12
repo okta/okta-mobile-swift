@@ -15,6 +15,6 @@ import Foundation
 struct OpenIdConfigurationRequest {}
 
 extension OpenIdConfigurationRequest: APIRequest {
-    var httpMethod: APIHTTPMethod { .get }
+    var httpMethod: APIRequestMethod { .get }
     var path: String { ".well-known/openid-configuration" }
 }

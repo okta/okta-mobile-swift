@@ -13,7 +13,7 @@
 import Foundation
 
 public protocol APIRequest {
-    var httpMethod: APIHTTPMethod { get }
+    var httpMethod: APIRequestMethod { get }
     var path: String { get }
     var query: [String:APIRequestArgument?]? { get }
     var headers: [String:APIRequestArgument?]? { get }
@@ -26,7 +26,7 @@ public protocol APIRequest {
     func request(for client: APIClient) throws -> URLRequest
 }
 
-public enum APIHTTPMethod: String {
+public enum APIRequestMethod: String {
     case get = "GET"
     case delete = "DELETE"
     case head = "HEAD"
@@ -81,7 +81,7 @@ extension APIRequest where Self: Encodable {
 }
 
 extension APIRequest {
-    public var httpMethod: APIHTTPMethod { .get }
+    public var httpMethod: APIRequestMethod { .get }
     public var query: [String:APIRequestArgument?]? { nil }
     public var headers: [String:APIRequestArgument?]? { nil }
     public var acceptsType: APIContentType? { nil }

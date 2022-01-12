@@ -19,7 +19,7 @@ extension UserInfo {
 }
 
 extension UserInfo.Request: APIRequest {
-    var httpMethod: APIHTTPMethod { .get }
+    var httpMethod: APIRequestMethod { .get }
     var path: String { "v1/userinfo" }
     var acceptsType: APIContentType? { .json }
     var authorization: APIAuthorization? { token }

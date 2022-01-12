@@ -108,7 +108,7 @@ class ProfileTableViewController: UITableViewController {
     
     func signout() {
         let alert = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
-        alert.addAction(.init(title: "Clear tokens", style: .default, handler: { _ in
+        alert.addAction(.init(title: "Remove", style: .default, handler: { _ in
             try? self.user?.remove()
             self.user = nil
         }))
@@ -184,16 +184,5 @@ class ProfileTableViewController: UITableViewController {
         }
 
         tableView.deselectRow(at: indexPath, animated: true)
-    }
-    
-    
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        switch segue.identifier {
-        case "TokenDetail":
-            guard let target = segue.destination as? TokenDetailViewController else { break }
-//            target.token = user?.token
-
-        default: break
-        }
     }
 }

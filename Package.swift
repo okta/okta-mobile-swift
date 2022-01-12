@@ -5,6 +5,7 @@ import PackageDescription
 
 let package = Package(
     name: "AuthFoundation",
+    defaultLocalization: "en",
     platforms: [
         .iOS(.v9),
         .tvOS(.v9),
@@ -20,11 +21,13 @@ let package = Package(
     ],
     targets: [
         .target(name: "AuthFoundation",
-                dependencies: []),
+                dependencies: [],
+                resources: [.process("Resources")]),
         .target(name: "OktaOAuth2",
                 dependencies: [
                     .target(name: "AuthFoundation")
-                ]),
+                ],
+                resources: [.process("Resources")]),
         .target(name: "WebAuthenticationUI",
                 dependencies: [
                     .target(name: "OktaOAuth2")

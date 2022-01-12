@@ -83,6 +83,7 @@ class DefaultTokenStorage: TokenStorage {
         
         if _defaultToken == token {
             _defaultToken = nil
+            delegate?.token(storage: self, defaultChanged: nil)
         }
         
         try save()
@@ -90,18 +91,24 @@ class DefaultTokenStorage: TokenStorage {
     }
     
     private func load() throws {
-        if let data = userDefaults.data(forKey: UserDefaultsKeys.allTokensKey) {
-            allTokens = try JSONDecoder().decode([Token].self, from: data)
-        }
-        
-        if let defaultAccessKey = userDefaults.string(forKey: UserDefaultsKeys.defaultTokenKey) {
-            _defaultToken = allTokens.first(where: { token in
-                token.accessToken == defaultAccessKey
-            })
+        do {
+            if let data = userDefaults.data(forKey: UserDefaultsKeys.allTokensKey) {
+                allTokens = try JSONDecoder().decode([Token].self, from: data)
+            }
+            
+            if let defaultAccessKey = userDefaults.string(forKey: UserDefaultsKeys.defaultTokenKey) {
+                _defaultToken = allTokens.first(where: { token in
+                    token.accessToken == defaultAccessKey
+                })
+            }
+        } catch {
+            print("Error: \(error)")
         }
     }
     
     private func save() throws {
+        defer { userDefaults.synchronize() }
+        
         userDefaults.set(try JSONEncoder().encode(allTokens),
                          forKey: UserDefaultsKeys.allTokensKey)
 

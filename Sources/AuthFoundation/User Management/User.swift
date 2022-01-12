@@ -23,7 +23,11 @@ public enum UserError: Error {
 
 public class User {
     private static let coordinator = UserCoordinator()
-    internal weak var coordinator: UserCoordinator?
+    internal weak var coordinator: UserCoordinator? {
+        didSet {
+            print(coordinator)
+        }
+    }
 
     /// Data source used for creating and managing the creation and caching of ``User`` instances.
     public static var userDataSource: UserDataSource {
@@ -66,7 +70,7 @@ public class User {
     
     public convenience init(token: Token) {
         let urlSession = type(of: self).userDataSource.urlSession(for: token)
-        self.init(token: token, oauth2: OAuth2Client(baseURL: token.configuration.baseURL,
+        self.init(token: token, oauth2: OAuth2Client(baseURL: token.context.baseURL,
                                                      session: urlSession))
     }
     

@@ -12,26 +12,14 @@
 
 import Foundation
 
-public protocol OAuth2Configuration {}
-
-public enum OAuth2Error: Error {
-    case invalidUrl
-    case cannotComposeUrl
-    case cannotGeneratePKCE
-    case missingRequiredDelegate
-    case invalidRedirect(message: String)
-    case invalidState(_ state: String?)
-    case oauth2Error(code: String, description: String?)
-    case network(error: APIClientError)
-    case flowNotReady(message: String)
-    case missingResultCode
-    case noResultReturned
-    case missingToken(type: Token.Kind)
-    case error(_ error: Error)
+public protocol OAuth2ClientDelegate: APIClientDelegate {
+    func oauth(client: OAuth2Client, willRefresh token: Token)
+    func oauth(client: OAuth2Client, didRefresh token: Token)
 }
 
-public protocol OAuth2ClientDelegate: APIClientDelegate {
-//    func oauth(client: Client<T>, customize url: inout URL, for endpoint: Client<T>.Endpoint)
+extension OAuth2ClientDelegate {
+    public func oauth(client: OAuth2Client, willRefresh token: Token) {}
+    public func oauth(client: OAuth2Client, didRefresh token: Token) {}
 }
 
 /// An OAuth2 client, used to interact with a given authorization server.
@@ -108,6 +96,10 @@ public class OAuth2Client: APIClient {
         delegateCollection.invoke { $0.api(client: self, willSend: &request) }
     }
     
+    public func didSend(request: URLRequest, received error: APIClientError) {
+        delegateCollection.invoke { $0.api(client: self, didSend: request, received: error) }
+    }
+
     public func didSend<T>(request: URLRequest, received response: APIResponse<T>) where T : Decodable {
         delegateCollection.invoke { $0.api(client: self, didSend: request, received: response) }
     }
@@ -137,11 +129,12 @@ public class OAuth2Client: APIClient {
     }
     
     public func refresh(_ token: Token, completion: @escaping (Result<Token, OAuth2Error>) -> Void) {
-        guard let refreshSettings = token.configuration.refreshSettings else {
+        guard let refreshSettings = token.context.refreshSettings else {
             completion(.failure(.missingToken(type: .refreshToken)))
             return
         }
         
+        delegateCollection.invoke { $0.oauth(client: self, willRefresh: token) }
         refresh(Token.RefreshRequest(token: token, configuration: refreshSettings)) { result in
             switch result {
             case .success(let response):
@@ -149,6 +142,8 @@ public class OAuth2Client: APIClient {
             case .failure(let error):
                 completion(.failure(.network(error: error)))
             }
+
+            self.delegateCollection.invoke { $0.oauth(client: self, didRefresh: token) }
         }
     }
     

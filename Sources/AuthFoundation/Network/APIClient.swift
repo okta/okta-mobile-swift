@@ -35,24 +35,13 @@ public protocol APIClient {
 
 public protocol APIClientDelegate: AnyObject {
     func api(client: APIClient, willSend request: inout URLRequest)
+    func api(client: APIClient, didSend request: URLRequest, received error: APIClientError)
     func api<T>(client: APIClient, didSend request: URLRequest, received response: APIResponse<T>)
-}
-
-public enum APIClientError: Error {
-    case invalidUrl
-    case missingResponse
-    case invalidResponse
-    case cannotParseResponse
-    case invalidRequestData
-    case missingRefreshSettings
-    case unsupportedContentType(_ type: APIContentType)
-    case serverError(_ error: Error)
-    case statusCode(_ statusCode: Int)
-    case unknown
 }
 
 extension APIClientDelegate {
     public func api(client: APIClient, willSend request: inout URLRequest) {}
+    public func api(client: APIClient, didSend request: URLRequest, received error: APIClientError) {}
     public func api<T>(client: APIClient, didSend request: URLRequest, received response: APIResponse<T>) {}
 }
 
@@ -84,18 +73,20 @@ extension APIClient {
 
     public func willSend(request: inout URLRequest) {}
     
+    public func didSend(request: URLRequest, received error: APIClientError) {}
+
     public func didSend<T>(request: URLRequest, received response: APIResponse<T>) {}
 
     public func send<T: Decodable>(_ request: URLRequest, completion: @escaping (Result<APIResponse<T>, APIClientError>) -> Void) where T : Decodable {
         var urlRequest = request
         
         willSend(request: &urlRequest)
-        session.dataTaskWithRequest(urlRequest) { data, response, error in
+        session.dataTaskWithRequest(urlRequest) { data, response, httpError in
             guard let data = data,
                   let response = response
             else {
                 let apiError: APIClientError
-                if let error = error {
+                if let error = httpError {
                     apiError = .serverError(error)
                 } else {
                     apiError = .missingResponse
@@ -111,7 +102,9 @@ extension APIClient {
                 
                 completion(.success(response))
             } catch {
-                completion(.failure(error as? APIClientError ?? .cannotParseResponse))
+                let apiError = error as? APIClientError ?? .cannotParseResponse(error: error)
+                self.didSend(request: request, received: apiError)
+                completion(.failure(apiError))
             }
         }.resume()
     }
@@ -132,8 +125,15 @@ extension APIClient {
         willSend(request: &urlRequest)
 
         let (data, response) = try await session.data(for: urlRequest, delegate: nil)
-        let result: APIResponse<T> = try validate(data, response)
-        self.didSend(request: request, received: result)
+        let result: APIResponse<T>
+        do {
+            result = try validate(data, response)
+            self.didSend(request: request, received: result)
+        } catch {
+            let apiError = error as? APIClientError ?? .cannotParseResponse(error: error)
+            self.didSend(request: request, received: apiError)
+            throw apiError
+        }
 
         return result
     }
@@ -201,7 +201,6 @@ extension APIClient {
                            requestId: requestId)
     }
 }
-
 
 fileprivate let linkRegex = try? NSRegularExpression(pattern: "<([^>]+)>; rel=\"([^\"]+)\"", options: [])
 

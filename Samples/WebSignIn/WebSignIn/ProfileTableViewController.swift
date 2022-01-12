@@ -36,11 +36,12 @@ class ProfileTableViewController: UITableViewController {
     }
 
     var tableContent: [Section: [Row]] = [:]
-    var user: UserInfo? {
+    var user: User? {
         didSet {
-            if let user = user {
+            user?.userInfo { result in
+                guard case let .success(userInfo) = result else { return }
                 DispatchQueue.main.async {
-                    self.configure(user)
+                    self.configure(userInfo)
                 }
             }
         }
@@ -53,9 +54,9 @@ class ProfileTableViewController: UITableViewController {
                                                object: nil,
                                                queue: .main) { (notification) in
             guard let user = notification.object as? User else { return }
-//            self.user = user
+            self.user = user
         }
-//        user = User.default
+        user = User.default
     }
     
     func row(at indexPath: IndexPath) -> Row? {
@@ -80,13 +81,13 @@ class ProfileTableViewController: UITableViewController {
             .profile: [
                 .init(kind: .rightDetail, id: "givenName", title: "Given name", detail: user.givenName),
                 .init(kind: .rightDetail, id: "familyName", title: "Family name", detail: user.familyName),
-                .init(kind: .rightDetail, id: "locale", title: "Locale", detail: user.locale),
-                .init(kind: .rightDetail, id: "timezone", title: "Timezone", detail: user.zoneinfo)
+                .init(kind: .rightDetail, id: "locale", title: "Locale", detail: user.userLocale?.identifier ?? "N/A"),
+                .init(kind: .rightDetail, id: "timezone", title: "Timezone", detail: user.zoneInfo?.identifier ?? "N/A")
             ],
             .details: [
                 .init(kind: .rightDetail, id: "username", title: "Username", detail: user.preferredUsername),
                 .init(kind: .rightDetail, id: "userId", title: "User ID", detail: user.sub),
-                .init(kind: .rightDetail, id: "createdAt", title: "Created at", detail: dateFormatter.string(from: user.updatedAt)),
+                .init(kind: .rightDetail, id: "createdAt", title: "Created at", detail: (user.updatedAt != nil) ? dateFormatter.string(from: user.updatedAt!) : "N/A"),
                 .init(kind: .disclosure, id: "details", title: "Token details"),
                 .init(kind: .action, id: "refresh", title: "Refresh")
             ],
@@ -108,8 +109,9 @@ class ProfileTableViewController: UITableViewController {
     
     func signout() {
         let alert = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
-        alert.addAction(.init(title: "Clear tokens", style: .default, handler: { _ in
-            User.default = nil
+        alert.addAction(.init(title: "Remove", style: .default, handler: { _ in
+            try? self.user?.remove()
+            self.user = nil
         }))
 //        alert.addAction(.init(title: "Revoke tokens", style: .destructive, handler: { _ in
 //            userManager.current?.token.revoke { (success, error) in

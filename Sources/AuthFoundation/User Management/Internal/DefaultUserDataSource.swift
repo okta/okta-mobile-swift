@@ -30,7 +30,7 @@ class DefaultUserDataSource: UserDataSource {
                 return user
             } else {
                 let urlSession = self.urlSession(for: token)
-                let client = OAuth2Client(baseURL: token.configuration.baseURL,
+                let client = OAuth2Client(baseURL: token.context.baseURL,
                                           session: urlSession)
                 let user = User(token: token, oauth2: client)
                 users[token] = user
