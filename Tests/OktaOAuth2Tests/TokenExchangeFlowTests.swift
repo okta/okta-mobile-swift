@@ -15,8 +15,8 @@ import XCTest
 @testable import AuthFoundation
 @testable import OktaOAuth2
 
-final class AuthorizationSSOFlowDelegateRecorder: AuthorizationSSOFlowDelegate {
-    typealias Flow = AuthorizationSSOFlow
+final class TokenExchangeFlowDelegateRecorder: TokenExchangeFlowDelegate {
+    typealias Flow = TokenExchangeFlow
     
     var token: Token?
     var error: OAuth2Error?
@@ -45,21 +45,21 @@ final class AuthorizationSSOFlowDelegateRecorder: AuthorizationSSOFlowDelegate {
     }
 }
 
-final class AuthorizationSSOFlowTests: XCTestCase {
+final class TokenExchangeFlowTests: XCTestCase {
     let issuer = URL(string: "https://example.com")!
     let redirectUri = URL(string: "com.example:/callback")!
     let clientMock = OAuth2ClientMock()
-    var configuration: AuthorizationSSOFlow.Configuration!
+    var configuration: TokenExchangeFlow.Configuration!
     let urlSession = URLSessionMock()
     var client: OAuth2Client!
-    var flow: AuthorizationSSOFlow!
+    var flow: TokenExchangeFlow!
+    
+    private let tokens: [TokenExchangeFlow.TokenType] = [.actor(type: .deviceSecret, value: "secret"), .subject(type: .idToken, value: "id_token")]
     
     override func setUpWithError() throws {
-        configuration = AuthorizationSSOFlow.Configuration(clientId: "clientId",
-                                                           scopes: "profile device_sso",
-                                                           deviceSecret: "secret",
-                                                           idToken: "id_token",
-                                                           audience: .default)
+        configuration = TokenExchangeFlow.Configuration(clientId: "clientId",
+                                                        scopes: "profile device_sso",
+                                                        audience: .default)
         client = OAuth2Client(baseURL: issuer, session: urlSession)
         
         urlSession.expect("https://example.com/oauth2/default/.well-known/openid-configuration",
@@ -69,31 +69,19 @@ final class AuthorizationSSOFlowTests: XCTestCase {
                           data: try data(for: "token", in: "MockResponses"),
                           contentType: "application/json")
         
-        flow = AuthorizationSSOFlow(configuration, client: client)
+        flow = TokenExchangeFlow(configuration, client: client)
     }
     
     func testWithDelegate() throws {
-        let delegate = AuthorizationSSOFlowDelegateRecorder()
+        let delegate = TokenExchangeFlowDelegateRecorder()
         flow.add(delegate: delegate)
         
-        XCTAssertNil(flow.context)
         XCTAssertFalse(flow.isAuthenticating)
         XCTAssertFalse(delegate.started)
         
-        // Begin
-        flow.start()
-        XCTAssertNotNil(flow.context)
-        XCTAssertNotNil(flow.context?.tokenURL)
-        XCTAssertTrue(flow.isAuthenticating)
-        
-        // The url should be taken from `openid-configuration`
-        XCTAssertEqual(flow.context?.tokenURL, URL(string: "https://example.okta.com/oauth2/v1/token"))
-        XCTAssertTrue(delegate.started)
-        XCTAssertNotNil(delegate.url)
-        
         // Exchange code
-        let expect = expectation(description: "Wait for timer")
-        flow.authorize { result in
+        let expect = expectation(description: "Expected `resume` succeeded")
+        flow.resume(with: tokens) { result in
             expect.fulfill()
         }
         
@@ -101,49 +89,27 @@ final class AuthorizationSSOFlowTests: XCTestCase {
             XCTAssertNil(error)
         }
         
-        XCTAssertNil(flow.context)
         XCTAssertFalse(flow.isAuthenticating)
         XCTAssertNotNil(delegate.token)
         XCTAssertTrue(delegate.finished)
     }
     
     func testAuthenticationSucceeded() {
-        let context = AuthorizationSSOFlow.Context(tokenURL: URL(string: "https://example.okta.com/oauth2/v1/token")!)
-        let startExpectation = expectation(description: "Expected `start` succeeded")
+        let authorizeExpectation = expectation(description: "Expected `resume` succeeded")
         
         XCTAssertFalse(flow.isAuthenticating)
         
-        flow.start(with: context) { result in
-            switch result {
-            case .success(let tokenURL):
-                XCTAssertEqual(tokenURL, context.tokenURL)
-                startExpectation.fulfill()
-            case .failure(let error):
-                XCTFail(error.localizedDescription)
-            }
-        }
-        
-        XCTAssertTrue(flow.isAuthenticating)
-        
-        wait(for: [startExpectation], timeout: 2)
-        
-        
-        let authorizeExpectation = expectation(description: "Expected `authorize` succed")
-        
-        XCTAssertNotNil(flow.context)
-        XCTAssertTrue(flow.isAuthenticating)
-        
-        flow.authorize { result in
+        flow.resume(with: tokens) { result in
             switch result {
             case .success:
                 XCTAssertTrue(self.flow.isAuthenticating)
+                
                 authorizeExpectation.fulfill()
             case .failure(let error):
                 XCTFail(error.localizedDescription)
             }
         }
         
-        XCTAssertNil(flow.context)
         XCTAssertFalse(flow.isAuthenticating)
         
         wait(for: [authorizeExpectation], timeout: 2)
@@ -152,20 +118,11 @@ final class AuthorizationSSOFlowTests: XCTestCase {
 #if swift(>=5.5.1) && !os(Linux)
     @available(iOS 15.0, tvOS 15.0, macOS 12.0, *)
     func testAsyncAuthenticationSucceeded() async throws {
-        let context = AuthorizationSSOFlow.Context(tokenURL: URL(string: "https://example.okta.com/oauth2/v1/token")!)
-        
         XCTAssertFalse(flow.isAuthenticating)
         
-        let tokenURL = try await flow.start(with: context)
-        
-        XCTAssertEqual(tokenURL, context.tokenURL)
-        XCTAssertTrue(flow.isAuthenticating)
-        XCTAssertNotNil(flow.context)
-        
-        let _ = try await flow.authorize()
+        let _ = try await flow.resume(with: tokens)
         
         XCTAssertFalse(flow.isAuthenticating)
-        XCTAssertNil(flow.context)
     }
 #endif
 }

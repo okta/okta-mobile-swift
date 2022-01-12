@@ -19,7 +19,7 @@ final class SingleSignOnViewController: UIViewController {
     
     private lazy var oktaConfiguration: [String: String] = {
         guard let oktaPlistUrl = Bundle.main.url(forResource: "Okta", withExtension: "plist"),
-                oktaPlistUrl.isFileURL
+              oktaPlistUrl.isFileURL
         else
         {
             assertionFailure("Cannot load Okta.plist. Make sure it's included into app target.")
@@ -43,13 +43,13 @@ final class SingleSignOnViewController: UIViewController {
         
         return plistDictionary
     }()
-
+    
     private lazy var issuer: String = {
         guard let issuer = oktaConfiguration["issuer"] else {
             assertionFailure("Cannot get `issuer`.")
             return ""
         }
-
+        
         return issuer
     }()
     
@@ -60,41 +60,62 @@ final class SingleSignOnViewController: UIViewController {
     private var idToken: String? {
         try? Keychain.get(key: "Okta-Id-Token", accessGroup: "com.okta.mobile-sdk.shared") as String
     }
-
-    private var flow: AuthorizationSSOFlow?
+    
+    private var flow: TokenExchangeFlow?
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        signIn()
+        signIn(silent: true)
         
         clientIdLabel.text = issuer
     }
     
     @IBAction private func signIn() {
-        flow = initializeFlow()
-        
-        try? flow?.start { result in
-            switch result {
-            case .failure(let error):
-                let alert = UIAlertController(title: "Cannot sign in", message: error.localizedDescription, preferredStyle: .alert)
-                alert.addAction(.init(title: "OK", style: .default))
-                
-                self.present(alert, animated: true)
-            case .success:
-                self.authorize()
-            }
-        }
+        signIn(silent: false)
     }
     
-    private func authorize() {
-        flow?.authorize { result in
+    private func signIn(silent: Bool) {
+        guard
+            let deviceSecret = deviceToken,
+            let idToken = idToken
+        else
+        {
+            if silent {
+                return
+            }
+            
+            let alert = UIAlertController(title: "No tokens found", message: "Device or/and ID tokens are not found.", preferredStyle: .alert)
+            alert.addAction(.init(title: "Cancel", style: .cancel))
+            
+            if
+                let webSignInScheme = URL(string: "websignin://"),
+                UIApplication.shared.canOpenURL(webSignInScheme)
+            {
+                alert.addAction(.init(title: "Sign-in with WebSignIn", style: .default) { _ in
+                    UIApplication.shared.open(webSignInScheme, options: [:])
+                })
+            }
+            
+            present(alert, animated: true)
+            
+            return
+        }
+        
+        flow = initializeFlow()
+        
+        let tokens: [TokenExchangeFlow.TokenType] = [
+            .actor(type: .deviceSecret, value: deviceSecret),
+            .subject(type: .idToken, value: idToken)
+        ]
+        
+        flow?.resume(with: tokens) { result in
             switch result {
             case .failure(let error):
                 DispatchQueue.main.async {
                     let alert = UIAlertController(title: "Cannot sign in", message: error.localizedDescription, preferredStyle: .alert)
                     alert.addAction(.init(title: "OK", style: .default))
-
+                    
                     self.present(alert, animated: true)
                 }
                 
@@ -113,7 +134,7 @@ final class SingleSignOnViewController: UIViewController {
         }
     }
     
-    private func initializeFlow() -> AuthorizationSSOFlow? {
+    private func initializeFlow() -> TokenExchangeFlow? {
         guard
             let issuer = URL(string: issuer),
             let clientId = oktaConfiguration["clientId"],
@@ -123,21 +144,10 @@ final class SingleSignOnViewController: UIViewController {
             return nil
         }
         
-        guard
-            let deviceSecret = deviceToken,
-            let idToken = idToken
-        else
-        {
-            print("[ERROR]: Cannot find `deviceSecret` and/or `idToken` in Keychain.")
-            return nil
-        }
-
-        return AuthorizationSSOFlow(issuer: issuer,
-                                    clientId: clientId,
-                                    scopes: scope,
-                                    deviceSecret: deviceSecret,
-                                    idToken: idToken,
-                                    audience: .default)
+        return TokenExchangeFlow(issuer: issuer,
+                                 clientId: clientId,
+                                 scopes: scope,
+                                 audience: .default)
     }
 }
 
