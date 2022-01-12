@@ -14,12 +14,15 @@ import Foundation
 extension Bundle {
     var resourceBundle: Bundle? {
         guard let resourcePath = resourcePath else { return nil }
+        var bundleName = (resourcePath as NSString).lastPathComponent as NSString
+        bundleName = bundleName.deletingPathExtension as NSString
+        
         let legacyBuildPath = (bundlePath as NSString).deletingLastPathComponent
         
         var bundle: Bundle?
         for directory in [resourcePath, legacyBuildPath] {
             bundle = try? FileManager.default.contentsOfDirectory(atPath: directory)
-                .filter { $0.hasSuffix(".bundle") }
+                .filter { $0.hasSuffix(".bundle") && $0.contains(bundleName as String) }
                 .compactMap { Bundle(path: "\(directory)/\($0)") }
                 .first
             
