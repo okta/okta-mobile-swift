@@ -26,8 +26,8 @@ final class UserCoordinatorTests: XCTestCase {
                       scope: "openid",
                       refreshToken: nil,
                       idToken: nil,
-                      configuration: TokenConfiguration(baseURL: URL(string: "https://example.com")!,
-                                                        refreshSettings: nil))
+                      context: Token.Context(baseURL: URL(string: "https://example.com")!,
+                                             refreshSettings: nil))
 
     override func setUpWithError() throws {
         userDefaults = UserDefaults(suiteName: name)
@@ -95,7 +95,7 @@ final class UserCoordinatorTests: XCTestCase {
                                                        rateInfo: nil,
                                                        requestId: nil)
         client.delegateCollection.invoke { delegate in
-            delegate.api(client: client, request: request, received: response)
+            delegate.api(client: client, didSend: request, received: response)
         }
         
         XCTAssertEqual(storage.allTokens.count, 1)

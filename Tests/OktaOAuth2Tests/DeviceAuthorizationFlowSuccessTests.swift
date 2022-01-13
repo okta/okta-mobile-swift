@@ -66,10 +66,10 @@ final class DeviceAuthorizationFlowSuccessTests: XCTestCase {
         client = OAuth2Client(baseURL: issuer, session: urlSession)
         
         urlSession.expect("https://example.com/oauth2/default/v1/device/authorize",
-                          data: try data(for: "device-authorize", in: "MockResponses"),
+                          data: try data(from: .module, for: "device-authorize", in: "MockResponses"),
                           contentType: "application/json")
         urlSession.expect("https://example.com/oauth2/default/v1/token",
-                          data: try data(for: "token", in: "MockResponses"),
+                          data: try data(from: .module, for: "token", in: "MockResponses"),
                           contentType: "application/json")
         flow = DeviceAuthorizationFlow(configuration, client: client)
     }

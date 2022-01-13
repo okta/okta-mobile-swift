@@ -23,15 +23,14 @@ extension XCTestCase {
         return json.data(using: .utf8)!
     }
     
-    func data(for filename: String, in folder: String?) throws -> Data {
+    func data(from bundle: Bundle, for filename: String, in folder: String? = nil) throws -> Data {
         let file = (filename as NSString).deletingPathExtension
         var fileExtension = (filename as NSString).pathExtension
         if fileExtension == "" {
             fileExtension = "json"
         }
         
-        guard let bundle = Bundle(for: type(of: self)).resourceBundle,
-              let url = bundle.url(forResource: file,
+        guard let url = bundle.url(forResource: file,
                                    withExtension: fileExtension,
                                    subdirectory: folder)
         else {

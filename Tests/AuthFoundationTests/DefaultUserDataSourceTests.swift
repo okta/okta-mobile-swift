@@ -31,8 +31,8 @@ final class DefaultUserDataSourceTests: XCTestCase {
                           scope: "openid",
                           refreshToken: nil,
                           idToken: nil,
-                          configuration: TokenConfiguration(baseURL: URL(string: "https://example.com")!,
-                                                            refreshSettings: nil))
+                          context: Token.Context(baseURL: URL(string: "https://example.com")!,
+                                                 refreshSettings: nil))
         let user = dataSource.user(for: token)
         XCTAssertEqual(user.token, token)
         XCTAssertEqual(dataSource.userCount, 1)

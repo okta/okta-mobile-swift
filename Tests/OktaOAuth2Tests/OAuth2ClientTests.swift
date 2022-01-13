@@ -31,7 +31,7 @@ final class OAuth2ClientTests: XCTestCase {
                                                          pkce: pkce)
         
         urlSession.expect("https://example.com/oauth2/default/v1/token",
-                          data: try data(for: "token", in: "MockResponses"),
+                          data: try data(from: .module, for: "token", in: "MockResponses"),
                           contentType: "application/json")
         
         var token: Token?

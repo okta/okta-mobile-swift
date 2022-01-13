@@ -14,7 +14,7 @@ final class OAuth2ClientTests: XCTestCase {
 
     func testOpenIDConfiguration() throws {
         urlSession.expect("https://example.com/oauth2/default/.well-known/openid-configuration",
-                          data: try data(for: "openid-configuration", in: "MockResponses"),
+                          data: try data(from: .module, for: "openid-configuration", in: "MockResponses"),
                           contentType: "application/json")
         
         var config: OpenIdConfiguration?

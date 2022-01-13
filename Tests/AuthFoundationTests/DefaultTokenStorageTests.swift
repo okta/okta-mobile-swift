@@ -25,8 +25,8 @@ final class DefaultTokenStorageTests: XCTestCase {
                       scope: "openid",
                       refreshToken: nil,
                       idToken: nil,
-                      configuration: TokenConfiguration(baseURL: URL(string: "https://example.com")!,
-                                                        refreshSettings: nil))
+                      context: Token.Context(baseURL: URL(string: "https://example.com")!,
+                                             refreshSettings: nil))
 
     override func setUpWithError() throws {
         userDefaults = UserDefaults(suiteName: name)
