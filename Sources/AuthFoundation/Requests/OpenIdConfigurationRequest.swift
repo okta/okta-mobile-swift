@@ -12,18 +12,9 @@
 
 import Foundation
 
-public struct OAuth2ServerError: Decodable, Error {
-    public let code: String
-    public let description: String
+struct OpenIdConfigurationRequest {}
 
-    public init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: CodingKeys.self)
-        code = try container.decode(String.self, forKey: .code)
-        description = try container.decode(String.self, forKey: .description)
-    }
-
-    enum CodingKeys: String, CodingKey, CaseIterable {
-        case code = "error"
-        case description = "errorDescription"
-    }
+extension OpenIdConfigurationRequest: APIRequest {
+    var httpMethod: APIRequestMethod { .get }
+    var path: String { ".well-known/openid-configuration" }
 }

@@ -12,24 +12,20 @@
 
 import Foundation
 
-/*
-public struct DefaultAPIClient: APIClient {
-    public var baseURL: URL
-    public let session: URLSession
-    public var additionalHttpHeaders: [String:String]? = nil
+public struct OAuth2ServerError: Decodable, Error, LocalizedError {
+    public let code: String
+    public let description: String
     
-    public weak var delegate: APIClientDelegate?
+    public var errorDescription: String? { description }
 
-    public init(session: URLSession = URLSession.shared) {
-        self.session = session
+    public init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        code = try container.decode(String.self, forKey: .code)
+        description = try container.decode(String.self, forKey: .description)
     }
-    
-    public func error(from data: Data) -> Error? {
-        if let error = try? decode(OktaAPIError.self, from: data) {
-            return error
-        }
-        
-        return nil
+
+    enum CodingKeys: String, CodingKey, CaseIterable {
+        case code = "error"
+        case description = "errorDescription"
     }
 }
-*/

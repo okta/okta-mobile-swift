@@ -10,6 +10,7 @@
 // See the License for the specific language governing permissions and limitations under the License.
 //
 
+import AuthFoundation
 import OktaOAuth2
 
 #if canImport(AuthenticationServices)
@@ -57,7 +58,7 @@ class AuthenticationServicesProvider: NSObject, WebAuthenticationProvider {
     
     func authenticate(using url: URL) {
         authenticationSession = ASWebAuthenticationSession(
-            url:url,
+            url: url,
             callbackURLScheme: flow.callbackScheme,
             completionHandler: { url, error in
                 self.process(url: url, error: error)

@@ -145,6 +145,17 @@ public class AuthorizationCodeFlow: AuthenticationFlow {
         }
     }
     
+    /// Errors reported during processing and handling of redirect URLs.
+    ///
+    /// These errors are mostly reported as a result of the ``resume(with:completion:)-6a7pf`` or ``resume(with:)-10rbh`` methods.
+    public enum RedirectError: Error {
+        case invalidRedirectUrl
+        case unexpectedScheme(_ scheme: String?)
+        case missingQueryArguments
+        case invalidState(_ state: String?)
+        case missingAuthorizationCode
+    }
+    
     /// The ``OAuth2Client`` this authentication flow will use.
     public let client: OAuth2Client
     
@@ -225,14 +236,14 @@ public class AuthorizationCodeFlow: AuthenticationFlow {
     /// - Parameters:
     ///   - context: Optional context to provide when customizing the state parameter.
     ///   - completion: Optional completion block for receiving the response. If `nil`, you may rely upon the appropriate delegate API methods.
-    public func resume(with context: Context? = nil, completion: ((Result<URL,APIClientError>) -> Void)? = nil) throws {
+    public func resume(with context: Context? = nil, completion: ((Result<URL,OAuth2Error>) -> Void)? = nil) throws {
         var context = context ?? Context()
         isAuthenticating = true
 
         client.openIdConfiguration { result in
             switch result {
             case .failure(let error):
-                self.delegateCollection.invoke { $0.authentication(flow: self, received: .network(error: error)) }
+                self.delegateCollection.invoke { $0.authentication(flow: self, received: error) }
                 completion?(.failure(error))
             case .success(let configuration):
                 self.openIdConfiguration = configuration
@@ -245,9 +256,9 @@ public class AuthorizationCodeFlow: AuthenticationFlow {
                     
                     completion?(.success(url))
                 } catch {
-                    let apiError = error as? APIClientError ?? .serverError(error)
-                    self.delegateCollection.invoke { $0.authentication(flow: self, received: .network(error: apiError)) }
-                    completion?(.failure(apiError))
+                    let oauthError = error as? OAuth2Error ?? .error(error)
+                    self.delegateCollection.invoke { $0.authentication(flow: self, received: oauthError) }
+                    completion?(.failure(oauthError))
                 }
             }
         }
@@ -347,15 +358,15 @@ extension AuthorizationCodeFlow: UsesDelegateCollection {
 extension AuthorizationCodeFlow {
     func authorizationCode(from url: URL) throws -> String {
         guard let context = context else {
-            throw OAuth2Error.flowNotReady(message: "No context has been initialized")
+            throw AuthenticationError.flowNotReady
         }
         
         guard let components = URLComponents(url: url, resolvingAgainstBaseURL: false) else {
-            throw OAuth2Error.invalidRedirect(message: "Authentication session returned neither a URL or an error")
+            throw RedirectError.invalidRedirectUrl
         }
         
         guard components.scheme?.lowercased() == callbackScheme?.lowercased() else {
-            throw OAuth2Error.invalidRedirect(message: "Received an unexpected callback scheme \(String(describing: components.scheme))")
+            throw RedirectError.unexpectedScheme(components.scheme)
         }
         
         guard let query = components.queryItems?.reduce(into: [String:String](), { partialResult, queryItem in
@@ -363,11 +374,11 @@ extension AuthorizationCodeFlow {
                 partialResult[queryItem.name] = value
             }
         }) else {
-            throw OAuth2Error.invalidRedirect(message: "No query arguments provided")
+            throw RedirectError.missingQueryArguments
         }
         
         guard query["state"] == context.state else {
-            throw OAuth2Error.invalidState(query["state"])
+            throw RedirectError.invalidState(query["state"])
         }
         
         if let errorCode = query["error"] {
@@ -379,7 +390,7 @@ extension AuthorizationCodeFlow {
         }
         
         guard let code = query["code"] else {
-            throw OAuth2Error.missingResultCode
+            throw RedirectError.missingAuthorizationCode
         }
         
         return code

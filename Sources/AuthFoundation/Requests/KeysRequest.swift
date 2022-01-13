@@ -12,11 +12,17 @@
 
 import Foundation
 
-@objc(OktaCredential)
-public protocol Credential {
+extension OAuth2Client {
+    struct KeysRequest {
+        let clientId: String
+    }
 }
 
-@objc(OktaBearerCredential)
-public class BearerCredential: NSObject, Credential {
-    
+extension OAuth2Client.KeysRequest: APIRequest {
+    var httpMethod: APIRequestMethod { .get }
+    var path: String { "v1/keys" }
+    var acceptsType: APIContentType? { .json }
+    var query: [String : APIRequestArgument?]? {
+        [ "client_id": clientId ]
+    }
 }

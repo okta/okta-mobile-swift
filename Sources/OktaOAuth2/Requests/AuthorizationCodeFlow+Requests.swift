@@ -25,7 +25,7 @@ extension AuthorizationCodeFlow {
 }
 
 extension AuthorizationCodeFlow.TokenRequest: TokenRequest, APIRequest, APIRequestBody {
-    var httpMethod: APIHTTPMethod { .post }
+    var httpMethod: APIRequestMethod { .post }
     var path: String { "v1/token" }
     var contentType: APIContentType? { .formEncoded }
     var acceptsType: APIContentType? { .json }
