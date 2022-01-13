@@ -12,14 +12,18 @@
 
 import Foundation
 
+/// Delegate protocol used by ``OAuth2Client`` to communicate important events.
 public protocol OAuth2ClientDelegate: APIClientDelegate {
+    /// Sent before a token will begin to refresh.
     func oauth(client: OAuth2Client, willRefresh token: Token)
-    func oauth(client: OAuth2Client, didRefresh token: Token)
+
+    /// Sent when a token has finished refreshing.
+    func oauth(client: OAuth2Client, didRefresh token: Token, replacedWith newToken: Token?)
 }
 
 extension OAuth2ClientDelegate {
     public func oauth(client: OAuth2Client, willRefresh token: Token) {}
-    public func oauth(client: OAuth2Client, didRefresh token: Token) {}
+    public func oauth(client: OAuth2Client, didRefresh token: Token, replacedWith newToken: Token?) {}
 }
 
 /// An OAuth2 client, used to interact with a given authorization server.
@@ -80,6 +84,9 @@ public class OAuth2Client: APIClient {
         NotificationCenter.default.post(name: .oauth2ClientCreated, object: self)
     }
     
+    /// Transforms HTTP response data into the appropriate error type, when requests are unsuccessful.
+    /// - Parameter data: HTTP response body data for a failed URL request.
+    /// - Returns: ``OktaAPIError`` or ``OAuth2ServerError``, depending on the type of error.
     public func error(from data: Data) -> Error? {
         if let error = try? decode(OktaAPIError.self, from: data) {
             return error
@@ -102,11 +109,6 @@ public class OAuth2Client: APIClient {
 
     public func didSend<T>(request: URLRequest, received response: APIResponse<T>) where T : Decodable {
         delegateCollection.invoke { $0.api(client: self, didSend: request, received: response) }
-    }
-    
-    func received(_ response: APIResponse<Token>) {
-        // Do something with the token
-        print(response.result)
     }
     
     /// Retrieves the org's OpenID configuration.
@@ -139,11 +141,11 @@ public class OAuth2Client: APIClient {
             switch result {
             case .success(let response):
                 completion(.success(response.result))
+                self.delegateCollection.invoke { $0.oauth(client: self, didRefresh: token, replacedWith: response.result) }
             case .failure(let error):
                 completion(.failure(.network(error: error)))
+                self.delegateCollection.invoke { $0.oauth(client: self, didRefresh: token, replacedWith: nil) }
             }
-
-            self.delegateCollection.invoke { $0.oauth(client: self, didRefresh: token) }
         }
     }
     
@@ -221,7 +223,13 @@ extension OAuth2Client {
 
 extension OAuth2Client: UsesDelegateCollection {
     public typealias Delegate = OAuth2ClientDelegate
+
+    /// Adds the supplied object as a delegate of this client.
+    /// - Parameter delegate: Delegate to add.
     public func add(delegate: Delegate) { delegates += delegate }
+    
+    /// Removes the given delegate from this client.
+    /// - Parameter delegate: Delegate to remove.
     public func remove(delegate: Delegate) { delegates -= delegate }
     
     public var delegateCollection: DelegateCollection<OAuth2ClientDelegate> {
@@ -230,5 +238,6 @@ extension OAuth2Client: UsesDelegateCollection {
 }
 
 extension Notification.Name {
+    /// Notification broadcast when a new ``OAuth2Client`` instance is created.
     public static let oauth2ClientCreated = Notification.Name("com.okta.oauth2client.created")
 }

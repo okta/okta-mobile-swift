@@ -16,18 +16,15 @@ You can use AuthFoundation when you want to:
 
 ### User Management
 
-- ``User``
+- <doc:ManagingUserCredentials>
 - ``Token``
+- ``User``
 - ``UserInfo``
-- ``UserError``
-- ``TokenError``
 
 ### OAuth2 Client Operations
 
 - ``OAuth2Client``
 - ``OAuth2ClientDelegate``
-- ``OAuth2Error``
-- ``OAuth2ServerError``
 - ``OpenIdConfiguration``
 
 ### Customizations
@@ -42,7 +39,6 @@ You can use AuthFoundation when you want to:
 
 - ``APIClient``
 - ``APIClientDelegate``
-- ``APIClientError``
 - ``APIContentType``
 - ``APIRequest``
 - ``APIRequestBody``
@@ -51,8 +47,16 @@ You can use AuthFoundation when you want to:
 - ``APIResponse``
 - ``APIAuthorization``
 - ``JSONDecodable``
-- ``OktaAPIError``
 - ``Empty``
+
+### Error Types
+
+- ``APIClientError``
+- ``OAuth2Error``
+- ``OAuth2ServerError``
+- ``OktaAPIError``
+- ``UserError``
+- ``TokenError``
 
 ### Internals and mocking
 

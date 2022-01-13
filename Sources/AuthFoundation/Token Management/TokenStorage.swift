@@ -47,9 +47,23 @@ public protocol TokenStorage {
     func remove(token: Token) throws
 }
 
+/// Protocol that custom ``TokenStorage`` instances are required to communicate changes to.
 public protocol TokenStorageDelegate: AnyObject {
+    /// Sent when the default token has been changed.
     func token(storage: TokenStorage, defaultChanged token: Token?)
+    
+    /// Sent when a new token has been added.
+    ///
+    /// > Important: This message should only be sent when a token is actually new. If the token is semantically identical to another one already in storage, the ``token(storage:updated:)`` message should be sent instead.
     func token(storage: TokenStorage, added token: Token?)
+    
+    /// Sent when a token has been removed from storage.
     func token(storage: TokenStorage, removed token: Token?)
+    
+    /// Sent when a token has been updated within storage.
+    ///
+    /// There are circumstances when a token that already exists within storage needs to be replaced or updated. For example, when a token is refreshed, even though the ``Token/accessToken`` is the same, there may be a different expiration time, the ``Token/refreshToken`` may change, or other values.
+    ///
+    /// As a result, this message is used to convey that a token has been updated, but not removed or newly added.
     func token(storage: TokenStorage, updated token: Token?)
 }

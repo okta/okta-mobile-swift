@@ -31,9 +31,3 @@ extension Double: APIRequestArgument {
 extension Bool: APIRequestArgument {
     public var stringValue: String { "\(self)"}
 }
-
-//extension Date: APIRequestArgument {
-//    var stringValue: String {
-//        isoDateFormatter.string(from: self)
-//    }
-//}

@@ -44,7 +44,7 @@ public protocol DeviceAuthorizationFlowDelegate: AuthenticationDelegate {
 ///
 /// Upon visiting that URL and entering in the code, the user is prompted to sign in using their standard credentials. Upon completing authentication, the device automatically signs the user in, without any direct interaction on the user's part.
 ///
-/// You can create an instance of  ``DeviceAuthorizationFlow/Configuration-swift.struct`` to define your client's settings, and supply that to the initializer, along with a reference to your ``OAuth2Client`` for performing key operations and requests. Alternatively, you can use any of the convenience initializers to simplify the process.
+/// You can create an instance of  ``DeviceAuthorizationFlow/Configuration-swift.struct`` to define your client's settings, and supply that to the initializer, along with a reference to your OAuth2Client for performing key operations and requests. Alternatively, you can use any of the convenience initializers to simplify the process.
 ///
 /// As an example, we'll use Swift Concurrency, since these asynchronous methods can be used inline easily, though ``DeviceAuthorizationFlow`` can just as easily be used with completion blocks or through the use of the ``DeviceAuthorizationFlowDelegate``.
 ///
@@ -85,16 +85,48 @@ public class DeviceAuthorizationFlow: AuthenticationFlow {
     }
     
     /// A model representing the context and current state for an authorization session.
-    public struct Context: Codable, Equatable {
-        public let deviceCode: String
+    public struct Context: Codable, Equatable, Expires {
+        let deviceCode: String
+        let interval: TimeInterval
+        
+        /// The date this context was created.
+        public let issuedAt: Date
+
+        /// The code that should be displayed to the user.
         public let userCode: String
+        
+        /// The URI the user should be prompted to open in order to authorize the application.
         public let verificationUri: URL
+        
+        /// A convenience URI that combines the ``verificationUri`` and the ``userCode``, to make a clickable link.
         public let verificationUriComplete: URL
+        
+        /// The time interval after which the authorization context will expire.
         public let expiresIn: TimeInterval
-        public let interval: TimeInterval
+        
+        enum CodingKeys: String, CodingKey, CaseIterable {
+            case issuedAt
+            case userCode
+            case verificationUri
+            case verificationUriComplete
+            case expiresIn
+            case deviceCode
+            case interval
+        }
+        
+        public init(from decoder: Decoder) throws {
+            let container = try decoder.container(keyedBy: CodingKeys.self)
+            issuedAt = try container.decodeIfPresent(Date.self, forKey: .issuedAt) ?? Date()
+            deviceCode = try container.decode(String.self, forKey: .deviceCode)
+            userCode = try container.decode(String.self, forKey: .userCode)
+            verificationUri = try container.decode(URL.self, forKey: .verificationUri)
+            verificationUriComplete = try container.decode(URL.self, forKey: .verificationUriComplete)
+            expiresIn = try container.decode(TimeInterval.self, forKey: .expiresIn)
+            interval = try container.decode(TimeInterval.self, forKey: .interval)
+        }
     }
     
-    /// The ``OAuth2Client`` this authentication flow will use.
+    /// The OAuth2Client this authentication flow will use.
     public let client: OAuth2Client
     
     /// The configuration used when constructing this authentication flow.
