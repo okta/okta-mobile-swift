@@ -11,7 +11,6 @@
 //
 
 import Foundation
-import AuthFoundation
 
 public struct OpenIdConfiguration: Decodable, JSONDecodable {
     public let authorizationEndpoint: URL

@@ -25,14 +25,22 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        flow = DeviceAuthorizationFlow(issuer: URL(string: "https://{domain}")!,
-                                       clientId: "{client_id}",
+        flow = DeviceAuthorizationFlow(issuer: URL(string: "https://<#domain#>")!,
+                                       clientId: "<#client_id#>",
                                        scopes: "openid profile email offline_access")
 
         codeStackView.isHidden = true
         activityIndicator.startAnimating()
         
-        flow?.resume() { result in
+        signIn()
+    }
+
+    func signIn() {
+        guard let flow = flow else {
+            return
+        }
+
+        flow.resume() { result in
             DispatchQueue.main.async {
                 switch result {
                 case .failure(let error):
@@ -43,10 +51,13 @@ class ViewController: UIViewController {
             }
         }
     }
-
+    
     func show(_ error: Error) {
         let alert = UIAlertController(title: nil, message: error.localizedDescription, preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: "OK", style: .default))
+        alert.addAction(UIAlertAction(title: "Retry", style: .default, handler: { _ in
+            self.signIn()
+        }))
+        alert.addAction(UIAlertAction(title: "Cancel", style: .cancel))
         present(alert, animated: true)
     }
     
@@ -62,15 +73,7 @@ class ViewController: UIViewController {
                 case .failure(let error):
                     self.show(error)
                 case .success(let token):
-                    UserManager.shared.current = User(token: token,
-                                                      info: User.Info(familyName: "Nachbaur",
-                                                                      givenName: "Mike",
-                                                                      name: "Mike Nachbaur",
-                                                                      preferredUsername: "Mike",
-                                                                      sub: "foo",
-                                                                      updatedAt: Date(),
-                                                                      locale: "en-US",
-                                                                      zoneinfo: "foo"))
+                    print("Received token \(token)")
                     self.dismiss(animated: true)
                 }
             }

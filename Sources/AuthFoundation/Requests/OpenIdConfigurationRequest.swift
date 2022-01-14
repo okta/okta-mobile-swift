@@ -12,11 +12,9 @@
 
 import Foundation
 
-@objc(OktaCredential)
-public protocol Credential {
-}
+struct OpenIdConfigurationRequest {}
 
-@objc(OktaBearerCredential)
-public class BearerCredential: NSObject, Credential {
-    
+extension OpenIdConfigurationRequest: APIRequest {
+    var httpMethod: APIRequestMethod { .get }
+    var path: String { ".well-known/openid-configuration" }
 }

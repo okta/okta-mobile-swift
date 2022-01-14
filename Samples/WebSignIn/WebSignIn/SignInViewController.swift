@@ -42,11 +42,17 @@ class SignInViewController: UIViewController {
         auth?.start(from: window) { result in
             switch result {
             case .success(let token):
-                UserManager.shared.current = User(token: token, info: .init(familyName: "", givenName: "", name: "", preferredUsername: "", sub: "", updatedAt: Date(), locale: "", zoneinfo: ""))
+                User.default = User(token: token)
                 
-                token.idToken.flatMap { try? Keychain.set(key: "Okta-Id-Token", string: $0, accessGroup: "com.okta.mobile-sdk.shared", accessibility: kSecAttrAccessibleWhenUnlocked) }
-                token.deviceSecret.flatMap { try? Keychain.set(key: "Okta-Device-Token", string: $0, accessGroup: "com.okta.mobile-sdk.shared", accessibility: kSecAttrAccessibleWhenUnlocked) }
-                
+                token.idToken.flatMap { try? Keychain.set(key: "Okta-Id-Token",
+                                                          string: $0,
+                                                          accessGroup: "com.okta.mobile-sdk.shared",
+                                                          accessibility: kSecAttrAccessibleWhenUnlocked) }
+                token.deviceSecret.flatMap { try? Keychain.set(key: "Okta-Device-Token",
+                                                               string: $0,
+                                                               accessGroup: "com.okta.mobile-sdk.shared",
+                                                               accessibility: kSecAttrAccessibleWhenUnlocked) }
+
             case .failure(let error):
                 let alert = UIAlertController(title: "Cannot sign in", message: error.localizedDescription, preferredStyle: .alert)
                 alert.addAction(.init(title: "OK", style: .default))
@@ -56,5 +62,7 @@ class SignInViewController: UIViewController {
             
             self.dismiss(animated: true)
         }
+
+        return
     }
 }

@@ -73,7 +73,7 @@ extension TokenExchangeFlow {
 }
 
 extension TokenExchangeFlow.TokenRequest: TokenRequest, APIRequest, APIRequestBody {
-    var httpMethod: APIHTTPMethod { .post }
+    var httpMethod: APIRequestMethod { .post }
     var path: String { tokenPath }
     var contentType: APIContentType? { .formEncoded }
     var acceptsType: APIContentType? { .json }

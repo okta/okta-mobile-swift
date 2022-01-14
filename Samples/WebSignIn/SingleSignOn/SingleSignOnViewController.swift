@@ -120,16 +120,7 @@ final class SingleSignOnViewController: UIViewController {
                 }
                 
             case .success(let token):
-                UserManager.shared.current = User(
-                    token: token,
-                    info: .init(familyName: "",
-                                givenName: "",
-                                name: "",
-                                preferredUsername: "",
-                                sub: "",
-                                updatedAt: Date(),
-                                locale: "",
-                                zoneinfo: ""))
+                User.default = User(token: token)
             }
         }
     }

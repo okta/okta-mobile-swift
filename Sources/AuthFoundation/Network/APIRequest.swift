@@ -13,19 +13,20 @@
 import Foundation
 
 public protocol APIRequest {
-    var httpMethod: APIHTTPMethod { get }
+    var httpMethod: APIRequestMethod { get }
     var path: String { get }
     var query: [String:APIRequestArgument?]? { get }
     var headers: [String:APIRequestArgument?]? { get }
     var contentType: APIContentType? { get }
     var cachePolicy: URLRequest.CachePolicy { get }
     var timeoutInterval: TimeInterval { get }
+    var authorization: APIAuthorization? { get }
 
     func body() throws -> Data?
     func request(for client: APIClient) throws -> URLRequest
 }
 
-public enum APIHTTPMethod: String {
+public enum APIRequestMethod: String {
     case get = "GET"
     case delete = "DELETE"
     case head = "HEAD"
@@ -49,6 +50,10 @@ public enum APIContentType: Equatable, RawRepresentable {
             self = .other(rawValue)
         }
     }
+}
+
+public protocol APIAuthorization {
+    var authorizationHeader: String? { get }
 }
 
 public protocol APIRequestBody {
@@ -76,13 +81,14 @@ extension APIRequest where Self: Encodable {
 }
 
 extension APIRequest {
-    public var httpMethod: APIHTTPMethod { .get }
+    public var httpMethod: APIRequestMethod { .get }
     public var query: [String:APIRequestArgument?]? { nil }
     public var headers: [String:APIRequestArgument?]? { nil }
     public var acceptsType: APIContentType? { nil }
     public var contentType: APIContentType? { nil }
     public var cachePolicy: URLRequest.CachePolicy { .reloadIgnoringLocalAndRemoteCacheData }
     public var timeoutInterval: TimeInterval { 60 }
+    public var authorization: APIAuthorization? { nil }
 
     public func body() throws -> Data? { nil }
     public func request(for client: APIClient) throws -> URLRequest {
@@ -109,6 +115,10 @@ extension APIRequest {
         headers?.forEach { (key, value) in
             guard let value = value?.stringValue else { return }
             request.setValue(value, forHTTPHeaderField: key)
+        }
+        
+        if let authorization = authorization?.authorizationHeader {
+            request.addValue(authorization, forHTTPHeaderField: "Authorization")
         }
         
         if let contentType = contentType {

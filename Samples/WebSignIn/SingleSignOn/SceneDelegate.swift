@@ -11,6 +11,7 @@
 //
 
 import UIKit
+import AuthFoundation
 
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
@@ -48,13 +49,13 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         guard let scene = (scene as? UIWindowScene) else { return }
         windowScene = scene
         
-        if UserManager.shared.current == nil {
+        if User.default == nil {
             showSignIn()
         } else {
             showProfile()
         }
         
-        NotificationCenter.default.addObserver(forName: .userChanged, object: nil, queue: .main) { notification in
+        NotificationCenter.default.addObserver(forName: .defaultUserChanged, object: nil, queue: .main) { notification in
             if notification.object == nil {
                 self.showSignIn()
             } else {

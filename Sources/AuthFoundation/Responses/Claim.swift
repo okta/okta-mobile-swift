@@ -21,6 +21,8 @@ public enum Claim: Codable, Hashable {
     case issuedAt
     case jwtID
     case nonce
+    case username
+    case userId
     case authenticationMethodsReference
     case claim(_ name: String)
 }
@@ -34,7 +36,9 @@ fileprivate let Mapping: [String:Claim] = [
     "iat":   .issuedAt,
     "jti":   .jwtID,
     "nonce": .nonce,
-    "amr":   .authenticationMethodsReference
+    "amr":   .authenticationMethodsReference,
+    "uid":   .userId,
+    "username": .username
 ]
 
 extension Claim: RawRepresentable {

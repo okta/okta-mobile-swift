@@ -38,9 +38,10 @@ class ProfileTableViewController: UITableViewController {
     var tableContent: [Section: [Row]] = [:]
     var user: User? {
         didSet {
-            if let user = user {
+            user?.userInfo { result in
+                guard case let .success(userInfo) = result else { return }
                 DispatchQueue.main.async {
-                    self.configure(user)
+                    self.configure(userInfo)
                 }
             }
         }
@@ -49,13 +50,13 @@ class ProfileTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        NotificationCenter.default.addObserver(forName: .userChanged,
+        NotificationCenter.default.addObserver(forName: .defaultUserChanged,
                                                object: nil,
                                                queue: .main) { (notification) in
             guard let user = notification.object as? User else { return }
             self.user = user
         }
-        user = UserManager.shared.current
+        user = User.default
     }
     
     func row(at indexPath: IndexPath) -> Row? {
@@ -68,25 +69,25 @@ class ProfileTableViewController: UITableViewController {
         return row
     }
     
-    func configure(_ user: User) {
+    func configure(_ user: UserInfo) {
         let dateFormatter = DateFormatter()
         dateFormatter.dateStyle = .medium
         dateFormatter.timeStyle = .long
 
-        title = user.info.name
+        title = user.name
         self.tabBarItem.title = title
 
         tableContent = [
             .profile: [
-                .init(kind: .rightDetail, id: "givenName", title: "Given name", detail: user.info.givenName),
-                .init(kind: .rightDetail, id: "familyName", title: "Family name", detail: user.info.familyName),
-                .init(kind: .rightDetail, id: "locale", title: "Locale", detail: user.info.locale),
-                .init(kind: .rightDetail, id: "timezone", title: "Timezone", detail: user.info.zoneinfo)
+                .init(kind: .rightDetail, id: "givenName", title: "Given name", detail: user.givenName),
+                .init(kind: .rightDetail, id: "familyName", title: "Family name", detail: user.familyName),
+                .init(kind: .rightDetail, id: "locale", title: "Locale", detail: user.userLocale?.identifier ?? "N/A"),
+                .init(kind: .rightDetail, id: "timezone", title: "Timezone", detail: user.zoneInfo?.identifier ?? "N/A")
             ],
             .details: [
-                .init(kind: .rightDetail, id: "username", title: "Username", detail: user.info.preferredUsername),
-                .init(kind: .rightDetail, id: "userId", title: "User ID", detail: user.info.sub),
-                .init(kind: .rightDetail, id: "createdAt", title: "Created at", detail: dateFormatter.string(from: user.info.updatedAt)),
+                .init(kind: .rightDetail, id: "username", title: "Username", detail: user.preferredUsername),
+                .init(kind: .rightDetail, id: "userId", title: "User ID", detail: user.sub),
+                .init(kind: .rightDetail, id: "createdAt", title: "Created at", detail: (user.updatedAt != nil) ? dateFormatter.string(from: user.updatedAt!) : "N/A"),
                 .init(kind: .disclosure, id: "details", title: "Token details"),
                 .init(kind: .action, id: "refresh", title: "Refresh")
             ],
@@ -107,10 +108,10 @@ class ProfileTableViewController: UITableViewController {
     }
     
     func signout() {
-        let userManager = UserManager.shared
         let alert = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
-        alert.addAction(.init(title: "Clear tokens", style: .default, handler: { _ in
-            userManager.current = nil
+        alert.addAction(.init(title: "Remove", style: .default, handler: { _ in
+            try? self.user?.remove()
+            self.user = nil
         }))
 //        alert.addAction(.init(title: "Revoke tokens", style: .destructive, handler: { _ in
 //            userManager.current?.token.revoke { (success, error) in
@@ -186,12 +187,11 @@ class ProfileTableViewController: UITableViewController {
         tableView.deselectRow(at: indexPath, animated: true)
     }
     
-    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         switch segue.identifier {
         case "TokenDetail":
             guard let target = segue.destination as? TokenDetailViewController else { break }
-            target.token = user?.token
+            target.token = User.default?.token
 
         default: break
         }

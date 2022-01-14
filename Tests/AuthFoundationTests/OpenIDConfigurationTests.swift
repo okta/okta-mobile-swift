@@ -12,7 +12,7 @@
 
 import XCTest
 @testable import TestCommon
-@testable import OktaOAuth2
+@testable import AuthFoundation
 
 final class OpenIDConfigurationTests: XCTestCase {
 //    func testSigningAlgorithm() throws {

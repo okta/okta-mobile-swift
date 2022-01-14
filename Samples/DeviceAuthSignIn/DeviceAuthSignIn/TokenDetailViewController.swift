@@ -27,13 +27,13 @@ class TokenDetailViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        NotificationCenter.default.addObserver(forName: .userChanged,
+        NotificationCenter.default.addObserver(forName: .defaultUserChanged,
                                                object: nil,
                                                queue: .main) { (notification) in
             guard let user = notification.object as? User else { return }
             self.token = user.token
         }
-        token = UserManager.shared.current?.token
+        token = User.default?.token
     }
     
     func drawToken() {

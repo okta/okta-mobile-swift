@@ -134,10 +134,10 @@ public class TokenExchangeFlow: AuthenticationFlow {
     /// - Parameters:
     ///   - tokens: Tokens to exchange.
     ///   - completion: Optional completion block for receiving the response. If `nil`, you may rely upon the appropriate delegate API methods.
-    public func resume(with tokens: [TokenType], completion: ((Result<Token,APIClientError>) -> Void)? = nil) {
+    public func resume(with tokens: [TokenType], completion: ((Result<Token, OAuth2Error>) -> Void)? = nil) {
         if tokens.isEmpty {
-            delegateCollection.invoke { $0.authentication(flow: self, received: .flowNotReady(message: "Array of tokens is empty.")) }
-            completion?(.failure(.invalidRequestData))
+            delegateCollection.invoke { $0.authentication(flow: self, received: OAuth2Error.cannotComposeUrl) }
+            completion?(.failure(OAuth2Error.cannotComposeUrl))
             
             return
         }
@@ -147,7 +147,7 @@ public class TokenExchangeFlow: AuthenticationFlow {
         client.openIdConfiguration { result in
             switch result {
             case .failure(let error):
-                self.delegateCollection.invoke { $0.authentication(flow: self, received: .network(error: error)) }
+                self.delegateCollection.invoke { $0.authentication(flow: self, received: error) }
                 completion?(.failure(error))
                 
                 self.isAuthenticating = false
@@ -166,7 +166,7 @@ public class TokenExchangeFlow: AuthenticationFlow {
         
     }
     
-    private func authenticate(tokenURL: URL, tokens: [TokenType], completion: ((Result<Token,APIClientError>) -> Void)? = nil) {
+    private func authenticate(tokenURL: URL, tokens: [TokenType], completion: ((Result<Token, OAuth2Error>) -> Void)? = nil) {
         let request = TokenRequest(clientId: configuration.clientId,
                                    tokens: tokens,
                                    scope: configuration.scopes,
@@ -182,8 +182,9 @@ public class TokenExchangeFlow: AuthenticationFlow {
         client.exchange(token: request) { result in
             switch result {
             case .failure(let error):
-                self.delegateCollection.invoke { $0.authentication(flow: self, received: .network(error: error)) }
-                completion?(.failure(error))
+                let oauthError = OAuth2Error.error(error)
+                self.delegateCollection.invoke { $0.authentication(flow: self, received: oauthError) }
+                completion?(.failure(oauthError))
             case .success(let response):
                 self.delegateCollection.invoke { $0.authentication(flow: self, received: response.result) }
                 completion?(.success(response.result))

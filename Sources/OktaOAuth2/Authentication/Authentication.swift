@@ -52,3 +52,9 @@ public protocol AuthenticationFlow: AnyObject, UsesDelegateCollection {
 public enum ResponseType: String {
     case token, code
 }
+
+/// Errors that may be generated during the process of authenticating with a variety of authentication flows.
+public enum AuthenticationError: Error {
+    case cannotGeneratePKCE
+    case flowNotReady
+}

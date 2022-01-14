@@ -12,20 +12,17 @@
 
 import Foundation
 
-public struct OAuth2ServerError: Decodable, LocalizedError {
-    public let code: String
-    public let description: String
-    
-    public var errorDescription: String? { description }
-
-    public init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: CodingKeys.self)
-        code = try container.decode(String.self, forKey: .code)
-        description = try container.decode(String.self, forKey: .description)
+extension OAuth2Client {
+    struct KeysRequest {
+        let clientId: String
     }
+}
 
-    enum CodingKeys: String, CodingKey, CaseIterable {
-        case code = "error"
-        case description = "errorDescription"
+extension OAuth2Client.KeysRequest: APIRequest {
+    var httpMethod: APIRequestMethod { .get }
+    var path: String { "v1/keys" }
+    var acceptsType: APIContentType? { .json }
+    var query: [String : APIRequestArgument?]? {
+        [ "client_id": clientId ]
     }
 }

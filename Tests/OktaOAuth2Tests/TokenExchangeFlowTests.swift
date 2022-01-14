@@ -63,10 +63,10 @@ final class TokenExchangeFlowTests: XCTestCase {
         client = OAuth2Client(baseURL: issuer, session: urlSession)
         
         urlSession.expect("https://example.com/oauth2/default/.well-known/openid-configuration",
-                          data: try data(for: "openid-configuration", in: "MockResponses"),
+                          data: try data(from: .module, for: "openid-configuration", in: "MockResponses"),
                           contentType: "application/json")
         urlSession.expect("https://example.okta.com/oauth2/v1/token",
-                          data: try data(for: "token", in: "MockResponses"),
+                          data: try data(from: .module, for: "token", in: "MockResponses"),
                           contentType: "application/json")
         
         flow = TokenExchangeFlow(configuration, client: client)

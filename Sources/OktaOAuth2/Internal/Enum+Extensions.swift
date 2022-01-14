@@ -11,6 +11,7 @@
 //
 
 import Foundation
+import AuthFoundation
 
 extension GrantType {
     var responseKey: String {
