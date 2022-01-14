@@ -15,7 +15,7 @@ import XCTest
 @testable import AuthFoundation
 @testable import OktaOAuth2
 
-final class TokenExchangeFlowDelegateRecorder: TokenExchangeFlowDelegate {
+final class TokenExchangeFlowDelegateRecorder: AuthenticationDelegate {
     typealias Flow = TokenExchangeFlow
     
     var token: Token?
@@ -38,10 +38,6 @@ final class TokenExchangeFlowDelegateRecorder: TokenExchangeFlowDelegate {
     
     func authentication<Flow>(flow: Flow, received error: OAuth2Error) {
         self.error = error
-    }
-    
-    func authentication<Flow>(flow: Flow, shouldAuthenticateUsing url: URL) {
-        self.url = url
     }
 }
 
