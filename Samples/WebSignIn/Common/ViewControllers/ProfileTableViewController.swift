@@ -110,6 +110,7 @@ class ProfileTableViewController: UITableViewController {
     func signout() {
         let alert = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
         alert.addAction(.init(title: "Remove", style: .default, handler: { _ in
+            try? Keychain.deleteTokens()
             try? self.user?.remove()
             self.user = nil
         }))

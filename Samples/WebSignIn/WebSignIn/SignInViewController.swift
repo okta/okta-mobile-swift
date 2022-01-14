@@ -44,14 +44,7 @@ class SignInViewController: UIViewController {
             case .success(let token):
                 User.default = User(token: token)
                 
-                token.idToken.flatMap { try? Keychain.set(key: "Okta-Id-Token",
-                                                          string: $0,
-                                                          accessGroup: "com.okta.mobile-sdk.shared",
-                                                          accessibility: kSecAttrAccessibleWhenUnlocked) }
-                token.deviceSecret.flatMap { try? Keychain.set(key: "Okta-Device-Token",
-                                                               string: $0,
-                                                               accessGroup: "com.okta.mobile-sdk.shared",
-                                                               accessibility: kSecAttrAccessibleWhenUnlocked) }
+                try? Keychain.save(token)
 
             case .failure(let error):
                 let alert = UIAlertController(title: "Cannot sign in", message: error.localizedDescription, preferredStyle: .alert)

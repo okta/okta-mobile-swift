@@ -58,7 +58,7 @@ final class TokenExchangeFlowTests: XCTestCase {
     
     override func setUpWithError() throws {
         configuration = TokenExchangeFlow.Configuration(clientId: "clientId",
-                                                        scopes: "profile device_sso",
+                                                        scopes: "profile openid device_sso",
                                                         audience: .default)
         client = OAuth2Client(baseURL: issuer, session: urlSession)
         

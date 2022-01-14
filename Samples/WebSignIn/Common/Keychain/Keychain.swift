@@ -12,7 +12,7 @@
 
 import Foundation
 
-public class Keychain {
+public final class Keychain {
     
     enum Error: Swift.Error {
         case codingError
@@ -118,16 +118,23 @@ public class Keychain {
      - parameters:
      - key: Hash to reference the stored Keychain item
      */
-    public static func remove(key: String) throws {
-        let data: Data = try get(key: key)
-        let q = [
+    public static func remove(key: String, accessGroup: String? = nil) throws {
+        let data: Data = try get(key: key, accessGroup: accessGroup)
+        var query = [
             kSecClass as String: kSecClassGenericPassword as String,
             kSecValueData as String: data,
             kSecAttrAccount as String: key
-        ] as CFDictionary
+        ] as [String: Any]
+        
+        if let accessGroup = accessGroup {
+            query[kSecAttrSynchronizable as String] = kCFBooleanTrue!
+            query[kSecAttrAccessGroup as String] = accessGroup
+        }
         
         // Delete existing (if applicable)
-        let sanityCheck = SecItemDelete(q)
+        let cfQuery = query as CFDictionary
+        let sanityCheck: OSStatus = SecItemDelete(cfQuery)
+        
         guard sanityCheck == noErr else {
             throw Keychain.Error.failed(sanityCheck.description)
         }

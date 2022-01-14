@@ -13,20 +13,6 @@
 import AuthFoundation
 import Foundation
 
-/// The delegate of a ``TokenExchangeFlow`` may adopt some, or all, of the methods described here. These allow a developer to customize or interact with the  flow during authentication.
-///
-/// This protocol extends the basic ``AuthenticationDelegate`` which all authentication flows support.
-public protocol TokenExchangeFlowDelegate: AuthenticationDelegate {
-    
-    typealias Flow = TokenExchangeFlow
-    
-    /// Called when the authorization URL has been created, indicating the URL should be used for token exchange.
-    /// - Parameters:
-    ///   - flow: The authentication flow.
-    ///   - url: The URL for token exchange.
-    func authentication<Flow>(flow: Flow, shouldAuthenticateUsing url: URL)
-}
-
 
 /// An authentication flow class that implements the Token Exchange Flow.
 ///
@@ -99,7 +85,7 @@ public class TokenExchangeFlow: AuthenticationFlow {
     }
 
     /// Collection of the ``TokenExchangeFlowDelegate`` objects.
-    public let delegateCollection = DelegateCollection<TokenExchangeFlowDelegate>()
+    public let delegateCollection = DelegateCollection<AuthenticationDelegate>()
     
     /// Convenience initializer to construct a flow from variables.
     /// - Parameters:
@@ -135,7 +121,7 @@ public class TokenExchangeFlow: AuthenticationFlow {
     ///   - tokens: Tokens to exchange.
     ///   - completion: Optional completion block for receiving the response. If `nil`, you may rely upon the appropriate delegate API methods.
     public func resume(with tokens: [TokenType], completion: ((Result<Token, OAuth2Error>) -> Void)? = nil) {
-        if tokens.isEmpty {
+        guard !tokens.isEmpty else {
             delegateCollection.invoke { $0.authentication(flow: self, received: OAuth2Error.cannotComposeUrl) }
             completion?(.failure(OAuth2Error.cannotComposeUrl))
             
@@ -152,7 +138,6 @@ public class TokenExchangeFlow: AuthenticationFlow {
                 
                 self.isAuthenticating = false
             case .success(let openIdConfiguration):
-                self.delegateCollection.invoke { $0.authentication(flow: self, shouldAuthenticateUsing: openIdConfiguration.tokenEndpoint) }
                 self.authenticate(tokenURL: openIdConfiguration.tokenEndpoint, tokens: tokens, completion: completion)
             }
         }
@@ -172,10 +157,8 @@ public class TokenExchangeFlow: AuthenticationFlow {
                                    scope: configuration.scopes,
                                    audience: configuration.audience.value,
                                    tokenPath: tokenURL.path)
-        if
-            let tokenBaseURL = URL(string: tokenURL.absoluteString.replacingOccurrences(of: tokenURL.path, with: "")),
-            tokenBaseURL != client.baseURL
-        {
+        if let tokenBaseURL = URL(string: tokenURL.absoluteString.replacingOccurrences(of: tokenURL.path, with: "")),
+            tokenBaseURL != client.baseURL {
             client = OAuth2Client(baseURL: tokenBaseURL, session: client.session)
         }
         

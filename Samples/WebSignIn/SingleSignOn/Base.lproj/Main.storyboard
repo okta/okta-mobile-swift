@@ -44,19 +44,38 @@
                                     </label>
                                 </subviews>
                             </stackView>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Klv-HL-iSQ">
+                                <rect key="frame" x="0.0" y="88" width="414" height="774"/>
+                                <subviews>
+                                    <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" animating="YES" style="large" translatesAutoresizingMaskIntoConstraints="NO" id="1fa-9j-96P">
+                                        <rect key="frame" x="188.5" y="368.5" width="37" height="37"/>
+                                        <color key="color" systemColor="tintColor"/>
+                                    </activityIndicatorView>
+                                </subviews>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <constraints>
+                                    <constraint firstItem="1fa-9j-96P" firstAttribute="centerY" secondItem="Klv-HL-iSQ" secondAttribute="centerY" id="pi8-gm-xt6"/>
+                                    <constraint firstItem="1fa-9j-96P" firstAttribute="centerX" secondItem="Klv-HL-iSQ" secondAttribute="centerX" id="vMi-5l-yLr"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="vLw-T5-A4g" secondAttribute="bottom" constant="47.5" id="0Wm-TN-TEK"/>
+                            <constraint firstItem="Klv-HL-iSQ" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="3w2-g4-gHc"/>
                             <constraint firstItem="Fsl-KR-I9b" firstAttribute="centerY" secondItem="6Tk-OE-BBY" secondAttribute="centerY" multiplier="0.9" id="EHr-Fd-Pu4"/>
                             <constraint firstItem="vLw-T5-A4g" firstAttribute="centerX" secondItem="6Tk-OE-BBY" secondAttribute="centerX" id="KD5-K5-w2h"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="Klv-HL-iSQ" secondAttribute="trailing" id="O2c-kW-ejI"/>
+                            <constraint firstItem="Klv-HL-iSQ" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="aWL-Gc-rzx"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="Klv-HL-iSQ" secondAttribute="bottom" id="cPz-sj-UlS"/>
                             <constraint firstItem="Fsl-KR-I9b" firstAttribute="centerX" secondItem="6Tk-OE-BBY" secondAttribute="centerX" id="hi0-Tg-VyD"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="Ety-aW-sRl"/>
                     <connections>
                         <outlet property="clientIdLabel" destination="Ocl-qA-b7f" id="ZEc-af-2BM"/>
+                        <outlet property="indicatorView" destination="Klv-HL-iSQ" id="h1S-Ln-k62"/>
                         <outlet property="signInButton" destination="Fsl-KR-I9b" id="o1U-BL-pWl"/>
                     </connections>
                 </viewController>
@@ -86,6 +105,9 @@
     <resources>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+        <systemColor name="tintColor">
+            <color red="0.0" green="0.47843137254901963" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>
