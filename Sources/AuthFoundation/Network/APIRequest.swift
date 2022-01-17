@@ -60,6 +60,10 @@ public protocol APIRequestBody {
     var bodyParameters: [String:Any]? { get }
 }
 
+public protocol APIParsingContext {
+    var codingUserInfo: [CodingUserInfoKey:Any]? { get }
+}
+
 extension APIRequest where Self: APIRequestBody {
     public func body() throws -> Data? {
         try contentType?.encodedData(with: bodyParameters)

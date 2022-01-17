@@ -277,6 +277,7 @@ public class AuthorizationCodeFlow: AuthenticationFlow {
 
         let request = TokenRequest(clientId: configuration.clientId,
                                    clientSecret: configuration.clientSecret,
+                                   scope: configuration.scopes,
                                    redirectUri: configuration.redirectUri.absoluteString,
                                    grantType: .authorizationCode,
                                    grantValue: code,
@@ -284,8 +285,12 @@ public class AuthorizationCodeFlow: AuthenticationFlow {
         client.exchange(token: request) { result in
             switch result {
             case .success(let response):
-                self.delegateCollection.invoke { $0.authentication(flow: self, received: response.result) }
-                completion?(.success(response.result))
+                let token = response.result
+                self.delegateCollection.invoke { $0.authentication(flow: self, received: token) }
+                self.client.introspect(token: token, type: .accessToken) { result in
+                    print(result)
+                    completion?(.success(token))
+                }
             case .failure(let error):
                 self.delegateCollection.invoke { $0.authentication(flow: self, received: .network(error: error)) }
                 completion?(.failure(error))

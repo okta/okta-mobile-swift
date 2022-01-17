@@ -143,8 +143,8 @@ extension Token {
 }
 
 extension CodingUserInfoKey {
-    static let baseURL = CodingUserInfoKey(rawValue: "baseURL")!
-    static let refreshSettings = CodingUserInfoKey(rawValue: "refreshSettings")!
+    public static let baseURL = CodingUserInfoKey(rawValue: "baseURL")!
+    public static let refreshSettings = CodingUserInfoKey(rawValue: "refreshSettings")!
 }
 
 public extension Token {

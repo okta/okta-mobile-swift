@@ -103,7 +103,7 @@ class ProfileTableViewController: UITableViewController {
         DispatchQueue.main.async {
             let alert = UIAlertController(title: nil, message: error.localizedDescription, preferredStyle: .alert)
             alert.addAction(.init(title: "OK", style: .default))
-            self.show(alert, sender: nil)
+            self.present(alert, animated: true)
         }
     }
     
@@ -132,14 +132,13 @@ class ProfileTableViewController: UITableViewController {
     }
 
     func refresh() {
-//        guard let user = UserManager.shared.current else { return }
-//        user.token.refresh { (token, error) in
-//            if let token = token {
-//                UserManager.shared.current = User(token: token, info: user.info)
-//            } else if let error = error {
-//                self.show(error: error)
-//            }
-//        }
+        user?.refresh { result in
+            if case let .failure(error) = result {
+                DispatchQueue.main.async {
+                    self.show(error: error)
+                }
+            }
+        }
     }
     
     // MARK: - Table view data source

@@ -14,26 +14,104 @@ import Foundation
 
 public protocol JWTClaim {}
 
-public struct JWT {
-    let header: [String: Any]
-    let body: [String: JWTClaim]
-    let signature: String?
-    let string: String
+public enum JWTError: Error {
+    case invalidBase64Encoding
+    case badTokenStructure
+}
 
-    let expiresAt: Date?
-    let issuer: String?
-    let subject: String?
-    let audience: [String]?
-    let issuedAt: Date?
-    let notBefore: Date?
-    let identifier: String?
+public struct JWT: Identifiable {
+    public var expirationTime: Date? { self[.expirationTime] }
+    
+    public var issuer: String? { self[.issuer] }
+    public var subject: String? { self[.subject] }
+    public var audience: [String]? { self[.audience] }
+    public var issuedAt: Date? { self[.issuedAt] }
+    public var notBefore: Date? { self[.notBefore] }
+    public var id: String? { self[.jwtId] }
+    
+    let header: Header
+    let payload: [String:Any]
+    let signature: String?
+    
+    public var allClaims: [Claim] { payload.keys.compactMap { Claim(rawValue: $0) } }
+    public var allClaimStrings: [String] { payload.keys.compactMap { $0 } }
+    public var scope: [String]? { self[.scope] ?? self["scp"] }
 
     var expired: Bool {
         false
     }
+        
+    public subscript(_ claim: Claim) -> Date? {
+        guard let time: TimeInterval = self[claim] else { return nil }
+        return Date(timeIntervalSince1970: time)
+    }
     
-    func claim<T>(_ name: String, with type: T.Type) -> T? where T: JWTClaim {
-        body[name] as? T
+    public subscript(_ claim: String) -> Date? {
+        guard let time: TimeInterval = self[claim] else { return nil }
+        return Date(timeIntervalSince1970: time)
+    }
+    
+    public subscript<T>(_ claim: Claim) -> T? {
+        payload[claim.rawValue] as? T
+    }
+    
+    public subscript<T>(_ claim: String) -> T? {
+        payload[claim] as? T
+    }
+    
+    public enum Algorithm: String, Codable {
+        case hs256 = "HS256"
+        case hs384 = "HS384"
+        case hs512 = "HS512"
+        case rs256 = "RS256"
+        case rs384 = "RS384"
+        case rs512 = "RS512"
+        case es256 = "ES256"
+        case es384 = "ES384"
+        case es512 = "ES512"
+    }
+    
+    public struct Header: Decodable {
+        public let kid: String
+        public let alg: Algorithm
+    }
+    
+    public init(_ token: String) throws {
+        let components: [String] = token
+            .components(separatedBy: ".")
+            .map { $0.replacingOccurrences(of: "-", with: "+") }
+            .map { $0.replacingOccurrences(of: "_", with: "/") }
+            .map { component in
+                var suffix = ""
+                switch (component.count % 4) {
+                case 1:
+                    suffix = "==="
+                case 2:
+                    suffix = "=="
+                case 3:
+                    suffix = "="
+                default: break
+                }
+                return "\(component)\(suffix)"
+            }
+
+        guard components.count == 3 else {
+            throw JWTError.badTokenStructure
+        }
+        
+        guard let headerData = Data(base64Encoded: components[0]),
+              let payloadData = Data(base64Encoded: components[1])
+        else { throw JWTError.invalidBase64Encoding }
+        
+        try self.init(header: headerData,
+                      payload: payloadData,
+                      signature: components[2])
+    }
+    
+    init(header headerData: Data, payload payloadData: Data, signature signatureData: String) throws {
+        header = try JSONDecoder().decode(JWT.Header.self, from: headerData)
+        payload = try JSONSerialization.jsonObject(with: payloadData, options: []) as! [String:Any]
+        signature = signatureData
     }
 }
 

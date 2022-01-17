@@ -53,7 +53,16 @@ class DefaultTokenStorage: TokenStorage {
     }
     
     func add(token: Token) throws {
-        if let index = allTokens.firstIndex(of: token) {
+        let tokenJwt = try JWT(token.accessToken)
+
+        if let tokenId = tokenJwt.id,
+           let replaceToken = allTokens.first(where: { compareToken in
+               guard let compareJwt = try? JWT(compareToken.accessToken) else { return false }
+               let compareId = compareJwt.id
+               return tokenId == compareId
+           }),
+           let index = allTokens.firstIndex(of: replaceToken)
+        {
             allTokens.remove(at: index)
             allTokens.insert(token, at: index)
             
