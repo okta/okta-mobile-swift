@@ -64,7 +64,7 @@ public class TokenExchangeFlow: AuthenticationFlow {
     }
     
     /// The ``OAuth2Client`` this authentication flow will use.
-    private(set) public var client: OAuth2Client
+    public let client: OAuth2Client
     
     /// The configuration used when constructing this authentication flow.
     public let configuration: Configuration
@@ -157,11 +157,6 @@ public class TokenExchangeFlow: AuthenticationFlow {
                                    scope: configuration.scopes,
                                    audience: configuration.audience.value,
                                    tokenPath: tokenURL.path)
-        if let tokenBaseURL = URL(string: tokenURL.absoluteString.replacingOccurrences(of: tokenURL.path, with: "")),
-            tokenBaseURL != client.baseURL {
-            client = OAuth2Client(baseURL: tokenBaseURL, session: client.session)
-        }
-        
         client.exchange(token: request) { result in
             switch result {
             case .failure(let error):

@@ -42,7 +42,7 @@ final class TokenExchangeFlowDelegateRecorder: AuthenticationDelegate {
 }
 
 final class TokenExchangeFlowTests: XCTestCase {
-    let issuer = URL(string: "https://example.com")!
+    let issuer = URL(string: "https://example.okta.com")!
     let redirectUri = URL(string: "com.example:/callback")!
     let clientMock = OAuth2ClientMock()
     var configuration: TokenExchangeFlow.Configuration!
@@ -58,7 +58,7 @@ final class TokenExchangeFlowTests: XCTestCase {
                                                         audience: .default)
         client = OAuth2Client(baseURL: issuer, session: urlSession)
         
-        urlSession.expect("https://example.com/oauth2/default/.well-known/openid-configuration",
+        urlSession.expect("https://example.okta.com/oauth2/default/.well-known/openid-configuration",
                           data: try data(from: .module, for: "openid-configuration", in: "MockResponses"),
                           contentType: "application/json")
         urlSession.expect("https://example.okta.com/oauth2/v1/token",
