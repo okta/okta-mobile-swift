@@ -130,21 +130,50 @@ public class OAuth2Client: APIClient {
         }
     }
     
+    public var isRefreshing: Bool {
+        refreshQueue.sync { refreshAction != nil }
+    }
+    
     public func refresh(_ token: Token, completion: @escaping (Result<Token, OAuth2Error>) -> Void) {
         guard let refreshSettings = token.context.refreshSettings else {
             completion(.failure(.missingToken(type: .refreshToken)))
             return
         }
         
+        refreshQueue.sync {
+            guard refreshAction == nil else {
+                refreshAction?.add(completion)
+                return
+            }
+            
+            refreshAction = CoalescedResult()
+            refreshAction?.add(completion)
+            performRefresh(token: token, refreshSettings: refreshSettings)
+        }
+    }
+    
+    private lazy var refreshQueue: DispatchQueue = {
+        DispatchQueue(label: "com.okta.refreshQueue.\(baseURL.host ?? "unknown")",
+                      qos: .userInitiated,
+                      attributes: .concurrent)
+    }()
+    private var refreshAction: CoalescedResult<Result<Token, OAuth2Error>>?
+    private func performRefresh(token: Token, refreshSettings: [String:String]) {
+        guard let action = refreshAction else { return }
+        
         delegateCollection.invoke { $0.oauth(client: self, willRefresh: token) }
         refresh(Token.RefreshRequest(token: token, configuration: refreshSettings)) { result in
-            switch result {
-            case .success(let response):
-                completion(.success(response.result))
-                self.delegateCollection.invoke { $0.oauth(client: self, didRefresh: token, replacedWith: response.result) }
-            case .failure(let error):
-                completion(.failure(.network(error: error)))
-                self.delegateCollection.invoke { $0.oauth(client: self, didRefresh: token, replacedWith: nil) }
+            self.refreshQueue.sync(flags: .barrier) {
+                switch result {
+                case .success(let response):
+                    action.finish(.success(response.result))
+                    self.delegateCollection.invoke { $0.oauth(client: self, didRefresh: token, replacedWith: response.result) }
+                case .failure(let error):
+                    action.finish(.failure(.network(error: error)))
+                    self.delegateCollection.invoke { $0.oauth(client: self, didRefresh: token, replacedWith: nil) }
+                }
+                
+                self.refreshAction = nil
             }
         }
     }

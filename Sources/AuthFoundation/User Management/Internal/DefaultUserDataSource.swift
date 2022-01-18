@@ -16,7 +16,7 @@ class DefaultUserDataSource: UserDataSource {
     private let queue = DispatchQueue(label: "com.okta.userDataSource.users",
                                       attributes: .concurrent)
 
-    private var users: [Token: User] = [:]
+    private var users: [User] = []
 
     weak var delegate: UserDataSourceDelegate?
 
@@ -24,16 +24,20 @@ class DefaultUserDataSource: UserDataSource {
         queue.sync { users.count }
     }
     
+    func hasUser(for token: Token) -> Bool {
+        queue.sync { !users.filter({ $0.token == token }).isEmpty }
+    }
+
     func user(for token: Token) -> User {
         queue.sync {
-            if let user = users[token] {
+            if let user = users.first(where: { $0.token == token }) {
                 return user
             } else {
                 let urlSession = self.urlSession(for: token)
                 let client = OAuth2Client(baseURL: token.context.baseURL,
                                           session: urlSession)
                 let user = User(token: token, oauth2: client)
-                users[token] = user
+                users.append(user)
                 
                 delegate?.user(dataSource: self, created: user)
 
@@ -44,7 +48,8 @@ class DefaultUserDataSource: UserDataSource {
     
     func remove(user: User) {
         let _ = queue.sync(flags: .barrier) {
-            users.removeValue(forKey: user.token)
+            guard let index = users.firstIndex(of: user) else { return }
+            users.remove(at: index)
             delegate?.user(dataSource: self, removed: user)
         }
     }

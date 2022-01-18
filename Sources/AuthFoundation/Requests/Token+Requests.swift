@@ -80,9 +80,11 @@ extension Token.RefreshRequest: APIRequest, APIRequestBody, APIParsingContext {
     }
     
     var codingUserInfo: [CodingUserInfoKey : Any]? {
-        token.context.refreshSettings?.reduce(into: [:]) { partialResult, item in
+        guard let refreshSettings = token.context.refreshSettings,
+              let settings = refreshSettings.reduce(into: [:], { partialResult, item in
             guard let key = CodingUserInfoKey(rawValue: item.key) else { return }
             partialResult?[key] = item.value
-        }
+        }) else { return nil }
+        return [ .refreshSettings: settings ]
     }
 }

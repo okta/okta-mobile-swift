@@ -53,36 +53,45 @@ class DefaultTokenStorage: TokenStorage {
     }
     
     func add(token: Token) throws {
-        let tokenJwt = try JWT(token.accessToken)
+        guard !allTokens.contains(token) else {
+            throw TokenError.duplicateTokenAdded
+        } 
 
-        if let tokenId = tokenJwt.id,
-           let replaceToken = allTokens.first(where: { compareToken in
-               guard let compareJwt = try? JWT(compareToken.accessToken) else { return false }
-               let compareId = compareJwt.id
-               return tokenId == compareId
-           }),
-           let index = allTokens.firstIndex(of: replaceToken)
-        {
-            allTokens.remove(at: index)
-            allTokens.insert(token, at: index)
+        var changedDefault = false
+        if allTokens.count == 0 {
+            _defaultToken = token
+            changedDefault = true
+        }
+        
+        allTokens.append(token)
+        
+        try save()
+        delegate?.token(storage: self, added: token)
+        
+        if changedDefault {
+            delegate?.token(storage: self, defaultChanged: token)
+        }
+    }
+    
+    func replace(token: Token, with newToken: Token) throws {
+        guard let index = allTokens.firstIndex(of: token) else {
+            throw TokenError.cannotReplaceToken
+        }
+        
+        allTokens.remove(at: index)
+        allTokens.insert(newToken, at: index)
             
-            try save()
-            delegate?.token(storage: self, updated: token)
-        } else {
-            var changedDefault = false
-            if allTokens.count == 0 {
-                _defaultToken = token
-                changedDefault = true
-            }
-            
-            allTokens.append(token)
-            
-            try save()
-            delegate?.token(storage: self, added: token)
-
-            if changedDefault {
-                delegate?.token(storage: self, defaultChanged: token)
-            }
+        var changedDefault = false
+        if _defaultToken == token {
+            changedDefault = true
+            _defaultToken = newToken
+        }
+        
+        try save()
+        delegate?.token(storage: self, replaced: token, with: newToken)
+        
+        if changedDefault {
+            delegate?.token(storage: self, defaultChanged: token)
         }
     }
     

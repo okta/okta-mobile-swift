@@ -36,11 +36,18 @@ public protocol TokenStorage {
 
     /// Adds the given token.
     ///
-    /// This should avoid adding duplicate tokens. If the new token is semantically the same as another token already within storage, but some other value (such as refresh token or expiration time) may have changed, this method should update the underlying data store with the refreshed value.
+    /// This should throw ``TokenError/duplicateTokenAdded`` if the token already exists in storage.
     ///
-    /// > Note: This method should invoke the relevant datasource method, either calling ``TokenStorageDelegate/token(storage:added:)`` or ``TokenStorageDelegate/token(storage:updated:)``.
+    /// > Note: This method should invoke the ``TokenStorageDelegate/token(storage:added:)`` delegate method.
     func add(token: Token) throws
     
+    /// Replaces an existing token with a new one.
+    ///
+    /// This can be used during the token refresh process, and indicates that one token is semantically the same as another. If the token being replaced is the default, the default value should be updated as well.
+    ///
+    /// > Note: This method should invoke the ``TokenStorageDelegate/token(storage:replaced:with:)`` and ``TokenStorageDelegate/token(storage:defaultChanged:)`` methods as needed.
+    func replace(token: Token, with newToken: Token) throws
+
     /// Removes the given token.
     ///
     /// > Note: This method should invoke the  ``TokenStorageDelegate/token(storage:removed:)`` method.
@@ -62,8 +69,8 @@ public protocol TokenStorageDelegate: AnyObject {
     
     /// Sent when a token has been updated within storage.
     ///
-    /// There are circumstances when a token that already exists within storage needs to be replaced or updated. For example, when a token is refreshed, even though the ``Token/accessToken`` is the same, there may be a different expiration time, the ``Token/refreshToken`` may change, or other values.
+    /// There are circumstances when a token that already exists within storage needs to be replaced or updated. For example, when a token is refreshed, even though the new token differs, it represents the same resources and capabilities as the previous token.
     ///
     /// As a result, this message is used to convey that a token has been updated, but not removed or newly added.
-    func token(storage: TokenStorage, updated token: Token?)
+    func token(storage: TokenStorage, replaced oldToken: Token, with newToken: Token)
 }

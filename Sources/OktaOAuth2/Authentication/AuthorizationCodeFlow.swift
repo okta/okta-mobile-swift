@@ -287,10 +287,7 @@ public class AuthorizationCodeFlow: AuthenticationFlow {
             case .success(let response):
                 let token = response.result
                 self.delegateCollection.invoke { $0.authentication(flow: self, received: token) }
-                self.client.introspect(token: token, type: .accessToken) { result in
-                    print(result)
-                    completion?(.success(token))
-                }
+                completion?(.success(token))
             case .failure(let error):
                 self.delegateCollection.invoke { $0.authentication(flow: self, received: .network(error: error)) }
                 completion?(.failure(error))
