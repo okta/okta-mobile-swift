@@ -13,6 +13,7 @@
 import Foundation
 import AuthFoundation
 
+/// Abstract base protocol for AuthenticationFlow instances to use for their backing configuration.
 public protocol AuthenticationConfiguration {}
 
 /// A common delegate protocol that all authentication flows should support.

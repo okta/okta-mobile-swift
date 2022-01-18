@@ -117,10 +117,14 @@ extension UserCoordinator: TokenStorageDelegate {
 extension UserCoordinator: UserDataSourceDelegate {
     func user(dataSource: UserDataSource, created user: User) {
         user.coordinator = self
+        
+        NotificationCenter.default.post(name: .userCreated, object: user)
     }
     
     func user(dataSource: UserDataSource, removed user: User) {
         user.coordinator = nil
+
+        NotificationCenter.default.post(name: .userRemoved, object: user)
     }
     
     func user(dataSource: UserDataSource, updated user: User) {

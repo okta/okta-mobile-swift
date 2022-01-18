@@ -24,7 +24,7 @@ public class ResourceOwnerFlow: AuthenticationFlow {
         public let scopes: String
     }
     
-    /// The ``OAuth2Client`` this authentication flow will use.
+    /// The OAuth2Client this authentication flow will use.
     public let client: OAuth2Client
     
     /// The configuration used when constructing this authentication flow.
