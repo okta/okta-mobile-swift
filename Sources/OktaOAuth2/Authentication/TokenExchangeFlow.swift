@@ -96,7 +96,7 @@ public class TokenExchangeFlow: AuthenticationFlow {
     public convenience init(issuer: URL,
                             clientId: String,
                             scopes: String,
-                            audience: Configuration.Audience) {
+                            audience: Configuration.Audience = .default) {
         self.init(Configuration(clientId: clientId,
                                 scopes: scopes,
                                 audience: audience),
