@@ -28,6 +28,8 @@ public protocol UserDataSource {
     /// > Note: This should not return the total number of available tokens, but rather the number of user objects loaded within this cache.
     var userCount: Int { get }
     
+    func hasUser(for token: Token) -> Bool
+    
     /// Returns a user for the given token.
     ///
     /// The implementation should ensure that no duplicate user instances should be created for the given token. It is recommended that the method be threadsafe as well.

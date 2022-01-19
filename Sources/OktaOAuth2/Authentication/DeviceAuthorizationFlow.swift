@@ -90,7 +90,7 @@ public class DeviceAuthorizationFlow: AuthenticationFlow {
         let interval: TimeInterval
         
         /// The date this context was created.
-        public let issuedAt: Date
+        public let issuedAt: Date?
 
         /// The code that should be displayed to the user.
         public let userCode: String

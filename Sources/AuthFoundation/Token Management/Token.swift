@@ -17,12 +17,14 @@ public enum TokenError: Error {
     case refreshTokenMissing
     case contextMissing
     case tokenNotFound(_: Token)
+    case cannotReplaceToken
+    case duplicateTokenAdded
 }
 
 /// Token information representing a user's access to a resource server, including access token, refresh token, and other related information.
 public class Token: Codable, Equatable, Hashable, Expires {
     // The date this token was issued at.
-    public var issuedAt: Date
+    public var issuedAt: Date?
     
     /// The string type of the token (e.g. `Bearer`).
     public let tokenType: String
@@ -45,6 +47,12 @@ public class Token: Codable, Equatable, Hashable, Expires {
     /// Defines the context this token was issued from.
     public let context: Context
     
+    public var isRefreshing: Bool {
+        refreshAction != nil
+    }
+    
+    internal var refreshAction: CoalescedResult<Result<Token, OAuth2Error>>?
+
     /// Return the relevant token string for the given type.
     /// - Parameter kind: Type of token string to return
     /// - Returns: Token string, or `nil` if this token doesn't contain the requested type.
@@ -100,7 +108,7 @@ public class Token: Codable, Equatable, Hashable, Expires {
             context = try container.decode(Context.self, forKey: .context)
         } else if let baseUrl = decoder.userInfo[.baseURL] as? URL {
             context = Context(baseURL: baseUrl,
-                              refreshSettings: decoder.userInfo[.refreshSettings] as? [String:String])
+                              refreshSettings: decoder.userInfo[.refreshSettings])
         } else {
             throw TokenError.contextMissing
         }
@@ -126,6 +134,22 @@ extension Token {
         
         /// Settings required to be supplied to the authorization server when refreshing this token.
         let refreshSettings: [String:String]?
+        
+        init(baseURL: URL, refreshSettings: Any?) {
+            self.baseURL = baseURL
+            
+            if let settings = refreshSettings as? [String:String]? {
+                self.refreshSettings = settings
+            }
+            
+            else if let settings = refreshSettings as? [CodingUserInfoKey: String] {
+                self.refreshSettings = settings.reduce(into: [String:String]()) { (partialResult, tuple: (key: CodingUserInfoKey, value: String)) in
+                    partialResult[tuple.key.rawValue] = tuple.value
+                }
+            } else {
+                self.refreshSettings = nil
+            }
+        }
     }
 }
 
@@ -143,8 +167,8 @@ extension Token {
 }
 
 extension CodingUserInfoKey {
-    static let baseURL = CodingUserInfoKey(rawValue: "baseURL")!
-    static let refreshSettings = CodingUserInfoKey(rawValue: "refreshSettings")!
+    public static let baseURL = CodingUserInfoKey(rawValue: "baseURL")!
+    public static let refreshSettings = CodingUserInfoKey(rawValue: "refreshSettings")!
 }
 
 public extension Token {

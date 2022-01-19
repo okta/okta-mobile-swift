@@ -53,13 +53,13 @@ public protocol APIClient {
     func didSend<T>(request: URLRequest, received response: APIResponse<T>)
     
     /// Send the given URLRequest.
-    func send<T: Decodable>(_ request: URLRequest, completion: @escaping (Result<APIResponse<T>, APIClientError>) -> Void)
+    func send<T: Decodable>(_ request: URLRequest, parsing context: APIParsingContext?, completion: @escaping (Result<APIResponse<T>, APIClientError>) -> Void)
 
     #if swift(>=5.5.1) && !os(Linux)
     /// Asynchronously send the given URLRequest.
     /// - Returns: APIResponse when the request is successful.
     @available(iOS 15.0, tvOS 15.0, macOS 12.0, *)
-    func send<T: Decodable>(_ request: URLRequest) async throws -> APIResponse<T>
+    func send<T: Decodable>(_ request: URLRequest, parsing context: APIParsingContext?) async throws -> APIResponse<T>
     #endif
 }
 
@@ -88,7 +88,9 @@ extension APIClient {
     
     public func decode<T>(_ type: T.Type, from data: Data, userInfo: [CodingUserInfoKey:Any]? = nil) throws -> T where T: Decodable {
         var info: [CodingUserInfoKey:Any] = userInfo ?? [:]
-        info[.baseURL] = baseURL
+        if info[.baseURL] == nil {
+            info[.baseURL] = baseURL
+        }
         
         let jsonDecoder: JSONDecoder
         if let jsonType = type as? JSONDecodable.Type {
@@ -113,7 +115,7 @@ extension APIClient {
 
     public func didSend<T>(request: URLRequest, received response: APIResponse<T>) {}
 
-    public func send<T: Decodable>(_ request: URLRequest, completion: @escaping (Result<APIResponse<T>, APIClientError>) -> Void) where T : Decodable {
+    public func send<T: Decodable>(_ request: URLRequest, parsing context: APIParsingContext? = nil, completion: @escaping (Result<APIResponse<T>, APIClientError>) -> Void) where T : Decodable {
         var urlRequest = request
         
         willSend(request: &urlRequest)
@@ -133,7 +135,9 @@ extension APIClient {
             }
 
             do {
-                let response: APIResponse<T> = try self.validate(data, response)
+                let response: APIResponse<T> = try self.validate(data: data,
+                                                                 response: response,
+                                                                 parsing: context)
                 self.didSend(request: request, received: response)
                 
                 completion(.success(response))
@@ -146,10 +150,12 @@ extension APIClient {
     }
     
     /// Convenience method that enables the use of an ``APIRequest`` struct to define how a network operation should be performed.
-    public func send<T: Decodable>(_ request: APIRequest, completion: @escaping (Result<APIResponse<T>, APIClientError>) -> Void) where T : Decodable {
+    public func send<T: Decodable>(_ request: APIRequest, parsing context: APIParsingContext? = nil, completion: @escaping (Result<APIResponse<T>, APIClientError>) -> Void) where T : Decodable {
         do {
             let urlRequest = try request.request(for: self)
-            send(urlRequest, completion: completion)
+            send(urlRequest,
+                 parsing: context ?? request as? APIParsingContext,
+                 completion: completion)
         } catch {
             completion(.failure(.serverError(error)))
         }
@@ -157,14 +163,16 @@ extension APIClient {
 
     #if swift(>=5.5.1) && !os(Linux)
     @available(iOS 15.0, tvOS 15.0, macOS 12.0, *)
-    public func send<T: Decodable>(_ request: URLRequest) async throws -> APIResponse<T> {
+    public func send<T: Decodable>(_ request: URLRequest, parsing context: APIParsingContext? = nil) async throws -> APIResponse<T> {
         var urlRequest = request
         willSend(request: &urlRequest)
 
         let (data, response) = try await session.data(for: urlRequest, delegate: nil)
         let result: APIResponse<T>
         do {
-            result = try validate(data, response)
+            result = try validate(data: data,
+                                  response: response,
+                                  parsing: context)
             self.didSend(request: request, received: result)
         } catch {
             let apiError = error as? APIClientError ?? .cannotParseResponse(error: error)
@@ -176,8 +184,9 @@ extension APIClient {
     }
 
     @available(iOS 15.0, tvOS 15.0, macOS 12.0, *)
-    public func send<T: Decodable>(_ request: APIRequest) async throws -> APIResponse<T> {
-        try await send(try request.request(for: self))
+    public func send<T: Decodable>(_ request: APIRequest, parsing context: APIParsingContext? = nil) async throws -> APIResponse<T> {
+        try await send(try request.request(for: self),
+                       parsing: context ?? request as? APIParsingContext)
     }
     #endif
 }
@@ -206,7 +215,7 @@ extension APIClient {
         return links
     }
     
-    private func validate<T: Decodable>(_ data: Data, _ response: URLResponse) throws -> APIResponse<T> {
+    private func validate<T: Decodable>(data: Data, response: URLResponse, parsing context: APIParsingContext? = nil) throws -> APIResponse<T> {
         guard let httpResponse = response as? HTTPURLResponse else {
             throw APIClientError.invalidResponse
         }
@@ -231,7 +240,9 @@ extension APIClient {
         
         let rateInfo = APIResponse<T>.RateLimit(with: httpResponse.allHeaderFields)
         
-        return APIResponse(result: try decode(T.self, from: data),
+        return APIResponse(result: try decode(T.self,
+                                              from: data,
+                                              userInfo: context?.codingUserInfo),
                            date: date ?? Date(),
                            links: relatedLinks(from: httpResponse.allHeaderFields["Link"] as? String),
                            rateInfo: rateInfo,

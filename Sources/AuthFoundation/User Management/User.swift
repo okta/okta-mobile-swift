@@ -88,6 +88,20 @@ public class User {
     public init(token: Token, oauth2 client: OAuth2Client) {
         self.token = token
         self.oauth2 = client
+
+        self.oauth2.add(delegate: self)
+    }
+}
+
+extension User: OAuth2ClientDelegate {
+    public func oauth(client: OAuth2Client, didRefresh token: Token, replacedWith newToken: Token?) {
+        guard token == self.token,
+              let newToken = newToken
+        else {
+            return
+        }
+
+        self.token = newToken
     }
 }
 
