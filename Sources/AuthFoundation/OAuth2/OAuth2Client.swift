@@ -130,10 +130,12 @@ public class OAuth2Client: APIClient {
         }
     }
     
-    public var isRefreshing: Bool {
-        refreshQueue.sync { refreshAction != nil }
-    }
-    
+    /// Attempts to refresh the supplied token, using the ``Token/refreshToken`` if it is available.
+    ///
+    /// This method prevents multiple concurrent refresh requests to be performed for a given token, though all applicable completion blocks will be invoked once the token refresh has completed.
+    /// - Parameters:
+    ///   - token: Token to refresh.
+    ///   - completion: Completion bock invoked with the result.
     public func refresh(_ token: Token, completion: @escaping (Result<Token, OAuth2Error>) -> Void) {
         guard let refreshSettings = token.context.refreshSettings else {
             completion(.failure(.missingToken(type: .refreshToken)))
@@ -141,13 +143,13 @@ public class OAuth2Client: APIClient {
         }
         
         refreshQueue.sync {
-            guard refreshAction == nil else {
-                refreshAction?.add(completion)
+            guard token.refreshAction == nil else {
+                token.refreshAction?.add(completion)
                 return
             }
             
-            refreshAction = CoalescedResult()
-            refreshAction?.add(completion)
+            token.refreshAction = CoalescedResult()
+            token.refreshAction?.add(completion)
             performRefresh(token: token, refreshSettings: refreshSettings)
         }
     }
@@ -157,9 +159,8 @@ public class OAuth2Client: APIClient {
                       qos: .userInitiated,
                       attributes: .concurrent)
     }()
-    private var refreshAction: CoalescedResult<Result<Token, OAuth2Error>>?
     private func performRefresh(token: Token, refreshSettings: [String:String]) {
-        guard let action = refreshAction else { return }
+        guard let action = token.refreshAction else { return }
         
         delegateCollection.invoke { $0.oauth(client: self, willRefresh: token) }
         refresh(Token.RefreshRequest(token: token, configuration: refreshSettings)) { result in
@@ -168,12 +169,14 @@ public class OAuth2Client: APIClient {
                 case .success(let response):
                     action.finish(.success(response.result))
                     self.delegateCollection.invoke { $0.oauth(client: self, didRefresh: token, replacedWith: response.result) }
+                    NotificationCenter.default.post(name: .tokenRefreshed, object: response.result)
+                    
                 case .failure(let error):
                     action.finish(.failure(.network(error: error)))
                     self.delegateCollection.invoke { $0.oauth(client: self, didRefresh: token, replacedWith: nil) }
                 }
                 
-                self.refreshAction = nil
+                token.refreshAction = nil
             }
         }
     }
@@ -247,6 +250,19 @@ extension OAuth2Client {
             }
         }
     }
+    
+    /// Attempts to refresh the supplied token, using the ``Token/refreshToken`` if it is available.
+    ///
+    /// This method prevents multiple concurrent refresh requests to be performed for a given token, though all applicable results will be returned once the token refresh has completed.
+    /// - Parameters:
+    ///   - token: Token to refresh.
+    public func refresh(_ token: Token) async throws -> Token {
+        try await withCheckedThrowingContinuation { continuation in
+            refresh(token) { result in
+                continuation.resume(with: result)
+            }
+        }
+    }
 }
 #endif
 
@@ -269,4 +285,7 @@ extension OAuth2Client: UsesDelegateCollection {
 extension Notification.Name {
     /// Notification broadcast when a new ``OAuth2Client`` instance is created.
     public static let oauth2ClientCreated = Notification.Name("com.okta.oauth2client.created")
+
+    /// Notification broadcast when a ``Token`` is refreshed.
+    public static let tokenRefreshed = Notification.Name("com.okta.token.refreshed")
 }

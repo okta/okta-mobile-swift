@@ -19,7 +19,11 @@ public enum JWTError: Error {
     case badTokenStructure
 }
 
-public struct JWT: Identifiable {
+public struct JWT: RawRepresentable, Codable {
+    public typealias RawValue = String
+    
+    public let rawValue: String
+        
     public var expirationTime: Date? { self[.expirationTime] }
     
     public var issuer: String? { self[.issuer] }
@@ -27,11 +31,7 @@ public struct JWT: Identifiable {
     public var audience: [String]? { self[.audience] }
     public var issuedAt: Date? { self[.issuedAt] }
     public var notBefore: Date? { self[.notBefore] }
-    public var id: String? { self[.jwtId] }
-    
-    let header: Header
-    let payload: [String:Any]
-    let signature: String?
+    public var expiresIn: TimeInterval { self[.expiresIn] ?? 0 }
     
     public var allClaims: [Claim] { payload.keys.compactMap { Claim(rawValue: $0) } }
     public var allClaimStrings: [String] { payload.keys.compactMap { $0 } }
@@ -40,7 +40,7 @@ public struct JWT: Identifiable {
     var expired: Bool {
         false
     }
-        
+    
     public subscript(_ claim: Claim) -> Date? {
         guard let time: TimeInterval = self[claim] else { return nil }
         return Date(timeIntervalSince1970: time)
@@ -76,7 +76,16 @@ public struct JWT: Identifiable {
         public let alg: Algorithm
     }
     
+    public init?(rawValue: String) {
+        try? self.init(rawValue)
+    }
+    
+    private let header: Header
+    private let payload: [String:Any]
+    private let signature: String?
     public init(_ token: String) throws {
+        rawValue = token
+        
         let components: [String] = token
             .components(separatedBy: ".")
             .map { $0.replacingOccurrences(of: "-", with: "+") }
@@ -102,16 +111,16 @@ public struct JWT: Identifiable {
         guard let headerData = Data(base64Encoded: components[0]),
               let payloadData = Data(base64Encoded: components[1])
         else { throw JWTError.invalidBase64Encoding }
-        
-        try self.init(header: headerData,
-                      payload: payloadData,
-                      signature: components[2])
-    }
-    
-    init(header headerData: Data, payload payloadData: Data, signature signatureData: String) throws {
+
         header = try JSONDecoder().decode(JWT.Header.self, from: headerData)
         payload = try JSONSerialization.jsonObject(with: payloadData, options: []) as! [String:Any]
-        signature = signatureData
+        signature = components[2]
+    }
+}
+
+extension JWT: Expires {
+    public var expiresAt: Date? {
+        issuedAt?.addingTimeInterval(expiresIn)
     }
 }
 

@@ -66,6 +66,11 @@ public class ResourceOwnerFlow: AuthenticationFlow {
         client.add(delegate: self)
     }
     
+    /// Authenticates using the supplied username and password.
+    /// - Parameters:
+    ///   - username: Username
+    ///   - password: Password
+    ///   - completion: Completion invoked when a response is received.
     public func resume(username: String, password: String, completion: ((Result<Token,APIClientError>) -> Void)? = nil) {
         isAuthenticating = true
 
@@ -101,6 +106,23 @@ public class ResourceOwnerFlow: AuthenticationFlow {
     // MARK: Private properties / methods
     public let delegateCollection = DelegateCollection<AuthenticationDelegate>()
 }
+
+#if swift(>=5.5.1) && !os(Linux)
+@available(iOS 15.0, tvOS 15.0, macOS 12.0, *)
+extension ResourceOwnerFlow {
+    /// Asynchronously authenticates with the Resource Owner flow.
+    ///
+    /// - Returns: The information a user should be presented with to continue authorization on a different device.
+    public func resume(username: String, password: String) async throws -> Token {
+        try await withCheckedThrowingContinuation { continuation in
+            resume(username: username, password: password) { result in
+                continuation.resume(with: result)
+            }
+        }
+    }
+}
+#endif
+
 
 extension ResourceOwnerFlow: UsesDelegateCollection {
     public typealias Delegate = AuthenticationDelegate

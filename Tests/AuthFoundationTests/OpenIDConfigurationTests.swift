@@ -15,10 +15,6 @@ import XCTest
 @testable import AuthFoundation
 
 final class OpenIDConfigurationTests: XCTestCase {
-//    func testSigningAlgorithm() throws {
-//
-//    }
-    
     func testLimitedConfiguration() throws {
         let config = try decode(type: OpenIdConfiguration.self, """
         {

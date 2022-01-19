@@ -24,7 +24,7 @@ public enum TokenError: Error {
 /// Token information representing a user's access to a resource server, including access token, refresh token, and other related information.
 public class Token: Codable, Equatable, Hashable, Expires {
     // The date this token was issued at.
-    public var issuedAt: Date
+    public var issuedAt: Date?
     
     /// The string type of the token (e.g. `Bearer`).
     public let tokenType: String
@@ -47,6 +47,12 @@ public class Token: Codable, Equatable, Hashable, Expires {
     /// Defines the context this token was issued from.
     public let context: Context
     
+    public var isRefreshing: Bool {
+        refreshAction != nil
+    }
+    
+    internal var refreshAction: CoalescedResult<Result<Token, OAuth2Error>>?
+
     /// Return the relevant token string for the given type.
     /// - Parameter kind: Type of token string to return
     /// - Returns: Token string, or `nil` if this token doesn't contain the requested type.

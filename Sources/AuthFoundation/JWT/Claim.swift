@@ -17,6 +17,7 @@ public enum Claim: String, Codable {
     /// Issuer
     case issuer                    = "iss"
     case version                   = "ver"
+    case userId                    = "uid"
     case identityProvider          = "idp"
     /// Subject
     case subject                   = "sub"

@@ -12,6 +12,9 @@
 
 import Foundation
 
+/// Describes the configuration of an OpenID server.
+///
+/// The values exposed from this configuration are typically used during authentication, or when querying a server for its capabilities.
 public struct OpenIdConfiguration: Decodable, JSONDecodable {
     public let authorizationEndpoint: URL
     public let endSessionEndpoint: URL
