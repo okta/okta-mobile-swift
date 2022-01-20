@@ -250,7 +250,7 @@ public class AuthorizationCodeFlow: AuthenticationFlow {
                 
                 do {
                     let url = try self.createAuthenticationURL(from: configuration.authorizationEndpoint,
-                                                                                   using: context)
+                                                               using: context)
                     context.authenticationURL = url
                     self.context = context
                     

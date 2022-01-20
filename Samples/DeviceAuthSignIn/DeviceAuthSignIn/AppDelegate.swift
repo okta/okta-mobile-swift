@@ -30,7 +30,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-        NotificationCenter.default.addObserver(forName: .defaultUserChanged, object: nil, queue: .main) { notification in
+        NotificationCenter.default.addObserver(forName: .defaultCredentialChanged, object: nil, queue: .main) { notification in
             if notification.object == nil {
                 self.signIn()
             }
@@ -50,7 +50,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func applicationDidBecomeActive(_ application: UIApplication) {
         guard signInViewController == nil,
-              User.default == nil
+              Credential.default == nil
         else {
             return
         }

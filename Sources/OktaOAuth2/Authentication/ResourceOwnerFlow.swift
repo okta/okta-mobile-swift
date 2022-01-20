@@ -13,6 +13,23 @@
 import Foundation
 import AuthFoundation
 
+/// An authentication flow class that implements the Resource Owner Flow exchange.
+///
+/// This simple authentication flow permits a suer to authenticate using a simple username and password. As such, the configuration is straightforward.
+///
+/// > Important: Resource Owner authentication does not support MFA or other more secure authentication models, and is not recommended for production applications.
+///
+/// As an example, we'll use Swift Concurrency, since these asynchronous methods can be used inline easily.
+///
+/// ```swift
+/// let flow = ResourceOwnerFlow(
+///     issuer: URL(string: "https://example.okta.com")!,
+///     clientId: "abc123client",
+///     scopes: "openid offline_access email profile")
+///
+/// // Authenticate with a username and password.
+/// let token = try await flow.resume(username: "smeagol", password: "myprecious")
+/// ```
 public class ResourceOwnerFlow: AuthenticationFlow {
     public typealias AuthConfiguration = ResourceOwnerFlow.Configuration
     
