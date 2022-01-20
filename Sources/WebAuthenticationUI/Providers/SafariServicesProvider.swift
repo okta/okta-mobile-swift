@@ -12,15 +12,16 @@
 
 import AuthFoundation
 import OktaOAuth2
-
-#if canImport(SafariServices)
 import SafariServices
 
 @available(iOS, introduced: 11.0, deprecated: 12.0)
 class SafariServicesProvider: NSObject, WebAuthenticationProvider {
     let flow: AuthorizationCodeFlow
     let delegate: WebAuthenticationProviderDelegate
-    let canStart: Bool = true
+    
+    var canStart: Bool {
+        authenticationSession != nil
+    }
     
     private var authenticationSession: SFAuthenticationSession?
     
@@ -111,5 +112,3 @@ extension SafariServicesProvider: AuthorizationCodeFlowDelegate {
         received(token: token)
     }
 }
-
-#endif

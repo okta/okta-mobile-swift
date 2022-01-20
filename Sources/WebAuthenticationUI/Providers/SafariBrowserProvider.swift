@@ -18,14 +18,13 @@ import SafariServices
 class SafariBrowserProvider: NSObject, WebAuthenticationProvider {
     let flow: AuthorizationCodeFlow
     let delegate: WebAuthenticationProviderDelegate
-    let canStart: Bool = true
+    
+    var canStart: Bool {
+        safariController != nil
+    }
     
     private var safariController: SFSafariViewController?
     private let window: WebAuthentication.WindowAnchor?
-    
-    deinit {
-        self.flow.remove(delegate: self)
-    }
     
     init(flow: AuthorizationCodeFlow,
          window: WebAuthentication.WindowAnchor?,
@@ -40,9 +39,12 @@ class SafariBrowserProvider: NSObject, WebAuthenticationProvider {
         self.flow.add(delegate: self)
     }
     
+    deinit {
+        self.flow.remove(delegate: self)
+    }
+    
     func authenticate(using url: URL) {
         safariController = SFSafariViewController(url: url)
-        safariController?.delegate = self
         
         guard let safariController = safariController else { return }
         
@@ -86,14 +88,6 @@ class SafariBrowserProvider: NSObject, WebAuthenticationProvider {
     
     func cancel() {
         safariController?.dismiss(animated: true)
-    }
-}
-
-@available(iOS, introduced: 9.0, deprecated: 11.0)
-extension SafariBrowserProvider: SFSafariViewControllerDelegate {
-    
-    func safariViewControllerDidFinish(_ controller: SFSafariViewController) {
-        
     }
 }
 
