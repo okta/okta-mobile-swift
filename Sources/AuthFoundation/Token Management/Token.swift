@@ -47,6 +47,9 @@ public class Token: Codable, Equatable, Hashable, Expires {
     /// Defines the context this token was issued from.
     public let context: Context
     
+    /// The Device secret, if requested in scope.
+    public let deviceSecret: String?
+
     public var isRefreshing: Bool {
         refreshAction != nil
     }
@@ -65,7 +68,7 @@ public class Token: Codable, Equatable, Hashable, Expires {
         case .idToken:
             return idToken
         case .deviceSecret:
-            return nil
+            return deviceSecret
         }
     }
     
@@ -88,6 +91,7 @@ public class Token: Codable, Equatable, Hashable, Expires {
                   scope: String,
                   refreshToken: String?,
                   idToken: String?,
+                  deviceSecret: String?,
                   context: Context)
     {
         self.issuedAt = issuedAt
@@ -97,6 +101,7 @@ public class Token: Codable, Equatable, Hashable, Expires {
         self.scope = scope
         self.refreshToken = refreshToken
         self.idToken = idToken
+        self.deviceSecret = deviceSecret
         self.context = context
     }
     
@@ -120,6 +125,7 @@ public class Token: Codable, Equatable, Hashable, Expires {
                   scope: try container.decode(String.self, forKey: .scope),
                   refreshToken: try container.decodeIfPresent(String.self, forKey: .refreshToken),
                   idToken: try container.decodeIfPresent(String.self, forKey: .idToken),
+                  deviceSecret: try container.decodeIfPresent(String.self, forKey: .deviceSecret),
                   context: context)
     }
 }
@@ -162,6 +168,7 @@ extension Token {
         case scope
         case refreshToken
         case idToken
+        case deviceSecret
         case context
     }
 }

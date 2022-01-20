@@ -42,7 +42,10 @@ class SignInViewController: UIViewController {
         auth?.start(from: window) { result in
             switch result {
             case .success(let token):
-                User.default = User(token: token)
+                User.default = User.for(token: token)
+                
+                try? Keychain.save(token)
+
             case .failure(let error):
                 let alert = UIAlertController(title: "Cannot sign in", message: error.localizedDescription, preferredStyle: .alert)
                 alert.addAction(.init(title: "OK", style: .default))

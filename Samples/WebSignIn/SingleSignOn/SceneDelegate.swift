@@ -11,25 +11,36 @@
 //
 
 import UIKit
-import WebAuthenticationUI
+import AuthFoundation
 
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
     var window: UIWindow?
     weak var windowScene: UIWindowScene?
-    weak var signInViewController: UIViewController?
     
-    func signIn() {
+    func showSignIn() {
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        let signInController = storyboard.instantiateViewController(withIdentifier: "SignIn")
+        guard let signInController = storyboard.instantiateInitialViewController() else { return }
         
-        signInViewController = signInController
+        if let rootViewController = window?.rootViewController,
+           type(of: rootViewController.self) == type(of: signInController.self) {
+            print("[WARN] Try to set the same type of controller.")
+            return
+        }
+        
         window?.rootViewController = signInController
     }
     
     func showProfile() {
         let storyboard = UIStoryboard(name: "Profile", bundle: nil)
-        let profileViewController = storyboard.instantiateInitialViewController()
+        guard let profileViewController = storyboard.instantiateInitialViewController() else { return }
+        
+        // Avoid resetting if such happens
+        if let rootViewController = window?.rootViewController,
+           type(of: rootViewController.self) == type(of: profileViewController.self) {
+            print("[WARN] Try to set the same type of controller.")
+            return
+        }
         
         window?.rootViewController = profileViewController
     }
@@ -38,45 +49,20 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         guard let scene = (scene as? UIWindowScene) else { return }
         windowScene = scene
         
+        if User.default == nil {
+            showSignIn()
+        } else {
+            showProfile()
+        }
+        
         NotificationCenter.default.addObserver(forName: .defaultUserChanged, object: nil, queue: .main) { notification in
             if notification.object == nil {
-                self.signIn()
+                self.showSignIn()
             } else {
                 self.showProfile()
             }
         }
     }
-
-    func sceneDidDisconnect(_ scene: UIScene) {
-    }
-
-    func sceneDidBecomeActive(_ scene: UIScene) {
-        guard signInViewController == nil,
-              User.default == nil
-        else {
-            return
-        }
-        
-        DispatchQueue.main.async {
-            self.signIn()
-        }
-    }
-
-    func sceneWillResignActive(_ scene: UIScene) {
-    }
-
-    func sceneWillEnterForeground(_ scene: UIScene) {
-    }
-
-    func sceneDidEnterBackground(_ scene: UIScene) {
-    }
-
-    func scene(_ scene: UIScene, openURLContexts URLContexts: Set<UIOpenURLContext>) {
-        print(URLContexts)
-        do {
-            try WebAuthentication.shared?.resume(with: URLContexts)
-        } catch {
-            print(error)
-        }
-    }
 }
+
+

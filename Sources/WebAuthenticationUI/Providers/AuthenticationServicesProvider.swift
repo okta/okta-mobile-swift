@@ -69,7 +69,9 @@ class AuthenticationServicesProvider: NSObject, WebAuthenticationProvider {
             authenticationSession?.presentationContextProvider = self
         }
 
-        authenticationSession?.start()
+        DispatchQueue.main.async {
+            self.authenticationSession?.start()
+        }
     }
     
     func cancel() {
