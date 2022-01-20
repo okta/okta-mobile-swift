@@ -25,6 +25,7 @@ final class OAuth2ClientTests: XCTestCase {
         let pkce = PKCE()
         let request = AuthorizationCodeFlow.TokenRequest(clientId: "client_id",
                                                          clientSecret: nil,
+                                                         scope: "openid profile offline_access",
                                                          redirectUri: redirectUri.absoluteString,
                                                          grantType: .authorizationCode,
                                                          grantValue: "abc123",

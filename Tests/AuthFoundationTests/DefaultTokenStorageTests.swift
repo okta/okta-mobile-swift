@@ -29,6 +29,16 @@ final class DefaultTokenStorageTests: XCTestCase {
                       context: Token.Context(baseURL: URL(string: "https://example.com")!,
                                              refreshSettings: nil))
 
+    let newToken = Token(issuedAt: Date(),
+                      tokenType: "Bearer",
+                      expiresIn: 300,
+                      accessToken: "zxy987",
+                      scope: "openid",
+                      refreshToken: nil,
+                      idToken: nil,
+                      context: Token.Context(baseURL: URL(string: "https://example.com")!,
+                                             refreshSettings: nil))
+
     override func setUpWithError() throws {
         userDefaults = UserDefaults(suiteName: name)
         userDefaults.removePersistentDomain(forName: name)
@@ -51,13 +61,16 @@ final class DefaultTokenStorageTests: XCTestCase {
         XCTAssertNil(storage.defaultToken)
         XCTAssertEqual(storage.allTokens.count, 1)
    
-        XCTAssertNoThrow(try storage.add(token: token))
+        XCTAssertThrowsError(try storage.add(token: token))
+        XCTAssertEqual(storage.allTokens.count, 1)
+        
+        XCTAssertNoThrow(try storage.replace(token: token, with: newToken))
         XCTAssertEqual(storage.allTokens.count, 1)
 
-        XCTAssertNoThrow(try storage.remove(token: token))
+        XCTAssertNoThrow(try storage.remove(token: newToken))
         XCTAssertEqual(storage.allTokens.count, 0)
 
-        XCTAssertNoThrow(try storage.remove(token: token))
+        XCTAssertNoThrow(try storage.remove(token: newToken))
         XCTAssertEqual(storage.allTokens.count, 0)
     }
 

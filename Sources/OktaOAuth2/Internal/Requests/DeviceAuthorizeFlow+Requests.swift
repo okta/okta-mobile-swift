@@ -38,7 +38,7 @@ extension DeviceAuthorizationFlow.AuthorizeRequest: APIRequest, APIRequestBody {
     }
 }
 
-extension DeviceAuthorizationFlow.TokenRequest: TokenRequest, APIRequest, APIRequestBody {
+extension DeviceAuthorizationFlow.TokenRequest: TokenRequest, APIRequest, APIRequestBody, APIParsingContext {
     var httpMethod: APIRequestMethod { .post }
     var path: String { "v1/token" }
     var contentType: APIContentType? { .formEncoded }
@@ -48,6 +48,14 @@ extension DeviceAuthorizationFlow.TokenRequest: TokenRequest, APIRequest, APIReq
             "client_id": clientId,
             "device_code": deviceCode,
             "grant_type": "urn:ietf:params:oauth:grant-type:device_code"
+        ]
+    }
+    
+    var codingUserInfo: [CodingUserInfoKey : Any]? {
+        [
+            .refreshSettings: [
+                "client_id": clientId
+            ]
         ]
     }
 }

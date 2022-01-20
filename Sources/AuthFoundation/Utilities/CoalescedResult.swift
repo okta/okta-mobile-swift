@@ -1,5 +1,5 @@
 //
-// Copyright (c) 2021-Present, Okta, Inc. and/or its affiliates. All rights reserved.
+// Copyright (c) 2022-Present, Okta, Inc. and/or its affiliates. All rights reserved.
 // The Okta software accompanied by this notice is provided pursuant to the Apache License, Version 2.0 (the "License.")
 //
 // You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0.
@@ -12,22 +12,23 @@
 
 import Foundation
 
-public protocol APIRequestArgument {
-    var stringValue: String { get }
-}
+class CoalescedResult<T> {
+    private var completionHandlers: [(T) -> Void] = []
+    
+    func add(_ completion: @escaping (T) -> Void) {
+        completionHandlers.append(completion)
+    }
+    
+    func start(_ operation: ((T) -> Void) -> Void) {
+        operation() { result in
+            self.finish(result)
+        }
+    }
+    
 
-extension String: APIRequestArgument {
-    public var stringValue: String { self }
-}
-
-extension Int: APIRequestArgument {
-    public var stringValue: String { "\(self)"}
-}
-
-extension Double: APIRequestArgument {
-    public var stringValue: String { "\(self)"}
-}
-
-extension Bool: APIRequestArgument {
-    public var stringValue: String { "\(self)"}
+    func finish(_ result: T) {
+        completionHandlers.forEach { completion in
+            completion(result)
+        }
+    }
 }

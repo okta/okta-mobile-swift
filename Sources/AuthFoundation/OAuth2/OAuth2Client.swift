@@ -12,14 +12,18 @@
 
 import Foundation
 
+/// Delegate protocol used by ``OAuth2Client`` to communicate important events.
 public protocol OAuth2ClientDelegate: APIClientDelegate {
+    /// Sent before a token will begin to refresh.
     func oauth(client: OAuth2Client, willRefresh token: Token)
-    func oauth(client: OAuth2Client, didRefresh token: Token)
+
+    /// Sent when a token has finished refreshing.
+    func oauth(client: OAuth2Client, didRefresh token: Token, replacedWith newToken: Token?)
 }
 
 extension OAuth2ClientDelegate {
     public func oauth(client: OAuth2Client, willRefresh token: Token) {}
-    public func oauth(client: OAuth2Client, didRefresh token: Token) {}
+    public func oauth(client: OAuth2Client, didRefresh token: Token, replacedWith newToken: Token?) {}
 }
 
 /// An OAuth2 client, used to interact with a given authorization server.
@@ -80,6 +84,9 @@ public class OAuth2Client: APIClient {
         NotificationCenter.default.post(name: .oauth2ClientCreated, object: self)
     }
     
+    /// Transforms HTTP response data into the appropriate error type, when requests are unsuccessful.
+    /// - Parameter data: HTTP response body data for a failed URL request.
+    /// - Returns: ``OktaAPIError`` or ``OAuth2ServerError``, depending on the type of error.
     public func error(from data: Data) -> Error? {
         if let error = try? decode(OktaAPIError.self, from: data) {
             return error
@@ -104,11 +111,6 @@ public class OAuth2Client: APIClient {
         delegateCollection.invoke { $0.api(client: self, didSend: request, received: response) }
     }
     
-    func received(_ response: APIResponse<Token>) {
-        // Do something with the token
-        print(response.result)
-    }
-    
     /// Retrieves the org's OpenID configuration.
     ///
     /// If this value has recently been retrieved, the cached result is returned.
@@ -130,22 +132,54 @@ public class OAuth2Client: APIClient {
         }
     }
     
+    /// Attempts to refresh the supplied token, using the ``Token/refreshToken`` if it is available.
+    ///
+    /// This method prevents multiple concurrent refresh requests to be performed for a given token, though all applicable completion blocks will be invoked once the token refresh has completed.
+    /// - Parameters:
+    ///   - token: Token to refresh.
+    ///   - completion: Completion bock invoked with the result.
     public func refresh(_ token: Token, completion: @escaping (Result<Token, OAuth2Error>) -> Void) {
         guard let refreshSettings = token.context.refreshSettings else {
             completion(.failure(.missingToken(type: .refreshToken)))
             return
         }
         
+        refreshQueue.sync {
+            guard token.refreshAction == nil else {
+                token.refreshAction?.add(completion)
+                return
+            }
+            
+            token.refreshAction = CoalescedResult()
+            token.refreshAction?.add(completion)
+            performRefresh(token: token, refreshSettings: refreshSettings)
+        }
+    }
+    
+    private lazy var refreshQueue: DispatchQueue = {
+        DispatchQueue(label: "com.okta.refreshQueue.\(baseURL.host ?? "unknown")",
+                      qos: .userInitiated,
+                      attributes: .concurrent)
+    }()
+    private func performRefresh(token: Token, refreshSettings: [String:String]) {
+        guard let action = token.refreshAction else { return }
+        
         delegateCollection.invoke { $0.oauth(client: self, willRefresh: token) }
         refresh(Token.RefreshRequest(token: token, configuration: refreshSettings)) { result in
-            switch result {
-            case .success(let response):
-                completion(.success(response.result))
-            case .failure(let error):
-                completion(.failure(.network(error: error)))
+            self.refreshQueue.sync(flags: .barrier) {
+                switch result {
+                case .success(let response):
+                    action.finish(.success(response.result))
+                    self.delegateCollection.invoke { $0.oauth(client: self, didRefresh: token, replacedWith: response.result) }
+                    NotificationCenter.default.post(name: .tokenRefreshed, object: response.result)
+                    
+                case .failure(let error):
+                    action.finish(.failure(.network(error: error)))
+                    self.delegateCollection.invoke { $0.oauth(client: self, didRefresh: token, replacedWith: nil) }
+                }
+                
+                token.refreshAction = nil
             }
-
-            self.delegateCollection.invoke { $0.oauth(client: self, didRefresh: token) }
         }
     }
     
@@ -218,12 +252,31 @@ extension OAuth2Client {
             }
         }
     }
+    
+    /// Attempts to refresh the supplied token, using the ``Token/refreshToken`` if it is available.
+    ///
+    /// This method prevents multiple concurrent refresh requests to be performed for a given token, though all applicable results will be returned once the token refresh has completed.
+    /// - Parameters:
+    ///   - token: Token to refresh.
+    public func refresh(_ token: Token) async throws -> Token {
+        try await withCheckedThrowingContinuation { continuation in
+            refresh(token) { result in
+                continuation.resume(with: result)
+            }
+        }
+    }
 }
 #endif
 
 extension OAuth2Client: UsesDelegateCollection {
     public typealias Delegate = OAuth2ClientDelegate
+
+    /// Adds the supplied object as a delegate of this client.
+    /// - Parameter delegate: Delegate to add.
     public func add(delegate: Delegate) { delegates += delegate }
+    
+    /// Removes the given delegate from this client.
+    /// - Parameter delegate: Delegate to remove.
     public func remove(delegate: Delegate) { delegates -= delegate }
     
     public var delegateCollection: DelegateCollection<OAuth2ClientDelegate> {
@@ -232,5 +285,9 @@ extension OAuth2Client: UsesDelegateCollection {
 }
 
 extension Notification.Name {
+    /// Notification broadcast when a new ``OAuth2Client`` instance is created.
     public static let oauth2ClientCreated = Notification.Name("com.okta.oauth2client.created")
+
+    /// Notification broadcast when a ``Token`` is refreshed.
+    public static let tokenRefreshed = Notification.Name("com.okta.token.refreshed")
 }

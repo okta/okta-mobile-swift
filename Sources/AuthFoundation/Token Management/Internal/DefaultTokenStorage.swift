@@ -53,27 +53,45 @@ class DefaultTokenStorage: TokenStorage {
     }
     
     func add(token: Token) throws {
-        if let index = allTokens.firstIndex(of: token) {
-            allTokens.remove(at: index)
-            allTokens.insert(token, at: index)
-            
-            try save()
-            delegate?.token(storage: self, updated: token)
-        } else {
-            var changedDefault = false
-            if allTokens.count == 0 {
-                _defaultToken = token
-                changedDefault = true
-            }
-            
-            allTokens.append(token)
-            
-            try save()
-            delegate?.token(storage: self, added: token)
+        guard !allTokens.contains(token) else {
+            throw TokenError.duplicateTokenAdded
+        } 
 
-            if changedDefault {
-                delegate?.token(storage: self, defaultChanged: token)
-            }
+        var changedDefault = false
+        if allTokens.count == 0 {
+            _defaultToken = token
+            changedDefault = true
+        }
+        
+        allTokens.append(token)
+        
+        try save()
+        delegate?.token(storage: self, added: token)
+        
+        if changedDefault {
+            delegate?.token(storage: self, defaultChanged: token)
+        }
+    }
+    
+    func replace(token: Token, with newToken: Token) throws {
+        guard let index = allTokens.firstIndex(of: token) else {
+            throw TokenError.cannotReplaceToken
+        }
+        
+        allTokens.remove(at: index)
+        allTokens.insert(newToken, at: index)
+            
+        var changedDefault = false
+        if _defaultToken == token {
+            changedDefault = true
+            _defaultToken = newToken
+        }
+        
+        try save()
+        delegate?.token(storage: self, replaced: token, with: newToken)
+        
+        if changedDefault {
+            delegate?.token(storage: self, defaultChanged: token)
         }
     }
     

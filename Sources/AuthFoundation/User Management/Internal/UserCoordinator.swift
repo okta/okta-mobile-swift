@@ -80,12 +80,15 @@ extension UserCoordinator: OAuth2ClientDelegate {
         print("Error happened: \(error)")
     }
 
-    func api<T>(client: APIClient, didSend request: URLRequest, received response: APIResponse<T>) where T : Decodable {
-        guard let token = response.result as? Token else { return }
+    func oauth(client: OAuth2Client, didRefresh token: Token, replacedWith newToken: Token?) {
+        guard let newToken = newToken else {
+            return
+        }
+
         do {
-            try tokenStorage.add(token: token)
+            try tokenStorage.replace(token: token, with: newToken)
         } catch {
-            print("Error happened: \(error)")
+            print("Error happened refreshing: \(error)")
         }
     }
 }
@@ -110,17 +113,25 @@ extension UserCoordinator: TokenStorageDelegate {
     func token(storage: TokenStorage, removed token: Token?) {
     }
     
-    func token(storage: TokenStorage, updated token: Token?) {
+    func token(storage: TokenStorage, replaced oldToken: Token, with newToken: Token) {
+        guard userDataSource.hasUser(for: oldToken) else { return }
+        
+        // Doing nothing with this, for now...
     }
+    
 }
 
 extension UserCoordinator: UserDataSourceDelegate {
     func user(dataSource: UserDataSource, created user: User) {
         user.coordinator = self
+        
+        NotificationCenter.default.post(name: .userCreated, object: user)
     }
     
     func user(dataSource: UserDataSource, removed user: User) {
         user.coordinator = nil
+
+        NotificationCenter.default.post(name: .userRemoved, object: user)
     }
     
     func user(dataSource: UserDataSource, updated user: User) {

@@ -13,21 +13,28 @@
 import Foundation
 
 extension Notification.Name {
+    /// Notification broadcast when the ``User/default`` value changes.
     public static let defaultUserChanged = Notification.Name("com.okta.defaultUserChanged")
-    public static let userInitialized = Notification.Name("com.okta.userInitialized")
+    
+    /// Notification broadcast when a new ``User`` instance is created.
+    ///
+    /// > Note: This notification is only sent when the ``UserDataSource`` creates a user. If you use the ``User/init(token:oauth2:)`` method directly, this notification is not sent.
+    public static let userCreated = Notification.Name("com.okta.user.created")
+
+    /// Notification broadcast when a user is removed from storage.
+    public static let userRemoved = Notification.Name("com.okta.user.removed")
 }
 
 public enum UserError: Error {
     case missingUserCoordinator
 }
 
+/// Convenience object that wraps a ``Token``, providing methods and properties for interacting with user resources.
+///
+/// This class can be used as a convenience mechanism for managing stored user credentials, performing operations on or for a user, and interacting with resources scoped to a user.
 public class User {
     private static let coordinator = UserCoordinator()
-    internal weak var coordinator: UserCoordinator? {
-        didSet {
-            print(coordinator)
-        }
-    }
+    internal weak var coordinator: UserCoordinator?
 
     /// Data source used for creating and managing the creation and caching of ``User`` instances.
     public static var userDataSource: UserDataSource {
@@ -62,9 +69,13 @@ public class User {
     /// OAuth2 client for performing operations related to the user's token.
     public let oauth2: OAuth2Client
 
+    /// The token this user instance represents.
     @TimeSensitive<Token>
     public private(set) var token: Token
 
+    /// The ``UserInfo`` describing this user.
+    ///
+    /// This value may be nil if the ``userInfo()`` or ``userInfo(completion:)`` methods haven't yet been called.
     @TimeSensitive<UserInfo?>
     public private(set) var userInfo: UserInfo?
     
@@ -77,6 +88,20 @@ public class User {
     public init(token: Token, oauth2 client: OAuth2Client) {
         self.token = token
         self.oauth2 = client
+
+        self.oauth2.add(delegate: self)
+    }
+}
+
+extension User: OAuth2ClientDelegate {
+    public func oauth(client: OAuth2Client, didRefresh token: Token, replacedWith newToken: Token?) {
+        guard token == self.token,
+              let newToken = newToken
+        else {
+            return
+        }
+
+        self.token = newToken
     }
 }
 
@@ -90,6 +115,7 @@ extension User: Equatable {
 }
 
 extension User {
+    /// Remove the user, and its token, from storage.
     public func remove() throws {
         guard let coordinator = coordinator else {
             throw UserError.missingUserCoordinator
@@ -99,6 +125,8 @@ extension User {
         try coordinator.tokenStorage.remove(token: token)
     }
     
+    /// Attempt to refresh the token.
+    /// - Parameter completion: Completion block invoked when a result is returned.
     public func refresh(completion: ((Result<Token, OAuth2Error>) -> Void)? = nil) {
         oauth2.refresh(token) { result in
             defer { completion?(result) }
@@ -109,6 +137,10 @@ extension User {
         }
     }
     
+    /// Attempt to revoke one or more of the tokens.
+    /// - Parameters:
+    ///   - type: The token type to revoke.
+    ///   - completion: Completion block called when the operation completes.
     public func revoke(type: Token.RevokeType = .accessToken, completion: ((Result<Void, OAuth2Error>) -> Void)? = nil) {
         oauth2.revoke(token, type: type) { result in
             defer { completion?(result) }
@@ -119,6 +151,10 @@ extension User {
         }
     }
     
+    /// Fetches the user info for this user.
+    ///
+    /// In addition to passing the result to the provided completion block, a successful request will result in the ``User/userInfo`` property being set with the new value for later use.
+    /// - Parameter completion: Optional completion block to be invoked when a result is returned.
     public func userInfo(completion: ((Result<UserInfo, OAuth2Error>) -> Void)? = nil) {
         oauth2.userInfo(token: token) { result in
             defer { completion?(result) }
@@ -133,6 +169,8 @@ extension User {
 #if swift(>=5.5.1) && !os(Linux)
 @available(iOS 15.0, tvOS 15.0, macOS 12.0, *)
 extension User {
+    /// Attempt to refresh the token.
+    /// - Returns: The new token generated as a result of the refresh.
     @discardableResult
     public func refresh() async throws -> Token {
         try await withCheckedThrowingContinuation { continuation in
@@ -142,6 +180,9 @@ extension User {
         }
     }
 
+    /// Attempt to revoke one or more of the tokens.
+    /// - Parameters:
+    ///   - type: The token type to revoke.
     public func revoke(type: Token.RevokeType = .accessToken) async throws {
         try await withCheckedThrowingContinuation { continuation in
             revoke(type: type) { result in
@@ -150,6 +191,10 @@ extension User {
         }
     }
 
+    /// Fetches the user info for this user.
+    ///
+    /// In addition to passing the result to the provided completion block, a successful request will result in the ``User/userInfo`` property being set with the new value for later use.
+    /// - Returns: The user info for this user.
     public func userInfo() async throws -> UserInfo {
         try await withCheckedThrowingContinuation { continuation in
             userInfo() { result in

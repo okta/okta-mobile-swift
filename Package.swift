@@ -31,7 +31,8 @@ let package = Package(
         .target(name: "WebAuthenticationUI",
                 dependencies: [
                     .target(name: "OktaOAuth2")
-                ]),
+                ],
+                resources: [.process("Resources")]),
     ] + [
         .target(name: "TestCommon",
                 dependencies: ["AuthFoundation"],

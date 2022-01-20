@@ -17,6 +17,7 @@ extension AuthorizationCodeFlow {
     struct TokenRequest {
         let clientId: String
         let clientSecret: String?
+        let scope: String
         let redirectUri: String
         let grantType: GrantType
         let grantValue: String
@@ -24,7 +25,7 @@ extension AuthorizationCodeFlow {
     }
 }
 
-extension AuthorizationCodeFlow.TokenRequest: TokenRequest, APIRequest, APIRequestBody {
+extension AuthorizationCodeFlow.TokenRequest: TokenRequest, APIRequest, APIRequestBody, APIParsingContext {
     var httpMethod: APIRequestMethod { .post }
     var path: String { "v1/token" }
     var contentType: APIContentType? { .formEncoded }
@@ -46,5 +47,15 @@ extension AuthorizationCodeFlow.TokenRequest: TokenRequest, APIRequest, APIReque
         }
         
         return result
+    }
+    
+    var codingUserInfo: [CodingUserInfoKey : Any]? {
+        [
+            .refreshSettings: [
+                "client_id": clientId,
+                "redirect_uri": redirectUri,
+                "scope": scope
+            ]
+        ]
     }
 }

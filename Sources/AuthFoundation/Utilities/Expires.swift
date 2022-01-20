@@ -20,10 +20,10 @@ public protocol Expires {
     var expiresIn: TimeInterval { get }
     
     /// The calculated date at which this object will expire.
-    var expiresAt: Date { get }
+    var expiresAt: Date? { get }
     
     /// The date this object was issued, from which the expiration time will be calculated.
-    var issuedAt: Date { get }
+    var issuedAt: Date? { get }
     
     /// Indicates if this object has expired.
     var isExpired: Bool { get }
@@ -33,11 +33,15 @@ public protocol Expires {
 }
 
 extension Expires {
-    public var expiresAt: Date {
-        return issuedAt.coordinated.addingTimeInterval(expiresIn)
+    public var expiresAt: Date? {
+        issuedAt?.coordinated.addingTimeInterval(expiresIn)
     }
     
     public var isExpired: Bool {
+        guard let expiresAt = expiresAt else {
+            return false
+        }
+
         return Date.nowCoordinated > expiresAt
     }
     

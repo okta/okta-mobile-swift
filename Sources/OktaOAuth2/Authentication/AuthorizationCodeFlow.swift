@@ -46,7 +46,7 @@ public protocol AuthorizationCodeFlowDelegate: AuthenticationDelegate {
 ///
 /// The Authorization Code Flow permits a user to authenticate using a web browser redirect model, where an initial authentication URL is loaded in a browser, they sign in through some external service, after which their browser is redirected to a URL whose scheme matches the one defined in the client configuration. An authorization code is included in that URL's query string parameters. This code can then be exchanged against the authorization server for access tokens.
 ///
-/// You can create an instance of  ``AuthorizationCodeFlow/Configuration-swift.struct`` to define your client's settings, and supply that to the initializer, along with a reference to your ``OAuth2Client`` for performing key operations and requests. Alternatively, you can use any of the convenience initializers to simplify the process.
+/// You can create an instance of  ``AuthorizationCodeFlow/Configuration-swift.struct`` to define your client's settings, and supply that to the initializer, along with a reference to your OAuth2Client for performing key operations and requests. Alternatively, you can use any of the convenience initializers to simplify the process.
 ///
 /// As an example, we'll use Swift Concurrency, since these asynchronous methods can be used inline easily, though ``AuthorizationCodeFlow`` can just as easily be used with completion blocks or through the use of the ``AuthorizationCodeFlowDelegate``.
 ///
@@ -156,7 +156,7 @@ public class AuthorizationCodeFlow: AuthenticationFlow {
         case missingAuthorizationCode
     }
     
-    /// The ``OAuth2Client`` this authentication flow will use.
+    /// The OAuth2Client this authentication flow will use.
     public let client: OAuth2Client
     
     /// The configuration used when constructing this authentication flow.
@@ -266,7 +266,7 @@ public class AuthorizationCodeFlow: AuthenticationFlow {
     
     /// Continues an authentication flow using the given authentication redirect URI.
     ///
-    /// Once the user completes authorization, using the URL provided by the ``resume(with:completion:)-7qe02`` method within a browser, the browser will redirect to a URL that matches the scheme provided in the client configuration's ``Configuration-swift.struct/redirectUri``. This URI will contain either an error response from the authorization server, or an authorization code which can be used to exchange a token.
+    /// Once the user completes authorization, using the URL provided by the ``resume(with:completion:)-uy9b`` method within a browser, the browser will redirect to a URL that matches the scheme provided in the client configuration's ``Configuration-swift.struct/redirectUri``. This URI will contain either an error response from the authorization server, or an authorization code which can be used to exchange a token.
     ///
     /// This method takes the returned redirect URI, and communicates with Okta to exchange that for a token.
     /// - Parameters:
@@ -277,6 +277,7 @@ public class AuthorizationCodeFlow: AuthenticationFlow {
 
         let request = TokenRequest(clientId: configuration.clientId,
                                    clientSecret: configuration.clientSecret,
+                                   scope: configuration.scopes,
                                    redirectUri: configuration.redirectUri.absoluteString,
                                    grantType: .authorizationCode,
                                    grantValue: code,
@@ -284,8 +285,9 @@ public class AuthorizationCodeFlow: AuthenticationFlow {
         client.exchange(token: request) { result in
             switch result {
             case .success(let response):
-                self.delegateCollection.invoke { $0.authentication(flow: self, received: response.result) }
-                completion?(.success(response.result))
+                let token = response.result
+                self.delegateCollection.invoke { $0.authentication(flow: self, received: token) }
+                completion?(.success(token))
             case .failure(let error):
                 self.delegateCollection.invoke { $0.authentication(flow: self, received: .network(error: error)) }
                 completion?(.failure(error))
@@ -330,7 +332,7 @@ extension AuthorizationCodeFlow {
     
     /// Asynchronously continues an authentication flow using the given authentication redirect URI, using Swift Concurrency.
     ///
-    /// Once the user completes authorization, using the URL provided by the ``resume(with:)-5lent`` method within a browser, the browser will redirect to a URL that matches the scheme provided in the client configuration's ``Configuration-swift.struct/redirectUri``. This URI will contain either an error response from the authorization server, or an authorization code which can be used to exchange a token.
+    /// Once the user completes authorization, using the URL provided by the ``resume(with:)-10rbh`` method within a browser, the browser will redirect to a URL that matches the scheme provided in the client configuration's ``Configuration-swift.struct/redirectUri``. This URI will contain either an error response from the authorization server, or an authorization code which can be used to exchange a token.
     ///
     /// This method takes the returned redirect URI, and communicates with Okta to exchange that for a token.
     /// - Parameters:

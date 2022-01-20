@@ -10,4 +10,103 @@
 // See the License for the specific language governing permissions and limitations under the License.
 //
 
-import Foundation
+import XCTest
+@testable import TestCommon
+@testable import AuthFoundation
+@testable import OktaOAuth2
+
+class AuthenticationDelegateRecorder: AuthenticationDelegate {
+    var token: Token?
+    var error: OAuth2Error?
+    var started = false
+    var finished = false
+    
+    func authenticationStarted<Flow>(flow: Flow) {
+        started = true
+    }
+    
+    func authenticationFinished<Flow>(flow: Flow) {
+        finished = true
+    }
+
+    func authentication<Flow>(flow: Flow, received token: Token) {
+        self.token = token
+    }
+    
+    func authentication<Flow>(flow: Flow, received error: OAuth2Error) {
+        self.error = error
+    }
+}
+
+final class ResourceOwnerFlowSuccessTests: XCTestCase {
+    let issuer = URL(string: "https://example.com")!
+    let clientMock = OAuth2ClientMock()
+    var configuration: ResourceOwnerFlow.Configuration!
+    let urlSession = URLSessionMock()
+    var client: OAuth2Client!
+    var flow: ResourceOwnerFlow!
+
+    override func setUpWithError() throws {
+        configuration = ResourceOwnerFlow.Configuration(clientId: "clientId",
+                                                        scopes: "openid profile")
+        client = OAuth2Client(baseURL: issuer, session: urlSession)
+        urlSession.expect("https://example.com/oauth2/default/v1/token",
+                          data: try data(from: .module, for: "token", in: "MockResponses"),
+                          contentType: "application/json")
+        flow = ResourceOwnerFlow(configuration, client: client)
+    }
+
+    func testWithDelegate() throws {
+        let delegate = AuthenticationDelegateRecorder()
+        flow.add(delegate: delegate)
+
+        // Ensure the initial state
+        XCTAssertFalse(flow.isAuthenticating)
+        XCTAssertFalse(delegate.started)
+        
+        // Authenticate
+        flow.resume(username: "username", password: "password")
+        XCTAssertTrue(delegate.started)
+        XCTAssertFalse(flow.isAuthenticating)
+        XCTAssertNotNil(delegate.token)
+        XCTAssertTrue(delegate.finished)
+    }
+
+    func testWithBlocks() throws {
+        // Ensure the initial state
+        XCTAssertFalse(flow.isAuthenticating)
+
+        // Authenticate
+        let wait = expectation(description: "resume")
+        var token: Token?
+        flow.resume(username: "username", password: "password") { result in
+            switch result {
+            case .success(let resultToken):
+                token = resultToken
+            case .failure(let error):
+                XCTAssertNil(error)
+            }
+            wait.fulfill()
+        }
+        waitForExpectations(timeout: 1) { error in
+            XCTAssertNil(error)
+        }
+        
+        XCTAssertFalse(flow.isAuthenticating)
+        XCTAssertNotNil(token)
+    }
+
+    #if swift(>=5.5.1) && !os(Linux)
+    @available(iOS 15.0, tvOS 15.0, macOS 12.0, *)
+    func testWithAsync() async throws {
+        // Ensure the initial state
+        XCTAssertFalse(flow.isAuthenticating)
+
+        // Authenticate
+        let token = try await flow.resume(username: "username", password: "password")
+
+        XCTAssertFalse(flow.isAuthenticating)
+        XCTAssertNotNil(token)
+    }
+    #endif
+}

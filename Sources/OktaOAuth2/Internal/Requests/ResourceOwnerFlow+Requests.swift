@@ -22,7 +22,7 @@ extension ResourceOwnerFlow {
     }
 }
 
-extension ResourceOwnerFlow.TokenRequest: TokenRequest, APIRequest, APIRequestBody {
+extension ResourceOwnerFlow.TokenRequest: TokenRequest, APIRequest, APIRequestBody, APIParsingContext {
     var httpMethod: APIRequestMethod { .post }
     var path: String { "v1/token" }
     var contentType: APIContentType? { .formEncoded }
@@ -34,6 +34,15 @@ extension ResourceOwnerFlow.TokenRequest: TokenRequest, APIRequest, APIRequestBo
             "grant_type": "password",
             "username": username,
             "password": password
+        ]
+    }
+    
+    var codingUserInfo: [CodingUserInfoKey : Any]? {
+        [
+            .refreshSettings: [
+                "client_id": clientId,
+                "scope": scope
+            ]
         ]
     }
 }

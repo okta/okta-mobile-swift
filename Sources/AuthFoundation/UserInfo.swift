@@ -12,6 +12,7 @@
 
 import Foundation
 
+/// User profile information.
 public class UserInfo: Codable, JSONDecodable {
     public let sub: String
     

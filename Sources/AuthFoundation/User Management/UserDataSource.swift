@@ -13,6 +13,8 @@
 import Foundation
 
 /// Protocol that enables a developer to interact with, and override, the default behavior for the lifecycle of ``User`` instances.
+///
+/// A default implementation is provided, but for advanced use-cases, you may implement this protocol yourself and assign an instance to the ``User/userDataSource`` property.
 public protocol UserDataSource {
     /// Mandatory delegate property that is used to communicate when users within this data source are created or changed.
     var delegate: UserDataSourceDelegate? { get set }
@@ -26,6 +28,8 @@ public protocol UserDataSource {
     /// > Note: This should not return the total number of available tokens, but rather the number of user objects loaded within this cache.
     var userCount: Int { get }
     
+    func hasUser(for token: Token) -> Bool
+    
     /// Returns a user for the given token.
     ///
     /// The implementation should ensure that no duplicate user instances should be created for the given token. It is recommended that the method be threadsafe as well.
@@ -38,9 +42,19 @@ public protocol UserDataSource {
     func remove(user: User)
 }
 
+/// Protocol that a custom ``UserDataSource`` instances are required to communicate changes to.
 public protocol UserDataSourceDelegate: AnyObject {
+    /// Sent when a new user object is created.
+    ///
+    /// This is usually sent in response to the ``UserDataSource/user(for:)`` method, but in any other circumstance where a user object is created, this message should be sent.
     func user(dataSource: UserDataSource, created user: User)
+    
+    /// Sent when an existing user object is removed from the data source cache.
+    ///
+    /// The user may be re-created at a later date, if its token has not been removed from the ``TokenStorage``. This message is only to indicate that the user has been removed from the data source cache.
     func user(dataSource: UserDataSource, removed user: User)
+    
+    /// Sent when a user object has been updated.
     func user(dataSource: UserDataSource, updated user: User)
 }
 

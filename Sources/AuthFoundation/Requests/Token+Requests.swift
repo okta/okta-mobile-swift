@@ -64,7 +64,7 @@ extension Token.IntrospectRequest: APIRequest, APIRequestBody {
     }
 }
 
-extension Token.RefreshRequest: APIRequest, APIRequestBody {
+extension Token.RefreshRequest: APIRequest, APIRequestBody, APIParsingContext {
     var httpMethod: APIRequestMethod { .post }
     var path: String { "v1/token" }
     var contentType: APIContentType? { .formEncoded }
@@ -77,5 +77,14 @@ extension Token.RefreshRequest: APIRequest, APIRequestBody {
         result["refresh_token"] = refreshToken
         
         return result
+    }
+    
+    var codingUserInfo: [CodingUserInfoKey : Any]? {
+        guard let refreshSettings = token.context.refreshSettings,
+              let settings = refreshSettings.reduce(into: [:], { partialResult, item in
+            guard let key = CodingUserInfoKey(rawValue: item.key) else { return }
+            partialResult?[key] = item.value
+        }) else { return nil }
+        return [ .refreshSettings: settings ]
     }
 }
