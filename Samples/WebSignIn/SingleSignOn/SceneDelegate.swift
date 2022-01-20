@@ -49,7 +49,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         guard let scene = (scene as? UIWindowScene) else { return }
         windowScene = scene
         
-        if User.default == nil {
+        if Credential.default == nil {
             showSignIn()
         } else {
             showProfile()

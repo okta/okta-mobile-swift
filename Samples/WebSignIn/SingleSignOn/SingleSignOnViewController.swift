@@ -89,7 +89,7 @@ final class SingleSignOnViewController: UIViewController {
                     self.present(alert, animated: true)
                     
                 case .success(let token):
-                    User.default = User.for(token: token)
+                    Credential.default = Credential.for(token: token)
                 }
             }
         }
