@@ -13,63 +13,63 @@
 import Foundation
 
 extension Notification.Name {
-    /// Notification broadcast when the ``User/default`` value changes.
-    public static let defaultUserChanged = Notification.Name("com.okta.defaultUserChanged")
+    /// Notification broadcast when the ``Credential/default`` value changes.
+    public static let defaultCredentialChanged = Notification.Name("com.okta.defaultCredentialChanged")
     
-    /// Notification broadcast when a new ``User`` instance is created.
+    /// Notification broadcast when a new ``Credential`` instance is created.
     ///
-    /// > Note: This notification is only sent when the ``UserDataSource`` creates a user. If you use the ``User/init(token:oauth2:)`` method directly, this notification is not sent.
-    public static let userCreated = Notification.Name("com.okta.user.created")
+    /// > Note: This notification is only sent when the ``CredentialDataSource`` creates a credential. If you use the ``Credential/init(token:oauth2:)`` method directly, this notification is not sent.
+    public static let credentialCreated = Notification.Name("com.okta.credential.created")
 
-    /// Notification broadcast when a user is removed from storage.
-    public static let userRemoved = Notification.Name("com.okta.user.removed")
+    /// Notification broadcast when a credential is removed from storage.
+    public static let credentialRemoved = Notification.Name("com.okta.credential.removed")
 }
 
-public enum UserError: Error {
-    case missingUserCoordinator
+public enum CredentialError: Error {
+    case missingCoordinator
 }
 
-/// Convenience object that wraps a ``Token``, providing methods and properties for interacting with user resources.
+/// Convenience object that wraps a ``Token``, providing methods and properties for interacting with credential resources.
 ///
-/// This class can be used as a convenience mechanism for managing stored user credentials, performing operations on or for a user, and interacting with resources scoped to a user.
-public class User {
-    private static let coordinator = UserCoordinator()
-    internal weak var coordinator: UserCoordinator?
+/// This class can be used as a convenience mechanism for managing stored credentials, performing operations on or for a user using their credentials, and interacting with resources scoped to the credential.
+public class Credential {
+    private static let coordinator = CredentialCoordinator()
+    internal weak var coordinator: CredentialCoordinator?
 
-    /// Data source used for creating and managing the creation and caching of ``User`` instances.
-    public static var userDataSource: UserDataSource {
-        get { coordinator.userDataSource }
-        set { coordinator.userDataSource = newValue }
+    /// Data source used for creating and managing the creation and caching of ``Credential`` instances.
+    public static var credentialDataSource: CredentialDataSource {
+        get { coordinator.credentialDataSource }
+        set { coordinator.credentialDataSource = newValue }
     }
     
-    /// Storage instance used to abstract the secure offline storage and retrieval of user ``Token`` instances.
+    /// Storage instance used to abstract the secure offline storage and retrieval of ``Token`` instances.
     public static var tokenStorage: TokenStorage {
         get { coordinator.tokenStorage }
         set { coordinator.tokenStorage = newValue }
     }
     
-    /// The current or "default" user.
+    /// The current or "default" credential.
     ///
     /// This can be used as a convenience to store a user's token within storage, and to access the user in a safe way. If the user's token isn't stored, this will automatically store the token for later use.
-    public static var `default`: User? {
+    public static var `default`: Credential? {
         get { coordinator.default }
         set { coordinator.default = newValue }
     }
     
     /// Lists all users currently stored within the user's application.
-    public static var allUsers: [User] { coordinator.allUsers }
+    public static var allCredentials: [Credential] { coordinator.allCredentials }
     
-    /// Returns a User instance for the given token.
+    /// Returns a Credential instance for the given token.
     ///
-    /// If a user object has previously been created for the given token, that cached user instance will be returned.
+    /// If a credential has previously been created for the given token, that cached instance will be returned.
     /// - Parameter token: Token to identify the user by.
-    /// - Returns: User object that represents the given token.
-    public static func `for`(token: Token) -> User { coordinator.for(token: token) }
+    /// - Returns: Credential object that represents the given token.
+    public static func `for`(token: Token) -> Credential { coordinator.for(token: token) }
     
     /// OAuth2 client for performing operations related to the user's token.
     public let oauth2: OAuth2Client
 
-    /// The token this user instance represents.
+    /// The token this credential represents.
     @TimeSensitive<Token>
     public private(set) var token: Token
 
@@ -80,7 +80,7 @@ public class User {
     public private(set) var userInfo: UserInfo?
     
     public convenience init(token: Token) {
-        let urlSession = type(of: self).userDataSource.urlSession(for: token)
+        let urlSession = type(of: self).credentialDataSource.urlSession(for: token)
         self.init(token: token, oauth2: OAuth2Client(baseURL: token.context.baseURL,
                                                      session: urlSession))
     }
@@ -93,7 +93,7 @@ public class User {
     }
 }
 
-extension User: OAuth2ClientDelegate {
+extension Credential: OAuth2ClientDelegate {
     public func oauth(client: OAuth2Client, didRefresh token: Token, replacedWith newToken: Token?) {
         guard token == self.token,
               let newToken = newToken
@@ -105,23 +105,23 @@ extension User: OAuth2ClientDelegate {
     }
 }
 
-extension User: Identifiable {
+extension Credential: Identifiable {
 }
 
-extension User: Equatable {
-    public static func == (lhs: User, rhs: User) -> Bool {
+extension Credential: Equatable {
+    public static func == (lhs: Credential, rhs: Credential) -> Bool {
         lhs.token == rhs.token
     }
 }
 
-extension User {
-    /// Remove the user, and its token, from storage.
+extension Credential {
+    /// Remove the credential, and its token, from storage.
     public func remove() throws {
         guard let coordinator = coordinator else {
-            throw UserError.missingUserCoordinator
+            throw CredentialError.missingCoordinator
         }
         
-        coordinator.userDataSource.remove(user: self)
+        coordinator.credentialDataSource.remove(credential: self)
         try coordinator.tokenStorage.remove(token: token)
     }
     
@@ -151,9 +151,9 @@ extension User {
         }
     }
     
-    /// Fetches the user info for this user.
+    /// Fetches the user info for this credential.
     ///
-    /// In addition to passing the result to the provided completion block, a successful request will result in the ``User/userInfo`` property being set with the new value for later use.
+    /// In addition to passing the result to the provided completion block, a successful request will result in the ``Credential/userInfo`` property being set with the new value for later use.
     /// - Parameter completion: Optional completion block to be invoked when a result is returned.
     public func userInfo(completion: ((Result<UserInfo, OAuth2Error>) -> Void)? = nil) {
         oauth2.userInfo(token: token) { result in
@@ -168,7 +168,7 @@ extension User {
 
 #if swift(>=5.5.1) && !os(Linux)
 @available(iOS 15.0, tvOS 15.0, macOS 12.0, *)
-extension User {
+extension Credential {
     /// Attempt to refresh the token.
     /// - Returns: The new token generated as a result of the refresh.
     @discardableResult

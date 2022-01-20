@@ -14,15 +14,15 @@ import XCTest
 @testable import TestCommon
 @testable import AuthFoundation
 
-final class DefaultUserDataSourceTests: XCTestCase {
-    var dataSource: DefaultUserDataSource!
+final class DefaultCredentialDataSourceTests: XCTestCase {
+    var dataSource: DefaultCredentialDataSource!
     
     override func setUpWithError() throws {
-        dataSource = DefaultUserDataSource()
+        dataSource = DefaultCredentialDataSource()
     }
     
     func testUsers() throws {
-        XCTAssertEqual(dataSource.userCount, 0)
+        XCTAssertEqual(dataSource.credentialCount, 0)
         
         let token = Token(issuedAt: Date(),
                           tokenType: "Bearer",
@@ -34,16 +34,16 @@ final class DefaultUserDataSourceTests: XCTestCase {
                           deviceSecret: nil,
                           context: Token.Context(baseURL: URL(string: "https://example.com")!,
                                                  refreshSettings: nil))
-        let user = dataSource.user(for: token)
-        XCTAssertEqual(user.token, token)
-        XCTAssertEqual(dataSource.userCount, 1)
+        let credential = dataSource.credential(for: token)
+        XCTAssertEqual(credential.token, token)
+        XCTAssertEqual(dataSource.credentialCount, 1)
 
-        let user2 = dataSource.user(for: token)
-        XCTAssertEqual(user.token, token)
-        XCTAssertTrue(user === user2)
-        XCTAssertEqual(dataSource.userCount, 1)
+        let user2 = dataSource.credential(for: token)
+        XCTAssertEqual(credential.token, token)
+        XCTAssertTrue(credential === user2)
+        XCTAssertEqual(dataSource.credentialCount, 1)
         
-        dataSource.remove(user: user)
-        XCTAssertEqual(dataSource.userCount, 0)
+        dataSource.remove(credential: credential)
+        XCTAssertEqual(dataSource.credentialCount, 0)
     }
 }

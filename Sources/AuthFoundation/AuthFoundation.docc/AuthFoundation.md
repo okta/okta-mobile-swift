@@ -18,7 +18,7 @@ You can use AuthFoundation when you want to:
 
 - <doc:ManagingUserCredentials>
 - ``Token``
-- ``User``
+- ``Credential``
 - ``UserInfo``
 
 ### OAuth2 Client Operations
@@ -30,8 +30,8 @@ You can use AuthFoundation when you want to:
 ### Customizations
 
 - ``TimeCoordinator``
-- ``UserDataSource``
-- ``UserDataSourceDelegate``
+- ``CredentialDataSource``
+- ``CredentialDataSourceDelegate``
 - ``TokenStorage``
 - ``TokenStorageDelegate``
 
@@ -55,7 +55,7 @@ You can use AuthFoundation when you want to:
 - ``OAuth2Error``
 - ``OAuth2ServerError``
 - ``OktaAPIError``
-- ``UserError``
+- ``CredentialError``
 - ``TokenError``
 
 ### Internals and mocking

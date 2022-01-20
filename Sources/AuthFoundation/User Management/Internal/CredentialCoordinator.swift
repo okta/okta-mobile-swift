@@ -12,10 +12,10 @@
 
 import Foundation
 
-class UserCoordinator {
-    var userDataSource: UserDataSource {
+class CredentialCoordinator {
+    var credentialDataSource: CredentialDataSource {
         didSet {
-            userDataSource.delegate = self
+            credentialDataSource.delegate = self
         }
     }
     
@@ -24,39 +24,39 @@ class UserCoordinator {
             tokenStorage.delegate = self
             
             if let defaultToken = tokenStorage.defaultToken {
-                _default = userDataSource.user(for: defaultToken)
+                _default = credentialDataSource.credential(for: defaultToken)
             } else {
                 _default = nil
             }
         }
     }
         
-    private var _default: User?
-    var `default`: User? {
+    private var _default: Credential?
+    var `default`: Credential? {
         get { _default }
         set { tokenStorage.defaultToken = newValue?.token }
     }
     
-    public var allUsers: [User] {
-        tokenStorage.allTokens.map { userDataSource.user(for: $0) }
+    public var allCredentials: [Credential] {
+        tokenStorage.allTokens.map { credentialDataSource.credential(for: $0) }
     }
 
-    func `for`(token: Token) -> User {
+    func `for`(token: Token) -> Credential {
         try? tokenStorage.add(token: token)
-        return userDataSource.user(for: token)
+        return credentialDataSource.credential(for: token)
     }
     
     init(tokenStorage: TokenStorage = DefaultTokenStorage(),
-         userDataSource: UserDataSource = DefaultUserDataSource())
+         credentialDataSource: CredentialDataSource = DefaultCredentialDataSource())
     {
-        self.userDataSource = userDataSource
+        self.credentialDataSource = credentialDataSource
         self.tokenStorage = tokenStorage
 
-        self.userDataSource.delegate = self
+        self.credentialDataSource.delegate = self
         self.tokenStorage.delegate = self
 
         if let defaultToken = tokenStorage.defaultToken {
-            _default = userDataSource.user(for: defaultToken)
+            _default = credentialDataSource.credential(for: defaultToken)
         }
         
         NotificationCenter.default.addObserver(self,
@@ -75,7 +75,7 @@ class UserCoordinator {
     }
 }
 
-extension UserCoordinator: OAuth2ClientDelegate {
+extension CredentialCoordinator: OAuth2ClientDelegate {
     func api(client: APIClient, didSend request: URLRequest, received error: APIClientError) {
         print("Error happened: \(error)")
     }
@@ -93,17 +93,17 @@ extension UserCoordinator: OAuth2ClientDelegate {
     }
 }
 
-extension UserCoordinator: TokenStorageDelegate {
+extension CredentialCoordinator: TokenStorageDelegate {
     func token(storage: TokenStorage, defaultChanged token: Token?) {
         guard _default?.token != token else { return }
 
         if let token = token {
-            _default = userDataSource.user(for: token)
+            _default = credentialDataSource.credential(for: token)
         } else {
             _default = nil
         }
 
-        NotificationCenter.default.post(name: .defaultUserChanged,
+        NotificationCenter.default.post(name: .defaultCredentialChanged,
                                         object: _default)
     }
     
@@ -114,26 +114,26 @@ extension UserCoordinator: TokenStorageDelegate {
     }
     
     func token(storage: TokenStorage, replaced oldToken: Token, with newToken: Token) {
-        guard userDataSource.hasUser(for: oldToken) else { return }
+        guard credentialDataSource.hasCredential(for: oldToken) else { return }
         
         // Doing nothing with this, for now...
     }
     
 }
 
-extension UserCoordinator: UserDataSourceDelegate {
-    func user(dataSource: UserDataSource, created user: User) {
-        user.coordinator = self
+extension CredentialCoordinator: CredentialDataSourceDelegate {
+    func credential(dataSource: CredentialDataSource, created credential: Credential) {
+        credential.coordinator = self
         
-        NotificationCenter.default.post(name: .userCreated, object: user)
+        NotificationCenter.default.post(name: .credentialCreated, object: credential)
     }
     
-    func user(dataSource: UserDataSource, removed user: User) {
-        user.coordinator = nil
+    func credential(dataSource: CredentialDataSource, removed credential: Credential) {
+        credential.coordinator = nil
 
-        NotificationCenter.default.post(name: .userRemoved, object: user)
+        NotificationCenter.default.post(name: .credentialRemoved, object: credential)
     }
     
-    func user(dataSource: UserDataSource, updated user: User) {
+    func credential(dataSource: CredentialDataSource, updated credential: Credential) {
     }
 }

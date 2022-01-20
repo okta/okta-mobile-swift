@@ -36,7 +36,7 @@ class ProfileTableViewController: UITableViewController {
     }
 
     var tableContent: [Section: [Row]] = [:]
-    var user: User? {
+    var user: Credential? {
         didSet {
             user?.userInfo { result in
                 guard case let .success(userInfo) = result else { return }
@@ -50,13 +50,13 @@ class ProfileTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        NotificationCenter.default.addObserver(forName: .defaultUserChanged,
+        NotificationCenter.default.addObserver(forName: .defaultCredentialChanged,
                                                object: nil,
                                                queue: .main) { (notification) in
-            guard let user = notification.object as? User else { return }
+            guard let user = notification.object as? Credential else { return }
             self.user = user
         }
-        user = User.default
+        user = Credential.default
     }
     
     func row(at indexPath: IndexPath) -> Row? {
@@ -191,7 +191,7 @@ class ProfileTableViewController: UITableViewController {
         switch segue.identifier {
         case "TokenDetail":
             guard let target = segue.destination as? TokenDetailViewController else { break }
-            target.token = User.default?.token
+            target.token = Credential.default?.token
 
         default: break
         }
