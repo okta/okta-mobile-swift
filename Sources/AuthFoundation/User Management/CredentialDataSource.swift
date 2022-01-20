@@ -53,9 +53,6 @@ public protocol CredentialDataSourceDelegate: AnyObject {
     ///
     /// The credential may be re-created at a later date, if its token has not been removed from the ``TokenStorage``. This message is only to indicate that the credential has been removed from the data source cache.
     func credential(dataSource: CredentialDataSource, removed credential: Credential)
-    
-    /// Sent when a credential has been updated.
-    func credential(dataSource: CredentialDataSource, updated credential: Credential)
 }
 
 extension CredentialDataSource {

@@ -17,7 +17,7 @@ import XCTest
 final class UserCoordinatorTests: XCTestCase {
     var userDefaults: UserDefaults!
     var storage: DefaultTokenStorage!
-    var coordinator: CredentialCoordinator!
+    var coordinator: CredentialCoordinatorImpl!
     
     let token = Token(issuedAt: Date(),
                       tokenType: "Bearer",
@@ -36,7 +36,7 @@ final class UserCoordinatorTests: XCTestCase {
 
         storage = DefaultTokenStorage(userDefaults: userDefaults)
         
-        coordinator = CredentialCoordinator(tokenStorage: storage)
+        coordinator = CredentialCoordinatorImpl(tokenStorage: storage)
         
         XCTAssertEqual(storage.allTokens.count, 0)
     }

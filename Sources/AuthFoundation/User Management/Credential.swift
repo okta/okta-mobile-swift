@@ -33,21 +33,6 @@ public enum CredentialError: Error {
 ///
 /// This class can be used as a convenience mechanism for managing stored credentials, performing operations on or for a user using their credentials, and interacting with resources scoped to the credential.
 public class Credential {
-    private static let coordinator = CredentialCoordinator()
-    internal weak var coordinator: CredentialCoordinator?
-
-    /// Data source used for creating and managing the creation and caching of ``Credential`` instances.
-    public static var credentialDataSource: CredentialDataSource {
-        get { coordinator.credentialDataSource }
-        set { coordinator.credentialDataSource = newValue }
-    }
-    
-    /// Storage instance used to abstract the secure offline storage and retrieval of ``Token`` instances.
-    public static var tokenStorage: TokenStorage {
-        get { coordinator.tokenStorage }
-        set { coordinator.tokenStorage = newValue }
-    }
-    
     /// The current or "default" credential.
     ///
     /// This can be used as a convenience to store a user's token within storage, and to access the user in a safe way. If the user's token isn't stored, this will automatically store the token for later use.
@@ -79,17 +64,41 @@ public class Credential {
     @TimeSensitive<UserInfo?>
     public private(set) var userInfo: UserInfo?
     
+    /// Initializer that creates a credential for the supplied token.
+    /// - Parameter token: Token to create a credential for.
     public convenience init(token: Token) {
         let urlSession = type(of: self).credentialDataSource.urlSession(for: token)
         self.init(token: token, oauth2: OAuth2Client(baseURL: token.context.baseURL,
                                                      session: urlSession))
     }
     
+    /// Initializer that creates a credential for a given token, using a custom OAuth2Client instance.
+    /// - Parameters:
+    ///   - token: Token
+    ///   - client: Client instance.
     public init(token: Token, oauth2 client: OAuth2Client) {
         self.token = token
         self.oauth2 = client
 
         self.oauth2.add(delegate: self)
+    }
+    
+    // MARK: Private properties
+    fileprivate static let coordinator = CredentialCoordinatorImpl()
+    internal weak var coordinator: CredentialCoordinator? = Credential.coordinator
+}
+
+extension Credential {
+    /// Data source used for creating and managing the creation and caching of ``Credential`` instances.
+    public static var credentialDataSource: CredentialDataSource {
+        get { coordinator.credentialDataSource }
+        set { coordinator.credentialDataSource = newValue }
+    }
+    
+    /// Storage instance used to abstract the secure offline storage and retrieval of ``Token`` instances.
+    public static var tokenStorage: TokenStorage {
+        get { coordinator.tokenStorage }
+        set { coordinator.tokenStorage = newValue }
     }
 }
 
@@ -120,9 +129,8 @@ extension Credential {
         guard let coordinator = coordinator else {
             throw CredentialError.missingCoordinator
         }
-        
-        coordinator.credentialDataSource.remove(credential: self)
-        try coordinator.tokenStorage.remove(token: token)
+     
+        try coordinator.remove(credential: self)
     }
     
     /// Attempt to refresh the token.
@@ -145,7 +153,7 @@ extension Credential {
         oauth2.revoke(token, type: type) { result in
             defer { completion?(result) }
             
-            if case let .success(_) = result {
+            if case .success(_) = result {
                 // Do something with the result
             }
         }

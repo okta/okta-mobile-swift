@@ -14,14 +14,38 @@ import XCTest
 @testable import TestCommon
 @testable import AuthFoundation
 
-final class DefaultCredentialDataSourceTests: XCTestCase {
-    var dataSource: DefaultCredentialDataSource!
-    
-    override func setUpWithError() throws {
-        dataSource = DefaultCredentialDataSource()
+class CredentialDataSourceDelegateRecorder: CredentialDataSourceDelegate {
+    private(set) var created: [Credential] = []
+    private(set) var removed: [Credential] = []
+    private(set) var callCount = 0
+
+    func credential(dataSource: CredentialDataSource, created credential: Credential) {
+        created.append(credential)
+        callCount += 1
     }
     
-    func testUsers() throws {
+    func credential(dataSource: CredentialDataSource, removed credential: Credential) {
+        removed.append(credential)
+        callCount += 1
+    }
+    
+    func reset() {
+        created.removeAll()
+        removed.removeAll()
+        callCount = 0
+    }
+}
+
+final class DefaultCredentialDataSourceTests: XCTestCase {
+    var dataSource: DefaultCredentialDataSource!
+    let delegate = CredentialDataSourceDelegateRecorder()
+
+    override func setUpWithError() throws {
+        dataSource = DefaultCredentialDataSource()
+        dataSource.delegate = delegate
+    }
+    
+    func testCredentials() throws {
         XCTAssertEqual(dataSource.credentialCount, 0)
         
         let token = Token(issuedAt: Date(),
@@ -34,16 +58,26 @@ final class DefaultCredentialDataSourceTests: XCTestCase {
                           deviceSecret: nil,
                           context: Token.Context(baseURL: URL(string: "https://example.com")!,
                                                  refreshSettings: nil))
+        
+        XCTAssertFalse(dataSource.hasCredential(for: token))
+        
         let credential = dataSource.credential(for: token)
         XCTAssertEqual(credential.token, token)
         XCTAssertEqual(dataSource.credentialCount, 1)
+        XCTAssertTrue(dataSource.hasCredential(for: token))
+        XCTAssertTrue(delegate.created.contains(credential))
+        XCTAssertEqual(delegate.callCount, 1)
 
         let user2 = dataSource.credential(for: token)
         XCTAssertEqual(credential.token, token)
         XCTAssertTrue(credential === user2)
         XCTAssertEqual(dataSource.credentialCount, 1)
-        
+        XCTAssertEqual(delegate.callCount, 1)
+
         dataSource.remove(credential: credential)
         XCTAssertEqual(dataSource.credentialCount, 0)
+        XCTAssertFalse(dataSource.hasCredential(for: token))
+        XCTAssertTrue(delegate.removed.contains(credential))
+        XCTAssertEqual(delegate.callCount, 2)
     }
 }

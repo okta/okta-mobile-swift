@@ -12,7 +12,14 @@
 
 import Foundation
 
-class CredentialCoordinator {
+protocol CredentialCoordinator: AnyObject {
+    var credentialDataSource: CredentialDataSource { get set }
+    var tokenStorage: TokenStorage { get set }
+    
+    func remove(credential: Credential) throws
+}
+
+class CredentialCoordinatorImpl: CredentialCoordinator {
     var credentialDataSource: CredentialDataSource {
         didSet {
             credentialDataSource.delegate = self
@@ -46,6 +53,11 @@ class CredentialCoordinator {
         return credentialDataSource.credential(for: token)
     }
     
+    func remove(credential: Credential) throws {
+        credentialDataSource.remove(credential: credential)
+        try tokenStorage.remove(token: credential.token)
+    }
+    
     init(tokenStorage: TokenStorage = DefaultTokenStorage(),
          credentialDataSource: CredentialDataSource = DefaultCredentialDataSource())
     {
@@ -75,7 +87,7 @@ class CredentialCoordinator {
     }
 }
 
-extension CredentialCoordinator: OAuth2ClientDelegate {
+extension CredentialCoordinatorImpl: OAuth2ClientDelegate {
     func api(client: APIClient, didSend request: URLRequest, received error: APIClientError) {
         print("Error happened: \(error)")
     }
@@ -93,7 +105,7 @@ extension CredentialCoordinator: OAuth2ClientDelegate {
     }
 }
 
-extension CredentialCoordinator: TokenStorageDelegate {
+extension CredentialCoordinatorImpl: TokenStorageDelegate {
     func token(storage: TokenStorage, defaultChanged token: Token?) {
         guard _default?.token != token else { return }
 
@@ -121,7 +133,7 @@ extension CredentialCoordinator: TokenStorageDelegate {
     
 }
 
-extension CredentialCoordinator: CredentialDataSourceDelegate {
+extension CredentialCoordinatorImpl: CredentialDataSourceDelegate {
     func credential(dataSource: CredentialDataSource, created credential: Credential) {
         credential.coordinator = self
         
