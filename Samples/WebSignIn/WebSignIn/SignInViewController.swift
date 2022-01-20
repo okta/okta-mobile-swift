@@ -17,9 +17,7 @@ class SignInViewController: UIViewController {
     @IBOutlet weak var signInButton: UIButton!
     @IBOutlet weak var clientIdLabel: UILabel!
 
-    let auth: WebAuthentication? = {
-        try? WebAuthentication()
-    }()
+    let auth = WebAuthentication.shared
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -43,17 +41,15 @@ class SignInViewController: UIViewController {
             switch result {
             case .success(let token):
                 User.default = User.for(token: token)
-                
                 try? Keychain.save(token)
-
+                                        
+                self.dismiss(animated: true)
             case .failure(let error):
                 let alert = UIAlertController(title: "Cannot sign in", message: error.localizedDescription, preferredStyle: .alert)
                 alert.addAction(.init(title: "OK", style: .default))
                 
                 self.present(alert, animated: true)
             }
-            
-            self.dismiss(animated: true)
         }
 
         return

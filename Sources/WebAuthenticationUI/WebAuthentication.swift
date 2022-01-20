@@ -134,10 +134,11 @@ public class WebAuthentication {
             throw WebAuthenticationError.invalidRedirectScheme(url.scheme)
         }
         
-        try flow.resume(with: url)
-
-        provider?.cancel()
-        provider = nil
+        try flow.resume(with: url) { _ in
+            self.provider = nil
+        }
+        
+        self.provider?.cancel()
     }
     
     /// Initializes a web authentiation session using client credentials defined within the application's `Okta.plist` file.
