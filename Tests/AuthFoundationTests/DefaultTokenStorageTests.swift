@@ -36,6 +36,7 @@ final class DefaultTokenStorageTests: XCTestCase {
                       scope: "openid",
                       refreshToken: nil,
                       idToken: nil,
+                      deviceSecret: nil,
                       context: Token.Context(baseURL: URL(string: "https://example.com")!,
                                              refreshSettings: nil))
 
