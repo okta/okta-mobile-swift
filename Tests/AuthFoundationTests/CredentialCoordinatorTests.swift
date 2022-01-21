@@ -28,7 +28,7 @@ final class UserCoordinatorTests: XCTestCase {
                       idToken: nil,
                       deviceSecret: nil,
                       context: Token.Context(baseURL: URL(string: "https://example.com")!,
-                                             refreshSettings: nil))
+                                             clientSettings: nil))
 
     override func setUpWithError() throws {
         userDefaults = UserDefaults(suiteName: name)
@@ -60,6 +60,7 @@ final class UserCoordinatorTests: XCTestCase {
         
         XCTAssertEqual(coordinator.allCredentials, [credential])
         XCTAssertEqual(coordinator.for(token: token), credential)
+        XCTAssertTrue(coordinator.for(token: token) === credential)
     }
     
     func testImplicitCredentialForToken() throws {

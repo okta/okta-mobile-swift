@@ -15,6 +15,7 @@ extension Token {
     struct RevokeRequest {
         let token: String
         let hint: Token.Kind?
+        let configuration: [String:String]
     }
 
     struct RefreshRequest {
@@ -38,9 +39,8 @@ extension Token.RevokeRequest: APIRequest, APIRequestBody {
     var contentType: APIContentType? { .formEncoded }
     var acceptsType: APIContentType? { .json }
     var bodyParameters: [String : Any]? {
-        var result = [
-            "token": token
-        ]
+        var result = configuration
+        result["token"] = token
         
         if let hint = hint {
             result["token_type_hint"] = hint.rawValue
@@ -80,11 +80,11 @@ extension Token.RefreshRequest: APIRequest, APIRequestBody, APIParsingContext {
     }
     
     var codingUserInfo: [CodingUserInfoKey : Any]? {
-        guard let refreshSettings = token.context.refreshSettings,
-              let settings = refreshSettings.reduce(into: [:], { partialResult, item in
+        guard let clientSettings = token.context.clientSettings,
+              let settings = clientSettings.reduce(into: [:], { partialResult, item in
             guard let key = CodingUserInfoKey(rawValue: item.key) else { return }
             partialResult?[key] = item.value
         }) else { return nil }
-        return [ .refreshSettings: settings ]
+        return [ .clientSettings: settings ]
     }
 }

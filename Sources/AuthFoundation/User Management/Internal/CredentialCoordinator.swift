@@ -12,7 +12,7 @@
 
 import Foundation
 
-protocol CredentialCoordinator: AnyObject {
+public protocol CredentialCoordinator: AnyObject {
     var credentialDataSource: CredentialDataSource { get set }
     var tokenStorage: TokenStorage { get set }
     
@@ -31,7 +31,7 @@ class CredentialCoordinatorImpl: CredentialCoordinator {
             tokenStorage.delegate = self
             
             if let defaultToken = tokenStorage.defaultToken {
-                _default = credentialDataSource.credential(for: defaultToken)
+                _default = credentialDataSource.credential(for: defaultToken, coordinator: self)
             } else {
                 _default = nil
             }
@@ -45,12 +45,12 @@ class CredentialCoordinatorImpl: CredentialCoordinator {
     }
     
     public var allCredentials: [Credential] {
-        tokenStorage.allTokens.map { credentialDataSource.credential(for: $0) }
+        tokenStorage.allTokens.map { credentialDataSource.credential(for: $0, coordinator: self) }
     }
 
     func `for`(token: Token) -> Credential {
         try? tokenStorage.add(token: token)
-        return credentialDataSource.credential(for: token)
+        return credentialDataSource.credential(for: token, coordinator: self)
     }
     
     func remove(credential: Credential) throws {
@@ -68,7 +68,7 @@ class CredentialCoordinatorImpl: CredentialCoordinator {
         self.tokenStorage.delegate = self
 
         if let defaultToken = tokenStorage.defaultToken {
-            _default = credentialDataSource.credential(for: defaultToken)
+            _default = credentialDataSource.credential(for: defaultToken, coordinator: self)
         }
         
         NotificationCenter.default.addObserver(self,
@@ -110,7 +110,7 @@ extension CredentialCoordinatorImpl: TokenStorageDelegate {
         guard _default?.token != token else { return }
 
         if let token = token {
-            _default = credentialDataSource.credential(for: token)
+            _default = credentialDataSource.credential(for: token, coordinator: self)
         } else {
             _default = nil
         }

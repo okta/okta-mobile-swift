@@ -28,3 +28,7 @@ macOS Catalyst  | 13.0 - Current | Uses ASWebAuthenticationSession
 
 - <doc:ConfiguringYourClient>
 - ``WebAuthentication``
+
+### Customizations
+
+- <doc:CustomizingAuthorizationURL>
