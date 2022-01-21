@@ -24,7 +24,7 @@ class SafariBrowserProvider: NSObject, WebAuthenticationProvider {
     }
     
     private var safariController: SFSafariViewController?
-    private let window: WebAuthentication.WindowAnchor?
+    private let anchor: WebAuthentication.WindowAnchor?
     
     init(flow: AuthorizationCodeFlow,
          window: WebAuthentication.WindowAnchor?,
