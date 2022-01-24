@@ -299,7 +299,7 @@ public class WebAuthentication {
     var completionBlock: ((Result<Token, WebAuthenticationError>) -> Void)?
 }
 
-#if swift(>=5.5.1) && !os(Linux)
+#if swift(>=5.5.1)
 @available(iOS 15.0, tvOS 15.0, macOS 12.0, *)
 extension WebAuthentication {
     /// Asynchronous convenience method that initiates sign in using the default client configuration, returning a token when successful.

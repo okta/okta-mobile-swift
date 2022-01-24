@@ -159,7 +159,7 @@ final class AuthorizationCodeFlowSuccessTests: XCTestCase {
         XCTAssertNotNil(token)
     }
 
-    #if swift(>=5.5.1) && !os(Linux)
+    #if swift(>=5.5.1)
     @available(iOS 15.0, tvOS 15.0, macOS 12.0, *)
     func testWithAsync() async throws {
         // Ensure the initial state

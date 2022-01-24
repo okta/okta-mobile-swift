@@ -21,7 +21,7 @@ public protocol URLSessionProtocol {
     typealias DataTaskResult = (Data?, HTTPURLResponse?, Error?) -> Void
     func dataTaskWithRequest(_ request: URLRequest, completionHandler: @escaping (Data?, URLResponse?, Error?) -> Void) -> URLSessionDataTaskProtocol
 
-    #if swift(>=5.5.1) && !os(Linux)
+    #if swift(>=5.5.1)
     @available(iOS 15.0, tvOS 15.0, macOS 12.0, *)
     func data(for request: URLRequest, delegate: URLSessionTaskDelegate?) async throws -> (Data, URLResponse)
     #endif

@@ -59,7 +59,7 @@ public protocol APIClient {
     /// Send the given URLRequest.
     func send<T: Decodable>(_ request: URLRequest, parsing context: APIParsingContext?, completion: @escaping (Result<APIResponse<T>, APIClientError>) -> Void)
 
-    #if swift(>=5.5.1) && !os(Linux)
+    #if swift(>=5.5.1)
     /// Asynchronously send the given URLRequest.
     /// - Returns: APIResponse when the request is successful.
     @available(iOS 15.0, tvOS 15.0, macOS 12.0, *)
@@ -168,7 +168,7 @@ extension APIClient {
         }
     }
 
-    #if swift(>=5.5.1) && !os(Linux)
+    #if swift(>=5.5.1)
     @available(iOS 15.0, tvOS 15.0, macOS 12.0, *)
     public func send<T>(_ request: URLRequest, parsing context: APIParsingContext? = nil) async throws -> APIResponse<T> {
         var urlRequest = request
