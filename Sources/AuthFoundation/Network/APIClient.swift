@@ -141,8 +141,11 @@ extension APIClient {
                 self.didSend(request: request, received: response)
                 
                 completion(.success(response))
+            } catch let error as APIClientError {
+                self.didSend(request: request, received: error)
+                completion(.failure(error))
             } catch {
-                let apiError = error as? APIClientError ?? .cannotParseResponse(error: error)
+                let apiError = APIClientError.cannotParseResponse(error: error)
                 self.didSend(request: request, received: apiError)
                 completion(.failure(apiError))
             }
@@ -174,8 +177,11 @@ extension APIClient {
                                   response: response,
                                   parsing: context)
             self.didSend(request: request, received: result)
+        } catch let error as APIClientError {
+            self.didSend(request: request, received: error)
+            throw error
         } catch {
-            let apiError = error as? APIClientError ?? .cannotParseResponse(error: error)
+            let apiError = APIClientError.cannotParseResponse(error: error)
             self.didSend(request: request, received: apiError)
             throw apiError
         }

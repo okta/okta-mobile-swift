@@ -162,8 +162,11 @@ extension Credential {
             {
                 do {
                     try self.coordinator?.remove(credential: self)
+                } catch let error as OAuth2Error {
+                    completion?(.failure(error))
+                    return
                 } catch {
-                    completion?(.failure(error as? OAuth2Error ?? OAuth2Error.error(error)))
+                    completion?(.failure(OAuth2Error.error(error)))
                     return
                 }
             }
