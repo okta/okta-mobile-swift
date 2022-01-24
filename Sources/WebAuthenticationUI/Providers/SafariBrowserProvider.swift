@@ -27,11 +27,11 @@ class SafariBrowserProvider: NSObject, WebAuthenticationProvider {
     private let anchor: WebAuthentication.WindowAnchor?
     
     init(flow: AuthorizationCodeFlow,
-         window: WebAuthentication.WindowAnchor?,
+         from window: WebAuthentication.WindowAnchor?,
          delegate: WebAuthenticationProviderDelegate)
     {
         self.flow = flow
-        self.window = window
+        self.anchor = window
         self.delegate = delegate
         
         super.init()
@@ -49,11 +49,9 @@ class SafariBrowserProvider: NSObject, WebAuthenticationProvider {
         guard let safariController = safariController else { return }
         
         DispatchQueue.main.async {
-            if let presentedViewController = self.window?.rootViewController?.presentedViewController {
-                presentedViewController.present(safariController, animated: true)
-            } else if let rootViewController = self.window?.rootViewController {
-                rootViewController.present(safariController, animated: true)
-            }
+            UIWindow
+                .topViewController(from: self.anchor?.rootViewController)?
+                .present(safariController, animated: true)
         }
     }
     
@@ -103,5 +101,25 @@ extension SafariBrowserProvider: AuthorizationCodeFlowDelegate {
     
     func authentication<Flow>(flow: Flow, received token: Token) {
         received(token: token)
+    }
+}
+
+
+private extension UIWindow {
+    static func topViewController(from rootViewController: UIViewController?) -> UIViewController? {
+        if let navigationController = rootViewController as? UINavigationController {
+            return topViewController(from: navigationController.visibleViewController)
+        }
+
+        if let tabBarController = rootViewController as? UITabBarController,
+            let selected = tabBarController.selectedViewController {
+            return topViewController(from: selected)
+        }
+
+        if let presentedViewController = rootViewController?.presentedViewController {
+            return topViewController(from: presentedViewController)
+        }
+
+        return rootViewController
     }
 }

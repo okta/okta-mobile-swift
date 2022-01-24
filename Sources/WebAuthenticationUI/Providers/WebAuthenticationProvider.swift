@@ -49,7 +49,7 @@ extension WebAuthentication {
         
         if #available(iOS 9.0, *) {
             return SafariBrowserProvider(flow: flow,
-                                         window: window,
+                                         from: window,
                                          delegate: delegate)
         }
         
