@@ -309,7 +309,7 @@ public class AuthorizationCodeFlow: AuthenticationFlow {
 }
 
 #if swift(>=5.5.1)
-@available(iOS 15.0, tvOS 15.0, macOS 12.0, *)
+@available(iOS 15.0, tvOS 15.0, macOS 12.0, watchOS 8, *)
 extension AuthorizationCodeFlow {
     /// Asynchronously initiates an authentication flow, with an optional ``Context-swift.struct``, using Swift Concurrency.
     ///

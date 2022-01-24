@@ -67,7 +67,7 @@ class URLSessionMock: URLSessionProtocol {
     }
     
     #if swift(>=5.5.1)
-    @available(iOS 15.0, tvOS 15.0, macOS 12.0, *)
+    @available(iOS 15.0, tvOS 15.0, macOS 12.0, watchOS 8, *)
     func data(for request: URLRequest, delegate: URLSessionTaskDelegate?) async throws -> (Data, URLResponse) {
         let response = call(for: request.url!.absoluteString)
         if let error = response?.error {
