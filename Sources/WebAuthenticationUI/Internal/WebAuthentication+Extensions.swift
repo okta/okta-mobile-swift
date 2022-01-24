@@ -14,6 +14,8 @@ import Foundation
 import AuthFoundation
 import OktaOAuth2
 
+#if canImport(UIKit) || canImport(AppKit)
+
 extension WebAuthentication {
     private func complete(with result: Result<Token, WebAuthenticationError>) {
         guard let completion = completionBlock else {
@@ -51,3 +53,5 @@ extension WebAuthentication: WebAuthenticationProviderDelegate {
         ephemeralSession
     }
 }
+
+#endif

@@ -12,6 +12,10 @@
 
 import Foundation
 
+#if os(Linux)
+import FoundationNetworking
+#endif
+
 /// Protocol defining the interfaces and capabilities that API clients can conform to.
 ///
 /// This provides a common pattern for network operations to be performed, and to centralize boilerplate handling of URL requests, provide customization extensions, and normalize response processing and argument handling.

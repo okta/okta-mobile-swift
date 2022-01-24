@@ -13,6 +13,8 @@
 import AuthFoundation
 import OktaOAuth2
 
+#if canImport(UIKit) || canImport(AppKit)
+
 protocol WebAuthenticationProvider {
     var flow: AuthorizationCodeFlow { get }
     var delegate: WebAuthenticationProviderDelegate { get }
@@ -30,3 +32,5 @@ protocol WebAuthenticationProviderDelegate {
     @available(iOS 13.0, macOS 10.15, macCatalyst 13.0, *)
     func authenticationShouldUseEphemeralSession(provider: WebAuthenticationProvider) -> Bool
 }
+
+#endif

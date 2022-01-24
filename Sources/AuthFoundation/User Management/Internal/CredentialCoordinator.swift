@@ -12,6 +12,10 @@
 
 import Foundation
 
+#if os(Linux)
+import FoundationNetworking
+#endif
+
 public protocol CredentialCoordinator: AnyObject {
     var credentialDataSource: CredentialDataSource { get set }
     var tokenStorage: TokenStorage { get set }
@@ -71,13 +75,23 @@ class CredentialCoordinatorImpl: CredentialCoordinator {
             _default = credentialDataSource.credential(for: defaultToken, coordinator: self)
         }
         
-        NotificationCenter.default.addObserver(self,
-                                               selector: #selector(received(notification:)),
-                                               name: .oauth2ClientCreated,
-                                               object: nil)
+        self.observer = NotificationCenter
+            .default
+            .addObserver(forName: .oauth2ClientCreated,
+                         object: nil,
+                         queue: nil) { [weak self] notification in
+                self?.received(notification: notification)
+            }
     }
     
-    @objc private func received(notification: Notification) {
+    deinit {
+        if let observer = observer {
+            NotificationCenter.default.removeObserver(observer as Any)
+        }
+    }
+    
+    private var observer: NSObjectProtocol?
+    private func received(notification: Notification) {
         switch notification.name {
         case .oauth2ClientCreated:
             guard let client = notification.object as? OAuth2Client else { break }

@@ -12,6 +12,10 @@
 
 import Foundation
 
+#if os(Linux)
+import FoundationNetworking
+#endif
+
 /// Delegate protocol used by ``OAuth2Client`` to communicate important events.
 public protocol OAuth2ClientDelegate: APIClientDelegate {
     /// Sent before a token will begin to refresh.

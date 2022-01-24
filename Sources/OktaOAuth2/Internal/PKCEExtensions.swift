@@ -56,24 +56,43 @@ internal extension Data {
 }
 
 internal extension String {
-    /// Generates a PKCE code verifier string.
-    /// - Returns: PKCE code verifier string, or `nil` if an error occurs.
-    static func pkceCodeVerifier() -> String? {
-        var data = Data(count: 32)
-        let result = data.withUnsafeMutableBytes {
-            SecRandomCopyBytes(kSecRandomDefault, 32, $0.baseAddress!)
-        }
-        
-        if result == errSecSuccess {
-            return data.base64URLEncodedString()
-        }
-
-        return nil
-    }
-    
     /// Generates a PKCE code challenge string.
     /// - Returns: PKCE code challenge string, or `nil` if an error occurs.
     func pkceCodeChallenge() -> String? {
         return data(using: .ascii)?.sha256()?.base64URLEncodedString()
+    }
+}
+
+extension FixedWidthInteger {
+    static func random() -> Self {
+        return Self.random(in: .min ... .max)
+    }
+
+    static func random<T>(using generator: inout T) -> Self
+        where T : RandomNumberGenerator
+    {
+        return Self.random(in: .min ... .max, using: &generator)
+    }
+}
+
+extension Array where Element: FixedWidthInteger {
+    static func random(count: Int) -> [Element] {
+        var array: [Element] = .init(repeating: 0, count: count)
+        (0 ..< count).forEach { array[$0] = Element.random() }
+        return array
+    }
+
+    static func random<T>(count: Int, using generator: inout T) -> [Element]
+        where T: RandomNumberGenerator
+    {
+        var array: [Element] = .init(repeating: 0, count: count)
+        (0 ..< count).forEach { array[$0] = Element.random() }
+        return array
+    }
+}
+
+extension Array where Element == UInt8 {
+    var base64: String {
+        Data(self).base64EncodedString()
     }
 }

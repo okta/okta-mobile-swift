@@ -12,6 +12,10 @@
 
 import Foundation
 
+#if os(Linux)
+import FoundationNetworking
+#endif
+
 /// Protocol defining the interface for interacting with a URLSession. This is used to provide mocking for unit tests.
 public protocol URLSessionProtocol {
     typealias DataTaskResult = (Data?, HTTPURLResponse?, Error?) -> Void

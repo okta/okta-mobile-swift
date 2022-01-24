@@ -11,6 +11,11 @@
 //
 
 import XCTest
+
+#if os(Linux)
+import FoundationNetworking
+#endif
+
 @testable import TestCommon
 @testable import AuthFoundation
 
