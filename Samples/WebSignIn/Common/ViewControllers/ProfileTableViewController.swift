@@ -114,19 +114,17 @@ class ProfileTableViewController: UITableViewController {
             try? self.user?.remove()
             self.user = nil
         }))
-//        alert.addAction(.init(title: "Revoke tokens", style: .destructive, handler: { _ in
-//            userManager.current?.token.revoke { (success, error) in
-//                guard success else {
-//                    DispatchQueue.main.async {
-//                        let alert = UIAlertController(title: "Sign out failed", message: error?.localizedDescription, preferredStyle: .alert)
-//                        alert.addAction(.init(title: "OK", style: .default))
-//                        self.present(alert, animated: true)
-//                    }
-//                    return
-//                }
-//                userManager.current = nil
-//            }
-//        }))
+        alert.addAction(.init(title: "Revoke tokens", style: .destructive, handler: { _ in
+            self.user?.revoke { result in
+                if case let .failure(error) = result {
+                    DispatchQueue.main.async {
+                        let alert = UIAlertController(title: "Sign out failed", message: error.localizedDescription, preferredStyle: .alert)
+                        alert.addAction(UIAlertAction(title: "OK", style: .default))
+                        self.present(alert, animated: true)
+                    }
+                }
+            }
+        }))
         alert.addAction(.init(title: "Cancel", style: .cancel))
 
         present(alert, animated: true)

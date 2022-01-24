@@ -7,7 +7,17 @@ final class OAuth2ClientTests: XCTestCase {
     let redirectUri = URL(string: "com.example:/callback")!
     let urlSession = URLSessionMock()
     var client: OAuth2Client!
-    
+    let token = Token(issuedAt: Date(),
+                      tokenType: "Bearer",
+                      expiresIn: 300,
+                      accessToken: "abcd123",
+                      scope: "openid",
+                      refreshToken: nil,
+                      idToken: nil,
+                      deviceSecret: nil,
+                      context: Token.Context(baseURL: URL(string: "https://example.com")!,
+                                             clientSettings: [ "client_id": "clientid" ]))
+
     override func setUpWithError() throws {
         client = OAuth2Client(baseURL: issuer, session: urlSession)
     }
@@ -35,5 +45,23 @@ final class OAuth2ClientTests: XCTestCase {
         XCTAssertNotNil(config)
         XCTAssertEqual(config?.authorizationEndpoint.absoluteString,
                        "https://example.okta.com/oauth2/v1/authorize")
+    }
+    
+    func testRevoke() throws {
+        urlSession.expect("https://example.com/oauth2/default/v1/revoke",
+                          data: Data())
+        
+        let expect = expectation(description: "network request")
+        client.revoke(token, type: .accessToken) { result in
+            switch result {
+            case .success(): break
+            case .failure(let error):
+                XCTAssertNil(error)
+            }
+            expect.fulfill()
+        }
+        waitForExpectations(timeout: 1.0) { error in
+            XCTAssertNil(error)
+        }
     }
 }

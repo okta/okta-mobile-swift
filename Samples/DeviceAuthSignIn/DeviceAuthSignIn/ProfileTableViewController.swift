@@ -112,33 +112,32 @@ class ProfileTableViewController: UITableViewController {
             try? self.user?.remove()
             self.user = nil
         }))
-//        alert.addAction(.init(title: "Revoke tokens", style: .destructive, handler: { _ in
-//            userManager.current?.token.revoke { (success, error) in
-//                guard success else {
-//                    DispatchQueue.main.async {
-//                        let alert = UIAlertController(title: "Sign out failed", message: error?.localizedDescription, preferredStyle: .alert)
-//                        alert.addAction(.init(title: "OK", style: .default))
-//                        self.present(alert, animated: true)
-//                    }
-//                    return
-//                }
-//                userManager.current = nil
-//            }
-//        }))
+        alert.addAction(.init(title: "Revoke tokens", style: .destructive, handler: { _ in
+            self.user?.revoke(type: .accessToken) { result in
+                if case let .failure(error) = result {
+                    DispatchQueue.main.async {
+                        let alert = UIAlertController(title: "Sign out failed",
+                                                      message: error.localizedDescription,
+                                                      preferredStyle: .alert)
+                        alert.addAction(UIAlertAction(title: "OK", style: .default))
+                        self.present(alert, animated: true)
+                    }
+                }
+            }
+        }))
         alert.addAction(.init(title: "Cancel", style: .cancel))
 
         present(alert, animated: true)
     }
 
     func refresh() {
-//        guard let user = UserManager.shared.current else { return }
-//        user.token.refresh { (token, error) in
-//            if let token = token {
-//                UserManager.shared.current = User(token: token, info: user.info)
-//            } else if let error = error {
-//                self.show(error: error)
-//            }
-//        }
+        user?.refresh { result in
+            if case let .failure(error) = result {
+                DispatchQueue.main.async {
+                    self.show(error: error)
+                }
+            }
+        }
     }
     
     // MARK: - Table view data source

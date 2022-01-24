@@ -11,7 +11,7 @@
 //
 
 import Foundation
-import AuthFoundation
+@testable import AuthFoundation
 
 class MockCredentialDataSource: CredentialDataSource {
     private(set) var credentials: [Credential] = []
@@ -24,14 +24,14 @@ class MockCredentialDataSource: CredentialDataSource {
         !credentials.filter({ $0.token == token }).isEmpty
     }
 
-    func credential(for token: Token) -> Credential {
+    func credential(for token: Token, coordinator: CredentialCoordinator) -> Credential {
         if let credential = credentials.first(where: { $0.token == token }) {
             return credential
         } else {
             let urlSession = URLSessionMock()
             let client = OAuth2Client(baseURL: token.context.baseURL,
                                       session: urlSession)
-            let credential = Credential(token: token, oauth2: client)
+            let credential = Credential(token: token, oauth2: client, coordinator: coordinator)
             credentials.append(credential)
             
             delegate?.credential(dataSource: self, created: credential)

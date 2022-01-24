@@ -113,7 +113,7 @@ public class Token: Codable, Equatable, Hashable, Expires {
             context = try container.decode(Context.self, forKey: .context)
         } else if let baseUrl = decoder.userInfo[.baseURL] as? URL {
             context = Context(baseURL: baseUrl,
-                              refreshSettings: decoder.userInfo[.refreshSettings])
+                              clientSettings: decoder.userInfo[.clientSettings])
         } else {
             throw TokenError.contextMissing
         }
@@ -139,21 +139,21 @@ extension Token {
         public let baseURL: URL
         
         /// Settings required to be supplied to the authorization server when refreshing this token.
-        let refreshSettings: [String:String]?
+        let clientSettings: [String:String]?
         
-        init(baseURL: URL, refreshSettings: Any?) {
+        init(baseURL: URL, clientSettings: Any?) {
             self.baseURL = baseURL
             
-            if let settings = refreshSettings as? [String:String]? {
-                self.refreshSettings = settings
+            if let settings = clientSettings as? [String:String]? {
+                self.clientSettings = settings
             }
             
-            else if let settings = refreshSettings as? [CodingUserInfoKey: String] {
-                self.refreshSettings = settings.reduce(into: [String:String]()) { (partialResult, tuple: (key: CodingUserInfoKey, value: String)) in
+            else if let settings = clientSettings as? [CodingUserInfoKey: String] {
+                self.clientSettings = settings.reduce(into: [String:String]()) { (partialResult, tuple: (key: CodingUserInfoKey, value: String)) in
                     partialResult[tuple.key.rawValue] = tuple.value
                 }
             } else {
-                self.refreshSettings = nil
+                self.clientSettings = nil
             }
         }
     }
@@ -175,7 +175,7 @@ extension Token {
 
 extension CodingUserInfoKey {
     public static let baseURL = CodingUserInfoKey(rawValue: "baseURL")!
-    public static let refreshSettings = CodingUserInfoKey(rawValue: "refreshSettings")!
+    public static let clientSettings = CodingUserInfoKey(rawValue: "clientSettings")!
 }
 
 public extension Token {

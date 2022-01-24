@@ -76,16 +76,21 @@ public class Credential {
     /// - Parameters:
     ///   - token: Token
     ///   - client: Client instance.
-    public init(token: Token, oauth2 client: OAuth2Client) {
+    public convenience init(token: Token, oauth2 client: OAuth2Client) {
+        self.init(token: token, oauth2: client, coordinator: Credential.coordinator)
+    }
+    
+    init(token: Token, oauth2 client: OAuth2Client, coordinator: CredentialCoordinator) {
         self.token = token
         self.oauth2 = client
+        self.coordinator = coordinator
 
         self.oauth2.add(delegate: self)
     }
-    
+
     // MARK: Private properties
     fileprivate static let coordinator = CredentialCoordinatorImpl()
-    internal weak var coordinator: CredentialCoordinator? = Credential.coordinator
+    internal weak var coordinator: CredentialCoordinator?
 }
 
 extension Credential {
@@ -151,11 +156,22 @@ extension Credential {
     ///   - completion: Completion block called when the operation completes.
     public func revoke(type: Token.RevokeType = .accessToken, completion: ((Result<Void, OAuth2Error>) -> Void)? = nil) {
         oauth2.revoke(token, type: type) { result in
-            defer { completion?(result) }
-            
-            if case .success(_) = result {
-                // Do something with the result
+            // Remove the credential from storage if the access token was revoked
+            if case .success(_) = result,
+               type == .accessToken
+            {
+                do {
+                    try self.coordinator?.remove(credential: self)
+                } catch let error as OAuth2Error {
+                    completion?(.failure(error))
+                    return
+                } catch {
+                    completion?(.failure(OAuth2Error.error(error)))
+                    return
+                }
             }
+            
+            completion?(result)
         }
     }
     

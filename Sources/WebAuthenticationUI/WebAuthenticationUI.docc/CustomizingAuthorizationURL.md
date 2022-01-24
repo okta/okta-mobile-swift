@@ -1,0 +1,47 @@
+# Customizing the Authorization URL
+
+Features and APIs to enable customization of the authorization URL.
+
+## Overview
+
+Many times the URL presented to the user within a browser may need to be customized. For example, a custom query string argument needs to be appended to the URL, such as `idp`, `login_hint`, or other parameters. These may be used by the Sign In Widget to determine how to present the UI to your user. Alternatively, other advanced use-cases may require more complex configuration of the URL.
+
+Since this URL is typically generated at runtime, APIs are needed to give you the capability to configure this URL.
+
+## Query String Parameters
+
+The simplest approach to customizing your authorization URL is adding additional parameters to the query string. These values can be supplied to the initializer, either through the ``WebAuthentication/init(issuer:clientId:clientSecret:scopes:responseType:redirectUri:logoutRedirectUri:additionalParameters:)`` initializer, or through the `Okta.plist` configuration format (see <doc:ConfiguringYourClient> for more information).
+
+```swift
+let auth = WebAuthentication(issuer: issuer,
+                             clientId: clientId,
+                             scopes: "openid profile offline_access",
+                             redirectUri: redirectUri,
+                             additionalParameters: [ "idp": myIdpString ])
+let token = try await auth.start()
+```
+
+## Customizing the Authorization URL through Delegation
+
+The ``WebAuthentication`` class exposes the underlying OAuth2 flow through the ``WebAuthentication/flow`` property. The authentication flows, defined within the OktaOAuth2 SDK, all support a multicast delegate mechanism to notify other parts of the SDK as well as your application of important events.
+
+If your code conforms to the `AuthorizationCodeFlowDelegate` protocol, and implements the `authentication(flow:customizeUrl:)` method, you can alter the URL before it is loaded in the browser.
+
+```swift
+let auth = try WebAuthentication()
+auth.add(delegate: self)
+
+let token = try await auth.start()
+```
+
+Elsewhere in your code, in the class that conforms to `AuthorizationCodeFlowDelegate`, you can implement the appropriate methods to customize the URL:
+
+```swift
+func authentication<Flow: AuthorizationCodeFlow>(
+    flow: Flow,
+    customizeUrl urlComponents: inout URLComponents)
+{
+    urlComponents.queryItems?.append(URLQueryItem(name: "idp", value: myIdpString))
+    urlComponents.fragment = "recover"
+}
+```

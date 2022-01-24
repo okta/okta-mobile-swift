@@ -37,12 +37,14 @@ class CredentialDataSourceDelegateRecorder: CredentialDataSourceDelegate {
 }
 
 final class DefaultCredentialDataSourceTests: XCTestCase {
+    let coordinator = MockCredentialCoordinator()
     var dataSource: DefaultCredentialDataSource!
     let delegate = CredentialDataSourceDelegateRecorder()
 
     override func setUpWithError() throws {
         dataSource = DefaultCredentialDataSource()
         dataSource.delegate = delegate
+        coordinator.credentialDataSource = dataSource
     }
     
     func testCredentials() throws {
@@ -57,18 +59,18 @@ final class DefaultCredentialDataSourceTests: XCTestCase {
                           idToken: nil,
                           deviceSecret: nil,
                           context: Token.Context(baseURL: URL(string: "https://example.com")!,
-                                                 refreshSettings: nil))
+                                                 clientSettings: nil))
         
         XCTAssertFalse(dataSource.hasCredential(for: token))
         
-        let credential = dataSource.credential(for: token)
+        let credential = dataSource.credential(for: token, coordinator: coordinator)
         XCTAssertEqual(credential.token, token)
         XCTAssertEqual(dataSource.credentialCount, 1)
         XCTAssertTrue(dataSource.hasCredential(for: token))
         XCTAssertTrue(delegate.created.contains(credential))
         XCTAssertEqual(delegate.callCount, 1)
 
-        let user2 = dataSource.credential(for: token)
+        let user2 = dataSource.credential(for: token, coordinator: coordinator)
         XCTAssertEqual(credential.token, token)
         XCTAssertTrue(credential === user2)
         XCTAssertEqual(dataSource.credentialCount, 1)
@@ -79,5 +81,9 @@ final class DefaultCredentialDataSourceTests: XCTestCase {
         XCTAssertFalse(dataSource.hasCredential(for: token))
         XCTAssertTrue(delegate.removed.contains(credential))
         XCTAssertEqual(delegate.callCount, 2)
+        
+        let user3 = dataSource.credential(for: token, coordinator: coordinator)
+        XCTAssertEqual(credential.token, token)
+        XCTAssertFalse(credential === user3)
     }
 }

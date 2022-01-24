@@ -28,7 +28,7 @@ class DefaultCredentialDataSource: CredentialDataSource {
         queue.sync { !credentials.filter({ $0.token == token }).isEmpty }
     }
 
-    func credential(for token: Token) -> Credential {
+    func credential(for token: Token, coordinator: CredentialCoordinator) -> Credential {
         queue.sync {
             if let credential = credentials.first(where: { $0.token == token }) {
                 return credential
@@ -36,7 +36,7 @@ class DefaultCredentialDataSource: CredentialDataSource {
                 let urlSession = self.urlSession(for: token)
                 let client = OAuth2Client(baseURL: token.context.baseURL,
                                           session: urlSession)
-                let credential = Credential(token: token, oauth2: client)
+                let credential = Credential(token: token, oauth2: client, coordinator: coordinator)
                 credentials.append(credential)
                 
                 delegate?.credential(dataSource: self, created: credential)

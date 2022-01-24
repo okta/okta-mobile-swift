@@ -139,7 +139,7 @@ public class OAuth2Client: APIClient {
     ///   - token: Token to refresh.
     ///   - completion: Completion bock invoked with the result.
     public func refresh(_ token: Token, completion: @escaping (Result<Token, OAuth2Error>) -> Void) {
-        guard let refreshSettings = token.context.refreshSettings else {
+        guard let clientSettings = token.context.clientSettings else {
             completion(.failure(.missingToken(type: .refreshToken)))
             return
         }
@@ -152,7 +152,7 @@ public class OAuth2Client: APIClient {
             
             token.refreshAction = CoalescedResult()
             token.refreshAction?.add(completion)
-            performRefresh(token: token, refreshSettings: refreshSettings)
+            performRefresh(token: token, clientSettings: clientSettings)
         }
     }
     
@@ -161,11 +161,11 @@ public class OAuth2Client: APIClient {
                       qos: .userInitiated,
                       attributes: .concurrent)
     }()
-    private func performRefresh(token: Token, refreshSettings: [String:String]) {
+    private func performRefresh(token: Token, clientSettings: [String:String]) {
         guard let action = token.refreshAction else { return }
         
         delegateCollection.invoke { $0.oauth(client: self, willRefresh: token) }
-        refresh(Token.RefreshRequest(token: token, configuration: refreshSettings)) { result in
+        refresh(Token.RefreshRequest(token: token, configuration: clientSettings)) { result in
             self.refreshQueue.sync(flags: .barrier) {
                 switch result {
                 case .success(let response):
@@ -183,6 +183,14 @@ public class OAuth2Client: APIClient {
         }
     }
     
+    /// Attempts to revoke the given token.
+    ///
+    /// A ``Token`` object may represent multiple token types, such as ``Token/accessToken`` or ``Token/refreshToken``. These individual token types can be targeted to be revoked.
+    ///
+    /// - Parameters:
+    ///   - token: Token object.
+    ///   - type: Type of token to revoke, default: ``Token/RevokeType/accessToken``
+    ///   - completion: Completion block to invoke once complete.
     public func revoke(_ token: Token, type: Token.RevokeType, completion: @escaping (Result<Void, OAuth2Error>) -> Void) {
         let tokenType = type.tokenType
         guard let tokenString = token.token(of: tokenType) else {
@@ -190,7 +198,12 @@ public class OAuth2Client: APIClient {
             return
         }
         
-        let request = Token.RevokeRequest(token: tokenString, hint: tokenType)
+        guard let clientSettings = token.context.clientSettings else {
+            completion(.failure(.missingClientConfiguration))
+            return
+        }
+        
+        let request = Token.RevokeRequest(token: tokenString, hint: tokenType, configuration: clientSettings)
         revoke(request) { result in
             switch result {
             case .success(_):
@@ -261,6 +274,21 @@ extension OAuth2Client {
     public func refresh(_ token: Token) async throws -> Token {
         try await withCheckedThrowingContinuation { continuation in
             refresh(token) { result in
+                continuation.resume(with: result)
+            }
+        }
+    }
+    
+    /// Attempts to revoke the given token.
+    ///
+    /// A ``Token`` object may represent multiple token types, such as ``Token/accessToken`` or ``Token/refreshToken``. These individual token types can be targeted to be revoked.
+    ///
+    /// - Parameters:
+    ///   - token: Token object.
+    ///   - type: Type of token to revoke, default: ``Token/RevokeType/accessToken``
+    public func revoke(_ token: Token, type: Token.RevokeType = .accessToken) async throws {
+        try await withCheckedThrowingContinuation { continuation in
+            revoke(token, type: type) { result in
                 continuation.resume(with: result)
             }
         }

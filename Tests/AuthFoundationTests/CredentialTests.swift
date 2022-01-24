@@ -16,7 +16,9 @@ import XCTest
 
 final class CredentialTests: XCTestCase {
     let coordinator = MockCredentialCoordinator()
-    
+    var credential: Credential!
+    var urlSession: URLSessionMock!
+
     let token = Token(issuedAt: Date(),
                       tokenType: "Bearer",
                       expiresIn: 300,
@@ -26,12 +28,33 @@ final class CredentialTests: XCTestCase {
                       idToken: nil,
                       deviceSecret: nil,
                       context: Token.Context(baseURL: URL(string: "https://example.com")!,
-                                             refreshSettings: nil))
+                                             clientSettings: [ "client_id": "foo" ]))
+
+    override func setUpWithError() throws {
+        credential = coordinator.credentialDataSource.credential(for: token, coordinator: coordinator)
+        urlSession = credential.oauth2.session as? URLSessionMock
+    }
 
     func testRemove() throws {
-        let credential = Credential(token: token)
-        credential.coordinator = coordinator
-        
         XCTAssertNoThrow(try credential.remove())
+        XCTAssertFalse(coordinator.credentialDataSource.hasCredential(for: token))
+    }
+    
+    func testRevoke() throws {
+        urlSession.expect("https://example.com/oauth2/default/v1/revoke",
+                          data: Data())
+        
+        let expect = expectation(description: "network request")
+        credential.revoke(type: .accessToken) { result in
+            switch result {
+            case .success(): break
+            case .failure(let error):
+                XCTAssertNil(error)
+            }
+            expect.fulfill()
+        }
+        waitForExpectations(timeout: 1.0) { error in
+            XCTAssertNil(error)
+        }
     }
 }

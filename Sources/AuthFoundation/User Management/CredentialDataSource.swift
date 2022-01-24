@@ -34,7 +34,7 @@ public protocol CredentialDataSource {
     ///
     /// The implementation should ensure that no duplicate user instances should be created for the given token. It is recommended that the method be threadsafe as well.
     /// - Returns: Credential for the given token, either newly-created or previously cached.
-    func credential(for token: Token) -> Credential
+    func credential(for token: Token, coordinator: CredentialCoordinator) -> Credential
     
     /// Removes the given credential from the datasource.
     ///
