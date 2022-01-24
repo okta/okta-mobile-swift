@@ -10,20 +10,16 @@ on:
 
 jobs:
   UnitTest:
-    name: Swift ${{ matrix.swift }} on ${{ matrix.os }}
+    name: Unit Tests on ${{ matrix.os }}
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
         os: [ubuntu-latest, macos-latest]
-        swift: ["5.5"]
     steps:
-    - uses: fwal/setup-swift@v1
-      with:
-        swift-version: ${{ matrix.swift }}
     - name: Get swift version
       run: swift --version
     - uses: actions/checkout@master
     - name: Build
-      run: swift build --build-tests --enable-test-discovery
+      run: swift build --build-tests
     - name: Test
-      run: swift test --enable-test-discovery
+      run: swift test
