@@ -30,29 +30,3 @@ protocol WebAuthenticationProviderDelegate {
     @available(iOS 13.0, macOS 10.15, macCatalyst 13.0, *)
     func authenticationShouldUseEphemeralSession(provider: WebAuthenticationProvider) -> Bool
 }
-
-extension WebAuthentication {
-    static func createWebAuthenticationProvider(flow: AuthorizationCodeFlow,
-                                                from window: WebAuthentication.WindowAnchor?,
-                                                delegate: WebAuthenticationProviderDelegate) -> WebAuthenticationProvider?
-    {
-        if #available(iOS 12.0, macOS 10.15, macCatalyst 13.0, *) {
-            return AuthenticationServicesProvider(flow: flow,
-                                                  from: window,
-                                                  delegate: delegate)
-        }
-        
-        if #available(iOS 11.0, *) {
-            return SafariServicesProvider(flow: flow,
-                                          delegate: delegate)
-        }
-        
-        if #available(iOS 9.0, *) {
-            return SafariBrowserProvider(flow: flow,
-                                         from: window,
-                                         delegate: delegate)
-        }
-        
-        return nil
-    }
-}

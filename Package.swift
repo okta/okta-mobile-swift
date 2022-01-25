@@ -44,6 +44,7 @@ let package = Package(
                     dependencies: ["OktaOAuth2", "TestCommon"],
                     resources: [ .copy("MockResponses") ]),
         .testTarget(name: "WebAuthenticationUITests",
-                    dependencies: ["WebAuthenticationUI", "TestCommon"])
+                    dependencies: ["WebAuthenticationUI", "TestCommon"],
+                    resources: [ .copy("MockResponses") ])
     ]
 )

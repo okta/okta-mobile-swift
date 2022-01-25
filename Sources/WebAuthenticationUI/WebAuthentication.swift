@@ -95,9 +95,9 @@ public class WebAuthentication {
             cancel()
         }
         
-        let provider = WebAuthentication.createWebAuthenticationProvider(flow: flow,
-                                                                         from: window,
-                                                                         delegate: self)
+        let provider = createWebAuthenticationProvider(flow: flow,
+                                                       from: window,
+                                                       delegate: self)
         self.completionBlock = completion
         self.provider = provider
 
@@ -248,6 +248,30 @@ public class WebAuthentication {
         self.init(flow: .init(configuration,
                               client: .init(baseURL: issuer,
                                             session: session)))
+    }
+    
+    func createWebAuthenticationProvider(flow: AuthorizationCodeFlow,
+                                                from window: WebAuthentication.WindowAnchor?,
+                                                delegate: WebAuthenticationProviderDelegate) -> WebAuthenticationProvider?
+    {
+        if #available(iOS 12.0, macOS 10.15, macCatalyst 13.0, *) {
+            return AuthenticationServicesProvider(flow: flow,
+                                                  from: window,
+                                                  delegate: delegate)
+        }
+        
+        if #available(iOS 11.0, *) {
+            return SafariServicesProvider(flow: flow,
+                                          delegate: delegate)
+        }
+        
+        if #available(iOS 9.0, *) {
+            return SafariBrowserProvider(flow: flow,
+                                         from: window,
+                                         delegate: delegate)
+        }
+        
+        return nil
     }
     
     /// Initializes a web authentication session using the supplied AuthorizationCodeFlow and optional context.
