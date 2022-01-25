@@ -32,7 +32,7 @@ If you run into problems using the SDK, you can:
 To get started, you will need:
 
 * An Okta account, called an _organization_ (sign up for a free [developer organization](https://developer.okta.com/signup) if you need one).
-* Xcode targeting iOS 10 and above.
+* Xcode targeting iOS 9 and above.
 
 ### Swift Package Manager
 
@@ -46,13 +46,43 @@ dependencies: [
 
 ## Usage
 
-The below code snippets will help you understand how to use this library.
+This SDK consists of several different libraries, each with their own detailed documentation.
 
-Once you initialize an `IDXClient`, you can call methods to make requests to the Okta IDX API. Please see the [configuration reference](#configuration-reference) section for more details.
+- AuthFoundation -- Common classes for managing credentials, and used as a foundation for other libraries.
+- OktaOAuth2 -- OAuth2 authentication capabilities for authenticating users.
+- WebAuthenticationUI -- Authenticate users using web-based OIDC flows.
 
 ## Development
 
 ### Running Tests
+
+## Support Policy
+
+This policy defines the extent of the support for Xcode, Swift, and platform (iOS, macOS, tvOS, and watchOS) versions.
+
+### Xcode
+
+The only supported versions of Xcode are those that can be currently used to submit apps to the App Store. Once a Xcode version becomes unsupported, dropping support for it will not be considered a breaking change, and will be done in a minor release.
+
+### Swift
+
+The minimum supported Swift 5 minor version is the one released with the oldest-supported Xcode version. Once a Swift 5 minor becomes unsupported, dropping support for it will not be considered a breaking change, and will be done in a minor release.
+
+### Platforms
+
+Only the last 4 major platform versions are supported, starting from:
+
+- iOS 12
+- macOS 10.15
+- Catalyst 13
+- tvOS 12
+- watchOS 6.2
+
+Once a platform version becomes unsupported, dropping support for it will not be considered a breaking change, and will be done in a minor release. E.g. iOS 12 will cease to be supported when iOS 16 gets released, and might be dropped in a minor release.
+
+In the case of macOS, the yearly named releases are considered a major platform version for the purposes of this Policy, regardless of the actual version numbers.
+
+> *Note:* Older OS versions will be supported in a best-effort manner. Unless there are API limitations that prevent the SDK from working effectively on older OS versions, the minimum requirements will not be changed.
 
 ## Known issues
 
