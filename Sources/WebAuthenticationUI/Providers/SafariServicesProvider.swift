@@ -10,6 +10,8 @@
 // See the License for the specific language governing permissions and limitations under the License.
 //
 
+#if os(iOS)
+
 import AuthFoundation
 import OktaOAuth2
 import SafariServices
@@ -112,3 +114,4 @@ extension SafariServicesProvider: AuthorizationCodeFlowDelegate {
         received(token: token)
     }
 }
+#endif

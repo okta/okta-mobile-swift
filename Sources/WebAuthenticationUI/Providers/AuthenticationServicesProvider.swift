@@ -65,7 +65,7 @@ class AuthenticationServicesProvider: NSObject, WebAuthenticationProvider {
                 self.process(url: url, error: error)
             })
         
-        if #available(iOS 13.0, macOS 10.15, macCatalyst 13.0, *) {
+        if #available(iOS 13.0, *) {
             authenticationSession?.prefersEphemeralWebBrowserSession = delegate.authenticationShouldUseEphemeralSession(provider: self)
             authenticationSession?.presentationContextProvider = self
         }

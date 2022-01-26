@@ -260,6 +260,7 @@ public class WebAuthentication {
                                                   delegate: delegate)
         }
         
+        #if os(iOS)
         if #available(iOS 11.0, *) {
             return SafariServicesProvider(flow: flow,
                                           delegate: delegate)
@@ -270,6 +271,8 @@ public class WebAuthentication {
                                          from: window,
                                          delegate: delegate)
         }
+        
+        #endif
         
         return nil
     }
