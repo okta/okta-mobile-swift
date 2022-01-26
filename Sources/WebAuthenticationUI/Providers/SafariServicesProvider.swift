@@ -10,5 +10,108 @@
 // See the License for the specific language governing permissions and limitations under the License.
 //
 
-import Foundation
+#if os(iOS)
 
+import AuthFoundation
+import OktaOAuth2
+import SafariServices
+
+@available(iOS, introduced: 11.0, deprecated: 12.0)
+class SafariServicesProvider: NSObject, WebAuthenticationProvider {
+    let flow: AuthorizationCodeFlow
+    let delegate: WebAuthenticationProviderDelegate
+    
+    var canStart: Bool {
+        authenticationSession != nil
+    }
+    
+    private var authenticationSession: SFAuthenticationSession?
+    
+    init(flow: AuthorizationCodeFlow,
+         delegate: WebAuthenticationProviderDelegate)
+    {
+        self.flow = flow
+        self.delegate = delegate
+        
+        super.init()
+        
+        self.flow.add(delegate: self)
+    }
+    
+    deinit {
+        self.flow.remove(delegate: self)
+    }
+    
+    func start(context: AuthorizationCodeFlow.Context?) {
+        do {
+            try flow.resume(with: context)
+        } catch {
+            delegate.authentication(provider: self, received: error)
+        }
+    }
+    
+    func authenticate(using url: URL) {
+        authenticationSession = SFAuthenticationSession(
+            url: url,
+            callbackURLScheme: flow.configuration.redirectUri.scheme,
+            completionHandler: { [weak self] url, error in
+                self?.process(url: url, error: error)
+            })
+        
+        authenticationSession?.start()
+    }
+    
+    func process(url: URL?, error: Error?) {
+        if let error = error {
+            let nsError = error as NSError
+            if nsError.domain == SFAuthenticationErrorDomain,
+               nsError.code == SFAuthenticationError.canceledLogin.rawValue
+            {
+                received(error: .userCancelledLogin)
+            } else {
+                received(error: .authenticationProviderError(error))
+            }
+            
+            return
+        }
+        
+        guard let url = url else {
+            received(error: .genericError(message: "Authentication session returned neither a URL or an error"))
+            return
+        }
+        
+        do {
+            try flow.resume(with: url)
+        } catch {
+            received(error: .authenticationProviderError(error))
+        }
+    }
+    
+    func received(token: Token) {
+        delegate.authentication(provider: self, received: token)
+    }
+    
+    func received(error: WebAuthenticationError) {
+        delegate.authentication(provider: self, received: error)
+    }
+    
+    func cancel() {
+        authenticationSession?.cancel()
+    }
+}
+
+@available(iOS, introduced: 11.0, deprecated: 12.0)
+extension SafariServicesProvider: AuthorizationCodeFlowDelegate {
+    func authentication<Flow>(flow: Flow, shouldAuthenticateUsing url: URL) where Flow : AuthorizationCodeFlow {
+        authenticate(using: url)
+    }
+    
+    func authentication<Flow>(flow: Flow, received error: OAuth2Error) {
+        received(error: .oauth2(error: error))
+    }
+    
+    func authentication<Flow>(flow: Flow, received token: Token) {
+        received(token: token)
+    }
+}
+#endif

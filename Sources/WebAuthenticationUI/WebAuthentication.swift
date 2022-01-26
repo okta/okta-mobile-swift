@@ -47,6 +47,8 @@ public enum WebAuthenticationError: Error {
 /// ```
 ///
 /// To customize the authentication flow, please read more about the underlying OAuth2 client within the OktaOAuth2 library, and how that relates to the ``flow`` property.
+///
+/// If the app is launched under iOS 9.x-10.x, users are prompted to sign in by ``SFSafariViewController``. Therefore, you should define the Okta parameter ``redirectUri`` as the app' URL scheme.
 public class WebAuthentication {
     #if os(macOS)
     public typealias WindowAnchor = NSWindow
@@ -93,9 +95,9 @@ public class WebAuthentication {
             cancel()
         }
         
-        let provider = WebAuthentication.createWebAuthenticationProvider(flow: flow,
-                                                                         from: window,
-                                                                         delegate: self)
+        let provider = createWebAuthenticationProvider(flow: flow,
+                                                       from: window,
+                                                       delegate: self)
         self.completionBlock = completion
         self.provider = provider
 
@@ -134,10 +136,11 @@ public class WebAuthentication {
             throw WebAuthenticationError.invalidRedirectScheme(url.scheme)
         }
         
-        try flow.resume(with: url)
-
-        provider?.cancel()
-        provider = nil
+        try flow.resume(with: url) { _ in
+            self.provider = nil
+        }
+        
+        self.provider?.cancel()
     }
     
     /// Initializes a web authentiation session using client credentials defined within the application's `Okta.plist` file.
@@ -245,6 +248,33 @@ public class WebAuthentication {
         self.init(flow: .init(configuration,
                               client: .init(baseURL: issuer,
                                             session: session)))
+    }
+    
+    func createWebAuthenticationProvider(flow: AuthorizationCodeFlow,
+                                                from window: WebAuthentication.WindowAnchor?,
+                                                delegate: WebAuthenticationProviderDelegate) -> WebAuthenticationProvider?
+    {
+        if #available(iOS 12.0, macOS 10.15, macCatalyst 13.0, *) {
+            return AuthenticationServicesProvider(flow: flow,
+                                                  from: window,
+                                                  delegate: delegate)
+        }
+        
+        #if os(iOS)
+        if #available(iOS 11.0, *) {
+            return SafariServicesProvider(flow: flow,
+                                          delegate: delegate)
+        }
+        
+        if #available(iOS 9.0, *) {
+            return SafariBrowserProvider(flow: flow,
+                                         from: window,
+                                         delegate: delegate)
+        }
+        
+        #endif
+        
+        return nil
     }
     
     /// Initializes a web authentication session using the supplied AuthorizationCodeFlow and optional context.
