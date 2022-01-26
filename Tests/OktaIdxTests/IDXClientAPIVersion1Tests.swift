@@ -41,10 +41,14 @@ class IDXClientAPIVersion1Tests: XCTestCase {
         try session.expect("https://foo.oktapreview.com/oauth2/default/v1/interact", fileName: "interact-response")
         
         let completion = expectation(description: "Response")
-        api.start(state: nil) { result in
+        api.start(options: nil) { result in
             if case let Result.success(context) = result {
                 XCTAssertNotNil(context)
                 XCTAssertEqual(context.interactionHandle, "003Q14X7li")
+
+                // Ensure state is a UUID
+                let state = context.state
+                XCTAssertNotNil(UUID(uuidString: state))
             } else {
                 XCTFail("Not successful")
             }
@@ -53,13 +57,46 @@ class IDXClientAPIVersion1Tests: XCTestCase {
         wait(for: [completion], timeout: 1)
     }
 
+    func testInteractWithOptions() throws {
+        try session.expect("https://foo.oktapreview.com/oauth2/default/v1/interact", fileName: "interact-response")
+        
+        let completion = expectation(description: "Response")
+        api.start(options: [.state: "MyState", .recoveryToken: "someRecoveryToken"]) { result in
+            if case let Result.success(context) = result {
+                XCTAssertNotNil(context)
+                XCTAssertEqual(context.state, "MyState")
+            } else {
+                XCTFail("Not successful")
+            }
+            completion.fulfill()
+        }
+        wait(for: [completion], timeout: 1)
+
+        let request = try XCTUnwrap(session.requests.last)
+        
+        XCTAssertEqual(request.url?.absoluteString,
+                       "https://foo.oktapreview.com/oauth2/default/v1/interact")
+        
+        let data = try XCTUnwrap(request.httpBody)
+        let body = String(data: data, encoding: .utf8)?
+            .components(separatedBy: "&")
+            .reduce(into: [String:String](), { partialResult, item in
+                let items = item.components(separatedBy: "=")
+                guard items.count == 2 else { return }
+                partialResult[items[0]] = items[1]
+            })
+        
+        XCTAssertEqual(body?["state"], "MyState")
+        XCTAssertEqual(body?["recovery_token"], "someRecoveryToken")
+    }
+    
     func testInteractFailure() throws {
         try session.expect("https://foo.oktapreview.com/v1/interact",
                            fileName: "interact-error-response",
                            statusCode: 400)
         
         let completion = expectation(description: "Response")
-        api.start(state: nil) { result in
+        api.start(options: nil) { result in
             if case let Result.failure(error) = result {
                 XCTAssertEqual(error, .invalidResponseData)
             } else {

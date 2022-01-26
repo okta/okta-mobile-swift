@@ -45,7 +45,7 @@ extension IDXClient.APIVersion1 {
     }
 
     struct InteractRequest: HasOAuthHTTPHeaders {
-        let state: String
+        let options: [String:String]
         let codeChallenge: String
     }
     

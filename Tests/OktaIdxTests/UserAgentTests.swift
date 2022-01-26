@@ -38,7 +38,7 @@ class UserAgentTests: XCTestCase {
     }
     
     func testInteractRequest() {
-        let request = IDXClient.APIVersion1.InteractRequest(state: nil, codeChallenge: "challenge")
+        let request = IDXClient.APIVersion1.InteractRequest(options: [:], codeChallenge: "challenge")
         let userAgent = request.httpHeaders["User-Agent"]
         XCTAssertNotNil(userAgent)
 

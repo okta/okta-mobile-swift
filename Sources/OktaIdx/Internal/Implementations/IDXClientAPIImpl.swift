@@ -39,7 +39,7 @@ protocol IDXClientAPIImpl: AnyObject {
     /// The upstream client to communicate critical events to
     var client: IDXClientAPI? { get set }
     
-    func start(state: String?, completion: @escaping (Result<IDXClient.Context, IDXClientError>) -> Void)
+    func start(options: [IDXClient.Option:String]?, completion: @escaping (Result<IDXClient.Context, IDXClientError>) -> Void)
     func resume(completion: @escaping (Result<Response, IDXClientError>) -> Void)
     func proceed(remediation option: Remediation,
                  completion: @escaping (Result<Response, IDXClientError>) -> Void)

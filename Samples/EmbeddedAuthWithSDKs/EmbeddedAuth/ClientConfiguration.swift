@@ -16,15 +16,17 @@ struct ClientConfiguration {
     private static let issuerKey = "issuerUrl"
     private static let clientIdKey = "clientId"
     private static let redirectUriKey = "redirectUrl"
+    private static let recoveryTokenKey = "recoveryToken"
     private static let scopesKey = "scopes"
 
     let clientId: String
     let issuer: String
     let redirectUri: String
     let scopes: String
+    let recoveryToken: String?
     let shouldSave: Bool
     
-    init(clientId: String, issuer: String, redirectUri: String, scopes: String, shouldSave: Bool) throws {
+    init(clientId: String, issuer: String, redirectUri: String, scopes: String, recoveryToken: String?, shouldSave: Bool) throws {
         guard let issuerUrl = URL(string: issuer) else {
             throw ConfigurationError.invalidUrl(name: "issuer")
         }
@@ -58,6 +60,7 @@ struct ClientConfiguration {
         self.clientId = clientId
         self.scopes = scopes
         self.redirectUri = redirectUri
+        self.recoveryToken = recoveryToken
         self.shouldSave = shouldSave
     }
     
@@ -66,13 +69,15 @@ struct ClientConfiguration {
             "--issuer", "-i",
             "--redirectUri", "-r",
             "--scopes", "-s",
-            "--clientId", "-c"
+            "--clientId", "-c",
+            "--recoveryToken", "-t"
         ]
         
         var issuer: String?
         var clientId: String?
         var scopes: String = "openid profile offline_access"
         var redirectUri: String?
+        var recoveryToken: String?
         var key: String?
         for argument in CommandLine.arguments {
             if arguments.contains(argument) {
@@ -93,6 +98,9 @@ struct ClientConfiguration {
             case "--scopes", "-s":
                 scopes = argument
                 
+            case "--recoveryToken", "-t":
+                recoveryToken = argument
+                
             default: break
             }
             key = nil
@@ -105,6 +113,7 @@ struct ClientConfiguration {
                                         issuer: issuer!,
                                         redirectUri: redirectUri!,
                                         scopes: scopes,
+                                        recoveryToken: recoveryToken,
                                         shouldSave: false)
     }
     
@@ -127,6 +136,7 @@ struct ClientConfiguration {
                                         issuer: issuer,
                                         redirectUri: redirectUri,
                                         scopes: scopes,
+                                        recoveryToken: nil,
                                         shouldSave: false)
     }
     
@@ -145,10 +155,16 @@ struct ClientConfiguration {
             return nil
         }
         
+        var recoveryToken = defaults.string(forKey: recoveryTokenKey) ?? environment["RECOVERY_TOKEN"]
+        if recoveryToken?.count == 0 {
+            recoveryToken = nil
+        }
+        
         return try? ClientConfiguration(clientId: clientId,
                                         issuer: issuer,
                                         redirectUri: redirectUri,
                                         scopes: scopes,
+                                        recoveryToken: recoveryToken,
                                         shouldSave: false)
     }
     
@@ -163,6 +179,7 @@ struct ClientConfiguration {
         defaults.setValue(issuer, forKey: type(of: self).issuerKey)
         defaults.setValue(clientId, forKey: type(of: self).clientIdKey)
         defaults.setValue(redirectUri, forKey: type(of: self).redirectUriKey)
+        defaults.setValue(recoveryToken, forKey: type(of: self).recoveryTokenKey)
         defaults.setValue(scopes, forKey: type(of: self).scopesKey)
         defaults.synchronize()
         

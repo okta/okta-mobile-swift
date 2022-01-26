@@ -100,10 +100,10 @@ class IDXClientAPIv1Mock: MockBase, IDXClientAPIImpl {
         self.configuration = configuration
     }
     
-    func start(state: String?, completion: @escaping (Result<IDXClient.Context, IDXClientError>) -> Void) {
+    func start(options: [IDXClient.Option: String]?, completion: @escaping (Result<IDXClient.Context, IDXClientError>) -> Void) {
         recordedCalls.append(RecordedCall(function: #function,
                                           arguments: [
-                                            "state": state as Any
+                                            "options": options as Any
                                           ]))
         completion(result(for: #function))
     }

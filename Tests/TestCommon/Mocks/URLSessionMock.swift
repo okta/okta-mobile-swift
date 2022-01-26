@@ -38,6 +38,8 @@ class URLSessionMock: URLSessionProtocol {
         let error: Error?
     }
     
+    private(set) var requests: [URLRequest] = []
+    
     private var calls: [String: Call] = [:]
     func expect(_ url: String, call: Call) {
         calls[url] = call
@@ -81,6 +83,7 @@ class URLSessionMock: URLSessionProtocol {
     }
     
     func dataTaskWithRequest(with request: URLRequest, completionHandler: @escaping DataTaskResult) -> URLSessionDataTaskProtocol {
+        requests.append(request)
         let response = call(for: request.url!.absoluteString)
         return URLSessionDataTaskMock(data: response?.data,
                                       response: response?.response,

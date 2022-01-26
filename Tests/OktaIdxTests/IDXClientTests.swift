@@ -78,16 +78,16 @@ class IDXClientTests: XCTestCase {
         
         // start()
         expect = expectation(description: "start")
-        IDXClient.start(with: api, state: "state") { result in
+        IDXClient.start(with: api, options: [.state: "stateString"]) { result in
             called = true
             expect.fulfill()
         }
         wait(for: [ expect ], timeout: 1)
         XCTAssertTrue(called)
         call = api.recordedCalls.last
-        XCTAssertEqual(call?.function, "start(state:completion:)")
+        XCTAssertEqual(call?.function, "start(options:completion:)")
         XCTAssertEqual(call?.arguments?.count, 1)
-        XCTAssertEqual(call?.arguments?["state"] as! String, "state")
+        XCTAssertEqual(call?.arguments?["options"] as! [IDXClient.Option:String], [.state: "stateString"])
         api.reset()
 
         // resume()

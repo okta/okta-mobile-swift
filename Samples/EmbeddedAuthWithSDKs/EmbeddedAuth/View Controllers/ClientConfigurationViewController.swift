@@ -29,6 +29,7 @@ class ClientConfigurationViewController: UIViewController {
     @IBOutlet weak var clientIdField: UITextField!
     @IBOutlet weak var scopesField: UITextField!
     @IBOutlet weak var redirectField: UITextField!
+    @IBOutlet weak var recoveryTokenField: UITextField!
     var configuration: ClientConfiguration? = ClientConfiguration.active
     
     override func viewDidLoad() {
@@ -38,12 +39,14 @@ class ClientConfigurationViewController: UIViewController {
         clientIdField.text = configuration?.clientId
         scopesField.text = configuration?.scopes
         redirectField.text = configuration?.redirectUri
-        
+        recoveryTokenField.text = configuration?.recoveryToken
+
         issuerField.accessibilityIdentifier = "issuerField"
         clientIdField.accessibilityIdentifier = "clientIdField"
         scopesField.accessibilityIdentifier = "scopesField"
         redirectField.accessibilityIdentifier = "redirectField"
-        
+        recoveryTokenField.accessibilityIdentifier = "recoveryTokenField"
+
         view.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(backgroundTapped)))
     }
     
@@ -70,6 +73,7 @@ class ClientConfigurationViewController: UIViewController {
                                                     issuer: issuerUrl,
                                                     redirectUri: redirectUri,
                                                     scopes: scopes,
+                                                    recoveryToken: recoveryTokenField.text,
                                                     shouldSave: true)
             configuration?.save()
             dismiss(animated: true)
@@ -97,8 +101,10 @@ extension ClientConfigurationViewController: UITextFieldDelegate {
         case scopesField:
             redirectField.becomeFirstResponder()
         case redirectField:
-            redirectField.resignFirstResponder()
-            
+            recoveryTokenField.becomeFirstResponder()
+        case recoveryTokenField:
+            recoveryTokenField.resignFirstResponder()
+
         default: break
         }
         return false

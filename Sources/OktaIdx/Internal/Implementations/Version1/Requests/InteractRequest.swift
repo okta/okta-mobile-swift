@@ -17,22 +17,15 @@ extension IDXClient.APIVersion1.InteractRequest: IDXClientAPIRequest {
     
     typealias ResponseType = Response
     
-    init(state: String?, codeChallenge: String) {
-        self.state = state ?? UUID().uuidString
-        self.codeChallenge = codeChallenge
-    }
-    
     func urlRequest(using configuration:IDXClient.Configuration) -> URLRequest? {
         guard let url = configuration.issuerUrl(with: "v1/interact") else { return nil }
 
-        let params = [
-            "client_id": configuration.clientId,
-            "scope": configuration.scopes.joined(separator: " "),
-            "code_challenge": codeChallenge,
-            "code_challenge_method": "S256",
-            "redirect_uri": configuration.redirectUri,
-            "state": state
-        ]
+        var params = options
+        params["client_id"] = configuration.clientId
+        params["scope"] = configuration.scopes.joined(separator: " ")
+        params["code_challenge"] = codeChallenge
+        params["code_challenge_method"] = "S256"
+        params["redirect_uri"] = configuration.redirectUri
         
         var request = URLRequest(url: url)
         request.httpMethod = "POST"

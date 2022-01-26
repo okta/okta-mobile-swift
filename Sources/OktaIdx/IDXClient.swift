@@ -17,6 +17,14 @@ import Foundation
 /// The `IDXClient.Configuration` class is used to communicate which application, defined within Okta, the user is being authenticated with. From this point a workflow is initiated, consisting of a series of authentication "Remediation" steps. At each step, your application can introspect the `Response` object to determine which UI should be presented to your user to guide them through to login.
 @objc
 public final class IDXClient: NSObject {
+    /// Options to use when initiating an IDXClient.
+    public enum Option: String {
+        /// Option used when a client needs to supply its own custom state value when initiating an IDXClient.
+        case state
+        
+        /// Option used when a user is authenticating using a recovery token.
+        case recoveryToken = "recovery_token"
+    }
     
     /// The type used for the completion  handler result from any method that returns an `Response`.
     /// - Parameters:
@@ -43,26 +51,31 @@ public final class IDXClient: NSObject {
     /// Starts a new authentication session using the given configuration values. If the client is able to successfully interact with Okta Identity Engine, a new client instance is returned to the caller.
     /// - Parameters:
     ///   - configuration: Configuration describing the app settings to contact.
-    ///   - state: Optional state string to use within the OAuth2 transaction.
+    ///   - options: Options to include within the OAuth2 transaction.
     ///   - completion: Completion block to be invoked when a client is created, or when an error is received.
     public static func start(with configuration: Configuration,
-                             state: String? = nil,
+                             options: [Option:String]? = nil,
                              completion: @escaping (Result<IDXClient, IDXClientError>) -> Void)
     {
         let api = Version.latest.clientImplementation(with: configuration)
-        start(with: api, state: state, completion: completion)
+        start(with: api, options: options, completion: completion)
     }
 
     /// Starts a new authentication session using the given configuration values. If the client is able to successfully interact with Okta Identity Engine, a new client instance is returned to the caller.
     /// - Parameters:
     ///   - configuration: Configuration describing the app settings to contact.
-    ///   - state: Optional state string to use within the OAuth2 transaction.
+    ///   - options: Options to include within the OAuth2 transaction.
     ///   - completion: Completion block to be invoked when a client is created, or when an error is received.
     @objc public static func start(with configuration: Configuration,
-                                   state: String? = nil,
+                                   options: [String:String]? = nil,
                                    completion: @escaping (_ client: IDXClient?, _ error: Error?) -> Void)
     {
-        start(with: configuration, state: state) { result in
+        let mappedOptions = options?.reduce(into: [Option:String](), { partialResult, item in
+            guard let option = Option(rawValue: item.key) else { return }
+            partialResult[option] = item.value
+        })
+        
+        start(with: configuration, options: mappedOptions) { result in
             switch result {
             case .failure(let error):
                 completion(nil, error)
@@ -73,10 +86,10 @@ public final class IDXClient: NSObject {
     }
     
     static func start(with api: IDXClientAPIImpl,
-                      state: String? = nil,
+                      options: [Option:String]? = nil,
                       completion: @escaping (Result<IDXClient, IDXClientError>) -> Void)
     {
-        api.start(state: state) { result in
+        api.start(options: options) { result in
             switch result {
             case .failure(let error):
                 completion(.failure(error))
@@ -206,20 +219,20 @@ extension IDXClient {
     /// Starts a new authentication session using the given configuration values. If the client is able to successfully interact with Okta Identity Engine, a new client instance is returned to the caller.
     /// - Parameters:
     ///   - configuration: Configuration describing the app settings to contact.
-    ///   - state: Optional state string to use within the OAuth2 transaction.
+    ///   - options: Options to include within the OAuth2 transaction.
     /// - Returns: An IDXClient instance for this session.
     public static func start(with configuration: Configuration,
-                             state: String? = nil) async throws -> IDXClient
+                             options: [Option:String]? = nil) async throws -> IDXClient
     {
         let api = Version.latest.clientImplementation(with: configuration)
-        return try await start(with: api, state: state)
+        return try await start(with: api, options: options)
     }
 
     static func start(with api: IDXClientAPIImpl,
-                      state: String? = nil) async throws -> IDXClient
+                      options: [Option:String]? = nil) async throws -> IDXClient
     {
         try await withCheckedThrowingContinuation { continuation in
-            start(with: api, state: state) { result in
+            start(with: api, options: options) { result in
                 continuation.resume(with: result)
             }
         }

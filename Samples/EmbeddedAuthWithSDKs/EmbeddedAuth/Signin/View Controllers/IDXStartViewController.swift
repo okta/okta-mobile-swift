@@ -27,27 +27,31 @@ class IDXStartViewController: UIViewController, IDXSigninController {
             return
         }
         
-        IDXClient.start(with: signin.configuration) { (client, error) in
-            guard let client = client else {
-                if let error = error {
-                    self.showError(error)
-                    
-                    signin.failure(with: error)
-                }
-                return
-            }
-            
-            self.signin?.idx = client
-            client.resume { (response, error) in
-                guard let response = response else {
-                    if let error = error {
-                        self.showError(error)
-                        
-                        signin.failure(with: error)
+        var options = [IDXClient.Option:String]()
+        if let recoveryToken = ClientConfiguration.active?.recoveryToken {
+            options[.recoveryToken] = recoveryToken
+        }
+        
+        IDXClient.start(with: signin.configuration, options: options) { result in
+            switch result {
+            case .success(let client):
+                self.signin?.idx = client
+                client.resume { (response, error) in
+                    guard let response = response else {
+                        if let error = error {
+                            self.showError(error)
+                            
+                            signin.failure(with: error)
+                        }
+                        return
                     }
-                    return
+                    signin.proceed(to: response)
                 }
-                signin.proceed(to: response)
+
+            case .failure(let error):
+                self.showError(error)
+                
+                signin.failure(with: error)
             }
         }
     }

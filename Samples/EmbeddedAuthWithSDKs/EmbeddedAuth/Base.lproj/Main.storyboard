@@ -35,7 +35,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="12" translatesAutoresizingMaskIntoConstraints="NO" id="4WF-jK-s7Q">
-                                <rect key="frame" x="8" y="96" width="398" height="286"/>
+                                <rect key="frame" x="8" y="96" width="398" height="352.5"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="5i7-kD-vNI">
                                         <rect key="frame" x="16" y="16" width="366" height="54.5"/>
@@ -113,6 +113,25 @@
                                             </textField>
                                         </subviews>
                                     </stackView>
+                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="yhO-zL-Yr1">
+                                        <rect key="frame" x="16" y="282" width="366" height="54.5"/>
+                                        <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Recovery Token (optional)" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Iti-sU-LPf">
+                                                <rect key="frame" x="0.0" y="0.0" width="366" height="20.5"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="token" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="f6p-S5-h3D">
+                                                <rect key="frame" x="0.0" y="20.5" width="366" height="34"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                <textInputTraits key="textInputTraits" returnKeyType="done"/>
+                                                <connections>
+                                                    <outlet property="delegate" destination="BYZ-38-t0r" id="ZZA-U1-ym4"/>
+                                                </connections>
+                                            </textField>
+                                        </subviews>
+                                    </stackView>
                                 </subviews>
                                 <edgeInsets key="layoutMargins" top="16" left="16" bottom="16" right="16"/>
                             </stackView>
@@ -141,6 +160,7 @@
                     <connections>
                         <outlet property="clientIdField" destination="BxJ-uw-0ZR" id="ily-M9-7g2"/>
                         <outlet property="issuerField" destination="kXk-Cn-yoW" id="Ito-I0-Q7K"/>
+                        <outlet property="recoveryTokenField" destination="f6p-S5-h3D" id="W2T-ba-JdX"/>
                         <outlet property="redirectField" destination="ZSr-Pi-X8m" id="2lB-bD-blw"/>
                         <outlet property="scopesField" destination="8JU-4E-haT" id="6II-Re-T0x"/>
                     </connections>

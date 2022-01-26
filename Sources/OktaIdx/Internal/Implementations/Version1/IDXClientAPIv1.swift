@@ -34,22 +34,31 @@ extension IDXClient {
 }
 
 extension IDXClient.APIVersion1: IDXClientAPIImpl {
-    func start(state: String?, completion: @escaping (Result<IDXClient.Context, IDXClientError>) -> Void) {
+    func start(options: [IDXClient.Option : String]?, completion: @escaping (Result<IDXClient.Context, IDXClientError>) -> Void) {
         guard let codeVerifier = String.pkceCodeVerifier(),
               let codeChallenge = codeVerifier.pkceCodeChallenge() else
         {
             completion(.failure(.internalMessage("Cannot create a PKCE Code Verifier")))
             return
         }
+
+        // Ensure we have, at minimum, a state value
+        let state = options?[.state] ?? UUID().uuidString
+        var options = options ?? [:]
+        options[.state] = state
         
-        let request = InteractRequest(state: state, codeChallenge: codeChallenge)
+        let mappedOptions = options.reduce(into: [String:String](), { partialResult, item in
+            partialResult[item.key.rawValue] = item.value
+        })
+        
+        let request = InteractRequest(options: mappedOptions, codeChallenge: codeChallenge)
         request.send(to: session, using: configuration) { result in
             switch result {
             case .failure(let error):
                 completion(.failure(error))
             case .success(let response):
                 completion(.success(IDXClient.Context(configuration: self.configuration,
-                                                      state: request.state,
+                                                      state: state,
                                                       interactionHandle: response.interactionHandle,
                                                       codeVerifier: codeVerifier)))
             }
