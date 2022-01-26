@@ -39,7 +39,7 @@ extension ResourceOwnerFlow.TokenRequest: TokenRequest, APIRequest, APIRequestBo
     
     var codingUserInfo: [CodingUserInfoKey : Any]? {
         [
-            .refreshSettings: [
+            .clientSettings: [
                 "client_id": clientId,
                 "scope": scope
             ]

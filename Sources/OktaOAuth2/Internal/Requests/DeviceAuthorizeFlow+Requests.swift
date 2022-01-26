@@ -53,7 +53,7 @@ extension DeviceAuthorizationFlow.TokenRequest: TokenRequest, APIRequest, APIReq
     
     var codingUserInfo: [CodingUserInfoKey : Any]? {
         [
-            .refreshSettings: [
+            .clientSettings: [
                 "client_id": clientId
             ]
         ]

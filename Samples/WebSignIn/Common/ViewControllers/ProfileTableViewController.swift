@@ -36,7 +36,7 @@ class ProfileTableViewController: UITableViewController {
     }
 
     var tableContent: [Section: [Row]] = [:]
-    var user: User? {
+    var user: Credential? {
         didSet {
             user?.userInfo { result in
                 guard case let .success(userInfo) = result else { return }
@@ -50,13 +50,13 @@ class ProfileTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        NotificationCenter.default.addObserver(forName: .defaultUserChanged,
+        NotificationCenter.default.addObserver(forName: .defaultCredentialChanged,
                                                object: nil,
                                                queue: .main) { (notification) in
-            guard let user = notification.object as? User else { return }
+            guard let user = notification.object as? Credential else { return }
             self.user = user
         }
-        user = User.default
+        user = Credential.default
     }
     
     func row(at indexPath: IndexPath) -> Row? {
@@ -114,19 +114,17 @@ class ProfileTableViewController: UITableViewController {
             try? self.user?.remove()
             self.user = nil
         }))
-//        alert.addAction(.init(title: "Revoke tokens", style: .destructive, handler: { _ in
-//            userManager.current?.token.revoke { (success, error) in
-//                guard success else {
-//                    DispatchQueue.main.async {
-//                        let alert = UIAlertController(title: "Sign out failed", message: error?.localizedDescription, preferredStyle: .alert)
-//                        alert.addAction(.init(title: "OK", style: .default))
-//                        self.present(alert, animated: true)
-//                    }
-//                    return
-//                }
-//                userManager.current = nil
-//            }
-//        }))
+        alert.addAction(.init(title: "Revoke tokens", style: .destructive, handler: { _ in
+            self.user?.revoke { result in
+                if case let .failure(error) = result {
+                    DispatchQueue.main.async {
+                        let alert = UIAlertController(title: "Sign out failed", message: error.localizedDescription, preferredStyle: .alert)
+                        alert.addAction(UIAlertAction(title: "OK", style: .default))
+                        self.present(alert, animated: true)
+                    }
+                }
+            }
+        }))
         alert.addAction(.init(title: "Cancel", style: .cancel))
 
         present(alert, animated: true)
@@ -191,7 +189,7 @@ class ProfileTableViewController: UITableViewController {
         switch segue.identifier {
         case "TokenDetail":
             guard let target = segue.destination as? TokenDetailViewController else { break }
-            target.token = User.default?.token
+            target.token = Credential.default?.token
 
         default: break
         }

@@ -73,7 +73,7 @@ class ViewController: UIViewController {
                 case .failure(let error):
                     self.show(error)
                 case .success(let token):
-                    print("Received token \(token)")
+                    Credential.default = Credential(token: token)
                     self.dismiss(animated: true)
                 }
             }

@@ -18,6 +18,7 @@ public enum OAuth2Error: Error {
     case oauth2Error(code: String, description: String?)
     case network(error: APIClientError)
     case missingToken(type: Token.Kind)
+    case missingClientConfiguration
     case error(_ error: Error)
 }
 
@@ -58,6 +59,11 @@ extension OAuth2Error: LocalizedError {
                                   bundle: .module,
                                   comment: "Invalid URL"),
                 type.rawValue)
+
+        case .missingClientConfiguration:
+            return NSLocalizedString("missing_client_configuration_description",
+                                     bundle: .module,
+                                     comment: "Invalid URL")
 
         case .error(let error):
             if let error = error as? LocalizedError {

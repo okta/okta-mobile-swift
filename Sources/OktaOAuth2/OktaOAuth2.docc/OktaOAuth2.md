@@ -19,3 +19,18 @@ You can use OktaOAuth2 when you want to:
 
 - ``AuthorizationCodeFlow``
 - ``AuthorizationCodeFlowDelegate``
+
+### Device Authorization Flow
+
+- ``DeviceAuthorizationFlow``
+- ``DeviceAuthorizationFlowDelegate``
+
+### Token Exchange Flow
+
+- ``TokenExchangeFlow``
+- ``AuthenticationDelegate``
+
+### Resource Owner Flow
+
+- ``ResourceOwnerFlow``
+- ``AuthenticationDelegate``

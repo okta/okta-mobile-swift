@@ -250,7 +250,7 @@ public class AuthorizationCodeFlow: AuthenticationFlow {
                 
                 do {
                     let url = try self.createAuthenticationURL(from: configuration.authorizationEndpoint,
-                                                                                   using: context)
+                                                               using: context)
                     context.authenticationURL = url
                     self.context = context
                     
@@ -323,9 +323,10 @@ extension AuthorizationCodeFlow {
                 try resume(with: context) { result in
                     continuation.resume(with: result)
                 }
+            } catch let error as APIClientError {
+                continuation.resume(with: .failure(error))
             } catch {
-                let apiError = error as? APIClientError ?? .serverError(error)
-                continuation.resume(with: .failure(apiError))
+                continuation.resume(with: .failure(APIClientError.serverError(error)))
             }
         }
     }
@@ -344,9 +345,10 @@ extension AuthorizationCodeFlow {
                 try resume(with: url) { result in
                     continuation.resume(with: result)
                 }
+            } catch let error as APIClientError {
+                continuation.resume(with: .failure(error))
             } catch {
-                let apiError = error as? APIClientError ?? .serverError(error)
-                continuation.resume(with: .failure(apiError))
+                continuation.resume(with: .failure(APIClientError.serverError(error)))
             }
         }
     }

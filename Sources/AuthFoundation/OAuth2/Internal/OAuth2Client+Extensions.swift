@@ -22,7 +22,7 @@ extension OAuth2Client {
     }
 
     func revoke(_ request: Token.RevokeRequest, completion: @escaping (Result<APIResponse<Empty>, APIClientError>) -> Void) {
-//        send(request, completion: completion)
+        send(request, completion: completion)
     }
 
     func introspect(_ request: Token.IntrospectRequest, completion: @escaping (Result<APIResponse<[String:Claim]>, APIClientError>) -> Void) {

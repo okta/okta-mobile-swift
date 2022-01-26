@@ -51,7 +51,7 @@ extension AuthorizationCodeFlow.TokenRequest: TokenRequest, APIRequest, APIReque
     
     var codingUserInfo: [CodingUserInfoKey : Any]? {
         [
-            .refreshSettings: [
+            .clientSettings: [
                 "client_id": clientId,
                 "redirect_uri": redirectUri,
                 "scope": scope

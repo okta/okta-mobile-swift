@@ -40,7 +40,8 @@ class SignInViewController: UIViewController {
         auth?.start(from: window) { result in
             switch result {
             case .success(let token):
-                User.default = User.for(token: token)
+                Credential.default = Credential(token: token)
+
                 try? Keychain.save(token)
                                         
                 self.dismiss(animated: true)
