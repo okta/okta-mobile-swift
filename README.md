@@ -119,7 +119,7 @@ The minimum supported Swift 5 minor version is the one released with the oldest-
 
 ### Platforms
 
-Only the last 4 major platform versions are supported, starting from:
+Only the last 4 major platform versions are officially supported, starting from:
 
 - iOS 12
 - macOS 10.15
