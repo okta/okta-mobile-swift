@@ -12,6 +12,10 @@
 
 import Foundation
 
+#if os(Linux)
+import FoundationNetworking
+#endif
+
 extension URLRequest {
     static func oktaURLFormEncodedString(for params: [String:APIRequestArgument]) -> String? {
         func escape(_ str: String) -> String {

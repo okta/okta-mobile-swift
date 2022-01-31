@@ -12,6 +12,10 @@
 
 import Foundation
 
+#if os(Linux)
+import FoundationNetworking
+#endif
+
 /// Protocol that enables a developer to interact with, and override, the default behavior for the lifecycle of ``Credential`` instances.
 ///
 /// A default implementation is provided, but for advanced use-cases, you may implement this protocol yourself and assign an instance to the ``Credential/credentialDataSource`` property.

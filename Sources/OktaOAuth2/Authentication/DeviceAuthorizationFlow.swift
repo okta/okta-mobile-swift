@@ -260,8 +260,8 @@ public class DeviceAuthorizationFlow: AuthenticationFlow {
     public let delegateCollection = DelegateCollection<DeviceAuthorizationFlowDelegate>()
 }
 
-#if swift(>=5.5.1) && !os(Linux)
-@available(iOS 15.0, tvOS 15.0, macOS 12.0, *)
+#if swift(>=5.5.1)
+@available(iOS 15.0, tvOS 15.0, macOS 12.0, watchOS 8, *)
 extension DeviceAuthorizationFlow {
     /// Asynchronously initiates a device authentication flow.
     ///

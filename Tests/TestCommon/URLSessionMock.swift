@@ -11,6 +11,11 @@
 //
 
 import Foundation
+
+#if os(Linux)
+import FoundationNetworking
+#endif
+
 @testable import AuthFoundation
 
 class URLSessionMock: URLSessionProtocol {
@@ -61,8 +66,8 @@ class URLSessionMock: URLSessionProtocol {
                                       completionHandler: completionHandler)
     }
     
-    #if swift(>=5.5.1) && !os(Linux)
-    @available(iOS 15.0, tvOS 15.0, macOS 12.0, *)
+    #if swift(>=5.5.1)
+    @available(iOS 15.0, tvOS 15.0, macOS 12.0, watchOS 8, *)
     func data(for request: URLRequest, delegate: URLSessionTaskDelegate?) async throws -> (Data, URLResponse) {
         let response = call(for: request.url!.absoluteString)
         if let error = response?.error {

@@ -124,8 +124,8 @@ public class ResourceOwnerFlow: AuthenticationFlow {
     public let delegateCollection = DelegateCollection<AuthenticationDelegate>()
 }
 
-#if swift(>=5.5.1) && !os(Linux)
-@available(iOS 15.0, tvOS 15.0, macOS 12.0, *)
+#if swift(>=5.5.1)
+@available(iOS 15.0, tvOS 15.0, macOS 12.0, watchOS 8, *)
 extension ResourceOwnerFlow {
     /// Asynchronously authenticates with the Resource Owner flow.
     ///

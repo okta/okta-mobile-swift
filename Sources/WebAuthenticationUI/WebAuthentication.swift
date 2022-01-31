@@ -15,10 +15,16 @@
 import Foundation
 import OktaOAuth2
 
+#if canImport(UIKit) || canImport(AppKit)
+
 #if canImport(UIKit)
 import UIKit
 #elseif canImport(AppKit)
 import AppKit
+#endif
+
+#if os(Linux)
+import FoundationNetworking
 #endif
 
 public enum WebAuthenticationError: Error {
@@ -293,8 +299,8 @@ public class WebAuthentication {
     var completionBlock: ((Result<Token, WebAuthenticationError>) -> Void)?
 }
 
-#if swift(>=5.5.1) && !os(Linux)
-@available(iOS 15.0, tvOS 15.0, macOS 12.0, *)
+#if swift(>=5.5.1)
+@available(iOS 15.0, tvOS 15.0, macOS 12.0, watchOS 8, *)
 extension WebAuthentication {
     /// Asynchronous convenience method that initiates sign in using the default client configuration, returning a token when successful.
     /// - Parameter window: The window from which the authentication browser should be shown.
@@ -313,4 +319,5 @@ extension WebAuthentication {
         }
     }
 }
+#endif
 #endif

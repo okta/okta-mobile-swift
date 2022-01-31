@@ -12,6 +12,10 @@
 
 import Foundation
 
+#if os(Linux)
+import FoundationNetworking
+#endif
+
 /// Delegate protocol used by ``OAuth2Client`` to communicate important events.
 public protocol OAuth2ClientDelegate: APIClientDelegate {
     /// Sent before a token will begin to refresh.
@@ -251,8 +255,8 @@ public class OAuth2Client: APIClient {
     private let delegates = DelegateCollection<OAuth2ClientDelegate>()
 }
 
-#if swift(>=5.5.1) && !os(Linux)
-@available(iOS 15.0, tvOS 15.0, macOS 12.0, *)
+#if swift(>=5.5.1)
+@available(iOS 15.0, tvOS 15.0, macOS 12.0, watchOS 8, *)
 extension OAuth2Client {
     /// Asynchronously retrieves the org's OpenID configuration.
     ///

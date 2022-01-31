@@ -12,6 +12,10 @@
 
 import Foundation
 
+#if os(Linux)
+import FoundationNetworking
+#endif
+
 /// Protocol defining the interfaces and capabilities that API clients can conform to.
 ///
 /// This provides a common pattern for network operations to be performed, and to centralize boilerplate handling of URL requests, provide customization extensions, and normalize response processing and argument handling.
@@ -55,10 +59,10 @@ public protocol APIClient {
     /// Send the given URLRequest.
     func send<T: Decodable>(_ request: URLRequest, parsing context: APIParsingContext?, completion: @escaping (Result<APIResponse<T>, APIClientError>) -> Void)
 
-    #if swift(>=5.5.1) && !os(Linux)
+    #if swift(>=5.5.1)
     /// Asynchronously send the given URLRequest.
     /// - Returns: APIResponse when the request is successful.
-    @available(iOS 15.0, tvOS 15.0, macOS 12.0, *)
+    @available(iOS 15.0, tvOS 15.0, macOS 12.0, watchOS 8, *)
     func send<T: Decodable>(_ request: URLRequest, parsing context: APIParsingContext?) async throws -> APIResponse<T>
     #endif
 }
@@ -164,32 +168,17 @@ extension APIClient {
         }
     }
 
-    #if swift(>=5.5.1) && !os(Linux)
-    @available(iOS 15.0, tvOS 15.0, macOS 12.0, *)
+    #if swift(>=5.5.1)
+    @available(iOS 15.0, tvOS 15.0, macOS 12.0, watchOS 8, *)
     public func send<T>(_ request: URLRequest, parsing context: APIParsingContext? = nil) async throws -> APIResponse<T> {
-        var urlRequest = request
-        willSend(request: &urlRequest)
-
-        let (data, response) = try await session.data(for: urlRequest, delegate: nil)
-        let result: APIResponse<T>
-        do {
-            result = try validate(data: data,
-                                  response: response,
-                                  parsing: context)
-            self.didSend(request: request, received: result)
-        } catch let error as APIClientError {
-            self.didSend(request: request, received: error)
-            throw error
-        } catch {
-            let apiError = APIClientError.cannotParseResponse(error: error)
-            self.didSend(request: request, received: apiError)
-            throw apiError
+        try await withCheckedThrowingContinuation { continuation in
+            send(request, parsing: context) { result in
+                continuation.resume(with: result)
+            }
         }
-
-        return result
     }
 
-    @available(iOS 15.0, tvOS 15.0, macOS 12.0, *)
+    @available(iOS 15.0, tvOS 15.0, macOS 12.0, watchOS 8, *)
     public func send<T>(_ request: APIRequest, parsing context: APIParsingContext? = nil) async throws -> APIResponse<T> {
         try await send(try request.request(for: self),
                        parsing: context ?? request as? APIParsingContext)

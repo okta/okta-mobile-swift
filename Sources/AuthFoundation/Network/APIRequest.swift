@@ -12,6 +12,10 @@
 
 import Foundation
 
+#if os(Linux)
+import FoundationNetworking
+#endif
+
 public protocol APIRequest {
     var httpMethod: APIRequestMethod { get }
     var path: String { get }

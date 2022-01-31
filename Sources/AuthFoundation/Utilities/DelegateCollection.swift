@@ -26,24 +26,28 @@ extension UsesDelegateCollection {
 }
 
 public class DelegateCollection<D> {
-    private let delegates: NSHashTable<AnyObject>
+    @WeakCollection
+    private var delegates: [AnyObject?]
     
     public init() {
-        delegates = .weakObjects()
+        delegates = []
     }
 }
 
 extension DelegateCollection {
     public func add(_ delegate: D) {
-        delegates.add(delegate as AnyObject)
+        delegates.append(delegate as AnyObject)
     }
     
     public func remove(_ delegate: D) {
-        delegates.remove(delegate as AnyObject)
+        let delegateObject = delegate as AnyObject
+        delegates.removeAll { object in
+            object === delegateObject
+        }
     }
     
     public func invoke(_ block: (D) -> Void) {
-        delegates.allObjects.forEach {
+        delegates.forEach {
             guard let delegate = $0 as? D else { return }
             block(delegate)
         }

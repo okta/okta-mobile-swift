@@ -45,11 +45,15 @@ extension Date {
 fileprivate var SharedTimeCoordinator: TimeCoordinator = DefaultTimeCoordinator()
 struct DefaultTimeCoordinator: TimeCoordinator {
     var now: Date {
+        #if !os(Linux)
         if #available(macOS 12, iOS 15, tvOS 15, watchOS 8, *) {
             return .now
         } else {
             return Date()
         }
+        #else
+        return Date()
+        #endif
     }
     
     func date(from date: Date) -> Date {

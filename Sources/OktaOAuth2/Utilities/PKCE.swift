@@ -35,9 +35,8 @@ public struct PKCE: Codable, Equatable {
     }
     
     init?() {
-        guard let verifier = String.pkceCodeVerifier() else { return nil }
-        codeVerifier = verifier
-        codeChallenge = verifier.pkceCodeChallenge()
+        codeVerifier = [UInt8].random(count: 32).base64
+        codeChallenge = codeVerifier.pkceCodeChallenge()
         
         if codeChallenge == nil {
             method = .plain
