@@ -105,7 +105,9 @@ class URLSessionDataTaskMock: URLSessionDataTaskProtocol {
     }
     
     func resume() {
-        self.completionHandler(data, response, error)
+        DispatchQueue.global().async {
+            self.completionHandler(self.data, self.response, self.error)
+        }
     }
 }
 
