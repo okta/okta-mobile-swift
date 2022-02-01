@@ -217,7 +217,7 @@ extension Credential {
 
     /// Fetches the user info for this user.
     ///
-    /// In addition to passing the result to the provided completion block, a successful request will result in the ``User/userInfo`` property being set with the new value for later use.
+    /// In addition to passing the result to the provided completion block, a successful request will result in the ``UserInfo`` property being set with the new value for later use.
     /// - Returns: The user info for this user.
     public func userInfo() async throws -> UserInfo {
         try await withCheckedThrowingContinuation { continuation in

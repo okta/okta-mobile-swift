@@ -42,7 +42,7 @@ public protocol CredentialDataSource {
     
     /// Removes the given credential from the datasource.
     ///
-    /// Credential instances may later be recreated when the ``credential(for:)`` method is invoked.
+    /// Credential instances may later be recreated when the ``credential(for:coordinator:)`` method is invoked.
     func remove(credential: Credential)
 }
 
@@ -50,7 +50,7 @@ public protocol CredentialDataSource {
 public protocol CredentialDataSourceDelegate: AnyObject {
     /// Sent when a new credential is created.
     ///
-    /// This is usually sent in response to the ``CredentialDataSource/credential(for:)`` method, but in any other circumstance where a credential is created, this message should be sent.
+    /// This is usually sent in response to the ``CredentialDataSource/credential(for:coordinator:)`` method, but in any other circumstance where a credential is created, this message should be sent.
     func credential(dataSource: CredentialDataSource, created credential: Credential)
     
     /// Sent when an existing credential is removed from the data source cache.

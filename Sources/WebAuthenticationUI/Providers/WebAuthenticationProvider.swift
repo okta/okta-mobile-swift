@@ -19,8 +19,6 @@ protocol WebAuthenticationProvider {
     var flow: AuthorizationCodeFlow { get }
     var delegate: WebAuthenticationProviderDelegate { get }
 
-    var canStart: Bool { get }
-
     func start(context: AuthorizationCodeFlow.Context?)
     func cancel()
 }

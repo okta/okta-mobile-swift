@@ -54,7 +54,7 @@ public enum WebAuthenticationError: Error {
 ///
 /// To customize the authentication flow, please read more about the underlying OAuth2 client within the OktaOAuth2 library, and how that relates to the ``flow`` property.
 ///
-/// If the app is launched under iOS 9.x-10.x, users are prompted to sign in by ``SFSafariViewController``. Therefore, you should define the Okta parameter ``redirectUri`` as the app' URL scheme.
+///  > Important: If your application targets iOS 9.x-10.x, you should add the redirect URI for your client configuration to your app's supported URL schemes.  This is because users on devices older than iOS 11 will be prompted to sign in using `SFSafariViewController`, which does not allow your application to detect the final token redirect.
 public class WebAuthentication {
     #if os(macOS)
     public typealias WindowAnchor = NSWindow
@@ -85,9 +85,6 @@ public class WebAuthentication {
     ///
     /// This represents the state and other challenge data necessary to resume the authentication flow.
     public let context: AuthorizationCodeFlow.Context?
-    
-    /// Indicates whether or not this session is able to start.
-    public var canStart: Bool { provider?.canStart ?? false }
     
     /// Indicates whether or not the developer prefers an ephemeral browser session, or if the user's browser state should be shared with the system browser.
     public var ephemeralSession: Bool = false

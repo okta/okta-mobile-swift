@@ -14,7 +14,7 @@ import Foundation
 
 /// Protocol used to customize the way tokens are stored, updated, and removed throughout the lifecycle of an application.
 ///
-/// A default implementation is provided, but for advanced use-cases, you may implement this protocol yourself and assign an instance to the ``User/tokenStorage`` property.
+/// A default implementation is provided, but for advanced use-cases, you may implement this protocol yourself and assign an instance to the ``Credential/tokenStorage`` property.
 ///
 /// > Warning: When implementing a custom token storage class, it's vitally important that you do not directly invoke any of these methods yourself. These methods are intended to be called on-demand by the other AuthFoundation classes, and the behavior is undefined if these methods are called directly by the developer.
 public protocol TokenStorage {
@@ -61,7 +61,7 @@ public protocol TokenStorageDelegate: AnyObject {
     
     /// Sent when a new token has been added.
     ///
-    /// > Important: This message should only be sent when a token is actually new. If the token is semantically identical to another one already in storage, the ``token(storage:updated:)`` message should be sent instead.
+    /// > Important: This message should only be sent when a token is actually new. If the token is semantically identical to another one already in storage, the ``token(storage:replaced:with:)`` message should be sent instead.
     func token(storage: TokenStorage, added token: Token?)
     
     /// Sent when a token has been removed from storage.

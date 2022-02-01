@@ -29,7 +29,6 @@ class WebAuthenticationMock: WebAuthentication {
 class WebAuthenticationProviderMock: WebAuthenticationProvider {
     var flow: AuthorizationCodeFlow
     var delegate: WebAuthenticationProviderDelegate
-    var canStart: Bool = true
     
     enum State {
         case initialized, started, cancelled
@@ -37,10 +36,9 @@ class WebAuthenticationProviderMock: WebAuthenticationProvider {
     
     var state: State = .initialized
     
-    init(flow: AuthorizationCodeFlow, delegate: WebAuthenticationProviderDelegate, canStart: Bool = true) {
+    init(flow: AuthorizationCodeFlow, delegate: WebAuthenticationProviderDelegate) {
         self.flow = flow
         self.delegate = delegate
-        self.canStart = canStart
     }
     
     func start(context: AuthorizationCodeFlow.Context?) {

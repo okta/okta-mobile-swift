@@ -55,7 +55,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
             showProfile()
         }
         
-        NotificationCenter.default.addObserver(forName: .defaultUserChanged, object: nil, queue: .main) { notification in
+        NotificationCenter.default.addObserver(forName: .defaultCredentialChanged, object: nil, queue: .main) { notification in
             if notification.object == nil {
                 self.showSignIn()
             } else {
