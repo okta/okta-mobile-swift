@@ -10,7 +10,7 @@
 // See the License for the specific language governing permissions and limitations under the License.
 //
 
-#if os(iOS)
+#if os(iOS) && canImport(SafariServices)
 
 import AuthFoundation
 import OktaOAuth2
@@ -21,11 +21,7 @@ class SafariServicesProvider: NSObject, WebAuthenticationProvider {
     let flow: AuthorizationCodeFlow
     let delegate: WebAuthenticationProviderDelegate
     
-    var canStart: Bool {
-        authenticationSession != nil
-    }
-    
-    private var authenticationSession: SFAuthenticationSession?
+    private(set) var authenticationSession: SFAuthenticationSession?
     
     init(flow: AuthorizationCodeFlow,
          delegate: WebAuthenticationProviderDelegate)

@@ -21,11 +21,7 @@ class SafariBrowserProvider: NSObject, WebAuthenticationProvider {
     let flow: AuthorizationCodeFlow
     let delegate: WebAuthenticationProviderDelegate
     
-    var canStart: Bool {
-        safariController != nil
-    }
-    
-    private var safariController: SFSafariViewController?
+    private(set) var safariController: SFSafariViewController?
     private let anchor: WebAuthentication.WindowAnchor?
     
     init(flow: AuthorizationCodeFlow,
@@ -63,19 +59,6 @@ class SafariBrowserProvider: NSObject, WebAuthenticationProvider {
     
     func received(error: WebAuthenticationError) {
         delegate.authentication(provider: self, received: error)
-    }
-    
-    func process(url: URL?) {
-        guard let url = url else {
-            received(error: .genericError(message: "Authentication session returned neither a URL or an error"))
-            return
-        }
-        
-        do {
-            try flow.resume(with: url)
-        } catch {
-            received(error: .authenticationProviderError(error))
-        }
     }
     
     func start(context: AuthorizationCodeFlow.Context?) {

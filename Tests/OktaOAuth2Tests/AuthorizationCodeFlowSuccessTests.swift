@@ -50,7 +50,6 @@ class AuthorizationCodeFlowDelegateRecorder: AuthorizationCodeFlowDelegate {
 final class AuthorizationCodeFlowSuccessTests: XCTestCase {
     let issuer = URL(string: "https://example.com")!
     let redirectUri = URL(string: "com.example:/callback")!
-    let clientMock = OAuth2ClientMock()
     var configuration: AuthorizationCodeFlow.Configuration!
     let urlSession = URLSessionMock()
     var client: OAuth2Client!

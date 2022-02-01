@@ -18,9 +18,9 @@ import Foundation
 ///
 /// The Token Exchange Flow allows a client to get the Access Token exchanging other tokens. As an example, consider [SSO for Native Apps](https://developer.okta.com/docs/guides/configure-native-sso/main/#native-sso-flow) where a client exchanges the ID and the Device Secret tokens to get the access to the resource.
 ///
-/// You can create an instance of  ``TokenExchangeFlow/Configuration-swift.struct`` to define your client's settings, and supply that to the initializer, along with a reference to your ``OAuth2Client`` for performing key operations and requests. Alternatively, you can use any of the convenience initializers to simplify the process.
+/// You can create an instance of  ``TokenExchangeFlow/Configuration-swift.struct`` to define your client's settings, and supply that to the initializer, along with a reference to your OAuth2 client for performing key operations and requests. Alternatively, you can use any of the convenience initializers to simplify the process.
 ///
-/// As an example, we'll use Swift Concurrency, since these asynchronous methods can be used inline easily, though ``AuthorizationCodeFlow`` can just as easily be used with completion blocks or through the use of the ``AuthorizationCodeFlowDelegate``.
+/// As an example, we'll use Swift Concurrency, since these asynchronous methods can be used inline easily, though ``TokenExchangeFlow`` can just as easily be used with completion blocks or through the use of the ``AuthenticationDelegate``.
 ///
 /// ```swift
 /// let flow = TokenExchangeFlow(
@@ -63,7 +63,7 @@ public class TokenExchangeFlow: AuthenticationFlow {
         public let audience: Audience
     }
     
-    /// The ``OAuth2Client`` this authentication flow will use.
+    /// The OAuth2 client this authentication flow will use.
     public let client: OAuth2Client
     
     /// The configuration used when constructing this authentication flow.
@@ -84,7 +84,7 @@ public class TokenExchangeFlow: AuthenticationFlow {
         }
     }
 
-    /// Collection of the ``TokenExchangeFlowDelegate`` objects.
+    /// Collection of the ``AuthenticationDelegate`` objects.
     public let delegateCollection = DelegateCollection<AuthenticationDelegate>()
     
     /// Convenience initializer to construct a flow from variables.
@@ -182,7 +182,7 @@ extension TokenExchangeFlow: OAuth2ClientDelegate {
 extension TokenExchangeFlow {
     /// Asynchronously initiates a token exchange flow.
     /// - Parameter tokens: Tokens to exchange. If empty, the method throws an error.
-    /// - Returns: The ``Token`` created as a result of exchanging the tokens.
+    /// - Returns: The the token created as a result of exchanging the tokens.
     public func resume(with tokens: [TokenType]) async throws -> Token {
         try await withCheckedThrowingContinuation { continuation in
             resume(with: tokens) { result in

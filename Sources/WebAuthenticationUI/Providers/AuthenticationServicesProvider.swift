@@ -22,14 +22,6 @@ class AuthenticationServicesProvider: NSObject, WebAuthenticationProvider {
     let delegate: WebAuthenticationProviderDelegate
     private(set) var authenticationSession: ASWebAuthenticationSession?
 
-    var canStart: Bool {
-        if #available(iOS 13.4, macOS 10.15.4, macCatalyst 13.4, *) {
-            return authenticationSession?.canStart ?? false
-        }
-            
-        return authenticationSession != nil
-    }
-    
     private let anchor: ASPresentationAnchor?
     
     init(flow: AuthorizationCodeFlow,

@@ -33,7 +33,7 @@ To get started, you will need:
 
 * An Okta account, called an _organization_ (sign up for a free [developer organization](https://developer.okta.com/signup) if you need one).
 * An Okta Application, configured as a Native App. This is done from the Okta Developer Console. When following the wizard, use the default properties. They are designed to work with our sample applications.
-* Xcode 13.x, targeting one of the supported platforms and target versions (see the [support-policy](Support Policy) below).
+* Xcode 13.x, targeting one of the supported platforms and target versions (see the [Support Policy][support-policy] below).
 
 ## Install
 
@@ -95,7 +95,7 @@ import WebAuthenticationUI
 
 func signIn() async {
     let token = try await WebAuthentication.signIn(from: view.window)
-    let credentnial = Credential.for(token: token)
+    let credential = Credential.for(token: token)
 }
 ```
 

@@ -16,7 +16,7 @@ import Foundation
 extension TokenExchangeFlow {
     /// Types specify token's identity.
     public enum TokenType {
-        /// Describes specific token used by ``TokenType``.
+        /// Describes specific token used by ``TokenExchangeFlow/TokenType``.
         public enum Kind: String {
             case idToken = "id_token"
             case accessToken = "access_token"
