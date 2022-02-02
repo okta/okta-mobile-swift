@@ -96,6 +96,8 @@ public class ResourceOwnerFlow: AuthenticationFlow {
                                    username: username,
                                    password: password)
         client.exchange(token: request) { result in
+            self.reset()
+
             switch result {
             case .failure(let error):
                 self.delegateCollection.invoke { $0.authentication(flow: self, received: .network(error: error)) }
@@ -104,9 +106,6 @@ public class ResourceOwnerFlow: AuthenticationFlow {
                 self.delegateCollection.invoke { $0.authentication(flow: self, received: response.result) }
                 completion?(.success(response.result))
             }
-            
-            self.reset()
-            self.isAuthenticating = false
         }
     }
     
