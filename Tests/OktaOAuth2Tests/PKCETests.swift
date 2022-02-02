@@ -24,10 +24,10 @@ final class PKCETests: XCTestCase {
         XCTAssertNotNil(pkce.codeVerifier)
         
         #if os(Linux)
-        XCTAssertNil(pkce.codeVerifier)
+        XCTAssertNil(pkce.codeChallenge)
         XCTAssertEqual(pkce.method, .plain)
         #else
-        XCTAssertNotNil(pkce.codeVerifier)
+        XCTAssertNotNil(pkce.codeChallenge)
         XCTAssertEqual(pkce.method, .sha256)
         #endif
     }
