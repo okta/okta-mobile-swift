@@ -221,6 +221,9 @@ public class DeviceAuthorizationFlow: AuthenticationFlow {
         timerSource.schedule(deadline: .now() + context.interval, repeating: context.interval)
         timerSource.setEventHandler {
             self.getToken(using: context) { result in
+                self.reset()
+                self.isAuthenticating = false
+
                 switch result {
                 case .failure(let error):
                     completion?(.failure(error))
@@ -233,9 +236,6 @@ public class DeviceAuthorizationFlow: AuthenticationFlow {
                         return
                     }
                 }
-                
-                self.reset()
-                self.isAuthenticating = false
             }
         }
         timer = timerSource

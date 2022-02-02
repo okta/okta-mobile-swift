@@ -91,7 +91,14 @@ final class AuthorizationCodeFlowSuccessTests: XCTestCase {
         
         // Begin
         let context = AuthorizationCodeFlow.Context(state: "ABC123", pkce: nil)
-        try flow.resume(with: context)
+        var expect = expectation(description: "network request")
+        try flow.resume(with: context) { _ in
+            expect.fulfill()
+        }
+        waitForExpectations(timeout: 1.0) { error in
+            XCTAssertNil(error)
+        }
+
         XCTAssertEqual(flow.context?.state, context.state)
         XCTAssertTrue(flow.isAuthenticating)
         XCTAssertNotNil(flow.context?.authenticationURL)
@@ -101,7 +108,14 @@ final class AuthorizationCodeFlowSuccessTests: XCTestCase {
         XCTAssertEqual(flow.context?.authenticationURL, delegate.url)
         
         // Exchange code
-        try flow.resume(with: URL(string: "com.example:/callback?code=ABCEasyAs123&state=ABC123")!)
+        expect = expectation(description: "network request")
+        try flow.resume(with: URL(string: "com.example:/callback?code=ABCEasyAs123&state=ABC123")!) { _ in
+            expect.fulfill()
+        }
+        waitForExpectations(timeout: 1.0) { error in
+            XCTAssertNil(error)
+        }
+
         XCTAssertNil(flow.context)
         XCTAssertFalse(flow.isAuthenticating)
         XCTAssertNotNil(delegate.token)

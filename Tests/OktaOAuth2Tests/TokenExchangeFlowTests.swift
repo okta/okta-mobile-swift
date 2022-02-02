@@ -95,6 +95,7 @@ final class TokenExchangeFlowTests: XCTestCase {
         
         XCTAssertFalse(flow.isAuthenticating)
         
+        let expect = expectation(description: "resume")
         flow.resume(with: tokens) { result in
             switch result {
             case .success:
@@ -104,11 +105,14 @@ final class TokenExchangeFlowTests: XCTestCase {
             case .failure(let error):
                 XCTFail(error.localizedDescription)
             }
+            
+            expect.fulfill()
         }
-        
+        waitForExpectations(timeout: 1) { error in
+            XCTAssertNil(error)
+        }
+
         XCTAssertFalse(flow.isAuthenticating)
-        
-        wait(for: [authorizeExpectation], timeout: 2)
     }
     
 #if swift(>=5.5.1)

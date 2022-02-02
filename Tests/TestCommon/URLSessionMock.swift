@@ -30,6 +30,8 @@ class URLSessionMock: URLSessionProtocol {
         calls[url] = call
     }
     
+    var asyncTasks: Bool = true
+    
     func expect(_ url: String,
                 data: Data?,
                 statusCode: Int = 200,
@@ -52,7 +54,8 @@ class URLSessionMock: URLSessionProtocol {
     
     func dataTaskWithRequest(_ request: URLRequest, completionHandler: @escaping (Data?, URLResponse?, Error?) -> Void) -> URLSessionDataTaskProtocol {
         let response = call(for: request.url!.absoluteString)
-        return URLSessionDataTaskMock(data: response?.data,
+        return URLSessionDataTaskMock(session: self,
+                                      data: response?.data,
                                       response: response?.response,
                                       error: response?.error,
                                       completionHandler: completionHandler)
@@ -60,7 +63,8 @@ class URLSessionMock: URLSessionProtocol {
 
     func dataTask(with request: URLRequest, completionHandler: @escaping (Data?, URLResponse?, Error?) -> Void) -> URLSessionDataTaskProtocol {
         let response = call(for: request.url!.absoluteString)
-        return URLSessionDataTaskMock(data: response?.data,
+        return URLSessionDataTaskMock(session: self,
+                                      data: response?.data,
                                       response: response?.response,
                                       error: response?.error,
                                       completionHandler: completionHandler)
@@ -88,16 +92,20 @@ class URLSessionMock: URLSessionProtocol {
 }
 
 class URLSessionDataTaskMock: URLSessionDataTaskProtocol {
+    weak var session: URLSessionMock?
+    
     let completionHandler: (Data?, HTTPURLResponse?, Error?) -> Void
     let data: Data?
     let response: HTTPURLResponse?
     let error: Error?
     
-    init(data: Data?,
+    init(session: URLSessionMock,
+         data: Data?,
          response: HTTPURLResponse?,
          error: Error?,
          completionHandler: @escaping (Data?, HTTPURLResponse?, Error?) -> Void)
     {
+        self.session = session
         self.completionHandler = completionHandler
         self.data = data
         self.response = response
@@ -105,7 +113,13 @@ class URLSessionDataTaskMock: URLSessionDataTaskProtocol {
     }
     
     func resume() {
-        self.completionHandler(data, response, error)
+        if session?.asyncTasks ?? true {
+            DispatchQueue.global().async {
+                self.completionHandler(self.data, self.response, self.error)
+            }
+        } else {
+            self.completionHandler(self.data, self.response, self.error)
+        }
     }
 }
 
