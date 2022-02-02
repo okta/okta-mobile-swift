@@ -21,7 +21,7 @@ import XCTest
 class WebAuthenticationProviderDelegateRecorder: WebAuthenticationProviderDelegate {
     private(set) var token: Token?
     private(set) var error: Error?
-    var shouldUseEphemeralSession: Bool = false
+    var shouldUseEphemeralSession: Bool = true
     
     func authentication(provider: WebAuthenticationProvider, received token: Token) {
         self.token = token
@@ -38,7 +38,7 @@ class WebAuthenticationProviderDelegateRecorder: WebAuthenticationProviderDelega
     func reset() {
         token = nil
         error = nil
-        shouldUseEphemeralSession = false
+        shouldUseEphemeralSession = true
     }
 }
 
@@ -62,6 +62,7 @@ class ProviderTestBase: XCTestCase {
                                                             additionalParameters: ["additional": "param"])
         client = OAuth2Client(baseURL: issuer, session: urlSession)
         
+        urlSession.asyncTasks = false
         urlSession.expect("https://example.com/oauth2/default/.well-known/openid-configuration",
                           data: try data(from: .module, for: "openid-configuration", in: "MockResponses"),
                           contentType: "application/json")

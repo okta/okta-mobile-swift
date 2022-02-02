@@ -35,7 +35,7 @@ public struct PKCE: Codable, Equatable {
     }
     
     init?() {
-        codeVerifier = [UInt8].random(count: 32).base64
+        codeVerifier = [UInt8].random(count: 32).base64URLEncodedString
         codeChallenge = codeVerifier.pkceCodeChallenge()
         
         if codeChallenge == nil {
