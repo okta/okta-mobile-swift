@@ -283,6 +283,8 @@ public class AuthorizationCodeFlow: AuthenticationFlow {
                                    grantValue: code,
                                    pkce: context?.pkce)
         client.exchange(token: request) { result in
+            self.reset()
+
             switch result {
             case .success(let response):
                 let token = response.result
@@ -292,9 +294,6 @@ public class AuthorizationCodeFlow: AuthenticationFlow {
                 self.delegateCollection.invoke { $0.authentication(flow: self, received: .network(error: error)) }
                 completion?(.failure(error))
             }
-            
-            self.context = nil
-            self.isAuthenticating = false
         }
     }
     
@@ -302,6 +301,7 @@ public class AuthorizationCodeFlow: AuthenticationFlow {
     
     public func reset() {
         context = nil
+        isAuthenticating = false
     }
 
     // MARK: Private properties / methods
