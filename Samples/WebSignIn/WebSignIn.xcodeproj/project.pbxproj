@@ -7,6 +7,14 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		92088FA027A9938B00A4DC1B /* WebSignIn.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92088F9A27A9938B00A4DC1B /* WebSignIn.swift */; };
+		92088FA127A9938B00A4DC1B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 92088F9B27A9938B00A4DC1B /* Assets.xcassets */; };
+		92088FA227A9938B00A4DC1B /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 92088F9D27A9938B00A4DC1B /* Preview Assets.xcassets */; };
+		92088FA327A9938B00A4DC1B /* SignInView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92088F9F27A9938B00A4DC1B /* SignInView.swift */; };
+		92088FA527A99C6700A4DC1B /* AuthFoundation in Frameworks */ = {isa = PBXBuildFile; productRef = 92088FA427A99C6700A4DC1B /* AuthFoundation */; };
+		92088FA727A99C6700A4DC1B /* OktaOAuth2 in Frameworks */ = {isa = PBXBuildFile; productRef = 92088FA627A99C6700A4DC1B /* OktaOAuth2 */; };
+		92088FA927A99C6700A4DC1B /* WebAuthenticationUI in Frameworks */ = {isa = PBXBuildFile; productRef = 92088FA827A99C6700A4DC1B /* WebAuthenticationUI */; };
+		9245105D27AD9E0400F4A5C1 /* SignInViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9245105C27AD9E0400F4A5C1 /* SignInViewModel.swift */; };
 		92DF175D2791785200473E7E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92DF175C2791785200473E7E /* AppDelegate.swift */; };
 		92DF175F2791785200473E7E /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92DF175E2791785200473E7E /* SceneDelegate.swift */; };
 		92DF17642791785200473E7E /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 92DF17622791785200473E7E /* Main.storyboard */; };
@@ -27,6 +35,7 @@
 		92DF17A32791C61A00473E7E /* Profile.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 92DF17A12791C61A00473E7E /* Profile.storyboard */; };
 		92DF17A62791DB2200473E7E /* Keychain+Token.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92DF17A52791DB2200473E7E /* Keychain+Token.swift */; };
 		92DF17A72791DB2200473E7E /* Keychain+Token.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92DF17A52791DB2200473E7E /* Keychain+Token.swift */; };
+		92E7C7C727AD5F7A00562498 /* Okta.plist in Resources */ = {isa = PBXBuildFile; fileRef = 9653DCFB274FF407003C6E20 /* Okta.plist */; };
 		962B24742757FBF0007ABC1A /* ProfileTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 962B24732757FBF0007ABC1A /* ProfileTableViewController.swift */; };
 		962B24762757FEAC007ABC1A /* TokenDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 962B24752757FEAC007ABC1A /* TokenDetailViewController.swift */; };
 		9653DCBE274C3008003C6E20 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9653DCBD274C3008003C6E20 /* AppDelegate.swift */; };
@@ -76,6 +85,13 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		92088F8A27A9936D00A4DC1B /* WebSignIn-macos.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "WebSignIn-macos.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		92088F9A27A9938B00A4DC1B /* WebSignIn.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WebSignIn.swift; sourceTree = "<group>"; };
+		92088F9B27A9938B00A4DC1B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		92088F9D27A9938B00A4DC1B /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		92088F9E27A9938B00A4DC1B /* WebSignIn.entitlements */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.entitlements; path = WebSignIn.entitlements; sourceTree = "<group>"; };
+		92088F9F27A9938B00A4DC1B /* SignInView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignInView.swift; sourceTree = "<group>"; };
+		9245105C27AD9E0400F4A5C1 /* SignInViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInViewModel.swift; sourceTree = "<group>"; };
 		92DF175A2791785200473E7E /* SingleSignOn.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SingleSignOn.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		92DF175C2791785200473E7E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		92DF175E2791785200473E7E /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -116,6 +132,16 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		92088F8727A9936D00A4DC1B /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				92088FA927A99C6700A4DC1B /* WebAuthenticationUI in Frameworks */,
+				92088FA727A99C6700A4DC1B /* OktaOAuth2 in Frameworks */,
+				92088FA527A99C6700A4DC1B /* AuthFoundation in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		92DF17572791785200473E7E /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -167,6 +193,27 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		92088F9927A9938B00A4DC1B /* WebSignIn-macos */ = {
+			isa = PBXGroup;
+			children = (
+				92088F9C27A9938B00A4DC1B /* Preview Content */,
+				92088F9A27A9938B00A4DC1B /* WebSignIn.swift */,
+				92088F9B27A9938B00A4DC1B /* Assets.xcassets */,
+				92088F9E27A9938B00A4DC1B /* WebSignIn.entitlements */,
+				92088F9F27A9938B00A4DC1B /* SignInView.swift */,
+				9245105C27AD9E0400F4A5C1 /* SignInViewModel.swift */,
+			);
+			path = "WebSignIn-macos";
+			sourceTree = "<group>";
+		};
+		92088F9C27A9938B00A4DC1B /* Preview Content */ = {
+			isa = PBXGroup;
+			children = (
+				92088F9D27A9938B00A4DC1B /* Preview Assets.xcassets */,
+			);
+			path = "Preview Content";
+			sourceTree = "<group>";
+		};
 		92DF175B2791785200473E7E /* SingleSignOn */ = {
 			isa = PBXGroup;
 			children = (
@@ -235,6 +282,7 @@
 				9653DCBC274C3008003C6E20 /* WebSignIn */,
 				9653DCD3274C3009003C6E20 /* WebSignInTests */,
 				9653DCDD274C300A003C6E20 /* WebSignInUITests */,
+				92088F9927A9938B00A4DC1B /* WebSignIn-macos */,
 				92DF175B2791785200473E7E /* SingleSignOn */,
 				92DF17722791785400473E7E /* SingleSignOnTests */,
 				92DF177C2791785400473E7E /* SingleSignOnUITests */,
@@ -253,6 +301,7 @@
 				92DF175A2791785200473E7E /* SingleSignOn.app */,
 				92DF176F2791785400473E7E /* SingleSignOnTests.xctest */,
 				92DF17792791785400473E7E /* SingleSignOnUITests.xctest */,
+				92088F8A27A9936D00A4DC1B /* WebSignIn-macos.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -309,6 +358,28 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		92088F8927A9936D00A4DC1B /* WebSignIn-macos */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 92088F9827A9936E00A4DC1B /* Build configuration list for PBXNativeTarget "WebSignIn-macos" */;
+			buildPhases = (
+				92088F8627A9936D00A4DC1B /* Sources */,
+				92088F8727A9936D00A4DC1B /* Frameworks */,
+				92088F8827A9936D00A4DC1B /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "WebSignIn-macos";
+			packageProductDependencies = (
+				92088FA427A99C6700A4DC1B /* AuthFoundation */,
+				92088FA627A99C6700A4DC1B /* OktaOAuth2 */,
+				92088FA827A99C6700A4DC1B /* WebAuthenticationUI */,
+			);
+			productName = "WebSignIn-macos";
+			productReference = 92088F8A27A9936D00A4DC1B /* WebSignIn-macos.app */;
+			productType = "com.apple.product-type.application";
+		};
 		92DF17592791785200473E7E /* SingleSignOn */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 92DF17872791785400473E7E /* Build configuration list for PBXNativeTarget "SingleSignOn" */;
@@ -435,6 +506,9 @@
 				LastSwiftUpdateCheck = 1310;
 				LastUpgradeCheck = 1310;
 				TargetAttributes = {
+					92088F8927A9936D00A4DC1B = {
+						CreatedOnToolsVersion = 13.1;
+					};
 					92DF17592791785200473E7E = {
 						CreatedOnToolsVersion = 13.1;
 					};
@@ -478,11 +552,22 @@
 				92DF17592791785200473E7E /* SingleSignOn */,
 				92DF176E2791785400473E7E /* SingleSignOnTests */,
 				92DF17782791785400473E7E /* SingleSignOnUITests */,
+				92088F8927A9936D00A4DC1B /* WebSignIn-macos */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		92088F8827A9936D00A4DC1B /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				92088FA227A9938B00A4DC1B /* Preview Assets.xcassets in Resources */,
+				92E7C7C727AD5F7A00562498 /* Okta.plist in Resources */,
+				92088FA127A9938B00A4DC1B /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		92DF17582791785200473E7E /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -537,6 +622,16 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		92088F8627A9936D00A4DC1B /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				92088FA327A9938B00A4DC1B /* SignInView.swift in Sources */,
+				92088FA027A9938B00A4DC1B /* WebSignIn.swift in Sources */,
+				9245105D27AD9E0400F4A5C1 /* SignInViewModel.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		92DF17562791785200473E7E /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -660,6 +755,60 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
+		92088F9627A9936E00A4DC1B /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = "WebSignIn-macos/WebSignIn.entitlements";
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "\"WebSignIn-macos/Preview Content\"";
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 11.0;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.example.okta-sample.WebSignIn-macos${SAMPLE_CODE_DISAMBIGUATOR}";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+			};
+			name = Debug;
+		};
+		92088F9727A9936E00A4DC1B /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = "WebSignIn-macos/WebSignIn.entitlements";
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "\"WebSignIn-macos/Preview Content\"";
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 11.0;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.example.okta-sample.WebSignIn-macos${SAMPLE_CODE_DISAMBIGUATOR}";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+			};
+			name = Release;
+		};
 		92DF17812791785400473E7E /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -1085,6 +1234,15 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		92088F9827A9936E00A4DC1B /* Build configuration list for PBXNativeTarget "WebSignIn-macos" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				92088F9627A9936E00A4DC1B /* Debug */,
+				92088F9727A9936E00A4DC1B /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		92DF17872791785400473E7E /* Build configuration list for PBXNativeTarget "SingleSignOn" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
@@ -1151,6 +1309,18 @@
 /* End XCConfigurationList section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		92088FA427A99C6700A4DC1B /* AuthFoundation */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = AuthFoundation;
+		};
+		92088FA627A99C6700A4DC1B /* OktaOAuth2 */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = OktaOAuth2;
+		};
+		92088FA827A99C6700A4DC1B /* WebAuthenticationUI */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = WebAuthenticationUI;
+		};
 		92DF179127917A0100473E7E /* AuthFoundation */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = AuthFoundation;
