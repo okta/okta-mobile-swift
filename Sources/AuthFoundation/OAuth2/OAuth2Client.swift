@@ -193,7 +193,7 @@ public class OAuth2Client: APIClient {
     ///
     /// - Parameters:
     ///   - token: Token object.
-    ///   - type: Type of token to revoke, default: ``Token/RevokeType/accessToken``
+    ///   - type: Type of token to revoke.
     ///   - completion: Completion block to invoke once complete.
     public func revoke(_ token: Token, type: Token.RevokeType, completion: @escaping (Result<Void, OAuth2Error>) -> Void) {
         let tokenType = type.tokenType

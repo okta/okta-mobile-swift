@@ -100,5 +100,13 @@ final class OAuth2ClientTests: XCTestCase {
         let token = try await client.refresh(token)
         XCTAssertNotNil(token)
     }
+
+    @available(iOS 15.0, tvOS 15.0, macOS 12.0, watchOS 8, *)
+    func testRevokeAsync() async throws {
+        urlSession.expect("https://example.com/oauth2/default/v1/revoke",
+                          data: Data())
+
+        try await client.revoke(token, type: .accessToken)
+    }
     #endif
 }

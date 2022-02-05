@@ -181,15 +181,28 @@ extension CodingUserInfoKey {
 public extension Token {
     /// The possible token types that can be revoked.
     enum RevokeType {
+        /// Indicates the access token should be revoked.
         case accessToken
+        
+        /// Indicates the refresh token should be revoked, if one is present. This will result in the access token being revoked as well.
         case refreshToken
+        
+        /// Indicates the device secret should be revoked.
         case deviceSecret
     }
     
+    /// The kind of access token an operation should be used with.
     enum Kind: String {
-        case accessToken  = "access_token"
+        /// Indicates the access token.
+        case accessToken = "access_token"
+        
+        /// Indicates the refresh token.
         case refreshToken = "refresh_token"
-        case idToken      = "id_token"
+        
+        /// Indicates the ID token.
+        case idToken = "id_token"
+        
+        /// Indicates the device secret.
         case deviceSecret = "device_secret"
     }
 }
