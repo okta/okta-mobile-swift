@@ -15,6 +15,8 @@ import Foundation
 /// Protocol used to return dates and times coordinated against trusted sources.
 ///
 /// This can be used to customize the behavior of how dates and times are calculated, when used on devices that may have skewed or incorrect clocks.
+///
+/// To use a custom ``TimeCoordintator``, you construct an instance of your class conforming to this protocol, and assign it to the ``Date.coordinator`` property.
 public protocol TimeCoordinator {
     /// Return the current coordinated date.
     var now: Date { get }
@@ -25,18 +27,18 @@ public protocol TimeCoordinator {
 }
 
 extension Date {
-    /// Returns times calculated or adjusted against a trusted clock.
+    /// Allows a custom ``TimeCoordinator`` to be used to adjust dates and times for devices with incorrect times.
     public static var coordinator: TimeCoordinator {
         get { SharedTimeCoordinator }
         set { SharedTimeCoordinator = newValue }
     }
     
-    /// Returns the current coordinated date.
+    /// Returns the current coordinated date, adjusting the system clock to correct for clock skew.
     public static var nowCoordinated: Date {
         coordinator.now
     }
     
-    /// Returns the coordinated version of this date.
+    /// Returns the coordinated version of this date, adjusting the system clock to correct for clock skew.
     public var coordinated: Date {
         Date.coordinator.date(from: self)
     }
@@ -44,6 +46,10 @@ extension Date {
 
 fileprivate var SharedTimeCoordinator: TimeCoordinator = DefaultTimeCoordinator()
 struct DefaultTimeCoordinator: TimeCoordinator {
+    static func resetToDefault() {
+        Date.coordinator = DefaultTimeCoordinator()
+    }
+    
     var now: Date {
         #if !os(Linux)
         if #available(macOS 12, iOS 15, tvOS 15, watchOS 8, *) {
