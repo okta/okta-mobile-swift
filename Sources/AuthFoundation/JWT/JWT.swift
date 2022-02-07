@@ -118,12 +118,6 @@ public struct JWT: RawRepresentable, Codable {
     }
 }
 
-extension JWT: Expires {
-    public var expiresAt: Date? {
-        issuedAt?.addingTimeInterval(expiresIn)
-    }
-}
-
 extension String: JWTClaim {}
 extension Bool: JWTClaim {}
 extension Double: JWTClaim {}

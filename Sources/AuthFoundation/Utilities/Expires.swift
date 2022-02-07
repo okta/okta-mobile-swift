@@ -34,9 +34,9 @@ public protocol Expires {
 
 extension Expires {
     public var expiresAt: Date? {
-        issuedAt?.coordinated.addingTimeInterval(expiresIn)
+        issuedAt?.addingTimeInterval(expiresIn)
     }
-    
+
     public var isExpired: Bool {
         guard let expiresAt = expiresAt else {
             return false
