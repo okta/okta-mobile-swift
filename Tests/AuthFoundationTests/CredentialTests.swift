@@ -72,10 +72,14 @@ final class CredentialTests: XCTestCase {
             }
             expect.fulfill()
         }
+        
+        XCTAssertTrue(credential.token.isRefreshing)
 
         waitForExpectations(timeout: 1.0) { error in
             XCTAssertNil(error)
         }
+        
+        XCTAssertFalse(credential.token.isRefreshing)
     }
 
     #if swift(>=5.5.1)
