@@ -47,7 +47,7 @@ internal extension Data {
     
     /// Encodes the data as a URL-safe Base64 string.
     /// - Returns: Base64 URL-encoded string.
-    func base64URLEncodedString() -> String {
+    var base64URLEncodedString: String {
         return base64EncodedString()
             .replacingOccurrences(of: "+", with: "-")
             .replacingOccurrences(of: "/", with: "_")
@@ -59,7 +59,7 @@ internal extension String {
     /// Generates a PKCE code challenge string.
     /// - Returns: PKCE code challenge string, or `nil` if an error occurs.
     func pkceCodeChallenge() -> String? {
-        return data(using: .ascii)?.sha256()?.base64URLEncodedString()
+        data(using: .ascii)?.sha256()?.base64URLEncodedString
     }
 }
 
@@ -92,7 +92,7 @@ extension Array where Element: FixedWidthInteger {
 }
 
 extension Array where Element == UInt8 {
-    var base64: String {
-        Data(self).base64EncodedString()
+    var base64URLEncodedString: String {
+        Data(self).base64URLEncodedString
     }
 }

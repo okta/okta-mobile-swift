@@ -84,7 +84,14 @@ final class DeviceAuthorizationFlowSuccessTests: XCTestCase {
         XCTAssertFalse(delegate.started)
         
         // Begin
-        flow.resume()
+        var expect = expectation(description: "resume")
+        flow.resume() { _ in
+            expect.fulfill()
+        }
+        waitForExpectations(timeout: 1) { error in
+            XCTAssertNil(error)
+        }
+
         XCTAssertNotNil(delegate.context)
         XCTAssertEqual(flow.context, delegate.context)
         XCTAssertTrue(flow.isAuthenticating)
@@ -92,7 +99,7 @@ final class DeviceAuthorizationFlowSuccessTests: XCTestCase {
         XCTAssertTrue(delegate.started)
         
         // Exchange code
-        let expect = expectation(description: "Wait for timer")
+        expect = expectation(description: "Wait for timer")
         flow.resume(with: delegate.context!) { _ in
             expect.fulfill()
         }

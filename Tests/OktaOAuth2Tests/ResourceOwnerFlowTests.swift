@@ -65,7 +65,14 @@ final class ResourceOwnerFlowSuccessTests: XCTestCase {
         XCTAssertFalse(delegate.started)
         
         // Authenticate
-        flow.resume(username: "username", password: "password")
+        let expect = expectation(description: "resume")
+        flow.resume(username: "username", password: "password") { _ in
+            expect.fulfill()
+        }
+        waitForExpectations(timeout: 1) { error in
+            XCTAssertNil(error)
+        }
+
         XCTAssertTrue(delegate.started)
         XCTAssertFalse(flow.isAuthenticating)
         XCTAssertNotNil(delegate.token)
