@@ -11,13 +11,18 @@
 //
 
 import SwiftUI
+import WebAuthenticationUI
 
-@main
-struct WebSignIn: App {
-    var body: some Scene {
-        WindowGroup {
-            RootView()
-                .frame(minWidth: AppSettings.SignInView.width, minHeight: AppSettings.SignInView.height, alignment: .center)
+struct RootView: View {
+    @State var signedIn = false
+    
+    var body: some View {
+        VStack {
+            if signedIn {
+                ProfileDetailsView(viewModel: .init(credential: Credential.default), signedIn: $signedIn)
+            } else {
+                SignInView(signedIn: $signedIn)
+            }
         }
     }
 }

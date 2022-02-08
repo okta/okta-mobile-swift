@@ -16,25 +16,25 @@ import WebAuthenticationUI
 import AuthenticationServices
 
 final class SignInViewModel: ObservableObject {
-    @Published var signInError: Error?
-    @Published var presentError: Bool = false
-    @Published var ephemeralSession = false
-
-    private let auth = WebAuthentication.shared
-    
     var clientID: String? { auth?.flow.configuration.clientId }
     var isConfigured: Bool { auth?.flow.configuration.clientId != nil }
     
+    @Published var presentError = false
+    @Published var ephemeralSession = false
+    @Published private(set) var signInError: Error?
+    @Published private(set) var signedIn = Credential.default != nil
+
+    private let auth = WebAuthentication.shared
     private var cancellableSet: Set<AnyCancellable> = []
  
     init() {
-        $signInError.map {
-            $0 != nil
-        }.assign(to: &$presentError)
+        $signInError
+            .map { $0 != nil }
+            .assign(to: &$presentError)
         
-        $ephemeralSession.sink {
-            self.auth?.ephemeralSession = $0
-        }.store(in: &cancellableSet)
+        $ephemeralSession
+            .sink { self.auth?.ephemeralSession = $0 }
+            .store(in: &cancellableSet)
     }
     
     func signIn() {
@@ -43,8 +43,10 @@ final class SignInViewModel: ObservableObject {
             switch result {
             case .success(let token):
                 Credential.default = Credential(token: token)
+                self.signedIn = true
             case .failure(let error):
                 self.signInError = error
+                self.signedIn = false
             }
         }
     }

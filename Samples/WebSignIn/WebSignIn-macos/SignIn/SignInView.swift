@@ -11,6 +11,8 @@
 //
 
 import SwiftUI
+import Combine
+import WebAuthenticationUI
 
 enum AppSettings {
     enum SignInView {
@@ -21,6 +23,12 @@ enum AppSettings {
 
 struct SignInView: View {
     @StateObject private var viewModel = SignInViewModel()
+    @Binding private var signedIn: Bool
+    @State private var cancellableSet: Set<AnyCancellable> = []
+    
+    init(signedIn: Binding<Bool>) {
+        self._signedIn = signedIn
+    }
     
     var body: some View {
         VStack {
@@ -42,7 +50,8 @@ struct SignInView: View {
                     title: Text("Error"),
                     message: Text(viewModel.signInError?.localizedDescription ?? "An unknown error occurred")
                 )
-            }.padding()
+            }
+            .padding()
             
             Toggle("Ephemeral Session", isOn: $viewModel.ephemeralSession)
             
@@ -51,14 +60,22 @@ struct SignInView: View {
             Text(viewModel.isConfigured ? "Client ID: \(viewModel.clientID!)" : "Not configured")
                 .font(.caption)
                 .padding()
-        }.navigationTitle("Web Sign In")
+        }.onAppear {
+            subscribe()
+        }
+    }
+    
+    func subscribe() {
+        viewModel.$signedIn
+            .sink { self.$signedIn.wrappedValue = $0 }
+            .store(in: &self.cancellableSet)
     }
 }
 
 #if DEBUG
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
-        SignInView()
+        SignInView(signedIn: .constant(false))
             .frame(minWidth: AppSettings.SignInView.width,
                    minHeight: AppSettings.SignInView.height)
     }
