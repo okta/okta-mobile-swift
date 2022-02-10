@@ -26,8 +26,12 @@ struct ProfileDetailItemView: View {
     
     var body: some View {
         HStack {
-            Text(leading).font(.title2).frame(maxWidth: .infinity, alignment: .trailing)
-            Text(trailing ?? "N/A").font(.title2).frame(maxWidth: .infinity, alignment: .leading)
+            Text(leading)
+                .font(.title2)
+                .frame(maxWidth: .infinity, alignment: .trailing)
+            Text(trailing ?? "N/A")
+                .font(.title2)
+                .frame(maxWidth: .infinity, alignment: .leading)
         }
     }
 }
