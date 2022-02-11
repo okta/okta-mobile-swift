@@ -77,6 +77,10 @@ class SafariBrowserProvider: NSObject, WebAuthenticationProvider {
         }
     }
     
+    func finish(context: AuthorizationLogoutFlow.Context?) {
+        
+    }
+    
     func cancel() {
         safariController?.dismiss(animated: true)
         safariController = nil

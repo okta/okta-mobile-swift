@@ -107,6 +107,21 @@ public class WebAuthentication {
         provider?.start(context: context)
     }
     
+    public func finish(_ completion: @escaping (Result<Void, WebAuthenticationError>) -> Void) {
+        if provider != nil {
+            cancel()
+        }
+        
+        let provider = createWebAuthenticationProvider(flow: flow,
+                                                       from: UIWindow(),
+                                                       delegate: self)
+        
+        self.logoutCompletionBlock = completion
+        self.provider = provider
+        
+        provider?.finish(context: nil)
+    }
+    
     /// Cancels the authentication session.
     public func cancel() {
         flow.cancel()
@@ -240,6 +255,7 @@ public class WebAuthentication {
     {
         if #available(iOS 12.0, macOS 10.15, macCatalyst 13.0, *) {
             return AuthenticationServicesProvider(flow: flow,
+                                                  logoutFlow: AuthorizationLogoutFlow(.init(logoutRedirectUri: flow.configuration.logoutRedirectUri), client: flow.client),
                                                   from: window,
                                                   delegate: delegate)
         }
@@ -275,6 +291,7 @@ public class WebAuthentication {
     private static var _shared: WebAuthentication?
     var provider: WebAuthenticationProvider?
     var completionBlock: ((Result<Token, WebAuthenticationError>) -> Void)?
+    var logoutCompletionBlock: ((Result<Void, WebAuthenticationError>) -> Void)?
 }
 
 #if swift(>=5.5.1)

@@ -128,6 +128,25 @@ class ProfileTableViewController: UITableViewController {
                 }
             }
         }))
+        
+        alert.addAction(.init(title: "End a session", style: .destructive, handler: { _ in
+            WebAuthentication.shared?.finish { result in
+                switch result {
+                case .success:
+                    try? self.user?.remove()
+                    self.user = nil
+                case .failure(let error):
+                    DispatchQueue.main.async {
+                        let alert = UIAlertController(title: "Sign out failed",
+                                                      message: error.localizedDescription,
+                                                      preferredStyle: .alert)
+                        alert.addAction(UIAlertAction(title: "OK", style: .default))
+                        self.present(alert, animated: true)
+                    }
+                }
+            }
+        }))
+        
         alert.addAction(.init(title: "Cancel", style: .cancel))
 
         present(alert, animated: true)

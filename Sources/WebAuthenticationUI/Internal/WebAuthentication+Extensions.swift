@@ -31,9 +31,29 @@ extension WebAuthentication {
         
         completionBlock = nil
     }
+    
+    private func completeLogout(with result: Result<Void, WebAuthenticationError>) {
+        guard let completion = logoutCompletionBlock else {
+            return
+        }
+
+        DispatchQueue.main.async {
+            completion(result)
+        }
+        
+        logoutCompletionBlock = nil
+        provider = nil
+        flow.reset()
+    }
 }
 
 extension WebAuthentication: WebAuthenticationProviderDelegate {
+    func authentication(provider: WebAuthenticationProvider, finished: Bool) {
+        if finished {
+            completeLogout(with: .success(()))
+        }
+    }
+    
     func authentication(provider: WebAuthenticationProvider, received result: Token) {
         complete(with: .success(result))
     }
@@ -47,7 +67,9 @@ extension WebAuthentication: WebAuthenticationProviderDelegate {
         } else {
             webError = .generic(error: error)
         }
+        
         complete(with: .failure(webError))
+        completeLogout(with: .failure(webError))
     }
     
     func authenticationShouldUseEphemeralSession(provider: WebAuthenticationProvider) -> Bool {
