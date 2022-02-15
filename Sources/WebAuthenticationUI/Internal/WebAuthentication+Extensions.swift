@@ -48,10 +48,27 @@ extension WebAuthentication {
 }
 
 extension WebAuthentication: WebAuthenticationProviderDelegate {
-    func authentication(provider: WebAuthenticationProvider, finished: Bool) {
+    func logout(provider: WebAuthenticationProvider, finished: Bool) {
         if finished {
             completeLogout(with: .success(()))
         }
+    }
+    
+    func logout(provider: WebAuthenticationProvider, received error: Error) {
+        let webError: WebAuthenticationError
+        if let error = error as? WebAuthenticationError {
+            webError = error
+        } else if let error = error as? OAuth2Error {
+            webError = .oauth2(error: error)
+        } else {
+            webError = .generic(error: error)
+        }
+        
+        completeLogout(with: .failure(webError))
+    }
+    
+    func authentication(provider: WebAuthenticationProvider, finished: Bool) {
+        
     }
     
     func authentication(provider: WebAuthenticationProvider, received result: Token) {
@@ -69,7 +86,6 @@ extension WebAuthentication: WebAuthenticationProviderDelegate {
         }
         
         complete(with: .failure(webError))
-        completeLogout(with: .failure(webError))
     }
     
     func authenticationShouldUseEphemeralSession(provider: WebAuthenticationProvider) -> Bool {

@@ -20,7 +20,7 @@ protocol WebAuthenticationProvider {
     var delegate: WebAuthenticationProviderDelegate? { get }
 
     func start(context: AuthorizationCodeFlow.Context?)
-    func finish(context: AuthorizationLogoutFlow.Context?)
+    func finish(context: SessionLogoutFlow.Context?)
     func cancel()
 }
 
@@ -28,6 +28,9 @@ protocol WebAuthenticationProviderDelegate: AnyObject {
     func authentication(provider: WebAuthenticationProvider, received token: Token)
     func authentication(provider: WebAuthenticationProvider, finished: Bool)
     func authentication(provider: WebAuthenticationProvider, received error: Error)
+    
+    func logout(provider: WebAuthenticationProvider, finished: Bool)
+    func logout(provider: WebAuthenticationProvider, received error: Error)
     
     @available(iOS 13.0, macOS 10.15, macCatalyst 13.0, *)
     func authenticationShouldUseEphemeralSession(provider: WebAuthenticationProvider) -> Bool

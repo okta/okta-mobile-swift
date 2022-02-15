@@ -77,7 +77,7 @@ class SafariBrowserProvider: NSObject, WebAuthenticationProvider {
         }
     }
     
-    func finish(context: AuthorizationLogoutFlow.Context?) {
+    func finish(context: SessionLogoutFlow.Context?) {
         
     }
     

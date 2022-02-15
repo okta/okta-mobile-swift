@@ -13,38 +13,13 @@
 import Foundation
 import AuthFoundation
 
-public protocol LogoutFlow: AnyObject, UsesDelegateCollection {
-//    associatedtype Configuration where Configuration: AuthenticationConfiguration
+public protocol SessionLogoutFlowDelegate: LogoutFlowDelegate {
+    func logout<Flow: SessionLogoutFlow>(flow: Flow, received error: OAuth2Error)
     
-//    var configuration: Configuration { get }
-    
-    var inProgress: Bool { get }
-    
-    func cancel()
-    
-    /// Resets the authentication session.
-    func reset()
+    func logout<Flow: SessionLogoutFlow>(flow: Flow, shouldLogoutUsing url: URL)
 }
 
-public protocol LogoutFlowDelegate: AnyObject {
-    func logoutStarted<Flow>(flow: Flow)
-    
-    func logoutFinished<Flow>(flow: Flow)
-    
-    func logout<Flow>(flow: Flow, received error: OAuth2Error)
-}
-
-public protocol AuthorizationLogoutFlowDelegate: LogoutFlowDelegate {
-    func logoutStarted<Flow: AuthorizationLogoutFlow>(flow: Flow)
-    
-    func logoutFinished<Flow: AuthorizationLogoutFlow>(flow: Flow)
-    
-    func logout<Flow: AuthorizationLogoutFlow>(flow: Flow, received error: OAuth2Error)
-    
-    func logout<Flow: AuthorizationLogoutFlow>(flow: Flow, shouldLogoutUsing url: URL)
-}
-
-public class AuthorizationLogoutFlow: LogoutFlow {
+public class SessionLogoutFlow: LogoutFlow {
     private(set) public var inProgress: Bool = false
     
     public struct Configuration: AuthenticationConfiguration {
@@ -75,7 +50,7 @@ public class AuthorizationLogoutFlow: LogoutFlow {
     /// The configuration used when constructing this authentication flow.
     public let configuration: Configuration
     
-    public let delegateCollection = DelegateCollection<AuthorizationLogoutFlowDelegate>()
+    public let delegateCollection = DelegateCollection<SessionLogoutFlowDelegate>()
     
     private(set) public var context: Context? {
         didSet {
@@ -99,11 +74,14 @@ public class AuthorizationLogoutFlow: LogoutFlow {
     }
     
     public func finish(with context: Context? = nil, completion: ((Result<URL, OAuth2Error>) -> Void)? = nil) throws {
-        guard var context = context ?? Credential.default?.token.idToken.flatMap({ Context(idToken: $0) })
+        guard !inProgress,
+            var context = context ?? Credential.default?.token.idToken.flatMap({ Context(idToken: $0) })
         else {
             completion?(.failure(.missingClientConfiguration))
             return
         }
+        
+        inProgress = true
         
         client.openIdConfiguration { result in
             switch result {
@@ -116,7 +94,6 @@ public class AuthorizationLogoutFlow: LogoutFlow {
                                                        using: context)
                     
                     context.logoutURL = url
-                    
                     self.context = context
                     
                     completion?(.success(url))
@@ -126,6 +103,8 @@ public class AuthorizationLogoutFlow: LogoutFlow {
                     completion?(.failure(oauthError))
                 }
             }
+            
+            self.inProgress = false
         }
     }
     
@@ -139,16 +118,15 @@ public class AuthorizationLogoutFlow: LogoutFlow {
     }
 }
 
-extension AuthorizationLogoutFlow: UsesDelegateCollection {
-    public typealias Delegate = AuthorizationLogoutFlowDelegate
+extension SessionLogoutFlow: UsesDelegateCollection {
+    public typealias Delegate = SessionLogoutFlowDelegate
 }
 
-extension AuthorizationLogoutFlow: OAuth2ClientDelegate {
-    
+extension SessionLogoutFlow: OAuth2ClientDelegate {
 }
 
-extension AuthorizationLogoutFlow.Configuration {
-    func authenticationUrlComponents(from authenticationUrl: URL, using context: AuthorizationLogoutFlow.Context) throws -> URLComponents {
+private extension SessionLogoutFlow.Configuration {
+    func authenticationUrlComponents(from authenticationUrl: URL, using context: SessionLogoutFlow.Context) throws -> URLComponents {
         guard var components = URLComponents(url: authenticationUrl, resolvingAgainstBaseURL: true)
         else {
             throw OAuth2Error.invalidUrl
@@ -163,7 +141,7 @@ extension AuthorizationLogoutFlow.Configuration {
         return components
     }
     
-    private func queryParameters(using context: AuthorizationLogoutFlow.Context) -> [String: String] {
+    func queryParameters(using context: SessionLogoutFlow.Context) -> [String: String] {
         [
             "id_token_hint": context.idToken,
             "post_logout_redirect_uri": logoutRedirectUri?.absoluteString,
@@ -172,8 +150,8 @@ extension AuthorizationLogoutFlow.Configuration {
     }
 }
 
-extension AuthorizationLogoutFlow {
-    func createLogoutURL(from url: URL, using context: AuthorizationLogoutFlow.Context) throws -> URL {
+private extension SessionLogoutFlow {
+    func createLogoutURL(from url: URL, using context: SessionLogoutFlow.Context) throws -> URL {
         let components = try configuration.authenticationUrlComponents(from: url, using: context)
 
         guard let url = components.url else {
