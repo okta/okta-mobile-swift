@@ -26,7 +26,6 @@ protocol WebAuthenticationProvider {
 
 protocol WebAuthenticationProviderDelegate: AnyObject {
     func authentication(provider: WebAuthenticationProvider, received token: Token)
-    func authentication(provider: WebAuthenticationProvider, finished: Bool)
     func authentication(provider: WebAuthenticationProvider, received error: Error)
     
     func logout(provider: WebAuthenticationProvider, finished: Bool)

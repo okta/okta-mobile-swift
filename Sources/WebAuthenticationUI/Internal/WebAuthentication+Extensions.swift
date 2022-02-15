@@ -67,10 +67,6 @@ extension WebAuthentication: WebAuthenticationProviderDelegate {
         completeLogout(with: .failure(webError))
     }
     
-    func authentication(provider: WebAuthenticationProvider, finished: Bool) {
-        
-    }
-    
     func authentication(provider: WebAuthenticationProvider, received result: Token) {
         complete(with: .success(result))
     }
