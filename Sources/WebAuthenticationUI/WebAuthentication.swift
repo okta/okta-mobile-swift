@@ -107,20 +107,29 @@ public class WebAuthentication {
         provider?.start(context: context)
     }
     
-    public func finish(from window: WindowAnchor? = nil, _ completion: @escaping (Result<Void, WebAuthenticationError>) -> Void) {
+    public func finish(from window: WindowAnchor? = nil, credential: Credential? = Credential.default, _ completion: @escaping (Result<Void, WebAuthenticationError>) -> Void) {
+        finish(from: window, token: credential?.token, completion)
+    }
+    
+    public func finish(from window: WindowAnchor? = nil, token: Token?, _ completion: @escaping (Result<Void, WebAuthenticationError>) -> Void) {
         if provider != nil {
             cancel()
         }
         
         // TODO: Pass custom window
         let provider = createWebAuthenticationProvider(flow: flow,
-                                                       from: window ?? UIWindow(),
+                                                       from: window,
                                                        delegate: self)
         
         self.logoutCompletionBlock = completion
         self.provider = provider
         
-        provider?.finish(context: nil)
+        if let idToken = token?.idToken {
+            let context = SessionLogoutFlow.Context(idToken: idToken)
+            provider?.finish(context: context)
+        } else {
+            provider?.finish(context: nil)
+        }
     }
     
     /// Cancels the authentication session.
@@ -254,7 +263,7 @@ public class WebAuthentication {
                                          from window: WebAuthentication.WindowAnchor?,
                                          delegate: WebAuthenticationProviderDelegate) -> WebAuthenticationProvider?
     {
-        // TODO: SessionLogoutFLow 
+        // TODO: SessionLogoutFLow
         if #available(iOS 12.0, macOS 10.15, macCatalyst 13.0, *) {
             return AuthenticationServicesProvider(flow: flow,
                                                   logoutFlow: SessionLogoutFlow(.init(logoutRedirectUri: flow.configuration.logoutRedirectUri), client: flow.client),
