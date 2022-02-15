@@ -46,5 +46,6 @@ let package = Package(
         .testTarget(name: "WebAuthenticationUITests",
                     dependencies: ["WebAuthenticationUI", "TestCommon"],
                     resources: [ .copy("MockResponses") ])
-    ]
+    ],
+    swiftLanguageVersions: [.v5]
 )

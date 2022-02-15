@@ -31,8 +31,6 @@
 		92DF179227917A0100473E7E /* AuthFoundation in Frameworks */ = {isa = PBXBuildFile; productRef = 92DF179127917A0100473E7E /* AuthFoundation */; };
 		92DF179427917A0100473E7E /* OktaOAuth2 in Frameworks */ = {isa = PBXBuildFile; productRef = 92DF179327917A0100473E7E /* OktaOAuth2 */; };
 		92DF179627917A0100473E7E /* WebAuthenticationUI in Frameworks */ = {isa = PBXBuildFile; productRef = 92DF179527917A0100473E7E /* WebAuthenticationUI */; };
-		92DF179A2791C5DC00473E7E /* Keychain.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92DF17992791C5DC00473E7E /* Keychain.swift */; };
-		92DF179B2791C5DC00473E7E /* Keychain.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92DF17992791C5DC00473E7E /* Keychain.swift */; };
 		92DF179C2791C5E100473E7E /* TokenDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 962B24752757FEAC007ABC1A /* TokenDetailViewController.swift */; };
 		92DF179D2791C5E100473E7E /* ProfileTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 962B24732757FBF0007ABC1A /* ProfileTableViewController.swift */; };
 		92DF17A22791C61A00473E7E /* Profile.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 92DF17A12791C61A00473E7E /* Profile.storyboard */; };
@@ -115,7 +113,6 @@
 		92DF178A279178AD00473E7E /* SingleSignOnViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SingleSignOnViewController.swift; sourceTree = "<group>"; };
 		92DF178C279178C000473E7E /* SingleSignOn.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = SingleSignOn.entitlements; sourceTree = "<group>"; };
 		92DF178D279178D300473E7E /* WebSignIn.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = WebSignIn.entitlements; sourceTree = "<group>"; };
-		92DF17992791C5DC00473E7E /* Keychain.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Keychain.swift; sourceTree = "<group>"; };
 		92DF17A12791C61A00473E7E /* Profile.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Profile.storyboard; sourceTree = "<group>"; };
 		92DF17A52791DB2200473E7E /* Keychain+Token.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Keychain+Token.swift"; sourceTree = "<group>"; };
 		96011A102784CB7E0008DD11 /* SampleCode.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; name = SampleCode.xcconfig; path = ../Shared/SampleCode.xcconfig; sourceTree = "<group>"; };
@@ -314,7 +311,6 @@
 		92DF17A82791DB4200473E7E /* Keychain */ = {
 			isa = PBXGroup;
 			children = (
-				92DF17992791C5DC00473E7E /* Keychain.swift */,
 				92DF17A52791DB2200473E7E /* Keychain+Token.swift */,
 			);
 			path = Keychain;
@@ -695,7 +691,6 @@
 				92DF179D2791C5E100473E7E /* ProfileTableViewController.swift in Sources */,
 				92DF179C2791C5E100473E7E /* TokenDetailViewController.swift in Sources */,
 				92DF178B279178AD00473E7E /* SingleSignOnViewController.swift in Sources */,
-				92DF179B2791C5DC00473E7E /* Keychain.swift in Sources */,
 				92DF175D2791785200473E7E /* AppDelegate.swift in Sources */,
 				92DF17A72791DB2200473E7E /* Keychain+Token.swift in Sources */,
 				92DF175F2791785200473E7E /* SceneDelegate.swift in Sources */,
@@ -729,7 +724,6 @@
 				962B24742757FBF0007ABC1A /* ProfileTableViewController.swift in Sources */,
 				9653DCC0274C3008003C6E20 /* SceneDelegate.swift in Sources */,
 				92DF17A62791DB2200473E7E /* Keychain+Token.swift in Sources */,
-				92DF179A2791C5DC00473E7E /* Keychain.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

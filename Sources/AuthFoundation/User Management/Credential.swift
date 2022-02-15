@@ -25,7 +25,9 @@ extension Notification.Name {
     public static let credentialRemoved = Notification.Name("com.okta.credential.removed")
 }
 
+/// Errors that may occur in the process of managing credentials.
 public enum CredentialError: Error {
+    /// Thrown when a credential no longer has a weak reference to the coordinator that was used to create it.
     case missingCoordinator
 }
 

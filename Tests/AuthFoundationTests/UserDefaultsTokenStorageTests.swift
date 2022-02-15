@@ -14,9 +14,9 @@ import XCTest
 @testable import AuthFoundation
 import TestCommon
 
-final class DefaultTokenStorageTests: XCTestCase {
+final class UserDefaultTokenStorageTests: XCTestCase {
     var userDefaults: UserDefaults!
-    var storage: DefaultTokenStorage!
+    var storage: UserDefaultsTokenStorage!
     
     let token = Token(issuedAt: Date(),
                       tokenType: "Bearer",
@@ -44,7 +44,7 @@ final class DefaultTokenStorageTests: XCTestCase {
         userDefaults = UserDefaults(suiteName: name)
         userDefaults.removePersistentDomain(forName: name)
 
-        storage = DefaultTokenStorage(userDefaults: userDefaults)
+        storage = UserDefaultsTokenStorage(userDefaults: userDefaults)
         XCTAssertEqual(storage.allTokens.count, 0)
     }
     

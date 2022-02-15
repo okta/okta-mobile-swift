@@ -16,13 +16,6 @@ import Foundation
 import FoundationNetworking
 #endif
 
-public protocol CredentialCoordinator: AnyObject {
-    var credentialDataSource: CredentialDataSource { get set }
-    var tokenStorage: TokenStorage { get set }
-    
-    func remove(credential: Credential) throws
-}
-
 class CredentialCoordinatorImpl: CredentialCoordinator {
     var credentialDataSource: CredentialDataSource {
         didSet {
@@ -62,8 +55,20 @@ class CredentialCoordinatorImpl: CredentialCoordinator {
         try tokenStorage.remove(token: credential.token)
     }
     
-    init(tokenStorage: TokenStorage = DefaultTokenStorage(),
-         credentialDataSource: CredentialDataSource = DefaultCredentialDataSource())
+    static func defaultTokenStorage() -> TokenStorage {
+        #if os(iOS) || os(macOS) || os(tvOS) || os(watchOS)
+        KeychainTokenStorage()
+        #else
+        UserDefaultsTokenStorage()
+        #endif
+    }
+    
+    static func defaultCredentialDataSource() -> CredentialDataSource {
+        DefaultCredentialDataSource()
+    }
+    
+    init(tokenStorage: TokenStorage = defaultTokenStorage(),
+         credentialDataSource: CredentialDataSource = defaultCredentialDataSource())
     {
         self.credentialDataSource = credentialDataSource
         self.tokenStorage = tokenStorage
