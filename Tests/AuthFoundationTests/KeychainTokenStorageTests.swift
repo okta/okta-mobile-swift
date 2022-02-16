@@ -10,6 +10,8 @@
 // See the License for the specific language governing permissions and limitations under the License.
 //
 
+#if os(iOS) || os(macOS) || os(tvOS) || os(watchOS)
+
 import XCTest
 @testable import AuthFoundation
 @testable import TestCommon
@@ -168,3 +170,5 @@ final class KeychainTokenStorageTests: XCTestCase {
         XCTAssertNil(storage.defaultToken)
     }
 }
+
+#endif
