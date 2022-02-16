@@ -26,7 +26,27 @@ class MockKeychain: KeychainProtocol {
     
     struct Operation: Equatable {
         let action: Action
-        let query: CFDictionary
+        let query: NSDictionary
+    }
+    
+    func expect(_ result: Dictionary<String,Any?>) {
+        var data: [String:Any?] = [
+            "tomb": 0,
+            "svce": "Generic",
+            "musr": nil,
+            "class": "genp",
+            "sync": 0,
+            "cdat": Date(),
+            "mdat": Date(),
+            "pdmn": "ak",
+            "agrp": "com.okta.sample.app",
+            "sha": "someshadata".data(using: .utf8),
+            "UUID": UUID().uuidString
+        ]
+        data.merge(result) { lhs, rhs in
+            rhs
+        }
+        expect(noErr, result: data as CFDictionary)
     }
     
     func expect(_ status: OSStatus, result: CFTypeRef? = nil) {
@@ -46,12 +66,14 @@ class MockKeychain: KeychainProtocol {
             statuses.remove(at: 0)
         }
         
-        if !results.isEmpty,
-           let result = result,
-           let resultResponse = results[0]
-        {
+        if !results.isEmpty {
+            let resultResponse = results[0]
+
             results.remove(at: 0)
-            result.initialize(to: resultResponse)
+            
+            if let result = result {
+                result.initialize(to: resultResponse)
+            }
         }
 
         return status

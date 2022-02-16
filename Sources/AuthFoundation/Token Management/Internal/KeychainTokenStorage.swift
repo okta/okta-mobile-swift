@@ -20,22 +20,22 @@ class KeychainTokenStorage: TokenStorage {
 
     weak var delegate: TokenStorageDelegate?
     
-    init() {
+    private lazy var _defaultTokenId: String? = {
         if let defaultResult = try? Keychain
             .Search(account: KeychainTokenStorage.defaultTokenName)
             .get()
         {
-            _defaultTokenId = String(data: defaultResult.value, encoding: .utf8)
+            return String(data: defaultResult.value, encoding: .utf8)
         }
-    }
-    
-    private var _defaultTokenId: String?
+        
+        return nil
+    }()
+
     private let decoder = JSONDecoder()
     private let encoder = JSONEncoder()
 
     var defaultToken: Token? {
         get {
-            try? Keychain.Search().list()
             guard let tokenId = _defaultTokenId else { return nil }
             return try? cachedToken(with: tokenId)
         }

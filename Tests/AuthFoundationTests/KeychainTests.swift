@@ -169,6 +169,26 @@ final class KeychainTests: XCTestCase {
         XCTAssertEqual(searchResults.account, "testSearchGet()")
         XCTAssertEqual(searchResults.value, value)
     }
+
+    func testSearchError() throws {
+        let result = [] as CFArray
+        mock.expect(errSecItemNotFound, result: result)
+
+        let search = Keychain.Search(account: #function,
+                                     service: serviceName,
+                                     accessGroup: nil)
+        
+        // Test item not found
+        XCTAssertThrowsError(try search.get())
+
+        // Test generic error
+        mock.expect(errSecAuthFailed, result: result)
+        XCTAssertThrowsError(try search.get())
+        
+        // Test invalid ref data
+        mock.expect(noErr, result: result)
+        XCTAssertThrowsError(try search.get())
+    }
     
     func testInvalidItemData() throws {
         // Test missing account
