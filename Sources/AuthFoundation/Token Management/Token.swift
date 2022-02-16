@@ -22,7 +22,7 @@ public enum TokenError: Error {
 }
 
 /// Token information representing a user's access to a resource server, including access token, refresh token, and other related information.
-public class Token: Codable, Equatable, Hashable, Expires {
+public class Token: Codable, Equatable, Hashable, Identifiable, Expires {
     // The date this token was issued at.
     public var issuedAt: Date?
     
@@ -54,6 +54,25 @@ public class Token: Codable, Equatable, Hashable, Expires {
         refreshAction != nil
     }
     
+    public typealias ID = String
+    public lazy var id: String = {
+        if let jwt = try? JWT(accessToken),
+           let cid: String = jwt[.clientId],
+           let uid: String = jwt[.userId]
+        {
+            return "\(cid).\(uid)"
+        }
+        
+        if let idToken = idToken,
+           let jwt = try? JWT(idToken),
+           let subject = jwt.subject
+        {
+            return subject
+        }
+
+        return UUID().uuidString
+    }()
+
     internal var refreshAction: CoalescedResult<Result<Token, OAuth2Error>>?
 
     /// Return the relevant token string for the given type.

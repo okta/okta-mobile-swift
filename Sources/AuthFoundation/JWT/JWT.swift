@@ -41,6 +41,14 @@ public struct JWT: RawRepresentable, Codable {
         false
     }
     
+    public subscript<T>(_ claim: Claim) -> T? {
+        payload[claim.rawValue] as? T
+    }
+    
+    public subscript<T>(_ claim: String) -> T? {
+        payload[claim] as? T
+    }
+    
     public subscript(_ claim: Claim) -> Date? {
         guard let time: TimeInterval = self[claim] else { return nil }
         return Date(timeIntervalSince1970: time)
@@ -49,14 +57,6 @@ public struct JWT: RawRepresentable, Codable {
     public subscript(_ claim: String) -> Date? {
         guard let time: TimeInterval = self[claim] else { return nil }
         return Date(timeIntervalSince1970: time)
-    }
-    
-    public subscript<T>(_ claim: Claim) -> T? {
-        payload[claim.rawValue] as? T
-    }
-    
-    public subscript<T>(_ claim: String) -> T? {
-        payload[claim] as? T
     }
     
     public enum Algorithm: String, Codable {

@@ -64,3 +64,11 @@ extension CredentialDataSource {
         URLSession(configuration: .ephemeral)
     }
 }
+
+/// Represents the class that manages the relationship between ``TokenStorage`` and ``CredentialDataSource`` instances.
+public protocol CredentialCoordinator: AnyObject {
+    var credentialDataSource: CredentialDataSource { get set }
+    var tokenStorage: TokenStorage { get set }
+    
+    func remove(credential: Credential) throws
+}

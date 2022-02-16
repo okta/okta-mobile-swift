@@ -13,28 +13,47 @@
 import Foundation
 import AuthFoundation
 
+enum DeviceSSOError: Error {
+    case invalidTokenSecret
+}
+
 public extension Keychain {
     
     private static let oktaMobileSdkAccessGroup = "com.okta.mobile-sdk.shared"
     
     static func save(_ token: Token) throws {
         try [Token.Kind.idToken, Token.Kind.deviceSecret].forEach { kind in
-            try token.token(of: kind).flatMap {
-                try Keychain.set(key: "Okta-\(kind.rawValue)",
-                                 string: $0,
-                                 accessGroup: oktaMobileSdkAccessGroup,
-                                 accessibility: kSecAttrAccessibleWhenUnlocked)
-            }
+            try token.token(of: kind)
+                .flatMap { $0.data(using: .utf8) }
+                .map {
+                    Keychain.Item(account: "Okta-\(kind.rawValue)",
+                                  service: "Okta",
+                                  accessGroup: oktaMobileSdkAccessGroup,
+                                  value: $0)
+                }
+                .map{ try $0.save() }
         }
     }
     
     static func get(_ kind: Token.Kind) throws -> String {
-        try Keychain.get(key: "Okta-\(kind.rawValue)", accessGroup: oktaMobileSdkAccessGroup)
+        let item = try Keychain
+            .Search(account: "Okta-\(kind.rawValue)",
+                    service: "Okta",
+                    accessGroup: oktaMobileSdkAccessGroup)
+            .get()
+        
+        guard let token = String(data: item.value, encoding: .utf8) else {
+            throw DeviceSSOError.invalidTokenSecret
+        }
+        
+        return token
     }
     
     static func deleteTokens() throws {
-        try [Token.Kind.idToken, Token.Kind.deviceSecret].forEach { kind in
-            try Keychain.remove(key: "Okta-\(kind.rawValue)", accessGroup: oktaMobileSdkAccessGroup)
-        }
+        try Keychain
+            .Search(service: "Okta",
+                    accessGroup: oktaMobileSdkAccessGroup)
+            .get()
+            .delete()
     }
 }

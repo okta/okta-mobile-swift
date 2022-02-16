@@ -38,6 +38,25 @@ func signInWithWebUsingCustomConfiguration() async throws {
     Credential.default = Credential(token: token)
 }
 
+func signInUsingAuthorizationCode() async throws {
+    let flow = AuthorizationCodeFlow(issuer: URL(string: issuer)!,
+                                     clientId: clientId,
+                                     scopes: "openid profile email offline_access",
+                                     redirectUri: URL(string: redirectUri)!)
+
+    // Initiate the auth flow, and get the URL to present to the user
+    let authorizeUrl = try await flow.resume()
+
+    // Open that URL in a browser, and wait for the redirect
+    let redirectURL: URL // Get the URL from the browser redirect
+
+    // Exchange the redirect URL for a token
+    let token = try await flow.resume(with: redirectURL)
+    
+    // Save the user's tokens
+    Credential.default = Credential(token: token)
+}
+
 func signInUsingResourceOwner(username: String, password: String) async throws {
     let flow = ResourceOwnerFlow(issuer: URL(string: issuer)!,
                                  clientId: clientId,

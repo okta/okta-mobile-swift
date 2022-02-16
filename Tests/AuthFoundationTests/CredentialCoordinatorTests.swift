@@ -21,7 +21,7 @@ import FoundationNetworking
 
 final class UserCoordinatorTests: XCTestCase {
     var userDefaults: UserDefaults!
-    var storage: DefaultTokenStorage!
+    var storage: UserDefaultsTokenStorage!
     var coordinator: CredentialCoordinatorImpl!
     
     let token = Token(issuedAt: Date(),
@@ -39,7 +39,7 @@ final class UserCoordinatorTests: XCTestCase {
         userDefaults = UserDefaults(suiteName: name)
         userDefaults.removePersistentDomain(forName: name)
 
-        storage = DefaultTokenStorage(userDefaults: userDefaults)
+        storage = UserDefaultsTokenStorage(userDefaults: userDefaults)
         
         coordinator = CredentialCoordinatorImpl(tokenStorage: storage)
         

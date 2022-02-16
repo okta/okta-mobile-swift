@@ -33,18 +33,24 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         
         window?.rootViewController = profileViewController
     }
+    
+    func setRootViewController() {
+        if Credential.default == nil {
+            self.signIn()
+        } else {
+            self.showProfile()
+        }
+    }
 
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
         guard let scene = (scene as? UIWindowScene) else { return }
         windowScene = scene
         
         NotificationCenter.default.addObserver(forName: .defaultCredentialChanged, object: nil, queue: .main) { notification in
-            if notification.object == nil {
-                self.signIn()
-            } else {
-                self.showProfile()
-            }
+            self.setRootViewController()
         }
+        
+        setRootViewController()
     }
 
     func sceneDidDisconnect(_ scene: UIScene) {
