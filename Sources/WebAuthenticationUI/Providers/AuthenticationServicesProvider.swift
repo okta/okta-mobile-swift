@@ -76,8 +76,8 @@ class AuthenticationServicesProvider: NSObject, WebAuthenticationProvider {
         }
     }
     
-    func finish(context: SessionLogoutFlow.Context? = nil) {
-        try? logoutFlow.finish(with: context)
+    func finish(context: SessionLogoutFlow.Context) {
+        try? logoutFlow.resume(with: context)
     }
     
     func logout(using url: URL) {

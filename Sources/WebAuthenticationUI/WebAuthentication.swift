@@ -37,6 +37,7 @@ public enum WebAuthenticationError: Error {
     case authenticationProviderError(_ error: Error)
     case invalidRedirectScheme(_ scheme: String?)
     case userCancelledLogin
+    case missingIdToken
     case oauth2(error: OAuth2Error)
     case generic(error: Error)
     case genericError(message: String)
@@ -107,11 +108,20 @@ public class WebAuthentication {
         provider?.start(context: context)
     }
     
-    public func finish(from window: WindowAnchor? = nil, credential: Credential? = Credential.default, _ completion: @escaping (Result<Void, WebAuthenticationError>) -> Void) {
-        finish(from: window, token: credential?.token, completion)
+    public func finish(from window: WindowAnchor? = nil, credential: Credential, _ completion: @escaping (Result<Void, WebAuthenticationError>) -> Void) {
+        finish(from: window, token: credential.token, completion)
     }
     
-    public func finish(from window: WindowAnchor? = nil, token: Token?, _ completion: @escaping (Result<Void, WebAuthenticationError>) -> Void) {
+    public func finish(from window: WindowAnchor? = nil, token: Token, _ completion: @escaping (Result<Void, WebAuthenticationError>) -> Void) {
+        guard let idToken = token.idToken else {
+            completion(.failure(.missingIdToken))
+            return
+        }
+        
+        finish(from: window, idToken: idToken, completion)
+    }
+    
+    public func finish(from window: WindowAnchor? = nil, idToken: String, _ completion: @escaping (Result<Void, WebAuthenticationError>) -> Void) {
         if provider != nil {
             cancel()
         }
@@ -124,12 +134,8 @@ public class WebAuthentication {
         self.logoutCompletionBlock = completion
         self.provider = provider
         
-        if let idToken = token?.idToken {
-            let context = SessionLogoutFlow.Context(idToken: idToken)
-            provider?.finish(context: context)
-        } else {
-            provider?.finish(context: nil)
-        }
+        let context = SessionLogoutFlow.Context(idToken: idToken)
+        provider?.finish(context: context)
     }
     
     /// Cancels the authentication session.

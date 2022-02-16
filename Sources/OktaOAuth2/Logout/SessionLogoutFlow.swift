@@ -16,6 +16,8 @@ import AuthFoundation
 public protocol SessionLogoutFlowDelegate: LogoutFlowDelegate {
     func logout<Flow: SessionLogoutFlow>(flow: Flow, received error: OAuth2Error)
     
+    func logout<Flow: SessionLogoutFlow>(flow: Flow, customizeUrl urlComponents: inout URLComponents)
+    
     func logout<Flow: SessionLogoutFlow>(flow: Flow, shouldLogoutUsing url: URL)
 }
 
@@ -73,10 +75,12 @@ public class SessionLogoutFlow: LogoutFlow {
         client.add(delegate: self)
     }
     
-    public func finish(with context: Context? = nil, completion: ((Result<URL, OAuth2Error>) -> Void)? = nil) throws {
-        guard !inProgress,
-            var context = context ?? Credential.default?.token.idToken.flatMap({ Context(idToken: $0) })
-        else {
+    public func resume(idToken: String, completion: ((Result<URL, OAuth2Error>) -> Void)? = nil) throws {
+        try resume(with: Context(idToken: idToken), completion: completion)
+    }
+    
+    public func resume(with context: Context, completion: ((Result<URL, OAuth2Error>) -> Void)? = nil) throws {
+        guard !inProgress else {
             completion?(.failure(.missingClientConfiguration))
             return
         }
@@ -92,7 +96,7 @@ public class SessionLogoutFlow: LogoutFlow {
                 do {
                     let url = try self.createLogoutURL(from: configuration.endSessionEndpoint,
                                                        using: context)
-                    
+                    var context = context
                     context.logoutURL = url
                     self.context = context
                     
@@ -152,8 +156,9 @@ private extension SessionLogoutFlow.Configuration {
 
 private extension SessionLogoutFlow {
     func createLogoutURL(from url: URL, using context: SessionLogoutFlow.Context) throws -> URL {
-        let components = try configuration.authenticationUrlComponents(from: url, using: context)
-
+        var components = try configuration.authenticationUrlComponents(from: url, using: context)
+        delegateCollection.invoke { $0.logout(flow: self, customizeUrl: &components) }
+        
         guard let url = components.url else {
             throw OAuth2Error.cannotComposeUrl
         }

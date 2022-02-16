@@ -53,6 +53,11 @@ class SafariBrowserProvider: NSObject, WebAuthenticationProvider {
         }
     }
     
+    func logout(using url: URL) {
+        // The process is the same as for authentication
+        authenticate(using: url)
+    }
+    
     func received(token: Token) {
         defer { safariController = nil }
         
@@ -67,6 +72,10 @@ class SafariBrowserProvider: NSObject, WebAuthenticationProvider {
         delegate.authentication(provider: self, received: error)
     }
     
+    func received(logoutError: WebAuthenticationError) {
+        delegate.authentication(provider: self, received: logoutError)
+    }
+    
     func start(context: AuthorizationCodeFlow.Context?) {
         guard let delegate = delegate else { return }
         
@@ -77,7 +86,7 @@ class SafariBrowserProvider: NSObject, WebAuthenticationProvider {
         }
     }
     
-    func finish(context: SessionLogoutFlow.Context?) {
+    func finish(context: SessionLogoutFlow.Context) {
         
     }
     
@@ -99,6 +108,17 @@ extension SafariBrowserProvider: AuthorizationCodeFlowDelegate {
     
     func authentication<Flow>(flow: Flow, received token: Token) {
         received(token: token)
+    }
+}
+
+@available(iOS, introduced: 9.0, deprecated: 11.0)
+extension SafariBrowserProvider: SessionLogoutFlowDelegate {
+    func logout<Flow>(flow: Flow, shouldLogoutUsing url: URL) where Flow : SessionLogoutFlow {
+        logout(using: url)
+    }
+    
+    func logout<SessionLogoutFlow>(flow: SessionLogoutFlow, received error: OAuth2Error) {
+        received(logoutError: .oauth2(error: error))
     }
 }
 

@@ -82,6 +82,11 @@ extension WebAuthenticationError: LocalizedError {
                                      bundle: .module,
                                      comment: "Invalid URL")
             
+        case .missingIdToken:
+            return NSLocalizedString("missing_id_token_description",
+                                     bundle: .module,
+                                     comment: "Missing ID Token")
+            
         case .oauth2(error: let error):
             return error.localizedDescription
 

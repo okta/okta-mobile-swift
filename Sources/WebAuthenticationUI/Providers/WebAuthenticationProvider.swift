@@ -20,7 +20,7 @@ protocol WebAuthenticationProvider {
     var delegate: WebAuthenticationProviderDelegate? { get }
 
     func start(context: AuthorizationCodeFlow.Context?)
-    func finish(context: SessionLogoutFlow.Context?)
+    func finish(context: SessionLogoutFlow.Context)
     func cancel()
 }
 
