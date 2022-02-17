@@ -115,7 +115,7 @@ final class TokenExchangeFlowTests: XCTestCase {
         XCTAssertFalse(flow.isAuthenticating)
     }
     
-#if swift(>=5.5.1)
+#if swift(>=5.5.1) && !os(Linux)
     @available(iOS 15.0, tvOS 15.0, macOS 12.0, watchOS 8, *)
     func testAsyncAuthenticationSucceeded() async throws {
         XCTAssertFalse(flow.isAuthenticating)
