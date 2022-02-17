@@ -38,6 +38,7 @@ class ProfileTableViewController: UITableViewController {
     var tableContent: [Section: [Row]] = [:]
     var user: Credential? {
         didSet {
+            configure(user?.userInfo)
             user?.userInfo { result in
                 guard case let .success(userInfo) = result else { return }
                 DispatchQueue.main.async {
@@ -69,31 +70,33 @@ class ProfileTableViewController: UITableViewController {
         return row
     }
     
-    func configure(_ user: UserInfo) {
+    func configure(_ user: UserInfo?) {
         let dateFormatter = DateFormatter()
         dateFormatter.dateStyle = .medium
         dateFormatter.timeStyle = .long
 
-        title = user.name
+        title = user?.name
         self.tabBarItem.title = title
-
-        tableContent = [
-            .profile: [
+        
+        tableContent = [:]
+        if let user = user {
+            tableContent[.profile] = [
                 .init(kind: .rightDetail, id: "givenName", title: "Given name", detail: user.givenName),
                 .init(kind: .rightDetail, id: "familyName", title: "Family name", detail: user.familyName),
                 .init(kind: .rightDetail, id: "locale", title: "Locale", detail: user.userLocale?.identifier ?? "N/A"),
                 .init(kind: .rightDetail, id: "timezone", title: "Timezone", detail: user.zoneInfo?.identifier ?? "N/A")
-            ],
-            .details: [
+            ]
+            tableContent[.details] = [
                 .init(kind: .rightDetail, id: "username", title: "Username", detail: user.preferredUsername),
                 .init(kind: .rightDetail, id: "userId", title: "User ID", detail: user.sub),
                 .init(kind: .rightDetail, id: "createdAt", title: "Created at", detail: (user.updatedAt != nil) ? dateFormatter.string(from: user.updatedAt!) : "N/A"),
                 .init(kind: .disclosure, id: "details", title: "Token details"),
-                .init(kind: .action, id: "refresh", title: "Refresh")
-            ],
-            .actions: [
-                .init(kind: .destructive, id: "signout", title: "Sign Out")
             ]
+        }
+        
+        tableContent[.actions] = [
+            .init(kind: .action, id: "refresh", title: "Refresh"),
+            .init(kind: .destructive, id: "signout", title: "Sign Out")
         ]
 
         tableView.reloadData()

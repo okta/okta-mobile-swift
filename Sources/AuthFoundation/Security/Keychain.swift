@@ -24,7 +24,7 @@ public enum KeychainError: Error {
     case missingAccount
     case missingValueData
     case missingAttribute
-    case cannotDelete
+    case cannotDelete(status: OSStatus)
 }
 
 /// Defines convenience mechanisms for interacting with the keychain, lincluding searching, creating, and deleting keychain items.
@@ -76,9 +76,11 @@ public struct Keychain {
         public func delete() throws {
             let cfDictionary = query as CFDictionary
 
-            let sanityCheck = Keychain.implementation.deleteItem(cfDictionary)
-            if sanityCheck != noErr {
-                throw KeychainError.cannotDelete
+            let status = Keychain.implementation.deleteItem(cfDictionary)
+            if status == errSecItemNotFound {
+                throw KeychainError.notFound
+            } else if status != noErr {
+                throw KeychainError.cannotDelete(status: status)
             }
         }
         

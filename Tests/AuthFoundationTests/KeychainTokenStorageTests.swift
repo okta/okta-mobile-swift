@@ -120,6 +120,8 @@ final class KeychainTokenStorageTests: XCTestCase {
         mock.expect(errSecSuccess, result: [] as CFArray)
         mock.expect(noErr)
         mock.expect(noErr)
+        mock.expect(noErr)
+        mock.expect(noErr)
 
         XCTAssertNoThrow(try storage.add(token: token))
 

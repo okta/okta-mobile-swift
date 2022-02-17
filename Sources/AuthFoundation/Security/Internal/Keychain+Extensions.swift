@@ -21,6 +21,9 @@ extension Keychain.Item {
         result[kSecAttrAccount as String] = account
         result[kSecValueData as String] = value
         result[kSecAttrAccessible as String] = accessibility.rawValue
+        if #available(iOS 13.0, *) {
+            result[kSecUseDataProtectionKeychain as String] = kCFBooleanTrue
+        }
         
         if let service = service {
             result[kSecAttrService as String] = service

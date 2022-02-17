@@ -19,8 +19,8 @@ import SafariServices
 @available(iOS, introduced: 9.0, deprecated: 11.0)
 class SafariBrowserProvider: NSObject, WebAuthenticationProvider {
     let flow: AuthorizationCodeFlow
-    let delegate: WebAuthenticationProviderDelegate
-    
+    private(set) weak var delegate: WebAuthenticationProviderDelegate?
+
     private(set) var safariController: SFSafariViewController?
     private let anchor: WebAuthentication.WindowAnchor?
     
@@ -54,14 +54,22 @@ class SafariBrowserProvider: NSObject, WebAuthenticationProvider {
     }
     
     func received(token: Token) {
+        defer { safariController = nil }
+        
+        guard let delegate = delegate else { return }
         delegate.authentication(provider: self, received: token)
     }
     
     func received(error: WebAuthenticationError) {
+        defer { safariController = nil }
+
+        guard let delegate = delegate else { return }
         delegate.authentication(provider: self, received: error)
     }
     
     func start(context: AuthorizationCodeFlow.Context?) {
+        guard let delegate = delegate else { return }
+        
         do {
             try flow.resume(with: context)
         } catch {
@@ -71,6 +79,7 @@ class SafariBrowserProvider: NSObject, WebAuthenticationProvider {
     
     func cancel() {
         safariController?.dismiss(animated: true)
+        safariController = nil
     }
 }
 

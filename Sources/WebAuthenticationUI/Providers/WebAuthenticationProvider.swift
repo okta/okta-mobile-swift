@@ -17,13 +17,13 @@ import OktaOAuth2
 
 protocol WebAuthenticationProvider {
     var flow: AuthorizationCodeFlow { get }
-    var delegate: WebAuthenticationProviderDelegate { get }
+    var delegate: WebAuthenticationProviderDelegate? { get }
 
     func start(context: AuthorizationCodeFlow.Context?)
     func cancel()
 }
 
-protocol WebAuthenticationProviderDelegate {
+protocol WebAuthenticationProviderDelegate: AnyObject {
     func authentication(provider: WebAuthenticationProvider, received token: Token)
     func authentication(provider: WebAuthenticationProvider, received error: Error)
     
