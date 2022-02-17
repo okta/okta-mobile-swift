@@ -9,7 +9,7 @@
 
 > This library is currently GA. See [release status](#release-status) for more information.
 
-This library is built for projects written in Swift to communicate with Okta as an OAuth 2.0 + OpenID Connect provider. It works with [Okta's Identity Engine](https://developer.okta.com/docs/concepts/ie-intro/) to authenticate and register users.
+This library is built for projects written in Swift to communicate with Okta as an OAuth 2.0 + OpenID Connect provider. It works with [Okta's Identity Engine](https://developer.okta.com/docs/guides/oie-intro/) to authenticate and register users.
 
 To see this library working in a sample, check out our [iOS Sample Application](Samples/EmbeddedAuthWithSDKs). You can also check out our guides for step-by-step instructions:
 
@@ -319,7 +319,7 @@ remediation.proceed { (response, error) in
 
 ### Sign up / Register
 
-When you [configure and enable a self-service registration policy](https://developer.okta.com/docs/guides/set-up-self-service-registration/configure-self-service-registration-policy/), the initial response will include a `.selectEnrollProfile` remediation option. Proceeding through this remediation option will return a remediation that will allow the user to supply their name and email address, allowing them to proceed through to creating a new user profile.
+When you [configure and enable a self-service registration policy](https://developer.okta.com/docs/guides/set-up-self-service-registration/main/#enable-and-configure-a-self-service-registration-policy), the initial response will include a `.selectEnrollProfile` remediation option. Proceeding through this remediation option will return a remediation that will allow the user to supply their name and email address, allowing them to proceed through to creating a new user profile.
 
 ```swift
 guard let remediation = response.remediations[.selectEnrollProfile] else {
