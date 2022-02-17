@@ -110,25 +110,25 @@ public class WebAuthentication {
         provider?.start(context: context)
     }
     
-    public func finish(from window: WindowAnchor? = nil, credential: Credential? = .default, _ completion: @escaping (Result<Void, WebAuthenticationError>) -> Void) {
+    public func logout(from window: WindowAnchor? = nil, credential: Credential? = .default, _ completion: @escaping (Result<Void, WebAuthenticationError>) -> Void) {
         guard let idToken = credential?.token.idToken else {
             completion(.failure(.missingIdToken))
             return
         }
         
-        finish(from: window, idToken: idToken, completion)
+        logout(from: window, idToken: idToken, completion)
     }
     
-    public func finish(from window: WindowAnchor? = nil, token: Token, _ completion: @escaping (Result<Void, WebAuthenticationError>) -> Void) {
+    public func logout(from window: WindowAnchor? = nil, token: Token, _ completion: @escaping (Result<Void, WebAuthenticationError>) -> Void) {
         guard let idToken = token.idToken else {
             completion(.failure(.missingIdToken))
             return
         }
         
-        finish(from: window, idToken: idToken, completion)
+        logout(from: window, idToken: idToken, completion)
     }
     
-    public func finish(from window: WindowAnchor? = nil, idToken: String, _ completion: @escaping (Result<Void, WebAuthenticationError>) -> Void) {
+    public func logout(from window: WindowAnchor? = nil, idToken: String, _ completion: @escaping (Result<Void, WebAuthenticationError>) -> Void) {
         var provider = provider
         
         if provider != nil {
@@ -145,7 +145,7 @@ public class WebAuthentication {
         self.provider = provider
         
         let context = SessionLogoutFlow.Context(idToken: idToken)
-        provider?.finish(context: context)
+        provider?.logout(context: context)
     }
     
     /// Cancels the authentication session.

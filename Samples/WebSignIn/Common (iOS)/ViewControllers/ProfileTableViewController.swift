@@ -131,7 +131,7 @@ class ProfileTableViewController: UITableViewController {
         
         if let idToken = Credential.default?.token.idToken {
             alert.addAction(.init(title: "End a session", style: .destructive) { _ in
-                WebAuthentication.shared?.finish(idToken: idToken) { result in
+                WebAuthentication.shared?.logout(idToken: idToken) { result in
                     switch result {
                     case .success:
                         try? self.user?.remove()

@@ -54,7 +54,7 @@ class WebAuthenticationUITests: XCTestCase {
     func testLogoout() throws {
         let webAuth = WebAuthenticationMock(flow: flow, context: .init(state: "qwe"))
         
-        webAuth.finish(from: nil, idToken: "idToken") { result in }
+        webAuth.logout(from: nil, idToken: "idToken") { result in }
         
         let provider = try XCTUnwrap(webAuth.provider as? WebAuthenticationProviderMock)
         XCTAssertNil(webAuth.completionBlock)

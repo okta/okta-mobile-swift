@@ -81,7 +81,7 @@ class AuthenticationServicesProviderTests: ProviderTestBase {
     }
     
     func testLogout() {
-        provider.finish(context: .init(idToken: "idToken", state: "state"))
+        provider.logout(context: .init(idToken: "idToken", state: "state"))
         XCTAssertNotNil(provider.authenticationSession)
         
         provider.processLogout(url: logoutRedirectUri, error: nil)
@@ -91,7 +91,7 @@ class AuthenticationServicesProviderTests: ProviderTestBase {
     }
     
     func testLogoutError() {
-        provider.finish(context: .init(idToken: "idToken", state: "state"))
+        provider.logout(context: .init(idToken: "idToken", state: "state"))
         XCTAssertNotNil(provider.authenticationSession)
         
         provider.processLogout(url: logoutRedirectUri, error: WebAuthenticationError.missingIdToken)
@@ -101,7 +101,7 @@ class AuthenticationServicesProviderTests: ProviderTestBase {
     }
     
     func testLogoutNoRedirectUri() {
-        provider.finish(context: .init(idToken: "idToken", state: "state"))
+        provider.logout(context: .init(idToken: "idToken", state: "state"))
         XCTAssertNotNil(provider.authenticationSession)
         
         provider.processLogout(url: nil, error: nil)
