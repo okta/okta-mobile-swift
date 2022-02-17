@@ -28,7 +28,7 @@ class WebAuthenticationMock: WebAuthentication {
 
 class WebAuthenticationProviderMock: WebAuthenticationProvider {
     var flow: AuthorizationCodeFlow
-    var delegate: WebAuthenticationProviderDelegate
+    var delegate: WebAuthenticationProviderDelegate?
     
     enum State {
         case initialized, started, cancelled
