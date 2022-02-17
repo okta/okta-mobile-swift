@@ -122,6 +122,25 @@ public class SessionLogoutFlow: LogoutFlow {
     }
 }
 
+#if swift(>=5.5.1)
+@available(iOS 15.0, tvOS 15.0, macOS 12.0, watchOS 8, *)
+extension SessionLogoutFlow {
+    public func resume(with context: Context) async throws -> URL {
+        try await withCheckedThrowingContinuation { continuation in
+            do {
+                try resume(with: context) { result in
+                    continuation.resume(with: result)
+                }
+            } catch let error as APIClientError {
+                continuation.resume(with: .failure(error))
+            } catch {
+                continuation.resume(with: .failure(APIClientError.serverError(error)))
+            }
+        }
+    }
+}
+#endif
+
 extension SessionLogoutFlow: UsesDelegateCollection {
     public typealias Delegate = SessionLogoutFlowDelegate
 }

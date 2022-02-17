@@ -22,6 +22,8 @@ class WebAuthenticationProviderDelegateRecorder: WebAuthenticationProviderDelega
     private(set) var token: Token?
     private(set) var error: Error?
     var shouldUseEphemeralSession: Bool = true
+    private(set) var logoutFinished = false
+    private(set) var logoutError: Error?
     
     func authentication(provider: WebAuthenticationProvider, received token: Token) {
         self.token = token
@@ -35,19 +37,32 @@ class WebAuthenticationProviderDelegateRecorder: WebAuthenticationProviderDelega
         shouldUseEphemeralSession
     }
     
+    func logout(provider: WebAuthenticationProvider, finished: Bool) {
+        self.logoutFinished = finished
+    }
+    
+    func logout(provider: WebAuthenticationProvider, received error: Error) {
+        self.logoutError = error
+    }
+    
     func reset() {
         token = nil
         error = nil
         shouldUseEphemeralSession = true
+        logoutError = nil
+        logoutFinished = false
     }
 }
 
 class ProviderTestBase: XCTestCase, AuthorizationCodeFlowDelegate {
     let issuer = URL(string: "https://example.com")!
     let redirectUri = URL(string: "com.example:/callback")!
+    let logoutRedirectUri = URL(string: "com.example:/logout")!
+    var configuration: AuthorizationCodeFlow.Configuration!
     let urlSession = URLSessionMock()
     var client: OAuth2Client!
     var flow: AuthorizationCodeFlow!
+    var logoutFlow: SessionLogoutFlow!
     let delegate = WebAuthenticationProviderDelegateRecorder()
 
     var authenticationURL: URL?
@@ -68,6 +83,8 @@ class ProviderTestBase: XCTestCase, AuthorizationCodeFlowDelegate {
                               clientId: "clientId",
                               scopes: "openid profile",
                               session: urlSession)
+        
+        logoutFlow = SessionLogoutFlow(.init(logoutRedirectUri: logoutRedirectUri), client: client)
         
         urlSession.expect("https://example.com/.well-known/openid-configuration",
                           data: try data(from: .module, for: "openid-configuration", in: "MockResponses"),

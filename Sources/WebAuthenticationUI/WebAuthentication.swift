@@ -99,7 +99,9 @@ public class WebAuthentication {
             cancel()
         }
         
+        let logoutFlow = SessionLogoutFlow(.init(logoutRedirectUri: flow.configuration.logoutRedirectUri), client: flow.client)
         let provider = createWebAuthenticationProvider(flow: flow,
+                                                       logoutFlow: logoutFlow,
                                                        from: window,
                                                        delegate: self)
         self.completionBlock = completion
@@ -108,8 +110,13 @@ public class WebAuthentication {
         provider?.start(context: context)
     }
     
-    public func finish(from window: WindowAnchor? = nil, credential: Credential, _ completion: @escaping (Result<Void, WebAuthenticationError>) -> Void) {
-        finish(from: window, token: credential.token, completion)
+    public func finish(from window: WindowAnchor? = nil, credential: Credential? = .default, _ completion: @escaping (Result<Void, WebAuthenticationError>) -> Void) {
+        guard let idToken = credential?.token.idToken else {
+            completion(.failure(.missingIdToken))
+            return
+        }
+        
+        finish(from: window, idToken: idToken, completion)
     }
     
     public func finish(from window: WindowAnchor? = nil, token: Token, _ completion: @escaping (Result<Void, WebAuthenticationError>) -> Void) {
@@ -122,14 +129,17 @@ public class WebAuthentication {
     }
     
     public func finish(from window: WindowAnchor? = nil, idToken: String, _ completion: @escaping (Result<Void, WebAuthenticationError>) -> Void) {
+        var provider = provider
+        
         if provider != nil {
             cancel()
-        }
-        
-        // TODO: Pass custom window
-        let provider = createWebAuthenticationProvider(flow: flow,
+        } else {
+            let logoutFlow = SessionLogoutFlow(.init(logoutRedirectUri: flow.configuration.logoutRedirectUri), client: flow.client)
+            provider = createWebAuthenticationProvider(flow: flow,
+                                                       logoutFlow: logoutFlow,
                                                        from: window,
                                                        delegate: self)
+        }
         
         self.logoutCompletionBlock = completion
         self.provider = provider
@@ -266,13 +276,14 @@ public class WebAuthentication {
     }
     
     func createWebAuthenticationProvider(flow: AuthorizationCodeFlow,
+                                         logoutFlow: SessionLogoutFlow,
                                          from window: WebAuthentication.WindowAnchor?,
                                          delegate: WebAuthenticationProviderDelegate) -> WebAuthenticationProvider?
     {
         // TODO: SessionLogoutFLow
         if #available(iOS 12.0, macOS 10.15, macCatalyst 13.0, *) {
             return AuthenticationServicesProvider(flow: flow,
-                                                  logoutFlow: SessionLogoutFlow(.init(logoutRedirectUri: flow.configuration.logoutRedirectUri), client: flow.client),
+                                                  logoutFlow: logoutFlow,
                                                   from: window,
                                                   delegate: delegate)
         }
@@ -280,11 +291,13 @@ public class WebAuthentication {
         #if os(iOS)
         if #available(iOS 11.0, *) {
             return SafariServicesProvider(flow: flow,
+                                          logoutFlow: logoutFlow,
                                           delegate: delegate)
         }
         
         if #available(iOS 9.0, *) {
             return SafariBrowserProvider(flow: flow,
+                                         logoutFlow: logoutFlow,
                                          from: window,
                                          delegate: delegate)
         }

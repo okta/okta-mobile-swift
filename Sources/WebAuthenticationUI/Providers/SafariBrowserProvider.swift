@@ -19,26 +19,31 @@ import SafariServices
 @available(iOS, introduced: 9.0, deprecated: 11.0)
 class SafariBrowserProvider: NSObject, WebAuthenticationProvider {
     let flow: AuthorizationCodeFlow
+    let logoutFlow: SessionLogoutFlow
     private(set) weak var delegate: WebAuthenticationProviderDelegate?
-
+    
     private(set) var safariController: SFSafariViewController?
     private let anchor: WebAuthentication.WindowAnchor?
     
     init(flow: AuthorizationCodeFlow,
+         logoutFlow: SessionLogoutFlow,
          from window: WebAuthentication.WindowAnchor?,
          delegate: WebAuthenticationProviderDelegate)
     {
         self.flow = flow
+        self.logoutFlow = logoutFlow
         self.anchor = window
         self.delegate = delegate
         
         super.init()
         
         self.flow.add(delegate: self)
+        self.logoutFlow.add(delegate: self)
     }
     
     deinit {
         self.flow.remove(delegate: self)
+        self.logoutFlow.remove(delegate: self)
     }
     
     func authenticate(using url: URL) {
@@ -87,7 +92,8 @@ class SafariBrowserProvider: NSObject, WebAuthenticationProvider {
     }
     
     func finish(context: SessionLogoutFlow.Context) {
-        
+        // LogoutFlow invokes delegate, so an error is propagated from delegate method
+        try? logoutFlow.resume(with: context)
     }
     
     func cancel() {
@@ -121,7 +127,6 @@ extension SafariBrowserProvider: SessionLogoutFlowDelegate {
         received(logoutError: .oauth2(error: error))
     }
 }
-
 
 private extension UIWindow {
     static func topViewController(from rootViewController: UIViewController?) -> UIViewController? {

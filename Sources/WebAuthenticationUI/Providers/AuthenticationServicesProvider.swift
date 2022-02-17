@@ -77,6 +77,7 @@ class AuthenticationServicesProvider: NSObject, WebAuthenticationProvider {
     }
     
     func finish(context: SessionLogoutFlow.Context) {
+        // LogoutFlow invokes delegate, so an error is propagated from delegate method
         try? logoutFlow.resume(with: context)
     }
     

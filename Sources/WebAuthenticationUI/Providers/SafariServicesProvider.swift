@@ -19,23 +19,29 @@ import SafariServices
 @available(iOS, introduced: 11.0, deprecated: 12.0)
 class SafariServicesProvider: NSObject, WebAuthenticationProvider {
     let flow: AuthorizationCodeFlow
+    let logoutFlow: SessionLogoutFlow
+    let delegate: WebAuthenticationProviderDelegate
     private(set) weak var delegate: WebAuthenticationProviderDelegate?
-
+    
     private(set) var authenticationSession: SFAuthenticationSession?
     
     init(flow: AuthorizationCodeFlow,
+         logoutFlow: SessionLogoutFlow,
          delegate: WebAuthenticationProviderDelegate)
     {
         self.flow = flow
+        self.logoutFlow = logoutFlow
         self.delegate = delegate
         
         super.init()
         
         self.flow.add(delegate: self)
+        self.logoutFlow.add(delegate: self)
     }
     
     deinit {
         self.flow.remove(delegate: self)
+        self.logoutFlow.remove(delegate: self)
     }
     
     func start(context: AuthorizationCodeFlow.Context?) {
@@ -49,7 +55,8 @@ class SafariServicesProvider: NSObject, WebAuthenticationProvider {
     }
     
     func finish(context: SessionLogoutFlow.Context) {
-        
+        // LogoutFlow invokes delegate, so an error is propagated from delegate method
+        try? logoutFlow.resume(with: context)
     }
     
     func authenticate(using url: URL) {
