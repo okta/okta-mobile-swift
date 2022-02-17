@@ -6,7 +6,7 @@ This functionality is in [General Availability](https://developer.okta.com/docs/
 do not have an account manager, please reach out to oie@okta.com for more information.
 
 This Sample Application will show you the best practices for integrating Authentication into your app
-using [Okta's Identity Engine](https://developer.okta.com/docs/concepts/ie-intro/). Specifically, this 
+using [Okta's Identity Engine](https://developer.okta.com/docs/guides/oie-intro/). Specifically, this 
 application will cover some basic use cases to get you up and running quickly with Okta.
 These examples are:
 1. Sign In
