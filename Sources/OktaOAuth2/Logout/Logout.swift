@@ -12,15 +12,23 @@
 
 import Foundation
 
-public protocol LogoutFlow: AnyObject, UsesDelegateCollection {
-    var inProgress: Bool { get }
-    
-    func cancel()
-    
-    /// Resets the authentication session.
-    func reset()
+/// Abstract base protocol for ``LogoutFlow`` instances to use for their backing configuration.
+public protocol LogoutConfiguration {}
+
+/// A common delegate protocol that all logout flows should support.
+public protocol LogoutFlowDelegate: AnyObject {
+    /// Sent when an logout flow receives an error.
+    func logout<Flow>(flow: Flow, received error: OAuth2Error)
 }
 
-public protocol LogoutFlowDelegate: AnyObject {
-    func logout<Flow>(flow: Flow, received error: OAuth2Error)
+/// A protocol defining a type of logout flow.
+public protocol LogoutFlow: AnyObject, UsesDelegateCollection {
+    /// Indicates if this flow is currently in progress.
+    var inProgress: Bool { get }
+    
+    /// Cancels the logout flow.
+    func cancel()
+    
+    /// Resets the logout flow.
+    func reset()
 }

@@ -79,8 +79,22 @@ public class WebAuthentication {
         }
     }
     
+    lazy var hiddenWindow: UIWindow = {
+        let controller = UIViewController()
+        controller.loadViewIfNeeded()
+        controller.view.isHidden = true
+        
+        let window = UIWindow(frame: .zero)
+        window.rootViewController = controller
+        
+        return window
+    }()
+    
     /// The underlying OAuth2 flow that implements the authentication behavior.
     public let flow: AuthorizationCodeFlow
+    
+    /// The underlying OAuth2 flow that implements the session logout behaviour.
+    public let logoutFlow: SessionLogoutFlow
     
     /// Context information about the current authorization code flow.
     ///
@@ -99,7 +113,6 @@ public class WebAuthentication {
             cancel()
         }
         
-        let logoutFlow = SessionLogoutFlow(.init(logoutRedirectUri: flow.configuration.logoutRedirectUri), client: flow.client)
         let provider = createWebAuthenticationProvider(flow: flow,
                                                        logoutFlow: logoutFlow,
                                                        from: window,
@@ -110,6 +123,11 @@ public class WebAuthentication {
         provider?.start(context: context)
     }
     
+    /// Starts log-out using the credential.
+    /// - Parameters:
+    ///   - window: Window from which the sign in process will be started.
+    ///   - credential: Stored credentials that will retrieve the ID token.
+    ///   - completion: Completion block that will be invoked when log-out finishes.
     public func logout(from window: WindowAnchor? = nil, credential: Credential? = .default, _ completion: @escaping (Result<Void, WebAuthenticationError>) -> Void) {
         guard let idToken = credential?.token.idToken else {
             completion(.failure(.missingIdToken))
@@ -119,6 +137,11 @@ public class WebAuthentication {
         logout(from: window, idToken: idToken, completion)
     }
     
+    /// Starts log-out using the ``Token`` object.
+    /// - Parameters:
+    ///   - window: Window from which the sign in process will be started.
+    ///   - token: Token object that will retrieve the ID token.
+    ///   - completion: Completion block that will be invoked when sign-out finishes.
     public func logout(from window: WindowAnchor? = nil, token: Token, _ completion: @escaping (Result<Void, WebAuthenticationError>) -> Void) {
         guard let idToken = token.idToken else {
             completion(.failure(.missingIdToken))
@@ -127,19 +150,25 @@ public class WebAuthentication {
         
         logout(from: window, idToken: idToken, completion)
     }
-    
+
+    /// Starts log-out using the ID token.
+    /// - Parameters:
+    ///   - window: Window from which the sign in process will be started.
+    ///   - idToken: The ID token used for log-out.
+    ///   - completion: Completion block that will be invoked when sign-out finishes.
     public func logout(from window: WindowAnchor? = nil, idToken: String, _ completion: @escaping (Result<Void, WebAuthenticationError>) -> Void) {
         var provider = provider
         
         if provider != nil {
             cancel()
-        } else {
-            let logoutFlow = SessionLogoutFlow(.init(logoutRedirectUri: flow.configuration.logoutRedirectUri), client: flow.client)
-            provider = createWebAuthenticationProvider(flow: flow,
-                                                       logoutFlow: logoutFlow,
-                                                       from: window,
-                                                       delegate: self)
         }
+        
+        hiddenWindow.makeKeyAndVisible()
+        
+        provider = createWebAuthenticationProvider(flow: flow,
+                                                   logoutFlow: logoutFlow,
+                                                   from: hiddenWindow,
+                                                   delegate: self)
         
         self.logoutCompletionBlock = completion
         self.provider = provider
@@ -311,8 +340,9 @@ public class WebAuthentication {
     /// - Parameters:
     ///   - flow: Authorization code flow instance for this client.
     ///   - context: Optional context to initialize authentication with.
-    public init(flow: AuthorizationCodeFlow, context: AuthorizationCodeFlow.Context? = nil) {
+    public init(flow: AuthorizationCodeFlow, logoutFlow: SessionLogoutFlow, context: AuthorizationCodeFlow.Context? = nil) {
         self.flow = flow
+        self.logoutFlow = logoutFlow
         self.context = context
         WebAuthentication.shared = self
     }
@@ -341,6 +371,39 @@ extension WebAuthentication {
     public func start(from window: WindowAnchor?) async throws -> Token {
         try await withCheckedThrowingContinuation { continuation in
             self.start(from: window) { continuation.resume(with: $0) }
+        }
+    }
+    
+    /// Asynchronous convenience method that initiates log-out using the credential object, throwing the error if fails.
+    /// - Parameters:
+    ///   - window: Window from which the sign in process will be started.
+    ///   - credential: Stored credentials that will retrieve the ID token.
+    ///   - completion: Completion block that will be invoked when log-out finishes.
+    public func logout(from window: WindowAnchor?, credential: Credential? = .default) async throws {
+        try await withCheckedThrowingContinuation { continuation in
+            self.logout(from: window, credential: credential) { continuation.resume(with: $0) }
+        }
+    }
+    
+    /// Asynchronous convenience method that initiates log-out using the ``Token`` object, throwing the error if fails.
+    /// - Parameters:
+    ///   - window: Window from which the sign in process will be started.
+    ///   - token: Token object that will retrieve the ID token.
+    ///   - completion: Completion block that will be invoked when sign-out finishes.
+    public func logout(from window: WindowAnchor?, token: Token) async throws {
+        try await withCheckedThrowingContinuation { continuation in
+            self.logout(from: window, token: token) { continuation.resume(with: $0) }
+        }
+    }
+    
+    /// Asynchronous convenience method that initiates log-out using the ID Token, throwing the error if fails.
+    /// - Parameters:
+    ///   - window: Window from which the sign in process will be started.
+    ///   - idToken: The ID token used for log-out.
+    ///   - completion: Completion block that will be invoked when sign-out finishes.
+    public func logout(from window: WindowAnchor?, idToken: String) async throws {
+        try await withCheckedThrowingContinuation { continuation in
+            self.logout(from: window, idToken: idToken) { continuation.resume(with: $0) }
         }
     }
 }

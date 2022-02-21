@@ -23,6 +23,7 @@ class WebAuthenticationUITests: XCTestCase {
     private let redirectUri = URL(string: "com.example:/callback")!
     private let urlSession = URLSessionMock()
     private var flow: AuthorizationCodeFlow!
+    private var logoutFlow: SessionLogoutFlow!
     private var client: OAuth2Client!
     
     override func setUpWithError() throws {
@@ -36,12 +37,13 @@ class WebAuthenticationUITests: XCTestCase {
                           contentType: "application/json")
         flow = client.authorizationCodeFlow(redirectUri: redirectUri,
                                             additionalParameters: ["additional": "param"])
+        logoutFlow = SessionLogoutFlow(issuer: issuer, logoutRedirectUri: flow.configuration.logoutRedirectUri)
     }
     
     func testStart() throws {
         XCTAssertNotNil(WebAuthentication.shared)
         
-        let webAuth = WebAuthenticationMock(flow: flow, context: .init(state: "qwe"))
+        let webAuth = WebAuthenticationMock(flow: flow, logoutFlow: logoutFlow, context: .init(state: "qwe"))
         
         webAuth.start(from: nil) { result in }
         
@@ -52,7 +54,7 @@ class WebAuthenticationUITests: XCTestCase {
     }
     
     func testLogoout() throws {
-        let webAuth = WebAuthenticationMock(flow: flow, context: .init(state: "qwe"))
+        let webAuth = WebAuthenticationMock(flow: flow, logoutFlow: logoutFlow, context: .init(state: "qwe"))
         
         webAuth.logout(from: nil, idToken: "idToken") { result in }
         
@@ -63,7 +65,7 @@ class WebAuthenticationUITests: XCTestCase {
     }
     
     func testCancel() throws {
-        let webAuth = WebAuthenticationMock(flow: flow, context: .init(state: "qwe"))
+        let webAuth = WebAuthenticationMock(flow: flow, logoutFlow: logoutFlow, context: .init(state: "qwe"))
         
         XCTAssertNil(webAuth.provider)
         

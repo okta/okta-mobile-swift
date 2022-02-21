@@ -13,33 +13,82 @@
 import Foundation
 import AuthFoundation
 
+/// The delegate of a ``SessionLogoutFlow`` may adopt some, or all, of the methods described here. These allow a developer to customize or interact with the logout flow during logout session.
+///
+/// This protocol extends the basic ``LogoutFlowDelegate`` which all logout flows support.
 public protocol SessionLogoutFlowDelegate: LogoutFlowDelegate {
+    /// Sent when the session logout flow receives an error.
+    /// 
+    /// - Parameters:
+    ///   - flow: The logout flow.
+    ///   - error: The received error.
     func logout<Flow: SessionLogoutFlow>(flow: Flow, received error: OAuth2Error)
     
+    /// Provides the opportunity to customize the logout URL.
+    ///
+    /// The logout URL is generated from a combination of configuration sources, as well as the end session endpoint's OpenID configuration. When specific values need to be added to the URL, such as custom query string or other URL parameters, this delegate method enables you to manipulate the URL before it is passed to a web browser.
+    /// - Parameters:
+    ///   - flow: The logout flow.
+    ///   - urlComponents: A `URLComponents` instance that represents the logout URL, prior to conversion to a URL.
     func logout<Flow: SessionLogoutFlow>(flow: Flow, customizeUrl urlComponents: inout URLComponents)
     
     func logout<Flow: SessionLogoutFlow>(flow: Flow, shouldLogoutUsing url: URL)
 }
 
+/// An logout flow class that implements the Session Logout Flow.
+///
+/// The Session Logout Flow permits a user to authenticate using a web browser redirect model, where an initial authentication URL is loaded in a browser, they log out through some external service, after which their browser is redirected to a URL whose scheme matches the one defined in the client configuration.
+///
+/// You can create an instance of  ``SessionLogoutFlow/Configuration-swift.struct`` to define your logout settings, and supply that to the initializer, along with a reference to your OAuth2Client for performing key operations and requests. Alternatively, you can use any of the convenience initializers to simplify the process.
+///
+/// As an example, we'll use Swift Concurrency, since these asynchronous methods can be used inline easily, though ``SessionLogoutFlow`` can just as easily be used with completion blocks or through the use of the ``SessionLogoutFlowDelegate``.
+///
+/// ```swift
+/// let flow = AuthorizationCodeFlow(
+///     issuer: URL(string: "https://example.okta.com")!,
+///     clientId: "abc123client",
+///     scopes: "openid offline_access email profile",
+///     redirectUri: URL(string: "com.example.app:/callback"))
+///
+/// // Create the authorization URL. Open this in a browser.
+/// let authorizeUrl = try await flow.resume()
+///
+/// // Once the browser redirects to the callback scheme
+/// // from the redirect URI, use that to resume the flow.
+/// let redirectUri: URL
+/// let token = try await flow.resume(with: redirectUri)
+/// ```
 public class SessionLogoutFlow: LogoutFlow {
+    /// Indicates if this flow is currently in progress.
     private(set) public var inProgress: Bool = false
     
-    public struct Configuration: AuthenticationConfiguration {
-        /// The redirect URI defined for your client.
+    /// Configuration settings that define the OAuth2 client to be signed-out against.
+    public struct Configuration: LogoutConfiguration {
+        /// The logout redirect URI.
         public let logoutRedirectUri: URL?
         
+        /// Convenience initializer for constructing an session logout flow configuration using the supplied values.
+        /// - Parameter logoutRedirectUri: The logout redirect URI.
         public init(logoutRedirectUri: URL?) {
             self.logoutRedirectUri = logoutRedirectUri
         }
     }
-    
+
+    /// A model representing the context and current state for a logout session.
     public struct Context: Codable, Equatable {
+        /// The ID token string used for log-out.
         public let idToken: String
         
+        /// The state string to use when creating an logout URL.
         public let state: String
         
+        /// The current logout URL, or `nil` if one has not yet been generated.
         internal(set) public var logoutURL: URL?
         
+        /// Initializer for creating a context.
+        /// - Parameters:
+        ///   - idToken: The ID token string used for log-out.
+        ///   - state: State string to use, or `nil` to accept an automatically generated default.
         public init(idToken: String, state: String? = nil) {
             self.idToken = idToken
             self.state = state ?? UUID().uuidString
@@ -54,6 +103,7 @@ public class SessionLogoutFlow: LogoutFlow {
     
     public let delegateCollection = DelegateCollection<SessionLogoutFlowDelegate>()
     
+    /// The context that stores the ID token and state for the current log-out session.
     private(set) public var context: Context? {
         didSet {
             guard let url = context?.logoutURL else {
@@ -64,7 +114,16 @@ public class SessionLogoutFlow: LogoutFlow {
         }
     }
     
-    /// Initializer to construct an authentication flow from a pre-defined configuration and client.
+    /// Convenience initializer to construct a logout flow.
+    /// - Parameters:
+    ///   - issuer: The issuer URL.
+    ///   - logoutRedirectUri: The logout redirect URI, if applicable.
+    public convenience init(issuer: URL, logoutRedirectUri: URL?) {
+        self.init(Configuration(logoutRedirectUri: logoutRedirectUri),
+                  client: .init(baseURL: issuer))
+    }
+    
+    /// Initializer to construct a logout flow from a pre-defined configuration and client.
     /// - Parameters:
     ///   - configuration: The configuration to use for this authentication flow.
     ///   - client: The `OAuth2Client` to use with this flow.
@@ -74,11 +133,23 @@ public class SessionLogoutFlow: LogoutFlow {
         
         client.add(delegate: self)
     }
-    
+
+    /// Initiates a logout flow, with a required ID Token.
+    ///
+    /// This method is used to begin a logout session. It is asynchronous, and will invoke the appropriate delegate methods when a response is received.
+    /// - Parameters:
+    ///   - idToken: The ID token string.
+    ///   - completion: Optional completion block for receiving the response. If `nil`, you may rely upon the appropriate delegate API methods.
     public func resume(idToken: String, completion: ((Result<URL, OAuth2Error>) -> Void)? = nil) throws {
         try resume(with: Context(idToken: idToken), completion: completion)
     }
-    
+
+    /// Initiates an logout flow, with a required ``Context-swift.struct`` object.
+    ///
+    /// This method is used to begin a logout session. It is asynchronous, and will invoke the appropriate delegate methods when a response is received.
+    /// - Parameters:
+    ///   - context: Represents current state for a logout session.
+    ///   - completion: Optional completion block for receiving the response. If `nil`, you may rely upon the appropriate delegate API methods.
     public func resume(with context: Context, completion: ((Result<URL, OAuth2Error>) -> Void)? = nil) throws {
         guard !inProgress else {
             completion?(.failure(.missingClientConfiguration))
@@ -112,10 +183,12 @@ public class SessionLogoutFlow: LogoutFlow {
         }
     }
     
+    /// Cancels a current session logout flow.
     public func cancel() {
         
     }
     
+    /// Resets a current session logout flow.
     public func reset() {
         inProgress = false
         context = nil
@@ -125,6 +198,22 @@ public class SessionLogoutFlow: LogoutFlow {
 #if swift(>=5.5.1)
 @available(iOS 15.0, tvOS 15.0, macOS 12.0, watchOS 8, *)
 extension SessionLogoutFlow {
+    /// Asynchronously initiates a logout flow, with a required ID Token.
+    ///
+    /// This method is used to begin a logout session. The method will invoke the appropriate delegate methods when a response is received.
+    /// - Parameters:
+    ///   - idToken: The ID token string.
+    /// - Returns: The URL a user should be presented with within a broser, to befing a logout flow.
+    public func resume(idToken: String) async throws -> URL {
+        try await resume(with: .init(idToken: idToken))
+    }
+    
+    /// Initiates an logout flow, with a required ``Context-swift.struct`` object.
+    ///
+    /// This method is used to begin a logout session. The method will invoke the appropriate delegate methods when a response is received.
+    /// - Parameters:
+    ///   - context: Represents current state for a logout session.
+    /// - Returns: The URL a user should be presented with within a broser, to befing a logout flow.
     public func resume(with context: Context) async throws -> URL {
         try await withCheckedThrowingContinuation { continuation in
             do {
