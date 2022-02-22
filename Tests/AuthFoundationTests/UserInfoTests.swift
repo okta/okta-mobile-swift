@@ -31,7 +31,7 @@ final class UserInfoTests: XCTestCase {
         XCTAssertEqual(info.address?["street_address"], "155 Country Lane")
         
         #if os(iOS) || os(macOS) || os(tvOS) || os(watchOS)
-        if #available(iOS 15, *) {
+        if #available(iOS 15, macCatalyst 15, macOS 12.0, tvOS 15, watchOS 8, *) {
             let formatter = PersonNameComponentsFormatter()
             formatter.style = .long
             formatter.locale = Locale(identifier: "UK")
