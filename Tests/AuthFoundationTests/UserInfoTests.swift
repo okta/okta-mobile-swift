@@ -30,12 +30,14 @@ final class UserInfoTests: XCTestCase {
         XCTAssertTrue(info.emailVerified!)
         XCTAssertEqual(info.address?["street_address"], "155 Country Lane")
         
+        #if os(iOS) || os(macOS) || os(tvOS) || os(watchOS)
         if #available(iOS 15, *) {
             let formatter = PersonNameComponentsFormatter()
             formatter.style = .long
             formatter.locale = Locale(identifier: "UK")
             XCTAssertEqual(formatter.string(from: info.nameComponents), "Arthur Phillip Dent Earthling")
         }
+        #endif
     }
 
     func testCoding() throws {
@@ -55,12 +57,5 @@ final class UserInfoTests: XCTestCase {
         XCTAssertEqual(info.updatedAt?.timeIntervalSinceReferenceDate, 666814703)
         XCTAssertTrue(info.emailVerified!)
         XCTAssertEqual(info.address?["street_address"], "155 Country Lane")
-        
-        if #available(iOS 15, *) {
-            let formatter = PersonNameComponentsFormatter()
-            formatter.style = .long
-            formatter.locale = Locale(identifier: "UK")
-            XCTAssertEqual(formatter.string(from: info.nameComponents), "Arthur Phillip Dent Earthling")
-        }
     }
 }

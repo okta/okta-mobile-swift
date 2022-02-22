@@ -221,6 +221,7 @@ public extension HasClaims {
     /// The person's preferred username.
     var preferredUsername: String? { self[.preferredUsername] }
 
+#if os(iOS) || os(macOS) || os(tvOS) || os(watchOS)
     /// The person's name components, pre-assigned to a PersonNameComponents object.
     ///
     /// This property can be used as a convenience to generate a string representation of the user's name, based on the user's current locale.
@@ -241,6 +242,7 @@ public extension HasClaims {
                              nameSuffix: nickname,
                              nickname: nickname)
     }
+    #endif
     
     /// The address components for this user.
     var address: [String:String]? { self[.address] }
