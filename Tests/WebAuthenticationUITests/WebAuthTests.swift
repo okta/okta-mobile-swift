@@ -62,10 +62,11 @@ class WebAuthenticationUITests: XCTestCase {
         XCTAssertNil(webAuth.provider)
         
         webAuth.start(from: nil) { result in }
-        webAuth.cancel()
-        
+
         let webAuthProvider = try XCTUnwrap(webAuth.provider as? WebAuthenticationProviderMock)
 
+        webAuth.cancel()
+        
         XCTAssertTrue(webAuthProvider.state == .cancelled)
     }
 }

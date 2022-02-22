@@ -18,6 +18,9 @@ import OktaOAuth2
 
 extension WebAuthentication {
     private func complete(with result: Result<Token, WebAuthenticationError>) {
+        provider = nil
+        flow.reset()
+
         guard let completion = completionBlock else {
             return
         }
@@ -27,8 +30,6 @@ extension WebAuthentication {
         }
         
         completionBlock = nil
-        provider = nil
-        flow.reset()
     }
 }
 

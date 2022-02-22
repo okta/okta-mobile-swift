@@ -19,8 +19,8 @@ import SafariServices
 @available(iOS, introduced: 11.0, deprecated: 12.0)
 class SafariServicesProvider: NSObject, WebAuthenticationProvider {
     let flow: AuthorizationCodeFlow
-    let delegate: WebAuthenticationProviderDelegate
-    
+    private(set) weak var delegate: WebAuthenticationProviderDelegate?
+
     private(set) var authenticationSession: SFAuthenticationSession?
     
     init(flow: AuthorizationCodeFlow,
@@ -39,6 +39,8 @@ class SafariServicesProvider: NSObject, WebAuthenticationProvider {
     }
     
     func start(context: AuthorizationCodeFlow.Context?) {
+        guard let delegate = delegate else { return }
+        
         do {
             try flow.resume(with: context)
         } catch {
@@ -58,6 +60,8 @@ class SafariServicesProvider: NSObject, WebAuthenticationProvider {
     }
     
     func process(url: URL?, error: Error?) {
+        defer { authenticationSession = nil }
+        
         if let error = error {
             let nsError = error as NSError
             if nsError.domain == SFAuthenticationErrorDomain,
@@ -84,15 +88,20 @@ class SafariServicesProvider: NSObject, WebAuthenticationProvider {
     }
     
     func received(token: Token) {
+        guard let delegate = delegate else { return }
+        
         delegate.authentication(provider: self, received: token)
     }
     
     func received(error: WebAuthenticationError) {
+        guard let delegate = delegate else { return }
+        
         delegate.authentication(provider: self, received: error)
     }
     
     func cancel() {
         authenticationSession?.cancel()
+        authenticationSession = nil
     }
 }
 

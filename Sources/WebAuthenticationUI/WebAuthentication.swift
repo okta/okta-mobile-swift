@@ -111,6 +111,7 @@ public class WebAuthentication {
     public func cancel() {
         flow.cancel()
         provider?.cancel()
+        provider = nil
     }
     
     #if os(iOS)
@@ -254,8 +255,8 @@ public class WebAuthentication {
     }
     
     func createWebAuthenticationProvider(flow: AuthorizationCodeFlow,
-                                                from window: WebAuthentication.WindowAnchor?,
-                                                delegate: WebAuthenticationProviderDelegate) -> WebAuthenticationProvider?
+                                         from window: WebAuthentication.WindowAnchor?,
+                                         delegate: WebAuthenticationProviderDelegate) -> WebAuthenticationProvider?
     {
         if #available(iOS 12.0, macOS 10.15, macCatalyst 13.0, *) {
             return AuthenticationServicesProvider(flow: flow,

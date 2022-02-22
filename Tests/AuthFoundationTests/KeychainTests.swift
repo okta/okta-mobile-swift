@@ -39,6 +39,7 @@ final class KeychainTests: XCTestCase {
             "gena": genericData,
             "labl": "Label",
             "pdmn": "cku",
+            "nleg": 1,
             "sync": 1,
             "svce": "KeychainTests.swift",
             "v_Data": value
@@ -75,6 +76,7 @@ final class KeychainTests: XCTestCase {
             "class": "genp",
             "gena": genericData,
             "pdmn": "aku",
+            "nleg": 1,
             "svce": "KeychainTests.swift",
             "v_Data": value
         ] as CFDictionary

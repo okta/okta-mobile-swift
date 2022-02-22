@@ -109,7 +109,7 @@ class KeychainTokenStorage: TokenStorage {
         delegate?.token(storage: self, added: token)
         
         if changedDefault {
-            try? saveDefault()
+            try saveDefault()
             delegate?.token(storage: self, defaultChanged: token)
         }
     }
@@ -136,7 +136,7 @@ class KeychainTokenStorage: TokenStorage {
         if _defaultTokenId == token.id {
             changedDefault = true
             _defaultTokenId = newToken.id
-            try? saveDefault()
+            try saveDefault()
         }
         
          delegate?.token(storage: self, replaced: token, with: newToken)
@@ -157,7 +157,7 @@ class KeychainTokenStorage: TokenStorage {
         
         if _defaultTokenId == token.id {
             _defaultTokenId = nil
-            try? saveDefault()
+            try saveDefault()
             delegate?.token(storage: self, defaultChanged: nil)
         }
         

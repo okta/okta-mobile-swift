@@ -19,7 +19,7 @@ import AuthenticationServices
 @available(iOS 12.0, macOS 10.15, macCatalyst 13.0, *)
 class AuthenticationServicesProvider: NSObject, WebAuthenticationProvider {
     let flow: AuthorizationCodeFlow
-    let delegate: WebAuthenticationProviderDelegate
+    private(set) weak var delegate: WebAuthenticationProviderDelegate?
     private(set) var authenticationSession: ASWebAuthenticationSession?
 
     private let anchor: ASPresentationAnchor?
@@ -42,6 +42,8 @@ class AuthenticationServicesProvider: NSObject, WebAuthenticationProvider {
     }
 
     func start(context: AuthorizationCodeFlow.Context? = nil) {
+        guard let delegate = delegate else { return }
+        
         do {
             try flow.resume(with: context)
         } catch {
@@ -50,6 +52,8 @@ class AuthenticationServicesProvider: NSObject, WebAuthenticationProvider {
     }
     
     func authenticate(using url: URL) {
+        guard let delegate = delegate else { return }
+        
         authenticationSession = ASWebAuthenticationSession(
             url: url,
             callbackURLScheme: flow.callbackScheme,
@@ -57,7 +61,7 @@ class AuthenticationServicesProvider: NSObject, WebAuthenticationProvider {
                 self.process(url: url, error: error)
             })
         
-        if #available(iOS 13.0, *) {
+        if #available(iOS 13.0, macCatalyst 13.0, macOS 10.15, *) {
             authenticationSession?.prefersEphemeralWebBrowserSession = delegate.authenticationShouldUseEphemeralSession(provider: self)
             authenticationSession?.presentationContextProvider = self
         }
@@ -69,17 +73,24 @@ class AuthenticationServicesProvider: NSObject, WebAuthenticationProvider {
     
     func cancel() {
         authenticationSession?.cancel()
+        authenticationSession = nil
     }
     
     func received(token: Token) {
+        guard let delegate = delegate else { return }
+        
         delegate.authentication(provider: self, received: token)
     }
     
     func received(error: WebAuthenticationError) {
+        guard let delegate = delegate else { return }
+        
         delegate.authentication(provider: self, received: error)
     }
     
     func process(url: URL?, error: Error?) {
+        defer { authenticationSession = nil }
+        
         if let error = error {
             let nsError = error as NSError
             if nsError.domain == ASWebAuthenticationSessionErrorDomain,
