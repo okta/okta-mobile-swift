@@ -136,7 +136,7 @@ final class SessionLogoutFlowSuccessTests: XCTestCase {
         
         let context = SessionLogoutFlow.Context(idToken: logoutIDToken, state: state)
         
-        let logoutUrl = await try flow.resume(with: context)
+        let logoutUrl = try await flow.resume(with: context)
         
         XCTAssertNotEqual(flow.context, context)
         XCTAssertEqual(flow.context?.state, context.state)

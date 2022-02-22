@@ -50,8 +50,13 @@ extension WebAuthentication {
 extension WebAuthentication: WebAuthenticationProviderDelegate {
     func logout(provider: WebAuthenticationProvider, finished: Bool) {
         if finished {
+            #if os(iOS)
             hiddenWindow.resignKey()
-            hiddenWindow.isHidden = true
+            hiddenWindow.view.isHidden = true
+            #elseif os(macOS)
+            hiddenWindow.resignKey()
+            hiddenWindow.setIsVisible(false)
+            #endif
             
             completeLogout(with: .success(()))
         }

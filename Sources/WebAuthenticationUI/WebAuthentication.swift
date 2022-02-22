@@ -79,14 +79,23 @@ public class WebAuthentication {
         }
     }
     
-    lazy var hiddenWindow: UIWindow = {
+    lazy var hiddenWindow: WindowAnchor = {
+        let window = WindowAnchor()
+        
+        #if os(iOS)
         let controller = UIViewController()
         controller.loadViewIfNeeded()
         controller.view.isHidden = true
-        
-        let window = UIWindow(frame: .zero)
+
         window.rootViewController = controller
+        #elseif os(macOS)
+        let controller = NSViewController()
+        controller.loadView()
+        controller.view.isHidden = true
         
+        window.contentViewController = controller
+        #endif
+
         return window
     }()
     
@@ -163,7 +172,12 @@ public class WebAuthentication {
             cancel()
         }
         
+        #if os(iOS)
         hiddenWindow.makeKeyAndVisible()
+        #elseif os(macOS)
+        hiddenWindow.setIsVisible(true)
+        hiddenWindow.makeKey()
+        #endif
         
         provider = createWebAuthenticationProvider(flow: flow,
                                                    logoutFlow: logoutFlow,
