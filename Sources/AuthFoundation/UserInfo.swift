@@ -13,53 +13,60 @@
 import Foundation
 
 /// User profile information.
-public class UserInfo: Codable, JSONDecodable {
-    public let sub: String
+///
+/// This provides a convenience mechanism for accessing information related to a user. It supports the ``HasClaims`` protocol, to simplify common operations against user information, and to provide consistency with the ``JWT`` class.
+public struct UserInfo: RawRepresentable, Codable, HasClaims {
+    public typealias RawValue = [String:Any]
+    public let rawValue: RawValue
     
-    public let name: String?
-    public let givenName: String?
-    public let familyName: String?
-    public let middleName: String?
-    public let nickname: String?
-    public let preferredUsername: String?
-
-    public let email: String?
-    public let emailVerified: Bool?
+    /// Returns the list of all claims contained within this ``UserInfo``.
+    public var claims: [Claim] {
+        rawValue.keys.compactMap { Claim(rawValue: $0) }
+    }
     
-    public let phoneNumber: String?
-    public let phoneNumberVerified: Bool?
+    /// Returns the list of custom claims this ``UserInfo`` instance might contain.
+    public var customClaims: [String] {
+        rawValue.keys.filter { Claim(rawValue: $0) == nil }
+    }
 
-    public let address: [String: String]?
+    public func value<T>(_ type: T.Type, for key: String) -> T? {
+        rawValue[key] as? T
+    }
 
-    public let gender: String?
-    public let birthdate: String?
-
-    public let updatedAt: Date?
+    public init?(rawValue: RawValue) {
+        self.init(rawValue)
+    }
     
-    private let locale: String?
-    public lazy var userLocale: Locale? = {
-        guard let locale = locale else {
-            return nil
-        }
-
-        return Locale(identifier: locale)
-    }()
+    public init(_ info: RawValue) {
+        self.rawValue = info
+    }
     
-    private let zoneinfo: String?
-    public lazy var zoneInfo: TimeZone? = {
-        guard let zoneinfo = zoneinfo else {
-            return nil
-        }
+    public init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: JSONCodingKeys.self)
+        self.init(try container.decode([String:Any].self))
+    }
+    
+    public func encode(to encoder: Encoder) throws {
+        var container = encoder.container(keyedBy: JSONCodingKeys.self)
+        _ = try rawValue.compactMap({ (key: String, value: Any) in
+            guard let key = JSONCodingKeys(stringValue: key) else { return nil }
+            return (key, value)
+        }).map({ (key: JSONCodingKeys, value: Any) in
+            if let value = value as? Bool {
+                try container.encode(value, forKey: key)
+            } else if let value = value as? String {
+                try container.encode(value, forKey: key)
+            } else if let value = value as? Int {
+                try container.encode(value, forKey: key)
+            } else if let value = value as? Double {
+                try container.encode(value, forKey: key)
+            } else if let value = value as? [String:String] {
+                try container.encode(value, forKey: key)
+            }
+        })
+    }
+}
 
-        return TimeZone(identifier: zoneinfo)
-    }()
-
-//    public let claims: [Claim: Any]?
-
-    public static let jsonDecoder: JSONDecoder = {
-        let result = JSONDecoder()
-        result.keyDecodingStrategy = .convertFromSnakeCase
-        result.dateDecodingStrategy = .secondsSince1970
-        return result
-    }()
+extension UserInfo: JSONDecodable {
+    public static var jsonDecoder = JSONDecoder()
 }

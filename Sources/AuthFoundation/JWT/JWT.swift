@@ -12,51 +12,42 @@
 
 import Foundation
 
-public protocol JWTClaim {}
-
 public enum JWTError: Error {
     case invalidBase64Encoding
     case badTokenStructure
 }
 
-public struct JWT: RawRepresentable, Codable {
+/// Represents the contents of a JWT token, providing access to its payload contents.
+public struct JWT: RawRepresentable, Codable, HasClaims {
     public typealias RawValue = String
-    
     public let rawValue: String
         
     public var expirationTime: Date? { self[.expirationTime] }
     
     public var issuer: String? { self[.issuer] }
-    public var subject: String? { self[.subject] }
     public var audience: [String]? { self[.audience] }
     public var issuedAt: Date? { self[.issuedAt] }
     public var notBefore: Date? { self[.notBefore] }
     public var expiresIn: TimeInterval { self[.expiresIn] ?? 0 }
     
-    public var allClaims: [Claim] { payload.keys.compactMap { Claim(rawValue: $0) } }
-    public var allClaimStrings: [String] { payload.keys.compactMap { $0 } }
     public var scope: [String]? { self[.scope] ?? self["scp"] }
+
+    /// The list of standard claims contained within this JWT token.
+    public var claims: [Claim] {
+        payload.keys.compactMap { Claim(rawValue: $0) }
+    }
+    
+    /// The list of custom claims contained within this JWT token.
+    public var customClaims: [String] {
+        payload.keys.filter { Claim(rawValue: $0) == nil }
+    }
+
+    public func value<T>(_ type: T.Type, for key: String) -> T? {
+        payload[key] as? T
+    }
 
     var expired: Bool {
         false
-    }
-    
-    public subscript<T>(_ claim: Claim) -> T? {
-        payload[claim.rawValue] as? T
-    }
-    
-    public subscript<T>(_ claim: String) -> T? {
-        payload[claim] as? T
-    }
-    
-    public subscript(_ claim: Claim) -> Date? {
-        guard let time: TimeInterval = self[claim] else { return nil }
-        return Date(timeIntervalSince1970: time)
-    }
-    
-    public subscript(_ claim: String) -> Date? {
-        guard let time: TimeInterval = self[claim] else { return nil }
-        return Date(timeIntervalSince1970: time)
     }
     
     public enum Algorithm: String, Codable {
@@ -76,7 +67,7 @@ public struct JWT: RawRepresentable, Codable {
         public let alg: Algorithm
     }
     
-    public init?(rawValue: String) {
+    public init?(rawValue: RawValue) {
         try? self.init(rawValue)
     }
     
@@ -117,10 +108,3 @@ public struct JWT: RawRepresentable, Codable {
         signature = components[2]
     }
 }
-
-extension String: JWTClaim {}
-extension Bool: JWTClaim {}
-extension Double: JWTClaim {}
-extension Int: JWTClaim {}
-extension Date: JWTClaim {}
-extension Array: JWTClaim where Element == String {}
