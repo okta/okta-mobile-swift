@@ -84,11 +84,7 @@ class ProfileTableViewController: UITableViewController {
                 .init(kind: .rightDetail, id: "givenName", title: "Given name", detail: user.givenName),
                 .init(kind: .rightDetail, id: "familyName", title: "Family name", detail: user.familyName),
                 .init(kind: .rightDetail, id: "locale", title: "Locale", detail: user.userLocale?.identifier ?? "N/A"),
-<<<<<<< HEAD
-                .init(kind: .rightDetail, id: "timezone", title: "Timezone", detail: user.zoneInfo?.identifier ?? "N/A")
-=======
                 .init(kind: .rightDetail, id: "timezone", title: "Timezone", detail: user.timeZone?.identifier ?? "N/A")
->>>>>>> 94dd42b (Added improved UserInfo support)
             ]
             tableContent[.details] = [
                 .init(kind: .rightDetail, id: "username", title: "Username", detail: user.preferredUsername),

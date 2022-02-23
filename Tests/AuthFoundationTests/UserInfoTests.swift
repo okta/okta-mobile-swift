@@ -41,11 +41,11 @@ final class UserInfoTests: XCTestCase {
     }
 
     func testCoding() throws {
-        let originalInfo = try JSONDecoder().decode(UserInfo.self, from: userInfo.data(using: .utf8)!)
+        let originalInfo = try UserInfo.jsonDecoder.decode(UserInfo.self, from: userInfo.data(using: .utf8)!)
 
         let data = try JSONEncoder().encode(originalInfo)
         
-        let info = try JSONDecoder().decode(UserInfo.self, from: data)
+        let info = try UserInfo.jsonDecoder.decode(UserInfo.self, from: data)
 
         XCTAssertEqual(info.subject, "00u2q5p3acVOXoSc04w5")
         XCTAssertEqual(info.preferredUsername, "arthur.dent@example.com")
