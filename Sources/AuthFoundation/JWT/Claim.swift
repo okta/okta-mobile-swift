@@ -158,3 +158,143 @@ public enum Claim: String, Codable {
     /// Token introspection response
     case tokenIntrospection        = "token_introspection"
 }
+
+/// Used by classes that contains OAuth2 claims.
+///
+/// This provides common conveniences for interacting with user or token information within those claims. For example, iterating through ``allClaims-7sado`` or using keyed subscripting to access specific claims.
+public protocol HasClaims {
+    /// Returns the collection of claims this object contains.
+    ///
+    /// > Note: This will only return the list of official claims defined in the ``Claim`` enum. For custom claims, please see the ``customClaims`` property.
+    var claims: [Claim] { get }
+    
+    /// Returns the collection of custom claims this object contains.
+    ///
+    /// Unlike the ``allClaims`` property, this returns values as strings.
+    var customClaims: [String] { get }
+    
+    /// Return the given claim's value.
+    subscript<T>(_ claim: Claim) -> T? { get }
+
+    /// Return the given claim's value.
+    subscript<T>(_ claim: String) -> T? { get }
+    
+    /// Return the value of the requested claim, for the given type.
+    func value<T>(_ type: T.Type, for key: String) -> T?
+}
+
+public extension HasClaims {
+    subscript<T>(_ claim: Claim) -> T? {
+        self[claim.rawValue]
+    }
+    
+    subscript<T>(_ claim: String) -> T? {
+        if T.self == Date.self {
+            guard let time = value(Int.self, for: claim) else { return nil }
+            return Date(timeIntervalSince1970: TimeInterval(time)) as? T
+        } else {
+            return value(T.self, for: claim)
+        }
+    }
+    
+    /// The subject of the resource, if available.
+    var subject: String? { self[.subject] }
+    
+    /// The date the resource was updated at.
+    var updatedAt: Date? { self[.updatedAt] }
+    
+    /// The full name of the resource.
+    var name: String? { self[.name] }
+    
+    /// The person's given, or first, name.
+    var givenName: String? { self[.givenName] }
+    
+    /// The person's family, or last, name.
+    var familyName: String? { self[.familyName] }
+    
+    /// The person's middle name.
+    var middleName: String? { self[.middleName] }
+    
+    /// The person's nickname.
+    var nickname: String? { self[.nickname] }
+    
+    /// The person's preferred username.
+    var preferredUsername: String? { self[.preferredUsername] }
+
+#if os(iOS) || os(macOS) || os(tvOS) || os(watchOS)
+    /// The person's name components, pre-assigned to a PersonNameComponents object.
+    ///
+    /// This property can be used as a convenience to generate a string representation of the user's name, based on the user's current locale.
+    ///
+    /// For example:
+    ///
+    /// ```swift
+    /// let formatter = PersonNameComponentsFormatter()
+    /// formatter.style = .medium
+    ///
+    /// let name = formatter.string(from: userInfo.nameComponents)
+    /// ```
+    @available(macOS 12, iOS 15, tvOS 15, watchOS 8, *)
+    var nameComponents: PersonNameComponents {
+        PersonNameComponents(givenName: givenName,
+                             middleName: middleName,
+                             familyName: familyName,
+                             nameSuffix: nickname,
+                             nickname: nickname)
+    }
+    #endif
+    
+    /// The address components for this user.
+    var address: [String:String]? { self[.address] }
+    
+    /// The user's profile address.
+    var profile: String? { self[.profile] }
+    
+    /// The user's picture address.
+    var picture: String? { self[.picture] }
+    
+    /// The user's website address.
+    var website: String? { self[.website] }
+
+    /// The user's email address.
+    var email: String? { self[.email] }
+    
+    /// Indicates whether or not the user's email address has been verified.
+    var emailVerified: Bool? { self[.emailVerified] }
+
+    /// The user's phone number.
+    var phoneNumber: String? { self[.phoneNumber] }
+    
+    /// Indicates whether or not the user's phone number has been verified.
+    var phoneNumberVerified: Bool? { self[.phoneNumberVerified] }
+
+    /// The user's gender.
+    var gender: String? { self[.gender] }
+    
+    /// The user's birth date.
+    var birthdate: String? { self[.birthdate] }
+
+    /// The user's timezone code.
+    var zoneinfo: String? { self[.zoneinfo] }
+    
+    /// The user's timezone, represented as a TimeZone object.
+    var timeZone: TimeZone? {
+        guard let zoneinfo = zoneinfo else {
+            return nil
+        }
+
+        return TimeZone(identifier: zoneinfo)
+    }
+    
+    /// The user's locale.
+    var locale: String? { self[.locale] }
+    
+    /// The user's locale, represnted as a Locale object.
+    var userLocale: Locale? {
+        guard let locale = locale else {
+            return nil
+        }
+
+        return Locale(identifier: locale)
+    }
+}
