@@ -79,7 +79,7 @@ public class WebAuthentication {
         }
     }
     
-    lazy var hiddenWindow: WindowAnchor = {
+    lazy var logoutWindow: WindowAnchor = {
         let window = WindowAnchor()
         
         #if os(iOS)
@@ -172,16 +172,16 @@ public class WebAuthentication {
             cancel()
         }
         
+        logoutWindow.makeKey()
         #if os(iOS)
-        hiddenWindow.makeKeyAndVisible()
+        logoutWindow.isHidden = true
         #elseif os(macOS)
         hiddenWindow.setIsVisible(true)
-        hiddenWindow.makeKey()
         #endif
         
         provider = createWebAuthenticationProvider(flow: flow,
                                                    logoutFlow: logoutFlow,
-                                                   from: hiddenWindow,
+                                                   from: logoutWindow,
                                                    delegate: self)
         
         self.logoutCompletionBlock = completion

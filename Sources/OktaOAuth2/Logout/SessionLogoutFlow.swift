@@ -32,31 +32,27 @@ public protocol SessionLogoutFlowDelegate: LogoutFlowDelegate {
     ///   - urlComponents: A `URLComponents` instance that represents the logout URL, prior to conversion to a URL.
     func logout<Flow: SessionLogoutFlow>(flow: Flow, customizeUrl urlComponents: inout URLComponents)
     
+    /// Called when the logout URL has been created, indicating the URL should be presented to the user.
+    /// - Parameters:
+    ///   - flow: The session logout flow.
+    ///   - url: The logout URL to display in a browser to the user.
     func logout<Flow: SessionLogoutFlow>(flow: Flow, shouldLogoutUsing url: URL)
 }
 
 /// An logout flow class that implements the Session Logout Flow.
 ///
-/// The Session Logout Flow permits a user to authenticate using a web browser redirect model, where an initial authentication URL is loaded in a browser, they log out through some external service, after which their browser is redirected to a URL whose scheme matches the one defined in the client configuration.
+/// The Session Logout Flow permits a user to logout using a web browser redirect model, where an initial logout URL is loaded in a browser, they log out through some external service, after which their browser is redirected to a URL whose scheme matches the one defined in the client configuration.
 ///
 /// You can create an instance of  ``SessionLogoutFlow/Configuration-swift.struct`` to define your logout settings, and supply that to the initializer, along with a reference to your OAuth2Client for performing key operations and requests. Alternatively, you can use any of the convenience initializers to simplify the process.
 ///
 /// As an example, we'll use Swift Concurrency, since these asynchronous methods can be used inline easily, though ``SessionLogoutFlow`` can just as easily be used with completion blocks or through the use of the ``SessionLogoutFlowDelegate``.
 ///
 /// ```swift
-/// let flow = AuthorizationCodeFlow(
-///     issuer: URL(string: "https://example.okta.com")!,
-///     clientId: "abc123client",
-///     scopes: "openid offline_access email profile",
-///     redirectUri: URL(string: "com.example.app:/callback"))
+/// let logoutFlow = SessionLogoutFlow(issuer: issuer,
+///                         logoutRedirectUri: URL(string: "com.example.app:/logout")!)
 ///
-/// // Create the authorization URL. Open this in a browser.
+/// // Create the logout URL. Open this in a browser.
 /// let authorizeUrl = try await flow.resume()
-///
-/// // Once the browser redirects to the callback scheme
-/// // from the redirect URI, use that to resume the flow.
-/// let redirectUri: URL
-/// let token = try await flow.resume(with: redirectUri)
 /// ```
 public class SessionLogoutFlow: LogoutFlow {
     /// Indicates if this flow is currently in progress.
@@ -95,10 +91,10 @@ public class SessionLogoutFlow: LogoutFlow {
         }
     }
     
-    /// The OAuth2Client this authentication flow will use.
+    /// The OAuth2Client this logout flow will use.
     public let client: OAuth2Client
     
-    /// The configuration used when constructing this authentication flow.
+    /// The configuration used when constructing this logout flow.
     public let configuration: Configuration
     
     public let delegateCollection = DelegateCollection<SessionLogoutFlowDelegate>()
@@ -125,7 +121,7 @@ public class SessionLogoutFlow: LogoutFlow {
     
     /// Initializer to construct a logout flow from a pre-defined configuration and client.
     /// - Parameters:
-    ///   - configuration: The configuration to use for this authentication flow.
+    ///   - configuration: The configuration to use for this logout flow.
     ///   - client: The `OAuth2Client` to use with this flow.
     public init(_ configuration: Configuration, client: OAuth2Client) {
         self.client = client
@@ -238,8 +234,8 @@ extension SessionLogoutFlow: OAuth2ClientDelegate {
 }
 
 private extension SessionLogoutFlow.Configuration {
-    func authenticationUrlComponents(from authenticationUrl: URL, using context: SessionLogoutFlow.Context) throws -> URLComponents {
-        guard var components = URLComponents(url: authenticationUrl, resolvingAgainstBaseURL: true)
+    func logoutUrlComponents(from logoutUrl: URL, using context: SessionLogoutFlow.Context) throws -> URLComponents {
+        guard var components = URLComponents(url: logoutUrl, resolvingAgainstBaseURL: true)
         else {
             throw OAuth2Error.invalidUrl
         }
@@ -264,7 +260,7 @@ private extension SessionLogoutFlow.Configuration {
 
 private extension SessionLogoutFlow {
     func createLogoutURL(from url: URL, using context: SessionLogoutFlow.Context) throws -> URL {
-        var components = try configuration.authenticationUrlComponents(from: url, using: context)
+        var components = try configuration.logoutUrlComponents(from: url, using: context)
         delegateCollection.invoke { $0.logout(flow: self, customizeUrl: &components) }
         
         guard let url = components.url else {

@@ -42,7 +42,7 @@
 		96011A09276A81DA0008DD11 /* TokenDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TokenDetailViewController.swift; sourceTree = "<group>"; };
 		96011A0A276A81DA0008DD11 /* ProfileTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileTableViewController.swift; sourceTree = "<group>"; };
 		96011A122784CB860008DD11 /* SampleCode.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; name = SampleCode.xcconfig; path = ../Shared/SampleCode.xcconfig; sourceTree = "<group>"; };
-		9617AD4C276914BE00D74E7E /* DeviceAuthSignIn (tvOS).app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "DeviceAuthSignIn (tvOS).app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		9617AD4C276914BE00D74E7E /* Device Auth Sign In.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Device Auth Sign In.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		9617AD4F276914BE00D74E7E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		9617AD51276914BE00D74E7E /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		9617AD54276914BE00D74E7E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -112,7 +112,7 @@
 		9617AD4D276914BE00D74E7E /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				9617AD4C276914BE00D74E7E /* DeviceAuthSignIn (tvOS).app */,
+				9617AD4C276914BE00D74E7E /* Device Auth Sign In.app */,
 				9617AD5F276914C200D74E7E /* DeviceAuthSignInTests (tvOS).xctest */,
 				9617AD69276914C200D74E7E /* DeviceAuthSignInUITests (tvOS).xctest */,
 			);
@@ -171,7 +171,7 @@
 				96011A0727696CDC0008DD11 /* OktaOAuth2 */,
 			);
 			productName = DeviceAuthSignIn;
-			productReference = 9617AD4C276914BE00D74E7E /* DeviceAuthSignIn (tvOS).app */;
+			productReference = 9617AD4C276914BE00D74E7E /* Device Auth Sign In.app */;
 			productType = "com.apple.product-type.application";
 		};
 		9617AD5E276914C200D74E7E /* DeviceAuthSignInTests (tvOS) */ = {
@@ -480,7 +480,7 @@
 				);
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.example.okta-sample.DeviceAuthSignIn${SAMPLE_CODE_DISAMBIGUATOR}";
-				PRODUCT_NAME = "DeviceAuthSignIn (tvOS)";
+				PRODUCT_NAME = "Device Auth Sign In";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 3;
@@ -505,7 +505,7 @@
 				);
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.example.okta-sample.DeviceAuthSignIn${SAMPLE_CODE_DISAMBIGUATOR}";
-				PRODUCT_NAME = "DeviceAuthSignIn (tvOS)";
+				PRODUCT_NAME = "Device Auth Sign In";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 3;
@@ -532,7 +532,7 @@
 				SWIFT_EMIT_LOC_STRINGS = NO;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 3;
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/DeviceAuthSignIn (tvOS).app/DeviceAuthSignIn (tvOS)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Device Auth Sign In.app/Device Auth Sign In";
 				TVOS_DEPLOYMENT_TARGET = 15.0;
 			};
 			name = Debug;
@@ -557,7 +557,7 @@
 				SWIFT_EMIT_LOC_STRINGS = NO;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 3;
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/DeviceAuthSignIn (tvOS).app/DeviceAuthSignIn (tvOS)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Device Auth Sign In.app/Device Auth Sign In";
 				TVOS_DEPLOYMENT_TARGET = 15.0;
 			};
 			name = Release;
