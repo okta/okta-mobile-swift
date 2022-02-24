@@ -56,6 +56,7 @@ class LandingViewController: UIViewController {
         let actionsheet = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
         actionsheet.popoverPresentationController?.barButtonItem = sender as? UIBarButtonItem
 
+        #if targetEnvironment(simulator) && DEBUG
         actionsheet.addAction(.init(title: "Print request log to console", style: .default, handler: { _ in
             print(URLSessionAudit.shared)
         }))
@@ -65,7 +66,8 @@ class LandingViewController: UIViewController {
         actionsheet.addAction(.init(title: "Toggle automatic logging to console", style: .default, handler: { _ in
             URLSessionAudit.shared.logToConsole = !URLSessionAudit.shared.logToConsole
         }))
-        
+        #endif
+
         actionsheet.addAction(.init(title: "Cancel", style: .cancel))
         
         present(actionsheet, animated: true)
