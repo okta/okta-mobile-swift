@@ -18,9 +18,9 @@ final class ProfileDetailsViewModel: ObservableObject {
     var givenName: String? { userInfo?.givenName }
     var familyName: String? { userInfo?.familyName }
     var userLocale: String? { userInfo?.userLocale?.identifier }
-    var timezone: String? { userInfo?.zoneInfo?.identifier }
+    var timezone: String? { userInfo?.timeZone?.identifier }
     var username: String? { userInfo?.preferredUsername }
-    var userId: String? { userInfo?.sub }
+    var userId: String? { userInfo?.subject }
     var createdAt: String? {
         userInfo?.updatedAt.flatMap {
             self.dateFormatter.string(from: $0)

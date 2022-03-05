@@ -130,8 +130,8 @@ public class Token: Codable, Equatable, Hashable, Identifiable, Expires {
         let context: Context
         if container.contains(.context) {
             context = try container.decode(Context.self, forKey: .context)
-        } else if let baseUrl = decoder.userInfo[.baseURL] as? URL {
-            context = Context(baseURL: baseUrl,
+        } else if let configuration = decoder.userInfo[.apiClientConfiguration] as? OAuth2Client.Configuration {
+            context = Context(configuration: configuration,
                               clientSettings: decoder.userInfo[.clientSettings])
         } else {
             throw TokenError.contextMissing
@@ -155,13 +155,13 @@ extension Token {
     /// This includes information such as the ``baseURL`` where operations related to this token should be performed.
     public struct Context: Codable, Equatable, Hashable {
         /// The base URL from which this token was issued.
-        public let baseURL: URL
+        public let configuration: OAuth2Client.Configuration
         
         /// Settings required to be supplied to the authorization server when refreshing this token.
         let clientSettings: [String:String]?
         
-        init(baseURL: URL, clientSettings: Any?) {
-            self.baseURL = baseURL
+        init(configuration: OAuth2Client.Configuration, clientSettings: Any?) {
+            self.configuration = configuration
             
             if let settings = clientSettings as? [String:String]? {
                 self.clientSettings = settings
@@ -193,7 +193,7 @@ extension Token {
 }
 
 extension CodingUserInfoKey {
-    public static let baseURL = CodingUserInfoKey(rawValue: "baseURL")!
+    public static let apiClientConfiguration = CodingUserInfoKey(rawValue: "apiClientConfiguration")!
     public static let clientSettings = CodingUserInfoKey(rawValue: "clientSettings")!
 }
 

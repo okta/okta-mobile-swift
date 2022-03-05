@@ -7,7 +7,15 @@ final class OAuth2ClientTests: XCTestCase {
     let redirectUri = URL(string: "com.example:/callback")!
     let urlSession = URLSessionMock()
     var client: OAuth2Client!
-    let token = Token(issuedAt: Date(),
+    let configuration = OAuth2Client.Configuration(baseURL: URL(string: "https://example.com")!,
+                                                   clientId: "clientid",
+                                                   scopes: "openid")
+    var token: Token!
+
+    override func setUpWithError() throws {
+        client = OAuth2Client(configuration, session: urlSession)
+        
+        token = Token(issuedAt: Date(),
                       tokenType: "Bearer",
                       expiresIn: 300,
                       accessToken: "abcd123",
@@ -15,15 +23,12 @@ final class OAuth2ClientTests: XCTestCase {
                       refreshToken: nil,
                       idToken: nil,
                       deviceSecret: nil,
-                      context: Token.Context(baseURL: URL(string: "https://example.com")!,
+                      context: Token.Context(configuration: self.configuration,
                                              clientSettings: [ "client_id": "clientid" ]))
-
-    override func setUpWithError() throws {
-        client = OAuth2Client(baseURL: issuer, session: urlSession)
     }
 
     func testOpenIDConfiguration() throws {
-        urlSession.expect("https://example.com/oauth2/default/.well-known/openid-configuration",
+        urlSession.expect("https://example.com/.well-known/openid-configuration",
                           data: try data(from: .module, for: "openid-configuration", in: "MockResponses"),
                           contentType: "application/json")
         
@@ -44,10 +49,13 @@ final class OAuth2ClientTests: XCTestCase {
         
         XCTAssertNotNil(config)
         XCTAssertEqual(config?.authorizationEndpoint.absoluteString,
-                       "https://example.okta.com/oauth2/v1/authorize")
+                       "https://example.com/oauth2/v1/authorize")
     }
     
     func testRevoke() throws {
+        urlSession.expect("https://example.com/.well-known/openid-configuration",
+                          data: try data(from: .module, for: "openid-configuration", in: "MockResponses"),
+                          contentType: "application/json")
         urlSession.expect("https://example.com/oauth2/default/v1/revoke",
                           data: Data())
         
@@ -66,6 +74,9 @@ final class OAuth2ClientTests: XCTestCase {
     }
 
     func testRefresh() throws {
+        urlSession.expect("https://example.com/.well-known/openid-configuration",
+                          data: try data(from: .module, for: "openid-configuration", in: "MockResponses"),
+                          contentType: "application/json")
         urlSession.expect("https://example.com/oauth2/default/v1/token",
                           data: try data(from: .module, for: "token", in: "MockResponses"))
         
@@ -94,6 +105,9 @@ final class OAuth2ClientTests: XCTestCase {
     #if swift(>=5.5.1)
     @available(iOS 15.0, tvOS 15.0, macOS 12.0, watchOS 8, *)
     func testRefreshAsync() async throws {
+        urlSession.expect("https://example.com/.well-known/openid-configuration",
+                          data: try data(from: .module, for: "openid-configuration", in: "MockResponses"),
+                          contentType: "application/json")
         urlSession.expect("https://example.com/oauth2/default/v1/token",
                           data: try data(from: .module, for: "token", in: "MockResponses"))
         
@@ -103,6 +117,9 @@ final class OAuth2ClientTests: XCTestCase {
 
     @available(iOS 15.0, tvOS 15.0, macOS 12.0, watchOS 8, *)
     func testRevokeAsync() async throws {
+        urlSession.expect("https://example.com/.well-known/openid-configuration",
+                          data: try data(from: .module, for: "openid-configuration", in: "MockResponses"),
+                          contentType: "application/json")
         urlSession.expect("https://example.com/oauth2/default/v1/revoke",
                           data: Data())
 

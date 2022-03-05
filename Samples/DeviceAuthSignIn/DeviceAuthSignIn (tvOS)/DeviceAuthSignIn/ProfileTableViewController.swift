@@ -81,11 +81,11 @@ class ProfileTableViewController: UITableViewController {
                 .init(kind: .rightDetail, id: "givenName", title: "Given name", detail: userInfo.givenName),
                 .init(kind: .rightDetail, id: "familyName", title: "Family name", detail: userInfo.familyName),
                 .init(kind: .rightDetail, id: "locale", title: "Locale", detail: userInfo.userLocale?.identifier ?? "N/A"),
-                .init(kind: .rightDetail, id: "timezone", title: "Timezone", detail: userInfo.zoneInfo?.identifier ?? "N/A")
+                .init(kind: .rightDetail, id: "timezone", title: "Timezone", detail: userInfo.timeZone?.identifier ?? "N/A")
             ],
             .details: [
                 .init(kind: .rightDetail, id: "username", title: "Username", detail: userInfo.preferredUsername),
-                .init(kind: .rightDetail, id: "userId", title: "User ID", detail: userInfo.sub),
+                .init(kind: .rightDetail, id: "userId", title: "User ID", detail: userInfo.subject),
                 .init(kind: .rightDetail, id: "createdAt", title: "Created at", detail: (userInfo.updatedAt != nil) ? dateFormatter.string(from: userInfo.updatedAt!) : "N/A"),
                 .init(kind: .disclosure, id: "details", title: "Token details"),
                 .init(kind: .action, id: "refresh", title: "Refresh")

@@ -16,6 +16,10 @@ import Foundation
 import FoundationNetworking
 #endif
 
+public protocol APIClientConfiguration: AnyObject {
+    var baseURL: URL { get }
+}
+
 /// Protocol defining the interfaces and capabilities that API clients can conform to.
 ///
 /// This provides a common pattern for network operations to be performed, and to centralize boilerplate handling of URL requests, provide customization extensions, and normalize response processing and argument handling.
@@ -89,24 +93,6 @@ extension APIClient {
     public var additionalHttpHeaders: [String:String]? { nil }
     public var requestIdHeader: String? { "x-okta-request-id" }
     public var userAgent: String { SDKVersion.userAgent }
-    
-    public func decode<T>(_ type: T.Type, from data: Data, userInfo: [CodingUserInfoKey:Any]? = nil) throws -> T where T: Decodable {
-        var info: [CodingUserInfoKey:Any] = userInfo ?? [:]
-        if info[.baseURL] == nil {
-            info[.baseURL] = baseURL
-        }
-        
-        let jsonDecoder: JSONDecoder
-        if let jsonType = type as? JSONDecodable.Type {
-            jsonDecoder = jsonType.jsonDecoder
-        } else {
-            jsonDecoder = defaultJSONDecoder
-        }
-        
-        jsonDecoder.userInfo = info
-        
-        return try jsonDecoder.decode(type, from: data)
-    }
     
     public func error(from data: Data) -> Error? {
         defaultJSONDecoder.userInfo = [:]
@@ -276,7 +262,7 @@ let defaultJSONEncoder: JSONEncoder = {
     return encoder
 }()
 
-fileprivate let defaultJSONDecoder: JSONDecoder = {
+let defaultJSONDecoder: JSONDecoder = {
     let decoder = JSONDecoder()
     decoder.dateDecodingStrategy = .formatted(defaultIsoDateFormatter)
     decoder.keyDecodingStrategy = .convertFromSnakeCase

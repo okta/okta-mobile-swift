@@ -20,14 +20,15 @@ import FoundationNetworking
 
 class URLSessionMock: URLSessionProtocol {
     struct Call {
+        let url: String
         let data: Data?
         let response: HTTPURLResponse?
         let error: Error?
     }
     
-    private var calls: [String: Call] = [:]
-    func expect(_ url: String, call: Call) {
-        calls[url] = call
+    private(set) var calls: [Call] = []
+    func expect(call: Call) {
+        calls.append(call)
     }
     
     var asyncTasks: Bool = true
@@ -43,17 +44,19 @@ class URLSessionMock: URLSessionProtocol {
                                        httpVersion: "http/1.1",
                                        headerFields: ["Content-Type": contentType])
         
-        expect(url, call: Call(data: data,
-                               response: response,
-                               error: error))
+        expect(call: Call(url: url,
+                          data: data,
+                          response: response,
+                          error: error))
     }
 
-    func call(for url: String) -> Call? {
-        return calls.removeValue(forKey: url)
+    func nextCall() -> Call? {
+        guard calls.count > 0 else { return nil }
+        return calls.remove(at: 0)
     }
     
     func dataTaskWithRequest(_ request: URLRequest, completionHandler: @escaping (Data?, URLResponse?, Error?) -> Void) -> URLSessionDataTaskProtocol {
-        let response = call(for: request.url!.absoluteString)
+        let response = nextCall()
         return URLSessionDataTaskMock(session: self,
                                       data: response?.data,
                                       response: response?.response,
@@ -62,7 +65,7 @@ class URLSessionMock: URLSessionProtocol {
     }
 
     func dataTask(with request: URLRequest, completionHandler: @escaping (Data?, URLResponse?, Error?) -> Void) -> URLSessionDataTaskProtocol {
-        let response = call(for: request.url!.absoluteString)
+        let response = nextCall()
         return URLSessionDataTaskMock(session: self,
                                       data: response?.data,
                                       response: response?.response,
@@ -73,7 +76,7 @@ class URLSessionMock: URLSessionProtocol {
     #if swift(>=5.5.1)
     @available(iOS 15.0, tvOS 15.0, macOS 12.0, watchOS 8, *)
     func data(for request: URLRequest, delegate: URLSessionTaskDelegate?) async throws -> (Data, URLResponse) {
-        let response = call(for: request.url!.absoluteString)
+        let response = nextCall()
         if let error = response?.error {
             throw error
         }

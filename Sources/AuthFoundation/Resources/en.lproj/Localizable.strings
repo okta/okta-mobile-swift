@@ -11,6 +11,7 @@
 "server_error_description" = "Received an error from the server: %@";
 "status_code_description" = "Received HTTP %d response code.";
 "unknown_description" = "An unknown error was encountered.";
+"validation_error" = "Could not validate the received token.";
 
 /* OAuth2Error */
 "cannot_compose_url_description" = "Cannot compose a URL to authenticate with.";
@@ -18,3 +19,4 @@
 "oauth2_error_code_description" = "Authentication error code %@.";
 "missing_token_description" = "Missing %@ token.";
 "error_description" = "Error: %@";
+"signature_invalid" = "Could not verify the token's signature.";

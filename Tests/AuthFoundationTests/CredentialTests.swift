@@ -27,7 +27,9 @@ final class CredentialTests: XCTestCase {
                       refreshToken: nil,
                       idToken: nil,
                       deviceSecret: nil,
-                      context: Token.Context(baseURL: URL(string: "https://example.com")!,
+                      context: Token.Context(configuration: .init(baseURL: URL(string: "https://example.com/oauth2/default")!,
+                                                                  clientId: "clientid",
+                                                                  scopes: "openid"),
                                              clientSettings: [ "client_id": "foo" ]))
 
     override func setUpWithError() throws {
@@ -41,6 +43,9 @@ final class CredentialTests: XCTestCase {
     }
     
     func testRevoke() throws {
+        urlSession.expect("https://example.com/oauth2/default/.well-known/openid-configuration",
+                          data: try data(from: .module, for: "openid-configuration", in: "MockResponses"),
+                          contentType: "application/json")
         urlSession.expect("https://example.com/oauth2/default/v1/revoke",
                           data: Data())
         
@@ -59,6 +64,9 @@ final class CredentialTests: XCTestCase {
     }
     
     func testRefresh() throws {
+        urlSession.expect("https://example.com/oauth2/default/.well-known/openid-configuration",
+                          data: try data(from: .module, for: "openid-configuration", in: "MockResponses"),
+                          contentType: "application/json")
         urlSession.expect("https://example.com/oauth2/default/v1/token",
                           data: try data(from: .module, for: "token", in: "MockResponses"))
         
@@ -85,6 +93,9 @@ final class CredentialTests: XCTestCase {
     #if swift(>=5.5.1)
     @available(iOS 15.0, tvOS 15.0, macOS 12.0, watchOS 8, *)
     func testRefreshAsync() async throws {
+        urlSession.expect("https://example.com/oauth2/default/.well-known/openid-configuration",
+                          data: try data(from: .module, for: "openid-configuration", in: "MockResponses"),
+                          contentType: "application/json")
         urlSession.expect("https://example.com/oauth2/default/v1/token",
                           data: try data(from: .module, for: "token", in: "MockResponses"))
         

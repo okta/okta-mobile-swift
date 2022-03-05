@@ -70,7 +70,7 @@ public class Credential {
     /// - Parameter token: Token to create a credential for.
     public convenience init(token: Token) {
         let urlSession = type(of: self).credentialDataSource.urlSession(for: token)
-        self.init(token: token, oauth2: OAuth2Client(baseURL: token.context.baseURL,
+        self.init(token: token, oauth2: OAuth2Client(token.context.configuration,
                                                      session: urlSession))
     }
     

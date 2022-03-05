@@ -8,9 +8,15 @@ final class OAuth2ClientTests: XCTestCase {
     let redirectUri = URL(string: "com.example:/callback")!
     let urlSession = URLSessionMock()
     var client: OAuth2Client!
+    var openIdConfiguration: OpenIdConfiguration!
     
     override func setUpWithError() throws {
-        client = OAuth2Client(baseURL: issuer, session: urlSession)
+        client = OAuth2Client(baseURL: issuer, clientId: "theClientId", scopes: "openid profile offline_access", session: urlSession)
+        openIdConfiguration = try OpenIdConfiguration.jsonDecoder.decode(
+            OpenIdConfiguration.self,
+            from: try data(from: .module,
+                           for: "openid-configuration",
+                           in: "MockResponses"))
     }
 
     func testAuthorizationCodeConstructor() throws {
@@ -23,8 +29,8 @@ final class OAuth2ClientTests: XCTestCase {
     
     func testExchange() throws {
         let pkce = PKCE()
-        let request = AuthorizationCodeFlow.TokenRequest(clientId: "client_id",
-                                                         clientSecret: nil,
+        let request = AuthorizationCodeFlow.TokenRequest(openIdConfiguration: openIdConfiguration,
+                                                         clientId: "client_id",
                                                          scope: "openid profile offline_access",
                                                          redirectUri: redirectUri.absoluteString,
                                                          grantType: .authorizationCode,
@@ -53,9 +59,9 @@ final class OAuth2ClientTests: XCTestCase {
         XCTAssertNotNil(token)
         XCTAssertEqual(token?.tokenType, "Bearer")
         XCTAssertEqual(token?.expiresIn, 3600)
-        XCTAssertEqual(token?.accessToken, "theaccesstoken")
+        XCTAssertEqual(token?.accessToken, JWT.mockAccessToken)
         XCTAssertEqual(token?.refreshToken, "therefreshtoken")
-        XCTAssertEqual(token?.idToken, "theidtoken")
+        XCTAssertNotNil(token?.idToken)
         XCTAssertEqual(token?.scope, "openid profile offline_access")
     }
 }

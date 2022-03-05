@@ -1,5 +1,5 @@
 //
-// Copyright (c) 2021-Present, Okta, Inc. and/or its affiliates. All rights reserved.
+// Copyright (c) 2022-Present, Okta, Inc. and/or its affiliates. All rights reserved.
 // The Okta software accompanied by this notice is provided pursuant to the Apache License, Version 2.0 (the "License.")
 //
 // You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0.
@@ -11,16 +11,3 @@
 //
 
 import Foundation
-
-struct OpenIdConfigurationRequest {
-    let url: URL
-    
-    init(baseURL: URL) {
-        url = baseURL.appendingPathComponent(".well-known/openid-configuration")
-    }
-}
-
-extension OpenIdConfigurationRequest: APIRequest {
-    var httpMethod: APIRequestMethod { .get }
-    var cachePolicy: URLRequest.CachePolicy { .returnCacheDataElseLoad }
-}

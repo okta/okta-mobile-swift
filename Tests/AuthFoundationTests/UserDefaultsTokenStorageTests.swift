@@ -26,7 +26,9 @@ final class UserDefaultTokenStorageTests: XCTestCase {
                       refreshToken: nil,
                       idToken: nil,
                       deviceSecret: nil,
-                      context: Token.Context(baseURL: URL(string: "https://example.com")!,
+                      context: Token.Context(configuration: .init(baseURL: URL(string: "https://example.com")!,
+                                                                  clientId: "clientid",
+                                                                  scopes: "openid"),
                                              clientSettings: nil))
 
     let newToken = Token(issuedAt: Date(),
@@ -37,7 +39,9 @@ final class UserDefaultTokenStorageTests: XCTestCase {
                       refreshToken: nil,
                       idToken: nil,
                       deviceSecret: nil,
-                      context: Token.Context(baseURL: URL(string: "https://example.com")!,
+                      context: Token.Context(configuration: .init(baseURL: URL(string: "https://example.com")!,
+                                                                  clientId: "clientid",
+                                                                  scopes: "openid"),
                                              clientSettings: nil))
 
     override func setUpWithError() throws {

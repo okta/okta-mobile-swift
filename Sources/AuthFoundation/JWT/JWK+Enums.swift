@@ -12,16 +12,27 @@
 
 import Foundation
 
-extension UserInfo {
-    struct Request {
-        let openIdConfiguration: OpenIdConfiguration
-        let token: Token
+extension JWK {
+    public enum KeyType: String, Codable {
+        case ellipticCurve = "EC"
+        case rsa = "RSA"
+        case octetSequence = "oct"
     }
-}
+    
+    public enum Usage: String, Codable {
+        case signature = "sig"
+        case encryption = "enc"
+    }
 
-extension UserInfo.Request: APIRequest, OAuth2APIRequest {
-    var httpMethod: APIRequestMethod { .get }
-    var url: URL { openIdConfiguration.userinfoEndpoint }
-    var acceptsType: APIContentType? { .json }
-    var authorization: APIAuthorization? { token }
+    public enum Algorithm: String, Codable {
+        case hs256 = "HS256"
+        case hs384 = "HS384"
+        case hs512 = "HS512"
+        case rs256 = "RS256"
+        case rs384 = "RS384"
+        case rs512 = "RS512"
+        case es256 = "ES256"
+        case es384 = "ES384"
+        case es512 = "ES512"
+    }
 }

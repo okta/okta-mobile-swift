@@ -18,6 +18,34 @@ extension OAuth2Client {
         send(request, completion: completion)
     }
     
+    func verify(result: Result<APIResponse<Token>, APIClientError>) -> Result<Token, APIClientError> {
+        guard case let .success(response) = result,
+              let idToken = response.result.idToken
+        else {
+            switch result {
+            case .success(let response):
+                return .success(response.result)
+            case .failure(let error):
+                return .failure(error)
+            }
+        }
+        
+        do {
+            let jwt = try JWT(idToken)
+            try validate(jwt)
+            
+            if let key = jwks?[jwt.header.keyId],
+               !(try JWT.validator.verify(token: jwt, using: key))
+            {
+                return .failure(.validation(error: OAuth2Error.signatureInvalid))
+            }
+        } catch {
+            return .failure(.validation(error: error))
+        }
+
+        return .success(response.result)
+    }
+    
     func device(authorize request: DeviceAuthorizationFlow.AuthorizeRequest, completion: @escaping (Result<APIResponse<DeviceAuthorizationFlow.Context>, APIClientError>) -> Void) {
         send(request, completion: completion)
     }

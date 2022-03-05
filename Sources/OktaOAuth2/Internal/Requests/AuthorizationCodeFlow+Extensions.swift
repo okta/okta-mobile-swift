@@ -13,7 +13,7 @@
 import Foundation
 import AuthFoundation
 
-extension AuthorizationCodeFlow.Configuration {
+extension AuthorizationCodeFlow {
     func authenticationUrlComponents(from authenticationUrl: URL, using context: AuthorizationCodeFlow.Context) throws -> URLComponents {
         guard var components = URLComponents(url: authenticationUrl, resolvingAgainstBaseURL: true)
         else {
@@ -31,8 +31,8 @@ extension AuthorizationCodeFlow.Configuration {
     
     private func queryParameters(using context: AuthorizationCodeFlow.Context) -> [String:String] {
         var parameters = additionalParameters ?? [:]
-        parameters["client_id"] = clientId
-        parameters["scope"] = scopes
+        parameters["client_id"] = client.configuration.clientId
+        parameters["scope"] = client.configuration.scopes
         parameters["redirect_uri"] = redirectUri.absoluteString
         parameters["response_type"] = responseType.rawValue
         parameters["state"] = context.state
@@ -44,11 +44,9 @@ extension AuthorizationCodeFlow.Configuration {
         
         return parameters
     }
-}
 
-extension AuthorizationCodeFlow {
     func createAuthenticationURL(from authenticationUrl: URL, using context: AuthorizationCodeFlow.Context) throws -> URL {
-        var components = try configuration.authenticationUrlComponents(from: authenticationUrl, using: context)
+        var components = try authenticationUrlComponents(from: authenticationUrl, using: context)
         delegateCollection.invoke { $0.authentication(flow: self, customizeUrl: &components) }
 
         guard let url = components.url else {

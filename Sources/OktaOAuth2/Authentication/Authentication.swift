@@ -13,8 +13,8 @@
 import Foundation
 import AuthFoundation
 
-/// Abstract base protocol for AuthenticationFlow instances to use for their backing configuration.
-public protocol AuthenticationConfiguration {}
+///// Abstract base protocol for AuthenticationFlow instances to use for their backing configuration.
+//public protocol AuthenticationConfiguration {}
 
 /// A common delegate protocol that all authentication flows should support.
 public protocol AuthenticationDelegate: AnyObject {
@@ -35,11 +35,6 @@ public protocol AuthenticationDelegate: AnyObject {
 ///
 /// OAuth2 supports a variety of authentication flows, each with its own capabilities, configuration, and limitations. To normalize these differences, the AuthenticationFlow protocol is used to represent the common capabilities provided by all flows.
 public protocol AuthenticationFlow: AnyObject, UsesDelegateCollection {
-    associatedtype AuthConfiguration where AuthConfiguration: AuthenticationConfiguration
-    
-    /// The client configuration for this flow.
-    var configuration: AuthConfiguration { get }
-    
     /// Indicates if this flow is currently authenticating.
     var isAuthenticating: Bool { get }
     

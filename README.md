@@ -63,7 +63,7 @@ The simplest way to integrate authentication in your app is with OIDC through a 
 
 #### Configure your OIDC Settings
 
-Before authenticating your user, you need to create your `AuthorizationCodeFlow.Configuration`, using the settings defined in your application in the Okta Developer Console. The simplest approach is to use a `Okta.plist` configuration file to specify these settings. Ensure one is created with the following fields:
+Before authenticating your user, you need to create your client configuration using the settings defined in your application in the Okta Developer Console. The simplest approach is to use a `Okta.plist` configuration file to specify these settings. Ensure one is created with the following fields:
 
 ```xml
 <?xml version="1.0" encoding="UTF-8"?>

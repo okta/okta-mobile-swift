@@ -45,7 +45,6 @@ final class TokenExchangeFlowTests: XCTestCase {
     let issuer = URL(string: "https://example.okta.com")!
     let redirectUri = URL(string: "com.example:/callback")!
     let clientMock = OAuth2ClientMock()
-    var configuration: TokenExchangeFlow.Configuration!
     let urlSession = URLSessionMock()
     var client: OAuth2Client!
     var flow: TokenExchangeFlow!
@@ -53,11 +52,12 @@ final class TokenExchangeFlowTests: XCTestCase {
     private let tokens: [TokenExchangeFlow.TokenType] = [.actor(type: .deviceSecret, value: "secret"), .subject(type: .idToken, value: "id_token")]
     
     override func setUpWithError() throws {
-        configuration = TokenExchangeFlow.Configuration(clientId: "clientId",
-                                                        scopes: "profile openid device_sso",
-                                                        audience: .default)
-        client = OAuth2Client(baseURL: issuer, session: urlSession)
-        
+        client = OAuth2Client(baseURL: issuer,
+                              clientId: "clientId",
+                              scopes: "profile openid device_sso",
+                              session: urlSession)
+        JWT.validator = MockJWTValidator()
+
         urlSession.expect("https://example.okta.com/oauth2/default/.well-known/openid-configuration",
                           data: try data(from: .module, for: "openid-configuration", in: "MockResponses"),
                           contentType: "application/json")
@@ -65,9 +65,13 @@ final class TokenExchangeFlowTests: XCTestCase {
                           data: try data(from: .module, for: "token", in: "MockResponses"),
                           contentType: "application/json")
         
-        flow = TokenExchangeFlow(configuration, client: client)
+        flow = client.tokenExchangeFlow(audience: .default)
     }
     
+    override func tearDownWithError() throws {
+        JWT.resetToDefault()
+    }
+
     func testWithDelegate() throws {
         let delegate = TokenExchangeFlowDelegateRecorder()
         flow.add(delegate: delegate)

@@ -55,25 +55,33 @@ class DeviceAuthorizationFlowDelegateRecorder: DeviceAuthorizationFlowDelegate {
 final class DeviceAuthorizationFlowSuccessTests: XCTestCase {
     let issuer = URL(string: "https://example.com")!
     let clientMock = OAuth2ClientMock()
-    var configuration: DeviceAuthorizationFlow.Configuration!
     let urlSession = URLSessionMock()
     var client: OAuth2Client!
     var flow: DeviceAuthorizationFlow!
 
     override func setUpWithError() throws {
-        configuration = DeviceAuthorizationFlow.Configuration(clientId: "clientId",
-                                                            scopes: "openid profile")
-        client = OAuth2Client(baseURL: issuer, session: urlSession)
-        
+        client = OAuth2Client(baseURL: issuer,
+                              clientId: "clientId",
+                              scopes: "openid profile",
+                              session: urlSession)
+        JWT.validator = MockJWTValidator()
+
+        urlSession.expect("https://example.com/.well-known/openid-configuration",
+                          data: try data(from: .module, for: "openid-configuration", in: "MockResponses"),
+                          contentType: "application/json")
         urlSession.expect("https://example.com/oauth2/default/v1/device/authorize",
                           data: try data(from: .module, for: "device-authorize", in: "MockResponses"),
                           contentType: "application/json")
         urlSession.expect("https://example.com/oauth2/default/v1/token",
                           data: try data(from: .module, for: "token", in: "MockResponses"),
                           contentType: "application/json")
-        flow = DeviceAuthorizationFlow(configuration, client: client)
+        flow = client.deviceAuthorizationFlow()
     }
     
+    override func tearDownWithError() throws {
+        JWT.resetToDefault()
+    }
+
     func testWithDelegate() throws {
         let delegate = DeviceAuthorizationFlowDelegateRecorder()
         flow.add(delegate: delegate)
@@ -98,9 +106,11 @@ final class DeviceAuthorizationFlowSuccessTests: XCTestCase {
         XCTAssertEqual(delegate.context?.verificationUri.absoluteString, "https://example.okta.com/activate")
         XCTAssertTrue(delegate.started)
         
+        let context = try XCTUnwrap(delegate.context)
+
         // Exchange code
         expect = expectation(description: "Wait for timer")
-        flow.resume(with: delegate.context!) { _ in
+        flow.resume(with: context) { _ in
             expect.fulfill()
         }
         waitForExpectations(timeout: 5) { error in
@@ -133,6 +143,7 @@ final class DeviceAuthorizationFlowSuccessTests: XCTestCase {
             XCTAssertNil(error)
         }
         
+        context = try XCTUnwrap(context)
         XCTAssertEqual(flow.context?.deviceCode, context?.deviceCode)
         XCTAssertTrue(flow.isAuthenticating)
         XCTAssertNotNil(flow.context?.verificationUri)

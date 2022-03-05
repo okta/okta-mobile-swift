@@ -45,32 +45,33 @@ class WebAuthenticationProviderDelegateRecorder: WebAuthenticationProviderDelega
 class ProviderTestBase: XCTestCase {
     let issuer = URL(string: "https://example.com")!
     let redirectUri = URL(string: "com.example:/callback")!
-    var configuration: AuthorizationCodeFlow.Configuration!
     let urlSession = URLSessionMock()
     var client: OAuth2Client!
     var flow: AuthorizationCodeFlow!
     let delegate = WebAuthenticationProviderDelegateRecorder()
 
     override func setUpWithError() throws {
-        configuration = AuthorizationCodeFlow.Configuration(clientId: "clientId",
-                                                            clientSecret: nil,
-                                                            state: nil,
-                                                            scopes: "openid profile",
-                                                            responseType: .code,
-                                                            redirectUri: redirectUri,
-                                                            logoutRedirectUri: nil,
-                                                            additionalParameters: ["additional": "param"])
-        client = OAuth2Client(baseURL: issuer, session: urlSession)
+        JWT.validator = MockJWTValidator()
+
+        client = OAuth2Client(baseURL: issuer,
+                              clientId: "clientId",
+                              scopes: "openid profile",
+                              session: urlSession)
         
         urlSession.asyncTasks = false
-        urlSession.expect("https://example.com/oauth2/default/.well-known/openid-configuration",
+        urlSession.expect("https://example.com/.well-known/openid-configuration",
                           data: try data(from: .module, for: "openid-configuration", in: "MockResponses"),
                           contentType: "application/json")
         urlSession.expect("https://example.com/oauth2/default/v1/token",
                           data: try data(from: .module, for: "token", in: "MockResponses"),
                           contentType: "application/json")
-        flow = AuthorizationCodeFlow(configuration, client: client)
+        flow = client.authorizationCodeFlow(redirectUri: redirectUri,
+                                            additionalParameters: ["additional": "param"])
         delegate.reset()
+    }
+
+    override func tearDownWithError() throws {
+        JWT.resetToDefault()
     }
 }
 

@@ -41,6 +41,11 @@ final class DefaultCredentialDataSourceTests: XCTestCase {
     var dataSource: DefaultCredentialDataSource!
     let delegate = CredentialDataSourceDelegateRecorder()
 
+    let configuration = OAuth2Client.Configuration(baseURL: URL(string: "https://example.com")!,
+                                                   clientId: "clientid",
+                                                   scopes: "openid")
+    
+
     override func setUpWithError() throws {
         dataSource = DefaultCredentialDataSource()
         dataSource.delegate = delegate
@@ -58,7 +63,7 @@ final class DefaultCredentialDataSourceTests: XCTestCase {
                           refreshToken: nil,
                           idToken: nil,
                           deviceSecret: nil,
-                          context: Token.Context(baseURL: URL(string: "https://example.com")!,
+                          context: Token.Context(configuration: configuration,
                                                  clientSettings: nil))
         
         XCTAssertFalse(dataSource.hasCredential(for: token))

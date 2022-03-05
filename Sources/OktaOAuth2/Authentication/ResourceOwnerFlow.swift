@@ -22,30 +22,17 @@ import AuthFoundation
 /// As an example, we'll use Swift Concurrency, since these asynchronous methods can be used inline easily.
 ///
 /// ```swift
-/// let flow = ResourceOwnerFlow(
-///     issuer: URL(string: "https://example.okta.com")!,
-///     clientId: "abc123client",
-///     scopes: "openid offline_access email profile")
+/// let client = OAuth2Client(baseURL: URL(string: "https://example.okta.com")!,
+///                           clientId: "abc123client",
+///                           scopes: "openid offline_access email profile")
+/// let flow = client.resourceOwnerFlow()
 ///
 /// // Authenticate with a username and password.
 /// let token = try await flow.resume(username: "smeagol", password: "myprecious")
 /// ```
 public class ResourceOwnerFlow: AuthenticationFlow {
-    public typealias AuthConfiguration = ResourceOwnerFlow.Configuration
-    
-    public struct Configuration: AuthenticationConfiguration {
-        /// The client's ID.
-        public let clientId: String
-        
-        /// The scopes requested.
-        public let scopes: String
-    }
-    
     /// The OAuth2Client this authentication flow will use.
     public let client: OAuth2Client
-    
-    /// The configuration used when constructing this authentication flow.
-    public let configuration: Configuration
     
     /// Indicates whether or not this flow is currently in the process of authenticating a user.
     private(set) public var isAuthenticating: Bool = false {
@@ -71,14 +58,13 @@ public class ResourceOwnerFlow: AuthenticationFlow {
                             clientId: String,
                             scopes: String)
     {
-        self.init(Configuration(clientId: clientId,
-                                scopes: scopes),
-                  client: OAuth2Client(baseURL: issuer))
+        self.init(client: OAuth2Client(baseURL: issuer,
+                                       clientId: clientId,
+                                       scopes: scopes))
     }
     
-    public init(_ configuration: Configuration, client: OAuth2Client) {
+    public init(client: OAuth2Client) {
         self.client = client
-        self.configuration = configuration
         
         client.add(delegate: self)
     }
@@ -91,20 +77,30 @@ public class ResourceOwnerFlow: AuthenticationFlow {
     public func resume(username: String, password: String, completion: ((Result<Token,APIClientError>) -> Void)? = nil) {
         isAuthenticating = true
 
-        let request = TokenRequest(clientId: configuration.clientId,
-                                   scope: configuration.scopes,
-                                   username: username,
-                                   password: password)
-        client.exchange(token: request) { result in
-            self.reset()
-
+        client.openIdConfiguration { result in
             switch result {
+            case .success(let configuration):
+                let request = TokenRequest(openIdConfiguration: configuration,
+                                           clientId: self.client.configuration.clientId,
+                                           scope: self.client.configuration.scopes,
+                                           username: username,
+                                           password: password)
+                self.client.exchange(token: request) { result in
+                    self.reset()
+                    
+                    let result = self.client.verify(result: result)
+                    defer { completion?(result) }
+                    
+                    switch result {
+                    case .failure(let error):
+                        self.delegateCollection.invoke { $0.authentication(flow: self, received: .network(error: error)) }
+                    case .success(let response):
+                        self.delegateCollection.invoke { $0.authentication(flow: self, received: response) }
+                    }
+                }
+
             case .failure(let error):
-                self.delegateCollection.invoke { $0.authentication(flow: self, received: .network(error: error)) }
-                completion?(.failure(error))
-            case .success(let response):
-                self.delegateCollection.invoke { $0.authentication(flow: self, received: response.result) }
-                completion?(.success(response.result))
+                self.delegateCollection.invoke { $0.authentication(flow: self, received: error) }
             }
         }
     }
@@ -146,4 +142,10 @@ extension ResourceOwnerFlow: UsesDelegateCollection {
 
 extension ResourceOwnerFlow: OAuth2ClientDelegate {
     
+}
+
+extension OAuth2Client {
+    public func resourceOwnerFlow() -> ResourceOwnerFlow {
+        ResourceOwnerFlow(client: self)
+    }
 }

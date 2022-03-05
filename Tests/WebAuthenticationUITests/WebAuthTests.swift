@@ -23,24 +23,19 @@ class WebAuthenticationUITests: XCTestCase {
     private let redirectUri = URL(string: "com.example:/callback")!
     private let urlSession = URLSessionMock()
     private var flow: AuthorizationCodeFlow!
-    private var configuration: AuthorizationCodeFlow.Configuration!
     private var client: OAuth2Client!
     
     override func setUpWithError() throws {
-        configuration = AuthorizationCodeFlow.Configuration(clientId: "clientId",
-                                                            clientSecret: nil,
-                                                            state: nil,
-                                                            scopes: "openid profile",
-                                                            responseType: .code,
-                                                            redirectUri: redirectUri,
-                                                            logoutRedirectUri: nil,
-                                                            additionalParameters: ["additional": "param"])
-        client = OAuth2Client(baseURL: issuer, session: urlSession)
+        client = OAuth2Client(baseURL: issuer,
+                              clientId: "clientId",
+                              scopes: "openid profile",
+                              session: urlSession)
         
         urlSession.expect("https://example.com/oauth2/default/.well-known/openid-configuration",
                           data: try data(from: .module, for: "openid-configuration", in: "MockResponses"),
                           contentType: "application/json")
-        flow = AuthorizationCodeFlow(configuration, client: client)
+        flow = client.authorizationCodeFlow(redirectUri: redirectUri,
+                                            additionalParameters: ["additional": "param"])
     }
     
     func testStart() throws {

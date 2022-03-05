@@ -16,8 +16,8 @@ import WebAuthenticationUI
 import AuthenticationServices
 
 final class SignInViewModel: ObservableObject {
-    var clientID: String? { auth?.flow.configuration.clientId }
-    var isConfigured: Bool { auth?.flow.configuration.clientId != nil }
+    var clientID: String? { auth?.flow.client.configuration.clientId }
+    var isConfigured: Bool { auth?.flow.client.configuration.clientId != nil }
     
     @Published var presentError = false
     @Published var ephemeralSession = false

@@ -16,6 +16,10 @@ import Foundation
 import UIKit
 #endif
 
+#if os(watchOS)
+import WatchKit
+#endif
+
 private let deviceModel: String = {
     var system = utsname()
     uname(&system)
@@ -40,8 +44,10 @@ private let systemName: String = {
 }()
 
 private let systemVersion: String = {
-    #if os(iOS) || os(watchOS) || os(tvOS)
+    #if os(iOS) || os(tvOS)
         return UIDevice.current.systemVersion
+    #elseif os(watchOS)
+        return WKInterfaceDevice.current().systemVersion
     #else
         let osVersion = ProcessInfo.processInfo.operatingSystemVersion
         return "\(osVersion.majorVersion).\(osVersion.minorVersion).\(osVersion.patchVersion)"

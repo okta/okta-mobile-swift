@@ -15,19 +15,21 @@ import AuthFoundation
 
 extension DeviceAuthorizationFlow {
     struct TokenRequest {
+        let openIdConfiguration: OpenIdConfiguration
         let clientId: String
         let deviceCode: String
     }
     
     struct AuthorizeRequest {
+        let openIdConfiguration: OpenIdConfiguration
         let clientId: String
         let scope: String
     }
 }
 
-extension DeviceAuthorizationFlow.AuthorizeRequest: APIRequest, APIRequestBody {
+extension DeviceAuthorizationFlow.AuthorizeRequest: OAuth2APIRequest, APIRequestBody {
     var httpMethod: APIRequestMethod { .post }
-    var path: String { "v1/device/authorize" }
+    var url: URL { openIdConfiguration.deviceAuthorizationEndpoint ?? openIdConfiguration.issuer.appendingPathComponent("oauth2/v1/device/authorize") }
     var contentType: APIContentType? { .formEncoded }
     var acceptsType: APIContentType? { .json }
     var bodyParameters: [String : Any]? {
@@ -38,9 +40,9 @@ extension DeviceAuthorizationFlow.AuthorizeRequest: APIRequest, APIRequestBody {
     }
 }
 
-extension DeviceAuthorizationFlow.TokenRequest: TokenRequest, APIRequest, APIRequestBody, APIParsingContext {
+extension DeviceAuthorizationFlow.TokenRequest: TokenRequest, OAuth2APIRequest, APIRequestBody, APIParsingContext {
     var httpMethod: APIRequestMethod { .post }
-    var path: String { "v1/token" }
+    var url: URL { openIdConfiguration.tokenEndpoint }
     var contentType: APIContentType? { .formEncoded }
     var acceptsType: APIContentType? { .json }
     var bodyParameters: [String : Any]? {
