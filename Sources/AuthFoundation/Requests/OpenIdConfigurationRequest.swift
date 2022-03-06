@@ -12,6 +12,10 @@
 
 import Foundation
 
+#if os(Linux)
+import FoundationNetworking
+#endif
+
 struct OpenIdConfigurationRequest {
     let url: URL
     

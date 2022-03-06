@@ -12,6 +12,10 @@
 
 import Foundation
 
+#if os(Linux)
+import FoundationNetworking
+#endif
+
 extension OAuth2Client {
     struct KeysRequest {
         let openIdConfiguration: OpenIdConfiguration
