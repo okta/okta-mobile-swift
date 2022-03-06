@@ -10,9 +10,11 @@
 // See the License for the specific language governing permissions and limitations under the License.
 //
 
-#if canImport(CommonCrypto)
 import Foundation
+
+#if canImport(CommonCrypto)
 import CommonCrypto
+#endif
 
 struct DefaultJWTValidator: JWTValidator {
     var issuedAtGraceInterval: TimeInterval = 300
@@ -54,7 +56,10 @@ struct DefaultJWTValidator: JWTValidator {
     }
     
     func verify(token: JWT, using key: JWK) throws -> Bool {
+        #if canImport(CommonCrypto)
         try key.verify(token: token)
+        #else
+        throw JWTValidatorError.signatureVerificationUnavailable
+        #endif
     }
 }
-#endif
