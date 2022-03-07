@@ -75,6 +75,9 @@ final class DeviceAuthorizationFlowSuccessTests: XCTestCase {
         urlSession.expect("https://example.com/oauth2/default/v1/token",
                           data: try data(from: .module, for: "token", in: "MockResponses"),
                           contentType: "application/json")
+        urlSession.expect("https://example.com/oauth2/v1/keys",
+                          data: try data(from: .module, for: "keys", in: "MockResponses"),
+                          contentType: "application/json")
         flow = client.deviceAuthorizationFlow()
     }
     

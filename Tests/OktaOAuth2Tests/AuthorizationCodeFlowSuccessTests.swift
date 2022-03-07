@@ -69,6 +69,9 @@ final class AuthorizationCodeFlowSuccessTests: XCTestCase {
                           contentType: "application/json")
         flow = client.authorizationCodeFlow(redirectUri: redirectUri,
                                             additionalParameters: ["additional": "param"])
+        urlSession.expect("https://example.com/oauth2/v1/keys",
+                          data: try data(from: .module, for: "keys", in: "MockResponses"),
+                          contentType: "application/json")
     }
     
     override func tearDownWithError() throws {

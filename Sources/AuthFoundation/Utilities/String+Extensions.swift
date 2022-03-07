@@ -17,10 +17,10 @@ extension String {
         var result = replacingOccurrences(of: "-", with: "+")
             .replacingOccurrences(of: "_", with: "/")
 
-        let paddingCount = result.count % 4
-        for _ in 0..<paddingCount {
-            result += "="
+        while result.count % 4 != 0 {
+            result.append(contentsOf: "=")
         }
+
         return result
     }
 }

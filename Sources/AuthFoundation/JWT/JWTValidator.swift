@@ -12,6 +12,10 @@
 
 import Foundation
 
+#if os(Linux)
+public typealias OSStatus = Int32
+#endif
+
 public enum JWTValidatorError: Error {
     case invalidIssuer
     case invalidAudience
