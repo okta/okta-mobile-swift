@@ -41,13 +41,19 @@ public struct JWT: RawRepresentable, Codable, HasClaims, Expires {
     public var customClaims: [String] {
         payload.keys.filter { Claim(rawValue: $0) == nil }
     }
-
+    
+    /// Returns a claim value from this JWT token, with the given key and expected return type.
+    /// - Returns: The value for the supplied claim.
     public func value<T>(_ type: T.Type, for key: String) -> T? {
         payload[key] as? T
     }
-
+    
+    /// JWT header information describing the contents of the token.
     public struct Header: Decodable {
+        /// The ID of the key used to sign this JWT token.
         public let keyId: String
+
+        /// The signing algorithm used to sign this JWT token.
         public let algorithm: JWK.Algorithm
         
         enum CodingKeys: String, CodingKey {
@@ -66,23 +72,32 @@ public struct JWT: RawRepresentable, Codable, HasClaims, Expires {
         try? self.init(rawValue)
     }
     
+    /// Validates the claims within this JWT token, to ensure it matches the given ``OAuth2Client``.
+    /// - Parameter client: Client to validate the token's claims against.
     public func validate(using client: OAuth2Client) throws {
         try JWT.validator.validate(token: self,
                                    issuer: client.configuration.baseURL,
                                    clientId: client.configuration.clientId)
     }
     
+    /// Verifies the JWT token using the given ``JWK`` key.
+    /// - Parameter key: JWK key to use to verify this token.
+    /// - Returns: Returns whether or not signing passes for this token/key combination.
+    /// - Throws: ``JWTValidatorError``
     public func verify(using key: JWK) throws -> Bool {
         try JWT.validator.verify(token: self, using: key)
     }
     
+    /// The validator instance used to perform validation steps on JWT tokens.
+    ///
+    /// A default implementation of ``JWTValidator`` is provided and will be used if this value is not changed.
     public static var validator: JWTValidator = DefaultJWTValidator()
-    static func resetToDefault() {
-        validator = DefaultJWTValidator()
-    }
-
+    
+    /// The header portion of the JWT token.
     public let header: Header
-    private let payload: [String:Any]
+    
+    /// Designated initializer, accepting the token string.
+    /// - Parameter token: Token string.
     public init(_ token: String) throws {
         rawValue = token
         
@@ -99,6 +114,12 @@ public struct JWT: RawRepresentable, Codable, HasClaims, Expires {
         self.payload = try JSONSerialization.jsonObject(with: payloadData, options: []) as! [String:Any]
     }
     
+    private let payload: [String:Any]
+    
+    static func resetToDefault() {
+        validator = DefaultJWTValidator()
+    }
+
     static func tokenComponents(from token: String) -> [String] {
         token
             .components(separatedBy: ".")

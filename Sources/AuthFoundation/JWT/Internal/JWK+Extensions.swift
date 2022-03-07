@@ -70,10 +70,20 @@ extension JWK.Algorithm {
 }
 
 extension JWK {
-    func publicKey() throws -> SecKey {
-        guard let rsaModulus = rsaModulus?.base64URLDecoded,
-              let keyData = Data(base64Encoded: rsaModulus)
+    var rsaData: Data? {
+        guard let rsaModulus = rsaModulus,
+              let rsaExponent = rsaExponent,
+              let modulusData = Data(base64Encoded: rsaModulus),
+              let exponentData = Data(base64Encoded: rsaExponent)
         else {
+            return nil
+        }
+
+        return Data(modulus: modulusData, exponent: exponentData)
+    }
+
+    func publicKey() throws -> SecKey {
+        guard let keyData = rsaData else {
             throw JWTValidatorError.invalidKey
         }
         

@@ -37,7 +37,12 @@ class KeychainTokenStorage: TokenStorage {
     var defaultToken: Token? {
         get {
             guard let tokenId = _defaultTokenId else { return nil }
-            return try? cachedToken(with: tokenId)
+            do {
+                return try cachedToken(with: tokenId)
+            } catch {
+                // TODO: Error logging...
+            }
+            return nil
         }
         set {
             if let token = newValue {

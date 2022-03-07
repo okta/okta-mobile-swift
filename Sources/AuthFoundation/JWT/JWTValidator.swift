@@ -31,9 +31,21 @@ public enum JWTValidatorError: Error {
     case generic(error: Error)
 }
 
+/// Protocol used to implement ``JWT`` token validation and verification steps.
+///
+/// Instances of this protocol may be assigned to ``JWT/validator`` to override the mechanisms used to validate tokens.
+///
+/// > Note: A default implementation will be automatically used if this value is not changed.
 public protocol JWTValidator {
+    /// The time interval grace period that will be permitted when verifying the ``Token/issuedAt`` value.
+    ///
+    /// *Default:* 5 minutes.
     var issuedAtGraceInterval: TimeInterval { get set }
-
+    
+    /// Validates the claims in the given ``JWT`` token, using the supplied issuer and client ID values.
     func validate(token: JWT, issuer: URL, clientId: String) throws
+    
+    /// Verifies the ``JWT`` signature using the supplied ``JWK`` key.
+    /// - Returns: Returns whether or not signing passes for this token/key combination.
     func verify(token: JWT, using key: JWK) throws -> Bool
 }

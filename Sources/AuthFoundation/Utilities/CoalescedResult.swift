@@ -24,7 +24,6 @@ class CoalescedResult<T> {
             self.finish(result)
         }
     }
-    
 
     func finish(_ result: T) {
         completionHandlers.forEach { completion in

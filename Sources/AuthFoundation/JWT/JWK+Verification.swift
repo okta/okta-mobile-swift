@@ -13,6 +13,9 @@
 import Foundation
 
 extension JWK {
+    /// Attempts to verify the given token, using the appropriate signing algorithm described.
+    /// - Parameter token: The ``JWT`` token to verify.
+    /// - Returns: `true` if the token is properly signed.
     public func verify(token: JWT) throws -> Bool {
         #if canImport(CommonCrypto)
         guard let algorithm = algorithm else {

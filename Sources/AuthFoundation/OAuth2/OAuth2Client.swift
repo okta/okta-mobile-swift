@@ -148,14 +148,33 @@ public class OAuth2Client {
         if let openIdConfiguration = openIdConfiguration {
             completion(.success(openIdConfiguration))
         } else {
-            fetchOpenIdConfiguration { result in
-                switch result {
-                case .success(let response):
-                    self.openIdConfiguration = response.result
-                    
-                    completion(.success(response.result))
-                case .failure(let error):
-                    completion(.failure(.network(error: error)))
+            configurationQueue.sync {
+                guard openIdConfigurationAction == nil else {
+                    openIdConfigurationAction?.add(completion)
+                    return
+                }
+                
+                let action: CoalescedResult<Result<OpenIdConfiguration, OAuth2Error>> = CoalescedResult()
+                action.add(completion)
+                
+                openIdConfigurationAction = action
+                fetchOpenIdConfiguration { result in
+                    self.configurationQueue.sync(flags: .barrier) {
+                        self.openIdConfigurationAction = nil
+                        
+                        switch result {
+                        case .success(let response):
+                            self.openIdConfiguration = response.result
+                            
+                            self.configurationQueue.async {
+                                action.finish(.success(response.result))
+                            }
+                        case .failure(let error):
+                            self.configurationQueue.async {
+                                action.finish(.failure(.network(error: error)))
+                            }
+                        }
+                    }
                 }
             }
         }
@@ -218,6 +237,7 @@ public class OAuth2Client {
             case .failure(let error):
                 action.finish(.failure(error))
                 self.delegateCollection.invoke { $0.oauth(client: self, didRefresh: token, replacedWith: nil) }
+                token.refreshAction = nil
             }
         }
     }
@@ -302,26 +322,51 @@ public class OAuth2Client {
         }
     }
     
+    /// Retrieves the org's ``JWKS`` key configuration.
+    ///
+    /// If this value has recently been retrieved, the cached result is returned.
+    /// - Parameter completion: Completion block invoked with the result.
     public func jwks(completion: @escaping (Result<JWKS, OAuth2Error>) -> Void) {
         if let jwks = jwks {
             completion(.success(jwks))
         } else {
-            openIdConfiguration { result in
-                switch result {
-                case .success(let configuration):
-                    self.fetchKeys(KeysRequest(openIdConfiguration: configuration,
-                                               clientId: self.configuration.clientId)) { result in
-                        switch result {
-                        case .success(let response):
-                            self.jwks = response.result
-                            completion(.success(response.result))
-                            
-                        case .failure(let error):
-                            completion(.failure(.network(error: error)))
+            jwksQueue.sync {
+                guard jwksAction == nil else {
+                    jwksAction?.add(completion)
+                    return
+                }
+                
+                let action: CoalescedResult<Result<JWKS, OAuth2Error>> = CoalescedResult()
+                action.add(completion)
+                
+                jwksAction = action
+                openIdConfiguration { result in
+                    switch result {
+                    case .success(let configuration):
+                        self.fetchKeys(KeysRequest(openIdConfiguration: configuration,
+                                                   clientId: self.configuration.clientId)) { result in
+                            self.jwksQueue.sync(flags: .barrier) {
+                                self.jwksAction = nil
+
+                                switch result {
+                                case .success(let response):
+                                    self.jwks = response.result
+                                    self.jwksQueue.async {
+                                        action.finish(.success(response.result))
+                                    }
+                                case .failure(let error):
+                                    self.jwksQueue.async {
+                                        action.finish(.failure(.network(error: error)))
+                                    }
+                                }
+                            }
+                        }
+                    case .failure(let error):
+                        self.jwksAction = nil
+                        self.jwksQueue.async {
+                            action.finish(.failure(error))
                         }
                     }
-                case .failure(let error):
-                    completion(.failure(error))
                 }
             }
         }
@@ -329,6 +374,20 @@ public class OAuth2Client {
     
     // MARK: Private properties / methods
     private let delegates = DelegateCollection<OAuth2ClientDelegate>()
+
+    private lazy var configurationQueue: DispatchQueue = {
+        DispatchQueue(label: "com.okta.configurationQueue.\(baseURL.host ?? "unknown")",
+                      qos: .userInitiated,
+                      attributes: .concurrent)
+    }()
+    internal var openIdConfigurationAction: CoalescedResult<Result<OpenIdConfiguration, OAuth2Error>>?
+
+    private lazy var jwksQueue: DispatchQueue = {
+        DispatchQueue(label: "com.okta.jwksQueue.\(baseURL.host ?? "unknown")",
+                      qos: .userInitiated,
+                      attributes: .concurrent)
+    }()
+    internal var jwksAction: CoalescedResult<Result<JWKS, OAuth2Error>>?
 }
 
 #if swift(>=5.5.1)
@@ -341,6 +400,18 @@ extension OAuth2Client {
     public func openIdConfiguration() async throws -> OpenIdConfiguration {
         try await withCheckedThrowingContinuation { continuation in
             openIdConfiguration() { result in
+                continuation.resume(with: result)
+            }
+        }
+    }
+    
+    /// Asynchronously retrieves the org's ``JWKS`` key configuration.
+    ///
+    /// If this value has recently been retrieved, the cached result is returned.
+    /// - Returns: The ``JWKS`` configuration for the org identified by the client's base URL.
+    public func jwks() async throws -> JWKS {
+        try await withCheckedThrowingContinuation { continuation in
+            jwks() { result in
                 continuation.resume(with: result)
             }
         }
