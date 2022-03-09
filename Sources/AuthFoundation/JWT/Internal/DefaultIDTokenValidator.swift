@@ -16,50 +16,42 @@ import Foundation
 import CommonCrypto
 #endif
 
-struct DefaultJWTValidator: JWTValidator {
+struct DefaultIDTokenValidator: IDTokenValidator {
     var issuedAtGraceInterval: TimeInterval = 300
     
     func validate(token: JWT, issuer: URL, clientId: String) throws {
         guard let tokenIssuerString = token.issuer,
               let tokenIssuer = URL(string: tokenIssuerString)
         else {
-            throw JWTValidatorError.invalidIssuer
+            throw JWTError.invalidIssuer
         }
 
-        guard tokenIssuer.standardized.absoluteString == issuer.standardized.absoluteString
+        guard tokenIssuer.absoluteString == issuer.absoluteString
         else {
-            throw JWTValidatorError.invalidIssuer
+            throw JWTError.invalidIssuer
         }
 
         guard token[.audience] == clientId else {
-            throw JWTValidatorError.invalidAudience
+            throw JWTError.invalidAudience
         }
 
         guard tokenIssuer.scheme == "https" else {
-            throw JWTValidatorError.issuerRequiresHTTPS
+            throw JWTError.issuerRequiresHTTPS
         }
         
         guard token.header.algorithm == .rs256 else {
-            throw JWTValidatorError.invalidSigningAlgorithm
+            throw JWTError.invalidSigningAlgorithm
         }
         
         guard let expirationTime = token.expirationTime,
               expirationTime > Date.nowCoordinated else {
-            throw JWTValidatorError.expired
+            throw JWTError.expired
         }
         
         guard let issuedAt = token.issuedAt,
               abs(issuedAt.timeIntervalSince(Date.nowCoordinated)) <= issuedAtGraceInterval
         else {
-            throw JWTValidatorError.issuedAtTimeExceedsGraceInterval
+            throw JWTError.issuedAtTimeExceedsGraceInterval
         }
-    }
-    
-    func verify(token: JWT, using key: JWK) throws -> Bool {
-        #if canImport(CommonCrypto)
-        try key.verify(token: token)
-        #else
-        throw JWTValidatorError.signatureVerificationUnavailable
-        #endif
     }
 }

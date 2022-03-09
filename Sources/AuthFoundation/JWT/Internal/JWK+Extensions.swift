@@ -71,8 +71,8 @@ extension JWK.Algorithm {
 
 extension JWK {
     var rsaData: Data? {
-        guard let rsaModulus = rsaModulus,
-              let rsaExponent = rsaExponent,
+        guard let rsaModulus = rsaModulus?.base64URLDecoded,
+              let rsaExponent = rsaExponent?.base64URLDecoded,
               let modulusData = Data(base64Encoded: rsaModulus),
               let exponentData = Data(base64Encoded: rsaExponent)
         else {
@@ -84,7 +84,7 @@ extension JWK {
 
     func publicKey() throws -> SecKey {
         guard let keyData = rsaData else {
-            throw JWTValidatorError.invalidKey
+            throw JWTError.invalidKey
         }
         
         if #available(iOS 10.0, macCatalyst 13.0, tvOS 10.0, watchOS 3.0, macOS 10.12, *) {
@@ -104,7 +104,7 @@ extension JWK {
                 let error = errorRef?.takeRetainedValue()
                 let desc = error != nil ? CFErrorCopyDescription(error) : nil
                 let code = error != nil ? CFErrorGetCode(error) : 0
-                throw JWTValidatorError.cannotCreateKey(code: OSStatus(code),
+                throw JWTError.cannotCreateKey(code: OSStatus(code),
                                                         description: desc as String?)
             }
             
@@ -123,7 +123,7 @@ extension JWK {
             
             let addStatus = SecItemAdd(addAttributes as CFDictionary, persistKey)
             guard addStatus == errSecSuccess || addStatus == errSecDuplicateItem else {
-                throw JWTValidatorError.cannotCreateKey(code: addStatus,
+                throw JWTError.cannotCreateKey(code: addStatus,
                                                         description: nil)
             }
             
@@ -139,7 +139,7 @@ extension JWK {
             let copyStatus = SecItemCopyMatching(copyAttributes as CFDictionary, &keyRef)
             
             guard let publicKey = keyRef else {
-                throw JWTValidatorError.cannotCreateKey(code: copyStatus,
+                throw JWTError.cannotCreateKey(code: copyStatus,
                                                         description: nil)
             }
             

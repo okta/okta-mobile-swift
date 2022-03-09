@@ -10,29 +10,14 @@
 // See the License for the specific language governing permissions and limitations under the License.
 //
 
-#if os(iOS)
+import Foundation
 
-import XCTest
-@testable import AuthFoundation
-@testable import TestCommon
-@testable import OktaOAuth2
-@testable import WebAuthenticationUI
-
-class SafariBrowserProviderTests: ProviderTestBase {
-    var provider: SafariBrowserProvider!
-    
-    override func setUpWithError() throws {
-        try super.setUpWithError()
-        
-        provider = SafariBrowserProvider(flow: flow, from: nil, delegate:delegate)
-    }
-    
-    func testControllerCreation() {
-        provider.start(context: nil)
-        waitFor(.authenticateUrl)
-
-        XCTAssertNotNil(provider.safariController)
-    }
-}
-
+#if os(Linux)
+public typealias OSStatus = Int32
 #endif
+
+public protocol JWKValidator {
+    /// Verifies the ``JWT`` signature using the supplied ``JWKS`` key set.
+    /// - Returns: Returns whether or not signing passes for this token/key combination.
+    func validate(token: JWT, using keySet: JWKS) throws -> Bool
+}

@@ -56,10 +56,14 @@ final class TokenExchangeFlowTests: XCTestCase {
                               clientId: "clientId",
                               scopes: "profile openid device_sso",
                               session: urlSession)
-        JWT.validator = MockJWTValidator()
+        JWK.validator = MockJWKValidator()
+        Token.idTokenValidator = MockIDTokenValidator()
 
-        urlSession.expect("https://example.okta.com/oauth2/default/.well-known/openid-configuration",
+        urlSession.expect("https://example.okta.com/.well-known/openid-configuration",
                           data: try data(from: .module, for: "openid-configuration", in: "MockResponses"),
+                          contentType: "application/json")
+        urlSession.expect("https://example.okta.com/oauth2/v1/keys?client_id=clientId",
+                          data: try data(from: .module, for: "keys", in: "MockResponses"),
                           contentType: "application/json")
         urlSession.expect("https://example.okta.com/oauth2/v1/token",
                           data: try data(from: .module, for: "token", in: "MockResponses"),
@@ -69,7 +73,8 @@ final class TokenExchangeFlowTests: XCTestCase {
     }
     
     override func tearDownWithError() throws {
-        JWT.resetToDefault()
+        JWK.resetToDefault()
+        Token.resetToDefault()
     }
 
     func testWithDelegate() throws {

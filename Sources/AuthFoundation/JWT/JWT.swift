@@ -12,12 +12,6 @@
 
 import Foundation
 
-public enum JWTError: Error {
-    case invalidBase64Encoding
-    case badTokenStructure
-    case missingIssuer
-}
-
 /// Represents the contents of a JWT token, providing access to its payload contents.
 public struct JWT: RawRepresentable, Codable, HasClaims, Expires {
     public typealias RawValue = String
@@ -72,26 +66,13 @@ public struct JWT: RawRepresentable, Codable, HasClaims, Expires {
         try? self.init(rawValue)
     }
     
-    /// Validates the claims within this JWT token, to ensure it matches the given ``OAuth2Client``.
-    /// - Parameter client: Client to validate the token's claims against.
-    public func validate(using client: OAuth2Client) throws {
-        try JWT.validator.validate(token: self,
-                                   issuer: client.configuration.baseURL,
-                                   clientId: client.configuration.clientId)
-    }
-    
     /// Verifies the JWT token using the given ``JWK`` key.
     /// - Parameter key: JWK key to use to verify this token.
     /// - Returns: Returns whether or not signing passes for this token/key combination.
-    /// - Throws: ``JWTValidatorError``
-    public func verify(using key: JWK) throws -> Bool {
-        try JWT.validator.verify(token: self, using: key)
+    /// - Throws: ``JWTError``
+    public func validate(using keySet: JWKS) throws -> Bool {
+        return try JWK.validator.validate(token: self, using: keySet)
     }
-    
-    /// The validator instance used to perform validation steps on JWT tokens.
-    ///
-    /// A default implementation of ``JWTValidator`` is provided and will be used if this value is not changed.
-    public static var validator: JWTValidator = DefaultJWTValidator()
     
     /// The header portion of the JWT token.
     public let header: Header
@@ -115,10 +96,6 @@ public struct JWT: RawRepresentable, Codable, HasClaims, Expires {
     }
     
     private let payload: [String:Any]
-    
-    static func resetToDefault() {
-        validator = DefaultJWTValidator()
-    }
 
     static func tokenComponents(from token: String) -> [String] {
         token

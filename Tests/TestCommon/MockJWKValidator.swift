@@ -21,19 +21,11 @@ extension JWT {
     }
 }
 
-struct MockJWTValidator: JWTValidator {
-    var issuedAtGraceInterval: TimeInterval = 300
-
-    var error: JWTValidatorError?
+struct MockJWKValidator: JWKValidator {
+    var error: JWTError?
     var result: Bool = true
     
-    func validate(token: JWT, issuer: URL, clientId: String) throws {
-        if let error = error {
-            throw error
-        }
-    }
-    
-    func verify(token: JWT, using key: JWK) throws -> Bool {
+    func validate(token: JWT, using keySet: JWKS) throws -> Bool {
         if let error = error {
             throw error
         }

@@ -23,6 +23,11 @@ public struct JWK: Codable, Equatable, Identifiable {
     public let rsaModulus: String?
     public let rsaExponent: String?
         
+    /// The validator instance used to perform verification steps on JWT tokens.
+    ///
+    /// A default implementation of ``JWKValidator`` is provided and will be used if this value is not changed.
+    public static var validator: JWKValidator = DefaultJWKValidator()
+
     public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         type = try container.decode(KeyType.self, forKey: .keyType)
@@ -68,4 +73,9 @@ public struct JWK: Codable, Equatable, Identifiable {
         case rsaPrimeFactor = "r"
         case rsaFactorCoefficient = "t"
     }
+    
+    static func resetToDefault() {
+        validator = DefaultJWKValidator()
+    }
+
 }

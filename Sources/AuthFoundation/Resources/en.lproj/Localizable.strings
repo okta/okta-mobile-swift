@@ -20,3 +20,29 @@
 "missing_token_description" = "Missing %@ token.";
 "error_description" = "Error: %@";
 "signature_invalid" = "Could not verify the token's signature.";
+
+/* JWTError */
+"invalid_base64_encoding" = "The token is invalid (incorrect Base64 encoding).";
+"bad_token_structure" = "The token is not structured correctly.";
+"invalid_issuer" = "The token's issuer is either not well-formed, or does not match.";
+"invalid_audience" = "The token's audience does not match.";
+"issuer_requires_https" = "Token issuer addresses must use HTTPS.";
+"invalid_signing_algorithm" = "The token's signing algorithm is invalid or unsupported.";
+"token_expired" = "The token has expired.";
+"issuedAt_time_exceeds_grace_interval" = "This token was issued at a time that exceeds the allowed grace interval.";
+"cannot_create_key" = "Cannot create a public key.";
+"invalid_key" = "Invalid key data.";
+"signature_invalid" = "Token signature is invalid.";
+"signature_verification_unavailable" = "Signature verification is unavailable on this platform.";
+
+/* KeychainError */
+"keychain_cannot_get" = "There was a failure getting a keychain item (%d).";
+"keychain_cannot_list" = "There was a failure getting a list of keychain items (%d).";
+"keychain_cannot_save" = "There was a failure saving a keychain item (%d).";
+"keychain_cannot_delete" = "There was a failure deleting a keychain item (%d).";
+"keychain_not_found" = "Could not find a keychain item.";
+"keychain_invalid_format" = "The returned keychain item is in an invalid format.";
+"keychain_invalid_accessibility_option" = "The keychain item has an invalid accessibility option set.";
+"keychain_missing_account" = "The keychain item is missing an account name.";
+"keychain_missing_value_data" = "The keychain item is missing its value data.";
+"keychain_missing_attribute" = "The keychain item is missing required attributes.";

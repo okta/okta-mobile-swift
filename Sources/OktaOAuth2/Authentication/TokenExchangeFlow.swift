@@ -127,16 +127,14 @@ public class TokenExchangeFlow: AuthenticationFlow {
                                            scope: self.client.configuration.scopes,
                                            audience: self.audience.value)
                 self.client.exchange(token: request) { result in
-                    let result = self.client.verify(result: result)
-                    
                     switch result {
                     case .failure(let error):
                         let oauthError = OAuth2Error.error(error)
                         self.delegateCollection.invoke { $0.authentication(flow: self, received: oauthError) }
                         completion?(.failure(oauthError))
                     case .success(let response):
-                        self.delegateCollection.invoke { $0.authentication(flow: self, received: response) }
-                        completion?(.success(response))
+                        self.delegateCollection.invoke { $0.authentication(flow: self, received: response.result) }
+                        completion?(.success(response.result))
                     }
                     
                     self.isAuthenticating = false

@@ -11,3 +11,17 @@
 //
 
 import Foundation
+
+struct DefaultJWKValidator: JWKValidator {
+    func validate(token: JWT, using keySet: JWKS) throws -> Bool {
+        guard let key = keySet[token.header.keyId] else {
+            throw JWTError.invalidKey
+        }
+        
+        #if canImport(CommonCrypto)
+        return try key.verify(token: token)
+        #else
+        throw JWTError.signatureVerificationUnavailable
+        #endif
+    }
+}

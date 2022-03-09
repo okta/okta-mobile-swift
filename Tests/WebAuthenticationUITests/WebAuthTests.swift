@@ -31,7 +31,7 @@ class WebAuthenticationUITests: XCTestCase {
                               scopes: "openid profile",
                               session: urlSession)
         
-        urlSession.expect("https://example.com/oauth2/default/.well-known/openid-configuration",
+        urlSession.expect("https://example.com/.well-known/openid-configuration",
                           data: try data(from: .module, for: "openid-configuration", in: "MockResponses"),
                           contentType: "application/json")
         flow = client.authorizationCodeFlow(redirectUri: redirectUri,

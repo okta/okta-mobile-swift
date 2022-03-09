@@ -48,7 +48,7 @@ class AuthorizationCodeFlowDelegateRecorder: AuthorizationCodeFlowDelegate {
 }
 
 final class AuthorizationCodeFlowSuccessTests: XCTestCase {
-    let issuer = URL(string: "https://example.com")!
+    let issuer = URL(string: "https://example.com/oauth2/default")!
     let redirectUri = URL(string: "com.example:/callback")!
     let urlSession = URLSessionMock()
     var client: OAuth2Client!
@@ -59,23 +59,25 @@ final class AuthorizationCodeFlowSuccessTests: XCTestCase {
                               clientId: "clientId",
                               scopes: "openid profile",
                               session: urlSession)
-        JWT.validator = MockJWTValidator()
+        JWK.validator = MockJWKValidator()
+        Token.idTokenValidator = MockIDTokenValidator()
         
-        urlSession.expect("https://example.com/.well-known/openid-configuration",
+        urlSession.expect("https://example.com/oauth2/default/.well-known/openid-configuration",
                           data: try data(from: .module, for: "openid-configuration", in: "MockResponses"),
                           contentType: "application/json")
-        urlSession.expect("https://example.com/oauth2/v1/token",
+        urlSession.expect("https://example.okta.com/oauth2/v1/token",
                           data: try data(from: .module, for: "token", in: "MockResponses"),
                           contentType: "application/json")
         flow = client.authorizationCodeFlow(redirectUri: redirectUri,
                                             additionalParameters: ["additional": "param"])
-        urlSession.expect("https://example.com/oauth2/v1/keys",
+        urlSession.expect("https://example.okta.com/oauth2/v1/keys?client_id=clientId",
                           data: try data(from: .module, for: "keys", in: "MockResponses"),
                           contentType: "application/json")
     }
     
     override func tearDownWithError() throws {
-        JWT.resetToDefault()
+        JWK.resetToDefault()
+        Token.resetToDefault()
     }
     
     func testWithDelegate() throws {

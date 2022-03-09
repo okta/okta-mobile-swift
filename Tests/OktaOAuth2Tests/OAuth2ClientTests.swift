@@ -4,7 +4,7 @@ import XCTest
 @testable import OktaOAuth2
 
 final class OAuth2ClientTests: XCTestCase {
-    let issuer = URL(string: "https://example.com")!
+    let issuer = URL(string: "https://example.com/oauth2/default")!
     let redirectUri = URL(string: "com.example:/callback")!
     let urlSession = URLSessionMock()
     var client: OAuth2Client!
@@ -17,6 +17,14 @@ final class OAuth2ClientTests: XCTestCase {
             from: try data(from: .module,
                            for: "openid-configuration",
                            in: "MockResponses"))
+        
+        JWK.validator = MockJWKValidator()
+        Token.idTokenValidator = MockIDTokenValidator()
+    }
+    
+    override func tearDownWithError() throws {
+        JWK.resetToDefault()
+        Token.resetToDefault()
     }
 
     func testAuthorizationCodeConstructor() throws {
@@ -37,7 +45,13 @@ final class OAuth2ClientTests: XCTestCase {
                                                          grantValue: "abc123",
                                                          pkce: pkce)
         
-        urlSession.expect("https://example.com/oauth2/default/v1/token",
+        urlSession.expect("https://example.com/oauth2/default/.well-known/openid-configuration",
+                          data: try data(from: .module, for: "openid-configuration", in: "MockResponses"),
+                          contentType: "application/json")
+        urlSession.expect("https://example.okta.com/oauth2/v1/keys?client_id=theClientId",
+                          data: try data(from: .module, for: "keys", in: "MockResponses"),
+                          contentType: "application/json")
+        urlSession.expect("https://example.okta.com/oauth2/v1/token",
                           data: try data(from: .module, for: "token", in: "MockResponses"),
                           contentType: "application/json")
         

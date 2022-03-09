@@ -15,35 +15,59 @@ import Foundation
 
 extension OAuth2Client {
     func exchange(token request: TokenRequest & APIRequest, completion: @escaping (Result<APIResponse<Token>, APIClientError>) -> Void) {
-        send(request, completion: completion)
-    }
-    
-    func verify(result: Result<APIResponse<Token>, APIClientError>) -> Result<Token, APIClientError> {
-        guard case let .success(response) = result,
-              let idToken = response.result.idToken
-        else {
-            switch result {
-            case .success(let response):
-                return .success(response.result)
-            case .failure(let error):
-                return .failure(error)
+        // Fetch the JWKS keys in parallel if necessary
+        let group = DispatchGroup()
+        var keySet = jwks
+        if keySet == nil {
+            group.enter()
+            jwks { result in
+                defer { group.leave() }
+                if case let .success(response) = result {
+                    keySet = response
+                }
             }
         }
         
-        do {
-            let jwt = try JWT(idToken)
-            try validate(jwt)
-            
-            if let key = jwks?[jwt.header.keyId],
-               !(try JWT.validator.verify(token: jwt, using: key))
-            {
-                return .failure(.validation(error: OAuth2Error.signatureInvalid))
+        // Exchange the token
+        send(request) { (result: Result<APIResponse<Token>, APIClientError>) in
+            guard case let .success(response) = result else {
+                completion(result)
+                return
             }
-        } catch {
-            return .failure(.validation(error: error))
+            
+            // Perform idToken/accessToken validation
+            do {
+                try response.result.validate(using: self)
+            } catch {
+                completion(.failure(.validation(error: error)))
+                return
+            }
+            
+            // Wait for the JWKS keys, if necessary
+            group.notify(queue: DispatchQueue.global()) {
+                guard let idToken = response.result.idToken else {
+                    completion(result)
+                    return
+                }
+                
+                guard let keySet = keySet else {
+                    completion(.failure(.validation(error: JWTError.invalidKey)))
+                    return
+                }
+                    
+                do {
+                    if try idToken.validate(using: keySet) == false {
+                        completion(.failure(.validation(error: JWTError.signatureInvalid)))
+                        return
+                    }
+                } catch {
+                    completion(.failure(.validation(error: error)))
+                    return
+                }
+                
+                completion(result)
+            }
         }
-
-        return .success(response.result)
     }
     
     func device(authorize request: DeviceAuthorizationFlow.AuthorizeRequest, completion: @escaping (Result<APIResponse<DeviceAuthorizationFlow.Context>, APIClientError>) -> Void) {

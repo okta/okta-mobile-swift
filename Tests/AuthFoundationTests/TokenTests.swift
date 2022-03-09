@@ -54,14 +54,13 @@ final class TokenTests: XCTestCase {
                           accessToken: "the_access_token",
                           scope: "openid profile offline_access",
                           refreshToken: "the_refresh_token",
-                          idToken: "the_id_token",
+                          idToken: nil,
                           deviceSecret: "the_device_secret",
                           context: Token.Context(configuration: configuration,
                                                  clientSettings: []))
         
         XCTAssertEqual(token.token(of: .accessToken), token.accessToken)
         XCTAssertEqual(token.token(of: .refreshToken), token.refreshToken)
-        XCTAssertEqual(token.token(of: .idToken), token.idToken)
         XCTAssertEqual(token.token(of: .deviceSecret), token.deviceSecret)
 
         let data = try JSONEncoder().encode(token)

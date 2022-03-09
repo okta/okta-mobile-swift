@@ -40,26 +40,47 @@ extension OAuth2ClientDelegate {
 ///
 /// The OAuth2Client is itself an APIClient, defined from within the AuthFoundation framework, and provides extensibility hooks.
 public class OAuth2Client {
+    /// The configuration for an ``OAuth2Client``.
+    ///
+    /// This defines the basic information necessary for interacting with an OAuth2 authorization server.
     public class Configuration: Codable, Equatable, Hashable, APIClientConfiguration {
+        /// The base URL for interactions with this OAuth2 server.
         public let baseURL: URL
+        
+        /// The discovery URL used to retrieve the ``OpenIdConfiguration`` for this client.
         public let discoveryURL: URL
+        
+        /// The unique client ID representing this ``OAuth2Client``.
         public let clientId: String
+        
+        /// The list of OAuth2 scopes requested for this client.
         public let scopes: String
         
+        /// Initializer for constructing an OAuth2Client.
+        /// - Parameters:
+        ///   - baseURL: Base URL.
+        ///   - discoveryURL: Discovery URL, or `nil` to accept the default OpenIDConfiguration endpoint.
+        ///   - clientId: The client ID.
+        ///   - scopes: The list of OAuth2 scopes.
         public init(baseURL: URL, discoveryURL: URL? = nil, clientId: String, scopes: String) {
-            var baseURL = baseURL
+            var relativeURL = baseURL
 
             // Ensure the base URL contains a trailing slash in its path, so request paths can be safely appended.
-            if !baseURL.lastPathComponent.isEmpty {
-                baseURL.appendPathComponent("")
+            if !relativeURL.lastPathComponent.isEmpty {
+                relativeURL.appendPathComponent("")
             }
             
             self.baseURL = baseURL
-            self.discoveryURL = discoveryURL ?? baseURL.appendingPathComponent(".well-known/openid-configuration")
+            self.discoveryURL = discoveryURL ?? relativeURL.appendingPathComponent(".well-known/openid-configuration")
             self.clientId = clientId
             self.scopes = scopes
         }
         
+        /// Convenience initializer to create a client using a simple domain name.
+        /// - Parameters:
+        ///   - domain: Domain name for the OAuth2 client.
+        ///   - clientId: The client ID.
+        ///   - scopes: The list of OAuth2 scopes.
         public convenience init(domain: String, clientId: String, scopes: String) throws {
             guard let url = URL(string: "https://\(domain)") else {
                 throw OAuth2Error.invalidUrl
@@ -84,7 +105,7 @@ public class OAuth2Client {
     /// The URLSession used by this client for network requests.
     public let session: URLSessionProtocol
     
-    /// The configuration that identifies this OAuth2 org.
+    /// The configuration that identifies this OAuth2 client.
     public let configuration: Configuration
     
     /// Additional HTTP headers to include in outgoing network requests.
@@ -96,6 +117,9 @@ public class OAuth2Client {
     @TimeSensitive
     private(set) public var openIdConfiguration: OpenIdConfiguration?
 
+    /// The ``JWKS`` key set for this org.
+    ///
+    /// This value will be `nil` until the keys have been retrieved through the ``jwks(completion:)`` or ``jwks()`` functions.
     @TimeSensitive
     private(set) public var jwks: JWKS?
 
@@ -130,14 +154,6 @@ public class OAuth2Client {
         self.session = session ?? URLSession.shared
         
         NotificationCenter.default.post(name: .oauth2ClientCreated, object: self)
-    }
-    
-    /// Validates the given JWT token.
-    /// - Parameter jwt: Token to validate.
-    public func validate(_ jwt: JWT) throws {
-        try JWT.validator.validate(token: jwt,
-                                   issuer: configuration.baseURL,
-                                   clientId: configuration.clientId)
     }
     
     /// Retrieves the org's OpenID configuration.

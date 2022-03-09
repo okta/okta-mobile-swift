@@ -42,7 +42,7 @@ class WebAuthenticationProviderDelegateRecorder: WebAuthenticationProviderDelega
     }
 }
 
-class ProviderTestBase: XCTestCase {
+class ProviderTestBase: XCTestCase, AuthorizationCodeFlowDelegate {
     let issuer = URL(string: "https://example.com")!
     let redirectUri = URL(string: "com.example:/callback")!
     let urlSession = URLSessionMock()
@@ -50,31 +50,97 @@ class ProviderTestBase: XCTestCase {
     var flow: AuthorizationCodeFlow!
     let delegate = WebAuthenticationProviderDelegateRecorder()
 
+    var authenticationURL: URL?
+    var token: Token?
+    var error: Error?
+    
+    enum WaitType {
+        case authenticateUrl
+        case token
+        case error
+    }
+
     override func setUpWithError() throws {
-        JWT.validator = MockJWTValidator()
+        JWK.validator = MockJWKValidator()
+        Token.idTokenValidator = MockIDTokenValidator()
 
         client = OAuth2Client(baseURL: issuer,
                               clientId: "clientId",
                               scopes: "openid profile",
                               session: urlSession)
         
-        urlSession.asyncTasks = false
         urlSession.expect("https://example.com/.well-known/openid-configuration",
                           data: try data(from: .module, for: "openid-configuration", in: "MockResponses"),
                           contentType: "application/json")
-        urlSession.expect("https://example.com/oauth2/default/v1/token",
+        urlSession.expect("https://example.okta.com/oauth2/v1/token",
                           data: try data(from: .module, for: "token", in: "MockResponses"),
                           contentType: "application/json")
-        urlSession.expect("https://example.com/oauth2/v1/keys",
+        urlSession.expect("https://example.okta.com/oauth2/v1/keys?client_id=clientId",
                           data: try data(from: .module, for: "keys", in: "MockResponses"),
                           contentType: "application/json")
         flow = client.authorizationCodeFlow(redirectUri: redirectUri,
                                             additionalParameters: ["additional": "param"])
+        flow.add(delegate: self)
+        
         delegate.reset()
     }
 
     override func tearDownWithError() throws {
-        JWT.resetToDefault()
+        JWK.resetToDefault()
+        Token.resetToDefault()
+
+        authenticationURL = nil
+        token = nil
+        error = nil
+    }
+    
+    func authentication<Flow>(flow: Flow, shouldAuthenticateUsing url: URL) where Flow : AuthorizationCodeFlow {
+        authenticationURL = url
+    }
+    
+    func authentication<Flow>(flow: Flow, received token: Token) {
+        self.token = token
+    }
+    
+    func authentication<Flow>(flow: Flow, received error: OAuth2Error) {
+        self.error = error
+    }
+
+    func waitFor(_ type: WaitType, timeout: TimeInterval = 5.0, pollInterval: TimeInterval = 0.1) {
+        let wait = expectation(description: "Receive authentication URL")
+        waitFor(type, timeout: timeout, pollInterval: pollInterval) {
+            wait.fulfill()
+        }
+        waitForExpectations(timeout: timeout + 1.0) { error in
+            XCTAssertNil(error)
+        }
+    }
+    
+    fileprivate func waitFor(_ type: WaitType, timeout: TimeInterval, pollInterval: TimeInterval, completion: @escaping() -> Void) {
+        DispatchQueue.global().asyncAfter(deadline: .now() + pollInterval) {
+            var object: AnyObject?
+            switch type {
+            case .authenticateUrl:
+                object = self.authenticationURL as AnyObject?
+            case .token:
+                object = self.token
+            case .error:
+                object = self.error as AnyObject?
+            }
+
+            guard object == nil else {
+                completion()
+                return
+            }
+
+            let timeout = timeout - pollInterval
+            guard timeout >= pollInterval else {
+                completion()
+                return
+            }
+
+            self.waitFor(type, timeout: timeout, pollInterval: pollInterval, completion: completion)
+        }
     }
 }
 

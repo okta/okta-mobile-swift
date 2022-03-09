@@ -23,7 +23,7 @@ final class JWKTests: XCTestCase {
         
         XCTAssertEqual(jwks.count, 1)
         
-        let keyId = "l4Y-XaEzOeADcvHK3A4DR646TJ72C8I75oRG3XLbllU"
+        let keyId = "k6HN2DKok-kExjJGBLqgzByMCnN1RvzEOA-1ukTjexA"
         let key = try XCTUnwrap(jwks[keyId])
         XCTAssertEqual(key.id, keyId)
         XCTAssertEqual(key.type, .rsa)

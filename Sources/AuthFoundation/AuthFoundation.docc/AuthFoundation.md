@@ -65,7 +65,7 @@ You can use AuthFoundation when you want to:
 - ``OktaAPIError``
 - ``CredentialError``
 - ``TokenError``
-- ``JWTValidatorError``
+- ``JWTError``
 
 ### Internals and mocking
 

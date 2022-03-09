@@ -11,6 +11,7 @@
 //
 
 import Foundation
+import XCTest
 
 #if os(Linux)
 import FoundationNetworking
@@ -31,8 +32,6 @@ class URLSessionMock: URLSessionProtocol {
         calls.append(call)
     }
     
-    var asyncTasks: Bool = true
-    
     func expect(_ url: String,
                 data: Data?,
                 statusCode: Int = 200,
@@ -50,13 +49,19 @@ class URLSessionMock: URLSessionProtocol {
                           error: error))
     }
 
-    func nextCall() -> Call? {
-        guard calls.count > 0 else { return nil }
-        return calls.remove(at: 0)
+    func call(for url: String) -> Call? {
+        guard let index = calls.firstIndex(where: { call in
+            call.url == url
+        }) else {
+            XCTFail("Mock URL \(url) not found")
+            return nil
+        }
+        
+        return calls.remove(at: index)
     }
     
     func dataTaskWithRequest(_ request: URLRequest, completionHandler: @escaping (Data?, URLResponse?, Error?) -> Void) -> URLSessionDataTaskProtocol {
-        let response = nextCall()
+        let response = call(for: request.url!.absoluteString)
         return URLSessionDataTaskMock(session: self,
                                       data: response?.data,
                                       response: response?.response,
@@ -65,7 +70,7 @@ class URLSessionMock: URLSessionProtocol {
     }
 
     func dataTask(with request: URLRequest, completionHandler: @escaping (Data?, URLResponse?, Error?) -> Void) -> URLSessionDataTaskProtocol {
-        let response = nextCall()
+        let response = call(for: request.url!.absoluteString)
         return URLSessionDataTaskMock(session: self,
                                       data: response?.data,
                                       response: response?.response,
@@ -76,7 +81,7 @@ class URLSessionMock: URLSessionProtocol {
     #if swift(>=5.5.1)
     @available(iOS 15.0, tvOS 15.0, macOS 12.0, watchOS 8, *)
     func data(for request: URLRequest, delegate: URLSessionTaskDelegate?) async throws -> (Data, URLResponse) {
-        let response = nextCall()
+        let response = call(for: request.url!.absoluteString)
         if let error = response?.error {
             throw error
         }
@@ -116,11 +121,7 @@ class URLSessionDataTaskMock: URLSessionDataTaskProtocol {
     }
     
     func resume() {
-        if session?.asyncTasks ?? true {
-            DispatchQueue.global().async {
-                self.completionHandler(self.data, self.response, self.error)
-            }
-        } else {
+        DispatchQueue.global().async {
             self.completionHandler(self.data, self.response, self.error)
         }
     }

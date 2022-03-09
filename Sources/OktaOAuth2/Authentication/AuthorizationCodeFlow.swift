@@ -241,19 +241,15 @@ public class AuthorizationCodeFlow: AuthenticationFlow {
                                            grantValue: code,
                                            pkce: self.context?.pkce)
                 self.client.exchange(token: request) { result in
-                    self.client.jwks { _ in
-                        self.reset()
-                        
-                        let result = self.client.verify(result: result)
-                        
-                        defer { completion?(result) }
-                        
-                        switch result {
-                        case .success(let token):
-                            self.delegateCollection.invoke { $0.authentication(flow: self, received: token) }
-                        case .failure(let error):
-                            self.delegateCollection.invoke { $0.authentication(flow: self, received: .network(error: error)) }
-                        }
+                    self.reset()
+                    
+                    switch result {
+                    case .success(let response):
+                        self.delegateCollection.invoke { $0.authentication(flow: self, received: response.result) }
+                        completion?(.success(response.result))
+                    case .failure(let error):
+                        self.delegateCollection.invoke { $0.authentication(flow: self, received: .network(error: error)) }
+                        completion?(.failure(error))
                     }
                 }
                 

@@ -19,7 +19,7 @@ extension JWK {
     public func verify(token: JWT) throws -> Bool {
         #if canImport(CommonCrypto)
         guard let algorithm = algorithm else {
-            throw JWTValidatorError.invalidSigningAlgorithm
+            throw JWTError.invalidSigningAlgorithm
         }
         
         let publicKey = try publicKey()
@@ -34,7 +34,7 @@ extension JWK {
         if #available(iOS 10.0, macCatalyst 13.0, tvOS 10.0, watchOS 3.0, macOS 10.12, *) {
             guard let algorithm = algorithm.secKeyAlgorithm
             else {
-                throw JWTValidatorError.invalidSigningAlgorithm
+                throw JWTError.invalidSigningAlgorithm
             }
             
             return SecKeyVerifySignature(publicKey,
@@ -49,7 +49,7 @@ extension JWK {
             guard let padding = algorithm.secPadding,
                   let digest = algorithm.digest(data: data)
             else {
-                throw JWTValidatorError.invalidSigningAlgorithm
+                throw JWTError.invalidSigningAlgorithm
             }
             
             var status: OSStatus = noErr
@@ -76,6 +76,6 @@ extension JWK {
         #endif
         #endif
         
-        throw JWTValidatorError.signatureVerificationUnavailable
+        throw JWTError.signatureVerificationUnavailable
     }
 }

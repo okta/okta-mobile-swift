@@ -88,14 +88,13 @@ public class ResourceOwnerFlow: AuthenticationFlow {
                 self.client.exchange(token: request) { result in
                     self.reset()
                     
-                    let result = self.client.verify(result: result)
-                    defer { completion?(result) }
-                    
                     switch result {
                     case .failure(let error):
                         self.delegateCollection.invoke { $0.authentication(flow: self, received: .network(error: error)) }
+                        completion?(.failure(error))
                     case .success(let response):
-                        self.delegateCollection.invoke { $0.authentication(flow: self, received: response) }
+                        self.delegateCollection.invoke { $0.authentication(flow: self, received: response.result) }
+                        completion?(.success(response.result))
                     }
                 }
 

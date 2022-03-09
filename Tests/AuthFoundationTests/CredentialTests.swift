@@ -46,7 +46,7 @@ final class CredentialTests: XCTestCase {
         urlSession.expect("https://example.com/oauth2/default/.well-known/openid-configuration",
                           data: try data(from: .module, for: "openid-configuration", in: "MockResponses"),
                           contentType: "application/json")
-        urlSession.expect("https://example.com/oauth2/default/v1/revoke",
+        urlSession.expect("https://example.com/oauth2/v1/revoke",
                           data: Data())
         
         let expect = expectation(description: "network request")
@@ -67,7 +67,7 @@ final class CredentialTests: XCTestCase {
         urlSession.expect("https://example.com/oauth2/default/.well-known/openid-configuration",
                           data: try data(from: .module, for: "openid-configuration", in: "MockResponses"),
                           contentType: "application/json")
-        urlSession.expect("https://example.com/oauth2/default/v1/token",
+        urlSession.expect("https://example.com/oauth2/v1/token",
                           data: try data(from: .module, for: "token", in: "MockResponses"))
         
         let expect = expectation(description: "refresh")
@@ -96,7 +96,7 @@ final class CredentialTests: XCTestCase {
         urlSession.expect("https://example.com/oauth2/default/.well-known/openid-configuration",
                           data: try data(from: .module, for: "openid-configuration", in: "MockResponses"),
                           contentType: "application/json")
-        urlSession.expect("https://example.com/oauth2/default/v1/token",
+        urlSession.expect("https://example.com/oauth2/v1/token",
                           data: try data(from: .module, for: "token", in: "MockResponses"))
         
         let token = try await credential.refresh()

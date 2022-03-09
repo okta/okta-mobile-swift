@@ -295,8 +295,6 @@ extension DeviceAuthorizationFlow {
                                            clientId: self.client.configuration.clientId,
                                            deviceCode: context.deviceCode)
                 self.client.exchange(token: request) { result in
-                    let result = self.client.verify(result: result)
-                    
                     switch result {
                     case .failure(let error):
                         if case let APIClientError.serverError(serverError) = error,
@@ -309,8 +307,8 @@ extension DeviceAuthorizationFlow {
                             completion(.failure(error))
                         }
                     case .success(let response):
-                        self.delegateCollection.invoke { $0.authentication(flow: self, received: response) }
-                        completion(.success(response))
+                        self.delegateCollection.invoke { $0.authentication(flow: self, received: response.result) }
+                        completion(.success(response.result))
                     }
                 }
                 
