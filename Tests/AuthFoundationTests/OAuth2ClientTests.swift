@@ -25,6 +25,8 @@ final class OAuth2ClientTests: XCTestCase {
                       deviceSecret: nil,
                       context: Token.Context(configuration: self.configuration,
                                              clientSettings: [ "client_id": "clientid" ]))
+        
+        urlSession.requestDelay = 0.1
     }
 
     func testOpenIDConfiguration() throws {

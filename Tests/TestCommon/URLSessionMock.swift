@@ -27,6 +27,8 @@ class URLSessionMock: URLSessionProtocol {
         let error: Error?
     }
     
+    var requestDelay: TimeInterval?
+    
     private(set) var calls: [Call] = []
     func expect(call: Call) {
         calls.append(call)
@@ -121,7 +123,14 @@ class URLSessionDataTaskMock: URLSessionDataTaskProtocol {
     }
     
     func resume() {
-        DispatchQueue.global().async {
+        guard let delay = session?.requestDelay else {
+            DispatchQueue.global().async {
+                self.completionHandler(self.data, self.response, self.error)
+            }
+            return
+        }
+        
+        DispatchQueue.global().asyncAfter(deadline: .now() + delay) {
             self.completionHandler(self.data, self.response, self.error)
         }
     }
