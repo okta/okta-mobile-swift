@@ -12,16 +12,11 @@
 
 import Foundation
 
-public enum JWTError: Error {
-    case invalidBase64Encoding
-    case badTokenStructure
-}
-
 /// Represents the contents of a JWT token, providing access to its payload contents.
-public struct JWT: RawRepresentable, Codable, HasClaims {
+public struct JWT: RawRepresentable, Codable, HasClaims, Expires {
     public typealias RawValue = String
     public let rawValue: String
-        
+    
     public var expirationTime: Date? { self[.expirationTime] }
     
     public var issuer: String? { self[.issuer] }
@@ -29,7 +24,6 @@ public struct JWT: RawRepresentable, Codable, HasClaims {
     public var issuedAt: Date? { self[.issuedAt] }
     public var notBefore: Date? { self[.notBefore] }
     public var expiresIn: TimeInterval { self[.expiresIn] ?? 0 }
-    
     public var scope: [String]? { self[.scope] ?? self["scp"] }
 
     /// The list of standard claims contained within this JWT token.
@@ -41,60 +35,54 @@ public struct JWT: RawRepresentable, Codable, HasClaims {
     public var customClaims: [String] {
         payload.keys.filter { Claim(rawValue: $0) == nil }
     }
-
+    
+    /// Returns a claim value from this JWT token, with the given key and expected return type.
+    /// - Returns: The value for the supplied claim.
     public func value<T>(_ type: T.Type, for key: String) -> T? {
         payload[key] as? T
     }
-
-    var expired: Bool {
-        false
-    }
     
-    public enum Algorithm: String, Codable {
-        case hs256 = "HS256"
-        case hs384 = "HS384"
-        case hs512 = "HS512"
-        case rs256 = "RS256"
-        case rs384 = "RS384"
-        case rs512 = "RS512"
-        case es256 = "ES256"
-        case es384 = "ES384"
-        case es512 = "ES512"
-    }
-    
+    /// JWT header information describing the contents of the token.
     public struct Header: Decodable {
-        public let kid: String
-        public let alg: Algorithm
+        /// The ID of the key used to sign this JWT token.
+        public let keyId: String
+
+        /// The signing algorithm used to sign this JWT token.
+        public let algorithm: JWK.Algorithm
+        
+        enum CodingKeys: String, CodingKey {
+            case keyId = "kid"
+            case algorithm = "alg"
+        }
+
+        public init(from decoder: Decoder) throws {
+            let container = try decoder.container(keyedBy: CodingKeys.self)
+            keyId = try container.decode(String.self, forKey: .keyId)
+            algorithm = try container.decode(JWK.Algorithm.self, forKey: .algorithm)
+        }
     }
     
     public init?(rawValue: RawValue) {
         try? self.init(rawValue)
     }
     
-    private let header: Header
-    private let payload: [String:Any]
-    private let signature: String?
+    /// Verifies the JWT token using the given ``JWK`` key.
+    /// - Parameter key: JWK key to use to verify this token.
+    /// - Returns: Returns whether or not signing passes for this token/key combination.
+    /// - Throws: ``JWTError``
+    public func validate(using keySet: JWKS) throws -> Bool {
+        return try JWK.validator.validate(token: self, using: keySet)
+    }
+    
+    /// The header portion of the JWT token.
+    public let header: Header
+    
+    /// Designated initializer, accepting the token string.
+    /// - Parameter token: Token string.
     public init(_ token: String) throws {
         rawValue = token
         
-        let components: [String] = token
-            .components(separatedBy: ".")
-            .map { $0.replacingOccurrences(of: "-", with: "+") }
-            .map { $0.replacingOccurrences(of: "_", with: "/") }
-            .map { component in
-                var suffix = ""
-                switch (component.count % 4) {
-                case 1:
-                    suffix = "==="
-                case 2:
-                    suffix = "=="
-                case 3:
-                    suffix = "="
-                default: break
-                }
-                return "\(component)\(suffix)"
-            }
-
+        let components = JWT.tokenComponents(from: rawValue)
         guard components.count == 3 else {
             throw JWTError.badTokenStructure
         }
@@ -103,8 +91,15 @@ public struct JWT: RawRepresentable, Codable, HasClaims {
               let payloadData = Data(base64Encoded: components[1])
         else { throw JWTError.invalidBase64Encoding }
 
-        header = try JSONDecoder().decode(JWT.Header.self, from: headerData)
-        payload = try JSONSerialization.jsonObject(with: payloadData, options: []) as! [String:Any]
-        signature = components[2]
+        self.header = try JSONDecoder().decode(JWT.Header.self, from: headerData)
+        self.payload = try JSONSerialization.jsonObject(with: payloadData, options: []) as! [String:Any]
+    }
+    
+    private let payload: [String:Any]
+
+    static func tokenComponents(from token: String) -> [String] {
+        token
+            .components(separatedBy: ".")
+            .map { $0.base64URLDecoded }
     }
 }

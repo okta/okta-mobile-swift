@@ -18,7 +18,6 @@ The keys read from this property list file are:
 ---|---|---
 `issuer` | ✔ | Issuer URL for the client.
 `clientId` | ✔ | Client ID for the Okta application.
-`clientSecret` | | _Optional_ client secret (not for use in production apps).
 `scopes` | ✔ | Scopes the client is requesting.
 `redirectUri` | ✔  | Redirect URI for the Okta application.
 `logoutRedirectUri` | | Logout URI used for the Okta application.

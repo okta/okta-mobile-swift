@@ -18,7 +18,7 @@ enum TestError: Error {
     case noBundleResourceFound
 }
 
-extension XCTestCase {
+public extension XCTestCase {
     func data(for json: String) -> Data {
         return json.data(using: .utf8)!
     }

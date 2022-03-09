@@ -18,7 +18,7 @@ import FoundationNetworking
 
 public protocol APIRequest {
     var httpMethod: APIRequestMethod { get }
-    var path: String { get }
+    var url: URL { get }
     var query: [String:APIRequestArgument?]? { get }
     var headers: [String:APIRequestArgument?]? { get }
     var contentType: APIContentType? { get }
@@ -100,8 +100,7 @@ extension APIRequest {
 
     public func body() throws -> Data? { nil }
     public func request(for client: APIClient) throws -> URLRequest {
-        guard let url = URL(string: path, relativeTo: client.baseURL),
-              var components = URLComponents(url: url, resolvingAgainstBaseURL: true)
+        guard var components = URLComponents(url: url, resolvingAgainstBaseURL: true)
         else {
             throw APIClientError.invalidUrl
         }

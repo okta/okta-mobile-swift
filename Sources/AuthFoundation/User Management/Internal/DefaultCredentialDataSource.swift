@@ -34,7 +34,7 @@ class DefaultCredentialDataSource: CredentialDataSource {
                 return credential
             } else {
                 let urlSession = self.urlSession(for: token)
-                let client = OAuth2Client(baseURL: token.context.baseURL,
+                let client = OAuth2Client(token.context.configuration,
                                           session: urlSession)
                 let credential = Credential(token: token, oauth2: client, coordinator: coordinator)
                 credentials.append(credential)

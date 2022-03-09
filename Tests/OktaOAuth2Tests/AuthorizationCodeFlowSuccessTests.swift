@@ -48,38 +48,38 @@ class AuthorizationCodeFlowDelegateRecorder: AuthorizationCodeFlowDelegate {
 }
 
 final class AuthorizationCodeFlowSuccessTests: XCTestCase {
-    let issuer = URL(string: "https://example.com")!
+    let issuer = URL(string: "https://example.com/oauth2/default")!
     let redirectUri = URL(string: "com.example:/callback")!
-    var configuration: AuthorizationCodeFlow.Configuration!
     let urlSession = URLSessionMock()
     var client: OAuth2Client!
     var flow: AuthorizationCodeFlow!
 
     override func setUpWithError() throws {
-        configuration = AuthorizationCodeFlow.Configuration(clientId: "clientId",
-                                                            clientSecret: nil,
-                                                            state: nil,
-                                                            scopes: "openid profile",
-                                                            responseType: .code,
-                                                            redirectUri: redirectUri,
-                                                            logoutRedirectUri: nil,
-                                                            additionalParameters: ["additional": "param"])
-        client = OAuth2Client(baseURL: issuer, session: urlSession)
+        client = OAuth2Client(baseURL: issuer,
+                              clientId: "clientId",
+                              scopes: "openid profile",
+                              session: urlSession)
+        JWK.validator = MockJWKValidator()
+        Token.idTokenValidator = MockIDTokenValidator()
         
         urlSession.expect("https://example.com/oauth2/default/.well-known/openid-configuration",
                           data: try data(from: .module, for: "openid-configuration", in: "MockResponses"),
                           contentType: "application/json")
-        urlSession.expect("https://example.com/oauth2/default/v1/token",
+        urlSession.expect("https://example.okta.com/oauth2/v1/token",
                           data: try data(from: .module, for: "token", in: "MockResponses"),
                           contentType: "application/json")
-        flow = AuthorizationCodeFlow(configuration, client: client)
+        flow = client.authorizationCodeFlow(redirectUri: redirectUri,
+                                            additionalParameters: ["additional": "param"])
+        urlSession.expect("https://example.okta.com/oauth2/v1/keys?client_id=clientId",
+                          data: try data(from: .module, for: "keys", in: "MockResponses"),
+                          contentType: "application/json")
     }
     
-    func testConfiguration() throws {
-        XCTAssertEqual(client.baseURL.absoluteString,
-                       "https://example.com/oauth2/default/")
+    override func tearDownWithError() throws {
+        JWK.resetToDefault()
+        Token.resetToDefault()
     }
-
+    
     func testWithDelegate() throws {
         let delegate = AuthorizationCodeFlowDelegateRecorder()
         flow.add(delegate: delegate)

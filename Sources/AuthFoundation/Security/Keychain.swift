@@ -14,19 +14,6 @@ import Foundation
 
 #if os(iOS) || os(macOS) || os(tvOS) || os(watchOS)
 
-public enum KeychainError: Error {
-    case codingError
-    case failed(String)
-    case unhandledError(status: OSStatus)
-    case notFound
-    case invalidFormat
-    case invalidAccessibilityOption
-    case missingAccount
-    case missingValueData
-    case missingAttribute
-    case cannotDelete(status: OSStatus)
-}
-
 /// Defines convenience mechanisms for interacting with the keychain, lincluding searching, creating, and deleting keychain items.
 public struct Keychain {
     static var implementation: KeychainProtocol = KeychainImpl()
@@ -66,9 +53,9 @@ public struct Keychain {
 
             Keychain.implementation.deleteItem(cfDictionary)
             
-            let sanityCheck = Keychain.implementation.addItem(cfDictionary, nil)
-            if sanityCheck != noErr {
-                throw KeychainError.failed(sanityCheck.description)
+            let status = Keychain.implementation.addItem(cfDictionary, nil)
+            if status != noErr {
+                throw KeychainError.cannotSave(code: status)
             }
         }
         
@@ -80,7 +67,7 @@ public struct Keychain {
             if status == errSecItemNotFound {
                 throw KeychainError.notFound
             } else if status != noErr {
-                throw KeychainError.cannotDelete(status: status)
+                throw KeychainError.cannotDelete(code: status)
             }
         }
         
@@ -199,12 +186,12 @@ public struct Keychain {
             let cfQuery = self.getQuery as CFDictionary
             var ref: AnyObject?
             
-            let sanityCheck = Keychain.implementation.copyItemMatching(cfQuery, &ref)
-            guard sanityCheck == noErr else {
-                if sanityCheck == errSecItemNotFound {
+            let status = Keychain.implementation.copyItemMatching(cfQuery, &ref)
+            guard status == noErr else {
+                if status == errSecItemNotFound {
                     throw KeychainError.notFound
                 } else {
-                    throw KeychainError.failed(sanityCheck.description)
+                    throw KeychainError.cannotGet(code: status)
                 }
             }
             
@@ -229,7 +216,7 @@ public struct Keychain {
             }
             
             guard status == errSecSuccess else {
-                throw KeychainError.unhandledError(status: status)
+                throw KeychainError.cannotList(code: status)
             }
             
             guard let items = ref as? Array<Dictionary<String, Any>> else {
@@ -292,12 +279,12 @@ public struct Keychain {
                 let cfQuery = self.query as CFDictionary
                 var ref: AnyObject?
                 
-                let sanityCheck = Keychain.implementation.copyItemMatching(cfQuery, &ref)
-                guard sanityCheck == noErr else {
-                    if sanityCheck == errSecItemNotFound {
+                let status = Keychain.implementation.copyItemMatching(cfQuery, &ref)
+                guard status == noErr else {
+                    if status == errSecItemNotFound {
                         throw KeychainError.notFound
                     } else {
-                        throw KeychainError.failed(sanityCheck.description)
+                        throw KeychainError.cannotGet(code: status)
                     }
                 }
                 

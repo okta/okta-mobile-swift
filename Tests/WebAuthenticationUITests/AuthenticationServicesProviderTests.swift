@@ -31,16 +31,22 @@ class AuthenticationServicesProviderTests: ProviderTestBase {
     
     func testSuccessfulAuthentication() {
         provider.start(context: .init(state: "state"))
+        waitFor(.authenticateUrl)
+        
         XCTAssertNotNil(provider.authenticationSession)
      
         let redirectUrl = URL(string: "com.example:/callback?code=abc123&state=state")
         provider.process(url: redirectUrl, error: nil)
+        waitFor(.token)
+        
         XCTAssertNotNil(delegate.token)
         XCTAssertNil(delegate.error)
     }
 
     func testErrorResponse() {
         provider.start(context: .init(state: "state"))
+        waitFor(.authenticateUrl)
+
         XCTAssertNotNil(provider.authenticationSession)
      
         let redirectUrl = URL(string: "com.example:/callback?state=state&error=errorname&error_description=This+Thing+Failed")
@@ -51,6 +57,8 @@ class AuthenticationServicesProviderTests: ProviderTestBase {
 
     func testUserCancelled() {
         provider.start(context: .init(state: "state"))
+        waitFor(.authenticateUrl)
+
         XCTAssertNotNil(provider.authenticationSession)
      
         let error = NSError(domain: ASWebAuthenticationSessionErrorDomain,
@@ -63,6 +71,8 @@ class AuthenticationServicesProviderTests: ProviderTestBase {
 
     func testNoResponse() {
         provider.start(context: .init(state: "state"))
+        waitFor(.authenticateUrl)
+
         XCTAssertNotNil(provider.authenticationSession)
      
         provider.process(url: nil, error: nil)

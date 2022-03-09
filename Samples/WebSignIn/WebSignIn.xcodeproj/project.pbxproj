@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		92088FA027A9938B00A4DC1B /* WebSignIn.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92088F9A27A9938B00A4DC1B /* WebSignIn.swift */; };
 		92088FA127A9938B00A4DC1B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 92088F9B27A9938B00A4DC1B /* Assets.xcassets */; };
-		92088FA227A9938B00A4DC1B /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 92088F9D27A9938B00A4DC1B /* Preview Assets.xcassets */; };
 		92088FA327A9938B00A4DC1B /* SignInView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92088F9F27A9938B00A4DC1B /* SignInView.swift */; };
 		92088FA527A99C6700A4DC1B /* AuthFoundation in Frameworks */ = {isa = PBXBuildFile; productRef = 92088FA427A99C6700A4DC1B /* AuthFoundation */; };
 		92088FA727A99C6700A4DC1B /* OktaOAuth2 in Frameworks */ = {isa = PBXBuildFile; productRef = 92088FA627A99C6700A4DC1B /* OktaOAuth2 */; };
@@ -90,7 +89,6 @@
 		92088F8A27A9936D00A4DC1B /* WebSignIn (macOS).app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "WebSignIn (macOS).app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		92088F9A27A9938B00A4DC1B /* WebSignIn.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WebSignIn.swift; sourceTree = "<group>"; };
 		92088F9B27A9938B00A4DC1B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		92088F9D27A9938B00A4DC1B /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		92088F9E27A9938B00A4DC1B /* WebSignIn.entitlements */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.entitlements; path = WebSignIn.entitlements; sourceTree = "<group>"; };
 		92088F9F27A9938B00A4DC1B /* SignInView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignInView.swift; sourceTree = "<group>"; };
 		9245105C27AD9E0400F4A5C1 /* SignInViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInViewModel.swift; sourceTree = "<group>"; };
@@ -203,21 +201,12 @@
 			children = (
 				928255D627B2CA3A0066A4C4 /* ProfileDetails */,
 				928255D527B2CA240066A4C4 /* SignIn */,
-				92088F9C27A9938B00A4DC1B /* Preview Content */,
 				92088F9A27A9938B00A4DC1B /* WebSignIn.swift */,
 				92088F9B27A9938B00A4DC1B /* Assets.xcassets */,
 				92088F9E27A9938B00A4DC1B /* WebSignIn.entitlements */,
 				928255B627B292050066A4C4 /* RootView.swift */,
 			);
 			path = WebSignIn;
-			sourceTree = "<group>";
-		};
-		92088F9C27A9938B00A4DC1B /* Preview Content */ = {
-			isa = PBXGroup;
-			children = (
-				92088F9D27A9938B00A4DC1B /* Preview Assets.xcassets */,
-			);
-			path = "Preview Content";
 			sourceTree = "<group>";
 		};
 		925F1A7227BABDC60059A389 /* SingleSignOn (iOS) */ = {
@@ -610,7 +599,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				92088FA227A9938B00A4DC1B /* Preview Assets.xcassets in Resources */,
 				92E7C7C727AD5F7A00562498 /* Okta.plist in Resources */,
 				92088FA127A9938B00A4DC1B /* Assets.xcassets in Resources */,
 			);
@@ -814,7 +802,6 @@
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_ASSET_PATHS = "\"WebSignIn-macos/Preview Content\"";
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
@@ -841,7 +828,6 @@
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_ASSET_PATHS = "\"WebSignIn-macos/Preview Content\"";
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
@@ -875,6 +861,7 @@
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -904,6 +891,7 @@
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

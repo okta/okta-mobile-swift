@@ -45,7 +45,6 @@ final class TokenExchangeFlowTests: XCTestCase {
     let issuer = URL(string: "https://example.okta.com")!
     let redirectUri = URL(string: "com.example:/callback")!
     let clientMock = OAuth2ClientMock()
-    var configuration: TokenExchangeFlow.Configuration!
     let urlSession = URLSessionMock()
     var client: OAuth2Client!
     var flow: TokenExchangeFlow!
@@ -53,21 +52,31 @@ final class TokenExchangeFlowTests: XCTestCase {
     private let tokens: [TokenExchangeFlow.TokenType] = [.actor(type: .deviceSecret, value: "secret"), .subject(type: .idToken, value: "id_token")]
     
     override func setUpWithError() throws {
-        configuration = TokenExchangeFlow.Configuration(clientId: "clientId",
-                                                        scopes: "profile openid device_sso",
-                                                        audience: .default)
-        client = OAuth2Client(baseURL: issuer, session: urlSession)
-        
-        urlSession.expect("https://example.okta.com/oauth2/default/.well-known/openid-configuration",
+        client = OAuth2Client(baseURL: issuer,
+                              clientId: "clientId",
+                              scopes: "profile openid device_sso",
+                              session: urlSession)
+        JWK.validator = MockJWKValidator()
+        Token.idTokenValidator = MockIDTokenValidator()
+
+        urlSession.expect("https://example.okta.com/.well-known/openid-configuration",
                           data: try data(from: .module, for: "openid-configuration", in: "MockResponses"),
+                          contentType: "application/json")
+        urlSession.expect("https://example.okta.com/oauth2/v1/keys?client_id=clientId",
+                          data: try data(from: .module, for: "keys", in: "MockResponses"),
                           contentType: "application/json")
         urlSession.expect("https://example.okta.com/oauth2/v1/token",
                           data: try data(from: .module, for: "token", in: "MockResponses"),
                           contentType: "application/json")
         
-        flow = TokenExchangeFlow(configuration, client: client)
+        flow = client.tokenExchangeFlow(audience: .default)
     }
     
+    override func tearDownWithError() throws {
+        JWK.resetToDefault()
+        Token.resetToDefault()
+    }
+
     func testWithDelegate() throws {
         let delegate = TokenExchangeFlowDelegateRecorder()
         flow.add(delegate: delegate)

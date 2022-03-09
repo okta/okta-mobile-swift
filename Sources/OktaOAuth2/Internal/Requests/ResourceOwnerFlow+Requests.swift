@@ -15,6 +15,7 @@ import AuthFoundation
 
 extension ResourceOwnerFlow {
     struct TokenRequest {
+        let openIdConfiguration: OpenIdConfiguration
         let clientId: String
         let scope: String
         let username: String
@@ -22,9 +23,9 @@ extension ResourceOwnerFlow {
     }
 }
 
-extension ResourceOwnerFlow.TokenRequest: TokenRequest, APIRequest, APIRequestBody, APIParsingContext {
+extension ResourceOwnerFlow.TokenRequest: TokenRequest, OAuth2APIRequest, APIRequestBody, APIParsingContext {
     var httpMethod: APIRequestMethod { .post }
-    var path: String { "v1/token" }
+    var url: URL { openIdConfiguration.tokenEndpoint }
     var contentType: APIContentType? { .formEncoded }
     var acceptsType: APIContentType? { .json }
     var bodyParameters: [String : Any]? {

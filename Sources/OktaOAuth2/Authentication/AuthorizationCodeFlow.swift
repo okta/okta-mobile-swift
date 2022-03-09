@@ -66,59 +66,6 @@ public protocol AuthorizationCodeFlowDelegate: AuthenticationDelegate {
 /// let token = try await flow.resume(with: redirectUri)
 /// ```
 public class AuthorizationCodeFlow: AuthenticationFlow {
-    /// Configuration settings that define the OAuth2 client to be authenticated against.
-    
-    public struct Configuration: AuthenticationConfiguration {
-        /// The client's ID.
-        public let clientId: String
-        
-        /// The client secret, if applicable to your application.
-        public let clientSecret: String?
-        
-        /// The scopes requested.
-        public let scopes: String
-        
-        /// The response type expected.
-        public let responseType: ResponseType
-        
-        /// The redirect URI defined for your client.
-        public let redirectUri: URL
-        
-        /// The logout redirect URI, if applicable.
-        public let logoutRedirectUri: URL?
-        
-        /// Any additional query string parameters you would like to supply to the authorization server.
-        public let additionalParameters: [String:String]?
-        
-        /// Convenience initializer for constructing an authorization code flow configuration using the supplied values.
-        /// - Parameters:
-        ///   - clientId: The client's ID
-        ///   - clientSecret: The client's secret, if applicable
-        ///   - state: The state to use in the authorization URL, or `nil` to accept an auto-generated value.
-        ///   - scopes: The scopes to request
-        ///   - responseType: The response type expected, which defaults to `.code`
-        ///   - redirectUri: The redirect URI for the client
-        ///   - logoutRedirectUri: The logout redirect URI, if applicable
-        ///   - additionalParameters: Additional query string parameters to provide, or `nil` for no custom parameters.
-        public init(clientId: String,
-                    clientSecret: String? = nil,
-                    state: String? = nil,
-                    scopes: String,
-                    responseType: ResponseType = .code,
-                    redirectUri: URL,
-                    logoutRedirectUri: URL? = nil,
-                    additionalParameters: [String:String]? = nil)
-        {
-            self.clientId = clientId
-            self.clientSecret = clientSecret
-            self.scopes = scopes
-            self.responseType = responseType
-            self.redirectUri = redirectUri
-            self.logoutRedirectUri = logoutRedirectUri
-            self.additionalParameters = additionalParameters
-        }
-    }
-    
     /// A model representing the context and current state for an authorization session.
     public struct Context: Codable, Equatable {
         /// The ``PKCE`` credentials to use in the authorization request.
@@ -159,9 +106,18 @@ public class AuthorizationCodeFlow: AuthenticationFlow {
     /// The OAuth2Client this authentication flow will use.
     public let client: OAuth2Client
     
-    /// The configuration used when constructing this authentication flow.
-    public let configuration: Configuration
+    /// The response type expected.
+    public let responseType: ResponseType
     
+    /// The redirect URI defined for your client.
+    public let redirectUri: URL
+    
+    /// The logout redirect URI, if applicable.
+    public let logoutRedirectUri: URL?
+    
+    /// Any additional query string parameters you would like to supply to the authorization server.
+    public let additionalParameters: [String:String]?
+
     /// Indicates whether or not this flow is currently in the process of authenticating a user.
     private(set) public var isAuthenticating: Bool = false {
         didSet {
@@ -188,16 +144,6 @@ public class AuthorizationCodeFlow: AuthenticationFlow {
         }
     }
     
-    /// The OpenID configuration retrieved from the authorization server.
-    ///
-    /// This value may be `nil` if the authentication session hasn't been started.
-    private(set) public var openIdConfiguration: OpenIdConfiguration?
-    
-    /// The callback URL scheme this client expects to see when a redirection occurs.
-    public lazy var callbackScheme: String? = {
-        configuration.redirectUri.scheme
-    }()
-    
     /// Convenience initializer to construct an authentication flow from variables.
     /// - Parameters:
     ///   - issuer: The issuer URL.
@@ -208,24 +154,35 @@ public class AuthorizationCodeFlow: AuthenticationFlow {
     public convenience init(issuer: URL,
                             clientId: String,
                             scopes: String,
+                            redirectUri: URL,
+                            logoutRedirectUri: URL? = nil,
                             responseType: ResponseType = .code,
-                            redirectUri: URL)
+                            additionalParameters: [String:String]? = nil)
     {
-        self.init(Configuration(clientId: clientId,
-                                clientSecret: nil,
-                                scopes: scopes,
-                                responseType: responseType,
-                                redirectUri: redirectUri),
-                  client: OAuth2Client(baseURL: issuer))
+        self.init(redirectUri: redirectUri,
+                  logoutRedirectUri: logoutRedirectUri,
+                  responseType: responseType,
+                  additionalParameters: additionalParameters,
+                  client: OAuth2Client(baseURL: issuer,
+                                       clientId: clientId,
+                                       scopes: scopes))
     }
     
     /// Initializer to construct an authentication flow from a pre-defined configuration and client.
     /// - Parameters:
     ///   - configuration: The configuration to use for this authentication flow.
     ///   - client: The `OAuth2Client` to use with this flow.
-    public init(_ configuration: Configuration, client: OAuth2Client) {
+    public init(redirectUri: URL,
+                logoutRedirectUri: URL? = nil,
+                responseType: ResponseType = .code,
+                additionalParameters: [String:String]? = nil,
+                client: OAuth2Client)
+    {
         self.client = client
-        self.configuration = configuration
+        self.responseType = responseType
+        self.redirectUri = redirectUri
+        self.logoutRedirectUri = logoutRedirectUri
+        self.additionalParameters = additionalParameters
         
         client.add(delegate: self)
     }
@@ -246,8 +203,6 @@ public class AuthorizationCodeFlow: AuthenticationFlow {
                 self.delegateCollection.invoke { $0.authentication(flow: self, received: error) }
                 completion?(.failure(error))
             case .success(let configuration):
-                self.openIdConfiguration = configuration
-                
                 do {
                     let url = try self.createAuthenticationURL(from: configuration.authorizationEndpoint,
                                                                using: context)
@@ -274,25 +229,32 @@ public class AuthorizationCodeFlow: AuthenticationFlow {
     ///   - completion: Optional completion block to retrieve the returned result.
     public func resume(with url: URL, completion: ((Result<Token,APIClientError>) -> Void)? = nil) throws {
         let code = try authorizationCode(from: url)
-
-        let request = TokenRequest(clientId: configuration.clientId,
-                                   clientSecret: configuration.clientSecret,
-                                   scope: configuration.scopes,
-                                   redirectUri: configuration.redirectUri.absoluteString,
-                                   grantType: .authorizationCode,
-                                   grantValue: code,
-                                   pkce: context?.pkce)
-        client.exchange(token: request) { result in
-            self.reset()
-
+        
+        client.openIdConfiguration { result in
             switch result {
-            case .success(let response):
-                let token = response.result
-                self.delegateCollection.invoke { $0.authentication(flow: self, received: token) }
-                completion?(.success(token))
+            case .success(let configuration):
+                let request = TokenRequest(openIdConfiguration: configuration,
+                                           clientId: self.client.configuration.clientId,
+                                           scope: self.client.configuration.scopes,
+                                           redirectUri: self.redirectUri.absoluteString,
+                                           grantType: .authorizationCode,
+                                           grantValue: code,
+                                           pkce: self.context?.pkce)
+                self.client.exchange(token: request) { result in
+                    self.reset()
+                    
+                    switch result {
+                    case .success(let response):
+                        self.delegateCollection.invoke { $0.authentication(flow: self, received: response.result) }
+                        completion?(.success(response.result))
+                    case .failure(let error):
+                        self.delegateCollection.invoke { $0.authentication(flow: self, received: .network(error: error)) }
+                        completion?(.failure(error))
+                    }
+                }
+                
             case .failure(let error):
-                self.delegateCollection.invoke { $0.authentication(flow: self, received: .network(error: error)) }
-                completion?(.failure(error))
+                self.delegateCollection.invoke { $0.authentication(flow: self, received: error) }
             }
         }
     }
@@ -369,7 +331,7 @@ extension AuthorizationCodeFlow {
             throw RedirectError.invalidRedirectUrl
         }
         
-        guard components.scheme?.lowercased() == callbackScheme?.lowercased() else {
+        guard components.scheme?.lowercased() == redirectUri.scheme?.lowercased() else {
             throw RedirectError.unexpectedScheme(components.scheme)
         }
         
@@ -403,4 +365,19 @@ extension AuthorizationCodeFlow {
 
 extension AuthorizationCodeFlow: OAuth2ClientDelegate {
     
+}
+
+extension OAuth2Client {
+    public func authorizationCodeFlow(
+        redirectUri: URL,
+        logoutRedirectUri: URL? = nil,
+        responseType: ResponseType = .code,
+        additionalParameters: [String:String]? = nil) -> AuthorizationCodeFlow
+    {
+        AuthorizationCodeFlow(redirectUri: redirectUri,
+                              logoutRedirectUri: logoutRedirectUri,
+                              responseType: responseType,
+                                                    additionalParameters: additionalParameters,
+                              client: self)
+    }
 }

@@ -29,6 +29,8 @@ class SafariBrowserProviderTests: ProviderTestBase {
     
     func testControllerCreation() {
         provider.start(context: nil)
+        waitFor(.authenticateUrl)
+
         XCTAssertNotNil(provider.safariController)
     }
 }

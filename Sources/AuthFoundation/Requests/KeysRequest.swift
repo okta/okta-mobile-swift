@@ -12,17 +12,23 @@
 
 import Foundation
 
+#if os(Linux)
+import FoundationNetworking
+#endif
+
 extension OAuth2Client {
     struct KeysRequest {
-        let clientId: String
+        let openIdConfiguration: OpenIdConfiguration
+        let clientId: String?
     }
 }
 
-extension OAuth2Client.KeysRequest: APIRequest {
+extension OAuth2Client.KeysRequest: OAuth2APIRequest {
     var httpMethod: APIRequestMethod { .get }
-    var path: String { "v1/keys" }
+    var url: URL { openIdConfiguration.jwksUri }
     var acceptsType: APIContentType? { .json }
     var query: [String : APIRequestArgument?]? {
         [ "client_id": clientId ]
     }
+    var cachePolicy: URLRequest.CachePolicy { .returnCacheDataElseLoad }
 }

@@ -27,6 +27,12 @@ You can use AuthFoundation when you want to:
 - ``OAuth2ClientDelegate``
 - ``OpenIdConfiguration``
 
+### JWT and Token Verification
+
+- ``JWT``
+- ``JWK``
+- ``JWKS``
+
 ### Customizations
 
 - ``TimeCoordinator``
@@ -34,6 +40,8 @@ You can use AuthFoundation when you want to:
 - ``CredentialDataSourceDelegate``
 - ``TokenStorage``
 - ``TokenStorageDelegate``
+- ``JWKStorage``
+- ``JWTValidator``
 
 ### Networking
 
@@ -57,6 +65,7 @@ You can use AuthFoundation when you want to:
 - ``OktaAPIError``
 - ``CredentialError``
 - ``TokenError``
+- ``JWTError``
 
 ### Internals and mocking
 

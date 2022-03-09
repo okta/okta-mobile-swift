@@ -11,6 +11,7 @@
 //
 
 import Foundation
+import XCTest
 
 #if os(Linux)
 import FoundationNetworking
@@ -20,17 +21,18 @@ import FoundationNetworking
 
 class URLSessionMock: URLSessionProtocol {
     struct Call {
+        let url: String
         let data: Data?
         let response: HTTPURLResponse?
         let error: Error?
     }
     
-    private var calls: [String: Call] = [:]
-    func expect(_ url: String, call: Call) {
-        calls[url] = call
-    }
+    var requestDelay: TimeInterval?
     
-    var asyncTasks: Bool = true
+    private(set) var calls: [Call] = []
+    func expect(call: Call) {
+        calls.append(call)
+    }
     
     func expect(_ url: String,
                 data: Data?,
@@ -43,13 +45,21 @@ class URLSessionMock: URLSessionProtocol {
                                        httpVersion: "http/1.1",
                                        headerFields: ["Content-Type": contentType])
         
-        expect(url, call: Call(data: data,
-                               response: response,
-                               error: error))
+        expect(call: Call(url: url,
+                          data: data,
+                          response: response,
+                          error: error))
     }
 
     func call(for url: String) -> Call? {
-        return calls.removeValue(forKey: url)
+        guard let index = calls.firstIndex(where: { call in
+            call.url == url
+        }) else {
+            XCTFail("Mock URL \(url) not found")
+            return nil
+        }
+        
+        return calls.remove(at: index)
     }
     
     func dataTaskWithRequest(_ request: URLRequest, completionHandler: @escaping (Data?, URLResponse?, Error?) -> Void) -> URLSessionDataTaskProtocol {
@@ -113,11 +123,14 @@ class URLSessionDataTaskMock: URLSessionDataTaskProtocol {
     }
     
     func resume() {
-        if session?.asyncTasks ?? true {
+        guard let delay = session?.requestDelay else {
             DispatchQueue.global().async {
                 self.completionHandler(self.data, self.response, self.error)
             }
-        } else {
+            return
+        }
+        
+        DispatchQueue.global().asyncAfter(deadline: .now() + delay) {
             self.completionHandler(self.data, self.response, self.error)
         }
     }

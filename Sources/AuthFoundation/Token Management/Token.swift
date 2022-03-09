@@ -23,6 +23,8 @@ public enum TokenError: Error {
 
 /// Token information representing a user's access to a resource server, including access token, refresh token, and other related information.
 public class Token: Codable, Equatable, Hashable, Identifiable, Expires {
+    public static var idTokenValidator: IDTokenValidator = DefaultIDTokenValidator()
+    
     // The date this token was issued at.
     public var issuedAt: Date?
     
@@ -42,7 +44,7 @@ public class Token: Codable, Equatable, Hashable, Identifiable, Expires {
     public let refreshToken: String?
     
     /// The ID token, if requested.
-    public let idToken: String?
+    public let idToken: JWT?
     
     /// Defines the context this token was issued from.
     public let context: Context
@@ -64,8 +66,7 @@ public class Token: Codable, Equatable, Hashable, Identifiable, Expires {
         }
         
         if let idToken = idToken,
-           let jwt = try? JWT(idToken),
-           let subject = jwt.subject
+           let subject = idToken.subject
         {
             return subject
         }
@@ -85,10 +86,22 @@ public class Token: Codable, Equatable, Hashable, Identifiable, Expires {
         case .refreshToken:
             return refreshToken
         case .idToken:
-            return idToken
+            return idToken?.rawValue
         case .deviceSecret:
             return deviceSecret
         }
+    }
+    
+    /// Validates the claims within this JWT token, to ensure it matches the given ``OAuth2Client``.
+    /// - Parameter client: Client to validate the token's claims against.
+    public func validate(using client: OAuth2Client) throws {
+        guard let idToken = idToken else {
+            return
+        }
+
+        try Token.idTokenValidator.validate(token: idToken,
+                                            issuer: client.configuration.baseURL,
+                                            clientId: client.configuration.clientId)
     }
     
     public static func == (lhs: Token, rhs: Token) -> Bool {
@@ -109,7 +122,7 @@ public class Token: Codable, Equatable, Hashable, Identifiable, Expires {
                   accessToken: String,
                   scope: String,
                   refreshToken: String?,
-                  idToken: String?,
+                  idToken: JWT?,
                   deviceSecret: String?,
                   context: Context)
     {
@@ -130,11 +143,16 @@ public class Token: Codable, Equatable, Hashable, Identifiable, Expires {
         let context: Context
         if container.contains(.context) {
             context = try container.decode(Context.self, forKey: .context)
-        } else if let baseUrl = decoder.userInfo[.baseURL] as? URL {
-            context = Context(baseURL: baseUrl,
+        } else if let configuration = decoder.userInfo[.apiClientConfiguration] as? OAuth2Client.Configuration {
+            context = Context(configuration: configuration,
                               clientSettings: decoder.userInfo[.clientSettings])
         } else {
             throw TokenError.contextMissing
+        }
+        
+        var idToken: JWT? = nil
+        if let idTokenString = try container.decodeIfPresent(String.self, forKey: .idToken) {
+            idToken = try JWT(idTokenString)
         }
         
         self.init(issuedAt: Date.nowCoordinated,
@@ -143,7 +161,7 @@ public class Token: Codable, Equatable, Hashable, Identifiable, Expires {
                   accessToken: try container.decode(String.self, forKey: .accessToken),
                   scope: try container.decode(String.self, forKey: .scope),
                   refreshToken: try container.decodeIfPresent(String.self, forKey: .refreshToken),
-                  idToken: try container.decodeIfPresent(String.self, forKey: .idToken),
+                  idToken: idToken,
                   deviceSecret: try container.decodeIfPresent(String.self, forKey: .deviceSecret),
                   context: context)
     }
@@ -155,13 +173,13 @@ extension Token {
     /// This includes information such as the ``baseURL`` where operations related to this token should be performed.
     public struct Context: Codable, Equatable, Hashable {
         /// The base URL from which this token was issued.
-        public let baseURL: URL
+        public let configuration: OAuth2Client.Configuration
         
         /// Settings required to be supplied to the authorization server when refreshing this token.
         let clientSettings: [String:String]?
         
-        init(baseURL: URL, clientSettings: Any?) {
-            self.baseURL = baseURL
+        init(configuration: OAuth2Client.Configuration, clientSettings: Any?) {
+            self.configuration = configuration
             
             if let settings = clientSettings as? [String:String]? {
                 self.clientSettings = settings
@@ -193,7 +211,7 @@ extension Token {
 }
 
 extension CodingUserInfoKey {
-    public static let baseURL = CodingUserInfoKey(rawValue: "baseURL")!
+    public static let apiClientConfiguration = CodingUserInfoKey(rawValue: "apiClientConfiguration")!
     public static let clientSettings = CodingUserInfoKey(rawValue: "clientSettings")!
 }
 

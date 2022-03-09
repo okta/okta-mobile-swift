@@ -41,19 +41,33 @@ class AuthenticationDelegateRecorder: AuthenticationDelegate {
 final class ResourceOwnerFlowSuccessTests: XCTestCase {
     let issuer = URL(string: "https://example.com")!
     let clientMock = OAuth2ClientMock()
-    var configuration: ResourceOwnerFlow.Configuration!
     let urlSession = URLSessionMock()
     var client: OAuth2Client!
     var flow: ResourceOwnerFlow!
 
     override func setUpWithError() throws {
-        configuration = ResourceOwnerFlow.Configuration(clientId: "clientId",
-                                                        scopes: "openid profile")
-        client = OAuth2Client(baseURL: issuer, session: urlSession)
-        urlSession.expect("https://example.com/oauth2/default/v1/token",
+        client = OAuth2Client(baseURL: issuer,
+                              clientId: "clientId",
+                              scopes: "openid profile",
+                              session: urlSession)
+        JWK.validator = MockJWKValidator()
+        Token.idTokenValidator = MockIDTokenValidator()
+
+        urlSession.expect("https://example.com/.well-known/openid-configuration",
+                          data: try data(from: .module, for: "openid-configuration", in: "MockResponses"),
+                          contentType: "application/json")
+        urlSession.expect("https://example.okta.com/oauth2/v1/keys?client_id=clientId",
+                          data: try data(from: .module, for: "keys", in: "MockResponses"),
+                          contentType: "application/json")
+        urlSession.expect("https://example.okta.com/oauth2/v1/token",
                           data: try data(from: .module, for: "token", in: "MockResponses"),
                           contentType: "application/json")
-        flow = ResourceOwnerFlow(configuration, client: client)
+        flow = client.resourceOwnerFlow()
+    }
+    
+    override func tearDownWithError() throws {
+        JWK.resetToDefault()
+        Token.resetToDefault()
     }
 
     func testWithDelegate() throws {

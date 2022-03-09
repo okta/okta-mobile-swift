@@ -14,11 +14,13 @@ import XCTest
 @testable import AuthFoundation
 
 final class TokenTests: XCTestCase {
-    let baseURL = URL(string: "https://example.com")!
+    let configuration = OAuth2Client.Configuration(baseURL: URL(string: "https://example.com")!,
+                                                   clientId: "clientid",
+                                                   scopes: "openid")
     
     func testTokenContextNilSettings() throws {
-        let context = Token.Context(baseURL: baseURL, clientSettings: nil)
-        XCTAssertEqual(context.baseURL, baseURL)
+        let context = Token.Context(configuration: configuration, clientSettings: nil)
+        XCTAssertEqual(context.configuration, configuration)
         
         let data = try JSONEncoder().encode(context)
         let decodedContext = try JSONDecoder().decode(Token.Context.self, from: data)
@@ -26,7 +28,7 @@ final class TokenTests: XCTestCase {
     }
     
     func testTokenContextStringSettings() throws {
-        let context = Token.Context(baseURL: baseURL,
+        let context = Token.Context(configuration: configuration,
                                     clientSettings: ["foo": "bar"])
         XCTAssertEqual(context.clientSettings, ["foo": "bar"])
         
@@ -36,9 +38,9 @@ final class TokenTests: XCTestCase {
     }
 
     func testTokenContextCodingUserInfoKeySettings() throws {
-        let context = Token.Context(baseURL: baseURL,
-                                    clientSettings: [CodingUserInfoKey.baseURL: "bar"])
-        XCTAssertEqual(context.clientSettings, ["baseURL": "bar"])
+        let context = Token.Context(configuration: configuration,
+                                    clientSettings: [CodingUserInfoKey.apiClientConfiguration: "bar"])
+        XCTAssertEqual(context.clientSettings, ["apiClientConfiguration": "bar"])
         
         let data = try JSONEncoder().encode(context)
         let decodedContext = try JSONDecoder().decode(Token.Context.self, from: data)
@@ -52,14 +54,13 @@ final class TokenTests: XCTestCase {
                           accessToken: "the_access_token",
                           scope: "openid profile offline_access",
                           refreshToken: "the_refresh_token",
-                          idToken: "the_id_token",
+                          idToken: nil,
                           deviceSecret: "the_device_secret",
-                          context: Token.Context(baseURL: baseURL,
+                          context: Token.Context(configuration: configuration,
                                                  clientSettings: []))
         
         XCTAssertEqual(token.token(of: .accessToken), token.accessToken)
         XCTAssertEqual(token.token(of: .refreshToken), token.refreshToken)
-        XCTAssertEqual(token.token(of: .idToken), token.idToken)
         XCTAssertEqual(token.token(of: .deviceSecret), token.deviceSecret)
 
         let data = try JSONEncoder().encode(token)

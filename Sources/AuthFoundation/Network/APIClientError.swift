@@ -22,6 +22,7 @@ public enum APIClientError: Error {
     case unsupportedContentType(_ type: APIContentType)
     case serverError(_ error: Error)
     case statusCode(_ statusCode: Int)
+    case validation(error: Error)
     case unknown
 }
 
@@ -92,7 +93,16 @@ extension APIClientError: LocalizedError {
                                   bundle: .module,
                                   comment: "Invalid URL"),
                 code)
-            
+
+        case .validation(error: let error):
+            if let error = error as? LocalizedError {
+                return error.localizedDescription
+            }
+
+            return NSLocalizedString("validation_error",
+                                     bundle: .module,
+                                     comment: "Invalid URL")
+
         case .unknown:
             return NSLocalizedString("unknown_description",
                                      bundle: .module,

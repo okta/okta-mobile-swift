@@ -14,13 +14,14 @@ import Foundation
 
 extension UserInfo {
     struct Request {
+        let openIdConfiguration: OpenIdConfiguration
         let token: Token
     }
 }
 
-extension UserInfo.Request: APIRequest {
+extension UserInfo.Request: APIRequest, OAuth2APIRequest {
     var httpMethod: APIRequestMethod { .get }
-    var path: String { "v1/userinfo" }
+    var url: URL { openIdConfiguration.userinfoEndpoint }
     var acceptsType: APIContentType? { .json }
     var authorization: APIAuthorization? { token }
 }

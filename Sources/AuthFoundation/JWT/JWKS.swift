@@ -12,34 +12,36 @@
 
 import Foundation
 
-public struct JWKS: Codable {
-    let keys: [JWK]
+/// Describes the collection of keys associated with an authorization server.
+///
+/// These can be used to verify tokens and other signed or encrypted content using the keys published by the server.
+public struct JWKS: Codable, Equatable, Collection {
+    public typealias Index = Int
+    public typealias Element = JWK
 
-    func key(with kid: String) -> JWK? {
-        keys.first { $0.keyId == kid }
+    private let keys: [JWK]
+
+    public subscript(_ keyId: String) -> JWK? {
+        keys.first { $0.id == keyId }
     }
-}
+    
+    public var startIndex: Index {
+        keys.startIndex
+    }
+    
+    public var endIndex: Index {
+        keys.endIndex
+    }
 
-public struct JWK: Codable {
-    let keyType: String
-    let keyId: String?
-    let usage: String?
-    let algorithm: String?
-    let certUrl: String?
-    let certThumbprint: String?
-    let certChain: [String]?
-    let rsaModulus: String?
-    let rsaExponent: String?
+    public subscript(index: Index) -> Element {
+        keys[index]
+    }
+    
+    public func index(after i: Index) -> Index {
+        keys.index(after: i)
+    }
 
-    enum CodingKeys: String, CodingKey {
-        case keyType = "kty"
-        case keyId = "kid"
-        case usage = "use"
-        case algorithm = "alg"
-        case certUrl = "x5u"
-        case certThumbprint = "x5t"
-        case certChain = "x5c"
-        case rsaModulus = "n"
-        case rsaExponent = "e"
+    public static func == (lhs: JWKS, rhs: JWKS) -> Bool {
+        lhs.keys == rhs.keys
     }
 }

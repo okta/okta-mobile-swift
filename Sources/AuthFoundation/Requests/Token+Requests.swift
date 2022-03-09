@@ -13,17 +13,20 @@
 import Foundation
 extension Token {
     struct RevokeRequest {
+        let openIdConfiguration: OpenIdConfiguration
         let token: String
         let hint: Token.Kind?
         let configuration: [String:String]
     }
 
     struct RefreshRequest {
+        let openIdConfiguration: OpenIdConfiguration
         let token: Token
         let configuration: [String:String]
     }
     
     struct IntrospectRequest {
+        let openIdConfiguration: OpenIdConfiguration
         let token: Token
         let type: Token.Kind
     }
@@ -33,9 +36,13 @@ extension Token: APIAuthorization {
     public var authorizationHeader: String? { "\(tokenType) \(accessToken)" }
 }
 
-extension Token.RevokeRequest: APIRequest, APIRequestBody {
+public protocol OAuth2APIRequest: APIRequest {
+    var openIdConfiguration: OpenIdConfiguration { get }
+}
+
+extension Token.RevokeRequest: OAuth2APIRequest, APIRequestBody {
     var httpMethod: APIRequestMethod { .post }
-    var path: String { "v1/revoke" }
+    var url: URL { openIdConfiguration.revocationEndpoint }
     var contentType: APIContentType? { .formEncoded }
     var acceptsType: APIContentType? { .json }
     var bodyParameters: [String : Any]? {
@@ -50,9 +57,9 @@ extension Token.RevokeRequest: APIRequest, APIRequestBody {
     }
 }
 
-extension Token.IntrospectRequest: APIRequest, APIRequestBody {
+extension Token.IntrospectRequest: OAuth2APIRequest, APIRequestBody {
     var httpMethod: APIRequestMethod { .post }
-    var path: String { "v1/introspect" }
+    var url: URL { openIdConfiguration.introspectionEndpoint }
     var contentType: APIContentType? { .formEncoded }
     var acceptsType: APIContentType? { .json }
     var authorization: APIAuthorization? { token }
@@ -64,9 +71,9 @@ extension Token.IntrospectRequest: APIRequest, APIRequestBody {
     }
 }
 
-extension Token.RefreshRequest: APIRequest, APIRequestBody, APIParsingContext {
+extension Token.RefreshRequest: OAuth2APIRequest, APIRequestBody, APIParsingContext {
     var httpMethod: APIRequestMethod { .post }
-    var path: String { "v1/token" }
+    var url: URL { openIdConfiguration.tokenEndpoint }
     var contentType: APIContentType? { .formEncoded }
     var acceptsType: APIContentType? { .json }
     var bodyParameters: [String : Any]? {

@@ -122,7 +122,7 @@ public class WebAuthentication {
     @available(iOS 13.0, *)
     public func resume(with URLContexts: Set<UIOpenURLContext>) throws {
         try URLContexts
-            .filter { $0.url.scheme?.lowercased() == flow.callbackScheme?.lowercased() }
+            .filter { $0.url.scheme?.lowercased() == flow.redirectUri.scheme?.lowercased() }
             .map(\.url)
             .forEach { try resume(with: $0) }
     }
@@ -135,7 +135,7 @@ public class WebAuthentication {
     /// If the URI does not match the configured URI scheme, this method will thrown an error.
     /// - Parameter url: URL from which to attempt to resume authentication.
     public func resume(with url: URL) throws {
-        guard url.scheme?.lowercased() == flow.callbackScheme?.lowercased()
+        guard url.scheme?.lowercased() == flow.redirectUri.scheme?.lowercased()
         else {
             throw WebAuthenticationError.invalidRedirectScheme(url.scheme)
         }
@@ -194,16 +194,13 @@ public class WebAuthentication {
             logoutRedirectUri = nil
         }
         
-        let clientSecret = dict["clientSecret"]
-        
         // Filter only additional parameters
         let additionalParameters = dict.filter {
-            !["clientId", "clientSecret", "issuer", "scopes", "redirectUri", "logoutRedirectUri"].contains($0.key)
+            !["clientId", "issuer", "scopes", "redirectUri", "logoutRedirectUri"].contains($0.key)
         }
 
         self.init(issuer: issuerUrl,
                   clientId: clientId,
-                  clientSecret: clientSecret,
                   scopes: scopes,
                   redirectUri: redirectUri,
                   logoutRedirectUri: logoutRedirectUri,
@@ -214,7 +211,6 @@ public class WebAuthentication {
     /// - Parameters:
     ///   - issuer: The URL for the OAuth2 issuer.
     ///   - clientId: The client's ID.
-    ///   - clientSecret: The client's secret, if applicable.
     ///   - scopes: The scopes the client is requesting.
     ///   - responseType: The response type to expect.
     ///   - redirectUri: The redirect URI for the configured client.
@@ -222,36 +218,20 @@ public class WebAuthentication {
     ///   - additionalParameters: Optional parameters to add to the authorization query string.
     public convenience init(issuer: URL,
                             clientId: String,
-                            clientSecret: String? = nil,
                             scopes: String,
                             responseType: ResponseType = .code,
                             redirectUri: URL,
                             logoutRedirectUri: URL? = nil,
                             additionalParameters: [String:String]? = nil)
     {
-        self.init(issuer: issuer,
-                  configuration: .init(clientId: clientId,
-                                       clientSecret: clientSecret,
-                                       scopes: scopes,
-                                       responseType: responseType,
-                                       redirectUri: redirectUri,
-                                       logoutRedirectUri: logoutRedirectUri,
-                                       additionalParameters: additionalParameters))
-    }
-    
-    /// Initializes a web authentication session using the supplied AuthorizationCodeFlow configuration, and optional URL session.
-    ///
-    /// This constructor can be used when a custom URL session is required.
-    /// - Parameters:
-    ///   - configuration: Authorization code flow configuration describing the OAuth2 client.
-    ///   - session: The URLSession instance to use; defaults to `.shared`.
-    public convenience init(issuer: URL,
-                            configuration: AuthorizationCodeFlow.Configuration,
-                            session: URLSession = URLSession.shared)
-    {
-        self.init(flow: .init(configuration,
-                              client: .init(baseURL: issuer,
-                                            session: session)))
+        self.init(flow: .init(issuer: issuer,
+                              clientId: clientId,
+                              scopes: scopes,
+                              redirectUri: redirectUri,
+                              logoutRedirectUri: logoutRedirectUri,
+                              responseType: responseType,
+                              additionalParameters: additionalParameters),
+                  context: nil)
     }
     
     func createWebAuthenticationProvider(flow: AuthorizationCodeFlow,

@@ -15,8 +15,8 @@ import AuthFoundation
 
 extension AuthorizationCodeFlow {
     struct TokenRequest {
+        let openIdConfiguration: OpenIdConfiguration
         let clientId: String
-        let clientSecret: String?
         let scope: String
         let redirectUri: String
         let grantType: GrantType
@@ -25,9 +25,9 @@ extension AuthorizationCodeFlow {
     }
 }
 
-extension AuthorizationCodeFlow.TokenRequest: TokenRequest, APIRequest, APIRequestBody, APIParsingContext {
+extension AuthorizationCodeFlow.TokenRequest: TokenRequest, OAuth2APIRequest, APIRequestBody, APIParsingContext {
     var httpMethod: APIRequestMethod { .post }
-    var path: String { "v1/token" }
+    var url: URL { openIdConfiguration.tokenEndpoint }
     var contentType: APIContentType? { .formEncoded }
     var acceptsType: APIContentType? { .json }
     var bodyParameters: [String : Any]? {
@@ -37,10 +37,6 @@ extension AuthorizationCodeFlow.TokenRequest: TokenRequest, APIRequest, APIReque
             "grant_type": grantType.rawValue,
             grantType.responseKey: grantValue
         ]
-        
-        if let clientSecret = clientSecret {
-            result["client_secret"] = clientSecret
-        }
         
         if let pkce = pkce {
             result["code_verifier"] = pkce.codeVerifier

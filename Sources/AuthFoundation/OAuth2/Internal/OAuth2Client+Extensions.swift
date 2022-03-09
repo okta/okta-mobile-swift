@@ -14,7 +14,7 @@ import Foundation
 
 extension OAuth2Client {
     func fetchOpenIdConfiguration(completion: @escaping (Result<APIResponse<OpenIdConfiguration>, APIClientError>) -> Void) {
-        send(OpenIdConfigurationRequest(), completion: completion)
+        send(OpenIdConfigurationRequest(baseURL: baseURL), completion: completion)
     }
 
     func refresh(_ request: Token.RefreshRequest, completion: @escaping (Result<APIResponse<Token>, APIClientError>) -> Void) {
@@ -33,7 +33,7 @@ extension OAuth2Client {
         send(request, completion: completion)
     }
 
-    func keys(_ request: KeysRequest, completion: @escaping (Result<APIResponse<JWKS>, APIClientError>) -> Void) {
+    func fetchKeys(_ request: KeysRequest, completion: @escaping (Result<APIResponse<JWKS>, APIClientError>) -> Void) {
         send(request, completion: completion)
     }
 }

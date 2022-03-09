@@ -22,7 +22,7 @@ class SignInViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        if let clientId = auth?.flow.configuration.clientId {
+        if let clientId = auth?.flow.client.configuration.clientId {
             clientIdLabel.text = clientId
         } else {
             clientIdLabel.text = "Not configured"
@@ -46,10 +46,15 @@ class SignInViewController: UIViewController {
                                         
                 self.dismiss(animated: true)
             case .failure(let error):
-                let alert = UIAlertController(title: "Cannot sign in", message: error.localizedDescription, preferredStyle: .alert)
-                alert.addAction(.init(title: "OK", style: .default))
-                
-                self.present(alert, animated: true)
+                // There's currently no way to know when the ASWebAuthenticationSession will be dismissed,
+                // so to ensure the alert can be displayed, we must delay presenting an error until the
+                // dismissal is complete.
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.33) {
+                    let alert = UIAlertController(title: "Cannot sign in", message: error.localizedDescription, preferredStyle: .alert)
+                    alert.addAction(.init(title: "OK", style: .default))
+                    
+                    self.present(alert, animated: true)
+                }
             }
         }
 

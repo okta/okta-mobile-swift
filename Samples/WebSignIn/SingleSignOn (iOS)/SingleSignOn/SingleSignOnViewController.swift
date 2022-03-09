@@ -40,7 +40,7 @@ final class SingleSignOnViewController: UIViewController {
         signIn(silent: true)
         
         signInButton.isEnabled = flow != nil
-        clientIdLabel.text = flow?.configuration.clientId
+        clientIdLabel.text = flow?.client.configuration.clientId
     }
     
     @IBAction private func signIn() {

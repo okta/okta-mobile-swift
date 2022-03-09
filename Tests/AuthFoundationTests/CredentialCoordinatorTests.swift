@@ -32,7 +32,9 @@ final class UserCoordinatorTests: XCTestCase {
                       refreshToken: nil,
                       idToken: nil,
                       deviceSecret: nil,
-                      context: Token.Context(baseURL: URL(string: "https://example.com")!,
+                      context: Token.Context(configuration: .init(baseURL: URL(string: "https://example.com")!,
+                                                                  clientId: "clientid",
+                                                                  scopes: "openid"),
                                              clientSettings: nil))
 
     override func setUpWithError() throws {
@@ -94,7 +96,10 @@ final class UserCoordinatorTests: XCTestCase {
         
         let issuer = URL(string: "https://example.com")!
         let urlSession = URLSessionMock()
-        let client = OAuth2Client(baseURL: issuer, session: urlSession)
+        let client = OAuth2Client(.init(baseURL: issuer,
+                                        clientId: "clientid",
+                                        scopes: "openid"),
+                                  session: urlSession)
         
         let request = URLRequest(url: URL(string: "https://example.com/oauth2/default/v1/token")!)
         let response: APIResponse<Token> = APIResponse(result: token,

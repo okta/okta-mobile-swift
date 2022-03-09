@@ -63,18 +63,18 @@ extension TokenExchangeFlow {
 
 extension TokenExchangeFlow {
     struct TokenRequest {
+        let openIdConfiguration: OpenIdConfiguration
         let clientId: String
         let tokens: [TokenType]
         let scope: String
         let audience: String
         let grantType = GrantType.other("urn:ietf:params:oauth:grant-type:token-exchange")
-        let tokenPath: String
     }
 }
 
-extension TokenExchangeFlow.TokenRequest: TokenRequest, APIRequest, APIRequestBody {
+extension TokenExchangeFlow.TokenRequest: TokenRequest, OAuth2APIRequest, APIRequestBody {
     var httpMethod: APIRequestMethod { .post }
-    var path: String { tokenPath }
+    var url: URL { openIdConfiguration.tokenEndpoint }
     var contentType: APIContentType? { .formEncoded }
     var acceptsType: APIContentType? { .json }
     var bodyParameters: [String: Any]? {

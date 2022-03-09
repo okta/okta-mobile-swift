@@ -56,12 +56,12 @@ class AuthenticationServicesProvider: NSObject, WebAuthenticationProvider {
         
         authenticationSession = ASWebAuthenticationSession(
             url: url,
-            callbackURLScheme: flow.callbackScheme,
+            callbackURLScheme: flow.redirectUri.scheme,
             completionHandler: { url, error in
                 self.process(url: url, error: error)
             })
         
-        if #available(iOS 13.0, macCatalyst 13.0, macOS 10.15, *) {
+        if #available(iOS 13.0, macCatalyst 13.0, *) {
             authenticationSession?.prefersEphemeralWebBrowserSession = delegate.authenticationShouldUseEphemeralSession(provider: self)
             authenticationSession?.presentationContextProvider = self
         }

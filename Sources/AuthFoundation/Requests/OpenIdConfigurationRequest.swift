@@ -12,9 +12,19 @@
 
 import Foundation
 
-struct OpenIdConfigurationRequest {}
+#if os(Linux)
+import FoundationNetworking
+#endif
+
+struct OpenIdConfigurationRequest {
+    let url: URL
+    
+    init(baseURL: URL) {
+        url = baseURL.appendingPathComponent(".well-known/openid-configuration")
+    }
+}
 
 extension OpenIdConfigurationRequest: APIRequest {
     var httpMethod: APIRequestMethod { .get }
-    var path: String { ".well-known/openid-configuration" }
+    var cachePolicy: URLRequest.CachePolicy { .returnCacheDataElseLoad }
 }

@@ -36,39 +36,27 @@ import Foundation
 /// let token = try await flow.resume(with: tokens)
 /// ```
 public class TokenExchangeFlow: AuthenticationFlow {
-    /// Configuration settings that define the OAuth2 client to be authenticated against.
-    public struct Configuration: AuthenticationConfiguration {
-        /// Identifies the audience of the authorization server.
-        public enum Audience {
-            case `default`
-            case custom(String)
-            
-            var value: String {
-                switch self {
-                case .default:
-                    return "api://default"
-                case .custom(let aud):
-                    return aud
-                }
+    /// Identifies the audience of the authorization server.
+    public enum Audience {
+        case `default`
+        case custom(String)
+        
+        var value: String {
+            switch self {
+            case .default:
+                return "api://default"
+            case .custom(let aud):
+                return aud
             }
         }
-        
-        /// The client's ID.
-        public let clientId: String
-        
-        /// The scopes requested.
-        public let scopes: String
-        
-        /// Server audience.
-        public let audience: Audience
     }
     
     /// The OAuth2 client this authentication flow will use.
     public let client: OAuth2Client
     
-    /// The configuration used when constructing this authentication flow.
-    public let configuration: Configuration
-    
+    /// Server audience.
+    public let audience: Audience
+
     /// Indicates whether or not this flow is currently in the process of authenticating a user.
     private(set) public var isAuthenticating: Bool = false {
         didSet {
@@ -96,20 +84,20 @@ public class TokenExchangeFlow: AuthenticationFlow {
     public convenience init(issuer: URL,
                             clientId: String,
                             scopes: String,
-                            audience: Configuration.Audience = .default) {
-        self.init(Configuration(clientId: clientId,
-                                scopes: scopes,
-                                audience: audience),
-                  client: OAuth2Client(baseURL: issuer))
+                            audience: Audience = .default) {
+        self.init(audience: audience,
+                  client: OAuth2Client(baseURL: issuer,
+                                       clientId: clientId,
+                                       scopes: scopes))
     }
     
     /// Initializer to construct a flow from a pre-defined configuration and client.
     /// - Parameters:
     ///   - configuration: The configuration to use for this flow.
     ///   - client: The `OAuth2Client` to use with this flow.
-    public init(_ configuration: Configuration, client: OAuth2Client) {
+    public init(audience: Audience = .default, client: OAuth2Client) {
         self.client = client
-        self.configuration = configuration
+        self.audience = audience
         
         client.add(delegate: self)
     }
@@ -132,13 +120,28 @@ public class TokenExchangeFlow: AuthenticationFlow {
         
         client.openIdConfiguration { result in
             switch result {
+            case .success(let configuration):
+                let request = TokenRequest(openIdConfiguration: configuration,
+                                           clientId: self.client.configuration.clientId,
+                                           tokens: tokens,
+                                           scope: self.client.configuration.scopes,
+                                           audience: self.audience.value)
+                self.client.exchange(token: request) { result in
+                    switch result {
+                    case .failure(let error):
+                        let oauthError = OAuth2Error.error(error)
+                        self.delegateCollection.invoke { $0.authentication(flow: self, received: oauthError) }
+                        completion?(.failure(oauthError))
+                    case .success(let response):
+                        self.delegateCollection.invoke { $0.authentication(flow: self, received: response.result) }
+                        completion?(.success(response.result))
+                    }
+                    
+                    self.isAuthenticating = false
+                }
+                
             case .failure(let error):
                 self.delegateCollection.invoke { $0.authentication(flow: self, received: error) }
-                completion?(.failure(error))
-                
-                self.isAuthenticating = false
-            case .success(let openIdConfiguration):
-                self.authenticate(tokenURL: openIdConfiguration.tokenEndpoint, tokens: tokens, completion: completion)
             }
         }
     }
@@ -149,27 +152,6 @@ public class TokenExchangeFlow: AuthenticationFlow {
     
     public func reset() {
         
-    }
-    
-    private func authenticate(tokenURL: URL, tokens: [TokenType], completion: ((Result<Token, OAuth2Error>) -> Void)? = nil) {
-        let request = TokenRequest(clientId: configuration.clientId,
-                                   tokens: tokens,
-                                   scope: configuration.scopes,
-                                   audience: configuration.audience.value,
-                                   tokenPath: tokenURL.path)
-        client.exchange(token: request) { result in
-            switch result {
-            case .failure(let error):
-                let oauthError = OAuth2Error.error(error)
-                self.delegateCollection.invoke { $0.authentication(flow: self, received: oauthError) }
-                completion?(.failure(oauthError))
-            case .success(let response):
-                self.delegateCollection.invoke { $0.authentication(flow: self, received: response.result) }
-                completion?(.success(response.result))
-            }
-            
-            self.isAuthenticating = false
-        }
     }
 }
 
@@ -192,3 +174,9 @@ extension TokenExchangeFlow {
     }
 }
 #endif
+
+extension OAuth2Client {
+    public func tokenExchangeFlow(audience: TokenExchangeFlow.Audience = .default) -> TokenExchangeFlow {
+        TokenExchangeFlow(audience: audience, client: self)
+    }
+}

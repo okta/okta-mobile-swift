@@ -144,8 +144,7 @@ final class OpenIDConfigurationTests: XCTestCase {
         XCTAssertEqual(config.tokenEndpoint.absoluteString, "https://example.okta.com/oauth2/v1/token")
         XCTAssertEqual(config.userinfoEndpoint.absoluteString, "https://example.okta.com/oauth2/v1/userinfo")
         
-        let typesSupported: [String]? = config["subjectTypesSupported"]
-        XCTAssertEqual(typesSupported?.first, "public")
+        XCTAssertEqual(config.subjectTypesSupported.first, "public")
         
     }
 }

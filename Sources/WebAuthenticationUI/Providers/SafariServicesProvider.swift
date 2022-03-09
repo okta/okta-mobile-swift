@@ -51,7 +51,7 @@ class SafariServicesProvider: NSObject, WebAuthenticationProvider {
     func authenticate(using url: URL) {
         authenticationSession = SFAuthenticationSession(
             url: url,
-            callbackURLScheme: flow.configuration.redirectUri.scheme,
+            callbackURLScheme: flow.redirectUri.scheme,
             completionHandler: { [weak self] url, error in
                 self?.process(url: url, error: error)
             })

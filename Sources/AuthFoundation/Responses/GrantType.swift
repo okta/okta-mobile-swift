@@ -17,6 +17,7 @@ public enum GrantType: Codable, Hashable {
     case implicit
     case refreshToken
     case password
+    case deviceCode
     case other(_ type: String)
 }
 
@@ -24,7 +25,8 @@ fileprivate let Mapping: [String:GrantType] = [
     "authorization_code": .authorizationCode,
     "implicit": .implicit,
     "refresh_token": .refreshToken,
-    "password": .password
+    "password": .password,
+    "urn:ietf:params:oauth:grant-type:device_code": .deviceCode
 ]
 
 extension GrantType: RawRepresentable {
@@ -50,6 +52,8 @@ extension GrantType: RawRepresentable {
             return "refresh_token"
         case .password:
             return "password"
+        case .deviceCode:
+            return "urn:ietf:params:oauth:grant-type:device_code"
         }
     }
 }

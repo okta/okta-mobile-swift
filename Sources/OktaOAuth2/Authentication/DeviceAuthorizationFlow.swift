@@ -64,26 +64,6 @@ public protocol DeviceAuthorizationFlowDelegate: AuthenticationDelegate {
 /// let token = try await flow.resume(with: context)
 /// ```
 public class DeviceAuthorizationFlow: AuthenticationFlow {
-    /// Configuration settings that define the OAuth2 client to be authenticated against.
-    public struct Configuration: AuthenticationConfiguration {
-        /// The client's ID.
-        public let clientId: String
-        
-        /// The scopes requested.
-        public let scopes: String
-        
-        /// Convenience initializer for constructing a device authorization flow configuration using the supplied values.
-        /// - Parameters:
-        ///   - clientId: The client's ID
-        ///   - scopes: The scopes to request
-        public init(clientId: String,
-                    scopes: String)
-        {
-            self.clientId = clientId
-            self.scopes = scopes
-        }
-    }
-    
     /// A model representing the context and current state for an authorization session.
     public struct Context: Codable, Equatable, Expires {
         let deviceCode: String
@@ -129,9 +109,6 @@ public class DeviceAuthorizationFlow: AuthenticationFlow {
     /// The OAuth2Client this authentication flow will use.
     public let client: OAuth2Client
     
-    /// The configuration used when constructing this authentication flow.
-    public let configuration: Configuration
-    
     /// Indicates whether or not this flow is currently in the process of authenticating a user.
     private(set) public var isAuthenticating: Bool = false {
         didSet {
@@ -167,18 +144,17 @@ public class DeviceAuthorizationFlow: AuthenticationFlow {
                             clientId: String,
                             scopes: String)
     {
-        self.init(Configuration(clientId: clientId,
-                                scopes: scopes),
-                  client: OAuth2Client(baseURL: issuer))
+        self.init(client: OAuth2Client(baseURL: issuer,
+                                       clientId: clientId,
+                                       scopes: scopes))
     }
     
     /// Initializer to construct an authentication flow from a pre-defined configuration and client.
     /// - Parameters:
     ///   - configuration: The configuration to use for this authentication flow.
     ///   - client: The `OAuth2Client` to use with this flow.
-    public init(_ configuration: Configuration, client: OAuth2Client) {
+    public init(client: OAuth2Client) {
         self.client = client
-        self.configuration = configuration
         
         client.add(delegate: self)
     }
@@ -193,17 +169,32 @@ public class DeviceAuthorizationFlow: AuthenticationFlow {
     public func resume(completion: ((Result<Context,APIClientError>) -> Void)? = nil) {
         isAuthenticating = true
 
-        let request = AuthorizeRequest(clientId: configuration.clientId,
-                                       scope: configuration.scopes)
-        client.device(authorize: request) { result in
+        client.openIdConfiguration { result in
             switch result {
+            case .success(let configuration):
+                guard let url = configuration.deviceAuthorizationEndpoint else {
+                    self.delegateCollection.invoke { $0.authentication(flow: self, received: .invalidUrl) }
+                    completion?(.failure(.invalidUrl))
+                    return
+                }
+                
+                let request = AuthorizeRequest(url: url,
+                                               clientId: self.client.configuration.clientId,
+                                               scope: self.client.configuration.scopes)
+                self.client.device(authorize: request) { result in
+                    switch result {
+                    case .failure(let error):
+                        self.delegateCollection.invoke { $0.authentication(flow: self, received: .network(error: error)) }
+                        completion?(.failure(error))
+                    case .success(let response):
+                        self.context = response.result
+                        self.delegateCollection.invoke { $0.authentication(flow: self, received: response.result) }
+                        completion?(.success(response.result))
+                    }
+                }
+                
             case .failure(let error):
-                self.delegateCollection.invoke { $0.authentication(flow: self, received: .network(error: error)) }
-                completion?(.failure(error))
-            case .success(let response):
-                self.context = response.result
-                self.delegateCollection.invoke { $0.authentication(flow: self, received: response.result) }
-                completion?(.success(response.result))
+                self.delegateCollection.invoke { $0.authentication(flow: self, received: error) }
             }
         }
     }
@@ -303,28 +294,47 @@ extension DeviceAuthorizationFlow {
     }
     
     func getToken(using context: Context, completion: @escaping(Result<Token?,APIClientError>) -> Void) {
-        let request = TokenRequest(clientId: configuration.clientId,
-                                   deviceCode: context.deviceCode)
-        client.exchange(token: request) { result in
+        client.openIdConfiguration { result in
             switch result {
-            case .failure(let error):
-                if case let APIClientError.serverError(serverError) = error,
-                   let oauthError = serverError as? OAuth2ServerError,
-                   oauthError.code == "authorization_pending"
-                {
-                    completion(.success(nil))
-                } else {
-                    self.delegateCollection.invoke { $0.authentication(flow: self, received: .network(error: error)) }
-                    completion(.failure(error))
+            case .success(let configuration):
+                let request = TokenRequest(openIdConfiguration: configuration,
+                                           clientId: self.client.configuration.clientId,
+                                           deviceCode: context.deviceCode)
+                self.client.exchange(token: request) { result in
+                    switch result {
+                    case .failure(let error):
+                        if case let APIClientError.serverError(serverError) = error,
+                           let oauthError = serverError as? OAuth2ServerError,
+                           oauthError.code == "authorization_pending"
+                        {
+                            completion(.success(nil))
+                        } else {
+                            self.delegateCollection.invoke { $0.authentication(flow: self, received: .network(error: error)) }
+                            completion(.failure(error))
+                        }
+                    case .success(let response):
+                        self.delegateCollection.invoke { $0.authentication(flow: self, received: response.result) }
+                        completion(.success(response.result))
+                    }
                 }
-            case .success(let response):
-                self.delegateCollection.invoke { $0.authentication(flow: self, received: response.result) }
-                completion(.success(response.result))
+                
+            case .failure(let error):
+                self.delegateCollection.invoke { $0.authentication(flow: self, received: error) }
             }
         }
+    }
+    
+    func finish(_ result: Result<Token?,APIClientError>) {
+        
     }
 }
 
 extension DeviceAuthorizationFlow: OAuth2ClientDelegate {
     
+}
+
+extension OAuth2Client {
+    public func deviceAuthorizationFlow() -> DeviceAuthorizationFlow {
+        DeviceAuthorizationFlow(client: self)
+    }
 }

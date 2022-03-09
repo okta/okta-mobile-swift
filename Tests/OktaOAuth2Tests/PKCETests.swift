@@ -31,4 +31,8 @@ final class PKCETests: XCTestCase {
         XCTAssertEqual(pkce.method, .sha256)
         #endif
     }
+    
+    func testRandomData() throws {
+        XCTAssertEqual(Array<UInt8>.random(count: 5).count, 5)
+    }
 }
