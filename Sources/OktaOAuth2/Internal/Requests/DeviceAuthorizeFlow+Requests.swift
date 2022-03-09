@@ -21,15 +21,14 @@ extension DeviceAuthorizationFlow {
     }
     
     struct AuthorizeRequest {
-        let openIdConfiguration: OpenIdConfiguration
+        let url: URL
         let clientId: String
         let scope: String
     }
 }
 
-extension DeviceAuthorizationFlow.AuthorizeRequest: OAuth2APIRequest, APIRequestBody {
+extension DeviceAuthorizationFlow.AuthorizeRequest: APIRequest, APIRequestBody {
     var httpMethod: APIRequestMethod { .post }
-    var url: URL { openIdConfiguration.deviceAuthorizationEndpoint ?? openIdConfiguration.issuer.appendingPathComponent("oauth2/v1/device/authorize") }
     var contentType: APIContentType? { .formEncoded }
     var acceptsType: APIContentType? { .json }
     var bodyParameters: [String : Any]? {

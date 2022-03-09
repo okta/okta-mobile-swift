@@ -16,11 +16,22 @@ import Foundation
 ///
 /// > Warning: At this time, this class only supports RSA Public Keys.
 public struct JWK: Codable, Equatable, Identifiable {
+    /// The type of this key.
     public let type: KeyType
+    
+    /// The key's ID.
     public let id: String?
+    
+    /// The intended usage for this key.
     public let usage: Usage
+
+    /// The signing algorithm used with this key.
     public let algorithm: Algorithm?
+
+    /// The RSA modulus value.
     public let rsaModulus: String?
+
+    /// The RSA exponent value.
     public let rsaExponent: String?
         
     /// The validator instance used to perform verification steps on JWT tokens.
@@ -77,5 +88,4 @@ public struct JWK: Codable, Equatable, Identifiable {
     static func resetToDefault() {
         validator = DefaultJWKValidator()
     }
-
 }

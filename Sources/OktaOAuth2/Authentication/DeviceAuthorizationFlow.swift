@@ -172,7 +172,13 @@ public class DeviceAuthorizationFlow: AuthenticationFlow {
         client.openIdConfiguration { result in
             switch result {
             case .success(let configuration):
-                let request = AuthorizeRequest(openIdConfiguration: configuration,
+                guard let url = configuration.deviceAuthorizationEndpoint else {
+                    self.delegateCollection.invoke { $0.authentication(flow: self, received: .invalidUrl) }
+                    completion?(.failure(.invalidUrl))
+                    return
+                }
+                
+                let request = AuthorizeRequest(url: url,
                                                clientId: self.client.configuration.clientId,
                                                scope: self.client.configuration.scopes)
                 self.client.device(authorize: request) { result in

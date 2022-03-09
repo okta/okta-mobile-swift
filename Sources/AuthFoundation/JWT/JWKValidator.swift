@@ -16,6 +16,11 @@ import Foundation
 public typealias OSStatus = Int32
 #endif
 
+/// Protocol used to implement JWK token validation.
+///
+/// Instances of this protocol may be assigned to ``JWK/validator`` to override the mechanisms used to validate token signatures.
+///
+/// > Note: A default implementation will be automatically used if this value is not changed.
 public protocol JWKValidator {
     /// Verifies the ``JWT`` signature using the supplied ``JWKS`` key set.
     /// - Returns: Returns whether or not signing passes for this token/key combination.

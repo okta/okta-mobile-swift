@@ -13,17 +13,20 @@
 import Foundation
 
 extension JWK {
+    /// The type of JWK key.
     public enum KeyType: String, Codable {
         case ellipticCurve = "EC"
         case rsa = "RSA"
         case octetSequence = "oct"
     }
     
+    /// The intended usage for this key (e.g. signing or encryption).
     public enum Usage: String, Codable {
         case signature = "sig"
         case encryption = "enc"
     }
-
+    
+    /// The algorithm this key is intended to be used with.
     public enum Algorithm: String, Codable {
         case hs256 = "HS256"
         case hs384 = "HS384"
