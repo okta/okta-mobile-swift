@@ -51,8 +51,6 @@ class AuthenticationServicesProviderTests: ProviderTestBase {
      
         let redirectUrl = URL(string: "com.example:/callback?state=state&error=errorname&error_description=This+Thing+Failed")
         provider.process(url: redirectUrl, error: nil)
-        waitFor(.error)
-
         XCTAssertNil(delegate.token)
         XCTAssertNotNil(delegate.error)
     }

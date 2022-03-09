@@ -32,24 +32,62 @@ final class OAuth2ClientTests: XCTestCase {
                           data: try data(from: .module, for: "openid-configuration", in: "MockResponses"),
                           contentType: "application/json")
         
-        var config: OpenIdConfiguration?
-        let expect = expectation(description: "network request")
-        client.fetchOpenIdConfiguration() { result in
-            guard case let .success(apiResponse) = result else {
-                XCTFail()
-                return
+        var configResults = [OpenIdConfiguration]()
+
+        for _ in 1...4 {
+            let expect = expectation(description: "network request")
+            client.openIdConfiguration { result in
+                switch result {
+                case .success(let configuration):
+                    configResults.append(configuration)
+                case .failure(let error):
+                    XCTAssertNil(error)
+                }
+                expect.fulfill()
             }
-            
-            config = apiResponse.result
-            expect.fulfill()
         }
+        
         waitForExpectations(timeout: 1.0) { error in
             XCTAssertNil(error)
         }
         
-        XCTAssertNotNil(config)
-        XCTAssertEqual(config?.authorizationEndpoint.absoluteString,
+        XCTAssertEqual(configResults.count, 4)
+        let config = try XCTUnwrap(configResults.first)
+        XCTAssertEqual(config.authorizationEndpoint.absoluteString,
                        "https://example.com/oauth2/v1/authorize")
+    }
+    
+    func testJWKS() throws {
+        urlSession.expect("https://example.com/.well-known/openid-configuration",
+                          data: try data(from: .module, for: "openid-configuration", in: "MockResponses"),
+                          contentType: "application/json")
+        urlSession.expect("https://example.com/oauth2/v1/keys?client_id=clientid",
+                          data: try data(from: .module, for: "keys", in: "MockResponses"),
+                          contentType: "application/json")
+        
+        var jwksResults = [JWKS]()
+
+        for _ in 1...4 {
+            let expect = expectation(description: "network request")
+            client.jwks { result in
+                switch result {
+                case .success(let jwks):
+                    jwksResults.append(jwks)
+                case .failure(let error):
+                    XCTAssertNil(error)
+                }
+                expect.fulfill()
+            }
+        }
+        
+        waitForExpectations(timeout: 1.0) { error in
+            XCTAssertNil(error)
+        }
+        
+        XCTAssertEqual(jwksResults.count, 4)
+        let jwks = try XCTUnwrap(jwksResults.first)
+        XCTAssertEqual(jwks.first?.id,
+                       "k6HN2DKok-kExjJGBLqgzByMCnN1RvzEOA-1ukTjexA")
     }
     
     func testRevoke() throws {
