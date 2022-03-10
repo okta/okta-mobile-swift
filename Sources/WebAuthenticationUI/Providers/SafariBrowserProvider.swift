@@ -19,14 +19,14 @@ import SafariServices
 @available(iOS, introduced: 9.0, deprecated: 11.0)
 class SafariBrowserProvider: NSObject, WebAuthenticationProvider {
     let flow: AuthorizationCodeFlow
-    let logoutFlow: SessionLogoutFlow
+    let logoutFlow: SessionLogoutFlow?
     private(set) weak var delegate: WebAuthenticationProviderDelegate?
     
     private(set) var safariController: SFSafariViewController?
     private let anchor: WebAuthentication.WindowAnchor?
     
     init(flow: AuthorizationCodeFlow,
-         logoutFlow: SessionLogoutFlow,
+         logoutFlow: SessionLogoutFlow?,
          from window: WebAuthentication.WindowAnchor?,
          delegate: WebAuthenticationProviderDelegate)
     {
@@ -38,12 +38,12 @@ class SafariBrowserProvider: NSObject, WebAuthenticationProvider {
         super.init()
         
         self.flow.add(delegate: self)
-        self.logoutFlow.add(delegate: self)
+        self.logoutFlow?.add(delegate: self)
     }
     
     deinit {
         self.flow.remove(delegate: self)
-        self.logoutFlow.remove(delegate: self)
+        self.logoutFlow?.remove(delegate: self)
     }
     
     func authenticate(using url: URL) {
@@ -78,7 +78,7 @@ class SafariBrowserProvider: NSObject, WebAuthenticationProvider {
     }
     
     func received(logoutError: WebAuthenticationError) {
-        delegate.authentication(provider: self, received: logoutError)
+        delegate?.authentication(provider: self, received: logoutError)
     }
     
     func start(context: AuthorizationCodeFlow.Context?) {
@@ -92,6 +92,10 @@ class SafariBrowserProvider: NSObject, WebAuthenticationProvider {
     }
     
     func logout(context: SessionLogoutFlow.Context) {
+        guard let logoutFlow = logoutFlow else {
+            return
+        }
+
         // LogoutFlow invokes delegate, so an error is propagated from delegate method
         try? logoutFlow.resume(with: context)
     }

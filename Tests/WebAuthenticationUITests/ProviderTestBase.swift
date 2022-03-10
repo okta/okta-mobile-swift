@@ -54,11 +54,10 @@ class WebAuthenticationProviderDelegateRecorder: WebAuthenticationProviderDelega
     }
 }
 
-class ProviderTestBase: XCTestCase, AuthorizationCodeFlowDelegate {
+class ProviderTestBase: XCTestCase, AuthorizationCodeFlowDelegate, SessionLogoutFlowDelegate {
     let issuer = URL(string: "https://example.com")!
     let redirectUri = URL(string: "com.example:/callback")!
     let logoutRedirectUri = URL(string: "com.example:/logout")!
-    var configuration: AuthorizationCodeFlow.Configuration!
     let urlSession = URLSessionMock()
     var client: OAuth2Client!
     var flow: AuthorizationCodeFlow!
@@ -66,11 +65,13 @@ class ProviderTestBase: XCTestCase, AuthorizationCodeFlowDelegate {
     let delegate = WebAuthenticationProviderDelegateRecorder()
 
     var authenticationURL: URL?
+    var logoutURL: URL?
     var token: Token?
     var error: Error?
     
     enum WaitType {
         case authenticateUrl
+        case logoutUrl
         case token
         case error
     }
@@ -84,7 +85,7 @@ class ProviderTestBase: XCTestCase, AuthorizationCodeFlowDelegate {
                               scopes: "openid profile",
                               session: urlSession)
         
-        logoutFlow = SessionLogoutFlow(.init(logoutRedirectUri: logoutRedirectUri), client: client)
+        logoutFlow = SessionLogoutFlow(logoutRedirectUri: logoutRedirectUri, client: client)
         
         urlSession.expect("https://example.com/.well-known/openid-configuration",
                           data: try data(from: .module, for: "openid-configuration", in: "MockResponses"),
@@ -107,6 +108,7 @@ class ProviderTestBase: XCTestCase, AuthorizationCodeFlowDelegate {
         Token.resetToDefault()
 
         authenticationURL = nil
+        logoutURL = nil
         token = nil
         error = nil
     }
@@ -120,6 +122,14 @@ class ProviderTestBase: XCTestCase, AuthorizationCodeFlowDelegate {
     }
     
     func authentication<Flow>(flow: Flow, received error: OAuth2Error) {
+        self.error = error
+    }
+
+    func logout<Flow>(flow: Flow, shouldLogoutUsing url: URL) where Flow : SessionLogoutFlow {
+        self.logoutURL = url
+    }
+    
+    func logout<Flow>(flow: Flow, received error: OAuth2Error) {
         self.error = error
     }
 
@@ -139,6 +149,8 @@ class ProviderTestBase: XCTestCase, AuthorizationCodeFlowDelegate {
             switch type {
             case .authenticateUrl:
                 object = self.authenticationURL as AnyObject?
+            case .logoutUrl:
+                object = self.logoutURL as AnyObject?
             case .token:
                 object = self.token
             case .error:

@@ -21,6 +21,7 @@ import XCTest
 class WebAuthenticationUITests: XCTestCase {
     private let issuer = URL(string: "https://example.com")!
     private let redirectUri = URL(string: "com.example:/callback")!
+    private let logoutRedirectUri = URL(string: "com.example:/logout")!
     private let urlSession = URLSessionMock()
     private var flow: AuthorizationCodeFlow!
     private var logoutFlow: SessionLogoutFlow!
@@ -37,7 +38,7 @@ class WebAuthenticationUITests: XCTestCase {
                           contentType: "application/json")
         flow = client.authorizationCodeFlow(redirectUri: redirectUri,
                                             additionalParameters: ["additional": "param"])
-        logoutFlow = SessionLogoutFlow(issuer: issuer, logoutRedirectUri: flow.configuration.logoutRedirectUri)
+        logoutFlow = SessionLogoutFlow(logoutRedirectUri: logoutRedirectUri, client: client)
     }
     
     func testStart() throws {

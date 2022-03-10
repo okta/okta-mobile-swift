@@ -49,7 +49,7 @@ public protocol SessionLogoutFlowDelegate: LogoutFlowDelegate {
 ///
 /// ```swift
 /// let logoutFlow = SessionLogoutFlow(issuer: issuer,
-///                         logoutRedirectUri: URL(string: "com.example.app:/logout")!)
+///                                    logoutRedirectUri: URL(string: "com.example.app:/logout")!)
 ///
 /// // Create the logout URL. Open this in a browser.
 /// let authorizeUrl = try await flow.resume()
@@ -80,7 +80,7 @@ public class SessionLogoutFlow: LogoutFlow {
     public let client: OAuth2Client
     
     /// The logout redirect URI.
-    public let logoutRedirectUri: URL?
+    public let logoutRedirectUri: URL
     
     /// Indicates if this flow is currently in progress.
     private(set) public var inProgress: Bool = false
@@ -99,25 +99,35 @@ public class SessionLogoutFlow: LogoutFlow {
     /// Convenience initializer to construct a logout flow.
     /// - Parameters:
     ///   - issuer: The issuer URL.
-    ///   - logoutRedirectUri: The logout redirect URI, if applicable.
-    public convenience init(issuer: URL,
-                            clientId: String,
-                            scopes: String,
-                            logoutRedirectUri: URL?)
+    ///   - clientId: The client ID.
+    ///   - scopes: The client's scopes.
+    ///   - logoutRedirectUri: The logout redirect URI.
+    public convenience init?(issuer: URL,
+                             clientId: String,
+                             scopes: String,
+                             logoutRedirectUri: URL?)
     {
+        guard let logoutRedirectUri = logoutRedirectUri else {
+            return nil
+        }
+
         self.init(logoutRedirectUri: logoutRedirectUri,
                   client: OAuth2Client(baseURL: issuer,
                                        clientId: clientId,
                                        scopes: scopes))
     }
     
-    /// Initializer to construct a logout flow from a pre-defined configuration and client.
+    /// Initializer to construct a logout flow from a pre-defined client.
     /// - Parameters:
-    ///   - configuration: The configuration to use for this logout flow.
+    ///   - logoutRedirectUri: The logout redirect URI.
     ///   - client: The `OAuth2Client` to use with this flow.
-    public init(logoutRedirectUri: URL?,
-                client: OAuth2Client)
+    public init?(logoutRedirectUri: URL?,
+                 client: OAuth2Client)
     {
+        guard let logoutRedirectUri = logoutRedirectUri else {
+            return nil
+        }
+
         self.client = client
         self.logoutRedirectUri = logoutRedirectUri
         
@@ -248,7 +258,7 @@ private extension SessionLogoutFlow {
     func queryParameters(using context: SessionLogoutFlow.Context) -> [String: String] {
         [
             "id_token_hint": context.idToken,
-            "post_logout_redirect_uri": logoutRedirectUri?.absoluteString,
+            "post_logout_redirect_uri": logoutRedirectUri.absoluteString,
             "state": context.state
         ].compactMapValues { $0 }
     }

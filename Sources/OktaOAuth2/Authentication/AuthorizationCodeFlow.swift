@@ -152,12 +152,10 @@ public class AuthorizationCodeFlow: AuthenticationFlow {
                             clientId: String,
                             scopes: String,
                             redirectUri: URL,
-                            logoutRedirectUri: URL? = nil,
                             responseType: ResponseType = .code,
                             additionalParameters: [String:String]? = nil)
     {
         self.init(redirectUri: redirectUri,
-                  logoutRedirectUri: logoutRedirectUri,
                   responseType: responseType,
                   additionalParameters: additionalParameters,
                   client: OAuth2Client(baseURL: issuer,
@@ -170,7 +168,6 @@ public class AuthorizationCodeFlow: AuthenticationFlow {
     ///   - configuration: The configuration to use for this authentication flow.
     ///   - client: The `OAuth2Client` to use with this flow.
     public init(redirectUri: URL,
-                logoutRedirectUri: URL? = nil,
                 responseType: ResponseType = .code,
                 additionalParameters: [String:String]? = nil,
                 client: OAuth2Client)
@@ -370,14 +367,12 @@ extension AuthorizationCodeFlow: OAuth2ClientDelegate {
 extension OAuth2Client {
     public func authorizationCodeFlow(
         redirectUri: URL,
-        logoutRedirectUri: URL? = nil,
         responseType: ResponseType = .code,
         additionalParameters: [String:String]? = nil) -> AuthorizationCodeFlow
     {
         AuthorizationCodeFlow(redirectUri: redirectUri,
-                              logoutRedirectUri: logoutRedirectUri,
                               responseType: responseType,
-                                                    additionalParameters: additionalParameters,
+                              additionalParameters: additionalParameters,
                               client: self)
     }
 }

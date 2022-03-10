@@ -19,14 +19,14 @@ import AuthenticationServices
 @available(iOS 12.0, macOS 10.15, macCatalyst 13.0, *)
 class AuthenticationServicesProvider: NSObject, WebAuthenticationProvider {
     let flow: AuthorizationCodeFlow
-    let logoutFlow: SessionLogoutFlow
+    let logoutFlow: SessionLogoutFlow?
     private(set) weak var delegate: WebAuthenticationProviderDelegate?
     private(set) var authenticationSession: ASWebAuthenticationSession?
 
     private let anchor: ASPresentationAnchor?
     
     init(flow: AuthorizationCodeFlow,
-         logoutFlow: SessionLogoutFlow,
+         logoutFlow: SessionLogoutFlow?,
          from window: WebAuthentication.WindowAnchor?,
          delegate: WebAuthenticationProviderDelegate) 
     {
@@ -38,12 +38,12 @@ class AuthenticationServicesProvider: NSObject, WebAuthenticationProvider {
         super.init()
         
         self.flow.add(delegate: self)
-        self.logoutFlow.add(delegate: self)
+        self.logoutFlow?.add(delegate: self)
     }
     
     deinit {
         self.flow.remove(delegate: self)
-        self.logoutFlow.remove(delegate: self)
+        self.logoutFlow?.remove(delegate: self)
     }
 
     func start(context: AuthorizationCodeFlow.Context? = nil) {
@@ -77,20 +77,30 @@ class AuthenticationServicesProvider: NSObject, WebAuthenticationProvider {
     }
     
     func logout(context: SessionLogoutFlow.Context) {
+        guard let logoutFlow = logoutFlow else {
+            return
+        }
+
         // LogoutFlow invokes delegate, so an error is propagated from delegate method
         try? logoutFlow.resume(with: context)
     }
     
     func logout(using url: URL) {
+        guard let logoutFlow = logoutFlow else {
+            return
+        }
+
         authenticationSession = ASWebAuthenticationSession(
             url: url,
-            callbackURLScheme: flow.callbackScheme,
+            callbackURLScheme: logoutFlow.logoutRedirectUri.scheme,
             completionHandler: { url, error in
                 self.processLogout(url: url, error: error)
             })
         
         if #available(iOS 13.0, *) {
-            authenticationSession?.prefersEphemeralWebBrowserSession = delegate.authenticationShouldUseEphemeralSession(provider: self)
+            if let delegate = delegate {
+                authenticationSession?.prefersEphemeralWebBrowserSession = delegate.authenticationShouldUseEphemeralSession(provider: self)
+            }
             authenticationSession?.presentationContextProvider = self
         }
 
@@ -117,6 +127,8 @@ class AuthenticationServicesProvider: NSObject, WebAuthenticationProvider {
     }
     
     func received(logoutError: WebAuthenticationError) {
+        guard let delegate = delegate else { return }
+        
         delegate.logout(provider: self, received: logoutError)
     }
     
@@ -148,6 +160,8 @@ class AuthenticationServicesProvider: NSObject, WebAuthenticationProvider {
     }
     
     func processLogout(url: URL?, error: Error?) {
+        guard let delegate = delegate else { return }
+        
         if let error = error {
             let nsError = error as NSError
             if nsError.domain == ASWebAuthenticationSessionErrorDomain,

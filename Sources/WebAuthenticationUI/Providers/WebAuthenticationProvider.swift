@@ -17,6 +17,7 @@ import OktaOAuth2
 
 protocol WebAuthenticationProvider {
     var flow: AuthorizationCodeFlow { get }
+    var logoutFlow: SessionLogoutFlow? { get }
     var delegate: WebAuthenticationProviderDelegate? { get }
 
     func start(context: AuthorizationCodeFlow.Context?)

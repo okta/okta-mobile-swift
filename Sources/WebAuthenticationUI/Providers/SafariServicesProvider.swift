@@ -19,14 +19,13 @@ import SafariServices
 @available(iOS, introduced: 11.0, deprecated: 12.0)
 class SafariServicesProvider: NSObject, WebAuthenticationProvider {
     let flow: AuthorizationCodeFlow
-    let logoutFlow: SessionLogoutFlow
-    let delegate: WebAuthenticationProviderDelegate
+    let logoutFlow: SessionLogoutFlow?
     private(set) weak var delegate: WebAuthenticationProviderDelegate?
     
     private(set) var authenticationSession: SFAuthenticationSession?
     
     init(flow: AuthorizationCodeFlow,
-         logoutFlow: SessionLogoutFlow,
+         logoutFlow: SessionLogoutFlow?,
          delegate: WebAuthenticationProviderDelegate)
     {
         self.flow = flow
@@ -36,12 +35,12 @@ class SafariServicesProvider: NSObject, WebAuthenticationProvider {
         super.init()
         
         self.flow.add(delegate: self)
-        self.logoutFlow.add(delegate: self)
+        self.logoutFlow?.add(delegate: self)
     }
     
     deinit {
         self.flow.remove(delegate: self)
-        self.logoutFlow.remove(delegate: self)
+        self.logoutFlow?.remove(delegate: self)
     }
     
     func start(context: AuthorizationCodeFlow.Context?) {
@@ -56,7 +55,7 @@ class SafariServicesProvider: NSObject, WebAuthenticationProvider {
     
     func logout(context: SessionLogoutFlow.Context) {
         // LogoutFlow invokes delegate, so an error is propagated from delegate method
-        try? logoutFlow.resume(with: context)
+        try? logoutFlow?.resume(with: context)
     }
     
     func authenticate(using url: URL) {
@@ -71,9 +70,13 @@ class SafariServicesProvider: NSObject, WebAuthenticationProvider {
     }
     
     func logout(using url: URL) {
+        guard let logoutFlow = logoutFlow else {
+            return
+        }
+
         authenticationSession = SFAuthenticationSession(
             url: url,
-            callbackURLScheme: flow.configuration.redirectUri.scheme,
+            callbackURLScheme: logoutFlow.logoutRedirectUri.scheme,
             completionHandler: { [weak self] url, error in
                 self?.processLogout(url: url, error: error)
             })
@@ -110,6 +113,8 @@ class SafariServicesProvider: NSObject, WebAuthenticationProvider {
     }
     
     func processLogout(url: URL?, error: Error?) {
+        guard let delegate = delegate else { return }
+
         if let error = error {
             let nsError = error as NSError
             if nsError.domain == SFAuthenticationErrorDomain,
@@ -144,6 +149,8 @@ class SafariServicesProvider: NSObject, WebAuthenticationProvider {
     }
     
     func received(logoutError: WebAuthenticationError) {
+        guard let delegate = delegate else { return }
+
         delegate.logout(provider: self, received: logoutError)
     }
     

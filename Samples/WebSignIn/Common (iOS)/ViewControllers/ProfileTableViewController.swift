@@ -131,11 +131,12 @@ class ProfileTableViewController: UITableViewController {
         
         if let idToken = Credential.default?.token.idToken {
             alert.addAction(.init(title: "End a session", style: .destructive) { _ in
-                WebAuthentication.shared?.logout(idToken: idToken) { result in
+                WebAuthentication.shared?.logout(idToken: idToken.rawValue) { result in
                     switch result {
                     case .success:
-                        try? self.user?.remove()
-                        self.user = nil
+                        try? Keychain.deleteTokens()
+                        try? self.credential?.remove()
+                        self.credential = nil
                     case .failure(let error):
                         DispatchQueue.main.async {
                             let alert = UIAlertController(title: "Sign out failed",

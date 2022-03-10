@@ -103,7 +103,7 @@ public class WebAuthentication {
     public let flow: AuthorizationCodeFlow
     
     /// The underlying OAuth2 flow that implements the session logout behaviour.
-    public let logoutFlow: SessionLogoutFlow
+    public let logoutFlow: SessionLogoutFlow?
     
     /// Context information about the current authorization code flow.
     ///
@@ -143,7 +143,7 @@ public class WebAuthentication {
             return
         }
         
-        logout(from: window, idToken: idToken, completion)
+        logout(from: window, idToken: idToken.rawValue, completion)
     }
     
     /// Starts log-out using the ``Token`` object.
@@ -157,7 +157,7 @@ public class WebAuthentication {
             return
         }
         
-        logout(from: window, idToken: idToken, completion)
+        logout(from: window, idToken: idToken.rawValue, completion)
     }
 
     /// Starts log-out using the ID token.
@@ -308,18 +308,21 @@ public class WebAuthentication {
                             logoutRedirectUri: URL? = nil,
                             additionalParameters: [String:String]? = nil)
     {
-        self.init(flow: .init(issuer: issuer,
-                              clientId: clientId,
-                              scopes: scopes,
-                              redirectUri: redirectUri,
-                              logoutRedirectUri: logoutRedirectUri,
-                              responseType: responseType,
-                              additionalParameters: additionalParameters),
+        let client = OAuth2Client(baseURL: issuer,
+                                  clientId: clientId,
+                                  scopes: scopes)
+        
+        self.init(flow: AuthorizationCodeFlow(redirectUri: redirectUri,
+                                              responseType: responseType,
+                                              additionalParameters: additionalParameters,
+                                              client: client),
+                  logoutFlow: SessionLogoutFlow(logoutRedirectUri: logoutRedirectUri,
+                                                client: client),
                   context: nil)
     }
     
     func createWebAuthenticationProvider(flow: AuthorizationCodeFlow,
-                                         logoutFlow: SessionLogoutFlow,
+                                         logoutFlow: SessionLogoutFlow?,
                                          from window: WebAuthentication.WindowAnchor?,
                                          delegate: WebAuthenticationProviderDelegate) -> WebAuthenticationProvider?
     {
@@ -354,7 +357,7 @@ public class WebAuthentication {
     /// - Parameters:
     ///   - flow: Authorization code flow instance for this client.
     ///   - context: Optional context to initialize authentication with.
-    public init(flow: AuthorizationCodeFlow, logoutFlow: SessionLogoutFlow, context: AuthorizationCodeFlow.Context? = nil) {
+    public init(flow: AuthorizationCodeFlow, logoutFlow: SessionLogoutFlow?, context: AuthorizationCodeFlow.Context? = nil) {
         self.flow = flow
         self.logoutFlow = logoutFlow
         self.context = context

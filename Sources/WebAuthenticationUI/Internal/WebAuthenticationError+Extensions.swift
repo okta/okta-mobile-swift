@@ -20,13 +20,13 @@ extension WebAuthenticationError: LocalizedError {
         case .defaultPropertyListNotFound:
             return NSLocalizedString("default_property_list_not_found_description",
                                      bundle: .module,
-                                     comment: "Invalid URL")
+                                     comment: "")
             
         case .invalidPropertyList(url: let url):
             return String.localizedStringWithFormat(
                 NSLocalizedString("invalid_property_list_description",
                                   bundle: .module,
-                                  comment: "Invalid URL"),
+                                  comment: ""),
                 url.lastPathComponent)
 
         case .cannotParsePropertyList(let error):
@@ -38,49 +38,51 @@ extension WebAuthenticationError: LocalizedError {
                                ? String(describing: error!)
                                : NSLocalizedString("unknown_error_message",
                                                    bundle: .module,
-                                                   comment: "Invalid URL"))
+                                                   comment: ""))
 
             return String.localizedStringWithFormat(
                 NSLocalizedString("generic_description",
                                   bundle: .module,
-                                  comment: "Invalid URL"),
+                                  comment: ""),
                 errorString)
 
         case .missingConfigurationValues:
             return NSLocalizedString("missing_configuration_values_description",
                                      bundle: .module,
-                                     comment: "Invalid URL")
+                                     comment: "")
             
         case .noCompatibleAuthenticationProviders:
             return NSLocalizedString("no_compatible_authentication_providers_description",
                                      bundle: .module,
-                                     comment: "Invalid URL")
+                                     comment: "")
             
         case .cannotComposeAuthenticationURL:
             return NSLocalizedString("cannot_compose_authentication_url_description",
                                      bundle: .module,
-                                     comment: "Invalid URL")
+                                     comment: "")
             
         case .authenticationProviderError(let error):
-            return String.localizedStringWithFormat(
-                NSLocalizedString("authentication_provider_error_description",
+            if let error = error as? LocalizedError {
+                return error.localizedDescription
+            }
+
+            return NSLocalizedString("authentication_provider_error",
                                   bundle: .module,
-                                  comment: "Invalid URL"),
-                (error as? LocalizedError)?.localizedDescription ?? "")
+                                  comment: "")
 
         case .invalidRedirectScheme(let scheme):
             return String.localizedStringWithFormat(
                 NSLocalizedString("invalid_redirect_scheme_description",
                                   bundle: .module,
-                                  comment: "Invalid URL"),
+                                  comment: ""),
                 scheme ?? NSLocalizedString("no_scheme_defined",
                                             bundle: .module,
-                                            comment: "Invalid URL"))
+                                            comment: ""))
 
         case .userCancelledLogin:
             return NSLocalizedString("user_cancelled_login_description",
                                      bundle: .module,
-                                     comment: "Invalid URL")
+                                     comment: "")
             
         case .missingIdToken:
             return NSLocalizedString("missing_id_token_description",
@@ -99,7 +101,7 @@ extension WebAuthenticationError: LocalizedError {
             return String.localizedStringWithFormat(
                 NSLocalizedString("generic_description",
                                   bundle: .module,
-                                  comment: "Invalid URL"),
+                                  comment: ""),
                 errorString)
 
         case .genericError(message: let message):

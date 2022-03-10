@@ -19,7 +19,7 @@ import XCTest
 
 class WebAuthenticationMock: WebAuthentication {
     override func createWebAuthenticationProvider(flow: AuthorizationCodeFlow,
-                                                  logoutFlow: SessionLogoutFlow,
+                                                  logoutFlow: SessionLogoutFlow?,
                                                   from window: WebAuthentication.WindowAnchor?,
                                                   delegate: WebAuthenticationProviderDelegate) -> WebAuthenticationProvider? {
         return WebAuthenticationProviderMock(flow: flow, logoutFlow: logoutFlow, delegate: delegate)
@@ -29,7 +29,7 @@ class WebAuthenticationMock: WebAuthentication {
 
 class WebAuthenticationProviderMock: WebAuthenticationProvider {
     var flow: AuthorizationCodeFlow
-    var logoutFlow: SessionLogoutFlow
+    var logoutFlow: SessionLogoutFlow?
     var delegate: WebAuthenticationProviderDelegate?
     
     enum State {
@@ -38,7 +38,7 @@ class WebAuthenticationProviderMock: WebAuthenticationProvider {
     
     var state: State = .initialized
     
-    init(flow: AuthorizationCodeFlow, logoutFlow: SessionLogoutFlow, delegate: WebAuthenticationProviderDelegate) {
+    init(flow: AuthorizationCodeFlow, logoutFlow: SessionLogoutFlow?, delegate: WebAuthenticationProviderDelegate) {
         self.flow = flow
         self.logoutFlow = logoutFlow
         self.delegate = delegate
@@ -55,7 +55,7 @@ class WebAuthenticationProviderMock: WebAuthenticationProvider {
     func logout(context: SessionLogoutFlow.Context) {
         state = .started
         
-        try? logoutFlow.resume(idToken: "idToken") { result in
+        try? logoutFlow?.resume(idToken: "idToken") { result in
             
         }
     }
