@@ -20,22 +20,19 @@ class SessionLogoutFlowFailureTests: XCTestCase {
     let redirectUri = URL(string: "com.example:/callback")!
     let logoutRedirectUri = URL(string: "com.example:/logout")!
     let urlSession = URLSessionMock()
-    var configuration: SessionLogoutFlow.Configuration!
     var client: OAuth2Client!
     var flow: SessionLogoutFlow!
     let logoutIDToken = "logoutIDToken"
     let state = "state"
     
     override func setUpWithError() throws {
-        configuration = SessionLogoutFlow.Configuration(logoutRedirectUri: logoutRedirectUri)
-        client = OAuth2Client(baseURL: issuer, session: urlSession)
+        client = OAuth2Client(baseURL: issuer, clientId: "clientId", scopes: "openid", session: urlSession)
         
-        urlSession.expect("https://example.com/oauth2/default/.well-known/openid-configuration",
-                          data: try data(from: .module, for: "openid-configuration", in: "MockResponses"),
-                          contentType: "application/json",
+        urlSession.expect("https://example.com/.well-known/openid-configuration",
+                          data: nil,
                           error: OAuth2Error.cannotComposeUrl)
         
-        flow = SessionLogoutFlow(configuration, client: client)
+        flow = SessionLogoutFlow(logoutRedirectUri: logoutRedirectUri, client: client)
     }
 
     func testDelegate() throws {

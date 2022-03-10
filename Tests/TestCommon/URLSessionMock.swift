@@ -125,7 +125,7 @@ class URLSessionDataTaskMock: URLSessionDataTaskProtocol {
     func resume() {
         guard let delay = session?.requestDelay else {
             DispatchQueue.global().async {
-                completion()
+                self.completionHandler(self.data, self.response, self.error)
             }
             return
         }

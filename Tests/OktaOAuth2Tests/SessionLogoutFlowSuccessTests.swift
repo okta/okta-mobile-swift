@@ -38,25 +38,19 @@ final class SessionLogoutFlowSuccessTests: XCTestCase {
     let redirectUri = URL(string: "com.example:/callback")!
     let logoutRedirectUri = URL(string: "com.example:/logout")!
     let urlSession = URLSessionMock()
-    var configuration: SessionLogoutFlow.Configuration!
     var client: OAuth2Client!
     var flow: SessionLogoutFlow!
     let logoutIDToken = "logoutIDToken"
     let state = "state"
     
     override func setUpWithError() throws {
-        configuration = SessionLogoutFlow.Configuration(logoutRedirectUri: logoutRedirectUri)
-        client = OAuth2Client(baseURL: issuer, session: urlSession)
+        client = OAuth2Client(baseURL: issuer, clientId: "clientId", scopes: "openid", session: urlSession)
         
-        urlSession.expect("https://example.com/oauth2/default/.well-known/openid-configuration",
+        urlSession.expect("https://example.com/.well-known/openid-configuration",
                           data: try data(from: .module, for: "openid-configuration", in: "MockResponses"),
                           contentType: "application/json")
         
-        flow = SessionLogoutFlow(configuration, client: client)
-    }
-    
-    func testConfiguration() throws {
-        XCTAssertEqual(client.baseURL.absoluteString, "https://example.com/oauth2/default/")
+        flow = SessionLogoutFlow(logoutRedirectUri: logoutRedirectUri, client: client)
     }
     
     func testWithDelegate() throws {
@@ -73,22 +67,20 @@ final class SessionLogoutFlowSuccessTests: XCTestCase {
         
         try flow.resume(with: context) { result in
             XCTAssertTrue(self.flow.inProgress)
+            XCTAssertNotEqual(self.flow.context, context)
+            XCTAssertEqual(self.flow.context?.state, context.state)
             resumeExpection.fulfill()
         }
         
         wait(for: [resumeExpection], timeout: 1)
 
-        XCTAssertNotEqual(flow.context, context)
-        XCTAssertEqual(flow.context?.state, context.state)
-        XCTAssertNotNil(flow.context?.logoutURL)
-        XCTAssertEqual(flow.context?.logoutURL?.absoluteString, """
+        XCTAssertEqual(delegate.url?.absoluteString, """
                             https://example.okta.com/oauth2/v1/logout\
                             ?id_token_hint=\(logoutIDToken)\
                             &post_logout_redirect_uri=\(logoutRedirectUri.absoluteString)\
                             &state=\(state)\
                             #\(delegate.fragment)
                             """)
-        XCTAssertEqual(flow.context?.logoutURL, delegate.url)
         XCTAssertNil(delegate.error)
         
         XCTAssertFalse(flow.inProgress)
@@ -110,21 +102,23 @@ final class SessionLogoutFlowSuccessTests: XCTestCase {
             }
             
             XCTAssertTrue(self.flow.inProgress)
+            
+            let newContext = self.flow.context
+            XCTAssertNotEqual(newContext, context)
+            XCTAssertEqual(newContext?.state, context.state)
+            XCTAssertNotNil(newContext?.logoutURL)
+            XCTAssertEqual(newContext?.logoutURL?.absoluteString, """
+                                https://example.okta.com/oauth2/v1/logout\
+                                ?id_token_hint=\(self.logoutIDToken)\
+                                &post_logout_redirect_uri=\(self.logoutRedirectUri.absoluteString)\
+                                &state=\(self.state)
+                                """)
             resumeExpection.fulfill()
         }
         
         wait(for: [resumeExpection], timeout: 1)
 
-        XCTAssertNotEqual(flow.context, context)
-        XCTAssertEqual(flow.context?.state, context.state)
-        XCTAssertNotNil(flow.context?.logoutURL)
-        XCTAssertEqual(flow.context?.logoutURL?.absoluteString, """
-                            https://example.okta.com/oauth2/v1/logout\
-                            ?id_token_hint=\(logoutIDToken)\
-                            &post_logout_redirect_uri=\(logoutRedirectUri.absoluteString)\
-                            &state=\(state)
-                            """)
-        
+        XCTAssertNil(flow.context)
         XCTAssertFalse(flow.inProgress)
     }
     
@@ -139,10 +133,7 @@ final class SessionLogoutFlowSuccessTests: XCTestCase {
         let logoutUrl = try await flow.resume(with: context)
         
         XCTAssertNotEqual(flow.context, context)
-        XCTAssertEqual(flow.context?.state, context.state)
-        XCTAssertNotNil(flow.context?.logoutURL)
-        XCTAssertEqual(logoutUrl, flow.context?.logoutURL)
-        XCTAssertEqual(flow.context?.logoutURL?.absoluteString, """
+        XCTAssertEqual(logoutUrl.absoluteString, """
                             https://example.okta.com/oauth2/v1/logout\
                             ?id_token_hint=\(logoutIDToken)\
                             &post_logout_redirect_uri=\(logoutRedirectUri.absoluteString)\

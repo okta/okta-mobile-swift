@@ -55,21 +55,6 @@ public protocol SessionLogoutFlowDelegate: LogoutFlowDelegate {
 /// let authorizeUrl = try await flow.resume()
 /// ```
 public class SessionLogoutFlow: LogoutFlow {
-    /// Indicates if this flow is currently in progress.
-    private(set) public var inProgress: Bool = false
-    
-    /// Configuration settings that define the OAuth2 client to be signed-out against.
-    public struct Configuration: LogoutConfiguration {
-        /// The logout redirect URI.
-        public let logoutRedirectUri: URL?
-        
-        /// Convenience initializer for constructing an session logout flow configuration using the supplied values.
-        /// - Parameter logoutRedirectUri: The logout redirect URI.
-        public init(logoutRedirectUri: URL?) {
-            self.logoutRedirectUri = logoutRedirectUri
-        }
-    }
-
     /// A model representing the context and current state for a logout session.
     public struct Context: Codable, Equatable {
         /// The ID token string used for log-out.
@@ -94,10 +79,11 @@ public class SessionLogoutFlow: LogoutFlow {
     /// The OAuth2Client this logout flow will use.
     public let client: OAuth2Client
     
-    /// The configuration used when constructing this logout flow.
-    public let configuration: Configuration
+    /// The logout redirect URI.
+    public let logoutRedirectUri: URL?
     
-    public let delegateCollection = DelegateCollection<SessionLogoutFlowDelegate>()
+    /// Indicates if this flow is currently in progress.
+    private(set) public var inProgress: Bool = false
     
     /// The context that stores the ID token and state for the current log-out session.
     private(set) public var context: Context? {
@@ -114,18 +100,26 @@ public class SessionLogoutFlow: LogoutFlow {
     /// - Parameters:
     ///   - issuer: The issuer URL.
     ///   - logoutRedirectUri: The logout redirect URI, if applicable.
-    public convenience init(issuer: URL, logoutRedirectUri: URL?) {
-        self.init(Configuration(logoutRedirectUri: logoutRedirectUri),
-                  client: .init(baseURL: issuer))
+    public convenience init(issuer: URL,
+                            clientId: String,
+                            scopes: String,
+                            logoutRedirectUri: URL?)
+    {
+        self.init(logoutRedirectUri: logoutRedirectUri,
+                  client: OAuth2Client(baseURL: issuer,
+                                       clientId: clientId,
+                                       scopes: scopes))
     }
     
     /// Initializer to construct a logout flow from a pre-defined configuration and client.
     /// - Parameters:
     ///   - configuration: The configuration to use for this logout flow.
     ///   - client: The `OAuth2Client` to use with this flow.
-    public init(_ configuration: Configuration, client: OAuth2Client) {
+    public init(logoutRedirectUri: URL?,
+                client: OAuth2Client)
+    {
         self.client = client
-        self.configuration = configuration
+        self.logoutRedirectUri = logoutRedirectUri
         
         client.add(delegate: self)
     }
@@ -155,6 +149,8 @@ public class SessionLogoutFlow: LogoutFlow {
         inProgress = true
         
         client.openIdConfiguration { result in
+            defer { self.reset() }
+            
             switch result {
             case .failure(let error):
                 self.delegateCollection.invoke { $0.logout(flow: self, received: error) }
@@ -174,8 +170,6 @@ public class SessionLogoutFlow: LogoutFlow {
                     completion?(.failure(oauthError))
                 }
             }
-            
-            self.inProgress = false
         }
     }
     
@@ -189,6 +183,8 @@ public class SessionLogoutFlow: LogoutFlow {
         inProgress = false
         context = nil
     }
+
+    public let delegateCollection = DelegateCollection<SessionLogoutFlowDelegate>()
 }
 
 #if swift(>=5.5.1)
@@ -233,7 +229,7 @@ extension SessionLogoutFlow: UsesDelegateCollection {
 extension SessionLogoutFlow: OAuth2ClientDelegate {
 }
 
-private extension SessionLogoutFlow.Configuration {
+private extension SessionLogoutFlow {
     func logoutUrlComponents(from logoutUrl: URL, using context: SessionLogoutFlow.Context) throws -> URLComponents {
         guard var components = URLComponents(url: logoutUrl, resolvingAgainstBaseURL: true)
         else {
@@ -256,11 +252,9 @@ private extension SessionLogoutFlow.Configuration {
             "state": context.state
         ].compactMapValues { $0 }
     }
-}
 
-private extension SessionLogoutFlow {
     func createLogoutURL(from url: URL, using context: SessionLogoutFlow.Context) throws -> URL {
-        var components = try configuration.logoutUrlComponents(from: url, using: context)
+        var components = try logoutUrlComponents(from: url, using: context)
         delegateCollection.invoke { $0.logout(flow: self, customizeUrl: &components) }
         
         guard let url = components.url else {
