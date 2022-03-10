@@ -29,12 +29,15 @@ class AuthenticationServicesProviderTests: ProviderTestBase {
         provider = AuthenticationServicesProvider(flow: flow, logoutFlow: logoutFlow, from: nil, delegate: delegate)
     }
     
+    override func tearDownWithError() throws {
+        provider.authenticationSession?.cancel()
+    }
+    
     func testSuccessfulAuthentication() {
         provider.start(context: .init(state: "state"))
         waitFor(.authenticateUrl)
         
         XCTAssertNotNil(provider.authenticationSession)
-     
         let redirectUrl = URL(string: "com.example:/callback?code=abc123&state=state")
         provider.process(url: redirectUrl, error: nil)
         waitFor(.token)
@@ -60,7 +63,6 @@ class AuthenticationServicesProviderTests: ProviderTestBase {
         waitFor(.authenticateUrl)
 
         XCTAssertNotNil(provider.authenticationSession)
-     
         let error = NSError(domain: ASWebAuthenticationSessionErrorDomain,
                             code: ASWebAuthenticationSessionError.canceledLogin.rawValue,
                             userInfo: nil)
@@ -74,7 +76,6 @@ class AuthenticationServicesProviderTests: ProviderTestBase {
         waitFor(.authenticateUrl)
 
         XCTAssertNotNil(provider.authenticationSession)
-     
         provider.process(url: nil, error: nil)
         XCTAssertNil(delegate.token)
         XCTAssertNotNil(delegate.error)
@@ -85,7 +86,6 @@ class AuthenticationServicesProviderTests: ProviderTestBase {
         waitFor(.logoutUrl)
 
         XCTAssertNotNil(provider.authenticationSession)
-        
         provider.processLogout(url: logoutRedirectUri, error: nil)
         
         XCTAssertTrue(delegate.logoutFinished)
@@ -97,7 +97,6 @@ class AuthenticationServicesProviderTests: ProviderTestBase {
         waitFor(.error)
         
         XCTAssertNotNil(provider.authenticationSession)
-        
         provider.processLogout(url: logoutRedirectUri, error: WebAuthenticationError.missingIdToken)
         
         XCTAssertFalse(delegate.logoutFinished)
@@ -109,7 +108,6 @@ class AuthenticationServicesProviderTests: ProviderTestBase {
         waitFor(.error)
         
         XCTAssertNotNil(provider.authenticationSession)
-        
         provider.processLogout(url: nil, error: nil)
         
         XCTAssertFalse(delegate.logoutFinished)
