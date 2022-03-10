@@ -16,8 +16,8 @@ import WebAuthenticationUI
 import AuthenticationServices
 
 final class SignInViewModel: ObservableObject {
-    var clientID: String? { auth?.flow.client.configuration.clientId }
-    var isConfigured: Bool { auth?.flow.client.configuration.clientId != nil }
+    var clientID: String? { auth?.signInFlow.client.configuration.clientId }
+    var isConfigured: Bool { auth?.signInFlow.client.configuration.clientId != nil }
     
     @Published var presentError = false
     @Published var ephemeralSession = false
@@ -39,7 +39,7 @@ final class SignInViewModel: ObservableObject {
     
     func signIn() {
         auth?.ephemeralSession = ephemeralSession
-        auth?.start(from: ASPresentationAnchor()) { result in
+        auth?.signIn(from: ASPresentationAnchor()) { result in
             switch result {
             case .success(let token):
                 Credential.default = Credential(token: token)

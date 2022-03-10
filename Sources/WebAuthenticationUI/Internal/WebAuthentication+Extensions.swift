@@ -19,7 +19,7 @@ import OktaOAuth2
 extension WebAuthentication {
     private func complete(with result: Result<Token, WebAuthenticationError>) {
         provider = nil
-        flow.reset()
+        signInFlow.reset()
 
         guard let completion = completionBlock else {
             return
@@ -43,20 +43,13 @@ extension WebAuthentication {
         
         logoutCompletionBlock = nil
         provider = nil
-        flow.reset()
+        signInFlow.reset()
     }
 }
 
 extension WebAuthentication: WebAuthenticationProviderDelegate {
     func logout(provider: WebAuthenticationProvider, finished: Bool) {
         if finished {
-            logoutWindow.resignKey()
-            #if os(iOS)
-            logoutWindow.isHidden = true
-            #elseif os(macOS)
-            logoutWindow.setIsVisible(false)
-            #endif
-            
             completeLogout(with: .success(()))
         }
     }
