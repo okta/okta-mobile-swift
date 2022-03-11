@@ -17,11 +17,31 @@ import OktaOAuth2
 import AuthenticationServices
 
 @available(iOS 12.0, macOS 10.15, macCatalyst 13.0, *)
+protocol AuthenticationServicesProviderSession {
+    init(url URL: URL, callbackURLScheme: String?, completionHandler: @escaping ASWebAuthenticationSession.CompletionHandler)
+
+    @available(macOS 10.15, *)
+    var presentationContextProvider: ASWebAuthenticationPresentationContextProviding? { get set }
+
+    @available(macOS 10.15, *)
+    var prefersEphemeralWebBrowserSession: Bool { get set }
+
+    @available(macOS 10.15.4, *)
+    var canStart: Bool { get }
+
+    func start() -> Bool
+
+    func cancel()
+}
+@available(iOS 12.0, macOS 10.15, macCatalyst 13.0, *)
+extension ASWebAuthenticationSession: AuthenticationServicesProviderSession {}
+
+@available(iOS 12.0, macOS 10.15, macCatalyst 13.0, *)
 class AuthenticationServicesProvider: NSObject, WebAuthenticationProvider {
     let flow: AuthorizationCodeFlow
     let logoutFlow: SessionLogoutFlow?
     private(set) weak var delegate: WebAuthenticationProviderDelegate?
-    private(set) var authenticationSession: ASWebAuthenticationSession?
+    private(set) var authenticationSession: AuthenticationServicesProviderSession?
 
     private let anchor: ASPresentationAnchor?
     
@@ -56,10 +76,16 @@ class AuthenticationServicesProvider: NSObject, WebAuthenticationProvider {
         }
     }
     
+    func createSession(url: URL, callbackURLScheme: String?, completionHandler: @escaping ASWebAuthenticationSession.CompletionHandler) -> AuthenticationServicesProviderSession {
+        ASWebAuthenticationSession(url: url,
+            callbackURLScheme: callbackURLScheme,
+            completionHandler: completionHandler)
+    }
+    
     func authenticate(using url: URL) {
         guard let delegate = delegate else { return }
         
-        authenticationSession = ASWebAuthenticationSession(
+        authenticationSession = createSession(
             url: url,
             callbackURLScheme: flow.redirectUri.scheme,
             completionHandler: { url, error in
@@ -72,7 +98,7 @@ class AuthenticationServicesProvider: NSObject, WebAuthenticationProvider {
         }
 
         DispatchQueue.main.async {
-            self.authenticationSession?.start()
+            _ = self.authenticationSession?.start()
         }
     }
     
@@ -105,7 +131,7 @@ class AuthenticationServicesProvider: NSObject, WebAuthenticationProvider {
         }
 
         DispatchQueue.main.async {
-            self.authenticationSession?.start()
+            _ = self.authenticationSession?.start()
         }
     }
     
