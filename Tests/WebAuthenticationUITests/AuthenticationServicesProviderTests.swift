@@ -27,6 +27,9 @@ class MockAuthenticationServicesProviderSession: AuthenticationServicesProviderS
     var startResult = true
     var cancelCalled = false
     
+    static var redirectUri: URL?
+    static var redirectError: Error?
+    
     required init(url: URL, callbackURLScheme: String?, completionHandler: @escaping ASWebAuthenticationSession.CompletionHandler) {
         self.url = url
         self.callbackURLScheme = callbackURLScheme
@@ -41,6 +44,11 @@ class MockAuthenticationServicesProviderSession: AuthenticationServicesProviderS
     
     func start() -> Bool {
         startCalled = true
+        DispatchQueue.global().asyncAfter(deadline: .now() + 0.5) {
+            self.completionHandler(
+                MockAuthenticationServicesProviderSession.redirectUri,
+                MockAuthenticationServicesProviderSession.redirectError)
+        }
         return startResult
     }
     
@@ -145,17 +153,6 @@ class AuthenticationServicesProviderTests: ProviderTestBase {
         
         XCTAssertNotNil(provider.authenticationSession)
         provider.processLogout(url: logoutRedirectUri, error: WebAuthenticationError.missingIdToken)
-        
-        XCTAssertFalse(delegate.logoutFinished)
-        XCTAssertNotNil(delegate.logoutError)
-    }
-    
-    func testLogoutNoRedirectUri() throws {
-        provider.logout(context: .init(idToken: "idToken", state: "state"))
-        waitFor(.error)
-        
-        XCTAssertNotNil(provider.authenticationSession)
-        provider.processLogout(url: nil, error: nil)
         
         XCTAssertFalse(delegate.logoutFinished)
         XCTAssertNotNil(delegate.logoutError)
