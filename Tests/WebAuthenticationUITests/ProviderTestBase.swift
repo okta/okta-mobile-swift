@@ -54,6 +54,10 @@ class WebAuthenticationProviderDelegateRecorder: WebAuthenticationProviderDelega
     }
 }
 
+enum ProviderTestError: Error {
+    case didNotFind(ProviderTestBase.WaitType)
+}
+
 class ProviderTestBase: XCTestCase, AuthorizationCodeFlowDelegate, SessionLogoutFlowDelegate {
     let issuer = URL(string: "https://example.com")!
     let redirectUri = URL(string: "com.example:/callback")!
@@ -85,7 +89,8 @@ class ProviderTestBase: XCTestCase, AuthorizationCodeFlowDelegate, SessionLogout
                               scopes: "openid profile",
                               session: urlSession)
         
-        logoutFlow = SessionLogoutFlow(logoutRedirectUri: logoutRedirectUri, client: client)
+        logoutFlow = client.sessionLogoutFlow(logoutRedirectUri: logoutRedirectUri)
+        logoutFlow.add(delegate: self)
         
         urlSession.expect("https://example.com/.well-known/openid-configuration",
                           data: try data(from: .module, for: "openid-configuration", in: "MockResponses"),
@@ -133,17 +138,26 @@ class ProviderTestBase: XCTestCase, AuthorizationCodeFlowDelegate, SessionLogout
         self.error = error
     }
 
-    func waitFor(_ type: WaitType, timeout: TimeInterval = 5.0, pollInterval: TimeInterval = 0.1) {
+    func waitFor(_ type: WaitType, timeout: TimeInterval = 5.0, pollInterval: TimeInterval = 0.1) throws {
+        var resultError: Error?
+        var success: Bool?
         let wait = expectation(description: "Receive authentication URL")
-        waitFor(type, timeout: timeout, pollInterval: pollInterval) {
+        waitFor(type, timeout: timeout, pollInterval: pollInterval) { result in
+            success = result
             wait.fulfill()
         }
         waitForExpectations(timeout: timeout + 1.0) { error in
-            XCTAssertNil(error)
+            resultError = error
+        }
+        
+        if let resultError = resultError {
+            throw resultError
+        } else if success == false {
+            throw ProviderTestError.didNotFind(type)
         }
     }
     
-    fileprivate func waitFor(_ type: WaitType, timeout: TimeInterval, pollInterval: TimeInterval, completion: @escaping() -> Void) {
+    fileprivate func waitFor(_ type: WaitType, timeout: TimeInterval, pollInterval: TimeInterval, completion: @escaping(Bool) -> Void) {
         DispatchQueue.global().asyncAfter(deadline: .now() + pollInterval) {
             var object: AnyObject?
             switch type {
@@ -158,13 +172,13 @@ class ProviderTestBase: XCTestCase, AuthorizationCodeFlowDelegate, SessionLogout
             }
 
             guard object == nil else {
-                completion()
+                completion(true)
                 return
             }
 
             let timeout = timeout - pollInterval
             guard timeout >= pollInterval else {
-                completion()
+                completion(false)
                 return
             }
 

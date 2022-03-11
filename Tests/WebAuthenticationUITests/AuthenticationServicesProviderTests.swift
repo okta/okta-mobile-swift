@@ -79,7 +79,7 @@ class AuthenticationServicesProviderTests: ProviderTestBase {
     
     func testSuccessfulAuthentication() throws {
         provider.start(context: .init(state: "state"))
-        waitFor(.authenticateUrl)
+        try waitFor(.authenticateUrl)
         
         XCTAssertNotNil(provider.authenticationSession)
         let session = try XCTUnwrap(provider.authenticationSession as? MockAuthenticationServicesProviderSession)
@@ -87,7 +87,7 @@ class AuthenticationServicesProviderTests: ProviderTestBase {
         
         let redirectUrl = URL(string: "com.example:/callback?code=abc123&state=state")
         provider.process(url: redirectUrl, error: nil)
-        waitFor(.token)
+        try waitFor(.token)
         
         XCTAssertNotNil(delegate.token)
         XCTAssertNil(delegate.error)
@@ -95,7 +95,7 @@ class AuthenticationServicesProviderTests: ProviderTestBase {
 
     func testErrorResponse() throws {
         provider.start(context: .init(state: "state"))
-        waitFor(.authenticateUrl)
+        try waitFor(.authenticateUrl)
 
         XCTAssertNotNil(provider.authenticationSession)
         let session = try XCTUnwrap(provider.authenticationSession as? MockAuthenticationServicesProviderSession)
@@ -109,7 +109,7 @@ class AuthenticationServicesProviderTests: ProviderTestBase {
 
     func testUserCancelled() throws {
         provider.start(context: .init(state: "state"))
-        waitFor(.authenticateUrl)
+        try waitFor(.authenticateUrl)
 
         XCTAssertNotNil(provider.authenticationSession)
         let session = try XCTUnwrap(provider.authenticationSession as? MockAuthenticationServicesProviderSession)
@@ -125,7 +125,7 @@ class AuthenticationServicesProviderTests: ProviderTestBase {
 
     func testNoResponse() throws {
         provider.start(context: .init(state: "state"))
-        waitFor(.authenticateUrl)
+        try waitFor(.authenticateUrl)
 
         XCTAssertNotNil(provider.authenticationSession)
         let session = try XCTUnwrap(provider.authenticationSession as? MockAuthenticationServicesProviderSession)
@@ -137,8 +137,10 @@ class AuthenticationServicesProviderTests: ProviderTestBase {
     }
     
     func testLogout() throws {
+        MockAuthenticationServicesProviderSession.redirectUri = URL(string: "com.example:/logout?foo=bar")
+    
         provider.logout(context: .init(idToken: "idToken", state: "state"))
-        waitFor(.logoutUrl)
+        try waitFor(.logoutUrl)
 
         XCTAssertNotNil(provider.authenticationSession)
         provider.processLogout(url: logoutRedirectUri, error: nil)
@@ -148,8 +150,10 @@ class AuthenticationServicesProviderTests: ProviderTestBase {
     }
     
     func testLogoutError() throws {
+        MockAuthenticationServicesProviderSession.redirectError = WebAuthenticationError.cannotComposeAuthenticationURL
+
         provider.logout(context: .init(idToken: "idToken", state: "state"))
-        waitFor(.error)
+        try waitFor(.logoutUrl)
         
         XCTAssertNotNil(provider.authenticationSession)
         provider.processLogout(url: logoutRedirectUri, error: WebAuthenticationError.missingIdToken)

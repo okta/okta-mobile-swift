@@ -121,13 +121,9 @@ public class SessionLogoutFlow: LogoutFlow {
     /// - Parameters:
     ///   - logoutRedirectUri: The logout redirect URI.
     ///   - client: The `OAuth2Client` to use with this flow.
-    public init?(logoutRedirectUri: URL?,
-                 client: OAuth2Client)
+    public init(logoutRedirectUri: URL,
+                client: OAuth2Client)
     {
-        guard let logoutRedirectUri = logoutRedirectUri else {
-            return nil
-        }
-
         self.client = client
         self.logoutRedirectUri = logoutRedirectUri
         
@@ -272,5 +268,14 @@ private extension SessionLogoutFlow {
         }
 
         return url
+    }
+}
+
+extension OAuth2Client {
+    /// Creates a new session logout flow for this redirect URI.
+    /// - Parameter logoutRedirectUri: Logout redirect URI to use
+    /// - Returns: ``SessionLogoutFlow`` to log out of this client.
+    public func sessionLogoutFlow(logoutRedirectUri: URL) -> SessionLogoutFlow {
+        SessionLogoutFlow(logoutRedirectUri: logoutRedirectUri, client: self)
     }
 }

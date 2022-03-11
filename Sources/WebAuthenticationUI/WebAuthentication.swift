@@ -286,12 +286,18 @@ public class WebAuthentication {
                                   clientId: clientId,
                                   scopes: scopes)
         
+        let logoutFlow: SessionLogoutFlow?
+        if let logoutRedirectUri = logoutRedirectUri {
+            logoutFlow = SessionLogoutFlow(logoutRedirectUri: logoutRedirectUri, client: client)
+        } else {
+            logoutFlow = nil
+        }
+        
         self.init(flow: AuthorizationCodeFlow(redirectUri: redirectUri,
                                               responseType: responseType,
                                               additionalParameters: additionalParameters,
                                               client: client),
-                  logoutFlow: SessionLogoutFlow(logoutRedirectUri: logoutRedirectUri,
-                                                client: client),
+                  logoutFlow: logoutFlow,
                   context: nil)
     }
     
