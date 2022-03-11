@@ -1,0 +1,34 @@
+//
+// Copyright (c) 2022-Present, Okta, Inc. and/or its affiliates. All rights reserved.
+// The Okta software accompanied by this notice is provided pursuant to the Apache License, Version 2.0 (the "License.")
+//
+// You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0.
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
+// WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+//
+// See the License for the specific language governing permissions and limitations under the License.
+//
+
+import Foundation
+
+/// Abstract base protocol for ``LogoutFlow`` instances to use for their backing configuration.
+public protocol LogoutConfiguration {}
+
+/// A common delegate protocol that all logout flows should support.
+public protocol LogoutFlowDelegate: AnyObject {
+    /// Sent when an logout flow receives an error.
+    func logout<Flow>(flow: Flow, received error: OAuth2Error)
+}
+
+/// A protocol defining a type of logout flow.
+public protocol LogoutFlow: AnyObject, UsesDelegateCollection {
+    /// Indicates if this flow is currently in progress.
+    var inProgress: Bool { get }
+    
+    /// Cancels the logout flow.
+    func cancel()
+    
+    /// Resets the logout flow.
+    func reset()
+}

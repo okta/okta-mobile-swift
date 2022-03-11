@@ -28,7 +28,7 @@ Once this file is created, your application can use the default initializer:
 ```swift
 @IBAction func signIn(_ sender: Any) {
     let auth = try WebAuthentication()
-    auth.start(from: view.window) { result in
+    auth.signIn(from: view.window) { result in
         // Handle the response
     }
 }
@@ -38,7 +38,7 @@ Alternatively, the ``WebAuthentication/shared`` property implicitly will do this
 
 ```swift
 @IBAction func signIn(_ sender: Any) {
-    WebAuthentication.shared.start(from: view.window) { result in
+    WebAuthentication.shared.signIn(from: view.window) { result in
         // Handle the response
     }
 }
@@ -58,7 +58,7 @@ There may be circumstances where your application connects to multiple client co
     }
 
     let auth = try WebAuthentication(plist: fileURL)
-    auth.start(from: view.window) { result in
+    auth.signIn(from: view.window) { result in
         // Handle the response
     }
 }
@@ -76,7 +76,7 @@ Another approach can be to use an initializer that passes those configuration va
         scopes: "openid offline_access profile",
         redirectUri: URL(string: "com.my.app:/callback")!)
 
-    auth.start(from: view.window) { result in
+    auth.signIn(from: view.window) { result in
         // Handle the response
     }
 }
@@ -97,7 +97,7 @@ let config = AuthorizationCodeFlow.Configuration(
     scopes: scopes,
     redirectUri: redirectUri)
 let auth = WebAuthentication(configuration: config,
-                                   session: myURLSession)
+                             session: myURLSession)
 ```
 
 ## Utilize a pre-configured OAuth2Client / use a pre-configured context
@@ -113,7 +113,7 @@ let flow = AuthorizationCodeFlow(clientConfig,
                                  client: oauth2Client)
 let auth = WebAuthentication(flow: flow,
                           context: flowContext)
-auth.start(from: view.window) { result in
+auth.signIn(from: view.window) { result in
     // Handle the response
 }
 ```

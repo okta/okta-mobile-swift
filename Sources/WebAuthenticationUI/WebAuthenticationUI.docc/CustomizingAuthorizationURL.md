@@ -18,7 +18,7 @@ let auth = WebAuthentication(issuer: issuer,
                              scopes: "openid profile offline_access",
                              redirectUri: redirectUri,
                              additionalParameters: [ "idp": myIdpString ])
-let token = try await auth.start()
+let token = try await auth.signIn()
 ```
 
 ## Customizing the Authorization URL through Delegation
@@ -31,7 +31,7 @@ If your code conforms to the `AuthorizationCodeFlowDelegate` protocol, and imple
 let auth = try WebAuthentication()
 auth.add(delegate: self)
 
-let token = try await auth.start()
+let token = try await auth.signIn()
 ```
 
 Elsewhere in your code, in the class that conforms to `AuthorizationCodeFlowDelegate`, you can implement the appropriate methods to customize the URL:

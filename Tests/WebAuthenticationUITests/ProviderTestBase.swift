@@ -22,6 +22,8 @@ class WebAuthenticationProviderDelegateRecorder: WebAuthenticationProviderDelega
     private(set) var token: Token?
     private(set) var error: Error?
     var shouldUseEphemeralSession: Bool = true
+    private(set) var logoutFinished = false
+    private(set) var logoutError: Error?
     
     func authentication(provider: WebAuthenticationProvider, received token: Token) {
         self.token = token
@@ -35,27 +37,45 @@ class WebAuthenticationProviderDelegateRecorder: WebAuthenticationProviderDelega
         shouldUseEphemeralSession
     }
     
+    func logout(provider: WebAuthenticationProvider, finished: Bool) {
+        self.logoutFinished = finished
+    }
+    
+    func logout(provider: WebAuthenticationProvider, received error: Error) {
+        self.logoutError = error
+    }
+    
     func reset() {
         token = nil
         error = nil
         shouldUseEphemeralSession = true
+        logoutError = nil
+        logoutFinished = false
     }
 }
 
-class ProviderTestBase: XCTestCase, AuthorizationCodeFlowDelegate {
+enum ProviderTestError: Error {
+    case didNotFind(ProviderTestBase.WaitType)
+}
+
+class ProviderTestBase: XCTestCase, AuthorizationCodeFlowDelegate, SessionLogoutFlowDelegate {
     let issuer = URL(string: "https://example.com")!
     let redirectUri = URL(string: "com.example:/callback")!
+    let logoutRedirectUri = URL(string: "com.example:/logout")!
     let urlSession = URLSessionMock()
     var client: OAuth2Client!
     var flow: AuthorizationCodeFlow!
+    var logoutFlow: SessionLogoutFlow!
     let delegate = WebAuthenticationProviderDelegateRecorder()
 
     var authenticationURL: URL?
+    var logoutURL: URL?
     var token: Token?
     var error: Error?
     
     enum WaitType {
         case authenticateUrl
+        case logoutUrl
         case token
         case error
     }
@@ -68,6 +88,9 @@ class ProviderTestBase: XCTestCase, AuthorizationCodeFlowDelegate {
                               clientId: "clientId",
                               scopes: "openid profile",
                               session: urlSession)
+        
+        logoutFlow = client.sessionLogoutFlow(logoutRedirectUri: logoutRedirectUri)
+        logoutFlow.add(delegate: self)
         
         urlSession.expect("https://example.com/.well-known/openid-configuration",
                           data: try data(from: .module, for: "openid-configuration", in: "MockResponses"),
@@ -90,6 +113,7 @@ class ProviderTestBase: XCTestCase, AuthorizationCodeFlowDelegate {
         Token.resetToDefault()
 
         authenticationURL = nil
+        logoutURL = nil
         token = nil
         error = nil
     }
@@ -106,22 +130,41 @@ class ProviderTestBase: XCTestCase, AuthorizationCodeFlowDelegate {
         self.error = error
     }
 
-    func waitFor(_ type: WaitType, timeout: TimeInterval = 5.0, pollInterval: TimeInterval = 0.1) {
+    func logout<Flow>(flow: Flow, shouldLogoutUsing url: URL) where Flow : SessionLogoutFlow {
+        self.logoutURL = url
+    }
+    
+    func logout<Flow>(flow: Flow, received error: OAuth2Error) {
+        self.error = error
+    }
+
+    func waitFor(_ type: WaitType, timeout: TimeInterval = 5.0, pollInterval: TimeInterval = 0.1) throws {
+        var resultError: Error?
+        var success: Bool?
         let wait = expectation(description: "Receive authentication URL")
-        waitFor(type, timeout: timeout, pollInterval: pollInterval) {
+        waitFor(type, timeout: timeout, pollInterval: pollInterval) { result in
+            success = result
             wait.fulfill()
         }
         waitForExpectations(timeout: timeout + 1.0) { error in
-            XCTAssertNil(error)
+            resultError = error
+        }
+        
+        if let resultError = resultError {
+            throw resultError
+        } else if success == false {
+            throw ProviderTestError.didNotFind(type)
         }
     }
     
-    fileprivate func waitFor(_ type: WaitType, timeout: TimeInterval, pollInterval: TimeInterval, completion: @escaping() -> Void) {
+    fileprivate func waitFor(_ type: WaitType, timeout: TimeInterval, pollInterval: TimeInterval, completion: @escaping(Bool) -> Void) {
         DispatchQueue.global().asyncAfter(deadline: .now() + pollInterval) {
             var object: AnyObject?
             switch type {
             case .authenticateUrl:
                 object = self.authenticationURL as AnyObject?
+            case .logoutUrl:
+                object = self.logoutURL as AnyObject?
             case .token:
                 object = self.token
             case .error:
@@ -129,13 +172,13 @@ class ProviderTestBase: XCTestCase, AuthorizationCodeFlowDelegate {
             }
 
             guard object == nil else {
-                completion()
+                completion(true)
                 return
             }
 
             let timeout = timeout - pollInterval
             guard timeout >= pollInterval else {
-                completion()
+                completion(false)
                 return
             }
 

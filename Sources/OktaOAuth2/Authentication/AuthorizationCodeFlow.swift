@@ -112,9 +112,6 @@ public class AuthorizationCodeFlow: AuthenticationFlow {
     /// The redirect URI defined for your client.
     public let redirectUri: URL
     
-    /// The logout redirect URI, if applicable.
-    public let logoutRedirectUri: URL?
-    
     /// Any additional query string parameters you would like to supply to the authorization server.
     public let additionalParameters: [String:String]?
 
@@ -155,12 +152,10 @@ public class AuthorizationCodeFlow: AuthenticationFlow {
                             clientId: String,
                             scopes: String,
                             redirectUri: URL,
-                            logoutRedirectUri: URL? = nil,
                             responseType: ResponseType = .code,
                             additionalParameters: [String:String]? = nil)
     {
         self.init(redirectUri: redirectUri,
-                  logoutRedirectUri: logoutRedirectUri,
                   responseType: responseType,
                   additionalParameters: additionalParameters,
                   client: OAuth2Client(baseURL: issuer,
@@ -173,7 +168,6 @@ public class AuthorizationCodeFlow: AuthenticationFlow {
     ///   - configuration: The configuration to use for this authentication flow.
     ///   - client: The `OAuth2Client` to use with this flow.
     public init(redirectUri: URL,
-                logoutRedirectUri: URL? = nil,
                 responseType: ResponseType = .code,
                 additionalParameters: [String:String]? = nil,
                 client: OAuth2Client)
@@ -181,7 +175,6 @@ public class AuthorizationCodeFlow: AuthenticationFlow {
         self.client = client
         self.responseType = responseType
         self.redirectUri = redirectUri
-        self.logoutRedirectUri = logoutRedirectUri
         self.additionalParameters = additionalParameters
         
         client.add(delegate: self)
@@ -200,6 +193,8 @@ public class AuthorizationCodeFlow: AuthenticationFlow {
         client.openIdConfiguration { result in
             switch result {
             case .failure(let error):
+                self.reset()
+                
                 self.delegateCollection.invoke { $0.authentication(flow: self, received: error) }
                 completion?(.failure(error))
             case .success(let configuration):
@@ -211,6 +206,8 @@ public class AuthorizationCodeFlow: AuthenticationFlow {
                     
                     completion?(.success(url))
                 } catch {
+                    self.reset()
+                    
                     let oauthError = error as? OAuth2Error ?? .error(error)
                     self.delegateCollection.invoke { $0.authentication(flow: self, received: oauthError) }
                     completion?(.failure(oauthError))
@@ -370,14 +367,12 @@ extension AuthorizationCodeFlow: OAuth2ClientDelegate {
 extension OAuth2Client {
     public func authorizationCodeFlow(
         redirectUri: URL,
-        logoutRedirectUri: URL? = nil,
         responseType: ResponseType = .code,
         additionalParameters: [String:String]? = nil) -> AuthorizationCodeFlow
     {
         AuthorizationCodeFlow(redirectUri: redirectUri,
-                              logoutRedirectUri: logoutRedirectUri,
                               responseType: responseType,
-                                                    additionalParameters: additionalParameters,
+                              additionalParameters: additionalParameters,
                               client: self)
     }
 }

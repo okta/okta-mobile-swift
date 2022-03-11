@@ -128,6 +128,28 @@ class ProfileTableViewController: UITableViewController {
                 }
             }
         }))
+        
+        if let token = Credential.default?.token {
+            alert.addAction(.init(title: "End a session", style: .destructive) { _ in
+                WebAuthentication.shared?.logout(token: token) { result in
+                    switch result {
+                    case .success:
+                        try? Keychain.deleteTokens()
+                        try? self.credential?.remove()
+                        self.credential = nil
+                    case .failure(let error):
+                        DispatchQueue.main.async {
+                            let alert = UIAlertController(title: "Sign out failed",
+                                                          message: error.localizedDescription,
+                                                          preferredStyle: .alert)
+                            alert.addAction(UIAlertAction(title: "OK", style: .default))
+                            self.present(alert, animated: true)
+                        }
+                    }
+                }
+            })
+        }
+        
         alert.addAction(.init(title: "Cancel", style: .cancel))
 
         present(alert, animated: true)

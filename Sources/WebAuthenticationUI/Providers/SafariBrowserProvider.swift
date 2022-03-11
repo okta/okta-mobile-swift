@@ -19,26 +19,31 @@ import SafariServices
 @available(iOS, introduced: 9.0, deprecated: 11.0)
 class SafariBrowserProvider: NSObject, WebAuthenticationProvider {
     let flow: AuthorizationCodeFlow
+    let logoutFlow: SessionLogoutFlow?
     private(set) weak var delegate: WebAuthenticationProviderDelegate?
-
+    
     private(set) var safariController: SFSafariViewController?
     private let anchor: WebAuthentication.WindowAnchor?
     
     init(flow: AuthorizationCodeFlow,
+         logoutFlow: SessionLogoutFlow?,
          from window: WebAuthentication.WindowAnchor?,
          delegate: WebAuthenticationProviderDelegate)
     {
         self.flow = flow
+        self.logoutFlow = logoutFlow
         self.anchor = window
         self.delegate = delegate
         
         super.init()
         
         self.flow.add(delegate: self)
+        self.logoutFlow?.add(delegate: self)
     }
     
     deinit {
         self.flow.remove(delegate: self)
+        self.logoutFlow?.remove(delegate: self)
     }
     
     func authenticate(using url: URL) {
@@ -51,6 +56,11 @@ class SafariBrowserProvider: NSObject, WebAuthenticationProvider {
                 .topViewController(from: self.anchor?.rootViewController)?
                 .present(safariController, animated: true)
         }
+    }
+    
+    func logout(using url: URL) {
+        // The process is the same as for authentication
+        authenticate(using: url)
     }
     
     func received(token: Token) {
@@ -67,6 +77,10 @@ class SafariBrowserProvider: NSObject, WebAuthenticationProvider {
         delegate.authentication(provider: self, received: error)
     }
     
+    func received(logoutError: WebAuthenticationError) {
+        delegate?.authentication(provider: self, received: logoutError)
+    }
+    
     func start(context: AuthorizationCodeFlow.Context?) {
         guard let delegate = delegate else { return }
         
@@ -75,6 +89,15 @@ class SafariBrowserProvider: NSObject, WebAuthenticationProvider {
         } catch {
             delegate.authentication(provider: self, received: error)
         }
+    }
+    
+    func logout(context: SessionLogoutFlow.Context) {
+        guard let logoutFlow = logoutFlow else {
+            return
+        }
+
+        // LogoutFlow invokes delegate, so an error is propagated from delegate method
+        try? logoutFlow.resume(with: context)
     }
     
     func cancel() {
@@ -98,6 +121,16 @@ extension SafariBrowserProvider: AuthorizationCodeFlowDelegate {
     }
 }
 
+@available(iOS, introduced: 9.0, deprecated: 11.0)
+extension SafariBrowserProvider: SessionLogoutFlowDelegate {
+    func logout<Flow>(flow: Flow, shouldLogoutUsing url: URL) where Flow : SessionLogoutFlow {
+        logout(using: url)
+    }
+    
+    func logout<SessionLogoutFlow>(flow: SessionLogoutFlow, received error: OAuth2Error) {
+        received(logoutError: .oauth2(error: error))
+    }
+}
 
 private extension UIWindow {
     static func topViewController(from rootViewController: UIViewController?) -> UIViewController? {

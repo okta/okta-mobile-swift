@@ -21,8 +21,10 @@ import XCTest
 class WebAuthenticationUITests: XCTestCase {
     private let issuer = URL(string: "https://example.com")!
     private let redirectUri = URL(string: "com.example:/callback")!
+    private let logoutRedirectUri = URL(string: "com.example:/logout")!
     private let urlSession = URLSessionMock()
     private var flow: AuthorizationCodeFlow!
+    private var logoutFlow: SessionLogoutFlow!
     private var client: OAuth2Client!
     
     override func setUpWithError() throws {
@@ -36,14 +38,15 @@ class WebAuthenticationUITests: XCTestCase {
                           contentType: "application/json")
         flow = client.authorizationCodeFlow(redirectUri: redirectUri,
                                             additionalParameters: ["additional": "param"])
+        logoutFlow = SessionLogoutFlow(logoutRedirectUri: logoutRedirectUri, client: client)
     }
     
     func testStart() throws {
         XCTAssertNotNil(WebAuthentication.shared)
         
-        let webAuth = WebAuthenticationMock(flow: flow, context: .init(state: "qwe"))
+        let webAuth = WebAuthenticationMock(flow: flow, logoutFlow: logoutFlow, context: .init(state: "qwe"))
         
-        webAuth.start(from: nil) { result in }
+        webAuth.signIn(from: nil) { result in }
         
         let webAuthProvider = try XCTUnwrap(webAuth.provider as? WebAuthenticationProviderMock)
 
@@ -51,12 +54,23 @@ class WebAuthenticationUITests: XCTestCase {
         XCTAssertTrue(webAuthProvider.state == .started)
     }
     
+    func testLogout() throws {
+        let webAuth = WebAuthenticationMock(flow: flow, logoutFlow: logoutFlow, context: .init(state: "qwe"))
+        
+        webAuth.signOut(from: nil, token: "idToken") { result in }
+        
+        let provider = try XCTUnwrap(webAuth.provider as? WebAuthenticationProviderMock)
+        XCTAssertNil(webAuth.completionBlock)
+        XCTAssertNotNil(webAuth.logoutCompletionBlock)
+        XCTAssertNotNil(provider.state == .started)
+    }
+    
     func testCancel() throws {
-        let webAuth = WebAuthenticationMock(flow: flow, context: .init(state: "qwe"))
+        let webAuth = WebAuthenticationMock(flow: flow, logoutFlow: logoutFlow, context: .init(state: "qwe"))
         
         XCTAssertNil(webAuth.provider)
         
-        webAuth.start(from: nil) { result in }
+        webAuth.signIn(from: nil) { result in }
 
         let webAuthProvider = try XCTUnwrap(webAuth.provider as? WebAuthenticationProviderMock)
 

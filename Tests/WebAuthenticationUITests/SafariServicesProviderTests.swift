@@ -26,7 +26,7 @@ class SafariServicesProviderTests: ProviderTestBase {
     override func setUpWithError() throws {
         try super.setUpWithError()
         
-        provider = SafariServicesProvider(flow: flow, delegate: delegate)
+        provider = SafariServicesProvider(flow: flow, logoutFlow: logoutFlow, delegate: delegate)
     }
     
     func testSuccessfulAuthentication() {
@@ -76,6 +76,42 @@ class SafariServicesProviderTests: ProviderTestBase {
         provider.process(url: nil, error: nil)
         XCTAssertNil(delegate.token)
         XCTAssertNotNil(delegate.error)
+    }
+    
+    func testLogout() {
+        provider.logout(context: .init(idToken: "idToken", state: "state"))
+        waitFor(.logoutUrl)
+
+        XCTAssertNotNil(provider.authenticationSession)
+        
+        provider.processLogout(url: logoutRedirectUri, error: nil)
+        
+        XCTAssertTrue(delegate.logoutFinished)
+        XCTAssertNil(delegate.logoutError)
+    }
+    
+    func testLogoutError() {
+        provider.logout(context: .init(idToken: "idToken", state: "state"))
+        waitFor(.error)
+
+        XCTAssertNotNil(provider.authenticationSession)
+        
+        provider.processLogout(url: logoutRedirectUri, error: WebAuthenticationError.missingIdToken)
+        
+        XCTAssertFalse(delegate.logoutFinished)
+        XCTAssertNotNil(delegate.logoutError)
+    }
+    
+    func testLogoutNoRedirectUri() {
+        provider.logout(context: .init(idToken: "idToken", state: "state"))
+        waitFor(.error)
+
+        XCTAssertNotNil(provider.authenticationSession)
+        
+        provider.processLogout(url: nil, error: nil)
+        
+        XCTAssertFalse(delegate.logoutFinished)
+        XCTAssertNotNil(delegate.logoutError)
     }
 }
 

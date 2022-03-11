@@ -19,7 +19,7 @@ import OktaOAuth2
 extension WebAuthentication {
     private func complete(with result: Result<Token, WebAuthenticationError>) {
         provider = nil
-        flow.reset()
+        signInFlow.reset()
 
         guard let completion = completionBlock else {
             return
@@ -31,9 +31,42 @@ extension WebAuthentication {
         
         completionBlock = nil
     }
+    
+    private func completeLogout(with result: Result<Void, WebAuthenticationError>) {
+        guard let completion = logoutCompletionBlock else {
+            return
+        }
+
+        DispatchQueue.main.async {
+            completion(result)
+        }
+        
+        logoutCompletionBlock = nil
+        provider = nil
+        signInFlow.reset()
+    }
 }
 
 extension WebAuthentication: WebAuthenticationProviderDelegate {
+    func logout(provider: WebAuthenticationProvider, finished: Bool) {
+        if finished {
+            completeLogout(with: .success(()))
+        }
+    }
+    
+    func logout(provider: WebAuthenticationProvider, received error: Error) {
+        let webError: WebAuthenticationError
+        if let error = error as? WebAuthenticationError {
+            webError = error
+        } else if let error = error as? OAuth2Error {
+            webError = .oauth2(error: error)
+        } else {
+            webError = .generic(error: error)
+        }
+        
+        completeLogout(with: .failure(webError))
+    }
+    
     func authentication(provider: WebAuthenticationProvider, received result: Token) {
         complete(with: .success(result))
     }
@@ -47,6 +80,7 @@ extension WebAuthentication: WebAuthenticationProviderDelegate {
         } else {
             webError = .generic(error: error)
         }
+        
         complete(with: .failure(webError))
     }
     

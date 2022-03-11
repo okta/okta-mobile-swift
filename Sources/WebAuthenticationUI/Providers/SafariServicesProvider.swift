@@ -19,23 +19,28 @@ import SafariServices
 @available(iOS, introduced: 11.0, deprecated: 12.0)
 class SafariServicesProvider: NSObject, WebAuthenticationProvider {
     let flow: AuthorizationCodeFlow
+    let logoutFlow: SessionLogoutFlow?
     private(set) weak var delegate: WebAuthenticationProviderDelegate?
-
+    
     private(set) var authenticationSession: SFAuthenticationSession?
     
     init(flow: AuthorizationCodeFlow,
+         logoutFlow: SessionLogoutFlow?,
          delegate: WebAuthenticationProviderDelegate)
     {
         self.flow = flow
+        self.logoutFlow = logoutFlow
         self.delegate = delegate
         
         super.init()
         
         self.flow.add(delegate: self)
+        self.logoutFlow?.add(delegate: self)
     }
     
     deinit {
         self.flow.remove(delegate: self)
+        self.logoutFlow?.remove(delegate: self)
     }
     
     func start(context: AuthorizationCodeFlow.Context?) {
@@ -48,12 +53,32 @@ class SafariServicesProvider: NSObject, WebAuthenticationProvider {
         }
     }
     
+    func logout(context: SessionLogoutFlow.Context) {
+        // LogoutFlow invokes delegate, so an error is propagated from delegate method
+        try? logoutFlow?.resume(with: context)
+    }
+    
     func authenticate(using url: URL) {
         authenticationSession = SFAuthenticationSession(
             url: url,
             callbackURLScheme: flow.redirectUri.scheme,
             completionHandler: { [weak self] url, error in
                 self?.process(url: url, error: error)
+            })
+        
+        authenticationSession?.start()
+    }
+    
+    func logout(using url: URL) {
+        guard let logoutFlow = logoutFlow else {
+            return
+        }
+
+        authenticationSession = SFAuthenticationSession(
+            url: url,
+            callbackURLScheme: logoutFlow.logoutRedirectUri.scheme,
+            completionHandler: { [weak self] url, error in
+                self?.processLogout(url: url, error: error)
             })
         
         authenticationSession?.start()
@@ -87,6 +112,30 @@ class SafariServicesProvider: NSObject, WebAuthenticationProvider {
         }
     }
     
+    func processLogout(url: URL?, error: Error?) {
+        guard let delegate = delegate else { return }
+
+        if let error = error {
+            let nsError = error as NSError
+            if nsError.domain == SFAuthenticationErrorDomain,
+               nsError.code == SFAuthenticationError.canceledLogin.rawValue
+            {
+                received(logoutError: .userCancelledLogin)
+            } else {
+                received(logoutError: .authenticationProviderError(error))
+            }
+            
+            return
+        }
+        
+        guard url != nil else {
+            received(logoutError: .genericError(message: "Authentication session returned neither a URL or an error on logout"))
+            return
+        }
+        
+        delegate.logout(provider: self, finished: true)
+    }
+    
     func received(token: Token) {
         guard let delegate = delegate else { return }
         
@@ -97,6 +146,12 @@ class SafariServicesProvider: NSObject, WebAuthenticationProvider {
         guard let delegate = delegate else { return }
         
         delegate.authentication(provider: self, received: error)
+    }
+    
+    func received(logoutError: WebAuthenticationError) {
+        guard let delegate = delegate else { return }
+
+        delegate.logout(provider: self, received: logoutError)
     }
     
     func cancel() {
@@ -117,6 +172,17 @@ extension SafariServicesProvider: AuthorizationCodeFlowDelegate {
     
     func authentication<Flow>(flow: Flow, received token: Token) {
         received(token: token)
+    }
+}
+
+@available(iOS, introduced: 11.0, deprecated: 12.0)
+extension SafariServicesProvider: SessionLogoutFlowDelegate {
+    func logout<Flow>(flow: Flow, shouldLogoutUsing url: URL) where Flow : SessionLogoutFlow {
+        logout(using: url)
+    }
+    
+    func logout<SessionLogoutFlow>(flow: SessionLogoutFlow, received error: OAuth2Error) {
+        received(logoutError: .oauth2(error: error))
     }
 }
 #endif
