@@ -116,12 +116,11 @@ class AuthenticationServicesProvider: NSObject, WebAuthenticationProvider {
             return
         }
 
-        authenticationSession = ASWebAuthenticationSession(
-            url: url,
-            callbackURLScheme: logoutFlow.logoutRedirectUri.scheme,
-            completionHandler: { url, error in
-                self.processLogout(url: url, error: error)
-            })
+        authenticationSession = createSession(url: url,
+                                              callbackURLScheme: logoutFlow.logoutRedirectUri.scheme,
+                                              completionHandler: { url, error in
+            self.processLogout(url: url, error: error)
+        })
         
         if #available(iOS 13.0, *) {
             if let delegate = delegate {
