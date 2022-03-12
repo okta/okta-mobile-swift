@@ -47,5 +47,3 @@ extension Expires {
     
     public var isValid: Bool { !isExpired }
 }
-
-

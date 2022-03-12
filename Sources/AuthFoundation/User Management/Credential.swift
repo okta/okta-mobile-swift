@@ -46,6 +46,11 @@ public class Credential {
     /// Lists all users currently stored within the user's application.
     public static var allCredentials: [Credential] { coordinator.allCredentials }
     
+    /// The default grace interval used when refreshing tokens using ``Credential/refreshIfNeeded(graceInterval:completion:)`` or ``Credential/refreshIfNeeded(graceInterval:)``.
+    ///
+    /// This value may still be overridden by supplying an explicit `graceInterval` argument to the above methods.
+    public static var defaultRefreshGraceInterval: TimeInterval = 300
+    
     /// Returns a Credential instance for the given token.
     ///
     /// If a credential has previously been created for the given token, that cached instance will be returned.
@@ -152,6 +157,20 @@ extension Credential {
         }
     }
     
+    /// Attempt to refresh the token if it either has expired, or is about to expire.
+    /// - Parameter completion: Completion block invoked with either the new token generated as a result of the refresh, or the current token if a refresh was unnecessary.
+    public func refreshIfNeeded(graceInterval: TimeInterval = Credential.defaultRefreshGraceInterval,
+                                completion: ((Result<Token, OAuth2Error>) -> Void)? = nil)
+    {
+        if let expiresAt = token.expiresAt,
+            expiresAt.timeIntervalSinceNow <= graceInterval
+        {
+            refresh(completion: completion)
+        } else {
+            completion?(.success(token))
+        }
+    }
+    
     /// Attempt to revoke one or more of the tokens.
     /// - Parameters:
     ///   - type: The token type to revoke.
@@ -201,6 +220,16 @@ extension Credential {
     public func refresh() async throws -> Token {
         try await withCheckedThrowingContinuation { continuation in
             refresh() { result in
+                continuation.resume(with: result)
+            }
+        }
+    }
+    
+    /// Attempt to refresh the token if it either has expired, or is about to expire.
+    /// - Returns: The new token generated as a result of the refresh, or the current token if a refresh was unnecessary.
+    public func refreshIfNeeded(graceInterval: TimeInterval = Credential.defaultRefreshGraceInterval) async throws -> Token {
+        try await withCheckedThrowingContinuation { continuation in
+            refreshIfNeeded(graceInterval: graceInterval) { result in
                 continuation.resume(with: result)
             }
         }

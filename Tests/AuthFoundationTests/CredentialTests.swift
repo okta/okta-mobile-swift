@@ -63,44 +63,4 @@ final class CredentialTests: XCTestCase {
         }
     }
     
-    func testRefresh() throws {
-        urlSession.expect("https://example.com/oauth2/default/.well-known/openid-configuration",
-                          data: try data(from: .module, for: "openid-configuration", in: "MockResponses"),
-                          contentType: "application/json")
-        urlSession.expect("https://example.com/oauth2/v1/token",
-                          data: try data(from: .module, for: "token", in: "MockResponses"))
-        
-        let expect = expectation(description: "refresh")
-        credential.refresh { result in
-            switch result {
-            case .success(let newToken):
-                XCTAssertNotNil(newToken)
-            case .failure(let error):
-                XCTAssertNil(error)
-            }
-            expect.fulfill()
-        }
-        
-        XCTAssertTrue(credential.token.isRefreshing)
-
-        waitForExpectations(timeout: 1.0) { error in
-            XCTAssertNil(error)
-        }
-        
-        XCTAssertFalse(credential.token.isRefreshing)
-    }
-
-    #if swift(>=5.5.1)
-    @available(iOS 15.0, tvOS 15.0, macOS 12.0, watchOS 8, *)
-    func testRefreshAsync() async throws {
-        urlSession.expect("https://example.com/oauth2/default/.well-known/openid-configuration",
-                          data: try data(from: .module, for: "openid-configuration", in: "MockResponses"),
-                          contentType: "application/json")
-        urlSession.expect("https://example.com/oauth2/v1/token",
-                          data: try data(from: .module, for: "token", in: "MockResponses"))
-        
-        let token = try await credential.refresh()
-        XCTAssertNotNil(token)
-    }
-    #endif
 }
