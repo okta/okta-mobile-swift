@@ -107,13 +107,17 @@ public class Token: Codable, Equatable, Hashable, Identifiable, Expires {
     public static func == (lhs: Token, rhs: Token) -> Bool {
         lhs.context == rhs.context &&
         lhs.accessToken == rhs.accessToken &&
-        lhs.scope == rhs.scope
+        lhs.scope == rhs.scope &&
+        lhs.idToken?.rawValue == rhs.idToken?.rawValue &&
+        lhs.deviceSecret == rhs.deviceSecret
     }
     
     public func hash(into hasher: inout Hasher) {
         hasher.combine(context)
         hasher.combine(accessToken)
         hasher.combine(scope)
+        hasher.combine(idToken?.rawValue)
+        hasher.combine(deviceSecret)
     }
 
     required init(issuedAt: Date,
