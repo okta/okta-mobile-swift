@@ -90,6 +90,7 @@ final class ErrorTests: XCTestCase {
                        "Nested Error")
     }
     
+    #if os(iOS) || os(macOS) || os(tvOS) || os(watchOS)
     func testKeychainError() {
         XCTAssertNotEqual(KeychainError.cannotGet(code: noErr).errorDescription,
                           "keychain_cannot_get")
@@ -112,6 +113,7 @@ final class ErrorTests: XCTestCase {
         XCTAssertNotEqual(KeychainError.missingAttribute.errorDescription,
                           "keychain_missing_attribute")
     }
+    #endif
     
     func testJWTError() {
         XCTAssertNotEqual(JWTError.invalidBase64Encoding.errorDescription,

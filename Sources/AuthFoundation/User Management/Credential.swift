@@ -12,6 +12,10 @@
 
 import Foundation
 
+#if os(Linux)
+import FoundationNetworking
+#endif
+
 extension Notification.Name {
     /// Notification broadcast when the ``Credential/default`` value changes.
     public static let defaultCredentialChanged = Notification.Name("com.okta.defaultCredentialChanged")
@@ -49,7 +53,7 @@ public class Credential {
     /// The default grace interval used when refreshing tokens using ``Credential/refreshIfNeeded(graceInterval:completion:)`` or ``Credential/refreshIfNeeded(graceInterval:)``.
     ///
     /// This value may still be overridden by supplying an explicit `graceInterval` argument to the above methods.
-    public static var defaultRefreshGraceInterval: TimeInterval = 300
+    public static var refreshGraceInterval: TimeInterval = 300
     
     /// Returns a Credential instance for the given token.
     ///
@@ -70,6 +74,20 @@ public class Credential {
     /// This value may be nil if the ``userInfo()`` or ``userInfo(completion:)`` methods haven't yet been called.
     @TimeSensitive<UserInfo?>
     public private(set) var userInfo: UserInfo?
+    
+    /// Indicates this credential's token should automatically be refreshed prior to its expiration.
+    ///
+    /// This property can be used to ensure a token is available for use, by refreshing the token automatically prior to its expiration. This uses the ``Credential/refreshGraceInterval`` in conjunction with the current ``TimeCoordinator`` instance, to refresh the token before its scheduled expiration.
+    public var automaticRefresh: Bool = false {
+        didSet {
+            guard oldValue != automaticRefresh else { return }
+            if automaticRefresh {
+                startAutomaticRefresh()
+            } else {
+                stopAutomaticRefresh()
+            }
+        }
+    }
     
     /// Initializer that creates a credential for the supplied token.
     /// - Parameter token: Token to create a credential for.
@@ -95,9 +113,35 @@ public class Credential {
         self.oauth2.add(delegate: self)
     }
 
+    deinit {
+        stopAutomaticRefresh()
+    }
+    
     // MARK: Private properties
     fileprivate static let coordinator = CredentialCoordinatorImpl()
     internal weak var coordinator: CredentialCoordinator?
+
+    private(set) internal var automaticRefreshTimer: DispatchSourceTimer?
+    private func startAutomaticRefresh() {
+        guard let timerSource = createAutomaticRefreshTimer() else { return }
+
+        automaticRefreshTimer?.cancel()
+        automaticRefreshTimer = timerSource
+        timerSource.resume()
+    }
+    
+    func stopAutomaticRefresh() {
+        automaticRefreshTimer?.cancel()
+        automaticRefreshTimer = nil
+    }
+}
+
+extension Credential {
+    /// Convenience method that decorates the given URLRequest with the appropriate authorization headers to make a request using the credential's current token.
+    /// - Parameter request: Request to decorate with the appropriate authorization header.
+    public func authorize(request: inout URLRequest) {
+        request.setValue(token.authorizationHeader, forHTTPHeaderField: "Authorization")
+    }
 }
 
 extension Credential {
@@ -159,7 +203,7 @@ extension Credential {
     
     /// Attempt to refresh the token if it either has expired, or is about to expire.
     /// - Parameter completion: Completion block invoked with either the new token generated as a result of the refresh, or the current token if a refresh was unnecessary.
-    public func refreshIfNeeded(graceInterval: TimeInterval = Credential.defaultRefreshGraceInterval,
+    public func refreshIfNeeded(graceInterval: TimeInterval = Credential.refreshGraceInterval,
                                 completion: ((Result<Token, OAuth2Error>) -> Void)? = nil)
     {
         if let expiresAt = token.expiresAt,
@@ -227,7 +271,7 @@ extension Credential {
     
     /// Attempt to refresh the token if it either has expired, or is about to expire.
     /// - Returns: The new token generated as a result of the refresh, or the current token if a refresh was unnecessary.
-    public func refreshIfNeeded(graceInterval: TimeInterval = Credential.defaultRefreshGraceInterval) async throws -> Token {
+    public func refreshIfNeeded(graceInterval: TimeInterval = Credential.refreshGraceInterval) async throws -> Token {
         try await withCheckedThrowingContinuation { continuation in
             refreshIfNeeded(graceInterval: graceInterval) { result in
                 continuation.resume(with: result)
@@ -235,6 +279,15 @@ extension Credential {
         }
     }
 
+    /// Asynchronous convenience method that decorates the given URLRequest with the appropriate authorization headers to make a request using the credential's current token.
+    ///
+    /// This asynchronous variant ensures that the token has been refreshed, if needed, prior to adding the appropriate headers to the request.
+    /// - Parameter request: Request to decorate with the appropriate authorization header.
+    public func authorize(_ request: inout URLRequest) async {
+        _ = try? await refreshIfNeeded()
+        authorize(request: &request)
+    }
+    
     /// Attempt to revoke one or more of the tokens.
     /// - Parameters:
     ///   - type: The token type to revoke.

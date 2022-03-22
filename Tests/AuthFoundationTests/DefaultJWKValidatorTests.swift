@@ -12,12 +12,11 @@
 
 import Foundation
 import XCTest
-import TestCommon
 
+@testable import TestCommon
 @testable import AuthFoundation
 
 final class DefaultJWKValidatorTests: XCTestCase {
-    let validToken = "eyJhbGciOiJSUzI1NiIsImtpZCI6Ims2SE4yREtvay1rRXhqSkdCTHFnekJ5TUNuTjFSdnpFT0EtMXVrVGpleEEifQ.eyJzdWIiOiIwMHUycTVwM2FjVk9Yb1NjMDR3NSIsIm5hbWUiOiJBcnRodXIgRGVudCIsInZlciI6MSwiaXNzIjoiaHR0cHM6Ly9leGFtcGxlLmNvbS9vYXV0aDIvZGVmYXVsdCIsImF1ZCI6IjBvYTNlbjRmSU1RM2RkYzIwNHc1IiwiaWF0IjoxNjQyNTMyNTYyLCJleHAiOjE2NDI1MzYxNjIsImp0aSI6IklELmJyNFdtM29RR2RqMGZzOFNDR3JLckNrX09pQmd1dEdya2dtZGk5VU9wZTgiLCJhbXIiOlsicHdkIl0sImlkcCI6IjAwbzJxNWhtTEFFWFRuWmxoNHc1IiwicHJlZmVycmVkX3VzZXJuYW1lIjoiYXJ0aHVyLmRlbnRAZXhhbXBsZS5jb20iLCJhdXRoX3RpbWUiOjE2NDI1MzI1NjEsImF0X2hhc2giOiJXbGN3enQtczNzeE9xMFlfRFNzcGFnIn0.hMcCg_SVy6TKC7KpHRfW484p-jxxdyKf5koWESFDoaouC_uEmtJr7KzpwYYkRM5A2T7_GuQ3E9dSv1l1M9Pp1b2fVIXHiCXTj9whbx97-xyTAT5HqQY_-nk_xUIYqzNOqWCMrP2PxZ4erRl_iRhu0KyL4neIalDIbnHPopzlALn-RRBHyyU9NHGXeyMWGhEV3NLmSIxVQWiwAySKxM5GbafHLvVhK2uJxCqQG6GPU5MwxkdJe_3W2Lvefv9iUn_YJENFF54Ph8NTuJzz6ccep6haHuEMpBZny9qd1fbITxMJi9dAPEbGm9ne9ch5gO7skPHTg-KFl90eIaU-zoKK-w"
     let keySet = """
         {
             "keys" : [
@@ -38,7 +37,7 @@ final class DefaultJWKValidatorTests: XCTestCase {
         let keyData = data(for: keySet)
         let jwks = try JSONDecoder().decode(JWKS.self, from: keyData)
 
-        let jwt = try JWT(validToken)
+        let jwt = try JWT(String.mockIdToken)
 
         #if os(Linux)
         XCTAssertThrowsError(try validator.validate(token: jwt, using: jwks))
@@ -60,7 +59,7 @@ final class DefaultJWKValidatorTests: XCTestCase {
                 ]
              }
             """))
-        let jwt = try JWT(validToken)
+        let jwt = try JWT(String.mockIdToken)
         XCTAssertThrowsError(try validator.validate(token: jwt, using: jwks)) { error in
             XCTAssertEqual(error as? JWTError, JWTError.invalidSigningAlgorithm)
         }
@@ -79,7 +78,7 @@ final class DefaultJWKValidatorTests: XCTestCase {
                 ]
              }
             """))
-        let jwt = try JWT(validToken)
+        let jwt = try JWT(String.mockIdToken)
         XCTAssertThrowsError(try validator.validate(token: jwt, using: jwks)) { error in
             XCTAssertEqual(error as? JWTError, JWTError.invalidKey)
         }
@@ -100,7 +99,7 @@ final class DefaultJWKValidatorTests: XCTestCase {
                 ]
              }
             """))
-        let jwt = try JWT(validToken)
+        let jwt = try JWT(String.mockIdToken)
         XCTAssertThrowsError(try validator.validate(token: jwt, using: jwks)) { error in
             XCTAssertEqual(error as? JWTError, JWTError.cannotCreateKey(
                 code: -50,
@@ -123,7 +122,7 @@ final class DefaultJWKValidatorTests: XCTestCase {
                 ]
              }
             """))
-        let jwt = try JWT(validToken)
+        let jwt = try JWT(String.mockIdToken)
         XCTAssertThrowsError(try validator.validate(token: jwt, using: jwks)) { error in
             XCTAssertEqual(error as? JWTError, JWTError.invalidSigningAlgorithm)
         }

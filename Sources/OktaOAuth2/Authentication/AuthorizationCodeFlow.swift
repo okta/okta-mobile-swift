@@ -67,7 +67,7 @@ public protocol AuthorizationCodeFlowDelegate: AuthenticationDelegate {
 /// ```
 public class AuthorizationCodeFlow: AuthenticationFlow {
     /// A model representing the context and current state for an authorization session.
-    public struct Context: Codable, Equatable {
+    public struct Context: Equatable {
         /// The ``PKCE`` credentials to use in the authorization request.
         ///
         /// This value may be `nil` on platforms that do not support PKCE.

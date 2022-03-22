@@ -22,7 +22,7 @@ class SignInViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        if let clientId = auth?.flow.client.configuration.clientId {
+        if let clientId = auth?.signInFlow.client.configuration.clientId {
             clientIdLabel.text = clientId
         } else {
             clientIdLabel.text = "Not configured"
@@ -37,7 +37,7 @@ class SignInViewController: UIViewController {
     
     @IBAction func signIn(_ sender: Any) {
         let window = viewIfLoaded?.window
-        auth?.start(from: window) { result in
+        auth?.signIn(from: window) { result in
             switch result {
             case .success(let token):
                 Credential.default = Credential(token: token)

@@ -28,10 +28,15 @@ class URLSessionMock: URLSessionProtocol {
     }
     
     var requestDelay: TimeInterval?
-    
-    private(set) var calls: [Call] = []
+
+    private(set) var requests: [URLRequest] = []
+    func resetRequests() {
+        requests.removeAll()
+    }
+
+    private(set) var expectedCalls: [Call] = []
     func expect(call: Call) {
-        calls.append(call)
+        expectedCalls.append(call)
     }
     
     func expect(_ url: String,
@@ -52,18 +57,19 @@ class URLSessionMock: URLSessionProtocol {
     }
 
     func call(for url: String) -> Call? {
-        guard let index = calls.firstIndex(where: { call in
+        guard let index = expectedCalls.firstIndex(where: { call in
             call.url == url
         }) else {
             XCTFail("Mock URL \(url) not found")
             return nil
         }
         
-        return calls.remove(at: index)
+        return expectedCalls.remove(at: index)
     }
     
     func dataTaskWithRequest(_ request: URLRequest, completionHandler: @escaping (Data?, URLResponse?, Error?) -> Void) -> URLSessionDataTaskProtocol {
         let response = call(for: request.url!.absoluteString)
+        requests.append(request)
         return URLSessionDataTaskMock(session: self,
                                       data: response?.data,
                                       response: response?.response,
@@ -73,6 +79,7 @@ class URLSessionMock: URLSessionProtocol {
 
     func dataTask(with request: URLRequest, completionHandler: @escaping (Data?, URLResponse?, Error?) -> Void) -> URLSessionDataTaskProtocol {
         let response = call(for: request.url!.absoluteString)
+        requests.append(request)
         return URLSessionDataTaskMock(session: self,
                                       data: response?.data,
                                       response: response?.response,
@@ -83,6 +90,8 @@ class URLSessionMock: URLSessionProtocol {
     #if swift(>=5.5.1)
     @available(iOS 15.0, tvOS 15.0, macOS 12.0, watchOS 8, *)
     func data(for request: URLRequest, delegate: URLSessionTaskDelegate?) async throws -> (Data, URLResponse) {
+        requests.append(request)
+
         let response = call(for: request.url!.absoluteString)
         if let error = response?.error {
             throw error

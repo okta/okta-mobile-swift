@@ -20,19 +20,20 @@ import AuthenticationServices
 protocol AuthenticationServicesProviderSession {
     init(url URL: URL, callbackURLScheme: String?, completionHandler: @escaping ASWebAuthenticationSession.CompletionHandler)
 
-    @available(macOS 10.15, *)
+    @available(iOS 13.0, macOS 10.15, *)
     var presentationContextProvider: ASWebAuthenticationPresentationContextProviding? { get set }
 
-    @available(macOS 10.15, *)
+    @available(iOS 13.0, macOS 10.15, *)
     var prefersEphemeralWebBrowserSession: Bool { get set }
 
-    @available(macOS 10.15.4, *)
+    @available(iOS 13.4, macCatalyst 13.4, macOS 10.15.4, *)
     var canStart: Bool { get }
 
     func start() -> Bool
 
     func cancel()
 }
+
 @available(iOS 12.0, macOS 10.15, macCatalyst 13.0, *)
 extension ASWebAuthenticationSession: AuthenticationServicesProviderSession {}
 

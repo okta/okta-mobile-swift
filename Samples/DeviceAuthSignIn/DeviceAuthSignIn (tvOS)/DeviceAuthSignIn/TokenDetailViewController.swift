@@ -67,7 +67,7 @@ class TokenDetailViewController: UIViewController {
         addString(to: string, title: "Token type", value: token.tokenType)
         
         if let idToken = token.idToken {
-            addString(to: string, title: "ID token", value: idToken)
+            addString(to: string, title: "ID token", value: idToken.rawValue)
         }
         
         textView.attributedText = string
