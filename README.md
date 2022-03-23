@@ -149,7 +149,7 @@ func signIn() async {
 }
 ```
 
-The `signIn(from:)` function returns  a token and, by using the `Credential` class, you can save the token and use it within your application.
+The `signIn(from:)` function returns a token and, by using the `Credential` class, you can save the token and use it within your application.
 
 ## Support Policy
 
