@@ -29,8 +29,6 @@ If you run into problems using the SDK, you can:
 
 ## Introduction
 
-> _”Make the easy things simple and make the hard things possible.”_
-
 The Okta Mobile SDK represents a suite of libraries that intends to replace our legacy mobile SDKs, with the aim to streamline development, ease maintenance and feature development, and enable new use cases that were previously difficult or impractical to implement. We are building a platform to support the development of many SDKs, allowing application developers to choose which SDKs they need.
 
 ### SDK Overview
@@ -198,7 +196,9 @@ swift test
 Alternatively, if you wish to run tests within Linux, you can utilize Docker from a macOS environment to run Linux tests:
 
 ```
-docker run --rm --privileged --interactive --tty --volume "$(pwd):/src" --workdir "/src" swift:5.5 swift test
+docker run --rm --privileged --interactive --tty \
+    --volume "$(pwd):/src" --workdir "/src" swift:5.5 \
+    swift test
 ```
 
 ## Known issues

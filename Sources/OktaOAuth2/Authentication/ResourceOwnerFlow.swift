@@ -18,23 +18,12 @@ import AuthFoundation
 /// This simple authentication flow permits a suer to authenticate using a simple username and password. As such, the configuration is straightforward.
 ///
 /// > Important: Resource Owner authentication does not support MFA or other more secure authentication models, and is not recommended for production applications.
-///
-/// As an example, we'll use Swift Concurrency, since these asynchronous methods can be used inline easily.
-///
-/// ```swift
-/// let client = OAuth2Client(baseURL: URL(string: "https://example.okta.com")!,
-///                           clientId: "abc123client",
-///                           scopes: "openid offline_access email profile")
-/// let flow = client.resourceOwnerFlow()
-///
-/// // Authenticate with a username and password.
-/// let token = try await flow.resume(username: "smeagol", password: "myprecious")
-/// ```
 public class ResourceOwnerFlow: AuthenticationFlow {
     /// The OAuth2Client this authentication flow will use.
     public let client: OAuth2Client
     
     /// Indicates whether or not this flow is currently in the process of authenticating a user.
+    /// ``ResourceOwnerFlow/init(issuer:clientId:scopes:)``
     private(set) public var isAuthenticating: Bool = false {
         didSet {
             guard oldValue != isAuthenticating else {
