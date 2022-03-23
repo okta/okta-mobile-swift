@@ -21,18 +21,59 @@ This library uses semantic versioning and follows Okta's [Library Version Policy
 The latest release can always be found on the [releases page][github-releases].
 
 ## Need help?
- 
+
 If you run into problems using the SDK, you can:
- 
+
 * Ask questions on the [Okta Developer Forums][devforum]
 * Post [issues][github-issues] here on GitHub (for code errors)
+
+## Introduction
+
+> _”Make the easy things simple and make the hard things possible.”_
+
+The Okta Mobile SDK represents a suite of libraries that intends to replace our legacy mobile SDKs, with the aim to streamline development, ease maintenance and feature development, and enable new use cases that were previously difficult or impractical to implement. We are building a platform to support the development of many SDKs, allowing application developers to choose which SDKs they need.
+
+### SDK Overview
+
+This SDK consists of several different libraries, each with detailed documentation.
+
+- AuthFoundation -- Common classes for managing credentials and used as a foundation for other libraries.
+- OktaOAuth2 -- OAuth2 authentication capabilities for authenticating users.
+- WebAuthenticationUI -- Authenticate users using web-based OIDC flows.
+
+This SDK enables you to build or support a myriad of different authentication flows and approaches.
+
+## Development Roadmap
+
+This SDK is being actively developed and is in Beta release status. At this time, we are seeking feedback from the developer community to evaluate:
+
+* The overall SDK and its components;
+* The APIs and overall developer experience;
+* Use-cases or features that may be missed or do not align with your application’s needs;
+* Suggestions for future development;
+* Any other comments or feedback on this new direction.
+
+### Feature roadmap
+
+| Feature | Status |
+| ------- | ------ |
+| Login and logout via web redirect | ✅ |
+| Credential management | ✅ |
+| Secure token storage | ✅ |
+| Native SSO / Token Exchange Flow | ✅ |
+| Device Authorization Grant Flow | ✅ |
+| Resource Owner Flow | ✅ |
+| Automatically authorized URLSessionConfiguration for authorizing requests | ✅ |
+| Time synchronization via NTP | 🚧 |
+| Advanced logging and tracing | 🚧 |
+| Transparent upgrades from okta-oidc-ios | 🚧 |
 
 ## Getting Started
 
 To get started, you will need:
 
 * An Okta account, called an _organization_ (sign up for a free [developer organization](https://developer.okta.com/signup) if you need one).
-* An Okta Application, configured as a Native App. This is done from the Okta Developer Console. When following the wizard, use the default properties. They are designed to work with our sample applications.
+* An Okta Application configured as a Native App. Use Okta's administrator console to create the application by following the wizard and using default properties.
 * Xcode 13.x, targeting one of the supported platforms and target versions (see the [Support Policy][support-policy] below).
 
 ## Install
@@ -47,15 +88,24 @@ dependencies: [
 ]
 ```
 
+### CocoaPods
+
+The SDK will support CocoaPods as it nears its full release.
+
+### Carthage
+
+To integrate this SDK into your Xcode project using [Carthage](https://github.com/Carthage/Carthage), specify it in your Cartfile:
+```ruby
+github "okta/okta-mobile-swift"
+```
+
+Then install it into your project:
+
+`carthage update --use-xcframeworks`
+
+**Note:** Make sure Carthage version is 0.37.0 or higher. Otherwise, Carthage can fail.
+
 ## Usage Guide
-
-This SDK consists of several different libraries, each with their own detailed documentation.
-
-- AuthFoundation -- Common classes for managing credentials, and used as a foundation for other libraries.
-- OktaOAuth2 -- OAuth2 authentication capabilities for authenticating users.
-- WebAuthenticationUI -- Authenticate users using web-based OIDC flows.
-
-The use of this SDK enables you to build or support a myriad of different authentication flows and approaches. To simplify getting started, here are a few samples to demonstrate its usage.
 
 ### Web Authentication using OIDC
 
@@ -71,7 +121,7 @@ Before authenticating your user, you need to create your client configuration us
 <plist version="1.0">
   <dict>
     <key>issuer</key>
-    <string>https://{yourOktaDomain}.com/oauth2/default</string>
+    <string>https://{yourOktaDomain}.com</string>
     <key>clientId</key>
     <string>{clientId}</string>
     <key>redirectUri</key>
@@ -88,7 +138,7 @@ Alternatively, you can supply those values to the constructor the `WebAuthentica
 
 #### Create a Web Authentication session
 
-Once you've configured your application settings within your `Okta.plist` file, a shared configuration will automatically be made available through the `WebAuthentication.shared` singleton property. With that in place, you can use the convenience `WebAuthentication.signIn(from:)` method to prompt the user to sign in.
+Once you've configured your application settings within your `Okta.plist` file, a shared configuration is automatically available through the `WebAuthentication.shared` singleton property. With that in place, you can use the convenience `WebAuthentication.signIn(from:)` method to prompt the user to sign in.
 
 ```swift
 import WebAuthenticationUI
@@ -99,11 +149,7 @@ func signIn() async {
 }
 ```
 
-The `signIn(from:)` function will return a token and, by using the `Credential` class, you can save the token and use it within your application.
-
-## Development
-
-### Running Tests
+The `signIn(from:)` function returns a token and, by using the `Credential` class, you can save the token and use it within your application.
 
 ## Support Policy
 
@@ -127,18 +173,38 @@ Only the last 4 major platform versions are officially supported, starting from:
 - tvOS 12
 - watchOS 6.2
 
-Once a platform version becomes unsupported, dropping support for it will not be considered a breaking change, and will be done in a minor release. E.g. iOS 12 will cease to be supported when iOS 16 gets released, and might be dropped in a minor release.
+Once a platform version becomes unsupported, dropping support for it will not be considered a breaking change and will be done in a minor release. For example, iOS 12 will cease to be supported when iOS 16 gets released, and might be dropped in a minor release.
 
-In the case of macOS, the yearly named releases are considered a major platform version for the purposes of this Policy, regardless of the actual version numbers.
+In the case of macOS, the yearly named releases are considered a major platform version for this Policy, regardless of the actual version numbers.
 
-> *Note:* Older OS versions will be supported in a best-effort manner. Unless there are API limitations that prevent the SDK from working effectively on older OS versions, the minimum requirements will not be changed.
+> *Note:* Older OS versions are supported in a best-effort manner. Unless there are API limitations that prevent the SDK from working effectively on older OS versions, the minimum requirements will not be changed.
 > 
-> Additionally, Linux compatibility is considered best-effort, and is not officially supported.
+> Additionally, Linux compatibility is considered best-effort and is not officially supported.
+
+### Legacy SDK support
+
+After the okta-mobile-swift SDK becomes generally available, we intend all new feature development to proceed within this new library. We plan to support okta-oidc-ios (and our other legacy SDKs that okta-mobile-swift replaces) with critical bug and security fixes for the foreseeable future. 
+
+## Development
+
+### Running Tests
+
+Tests can be run on macOS from the command-line using:
+
+```
+swift test
+```
+
+Alternatively, if you wish to run tests within Linux, you can utilize Docker from a macOS environment to run Linux tests:
+
+```
+docker run --rm --privileged --interactive --tty --volume "$(pwd):/src" --workdir "/src" swift:5.5 swift test
+```
 
 ## Known issues
 
 ## Contributing
- 
+
 We are happy to accept contributions and PRs! Please see the [contribution guide](CONTRIBUTING.md) to understand how to structure a contribution.
 
 [devforum]: https://devforum.okta.com/

@@ -65,7 +65,7 @@ public protocol DeviceAuthorizationFlowDelegate: AuthenticationDelegate {
 /// ```
 public class DeviceAuthorizationFlow: AuthenticationFlow {
     /// A model representing the context and current state for an authorization session.
-    public struct Context: Codable, Equatable, Expires {
+    public struct Context: Decodable, Equatable, Expires {
         let deviceCode: String
         let interval: TimeInterval
         

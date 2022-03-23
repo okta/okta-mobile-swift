@@ -39,10 +39,13 @@ class ProfileTableViewController: UITableViewController {
     var credential: Credential? {
         didSet {
             configure(credential?.userInfo)
-            credential?.userInfo { result in
-                guard case let .success(userInfo) = result else { return }
-                DispatchQueue.main.async {
-                    self.configure(userInfo)
+            credential?.automaticRefresh = true
+            credential?.refreshIfNeeded { _ in
+                self.credential?.userInfo { result in
+                    guard case let .success(userInfo) = result else { return }
+                    DispatchQueue.main.async {
+                        self.configure(userInfo)
+                    }
                 }
             }
         }
@@ -131,7 +134,7 @@ class ProfileTableViewController: UITableViewController {
         
         if let token = Credential.default?.token {
             alert.addAction(.init(title: "End a session", style: .destructive) { _ in
-                WebAuthentication.shared?.logout(token: token) { result in
+                WebAuthentication.shared?.signOut(token: token) { result in
                     switch result {
                     case .success:
                         try? Keychain.deleteTokens()

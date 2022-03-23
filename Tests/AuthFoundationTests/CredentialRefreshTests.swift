@@ -14,22 +14,75 @@ import XCTest
 @testable import TestCommon
 @testable import AuthFoundation
 
-final class CredentialRefreshTests: XCTestCase {
+#if os(Linux)
+import FoundationNetworking
+#endif
+
+class CredentialRefreshDelegate: OAuth2ClientDelegate {
+    private(set) var refreshCount = 0
+    
+    func reset() {
+        refreshCount = 0
+        refreshExpectation = nil
+    }
+    
+    var refreshExpectation: XCTestExpectation?
+    func oauth(client: OAuth2Client, didRefresh token: Token, replacedWith newToken: Token?) {
+        refreshCount += 1
+        
+        refreshExpectation?.fulfill()
+        refreshExpectation = nil
+    }
+}
+
+final class CredentialRefreshTests: XCTestCase, OAuth2ClientDelegate {
+    let delegate = CredentialRefreshDelegate()
     let coordinator = MockCredentialCoordinator()
 
-    func credential(for token: Token, expectAPICalls: Bool = true) throws -> Credential {
+    enum APICalls {
+        case none
+        case openIdOnly
+        case refresh(count: Int)
+    }
+
+    func credential(for token: Token, expectAPICalls: APICalls = .refresh(count: 1), expiresIn: TimeInterval = 3600) throws -> Credential {
         let credential = coordinator.credentialDataSource.credential(for: token, coordinator: coordinator)
+        credential.oauth2.add(delegate: delegate)
         
-        if expectAPICalls {
-            let urlSession = credential.oauth2.session as! URLSessionMock
+        let urlSession = credential.oauth2.session as! URLSessionMock
+        urlSession.resetRequests()
+        
+        switch expectAPICalls {
+        case .none: break
+        case .openIdOnly:
             urlSession.expect("https://example.com/.well-known/openid-configuration",
                               data: try data(from: .module, for: "openid-configuration", in: "MockResponses"),
                               contentType: "application/json")
-            urlSession.expect("https://example.com/oauth2/v1/token",
-                              data: try data(from: .module, for: "token", in: "MockResponses"))
+
+        case .refresh(let count):
+            urlSession.expect("https://example.com/.well-known/openid-configuration",
+                              data: try data(from: .module, for: "openid-configuration", in: "MockResponses"),
+                              contentType: "application/json")
+            for _ in 1 ... count {
+                urlSession.expect("https://example.com/oauth2/v1/token",
+                                  data: data(for: """
+                {
+                   "token_type": "Bearer",
+                   "expires_in": \(expiresIn),
+                   "access_token": "\(String.mockAccessToken)",
+                   "scope": "openid profile offline_access",
+                   "refresh_token": "therefreshtoken",
+                   "id_token": "\(String.mockIdToken)"
+                 }
+                """))
+            }
         }
         
         return credential
+    }
+    
+    override func setUpWithError() throws {
+        Credential.refreshGraceInterval = 300
     }
     
     func testRefresh() throws {
@@ -53,6 +106,7 @@ final class CredentialRefreshTests: XCTestCase {
         }
         
         XCTAssertFalse(credential.token.isRefreshing)
+        XCTAssertEqual(delegate.refreshCount, 1)
     }
 
     func testRefreshIfNeededExpired() throws {
@@ -75,11 +129,12 @@ final class CredentialRefreshTests: XCTestCase {
         }
         
         XCTAssertFalse(credential.token.isRefreshing)
-    }
+        XCTAssertEqual(delegate.refreshCount, 1)
+}
 
     func testRefreshIfNeededWithinGraceInterval() throws {
         let credential = try credential(for: Token.mockToken(issuedOffset: 0),
-                                           expectAPICalls: false)
+                                           expectAPICalls: .none)
         let expect = expectation(description: "refresh")
         credential.refreshIfNeeded() { result in
             switch result {
@@ -98,6 +153,7 @@ final class CredentialRefreshTests: XCTestCase {
         }
         
         XCTAssertFalse(credential.token.isRefreshing)
+        XCTAssertEqual(delegate.refreshCount, 0)
     }
 
     func testRefreshIfNeededOutsideGraceInterval() throws {
@@ -114,12 +170,54 @@ final class CredentialRefreshTests: XCTestCase {
         }
         
         XCTAssertTrue(credential.token.isRefreshing)
-
+        
         waitForExpectations(timeout: 1.0) { error in
             XCTAssertNil(error)
         }
         
+        XCTAssertEqual(delegate.refreshCount, 1)
         XCTAssertFalse(credential.token.isRefreshing)
+    }
+    
+    func testAutomaticRefresh() throws {
+        Credential.refreshGraceInterval = 0.5
+        let credential = try credential(for: Token.mockToken(expiresIn: 1), expectAPICalls: .refresh(count: 2), expiresIn: 1)
+        let urlSession = try XCTUnwrap(credential.oauth2.session as? URLSessionMock)
+
+        XCTAssertEqual(urlSession.requests.count, 0)
+
+        // Setting automatic refresh should refresh
+        var refreshExpectation = expectation(description: "First refresh")
+        delegate.refreshExpectation = refreshExpectation
+        credential.automaticRefresh = true
+        
+        wait(for: [refreshExpectation], timeout: 1.0)
+        XCTAssertEqual(urlSession.requests.count, 2)
+        
+        // Should automatically refresh after a delay
+        urlSession.resetRequests()
+        refreshExpectation = expectation(description: "Second refresh")
+        delegate.refreshExpectation = refreshExpectation
+        wait(for: [refreshExpectation], timeout: 1)
+
+        XCTAssertEqual(urlSession.requests.count, 1)
+        urlSession.resetRequests()
+
+        // Stopping should prevent subsequent refreshes
+        credential.automaticRefresh = false
+        
+        sleep(1)
+        XCTAssertEqual(urlSession.requests.count, 0)
+    }
+    
+    func testAuthorizedURLSession() throws {
+        let credential = try credential(for: Token.simpleMockToken)
+        
+        var request = URLRequest(url: URL(string: "https://example.com/my/api")!)
+        credential.authorize(request: &request)
+        
+        XCTAssertEqual(request.value(forHTTPHeaderField: "Authorization"),
+                       "Bearer \(credential.token.accessToken)")
     }
 
     #if swift(>=5.5.1)
@@ -140,7 +238,7 @@ final class CredentialRefreshTests: XCTestCase {
     @available(iOS 15.0, tvOS 15.0, macOS 12.0, watchOS 8, *)
     func testRefreshIfNeededWithinGraceIntervalAsync() async throws {
         let credential = try credential(for: Token.mockToken(issuedOffset: 0),
-                                           expectAPICalls: false)
+                                           expectAPICalls: .none)
         let token = try await credential.refreshIfNeeded()
         XCTAssertNotNil(token)
     }

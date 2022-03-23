@@ -220,7 +220,7 @@ public class OAuth2Client {
         }
     }
     
-    private lazy var refreshQueue: DispatchQueue = {
+    private(set) lazy var refreshQueue: DispatchQueue = {
         DispatchQueue(label: "com.okta.refreshQueue.\(baseURL.host ?? "unknown")",
                       qos: .userInitiated,
                       attributes: .concurrent)
