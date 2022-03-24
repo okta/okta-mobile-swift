@@ -13,28 +13,7 @@
 import AuthFoundation
 import Foundation
 
-
 /// An authentication flow class that implements the Token Exchange Flow.
-///
-/// The Token Exchange Flow allows a client to get the Access Token exchanging other tokens. As an example, consider [SSO for Native Apps](https://developer.okta.com/docs/guides/configure-native-sso/main/#native-sso-flow) where a client exchanges the ID and the Device Secret tokens to get the access to the resource.
-///
-/// You can create an instance of  ``TokenExchangeFlow/Configuration-swift.struct`` to define your client's settings, and supply that to the initializer, along with a reference to your OAuth2 client for performing key operations and requests. Alternatively, you can use any of the convenience initializers to simplify the process.
-///
-/// As an example, we'll use Swift Concurrency, since these asynchronous methods can be used inline easily, though ``TokenExchangeFlow`` can just as easily be used with completion blocks or through the use of the ``AuthenticationDelegate``.
-///
-/// ```swift
-/// let flow = TokenExchangeFlow(
-///     issuer: URL(string: "https://example.okta.com")!,
-///     clientId: "abc123client",
-///     scopes: "openid offline_access email profile",
-///     audience: .default)
-///
-/// let tokens: [TokenType] = [
-///     .actor(type: .deviceSecret, value: "DeviceToken"),
-///     .subject(type: .idToken, value: "IDToken")
-/// ]
-/// let token = try await flow.resume(with: tokens)
-/// ```
 public class TokenExchangeFlow: AuthenticationFlow {
     /// Identifies the audience of the authorization server.
     public enum Audience {
