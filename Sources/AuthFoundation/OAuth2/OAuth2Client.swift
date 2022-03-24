@@ -31,14 +31,6 @@ extension OAuth2ClientDelegate {
 }
 
 /// An OAuth2 client, used to interact with a given authorization server.
-///
-/// This class serves two purposes:
-/// 1. Expose high-level actions a client can perform against an OAuth2 service.
-/// 2. Connect authentication flows to the OAuth2 servers they intend to authenticate against.
-///
-/// Authentication flows represent the variety of ways authentication can occur, and in many cases involves multiple discrete steps. These often require interaction with individual actions (such as fetching OpenID configuration, accessing JWKS keys, and exchanging tokens), so these are encapsulated within the OAuth2Client for code sharing and ease of use.
-///
-/// The OAuth2Client is itself an APIClient, defined from within the AuthFoundation framework, and provides extensibility hooks.
 public class OAuth2Client {
     /// The configuration for an ``OAuth2Client``.
     ///
