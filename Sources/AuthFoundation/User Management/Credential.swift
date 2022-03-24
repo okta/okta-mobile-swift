@@ -33,6 +33,9 @@ extension Notification.Name {
 public enum CredentialError: Error {
     /// Thrown when a credential no longer has a weak reference to the coordinator that was used to create it.
     case missingCoordinator
+    
+    /// Thrown when a Credential is initialized with a ``Token`` and ``OAuth2Client`` with mismatched client configuration.
+    case incorrectClientConfiguration
 }
 
 /// Convenience object that wraps a ``Token``, providing methods and properties for interacting with credential resources.
@@ -93,15 +96,22 @@ public class Credential {
     /// - Parameter token: Token to create a credential for.
     public convenience init(token: Token) {
         let urlSession = type(of: self).credentialDataSource.urlSession(for: token)
-        self.init(token: token, oauth2: OAuth2Client(token.context.configuration,
-                                                     session: urlSession))
+        self.init(token: token,
+                  oauth2: OAuth2Client(token.context.configuration, session: urlSession),
+                  coordinator: Credential.coordinator)
     }
     
     /// Initializer that creates a credential for a given token, using a custom OAuth2Client instance.
     /// - Parameters:
     ///   - token: Token
     ///   - client: Client instance.
-    public convenience init(token: Token, oauth2 client: OAuth2Client) {
+    public convenience init(token: Token, oauth2 client: OAuth2Client) throws {
+        guard token.context.configuration.clientId == client.configuration.clientId,
+              token.context.configuration.baseURL == client.configuration.baseURL
+        else {
+            throw CredentialError.incorrectClientConfiguration
+        }
+        
         self.init(token: token, oauth2: client, coordinator: Credential.coordinator)
     }
     
