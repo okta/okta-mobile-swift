@@ -161,7 +161,7 @@ public enum Claim: String, Codable {
 
 /// Used by classes that contains OAuth2 claims.
 ///
-/// This provides common conveniences for interacting with user or token information within those claims. For example, iterating through ``allClaims-7sado`` or using keyed subscripting to access specific claims.
+/// This provides common conveniences for interacting with user or token information within those claims. For example, iterating through ``allClaims-4c54a`` or using keyed subscripting to access specific claims.
 public protocol HasClaims {
     /// Returns the collection of claims this object contains.
     ///
@@ -170,8 +170,11 @@ public protocol HasClaims {
     
     /// Returns the collection of custom claims this object contains.
     ///
-    /// Unlike the ``allClaims`` property, this returns values as strings.
+    /// Unlike the ``claims`` property, this returns values as strings.
     var customClaims: [String] { get }
+    
+    /// All claims, across both standard ``claims`` and ``customClaims``.
+    var allClaims: [String] { get }
     
     /// Return the given claim's value.
     subscript<T>(_ claim: Claim) -> T? { get }
@@ -195,6 +198,13 @@ public extension HasClaims {
         } else {
             return value(T.self, for: claim)
         }
+    }
+    
+    var allClaims: [String] {
+        Array([
+            claims.map({ $0.rawValue }),
+            customClaims
+        ].joined())
     }
     
     /// The subject of the resource, if available.

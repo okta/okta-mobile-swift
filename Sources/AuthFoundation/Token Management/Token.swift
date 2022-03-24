@@ -174,7 +174,7 @@ public class Token: Codable, Equatable, Hashable, Identifiable, Expires {
 extension Token {
     /// Summarizes the context in which a token is valid.
     ///
-    /// This includes information such as the ``baseURL`` where operations related to this token should be performed.
+    /// This includes information such as the client configuration or settings required for token refresh.
     public struct Context: Codable, Equatable, Hashable {
         /// The base URL from which this token was issued.
         public let configuration: OAuth2Client.Configuration

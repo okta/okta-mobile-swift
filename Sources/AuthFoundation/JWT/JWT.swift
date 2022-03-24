@@ -15,15 +15,28 @@ import Foundation
 /// Represents the contents of a JWT token, providing access to its payload contents.
 public struct JWT: RawRepresentable, Codable, HasClaims, Expires {
     public typealias RawValue = String
+    
+    /// The raw string representation of this JWT token.
     public let rawValue: String
     
+    /// The date this token will expire.
     public var expirationTime: Date? { self[.expirationTime] }
     
+    /// The issuer claim for this token.
     public var issuer: String? { self[.issuer] }
+    
+    /// The intended audience for this token.
     public var audience: [String]? { self[.audience] }
+    
+    /// The date this token was issued.
     public var issuedAt: Date? { self[.issuedAt] }
+    
     public var notBefore: Date? { self[.notBefore] }
+    
+    /// The time interval in which the token will expire.
     public var expiresIn: TimeInterval { self[.expiresIn] ?? 0 }
+    
+    /// The array of scopes this token is valid for.
     public var scope: [String]? { self[.scope] ?? self["scp"] }
 
     /// The list of standard claims contained within this JWT token.
