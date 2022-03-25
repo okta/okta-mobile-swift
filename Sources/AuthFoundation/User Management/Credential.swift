@@ -250,6 +250,14 @@ extension Credential {
         }
     }
     
+    /// Introspect the token to check it for validity, and read the additional information associated with it.
+    /// - Parameter completion: Completion block invoked when a result is returned.
+    public func introspect(_ type: Token.Kind, completion: ((Result<TokenInfo, OAuth2Error>) -> Void)? = nil) {
+        oauth2.introspect(token: token, type: type) { result in
+            completion?(result)
+        }
+    }
+
     /// Fetches the user info for this credential.
     ///
     /// In addition to passing the result to the provided completion block, a successful request will result in the ``Credential/userInfo`` property being set with the new value for later use.

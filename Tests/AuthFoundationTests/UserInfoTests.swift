@@ -58,4 +58,21 @@ final class UserInfoTests: XCTestCase {
         XCTAssertTrue(info.emailVerified!)
         XCTAssertEqual(info.address?["street_address"], "155 Country Lane")
     }
+    
+    func testRawValueInitializer() throws {
+        let data = [
+            "sub":"ABC123",
+            "name":"Arthur Dent"
+        ]
+        
+        let info1 = UserInfo(data)
+        XCTAssertEqual(info1.subject, "ABC123")
+        XCTAssertEqual(info1.name, "Arthur Dent")
+        
+        let info2 = try XCTUnwrap(UserInfo(rawValue: data))
+        XCTAssertEqual(info2.subject, "ABC123")
+        XCTAssertEqual(info2.name, "Arthur Dent")
+        
+        XCTAssertEqual(info1.allClaims, info2.allClaims)
+    }
 }
