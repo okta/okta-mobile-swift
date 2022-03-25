@@ -42,6 +42,7 @@ You can use AuthFoundation when you want to:
 
 ### Customizations
 
+- <doc:CustomizingNetworkRequests>
 - ``TimeCoordinator``
 - ``CredentialDataSource``
 - ``CredentialDataSourceDelegate``
