@@ -291,7 +291,12 @@ public class OAuth2Client {
         }
     }
     
-    public func introspect(token: Token, type: Token.Kind, completion: @escaping (Result<[String:Claim], OAuth2Error>) -> Void) {
+    /// Introspects the given token information.
+    /// - Parameters:
+    ///   - token: Token to introspect
+    ///   - type: The type of value to introspect.
+    ///   - completion: Completion block to invoke once complete.
+    public func introspect(token: Token, type: Token.Kind, completion: @escaping (Result<TokenInfo, OAuth2Error>) -> Void) {
         openIdConfiguration { result in
             switch result {
             case .success(let configuration):

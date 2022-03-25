@@ -1,5 +1,5 @@
 //
-// Copyright (c) 2021-Present, Okta, Inc. and/or its affiliates. All rights reserved.
+// Copyright (c) 2022-Present, Okta, Inc. and/or its affiliates. All rights reserved.
 // The Okta software accompanied by this notice is provided pursuant to the Apache License, Version 2.0 (the "License.")
 //
 // You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0.
@@ -12,40 +12,14 @@
 
 import Foundation
 
-/// User profile information.
+/// Protocol used to define shared behavior when an object can contain claims.
 ///
-/// This provides a convenience mechanism for accessing information related to a user. It supports the ``HasClaims`` protocol, to simplify common operations against user information, and to provide consistency with the ``JWT`` class.
-public struct UserInfo: RawRepresentable, Codable, HasClaims {
-    public typealias RawValue = [String:Any]
-    public let rawValue: RawValue
-    
-    /// Returns the list of all claims contained within this ``UserInfo``.
-    public var claims: [Claim] {
-        rawValue.keys.compactMap { Claim(rawValue: $0) }
-    }
-    
-    /// Returns the list of custom claims this ``UserInfo`` instance might contain.
-    public var customClaims: [String] {
-        rawValue.keys.filter { Claim(rawValue: $0) == nil }
-    }
+/// > Note: This does not apply to JWT, which while it contains claims, it has a different format which includes headers and signatures.
+public protocol ClaimContainer: JSONDecodable {
+    var rawValue: [String:Any] { get }
+}
 
-    public func value<T>(_ type: T.Type, for key: String) -> T? {
-        rawValue[key] as? T
-    }
-
-    public init?(rawValue: RawValue) {
-        self.init(rawValue)
-    }
-    
-    public init(_ info: RawValue) {
-        self.rawValue = info
-    }
-    
-    public init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: JSONCodingKeys.self)
-        self.init(try container.decode([String:Any].self))
-    }
-    
+extension ClaimContainer {
     public func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: JSONCodingKeys.self)
         try rawValue
@@ -67,8 +41,20 @@ public struct UserInfo: RawRepresentable, Codable, HasClaims {
                 }
             }
     }
-}
 
-extension UserInfo: JSONDecodable {
-    public static var jsonDecoder = JSONDecoder()
+    /// Returns the list of all claims contained within this ``UserInfo``.
+    public var claims: [Claim] {
+        rawValue.keys.compactMap { Claim(rawValue: $0) }
+    }
+    
+    /// Returns the list of custom claims this instance might contain.
+    public var customClaims: [String] {
+        rawValue.keys.filter { Claim(rawValue: $0) == nil }
+    }
+    
+    /// Returns the value for the supplied key, of the expected type.
+    /// - Returns: Value, or `nil` if the key doesn't exist, or is of a different value.
+    public func value<T>(_ type: T.Type, for key: String) -> T? {
+        rawValue[key] as? T
+    }
 }

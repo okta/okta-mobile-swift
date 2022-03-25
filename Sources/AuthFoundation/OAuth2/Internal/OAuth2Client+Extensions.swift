@@ -25,7 +25,7 @@ extension OAuth2Client {
         send(request, completion: completion)
     }
 
-    func introspect(_ request: Token.IntrospectRequest, completion: @escaping (Result<APIResponse<[String:Claim]>, APIClientError>) -> Void) {
+    func introspect(_ request: Token.IntrospectRequest, completion: @escaping (Result<APIResponse<TokenInfo>, APIClientError>) -> Void) {
         send(request, completion: completion)
     }
 

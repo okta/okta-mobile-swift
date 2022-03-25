@@ -91,6 +91,88 @@ final class OAuth2ClientTests: XCTestCase {
         XCTAssertEqual(jwks.first?.id,
                        "k6HN2DKok-kExjJGBLqgzByMCnN1RvzEOA-1ukTjexA")
     }
+
+    func testUserInfo() throws {
+        urlSession.expect("https://example.com/.well-known/openid-configuration",
+                          data: try data(from: .module, for: "openid-configuration", in: "MockResponses"),
+                          contentType: "application/json")
+        urlSession.expect("https://example.com/oauth2/v1/userinfo",
+                          data: data(for: """
+                            {
+                              "sub": "00uid4BxXw6I6TV4m0g3",
+                              "name" :"John Doe",
+                              "nickname":"Jimmy",
+                              "given_name":"John",
+                              "middle_name":"James",
+                              "family_name":"Doe",
+                              "profile":"https://example.com/john.doe",
+                              "zoneinfo":"America/Los_Angeles",
+                              "locale":"en-US",
+                              "updated_at":1311280970,
+                              "email":"john.doe@example.com",
+                              "email_verified":true,
+                              "address" : { "street_address":"123 Hollywood Blvd.", "locality":"Los Angeles", "region":"CA", "postal_code":"90210", "country":"US" },
+                              "phone_number":"+1 (425) 555-1212"
+                            }
+                          """),
+                          contentType: "application/json")
+
+        var userInfo: UserInfo?
+        let expect = expectation(description: "network request")
+        client.userInfo(token: token) { result in
+            switch result {
+            case .success(let response):
+                userInfo = response
+            case .failure(let error):
+                XCTAssertNil(error)
+            }
+            expect.fulfill()
+        }
+        
+        waitForExpectations(timeout: 1.0) { error in
+            XCTAssertNil(error)
+        }
+        
+        XCTAssertEqual(userInfo?.subject, "00uid4BxXw6I6TV4m0g3")
+    }
+
+    func testIntrospect() throws {
+        urlSession.expect("https://example.com/.well-known/openid-configuration",
+                          data: try data(from: .module, for: "openid-configuration", in: "MockResponses"),
+                          contentType: "application/json")
+        urlSession.expect("https://example.com/oauth2/v1/introspect",
+                          data: data(for: """
+                            {
+                              "active" : true,
+                              "token_type" : "Bearer",
+                              "scope" : "openid profile email",
+                              "client_id" : "a9VpZDRCeFh3Nkk2VdYa",
+                              "username" : "john.doe@example.com",
+                              "exp" : 1451606400,
+                              "sub" : "john.doe@example.com",
+                              "device_id" : "q4SZgrA9sOeHkfst5uaa"
+                            }
+                          """),
+                          contentType: "application/json")
+
+        var tokenInfo: TokenInfo?
+        let expect = expectation(description: "network request")
+        client.introspect(token: token, type: .refreshToken) { result in
+            switch result {
+            case .success(let response):
+                tokenInfo = response
+            case .failure(let error):
+                XCTAssertNil(error)
+            }
+            expect.fulfill()
+        }
+        
+        waitForExpectations(timeout: 1.0) { error in
+            XCTAssertNil(error)
+        }
+        
+        XCTAssertEqual(tokenInfo?.subject, "john.doe@example.com")
+    }
     
     func testRevoke() throws {
         urlSession.expect("https://example.com/.well-known/openid-configuration",
