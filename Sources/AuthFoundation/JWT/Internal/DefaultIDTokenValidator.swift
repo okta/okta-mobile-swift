@@ -40,7 +40,7 @@ struct DefaultIDTokenValidator: IDTokenValidator {
         }
         
         guard token.header.algorithm == .rs256 else {
-            throw JWTError.invalidSigningAlgorithm
+            throw JWTError.unsupportedAlgorithm(token.header.algorithm)
         }
         
         guard let expirationTime = token.expirationTime,

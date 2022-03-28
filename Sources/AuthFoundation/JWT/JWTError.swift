@@ -23,6 +23,8 @@ public enum JWTError: Error, Equatable {
     case issuedAtTimeExceedsGraceInterval
     case cannotCreateKey(code: OSStatus, description: String?)
     case invalidKey
+    case unsupportedAlgorithm(_ algorithm: JWK.Algorithm)
+    case cannotGenerateHash
     case signatureVerificationUnavailable
     case signatureInvalid
 }
@@ -87,6 +89,18 @@ extension JWTError: LocalizedError {
             
         case .signatureVerificationUnavailable:
             return NSLocalizedString("signature_verification_unavailable",
+                                     bundle: .module,
+                                     comment: "")
+            
+        case .unsupportedAlgorithm(let algorithm):
+            return String.localizedStringWithFormat(
+                NSLocalizedString("unsupported_algorithm",
+                                  bundle: .module,
+                                  comment: ""),
+                algorithm.rawValue)
+        
+        case .cannotGenerateHash:
+            return NSLocalizedString("cannot_generate_hash",
                                      bundle: .module,
                                      comment: "")
         }

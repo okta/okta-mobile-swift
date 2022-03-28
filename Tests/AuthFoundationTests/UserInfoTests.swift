@@ -73,6 +73,6 @@ final class UserInfoTests: XCTestCase {
         XCTAssertEqual(info2.subject, "ABC123")
         XCTAssertEqual(info2.name, "Arthur Dent")
         
-        XCTAssertEqual(info1.allClaims, info2.allClaims)
+        XCTAssertEqual(info1.allClaims.sorted(), info2.allClaims.sorted())
     }
 }

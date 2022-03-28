@@ -105,10 +105,10 @@ final class DefaultIDTokenValidatorTests: XCTestCase {
         }
     }
     
-    func testInvalidAlgorithm() throws {
+    func testUnsupportedAlgorithm() throws {
         let jwt = try JWT("eyJraWQiOiJGSkEwSEdOdHN1dWRhX1BsNDVKNDJrdlFxY3N1XzBDNEZnN3BiSkxYVEhZIiwiYWxnIjoiUlMzODQifQ.eyJzdWIiOiIwMHViNDF6N21nek5xcnlNdjY5NiIsIm5hbWUiOiJUZXN0IFVzZXIiLCJlbWFpbCI6InRlc3RAZXhhbXBsZS5jb20iLCJ2ZXIiOjEsImlzcyI6Imh0dHBzOi8vZXhhbXBsZS5va3RhLmNvbS9vYXV0aDIvZGVmYXVsdCIsImF1ZCI6InVuaXRfdGVzdF9jbGllbnRfaWQiLCJpYXQiOjE2NDQzNDcwNjksImV4cCI6MTY0NDM1MDY2OSwianRpIjoiSUQuNTVjeEJ0ZFlsOGw2YXJLSVNQQndkMHlPVC05VUNUYVhhUVRYdDJsYVJMcyIsImFtciI6WyJwd2QiXSwiaWRwIjoiMDBvOGZvdTdzUmFHR3dkbjQ2OTYiLCJzaWQiOiJpZHhXeGtscF80a1N4dUNfblUxcFhELW5BIiwicHJlZmVycmVkX3VzZXJuYW1lIjoidGVzdEBleGFtcGxlLmNvbSIsImF1dGhfdGltZSI6MTY0NDM0NzA2OCwiYXRfaGFzaCI6ImdNY0dUYmhHVDFHX2xkc0hvSnNQelEiLCJkc19oYXNoIjoiREFlTE9GUnFpZnlzYmdzcmJPZ2JvZyJ9.1Wnn-ozvVDJHwYrxCoWtiTZnNgb2E1ySyplbngwFF7-gi8FN5VNLMHYH0JitIp-SXB2lfoXZBfx0C5HPC1mYyqOTfc0eysvo3WAdAfDbK2H3Du5hGwt-dedPZjePM3f-vGTcNmKCWE0OjjaPn8wVJzl0iyCQ94EhVptc6zL2vTBnHFkV_TMlB0uqgzaixPhl9JYBKXqbGSg_olpnaKbpYBOR2Fq-yBk3Z9b44JjzhjYI5oRp_9xul6nCXt1RJTFg0qflHAN2LgqoFuvlNMmXRhy_F0CP4U4N35s-X2l_Qd74LwP5X1AmucBPvv2OCdJJo9KRl9Up-7tCBB1Pc2Oxrg")
         XCTAssertThrowsError(try validator.validate(token: jwt, issuer: issuer, clientId: clientId)) { error in
-            XCTAssertEqual(error as? JWTError, JWTError.invalidSigningAlgorithm)
+            XCTAssertEqual(error as? JWTError, JWTError.unsupportedAlgorithm(.rs384))
         }
     }
 

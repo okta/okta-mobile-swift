@@ -20,6 +20,7 @@ final class OAuth2ClientTests: XCTestCase {
         
         JWK.validator = MockJWKValidator()
         Token.idTokenValidator = MockIDTokenValidator()
+        Token.accessTokenValidator = MockAccessTokenValidator()
     }
     
     override func tearDownWithError() throws {

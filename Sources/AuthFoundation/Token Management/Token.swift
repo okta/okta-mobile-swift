@@ -24,7 +24,8 @@ public enum TokenError: Error {
 /// Token information representing a user's access to a resource server, including access token, refresh token, and other related information.
 public class Token: Codable, Equatable, Hashable, Identifiable, Expires {
     public static var idTokenValidator: IDTokenValidator = DefaultIDTokenValidator()
-    
+    public static var accessTokenValidator: AccessTokenValidator = DefaultAccessTokenValidator()
+
     // The date this token was issued at.
     public var issuedAt: Date?
     
@@ -102,6 +103,8 @@ public class Token: Codable, Equatable, Hashable, Identifiable, Expires {
         try Token.idTokenValidator.validate(token: idToken,
                                             issuer: client.configuration.baseURL,
                                             clientId: client.configuration.clientId)
+        try Token.accessTokenValidator.validate(accessToken: accessToken,
+                                                idToken: idToken)
     }
     
     public static func == (lhs: Token, rhs: Token) -> Bool {
