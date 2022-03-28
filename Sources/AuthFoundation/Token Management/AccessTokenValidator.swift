@@ -12,6 +12,12 @@
 
 import Foundation
 
+/// Protocol used to implement access token validation.
+///
+/// Instances of this protocol may be assigned to ``Token/accessTokenValidator`` to override the mechanisms used to validate tokens.
+///
+/// > Note: A default implementation will atuomatically be used if this value is not changed.
 public protocol AccessTokenValidator {
+    /// Validates the given access token, using the `at_hash` value from the supplied ID token, if it is present.
     func validate(accessToken: String, idToken: JWT) throws
 }

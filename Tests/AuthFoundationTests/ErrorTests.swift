@@ -138,9 +138,13 @@ final class ErrorTests: XCTestCase {
                           "signature_invalid")
         XCTAssertNotEqual(JWTError.signatureVerificationUnavailable.errorDescription,
                           "signature_verification_unavailable")
+        XCTAssertNotEqual(JWTError.cannotGenerateHash.errorDescription,
+                          "cannot_generate_hash")
 
         XCTAssertNotEqual(JWTError.cannotCreateKey(code: 123, description: "Description").errorDescription,
                           "cannot_create_key")
+        XCTAssertNotEqual(JWTError.unsupportedAlgorithm(.es384).errorDescription,
+                          "unsupported_algorithm")
     }
 
     func testOktaAPIError() throws {
