@@ -52,6 +52,7 @@ final class ResourceOwnerFlowSuccessTests: XCTestCase {
                               session: urlSession)
         JWK.validator = MockJWKValidator()
         Token.idTokenValidator = MockIDTokenValidator()
+        Token.accessTokenValidator = MockAccessTokenValidator()
 
         urlSession.expect("https://example.com/.well-known/openid-configuration",
                           data: try data(from: .module, for: "openid-configuration", in: "MockResponses"),
