@@ -41,6 +41,8 @@ public protocol OAuth2APIRequest: APIRequest {
 }
 
 extension Token.RevokeRequest: OAuth2APIRequest, APIRequestBody {
+    typealias ResponseType = Empty
+    
     var httpMethod: APIRequestMethod { .post }
     var url: URL { openIdConfiguration.revocationEndpoint }
     var contentType: APIContentType? { .formEncoded }
@@ -58,6 +60,8 @@ extension Token.RevokeRequest: OAuth2APIRequest, APIRequestBody {
 }
 
 extension Token.IntrospectRequest: OAuth2APIRequest, APIRequestBody {
+    typealias ResponseType = TokenInfo
+
     var httpMethod: APIRequestMethod { .post }
     var url: URL { openIdConfiguration.introspectionEndpoint }
     var contentType: APIContentType? { .formEncoded }
@@ -72,6 +76,8 @@ extension Token.IntrospectRequest: OAuth2APIRequest, APIRequestBody {
 }
 
 extension Token.RefreshRequest: OAuth2APIRequest, APIRequestBody, APIParsingContext {
+    typealias ResponseType = Token
+
     var httpMethod: APIRequestMethod { .post }
     var url: URL { openIdConfiguration.tokenEndpoint }
     var contentType: APIContentType? { .formEncoded }

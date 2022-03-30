@@ -25,7 +25,7 @@ extension AuthorizationCodeFlow {
     }
 }
 
-extension AuthorizationCodeFlow.TokenRequest: TokenRequest, OAuth2APIRequest, APIRequestBody, APIParsingContext {
+extension AuthorizationCodeFlow.TokenRequest: OAuth2TokenRequest, OAuth2APIRequest, APIRequestBody, APIParsingContext {
     var httpMethod: APIRequestMethod { .post }
     var url: URL { openIdConfiguration.tokenEndpoint }
     var contentType: APIContentType? { .formEncoded }

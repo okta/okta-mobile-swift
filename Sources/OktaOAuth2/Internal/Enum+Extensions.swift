@@ -13,6 +13,10 @@
 import Foundation
 import AuthFoundation
 
+public enum ResponseType: String {
+    case token, code
+}
+
 extension GrantType {
     var responseKey: String {
         switch self {

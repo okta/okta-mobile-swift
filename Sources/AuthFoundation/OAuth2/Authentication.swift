@@ -11,7 +11,6 @@
 //
 
 import Foundation
-import AuthFoundation
 
 ///// Abstract base protocol for AuthenticationFlow instances to use for their backing configuration.
 //public protocol AuthenticationConfiguration {}
@@ -43,10 +42,6 @@ public protocol AuthenticationFlow: AnyObject, UsesDelegateCollection {
     
     /// Resets the authentication session.
     func reset()
-}
-
-public enum ResponseType: String {
-    case token, code
 }
 
 /// Errors that may be generated during the process of authenticating with a variety of authentication flows.

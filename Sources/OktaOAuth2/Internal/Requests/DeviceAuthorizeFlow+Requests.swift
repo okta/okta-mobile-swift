@@ -28,6 +28,8 @@ extension DeviceAuthorizationFlow {
 }
 
 extension DeviceAuthorizationFlow.AuthorizeRequest: APIRequest, APIRequestBody {
+    typealias ResponseType = DeviceAuthorizationFlow.Context
+    
     var httpMethod: APIRequestMethod { .post }
     var contentType: APIContentType? { .formEncoded }
     var acceptsType: APIContentType? { .json }
@@ -39,7 +41,7 @@ extension DeviceAuthorizationFlow.AuthorizeRequest: APIRequest, APIRequestBody {
     }
 }
 
-extension DeviceAuthorizationFlow.TokenRequest: TokenRequest, OAuth2APIRequest, APIRequestBody, APIParsingContext {
+extension DeviceAuthorizationFlow.TokenRequest: OAuth2TokenRequest, OAuth2APIRequest, APIRequestBody, APIParsingContext {
     var httpMethod: APIRequestMethod { .post }
     var url: URL { openIdConfiguration.tokenEndpoint }
     var contentType: APIContentType? { .formEncoded }

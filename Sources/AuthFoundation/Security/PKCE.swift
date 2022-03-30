@@ -20,7 +20,7 @@ public struct PKCE: Codable, Equatable {
     /// The challenge sent to the server in the initial OAuth2 call.
     ///
     /// This will either be SHA256-encoded, or plain text on platforms that do not support SHA256.
-    public let codeChallenge: String?
+    public let codeChallenge: String
     
     /// The challenge method to be sent to the server.
     public let method: Method
@@ -34,14 +34,15 @@ public struct PKCE: Codable, Equatable {
         case plain
     }
     
-    init?() {
+    public init?() {
         codeVerifier = [UInt8].random(count: 32).base64URLEncodedString
-        codeChallenge = codeVerifier.pkceCodeChallenge()
         
-        if codeChallenge == nil {
-            method = .plain
-        } else {
+        if let challenge = codeVerifier.pkceCodeChallenge() {
+            codeChallenge = challenge
             method = .sha256
+        } else {
+            codeChallenge = codeVerifier
+            method = .plain
         }
     }
 }

@@ -29,23 +29,23 @@ class SafariServicesProviderTests: ProviderTestBase {
         provider = SafariServicesProvider(flow: flow, logoutFlow: logoutFlow, delegate: delegate)
     }
     
-    func testSuccessfulAuthentication() {
+    func testSuccessfulAuthentication() throws {
         provider.start(context: .init(state: "state"))
-        waitFor(.authenticateUrl)
+        try waitFor(.authenticateUrl)
 
         XCTAssertNotNil(provider.authenticationSession)
      
         let redirectUrl = URL(string: "com.example:/callback?code=abc123&state=state")
         provider.process(url: redirectUrl, error: nil)
-        waitFor(.token)
+        try waitFor(.token)
 
         XCTAssertNotNil(delegate.token)
         XCTAssertNil(delegate.error)
     }
 
-    func testErrorResponse() {
+    func testErrorResponse() throws {
         provider.start(context: .init(state: "state"))
-        waitFor(.authenticateUrl)
+        try waitFor(.authenticateUrl)
 
         XCTAssertNotNil(provider.authenticationSession)
      
@@ -55,9 +55,9 @@ class SafariServicesProviderTests: ProviderTestBase {
         XCTAssertNotNil(delegate.error)
     }
 
-    func testUserCancelled() {
+    func testUserCancelled() throws {
         provider.start(context: .init(state: "state"))
-        waitFor(.authenticateUrl)
+        try waitFor(.authenticateUrl)
 
         XCTAssertNotNil(provider.authenticationSession)
      
@@ -67,9 +67,9 @@ class SafariServicesProviderTests: ProviderTestBase {
         XCTAssertNotNil(delegate.error)
     }
 
-    func testNoResponse() {
+    func testNoResponse() throws {
         provider.start(context: .init(state: "state"))
-        waitFor(.authenticateUrl)
+        try waitFor(.authenticateUrl)
 
         XCTAssertNotNil(provider.authenticationSession)
      
@@ -78,9 +78,9 @@ class SafariServicesProviderTests: ProviderTestBase {
         XCTAssertNotNil(delegate.error)
     }
     
-    func testLogout() {
+    func testLogout() throws {
         provider.logout(context: .init(idToken: "idToken", state: "state"))
-        waitFor(.logoutUrl)
+        try waitFor(.logoutUrl)
 
         XCTAssertNotNil(provider.authenticationSession)
         
@@ -90,9 +90,9 @@ class SafariServicesProviderTests: ProviderTestBase {
         XCTAssertNil(delegate.logoutError)
     }
     
-    func testLogoutError() {
+    func testLogoutError() throws {
         provider.logout(context: .init(idToken: "idToken", state: "state"))
-        waitFor(.error)
+        try waitFor(.error)
 
         XCTAssertNotNil(provider.authenticationSession)
         
@@ -102,9 +102,9 @@ class SafariServicesProviderTests: ProviderTestBase {
         XCTAssertNotNil(delegate.logoutError)
     }
     
-    func testLogoutNoRedirectUri() {
+    func testLogoutNoRedirectUri() throws {
         provider.logout(context: .init(idToken: "idToken", state: "state"))
-        waitFor(.error)
+        try waitFor(.error)
 
         XCTAssertNotNil(provider.authenticationSession)
         

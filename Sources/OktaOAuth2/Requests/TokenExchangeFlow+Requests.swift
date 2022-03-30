@@ -72,7 +72,7 @@ extension TokenExchangeFlow {
     }
 }
 
-extension TokenExchangeFlow.TokenRequest: TokenRequest, OAuth2APIRequest, APIRequestBody {
+extension TokenExchangeFlow.TokenRequest: OAuth2TokenRequest, OAuth2APIRequest, APIRequestBody {
     var httpMethod: APIRequestMethod { .post }
     var url: URL { openIdConfiguration.tokenEndpoint }
     var contentType: APIContentType? { .formEncoded }

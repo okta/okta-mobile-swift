@@ -12,7 +12,7 @@
 
 import XCTest
 
-@testable import OktaOAuth2
+@testable import AuthFoundation
 
 final class PKCETests: XCTestCase {
     func testPKCE() throws {
@@ -24,7 +24,7 @@ final class PKCETests: XCTestCase {
         XCTAssertNotNil(pkce.codeVerifier)
         
         #if os(Linux)
-        XCTAssertNil(pkce.codeChallenge)
+        XCTAssertEqual(pkce.codeVerifier, pkce.codeChallenge)
         XCTAssertEqual(pkce.method, .plain)
         #else
         XCTAssertNotNil(pkce.codeChallenge)

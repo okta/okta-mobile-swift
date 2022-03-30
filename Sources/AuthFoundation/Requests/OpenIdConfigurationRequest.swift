@@ -25,6 +25,8 @@ struct OpenIdConfigurationRequest {
 }
 
 extension OpenIdConfigurationRequest: APIRequest {
+    typealias ResponseType = OpenIdConfiguration
+
     var httpMethod: APIRequestMethod { .get }
     var cachePolicy: URLRequest.CachePolicy { .returnCacheDataElseLoad }
 }
