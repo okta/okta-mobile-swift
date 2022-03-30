@@ -17,6 +17,8 @@ import FoundationNetworking
 #endif
 
 public protocol APIRequest {
+    associatedtype ResponseType: Decodable
+
     var httpMethod: APIRequestMethod { get }
     var url: URL { get }
     var query: [String:APIRequestArgument?]? { get }
@@ -28,6 +30,12 @@ public protocol APIRequest {
 
     func body() throws -> Data?
     func request(for client: APIClient) throws -> URLRequest
+    func send(to client: APIClient, parsing context: APIParsingContext?, completion: @escaping(Result<APIResponse<ResponseType>, APIClientError>) -> Void)
+
+    #if swift(>=5.5.1)
+    @available(iOS 15.0, tvOS 15.0, macOS 12.0, watchOS 8, *)
+    func send(to client: APIClient, parsing context: APIParsingContext?) async throws -> APIResponse<ResponseType>
+    #endif
 }
 
 public enum APIRequestMethod: String {
@@ -146,6 +154,28 @@ extension APIRequest {
         
         return request
     }
+    
+    public func send(to client: APIClient, parsing context: APIParsingContext? = nil, completion: @escaping(Result<APIResponse<ResponseType>, APIClientError>) -> Void) {
+        do {
+            let urlRequest = try request(for: client)
+            client.send(urlRequest,
+                        parsing: context ?? self as? APIParsingContext,
+                        completion: completion)
+        } catch {
+            completion(.failure(.serverError(error)))
+        }
+    }
+    
+    #if swift(>=5.5.1)
+    @available(iOS 15.0, tvOS 15.0, macOS 12.0, watchOS 8, *)
+    public func send(to client: APIClient, parsing context: APIParsingContext? = nil) async throws -> APIResponse<ResponseType> {
+        try await withCheckedThrowingContinuation { continuation in
+            send(to: client, parsing: context) { result in
+                continuation.resume(with: result)
+            }
+        }
+    }
+    #endif
 }
 
 extension APIContentType {

@@ -166,7 +166,9 @@ public class OAuth2Client {
                 action.add(completion)
                 
                 openIdConfigurationAction = action
-                fetchOpenIdConfiguration { result in
+                
+                let request = OpenIdConfigurationRequest(baseURL: baseURL)
+                request.send(to: self) { result in
                     self.configurationQueue.sync(flags: .barrier) {
                         self.openIdConfigurationAction = nil
                         
@@ -224,9 +226,10 @@ public class OAuth2Client {
         openIdConfiguration { result in
             switch result {
             case .success(let configuration):
-                self.refresh(Token.RefreshRequest(openIdConfiguration: configuration,
-                                                  token: token,
-                                                  configuration: clientSettings)) { result in
+                let request = Token.RefreshRequest(openIdConfiguration: configuration,
+                                                   token: token,
+                                                   configuration: clientSettings)
+                request.send(to: self) { result in
                     self.refreshQueue.sync(flags: .barrier) {
                         switch result {
                         case .success(let response):
@@ -277,7 +280,7 @@ public class OAuth2Client {
                                                   token: tokenString,
                                                   hint: tokenType,
                                                   configuration: clientSettings)
-                self.revoke(request) { result in
+                request.send(to: self) { result in
                     switch result {
                     case .success(_):
                         completion(.success(()))
@@ -300,9 +303,10 @@ public class OAuth2Client {
         openIdConfiguration { result in
             switch result {
             case .success(let configuration):
-                self.introspect(Token.IntrospectRequest(openIdConfiguration: configuration,
-                                                        token: token,
-                                                        type: type)) { result in
+                let request = Token.IntrospectRequest(openIdConfiguration: configuration,
+                                                      token: token,
+                                                      type: type)
+                request.send(to: self) { result in
                     switch result {
                     case .success(let response):
                         completion(.success(response.result))
@@ -320,8 +324,9 @@ public class OAuth2Client {
         openIdConfiguration { result in
             switch result {
             case .success(let configuration):
-                self.userInfo(UserInfo.Request(openIdConfiguration: configuration,
-                                               token: token)) { result in
+                let request = UserInfo.Request(openIdConfiguration: configuration,
+                                               token: token)
+                request.send(to: self) { result in
                     switch result {
                     case .success(let response):
                         completion(.success(response.result))
@@ -356,8 +361,9 @@ public class OAuth2Client {
                 openIdConfiguration { result in
                     switch result {
                     case .success(let configuration):
-                        self.fetchKeys(KeysRequest(openIdConfiguration: configuration,
-                                                   clientId: self.configuration.clientId)) { result in
+                        let request = KeysRequest(openIdConfiguration: configuration,
+                                                  clientId: self.configuration.clientId)
+                        request.send(to: self) { result in
                             self.jwksQueue.sync(flags: .barrier) {
                                 self.jwksAction = nil
 
@@ -385,6 +391,65 @@ public class OAuth2Client {
         }
     }
     
+    /// Attempts to exchange, and verify, a token from the supplied request.
+    ///
+    /// This also ensures the ``JWKS`` keyset is retrieved in parallel (if it hasn't already been cached), and verifies the ID and Access tokens to ensure validity.
+    public func exchange<T: OAuth2TokenRequest>(token request: T, completion: @escaping (Result<APIResponse<Token>, APIClientError>) -> Void) {
+        // Fetch the JWKS keys in parallel if necessary
+        let group = DispatchGroup()
+        var keySet = jwks
+        if keySet == nil {
+            group.enter()
+            jwks { result in
+                defer { group.leave() }
+                if case let .success(response) = result {
+                    keySet = response
+                }
+            }
+        }
+        
+        // Exchange the token
+        request.send(to: self) { result in
+            guard case let .success(response) = result else {
+                completion(result)
+                return
+            }
+            
+            // Perform idToken/accessToken validation
+            do {
+                try response.result.validate(using: self)
+            } catch {
+                completion(.failure(.validation(error: error)))
+                return
+            }
+            
+            // Wait for the JWKS keys, if necessary
+            group.notify(queue: DispatchQueue.global()) {
+                guard let idToken = response.result.idToken else {
+                    completion(result)
+                    return
+                }
+                
+                guard let keySet = keySet else {
+                    completion(.failure(.validation(error: JWTError.invalidKey)))
+                    return
+                }
+                    
+                do {
+                    if try idToken.validate(using: keySet) == false {
+                        completion(.failure(.validation(error: JWTError.signatureInvalid)))
+                        return
+                    }
+                } catch {
+                    completion(.failure(.validation(error: error)))
+                    return
+                }
+                
+                completion(result)
+            }
+        }
+    }
+
     // MARK: Private properties / methods
     private let delegates = DelegateCollection<OAuth2ClientDelegate>()
 

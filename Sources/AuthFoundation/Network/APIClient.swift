@@ -62,13 +62,6 @@ public protocol APIClient {
     
     /// Send the given URLRequest.
     func send<T: Decodable>(_ request: URLRequest, parsing context: APIParsingContext?, completion: @escaping (Result<APIResponse<T>, APIClientError>) -> Void)
-
-    #if swift(>=5.5.1)
-    /// Asynchronously send the given URLRequest.
-    /// - Returns: APIResponse when the request is successful.
-    @available(iOS 15.0, tvOS 15.0, macOS 12.0, watchOS 8, *)
-    func send<T: Decodable>(_ request: URLRequest, parsing context: APIParsingContext?) async throws -> APIResponse<T>
-    #endif
 }
 
 /// Protocol that delegates of APIClient instances can conform to.
@@ -141,35 +134,6 @@ extension APIClient {
             }
         }.resume()
     }
-    
-    /// Convenience method that enables the use of an ``APIRequest`` struct to define how a network operation should be performed.
-    public func send<T>(_ request: APIRequest, parsing context: APIParsingContext? = nil, completion: @escaping (Result<APIResponse<T>, APIClientError>) -> Void) {
-        do {
-            let urlRequest = try request.request(for: self)
-            send(urlRequest,
-                 parsing: context ?? request as? APIParsingContext,
-                 completion: completion)
-        } catch {
-            completion(.failure(.serverError(error)))
-        }
-    }
-
-    #if swift(>=5.5.1)
-    @available(iOS 15.0, tvOS 15.0, macOS 12.0, watchOS 8, *)
-    public func send<T>(_ request: URLRequest, parsing context: APIParsingContext? = nil) async throws -> APIResponse<T> {
-        try await withCheckedThrowingContinuation { continuation in
-            send(request, parsing: context) { result in
-                continuation.resume(with: result)
-            }
-        }
-    }
-
-    @available(iOS 15.0, tvOS 15.0, macOS 12.0, watchOS 8, *)
-    public func send<T>(_ request: APIRequest, parsing context: APIParsingContext? = nil) async throws -> APIResponse<T> {
-        try await send(try request.request(for: self),
-                       parsing: context ?? request as? APIParsingContext)
-    }
-    #endif
 }
 
 extension APIClient {

@@ -12,4 +12,7 @@
 
 import Foundation
 
-protocol TokenRequest {}
+/// Protocol that represents a type of ``APIRequest`` that can be used to exchange a token.
+public protocol OAuth2TokenRequest: APIRequest where ResponseType == Token {
+    var clientId: String { get }
+}

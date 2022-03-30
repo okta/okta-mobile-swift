@@ -27,9 +27,9 @@ class SafariBrowserProviderTests: ProviderTestBase {
         provider = SafariBrowserProvider(flow: flow, logoutFlow: logoutFlow, from: nil, delegate:delegate)
     }
     
-    func testControllerCreation() {
+    func testControllerCreation() throws {
         provider.start(context: nil)
-        waitFor(.authenticateUrl)
+        try waitFor(.authenticateUrl)
 
         XCTAssertNotNil(provider.safariController)
     }

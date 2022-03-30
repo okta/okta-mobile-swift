@@ -181,7 +181,7 @@ public class DeviceAuthorizationFlow: AuthenticationFlow {
                 let request = AuthorizeRequest(url: url,
                                                clientId: self.client.configuration.clientId,
                                                scope: self.client.configuration.scopes)
-                self.client.device(authorize: request) { result in
+                request.send(to: self.client) { result in
                     switch result {
                     case .failure(let error):
                         self.delegateCollection.invoke { $0.authentication(flow: self, received: .network(error: error)) }

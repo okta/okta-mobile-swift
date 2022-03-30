@@ -20,6 +20,8 @@ extension UserInfo {
 }
 
 extension UserInfo.Request: APIRequest, OAuth2APIRequest {
+    typealias ResponseType = UserInfo
+    
     var httpMethod: APIRequestMethod { .get }
     var url: URL { openIdConfiguration.userinfoEndpoint }
     var acceptsType: APIContentType? { .json }
