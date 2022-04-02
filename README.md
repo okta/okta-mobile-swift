@@ -143,7 +143,7 @@ import WebAuthenticationUI
 
 func signIn() async {
     let token = try await WebAuthentication.signIn(from: view.window)
-    let credential = Credential.for(token: token)
+    let credential = try Credential.store(token)
 }
 ```
 

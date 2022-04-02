@@ -26,51 +26,61 @@ public protocol TokenStorage {
     /// > Note: Setting a new token should implicitly invoke ``add(token:)`` if the token doesn't previously exist within storage.
     /// >
     /// > The ``TokenStorageDelegate/token(storage:defaultChanged:)`` method should also be invoked.
-    var defaultToken: Token? { get set }
+    var defaultTokenID: UUID? { get }
+
+    func setDefaultTokenID(_ id: UUID?) throws
 
     /// Returns all tokens currently in storage.
-    var allTokens: [Token] { get }
+    var allIDs: [UUID] { get }
     
-    /// Determines whether or not the given token is stored.
-    func contains(token: Token) -> Bool
-
     /// Adds the given token.
     ///
     /// This should throw ``TokenError/duplicateTokenAdded`` if the token already exists in storage.
     ///
     /// > Note: This method should invoke the ``TokenStorageDelegate/token(storage:added:)`` delegate method.
-    func add(token: Token) throws
+    func add(token: Token, with id: UUID) throws
+    
+    /// Associates the given metadata with the token identified by the given ID.
+    func assign(metadata: [String:String], for id: UUID) throws
+    
+    /// Returns the metadata for the given token ID.
+    /// - Returns: Metadata for this token ID.
+    func metadata(for id: UUID) throws -> [String:String]
     
     /// Replaces an existing token with a new one.
     ///
     /// This can be used during the token refresh process, and indicates that one token is semantically the same as another. If the token being replaced is the default, the default value should be updated as well.
     ///
     /// > Note: This method should invoke the ``TokenStorageDelegate/token(storage:replaced:with:)`` and ``TokenStorageDelegate/token(storage:defaultChanged:)`` methods as needed.
-    func replace(token: Token, with newToken: Token) throws
+    func replace(token id: UUID, with token: Token) throws
 
     /// Removes the given token.
     ///
     /// > Note: This method should invoke the  ``TokenStorageDelegate/token(storage:removed:)`` method.
-    func remove(token: Token) throws
+    func remove(id: UUID) throws
+    
+    /// Returns a token for the given UUID.
+    /// - Returns: Token that matches the given UUID.
+    func get(token id: UUID) throws -> Token
 }
 
 /// Protocol that custom ``TokenStorage`` instances are required to communicate changes to.
 public protocol TokenStorageDelegate: AnyObject {
     /// Sent when the default token has been changed.
-    func token(storage: TokenStorage, defaultChanged token: Token?)
+    func token(storage: TokenStorage, defaultChanged id: UUID?)
     
     /// Sent when a new token has been added.
     ///
     /// > Important: This message should only be sent when a token is actually new. If the token is semantically identical to another one already in storage, the ``token(storage:replaced:with:)`` message should be sent instead.
-    func token(storage: TokenStorage, added token: Token?)
+    func token(storage: TokenStorage, added id: UUID, token: Token)
     
     /// Sent when a token has been removed from storage.
-    func token(storage: TokenStorage, removed token: Token?)
+    func token(storage: TokenStorage, removed id: UUID)
     
     /// Sent when a token has been updated within storage.
     ///
     /// There are circumstances when a token that already exists within storage needs to be replaced or updated. For example, when a token is refreshed, even though the new token differs, it represents the same resources and capabilities as the previous token.
     ///
     /// As a result, this message is used to convey that a token has been updated, but not removed or newly added.
-    func token(storage: TokenStorage, replaced oldToken: Token, with newToken: Token)
+    func token(storage: TokenStorage, replaced id: UUID, from oldToken: Token, to newToken: Token)
 }

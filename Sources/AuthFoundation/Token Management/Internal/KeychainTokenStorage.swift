@@ -15,71 +15,47 @@
 import Foundation
 
 class KeychainTokenStorage: TokenStorage {
-    static let serviceName = "com.okta.authfoundation.keychainStorage"
-    static let defaultTokenName = "com.okta.authfoundation.keychainStorage.default"
+    static let serviceName = "com.okta.authfoundation.keychain.storage"
+    static let metadataName = "com.okta.authfoundation.keychain.metadata"
+    static let defaultTokenName = "com.okta.authfoundation.keychain.default"
 
     weak var delegate: TokenStorageDelegate?
     
-    private lazy var _defaultTokenId: String? = {
-        if let defaultResult = try? Keychain
-            .Search(account: KeychainTokenStorage.defaultTokenName)
-            .get()
-        {
-            return String(data: defaultResult.value, encoding: .utf8)
-        }
-        
-        return nil
-    }()
-
-    private let decoder = JSONDecoder()
-    private let encoder = JSONEncoder()
-
-    var defaultToken: Token? {
-        get {
-            guard let tokenId = _defaultTokenId else { return nil }
-            do {
-                return try cachedToken(with: tokenId)
-            } catch {
-                // TODO: Error logging...
-            }
+    private(set) lazy var defaultTokenID: UUID? = {
+        guard let defaultResult = try? Keychain
+                .Search(account: KeychainTokenStorage.defaultTokenName)
+                .get(),
+              let uuidString = String(data: defaultResult.value, encoding: .utf8),
+              let uuid = UUID(uuidString: uuidString)
+        else {
             return nil
         }
-        set {
-            if let token = newValue {
-                try? add(token: token)
-            }
-            
-            let tokenId = newValue?.id
-            if _defaultTokenId != tokenId {
-                _defaultTokenId = tokenId
-                try? saveDefault()
-                
-                delegate?.token(storage: self, defaultChanged: newValue)
-            }
-        }
+        
+        return uuid
+    }()
+
+    func setDefaultTokenID(_ id: UUID?) throws {
+        guard defaultTokenID != id else { return }
+        defaultTokenID = id
+        try saveDefault()
+        delegate?.token(storage: self, defaultChanged: id)
     }
     
-    private var tokenCache: [String:Token?] = [:]
-    var allTokens: [Token] {
+    var allIDs: [UUID] {
         let result = try? Keychain
             .Search(service: KeychainTokenStorage.serviceName)
             .list()
-            .compactMap { result -> Token? in
-                try? cachedToken(with: result.account)
+            .compactMap { result -> UUID? in
+                UUID(uuidString: result.account)
             }
         
         return result ?? []
     }
     
-    func contains(token: Token) -> Bool {
-        tokenCache.keys.contains(token.id)
-    }
-    
-    func add(token: Token) throws {
-        let tokenId = token.id
+    func add(token: Token, with id: UUID) throws {
         guard try Keychain
-                .Search(account: tokenId,
-                      service: KeychainTokenStorage.serviceName)
+                .Search(account: id.uuidString,
+                        service: KeychainTokenStorage.serviceName)
                 .list()
                 .isEmpty
         else {
@@ -91,12 +67,10 @@ class KeychainTokenStorage: TokenStorage {
             .list()
             .count == 0
         
-        tokenCache[tokenId] = token
-        
         let data = try encoder.encode(token)
         
         // TODO: Update keychain handling to abstract ID generation, and support custom access groups, accessibility options, and to provide the ability to separate secret data and generic data.
-        let item = Keychain.Item(account: token.id,
+        let item = Keychain.Item(account: id.uuidString,
                                  service: KeychainTokenStorage.serviceName,
                                  accessibility: .unlocked,
                                  accessGroup: nil,
@@ -106,104 +80,94 @@ class KeychainTokenStorage: TokenStorage {
                                  generic: nil,
                                  value: data)
         try item.save()
-        
-        if changedDefault {
-            _defaultTokenId = tokenId
-        }
 
-        delegate?.token(storage: self, added: token)
+        delegate?.token(storage: self, added: id, token: token)
         
         if changedDefault {
-            try saveDefault()
-            delegate?.token(storage: self, defaultChanged: token)
+            try setDefaultTokenID(id)
         }
     }
     
-    func replace(token: Token, with newToken: Token) throws {
-        try Keychain
-            .Search(account: token.id,
+    func replace(token id: UUID, with token: Token) throws {
+        let oldResult = try Keychain
+            .Search(account: id.uuidString,
                     service: KeychainTokenStorage.serviceName)
             .get()
-            .delete()
+        
+        let oldToken = try self.token(with: oldResult)
+        try oldResult.delete()
+        
+        token.id = id
         
         let data = try encoder.encode(token)
         try Keychain
-            .Item(account: token.id,
+            .Item(account: id.uuidString,
                   service: KeychainTokenStorage.serviceName,
                   accessibility: .unlocked,
                   value: data)
             .save()
         
-        tokenCache.removeValue(forKey: token.id)
-        tokenCache[newToken.id] = newToken
-            
-        var changedDefault = false
-        if _defaultTokenId == token.id {
-            changedDefault = true
-            _defaultTokenId = newToken.id
-            try saveDefault()
-        }
-        
-         delegate?.token(storage: self, replaced: token, with: newToken)
-        
-        if changedDefault {
-            delegate?.token(storage: self, defaultChanged: token)
-        }
+        delegate?.token(storage: self, replaced: id, from: oldToken, to: token)
     }
     
-    func remove(token: Token) throws {
+    func remove(id: UUID) throws {
         try Keychain
-            .Search(account: token.id,
+            .Search(account: id.uuidString,
                     service: KeychainTokenStorage.serviceName)
             .get()
             .delete()
 
-        tokenCache.removeValue(forKey: token.id)
-        
-        if _defaultTokenId == token.id {
-            _defaultTokenId = nil
-            try saveDefault()
-            delegate?.token(storage: self, defaultChanged: nil)
-        }
-        
         try Keychain
-            .Search(account: token.id,
+            .Search(account: id.uuidString,
                     service: KeychainTokenStorage.serviceName,
                     accessGroup: nil)
             .get()
             .delete()
         
-        delegate?.token(storage: self, removed: token)
-    }
-    
-    func cachedToken(with id: String) throws -> Token {
-        if let token = tokenCache[id],
-           let token = token
-        {
-            return token
+        delegate?.token(storage: self, removed: id)
+
+        if defaultTokenID == id {
+            try setDefaultTokenID(id)
         }
-        
-        let token = try token(with: id)
-        tokenCache[id] = token
-        return token
     }
     
-    func token(with id: String) throws -> Token {
-        try decoder.decode(Token.self,
+    func get(token id: UUID) throws -> Token {
+        try token(with: try Keychain
+                    .Search(account: id.uuidString,
+                            service: KeychainTokenStorage.serviceName)
+                    .get())
+    }
+    
+    func assign(metadata: [String:String], for id: UUID) throws {
+        try Keychain
+            .Item(account: id.uuidString,
+                  service: KeychainTokenStorage.metadataName,
+                  accessibility: .afterFirstUnlock,
+                  value: try encoder.encode(metadata))
+            .save()
+    }
+
+    func metadata(for id: UUID) throws -> [String:String] {
+        try decoder.decode([String:String].self,
                            from: try Keychain
-                            .Search(account: id,
-                                    service: KeychainTokenStorage.serviceName)
+                            .Search(account: id.uuidString,
+                                    service: KeychainTokenStorage.metadataName)
                             .get()
                             .value)
     }
+
+    private func token(with item: Keychain.Item) throws -> Token {
+        try decoder.decode(Token.self,
+                           from: item.value)
+    }
     
-    func token(with result: Keychain.Search.Result) throws -> Token {
+    private func token(with result: Keychain.Search.Result) throws -> Token {
         try decoder.decode(Token.self,
                            from: try result.get().value)
     }
     
     private func saveDefault() throws {
-        if let tokenIdData = _defaultTokenId?.data(using: .utf8) {
+        if let tokenIdData = defaultTokenID?.uuidString.data(using: .utf8) {
             try Keychain
                 .Item(account: KeychainTokenStorage.defaultTokenName,
                       accessibility: .afterFirstUnlock,
@@ -216,6 +180,9 @@ class KeychainTokenStorage: TokenStorage {
                 .delete()
         }
     }
+
+    private let decoder = JSONDecoder()
+    private let encoder = JSONEncoder()
 }
 
 #endif
