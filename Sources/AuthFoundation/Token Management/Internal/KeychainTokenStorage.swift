@@ -127,7 +127,7 @@ class KeychainTokenStorage: TokenStorage {
         delegate?.token(storage: self, removed: id)
 
         if defaultTokenID == id {
-            try setDefaultTokenID(id)
+            try setDefaultTokenID(nil)
         }
     }
     

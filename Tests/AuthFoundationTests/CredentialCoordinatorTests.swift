@@ -24,7 +24,8 @@ final class UserCoordinatorTests: XCTestCase {
     var storage: UserDefaultsTokenStorage!
     var coordinator: CredentialCoordinatorImpl!
     
-    let token = Token(issuedAt: Date(),
+    let token = Token(id: UUID(),
+                      issuedAt: Date(),
                       tokenType: "Bearer",
                       expiresIn: 300,
                       accessToken: "abcd123",
@@ -45,7 +46,7 @@ final class UserCoordinatorTests: XCTestCase {
         
         coordinator = CredentialCoordinatorImpl(tokenStorage: storage)
         
-        XCTAssertEqual(storage.allTokens.count, 0)
+        XCTAssertEqual(storage.allIDs.count, 0)
     }
     
     override func tearDownWithError() throws {
@@ -53,34 +54,35 @@ final class UserCoordinatorTests: XCTestCase {
     }
     
     func testDefaultCredentialViaToken() throws {
-        storage.defaultToken = token
+        try storage.add(token: token, with: token.id)
 
-        XCTAssertEqual(storage.allTokens.count, 1)
+        XCTAssertEqual(storage.allIDs.count, 1)
         
         let credential = try XCTUnwrap(coordinator.default)
         XCTAssertEqual(credential.token, token)
         
         coordinator.default = nil
         XCTAssertNil(coordinator.default)
-        XCTAssertNil(storage.defaultToken)
-        XCTAssertEqual(storage.allTokens.count, 1)
+        XCTAssertNil(storage.defaultTokenID)
+        XCTAssertEqual(storage.allIDs.count, 1)
         
-        XCTAssertEqual(coordinator.allCredentials, [credential])
-        XCTAssertEqual(coordinator.for(token: token), credential)
-        XCTAssertTrue(coordinator.for(token: token) === credential)
+        XCTAssertEqual(coordinator.allIDs, [token.id])
+        XCTAssertEqual(try coordinator.with(id: token.id), credential)
+        XCTAssertTrue(try coordinator.with(token: token) === credential)
     }
     
     func testImplicitCredentialForToken() throws {
-        let credential = coordinator.for(token: token)
+        let credential = try coordinator.with(token: token)
         
-        XCTAssertEqual(storage.allTokens.count, 1)
+        XCTAssertEqual(storage.allIDs, [token.id])
+        XCTAssertEqual(storage.defaultTokenID, token.id)
         XCTAssertEqual(coordinator.default, credential)
     }
     
     func testNotifications() throws {
         let recorder = NotificationRecorder(observing: [.defaultCredentialChanged])
         
-        let credential = coordinator.for(token: token)
+        let credential = try coordinator.with(token: token)
         XCTAssertEqual(recorder.notifications.count, 1)
         XCTAssertEqual(recorder.notifications.first?.object as? Credential, credential)
         
@@ -88,30 +90,5 @@ final class UserCoordinatorTests: XCTestCase {
         coordinator.default = nil
         XCTAssertEqual(recorder.notifications.count, 1)
         XCTAssertNil(recorder.notifications.first?.object)
-    }
-    
-    // TODO: Figure a better solution to this automatic token injection.
-    func disabled_testAutomaticTokenImport() throws {
-        XCTAssertEqual(storage.allTokens.count, 0)
-        
-        let issuer = URL(string: "https://example.com")!
-        let urlSession = URLSessionMock()
-        let client = OAuth2Client(.init(baseURL: issuer,
-                                        clientId: "clientid",
-                                        scopes: "openid"),
-                                  session: urlSession)
-        
-        let request = URLRequest(url: URL(string: "https://example.com/oauth2/default/v1/token")!)
-        let response: APIResponse<Token> = APIResponse(result: token,
-                                                       date: Date(),
-                                                       links: [:],
-                                                       rateInfo: nil,
-                                                       requestId: nil)
-        client.delegateCollection.invoke { delegate in
-            delegate.api(client: client, didSend: request, received: response)
-        }
-        
-        XCTAssertEqual(storage.allTokens.count, 1)
-        XCTAssertEqual(storage.defaultToken, token)
     }
 }

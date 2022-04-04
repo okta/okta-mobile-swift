@@ -18,7 +18,8 @@ final class UserDefaultTokenStorageTests: XCTestCase {
     var userDefaults: UserDefaults!
     var storage: UserDefaultsTokenStorage!
     
-    let token = Token(issuedAt: Date(),
+    let token = Token(id: UUID(),
+                      issuedAt: Date(),
                       tokenType: "Bearer",
                       expiresIn: 300,
                       accessToken: "abcd123",
@@ -31,25 +32,26 @@ final class UserDefaultTokenStorageTests: XCTestCase {
                                                                   scopes: "openid"),
                                              clientSettings: nil))
 
-    let newToken = Token(issuedAt: Date(),
-                      tokenType: "Bearer",
-                      expiresIn: 300,
-                      accessToken: "zxy987",
-                      scope: "openid",
-                      refreshToken: nil,
-                      idToken: nil,
-                      deviceSecret: nil,
-                      context: Token.Context(configuration: .init(baseURL: URL(string: "https://example.com")!,
-                                                                  clientId: "clientid",
-                                                                  scopes: "openid"),
-                                             clientSettings: nil))
+    let newToken = Token(id: UUID(),
+                         issuedAt: Date(),
+                         tokenType: "Bearer",
+                         expiresIn: 300,
+                         accessToken: "zxy987",
+                         scope: "openid",
+                         refreshToken: nil,
+                         idToken: nil,
+                         deviceSecret: nil,
+                         context: Token.Context(configuration: .init(baseURL: URL(string: "https://example.com")!,
+                                                                     clientId: "clientid",
+                                                                     scopes: "openid"),
+                                                clientSettings: nil))
 
     override func setUpWithError() throws {
         userDefaults = UserDefaults(suiteName: name)
         userDefaults.removePersistentDomain(forName: name)
 
         storage = UserDefaultsTokenStorage(userDefaults: userDefaults)
-        XCTAssertEqual(storage.allTokens.count, 0)
+        XCTAssertEqual(storage.allIDs.count, 0)
     }
     
     override func tearDownWithError() throws {
@@ -57,44 +59,43 @@ final class UserDefaultTokenStorageTests: XCTestCase {
     }
     
     func testDefaultToken() throws {
-        storage.defaultToken = token
+        try storage.add(token: token, with: token.id)
+        XCTAssertEqual(storage.allIDs.count, 1)
+        XCTAssertEqual(storage.defaultTokenID, token.id)
         
-        XCTAssertEqual(storage.defaultToken, token)
-        XCTAssertEqual(storage.allTokens.count, 1)
-        
-        storage.defaultToken = nil
-        XCTAssertNil(storage.defaultToken)
-        XCTAssertEqual(storage.allTokens.count, 1)
+        try storage.setDefaultTokenID(nil)
+        XCTAssertNil(storage.defaultTokenID)
+        XCTAssertEqual(storage.allIDs.count, 1)
    
-        XCTAssertThrowsError(try storage.add(token: token))
-        XCTAssertEqual(storage.allTokens.count, 1)
+        XCTAssertThrowsError(try storage.add(token: token, with: token.id))
+        XCTAssertEqual(storage.allIDs.count, 1)
         
-        XCTAssertNoThrow(try storage.replace(token: token, with: newToken))
-        XCTAssertEqual(storage.allTokens.count, 1)
+        XCTAssertNoThrow(try storage.replace(token: token.id, with: newToken))
+        XCTAssertEqual(storage.allIDs.count, 1)
 
-        XCTAssertNoThrow(try storage.remove(token: newToken))
-        XCTAssertEqual(storage.allTokens.count, 0)
+        XCTAssertNoThrow(try storage.remove(id: token.id))
+        XCTAssertEqual(storage.allIDs.count, 0)
 
-        XCTAssertNoThrow(try storage.remove(token: newToken))
-        XCTAssertEqual(storage.allTokens.count, 0)
+        XCTAssertNoThrow(try storage.remove(id: token.id))
+        XCTAssertEqual(storage.allIDs.count, 0)
     }
 
     func testImplicitDefaultToken() throws {
-        XCTAssertNil(storage.defaultToken)
+        XCTAssertNil(storage.defaultTokenID)
         
-        XCTAssertNoThrow(try storage.add(token: token))
-        XCTAssertEqual(storage.allTokens.count, 1)
+        XCTAssertNoThrow(try storage.add(token: token, with: token.id))
+        XCTAssertEqual(storage.allIDs.count, 1)
 
-        XCTAssertEqual(storage.defaultToken, token)
+        XCTAssertEqual(storage.defaultTokenID, token.id)
     }
 
     func testRemoveDefaultToken() throws {
-        storage.defaultToken = token
-        XCTAssertEqual(storage.defaultToken, token)
-        XCTAssertEqual(storage.allTokens.count, 1)
+        try storage.add(token: token, with: token.id)
+        try storage.setDefaultTokenID(token.id)
+        XCTAssertEqual(storage.allIDs.count, 1)
 
-        XCTAssertNoThrow(try storage.remove(token: token))
-        XCTAssertEqual(storage.allTokens.count, 0)
-        XCTAssertNil(storage.defaultToken)
+        XCTAssertNoThrow(try storage.remove(id: token.id))
+        XCTAssertEqual(storage.allIDs.count, 0)
+        XCTAssertNil(storage.defaultTokenID)
     }
 }

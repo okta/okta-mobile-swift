@@ -63,6 +63,7 @@ class UserDefaultsTokenStorage: TokenStorage {
             userDefaults.removeObject(forKey: UserDefaultsKeys.defaultTokenKey)
         }
         userDefaults.synchronize()
+        delegate?.token(storage: self, defaultChanged: id)
     }
     
     var allIDs: [UUID] {
