@@ -19,6 +19,6 @@ class MockCredentialCoordinator: CredentialCoordinator {
 
     func remove(credential: Credential) throws {
         credentialDataSource.remove(credential: credential)
-        try tokenStorage.remove(token: credential.token)
+        try tokenStorage.remove(id: credential.token.id)
     }
 }

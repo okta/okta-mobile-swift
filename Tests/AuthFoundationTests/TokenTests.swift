@@ -48,7 +48,8 @@ final class TokenTests: XCTestCase {
     }
     
     func testToken() throws {
-        let token = Token(issuedAt: Date(),
+        let token = Token(id: "TokenId",
+                          issuedAt: Date(),
                           tokenType: "Bearer",
                           expiresIn: 3600,
                           accessToken: "the_access_token",

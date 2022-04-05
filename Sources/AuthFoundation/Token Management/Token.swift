@@ -16,18 +16,21 @@ public enum TokenError: Error {
     case tokenTypeMissing(_: Token.RevokeType)
     case refreshTokenMissing
     case contextMissing
-    case tokenNotFound(_: Token)
+    case tokenNotFound(id: String)
     case cannotReplaceToken
     case duplicateTokenAdded
 }
 
 /// Token information representing a user's access to a resource server, including access token, refresh token, and other related information.
-public class Token: Codable, Equatable, Hashable, Identifiable, Expires {
+public class Token: Codable, Equatable, Hashable, Expires, Identifiable {
     public static var idTokenValidator: IDTokenValidator = DefaultIDTokenValidator()
     public static var accessTokenValidator: AccessTokenValidator = DefaultAccessTokenValidator()
-
+    
+    /// The unique identifier for this token.
+    public internal(set) var id: String
+    
     // The date this token was issued at.
-    public var issuedAt: Date?
+    public let issuedAt: Date?
     
     /// The string type of the token (e.g. `Bearer`).
     public let tokenType: String
@@ -57,24 +60,6 @@ public class Token: Codable, Equatable, Hashable, Identifiable, Expires {
         refreshAction != nil
     }
     
-    public typealias ID = String
-    public lazy var id: String = {
-        if let jwt = try? JWT(accessToken),
-           let cid: String = jwt[.clientId],
-           let uid: String = jwt[.userId]
-        {
-            return "\(cid).\(uid)"
-        }
-        
-        if let idToken = idToken,
-           let subject = idToken.subject
-        {
-            return subject
-        }
-
-        return UUID().uuidString
-    }()
-
     internal var refreshAction: CoalescedResult<Result<Token, OAuth2Error>>?
 
     /// Return the relevant token string for the given type.
@@ -123,7 +108,8 @@ public class Token: Codable, Equatable, Hashable, Identifiable, Expires {
         hasher.combine(deviceSecret)
     }
 
-    required init(issuedAt: Date,
+    required init(id: String,
+                  issuedAt: Date,
                   tokenType: String,
                   expiresIn: TimeInterval,
                   accessToken: String,
@@ -133,6 +119,7 @@ public class Token: Codable, Equatable, Hashable, Identifiable, Expires {
                   deviceSecret: String?,
                   context: Context)
     {
+        self.id = id
         self.issuedAt = issuedAt
         self.tokenType = tokenType
         self.expiresIn = expiresIn
@@ -156,13 +143,23 @@ public class Token: Codable, Equatable, Hashable, Identifiable, Expires {
         } else {
             throw TokenError.contextMissing
         }
-        
+
+        let id: String
+        if let userInfoId = decoder.userInfo[.tokenId] as? String {
+            id = userInfoId
+        } else if container.contains(.id) {
+            id = try container.decode(String.self, forKey: .id)
+        } else {
+            id = UUID().uuidString
+        }
+
         var idToken: JWT? = nil
         if let idTokenString = try container.decodeIfPresent(String.self, forKey: .idToken) {
             idToken = try JWT(idTokenString)
         }
         
-        self.init(issuedAt: Date.nowCoordinated,
+        self.init(id: id,
+                  issuedAt: Date.nowCoordinated,
                   tokenType: try container.decode(String.self, forKey: .tokenType),
                   expiresIn: try container.decode(TimeInterval.self, forKey: .expiresIn),
                   accessToken: try container.decode(String.self, forKey: .accessToken),
@@ -205,6 +202,7 @@ extension Token {
 
 extension Token {
     enum CodingKeys: String, CodingKey, CaseIterable {
+        case id
         case issuedAt
         case tokenType
         case expiresIn
@@ -218,6 +216,7 @@ extension Token {
 }
 
 extension CodingUserInfoKey {
+    public static let tokenId = CodingUserInfoKey(rawValue: "tokenId")!
     public static let apiClientConfiguration = CodingUserInfoKey(rawValue: "apiClientConfiguration")!
     public static let clientSettings = CodingUserInfoKey(rawValue: "clientSettings")!
 }

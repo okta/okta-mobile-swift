@@ -24,7 +24,8 @@ extension Token {
     static let simpleMockToken = mockToken()
     
     static func mockToken(issuedOffset: TimeInterval = 0, expiresIn: TimeInterval = 3600) -> Token {
-        Token(issuedAt: Date(timeIntervalSinceNow: -issuedOffset),
+        Token(id: "TokenId",
+              issuedAt: Date(timeIntervalSinceNow: -issuedOffset),
               tokenType: "Bearer",
               expiresIn: expiresIn,
               accessToken: JWT.mockAccessToken,

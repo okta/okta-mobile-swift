@@ -98,6 +98,10 @@ extension Token.RefreshRequest: OAuth2APIRequest, APIRequestBody, APIParsingCont
             guard let key = CodingUserInfoKey(rawValue: item.key) else { return }
             partialResult?[key] = item.value
         }) else { return nil }
-        return [ .clientSettings: settings ]
+        
+        return [
+            .clientSettings: settings,
+            .tokenId: token.id
+        ]
     }
 }

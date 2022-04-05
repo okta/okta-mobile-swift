@@ -14,39 +14,77 @@ import Foundation
 import AuthFoundation
 
 class MockTokenStorage: TokenStorage {
-    var delegate: TokenStorageDelegate?
+    var error: Error?
     
-    var defaultToken: Token? {
+    var defaultTokenID: String? {
         didSet {
-            if defaultToken != oldValue {
-                delegate?.token(storage: self, defaultChanged: defaultToken)
+            if defaultTokenID != oldValue {
+                delegate?.token(storage: self, defaultChanged: defaultTokenID)
             }
         }
     }
     
-    var allTokens: [Token] = []
-    
-    func contains(token: Token) -> Bool {
-        allTokens.contains(token)
-    }
-    
-    func add(token: Token) throws {
-        allTokens.append(token)
-        delegate?.token(storage: self, added: token)
-    }
-    
-    func replace(token: Token, with newToken: Token) throws {
-        guard let index = allTokens.firstIndex(of: token) else {
-            throw TokenError.cannotReplaceToken
+    func setDefaultTokenID(_ id: String?) throws {
+        if let error = error {
+            throw error
         }
         
-        allTokens.remove(at: index)
-        allTokens.insert(newToken, at: index)
-        delegate?.token(storage: self, replaced: token, with: newToken)
+        defaultTokenID = id
     }
     
-    func remove(token: Token) throws {
-        guard let index = allTokens.firstIndex(of: token) else { return }
-        allTokens.remove(at: index)
+    var allIDs: [String] { Array(allTokens.keys) }
+    private var allTokens: [String:Token] = [:]
+    private var metadata: [String:[String:String]] = [:]
+    
+    func add(token: Token, with id: String) throws {
+        if let error = error {
+            throw error
+        }
+        
+        allTokens[id] = token
+        delegate?.token(storage: self, added: id, token: token)
     }
+    
+    func setMetadata(_ metadata: [String : String], for id: String) throws {
+        if let error = error {
+            throw error
+        }
+        
+        self.metadata[id] = metadata
+    }
+    
+    func metadata(for id: String) throws -> [String : String] {
+        if let error = error {
+            throw error
+        }
+        
+        return metadata[id] ?? [:]
+    }
+    
+    func replace(token id: String, with token: Token) throws {
+        if let error = error {
+            throw error
+        }
+        
+        allTokens[id] = token
+    }
+    
+    func remove(id: String) throws {
+        if let error = error {
+            throw error
+        }
+        
+        allTokens.removeValue(forKey: id)
+        metadata.removeValue(forKey: id)
+    }
+    
+    func get(token id: String) throws -> Token {
+        if let error = error {
+            throw error
+        }
+        
+        return allTokens[id]!
+    }
+    
+    var delegate: TokenStorageDelegate?
 }

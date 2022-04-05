@@ -51,7 +51,7 @@ public class Credential {
     }
     
     /// Lists all users currently stored within the user's application.
-    public static var allCredentials: [Credential] { coordinator.allCredentials }
+    public static var allIDs: [String] { coordinator.allIDs }
     
     /// The default grace interval used when refreshing tokens using ``Credential/refreshIfNeeded(graceInterval:completion:)`` or ``Credential/refreshIfNeeded(graceInterval:)``.
     ///
@@ -63,11 +63,46 @@ public class Credential {
     /// If a credential has previously been created for the given token, that cached instance will be returned.
     /// - Parameter token: Token to identify the user by.
     /// - Returns: Credential object that represents the given token.
-    public static func `for`(token: Token) -> Credential { coordinator.for(token: token) }
+    public static func with(token: Token) throws -> Credential {
+        try coordinator.with(token: token)
+    }
+    
+    @discardableResult
+    public static func store(token: Token, metadata: [String:String] = [:]) throws -> Credential {
+        try coordinator.store(token: token, metadata: metadata)
+    }
     
     /// OAuth2 client for performing operations related to the user's token.
     public let oauth2: OAuth2Client
-
+    
+    /// The ID the token is identified by within storage.
+    public lazy var id: String = { token.id }()
+    
+    /// The metadata associated with this credential.
+    ///
+    /// This property can be used to associate application-specific information with a ``Token``. This can be used to identify which token should be associated with certain parts of your application.
+    ///
+    /// > Important: Errors thrown from the setter are silently ignored. If you would like to handle errors when changing metadata, see the ``set(metadata:)`` function.
+    public var metadata: [String:String] {
+        get { _metadata }
+        set {
+            try? update(metadata: newValue)
+            _metadata = metadata
+        }
+    }
+    
+    /// Updates the metadata associated with this credential.
+    ///
+    /// This is used internally by the ``metadata`` setter, except the use of this function allows you to catch errors.
+    /// - Parameter metadata: Metadata to set.
+    public func update(metadata: [String:String]) throws {
+        guard let coordinator = coordinator else {
+            throw CredentialError.missingCoordinator
+        }
+     
+        try coordinator.tokenStorage.setMetadata(metadata, for: token.id)
+    }
+    
     /// The token this credential represents.
     @TimeSensitive<Token>
     public private(set) var token: Token
@@ -97,7 +132,8 @@ public class Credential {
     public convenience init(token: Token) {
         let urlSession = type(of: self).credentialDataSource.urlSession(for: token)
         self.init(token: token,
-                  oauth2: OAuth2Client(token.context.configuration, session: urlSession),
+                  oauth2: OAuth2Client(token.context.configuration,
+                                       session: urlSession),
                   coordinator: Credential.coordinator)
     }
     
@@ -112,7 +148,9 @@ public class Credential {
             throw CredentialError.incorrectClientConfiguration
         }
         
-        self.init(token: token, oauth2: client, coordinator: Credential.coordinator)
+        self.init(token: token,
+                  oauth2: client,
+                  coordinator: Credential.coordinator)
     }
     
     init(token: Token, oauth2 client: OAuth2Client, coordinator: CredentialCoordinator) {
@@ -131,6 +169,14 @@ public class Credential {
     fileprivate static let coordinator = CredentialCoordinatorImpl()
     internal weak var coordinator: CredentialCoordinator?
 
+    private lazy var _metadata: [String:String] = {
+        if let metadata = try? coordinator?.tokenStorage.metadata(for: token.id) {
+            return metadata
+        }
+        
+        return [:]
+    }()
+    
     private(set) internal var automaticRefreshTimer: DispatchSourceTimer?
     private func startAutomaticRefresh() {
         guard let timerSource = createAutomaticRefreshTimer() else { return }

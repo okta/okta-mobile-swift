@@ -27,32 +27,50 @@ class CredentialCoordinatorImpl: CredentialCoordinator {
         didSet {
             tokenStorage.delegate = self
             
-            if let defaultToken = tokenStorage.defaultToken {
-                _default = credentialDataSource.credential(for: defaultToken, coordinator: self)
-            } else {
-                _default = nil
-            }
+            _default = try? CredentialCoordinatorImpl.defaultCredential(
+                tokenStorage: tokenStorage,
+                credentialDataSource: credentialDataSource,
+                coordinator: self)
         }
     }
         
     private var _default: Credential?
     var `default`: Credential? {
         get { _default }
-        set { tokenStorage.defaultToken = newValue?.token }
+        set {
+            if let token = newValue?.token {
+                try? tokenStorage.add(token: token, with: token.id)
+            }
+            try? tokenStorage.setDefaultTokenID(newValue?.id)
+        }
     }
     
-    public var allCredentials: [Credential] {
-        tokenStorage.allTokens.map { credentialDataSource.credential(for: $0, coordinator: self) }
+    public var allIDs: [String] {
+        tokenStorage.allIDs
     }
+    
+    func store(token: Token, metadata: [String:String] = [:]) throws -> Credential {
+        try tokenStorage.add(token: token, with: token.id)
+        try tokenStorage.setMetadata(metadata, for: token.id)
+        return credentialDataSource.credential(for: token, coordinator: self)
+    }
+    
+    func with(id: String) throws -> Credential? {
+        credentialDataSource.credential(for: try tokenStorage.get(token: id),
+                                        coordinator: self)
+    }
+    
+    func with(token: Token) throws -> Credential {
+        if !tokenStorage.allIDs.contains(token.id) {
+            try tokenStorage.add(token: token, with: token.id)
+        }
 
-    func `for`(token: Token) -> Credential {
-        try? tokenStorage.add(token: token)
         return credentialDataSource.credential(for: token, coordinator: self)
     }
     
     func remove(credential: Credential) throws {
         credentialDataSource.remove(credential: credential)
-        try tokenStorage.remove(token: credential.token)
+        try tokenStorage.remove(id: credential.id)
     }
     
     static func defaultTokenStorage() -> TokenStorage {
@@ -67,6 +85,17 @@ class CredentialCoordinatorImpl: CredentialCoordinator {
         DefaultCredentialDataSource()
     }
     
+    static func defaultCredential(tokenStorage: TokenStorage,
+                                  credentialDataSource: CredentialDataSource,
+                                  coordinator: CredentialCoordinator) throws -> Credential?
+    {
+        if let defaultTokenId = tokenStorage.defaultTokenID {
+            let token = try tokenStorage.get(token: defaultTokenId)
+            return credentialDataSource.credential(for: token, coordinator: coordinator)
+        }
+        return nil
+    }
+    
     init(tokenStorage: TokenStorage = defaultTokenStorage(),
          credentialDataSource: CredentialDataSource = defaultCredentialDataSource())
     {
@@ -76,10 +105,11 @@ class CredentialCoordinatorImpl: CredentialCoordinator {
         self.credentialDataSource.delegate = self
         self.tokenStorage.delegate = self
 
-        if let defaultToken = tokenStorage.defaultToken {
-            _default = credentialDataSource.credential(for: defaultToken, coordinator: self)
-        }
-        
+        _default = try? CredentialCoordinatorImpl.defaultCredential(
+            tokenStorage: tokenStorage,
+            credentialDataSource: credentialDataSource,
+            coordinator: self)
+
         self.observer = NotificationCenter
             .default
             .addObserver(forName: .oauth2ClientCreated,
@@ -117,7 +147,7 @@ extension CredentialCoordinatorImpl: OAuth2ClientDelegate {
         }
 
         do {
-            try tokenStorage.replace(token: token, with: newToken)
+            try tokenStorage.replace(token: token.id, with: newToken)
         } catch {
             print("Error happened refreshing: \(error)")
         }
@@ -125,10 +155,12 @@ extension CredentialCoordinatorImpl: OAuth2ClientDelegate {
 }
 
 extension CredentialCoordinatorImpl: TokenStorageDelegate {
-    func token(storage: TokenStorage, defaultChanged token: Token?) {
-        guard _default?.token != token else { return }
+    func token(storage: TokenStorage, defaultChanged id: String?) {
+        guard _default?.id != id else { return }
 
-        if let token = token {
+        if let id = id,
+           let token = try? storage.get(token: id)
+        {
             _default = credentialDataSource.credential(for: token, coordinator: self)
         } else {
             _default = nil
@@ -138,13 +170,13 @@ extension CredentialCoordinatorImpl: TokenStorageDelegate {
                                         object: _default)
     }
     
-    func token(storage: TokenStorage, added token: Token?) {
+    func token(storage: TokenStorage, added id: String, token: Token) {
     }
     
-    func token(storage: TokenStorage, removed token: Token?) {
+    func token(storage: TokenStorage, removed id: String) {
     }
     
-    func token(storage: TokenStorage, replaced oldToken: Token, with newToken: Token) {
+    func token(storage: TokenStorage, replaced id: String, from oldToken: Token, to newToken: Token) {
         guard credentialDataSource.hasCredential(for: oldToken) else { return }
         
         // Doing nothing with this, for now...

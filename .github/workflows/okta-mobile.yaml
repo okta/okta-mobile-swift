@@ -13,8 +13,9 @@ jobs:
     name: Unit Tests on ${{ matrix.os }}
     runs-on: ${{ matrix.os }}
     strategy:
+      fail-fast: false
       matrix:
-        os: [ubuntu-latest, macos-latest]
+        os: [macos-latest]
     steps:
     - name: Get swift version
       run: swift --version
