@@ -18,7 +18,7 @@ final class UserDefaultTokenStorageTests: XCTestCase {
     var userDefaults: UserDefaults!
     var storage: UserDefaultsTokenStorage!
     
-    let token = Token(id: UUID(),
+    let token = Token(id: "TokenId",
                       issuedAt: Date(),
                       tokenType: "Bearer",
                       expiresIn: 300,
@@ -32,7 +32,7 @@ final class UserDefaultTokenStorageTests: XCTestCase {
                                                                   scopes: "openid"),
                                              clientSettings: nil))
 
-    let newToken = Token(id: UUID(),
+    let newToken = Token(id: "TokenId2",
                          issuedAt: Date(),
                          tokenType: "Bearer",
                          expiresIn: 300,

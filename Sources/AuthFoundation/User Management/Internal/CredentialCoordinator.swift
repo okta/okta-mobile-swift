@@ -45,17 +45,17 @@ class CredentialCoordinatorImpl: CredentialCoordinator {
         }
     }
     
-    public var allIDs: [UUID] {
+    public var allIDs: [String] {
         tokenStorage.allIDs
     }
     
     func store(token: Token, metadata: [String:String] = [:]) throws -> Credential {
         try tokenStorage.add(token: token, with: token.id)
-        try tokenStorage.assign(metadata: metadata, for: token.id)
+        try tokenStorage.setMetadata(metadata, for: token.id)
         return credentialDataSource.credential(for: token, coordinator: self)
     }
     
-    func with(id: UUID) throws -> Credential? {
+    func with(id: String) throws -> Credential? {
         credentialDataSource.credential(for: try tokenStorage.get(token: id),
                                         coordinator: self)
     }
@@ -155,7 +155,7 @@ extension CredentialCoordinatorImpl: OAuth2ClientDelegate {
 }
 
 extension CredentialCoordinatorImpl: TokenStorageDelegate {
-    func token(storage: TokenStorage, defaultChanged id: UUID?) {
+    func token(storage: TokenStorage, defaultChanged id: String?) {
         guard _default?.id != id else { return }
 
         if let id = id,
@@ -170,13 +170,13 @@ extension CredentialCoordinatorImpl: TokenStorageDelegate {
                                         object: _default)
     }
     
-    func token(storage: TokenStorage, added id: UUID, token: Token) {
+    func token(storage: TokenStorage, added id: String, token: Token) {
     }
     
-    func token(storage: TokenStorage, removed id: UUID) {
+    func token(storage: TokenStorage, removed id: String) {
     }
     
-    func token(storage: TokenStorage, replaced id: UUID, from oldToken: Token, to newToken: Token) {
+    func token(storage: TokenStorage, replaced id: String, from oldToken: Token, to newToken: Token) {
         guard credentialDataSource.hasCredential(for: oldToken) else { return }
         
         // Doing nothing with this, for now...

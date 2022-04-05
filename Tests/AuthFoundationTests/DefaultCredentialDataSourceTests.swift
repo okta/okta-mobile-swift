@@ -55,7 +55,7 @@ final class DefaultCredentialDataSourceTests: XCTestCase {
     func testCredentials() throws {
         XCTAssertEqual(dataSource.credentialCount, 0)
         
-        let token = Token(id: UUID(),
+        let token = Token(id: "TokenId",
                           issuedAt: Date(),
                           tokenType: "Bearer",
                           expiresIn: 300,

@@ -16,7 +16,7 @@ import AuthFoundation
 class MockTokenStorage: TokenStorage {
     var error: Error?
     
-    var defaultTokenID: UUID? {
+    var defaultTokenID: String? {
         didSet {
             if defaultTokenID != oldValue {
                 delegate?.token(storage: self, defaultChanged: defaultTokenID)
@@ -24,7 +24,7 @@ class MockTokenStorage: TokenStorage {
         }
     }
     
-    func setDefaultTokenID(_ id: UUID?) throws {
+    func setDefaultTokenID(_ id: String?) throws {
         if let error = error {
             throw error
         }
@@ -32,11 +32,11 @@ class MockTokenStorage: TokenStorage {
         defaultTokenID = id
     }
     
-    var allIDs: [UUID] { Array(allTokens.keys) }
-    private var allTokens: [UUID:Token] = [:]
-    private var metadata: [UUID:[String:String]] = [:]
+    var allIDs: [String] { Array(allTokens.keys) }
+    private var allTokens: [String:Token] = [:]
+    private var metadata: [String:[String:String]] = [:]
     
-    func add(token: Token, with id: UUID) throws {
+    func add(token: Token, with id: String) throws {
         if let error = error {
             throw error
         }
@@ -45,7 +45,7 @@ class MockTokenStorage: TokenStorage {
         delegate?.token(storage: self, added: id, token: token)
     }
     
-    func assign(metadata: [String : String], for id: UUID) throws {
+    func setMetadata(_ metadata: [String : String], for id: String) throws {
         if let error = error {
             throw error
         }
@@ -53,7 +53,7 @@ class MockTokenStorage: TokenStorage {
         self.metadata[id] = metadata
     }
     
-    func metadata(for id: UUID) throws -> [String : String] {
+    func metadata(for id: String) throws -> [String : String] {
         if let error = error {
             throw error
         }
@@ -61,7 +61,7 @@ class MockTokenStorage: TokenStorage {
         return metadata[id] ?? [:]
     }
     
-    func replace(token id: UUID, with token: Token) throws {
+    func replace(token id: String, with token: Token) throws {
         if let error = error {
             throw error
         }
@@ -69,7 +69,7 @@ class MockTokenStorage: TokenStorage {
         allTokens[id] = token
     }
     
-    func remove(id: UUID) throws {
+    func remove(id: String) throws {
         if let error = error {
             throw error
         }
@@ -78,7 +78,7 @@ class MockTokenStorage: TokenStorage {
         metadata.removeValue(forKey: id)
     }
     
-    func get(token id: UUID) throws -> Token {
+    func get(token id: String) throws -> Token {
         if let error = error {
             throw error
         }

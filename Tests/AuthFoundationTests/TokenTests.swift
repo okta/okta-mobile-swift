@@ -48,7 +48,7 @@ final class TokenTests: XCTestCase {
     }
     
     func testToken() throws {
-        let token = Token(id: UUID(),
+        let token = Token(id: "TokenId",
                           issuedAt: Date(),
                           tokenType: "Bearer",
                           expiresIn: 3600,

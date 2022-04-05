@@ -16,7 +16,7 @@ public enum TokenError: Error {
     case tokenTypeMissing(_: Token.RevokeType)
     case refreshTokenMissing
     case contextMissing
-    case tokenNotFound(id: UUID)
+    case tokenNotFound(id: String)
     case cannotReplaceToken
     case duplicateTokenAdded
 }
@@ -27,7 +27,7 @@ public class Token: Codable, Equatable, Hashable, Expires, Identifiable {
     public static var accessTokenValidator: AccessTokenValidator = DefaultAccessTokenValidator()
     
     /// The unique identifier for this token.
-    public internal(set) var id: UUID
+    public internal(set) var id: String
     
     // The date this token was issued at.
     public let issuedAt: Date?
@@ -108,7 +108,7 @@ public class Token: Codable, Equatable, Hashable, Expires, Identifiable {
         hasher.combine(deviceSecret)
     }
 
-    required init(id: UUID,
+    required init(id: String,
                   issuedAt: Date,
                   tokenType: String,
                   expiresIn: TimeInterval,
@@ -144,13 +144,13 @@ public class Token: Codable, Equatable, Hashable, Expires, Identifiable {
             throw TokenError.contextMissing
         }
 
-        let id: UUID
-        if let userInfoId = decoder.userInfo[.tokenId] as? UUID {
+        let id: String
+        if let userInfoId = decoder.userInfo[.tokenId] as? String {
             id = userInfoId
         } else if container.contains(.id) {
-            id = try container.decode(UUID.self, forKey: .id)
+            id = try container.decode(String.self, forKey: .id)
         } else {
-            id = UUID()
+            id = UUID().uuidString
         }
 
         var idToken: JWT? = nil

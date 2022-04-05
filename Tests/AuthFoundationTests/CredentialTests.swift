@@ -19,7 +19,7 @@ final class CredentialTests: XCTestCase {
     var credential: Credential!
     var urlSession: URLSessionMock!
 
-    let token = Token(id: UUID(),
+    let token = Token(id: "TokenId",
                       issuedAt: Date(),
                       tokenType: "Bearer",
                       expiresIn: 300,

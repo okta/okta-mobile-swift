@@ -51,7 +51,7 @@ public class Credential {
     }
     
     /// Lists all users currently stored within the user's application.
-    public static var allIDs: [UUID] { coordinator.allIDs }
+    public static var allIDs: [String] { coordinator.allIDs }
     
     /// The default grace interval used when refreshing tokens using ``Credential/refreshIfNeeded(graceInterval:completion:)`` or ``Credential/refreshIfNeeded(graceInterval:)``.
     ///
@@ -76,7 +76,7 @@ public class Credential {
     public let oauth2: OAuth2Client
     
     /// The ID the token is identified by within storage.
-    public lazy var id: UUID = { token.id }()
+    public lazy var id: String = { token.id }()
     
     /// The metadata associated with this credential.
     ///
@@ -100,7 +100,7 @@ public class Credential {
             throw CredentialError.missingCoordinator
         }
      
-        try coordinator.tokenStorage.assign(metadata: metadata, for: token.id)
+        try coordinator.tokenStorage.setMetadata(metadata, for: token.id)
     }
     
     /// The token this credential represents.

@@ -27,38 +27,37 @@ class UserDefaultsTokenStorage: TokenStorage {
         self.userDefaults = userDefaults
     }
     
-    private(set) lazy var defaultTokenID: UUID? = {
-        var result: UUID?
+    private(set) lazy var defaultTokenID: String? = {
         if let defaultAccessKey = userDefaults.string(forKey: UserDefaultsKeys.defaultTokenKey) {
-            result = UUID(uuidString: defaultAccessKey)
+            return defaultAccessKey
         }
-        return result
+        return nil
     }()
     
-    private lazy var allTokens: [UUID:Token] = {
+    private lazy var allTokens: [String: Token] = {
         if let data = userDefaults.data(forKey: UserDefaultsKeys.allTokensKey),
-           let result = try? JSONDecoder().decode([UUID:Token].self, from: data)
+           let result = try? JSONDecoder().decode([String:Token].self, from: data)
         {
             return result
         }
         return [:]
     }()
     
-    private lazy var metadata: [UUID:[String:String]] = {
+    private lazy var metadata: [String: [String: String]] = {
         if let data = userDefaults.data(forKey: UserDefaultsKeys.metadataKey),
-           let result = try? JSONDecoder().decode([UUID:[String:String]].self, from: data)
+           let result = try? JSONDecoder().decode([String:[String:String]].self, from: data)
         {
             return result
         }
         return [:]
     }()
     
-    func setDefaultTokenID(_ id: UUID?) throws {
+    func setDefaultTokenID(_ id: String?) throws {
         guard defaultTokenID != id else { return }
         defaultTokenID = id
         
         if let id = id {
-            userDefaults.set(id.uuidString, forKey: UserDefaultsKeys.defaultTokenKey)
+            userDefaults.set(id, forKey: UserDefaultsKeys.defaultTokenKey)
         } else {
             userDefaults.removeObject(forKey: UserDefaultsKeys.defaultTokenKey)
         }
@@ -66,11 +65,11 @@ class UserDefaultsTokenStorage: TokenStorage {
         delegate?.token(storage: self, defaultChanged: id)
     }
     
-    var allIDs: [UUID] {
+    var allIDs: [String] {
         Array(allTokens.keys)
     }
     
-    func get(token id: UUID) throws -> Token {
+    func get(token id: String) throws -> Token {
         guard let token = allTokens[id] else {
             throw TokenError.tokenNotFound(id: id)
         }
@@ -78,7 +77,7 @@ class UserDefaultsTokenStorage: TokenStorage {
         return token
     }
     
-    func add(token: Token, with id: UUID) throws {
+    func add(token: Token, with id: String) throws {
         guard !allTokens.keys.contains(id) else {
             throw TokenError.duplicateTokenAdded
         } 
@@ -98,7 +97,7 @@ class UserDefaultsTokenStorage: TokenStorage {
         }
     }
     
-    func replace(token id: UUID, with token: Token) throws {
+    func replace(token id: String, with token: Token) throws {
         guard let oldToken = allTokens[id] else {
             throw TokenError.cannotReplaceToken
         }
@@ -108,7 +107,7 @@ class UserDefaultsTokenStorage: TokenStorage {
         delegate?.token(storage: self, replaced: id, from: oldToken, to: token)
     }
     
-    func remove(id: UUID) throws {
+    func remove(id: String) throws {
         guard allTokens[id] != nil else {
             return
         }
@@ -123,13 +122,13 @@ class UserDefaultsTokenStorage: TokenStorage {
         }
     }
     
-    func assign(metadata: [String:String], for id: UUID) throws {
+    func setMetadata(_ metadata: [String:String], for id: String) throws {
         self.metadata[id] = metadata
         
         try save()
     }
     
-    func metadata(for id: UUID) throws -> [String:String] {
+    func metadata(for id: String) throws -> [String:String] {
         metadata[id] ?? [:]
     }
 

@@ -20,7 +20,7 @@ final class KeychainTokenStorageTests: XCTestCase {
     let mock = MockKeychain()
     var storage: KeychainTokenStorage!
     
-    let token = Token(id: UUID(),
+    let token = Token(id: "TokenId",
                       issuedAt: Date(),
                       tokenType: "Bearer",
                       expiresIn: 300,
@@ -65,7 +65,7 @@ final class KeychainTokenStorageTests: XCTestCase {
         // - Searching for tokens matching the same ID
         XCTAssertEqual(mock.operations[0].action, .copy)
         XCTAssertEqual(mock.operations[0].query["svce"] as? String, KeychainTokenStorage.serviceName)
-        XCTAssertEqual(mock.operations[0].query["acct"] as? String, token.id.uuidString)
+        XCTAssertEqual(mock.operations[0].query["acct"] as? String, token.id)
         XCTAssertEqual(mock.operations[0].query["m_Limit"] as? String, "m_LimitAll")
 
         // - Checking how many tokens are already registered
@@ -76,12 +76,12 @@ final class KeychainTokenStorageTests: XCTestCase {
 
         // - Preemptively deleting the newly-added token
         XCTAssertEqual(mock.operations[2].action, .delete)
-        XCTAssertEqual(mock.operations[2].query["acct"] as? String, token.id.uuidString)
+        XCTAssertEqual(mock.operations[2].query["acct"] as? String, token.id)
         XCTAssertEqual(mock.operations[2].query["svce"] as? String, KeychainTokenStorage.serviceName)
 
         // - Adding the new token
         XCTAssertEqual(mock.operations[3].action, .add)
-        XCTAssertEqual(mock.operations[3].query["acct"] as? String, token.id.uuidString)
+        XCTAssertEqual(mock.operations[3].query["acct"] as? String, token.id)
         XCTAssertEqual(mock.operations[3].query["svce"] as? String, KeychainTokenStorage.serviceName)
         let tokenQuery = mock.operations[3].query
         
@@ -98,7 +98,7 @@ final class KeychainTokenStorageTests: XCTestCase {
         // Adding the new default token ID
         XCTAssertEqual(mock.operations[6].action, .add)
         XCTAssertEqual(mock.operations[6].query["acct"] as? String, KeychainTokenStorage.defaultTokenName)
-        XCTAssertEqual(mock.operations[6].query["v_Data"] as? Data, token.id.uuidString.data(using: .utf8))
+        XCTAssertEqual(mock.operations[6].query["v_Data"] as? Data, token.id.data(using: .utf8))
 
         XCTAssertEqual(storage.defaultTokenID, token.id)
         

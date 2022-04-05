@@ -15,7 +15,7 @@ final class OAuth2ClientTests: XCTestCase {
     override func setUpWithError() throws {
         client = OAuth2Client(configuration, session: urlSession)
         
-        token = Token(id: UUID(),
+        token = Token(id: "TokenId",
                       issuedAt: Date(),
                       tokenType: "Bearer",
                       expiresIn: 300,

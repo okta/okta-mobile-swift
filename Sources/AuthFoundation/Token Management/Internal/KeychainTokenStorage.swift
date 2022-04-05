@@ -21,40 +21,37 @@ class KeychainTokenStorage: TokenStorage {
 
     weak var delegate: TokenStorageDelegate?
     
-    private(set) lazy var defaultTokenID: UUID? = {
+    private(set) lazy var defaultTokenID: String? = {
         guard let defaultResult = try? Keychain
                 .Search(account: KeychainTokenStorage.defaultTokenName)
                 .get(),
-              let uuidString = String(data: defaultResult.value, encoding: .utf8),
-              let uuid = UUID(uuidString: uuidString)
+              let id = String(data: defaultResult.value, encoding: .utf8)
         else {
             return nil
         }
         
-        return uuid
+        return id
     }()
 
-    func setDefaultTokenID(_ id: UUID?) throws {
+    func setDefaultTokenID(_ id: String?) throws {
         guard defaultTokenID != id else { return }
         defaultTokenID = id
         try saveDefault()
         delegate?.token(storage: self, defaultChanged: id)
     }
     
-    var allIDs: [UUID] {
+    var allIDs: [String] {
         let result = try? Keychain
             .Search(service: KeychainTokenStorage.serviceName)
             .list()
-            .compactMap { result -> UUID? in
-                UUID(uuidString: result.account)
-            }
+            .map { $0.account }
         
         return result ?? []
     }
     
-    func add(token: Token, with id: UUID) throws {
+    func add(token: Token, with id: String) throws {
         guard try Keychain
-                .Search(account: id.uuidString,
+                .Search(account: id,
                         service: KeychainTokenStorage.serviceName)
                 .list()
                 .isEmpty
@@ -70,7 +67,7 @@ class KeychainTokenStorage: TokenStorage {
         let data = try encoder.encode(token)
         
         // TODO: Update keychain handling to abstract ID generation, and support custom access groups, accessibility options, and to provide the ability to separate secret data and generic data.
-        let item = Keychain.Item(account: id.uuidString,
+        let item = Keychain.Item(account: id,
                                  service: KeychainTokenStorage.serviceName,
                                  accessibility: .unlocked,
                                  accessGroup: nil,
@@ -88,9 +85,9 @@ class KeychainTokenStorage: TokenStorage {
         }
     }
     
-    func replace(token id: UUID, with token: Token) throws {
+    func replace(token id: String, with token: Token) throws {
         let oldResult = try Keychain
-            .Search(account: id.uuidString,
+            .Search(account: id,
                     service: KeychainTokenStorage.serviceName)
             .get()
         
@@ -101,7 +98,7 @@ class KeychainTokenStorage: TokenStorage {
         
         let data = try encoder.encode(token)
         try Keychain
-            .Item(account: id.uuidString,
+            .Item(account: id,
                   service: KeychainTokenStorage.serviceName,
                   accessibility: .unlocked,
                   value: data)
@@ -110,15 +107,15 @@ class KeychainTokenStorage: TokenStorage {
         delegate?.token(storage: self, replaced: id, from: oldToken, to: token)
     }
     
-    func remove(id: UUID) throws {
+    func remove(id: String) throws {
         try Keychain
-            .Search(account: id.uuidString,
+            .Search(account: id,
                     service: KeychainTokenStorage.serviceName)
             .get()
             .delete()
 
         try Keychain
-            .Search(account: id.uuidString,
+            .Search(account: id,
                     service: KeychainTokenStorage.serviceName,
                     accessGroup: nil)
             .get()
@@ -131,26 +128,26 @@ class KeychainTokenStorage: TokenStorage {
         }
     }
     
-    func get(token id: UUID) throws -> Token {
+    func get(token id: String) throws -> Token {
         try token(with: try Keychain
-                    .Search(account: id.uuidString,
+                    .Search(account: id,
                             service: KeychainTokenStorage.serviceName)
                     .get())
     }
     
-    func assign(metadata: [String:String], for id: UUID) throws {
+    func setMetadata(_ metadata: [String:String], for id: String) throws {
         try Keychain
-            .Item(account: id.uuidString,
+            .Item(account: id,
                   service: KeychainTokenStorage.metadataName,
                   accessibility: .afterFirstUnlock,
                   value: try encoder.encode(metadata))
             .save()
     }
 
-    func metadata(for id: UUID) throws -> [String:String] {
+    func metadata(for id: String) throws -> [String:String] {
         try decoder.decode([String:String].self,
                            from: try Keychain
-                            .Search(account: id.uuidString,
+                            .Search(account: id,
                                     service: KeychainTokenStorage.metadataName)
                             .get()
                             .value)
@@ -167,7 +164,7 @@ class KeychainTokenStorage: TokenStorage {
     }
     
     private func saveDefault() throws {
-        if let tokenIdData = defaultTokenID?.uuidString.data(using: .utf8) {
+        if let tokenIdData = defaultTokenID?.data(using: .utf8) {
             try Keychain
                 .Item(account: KeychainTokenStorage.defaultTokenName,
                       accessibility: .afterFirstUnlock,
