@@ -17,11 +17,12 @@ import CommonCrypto
 #endif
 
 struct DefaultAccessTokenValidator: AccessTokenValidator {
+    #if !canImport(CommonCrypto)
     func validate(accessToken: String, idToken: JWT) throws {
-        #if !canImport(CommonCrypto)
         throw JWTError.signatureVerificationUnavailable
-        #endif
-
+    }
+    #else
+    func validate(accessToken: String, idToken: JWT) throws {
         guard let atHash = idToken.value(String.self, for: "at_hash")
         else {
             return
@@ -46,4 +47,5 @@ struct DefaultAccessTokenValidator: AccessTokenValidator {
             throw JWTError.signatureInvalid
         }
     }
+    #endif
 }
