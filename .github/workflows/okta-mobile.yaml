@@ -13,7 +13,6 @@ jobs:
     name: Unit Tests on ${{ matrix.os }}
     runs-on: ${{ matrix.os }}
     strategy:
-      fail-fast: false
       matrix:
         os: [macos-latest]
     steps:

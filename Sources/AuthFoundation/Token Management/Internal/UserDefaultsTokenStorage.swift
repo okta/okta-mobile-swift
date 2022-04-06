@@ -43,9 +43,9 @@ class UserDefaultsTokenStorage: TokenStorage {
         return [:]
     }()
     
-    private lazy var metadata: [String: [String: String]] = {
+    private lazy var metadata: [String: Token.Metadata] = {
         if let data = userDefaults.data(forKey: UserDefaultsKeys.metadataKey),
-           let result = try? JSONDecoder().decode([String:[String:String]].self, from: data)
+           let result = try? JSONDecoder().decode([String:Token.Metadata].self, from: data)
         {
             return result
         }
@@ -77,7 +77,9 @@ class UserDefaultsTokenStorage: TokenStorage {
         return token
     }
     
-    func add(token: Token, with id: String) throws {
+    func add(token: Token) throws {
+        let id = token.id
+        
         guard !allTokens.keys.contains(id) else {
             throw TokenError.duplicateTokenAdded
         } 
@@ -122,14 +124,18 @@ class UserDefaultsTokenStorage: TokenStorage {
         }
     }
     
-    func setMetadata(_ metadata: [String:String], for id: String) throws {
-        self.metadata[id] = metadata
+    func setMetadata(_ metadata: Token.Metadata) throws {
+        guard allIDs.contains(metadata.id) else {
+            throw TokenError.tokenNotFound(id: metadata.id)
+        }
+        
+        self.metadata[metadata.id] = metadata
         
         try save()
     }
     
-    func metadata(for id: String) throws -> [String:String] {
-        metadata[id] ?? [:]
+    func metadata(for id: String) throws -> Token.Metadata {
+        metadata[id] ?? Token.Metadata(id: id)
     }
 
     private func save() throws {

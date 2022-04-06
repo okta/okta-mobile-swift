@@ -11,7 +11,7 @@
 //
 
 import Foundation
-import AuthFoundation
+@testable import AuthFoundation
 
 class MockTokenStorage: TokenStorage {
     var error: Error?
@@ -34,31 +34,36 @@ class MockTokenStorage: TokenStorage {
     
     var allIDs: [String] { Array(allTokens.keys) }
     private var allTokens: [String:Token] = [:]
-    private var metadata: [String:[String:String]] = [:]
+    private var metadata: [String:Token.Metadata] = [:]
     
-    func add(token: Token, with id: String) throws {
+    func add(token: Token) throws {
         if let error = error {
             throw error
         }
         
+        let id = token.id
         allTokens[id] = token
         delegate?.token(storage: self, added: id, token: token)
     }
     
-    func setMetadata(_ metadata: [String : String], for id: String) throws {
+    func setMetadata(_ metadata: Token.Metadata) throws {
+        guard allIDs.contains(metadata.id) else {
+            throw TokenError.tokenNotFound(id: metadata.id)
+        }
+        
         if let error = error {
             throw error
         }
         
-        self.metadata[id] = metadata
+        self.metadata[metadata.id] = metadata
     }
     
-    func metadata(for id: String) throws -> [String : String] {
+    func metadata(for id: String) throws -> Token.Metadata {
         if let error = error {
             throw error
         }
         
-        return metadata[id] ?? [:]
+        return metadata[id] ?? Token.Metadata(id: id)
     }
     
     func replace(token id: String, with token: Token) throws {

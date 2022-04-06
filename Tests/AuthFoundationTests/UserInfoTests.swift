@@ -69,7 +69,7 @@ final class UserInfoTests: XCTestCase {
         XCTAssertEqual(info1.subject, "ABC123")
         XCTAssertEqual(info1.name, "Arthur Dent")
         
-        let info2 = try XCTUnwrap(UserInfo(rawValue: data))
+        let info2 = try XCTUnwrap(UserInfo(data))
         XCTAssertEqual(info2.subject, "ABC123")
         XCTAssertEqual(info2.name, "Arthur Dent")
         

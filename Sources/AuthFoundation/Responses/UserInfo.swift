@@ -17,16 +17,11 @@ import Foundation
 /// This provides a convenience mechanism for accessing information related to a user. It supports the ``HasClaims`` protocol, to simplify common operations against user information, and to provide consistency with the ``JWT`` class.
 ///
 /// For more information about the members to use, please refer to ``ClaimContainer``.
-public struct UserInfo: RawRepresentable, Codable, HasClaims, ClaimContainer {
-    public typealias RawValue = [String:Any]
-    public let rawValue: RawValue
+public struct UserInfo: Codable, HasClaims, ClaimContainer {
+    public let payload: [String:Any]
     
-    public init?(rawValue: RawValue) {
-        self.init(rawValue)
-    }
-    
-    public init(_ info: RawValue) {
-        self.rawValue = info
+    public init(_ info: [String:Any]) {
+        self.payload = info
     }
     
     public init(from decoder: Decoder) throws {

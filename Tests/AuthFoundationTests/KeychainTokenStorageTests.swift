@@ -58,7 +58,7 @@ final class KeychainTokenStorageTests: XCTestCase {
         // Save new defaultTokenID
         mock.expect(noErr)
         mock.expect(noErr)
-        try storage.add(token: token, with: token.id)
+        try storage.add(token: token)
         XCTAssertEqual(mock.operations.count, 7)
         
         // Adding the new token
@@ -120,7 +120,7 @@ final class KeychainTokenStorageTests: XCTestCase {
         XCTAssertEqual(storage.allIDs.count, 1)
 
         mock.expect(noErr, result: NSArray(arrayLiteral: tokenResult as CFDictionary) as CFArray)
-        XCTAssertThrowsError(try storage.add(token: token, with: token.id))
+        XCTAssertThrowsError(try storage.add(token: token))
 
         mock.expect(noErr, result: NSArray(arrayLiteral: tokenResult as CFDictionary) as CFArray)
         XCTAssertEqual(storage.allIDs.count, 1)
@@ -138,7 +138,7 @@ final class KeychainTokenStorageTests: XCTestCase {
         mock.expect(noErr)
         mock.expect(noErr)
 
-        XCTAssertNoThrow(try storage.add(token: token, with: token.id))
+        XCTAssertNoThrow(try storage.add(token: token))
 
         let tokenQuery = mock.operations[3].query
         var tokenResult = tokenQuery as! [String:Any?]
@@ -160,7 +160,7 @@ final class KeychainTokenStorageTests: XCTestCase {
         mock.expect(noErr)
         mock.expect(noErr)
 
-        try storage.add(token: token, with: token.id)
+        try storage.add(token: token)
 
         let tokenQuery = mock.operations[3].query
         var tokenResult = tokenQuery as! [String:Any?]

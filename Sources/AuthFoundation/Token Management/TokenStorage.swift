@@ -37,21 +37,21 @@ public protocol TokenStorage {
     ///
     /// This should throw ``TokenError/duplicateTokenAdded`` if the token already exists in storage.
     ///
-    /// > Note: This method should invoke the ``TokenStorageDelegate/token(storage:added:)`` delegate method.
-    func add(token: Token, with id: String) throws
+    /// > Note: This method should invoke the ``TokenStorageDelegate/token(storage:added:token:)`` delegate method.
+    func add(token: Token) throws
     
     /// Associates the given metadata with the token identified by the given ID.
-    func setMetadata(_ metadata: [String:String], for id: String) throws
+    func setMetadata(_ metadata: Token.Metadata) throws
     
     /// Returns the metadata for the given token ID.
     /// - Returns: Metadata for this token ID.
-    func metadata(for id: String) throws -> [String:String]
+    func metadata(for id: String) throws -> Token.Metadata
     
     /// Replaces an existing token with a new one.
     ///
     /// This can be used during the token refresh process, and indicates that one token is semantically the same as another. If the token being replaced is the default, the default value should be updated as well.
     ///
-    /// > Note: This method should invoke the ``TokenStorageDelegate/token(storage:replaced:with:)`` and ``TokenStorageDelegate/token(storage:defaultChanged:)`` methods as needed.
+    /// > Note: This method should invoke the ``TokenStorageDelegate/token(storage:replaced:from:to:)`` and ``TokenStorageDelegate/token(storage:defaultChanged:)`` methods as needed.
     func replace(token id: String, with token: Token) throws
 
     /// Removes the given token.
@@ -71,7 +71,7 @@ public protocol TokenStorageDelegate: AnyObject {
     
     /// Sent when a new token has been added.
     ///
-    /// > Important: This message should only be sent when a token is actually new. If the token is semantically identical to another one already in storage, the ``token(storage:replaced:with:)`` message should be sent instead.
+    /// > Important: This message should only be sent when a token is actually new. If the token is semantically identical to another one already in storage, the ``token(storage:replaced:from:to:)`` message should be sent instead.
     func token(storage: TokenStorage, added id: String, token: Token)
     
     /// Sent when a token has been removed from storage.

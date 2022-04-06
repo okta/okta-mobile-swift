@@ -67,9 +67,28 @@ public class Credential {
         try coordinator.with(token: token)
     }
     
+    /// Returns the ``Credential`` that matches the given ID.
+    /// - Parameter id: ID for the credential to return.
+    /// - Returns: Credential matching the ID.
+    public static func with(id: String) throws -> Credential? {
+        try coordinator.with(id: id)
+    }
+    
+    /// Returns a collection of ``Credential`` instances that match the given expression.
+    /// - Parameter expression: Expression used to filter the list of tokens.
+    /// - Returns: Collection of credentials.
+    public static func find(where expression: @escaping (Token.Metadata) -> Bool) throws -> [Credential] {
+        try coordinator.find(where: expression)
+    }
+    
+    /// Stores the given token for later use.
+    /// - Parameters:
+    ///   - token: Token to store.
+    ///   - tags: Optional developer-assigned tags to associate with this token.
+    /// - Returns: Credential representing this token.
     @discardableResult
-    public static func store(token: Token, metadata: [String:String] = [:]) throws -> Credential {
-        try coordinator.store(token: token, metadata: metadata)
+    public static func store(token: Token, tags: [String:String] = [:]) throws -> Credential {
+        try coordinator.store(token: token, tags: tags)
     }
     
     /// OAuth2 client for performing operations related to the user's token.
@@ -82,25 +101,27 @@ public class Credential {
     ///
     /// This property can be used to associate application-specific information with a ``Token``. This can be used to identify which token should be associated with certain parts of your application.
     ///
-    /// > Important: Errors thrown from the setter are silently ignored. If you would like to handle errors when changing metadata, see the ``set(metadata:)`` function.
-    public var metadata: [String:String] {
-        get { _metadata }
+    /// > Important: Errors thrown from the setter are silently ignored. If you would like to handle errors when changing metadata, see the ``setTags(_:)`` function.
+    public var tags: [String:String] {
+        get { _metadata.tags }
         set {
-            try? update(metadata: newValue)
-            _metadata = metadata
+            try? setTags(newValue)
         }
     }
     
     /// Updates the metadata associated with this credential.
     ///
-    /// This is used internally by the ``metadata`` setter, except the use of this function allows you to catch errors.
+    /// This is used internally by the ``tags`` setter, except the use of this function allows you to catch errors.
     /// - Parameter metadata: Metadata to set.
-    public func update(metadata: [String:String]) throws {
+    public func setTags(_ tags: [String:String]) throws {
         guard let coordinator = coordinator else {
             throw CredentialError.missingCoordinator
         }
      
-        try coordinator.tokenStorage.setMetadata(metadata, for: token.id)
+        let metadata = Token.Metadata(token: token, tags: tags)
+        try coordinator.tokenStorage.setMetadata(metadata)
+
+        _metadata = metadata
     }
     
     /// The token this credential represents.
@@ -169,12 +190,12 @@ public class Credential {
     fileprivate static let coordinator = CredentialCoordinatorImpl()
     internal weak var coordinator: CredentialCoordinator?
 
-    private lazy var _metadata: [String:String] = {
+    private lazy var _metadata: Token.Metadata = {
         if let metadata = try? coordinator?.tokenStorage.metadata(for: token.id) {
             return metadata
         }
         
-        return [:]
+        return Token.Metadata(id: id)
     }()
     
     private(set) internal var automaticRefreshTimer: DispatchSourceTimer?

@@ -4,7 +4,7 @@ The Token Exchange Flow allows a client to get the Access Token exchanging other
 
 You can create an instance of  ``TokenExchangeFlow`` either through the `resourceOwnerFlow()` method on `OAuth2Client`, or you can use any of the designated initializers to construct the flow.
 
-As an example, we'll use Swift Concurrency, since these asynchronous methods can be used inline easily, though ``TokenExchangeFlow`` can just as easily be used with completion blocks or through the use of the ``AuthenticationDelegate``.
+As an example, we'll use Swift Concurrency, since these asynchronous methods can be used inline easily, though ``TokenExchangeFlow`` can just as easily be used with completion blocks or through the use of the `AuthenticationDelegate`.
 
 ```swift
 let flow = TokenExchangeFlow(

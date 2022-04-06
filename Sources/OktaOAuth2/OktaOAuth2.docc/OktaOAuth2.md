@@ -28,9 +28,7 @@ You can use OktaOAuth2 when you want to:
 ### Token Exchange Flow
 
 - ``TokenExchangeFlow``
-- ``AuthenticationDelegate``
 
 ### Resource Owner Flow
 
 - ``ResourceOwnerFlow``
-- ``AuthenticationDelegate``

@@ -51,7 +51,7 @@ public class TokenExchangeFlow: AuthenticationFlow {
         }
     }
 
-    /// Collection of the ``AuthenticationDelegate`` objects.
+    /// Collection of the `AuthenticationDelegate` objects.
     public let delegateCollection = DelegateCollection<AuthenticationDelegate>()
     
     /// Convenience initializer to construct a flow from variables.

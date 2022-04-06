@@ -16,7 +16,7 @@ import Foundation
 ///
 /// This can be used to customize the behavior of how dates and times are calculated, when used on devices that may have skewed or incorrect clocks.
 ///
-/// To use a custom ``TimeCoordintator``, you construct an instance of your class conforming to this protocol, and assign it to the ``Date.coordinator`` property.
+/// To use a custom ``TimeCoordinator``, you construct an instance of your class conforming to this protocol, and assign it to the `Date.coordinator` property.
 public protocol TimeCoordinator {
     /// Return the current coordinated date.
     var now: Date { get }

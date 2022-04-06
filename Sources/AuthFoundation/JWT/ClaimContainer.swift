@@ -16,13 +16,13 @@ import Foundation
 ///
 /// > Note: This does not apply to JWT, which while it contains claims, it has a different format which includes headers and signatures.
 public protocol ClaimContainer: JSONDecodable {
-    var rawValue: [String:Any] { get }
+    var payload: [String:Any] { get }
 }
 
 extension ClaimContainer {
     public func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: JSONCodingKeys.self)
-        try rawValue
+        try payload
             .compactMap { (key: String, value: Any) in
                 guard let key = JSONCodingKeys(stringValue: key) else { return nil }
                 return (key, value)
@@ -44,17 +44,17 @@ extension ClaimContainer {
 
     /// Returns the list of all claims contained within this ``UserInfo``.
     public var claims: [Claim] {
-        rawValue.keys.compactMap { Claim(rawValue: $0) }
+        payload.keys.compactMap { Claim(rawValue: $0) }
     }
     
     /// Returns the list of custom claims this instance might contain.
     public var customClaims: [String] {
-        rawValue.keys.filter { Claim(rawValue: $0) == nil }
+        payload.keys.filter { Claim(rawValue: $0) == nil }
     }
     
     /// Returns the value for the supplied key, of the expected type.
     /// - Returns: Value, or `nil` if the key doesn't exist, or is of a different value.
     public func value<T>(_ type: T.Type, for key: String) -> T? {
-        rawValue[key] as? T
+        payload[key] as? T
     }
 }

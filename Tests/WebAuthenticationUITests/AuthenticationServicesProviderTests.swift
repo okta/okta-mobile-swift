@@ -19,6 +19,7 @@ import XCTest
 @testable import WebAuthenticationUI
 import AuthenticationServices
 
+@available(iOS 13.0, *)
 class MockAuthenticationServicesProviderSession: AuthenticationServicesProviderSession {
     let url: URL
     let callbackURLScheme: String?
@@ -57,13 +58,14 @@ class MockAuthenticationServicesProviderSession: AuthenticationServicesProviderS
     }
 }
 
+@available(iOS 13.0, *)
 class TestAuthenticationServicesProvider: AuthenticationServicesProvider {
     override func createSession(url: URL, callbackURLScheme: String?, completionHandler: @escaping ASWebAuthenticationSession.CompletionHandler) -> AuthenticationServicesProviderSession {
         MockAuthenticationServicesProviderSession(url: url, callbackURLScheme: callbackURLScheme, completionHandler: completionHandler)
     }
 }
 
-@available(iOS 12.0, *)
+@available(iOS 13.0, *)
 class AuthenticationServicesProviderTests: ProviderTestBase {
     var provider: AuthenticationServicesProvider!
     

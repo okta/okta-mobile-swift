@@ -23,7 +23,7 @@ let token = try await auth.signIn()
 
 ## Customizing the Authorization URL through Delegation
 
-The ``WebAuthentication`` class exposes the underlying OAuth2 flow through the ``WebAuthentication/flow`` property. The authentication flows, defined within the OktaOAuth2 SDK, all support a multicast delegate mechanism to notify other parts of the SDK as well as your application of important events.
+The ``WebAuthentication`` class exposes the underlying OAuth2 flow through the ``WebAuthentication/signInFlow`` property. The authentication flows, defined within the OktaOAuth2 SDK, all support a multicast delegate mechanism to notify other parts of the SDK as well as your application of important events.
 
 If your code conforms to the `AuthorizationCodeFlowDelegate` protocol, and implements the `authentication(flow:customizeUrl:)` method, you can alter the URL before it is loaded in the browser.
 

@@ -172,35 +172,6 @@ public class Token: Codable, Equatable, Hashable, Expires, Identifiable {
 }
 
 extension Token {
-    /// Summarizes the context in which a token is valid.
-    ///
-    /// This includes information such as the client configuration or settings required for token refresh.
-    public struct Context: Codable, Equatable, Hashable {
-        /// The base URL from which this token was issued.
-        public let configuration: OAuth2Client.Configuration
-        
-        /// Settings required to be supplied to the authorization server when refreshing this token.
-        let clientSettings: [String:String]?
-        
-        init(configuration: OAuth2Client.Configuration, clientSettings: Any?) {
-            self.configuration = configuration
-            
-            if let settings = clientSettings as? [String:String]? {
-                self.clientSettings = settings
-            }
-            
-            else if let settings = clientSettings as? [CodingUserInfoKey: String] {
-                self.clientSettings = settings.reduce(into: [String:String]()) { (partialResult, tuple: (key: CodingUserInfoKey, value: String)) in
-                    partialResult[tuple.key.rawValue] = tuple.value
-                }
-            } else {
-                self.clientSettings = nil
-            }
-        }
-    }
-}
-
-extension Token {
     enum CodingKeys: String, CodingKey, CaseIterable {
         case id
         case issuedAt
@@ -219,33 +190,4 @@ extension CodingUserInfoKey {
     public static let tokenId = CodingUserInfoKey(rawValue: "tokenId")!
     public static let apiClientConfiguration = CodingUserInfoKey(rawValue: "apiClientConfiguration")!
     public static let clientSettings = CodingUserInfoKey(rawValue: "clientSettings")!
-}
-
-public extension Token {
-    /// The possible token types that can be revoked.
-    enum RevokeType {
-        /// Indicates the access token should be revoked.
-        case accessToken
-        
-        /// Indicates the refresh token should be revoked, if one is present. This will result in the access token being revoked as well.
-        case refreshToken
-        
-        /// Indicates the device secret should be revoked.
-        case deviceSecret
-    }
-    
-    /// The kind of access token an operation should be used with.
-    enum Kind: String {
-        /// Indicates the access token.
-        case accessToken = "access_token"
-        
-        /// Indicates the refresh token.
-        case refreshToken = "refresh_token"
-        
-        /// Indicates the ID token.
-        case idToken = "id_token"
-        
-        /// Indicates the device secret.
-        case deviceSecret = "device_secret"
-    }
 }

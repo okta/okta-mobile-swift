@@ -15,7 +15,7 @@ import AuthFoundation
 
 /// The delegate of ``DeviceAuthorizationFlow`` may adopt some, or all, of the methods described here. These allow a developer to customize or interact with the authentication flow during authentication.
 ///
-/// This protocol extends the basic ``AuthenticationDelegate`` which all authentication flows support.
+/// This protocol extends the basic `AuthenticationDelegate` which all authentication flows support.
 public protocol DeviceAuthorizationFlowDelegate: AuthenticationDelegate {
     /// Called before authentication begins.
     /// - Parameters:
@@ -44,7 +44,7 @@ public protocol DeviceAuthorizationFlowDelegate: AuthenticationDelegate {
 ///
 /// Upon visiting that URL and entering in the code, the user is prompted to sign in using their standard credentials. Upon completing authentication, the device automatically signs the user in, without any direct interaction on the user's part.
 ///
-/// You can create an instance of  ``DeviceAuthorizationFlow/Configuration-swift.struct`` to define your client's settings, and supply that to the initializer, along with a reference to your OAuth2Client for performing key operations and requests. Alternatively, you can use any of the convenience initializers to simplify the process.
+/// You can create an instance of  ``DeviceAuthorizationFlow`` with your client's settings, and supply that to the initializer, along with a reference to your OAuth2Client for performing key operations and requests. Alternatively, you can use any of the convenience initializers to simplify the process.
 ///
 /// As an example, we'll use Swift Concurrency, since these asynchronous methods can be used inline easily, though ``DeviceAuthorizationFlow`` can just as easily be used with completion blocks or through the use of the ``DeviceAuthorizationFlowDelegate``.
 ///
