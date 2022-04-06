@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder.AppleTV.Storyboard" version="3.0" toolsVersion="19455" targetRuntime="AppleTV" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="oRr-3h-6T8">
+<document type="com.apple.InterfaceBuilder.AppleTV.Storyboard" version="3.0" toolsVersion="20037" targetRuntime="AppleTV" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="oRr-3h-6T8">
     <device id="appleTV" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19454"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="20020"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -11,7 +11,7 @@
         <!--View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController storyboardIdentifier="SignIn" id="BYZ-38-t0r" customClass="ViewController" customModule="DeviceAuthSignIn" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="SignIn" id="BYZ-38-t0r" customClass="ViewController" customModule="Device_Auth_Sign_In" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="y3c-jy-aDJ"/>
                         <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
@@ -20,31 +20,48 @@
                         <rect key="frame" x="0.0" y="0.0" width="1920" height="1080"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="75" translatesAutoresizingMaskIntoConstraints="NO" id="5Zh-DX-AJv">
-                                <rect key="frame" x="480" y="283" width="960" height="514"/>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="64" translatesAutoresizingMaskIntoConstraints="NO" id="5Zh-DX-AJv">
+                                <rect key="frame" x="240" y="298" width="1440" height="484"/>
                                 <subviews>
                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Logo" translatesAutoresizingMaskIntoConstraints="NO" id="PLU-Ft-Oif">
-                                        <rect key="frame" x="0.0" y="0.0" width="960" height="120"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="1440" height="120"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="120" id="t5V-bc-lWh"/>
                                         </constraints>
                                     </imageView>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="To sign in, visit blah/login and enter the following code:" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fB6-bM-vlw">
-                                        <rect key="frame" x="0.0" y="195" width="960" height="148"/>
-                                        <color key="tintColor" red="0.2101677130450087" green="0.69467155936939684" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                        <fontDescription key="fontDescription" type="system" weight="thin" pointSize="62"/>
-                                        <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="123 ASD" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YFs-sG-4B5">
-                                        <rect key="frame" x="0.0" y="418" width="960" height="96"/>
-                                        <fontDescription key="fontDescription" type="system" weight="medium" pointSize="80"/>
-                                        <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                        <nil key="highlightedColor"/>
-                                        <variation key="userInterfaceStyle=dark">
-                                            <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                        </variation>
-                                    </label>
+                                    <stackView opaque="NO" contentMode="scaleToFill" alignment="center" spacing="128" translatesAutoresizingMaskIntoConstraints="NO" id="59y-OR-DY1">
+                                        <rect key="frame" x="0.0" y="184" width="1440" height="300"/>
+                                        <subviews>
+                                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="32" translatesAutoresizingMaskIntoConstraints="NO" id="8zu-0F-p7g">
+                                                <rect key="frame" x="0.0" y="12" width="1012" height="276"/>
+                                                <subviews>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Visit blah/login and enter the following code:" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fB6-bM-vlw">
+                                                        <rect key="frame" x="0.0" y="0.0" width="1012" height="148"/>
+                                                        <color key="tintColor" red="0.2101677130450087" green="0.69467155936939684" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                        <fontDescription key="fontDescription" type="system" weight="thin" pointSize="62"/>
+                                                        <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                        <nil key="highlightedColor"/>
+                                                    </label>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="123 ASD" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsLetterSpacingToFitWidth="YES" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YFs-sG-4B5">
+                                                        <rect key="frame" x="0.0" y="180" width="1012" height="96"/>
+                                                        <fontDescription key="fontDescription" type="system" weight="medium" pointSize="80"/>
+                                                        <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                        <nil key="highlightedColor"/>
+                                                        <variation key="userInterfaceStyle=dark">
+                                                            <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                        </variation>
+                                                    </label>
+                                                </subviews>
+                                            </stackView>
+                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="zE6-mg-Qri">
+                                                <rect key="frame" x="1140" y="0.0" width="300" height="300"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" constant="300" id="j8w-Cr-hnj"/>
+                                                    <constraint firstAttribute="width" secondItem="zE6-mg-Qri" secondAttribute="height" multiplier="1:1" id="sre-Cj-uk2"/>
+                                                </constraints>
+                                            </imageView>
+                                        </subviews>
+                                    </stackView>
                                 </subviews>
                             </stackView>
                             <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" animating="YES" style="large" translatesAutoresizingMaskIntoConstraints="NO" id="8hd-aF-Cns">
@@ -58,7 +75,7 @@
                             <constraint firstItem="5Zh-DX-AJv" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="ELy-Uf-5Ti"/>
                             <constraint firstItem="8hd-aF-Cns" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="MVM-4J-kKH"/>
                             <constraint firstItem="5Zh-DX-AJv" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="RGh-KI-vXp"/>
-                            <constraint firstItem="5Zh-DX-AJv" firstAttribute="width" secondItem="8bC-Xf-vdC" secondAttribute="width" multiplier="0.5" id="nNE-ld-X5E"/>
+                            <constraint firstItem="5Zh-DX-AJv" firstAttribute="width" secondItem="8bC-Xf-vdC" secondAttribute="width" multiplier="0.75" id="nNE-ld-X5E"/>
                         </constraints>
                         <variation key="userInterfaceStyle=dark">
                             <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -66,6 +83,7 @@
                     </view>
                     <connections>
                         <outlet property="activityIndicator" destination="8hd-aF-Cns" id="w76-Nx-5HT"/>
+                        <outlet property="codeImageView" destination="zE6-mg-Qri" id="dtQ-de-0Ca"/>
                         <outlet property="codeLabel" destination="YFs-sG-4B5" id="KNM-OB-VRq"/>
                         <outlet property="codeStackView" destination="5Zh-DX-AJv" id="cGt-jR-xOt"/>
                         <outlet property="urlPromptLabel" destination="fB6-bM-vlw" id="kIL-sQ-MZ4"/>
@@ -78,7 +96,7 @@
         <!--User Profile-->
         <scene sceneID="HRB-ag-Era">
             <objects>
-                <tableViewController title="User Profile" id="qiX-gn-sxu" customClass="ProfileTableViewController" customModule="DeviceAuthSignIn" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController title="User Profile" id="qiX-gn-sxu" customClass="ProfileTableViewController" customModule="Device_Auth_Sign_In" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="-1" sectionHeaderHeight="7" sectionFooterHeight="7" id="5qT-sd-nly">
                         <rect key="frame" x="0.0" y="0.0" width="1920" height="1080"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -201,7 +219,7 @@
         <!--Token Details-->
         <scene sceneID="b92-Pg-DWQ">
             <objects>
-                <viewController title="Token Details" id="rzu-MW-L2K" customClass="TokenDetailViewController" customModule="DeviceAuthSignIn" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController title="Token Details" id="rzu-MW-L2K" customClass="TokenDetailViewController" customModule="Device_Auth_Sign_In" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="3Va-Yv-bB7"/>
                         <viewControllerLayoutGuide type="bottom" id="cSe-oa-8n7"/>
