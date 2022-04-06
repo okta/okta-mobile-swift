@@ -55,20 +55,23 @@ This SDK is being actively developed and is in Beta release status. At this time
 * Suggestions for future development;
 * Any other comments or feedback on this new direction.
 
-### Feature roadmap
+### Key Features
 
-| Feature | Status |
-| ------- | ------ |
-| Login and logout via web redirect | ✅ |
-| Credential management | ✅ |
-| Secure token storage | ✅ |
-| Native SSO / Token Exchange Flow | ✅ |
-| Device Authorization Grant Flow | ✅ |
-| Resource Owner Flow | ✅ |
-| Automatically authorized URLSessionConfiguration for authorizing requests | ✅ |
-| Time synchronization via NTP | 🚧 |
-| Advanced logging and tracing | 🚧 |
-| Transparent upgrades from okta-oidc-ios | 🚧 |
+Several key features and capabilities are introduced with this library, with some notable improvements listed below.
+
+| Feature |
+| ------- |
+| Simple OIDC web-based sign in |
+| Credential management (secure storage, retrieval, etc) |
+| Multi-token handling (store and use tokens for multiple users, scopes, etc) |
+| Authorization Code Flow |
+| Native SSO / Token Exchange Flow |
+| Device Authorization Grant Flow |
+| Resource Owner Flow |
+| Simple JWT parsing and handling |
+| Streamlined authorization of URLSession requests using credential tokens |
+| Automatic time synchronization |
+| Many extension points for customizability, monitoring, and tracking |
 
 ## Getting Started
 
