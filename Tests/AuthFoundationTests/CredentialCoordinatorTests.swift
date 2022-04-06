@@ -50,11 +50,11 @@ final class UserCoordinatorTests: XCTestCase {
     }
     
     override func tearDownWithError() throws {
-        userDefaults.removePersistentDomain(forName: #file)
+        userDefaults.removePersistentDomain(forName: name)
     }
     
     func testDefaultCredentialViaToken() throws {
-        try storage.add(token: token, with: token.id)
+        try storage.add(token: token)
 
         XCTAssertEqual(storage.allIDs.count, 1)
         

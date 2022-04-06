@@ -55,11 +55,11 @@ final class UserDefaultTokenStorageTests: XCTestCase {
     }
     
     override func tearDownWithError() throws {
-        userDefaults.removePersistentDomain(forName: #file)
+        userDefaults.removePersistentDomain(forName: name)
     }
     
     func testDefaultToken() throws {
-        try storage.add(token: token, with: token.id)
+        try storage.add(token: token)
         XCTAssertEqual(storage.allIDs.count, 1)
         XCTAssertEqual(storage.defaultTokenID, token.id)
         
@@ -67,7 +67,7 @@ final class UserDefaultTokenStorageTests: XCTestCase {
         XCTAssertNil(storage.defaultTokenID)
         XCTAssertEqual(storage.allIDs.count, 1)
    
-        XCTAssertThrowsError(try storage.add(token: token, with: token.id))
+        XCTAssertThrowsError(try storage.add(token: token))
         XCTAssertEqual(storage.allIDs.count, 1)
         
         XCTAssertNoThrow(try storage.replace(token: token.id, with: newToken))
@@ -83,14 +83,14 @@ final class UserDefaultTokenStorageTests: XCTestCase {
     func testImplicitDefaultToken() throws {
         XCTAssertNil(storage.defaultTokenID)
         
-        XCTAssertNoThrow(try storage.add(token: token, with: token.id))
+        XCTAssertNoThrow(try storage.add(token: token))
         XCTAssertEqual(storage.allIDs.count, 1)
 
         XCTAssertEqual(storage.defaultTokenID, token.id)
     }
 
     func testRemoveDefaultToken() throws {
-        try storage.add(token: token, with: token.id)
+        try storage.add(token: token)
         try storage.setDefaultTokenID(token.id)
         XCTAssertEqual(storage.allIDs.count, 1)
 

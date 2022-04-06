@@ -38,14 +38,14 @@ public protocol TokenStorage {
     /// This should throw ``TokenError/duplicateTokenAdded`` if the token already exists in storage.
     ///
     /// > Note: This method should invoke the ``TokenStorageDelegate/token(storage:added:)`` delegate method.
-    func add(token: Token, with id: String) throws
+    func add(token: Token) throws
     
     /// Associates the given metadata with the token identified by the given ID.
-    func setMetadata(_ metadata: [String:String], for id: String) throws
+    func setMetadata(_ metadata: Token.Metadata) throws
     
     /// Returns the metadata for the given token ID.
     /// - Returns: Metadata for this token ID.
-    func metadata(for id: String) throws -> [String:String]
+    func metadata(for id: String) throws -> Token.Metadata
     
     /// Replaces an existing token with a new one.
     ///

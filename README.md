@@ -149,6 +149,63 @@ func signIn() async {
 
 The `signIn(from:)` function returns a token and, by using the `Credential` class, you can save the token and use it within your application.
 
+### Authentication using Device Code-Flow Grant
+
+For headless devices, or devices that are difficult to use a keyboard (e.g. AppleTV), your application can use OktaOAuth2 directly with the `DeviceAuthorizationFlow` class. This will enable you to present a easy to remember code to your user, which they can use on a different device to authorize your application.
+
+Using this is simple:
+
+1. Create an instance of `DeviceAuthorizationFlow`
+
+```swift
+let flow = DeviceAuthorizationFlow(
+    issuer: URL(string: "https://example.okta.com")!,
+    clientId: "abc123client",
+    scopes: "openid offline_access email profile")
+```
+
+2. Start an authentication session to receive the code and authorize URL to present to your user.
+
+```swift
+let context = try await flow.resume()
+let code = context.userCode
+let uri = context.verificationUri
+```
+
+3. Wait for the user to authorize the application from another device.
+
+```swift
+let token = try await flow.resume(with: context)
+```
+
+### Authentication using Native SSO flow
+
+When using the `device_sso` scope, your application can receive a "device secret", which can be used in combination with your user's ID token to exchange new credentials. To use this within your application, you would use the `TokenExchangeFlow` to exchange those sets of tokens.
+
+```swift
+let flow = TokenExchangeFlow(
+    issuer: URL(string: "https://example.okta.com")!,
+    clientId: "abc123client",
+    scopes: "openid offline_access email profile",
+    audience: .default)
+
+let token = try await flow.resume(with: [
+    .actor(type: .deviceSecret, value: "DeviceToken"),
+    .subject(type: .idToken, value: "IDToken")
+])
+```
+
+### Authentication with Username/Password
+
+For simple authentication use-cases, you can use the `ResourceOwnerFlow` class to authenticate with a plain username and password.
+
+```swift
+let flow = ResourceOwnerFlow(issuer: URL(string: "https://example.okta.com")!,
+                             clientId: "abc123client",
+                             scopes: "openid offline_access email profile")
+let token = try await flow.resume(username: "jane.doe", password: "secretPassword")
+```
+
 ## Support Policy
 
 This policy defines the extent of the support for Xcode, Swift, and platform (iOS, macOS, tvOS, and watchOS) versions.

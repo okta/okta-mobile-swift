@@ -49,7 +49,9 @@ class KeychainTokenStorage: TokenStorage {
         return result ?? []
     }
     
-    func add(token: Token, with id: String) throws {
+    func add(token: Token) throws {
+        let id = token.id
+        
         guard try Keychain
                 .Search(account: id,
                         service: KeychainTokenStorage.serviceName)
@@ -135,17 +137,21 @@ class KeychainTokenStorage: TokenStorage {
                     .get())
     }
     
-    func setMetadata(_ metadata: [String:String], for id: String) throws {
+    func setMetadata(_ metadata: Token.Metadata) throws {
+        guard allIDs.contains(metadata.id) else {
+            throw TokenError.tokenNotFound(id: metadata.id)
+        }
+        
         try Keychain
-            .Item(account: id,
+            .Item(account: metadata.id,
                   service: KeychainTokenStorage.metadataName,
                   accessibility: .afterFirstUnlock,
                   value: try encoder.encode(metadata))
             .save()
     }
 
-    func metadata(for id: String) throws -> [String:String] {
-        try decoder.decode([String:String].self,
+    func metadata(for id: String) throws -> Token.Metadata {
+        try decoder.decode(Token.Metadata.self,
                            from: try Keychain
                             .Search(account: id,
                                     service: KeychainTokenStorage.metadataName)

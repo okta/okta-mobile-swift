@@ -71,7 +71,7 @@ final class TokenInfoTests: XCTestCase {
         let info1 = TokenInfo(data)
         XCTAssertFalse(info1.active ?? true)
         
-        let info2 = try XCTUnwrap(TokenInfo(rawValue: data))
+        let info2 = try XCTUnwrap(TokenInfo(data))
         XCTAssertFalse(info2.active ?? true)
         
         XCTAssertEqual(info1.allClaims, info2.allClaims)

@@ -39,7 +39,7 @@ class CredentialCoordinatorImpl: CredentialCoordinator {
         get { _default }
         set {
             if let token = newValue?.token {
-                try? tokenStorage.add(token: token, with: token.id)
+                try? tokenStorage.add(token: token)
             }
             try? tokenStorage.setDefaultTokenID(newValue?.id)
         }
@@ -49,9 +49,9 @@ class CredentialCoordinatorImpl: CredentialCoordinator {
         tokenStorage.allIDs
     }
     
-    func store(token: Token, metadata: [String:String] = [:]) throws -> Credential {
-        try tokenStorage.add(token: token, with: token.id)
-        try tokenStorage.setMetadata(metadata, for: token.id)
+    func store(token: Token, tags: [String:String] = [:]) throws -> Credential {
+        try tokenStorage.add(token: token)
+        try tokenStorage.setMetadata(Token.Metadata(token: token, tags: tags))
         return credentialDataSource.credential(for: token, coordinator: self)
     }
     
@@ -60,9 +60,20 @@ class CredentialCoordinatorImpl: CredentialCoordinator {
                                         coordinator: self)
     }
     
+    func find(where expression: @escaping (Token.Metadata) -> Bool) throws -> [Credential] {
+        try allIDs
+            .map({ id in
+                try self.tokenStorage.metadata(for: id)
+            })
+            .filter(expression)
+            .compactMap({ metadata in
+                try self.with(id: metadata.id)
+            })
+    }
+    
     func with(token: Token) throws -> Credential {
         if !tokenStorage.allIDs.contains(token.id) {
-            try tokenStorage.add(token: token, with: token.id)
+            try tokenStorage.add(token: token)
         }
 
         return credentialDataSource.credential(for: token, coordinator: self)

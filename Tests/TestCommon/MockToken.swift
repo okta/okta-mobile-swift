@@ -23,8 +23,8 @@ extension Token {
 
     static let simpleMockToken = mockToken()
     
-    static func mockToken(issuedOffset: TimeInterval = 0, expiresIn: TimeInterval = 3600) -> Token {
-        Token(id: "TokenId",
+    static func mockToken(id: String = "TokenId", issuedOffset: TimeInterval = 0, expiresIn: TimeInterval = 3600) -> Token {
+        Token(id: id,
               issuedAt: Date(timeIntervalSinceNow: -issuedOffset),
               tokenType: "Bearer",
               expiresIn: expiresIn,
