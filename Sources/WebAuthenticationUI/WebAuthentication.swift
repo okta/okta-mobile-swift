@@ -53,7 +53,7 @@ public enum WebAuthenticationError: Error {
 /// let token = try await WebAuthentication.shared.signIn(from: view.window)
 /// ```
 ///
-/// To customize the authentication flow, please read more about the underlying OAuth2 client within the OktaOAuth2 library, and how that relates to the ``flow`` property.
+/// To customize the authentication flow, please read more about the underlying OAuth2 client within the OktaOAuth2 library, and how that relates to the ``signInFlow`` or ``signOutFlow`` properties.
 ///
 ///  > Important: If your application targets iOS 9.x-10.x, you should add the redirect URI for your client configuration to your app's supported URL schemes.  This is because users on devices older than iOS 11 will be prompted to sign in using `SFSafariViewController`, which does not allow your application to detect the final token redirect.
 public class WebAuthentication {
@@ -126,7 +126,7 @@ public class WebAuthentication {
         signOut(from: window, token: token, completion: completion)
     }
     
-    /// Starts log-out using the ``Token`` object.
+    /// Starts log-out using the `Token` object.
     /// - Parameters:
     ///   - window: Window from which the sign in process will be started.
     ///   - token: Token object that will retrieve the ID token.
@@ -374,7 +374,7 @@ extension WebAuthentication {
         }
     }
     
-    /// Asynchronous convenience method that initiates log-out using the ``Token`` object, throwing the error if fails.
+    /// Asynchronous convenience method that initiates log-out using the `Token` object, throwing the error if fails.
     /// - Parameters:
     ///   - window: Window from which the sign in process will be started.
     ///   - token: Token object that will retrieve the ID token.

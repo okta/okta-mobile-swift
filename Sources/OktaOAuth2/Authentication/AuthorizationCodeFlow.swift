@@ -15,7 +15,7 @@ import AuthFoundation
 
 /// The delegate of a ``AuthorizationCodeFlow`` may adopt some, or all, of the methods described here. These allow a developer to customize or interact with the authentication flow during authentication.
 ///
-/// This protocol extends the basic ``AuthenticationDelegate`` which all authentication flows support.
+/// This protocol extends the basic `AuthenticationDelegate` which all authentication flows support.
 public protocol AuthorizationCodeFlowDelegate: AuthenticationDelegate {
     /// Called before authentication begins.
     /// - Parameters:
@@ -46,7 +46,7 @@ public protocol AuthorizationCodeFlowDelegate: AuthenticationDelegate {
 ///
 /// The Authorization Code Flow permits a user to authenticate using a web browser redirect model, where an initial authentication URL is loaded in a browser, they sign in through some external service, after which their browser is redirected to a URL whose scheme matches the one defined in the client configuration. An authorization code is included in that URL's query string parameters. This code can then be exchanged against the authorization server for access tokens.
 ///
-/// You can create an instance of  ``AuthorizationCodeFlow/Configuration-swift.struct`` to define your client's settings, and supply that to the initializer, along with a reference to your OAuth2Client for performing key operations and requests. Alternatively, you can use any of the convenience initializers to simplify the process.
+/// You can create an instance of  ``AuthorizationCodeFlow`` with your client settings, along with the matching `OAuth2Client` for performing key operations and requests. Alternatively, you can use any of the convenience initializers to simplify the process.
 ///
 /// As an example, we'll use Swift Concurrency, since these asynchronous methods can be used inline easily, though ``AuthorizationCodeFlow`` can just as easily be used with completion blocks or through the use of the ``AuthorizationCodeFlowDelegate``.
 ///
@@ -68,7 +68,7 @@ public protocol AuthorizationCodeFlowDelegate: AuthenticationDelegate {
 public class AuthorizationCodeFlow: AuthenticationFlow {
     /// A model representing the context and current state for an authorization session.
     public struct Context: Equatable {
-        /// The ``PKCE`` credentials to use in the authorization request.
+        /// The `PKCE` credentials to use in the authorization request.
         ///
         /// This value may be `nil` on platforms that do not support PKCE.
         public let pkce: PKCE?
@@ -218,7 +218,7 @@ public class AuthorizationCodeFlow: AuthenticationFlow {
     
     /// Continues an authentication flow using the given authentication redirect URI.
     ///
-    /// Once the user completes authorization, using the URL provided by the ``resume(with:completion:)-uy9b`` method within a browser, the browser will redirect to a URL that matches the scheme provided in the client configuration's ``Configuration-swift.struct/redirectUri``. This URI will contain either an error response from the authorization server, or an authorization code which can be used to exchange a token.
+    /// Once the user completes authorization, using the URL provided by the ``resume(with:completion:)-uy9b`` method within a browser, the browser will redirect to a URL that matches the scheme provided in the client configuration's ``redirectUri``. This URI will contain either an error response from the authorization server, or an authorization code which can be used to exchange a token.
     ///
     /// This method takes the returned redirect URI, and communicates with Okta to exchange that for a token.
     /// - Parameters:
@@ -292,7 +292,7 @@ extension AuthorizationCodeFlow {
     
     /// Asynchronously continues an authentication flow using the given authentication redirect URI, using Swift Concurrency.
     ///
-    /// Once the user completes authorization, using the URL provided by the ``resume(with:)-10rbh`` method within a browser, the browser will redirect to a URL that matches the scheme provided in the client configuration's ``Configuration-swift.struct/redirectUri``. This URI will contain either an error response from the authorization server, or an authorization code which can be used to exchange a token.
+    /// Once the user completes authorization, using the URL provided by the ``resume(with:)-10rbh`` method within a browser, the browser will redirect to a URL that matches the scheme provided in the client configuration's ``redirectUri``. This URI will contain either an error response from the authorization server, or an authorization code which can be used to exchange a token.
     ///
     /// This method takes the returned redirect URI, and communicates with Okta to exchange that for a token.
     /// - Parameters:
