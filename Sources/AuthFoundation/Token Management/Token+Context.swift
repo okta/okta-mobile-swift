@@ -21,17 +21,17 @@ extension Token {
         public let configuration: OAuth2Client.Configuration
         
         /// Settings required to be supplied to the authorization server when refreshing this token.
-        let clientSettings: [String:String]?
+        let clientSettings: [String: String]?
         
         init(configuration: OAuth2Client.Configuration, clientSettings: Any?) {
             self.configuration = configuration
             
-            if let settings = clientSettings as? [String:String]? {
+            if let settings = clientSettings as? [String: String]? {
                 self.clientSettings = settings
             }
             
             else if let settings = clientSettings as? [CodingUserInfoKey: String] {
-                self.clientSettings = settings.reduce(into: [String:String]()) { (partialResult, tuple: (key: CodingUserInfoKey, value: String)) in
+                self.clientSettings = settings.reduce(into: [String: String]()) { (partialResult, tuple: (key: CodingUserInfoKey, value: String)) in
                     partialResult[tuple.key.rawValue] = tuple.value
                 }
             } else {

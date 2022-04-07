@@ -101,25 +101,25 @@ public class OAuth2Client {
     public let configuration: Configuration
     
     /// Additional HTTP headers to include in outgoing network requests.
-    public var additionalHttpHeaders: [String:String]? = nil
+    public var additionalHttpHeaders: [String: String]? = nil
     
     /// The OpenID configuration for this org.
     ///
     /// This value will be `nil` until the configuration has been retrieved through the ``openIdConfiguration(completion:)`` or ``openIdConfiguration()`` functions.
     @TimeSensitive
-    private(set) public var openIdConfiguration: OpenIdConfiguration?
+    public private(set) var openIdConfiguration: OpenIdConfiguration?
 
     /// The ``JWKS`` key set for this org.
     ///
     /// This value will be `nil` until the keys have been retrieved through the ``jwks(completion:)`` or ``jwks()`` functions.
     @TimeSensitive
-    private(set) public var jwks: JWKS?
+    public private(set) var jwks: JWKS?
 
     /// Constructs an OAuth2Client for the given domain.
     /// - Parameters:
     ///   - domain: Okta domain to use for the base URL.
     ///   - session: Optional URLSession to use for network requests.
-    convenience public init(domain: String, clientId: String, scopes: String, session: URLSessionProtocol? = nil) throws {
+    public convenience init(domain: String, clientId: String, scopes: String, session: URLSessionProtocol? = nil) throws {
         self.init(try Configuration(domain: domain,
                                     clientId: clientId,
                                     scopes: scopes),
@@ -130,7 +130,7 @@ public class OAuth2Client {
     /// - Parameters:
     ///   - domain: Okta domain to use for the base URL.
     ///   - session: Optional URLSession to use for network requests.
-    convenience public init(baseURL: URL, clientId: String, scopes: String, session: URLSessionProtocol? = nil) {
+    public convenience init(baseURL: URL, clientId: String, scopes: String, session: URLSessionProtocol? = nil) {
         self.init(Configuration(baseURL: baseURL,
                                 clientId: clientId,
                                 scopes: scopes),
@@ -219,7 +219,7 @@ public class OAuth2Client {
                       qos: .userInitiated,
                       attributes: .concurrent)
     }()
-    private func performRefresh(token: Token, clientSettings: [String:String]) {
+    private func performRefresh(token: Token, clientSettings: [String: String]) {
         guard let action = token.refreshAction else { return }
         
         delegateCollection.invoke { $0.oauth(client: self, willRefresh: token) }
@@ -544,8 +544,8 @@ extension OAuth2Client: APIClient {
         return nil
     }
 
-    public func decode<T>(_ type: T.Type, from data: Data, userInfo: [CodingUserInfoKey:Any]? = nil) throws -> T where T: Decodable {
-        var info: [CodingUserInfoKey:Any] = userInfo ?? [:]
+    public func decode<T>(_ type: T.Type, from data: Data, userInfo: [CodingUserInfoKey: Any]? = nil) throws -> T where T: Decodable {
+        var info: [CodingUserInfoKey: Any] = userInfo ?? [:]
         if info[.apiClientConfiguration] == nil {
             info[.apiClientConfiguration] = configuration
         }
@@ -570,7 +570,7 @@ extension OAuth2Client: APIClient {
         delegateCollection.invoke { $0.api(client: self, didSend: request, received: error) }
     }
 
-    public func didSend<T>(request: URLRequest, received response: APIResponse<T>) where T : Decodable {
+    public func didSend<T>(request: URLRequest, received response: APIResponse<T>) where T: Decodable {
         delegateCollection.invoke { $0.api(client: self, didSend: request, received: response) }
     }
 }

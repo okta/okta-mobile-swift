@@ -16,7 +16,7 @@ import Foundation
 ///
 /// > Note: This does not apply to JWT, which while it contains claims, it has a different format which includes headers and signatures.
 public protocol ClaimContainer: JSONDecodable {
-    var payload: [String:Any] { get }
+    var payload: [String: Any] { get }
 }
 
 extension ClaimContainer {
@@ -36,7 +36,7 @@ extension ClaimContainer {
                     try container.encode(value, forKey: key)
                 } else if let value = value as? Double {
                     try container.encode(value, forKey: key)
-                } else if let value = value as? [String:String] {
+                } else if let value = value as? [String: String] {
                     try container.encode(value, forKey: key)
                 }
             }

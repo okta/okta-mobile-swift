@@ -21,13 +21,13 @@ extension String: APIRequestArgument {
 }
 
 extension Int: APIRequestArgument {
-    public var stringValue: String { "\(self)"}
+    public var stringValue: String { "\(self)" }
 }
 
 extension Double: APIRequestArgument {
-    public var stringValue: String { "\(self)"}
+    public var stringValue: String { "\(self)" }
 }
 
 extension Bool: APIRequestArgument {
-    public var stringValue: String { "\(self)"}
+    public var stringValue: String { "\(self)" }
 }

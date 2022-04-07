@@ -66,7 +66,7 @@ public class SDKVersion {
     }
 
     public var displayName: String { "\(name)/\(version)" }
-    static private(set) public var userAgent: String = ""
+    public private(set) static var userAgent: String = ""
 
     fileprivate static var sdkVersions: [SDKVersion] = []
     private static func register(sdk: SDKVersion) {
@@ -81,7 +81,7 @@ public class SDKVersion {
 }
 
 extension String {
-    func expanded(using: [String:APIRequestArgument]) -> String {
+    func expanded(using: [String: APIRequestArgument]) -> String {
         using.reduce(self) { (string, argument) in
             string.replacingOccurrences(of: "{\(argument.key)}", with: argument.value.stringValue)
         }

@@ -1,0 +1,118 @@
+whitelist_rules:
+  # Spacing
+  - closing_brace
+  - closure_spacing
+  - comma
+  - colon
+
+  # Whitespace (Xcode configuration)
+  - leading_whitespace
+  #- let_var_whitespace # Disabled due to https://github.com/realm/SwiftLint/issues/2980
+  - operator_whitespace
+  - operator_usage_whitespace
+  - return_arrow_whitespace
+  - trailing_whitespace
+
+  # Empty
+  - empty_collection_literal
+  - empty_count
+  - empty_string
+
+  # Force
+  - force_cast
+  - force_try
+  - force_unwrapping
+
+  # Closures
+  - closure_body_length
+  - closure_end_indentation
+  - closure_parameter_position
+
+  # Style
+  # - attributes - disabled due to rule issue. See: https://github.com/okta/okta-devices-swift/pull/93
+  - collection_alignment
+  - control_statement
+  - file_header
+
+  # Order
+  - file_types_order
+  - modifier_order
+  - protocol_property_accessors_order
+
+  # Lint
+  - anyobject_protocol
+  - class_delegate_protocol
+  - cyclomatic_complexity
+
+# Override rule to return as warning/error
+closing_brace:
+  severity: error
+closure_spacing:
+  severity: error
+comma:
+  severity: error
+colon:
+  severity: error
+
+leading_whitespace:
+  severity: error
+let_var_whitespace:
+  severity: error
+operator_whitespace:
+  severity: error
+operator_usage_whitespace:
+  severity: error
+return_arrow_whitespace:
+  severity: error
+trailing_whitespace:
+  severity: error
+  ignores_empty_lines: true
+
+empty_collection_literal:
+  severity: error
+empty_count:
+  severity: error
+empty_string:
+  severity: error
+
+closure_body_length:
+  warning: 50
+  error: 100
+closure_end_indentation:
+  severity: error
+closure_parameter_position:
+  severity: error
+
+attributes:
+  severity: error
+collection_alignment:
+  severity: error
+control_statement:
+  severity: error
+file_header:
+  severity: error
+  required_pattern: |
+                  \/\/
+                  \/\/ Copyright \(c\) \d{4}(-Present)?, Okta, Inc\. and\/or its affiliates\. All rights reserved\.
+                  \/\/ The Okta software accompanied by this notice is provided pursuant to the Apache License, Version 2\.0 \(the "License."\)
+                  \/\/
+                  \/\/ You may obtain a copy of the License at http:\/\/www\.apache\.org\/licenses\/LICENSE-2\.0\.
+                  \/\/ Unless required by applicable law or agreed to in writing, software
+                  \/\/ distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
+                  \/\/ WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied\.
+                  \/\/
+                  \/\/ See the License for the specific language governing permissions and limitations under the License\.
+                  \/\/
+
+anyobject_protocol:
+  severity: error
+class_delegate_protocol:
+  severity: error
+cyclomatic_complexity:
+  severity: error
+
+# Paths to ignore
+excluded:
+- Pods
+- Tests
+- Example

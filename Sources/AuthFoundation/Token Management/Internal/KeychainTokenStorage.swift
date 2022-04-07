@@ -64,7 +64,7 @@ class KeychainTokenStorage: TokenStorage {
         let changedDefault = try Keychain
             .Search(service: KeychainTokenStorage.serviceName)
             .list()
-            .count == 0
+            .isEmpty
         
         let data = try encoder.encode(token)
         

@@ -87,7 +87,7 @@ public class Credential {
     ///   - tags: Optional developer-assigned tags to associate with this token.
     /// - Returns: Credential representing this token.
     @discardableResult
-    public static func store(token: Token, tags: [String:String] = [:]) throws -> Credential {
+    public static func store(token: Token, tags: [String: String] = [:]) throws -> Credential {
         try coordinator.store(token: token, tags: tags)
     }
     
@@ -102,7 +102,7 @@ public class Credential {
     /// This property can be used to associate application-specific information with a ``Token``. This can be used to identify which token should be associated with certain parts of your application.
     ///
     /// > Important: Errors thrown from the setter are silently ignored. If you would like to handle errors when changing metadata, see the ``setTags(_:)`` function.
-    public var tags: [String:String] {
+    public var tags: [String: String] {
         get { _metadata.tags }
         set {
             try? setTags(newValue)
@@ -113,7 +113,7 @@ public class Credential {
     ///
     /// This is used internally by the ``tags`` setter, except the use of this function allows you to catch errors.
     /// - Parameter metadata: Metadata to set.
-    public func setTags(_ tags: [String:String]) throws {
+    public func setTags(_ tags: [String: String]) throws {
         guard let coordinator = coordinator else {
             throw CredentialError.missingCoordinator
         }
@@ -198,7 +198,7 @@ public class Credential {
         return Token.Metadata(id: id)
     }()
     
-    private(set) internal var automaticRefreshTimer: DispatchSourceTimer?
+    internal private(set) var automaticRefreshTimer: DispatchSourceTimer?
     private func startAutomaticRefresh() {
         guard let timerSource = createAutomaticRefreshTimer() else { return }
 

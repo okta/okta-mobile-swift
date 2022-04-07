@@ -29,7 +29,7 @@ extension AuthorizationCodeFlow {
         return components
     }
     
-    private func queryParameters(using context: AuthorizationCodeFlow.Context) -> [String:String] {
+    private func queryParameters(using context: AuthorizationCodeFlow.Context) -> [String: String] {
         var parameters = additionalParameters ?? [:]
         parameters["client_id"] = client.configuration.clientId
         parameters["scope"] = client.configuration.scopes

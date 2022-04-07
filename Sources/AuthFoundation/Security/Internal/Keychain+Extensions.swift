@@ -15,8 +15,8 @@
 import Foundation
 
 extension Keychain.Item {
-    var query: [String:Any] {
-        var result = [String:Any]()
+    var query: [String: Any] {
+        var result = [String: Any]()
         result[kSecClass as String] = kSecClassGenericPassword
         result[kSecAttrAccount as String] = account
         result[kSecValueData as String] = value
@@ -54,8 +54,8 @@ extension Keychain.Item {
 }
 
 extension Keychain.Search {
-    fileprivate var query: [String:Any] {
-        var result = [String:Any]()
+    fileprivate var query: [String: Any] {
+        var result = [String: Any]()
         result[kSecClass as String] = kSecClassGenericPassword
         result[kSecReturnRef as String] = kCFBooleanTrue
         result[kSecReturnAttributes as String] = kCFBooleanTrue
@@ -72,14 +72,14 @@ extension Keychain.Search {
         return result
     }
     
-    var getQuery: [String:Any] {
+    var getQuery: [String: Any] {
         var result = self.query
         result[kSecMatchLimit as String] = kSecMatchLimitOne
         result[kSecReturnData as String] = kCFBooleanTrue
         return result
     }
 
-    var listQuery: [String:Any] {
+    var listQuery: [String: Any] {
         var result = self.query
         result[kSecMatchLimit as String] = kSecMatchLimitAll
         return result
@@ -87,8 +87,8 @@ extension Keychain.Search {
 }
 
 extension Keychain.Search.Result {
-    var query: [String:Any] {
-        var result = [String:Any]()
+    var query: [String: Any] {
+        var result = [String: Any]()
         result[kSecClass as String] = kSecClassGenericPassword
         result[kSecMatchLimit as String] = kSecMatchLimitOne
         result[kSecReturnRef as String] = kCFBooleanTrue

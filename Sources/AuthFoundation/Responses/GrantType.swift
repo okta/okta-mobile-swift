@@ -21,7 +21,7 @@ public enum GrantType: Codable, Hashable {
     case other(_ type: String)
 }
 
-fileprivate let Mapping: [String:GrantType] = [
+fileprivate let Mapping: [String: GrantType] = [
     "authorization_code": .authorizationCode,
     "implicit": .implicit,
     "refresh_token": .refreshToken,

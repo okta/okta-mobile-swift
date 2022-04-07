@@ -66,7 +66,7 @@ public class WebAuthentication {
     /// Active / default shared instance of the ``WebAuthentication`` session.
     ///
     /// This convenience property exposes either the msot recent WebAuthentication instance, or will construct the default based on client details configured within your app's `Okta.plist` configuration file.
-    private(set) public static var shared: WebAuthentication? {
+    public private(set) static var shared: WebAuthentication? {
         set {
             _shared = newValue
         }
@@ -280,7 +280,7 @@ public class WebAuthentication {
                             responseType: ResponseType = .code,
                             redirectUri: URL,
                             logoutRedirectUri: URL? = nil,
-                            additionalParameters: [String:String]? = nil)
+                            additionalParameters: [String: String]? = nil)
     {
         let client = OAuth2Client(baseURL: issuer,
                                   clientId: clientId,

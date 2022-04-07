@@ -110,7 +110,7 @@ public class DeviceAuthorizationFlow: AuthenticationFlow {
     public let client: OAuth2Client
     
     /// Indicates whether or not this flow is currently in the process of authenticating a user.
-    private(set) public var isAuthenticating: Bool = false {
+    public private(set) var isAuthenticating: Bool = false {
         didSet {
             guard oldValue != isAuthenticating else {
                 return
@@ -125,7 +125,7 @@ public class DeviceAuthorizationFlow: AuthenticationFlow {
     }
     
     /// The context that stores the state for the current authentication session.
-    private(set) public var context: Context? {
+    public private(set) var context: Context? {
         didSet {
             guard let context = context else {
                 return
@@ -166,7 +166,7 @@ public class DeviceAuthorizationFlow: AuthenticationFlow {
     /// The ``resume(with:completion:)`` method also uses this context, to poll the server to determine when the user approves the authorization request.
     /// - Parameters:
     ///   - completion: Optional completion block for receiving the context. If `nil`, you may rely upon the ``DeviceAuthorizationFlowDelegate/authentication(flow:received:)`` method instead.
-    public func resume(completion: ((Result<Context,APIClientError>) -> Void)? = nil) {
+    public func resume(completion: ((Result<Context, APIClientError>) -> Void)? = nil) {
         isAuthenticating = true
 
         client.openIdConfiguration { result in
@@ -205,7 +205,7 @@ public class DeviceAuthorizationFlow: AuthenticationFlow {
     /// - Parameters:
     ///   - context: Device authorization context object.
     ///   - completion: Optional completion block for receiving the token, or error result. If `nil`, you may rely upon the ``DeviceAuthorizationFlowDelegate/authentication(flow:received:)`` method instead.
-    public func resume(with context: Context, completion: ((Result<Token,APIClientError>) -> Void)? = nil) {
+    public func resume(with context: Context, completion: ((Result<Token, APIClientError>) -> Void)? = nil) {
         timer?.cancel()
         
         let timerSource = DispatchSource.makeTimerSource()
@@ -290,10 +290,10 @@ extension DeviceAuthorizationFlow: UsesDelegateCollection {
 extension DeviceAuthorizationFlow {
     struct TimerInfo {
         let context: Context
-        let completion: ((Result<Token,APIClientError>) -> Void)?
+        let completion: ((Result<Token, APIClientError>) -> Void)?
     }
     
-    func getToken(using context: Context, completion: @escaping(Result<Token?,APIClientError>) -> Void) {
+    func getToken(using context: Context, completion: @escaping(Result<Token?, APIClientError>) -> Void) {
         client.openIdConfiguration { result in
             switch result {
             case .success(let configuration):
@@ -324,7 +324,7 @@ extension DeviceAuthorizationFlow {
         }
     }
     
-    func finish(_ result: Result<Token?,APIClientError>) {
+    func finish(_ result: Result<Token?, APIClientError>) {
         
     }
 }

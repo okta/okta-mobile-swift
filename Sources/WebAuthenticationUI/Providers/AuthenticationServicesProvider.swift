@@ -49,7 +49,7 @@ class AuthenticationServicesProvider: NSObject, WebAuthenticationProvider {
     init(flow: AuthorizationCodeFlow,
          logoutFlow: SessionLogoutFlow?,
          from window: WebAuthentication.WindowAnchor?,
-         delegate: WebAuthenticationProviderDelegate) 
+         delegate: WebAuthenticationProviderDelegate)
     {
         self.flow = flow
         self.logoutFlow = logoutFlow
@@ -211,7 +211,7 @@ class AuthenticationServicesProvider: NSObject, WebAuthenticationProvider {
 
 @available(iOS 12.0, macOS 10.15, *)
 extension AuthenticationServicesProvider: AuthenticationDelegate, AuthorizationCodeFlowDelegate {
-    func authentication<Flow>(flow: Flow, shouldAuthenticateUsing url: URL) where Flow : AuthorizationCodeFlow {
+    func authentication<Flow>(flow: Flow, shouldAuthenticateUsing url: URL) where Flow: AuthorizationCodeFlow {
         authenticate(using: url)
     }
     
@@ -226,7 +226,7 @@ extension AuthenticationServicesProvider: AuthenticationDelegate, AuthorizationC
 
 @available(iOS 12.0, macOS 10.15, *)
 extension AuthenticationServicesProvider: SessionLogoutFlowDelegate {
-    func logout<Flow>(flow: Flow, shouldLogoutUsing url: URL) where Flow : SessionLogoutFlow {
+    func logout<Flow>(flow: Flow, shouldLogoutUsing url: URL) where Flow: SessionLogoutFlow {
         logout(using: url)
     }
     

@@ -33,7 +33,7 @@ public protocol APIClient {
     var session: URLSessionProtocol { get }
     
     /// Any additional headers that should be added to all requests sent through this client.
-    var additionalHttpHeaders: [String:String]? { get }
+    var additionalHttpHeaders: [String: String]? { get }
     
     /// The name of the HTTP response header where unique request IDs can be found.
     var requestIdHeader: String? { get }
@@ -45,7 +45,7 @@ public protocol APIClient {
     ///
     /// The userInfo property may be included, which can include contextual information that can help decoders formulate objects.
     /// - Returns: Decoded object.
-    func decode<T: Decodable>(_ type: T.Type, from data: Data, userInfo: [CodingUserInfoKey:Any]?) throws -> T
+    func decode<T: Decodable>(_ type: T.Type, from data: Data, userInfo: [CodingUserInfoKey: Any]?) throws -> T
     
     /// Parses HTTP response body data when a request fails.
     /// - Returns: Error instance, if any, described within the data.
@@ -83,7 +83,7 @@ extension APIClientDelegate {
 }
 
 extension APIClient {
-    public var additionalHttpHeaders: [String:String]? { nil }
+    public var additionalHttpHeaders: [String: String]? { nil }
     public var requestIdHeader: String? { "x-okta-request-id" }
     public var userAgent: String { SDKVersion.userAgent }
     
@@ -137,14 +137,14 @@ extension APIClient {
 }
 
 extension APIClient {
-    private func relatedLinks<T>(from linkHeader: String?) -> [APIResponse<T>.Link:URL] {
+    private func relatedLinks<T>(from linkHeader: String?) -> [APIResponse<T>.Link: URL] {
         guard let linkHeader = linkHeader,
            let matches = linkRegex?.matches(in: linkHeader, options: [], range: NSMakeRange(0, linkHeader.count))
         else {
             return [:]
         }
         
-        var links: [APIResponse<T>.Link:URL] = [:]
+        var links: [APIResponse<T>.Link: URL] = [:]
         for match in matches {
             guard let urlRange = Range(match.range(at: 1), in: linkHeader),
                   let url = URL(string: String(linkHeader[urlRange])),

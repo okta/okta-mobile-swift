@@ -30,7 +30,7 @@ extension AuthorizationCodeFlow.TokenRequest: OAuth2TokenRequest, OAuth2APIReque
     var url: URL { openIdConfiguration.tokenEndpoint }
     var contentType: APIContentType? { .formEncoded }
     var acceptsType: APIContentType? { .json }
-    var bodyParameters: [String : Any]? {
+    var bodyParameters: [String: Any]? {
         var result = [
             "client_id": clientId,
             "redirect_uri": redirectUri,
@@ -45,7 +45,7 @@ extension AuthorizationCodeFlow.TokenRequest: OAuth2TokenRequest, OAuth2APIReque
         return result
     }
     
-    var codingUserInfo: [CodingUserInfoKey : Any]? {
+    var codingUserInfo: [CodingUserInfoKey: Any]? {
         [
             .clientSettings: [
                 "client_id": clientId,

@@ -24,14 +24,14 @@ extension Token {
         public let tags: [String: String]
         
         /// The raw contents of the claim payload for this token.
-        public let payload: [String : Any]
+        public let payload: [String: Any]
         
         private let payloadData: Data?
         init(token: Token, tags: [String: String]) {
             self.id = token.id
             self.tags = tags
             
-            var payload = [String:Any]()
+            var payload = [String: Any]()
             var payloadData: Data?
             
             if let idToken = token.idToken {
@@ -42,7 +42,7 @@ extension Token {
             }
             
             if let payloadData = payloadData,
-               let payloadInfo = try? JSONSerialization.jsonObject(with: payloadData) as? [String:Any]
+               let payloadInfo = try? JSONSerialization.jsonObject(with: payloadData) as? [String: Any]
             {
                 payload = payloadInfo
             }
@@ -70,10 +70,10 @@ extension Token.Metadata: Codable {
         
         self.payloadData = try container.decodeIfPresent(Data.self, forKey: .payload)
         self.id = try container.decode(String.self, forKey: .id)
-        self.tags = try container.decode([String:String].self, forKey: .tags)
+        self.tags = try container.decode([String: String].self, forKey: .tags)
         
         if let data = self.payloadData,
-           let payload = try JSONSerialization.jsonObject(with: data) as? [String:Any]
+           let payload = try JSONSerialization.jsonObject(with: data) as? [String: Any]
         {
             self.payload = payload
         } else {

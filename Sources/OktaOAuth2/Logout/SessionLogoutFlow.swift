@@ -18,7 +18,7 @@ import AuthFoundation
 /// This protocol extends the basic ``LogoutFlowDelegate`` which all logout flows support.
 public protocol SessionLogoutFlowDelegate: LogoutFlowDelegate {
     /// Sent when the session logout flow receives an error.
-    /// 
+    ///
     /// - Parameters:
     ///   - flow: The logout flow.
     ///   - error: The received error.
@@ -64,7 +64,7 @@ public class SessionLogoutFlow: LogoutFlow {
         public let state: String
         
         /// The current logout URL, or `nil` if one has not yet been generated.
-        internal(set) public var logoutURL: URL?
+        public internal(set) var logoutURL: URL?
         
         /// Initializer for creating a context.
         /// - Parameters:
@@ -83,10 +83,10 @@ public class SessionLogoutFlow: LogoutFlow {
     public let logoutRedirectUri: URL
     
     /// Indicates if this flow is currently in progress.
-    private(set) public var inProgress: Bool = false
+    public private(set) var inProgress: Bool = false
     
     /// The context that stores the ID token and state for the current log-out session.
-    private(set) public var context: Context? {
+    public private(set) var context: Context? {
         didSet {
             guard let url = context?.logoutURL else {
                 return

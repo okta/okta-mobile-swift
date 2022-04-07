@@ -28,7 +28,7 @@ extension ResourceOwnerFlow.TokenRequest: OAuth2TokenRequest, OAuth2APIRequest, 
     var url: URL { openIdConfiguration.tokenEndpoint }
     var contentType: APIContentType? { .formEncoded }
     var acceptsType: APIContentType? { .json }
-    var bodyParameters: [String : Any]? {
+    var bodyParameters: [String: Any]? {
         [
             "client_id": clientId,
             "scope": scope,
@@ -38,7 +38,7 @@ extension ResourceOwnerFlow.TokenRequest: OAuth2TokenRequest, OAuth2APIRequest, 
         ]
     }
     
-    var codingUserInfo: [CodingUserInfoKey : Any]? {
+    var codingUserInfo: [CodingUserInfoKey: Any]? {
         [
             .clientSettings: [
                 "client_id": clientId,

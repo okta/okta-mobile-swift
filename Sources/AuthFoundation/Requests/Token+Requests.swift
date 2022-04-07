@@ -16,13 +16,13 @@ extension Token {
         let openIdConfiguration: OpenIdConfiguration
         let token: String
         let hint: Token.Kind?
-        let configuration: [String:String]
+        let configuration: [String: String]
     }
 
     struct RefreshRequest {
         let openIdConfiguration: OpenIdConfiguration
         let token: Token
-        let configuration: [String:String]
+        let configuration: [String: String]
     }
     
     struct IntrospectRequest {
@@ -47,7 +47,7 @@ extension Token.RevokeRequest: OAuth2APIRequest, APIRequestBody {
     var url: URL { openIdConfiguration.revocationEndpoint }
     var contentType: APIContentType? { .formEncoded }
     var acceptsType: APIContentType? { .json }
-    var bodyParameters: [String : Any]? {
+    var bodyParameters: [String: Any]? {
         var result = configuration
         result["token"] = token
         
@@ -67,7 +67,7 @@ extension Token.IntrospectRequest: OAuth2APIRequest, APIRequestBody {
     var contentType: APIContentType? { .formEncoded }
     var acceptsType: APIContentType? { .json }
     var authorization: APIAuthorization? { token }
-    var bodyParameters: [String : Any]? {
+    var bodyParameters: [String: Any]? {
         [
             "token": (token.token(of: type) ?? "") as String,
             "token_type_hint": type.rawValue
@@ -82,7 +82,7 @@ extension Token.RefreshRequest: OAuth2APIRequest, APIRequestBody, APIParsingCont
     var url: URL { openIdConfiguration.tokenEndpoint }
     var contentType: APIContentType? { .formEncoded }
     var acceptsType: APIContentType? { .json }
-    var bodyParameters: [String : Any]? {
+    var bodyParameters: [String: Any]? {
         guard let refreshToken = token.refreshToken else { return nil }
 
         var result = configuration
@@ -92,7 +92,7 @@ extension Token.RefreshRequest: OAuth2APIRequest, APIRequestBody, APIParsingCont
         return result
     }
     
-    var codingUserInfo: [CodingUserInfoKey : Any]? {
+    var codingUserInfo: [CodingUserInfoKey: Any]? {
         guard let clientSettings = token.context.clientSettings,
               let settings = clientSettings.reduce(into: [:], { partialResult, item in
             guard let key = CodingUserInfoKey(rawValue: item.key) else { return }

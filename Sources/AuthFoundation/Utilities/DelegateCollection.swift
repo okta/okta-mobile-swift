@@ -54,11 +54,11 @@ extension DelegateCollection {
     }
 }
 
-public func +=<D>(left: DelegateCollection<D>, right: D) {
+public func += <D>(left: DelegateCollection<D>, right: D) {
     left.add(right)
 }
 
-public func -=<D>(left: DelegateCollection<D>, right: D) {
+public func -= <D>(left: DelegateCollection<D>, right: D) {
     left.remove(right)
 }
 
@@ -68,6 +68,6 @@ precedencegroup MulticastPrecedence {
 }
 
 infix operator |> : MulticastPrecedence
-public func |><D>(left: DelegateCollection<D>, right: (D) -> Void) {
+public func |> <D>(left: DelegateCollection<D>, right: (D) -> Void) {
     left.invoke(right)
 }

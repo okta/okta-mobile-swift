@@ -17,7 +17,7 @@ import FoundationNetworking
 #endif
 
 extension URLRequest {
-    static func oktaURLFormEncodedString(for params: [String:APIRequestArgument]) -> String? {
+    static func oktaURLFormEncodedString(for params: [String: APIRequestArgument]) -> String? {
         func escape(_ str: String) -> String {
             return str.replacingOccurrences(of: "\n", with: "\r\n")
                 .addingPercentEncoding(withAllowedCharacters: oktaQueryCharacters)!
