@@ -5,7 +5,14 @@
 
 # Okta Mobile SDK for Swift
 
-The Okta Mobile SDK represents a suite of libraries that intends to replace our legacy mobile SDKs, with the aim to streamline development, ease maintenance and feature expansion, and enable new use cases that were previously difficult or impractical to implement. We are building a platform to support the development of many SDKs, allowing application developers to choose which components they need.
+The Okta Mobile SDK replaces our legacy mobile SDKs (such as okta-oidc-ios) and enables:
+
+* Streamlined development
+* Increased maintainability of the Okta portion of your code
+* Easier feature expansion
+* Implementation of use cases that were previously difficult or impractical
+
+This new Mobile SDK is built as a platform, enabling you to choose the components you need for your app.
 
 **Table of Contents**
 
