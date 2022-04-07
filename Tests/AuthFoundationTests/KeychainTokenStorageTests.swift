@@ -17,7 +17,7 @@ import XCTest
 @testable import TestCommon
 
 final class KeychainTokenStorageTests: XCTestCase {
-    let mock = MockKeychain()
+    var mock: MockKeychain!
     var storage: KeychainTokenStorage!
     
     let token = Token(id: "TokenId",
@@ -35,15 +35,18 @@ final class KeychainTokenStorageTests: XCTestCase {
                                              clientSettings: nil))
 
     override func setUpWithError() throws {
+        mock = MockKeychain()
         Keychain.implementation = mock
-        mock.reset()
 
         storage = KeychainTokenStorage()
         XCTAssertEqual(mock.operations.count, 0)
     }
     
-    override class func tearDown() {
+    override func tearDownWithError() throws {
         Keychain.implementation = KeychainImpl()
+        
+        mock = nil
+        storage = nil
     }
 
     func testDefaultToken() throws {

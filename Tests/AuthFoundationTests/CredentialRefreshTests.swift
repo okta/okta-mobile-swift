@@ -36,8 +36,8 @@ class CredentialRefreshDelegate: OAuth2ClientDelegate {
 }
 
 final class CredentialRefreshTests: XCTestCase, OAuth2ClientDelegate {
-    let delegate = CredentialRefreshDelegate()
-    let coordinator = MockCredentialCoordinator()
+    var delegate: CredentialRefreshDelegate!
+    var coordinator: MockCredentialCoordinator!
 
     enum APICalls {
         case none
@@ -82,7 +82,13 @@ final class CredentialRefreshTests: XCTestCase, OAuth2ClientDelegate {
     }
     
     override func setUpWithError() throws {
-        Credential.refreshGraceInterval = 300
+        delegate = CredentialRefreshDelegate()
+        coordinator = MockCredentialCoordinator()
+    }
+    
+    override func tearDownWithError() throws {
+        delegate = nil
+        coordinator = nil
     }
     
     func testRefresh() throws {

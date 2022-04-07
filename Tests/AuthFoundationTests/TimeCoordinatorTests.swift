@@ -27,14 +27,16 @@ class MockTimeCoordinator: TimeCoordinator {
 }
 
 final class TimeCoordinatorTests: XCTestCase {
-    let coordinator = MockTimeCoordinator()
+    var coordinator: MockTimeCoordinator!
     
     override func setUpWithError() throws {
+        coordinator = MockTimeCoordinator()
         Date.coordinator = coordinator
     }
     
-    override func tearDown() {
+    override func tearDownWithError() throws {
         DefaultTimeCoordinator.resetToDefault()
+        coordinator = nil
     }
     
     func testDateAdjustments() {

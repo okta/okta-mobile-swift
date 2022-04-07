@@ -64,19 +64,25 @@ import XCTest
 import TestCommon
 
 final class DefaultIDTokenValidatorTests: XCTestCase {
-    let validator = DefaultIDTokenValidator()
+    var validator = DefaultIDTokenValidator()
     let issuer = URL(string: "https://example.okta.com/oauth2/default")!
     let clientId = "unit_test_client_id"
     let baselineTime: TimeInterval = 1644347069 // The date the ID tokens were created
-    let mockTime = MockTimeCoordinator()
+    var mockTime: MockTimeCoordinator!
     
     let validToken = "eyJraWQiOiJGSkEwSEdOdHN1dWRhX1BsNDVKNDJrdlFxY3N1XzBDNEZnN3BiSkxYVEhZIiwiYWxnIjoiUlMyNTYifQ.eyJzdWIiOiIwMHViNDF6N21nek5xcnlNdjY5NiIsIm5hbWUiOiJUZXN0IFVzZXIiLCJlbWFpbCI6InRlc3RAZXhhbXBsZS5jb20iLCJ2ZXIiOjEsImlzcyI6Imh0dHBzOi8vZXhhbXBsZS5va3RhLmNvbS9vYXV0aDIvZGVmYXVsdCIsImF1ZCI6InVuaXRfdGVzdF9jbGllbnRfaWQiLCJpYXQiOjE2NDQzNDcwNjksImV4cCI6MTY0NDM1MDY2OSwianRpIjoiSUQuNTVjeEJ0ZFlsOGw2YXJLSVNQQndkMHlPVC05VUNUYVhhUVRYdDJsYVJMcyIsImFtciI6WyJwd2QiXSwiaWRwIjoiMDBvOGZvdTdzUmFHR3dkbjQ2OTYiLCJzaWQiOiJpZHhXeGtscF80a1N4dUNfblUxcFhELW5BIiwicHJlZmVycmVkX3VzZXJuYW1lIjoidGVzdEBleGFtcGxlLmNvbSIsImF1dGhfdGltZSI6MTY0NDM0NzA2OCwiYXRfaGFzaCI6ImdNY0dUYmhHVDFHX2xkc0hvSnNQelEiLCJkc19oYXNoIjoiREFlTE9GUnFpZnlzYmdzcmJPZ2JvZyJ9.LvWXuIL5oinAfTfZFBo9a2Q1SGZcu9GZZ2LOYbWekRvKw3eFJk8aZHeFDQx3c3J_NpCYqjxlOnb5YJ1emRS2sSU9YOoMjm-15TeM_O5AMHk06jJkBiJlhDr0IaCSXw8dB2Hnj4mfGJ3HxknA8nWnHZUhkzu1196QCHGQwwK-EbYzaQAzkU9itcJZmQObV56rNsvSL4RQUfI1auoz0IAj3gAee-g6O1y7sTdsRmXgtKM8AoKqehBO9QXOdrlv7648Ixo2NgB7iobFLIQ-FxChp_mwhfgqG1RtQBCJGG4eow7ER5lPIYJkUlzgc79sFoiZKo3KZfUFwlwWXPAwAqVdmg"
     
     override func setUpWithError() throws {
+        mockTime = MockTimeCoordinator()
         Date.coordinator = mockTime
         
         let offset = baselineTime - Date().timeIntervalSince1970
         mockTime.offset = offset
+    }
+    
+    override func tearDownWithError() throws {
+        DefaultTimeCoordinator.resetToDefault()
+        mockTime = nil
     }
     
     func testValidIDToken() throws {
@@ -113,7 +119,7 @@ final class DefaultIDTokenValidatorTests: XCTestCase {
     }
 
     func testExpired() throws {
-        mockTime.offset = 0
+        mockTime?.offset = 0
         let jwt = try JWT("eyJraWQiOiJGSkEwSEdOdHN1dWRhX1BsNDVKNDJrdlFxY3N1XzBDNEZnN3BiSkxYVEhZIiwiYWxnIjoiUlMyNTYifQ.eyJzdWIiOiIwMHViNDF6N21nek5xcnlNdjY5NiIsIm5hbWUiOiJUZXN0IFVzZXIiLCJlbWFpbCI6InRlc3RAZXhhbXBsZS5jb20iLCJ2ZXIiOjEsImlzcyI6Imh0dHBzOi8vZXhhbXBsZS5va3RhLmNvbS9vYXV0aDIvZGVmYXVsdCIsImF1ZCI6InVuaXRfdGVzdF9jbGllbnRfaWQiLCJpYXQiOjE2NDQzNDcwNjksImV4cCI6MTY0NDM1MDY2OSwianRpIjoiSUQuNTVjeEJ0ZFlsOGw2YXJLSVNQQndkMHlPVC05VUNUYVhhUVRYdDJsYVJMcyIsImFtciI6WyJwd2QiXSwiaWRwIjoiMDBvOGZvdTdzUmFHR3dkbjQ2OTYiLCJzaWQiOiJpZHhXeGtscF80a1N4dUNfblUxcFhELW5BIiwicHJlZmVycmVkX3VzZXJuYW1lIjoidGVzdEBleGFtcGxlLmNvbSIsImF1dGhfdGltZSI6MTY0NDM0NzA2OCwiYXRfaGFzaCI6ImdNY0dUYmhHVDFHX2xkc0hvSnNQelEiLCJkc19oYXNoIjoiREFlTE9GUnFpZnlzYmdzcmJPZ2JvZyJ9.LvWXuIL5oinAfTfZFBo9a2Q1SGZcu9GZZ2LOYbWekRvKw3eFJk8aZHeFDQx3c3J_NpCYqjxlOnb5YJ1emRS2sSU9YOoMjm-15TeM_O5AMHk06jJkBiJlhDr0IaCSXw8dB2Hnj4mfGJ3HxknA8nWnHZUhkzu1196QCHGQwwK-EbYzaQAzkU9itcJZmQObV56rNsvSL4RQUfI1auoz0IAj3gAee-g6O1y7sTdsRmXgtKM8AoKqehBO9QXOdrlv7648Ixo2NgB7iobFLIQ-FxChp_mwhfgqG1RtQBCJGG4eow7ER5lPIYJkUlzgc79sFoiZKo3KZfUFwlwWXPAwAqVdmg")
         XCTAssertThrowsError(try validator.validate(token: jwt, issuer: issuer, clientId: clientId)) { error in
             XCTAssertEqual(error as? JWTError, JWTError.expired)
@@ -121,7 +127,7 @@ final class DefaultIDTokenValidatorTests: XCTestCase {
     }
 
     func testIssuedAtExceedsGracePeriod() throws {
-        mockTime.offset += 320
+        mockTime?.offset += 320
         let jwt = try JWT(validToken)
         XCTAssertThrowsError(try validator.validate(token: jwt, issuer: issuer, clientId: clientId)) { error in
             XCTAssertEqual(error as? JWTError, JWTError.issuedAtTimeExceedsGraceInterval)

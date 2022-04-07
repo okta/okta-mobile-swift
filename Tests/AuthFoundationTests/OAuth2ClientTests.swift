@@ -5,7 +5,7 @@ import XCTest
 final class OAuth2ClientTests: XCTestCase {
     let issuer = URL(string: "https://example.com")!
     let redirectUri = URL(string: "com.example:/callback")!
-    let urlSession = URLSessionMock()
+    var urlSession: URLSessionMock!
     var client: OAuth2Client!
     let configuration = OAuth2Client.Configuration(baseURL: URL(string: "https://example.com")!,
                                                    clientId: "clientid",
@@ -13,6 +13,7 @@ final class OAuth2ClientTests: XCTestCase {
     var token: Token!
 
     override func setUpWithError() throws {
+        urlSession = URLSessionMock()
         client = OAuth2Client(configuration, session: urlSession)
         
         token = Token(id: "TokenId",
@@ -28,6 +29,11 @@ final class OAuth2ClientTests: XCTestCase {
                                              clientSettings: [ "client_id": "clientid" ]))
         
         urlSession.requestDelay = 0.1
+    }
+    
+    override func tearDownWithError() throws {
+        urlSession = nil
+        client = nil
     }
 
     func testOpenIDConfiguration() throws {
