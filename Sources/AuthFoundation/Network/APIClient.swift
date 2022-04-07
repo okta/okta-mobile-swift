@@ -185,7 +185,10 @@ extension APIClient {
         
         let rateInfo = APIResponse<T>.RateLimit(with: httpResponse.allHeaderFields)
         
+        // swiftlint:disable force_unwrapping
         let jsonData = (data.isEmpty) ? "{}".data(using: .utf8)! : data
+        // swiftlint:enable force_unwrapping
+        
         return APIResponse(result: try decode(T.self,
                                               from: jsonData,
                                               userInfo: context?.codingUserInfo),

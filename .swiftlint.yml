@@ -35,7 +35,7 @@ whitelist_rules:
   - file_header
 
   # Order
-  - file_types_order
+  #- file_types_order - disabled due to the impracticality of private/fileprivate usages
   - modifier_order
   - protocol_property_accessors_order
 

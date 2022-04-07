@@ -57,7 +57,7 @@ struct SignInView: View {
             
             Spacer()
             
-            Text(viewModel.isConfigured ? "Client ID: \(viewModel.clientID!)" : "Not configured")
+            Text(viewModel.isConfigured ? "Client ID: \(viewModel.clientID ?? "N/A")" : "Not configured")
                 .font(.caption)
                 .padding()
         }.onAppear {

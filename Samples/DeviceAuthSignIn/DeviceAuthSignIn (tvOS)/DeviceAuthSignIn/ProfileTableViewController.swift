@@ -75,6 +75,13 @@ class ProfileTableViewController: UITableViewController {
         dateFormatter.timeStyle = .long
 
         navigationItem.title = userInfo.name
+        
+        let updatedAt: String
+        if let updatedDate = userInfo.updatedAt {
+            updatedAt = dateFormatter.string(from: updatedDate)
+        } else {
+            updatedAt = "N/A"
+        }
 
         tableContent = [
             .profile: [
@@ -86,7 +93,7 @@ class ProfileTableViewController: UITableViewController {
             .details: [
                 .init(kind: .rightDetail, id: "username", title: "Username", detail: userInfo.preferredUsername),
                 .init(kind: .rightDetail, id: "userId", title: "User ID", detail: userInfo.subject),
-                .init(kind: .rightDetail, id: "createdAt", title: "Created at", detail: (userInfo.updatedAt != nil) ? dateFormatter.string(from: userInfo.updatedAt!) : "N/A"),
+                .init(kind: .rightDetail, id: "createdAt", title: "Created at", detail: updatedAt),
                 .init(kind: .disclosure, id: "details", title: "Token details"),
                 .init(kind: .action, id: "refresh", title: "Refresh")
             ],

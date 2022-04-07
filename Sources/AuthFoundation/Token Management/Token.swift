@@ -187,7 +187,9 @@ extension Token {
 }
 
 extension CodingUserInfoKey {
+    // swiftlint:disable force_unwrapping
     public static let tokenId = CodingUserInfoKey(rawValue: "tokenId")!
     public static let apiClientConfiguration = CodingUserInfoKey(rawValue: "apiClientConfiguration")!
     public static let clientSettings = CodingUserInfoKey(rawValue: "clientSettings")!
+    // swiftlint:enable force_unwrapping
 }

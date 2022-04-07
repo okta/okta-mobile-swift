@@ -16,32 +16,10 @@ import Foundation
 import FoundationNetworking
 #endif
 
-extension Notification.Name {
-    /// Notification broadcast when the ``Credential/default`` value changes.
-    public static let defaultCredentialChanged = Notification.Name("com.okta.defaultCredentialChanged")
-    
-    /// Notification broadcast when a new ``Credential`` instance is created.
-    ///
-    /// > Note: This notification is only sent when the ``CredentialDataSource`` creates a credential. If you use the ``Credential/init(token:oauth2:)`` method directly, this notification is not sent.
-    public static let credentialCreated = Notification.Name("com.okta.credential.created")
-
-    /// Notification broadcast when a credential is removed from storage.
-    public static let credentialRemoved = Notification.Name("com.okta.credential.removed")
-}
-
-/// Errors that may occur in the process of managing credentials.
-public enum CredentialError: Error {
-    /// Thrown when a credential no longer has a weak reference to the coordinator that was used to create it.
-    case missingCoordinator
-    
-    /// Thrown when a Credential is initialized with a ``Token`` and ``OAuth2Client`` with mismatched client configuration.
-    case incorrectClientConfiguration
-}
-
 /// Convenience object that wraps a ``Token``, providing methods and properties for interacting with credential resources.
 ///
 /// This class can be used as a convenience mechanism for managing stored credentials, performing operations on or for a user using their credentials, and interacting with resources scoped to the credential.
-public class Credential {
+public class Credential: Identifiable, Equatable, OAuth2ClientDelegate {
     /// The current or "default" credential.
     ///
     /// This can be used as a convenience to store a user's token within storage, and to access the user in a safe way. If the user's token isn't stored, this will automatically store the token for later use.
@@ -90,7 +68,23 @@ public class Credential {
     public static func store(token: Token, tags: [String: String] = [:]) throws -> Credential {
         try coordinator.store(token: token, tags: tags)
     }
+
+    /// Data source used for creating and managing the creation and caching of ``Credential`` instances.
+    public static var credentialDataSource: CredentialDataSource {
+        get { coordinator.credentialDataSource }
+        set { coordinator.credentialDataSource = newValue }
+    }
     
+    /// Storage instance used to abstract the secure offline storage and retrieval of ``Token`` instances.
+    public static var tokenStorage: TokenStorage {
+        get { coordinator.tokenStorage }
+        set { coordinator.tokenStorage = newValue }
+    }
+
+    public static func == (lhs: Credential, rhs: Credential) -> Bool {
+        lhs.token == rhs.token
+    }
+
     /// OAuth2 client for performing operations related to the user's token.
     public let oauth2: OAuth2Client
     
@@ -148,115 +142,12 @@ public class Credential {
         }
     }
     
-    /// Initializer that creates a credential for the supplied token.
-    /// - Parameter token: Token to create a credential for.
-    public convenience init(token: Token) {
-        let urlSession = type(of: self).credentialDataSource.urlSession(for: token)
-        self.init(token: token,
-                  oauth2: OAuth2Client(token.context.configuration,
-                                       session: urlSession),
-                  coordinator: Credential.coordinator)
-    }
-    
-    /// Initializer that creates a credential for a given token, using a custom OAuth2Client instance.
-    /// - Parameters:
-    ///   - token: Token
-    ///   - client: Client instance.
-    public convenience init(token: Token, oauth2 client: OAuth2Client) throws {
-        guard token.context.configuration.clientId == client.configuration.clientId,
-              token.context.configuration.baseURL == client.configuration.baseURL
-        else {
-            throw CredentialError.incorrectClientConfiguration
-        }
-        
-        self.init(token: token,
-                  oauth2: client,
-                  coordinator: Credential.coordinator)
-    }
-    
-    init(token: Token, oauth2 client: OAuth2Client, coordinator: CredentialCoordinator) {
-        self.token = token
-        self.oauth2 = client
-        self.coordinator = coordinator
-
-        self.oauth2.add(delegate: self)
-    }
-
-    deinit {
-        stopAutomaticRefresh()
-    }
-    
-    // MARK: Private properties
-    fileprivate static let coordinator = CredentialCoordinatorImpl()
-    internal weak var coordinator: CredentialCoordinator?
-
-    private lazy var _metadata: Token.Metadata = {
-        if let metadata = try? coordinator?.tokenStorage.metadata(for: token.id) {
-            return metadata
-        }
-        
-        return Token.Metadata(id: id)
-    }()
-    
-    internal private(set) var automaticRefreshTimer: DispatchSourceTimer?
-    private func startAutomaticRefresh() {
-        guard let timerSource = createAutomaticRefreshTimer() else { return }
-
-        automaticRefreshTimer?.cancel()
-        automaticRefreshTimer = timerSource
-        timerSource.resume()
-    }
-    
-    func stopAutomaticRefresh() {
-        automaticRefreshTimer?.cancel()
-        automaticRefreshTimer = nil
-    }
-}
-
-extension Credential {
     /// Convenience method that decorates the given URLRequest with the appropriate authorization headers to make a request using the credential's current token.
     /// - Parameter request: Request to decorate with the appropriate authorization header.
     public func authorize(request: inout URLRequest) {
         request.setValue(token.authorizationHeader, forHTTPHeaderField: "Authorization")
     }
-}
 
-extension Credential {
-    /// Data source used for creating and managing the creation and caching of ``Credential`` instances.
-    public static var credentialDataSource: CredentialDataSource {
-        get { coordinator.credentialDataSource }
-        set { coordinator.credentialDataSource = newValue }
-    }
-    
-    /// Storage instance used to abstract the secure offline storage and retrieval of ``Token`` instances.
-    public static var tokenStorage: TokenStorage {
-        get { coordinator.tokenStorage }
-        set { coordinator.tokenStorage = newValue }
-    }
-}
-
-extension Credential: OAuth2ClientDelegate {
-    public func oauth(client: OAuth2Client, didRefresh token: Token, replacedWith newToken: Token?) {
-        guard token == self.token,
-              let newToken = newToken
-        else {
-            return
-        }
-
-        self.token = newToken
-    }
-}
-
-extension Credential: Identifiable {
-}
-
-extension Credential: Equatable {
-    public static func == (lhs: Credential, rhs: Credential) -> Bool {
-        lhs.token == rhs.token
-    }
-}
-
-extension Credential {
     /// Remove the credential, and its token, from storage.
     public func remove() throws {
         guard let coordinator = coordinator else {
@@ -338,62 +229,79 @@ extension Credential {
             }
         }
     }
-}
 
-#if swift(>=5.5.1)
-@available(iOS 15.0, tvOS 15.0, macOS 12.0, watchOS 8, *)
-extension Credential {
-    /// Attempt to refresh the token.
-    /// - Returns: The new token generated as a result of the refresh.
-    @discardableResult
-    public func refresh() async throws -> Token {
-        try await withCheckedThrowingContinuation { continuation in
-            refresh() { result in
-                continuation.resume(with: result)
-            }
-        }
+    /// Initializer that creates a credential for the supplied token.
+    /// - Parameter token: Token to create a credential for.
+    public convenience init(token: Token) {
+        let urlSession = type(of: self).credentialDataSource.urlSession(for: token)
+        self.init(token: token,
+                  oauth2: OAuth2Client(token.context.configuration,
+                                       session: urlSession),
+                  coordinator: Credential.coordinator)
     }
     
-    /// Attempt to refresh the token if it either has expired, or is about to expire.
-    /// - Returns: The new token generated as a result of the refresh, or the current token if a refresh was unnecessary.
-    public func refreshIfNeeded(graceInterval: TimeInterval = Credential.refreshGraceInterval) async throws -> Token {
-        try await withCheckedThrowingContinuation { continuation in
-            refreshIfNeeded(graceInterval: graceInterval) { result in
-                continuation.resume(with: result)
-            }
-        }
-    }
-
-    /// Asynchronous convenience method that decorates the given URLRequest with the appropriate authorization headers to make a request using the credential's current token.
-    ///
-    /// This asynchronous variant ensures that the token has been refreshed, if needed, prior to adding the appropriate headers to the request.
-    /// - Parameter request: Request to decorate with the appropriate authorization header.
-    public func authorize(_ request: inout URLRequest) async {
-        _ = try? await refreshIfNeeded()
-        authorize(request: &request)
-    }
-    
-    /// Attempt to revoke one or more of the tokens.
+    /// Initializer that creates a credential for a given token, using a custom OAuth2Client instance.
     /// - Parameters:
-    ///   - type: The token type to revoke.
-    public func revoke(type: Token.RevokeType = .accessToken) async throws {
-        try await withCheckedThrowingContinuation { continuation in
-            revoke(type: type) { result in
-                continuation.resume(with: result)
-            }
+    ///   - token: Token
+    ///   - client: Client instance.
+    public convenience init(token: Token, oauth2 client: OAuth2Client) throws {
+        guard token.context.configuration.clientId == client.configuration.clientId,
+              token.context.configuration.baseURL == client.configuration.baseURL
+        else {
+            throw CredentialError.incorrectClientConfiguration
         }
+        
+        self.init(token: token,
+                  oauth2: client,
+                  coordinator: Credential.coordinator)
+    }
+    
+    init(token: Token, oauth2 client: OAuth2Client, coordinator: CredentialCoordinator) {
+        self.token = token
+        self.oauth2 = client
+        self.coordinator = coordinator
+
+        self.oauth2.add(delegate: self)
     }
 
-    /// Fetches the user info for this user.
-    ///
-    /// In addition to passing the result to the provided completion block, a successful request will result in the ``UserInfo`` property being set with the new value for later use.
-    /// - Returns: The user info for this user.
-    public func userInfo() async throws -> UserInfo {
-        try await withCheckedThrowingContinuation { continuation in
-            userInfo() { result in
-                continuation.resume(with: result)
-            }
+    deinit {
+        stopAutomaticRefresh()
+    }
+    
+    // MARK: OAuth2ClientDelegate
+    public func oauth(client: OAuth2Client, didRefresh token: Token, replacedWith newToken: Token?) {
+        guard token == self.token,
+              let newToken = newToken
+        else {
+            return
         }
+
+        self.token = newToken
+    }
+    
+    // MARK: Private properties
+    fileprivate static let coordinator = CredentialCoordinatorImpl()
+    internal weak var coordinator: CredentialCoordinator?
+
+    private lazy var _metadata: Token.Metadata = {
+        if let metadata = try? coordinator?.tokenStorage.metadata(for: token.id) {
+            return metadata
+        }
+        
+        return Token.Metadata(id: id)
+    }()
+    
+    internal private(set) var automaticRefreshTimer: DispatchSourceTimer?
+    private func startAutomaticRefresh() {
+        guard let timerSource = createAutomaticRefreshTimer() else { return }
+
+        automaticRefreshTimer?.cancel()
+        automaticRefreshTimer = timerSource
+        timerSource.resume()
+    }
+    
+    func stopAutomaticRefresh() {
+        automaticRefreshTimer?.cancel()
+        automaticRefreshTimer = nil
     }
 }
-#endif
