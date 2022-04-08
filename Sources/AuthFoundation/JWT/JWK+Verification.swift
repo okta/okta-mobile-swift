@@ -55,8 +55,10 @@ extension JWK {
             var status: OSStatus = noErr
             digest.withUnsafeBytes { (digestBytes: UnsafeRawBufferPointer) in
                 signature.withUnsafeBytes { (signatureBytes: UnsafeRawBufferPointer) in
+                    // swiftlint:disable force_unwrapping
                     let digestPtr = digestBytes.baseAddress!.assumingMemoryBound(to: UInt8.self)
                     let signaturePtr = signatureBytes.baseAddress!.assumingMemoryBound(to: UInt8.self)
+                    // swiftlint:enable force_unwrapping
                     status = SecKeyRawVerify(publicKey,
                                              padding,
                                              digestPtr,

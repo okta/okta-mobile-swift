@@ -77,7 +77,7 @@ public class AuthorizationCodeFlow: AuthenticationFlow {
         public let state: String
         
         /// The current authentication URL, or `nil` if one has not yet been generated.
-        internal(set) public var authenticationURL: URL?
+        public internal(set) var authenticationURL: URL?
         
         /// Initializer for creating a context with a custom state string.
         /// - Parameter state: State string to use, or `nil` to accept an automatically generated default.
@@ -113,10 +113,10 @@ public class AuthorizationCodeFlow: AuthenticationFlow {
     public let redirectUri: URL
     
     /// Any additional query string parameters you would like to supply to the authorization server.
-    public let additionalParameters: [String:String]?
+    public let additionalParameters: [String: String]?
 
     /// Indicates whether or not this flow is currently in the process of authenticating a user.
-    private(set) public var isAuthenticating: Bool = false {
+    public private(set) var isAuthenticating: Bool = false {
         didSet {
             guard oldValue != isAuthenticating else {
                 return
@@ -131,7 +131,7 @@ public class AuthorizationCodeFlow: AuthenticationFlow {
     }
     
     /// The context that stores the state for the current authentication session.
-    private(set) public var context: Context? {
+    public private(set) var context: Context? {
         didSet {
             guard let url = context?.authenticationURL else {
                 return
@@ -153,7 +153,7 @@ public class AuthorizationCodeFlow: AuthenticationFlow {
                             scopes: String,
                             redirectUri: URL,
                             responseType: ResponseType = .code,
-                            additionalParameters: [String:String]? = nil)
+                            additionalParameters: [String: String]? = nil)
     {
         self.init(redirectUri: redirectUri,
                   responseType: responseType,
@@ -169,7 +169,7 @@ public class AuthorizationCodeFlow: AuthenticationFlow {
     ///   - client: The `OAuth2Client` to use with this flow.
     public init(redirectUri: URL,
                 responseType: ResponseType = .code,
-                additionalParameters: [String:String]? = nil,
+                additionalParameters: [String: String]? = nil,
                 client: OAuth2Client)
     {
         self.client = client
@@ -186,7 +186,7 @@ public class AuthorizationCodeFlow: AuthenticationFlow {
     /// - Parameters:
     ///   - context: Optional context to provide when customizing the state parameter.
     ///   - completion: Optional completion block for receiving the response. If `nil`, you may rely upon the appropriate delegate API methods.
-    public func resume(with context: Context? = nil, completion: ((Result<URL,OAuth2Error>) -> Void)? = nil) throws {
+    public func resume(with context: Context? = nil, completion: ((Result<URL, OAuth2Error>) -> Void)? = nil) throws {
         var context = context ?? Context()
         isAuthenticating = true
 
@@ -224,7 +224,7 @@ public class AuthorizationCodeFlow: AuthenticationFlow {
     /// - Parameters:
     ///   - url: Authorization redirect URI
     ///   - completion: Optional completion block to retrieve the returned result.
-    public func resume(with url: URL, completion: ((Result<Token,APIClientError>) -> Void)? = nil) throws {
+    public func resume(with url: URL, completion: ((Result<Token, APIClientError>) -> Void)? = nil) throws {
         let code = try authorizationCode(from: url)
         
         client.openIdConfiguration { result in
@@ -332,7 +332,7 @@ extension AuthorizationCodeFlow {
             throw RedirectError.unexpectedScheme(components.scheme)
         }
         
-        guard let query = components.queryItems?.reduce(into: [String:String](), { partialResult, queryItem in
+        guard let query = components.queryItems?.reduce(into: [String: String](), { partialResult, queryItem in
             if let value = queryItem.value {
                 partialResult[queryItem.name] = value
             }
@@ -368,7 +368,7 @@ extension OAuth2Client {
     public func authorizationCodeFlow(
         redirectUri: URL,
         responseType: ResponseType = .code,
-        additionalParameters: [String:String]? = nil) -> AuthorizationCodeFlow
+        additionalParameters: [String: String]? = nil) -> AuthorizationCodeFlow
     {
         AuthorizationCodeFlow(redirectUri: redirectUri,
                               responseType: responseType,

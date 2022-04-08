@@ -103,7 +103,7 @@ public struct Keychain {
             self.value = value
         }
 
-        init(_ result: [String:Any]) throws {
+        init(_ result: [String: Any]) throws {
             guard let account = result[kSecAttrAccount as String] as? String else {
                 throw KeychainError.missingAccount
             }
@@ -252,7 +252,7 @@ public struct Keychain {
             /// The date this keychain item was modified.
             public let modificationDate: Date
 
-            init(_ result: [String:Any]) throws {
+            init(_ result: [String: Any]) throws {
                 guard let account = result[kSecAttrAccount as String] as? String else {
                     throw KeychainError.missingAccount
                 }

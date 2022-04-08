@@ -26,9 +26,15 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        flow = DeviceAuthorizationFlow(issuer: URL(string: "https://<#domain#>")!,
-                                       clientId: "<#client_id#>",
-                                       scopes: "openid profile email offline_access")
+        if let issuerUrl = URL(string: "https://<#domain#>") {
+            flow = DeviceAuthorizationFlow(issuer: issuerUrl,
+                                           clientId: "<#client_id#>",
+                                           scopes: "openid profile email offline_access")
+        } else {
+            let alert = UIAlertController(title: "Client not configured", message: "Please update ViewController.swift", preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "OK", style: .default))
+            present(alert, animated: true)
+        }
 
         codeStackView.isHidden = true
         activityIndicator.startAnimating()

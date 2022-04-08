@@ -21,8 +21,8 @@ public protocol APIRequest {
 
     var httpMethod: APIRequestMethod { get }
     var url: URL { get }
-    var query: [String:APIRequestArgument?]? { get }
-    var headers: [String:APIRequestArgument?]? { get }
+    var query: [String: APIRequestArgument?]? { get }
+    var headers: [String: APIRequestArgument?]? { get }
     var contentType: APIContentType? { get }
     var cachePolicy: URLRequest.CachePolicy { get }
     var timeoutInterval: TimeInterval { get }
@@ -69,11 +69,11 @@ public protocol APIAuthorization {
 }
 
 public protocol APIRequestBody {
-    var bodyParameters: [String:Any]? { get }
+    var bodyParameters: [String: Any]? { get }
 }
 
 public protocol APIParsingContext {
-    var codingUserInfo: [CodingUserInfoKey:Any]? { get }
+    var codingUserInfo: [CodingUserInfoKey: Any]? { get }
 }
 
 extension APIRequest where Self: APIRequestBody {
@@ -98,8 +98,8 @@ extension APIRequest where Self: Encodable {
 
 extension APIRequest {
     public var httpMethod: APIRequestMethod { .get }
-    public var query: [String:APIRequestArgument?]? { nil }
-    public var headers: [String:APIRequestArgument?]? { nil }
+    public var query: [String: APIRequestArgument?]? { nil }
+    public var headers: [String: APIRequestArgument?]? { nil }
     public var acceptsType: APIContentType? { nil }
     public var contentType: APIContentType? { nil }
     public var cachePolicy: URLRequest.CachePolicy { .reloadIgnoringLocalAndRemoteCacheData }
@@ -190,14 +190,14 @@ extension APIContentType {
         }
     }
     
-    func encodedData(with parameters: [String:Any]?) throws -> Data? {
+    func encodedData(with parameters: [String: Any]?) throws -> Data? {
         guard let parameters = parameters else {
             return nil
         }
 
         switch self {
         case .formEncoded:
-            guard let parameters = parameters as? [String:APIRequestArgument] else {
+            guard let parameters = parameters as? [String: APIRequestArgument] else {
                 throw APIClientError.invalidRequestData
             }
             return URLRequest.oktaURLFormEncodedString(for: parameters)?.data(using: .utf8)

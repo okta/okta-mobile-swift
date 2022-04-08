@@ -33,7 +33,7 @@ extension DeviceAuthorizationFlow.AuthorizeRequest: APIRequest, APIRequestBody {
     var httpMethod: APIRequestMethod { .post }
     var contentType: APIContentType? { .formEncoded }
     var acceptsType: APIContentType? { .json }
-    var bodyParameters: [String : Any]? {
+    var bodyParameters: [String: Any]? {
         [
             "client_id": clientId,
             "scope": scope
@@ -46,7 +46,7 @@ extension DeviceAuthorizationFlow.TokenRequest: OAuth2TokenRequest, OAuth2APIReq
     var url: URL { openIdConfiguration.tokenEndpoint }
     var contentType: APIContentType? { .formEncoded }
     var acceptsType: APIContentType? { .json }
-    var bodyParameters: [String : Any]? {
+    var bodyParameters: [String: Any]? {
         [
             "client_id": clientId,
             "device_code": deviceCode,
@@ -54,7 +54,7 @@ extension DeviceAuthorizationFlow.TokenRequest: OAuth2TokenRequest, OAuth2APIReq
         ]
     }
     
-    var codingUserInfo: [CodingUserInfoKey : Any]? {
+    var codingUserInfo: [CodingUserInfoKey: Any]? {
         [
             .clientSettings: [
                 "client_id": clientId

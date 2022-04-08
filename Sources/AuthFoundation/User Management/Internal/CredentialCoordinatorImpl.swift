@@ -49,7 +49,7 @@ class CredentialCoordinatorImpl: CredentialCoordinator {
         tokenStorage.allIDs
     }
     
-    func store(token: Token, tags: [String:String] = [:]) throws -> Credential {
+    func store(token: Token, tags: [String: String] = [:]) throws -> Credential {
         try tokenStorage.add(token: token)
         try tokenStorage.setMetadata(Token.Metadata(token: token, tags: tags))
         return credentialDataSource.credential(for: token, coordinator: self)

@@ -34,11 +34,14 @@ extension WebAuthenticationError: LocalizedError {
                 return error.localizedDescription
             }
             
-            let errorString = (error != nil
-                               ? String(describing: error!)
-                               : NSLocalizedString("unknown_error_message",
-                                                   bundle: .module,
-                                                   comment: ""))
+            let errorString: String
+            if let error = error {
+                errorString = String(describing: error)
+            } else {
+                errorString = NSLocalizedString("unknown_error_message",
+                                                bundle: .module,
+                                                comment: "")
+            }
 
             return String.localizedStringWithFormat(
                 NSLocalizedString("generic_description",

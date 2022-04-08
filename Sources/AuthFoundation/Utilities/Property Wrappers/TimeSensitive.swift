@@ -14,7 +14,7 @@ import Foundation
 
 @propertyWrapper
 public struct TimeSensitive<T: Codable>: Codable {
-    private(set) public var updatedAt: Date?
+    public private(set) var updatedAt: Date?
 
     var storedValue: T
     

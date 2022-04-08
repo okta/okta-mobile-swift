@@ -1,5 +1,5 @@
 //
-// Copyright (c) 2021-Present, Okta, Inc. and/or its affiliates. All rights reserved.
+// Copyright (c) 2022-Present, Okta, Inc. and/or its affiliates. All rights reserved.
 // The Okta software accompanied by this notice is provided pursuant to the Apache License, Version 2.0 (the "License.")
 //
 // You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0.
@@ -12,9 +12,11 @@
 
 import Foundation
 
-public protocol TelemetryService {
-}
-
-public protocol Loggable {
-    func logEvent(_ name: String, parameters: [String:Any]?)
+/// Errors that may occur in the process of managing credentials.
+public enum CredentialError: Error {
+    /// Thrown when a credential no longer has a weak reference to the coordinator that was used to create it.
+    case missingCoordinator
+    
+    /// Thrown when a Credential is initialized with a ``Token`` and ``OAuth2Client`` with mismatched client configuration.
+    case incorrectClientConfiguration
 }

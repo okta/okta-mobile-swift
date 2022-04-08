@@ -108,7 +108,7 @@ class SafariBrowserProvider: NSObject, WebAuthenticationProvider {
 
 @available(iOS, introduced: 9.0, deprecated: 11.0)
 extension SafariBrowserProvider: AuthorizationCodeFlowDelegate {
-    func authentication<Flow>(flow: Flow, shouldAuthenticateUsing url: URL) where Flow : AuthorizationCodeFlow {
+    func authentication<Flow>(flow: Flow, shouldAuthenticateUsing url: URL) where Flow: AuthorizationCodeFlow {
         authenticate(using: url)
     }
     
@@ -123,7 +123,7 @@ extension SafariBrowserProvider: AuthorizationCodeFlowDelegate {
 
 @available(iOS, introduced: 9.0, deprecated: 11.0)
 extension SafariBrowserProvider: SessionLogoutFlowDelegate {
-    func logout<Flow>(flow: Flow, shouldLogoutUsing url: URL) where Flow : SessionLogoutFlow {
+    func logout<Flow>(flow: Flow, shouldLogoutUsing url: URL) where Flow: SessionLogoutFlow {
         logout(using: url)
     }
     

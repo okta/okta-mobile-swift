@@ -36,7 +36,7 @@ class UserDefaultsTokenStorage: TokenStorage {
     
     private lazy var allTokens: [String: Token] = {
         if let data = userDefaults.data(forKey: UserDefaultsKeys.allTokensKey),
-           let result = try? JSONDecoder().decode([String:Token].self, from: data)
+           let result = try? JSONDecoder().decode([String: Token].self, from: data)
         {
             return result
         }
@@ -45,7 +45,7 @@ class UserDefaultsTokenStorage: TokenStorage {
     
     private lazy var metadata: [String: Token.Metadata] = {
         if let data = userDefaults.data(forKey: UserDefaultsKeys.metadataKey),
-           let result = try? JSONDecoder().decode([String:Token.Metadata].self, from: data)
+           let result = try? JSONDecoder().decode([String: Token.Metadata].self, from: data)
         {
             return result
         }
@@ -82,10 +82,10 @@ class UserDefaultsTokenStorage: TokenStorage {
         
         guard !allTokens.keys.contains(id) else {
             throw TokenError.duplicateTokenAdded
-        } 
+        }
 
         var changedDefault = false
-        if allTokens.count == 0 {
+        if allTokens.isEmpty {
             changedDefault = true
         }
         

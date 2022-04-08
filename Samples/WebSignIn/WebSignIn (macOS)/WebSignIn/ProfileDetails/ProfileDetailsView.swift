@@ -60,7 +60,7 @@ struct ProfileDetailsView: View {
         viewModel.$signedIn
             .sink {
             self.$signedIn.wrappedValue = $0
-        }
+            }
         .store(in: &self.cancellableSet)
     }
 }

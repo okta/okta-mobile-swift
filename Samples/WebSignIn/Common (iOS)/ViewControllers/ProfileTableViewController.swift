@@ -81,6 +81,13 @@ class ProfileTableViewController: UITableViewController {
         title = user?.name
         self.tabBarItem.title = title
         
+        let updatedAt: String
+        if let updatedDate = userInfo.updatedAt {
+            updatedAt = dateFormatter.string(from: updatedDate)
+        } else {
+            updatedAt = "N/A"
+        }
+
         tableContent = [:]
         if let user = user {
             tableContent[.profile] = [
@@ -92,7 +99,7 @@ class ProfileTableViewController: UITableViewController {
             tableContent[.details] = [
                 .init(kind: .rightDetail, id: "username", title: "Username", detail: user.preferredUsername),
                 .init(kind: .rightDetail, id: "userId", title: "User ID", detail: user.subject),
-                .init(kind: .rightDetail, id: "createdAt", title: "Created at", detail: (user.updatedAt != nil) ? dateFormatter.string(from: user.updatedAt!) : "N/A"),
+                .init(kind: .rightDetail, id: "createdAt", title: "Created at", detail: updatedAt),
                 .init(kind: .disclosure, id: "details", title: "Token details"),
             ]
         }

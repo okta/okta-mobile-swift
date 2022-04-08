@@ -18,15 +18,15 @@ import Foundation
 ///
 /// For more information about the members to use, please refer to ``ClaimContainer``.
 public struct UserInfo: Codable, HasClaims, ClaimContainer {
-    public let payload: [String:Any]
+    public let payload: [String: Any]
     
-    public init(_ info: [String:Any]) {
+    public init(_ info: [String: Any]) {
         self.payload = info
     }
     
     public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: JSONCodingKeys.self)
-        self.init(try container.decode([String:Any].self))
+        self.init(try container.decode([String: Any].self))
     }
 }
 

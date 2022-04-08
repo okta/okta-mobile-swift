@@ -143,7 +143,9 @@ extension JWK {
                                                         description: nil)
             }
             
+            // swiftlint:disable force_cast
             return publicKey as! SecKey
+            // swiftlint:enable force_cast
         }
     }
 }

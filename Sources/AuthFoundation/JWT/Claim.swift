@@ -255,7 +255,7 @@ public extension HasClaims {
     #endif
     
     /// The address components for this user.
-    var address: [String:String]? { self[.address] }
+    var address: [String: String]? { self[.address] }
     
     /// The user's profile address.
     var profile: String? { self[.profile] }

@@ -1,14 +1,14 @@
-/*
- * Copyright (c) 2021-Present, Okta, Inc. and/or its affiliates. All rights reserved.
- * The Okta software accompanied by this notice is provided pursuant to the Apache License, Version 2.0 (the "License.")
- *
- * You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0.
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
- * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- *
- * See the License for the specific language governing permissions and limitations under the License.
- */
+//
+// Copyright (c) 2021-Present, Okta, Inc. and/or its affiliates. All rights reserved.
+// The Okta software accompanied by this notice is provided pursuant to the Apache License, Version 2.0 (the "License.")
+//
+// You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0.
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
+// WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+//
+// See the License for the specific language governing permissions and limitations under the License.
+//
 
 import UIKit
 import OktaOAuth2
@@ -75,6 +75,13 @@ class ProfileTableViewController: UITableViewController {
         dateFormatter.timeStyle = .long
 
         navigationItem.title = userInfo.name
+        
+        let updatedAt: String
+        if let updatedDate = userInfo.updatedAt {
+            updatedAt = dateFormatter.string(from: updatedDate)
+        } else {
+            updatedAt = "N/A"
+        }
 
         tableContent = [
             .profile: [
@@ -86,7 +93,7 @@ class ProfileTableViewController: UITableViewController {
             .details: [
                 .init(kind: .rightDetail, id: "username", title: "Username", detail: userInfo.preferredUsername),
                 .init(kind: .rightDetail, id: "userId", title: "User ID", detail: userInfo.subject),
-                .init(kind: .rightDetail, id: "createdAt", title: "Created at", detail: (userInfo.updatedAt != nil) ? dateFormatter.string(from: userInfo.updatedAt!) : "N/A"),
+                .init(kind: .rightDetail, id: "createdAt", title: "Created at", detail: updatedAt),
                 .init(kind: .disclosure, id: "details", title: "Token details"),
                 .init(kind: .action, id: "refresh", title: "Refresh")
             ],

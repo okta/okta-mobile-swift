@@ -24,7 +24,7 @@ public class ResourceOwnerFlow: AuthenticationFlow {
     
     /// Indicates whether or not this flow is currently in the process of authenticating a user.
     /// ``ResourceOwnerFlow/init(issuer:clientId:scopes:)``
-    private(set) public var isAuthenticating: Bool = false {
+    public private(set) var isAuthenticating: Bool = false {
         didSet {
             guard oldValue != isAuthenticating else {
                 return
@@ -63,7 +63,7 @@ public class ResourceOwnerFlow: AuthenticationFlow {
     ///   - username: Username
     ///   - password: Password
     ///   - completion: Completion invoked when a response is received.
-    public func resume(username: String, password: String, completion: ((Result<Token,APIClientError>) -> Void)? = nil) {
+    public func resume(username: String, password: String, completion: ((Result<Token, APIClientError>) -> Void)? = nil) {
         isAuthenticating = true
 
         client.openIdConfiguration { result in

@@ -103,12 +103,16 @@ public struct JWT: RawRepresentable, Codable, HasClaims, Expires {
         guard let headerData = Data(base64Encoded: components[0]),
               let payloadData = Data(base64Encoded: components[1])
         else { throw JWTError.invalidBase64Encoding }
-
+        
         self.header = try JSONDecoder().decode(JWT.Header.self, from: headerData)
-        self.payload = try JSONSerialization.jsonObject(with: payloadData, options: []) as! [String:Any]
+        guard let payload = try JSONSerialization.jsonObject(with: payloadData, options: []) as? [String: Any] else {
+            throw JWTError.badTokenStructure
+        }
+        
+        self.payload = payload
     }
     
-    private let payload: [String:Any]
+    private let payload: [String: Any]
 
     static func tokenComponents(from token: String) -> [String] {
         token

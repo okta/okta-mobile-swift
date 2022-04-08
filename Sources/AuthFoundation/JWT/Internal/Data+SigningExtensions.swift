@@ -40,7 +40,7 @@ extension Data {
         let exponentBytes = [CUnsignedChar](UnsafeBufferPointer<CUnsignedChar>(start: (exponent as NSData).bytes.bindMemory(to: CUnsignedChar.self, capacity: exponent.count), count: exponent.count / MemoryLayout<CUnsignedChar>.size))
         
         // Make sure modulus starts with a 0x00
-        if let prefix = modulusBytes.first , prefix != 0x00 {
+        if let prefix = modulusBytes.first, prefix != 0x00 {
             modulusBytes.insert(0x00, at: 0)
         }
         

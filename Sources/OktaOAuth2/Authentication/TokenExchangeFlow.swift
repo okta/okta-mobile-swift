@@ -37,7 +37,7 @@ public class TokenExchangeFlow: AuthenticationFlow {
     public let audience: Audience
 
     /// Indicates whether or not this flow is currently in the process of authenticating a user.
-    private(set) public var isAuthenticating: Bool = false {
+    public private(set) var isAuthenticating: Bool = false {
         didSet {
             guard oldValue != isAuthenticating else {
                 return

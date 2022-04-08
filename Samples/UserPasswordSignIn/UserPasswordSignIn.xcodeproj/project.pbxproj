@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		96B3DBD227FF6F0F004C3BA7 /* main+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96B3DBD127FF6F0F004C3BA7 /* main+Extensions.swift */; };
 		96D66FBE27EB870500AE89AD /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96D66FBD27EB870500AE89AD /* main.swift */; };
 		96D66FC727EB87A200AE89AD /* AuthFoundation in Frameworks */ = {isa = PBXBuildFile; productRef = 96D66FC627EB87A200AE89AD /* AuthFoundation */; };
 		96D66FC927EB87A200AE89AD /* OktaOAuth2 in Frameworks */ = {isa = PBXBuildFile; productRef = 96D66FC827EB87A200AE89AD /* OktaOAuth2 */; };
@@ -26,6 +27,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		96B3DBD127FF6F0F004C3BA7 /* main+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "main+Extensions.swift"; sourceTree = "<group>"; };
 		96D66FBA27EB870500AE89AD /* UserPasswordSignIn */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = UserPasswordSignIn; sourceTree = BUILT_PRODUCTS_DIR; };
 		96D66FBD27EB870500AE89AD /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
 		96D66FC427EB874800AE89AD /* SampleCode.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; name = SampleCode.xcconfig; path = ../Shared/SampleCode.xcconfig; sourceTree = "<group>"; };
@@ -67,6 +69,7 @@
 			isa = PBXGroup;
 			children = (
 				96D66FBD27EB870500AE89AD /* main.swift */,
+				96B3DBD127FF6F0F004C3BA7 /* main+Extensions.swift */,
 			);
 			path = "UserPasswordSignIn (macOS)";
 			sourceTree = "<group>";
@@ -118,7 +121,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 96D66FB527EB870500AE89AD /* Build configuration list for PBXProject "UserPasswordSignIn (macOS)" */;
+			buildConfigurationList = 96D66FB527EB870500AE89AD /* Build configuration list for PBXProject "UserPasswordSignIn" */;
 			compatibilityVersion = "Xcode 13.0";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -144,6 +147,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				96B3DBD227FF6F0F004C3BA7 /* main+Extensions.swift in Sources */,
 				96D66FBE27EB870500AE89AD /* main.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -295,7 +299,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		96D66FB527EB870500AE89AD /* Build configuration list for PBXProject "UserPasswordSignIn (macOS)" */ = {
+		96D66FB527EB870500AE89AD /* Build configuration list for PBXProject "UserPasswordSignIn" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				96D66FBF27EB870500AE89AD /* Debug */,

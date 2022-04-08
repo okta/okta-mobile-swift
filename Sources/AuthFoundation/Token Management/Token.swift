@@ -131,7 +131,7 @@ public class Token: Codable, Equatable, Hashable, Expires, Identifiable {
         self.context = context
     }
     
-    required public convenience init(from decoder: Decoder) throws {
+    public required convenience init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         
         let context: Context
@@ -187,7 +187,9 @@ extension Token {
 }
 
 extension CodingUserInfoKey {
+    // swiftlint:disable force_unwrapping
     public static let tokenId = CodingUserInfoKey(rawValue: "tokenId")!
     public static let apiClientConfiguration = CodingUserInfoKey(rawValue: "apiClientConfiguration")!
     public static let clientSettings = CodingUserInfoKey(rawValue: "clientSettings")!
+    // swiftlint:enable force_unwrapping
 }
