@@ -51,7 +51,7 @@
 		9653DCF2274C355E003C6E20 /* WebAuthenticationUI in Frameworks */ = {isa = PBXBuildFile; productRef = 9653DCF1274C355E003C6E20 /* WebAuthenticationUI */; };
 		9653DCF4274C3564003C6E20 /* AuthFoundation in Frameworks */ = {isa = PBXBuildFile; productRef = 9653DCF3274C3564003C6E20 /* AuthFoundation */; };
 		9653DCF6274C3564003C6E20 /* OktaOAuth2 in Frameworks */ = {isa = PBXBuildFile; productRef = 9653DCF5274C3564003C6E20 /* OktaOAuth2 */; };
-		9653DCFC274FF407003C6E20 /* Okta.plist in Resources */ = {isa = PBXBuildFile; fileRef = 9653DCFB274FF407003C6E20 /* Okta.plist */; };
+		96A5287827FE3B08009A0392 /* Okta.plist in Resources */ = {isa = PBXBuildFile; fileRef = 96A5287727FE3ABC009A0392 /* Okta.plist */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -131,7 +131,8 @@
 		9653DCE0274C300A003C6E20 /* WebSignInUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebSignInUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		9653DCEE274C305D003C6E20 /* okta-mobile-swift */ = {isa = PBXFileReference; lastKnownFileType = folder; name = "okta-mobile-swift"; path = ../..; sourceTree = "<group>"; };
 		9653DCEF274C33E4003C6E20 /* okta-mobile-swift */ = {isa = PBXFileReference; lastKnownFileType = folder; name = "okta-mobile-swift"; path = ../..; sourceTree = "<group>"; };
-		9653DCFB274FF407003C6E20 /* Okta.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Okta.plist; sourceTree = "<group>"; };
+		9653DCFB274FF407003C6E20 /* Okta.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Okta.plist; path = ../../Okta.plist; sourceTree = "<group>"; };
+		96A5287727FE3ABC009A0392 /* Okta.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = Okta.plist; path = ../../Okta.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -205,6 +206,7 @@
 				92088F9B27A9938B00A4DC1B /* Assets.xcassets */,
 				92088F9E27A9938B00A4DC1B /* WebSignIn.entitlements */,
 				928255B627B292050066A4C4 /* RootView.swift */,
+				9653DCFB274FF407003C6E20 /* Okta.plist */,
 			);
 			path = WebSignIn;
 			sourceTree = "<group>";
@@ -354,7 +356,7 @@
 				9653DCC6274C3009003C6E20 /* Assets.xcassets */,
 				9653DCC8274C3009003C6E20 /* LaunchScreen.storyboard */,
 				9653DCCB274C3009003C6E20 /* Info.plist */,
-				9653DCFB274FF407003C6E20 /* Okta.plist */,
+				96A5287727FE3ABC009A0392 /* Okta.plist */,
 			);
 			path = WebSignIn;
 			sourceTree = "<group>";
@@ -633,8 +635,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				96A5287827FE3B08009A0392 /* Okta.plist in Resources */,
 				92DF17A22791C61A00473E7E /* Profile.storyboard in Resources */,
-				9653DCFC274FF407003C6E20 /* Okta.plist in Resources */,
 				9653DCCA274C3009003C6E20 /* LaunchScreen.storyboard in Resources */,
 				9653DCC7274C3009003C6E20 /* Assets.xcassets in Resources */,
 				9653DCC5274C3008003C6E20 /* Main.storyboard in Resources */,

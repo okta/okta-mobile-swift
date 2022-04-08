@@ -31,8 +31,16 @@ final class DefaultJWKValidatorTests: XCTestCase {
             ]
          }
         """
-    let validator = DefaultJWKValidator()
+    var validator: DefaultJWKValidator!
 
+    override func setUpWithError() throws {
+        validator = DefaultJWKValidator()
+    }
+    
+    override func tearDownWithError() throws {
+        validator = nil
+    }
+    
     func testValidator() throws {
         let keyData = data(for: keySet)
         let jwks = try JSONDecoder().decode(JWKS.self, from: keyData)

@@ -37,9 +37,9 @@ class CredentialDataSourceDelegateRecorder: CredentialDataSourceDelegate {
 }
 
 final class DefaultCredentialDataSourceTests: XCTestCase {
-    let coordinator = MockCredentialCoordinator()
+    var coordinator: MockCredentialCoordinator!
     var dataSource: DefaultCredentialDataSource!
-    let delegate = CredentialDataSourceDelegateRecorder()
+    var delegate: CredentialDataSourceDelegateRecorder!
 
     let configuration = OAuth2Client.Configuration(baseURL: URL(string: "https://example.com")!,
                                                    clientId: "clientid",
@@ -47,9 +47,17 @@ final class DefaultCredentialDataSourceTests: XCTestCase {
     
 
     override func setUpWithError() throws {
+        coordinator = MockCredentialCoordinator()
+        delegate = CredentialDataSourceDelegateRecorder()
         dataSource = DefaultCredentialDataSource()
         dataSource.delegate = delegate
         coordinator.credentialDataSource = dataSource
+    }
+    
+    override func tearDownWithError() throws {
+        coordinator = nil
+        delegate = nil
+        dataSource = nil
     }
     
     func testCredentials() throws {

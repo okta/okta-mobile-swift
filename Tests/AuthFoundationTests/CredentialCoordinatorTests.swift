@@ -43,7 +43,6 @@ final class UserCoordinatorTests: XCTestCase {
         userDefaults.removePersistentDomain(forName: name)
 
         storage = UserDefaultsTokenStorage(userDefaults: userDefaults)
-        
         coordinator = CredentialCoordinatorImpl(tokenStorage: storage)
         
         XCTAssertEqual(storage.allIDs.count, 0)
@@ -51,6 +50,10 @@ final class UserCoordinatorTests: XCTestCase {
     
     override func tearDownWithError() throws {
         userDefaults.removePersistentDomain(forName: name)
+
+        userDefaults = nil
+        storage = nil
+        coordinator = nil
     }
     
     func testDefaultCredentialViaToken() throws {

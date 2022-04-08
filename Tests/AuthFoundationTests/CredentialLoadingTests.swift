@@ -24,15 +24,19 @@ final class CredentialLoadingTests: XCTestCase {
         userDefaults = UserDefaults(suiteName: name)
         userDefaults.removePersistentDomain(forName: name)
 
-        storage = UserDefaultsTokenStorage(userDefaults: userDefaults)
-        
+        let storage = UserDefaultsTokenStorage(userDefaults: userDefaults)
         coordinator = CredentialCoordinatorImpl(tokenStorage: storage)
         
         XCTAssertEqual(storage.allIDs.count, 0)
+        self.storage = storage
     }
     
     override func tearDownWithError() throws {
         userDefaults.removePersistentDomain(forName: name)
+
+        userDefaults = nil
+        storage = nil
+        coordinator = nil
     }
     
     func testFetchingTokens() throws {

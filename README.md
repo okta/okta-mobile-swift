@@ -5,6 +5,15 @@
 
 # Okta Mobile SDK for Swift
 
+The Okta Mobile SDK replaces our legacy mobile SDKs (such as okta-oidc-ios) and enables:
+
+* Streamlined development
+* Increased maintainability of the Okta portion of your code
+* Easier feature expansion
+* Implementation of use cases that were previously difficult or impractical
+
+This new Mobile SDK is built as a platform, enabling you to choose the components you need for your app.
+
 **Table of Contents**
 
 <!-- TOC depthFrom:2 depthTo:3 -->
@@ -27,13 +36,15 @@ If you run into problems using the SDK, you can:
 * Ask questions on the [Okta Developer Forums][devforum]
 * Post [issues][github-issues] here on GitHub (for code errors)
 
-## Introduction
-
-The Okta Mobile SDK represents a suite of libraries that intends to replace our legacy mobile SDKs, with the aim to streamline development, ease maintenance and feature development, and enable new use cases that were previously difficult or impractical to implement. We are building a platform to support the development of many SDKs, allowing application developers to choose which SDKs they need.
-
-### SDK Overview
+## SDK Architecture
 
 This SDK consists of several different libraries, each with detailed documentation.
+
+```mermaid
+  graph TD;
+    AuthFoundation-->OktaOAuth2;
+    OktaOAuth2-->WebAuthenticationUI;
+```
 
 - AuthFoundation -- Common classes for managing credentials and used as a foundation for other libraries.
 - OktaOAuth2 -- OAuth2 authentication capabilities for authenticating users.
@@ -51,20 +62,23 @@ This SDK is being actively developed and is in Beta release status. At this time
 * Suggestions for future development;
 * Any other comments or feedback on this new direction.
 
-### Feature roadmap
+### Key Features
 
-| Feature | Status |
-| ------- | ------ |
-| Login and logout via web redirect | ✅ |
-| Credential management | ✅ |
-| Secure token storage | ✅ |
-| Native SSO / Token Exchange Flow | ✅ |
-| Device Authorization Grant Flow | ✅ |
-| Resource Owner Flow | ✅ |
-| Automatically authorized URLSessionConfiguration for authorizing requests | ✅ |
-| Time synchronization via NTP | 🚧 |
-| Advanced logging and tracing | 🚧 |
-| Transparent upgrades from okta-oidc-ios | 🚧 |
+Several key features and capabilities are introduced with this library, with some notable improvements listed below.
+
+| Feature |
+| ------- |
+| Simple OIDC web-based sign in |
+| Credential management (secure storage, retrieval, etc) |
+| Multi-token handling (store and use tokens for multiple users, scopes, etc) |
+| Authorization Code Flow |
+| Native SSO / Token Exchange Flow |
+| Device Authorization Grant Flow |
+| Resource Owner Flow |
+| Simple JWT parsing and handling |
+| Streamlined authorization of URLSession requests using credential tokens |
+| Automatic time synchronization |
+| Many extension points for customizability, monitoring, and tracking |
 
 ## Getting Started
 
@@ -73,6 +87,8 @@ To get started, you will need:
 * An Okta account, called an _organization_ (sign up for a free [developer organization](https://developer.okta.com/signup) if you need one).
 * An Okta Application configured as a Native App. Use Okta's administrator console to create the application by following the wizard and using default properties.
 * Xcode 13.x, targeting one of the supported platforms and target versions (see the [Support Policy][support-policy] below).
+
+For examples of how this SDK can be utilized, please refer to the [sample applications](Samples) included within this repository.
 
 ## Install
 

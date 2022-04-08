@@ -56,6 +56,9 @@ final class UserDefaultTokenStorageTests: XCTestCase {
     
     override func tearDownWithError() throws {
         userDefaults.removePersistentDomain(forName: name)
+
+        userDefaults = nil
+        storage = nil
     }
     
     func testDefaultToken() throws {

@@ -18,15 +18,16 @@ import XCTest
 
 final class KeychainTests: XCTestCase {
     let serviceName = (#file as NSString).lastPathComponent
-    let mock = MockKeychain()
+    var mock: MockKeychain!
     
     override func setUp() {
+        mock = MockKeychain()
         Keychain.implementation = mock
-        mock.reset()
     }
     
-    override class func tearDown() {
+    override func tearDownWithError() throws {
         Keychain.implementation = KeychainImpl()
+        mock = nil
     }
 
     func testItemSave() throws {

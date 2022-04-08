@@ -149,7 +149,6 @@ class CredentialCoordinatorImpl: CredentialCoordinator {
 
 extension CredentialCoordinatorImpl: OAuth2ClientDelegate {
     func api(client: APIClient, didSend request: URLRequest, received error: APIClientError) {
-        print("Error happened: \(error)")
     }
 
     func oauth(client: OAuth2Client, didRefresh token: Token, replacedWith newToken: Token?) {

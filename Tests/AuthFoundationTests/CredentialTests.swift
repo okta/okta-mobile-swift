@@ -15,7 +15,7 @@ import XCTest
 @testable import AuthFoundation
 
 final class CredentialTests: XCTestCase {
-    let coordinator = MockCredentialCoordinator()
+    var coordinator: MockCredentialCoordinator!
     var credential: Credential!
     var urlSession: URLSessionMock!
 
@@ -34,8 +34,15 @@ final class CredentialTests: XCTestCase {
                                              clientSettings: [ "client_id": "foo" ]))
 
     override func setUpWithError() throws {
+        coordinator = MockCredentialCoordinator()
         credential = coordinator.credentialDataSource.credential(for: token, coordinator: coordinator)
         urlSession = credential.oauth2.session as? URLSessionMock
+    }
+    
+    override func tearDownWithError() throws {
+        coordinator = nil
+        credential = nil
+        urlSession = nil
     }
 
     func testRemove() throws {

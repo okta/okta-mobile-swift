@@ -12,13 +12,14 @@
 
 import UIKit
 import OktaOAuth2
+import CoreImage.CIFilterBuiltins
 
 class ViewController: UIViewController {
-
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     @IBOutlet weak var codeStackView: UIStackView!
     @IBOutlet weak var urlPromptLabel: UILabel!
     @IBOutlet weak var codeLabel: UILabel!
+    @IBOutlet weak var codeImageView: UIImageView!
     
     var flow: DeviceAuthorizationFlow?
     
@@ -31,6 +32,7 @@ class ViewController: UIViewController {
 
         codeStackView.isHidden = true
         activityIndicator.startAnimating()
+        codeImageView.layer.magnificationFilter = .nearest
         
         signIn()
     }
@@ -63,6 +65,7 @@ class ViewController: UIViewController {
     
     func show(_ context: DeviceAuthorizationFlow.Context) {
         update(prompt: context.verificationUri)
+        update(qrCode: context.verificationUriComplete)
         update(code: context.userCode)
         codeStackView.isHidden = false
         activityIndicator.stopAnimating()
@@ -83,7 +86,7 @@ class ViewController: UIViewController {
     func update(prompt url: URL) {
         let textColor = (traitCollection.userInterfaceStyle == .light) ? UIColor.black : UIColor.white
         let urlString = url.absoluteString.replacingOccurrences(of: "https://", with: "")
-        let mutableString = NSMutableAttributedString(string: "To sign in, visit \(urlString) and enter the following code:",
+        let mutableString = NSMutableAttributedString(string: "Visit \(urlString) and enter the following code:",
                                                       attributes: [
                                                         .foregroundColor: textColor
                                                       ])
@@ -98,6 +101,30 @@ class ViewController: UIViewController {
         mutableString.setAttributes([ .foregroundColor: linkColor ],
                                     range: NSRange(range, in: mutableString.string))
         urlPromptLabel.attributedText = mutableString
+    }
+    
+    func update(qrCode url: URL) {
+        var image: UIImage? = nil
+        defer {
+            codeImageView.image = image
+        }
+        
+        let context = CIContext()
+        let filter = CIFilter.qrCodeGenerator()
+
+        guard let data = url.absoluteString.data(using: .utf8) else {
+            return
+        }
+        
+        filter.message = data
+        
+        guard let outputImage = filter.outputImage,
+              let cgImage = context.createCGImage(outputImage, from: outputImage.extent)
+        else {
+            return
+        }
+        
+        image = UIImage(cgImage: cgImage)
     }
     
     func update(code: String) {
