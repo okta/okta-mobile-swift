@@ -23,6 +23,7 @@ public protocol APIRequest {
     var url: URL { get }
     var query: [String: APIRequestArgument?]? { get }
     var headers: [String: APIRequestArgument?]? { get }
+    var acceptsType: APIContentType? { get }
     var contentType: APIContentType? { get }
     var cachePolicy: URLRequest.CachePolicy { get }
     var timeoutInterval: TimeInterval { get }
