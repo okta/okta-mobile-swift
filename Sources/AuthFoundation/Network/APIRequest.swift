@@ -142,7 +142,7 @@ extension APIRequest {
         }
         
         if let acceptsType = acceptsType {
-            request.setValue(acceptsType.rawValue, forHTTPHeaderField: "Accepts")
+            request.setValue(acceptsType.rawValue, forHTTPHeaderField: "Accept")
         }
         
         request.setValue(client.userAgent, forHTTPHeaderField: "User-Agent")
