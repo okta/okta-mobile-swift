@@ -338,6 +338,9 @@ public class WebAuthentication {
     ///   - flow: Authorization code flow instance for this client.
     ///   - context: Optional context to initialize authentication with.
     public init(flow: AuthorizationCodeFlow, logoutFlow: SessionLogoutFlow?, context: AuthorizationCodeFlow.Context? = nil) {
+        // Ensure this SDK's static version is included in the user agent.
+        SDKVersion.register(sdk: Version)
+        
         self.signInFlow = flow
         self.signOutFlow = logoutFlow
         self.context = context

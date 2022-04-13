@@ -172,6 +172,9 @@ public class AuthorizationCodeFlow: AuthenticationFlow {
                 additionalParameters: [String: String]? = nil,
                 client: OAuth2Client)
     {
+        // Ensure this SDK's static version is included in the user agent.
+        SDKVersion.register(sdk: Version)
+        
         self.client = client
         self.responseType = responseType
         self.redirectUri = redirectUri

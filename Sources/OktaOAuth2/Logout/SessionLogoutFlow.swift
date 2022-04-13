@@ -124,6 +124,9 @@ public class SessionLogoutFlow: LogoutFlow {
     public init(logoutRedirectUri: URL,
                 client: OAuth2Client)
     {
+        // Ensure this SDK's static version is included in the user agent.
+        SDKVersion.register(sdk: Version)
+        
         self.client = client
         self.logoutRedirectUri = logoutRedirectUri
         

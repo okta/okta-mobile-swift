@@ -61,15 +61,17 @@ public class SDKVersion {
     public init(sdk name: String, version: String) {
         self.name = name
         self.version = version
-        
-        SDKVersion.register(sdk: self)
     }
 
     public var displayName: String { "\(name)/\(version)" }
     public private(set) static var userAgent: String = ""
 
     fileprivate static var sdkVersions: [SDKVersion] = []
-    private static func register(sdk: SDKVersion) {
+    public static func register(sdk: SDKVersion) {
+        guard sdkVersions.filter({ $0.name == sdk.name }).isEmpty else {
+            return
+        }
+        
         sdkVersions.append(sdk)
 
         let sdkVersions = SDKVersion.sdkVersions

@@ -11,5 +11,6 @@
 //
 
 import Foundation
+import AuthFoundation
 
-public let Version = SDKVersion(sdk: "okta-authfoundation-swift", version: "0.1.0")
+public let Version = SDKVersion(sdk: "okta-webauthenticationui-swift", version: "0.1.0")
