@@ -213,7 +213,7 @@ extension APIContentType {
             return nil
         }
 
-        switch self {
+        switch self.underlyingType {
         case .formEncoded:
             guard let parameters = parameters as? [String: APIRequestArgument] else {
                 throw APIClientError.invalidRequestData
