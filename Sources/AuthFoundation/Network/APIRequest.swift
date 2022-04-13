@@ -63,6 +63,23 @@ public enum APIContentType: Equatable, RawRepresentable {
             self = .other(rawValue)
         }
     }
+    
+    var underlyingType: APIContentType? {
+        switch self {
+        case .other(let value):
+            if value.hasPrefix("application/json") ||
+                value.hasPrefix("application/ion+json")
+            {
+                return .json
+            } else if value.hasPrefix("application/x-www-form-urlencoded") {
+                return .formEncoded
+            } else {
+                return self
+            }
+        default:
+            return self
+        }
+    }
 }
 
 public protocol APIAuthorization {
