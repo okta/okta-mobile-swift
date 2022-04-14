@@ -142,6 +142,9 @@ public class OAuth2Client {
     ///   - baseURL: Base URL representing the Okta domain to use.
     ///   - session: Optional URLSession to use for network requests.
     public init(_ configuration: Configuration, session: URLSessionProtocol? = nil) {
+        // Ensure this SDK's static version is included in the user agent.
+        SDKVersion.register(sdk: Version)
+        
         self.configuration = configuration
         self.session = session ?? URLSession.shared
         

@@ -23,6 +23,7 @@ public protocol APIRequest {
     var url: URL { get }
     var query: [String: APIRequestArgument?]? { get }
     var headers: [String: APIRequestArgument?]? { get }
+    var acceptsType: APIContentType? { get }
     var contentType: APIContentType? { get }
     var cachePolicy: URLRequest.CachePolicy { get }
     var timeoutInterval: TimeInterval { get }
@@ -60,6 +61,23 @@ public enum APIContentType: Equatable, RawRepresentable {
             self = .formEncoded
         } else {
             self = .other(rawValue)
+        }
+    }
+    
+    var underlyingType: APIContentType? {
+        switch self {
+        case .other(let value):
+            if value.hasPrefix("application/json") ||
+                value.hasPrefix("application/ion+json")
+            {
+                return .json
+            } else if value.hasPrefix("application/x-www-form-urlencoded") {
+                return .formEncoded
+            } else {
+                return self
+            }
+        default:
+            return self
         }
     }
 }
@@ -141,7 +159,7 @@ extension APIRequest {
         }
         
         if let acceptsType = acceptsType {
-            request.setValue(acceptsType.rawValue, forHTTPHeaderField: "Accepts")
+            request.setValue(acceptsType.rawValue, forHTTPHeaderField: "Accept")
         }
         
         request.setValue(client.userAgent, forHTTPHeaderField: "User-Agent")
@@ -195,7 +213,7 @@ extension APIContentType {
             return nil
         }
 
-        switch self {
+        switch self.underlyingType {
         case .formEncoded:
             guard let parameters = parameters as? [String: APIRequestArgument] else {
                 throw APIClientError.invalidRequestData
