@@ -12,11 +12,12 @@
 
 import Foundation
 
+/// Property wrapper representing a weak value.
 @propertyWrapper
-struct Weak<Object: AnyObject> {
-    weak var wrappedValue: Object?
+public struct Weak<Object: AnyObject> {
+    public weak var wrappedValue: Object?
     
-    init?(_ object: Object?) {
+    public init?(_ object: Object?) {
         guard let object = object else {
             return nil
         }
@@ -25,17 +26,18 @@ struct Weak<Object: AnyObject> {
     }
 }
 
+/// Property wrapper representing a collection of weak values.
 @propertyWrapper
-struct WeakCollection<Collect, Element> where Collect: RangeReplaceableCollection, Collect.Element == Optional<Element>, Element: AnyObject {
+public struct WeakCollection<Collect, Element> where Collect: RangeReplaceableCollection, Collect.Element == Optional<Element>, Element: AnyObject {
     private var weakObjects = [Weak<Element>]()
 
-    init(wrappedValue value: Collect) { save(collection: value) }
+    public init(wrappedValue value: Collect) { save(collection: value) }
 
     private mutating func save(collection: Collect) {
         weakObjects = collection.compactMap { Weak($0) }
     }
 
-    var wrappedValue: Collect {
+    public var wrappedValue: Collect {
         get { Collect(weakObjects.compactMap { $0.wrappedValue }) }
         set (newValues) { save(collection: newValues) }
     }
