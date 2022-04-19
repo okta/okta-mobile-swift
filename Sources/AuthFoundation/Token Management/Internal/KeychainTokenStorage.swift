@@ -118,7 +118,7 @@ class KeychainTokenStorage: TokenStorage {
 
         try Keychain
             .Search(account: id,
-                    service: KeychainTokenStorage.serviceName,
+                    service: KeychainTokenStorage.metadataName,
                     accessGroup: nil)
             .get()
             .delete()
