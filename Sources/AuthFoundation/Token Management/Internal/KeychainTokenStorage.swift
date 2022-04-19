@@ -116,12 +116,14 @@ class KeychainTokenStorage: TokenStorage {
             .get()
             .delete()
 
-        try Keychain
+        let metadataItems = try Keychain
             .Search(account: id,
                     service: KeychainTokenStorage.metadataName,
                     accessGroup: nil)
-            .get()
-            .delete()
+            .list()
+        if !metadataItems.isEmpty {
+            try metadataItems.first?.get().delete()
+        }
         
         delegate?.token(storage: self, removed: id)
 
