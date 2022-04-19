@@ -97,7 +97,7 @@ public protocol APIParsingContext {
 }
 
 extension APIParsingContext {
-    func error(from data: Data) -> Error? { nil }
+    public func error(from data: Data) -> Error? { nil }
 }
 
 extension APIRequest where Self: APIRequestBody {
