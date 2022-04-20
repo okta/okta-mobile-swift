@@ -581,14 +581,6 @@ extension OAuth2Client: APIClient {
 extension OAuth2Client: UsesDelegateCollection {
     public typealias Delegate = OAuth2ClientDelegate
 
-    /// Adds the supplied object as a delegate of this client.
-    /// - Parameter delegate: Delegate to add.
-    public func add(delegate: Delegate) { delegates += delegate }
-    
-    /// Removes the given delegate from this client.
-    /// - Parameter delegate: Delegate to remove.
-    public func remove(delegate: Delegate) { delegates -= delegate }
-    
     public var delegateCollection: DelegateCollection<OAuth2ClientDelegate> {
         delegates
     }

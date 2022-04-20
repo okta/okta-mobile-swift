@@ -21,8 +21,8 @@ public protocol UsesDelegateCollection {
 }
 
 extension UsesDelegateCollection {
-    public func add(delegate: Delegate) { delegateCollection += delegate }
-    public func remove(delegate: Delegate) { delegateCollection -= delegate }
+    public func add(delegate: Delegate) { delegateCollection.add(delegate) }
+    public func remove(delegate: Delegate) { delegateCollection.remove(delegate) }
 }
 
 public class DelegateCollection<D> {
@@ -52,22 +52,4 @@ extension DelegateCollection {
             block(delegate)
         }
     }
-}
-
-public func += <D>(left: DelegateCollection<D>, right: D) {
-    left.add(right)
-}
-
-public func -= <D>(left: DelegateCollection<D>, right: D) {
-    left.remove(right)
-}
-
-precedencegroup MulticastPrecedence {
-    associativity: left
-    higherThan: TernaryPrecedence
-}
-
-infix operator |> : MulticastPrecedence
-public func |> <D>(left: DelegateCollection<D>, right: (D) -> Void) {
-    left.invoke(right)
 }

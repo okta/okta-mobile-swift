@@ -31,3 +31,49 @@ extension Double: APIRequestArgument {
 extension Bool: APIRequestArgument {
     public var stringValue: String { "\(self)" }
 }
+
+extension UInt: APIRequestArgument {
+    public var stringValue: String { "\(self)" }
+}
+
+extension Int8: APIRequestArgument {
+    public var stringValue: String { "\(self)" }
+}
+
+extension UInt8: APIRequestArgument {
+    public var stringValue: String { "\(self)" }
+}
+
+extension Int16: APIRequestArgument {
+    public var stringValue: String { "\(self)" }
+}
+
+extension UInt16: APIRequestArgument {
+    public var stringValue: String { "\(self)" }
+}
+
+extension Int32: APIRequestArgument {
+    public var stringValue: String { "\(self)" }
+}
+
+extension UInt32: APIRequestArgument {
+    public var stringValue: String { "\(self)" }
+}
+
+extension Int64: APIRequestArgument {
+    public var stringValue: String { "\(self)" }
+}
+
+extension UInt64: APIRequestArgument {
+    public var stringValue: String { "\(self)" }
+}
+
+extension Float: APIRequestArgument {
+    public var stringValue: String { "\(self)" }
+}
+
+extension NSString: APIRequestArgument {
+    public var stringValue: String { "\(self)" }
+}
+
+extension NSNumber: APIRequestArgument {}

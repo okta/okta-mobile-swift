@@ -14,10 +14,18 @@ import XCTest
 @testable import AuthFoundation
 
 final class WeakCollectionTests: XCTestCase {
-    class Thing {
+    class Thing: Equatable, Hashable {
         let value: String
         init(_ value: String) {
             self.value = value
+        }
+
+        static func == (lhs: WeakCollectionTests.Thing, rhs: WeakCollectionTests.Thing) -> Bool {
+            lhs.value == rhs.value
+        }
+
+        func hash(into hasher: inout Hasher) {
+            hasher.combine(value)
         }
     }
     
@@ -69,6 +77,7 @@ final class WeakCollectionTests: XCTestCase {
             let thing1 = Thing("Thing 1")
             parent.things.append(thing1)
             XCTAssertEqual(parent.things.count, 1)
+            XCTAssertEqual(parent.things, [thing1])
         }
         
         XCTAssertEqual(parent.things.count, 0)

@@ -166,7 +166,7 @@ extension APIClient {
         }
         
         guard 200..<300 ~= httpResponse.statusCode else {
-            if let error = error(from: data) {
+            if let error = error(from: data) ?? context?.error(from: data) {
                 throw APIClientError.serverError(error)
             } else {
                 throw APIClientError.statusCode(httpResponse.statusCode)

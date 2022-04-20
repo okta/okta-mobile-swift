@@ -184,6 +184,7 @@ final class KeychainTokenStorageTests: XCTestCase {
 
         mock.expect(noErr, result: tokenResult as CFDictionary)
         mock.expect(noErr)
+        mock.expect(errSecSuccess, result: [] as CFArray)
         mock.expect(noErr, result: defaultResult as CFDictionary)
         mock.expect(noErr)
         mock.expect(noErr, result: tokenResult as CFDictionary)

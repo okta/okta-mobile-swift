@@ -188,11 +188,20 @@ public class Credential: Identifiable, Equatable, OAuth2ClientDelegate {
     ///   - type: The token type to revoke.
     ///   - completion: Completion block called when the operation completes.
     public func revoke(type: Token.RevokeType = .accessToken, completion: ((Result<Void, OAuth2Error>) -> Void)? = nil) {
+        var shouldRemove = false
+        if type == .refreshToken && token.refreshToken != nil {
+            shouldRemove = true
+        } else if type == .accessToken {
+            shouldRemove = true
+        }
+        
         oauth2.revoke(token, type: type) { result in
+            defer { completion?(result) }
+            
+            guard case .success(_) = result else { return }
+            
             // Remove the credential from storage if the access token was revoked
-            if case .success(_) = result,
-               type == .accessToken
-            {
+            if shouldRemove {
                 do {
                     try self.coordinator?.remove(credential: self)
                 } catch let error as OAuth2Error {
@@ -203,8 +212,6 @@ public class Credential: Identifiable, Equatable, OAuth2ClientDelegate {
                     return
                 }
             }
-            
-            completion?(result)
         }
     }
     

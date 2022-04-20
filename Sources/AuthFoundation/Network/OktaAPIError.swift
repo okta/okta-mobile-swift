@@ -12,12 +12,14 @@
 
 import Foundation
 
-public struct OktaAPIError: Decodable, Error {
+public struct OktaAPIError: Decodable, Error, LocalizedError {
     public let code: String
     public let summary: String
     public let link: String
     public let id: String
     public let causes: [String]
+    
+    public var errorDescription: String? { summary }
     
     public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)

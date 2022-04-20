@@ -20,13 +20,18 @@ You can use AuthFoundation when you want to:
 - ``Token``
 - ``Credential``
 - ``UserInfo``
+- ``TokenInfo``
 
 ### OAuth2 Client Operations
 
 - ``OAuth2Client``
 - ``OAuth2ClientDelegate``
 - ``OpenIdConfiguration``
+- ``AuthenticationFlow``
+- ``AuthenticationDelegate``
+- ``OAuth2TokenRequest``
 - ``GrantType``
+- ``PKCE``
 
 ### JWT and Token Verification
 
@@ -35,6 +40,8 @@ You can use AuthFoundation when you want to:
 - ``JWKS``
 - ``Claim``
 - ``HasClaims``
+- ``ClaimContainer``
+- ``Expires``
 
 ### Security
 
@@ -44,17 +51,20 @@ You can use AuthFoundation when you want to:
 
 - <doc:CustomizingNetworkRequests>
 - ``TimeCoordinator``
+- ``CredentialCoordinator``
 - ``CredentialDataSource``
 - ``CredentialDataSourceDelegate``
 - ``TokenStorage``
 - ``TokenStorageDelegate``
 - ``JWKValidator``
+- ``AccessTokenValidator``
 - ``IDTokenValidator``
 
 ### Networking
 
 - ``APIClient``
 - ``APIClientDelegate``
+- ``APIClientConfiguration``
 - ``APIContentType``
 - ``APIRequest``
 - ``APIRequestBody``
@@ -62,6 +72,7 @@ You can use AuthFoundation when you want to:
 - ``APIRequestMethod``
 - ``APIResponse``
 - ``APIAuthorization``
+- ``APIParsingContext``
 - ``OAuth2APIRequest``
 - ``JSONDecodable``
 - ``Empty``
@@ -76,6 +87,7 @@ You can use AuthFoundation when you want to:
 - ``TokenError``
 - ``JWTError``
 - ``KeychainError``
+- ``AuthenticationError``
 
 ### Internals and mocking
 
@@ -84,3 +96,6 @@ You can use AuthFoundation when you want to:
 - ``URLSessionProtocol``
 - ``URLSessionDataTaskProtocol``
 - ``SDKVersion``
+- ``Weak``
+- ``WeakCollection``
+- ``TimeSensitive``

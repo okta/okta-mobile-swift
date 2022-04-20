@@ -44,4 +44,16 @@ final class APIContentTypeTests: XCTestCase {
 
         XCTAssertEqual(APIContentType(rawValue: "application/ion+json")?.underlyingType, .json)
     }
+    
+    func testJsonEncodedData() throws {
+        let data = try XCTUnwrap(APIContentType.json.encodedData(with: ["string": "value", "bool": true, "int": 6]))
+        XCTAssertEqual(String(data: data, encoding: .utf8),
+                       "{\"bool\":true,\"int\":6,\"string\":\"value\"}")
+    }
+
+    func testFormEncodedData() throws {
+        let data = try XCTUnwrap(APIContentType.formEncoded.encodedData(with: ["string": "value", "bool": true, "int": 6]))
+        XCTAssertEqual(String(data: data, encoding: .utf8),
+                       "bool=true&int=6&string=value")
+    }
 }

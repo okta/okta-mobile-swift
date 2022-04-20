@@ -92,6 +92,12 @@ public protocol APIRequestBody {
 
 public protocol APIParsingContext {
     var codingUserInfo: [CodingUserInfoKey: Any]? { get }
+
+    func error(from data: Data) -> Error?
+}
+
+extension APIParsingContext {
+    public func error(from data: Data) -> Error? { nil }
 }
 
 extension APIRequest where Self: APIRequestBody {
