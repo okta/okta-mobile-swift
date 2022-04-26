@@ -98,8 +98,12 @@ final class ErrorTests: XCTestCase {
                           "keychain_cannot_list")
         XCTAssertNotEqual(KeychainError.cannotSave(code: noErr).errorDescription,
                           "keychain_cannot_save")
+        XCTAssertNotEqual(KeychainError.cannotUpdate(code: noErr).errorDescription,
+                          "keychain_cannot_update")
         XCTAssertNotEqual(KeychainError.cannotDelete(code: noErr).errorDescription,
                           "keychain_cannot_delete")
+        XCTAssertNotEqual(KeychainError.accessControlInvalid(code: 0, description: "error").errorDescription,
+                          "keychain_access_control_invalid")
         XCTAssertNotEqual(KeychainError.notFound.errorDescription,
                           "keychain_not_found")
         XCTAssertNotEqual(KeychainError.invalidFormat.errorDescription,

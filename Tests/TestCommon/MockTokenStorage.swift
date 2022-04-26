@@ -15,7 +15,8 @@ import Foundation
 
 class MockTokenStorage: TokenStorage {
     var error: Error?
-    
+    var prompt: String?
+
     var defaultTokenID: String? {
         didSet {
             if defaultTokenID != oldValue {
@@ -33,16 +34,16 @@ class MockTokenStorage: TokenStorage {
     }
     
     var allIDs: [String] { Array(allTokens.keys) }
-    private var allTokens: [String:Token] = [:]
+    private var allTokens: [String:(Token,[Credential.Security])] = [:]
     private var metadata: [String:Token.Metadata] = [:]
     
-    func add(token: Token) throws {
+    func add(token: Token, security: [Credential.Security]) throws {
         if let error = error {
             throw error
         }
         
         let id = token.id
-        allTokens[id] = token
+        allTokens[id] = (token, security)
         delegate?.token(storage: self, added: id, token: token)
     }
     
@@ -66,12 +67,13 @@ class MockTokenStorage: TokenStorage {
         return metadata[id] ?? Token.Metadata(id: id)
     }
     
-    func replace(token id: String, with token: Token) throws {
+    func replace(token id: String, with token: Token, security: [Credential.Security]?) throws {
         if let error = error {
             throw error
         }
         
-        allTokens[id] = token
+        let item = allTokens[id]!
+        allTokens[id] = (token, item.1)
     }
     
     func remove(id: String) throws {
@@ -83,12 +85,16 @@ class MockTokenStorage: TokenStorage {
         metadata.removeValue(forKey: id)
     }
     
-    func get(token id: String) throws -> Token {
+    func get(token id: String, prompt: String?, authenticationContext: TokenAuthenticationContext? = nil) throws -> Token {
         if let error = error {
             throw error
         }
         
-        return allTokens[id]!
+        self.prompt = prompt
+        guard let item = allTokens[id] else {
+            throw TokenError.tokenNotFound(id: id)
+        }
+        return item.0
     }
     
     var delegate: TokenStorageDelegate?

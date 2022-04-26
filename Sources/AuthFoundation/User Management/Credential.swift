@@ -36,37 +36,38 @@ public class Credential: Identifiable, Equatable, OAuth2ClientDelegate {
     /// This value may still be overridden by supplying an explicit `graceInterval` argument to the above methods.
     public static var refreshGraceInterval: TimeInterval = 300
     
-    /// Returns a Credential instance for the given token.
-    ///
-    /// If a credential has previously been created for the given token, that cached instance will be returned.
-    /// - Parameter token: Token to identify the user by.
-    /// - Returns: Credential object that represents the given token.
-    public static func with(token: Token) throws -> Credential {
-        try coordinator.with(token: token)
-    }
-    
     /// Returns the ``Credential`` that matches the given ID.
-    /// - Parameter id: ID for the credential to return.
+    /// - Parameters:
+    ///   - id: ID for the credential to return.
+    ///   - prompt: Optional prompt to show to the user when requesting biometric/Face ID user prompts.
+    ///   - authenticationContext: Optional `LAContext` to use when retrieving credentials, on systems that support it.
     /// - Returns: Credential matching the ID.
-    public static func with(id: String) throws -> Credential? {
-        try coordinator.with(id: id)
+    public static func with(id: String, prompt: String? = nil, authenticationContext: TokenAuthenticationContext? = nil) throws -> Credential? {
+        try coordinator.with(id: id, prompt: prompt, authenticationContext: authenticationContext)
     }
     
     /// Returns a collection of ``Credential`` instances that match the given expression.
-    /// - Parameter expression: Expression used to filter the list of tokens.
+    /// - Parameters:
+    ///   - expression: Expression used to filter the list of tokens.
+    ///   - prompt: Optional prompt to show to the user when requesting biometric/Face ID user prompts.
+    ///   - authenticationContext: Optional `LAContext` to use when retrieving credentials, on systems that support it.
     /// - Returns: Collection of credentials.
-    public static func find(where expression: @escaping (Token.Metadata) -> Bool) throws -> [Credential] {
-        try coordinator.find(where: expression)
+    public static func find(where expression: @escaping (Token.Metadata) -> Bool, prompt: String? = nil, authenticationContext: TokenAuthenticationContext? = nil) throws -> [Credential] {
+        try coordinator.find(where: expression, prompt: prompt, authenticationContext: authenticationContext)
     }
     
     /// Stores the given token for later use.
     /// - Parameters:
     ///   - token: Token to store.
     ///   - tags: Optional developer-assigned tags to associate with this token.
+    ///   - options: Optional ``Credential/Security`` options to use when storing this token.
     /// - Returns: Credential representing this token.
     @discardableResult
-    public static func store(token: Token, tags: [String: String] = [:]) throws -> Credential {
-        try coordinator.store(token: token, tags: tags)
+    public static func store(_ token: Token,
+                             tags: [String: String] = [:],
+                             security options: [Security] = Security.standard
+    ) throws -> Credential {
+        try coordinator.store(token: token, tags: tags, security: options)
     }
 
     /// Data source used for creating and managing the creation and caching of ``Credential`` instances.

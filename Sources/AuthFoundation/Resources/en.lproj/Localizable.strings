@@ -15,7 +15,7 @@
 
 /* OAuth2Error */
 "cannot_compose_url_description" = "Cannot compose a URL to authenticate with.";
-"oauth2_error_description" = "Authentication error: %@ (code %@).";
+"oauth2_error_description" = "Authentication error: %@ (code %d).";
 "oauth2_error_code_description" = "Authentication error code %@.";
 "missing_token_description" = "Missing %@ token.";
 "error_description" = "Error: %@";
@@ -41,6 +41,7 @@
 "keychain_cannot_get" = "There was a failure getting a keychain item (%d).";
 "keychain_cannot_list" = "There was a failure getting a list of keychain items (%d).";
 "keychain_cannot_save" = "There was a failure saving a keychain item (%d).";
+"keychain_cannot_update" = "There was a failure updating a keychain item (%d).";
 "keychain_cannot_delete" = "There was a failure deleting a keychain item (%d).";
 "keychain_not_found" = "Could not find a keychain item.";
 "keychain_invalid_format" = "The returned keychain item is in an invalid format.";
@@ -48,3 +49,4 @@
 "keychain_missing_account" = "The keychain item is missing an account name.";
 "keychain_missing_value_data" = "The keychain item is missing its value data.";
 "keychain_missing_attribute" = "The keychain item is missing required attributes.";
+"keychain_access_control_invalid" = "The access control settings for this keychain item are invalid: %@ (code %d).";

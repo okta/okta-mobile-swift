@@ -20,7 +20,10 @@ protocol KeychainProtocol {
     
     @discardableResult
     func addItem(_ query: CFDictionary, _ result: UnsafeMutablePointer<CFTypeRef?>?) -> OSStatus
-    
+
+    @discardableResult
+    func updateItem(_ query: CFDictionary, _ attributes: CFDictionary) -> OSStatus
+
     @discardableResult
     func copyItemMatching(_ query: CFDictionary, _ result: UnsafeMutablePointer<CFTypeRef?>?) -> OSStatus
 }
@@ -32,6 +35,10 @@ struct KeychainImpl: KeychainProtocol {
     
     func addItem(_ query: CFDictionary, _ result: UnsafeMutablePointer<CFTypeRef?>?) -> OSStatus {
         SecItemAdd(query, result)
+    }
+    
+    func updateItem(_ query: CFDictionary, _ attributes: CFDictionary) -> OSStatus {
+        SecItemUpdate(query, attributes)
     }
     
     func copyItemMatching(_ query: CFDictionary, _ result: UnsafeMutablePointer<CFTypeRef?>?) -> OSStatus {

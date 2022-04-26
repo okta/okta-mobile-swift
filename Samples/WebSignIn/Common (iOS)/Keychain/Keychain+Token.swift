@@ -21,7 +21,7 @@ public extension Keychain {
     
     private static let oktaMobileSdkAccessGroup = "com.okta.mobile-sdk.shared"
     
-    static func save(_ token: Token) throws {
+    static func saveDeviceSSO(_ token: Token) throws {
         try [Token.Kind.idToken, Token.Kind.deviceSecret].forEach { kind in
             try token.token(of: kind)
                 .flatMap { $0.data(using: .utf8) }
@@ -53,7 +53,6 @@ public extension Keychain {
         try Keychain
             .Search(service: "Okta",
                     accessGroup: oktaMobileSdkAccessGroup)
-            .get()
             .delete()
     }
 }

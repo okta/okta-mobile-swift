@@ -35,29 +35,39 @@ class SignInViewController: UIViewController {
         auth?.ephemeralSession = sender.isOn
     }
     
+    func show(error: Error) {
+        // There's currently no way to know when the ASWebAuthenticationSession will be dismissed,
+        // so to ensure the alert can be displayed, we must delay presenting an error until the
+        // dismissal is complete.
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.33) {
+            let alert = UIAlertController(title: "Cannot sign in",
+                                          message: error.localizedDescription,
+                                          preferredStyle: .alert)
+            alert.addAction(.init(title: "OK", style: .default))
+            
+            self.present(alert, animated: true)
+        }
+    }
+
     @IBAction func signIn(_ sender: Any) {
         let window = viewIfLoaded?.window
         auth?.signIn(from: window) { result in
             switch result {
             case .success(let token):
-                Credential.default = Credential(token: token)
-
-                try? Keychain.save(token)
+                do {
+                    try Credential.store(token)
+                    
+                    // This saves the device secret in a place accessible by the SingleSignOn sample application.
+                    try Keychain.saveDeviceSSO(token)
+                } catch {
+                    self.show(error: error)
+                    return
+                }
                                         
                 self.dismiss(animated: true)
             case .failure(let error):
-                // There's currently no way to know when the ASWebAuthenticationSession will be dismissed,
-                // so to ensure the alert can be displayed, we must delay presenting an error until the
-                // dismissal is complete.
-                DispatchQueue.main.asyncAfter(deadline: .now() + 0.33) {
-                    let alert = UIAlertController(title: "Cannot sign in", message: error.localizedDescription, preferredStyle: .alert)
-                    alert.addAction(.init(title: "OK", style: .default))
-                    
-                    self.present(alert, animated: true)
-                }
+                self.show(error: error)
             }
         }
-
-        return
     }
 }

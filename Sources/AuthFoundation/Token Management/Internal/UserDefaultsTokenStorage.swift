@@ -12,6 +12,12 @@
 
 import Foundation
 
+#if canImport(LocalAuthentication)
+import LocalAuthentication
+#else
+typealias LAContext = Void
+#endif
+
 private struct UserDefaultsKeys {
     static let defaultTokenKey = "com.okta.authfoundation.defaultToken"
     static let metadataKey = "com.okta.authfoundation.tokenMetadata"
@@ -69,7 +75,7 @@ class UserDefaultsTokenStorage: TokenStorage {
         Array(allTokens.keys)
     }
     
-    func get(token id: String) throws -> Token {
+    func get(token id: String, prompt: String? = nil, authenticationContext: TokenAuthenticationContext? = nil) throws -> Token {
         guard let token = allTokens[id] else {
             throw TokenError.tokenNotFound(id: id)
         }
@@ -77,7 +83,7 @@ class UserDefaultsTokenStorage: TokenStorage {
         return token
     }
     
-    func add(token: Token) throws {
+    func add(token: Token, security: [Credential.Security]) throws {
         let id = token.id
         
         guard !allTokens.keys.contains(id) else {
@@ -99,14 +105,14 @@ class UserDefaultsTokenStorage: TokenStorage {
         }
     }
     
-    func replace(token id: String, with token: Token) throws {
-        guard let oldToken = allTokens[id] else {
+    func replace(token id: String, with token: Token, security: [Credential.Security]?) throws {
+        guard allTokens[id] != nil else {
             throw TokenError.cannotReplaceToken
         }
         allTokens[id] = token
             
         try save()
-        delegate?.token(storage: self, replaced: id, from: oldToken, to: token)
+        delegate?.token(storage: self, replaced: id, with: token)
     }
     
     func remove(id: String) throws {

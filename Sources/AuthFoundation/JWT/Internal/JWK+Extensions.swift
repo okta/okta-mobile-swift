@@ -105,7 +105,7 @@ extension JWK {
                 let desc = error != nil ? CFErrorCopyDescription(error) : nil
                 let code = error != nil ? CFErrorGetCode(error) : 0
                 throw JWTError.cannotCreateKey(code: OSStatus(code),
-                                                        description: desc as String?)
+                                               description: desc as String?)
             }
             
             return publicKey

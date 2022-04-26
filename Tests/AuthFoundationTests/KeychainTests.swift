@@ -40,13 +40,30 @@ final class KeychainTests: XCTestCase {
             "gena": genericData,
             "labl": "Label",
             "pdmn": "cku",
+            "r_Attributes": 1,
+            "r_Data": 1,
+            "r_Ref": 1,
             "nleg": 1,
             "sync": 1,
             "svce": "KeychainTests.swift",
             "v_Data": value
         ] as CFDictionary
         mock.expect(errSecItemNotFound)
-        mock.expect(noErr)
+        mock.expect(noErr, result: [
+            "tomb": 0,
+            "svce": "KeychainTests.swift",
+            "musr": nil,
+            "class": "genp",
+            "sync": 0,
+            "cdat": Date(),
+            "mdat": Date(),
+            "pdmn": "ak",
+            "agrp": "com.okta.sample.app",
+            "acct": "testItemSave()",
+            "sha": "someshadata".data(using: .utf8),
+            "UUID": UUID().uuidString,
+            "v_Data": value
+        ] as CFDictionary)
 
         let item = Keychain.Item(account: #function,
                                  service: serviceName,
@@ -59,8 +76,8 @@ final class KeychainTests: XCTestCase {
                                  value: value)
         try item.save()
         
-        XCTAssertEqual(mock.operations[0], .init(action: .delete, query: query))
-        XCTAssertEqual(mock.operations[1], .init(action: .add, query: query))
+        XCTAssertEqual(mock.operations[0], .init(action: .delete, query: query, attributes: nil))
+        XCTAssertEqual(mock.operations[1], .init(action: .add, query: query, attributes: nil))
 
         // Test failed save
         mock.reset()
@@ -69,6 +86,41 @@ final class KeychainTests: XCTestCase {
         XCTAssertThrowsError(try item.save())
     }
     
+    func testItemUpdate() throws {
+        let oldData = "Old value".data(using: .utf8)!
+        let newData = "New value".data(using: .utf8)!
+        
+        let query = [
+            "acct": "testItemUpdate()",
+            "class": "genp",
+            "svce": "KeychainTests.swift",
+        ] as CFDictionary
+        
+        let attributes = [
+            "acct": "testItemUpdate()",
+            "svce": "KeychainTests.swift",
+            "pdmn": "ak",
+            "nleg": 1,
+            "v_Data": newData
+        ] as CFDictionary
+
+        mock.expect(noErr)
+
+        let oldItem = Keychain.Item(account: #function,
+                                    service: serviceName,
+                                    accessibility: .afterFirstUnlockThisDeviceOnly,
+                                    value: oldData)
+
+        let newItem = Keychain.Item(account: #function,
+                                    service: serviceName,
+                                    accessibility: .unlocked,
+                                    value: newData)
+
+        XCTAssertNoThrow(try oldItem.update(newItem, authenticationContext: nil))
+
+        XCTAssertEqual(mock.operations[0], .init(action: .update, query: query, attributes: attributes))
+    }
+
     func testItemDelete() throws {
         let genericData = "This is generic data".data(using: .utf8)!
         let value = "This is value data".data(using: .utf8)!
@@ -90,7 +142,7 @@ final class KeychainTests: XCTestCase {
                                  value: value)
         try item.delete()
         
-        XCTAssertEqual(mock.operations[0], .init(action: .delete, query: query))
+        XCTAssertEqual(mock.operations[0], .init(action: .delete, query: query, attributes: nil))
 
         // Test failed delete
         mock.reset()
@@ -129,14 +181,14 @@ final class KeychainTests: XCTestCase {
                                      accessGroup: nil)
         let searchResults = try search.list()
         
-        XCTAssertEqual(mock.operations[0], .init(action: .copy, query: query))
+        XCTAssertEqual(mock.operations[0], .init(action: .copy, query: query, attributes: nil))
         XCTAssertEqual(searchResults.first?.account, "testSearchList()")
     }
     
     func testSearchGet() throws {
         let value = "This is value data".data(using: .utf8)!
 
-        let query = [
+        var query: [String: Any] = [
             "acct": "testSearchGet()",
             "class": "genp",
             "m_Limit": "m_LimitOne",
@@ -144,7 +196,7 @@ final class KeychainTests: XCTestCase {
             "r_Data": 1,
             "r_Ref": 1,
             "svce": "KeychainTests.swift"
-        ] as CFDictionary
+        ]
 
         let result = [
             "tomb": 0,
@@ -166,9 +218,12 @@ final class KeychainTests: XCTestCase {
         let search = Keychain.Search(account: #function,
                                      service: serviceName,
                                      accessGroup: nil)
-        let searchResults = try search.get()
+        let searchResults = try search.get(prompt: "UI Prompt",
+                                           authenticationContext: nil)
         
-        XCTAssertEqual(mock.operations[0], .init(action: .copy, query: query))
+        query["u_OpPrompt"] = "UI Prompt"
+
+        XCTAssertEqual(mock.operations[0], .init(action: .copy, query: query as CFDictionary, attributes: nil))
         XCTAssertEqual(searchResults.account, "testSearchGet()")
         XCTAssertEqual(searchResults.value, value)
     }
@@ -265,6 +320,84 @@ final class KeychainTests: XCTestCase {
         ])
         
         XCTAssertEqual(result.account, "TheAccountName")
+    }
+
+    func testSearchResultGet() throws {
+        let result = try Keychain.Search.Result([
+            kSecAttrAccount as String: "TheAccountName",
+            kSecAttrModificationDate as String: Date(),
+            kSecAttrCreationDate as String: Date()
+        ])
+        
+        mock.expect(noErr, result: [
+            "tomb": 0,
+            "svce": "KeychainTests.swift",
+            "musr": nil,
+            "class": "genp",
+            "sync": 0,
+            "cdat": Date(),
+            "mdat": Date(),
+            "pdmn": "ak",
+            "agrp": "com.okta.sample.app",
+            "acct": "TheAccountName",
+            "sha": "someshadata".data(using: .utf8),
+            "UUID": UUID().uuidString,
+            "v_Data": "TestData".data(using: .utf8)
+        ] as CFDictionary)
+
+        let item = try result.get(prompt: "Why I need this")
+        XCTAssertEqual(mock.operations[0], .init(action: .copy, query: [
+            "acct": "TheAccountName",
+            "class": "genp",
+            "m_Limit": "m_LimitOne",
+            "r_Attributes": 1,
+            "r_Data": 1,
+            "r_Ref": 1,
+            "u_OpPrompt": "Why I need this"
+        ] as CFDictionary, attributes: nil))
+        XCTAssertEqual(item.account, "TheAccountName")
+        XCTAssertEqual(item.value, "TestData".data(using: .utf8))
+    }
+
+    func testSearchResultDelete() throws {
+        let result = try Keychain.Search.Result([
+            kSecAttrAccount as String: "TheAccountName",
+            kSecAttrModificationDate as String: Date(),
+            kSecAttrCreationDate as String: Date()
+        ])
+        
+        mock.expect(noErr)
+
+        try result.delete()
+        XCTAssertEqual(mock.operations[0], .init(action: .delete, query: [
+            "acct": "TheAccountName",
+            "class": "genp"
+        ] as CFDictionary, attributes: nil))
+    }
+
+    func testSearchResultUpdate() throws {
+        let result = try Keychain.Search.Result([
+            kSecAttrAccount as String: "TheAccountName",
+            kSecAttrModificationDate as String: Date(),
+            kSecAttrCreationDate as String: Date()
+        ])
+        
+        mock.expect(noErr)
+
+        let newItem = Keychain.Item(account: "TheAccountName",
+                                    accessibility: .unlocked,
+                                    value: "New Value".data(using: .utf8)!)
+
+        try result.update(newItem)
+        XCTAssertEqual(mock.operations[0], .init(action: .update, query: [
+            "acct": "TheAccountName",
+            "class": "genp"
+        ] as CFDictionary, attributes: [
+            "acct": "TheAccountName",
+            "nleg": 1,
+            "pdmn": "ak",
+            "v_Data": "New Value".data(using: .utf8)!
+        ] as CFDictionary))
     }
 }
 

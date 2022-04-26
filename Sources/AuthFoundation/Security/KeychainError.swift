@@ -19,6 +19,8 @@ public enum KeychainError: Error {
     case cannotList(code: OSStatus)
     case cannotSave(code: OSStatus)
     case cannotDelete(code: OSStatus)
+    case cannotUpdate(code: OSStatus)
+    case accessControlInvalid(code: OSStatus, description: String?)
     case notFound
     case invalidFormat
     case invalidAccessibilityOption
@@ -51,6 +53,13 @@ extension KeychainError: LocalizedError {
                                   comment: ""),
                 status)
 
+        case .cannotUpdate(code: let status):
+            return String.localizedStringWithFormat(
+                NSLocalizedString("keychain_cannot_update",
+                                  bundle: .module,
+                                  comment: ""),
+                status)
+
         case .cannotDelete(code: let status):
             return String.localizedStringWithFormat(
                 NSLocalizedString("keychain_cannot_delete",
@@ -58,7 +67,13 @@ extension KeychainError: LocalizedError {
                                   comment: ""),
                 status)
 
-
+        case .accessControlInvalid(code: let code, description: let description):
+            return String.localizedStringWithFormat(
+                NSLocalizedString("keychain_access_control_invalid",
+                                  bundle: .module,
+                                  comment: ""),
+                description ?? "", code)
+            
         case .notFound:
             return NSLocalizedString("keychain_not_found",
                                      bundle: .module,
