@@ -45,10 +45,10 @@ final class CredentialLoadingTests: XCTestCase {
         let tokenC = Token.mockToken(id: "TokenC")
         let tokenD = Token.mockToken(id: "TokenD")
 
-        try storage.add(token: tokenA, security: [])
-        try storage.add(token: tokenB, security: [])
-        try storage.add(token: tokenC, security: [])
-        try storage.add(token: tokenD, security: [])
+        try storage.add(token: tokenA, metadata: nil, security: [])
+        try storage.add(token: tokenB, metadata: nil, security: [])
+        try storage.add(token: tokenC, metadata: nil, security: [])
+        try storage.add(token: tokenD, metadata: nil, security: [])
 
         try storage.setMetadata(Token.Metadata(token: tokenA, tags: ["animal": "cat"]))
         try storage.setMetadata(Token.Metadata(token: tokenB, tags: ["animal": "dog"]))

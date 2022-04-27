@@ -40,6 +40,7 @@ class CredentialCoordinatorImpl: CredentialCoordinator {
         set {
             if let token = newValue?.token {
                 try? tokenStorage.add(token: token,
+                                      metadata: Token.Metadata(id: token.id),
                                       security: Credential.Security.standard)
             }
             try? tokenStorage.setDefaultTokenID(newValue?.id)
@@ -51,8 +52,10 @@ class CredentialCoordinatorImpl: CredentialCoordinator {
     }
     
     func store(token: Token, tags: [String: String], security: [Credential.Security]) throws -> Credential {
-        try tokenStorage.add(token: token, security: security)
-        try tokenStorage.setMetadata(Token.Metadata(token: token, tags: tags))
+        try tokenStorage.add(token: token,
+                             metadata: Token.Metadata(token: token,
+                                                      tags: tags),
+                             security: security)
         return credentialDataSource.credential(for: token, coordinator: self)
     }
     

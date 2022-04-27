@@ -37,13 +37,15 @@ class MockTokenStorage: TokenStorage {
     private var allTokens: [String:(Token,[Credential.Security])] = [:]
     private var metadata: [String:Token.Metadata] = [:]
     
-    func add(token: Token, security: [Credential.Security]) throws {
+    func add(token: Token, metadata: Token.Metadata?, security: [Credential.Security]) throws {
+        let metadata = metadata ?? Token.Metadata(token: token, tags: [:])
         if let error = error {
             throw error
         }
         
         let id = token.id
         allTokens[id] = (token, security)
+        self.metadata[id] = metadata
         delegate?.token(storage: self, added: id, token: token)
     }
     

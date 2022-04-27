@@ -22,17 +22,23 @@ public extension Keychain {
     private static let oktaMobileSdkAccessGroup = "com.okta.mobile-sdk.shared"
     
     static func saveDeviceSSO(_ token: Token) throws {
-        try [Token.Kind.idToken, Token.Kind.deviceSecret].forEach { kind in
-            try token.token(of: kind)
-                .flatMap { $0.data(using: .utf8) }
-                .map {
-                    Keychain.Item(account: "Okta-\(kind.rawValue)",
-                                  service: "Okta",
-                                  accessGroup: oktaMobileSdkAccessGroup,
-                                  value: $0)
-                }
-                .map{ try $0.save() }
+        try [Token.Kind.idToken, Token.Kind.deviceSecret]
+            .forEach { try saveDeviceSSO(token, kind: $0) }
+    }
+    
+    static func saveDeviceSSO(_ token: Token, kind: Token.Kind) throws {
+        guard let tokenString = token.token(of: kind),
+              let data = tokenString.data(using: .utf8)
+        else {
+            return
         }
+        
+        try Keychain
+            .Item(account: "Okta-\(kind.rawValue)",
+                  service: "Okta",
+                  accessGroup: oktaMobileSdkAccessGroup,
+                  value: data)
+            .save()
     }
     
     static func get(_ kind: Token.Kind) throws -> String {

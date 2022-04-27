@@ -19,4 +19,7 @@ public enum CredentialError: Error {
     
     /// Thrown when a Credential is initialized with a ``Token`` and ``OAuth2Client`` with mismatched client configuration.
     case incorrectClientConfiguration
+    
+    /// Thrown when the metadata associated with a token has become inconsistent.
+    case metadataConsistency
 }

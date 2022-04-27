@@ -55,7 +55,12 @@ class KeychainTokenStorage: TokenStorage {
         }
     }
     
-    func add(token: Token, security: [Credential.Security]) throws {
+    func add(token: Token, metadata: Token.Metadata?, security: [Credential.Security]) throws {
+        let metadata = metadata ?? Token.Metadata(token: token, tags: [:])
+        guard token.id == metadata.id else {
+            throw CredentialError.metadataConsistency
+        }
+        
         let id = token.id
         
         guard try Keychain
@@ -76,6 +81,7 @@ class KeychainTokenStorage: TokenStorage {
         let accessibility = security.accessibility ?? .afterFirstUnlock
         let accessGroup = security.accessGroup
         let accessControl = try security.createAccessControl(accessibility: accessibility)
+        
         let item = Keychain.Item(account: id,
                                  service: KeychainTokenStorage.serviceName,
                                  accessibility: accessibility,
@@ -86,8 +92,16 @@ class KeychainTokenStorage: TokenStorage {
                                  description: nil,
                                  generic: nil,
                                  value: data)
+        
+        let metadataItem = Keychain.Item(account: id,
+                                         service: KeychainTokenStorage.metadataName,
+                                         accessibility: .afterFirstUnlock,
+                                         accessGroup: accessGroup,
+                                         synchronizable: accessibility.isSynchronizable,
+                                         value: try encoder.encode(metadata))
 
         try item.save(authenticationContext: security.context)
+        try metadataItem.save(authenticationContext: security.context)
 
         delegate?.token(storage: self, added: id, token: token)
         
@@ -112,6 +126,7 @@ class KeychainTokenStorage: TokenStorage {
         let accessibility = security?.accessibility ?? oldResult.accessibility ?? .afterFirstUnlock
         let accessGroup = security?.accessGroup ?? oldResult.accessGroup
         let accessControl = try security?.createAccessControl(accessibility: accessibility) ?? oldResult.accessControl
+        
         let newItem = Keychain.Item(account: id,
                                     service: KeychainTokenStorage.serviceName,
                                     accessibility: accessibility,
@@ -155,14 +170,20 @@ class KeychainTokenStorage: TokenStorage {
     }
     
     func setMetadata(_ metadata: Token.Metadata) throws {
-        let item = Keychain
-            .Item(account: metadata.id,
-                  service: KeychainTokenStorage.metadataName,
-                  accessibility: .afterFirstUnlock,
-                  value: try encoder.encode(metadata))
+        guard let result = try Keychain
+            .Search(account: metadata.id,
+                    service: KeychainTokenStorage.metadataName)
+                .list()
+                .first
+        else {
+            throw CredentialError.metadataConsistency
+        }
+        
+        let item = Keychain.Item(account: result.account,
+                                 service: result.service,
+                                 value: try encoder.encode(metadata))
 
-        try? item.delete()
-        try item.save()
+        try result.update(item)
     }
 
     func metadata(for id: String) throws -> Token.Metadata {
