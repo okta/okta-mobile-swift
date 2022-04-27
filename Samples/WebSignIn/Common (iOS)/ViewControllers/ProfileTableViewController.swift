@@ -82,7 +82,7 @@ class ProfileTableViewController: UITableViewController {
         self.tabBarItem.title = title
         
         let updatedAt: String
-        if let updatedDate = userInfo.updatedAt {
+        if let updatedDate = user?.updatedAt {
             updatedAt = dateFormatter.string(from: updatedDate)
         } else {
             updatedAt = "N/A"

@@ -14,6 +14,10 @@
 
 import Foundation
 
+#if canImport(LocalAuthentication)
+import LocalAuthentication
+#endif
+
 class KeychainTokenStorage: TokenStorage {
     static let serviceName = "com.okta.authfoundation.keychain.storage"
     static let metadataName = "com.okta.authfoundation.keychain.metadata"
@@ -41,15 +45,17 @@ class KeychainTokenStorage: TokenStorage {
     }
     
     var allIDs: [String] {
-        let result = try? Keychain
-            .Search(service: KeychainTokenStorage.serviceName)
-            .list()
-            .map { $0.account }
-        
-        return result ?? []
+        do {
+            return try Keychain
+                .Search(service: KeychainTokenStorage.metadataName)
+                .list()
+                .map { $0.account }
+        } catch {
+            return []
+        }
     }
     
-    func add(token: Token) throws {
+    func add(token: Token, security: [Credential.Security]) throws {
         let id = token.id
         
         guard try Keychain
@@ -67,18 +73,21 @@ class KeychainTokenStorage: TokenStorage {
             .isEmpty
         
         let data = try encoder.encode(token)
-        
-        // TODO: Update keychain handling to abstract ID generation, and support custom access groups, accessibility options, and to provide the ability to separate secret data and generic data.
+        let accessibility = security.accessibility ?? .afterFirstUnlock
+        let accessGroup = security.accessGroup
+        let accessControl = try security.createAccessControl(accessibility: accessibility)
         let item = Keychain.Item(account: id,
                                  service: KeychainTokenStorage.serviceName,
-                                 accessibility: .unlocked,
-                                 accessGroup: nil,
-                                 synchronizable: nil,
+                                 accessibility: accessibility,
+                                 accessGroup: accessGroup,
+                                 accessControl: accessControl,
+                                 synchronizable: accessibility.isSynchronizable,
                                  label: nil,
                                  description: nil,
                                  generic: nil,
                                  value: data)
-        try item.save()
+
+        try item.save(authenticationContext: security.context)
 
         delegate?.token(storage: self, added: id, token: token)
         
@@ -87,44 +96,49 @@ class KeychainTokenStorage: TokenStorage {
         }
     }
     
-    func replace(token id: String, with token: Token) throws {
-        let oldResult = try Keychain
+    func replace(token id: String, with token: Token, security: [Credential.Security]?) throws {
+        guard let oldResult = try Keychain
             .Search(account: id,
                     service: KeychainTokenStorage.serviceName)
-            .get()
-        
-        let oldToken = try self.token(with: oldResult)
-        try oldResult.delete()
+                .list()
+                .first
+        else {
+            throw TokenError.cannotReplaceToken
+        }
         
         token.id = id
         
         let data = try encoder.encode(token)
-        try Keychain
-            .Item(account: id,
-                  service: KeychainTokenStorage.serviceName,
-                  accessibility: .unlocked,
-                  value: data)
-            .save()
+        let accessibility = security?.accessibility ?? oldResult.accessibility ?? .afterFirstUnlock
+        let accessGroup = security?.accessGroup ?? oldResult.accessGroup
+        let accessControl = try security?.createAccessControl(accessibility: accessibility) ?? oldResult.accessControl
+        let newItem = Keychain.Item(account: id,
+                                    service: KeychainTokenStorage.serviceName,
+                                    accessibility: accessibility,
+                                    accessGroup: accessGroup,
+                                    accessControl: accessControl,
+                                    synchronizable: accessibility.isSynchronizable,
+                                    label: nil,
+                                    description: nil,
+                                    generic: nil,
+                                    value: data)
         
-        delegate?.token(storage: self, replaced: id, from: oldToken, to: token)
+        try oldResult.update(newItem, authenticationContext: security?.context)
+
+        delegate?.token(storage: self, replaced: id, with: token)
     }
     
     func remove(id: String) throws {
         try Keychain
             .Search(account: id,
+                    service: KeychainTokenStorage.metadataName)
+            .delete()
+        
+        try Keychain
+            .Search(account: id,
                     service: KeychainTokenStorage.serviceName)
-            .get()
             .delete()
 
-        let metadataItems = try Keychain
-            .Search(account: id,
-                    service: KeychainTokenStorage.metadataName,
-                    accessGroup: nil)
-            .list()
-        if !metadataItems.isEmpty {
-            try metadataItems.first?.get().delete()
-        }
-        
         delegate?.token(storage: self, removed: id)
 
         if defaultTokenID == id {
@@ -132,24 +146,23 @@ class KeychainTokenStorage: TokenStorage {
         }
     }
     
-    func get(token id: String) throws -> Token {
+    func get(token id: String, prompt: String? = nil, authenticationContext: TokenAuthenticationContext? = nil) throws -> Token {
         try token(with: try Keychain
                     .Search(account: id,
                             service: KeychainTokenStorage.serviceName)
-                    .get())
+                    .get(prompt: prompt,
+                         authenticationContext: authenticationContext as? KeychainAuthenticationContext))
     }
     
     func setMetadata(_ metadata: Token.Metadata) throws {
-        guard allIDs.contains(metadata.id) else {
-            throw TokenError.tokenNotFound(id: metadata.id)
-        }
-        
-        try Keychain
+        let item = Keychain
             .Item(account: metadata.id,
                   service: KeychainTokenStorage.metadataName,
                   accessibility: .afterFirstUnlock,
                   value: try encoder.encode(metadata))
-            .save()
+
+        try? item.delete()
+        try item.save()
     }
 
     func metadata(for id: String) throws -> Token.Metadata {
@@ -160,7 +173,7 @@ class KeychainTokenStorage: TokenStorage {
                             .get()
                             .value)
     }
-
+    
     private func token(with item: Keychain.Item) throws -> Token {
         try decoder.decode(Token.self,
                            from: item.value)
@@ -181,7 +194,6 @@ class KeychainTokenStorage: TokenStorage {
         } else {
             try Keychain
                 .Search(account: KeychainTokenStorage.defaultTokenName)
-                .get()
                 .delete()
         }
     }

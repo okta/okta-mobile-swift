@@ -14,6 +14,13 @@ import Foundation
 
 #if os(iOS) || os(macOS) || os(tvOS) || os(watchOS)
 
+#if canImport(LocalAuthentication)
+import LocalAuthentication
+extension LAContext: KeychainAuthenticationContext {}
+#endif
+
+public protocol KeychainAuthenticationContext {}
+
 /// Defines convenience mechanisms for interacting with the keychain, lincluding searching, creating, and deleting keychain items.
 public struct Keychain {
     static var implementation: KeychainProtocol = KeychainImpl()
@@ -26,14 +33,20 @@ public struct Keychain {
         /// The service name this account is associated with.
         public let service: String?
         
+        /// The server this account is associated with.
+        public let server: String?
+        
         /// The accessibility level for this keychain item.
-        public var accessibility: Accessibility
+        public var accessibility: Accessibility?
         
         /// Indicates whether or not this keychain item may be synchronized to iCloud Keychain.
         public var synchronizable: Bool?
         
         /// The access group this keychain item is stored within.
         public var accessGroup: String?
+        
+        /// The access control settings for this item.
+        public var accessControl: SecAccessControl?
         
         /// The human-readable summary for this keychain item.
         public var label: String?
@@ -48,27 +61,50 @@ public struct Keychain {
         public var value: Data
         
         /// Saves the item to the keychain.
-        public func save() throws {
-            let cfDictionary = query as CFDictionary
-
-            Keychain.implementation.deleteItem(cfDictionary)
+        /// - Parameter authenticationContext: Optional `LAContext` to use when saving the credential, for platforms that support it.
+        /// - Returns: A ``Keychain/Item`` representing the new saved item.
+        @discardableResult
+        public func save(authenticationContext: KeychainAuthenticationContext? = nil) throws -> Item {
+            var cfDictionary = query
+            cfDictionary[kSecReturnAttributes as String] = kCFBooleanTrue
+            cfDictionary[kSecReturnData as String] = kCFBooleanTrue
+            cfDictionary[kSecReturnRef as String] = kCFBooleanTrue
             
-            let status = Keychain.implementation.addItem(cfDictionary, nil)
+            if let authenticationContext = authenticationContext {
+                cfDictionary[kSecUseAuthenticationContext as String] = authenticationContext
+            }
+            
+            if let accessControl = accessControl {
+                cfDictionary[kSecAttrAccessControl as String] = accessControl
+                cfDictionary.removeValue(forKey: kSecAttrAccessible as String)
+            }
+
+            Keychain.implementation.deleteItem(cfDictionary as CFDictionary)
+            
+            var ref: AnyObject?
+            let status = Keychain.implementation.addItem(cfDictionary as CFDictionary, &ref)
             if status != noErr {
                 throw KeychainError.cannotSave(code: status)
             }
+            
+            guard let result = ref as? Dictionary<String, Any> else {
+                throw KeychainError.invalidFormat
+            }
+            
+            return try Item(result)
+        }
+        
+        /// Updates the keychain item with the values supplied in the included item.
+        /// - Parameters:
+        ///   - item: Item whose values should replace the receiver's keychain item.
+        ///   - authenticationContext: Optional `LAContext` to use when updating the item, on platforms that support it.
+        public func update(_ item: Keychain.Item, authenticationContext: KeychainAuthenticationContext? = nil) throws {
+            try performUpdate(item, authenticationContext: authenticationContext)
         }
         
         /// Deletes this keychain item.
         public func delete() throws {
-            let cfDictionary = query as CFDictionary
-
-            let status = Keychain.implementation.deleteItem(cfDictionary)
-            if status == errSecItemNotFound {
-                throw KeychainError.notFound
-            } else if status != noErr {
-                throw KeychainError.cannotDelete(code: status)
-            }
+            try performDelete()
         }
         
         /// Designated initializer, used for creating a new keychain item.
@@ -84,8 +120,10 @@ public struct Keychain {
         ///   - valueData: The secret value for this item.
         public init(account: String,
                     service: String? = nil,
-                    accessibility: Accessibility = .unlocked,
+                    server: String? = nil,
+                    accessibility: Accessibility? = .unlocked,
                     accessGroup: String? = nil,
+                    accessControl: SecAccessControl? = nil,
                     synchronizable: Bool? = nil,
                     label: String? = nil,
                     description: String? = nil,
@@ -94,8 +132,10 @@ public struct Keychain {
         {
             self.account = account
             self.service = service
+            self.server = server
             self.accessibility = accessibility
             self.accessGroup = accessGroup
+            self.accessControl = accessControl
             self.synchronizable = synchronizable
             self.label = label
             self.description = description
@@ -123,11 +163,18 @@ public struct Keychain {
             self.accessibility = accessibility
 
             service = result[kSecAttrService as String] as? String
+            server = result[kSecAttrServer as String] as? String
             accessGroup = result[kSecAttrAccessGroup as String] as? String
             label = result[kSecAttrLabel as String] as? String
             description = result[kSecAttrDescription as String] as? String
             generic = result[kSecAttrGeneric as String] as? Data
             synchronizable = result[kSecAttrSynchronizable as String] as? Bool
+
+            if let value = result[kSecAttrAccessControl as String] {
+                // swiftlint:disable force_cast
+                accessControl = (value as! SecAccessControl)
+                // swiftlint:enable force_cast
+            }
         }
     }
     
@@ -135,19 +182,38 @@ public struct Keychain {
     ///
     /// This is a convenience wrapper around the iOS `kSecAttrAccessible*` Core Foundation strings.
     public enum Accessibility {
+        /// Requires the device to be actively unlocked.
         case unlocked
+        
+        /// Requires the device to be actively unlocked, and disallows iCloud keychain sharing.
         case unlockedThisDeviceOnly
+        
+        /// Requires the device to have been unlocked at some point.
         case afterFirstUnlock
+
+        /// Requires the device to have been unlocked at some point, and disallows iCloud keychain sharing.
         case afterFirstUnlockThisDeviceOnly
 
+        /// Requires the device to have a passcode set, and disallows iCloud keychain sharing.
         @available(iOS 8.0, *)
         case whenPasswordSetThisDeviceOnly
 
+        /// Allows the keychain item to always be accessible.
         @available(iOS, introduced: 4.0, deprecated: 12.0, message: "Use an accessibility level that provides some user protection, such as kSecAttrAccessibleAfterFirstUnlock")
         case always
 
+        /// Allows the keychain item to always be accessible, and disallows iCloud keychain sharing.
         @available(iOS, introduced: 4.0, deprecated: 12.0, message: "Use an accessibility level that provides some user protection, such as kSecAttrAccessibleAfterFirstUnlock")
         case alwaysThisDeviceOnly
+        
+        var isSynchronizable: Bool {
+            switch self {
+            case .unlocked, .afterFirstUnlock, .always:
+                return true
+            case .unlockedThisDeviceOnly, .afterFirstUnlockThisDeviceOnly, .whenPasswordSetThisDeviceOnly, .alwaysThisDeviceOnly:
+                return false
+            }
+        }
     }
     
     /// Defines a search for keychain items.
@@ -162,6 +228,11 @@ public struct Keychain {
         /// When this value is `nil`, all items that match the remaining criteria will be returned.
         public let service: String?
 
+        /// The server the various accounts are grouped within.
+        ///
+        /// When this value is `nil`, all items that match the remaining criteria will be returned.
+        public let server: String?
+
         /// The access group the items returned should be stored in.
         ///
         /// When this value is `nil`, all items that match the remaining criteria will be returned.
@@ -172,34 +243,23 @@ public struct Keychain {
         ///   - account: The account to search for, or `nil` to return all accounts.
         ///   - service: The service to search for, or `nil` to return all services.
         ///   - accessGroup: The access group to search within, or `nil` to return all access groups.
-        public init(account: String? = nil, service: String? = nil, accessGroup: String? = nil) {
+        public init(account: String? = nil, service: String? = nil, server: String? = nil, accessGroup: String? = nil) {
             self.account = account
             self.service = service
+            self.server = server
             self.accessGroup = accessGroup
         }
         
         /// Gets the first item matching this search criteria.
         ///
         /// This will attempt to read the secret data contained within the keychain item represented by this search query. If the item cannot be read, either because it does not exist, or if the device is in an incompatible state, this will throw an exception.
+        /// - Parameters:
+        ///   - prompt: Optional message to show to the user when prompting the user for biometric/Face ID.
+        ///   - authenticationContext: Optional `LAContext` to use when updating the item, on platforms that support it.
         /// - Returns: The keychain item defined by this search query.
-        public func get() throws -> Item {
-            let cfQuery = self.getQuery as CFDictionary
-            var ref: AnyObject?
-            
-            let status = Keychain.implementation.copyItemMatching(cfQuery, &ref)
-            guard status == noErr else {
-                if status == errSecItemNotFound {
-                    throw KeychainError.notFound
-                } else {
-                    throw KeychainError.cannotGet(code: status)
-                }
-            }
-            
-            guard let result = ref as? Dictionary<String, Any> else {
-                throw KeychainError.invalidFormat
-            }
-            
-            return try Item(result)
+        public func get(prompt: String? = nil, authenticationContext: KeychainAuthenticationContext? = nil) throws -> Item {
+            try performGet(prompt: prompt,
+                           authenticationContext: authenticationContext)
         }
         
         /// Returns the list of keychain items matching this search criteria.
@@ -207,25 +267,14 @@ public struct Keychain {
         /// This will return an array of ``Keychain/Search/Result`` objects that define the results of the search.  Each of those result objects may be inspected for their public information, as well as can be used to retrieve the secret value data associated with individual results.
         /// - Returns: Array of ``Keychain/Search/Result`` objects matching this search.
         public func list() throws -> [Result] {
-            let cfQuery = self.listQuery as CFDictionary
-            var ref: CFTypeRef?
-            let status = Keychain.implementation.copyItemMatching(cfQuery, &ref)
-            
-            guard status != errSecItemNotFound else {
-                return []
-            }
-            
-            guard status == errSecSuccess else {
-                throw KeychainError.cannotList(code: status)
-            }
-            
-            guard let items = ref as? Array<Dictionary<String, Any>> else {
-                throw KeychainError.invalidFormat
-            }
-
-            return try items.map { try Result($0) }
+            try performList()
         }
         
+        /// Deletes all items mathcing this search.
+        public func delete() throws {
+            try performDelete()
+        }
+
         /// An individual result within a keychain search.
         public struct Result {
             /// The account for this item.
@@ -233,6 +282,9 @@ public struct Keychain {
             
             /// The service name for this keychain item.
             public let service: String?
+            
+            /// The server for this keychain item.
+            public let server: String?
             
             /// The access group for this keychain item.
             public let accessGroup: String?
@@ -242,6 +294,15 @@ public struct Keychain {
             
             /// The description for this keychain item.
             public let description: String?
+            
+            /// The accessibility level for this keychain item.
+            public var accessibility: Accessibility?
+            
+            /// Indicates whether or not this keychain item may be synchronized to iCloud Keychain.
+            public var synchronizable: Bool?
+
+            /// The access control settings for this item.
+            public var accessControl: SecAccessControl?
             
             /// The generic, publicly-visible, data associated with this keychain item.
             public let generic: Data?
@@ -267,32 +328,51 @@ public struct Keychain {
                 self.creationDate = creationDate
                 self.modificationDate = modificationDate
                 service = result[kSecAttrService as String] as? String
+                server = result[kSecAttrServer as String] as? String
                 accessGroup = result[kSecAttrAccessGroup as String] as? String
                 label = result[kSecAttrLabel as String] as? String
                 description = result[kSecAttrDescription as String] as? String
                 generic = result[kSecAttrGeneric as String] as? Data
+                synchronizable = result[kSecAttrSynchronizable as String] as? Bool
+                
+                guard let accessibilityString = result[kSecAttrAccessible as String] as? String,
+                      let accessibility = Keychain.Accessibility(rawValue: accessibilityString)
+                else {
+                    throw KeychainError.invalidAccessibilityOption
+                }
+
+                self.accessibility = accessibility
+                
+                if let value = result[kSecAttrAccessControl as String] {
+                    // swiftlint:disable force_cast
+                    accessControl = (value as! SecAccessControl)
+                    // swiftlint:enable force_cast
+                } else {
+                    accessControl = nil
+                }
             }
             
             /// Fetches the complete ``Keychain/Item`` for this individual search result.
+            /// - Parameters:
+            ///   - prompt: Optional message to show to the user when prompting the user for biometric/Face ID.
+            ///   - authenticationContext: Optional `LAContext` to use when updating the item, on platforms that support it.
             /// - Returns: ``Keychain/Item`` represented by this search result.
-            public func get() throws -> Item {
-                let cfQuery = self.query as CFDictionary
-                var ref: AnyObject?
-                
-                let status = Keychain.implementation.copyItemMatching(cfQuery, &ref)
-                guard status == noErr else {
-                    if status == errSecItemNotFound {
-                        throw KeychainError.notFound
-                    } else {
-                        throw KeychainError.cannotGet(code: status)
-                    }
-                }
-                
-                guard let result = ref as? Dictionary<String, Any> else {
-                    throw KeychainError.invalidFormat
-                }
-                
-                return try Item(result)
+            public func get(prompt: String? = nil, authenticationContext: KeychainAuthenticationContext? = nil) throws -> Item {
+                try performGet(prompt: prompt,
+                               authenticationContext: authenticationContext)
+            }
+            
+            /// Updates the keychain item with the values supplied in the included item.
+            /// - Parameters:
+            ///   - item: Item whose values should replace the receiver's keychain item.
+            ///   - authenticationContext: Optional `LAContext` to use when updating the item, on platforms that support it.
+            public func update(_ item: Keychain.Item, authenticationContext: KeychainAuthenticationContext? = nil) throws {
+                try performUpdate(item, authenticationContext: authenticationContext)
+            }
+
+            /// Deletes an individual search result.
+            public func delete() throws {
+                try performDelete()
             }
         }
     }

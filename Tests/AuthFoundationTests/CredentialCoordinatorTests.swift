@@ -57,7 +57,7 @@ final class UserCoordinatorTests: XCTestCase {
     }
     
     func testDefaultCredentialViaToken() throws {
-        try storage.add(token: token)
+        try storage.add(token: token, security: [])
 
         XCTAssertEqual(storage.allIDs.count, 1)
         
@@ -70,12 +70,11 @@ final class UserCoordinatorTests: XCTestCase {
         XCTAssertEqual(storage.allIDs.count, 1)
         
         XCTAssertEqual(coordinator.allIDs, [token.id])
-        XCTAssertEqual(try coordinator.with(id: token.id), credential)
-        XCTAssertTrue(try coordinator.with(token: token) === credential)
+        XCTAssertEqual(try coordinator.with(id: token.id, prompt: nil, authenticationContext: nil), credential)
     }
     
     func testImplicitCredentialForToken() throws {
-        let credential = try coordinator.with(token: token)
+        let credential = try coordinator.store(token: token, tags: [:], security: [])
         
         XCTAssertEqual(storage.allIDs, [token.id])
         XCTAssertEqual(storage.defaultTokenID, token.id)
@@ -85,7 +84,7 @@ final class UserCoordinatorTests: XCTestCase {
     func testNotifications() throws {
         let recorder = NotificationRecorder(observing: [.defaultCredentialChanged])
         
-        let credential = try coordinator.with(token: token)
+        let credential = try coordinator.store(token: token, tags: [:], security: [])
         XCTAssertEqual(recorder.notifications.count, 1)
         XCTAssertEqual(recorder.notifications.first?.object as? Credential, credential)
         

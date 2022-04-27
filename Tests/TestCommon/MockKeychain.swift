@@ -21,12 +21,13 @@ class MockKeychain: KeychainProtocol {
     private(set) var operations = [Operation]()
     
     enum Action {
-        case delete, add, copy
+        case delete, add, update, copy
     }
     
     struct Operation: Equatable {
         let action: Action
         let query: NSDictionary
+        let attributes: NSDictionary?
     }
     
     func expect(_ result: Dictionary<String,Any?>) {
@@ -80,17 +81,22 @@ class MockKeychain: KeychainProtocol {
     }
     
     func deleteItem(_ query: CFDictionary) -> OSStatus {
-        operations.append(Operation(action: .delete, query: query))
+        operations.append(Operation(action: .delete, query: query, attributes: nil))
         return nextStatus(nil)
     }
     
     func addItem(_ query: CFDictionary, _ result: UnsafeMutablePointer<CFTypeRef?>?) -> OSStatus {
-        operations.append(Operation(action: .add, query: query))
+        operations.append(Operation(action: .add, query: query, attributes: nil))
         return nextStatus(result)
     }
     
+    func updateItem(_ query: CFDictionary, _ attributes: CFDictionary) -> OSStatus {
+        operations.append(Operation(action: .update, query: query, attributes: attributes))
+        return nextStatus(nil)
+    }
+    
     func copyItemMatching(_ query: CFDictionary, _ result: UnsafeMutablePointer<CFTypeRef?>?) -> OSStatus {
-        operations.append(Operation(action: .copy, query: query))
+        operations.append(Operation(action: .copy, query: query, attributes: nil))
         return nextStatus(result)
     }
 }

@@ -45,17 +45,17 @@ final class CredentialLoadingTests: XCTestCase {
         let tokenC = Token.mockToken(id: "TokenC")
         let tokenD = Token.mockToken(id: "TokenD")
 
-        try storage.add(token: tokenA)
-        try storage.add(token: tokenB)
-        try storage.add(token: tokenC)
-        try storage.add(token: tokenD)
+        try storage.add(token: tokenA, security: [])
+        try storage.add(token: tokenB, security: [])
+        try storage.add(token: tokenC, security: [])
+        try storage.add(token: tokenD, security: [])
 
         try storage.setMetadata(Token.Metadata(token: tokenA, tags: ["animal": "cat"]))
         try storage.setMetadata(Token.Metadata(token: tokenB, tags: ["animal": "dog"]))
         try storage.setMetadata(Token.Metadata(token: tokenC, tags: ["animal": "pig"]))
         try storage.setMetadata(Token.Metadata(token: tokenD, tags: ["animal": "emu"]))
         
-        XCTAssertEqual(try coordinator.with(id: "TokenA")?.token, tokenA)
+        XCTAssertEqual(try coordinator.with(id: "TokenA", prompt: nil, authenticationContext: nil)?.token, tokenA)
         XCTAssertEqual(try coordinator.find(where: { meta in
             meta.tags["animal"] == "cat"
         }).count, 1)
