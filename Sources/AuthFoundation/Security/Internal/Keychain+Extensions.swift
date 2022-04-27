@@ -75,6 +75,7 @@ extension KeychainListable {
     var listQuery: [String: Any] {
         var result = self.query
         result[kSecMatchLimit as String] = kSecMatchLimitAll
+        result.removeValue(forKey: kSecValueData as String)
         return result
     }
 

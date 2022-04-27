@@ -295,6 +295,15 @@ public struct Keychain {
             /// The description for this keychain item.
             public let description: String?
             
+            /// The accessibility level for this keychain item.
+            public var accessibility: Accessibility?
+            
+            /// Indicates whether or not this keychain item may be synchronized to iCloud Keychain.
+            public var synchronizable: Bool?
+
+            /// The access control settings for this item.
+            public var accessControl: SecAccessControl?
+            
             /// The generic, publicly-visible, data associated with this keychain item.
             public let generic: Data?
             
@@ -324,6 +333,23 @@ public struct Keychain {
                 label = result[kSecAttrLabel as String] as? String
                 description = result[kSecAttrDescription as String] as? String
                 generic = result[kSecAttrGeneric as String] as? Data
+                synchronizable = result[kSecAttrSynchronizable as String] as? Bool
+                
+                guard let accessibilityString = result[kSecAttrAccessible as String] as? String,
+                      let accessibility = Keychain.Accessibility(rawValue: accessibilityString)
+                else {
+                    throw KeychainError.invalidAccessibilityOption
+                }
+
+                self.accessibility = accessibility
+                
+                if let value = result[kSecAttrAccessControl as String] {
+                    // swiftlint:disable force_cast
+                    accessControl = (value as! SecAccessControl)
+                    // swiftlint:enable force_cast
+                } else {
+                    accessControl = nil
+                }
             }
             
             /// Fetches the complete ``Keychain/Item`` for this individual search result.

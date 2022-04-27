@@ -316,7 +316,8 @@ final class KeychainTests: XCTestCase {
         let result = try Keychain.Search.Result([
             kSecAttrAccount as String: "TheAccountName",
             kSecAttrModificationDate as String: Date(),
-            kSecAttrCreationDate as String: Date()
+            kSecAttrCreationDate as String: Date(),
+            kSecAttrAccessible as String: "ak"
         ])
         
         XCTAssertEqual(result.account, "TheAccountName")
@@ -326,7 +327,8 @@ final class KeychainTests: XCTestCase {
         let result = try Keychain.Search.Result([
             kSecAttrAccount as String: "TheAccountName",
             kSecAttrModificationDate as String: Date(),
-            kSecAttrCreationDate as String: Date()
+            kSecAttrCreationDate as String: Date(),
+            kSecAttrAccessible as String: "ak"
         ])
         
         mock.expect(noErr, result: [
@@ -363,7 +365,8 @@ final class KeychainTests: XCTestCase {
         let result = try Keychain.Search.Result([
             kSecAttrAccount as String: "TheAccountName",
             kSecAttrModificationDate as String: Date(),
-            kSecAttrCreationDate as String: Date()
+            kSecAttrCreationDate as String: Date(),
+            kSecAttrAccessible as String: "ak"
         ])
         
         mock.expect(noErr)
@@ -379,7 +382,8 @@ final class KeychainTests: XCTestCase {
         let result = try Keychain.Search.Result([
             kSecAttrAccount as String: "TheAccountName",
             kSecAttrModificationDate as String: Date(),
-            kSecAttrCreationDate as String: Date()
+            kSecAttrCreationDate as String: Date(),
+            kSecAttrAccessible as String: "ak"
         ])
         
         mock.expect(noErr)
