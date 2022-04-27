@@ -109,9 +109,9 @@ class KeychainTokenStorage: TokenStorage {
         token.id = id
         
         let data = try encoder.encode(token)
-        let accessibility = security?.accessibility ?? .afterFirstUnlock
-        let accessGroup = security?.accessGroup
-        let accessControl = try security?.createAccessControl(accessibility: accessibility)
+        let accessibility = security?.accessibility ?? oldResult.accessibility ?? .afterFirstUnlock
+        let accessGroup = security?.accessGroup ?? oldResult.accessGroup
+        let accessControl = try security?.createAccessControl(accessibility: accessibility) ?? oldResult.accessControl
         let newItem = Keychain.Item(account: id,
                                     service: KeychainTokenStorage.serviceName,
                                     accessibility: accessibility,
@@ -123,8 +123,7 @@ class KeychainTokenStorage: TokenStorage {
                                     generic: nil,
                                     value: data)
         
-        try? oldResult.delete()
-        try newItem.save(authenticationContext: security?.context)
+        try oldResult.update(newItem, authenticationContext: security?.context)
 
         delegate?.token(storage: self, replaced: id, with: token)
     }

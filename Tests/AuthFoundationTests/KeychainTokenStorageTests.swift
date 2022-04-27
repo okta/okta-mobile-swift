@@ -210,6 +210,23 @@ final class KeychainTokenStorageTests: XCTestCase {
         XCTAssertEqual(storage.allIDs.count, 0)
         XCTAssertNil(storage.defaultTokenID)
     }
+    
+    func testReplaceTokenSecurity() throws {
+        mock.expect(errSecSuccess, result: [dummyGetResult] as CFArray)
+        mock.expect(noErr)
+        
+        try storage.replace(token: token.id,
+                            with: token,
+                            security: [
+                                .accessibility(.whenPasswordSetThisDeviceOnly),
+                                .accessGroup("otherGroup")
+                            ])
+
+        let updateOperation = try XCTUnwrap(mock.operations[1])
+        XCTAssertEqual(updateOperation.action, .update)
+        XCTAssertEqual(updateOperation.attributes?["pdmn"] as? String, "akpu")
+        XCTAssertEqual(updateOperation.attributes?["agrp"] as? String, "otherGroup")
+    }
 }
 
 #endif
