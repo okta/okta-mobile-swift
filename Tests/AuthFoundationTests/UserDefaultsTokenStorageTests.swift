@@ -62,7 +62,7 @@ final class UserDefaultTokenStorageTests: XCTestCase {
     }
     
     func testDefaultToken() throws {
-        try storage.add(token: token, security: [])
+        try storage.add(token: token, metadata: nil, security: [])
         XCTAssertEqual(storage.allIDs.count, 1)
         XCTAssertEqual(storage.defaultTokenID, token.id)
         
@@ -70,7 +70,7 @@ final class UserDefaultTokenStorageTests: XCTestCase {
         XCTAssertNil(storage.defaultTokenID)
         XCTAssertEqual(storage.allIDs.count, 1)
    
-        XCTAssertThrowsError(try storage.add(token: token, security: []))
+        XCTAssertThrowsError(try storage.add(token: token, metadata: nil, security: []))
         XCTAssertEqual(storage.allIDs.count, 1)
         
         XCTAssertNoThrow(try storage.replace(token: token.id, with: newToken, security: nil))
@@ -86,14 +86,14 @@ final class UserDefaultTokenStorageTests: XCTestCase {
     func testImplicitDefaultToken() throws {
         XCTAssertNil(storage.defaultTokenID)
         
-        XCTAssertNoThrow(try storage.add(token: token, security: []))
+        XCTAssertNoThrow(try storage.add(token: token, metadata: nil, security: []))
         XCTAssertEqual(storage.allIDs.count, 1)
 
         XCTAssertEqual(storage.defaultTokenID, token.id)
     }
 
     func testRemoveDefaultToken() throws {
-        try storage.add(token: token, security: [])
+        try storage.add(token: token, metadata: nil, security: [])
         try storage.setDefaultTokenID(token.id)
         XCTAssertEqual(storage.allIDs.count, 1)
 

@@ -57,7 +57,7 @@ final class UserCoordinatorTests: XCTestCase {
     }
     
     func testDefaultCredentialViaToken() throws {
-        try storage.add(token: token, security: [])
+        try storage.add(token: token, metadata: nil, security: [])
 
         XCTAssertEqual(storage.allIDs.count, 1)
         

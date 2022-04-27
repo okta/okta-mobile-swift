@@ -83,7 +83,12 @@ class UserDefaultsTokenStorage: TokenStorage {
         return token
     }
     
-    func add(token: Token, security: [Credential.Security]) throws {
+    func add(token: Token, metadata: Token.Metadata?, security: [Credential.Security]) throws {
+        let metadata = metadata ?? Token.Metadata(token: token, tags: [:])
+        guard token.id == metadata.id else {
+            throw CredentialError.metadataConsistency
+        }
+        
         let id = token.id
         
         guard !allTokens.keys.contains(id) else {
@@ -96,6 +101,7 @@ class UserDefaultsTokenStorage: TokenStorage {
         }
         
         allTokens[id] = token
+        self.metadata[id] = metadata
         
         try save()
         delegate?.token(storage: self, added: id, token: token)
