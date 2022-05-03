@@ -30,6 +30,9 @@ extension Credential {
         
         /// Defines custom access control flags, such as requiring user presense or a device passcode.
         case accessControl(_ flags: SecAccessControlCreateFlags)
+
+        /// Defines access control settings, using a predefined `SecAccessControl` value.
+        case accessControlRef(_ secRef: SecAccessControl)
         
         /// Assigns a custom access group for this credential.
         case accessGroup(_ name: String)

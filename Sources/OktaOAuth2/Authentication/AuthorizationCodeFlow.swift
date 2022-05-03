@@ -183,6 +183,29 @@ public class AuthorizationCodeFlow: AuthenticationFlow {
         client.add(delegate: self)
     }
     
+    /// Initializer that uses the configuration defined within the application's `Okta.plist` file.
+    public convenience init() throws {
+        try self.init(try OAuth2Client.PropertyListConfiguration())
+    }
+    
+    /// Initializer that uses the configuration defined within the given file URL.
+    /// - Parameter fileURL: File URL to a `plist` containing client configuration.
+    public convenience init(plist fileURL: URL) throws {
+        try self.init(try OAuth2Client.PropertyListConfiguration(plist: fileURL))
+    }
+    
+    private convenience init(_ config: OAuth2Client.PropertyListConfiguration) throws {
+        guard let redirectUri = config.redirectUri else {
+            throw OAuth2Client.PropertyListConfigurationError.missingConfigurationValues
+        }
+
+        self.init(issuer: config.issuer,
+                  clientId: config.clientId,
+                  scopes: config.scopes,
+                  redirectUri: redirectUri,
+                  additionalParameters: config.additionalParameters)
+    }
+    
     /// Initiates an authentication flow, with an optional ``Context-swift.struct``.
     ///
     /// This method is used to begin an authentication session. It is asynchronous, and will invoke the appropriate delegate methods when a response is received.

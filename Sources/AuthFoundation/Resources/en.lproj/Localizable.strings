@@ -50,3 +50,9 @@
 "keychain_missing_value_data" = "The keychain item is missing its value data.";
 "keychain_missing_attribute" = "The keychain item is missing required attributes.";
 "keychain_access_control_invalid" = "The access control settings for this keychain item are invalid: %@ (code %d).";
+
+/* OAuth2Client.PropertyListConfigurationError */
+"default_property_list_not_found_description" = "The default Okta.plist configuration file was not found.";
+"invalid_property_list_description" = "The configuration file named \"%@\" was invalid.";
+"cannot_parse_property_list_description" = "Could not parse the configuration file named \"%@\".";
+"missing_configuration_values_description" = "Web authentication is not configured properly.";

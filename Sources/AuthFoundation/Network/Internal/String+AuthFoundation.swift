@@ -54,7 +54,7 @@ private let systemVersion: String = {
     #endif
 }()
 
-public class SDKVersion {
+public class SDKVersion: Codable {
     public let name: String
     public let version: String
     

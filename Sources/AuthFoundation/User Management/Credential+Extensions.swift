@@ -23,6 +23,9 @@ extension Notification.Name {
 
     /// Notification broadcast when a credential is removed from storage.
     public static let credentialRemoved = Notification.Name("com.okta.credential.removed")
+
+    /// Notification broadcast when a credential has been migrated from a previous version.
+    public static let credentialMigrated = Notification.Name("com.okta.credential.migrated")
 }
 
 #if swift(>=5.5.1)

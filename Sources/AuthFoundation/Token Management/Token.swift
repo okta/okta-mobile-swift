@@ -159,7 +159,7 @@ public class Token: Codable, Equatable, Hashable, Expires, Identifiable {
         }
         
         self.init(id: id,
-                  issuedAt: Date.nowCoordinated,
+                  issuedAt: try container.decodeIfPresent(Date.self, forKey: .issuedAt) ?? Date.nowCoordinated,
                   tokenType: try container.decode(String.self, forKey: .tokenType),
                   expiresIn: try container.decode(TimeInterval.self, forKey: .expiresIn),
                   accessToken: try container.decode(String.self, forKey: .accessToken),
