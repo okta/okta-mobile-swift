@@ -24,7 +24,7 @@ extension SDKVersion.Migration {
     ///     // Import the default `Okta.plist` configuration for migration
     ///     try? SDKVersion.Migration.LegacyOIDC.register()
     ///     try? SDKVersion.migrateIfNeeded()
-    ///     
+    ///
     ///     return true
     /// }
     /// ```
@@ -91,11 +91,13 @@ extension SDKVersion.Migration {
             }
             
             let results = items.filter({ searchResult in
+                // swiftlint:disable empty_string
                 guard searchResult.service == "",
                       regex.matches(in: searchResult.account, range: NSRange(location: 0, length: searchResult.account.count)).count == 1
                 else {
                     return false
                 }
+                // swiftlint:enable empty_string
                 return true
             })
                 

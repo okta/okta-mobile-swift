@@ -52,11 +52,6 @@ extension SDKVersion {
         
         fileprivate(set) static var registeredMigrators: [SDKVersionMigrator] = []
         
-        struct State: Codable {
-            let migratedAt: Date
-            let versions: [SDKVersion]
-        }
-        
         let migrators: [SDKVersionMigrator]
         
         init(migrators: [SDKVersionMigrator]) {

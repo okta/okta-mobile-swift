@@ -24,13 +24,25 @@ extension OAuth2Client {
     ///
     /// > Important: This struct is intended for internal use, and may be subject to change.
     public struct PropertyListConfiguration {
+        /// The client issuer URL, defined in the "issuer" key.
         public let issuer: URL
+        
+        /// The client ID, defined in the "clientId" key.
         public let clientId: String
+        
+        /// The client scopes, defined in the "scopes" key.
         public let scopes: String
+        
+        /// The client's redirect URI, if one is applicable, defined in the "redirectUri" key.
         public let redirectUri: URL?
+        
+        /// The client's logout redirect URI, if one is applicable, defined in the "logoutRedirectUri" key.
         public let logoutRedirectUri: URL?
+        
+        /// Additional parameters defined by the developer within the property list.
         public let additionalParameters: [String: String]?
-
+        
+        /// Default initializer that reads the `Okta.plist` file from the application's main bundle.
         public init() throws {
             guard let file = Bundle.main.url(forResource: "Okta", withExtension: "plist") else {
                 throw PropertyListConfigurationError.defaultPropertyListNotFound
@@ -39,6 +51,8 @@ extension OAuth2Client {
             try self.init(plist: file)
         }
         
+        /// Initializer that reads the supplied file URL.
+        /// - Parameter fileURL: File URL to the client configuration property list.
         public init(plist fileURL: URL) throws {
             guard fileURL.isFileURL else {
                 throw PropertyListConfigurationError.invalidPropertyList(url: fileURL)
