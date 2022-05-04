@@ -73,7 +73,7 @@ extension Array where Element == Credential.Security {
             let code = CFErrorGetCode(error)
             
             throw KeychainError.accessControlInvalid(code: OSStatus(code),
-                                                     description: desc as? String)
+                                                     description: desc as String?)
         }
         
         return accessControl

@@ -12,6 +12,8 @@
 
 import Foundation
 
+#if os(iOS) || os(macOS) || os(tvOS) || os(watchOS)
+
 fileprivate let accountIdRegex = try? NSRegularExpression(pattern: "0oa[0-9a-zA-Z]{17}")
 
 extension SDKVersion.Migration {
@@ -125,7 +127,7 @@ extension SDKVersion.Migration {
 
         private func decode(_ data: Data) throws -> StateManager? {
             let archiver: NSKeyedUnarchiver
-            if #available(iOS 11.0, *) {
+            if #available(iOS 11.0, tvOS 11.0, macCatalyst 13.1, macOS 10.13, watchOS 4.0, *) {
                 archiver = try NSKeyedUnarchiver(forReadingFrom: data)
             } else {
                 archiver = NSKeyedUnarchiver(forReadingWith: data)
@@ -270,3 +272,5 @@ extension SDKVersion.Migration {
         }
     }
 }
+
+#endif
