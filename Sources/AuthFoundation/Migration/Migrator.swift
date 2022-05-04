@@ -12,7 +12,7 @@
 
 import Foundation
 
-public protocol SDKVersionMigrator {
+public protocol SDKVersionMigrator: AnyObject {
     var needsMigration: Bool { get }
 
     func migrate() throws

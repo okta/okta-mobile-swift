@@ -45,12 +45,19 @@ extension SDKVersion {
     
     /// Namespace used for a variety of version migration agents.
     public class Migration {
-        fileprivate static var hasMigrated: Bool = false
         static var shared: Migration = {
             Migration()
         }()
         
-        fileprivate(set) static var registeredMigrators: [SDKVersionMigrator] = []
+        fileprivate(set) static var registeredMigrators: [SDKVersionMigrator] = defaultMigrators()
+
+        static func resetMigrators() {
+            registeredMigrators = defaultMigrators()
+        }
+        
+        static func defaultMigrators() -> [SDKVersionMigrator] {
+            []
+        }
         
         let migrators: [SDKVersionMigrator]
         
