@@ -29,15 +29,18 @@ class OIDCSignInViewController: UIViewController {
         updateUIState()
         
         // Dismiss the profile view controller when it is signed out
-        NotificationCenter.default.addObserver(forName: .defaultCredentialChanged, object: nil, queue: .main) { note in
-            guard note.object == nil,
-                  self.presentedViewController != nil
-            else { return }
-            
-            self.presentedViewController?.dismiss(animated: true, completion: {
-                self.updateUIState()
-            })
-        }
+        NotificationCenter.default.addObserver(self,
+                                               selector: #selector(dismissProfile),
+                                               name: .defaultCredentialChanged,
+                                               object: nil)
+    }
+    
+    @objc func dismissProfile() {
+        guard presentedViewController != nil else { return }
+        
+        self.presentedViewController?.dismiss(animated: true, completion: {
+            self.updateUIState()
+        })
     }
     
     func updateUIState() {
