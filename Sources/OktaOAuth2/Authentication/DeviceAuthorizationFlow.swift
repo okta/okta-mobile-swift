@@ -162,6 +162,23 @@ public class DeviceAuthorizationFlow: AuthenticationFlow {
         client.add(delegate: self)
     }
     
+    /// Initializer that uses the configuration defined within the application's `Okta.plist` file.
+    public convenience init() throws {
+        self.init(try OAuth2Client.PropertyListConfiguration())
+    }
+    
+    /// Initializer that uses the configuration defined within the given file URL.
+    /// - Parameter fileURL: File URL to a `plist` containing client configuration.
+    public convenience init(plist fileURL: URL) throws {
+        self.init(try OAuth2Client.PropertyListConfiguration(plist: fileURL))
+    }
+    
+    private convenience init(_ config: OAuth2Client.PropertyListConfiguration) {
+        self.init(issuer: config.issuer,
+                  clientId: config.clientId,
+                  scopes: config.scopes)
+    }
+    
     /// Initiates a device authentication flow.
     ///
     /// This method is used to begin an authentication session. The resulting ``Context-swift.struct`` object can be used to display the user code and URI necessary for them to complete authentication on a different device.

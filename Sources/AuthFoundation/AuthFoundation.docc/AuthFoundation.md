@@ -89,13 +89,17 @@ You can use AuthFoundation when you want to:
 - ``KeychainError``
 - ``AuthenticationError``
 
+### Migration and versioning
+- ``SDKVersion``
+- ``SDKVersionMigrator``
+- ``SDKVersionMigrationError``
+
 ### Internals and mocking
 
 - ``DelegateCollection``
 - ``UsesDelegateCollection``
 - ``URLSessionProtocol``
 - ``URLSessionDataTaskProtocol``
-- ``SDKVersion``
 - ``Weak``
 - ``WeakCollection``
 - ``TimeSensitive``

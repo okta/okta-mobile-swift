@@ -28,10 +28,6 @@ import FoundationNetworking
 #endif
 
 public enum WebAuthenticationError: Error {
-    case defaultPropertyListNotFound
-    case invalidPropertyList(url: URL)
-    case cannotParsePropertyList(_ error: Error?)
-    case missingConfigurationValues
     case noCompatibleAuthenticationProviders
     case cannotComposeAuthenticationURL
     case authenticationProviderError(_ error: Error)
@@ -207,62 +203,13 @@ public class WebAuthentication {
     
     /// Initializes a web authentiation session using client credentials defined within the application's `Okta.plist` file.
     public convenience init() throws {
-        guard let file = Bundle.main.url(forResource: "Okta", withExtension: "plist") else {
-            throw WebAuthenticationError.defaultPropertyListNotFound
-        }
-        
-        try self.init(plist: file)
+        try self.init(try OAuth2Client.PropertyListConfiguration())
     }
     
     /// Initializes a web authentication session using client credentials defined within the provided file URL.
-    /// - Parameter fileURL: File URL to a `plist` file containing client credentials.
+    /// - Parameter fileURL: File URL to a `plist` file containing client configuration.
     public convenience init(plist fileURL: URL) throws {
-        guard fileURL.isFileURL else {
-            throw WebAuthenticationError.invalidPropertyList(url: fileURL)
-        }
-        
-        let plistContent: Any
-        do {
-            let data = try Data(contentsOf: fileURL)
-            plistContent = try PropertyListSerialization.propertyList(from: data, options: [], format: nil)
-        } catch {
-            throw WebAuthenticationError.cannotParsePropertyList(error)
-        }
-        
-        guard let dict = plistContent as? [String: String] else {
-            throw WebAuthenticationError.cannotParsePropertyList(nil)
-        }
-        
-        guard let clientId = dict["clientId"],
-              !clientId.isEmpty,
-              let issuer = dict["issuer"],
-              let issuerUrl = URL(string: issuer),
-              let scopes = dict["scopes"],
-              !scopes.isEmpty,
-              let redirectUriString = dict["redirectUri"],
-              let redirectUri = URL(string: redirectUriString)
-        else {
-            throw WebAuthenticationError.missingConfigurationValues
-        }
-        
-        let logoutRedirectUri: URL?
-        if let logoutRedirectUriString = dict["logoutRedirectUri"] {
-            logoutRedirectUri = URL(string: logoutRedirectUriString)
-        } else {
-            logoutRedirectUri = nil
-        }
-        
-        // Filter only additional parameters
-        let additionalParameters = dict.filter {
-            !["clientId", "issuer", "scopes", "redirectUri", "logoutRedirectUri"].contains($0.key)
-        }
-
-        self.init(issuer: issuerUrl,
-                  clientId: clientId,
-                  scopes: scopes,
-                  redirectUri: redirectUri,
-                  logoutRedirectUri: logoutRedirectUri,
-                  additionalParameters: additionalParameters.isEmpty ? nil : additionalParameters)
+        try self.init(try OAuth2Client.PropertyListConfiguration(plist: fileURL))
     }
     
     /// Initializes a web authentication session using the supplied client credentials.
@@ -299,6 +246,19 @@ public class WebAuthentication {
                                               client: client),
                   logoutFlow: logoutFlow,
                   context: nil)
+    }
+    
+    convenience init(_ config: OAuth2Client.PropertyListConfiguration) throws {
+        guard let redirectUri = config.redirectUri else {
+            throw OAuth2Client.PropertyListConfigurationError.missingConfigurationValues
+        }
+        
+        self.init(issuer: config.issuer,
+                  clientId: config.clientId,
+                  scopes: config.scopes,
+                  redirectUri: redirectUri,
+                  logoutRedirectUri: config.logoutRedirectUri,
+                  additionalParameters: config.additionalParameters)
     }
     
     func createWebAuthenticationProvider(flow: AuthorizationCodeFlow,

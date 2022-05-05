@@ -47,7 +47,18 @@ extension Array where Element == Credential.Security {
         return nil
     }
     
+    var accessControlRef: SecAccessControl? {
+        for case let Credential.Security.accessControlRef(value) in self {
+            return value
+        }
+        return nil
+    }
+    
     func createAccessControl(accessibility: Keychain.Accessibility) throws -> SecAccessControl? {
+        if let accessControlRef = accessControlRef {
+            return accessControlRef
+        }
+        
         guard let accessControlFlags = accessControlFlags else {
             return nil
         }
@@ -62,7 +73,7 @@ extension Array where Element == Credential.Security {
             let code = CFErrorGetCode(error)
             
             throw KeychainError.accessControlInvalid(code: OSStatus(code),
-                                                     description: desc as? String)
+                                                     description: desc as String?)
         }
         
         return accessControl

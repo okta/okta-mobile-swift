@@ -290,13 +290,14 @@
 			path = SingleSignOnUITests;
 			sourceTree = "<group>";
 		};
-		92DF17982791C5C700473E7E /* Common (iOS) */ = {
+		92DF17982791C5C700473E7E /* Common */ = {
 			isa = PBXGroup;
 			children = (
 				92DF17A82791DB4200473E7E /* Keychain */,
 				92DF17AB2791DB7F00473E7E /* ViewControllers */,
 			);
-			path = "Common (iOS)";
+			name = Common;
+			path = ../Common;
 			sourceTree = "<group>";
 		};
 		92DF17A82791DB4200473E7E /* Keychain */ = {
@@ -323,7 +324,7 @@
 				925F1A7227BABDC60059A389 /* SingleSignOn (iOS) */,
 				925F1A7427BABE140059A389 /* WebSignIn (iOS) */,
 				925F1A7527BABE260059A389 /* WebSignIn (macOS) */,
-				92DF17982791C5C700473E7E /* Common (iOS) */,
+				92DF17982791C5C700473E7E /* Common */,
 				9653DCED274C305D003C6E20 /* Packages */,
 				9653DCBB274C3008003C6E20 /* Products */,
 				9653DCF0274C355E003C6E20 /* Frameworks */,
