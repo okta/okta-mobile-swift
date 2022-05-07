@@ -23,9 +23,6 @@
 		92DF17642791785200473E7E /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 92DF17622791785200473E7E /* Main.storyboard */; };
 		92DF17662791785400473E7E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 92DF17652791785400473E7E /* Assets.xcassets */; };
 		92DF17692791785400473E7E /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 92DF17672791785400473E7E /* LaunchScreen.storyboard */; };
-		92DF17742791785400473E7E /* SingleSignOnTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92DF17732791785400473E7E /* SingleSignOnTests.swift */; };
-		92DF177E2791785400473E7E /* SingleSignOnUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92DF177D2791785400473E7E /* SingleSignOnUITests.swift */; };
-		92DF17802791785400473E7E /* SingleSignOnUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92DF177F2791785400473E7E /* SingleSignOnUITestsLaunchTests.swift */; };
 		92DF178B279178AD00473E7E /* SingleSignOnViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92DF178A279178AD00473E7E /* SingleSignOnViewController.swift */; };
 		92DF179227917A0100473E7E /* AuthFoundation in Frameworks */ = {isa = PBXBuildFile; productRef = 92DF179127917A0100473E7E /* AuthFoundation */; };
 		92DF179427917A0100473E7E /* OktaOAuth2 in Frameworks */ = {isa = PBXBuildFile; productRef = 92DF179327917A0100473E7E /* OktaOAuth2 */; };
@@ -45,43 +42,24 @@
 		9653DCC5274C3008003C6E20 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9653DCC3274C3008003C6E20 /* Main.storyboard */; };
 		9653DCC7274C3009003C6E20 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9653DCC6274C3009003C6E20 /* Assets.xcassets */; };
 		9653DCCA274C3009003C6E20 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9653DCC8274C3009003C6E20 /* LaunchScreen.storyboard */; };
-		9653DCD5274C3009003C6E20 /* WebSignInTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9653DCD4274C3009003C6E20 /* WebSignInTests.swift */; };
-		9653DCDF274C300A003C6E20 /* WebSignInUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9653DCDE274C300A003C6E20 /* WebSignInUITests.swift */; };
-		9653DCE1274C300A003C6E20 /* WebSignInUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9653DCE0274C300A003C6E20 /* WebSignInUITestsLaunchTests.swift */; };
 		9653DCF2274C355E003C6E20 /* WebAuthenticationUI in Frameworks */ = {isa = PBXBuildFile; productRef = 9653DCF1274C355E003C6E20 /* WebAuthenticationUI */; };
 		9653DCF4274C3564003C6E20 /* AuthFoundation in Frameworks */ = {isa = PBXBuildFile; productRef = 9653DCF3274C3564003C6E20 /* AuthFoundation */; };
 		9653DCF6274C3564003C6E20 /* OktaOAuth2 in Frameworks */ = {isa = PBXBuildFile; productRef = 9653DCF5274C3564003C6E20 /* OktaOAuth2 */; };
+		9698F1F228259133002D50C2 /* BrowserSignIn.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9698F1F128259133002D50C2 /* BrowserSignIn.swift */; };
 		96A5287827FE3B08009A0392 /* Okta.plist in Resources */ = {isa = PBXBuildFile; fileRef = 96A5287727FE3ABC009A0392 /* Okta.plist */; };
+		96E98A90282593BA00CE251E /* Screen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96E98A8F282593BA00CE251E /* Screen.swift */; };
+		96E98A93282593E800CE251E /* SignInScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96E98A92282593E800CE251E /* SignInScreen.swift */; };
+		96E98A952825952600CE251E /* XCTest+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96E98A942825952600CE251E /* XCTest+Extensions.swift */; };
+		96E98A9728259D4100CE251E /* ProfileScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96E98A9628259D4100CE251E /* ProfileScreen.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		92DF17702791785400473E7E /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 9653DCB2274C3008003C6E20 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 92DF17592791785200473E7E;
-			remoteInfo = SingleSignOn;
-		};
-		92DF177A2791785400473E7E /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 9653DCB2274C3008003C6E20 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 92DF17592791785200473E7E;
-			remoteInfo = SingleSignOn;
-		};
-		9653DCD1274C3009003C6E20 /* PBXContainerItemProxy */ = {
+		9698F1F528259133002D50C2 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 9653DCB2274C3008003C6E20 /* Project object */;
 			proxyType = 1;
 			remoteGlobalIDString = 9653DCB9274C3008003C6E20;
-			remoteInfo = WebSignIn;
-		};
-		9653DCDB274C300A003C6E20 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 9653DCB2274C3008003C6E20 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 9653DCB9274C3008003C6E20;
-			remoteInfo = WebSignIn;
+			remoteInfo = "WebSignIn (iOS)";
 		};
 /* End PBXContainerItemProxy section */
 
@@ -103,9 +81,7 @@
 		92DF17652791785400473E7E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		92DF17682791785400473E7E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		92DF176A2791785400473E7E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		92DF176F2791785400473E7E /* SingleSignOnTests (iOS).xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "SingleSignOnTests (iOS).xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		92DF17732791785400473E7E /* SingleSignOnTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SingleSignOnTests.swift; sourceTree = "<group>"; };
-		92DF17792791785400473E7E /* SingleSignOnUITests (iOS).xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "SingleSignOnUITests (iOS).xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		92DF177D2791785400473E7E /* SingleSignOnUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SingleSignOnUITests.swift; sourceTree = "<group>"; };
 		92DF177F2791785400473E7E /* SingleSignOnUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SingleSignOnUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		92DF178A279178AD00473E7E /* SingleSignOnViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SingleSignOnViewController.swift; sourceTree = "<group>"; };
@@ -124,15 +100,16 @@
 		9653DCC6274C3009003C6E20 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		9653DCC9274C3009003C6E20 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		9653DCCB274C3009003C6E20 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		9653DCD0274C3009003C6E20 /* WebSignInTests (iOS).xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "WebSignInTests (iOS).xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
-		9653DCD4274C3009003C6E20 /* WebSignInTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebSignInTests.swift; sourceTree = "<group>"; };
-		9653DCDA274C3009003C6E20 /* WebSignInUITests (iOS).xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "WebSignInUITests (iOS).xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
-		9653DCDE274C300A003C6E20 /* WebSignInUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebSignInUITests.swift; sourceTree = "<group>"; };
-		9653DCE0274C300A003C6E20 /* WebSignInUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebSignInUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		9653DCEE274C305D003C6E20 /* okta-mobile-swift */ = {isa = PBXFileReference; lastKnownFileType = folder; name = "okta-mobile-swift"; path = ../..; sourceTree = "<group>"; };
 		9653DCEF274C33E4003C6E20 /* okta-mobile-swift */ = {isa = PBXFileReference; lastKnownFileType = folder; name = "okta-mobile-swift"; path = ../..; sourceTree = "<group>"; };
 		9653DCFB274FF407003C6E20 /* Okta.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Okta.plist; path = ../../Okta.plist; sourceTree = "<group>"; };
+		9698F1EF28259133002D50C2 /* WebSignIn (iOS) UITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "WebSignIn (iOS) UITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		9698F1F128259133002D50C2 /* BrowserSignIn.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BrowserSignIn.swift; sourceTree = "<group>"; };
 		96A5287727FE3ABC009A0392 /* Okta.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = Okta.plist; path = ../../Okta.plist; sourceTree = "<group>"; };
+		96E98A8F282593BA00CE251E /* Screen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Screen.swift; sourceTree = "<group>"; };
+		96E98A92282593E800CE251E /* SignInScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInScreen.swift; sourceTree = "<group>"; };
+		96E98A942825952600CE251E /* XCTest+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "XCTest+Extensions.swift"; sourceTree = "<group>"; };
+		96E98A9628259D4100CE251E /* ProfileScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileScreen.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -156,20 +133,6 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		92DF176C2791785400473E7E /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		92DF17762791785400473E7E /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		9653DCB7274C3008003C6E20 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -180,14 +143,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		9653DCCD274C3009003C6E20 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		9653DCD7274C3009003C6E20 /* Frameworks */ = {
+		9698F1EC28259133002D50C2 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -225,8 +181,7 @@
 			isa = PBXGroup;
 			children = (
 				9653DCBC274C3008003C6E20 /* WebSignIn */,
-				9653DCD3274C3009003C6E20 /* WebSignInTests */,
-				9653DCDD274C300A003C6E20 /* WebSignInUITests */,
+				9698F1F028259133002D50C2 /* UITests */,
 			);
 			path = "WebSignIn (iOS)";
 			sourceTree = "<group>";
@@ -293,11 +248,12 @@
 		92DF17982791C5C700473E7E /* Common */ = {
 			isa = PBXGroup;
 			children = (
+				96E98A8E282593A900CE251E /* Testing */,
 				92DF17A82791DB4200473E7E /* Keychain */,
 				92DF17AB2791DB7F00473E7E /* ViewControllers */,
 			);
 			name = Common;
-			path = ../Common;
+			path = ../Shared/Common;
 			sourceTree = "<group>";
 		};
 		92DF17A82791DB4200473E7E /* Keychain */ = {
@@ -336,12 +292,9 @@
 			isa = PBXGroup;
 			children = (
 				9653DCBA274C3008003C6E20 /* WebSignIn (iOS).app */,
-				9653DCD0274C3009003C6E20 /* WebSignInTests (iOS).xctest */,
-				9653DCDA274C3009003C6E20 /* WebSignInUITests (iOS).xctest */,
 				92DF175A2791785200473E7E /* SingleSignOn (iOS).app */,
-				92DF176F2791785400473E7E /* SingleSignOnTests (iOS).xctest */,
-				92DF17792791785400473E7E /* SingleSignOnUITests (iOS).xctest */,
 				92088F8A27A9936D00A4DC1B /* WebSignIn (macOS).app */,
+				9698F1EF28259133002D50C2 /* WebSignIn (iOS) UITests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -362,23 +315,6 @@
 			path = WebSignIn;
 			sourceTree = "<group>";
 		};
-		9653DCD3274C3009003C6E20 /* WebSignInTests */ = {
-			isa = PBXGroup;
-			children = (
-				9653DCD4274C3009003C6E20 /* WebSignInTests.swift */,
-			);
-			path = WebSignInTests;
-			sourceTree = "<group>";
-		};
-		9653DCDD274C300A003C6E20 /* WebSignInUITests */ = {
-			isa = PBXGroup;
-			children = (
-				9653DCDE274C300A003C6E20 /* WebSignInUITests.swift */,
-				9653DCE0274C300A003C6E20 /* WebSignInUITestsLaunchTests.swift */,
-			);
-			path = WebSignInUITests;
-			sourceTree = "<group>";
-		};
 		9653DCED274C305D003C6E20 /* Packages */ = {
 			isa = PBXGroup;
 			children = (
@@ -393,6 +329,33 @@
 			children = (
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		9698F1F028259133002D50C2 /* UITests */ = {
+			isa = PBXGroup;
+			children = (
+				96E98A91282593D200CE251E /* Pages */,
+				9698F1F128259133002D50C2 /* BrowserSignIn.swift */,
+			);
+			path = UITests;
+			sourceTree = "<group>";
+		};
+		96E98A8E282593A900CE251E /* Testing */ = {
+			isa = PBXGroup;
+			children = (
+				96E98A8F282593BA00CE251E /* Screen.swift */,
+				96E98A942825952600CE251E /* XCTest+Extensions.swift */,
+			);
+			path = Testing;
+			sourceTree = "<group>";
+		};
+		96E98A91282593D200CE251E /* Pages */ = {
+			isa = PBXGroup;
+			children = (
+				96E98A92282593E800CE251E /* SignInScreen.swift */,
+				96E98A9628259D4100CE251E /* ProfileScreen.swift */,
+			);
+			path = Pages;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -442,42 +405,6 @@
 			productReference = 92DF175A2791785200473E7E /* SingleSignOn (iOS).app */;
 			productType = "com.apple.product-type.application";
 		};
-		92DF176E2791785400473E7E /* SingleSignOnTests (iOS) */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 92DF17882791785400473E7E /* Build configuration list for PBXNativeTarget "SingleSignOnTests (iOS)" */;
-			buildPhases = (
-				92DF176B2791785400473E7E /* Sources */,
-				92DF176C2791785400473E7E /* Frameworks */,
-				92DF176D2791785400473E7E /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				92DF17712791785400473E7E /* PBXTargetDependency */,
-			);
-			name = "SingleSignOnTests (iOS)";
-			productName = SingleSignOnTests;
-			productReference = 92DF176F2791785400473E7E /* SingleSignOnTests (iOS).xctest */;
-			productType = "com.apple.product-type.bundle.unit-test";
-		};
-		92DF17782791785400473E7E /* SingleSignOnUITests (iOS) */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 92DF17892791785400473E7E /* Build configuration list for PBXNativeTarget "SingleSignOnUITests (iOS)" */;
-			buildPhases = (
-				92DF17752791785400473E7E /* Sources */,
-				92DF17762791785400473E7E /* Frameworks */,
-				92DF17772791785400473E7E /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				92DF177B2791785400473E7E /* PBXTargetDependency */,
-			);
-			name = "SingleSignOnUITests (iOS)";
-			productName = SingleSignOnUITests;
-			productReference = 92DF17792791785400473E7E /* SingleSignOnUITests (iOS).xctest */;
-			productType = "com.apple.product-type.bundle.ui-testing";
-		};
 		9653DCB9274C3008003C6E20 /* WebSignIn (iOS) */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 9653DCE4274C300A003C6E20 /* Build configuration list for PBXNativeTarget "WebSignIn (iOS)" */;
@@ -500,40 +427,22 @@
 			productReference = 9653DCBA274C3008003C6E20 /* WebSignIn (iOS).app */;
 			productType = "com.apple.product-type.application";
 		};
-		9653DCCF274C3009003C6E20 /* WebSignInTests (iOS) */ = {
+		9698F1EE28259133002D50C2 /* WebSignIn (iOS) UITests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 9653DCE7274C300A003C6E20 /* Build configuration list for PBXNativeTarget "WebSignInTests (iOS)" */;
+			buildConfigurationList = 9698F1F728259133002D50C2 /* Build configuration list for PBXNativeTarget "WebSignIn (iOS) UITests" */;
 			buildPhases = (
-				9653DCCC274C3009003C6E20 /* Sources */,
-				9653DCCD274C3009003C6E20 /* Frameworks */,
-				9653DCCE274C3009003C6E20 /* Resources */,
+				9698F1EB28259133002D50C2 /* Sources */,
+				9698F1EC28259133002D50C2 /* Frameworks */,
+				9698F1ED28259133002D50C2 /* Resources */,
 			);
 			buildRules = (
 			);
 			dependencies = (
-				9653DCD2274C3009003C6E20 /* PBXTargetDependency */,
+				9698F1F628259133002D50C2 /* PBXTargetDependency */,
 			);
-			name = "WebSignInTests (iOS)";
-			productName = WebSignInTests;
-			productReference = 9653DCD0274C3009003C6E20 /* WebSignInTests (iOS).xctest */;
-			productType = "com.apple.product-type.bundle.unit-test";
-		};
-		9653DCD9274C3009003C6E20 /* WebSignInUITests (iOS) */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 9653DCEA274C300A003C6E20 /* Build configuration list for PBXNativeTarget "WebSignInUITests (iOS)" */;
-			buildPhases = (
-				9653DCD6274C3009003C6E20 /* Sources */,
-				9653DCD7274C3009003C6E20 /* Frameworks */,
-				9653DCD8274C3009003C6E20 /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				9653DCDC274C300A003C6E20 /* PBXTargetDependency */,
-			);
-			name = "WebSignInUITests (iOS)";
-			productName = WebSignInUITests;
-			productReference = 9653DCDA274C3009003C6E20 /* WebSignInUITests (iOS).xctest */;
+			name = "WebSignIn (iOS) UITests";
+			productName = "WebSignIn (iOS) UITests";
+			productReference = 9698F1EF28259133002D50C2 /* WebSignIn (iOS) UITests.xctest */;
 			productType = "com.apple.product-type.bundle.ui-testing";
 		};
 /* End PBXNativeTarget section */
@@ -543,7 +452,7 @@
 			isa = PBXProject;
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
-				LastSwiftUpdateCheck = 1310;
+				LastSwiftUpdateCheck = 1330;
 				LastUpgradeCheck = 1310;
 				TargetAttributes = {
 					92088F8927A9936D00A4DC1B = {
@@ -552,23 +461,11 @@
 					92DF17592791785200473E7E = {
 						CreatedOnToolsVersion = 13.1;
 					};
-					92DF176E2791785400473E7E = {
-						CreatedOnToolsVersion = 13.1;
-						TestTargetID = 92DF17592791785200473E7E;
-					};
-					92DF17782791785400473E7E = {
-						CreatedOnToolsVersion = 13.1;
-						TestTargetID = 92DF17592791785200473E7E;
-					};
 					9653DCB9274C3008003C6E20 = {
 						CreatedOnToolsVersion = 13.1;
 					};
-					9653DCCF274C3009003C6E20 = {
-						CreatedOnToolsVersion = 13.1;
-						TestTargetID = 9653DCB9274C3008003C6E20;
-					};
-					9653DCD9274C3009003C6E20 = {
-						CreatedOnToolsVersion = 13.1;
+					9698F1EE28259133002D50C2 = {
+						CreatedOnToolsVersion = 13.3;
 						TestTargetID = 9653DCB9274C3008003C6E20;
 					};
 				};
@@ -587,11 +484,8 @@
 			projectRoot = "";
 			targets = (
 				9653DCB9274C3008003C6E20 /* WebSignIn (iOS) */,
-				9653DCCF274C3009003C6E20 /* WebSignInTests (iOS) */,
-				9653DCD9274C3009003C6E20 /* WebSignInUITests (iOS) */,
+				9698F1EE28259133002D50C2 /* WebSignIn (iOS) UITests */,
 				92DF17592791785200473E7E /* SingleSignOn (iOS) */,
-				92DF176E2791785400473E7E /* SingleSignOnTests (iOS) */,
-				92DF17782791785400473E7E /* SingleSignOnUITests (iOS) */,
 				92088F8927A9936D00A4DC1B /* WebSignIn (macOS) */,
 			);
 		};
@@ -618,20 +512,6 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		92DF176D2791785400473E7E /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		92DF17772791785400473E7E /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		9653DCB8274C3008003C6E20 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -644,14 +524,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		9653DCCE274C3009003C6E20 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		9653DCD8274C3009003C6E20 /* Resources */ = {
+		9698F1ED28259133002D50C2 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -688,23 +561,6 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		92DF176B2791785400473E7E /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				92DF17742791785400473E7E /* SingleSignOnTests.swift in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		92DF17752791785400473E7E /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				92DF17802791785400473E7E /* SingleSignOnUITestsLaunchTests.swift in Sources */,
-				92DF177E2791785400473E7E /* SingleSignOnUITests.swift in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		9653DCB6274C3008003C6E20 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -718,45 +574,25 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		9653DCCC274C3009003C6E20 /* Sources */ = {
+		9698F1EB28259133002D50C2 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				9653DCD5274C3009003C6E20 /* WebSignInTests.swift in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		9653DCD6274C3009003C6E20 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				9653DCDF274C300A003C6E20 /* WebSignInUITests.swift in Sources */,
-				9653DCE1274C300A003C6E20 /* WebSignInUITestsLaunchTests.swift in Sources */,
+				9698F1F228259133002D50C2 /* BrowserSignIn.swift in Sources */,
+				96E98A9728259D4100CE251E /* ProfileScreen.swift in Sources */,
+				96E98A93282593E800CE251E /* SignInScreen.swift in Sources */,
+				96E98A90282593BA00CE251E /* Screen.swift in Sources */,
+				96E98A952825952600CE251E /* XCTest+Extensions.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		92DF17712791785400473E7E /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 92DF17592791785200473E7E /* SingleSignOn (iOS) */;
-			targetProxy = 92DF17702791785400473E7E /* PBXContainerItemProxy */;
-		};
-		92DF177B2791785400473E7E /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 92DF17592791785200473E7E /* SingleSignOn (iOS) */;
-			targetProxy = 92DF177A2791785400473E7E /* PBXContainerItemProxy */;
-		};
-		9653DCD2274C3009003C6E20 /* PBXTargetDependency */ = {
+		9698F1F628259133002D50C2 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 9653DCB9274C3008003C6E20 /* WebSignIn (iOS) */;
-			targetProxy = 9653DCD1274C3009003C6E20 /* PBXContainerItemProxy */;
-		};
-		9653DCDC274C300A003C6E20 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 9653DCB9274C3008003C6E20 /* WebSignIn (iOS) */;
-			targetProxy = 9653DCDB274C300A003C6E20 /* PBXContainerItemProxy */;
+			targetProxy = 9698F1F528259133002D50C2 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -905,98 +741,6 @@
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
-			};
-			name = Release;
-		};
-		92DF17832791785400473E7E /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				BUNDLE_LOADER = "$(TEST_HOST)";
-				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
-				GENERATE_INFOPLIST_FILE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@loader_path/Frameworks",
-				);
-				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = "com.example.okta-sample.SingleSignOnTests${SAMPLE_CODE_DISAMBIGUATOR}";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_EMIT_LOC_STRINGS = NO;
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/SingleSignOn (iOS).app/SingleSignOn (iOS)";
-			};
-			name = Debug;
-		};
-		92DF17842791785400473E7E /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				BUNDLE_LOADER = "$(TEST_HOST)";
-				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
-				GENERATE_INFOPLIST_FILE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@loader_path/Frameworks",
-				);
-				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = "com.example.okta-sample.SingleSignOnTests${SAMPLE_CODE_DISAMBIGUATOR}";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_EMIT_LOC_STRINGS = NO;
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/SingleSignOn (iOS).app/SingleSignOn (iOS)";
-			};
-			name = Release;
-		};
-		92DF17852791785400473E7E /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
-				GENERATE_INFOPLIST_FILE = YES;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@loader_path/Frameworks",
-				);
-				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = "com.example.okta-sample.SingleSignOnUITests${SAMPLE_CODE_DISAMBIGUATOR}";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_EMIT_LOC_STRINGS = NO;
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_TARGET_NAME = SingleSignOn;
-			};
-			name = Debug;
-		};
-		92DF17862791785400473E7E /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
-				GENERATE_INFOPLIST_FILE = YES;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@loader_path/Frameworks",
-				);
-				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = "com.example.okta-sample.SingleSignOnUITests${SAMPLE_CODE_DISAMBIGUATOR}";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_EMIT_LOC_STRINGS = NO;
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_TARGET_NAME = SingleSignOn;
 			};
 			name = Release;
 		};
@@ -1180,99 +924,37 @@
 			};
 			name = Release;
 		};
-		9653DCE8274C300A003C6E20 /* Debug */ = {
+		9698F1F828259133002D50C2 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 96011A102784CB7E0008DD11 /* SampleCode.xcconfig */;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				GENERATE_INFOPLIST_FILE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@loader_path/Frameworks",
-				);
+				IPHONEOS_DEPLOYMENT_TARGET = 15.4;
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = "com.okta.mobile-sdk.WebSignInTests";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.example.okta-sample.WebSignIn--iOS--UITests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = NO;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/WebSignIn (iOS).app/WebSignIn (iOS)";
+				TEST_TARGET_NAME = "WebSignIn (iOS)";
 			};
 			name = Debug;
 		};
-		9653DCE9274C300A003C6E20 /* Release */ = {
+		9698F1F928259133002D50C2 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 96011A102784CB7E0008DD11 /* SampleCode.xcconfig */;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				GENERATE_INFOPLIST_FILE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@loader_path/Frameworks",
-				);
+				IPHONEOS_DEPLOYMENT_TARGET = 15.4;
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = "com.okta.mobile-sdk.WebSignInTests";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.example.okta-sample.WebSignIn--iOS--UITests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = NO;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/WebSignIn (iOS).app/WebSignIn (iOS)";
-			};
-			name = Release;
-		};
-		9653DCEB274C300A003C6E20 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 96011A102784CB7E0008DD11 /* SampleCode.xcconfig */;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
-				GENERATE_INFOPLIST_FILE = YES;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@loader_path/Frameworks",
-				);
-				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = "com.okta.mobile-sdk.WebSignInUITests";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_EMIT_LOC_STRINGS = NO;
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_TARGET_NAME = WebSignIn;
-			};
-			name = Debug;
-		};
-		9653DCEC274C300A003C6E20 /* Release */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 96011A102784CB7E0008DD11 /* SampleCode.xcconfig */;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
-				GENERATE_INFOPLIST_FILE = YES;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@loader_path/Frameworks",
-				);
-				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = "com.okta.mobile-sdk.WebSignInUITests";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_EMIT_LOC_STRINGS = NO;
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_TARGET_NAME = WebSignIn;
+				TEST_TARGET_NAME = "WebSignIn (iOS)";
 			};
 			name = Release;
 		};
@@ -1297,24 +979,6 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		92DF17882791785400473E7E /* Build configuration list for PBXNativeTarget "SingleSignOnTests (iOS)" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				92DF17832791785400473E7E /* Debug */,
-				92DF17842791785400473E7E /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		92DF17892791785400473E7E /* Build configuration list for PBXNativeTarget "SingleSignOnUITests (iOS)" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				92DF17852791785400473E7E /* Debug */,
-				92DF17862791785400473E7E /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
 		9653DCB5274C3008003C6E20 /* Build configuration list for PBXProject "WebSignIn" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
@@ -1333,20 +997,11 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		9653DCE7274C300A003C6E20 /* Build configuration list for PBXNativeTarget "WebSignInTests (iOS)" */ = {
+		9698F1F728259133002D50C2 /* Build configuration list for PBXNativeTarget "WebSignIn (iOS) UITests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				9653DCE8274C300A003C6E20 /* Debug */,
-				9653DCE9274C300A003C6E20 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		9653DCEA274C300A003C6E20 /* Build configuration list for PBXNativeTarget "WebSignInUITests (iOS)" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				9653DCEB274C300A003C6E20 /* Debug */,
-				9653DCEC274C300A003C6E20 /* Release */,
+				9698F1F828259133002D50C2 /* Debug */,
+				9698F1F928259133002D50C2 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

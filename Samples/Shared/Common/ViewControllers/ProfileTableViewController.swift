@@ -78,14 +78,20 @@ class ProfileTableViewController: UITableViewController {
         dateFormatter.dateStyle = .medium
         dateFormatter.timeStyle = .long
 
-        title = user?.name
-        self.tabBarItem.title = title
+        navigationItem.title = user?.name
         
         let updatedAt: String
         if let updatedDate = user?.updatedAt {
             updatedAt = dateFormatter.string(from: updatedDate)
         } else {
             updatedAt = "N/A"
+        }
+        
+        let defaultValue: String
+        if Credential.default?.id == credential?.id {
+            defaultValue = "Yes"
+        } else {
+            defaultValue = "No"
         }
 
         tableContent = [:]
@@ -100,6 +106,7 @@ class ProfileTableViewController: UITableViewController {
                 .init(kind: .rightDetail, id: "username", title: "Username", detail: user.preferredUsername),
                 .init(kind: .rightDetail, id: "userId", title: "User ID", detail: user.subject),
                 .init(kind: .rightDetail, id: "createdAt", title: "Created at", detail: updatedAt),
+                .init(kind: .rightDetail, id: "isDefaultCredential", title: "Is Default", detail: defaultValue),
                 .init(kind: .disclosure, id: "details", title: "Token details"),
             ]
         }

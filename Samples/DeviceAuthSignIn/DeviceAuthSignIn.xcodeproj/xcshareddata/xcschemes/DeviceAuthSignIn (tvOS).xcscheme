@@ -28,6 +28,26 @@
       selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
       shouldUseLaunchSchemeArgsEnv = "YES">
       <Testables>
+         <TestableReference
+            skipped = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "9617AD5E276914C200D74E7E"
+               BuildableName = "DeviceAuthSignInTests (tvOS).xctest"
+               BlueprintName = "DeviceAuthSignInTests (tvOS)"
+               ReferencedContainer = "container:DeviceAuthSignIn.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
+         <TestableReference
+            skipped = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "9617AD68276914C200D74E7E"
+               BuildableName = "DeviceAuthSignInUITests (tvOS).xctest"
+               BlueprintName = "DeviceAuthSignInUITests (tvOS)"
+               ReferencedContainer = "container:DeviceAuthSignIn.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
       </Testables>
    </TestAction>
    <LaunchAction
