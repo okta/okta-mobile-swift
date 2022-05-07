@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="20037" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="IiQ-U1-iKI">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="20020"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Okta Web Sign In-->
+        <scene sceneID="NON-4U-CVw">
+            <objects>
+                <viewController title="Okta Web Sign In" id="oA1-3v-UXn" customClass="OIDCSignInViewController" customModule="OIDCMigration" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="Nag-m8-t7U">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Sign in using OktaOidc" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qYK-wq-WOb">
+                                <rect key="frame" x="55.5" y="204" width="303.5" height="37"/>
+                                <fontDescription key="fontDescription" style="UICTFontTextStyleTitle0"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="1W7-Lm-oO8">
+                                <rect key="frame" x="115" y="265" width="184.5" height="62"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" role="primary" translatesAutoresizingMaskIntoConstraints="NO" id="oZI-Lq-sTN">
+                                        <rect key="frame" x="0.0" y="0.0" width="184.5" height="31"/>
+                                        <accessibility key="accessibilityConfiguration" identifier="sign_in_button"/>
+                                        <state key="normal" title="Button"/>
+                                        <buttonConfiguration key="configuration" style="filled" title="Sign In with OktaOidc"/>
+                                        <connections>
+                                            <action selector="signIn:" destination="oA1-3v-UXn" eventType="touchUpInside" id="lvr-Is-y1G"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" role="primary" translatesAutoresizingMaskIntoConstraints="NO" id="Sil-dL-UqV">
+                                        <rect key="frame" x="0.0" y="31" width="184.5" height="31"/>
+                                        <accessibility key="accessibilityConfiguration" identifier="sign_out_button"/>
+                                        <state key="normal" title="Button"/>
+                                        <buttonConfiguration key="configuration" style="filled" title="Sign Out from OktaOidc"/>
+                                        <connections>
+                                            <action selector="signOut:" destination="oA1-3v-UXn" eventType="touchUpInside" id="erE-C6-mzs"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                            </stackView>
+                            <stackView opaque="NO" contentMode="scaleToFill" spacing="6" translatesAutoresizingMaskIntoConstraints="NO" id="hng-Fi-9UO">
+                                <rect key="frame" x="165.5" y="840.5" width="83" height="13.5"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Client ID:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="p8a-Qh-1W8">
+                                        <rect key="frame" x="0.0" y="0.0" width="48.5" height="13.5"/>
+                                        <fontDescription key="fontDescription" style="UICTFontTextStyleCaption1"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QTg-J0-M7a">
+                                        <rect key="frame" x="54.5" y="0.0" width="28.5" height="13.5"/>
+                                        <fontDescription key="fontDescription" style="UICTFontTextStyleCaption1"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                            </stackView>
+                            <stackView opaque="NO" contentMode="scaleToFill" spacing="12" translatesAutoresizingMaskIntoConstraints="NO" id="gMW-B0-lKN">
+                                <rect key="frame" x="104" y="785" width="206" height="31"/>
+                                <subviews>
+                                    <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="I1r-V4-AlX">
+                                        <rect key="frame" x="0.0" y="0.0" width="51" height="31"/>
+                                        <connections>
+                                            <action selector="ephemeralSwitchChanged:" destination="oA1-3v-UXn" eventType="valueChanged" id="2OH-wc-QFZ"/>
+                                        </connections>
+                                    </switch>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Ephemeral Session" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Cxo-tt-mvD">
+                                        <rect key="frame" x="61" y="0.0" width="145" height="31"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                            </stackView>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="ukr-jc-gll">
+                                <rect key="frame" x="117.5" y="417" width="179" height="62"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" role="primary" translatesAutoresizingMaskIntoConstraints="NO" id="Agb-W0-cUY">
+                                        <rect key="frame" x="0.0" y="0.0" width="179" height="31"/>
+                                        <accessibility key="accessibilityConfiguration" identifier="migrate_button"/>
+                                        <state key="normal" title="Button"/>
+                                        <buttonConfiguration key="configuration" style="filled" title="Migrate Legacy Tokens"/>
+                                        <connections>
+                                            <action selector="migrateAction:" destination="oA1-3v-UXn" eventType="touchUpInside" id="7hR-nN-CwW"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" role="primary" translatesAutoresizingMaskIntoConstraints="NO" id="xy2-dB-NXI">
+                                        <rect key="frame" x="0.0" y="31" width="179" height="31"/>
+                                        <accessibility key="accessibilityConfiguration" identifier="open_user_button"/>
+                                        <state key="normal" title="Button"/>
+                                        <buttonConfiguration key="configuration" style="filled" title="Open User Profile"/>
+                                        <connections>
+                                            <action selector="openUserProfile:" destination="oA1-3v-UXn" eventType="touchUpInside" id="fGd-mw-KHE"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                            </stackView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="scU-IK-zcF"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="qYK-wq-WOb" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="scU-IK-zcF" secondAttribute="leading" constant="24" id="4pH-hB-1Uh"/>
+                            <constraint firstItem="ukr-jc-gll" firstAttribute="centerX" secondItem="scU-IK-zcF" secondAttribute="centerX" id="IVE-kN-ti5"/>
+                            <constraint firstItem="ukr-jc-gll" firstAttribute="top" relation="greaterThanOrEqual" secondItem="1W7-Lm-oO8" secondAttribute="bottom" constant="60" id="JvL-Hz-EL9"/>
+                            <constraint firstItem="1W7-Lm-oO8" firstAttribute="top" secondItem="qYK-wq-WOb" secondAttribute="bottom" constant="24" id="Ta8-L7-lka"/>
+                            <constraint firstItem="ukr-jc-gll" firstAttribute="centerY" secondItem="Nag-m8-t7U" secondAttribute="centerY" priority="750" id="WcX-ws-vF8"/>
+                            <constraint firstItem="1W7-Lm-oO8" firstAttribute="centerX" secondItem="scU-IK-zcF" secondAttribute="centerX" id="Y2v-R7-Ddu"/>
+                            <constraint firstItem="qYK-wq-WOb" firstAttribute="top" secondItem="scU-IK-zcF" secondAttribute="top" constant="64" id="YdN-DH-IkO">
+                                <variation key="heightClass=compact-widthClass=regular" constant="0.0"/>
+                            </constraint>
+                            <constraint firstItem="scU-IK-zcF" firstAttribute="bottom" secondItem="hng-Fi-9UO" secondAttribute="bottom" constant="8" id="Zdh-VZ-cU8"/>
+                            <constraint firstItem="scU-IK-zcF" firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="qYK-wq-WOb" secondAttribute="trailing" constant="24" id="ed4-06-RkB"/>
+                            <constraint firstItem="hng-Fi-9UO" firstAttribute="top" secondItem="gMW-B0-lKN" secondAttribute="bottom" constant="24.5" id="fSB-9c-gpm"/>
+                            <constraint firstItem="qYK-wq-WOb" firstAttribute="centerX" secondItem="Nag-m8-t7U" secondAttribute="centerX" id="q0b-YF-Fgb"/>
+                            <constraint firstItem="hng-Fi-9UO" firstAttribute="centerX" secondItem="scU-IK-zcF" secondAttribute="centerX" id="si6-UB-1Qd"/>
+                            <constraint firstItem="gMW-B0-lKN" firstAttribute="centerX" secondItem="scU-IK-zcF" secondAttribute="centerX" id="uo0-8F-5DO"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" title="Legacy OIDC Migration" id="tjy-j0-hZu"/>
+                    <connections>
+                        <outlet property="clientIdLabel" destination="QTg-J0-M7a" id="uRO-xC-t2E"/>
+                        <outlet property="migrateButton" destination="Agb-W0-cUY" id="6EA-4b-Q7s"/>
+                        <outlet property="openUserProfileButton" destination="xy2-dB-NXI" id="iof-wt-1lz"/>
+                        <outlet property="signInButton" destination="oZI-Lq-sTN" id="Wav-zu-XG1"/>
+                        <outlet property="signOutButton" destination="Sil-dL-UqV" id="bkj-ZO-kwV"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Cuh-LB-yv5" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-181" y="222"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="QfH-9S-0fP">
+            <objects>
+                <navigationController storyboardIdentifier="SignIn" modalTransitionStyle="crossDissolve" modalPresentationStyle="fullScreen" id="IiQ-U1-iKI" sceneMemberID="viewController">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" largeTitles="YES" id="2cG-tS-WJT">
+                        <rect key="frame" x="0.0" y="44" width="414" height="96"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="oA1-3v-UXn" kind="relationship" relationship="rootViewController" id="kEg-TX-iM9"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Rce-dZ-qdX" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-1175" y="222"/>
+        </scene>
+    </scenes>
+    <resources>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+    </resources>
+</document>
