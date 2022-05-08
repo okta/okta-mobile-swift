@@ -26,25 +26,36 @@
       buildConfiguration = "Debug"
       selectedDebuggerIdentifier = "Xcode.DebuggerFoundation.Debugger.LLDB"
       selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
-      shouldUseLaunchSchemeArgsEnv = "YES">
+      shouldUseLaunchSchemeArgsEnv = "NO">
+      <MacroExpansion>
+         <BuildableReference
+            BuildableIdentifier = "primary"
+            BlueprintIdentifier = "9653DCB9274C3008003C6E20"
+            BuildableName = "WebSignIn (iOS).app"
+            BlueprintName = "WebSignIn (iOS)"
+            ReferencedContainer = "container:WebSignIn.xcodeproj">
+         </BuildableReference>
+      </MacroExpansion>
+      <EnvironmentVariables>
+         <EnvironmentVariable
+            key = "E2E_USERNAME"
+            value = "$(E2E_USERNAME)"
+            isEnabled = "YES">
+         </EnvironmentVariable>
+         <EnvironmentVariable
+            key = "E2E_PASSWORD"
+            value = "$(E2E_PASSWORD)"
+            isEnabled = "YES">
+         </EnvironmentVariable>
+      </EnvironmentVariables>
       <Testables>
          <TestableReference
             skipped = "NO">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "9653DCCF274C3009003C6E20"
-               BuildableName = "WebSignInTests (iOS).xctest"
-               BlueprintName = "WebSignInTests (iOS)"
-               ReferencedContainer = "container:WebSignIn.xcodeproj">
-            </BuildableReference>
-         </TestableReference>
-         <TestableReference
-            skipped = "NO">
-            <BuildableReference
-               BuildableIdentifier = "primary"
-               BlueprintIdentifier = "9653DCD9274C3009003C6E20"
-               BuildableName = "WebSignInUITests (iOS).xctest"
-               BlueprintName = "WebSignInUITests (iOS)"
+               BlueprintIdentifier = "9698F1EE28259133002D50C2"
+               BuildableName = "WebSignIn (iOS) UITests.xctest"
+               BlueprintName = "WebSignIn (iOS) UITests"
                ReferencedContainer = "container:WebSignIn.xcodeproj">
             </BuildableReference>
          </TestableReference>

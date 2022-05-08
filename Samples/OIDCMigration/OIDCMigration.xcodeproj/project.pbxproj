@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		9698F1EA28258ADC002D50C2 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9698F1E828258ADC002D50C2 /* Main.storyboard */; };
 		96AE3CCA281B2E000048E66B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96AE3CC9281B2E000048E66B /* AppDelegate.swift */; };
 		96AE3CCC281B2E000048E66B /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96AE3CCB281B2E000048E66B /* SceneDelegate.swift */; };
 		96AE3CCE281B2E000048E66B /* OIDCSignInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96AE3CCD281B2E000048E66B /* OIDCSignInViewController.swift */; };
@@ -15,7 +16,6 @@
 		96AE3CE1281B2E020048E66B /* OIDCMigrationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96AE3CE0281B2E020048E66B /* OIDCMigrationTests.swift */; };
 		96AE3CEB281B2E020048E66B /* OIDCMigrationUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96AE3CEA281B2E020048E66B /* OIDCMigrationUITests.swift */; };
 		96AE3CED281B2E020048E66B /* OIDCMigrationUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96AE3CEC281B2E020048E66B /* OIDCMigrationUITestsLaunchTests.swift */; };
-		96AE3D00281B4E930048E66B /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 96AE3CFE281B4E930048E66B /* Main.storyboard */; };
 		96AE3D02281B4EF40048E66B /* Okta.plist in Resources */ = {isa = PBXBuildFile; fileRef = 96AE3D01281B4EF40048E66B /* Okta.plist */; };
 		96C462AD28204AD000D732DC /* WebAuthenticationUI in Frameworks */ = {isa = PBXBuildFile; productRef = 96C462AC28204AD000D732DC /* WebAuthenticationUI */; };
 		96C462AF28204AD800D732DC /* AuthFoundation in Frameworks */ = {isa = PBXBuildFile; productRef = 96C462AE28204AD800D732DC /* AuthFoundation */; };
@@ -45,6 +45,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		9698F1E928258ADC002D50C2 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		96AE3CC6281B2E000048E66B /* OIDCMigration.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = OIDCMigration.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		96AE3CC9281B2E000048E66B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		96AE3CCB281B2E000048E66B /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -57,7 +58,6 @@
 		96AE3CE6281B2E020048E66B /* OIDCMigrationUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = OIDCMigrationUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		96AE3CEA281B2E020048E66B /* OIDCMigrationUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OIDCMigrationUITests.swift; sourceTree = "<group>"; };
 		96AE3CEC281B2E020048E66B /* OIDCMigrationUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OIDCMigrationUITestsLaunchTests.swift; sourceTree = "<group>"; };
-		96AE3CFF281B4E930048E66B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = "../../WebSignIn/WebSignIn (iOS)/WebSignIn/Base.lproj/Main.storyboard"; sourceTree = "<group>"; };
 		96AE3D01281B4EF40048E66B /* Okta.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Okta.plist; path = ../../WebSignIn/Okta.plist; sourceTree = "<group>"; };
 		96AE3D05281B51350048E66B /* Profile.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Profile.storyboard; sourceTree = "<group>"; };
 		96AE3D06281B51350048E66B /* ProfileTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileTableViewController.swift; sourceTree = "<group>"; };
@@ -123,7 +123,7 @@
 				96AE3CCB281B2E000048E66B /* SceneDelegate.swift */,
 				96AE3CCD281B2E000048E66B /* OIDCSignInViewController.swift */,
 				96AE3CD2281B2E020048E66B /* Assets.xcassets */,
-				96AE3CFE281B4E930048E66B /* Main.storyboard */,
+				9698F1E828258ADC002D50C2 /* Main.storyboard */,
 				96AE3CD4281B2E020048E66B /* LaunchScreen.storyboard */,
 				96AE3CD7281B2E020048E66B /* Info.plist */,
 				96AE3D01281B4EF40048E66B /* Okta.plist */,
@@ -154,7 +154,8 @@
 				96AE3D04281B51350048E66B /* ViewControllers */,
 				96AE3D08281B51350048E66B /* Keychain */,
 			);
-			path = Common;
+			name = Common;
+			path = ../Shared/Common;
 			sourceTree = "<group>";
 		};
 		96AE3D04281B51350048E66B /* ViewControllers */ = {
@@ -295,8 +296,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				96AE3D00281B4E930048E66B /* Main.storyboard in Resources */,
 				96AE3CD6281B2E020048E66B /* LaunchScreen.storyboard in Resources */,
+				9698F1EA28258ADC002D50C2 /* Main.storyboard in Resources */,
 				96C462B62821B74B00D732DC /* Profile.storyboard in Resources */,
 				96AE3CD3281B2E020048E66B /* Assets.xcassets in Resources */,
 				96AE3D02281B4EF40048E66B /* Okta.plist in Resources */,
@@ -366,20 +367,20 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
+		9698F1E828258ADC002D50C2 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				9698F1E928258ADC002D50C2 /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
 		96AE3CD4281B2E020048E66B /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
 				96AE3CD5281B2E020048E66B /* Base */,
 			);
 			name = LaunchScreen.storyboard;
-			sourceTree = "<group>";
-		};
-		96AE3CFE281B4E930048E66B /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				96AE3CFF281B4E930048E66B /* Base */,
-			);
-			name = Main.storyboard;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
