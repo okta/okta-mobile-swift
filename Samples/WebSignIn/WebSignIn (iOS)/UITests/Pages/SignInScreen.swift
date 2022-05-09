@@ -13,13 +13,13 @@
 import Foundation
 import XCTest
 
-class SignInScreen: Screen {
+class SignInScreen: Screen, WebLogin {
     let app = XCUIApplication()
     let testCase: XCTestCase
     
-    private lazy var ephemeralSwitch = app.switches["ephemeral_switch"]
-    private lazy var signInButton = app.buttons["sign_in_button"]
-    private lazy var clientIdLabel = app.buttons["client_id_label"]
+    lazy var ephemeralSwitch = app.switches["ephemeral_switch"]
+    lazy var signInButton = app.buttons["sign_in_button"]
+    lazy var clientIdLabel = app.buttons["client_id_label"]
 
     init(_ testCase: XCTestCase) {
         self.testCase = testCase
@@ -32,67 +32,5 @@ class SignInScreen: Screen {
     
     func validate(clientId: String) {
         XCTAssertEqual(clientIdLabel.label, clientId)
-    }
-    
-    func setEphemeral(_ enabled: Bool) {
-        if ephemeralSwitch.isOn != enabled {
-            ephemeralSwitch.tap()
-        }
-    }
-    
-    func login(username: String? = nil, password: String? = nil) {
-        let alertObserver = testCase.addUIInterruptionMonitor(withDescription: "System Dialog") { (alert) -> Bool in
-            alert.buttons["Continue"].tap()
-            return true
-        }
-        
-        defer {
-            testCase.removeUIInterruptionMonitor(alertObserver)
-        }
-
-        signInButton.tap()
-
-        let isEphemeral = ephemeralSwitch.isOn ?? false
-        if !isEphemeral {
-            app.tap()
-        }
-
-        guard app.webViews.firstMatch.waitForExistence(timeout: 5) else { return }
-        
-        if let username = username,
-           app.webViews.textFields.firstMatch.waitForExistence(timeout: 5)
-        {
-            let field = app.webViews.textFields.element(boundBy: 0)
-            if !field.hasFocus {
-                field.tap()
-            }
-            
-            field.typeText(username)
-        }
-        
-        if let password = password,
-           app.webViews.secureTextFields.firstMatch.waitForExistence(timeout: 5)
-        {
-            let field = app.webViews.secureTextFields.element(boundBy: 0)
-            if !field.hasFocus {
-                field.tap()
-            }
-            
-            field.typeText(password)
-        }
-        
-        if username != nil || password != nil {
-            app.webViews.buttons.firstMatch.tap()
-        }
-    }
-    
-    func cancel() {
-        app.buttons["Cancel"].tap()
-        
-        XCTAssertTrue(app.alerts
-            .staticTexts["Authentication cancelled by the user."]
-            .waitForExistence(timeout: .short))
-        
-        app.alerts.buttons["OK"].tap()
     }
 }
