@@ -51,6 +51,7 @@
 		96E98A93282593E800CE251E /* SignInScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96E98A92282593E800CE251E /* SignInScreen.swift */; };
 		96E98A952825952600CE251E /* XCTest+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96E98A942825952600CE251E /* XCTest+Extensions.swift */; };
 		96E98A9728259D4100CE251E /* ProfileScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96E98A9628259D4100CE251E /* ProfileScreen.swift */; };
+		96E98AA52827031500CE251E /* Screen+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96E98AA42827031500CE251E /* Screen+Extensions.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -110,6 +111,8 @@
 		96E98A92282593E800CE251E /* SignInScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInScreen.swift; sourceTree = "<group>"; };
 		96E98A942825952600CE251E /* XCTest+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "XCTest+Extensions.swift"; sourceTree = "<group>"; };
 		96E98A9628259D4100CE251E /* ProfileScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileScreen.swift; sourceTree = "<group>"; };
+		96E98AA42827031500CE251E /* Screen+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Screen+Extensions.swift"; sourceTree = "<group>"; };
+		96E98AA628288DB800CE251E /* TestConfiguration.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; name = TestConfiguration.xcconfig; path = ../Shared/TestConfiguration.xcconfig; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -285,6 +288,7 @@
 				9653DCBB274C3008003C6E20 /* Products */,
 				9653DCF0274C355E003C6E20 /* Frameworks */,
 				96011A102784CB7E0008DD11 /* SampleCode.xcconfig */,
+				96E98AA628288DB800CE251E /* TestConfiguration.xcconfig */,
 			);
 			sourceTree = "<group>";
 		};
@@ -343,6 +347,8 @@
 		96E98A8E282593A900CE251E /* Testing */ = {
 			isa = PBXGroup;
 			children = (
+				96E98AA9282894A900CE251E /* Pages */,
+				96E98AA42827031500CE251E /* Screen+Extensions.swift */,
 				96E98A8F282593BA00CE251E /* Screen.swift */,
 				96E98A942825952600CE251E /* XCTest+Extensions.swift */,
 			);
@@ -353,6 +359,13 @@
 			isa = PBXGroup;
 			children = (
 				96E98A92282593E800CE251E /* SignInScreen.swift */,
+			);
+			path = Pages;
+			sourceTree = "<group>";
+		};
+		96E98AA9282894A900CE251E /* Pages */ = {
+			isa = PBXGroup;
+			children = (
 				96E98A9628259D4100CE251E /* ProfileScreen.swift */,
 			);
 			path = Pages;
@@ -579,6 +592,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				9698F1F228259133002D50C2 /* BrowserSignIn.swift in Sources */,
+				96E98AA52827031500CE251E /* Screen+Extensions.swift in Sources */,
 				96E98A9728259D4100CE251E /* ProfileScreen.swift in Sources */,
 				96E98A93282593E800CE251E /* SignInScreen.swift in Sources */,
 				96E98A90282593BA00CE251E /* Screen.swift in Sources */,
@@ -926,6 +940,7 @@
 		};
 		9698F1F828259133002D50C2 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 96E98AA628288DB800CE251E /* TestConfiguration.xcconfig */;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
@@ -943,6 +958,7 @@
 		};
 		9698F1F928259133002D50C2 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 96E98AA628288DB800CE251E /* TestConfiguration.xcconfig */;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;

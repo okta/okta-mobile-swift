@@ -16,6 +16,10 @@ import AuthFoundation
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
+        if ProcessInfo.processInfo.arguments.contains("--reset-keychain") {
+            try? Keychain.Search().delete()
+        }
+        
         // Import the default `Okta.plist` configuration for migration
         try? SDKVersion.Migration.LegacyOIDC.register()
 

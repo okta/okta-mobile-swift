@@ -54,7 +54,7 @@ class ProfileScreen: Screen {
         let fieldQuery = app.cells
             .containing(.staticText, identifier: field.rawValue)
 
-        fieldQuery.firstMatch.waitForExistence(timeout: .standard)
+        _ = fieldQuery.firstMatch.waitForExistence(timeout: .standard)
         return fieldQuery.staticTexts
             .allElementsBoundByIndex[1]
     }

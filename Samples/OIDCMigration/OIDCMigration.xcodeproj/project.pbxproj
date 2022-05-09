@@ -13,9 +13,7 @@
 		96AE3CCE281B2E000048E66B /* OIDCSignInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96AE3CCD281B2E000048E66B /* OIDCSignInViewController.swift */; };
 		96AE3CD3281B2E020048E66B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 96AE3CD2281B2E020048E66B /* Assets.xcassets */; };
 		96AE3CD6281B2E020048E66B /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 96AE3CD4281B2E020048E66B /* LaunchScreen.storyboard */; };
-		96AE3CE1281B2E020048E66B /* OIDCMigrationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96AE3CE0281B2E020048E66B /* OIDCMigrationTests.swift */; };
-		96AE3CEB281B2E020048E66B /* OIDCMigrationUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96AE3CEA281B2E020048E66B /* OIDCMigrationUITests.swift */; };
-		96AE3CED281B2E020048E66B /* OIDCMigrationUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96AE3CEC281B2E020048E66B /* OIDCMigrationUITestsLaunchTests.swift */; };
+		96AE3CEB281B2E020048E66B /* MigrationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96AE3CEA281B2E020048E66B /* MigrationTests.swift */; };
 		96AE3D02281B4EF40048E66B /* Okta.plist in Resources */ = {isa = PBXBuildFile; fileRef = 96AE3D01281B4EF40048E66B /* Okta.plist */; };
 		96C462AD28204AD000D732DC /* WebAuthenticationUI in Frameworks */ = {isa = PBXBuildFile; productRef = 96C462AC28204AD000D732DC /* WebAuthenticationUI */; };
 		96C462AF28204AD800D732DC /* AuthFoundation in Frameworks */ = {isa = PBXBuildFile; productRef = 96C462AE28204AD800D732DC /* AuthFoundation */; };
@@ -25,16 +23,14 @@
 		96C462B52821B74B00D732DC /* ProfileTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96AE3D06281B51350048E66B /* ProfileTableViewController.swift */; };
 		96C462B62821B74B00D732DC /* Profile.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 96AE3D05281B51350048E66B /* Profile.storyboard */; };
 		96C462B72821B75100D732DC /* Keychain+Token.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96AE3D09281B51350048E66B /* Keychain+Token.swift */; };
+		96E98A9E2827011600CE251E /* XCTest+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96E98A9A2827011000CE251E /* XCTest+Extensions.swift */; };
+		96E98A9F2827011600CE251E /* Screen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96E98A9B2827011000CE251E /* Screen.swift */; };
+		96E98AA12827012A00CE251E /* LaunchScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96E98AA02827012A00CE251E /* LaunchScreen.swift */; };
+		96E98AA3282701D000CE251E /* Screen+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96E98AA2282701D000CE251E /* Screen+Extensions.swift */; };
+		96E98AAC2828957600CE251E /* ProfileScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96E98AAB2828957600CE251E /* ProfileScreen.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		96AE3CDD281B2E020048E66B /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 96AE3CBE281B2E000048E66B /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 96AE3CC5281B2E000048E66B;
-			remoteInfo = OIDCMigration;
-		};
 		96AE3CE7281B2E020048E66B /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 96AE3CBE281B2E000048E66B /* Project object */;
@@ -53,16 +49,20 @@
 		96AE3CD2281B2E020048E66B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		96AE3CD5281B2E020048E66B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		96AE3CD7281B2E020048E66B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		96AE3CDC281B2E020048E66B /* OIDCMigrationTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = OIDCMigrationTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		96AE3CE0281B2E020048E66B /* OIDCMigrationTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OIDCMigrationTests.swift; sourceTree = "<group>"; };
 		96AE3CE6281B2E020048E66B /* OIDCMigrationUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = OIDCMigrationUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		96AE3CEA281B2E020048E66B /* OIDCMigrationUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OIDCMigrationUITests.swift; sourceTree = "<group>"; };
-		96AE3CEC281B2E020048E66B /* OIDCMigrationUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OIDCMigrationUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		96AE3CEA281B2E020048E66B /* MigrationTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MigrationTests.swift; sourceTree = "<group>"; };
 		96AE3D01281B4EF40048E66B /* Okta.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Okta.plist; path = ../../WebSignIn/Okta.plist; sourceTree = "<group>"; };
 		96AE3D05281B51350048E66B /* Profile.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Profile.storyboard; sourceTree = "<group>"; };
 		96AE3D06281B51350048E66B /* ProfileTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileTableViewController.swift; sourceTree = "<group>"; };
 		96AE3D07281B51350048E66B /* TokenDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TokenDetailViewController.swift; sourceTree = "<group>"; };
 		96AE3D09281B51350048E66B /* Keychain+Token.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Keychain+Token.swift"; sourceTree = "<group>"; };
+		96E98A9A2827011000CE251E /* XCTest+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "XCTest+Extensions.swift"; sourceTree = "<group>"; };
+		96E98A9B2827011000CE251E /* Screen.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Screen.swift; sourceTree = "<group>"; };
+		96E98AA02827012A00CE251E /* LaunchScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchScreen.swift; sourceTree = "<group>"; };
+		96E98AA2282701D000CE251E /* Screen+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Screen+Extensions.swift"; sourceTree = "<group>"; };
+		96E98AA728288DF800CE251E /* SampleCode.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; name = SampleCode.xcconfig; path = ../Shared/SampleCode.xcconfig; sourceTree = "<group>"; };
+		96E98AA828288DF800CE251E /* TestConfiguration.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; name = TestConfiguration.xcconfig; path = ../Shared/TestConfiguration.xcconfig; sourceTree = "<group>"; };
+		96E98AAB2828957600CE251E /* ProfileScreen.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileScreen.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -74,13 +74,6 @@
 				96C462AF28204AD800D732DC /* AuthFoundation in Frameworks */,
 				96C462B32820A80600D732DC /* OktaOidc in Frameworks */,
 				96C462AD28204AD000D732DC /* WebAuthenticationUI in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		96AE3CD9281B2E020048E66B /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -99,10 +92,11 @@
 			children = (
 				96AE3D03281B51350048E66B /* Common */,
 				96AE3CC8281B2E000048E66B /* OIDCMigration */,
-				96AE3CDF281B2E020048E66B /* OIDCMigrationTests */,
 				96AE3CE9281B2E020048E66B /* OIDCMigrationUITests */,
 				96AE3CC7281B2E000048E66B /* Products */,
 				96C462AB28204AD000D732DC /* Frameworks */,
+				96E98AA728288DF800CE251E /* SampleCode.xcconfig */,
+				96E98AA828288DF800CE251E /* TestConfiguration.xcconfig */,
 			);
 			sourceTree = "<group>";
 		};
@@ -110,7 +104,6 @@
 			isa = PBXGroup;
 			children = (
 				96AE3CC6281B2E000048E66B /* OIDCMigration.app */,
-				96AE3CDC281B2E020048E66B /* OIDCMigrationTests.xctest */,
 				96AE3CE6281B2E020048E66B /* OIDCMigrationUITests.xctest */,
 			);
 			name = Products;
@@ -131,19 +124,11 @@
 			path = OIDCMigration;
 			sourceTree = "<group>";
 		};
-		96AE3CDF281B2E020048E66B /* OIDCMigrationTests */ = {
-			isa = PBXGroup;
-			children = (
-				96AE3CE0281B2E020048E66B /* OIDCMigrationTests.swift */,
-			);
-			path = OIDCMigrationTests;
-			sourceTree = "<group>";
-		};
 		96AE3CE9281B2E020048E66B /* OIDCMigrationUITests */ = {
 			isa = PBXGroup;
 			children = (
-				96AE3CEA281B2E020048E66B /* OIDCMigrationUITests.swift */,
-				96AE3CEC281B2E020048E66B /* OIDCMigrationUITestsLaunchTests.swift */,
+				96E98A98282700D200CE251E /* Pages */,
+				96AE3CEA281B2E020048E66B /* MigrationTests.swift */,
 			);
 			path = OIDCMigrationUITests;
 			sourceTree = "<group>";
@@ -151,6 +136,7 @@
 		96AE3D03281B51350048E66B /* Common */ = {
 			isa = PBXGroup;
 			children = (
+				96E98A992827011000CE251E /* Testing */,
 				96AE3D04281B51350048E66B /* ViewControllers */,
 				96AE3D08281B51350048E66B /* Keychain */,
 			);
@@ -183,6 +169,33 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		96E98A98282700D200CE251E /* Pages */ = {
+			isa = PBXGroup;
+			children = (
+				96E98AA02827012A00CE251E /* LaunchScreen.swift */,
+			);
+			path = Pages;
+			sourceTree = "<group>";
+		};
+		96E98A992827011000CE251E /* Testing */ = {
+			isa = PBXGroup;
+			children = (
+				96E98AAA2828957600CE251E /* Pages */,
+				96E98A9A2827011000CE251E /* XCTest+Extensions.swift */,
+				96E98A9B2827011000CE251E /* Screen.swift */,
+				96E98AA2282701D000CE251E /* Screen+Extensions.swift */,
+			);
+			path = Testing;
+			sourceTree = "<group>";
+		};
+		96E98AAA2828957600CE251E /* Pages */ = {
+			isa = PBXGroup;
+			children = (
+				96E98AAB2828957600CE251E /* ProfileScreen.swift */,
+			);
+			path = Pages;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -208,24 +221,6 @@
 			productName = OIDCMigration;
 			productReference = 96AE3CC6281B2E000048E66B /* OIDCMigration.app */;
 			productType = "com.apple.product-type.application";
-		};
-		96AE3CDB281B2E020048E66B /* OIDCMigrationTests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 96AE3CF3281B2E020048E66B /* Build configuration list for PBXNativeTarget "OIDCMigrationTests" */;
-			buildPhases = (
-				96AE3CD8281B2E020048E66B /* Sources */,
-				96AE3CD9281B2E020048E66B /* Frameworks */,
-				96AE3CDA281B2E020048E66B /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				96AE3CDE281B2E020048E66B /* PBXTargetDependency */,
-			);
-			name = OIDCMigrationTests;
-			productName = OIDCMigrationTests;
-			productReference = 96AE3CDC281B2E020048E66B /* OIDCMigrationTests.xctest */;
-			productType = "com.apple.product-type.bundle.unit-test";
 		};
 		96AE3CE5281B2E020048E66B /* OIDCMigrationUITests */ = {
 			isa = PBXNativeTarget;
@@ -258,10 +253,6 @@
 					96AE3CC5281B2E000048E66B = {
 						CreatedOnToolsVersion = 13.3;
 					};
-					96AE3CDB281B2E020048E66B = {
-						CreatedOnToolsVersion = 13.3;
-						TestTargetID = 96AE3CC5281B2E000048E66B;
-					};
 					96AE3CE5281B2E020048E66B = {
 						CreatedOnToolsVersion = 13.3;
 						TestTargetID = 96AE3CC5281B2E000048E66B;
@@ -285,7 +276,6 @@
 			projectRoot = "";
 			targets = (
 				96AE3CC5281B2E000048E66B /* OIDCMigration */,
-				96AE3CDB281B2E020048E66B /* OIDCMigrationTests */,
 				96AE3CE5281B2E020048E66B /* OIDCMigrationUITests */,
 			);
 		};
@@ -301,13 +291,6 @@
 				96C462B62821B74B00D732DC /* Profile.storyboard in Resources */,
 				96AE3CD3281B2E020048E66B /* Assets.xcassets in Resources */,
 				96AE3D02281B4EF40048E66B /* Okta.plist in Resources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		96AE3CDA281B2E020048E66B /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -334,31 +317,22 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		96AE3CD8281B2E020048E66B /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				96AE3CE1281B2E020048E66B /* OIDCMigrationTests.swift in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		96AE3CE2281B2E020048E66B /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				96AE3CED281B2E020048E66B /* OIDCMigrationUITestsLaunchTests.swift in Sources */,
-				96AE3CEB281B2E020048E66B /* OIDCMigrationUITests.swift in Sources */,
+				96E98AA12827012A00CE251E /* LaunchScreen.swift in Sources */,
+				96E98AAC2828957600CE251E /* ProfileScreen.swift in Sources */,
+				96E98A9E2827011600CE251E /* XCTest+Extensions.swift in Sources */,
+				96AE3CEB281B2E020048E66B /* MigrationTests.swift in Sources */,
+				96E98AA3282701D000CE251E /* Screen+Extensions.swift in Sources */,
+				96E98A9F2827011600CE251E /* Screen.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		96AE3CDE281B2E020048E66B /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 96AE3CC5281B2E000048E66B /* OIDCMigration */;
-			targetProxy = 96AE3CDD281B2E020048E66B /* PBXContainerItemProxy */;
-		};
 		96AE3CE8281B2E020048E66B /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 96AE3CC5281B2E000048E66B /* OIDCMigration */;
@@ -388,6 +362,7 @@
 /* Begin XCBuildConfiguration section */
 		96AE3CEE281B2E020048E66B /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 96E98AA728288DF800CE251E /* SampleCode.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ANALYZER_NONNULL = YES;
@@ -448,6 +423,7 @@
 		};
 		96AE3CEF281B2E020048E66B /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 96E98AA728288DF800CE251E /* SampleCode.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ANALYZER_NONNULL = YES;
@@ -502,6 +478,7 @@
 		};
 		96AE3CF1281B2E020048E66B /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 96E98AA728288DF800CE251E /* SampleCode.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -530,6 +507,7 @@
 		};
 		96AE3CF2281B2E020048E66B /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 96E98AA728288DF800CE251E /* SampleCode.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -556,46 +534,9 @@
 			};
 			name = Release;
 		};
-		96AE3CF4281B2E020048E66B /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				BUNDLE_LOADER = "$(TEST_HOST)";
-				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
-				GENERATE_INFOPLIST_FILE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 15.4;
-				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = "com.example.okta-sample.OIDCMigrationTests";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_EMIT_LOC_STRINGS = NO;
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/OIDCMigration.app/OIDCMigration";
-			};
-			name = Debug;
-		};
-		96AE3CF5281B2E020048E66B /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				BUNDLE_LOADER = "$(TEST_HOST)";
-				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
-				GENERATE_INFOPLIST_FILE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 15.4;
-				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = "com.example.okta-sample.OIDCMigrationTests";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_EMIT_LOC_STRINGS = NO;
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/OIDCMigration.app/OIDCMigration";
-			};
-			name = Release;
-		};
 		96AE3CF7281B2E020048E66B /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 96E98AA828288DF800CE251E /* TestConfiguration.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
@@ -613,6 +554,7 @@
 		};
 		96AE3CF8281B2E020048E66B /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 96E98AA828288DF800CE251E /* TestConfiguration.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
@@ -645,15 +587,6 @@
 			buildConfigurations = (
 				96AE3CF1281B2E020048E66B /* Debug */,
 				96AE3CF2281B2E020048E66B /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		96AE3CF3281B2E020048E66B /* Build configuration list for PBXNativeTarget "OIDCMigrationTests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				96AE3CF4281B2E020048E66B /* Debug */,
-				96AE3CF5281B2E020048E66B /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
