@@ -12,7 +12,19 @@
 		96D66FC727EB87A200AE89AD /* AuthFoundation in Frameworks */ = {isa = PBXBuildFile; productRef = 96D66FC627EB87A200AE89AD /* AuthFoundation */; };
 		96D66FC927EB87A200AE89AD /* OktaOAuth2 in Frameworks */ = {isa = PBXBuildFile; productRef = 96D66FC827EB87A200AE89AD /* OktaOAuth2 */; };
 		96D66FCC27EB87CE00AE89AD /* ArgumentParser in Frameworks */ = {isa = PBXBuildFile; productRef = 96D66FCB27EB87CE00AE89AD /* ArgumentParser */; };
+		96E98AB4282979A500CE251E /* SignInTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96E98AB3282979A500CE251E /* SignInTests.swift */; };
+		96E98ABC2829EE2C00CE251E /* Command.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96E98ABB2829EE2C00CE251E /* Command.swift */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		96E98AB8282979BC00CE251E /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 96D66FB227EB870500AE89AD /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 96D66FB927EB870500AE89AD;
+			remoteInfo = "UserPasswordSignIn (macOS)";
+		};
+/* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
 		96D66FB827EB870500AE89AD /* CopyFiles */ = {
@@ -31,6 +43,10 @@
 		96D66FBA27EB870500AE89AD /* UserPasswordSignIn */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = UserPasswordSignIn; sourceTree = BUILT_PRODUCTS_DIR; };
 		96D66FBD27EB870500AE89AD /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
 		96D66FC427EB874800AE89AD /* SampleCode.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; name = SampleCode.xcconfig; path = ../Shared/SampleCode.xcconfig; sourceTree = "<group>"; };
+		96E98AB1282979A500CE251E /* UserPasswordSignIn Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "UserPasswordSignIn Tests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		96E98AB3282979A500CE251E /* SignInTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInTests.swift; sourceTree = "<group>"; };
+		96E98ABB2829EE2C00CE251E /* Command.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Command.swift; sourceTree = "<group>"; };
+		96E98ABD2829EEBF00CE251E /* TestConfiguration.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; name = TestConfiguration.xcconfig; path = ../Shared/TestConfiguration.xcconfig; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -44,6 +60,13 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		96E98AAE282979A500CE251E /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
@@ -51,9 +74,11 @@
 			isa = PBXGroup;
 			children = (
 				96D66FBC27EB870500AE89AD /* UserPasswordSignIn (macOS) */,
-				96D66FC427EB874800AE89AD /* SampleCode.xcconfig */,
+				96E98AB2282979A500CE251E /* UserPasswordSignIn Tests */,
 				96D66FBB27EB870500AE89AD /* Products */,
 				96D66FC527EB87A200AE89AD /* Frameworks */,
+				96E98ABD2829EEBF00CE251E /* TestConfiguration.xcconfig */,
+				96D66FC427EB874800AE89AD /* SampleCode.xcconfig */,
 			);
 			sourceTree = "<group>";
 		};
@@ -61,6 +86,7 @@
 			isa = PBXGroup;
 			children = (
 				96D66FBA27EB870500AE89AD /* UserPasswordSignIn */,
+				96E98AB1282979A500CE251E /* UserPasswordSignIn Tests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -79,6 +105,23 @@
 			children = (
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		96E98AB2282979A500CE251E /* UserPasswordSignIn Tests */ = {
+			isa = PBXGroup;
+			children = (
+				96E98ABA2829EE2300CE251E /* Utilities */,
+				96E98AB3282979A500CE251E /* SignInTests.swift */,
+			);
+			path = "UserPasswordSignIn Tests";
+			sourceTree = "<group>";
+		};
+		96E98ABA2829EE2300CE251E /* Utilities */ = {
+			isa = PBXGroup;
+			children = (
+				96E98ABB2829EE2C00CE251E /* Command.swift */,
+			);
+			path = Utilities;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -106,6 +149,24 @@
 			productReference = 96D66FBA27EB870500AE89AD /* UserPasswordSignIn */;
 			productType = "com.apple.product-type.tool";
 		};
+		96E98AB0282979A500CE251E /* UserPasswordSignIn Tests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 96E98AB7282979A500CE251E /* Build configuration list for PBXNativeTarget "UserPasswordSignIn Tests" */;
+			buildPhases = (
+				96E98AAD282979A500CE251E /* Sources */,
+				96E98AAE282979A500CE251E /* Frameworks */,
+				96E98AAF282979A500CE251E /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				96E98AB9282979BC00CE251E /* PBXTargetDependency */,
+			);
+			name = "UserPasswordSignIn Tests";
+			productName = "UserPasswordSignIn Tests";
+			productReference = 96E98AB1282979A500CE251E /* UserPasswordSignIn Tests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -113,11 +174,14 @@
 			isa = PBXProject;
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
-				LastSwiftUpdateCheck = 1320;
+				LastSwiftUpdateCheck = 1330;
 				LastUpgradeCheck = 1320;
 				TargetAttributes = {
 					96D66FB927EB870500AE89AD = {
 						CreatedOnToolsVersion = 13.2.1;
+					};
+					96E98AB0282979A500CE251E = {
+						CreatedOnToolsVersion = 13.3;
 					};
 				};
 			};
@@ -138,9 +202,20 @@
 			projectRoot = "";
 			targets = (
 				96D66FB927EB870500AE89AD /* UserPasswordSignIn (macOS) */,
+				96E98AB0282979A500CE251E /* UserPasswordSignIn Tests */,
 			);
 		};
 /* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		96E98AAF282979A500CE251E /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		96D66FB627EB870500AE89AD /* Sources */ = {
@@ -152,7 +227,24 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		96E98AAD282979A500CE251E /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				96E98AB4282979A500CE251E /* SignInTests.swift in Sources */,
+				96E98ABC2829EE2C00CE251E /* Command.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		96E98AB9282979BC00CE251E /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 96D66FB927EB870500AE89AD /* UserPasswordSignIn (macOS) */;
+			targetProxy = 96E98AB8282979BC00CE251E /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
 		96D66FBF27EB870500AE89AD /* Debug */ = {
@@ -296,6 +388,38 @@
 			};
 			name = Release;
 		};
+		96E98AB5282979A500CE251E /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 96E98ABD2829EEBF00CE251E /* TestConfiguration.xcconfig */;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 12.3;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.example.okta-sample.UserPasswordSignIn-Tests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+			};
+			name = Debug;
+		};
+		96E98AB6282979A500CE251E /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 96E98ABD2829EEBF00CE251E /* TestConfiguration.xcconfig */;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 12.3;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.example.okta-sample.UserPasswordSignIn-Tests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -313,6 +437,15 @@
 			buildConfigurations = (
 				96D66FC227EB870500AE89AD /* Debug */,
 				96D66FC327EB870500AE89AD /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		96E98AB7282979A500CE251E /* Build configuration list for PBXNativeTarget "UserPasswordSignIn Tests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				96E98AB5282979A500CE251E /* Debug */,
+				96E98AB6282979A500CE251E /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

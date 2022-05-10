@@ -11,6 +11,7 @@
 //
 
 import Foundation
+import OktaOAuth2
 
 enum UserPasswordError: Error {
     case missingUsername
