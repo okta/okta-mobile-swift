@@ -17,7 +17,7 @@ class Command {
     let arguments: [String]
 
     private(set) var output: [String: String]?
-    private(set) var expectations: [String:String] = [:]
+    private(set) var expectations: [String: String] = [:]
     
     init(_ executable: URL, arguments: [String] = []) {
         self.executable = executable
