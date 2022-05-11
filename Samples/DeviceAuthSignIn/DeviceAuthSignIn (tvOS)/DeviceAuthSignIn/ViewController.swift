@@ -20,7 +20,7 @@ class ViewController: UIViewController {
     @IBOutlet weak var urlPromptLabel: UILabel!
     @IBOutlet weak var codeLabel: UILabel!
     @IBOutlet weak var codeImageView: UIImageView!
-    @IBOutlet weak var openTestBrowser: UIButton!
+    @IBOutlet weak var openAuthenticationButton: UIButton?
     
     var flow: DeviceAuthorizationFlow?
     
@@ -35,7 +35,9 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        if let issuerUrl = URL(string: "https://\(domain)") {
+        if !domain.isEmpty,
+           let issuerUrl = URL(string: "https://\(domain)")
+        {
             flow = DeviceAuthorizationFlow(issuer: issuerUrl,
                                            clientId: clientId,
                                            scopes: "openid profile email offline_access")
@@ -46,6 +48,7 @@ class ViewController: UIViewController {
         }
 
         codeStackView.isHidden = true
+        openAuthenticationButton?.isHidden = true
         activityIndicator.startAnimating()
         codeImageView.layer.magnificationFilter = .nearest
         
@@ -84,14 +87,18 @@ class ViewController: UIViewController {
         update(code: context.userCode)
         codeStackView.isHidden = false
         activityIndicator.stopAnimating()
-        
+
+        if ProcessInfo.processInfo.arguments.contains("--enable-browser") {
+            openAuthenticationButton?.isHidden = false
+        }
+
         flow?.resume(with: context) { result in
             DispatchQueue.main.async {
                 switch result {
                 case .failure(let error):
                     self.show(error)
                 case .success(let token):
-                    Credential.default = Credential(token: token)
+                    Credential.default = try? Credential.store(token)
                     self.dismiss(animated: true)
                 }
             }

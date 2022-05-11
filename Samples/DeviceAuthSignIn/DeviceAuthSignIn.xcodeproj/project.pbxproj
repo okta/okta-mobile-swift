@@ -21,6 +21,26 @@
 		96E98AD9282AD36E00CE251E /* ProfileTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96E98ACC282AD24E00CE251E /* ProfileTableViewController.swift */; };
 		96E98ADB282AD3E300CE251E /* Profile-tvOS.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 96E98ADA282AD3E300CE251E /* Profile-tvOS.storyboard */; };
 		96E98ADC282AD50000CE251E /* DeviceCodeScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96E98AC1282AD20B00CE251E /* DeviceCodeScreen.swift */; };
+		96E98AEA282B44DE00CE251E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96E98AE9282B44DE00CE251E /* AppDelegate.swift */; };
+		96E98AEC282B44DE00CE251E /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96E98AEB282B44DE00CE251E /* SceneDelegate.swift */; };
+		96E98AEE282B44DE00CE251E /* ViewController+iOSExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96E98AED282B44DE00CE251E /* ViewController+iOSExtension.swift */; };
+		96E98AF3282B44E000CE251E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 96E98AF2282B44E000CE251E /* Assets.xcassets */; };
+		96E98AF6282B44E000CE251E /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 96E98AF4282B44E000CE251E /* LaunchScreen.storyboard */; };
+		96E98AFD282C18B600CE251E /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9617AD51276914BE00D74E7E /* ViewController.swift */; };
+		96E98AFF282C2EC300CE251E /* AuthFoundation in Frameworks */ = {isa = PBXBuildFile; productRef = 96E98AFE282C2EC300CE251E /* AuthFoundation */; };
+		96E98B01282C2EC300CE251E /* OktaOAuth2 in Frameworks */ = {isa = PBXBuildFile; productRef = 96E98B00282C2EC300CE251E /* OktaOAuth2 */; };
+		96E98B02282C2ED800CE251E /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 96E98AFB282B475700CE251E /* Main.storyboard */; };
+		96E98B04282C302C00CE251E /* Profile.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 96E98B03282C302C00CE251E /* Profile.storyboard */; };
+		96E98B05282C32A300CE251E /* ProfileTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96E98ACC282AD24E00CE251E /* ProfileTableViewController.swift */; };
+		96E98B06282C32A300CE251E /* TokenDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96E98ACD282AD24E00CE251E /* TokenDetailViewController.swift */; };
+		96E98B09282C32BE00CE251E /* Keychain+Token.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96E98B08282C32BE00CE251E /* Keychain+Token.swift */; };
+		96E98B0B282C3E1900CE251E /* WebAuthenticationUI in Frameworks */ = {isa = PBXBuildFile; productRef = 96E98B0A282C3E1900CE251E /* WebAuthenticationUI */; };
+		96E98B13282C3F6600CE251E /* DeviceSignInTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96E98B12282C3F6600CE251E /* DeviceSignInTests.swift */; };
+		96E98B1E282C5F8900CE251E /* DeviceCodeScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96E98B1D282C5F4900CE251E /* DeviceCodeScreen.swift */; };
+		96E98B1F282C5FB700CE251E /* Screen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96E98AC7282AD24E00CE251E /* Screen.swift */; };
+		96E98B20282C5FB700CE251E /* XCTest+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96E98AC5282AD24E00CE251E /* XCTest+Extensions.swift */; };
+		96E98B22282C61C300CE251E /* BrowserSignInScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96E98B21282C61C300CE251E /* BrowserSignInScreen.swift */; };
+		96E98B25282C742000CE251E /* ProfileScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96E98B24282C742000CE251E /* ProfileScreen.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -30,6 +50,13 @@
 			proxyType = 1;
 			remoteGlobalIDString = 9617AD4B276914BE00D74E7E;
 			remoteInfo = DeviceAuthSignIn;
+		};
+		96E98B16282C3F6600CE251E /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 9617AD44276914BE00D74E7E /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 96E98AE6282B44DE00CE251E;
+			remoteInfo = "DeviceAuthSignIn (iOS)";
 		};
 /* End PBXContainerItemProxy section */
 
@@ -50,6 +77,21 @@
 		96E98ACC282AD24E00CE251E /* ProfileTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileTableViewController.swift; sourceTree = "<group>"; };
 		96E98ACD282AD24E00CE251E /* TokenDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TokenDetailViewController.swift; sourceTree = "<group>"; };
 		96E98ADA282AD3E300CE251E /* Profile-tvOS.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = "Profile-tvOS.storyboard"; sourceTree = "<group>"; };
+		96E98AE7282B44DE00CE251E /* DeviceAuthSignIn (iOS).app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "DeviceAuthSignIn (iOS).app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		96E98AE9282B44DE00CE251E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		96E98AEB282B44DE00CE251E /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
+		96E98AED282B44DE00CE251E /* ViewController+iOSExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ViewController+iOSExtension.swift"; sourceTree = "<group>"; };
+		96E98AF2282B44E000CE251E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		96E98AF5282B44E000CE251E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		96E98AF7282B44E000CE251E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		96E98AFC282B475700CE251E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		96E98B03282C302C00CE251E /* Profile.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Profile.storyboard; sourceTree = "<group>"; };
+		96E98B08282C32BE00CE251E /* Keychain+Token.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Keychain+Token.swift"; sourceTree = "<group>"; };
+		96E98B10282C3F6600CE251E /* DeviceAuthSignInUITests (iOS).xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "DeviceAuthSignInUITests (iOS).xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		96E98B12282C3F6600CE251E /* DeviceSignInTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceSignInTests.swift; sourceTree = "<group>"; };
+		96E98B1D282C5F4900CE251E /* DeviceCodeScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceCodeScreen.swift; sourceTree = "<group>"; };
+		96E98B21282C61C300CE251E /* BrowserSignInScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BrowserSignInScreen.swift; sourceTree = "<group>"; };
+		96E98B24282C742000CE251E /* ProfileScreen.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileScreen.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -63,6 +105,23 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 		9617AD66276914C200D74E7E /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		96E98AE4282B44DE00CE251E /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				96E98B0B282C3E1900CE251E /* WebAuthenticationUI in Frameworks */,
+				96E98B01282C2EC300CE251E /* OktaOAuth2 in Frameworks */,
+				96E98AFF282C2EC300CE251E /* AuthFoundation in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		96E98B0D282C3F6600CE251E /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -93,6 +152,8 @@
 			isa = PBXGroup;
 			children = (
 				9223E93727BBCECC00F14A1B /* DeviceAuthSignIn (tvOS) */,
+				96E98AE8282B44DE00CE251E /* DeviceAuthSignIn (iOS) */,
+				96E98B11282C3F6600CE251E /* DeviceAuthSignInUITests (iOS) */,
 				9617AD4D276914BE00D74E7E /* Products */,
 				96011A0427696CDC0008DD11 /* Frameworks */,
 				96E98ABF282ACF8900CE251E /* TestConfiguration.xcconfig */,
@@ -105,6 +166,8 @@
 			children = (
 				9617AD4C276914BE00D74E7E /* Device Auth Sign In.app */,
 				9617AD69276914C200D74E7E /* DeviceAuthSignInUITests (tvOS).xctest */,
+				96E98AE7282B44DE00CE251E /* DeviceAuthSignIn (iOS).app */,
+				96E98B10282C3F6600CE251E /* DeviceAuthSignInUITests (iOS).xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -141,6 +204,7 @@
 		96E98AC3282AD24E00CE251E /* Common */ = {
 			isa = PBXGroup;
 			children = (
+				96E98B07282C32BE00CE251E /* Keychain */,
 				96E98AC4282AD24E00CE251E /* Testing */,
 				96E98ACA282AD24E00CE251E /* ViewControllers */,
 			);
@@ -151,6 +215,7 @@
 		96E98AC4282AD24E00CE251E /* Testing */ = {
 			isa = PBXGroup;
 			children = (
+				96E98B23282C742000CE251E /* Pages */,
 				96E98AC5282AD24E00CE251E /* XCTest+Extensions.swift */,
 				96E98AC7282AD24E00CE251E /* Screen.swift */,
 			);
@@ -160,11 +225,60 @@
 		96E98ACA282AD24E00CE251E /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
+				96E98B03282C302C00CE251E /* Profile.storyboard */,
 				96E98ADA282AD3E300CE251E /* Profile-tvOS.storyboard */,
 				96E98ACC282AD24E00CE251E /* ProfileTableViewController.swift */,
 				96E98ACD282AD24E00CE251E /* TokenDetailViewController.swift */,
 			);
 			path = ViewControllers;
+			sourceTree = "<group>";
+		};
+		96E98AE8282B44DE00CE251E /* DeviceAuthSignIn (iOS) */ = {
+			isa = PBXGroup;
+			children = (
+				96E98AE9282B44DE00CE251E /* AppDelegate.swift */,
+				96E98AEB282B44DE00CE251E /* SceneDelegate.swift */,
+				96E98AED282B44DE00CE251E /* ViewController+iOSExtension.swift */,
+				96E98AFB282B475700CE251E /* Main.storyboard */,
+				96E98AF2282B44E000CE251E /* Assets.xcassets */,
+				96E98AF4282B44E000CE251E /* LaunchScreen.storyboard */,
+				96E98AF7282B44E000CE251E /* Info.plist */,
+			);
+			path = "DeviceAuthSignIn (iOS)";
+			sourceTree = "<group>";
+		};
+		96E98B07282C32BE00CE251E /* Keychain */ = {
+			isa = PBXGroup;
+			children = (
+				96E98B08282C32BE00CE251E /* Keychain+Token.swift */,
+			);
+			path = Keychain;
+			sourceTree = "<group>";
+		};
+		96E98B11282C3F6600CE251E /* DeviceAuthSignInUITests (iOS) */ = {
+			isa = PBXGroup;
+			children = (
+				96E98B1C282C5F4500CE251E /* Pages */,
+				96E98B12282C3F6600CE251E /* DeviceSignInTests.swift */,
+			);
+			path = "DeviceAuthSignInUITests (iOS)";
+			sourceTree = "<group>";
+		};
+		96E98B1C282C5F4500CE251E /* Pages */ = {
+			isa = PBXGroup;
+			children = (
+				96E98B1D282C5F4900CE251E /* DeviceCodeScreen.swift */,
+				96E98B21282C61C300CE251E /* BrowserSignInScreen.swift */,
+			);
+			path = Pages;
+			sourceTree = "<group>";
+		};
+		96E98B23282C742000CE251E /* Pages */ = {
+			isa = PBXGroup;
+			children = (
+				96E98B24282C742000CE251E /* ProfileScreen.swift */,
+			);
+			path = Pages;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -209,6 +323,46 @@
 			productReference = 9617AD69276914C200D74E7E /* DeviceAuthSignInUITests (tvOS).xctest */;
 			productType = "com.apple.product-type.bundle.ui-testing";
 		};
+		96E98AE6282B44DE00CE251E /* DeviceAuthSignIn (iOS) */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 96E98AF8282B44E000CE251E /* Build configuration list for PBXNativeTarget "DeviceAuthSignIn (iOS)" */;
+			buildPhases = (
+				96E98AE3282B44DE00CE251E /* Sources */,
+				96E98AE4282B44DE00CE251E /* Frameworks */,
+				96E98AE5282B44DE00CE251E /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "DeviceAuthSignIn (iOS)";
+			packageProductDependencies = (
+				96E98AFE282C2EC300CE251E /* AuthFoundation */,
+				96E98B00282C2EC300CE251E /* OktaOAuth2 */,
+				96E98B0A282C3E1900CE251E /* WebAuthenticationUI */,
+			);
+			productName = "DeviceAuthSignIn (iOS)";
+			productReference = 96E98AE7282B44DE00CE251E /* DeviceAuthSignIn (iOS).app */;
+			productType = "com.apple.product-type.application";
+		};
+		96E98B0F282C3F6600CE251E /* DeviceAuthSignInUITests (iOS) */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 96E98B18282C3F6600CE251E /* Build configuration list for PBXNativeTarget "DeviceAuthSignInUITests (iOS)" */;
+			buildPhases = (
+				96E98B0C282C3F6600CE251E /* Sources */,
+				96E98B0D282C3F6600CE251E /* Frameworks */,
+				96E98B0E282C3F6600CE251E /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				96E98B17282C3F6600CE251E /* PBXTargetDependency */,
+			);
+			name = "DeviceAuthSignInUITests (iOS)";
+			productName = "DeviceAuthSignInUITests (iOS)";
+			productReference = 96E98B10282C3F6600CE251E /* DeviceAuthSignInUITests (iOS).xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -216,7 +370,7 @@
 			isa = PBXProject;
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
-				LastSwiftUpdateCheck = 1310;
+				LastSwiftUpdateCheck = 1330;
 				LastUpgradeCheck = 1310;
 				TargetAttributes = {
 					9617AD4B276914BE00D74E7E = {
@@ -226,6 +380,13 @@
 						CreatedOnToolsVersion = 13.1;
 						LastSwiftMigration = 1330;
 						TestTargetID = 9617AD4B276914BE00D74E7E;
+					};
+					96E98AE6282B44DE00CE251E = {
+						CreatedOnToolsVersion = 13.3;
+					};
+					96E98B0F282C3F6600CE251E = {
+						CreatedOnToolsVersion = 13.3;
+						TestTargetID = 96E98AE6282B44DE00CE251E;
 					};
 				};
 			};
@@ -244,6 +405,8 @@
 			targets = (
 				9617AD4B276914BE00D74E7E /* DeviceAuthSignIn (tvOS) */,
 				9617AD68276914C200D74E7E /* DeviceAuthSignInUITests (tvOS) */,
+				96E98AE6282B44DE00CE251E /* DeviceAuthSignIn (iOS) */,
+				96E98B0F282C3F6600CE251E /* DeviceAuthSignInUITests (iOS) */,
 			);
 		};
 /* End PBXProject section */
@@ -261,6 +424,24 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 		9617AD67276914C200D74E7E /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		96E98AE5282B44DE00CE251E /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				96E98B02282C2ED800CE251E /* Main.storyboard in Resources */,
+				96E98AF6282B44E000CE251E /* LaunchScreen.storyboard in Resources */,
+				96E98B04282C302C00CE251E /* Profile.storyboard in Resources */,
+				96E98AF3282B44E000CE251E /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		96E98B0E282C3F6600CE251E /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -292,6 +473,33 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		96E98AE3282B44DE00CE251E /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				96E98AEE282B44DE00CE251E /* ViewController+iOSExtension.swift in Sources */,
+				96E98B05282C32A300CE251E /* ProfileTableViewController.swift in Sources */,
+				96E98AEA282B44DE00CE251E /* AppDelegate.swift in Sources */,
+				96E98AFD282C18B600CE251E /* ViewController.swift in Sources */,
+				96E98AEC282B44DE00CE251E /* SceneDelegate.swift in Sources */,
+				96E98B09282C32BE00CE251E /* Keychain+Token.swift in Sources */,
+				96E98B06282C32A300CE251E /* TokenDetailViewController.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		96E98B0C282C3F6600CE251E /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				96E98B22282C61C300CE251E /* BrowserSignInScreen.swift in Sources */,
+				96E98B25282C742000CE251E /* ProfileScreen.swift in Sources */,
+				96E98B20282C5FB700CE251E /* XCTest+Extensions.swift in Sources */,
+				96E98B1E282C5F8900CE251E /* DeviceCodeScreen.swift in Sources */,
+				96E98B13282C3F6600CE251E /* DeviceSignInTests.swift in Sources */,
+				96E98B1F282C5FB700CE251E /* Screen.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
@@ -299,6 +507,11 @@
 			isa = PBXTargetDependency;
 			target = 9617AD4B276914BE00D74E7E /* DeviceAuthSignIn (tvOS) */;
 			targetProxy = 9617AD6A276914C200D74E7E /* PBXContainerItemProxy */;
+		};
+		96E98B17282C3F6600CE251E /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 96E98AE6282B44DE00CE251E /* DeviceAuthSignIn (iOS) */;
+			targetProxy = 96E98B16282C3F6600CE251E /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -317,6 +530,22 @@
 				9617AD59276914C200D74E7E /* Base */,
 			);
 			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+		96E98AF4282B44E000CE251E /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				96E98AF5282B44E000CE251E /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+		96E98AFB282B475700CE251E /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				96E98AFC282B475700CE251E /* Base */,
+			);
+			name = Main.storyboard;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
@@ -541,6 +770,104 @@
 			};
 			name = Release;
 		};
+		96E98AF9282B44E000CE251E /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 96011A122784CB860008DD11 /* SampleCode.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "DeviceAuthSignIn (iOS)/Info.plist";
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
+				INFOPLIST_KEY_UIMainStoryboardFile = Main;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 15.4;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.example.okta-sample.DeviceAuthSignIn${SAMPLE_CODE_DISAMBIGUATOR}";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		96E98AFA282B44E000CE251E /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 96011A122784CB860008DD11 /* SampleCode.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "DeviceAuthSignIn (iOS)/Info.plist";
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
+				INFOPLIST_KEY_UIMainStoryboardFile = Main;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 15.4;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.example.okta-sample.DeviceAuthSignIn${SAMPLE_CODE_DISAMBIGUATOR}";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		96E98B19282C3F6600CE251E /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 96E98ABF282ACF8900CE251E /* TestConfiguration.xcconfig */;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.4;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.example.okta-sample.DeviceAuthSignInUITests--iOS-";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = "DeviceAuthSignIn (iOS)";
+			};
+			name = Debug;
+		};
+		96E98B1A282C3F6600CE251E /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 96E98ABF282ACF8900CE251E /* TestConfiguration.xcconfig */;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.4;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.example.okta-sample.DeviceAuthSignInUITests--iOS-";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = "DeviceAuthSignIn (iOS)";
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -571,6 +898,24 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
+		96E98AF8282B44E000CE251E /* Build configuration list for PBXNativeTarget "DeviceAuthSignIn (iOS)" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				96E98AF9282B44E000CE251E /* Debug */,
+				96E98AFA282B44E000CE251E /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		96E98B18282C3F6600CE251E /* Build configuration list for PBXNativeTarget "DeviceAuthSignInUITests (iOS)" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				96E98B19282C3F6600CE251E /* Debug */,
+				96E98B1A282C3F6600CE251E /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 /* End XCConfigurationList section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -581,6 +926,18 @@
 		96011A0727696CDC0008DD11 /* OktaOAuth2 */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = OktaOAuth2;
+		};
+		96E98AFE282C2EC300CE251E /* AuthFoundation */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = AuthFoundation;
+		};
+		96E98B00282C2EC300CE251E /* OktaOAuth2 */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = OktaOAuth2;
+		};
+		96E98B0A282C3E1900CE251E /* WebAuthenticationUI */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = WebAuthenticationUI;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
