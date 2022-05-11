@@ -9,26 +9,21 @@
 /* Begin PBXBuildFile section */
 		96011A0627696CDC0008DD11 /* AuthFoundation in Frameworks */ = {isa = PBXBuildFile; productRef = 96011A0527696CDC0008DD11 /* AuthFoundation */; };
 		96011A0827696CDC0008DD11 /* OktaOAuth2 in Frameworks */ = {isa = PBXBuildFile; productRef = 96011A0727696CDC0008DD11 /* OktaOAuth2 */; };
-		96011A0B276A81DA0008DD11 /* ProfileTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96011A0A276A81DA0008DD11 /* ProfileTableViewController.swift */; };
-		96011A0C276A81DA0008DD11 /* TokenDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96011A09276A81DA0008DD11 /* TokenDetailViewController.swift */; };
 		9617AD50276914BE00D74E7E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9617AD4F276914BE00D74E7E /* AppDelegate.swift */; };
 		9617AD52276914BE00D74E7E /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9617AD51276914BE00D74E7E /* ViewController.swift */; };
 		9617AD55276914BE00D74E7E /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9617AD53276914BE00D74E7E /* Main.storyboard */; };
 		9617AD57276914C200D74E7E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9617AD56276914C200D74E7E /* Assets.xcassets */; };
 		9617AD5A276914C200D74E7E /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9617AD58276914C200D74E7E /* LaunchScreen.storyboard */; };
-		9617AD64276914C200D74E7E /* DeviceAuthSignInTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9617AD63276914C200D74E7E /* DeviceAuthSignInTests.swift */; };
-		9617AD6E276914C200D74E7E /* DeviceAuthSignInUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9617AD6D276914C200D74E7E /* DeviceAuthSignInUITests.swift */; };
-		9617AD70276914C200D74E7E /* DeviceAuthSignInUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9617AD6F276914C200D74E7E /* DeviceAuthSignInUITestsLaunchTests.swift */; };
+		9617AD6E276914C200D74E7E /* DeviceSignInTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9617AD6D276914C200D74E7E /* DeviceSignInTests.swift */; };
+		96E98AD0282AD24E00CE251E /* XCTest+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96E98AC5282AD24E00CE251E /* XCTest+Extensions.swift */; };
+		96E98AD2282AD24E00CE251E /* Screen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96E98AC7282AD24E00CE251E /* Screen.swift */; };
+		96E98AD8282AD36E00CE251E /* TokenDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96E98ACD282AD24E00CE251E /* TokenDetailViewController.swift */; };
+		96E98AD9282AD36E00CE251E /* ProfileTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96E98ACC282AD24E00CE251E /* ProfileTableViewController.swift */; };
+		96E98ADB282AD3E300CE251E /* Profile-tvOS.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 96E98ADA282AD3E300CE251E /* Profile-tvOS.storyboard */; };
+		96E98ADC282AD50000CE251E /* DeviceCodeScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96E98AC1282AD20B00CE251E /* DeviceCodeScreen.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		9617AD60276914C200D74E7E /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 9617AD44276914BE00D74E7E /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 9617AD4B276914BE00D74E7E;
-			remoteInfo = DeviceAuthSignIn;
-		};
 		9617AD6A276914C200D74E7E /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 9617AD44276914BE00D74E7E /* Project object */;
@@ -39,8 +34,6 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		96011A09276A81DA0008DD11 /* TokenDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TokenDetailViewController.swift; sourceTree = "<group>"; };
-		96011A0A276A81DA0008DD11 /* ProfileTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileTableViewController.swift; sourceTree = "<group>"; };
 		96011A122784CB860008DD11 /* SampleCode.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; name = SampleCode.xcconfig; path = ../Shared/SampleCode.xcconfig; sourceTree = "<group>"; };
 		9617AD4C276914BE00D74E7E /* Device Auth Sign In.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Device Auth Sign In.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		9617AD4F276914BE00D74E7E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -48,11 +41,15 @@
 		9617AD54276914BE00D74E7E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		9617AD56276914C200D74E7E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		9617AD59276914C200D74E7E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
-		9617AD5F276914C200D74E7E /* DeviceAuthSignInTests (tvOS).xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "DeviceAuthSignInTests (tvOS).xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
-		9617AD63276914C200D74E7E /* DeviceAuthSignInTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceAuthSignInTests.swift; sourceTree = "<group>"; };
 		9617AD69276914C200D74E7E /* DeviceAuthSignInUITests (tvOS).xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "DeviceAuthSignInUITests (tvOS).xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
-		9617AD6D276914C200D74E7E /* DeviceAuthSignInUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceAuthSignInUITests.swift; sourceTree = "<group>"; };
-		9617AD6F276914C200D74E7E /* DeviceAuthSignInUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceAuthSignInUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		9617AD6D276914C200D74E7E /* DeviceSignInTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceSignInTests.swift; sourceTree = "<group>"; };
+		96E98ABF282ACF8900CE251E /* TestConfiguration.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; name = TestConfiguration.xcconfig; path = ../Shared/TestConfiguration.xcconfig; sourceTree = "<group>"; };
+		96E98AC1282AD20B00CE251E /* DeviceCodeScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceCodeScreen.swift; sourceTree = "<group>"; };
+		96E98AC5282AD24E00CE251E /* XCTest+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "XCTest+Extensions.swift"; sourceTree = "<group>"; };
+		96E98AC7282AD24E00CE251E /* Screen.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Screen.swift; sourceTree = "<group>"; };
+		96E98ACC282AD24E00CE251E /* ProfileTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileTableViewController.swift; sourceTree = "<group>"; };
+		96E98ACD282AD24E00CE251E /* TokenDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TokenDetailViewController.swift; sourceTree = "<group>"; };
+		96E98ADA282AD3E300CE251E /* Profile-tvOS.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = "Profile-tvOS.storyboard"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -62,13 +59,6 @@
 			files = (
 				96011A0827696CDC0008DD11 /* OktaOAuth2 in Frameworks */,
 				96011A0627696CDC0008DD11 /* AuthFoundation in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		9617AD5C276914C200D74E7E /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -86,7 +76,7 @@
 			isa = PBXGroup;
 			children = (
 				9617AD4E276914BE00D74E7E /* DeviceAuthSignIn */,
-				9617AD62276914C200D74E7E /* DeviceAuthSignInTests */,
+				96E98AC3282AD24E00CE251E /* Common */,
 				9617AD6C276914C200D74E7E /* DeviceAuthSignInUITests */,
 			);
 			path = "DeviceAuthSignIn (tvOS)";
@@ -105,6 +95,7 @@
 				9223E93727BBCECC00F14A1B /* DeviceAuthSignIn (tvOS) */,
 				9617AD4D276914BE00D74E7E /* Products */,
 				96011A0427696CDC0008DD11 /* Frameworks */,
+				96E98ABF282ACF8900CE251E /* TestConfiguration.xcconfig */,
 				96011A122784CB860008DD11 /* SampleCode.xcconfig */,
 			);
 			sourceTree = "<group>";
@@ -113,7 +104,6 @@
 			isa = PBXGroup;
 			children = (
 				9617AD4C276914BE00D74E7E /* Device Auth Sign In.app */,
-				9617AD5F276914C200D74E7E /* DeviceAuthSignInTests (tvOS).xctest */,
 				9617AD69276914C200D74E7E /* DeviceAuthSignInUITests (tvOS).xctest */,
 			);
 			name = Products;
@@ -124,8 +114,6 @@
 			children = (
 				9617AD4F276914BE00D74E7E /* AppDelegate.swift */,
 				9617AD51276914BE00D74E7E /* ViewController.swift */,
-				96011A0A276A81DA0008DD11 /* ProfileTableViewController.swift */,
-				96011A09276A81DA0008DD11 /* TokenDetailViewController.swift */,
 				9617AD53276914BE00D74E7E /* Main.storyboard */,
 				9617AD56276914C200D74E7E /* Assets.xcassets */,
 				9617AD58276914C200D74E7E /* LaunchScreen.storyboard */,
@@ -133,21 +121,50 @@
 			path = DeviceAuthSignIn;
 			sourceTree = "<group>";
 		};
-		9617AD62276914C200D74E7E /* DeviceAuthSignInTests */ = {
-			isa = PBXGroup;
-			children = (
-				9617AD63276914C200D74E7E /* DeviceAuthSignInTests.swift */,
-			);
-			path = DeviceAuthSignInTests;
-			sourceTree = "<group>";
-		};
 		9617AD6C276914C200D74E7E /* DeviceAuthSignInUITests */ = {
 			isa = PBXGroup;
 			children = (
-				9617AD6D276914C200D74E7E /* DeviceAuthSignInUITests.swift */,
-				9617AD6F276914C200D74E7E /* DeviceAuthSignInUITestsLaunchTests.swift */,
+				96E98AC0282AD1EE00CE251E /* Pages */,
+				9617AD6D276914C200D74E7E /* DeviceSignInTests.swift */,
 			);
 			path = DeviceAuthSignInUITests;
+			sourceTree = "<group>";
+		};
+		96E98AC0282AD1EE00CE251E /* Pages */ = {
+			isa = PBXGroup;
+			children = (
+				96E98AC1282AD20B00CE251E /* DeviceCodeScreen.swift */,
+			);
+			path = Pages;
+			sourceTree = "<group>";
+		};
+		96E98AC3282AD24E00CE251E /* Common */ = {
+			isa = PBXGroup;
+			children = (
+				96E98AC4282AD24E00CE251E /* Testing */,
+				96E98ACA282AD24E00CE251E /* ViewControllers */,
+			);
+			name = Common;
+			path = ../../Shared/Common;
+			sourceTree = "<group>";
+		};
+		96E98AC4282AD24E00CE251E /* Testing */ = {
+			isa = PBXGroup;
+			children = (
+				96E98AC5282AD24E00CE251E /* XCTest+Extensions.swift */,
+				96E98AC7282AD24E00CE251E /* Screen.swift */,
+			);
+			path = Testing;
+			sourceTree = "<group>";
+		};
+		96E98ACA282AD24E00CE251E /* ViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				96E98ADA282AD3E300CE251E /* Profile-tvOS.storyboard */,
+				96E98ACC282AD24E00CE251E /* ProfileTableViewController.swift */,
+				96E98ACD282AD24E00CE251E /* TokenDetailViewController.swift */,
+			);
+			path = ViewControllers;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -173,24 +190,6 @@
 			productName = DeviceAuthSignIn;
 			productReference = 9617AD4C276914BE00D74E7E /* Device Auth Sign In.app */;
 			productType = "com.apple.product-type.application";
-		};
-		9617AD5E276914C200D74E7E /* DeviceAuthSignInTests (tvOS) */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 9617AD76276914C200D74E7E /* Build configuration list for PBXNativeTarget "DeviceAuthSignInTests (tvOS)" */;
-			buildPhases = (
-				9617AD5B276914C200D74E7E /* Sources */,
-				9617AD5C276914C200D74E7E /* Frameworks */,
-				9617AD5D276914C200D74E7E /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				9617AD61276914C200D74E7E /* PBXTargetDependency */,
-			);
-			name = "DeviceAuthSignInTests (tvOS)";
-			productName = DeviceAuthSignInTests;
-			productReference = 9617AD5F276914C200D74E7E /* DeviceAuthSignInTests (tvOS).xctest */;
-			productType = "com.apple.product-type.bundle.unit-test";
 		};
 		9617AD68276914C200D74E7E /* DeviceAuthSignInUITests (tvOS) */ = {
 			isa = PBXNativeTarget;
@@ -223,12 +222,9 @@
 					9617AD4B276914BE00D74E7E = {
 						CreatedOnToolsVersion = 13.1;
 					};
-					9617AD5E276914C200D74E7E = {
-						CreatedOnToolsVersion = 13.1;
-						TestTargetID = 9617AD4B276914BE00D74E7E;
-					};
 					9617AD68276914C200D74E7E = {
 						CreatedOnToolsVersion = 13.1;
+						LastSwiftMigration = 1330;
 						TestTargetID = 9617AD4B276914BE00D74E7E;
 					};
 				};
@@ -247,7 +243,6 @@
 			projectRoot = "";
 			targets = (
 				9617AD4B276914BE00D74E7E /* DeviceAuthSignIn (tvOS) */,
-				9617AD5E276914C200D74E7E /* DeviceAuthSignInTests (tvOS) */,
 				9617AD68276914C200D74E7E /* DeviceAuthSignInUITests (tvOS) */,
 			);
 		};
@@ -258,16 +253,10 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				96E98ADB282AD3E300CE251E /* Profile-tvOS.storyboard in Resources */,
 				9617AD5A276914C200D74E7E /* LaunchScreen.storyboard in Resources */,
 				9617AD57276914C200D74E7E /* Assets.xcassets in Resources */,
 				9617AD55276914BE00D74E7E /* Main.storyboard in Resources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		9617AD5D276914C200D74E7E /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -285,18 +274,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				96011A0B276A81DA0008DD11 /* ProfileTableViewController.swift in Sources */,
-				96011A0C276A81DA0008DD11 /* TokenDetailViewController.swift in Sources */,
+				96E98AD9282AD36E00CE251E /* ProfileTableViewController.swift in Sources */,
 				9617AD52276914BE00D74E7E /* ViewController.swift in Sources */,
 				9617AD50276914BE00D74E7E /* AppDelegate.swift in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		9617AD5B276914C200D74E7E /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				9617AD64276914C200D74E7E /* DeviceAuthSignInTests.swift in Sources */,
+				96E98AD8282AD36E00CE251E /* TokenDetailViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -304,19 +285,16 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				9617AD70276914C200D74E7E /* DeviceAuthSignInUITestsLaunchTests.swift in Sources */,
-				9617AD6E276914C200D74E7E /* DeviceAuthSignInUITests.swift in Sources */,
+				96E98AD0282AD24E00CE251E /* XCTest+Extensions.swift in Sources */,
+				96E98ADC282AD50000CE251E /* DeviceCodeScreen.swift in Sources */,
+				9617AD6E276914C200D74E7E /* DeviceSignInTests.swift in Sources */,
+				96E98AD2282AD24E00CE251E /* Screen.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		9617AD61276914C200D74E7E /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 9617AD4B276914BE00D74E7E /* DeviceAuthSignIn (tvOS) */;
-			targetProxy = 9617AD60276914C200D74E7E /* PBXContainerItemProxy */;
-		};
 		9617AD6B276914C200D74E7E /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 9617AD4B276914BE00D74E7E /* DeviceAuthSignIn (tvOS) */;
@@ -464,7 +442,7 @@
 		};
 		9617AD74276914C200D74E7E /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 96011A122784CB860008DD11 /* SampleCode.xcconfig */;
+			baseConfigurationReference = 96E98ABF282ACF8900CE251E /* TestConfiguration.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = "App Icon & Top Shelf Image";
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -489,7 +467,7 @@
 		};
 		9617AD75276914C200D74E7E /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 96011A122784CB860008DD11 /* SampleCode.xcconfig */;
+			baseConfigurationReference = 96E98ABF282ACF8900CE251E /* TestConfiguration.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = "App Icon & Top Shelf Image";
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -512,61 +490,12 @@
 			};
 			name = Release;
 		};
-		9617AD77276914C200D74E7E /* Debug */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 96011A122784CB860008DD11 /* SampleCode.xcconfig */;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				BUNDLE_LOADER = "$(TEST_HOST)";
-				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
-				GENERATE_INFOPLIST_FILE = YES;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@loader_path/Frameworks",
-				);
-				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = "com.okta.mobile-sdk.DeviceAuthSignInTests";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_EMIT_LOC_STRINGS = NO;
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = 3;
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Device Auth Sign In.app/Device Auth Sign In";
-				TVOS_DEPLOYMENT_TARGET = 15.0;
-			};
-			name = Debug;
-		};
-		9617AD78276914C200D74E7E /* Release */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 96011A122784CB860008DD11 /* SampleCode.xcconfig */;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				BUNDLE_LOADER = "$(TEST_HOST)";
-				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
-				GENERATE_INFOPLIST_FILE = YES;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@loader_path/Frameworks",
-				);
-				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = "com.okta.mobile-sdk.DeviceAuthSignInTests";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_EMIT_LOC_STRINGS = NO;
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = 3;
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Device Auth Sign In.app/Device Auth Sign In";
-				TVOS_DEPLOYMENT_TARGET = 15.0;
-			};
-			name = Release;
-		};
 		9617AD7A276914C200D74E7E /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 96011A122784CB860008DD11 /* SampleCode.xcconfig */;
+			baseConfigurationReference = 96E98ABF282ACF8900CE251E /* TestConfiguration.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -578,18 +507,21 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.okta.mobile-sdk.DeviceAuthSignInUITests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 3;
-				TEST_TARGET_NAME = DeviceAuthSignIn;
+				TEST_TARGET_NAME = "DeviceAuthSignIn (tvOS)";
 			};
 			name = Debug;
 		};
 		9617AD7B276914C200D74E7E /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 96011A122784CB860008DD11 /* SampleCode.xcconfig */;
+			baseConfigurationReference = 96E98ABF282ACF8900CE251E /* TestConfiguration.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -601,10 +533,11 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.okta.mobile-sdk.DeviceAuthSignInUITests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 				SWIFT_EMIT_LOC_STRINGS = NO;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 3;
-				TEST_TARGET_NAME = DeviceAuthSignIn;
+				TEST_TARGET_NAME = "DeviceAuthSignIn (tvOS)";
 			};
 			name = Release;
 		};
@@ -625,15 +558,6 @@
 			buildConfigurations = (
 				9617AD74276914C200D74E7E /* Debug */,
 				9617AD75276914C200D74E7E /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		9617AD76276914C200D74E7E /* Build configuration list for PBXNativeTarget "DeviceAuthSignInTests (tvOS)" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				9617AD77276914C200D74E7E /* Debug */,
-				9617AD78276914C200D74E7E /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

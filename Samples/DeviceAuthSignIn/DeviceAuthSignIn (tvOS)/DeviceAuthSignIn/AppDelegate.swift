@@ -20,21 +20,38 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     weak var signInViewController: UIViewController?
 
     func signIn() {
-        guard let tabController = window?.rootViewController as? UITabBarController else { return }
-
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         let signInController = storyboard.instantiateViewController(withIdentifier: "SignIn")
         
         signInViewController = signInController
-        tabController.present(signInController, animated: false)
+        window?.rootViewController = signInController
+    }
+
+    func showProfile() {
+        let storyboard = UIStoryboard(name: "Profile-tvOS", bundle: nil)
+        let profileViewController = storyboard.instantiateInitialViewController()
+        
+        window?.rootViewController = profileViewController
+    }
+    
+    func setRootViewController() {
+        if Credential.default == nil {
+            self.signIn()
+        } else {
+            self.showProfile()
+        }
     }
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-        NotificationCenter.default.addObserver(forName: .defaultCredentialChanged, object: nil, queue: .main) { notification in
-            if notification.object == nil {
-                self.signIn()
-            }
+        if ProcessInfo.processInfo.arguments.contains("--reset-keychain") {
+            try? Keychain.Search().delete()
         }
+        
+        NotificationCenter.default.addObserver(forName: .defaultCredentialChanged, object: nil, queue: .main) { notification in
+            self.setRootViewController()
+        }
+        
+        setRootViewController()
         
         return true
     }

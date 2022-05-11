@@ -11,17 +11,32 @@
 //
 
 import UIKit
-import WebAuthenticationUI
 import OktaOAuth2
 
 class TokenDetailViewController: UIViewController {
-    var token: Token?
-    
+    var token: Token? {
+        didSet {
+            DispatchQueue.main.async {
+                self.drawToken()
+            }
+        }
+    }
+
     @IBOutlet weak var textView: UITextView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        NotificationCenter.default.addObserver(forName: .defaultCredentialChanged,
+                                               object: nil,
+                                               queue: .main) { (notification) in
+            guard let user = notification.object as? Credential else { return }
+            self.token = user.token
+        }
+        token = Credential.default?.token
+    }
+    
+    func drawToken() {
         guard let token = token else {
             textView.text = "No token was found"
             return

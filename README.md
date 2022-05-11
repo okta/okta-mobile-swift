@@ -236,13 +236,15 @@ The minimum supported Swift 5 minor version is the one released with the oldest-
 
 ### Platforms
 
-Only the last 4 major platform versions are officially supported, starting from:
+Only the last 4 major platform versions are officially supported, unless there are platform limitations that limits our ability to support older versions.
 
-- iOS 12
-- macOS 10.15
-- Catalyst 13
-- tvOS 12
-- watchOS 6.2
+| Platform    | Supported | Best-Effort |
+| ----------- | --------- | ----------- |
+| iOS         | 12.0      | 9.0         |
+| tvOS        | 12.0      | 10.0        |
+| watchOS     | 8.0       | 7.0         |
+| macCatalyst | 13.0      | 13.0        |
+| macOS       | 12.0      | 10.11       |
 
 Once a platform version becomes unsupported, dropping support for it will not be considered a breaking change and will be done in a minor release. For example, iOS 12 will cease to be supported when iOS 16 gets released, and might be dropped in a minor release.
 

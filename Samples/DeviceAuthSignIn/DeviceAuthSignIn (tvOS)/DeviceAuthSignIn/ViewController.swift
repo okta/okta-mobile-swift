@@ -20,15 +20,24 @@ class ViewController: UIViewController {
     @IBOutlet weak var urlPromptLabel: UILabel!
     @IBOutlet weak var codeLabel: UILabel!
     @IBOutlet weak var codeImageView: UIImageView!
+    @IBOutlet weak var openTestBrowser: UIButton!
     
     var flow: DeviceAuthorizationFlow?
+    
+    lazy var domain: String = {
+        ProcessInfo.processInfo.environment["E2E_DOMAIN"] ?? "<#domain#>"
+    }()
+    
+    lazy var clientId: String = {
+        ProcessInfo.processInfo.environment["E2E_CLIENT_ID"] ?? "<#client_id#>"
+    }()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        if let issuerUrl = URL(string: "https://<#domain#>") {
+        if let issuerUrl = URL(string: "https://\(domain)") {
             flow = DeviceAuthorizationFlow(issuer: issuerUrl,
-                                           clientId: "<#client_id#>",
+                                           clientId: clientId,
                                            scopes: "openid profile email offline_access")
         } else {
             let alert = UIAlertController(title: "Client not configured", message: "Please update ViewController.swift", preferredStyle: .alert)
