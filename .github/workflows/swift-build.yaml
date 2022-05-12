@@ -19,7 +19,7 @@ jobs:
     strategy:
       matrix:
         OS:
-          - macos-latest
+          - macos-12
     steps:
     - name: Get swift version
       run: swift --version
