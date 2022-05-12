@@ -3,14 +3,14 @@
 <plist version="1.0">
 <dict>
 	<key>issuer</key>
-	<string>https://mnachbaur-test.trexcloud.com/oauth2/default</string>
+	<string>https://{orgDomain}/oauth2/default</string>
 	<key>clientId</key>
-	<string>0oa4983cxpacKycYA0g7</string>
+	<string>{clientId}</string>
 	<key>scopes</key>
 	<string>openid profile offline_access device_sso</string>
 	<key>redirectUri</key>
-	<string>com.okta.example:/callback</string>
+	<string>{appScheme}:/callback</string>
 	<key>logoutRedirectUri</key>
-	<string>com.okta.example:/</string>
+	<string>{appScheme}:/</string>
 </dict>
 </plist>
