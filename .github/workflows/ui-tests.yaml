@@ -23,7 +23,7 @@ jobs:
         okta_plist: "${{ secrets.TEST_OKTA_PLIST }}"
         test_configuration: "${{ secrets.TEST_CONFIGURATION }}"
     - name: Check stuff out
-      run: cat Samples/Shared/TestConfiguration.xcconfig
+      run: cat Samples/Shared/TestConfiguration.xcconfig |base64
     - name: Test Web Sign In
       run: |
         xcodebuild \
