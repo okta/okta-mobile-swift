@@ -27,24 +27,28 @@ jobs:
     - name: Resolve package dependencies
       run: |
         xcodebuild \
-            -derivedDataPath DerivedData \
+            -derivedDataPath Build/DerivedData \
+            -clonedSourcePackagesDirPath Build/ClonedSources \
             -workspace OktaMobileSDK.xcworkspace \
             -scheme AuthFoundation \
             -resolvePackageDependencies
         xcodebuild \
-            -derivedDataPath DerivedData \
+            -derivedDataPath Build/DerivedData \
+            -clonedSourcePackagesDirPath Build/ClonedSources \
             -workspace OktaMobileSDK.xcworkspace \
             -scheme OktaOAuth2 \
             -resolvePackageDependencies
         xcodebuild \
-            -derivedDataPath DerivedData \
+            -derivedDataPath Build/DerivedData \
+            -clonedSourcePackagesDirPath Build/ClonedSources \
             -workspace OktaMobileSDK.xcworkspace \
             -scheme WebAuthenticationUI \
             -resolvePackageDependencies
     - name: Build AuthFoundation
       run: |
         xcodebuild \
-            -derivedDataPath DerivedData \
+            -derivedDataPath Build/DerivedData \
+            -clonedSourcePackagesDirPath Build/ClonedSources \
             -workspace OktaMobileSDK.xcworkspace \
             -scheme AuthFoundation \
             -sdk ${{ matrix.Platform }} \
@@ -52,7 +56,8 @@ jobs:
     - name: Build OktaOAuth2
       run: |
         xcodebuild \
-            -derivedDataPath DerivedData \
+            -derivedDataPath Build/DerivedData \
+            -clonedSourcePackagesDirPath Build/ClonedSources \
             -workspace OktaMobileSDK.xcworkspace \
             -scheme OktaOAuth2 \
             -sdk ${{ matrix.Platform }} \
@@ -61,7 +66,8 @@ jobs:
       if: ${{ matrix.Platform != 'appletvsimulator' }}
       run: |
         xcodebuild \
-            -derivedDataPath DerivedData \
+            -derivedDataPath Build/DerivedData \
+            -clonedSourcePackagesDirPath Build/ClonedSources \
             -workspace OktaMobileSDK.xcworkspace \
             -scheme WebAuthenticationUI \
             -sdk ${{ matrix.Platform }} \
@@ -70,7 +76,7 @@ jobs:
       uses: actions/cache@v2
       id: restore-build
       with:
-        path: DerivedData
+        path: Build
         key: ${{ github.sha }}-${{ matrix.Platform }}
 
   WebSignIn:
@@ -87,12 +93,15 @@ jobs:
       uses: actions/cache@v2
       id: restore-build
       with:
-        path: DerivedData
+        path: Build
         key: ${{ github.sha }}-iphonesimulator
+    - name: Look up stuff
+      run: ls -lah
     - name: Test Web Sign In
       run: |
         xcodebuild \
-            -derivedDataPath DerivedData \
+            -derivedDataPath Build/DerivedData \
+            -clonedSourcePackagesDirPath Build/ClonedSources \
             -workspace OktaMobileSDK.xcworkspace \
             -scheme "WebSignIn (iOS)" \
             -destination 'platform=iOS Simulator,name=iPhone 12,OS=15.4' \
@@ -100,7 +109,8 @@ jobs:
     - name: Test Single Sign In
       run: |
         xcodebuild \
-            -derivedDataPath DerivedData \
+            -derivedDataPath Build/DerivedData \
+            -clonedSourcePackagesDirPath Build/ClonedSources \
             -workspace OktaMobileSDK.xcworkspace \
             -scheme "SingleSignOn (iOS)" \
             -destination 'platform=iOS Simulator,name=iPhone 12,OS=15.4' \
@@ -120,12 +130,13 @@ jobs:
       uses: actions/cache@v2
       id: restore-build
       with:
-        path: DerivedData
+        path: Build
         key: ${{ github.sha }}-iphonesimulator
     - name: Test
       run: |
         xcodebuild \
-            -derivedDataPath DerivedData \
+            -derivedDataPath Build/DerivedData \
+            -clonedSourcePackagesDirPath Build/ClonedSources \
             -workspace OktaMobileSDK.xcworkspace \
             -scheme "DeviceAuthSignIn (iOS)" \
             -destination 'platform=iOS Simulator,name=iPhone 12,OS=15.4' \
@@ -145,12 +156,13 @@ jobs:
       uses: actions/cache@v2
       id: restore-build
       with:
-        path: DerivedData
+        path: Build
         key: ${{ github.sha }}-appletvsimulator
     - name: Test
       run: |
         xcodebuild \
-            -derivedDataPath DerivedData \
+            -derivedDataPath Build/DerivedData \
+            -clonedSourcePackagesDirPath Build/ClonedSources \
             -workspace OktaMobileSDK.xcworkspace \
             -scheme "DeviceAuthSignIn (tvOS)" \
             -destination 'platform=tvOS Simulator,name=Apple TV,OS=15.4' \
@@ -170,13 +182,13 @@ jobs:
       uses: actions/cache@v2
       id: restore-build
       with:
-        path: DerivedData
-        key: ${{ github.sha }}-appletvsimulator
+        path: Build
+        key: ${{ github.sha }}-macosx
     - name: Test
       run: |
         xcodebuild \
-            -derivedDataPath DerivedData \
+            -derivedDataPath Build/DerivedData \
+            -clonedSourcePackagesDirPath Build/ClonedSources \
             -workspace OktaMobileSDK.xcworkspace \
             -scheme "UserPasswordSignIn (macOS)" \
-            -destination 'platform=macOS,name=Any Mac' \
             test
