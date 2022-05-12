@@ -15,7 +15,6 @@ on:
 jobs:
   WebSignIn:
     name: Web Sign In / Single Sign On (iOS)
-    needs: Build
     runs-on: macos-latest
     steps:
     - uses: actions/checkout@master
@@ -44,7 +43,6 @@ jobs:
 
   DeviceAuthSignIniOS:
     name: Device Auth Sign In (iOS)
-    needs: Build
     runs-on: macos-latest
     steps:
     - uses: actions/checkout@master
@@ -64,7 +62,6 @@ jobs:
 
   DeviceAuthSignIntvOS:
     name: Device Auth Sign In (tvOS)
-    needs: Build
     runs-on: macos-latest
     steps:
     - uses: actions/checkout@master
@@ -84,7 +81,6 @@ jobs:
 
   UserPasswordSignInmacOS:
     name: User Password Sign In (macOS)
-    needs: Build
     runs-on: macos-latest
     steps:
     - uses: actions/checkout@master

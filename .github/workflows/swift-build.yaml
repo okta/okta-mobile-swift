@@ -15,7 +15,6 @@ on:
 jobs:
   SwiftBuild:
     name: Unit Tests on ${{ matrix.OS }}
-    needs: SwiftLint
     runs-on: ${{ matrix.OS }}
     strategy:
       matrix:
