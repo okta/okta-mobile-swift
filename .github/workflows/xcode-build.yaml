@@ -15,7 +15,8 @@ on:
 jobs:
   Build:
     name: Build SDK (${{ matrix.Platform }})
-    runs-on: macos-12
+    needs: SwiftBuild
+    runs-on: macos-latest
     strategy:
       matrix:
         Platform:
@@ -82,7 +83,7 @@ jobs:
   WebSignIn:
     name: Web Sign In / Single Sign On (iOS)
     needs: Build
-    runs-on: macos-12
+    runs-on: macos-latest
     steps:
     - uses: actions/checkout@master
     - uses: ./.github/actions/setup-secrets
@@ -115,11 +116,13 @@ jobs:
             -scheme "SingleSignOn (iOS)" \
             -destination 'platform=iOS Simulator,name=iPhone 12,OS=15.4' \
             test
+    - name: Look up stuff
+      run: find Build -type d
 
   DeviceAuthSignIniOS:
     name: Device Auth Sign In (iOS)
     needs: Build
-    runs-on: macos-12
+    runs-on: macos-latest
     steps:
     - uses: actions/checkout@master
     - uses: ./.github/actions/setup-secrets
@@ -145,7 +148,7 @@ jobs:
   DeviceAuthSignIntvOS:
     name: Device Auth Sign In (tvOS)
     needs: Build
-    runs-on: macos-12
+    runs-on: macos-latest
     steps:
     - uses: actions/checkout@master
     - uses: ./.github/actions/setup-secrets
@@ -158,6 +161,8 @@ jobs:
       with:
         path: Build
         key: ${{ github.sha }}-appletvsimulator
+    - name: Look up stuff
+      run: find Build -type d
     - name: Test
       run: |
         xcodebuild \
@@ -167,11 +172,13 @@ jobs:
             -scheme "DeviceAuthSignIn (tvOS)" \
             -destination 'platform=tvOS Simulator,name=Apple TV,OS=15.4' \
             test
+    - name: Look up stuff after
+      run: find Build -type d
 
   UserPasswordSignInmacOS:
     name: User Password Sign In (macOS)
     needs: Build
-    runs-on: macos-12
+    runs-on: macos-latest
     steps:
     - uses: actions/checkout@master
     - uses: ./.github/actions/setup-secrets

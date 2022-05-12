@@ -13,13 +13,14 @@ on:
       - release-*
 
 jobs:
-  Build:
+  SwiftBuild:
     name: Unit Tests on ${{ matrix.OS }}
+    needs: SwiftLint
     runs-on: ${{ matrix.OS }}
     strategy:
       matrix:
         OS:
-          - macos-11
+          - macos-latest
     steps:
     - name: Get swift version
       run: swift --version
