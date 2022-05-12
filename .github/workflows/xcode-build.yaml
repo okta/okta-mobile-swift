@@ -63,6 +63,12 @@ jobs:
             -scheme WebAuthenticationUI \
             -sdk ${{ matrix.Platform }} \
             build
+    - name: Cache build directory
+      uses: actions/cache@v2
+      id: restore-build
+      with:
+        path: Build
+        key: ${{ github.sha }}-${{ matrix.Platform }}
 
   WebSignIn:
     name: Web Sign In 
@@ -74,6 +80,12 @@ jobs:
       with:
         okta_plist: "${{ secrets.TEST_OKTA_PLIST }}"
         test_configuration: "${{ secrets.TEST_CONFIGURATION }}"
+    - name: Restore build directory
+      uses: actions/cache@v2
+      id: restore-build
+      with:
+        path: Build
+        key: ${{ github.sha }}-iphonesimulator
     - name: Test
       run: |
         xcodebuild \
