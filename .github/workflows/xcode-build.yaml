@@ -36,13 +36,11 @@ jobs:
             -workspace OktaMobileSDK.xcworkspace \
             -scheme OktaOAuth2 \
             -resolvePackageDependencies
-        if [[ "${{ matrix.Platform }}" != "appletvsimulator" ]]; then
-          xcodebuild \
-              -derivedDataPath DerivedData \
-              -workspace OktaMobileSDK.xcworkspace \
-              -scheme WebAuthenticationUI \
-              -resolvePackageDependencies
-        fi
+        xcodebuild \
+            -derivedDataPath DerivedData \
+            -workspace OktaMobileSDK.xcworkspace \
+            -scheme WebAuthenticationUI \
+            -resolvePackageDependencies
     - name: Build AuthFoundation
       run: |
         xcodebuild \
@@ -60,6 +58,7 @@ jobs:
             -sdk ${{ matrix.Platform }} \
             build
     - name: Build WebAuthenticationUI
+      if: ${{ matrix.Platform }} != "appletvsimulator"
       run: |
         xcodebuild \
             -derivedDataPath DerivedData \
