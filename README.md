@@ -236,7 +236,7 @@ The minimum supported Swift 5 minor version is the one released with the oldest-
 
 ### Platforms
 
-Only the last 4 major platform versions are officially supported, unless there are platform limitations that limits our ability to support older versions.
+Only the last 4 major platform versions are officially supported, unless there are platform limitations that limit our ability to support older versions.
 
 | Platform    | Supported | Best-Effort |
 | ----------- | --------- | ----------- |
