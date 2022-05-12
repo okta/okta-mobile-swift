@@ -25,7 +25,7 @@ class BrowserSignInScreen: Screen {
         self.testCase = testCase
     }
         
-    func isVisible(timeout: TimeInterval = 3) {
+    func isVisible(timeout: TimeInterval = .long) {
         XCTAssertTrue(app.staticTexts["Activate your device"].waitForExistence(timeout: timeout))
     }
     

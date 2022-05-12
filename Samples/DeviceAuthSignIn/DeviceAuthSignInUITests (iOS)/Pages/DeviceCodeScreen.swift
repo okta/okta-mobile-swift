@@ -47,5 +47,6 @@ class DeviceCodeScreen: Screen {
     func openBrowser() {
         XCTAssertTrue(openBrowserButton.exists)
         openBrowserButton.tap()
+        XCTAssertTrue(app.webViews.firstMatch.waitForExistence(timeout: .standard))
     }
 }
