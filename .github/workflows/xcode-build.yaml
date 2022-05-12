@@ -53,7 +53,7 @@ jobs:
     runs-on: macos-12
     steps:
     - uses: actions/checkout@master
-    - uses: .github/actions/setup-secrets
+    - uses: ./.github/actions/setup-secrets
     - name: Test
       run: |
         xcodebuild \
