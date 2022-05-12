@@ -25,6 +25,7 @@ jobs:
     - name: Build AuthFoundation
       run: |
         xcodebuild \
+            -derivedDataPath Build \
             -workspace OktaMobileSDK.xcworkspace \
             -scheme AuthFoundation \
             -sdk ${{ matrix.Platform }} \
@@ -32,6 +33,7 @@ jobs:
     - name: Build OktaOAuth2
       run: |
         xcodebuild \
+            -derivedDataPath Build \
             -workspace OktaMobileSDK.xcworkspace \
             -scheme OktaOAuth2 \
             -sdk ${{ matrix.Platform }} \
@@ -39,6 +41,7 @@ jobs:
     - name: Build WebAuthenticationUI
       run: |
         xcodebuild \
+            -derivedDataPath Build \
             -workspace OktaMobileSDK.xcworkspace \
             -scheme WebAuthenticationUI \
             -sdk ${{ matrix.Platform }} \
@@ -46,13 +49,15 @@ jobs:
 
   WebSignIn:
     name: Web Sign In 
+    needs: Build
     runs-on: macos-12
     steps:
     - uses: actions/checkout@master
-    - uses: setup-secrets
+    - uses: .github/actions/setup-secrets
     - name: Test
       run: |
         xcodebuild \
+            -derivedDataPath Build \
             -workspace OktaMobileSDK.xcworkspace \
             -scheme "WebSignIn (iOS)" \
             -sdk iphonesimulator \
