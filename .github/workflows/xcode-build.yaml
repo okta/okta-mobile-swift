@@ -25,7 +25,19 @@ jobs:
     - name: Resolve package dependencies
       run: |
         xcodebuild \
+            -derivedDataPath Build \
             -workspace OktaMobileSDK.xcworkspace \
+            -scheme AuthFoundation \
+            -resolvePackageDependencies
+        xcodebuild \
+            -derivedDataPath Build \
+            -workspace OktaMobileSDK.xcworkspace \
+            -scheme OktaOAuth2 \
+            -resolvePackageDependencies
+        xcodebuild \
+            -derivedDataPath Build \
+            -workspace OktaMobileSDK.xcworkspace \
+            -scheme WebAuthenticationUI \
             -resolvePackageDependencies
     - name: Build AuthFoundation
       run: |
