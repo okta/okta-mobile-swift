@@ -14,12 +14,13 @@ on:
 
 jobs:
   Build:
-    name: Unit Tests on ${{ matrix.os }}
-    runs-on: ${{ matrix.os }}
+    name: Unit Tests on ${{ matrix.OS }}
+    runs-on: ${{ matrix.OS }}
     strategy:
       matrix:
-        os:
-          - macos-latest
+        OS:
+          - macos-11
+          - macos-12
     steps:
     - name: Get swift version
       run: swift --version
