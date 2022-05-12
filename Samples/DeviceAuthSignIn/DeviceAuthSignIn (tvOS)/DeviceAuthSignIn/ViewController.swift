@@ -20,15 +20,26 @@ class ViewController: UIViewController {
     @IBOutlet weak var urlPromptLabel: UILabel!
     @IBOutlet weak var codeLabel: UILabel!
     @IBOutlet weak var codeImageView: UIImageView!
+    @IBOutlet weak var openAuthenticationButton: UIButton?
     
     var flow: DeviceAuthorizationFlow?
+    
+    lazy var domain: String = {
+        ProcessInfo.processInfo.environment["E2E_DOMAIN"] ?? "<#domain#>"
+    }()
+    
+    lazy var clientId: String = {
+        ProcessInfo.processInfo.environment["E2E_CLIENT_ID"] ?? "<#client_id#>"
+    }()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        if let issuerUrl = URL(string: "https://<#domain#>") {
+        if !domain.isEmpty,
+           let issuerUrl = URL(string: "https://\(domain)")
+        {
             flow = DeviceAuthorizationFlow(issuer: issuerUrl,
-                                           clientId: "<#client_id#>",
+                                           clientId: clientId,
                                            scopes: "openid profile email offline_access")
         } else {
             let alert = UIAlertController(title: "Client not configured", message: "Please update ViewController.swift", preferredStyle: .alert)
@@ -37,6 +48,7 @@ class ViewController: UIViewController {
         }
 
         codeStackView.isHidden = true
+        openAuthenticationButton?.isHidden = true
         activityIndicator.startAnimating()
         codeImageView.layer.magnificationFilter = .nearest
         
@@ -75,14 +87,18 @@ class ViewController: UIViewController {
         update(code: context.userCode)
         codeStackView.isHidden = false
         activityIndicator.stopAnimating()
-        
+
+        if ProcessInfo.processInfo.arguments.contains("--enable-browser") {
+            openAuthenticationButton?.isHidden = false
+        }
+
         flow?.resume(with: context) { result in
             DispatchQueue.main.async {
                 switch result {
                 case .failure(let error):
                     self.show(error)
                 case .success(let token):
-                    Credential.default = Credential(token: token)
+                    Credential.default = try? Credential.store(token)
                     self.dismiss(animated: true)
                 }
             }

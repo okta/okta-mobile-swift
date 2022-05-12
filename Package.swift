@@ -8,9 +8,10 @@ let package = Package(
     defaultLocalization: "en",
     platforms: [
         .iOS(.v9),
-        .tvOS(.v9),
+        .tvOS(.v10),
         .watchOS(.v7),
-        .macOS(.v10_11)
+        .macOS(.v10_11),
+        .macCatalyst(.v13)
     ],
     products: [
         .library(name: "AuthFoundation", targets: ["AuthFoundation"]),

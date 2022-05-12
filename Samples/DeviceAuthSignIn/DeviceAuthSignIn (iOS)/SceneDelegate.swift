@@ -1,5 +1,5 @@
 //
-// Copyright (c) 2021-Present, Okta, Inc. and/or its affiliates. All rights reserved.
+// Copyright (c) 2022-Present, Okta, Inc. and/or its affiliates. All rights reserved.
 // The Okta software accompanied by this notice is provided pursuant to the Apache License, Version 2.0 (the "License.")
 //
 // You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0.
@@ -13,22 +13,22 @@
 import UIKit
 import AuthFoundation
 
-@main
-class AppDelegate: UIResponder, UIApplicationDelegate {
+class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
     var window: UIWindow?
+    weak var windowScene: UIWindowScene?
     weak var signInViewController: UIViewController?
 
     func signIn() {
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        let signInController = storyboard.instantiateViewController(withIdentifier: "SignIn")
+        let signInController = storyboard.instantiateInitialViewController()
         
         signInViewController = signInController
         window?.rootViewController = signInController
     }
 
     func showProfile() {
-        let storyboard = UIStoryboard(name: "Profile-tvOS", bundle: nil)
+        let storyboard = UIStoryboard(name: "Profile", bundle: nil)
         let profileViewController = storyboard.instantiateInitialViewController()
         
         window?.rootViewController = profileViewController
@@ -42,30 +42,21 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
     }
 
-    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-        if ProcessInfo.processInfo.arguments.contains("--reset-keychain") {
-            try? Keychain.Search().delete()
-        }
+    func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
+        guard let scene = (scene as? UIWindowScene) else { return }
+        windowScene = scene
         
         NotificationCenter.default.addObserver(forName: .defaultCredentialChanged, object: nil, queue: .main) { notification in
             self.setRootViewController()
         }
         
         setRootViewController()
-         
-        return true
     }
 
-    func applicationWillResignActive(_ application: UIApplication) {
+    func sceneDidDisconnect(_ scene: UIScene) {
     }
 
-    func applicationDidEnterBackground(_ application: UIApplication) {
-    }
-
-    func applicationWillEnterForeground(_ application: UIApplication) {
-    }
-
-    func applicationDidBecomeActive(_ application: UIApplication) {
+    func sceneDidBecomeActive(_ scene: UIScene) {
         guard signInViewController == nil,
               Credential.default == nil
         else {
@@ -76,5 +67,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             self.signIn()
         }
     }
-}
 
+    func sceneWillResignActive(_ scene: UIScene) {
+    }
+
+    func sceneWillEnterForeground(_ scene: UIScene) {
+    }
+
+    func sceneDidEnterBackground(_ scene: UIScene) {
+    }
+}

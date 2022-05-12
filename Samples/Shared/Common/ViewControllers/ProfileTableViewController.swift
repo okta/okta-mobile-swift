@@ -11,7 +11,12 @@
 //
 
 import UIKit
+
+#if os(tvOS)
+import OktaOAuth2
+#else
 import WebAuthenticationUI
+#endif
 
 class ProfileTableViewController: UITableViewController {
     enum Section: Int {
@@ -123,14 +128,22 @@ class ProfileTableViewController: UITableViewController {
         DispatchQueue.main.async {
             let alert = UIAlertController(title: nil, message: error.localizedDescription, preferredStyle: .alert)
             alert.addAction(.init(title: "OK", style: .default))
+            
+            #if os(tvOS)
+            self.show(alert, sender: nil)
+            #else
             self.present(alert, animated: true)
+            #endif
         }
     }
     
     func signout() {
         let alert = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
         alert.addAction(.init(title: "Remove", style: .default, handler: { _ in
+            #if !os(tvOS)
             try? Keychain.deleteTokens()
+            #endif
+            
             try? self.credential?.remove()
             self.credential = nil
         }))
@@ -146,6 +159,7 @@ class ProfileTableViewController: UITableViewController {
             }
         }))
         
+        #if !os(tvOS)
         if let token = Credential.default?.token {
             alert.addAction(.init(title: "End a session", style: .destructive) { _ in
                 WebAuthentication.shared?.signOut(token: token) { result in
@@ -166,6 +180,7 @@ class ProfileTableViewController: UITableViewController {
                 }
             })
         }
+        #endif
         
         alert.addAction(.init(title: "Cancel", style: .cancel))
 

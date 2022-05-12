@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="20037" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="oA1-3v-UXn">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="20020"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Okta Web Sign In-->
+        <scene sceneID="NON-4U-CVw">
+            <objects>
+                <viewController id="oA1-3v-UXn" customClass="ViewController" customModule="DeviceAuthSignIn__iOS_" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="Nag-m8-t7U">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Logo" translatesAutoresizingMaskIntoConstraints="NO" id="2Nl-jN-A8d">
+                                <rect key="frame" x="-390" y="44" width="1196" height="100"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="100" id="ZPK-Eg-g7l"/>
+                                </constraints>
+                            </imageView>
+                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" animating="YES" style="large" translatesAutoresizingMaskIntoConstraints="NO" id="LAb-Mc-tGj">
+                                <rect key="frame" x="188.5" y="429.5" width="37" height="37"/>
+                            </activityIndicatorView>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="33" translatesAutoresizingMaskIntoConstraints="NO" id="AKj-nD-cmg">
+                                <rect key="frame" x="20.5" y="194" width="373" height="116"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Visit blah/login and enter the following code:" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6Tn-Kq-RES">
+                                        <rect key="frame" x="56" y="0.0" width="261" height="48"/>
+                                        <accessibility key="accessibilityConfiguration" identifier="url_prompt_label"/>
+                                        <fontDescription key="fontDescription" type="system" weight="medium" pointSize="20"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="1234 ABCD" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" adjustsLetterSpacingToFitWidth="YES" translatesAutoresizingMaskIntoConstraints="NO" id="mJR-PB-xIy">
+                                        <rect key="frame" x="105.5" y="81" width="162" height="35"/>
+                                        <accessibility key="accessibilityConfiguration" identifier="code_label"/>
+                                        <fontDescription key="fontDescription" type="system" weight="heavy" pointSize="29"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                            </stackView>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Uw5-wP-1nI">
+                                <rect key="frame" x="107" y="348" width="200" height="200"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="Uw5-wP-1nI" secondAttribute="height" multiplier="1:1" id="3W3-6Y-fLl"/>
+                                    <constraint firstAttribute="width" constant="200" id="sjU-dI-CZy"/>
+                                </constraints>
+                            </imageView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8dr-G0-THZ">
+                                <rect key="frame" x="113.5" y="831" width="187" height="31"/>
+                                <accessibility key="accessibilityConfiguration" identifier="open_browser_button"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain" title="Open Authentication Link"/>
+                                <connections>
+                                    <action selector="openBrowser:" destination="oA1-3v-UXn" eventType="touchUpInside" id="Vwp-OZ-a3x"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="scU-IK-zcF"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="Uw5-wP-1nI" firstAttribute="centerY" secondItem="Nag-m8-t7U" secondAttribute="centerY" id="3EH-UT-SaW"/>
+                            <constraint firstItem="2Nl-jN-A8d" firstAttribute="top" secondItem="scU-IK-zcF" secondAttribute="top" id="3mz-cv-7vx">
+                                <variation key="heightClass=compact-widthClass=regular" constant="15"/>
+                            </constraint>
+                            <constraint firstItem="8dr-G0-THZ" firstAttribute="bottom" secondItem="scU-IK-zcF" secondAttribute="bottom" id="7Ga-Nx-hlW"/>
+                            <constraint firstItem="scU-IK-zcF" firstAttribute="trailing" secondItem="Uw5-wP-1nI" secondAttribute="trailing" constant="16" id="MsM-b7-RYb"/>
+                            <constraint firstItem="Uw5-wP-1nI" firstAttribute="centerX" secondItem="Nag-m8-t7U" secondAttribute="centerX" id="OJR-Nj-SGu"/>
+                            <constraint firstItem="2Nl-jN-A8d" firstAttribute="centerX" secondItem="scU-IK-zcF" secondAttribute="centerX" constant="1" id="OMD-1d-ljQ"/>
+                            <constraint firstItem="8dr-G0-THZ" firstAttribute="centerX" secondItem="Nag-m8-t7U" secondAttribute="centerX" id="Pe5-Pn-N9r"/>
+                            <constraint firstItem="AKj-nD-cmg" firstAttribute="width" secondItem="scU-IK-zcF" secondAttribute="width" multiplier="0.9" id="Wl4-1Q-IUY"/>
+                            <constraint firstItem="AKj-nD-cmg" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="scU-IK-zcF" secondAttribute="leading" constant="16" id="c5z-Wg-4LA"/>
+                            <constraint firstItem="AKj-nD-cmg" firstAttribute="centerX" secondItem="scU-IK-zcF" secondAttribute="centerX" priority="750" id="d2G-sf-SXj"/>
+                            <constraint firstItem="LAb-Mc-tGj" firstAttribute="centerX" secondItem="Nag-m8-t7U" secondAttribute="centerX" id="gPm-Wj-NPu"/>
+                            <constraint firstItem="LAb-Mc-tGj" firstAttribute="centerY" secondItem="Nag-m8-t7U" secondAttribute="centerY" id="hi1-94-epm"/>
+                            <constraint firstItem="AKj-nD-cmg" firstAttribute="top" secondItem="2Nl-jN-A8d" secondAttribute="bottom" constant="50" id="l7I-ci-tKu"/>
+                            <constraint firstItem="Uw5-wP-1nI" firstAttribute="leading" secondItem="AKj-nD-cmg" secondAttribute="trailing" constant="44.5" id="lVl-C4-SOb"/>
+                        </constraints>
+                        <variation key="default">
+                            <mask key="constraints">
+                                <exclude reference="MsM-b7-RYb"/>
+                                <exclude reference="c5z-Wg-4LA"/>
+                                <exclude reference="OJR-Nj-SGu"/>
+                                <exclude reference="lVl-C4-SOb"/>
+                            </mask>
+                        </variation>
+                        <variation key="widthClass=regular">
+                            <mask key="constraints">
+                                <exclude reference="Wl4-1Q-IUY"/>
+                            </mask>
+                        </variation>
+                        <variation key="heightClass=compact-widthClass=regular">
+                            <mask key="constraints">
+                                <include reference="MsM-b7-RYb"/>
+                                <include reference="c5z-Wg-4LA"/>
+                                <include reference="lVl-C4-SOb"/>
+                            </mask>
+                        </variation>
+                        <variation key="heightClass=regular-widthClass=compact">
+                            <mask key="constraints">
+                                <include reference="OJR-Nj-SGu"/>
+                            </mask>
+                        </variation>
+                    </view>
+                    <navigationItem key="navigationItem" title="Okta Web Sign In" id="tjy-j0-hZu"/>
+                    <connections>
+                        <outlet property="activityIndicator" destination="LAb-Mc-tGj" id="NGI-eA-5d2"/>
+                        <outlet property="codeImageView" destination="Uw5-wP-1nI" id="7eI-WK-uBn"/>
+                        <outlet property="codeLabel" destination="mJR-PB-xIy" id="FqJ-u1-rIX"/>
+                        <outlet property="codeStackView" destination="AKj-nD-cmg" id="rhz-n7-3tr"/>
+                        <outlet property="openAuthenticationButton" destination="8dr-G0-THZ" id="OTN-Ya-7By"/>
+                        <outlet property="urlPromptLabel" destination="6Tn-Kq-RES" id="7LM-AM-lYE"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Cuh-LB-yv5" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-886.95652173913049" y="133.92857142857142"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="Logo" width="148.5" height="50"/>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+    </resources>
+</document>
