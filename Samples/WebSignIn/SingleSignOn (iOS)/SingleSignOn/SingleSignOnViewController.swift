@@ -26,15 +26,24 @@ final class SingleSignOnViewController: UIViewController {
         try? Keychain.get(.idToken)
     }
     
+    lazy var domain: String = {
+         ProcessInfo.processInfo.environment["E2E_DOMAIN"] ?? "<#domain#>"
+     }()
+
+     lazy var clientId: String = {
+         ProcessInfo.processInfo.environment["E2E_CLIENT_ID"] ?? "<#client_id#>"
+     }()
+    
     private lazy var flow: TokenExchangeFlow? = {
-        guard let issuerUrl = URL(string: "https://<#domain#>") else {
+        guard !domain.isEmpty,
+              let issuerUrl = URL(string: "https://\(domain)") else {
             return nil
         }
         
-        TokenExchangeFlow(issuer: issuerUrl,
-                          clientId: "<#client_id#>",
-                          scopes: "openid profile offline_access",
-                          audience: .default)
+        return TokenExchangeFlow(issuer: issuerUrl,
+                                 clientId: clientId,
+                                 scopes: "openid profile offline_access",
+                                 audience: .default)
     }()
     
     override func viewDidLoad() {
@@ -93,7 +102,7 @@ final class SingleSignOnViewController: UIViewController {
                     self.present(alert, animated: true)
                     
                 case .success(let token):
-                    Credential.default = Credential.for(token: token)
+                    Credential.default = try? Credential.store(token)
                 }
             }
         }

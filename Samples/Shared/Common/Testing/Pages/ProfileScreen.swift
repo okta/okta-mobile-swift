@@ -14,7 +14,7 @@ import Foundation
 import XCTest
 
 class ProfileScreen: Screen {
-    let app = XCUIApplication()
+    let app: XCUIApplication
     let testCase: XCTestCase
 
     private lazy var refreshButton = app.buttons["Refresh"]
@@ -23,8 +23,9 @@ class ProfileScreen: Screen {
     private lazy var revokeButton = app.sheets.buttons["Revoke tokens"]
     private lazy var endSessionButton = app.sheets.buttons["End a session"]
 
-    init(_ testCase: XCTestCase) {
+    init(_ testCase: XCTestCase, app: XCUIApplication = XCUIApplication()) {
         self.testCase = testCase
+        self.app = app
     }
     
     func wait(timeout: TimeInterval = 3) {
