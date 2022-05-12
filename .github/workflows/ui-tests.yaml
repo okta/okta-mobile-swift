@@ -95,4 +95,4 @@ jobs:
             -clonedSourcePackagesDirPath Build/ClonedSources \
             -workspace OktaMobileSDK.xcworkspace \
             -scheme "UserPasswordSignIn (macOS)" \
-            test
+            build test
