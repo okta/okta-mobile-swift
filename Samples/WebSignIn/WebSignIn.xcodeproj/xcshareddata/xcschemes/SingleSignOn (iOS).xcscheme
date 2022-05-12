@@ -26,7 +26,43 @@
       buildConfiguration = "Debug"
       selectedDebuggerIdentifier = "Xcode.DebuggerFoundation.Debugger.LLDB"
       selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
-      shouldUseLaunchSchemeArgsEnv = "YES">
+      shouldUseLaunchSchemeArgsEnv = "NO">
+      <MacroExpansion>
+         <BuildableReference
+            BuildableIdentifier = "primary"
+            BlueprintIdentifier = "96E98B29282C777400CE251E"
+            BuildableName = "SingleSignOnUITests (iOS).xctest"
+            BlueprintName = "SingleSignOnUITests (iOS)"
+            ReferencedContainer = "container:WebSignIn.xcodeproj">
+         </BuildableReference>
+      </MacroExpansion>
+      <EnvironmentVariables>
+         <EnvironmentVariable
+            key = "E2E_USERNAME"
+            value = "$(E2E_USERNAME)"
+            isEnabled = "YES">
+         </EnvironmentVariable>
+         <EnvironmentVariable
+            key = "E2E_PASSWORD"
+            value = "$(E2E_PASSWORD)"
+            isEnabled = "YES">
+         </EnvironmentVariable>
+         <EnvironmentVariable
+            key = "E2E_DOMAIN"
+            value = "$(E2E_DOMAIN)"
+            isEnabled = "YES">
+         </EnvironmentVariable>
+         <EnvironmentVariable
+            key = "E2E_CLIENT_ID"
+            value = "$(E2E_CLIENT_ID)"
+            isEnabled = "YES">
+         </EnvironmentVariable>
+         <EnvironmentVariable
+            key = "SAMPLE_CODE_DISAMBIGUATOR"
+            value = "$(SAMPLE_CODE_DISAMBIGUATOR)"
+            isEnabled = "YES">
+         </EnvironmentVariable>
+      </EnvironmentVariables>
       <Testables>
          <TestableReference
             skipped = "NO">
@@ -42,7 +78,7 @@
             skipped = "NO">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "92DF17782791785400473E7E"
+               BlueprintIdentifier = "96E98B29282C777400CE251E"
                BuildableName = "SingleSignOnUITests (iOS).xctest"
                BlueprintName = "SingleSignOnUITests (iOS)"
                ReferencedContainer = "container:WebSignIn.xcodeproj">

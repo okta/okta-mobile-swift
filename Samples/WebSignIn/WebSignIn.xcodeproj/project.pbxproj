@@ -52,6 +52,12 @@
 		96E98A952825952600CE251E /* XCTest+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96E98A942825952600CE251E /* XCTest+Extensions.swift */; };
 		96E98A9728259D4100CE251E /* ProfileScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96E98A9628259D4100CE251E /* ProfileScreen.swift */; };
 		96E98AA52827031500CE251E /* Screen+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96E98AA42827031500CE251E /* Screen+Extensions.swift */; };
+		96E98B2D282C777400CE251E /* SingleSignOnTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96E98B2C282C777400CE251E /* SingleSignOnTests.swift */; };
+		96E98B35282C77B900CE251E /* ProfileScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96E98A9628259D4100CE251E /* ProfileScreen.swift */; };
+		96E98B36282C77B900CE251E /* Screen+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96E98AA42827031500CE251E /* Screen+Extensions.swift */; };
+		96E98B37282C77B900CE251E /* Screen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96E98A8F282593BA00CE251E /* Screen.swift */; };
+		96E98B38282C77B900CE251E /* XCTest+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96E98A942825952600CE251E /* XCTest+Extensions.swift */; };
+		96E98B3B282C940D00CE251E /* SignInScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96E98B3A282C93FC00CE251E /* SignInScreen.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -61,6 +67,13 @@
 			proxyType = 1;
 			remoteGlobalIDString = 9653DCB9274C3008003C6E20;
 			remoteInfo = "WebSignIn (iOS)";
+		};
+		96E98B30282C777400CE251E /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 9653DCB2274C3008003C6E20 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 92DF17592791785200473E7E;
+			remoteInfo = "SingleSignOn (iOS)";
 		};
 /* End PBXContainerItemProxy section */
 
@@ -82,9 +95,6 @@
 		92DF17652791785400473E7E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		92DF17682791785400473E7E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		92DF176A2791785400473E7E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		92DF17732791785400473E7E /* SingleSignOnTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SingleSignOnTests.swift; sourceTree = "<group>"; };
-		92DF177D2791785400473E7E /* SingleSignOnUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SingleSignOnUITests.swift; sourceTree = "<group>"; };
-		92DF177F2791785400473E7E /* SingleSignOnUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SingleSignOnUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		92DF178A279178AD00473E7E /* SingleSignOnViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SingleSignOnViewController.swift; sourceTree = "<group>"; };
 		92DF178C279178C000473E7E /* SingleSignOn.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = SingleSignOn.entitlements; sourceTree = "<group>"; };
 		92DF178D279178D300473E7E /* WebSignIn.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = WebSignIn.entitlements; sourceTree = "<group>"; };
@@ -113,6 +123,9 @@
 		96E98A9628259D4100CE251E /* ProfileScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileScreen.swift; sourceTree = "<group>"; };
 		96E98AA42827031500CE251E /* Screen+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Screen+Extensions.swift"; sourceTree = "<group>"; };
 		96E98AA628288DB800CE251E /* TestConfiguration.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; name = TestConfiguration.xcconfig; path = ../Shared/TestConfiguration.xcconfig; sourceTree = "<group>"; };
+		96E98B2A282C777400CE251E /* SingleSignOnUITests (iOS).xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "SingleSignOnUITests (iOS).xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		96E98B2C282C777400CE251E /* SingleSignOnTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SingleSignOnTests.swift; sourceTree = "<group>"; };
+		96E98B3A282C93FC00CE251E /* SignInScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInScreen.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -153,6 +166,13 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		96E98B27282C777400CE251E /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
@@ -174,8 +194,7 @@
 			isa = PBXGroup;
 			children = (
 				92DF175B2791785200473E7E /* SingleSignOn */,
-				92DF17722791785400473E7E /* SingleSignOnTests */,
-				92DF177C2791785400473E7E /* SingleSignOnUITests */,
+				96E98B2B282C777400CE251E /* SingleSignOnUITests (iOS) */,
 			);
 			path = "SingleSignOn (iOS)";
 			sourceTree = "<group>";
@@ -231,23 +250,6 @@
 			path = SingleSignOn;
 			sourceTree = "<group>";
 		};
-		92DF17722791785400473E7E /* SingleSignOnTests */ = {
-			isa = PBXGroup;
-			children = (
-				92DF17732791785400473E7E /* SingleSignOnTests.swift */,
-			);
-			path = SingleSignOnTests;
-			sourceTree = "<group>";
-		};
-		92DF177C2791785400473E7E /* SingleSignOnUITests */ = {
-			isa = PBXGroup;
-			children = (
-				92DF177D2791785400473E7E /* SingleSignOnUITests.swift */,
-				92DF177F2791785400473E7E /* SingleSignOnUITestsLaunchTests.swift */,
-			);
-			path = SingleSignOnUITests;
-			sourceTree = "<group>";
-		};
 		92DF17982791C5C700473E7E /* Common */ = {
 			isa = PBXGroup;
 			children = (
@@ -299,6 +301,7 @@
 				92DF175A2791785200473E7E /* SingleSignOn (iOS).app */,
 				92088F8A27A9936D00A4DC1B /* WebSignIn (macOS).app */,
 				9698F1EF28259133002D50C2 /* WebSignIn (iOS) UITests.xctest */,
+				96E98B2A282C777400CE251E /* SingleSignOnUITests (iOS).xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -367,6 +370,23 @@
 			isa = PBXGroup;
 			children = (
 				96E98A9628259D4100CE251E /* ProfileScreen.swift */,
+			);
+			path = Pages;
+			sourceTree = "<group>";
+		};
+		96E98B2B282C777400CE251E /* SingleSignOnUITests (iOS) */ = {
+			isa = PBXGroup;
+			children = (
+				96E98B39282C91F300CE251E /* Pages */,
+				96E98B2C282C777400CE251E /* SingleSignOnTests.swift */,
+			);
+			path = "SingleSignOnUITests (iOS)";
+			sourceTree = "<group>";
+		};
+		96E98B39282C91F300CE251E /* Pages */ = {
+			isa = PBXGroup;
+			children = (
+				96E98B3A282C93FC00CE251E /* SignInScreen.swift */,
 			);
 			path = Pages;
 			sourceTree = "<group>";
@@ -458,6 +478,24 @@
 			productReference = 9698F1EF28259133002D50C2 /* WebSignIn (iOS) UITests.xctest */;
 			productType = "com.apple.product-type.bundle.ui-testing";
 		};
+		96E98B29282C777400CE251E /* SingleSignOnUITests (iOS) */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 96E98B34282C777400CE251E /* Build configuration list for PBXNativeTarget "SingleSignOnUITests (iOS)" */;
+			buildPhases = (
+				96E98B26282C777400CE251E /* Sources */,
+				96E98B27282C777400CE251E /* Frameworks */,
+				96E98B28282C777400CE251E /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				96E98B31282C777400CE251E /* PBXTargetDependency */,
+			);
+			name = "SingleSignOnUITests (iOS)";
+			productName = "SingleSignOnUITests (iOS)";
+			productReference = 96E98B2A282C777400CE251E /* SingleSignOnUITests (iOS).xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -481,6 +519,10 @@
 						CreatedOnToolsVersion = 13.3;
 						TestTargetID = 9653DCB9274C3008003C6E20;
 					};
+					96E98B29282C777400CE251E = {
+						CreatedOnToolsVersion = 13.3;
+						TestTargetID = 92DF17592791785200473E7E;
+					};
 				};
 			};
 			buildConfigurationList = 9653DCB5274C3008003C6E20 /* Build configuration list for PBXProject "WebSignIn" */;
@@ -499,6 +541,7 @@
 				9653DCB9274C3008003C6E20 /* WebSignIn (iOS) */,
 				9698F1EE28259133002D50C2 /* WebSignIn (iOS) UITests */,
 				92DF17592791785200473E7E /* SingleSignOn (iOS) */,
+				96E98B29282C777400CE251E /* SingleSignOnUITests (iOS) */,
 				92088F8927A9936D00A4DC1B /* WebSignIn (macOS) */,
 			);
 		};
@@ -538,6 +581,13 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 		9698F1ED28259133002D50C2 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		96E98B28282C777400CE251E /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -600,6 +650,19 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		96E98B26282C777400CE251E /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				96E98B2D282C777400CE251E /* SingleSignOnTests.swift in Sources */,
+				96E98B36282C77B900CE251E /* Screen+Extensions.swift in Sources */,
+				96E98B35282C77B900CE251E /* ProfileScreen.swift in Sources */,
+				96E98B37282C77B900CE251E /* Screen.swift in Sources */,
+				96E98B38282C77B900CE251E /* XCTest+Extensions.swift in Sources */,
+				96E98B3B282C940D00CE251E /* SignInScreen.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
@@ -607,6 +670,11 @@
 			isa = PBXTargetDependency;
 			target = 9653DCB9274C3008003C6E20 /* WebSignIn (iOS) */;
 			targetProxy = 9698F1F528259133002D50C2 /* PBXContainerItemProxy */;
+		};
+		96E98B31282C777400CE251E /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 92DF17592791785200473E7E /* SingleSignOn (iOS) */;
+			targetProxy = 96E98B30282C777400CE251E /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -648,6 +716,7 @@
 /* Begin XCBuildConfiguration section */
 		92088F9627A9936E00A4DC1B /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 96011A102784CB7E0008DD11 /* SampleCode.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -674,6 +743,7 @@
 		};
 		92088F9727A9936E00A4DC1B /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 96011A102784CB7E0008DD11 /* SampleCode.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -700,10 +770,11 @@
 		};
 		92DF17812791785400473E7E /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 96E98AA628288DB800CE251E /* TestConfiguration.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				CODE_SIGN_ENTITLEMENTS = SingleSignOn/SingleSignOn.entitlements;
+				CODE_SIGN_ENTITLEMENTS = "SingleSignOn (iOS)/SingleSignOn/SingleSignOn.entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -730,10 +801,11 @@
 		};
 		92DF17822791785400473E7E /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 96E98AA628288DB800CE251E /* TestConfiguration.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				CODE_SIGN_ENTITLEMENTS = SingleSignOn/SingleSignOn.entitlements;
+				CODE_SIGN_ENTITLEMENTS = "SingleSignOn (iOS)/SingleSignOn/SingleSignOn.entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -974,6 +1046,42 @@
 			};
 			name = Release;
 		};
+		96E98B32282C777400CE251E /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 96E98AA628288DB800CE251E /* TestConfiguration.xcconfig */;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.4;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.example.okta-sample.SingleSignOnUITests--iOS-";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = "SingleSignOn (iOS)";
+			};
+			name = Debug;
+		};
+		96E98B33282C777400CE251E /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 96E98AA628288DB800CE251E /* TestConfiguration.xcconfig */;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.4;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.example.okta-sample.SingleSignOnUITests--iOS-";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = "SingleSignOn (iOS)";
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -1018,6 +1126,15 @@
 			buildConfigurations = (
 				9698F1F828259133002D50C2 /* Debug */,
 				9698F1F928259133002D50C2 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		96E98B34282C777400CE251E /* Build configuration list for PBXNativeTarget "SingleSignOnUITests (iOS)" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				96E98B32282C777400CE251E /* Debug */,
+				96E98B33282C777400CE251E /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
