@@ -102,9 +102,14 @@ class CredentialCoordinatorImpl: CredentialCoordinator {
                                   coordinator: CredentialCoordinator) throws -> Credential?
     {
         if let defaultTokenId = tokenStorage.defaultTokenID {
+            var context: TokenAuthenticationContext?
+            #if canImport(LocalAuthentication)
+            context = Credential.Security.standard.context
+            #endif
+            
             let token = try tokenStorage.get(token: defaultTokenId,
                                              prompt: nil,
-                                             authenticationContext: Credential.Security.standard.context)
+                                             authenticationContext: context)
             return credentialDataSource.credential(for: token, coordinator: coordinator)
         }
         return nil

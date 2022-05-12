@@ -272,7 +272,7 @@ Alternatively, if you wish to run tests within Linux, you can utilize Docker fro
 
 ```
 docker run --rm --privileged --interactive --tty \
-    --volume "$(pwd):/src" --workdir "/src" swift:5.5 \
+    --volume "$(pwd):/src" --workdir "/src" swift:5.6.1 \
     swift test
 ```
 

@@ -14,6 +14,8 @@ import XCTest
 
 @testable import TestCommon
 @testable import AuthFoundation
+
+#if canImport(LocalAuthentication)
 import LocalAuthentication
 
 final class CredentialSecurityTests: XCTestCase {
@@ -60,3 +62,4 @@ final class CredentialSecurityTests: XCTestCase {
         XCTAssertThrowsError(try options.createAccessControl(accessibility: .unlocked))
     }
 }
+#endif

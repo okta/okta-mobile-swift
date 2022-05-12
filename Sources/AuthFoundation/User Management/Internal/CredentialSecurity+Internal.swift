@@ -17,6 +17,7 @@ import LocalAuthentication
 #endif
 
 extension Array where Element == Credential.Security {
+    #if os(iOS) || os(macOS) || os(tvOS) || os(watchOS)
     #if canImport(LocalAuthentication)
     var context: LAContext? {
         for case let Credential.Security.context(value) in self {
@@ -78,4 +79,5 @@ extension Array where Element == Credential.Security {
         
         return accessControl
     }
+    #endif
 }
