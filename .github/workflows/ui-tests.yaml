@@ -1,0 +1,102 @@
+name: UI Tests
+
+on:
+  push:
+    branches:
+      - master
+      - dev-*
+      - release-*
+  pull_request:
+    branches:
+      - master
+      - dev-*
+      - release-*
+
+jobs:
+  WebSignIn:
+    name: Web Sign In / Single Sign On (iOS)
+    needs: Build
+    runs-on: macos-latest
+    steps:
+    - uses: actions/checkout@master
+    - uses: ./.github/actions/setup-secrets
+      with:
+        okta_plist: "${{ secrets.TEST_OKTA_PLIST }}"
+        test_configuration: "${{ secrets.TEST_CONFIGURATION }}"
+    - name: Test Web Sign In
+      run: |
+        xcodebuild \
+            -derivedDataPath Build/DerivedData \
+            -clonedSourcePackagesDirPath Build/ClonedSources \
+            -workspace OktaMobileSDK.xcworkspace \
+            -scheme "WebSignIn (iOS)" \
+            -destination 'platform=iOS Simulator,name=iPhone 12,OS=15.4' \
+            test
+    - name: Test Single Sign In
+      run: |
+        xcodebuild \
+            -derivedDataPath Build/DerivedData \
+            -clonedSourcePackagesDirPath Build/ClonedSources \
+            -workspace OktaMobileSDK.xcworkspace \
+            -scheme "SingleSignOn (iOS)" \
+            -destination 'platform=iOS Simulator,name=iPhone 12,OS=15.4' \
+            test
+
+  DeviceAuthSignIniOS:
+    name: Device Auth Sign In (iOS)
+    needs: Build
+    runs-on: macos-latest
+    steps:
+    - uses: actions/checkout@master
+    - uses: ./.github/actions/setup-secrets
+      with:
+        okta_plist: "${{ secrets.TEST_OKTA_PLIST }}"
+        test_configuration: "${{ secrets.TEST_CONFIGURATION }}"
+    - name: Test
+      run: |
+        xcodebuild \
+            -derivedDataPath Build/DerivedData \
+            -clonedSourcePackagesDirPath Build/ClonedSources \
+            -workspace OktaMobileSDK.xcworkspace \
+            -scheme "DeviceAuthSignIn (iOS)" \
+            -destination 'platform=iOS Simulator,name=iPhone 12,OS=15.4' \
+            test
+
+  DeviceAuthSignIntvOS:
+    name: Device Auth Sign In (tvOS)
+    needs: Build
+    runs-on: macos-latest
+    steps:
+    - uses: actions/checkout@master
+    - uses: ./.github/actions/setup-secrets
+      with:
+        okta_plist: "${{ secrets.TEST_OKTA_PLIST }}"
+        test_configuration: "${{ secrets.TEST_CONFIGURATION }}"
+    - name: Test
+      run: |
+        xcodebuild \
+            -derivedDataPath Build/DerivedData \
+            -clonedSourcePackagesDirPath Build/ClonedSources \
+            -workspace OktaMobileSDK.xcworkspace \
+            -scheme "DeviceAuthSignIn (tvOS)" \
+            -destination 'platform=tvOS Simulator,name=Apple TV,OS=15.4' \
+            test
+
+  UserPasswordSignInmacOS:
+    name: User Password Sign In (macOS)
+    needs: Build
+    runs-on: macos-latest
+    steps:
+    - uses: actions/checkout@master
+    - uses: ./.github/actions/setup-secrets
+      with:
+        okta_plist: "${{ secrets.TEST_OKTA_PLIST }}"
+        test_configuration: "${{ secrets.TEST_CONFIGURATION }}"
+    - name: Test
+      run: |
+        xcodebuild \
+            -derivedDataPath Build/DerivedData \
+            -clonedSourcePackagesDirPath Build/ClonedSources \
+            -workspace OktaMobileSDK.xcworkspace \
+            -scheme "UserPasswordSignIn (macOS)" \
+            test
