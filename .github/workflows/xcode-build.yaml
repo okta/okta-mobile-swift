@@ -58,7 +58,7 @@ jobs:
             -sdk ${{ matrix.Platform }} \
             build
     - name: Build WebAuthenticationUI
-      if: ${{ matrix.Platform }} != "appletvsimulator"
+      if: ${{ matrix.Platform != "appletvsimulator" }}
       run: |
         xcodebuild \
             -derivedDataPath DerivedData \
