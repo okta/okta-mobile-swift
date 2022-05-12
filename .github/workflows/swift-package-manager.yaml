@@ -1,4 +1,4 @@
-name: Build and Unit Test
+name: Swift Package Manager
 
 on:
   push:
@@ -20,7 +20,6 @@ jobs:
       matrix:
         OS:
           - macos-11
-          - macos-12
     steps:
     - name: Get swift version
       run: swift --version

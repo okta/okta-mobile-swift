@@ -1,0 +1,61 @@
+name: Xcode Build and Test
+
+on:
+  push:
+    branches:
+      - master
+      - dev-*
+      - release-*
+  pull_request:
+    branches:
+      - master
+      - dev-*
+      - release-*
+
+jobs:
+  Build:
+    name: Build SDK on ${{ matrix.Platform }}
+    runs-on: macos-12
+    strategy:
+      matrix:
+        Platform:
+          - iphonesimulator
+    steps:
+    - uses: actions/checkout@master
+    - name: Build AuthFoundation
+      run: |
+        xcodebuild \
+            -workspace OktaMobileSDK.xcworkspace \
+            -scheme AuthFoundation \
+            -sdk ${{ matrix.Platform }} \
+            build
+    - name: Build OktaOAuth2
+      run: |
+        xcodebuild \
+            -workspace OktaMobileSDK.xcworkspace \
+            -scheme OktaOAuth2 \
+            -sdk ${{ matrix.Platform }} \
+            build
+    - name: Build WebAuthenticationUI
+      run: |
+        xcodebuild \
+            -workspace OktaMobileSDK.xcworkspace \
+            -scheme WebAuthenticationUI \
+            -sdk ${{ matrix.Platform }} \
+            build
+
+  WebSignIn:
+    name: Web Sign In 
+    runs-on: macos-12
+    steps:
+    - uses: actions/checkout@master
+    - uses: setup-secrets
+    - name: Test
+      run: |
+        xcodebuild \
+            -workspace OktaMobileSDK.xcworkspace \
+            -scheme "WebSignIn (iOS)" \
+            -sdk iphonesimulator \
+            -destination 'platform=iOS Simulator,name=iPhone 12,OS=15.4' \
+            test
+
