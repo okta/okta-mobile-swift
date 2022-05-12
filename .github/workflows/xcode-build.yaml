@@ -22,6 +22,12 @@ jobs:
           - iphonesimulator
     steps:
     - uses: actions/checkout@master
+    - name: Resolve package dependencies
+      run: |
+        xcodebuild \
+            -derivedDataPath Build \
+            -workspace OktaMobileSDK.xcworkspace \
+            -resolvePackageDependencies
     - name: Build AuthFoundation
       run: |
         xcodebuild \
