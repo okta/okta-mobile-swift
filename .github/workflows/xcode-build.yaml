@@ -96,7 +96,7 @@ jobs:
         path: Build
         key: ${{ github.sha }}-iphonesimulator
     - name: Look up stuff
-      run: ls -lah
+      run: find Build -type d
     - name: Test Web Sign In
       run: |
         xcodebuild \
