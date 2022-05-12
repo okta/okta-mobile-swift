@@ -10,8 +10,8 @@ runs:
   using: composite
   steps:
     - name: Write Okta.plist
-      run: echo "::add-mask::${{ inputs.okta_plist }}" > Samples/WebSignIn/Okta.plist
+      run: echo "${{ inputs.okta_plist }}" > Samples/WebSignIn/Okta.plist
       shell: bash
     - name: Write TestConfiguration.xcconfig
-      run: echo "::add-mask::${{ inputs.test_configuration }}" > Samples/Shared/TestConfiguration.xcconfig
+      run: echo "${{ inputs.test_configuration }}" > Samples/Shared/TestConfiguration.xcconfig
       shell: bash
