@@ -1,4 +1,4 @@
-name: OktaMobileSDK
+name: Build and Unit Test
 
 on:
   push:
@@ -13,13 +13,14 @@ on:
       - release-*
 
 jobs:
-  UnitTest:
+  Build:
     name: Unit Tests on ${{ matrix.os }}
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
         os:
           - macos-latest
+          - ubuntu-latest
     steps:
     - name: Get swift version
       run: swift --version
