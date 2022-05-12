@@ -14,7 +14,7 @@ on:
 
 jobs:
   Build:
-    name: Build SDK on ${{ matrix.Platform }}
+    name: Build SDK (${{ matrix.Platform }})
     runs-on: macos-12
     strategy:
       matrix:
@@ -36,11 +36,13 @@ jobs:
             -workspace OktaMobileSDK.xcworkspace \
             -scheme OktaOAuth2 \
             -resolvePackageDependencies
-        xcodebuild \
-            -derivedDataPath DerivedData \
-            -workspace OktaMobileSDK.xcworkspace \
-            -scheme WebAuthenticationUI \
-            -resolvePackageDependencies
+        if [[ "${{ matrix.Platform }}" != "appletvsimulator" ]]; then
+          xcodebuild \
+              -derivedDataPath DerivedData \
+              -workspace OktaMobileSDK.xcworkspace \
+              -scheme WebAuthenticationUI \
+              -resolvePackageDependencies
+        fi
     - name: Build AuthFoundation
       run: |
         xcodebuild \
@@ -73,7 +75,7 @@ jobs:
         key: ${{ github.sha }}-${{ matrix.Platform }}
 
   WebSignIn:
-    name: Web Sign In / Single Sign On
+    name: Web Sign In / Single Sign On (iOS)
     needs: Build
     runs-on: macos-12
     steps:
@@ -106,7 +108,7 @@ jobs:
             test
 
   DeviceAuthSignIniOS:
-    name: Device Auth Sign In iOS
+    name: Device Auth Sign In (iOS)
     needs: Build
     runs-on: macos-12
     steps:
@@ -131,7 +133,7 @@ jobs:
             test
 
   DeviceAuthSignIntvOS:
-    name: Device Auth Sign In tvOS
+    name: Device Auth Sign In (tvOS)
     needs: Build
     runs-on: macos-12
     steps:
@@ -156,7 +158,7 @@ jobs:
             test
 
   UserPasswordSignInmacOS:
-    name: Device Auth Sign In tvOS
+    name: User Password Sign In (macOS)
     needs: Build
     runs-on: macos-12
     steps:
