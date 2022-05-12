@@ -25,24 +25,24 @@ jobs:
     - name: Resolve package dependencies
       run: |
         xcodebuild \
-            -derivedDataPath Build \
+            -derivedDataPath DerivedData \
             -workspace OktaMobileSDK.xcworkspace \
             -scheme AuthFoundation \
             -resolvePackageDependencies
         xcodebuild \
-            -derivedDataPath Build \
+            -derivedDataPath DerivedData \
             -workspace OktaMobileSDK.xcworkspace \
             -scheme OktaOAuth2 \
             -resolvePackageDependencies
         xcodebuild \
-            -derivedDataPath Build \
+            -derivedDataPath DerivedData \
             -workspace OktaMobileSDK.xcworkspace \
             -scheme WebAuthenticationUI \
             -resolvePackageDependencies
     - name: Build AuthFoundation
       run: |
         xcodebuild \
-            -derivedDataPath Build \
+            -derivedDataPath DerivedData \
             -workspace OktaMobileSDK.xcworkspace \
             -scheme AuthFoundation \
             -sdk ${{ matrix.Platform }} \
@@ -50,7 +50,7 @@ jobs:
     - name: Build OktaOAuth2
       run: |
         xcodebuild \
-            -derivedDataPath Build \
+            -derivedDataPath DerivedData \
             -workspace OktaMobileSDK.xcworkspace \
             -scheme OktaOAuth2 \
             -sdk ${{ matrix.Platform }} \
@@ -58,7 +58,7 @@ jobs:
     - name: Build WebAuthenticationUI
       run: |
         xcodebuild \
-            -derivedDataPath Build \
+            -derivedDataPath DerivedData \
             -workspace OktaMobileSDK.xcworkspace \
             -scheme WebAuthenticationUI \
             -sdk ${{ matrix.Platform }} \
@@ -67,7 +67,7 @@ jobs:
       uses: actions/cache@v2
       id: restore-build
       with:
-        path: Build
+        path: DerivedData
         key: ${{ github.sha }}-${{ matrix.Platform }}
 
   WebSignIn:
@@ -84,15 +84,49 @@ jobs:
       uses: actions/cache@v2
       id: restore-build
       with:
-        path: Build
+        path: DerivedData
         key: ${{ github.sha }}-iphonesimulator
-    - name: Test
+    - name: Test Web Sign In
       run: |
         xcodebuild \
-            -derivedDataPath Build \
+            -derivedDataPath DerivedData \
             -workspace OktaMobileSDK.xcworkspace \
             -scheme "WebSignIn (iOS)" \
             -sdk iphonesimulator \
             -destination 'platform=iOS Simulator,name=iPhone 12,OS=15.4' \
             test
+    - name: Test Single Sign In
+      run: |
+        xcodebuild \
+            -derivedDataPath DerivedData \
+            -workspace OktaMobileSDK.xcworkspace \
+            -scheme "SingleSignOn (iOS)" \
+            -sdk iphonesimulator \
+            -destination 'platform=iOS Simulator,name=iPhone 12,OS=15.4' \
+            test
 
+  DeviceAuthSignIniOS:
+    name: Device Auth Sign In iOS
+    needs: Build
+    runs-on: macos-12
+    steps:
+    - uses: actions/checkout@master
+    - uses: ./.github/actions/setup-secrets
+      with:
+        okta_plist: "${{ secrets.TEST_OKTA_PLIST }}"
+        test_configuration: "${{ secrets.TEST_CONFIGURATION }}"
+    - name: Restore build directory
+      uses: actions/cache@v2
+      id: restore-build
+      with:
+        path: DerivedData
+        key: ${{ github.sha }}-iphonesimulator
+    - name: Test
+      run: |
+        xcodebuild \
+            -derivedDataPath DerivedData \
+            -workspace OktaMobileSDK.xcworkspace \
+            -scheme "DeviceAuthSignIn (iOS)" \
+            -sdk iphonesimulator \
+            -destination 'platform=iOS Simulator,name=iPhone 12,OS=15.4' \
+            test
