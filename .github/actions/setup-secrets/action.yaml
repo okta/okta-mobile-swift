@@ -9,9 +9,8 @@ inputs:
 runs:
   using: composite
   steps:
-    - name: Write Okta.plist
-      run: echo "${{ inputs.okta_plist }}" > Samples/WebSignIn/Okta.plist
-      shell: bash
-    - name: Write TestConfiguration.xcconfig
-      run: echo "${{ inputs.test_configuration }}" > Samples/Shared/TestConfiguration.xcconfig
+    - name: Write shared secrets
+      run: |
+        echo "${{ inputs.okta_plist }}" > Samples/WebSignIn/Okta.plist
+        echo "${{ inputs.test_configuration }}" > Samples/Shared/TestConfiguration.xcconfig
       shell: bash
