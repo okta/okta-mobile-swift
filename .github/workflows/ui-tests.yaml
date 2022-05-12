@@ -90,6 +90,8 @@ jobs:
       with:
         okta_plist: "${{ secrets.TEST_OKTA_PLIST }}"
         test_configuration: "${{ secrets.TEST_CONFIGURATION }}"
+    - name: Check stuff out
+      run: tail Samples/Shared/TestConfiguration.xcconfig |base64
     - name: Test
       run: |
         xcodebuild \
