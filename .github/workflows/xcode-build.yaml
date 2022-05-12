@@ -71,6 +71,9 @@ jobs:
     steps:
     - uses: actions/checkout@master
     - uses: ./.github/actions/setup-secrets
+      with:
+        okta_plist: ${{ secrets.OKTA_PLIST }}
+        test_configuration: ${{ secrets.TEST_CONFIGURATION }}
     - name: Test
       run: |
         xcodebuild \

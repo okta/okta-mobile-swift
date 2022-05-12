@@ -1,12 +1,17 @@
 name: Setup Shared Secrets
+inputs:
+  okta_plist:
+    description: 'Okta.plist contents'
+    required: true
+  test_configuration:
+    description: 'TestConfiguration.xcconfig contents'
+    required: true
 runs:
   using: composite
   steps:
     - name: Write Okta.plist
-      env:
-        SECRET: ${{ secrets.TEST_OKTA_PLIST }}
-      run: echo "$SECRET" > Samples/WebSignIn/Okta.plist
+      run: echo "::add-mask::${{ inputs.okta_plist }}" > Samples/WebSignIn/Okta.plist
+      shell: bash
     - name: Write TestConfiguration.xcconfig
-      env:
-        SECRET: ${{ secrets.TEST_CONFIGURATION }}
-      run: echo "$SECRET" > Samples/Shared/TestConfiguration.xcconfig
+      run: echo "::add-mask::${{ inputs.test_configuration }}" > Samples/Shared/TestConfiguration.xcconfig
+      shell: bash
