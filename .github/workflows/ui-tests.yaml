@@ -161,7 +161,7 @@ jobs:
       id: restore-build
       with:
         path: Build
-        key: ${{ github.sha }}-iphonesimulator
+        key: ${{ github.sha }}-appletvsimulator
     - name: Test
       run: |
         xcodebuild \
@@ -187,7 +187,7 @@ jobs:
       id: restore-build
       with:
         path: Build
-        key: ${{ github.sha }}-iphonesimulator
+        key: ${{ github.sha }}-macosx
     - name: Look at our directory
       run: find . -type d
     - name: Test
