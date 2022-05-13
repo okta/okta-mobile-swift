@@ -13,6 +13,72 @@ on:
       - release-*
 
 jobs:
+  Build:
+    name: Build SDK (${{ matrix.Platform }})
+    runs-on: macos-latest
+    strategy:
+      matrix:
+        Platform:
+          - iphonesimulator
+          - appletvsimulator
+          - macosx
+    steps:
+    - uses: actions/checkout@master
+    - name: Resolve package dependencies
+      run: |
+        xcodebuild \
+            -derivedDataPath Build/DerivedData \
+            -clonedSourcePackagesDirPath Build/ClonedSources \
+            -workspace OktaMobileSDK.xcworkspace \
+            -scheme AuthFoundation \
+            -resolvePackageDependencies
+        xcodebuild \
+            -derivedDataPath Build/DerivedData \
+            -clonedSourcePackagesDirPath Build/ClonedSources \
+            -workspace OktaMobileSDK.xcworkspace \
+            -scheme OktaOAuth2 \
+            -resolvePackageDependencies
+        xcodebuild \
+            -derivedDataPath Build/DerivedData \
+            -clonedSourcePackagesDirPath Build/ClonedSources \
+            -workspace OktaMobileSDK.xcworkspace \
+            -scheme WebAuthenticationUI \
+            -resolvePackageDependencies
+    - name: Build AuthFoundation
+      run: |
+        xcodebuild \
+            -derivedDataPath Build/DerivedData \
+            -clonedSourcePackagesDirPath Build/ClonedSources \
+            -workspace OktaMobileSDK.xcworkspace \
+            -scheme AuthFoundation \
+            -sdk ${{ matrix.Platform }} \
+            build-for-testing
+    - name: Build OktaOAuth2
+      run: |
+        xcodebuild \
+            -derivedDataPath Build/DerivedData \
+            -clonedSourcePackagesDirPath Build/ClonedSources \
+            -workspace OktaMobileSDK.xcworkspace \
+            -scheme OktaOAuth2 \
+            -sdk ${{ matrix.Platform }} \
+            build-for-testing
+    - name: Build WebAuthenticationUI
+      if: ${{ matrix.Platform != 'appletvsimulator' }}
+      run: |
+        xcodebuild \
+            -derivedDataPath Build/DerivedData \
+            -clonedSourcePackagesDirPath Build/ClonedSources \
+            -workspace OktaMobileSDK.xcworkspace \
+            -scheme WebAuthenticationUI \
+            -sdk ${{ matrix.Platform }} \
+            build-for-testing
+    - name: Cache build directory
+      uses: actions/cache@v2
+      id: restore-build
+      with:
+        path: Build
+        key: ${{ github.sha }}-${{ matrix.Platform }}
+
   WebSignIn:
     name: Web Sign In / Single Sign On (iOS)
     runs-on: macos-12
@@ -22,6 +88,12 @@ jobs:
       with:
         okta_plist: "${{ secrets.TEST_OKTA_PLIST }}"
         test_configuration: "${{ secrets.TEST_CONFIGURATION }}"
+    - name: Restore build directory
+      uses: actions/cache@v2
+      id: restore-build
+      with:
+        path: Build
+        key: ${{ github.sha }}-iphonesimulator
     - name: Test Web Sign In
       run: |
         xcodebuild \
@@ -50,6 +122,12 @@ jobs:
       with:
         okta_plist: "${{ secrets.TEST_OKTA_PLIST }}"
         test_configuration: "${{ secrets.TEST_CONFIGURATION }}"
+    - name: Restore build directory
+      uses: actions/cache@v2
+      id: restore-build
+      with:
+        path: Build
+        key: ${{ github.sha }}-iphonesimulator
     - name: Test
       run: |
         xcodebuild \
@@ -69,6 +147,12 @@ jobs:
       with:
         okta_plist: "${{ secrets.TEST_OKTA_PLIST }}"
         test_configuration: "${{ secrets.TEST_CONFIGURATION }}"
+    - name: Restore build directory
+      uses: actions/cache@v2
+      id: restore-build
+      with:
+        path: Build
+        key: ${{ github.sha }}-iphonesimulator
     - name: Test
       run: |
         xcodebuild \
@@ -88,6 +172,12 @@ jobs:
       with:
         okta_plist: "${{ secrets.TEST_OKTA_PLIST }}"
         test_configuration: "${{ secrets.TEST_CONFIGURATION }}"
+    - name: Restore build directory
+      uses: actions/cache@v2
+      id: restore-build
+      with:
+        path: Build
+        key: ${{ github.sha }}-iphonesimulator
     - name: Test
       run: |
         xcodebuild \
