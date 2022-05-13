@@ -12,10 +12,13 @@ on:
       - dev-*
       - release-*
 
+env:
+  DEVELOPER_DIR: /Applications/Xcode_13.3.app/Contents/Developer
+
 jobs:
   Build:
     name: Build SDK (${{ matrix.Platform }})
-    runs-on: macos-latest
+    runs-on: macos-12
     strategy:
       matrix:
         Platform:
@@ -31,18 +34,21 @@ jobs:
             -clonedSourcePackagesDirPath Build/ClonedSources \
             -workspace OktaMobileSDK.xcworkspace \
             -scheme AuthFoundation \
+            -sdk ${{ matrix.Platform }} \
             -resolvePackageDependencies
         xcodebuild \
             -derivedDataPath Build/DerivedData \
             -clonedSourcePackagesDirPath Build/ClonedSources \
             -workspace OktaMobileSDK.xcworkspace \
             -scheme OktaOAuth2 \
+            -sdk ${{ matrix.Platform }} \
             -resolvePackageDependencies
         xcodebuild \
             -derivedDataPath Build/DerivedData \
             -clonedSourcePackagesDirPath Build/ClonedSources \
             -workspace OktaMobileSDK.xcworkspace \
             -scheme WebAuthenticationUI \
+            -sdk ${{ matrix.Platform }} \
             -resolvePackageDependencies
     - name: Build AuthFoundation
       run: |
