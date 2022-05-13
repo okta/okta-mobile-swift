@@ -188,6 +188,8 @@ jobs:
       with:
         path: Build
         key: ${{ github.sha }}-iphonesimulator
+    - name: Look at our directory
+      run: find . -type d
     - name: Test
       run: |
         xcodebuild \
