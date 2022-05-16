@@ -56,3 +56,14 @@
 "invalid_property_list_description" = "The configuration file named \"%@\" was invalid.";
 "cannot_parse_property_list_description" = "Could not parse the configuration file named \"%@\".";
 "missing_configuration_values_description" = "Web authentication is not configured properly.";
+
+/* TokenError */
+"token_context_missing" = "Context information related to this token is missing.";
+"token_not_found" = "The requested token was not found (ID: \"%@\").";
+"cannot_replace_token" = "Could not replace the token with its updated value.";
+"duplicate_token_added" = "Could not add a new token, since a duplicate was found.";
+
+/* CredentialError */
+"credential_metadata_consistency" = "Metadata associated with a credential has become inconsistent with its value in storage.";
+"credential_incorrect_configuration" = "The credential's token does not match the client configuration supplied.";
+"credential_missing_coordinator" = "The storage coordinator for this credential is missing. This credential may have already been removed.";
