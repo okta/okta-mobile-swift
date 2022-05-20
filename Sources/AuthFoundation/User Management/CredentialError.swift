@@ -23,3 +23,26 @@ public enum CredentialError: Error {
     /// Thrown when the metadata associated with a token has become inconsistent.
     case metadataConsistency
 }
+
+extension CredentialError: LocalizedError {
+    public var errorDescription: String? {
+        switch self {
+        case .missingCoordinator:
+            return NSLocalizedString("credential_missing_coordinator",
+                                     bundle: .module,
+                                     comment: "")
+            
+        case .incorrectClientConfiguration:
+            return  NSLocalizedString("credential_incorrect_configuration",
+                                      bundle: .module,
+                                      comment: "")
+            
+        case .metadataConsistency:
+            return NSLocalizedString("credential_metadata_consistency",
+                                     bundle: .module,
+                                     comment: "")
+        }
+    }
+}
+
+

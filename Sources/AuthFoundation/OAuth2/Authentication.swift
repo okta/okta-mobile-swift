@@ -46,6 +46,5 @@ public protocol AuthenticationFlow: AnyObject, UsesDelegateCollection {
 
 /// Errors that may be generated during the process of authenticating with a variety of authentication flows.
 public enum AuthenticationError: Error {
-    case cannotGeneratePKCE
     case flowNotReady
 }

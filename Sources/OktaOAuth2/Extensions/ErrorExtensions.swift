@@ -15,11 +15,6 @@ import Foundation
 extension AuthenticationError: LocalizedError {
     public var errorDescription: String? {
         switch self {
-        case .cannotGeneratePKCE:
-            return NSLocalizedString("cannot_generate_pkce_description",
-                                     bundle: .module,
-                                     comment: "Invalid URL")
-
         case .flowNotReady:
             return NSLocalizedString("flow_not_ready_description",
                                      bundle: .module,

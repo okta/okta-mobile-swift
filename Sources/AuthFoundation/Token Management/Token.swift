@@ -12,15 +12,6 @@
 
 import Foundation
 
-public enum TokenError: Error {
-    case tokenTypeMissing(_: Token.RevokeType)
-    case refreshTokenMissing
-    case contextMissing
-    case tokenNotFound(id: String)
-    case cannotReplaceToken
-    case duplicateTokenAdded
-}
-
 /// Token information representing a user's access to a resource server, including access token, refresh token, and other related information.
 public class Token: Codable, Equatable, Hashable, Expires, Identifiable {
     public static var idTokenValidator: IDTokenValidator = DefaultIDTokenValidator()

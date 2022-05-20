@@ -12,12 +12,6 @@
 
 import Foundation
 
-public enum SDKVersionMigrationError: Error {
-    case cannotCreateMigrator
-    case configurationNotFound
-    case configurationInvalid
-}
-
 extension SDKVersion {
     /// Determines whether or not some user data needs to be migrated.
     ///
