@@ -14,6 +14,7 @@ import XCTest
 @testable import TestCommon
 @testable import AuthFoundation
 
+#if os(iOS) || os(macOS) || os(tvOS) || os(watchOS)
 final class OIDCLegacyMigratorTests: XCTestCase {
     typealias LegacyOIDC = SDKVersion.Migration.LegacyOIDC
     
@@ -144,3 +145,4 @@ final class OIDCLegacyMigratorTests: XCTestCase {
         XCTAssertEqual(credential.id, "0oathisistheaccount0")
     }
 }
+#endif

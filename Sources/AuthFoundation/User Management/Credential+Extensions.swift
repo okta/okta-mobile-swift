@@ -12,6 +12,10 @@
 
 import Foundation
 
+#if os(Linux)
+import FoundationNetworking
+#endif
+
 extension Notification.Name {
     /// Notification broadcast when the ``Credential/default`` value changes.
     public static let defaultCredentialChanged = Notification.Name("com.okta.defaultCredentialChanged")

@@ -1,0 +1,16 @@
+name: Setup Shared Secrets
+inputs:
+  okta_plist:
+    description: 'Okta.plist contents'
+    required: true
+  test_configuration:
+    description: 'TestConfiguration.xcconfig contents'
+    required: true
+runs:
+  using: composite
+  steps:
+    - name: Write shared secrets
+      shell: bash
+      run: |
+        echo "${{ inputs.okta_plist }}" > Samples/WebSignIn/Okta.plist
+        echo "${{ inputs.test_configuration }}" > Samples/Shared/TestConfiguration.xcconfig

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Scheme
-   LastUpgradeVersion = "1320"
+   LastUpgradeVersion = "1330"
    version = "1.3">
    <BuildAction
       parallelizeBuildables = "YES"
@@ -14,10 +14,10 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "96D66FB927EB870500AE89AD"
-               BuildableName = "UserPasswordSignIn"
-               BlueprintName = "UserPasswordSignIn (macOS)"
-               ReferencedContainer = "container:UserPasswordSignIn.xcodeproj">
+               BlueprintIdentifier = "96AE3CC5281B2E000048E66B"
+               BuildableName = "OIDCMigration.app"
+               BlueprintName = "OIDCMigration"
+               ReferencedContainer = "container:OIDCMigration.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -30,10 +30,10 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "96E98AB0282979A500CE251E"
-            BuildableName = "UserPasswordSignIn Tests.xctest"
-            BlueprintName = "UserPasswordSignIn Tests"
-            ReferencedContainer = "container:UserPasswordSignIn.xcodeproj">
+            BlueprintIdentifier = "96AE3CE5281B2E020048E66B"
+            BuildableName = "OIDCMigrationUITests.xctest"
+            BlueprintName = "OIDCMigrationUITests"
+            ReferencedContainer = "container:OIDCMigration.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
       <EnvironmentVariables>
@@ -47,31 +47,16 @@
             value = "$(E2E_PASSWORD)"
             isEnabled = "YES">
          </EnvironmentVariable>
-         <EnvironmentVariable
-            key = "E2E_DOMAIN"
-            value = "$(E2E_DOMAIN)"
-            isEnabled = "YES">
-         </EnvironmentVariable>
-         <EnvironmentVariable
-            key = "E2E_CLIENT_ID"
-            value = "$(E2E_CLIENT_ID)"
-            isEnabled = "YES">
-         </EnvironmentVariable>
-         <EnvironmentVariable
-            key = "E2E_SCOPES"
-            value = "$(E2E_SCOPES)"
-            isEnabled = "YES">
-         </EnvironmentVariable>
       </EnvironmentVariables>
       <Testables>
          <TestableReference
             skipped = "NO">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "96E98AB0282979A500CE251E"
-               BuildableName = "UserPasswordSignIn Tests.xctest"
-               BlueprintName = "UserPasswordSignIn Tests"
-               ReferencedContainer = "container:UserPasswordSignIn.xcodeproj">
+               BlueprintIdentifier = "96AE3CE5281B2E020048E66B"
+               BuildableName = "OIDCMigrationUITests.xctest"
+               BlueprintName = "OIDCMigrationUITests"
+               ReferencedContainer = "container:OIDCMigration.xcodeproj">
             </BuildableReference>
          </TestableReference>
       </Testables>
@@ -90,10 +75,10 @@
          runnableDebuggingMode = "0">
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "96D66FB927EB870500AE89AD"
-            BuildableName = "UserPasswordSignIn"
-            BlueprintName = "UserPasswordSignIn (macOS)"
-            ReferencedContainer = "container:UserPasswordSignIn.xcodeproj">
+            BlueprintIdentifier = "96AE3CC5281B2E000048E66B"
+            BuildableName = "OIDCMigration.app"
+            BlueprintName = "OIDCMigration"
+            ReferencedContainer = "container:OIDCMigration.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </LaunchAction>
@@ -107,10 +92,10 @@
          runnableDebuggingMode = "0">
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "96D66FB927EB870500AE89AD"
-            BuildableName = "UserPasswordSignIn"
-            BlueprintName = "UserPasswordSignIn (macOS)"
-            ReferencedContainer = "container:UserPasswordSignIn.xcodeproj">
+            BlueprintIdentifier = "96AE3CC5281B2E000048E66B"
+            BuildableName = "OIDCMigration.app"
+            BlueprintName = "OIDCMigration"
+            ReferencedContainer = "container:OIDCMigration.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </ProfileAction>

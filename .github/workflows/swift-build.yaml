@@ -1,4 +1,4 @@
-name: OktaMobileSDK
+name: Swift Package Manager
 
 on:
   push:
@@ -12,14 +12,17 @@ on:
       - dev-*
       - release-*
 
+env:
+  DEVELOPER_DIR: /Applications/Xcode_13.3.app/Contents/Developer
+
 jobs:
-  UnitTest:
-    name: Unit Tests on ${{ matrix.os }}
-    runs-on: ${{ matrix.os }}
+  SwiftBuild:
+    name: Unit Tests on ${{ matrix.OS }}
+    runs-on: ${{ matrix.OS }}
     strategy:
       matrix:
-        os:
-          - macos-latest
+        OS:
+          - macos-12
     steps:
     - name: Get swift version
       run: swift --version
