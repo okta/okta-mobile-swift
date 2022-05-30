@@ -16,8 +16,8 @@ import XCTest
 @testable import AuthFoundation
 import TestCommon
 
-final class DefaultAccessTokenValidatorTests: XCTestCase {
-    var validator: DefaultAccessTokenValidator!
+final class DefaultTokenHashValidatorTests: XCTestCase {
+    var validator: DefaultTokenHashValidator!
 
     let validIdToken = "eyJraWQiOiJGSkEwSEdOdHN1dWRhX1BsNDVKNDJrdlFxY3N1XzBDNEZnN3BiSkxYVEhZIiwiYWxnIjoiUlMyNTYifQ.eyJzdWIiOiIwMHViNDF6N21nek5xcnlNdjY5NiIsIm5hbWUiOiJUZXN0IFVzZXIiLCJlbWFpbCI6InRlc3RAZXhhbXBsZS5jb20iLCJ2ZXIiOjEsImlzcyI6Imh0dHBzOi8vZXhhbXBsZS5va3RhLmNvbS9vYXV0aDIvZGVmYXVsdCIsImF1ZCI6InVuaXRfdGVzdF9jbGllbnRfaWQiLCJpYXQiOjE2NDQzNDcwNjksImV4cCI6MTY0NDM1MDY2OSwianRpIjoiSUQuNTVjeEJ0ZFlsOGw2YXJLSVNQQndkMHlPVC05VUNUYVhhUVRYdDJsYVJMcyIsImFtciI6WyJwd2QiXSwiaWRwIjoiMDBvOGZvdTdzUmFHR3dkbjQ2OTYiLCJzaWQiOiJpZHhXeGtscF80a1N4dUNfblUxcFhELW5BIiwicHJlZmVycmVkX3VzZXJuYW1lIjoidGVzdEBleGFtcGxlLmNvbSIsImF1dGhfdGltZSI6MTY0NDM0NzA2OCwiYXRfaGFzaCI6IktfVVNrUU94SnVRb0M3blNFc1BFYnciLCJkc19oYXNoIjoiREFlTE9GUnFpZnlzYmdzcmJPZ2JvZyJ9.OYNrJXGj0fdMQjuCJSE4aInN3pRqjU6pcd-8-4Oqe5R9I-z6B2-aK_inbwFHwzZl9SLe0mJDdPcTlRpuK1rPb2QwNTPBB0JRGXnu0KkZTE8bv2CgfyKdiH7y0LEjJraboqX2Nddz9kUsEUhZsrt9LSNMWR2nkoE2QuQe8a1mvATeUY9itY-wMJMf6yC2f0FTBQqjCHI7W0SlRsgTsNRUDZsGMhdLwzSjYgB2M6Luc7TmXDbrKHBkEAsEat_8nED2hQWnGnT1i6jrcVEEWVqR5-bMJ_ocf7cLZM6FTq5Xtem-5QFpiePx2qWKCZ6QFWubr52qaEEUP-kj4jG1GNvIqA"
     
@@ -26,7 +26,7 @@ final class DefaultAccessTokenValidatorTests: XCTestCase {
     let validAccessToken = "VGhpc0lzQVJlYWxseUdyZWF0QWNjZXNzVG9rZW4sIERvbid0WW91VGhpbms_"
     
     override func setUpWithError() throws {
-        validator = DefaultAccessTokenValidator()
+        validator = DefaultTokenHashValidator(hashKey: .accessToken)
     }
     
     override func tearDownWithError() throws {
@@ -36,19 +36,19 @@ final class DefaultAccessTokenValidatorTests: XCTestCase {
     #if !os(Linux)
     func testInvalidAccessToken() throws {
         let jwt = try XCTUnwrap(JWT(rawValue: validIdToken))
-        XCTAssertThrowsError(try validator.validate(accessToken: "ThisIsn'tGoingToWork", idToken: jwt)) { error in
+        XCTAssertThrowsError(try validator.validate("ThisIsn'tGoingToWork", idToken: jwt)) { error in
             XCTAssertEqual(error as! JWTError, JWTError.signatureInvalid)
         }
     }
 
     func testValidAccessToken() throws {
         let jwt = try XCTUnwrap(JWT(rawValue: validIdToken))
-        XCTAssertNoThrow(try validator.validate(accessToken: validAccessToken, idToken: jwt))
+        XCTAssertNoThrow(try validator.validate(validAccessToken, idToken: jwt))
     }
 
     func testValidAccessTokenWithoutAtHash() throws {
         let jwt = try XCTUnwrap(JWT(rawValue: idTokenWithoutAtHash))
-        XCTAssertNoThrow(try validator.validate(accessToken: validAccessToken, idToken: jwt))
+        XCTAssertNoThrow(try validator.validate(validAccessToken, idToken: jwt))
     }
     #endif
 }
