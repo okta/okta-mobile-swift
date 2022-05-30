@@ -83,7 +83,7 @@ class ProviderTestBase: XCTestCase, AuthorizationCodeFlowDelegate, SessionLogout
     override func setUpWithError() throws {
         JWK.validator = MockJWKValidator()
         Token.idTokenValidator = MockIDTokenValidator()
-        Token.accessTokenValidator = MockAccessTokenValidator()
+        Token.accessTokenValidator = MockTokenHashValidator()
 
         client = OAuth2Client(baseURL: issuer,
                               clientId: "clientId",
