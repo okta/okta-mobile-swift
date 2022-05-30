@@ -14,6 +14,7 @@ import Foundation
 
 #if canImport(UIKit) || canImport(AppKit)
 
+#if SWIFT_PACKAGE
 extension WebAuthenticationError: LocalizedError {
     public var errorDescription: String? {
         switch self {
@@ -76,4 +77,5 @@ extension WebAuthenticationError: LocalizedError {
     }
 }
 
+#endif
 #endif

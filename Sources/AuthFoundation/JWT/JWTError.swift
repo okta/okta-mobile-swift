@@ -29,6 +29,7 @@ public enum JWTError: Error, Equatable {
     case signatureInvalid
 }
 
+#if SWIFT_PACKAGE
 extension JWTError: LocalizedError {
     public var errorDescription: String? {
         switch self {
@@ -106,3 +107,4 @@ extension JWTError: LocalizedError {
         }
     }
 }
+#endif

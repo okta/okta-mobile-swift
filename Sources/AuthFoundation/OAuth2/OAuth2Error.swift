@@ -23,6 +23,7 @@ public enum OAuth2Error: Error {
     case error(_ error: Error)
 }
 
+#if SWIFT_PACKAGE
 extension OAuth2Error: LocalizedError {
     public var errorDescription: String? {
         switch self {
@@ -85,3 +86,4 @@ extension OAuth2Error: LocalizedError {
         }
     }
 }
+#endif

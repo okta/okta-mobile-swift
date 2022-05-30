@@ -115,6 +115,27 @@ final class CredentialRefreshTests: XCTestCase, OAuth2ClientDelegate {
         XCTAssertEqual(delegate.refreshCount, 1)
     }
 
+    func testRefreshWithoutOptionalValues() throws {
+        let credential = try credential(for: Token.mockToken(id: "TokenID",
+                                                             deviceSecret: "theDeviceSecret"))
+
+        let expect = expectation(description: "refresh")
+        credential.refresh { result in
+            switch result {
+            case .success(let newToken):
+                XCTAssertNotNil(newToken)
+            case .failure(let error):
+                XCTAssertNil(error)
+            }
+            expect.fulfill()
+        }
+        waitForExpectations(timeout: 1.0) { error in
+            XCTAssertNil(error)
+        }
+
+        XCTAssertEqual(credential.token.deviceSecret, "theDeviceSecret")
+    }
+
     func testRefreshIfNeededExpired() throws {
         let credential = try credential(for: Token.mockToken(issuedOffset: 6000))
         let expect = expectation(description: "refresh")
