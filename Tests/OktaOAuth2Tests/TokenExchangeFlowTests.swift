@@ -58,7 +58,7 @@ final class TokenExchangeFlowTests: XCTestCase {
                               session: urlSession)
         JWK.validator = MockJWKValidator()
         Token.idTokenValidator = MockIDTokenValidator()
-        Token.accessTokenValidator = MockAccessTokenValidator()
+        Token.accessTokenValidator = MockTokenHashValidator()
 
         urlSession.expect("https://example.okta.com/.well-known/openid-configuration",
                           data: try data(from: .module, for: "openid-configuration", in: "MockResponses"),
