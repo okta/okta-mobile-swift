@@ -14,8 +14,13 @@ import Foundation
 
 /// Token information representing a user's access to a resource server, including access token, refresh token, and other related information.
 public class Token: Codable, Equatable, Hashable, Expires, Identifiable {
+    /// The object used to ensure ID tokens are valid.
     public static var idTokenValidator: IDTokenValidator = DefaultIDTokenValidator()
+    
+    /// The object used to ensure access tokens can be validated against its associated ID token.
     public static var accessTokenValidator: TokenHashValidator = DefaultTokenHashValidator(hashKey: .accessToken)
+    
+    /// The object used to ensure device secrets are validated against its associated ID token.
     public static var deviceSecretValidator: TokenHashValidator = DefaultTokenHashValidator(hashKey: .deviceSecret)
     
     /// The unique identifier for this token.
@@ -47,7 +52,8 @@ public class Token: Codable, Equatable, Hashable, Expires, Identifiable {
     
     /// The Device secret, if requested in scope.
     public let deviceSecret: String?
-
+    
+    /// Indicates whether or not the token is being refreshed.
     public var isRefreshing: Bool {
         refreshAction != nil
     }

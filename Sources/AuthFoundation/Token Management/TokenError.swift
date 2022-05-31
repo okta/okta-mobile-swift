@@ -19,6 +19,7 @@ public enum TokenError: Error {
     case duplicateTokenAdded
 }
 
+#if SWIFT_PACKAGE
 extension TokenError: LocalizedError {
     public var errorDescription: String? {
         switch self {
@@ -46,3 +47,4 @@ extension TokenError: LocalizedError {
         }
     }
 }
+#endif

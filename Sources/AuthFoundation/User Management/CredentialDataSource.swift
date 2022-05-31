@@ -32,6 +32,9 @@ public protocol CredentialDataSource {
     /// > Note: This should not return the total number of available tokens, but rather the number of credential objects loaded within this cache.
     var credentialCount: Int { get }
     
+    /// Identify whether or not a credential is currently cached for the supplied token.
+    /// - Parameter token: Token to identify a credential instance for.
+    /// - Returns: `true` if this datasource has a cached credential.
     func hasCredential(for token: Token) -> Bool
     
     /// Returns a credential for the given token.
