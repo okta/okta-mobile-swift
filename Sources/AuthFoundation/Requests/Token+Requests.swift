@@ -36,7 +36,9 @@ extension Token: APIAuthorization {
     public var authorizationHeader: String? { "\(tokenType) \(accessToken)" }
 }
 
+/// Sub-protocol of ``APIRequest`` used to define requests that are performed using links supplied via an organization's ``OpenIdConfiguration``.
 public protocol OAuth2APIRequest: APIRequest {
+    /// The ``OpenIdConfiguration`` used to formulate this request's ``APIRequest/url``.
     var openIdConfiguration: OpenIdConfiguration { get }
 }
 

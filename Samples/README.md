@@ -1,8 +1,19 @@
 # Samples
 
+This repo contains a number of sample projects to both illustrate how to integrate different authentication workflows into your application, but to also be used within end-to-end automated tests. The following sample applications are provided, with information on how to test them locally.
+
 ## WebSignIn (iOS)
 
 This sample demonstrates web authentication using the WebAuthenticationUI library.  To get started, open the `Okta.plist` file and update its contents with your application's configuration settings to run the sample.
+
+ Key | Required | Description |
+---|---|---
+`issuer` | ✔ | Issuer URL for the client.
+`clientId` | ✔ | Client ID for the Okta application.
+`scopes` | ✔ | Scopes the client is requesting.
+`redirectUri` | ✔  | Redirect URI for the Okta application.
+`logoutRedirectUri` | | Logout URI used for the Okta application.
+Other... | | Any additional keys will be passed to the `additionalParameters` argument of the initializer.
 
 ## SingleSignOn (iOS)
 

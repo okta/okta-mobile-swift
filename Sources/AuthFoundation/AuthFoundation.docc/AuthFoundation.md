@@ -8,8 +8,8 @@ AuthFoundation provides the fundamentals for interacting with Okta, and exposing
 
 You can use AuthFoundation when you want to:
 
-* Manager, store, and use tokens and user information.
-* Interact with supplementary native SDKs, such as WebAuthentication or OktaOAuth2.
+* Manage, store, and use tokens and user information.
+* Interact with supplementary native SDKs, such as WebAuthenticationUI or OktaOAuth2.
 * Introspect or monitor network activity, customize behavior, or other operations related to user interaction.
 
 ## Topics
@@ -90,9 +90,9 @@ You can use AuthFoundation when you want to:
 - ``AuthenticationError``
 
 ### Migration and versioning
+
 - ``SDKVersion``
 - ``SDKVersionMigrator``
-- ``SDKVersionMigrationError``
 
 ### Internals and mocking
 

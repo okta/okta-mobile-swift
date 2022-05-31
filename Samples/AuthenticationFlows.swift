@@ -41,7 +41,7 @@ func signInWithWebUsingCustomConfiguration() async throws {
     let token = try await auth.start(from: view.window)
     
     // Save the user's tokens
-    Credential.default = Credential(token: token)
+    let credential = try Credential.store(token)
 }
 
 func signInUsingAuthorizationCode() async throws {
@@ -66,7 +66,7 @@ func signInUsingAuthorizationCode() async throws {
     let token = try await flow.resume(with: redirectURL)
     
     // Save the user's tokens
-    Credential.default = Credential(token: token)
+    let credential = try Credential.store(token)
 }
 
 func signInUsingResourceOwner(username: String, password: String) async throws {
@@ -82,7 +82,7 @@ func signInUsingResourceOwner(username: String, password: String) async throws {
     let token = try await flow.resume(username: username, password: password)
     
     // Save the user's tokens
-    Credential.default = Credential(token: token)
+    let credential = try Credential.store(token)
 }
 
 func signInUsingDeviceSSO(deviceToken: String, idToken: String) async throws {
@@ -103,7 +103,7 @@ func signInUsingDeviceSSO(deviceToken: String, idToken: String) async throws {
     ])
 
     // Save the user's token
-    Credential.default = Credential(token: token)
+    let credential = try Credential.store(token)
 }
 
 func signInUsingDeviceAuthorizationCode() async throws {
@@ -124,7 +124,7 @@ func signInUsingDeviceAuthorizationCode() async throws {
     let token = try await flow.resume(with: context)
     
     // Save the user's tokens
-    Credential.default = Credential(token: token)
+    let credential = try Credential.store(token)
 }
 
 enum SampleError: Error {
