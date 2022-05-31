@@ -16,29 +16,65 @@ import Foundation
 import FoundationNetworking
 #endif
 
+/// Abstract protocol defining the structure of an API request.
 public protocol APIRequest {
     associatedtype ResponseType: Decodable
-
+    
+    /// HTTP method to perform.
     var httpMethod: APIRequestMethod { get }
+    
+    /// The URL to perform the API request against.
     var url: URL { get }
+    
+    /// Optional query string arguments.
     var query: [String: APIRequestArgument?]? { get }
+    
+    /// Optional HTTP headers to supply.
     var headers: [String: APIRequestArgument?]? { get }
+    
+    /// Optional accept type to request.
     var acceptsType: APIContentType? { get }
+    
+    /// Optional request body content type.
     var contentType: APIContentType? { get }
+    
+    /// The HTTP request cache policy to use.
     var cachePolicy: URLRequest.CachePolicy { get }
+    
+    /// The HTTP timeout interval.
     var timeoutInterval: TimeInterval { get }
+    
+    /// Optional API authorization information to use.
     var authorization: APIAuthorization? { get }
-
+    
+    /// Function to generate the HTTP request body.
+    /// - Returns: Data for the body, or `nil` if no body is needed.
     func body() throws -> Data?
+    
+    /// Composes a URLRequest for this object.
+    /// - Parameter client: The ``APIClient`` the request is being sent through.
+    /// - Returns: URLRequest instance for this API request.
     func request(for client: APIClient) throws -> URLRequest
+    
+    /// Sends the request to the given ``APIClient``.
+    /// - Parameters:
+    ///   - client: ``APIClient`` the request is being sent to.
+    ///   - context: Optional context to use when parsing the response.
+    ///   - completion: Completion block invoked with the result.
     func send(to client: APIClient, parsing context: APIParsingContext?, completion: @escaping(Result<APIResponse<ResponseType>, APIClientError>) -> Void)
 
     #if swift(>=5.5.1)
+    /// Asynchronously sends the request to the given ``APIClient``.
+    /// - Parameters:
+    ///   - client: ``APIClient`` the request is being sent to.
+    ///   - context: Optional context to use when parsing the response.
+    /// - Returns: ``APIResponse`` result of the request.
     @available(iOS 15.0, tvOS 15.0, macOS 12.0, watchOS 8, *)
     func send(to client: APIClient, parsing context: APIParsingContext?) async throws -> APIResponse<ResponseType>
     #endif
 }
 
+/// API HTTP request method.
 public enum APIRequestMethod: String {
     case get = "GET"
     case delete = "DELETE"
@@ -48,6 +84,7 @@ public enum APIRequestMethod: String {
     case patch = "PATCH"
 }
 
+/// Describes the ``APIRequest`` content type.
 public enum APIContentType: Equatable, RawRepresentable {
     case json
     case formEncoded
@@ -82,17 +119,26 @@ public enum APIContentType: Equatable, RawRepresentable {
     }
 }
 
+/// Defines how ``APIRequest`` authorization headers are generated.
 public protocol APIAuthorization {
+    /// The value of the authorization header, or `nil` if none should be set.
     var authorizationHeader: String? { get }
 }
 
+/// Defines key/value pairs for an ``APIRequest`` body.
 public protocol APIRequestBody {
+    /// Key/value pairs to use when generating an ``APIRequest`` body.
     var bodyParameters: [String: Any]? { get }
 }
 
+/// Provides contextual information when parsing and decoding ``APIRequest`` responses, or errors.
 public protocol APIParsingContext {
+    /// Optional coding user info to use when parsing ``APIRequest`` responses.
     var codingUserInfo: [CodingUserInfoKey: Any]? { get }
-
+    
+    /// Generates an error response from an ``APIRequest`` result when an HTTP error occurs.
+    /// - Parameter data: Raw data returned from the HTTP response.
+    /// - Returns: Optional error option described within the supplied data.
     func error(from data: Data) -> Error?
 }
 

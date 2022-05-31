@@ -222,6 +222,87 @@ let flow = ResourceOwnerFlow(issuer: URL(string: "https://example.okta.com")!,
 let token = try await flow.resume(username: "jane.doe", password: "secretPassword")
 ```
 
+## Storing and using tokens
+
+Once your user has authenticated and you have a `Token` object, your application can store and use those credentials. The most direct approach is to use the `Credential.store(_:tags:security:)` function.
+
+```swift
+let credential = try Credential.store(token)
+```
+
+As a convenience, the SDK provides a `default` static property on the `Credential` class. This provides a simple way to identify if a user is currently authenticated, and to quickly access that user's credentials. When storing a new credential, if one isn't already stored, it will automatically be assigned as the default.
+
+```swift
+if let credential = Credential.default {
+    // The user is signed in. Start by refreshing it.
+    try await credential.refreshIfNeeded()
+}
+```
+
+### Finding credentials by their unique identifier
+
+When a token is stored, it is assigned a unique ID, which can be used to differentiate between tokens and to retrieve a token at a later date.
+
+```swift
+let tokenId = token.id
+
+// Later, retrieve the token
+if let credential = try Credential.with(id: tokenId) {
+    // Use the credential
+}
+```
+
+### Assigning and finding credentials using custom tags
+
+For more complex applications, you may need to manage multiple credentials (e.g. multi-user sign-in, different tokens for app extensions, granular scopes for different portions of your application, etc). To make it easier to differentiate between credentials, you can assign tags to them which can later be used to identify them.
+
+```swift
+try Credential.store(token, tags: ["customTag": "someValue"])
+```
+
+The credential can later be retrieved based on these tags.
+
+```swift
+if let credential = try Credential.find(where: { $0.tags["customTag"] == "someValue" }).first {
+    // Use the credential
+}
+```
+
+A credential's tags are available through its `tags` property, and can be changed after the fact.
+
+```
+if !credential.tags.contains("someCustomTag") {
+    credential.tags["someCustomTag"] = "someValue"
+}
+
+// Or use the following method to intercept exceptions
+try credential.setTags(["customTag": "someValue"])
+```
+
+### Finding credentials using ID token claims
+
+This SDK simplifies access to JWT tokens and their claims. In fact, a Token's `idToken` property is automatically exposed as an instance of `JWT`. Using this, you can enumerate and retrieve credentials based on the claims associated with their tokens.
+
+```swift
+if let credential = try Credential.find(where: { $0.email == "user@example.com" }).first {
+    // Use the credential
+}
+```
+
+## Migration from legacy SDKs
+
+This collection of SDKs intend to replace the following SDKs:
+
+* [okta-oidc-ios](https://github.com/okta/okta-oidc-ios)
+* [okta-ios-jwt](https://github.com/okta/okta-ios-jwt)
+* [okta-storage-swift](https://github.com/okta/okta-storage-swift)
+
+If your application currently uses OktaOidc, facilities are in place to migrate your existing users to the new SDK. For more information, see the `SDKVersion.Migration` class for details.
+
+## Running the Samples
+
+Several applications are available to demonstrate different workflows of this SDK. For more information, please see the [sample applications](Samples).
+
 ## Support Policy
 
 This policy defines the extent of the support for Xcode, Swift, and platform (iOS, macOS, tvOS, and watchOS) versions.

@@ -16,9 +16,11 @@ Instances of ``Credential`` not only contain a reference to that user's ``Creden
 
 ## Storing a token
 
-When you first receive a ``Token``, you can use the ``Credential/store(token:tags:)`` static function to save the token in local storage. This function lets you supply optional tags to assign to the token, to simplify the process of retrieving those credentials at a later date.
+When you first receive a ``Token``, you can use the ``Credential/store(_:tags:security:)`` static function to save the token in local storage. This function lets you supply optional tags to assign to the token to simplify the process of retrieving those credentials at a later date, or security settings to control how the token is stored.
 
-An additional function ``Credential/with(token:)`` will return a credential object based on the given token. If that token hasn't yet been stored, it will be automatically stored for you. If this method is called multiple times with the same token, the same shared Credential instance will be returned.
+If you know the unique ID for a given token, you can use the ``Credential/with(id:prompt:authenticationContext:)`` function to retrieve an individual credential. The optional `prompt` and `authenticationContext` arguments can be used to supply additional information when accessing tokens secured behind biometrics, with an optional `LAContext`.
+
+When multiple credentials are stored, the ``Credential/find(where:prompt:authenticationContext:)`` method can be used to retrieve credentials based on custom tags, or claims defined within the credential's ID token.
 
 ## Working with the default credential
 
@@ -26,7 +28,7 @@ Once your user signs in, you as an application developer will want to do somethi
 
 The ``Credential/default`` static property does just that, providing common access to the default credential for the application. This value will additionally be persisted across app launches, ensuring you can quickly and conveniently determine if a sign in screen needs to be presented, or if a user is already present.
 
-As a convenience, if no other tokens are present in your application, the first ``Token`` stored (either through ``Credential/store(token:tags:)`` or ``Credential/with(token:)``) will automatically be assigned as the default.
+As a convenience, if no other tokens are present in your application, the first ``Token`` stored will automatically be assigned as the default. The ``Credential/default`` value will automatically be set to `nil` when its credential is removed using ``Credential/remove()``.
 
 ### Changing the default credential
 
@@ -57,7 +59,7 @@ Several approachs to finding and using credentials are provided, depending upon 
 
 #### Finding credentials by ID
 
-All tokens are automatically assigned a unique ID it can be identified by. This can be seen in the ``Token/id`` (as well as through the ``Credential/id`` property). This identifier may be used with the ``Credential/with(id:)`` function.
+All tokens are automatically assigned a unique ID it can be identified by. This can be seen in the ``Token/id`` (as well as through the ``Credential/id`` property). This identifier may be used with the ``Credential/with(id:prompt:authenticationContext:)`` function.
 
 ```swift
 if let credential = try Credential.with(id: serviceTokenId) {
@@ -65,9 +67,11 @@ if let credential = try Credential.with(id: serviceTokenId) {
 }
 ```
 
+The list of all stored IDs is available through the ``Credential/allIDs`` static property.
+
 #### Finding credentials by developer-assigned tags
 
-When storing tokens, the ``Credential/store(token:tags:)`` function accepts an optional collection of tags you can use to identify the purpose of different tokens.  The ``Credential/find(where:)`` function allows you to query tokens based on those tags at a later date.  Furthermore, those tags can later be updated by changing the credential's ``Credential/tags`` property.
+When storing tokens, the ``Credential/store(_:tags:security:)`` function accepts an optional collection of tags you can use to identify the purpose of different tokens.  The ``Credential/find(where:prompt:authenticationContext:)`` function allows you to query tokens based on those tags at a later date.  Furthermore, those tags can later be updated by changing the credential's ``Credential/tags`` property.
 
 ```swift
 try Credential.store(token: newToken, tags: ["service": "purchase"])
@@ -81,7 +85,7 @@ if let credential = try Credential.find(where: { $0.tags["service"] == "purchase
 
 #### Finding credentials by ID Token claims
 
-If a token contains a valid ``Token/idToken``, the claims it represents are available within the ``Credential/find(where:)`` expression. The object returned within that expression supports the ``HasClaims`` protocol, meaning its values can be queried within that filter.
+If a token contains a valid ``Token/idToken``, the claims it represents are available within the ``Credential/find(where:prompt:authenticationContext:)`` expression. The object returned within that expression supports the ``HasClaims`` protocol, meaning its values can be queried within that filter.
 
 ```swift
 let userCredentials = try Credential.find { metadata in
@@ -91,4 +95,4 @@ let userCredentials = try Credential.find { metadata in
 
 ### Removing a credential
 
-To clean up credentials that are no longer needed, the ``Credential/remove()`` method removes the token from storage, and removes the Credential instance from ``Credential/allCredentials``.
+To clean up credentials that are no longer needed, the ``Credential/remove()`` method removes the token from storage, and removes the Credential's ID from ``Credential/allIDs``.

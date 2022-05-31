@@ -12,7 +12,27 @@
 
 import Foundation
 
+/// Defines an argument to an ``APIRequest``. Used within ``APIRequest/headers-8ieky`` and ``APIRequest/query-730ld``.
+///
+/// The following types conform to this protocol:
+/// - String
+/// - Int
+/// - Double
+/// - Bool
+/// - UInt
+/// - Int8
+/// - UInt8
+/// - Int16
+/// - UInt16
+/// - Int32
+/// - UInt32
+/// - Int64
+/// - UInt64
+/// - Float
+/// - NSString
+/// - NSNumber
 public protocol APIRequestArgument {
+    /// The string representation of this request argument.
     var stringValue: String { get }
 }
 

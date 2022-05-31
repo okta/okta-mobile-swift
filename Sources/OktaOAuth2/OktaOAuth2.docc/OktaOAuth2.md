@@ -10,7 +10,7 @@ You can use OktaOAuth2 when you want to:
 
 * Customize the sign in workflow for WebAuthenticationUI-based applications, through the use of an ``AuthorizationCodeFlowDelegate``.
 * Implement your own browser-based sign in workflow directly using ``AuthorizationCodeFlow``.
-* Sign users in using headless or non-browser-based workflows, such as Device SSO, Device Authentication, ID Token Exchange, etc.
+* Sign users in using headless or non-browser-based workflows, such as Device SSO, Device Authentication, Resource Owner (aka Username/Password sign on), etc.
 * Customize outbound network requests through the use of the ``OktaOAuth2`` API delegate.
 
 ## Topics

@@ -323,6 +323,10 @@ public class OAuth2Client {
         }
     }
     
+    /// Fetches the ``UserInfo`` associated with the given token.
+    /// - Parameters:
+    ///   - token: Token to retrieve user information for.
+    ///   - completion: Completion block invoked with the result.
     public func userInfo(token: Token, completion: @escaping (Result<UserInfo, OAuth2Error>) -> Void) {
         openIdConfiguration { result in
             switch result {

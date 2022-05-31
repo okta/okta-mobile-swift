@@ -12,8 +12,13 @@
 
 import Foundation
 
+/// Protocol describing a version migrator.
+///
+/// Version migrators are used to both determine a) if any migration operations need to be performed during app start-up, and b) perform migrations to upgrade user data.
 public protocol SDKVersionMigrator: AnyObject {
+    /// Used to indicate if an individual migrator needs to perform any migration operations.  It is recommended that this value be cached.
     var needsMigration: Bool { get }
-
+    
+    /// Performs the version migration work necessary for this migrator.
     func migrate() throws
 }
