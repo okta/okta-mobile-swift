@@ -236,9 +236,12 @@ public class OAuth2Client {
                     self.refreshQueue.sync(flags: .barrier) {
                         switch result {
                         case .success(let response):
-                            action.finish(.success(response.result))
-                            self.delegateCollection.invoke { $0.oauth(client: self, didRefresh: token, replacedWith: response.result) }
-                            NotificationCenter.default.post(name: .tokenRefreshed, object: response.result)
+                            let newToken = response.result.token(merging: token)
+                            
+                            action.finish(.success(newToken))
+                            
+                            self.delegateCollection.invoke { $0.oauth(client: self, didRefresh: token, replacedWith: newToken) }
+                            NotificationCenter.default.post(name: .tokenRefreshed, object: newToken)
                             
                         case .failure(let error):
                             action.finish(.failure(.network(error: error)))

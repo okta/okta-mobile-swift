@@ -23,16 +23,21 @@ extension Token {
 
     static let simpleMockToken = mockToken()
     
-    static func mockToken(id: String = "TokenId", issuedOffset: TimeInterval = 0, expiresIn: TimeInterval = 3600) -> Token {
+    static func mockToken(id: String = "TokenId",
+                          refreshToken: String? = nil,
+                          deviceSecret: String? = nil,
+                          issuedOffset: TimeInterval = 0,
+                          expiresIn: TimeInterval = 3600) -> Token
+    {
         Token(id: id,
               issuedAt: Date(timeIntervalSinceNow: -issuedOffset),
               tokenType: "Bearer",
               expiresIn: expiresIn,
               accessToken: JWT.mockAccessToken,
               scope: "openid",
-              refreshToken: nil,
+              refreshToken: refreshToken,
               idToken: try? JWT(JWT.mockIDToken),
-              deviceSecret: nil,
+              deviceSecret: deviceSecret,
               context: mockContext)
     }
 }

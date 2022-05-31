@@ -10,9 +10,9 @@ The Okta Mobile SDK replaces our legacy mobile SDKs (such as okta-oidc-ios) and 
 * Streamlined development
 * Increased maintainability of the Okta portion of your code
 * Easier feature expansion
-* Implementation of use cases that were previously difficult or impractical
+* Support for use cases that were previously difficult or impractical to implement.
 
-This new Mobile SDK is built as a platform, enabling you to choose the components you need for your app.
+This new SDK is built as a platform, enabling you to choose the components you need for your app.
 
 **Table of Contents**
 
@@ -25,7 +25,7 @@ This library uses semantic versioning and follows Okta's [Library Version Policy
 
 | Version | Status                             |
 | ------- | ---------------------------------- |
-| 0.1.0   | ✔️ Beta                             |
+| 0.3.0   | ✔️ Beta                             |
 
 The latest release can always be found on the [releases page][github-releases].
 
@@ -47,19 +47,19 @@ This SDK consists of several different libraries, each with detailed documentati
 ```
 
 - AuthFoundation -- Common classes for managing credentials and used as a foundation for other libraries.
-- OktaOAuth2 -- OAuth2 authentication capabilities for authenticating users.
+- OktaOAuth2 -- OAuth2 authentication capabilities for advanced use-cases.
 - WebAuthenticationUI -- Authenticate users using web-based OIDC flows.
 
 This SDK enables you to build or support a myriad of different authentication flows and approaches.
 
 ## Development Roadmap
 
-This SDK is being actively developed and is in Beta release status. At this time, we are seeking feedback from the developer community to evaluate:
+This SDK is being actively developed, with plans for future expansion. At this time, we are seeking feedback from the developer community to evaluate:
 
-* The overall SDK and its components;
-* The APIs and overall developer experience;
-* Use-cases or features that may be missed or do not align with your application’s needs;
-* Suggestions for future development;
+* The overall SDK and its components
+* The APIs and overall developer experience
+* Use-cases or features that may be missed or do not align with your application’s needs
+* Suggestions for future development
 * Any other comments or feedback on this new direction.
 
 ### Key Features
@@ -75,9 +75,8 @@ Several key features and capabilities are introduced with this library, with som
 | Native SSO / Token Exchange Flow |
 | Device Authorization Grant Flow |
 | Resource Owner Flow |
-| Simple JWT parsing and handling |
+| Simplified JWT parsing and handling |
 | Streamlined authorization of URLSession requests using credential tokens |
-| Automatic time synchronization |
 | Many extension points for customizability, monitoring, and tracking |
 
 ## Getting Started
@@ -85,7 +84,7 @@ Several key features and capabilities are introduced with this library, with som
 To get started, you will need:
 
 * An Okta account, called an _organization_ (sign up for a free [developer organization](https://developer.okta.com/signup) if you need one).
-* An Okta Application configured as a Native App. Use Okta's administrator console to create the application by following the wizard and using default properties.
+* An Okta Application configured as a "Native App". Use Okta's administrator console to create the application by following the wizard and using default properties.
 * Xcode 13.x, targeting one of the supported platforms and target versions (see the [Support Policy][support-policy] below).
 
 For examples of how this SDK can be utilized, please refer to the [sample applications](Samples) included within this repository.

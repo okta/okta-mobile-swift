@@ -12,6 +12,7 @@
 
 import Foundation
 
+#if SWIFT_PACKAGE
 extension OAuth2Client.PropertyListConfigurationError: LocalizedError {
     public var errorDescription: String? {
         switch self {
@@ -54,3 +55,4 @@ extension OAuth2Client.PropertyListConfigurationError: LocalizedError {
         }
     }
 }
+#endif

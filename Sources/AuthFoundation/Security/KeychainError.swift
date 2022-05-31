@@ -29,6 +29,7 @@ public enum KeychainError: Error {
     case missingAttribute
 }
 
+#if SWIFT_PACKAGE
 extension KeychainError: LocalizedError {
     public var errorDescription: String? {
         switch self {
@@ -106,5 +107,6 @@ extension KeychainError: LocalizedError {
         }
     }
 }
+#endif
 
 #endif

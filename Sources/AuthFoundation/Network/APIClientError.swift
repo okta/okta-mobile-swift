@@ -26,6 +26,7 @@ public enum APIClientError: Error {
     case unknown
 }
 
+#if SWIFT_PACKAGE
 extension APIClientError: LocalizedError {
     public var errorDescription: String? {
         switch self {
@@ -110,3 +111,4 @@ extension APIClientError: LocalizedError {
         }
     }
 }
+#endif

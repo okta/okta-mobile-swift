@@ -12,6 +12,7 @@
 
 import Foundation
 
+#if SWIFT_PACKAGE
 extension AuthenticationError: LocalizedError {
     public var errorDescription: String? {
         switch self {
@@ -53,3 +54,4 @@ extension AuthorizationCodeFlow.RedirectError: LocalizedError {
         }
     }
 }
+#endif
