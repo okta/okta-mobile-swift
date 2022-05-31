@@ -11,25 +11,13 @@
 //
 
 import Foundation
-@testable import AuthFoundation
 
-class MockAccessTokenValidator: AccessTokenValidator {
-    var error: JWTError?
-    private(set) var accessToken: String?
-    private(set) var idToken: JWT?
-    
-    func validate(accessToken: String, idToken: JWT) throws {
-        self.accessToken = accessToken
-        self.idToken = idToken
-        
-        if let error = error {
-            throw error
-        }
-    }
-    
-    func reset() {
-        error = nil
-        accessToken = nil
-        idToken = nil
-    }
+/// Protocol used to implement token validation using either the `at_hash` or `ds_hash` properties from an ID token.
+///
+/// Instances of this protocol may be assigned to ``Token/accessTokenValidator`` or ``Token/deviceSecretValidator`` to override the mechanisms used to validate tokens.
+///
+/// > Note: A default implementation will atuomatically be used if this value is not changed.
+public protocol TokenHashValidator {
+    /// Validates the given access token, using the `at_hash` value from the supplied ID token, if it is present.
+    func validate(_ string: String, idToken: JWT) throws
 }

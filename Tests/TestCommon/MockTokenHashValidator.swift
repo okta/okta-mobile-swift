@@ -11,13 +11,25 @@
 //
 
 import Foundation
+@testable import AuthFoundation
 
-/// Protocol used to implement access token validation.
-///
-/// Instances of this protocol may be assigned to ``Token/accessTokenValidator`` to override the mechanisms used to validate tokens.
-///
-/// > Note: A default implementation will atuomatically be used if this value is not changed.
-public protocol AccessTokenValidator {
-    /// Validates the given access token, using the `at_hash` value from the supplied ID token, if it is present.
-    func validate(accessToken: String, idToken: JWT) throws
+class MockTokenHashValidator: TokenHashValidator {
+    var error: JWTError?
+    private(set) var string: String?
+    private(set) var idToken: JWT?
+    
+    func validate(_ string: String, idToken: JWT) throws {
+        self.string = string
+        self.idToken = idToken
+        
+        if let error = error {
+            throw error
+        }
+    }
+    
+    func reset() {
+        error = nil
+        string = nil
+        idToken = nil
+    }
 }

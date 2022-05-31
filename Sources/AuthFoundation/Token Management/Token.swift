@@ -15,7 +15,8 @@ import Foundation
 /// Token information representing a user's access to a resource server, including access token, refresh token, and other related information.
 public class Token: Codable, Equatable, Hashable, Expires, Identifiable {
     public static var idTokenValidator: IDTokenValidator = DefaultIDTokenValidator()
-    public static var accessTokenValidator: AccessTokenValidator = DefaultAccessTokenValidator()
+    public static var accessTokenValidator: TokenHashValidator = DefaultTokenHashValidator(hashKey: .accessToken)
+    public static var deviceSecretValidator: TokenHashValidator = DefaultTokenHashValidator(hashKey: .deviceSecret)
     
     /// The unique identifier for this token.
     public internal(set) var id: String
@@ -79,8 +80,11 @@ public class Token: Codable, Equatable, Hashable, Expires, Identifiable {
         try Token.idTokenValidator.validate(token: idToken,
                                             issuer: client.configuration.baseURL,
                                             clientId: client.configuration.clientId)
-        try Token.accessTokenValidator.validate(accessToken: accessToken,
-                                                idToken: idToken)
+        try Token.accessTokenValidator.validate(accessToken, idToken: idToken)
+        
+        if let deviceSecret = deviceSecret {
+            try Token.deviceSecretValidator.validate(deviceSecret, idToken: idToken)
+        }
     }
     
     public static func == (lhs: Token, rhs: Token) -> Bool {
