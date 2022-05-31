@@ -57,6 +57,8 @@ public class Credential: Identifiable, Equatable, OAuth2ClientDelegate {
     }
     
     /// Stores the given token for later use.
+    ///
+    /// This
     /// - Parameters:
     ///   - token: Token to store.
     ///   - tags: Optional developer-assigned tags to associate with this token.
