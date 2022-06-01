@@ -47,18 +47,30 @@ public class Credential: Identifiable, Equatable, OAuth2ClientDelegate {
     }
     
     /// Returns a collection of ``Credential`` instances that match the given expression.
+    ///
+    /// The supplied expression can be used to filter out credentials based on information about the tokens (see ``Token/Metadata`` for more information).  For example:
+    ///
+    /// ```swift
+    /// let credentials = try Credential.find(where: { info in
+    ///      info.tags["customTag"] == "value" &&
+    ///      info[.email] == "user@example.com"
+    /// })
+    /// ```
+    ///
+    /// The metadata object supplied to the expression contains information about custom tags, as well as claims included in the token's ID Token value.
+    ///
     /// - Parameters:
     ///   - expression: Expression used to filter the list of tokens.
     ///   - prompt: Optional prompt to show to the user when requesting biometric/Face ID user prompts.
     ///   - authenticationContext: Optional `LAContext` to use when retrieving credentials, on systems that support it.
-    /// - Returns: Collection of credentials.
+    /// - Returns: Collection of credentials that matches the given expression.
     public static func find(where expression: @escaping (Token.Metadata) -> Bool, prompt: String? = nil, authenticationContext: TokenAuthenticationContext? = nil) throws -> [Credential] {
         try coordinator.find(where: expression, prompt: prompt, authenticationContext: authenticationContext)
     }
     
     /// Stores the given token for later use.
     ///
-    /// This
+    /// Once the token is stored, a ``Credential`` object is returned that provides conveniences to interact with the token. See <doc:ManagingUserCredentials> for more information.
     /// - Parameters:
     ///   - token: Token to store.
     ///   - tags: Optional developer-assigned tags to associate with this token.
