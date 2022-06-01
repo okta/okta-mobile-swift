@@ -25,24 +25,28 @@ extension TokenError: LocalizedError {
         switch self {
         case .contextMissing:
             return NSLocalizedString("token_context_missing",
-                                     bundle: .module,
+                                     tableName: "AuthFoundation",
+                                     bundle: .authFoundation,
                                      comment: "")
             
         case .tokenNotFound(id: let id):
             return String.localizedStringWithFormat(
                 NSLocalizedString("token_not_found",
-                                  bundle: .module,
+                                  tableName: "AuthFoundation",
+                                  bundle: .authFoundation,
                                   comment: ""),
                 id)
             
         case .cannotReplaceToken:
             return NSLocalizedString("cannot_replace_token",
-                                     bundle: .module,
+                                     tableName: "AuthFoundation",
+                                     bundle: .authFoundation,
                                      comment: "")
             
         case .duplicateTokenAdded:
             return NSLocalizedString("duplicate_token_added",
-                                     bundle: .module,
+                                     tableName: "AuthFoundation",
+                                     bundle: .authFoundation,
                                      comment: "")
         }
     }

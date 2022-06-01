@@ -12,19 +12,20 @@
 
 import Foundation
 
-#if SWIFT_PACKAGE
 extension OAuth2Client.PropertyListConfigurationError: LocalizedError {
     public var errorDescription: String? {
         switch self {
         case .defaultPropertyListNotFound:
             return NSLocalizedString("default_property_list_not_found_description",
-                                     bundle: .module,
+                                     tableName: "AuthFoundation",
+                                     bundle: .authFoundation,
                                      comment: "")
             
         case .invalidPropertyList(url: let url):
             return String.localizedStringWithFormat(
                 NSLocalizedString("invalid_property_list_description",
-                                  bundle: .module,
+                                  tableName: "AuthFoundation",
+                                  bundle: .authFoundation,
                                   comment: ""),
                 url.lastPathComponent)
 
@@ -38,21 +39,23 @@ extension OAuth2Client.PropertyListConfigurationError: LocalizedError {
                 errorString = String(describing: error)
             } else {
                 errorString = NSLocalizedString("unknown_error_message",
-                                                bundle: .module,
+                                                tableName: "AuthFoundation",
+                                                bundle: .authFoundation,
                                                 comment: "")
             }
 
             return String.localizedStringWithFormat(
                 NSLocalizedString("generic_description",
-                                  bundle: .module,
+                                  tableName: "AuthFoundation",
+                                  bundle: .authFoundation,
                                   comment: ""),
                 errorString)
 
         case .missingConfigurationValues:
             return NSLocalizedString("missing_configuration_values_description",
-                                     bundle: .module,
+                                     tableName: "AuthFoundation",
+                                     bundle: .authFoundation,
                                      comment: "")
         }
     }
 }
-#endif

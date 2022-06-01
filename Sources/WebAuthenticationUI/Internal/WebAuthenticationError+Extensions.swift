@@ -14,60 +14,67 @@ import Foundation
 
 #if canImport(UIKit) || canImport(AppKit)
 
-#if SWIFT_PACKAGE
 extension WebAuthenticationError: LocalizedError {
     public var errorDescription: String? {
         switch self {
         case .noCompatibleAuthenticationProviders:
             return NSLocalizedString("no_compatible_authentication_providers_description",
-                                     bundle: .module,
+                                     tableName: "WebAuthenticationUI",
+                                     bundle: .webAuthenticationUI,
                                      comment: "")
             
         case .cannotComposeAuthenticationURL:
             return NSLocalizedString("cannot_compose_authentication_url_description",
-                                     bundle: .module,
+                                     tableName: "WebAuthenticationUI",
+                                     bundle: .webAuthenticationUI,
                                      comment: "")
             
         case .authenticationProviderError(let error):
             if let error = error as? LocalizedError {
                 return error.localizedDescription
             }
-
+            
             return NSLocalizedString("authentication_provider_error",
-                                  bundle: .module,
-                                  comment: "")
-
+                                     tableName: "WebAuthenticationUI",
+                                     bundle: .webAuthenticationUI,
+                                     comment: "")
+            
         case .invalidRedirectScheme(let scheme):
             return String.localizedStringWithFormat(
                 NSLocalizedString("invalid_redirect_scheme_description",
-                                  bundle: .module,
+                                  tableName: "WebAuthenticationUI",
+                                  bundle: .webAuthenticationUI,
                                   comment: ""),
                 scheme ?? NSLocalizedString("no_scheme_defined",
-                                            bundle: .module,
+                                            tableName: "WebAuthenticationUI",
+                                            bundle: .webAuthenticationUI,
                                             comment: ""))
-
+            
         case .userCancelledLogin:
             return NSLocalizedString("user_cancelled_login_description",
-                                     bundle: .module,
+                                     tableName: "WebAuthenticationUI",
+                                     bundle: .webAuthenticationUI,
                                      comment: "")
             
         case .missingIdToken:
             return NSLocalizedString("missing_id_token_description",
-                                     bundle: .module,
+                                     tableName: "WebAuthenticationUI",
+                                     bundle: .webAuthenticationUI,
                                      comment: "Missing ID Token")
             
         case .oauth2(error: let error):
             return error.localizedDescription
-
+            
         case .generic(error: let error):
             if let error = error as? LocalizedError {
                 return error.localizedDescription
             }
             let errorString = String(describing: error)
-
+            
             return String.localizedStringWithFormat(
                 NSLocalizedString("generic_description",
-                                  bundle: .module,
+                                  tableName: "WebAuthenticationUI",
+                                  bundle: .webAuthenticationUI,
                                   comment: ""),
                 errorString)
 
@@ -77,5 +84,4 @@ extension WebAuthenticationError: LocalizedError {
     }
 }
 
-#endif
 #endif

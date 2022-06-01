@@ -30,17 +30,20 @@ extension CredentialError: LocalizedError {
         switch self {
         case .missingCoordinator:
             return NSLocalizedString("credential_missing_coordinator",
-                                     bundle: .module,
+                                     tableName: "AuthFoundation",
+                                     bundle: .authFoundation,
                                      comment: "")
             
         case .incorrectClientConfiguration:
             return  NSLocalizedString("credential_incorrect_configuration",
-                                      bundle: .module,
+                                      tableName: "AuthFoundation",
+                                      bundle: .authFoundation,
                                       comment: "")
             
         case .metadataConsistency:
             return NSLocalizedString("credential_metadata_consistency",
-                                     bundle: .module,
+                                     tableName: "AuthFoundation",
+                                     bundle: .authFoundation,
                                      comment: "")
         }
     }

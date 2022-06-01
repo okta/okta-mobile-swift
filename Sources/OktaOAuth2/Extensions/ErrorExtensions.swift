@@ -12,13 +12,13 @@
 
 import Foundation
 
-#if SWIFT_PACKAGE
 extension AuthenticationError: LocalizedError {
     public var errorDescription: String? {
         switch self {
         case .flowNotReady:
             return NSLocalizedString("flow_not_ready_description",
-                                     bundle: .module,
+                                     tableName: "OktaOAuth2",
+                                     bundle: .oktaOAuth2,
                                      comment: "Invalid URL")
         }
     }
@@ -29,29 +29,33 @@ extension AuthorizationCodeFlow.RedirectError: LocalizedError {
         switch self {
         case .invalidRedirectUrl:
             return NSLocalizedString("invalid_redirect_url_description",
-                                     bundle: .module,
+                                     tableName: "OktaOAuth2",
+                                     bundle: .oktaOAuth2,
                                      comment: "Invalid URL")
 
         case .unexpectedScheme(_):
             return NSLocalizedString("unexpected_scheme_description",
-                                     bundle: .module,
+                                     tableName: "OktaOAuth2",
+                                     bundle: .oktaOAuth2,
                                      comment: "Invalid URL")
 
         case .missingQueryArguments:
             return NSLocalizedString("missing_query_arguments_description",
-                                     bundle: .module,
+                                     tableName: "OktaOAuth2",
+                                     bundle: .oktaOAuth2,
                                      comment: "Invalid URL")
         
         case .invalidState(_):
             return NSLocalizedString("invalid_state_description",
-                                     bundle: .module,
+                                     tableName: "OktaOAuth2",
+                                     bundle: .oktaOAuth2,
                                      comment: "Invalid URL")
             
         case .missingAuthorizationCode:
             return NSLocalizedString("missing_authorization_code_description",
-                                     bundle: .module,
+                                     tableName: "OktaOAuth2",
+                                     bundle: .oktaOAuth2,
                                      comment: "Invalid URL")
         }
     }
 }
-#endif

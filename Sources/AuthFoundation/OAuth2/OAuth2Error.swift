@@ -23,32 +23,35 @@ public enum OAuth2Error: Error {
     case error(_ error: Error)
 }
 
-#if SWIFT_PACKAGE
 extension OAuth2Error: LocalizedError {
     public var errorDescription: String? {
         switch self {
         case .invalidUrl:
             return NSLocalizedString("invalid_url_description",
-                                     bundle: .module,
+                                     tableName: "AuthFoundation",
+                                     bundle: .authFoundation,
                                      comment: "Invalid URL")
 
         case .cannotComposeUrl:
             return NSLocalizedString("cannot_compose_url_description",
-                                     bundle: .module,
+                                     tableName: "AuthFoundation",
+                                     bundle: .authFoundation,
                                      comment: "Invalid URL")
 
         case .oauth2Error(let code, let description):
             if let description = description {
                 return String.localizedStringWithFormat(
                     NSLocalizedString("oauth2_error_description",
-                                      bundle: .module,
+                                      tableName: "AuthFoundation",
+                                      bundle: .authFoundation,
                                       comment: "Invalid URL"),
                     description, code)
             }
             
             return String.localizedStringWithFormat(
                 NSLocalizedString("oauth2_error_code_description",
-                                  bundle: .module,
+                                  tableName: "AuthFoundation",
+                                  bundle: .authFoundation,
                                   comment: "Invalid URL"),
                 code)
 
@@ -58,18 +61,21 @@ extension OAuth2Error: LocalizedError {
         case .missingToken(let type):
             return String.localizedStringWithFormat(
                 NSLocalizedString("missing_token_description",
-                                  bundle: .module,
+                                  tableName: "AuthFoundation",
+                                  bundle: .authFoundation,
                                   comment: "Invalid URL"),
                 type.rawValue)
 
         case .missingClientConfiguration:
             return NSLocalizedString("missing_client_configuration_description",
-                                     bundle: .module,
+                                     tableName: "AuthFoundation",
+                                     bundle: .authFoundation,
                                      comment: "Invalid URL")
 
         case .signatureInvalid:
             return NSLocalizedString("signature_invalid",
-                                     bundle: .module,
+                                     tableName: "AuthFoundation",
+                                     bundle: .authFoundation,
                                      comment: "Invalid URL")
 
         case .error(let error):
@@ -80,10 +86,10 @@ extension OAuth2Error: LocalizedError {
 
             return String.localizedStringWithFormat(
                 NSLocalizedString("error_description",
-                                  bundle: .module,
+                                  tableName: "AuthFoundation",
+                                  bundle: .authFoundation,
                                   comment: "Invalid URL"),
                 errorString)
         }
     }
 }
-#endif
