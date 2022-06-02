@@ -31,7 +31,7 @@ public protocol TokenStorage {
     
     /// Accessor for defining which token shall be the default.
     ///
-    /// > Note: Setting a new token should implicitly invoke ``add(token:)`` if the token doesn't previously exist within storage.
+    /// > Note: Setting a new token should implicitly invoke ``add(token:metadata:security:)`` if the token doesn't previously exist within storage.
     /// >
     /// > The ``TokenStorageDelegate/token(storage:defaultChanged:)`` method should also be invoked.
     var defaultTokenID: String? { get }
@@ -59,7 +59,7 @@ public protocol TokenStorage {
     ///
     /// This can be used during the token refresh process, and indicates that one token is semantically the same as another. If the token being replaced is the default, the default value should be updated as well.
     ///
-    /// > Note: This method should invoke the ``TokenStorageDelegate/token(storage:replaced:from:to:)`` and ``TokenStorageDelegate/token(storage:defaultChanged:)`` methods as needed.
+    /// > Note: This method should invoke the ``TokenStorageDelegate/token(storage:replaced:with:)`` and ``TokenStorageDelegate/token(storage:defaultChanged:)`` methods as needed.
     func replace(token id: String, with token: Token, security: [Credential.Security]?) throws
 
     /// Removes the given token.
@@ -79,7 +79,7 @@ public protocol TokenStorageDelegate: AnyObject {
     
     /// Sent when a new token has been added.
     ///
-    /// > Important: This message should only be sent when a token is actually new. If the token is semantically identical to another one already in storage, the ``token(storage:replaced:from:to:)`` message should be sent instead.
+    /// > Important: This message should only be sent when a token is actually new. If the token is semantically identical to another one already in storage, the ``token(storage:replaced:with:)`` message should be sent instead.
     func token(storage: TokenStorage, added id: String, token: Token)
     
     /// Sent when a token has been removed from storage.

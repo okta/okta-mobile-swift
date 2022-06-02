@@ -21,7 +21,11 @@ extension LAContext: KeychainAuthenticationContext {}
 
 public protocol KeychainAuthenticationContext {}
 
-/// Defines convenience mechanisms for interacting with the keychain, lincluding searching, creating, and deleting keychain items.
+/// Defines convenience mechanisms for interacting with the keychain, including searching, creating, and deleting keychain items.
+///
+/// This struct represents a collection of similar objects that can be used to represent keychain items, searches, and search results, with the goal of simplifying keychain operations in a more expressive way.
+///
+/// > Note: At this time, only Generic Password items are supported by this struct.
 public struct Keychain {
     static var implementation: KeychainProtocol = KeychainImpl()
     

@@ -44,7 +44,7 @@ extension Credential {
         
         /// The standard set of security settings to use when creating or getting credentials.
         ///
-        /// If you wish to change the default security threshold for Keychain items, you can assign a new value here. Additionally, if a ``context(_:)`` value is assigned to the ``standard-72pe0`` property, that context will be used when fetching credentials unless otherwise specified.
+        /// If you wish to change the default security threshold for Keychain items, you can assign a new value here. Additionally, if a ``context(_:)`` value is assigned to the ``standard`` property, that context will be used when fetching credentials unless otherwise specified.
         public static var standard: [Security] = [.accessibility(.afterFirstUnlockThisDeviceOnly)]
         #else
         public static var standard: [Security] = []
