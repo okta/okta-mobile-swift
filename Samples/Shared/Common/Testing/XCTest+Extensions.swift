@@ -17,6 +17,7 @@ extension TimeInterval {
     static let standard: TimeInterval = 3
     static let short: TimeInterval = 1
     static let long: TimeInterval = 5
+    static let veryLong: TimeInterval = 10
 }
 
 extension XCTestCase {
