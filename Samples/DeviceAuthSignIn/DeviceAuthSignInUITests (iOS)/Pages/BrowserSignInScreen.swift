@@ -63,7 +63,7 @@ class BrowserSignInScreen: Screen {
     }
     
     func waitForAuthorization() {
-        XCTAssertTrue(app.webViews.staticTexts["Device activated"].waitForExistence(timeout: .standard))
+        XCTAssertTrue(app.webViews.staticTexts["Device activated"].waitForExistence(timeout: .long))
         app.buttons["Done"].tap()
         XCTAssertTrue(app.webViews.firstMatch.waitForNonExistence(timeout: .short))
     }
