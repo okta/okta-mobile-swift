@@ -25,7 +25,7 @@ This library uses semantic versioning and follows Okta's [Library Version Policy
 
 | Version | Status                             |
 | ------- | ---------------------------------- |
-| 0.3.0   | ✔️ Beta                             |
+| 0.4.0   | ✔️ Beta                             |
 
 The latest release can always be found on the [releases page][github-releases].
 
