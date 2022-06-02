@@ -27,6 +27,7 @@ class BrowserSignInScreen: Screen {
         
     func isVisible(timeout: TimeInterval = .long) {
         XCTAssertTrue(app.staticTexts["Activate your device"].waitForExistence(timeout: timeout))
+        testCase.save(screenshot: "Activate your device")
     }
     
     func verifyActivationCode(_ code: String) {
@@ -36,6 +37,7 @@ class BrowserSignInScreen: Screen {
         
         XCTAssertEqual(code.replacingOccurrences(of: " ", with: ""),
                        screenCode)
+        testCase.save(screenshot: "Verify activation code")
         app.webViews.buttons["Next"].tap()
     }
 
@@ -60,10 +62,13 @@ class BrowserSignInScreen: Screen {
         passwordField.typeText(password)
         
         app.webViews.buttons["Sign in"].tap()
+        testCase.save(screenshot: "Sign in")
     }
     
     func waitForAuthorization() {
-        XCTAssertTrue(app.webViews.staticTexts["Device activated"].waitForExistence(timeout: .standard))
+        XCTAssertTrue(app.webViews.staticTexts["Device activated"].waitForExistence(timeout: .veryLong))
+        testCase.save(screenshot: "Device Activated")
+        
         app.buttons["Done"].tap()
         XCTAssertTrue(app.webViews.firstMatch.waitForNonExistence(timeout: .short))
     }
