@@ -75,7 +75,7 @@ public class Credential: Identifiable, Equatable, OAuth2ClientDelegate {
     /// The optional arguments `tags` and `security` allow you to customize how this token is stored to assist with later retrieval of these objects.
     ///
     /// > Note: The ``Credential/Security/standard`` static property defines the standard set of security options to use when the `security` argument is not provided. To change the default values used when storing credentials, you can change that property to fit your application's needs.
-    /// 
+    ///
     /// - Parameters:
     ///   - token: Token to store.
     ///   - tags: Optional developer-assigned tags that can enable you provide additional context to help with differentiating between multiple credentials, or to indicate the intended use for a particular token.
