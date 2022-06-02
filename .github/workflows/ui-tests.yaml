@@ -28,8 +28,8 @@ jobs:
     - name: Test Web Sign In
       run: |
         xcodebuild \
-            -derivedDataPath Build/DerivedData \
-            -clonedSourcePackagesDirPath Build/ClonedSources \
+            -derivedDataPath ../Build/DerivedData \
+            -clonedSourcePackagesDirPath ../Build/ClonedSources \
             -workspace OktaMobileSDK.xcworkspace \
             -scheme "WebSignIn (iOS)" \
             -destination 'platform=iOS Simulator,name=iPhone 12,OS=15.4' \
@@ -37,8 +37,8 @@ jobs:
     - name: Test Single Sign In
       run: |
         xcodebuild \
-            -derivedDataPath Build/DerivedData \
-            -clonedSourcePackagesDirPath Build/ClonedSources \
+            -derivedDataPath ../Build/DerivedData \
+            -clonedSourcePackagesDirPath ../Build/ClonedSources \
             -workspace OktaMobileSDK.xcworkspace \
             -scheme "SingleSignOn (iOS)" \
             -destination 'platform=iOS Simulator,name=iPhone 12,OS=15.4' \
@@ -56,8 +56,8 @@ jobs:
     - name: Test
       run: |
         xcodebuild \
-            -derivedDataPath Build/DerivedData \
-            -clonedSourcePackagesDirPath Build/ClonedSources \
+            -derivedDataPath ../Build/DerivedData \
+            -clonedSourcePackagesDirPath ../Build/ClonedSources \
             -workspace OktaMobileSDK.xcworkspace \
             -scheme "DeviceAuthSignIn (iOS)" \
             -destination 'platform=iOS Simulator,name=iPhone 12,OS=15.4' \
@@ -75,8 +75,8 @@ jobs:
     - name: Test
       run: |
         xcodebuild \
-            -derivedDataPath Build/DerivedData \
-            -clonedSourcePackagesDirPath Build/ClonedSources \
+            -derivedDataPath ../Build/DerivedData \
+            -clonedSourcePackagesDirPath ../Build/ClonedSources \
             -workspace OktaMobileSDK.xcworkspace \
             -scheme "DeviceAuthSignIn (tvOS)" \
             -destination 'platform=tvOS Simulator,name=Apple TV,OS=15.4' \
@@ -94,8 +94,8 @@ jobs:
     - name: Test
       run: |
         xcodebuild \
-            -derivedDataPath Build/DerivedData \
-            -clonedSourcePackagesDirPath Build/ClonedSources \
+            -derivedDataPath ../Build/DerivedData \
+            -clonedSourcePackagesDirPath ../Build/ClonedSources \
             -workspace OktaMobileSDK.xcworkspace \
             -scheme "UserPasswordSignIn (macOS)" \
             build test
