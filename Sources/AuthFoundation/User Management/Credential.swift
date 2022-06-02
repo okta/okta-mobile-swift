@@ -16,9 +16,9 @@ import Foundation
 import FoundationNetworking
 #endif
 
-/// Convenience object that wraps a ``Token``, providing methods and properties for interacting with credential resources.
+/// Convenience object that provides methods and properties for using a user's authentication tokens.
 ///
-/// This class can be used as a convenience mechanism for managing stored credentials, performing operations on or for a user using their credentials, and interacting with resources scoped to the credential.
+/// Once a user is authenticated within an application, the tokens' lifecycle must be managed to ensure it is properly refreshed as needed, is stored in a secure manner, and can be used to perform requests on behalf of the user. This class provides capabilities to accomplish all these tasks, while ensuring a convenient developer experience.
 public class Credential: Identifiable, Equatable, OAuth2ClientDelegate {
     /// The current or "default" credential.
     ///
@@ -71,10 +71,15 @@ public class Credential: Identifiable, Equatable, OAuth2ClientDelegate {
     /// Stores the given token for later use.
     ///
     /// Once the token is stored, a ``Credential`` object is returned that provides conveniences to interact with the token. See <doc:ManagingUserCredentials> for more information.
+    ///
+    /// The optional arguments `tags` and `security` allow you to customize how this token is stored to assist with later retrieval of these objects.
+    ///
+    /// > Note: The ``Credential/Security/standard`` static property defines the standard set of security options to use when the `security` argument is not provided. To change the default values used when storing credentials, you can change that property to fit your application's needs.
+    /// 
     /// - Parameters:
     ///   - token: Token to store.
-    ///   - tags: Optional developer-assigned tags to associate with this token.
-    ///   - options: Optional ``Credential/Security`` options to use when storing this token.
+    ///   - tags: Optional developer-assigned tags that can enable you provide additional context to help with differentiating between multiple credentials, or to indicate the intended use for a particular token.
+    ///   - options: Optional collection of security options used to customize how the token is stored.
     /// - Returns: Credential representing this token.
     @discardableResult
     public static func store(_ token: Token,
@@ -104,6 +109,8 @@ public class Credential: Identifiable, Equatable, OAuth2ClientDelegate {
     public let oauth2: OAuth2Client
     
     /// The ID the token is identified by within storage.
+    ///
+    /// This value is automatically generated when the token is stored, and is a way to uniquely identify a token within storage. This value corresponds to the IDs found in the ``allIDs`` static property.
     public lazy var id: String = { token.id }()
     
     /// The metadata associated with this credential.
