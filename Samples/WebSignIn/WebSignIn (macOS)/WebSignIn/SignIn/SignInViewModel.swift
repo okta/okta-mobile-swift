@@ -42,7 +42,7 @@ final class SignInViewModel: ObservableObject {
         auth?.signIn(from: ASPresentationAnchor()) { result in
             switch result {
             case .success(let token):
-                Credential.default = Credential(token: token)
+                try? Credential.store(token)
                 self.signedIn = true
             case .failure(let error):
                 self.signInError = error

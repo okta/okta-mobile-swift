@@ -30,6 +30,7 @@ jobs:
         xcodebuild \
             -derivedDataPath ../Build/DerivedData \
             -clonedSourcePackagesDirPath ../Build/ClonedSources \
+            -resultBundlePath ../Build/WebSignIn-iOS.xcresult \
             -workspace OktaMobileSDK.xcworkspace \
             -scheme "WebSignIn (iOS)" \
             -destination 'platform=iOS Simulator,name=iPhone 12,OS=15.4' \
@@ -39,10 +40,17 @@ jobs:
         xcodebuild \
             -derivedDataPath ../Build/DerivedData \
             -clonedSourcePackagesDirPath ../Build/ClonedSources \
+            -resultBundlePath ../Build/SingleSignOn-iOS.xcresult \
             -workspace OktaMobileSDK.xcworkspace \
             -scheme "SingleSignOn (iOS)" \
             -destination 'platform=iOS Simulator,name=iPhone 12,OS=15.4' \
             test
+    - uses: kishikawakatsumi/xcresulttool@v1
+      with:
+        path: |
+          ../Build/WebSignIn-iOS.xcresult
+          ../Build/SingleSignOn-iOS.xcresult
+      if: success() || failure()
 
   DeviceAuthSignIniOS:
     name: Device Auth Sign In (iOS)
@@ -58,10 +66,15 @@ jobs:
         xcodebuild \
             -derivedDataPath ../Build/DerivedData \
             -clonedSourcePackagesDirPath ../Build/ClonedSources \
+            -resultBundlePath ../Build/DeviceAuthSignIn-iOS.xcresult \
             -workspace OktaMobileSDK.xcworkspace \
             -scheme "DeviceAuthSignIn (iOS)" \
             -destination 'platform=iOS Simulator,name=iPhone 12,OS=15.4' \
             test
+    - uses: kishikawakatsumi/xcresulttool@v1
+      with:
+        path: ../Build/DeviceAuthSignIn-iOS.xcresult
+      if: success() || failure()
 
   DeviceAuthSignIntvOS:
     name: Device Auth Sign In (tvOS)
@@ -77,10 +90,15 @@ jobs:
         xcodebuild \
             -derivedDataPath ../Build/DerivedData \
             -clonedSourcePackagesDirPath ../Build/ClonedSources \
+            -resultBundlePath ../Build/DeviceAuthSignIn-tvOS.xcresult \
             -workspace OktaMobileSDK.xcworkspace \
             -scheme "DeviceAuthSignIn (tvOS)" \
             -destination 'platform=tvOS Simulator,name=Apple TV,OS=15.4' \
             test
+    - uses: kishikawakatsumi/xcresulttool@v1
+      with:
+        path: ../Build/DeviceAuthSignIn-tvOS.xcresult
+      if: success() || failure()
 
   UserPasswordSignInmacOS:
     name: User Password Sign In (macOS)
@@ -96,6 +114,11 @@ jobs:
         xcodebuild \
             -derivedDataPath ../Build/DerivedData \
             -clonedSourcePackagesDirPath ../Build/ClonedSources \
+            -resultBundlePath ../Build/UserPasswordSignIn-macOS.xcresult \
             -workspace OktaMobileSDK.xcworkspace \
             -scheme "UserPasswordSignIn (macOS)" \
             build test
+    - uses: kishikawakatsumi/xcresulttool@v1
+      with:
+        path: ../Build/UserPasswordSignIn-macOS.xcresult
+      if: success() || failure()
