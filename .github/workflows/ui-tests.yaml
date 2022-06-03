@@ -50,6 +50,7 @@ jobs:
       with:
         path: ~/TestResults/*.xcresult
         name: WebSignIn-iOS-Results
+      if: success() || failure()
 
   DeviceAuthSignIniOS:
     name: Device Auth Sign In (iOS)
@@ -75,6 +76,7 @@ jobs:
       with:
         path: ~/TestResults/*.xcresult
         name: DeviceAuthSignIn-iOS-Results
+      if: success() || failure()
 
   DeviceAuthSignIntvOS:
     name: Device Auth Sign In (tvOS)
@@ -100,6 +102,7 @@ jobs:
       with:
         path: ~/TestResults/*.xcresult
         name: DeviceAuthSignIn-tvOS-Results
+      if: success() || failure()
 
   UserPasswordSignInmacOS:
     name: User Password Sign In (macOS)
@@ -124,11 +127,13 @@ jobs:
       with:
         path: ~/TestResults/*.xcresult
         name: UserPasswordSignIn-macOS-Results
+      if: success() || failure()
 
   TestResults:
     name: Test Results
     runs-on: macos-12
     needs: [WebSignIn, DeviceAuthSignIniOS, DeviceAuthSignIntvOS, UserPasswordSignInmacOS]
+    if: success() || failure()
     steps:
     - name: Download Test Results
       uses: actions/download-artifact@v2
