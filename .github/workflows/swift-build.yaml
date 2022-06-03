@@ -36,34 +36,10 @@ jobs:
     runs-on: macos-12
     steps:
     - uses: actions/checkout@master
-    - name: Build AuthFoundation
-      run: |
-        set -o pipefail
-        env NSUnbufferedIO=YES xcodebuild build-for-testing \
-          -derivedDataPath ../Build/DerivedData \
-          -clonedSourcePackagesDirPath ../Build/ClonedSources \
-          -scheme AuthFoundation \
-          -destination "platform=iOS Simulator,OS=latest,name=iPhone 12" | xcpretty
-    - name: Build OktaOAuth2
-      run: |
-        set -o pipefail
-        env NSUnbufferedIO=YES xcodebuild build-for-testing \
-          -derivedDataPath ../Build/DerivedData \
-          -clonedSourcePackagesDirPath ../Build/ClonedSources \
-          -scheme OktaOAuth2 \
-          -destination "platform=iOS Simulator,OS=latest,name=iPhone 12" | xcpretty
-    - name: Build WebAuthenticationUI
-      run: |
-        set -o pipefail
-        env NSUnbufferedIO=YES xcodebuild build-for-testing \
-          -derivedDataPath ../Build/DerivedData \
-          -clonedSourcePackagesDirPath ../Build/ClonedSources \
-          -scheme WebAuthenticationUI \
-          -destination "platform=iOS Simulator,OS=latest,name=iPhone 12" | xcpretty
     - name: Test AuthFoundation
       run: |
         set -o pipefail
-        env NSUnbufferedIO=YES xcodebuild test-without-building \
+        env NSUnbufferedIO=YES xcodebuild test \
           -derivedDataPath ../Build/DerivedData \
           -clonedSourcePackagesDirPath ../Build/ClonedSources \
           -resultBundlePath ../TestResults/AuthFoundation.xcresult \
@@ -72,7 +48,7 @@ jobs:
     - name: Test OktaOAuth2
       run: |
         set -o pipefail
-        env NSUnbufferedIO=YES xcodebuild test-without-building \
+        env NSUnbufferedIO=YES xcodebuild test \
           -derivedDataPath ../Build/DerivedData \
           -clonedSourcePackagesDirPath ../Build/ClonedSources \
           -resultBundlePath ../TestResults/OktaOAuth2.xcresult \
@@ -81,17 +57,19 @@ jobs:
     - name: Test WebAuthenticationUI
       run: |
         set -o pipefail
-        env NSUnbufferedIO=YES xcodebuild test-without-building \
+        env NSUnbufferedIO=YES xcodebuild test \
           -derivedDataPath ../Build/DerivedData \
           -clonedSourcePackagesDirPath ../Build/ClonedSources \
           -resultBundlePath ../TestResults/WebAuthenticationUI.xcresult \
           -scheme WebAuthenticationUI \
           -destination "platform=iOS Simulator,OS=latest,name=iPhone 12" | xcpretty
     - uses: kishikawakatsumi/xcresulttool@v1
+      id: XcodeTests
       with:
         path: |
           ../TestResults/AuthFoundation.xcresult
           ../TestResults/OktaOAuth2.xcresult
           ../TestResults/WebAuthenticationUI.xcresult
+        title: Xcode Unit Test Results
         show-passed-tests: false
       if: success() || failure()

@@ -145,6 +145,7 @@ jobs:
         env
         find ~ -type d
     - uses: kishikawakatsumi/xcresulttool@v1
+      id: UITests
       with:
         path: |
           ../TestResults/DeviceAuthSignIn-iOS-Results/DeviceAuthSignIn-iOS.xcresult
@@ -152,4 +153,5 @@ jobs:
           ../TestResults/WebSignIn-iOS-Results/SingleSignOn-iOS.xcresult
           ../TestResults/DeviceAuthSignIn-tvOS-Results/DeviceAuthSignIn-tvOS.xcresult
           ../TestResults/UserPasswordSignIn-macOS-Results/UserPasswordSignIn-macOS.xcresult
+        title: UI Test Results
       if: success() || failure()
