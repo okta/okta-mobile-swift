@@ -37,22 +37,61 @@ jobs:
     steps:
     - uses: actions/checkout@master
     - name: Build AuthFoundation
-      run: set -o pipefail && env NSUnbufferedIO=YES xcodebuild build-for-testing -scheme AuthFoundation -destination "platform=iOS Simulator,OS=latest,name=iPhone 12" | xcpretty
-    - name: Test AuthFoundation
-      run: set -o pipefail && env NSUnbufferedIO=YES xcodebuild test-without-building -scheme AuthFoundation -resultBundlePath AuthFoundation.xcresult -destination "platform=iOS Simulator,OS=latest,name=iPhone 12" | xcpretty
+      run: |
+        set -o pipefail
+        env NSUnbufferedIO=YES xcodebuild build-for-testing \
+          -derivedDataPath ../Build/DerivedData \
+          -clonedSourcePackagesDirPath ../Build/ClonedSources \
+          -scheme AuthFoundation \
+          -destination "platform=iOS Simulator,OS=latest,name=iPhone 12" | xcpretty
     - name: Build OktaOAuth2
-      run: set -o pipefail && env NSUnbufferedIO=YES xcodebuild build-for-testing -scheme OktaOAuth2 -destination "platform=iOS Simulator,OS=latest,name=iPhone 12" | xcpretty
-    - name: Test OktaOAuth2
-      run: set -o pipefail && env NSUnbufferedIO=YES xcodebuild test-without-building -scheme OktaOAuth2 -resultBundlePath OktaOAuth2.xcresult -destination "platform=iOS Simulator,OS=latest,name=iPhone 12" | xcpretty
+      run: |
+        set -o pipefail
+        env NSUnbufferedIO=YES xcodebuild build-for-testing \
+          -derivedDataPath ../Build/DerivedData \
+          -clonedSourcePackagesDirPath ../Build/ClonedSources \
+          -scheme OktaOAuth2 \
+          -destination "platform=iOS Simulator,OS=latest,name=iPhone 12" | xcpretty
     - name: Build WebAuthenticationUI
-      run: set -o pipefail && env NSUnbufferedIO=YES xcodebuild build-for-testing -scheme WebAuthenticationUI -destination "platform=iOS Simulator,OS=latest,name=iPhone 12" | xcpretty
+      run: |
+        set -o pipefail
+        env NSUnbufferedIO=YES xcodebuild build-for-testing \
+          -derivedDataPath ../Build/DerivedData \
+          -clonedSourcePackagesDirPath ../Build/ClonedSources \
+          -scheme WebAuthenticationUI \
+          -destination "platform=iOS Simulator,OS=latest,name=iPhone 12" | xcpretty
+    - name: Test AuthFoundation
+      run: |
+        set -o pipefail
+        env NSUnbufferedIO=YES xcodebuild test-without-building \
+          -derivedDataPath ../Build/DerivedData \
+          -clonedSourcePackagesDirPath ../Build/ClonedSources \
+          -resultBundlePath ../TestResults/AuthFoundation.xcresult \
+          -scheme AuthFoundation \
+          -destination "platform=iOS Simulator,OS=latest,name=iPhone 12" | xcpretty
+    - name: Test OktaOAuth2
+      run: |
+        set -o pipefail
+        env NSUnbufferedIO=YES xcodebuild test-without-building \
+          -derivedDataPath ../Build/DerivedData \
+          -clonedSourcePackagesDirPath ../Build/ClonedSources \
+          -resultBundlePath ../TestResults/OktaOAuth2.xcresult \
+          -scheme OktaOAuth2 \
+          -destination "platform=iOS Simulator,OS=latest,name=iPhone 12" | xcpretty
     - name: Test WebAuthenticationUI
-      run: set -o pipefail && env NSUnbufferedIO=YES xcodebuild test-without-building -scheme WebAuthenticationUI -resultBundlePath WebAuthenticationUI.xcresult -destination "platform=iOS Simulator,OS=latest,name=iPhone 12" | xcpretty
+      run: |
+        set -o pipefail
+        env NSUnbufferedIO=YES xcodebuild test-without-building \
+          -derivedDataPath ../Build/DerivedData \
+          -clonedSourcePackagesDirPath ../Build/ClonedSources \
+          -resultBundlePath ../TestResults/WebAuthenticationUI.xcresult \
+          -scheme WebAuthenticationUI \
+          -destination "platform=iOS Simulator,OS=latest,name=iPhone 12" | xcpretty
     - uses: kishikawakatsumi/xcresulttool@v1
       with:
         path: |
-          AuthFoundation.xcresult
-          OktaOAuth2.xcresult
-          WebAuthenticationUI.xcresult
+          ../TestResults/AuthFoundation.xcresult
+          ../TestResults/OktaOAuth2.xcresult
+          ../TestResults/WebAuthenticationUI.xcresult
         show-passed-tests: false
       if: success() || failure()
