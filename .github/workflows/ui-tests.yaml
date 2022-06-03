@@ -45,12 +45,11 @@ jobs:
             -scheme "SingleSignOn (iOS)" \
             -destination 'platform=iOS Simulator,name=iPhone 12,OS=15.4' \
             test
-    - uses: kishikawakatsumi/xcresulttool@v1
+    - name: Upload Test Results
+      uses: actions/upload-artifact@v2
       with:
-        path: |
-          ../Build/WebSignIn-iOS.xcresult
-          ../Build/SingleSignOn-iOS.xcresult
-      if: success() || failure()
+        path: ../Build/*.xcresult
+        name: WebSignIn-iOS-Results
 
   DeviceAuthSignIniOS:
     name: Device Auth Sign In (iOS)
@@ -71,10 +70,11 @@ jobs:
             -scheme "DeviceAuthSignIn (iOS)" \
             -destination 'platform=iOS Simulator,name=iPhone 12,OS=15.4' \
             test
-    - uses: kishikawakatsumi/xcresulttool@v1
+    - name: Upload Test Results
+      uses: actions/upload-artifact@v2
       with:
-        path: ../Build/DeviceAuthSignIn-iOS.xcresult
-      if: success() || failure()
+        path: ../Build/*.xcresult
+        name: DeviceAuthSignIn-iOS-Results
 
   DeviceAuthSignIntvOS:
     name: Device Auth Sign In (tvOS)
@@ -95,10 +95,11 @@ jobs:
             -scheme "DeviceAuthSignIn (tvOS)" \
             -destination 'platform=tvOS Simulator,name=Apple TV,OS=15.4' \
             test
-    - uses: kishikawakatsumi/xcresulttool@v1
+    - name: Upload Test Results
+      uses: actions/upload-artifact@v2
       with:
-        path: ../Build/DeviceAuthSignIn-tvOS.xcresult
-      if: success() || failure()
+        path: ../Build/*.xcresult
+        name: DeviceAuthSignIn-tvOS-Results
 
   UserPasswordSignInmacOS:
     name: User Password Sign In (macOS)
@@ -118,7 +119,24 @@ jobs:
             -workspace OktaMobileSDK.xcworkspace \
             -scheme "UserPasswordSignIn (macOS)" \
             build test
+    - name: Upload Test Results
+      uses: actions/upload-artifact@v2
+      with:
+        path: ../Build/*.xcresult
+        name: UserPasswordSignIn-macOS-Results
+
+  TestResults:
+    name: Test Results
+    runs-on: macos-12
+    needs: [WebSignIn, DeviceAuthSignIniOS, DeviceAuthSignIntvOS, UserPasswordSignInmacOS]
+    steps:
+    - name: Download Test Results
+      uses: actions/download-artifact@v2
+      with:
+        path: ../TestResults
     - uses: kishikawakatsumi/xcresulttool@v1
       with:
-        path: ../Build/UserPasswordSignIn-macOS.xcresult
+        path: ../TestResults/*.xcresult
       if: success() || failure()
+      upload-bundles: false
+      show-passed-tests: false
