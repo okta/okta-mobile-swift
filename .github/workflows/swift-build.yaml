@@ -42,7 +42,7 @@ jobs:
         env NSUnbufferedIO=YES xcodebuild test \
           -derivedDataPath ../Build/DerivedData \
           -clonedSourcePackagesDirPath ../Build/ClonedSources \
-          -resultBundlePath ../TestResults/AuthFoundation.xcresult \
+          -resultBundlePath ~/TestResults/AuthFoundation.xcresult \
           -scheme AuthFoundation \
           -destination "platform=iOS Simulator,OS=latest,name=iPhone 12" | xcpretty
     - name: Test OktaOAuth2
@@ -51,7 +51,7 @@ jobs:
         env NSUnbufferedIO=YES xcodebuild test \
           -derivedDataPath ../Build/DerivedData \
           -clonedSourcePackagesDirPath ../Build/ClonedSources \
-          -resultBundlePath ../TestResults/OktaOAuth2.xcresult \
+          -resultBundlePath ~/TestResults/OktaOAuth2.xcresult \
           -scheme OktaOAuth2 \
           -destination "platform=iOS Simulator,OS=latest,name=iPhone 12" | xcpretty
     - name: Test WebAuthenticationUI
@@ -60,16 +60,12 @@ jobs:
         env NSUnbufferedIO=YES xcodebuild test \
           -derivedDataPath ../Build/DerivedData \
           -clonedSourcePackagesDirPath ../Build/ClonedSources \
-          -resultBundlePath ../TestResults/WebAuthenticationUI.xcresult \
+          -resultBundlePath ~/TestResults/WebAuthenticationUI.xcresult \
           -scheme WebAuthenticationUI \
           -destination "platform=iOS Simulator,OS=latest,name=iPhone 12" | xcpretty
-    - uses: kishikawakatsumi/xcresulttool@v1
-      id: XcodeTests
+    - name: Upload Test Results
+      uses: actions/upload-artifact@v2
       with:
-        path: |
-          ../TestResults/AuthFoundation.xcresult
-          ../TestResults/OktaOAuth2.xcresult
-          ../TestResults/WebAuthenticationUI.xcresult
-        title: Xcode Unit Test Results
-        show-passed-tests: false
+        path: ~/TestResults/*.xcresult
+        name: UnitTest-iOS-Results
       if: success() || failure()
