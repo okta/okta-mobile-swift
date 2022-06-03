@@ -145,11 +145,9 @@ jobs:
     - uses: kishikawakatsumi/xcresulttool@v1
       with:
         path: |
-          ../TestResults/DeviceAuthSignIn-iOS-Results/DeviceAuthSignIn-iOS.xcresult
-          ../TestResults/WebSignIn-iOS-Results/WebSignIn-iOS.xcresult
-          ../TestResults/WebSignIn-iOS-Results/SingleSignOn-iOS.xcresult
-          ../TestResults/DeviceAuthSignIn-tvOS-Results/DeviceAuthSignIn-tvOS.xcresult
-          ../TestResults/UserPasswordSignIn-macOS-Results/UserPasswordSignIn-macOS.xcresult
-        upload-bundles: false
-        show-passed-tests: false
+          TestResults/DeviceAuthSignIn-iOS-Results/DeviceAuthSignIn-iOS.xcresult
+          TestResults/WebSignIn-iOS-Results/WebSignIn-iOS.xcresult
+          TestResults/WebSignIn-iOS-Results/SingleSignOn-iOS.xcresult
+          TestResults/DeviceAuthSignIn-tvOS-Results/DeviceAuthSignIn-tvOS.xcresult
+          TestResults/UserPasswordSignIn-macOS-Results/UserPasswordSignIn-macOS.xcresult
       if: success() || failure()

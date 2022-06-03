@@ -1,4 +1,4 @@
-name: Swift Package Manager
+name: Package Managers
 
 on:
   push:
@@ -17,7 +17,7 @@ env:
 
 jobs:
   SwiftBuild:
-    name: Unit Tests on ${{ matrix.OS }}
+    name: Swift Package Manager on ${{ matrix.OS }}
     runs-on: ${{ matrix.OS }}
     strategy:
       matrix:
