@@ -141,7 +141,8 @@ jobs:
         path: ~/TestResults
     - name: Debug
       run: |
-        find . -type d
+        pwd
+        find ~ -type d
     - uses: kishikawakatsumi/xcresulttool@v1
       with:
         path: |

@@ -39,4 +39,8 @@ jobs:
     - name: Build
       run: set -o pipefail && env NSUnbufferedIO=YES xcodebuild build-for-testing -scheme AuthFoundation -destination "platform=iOS Simulator,OS=latest,name=iPhone 12" | xcpretty
     - name: Test
-      run: set -o pipefail && env NSUnbufferedIO=YES xcodebuild test-without-building -scheme AuthFoundation -destination "platform=iOS Simulator,OS=latest,name=iPhone 12" | xcpretty
+      run: set -o pipefail && env NSUnbufferedIO=YES xcodebuild test-without-building -scheme AuthFoundation -resultBundlePath TestResults.xcresult -destination "platform=iOS Simulator,OS=latest,name=iPhone 12" | xcpretty
+    - uses: kishikawakatsumi/xcresulttool@v1
+      with:
+        path: TestResults.xcresult
+      if: success() || failure()
