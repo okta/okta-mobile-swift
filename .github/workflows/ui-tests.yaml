@@ -138,10 +138,11 @@ jobs:
     - name: Download Test Results
       uses: actions/download-artifact@v2
       with:
-        path: ~/TestResults
+        path: ~/work/okta-mobile-swift/TestResults
     - name: Debug
       run: |
         pwd
+        env
         find ~ -type d
     - uses: kishikawakatsumi/xcresulttool@v1
       with:
