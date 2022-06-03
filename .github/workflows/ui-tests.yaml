@@ -30,7 +30,7 @@ jobs:
         xcodebuild \
             -derivedDataPath ../Build/DerivedData \
             -clonedSourcePackagesDirPath ../Build/ClonedSources \
-            -resultBundlePath ../Build/WebSignIn-iOS.xcresult \
+            -resultBundlePath ~/TestResults/WebSignIn-iOS.xcresult \
             -workspace OktaMobileSDK.xcworkspace \
             -scheme "WebSignIn (iOS)" \
             -destination 'platform=iOS Simulator,name=iPhone 12,OS=15.4' \
@@ -40,7 +40,7 @@ jobs:
         xcodebuild \
             -derivedDataPath ../Build/DerivedData \
             -clonedSourcePackagesDirPath ../Build/ClonedSources \
-            -resultBundlePath ../Build/SingleSignOn-iOS.xcresult \
+            -resultBundlePath ~/TestResults/SingleSignOn-iOS.xcresult \
             -workspace OktaMobileSDK.xcworkspace \
             -scheme "SingleSignOn (iOS)" \
             -destination 'platform=iOS Simulator,name=iPhone 12,OS=15.4' \
@@ -48,7 +48,7 @@ jobs:
     - name: Upload Test Results
       uses: actions/upload-artifact@v2
       with:
-        path: ../Build/*.xcresult
+        path: ~/TestResults/*.xcresult
         name: WebSignIn-iOS-Results
 
   DeviceAuthSignIniOS:
@@ -65,7 +65,7 @@ jobs:
         xcodebuild \
             -derivedDataPath ../Build/DerivedData \
             -clonedSourcePackagesDirPath ../Build/ClonedSources \
-            -resultBundlePath ../Build/DeviceAuthSignIn-iOS.xcresult \
+            -resultBundlePath ~/TestResults/DeviceAuthSignIn-iOS.xcresult \
             -workspace OktaMobileSDK.xcworkspace \
             -scheme "DeviceAuthSignIn (iOS)" \
             -destination 'platform=iOS Simulator,name=iPhone 12,OS=15.4' \
@@ -73,7 +73,7 @@ jobs:
     - name: Upload Test Results
       uses: actions/upload-artifact@v2
       with:
-        path: ../Build/*.xcresult
+        path: ~/TestResults/*.xcresult
         name: DeviceAuthSignIn-iOS-Results
 
   DeviceAuthSignIntvOS:
@@ -90,7 +90,7 @@ jobs:
         xcodebuild \
             -derivedDataPath ../Build/DerivedData \
             -clonedSourcePackagesDirPath ../Build/ClonedSources \
-            -resultBundlePath ../Build/DeviceAuthSignIn-tvOS.xcresult \
+            -resultBundlePath ~/TestResults/DeviceAuthSignIn-tvOS.xcresult \
             -workspace OktaMobileSDK.xcworkspace \
             -scheme "DeviceAuthSignIn (tvOS)" \
             -destination 'platform=tvOS Simulator,name=Apple TV,OS=15.4' \
@@ -98,7 +98,7 @@ jobs:
     - name: Upload Test Results
       uses: actions/upload-artifact@v2
       with:
-        path: ../Build/*.xcresult
+        path: ~/TestResults/*.xcresult
         name: DeviceAuthSignIn-tvOS-Results
 
   UserPasswordSignInmacOS:
@@ -115,14 +115,14 @@ jobs:
         xcodebuild \
             -derivedDataPath ../Build/DerivedData \
             -clonedSourcePackagesDirPath ../Build/ClonedSources \
-            -resultBundlePath ../Build/UserPasswordSignIn-macOS.xcresult \
+            -resultBundlePath ~/TestResults/UserPasswordSignIn-macOS.xcresult \
             -workspace OktaMobileSDK.xcworkspace \
             -scheme "UserPasswordSignIn (macOS)" \
             build test
     - name: Upload Test Results
       uses: actions/upload-artifact@v2
       with:
-        path: ../Build/*.xcresult
+        path: ~/TestResults/*.xcresult
         name: UserPasswordSignIn-macOS-Results
 
   TestResults:
@@ -133,10 +133,10 @@ jobs:
     - name: Download Test Results
       uses: actions/download-artifact@v2
       with:
-        path: ../TestResults
+        path: ~/TestResults
     - uses: kishikawakatsumi/xcresulttool@v1
       with:
-        path: ../TestResults/*.xcresult
+        path: ~/TestResults/*.xcresult
         upload-bundles: false
         show-passed-tests: false
       if: success() || failure()
