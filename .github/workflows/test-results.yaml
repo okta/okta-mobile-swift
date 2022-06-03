@@ -1,0 +1,35 @@
+name: UI Tests
+
+on:
+  workflow_run:
+    workflows: ["Package Managers", "UI Tests"]
+    branches:
+      - master
+      - dev-*
+      - release-*
+    types:
+      - completed
+
+jobs:
+  TestResults:
+    name: Test Results
+    runs-on: ubuntu-latest
+    if: success() || failure()
+    steps:
+    - name: Download Test Results
+      uses: actions/download-artifact@v2
+      with:
+        path: ~/work/okta-mobile-swift/TestResults
+    - uses: kishikawakatsumi/xcresulttool@v1
+      with:
+        path: |
+          ../TestResults/DeviceAuthSignIn-iOS-Results/DeviceAuthSignIn-iOS.xcresult
+          ../TestResults/WebSignIn-iOS-Results/WebSignIn-iOS.xcresult
+          ../TestResults/WebSignIn-iOS-Results/SingleSignOn-iOS.xcresult
+          ../TestResults/DeviceAuthSignIn-tvOS-Results/DeviceAuthSignIn-tvOS.xcresult
+          ../TestResults/UserPasswordSignIn-macOS-Results/UserPasswordSignIn-macOS.xcresult
+          ../TestResults/UnitTest-iOS-Results/AuthFoundation.xcresult
+          ../TestResults/UnitTest-iOS-Results/OktaOAuth2.xcresult
+          ../TestResults/UnitTest-iOS-Results/WebAuthenticationUI.xcresult
+        title: Test Results
+      if: success() || failure()
