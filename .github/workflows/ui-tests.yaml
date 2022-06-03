@@ -137,6 +137,6 @@ jobs:
     - uses: kishikawakatsumi/xcresulttool@v1
       with:
         path: ../TestResults/*.xcresult
+        upload-bundles: false
+        show-passed-tests: false
       if: success() || failure()
-      upload-bundles: false
-      show-passed-tests: false
