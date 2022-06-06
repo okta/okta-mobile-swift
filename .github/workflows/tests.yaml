@@ -1,4 +1,4 @@
-name: UI Tests
+name: Tests
 
 on:
   push:
@@ -16,7 +16,57 @@ env:
   DEVELOPER_DIR: /Applications/Xcode_13.3.app/Contents/Developer
 
 jobs:
-  WebSignIn:
+  UnitTest-Swift:
+    name: Swift Package Manager
+    steps:
+    - name: Get swift version
+      run: swift --version
+    - uses: actions/checkout@master
+    - name: Build
+      run: swift build --build-tests
+    - name: Test
+      run: swift test
+
+  UnitTest-Xcode:
+    name: Xcode
+    runs-on: macos-12
+    steps:
+    - uses: actions/checkout@master
+    - name: Test AuthFoundation
+      run: |
+        set -o pipefail
+        env NSUnbufferedIO=YES xcodebuild test \
+          -derivedDataPath ../Build/DerivedData \
+          -clonedSourcePackagesDirPath ../Build/ClonedSources \
+          -resultBundlePath ~/TestResults/AuthFoundation.xcresult \
+          -scheme AuthFoundation \
+          -destination "platform=iOS Simulator,OS=latest,name=iPhone 12" | xcpretty
+    - name: Test OktaOAuth2
+      run: |
+        set -o pipefail
+        env NSUnbufferedIO=YES xcodebuild test \
+          -derivedDataPath ../Build/DerivedData \
+          -clonedSourcePackagesDirPath ../Build/ClonedSources \
+          -resultBundlePath ~/TestResults/OktaOAuth2.xcresult \
+          -scheme OktaOAuth2 \
+          -destination "platform=iOS Simulator,OS=latest,name=iPhone 12" | xcpretty
+    - name: Test WebAuthenticationUI
+      run: |
+        set -o pipefail
+        env NSUnbufferedIO=YES xcodebuild test \
+          -derivedDataPath ../Build/DerivedData \
+          -clonedSourcePackagesDirPath ../Build/ClonedSources \
+          -resultBundlePath ~/TestResults/WebAuthenticationUI.xcresult \
+          -scheme WebAuthenticationUI \
+          -destination "platform=iOS Simulator,OS=latest,name=iPhone 12" | xcpretty
+    - name: Upload Test Results
+      uses: actions/upload-artifact@v2
+      with:
+        path: ~/TestResults/*.xcresult
+        name: UnitTest-iOS-Results
+      if: success() || failure()
+
+  UITest-WebSignIn:
     name: Web Sign In / Single Sign On (iOS)
     runs-on: macos-12
     steps:
@@ -52,7 +102,7 @@ jobs:
         name: WebSignIn-iOS-Results
       if: success() || failure()
 
-  DeviceAuthSignIniOS:
+  UITest-DeviceAuthSignIniOS:
     name: Device Auth Sign In (iOS)
     runs-on: macos-12
     steps:
@@ -78,7 +128,7 @@ jobs:
         name: DeviceAuthSignIn-iOS-Results
       if: success() || failure()
 
-  DeviceAuthSignIntvOS:
+  UITest-DeviceAuthSignIntvOS:
     name: Device Auth Sign In (tvOS)
     runs-on: macos-12
     steps:
@@ -104,7 +154,7 @@ jobs:
         name: DeviceAuthSignIn-tvOS-Results
       if: success() || failure()
 
-  UserPasswordSignInmacOS:
+  UITest-UserPasswordSignInmacOS:
     name: User Password Sign In (macOS)
     runs-on: macos-12
     steps:
@@ -127,4 +177,33 @@ jobs:
       with:
         path: ~/TestResults/*.xcresult
         name: UserPasswordSignIn-macOS-Results
+      if: success() || failure()
+
+  Results:
+    name: Test Results
+    runs-on: ubuntu-latest
+    needs:
+      - UnitTest-Xcode
+      - UITest-WebSignIn
+      - UITest-DeviceAuthSignIniOS
+      - UITest-DeviceAuthSignIntvOS
+      - UITest-UserPasswordSignInmacOS
+    if: success() || failure()
+    steps:
+    - name: Download Test Results
+      uses: actions/download-artifact@v2
+      with:
+        path: ~/work/okta-mobile-swift/TestResults
+    - uses: kishikawakatsumi/xcresulttool@v1
+      with:
+        path: |
+          ../TestResults/DeviceAuthSignIn-iOS-Results/DeviceAuthSignIn-iOS.xcresult
+          ../TestResults/WebSignIn-iOS-Results/WebSignIn-iOS.xcresult
+          ../TestResults/WebSignIn-iOS-Results/SingleSignOn-iOS.xcresult
+          ../TestResults/DeviceAuthSignIn-tvOS-Results/DeviceAuthSignIn-tvOS.xcresult
+          ../TestResults/UserPasswordSignIn-macOS-Results/UserPasswordSignIn-macOS.xcresult
+          ../TestResults/UnitTest-iOS-Results/AuthFoundation.xcresult
+          ../TestResults/UnitTest-iOS-Results/OktaOAuth2.xcresult
+          ../TestResults/UnitTest-iOS-Results/WebAuthenticationUI.xcresult
+        title: Test Results
       if: success() || failure()
