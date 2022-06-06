@@ -42,7 +42,7 @@ jobs:
     - name: Build AuthFoundation for ${{ matrix.SDK }}
       run: |
         set -o pipefail
-        env NSUnbufferedIO=YES xcodebuild build-for-testing \
+        env NSUnbufferedIO=YES xcodebuild build \
           -derivedDataPath ../Build/DerivedData \
           -clonedSourcePackagesDirPath ../Build/ClonedSources \
           -resultBundlePath ~/TestResults/AuthFoundation.xcresult \
@@ -51,7 +51,7 @@ jobs:
     - name: Build OktaOAuth2
       run: |
         set -o pipefail
-        env NSUnbufferedIO=YES xcodebuild build-for-testing \
+        env NSUnbufferedIO=YES xcodebuild build \
           -derivedDataPath ../Build/DerivedData \
           -clonedSourcePackagesDirPath ../Build/ClonedSources \
           -resultBundlePath ~/TestResults/OktaOAuth2.xcresult \
@@ -61,7 +61,7 @@ jobs:
       if: ${{ matrix.SDK }} != "appletvsimulator"
       run: |
         set -o pipefail
-        env NSUnbufferedIO=YES xcodebuild build-for-testing \
+        env NSUnbufferedIO=YES xcodebuild build \
           -derivedDataPath ../Build/DerivedData \
           -clonedSourcePackagesDirPath ../Build/ClonedSources \
           -resultBundlePath ~/TestResults/WebAuthenticationUI.xcresult \
