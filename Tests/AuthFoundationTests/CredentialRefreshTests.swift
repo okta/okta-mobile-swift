@@ -225,7 +225,7 @@ final class CredentialRefreshTests: XCTestCase, OAuth2ClientDelegate {
         urlSession.resetRequests()
         refreshExpectation = expectation(description: "Second refresh")
         delegate.refreshExpectation = refreshExpectation
-        wait(for: [refreshExpectation], timeout: 1)
+        wait(for: [refreshExpectation], timeout: 3)
 
         XCTAssertEqual(urlSession.requests.count, 1)
         urlSession.resetRequests()
