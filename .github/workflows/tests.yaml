@@ -196,7 +196,7 @@ jobs:
     name: Test Results
     runs-on: macos-12
     needs:
-      - UnitTest-Xcode
+      - XcodeBuild
       - UITest-WebSignIn
       - UITest-DeviceAuthSignIniOS
       - UITest-DeviceAuthSignIntvOS
