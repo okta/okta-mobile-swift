@@ -33,13 +33,10 @@ jobs:
     runs-on: macos-12
     strategy:
       matrix:
-        SDK:
-          - iphonesimulator
-          - appletvsimulator
-          - macosx
+        sdk: [iphonesimulator, appletvsimulator, macosx]
     steps:
     - uses: actions/checkout@master
-    - name: Build AuthFoundation for ${{ SDK }}
+    - name: Build AuthFoundation for ${{ sdk }}
       run: |
         set -o pipefail
         env NSUnbufferedIO=YES xcodebuild build-for-testing \
@@ -47,7 +44,7 @@ jobs:
           -clonedSourcePackagesDirPath ../Build/ClonedSources \
           -resultBundlePath ~/TestResults/AuthFoundation.xcresult \
           -scheme AuthFoundation \
-          -sdk ${{ SDK }} | xcpretty
+          -sdk ${{ sdk }} | xcpretty
     - name: Build OktaOAuth2
       run: |
         set -o pipefail
@@ -56,7 +53,7 @@ jobs:
           -clonedSourcePackagesDirPath ../Build/ClonedSources \
           -resultBundlePath ~/TestResults/OktaOAuth2.xcresult \
           -scheme OktaOAuth2 \
-          -sdk ${{ SDK }} | xcpretty
+          -sdk ${{ sdk }} | xcpretty
     - name: Build WebAuthenticationUI
       run: |
         set -o pipefail
@@ -65,12 +62,12 @@ jobs:
           -clonedSourcePackagesDirPath ../Build/ClonedSources \
           -resultBundlePath ~/TestResults/WebAuthenticationUI.xcresult \
           -scheme WebAuthenticationUI \
-          -sdk ${{ SDK }} | xcpretty
+          -sdk ${{ sdk }} | xcpretty
     - name: Cache Build
       uses: actions/cache@v2
       with:
         path: ../Build
-        key: Build-${{ SDK }}-${{ github.sha }}
+        key: Build-${{ sdk }}-${{ github.sha }}
 
   UnitTest-Xcode:
     name: Xcode Unit Tests
