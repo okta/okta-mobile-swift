@@ -31,9 +31,15 @@ jobs:
   XcodeBuild:
     name: Xcode Build
     runs-on: macos-12
+    strategy:
+      matrix:
+        SDK:
+          - iphonesimulator
+          - appletvsimulator
+          - macosx
     steps:
     - uses: actions/checkout@master
-    - name: Test AuthFoundation
+    - name: Build AuthFoundation for ${{ SDK }}
       run: |
         set -o pipefail
         env NSUnbufferedIO=YES xcodebuild build-for-testing \
@@ -41,8 +47,8 @@ jobs:
           -clonedSourcePackagesDirPath ../Build/ClonedSources \
           -resultBundlePath ~/TestResults/AuthFoundation.xcresult \
           -scheme AuthFoundation \
-          -destination "platform=iOS Simulator,OS=latest,name=iPhone 12" | xcpretty
-    - name: Test OktaOAuth2
+          -sdk ${{ SDK }} | xcpretty
+    - name: Build OktaOAuth2
       run: |
         set -o pipefail
         env NSUnbufferedIO=YES xcodebuild build-for-testing \
@@ -50,8 +56,8 @@ jobs:
           -clonedSourcePackagesDirPath ../Build/ClonedSources \
           -resultBundlePath ~/TestResults/OktaOAuth2.xcresult \
           -scheme OktaOAuth2 \
-          -destination "platform=iOS Simulator,OS=latest,name=iPhone 12" | xcpretty
-    - name: Test WebAuthenticationUI
+          -sdk ${{ SDK }} | xcpretty
+    - name: Build WebAuthenticationUI
       run: |
         set -o pipefail
         env NSUnbufferedIO=YES xcodebuild build-for-testing \
@@ -59,12 +65,12 @@ jobs:
           -clonedSourcePackagesDirPath ../Build/ClonedSources \
           -resultBundlePath ~/TestResults/WebAuthenticationUI.xcresult \
           -scheme WebAuthenticationUI \
-          -destination "platform=iOS Simulator,OS=latest,name=iPhone 12" | xcpretty
+          -sdk ${{ SDK }} | xcpretty
     - name: Cache Build
       uses: actions/cache@v2
       with:
         path: ../Build
-        key: Build-${{ github.sha }}-${{ runner.os }}
+        key: Build-${{ SDK }}-${{ github.sha }}
 
   UnitTest-Xcode:
     name: Xcode Unit Tests
@@ -76,7 +82,7 @@ jobs:
       uses: actions/cache@v2
       with:
         path: ../Build
-        key: Build-${{ github.sha }}-${{ runner.os }}
+        key: Build-iphonesimulator-${{ github.sha }}
     - name: Test AuthFoundation
       run: |
         set -o pipefail
@@ -85,6 +91,7 @@ jobs:
           -clonedSourcePackagesDirPath ../Build/ClonedSources \
           -resultBundlePath ~/TestResults/AuthFoundation.xcresult \
           -scheme AuthFoundation \
+          -sdk iphonesimulator \
           -destination "platform=iOS Simulator,OS=latest,name=iPhone 12" | xcpretty
     - name: Test OktaOAuth2
       run: |
@@ -94,6 +101,7 @@ jobs:
           -clonedSourcePackagesDirPath ../Build/ClonedSources \
           -resultBundlePath ~/TestResults/OktaOAuth2.xcresult \
           -scheme OktaOAuth2 \
+          -sdk iphonesimulator \
           -destination "platform=iOS Simulator,OS=latest,name=iPhone 12" | xcpretty
     - name: Test WebAuthenticationUI
       run: |
@@ -103,6 +111,7 @@ jobs:
           -clonedSourcePackagesDirPath ../Build/ClonedSources \
           -resultBundlePath ~/TestResults/WebAuthenticationUI.xcresult \
           -scheme WebAuthenticationUI \
+          -sdk iphonesimulator \
           -destination "platform=iOS Simulator,OS=latest,name=iPhone 12" | xcpretty
     - name: Upload Test Results
       uses: actions/upload-artifact@v2
@@ -121,7 +130,7 @@ jobs:
       uses: actions/cache@v2
       with:
         path: ../Build
-        key: Build-${{ github.sha }}-${{ runner.os }}
+        key: Build-iphonesimulator-${{ github.sha }}
     - uses: ./.github/actions/setup-secrets
       with:
         okta_plist: "${{ secrets.TEST_OKTA_PLIST }}"
@@ -134,6 +143,7 @@ jobs:
             -resultBundlePath ~/TestResults/WebSignIn-iOS.xcresult \
             -workspace OktaMobileSDK.xcworkspace \
             -scheme "WebSignIn (iOS)" \
+            -sdk iphonesimulator \
             -destination 'platform=iOS Simulator,name=iPhone 12,OS=15.4' \
             test
     - name: Test Single Sign In
@@ -144,6 +154,7 @@ jobs:
             -resultBundlePath ~/TestResults/SingleSignOn-iOS.xcresult \
             -workspace OktaMobileSDK.xcworkspace \
             -scheme "SingleSignOn (iOS)" \
+            -sdk iphonesimulator \
             -destination 'platform=iOS Simulator,name=iPhone 12,OS=15.4' \
             test
     - name: Upload Test Results
@@ -163,7 +174,7 @@ jobs:
       uses: actions/cache@v2
       with:
         path: ../Build
-        key: Build-${{ github.sha }}-${{ runner.os }}
+        key: Build-iphonesimulator-${{ github.sha }}
     - uses: ./.github/actions/setup-secrets
       with:
         okta_plist: "${{ secrets.TEST_OKTA_PLIST }}"
@@ -176,6 +187,7 @@ jobs:
             -resultBundlePath ~/TestResults/DeviceAuthSignIn-iOS.xcresult \
             -workspace OktaMobileSDK.xcworkspace \
             -scheme "DeviceAuthSignIn (iOS)" \
+            -sdk iphonesimulator \
             -destination 'platform=iOS Simulator,name=iPhone 12,OS=15.4' \
             test
     - name: Upload Test Results
@@ -195,7 +207,7 @@ jobs:
       uses: actions/cache@v2
       with:
         path: ../Build
-        key: Build-${{ github.sha }}-${{ runner.os }}
+        key: Build-appletvsimulator-${{ github.sha }}
     - uses: ./.github/actions/setup-secrets
       with:
         okta_plist: "${{ secrets.TEST_OKTA_PLIST }}"
@@ -208,6 +220,7 @@ jobs:
             -resultBundlePath ~/TestResults/DeviceAuthSignIn-tvOS.xcresult \
             -workspace OktaMobileSDK.xcworkspace \
             -scheme "DeviceAuthSignIn (tvOS)" \
+            -sdk appletvsimulator \
             -destination 'platform=tvOS Simulator,name=Apple TV,OS=15.4' \
             test
     - name: Upload Test Results
@@ -227,7 +240,7 @@ jobs:
       uses: actions/cache@v2
       with:
         path: ../Build
-        key: Build-${{ github.sha }}-${{ runner.os }}
+        key: Build-macosx-${{ github.sha }}
     - uses: ./.github/actions/setup-secrets
       with:
         okta_plist: "${{ secrets.TEST_OKTA_PLIST }}"
@@ -239,6 +252,7 @@ jobs:
             -clonedSourcePackagesDirPath ../Build/ClonedSources \
             -resultBundlePath ~/TestResults/UserPasswordSignIn-macOS.xcresult \
             -workspace OktaMobileSDK.xcworkspace \
+            -sdk macosx \
             -scheme "UserPasswordSignIn (macOS)" \
             build test
     - name: Upload Test Results
