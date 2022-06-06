@@ -43,8 +43,8 @@ jobs:
       run: |
         set -o pipefail
         env NSUnbufferedIO=YES xcodebuild build \
-          -derivedDataPath ../Build/DerivedData \
-          -clonedSourcePackagesDirPath ../Build/ClonedSources \
+          -derivedDataPath ~/Build/DerivedData \
+          -clonedSourcePackagesDirPath ~/Build/ClonedSources \
           -resultBundlePath ~/TestResults/AuthFoundation.xcresult \
           -scheme AuthFoundation \
           -sdk ${{ matrix.SDK }} | xcpretty
@@ -52,8 +52,8 @@ jobs:
       run: |
         set -o pipefail
         env NSUnbufferedIO=YES xcodebuild build \
-          -derivedDataPath ../Build/DerivedData \
-          -clonedSourcePackagesDirPath ../Build/ClonedSources \
+          -derivedDataPath ~/Build/DerivedData \
+          -clonedSourcePackagesDirPath ~/Build/ClonedSources \
           -resultBundlePath ~/TestResults/OktaOAuth2.xcresult \
           -scheme OktaOAuth2 \
           -sdk ${{ matrix.SDK }} | xcpretty
@@ -62,15 +62,15 @@ jobs:
       run: |
         set -o pipefail
         env NSUnbufferedIO=YES xcodebuild build \
-          -derivedDataPath ../Build/DerivedData \
-          -clonedSourcePackagesDirPath ../Build/ClonedSources \
+          -derivedDataPath ~/Build/DerivedData \
+          -clonedSourcePackagesDirPath ~/Build/ClonedSources \
           -resultBundlePath ~/TestResults/WebAuthenticationUI.xcresult \
           -scheme WebAuthenticationUI \
           -sdk ${{ matrix.SDK }} | xcpretty
     - name: Cache Build
       uses: actions/cache@v2
       with:
-        path: ../Build
+        path: ~/Build
         key: Build-${{ matrix.SDK }}-${{ github.sha }}
 
   UnitTest-Xcode:
@@ -82,14 +82,14 @@ jobs:
     - name: Use Build Cache
       uses: actions/cache@v2
       with:
-        path: ../Build
+        path: ~/Build
         key: Build-iphonesimulator-${{ github.sha }}
     - name: Test AuthFoundation
       run: |
         set -o pipefail
         env NSUnbufferedIO=YES xcodebuild test \
-          -derivedDataPath ../Build/DerivedData \
-          -clonedSourcePackagesDirPath ../Build/ClonedSources \
+          -derivedDataPath ~/Build/DerivedData \
+          -clonedSourcePackagesDirPath ~/Build/ClonedSources \
           -resultBundlePath ~/TestResults/AuthFoundation.xcresult \
           -scheme AuthFoundation \
           -sdk iphonesimulator \
@@ -98,8 +98,8 @@ jobs:
       run: |
         set -o pipefail
         env NSUnbufferedIO=YES xcodebuild test \
-          -derivedDataPath ../Build/DerivedData \
-          -clonedSourcePackagesDirPath ../Build/ClonedSources \
+          -derivedDataPath ~/Build/DerivedData \
+          -clonedSourcePackagesDirPath ~/Build/ClonedSources \
           -resultBundlePath ~/TestResults/OktaOAuth2.xcresult \
           -scheme OktaOAuth2 \
           -sdk iphonesimulator \
@@ -108,8 +108,8 @@ jobs:
       run: |
         set -o pipefail
         env NSUnbufferedIO=YES xcodebuild test \
-          -derivedDataPath ../Build/DerivedData \
-          -clonedSourcePackagesDirPath ../Build/ClonedSources \
+          -derivedDataPath ~/Build/DerivedData \
+          -clonedSourcePackagesDirPath ~/Build/ClonedSources \
           -resultBundlePath ~/TestResults/WebAuthenticationUI.xcresult \
           -scheme WebAuthenticationUI \
           -sdk iphonesimulator \
@@ -130,7 +130,7 @@ jobs:
     - name: Use Build Cache
       uses: actions/cache@v2
       with:
-        path: ../Build
+        path: ~/Build
         key: Build-iphonesimulator-${{ github.sha }}
     - uses: ./.github/actions/setup-secrets
       with:
@@ -139,8 +139,8 @@ jobs:
     - name: Test Web Sign In
       run: |
         xcodebuild \
-            -derivedDataPath ../Build/DerivedData \
-            -clonedSourcePackagesDirPath ../Build/ClonedSources \
+            -derivedDataPath ~/Build/DerivedData \
+            -clonedSourcePackagesDirPath ~/Build/ClonedSources \
             -resultBundlePath ~/TestResults/WebSignIn-iOS.xcresult \
             -workspace OktaMobileSDK.xcworkspace \
             -scheme "WebSignIn (iOS)" \
@@ -150,8 +150,8 @@ jobs:
     - name: Test Single Sign In
       run: |
         xcodebuild \
-            -derivedDataPath ../Build/DerivedData \
-            -clonedSourcePackagesDirPath ../Build/ClonedSources \
+            -derivedDataPath ~/Build/DerivedData \
+            -clonedSourcePackagesDirPath ~/Build/ClonedSources \
             -resultBundlePath ~/TestResults/SingleSignOn-iOS.xcresult \
             -workspace OktaMobileSDK.xcworkspace \
             -scheme "SingleSignOn (iOS)" \
@@ -174,7 +174,7 @@ jobs:
     - name: Use Build Cache
       uses: actions/cache@v2
       with:
-        path: ../Build
+        path: ~/Build
         key: Build-iphonesimulator-${{ github.sha }}
     - uses: ./.github/actions/setup-secrets
       with:
@@ -183,8 +183,8 @@ jobs:
     - name: Test
       run: |
         xcodebuild \
-            -derivedDataPath ../Build/DerivedData \
-            -clonedSourcePackagesDirPath ../Build/ClonedSources \
+            -derivedDataPath ~/Build/DerivedData \
+            -clonedSourcePackagesDirPath ~/Build/ClonedSources \
             -resultBundlePath ~/TestResults/DeviceAuthSignIn-iOS.xcresult \
             -workspace OktaMobileSDK.xcworkspace \
             -scheme "DeviceAuthSignIn (iOS)" \
@@ -207,7 +207,7 @@ jobs:
     - name: Use Build Cache
       uses: actions/cache@v2
       with:
-        path: ../Build
+        path: ~/Build
         key: Build-appletvsimulator-${{ github.sha }}
     - uses: ./.github/actions/setup-secrets
       with:
@@ -216,8 +216,8 @@ jobs:
     - name: Test
       run: |
         xcodebuild \
-            -derivedDataPath ../Build/DerivedData \
-            -clonedSourcePackagesDirPath ../Build/ClonedSources \
+            -derivedDataPath ~/Build/DerivedData \
+            -clonedSourcePackagesDirPath ~/Build/ClonedSources \
             -resultBundlePath ~/TestResults/DeviceAuthSignIn-tvOS.xcresult \
             -workspace OktaMobileSDK.xcworkspace \
             -scheme "DeviceAuthSignIn (tvOS)" \
@@ -240,7 +240,7 @@ jobs:
     - name: Use Build Cache
       uses: actions/cache@v2
       with:
-        path: ../Build
+        path: ~/Build
         key: Build-macosx-${{ github.sha }}
     - uses: ./.github/actions/setup-secrets
       with:
@@ -249,8 +249,8 @@ jobs:
     - name: Test
       run: |
         xcodebuild \
-            -derivedDataPath ../Build/DerivedData \
-            -clonedSourcePackagesDirPath ../Build/ClonedSources \
+            -derivedDataPath ~/Build/DerivedData \
+            -clonedSourcePackagesDirPath ~/Build/ClonedSources \
             -resultBundlePath ~/TestResults/UserPasswordSignIn-macOS.xcresult \
             -workspace OktaMobileSDK.xcworkspace \
             -sdk macosx \
