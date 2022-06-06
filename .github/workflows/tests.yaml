@@ -29,61 +29,10 @@ jobs:
       run: swift test
 
   XcodeBuild:
-    name: Xcode Build
-    runs-on: macos-12
-    strategy:
-      matrix:
-        SDK:
-          - iphonesimulator
-          - appletvsimulator
-          - macosx
-    steps:
-    - uses: actions/checkout@master
-    - name: Build AuthFoundation for ${{ matrix.SDK }}
-      run: |
-        set -o pipefail
-        env NSUnbufferedIO=YES xcodebuild build \
-          -derivedDataPath ~/Build/DerivedData \
-          -clonedSourcePackagesDirPath ~/Build/ClonedSources \
-          -resultBundlePath ~/TestResults/AuthFoundation.xcresult \
-          -scheme AuthFoundation \
-          -sdk ${{ matrix.SDK }} | xcpretty
-    - name: Build OktaOAuth2
-      run: |
-        set -o pipefail
-        env NSUnbufferedIO=YES xcodebuild build \
-          -derivedDataPath ~/Build/DerivedData \
-          -clonedSourcePackagesDirPath ~/Build/ClonedSources \
-          -resultBundlePath ~/TestResults/OktaOAuth2.xcresult \
-          -scheme OktaOAuth2 \
-          -sdk ${{ matrix.SDK }} | xcpretty
-    - name: Build WebAuthenticationUI
-      if: ${{ matrix.SDK != 'appletvsimulator' }}
-      run: |
-        set -o pipefail
-        env NSUnbufferedIO=YES xcodebuild build \
-          -derivedDataPath ~/Build/DerivedData \
-          -clonedSourcePackagesDirPath ~/Build/ClonedSources \
-          -resultBundlePath ~/TestResults/WebAuthenticationUI.xcresult \
-          -scheme WebAuthenticationUI \
-          -sdk ${{ matrix.SDK }} | xcpretty
-    - name: Cache Build
-      uses: actions/cache@v2
-      with:
-        path: ~/Build
-        key: Build-${{ matrix.SDK }}-${{ github.sha }}
-
-  UnitTest-Xcode:
     name: Xcode Unit Tests
     runs-on: macos-12
-    needs: XcodeBuild
     steps:
     - uses: actions/checkout@master
-    - name: Use Build Cache
-      uses: actions/cache@v2
-      with:
-        path: ~/Build
-        key: Build-iphonesimulator-${{ github.sha }}
     - name: Test AuthFoundation
       run: |
         set -o pipefail
@@ -127,11 +76,6 @@ jobs:
     needs: XcodeBuild
     steps:
     - uses: actions/checkout@master
-    - name: Use Build Cache
-      uses: actions/cache@v2
-      with:
-        path: ~/Build
-        key: Build-iphonesimulator-${{ github.sha }}
     - uses: ./.github/actions/setup-secrets
       with:
         okta_plist: "${{ secrets.TEST_OKTA_PLIST }}"
@@ -171,11 +115,6 @@ jobs:
     needs: XcodeBuild
     steps:
     - uses: actions/checkout@master
-    - name: Use Build Cache
-      uses: actions/cache@v2
-      with:
-        path: ~/Build
-        key: Build-iphonesimulator-${{ github.sha }}
     - uses: ./.github/actions/setup-secrets
       with:
         okta_plist: "${{ secrets.TEST_OKTA_PLIST }}"
@@ -204,11 +143,6 @@ jobs:
     needs: XcodeBuild
     steps:
     - uses: actions/checkout@master
-    - name: Use Build Cache
-      uses: actions/cache@v2
-      with:
-        path: ~/Build
-        key: Build-appletvsimulator-${{ github.sha }}
     - uses: ./.github/actions/setup-secrets
       with:
         okta_plist: "${{ secrets.TEST_OKTA_PLIST }}"
@@ -237,11 +171,6 @@ jobs:
     needs: XcodeBuild
     steps:
     - uses: actions/checkout@master
-    - name: Use Build Cache
-      uses: actions/cache@v2
-      with:
-        path: ~/Build
-        key: Build-macosx-${{ github.sha }}
     - uses: ./.github/actions/setup-secrets
       with:
         okta_plist: "${{ secrets.TEST_OKTA_PLIST }}"
