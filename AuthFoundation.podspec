@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
     s.name             = "AuthFoundation"
-    s.version          = "1.0.0-RC1"
+    s.version          = "0.5.0"
     s.summary          = "Okta Authentication Foundation"
     s.description      = <<-DESC
 PrProvides the foundation and common features for authenticating users, and managing the lifecycle and storage of tokens and credentials.
