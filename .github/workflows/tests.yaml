@@ -207,4 +207,5 @@ jobs:
           ../TestResults/UnitTest-iOS-Results/OktaOAuth2.xcresult
           ../TestResults/UnitTest-iOS-Results/WebAuthenticationUI.xcresult
         title: Test Results
+        show-passed-tests: false
       if: success() || failure()
