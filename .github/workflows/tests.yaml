@@ -18,6 +18,7 @@ env:
 jobs:
   UnitTest-Swift:
     name: Swift Package Manager
+    runs-on: macos-12
     steps:
     - name: Get swift version
       run: swift --version
