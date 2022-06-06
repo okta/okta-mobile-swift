@@ -89,30 +89,6 @@ class SafariServicesProviderTests: ProviderTestBase {
         XCTAssertTrue(delegate.logoutFinished)
         XCTAssertNil(delegate.logoutError)
     }
-    
-    func testLogoutError() throws {
-        provider.logout(context: .init(idToken: "idToken", state: "state"))
-        try waitFor(.error)
-
-        XCTAssertNotNil(provider.authenticationSession)
-        
-        provider.processLogout(url: logoutRedirectUri, error: WebAuthenticationError.missingIdToken)
-        
-        XCTAssertFalse(delegate.logoutFinished)
-        XCTAssertNotNil(delegate.logoutError)
-    }
-    
-    func testLogoutNoRedirectUri() throws {
-        provider.logout(context: .init(idToken: "idToken", state: "state"))
-        try waitFor(.error)
-
-        XCTAssertNotNil(provider.authenticationSession)
-        
-        provider.processLogout(url: nil, error: nil)
-        
-        XCTAssertFalse(delegate.logoutFinished)
-        XCTAssertNotNil(delegate.logoutError)
-    }
 }
 
 #endif
