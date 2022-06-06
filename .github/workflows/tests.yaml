@@ -69,6 +69,7 @@ jobs:
   UnitTest-Xcode:
     name: Xcode Unit Tests
     runs-on: macos-12
+    needs: XcodeBuild
     steps:
     - uses: actions/checkout@master
     - name: Use Build Cache
@@ -113,6 +114,7 @@ jobs:
   UITest-WebSignIn:
     name: Web Sign In / Single Sign On (iOS)
     runs-on: macos-12
+    needs: XcodeBuild
     steps:
     - uses: actions/checkout@master
     - name: Use Build Cache
@@ -154,6 +156,7 @@ jobs:
   UITest-DeviceAuthSignIniOS:
     name: Device Auth Sign In (iOS)
     runs-on: macos-12
+    needs: XcodeBuild
     steps:
     - uses: actions/checkout@master
     - name: Use Build Cache
@@ -185,6 +188,7 @@ jobs:
   UITest-DeviceAuthSignIntvOS:
     name: Device Auth Sign In (tvOS)
     runs-on: macos-12
+    needs: XcodeBuild
     steps:
     - uses: actions/checkout@master
     - name: Use Build Cache
@@ -216,6 +220,7 @@ jobs:
   UITest-UserPasswordSignInmacOS:
     name: User Password Sign In (macOS)
     runs-on: macos-12
+    needs: XcodeBuild
     steps:
     - uses: actions/checkout@master
     - name: Use Build Cache
