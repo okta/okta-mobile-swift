@@ -1,0 +1,45 @@
+name: Documentation
+
+on:
+  push:
+    branches:
+      - master
+      - dev-*
+      - release-*
+  pull_request:
+    branches:
+      - master
+      - dev-*
+      - release-*
+
+env:
+  DEVELOPER_DIR: /Applications/Xcode_13.3.app/Contents/Developer
+
+jobs:
+  BuildDocumentation:
+    name: Build Documentation
+    runs-on: macos-12
+    steps:
+    - uses: actions/checkout@master
+    - name: AuthFoundation
+      run: |
+        set -o pipefail
+        env NSUnbufferedIO=YES xcodebuild docbuild \
+          -derivedDataPath ~/Build/DerivedData \
+          -scheme AuthFoundation | xcpretty
+    - name: OktaOAuth2
+      run: |
+        set -o pipefail
+        env NSUnbufferedIO=YES xcodebuild docbuild \
+          -derivedDataPath ~/Build/DerivedData \
+          -scheme OktaOAuth2 | xcpretty
+    - name: WebAuthenticationUI
+      run: |
+        set -o pipefail
+        env NSUnbufferedIO=YES xcodebuild docbuild \
+          -derivedDataPath ~/Build/DerivedData \
+          -scheme WebAuthenticationUI | xcpretty
+    - name: Upload Documentation Archives
+      uses: actions/upload-artifact@v2
+      with:
+        path: ~/Build/DerivedData/Build/**/*.doccarchive
