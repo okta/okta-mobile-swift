@@ -1,9 +1,10 @@
 Pod::Spec.new do |s|
-    s.name             = "OktaOAuth2"
+    s.name             = "OktaAuthFoundation"
+    s.module_name      = "AuthFoundation"
     s.version          = "0.5.0"
-    s.summary          = "Okta OAuth2 Authentication"
+    s.summary          = "Okta Authentication Foundation"
     s.description      = <<-DESC
-Enables application developers to authenticate users utilizing a variety of OAuth2 authentication flows.
+Provides the foundation and common features used to authenticate users, managing the lifecycle and storage of tokens and credentials, and provide a base for other Okta SDKs to build upon.
                          DESC
     s.platforms = {
         :ios     => "9.0",
@@ -20,9 +21,7 @@ Enables application developers to authenticate users utilizing a variety of OAut
     s.license       = { :type => "APACHE2", :file => "LICENSE" }
     s.authors       = { "Okta Developers" => "developer@okta.com"}
     s.source        = { :git => "https://github.com/okta/okta-mobile-swift.git", :tag => s.version.to_s }
-    s.source_files  = "Sources/OktaOAuth2/**/*.swift"
-    s.resources     = "Sources/OktaOAuth2/Resources/*.lproj"
+    s.source_files  = "Sources/AuthFoundation/**/*.swift"
+    s.resources     = "Sources/AuthFoundation/Resources/*.lproj"
     s.swift_version = "5.5"
-
-    s.dependency "OktaAuthFoundation", "#{s.version.to_s}"
 end
