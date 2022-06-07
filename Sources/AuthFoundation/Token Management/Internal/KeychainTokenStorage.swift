@@ -100,8 +100,13 @@ class KeychainTokenStorage: TokenStorage {
                                          synchronizable: accessibility.isSynchronizable,
                                          value: try encoder.encode(metadata))
 
-        try item.save(authenticationContext: security.context)
-        try metadataItem.save(authenticationContext: security.context)
+        var context: KeychainAuthenticationContext? = nil
+        #if canImport(LocalAuthentication)
+        context = security.context
+        #endif
+
+        try item.save(authenticationContext: context)
+        try metadataItem.save(authenticationContext: context)
 
         delegate?.token(storage: self, added: id, token: token)
         
@@ -138,7 +143,12 @@ class KeychainTokenStorage: TokenStorage {
                                     generic: nil,
                                     value: data)
         
-        try oldResult.update(newItem, authenticationContext: security?.context)
+        var context: KeychainAuthenticationContext? = nil
+        #if canImport(LocalAuthentication)
+        context = security?.context
+        #endif
+
+        try oldResult.update(newItem, authenticationContext: context)
 
         delegate?.token(storage: self, replaced: id, with: token)
     }

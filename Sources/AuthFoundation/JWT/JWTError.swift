@@ -29,82 +29,94 @@ public enum JWTError: Error, Equatable {
     case signatureInvalid
 }
 
-#if SWIFT_PACKAGE
 extension JWTError: LocalizedError {
     public var errorDescription: String? {
         switch self {
         case .invalidBase64Encoding:
             return NSLocalizedString("invalid_base64_encoding",
-                                     bundle: .module,
+                                     tableName: "AuthFoundation",
+                                     bundle: .authFoundation,
                                      comment: "")
 
         case .badTokenStructure:
             return NSLocalizedString("bad_token_structure",
-                                     bundle: .module,
+                                     tableName: "AuthFoundation",
+                                     bundle: .authFoundation,
                                      comment: "")
         case .invalidIssuer:
             return NSLocalizedString("invalid_issuer",
-                                     bundle: .module,
+                                     tableName: "AuthFoundation",
+                                     bundle: .authFoundation,
                                      comment: "")
 
         case .invalidAudience:
             return NSLocalizedString("invalid_audience",
-                                     bundle: .module,
+                                     tableName: "AuthFoundation",
+                                     bundle: .authFoundation,
                                      comment: "")
 
         case .issuerRequiresHTTPS:
             return NSLocalizedString("issuer_requires_https",
-                                     bundle: .module,
+                                     tableName: "AuthFoundation",
+                                     bundle: .authFoundation,
                                      comment: "")
 
         case .invalidSigningAlgorithm:
             return NSLocalizedString("invalid_signing_algorithm",
-                                     bundle: .module,
+                                     tableName: "AuthFoundation",
+                                     bundle: .authFoundation,
                                      comment: "")
 
         case .expired:
             return NSLocalizedString("token_expired",
-                                     bundle: .module,
+                                     tableName: "AuthFoundation",
+                                     bundle: .authFoundation,
                                      comment: "")
 
         case .issuedAtTimeExceedsGraceInterval:
             return NSLocalizedString("issuedAt_time_exceeds_grace_interval",
-                                     bundle: .module,
+                                     tableName: "AuthFoundation",
+                                     bundle: .authFoundation,
                                      comment: "")
 
 
         case .cannotCreateKey(code: _, description: _):
             return NSLocalizedString("cannot_create_key",
-                                     bundle: .module,
+                                     tableName: "AuthFoundation",
+                                     bundle: .authFoundation,
                                      comment: "")
 
         case .invalidKey:
             return NSLocalizedString("invalid_key",
-                                     bundle: .module,
+                                     tableName: "AuthFoundation",
+                                     bundle: .authFoundation,
                                      comment: "")
 
         case .signatureInvalid:
             return NSLocalizedString("signature_invalid",
-                                     bundle: .module,
+                                     tableName: "AuthFoundation",
+                                     bundle: .authFoundation,
                                      comment: "")
             
         case .signatureVerificationUnavailable:
             return NSLocalizedString("signature_verification_unavailable",
-                                     bundle: .module,
+                                     tableName: "AuthFoundation",
+                                     bundle: .authFoundation,
                                      comment: "")
             
         case .unsupportedAlgorithm(let algorithm):
             return String.localizedStringWithFormat(
                 NSLocalizedString("unsupported_algorithm",
-                                  bundle: .module,
+                                  tableName: "AuthFoundation",
+                                  bundle: .authFoundation,
                                   comment: ""),
                 algorithm.rawValue)
         
         case .cannotGenerateHash:
             return NSLocalizedString("cannot_generate_hash",
-                                     bundle: .module,
+                                     tableName: "AuthFoundation",
+                                     bundle: .authFoundation,
                                      comment: "")
         }
     }
 }
-#endif

@@ -16,9 +16,10 @@ env:
   DEVELOPER_DIR: /Applications/Xcode_13.3.app/Contents/Developer
 
 jobs:
-  UnitTest-Swift:
-    name: Swift Package Manager
+  SwiftBuild:
+    name: Swift Unit Tests
     runs-on: macos-12
+    timeout-minutes: 10
     steps:
     - name: Get swift version
       run: swift --version
@@ -31,6 +32,7 @@ jobs:
   XcodeBuild:
     name: Xcode Unit Tests
     runs-on: macos-12
+    timeout-minutes: 10
     steps:
     - uses: actions/checkout@master
     - name: Test AuthFoundation
@@ -74,6 +76,7 @@ jobs:
     name: Web Sign In / Single Sign On (iOS)
     runs-on: macos-12
     needs: XcodeBuild
+    timeout-minutes: 10
     steps:
     - uses: actions/checkout@master
     - uses: ./.github/actions/setup-secrets
@@ -113,6 +116,7 @@ jobs:
     name: Device Auth Sign In (iOS)
     runs-on: macos-12
     needs: XcodeBuild
+    timeout-minutes: 10
     steps:
     - uses: actions/checkout@master
     - uses: ./.github/actions/setup-secrets
@@ -169,6 +173,7 @@ jobs:
     name: User Password Sign In (macOS)
     runs-on: macos-12
     needs: XcodeBuild
+    timeout-minutes: 10
     steps:
     - uses: actions/checkout@master
     - uses: ./.github/actions/setup-secrets
@@ -195,6 +200,7 @@ jobs:
   Results:
     name: Test Results
     runs-on: macos-12
+    timeout-minutes: 5
     needs:
       - XcodeBuild
       - UITest-WebSignIn

@@ -26,23 +26,25 @@ public enum APIClientError: Error {
     case unknown
 }
 
-#if SWIFT_PACKAGE
 extension APIClientError: LocalizedError {
     public var errorDescription: String? {
         switch self {
         case .invalidUrl:
             return NSLocalizedString("invalid_url_description",
-                                     bundle: .module,
+                                     tableName: "AuthFoundation",
+                                     bundle: .authFoundation,
                                      comment: "Invalid URL")
             
         case .missingResponse:
             return NSLocalizedString("missing_response_description",
-                                     bundle: .module,
+                                     tableName: "AuthFoundation",
+                                     bundle: .authFoundation,
                                      comment: "Invalid URL")
             
         case .invalidResponse:
             return NSLocalizedString("invalid_response_description",
-                                     bundle: .module,
+                                     tableName: "AuthFoundation",
+                                     bundle: .authFoundation,
                                      comment: "Invalid URL")
             
         case .cannotParseResponse(error: let error):
@@ -55,24 +57,28 @@ extension APIClientError: LocalizedError {
 
             return String.localizedStringWithFormat(
                 NSLocalizedString("cannot_parse_response_description",
-                                  bundle: .module,
+                                  tableName: "AuthFoundation",
+                                  bundle: .authFoundation,
                                   comment: "Invalid URL"),
                 errorString)
             
         case .invalidRequestData:
             return NSLocalizedString("invalid_request_data_description",
-                                     bundle: .module,
+                                     tableName: "AuthFoundation",
+                                     bundle: .authFoundation,
                                      comment: "Invalid URL")
             
         case .missingRefreshSettings:
             return NSLocalizedString("missing_refresh_settings_description",
-                                     bundle: .module,
+                                     tableName: "AuthFoundation",
+                                     bundle: .authFoundation,
                                      comment: "Invalid URL")
             
         case .unsupportedContentType(let type):
             return String.localizedStringWithFormat(
                 NSLocalizedString("unsupported_content_type_description",
-                                  bundle: .module,
+                                  tableName: "AuthFoundation",
+                                  bundle: .authFoundation,
                                   comment: "Invalid URL"),
                 type.rawValue)
             
@@ -84,14 +90,16 @@ extension APIClientError: LocalizedError {
 
             return String.localizedStringWithFormat(
                 NSLocalizedString("server_error_description",
-                                  bundle: .module,
+                                  tableName: "AuthFoundation",
+                                  bundle: .authFoundation,
                                   comment: "Invalid URL"),
                 errorString)
             
         case .statusCode(let code):
             return String.localizedStringWithFormat(
                 NSLocalizedString("status_code_description",
-                                  bundle: .module,
+                                  tableName: "AuthFoundation",
+                                  bundle: .authFoundation,
                                   comment: "Invalid URL"),
                 code)
 
@@ -101,14 +109,15 @@ extension APIClientError: LocalizedError {
             }
 
             return NSLocalizedString("validation_error",
-                                     bundle: .module,
+                                     tableName: "AuthFoundation",
+                                     bundle: .authFoundation,
                                      comment: "Invalid URL")
 
         case .unknown:
             return NSLocalizedString("unknown_description",
-                                     bundle: .module,
+                                     tableName: "AuthFoundation",
+                                     bundle: .authFoundation,
                                      comment: "Invalid URL")
         }
     }
 }
-#endif

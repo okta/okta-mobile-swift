@@ -29,84 +29,94 @@ public enum KeychainError: Error {
     case missingAttribute
 }
 
-#if SWIFT_PACKAGE
 extension KeychainError: LocalizedError {
     public var errorDescription: String? {
         switch self {
         case .cannotGet(code: let status):
             return String.localizedStringWithFormat(
                 NSLocalizedString("keychain_cannot_get",
-                                  bundle: .module,
+                                  tableName: "AuthFoundation",
+                                  bundle: .authFoundation,
                                   comment: ""),
                 status)
 
         case .cannotList(code: let status):
             return String.localizedStringWithFormat(
                 NSLocalizedString("keychain_cannot_list",
-                                  bundle: .module,
+                                  tableName: "AuthFoundation",
+                                  bundle: .authFoundation,
                                   comment: ""),
                 status)
 
         case .cannotSave(code: let status):
             return String.localizedStringWithFormat(
                 NSLocalizedString("keychain_cannot_save",
-                                  bundle: .module,
+                                  tableName: "AuthFoundation",
+                                  bundle: .authFoundation,
                                   comment: ""),
                 status)
 
         case .cannotUpdate(code: let status):
             return String.localizedStringWithFormat(
                 NSLocalizedString("keychain_cannot_update",
-                                  bundle: .module,
+                                  tableName: "AuthFoundation",
+                                  bundle: .authFoundation,
                                   comment: ""),
                 status)
 
         case .cannotDelete(code: let status):
             return String.localizedStringWithFormat(
                 NSLocalizedString("keychain_cannot_delete",
-                                  bundle: .module,
+                                  tableName: "AuthFoundation",
+                                  bundle: .authFoundation,
                                   comment: ""),
                 status)
 
         case .accessControlInvalid(code: let code, description: let description):
             return String.localizedStringWithFormat(
                 NSLocalizedString("keychain_access_control_invalid",
-                                  bundle: .module,
+                                  tableName: "AuthFoundation",
+                                  bundle: .authFoundation,
                                   comment: ""),
                 description ?? "", code)
             
         case .notFound:
             return NSLocalizedString("keychain_not_found",
-                                     bundle: .module,
+                                     tableName: "AuthFoundation",
+                                     bundle: .authFoundation,
                                      comment: "")
 
         case .invalidFormat:
             return NSLocalizedString("keychain_invalid_format",
-                                     bundle: .module,
+                                     tableName: "AuthFoundation",
+                                     bundle: .authFoundation,
                                      comment: "")
 
         case .invalidAccessibilityOption:
             return NSLocalizedString("keychain_invalid_accessibility_option",
-                                     bundle: .module,
+                                     tableName: "AuthFoundation",
+                                     bundle: .authFoundation,
                                      comment: "")
 
         case .missingAccount:
             return NSLocalizedString("keychain_missing_account",
-                                     bundle: .module,
+                                     tableName: "AuthFoundation",
+                                     bundle: .authFoundation,
                                      comment: "")
 
         case .missingValueData:
             return NSLocalizedString("keychain_missing_value_data",
-                                     bundle: .module,
+                                     tableName: "AuthFoundation",
+                                     bundle: .authFoundation,
                                      comment: "")
 
         case .missingAttribute:
             return NSLocalizedString("keychain_missing_attribute",
-                                     bundle: .module,
+                                     tableName: "AuthFoundation",
+                                     bundle: .authFoundation,
                                      comment: "")
         }
     }
 }
-#endif
 
 #endif
