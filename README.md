@@ -25,7 +25,7 @@ This library uses semantic versioning and follows Okta's [Library Version Policy
 
 | Version | Status                             |
 | ------- | ---------------------------------- |
-| 0.4.0   | ✔️ Beta                             |
+| 0.5.0   | ✔️ Beta                             |
 
 The latest release can always be found on the [releases page][github-releases].
 
@@ -103,7 +103,23 @@ dependencies: [
 
 ### CocoaPods
 
-The SDK will support CocoaPods as it nears its full release.
+Simply add the following line to your `Podfile`:
+
+```ruby
+pod 'OktaWebAuthenticationUI'
+```
+
+Then install it into your project:
+
+```bash
+pod install --repo-update
+```
+
+If you are interested in only consuming the OktaOAuth2 library, instead use the following:
+
+```ruby
+pod 'OktaOAuth2'
+```
 
 ### Carthage
 

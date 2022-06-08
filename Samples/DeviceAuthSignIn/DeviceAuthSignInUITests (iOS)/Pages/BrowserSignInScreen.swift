@@ -69,7 +69,9 @@ class BrowserSignInScreen: Screen {
         XCTAssertTrue(app.webViews.staticTexts["Device activated"].waitForExistence(timeout: .veryLong))
         testCase.save(screenshot: "Device Activated")
         
-        app.buttons["Done"].tap()
-        XCTAssertTrue(app.webViews.firstMatch.waitForNonExistence(timeout: .short))
+        if app.webViews.firstMatch.exists {
+            app.buttons["Done"].tap()
+            XCTAssertTrue(app.webViews.firstMatch.waitForNonExistence(timeout: .short))
+        }
     }
 }
