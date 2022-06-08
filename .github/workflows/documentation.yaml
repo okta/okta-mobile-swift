@@ -45,7 +45,15 @@ jobs:
           cd $(dirname "$archive")
           zip -r ~/Build/$(basename "$archive").zip $(basename "$archive")
         done
-    - name: Upload Documentation Archives
+    - name: Upload AuthFoundation DocC Archive
       uses: actions/upload-artifact@v2
       with:
-        path: ~/Build/*.doccarchive.zip
+        path: ~/Build/AuthFoundation.doccarchive.zip
+    - name: Upload OktaOAuth2 DocC Archive
+      uses: actions/upload-artifact@v2
+      with:
+        path: ~/Build/OktaOAuth2.doccarchive.zip
+    - name: Upload WebAuthenticationUI DocC Archive
+      uses: actions/upload-artifact@v2
+      with:
+        path: ~/Build/WebAuthenticationUI.doccarchive.zip
