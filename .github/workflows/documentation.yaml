@@ -43,7 +43,7 @@ jobs:
       run: |
         for archive in $(find ~/Build/DerivedData/Build/Products -type d -name '*.doccarchive'); do
           cd $(dirname "$archive")
-          zip -r ~/Build/$(filename "$archive").zip $(filename "$archive")
+          zip -r ~/Build/$(basename "$archive").zip $(basename "$archive")
         done
     - name: Upload Documentation Archives
       uses: actions/upload-artifact@v2
