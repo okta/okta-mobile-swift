@@ -2,6 +2,10 @@ name: Tests
 
 on:
   push:
+    paths:
+      - '.github/workflows/tests.yml'
+      - 'Sources/**/*.swift'
+      - 'Samples/**/*'
     branches:
       - master
       - dev-*
