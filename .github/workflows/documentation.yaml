@@ -39,7 +39,13 @@ jobs:
         env NSUnbufferedIO=YES xcodebuild docbuild \
           -derivedDataPath ~/Build/DerivedData \
           -scheme WebAuthenticationUI | xcpretty
+    - name: Compress DocC archives
+      run: |
+        for archive in $(find Build/DerivedData/Build/Products -type d -name '*.doccarchive'); do
+          cd $(dirname "$archive")
+          zip -r $(filename "$archive").zip $(filename "$archive")
+        done
     - name: Upload Documentation Archives
       uses: actions/upload-artifact@v2
       with:
-        path: ~/Build/DerivedData/Build/**/*.doccarchive
+        path: ~/Build/DerivedData/Build/**/*.doccarchive.zip
