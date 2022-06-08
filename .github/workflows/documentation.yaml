@@ -6,11 +6,19 @@ on:
       - master
       - dev-*
       - release-*
+    paths:
+      - '.github/workflows/documentation.yml'
+      - 'Sources/**/*.swift'
+      - 'Sources/**/*.md'
   pull_request:
     branches:
       - master
       - dev-*
       - release-*
+    paths:
+      - '.github/workflows/documentation.yml'
+      - 'Sources/**/*.swift'
+      - 'Sources/**/*.md'
 
 env:
   DEVELOPER_DIR: /Applications/Xcode_13.3.app/Contents/Developer
