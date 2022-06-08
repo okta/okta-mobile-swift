@@ -41,7 +41,7 @@ jobs:
           -scheme WebAuthenticationUI | xcpretty
     - name: Compress DocC archives
       run: |
-        for archive in $(find Build/DerivedData/Build/Products -type d -name '*.doccarchive'); do
+        for archive in $(find ~/Build/DerivedData/Build/Products -type d -name '*.doccarchive'); do
           cd $(dirname "$archive")
           zip -r ~/Build/$(filename "$archive").zip $(filename "$archive")
         done
