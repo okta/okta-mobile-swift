@@ -25,7 +25,7 @@ This library uses semantic versioning and follows Okta's [Library Version Policy
 
 | Version | Status                             |
 | ------- | ---------------------------------- |
-| 0.4.0   | ✔️ Beta                             |
+| 0.5.0   | ✔️ Beta                             |
 
 The latest release can always be found on the [releases page][github-releases].
 
@@ -103,20 +103,23 @@ dependencies: [
 
 ### CocoaPods
 
-The SDK will support CocoaPods as it nears its full release.
+Simply add the following line to your `Podfile`:
 
-### Carthage
-
-To integrate this SDK into your Xcode project using [Carthage](https://github.com/Carthage/Carthage), specify it in your Cartfile:
 ```ruby
-github "okta/okta-mobile-swift"
+pod 'OktaWebAuthenticationUI'
 ```
 
 Then install it into your project:
 
-`carthage update --use-xcframeworks`
+```bash
+pod install --repo-update
+```
 
-**Note:** Make sure Carthage version is 0.37.0 or higher. Otherwise, Carthage can fail.
+If you are interested in only consuming the OktaOAuth2 library, instead use the following:
+
+```ruby
+pod 'OktaOAuth2'
+```
 
 ## Usage Guide
 
