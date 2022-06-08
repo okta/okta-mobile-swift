@@ -121,19 +121,6 @@ If you are interested in only consuming the OktaOAuth2 library, instead use the 
 pod 'OktaOAuth2'
 ```
 
-### Carthage
-
-To integrate this SDK into your Xcode project using [Carthage](https://github.com/Carthage/Carthage), specify it in your Cartfile:
-```ruby
-github "okta/okta-mobile-swift"
-```
-
-Then install it into your project:
-
-`carthage update --use-xcframeworks`
-
-**Note:** Make sure Carthage version is 0.37.0 or higher. Otherwise, Carthage can fail.
-
 ## Usage Guide
 
 ### Web Authentication using OIDC
