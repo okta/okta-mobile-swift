@@ -107,7 +107,7 @@ final class CredentialRefreshTests: XCTestCase, OAuth2ClientDelegate {
         
         XCTAssertTrue(credential.token.isRefreshing)
 
-        waitForExpectations(timeout: 1.0) { error in
+        waitForExpectations(timeout: 3.0) { error in
             XCTAssertNil(error)
         }
         
@@ -129,7 +129,7 @@ final class CredentialRefreshTests: XCTestCase, OAuth2ClientDelegate {
             }
             expect.fulfill()
         }
-        waitForExpectations(timeout: 1.0) { error in
+        waitForExpectations(timeout: 3.0) { error in
             XCTAssertNil(error)
         }
 
@@ -151,7 +151,7 @@ final class CredentialRefreshTests: XCTestCase, OAuth2ClientDelegate {
         
         XCTAssertTrue(credential.token.isRefreshing)
 
-        waitForExpectations(timeout: 1.0) { error in
+        waitForExpectations(timeout: 3.0) { error in
             XCTAssertNil(error)
         }
         
@@ -175,7 +175,7 @@ final class CredentialRefreshTests: XCTestCase, OAuth2ClientDelegate {
         
         XCTAssertFalse(credential.token.isRefreshing)
 
-        waitForExpectations(timeout: 1.0) { error in
+        waitForExpectations(timeout: 3.0) { error in
             XCTAssertNil(error)
         }
         
@@ -198,7 +198,7 @@ final class CredentialRefreshTests: XCTestCase, OAuth2ClientDelegate {
         
         XCTAssertTrue(credential.token.isRefreshing)
         
-        waitForExpectations(timeout: 1.0) { error in
+        waitForExpectations(timeout: 3.0) { error in
             XCTAssertNil(error)
         }
         
