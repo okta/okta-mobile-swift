@@ -76,8 +76,8 @@ jobs:
     - uses: kishikawakatsumi/xcresulttool@v1
       with:
         path: |
-          ../TestResults/UnitTest-iOS-Results/AuthFoundation.xcresult
-          ../TestResults/UnitTest-iOS-Results/OktaOAuth2.xcresult
-          ../TestResults/UnitTest-iOS-Results/WebAuthenticationUI.xcresult
+          ../TestResults/AuthFoundation.xcresult
+          ../TestResults/OktaOAuth2.xcresult
+          ../TestResults/WebAuthenticationUI.xcresult
         title: Unit Test Results
       if: success() || failure()
