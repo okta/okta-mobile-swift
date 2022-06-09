@@ -19,7 +19,7 @@ import CommonCrypto
 struct DefaultIDTokenValidator: IDTokenValidator {
     var issuedAtGraceInterval: TimeInterval = 300
     
-    func validate(token: JWT, issuer: URL, clientId: String) throws {
+    func validate(token: JWT, issuer: URL, clientId: String, context: IDTokenValidatorContext?) throws {
         guard let tokenIssuerString = token.issuer,
               let tokenIssuer = URL(string: tokenIssuerString)
         else {
@@ -52,6 +52,10 @@ struct DefaultIDTokenValidator: IDTokenValidator {
               abs(issuedAt.timeIntervalSince(Date.nowCoordinated)) <= issuedAtGraceInterval
         else {
             throw JWTError.issuedAtTimeExceedsGraceInterval
+        }
+        
+        guard token["nonce"] == context?.nonce else {
+            throw JWTError.nonceMismatch
         }
     }
 }

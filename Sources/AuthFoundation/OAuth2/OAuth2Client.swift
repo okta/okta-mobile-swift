@@ -427,7 +427,7 @@ public class OAuth2Client {
             
             // Perform idToken/accessToken validation
             do {
-                try response.result.validate(using: self)
+                try response.result.validate(using: self, with: request as? IDTokenValidatorContext)
             } catch {
                 completion(.failure(.validation(error: error)))
                 return

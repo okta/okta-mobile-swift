@@ -22,14 +22,20 @@ extension AuthorizationCodeFlow {
         let grantType: GrantType
         let grantValue: String
         let pkce: PKCE?
+        let nonce: String?
     }
 }
 
-extension AuthorizationCodeFlow.TokenRequest: OAuth2TokenRequest, OAuth2APIRequest, APIRequestBody, APIParsingContext {
+extension AuthorizationCodeFlow.TokenRequest: OAuth2TokenRequest {
     var httpMethod: APIRequestMethod { .post }
     var url: URL { openIdConfiguration.tokenEndpoint }
     var contentType: APIContentType? { .formEncoded }
     var acceptsType: APIContentType? { .json }
+}
+
+extension AuthorizationCodeFlow.TokenRequest: OAuth2APIRequest {}
+
+extension AuthorizationCodeFlow.TokenRequest: APIRequestBody {
     var bodyParameters: [String: Any]? {
         var result = [
             "client_id": clientId,
@@ -44,7 +50,9 @@ extension AuthorizationCodeFlow.TokenRequest: OAuth2TokenRequest, OAuth2APIReque
         
         return result
     }
-    
+}
+
+extension AuthorizationCodeFlow.TokenRequest: APIParsingContext {
     var codingUserInfo: [CodingUserInfoKey: Any]? {
         [
             .clientSettings: [
@@ -55,3 +63,5 @@ extension AuthorizationCodeFlow.TokenRequest: OAuth2TokenRequest, OAuth2APIReque
         ]
     }
 }
+
+extension AuthorizationCodeFlow.TokenRequest: IDTokenValidatorContext {}

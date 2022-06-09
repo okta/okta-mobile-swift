@@ -91,7 +91,7 @@ final class AuthorizationCodeFlowSuccessTests: XCTestCase {
         XCTAssertFalse(delegate.started)
         
         // Begin
-        let context = AuthorizationCodeFlow.Context(state: "ABC123", pkce: nil)
+        let context = AuthorizationCodeFlow.Context(state: "ABC123", nonce: "nonce_string", pkce: nil)
         var expect = expectation(description: "network request")
         try flow.resume(with: context) { _ in
             expect.fulfill()
@@ -104,7 +104,7 @@ final class AuthorizationCodeFlowSuccessTests: XCTestCase {
         XCTAssertTrue(flow.isAuthenticating)
         XCTAssertNotNil(flow.context?.authenticationURL)
         XCTAssertEqual(flow.context?.authenticationURL?.absoluteString,
-                       "https://example.okta.com/oauth2/v1/authorize?additional=param&client_id=clientId&redirect_uri=com.example:/callback&response_type=code&scope=openid%20profile&state=ABC123#customizedUrl")
+                       "https://example.okta.com/oauth2/v1/authorize?additional=param&client_id=clientId&nonce=nonce_string&redirect_uri=com.example:/callback&response_type=code&scope=openid%20profile&state=ABC123#customizedUrl")
         XCTAssertTrue(delegate.started)
         XCTAssertEqual(flow.context?.authenticationURL, delegate.url)
         
@@ -129,7 +129,7 @@ final class AuthorizationCodeFlowSuccessTests: XCTestCase {
         XCTAssertFalse(flow.isAuthenticating)
 
         // Begin
-        let context = AuthorizationCodeFlow.Context(state: "ABC123", pkce: nil)
+        let context = AuthorizationCodeFlow.Context(state: "ABC123", nonce: "nonce_string", pkce: nil)
         var wait = expectation(description: "resume")
         var url: URL?
         try flow.resume(with: context) { result in
@@ -150,7 +150,7 @@ final class AuthorizationCodeFlowSuccessTests: XCTestCase {
         XCTAssertNotNil(flow.context?.authenticationURL)
         XCTAssertEqual(url, flow.context?.authenticationURL)
         XCTAssertEqual(flow.context?.authenticationURL?.absoluteString,
-                       "https://example.okta.com/oauth2/v1/authorize?additional=param&client_id=clientId&redirect_uri=com.example:/callback&response_type=code&scope=openid%20profile&state=ABC123")
+                       "https://example.okta.com/oauth2/v1/authorize?additional=param&client_id=clientId&nonce=nonce_string&redirect_uri=com.example:/callback&response_type=code&scope=openid%20profile&state=ABC123")
 
         // Exchange code
         var token: Token?
@@ -181,7 +181,7 @@ final class AuthorizationCodeFlowSuccessTests: XCTestCase {
         XCTAssertFalse(flow.isAuthenticating)
 
         // Begin
-        let context = AuthorizationCodeFlow.Context(state: "ABC123", pkce: nil)
+        let context = AuthorizationCodeFlow.Context(state: "ABC123", nonce: "nonce_string", pkce: nil)
         let url = try await flow.resume(with: context)
         
         XCTAssertEqual(flow.context?.state, context.state)
@@ -189,7 +189,7 @@ final class AuthorizationCodeFlowSuccessTests: XCTestCase {
         XCTAssertNotNil(flow.context?.authenticationURL)
         XCTAssertEqual(url, flow.context?.authenticationURL)
         XCTAssertEqual(flow.context?.authenticationURL?.absoluteString,
-                       "https://example.okta.com/oauth2/v1/authorize?additional=param&client_id=clientId&redirect_uri=com.example:/callback&response_type=code&scope=openid%20profile&state=ABC123")
+                       "https://example.okta.com/oauth2/v1/authorize?additional=param&client_id=clientId&nonce=nonce_string&redirect_uri=com.example:/callback&response_type=code&scope=openid%20profile&state=ABC123")
 
         // Exchange code
         let token = try await flow.resume(with: URL(string: "com.example:/callback?code=ABCEasyAs123&state=ABC123")!)
