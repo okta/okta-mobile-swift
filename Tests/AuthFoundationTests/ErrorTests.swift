@@ -136,6 +136,8 @@ final class ErrorTests: XCTestCase {
                           "token_expired")
         XCTAssertNotEqual(JWTError.issuedAtTimeExceedsGraceInterval.errorDescription,
                           "issuedAt_time_exceeds_grace_interval")
+        XCTAssertNotEqual(JWTError.nonceMismatch.errorDescription,
+                          "nonce_mismatch")
         XCTAssertNotEqual(JWTError.invalidKey.errorDescription,
                           "invalid_key")
         XCTAssertNotEqual(JWTError.signatureInvalid.errorDescription,

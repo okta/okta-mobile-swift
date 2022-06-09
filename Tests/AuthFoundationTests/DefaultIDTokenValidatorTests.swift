@@ -63,6 +63,10 @@ import XCTest
 @testable import AuthFoundation
 import TestCommon
 
+struct MockTokenContext: IDTokenValidatorContext {
+    let nonce: String?
+}
+
 final class DefaultIDTokenValidatorTests: XCTestCase {
     var validator = DefaultIDTokenValidator()
     let issuer = URL(string: "https://example.okta.com/oauth2/default")!
@@ -87,33 +91,33 @@ final class DefaultIDTokenValidatorTests: XCTestCase {
     
     func testValidIDToken() throws {
         let jwt = try JWT(validToken)
-        XCTAssertNoThrow(try validator.validate(token: jwt, issuer: issuer, clientId: clientId))
+        XCTAssertNoThrow(try validator.validate(token: jwt, issuer: issuer, clientId: clientId, context: nil))
     }
 
     func testInvalidIssuer() throws {
         let jwt = try JWT("eyJraWQiOiJGSkEwSEdOdHN1dWRhX1BsNDVKNDJrdlFxY3N1XzBDNEZnN3BiSkxYVEhZIiwiYWxnIjoiUlMyNTYifQ.eyJzdWIiOiIwMHViNDF6N21nek5xcnlNdjY5NiIsIm5hbWUiOiJUZXN0IFVzZXIiLCJlbWFpbCI6InRlc3RAZXhhbXBsZS5jb20iLCJ2ZXIiOjEsImlzcyI6Imh0dHBzOi8vb3RoZXItc2VydmVyLm9rdGEuY29tIiwiYXVkIjoidW5pdF90ZXN0X2NsaWVudF9pZCIsImlhdCI6MTY0NDM0NzA2OSwiZXhwIjoxNjQ0MzUwNjY5LCJqdGkiOiJJRC41NWN4QnRkWWw4bDZhcktJU1BCd2QweU9ULTlVQ1RhWGFRVFh0MmxhUkxzIiwiYW1yIjpbInB3ZCJdLCJpZHAiOiIwMG84Zm91N3NSYUdHd2RuNDY5NiIsInNpZCI6ImlkeFd4a2xwXzRrU3h1Q19uVTFwWEQtbkEiLCJwcmVmZXJyZWRfdXNlcm5hbWUiOiJ0ZXN0QGV4YW1wbGUuY29tIiwiYXV0aF90aW1lIjoxNjQ0MzQ3MDY4LCJhdF9oYXNoIjoiZ01jR1RiaEdUMUdfbGRzSG9Kc1B6USIsImRzX2hhc2giOiJEQWVMT0ZScWlmeXNiZ3NyYk9nYm9nIn0.bYbmOb56ei9cEwGGOdjCP2niCcemeUhuvmIJ02cp9bqCEmtbr9HCGxQFiLXLFX1uj4pa0RBaAFvI25wGG8_3tjBUm1kiwP8bggbG49oGaLslkqdof1f58AU1LED4CmmaJdMV8Rl9h5WXzTv-So5euqonMwDVB04kO9B7jjCwQ1RmjLm4rdfN5_WzMuBXX7ENhELkOjwkEmsB9h_yQtow0RQKHKgJQN9PF_YAR1H2LT0rnCB0aGXF8cbE69qIC-iQ5jpHOh9lQY7QYJJ9CEpugZIbqJP1BEjOVvSNgTa7WzILvs18fvBeQmP6RLE9G8UlvVBNCt8ALekxeH1kEYFSyQ")
-        XCTAssertThrowsError(try validator.validate(token: jwt, issuer: issuer, clientId: clientId)) { error in
+        XCTAssertThrowsError(try validator.validate(token: jwt, issuer: issuer, clientId: clientId, context: nil)) { error in
             XCTAssertEqual(error as? JWTError, JWTError.invalidIssuer)
         }
     }
 
     func testInvalidAudience() throws {
         let jwt = try JWT("eyJraWQiOiJGSkEwSEdOdHN1dWRhX1BsNDVKNDJrdlFxY3N1XzBDNEZnN3BiSkxYVEhZIiwiYWxnIjoiUlMyNTYifQ.eyJzdWIiOiIwMHViNDF6N21nek5xcnlNdjY5NiIsIm5hbWUiOiJUZXN0IFVzZXIiLCJlbWFpbCI6InRlc3RAZXhhbXBsZS5jb20iLCJ2ZXIiOjEsImlzcyI6Imh0dHBzOi8vZXhhbXBsZS5va3RhLmNvbS9vYXV0aDIvZGVmYXVsdCIsImF1ZCI6Im90aGVyX2NsaWVudF9pZCIsImlhdCI6MTY0NDM0NzA2OSwiZXhwIjoxNjQ0MzUwNjY5LCJqdGkiOiJJRC41NWN4QnRkWWw4bDZhcktJU1BCd2QweU9ULTlVQ1RhWGFRVFh0MmxhUkxzIiwiYW1yIjpbInB3ZCJdLCJpZHAiOiIwMG84Zm91N3NSYUdHd2RuNDY5NiIsInNpZCI6ImlkeFd4a2xwXzRrU3h1Q19uVTFwWEQtbkEiLCJwcmVmZXJyZWRfdXNlcm5hbWUiOiJ0ZXN0QGV4YW1wbGUuY29tIiwiYXV0aF90aW1lIjoxNjQ0MzQ3MDY4LCJhdF9oYXNoIjoiZ01jR1RiaEdUMUdfbGRzSG9Kc1B6USIsImRzX2hhc2giOiJEQWVMT0ZScWlmeXNiZ3NyYk9nYm9nIn0.X0E7hCwAsvCUW6kTKDVZMTkxqfZ0wpb5IBmmBJOMxB9xzhz7N041mWXZ2cjNmdP29UuZ4FgFTBoTfc15EiQqLcxkvm4r7mERJv4QjEUtoQPgKIN1xbq3ISzBXsL9pLZvwIPmGSgZGlyzFgUG7-GKdcF7g0kHpOk4237mE78PpvYuo7CK-Ri0uQ_29DGLDUH_KhxI8SH0A5v4wHN75gDfm9LEpgdC0LIONPBCFEyemNFkNhE81YHOSvNCvqaprm3-OfeHKphzsScDc1kem8OL8sga8FT_huqG03y2yYVE5tvqYlq_WB4eMM1QOJTeCqctzM6rNa7yQK8HDrnOu8KCHg")
-        XCTAssertThrowsError(try validator.validate(token: jwt, issuer: issuer, clientId: clientId)) { error in
+        XCTAssertThrowsError(try validator.validate(token: jwt, issuer: issuer, clientId: clientId, context: nil)) { error in
             XCTAssertEqual(error as? JWTError, JWTError.invalidAudience)
         }
     }
     
     func testInvalidURLScheme() throws {
         let jwt = try JWT("eyJraWQiOiJGSkEwSEdOdHN1dWRhX1BsNDVKNDJrdlFxY3N1XzBDNEZnN3BiSkxYVEhZIiwiYWxnIjoiUlMyNTYifQ.eyJzdWIiOiIwMHViNDF6N21nek5xcnlNdjY5NiIsIm5hbWUiOiJUZXN0IFVzZXIiLCJlbWFpbCI6InRlc3RAZXhhbXBsZS5jb20iLCJ2ZXIiOjEsImlzcyI6Imh0dHA6Ly9leGFtcGxlLm9rdGEuY29tL29hdXRoMi9kZWZhdWx0IiwiYXVkIjoidW5pdF90ZXN0X2NsaWVudF9pZCIsImlhdCI6MTY0NDM0NzA2OSwiZXhwIjoxNjQ0MzUwNjY5LCJqdGkiOiJJRC41NWN4QnRkWWw4bDZhcktJU1BCd2QweU9ULTlVQ1RhWGFRVFh0MmxhUkxzIiwiYW1yIjpbInB3ZCJdLCJpZHAiOiIwMG84Zm91N3NSYUdHd2RuNDY5NiIsInNpZCI6ImlkeFd4a2xwXzRrU3h1Q19uVTFwWEQtbkEiLCJwcmVmZXJyZWRfdXNlcm5hbWUiOiJ0ZXN0QGV4YW1wbGUuY29tIiwiYXV0aF90aW1lIjoxNjQ0MzQ3MDY4LCJhdF9oYXNoIjoiZ01jR1RiaEdUMUdfbGRzSG9Kc1B6USIsImRzX2hhc2giOiJEQWVMT0ZScWlmeXNiZ3NyYk9nYm9nIn0.UMO7oK_YYWPqob7W4jhKdcaUpxyYDKPo33PnJEtzMvv7dSfqLoM9A-E-daVXCqL0-ZER70B2jRonJvOCSKZdXIxgQJtUroVS0rL6Wchda4Yg97gYqvcynRuWaT2i5DHhP-Hq-W0DqseGTlI269-0qy-1fhXqDF0Nvu129GdjCLyUJ1K8WXPp_0tNXl97cmGY3zlNS9VLHoixgy98bBDkUGclIsHYMcE0RPdqFx2YC8n1eHqhqpqA-PTyYB2HibCCylqd28DRGXTY64LJnL9rhgjKm0MPpNC1EhbvFV23eZH_mnX-_ogMtVHCGLt3r8alOlBPlF4cLsuKTbbcZ2E6Sw")
-        XCTAssertThrowsError(try validator.validate(token: jwt, issuer: URL(string: "http://example.okta.com/oauth2/default")!, clientId: clientId)) { error in
+        XCTAssertThrowsError(try validator.validate(token: jwt, issuer: URL(string: "http://example.okta.com/oauth2/default")!, clientId: clientId, context: nil)) { error in
             XCTAssertEqual(error as? JWTError, JWTError.issuerRequiresHTTPS)
         }
     }
     
     func testUnsupportedAlgorithm() throws {
         let jwt = try JWT("eyJraWQiOiJGSkEwSEdOdHN1dWRhX1BsNDVKNDJrdlFxY3N1XzBDNEZnN3BiSkxYVEhZIiwiYWxnIjoiUlMzODQifQ.eyJzdWIiOiIwMHViNDF6N21nek5xcnlNdjY5NiIsIm5hbWUiOiJUZXN0IFVzZXIiLCJlbWFpbCI6InRlc3RAZXhhbXBsZS5jb20iLCJ2ZXIiOjEsImlzcyI6Imh0dHBzOi8vZXhhbXBsZS5va3RhLmNvbS9vYXV0aDIvZGVmYXVsdCIsImF1ZCI6InVuaXRfdGVzdF9jbGllbnRfaWQiLCJpYXQiOjE2NDQzNDcwNjksImV4cCI6MTY0NDM1MDY2OSwianRpIjoiSUQuNTVjeEJ0ZFlsOGw2YXJLSVNQQndkMHlPVC05VUNUYVhhUVRYdDJsYVJMcyIsImFtciI6WyJwd2QiXSwiaWRwIjoiMDBvOGZvdTdzUmFHR3dkbjQ2OTYiLCJzaWQiOiJpZHhXeGtscF80a1N4dUNfblUxcFhELW5BIiwicHJlZmVycmVkX3VzZXJuYW1lIjoidGVzdEBleGFtcGxlLmNvbSIsImF1dGhfdGltZSI6MTY0NDM0NzA2OCwiYXRfaGFzaCI6ImdNY0dUYmhHVDFHX2xkc0hvSnNQelEiLCJkc19oYXNoIjoiREFlTE9GUnFpZnlzYmdzcmJPZ2JvZyJ9.1Wnn-ozvVDJHwYrxCoWtiTZnNgb2E1ySyplbngwFF7-gi8FN5VNLMHYH0JitIp-SXB2lfoXZBfx0C5HPC1mYyqOTfc0eysvo3WAdAfDbK2H3Du5hGwt-dedPZjePM3f-vGTcNmKCWE0OjjaPn8wVJzl0iyCQ94EhVptc6zL2vTBnHFkV_TMlB0uqgzaixPhl9JYBKXqbGSg_olpnaKbpYBOR2Fq-yBk3Z9b44JjzhjYI5oRp_9xul6nCXt1RJTFg0qflHAN2LgqoFuvlNMmXRhy_F0CP4U4N35s-X2l_Qd74LwP5X1AmucBPvv2OCdJJo9KRl9Up-7tCBB1Pc2Oxrg")
-        XCTAssertThrowsError(try validator.validate(token: jwt, issuer: issuer, clientId: clientId)) { error in
+        XCTAssertThrowsError(try validator.validate(token: jwt, issuer: issuer, clientId: clientId, context: nil)) { error in
             XCTAssertEqual(error as? JWTError, JWTError.unsupportedAlgorithm(.rs384))
         }
     }
@@ -121,7 +125,7 @@ final class DefaultIDTokenValidatorTests: XCTestCase {
     func testExpired() throws {
         mockTime?.offset = 0
         let jwt = try JWT("eyJraWQiOiJGSkEwSEdOdHN1dWRhX1BsNDVKNDJrdlFxY3N1XzBDNEZnN3BiSkxYVEhZIiwiYWxnIjoiUlMyNTYifQ.eyJzdWIiOiIwMHViNDF6N21nek5xcnlNdjY5NiIsIm5hbWUiOiJUZXN0IFVzZXIiLCJlbWFpbCI6InRlc3RAZXhhbXBsZS5jb20iLCJ2ZXIiOjEsImlzcyI6Imh0dHBzOi8vZXhhbXBsZS5va3RhLmNvbS9vYXV0aDIvZGVmYXVsdCIsImF1ZCI6InVuaXRfdGVzdF9jbGllbnRfaWQiLCJpYXQiOjE2NDQzNDcwNjksImV4cCI6MTY0NDM1MDY2OSwianRpIjoiSUQuNTVjeEJ0ZFlsOGw2YXJLSVNQQndkMHlPVC05VUNUYVhhUVRYdDJsYVJMcyIsImFtciI6WyJwd2QiXSwiaWRwIjoiMDBvOGZvdTdzUmFHR3dkbjQ2OTYiLCJzaWQiOiJpZHhXeGtscF80a1N4dUNfblUxcFhELW5BIiwicHJlZmVycmVkX3VzZXJuYW1lIjoidGVzdEBleGFtcGxlLmNvbSIsImF1dGhfdGltZSI6MTY0NDM0NzA2OCwiYXRfaGFzaCI6ImdNY0dUYmhHVDFHX2xkc0hvSnNQelEiLCJkc19oYXNoIjoiREFlTE9GUnFpZnlzYmdzcmJPZ2JvZyJ9.LvWXuIL5oinAfTfZFBo9a2Q1SGZcu9GZZ2LOYbWekRvKw3eFJk8aZHeFDQx3c3J_NpCYqjxlOnb5YJ1emRS2sSU9YOoMjm-15TeM_O5AMHk06jJkBiJlhDr0IaCSXw8dB2Hnj4mfGJ3HxknA8nWnHZUhkzu1196QCHGQwwK-EbYzaQAzkU9itcJZmQObV56rNsvSL4RQUfI1auoz0IAj3gAee-g6O1y7sTdsRmXgtKM8AoKqehBO9QXOdrlv7648Ixo2NgB7iobFLIQ-FxChp_mwhfgqG1RtQBCJGG4eow7ER5lPIYJkUlzgc79sFoiZKo3KZfUFwlwWXPAwAqVdmg")
-        XCTAssertThrowsError(try validator.validate(token: jwt, issuer: issuer, clientId: clientId)) { error in
+        XCTAssertThrowsError(try validator.validate(token: jwt, issuer: issuer, clientId: clientId, context: nil)) { error in
             XCTAssertEqual(error as? JWTError, JWTError.expired)
         }
     }
@@ -129,8 +133,22 @@ final class DefaultIDTokenValidatorTests: XCTestCase {
     func testIssuedAtExceedsGracePeriod() throws {
         mockTime?.offset += 320
         let jwt = try JWT(validToken)
-        XCTAssertThrowsError(try validator.validate(token: jwt, issuer: issuer, clientId: clientId)) { error in
+        XCTAssertThrowsError(try validator.validate(token: jwt, issuer: issuer, clientId: clientId, context: nil)) { error in
             XCTAssertEqual(error as? JWTError, JWTError.issuedAtTimeExceedsGraceInterval)
         }
+    }
+    
+    func testNonce() throws {
+        let jwt = try JWT("eyJraWQiOiJGSkEwSEdOdHN1dWRhX1BsNDVKNDJrdlFxY3N1XzBDNEZnN3BiSkxYVEhZIiwiYWxnIjoiUlMyNTYifQ.eyJzdWIiOiIwMHViNDF6N21nek5xcnlNdjY5NiIsIm5hbWUiOiJUZXN0IFVzZXIiLCJlbWFpbCI6InRlc3RAZXhhbXBsZS5jb20iLCJ2ZXIiOjEsImlzcyI6Imh0dHBzOi8vZXhhbXBsZS5va3RhLmNvbS9vYXV0aDIvZGVmYXVsdCIsImF1ZCI6InVuaXRfdGVzdF9jbGllbnRfaWQiLCJpYXQiOjE2NDQzNDcwNjksImV4cCI6MTY0NDM1MDY2OSwianRpIjoiSUQuNTVjeEJ0ZFlsOGw2YXJLSVNQQndkMHlPVC05VUNUYVhhUVRYdDJsYVJMcyIsImFtciI6WyJwd2QiXSwiaWRwIjoiMDBvOGZvdTdzUmFHR3dkbjQ2OTYiLCJzaWQiOiJpZHhXeGtscF80a1N4dUNfblUxcFhELW5BIiwicHJlZmVycmVkX3VzZXJuYW1lIjoidGVzdEBleGFtcGxlLmNvbSIsImF1dGhfdGltZSI6MTY0NDM0NzA2OCwiYXRfaGFzaCI6ImdNY0dUYmhHVDFHX2xkc0hvSnNQelEiLCJkc19oYXNoIjoiREFlTE9GUnFpZnlzYmdzcmJPZ2JvZyIsIm5vbmNlIjoiQjM0QUFFMDEtNTc1Ny00QTBCLTkzNjItQjAyRjZGMDJBM0IxIn0.Ac8qsEiu0nbQoUszIdB_fkrFHVKBd5g2r-fkK_lPZ8_lyxZSJzj6saoA3746dh6wpZxcEwJikrFsoEEWMdHZITx8fou3TiYSffk-6z2VKivk0xeGMQxh5fh9tlSfYwHFf1K4LDyNr9bsNF8HMmdlOf-JJv9YU6scpr9VnYGnF4JgMVtlGqlIq56fmjjWry-SYZU6hjlHcdYOKg5UKspz1JMvN403HegZIcPOmvFcIlumgZYXk3TO7gWlMwD2WLRoqurjUuvhFYkfoNgKnElTQeAWi20lb2p43XBn4fU_jJse49lXw3cBw_hEU9bK_i3GB1z3K-YZEeWhX8JXBi9Ilg")
+
+        XCTAssertThrowsError(try validator.validate(token: jwt, issuer: issuer, clientId: clientId, context: nil)) { error in
+            XCTAssertEqual(error as? JWTError, JWTError.nonceMismatch)
+        }
+
+        XCTAssertThrowsError(try validator.validate(token: jwt, issuer: issuer, clientId: clientId, context: MockTokenContext(nonce: "does_not_match"))) { error in
+            XCTAssertEqual(error as? JWTError, JWTError.nonceMismatch)
+        }
+
+        XCTAssertNoThrow(try validator.validate(token: jwt, issuer: issuer, clientId: clientId, context: MockTokenContext(nonce: "B34AAE01-5757-4A0B-9362-B02F6F02A3B1")))
     }
 }

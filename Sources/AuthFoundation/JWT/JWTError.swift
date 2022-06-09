@@ -21,6 +21,7 @@ public enum JWTError: Error, Equatable {
     case invalidSigningAlgorithm
     case expired
     case issuedAtTimeExceedsGraceInterval
+    case nonceMismatch
     case cannotCreateKey(code: OSStatus, description: String?)
     case invalidKey
     case unsupportedAlgorithm(_ algorithm: JWK.Algorithm)
@@ -79,6 +80,11 @@ extension JWTError: LocalizedError {
                                      bundle: .authFoundation,
                                      comment: "")
 
+        case .nonceMismatch:
+            return NSLocalizedString("nonce_mismatch",
+                                     tableName: "AuthFoundation",
+                                     bundle: .authFoundation,
+                                     comment: "")
 
         case .cannotCreateKey(code: _, description: _):
             return NSLocalizedString("cannot_create_key",

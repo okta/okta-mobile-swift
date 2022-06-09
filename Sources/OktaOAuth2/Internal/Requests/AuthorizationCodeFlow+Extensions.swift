@@ -36,6 +36,7 @@ extension AuthorizationCodeFlow {
         parameters["redirect_uri"] = redirectUri.absoluteString
         parameters["response_type"] = responseType.rawValue
         parameters["state"] = context.state
+        parameters["nonce"] = context.nonce
 
         if let pkce = context.pkce {
             parameters["code_challenge"] = pkce.codeChallenge

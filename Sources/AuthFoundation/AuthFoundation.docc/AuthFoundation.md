@@ -57,7 +57,7 @@ You can use AuthFoundation when you want to:
 - ``TokenStorage``
 - ``TokenStorageDelegate``
 - ``JWKValidator``
-- ``AccessTokenValidator``
+- ``TokenHashValidator``
 - ``IDTokenValidator``
 
 ### Networking

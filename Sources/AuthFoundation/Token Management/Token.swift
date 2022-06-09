@@ -13,7 +13,7 @@
 import Foundation
 
 /// Token information representing a user's access to a resource server, including access token, refresh token, and other related information.
-public class Token: Codable, Equatable, Hashable, Expires, Identifiable {
+public class Token: Codable, Equatable, Hashable, Identifiable, Expires {
     /// The object used to ensure ID tokens are valid.
     public static var idTokenValidator: IDTokenValidator = DefaultIDTokenValidator()
     
@@ -78,14 +78,15 @@ public class Token: Codable, Equatable, Hashable, Expires, Identifiable {
     
     /// Validates the claims within this JWT token, to ensure it matches the given ``OAuth2Client``.
     /// - Parameter client: Client to validate the token's claims against.
-    public func validate(using client: OAuth2Client) throws {
+    public func validate(using client: OAuth2Client, with context: IDTokenValidatorContext?) throws {
         guard let idToken = idToken else {
             return
         }
 
         try Token.idTokenValidator.validate(token: idToken,
                                             issuer: client.configuration.baseURL,
-                                            clientId: client.configuration.clientId)
+                                            clientId: client.configuration.clientId,
+                                            context: context)
         try Token.accessTokenValidator.validate(accessToken, idToken: idToken)
         
         if let deviceSecret = deviceSecret {

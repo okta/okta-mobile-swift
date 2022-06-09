@@ -24,5 +24,9 @@ public protocol IDTokenValidator {
     var issuedAtGraceInterval: TimeInterval { get set }
     
     /// Validates the claims in the given token, using the supplied issuer and client ID values.
-    func validate(token: JWT, issuer: URL, clientId: String) throws
+    func validate(token: JWT, issuer: URL, clientId: String, context: IDTokenValidatorContext?) throws
+}
+
+public protocol IDTokenValidatorContext {
+    var nonce: String? { get }
 }

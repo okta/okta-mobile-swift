@@ -44,7 +44,8 @@ final class OAuth2ClientTests: XCTestCase {
                                                          redirectUri: redirectUri.absoluteString,
                                                          grantType: .authorizationCode,
                                                          grantValue: "abc123",
-                                                         pkce: pkce)
+                                                         pkce: pkce,
+                                                         nonce: nil)
         
         urlSession.expect("https://example.com/oauth2/default/.well-known/openid-configuration",
                           data: try data(from: .module, for: "openid-configuration", in: "MockResponses"),

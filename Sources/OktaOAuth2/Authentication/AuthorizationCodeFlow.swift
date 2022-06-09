@@ -76,6 +76,9 @@ public class AuthorizationCodeFlow: AuthenticationFlow {
         /// The state string to use when creating an authentication URL.
         public let state: String
         
+        /// The "nonce" value to send with this authorization request.
+        public let nonce: String
+        
         /// The current authentication URL, or `nil` if one has not yet been generated.
         public internal(set) var authenticationURL: URL?
         
@@ -83,11 +86,13 @@ public class AuthorizationCodeFlow: AuthenticationFlow {
         /// - Parameter state: State string to use, or `nil` to accept an automatically generated default.
         public init(state: String? = nil) {
             self.init(state: state ?? UUID().uuidString,
+                      nonce: [UInt8].random(count: 16).base64URLEncodedString,
                       pkce: PKCE())
         }
         
-        init(state: String, pkce: PKCE?) {
+        init(state: String, nonce: String, pkce: PKCE?) {
             self.state = state
+            self.nonce = nonce
             self.pkce = pkce
         }
     }
@@ -262,7 +267,8 @@ public class AuthorizationCodeFlow: AuthenticationFlow {
                                            redirectUri: self.redirectUri.absoluteString,
                                            grantType: .authorizationCode,
                                            grantValue: code,
-                                           pkce: self.context?.pkce)
+                                           pkce: self.context?.pkce,
+                                           nonce: self.context?.nonce)
                 self.client.exchange(token: request) { result in
                     self.reset()
                     
