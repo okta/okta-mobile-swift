@@ -1,0 +1,52 @@
+name: Deploy Documentation
+
+on:
+  push:
+    branches:
+      - master
+
+env:
+  DEVELOPER_DIR: /Applications/Xcode_13.3.app/Contents/Developer
+
+jobs:
+  ExportToGHPages:
+    name: Export to Github Pages
+    runs-on: macos-12
+    steps:
+    - uses: actions/checkout@master
+    - name: AuthFoundation
+      run: |
+        swift package \
+          generate-documentation \
+          --allow-writing-to-directory docs \
+          --target AuthFoundation \
+          --disable-indexing \
+          --transform-for-static-hosting \
+          --hosting-base-path /development/AuthFoundation \
+          --output-path docs/development/AuthFoundation
+    - name: OktaOAuth2
+      run: |
+        swift package \
+          generate-documentation \
+          --allow-writing-to-directory docs \
+          --target OktaOAuth2 \
+          --disable-indexing \
+          --transform-for-static-hosting \
+          --hosting-base-path /development/OktaOAuth2 \
+          --output-path docs/development/OktaOAuth2
+    - name: WebAuthenticationUI
+      run: |
+        swift package \
+          generate-documentation \
+          --allow-writing-to-directory docs \
+          --target WebAuthenticationUI \
+          --disable-indexing \
+          --transform-for-static-hosting \
+          --hosting-base-path /development/WebAuthenticationUI \
+          --output-path docs/development/WebAuthenticationUI
+    - name: Deploy documentation to Github Pages
+      uses: peaceiris/actions-gh-pages@v3
+      with:
+        github_token: ${{ secrets.GITHUB_TOKEN }}
+        publish_dir: ./docs
+        keep_files: true

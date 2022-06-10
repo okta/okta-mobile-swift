@@ -4,6 +4,7 @@ on:
   push:
     paths:
       - '.github/workflows/unittests.yml'
+      - 'Package.swift'
       - 'Sources/**/*.swift'
       - 'Tests/**/*.swift'
     branches:
@@ -17,6 +18,7 @@ on:
       - release-*
     paths:
       - '.github/workflows/unittests.yml'
+      - 'Package.swift'
       - 'Sources/**/*.swift'
       - 'Tests/**/*.swift'
 

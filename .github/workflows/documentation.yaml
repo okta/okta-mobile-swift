@@ -1,0 +1,70 @@
+name: Documentation
+
+on:
+  push:
+    branches:
+      - master
+      - dev-*
+      - release-*
+    paths:
+      - '.github/workflows/documentation.yml'
+      - 'Sources/**/*.swift'
+      - 'Sources/**/*.md'
+  pull_request:
+    branches:
+      - master
+      - dev-*
+      - release-*
+    paths:
+      - '.github/workflows/documentation.yml'
+      - 'Sources/**/*.swift'
+      - 'Sources/**/*.md'
+
+env:
+  DEVELOPER_DIR: /Applications/Xcode_13.3.app/Contents/Developer
+
+jobs:
+  BuildDocumentation:
+    name: Build Documentation Archives
+    runs-on: macos-12
+    steps:
+    - uses: actions/checkout@master
+    - name: AuthFoundation
+      run: |
+        set -o pipefail
+        env NSUnbufferedIO=YES xcodebuild docbuild \
+          -derivedDataPath ~/Build/DerivedData \
+          -scheme AuthFoundation | xcpretty
+    - name: OktaOAuth2
+      run: |
+        set -o pipefail
+        env NSUnbufferedIO=YES xcodebuild docbuild \
+          -derivedDataPath ~/Build/DerivedData \
+          -scheme OktaOAuth2 | xcpretty
+    - name: WebAuthenticationUI
+      run: |
+        set -o pipefail
+        env NSUnbufferedIO=YES xcodebuild docbuild \
+          -derivedDataPath ~/Build/DerivedData \
+          -scheme WebAuthenticationUI | xcpretty
+    - name: Compress DocC archives
+      run: |
+        for archive in $(find ~/Build/DerivedData/Build/Products -type d -name '*.doccarchive'); do
+          cd $(dirname "$archive")
+          zip -r ~/Build/$(basename "$archive").zip $(basename "$archive")
+        done
+    - name: Upload AuthFoundation DocC Archive
+      uses: actions/upload-artifact@v2
+      with:
+        name: AuthFoundation.doccarchive.zip
+        path: ~/Build/AuthFoundation.doccarchive.zip
+    - name: Upload OktaOAuth2 DocC Archive
+      uses: actions/upload-artifact@v2
+      with:
+        name: OktaOAuth2.doccarchive.zip
+        path: ~/Build/OktaOAuth2.doccarchive.zip
+    - name: Upload WebAuthenticationUI DocC Archive
+      uses: actions/upload-artifact@v2
+      with:
+        name: WebAuthenticationUI.doccarchive.zip
+        path: ~/Build/WebAuthenticationUI.doccarchive.zip
