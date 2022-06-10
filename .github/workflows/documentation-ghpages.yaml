@@ -46,7 +46,7 @@ jobs:
           --output-path docs/development/WebAuthenticationUI
     - name: Deploy documentation to Github Pages
       uses: peaceiris/actions-gh-pages@v3
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./docs
-          keep_files: true
+      with:
+        github_token: ${{ secrets.GITHUB_TOKEN }}
+        publish_dir: ./docs
+        keep_files: true

@@ -166,7 +166,6 @@ jobs:
       - UITest-DeviceAuthSignIniOS
       - UITest-DeviceAuthSignIntvOS
       - UITest-UserPasswordSignInmacOS
-    if: success() || failure()
     steps:
     - name: Download Test Results
       uses: actions/download-artifact@v2
