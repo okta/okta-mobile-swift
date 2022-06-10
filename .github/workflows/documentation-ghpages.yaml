@@ -14,11 +14,14 @@ jobs:
     runs-on: macos-12
     steps:
     - uses: actions/checkout@master
+    - name: Prepare directory
+      run: |
+        mkdir -p docs/development
     - name: AuthFoundation
       run: |
         swift package \
-          generate-documentation \
           --allow-writing-to-directory docs \
+          generate-documentation \
           --target AuthFoundation \
           --disable-indexing \
           --transform-for-static-hosting \
@@ -27,8 +30,8 @@ jobs:
     - name: OktaOAuth2
       run: |
         swift package \
-          generate-documentation \
           --allow-writing-to-directory docs \
+          generate-documentation \
           --target OktaOAuth2 \
           --disable-indexing \
           --transform-for-static-hosting \
@@ -37,8 +40,8 @@ jobs:
     - name: WebAuthenticationUI
       run: |
         swift package \
-          generate-documentation \
           --allow-writing-to-directory docs \
+          generate-documentation \
           --target WebAuthenticationUI \
           --disable-indexing \
           --transform-for-static-hosting \
