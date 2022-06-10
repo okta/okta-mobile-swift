@@ -1,0 +1,83 @@
+name: Unit Tests
+
+on:
+  push:
+    paths:
+      - '.github/workflows/unittests.yml'
+      - 'Sources/**/*.swift'
+      - 'Tests/**/*.swift'
+    branches:
+      - master
+      - dev-*
+      - release-*
+  pull_request:
+    branches:
+      - master
+      - dev-*
+      - release-*
+    paths:
+      - '.github/workflows/unittests.yml'
+      - 'Sources/**/*.swift'
+      - 'Tests/**/*.swift'
+
+env:
+  DEVELOPER_DIR: /Applications/Xcode_13.3.app/Contents/Developer
+
+jobs:
+  SwiftBuild:
+    name: Swift Unit Tests
+    runs-on: macos-12
+    timeout-minutes: 10
+    steps:
+    - name: Get swift version
+      run: swift --version
+    - uses: actions/checkout@master
+    - name: Build
+      run: swift build --build-tests
+    - name: Test
+      run: swift test
+
+  XcodeBuild:
+    name: Xcode Unit Tests
+    runs-on: macos-12
+    timeout-minutes: 10
+    steps:
+    - uses: actions/checkout@master
+    - name: Test AuthFoundation
+      run: |
+        set -o pipefail
+        env NSUnbufferedIO=YES xcodebuild test \
+          -derivedDataPath ../Build/DerivedData \
+          -clonedSourcePackagesDirPath ../Build/ClonedSources \
+          -resultBundlePath ../TestResults/AuthFoundation.xcresult \
+          -scheme AuthFoundation \
+          -sdk iphonesimulator \
+          -destination "platform=iOS Simulator,OS=latest,name=iPhone 12" | xcpretty
+    - name: Test OktaOAuth2
+      run: |
+        set -o pipefail
+        env NSUnbufferedIO=YES xcodebuild test \
+          -derivedDataPath ../Build/DerivedData \
+          -clonedSourcePackagesDirPath ../Build/ClonedSources \
+          -resultBundlePath ../TestResults/OktaOAuth2.xcresult \
+          -scheme OktaOAuth2 \
+          -sdk iphonesimulator \
+          -destination "platform=iOS Simulator,OS=latest,name=iPhone 12" | xcpretty
+    - name: Test WebAuthenticationUI
+      run: |
+        set -o pipefail
+        env NSUnbufferedIO=YES xcodebuild test \
+          -derivedDataPath ../Build/DerivedData \
+          -clonedSourcePackagesDirPath ../Build/ClonedSources \
+          -resultBundlePath ../TestResults/WebAuthenticationUI.xcresult \
+          -scheme WebAuthenticationUI \
+          -sdk iphonesimulator \
+          -destination "platform=iOS Simulator,OS=latest,name=iPhone 12" | xcpretty
+    - uses: kishikawakatsumi/xcresulttool@v1
+      with:
+        path: |
+          ../TestResults/AuthFoundation.xcresult
+          ../TestResults/OktaOAuth2.xcresult
+          ../TestResults/WebAuthenticationUI.xcresult
+        title: Unit Test Results
+      if: success() || failure()
