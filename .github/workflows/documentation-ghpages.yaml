@@ -35,7 +35,7 @@ jobs:
         done
         find docs/development/AuthFoundation -type f -name '*.js' | while read file; do \
           perl -pi -e "s#\\{\\{BASE_PATH\\}\\}#okta-mobile-swift/development/AuthFoundation#g" "$file"; \
-          perl -pi -e 's#n + "theme-settings.json"#"okta-mobile-swift/development/AuthFoundation/theme-settings.json"#g' "$file"; \
+          perl -pi -e 's#n+"theme-settings.json"#"okta-mobile-swift/development/AuthFoundation/theme-settings.json"#g' "$file"; \
         done
         perl -pi -e "s#/(js|css)#/okta-mobile-swift/development/AuthFoundation/\$1#g" docs/development/AuthFoundation/index.html
     - name: OktaOAuth2
@@ -53,7 +53,7 @@ jobs:
         done
         find docs/development/OktaOAuth2 -type f -name '*.js' | while read file; do \
           perl -pi -e "s#\\{\\{BASE_PATH\\}\\}#okta-mobile-swift/development/OktaOAuth2#g" "$file"; \
-          perl -pi -e 's#n + "theme-settings.json"#"okta-mobile-swift/development/OktaOAuth2/theme-settings.json"#g' "$file"; \
+          perl -pi -e 's#n+"theme-settings.json"#"okta-mobile-swift/development/OktaOAuth2/theme-settings.json"#g' "$file"; \
         done
         perl -pi -e "s#/(js|css)#/okta-mobile-swift/development/OktaOAuth2/\$1#g" docs/development/OktaOAuth2/index.html
     - name: WebAuthenticationUI
@@ -71,7 +71,7 @@ jobs:
         done
         find docs/development/WebAuthenticationUI -type f -name '*.js' | while read file; do \
           perl -pi -e "s#\\{\\{BASE_PATH\\}\\}#okta-mobile-swift/development/WebAuthenticationUI#g" "$file"; \
-          perl -pi -e 's#n + "theme-settings.json"#"okta-mobile-swift/development/WebAuthenticationUI/theme-settings.json"#g' "$file"; \
+          perl -pi -e 's#n+"theme-settings.json"#"okta-mobile-swift/development/WebAuthenticationUI/theme-settings.json"#g' "$file"; \
         done
         perl -pi -e "s#/(js|css)#/okta-mobile-swift/development/WebAuthenticationUI/\$1#g" docs/development/WebAuthenticationUI/index.html
     - name: Deploy documentation to Github Pages
