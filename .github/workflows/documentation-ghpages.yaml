@@ -28,10 +28,10 @@ jobs:
           --target AuthFoundation \
           --disable-indexing \
           --transform-for-static-hosting \
-          --hosting-base-path /development/AuthFoundation \
+          --hosting-base-path PACKAGENAME \
           --output-path docs/development/AuthFoundation
         find docs/development/AuthFoundation -type f | while read file; do \
-          perl -pi -e "s#([\"'])/(js|css|documentation|images|videos|data|downloads|img|js|theme-settings.json|metadata.json|index.html|favicon.ico|favicon.svg)#\$1/okta-mobile-swift/development/AuthFoundation/\$2#g" "$file"; \
+          perl -pi -e "s#PACKAGENAME#okta-mobile-swift/development/AuthFoundation#g" "$file"; \
         done
     - name: OktaOAuth2
       run: |
@@ -41,10 +41,10 @@ jobs:
           --target OktaOAuth2 \
           --disable-indexing \
           --transform-for-static-hosting \
-          --hosting-base-path /development/OktaOAuth2 \
+          --hosting-base-path PACKAGENAME \
           --output-path docs/development/OktaOAuth2
         find docs/development/OktaOAuth2 -type f | while read file; do \
-          perl -pi -e "s#([\"'])/(js|css|documentation|images|videos|data|downloads|img|js|theme-settings.json|metadata.json|index.html|favicon.ico|favicon.svg)#\$1/okta-mobile-swift/development/OktaOAuth2/\$2#g" "$file"; \
+          perl -pi -e "s#PACKAGENAME#okta-mobile-swift/development/OktaOAuth2#g" "$file"; \
         done
     - name: WebAuthenticationUI
       run: |
@@ -54,10 +54,10 @@ jobs:
           --target WebAuthenticationUI \
           --disable-indexing \
           --transform-for-static-hosting \
-          --hosting-base-path /development/WebAuthenticationUI \
+          --hosting-base-path PACKAGENAME \
           --output-path docs/development/WebAuthenticationUI
         find docs/development/WebAuthenticationUI -type f | while read file; do \
-          perl -pi -e "s#([\"'])/(js|css|documentation|images|videos|data|downloads|img|js|theme-settings.json|metadata.json|index.html|favicon.ico|favicon.svg)#\$1/okta-mobile-swift/development/WebAuthenticationUI/\$2#g" "$file"; \
+          perl -pi -e "s#PACKAGENAME#okta-mobile-swift/development/WebAuthenticationUI#g" "$file"; \
         done
     - name: Deploy documentation to Github Pages
       uses: peaceiris/actions-gh-pages@v3
