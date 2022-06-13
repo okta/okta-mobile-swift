@@ -8,6 +8,14 @@ on:
 env:
   DEVELOPER_DIR: /Applications/Xcode_13.3.app/Contents/Developer
 
+# NOTE: The DocC `generate-documentation` plugin does not handle the 
+#       hostingBasePath well. In particular, it doesn't properly handle
+#       multiple child paths. Furthermore, the current 1.0.0 version of
+#       the plugin doesn't handle updates to the index.html or *.js
+#       files.
+#
+#       This workflow should be revisited once Xcode 14 GA is released
+#       so the newer DocC utilities can be utilized.
 jobs:
   ExportToGHPages:
     name: Export to Github Pages
