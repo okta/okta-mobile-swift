@@ -33,6 +33,7 @@ jobs:
         find docs/development/AuthFoundation -type f | while read file; do \
           perl -pi -e "s#PACKAGENAME#okta-mobile-swift/development/AuthFoundation#g" "$file"; \
         done
+        perl -pi -e "s#/(js|css)#/okta-mobile-swift/development/AuthFoundation/\$1#g" docs/development/AuthFoundation/index.html
     - name: OktaOAuth2
       run: |
         swift package \
@@ -46,6 +47,7 @@ jobs:
         find docs/development/OktaOAuth2 -type f | while read file; do \
           perl -pi -e "s#PACKAGENAME#okta-mobile-swift/development/OktaOAuth2#g" "$file"; \
         done
+        perl -pi -e "s#/(js|css)#/okta-mobile-swift/development/OktaOAuth2/\$1#g" docs/development/OktaOAuth2/index.html
     - name: WebAuthenticationUI
       run: |
         swift package \
@@ -59,6 +61,7 @@ jobs:
         find docs/development/WebAuthenticationUI -type f | while read file; do \
           perl -pi -e "s#PACKAGENAME#okta-mobile-swift/development/WebAuthenticationUI#g" "$file"; \
         done
+        perl -pi -e "s#/(js|css)#/okta-mobile-swift/development/WebAuthenticationUI/\$1#g" docs/development/WebAuthenticationUI/index.html
     - name: Deploy documentation to Github Pages
       uses: peaceiris/actions-gh-pages@v3
       with:
