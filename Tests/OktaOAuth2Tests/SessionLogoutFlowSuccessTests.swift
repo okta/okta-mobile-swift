@@ -125,14 +125,14 @@ final class SessionLogoutFlowSuccessTests: XCTestCase {
     #if swift(>=5.5.1)
     @available(iOS 15.0, tvOS 15.0, macOS 12.0, watchOS 8, *)
     func testWithAsync() async throws {
-        XCTAssertNil(loginFlow.context)
-        XCTAssertFalse(loginFlow.inProgress)
+        XCTAssertNil(flow.context)
+        XCTAssertFalse(flow.inProgress)
         
         let context = SessionLogoutFlow.Context(idToken: logoutIDToken, state: state)
         
-        let logoutUrl = try await loginFlow.resume(with: context)
+        let logoutUrl = try await flow.resume(with: context)
         
-        XCTAssertNotEqual(loginFlow.context, context)
+        XCTAssertNotEqual(flow.context, context)
         XCTAssertEqual(logoutUrl.absoluteString, """
                             https://example.okta.com/oauth2/v1/logout\
                             ?id_token_hint=\(logoutIDToken)\

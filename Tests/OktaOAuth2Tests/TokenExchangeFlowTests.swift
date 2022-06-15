@@ -128,11 +128,11 @@ final class TokenExchangeFlowTests: XCTestCase {
 #if swift(>=5.5.1) && !os(Linux)
     @available(iOS 15.0, tvOS 15.0, macOS 12.0, watchOS 8, *)
     func testAsyncAuthenticationSucceeded() async throws {
-        XCTAssertFalse(loginFlow.isAuthenticating)
+        XCTAssertFalse(flow.isAuthenticating)
         
-        let _ = try await loginFlow.resume(with: tokens)
+        let _ = try await flow.resume(with: tokens)
         
-        XCTAssertFalse(loginFlow.isAuthenticating)
+        XCTAssertFalse(flow.isAuthenticating)
     }
 #endif
 }

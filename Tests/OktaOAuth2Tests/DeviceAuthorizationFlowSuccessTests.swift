@@ -181,22 +181,22 @@ final class DeviceAuthorizationFlowSuccessTests: XCTestCase {
     @available(iOS 15.0, tvOS 15.0, macOS 12.0, watchOS 8, *)
     func testWithAsync() async throws {
         // Ensure the initial state
-        XCTAssertNil(loginFlow.context)
-        XCTAssertFalse(loginFlow.isAuthenticating)
+        XCTAssertNil(flow.context)
+        XCTAssertFalse(flow.isAuthenticating)
 
         // Begin
-        let context = try await loginFlow.resume()
+        let context = try await flow.resume()
 
-        XCTAssertEqual(loginFlow.context, context)
-        XCTAssertTrue(loginFlow.isAuthenticating)
-        XCTAssertEqual(context, loginFlow.context)
-        XCTAssertEqual(loginFlow.context?.verificationUri.absoluteString, "https://example.okta.com/activate")
+        XCTAssertEqual(flow.context, context)
+        XCTAssertTrue(flow.isAuthenticating)
+        XCTAssertEqual(context, flow.context)
+        XCTAssertEqual(flow.context?.verificationUri.absoluteString, "https://example.okta.com/activate")
 
         // Exchange code
-        let token = try await loginFlow.resume(with: context)
+        let token = try await flow.resume(with: context)
 
-        XCTAssertNil(loginFlow.context)
-        XCTAssertFalse(loginFlow.isAuthenticating)
+        XCTAssertNil(flow.context)
+        XCTAssertFalse(flow.isAuthenticating)
         XCTAssertNotNil(token)
     }
     #endif
