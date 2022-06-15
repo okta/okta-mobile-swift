@@ -16,7 +16,7 @@ import OktaOAuth2
 #if canImport(UIKit) || canImport(AppKit)
 
 protocol WebAuthenticationProvider {
-    var flow: AuthorizationCodeFlow { get }
+    var loginFlow: AuthorizationCodeFlow { get }
     var logoutFlow: SessionLogoutFlow? { get }
     var delegate: WebAuthenticationProviderDelegate? { get }
 

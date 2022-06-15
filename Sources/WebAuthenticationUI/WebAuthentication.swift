@@ -98,7 +98,7 @@ public class WebAuthentication {
             cancel()
         }
         
-        let provider = createWebAuthenticationProvider(flow: signInFlow,
+        let provider = createWebAuthenticationProvider(loginFlow: signInFlow,
                                                        logoutFlow: signOutFlow,
                                                        from: window,
                                                        delegate: self)
@@ -148,7 +148,7 @@ public class WebAuthentication {
             cancel()
         }
         
-        provider = createWebAuthenticationProvider(flow: signInFlow,
+        provider = createWebAuthenticationProvider(loginFlow: signInFlow,
                                                    logoutFlow: signOutFlow,
                                                    from: window,
                                                    delegate: self)
@@ -240,7 +240,7 @@ public class WebAuthentication {
             logoutFlow = nil
         }
         
-        self.init(flow: AuthorizationCodeFlow(redirectUri: redirectUri,
+        self.init(loginFlow: AuthorizationCodeFlow(redirectUri: redirectUri,
                                               responseType: responseType,
                                               additionalParameters: additionalParameters,
                                               client: client),
@@ -261,14 +261,14 @@ public class WebAuthentication {
                   additionalParameters: config.additionalParameters)
     }
     
-    func createWebAuthenticationProvider(flow: AuthorizationCodeFlow,
+    func createWebAuthenticationProvider(loginFlow: AuthorizationCodeFlow,
                                          logoutFlow: SessionLogoutFlow?,
                                          from window: WebAuthentication.WindowAnchor?,
                                          delegate: WebAuthenticationProviderDelegate) -> WebAuthenticationProvider?
     {
         // TODO: SessionLogoutFLow
         if #available(iOS 12.0, macOS 10.15, macCatalyst 13.0, *) {
-            return AuthenticationServicesProvider(flow: flow,
+            return AuthenticationServicesProvider(loginFlow: loginFlow,
                                                   logoutFlow: logoutFlow,
                                                   from: window,
                                                   delegate: delegate)
@@ -276,13 +276,13 @@ public class WebAuthentication {
         
         #if os(iOS)
         if #available(iOS 11.0, *) {
-            return SafariServicesProvider(flow: flow,
+            return SafariServicesProvider(loginFlow: loginFlow,
                                           logoutFlow: logoutFlow,
                                           delegate: delegate)
         }
         
         if #available(iOS 9.0, *) {
-            return SafariBrowserProvider(flow: flow,
+            return SafariBrowserProvider(loginFlow: loginFlow,
                                          logoutFlow: logoutFlow,
                                          from: window,
                                          delegate: delegate)
@@ -297,11 +297,11 @@ public class WebAuthentication {
     /// - Parameters:
     ///   - flow: Authorization code flow instance for this client.
     ///   - context: Optional context to initialize authentication with.
-    public init(flow: AuthorizationCodeFlow, logoutFlow: SessionLogoutFlow?, context: AuthorizationCodeFlow.Context? = nil) {
+    public init(loginFlow: AuthorizationCodeFlow, logoutFlow: SessionLogoutFlow?, context: AuthorizationCodeFlow.Context? = nil) {
         // Ensure this SDK's static version is included in the user agent.
         SDKVersion.register(sdk: Version)
         
-        self.signInFlow = flow
+        self.signInFlow = loginFlow
         self.signOutFlow = logoutFlow
         self.context = context
         WebAuthentication.shared = self

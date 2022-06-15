@@ -6,6 +6,7 @@ on:
       - '.github/workflows/unittests.yml'
       - 'Package.swift'
       - 'Sources/**/*.swift'
+      - 'Samples/**/*.swift'
       - 'Tests/**/*.swift'
     branches:
       - master
@@ -20,6 +21,7 @@ on:
       - '.github/workflows/unittests.yml'
       - 'Package.swift'
       - 'Sources/**/*.swift'
+      - 'Samples/**/*.swift'
       - 'Tests/**/*.swift'
 
 env:

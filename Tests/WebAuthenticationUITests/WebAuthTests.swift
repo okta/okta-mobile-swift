@@ -23,7 +23,7 @@ class WebAuthenticationUITests: XCTestCase {
     private let redirectUri = URL(string: "com.example:/callback")!
     private let logoutRedirectUri = URL(string: "com.example:/logout")!
     private let urlSession = URLSessionMock()
-    private var flow: AuthorizationCodeFlow!
+    private var loginFlow: AuthorizationCodeFlow!
     private var logoutFlow: SessionLogoutFlow!
     private var client: OAuth2Client!
     
@@ -36,7 +36,7 @@ class WebAuthenticationUITests: XCTestCase {
         urlSession.expect("https://example.com/.well-known/openid-configuration",
                           data: try data(from: .module, for: "openid-configuration", in: "MockResponses"),
                           contentType: "application/json")
-        flow = client.authorizationCodeFlow(redirectUri: redirectUri,
+        loginFlow = client.authorizationCodeFlow(redirectUri: redirectUri,
                                             additionalParameters: ["additional": "param"])
         logoutFlow = SessionLogoutFlow(logoutRedirectUri: logoutRedirectUri, client: client)
     }
@@ -44,7 +44,7 @@ class WebAuthenticationUITests: XCTestCase {
     func testStart() throws {
         XCTAssertNotNil(WebAuthentication.shared)
         
-        let webAuth = WebAuthenticationMock(flow: flow, logoutFlow: logoutFlow, context: .init(state: "qwe"))
+        let webAuth = WebAuthenticationMock(loginFlow: loginFlow, logoutFlow: logoutFlow, context: .init(state: "qwe"))
         
         webAuth.signIn(from: nil) { result in }
         
@@ -55,7 +55,7 @@ class WebAuthenticationUITests: XCTestCase {
     }
     
     func testLogout() throws {
-        let webAuth = WebAuthenticationMock(flow: flow, logoutFlow: logoutFlow, context: .init(state: "qwe"))
+        let webAuth = WebAuthenticationMock(loginFlow: loginFlow, logoutFlow: logoutFlow, context: .init(state: "qwe"))
         
         webAuth.signOut(from: nil, token: "idToken") { result in }
         
@@ -66,7 +66,7 @@ class WebAuthenticationUITests: XCTestCase {
     }
     
     func testCancel() throws {
-        let webAuth = WebAuthenticationMock(flow: flow, logoutFlow: logoutFlow, context: .init(state: "qwe"))
+        let webAuth = WebAuthenticationMock(loginFlow: loginFlow, logoutFlow: logoutFlow, context: .init(state: "qwe"))
         
         XCTAssertNil(webAuth.provider)
         

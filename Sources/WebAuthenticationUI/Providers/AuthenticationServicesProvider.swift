@@ -39,31 +39,31 @@ extension ASWebAuthenticationSession: AuthenticationServicesProviderSession {}
 
 @available(iOS 12.0, macOS 10.15, macCatalyst 13.0, *)
 class AuthenticationServicesProvider: NSObject, WebAuthenticationProvider {
-    let flow: AuthorizationCodeFlow
+    let loginFlow: AuthorizationCodeFlow
     let logoutFlow: SessionLogoutFlow?
     private(set) weak var delegate: WebAuthenticationProviderDelegate?
     private(set) var authenticationSession: AuthenticationServicesProviderSession?
 
     private let anchor: ASPresentationAnchor?
     
-    init(flow: AuthorizationCodeFlow,
+    init(loginFlow: AuthorizationCodeFlow,
          logoutFlow: SessionLogoutFlow?,
          from window: WebAuthentication.WindowAnchor?,
          delegate: WebAuthenticationProviderDelegate)
     {
-        self.flow = flow
+        self.loginFlow = loginFlow
         self.logoutFlow = logoutFlow
         self.anchor = window
         self.delegate = delegate
         
         super.init()
         
-        self.flow.add(delegate: self)
+        self.loginFlow.add(delegate: self)
         self.logoutFlow?.add(delegate: self)
     }
     
     deinit {
-        self.flow.remove(delegate: self)
+        self.loginFlow.remove(delegate: self)
         self.logoutFlow?.remove(delegate: self)
     }
 
@@ -71,7 +71,7 @@ class AuthenticationServicesProvider: NSObject, WebAuthenticationProvider {
         guard let delegate = delegate else { return }
         
         do {
-            try flow.resume(with: context)
+            try loginFlow.resume(with: context)
         } catch {
             delegate.authentication(provider: self, received: error)
         }
@@ -88,7 +88,7 @@ class AuthenticationServicesProvider: NSObject, WebAuthenticationProvider {
         
         authenticationSession = createSession(
             url: url,
-            callbackURLScheme: flow.redirectUri.scheme,
+            callbackURLScheme: loginFlow.redirectUri.scheme,
             completionHandler: { url, error in
                 self.process(url: url, error: error)
             })
@@ -179,13 +179,15 @@ class AuthenticationServicesProvider: NSObject, WebAuthenticationProvider {
         }
         
         do {
-            try flow.resume(with: url)
+            try loginFlow.resume(with: url)
         } catch {
             received(error: .authenticationProviderError(error))
         }
     }
     
     func processLogout(url: URL?, error: Error?) {
+        defer { authenticationSession = nil }
+
         guard let delegate = delegate else { return }
         
         if let error = error {

@@ -26,7 +26,7 @@ class SafariServicesProviderTests: ProviderTestBase {
     override func setUpWithError() throws {
         try super.setUpWithError()
         
-        provider = SafariServicesProvider(flow: flow, logoutFlow: logoutFlow, delegate: delegate)
+        provider = SafariServicesProvider(loginFlow: loginFlow, logoutFlow: logoutFlow, delegate: delegate)
     }
     
     func testSuccessfulAuthentication() throws {

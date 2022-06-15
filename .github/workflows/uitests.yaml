@@ -6,26 +6,6 @@ on:
     types:
       - completed
 
-  push:
-    paths:
-      - '.github/workflows/uitests.yml'
-      - 'Sources/**/*.swift'
-      - 'Samples/**/*'
-    branches:
-      - master
-      - dev-*
-      - release-*
-  pull_request:
-    branches:
-      - master
-      - dev-*
-      - release-*
-    paths:
-      - '.github/workflows/uitests.yml'
-      - 'Sources/**/*.swift'
-      - 'Samples/**/*'
-
-
 env:
   DEVELOPER_DIR: /Applications/Xcode_13.3.app/Contents/Developer
 

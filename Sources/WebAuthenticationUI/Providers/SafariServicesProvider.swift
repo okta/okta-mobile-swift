@@ -18,28 +18,28 @@ import SafariServices
 
 @available(iOS, introduced: 11.0, deprecated: 12.0)
 class SafariServicesProvider: NSObject, WebAuthenticationProvider {
-    let flow: AuthorizationCodeFlow
+    let loginFlow: AuthorizationCodeFlow
     let logoutFlow: SessionLogoutFlow?
     private(set) weak var delegate: WebAuthenticationProviderDelegate?
     
     private(set) var authenticationSession: SFAuthenticationSession?
     
-    init(flow: AuthorizationCodeFlow,
+    init(loginFlow: AuthorizationCodeFlow,
          logoutFlow: SessionLogoutFlow?,
          delegate: WebAuthenticationProviderDelegate)
     {
-        self.flow = flow
+        self.loginFlow = loginFlow
         self.logoutFlow = logoutFlow
         self.delegate = delegate
         
         super.init()
         
-        self.flow.add(delegate: self)
+        self.loginFlow.add(delegate: self)
         self.logoutFlow?.add(delegate: self)
     }
     
     deinit {
-        self.flow.remove(delegate: self)
+        self.loginFlow.remove(delegate: self)
         self.logoutFlow?.remove(delegate: self)
     }
     
@@ -47,7 +47,7 @@ class SafariServicesProvider: NSObject, WebAuthenticationProvider {
         guard let delegate = delegate else { return }
         
         do {
-            try flow.resume(with: context)
+            try loginFlow.resume(with: context)
         } catch {
             delegate.authentication(provider: self, received: error)
         }
@@ -61,7 +61,7 @@ class SafariServicesProvider: NSObject, WebAuthenticationProvider {
     func authenticate(using url: URL) {
         authenticationSession = SFAuthenticationSession(
             url: url,
-            callbackURLScheme: flow.redirectUri.scheme,
+            callbackURLScheme: loginFlow.redirectUri.scheme,
             completionHandler: { [weak self] url, error in
                 self?.process(url: url, error: error)
             })
@@ -106,7 +106,7 @@ class SafariServicesProvider: NSObject, WebAuthenticationProvider {
         }
         
         do {
-            try flow.resume(with: url)
+            try loginFlow.resume(with: url)
         } catch {
             received(error: .authenticationProviderError(error))
         }

@@ -64,7 +64,7 @@ class ProviderTestBase: XCTestCase, AuthorizationCodeFlowDelegate, SessionLogout
     let logoutRedirectUri = URL(string: "com.example:/logout")!
     let urlSession = URLSessionMock()
     var client: OAuth2Client!
-    var flow: AuthorizationCodeFlow!
+    var loginFlow: AuthorizationCodeFlow!
     var logoutFlow: SessionLogoutFlow!
     let delegate = WebAuthenticationProviderDelegateRecorder()
 
@@ -102,9 +102,9 @@ class ProviderTestBase: XCTestCase, AuthorizationCodeFlowDelegate, SessionLogout
         urlSession.expect("https://example.okta.com/oauth2/v1/keys?client_id=clientId",
                           data: try data(from: .module, for: "keys", in: "MockResponses"),
                           contentType: "application/json")
-        flow = client.authorizationCodeFlow(redirectUri: redirectUri,
+        loginFlow = client.authorizationCodeFlow(redirectUri: redirectUri,
                                             additionalParameters: ["additional": "param"])
-        flow.add(delegate: self)
+        loginFlow.add(delegate: self)
         
         delegate.reset()
     }

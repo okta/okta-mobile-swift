@@ -72,7 +72,7 @@ class AuthenticationServicesProviderTests: ProviderTestBase {
     override func setUpWithError() throws {
         try super.setUpWithError()
         
-        provider = TestAuthenticationServicesProvider(flow: flow, logoutFlow: logoutFlow, from: nil, delegate: delegate)
+        provider = TestAuthenticationServicesProvider(loginFlow: loginFlow, logoutFlow: logoutFlow, from: nil, delegate: delegate)
     }
     
     override func tearDownWithError() throws {
@@ -93,6 +93,7 @@ class AuthenticationServicesProviderTests: ProviderTestBase {
         
         XCTAssertNotNil(delegate.token)
         XCTAssertNil(delegate.error)
+        XCTAssertNil(provider.authenticationSession)
     }
 
     func testErrorResponse() throws {
@@ -107,6 +108,7 @@ class AuthenticationServicesProviderTests: ProviderTestBase {
         provider.process(url: redirectUrl, error: nil)
         XCTAssertNil(delegate.token)
         XCTAssertNotNil(delegate.error)
+        XCTAssertNil(provider.authenticationSession)
     }
 
     func testUserCancelled() throws {
@@ -123,6 +125,7 @@ class AuthenticationServicesProviderTests: ProviderTestBase {
         provider.process(url: nil, error: error)
         XCTAssertNil(delegate.token)
         XCTAssertNotNil(delegate.error)
+        XCTAssertNil(provider.authenticationSession)
     }
 
     func testNoResponse() throws {
@@ -136,6 +139,7 @@ class AuthenticationServicesProviderTests: ProviderTestBase {
         provider.process(url: nil, error: nil)
         XCTAssertNil(delegate.token)
         XCTAssertNotNil(delegate.error)
+        XCTAssertNil(provider.authenticationSession)
     }
     
     func testLogout() throws {
@@ -149,6 +153,7 @@ class AuthenticationServicesProviderTests: ProviderTestBase {
         
         XCTAssertTrue(delegate.logoutFinished)
         XCTAssertNil(delegate.logoutError)
+        XCTAssertNil(provider.authenticationSession)
     }
     
     func testLogoutError() throws {
@@ -162,6 +167,7 @@ class AuthenticationServicesProviderTests: ProviderTestBase {
         
         XCTAssertFalse(delegate.logoutFinished)
         XCTAssertNotNil(delegate.logoutError)
+        XCTAssertNil(provider.authenticationSession)
     }
 }
 
