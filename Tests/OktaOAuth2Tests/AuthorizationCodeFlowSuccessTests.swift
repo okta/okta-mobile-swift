@@ -177,25 +177,25 @@ final class AuthorizationCodeFlowSuccessTests: XCTestCase {
     @available(iOS 15.0, tvOS 15.0, macOS 12.0, watchOS 8, *)
     func testWithAsync() async throws {
         // Ensure the initial state
-        XCTAssertNil(flow.context)
-        XCTAssertFalse(flow.isAuthenticating)
+        XCTAssertNil(loginFlow.context)
+        XCTAssertFalse(loginFlow.isAuthenticating)
 
         // Begin
         let context = AuthorizationCodeFlow.Context(state: "ABC123", nonce: "nonce_string", pkce: nil)
-        let url = try await flow.resume(with: context)
+        let url = try await loginFlow.resume(with: context)
         
-        XCTAssertEqual(flow.context?.state, context.state)
-        XCTAssertTrue(flow.isAuthenticating)
-        XCTAssertNotNil(flow.context?.authenticationURL)
-        XCTAssertEqual(url, flow.context?.authenticationURL)
-        XCTAssertEqual(flow.context?.authenticationURL?.absoluteString,
+        XCTAssertEqual(loginFlow.context?.state, context.state)
+        XCTAssertTrue(loginFlow.isAuthenticating)
+        XCTAssertNotNil(loginFlow.context?.authenticationURL)
+        XCTAssertEqual(url, loginFlow.context?.authenticationURL)
+        XCTAssertEqual(loginFlow.context?.authenticationURL?.absoluteString,
                        "https://example.okta.com/oauth2/v1/authorize?additional=param&client_id=clientId&nonce=nonce_string&redirect_uri=com.example:/callback&response_type=code&scope=openid%20profile&state=ABC123")
 
         // Exchange code
-        let token = try await flow.resume(with: URL(string: "com.example:/callback?code=ABCEasyAs123&state=ABC123")!)
+        let token = try await loginFlow.resume(with: URL(string: "com.example:/callback?code=ABCEasyAs123&state=ABC123")!)
         
-        XCTAssertNil(flow.context)
-        XCTAssertFalse(flow.isAuthenticating)
+        XCTAssertNil(loginFlow.context)
+        XCTAssertFalse(loginFlow.isAuthenticating)
         XCTAssertNotNil(token)
     }
     #endif

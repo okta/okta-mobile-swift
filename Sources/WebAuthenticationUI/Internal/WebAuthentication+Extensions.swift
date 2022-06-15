@@ -33,6 +33,9 @@ extension WebAuthentication {
     }
     
     private func completeLogout(with result: Result<Void, WebAuthenticationError>) {
+        provider = nil
+        signOutFlow?.reset()
+        
         guard let completion = logoutCompletionBlock else {
             return
         }
@@ -42,8 +45,6 @@ extension WebAuthentication {
         }
         
         logoutCompletionBlock = nil
-        provider = nil
-        signInFlow.reset()
     }
 }
 

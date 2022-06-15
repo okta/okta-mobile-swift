@@ -20,6 +20,7 @@ Platform | Versions | Description |
 iOS | 9.0 - 10.x | Uses SFSafariViewController 
 iOS | 11.0 | Uses SFAuthenticationSession 
 iOS | 12.0 - Current | Uses ASWebAuthenticationSession 
+macOS | 10.15 - Current | Uses ASWebAuthenticationSession
 macOS Catalyst  | 13.0 - Current | Uses ASWebAuthenticationSession
 
 ## Topics

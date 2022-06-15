@@ -18,17 +18,17 @@ import XCTest
 @testable import WebAuthenticationUI
 
 class WebAuthenticationMock: WebAuthentication {
-    override func createWebAuthenticationProvider(flow: AuthorizationCodeFlow,
+    override func createWebAuthenticationProvider(loginFlow: AuthorizationCodeFlow,
                                                   logoutFlow: SessionLogoutFlow?,
                                                   from window: WebAuthentication.WindowAnchor?,
                                                   delegate: WebAuthenticationProviderDelegate) -> WebAuthenticationProvider? {
-        return WebAuthenticationProviderMock(flow: flow, logoutFlow: logoutFlow, delegate: delegate)
+        return WebAuthenticationProviderMock(loginFlow: loginFlow, logoutFlow: logoutFlow, delegate: delegate)
     }
 }
 
 
 class WebAuthenticationProviderMock: WebAuthenticationProvider {
-    var flow: AuthorizationCodeFlow
+    var loginFlow: AuthorizationCodeFlow
     var logoutFlow: SessionLogoutFlow?
     var delegate: WebAuthenticationProviderDelegate?
     
@@ -38,8 +38,8 @@ class WebAuthenticationProviderMock: WebAuthenticationProvider {
     
     var state: State = .initialized
     
-    init(flow: AuthorizationCodeFlow, logoutFlow: SessionLogoutFlow?, delegate: WebAuthenticationProviderDelegate) {
-        self.flow = flow
+    init(loginFlow: AuthorizationCodeFlow, logoutFlow: SessionLogoutFlow?, delegate: WebAuthenticationProviderDelegate) {
+        self.loginFlow = loginFlow
         self.logoutFlow = logoutFlow
         self.delegate = delegate
     }
@@ -47,7 +47,7 @@ class WebAuthenticationProviderMock: WebAuthenticationProvider {
     func start(context: AuthorizationCodeFlow.Context?) {
         state = .started
         
-        try! flow.resume(with: nil) { result in
+        try! loginFlow.resume(with: nil) { result in
             
         }
     }

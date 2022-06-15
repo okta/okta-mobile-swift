@@ -122,12 +122,12 @@ final class ResourceOwnerFlowSuccessTests: XCTestCase {
     @available(iOS 15.0, tvOS 15.0, macOS 12.0, watchOS 8, *)
     func testWithAsync() async throws {
         // Ensure the initial state
-        XCTAssertFalse(flow.isAuthenticating)
+        XCTAssertFalse(loginFlow.isAuthenticating)
 
         // Authenticate
-        let token = try await flow.resume(username: "username", password: "password")
+        let token = try await loginFlow.resume(username: "username", password: "password")
 
-        XCTAssertFalse(flow.isAuthenticating)
+        XCTAssertFalse(loginFlow.isAuthenticating)
         XCTAssertNotNil(token)
     }
     #endif

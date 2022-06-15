@@ -18,31 +18,31 @@ import SafariServices
 
 @available(iOS, introduced: 9.0, deprecated: 11.0)
 class SafariBrowserProvider: NSObject, WebAuthenticationProvider {
-    let flow: AuthorizationCodeFlow
+    let loginFlow: AuthorizationCodeFlow
     let logoutFlow: SessionLogoutFlow?
     private(set) weak var delegate: WebAuthenticationProviderDelegate?
     
     private(set) var safariController: SFSafariViewController?
     private let anchor: WebAuthentication.WindowAnchor?
     
-    init(flow: AuthorizationCodeFlow,
+    init(loginFlow: AuthorizationCodeFlow,
          logoutFlow: SessionLogoutFlow?,
          from window: WebAuthentication.WindowAnchor?,
          delegate: WebAuthenticationProviderDelegate)
     {
-        self.flow = flow
+        self.loginFlow = loginFlow
         self.logoutFlow = logoutFlow
         self.anchor = window
         self.delegate = delegate
         
         super.init()
         
-        self.flow.add(delegate: self)
+        self.loginFlow.add(delegate: self)
         self.logoutFlow?.add(delegate: self)
     }
     
     deinit {
-        self.flow.remove(delegate: self)
+        self.loginFlow.remove(delegate: self)
         self.logoutFlow?.remove(delegate: self)
     }
     
@@ -85,7 +85,7 @@ class SafariBrowserProvider: NSObject, WebAuthenticationProvider {
         guard let delegate = delegate else { return }
         
         do {
-            try flow.resume(with: context)
+            try loginFlow.resume(with: context)
         } catch {
             delegate.authentication(provider: self, received: error)
         }

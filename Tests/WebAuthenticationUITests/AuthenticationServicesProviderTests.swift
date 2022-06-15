@@ -72,7 +72,7 @@ class AuthenticationServicesProviderTests: ProviderTestBase {
     override func setUpWithError() throws {
         try super.setUpWithError()
         
-        provider = TestAuthenticationServicesProvider(flow: flow, logoutFlow: logoutFlow, from: nil, delegate: delegate)
+        provider = TestAuthenticationServicesProvider(loginFlow: loginFlow, logoutFlow: logoutFlow, from: nil, delegate: delegate)
     }
     
     override func tearDownWithError() throws {
