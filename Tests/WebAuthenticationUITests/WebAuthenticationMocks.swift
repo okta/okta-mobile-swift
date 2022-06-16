@@ -55,7 +55,7 @@ class WebAuthenticationProviderMock: WebAuthenticationProvider {
     func logout(context: SessionLogoutFlow.Context) {
         state = .started
         
-        try? logoutFlow?.resume(idToken: "idToken") { result in
+        try? logoutFlow?.start(idToken: "idToken") { result in
             
         }
     }
