@@ -35,6 +35,10 @@ public final class NotificationRecorder {
             self?.received(notification)
         }))
     }
+
+    public func notifications(for name: Notification.Name) -> [Notification] {
+        notifications.filter { $0.name == name }
+    }
     
     public func reset() {
         notifications.removeAll()

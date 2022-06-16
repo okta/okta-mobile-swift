@@ -142,7 +142,11 @@ public class Credential: Identifiable, Equatable, OAuth2ClientDelegate {
     
     /// The token this credential represents.
     @TimeSensitive<Token>
-    public private(set) var token: Token
+    public private(set) var token: Token {
+        didSet {
+            observeToken(token)
+        }
+    }
 
     /// The ``UserInfo`` describing this user.
     ///
@@ -293,10 +297,15 @@ public class Credential: Identifiable, Equatable, OAuth2ClientDelegate {
         self.coordinator = coordinator
 
         self.oauth2.add(delegate: self)
+        observeToken(token)
     }
 
     deinit {
         stopAutomaticRefresh()
+
+        if let tokenObserver = tokenObserver {
+            NotificationCenter.default.removeObserver(tokenObserver)
+        }
     }
     
     // MARK: OAuth2ClientDelegate
@@ -334,5 +343,26 @@ public class Credential: Identifiable, Equatable, OAuth2ClientDelegate {
     func stopAutomaticRefresh() {
         automaticRefreshTimer?.cancel()
         automaticRefreshTimer = nil
+    }
+
+    private var tokenObserver: NSObjectProtocol?
+    private func observeToken(_ token: Token) {
+        if let tokenObserver = tokenObserver {
+            NotificationCenter.default.removeObserver(tokenObserver)
+        }
+
+        tokenObserver = NotificationCenter.default.addObserver(forName: .tokenRefreshFailed,
+                                                               object: token,
+                                                               queue: nil) { [weak self] notification in
+            guard let self = self,
+                  token == self.token
+            else {
+                return
+            }
+            
+            NotificationCenter.default.post(name: .credentialRefreshFailed,
+                                            object: self,
+                                            userInfo: notification.userInfo)
+        }
     }
 }

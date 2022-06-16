@@ -30,6 +30,9 @@ extension Notification.Name {
 
     /// Notification broadcast when a credential has been migrated from a previous version.
     public static let credentialMigrated = Notification.Name("com.okta.credential.migrated")
+
+    /// Notification broadcast when a credential fails to refresh.
+    public static let credentialRefreshFailed = Notification.Name("com.okta.credential.refresh.failed")
 }
 
 #if swift(>=5.5.1)
