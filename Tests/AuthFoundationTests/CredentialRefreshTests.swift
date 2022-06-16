@@ -145,6 +145,9 @@ final class CredentialRefreshTests: XCTestCase, OAuth2ClientDelegate {
             XCTAssertNil(error)
         }
         
+        // Need to wait for the async notification dispatch
+        usleep(useconds_t(2000))
+        
         XCTAssertEqual(notification.notifications.count, 2)
         let tokenNotification = try XCTUnwrap(notification.notifications(for: .tokenRefreshFailed).first)
         XCTAssertEqual(tokenNotification.object as? Token, credential.token)
