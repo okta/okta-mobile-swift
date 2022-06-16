@@ -58,7 +58,7 @@ public protocol AuthorizationCodeFlowDelegate: AuthenticationDelegate {
 ///     redirectUri: URL(string: "com.example.app:/callback"))
 ///
 /// // Create the authorization URL. Open this in a browser.
-/// let authorizeUrl = try await flow.resume()
+/// let authorizeUrl = try await flow.start()
 ///
 /// // Once the browser redirects to the callback scheme
 /// // from the redirect URI, use that to resume the flow.
@@ -99,7 +99,7 @@ public class AuthorizationCodeFlow: AuthenticationFlow {
     
     /// Errors reported during processing and handling of redirect URLs.
     ///
-    /// These errors are mostly reported as a result of the ``resume(with:completion:)-6a7pf`` or ``resume(with:)-10rbh`` methods.
+    /// These errors are mostly reported as a result of the ``start(with:completion:)`` or ``start(with:)`` methods.
     public enum RedirectError: Error {
         case invalidRedirectUrl
         case unexpectedScheme(_ scheme: String?)
@@ -217,7 +217,7 @@ public class AuthorizationCodeFlow: AuthenticationFlow {
     /// - Parameters:
     ///   - context: Optional context to provide when customizing the state parameter.
     ///   - completion: Optional completion block for receiving the response. If `nil`, you may rely upon the appropriate delegate API methods.
-    public func resume(with context: Context? = nil, completion: ((Result<URL, OAuth2Error>) -> Void)? = nil) throws {
+    public func start(with context: Context? = nil, completion: ((Result<URL, OAuth2Error>) -> Void)? = nil) throws {
         var context = context ?? Context()
         isAuthenticating = true
 
@@ -249,7 +249,7 @@ public class AuthorizationCodeFlow: AuthenticationFlow {
     
     /// Continues an authentication flow using the given authentication redirect URI.
     ///
-    /// Once the user completes authorization, using the URL provided by the ``resume(with:completion:)-uy9b`` method within a browser, the browser will redirect to a URL that matches the scheme provided in the client configuration's ``redirectUri``. This URI will contain either an error response from the authorization server, or an authorization code which can be used to exchange a token.
+    /// Once the user completes authorization, using the URL provided by the ``start(with:completion:)`` method within a browser, the browser will redirect to a URL that matches the scheme provided in the client configuration's ``redirectUri``. This URI will contain either an error response from the authorization server, or an authorization code which can be used to exchange a token.
     ///
     /// This method takes the returned redirect URI, and communicates with Okta to exchange that for a token.
     /// - Parameters:
@@ -308,10 +308,10 @@ extension AuthorizationCodeFlow {
     /// - Parameters:
     ///   - context: Optional context to provide when customizing the state parameter.
     /// - Returns: The URL a user should be presented with within a browser, to continue authorization.
-    public func resume(with context: Context? = nil) async throws -> URL {
+    public func start(with context: Context? = nil) async throws -> URL {
         try await withCheckedThrowingContinuation { continuation in
             do {
-                try resume(with: context) { result in
+                try start(with: context) { result in
                     continuation.resume(with: result)
                 }
             } catch let error as APIClientError {
@@ -324,7 +324,7 @@ extension AuthorizationCodeFlow {
     
     /// Asynchronously continues an authentication flow using the given authentication redirect URI, using Swift Concurrency.
     ///
-    /// Once the user completes authorization, using the URL provided by the ``resume(with:)-10rbh`` method within a browser, the browser will redirect to a URL that matches the scheme provided in the client configuration's ``redirectUri``. This URI will contain either an error response from the authorization server, or an authorization code which can be used to exchange a token.
+    /// Once the user completes authorization, using the URL provided by the ``start(with:)`` method within a browser, the browser will redirect to a URL that matches the scheme provided in the client configuration's ``redirectUri``. This URI will contain either an error response from the authorization server, or an authorization code which can be used to exchange a token.
     ///
     /// This method takes the returned redirect URI, and communicates with Okta to exchange that for a token.
     /// - Parameters:

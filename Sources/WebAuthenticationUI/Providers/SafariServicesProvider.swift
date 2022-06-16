@@ -47,7 +47,7 @@ class SafariServicesProvider: NSObject, WebAuthenticationProvider {
         guard let delegate = delegate else { return }
         
         do {
-            try loginFlow.resume(with: context)
+            try loginFlow.start(with: context)
         } catch {
             delegate.authentication(provider: self, received: error)
         }
@@ -55,7 +55,7 @@ class SafariServicesProvider: NSObject, WebAuthenticationProvider {
     
     func logout(context: SessionLogoutFlow.Context) {
         // LogoutFlow invokes delegate, so an error is propagated from delegate method
-        try? logoutFlow?.resume(with: context)
+        try? logoutFlow?.start(with: context)
     }
     
     func authenticate(using url: URL) {

@@ -60,7 +60,7 @@ class ViewController: UIViewController {
             return
         }
 
-        flow.resume() { result in
+        flow.start() { result in
             DispatchQueue.main.async {
                 switch result {
                 case .failure(let error):

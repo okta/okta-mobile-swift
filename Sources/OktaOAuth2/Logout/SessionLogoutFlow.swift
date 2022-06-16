@@ -52,7 +52,7 @@ public protocol SessionLogoutFlowDelegate: LogoutFlowDelegate {
 ///                                    logoutRedirectUri: URL(string: "com.example.app:/logout")!)
 ///
 /// // Create the logout URL. Open this in a browser.
-/// let authorizeUrl = try await flow.resume()
+/// let authorizeUrl = try await flow.start()
 /// ```
 public class SessionLogoutFlow: LogoutFlow {
     /// A model representing the context and current state for a logout session.
@@ -139,8 +139,8 @@ public class SessionLogoutFlow: LogoutFlow {
     /// - Parameters:
     ///   - idToken: The ID token string.
     ///   - completion: Optional completion block for receiving the response. If `nil`, you may rely upon the appropriate delegate API methods.
-    public func resume(idToken: String, completion: ((Result<URL, OAuth2Error>) -> Void)? = nil) throws {
-        try resume(with: Context(idToken: idToken), completion: completion)
+    public func start(idToken: String, completion: ((Result<URL, OAuth2Error>) -> Void)? = nil) throws {
+        try start(with: Context(idToken: idToken), completion: completion)
     }
 
     /// Initiates an logout flow, with a required ``Context-swift.struct`` object.
@@ -149,7 +149,7 @@ public class SessionLogoutFlow: LogoutFlow {
     /// - Parameters:
     ///   - context: Represents current state for a logout session.
     ///   - completion: Optional completion block for receiving the response. If `nil`, you may rely upon the appropriate delegate API methods.
-    public func resume(with context: Context, completion: ((Result<URL, OAuth2Error>) -> Void)? = nil) throws {
+    public func start(with context: Context, completion: ((Result<URL, OAuth2Error>) -> Void)? = nil) throws {
         guard !inProgress else {
             completion?(.failure(.missingClientConfiguration))
             return
@@ -205,8 +205,8 @@ extension SessionLogoutFlow {
     /// - Parameters:
     ///   - idToken: The ID token string.
     /// - Returns: The URL a user should be presented with within a broser, to befing a logout flow.
-    public func resume(idToken: String) async throws -> URL {
-        try await resume(with: .init(idToken: idToken))
+    public func start(idToken: String) async throws -> URL {
+        try await start(with: .init(idToken: idToken))
     }
     
     /// Initiates an logout flow, with a required ``Context-swift.struct`` object.
@@ -215,10 +215,10 @@ extension SessionLogoutFlow {
     /// - Parameters:
     ///   - context: Represents current state for a logout session.
     /// - Returns: The URL a user should be presented with within a broser, to befing a logout flow.
-    public func resume(with context: Context) async throws -> URL {
+    public func start(with context: Context) async throws -> URL {
         try await withCheckedThrowingContinuation { continuation in
             do {
-                try resume(with: context) { result in
+                try start(with: context) { result in
                     continuation.resume(with: result)
                 }
             } catch let error as APIClientError {

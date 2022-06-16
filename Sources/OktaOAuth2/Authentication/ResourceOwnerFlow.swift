@@ -83,7 +83,7 @@ public class ResourceOwnerFlow: AuthenticationFlow {
     ///   - username: Username
     ///   - password: Password
     ///   - completion: Completion invoked when a response is received.
-    public func resume(username: String, password: String, completion: ((Result<Token, APIClientError>) -> Void)? = nil) {
+    public func start(username: String, password: String, completion: ((Result<Token, APIClientError>) -> Void)? = nil) {
         isAuthenticating = true
 
         client.openIdConfiguration { result in
@@ -133,9 +133,9 @@ extension ResourceOwnerFlow {
     /// Asynchronously authenticates with the Resource Owner flow.
     ///
     /// - Returns: The information a user should be presented with to continue authorization on a different device.
-    public func resume(username: String, password: String) async throws -> Token {
+    public func start(username: String, password: String) async throws -> Token {
         try await withCheckedThrowingContinuation { continuation in
-            resume(username: username, password: password) { result in
+            start(username: username, password: password) { result in
                 continuation.resume(with: result)
             }
         }

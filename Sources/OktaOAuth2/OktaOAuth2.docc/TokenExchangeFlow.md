@@ -17,5 +17,5 @@ let tokens: [TokenType] = [
     .actor(type: .deviceSecret, value: "DeviceToken"),
     .subject(type: .idToken, value: "IDToken")
 ]
-let token = try await flow.resume(with: tokens)
+let token = try await flow.start(with: tokens)
 ```

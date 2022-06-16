@@ -307,4 +307,16 @@ public extension HasClaims {
 
         return Locale(identifier: locale)
     }
+    
+    /// Returns the Authentication Context Class Reference for this token.
+    var authenticationClass: String? { self[.authContextClassReference] }
+    
+    /// The list of authentication methods included in this token.
+    ///
+    /// ```swift
+    /// if jwt.authenticationMethods?.contains("mfa") {
+    ///   // The user authenticated with an MFA factor.
+    /// }
+    /// ```
+    var authenticationMethods: [String]? { self[.authMethodsReference] }
 }

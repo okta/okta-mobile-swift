@@ -107,7 +107,7 @@ public class TokenExchangeFlow: AuthenticationFlow {
     /// - Parameters:
     ///   - tokens: Tokens to exchange.
     ///   - completion: Optional completion block for receiving the response. If `nil`, you may rely upon the appropriate delegate API methods.
-    public func resume(with tokens: [TokenType], completion: ((Result<Token, OAuth2Error>) -> Void)? = nil) {
+    public func start(with tokens: [TokenType], completion: ((Result<Token, OAuth2Error>) -> Void)? = nil) {
         guard !tokens.isEmpty else {
             delegateCollection.invoke { $0.authentication(flow: self, received: OAuth2Error.cannotComposeUrl) }
             completion?(.failure(OAuth2Error.cannotComposeUrl))
@@ -164,9 +164,9 @@ extension TokenExchangeFlow {
     /// Asynchronously initiates a token exchange flow.
     /// - Parameter tokens: Tokens to exchange. If empty, the method throws an error.
     /// - Returns: The the token created as a result of exchanging the tokens.
-    public func resume(with tokens: [TokenType]) async throws -> Token {
+    public func start(with tokens: [TokenType]) async throws -> Token {
         try await withCheckedThrowingContinuation { continuation in
-            resume(with: tokens) { result in
+            start(with: tokens) { result in
                 continuation.resume(with: result)
             }
         }

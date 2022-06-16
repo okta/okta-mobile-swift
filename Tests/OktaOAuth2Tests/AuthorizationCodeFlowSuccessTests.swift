@@ -93,7 +93,7 @@ final class AuthorizationCodeFlowSuccessTests: XCTestCase {
         // Begin
         let context = AuthorizationCodeFlow.Context(state: "ABC123", nonce: "nonce_string", pkce: nil)
         var expect = expectation(description: "network request")
-        try flow.resume(with: context) { _ in
+        try flow.start(with: context) { _ in
             expect.fulfill()
         }
         waitForExpectations(timeout: 1.0) { error in
@@ -132,7 +132,7 @@ final class AuthorizationCodeFlowSuccessTests: XCTestCase {
         let context = AuthorizationCodeFlow.Context(state: "ABC123", nonce: "nonce_string", pkce: nil)
         var wait = expectation(description: "resume")
         var url: URL?
-        try flow.resume(with: context) { result in
+        try flow.start(with: context) { result in
             switch result {
             case .success(let redirectUrl):
                 url = redirectUrl
@@ -182,7 +182,7 @@ final class AuthorizationCodeFlowSuccessTests: XCTestCase {
 
         // Begin
         let context = AuthorizationCodeFlow.Context(state: "ABC123", nonce: "nonce_string", pkce: nil)
-        let url = try await flow.resume(with: context)
+        let url = try await flow.start(with: context)
         
         XCTAssertEqual(flow.context?.state, context.state)
         XCTAssertTrue(flow.isAuthenticating)

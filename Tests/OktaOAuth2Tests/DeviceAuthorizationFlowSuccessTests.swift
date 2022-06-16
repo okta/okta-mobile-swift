@@ -99,7 +99,7 @@ final class DeviceAuthorizationFlowSuccessTests: XCTestCase {
         
         // Begin
         var expect = expectation(description: "resume")
-        flow.resume() { _ in
+        flow.start() { _ in
             expect.fulfill()
         }
         waitForExpectations(timeout: 1) { error in
@@ -136,7 +136,7 @@ final class DeviceAuthorizationFlowSuccessTests: XCTestCase {
         // Begin
         var wait = expectation(description: "resume")
         var context: DeviceAuthorizationFlow.Context?
-        flow.resume { result in
+        flow.start { result in
             switch result {
             case .success(let response):
                 context = response
@@ -185,7 +185,7 @@ final class DeviceAuthorizationFlowSuccessTests: XCTestCase {
         XCTAssertFalse(flow.isAuthenticating)
 
         // Begin
-        let context = try await flow.resume()
+        let context = try await flow.start()
 
         XCTAssertEqual(flow.context, context)
         XCTAssertTrue(flow.isAuthenticating)

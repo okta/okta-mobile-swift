@@ -65,7 +65,7 @@ final class SessionLogoutFlowSuccessTests: XCTestCase {
         let context = SessionLogoutFlow.Context(idToken: logoutIDToken, state: state)
         let resumeExpection = expectation(description: "Expect success")
         
-        try flow.resume(with: context) { result in
+        try flow.start(with: context) { result in
             XCTAssertTrue(self.flow.inProgress)
             XCTAssertNotEqual(self.flow.context, context)
             XCTAssertEqual(self.flow.context?.state, context.state)
@@ -93,7 +93,7 @@ final class SessionLogoutFlowSuccessTests: XCTestCase {
         let context = SessionLogoutFlow.Context(idToken: logoutIDToken, state: state)
         let resumeExpection = expectation(description: "Expect success")
         
-        try flow.resume(with: context) { result in
+        try flow.start(with: context) { result in
             switch result {
             case .success(let url):
                 XCTAssertEqual(url, self.flow.context?.logoutURL)
@@ -130,7 +130,7 @@ final class SessionLogoutFlowSuccessTests: XCTestCase {
         
         let context = SessionLogoutFlow.Context(idToken: logoutIDToken, state: state)
         
-        let logoutUrl = try await flow.resume(with: context)
+        let logoutUrl = try await flow.start(with: context)
         
         XCTAssertNotEqual(flow.context, context)
         XCTAssertEqual(logoutUrl.absoluteString, """

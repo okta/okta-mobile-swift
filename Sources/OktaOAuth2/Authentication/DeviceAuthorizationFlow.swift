@@ -55,7 +55,7 @@ public protocol DeviceAuthorizationFlowDelegate: AuthenticationDelegate {
 ///     scopes: "openid offline_access email profile")
 ///
 /// // Retrieve the context for this session.
-/// let context = try await flow.resume()
+/// let context = try await flow.start()
 ///
 /// // Present the userCode and verificationUri from the context
 /// // to the user. Once that is done, use the following code to
@@ -186,7 +186,7 @@ public class DeviceAuthorizationFlow: AuthenticationFlow {
     /// The ``resume(with:completion:)`` method also uses this context, to poll the server to determine when the user approves the authorization request.
     /// - Parameters:
     ///   - completion: Optional completion block for receiving the context. If `nil`, you may rely upon the ``DeviceAuthorizationFlowDelegate/authentication(flow:received:)`` method instead.
-    public func resume(completion: ((Result<Context, APIClientError>) -> Void)? = nil) {
+    public func start(completion: ((Result<Context, APIClientError>) -> Void)? = nil) {
         isAuthenticating = true
 
         client.openIdConfiguration { result in
@@ -221,7 +221,7 @@ public class DeviceAuthorizationFlow: AuthenticationFlow {
     
     /// Polls to determine when authorization completes, using the supplied ``Context-swift.struct`` instance.
     ///
-    /// Once an authentication session has begun, using ``resume(completion:)``, the user should be presented with the user code and verification URI. This method is used to poll the server, to determine when a user completes authorizing this device. At that point, the result is exchanged for a token.
+    /// Once an authentication session has begun, using ``start(completion:)``, the user should be presented with the user code and verification URI. This method is used to poll the server, to determine when a user completes authorizing this device. At that point, the result is exchanged for a token.
     /// - Parameters:
     ///   - context: Device authorization context object.
     ///   - completion: Optional completion block for receiving the token, or error result. If `nil`, you may rely upon the ``DeviceAuthorizationFlowDelegate/authentication(flow:received:)`` method instead.
@@ -279,9 +279,9 @@ extension DeviceAuthorizationFlow {
     ///
     /// The ``resume(with:)`` method also uses this context, to poll the server to determine when the user approves the authorization request.
     /// - Returns: The information a user should be presented with to continue authorization on a different device.
-    public func resume() async throws -> Context {
+    public func start() async throws -> Context {
         try await withCheckedThrowingContinuation { continuation in
-            resume() { result in
+            start() { result in
                 continuation.resume(with: result)
             }
         }
@@ -289,7 +289,7 @@ extension DeviceAuthorizationFlow {
 
     /// Asynchronously polls to determine when authorization completes, using the supplied ``Context-swift.struct`` instance.
     ///
-    /// Once an authentication session has begun, using ``resume()``, the user should be presented with the user code and verification URI. This method is used to poll the server, to determine when a user completes authorizing this device. At that point, the result is exchanged for a token.
+    /// Once an authentication session has begun, using ``start()``, the user should be presented with the user code and verification URI. This method is used to poll the server, to determine when a user completes authorizing this device. At that point, the result is exchanged for a token.
     /// - Parameters:
     ///   - context: Device authorization context object.
     /// - Returns: The Token created as a result of exchanging an authorization code.
