@@ -39,8 +39,8 @@ struct UserPasswordSignIn: Command {
         }
         
         let flow = try createFlow()
-        let token = try await flow.resume(username: try promptUsername(),
-                                          password: try promptPassword())
+        let token = try await flow.start(username: try promptUsername(),
+                                         password: try promptPassword())
         printUserInfo(using: token)
     }
     #else
@@ -54,8 +54,8 @@ struct UserPasswordSignIn: Command {
         
         let group = DispatchGroup()
         group.enter()
-        flow.resume(username: try promptUsername(),
-                    password: try promptPassword()) { result in
+        flow.start(username: try promptUsername(),
+                   password: try promptPassword()) { result in
             defer { group.leave() }
             switch result {
             case .success(let token):

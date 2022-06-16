@@ -57,7 +57,7 @@ func signInUsingAuthorizationCode() async throws {
                                      redirectUri: redirectUrl)
 
     // Initiate the auth flow, and get the URL to present to the user
-    let authorizeUrl = try await flow.resume()
+    let authorizeUrl = try await flow.start()
 
     // Open that URL in a browser, and wait for the redirect
     let redirectURL: URL // Get the URL from the browser redirect
@@ -79,7 +79,7 @@ func signInUsingResourceOwner(username: String, password: String) async throws {
                                  scopes: "openid profile email offline_access")
     
     // Sign in using a username & password
-    let token = try await flow.resume(username: username, password: password)
+    let token = try await flow.start(username: username, password: password)
     
     // Save the user's tokens
     let credential = try Credential.store(token)
@@ -97,7 +97,7 @@ func signInUsingDeviceSSO(deviceToken: String, idToken: String) async throws {
                                  audience: .default)
     
     // Exchange the ID and Device tokens for access tokens.
-    let token = try await flow.resume(with: [
+    let token = try await flow.start(with: [
         .actor(type: .deviceSecret, value: deviceToken),
         .subject(type: .idToken, value: idToken)
     ])
@@ -116,7 +116,7 @@ func signInUsingDeviceAuthorizationCode() async throws {
                                        scopes: "openid profile email offline_access")
 
     // Initiate the auth flow, and get the user code to display to the user
-    let context = try await flow.resume()
+    let context = try await flow.start()
 
     print("Go to \(context.verificationUri.absoluteString) and enter \(context.userCode)")
     

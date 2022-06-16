@@ -47,7 +47,7 @@ class SessionLogoutFlowFailureTests: XCTestCase {
         let context = SessionLogoutFlow.Context(idToken: logoutIDToken, state: state)
         let resumeExpection = expectation(description: "Expect success")
         
-        try flow.resume(with: context) { result in
+        try flow.start(with: context) { result in
             XCTAssertTrue(self.flow.inProgress)
             resumeExpection.fulfill()
         }
@@ -70,7 +70,7 @@ class SessionLogoutFlowFailureTests: XCTestCase {
         let context = SessionLogoutFlow.Context(idToken: logoutIDToken, state: state)
         let resumeExpection = expectation(description: "Expect success")
         
-        try flow.resume(with: context) { result in
+        try flow.start(with: context) { result in
             switch result {
             case .success:
                 XCTFail()

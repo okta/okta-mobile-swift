@@ -81,7 +81,7 @@ final class ResourceOwnerFlowSuccessTests: XCTestCase {
         
         // Authenticate
         let expect = expectation(description: "resume")
-        flow.resume(username: "username", password: "password") { _ in
+        flow.start(username: "username", password: "password") { _ in
             expect.fulfill()
         }
         waitForExpectations(timeout: 1) { error in
@@ -101,7 +101,7 @@ final class ResourceOwnerFlowSuccessTests: XCTestCase {
         // Authenticate
         let wait = expectation(description: "resume")
         var token: Token?
-        flow.resume(username: "username", password: "password") { result in
+        flow.start(username: "username", password: "password") { result in
             switch result {
             case .success(let resultToken):
                 token = resultToken
@@ -125,7 +125,7 @@ final class ResourceOwnerFlowSuccessTests: XCTestCase {
         XCTAssertFalse(flow.isAuthenticating)
 
         // Authenticate
-        let token = try await flow.resume(username: "username", password: "password")
+        let token = try await flow.start(username: "username", password: "password")
 
         XCTAssertFalse(flow.isAuthenticating)
         XCTAssertNotNil(token)

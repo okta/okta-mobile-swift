@@ -3,7 +3,7 @@
 
 import PackageDescription
 
-let package = Package(
+var package = Package(
     name: "AuthFoundation",
     defaultLocalization: "en",
     platforms: [
@@ -19,7 +19,6 @@ let package = Package(
         .library(name: "WebAuthenticationUI", targets: ["WebAuthenticationUI"])
     ],
     dependencies: [
-        .package(url: "https://github.com/apple/swift-docc-plugin", from: "1.0.0"),
     ],
     targets: [
         .target(name: "AuthFoundation",
@@ -51,3 +50,7 @@ let package = Package(
     ],
     swiftLanguageVersions: [.v5]
 )
+
+#if swift(>=5.6)
+    package.dependencies.append(.package(url: "https://github.com/apple/swift-docc-plugin", from: "1.0.0"))
+#endif

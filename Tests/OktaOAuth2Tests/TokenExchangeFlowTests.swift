@@ -87,7 +87,7 @@ final class TokenExchangeFlowTests: XCTestCase {
         
         // Exchange code
         let expect = expectation(description: "Expected `resume` succeeded")
-        flow.resume(with: tokens) { result in
+        flow.start(with: tokens) { result in
             expect.fulfill()
         }
         
@@ -106,7 +106,7 @@ final class TokenExchangeFlowTests: XCTestCase {
         XCTAssertFalse(flow.isAuthenticating)
         
         let expect = expectation(description: "resume")
-        flow.resume(with: tokens) { result in
+        flow.start(with: tokens) { result in
             switch result {
             case .success:
                 XCTAssertTrue(self.flow.isAuthenticating)
@@ -130,7 +130,7 @@ final class TokenExchangeFlowTests: XCTestCase {
     func testAsyncAuthenticationSucceeded() async throws {
         XCTAssertFalse(flow.isAuthenticating)
         
-        let _ = try await flow.resume(with: tokens)
+        let _ = try await flow.start(with: tokens)
         
         XCTAssertFalse(flow.isAuthenticating)
     }

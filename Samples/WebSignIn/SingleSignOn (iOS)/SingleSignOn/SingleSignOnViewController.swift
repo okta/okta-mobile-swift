@@ -90,7 +90,7 @@ final class SingleSignOnViewController: UIViewController {
             .subject(type: .idToken, value: idToken)
         ]
         
-        flow?.resume(with: tokens) { result in
+        flow?.start(with: tokens) { result in
             DispatchQueue.main.async {
                 self.stopAnimating()
                 

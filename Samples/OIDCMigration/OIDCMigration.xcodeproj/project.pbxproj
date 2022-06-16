@@ -607,8 +607,8 @@
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/okta/okta-oidc-ios";
 			requirement = {
-				branch = master;
-				kind = branch;
+				kind = upToNextMajorVersion;
+				minimumVersion = 3.11.2;
 			};
 		};
 /* End XCRemoteSwiftPackageReference section */

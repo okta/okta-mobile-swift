@@ -47,7 +47,7 @@ class WebAuthenticationProviderMock: WebAuthenticationProvider {
     func start(context: AuthorizationCodeFlow.Context?) {
         state = .started
         
-        try! loginFlow.resume(with: nil) { result in
+        try! loginFlow.start(with: nil) { result in
             
         }
     }
@@ -55,7 +55,7 @@ class WebAuthenticationProviderMock: WebAuthenticationProvider {
     func logout(context: SessionLogoutFlow.Context) {
         state = .started
         
-        try? logoutFlow?.resume(idToken: "idToken") { result in
+        try? logoutFlow?.start(idToken: "idToken") { result in
             
         }
     }

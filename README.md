@@ -185,7 +185,7 @@ let flow = DeviceAuthorizationFlow(
 2. Start an authentication session to receive the code and authorize URL to present to your user.
 
 ```swift
-let context = try await flow.resume()
+let context = try await flow.start()
 let code = context.userCode
 let uri = context.verificationUri
 ```
@@ -207,7 +207,7 @@ let flow = TokenExchangeFlow(
     scopes: "openid offline_access email profile",
     audience: .default)
 
-let token = try await flow.resume(with: [
+let token = try await flow.start(with: [
     .actor(type: .deviceSecret, value: "DeviceToken"),
     .subject(type: .idToken, value: "IDToken")
 ])
@@ -221,7 +221,7 @@ For simple authentication use-cases, you can use the `ResourceOwnerFlow` class t
 let flow = ResourceOwnerFlow(issuer: URL(string: "https://example.okta.com")!,
                              clientId: "abc123client",
                              scopes: "openid offline_access email profile")
-let token = try await flow.resume(username: "jane.doe", password: "secretPassword")
+let token = try await flow.start(username: "jane.doe", password: "secretPassword")
 ```
 
 ## Storing and using tokens
