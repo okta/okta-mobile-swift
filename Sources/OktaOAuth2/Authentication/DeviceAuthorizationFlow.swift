@@ -27,7 +27,7 @@ public protocol DeviceAuthorizationFlowDelegate: AuthenticationDelegate {
     ///   - flow: The authentication flow that has finished.
     func authenticationFinished<Flow: DeviceAuthorizationFlow>(flow: Flow)
     
-    /// Called when a ``DeviceAuthorizationFlow/Context-swift.struct`` instance is returned from the ``DeviceAuthorizationFlow/resume(completion:)`` method.
+    /// Called when a ``DeviceAuthorizationFlow/Context-swift.struct`` instance is returned from the ``DeviceAuthorizationFlow/start(completion:)`` method.
     ///
     /// This context object is used to present the user with the user code, and verification URI, which will enable them to authorized the user from a different device.
     /// - Parameters:
