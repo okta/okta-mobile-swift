@@ -58,6 +58,20 @@ dependencies: [
 ]
 ```
 
+### CocoaPods
+
+Simply add the following line to your `Podfile`:
+
+```ruby
+pod 'OktaIdx'
+```
+
+Then install it into your project:
+
+```bash
+pod install --repo-update
+```
+
 ## API patterns
 
 The IDX SDK enables dynamic user authentication through a cyclical call-and-response pattern. A user is presented with a series of choices in how they can iteratively step through the authentication process, with each step giving way to additional choices until they can either successfully authenticate or receive actionable error messages.
