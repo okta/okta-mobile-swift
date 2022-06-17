@@ -38,9 +38,11 @@ class CredentialRefreshDelegate: OAuth2ClientDelegate {
 final class CredentialRefreshTests: XCTestCase, OAuth2ClientDelegate {
     var delegate: CredentialRefreshDelegate!
     var coordinator: MockCredentialCoordinator!
+    var notification: NotificationRecorder!
 
     enum APICalls {
         case none
+        case error
         case openIdOnly
         case refresh(count: Int)
     }
@@ -76,6 +78,14 @@ final class CredentialRefreshTests: XCTestCase, OAuth2ClientDelegate {
                  }
                 """))
             }
+            
+        case .error:
+            urlSession.expect("https://example.com/.well-known/openid-configuration",
+                              data: try data(from: .module, for: "openid-configuration", in: "MockResponses"),
+                              contentType: "application/json")
+            urlSession.expect("https://example.com/oauth2/v1/token",
+                              data: nil,
+                              statusCode: 500)
         }
         
         return credential
@@ -84,11 +94,13 @@ final class CredentialRefreshTests: XCTestCase, OAuth2ClientDelegate {
     override func setUpWithError() throws {
         delegate = CredentialRefreshDelegate()
         coordinator = MockCredentialCoordinator()
+        notification = NotificationRecorder(observing: [.credentialRefreshFailed, .tokenRefreshFailed])
     }
     
     override func tearDownWithError() throws {
         delegate = nil
         coordinator = nil
+        notification = nil
     }
     
     func testRefresh() throws {
@@ -115,6 +127,37 @@ final class CredentialRefreshTests: XCTestCase, OAuth2ClientDelegate {
         XCTAssertEqual(delegate.refreshCount, 1)
     }
 
+    func testRefreshFailed() throws {
+        let credential = try credential(for: Token.simpleMockToken, expectAPICalls: .error)
+
+        let expect = expectation(description: "refresh")
+        credential.refresh { result in
+            switch result {
+            case .success(_):
+                XCTFail("Did not expect a success response")
+            case .failure(let error):
+                XCTAssertNotNil(error)
+            }
+            expect.fulfill()
+        }
+        
+        waitForExpectations(timeout: 3.0) { error in
+            XCTAssertNil(error)
+        }
+        
+        // Need to wait for the async notification dispatch
+        usleep(useconds_t(2000))
+        
+        XCTAssertEqual(notification.notifications.count, 2)
+        let tokenNotification = try XCTUnwrap(notification.notifications(for: .tokenRefreshFailed).first)
+        XCTAssertEqual(tokenNotification.object as? Token, credential.token)
+        XCTAssertNotNil(tokenNotification.userInfo?["error"])
+        
+        let credentialNotification = try XCTUnwrap(notification.notifications(for: .credentialRefreshFailed).first)
+        XCTAssertEqual(credentialNotification.object as? Credential, credential)
+        XCTAssertNotNil(credentialNotification.userInfo?["error"])
+    }
+    
     func testRefreshWithoutOptionalValues() throws {
         let credential = try credential(for: Token.mockToken(id: "TokenID",
                                                              deviceSecret: "theDeviceSecret"))
@@ -251,30 +294,26 @@ final class CredentialRefreshTests: XCTestCase, OAuth2ClientDelegate {
     @available(iOS 15.0, tvOS 15.0, macOS 12.0, watchOS 8, *)
     func testRefreshAsync() async throws {
         let credential = try credential(for: Token.simpleMockToken)
-        let token = try await credential.refresh()
-        XCTAssertNotNil(token)
+        try await credential.refresh()
     }
 
     @available(iOS 15.0, tvOS 15.0, macOS 12.0, watchOS 8, *)
     func testRefreshIfNeededExpiredAsync() async throws {
         let credential = try credential(for: Token.mockToken(issuedOffset: 6000))
-        let token = try await credential.refreshIfNeeded(graceInterval: 300)
-        XCTAssertNotNil(token)
+        try await credential.refreshIfNeeded(graceInterval: 300)
     }
 
     @available(iOS 15.0, tvOS 15.0, macOS 12.0, watchOS 8, *)
     func testRefreshIfNeededWithinGraceIntervalAsync() async throws {
         let credential = try credential(for: Token.mockToken(issuedOffset: 0),
                                            expectAPICalls: .none)
-        let token = try await credential.refreshIfNeeded(graceInterval: 300)
-        XCTAssertNotNil(token)
+        try await credential.refreshIfNeeded(graceInterval: 300)
     }
 
     @available(iOS 15.0, tvOS 15.0, macOS 12.0, watchOS 8, *)
     func testRefreshIfNeededOutsideGraceIntervalAsync() async throws {
             let credential = try credential(for: Token.mockToken(issuedOffset: 3500))
-        let token = try await credential.refreshIfNeeded(graceInterval: 300)
-        XCTAssertNotNil(token)
+        try await credential.refreshIfNeeded(graceInterval: 300)
     }
     #endif
 }

@@ -246,6 +246,10 @@ public class OAuth2Client {
                         case .failure(let error):
                             action.finish(.failure(.network(error: error)))
                             self.delegateCollection.invoke { $0.oauth(client: self, didRefresh: token, replacedWith: nil) }
+                            
+                            NotificationCenter.default.post(name: .tokenRefreshFailed,
+                                                            object: token,
+                                                            userInfo: ["error": error])
                         }
                         
                         token.refreshAction = nil
@@ -598,5 +602,8 @@ extension Notification.Name {
     public static let oauth2ClientCreated = Notification.Name("com.okta.oauth2client.created")
 
     /// Notification broadcast when a ``Token`` is refreshed.
-    public static let tokenRefreshed = Notification.Name("com.okta.token.refreshed")
+    public static let tokenRefreshed = Notification.Name("com.okta.token.refresh.success")
+
+    /// Notification broadcast when a ``Token`` refresh fails.
+    public static let tokenRefreshFailed = Notification.Name("com.okta.token.refresh.failed")
 }

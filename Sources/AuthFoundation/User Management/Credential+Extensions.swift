@@ -30,15 +30,16 @@ extension Notification.Name {
 
     /// Notification broadcast when a credential has been migrated from a previous version.
     public static let credentialMigrated = Notification.Name("com.okta.credential.migrated")
+
+    /// Notification broadcast when a credential fails to refresh.
+    public static let credentialRefreshFailed = Notification.Name("com.okta.credential.refresh.failed")
 }
 
 #if swift(>=5.5.1)
 @available(iOS 15.0, tvOS 15.0, macOS 12.0, watchOS 8, *)
 extension Credential {
     /// Attempt to refresh the token.
-    /// - Returns: The new token generated as a result of the refresh.
-    @discardableResult
-    public func refresh() async throws -> Token {
+    public func refresh() async throws {
         try await withCheckedThrowingContinuation { continuation in
             refresh() { result in
                 continuation.resume(with: result)
@@ -47,8 +48,7 @@ extension Credential {
     }
     
     /// Attempt to refresh the token if it either has expired, or is about to expire.
-    /// - Returns: The new token generated as a result of the refresh, or the current token if a refresh was unnecessary.
-    public func refreshIfNeeded(graceInterval: TimeInterval = Credential.refreshGraceInterval) async throws -> Token {
+    public func refreshIfNeeded(graceInterval: TimeInterval = Credential.refreshGraceInterval) async throws {
         try await withCheckedThrowingContinuation { continuation in
             refreshIfNeeded(graceInterval: graceInterval) { result in
                 continuation.resume(with: result)

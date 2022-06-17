@@ -142,7 +142,11 @@ public class Credential: Identifiable, Equatable, OAuth2ClientDelegate {
     
     /// The token this credential represents.
     @TimeSensitive<Token>
-    public private(set) var token: Token
+    public private(set) var token: Token {
+        didSet {
+            observeToken(token)
+        }
+    }
 
     /// The ``UserInfo`` describing this user.
     ///
@@ -181,27 +185,29 @@ public class Credential: Identifiable, Equatable, OAuth2ClientDelegate {
     
     /// Attempt to refresh the token.
     /// - Parameter completion: Completion block invoked when a result is returned.
-    public func refresh(completion: ((Result<Token, OAuth2Error>) -> Void)? = nil) {
+    public func refresh(completion: ((Result<Void, OAuth2Error>) -> Void)? = nil) {
         oauth2.refresh(token) { result in
-            defer { completion?(result) }
-            
-            if case let .success(token) = result {
+            switch result {
+            case .success(let token):
                 self.token = token
+                completion?(.success(()))
+            case .failure(let error):
+                completion?(.failure(error))
             }
         }
     }
     
     /// Attempt to refresh the token if it either has expired, or is about to expire.
-    /// - Parameter completion: Completion block invoked with either the new token generated as a result of the refresh, or the current token if a refresh was unnecessary.
+    /// - Parameter completion: Completion block invoked to indicate the status of the token, if the refresh was successful or if an error occurred.
     public func refreshIfNeeded(graceInterval: TimeInterval = Credential.refreshGraceInterval,
-                                completion: ((Result<Token, OAuth2Error>) -> Void)? = nil)
+                                completion: ((Result<Void, OAuth2Error>) -> Void)? = nil)
     {
         if let expiresAt = token.expiresAt,
             expiresAt.timeIntervalSinceNow <= graceInterval
         {
             refresh(completion: completion)
         } else {
-            completion?(.success(token))
+            completion?(.success(()))
         }
     }
     
@@ -291,10 +297,15 @@ public class Credential: Identifiable, Equatable, OAuth2ClientDelegate {
         self.coordinator = coordinator
 
         self.oauth2.add(delegate: self)
+        observeToken(token)
     }
 
     deinit {
         stopAutomaticRefresh()
+
+        if let tokenObserver = tokenObserver {
+            NotificationCenter.default.removeObserver(tokenObserver)
+        }
     }
     
     // MARK: OAuth2ClientDelegate
@@ -332,5 +343,26 @@ public class Credential: Identifiable, Equatable, OAuth2ClientDelegate {
     func stopAutomaticRefresh() {
         automaticRefreshTimer?.cancel()
         automaticRefreshTimer = nil
+    }
+
+    private var tokenObserver: NSObjectProtocol?
+    private func observeToken(_ token: Token) {
+        if let tokenObserver = tokenObserver {
+            NotificationCenter.default.removeObserver(tokenObserver)
+        }
+
+        tokenObserver = NotificationCenter.default.addObserver(forName: .tokenRefreshFailed,
+                                                               object: token,
+                                                               queue: nil) { [weak self] notification in
+            guard let self = self,
+                  token == self.token
+            else {
+                return
+            }
+            
+            NotificationCenter.default.post(name: .credentialRefreshFailed,
+                                            object: self,
+                                            userInfo: notification.userInfo)
+        }
     }
 }
