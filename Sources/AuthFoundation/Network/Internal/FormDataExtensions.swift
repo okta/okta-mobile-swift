@@ -23,7 +23,7 @@ extension URLRequest {
             return str.replacingOccurrences(of: "\n", with: "\r\n")
                 .addingPercentEncoding(withAllowedCharacters: oktaQueryCharacters)!
                 .replacingOccurrences(of: " ", with: "+")
-            // swiftlint:disable force_unwrapping
+            // swiftlint:enable force_unwrapping
         }
 
         return params.keys.sorted().compactMap {

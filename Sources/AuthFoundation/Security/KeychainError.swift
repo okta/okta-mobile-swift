@@ -14,6 +14,7 @@ import Foundation
 
 #if os(iOS) || os(macOS) || os(tvOS) || os(watchOS)
 
+/// Describes errors that may occur when interacting with the keychain.
 public enum KeychainError: Error {
     case cannotGet(code: OSStatus)
     case cannotList(code: OSStatus)

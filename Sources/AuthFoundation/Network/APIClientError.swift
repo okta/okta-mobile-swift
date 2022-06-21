@@ -12,6 +12,7 @@
 
 import Foundation
 
+/// Errors that may occur at the API or network level.
 public enum APIClientError: Error {
     case invalidUrl
     case missingResponse

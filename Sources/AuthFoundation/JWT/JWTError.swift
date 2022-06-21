@@ -12,6 +12,7 @@
 
 import Foundation
 
+/// Describes errors that may occur with parsing or validating JWT tokens.
 public enum JWTError: Error, Equatable {
     case invalidBase64Encoding
     case badTokenStructure

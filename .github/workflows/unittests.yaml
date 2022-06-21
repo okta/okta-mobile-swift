@@ -41,6 +41,17 @@ jobs:
     - name: Test
       run: swift test
 
+  Cocoapods:
+    name: CocoaPods Build
+    runs-on: macos-12
+    timeout-minutes: 10
+    needs:
+      - SwiftBuild
+    steps:
+    - name: Lint CocoaPods
+      run: pod lib lint
+
+
   XcodeBuild:
     name: Xcode Unit Tests
     runs-on: macos-12
