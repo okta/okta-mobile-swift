@@ -143,6 +143,19 @@ public class AuthorizationCodeFlow: AuthenticationFlow {
         }
     }
     
+    public enum Parameter {
+        public enum Prompt: String {
+            case none, consent, login, loginConsent = "login consent"
+        }
+        case display(_ name: String)
+        case idpScope(_ scopes: String)
+        case idp(_ provider: String)
+        case loginHint(_ username: String)
+        case prompt(_ type: Prompt)
+        case session(token: String)
+        case custom(key: String, value: String)
+    }
+    
     /// Convenience initializer to construct an authentication flow from variables.
     /// - Parameters:
     ///   - issuer: The issuer URL.
