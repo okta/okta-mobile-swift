@@ -145,12 +145,8 @@ public class TokenExchangeFlow: AuthenticationFlow {
         }
     }
 
-    /// Cancel an initiated token exchange flow.
-    public func cancel() {
-    }
-    
     public func reset() {
-        
+        isAuthenticating = false
     }
 }
 

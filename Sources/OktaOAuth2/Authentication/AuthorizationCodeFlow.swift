@@ -288,8 +288,6 @@ public class AuthorizationCodeFlow: AuthenticationFlow {
         }
     }
     
-    public func cancel() {}
-    
     public func reset() {
         context = nil
         isAuthenticating = false
