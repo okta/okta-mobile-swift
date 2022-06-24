@@ -224,7 +224,6 @@ public class WebAuthentication {
     public convenience init(issuer: URL,
                             clientId: String,
                             scopes: String,
-                            responseType: ResponseType = .code,
                             redirectUri: URL,
                             logoutRedirectUri: URL? = nil,
                             additionalParameters: [String: String]? = nil)
@@ -241,9 +240,8 @@ public class WebAuthentication {
         }
         
         self.init(loginFlow: AuthorizationCodeFlow(redirectUri: redirectUri,
-                                              responseType: responseType,
-                                              additionalParameters: additionalParameters,
-                                              client: client),
+                                                   additionalParameters: additionalParameters,
+                                                   client: client),
                   logoutFlow: logoutFlow,
                   context: nil)
     }
@@ -266,7 +264,6 @@ public class WebAuthentication {
                                          from window: WebAuthentication.WindowAnchor?,
                                          delegate: WebAuthenticationProviderDelegate) -> WebAuthenticationProvider?
     {
-        // TODO: SessionLogoutFLow
         if #available(iOS 12.0, macOS 10.15, macCatalyst 13.0, *) {
             return AuthenticationServicesProvider(loginFlow: loginFlow,
                                                   logoutFlow: logoutFlow,

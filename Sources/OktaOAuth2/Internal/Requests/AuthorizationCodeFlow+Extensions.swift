@@ -34,7 +34,7 @@ extension AuthorizationCodeFlow {
         parameters["client_id"] = client.configuration.clientId
         parameters["scope"] = client.configuration.scopes
         parameters["redirect_uri"] = redirectUri.absoluteString
-        parameters["response_type"] = responseType.rawValue
+        parameters["response_type"] = "code"
         parameters["state"] = context.state
         parameters["nonce"] = context.nonce
 
