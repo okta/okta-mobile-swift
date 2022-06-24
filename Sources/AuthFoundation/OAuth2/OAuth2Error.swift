@@ -12,6 +12,7 @@
 
 import Foundation
 
+/// Errors that may occur when interacting with OAuth2 endpoints.
 public enum OAuth2Error: Error {
     case invalidUrl
     case cannotComposeUrl

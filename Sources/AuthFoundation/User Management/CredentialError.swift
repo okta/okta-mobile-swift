@@ -24,7 +24,6 @@ public enum CredentialError: Error {
     case metadataConsistency
 }
 
-#if SWIFT_PACKAGE
 extension CredentialError: LocalizedError {
     public var errorDescription: String? {
         switch self {
@@ -48,4 +47,3 @@ extension CredentialError: LocalizedError {
         }
     }
 }
-#endif

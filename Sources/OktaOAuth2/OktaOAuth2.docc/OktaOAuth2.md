@@ -19,6 +19,8 @@ You can use OktaOAuth2 when you want to:
 
 - ``AuthorizationCodeFlow``
 - ``AuthorizationCodeFlowDelegate``
+- ``SessionLogoutFlow``
+- ``SessionLogoutFlowDelegate``
 
 ### Device Authorization Flow
 
