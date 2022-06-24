@@ -15,9 +15,6 @@ You can use OktaOAuth2 when you want to:
 
 ## Topics
 
-### Essentials
-- <doc:IntroductionToAuthenticationFlows>
-
 ### Authorization Code Flow
 
 - ``AuthorizationCodeFlow``
