@@ -111,9 +111,6 @@ public class AuthorizationCodeFlow: AuthenticationFlow {
     /// The OAuth2Client this authentication flow will use.
     public let client: OAuth2Client
     
-    /// The response type expected.
-    public let responseType: ResponseType
-    
     /// The redirect URI defined for your client.
     public let redirectUri: URL
     
@@ -151,17 +148,14 @@ public class AuthorizationCodeFlow: AuthenticationFlow {
     ///   - issuer: The issuer URL.
     ///   - clientId: The client ID
     ///   - scopes: The scopes to request
-    ///   - responseType: The response type to expect, or ``ResponseType/code`` if not specified.
     ///   - redirectUri: The redirect URI for the client.
     public convenience init(issuer: URL,
                             clientId: String,
                             scopes: String,
                             redirectUri: URL,
-                            responseType: ResponseType = .code,
                             additionalParameters: [String: String]? = nil)
     {
         self.init(redirectUri: redirectUri,
-                  responseType: responseType,
                   additionalParameters: additionalParameters,
                   client: OAuth2Client(baseURL: issuer,
                                        clientId: clientId,
@@ -173,7 +167,6 @@ public class AuthorizationCodeFlow: AuthenticationFlow {
     ///   - configuration: The configuration to use for this authentication flow.
     ///   - client: The `OAuth2Client` to use with this flow.
     public init(redirectUri: URL,
-                responseType: ResponseType = .code,
                 additionalParameters: [String: String]? = nil,
                 client: OAuth2Client)
     {
@@ -181,7 +174,6 @@ public class AuthorizationCodeFlow: AuthenticationFlow {
         SDKVersion.register(sdk: Version)
         
         self.client = client
-        self.responseType = responseType
         self.redirectUri = redirectUri
         self.additionalParameters = additionalParameters
         
@@ -397,11 +389,9 @@ extension AuthorizationCodeFlow: OAuth2ClientDelegate {
 extension OAuth2Client {
     public func authorizationCodeFlow(
         redirectUri: URL,
-        responseType: ResponseType = .code,
         additionalParameters: [String: String]? = nil) -> AuthorizationCodeFlow
     {
         AuthorizationCodeFlow(redirectUri: redirectUri,
-                              responseType: responseType,
                               additionalParameters: additionalParameters,
                               client: self)
     }
