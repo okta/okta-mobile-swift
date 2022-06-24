@@ -34,9 +34,6 @@ public protocol AuthenticationFlow: AnyObject, UsesDelegateCollection {
     /// Indicates if this flow is currently authenticating.
     var isAuthenticating: Bool { get }
     
-    /// Cancels the authentication session.
-    func cancel()
-    
     /// Resets the authentication session.
     func reset()
 }

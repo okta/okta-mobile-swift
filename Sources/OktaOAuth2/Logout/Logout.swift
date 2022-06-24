@@ -12,9 +12,6 @@
 
 import Foundation
 
-/// Abstract base protocol for ``LogoutFlow`` instances to use for their backing configuration.
-public protocol LogoutConfiguration {}
-
 /// A common delegate protocol that all logout flows should support.
 public protocol LogoutFlowDelegate: AnyObject {
     /// Sent when an logout flow receives an error.

@@ -14,11 +14,14 @@ You can use AuthFoundation when you want to:
 
 ## Topics
 
+### Essentials
+
+- ``Credential``
+
 ### User Management
 
 - <doc:ManagingUserCredentials>
 - ``Token``
-- ``Credential``
 - ``UserInfo``
 - ``TokenInfo``
 

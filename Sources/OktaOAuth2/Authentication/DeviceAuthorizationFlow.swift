@@ -252,11 +252,6 @@ public class DeviceAuthorizationFlow: AuthenticationFlow {
         timerSource.resume()
     }
     
-    /// Cancels the current authorization session.
-    public func cancel() {
-        reset()
-    }
-    
     /// Resets the flow for later reuse.
     public func reset() {
         timer?.cancel()

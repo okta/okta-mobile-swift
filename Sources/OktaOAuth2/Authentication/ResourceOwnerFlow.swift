@@ -113,11 +113,6 @@ public class ResourceOwnerFlow: AuthenticationFlow {
         }
     }
     
-    /// Cancels the current authorization session.
-    public func cancel() {
-        reset()
-    }
-    
     /// Resets the flow for later reuse.
     public func reset() {
         isAuthenticating = false

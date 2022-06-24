@@ -162,8 +162,8 @@ public class WebAuthentication {
     
     /// Cancels the authentication session.
     public func cancel() {
-        signInFlow.cancel()
-        signOutFlow?.cancel()
+        signInFlow.reset()
+        signOutFlow?.reset()
         provider?.cancel()
         provider = nil
     }
