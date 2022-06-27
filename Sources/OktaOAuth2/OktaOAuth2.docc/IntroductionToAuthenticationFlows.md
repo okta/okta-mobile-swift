@@ -18,7 +18,7 @@ These separate flows are built in such a way that they follow a similar pattern,
 
 ## Typical Authenticator Workflow
 
-Most authenticators follow a typical pattern involving similarly-named functions: `start` and `resume`. Optionally, the `cancel` or `reset` functions can be used to reset a flow.
+Most authenticators follow a typical pattern involving similarly-named functions: `start` and `resume`. Optionally the `reset` function can be used to reset a flow.
 
 ![Flowchart describing typical authenticator flow.](AuthenticatorFlowsWorkflow)
 
