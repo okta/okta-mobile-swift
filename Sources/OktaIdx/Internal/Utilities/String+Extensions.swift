@@ -18,9 +18,11 @@ extension String {
          
         guard hasPrefix("data:image/") else { return nil }
         
+        // swiftlint:disable force_unwrapping
         let searchRange = startIndex ..< index(startIndex, offsetBy: mimeLookupUpperBound)
         let mimeRange = range(of: ";base64,", range: searchRange)
         let base64String = String(self[mimeRange!.upperBound ..< endIndex])
         return Data(base64Encoded: base64String, options: .ignoreUnknownCharacters)
+        // swiftlint:enable force_unwrapping
     }
 }

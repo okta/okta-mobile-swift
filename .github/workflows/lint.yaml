@@ -1,0 +1,29 @@
+name: Lint code
+
+on:
+  pull_request:
+    paths:
+      - '.github/workflows/lint.yml'
+      - '.swiftlint.yml'
+      - 'Sources/**/*.swift'
+    branches: 
+      - master
+      - dev-*
+      - release-*
+  push:
+    paths:
+      - '.github/workflows/lint.yml'
+      - '.swiftlint.yml'
+      - 'Sources/**/*.swift'
+    branches:
+      - master
+      - dev-*
+      - release-*
+
+jobs:
+  SwiftLint:
+    runs-on: macos-latest
+    steps:
+      - uses: actions/checkout@v1
+      - name: Lint code using SwiftLint
+        run: swiftlint lint --reporter github-actions-logging Sources

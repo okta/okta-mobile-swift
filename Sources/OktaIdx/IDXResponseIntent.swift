@@ -14,8 +14,7 @@ import Foundation
 
 extension Response {
     /// The intent of the authentication workflow, as returned from the server.
-    @objc(IDXResponseIntent)
-    public enum Intent: Int {
+    public enum Intent {
         case enrollNewUser
         case login
         case credentialEnrollment

@@ -24,7 +24,7 @@ class PollingHandler {
         isPolling = false
     }
     
-    func start(completion: @escaping (Response?, Error?) -> Remediation?) {
+    func start(completion: @escaping (Result<Response, IDXAuthenticationFlowError>) -> Remediation?) {
         guard !isPolling else { return }
         
         isPolling = true
@@ -35,11 +35,11 @@ class PollingHandler {
         isPolling = false
     }
     
-    func nextPoll(completion: @escaping (Response?, Error?) -> Remediation?) {
+    func nextPoll(completion: @escaping (Result<Response, IDXAuthenticationFlowError>) -> Remediation?) {
         guard let refreshTime = pollOption.refresh,
               refreshTime > 0
         else {
-            let _ = completion(nil, IDXClientError.internalMessage("Missing polling information"))
+            let _ = completion(.failure(.internalMessage("Missing polling information")))
             stopPolling()
             return
         }
@@ -54,14 +54,14 @@ class PollingHandler {
                 return
             }
             
-            self.pollOption.proceed { [weak self] (response, error) in
+            self.pollOption.proceed { [weak self] result in
                 guard let self = self else { return }
                 
                 if self.isPolling == false {
                     return
                 }
                 
-                if let nextPollingOption = completion(response, error) {
+                if let nextPollingOption = completion(result) {
                     self.pollOption = nextPollingOption
                     self.nextPoll(completion: completion)
                 } else {

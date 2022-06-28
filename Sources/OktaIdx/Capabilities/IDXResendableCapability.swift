@@ -13,27 +13,18 @@
 import Foundation
 
 extension Capability {
-    /// Capability used for being able to "resend".
+    /// Capability used for being able to "resend" a verification code.
     ///
     /// This is typically used by Email and Phone authenticators.
     public struct Resendable: AuthenticatorCapability {
         /// Resends a new authentication code.
         /// - Parameter completion: Completion handler when the response is returned with the result of the operation.
-        public func resend(completion: IDXClient.ResponseResult? = nil) {
-            guard let client = client else {
-                completion?(.failure(.invalidClient))
-                return
-            }
-            
-            client.proceed(remediation: remediation, completion: completion)
+        public func resend(completion: IDXAuthenticationFlow.ResponseResult? = nil) {
+            remediation.proceed(completion: completion)
         }
         
-        internal private(set) weak var client: IDXClientAPI?
         internal let remediation: Remediation
-        internal init(client: IDXClientAPI,
-                      remediation: Remediation)
-        {
-            self.client = client
+        internal init(remediation: Remediation) {
             self.remediation = remediation
         }
     }

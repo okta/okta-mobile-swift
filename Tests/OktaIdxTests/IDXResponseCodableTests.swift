@@ -14,59 +14,13 @@ import XCTest
 @testable import OktaIdx
 
 class IDXResponseCodableTests: XCTestCase {
-    let configuration = IDXClient.Configuration(issuer: "issuer",
-                                                clientId: "client",
-                                                clientSecret: nil,
-                                                scopes: ["scope"],
-                                                redirectUri: "redirect")
-    
     func testContextCodable() throws {
-        let object = IDXClient.Context(configuration: configuration,
-                                       state: "state",
-                                       interactionHandle: "handle",
-                                       codeVerifier: "verifier")
+        let pkce = try XCTUnwrap(PKCE())
+        let object = IDXAuthenticationFlow.Context(interactionHandle: "handle",
+                                                   state: "state",
+                                                   pkce: pkce)
         let data = try JSONEncoder().encode(object)
-        let result = try JSONDecoder().decode(IDXClient.Context.self, from: data)
-        XCTAssertEqual(object, result)
-    }
-
-    func testTokenCodable() throws {
-        let object = Token(accessToken: "access",
-                                     refreshToken: "refresh",
-                                     expiresIn: 10,
-                                     idToken: "foo",
-                                     scope: "bar",
-                                     tokenType: "type",
-                                     configuration: configuration)
-        let data = try JSONEncoder().encode(object)
-        let result = try JSONDecoder().decode(Token.self, from: data)
-        XCTAssertEqual(object, result)
-    }
-
-    @available(iOS 11.0, *)
-    func testContextSecureCoding() throws {
-        let object = IDXClient.Context(configuration: configuration,
-                                       state: "state",
-                                       interactionHandle: "handle",
-                                       codeVerifier: "verifier")
-        let data = try NSKeyedArchiver.archivedData(withRootObject: object,
-                                                    requiringSecureCoding: true)
-        let result = try NSKeyedUnarchiver.unarchiveTopLevelObjectWithData(data) as? IDXClient.Context
-        XCTAssertEqual(object, result)
-    }
-    
-    @available(iOS 11.0, *)
-    func testTokenSecureCoding() throws {
-        let object = Token(accessToken: "access",
-                                     refreshToken: "refresh",
-                                     expiresIn: 10,
-                                     idToken: "foo",
-                                     scope: "bar",
-                                     tokenType: "type",
-                                     configuration: configuration)
-        let data = try NSKeyedArchiver.archivedData(withRootObject: object,
-                                                    requiringSecureCoding: true)
-        let result = try NSKeyedUnarchiver.unarchiveTopLevelObjectWithData(data) as? Token
+        let result = try JSONDecoder().decode(IDXAuthenticationFlow.Context.self, from: data)
         XCTAssertEqual(object, result)
     }
 }

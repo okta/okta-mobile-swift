@@ -1,5 +1,5 @@
-[<img src="https://aws1.discourse-cdn.com/standard14/uploads/oktadev/original/1X/0c6402653dfb70edc661d4976a43a46f33e5e919.png" align="right" width="256px"/>](https://devforum.okta.com/)
-
+[<img src="https://www.okta.com/sites/default/files/Dev_Logo-01_Large-thumbnail.png" align="right" width="256px"/>](https://devforum.okta.com/)
+[![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
 [![Support](https://img.shields.io/badge/support-Developer%20Forum-blue.svg)][devforum]
 [![API Reference](https://img.shields.io/badge/docs-reference-lightgrey.svg)][swiftdocs]
 
@@ -25,12 +25,13 @@ To see this library working in a sample, check out our [iOS Sample Application](
 
 This library uses semantic versioning and follows Okta's [Library Version Policy][okta-library-versioning].
 
-✔️ The current stable major version series is: 2.x
+✔️ The current stable major version series is: 3.x
 
 | Version | Status                             |
 | ------- | ---------------------------------- |
 | 1.0.0   |                                    |
-| 2.0.1   | ✔️ Stable                           |
+| 2.0.1   |                                    |
+| 3.0.0   | ✔️ Stable                           |
 
 The latest release can always be found on the [releases page][github-releases].
 
@@ -88,23 +89,28 @@ The below code snippets will help you understand how to use this library.
 
 Once you initialize an `IDXClient`, you can call methods to make requests to the Okta IDX API. Please see the [configuration reference](#configuration-reference) section for more details.
 
-### Create the client configuration
+### Create the flow
 
 ```swift
-let config = IDXClient.Configuration(
+let flow = IDXAuthenticationFlow(
     issuer: "https:///<#oktaDomain#>/oauth2/default", // e.g. https://foo.okta.com/oauth2/default, https://foo.okta.com/oauth2/ausar5vgt5TSDsfcJ0h7
     clientId: "<#clientId#>",
-    clientSecret: nil, // Optional, only required for confidential clients.
     scopes: ["openid", "email", "offline_access", "<#otherScopes#>"],
     redirectUri: "<#redirectUri#>") // Must match the redirect uri in client app settings/console
 ```
 
 > **Note:** While your issuer URL may vary for advanced configurations, for most uses it will be your Okta Domain, followed by `/oauth2/default`.
 
-### Create the Client
+### Start authenticating
 
 ```swift
-IDXClient.start(with: configuration) { result in
+let response = try await flow.start()
+```
+
+If your application does not use Swift Concurrency, you can utilize completion blocks instead:
+
+```swift
+flow.start { result in
     switch result {
     case .success(let response):
         // Handle the response
@@ -114,18 +120,7 @@ IDXClient.start(with: configuration) { result in
 }
 ```
 
-### Start / continue the authentication session
-
-```swift
-client.resume { result in
-    switch result {
-    case .success(let response):
-        // Use the response
-    case .failure(let error):
-        // Handle the error
-    }
-}
-```
+Once you receive a response, you can use the response's data to present the appropriate user interface based on that response. 
 
 ### Get new tokens using username & password
 
@@ -134,49 +129,34 @@ In this example the sign-on policy has no authenticators required.
 > **Note:** Steps to identify the user might change based on your Org configuration.
 
 ```swift
-func signIn(username: String, password: String, completion: @escaping(Token?, Error?) -> Void) {
+let flow: IDXAuthenticationFlow
+
+func signIn(username: String, password: String) async throws -> Token? {
     // Start the IDX authentication session
-    IDXClient.start { (client, error) in
-        guard let client = client else {
-            completion(nil, error)
-            return
-        }
+    var response = try await flow.start()
 
-        // Call `resume` to load the initial response
-        client.resume { (response, error) in {
-            guard let response = response else {
-                completion(nil, error)
-                return
-            }
-
-            // Use the `identify` remediation option, and find the relevant form fields
-            guard let remediation = response.remediations[.identify],
-                  let usernameField = remediation["identifier"],
-                  let passwordField = remediation["credentials.passcode"],
-            else {
-                completion(nil, error)
-                return
-            }
-            
-            // Populate the form fields with the user's supplied values
-            usernameField.value = username
-            passwordField.value = password
-            
-            // Proceed through the remediation option
-            remediation.proceed { (response, error) in 
-                guard let response = response,
-                      response.isLoginSuccessful
-                else {
-                    completion(nil, error)
-                }
-                
-                // Exchange the successful response for tokens
-                response.exchangeCode { (token, error) in
-                    completion(token, error)
-                }
-            }
-        }
+    // Use the `identify` remediation option, and find the relevant form fields
+    guard let remediation = response.remediations[.identify],
+          let usernameField = remediation["identifier"],
+          let passwordField = remediation["credentials.passcode"],
+    else {
+        return nil
     }
+            
+    // Populate the form fields with the user's supplied values
+    usernameField.value = username
+    passwordField.value = password
+            
+    // Proceed through the remediation option
+    response = try await remediation.proceed()
+    
+    guard response.isLoginSuccessful
+    else {
+        return nil
+    }
+        
+    // Exchange the successful response for tokens
+    return try await response.exchangeCode()
 }
 ```
 
@@ -185,8 +165,9 @@ func signIn(username: String, password: String, completion: @escaping(Token?, Er
 *Note:* This example assumes this code is being called in response to a previous IDX API call.
 
 ```swift
-response.cancel { (response, error) in
-    // Handle the newly-restarted IDX session
+let response = try await response.cancel()
+
+// Handle the newly-restarted IDX session
 }
 ```
 
@@ -226,9 +207,9 @@ if let remediation = response.remediations[.selectAuthenticatorEnroll],
    })
 {
     authenticator.selectedOption = option
-    remediation.proceed { (response, error) in
-        // Handle the response to enroll in the authenticator
-    }
+
+    let newResponse = try await remediation.proceed()
+    // Handle the response to enroll in the authenticator
 }
 ```
 
@@ -255,9 +236,8 @@ credentials.selectedOption = createQuestionOption
 questionField.value = "What is Trillian's real name?"
 answerField.value = "Tricia MacMillan"
 
-remediation.proceed { (response, error) in
-    // Handle the response
-}
+let newResponse = try await remediation.proceed()
+// Handle the response
 ```
 
 #### Authenticating using an Email authenticator
@@ -277,9 +257,9 @@ else {
 }
 
 passcodeField.value = "123456"
-remediation.proceed { (response, error) in
-    // Handle response
-}
+
+let newResponse = try await remediation.proceed()
+// Handle the response
 ```
 
 #### Enrolling a phone authenticator (SMS/Voice)
@@ -310,9 +290,8 @@ authenticatorField.selectedOption = phoneOption
 methodTypeField.selectedOption = smsMethod
 phoneNumberField.value = "+15551234567"
 
-remediation.proceed { (response, error) in
-    // Use this response to present the verification code UI to the user
-}
+let newResponse = try await remediation.proceed()
+// Use this response to present the verification code UI to the user
 ```
 
 ##### Responding with the verification code
@@ -326,9 +305,9 @@ else {
 }
 
 passcodeField.value = "123456"
-remediation.proceed { (response, error) in
-    // Handle response
-}
+
+let newResponse = try await remediation.proceed()
+// Handle the response
 ```
 
 ### Sign up / Register
@@ -341,21 +320,21 @@ guard let remediation = response.remediations[.selectEnrollProfile] else {
     return
 }
 
-remediation.proceed { (response, error) in
-    guard let remediation = response?.remediations[.enrollProfile],
-          let firstNameField = remediation["userProfile.firstName"],
-          let lastNameField = remediation["userProfile.lastName"],
-          let emailField = remediation["userProfile.email"]
-    else {
-        return
-    }
+response = try await remediation.proceed()
+guard let remediation = response?.remediations[.enrollProfile],
+      let firstNameField = remediation["userProfile.firstName"],
+      let lastNameField = remediation["userProfile.lastName"],
+      let emailField = remediation["userProfile.email"]
+else {
+    return
+}
     
-    firstNameField.value = "Mary"
-    lastNameField.value = "Smith"
-    emailField.value = "msmith@example.com"
-    remediation.proceed { (response, error) in
-        // Handle response
-    }
+firstNameField.value = "Mary"
+lastNameField.value = "Smith"
+emailField.value = "msmith@example.com"
+
+let newResponse = try await remediation.proceed()
+// Handle the response
 }
 ```
 
@@ -367,9 +346,8 @@ Password recovery is supported through the use of the current authenticator's as
 
 ```swift
 if let recoverable = response.authenticators.current?.recoverable {
-    recoverable.recover { result in
-        // Handle the result
-    }
+    let newResponse = try await recoverable.recover()
+    // Handle the response
 }
 ```
 
@@ -385,9 +363,9 @@ else {
 }
 
 identifierField.value = "mary.smith@example.com"
-remediation.proceed { (response, error) in
-    // Handle the response
-}
+
+let newResponse = try await recoverable.recover()
+// Handle the response
 ```
 
 The subsequent responses will prompt the user to respond to different factor challenges to verify their account, and reset their password.
@@ -406,11 +384,11 @@ else {
     return
 }
 
-if let pollable = authenticator.pollable {
-    pollable.startPolling { result in
-        // Use the result to display the UI for the next step
-        // in the user's authentication, or handle the error.
-    }
+if let pollable = authenticator.pollable,
+   let response = try await pollable.startPolling()
+{
+    // The poll was successful. Use the result to display
+    // the UI for the next step in the user's authentication.
 }
 
 // Or, call `stopPolling()` to stop polling for the magic link.
@@ -515,43 +493,10 @@ struct UsernameView: View {
 Whenever receiving a response, it's important to check the `isLoginSuccessful` property to determine if the user is able to complete their authentication. At this point, you may call the `exchangeCode` method on the response to receive a `Token`.
 
 ```swift
-if response.isLoginSuccessful {
-    response.exchangeCode { (token, error) in
-        guard let token = token else {
-            // Handle error
-            return
-        }
-
-        // Use the token
-    }
-}
-```
-
-### Logout / revoking tokens
-
-Logging a user out is as simple as revoking the token. As a developer, you have the choice to either revoke just the refresh token, or to revoke both access and refresh tokens. There are two ways one can revoke tokens, depending on how you implement the IDX SDK.
-
-#### Revoking a token using an `Token` object
-
-```swift
-token.revoke(type: .accessAndRefreshToken) { (success, error) in
-    if !success {
-        // Handle error
-    }
-}
-```
-
-#### Revoking a token using a plain token string
-
-If you don't store the `Token` object, you can make requests to revoke tokens with the raw string value of the token in question.
-
-```swift
-Token.revoke(token: tokenString,
-                       type: .accessAndRefreshToken,
-                       configuration: configuration) { (success, error) in
-    if !success {
-        // Handle error
-    }
+if response.isLoginSuccessful,
+   let token = try await response.exchangeCode()
+{
+    // Use the token
 }
 ```
 
@@ -604,32 +549,36 @@ if response.remediations.isEmpty {
 }
 ```
 
-### Responding to events using the IDXClientDelegate
+### Responding to events using IDXAuthenticationFlowDelegate
 
-IDXClient supports the use of a delegate to centralize response handling and processing. This enables a single delegate object to intercept all responses, errors, and tokens that are received by the client, regardless of where the initial call is made within your application.
+The `IDXAuthenticationFlow` class supports the use of a delegate to centralize response handling and processing. This enables a single delegate object to intercept all responses, errors, and tokens that are received by the client, regardless of where the initial call is made within your application.
 
 The following example highlights how simple username/password authentication can be implemented using a delegate.
 
 ```swift
-class LoginManager: IDXClientDelegate {
-    private var client: IDXClient?
+class LoginManager: IDXAuthenticationFlowDelegate {
+    private let flow = IDXAuthenticationFlow(issuer: issuerUrl,
+                                             clientId: clientId,
+                                             scopes: scopes,
+                                             redirectUri: redirectUrl)
     let username: String
     let password: String
     
+    init() {
+        flow.add(delegate: self)
+    }
+    
     func start() {
-        IDXClient.start(configuration: config) { result in
+        flow.start { result in
             switch result {
             case .failure(let error):
                 // Handle the error
-            case .success(let client):
-                self.client = client
-                client.delegate = self
-                client.resume()
+            case .success(_): break
             }
         }
     }
     
-    func idx(client: IDXClient, didReceive response: Response) {
+    func authentication<Flow>(flow: Flow, received response: Response) where Flow : IDXAuthenticationFlow {
         // If login is successful, immediately exchange it for a token.
         guard !response.isLoginSuccessful else {
             response.exchangeCode()
@@ -640,12 +589,12 @@ class LoginManager: IDXClientDelegate {
         if let remediation = response.remediations[.identify] {
             remediation["identifier"]?.value = username
             remediation["credentials.passcode"]?.value = password
-            remediation.proceed() 
+            remediation.proceed()
         }
         
         // If the password is requested on a separate "page", supply it there.
         else if let remediation = response.remediations[.challengeAuthenticator],
-                response.authenticators.current.type == .password
+                response.authenticators.current?.type == .password
         {
             remediation["credentials.passcode"]?.value = password
             remediation.proceed()
@@ -653,12 +602,17 @@ class LoginManager: IDXClientDelegate {
         
         // Handle other scenarios / remediation states here...
     }
-
-    func idx(client: IDXClient, didReceive token: Token) {
+    
+    func authentication<Flow>(flow: Flow, received token: Token) where Flow : IDXAuthenticationFlow {
         // Login succeeded, with the given token.
+        do {
+            try Credential.store(token)
+        } catch {
+            // Handle with errors
+        }
     }
-
-    func idx(client: IDXClient, didReceive error: Error) {
+    
+    func authentication<Flow>(flow: Flow, received error: OAuth2Error) {
         // Handle the error
     }
 }
@@ -668,7 +622,7 @@ class LoginManager: IDXClientDelegate {
 
 ### Running Tests
 
-To perform an end-to-end test, copy the `TestCredentials.xcconfig.example` file to `TestCredentials.xcconfig`, and update its contents to match your configuration as specified in the [prerequisites](#prerequisites). Next, you can run the test targets for both `okta-idx-ios` and `EmbeddedAuth` (in the [Samples/EmbeddedAuthWithSDKs](Samples/EmbeddedAuthWithSDKs) directory).
+To perform an end-to-end test, edit the `Samples/Shared/TestCredentials.xcconfig` to match your configuration as specified in the [prerequisites](#prerequisites). Next, you can run the test targets for both `okta-idx-ios` and `EmbeddedAuth` (in the [Samples/EmbeddedAuthWithSDKs](Samples/EmbeddedAuthWithSDKs) directory).
 
 ## Known issues
 

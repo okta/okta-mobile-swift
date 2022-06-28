@@ -12,30 +12,43 @@
 
 import Foundation
 
-extension IDXClient {
+extension Response {
     /// Represents messages sent from the server to indicate error or warning conditions related to responses or form values.
-    @objc(IDXMessage)
-    public final class Message: NSObject {
+    public final class Message: Equatable, Hashable {
         /// Enumeration describing the type of message.
-        @objc public enum Severity: Int {
+        public enum Severity {
             case error
             case info
             case unknown
         }
         
         /// The type of message received from the server
-        @objc public let type: Severity
+        public let type: Severity
         
         /// A localization key representing this message.
         ///
         /// This allows the text represented by this message to be customized or localized as needed.
-        @objc public let localizationKey: String?
+        public let localizationKey: String?
         
         /// The default text for this message.
-        @objc public let message: String
+        public let message: String
         
         /// The field where this error occurred, or `nil` if this message is not scoped to a particular field.
-        @objc weak internal(set) public var field: Remediation.Form.Field?
+        public internal(set) weak var field: Remediation.Form.Field?
+        
+        public static func == (lhs: Response.Message, rhs: Response.Message) -> Bool {
+            lhs.type == rhs.type &&
+            lhs.localizationKey == rhs.localizationKey &&
+            lhs.message == rhs.message &&
+            lhs.field === rhs.field
+        }
+        
+        public func hash(into hasher: inout Hasher) {
+            hasher.combine(type)
+            hasher.combine(localizationKey)
+            hasher.combine(message)
+            hasher.combine(field?.name)
+        }
         
         internal init(type: String,
                       localizationKey: String?,
@@ -44,24 +57,6 @@ extension IDXClient {
             self.type = Severity(string: type)
             self.localizationKey = localizationKey
             self.message = message
-            
-            super.init()
-        }
-        
-        public override var description: String {
-            let logger = DebugDescription(self)
-            let components = [
-                logger.address(),
-                "\(#keyPath(type)): \(type)",
-                "\(#keyPath(message)): \(message)",
-                "\(#keyPath(localizationKey)): \(localizationKey ?? "-")"
-            ]
-            
-            return logger.brace(components.joined(separator: "; "))
-        }
-        
-        public override var debugDescription: String {
-            description
         }
     }
 }

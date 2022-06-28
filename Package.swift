@@ -3,25 +3,37 @@
 
 import PackageDescription
 
-let package = Package(
+var package = Package(
     name: "OktaIdx",
+    defaultLocalization: "en",
     platforms: [
-        .macOS(.v10_10),
-        .iOS(.v10)
+        .iOS(.v9),
+        .tvOS(.v9),
+        .watchOS(.v7),
+        .macOS(.v10_11)
     ],
     products: [
-        .library(name: "OktaIdx",
-                 targets: [ "OktaIdx" ])
+        .library(name: "OktaIdx", targets: ["OktaIdx"])
+    ],
+    dependencies: [
+        .package(name: "AuthFoundation",
+                 url: "https://github.com/okta/okta-mobile-swift",
+                 branch: "master")
     ],
     targets: [
         .target(name: "OktaIdx",
-                exclude: ["Info.plist"]),
+                dependencies: ["AuthFoundation"]),
         .target(name: "TestCommon",
-                dependencies: [ "OktaIdx" ],
-                path: "Tests/TestCommon",
-                resources: [ .copy("SampleResponses") ]),
+                dependencies: ["OktaIdx"],
+                path: "Tests/TestCommon"),
         .testTarget(name: "OktaIdxTests",
-                    dependencies: [ "OktaIdx", "TestCommon" ],
-                    exclude: ["Info.plist"])
-    ]
+                    dependencies: ["OktaIdx", "TestCommon"],
+                resources: [.copy("SampleResponses")])
+    ],
+    swiftLanguageVersions: [.v5]
 )
+
+#if swift(>=5.6)
+    package.dependencies.append(.package(url: "https://github.com/apple/swift-docc-plugin", from: "1.0.0"))
+#endif
+

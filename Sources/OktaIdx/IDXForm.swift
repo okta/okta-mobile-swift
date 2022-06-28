@@ -14,9 +14,8 @@ import Foundation
 
 extension Remediation {
     /// Object that represents a form of fields associated with a remediation.
-    @objc(IDXRemediationForm)
     public class Form: NSObject {
-        @objc public subscript(index: Int) -> Field? {
+        public subscript(index: Int) -> Field? {
             fields[index]
         }
         
@@ -33,7 +32,7 @@ extension Remediation {
         }
         
         /// The array of ordered user-visible fields within this form. Each field may also contain nested forms for collections of related fields.
-        @objc public let fields: [Field]
+        public let fields: [Field]
         
         let allFields: [Field]
 
@@ -43,25 +42,6 @@ extension Remediation {
             self.fields = self.allFields.filter { $0.hasVisibleFields }
             
             super.init()
-        }
-        
-        public override var description: String {
-            let logger = DebugDescription(self)
-            let components = [logger.address()]
-
-            return logger.brace(components.joined(separator: "; "))
-        }
-        
-        public override var debugDescription: String {
-            let components = [
-                fields.map(\.debugDescription).joined(separator: ";\n")
-            ]
-            
-            return """
-            \(description) {
-            \(DebugDescription(self).format(components, indent: 4))
-            }
-            """
         }
     }
 }

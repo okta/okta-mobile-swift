@@ -13,43 +13,44 @@
 import Foundation
 
 extension Remediation.Form {
-    func formValues() throws -> [String:Any] {
+    func formValues() throws -> [String: Any] {
         return try allFields.reduce(into: [:]) { (result, field) in
             guard let nestedResult = try field.formValues() else {
                 return
             }
 
-            if let nestedObject = nestedResult as? [String:Any] {
+            if let nestedObject = nestedResult as? [String: Any] {
                 result.merge(nestedObject, uniquingKeysWith: { (old, new) in
                     return new
                 })
             } else if let name = field.name {
                 result[name] = nestedResult
             } else {
-                throw IDXClientError.invalidRequestData
+                throw IDXAuthenticationFlowError.invalidRequestData
             }
         }
     }
 }
 
 extension Remediation.Form.Field {
+    // swiftlint:disable cyclomatic_complexity
     func formValues() throws -> Any? {
         // Unnamed FormValues, which may contain nested options
         guard let name = name else {
             if let form = self.form,
                !form.allFields.isEmpty
             {
-                let result: [String:Any] = try form.allFields.reduce(into: [:]) { (result, formValue) in
+                let result: [String: Any] = try form.allFields.reduce(into: [:]) { (result, formValue) in
                     let nestedObject = try formValue.formValues()
 
                     if let name = formValue.name {
                         result[name] = nestedObject
-                    } else if let nestedObject = nestedObject as? [String:Any] {
+                    } else if let nestedObject = nestedObject as? [String: Any] {
                         result.merge(nestedObject, uniquingKeysWith: { (old, new) in
                             return new
                         })
                     } else {
-                        throw IDXClientError.invalidParameter(name: formValue.name ?? "")
+                        throw IDXAuthenticationFlowError.invalidParameter(name: formValue.name ?? "")
                     }
                 }
                 return result
@@ -63,17 +64,17 @@ extension Remediation.Form.Field {
         if let form = self.form,
            !form.allFields.isEmpty
         {
-            let childValues: [String:Any] = try form.allFields.reduce(into: [:]) { (result, formValue) in
+            let childValues: [String: Any] = try form.allFields.reduce(into: [:]) { (result, formValue) in
                 guard let nestedResult = try formValue.formValues() else { return }
 
                 if let name = formValue.name {
                     result[name] = nestedResult
-                } else if let nestedObject = nestedResult as? [String:Any] {
+                } else if let nestedObject = nestedResult as? [String: Any] {
                     result.merge(nestedObject, uniquingKeysWith: { (old, new) in
                         return new
                     })
                 } else {
-                    throw IDXClientError.invalidRequestData
+                    throw IDXAuthenticationFlowError.invalidRequestData
                 }
             }
             result = [name: childValues]
@@ -96,9 +97,10 @@ extension Remediation.Form.Field {
         }
 
         if isRequired && result == nil {
-            throw IDXClientError.missingRequiredParameter(name: name)
+            throw IDXAuthenticationFlowError.missingRequiredParameter(name: name)
         }
         
         return result
     }
+    // swiftlint:enable cyclomatic_complexity
 }

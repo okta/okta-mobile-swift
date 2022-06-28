@@ -17,92 +17,130 @@ import XCTest
 @testable import TestCommon
 #endif
 
+class MockAccessTokenValidator: TokenHashValidator {
+    func validate(_ accessToken: String, idToken: JWT) throws {}
+}
+
+struct MockIDTokenValidator: IDTokenValidator {
+    var issuedAtGraceInterval: TimeInterval = 300
+    func validate(token: JWT, issuer: URL, clientId: String, context: IDTokenValidatorContext?) throws {}
+}
+
+struct MockJWKValidator: JWKValidator {
+    func validate(token: JWT, using keySet: JWKS) throws -> Bool {
+        true
+    }
+}
+
 class ScenarioTests: XCTestCase {
-    var configuration: IDXClient.Configuration!
-    var context: IDXClient.Context!
-    var session: URLSessionMock!
-    var api: IDXClient.APIVersion1!
+    var issuer: URL!
+    var client: OAuth2Client!
+    var urlSession = URLSessionMock()
+    var flow: IDXAuthenticationFlow!
     
     override func setUpWithError() throws {
-        session = URLSessionMock()
-        configuration = IDXClient.Configuration(issuer: "https://example.com/oauth2/default",
-                                                clientId: "clientId",
-                                                clientSecret: "clientSecret",
-                                                scopes: ["all"],
-                                                redirectUri: "redirect:/uri")
-        context = IDXClient.Context(configuration: configuration,
-                                    state: "state",
-                                    interactionHandle: "foo",
-                                    codeVerifier: "bar")
+        JWK.validator = MockJWKValidator()
+        Token.idTokenValidator = MockIDTokenValidator()
+        Token.accessTokenValidator = MockAccessTokenValidator()
 
-        api = IDXClient.APIVersion1(with: configuration,
-                                    session: session)
+        issuer = try XCTUnwrap(URL(string: "https://example.com/oauth2/default"))
+
+        client = OAuth2Client(baseURL: issuer,
+                              clientId: "0ZczewGCFPlxNYYcLq5i",
+                              scopes: "openid profile",
+                              session: urlSession)
+        let redirectUri = try XCTUnwrap(URL(string: "redirect:/uri"))
+        
+        flow = IDXAuthenticationFlow(redirectUri: redirectUri, client: client)
+    }
+    
+    override func tearDownWithError() throws {
+        client = nil
+        flow = nil
     }
     
     func testScenario1() throws {
         let completion = expectation(description: "Start")
-        try session.expect("https://example.com/oauth2/default/v1/interact", folderName: "Passcode", fileName: "01-interact-response")
-        try session.expect("https://example.com/idp/idx/introspect", folderName: "Passcode", fileName: "02-introspect-response")
-        try session.expect("https://example.com/idp/idx/identify", folderName: "Passcode", fileName: "03-identify-response")
-        try session.expect("https://example.com/idp/idx/challenge/answer", folderName: "Passcode", fileName: "04-challenge-answer-response")
-        try session.expect("https://example.com/oauth2/auszsfkYrgGCTilsV2o4/v1/token", folderName: "Passcode", fileName: "05-token-response")
+        urlSession.expect("https://example.com/oauth2/default/v1/interact",
+                          data: try data(from: .module,
+                                         for: "01-interact-response",
+                                         in: "Passcode"))
+        urlSession.expect("https://example.com/idp/idx/introspect",
+                          data: try data(from: .module,
+                                         for: "02-introspect-response",
+                                         in: "Passcode"))
+        urlSession.expect("https://example.com/idp/idx/identify",
+                          data: try data(from: .module,
+                                         for: "03-identify-response",
+                                         in: "Passcode"))
+        urlSession.expect("https://example.com/idp/idx/challenge/answer",
+                          data: try data(from: .module,
+                                         for: "04-challenge-answer-response",
+                                         in: "Passcode"))
+        urlSession.expect("https://example.com/oauth2/auszsfkYrgGCTilsV2o4/v1/token",
+                          data: try data(from: .module,
+                                         for: "05-token-response",
+                                         in: "Passcode"))
+        urlSession.expect("https://example.com/oauth2/default/.well-known/openid-configuration",
+                          data: try data(from: .module, for: "openid-configuration"),
+                          contentType: "application/json")
+        urlSession.expect("https://example.com/oauth2/v1/keys?client_id=0ZczewGCFPlxNYYcLq5i",
+                          data: try data(from: .module, for: "keys"),
+                          contentType: "application/json")
 
-        IDXClient.start(with: api) { result in
-            guard case let Result.success(client) = result else {
+        flow.start { result in
+            guard case let Result.success(response) = result else {
                 XCTFail("Received a failure when a success was expected")
                 return
             }
+            XCTAssertFalse(response.isLoginSuccessful)
             
-            client.resume { result in
+            let remediation = response.remediations.first
+            XCTAssertEqual(remediation?.name, "identify")
+            XCTAssertEqual(remediation?.form.count, 2)
+            XCTAssertEqual(remediation?.form.allFields.count, 3)
+            XCTAssertEqual(remediation?.form[0].name, "identifier")
+            XCTAssertEqual(remediation?.form[1].name, "rememberMe")
+            XCTAssertEqual(remediation?.form.allFields[2].name, "stateHandle")
+            remediation?.form["identifier"]?.value = "user@example.com"
+            
+            remediation?.proceed { result in
                 guard case let Result.success(response) = result else {
                     XCTFail("Received a failure when a success was expected")
                     return
                 }
+                
                 XCTAssertFalse(response.isLoginSuccessful)
                 
                 let remediation = response.remediations.first
-                XCTAssertEqual(remediation?.name, "identify")
-                XCTAssertEqual(remediation?.form.count, 2)
-                XCTAssertEqual(remediation?.form.allFields.count, 3)
-                XCTAssertEqual(remediation?.form[0].name, "identifier")
-                XCTAssertEqual(remediation?.form[1].name, "rememberMe")
-                XCTAssertEqual(remediation?.form.allFields[2].name, "stateHandle")
-                remediation?.form["identifier"]?.value = "user@example.com"
+                XCTAssertEqual(remediation?.name, "challenge-authenticator")
+                XCTAssertEqual(remediation?.form.count, 1)
+                
+                XCTAssertEqual(remediation?.form[0].name, "credentials")
+                XCTAssertEqual(remediation?.form.allFields[1].name, "stateHandle")
+                
+                let credentials = remediation?.form[0]
+                XCTAssertTrue(credentials?.isRequired ?? false)
+                remediation?.form["credentials"]?.form?["passcode"]?.value = "password"
                 
                 remediation?.proceed { result in
                     guard case let Result.success(response) = result else {
                         XCTFail("Received a failure when a success was expected")
                         return
                     }
+                    
+                    XCTAssertTrue(response.isLoginSuccessful)
 
-                    XCTAssertFalse(response.isLoginSuccessful)
-                    
-                    let remediation = response.remediations.first
-                    XCTAssertNotNil(remediation)
-                    XCTAssertEqual(remediation?.name, "challenge-authenticator")
-                    XCTAssertEqual(remediation?.form.count, 1)
-                    
-                    XCTAssertEqual(remediation?.form[0].name, "credentials")
-                    XCTAssertEqual(remediation?.form.allFields[1].name, "stateHandle")
-                    
-                    let credentials = remediation?.form[0]
-                    XCTAssertTrue(credentials?.isRequired ?? false)
-                    remediation?.form["credentials"]?.form?["passcode"]?.value = "password"
-
-                    remediation?.proceed { (response, error) in
-                        XCTAssertNotNil(response)
-                        XCTAssertNil(error)
-                        XCTAssertTrue(response?.isLoginSuccessful ?? false)
-                        
-                        response?.exchangeCode { (token, error) in
-                            XCTAssertNotNil(token)
-                            XCTAssertNil(error)
-                            
-                            XCTAssertEqual(token?.tokenType, "Bearer")
-                            XCTAssertEqual(token?.expiresIn, 3600)
-                            XCTAssertEqual(token?.refreshToken, "CCY4M4fR3")
-                            completion.fulfill()
+                    response.exchangeCode { result in
+                        guard case let Result.success(token) = result else {
+                            XCTFail("Received a failure when a success was expected")
+                            return
                         }
+                        
+                        XCTAssertEqual(token.tokenType, "Bearer")
+                        XCTAssertEqual(token.expiresIn, 3600)
+                        XCTAssertEqual(token.refreshToken, "CCY4M4fR3")
+                        completion.fulfill()
                     }
                 }
             }
@@ -113,14 +151,34 @@ class ScenarioTests: XCTestCase {
     #if swift(>=5.5.1) && !os(Linux)
     @available(iOS 15.0, tvOS 15.0, macOS 12.0, *)
     func testScenario1Async() async throws {
-        try session.expect("https://example.com/oauth2/default/v1/interact", folderName: "Passcode", fileName: "01-interact-response")
-        try session.expect("https://example.com/idp/idx/introspect", folderName: "Passcode", fileName: "02-introspect-response")
-        try session.expect("https://example.com/idp/idx/identify", folderName: "Passcode", fileName: "03-identify-response")
-        try session.expect("https://example.com/idp/idx/challenge/answer", folderName: "Passcode", fileName: "04-challenge-answer-response")
-        try session.expect("https://example.com/oauth2/auszsfkYrgGCTilsV2o4/v1/token", folderName: "Passcode", fileName: "05-token-response")
+        urlSession.expect("https://example.com/oauth2/default/v1/interact",
+                          data: try data(from: .module,
+                                         for: "01-interact-response",
+                                         in: "Passcode"))
+        urlSession.expect("https://example.com/idp/idx/introspect",
+                          data: try data(from: .module,
+                                         for: "02-introspect-response",
+                                         in: "Passcode"))
+        urlSession.expect("https://example.com/idp/idx/identify",
+                          data: try data(from: .module,
+                                         for: "03-identify-response",
+                                         in: "Passcode"))
+        urlSession.expect("https://example.com/idp/idx/challenge/answer",
+                          data: try data(from: .module,
+                                         for: "04-challenge-answer-response",
+                                         in: "Passcode"))
+        urlSession.expect("https://example.com/oauth2/auszsfkYrgGCTilsV2o4/v1/token",
+                          data: try data(from: .module,
+                                         for: "05-token-response",
+                                         in: "Passcode"))
+        urlSession.expect("https://example.com/oauth2/default/.well-known/openid-configuration",
+                          data: try data(from: .module, for: "openid-configuration"),
+                          contentType: "application/json")
+        urlSession.expect("https://example.com/oauth2/v1/keys?client_id=0ZczewGCFPlxNYYcLq5i",
+                          data: try data(from: .module, for: "keys"),
+                          contentType: "application/json")
 
-        let client = try await IDXClient.start(with: api)
-        var response = try await client.resume()
+        var response = try await flow.start()
         
         XCTAssertFalse(response.isLoginSuccessful)
                 
@@ -146,21 +204,50 @@ class ScenarioTests: XCTestCase {
 
     func testScenario2() throws {
         let completion = expectation(description: "Start")
-        try session.expect("https://example.com/oauth2/default/v1/interact", folderName: "MFA-Email", fileName: "01-interact-response")
-        try session.expect("https://example.com/idp/idx/introspect", folderName: "MFA-Email", fileName: "02-introspect-response")
-        try session.expect("https://example.com/idp/idx/identify", folderName: "MFA-Email", fileName: "03-identify-response")
-        try session.expect("https://example.com/idp/idx/challenge", folderName: "MFA-Email", fileName: "04-challenge-authenticator")
-//        try session.expect("https://example.com/idp/idx/challenge/answer", folderName: "MFA-Email", fileName: "05-challenge-authenticator")
-        try session.expect("https://example.com/oauth2/auszsfkYrgGCTilsV2o4/v1/token", folderName: "MFA-Email", fileName: "05-challenge-answer-invalid")
-        
-        // Start, takes us through interact & introspect
-        IDXClient.start(with: api) { result in
-            guard case let Result.success(client) = result else {
+        urlSession.expect("https://example.com/oauth2/default/v1/interact",
+                          data: try data(from: .module,
+                                         for: "01-interact-response",
+                                         in: "MFA-Email"))
+        urlSession.expect("https://example.com/idp/idx/introspect",
+                          data: try data(from: .module,
+                                         for: "02-introspect-response",
+                                         in: "MFA-Email"))
+        urlSession.expect("https://example.com/idp/idx/identify",
+                          data: try data(from: .module,
+                                         for: "03-identify-response",
+                                         in: "MFA-Email"))
+        urlSession.expect("https://example.com/idp/idx/challenge",
+                          data: try data(from: .module,
+                                         for: "04-challenge-authenticator",
+                                         in: "MFA-Email"))
+
+        flow.start { result in
+            guard case let Result.success(response) = result else {
                 XCTFail("Received a failure when a success was expected")
                 return
             }
             
-            client.resume { result in
+            XCTAssertFalse(response.isLoginSuccessful)
+            
+            let remediation = response.remediations.first
+            XCTAssertEqual(remediation?.name, "identify")
+            XCTAssertEqual(remediation?.form.count, 2)
+            XCTAssertEqual(remediation?.form.allFields.count, 3)
+            
+            let identifierField = remediation?.form[0]
+            XCTAssertEqual(identifierField?.name, "identifier")
+            
+            let rememberMeField = remediation?.form[1]
+            XCTAssertEqual(rememberMeField?.name, "rememberMe")
+            
+            let stateHandleField = remediation?.form.allFields[2]
+            XCTAssertEqual(stateHandleField?.name, "stateHandle")
+            
+            identifierField?.value = "user@example.com"
+            rememberMeField?.value = false
+            
+            // Identify ourselves as the given user, which returns the identify-response
+            remediation?.proceed { result in
                 guard case let Result.success(response) = result else {
                     XCTFail("Received a failure when a success was expected")
                     return
@@ -170,28 +257,29 @@ class ScenarioTests: XCTestCase {
                 
                 let remediation = response.remediations.first
                 XCTAssertNotNil(remediation)
-                XCTAssertEqual(remediation?.name, "identify")
-                XCTAssertEqual(remediation?.form.count, 2)
-                XCTAssertEqual(remediation?.form.allFields.count, 3)
-
-                let identifierField = remediation?.form[0]
-                XCTAssertEqual(identifierField?.name, "identifier")
-
-                let rememberMeField = remediation?.form[1]
-                XCTAssertEqual(rememberMeField?.name, "rememberMe")
-
-                let stateHandleField = remediation?.form.allFields[2]
-                XCTAssertEqual(stateHandleField?.name, "stateHandle")
+                XCTAssertEqual(remediation?.name, "select-authenticator-authenticate")
+                XCTAssertEqual(remediation?.form.count, 1)
+                XCTAssertEqual(remediation?.form.allFields.count, 2)
                 
-                identifierField?.value = "user@example.com"
-                rememberMeField?.value = false
+                XCTAssertEqual(remediation?.form[0].name, "authenticator")
+                XCTAssertEqual(remediation?.form.allFields[1].name, "stateHandle")
                 
-                // Identify ourselves as the given user, which returns the identify-response
-                remediation?.proceed { (response, error) in
-                    XCTAssertNotNil(response)
-                    XCTAssertNil(error)
-                    guard let response = response else {
-                        XCTFail()
+                let credentials = remediation?.form[0]
+                XCTAssertEqual(credentials?.type, "object")
+                XCTAssertNotNil(credentials?.options)
+                XCTAssertEqual(credentials?.options?.count, 3)
+                
+                let securityQuestion = credentials?.options?.filter { $0.label == "Security Question" }.first
+                XCTAssertNotNil(securityQuestion)
+                XCTAssertEqual(securityQuestion?.form?.count, 0)
+                XCTAssertEqual(securityQuestion?.form?.allFields.count, 2)
+                
+                credentials?.selectedOption = securityQuestion
+                
+                // Choose a authenticator challenge type
+                remediation?.proceed { result in
+                    guard case let Result.success(response) = result else {
+                        XCTFail("Received a failure when a success was expected")
                         return
                     }
                     
@@ -199,55 +287,22 @@ class ScenarioTests: XCTestCase {
                     
                     let remediation = response.remediations.first
                     XCTAssertNotNil(remediation)
-                    XCTAssertEqual(remediation?.name, "select-authenticator-authenticate")
+                    XCTAssertEqual(remediation?.name, "challenge-authenticator")
                     XCTAssertEqual(remediation?.form.count, 1)
                     XCTAssertEqual(remediation?.form.allFields.count, 2)
-
-                    XCTAssertEqual(remediation?.form[0].name, "authenticator")
+                    
+                    XCTAssertEqual(remediation?.form[0].name, "credentials")
                     XCTAssertEqual(remediation?.form.allFields[1].name, "stateHandle")
-                    
-                    let credentials = remediation?.form[0]
-                    XCTAssertEqual(credentials?.type, "object")
-                    XCTAssertNotNil(credentials?.options)
-                    XCTAssertEqual(credentials?.options?.count, 3)
-                    
-                    let securityQuestion = credentials?.options?.filter { $0.label == "Security Question" }.first
-                    XCTAssertNotNil(securityQuestion)
-                    XCTAssertEqual(securityQuestion?.form?.count, 0)
-                    XCTAssertEqual(securityQuestion?.form?.allFields.count, 2)
-
-                    credentials?.selectedOption = securityQuestion
-                    
-                    // Choose a authenticator challenge type
-                    remediation?.proceed { (response, error) in
-                        XCTAssertNotNil(response)
-                        XCTAssertNil(error)
-                        guard let response = response else {
-                            XCTFail()
-                            return
-                        }
-                        
-                        XCTAssertFalse(response.isLoginSuccessful)
-                        
-                        let remediation = response.remediations.first
-                        XCTAssertNotNil(remediation)
-                        XCTAssertEqual(remediation?.name, "challenge-authenticator")
-                        XCTAssertEqual(remediation?.form.count, 1)
-                        XCTAssertEqual(remediation?.form.allFields.count, 2)
-
-                        XCTAssertEqual(remediation?.form[0].name, "credentials")
-                        XCTAssertEqual(remediation?.form.allFields[1].name, "stateHandle")
-                        //                    TODO: MFA authentication tests aren't yet complete
-                        //                    response?.exchangeCode(completionHandler: { (token, error) in
-                        //                        XCTAssertNotNil(token)
-                        //                        XCTAssertNil(error)
-                        //
-                        //                        XCTAssertEqual(token?.tokenType, "Bearer")
-                        //                        XCTAssertEqual(token?.expiresIn, 3600)
-                        //                        XCTAssertEqual(token?.refreshToken, "WQcGbvjBpm2EA30-rPR7m6vGSzI8YMqNGYY9Qe14fT0")
-                        completion.fulfill()
-                        //                    })
-                    }
+                    //                    TODO: MFA authentication tests aren't yet complete
+                    //                    response?.exchangeCode(completionHandler: { (token, error) in
+                    //                        XCTAssertNotNil(token)
+                    //                        XCTAssertNil(error)
+                    //
+                    //                        XCTAssertEqual(token?.tokenType, "Bearer")
+                    //                        XCTAssertEqual(token?.expiresIn, 3600)
+                    //                        XCTAssertEqual(token?.refreshToken, "WQcGbvjBpm2EA30-rPR7m6vGSzI8YMqNGYY9Qe14fT0")
+                    completion.fulfill()
+                    //                    })
                 }
             }
         }
@@ -257,90 +312,114 @@ class ScenarioTests: XCTestCase {
     /// Tests restarting a transaction
     func testScenario4() throws {
         let completion = expectation(description: "Start")
-        try session.expect("https://example.com/oauth2/default/v1/interact", folderName: "RestartTransaction", fileName: "01-interact-response")
-        try session.expect("https://example.com/idp/idx/introspect", folderName: "RestartTransaction", fileName: "02-introspect-response")
-        try session.expect("https://example.com/idp/idx/identify", folderName: "RestartTransaction", fileName: "03-identify-response")
-        try session.expect("https://example.com/idp/idx/challenge", folderName: "RestartTransaction", fileName: "04-challenge-response")
-        try session.expect("https://example.com/idp/idx/challenge/answer", folderName: "RestartTransaction", fileName: "05-challenge-answer-response")
-        try session.expect("https://example.com/idp/idx/cancel", folderName: "RestartTransaction", fileName: "06-cancel-response")
 
-        IDXClient.start(with: api) { result in
-            guard case let Result.success(client) = result else {
+        urlSession.expect("https://example.com/oauth2/default/v1/interact",
+                          data: try data(from: .module,
+                                         for: "01-interact-response",
+                                         in: "RestartTransaction"))
+        urlSession.expect("https://example.com/idp/idx/introspect",
+                          data: try data(from: .module,
+                                         for: "02-introspect-response",
+                                         in: "RestartTransaction"))
+        urlSession.expect("https://example.com/idp/idx/identify",
+                          data: try data(from: .module,
+                                         for: "03-identify-response",
+                                         in: "RestartTransaction"))
+        urlSession.expect("https://example.com/idp/idx/challenge",
+                          data: try data(from: .module,
+                                         for: "04-challenge-response",
+                                         in: "RestartTransaction"))
+        urlSession.expect("https://example.com/idp/idx/challenge/answer",
+                          data: try data(from: .module,
+                                         for: "05-challenge-answer-response",
+                                         in: "RestartTransaction"))
+        urlSession.expect("https://example.com/idp/idx/cancel",
+                          data: try data(from: .module,
+                                         for: "06-cancel-response",
+                                         in: "RestartTransaction"))
+
+        flow.start { result in
+            guard case let Result.success(response) = result else {
                 XCTFail("Received a failure when a success was expected")
                 return
             }
 
-            client.resume { result in
+            XCTAssertTrue(response.canCancel)
+
+            let remediation = response.remediations.first
+            XCTAssertEqual(remediation?.name, "identify")
+
+            remediation?["identify"]?.value = "user@example.com"
+
+            remediation?.proceed { result in
                 guard case let Result.success(response) = result else {
                     XCTFail("Received a failure when a success was expected")
                     return
                 }
 
                 XCTAssertTrue(response.canCancel)
-                
-                let remediation = response.remediations.first
-                XCTAssertEqual(remediation?.name, "identify")
-                
-                remediation?["identify"]?.value = "user@example.com"
-                
-                remediation?.proceed { (response, error) in
-                    XCTAssertNotNil(response)
-                    XCTAssertNil(error)
-                    XCTAssertTrue(response?.canCancel ?? false)
-                    
-                    let remediation = response?.remediations.first
-                    XCTAssertEqual(remediation?.name, "select-authenticator-authenticate")
-                    
-                    let authenticator = remediation?.form
-                        .filter { $0.name == "authenticator" }.first
-                    let passcodeOption = authenticator?
-                        .options?.filter { $0.label == "Password" }.first
-                    XCTAssertNotNil(passcodeOption)
-                    
-                    authenticator?.selectedOption = passcodeOption
-                    
-                    remediation?.proceed { (response, error) in
-                        XCTAssertNotNil(response)
-                        XCTAssertNil(error)
-                        XCTAssertTrue(response?.canCancel ?? false)
-                        
-                        let remediation = response?.remediations.first
-                        XCTAssertEqual(remediation?.name, "challenge-authenticator")
-                        
-                        let currentEnrollment = response?.authenticators.current
-                        let related = remediation?.authenticators.first
-                        XCTAssertEqual(related, currentEnrollment)
-                        
-                        remediation?.form["credentials.passcode"]?.value = "password"
-                        
-                        remediation?.proceed { (response, error) in
-                            XCTAssertNotNil(response)
-                            XCTAssertNil(error)
-                            XCTAssertTrue(response?.canCancel ?? false)
-                            
-                            let remediation = response?.remediations.first
-                            XCTAssertEqual(remediation?.name, "select-authenticator-authenticate")
-                            XCTAssertEqual(remediation?.type, .selectAuthenticatorAuthenticate)
 
-                            let emailOption = remediation?.form
-                                .filter { $0.name == "authenticator" }.first?
-                                .options?.filter { $0.label == "Email" }.first
-                            XCTAssertNotNil(emailOption)
-                            
-                            let authenticator = response?.authenticators.enrolled.first
-                            let related = emailOption?.authenticator
-                            XCTAssertEqual(related, authenticator)
-                            
-                            response?.cancel() { (response, error) in
-                                XCTAssertNotNil(response)
-                                XCTAssertNil(error)
-                                XCTAssertTrue(response?.canCancel ?? false)
-                                
-                                let remediation = response?.remediations.first
-                                XCTAssertEqual(remediation?.name, "identify")
-                                
-                                completion.fulfill()
+                let remediation = response.remediations.first
+                XCTAssertEqual(remediation?.name, "select-authenticator-authenticate")
+
+                let authenticator = remediation?.form
+                    .filter { $0.name == "authenticator" }.first
+                let passcodeOption = authenticator?
+                    .options?.filter { $0.label == "Password" }.first
+                XCTAssertNotNil(passcodeOption)
+
+                authenticator?.selectedOption = passcodeOption
+
+                remediation?.proceed { result in
+                    guard case let Result.success(response) = result else {
+                        XCTFail("Received a failure when a success was expected")
+                        return
+                    }
+
+                    XCTAssertTrue(response.canCancel)
+
+                    let remediation = response.remediations.first
+                    XCTAssertEqual(remediation?.name, "challenge-authenticator")
+
+                    let currentEnrollment = response.authenticators.current
+                    let related = remediation?.authenticators.first
+                    XCTAssertEqual(related, currentEnrollment)
+
+                    remediation?.form["credentials.passcode"]?.value = "password"
+
+                    remediation?.proceed { result in
+                        guard case let Result.success(response) = result else {
+                            XCTFail("Received a failure when a success was expected")
+                            return
+                        }
+
+                        XCTAssertTrue(response.canCancel)
+
+                        let remediation = response.remediations.first
+                        XCTAssertEqual(remediation?.name, "select-authenticator-authenticate")
+                        XCTAssertEqual(remediation?.type, .selectAuthenticatorAuthenticate)
+
+                        let emailOption = remediation?.form
+                            .filter { $0.name == "authenticator" }.first?
+                            .options?.filter { $0.label == "Email" }.first
+                        XCTAssertNotNil(emailOption)
+
+                        let authenticator = response.authenticators.enrolled.first
+                        let related = emailOption?.authenticator
+                        XCTAssertEqual(related, authenticator)
+
+                        response.cancel() { result in
+                            guard case let Result.success(response) = result else {
+                                XCTFail("Received a failure when a success was expected")
+                                return
                             }
+
+                            XCTAssertTrue(response.canCancel)
+
+                            let remediation = response.remediations.first
+                            XCTAssertEqual(remediation?.name, "identify")
+
+                            completion.fulfill()
                         }
                     }
                 }
@@ -351,45 +430,53 @@ class ScenarioTests: XCTestCase {
     
     func testScenario5() throws {
         let completion = expectation(description: "Start")
-        try session.expect("https://example.com/oauth2/default/v1/interact", folderName: "IdP", fileName: "01-interact-response")
-        try session.expect("https://example.com/idp/idx/introspect", folderName: "IdP", fileName: "02-introspect-response")
-        try session.expect("https://example.com/oauth2/default/v1/token", folderName: "IdP", fileName: "03-token-response")
+        urlSession.expect("https://example.com/oauth2/default/v1/interact",
+                          data: try data(from: .module,
+                                         for: "01-interact-response",
+                                         in: "IdP"))
+        urlSession.expect("https://example.com/idp/idx/introspect",
+                          data: try data(from: .module,
+                                         for: "02-introspect-response",
+                                         in: "IdP"))
+        urlSession.expect("https://example.com/oauth2/default/.well-known/openid-configuration",
+                          data: try data(from: .module,
+                                         for: "openid-configuration"))
+        urlSession.expect("https://example.com/oauth2/v1/token",
+                          data: try data(from: .module,
+                                         for: "03-token-response",
+                                         in: "IdP"))
+        urlSession.expect("https://example.com/oauth2/v1/keys?client_id=0ZczewGCFPlxNYYcLq5i",
+                          data: try data(from: .module, for: "keys"),
+                          contentType: "application/json")
 
-        IDXClient.start(with: api) { result in
-            guard case let Result.success(client) = result else {
+        flow.start { result in
+            guard case let Result.success(response) = result else {
                 XCTFail("Received a failure when a success was expected")
                 return
             }
-
-            client.resume { result in
-                guard case let Result.success(response) = result else {
+            
+            let redirectUrl = URL(string: """
+                        redirect:///uri?\
+                        interaction_code=qwe4xJaJF897EbEKL0LLbNUI-QwXZa8YOkY8QkWUlpXxU&\
+                        state=\(self.flow.context?.state ?? "Missing")#_=_
+                        """)!
+            
+            XCTAssertTrue(response.canCancel)
+            XCTAssertNotNil(response.remediations[.redirectIdp])
+            XCTAssertNotNil(response.remediations[.redirectIdp]?.href)
+            XCTAssertFalse(response.isLoginSuccessful)
+            XCTAssertEqual(self.flow.redirectResult(for: redirectUrl), .authenticated)
+            
+            self.flow.exchangeCode(redirect: redirectUrl) { result in
+                guard case let Result.success(token) = result else {
                     XCTFail("Received a failure when a success was expected")
                     return
                 }
-
-                let redirectUrl = URL(string: """
-                        redirect:///uri?\
-                        interaction_code=qwe4xJaJF897EbEKL0LLbNUI-QwXZa8YOkY8QkWUlpXxU&\
-                        state=\(client.context.state)#_=_
-                        """)!
                 
-                XCTAssertTrue(response.canCancel)
-                XCTAssertNotNil(response.remediations[.redirectIdp])
-                XCTAssertNotNil(response.remediations[.redirectIdp]?.href)
-                XCTAssertFalse(response.isLoginSuccessful)
-                XCTAssertEqual(client.redirectResult(for: redirectUrl), .authenticated)
+                XCTAssertNotNil(token.idToken)
+                XCTAssertNotNil(token.refreshToken)
                 
-                client.exchangeCode(redirect: redirectUrl) { result in
-                    guard case let Result.success(token) = result else {
-                        XCTFail("Received a failure when a success was expected")
-                        return
-                    }
-                    
-                    XCTAssertNotNil(token.idToken)
-                    XCTAssertNotNil(token.refreshToken)
-                    
-                    completion.fulfill()
-                }
+                completion.fulfill()
             }
         }
         
@@ -398,36 +485,35 @@ class ScenarioTests: XCTestCase {
     
     func testScenario6() throws {
         let completion = expectation(description: "Start")
-        try session.expect("https://example.com/oauth2/default/v1/interact", folderName: "IdP", fileName: "01-interact-response")
-        try session.expect("https://example.com/idp/idx/introspect", folderName: "IdP", fileName: "02-introspect-response")
+        urlSession.expect("https://example.com/oauth2/default/v1/interact",
+                          data: try data(from: .module,
+                                         for: "01-interact-response",
+                                         in: "IdP"))
+        urlSession.expect("https://example.com/idp/idx/introspect",
+                          data: try data(from: .module,
+                                         for: "02-introspect-response",
+                                         in: "IdP"))
 
-        IDXClient.start(with: api) { result in
-            guard case let Result.success(client) = result else {
+        flow.start { result in
+            guard case let Result.success(response) = result else {
                 XCTFail("Received a failure when a success was expected")
                 return
             }
-
-            client.resume { result in
-                guard case let Result.success(response) = result else {
-                    XCTFail("Received a failure when a success was expected")
-                    return
-                }
-
-                let redirectUrl = URL(string: """
+            
+            let redirectUrl = URL(string: """
                     redirect:///uri?\
-                    state=\(client.context.state)&\
+                    state=\(self.flow.context?.state ?? "Missing")&\
                     error=interaction_required&\
                     error_description=Your+client+is+configured+to+use+the+interaction+code+flow+and+user+interaction+is+required+to+complete+the+request.#_=_
                     """)!
-                
-                XCTAssertTrue(response.canCancel)
-                XCTAssertNotNil(response.remediations[.redirectIdp])
-                XCTAssertNotNil(response.remediations[.redirectIdp]?.href)
-                XCTAssertFalse(response.isLoginSuccessful)
-                XCTAssertEqual(client.redirectResult(for: redirectUrl), .remediationRequired)
-                
-                completion.fulfill()
-            }
+            
+            XCTAssertTrue(response.canCancel)
+            XCTAssertNotNil(response.remediations[.redirectIdp])
+            XCTAssertNotNil(response.remediations[.redirectIdp]?.href)
+            XCTAssertFalse(response.isLoginSuccessful)
+            XCTAssertEqual(self.flow.redirectResult(for: redirectUrl), .remediationRequired)
+            
+            completion.fulfill()
         }
         
         wait(for: [completion], timeout: 2)

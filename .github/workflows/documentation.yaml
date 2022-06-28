@@ -1,0 +1,48 @@
+name: Documentation
+
+on:
+  push:
+    branches:
+      - master
+      - dev-*
+      - release-*
+    paths:
+      - '.github/workflows/documentation.yml'
+      - 'Sources/**/*.swift'
+      - 'Sources/**/*.md'
+  pull_request:
+    branches:
+      - master
+      - dev-*
+      - release-*
+    paths:
+      - '.github/workflows/documentation.yml'
+      - 'Sources/**/*.swift'
+      - 'Sources/**/*.md'
+
+env:
+  DEVELOPER_DIR: /Applications/Xcode_13.3.app/Contents/Developer
+
+jobs:
+  BuildDocumentation:
+    name: Build Documentation Archives
+    runs-on: macos-12
+    steps:
+    - uses: actions/checkout@master
+    - name: OktaIdx
+      run: |
+        set -o pipefail
+        env NSUnbufferedIO=YES xcodebuild docbuild \
+          -derivedDataPath ~/Build/DerivedData \
+          -scheme OktaIdx | xcpretty
+    - name: Compress DocC archive
+      run: |
+        for archive in $(find ~/Build/DerivedData/Build/Products -type d -name '*.doccarchive'); do
+          cd $(dirname "$archive")
+          zip -r ~/Build/$(basename "$archive").zip $(basename "$archive")
+        done
+    - name: Upload OktaIdx DocC Archive
+      uses: actions/upload-artifact@v2
+      with:
+        name: OktaIdx.doccarchive.zip
+        path: ~/Build/OktaIdx.doccarchive.zip

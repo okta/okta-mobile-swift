@@ -17,21 +17,12 @@ extension Capability {
     public struct Recoverable: AuthenticatorCapability {
         /// Requests that the recovery code is sent.
         /// - Parameter completion: Completion handler when the response is returned with the result of the operation.
-        public func recover(completion: IDXClient.ResponseResult? = nil) {
-            guard let client = client else {
-                completion?(.failure(.invalidClient))
-                return
-            }
-            
-            client.proceed(remediation: remediation, completion: completion)
+        public func recover(completion: IDXAuthenticationFlow.ResponseResult? = nil) {
+            remediation.proceed(completion: completion)
         }
         
-        internal private(set) weak var client: IDXClientAPI?
         internal let remediation: Remediation
-        internal init(client: IDXClientAPI,
-                      remediation: Remediation)
-        {
-            self.client = client
+        internal init(remediation: Remediation) {
             self.remediation = remediation
         }
     }

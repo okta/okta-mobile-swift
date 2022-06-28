@@ -12,6 +12,7 @@
 
 import Foundation
 
+/// A generic protocol used to identify objects that describe a capability.
 public protocol IDXCapability {}
 
 /// Defines type conformance for capabilities that can be used with Authenticators.
@@ -22,7 +23,7 @@ public protocol RemediationCapability: IDXCapability {}
 
 public struct Capability {}
 
-/// A collection of capabilities that can be associated with some parent object, such as an Authenticator or Remediation.
+/// A collection of capabilities that can be associated with some parent object, such as an ``Authenticator`` or ``Remediation``.
 public protocol CapabilityCollection: AnyObject {
     associatedtype CapabilityType
 

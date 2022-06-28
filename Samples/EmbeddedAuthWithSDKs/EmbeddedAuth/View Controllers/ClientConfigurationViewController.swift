@@ -15,12 +15,11 @@ import UIKit
 import OktaIdx
 
 extension ClientConfiguration {
-    var idxConfiguration: IDXClient.Configuration {
-        return IDXClient.Configuration(issuer: issuer,
-                                       clientId: clientId,
-                                       clientSecret: nil,
-                                       scopes: scopes.components(separatedBy: .whitespaces),
-                                       redirectUri: redirectUri)
+    var idxFlow: IDXAuthenticationFlow {
+        IDXAuthenticationFlow(issuer: issuer,
+                              clientId: clientId,
+                              scopes: scopes,
+                              redirectUri: redirectUri)
     }
 }
 
@@ -35,10 +34,10 @@ class ClientConfigurationViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        issuerField.text = configuration?.issuer
+        issuerField.text = configuration?.issuer.absoluteString
         clientIdField.text = configuration?.clientId
         scopesField.text = configuration?.scopes
-        redirectField.text = configuration?.redirectUri
+        redirectField.text = configuration?.redirectUri.absoluteString
         recoveryTokenField.text = configuration?.recoveryToken
 
         issuerField.accessibilityIdentifier = "issuerField"

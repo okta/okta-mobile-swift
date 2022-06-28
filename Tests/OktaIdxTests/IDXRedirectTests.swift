@@ -14,20 +14,17 @@ import XCTest
 @testable import OktaIdx
 
 class IDXRedirectTests: XCTestCase {
-
-    typealias IDXRedirect = IDXClient.APIVersion1.Redirect
-    
     func testRedirectWithInvalidUrl() throws {
-        let redirectFromString = IDXRedirect(url: "")
+        let redirectFromString = Redirect(url: "")
         XCTAssertNil(redirectFromString)
-        
-        let redirectFromUrl = IDXRedirect(url: try XCTUnwrap(URL(string: "callback")))
+
+        let redirectFromUrl = Redirect(url: try XCTUnwrap(URL(string: "callback")))
         XCTAssertNil(redirectFromUrl)
     }
-    
+
     func testRedirectWithInteractionCode() throws {
         let url = try XCTUnwrap(URL(string: "com.test:///login?state=1234&interaction_code=qwerty#_=_"))
-        let redirect = try XCTUnwrap(IDXRedirect(url: url))
+        let redirect = try XCTUnwrap(Redirect(url: url))
 
         XCTAssertEqual(redirect.url, url)
         XCTAssertEqual(redirect.scheme, "com.test")
@@ -37,10 +34,10 @@ class IDXRedirectTests: XCTestCase {
         XCTAssertNil(redirect.error)
         XCTAssertNil(redirect.errorDescription)
     }
-    
+
     func testRedirectWithInteractionError() throws {
         let url = "com.test:///login?error=interaction_required&error_description=Interaction+required#_=_"
-        let redirect = try XCTUnwrap(IDXRedirect(url: url))
+        let redirect = try XCTUnwrap(Redirect(url: url))
 
         XCTAssertEqual(redirect.url, try XCTUnwrap(URL(string: url)))
         XCTAssertEqual(redirect.scheme, "com.test")
@@ -57,12 +54,12 @@ class IDXRedirectTests: XCTestCase {
     func testRedirectComparison() throws {
         let firstUrl = "com.test:///login#_=_"
         let secondUrl = "com.test:/login#_=_"
-        let firstRedirect = try XCTUnwrap(IDXRedirect(url: firstUrl))
-        let secondRedirect = try XCTUnwrap(IDXRedirect(url: secondUrl))
+        let firstRedirect = try XCTUnwrap(Redirect(url: firstUrl))
+        let secondRedirect = try XCTUnwrap(Redirect(url: secondUrl))
 
         XCTAssertEqual(firstRedirect.path, "/login")
         XCTAssertEqual(firstRedirect.scheme, "com.test")
-        
+
         XCTAssertEqual(firstRedirect.scheme, secondRedirect.scheme)
         XCTAssertEqual(firstRedirect.path, secondRedirect.path)
         XCTAssertNotEqual(firstRedirect.url, secondRedirect.url)
@@ -72,7 +69,7 @@ class IDXRedirectTests: XCTestCase {
         XCTAssertNil(firstRedirect.interactionCode)
         XCTAssertNil(firstRedirect.error)
         XCTAssertNil(firstRedirect.errorDescription)
-        
+
         XCTAssertEqual(firstRedirect.state, secondRedirect.state)
         XCTAssertEqual(firstRedirect.interactionRequired, secondRedirect.interactionRequired)
         XCTAssertEqual(firstRedirect.interactionCode, secondRedirect.interactionCode)
@@ -80,5 +77,3 @@ class IDXRedirectTests: XCTestCase {
         XCTAssertEqual(firstRedirect.errorDescription, secondRedirect.errorDescription)
     }
 }
-
-

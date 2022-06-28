@@ -13,27 +13,18 @@
 import Foundation
 
 extension Capability {
-    /// Capability used for being able to "send".
+    /// Capability used for being able to "send" a verification code.
     ///
     /// This is typically used by Email and Phone authenticators.
     public struct Sendable: AuthenticatorCapability {
         /// Sends a new authentication code.
         /// - Parameter completion: Completion handler when the response is returned with the result of the operation.
-        public func send(completion: IDXClient.ResponseResult? = nil) {
-            guard let client = client else {
-                completion?(.failure(.invalidClient))
-                return
-            }
-
-            client.proceed(remediation: remediation, completion: completion)
+        public func send(completion: IDXAuthenticationFlow.ResponseResult? = nil) {
+            remediation.proceed(completion: completion)
         }
         
-        internal private(set) weak var client: IDXClientAPI?
         internal let remediation: Remediation
-        internal init(client: IDXClientAPI,
-                      remediation: Remediation)
-        {
-            self.client = client
+        internal init(remediation: Remediation) {
             self.remediation = remediation
         }
     }

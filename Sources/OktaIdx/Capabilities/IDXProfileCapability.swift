@@ -18,14 +18,14 @@ extension Capability {
         /// Profile information describing the authenticator.
         ///
         /// This usually contains redacted information relevant to display to the user.
-        public let values: [String:String]
+        public let values: [String: String]
         
         /// Returns the nested `profile` field with the given name.
         public subscript(name: String) -> String? {
             values[name]
         }
 
-        internal init(profile: [String:String]) {
+        internal init(profile: [String: String]) {
             self.values = profile
         }
     }

@@ -14,7 +14,7 @@ import Foundation
 
 extension Bundle {
     static var resourcesPath: URL {
-        let bundle = Bundle(for: IDXClientAPIv1Mock.self)
+        let bundle = Bundle(for: URLSessionMock.self)
         #if SWIFT_PACKAGE
         let bundleName = "OktaIdx_TestCommon"
         #else

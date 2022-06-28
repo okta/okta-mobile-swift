@@ -38,7 +38,7 @@ extension IDXRelatedObjectRoot {
     func loadRelatedObjects() throws {
         let nestedObjects = nestedRelatableObjects()
         let jsonMapping: [String: IDXHasRelatedObjects] = nestedObjects
-            .reduce(into: [String:IDXHasRelatedObjects]()) { (result, object) in
+            .reduce(into: [String: IDXHasRelatedObjects]()) { (result, object) in
                 for path in object.jsonPaths {
                     result[path] = object
                 }
@@ -70,7 +70,7 @@ extension Remediation.Collection: IDXContainsRelatableObjects {
 }
 
 extension Authenticator: IDXHasRelatedObjects {
-    func findRelatedObjects(using jsonMapping: [String : IDXHasRelatedObjects]) throws {
+    func findRelatedObjects(using jsonMapping: [String: IDXHasRelatedObjects]) throws {
         return
     }
     
@@ -105,7 +105,7 @@ extension Remediation: IDXHasRelatedObjects {
         
         guard authenticatorObjects.count == calculatedRelatesTo?.count ?? 0 else {
             #if DEBUG_RELATES_TO
-            throw IDXClientError.missingRelatedObject
+            throw IDXAuthenticationFlowError.missingRelatedObject
             #else
             return
             #endif
@@ -145,7 +145,7 @@ extension Remediation.Form.Field: IDXHasRelatedObjects {
         guard let relatesTo = relatesTo else { return }
         guard let mappedAuthenticator = jsonMapping[relatesTo] as? Authenticator else {
             #if DEBUG_RELATES_TO
-            throw IDXClientError.missingRelatedObject
+            throw IDXAuthenticationFlowError.missingRelatedObject
             #else
             return
             #endif

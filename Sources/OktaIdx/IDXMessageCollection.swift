@@ -11,56 +11,43 @@
 //
 
 import Foundation
+import AuthFoundation
 
-extension IDXClient.Message {
+extension Response.Message {
     /// Represents a collection of messages.
-    @objc(IDXMessageCollection)
-    public class Collection: NSObject {
+    public class Collection: Equatable, Hashable {
         /// Convenience to return the message associated with the given field.
-        @objc(messageForField:)
-        public func message(for field: Remediation.Form.Field) -> IDXClient.Message? {
+        public func message(for field: Remediation.Form.Field) -> Response.Message? {
             return allMessages.first(where: { $0.field == field })
         }
         
         /// Convenience method to return the message for a field with the given name.
-        @objc(messageForFieldNamed:)
-        public func message(for fieldName: String) -> IDXClient.Message? {
+        public func message(for fieldName: String) -> Response.Message? {
             return allMessages.first(where: { $0.field?.name == fieldName })
         }
         
-        @objc public var allMessages: [IDXClient.Message] {
-            guard let nestedMessages = nestedMessages else { return messages }
-            return messages + nestedMessages.compactMap { $0.object }
+        /// All messages within this collection, and all nested messages.
+        public var allMessages: [Response.Message] {
+            return messages + nestedMessages.compactMap { $0 }
         }
         
-        var nestedMessages: [Weak<IDXClient.Message>]?
+        @WeakCollection
+        var nestedMessages: [Response.Message?] = []
 
-        let messages: [IDXClient.Message]
-        init(messages: [IDXClient.Message]?, nestedMessages: [IDXClient.Message]? = nil) {
+        let messages: [Response.Message]
+        init(messages: [Response.Message]?, nestedMessages: [Response.Message]? = nil) {
             self.messages = messages ?? []
-            self.nestedMessages = nestedMessages?.map { Weak(object: $0) }
-
-            super.init()
+            self.nestedMessages = nestedMessages ?? []
         }
         
-        public override var description: String {
-            let logger = DebugDescription(self)
-            let components = [logger.address()]
-
-            return logger.brace(components.joined(separator: "; "))
+        public static func == (lhs: Collection, rhs: Collection) -> Bool {
+            lhs.messages == rhs.messages &&
+            lhs.nestedMessages == rhs.nestedMessages
         }
         
-        public override var debugDescription: String {
-            let logger = DebugDescription(self)
-            let components = [
-                "\(logger.format(messages.map(\.debugDescription), indent: .zero))"
-            ]
-            
-            return """
-            \(description) {
-            \(logger.format(components, indent: 4))
-            }
-            """
+        public func hash(into hasher: inout Hasher) {
+            hasher.combine(messages)
+            hasher.combine(nestedMessages)
         }
     }
 }

@@ -1,43 +1,42 @@
-/*
- * Copyright (c) 2021-Present, Okta, Inc. and/or its affiliates. All rights reserved.
- * The Okta software accompanied by this notice is provided pursuant to the Apache License, Version 2.0 (the "License.")
- *
- * You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0.
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
- * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- *
- * See the License for the specific language governing permissions and limitations under the License.
- */
+//
+// Copyright (c) 2021-Present, Okta, Inc. and/or its affiliates. All rights reserved.
+// The Okta software accompanied by this notice is provided pursuant to the Apache License, Version 2.0 (the "License.")
+//
+// You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0.
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
+// WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+//
+// See the License for the specific language governing permissions and limitations under the License.
+//
 
 import Foundation
-
-typealias V1 = IDXClient.APIVersion1
+import AuthFoundation
 
 extension Response {
-    internal convenience init(client: IDXClientAPI, v1 response: V1.IonResponse) throws {
-        let authenticators = try Authenticator.Collection(client: client, v1: response)
-        let remediations = Remediation.Collection(client: client, v1: response)
-        let successRemediationOption = Remediation(client: client, v1: response.successWithInteractionCode)
-        let messages = IDXClient.Message.Collection(messages: response.messages?.value.compactMap { IDXClient.Message(client: client, v1: $0) },
+    internal convenience init(flow: IDXAuthenticationFlowAPI, ion response: IonResponse) throws {
+        let authenticators = try Authenticator.Collection(flow: flow, ion: response)
+        let remediations = Remediation.Collection(flow: flow, ion: response)
+        let successRemediationOption = Remediation(flow: flow, ion: response.successWithInteractionCode)
+        let messages = Response.Message.Collection(messages: response.messages?.value.compactMap { Response.Message(flow: flow, ion: $0) },
                                                    nestedMessages: remediations.nestedMessages())
         
-        self.init(client: client,
+        self.init(flow: flow,
                   expiresAt: response.expiresAt,
                   intent: Intent(string: response.intent),
                   authenticators: authenticators,
                   remediations: remediations,
                   successRemediationOption: successRemediationOption,
                   messages: messages,
-                  app: IDXClient.Application(v1: response.app?.value),
-                  user: IDXClient.User(v1: response.user?.value))
+                  app: Response.Application(ion: response.app?.value),
+                  user: Response.User(ion: response.user?.value))
 
         try loadRelatedObjects()
     }
 }
 
-extension IDXClient.Message {
-    internal convenience init?(client: IDXClientAPI, v1 object: V1.IonMessage?) {
+extension Response.Message {
+    internal convenience init?(flow: IDXAuthenticationFlowAPI, ion object: IonMessage?) {
         guard let object = object else { return nil }
         self.init(type: object.type,
                   localizationKey: object.i18n?.key,
@@ -45,8 +44,8 @@ extension IDXClient.Message {
     }
 }
 
-extension IDXClient.Application {
-    internal convenience init?(v1 object: V1.IonApp?) {
+extension Response.Application {
+    internal init?(ion object: IonApp?) {
         guard let object = object else { return nil }
         self.init(id: object.id,
                   label: object.label,
@@ -54,8 +53,8 @@ extension IDXClient.Application {
     }
 }
 
-extension IDXClient.User {
-    internal convenience init?(v1 object: V1.IonUser?) {
+extension Response.User {
+    internal init?(ion object: IonUser?) {
         guard let object = object,
               let userId = object.id
         else { return nil }
@@ -63,13 +62,13 @@ extension IDXClient.User {
     }
 }
 
-extension V1.IonResponse {
+extension IonResponse {
     struct AuthenticatorMapping {
         let jsonPath: String
-        let authenticator: V1.IonAuthenticator
+        let authenticator: IonAuthenticator
     }
 
-    func authenticatorState(for authenticators: [V1.IonAuthenticator],
+    func authenticatorState(for authenticators: [IonAuthenticator],
                             in jsonPaths: [String]) -> Authenticator.State
     {
         var state = [OktaIdx.Authenticator.State]()
@@ -95,7 +94,7 @@ extension V1.IonResponse {
             }
         })
         
-        return state.sorted(by: { $0.rawValue > $1.rawValue }).first ?? .normal
+        return state.sorted(by: { $0 > $1 }).first ?? .normal
     }
     
     func allAuthenticators() -> [AuthenticatorMapping] {
@@ -138,7 +137,7 @@ extension V1.IonResponse {
 }
 
 extension Capability.PasswordSettings {
-    init?(with settings: [String:JSONValue]?) {
+    init?(with settings: [String: JSONValue]?) {
         guard let settings = settings,
               let complexity = settings["complexity"]?.toAnyObject() as? [String: Any]
         else { return nil }
@@ -155,13 +154,13 @@ extension Capability.PasswordSettings {
 }
 
 extension Authenticator.Collection {
-    convenience init(client: IDXClientAPI, v1 object: V1.IonResponse) throws {
-        let authenticatorMapping: [String:[V1.IonResponse.AuthenticatorMapping]]
+    convenience init(flow: IDXAuthenticationFlowAPI, ion object: IonResponse) throws {
+        let authenticatorMapping: [String: [IonResponse.AuthenticatorMapping]]
         authenticatorMapping = object
             .allAuthenticators()
             .reduce(into: [:]) { (result, mapping) in
                 let authenticatorType = "\(mapping.authenticator.type):\(mapping.authenticator.id ?? "-")"
-                var collection: [V1.IonResponse.AuthenticatorMapping] = result[authenticatorType] ?? []
+                var collection: [IonResponse.AuthenticatorMapping] = result[authenticatorType] ?? []
                 collection.append(mapping)
                 result[authenticatorType] = collection
             }
@@ -169,8 +168,8 @@ extension Authenticator.Collection {
         let authenticators: [Authenticator] = try authenticatorMapping
             .values
             .compactMap({ (mappingArray) in
-                return try Authenticator.makeAuthenticator(client: client,
-                                                                     v1: mappingArray.map(\.authenticator),
+                return try Authenticator.makeAuthenticator(flow: flow,
+                                                                     ion: mappingArray.map(\.authenticator),
                                                                      jsonPaths: mappingArray.map(\.jsonPath),
                                                                      in: object)
             })
@@ -180,16 +179,16 @@ extension Authenticator.Collection {
 }
 
 extension Remediation.Collection {
-    convenience init(client: IDXClientAPI, v1 object: V1.IonResponse?) {
+    convenience init(flow: IDXAuthenticationFlowAPI, ion object: IonResponse?) {
         var remediations: [Remediation] = object?.remediation?.value.compactMap { (value) in
-            Remediation.makeRemediation(client: client, v1: value)
+            Remediation.makeRemediation(flow: flow, ion: value)
         } ?? []
         
-        if let cancelResponse = Remediation.makeRemediation(client: client, v1: object?.cancel) {
+        if let cancelResponse = Remediation.makeRemediation(flow: flow, ion: object?.cancel) {
             remediations.append(cancelResponse)
         }
 
-        if let successResponse = Remediation.makeRemediation(client: client, v1: object?.successWithInteractionCode) {
+        if let successResponse = Remediation.makeRemediation(flow: flow, ion: object?.successWithInteractionCode) {
             remediations.append(successResponse)
         }
         
@@ -198,74 +197,74 @@ extension Remediation.Collection {
 }
 
 extension Capability.Sendable {
-    init?(client: IDXClientAPI, v1 authenticators: [V1.IonAuthenticator]) {
+    init?(flow: IDXAuthenticationFlowAPI, ion authenticators: [IonAuthenticator]) {
         guard let authenticator = authenticators.compactMap(\.send).first,
-              let remediation = Remediation.makeRemediation(client: client, v1: authenticator)
+              let remediation = Remediation.makeRemediation(flow: flow, ion: authenticator)
         else {
             return nil
         }
-        self.init(client: client, remediation: remediation)
+        self.init(remediation: remediation)
     }
 }
 
 extension Capability.Resendable {
-    init?(client: IDXClientAPI, v1 authenticators: [V1.IonAuthenticator]) {
+    init?(flow: IDXAuthenticationFlowAPI, ion authenticators: [IonAuthenticator]) {
         guard let authenticator = authenticators.compactMap(\.resend).first,
-              let remediation = Remediation.makeRemediation(client: client, v1: authenticator)
+              let remediation = Remediation.makeRemediation(flow: flow, ion: authenticator)
         else {
             return nil
         }
-        self.init(client: client, remediation: remediation)
+        self.init(remediation: remediation)
     }
 }
 
 extension Capability.Recoverable {
-    init?(client: IDXClientAPI, v1 authenticators: [V1.IonAuthenticator]) {
+    init?(flow: IDXAuthenticationFlowAPI, ion authenticators: [IonAuthenticator]) {
         guard let authenticator = authenticators.compactMap(\.recover).first,
-              let remediation = Remediation.makeRemediation(client: client, v1: authenticator)
+              let remediation = Remediation.makeRemediation(flow: flow, ion: authenticator)
         else {
             return nil
         }
-        self.init(client: client, remediation: remediation)
+        self.init(remediation: remediation)
     }
 }
 
 extension Capability.Pollable {
-    convenience init?(client: IDXClientAPI, v1 authenticators: [V1.IonAuthenticator]) {
+    convenience init?(flow: IDXAuthenticationFlowAPI, ion authenticators: [IonAuthenticator]) {
         guard let typeName = authenticators.first?.type,
               let authenticator = authenticators.compactMap(\.poll).first,
-              let remediation = Remediation.makeRemediation(client: client, v1: authenticator)
+              let remediation = Remediation.makeRemediation(flow: flow, ion: authenticator)
         else {
             return nil
         }
         
         let type = Authenticator.Kind(string: typeName)
-        self.init(client: client,
+        self.init(flow: flow,
                   authenticatorType: type,
                   remediation: remediation)
     }
 
-    convenience init?(client: IDXClientAPI, v1 form: V1.IonForm) {
+    convenience init?(flow: IDXAuthenticationFlowAPI, ion form: IonForm) {
         guard form.name == "enroll-poll" ||
                 form.name == "challenge-poll"
         else {
             return nil
         }
-        guard let remediation = Remediation.makeRemediation(client: client,
-                                                                      v1: form,
+        guard let remediation = Remediation.makeRemediation(flow: flow,
+                                                                      ion: form,
                                                                       createCapabilities: false)
         else {
             return nil
         }
         
-        self.init(client: client,
+        self.init(flow: flow,
                   authenticatorType: .app,
                   remediation: remediation)
     }
 }
 
 extension Capability.NumberChallenge {
-    init?(client: IDXClientAPI, v1 authenticators: [V1.IonAuthenticator]) {
+    init?(flow: IDXAuthenticationFlowAPI, ion authenticators: [IonAuthenticator]) {
         guard let answer = authenticators.compactMap(\.contextualData?["correctAnswer"]).first?.stringValue()
         else {
             return nil
@@ -276,7 +275,7 @@ extension Capability.NumberChallenge {
 }
 
 extension Capability.Profile {
-    init?(client: IDXClientAPI, v1 authenticators: [V1.IonAuthenticator]) {
+    init?(flow: IDXAuthenticationFlowAPI, ion authenticators: [IonAuthenticator]) {
         guard let profile = authenticators.compactMap(\.profile).first
         else {
             return nil
@@ -287,7 +286,7 @@ extension Capability.Profile {
 }
 
 extension Capability.PasswordSettings {
-    init?(client: IDXClientAPI, v1 authenticators: [V1.IonAuthenticator]) {
+    init?(flow: IDXAuthenticationFlowAPI, ion authenticators: [IonAuthenticator]) {
         guard let typeName = authenticators.first?.type,
               Authenticator.Kind(string: typeName) == .password,
               let settings = authenticators.compactMap(\.settings).first
@@ -300,7 +299,7 @@ extension Capability.PasswordSettings {
 }
 
 extension Capability.OTP {
-    init?(client: IDXClientAPI, v1 authenticators: [V1.IonAuthenticator]) {
+    init?(flow: IDXAuthenticationFlowAPI, ion authenticators: [IonAuthenticator]) {
         let methods = methodTypes(from: authenticators)
         guard methods.contains(.otp) || methods.contains(.totp)
         else {
@@ -312,7 +311,7 @@ extension Capability.OTP {
         
         guard type == .app,
               let contextualData = authenticators.compactMap(\.contextualData).first,
-              let qrcode = contextualData["qrcode"]?.toAnyObject() as? [String:String],
+              let qrcode = contextualData["qrcode"]?.toAnyObject() as? [String: String],
               qrcode["method"] == "embedded",
               let mimeType = qrcode["type"],
               let imageUrlString = qrcode["href"],
@@ -330,7 +329,7 @@ extension Capability.OTP {
 }
 
 extension Capability.SocialIDP {
-    init?(client: IDXClientAPI, v1 object: V1.IonForm) {
+    init?(flow: IDXAuthenticationFlowAPI, ion object: IonForm) {
         let type = Remediation.RemediationType(string: object.name)
         guard type == .redirectIdp,
               let idpObject = object.idp,
@@ -341,8 +340,7 @@ extension Capability.SocialIDP {
             return nil
         }
 
-        self.init(client: client,
-                  redirectUrl: object.href,
+        self.init(redirectUrl: object.href,
                   id: idpId,
                   idpName: idpName,
                   idpType: idpType,
@@ -350,11 +348,11 @@ extension Capability.SocialIDP {
     }
 }
 
-private func methodTypes(from authenticators: [V1.IonAuthenticator]) -> [Authenticator.Method]
+private func methodTypes(from authenticators: [IonAuthenticator]) -> [Authenticator.Method]
 {
     let methods = authenticators
         .compactMap(\.methods)
-        .reduce(into: [String:String]()) { (partialResult, items: [[String:String]]) in
+        .reduce(into: [String: String]()) { (partialResult, items: [[String: String]]) in
             items.forEach { item in
                 item.forEach { (key: String, value: String) in
                     partialResult[key] = value
@@ -372,16 +370,16 @@ private func methodTypes(from authenticators: [V1.IonAuthenticator]) -> [Authent
 }
 
 extension Authenticator {
-    static func makeAuthenticator(client: IDXClientAPI,
-                                  v1 authenticators: [V1.IonAuthenticator],
+    static func makeAuthenticator(flow: IDXAuthenticationFlowAPI,
+                                  ion authenticators: [IonAuthenticator],
                                   jsonPaths: [String],
-                                  in response: V1.IonResponse) throws -> Authenticator?
+                                  in response: IonResponse) throws -> Authenticator?
     {
         guard let first = authenticators.first else { return nil }
 
         let filteredTypes = Set(authenticators.map(\.type))
         guard filteredTypes.count == 1 else {
-            throw IDXClientError.internalMessage("Some mapped authenticators have differing types: \(filteredTypes.joined(separator: ", "))")
+            throw IDXAuthenticationFlowError.internalMessage("Some mapped authenticators have differing types: \(filteredTypes.joined(separator: ", "))")
         }
         
         let state = response.authenticatorState(for: authenticators, in: jsonPaths)
@@ -389,17 +387,17 @@ extension Authenticator {
         let methods = authenticators.compactMap(\.methods).first
 
         let capabilities: [AuthenticatorCapability?] = [
-            Capability.Profile(client: client, v1: authenticators),
-            Capability.Sendable(client: client, v1: authenticators),
-            Capability.Resendable(client: client, v1: authenticators),
-            Capability.Pollable(client: client, v1: authenticators),
-            Capability.Recoverable(client: client, v1: authenticators),
-            Capability.PasswordSettings(client: client, v1: authenticators),
-            Capability.NumberChallenge(client: client, v1: authenticators),
-            Capability.OTP(client: client, v1: authenticators)
+            Capability.Profile(flow: flow, ion: authenticators),
+            Capability.Sendable(flow: flow, ion: authenticators),
+            Capability.Resendable(flow: flow, ion: authenticators),
+            Capability.Pollable(flow: flow, ion: authenticators),
+            Capability.Recoverable(flow: flow, ion: authenticators),
+            Capability.PasswordSettings(flow: flow, ion: authenticators),
+            Capability.NumberChallenge(flow: flow, ion: authenticators),
+            Capability.OTP(flow: flow, ion: authenticators)
         ]
         
-        return Authenticator(client: client,
+        return Authenticator(flow: flow,
                                        v1JsonPaths: jsonPaths,
                                        state: state,
                                        id: first.id,
@@ -412,40 +410,44 @@ extension Authenticator {
 }
 
 extension Remediation {
-    static func makeRemediation(client: IDXClientAPI,
-                                v1 object: V1.IonForm?,
+    static func makeRemediation(flow: IDXAuthenticationFlowAPI,
+                                ion object: IonForm?,
                                 createCapabilities: Bool = true) -> Remediation?
     {
         guard let object = object else { return nil }
+
+        // swiftlint:disable force_unwrapping
         let form = Form(fields: object.value?.map({ (value) in
-          .init(client: client, v1: value)
+          .init(flow: flow, ion: value)
         })) ?? Form(fields: [])!
         let refresh = (object.refresh != nil) ? Double(object.refresh!) / 1000.0 : nil
-        
+        // swiftlint:enable force_unwrapping
+
         let capabilities: [RemediationCapability?] = createCapabilities ? [
-            Capability.SocialIDP(client: client, v1: object),
-            Capability.Pollable(client: client, v1: object)
+            Capability.SocialIDP(flow: flow, ion: object),
+            Capability.Pollable(flow: flow, ion: object)
         ] : []
         
-        return Remediation(client: client,
-                                     name: object.name,
-                                     method: object.method,
-                                     href: object.href,
-                                     accepts: object.accepts,
-                                     form: form,
-                                     refresh: refresh,
-                                     relatesTo: object.relatesTo,
-                                     capabilities: capabilities.compactMap { $0 })
+        return Remediation(flow: flow,
+                           name: object.name,
+                           method: object.method,
+                           href: object.href,
+                           accepts: object.accepts,
+                           form: form,
+                           refresh: refresh,
+                           relatesTo: object.relatesTo,
+                           capabilities: capabilities.compactMap { $0 })
     }
 
-    internal convenience init?(client: IDXClientAPI, v1 object: V1.IonForm?) {
+    internal convenience init?(flow: IDXAuthenticationFlowAPI, ion object: IonForm?) {
         guard let object = object,
               let form = Form(fields: object.value?.map({ (value) in
-                .init(client: client, v1: value)
+                .init(flow: flow, ion: value)
               }))
         else { return nil }
 
-        self.init(client: client,
+        // swiftlint:disable force_unwrapping
+        self.init(flow: flow,
                   name: object.name,
                   method: object.method,
                   href: object.href,
@@ -454,11 +456,12 @@ extension Remediation {
                   refresh: (object.refresh != nil) ? Double(object.refresh!) / 1000.0 : nil,
                   relatesTo: object.relatesTo,
                   capabilities: [])
+        // swiftlint:enable force_unwrapping
     }
 }
 
 extension Remediation.Form.Field {
-    internal convenience init(client: IDXClientAPI, v1 object: V1.IonFormValue) {
+    internal convenience init(flow: IDXAuthenticationFlowAPI, ion object: IonFormValue) {
         // Fields default to visible, except there are circumstances where
         // fields (such as `id`) don't properly include a `visible: false`. As a result,
         // we need to infer visibility from other values.
@@ -479,26 +482,14 @@ extension Remediation.Form.Field {
                   secret: object.secret ?? false,
                   relatesTo: object.relatesTo,
                   form: Remediation.Form(fields: object.form?.value.map({ (value) in
-                    .init(client: client, v1: value)
+                    .init(flow: flow, ion: value)
                   })),
                   options: object.options?.map { (value) in
-                    .init(client: client, v1: value)
+                    .init(flow: flow, ion: value)
                   },
                   messages: .init(messages: object.messages?.value.compactMap {
-            IDXClient.Message(client: client, v1: $0)
+            Response.Message(flow: flow, ion: $0)
                   }))
         self.messages.allMessages.forEach { $0.field = self }
-    }
-}
-
-extension Token {
-    internal convenience init(v1 object: V1.IonToken, configuration: IDXClient.Configuration) {
-        self.init(accessToken: object.accessToken,
-                  refreshToken: object.refreshToken,
-                  expiresIn: TimeInterval(object.expiresIn),
-                  idToken: object.idToken,
-                  scope: object.scope,
-                  tokenType: object.tokenType,
-                  configuration: configuration)
     }
 }

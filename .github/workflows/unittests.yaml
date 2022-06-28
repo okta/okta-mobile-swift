@@ -1,0 +1,80 @@
+name: Unit Tests
+
+on:
+  push:
+    paths:
+      - '.github/workflows/unittests.yml'
+      - 'Package.swift'
+      - 'Sources/**/*.swift'
+      - 'Samples/**/*.swift'
+      - 'Tests/**/*.swift'
+    branches:
+      - master
+      - dev-*
+      - release-*
+  pull_request:
+    branches:
+      - master
+      - dev-*
+      - release-*
+    paths:
+      - '.github/workflows/unittests.yml'
+      - 'Package.swift'
+      - 'Sources/**/*.swift'
+      - 'Samples/**/*.swift'
+      - 'Tests/**/*.swift'
+
+jobs:
+  SwiftBuild:
+    name: Swift Unit Tests
+    runs-on: macos-12
+    timeout-minutes: 10
+    env:
+      DEVELOPER_DIR: /Applications/Xcode_13.3.app/Contents/Developer
+    steps:
+    - name: Get swift version
+      run: swift --version
+    - uses: actions/checkout@master
+    - name: Build
+      run: swift build --build-tests
+    - name: Test
+      run: swift test
+
+  Cocoapods:
+    name: CocoaPods Build
+    runs-on: macos-12
+    timeout-minutes: 10
+    needs:
+      - SwiftBuild
+    env:
+      DEVELOPER_DIR: /Applications/Xcode_13.3.app/Contents/Developer
+    steps:
+    - uses: actions/checkout@master
+    - name: Lint CocoaPods
+      run: pod lib lint OktaIdx.podspec
+
+  XcodeBuild:
+    name: Xcode Unit Tests
+    runs-on: macos-12
+    timeout-minutes: 10
+    env:
+      DEVELOPER_DIR: /Applications/Xcode_13.3.app/Contents/Developer
+    steps:
+    - uses: actions/checkout@master
+    - name: Test OktaIdx
+      run: |
+        set -o pipefail
+        env NSUnbufferedIO=YES xcodebuild test \
+          -derivedDataPath ../Build/DerivedData \
+          -clonedSourcePackagesDirPath ../Build/ClonedSources \
+          -resultBundlePath ../TestResults/OktaIdx.xcresult \
+          -workspace OktaIdx.xcworkspace \
+          -scheme OktaIdx \
+          -sdk iphonesimulator \
+          -destination "platform=iOS Simulator,OS=latest,name=iPhone 12" | xcpretty
+    - uses: kishikawakatsumi/xcresulttool@v1
+      with:
+        path: |
+          ../TestResults/OktaIdx.xcresult
+        title: Unit Test Results
+      if: success() || failure()

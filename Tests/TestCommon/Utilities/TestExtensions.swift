@@ -26,6 +26,10 @@ extension Data {
             $0[$1.name] = $1.value
         }
     }
+    
+    func jsonEncoded() throws -> [String:Any?]? {
+        try JSONSerialization.jsonObject(with: self) as? [String:Any?]
+    }
 }
 
 extension String {
@@ -35,9 +39,37 @@ extension String {
     }
 }
 
-extension XCTestCase {
+enum TestError: Error {
+    case noBundleResourceFound
+}
+
+public extension XCTestCase {
     func data(for json: String) -> Data {
         return json.data(using: .utf8)!
+    }
+    
+    func data(from bundle: Bundle, for filename: String, in folder: String? = nil) throws -> Data {
+        let file = (filename as NSString).deletingPathExtension
+        var fileExtension = (filename as NSString).pathExtension
+        if fileExtension == "" {
+            fileExtension = "json"
+        }
+        
+        let subdirectory: String
+        if let folder = folder {
+            subdirectory = "SampleResponses/\(folder)"
+        } else {
+            subdirectory = "SampleResponses"
+        }
+        
+        guard let url = bundle.url(forResource: file,
+                                   withExtension: fileExtension,
+                                   subdirectory: subdirectory)
+        else {
+            throw TestError.noBundleResourceFound
+        }
+        
+        return try data(for: url)
     }
     
     func data(for file: URL) throws -> Data {
@@ -45,22 +77,37 @@ extension XCTestCase {
     }
     
     func decode<T>(type: T.Type, _ file: URL) throws -> T where T : Decodable {
-        let json = String(data: try data(for: file), encoding: .utf8)
-        return try decode(type: type, json!)
+        let json = try data(for: file)
+        return try decode(type: type, json)
     }
 
     func decode<T>(type: T.Type, _ file: URL, _ test: ((T) throws -> Void)) throws where T : Decodable {
-        let json = String(data: try data(for: file), encoding: .utf8)
-        try test(try decode(type: type, json!))
+        let json = try data(for: file)
+        try test(try decode(type: type, json))
+    }
+
+    func decode<T>(type: T.Type, _ json: String) throws -> T where T : Decodable & JSONDecodable {
+        try decode(type: type, json.data(using: .utf8)!)
     }
 
     func decode<T>(type: T.Type, _ json: String) throws -> T where T : Decodable {
-        let jsonData = data(for: json)
-        return try JSONDecoder.idxResponseDecoder.decode(T.self, from: jsonData)
+        try decode(type: type, json.data(using: .utf8)!)
     }
 
-    func decode<T>(type: T.Type, _ json: String, _ test: ((T) throws -> Void)) throws where T : Decodable {
+    func decode<T>(type: T.Type, _ json: Data) throws -> T where T : Decodable & JSONDecodable {
+        try decode(type: type, decoder: T.jsonDecoder, json)
+    }
+
+    func decode<T>(type: T.Type, _ json: Data) throws -> T where T : Decodable {
+        try decode(type: type, decoder: JSONDecoder(), json)
+    }
+
+    func decode<T>(type: T.Type, _ json: Data, _ test: ((T) throws -> Void)) throws where T : Decodable {
         try test(try decode(type: type, json))
+    }
+
+    func decode<T>(type: T.Type, decoder: JSONDecoder, _ json: Data) throws -> T where T : Decodable {
+        return try decoder.decode(T.self, from: json)
     }
 }
 
@@ -84,9 +131,9 @@ extension TestResponse where Self : Decodable {
             return try data(from: .json(try String(contentsOf: url)))
         case .json(let json):
             let data = json.data(using: .utf8)!
-            return try JSONDecoder.idxResponseDecoder.decode(Self.self, from: data)
+            return try IDXAuthenticationFlow.IntrospectRequest.jsonDecoder.decode(Self.self, from: data)
         }
     }
 }
 
-extension IDXClient.APIVersion1.IonResponse: TestResponse {}
+extension IonResponse: TestResponse {}

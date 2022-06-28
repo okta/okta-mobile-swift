@@ -11,6 +11,7 @@
 //
 
 import Foundation
+import AuthFoundation
 
 extension Remediation.Form {
     /// Describes an individual field within a form, used to collect and submit information from the user to proceed through the authentication workflow.
@@ -18,56 +19,47 @@ extension Remediation.Form {
     /// Nested form values can be accessed through keyed subscripting, for example:
     ///
     ///    credentials.form["passcode"]
-    @objc(IDXRemediationFormField)
-    final public class Field: NSObject {
+    public final class Field: NSObject {
         /// The programmatic name for this form value.
-        @objc public let name: String?
+        public let name: String?
         
         /// The user-readable label describing this form value.
-        @objc public let label: String?
+        public let label: String?
         
         /// The type of value expected from the client.
-        @objc public let type: String?
+        public let type: String?
         
         /// The value to send, if a default is provided from the Identity Engine.
-        @nonobjc public var value: IDXFormValue? {
-            get { _value as? IDXFormValue }
+        public var value: APIRequestArgument? {
+            get { _value as? APIRequestArgument }
             set {
                 guard isMutable else { return }
                 _value = newValue as AnyObject
             }
         }
         
-        @objc(value) public var objcValue: AnyObject? {
-            get { _value }
-            set {
-                guard isMutable else { return }
-                _value = newValue
-            }
-        }
-        
         /// Indicates whether or not the form value is read-only.
-        @objc public let isMutable: Bool
+        public let isMutable: Bool
         
         /// Indicates whether or not the form value is required to successfully proceed through this remediation option.
-        @objc public let isRequired: Bool
+        public let isRequired: Bool
         
         /// Indicates whether or not the value supplied in this form value should be considered secret, and not presented to the user.
-        @objc public let isSecret: Bool
+        public let isSecret: Bool
         
         /// For composite form fields, this contains the nested array of form values to group together.
-        @objc public let form: Remediation.Form?
+        public let form: Remediation.Form?
         
         /// For form fields that have specific options the user can choose from (e.g. security question, passcode, etc), this indicates the different form options that should be displayed to the user.
-        @objc public let options: [Remediation.Form.Field]?
+        public let options: [Remediation.Form.Field]?
         
         /// Indicates if this field is the selected option within a parent field's `options` array.
-        @objc public internal(set) var isSelectedOption: Bool
+        public internal(set) var isSelectedOption: Bool
         
         /// Allows a developer to set the selected option for a field that contains multiple `options`.
         ///
-        /// This will update the `isSelectedOption` on all relevant fields.
-        @objc public weak var selectedOption: Remediation.Form.Field? {
+        /// This will update the ``isSelectedOption`` on all relevant fields.
+        public weak var selectedOption: Remediation.Form.Field? {
             didSet {
                 guard let options = options else { return }
                 for option in options {
@@ -79,13 +71,13 @@ extension Remediation.Form {
         /// The list of messages sent from the server.
         ///
         /// Messages reported from the server at the FormValue level should be considered relevant to the individual form field, and as a result should be displayed to the user alongside any UI elements associated with it.
-        @objc public let messages: IDXClient.Message.Collection
+        public let messages: Response.Message.Collection
         
-        /// Relates this field to an authenticator, when a field is used to represent an authenticator. For example, when a field is used within a series of `options` to identify which authenticator to select.
-        @objc public internal(set) weak var authenticator: Authenticator?
+        /// Relates this field to an authenticator, when a field is used to represent an authenticator. For example, when a field is used within a series of ``options`` to identify which authenticator to select.
+        public internal(set) weak var authenticator: Authenticator?
 
         /// Returns the nested `form` field with the given name.
-        @objc public subscript(name: String) -> Field? {
+        public subscript(name: String) -> Field? {
             form?[name]
         }
         
@@ -123,7 +115,7 @@ extension Remediation.Form {
                       relatesTo: String? = nil,
                       form: Remediation.Form? = nil,
                       options: [Remediation.Form.Field]? = nil,
-                      messages: IDXClient.Message.Collection = .init(messages: nil))
+                      messages: Response.Message.Collection = .init(messages: nil))
         {
             self.name = name
             self.label = label
@@ -140,36 +132,6 @@ extension Remediation.Form {
             self.isSelectedOption = false
             
             super.init()
-        }
-        
-        public override var description: String {
-            let logger = DebugDescription(self)
-            let components = [
-                logger.address(),
-                "\(#keyPath(name)): \(name ?? "-")",
-                "\(#keyPath(label)): \(label ?? "-")",
-                "\(#keyPath(type)): \(type ?? "-")",
-                "value: \(value ?? "-")"
-            ]
-
-            return logger.brace(components.joined(separator: "; "))
-        }
-        
-        public override var debugDescription: String {
-            let components = [
-                "isVisible: \(isVisible)",
-                "\(#keyPath(isMutable)): \(isMutable)",
-                "\(#keyPath(isRequired)): \(isRequired)",
-                "\(#keyPath(isSecret)): \(isSecret)",
-                "\(#keyPath(options)): \n\(DebugDescription(self).format(options?.map(\.debugDescription) ?? [], indent: 4))",
-                "\(#keyPath(messages)): \(messages.debugDescription)"
-            ]
-            
-            return """
-            \(description) {
-            \(DebugDescription(self).format(components, indent: 4))
-            }
-            """
         }
     }
     

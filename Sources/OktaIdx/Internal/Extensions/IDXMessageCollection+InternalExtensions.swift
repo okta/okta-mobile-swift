@@ -13,33 +13,33 @@
 import Foundation
 
 protocol ContainsNestedMessages {
-    func nestedMessages() -> [IDXClient.Message]
+    func nestedMessages() -> [Response.Message]
 }
 
 extension Remediation.Collection: ContainsNestedMessages {
-    func nestedMessages() -> [IDXClient.Message] {
-        remediations.reduce(into: [IDXClient.Message]()) { (result, remediation) in
+    func nestedMessages() -> [Response.Message] {
+        remediations.reduce(into: [Response.Message]()) { (result, remediation) in
             result.append(contentsOf: remediation.nestedMessages())
         }
     }
 }
 
 extension Remediation: ContainsNestedMessages {
-    func nestedMessages() -> [IDXClient.Message] {
+    func nestedMessages() -> [Response.Message] {
         form.nestedMessages()
     }
 }
 
 extension Remediation.Form: ContainsNestedMessages {
-    func nestedMessages() -> [IDXClient.Message] {
-        allFields.reduce(into: [IDXClient.Message]()) { (result, field) in
+    func nestedMessages() -> [Response.Message] {
+        allFields.reduce(into: [Response.Message]()) { (result, field) in
             result.append(contentsOf: field.nestedMessages())
         }
     }
 }
 
 extension Remediation.Form.Field: ContainsNestedMessages {
-    func nestedMessages() -> [IDXClient.Message] {
+    func nestedMessages() -> [Response.Message] {
         var result = messages.allMessages
         if let form = form {
             result.append(contentsOf: form.nestedMessages())

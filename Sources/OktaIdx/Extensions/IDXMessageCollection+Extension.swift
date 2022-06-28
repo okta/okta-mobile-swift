@@ -12,9 +12,9 @@
 
 import Foundation
 
-extension IDXClient.Message.Collection: Collection {
+extension Response.Message.Collection: Collection {
     public typealias Index = Int
-    public typealias Element = IDXClient.Message
+    public typealias Element = Response.Message
 
     public var startIndex: Index {
         messages.startIndex

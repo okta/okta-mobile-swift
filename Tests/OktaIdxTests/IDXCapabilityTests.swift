@@ -18,30 +18,42 @@ import XCTest
 #endif
 
 class IDXCapabilityTests: XCTestCase {
-    let clientMock = IDXClientAPIMock(context: .init(configuration: .init(issuer: "https://example.com",
-                                                                          clientId: "Bar",
-                                                                          clientSecret: nil,
-                                                                          scopes: ["scope"],
-                                                                          redirectUri: "redirect:/"),
-                                                     state: "state",
-                                                     interactionHandle: "handle",
-                                                     codeVerifier: "verifier"))
+    var client: OAuth2Client!
+    var redirectUri: URL!
+    let urlSession = URLSessionMock()
+    var flowMock: IDXAuthenticationFlowMock!
     var remediation: Remediation!
+    var responseData: Data!
     var response: Response!
 
     override func setUpWithError() throws {
+        let issuer = try XCTUnwrap(URL(string: "https://example.com/oauth2/default"))
+        redirectUri = try XCTUnwrap(URL(string: "redirect:/uri"))
+
+        client = OAuth2Client(baseURL: issuer,
+                              clientId: "clientId",
+                              scopes: "openid profile",
+                              session: urlSession)
+        
+        let context = try IDXAuthenticationFlow.Context(interactionHandle: "handle", state: "state")
+        
+        flowMock = IDXAuthenticationFlowMock(context: context, client: client, redirectUri: redirectUri)
+
         let fields = try XCTUnwrap(Remediation.Form(fields: []))
-        remediation = Remediation(client: clientMock,
-                                            name: "remediation",
-                                            method: "POST",
-                                            href: URL(string: "https://example.com/idp/path")!,
-                                            accepts: nil,
-                                            form: fields,
-                                            refresh: nil,
-                                            relatesTo: nil,
-                                            capabilities: [])
-        response = try Response.response(client: clientMock,
-                                                   fileName: "introspect-response")
+        remediation = Remediation(flow: flowMock,
+                                  name: "remediation",
+                                  method: "POST",
+                                  href: URL(string: "https://example.com/idp/path")!,
+                                  accepts: "application/ion+json; okta-version=1.0.0",
+                                  form: fields,
+                                  refresh: nil,
+                                  relatesTo: nil,
+                                  capabilities: [])
+        responseData = try data(from: .module,
+                                for: "introspect-response")
+        response = try Response.response(flow: flowMock,
+                                         data: data(from: .module,
+                                                    for: "introspect-response"))
     }
 
     func testProfileCapability() throws {
@@ -50,44 +62,56 @@ class IDXCapabilityTests: XCTestCase {
     }
 
     func testRecoverableCapability() throws {
-        clientMock.expect(function: "proceed(remediation:completion:)",
-                          arguments: ["response": response as Any])
+        flowMock.expect(function: "send(response:completion:)",
+                        arguments: ["response": response as Any])
+        urlSession.expect("https://example.com/idp/path", data: responseData)
         
-        let capability = Capability.Recoverable(client: clientMock, remediation: remediation)
+        let wait = expectation(description: "Recover")
+        let capability = Capability.Recoverable(remediation: remediation)
         capability.recover { result in
+            defer { wait.fulfill() }
             guard case Result.success(_) = result else { XCTFail()
                 return
             }
         }
+        waitForExpectations(timeout: 1.0)
         
-        XCTAssertEqual(clientMock.recordedCalls.count, 1)
+        XCTAssertEqual(flowMock.recordedCalls.count, 1)
     }
 
     func testSendableCapability() throws {
-        clientMock.expect(function: "proceed(remediation:completion:)",
-                          arguments: ["response": response as Any])
-        
-        let capability = Capability.Sendable(client: clientMock, remediation: remediation)
-        capability.send { result in
-            guard case Result.success(_) = result else { XCTFail()
-                return
-            }
-        }
-        
-        XCTAssertEqual(clientMock.recordedCalls.count, 1)
-    }
+        flowMock.expect(function: "send(response:completion:)",
+                        arguments: ["response": response as Any])
+        urlSession.expect("https://example.com/idp/path", data: responseData)
 
-    func testResendableCapability() throws {
-        clientMock.expect(function: "proceed(remediation:completion:)",
-                          arguments: ["response": response as Any])
-        
-        let capability = Capability.Resendable(client: clientMock, remediation: remediation)
-        capability.resend { result in
+        let wait = expectation(description: "Recover")
+        let capability = Capability.Sendable(remediation: remediation)
+        capability.send { result in
+            defer { wait.fulfill() }
             guard case Result.success(_) = result else { XCTFail()
                 return
             }
         }
+        waitForExpectations(timeout: 1.0)
         
-        XCTAssertEqual(clientMock.recordedCalls.count, 1)
+        XCTAssertEqual(flowMock.recordedCalls.count, 1)
+    }
+    
+    func testResendableCapability() throws {
+        flowMock.expect(function: "send(response:completion:)",
+                        arguments: ["response": response as Any])
+        urlSession.expect("https://example.com/idp/path", data: responseData)
+        
+        let wait = expectation(description: "Recover")
+        let capability = Capability.Resendable(remediation: remediation)
+        capability.resend { result in
+            defer { wait.fulfill() }
+            guard case Result.success(_) = result else { XCTFail()
+                return
+            }
+        }
+        waitForExpectations(timeout: 1.0)
+        
+        XCTAssertEqual(flowMock.recordedCalls.count, 1)
     }
 }

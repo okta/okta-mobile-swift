@@ -14,10 +14,9 @@ import Foundation
 
 extension Remediation {
     /// Represents a collection of remediation options.
-    @objc(IDXRemediationCollection)
-    public class Collection: NSObject {
+    public class Collection {
         /// Returns a remediation based on its string name.
-        @objc public subscript(name: String) -> Remediation? {
+        public subscript(name: String) -> Remediation? {
             remediations.first { $0.name == name }
         }
         
@@ -30,28 +29,6 @@ extension Remediation {
         
         init(remediations: [Remediation]?) {
             self.remediations = remediations ?? []
-
-            super.init()
-        }
-        
-        public override var description: String {
-            let logger = DebugDescription(self)
-            let components = [logger.address()]
-
-            return logger.brace(components.joined(separator: "; "))
-        }
-        
-        public override var debugDescription: String {
-            let logger = DebugDescription(self)
-            let components = [
-                logger.format(remediations.map(\.debugDescription), indent: .zero)
-            ]
-            
-            return """
-            \(description) {
-            \(logger.format(components, indent: 4))
-            }
-            """
         }
     }
 }

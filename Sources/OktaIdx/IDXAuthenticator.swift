@@ -13,45 +13,52 @@
 import Foundation
 
 /// Represents information describing the available authenticators and enrolled authenticators.
-@objc(IDXAuthenticator)
-public class Authenticator: NSObject {
+///
+/// Instances of this class are used to identify the type of authenticator, or factor, that is associated with a user. These may be associated with form fields (for example, when selecting an authenticator to verify or to enrol in), with a ``Remediation`` (when challenging an authenticator for a verification code), or with an overall ``Response`` to indicate which authenticators have been enrolled, are being enrolled.
+public class Authenticator: Equatable {
     /// Unique identifier for this enrollment
-    @objc(identifier)
     public let id: String?
     
     /// The user-visible name to use for this authenticator enrollment.
-    @objc public let displayName: String?
+    public let displayName: String?
     
-    /// The type of this authenticator, or `unknown` if the type isn't represented by this enumeration.
-    @objc public let type: Kind
+    /// The type of this authenticator, or ``Kind/unknown`` if the type isn't represented by this enumeration.
+    public let type: Kind
     
     /// The key name for the authenticator
-    @objc public let key: String?
+    public let key: String?
     
     /// Indicates the state of this authenticator, either being an available authenticator, an enrolled authenticator, authenticating, or enrolling.
-    @objc public let state: State
+    public let state: State
     
     /// Describes the various methods this authenticator can perform.
-    @nonobjc public let methods: [Method]?
+    public let methods: [Method]?
     
-    /// Describes the various methods this authenticator can perform, as string values.
-    @objc public let methodNames: [String]?
-    
+    /// Set of objects that describe the capabilities this authenticator may have.
     public let capabilities: [AuthenticatorCapability]
     
-    private weak var client: IDXClientAPI?
+    public static func == (lhs: Authenticator, rhs: Authenticator) -> Bool {
+        lhs.id == rhs.id &&
+        lhs.displayName == rhs.displayName &&
+        lhs.type == rhs.type &&
+        lhs.key == rhs.key &&
+        lhs.state == rhs.state &&
+        lhs.methods == rhs.methods
+    }
+    
+    private weak var flow: IDXAuthenticationFlowAPI?
     let jsonPaths: [String]
-    init(client: IDXClientAPI,
+    init(flow: IDXAuthenticationFlowAPI,
          v1JsonPaths: [String],
          state: State,
          id: String?,
          displayName: String?,
          type: String,
          key: String?,
-         methods: [[String:String]]?,
+         methods: [[String: String]]?,
          capabilities: [AuthenticatorCapability])
     {
-        self.client = client
+        self.flow = flow
         self.jsonPaths = v1JsonPaths
         self.state = state
         self.id = id
@@ -62,35 +69,6 @@ public class Authenticator: NSObject {
             guard let type = $0["type"] else { return nil }
             return Method(string: type)
         }
-        self.methodNames = methods?.compactMap { $0["type"] }
         self.capabilities = capabilities
-        
-        super.init()
-    }
-    
-    public override var description: String {
-        let logger = DebugDescription(self)
-        let components = [
-            logger.address(),
-            "\(#keyPath(type)): \(type.rawValue)",
-            "\(#keyPath(state)): \(state.rawValue)",
-        ]
-        
-        return logger.brace(components.joined(separator: "; "))
-    }
-    
-    public override var debugDescription: String {
-        let components = [
-            "\(#keyPath(id)): \(id ?? "-")",
-            "\(#keyPath(displayName)): \(displayName ?? "-")",
-            "\(#keyPath(key)): \(key ?? "-")",
-            "\(#keyPath(methodNames)): \(methodNames ?? [])"
-        ]
-        
-        return """
-            \(description) {
-            \(DebugDescription(self).format(components, indent: 4))
-            }
-            """
     }
 }

@@ -29,9 +29,12 @@ class LandingViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        configurationUpdated(UserManager.shared.configuration)
+        if let configuration = ClientConfiguration.active {
+            configurationUpdated(configuration.idxFlow)
+        }
+        
         NotificationCenter.default.addObserver(forName: .configurationChanged, object: nil, queue: .main) { (note) in
-            self.configurationUpdated(note.object as? IDXClient.Configuration)
+            self.configurationUpdated(note.object as? IDXAuthenticationFlow)
         }
         
         if !isSignInAvailable {
@@ -39,11 +42,11 @@ class LandingViewController: UIViewController {
         }
     }
     
-    func configurationUpdated(_ configuration: IDXClient.Configuration?) {
-        isSignInAvailable = configuration != nil
-        if let configuration = configuration {
+    func configurationUpdated(_ flow: IDXAuthenticationFlow?) {
+        isSignInAvailable = flow != nil
+        if let configuration = flow {
             configurationInfoLabel.text = """
-            Client ID: \(configuration.clientId)
+            Client ID: \(configuration.client.configuration.clientId)
             """
             signin = Signin(using: configuration)
         } else {
@@ -78,11 +81,12 @@ class LandingViewController: UIViewController {
             return
         }
         
-        signin.signin(from: self) { (user, error) in
-            if let error = error {
+        signin.signin(from: self) { result in
+            switch result {
+            case .failure(let error):
                 print("Could not sign in: \(error)")
-            } else {
-                UserManager.shared.current = user
+            case .success(let credential):
+                Credential.default = credential
             }
         }
     }

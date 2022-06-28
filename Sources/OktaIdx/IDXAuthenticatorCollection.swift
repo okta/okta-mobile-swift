@@ -11,23 +11,23 @@
 //
 
 import Foundation
+import AuthFoundation
 
 extension Authenticator {
     /// Container that represents a collection of authenticators, providing conveniences for quickly accessing relevant objects.
-    @objc(IDXAuthenticatorCollection)
-    public class Collection: NSObject {
+    public class Collection {
         /// The current authenticator, if one is actively being enrolled or authenticated.
-        @objc public var current: Authenticator? {
+        public var current: Authenticator? {
             allAuthenticators.first { $0.state == .authenticating || $0.state == .enrolling }
         }
         
         /// The array of currently-enrolled authenticators.
-        @objc public var enrolled: [Authenticator] {
+        public var enrolled: [Authenticator] {
             allAuthenticators.filter { $0.state == .enrolled }
         }
         
         /// Access authenticators based on their type.
-        @objc public subscript(type: Authenticator.Kind) -> Authenticator? {
+        public subscript(type: Authenticator.Kind) -> Authenticator? {
             allAuthenticators.first(where: { $0.type == type })
         }
         
@@ -38,40 +38,17 @@ extension Authenticator {
         let authenticators: [Authenticator]
         init(authenticators: [Authenticator]?) {
             self.authenticators = authenticators ?? []
-
-            super.init()
-        }
-        
-        public override var description: String {
-            let logger = DebugDescription(self)
-            let components = [logger.address()]
-
-            return logger.brace(components.joined(separator: "; "))
-        }
-        
-        public override var debugDescription: String {
-            let components = [
-                DebugDescription(self).format(allAuthenticators.map(\.debugDescription), indent: .zero)
-            ]
-            
-            return """
-            \(description) {
-            \(DebugDescription(self).format(components, indent: 4))
-            }
-            """
         }
     }
     
     class WeakCollection: Collection {
         override var allAuthenticators: [Authenticator] {
-            weakAuthenticators.compactMap { $0.object }
+            weakAuthenticators.compactMap { $0.wrappedValue }
         }
         
         let weakAuthenticators: [Weak<Authenticator>]
         override init(authenticators: [Authenticator]?) {
-            weakAuthenticators = authenticators?.map({ (authenticator) in
-                Weak(object: authenticator)
-            }) ?? []
+            weakAuthenticators = authenticators?.compactMap({ Weak($0) }) ?? []
             
             super.init(authenticators: nil)
         }

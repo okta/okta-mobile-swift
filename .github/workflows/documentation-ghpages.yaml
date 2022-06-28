@@ -1,0 +1,51 @@
+name: Deploy Documentation
+
+on:
+  push:
+    branches:
+      - master
+
+env:
+  DEVELOPER_DIR: /Applications/Xcode_13.3.app/Contents/Developer
+
+# NOTE: The DocC `generate-documentation` plugin does not handle the 
+#       hostingBasePath well. In particular, it doesn't properly handle
+#       multiple child paths. Furthermore, the current 1.0.0 version of
+#       the plugin doesn't handle updates to the index.html or *.js
+#       files.
+#
+#       This workflow should be revisited once Xcode 14 GA is released
+#       so the newer DocC utilities can be utilized.
+jobs:
+  ExportToGHPages:
+    name: Export to Github Pages
+    runs-on: macos-12
+    steps:
+    - uses: actions/checkout@master
+    - name: Prepare directory
+      run: |
+        mkdir -p docs/development
+    - name: OktaIdx
+      run: |
+        swift package \
+          --allow-writing-to-directory docs \
+          generate-documentation \
+          --target OktaIdx \
+          --disable-indexing \
+          --transform-for-static-hosting \
+          --hosting-base-path PACKAGENAME \
+          --output-path docs/development/OktaIdx
+        find docs/development/OktaIdx -type f | while read file; do \
+          perl -pi -e "s#PACKAGENAME#okta-idx-swift/development/OktaIdx#g" "$file"; \
+        done
+        find docs/development/OktaIdx -type f -name '*.js' | while read file; do \
+          perl -pi -e "s#\\{\\{BASE_PATH\\}\\}#okta-idx-swift/development/OktaIdx#g" "$file"; \
+          perl -pi -e 's#n\+"(theme-settings.json)"#"/okta-idx-swift/development/OktaIdx/$1"#g' "$file"; \
+        done
+        perl -pi -e "s#/(js|css)#/okta-idx-swift/development/OktaIdx/\$1#g" docs/development/OktaIdx/index.html
+    - name: Deploy documentation to Github Pages
+      uses: peaceiris/actions-gh-pages@v3
+      with:
+        github_token: ${{ secrets.GITHUB_TOKEN }}
+        publish_dir: ./docs
+        keep_files: true

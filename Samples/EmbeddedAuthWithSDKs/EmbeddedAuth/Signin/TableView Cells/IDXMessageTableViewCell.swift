@@ -13,7 +13,7 @@
 import UIKit
 import OktaIdx
 
-extension IDXClient.Message.Severity {
+extension Response.Message.Severity {
     var image: UIImage? {
         switch self {
         case .error:
@@ -42,7 +42,7 @@ class IDXMessageTableViewCell: UITableViewCell {
     var update: (() -> Void)? = nil
     
     enum Style: Hashable {
-        case message(message: IDXClient.Message)
+        case message(message: Response.Message)
         case enrollment(action: Signin.EnrollmentAction)
         
         var image: UIImage? {

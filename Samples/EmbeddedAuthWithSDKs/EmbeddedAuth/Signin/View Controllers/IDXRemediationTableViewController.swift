@@ -100,8 +100,7 @@ class IDXRemediationTableViewController: UITableViewController, IDXResponseContr
         
         poll?.stopPolling()
         if let socialAuth = remediationOption?.socialIdp,
-           let idx = signin.idx,
-           let scheme = URL(string: idx.context.configuration.redirectUri)?.scheme
+           let scheme = signin.flow.redirectUri.scheme
         {
             let session = ASWebAuthenticationSession(url: socialAuth.redirectUrl,
                                                      callbackURLScheme: scheme)
@@ -114,27 +113,29 @@ class IDXRemediationTableViewController: UITableViewController, IDXResponseContr
                     return
                 }
                 
-                let result = signin.idx?.redirectResult(for: callbackURL)
+                let result = signin.flow.redirectResult(for: callbackURL)
                 
                 switch result {
                 case .authenticated:
-                    idx.exchangeCode(redirect: callbackURL) { (token, error) in
-                        if let error = error {
+                    signin.flow.exchangeCode(redirect: callbackURL) { result in
+                        switch result {
+                        case .failure(let error):
                             signin.failure(with: error)
-                        } else if let token = token {
+                        case .success(let token):
                             signin.success(with: token)
                         }
                     }
                     
                 case .remediationRequired:
-                    idx.resume { (response, error) in
-                        if let error = error {
+                    signin.flow.resume { result in
+                        switch result {
+                        case .failure(let error):
                             signin.failure(with: error)
-                        } else if let response = response {
+                        case .success(let response):
                             signin.proceed(to: response)
                         }
                     }
-                case .invalidContext, .invalidRedirectUrl, .none:
+                case .invalidContext, .invalidRedirectUrl:
                     return
                 }
             }
@@ -148,15 +149,13 @@ class IDXRemediationTableViewController: UITableViewController, IDXResponseContr
             return
         }
 
-        remediationOption?.proceed { [weak self] (response, error) in
-            guard let response = response else {
-                if let error = error {
-                    self?.showError(error, recoverable: true)
-                }
-                return
+        remediationOption?.proceed { [weak self] result in
+            switch result {
+            case .failure(let error):
+                self?.showError(error, recoverable: true)
+            case .success(let response):
+                signin.proceed(to: response)
             }
-            
-            signin.proceed(to: response)
         }
     }
     
@@ -170,17 +169,15 @@ class IDXRemediationTableViewController: UITableViewController, IDXResponseContr
             button.isEnabled = false
         }
 
-        response?.cancel { [weak self] (response, error) in
-            guard let response = response else {
-                if let error = error {
-                    self?.showError(error)
-                    
-                    signin.failure(with: error)
-                }
-                return
+        response?.cancel { [weak self] result in
+            switch result {
+            case .failure(let error):
+                self?.showError(error)
+
+                signin.failure(with: error)
+            case .success(let response):
+                signin.proceed(to: response)
             }
-            
-            signin.proceed(to: response)
         }
     }
     

@@ -14,7 +14,7 @@ import UIKit
 import OktaIdx
 
 class TokenDetailViewController: UIViewController {
-    var client: IDXClient?
+    var client: IDXAuthenticationFlow?
     var token: Token?
     
     @IBOutlet weak var textView: UITextView!
@@ -52,7 +52,7 @@ class TokenDetailViewController: UIViewController {
         addString(to: string, title: "Token type", value: token.tokenType)
         
         if let idToken = token.idToken {
-            addString(to: string, title: "ID token", value: idToken)
+            addString(to: string, title: "ID token", value: idToken.rawValue)
         }
         
         textView.attributedText = string

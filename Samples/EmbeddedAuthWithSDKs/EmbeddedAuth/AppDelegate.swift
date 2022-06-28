@@ -11,6 +11,7 @@
  */
 
 import UIKit
+import AuthFoundation
 
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -27,7 +28,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         for argument in ProcessInfo.processInfo.arguments {
             switch argument {
             case "--reset-user":
-                UserManager.shared.current = nil
+                try? Credential.default?.remove()
             default: break
             }
         }

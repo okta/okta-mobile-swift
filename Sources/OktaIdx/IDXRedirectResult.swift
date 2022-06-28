@@ -12,10 +12,9 @@
 
 import Foundation
 
-extension IDXClient {
+extension IDXAuthenticationFlow {
     /// Result of parsing a redirect URL.
-    @objc(IDXRedirectResult)
-    public enum RedirectResult: Int {
+    public enum RedirectResult {
         /// Redirect URL contains Authorization Code.
         case authenticated
         /// Remediation required to proceed authorization.

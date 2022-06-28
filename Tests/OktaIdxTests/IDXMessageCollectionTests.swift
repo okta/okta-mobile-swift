@@ -18,38 +18,37 @@ import XCTest
 #endif
 
 class IDXMessageCollectionTests: XCTestCase {
-    let configuration = IDXClient.Configuration(issuer: "https://foo.oktapreview.com/oauth2/default",
-                                                clientId: "clientId",
-                                                clientSecret: "clientSecret",
-                                                scopes: ["all"],
-                                                redirectUri: "redirect:/uri")
-    var context: IDXClient.Context!
-    var session: URLSessionMock!
-    var api: IDXClient.APIVersion1!
-    var client: IDXClientAPIMock!
-    
+    var client: OAuth2Client!
+    let urlSession = URLSessionMock()
+    var flowMock: IDXAuthenticationFlowMock!
+
     override func setUpWithError() throws {
-        session = URLSessionMock()
-        context = IDXClient.Context(configuration: configuration, state: "state", interactionHandle: "foo", codeVerifier: "bar")
-        client = IDXClientAPIMock(context: context)
-        api = IDXClient.APIVersion1(with: configuration,
-                                    session: session)
-        api.client = client
+        let issuer = try XCTUnwrap(URL(string: "https://example.com/oauth2/default"))
+        let redirectUri = try XCTUnwrap(URL(string: "redirect:/uri"))
+        client = OAuth2Client(baseURL: issuer,
+                              clientId: "clientId",
+                              scopes: "openid profile",
+                              session: urlSession)
+        
+        let context = try IDXAuthenticationFlow.Context(interactionHandle: "handle", state: "state")
+        
+        flowMock = IDXAuthenticationFlowMock(context: context, client: client, redirectUri: redirectUri)
     }
 
     func testResponse() throws {
-        let response = try XCTUnwrap(Response.response(client: client,
-                                                                 fileName: "invalid-password-response"))
+        let response = try XCTUnwrap(Response.response(
+            flow: flowMock,
+            data: data(from: .module,
+                       for: "invalid-password-response")))
         XCTAssertEqual(response.messages.count, 0)
         XCTAssertEqual(response.messages.allMessages.count, 1)
         
         let remediation = try XCTUnwrap(response.remediations[.enrollAuthenticator])
         XCTAssertEqual(remediation.messages.count, 0)
         XCTAssertEqual(remediation.messages.allMessages.count, 1)
-
+        
         let field = try XCTUnwrap(remediation["credentials.passcode"])
         XCTAssertEqual(field.messages.count, 1)
         XCTAssertEqual(field.messages.allMessages.count, 1)
-
     }
 }

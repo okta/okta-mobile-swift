@@ -30,17 +30,15 @@ class IDXGetTokenViewController: UIViewController, IDXResponseController {
             return
         }
         
-        response.exchangeCode { [weak self] (token, error) in
-            guard let token = token else {
-                if let error = error {
-                    self?.showError(error)
-                    
-                    signin.failure(with: error)
-                }
-                return
+        response.exchangeCode { [weak self] result in
+            switch result {
+            case .failure(let error):
+                self?.showError(error)
+                
+                signin.failure(with: error)
+            case .success(let token):
+                signin.success(with: token)
             }
-            
-            signin.success(with: token)
         }
     }
 }

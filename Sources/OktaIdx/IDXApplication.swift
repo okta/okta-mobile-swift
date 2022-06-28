@@ -12,42 +12,16 @@
 
 import Foundation
 
-extension IDXClient {
+extension Response {
     /// Provides information about the client application being authenticated against.
-    @objc(IDXApplication)
-    public class Application: NSObject {
+    public struct Application {
         /// Unique identifier for this application.
-        @objc(identifier)
         public let id: String
         
         /// Label for this application.
-        @objc public let label: String
+        public let label: String
         
         /// Name for this application.
-        @objc public let name: String
-        
-        internal init(id: String, label: String, name: String) {
-            self.id = id
-            self.label = label
-            self.name = name
-         
-            super.init()
-        }
-        
-        public override var description: String {
-            let logger = DebugDescription(self)
-            let components = [
-                logger.address(),
-                "\(#keyPath(id)): \(id)",
-                "\(#keyPath(label)): \(label)",
-                "\(#keyPath(name)): \(name)",
-            ]
-            
-            return logger.brace(components.joined(separator: "; "))
-        }
-        
-        public override var debugDescription: String {
-            description
-        }
+        public let name: String
     }
 }

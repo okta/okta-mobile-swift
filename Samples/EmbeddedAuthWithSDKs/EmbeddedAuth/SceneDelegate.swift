@@ -11,6 +11,7 @@
  */
 
 import UIKit
+import AuthFoundation
 
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
@@ -35,7 +36,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
     func sceneDidBecomeActive(_ scene: UIScene) {
         guard let windowScene = scene as? UIWindowScene,
-              UserManager.shared.current == nil
+              Credential.default == nil
         else {
             return
         }
@@ -58,7 +59,4 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         // Use this method to save data, release shared resources, and store enough scene-specific state information
         // to restore the scene back to its current state.
     }
-
-
 }
-

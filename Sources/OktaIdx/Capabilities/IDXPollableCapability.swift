@@ -20,35 +20,33 @@ extension Capability {
         
         /// Starts the polling process.
         ///
-        /// The action will be continually polled in the background either until `stopPolling` is called, or when the authenticator has finished. The completion block is invoked once the user has completed the action out-of-band, or when an error is received.
+        /// The action will be continually polled in the background either until ``stopPolling`` is called, or when the authenticator has finished. The completion block is invoked once the user has completed the action out-of-band, or when an error is received.
         /// - Parameter completion: Completion handler when the polling is complete, or `nil` if the developer does not need to handle the response
-        public func startPolling(completion: IDXClient.ResponseResult? = nil) {
+        public func startPolling(completion: IDXAuthenticationFlow.ResponseResult? = nil) {
             // Stop any previous polling
             stopPolling()
             
             let authenticatorType = self.authenticatorType
             let handler = PollingHandler(pollOption: remediation)
-            handler.start { (response, error) in
-                guard let response = response else {
-                    if let error = error {
-                        completion?(.failure(.internalError(error)))
-                    } else {
-                        completion?(.failure(.invalidResponseData))
+            handler.start { result in
+                switch result {
+                case .failure(let error):
+                    completion?(.failure(error))
+                    return nil
+                    
+                case .success(let response):
+                    // If we don't get another email authenticator back, we know the
+                    // magic link was clicked, and we can proceed to the completion block.
+                    guard let currentAuthenticator = response.authenticators.current,
+                          let nextPoll = currentAuthenticator.capability(Capability.Pollable.self),
+                          currentAuthenticator.type == authenticatorType
+                    else {
+                        completion?(.success(response))
+                        return nil
                     }
-                    return nil
+                    
+                    return nextPoll.remediation
                 }
-                
-                // If we don't get another email authenticator back, we know the
-                // magic link was clicked, and we can proceed to the completion block.
-                guard let currentAuthenticator = response.authenticators.current,
-                      let nextPoll = currentAuthenticator.capability(Capability.Pollable.self),
-                      currentAuthenticator.type == authenticatorType
-                else {
-                    completion?(.success(response))
-                    return nil
-                }
-                
-                return nextPoll.remediation
             }
             pollHandler = handler
         }
@@ -59,15 +57,15 @@ extension Capability {
             pollHandler = nil
         }
         
-        internal private(set) weak var client: IDXClientAPI?
+        internal private(set) weak var flow: IDXAuthenticationFlowAPI?
         internal private(set) var remediation: Remediation
         internal let authenticatorType: Authenticator.Kind
         private var pollHandler: PollingHandler?
-        internal init(client: IDXClientAPI,
+        internal init(flow: IDXAuthenticationFlowAPI,
                       authenticatorType: Authenticator.Kind,
                       remediation: Remediation)
         {
-            self.client = client
+            self.flow = flow
             self.authenticatorType = authenticatorType
             self.remediation = remediation
         }
@@ -79,7 +77,7 @@ extension Capability {
 extension Capability.Pollable {
     /// Starts the polling process asynchronously.
     ///
-    /// The action will be continually polled in the background either until `stopPolling` is called, or when the authenticator has finished.
+    /// The action will be continually polled in the background either until ``stopPolling`` is called, or when the authenticator has finished.
     /// - Returns: The next response after polling completes successfully
     public func startPolling() async throws -> Response {
         try await withCheckedThrowingContinuation { continuation in

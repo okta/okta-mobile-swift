@@ -11,38 +11,42 @@
  */
 
 import Foundation
+import XCTest
+
+import AuthFoundation
 @testable import OktaIdx
 
+#if os(Linux)
+import FoundationNetworking
+#endif
+
 extension Response {
-    class func response(client: IDXClientAPI,
-                        folderName: String? = nil,
-                        fileName: String) throws -> Response
+    class func response(flow: IDXAuthenticationFlowAPI,
+                        data: Data) throws -> Response
     {
-        let path = Bundle.testResource(folderName: folderName, fileName: fileName)
-        let data: Data!
-        do {
-            data = try Data(contentsOf: path)
-        } catch {
-            throw IDXClientError.invalidHTTPResponse
-        }
-        
-        let response = try JSONDecoder.idxResponseDecoder.decode(IDXClient.APIVersion1.IonResponse.self, from: data)
-        return try Response(client: client, v1: response)
+        let response = try IDXAuthenticationFlow.IntrospectRequest.jsonDecoder.decode(IonResponse.self, from: data)
+        return try Response(flow: flow, ion: response)
     }
 }
 
 class URLSessionMock: URLSessionProtocol {
     struct Call {
+        let url: String
         let data: Data?
         let response: HTTPURLResponse?
         let error: Error?
     }
     
+    var requestDelay: TimeInterval?
+
     private(set) var requests: [URLRequest] = []
-    
-    private var calls: [String: Call] = [:]
-    func expect(_ url: String, call: Call) {
-        calls[url] = call
+    func resetRequests() {
+        requests.removeAll()
+    }
+
+    private(set) var expectedCalls: [Call] = []
+    func expect(call: Call) {
+        expectedCalls.append(call)
     }
     
     func expect(_ url: String,
@@ -56,53 +60,81 @@ class URLSessionMock: URLSessionProtocol {
                                        httpVersion: "http/1.1",
                                        headerFields: ["Content-Type": contentType])
         
-        expect(url, call: Call(data: data,
-                               response: response,
-                               error: error))
-    }
-
-    func expect(_ url: String,
-                folderName: String? = nil,
-                fileName: String,
-                statusCode: Int = 200,
-                contentType: String = "application/x-www-form-urlencoded",
-                error: Error? = nil) throws
-    {
-        let path = Bundle.testResource(folderName: folderName, fileName: fileName)
-        let data = try Data(contentsOf: path)
-        
-        expect(url,
-               data: data,
-               statusCode: statusCode,
-               contentType: contentType,
-               error: error)
+        expect(call: Call(url: url,
+                          data: data,
+                          response: response,
+                          error: error))
     }
 
     func call(for url: String) -> Call? {
-        return calls.removeValue(forKey: url)
+        guard let index = expectedCalls.firstIndex(where: { call in
+            call.url == url
+        }) else {
+            XCTFail("Mock URL \(url) not found")
+            return nil
+        }
+        
+        return expectedCalls.remove(at: index)
     }
     
-    func dataTaskWithRequest(with request: URLRequest, completionHandler: @escaping DataTaskResult) -> URLSessionDataTaskProtocol {
-        requests.append(request)
+    func dataTaskWithRequest(_ request: URLRequest, completionHandler: @escaping (Data?, URLResponse?, Error?) -> Void) -> URLSessionDataTaskProtocol {
         let response = call(for: request.url!.absoluteString)
-        return URLSessionDataTaskMock(data: response?.data,
+        requests.append(request)
+        return URLSessionDataTaskMock(session: self,
+                                      data: response?.data,
                                       response: response?.response,
                                       error: response?.error,
                                       completionHandler: completionHandler)
     }
+
+    func dataTask(with request: URLRequest, completionHandler: @escaping (Data?, URLResponse?, Error?) -> Void) -> URLSessionDataTaskProtocol {
+        let response = call(for: request.url!.absoluteString)
+        requests.append(request)
+        return URLSessionDataTaskMock(session: self,
+                                      data: response?.data,
+                                      response: response?.response,
+                                      error: response?.error,
+                                      completionHandler: completionHandler)
+    }
+    
+    #if swift(>=5.5.1)
+    @available(iOS 15.0, tvOS 15.0, macOS 12.0, watchOS 8, *)
+    func data(for request: URLRequest, delegate: URLSessionTaskDelegate?) async throws -> (Data, URLResponse) {
+        requests.append(request)
+
+        let response = call(for: request.url!.absoluteString)
+        if let error = response?.error {
+            throw error
+        }
+        
+        else if let data = response?.data,
+                let response = response?.response
+        {
+            return (data, response)
+        }
+        
+        else {
+            throw APIClientError.unknown
+        }
+    }
+    #endif
 }
 
 class URLSessionDataTaskMock: URLSessionDataTaskProtocol {
+    weak var session: URLSessionMock?
+    
     let completionHandler: (Data?, HTTPURLResponse?, Error?) -> Void
     let data: Data?
     let response: HTTPURLResponse?
     let error: Error?
     
-    init(data: Data?,
+    init(session: URLSessionMock,
+         data: Data?,
          response: HTTPURLResponse?,
          error: Error?,
          completionHandler: @escaping (Data?, HTTPURLResponse?, Error?) -> Void)
     {
+        self.session = session
         self.completionHandler = completionHandler
         self.data = data
         self.response = response
@@ -110,6 +142,16 @@ class URLSessionDataTaskMock: URLSessionDataTaskProtocol {
     }
     
     func resume() {
-        self.completionHandler(data, response, error)
+        guard let delay = session?.requestDelay else {
+            DispatchQueue.global().async {
+                self.completionHandler(self.data, self.response, self.error)
+            }
+            return
+        }
+        
+        DispatchQueue.global().asyncAfter(deadline: .now() + delay) {
+            self.completionHandler(self.data, self.response, self.error)
+        }
     }
 }
+

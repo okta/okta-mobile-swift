@@ -18,28 +18,28 @@ import XCTest
 #endif
 
 class IDXAuthenticatorCollectionTests: XCTestCase {
-    let configuration = IDXClient.Configuration(issuer: "https://foo.oktapreview.com/oauth2/default",
-                                                clientId: "clientId",
-                                                clientSecret: "clientSecret",
-                                                scopes: ["all"],
-                                                redirectUri: "redirect:/uri")
-    var context: IDXClient.Context!
-    var session: URLSessionMock!
-    var api: IDXClient.APIVersion1!
-    var client: IDXClientAPIMock!
-    
+    var client: OAuth2Client!
+    let urlSession = URLSessionMock()
+    var flowMock: IDXAuthenticationFlowMock!
+
     override func setUpWithError() throws {
-        session = URLSessionMock()
-        context = IDXClient.Context(configuration: configuration, state: "state", interactionHandle: "foo", codeVerifier: "bar")
-        client = IDXClientAPIMock(context: context)
-        api = IDXClient.APIVersion1(with: configuration,
-                                    session: session)
-        api.client = client
+        let issuer = try XCTUnwrap(URL(string: "https://example.com/oauth2/default"))
+        let redirectUri = try XCTUnwrap(URL(string: "redirect:/uri"))
+        client = OAuth2Client(baseURL: issuer,
+                              clientId: "clientId",
+                              scopes: "all",
+                              session: urlSession)
+        
+        let context = try IDXAuthenticationFlow.Context(interactionHandle: "handle", state: "state")
+        
+        flowMock = IDXAuthenticationFlowMock(context: context, client: client, redirectUri: redirectUri)
     }
 
     func testCurrentAuthenticatorWithoutRelatesTo() throws {
-        let response = try XCTUnwrap(Response.response(client: client,
-                                                                 fileName: "identify-single-form-response"))
+        let response = try XCTUnwrap(Response.response(
+            flow: flowMock,
+            data: data(from: .module,
+                       for: "identify-single-form-response")))
         XCTAssertEqual(response.authenticators.count, 1)
         XCTAssertEqual(response.authenticators.first?.type, .password)
         
@@ -49,8 +49,10 @@ class IDXAuthenticatorCollectionTests: XCTestCase {
     }
     
     func testAuthenticatorEnrollmentWithoutId() throws {
-        let response = try XCTUnwrap(Response.response(client: client,
-                                                                 fileName: "account-recovery"))
+        let response = try XCTUnwrap(Response.response(
+            flow: flowMock,
+            data: data(from: .module,
+                       for: "account-recovery")))
         
         let remediation = try XCTUnwrap(response.remediations[.selectAuthenticatorAuthenticate])
         let emailOption = try XCTUnwrap(remediation["authenticator"]?.options?.first)

@@ -12,13 +12,26 @@
 
 import XCTest
 @testable import OktaIdx
+@testable import TestCommon
 
-#if !SWIFT_PACKAGE
 class UserAgentTests: XCTestCase {
     var regex: NSRegularExpression!
-    
+    var issuer: URL!
+    var redirectUri: URL!
+    var client: OAuth2Client!
+    var flow: IDXAuthenticationFlow!
+    let urlSession = URLSessionMock()
+
     override func setUpWithError() throws {
-        let pattern = "okta-idx-swift/[\\d\\.]+ xctest/[\\d+\\.]+ CFNetwork/[\\d+\\.]+ Device/\\S+ (iOS|watchOS|tvOS|macOS)/[\\d\\.]+"
+        issuer = try XCTUnwrap(URL(string: "https://example.com/oauth2/default"))
+        redirectUri = try XCTUnwrap(URL(string: "redirect:/uri"))
+        client = OAuth2Client(baseURL: issuer,
+                              clientId: "clientId",
+                              scopes: "openid profile",
+                              session: urlSession)
+        flow = IDXAuthenticationFlow(redirectUri: redirectUri, client: client)
+
+        let pattern = "okta-authfoundation-swift/[\\d\\.]+ okta-idx-swift/[\\d\\.]+ (iOS|watchOS|tvOS|macOS|linux)/[\\d\\.]+ Device/\\S+"
         regex = try NSRegularExpression(pattern: pattern, options: [])
     }
     
@@ -29,54 +42,42 @@ class UserAgentTests: XCTestCase {
         return regex.firstMatch(in: userAgent, options: [], range: range)
     }
     
-    func testUserAgent() throws {
-        let userAgent = buildUserAgent()
+    func testInteractRequest() throws {
+        let request = IDXAuthenticationFlow.InteractRequest(baseURL: issuer,
+                                                            clientId: "ClientId",
+                                                            scope: "all",
+                                                            redirectUri: redirectUri,
+                                                            options: nil,
+                                                            pkce: PKCE()!)
+        let urlRequest = try request.request(for: client)
+        let userAgent = urlRequest.allHTTPHeaderFields?["User-Agent"]
         XCTAssertNotNil(userAgent)
-        
+
+        let match = regexMatch(in: userAgent)
+        XCTAssertNotNil(match)
+    }
+
+    func testIntrospectRequest() throws {
+        let request = try IDXAuthenticationFlow.IntrospectRequest(baseURL: issuer,
+                                                                  interactionHandle: "abc123")
+        let urlRequest = try request.request(for: client)
+        let userAgent = urlRequest.allHTTPHeaderFields?["User-Agent"]
+        XCTAssertNotNil(userAgent)
+
         let match = regexMatch(in: userAgent)
         XCTAssertNotNil(match)
     }
     
-    func testInteractRequest() {
-        let request = IDXClient.APIVersion1.InteractRequest(options: [:], codeChallenge: "challenge")
-        let userAgent = request.httpHeaders["User-Agent"]
-        XCTAssertNotNil(userAgent)
-
-        let match = regexMatch(in: userAgent)
-        XCTAssertNotNil(match)
-    }
-
-    func testIntrospectRequest() {
-        let request = IDXClient.APIVersion1.IntrospectRequest(interactionHandle: "abc123")
-        let userAgent = request.httpHeaders["User-Agent"]
-        XCTAssertNotNil(userAgent)
-
-        let match = regexMatch(in: userAgent)
-        XCTAssertNotNil(match)
-    }
-    
-    func testTokenRequest() {
-        let request = IDXClient.APIVersion1.TokenRequest(method: "POST",
-                                                         href: URL(string: "https://example.com")!,
-                                                         accepts: .formEncoded,
-                                                         parameters: [:])
-        let userAgent = request.httpHeaders["User-Agent"]
-        XCTAssertNotNil(userAgent)
-
-        let match = regexMatch(in: userAgent)
-        XCTAssertNotNil(match)
-    }
-
-    func testRemediationRequest() {
-        let request = IDXClient.APIVersion1.RemediationRequest(method: "POST",
-                                                               href: URL(string: "https://example.com")!,
-                                                               accepts: .formEncoded,
-                                                               parameters: [:])
-        let userAgent = request.httpHeaders["User-Agent"]
+    func testRemediationRequest() throws {
+        let request = IDXAuthenticationFlow.RemediationRequest(httpMethod: .post,
+                                                               url: issuer,
+                                                               contentType: nil,
+                                                               bodyParameters: nil)
+        let urlRequest = try request.request(for: client)
+        let userAgent = urlRequest.allHTTPHeaderFields?["User-Agent"]
         XCTAssertNotNil(userAgent)
 
         let match = regexMatch(in: userAgent)
         XCTAssertNotNil(match)
     }
 }
-#endif

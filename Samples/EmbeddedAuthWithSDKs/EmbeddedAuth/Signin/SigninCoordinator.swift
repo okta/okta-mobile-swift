@@ -24,10 +24,10 @@ class SigninCoordinator {
     private(set) var onboardingWindow: UIWindow?
     
     init() {
-        NotificationCenter.default.addObserver(forName: .userChanged, object: nil, queue: .main) { (note) in
-            let user = note.object as? User
+        NotificationCenter.default.addObserver(forName: .defaultCredentialChanged, object: nil, queue: .main) { (note) in
+            let credential = note.object as? Credential
             
-            if user == nil {
+            if credential == nil {
                 self.show()
             } else {
                 self.dismiss()

@@ -1,0 +1,60 @@
+name: UI Tests
+
+on:
+  workflow_run:
+    workflows: ["Unit Tests"]
+    types:
+      - completed
+
+env:
+  DEVELOPER_DIR: /Applications/Xcode_13.3.app/Contents/Developer
+
+jobs:
+  UITest-EmbeddedAuth:
+    name: Embedded Auth (iOS)
+    runs-on: macos-12
+    timeout-minutes: 10
+    if: ${{ github.event.workflow_run.conclusion == 'success' && secrets.TEST_OKTA_PLIST && secrets.TEST_CONFIGURATION }}
+    steps:
+    - uses: actions/checkout@master
+    - uses: ./.github/actions/setup-secrets
+      with:
+        okta_plist: "${{ secrets.TEST_OKTA_PLIST }}"
+        test_configuration: "${{ secrets.TEST_CONFIGURATION }}"
+    - name: Test Embedded Auth
+      run: |
+        xcodebuild \
+            -derivedDataPath ~/Build/DerivedData \
+            -clonedSourcePackagesDirPath ~/Build/ClonedSources \
+            -resultBundlePath ~/TestResults/EmbeddedAuth-iOS.xcresult \
+            -workspace OktaIdx.xcworkspace \
+            -scheme "EmbeddedAuth" \
+            -sdk iphonesimulator \
+            -destination 'platform=iOS Simulator,name=iPhone 12,OS=15.4' \
+            test
+    - name: Upload Test Results
+      uses: actions/upload-artifact@v2
+      with:
+        path: ~/TestResults/*.xcresult
+        name: EmbeddedAuth-iOS-Results
+      if: success() || failure()
+
+  Results:
+    name: UI Test Results
+    runs-on: macos-12
+    timeout-minutes: 5
+    if: ${{ github.event.workflow_run.conclusion == 'success' }}
+    needs:
+      - UITest-EmbeddedAuth
+    steps:
+    - name: Download Test Results
+      uses: actions/download-artifact@v2
+      with:
+        path: ~/work/okta-idx-swift/TestResults
+    - uses: kishikawakatsumi/xcresulttool@v1
+      with:
+        path: |
+          ../TestResults/EmbeddedAuth-iOS-Results/EmbeddedAuth-iOS.xcresult
+        title: UI Test Results
+        show-passed-tests: false
+      if: success() || failure()

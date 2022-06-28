@@ -36,11 +36,13 @@ class ProfileTableViewController: UITableViewController {
     }
 
     var tableContent: [Section: [Row]] = [:]
-    var user: User? {
+    var credential: Credential? {
         didSet {
-            if let user = user {
-                DispatchQueue.main.async {
-                    self.configure(user)
+            if let credential = credential {
+                credential.userInfo { _ in
+                    DispatchQueue.main.async {
+                        self.configure(credential)
+                    }
                 }
             }
         }
@@ -49,13 +51,13 @@ class ProfileTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        NotificationCenter.default.addObserver(forName: .userChanged,
+        NotificationCenter.default.addObserver(forName: .defaultCredentialChanged,
                                                object: nil,
                                                queue: .main) { (notification) in
-            guard let user = notification.object as? User else { return }
-            self.user = user
+            guard let credential = notification.object as? Credential else { return }
+            self.credential = credential
         }
-        user = UserManager.shared.current
+        credential = Credential.default
     }
     
     func row(at indexPath: IndexPath) -> Row? {
@@ -68,25 +70,36 @@ class ProfileTableViewController: UITableViewController {
         return row
     }
     
-    func configure(_ user: User) {
+    func configure(_ credential: Credential) {
         let dateFormatter = DateFormatter()
         dateFormatter.dateStyle = .medium
         dateFormatter.timeStyle = .long
         
-        title = user.info.name
+        guard let info = credential.userInfo else {
+            return
+        }
+        
+        title = info.name
         self.tabBarItem.title = title
+        
+        let dateString: String
+        if let updatedAt = info.updatedAt {
+            dateString = dateFormatter.string(from: updatedAt)
+        } else {
+            dateString = "N/A"
+        }
         
         tableContent = [
             .profile: [
-                .init(kind: .rightDetail, id: "givenName", title: "Given name", detail: user.info.givenName),
-                .init(kind: .rightDetail, id: "familyName", title: "Family name", detail: user.info.familyName),
-                .init(kind: .rightDetail, id: "locale", title: "Locale", detail: user.info.locale),
-                .init(kind: .rightDetail, id: "timezone", title: "Timezone", detail: user.info.zoneinfo)
+                .init(kind: .rightDetail, id: "givenName", title: "Given name", detail: info.givenName),
+                .init(kind: .rightDetail, id: "familyName", title: "Family name", detail: info.familyName),
+                .init(kind: .rightDetail, id: "locale", title: "Locale", detail: info.locale),
+                .init(kind: .rightDetail, id: "timezone", title: "Timezone", detail: info.zoneinfo)
             ],
             .details: [
-                .init(kind: .rightDetail, id: "username", title: "Username", detail: user.info.preferredUsername),
-                .init(kind: .rightDetail, id: "userId", title: "User ID", detail: user.info.sub),
-                .init(kind: .rightDetail, id: "createdAt", title: "Created at", detail: dateFormatter.string(from: user.info.updatedAt)),
+                .init(kind: .rightDetail, id: "username", title: "Username", detail: info.preferredUsername),
+                .init(kind: .rightDetail, id: "userId", title: "User ID", detail: info.subject),
+                .init(kind: .rightDetail, id: "createdAt", title: "Created at", detail: dateString),
                 .init(kind: .disclosure, id: "details", title: "Token details"),
                 .init(kind: .action, id: "refresh", title: "Refresh")
             ],
@@ -107,23 +120,26 @@ class ProfileTableViewController: UITableViewController {
     }
     
     func signout() {
-        let userManager = UserManager.shared
         let alert = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
         alert.addAction(.init(title: "Clear tokens", style: .default, handler: { _ in
-            userManager.current = nil
+            do {
+                try Credential.default?.remove()
+            } catch {
+                self.show(error: error)
+            }
         }))
         alert.addAction(.init(title: "Revoke tokens", style: .destructive, handler: { _ in
-            userManager.current?.token.revoke { (success, error) in
-                guard success else {
+            Credential.default?.revoke(type: .refreshToken, completion: { result in
+                switch result {
+                case .failure(let error):
                     DispatchQueue.main.async {
-                        let alert = UIAlertController(title: "Sign out failed", message: error?.localizedDescription, preferredStyle: .alert)
+                        let alert = UIAlertController(title: "Sign out failed", message: error.localizedDescription, preferredStyle: .alert)
                         alert.addAction(.init(title: "OK", style: .default))
                         self.present(alert, animated: true)
                     }
-                    return
+                case .success(): break
                 }
-                userManager.current = nil
-            }
+            })
         }))
         alert.addAction(.init(title: "Cancel", style: .cancel))
 
@@ -131,11 +147,9 @@ class ProfileTableViewController: UITableViewController {
     }
 
     func refresh() {
-        guard let user = UserManager.shared.current else { return }
-        user.token.refresh { (token, error) in
-            if let token = token {
-                UserManager.shared.current = User(token: token, info: user.info)
-            } else if let error = error {
+        guard let credential = Credential.default else { return }
+        credential.refreshIfNeeded { result in
+            if case let .failure(error) = result {
                 self.show(error: error)
             }
         }
@@ -191,7 +205,7 @@ class ProfileTableViewController: UITableViewController {
         switch segue.identifier {
         case "TokenDetail":
             guard let target = segue.destination as? TokenDetailViewController else { break }
-            target.token = user?.token
+            target.token = credential?.token
 
         default: break
         }

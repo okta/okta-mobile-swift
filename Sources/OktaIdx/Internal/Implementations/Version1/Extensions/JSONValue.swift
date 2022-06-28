@@ -1,14 +1,14 @@
-/*
- * Copyright (c) 2021-Present, Okta, Inc. and/or its affiliates. All rights reserved.
- * The Okta software accompanied by this notice is provided pursuant to the Apache License, Version 2.0 (the "License.")
- *
- * You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0.
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
- * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- *
- * See the License for the specific language governing permissions and limitations under the License.
- */
+//
+// Copyright (c) 2021-Present, Okta, Inc. and/or its affiliates. All rights reserved.
+// The Okta software accompanied by this notice is provided pursuant to the Apache License, Version 2.0 (the "License.")
+//
+// You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0.
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
+// WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+//
+// See the License for the specific language governing permissions and limitations under the License.
+//
 
 import Foundation
 
@@ -18,7 +18,7 @@ enum JSONValue: Equatable {
     case string(String)
     case number(Double)
     case bool(Bool)
-    case dictionary([String:JSONValue])
+    case dictionary([String: JSONValue])
     case array([JSONValue])
     case object(Any)
     case null
@@ -32,7 +32,7 @@ enum JSONValue: Equatable {
         case let .bool(value):
             return NSNumber(booleanLiteral: value)
         case let .dictionary(value):
-            return value.reduce(into: [String:AnyObject]()) {
+            return value.reduce(into: [String: AnyObject]()) {
                 $0[$1.key] = $1.value.toAnyObject()
             } as AnyObject
         case let .array(value):
@@ -117,7 +117,7 @@ extension JSONValue: Codable {
         case let .array(value):
             try container.encode(value)
         case .object(_):
-            throw IDXClientError.internalMessage("Unable to encode object as JSON")
+            throw IDXAuthenticationFlowError.internalMessage("Unable to encode object as JSON")
         case .null:
             try container.encodeNil()
         }
@@ -144,9 +144,11 @@ extension JSONValue: CustomDebugStringConvertible {
         default:
             let encoder = JSONEncoder()
             encoder.outputFormatting = [.prettyPrinted]
+            // swiftlint:disable force_unwrapping
+            // swiftlint:disable force_try
             return try! String(data: encoder.encode(self), encoding: .utf8)!
+            // swiftlint:enable force_try
+            // swiftlint:enable force_unwrapping
         }
     }
 }
-
-//extension JSONValue: Hashable {}

@@ -20,8 +20,8 @@ struct ClientConfiguration {
     private static let scopesKey = "scopes"
 
     let clientId: String
-    let issuer: String
-    let redirectUri: String
+    let issuer: URL
+    let redirectUri: URL
     let scopes: String
     let recoveryToken: String?
     let shouldSave: Bool
@@ -39,7 +39,7 @@ struct ClientConfiguration {
             throw ConfigurationError.missingValue(name: "clientId")
         }
         
-        guard URL(string: redirectUri) != nil else {
+        guard let redirectUrl = URL(string: redirectUri) else {
             throw ConfigurationError.invalidUrl(name: "redirectUri")
         }
 
@@ -56,10 +56,10 @@ struct ClientConfiguration {
             throw ConfigurationError.missingRecommendedScopes
         }
         
-        self.issuer = issuer
+        self.issuer = issuerUrl
         self.clientId = clientId
         self.scopes = scopes
-        self.redirectUri = redirectUri
+        self.redirectUri = redirectUrl
         self.recoveryToken = recoveryToken
         self.shouldSave = shouldSave
     }
@@ -176,14 +176,14 @@ struct ClientConfiguration {
         guard shouldSave else { return }
         
         let defaults = UserDefaults.standard
-        defaults.setValue(issuer, forKey: type(of: self).issuerKey)
+        defaults.setValue(issuer.absoluteString, forKey: type(of: self).issuerKey)
         defaults.setValue(clientId, forKey: type(of: self).clientIdKey)
-        defaults.setValue(redirectUri, forKey: type(of: self).redirectUriKey)
+        defaults.setValue(redirectUri.absoluteString, forKey: type(of: self).redirectUriKey)
         defaults.setValue(recoveryToken, forKey: type(of: self).recoveryTokenKey)
         defaults.setValue(scopes, forKey: type(of: self).scopesKey)
         defaults.synchronize()
         
-        NotificationCenter.default.post(name: .configurationChanged, object: self.idxConfiguration)
+        NotificationCenter.default.post(name: .configurationChanged, object: self.idxFlow)
     }
     
     enum ConfigurationError: Error, LocalizedError {

@@ -15,13 +15,28 @@ import Foundation
 extension Capability {
     /// Describes the password complexity settings.
     public struct PasswordSettings: AuthenticatorCapability {
+        /// The number of days before a password will expire.
         public let daysToExpiry: Int
+        
+        /// The minimum password length.
         public let minLength: Int
+        
+        /// The minimum number of lower-case characters.
         public let minLowerCase: Int
+        
+        /// The minimum  number of upper-case characters.
         public let minUpperCase: Int
+        
+        /// The minimum number of numeric characters.
         public let minNumber: Int
+        
+        /// The minimum number of symbols (e.g. non-alpha-numeric characters).
         public let minSymbol: Int
+        
+        /// Indicates the user's username cannot be used in the password.
         public let excludeUsername: Bool
+        
+        /// Indicates the user's attributes that cannot be used within the password.
         public let excludeAttributes: [String]
         
         init(daysToExpiry: Int,

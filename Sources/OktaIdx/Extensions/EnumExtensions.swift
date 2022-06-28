@@ -12,6 +12,7 @@
 
 import Foundation
 
+// swiftlint:disable cyclomatic_complexity
 extension Authenticator.Kind {
     internal init(string value: String) {
         switch value {
@@ -41,9 +42,9 @@ extension Authenticator.Method {
         case "password":          self = .password
         case "webauthn":          self = .webAuthN
         case "security_question": self = .securityQuestion
-        case "idp": self = .idp
-        case "duo": self = .duo
-        case "federated": self = .federated // TODO: This is shown as deprecated; should we care about it?
+        case "idp":               self = .idp
+        case "duo":               self = .duo
+        case "federated":         self = .federated // TODO: This is shown as deprecated; should we care about it?
         default:                  self = .unknown
         }
     }
@@ -120,18 +121,18 @@ extension Response.Intent {
 extension Capability.SocialIDP.Service {
     public init(string: String) {
         switch string {
-        case "SAML2":        self = .saml         
-        case "GOOGLE":       self = .google       
-        case "FACEBOOK":     self = .facebook     
-        case "LINKEDIN":     self = .linkedin     
-        case "MICROSOFT":    self = .microsoft    
-        case "OIDC":         self = .oidc         
-        case "OKTA":         self = .okta         
-        case "IWA":          self = .iwa          
+        case "SAML2":        self = .saml
+        case "GOOGLE":       self = .google
+        case "FACEBOOK":     self = .facebook
+        case "LINKEDIN":     self = .linkedin
+        case "MICROSOFT":    self = .microsoft
+        case "OIDC":         self = .oidc
+        case "OKTA":         self = .okta
+        case "IWA":          self = .iwa
         case "AgentlessDSSO":self = .agentlessIwa
-        case "X509":         self = .x509         
-        case "APPLE":        self = .apple        
-        case "OIN_SOCIAL":   self = .oinSocial   
+        case "X509":         self = .x509
+        case "APPLE":        self = .apple
+        case "OIN_SOCIAL":   self = .oinSocial
         default:             self = .other
         }
     }
@@ -171,3 +172,4 @@ extension Authenticator.Method {
         }
     }
 }
+// swiftlint:enable cyclomatic_complexity

@@ -11,62 +11,38 @@
 //
 
 import Foundation
+import AuthFoundation
 
-extension IDXClient {
+extension IDXAuthenticationFlow {
     /// Object that defines the context for the current authentication session, which is required when a session needs to be resumed.
-    @objc(IDXContext)
-    public final class Context: NSObject, Codable {
-        /// The configuration used when initiating the authentication session.
-        @objc public let configuration: Configuration
-        
-        /// The state value used when the `interact` call was initially made.
+    public struct Context: Codable, Equatable {
+        /// The state value used when the ``IDXAuthenticationFlow/start(options:completion:)`` call was initially made.
         ///
         /// This value can be used to associate a redirect URI to the associated Context that can be used to resume an authentication session.
-        @objc public let state: String
+        public let state: String
         
         /// The interaction handle returned from the `interact` response from the server.
-        @objc public let interactionHandle: String
+        public let interactionHandle: String
         
-        /// The PKCE code verifier value used when initiating the session using the `interact` method.
-        @objc public let codeVerifier: String
-        
-        let version: Version
+        /// The PKCE settings used when initiating the session using the ``IDXAuthenticationFlow/start(options:completion:)`` method.
+        public let pkce: PKCE
 
-        internal init(configuration: Configuration,
-                      state: String,
-                      interactionHandle: String,
-                      codeVerifier: String,
-                      version: Version = .latest)
-        {
-            self.configuration = configuration
-            self.state = state
-            self.interactionHandle = interactionHandle
-            self.codeVerifier = codeVerifier
-            self.version = version
-            
-            super.init()
-        }
-        
-        public override var description: String {
-            let logger = DebugDescription(self)
-            let components = [
-                logger.address(),
-                "\(#keyPath(state)): \(state)",
-                "\(#keyPath(interactionHandle)): \(interactionHandle)",
-                "\(#keyPath(codeVerifier)): \(codeVerifier)"
-            ]
-
-            return logger.brace(components.joined(separator: "; "))
-        }
-        
-        public override var debugDescription: String {
-            let components = [configuration.debugDescription]
-                
-            return """
-            \(description) {
-            \(DebugDescription(self).format(components, indent: 4))
+        /// Initializer for creating a context with a custom state string.
+        /// - Parameter state: State string to use, or `nil` to accept an automatically generated default.
+        public init(interactionHandle: String, state: String? = nil) throws {
+            guard let pkce = PKCE() else {
+                throw IDXAuthenticationFlowError.platformUnsupported
             }
-            """
+            
+            self.init(interactionHandle: interactionHandle,
+                      state: state ?? UUID().uuidString,
+                      pkce: pkce)
+        }
+        
+        init(interactionHandle: String, state: String, pkce: PKCE) {
+            self.interactionHandle = interactionHandle
+            self.state = state
+            self.pkce = pkce
         }
     }
 }

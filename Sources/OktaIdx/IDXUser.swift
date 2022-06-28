@@ -12,32 +12,10 @@
 
 import Foundation
 
-extension IDXClient {
+extension Response {
     /// Provides information about the user being authenticated.
-    @objc(IDXUser)
-    public class User: NSObject {
+    public struct User {
         /// Unique identifier for this user.
-        @objc(identifier)
         public let id: String
-
-        internal init(id: String) {
-            self.id = id
-         
-            super.init()
-        }
-        
-        public override var description: String {
-            let logger = DebugDescription(self)
-            let components = [
-                logger.address(),
-                "\(#keyPath(id)): \(id)"
-            ]
-
-            return logger.brace(components.joined(separator: "; "))
-        }
-        
-        public override var debugDescription: String {
-            description
-        }
     }
 }

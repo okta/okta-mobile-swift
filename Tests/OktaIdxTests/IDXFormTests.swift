@@ -18,15 +18,23 @@ import XCTest
 #endif
 
 class IDXFormTests: XCTestCase {
-    let clientMock = IDXClientAPIMock(context: .init(configuration: .init(issuer: "https://example.com",
-                                                                          clientId: "Bar",
-                                                                          clientSecret: nil,
-                                                                          scopes: ["scope"],
-                                                                          redirectUri: "redirect:/"),
-                                                     state: "state",
-                                                     interactionHandle: "handle",
-                                                     codeVerifier: "verifier"))
+    var client: OAuth2Client!
+    let urlSession = URLSessionMock()
+    var flowMock: IDXAuthenticationFlowMock!
 
+    override func setUpWithError() throws {
+        let issuer = try XCTUnwrap(URL(string: "https://example.com/oauth2/default"))
+        let redirectUri = try XCTUnwrap(URL(string: "redirect:/uri"))
+        client = OAuth2Client(baseURL: issuer,
+                              clientId: "clientId",
+                              scopes: "openid profile",
+                              session: urlSession)
+        
+        let context = try IDXAuthenticationFlow.Context(interactionHandle: "handle", state: "state")
+        
+        flowMock = IDXAuthenticationFlowMock(context: context, client: client, redirectUri: redirectUri)
+    }
+    
     func testSubscripts() throws {
         let data = try XCTUnwrap("""
         {
@@ -67,8 +75,8 @@ class IDXFormTests: XCTestCase {
         }
         """.data(using: .utf8))
         
-        let v1Form = try JSONDecoder().decode(V1.IonForm.self, from: data)
-        let remediation = try XCTUnwrap(Remediation.makeRemediation(client: clientMock, v1: v1Form))
+        let v1Form = try JSONDecoder().decode(IonForm.self, from: data)
+        let remediation = try XCTUnwrap(Remediation.makeRemediation(flow: flowMock, ion: v1Form))
         let form = remediation.form
         
         XCTAssertEqual(form.fields.count, 3)

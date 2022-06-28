@@ -11,88 +11,35 @@
  */
 
 import XCTest
+import AuthFoundation
 @testable import OktaIdx
 
 class IDXResponseEqualityTests: XCTestCase {
-    func testContextEquality() {
-        let configuration = IDXClient.Configuration(issuer: "issuer",
-                                                    clientId: "client",
-                                                    clientSecret: nil,
-                                                    scopes: ["scope"],
-                                                    redirectUri: "redirect")
-
-        let compare = IDXClient.Context(configuration: configuration,
-                                        state: "state",
-                                        interactionHandle: "handle",
-                                        codeVerifier: "verifier")
-        XCTAssertNotEqual(compare as NSObject, "Foo" as NSObject)
+    func testContextEquality() throws {
+        let pkce = try XCTUnwrap(PKCE())
+        let compare = IDXAuthenticationFlow.Context(interactionHandle: "handle",
+                                                    state: "state",
+                                                    pkce: pkce)
         
-        var object = IDXClient.Context(configuration: configuration,
-                                       state: "state",
-                                       interactionHandle: "handle2",
-                                       codeVerifier: "verifier2")
+        var object = IDXAuthenticationFlow.Context(interactionHandle: "handle2",
+                                                   state: "state",
+                                                   pkce: pkce)
         XCTAssertNotEqual(compare, object)
         
-        object = IDXClient.Context(configuration: configuration,
-                                   state: "state",
-                                   interactionHandle: "handle",
-                                   codeVerifier: "verifier2")
-        XCTAssertNotEqual(compare, object)
-        
-
-        object = IDXClient.Context(configuration: configuration,
-                                   state: "state2",
-                                   interactionHandle: "handle",
-                                   codeVerifier: "verifier")
-        XCTAssertNotEqual(compare, object)
-        
-        object = IDXClient.Context(configuration: configuration,
-                                   state: "state",
-                                   interactionHandle: "handle",
-                                   codeVerifier: "verifier")
+        object = IDXAuthenticationFlow.Context(interactionHandle: "handle",
+                                               state: "state",
+                                               pkce: pkce)
         XCTAssertEqual(compare, object)
-    }
-
-    func testTokenEquality() throws {
-        let configuration = IDXClient.Configuration(issuer: "issuer",
-                                                    clientId: "client",
-                                                    clientSecret: nil,
-                                                    scopes: ["scope"],
-                                                    redirectUri: "redirect")
-        let compare = Token(accessToken: "access",
-                                     refreshToken: "refresh",
-                                     expiresIn: 10,
-                                     idToken: "foo",
-                                     scope: "bar",
-                                     tokenType: "type",
-                                     configuration: configuration)
-        XCTAssertNotEqual(compare as NSObject, "Foo" as NSObject)
-
-        var object = Token(accessToken: "access2",
-                                     refreshToken: "refresh2",
-                                     expiresIn: 100,
-                                     idToken: "foo2",
-                                     scope: "bar2",
-                                     tokenType: "type2",
-                                     configuration: configuration)
+        
+        
+        object = IDXAuthenticationFlow.Context(interactionHandle: "handle",
+                                               state: "state2",
+                                               pkce: pkce)
         XCTAssertNotEqual(compare, object)
-
-        object = Token(accessToken: "access",
-                                     refreshToken: nil,
-                                     expiresIn: 10,
-                                     idToken: nil,
-                                     scope: "bar",
-                                     tokenType: "type",
-                                     configuration: configuration)
-        XCTAssertNotEqual(compare, object)
-
-        object = Token(accessToken: "access",
-                                 refreshToken: "refresh",
-                                     expiresIn: 10,
-                                     idToken: "foo",
-                                     scope: "bar",
-                                     tokenType: "type",
-                                     configuration: configuration)
+        
+        object = IDXAuthenticationFlow.Context(interactionHandle: "handle",
+                                               state: "state",
+                                               pkce: pkce)
         XCTAssertEqual(compare, object)
     }
 }

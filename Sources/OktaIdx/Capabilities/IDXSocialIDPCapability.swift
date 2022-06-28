@@ -57,15 +57,12 @@ extension Capability {
         }
         
         let idpType: String
-        internal private(set) weak var client: IDXClientAPI?
-        init(client: IDXClientAPI,
-             redirectUrl: URL,
+        init(redirectUrl: URL,
              id: String,
              idpName: String,
              idpType: String,
              service: Service)
         {
-            self.client = client
             self.redirectUrl = redirectUrl
             self.id = id
             self.idpName = idpName

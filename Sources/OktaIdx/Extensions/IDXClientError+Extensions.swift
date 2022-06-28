@@ -1,21 +1,24 @@
-/*
- * Copyright (c) 2021-Present, Okta, Inc. and/or its affiliates. All rights reserved.
- * The Okta software accompanied by this notice is provided pursuant to the Apache License, Version 2.0 (the "License.")
- *
- * You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0.
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
- * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- *
- * See the License for the specific language governing permissions and limitations under the License.
- */
+//
+// Copyright (c) 2021-Present, Okta, Inc. and/or its affiliates. All rights reserved.
+// The Okta software accompanied by this notice is provided pursuant to the Apache License, Version 2.0 (the "License.")
+//
+// You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0.
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
+// WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+//
+// See the License for the specific language governing permissions and limitations under the License.
+//
 
 import Foundation
 
-extension IDXClientError: Equatable {
-    public static func ==(lhs: IDXClientError, rhs: IDXClientError) -> Bool {
+// swiftlint:disable cyclomatic_complexity
+extension IDXAuthenticationFlowError: Equatable {
+    public static func == (lhs: IDXAuthenticationFlowError,
+                           rhs: IDXAuthenticationFlowError) -> Bool
+    {
         switch (lhs, rhs) {
-        case (.invalidClient, .invalidClient): return true
+        case (.invalidFlow, .invalidFlow): return true
         case (.cannotCreateRequest, .cannotCreateRequest): return true
         case (.invalidHTTPResponse, .invalidHTTPResponse): return true
         case (.invalidResponseData, .invalidResponseData): return true
@@ -41,12 +44,12 @@ extension IDXClientError: Equatable {
     }
 }
 
-extension IDXClientError: LocalizedError {
+extension IDXAuthenticationFlowError: LocalizedError {
     public var errorDescription: String? {
         switch self {
-        case .invalidClient:
-            return NSLocalizedString("IDXClient instance is invalid.",
-                                     comment: "Error message thrown when an IDXClient object is missing or becomes invalid.")
+        case .invalidFlow:
+            return NSLocalizedString("IDXAuthenticationFlow instance is invalid.",
+                                     comment: "Error message thrown when an IDXAuthenticationFlow object is missing or becomes invalid.")
         case .cannotCreateRequest:
             return NSLocalizedString("Could not create a URL request for this action.",
                                      comment: "Error message thrown when an error occurs while creating a URL request.")
@@ -99,102 +102,21 @@ extension IDXClientError: LocalizedError {
         case .oauthError(summary: let summary, code: let code, errorId: _):
             return NSLocalizedString("\(summary). Error code \(code ?? "unknown").",
                                      comment: "OAuth error reported from the server.")
+        case .invalidContext:
+            return NSLocalizedString("The Context for this flow is missing or is invalid.",
+                                     comment: "Error message thrown when an IDXAuthenticationFlow does not contain a Context.")
+
+        case .platformUnsupported:
+            return NSLocalizedString("The current platform is not yet supported.",
+                                     comment: "")
+
+        case .invalidUrl:
+            return NSLocalizedString("The supplied URL is invalid.",
+                                     comment: "")
+
+        case .apiError(let error):
+            return error.localizedDescription
         }
     }
 }
-
-extension IDXClientError: CustomNSError {
-    public static var errorDomain: String {
-        return "IDXClientError"
-    }
-    
-    public var errorCode: Int {
-        switch self {
-        case .invalidClient: return 1
-        case .cannotCreateRequest: return 3
-        case .invalidHTTPResponse: return 4
-        case .invalidResponseData: return 5
-        case .invalidRequestData: return 6
-        case .serverError(message: _, localizationKey: _, type: _): return 7
-        case .invalidParameter(name: _): return 8
-        case .invalidParameterValue(name: _, type: _): return 9
-        case .parameterImmutable(name: _): return 10
-        case .missingRequiredParameter(name: _): return 11
-        case .unknownRemediationOption(name: _): return 12
-        case .successResponseMissing: return 13
-        case .internalMessage(_): return 14
-        case .missingRefreshToken: return 15
-        case .missingRelatedObject: return 16
-        case .internalError(_): return 17
-        case .oauthError(summary: _, code: _, errorId: _): return 18
-        case .missingRemediationOption(name: _): return 19
-        }
-    }
-
-    public var errorUserInfo: [String : Any] {
-        switch self {
-        case .invalidClient: fallthrough
-        case .cannotCreateRequest: fallthrough
-        case .invalidHTTPResponse: fallthrough
-        case .invalidResponseData: fallthrough
-        case .invalidRequestData: fallthrough
-        case .missingRefreshToken: fallthrough
-        case .missingRelatedObject: fallthrough
-        case .successResponseMissing:
-            return [:]
-        case .serverError(message: let message, localizationKey: let localizationKey, type: let type):
-            return [
-                "message": message,
-                "type": type,
-                "localizationKey": localizationKey
-            ]
-        case .internalMessage(let message):
-            return [
-                "message": message
-            ]
-        case .internalError(let error):
-            return [
-                NSUnderlyingErrorKey: error
-            ]
-        case .invalidParameter(name: let name):
-            return [
-                "name": name
-            ]
-        case .invalidParameterValue(name: let name, type: let type):
-            return [
-                "name": name,
-                "type": type
-            ]
-        case .parameterImmutable(name: let name):
-            return [
-                "name": name
-            ]
-        case .missingRequiredParameter(name: let name):
-            return [
-                "name": name
-            ]
-        case .missingRemediationOption(name: let name):
-            return [
-                "name": name
-            ]
-        case .unknownRemediationOption(name: let name):
-            return [
-                "name": name
-            ]
-        case .oauthError(summary: let summary, code: let code, errorId: let errorId):
-            var result = [
-                "summary": summary
-            ]
-            
-            if let code = code {
-                result["code"] = code
-            }
-            
-            if let errorId = errorId {
-                result["errorId"] = errorId
-            }
-            
-            return result
-        }
-    }
-}
+// swiftlint:enable cyclomatic_complexity

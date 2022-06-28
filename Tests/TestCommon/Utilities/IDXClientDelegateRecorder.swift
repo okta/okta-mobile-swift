@@ -11,9 +11,10 @@
  */
 
 import Foundation
+import AuthFoundation
 import OktaIdx
 
-class DelegateRecorder: IDXClientDelegate {
+class DelegateRecorder: IDXAuthenticationFlowDelegate {
     struct Call {
         enum CallType {
             case error
@@ -38,19 +39,35 @@ class DelegateRecorder: IDXClientDelegate {
     
     private(set) var calls: [Call] = []
     
+    private(set) var startCalled: Bool = false
+    private(set) var finishedCalled: Bool = false
+
     func reset() {
         calls.removeAll()
+        startCalled = false
+        finishedCalled = false
     }
     
-    func idx(client: IDXClient, didReceive error: Error) {
+    func authenticationStarted<Flow>(flow: Flow) {
+        startCalled = true
+    }
+    
+    func authenticationFinished<Flow>(flow: Flow) {
+        finishedCalled = true
+    }
+    
+    func authentication<Flow>(flow: Flow, received error: IDXAuthenticationFlowError) {
         calls.append(Call(type: .error, object: nil))
     }
     
-    func idx(client: IDXClient, didReceive response: Response) {
+    func authentication<Flow>(flow: Flow, received response: Response) {
         calls.append(Call(type: .response, object: response))
     }
     
-    func idx(client: IDXClient, didReceive token: Token) {
+    func authentication<Flow>(flow: Flow, received token: Token) {
         calls.append(Call(type: .token, object: token))
+    }
+    
+    func authentication<Flow>(flow: Flow, received error: OAuth2Error) {
     }
 }
