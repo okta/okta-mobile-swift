@@ -13,10 +13,10 @@
 import Foundation
 import AuthFoundation
 
-extension IDXAuthenticationFlow {
+extension InteractionCodeFlow {
     /// Object that defines the context for the current authentication session, which is required when a session needs to be resumed.
     public struct Context: Codable, Equatable {
-        /// The state value used when the ``IDXAuthenticationFlow/start(options:completion:)`` call was initially made.
+        /// The state value used when the ``InteractionCodeFlow/start(options:completion:)`` call was initially made.
         ///
         /// This value can be used to associate a redirect URI to the associated Context that can be used to resume an authentication session.
         public let state: String
@@ -24,14 +24,14 @@ extension IDXAuthenticationFlow {
         /// The interaction handle returned from the `interact` response from the server.
         public let interactionHandle: String
         
-        /// The PKCE settings used when initiating the session using the ``IDXAuthenticationFlow/start(options:completion:)`` method.
+        /// The PKCE settings used when initiating the session using the ``InteractionCodeFlow/start(options:completion:)`` method.
         public let pkce: PKCE
 
         /// Initializer for creating a context with a custom state string.
         /// - Parameter state: State string to use, or `nil` to accept an automatically generated default.
         public init(interactionHandle: String, state: String? = nil) throws {
             guard let pkce = PKCE() else {
-                throw IDXAuthenticationFlowError.platformUnsupported
+                throw InteractionCodeFlowError.platformUnsupported
             }
             
             self.init(interactionHandle: interactionHandle,

@@ -20,7 +20,7 @@ import XCTest
 class IDXClientV1ResponseTests: XCTestCase {
     var client: OAuth2Client!
     let urlSession = URLSessionMock()
-    var flowMock: IDXAuthenticationFlowMock!
+    var flowMock: InteractionCodeFlowMock!
 
     override func setUpWithError() throws {
         let issuer = try XCTUnwrap(URL(string: "https://example.com/oauth2/default"))
@@ -30,9 +30,9 @@ class IDXClientV1ResponseTests: XCTestCase {
                               scopes: "openid profile",
                               session: urlSession)
         
-        let context = try IDXAuthenticationFlow.Context(interactionHandle: "handle", state: "state")
+        let context = try InteractionCodeFlow.Context(interactionHandle: "handle", state: "state")
         
-        flowMock = IDXAuthenticationFlowMock(context: context, client: client, redirectUri: redirectUri)
+        flowMock = InteractionCodeFlowMock(context: context, client: client, redirectUri: redirectUri)
     }
 
     var response: IonResponse {

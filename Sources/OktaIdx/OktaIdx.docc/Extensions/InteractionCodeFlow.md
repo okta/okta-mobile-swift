@@ -1,4 +1,4 @@
-# ``OktaIdx/IDXAuthenticationFlow``
+# ``OktaIdx/InteractionCodeFlow``
 
 @Metadata {
     @DocumentationExtension(mergeBehavior: append)

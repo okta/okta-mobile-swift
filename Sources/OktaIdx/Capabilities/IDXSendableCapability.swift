@@ -19,7 +19,7 @@ extension Capability {
     public struct Sendable: AuthenticatorCapability {
         /// Sends a new authentication code.
         /// - Parameter completion: Completion handler when the response is returned with the result of the operation.
-        public func send(completion: IDXAuthenticationFlow.ResponseResult? = nil) {
+        public func send(completion: InteractionCodeFlow.ResponseResult? = nil) {
             remediation.proceed(completion: completion)
         }
         

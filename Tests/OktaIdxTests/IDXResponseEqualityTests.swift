@@ -17,29 +17,29 @@ import AuthFoundation
 class IDXResponseEqualityTests: XCTestCase {
     func testContextEquality() throws {
         let pkce = try XCTUnwrap(PKCE())
-        let compare = IDXAuthenticationFlow.Context(interactionHandle: "handle",
-                                                    state: "state",
-                                                    pkce: pkce)
+        let compare = InteractionCodeFlow.Context(interactionHandle: "handle",
+                                                  state: "state",
+                                                  pkce: pkce)
         
-        var object = IDXAuthenticationFlow.Context(interactionHandle: "handle2",
-                                                   state: "state",
-                                                   pkce: pkce)
+        var object = InteractionCodeFlow.Context(interactionHandle: "handle2",
+                                                 state: "state",
+                                                 pkce: pkce)
         XCTAssertNotEqual(compare, object)
         
-        object = IDXAuthenticationFlow.Context(interactionHandle: "handle",
-                                               state: "state",
-                                               pkce: pkce)
+        object = InteractionCodeFlow.Context(interactionHandle: "handle",
+                                             state: "state",
+                                             pkce: pkce)
         XCTAssertEqual(compare, object)
         
         
-        object = IDXAuthenticationFlow.Context(interactionHandle: "handle",
-                                               state: "state2",
-                                               pkce: pkce)
+        object = InteractionCodeFlow.Context(interactionHandle: "handle",
+                                             state: "state2",
+                                             pkce: pkce)
         XCTAssertNotEqual(compare, object)
         
-        object = IDXAuthenticationFlow.Context(interactionHandle: "handle",
-                                               state: "state",
-                                               pkce: pkce)
+        object = InteractionCodeFlow.Context(interactionHandle: "handle",
+                                             state: "state",
+                                             pkce: pkce)
         XCTAssertEqual(compare, object)
     }
 }

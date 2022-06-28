@@ -17,7 +17,7 @@ extension Capability {
     public struct Recoverable: AuthenticatorCapability {
         /// Requests that the recovery code is sent.
         /// - Parameter completion: Completion handler when the response is returned with the result of the operation.
-        public func recover(completion: IDXAuthenticationFlow.ResponseResult? = nil) {
+        public func recover(completion: InteractionCodeFlow.ResponseResult? = nil) {
             remediation.proceed(completion: completion)
         }
         

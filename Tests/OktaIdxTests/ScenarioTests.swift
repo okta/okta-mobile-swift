@@ -36,7 +36,7 @@ class ScenarioTests: XCTestCase {
     var issuer: URL!
     var client: OAuth2Client!
     var urlSession = URLSessionMock()
-    var flow: IDXAuthenticationFlow!
+    var flow: InteractionCodeFlow!
     
     override func setUpWithError() throws {
         JWK.validator = MockJWKValidator()
@@ -51,7 +51,7 @@ class ScenarioTests: XCTestCase {
                               session: urlSession)
         let redirectUri = try XCTUnwrap(URL(string: "redirect:/uri"))
         
-        flow = IDXAuthenticationFlow(redirectUri: redirectUri, client: client)
+        flow = InteractionCodeFlow(redirectUri: redirectUri, client: client)
     }
     
     override func tearDownWithError() throws {

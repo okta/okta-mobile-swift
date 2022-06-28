@@ -13,7 +13,7 @@
 import Foundation
 import AuthFoundation
 
-extension IDXAuthenticationFlow {
+extension InteractionCodeFlow {
     struct RemediationRequest {
         let httpMethod: APIRequestMethod
         let url: URL
@@ -22,7 +22,7 @@ extension IDXAuthenticationFlow {
     }
 }
 
-extension IDXAuthenticationFlow.RemediationRequest: APIRequest, APIRequestBody, ReceivesIDXResponse, ReturnsIDXError {
+extension InteractionCodeFlow.RemediationRequest: APIRequest, APIRequestBody, ReceivesIDXResponse, ReturnsIDXError {
     typealias ResponseType = IonResponse
     
     init(remediation option: Remediation) throws {
@@ -30,7 +30,7 @@ extension IDXAuthenticationFlow.RemediationRequest: APIRequest, APIRequestBody, 
               let accepts = APIContentType(rawValue: acceptsString),
               let method = APIRequestMethod(rawValue: option.method)
         else {
-            throw IDXAuthenticationFlowError.invalidRequestData
+            throw InteractionCodeFlowError.invalidRequestData
         }
         
         self.url = option.href

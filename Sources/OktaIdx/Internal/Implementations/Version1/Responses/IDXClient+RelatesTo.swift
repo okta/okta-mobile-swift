@@ -105,7 +105,7 @@ extension Remediation: IDXHasRelatedObjects {
         
         guard authenticatorObjects.count == calculatedRelatesTo?.count ?? 0 else {
             #if DEBUG_RELATES_TO
-            throw IDXAuthenticationFlowError.missingRelatedObject
+            throw InteractionCodeFlowError.missingRelatedObject
             #else
             return
             #endif
@@ -145,7 +145,7 @@ extension Remediation.Form.Field: IDXHasRelatedObjects {
         guard let relatesTo = relatesTo else { return }
         guard let mappedAuthenticator = jsonMapping[relatesTo] as? Authenticator else {
             #if DEBUG_RELATES_TO
-            throw IDXAuthenticationFlowError.missingRelatedObject
+            throw InteractionCodeFlowError.missingRelatedObject
             #else
             return
             #endif

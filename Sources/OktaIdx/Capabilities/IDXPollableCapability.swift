@@ -22,7 +22,7 @@ extension Capability {
         ///
         /// The action will be continually polled in the background either until ``stopPolling`` is called, or when the authenticator has finished. The completion block is invoked once the user has completed the action out-of-band, or when an error is received.
         /// - Parameter completion: Completion handler when the polling is complete, or `nil` if the developer does not need to handle the response
-        public func startPolling(completion: IDXAuthenticationFlow.ResponseResult? = nil) {
+        public func startPolling(completion: InteractionCodeFlow.ResponseResult? = nil) {
             // Stop any previous polling
             stopPolling()
             
@@ -57,11 +57,11 @@ extension Capability {
             pollHandler = nil
         }
         
-        internal private(set) weak var flow: IDXAuthenticationFlowAPI?
+        internal private(set) weak var flow: InteractionCodeFlowAPI?
         internal private(set) var remediation: Remediation
         internal let authenticatorType: Authenticator.Kind
         private var pollHandler: PollingHandler?
-        internal init(flow: IDXAuthenticationFlowAPI,
+        internal init(flow: InteractionCodeFlowAPI,
                       authenticatorType: Authenticator.Kind,
                       remediation: Remediation)
         {

@@ -13,8 +13,8 @@
 import Foundation
 import AuthFoundation
 
-extension IDXAuthenticationFlow {
-    func send(error: IDXAuthenticationFlowError, completion: ResponseResult?) {
+extension InteractionCodeFlow {
+    func send(error: InteractionCodeFlowError, completion: ResponseResult?) {
         delegateCollection.invoke { $0.authentication(flow: self, received: error) }
         completion?(.failure(error))
     }
@@ -24,7 +24,7 @@ extension IDXAuthenticationFlow {
         completion?(.success(response))
     }
 
-    func send(error: IDXAuthenticationFlowError, completion: TokenResult?) {
+    func send(error: InteractionCodeFlowError, completion: TokenResult?) {
         delegateCollection.invoke { $0.authentication(flow: self, received: error) }
         completion?(.failure(error))
     }

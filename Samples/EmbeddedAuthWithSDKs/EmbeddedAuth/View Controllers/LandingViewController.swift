@@ -30,11 +30,11 @@ class LandingViewController: UIViewController {
         super.viewDidLoad()
         
         if let configuration = ClientConfiguration.active {
-            configurationUpdated(configuration.idxFlow)
+            configurationUpdated(configuration.flow)
         }
         
         NotificationCenter.default.addObserver(forName: .configurationChanged, object: nil, queue: .main) { (note) in
-            self.configurationUpdated(note.object as? IDXAuthenticationFlow)
+            self.configurationUpdated(note.object as? InteractionCodeFlow)
         }
         
         if !isSignInAvailable {
@@ -42,7 +42,7 @@ class LandingViewController: UIViewController {
         }
     }
     
-    func configurationUpdated(_ flow: IDXAuthenticationFlow?) {
+    func configurationUpdated(_ flow: InteractionCodeFlow?) {
         isSignInAvailable = flow != nil
         if let configuration = flow {
             configurationInfoLabel.text = """

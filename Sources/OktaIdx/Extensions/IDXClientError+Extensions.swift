@@ -13,9 +13,9 @@
 import Foundation
 
 // swiftlint:disable cyclomatic_complexity
-extension IDXAuthenticationFlowError: Equatable {
-    public static func == (lhs: IDXAuthenticationFlowError,
-                           rhs: IDXAuthenticationFlowError) -> Bool
+extension InteractionCodeFlowError: Equatable {
+    public static func == (lhs: InteractionCodeFlowError,
+                           rhs: InteractionCodeFlowError) -> Bool
     {
         switch (lhs, rhs) {
         case (.invalidFlow, .invalidFlow): return true
@@ -44,12 +44,12 @@ extension IDXAuthenticationFlowError: Equatable {
     }
 }
 
-extension IDXAuthenticationFlowError: LocalizedError {
+extension InteractionCodeFlowError: LocalizedError {
     public var errorDescription: String? {
         switch self {
         case .invalidFlow:
-            return NSLocalizedString("IDXAuthenticationFlow instance is invalid.",
-                                     comment: "Error message thrown when an IDXAuthenticationFlow object is missing or becomes invalid.")
+            return NSLocalizedString("InteractionCodeFlow instance is invalid.",
+                                     comment: "Error message thrown when an InteractionCodeFlow object is missing or becomes invalid.")
         case .cannotCreateRequest:
             return NSLocalizedString("Could not create a URL request for this action.",
                                      comment: "Error message thrown when an error occurs while creating a URL request.")
@@ -104,7 +104,7 @@ extension IDXAuthenticationFlowError: LocalizedError {
                                      comment: "OAuth error reported from the server.")
         case .invalidContext:
             return NSLocalizedString("The Context for this flow is missing or is invalid.",
-                                     comment: "Error message thrown when an IDXAuthenticationFlow does not contain a Context.")
+                                     comment: "Error message thrown when an InteractionCodeFlow does not contain a Context.")
 
         case .platformUnsupported:
             return NSLocalizedString("The current platform is not yet supported.",

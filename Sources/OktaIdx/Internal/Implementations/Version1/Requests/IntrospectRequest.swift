@@ -17,20 +17,20 @@ extension APIContentType {
     static let ionJson = APIContentType.other("application/ion+json; okta-version=1.0.0")
 }
 
-extension IDXAuthenticationFlow {
+extension InteractionCodeFlow {
     struct IntrospectRequest {
         let url: URL
         let interactionHandle: String
 
         init(baseURL: URL, interactionHandle: String) throws {
             guard var components = URLComponents(url: baseURL, resolvingAgainstBaseURL: true) else {
-                throw IDXAuthenticationFlowError.invalidUrl
+                throw InteractionCodeFlowError.invalidUrl
             }
             
             components.path = "/idp/idx/introspect"
             
             guard let url = components.url else {
-                throw IDXAuthenticationFlowError.invalidUrl
+                throw InteractionCodeFlowError.invalidUrl
             }
             
             self.url = url
@@ -39,7 +39,7 @@ extension IDXAuthenticationFlow {
     }
 }
 
-extension IDXAuthenticationFlow.IntrospectRequest: APIRequest, APIRequestBody, ReceivesIDXResponse, ReturnsIDXError {
+extension InteractionCodeFlow.IntrospectRequest: APIRequest, APIRequestBody, ReceivesIDXResponse, ReturnsIDXError {
     typealias ResponseType = IonResponse
     
     var httpMethod: APIRequestMethod { .post }

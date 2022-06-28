@@ -43,7 +43,7 @@ public class Remediation: Equatable, Hashable {
         Response.Message.Collection(messages: nil, nestedMessages: nestedMessages())
     }()
     
-    private weak var flow: IDXAuthenticationFlowAPI?
+    private weak var flow: InteractionCodeFlowAPI?
     
     let method: String
     let href: URL
@@ -51,7 +51,7 @@ public class Remediation: Equatable, Hashable {
     let refresh: TimeInterval?
     let relatesTo: [String]?
     
-    internal required init?(flow: IDXAuthenticationFlowAPI,
+    internal required init?(flow: InteractionCodeFlowAPI,
                             name: String,
                             method: String,
                             href: URL,
@@ -77,19 +77,19 @@ public class Remediation: Equatable, Hashable {
     ///
     /// This method is used to proceed through the authentication flow, using the data assigned to the nested fields' `value` to make selections.
     /// - Important:
-    /// If a completion handler is not provided, you should ensure that you implement the ``IDXAuthenticationFlowDelegate`` methods to process any response or error returned from this call.
+    /// If a completion handler is not provided, you should ensure that you implement the ``InteractionCodeFlowDelegate`` methods to process any response or error returned from this call.
     /// - Parameters:
     ///   - completion: Optional completion handler invoked when a response is received.
-    public func proceed(completion: IDXAuthenticationFlow.ResponseResult? = nil) {
+    public func proceed(completion: InteractionCodeFlow.ResponseResult? = nil) {
         guard let flow = flow else {
             completion?(.failure(.invalidFlow))
             return
         }
         
-        let request: IDXAuthenticationFlow.RemediationRequest
+        let request: InteractionCodeFlow.RemediationRequest
         do {
-            request = try IDXAuthenticationFlow.RemediationRequest(remediation: self)
-        } catch let error as IDXAuthenticationFlowError {
+            request = try InteractionCodeFlow.RemediationRequest(remediation: self)
+        } catch let error as InteractionCodeFlowError {
             flow.send(error: error, completion: completion)
             return
         } catch let error as APIClientError {

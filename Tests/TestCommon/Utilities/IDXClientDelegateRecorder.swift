@@ -14,7 +14,7 @@ import Foundation
 import AuthFoundation
 import OktaIdx
 
-class DelegateRecorder: IDXAuthenticationFlowDelegate {
+class DelegateRecorder: InteractionCodeFlowDelegate {
     struct Call {
         enum CallType {
             case error
@@ -56,7 +56,7 @@ class DelegateRecorder: IDXAuthenticationFlowDelegate {
         finishedCalled = true
     }
     
-    func authentication<Flow>(flow: Flow, received error: IDXAuthenticationFlowError) {
+    func authentication<Flow>(flow: Flow, received error: InteractionCodeFlowError) {
         calls.append(Call(type: .error, object: nil))
     }
     

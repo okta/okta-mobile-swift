@@ -16,11 +16,11 @@ import XCTest
 class IDXResponseCodableTests: XCTestCase {
     func testContextCodable() throws {
         let pkce = try XCTUnwrap(PKCE())
-        let object = IDXAuthenticationFlow.Context(interactionHandle: "handle",
-                                                   state: "state",
-                                                   pkce: pkce)
+        let object = InteractionCodeFlow.Context(interactionHandle: "handle",
+                                                 state: "state",
+                                                 pkce: pkce)
         let data = try JSONEncoder().encode(object)
-        let result = try JSONDecoder().decode(IDXAuthenticationFlow.Context.self, from: data)
+        let result = try JSONDecoder().decode(InteractionCodeFlow.Context.self, from: data)
         XCTAssertEqual(object, result)
     }
 }

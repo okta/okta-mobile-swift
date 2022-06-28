@@ -34,12 +34,12 @@ class IDXClientRequestTests: XCTestCase {
 
     func testInteractRequest() throws {
         let pkce = try XCTUnwrap(PKCE())
-        let request = IDXAuthenticationFlow.InteractRequest(baseURL: issuer,
-                                                            clientId: "clientId",
-                                                            scope: "all",
-                                                            redirectUri: redirectUri,
-                                                            options: [.state: "state", .recoveryToken: "RecoveryToken"],
-                                                            pkce: pkce)
+        let request = InteractionCodeFlow.InteractRequest(baseURL: issuer,
+                                                          clientId: "clientId",
+                                                          scope: "all",
+                                                          redirectUri: redirectUri,
+                                                          options: [.state: "state", .recoveryToken: "RecoveryToken"],
+                                                          pkce: pkce)
 
         let urlRequest = try request.request(for: client)
         XCTAssertEqual(urlRequest.httpMethod, "POST")
@@ -63,8 +63,8 @@ class IDXClientRequestTests: XCTestCase {
     }
 
     func testIntrospectRequest() throws {
-        let request = try IDXAuthenticationFlow.IntrospectRequest(baseURL: issuer,
-                                                                  interactionHandle: "handle")
+        let request = try InteractionCodeFlow.IntrospectRequest(baseURL: issuer,
+                                                                interactionHandle: "handle")
         let urlRequest = try request.request(for: client)
         XCTAssertEqual(urlRequest.httpMethod, "POST")
         
@@ -80,8 +80,8 @@ class IDXClientRequestTests: XCTestCase {
     }
     
     func testRemediationRequest() throws {
-        let context = try IDXAuthenticationFlow.Context(interactionHandle: "handle", state: "state")
-        let flowMock = IDXAuthenticationFlowMock(context: context, client: client, redirectUri: redirectUri)
+        let context = try InteractionCodeFlow.Context(interactionHandle: "handle", state: "state")
+        let flowMock = InteractionCodeFlowMock(context: context, client: client, redirectUri: redirectUri)
         let response = try XCTUnwrap(Response.response(
             flow: flowMock,
             data: data(from: .module,
@@ -91,7 +91,7 @@ class IDXClientRequestTests: XCTestCase {
         remediation["identifier"]?.value = "user@example.com"
         remediation["credentials.passcode"]?.value = "secret"
 
-        let request = try IDXAuthenticationFlow.RemediationRequest(remediation: remediation)
+        let request = try InteractionCodeFlow.RemediationRequest(remediation: remediation)
         
         let urlRequest = try request.request(for: client)
         XCTAssertEqual(urlRequest.httpMethod, "POST")
@@ -116,12 +116,12 @@ class IDXClientRequestTests: XCTestCase {
                            for: "openid-configuration"))
         let pkce = try XCTUnwrap(PKCE())
         
-        let request = IDXAuthenticationFlow.RedirectURLTokenRequest(openIdConfiguration: openIdConfiguration,
-                                                                    clientId: "clientId",
-                                                                    scope: "all",
-                                                                    redirectUri: "redirect:/uri",
-                                                                    interactionCode: "interaction_code",
-                                                                    pkce: pkce)
+        let request = InteractionCodeFlow.RedirectURLTokenRequest(openIdConfiguration: openIdConfiguration,
+                                                                  clientId: "clientId",
+                                                                  scope: "all",
+                                                                  redirectUri: "redirect:/uri",
+                                                                  interactionCode: "interaction_code",
+                                                                  pkce: pkce)
         
         let urlRequest = try request.request(for: client)
         XCTAssertEqual(urlRequest.httpMethod, "POST")
@@ -141,8 +141,8 @@ class IDXClientRequestTests: XCTestCase {
     }
     
     func testSuccessResponseTokenRequest() throws {
-        let context = try IDXAuthenticationFlow.Context(interactionHandle: "handle", state: "state")
-        let flowMock = IDXAuthenticationFlowMock(context: context, client: client, redirectUri: redirectUri)
+        let context = try InteractionCodeFlow.Context(interactionHandle: "handle", state: "state")
+        let flowMock = InteractionCodeFlowMock(context: context, client: client, redirectUri: redirectUri)
 
         let ion = try IonResponse.jsonDecoder.decode(
             IonForm.self,
@@ -179,11 +179,11 @@ class IDXClientRequestTests: XCTestCase {
             """))
         let remediation = try XCTUnwrap(Remediation(flow: flowMock, ion: ion))
         
-        let request = try IDXAuthenticationFlow.SuccessResponseTokenRequest(successResponse: remediation,
-                                                                            clientId: "clientId",
-                                                                            scope: "all",
-                                                                            redirectUri: "redirect:/uri",
-                                                                            context: context)
+        let request = try InteractionCodeFlow.SuccessResponseTokenRequest(successResponse: remediation,
+                                                                          clientId: "clientId",
+                                                                          scope: "all",
+                                                                          redirectUri: "redirect:/uri",
+                                                                          context: context)
         
         let urlRequest = try request.request(for: client)
         XCTAssertEqual(urlRequest.httpMethod, "POST")

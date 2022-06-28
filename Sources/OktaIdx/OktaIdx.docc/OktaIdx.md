@@ -6,7 +6,7 @@ Authenticate users using policy-driven native authentication with the Okta Ident
 
 ### Essentials
 
-- ``IDXAuthenticationFlow``
+- ``InteractionCodeFlow``
 - ``Response``
 - ``Remediation``
 

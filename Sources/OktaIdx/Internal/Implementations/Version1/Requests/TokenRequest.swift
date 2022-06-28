@@ -13,7 +13,7 @@
 import Foundation
 import AuthFoundation
 
-extension IDXAuthenticationFlow {
+extension InteractionCodeFlow {
     struct SuccessResponseTokenRequest {
         let httpMethod: APIRequestMethod
         let url: URL
@@ -26,12 +26,12 @@ extension IDXAuthenticationFlow {
              clientId: String,
              scope: String,
              redirectUri: String,
-             context: IDXAuthenticationFlow.Context) throws
+             context: InteractionCodeFlow.Context) throws
         {
             guard let method = APIRequestMethod(rawValue: option.method),
                   let accepts = option.accepts
             else {
-                throw IDXAuthenticationFlowError.cannotCreateRequest
+                throw InteractionCodeFlowError.cannotCreateRequest
             }
             
             let parameters: [String: Any] = try option.form.allFields.reduce(into: [:]) { partialResult, field in
@@ -42,7 +42,7 @@ extension IDXAuthenticationFlow {
                     
                 case "client_id":
                     guard clientId == field.value as? String else {
-                        throw IDXAuthenticationFlowError.invalidParameter(name: name)
+                        throw InteractionCodeFlowError.invalidParameter(name: name)
                     }
                     fallthrough
                     
@@ -84,10 +84,10 @@ extension IDXAuthenticationFlow {
     }
 }
 
-extension IDXAuthenticationFlow.SuccessResponseTokenRequest: OAuth2TokenRequest, APIRequestBody, APIParsingContext {
+extension InteractionCodeFlow.SuccessResponseTokenRequest: OAuth2TokenRequest, APIRequestBody, APIParsingContext {
 }
 
-extension IDXAuthenticationFlow.RedirectURLTokenRequest: OAuth2TokenRequest, APIRequestBody, APIParsingContext {
+extension InteractionCodeFlow.RedirectURLTokenRequest: OAuth2TokenRequest, APIRequestBody, APIParsingContext {
     var httpMethod: APIRequestMethod { .post }
     var url: URL { openIdConfiguration.tokenEndpoint }
     var contentType: APIContentType? { .formEncoded }

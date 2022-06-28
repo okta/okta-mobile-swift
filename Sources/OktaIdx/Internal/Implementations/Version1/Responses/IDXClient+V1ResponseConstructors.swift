@@ -14,7 +14,7 @@ import Foundation
 import AuthFoundation
 
 extension Response {
-    internal convenience init(flow: IDXAuthenticationFlowAPI, ion response: IonResponse) throws {
+    internal convenience init(flow: InteractionCodeFlowAPI, ion response: IonResponse) throws {
         let authenticators = try Authenticator.Collection(flow: flow, ion: response)
         let remediations = Remediation.Collection(flow: flow, ion: response)
         let successRemediationOption = Remediation(flow: flow, ion: response.successWithInteractionCode)
@@ -36,7 +36,7 @@ extension Response {
 }
 
 extension Response.Message {
-    internal convenience init?(flow: IDXAuthenticationFlowAPI, ion object: IonMessage?) {
+    internal convenience init?(flow: InteractionCodeFlowAPI, ion object: IonMessage?) {
         guard let object = object else { return nil }
         self.init(type: object.type,
                   localizationKey: object.i18n?.key,
@@ -154,7 +154,7 @@ extension Capability.PasswordSettings {
 }
 
 extension Authenticator.Collection {
-    convenience init(flow: IDXAuthenticationFlowAPI, ion object: IonResponse) throws {
+    convenience init(flow: InteractionCodeFlowAPI, ion object: IonResponse) throws {
         let authenticatorMapping: [String: [IonResponse.AuthenticatorMapping]]
         authenticatorMapping = object
             .allAuthenticators()
@@ -179,7 +179,7 @@ extension Authenticator.Collection {
 }
 
 extension Remediation.Collection {
-    convenience init(flow: IDXAuthenticationFlowAPI, ion object: IonResponse?) {
+    convenience init(flow: InteractionCodeFlowAPI, ion object: IonResponse?) {
         var remediations: [Remediation] = object?.remediation?.value.compactMap { (value) in
             Remediation.makeRemediation(flow: flow, ion: value)
         } ?? []
@@ -197,7 +197,7 @@ extension Remediation.Collection {
 }
 
 extension Capability.Sendable {
-    init?(flow: IDXAuthenticationFlowAPI, ion authenticators: [IonAuthenticator]) {
+    init?(flow: InteractionCodeFlowAPI, ion authenticators: [IonAuthenticator]) {
         guard let authenticator = authenticators.compactMap(\.send).first,
               let remediation = Remediation.makeRemediation(flow: flow, ion: authenticator)
         else {
@@ -208,7 +208,7 @@ extension Capability.Sendable {
 }
 
 extension Capability.Resendable {
-    init?(flow: IDXAuthenticationFlowAPI, ion authenticators: [IonAuthenticator]) {
+    init?(flow: InteractionCodeFlowAPI, ion authenticators: [IonAuthenticator]) {
         guard let authenticator = authenticators.compactMap(\.resend).first,
               let remediation = Remediation.makeRemediation(flow: flow, ion: authenticator)
         else {
@@ -219,7 +219,7 @@ extension Capability.Resendable {
 }
 
 extension Capability.Recoverable {
-    init?(flow: IDXAuthenticationFlowAPI, ion authenticators: [IonAuthenticator]) {
+    init?(flow: InteractionCodeFlowAPI, ion authenticators: [IonAuthenticator]) {
         guard let authenticator = authenticators.compactMap(\.recover).first,
               let remediation = Remediation.makeRemediation(flow: flow, ion: authenticator)
         else {
@@ -230,7 +230,7 @@ extension Capability.Recoverable {
 }
 
 extension Capability.Pollable {
-    convenience init?(flow: IDXAuthenticationFlowAPI, ion authenticators: [IonAuthenticator]) {
+    convenience init?(flow: InteractionCodeFlowAPI, ion authenticators: [IonAuthenticator]) {
         guard let typeName = authenticators.first?.type,
               let authenticator = authenticators.compactMap(\.poll).first,
               let remediation = Remediation.makeRemediation(flow: flow, ion: authenticator)
@@ -244,7 +244,7 @@ extension Capability.Pollable {
                   remediation: remediation)
     }
 
-    convenience init?(flow: IDXAuthenticationFlowAPI, ion form: IonForm) {
+    convenience init?(flow: InteractionCodeFlowAPI, ion form: IonForm) {
         guard form.name == "enroll-poll" ||
                 form.name == "challenge-poll"
         else {
@@ -264,7 +264,7 @@ extension Capability.Pollable {
 }
 
 extension Capability.NumberChallenge {
-    init?(flow: IDXAuthenticationFlowAPI, ion authenticators: [IonAuthenticator]) {
+    init?(flow: InteractionCodeFlowAPI, ion authenticators: [IonAuthenticator]) {
         guard let answer = authenticators.compactMap(\.contextualData?["correctAnswer"]).first?.stringValue()
         else {
             return nil
@@ -275,7 +275,7 @@ extension Capability.NumberChallenge {
 }
 
 extension Capability.Profile {
-    init?(flow: IDXAuthenticationFlowAPI, ion authenticators: [IonAuthenticator]) {
+    init?(flow: InteractionCodeFlowAPI, ion authenticators: [IonAuthenticator]) {
         guard let profile = authenticators.compactMap(\.profile).first
         else {
             return nil
@@ -286,7 +286,7 @@ extension Capability.Profile {
 }
 
 extension Capability.PasswordSettings {
-    init?(flow: IDXAuthenticationFlowAPI, ion authenticators: [IonAuthenticator]) {
+    init?(flow: InteractionCodeFlowAPI, ion authenticators: [IonAuthenticator]) {
         guard let typeName = authenticators.first?.type,
               Authenticator.Kind(string: typeName) == .password,
               let settings = authenticators.compactMap(\.settings).first
@@ -299,7 +299,7 @@ extension Capability.PasswordSettings {
 }
 
 extension Capability.OTP {
-    init?(flow: IDXAuthenticationFlowAPI, ion authenticators: [IonAuthenticator]) {
+    init?(flow: InteractionCodeFlowAPI, ion authenticators: [IonAuthenticator]) {
         let methods = methodTypes(from: authenticators)
         guard methods.contains(.otp) || methods.contains(.totp)
         else {
@@ -329,7 +329,7 @@ extension Capability.OTP {
 }
 
 extension Capability.SocialIDP {
-    init?(flow: IDXAuthenticationFlowAPI, ion object: IonForm) {
+    init?(flow: InteractionCodeFlowAPI, ion object: IonForm) {
         let type = Remediation.RemediationType(string: object.name)
         guard type == .redirectIdp,
               let idpObject = object.idp,
@@ -370,7 +370,7 @@ private func methodTypes(from authenticators: [IonAuthenticator]) -> [Authentica
 }
 
 extension Authenticator {
-    static func makeAuthenticator(flow: IDXAuthenticationFlowAPI,
+    static func makeAuthenticator(flow: InteractionCodeFlowAPI,
                                   ion authenticators: [IonAuthenticator],
                                   jsonPaths: [String],
                                   in response: IonResponse) throws -> Authenticator?
@@ -379,7 +379,7 @@ extension Authenticator {
 
         let filteredTypes = Set(authenticators.map(\.type))
         guard filteredTypes.count == 1 else {
-            throw IDXAuthenticationFlowError.internalMessage("Some mapped authenticators have differing types: \(filteredTypes.joined(separator: ", "))")
+            throw InteractionCodeFlowError.internalMessage("Some mapped authenticators have differing types: \(filteredTypes.joined(separator: ", "))")
         }
         
         let state = response.authenticatorState(for: authenticators, in: jsonPaths)
@@ -410,7 +410,7 @@ extension Authenticator {
 }
 
 extension Remediation {
-    static func makeRemediation(flow: IDXAuthenticationFlowAPI,
+    static func makeRemediation(flow: InteractionCodeFlowAPI,
                                 ion object: IonForm?,
                                 createCapabilities: Bool = true) -> Remediation?
     {
@@ -439,7 +439,7 @@ extension Remediation {
                            capabilities: capabilities.compactMap { $0 })
     }
 
-    internal convenience init?(flow: IDXAuthenticationFlowAPI, ion object: IonForm?) {
+    internal convenience init?(flow: InteractionCodeFlowAPI, ion object: IonForm?) {
         guard let object = object,
               let form = Form(fields: object.value?.map({ (value) in
                 .init(flow: flow, ion: value)
@@ -461,7 +461,7 @@ extension Remediation {
 }
 
 extension Remediation.Form.Field {
-    internal convenience init(flow: IDXAuthenticationFlowAPI, ion object: IonFormValue) {
+    internal convenience init(flow: InteractionCodeFlowAPI, ion object: IonFormValue) {
         // Fields default to visible, except there are circumstances where
         // fields (such as `id`) don't properly include a `visible: false`. As a result,
         // we need to infer visibility from other values.

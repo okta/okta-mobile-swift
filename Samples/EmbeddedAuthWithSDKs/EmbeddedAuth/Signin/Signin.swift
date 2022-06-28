@@ -27,17 +27,17 @@ public class Signin {
     private var completion: ((Result<Credential, Error>) -> Void)?
     private var navigationController: UINavigationController?
     
-    internal let flow: IDXAuthenticationFlow
+    internal let flow: InteractionCodeFlow
     
     /// Initializes a signin instance with the given client configuration.
     /// - Parameter configuration: Client app configuration.
-    init(using flow: IDXAuthenticationFlow) {
+    init(using flow: InteractionCodeFlow) {
         self.flow = flow
         self.storyboard = UIStoryboard(name: "IDXSignin", bundle: Bundle(for: type(of: self)))
     }
     
     convenience init?() {
-        guard let flow = ClientConfiguration.active?.idxFlow else {
+        guard let flow = ClientConfiguration.active?.flow else {
             return nil
         }
         self.init(using: flow)

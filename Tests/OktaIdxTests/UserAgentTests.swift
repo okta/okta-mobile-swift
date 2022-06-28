@@ -19,7 +19,7 @@ class UserAgentTests: XCTestCase {
     var issuer: URL!
     var redirectUri: URL!
     var client: OAuth2Client!
-    var flow: IDXAuthenticationFlow!
+    var flow: InteractionCodeFlow!
     let urlSession = URLSessionMock()
 
     override func setUpWithError() throws {
@@ -29,7 +29,7 @@ class UserAgentTests: XCTestCase {
                               clientId: "clientId",
                               scopes: "openid profile",
                               session: urlSession)
-        flow = IDXAuthenticationFlow(redirectUri: redirectUri, client: client)
+        flow = InteractionCodeFlow(redirectUri: redirectUri, client: client)
 
         let pattern = "okta-authfoundation-swift/[\\d\\.]+ okta-idx-swift/[\\d\\.]+ (iOS|watchOS|tvOS|macOS|linux)/[\\d\\.]+ Device/\\S+"
         regex = try NSRegularExpression(pattern: pattern, options: [])
@@ -43,12 +43,12 @@ class UserAgentTests: XCTestCase {
     }
     
     func testInteractRequest() throws {
-        let request = IDXAuthenticationFlow.InteractRequest(baseURL: issuer,
-                                                            clientId: "ClientId",
-                                                            scope: "all",
-                                                            redirectUri: redirectUri,
-                                                            options: nil,
-                                                            pkce: PKCE()!)
+        let request = InteractionCodeFlow.InteractRequest(baseURL: issuer,
+                                                          clientId: "ClientId",
+                                                          scope: "all",
+                                                          redirectUri: redirectUri,
+                                                          options: nil,
+                                                          pkce: PKCE()!)
         let urlRequest = try request.request(for: client)
         let userAgent = urlRequest.allHTTPHeaderFields?["User-Agent"]
         XCTAssertNotNil(userAgent)
@@ -58,8 +58,8 @@ class UserAgentTests: XCTestCase {
     }
 
     func testIntrospectRequest() throws {
-        let request = try IDXAuthenticationFlow.IntrospectRequest(baseURL: issuer,
-                                                                  interactionHandle: "abc123")
+        let request = try InteractionCodeFlow.IntrospectRequest(baseURL: issuer,
+                                                                interactionHandle: "abc123")
         let urlRequest = try request.request(for: client)
         let userAgent = urlRequest.allHTTPHeaderFields?["User-Agent"]
         XCTAssertNotNil(userAgent)
@@ -69,10 +69,10 @@ class UserAgentTests: XCTestCase {
     }
     
     func testRemediationRequest() throws {
-        let request = IDXAuthenticationFlow.RemediationRequest(httpMethod: .post,
-                                                               url: issuer,
-                                                               contentType: nil,
-                                                               bodyParameters: nil)
+        let request = InteractionCodeFlow.RemediationRequest(httpMethod: .post,
+                                                             url: issuer,
+                                                             contentType: nil,
+                                                             bodyParameters: nil)
         let urlRequest = try request.request(for: client)
         let userAgent = urlRequest.allHTTPHeaderFields?["User-Agent"]
         XCTAssertNotNil(userAgent)

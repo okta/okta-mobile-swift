@@ -183,7 +183,7 @@ struct ClientConfiguration {
         defaults.setValue(scopes, forKey: type(of: self).scopesKey)
         defaults.synchronize()
         
-        NotificationCenter.default.post(name: .configurationChanged, object: self.idxFlow)
+        NotificationCenter.default.post(name: .configurationChanged, object: self.flow)
     }
     
     enum ConfigurationError: Error, LocalizedError {

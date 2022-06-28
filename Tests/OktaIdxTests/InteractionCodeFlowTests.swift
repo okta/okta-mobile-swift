@@ -17,13 +17,13 @@ import XCTest
 @testable import TestCommon
 #endif
 
-class IDXAuthenticationFlowTests: XCTestCase {
+class InteractionCodeFlowTests: XCTestCase {
     var issuer: URL!
     var client: OAuth2Client!
     var urlSession: URLSessionMock!
     var redirectUri: URL!
-    var flow: IDXAuthenticationFlow!
-    var context: IDXAuthenticationFlow.Context!
+    var flow: InteractionCodeFlow!
+    var context: InteractionCodeFlow.Context!
     var delegate: DelegateRecorder!
 
     override func setUpWithError() throws {
@@ -35,8 +35,8 @@ class IDXAuthenticationFlowTests: XCTestCase {
                               clientId: "clientId",
                               scopes: "openid profile",
                               session: urlSession)
-        flow = IDXAuthenticationFlow(redirectUri: redirectUri, client: client)
-        context = try IDXAuthenticationFlow.Context(interactionHandle: "interactionHandle", state: "state")
+        flow = InteractionCodeFlow(redirectUri: redirectUri, client: client)
+        context = try InteractionCodeFlow.Context(interactionHandle: "interactionHandle", state: "state")
 
         delegate = DelegateRecorder()
         flow.add(delegate: delegate)
@@ -94,7 +94,7 @@ class IDXAuthenticationFlowTests: XCTestCase {
             defer { wait.fulfill() }
             
             guard case let Result.failure(error) = result,
-                  case let IDXAuthenticationFlowError.apiError(apiError) = error,
+                  case let InteractionCodeFlowError.apiError(apiError) = error,
                   case let APIClientError.serverError(oauthError) = apiError,
                   let oauthError = oauthError as? OAuth2ServerError
             else {

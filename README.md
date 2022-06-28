@@ -92,7 +92,7 @@ Once you initialize an `IDXClient`, you can call methods to make requests to the
 ### Create the flow
 
 ```swift
-let flow = IDXAuthenticationFlow(
+let flow = InteractionCodeFlow(
     issuer: "https:///<#oktaDomain#>/oauth2/default", // e.g. https://foo.okta.com/oauth2/default, https://foo.okta.com/oauth2/ausar5vgt5TSDsfcJ0h7
     clientId: "<#clientId#>",
     scopes: ["openid", "email", "offline_access", "<#otherScopes#>"],
@@ -129,7 +129,7 @@ In this example the sign-on policy has no authenticators required.
 > **Note:** Steps to identify the user might change based on your Org configuration.
 
 ```swift
-let flow: IDXAuthenticationFlow
+let flow: InteractionCodeFlow
 
 func signIn(username: String, password: String) async throws -> Token? {
     // Start the IDX authentication session
@@ -549,15 +549,15 @@ if response.remediations.isEmpty {
 }
 ```
 
-### Responding to events using IDXAuthenticationFlowDelegate
+### Responding to events using InteractionCodeFlowDelegate
 
-The `IDXAuthenticationFlow` class supports the use of a delegate to centralize response handling and processing. This enables a single delegate object to intercept all responses, errors, and tokens that are received by the client, regardless of where the initial call is made within your application.
+The `InteractionCodeFlow` class supports the use of a delegate to centralize response handling and processing. This enables a single delegate object to intercept all responses, errors, and tokens that are received by the client, regardless of where the initial call is made within your application.
 
 The following example highlights how simple username/password authentication can be implemented using a delegate.
 
 ```swift
-class LoginManager: IDXAuthenticationFlowDelegate {
-    private let flow = IDXAuthenticationFlow(issuer: issuerUrl,
+class LoginManager: InteractionCodeFlowDelegate {
+    private let flow = InteractionCodeFlow(issuer: issuerUrl,
                                              clientId: clientId,
                                              scopes: scopes,
                                              redirectUri: redirectUrl)
@@ -578,7 +578,7 @@ class LoginManager: IDXAuthenticationFlowDelegate {
         }
     }
     
-    func authentication<Flow>(flow: Flow, received response: Response) where Flow : IDXAuthenticationFlow {
+    func authentication<Flow>(flow: Flow, received response: Response) where Flow : InteractionCodeFlow {
         // If login is successful, immediately exchange it for a token.
         guard !response.isLoginSuccessful else {
             response.exchangeCode()
@@ -603,7 +603,7 @@ class LoginManager: IDXAuthenticationFlowDelegate {
         // Handle other scenarios / remediation states here...
     }
     
-    func authentication<Flow>(flow: Flow, received token: Token) where Flow : IDXAuthenticationFlow {
+    func authentication<Flow>(flow: Flow, received token: Token) where Flow : InteractionCodeFlow {
         // Login succeeded, with the given token.
         do {
             try Credential.store(token)

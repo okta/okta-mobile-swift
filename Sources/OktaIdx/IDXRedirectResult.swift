@@ -12,7 +12,7 @@
 
 import Foundation
 
-extension IDXAuthenticationFlow {
+extension InteractionCodeFlow {
     /// Result of parsing a redirect URL.
     public enum RedirectResult {
         /// Redirect URL contains Authorization Code.

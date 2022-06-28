@@ -15,11 +15,11 @@ import UIKit
 import OktaIdx
 
 extension ClientConfiguration {
-    var idxFlow: IDXAuthenticationFlow {
-        IDXAuthenticationFlow(issuer: issuer,
-                              clientId: clientId,
-                              scopes: scopes,
-                              redirectUri: redirectUri)
+    var flow: InteractionCodeFlow {
+        InteractionCodeFlow(issuer: issuer,
+                            clientId: clientId,
+                            scopes: scopes,
+                            redirectUri: redirectUri)
     }
 }
 

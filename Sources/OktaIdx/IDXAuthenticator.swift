@@ -46,9 +46,9 @@ public class Authenticator: Equatable {
         lhs.methods == rhs.methods
     }
     
-    private weak var flow: IDXAuthenticationFlowAPI?
+    private weak var flow: InteractionCodeFlowAPI?
     let jsonPaths: [String]
-    init(flow: IDXAuthenticationFlowAPI,
+    init(flow: InteractionCodeFlowAPI,
          v1JsonPaths: [String],
          state: State,
          id: String?,

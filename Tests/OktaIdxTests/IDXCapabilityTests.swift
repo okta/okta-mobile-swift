@@ -21,7 +21,7 @@ class IDXCapabilityTests: XCTestCase {
     var client: OAuth2Client!
     var redirectUri: URL!
     let urlSession = URLSessionMock()
-    var flowMock: IDXAuthenticationFlowMock!
+    var flowMock: InteractionCodeFlowMock!
     var remediation: Remediation!
     var responseData: Data!
     var response: Response!
@@ -35,9 +35,9 @@ class IDXCapabilityTests: XCTestCase {
                               scopes: "openid profile",
                               session: urlSession)
         
-        let context = try IDXAuthenticationFlow.Context(interactionHandle: "handle", state: "state")
+        let context = try InteractionCodeFlow.Context(interactionHandle: "handle", state: "state")
         
-        flowMock = IDXAuthenticationFlowMock(context: context, client: client, redirectUri: redirectUri)
+        flowMock = InteractionCodeFlowMock(context: context, client: client, redirectUri: redirectUri)
 
         let fields = try XCTUnwrap(Remediation.Form(fields: []))
         remediation = Remediation(flow: flowMock,

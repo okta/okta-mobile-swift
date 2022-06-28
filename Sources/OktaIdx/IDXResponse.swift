@@ -49,10 +49,10 @@ public class Response: NSObject {
     /// Cancels the current workflow, and restarts the session.
     ///
     /// - Important:
-    /// If a completion handler is not provided, you should ensure that you implement the ``IDXAuthenticationFlowDelegate`` methods to process any response or error returned from this call.
+    /// If a completion handler is not provided, you should ensure that you implement the ``InteractionCodeFlowDelegate`` methods to process any response or error returned from this call.
     /// - Parameters:
     ///   - completion: Optional completion handler invoked when the operation is cancelled.
-    public func cancel(completion: IDXAuthenticationFlow.ResponseResult? = nil) {
+    public func cancel(completion: InteractionCodeFlow.ResponseResult? = nil) {
         guard let cancelOption = remediations[.cancel] else {
             flow.send(error: .unknownRemediationOption(name: "cancel"), completion: completion)
             return
@@ -65,10 +65,10 @@ public class Response: NSObject {
     ///
     /// Once the ``isLoginSuccessful`` property is `true`, the developer can exchange the response for a valid token by using this method.
     /// - Important:
-    /// If a completion handler is not provided, you should ensure that you implement the ``IDXAuthenticationFlowDelegate`` methods to receive the token or to handle any errors.
+    /// If a completion handler is not provided, you should ensure that you implement the ``InteractionCodeFlowDelegate`` methods to receive the token or to handle any errors.
     /// - Parameters:
     ///   - completion: Optional completion handler invoked when a token, or error, is received.
-    public func exchangeCode(completion: IDXAuthenticationFlow.TokenResult? = nil) {
+    public func exchangeCode(completion: InteractionCodeFlow.TokenResult? = nil) {
         guard let remediation = successRemediationOption else {
             completion?(.failure(.successResponseMissing))
             return
@@ -85,7 +85,7 @@ public class Response: NSObject {
         }
         
         do {
-            let tokenRequest = try IDXAuthenticationFlow.SuccessResponseTokenRequest(
+            let tokenRequest = try InteractionCodeFlow.SuccessResponseTokenRequest(
                 successResponse: remediation,
                 clientId: flow.client.configuration.clientId,
                 scope: flow.client.configuration.scopes,
@@ -101,7 +101,7 @@ public class Response: NSObject {
                     self.flow.send(error: .apiError(error), completion: completion)
                 }
             }
-        } catch let error as IDXAuthenticationFlowError {
+        } catch let error as InteractionCodeFlowError {
             flow.send(error: error, completion: completion)
             return
         } catch let error as APIClientError {
@@ -113,9 +113,9 @@ public class Response: NSObject {
         }
     }
     
-    private let flow: IDXAuthenticationFlowAPI
+    private let flow: InteractionCodeFlowAPI
     let successRemediationOption: Remediation?
-    internal init(flow: IDXAuthenticationFlowAPI,
+    internal init(flow: InteractionCodeFlowAPI,
                   expiresAt: Date?,
                   intent: Intent,
                   authenticators: Authenticator.Collection,

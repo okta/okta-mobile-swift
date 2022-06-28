@@ -13,20 +13,20 @@
 import Foundation
 import AuthFoundation
 
-extension IDXAuthenticationFlow {
+extension InteractionCodeFlow {
     struct InteractRequest {
         let url: URL
         let clientId: String
         let scope: String
         let redirectUri: URL
-        let options: [IDXAuthenticationFlow.Option: String]?
+        let options: [InteractionCodeFlow.Option: String]?
         let pkce: PKCE
 
         init(baseURL: URL,
              clientId: String,
              scope: String,
              redirectUri: URL,
-             options: [IDXAuthenticationFlow.Option: String]?,
+             options: [InteractionCodeFlow.Option: String]?,
              pkce: PKCE)
         {
             url = baseURL.appendingPathComponent("v1/interact")
@@ -43,7 +43,7 @@ extension IDXAuthenticationFlow {
     }
 }
 
-extension IDXAuthenticationFlow.InteractRequest: APIRequest, APIRequestBody {
+extension InteractionCodeFlow.InteractRequest: APIRequest, APIRequestBody {
     typealias ResponseType = Response
     
     var httpMethod: APIRequestMethod { .post }
@@ -59,7 +59,7 @@ extension IDXAuthenticationFlow.InteractRequest: APIRequest, APIRequestBody {
             "code_challenge_method": pkce.method.rawValue
         ]
         
-        options?.forEach { (key: IDXAuthenticationFlow.Option, value: String) in
+        options?.forEach { (key: InteractionCodeFlow.Option, value: String) in
             result[key.rawValue] = value
         }
         

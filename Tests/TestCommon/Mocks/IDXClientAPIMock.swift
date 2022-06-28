@@ -33,53 +33,53 @@ class MockBase {
         return expectations.removeValue(forKey: name)
     }
     
-    func result<T>(for name: String) -> Result<T, IDXAuthenticationFlowError> {
+    func result<T>(for name: String) -> Result<T, InteractionCodeFlowError> {
         let responseData = response(for: name)
         if let result = responseData?["response"] as? T {
             return .success(result)
         }
         
-        let error = responseData?["error"] as? IDXAuthenticationFlowError ?? IDXAuthenticationFlowError.invalidFlow
+        let error = responseData?["error"] as? InteractionCodeFlowError ?? InteractionCodeFlowError.invalidFlow
         return .failure(error)
     }
 }
 
-class IDXAuthenticationFlowMock: MockBase, IDXAuthenticationFlowAPI {
+class InteractionCodeFlowMock: MockBase, InteractionCodeFlowAPI {
     let client: OAuth2Client
     let redirectUri: URL
-    let context: IDXAuthenticationFlow.Context?
+    let context: InteractionCodeFlow.Context?
     
-    init(context: IDXAuthenticationFlow.Context, client: OAuth2Client, redirectUri: URL) {
+    init(context: InteractionCodeFlow.Context, client: OAuth2Client, redirectUri: URL) {
         self.context = context
         self.client = client
         self.redirectUri = redirectUri
     }
 
-    func send(response: Response, completion: IDXAuthenticationFlow.ResponseResult?) {
+    func send(response: Response, completion: InteractionCodeFlow.ResponseResult?) {
         recordedCalls.append(RecordedCall(function: #function,
                                           arguments: ["response": response as Any]))
         completion?(result(for: #function))
     }
     
-    func send(response: Token, completion: IDXAuthenticationFlow.TokenResult?) {
+    func send(response: Token, completion: InteractionCodeFlow.TokenResult?) {
         recordedCalls.append(RecordedCall(function: #function,
                                           arguments: ["response": response as Any]))
         completion?(result(for: #function))
     }
     
-    func send(error: IDXAuthenticationFlowError, completion: IDXAuthenticationFlow.ResponseResult?) {
+    func send(error: InteractionCodeFlowError, completion: InteractionCodeFlow.ResponseResult?) {
         recordedCalls.append(RecordedCall(function: #function,
                                           arguments: ["error": error as Any]))
         completion?(result(for: #function))
     }
     
-    func send(error: IDXAuthenticationFlowError, completion: IDXAuthenticationFlow.TokenResult?) {
+    func send(error: InteractionCodeFlowError, completion: InteractionCodeFlow.TokenResult?) {
         recordedCalls.append(RecordedCall(function: #function,
                                           arguments: ["error": error as Any]))
         completion?(result(for: #function))
     }
     
-    func redirectResult(for url: URL) -> IDXAuthenticationFlow.RedirectResult {
+    func redirectResult(for url: URL) -> InteractionCodeFlow.RedirectResult {
         recordedCalls.append(RecordedCall(function: #function,
                                           arguments: [
                                             "redirect": url as Any

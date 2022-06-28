@@ -131,7 +131,7 @@ extension TestResponse where Self : Decodable {
             return try data(from: .json(try String(contentsOf: url)))
         case .json(let json):
             let data = json.data(using: .utf8)!
-            return try IDXAuthenticationFlow.IntrospectRequest.jsonDecoder.decode(Self.self, from: data)
+            return try InteractionCodeFlow.IntrospectRequest.jsonDecoder.decode(Self.self, from: data)
         }
     }
 }

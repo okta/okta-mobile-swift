@@ -26,7 +26,7 @@ extension Remediation.Form {
             } else if let name = field.name {
                 result[name] = nestedResult
             } else {
-                throw IDXAuthenticationFlowError.invalidRequestData
+                throw InteractionCodeFlowError.invalidRequestData
             }
         }
     }
@@ -50,7 +50,7 @@ extension Remediation.Form.Field {
                             return new
                         })
                     } else {
-                        throw IDXAuthenticationFlowError.invalidParameter(name: formValue.name ?? "")
+                        throw InteractionCodeFlowError.invalidParameter(name: formValue.name ?? "")
                     }
                 }
                 return result
@@ -74,7 +74,7 @@ extension Remediation.Form.Field {
                         return new
                     })
                 } else {
-                    throw IDXAuthenticationFlowError.invalidRequestData
+                    throw InteractionCodeFlowError.invalidRequestData
                 }
             }
             result = [name: childValues]
@@ -97,7 +97,7 @@ extension Remediation.Form.Field {
         }
 
         if isRequired && result == nil {
-            throw IDXAuthenticationFlowError.missingRequiredParameter(name: name)
+            throw InteractionCodeFlowError.missingRequiredParameter(name: name)
         }
         
         return result

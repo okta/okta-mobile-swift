@@ -24,7 +24,7 @@ class PollingHandler {
         isPolling = false
     }
     
-    func start(completion: @escaping (Result<Response, IDXAuthenticationFlowError>) -> Remediation?) {
+    func start(completion: @escaping (Result<Response, InteractionCodeFlowError>) -> Remediation?) {
         guard !isPolling else { return }
         
         isPolling = true
@@ -35,7 +35,7 @@ class PollingHandler {
         isPolling = false
     }
     
-    func nextPoll(completion: @escaping (Result<Response, IDXAuthenticationFlowError>) -> Remediation?) {
+    func nextPoll(completion: @escaping (Result<Response, InteractionCodeFlowError>) -> Remediation?) {
         guard let refreshTime = pollOption.refresh,
               refreshTime > 0
         else {

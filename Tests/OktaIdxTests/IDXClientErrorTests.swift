@@ -15,74 +15,74 @@ import XCTest
 
 class IDXClientErrorTests: XCTestCase {
     func testEquality() {
-        XCTAssertEqual(IDXAuthenticationFlowError.invalidFlow,
-                       IDXAuthenticationFlowError.invalidFlow)
-        XCTAssertEqual(IDXAuthenticationFlowError.cannotCreateRequest,
-                       IDXAuthenticationFlowError.cannotCreateRequest)
-        XCTAssertEqual(IDXAuthenticationFlowError.invalidHTTPResponse,
-                       IDXAuthenticationFlowError.invalidHTTPResponse)
-        XCTAssertEqual(IDXAuthenticationFlowError.invalidResponseData,
-                       IDXAuthenticationFlowError.invalidResponseData)
-        XCTAssertEqual(IDXAuthenticationFlowError.invalidRequestData,
-                       IDXAuthenticationFlowError.invalidRequestData)
-        XCTAssertEqual(IDXAuthenticationFlowError.successResponseMissing,
-                       IDXAuthenticationFlowError.successResponseMissing)
-        XCTAssertEqual(IDXAuthenticationFlowError.serverError(message: "Message", localizationKey: "key", type: "type"),
-                       IDXAuthenticationFlowError.serverError(message: "Message", localizationKey: "key", type: "type"))
-        XCTAssertEqual(IDXAuthenticationFlowError.invalidParameter(name: "name"),
-                       IDXAuthenticationFlowError.invalidParameter(name: "name"))
-        XCTAssertEqual(IDXAuthenticationFlowError.invalidParameterValue(name: "name", type: "type"),
-                       IDXAuthenticationFlowError.invalidParameterValue(name: "name", type: "type"))
-        XCTAssertEqual(IDXAuthenticationFlowError.parameterImmutable(name: "name"),
-                       IDXAuthenticationFlowError.parameterImmutable(name: "name"))
-        XCTAssertEqual(IDXAuthenticationFlowError.missingRequiredParameter(name: "name"),
-                       IDXAuthenticationFlowError.missingRequiredParameter(name: "name"))
-        XCTAssertEqual(IDXAuthenticationFlowError.unknownRemediationOption(name: "name"),
-                       IDXAuthenticationFlowError.unknownRemediationOption(name: "name"))
+        XCTAssertEqual(InteractionCodeFlowError.invalidFlow,
+                       InteractionCodeFlowError.invalidFlow)
+        XCTAssertEqual(InteractionCodeFlowError.cannotCreateRequest,
+                       InteractionCodeFlowError.cannotCreateRequest)
+        XCTAssertEqual(InteractionCodeFlowError.invalidHTTPResponse,
+                       InteractionCodeFlowError.invalidHTTPResponse)
+        XCTAssertEqual(InteractionCodeFlowError.invalidResponseData,
+                       InteractionCodeFlowError.invalidResponseData)
+        XCTAssertEqual(InteractionCodeFlowError.invalidRequestData,
+                       InteractionCodeFlowError.invalidRequestData)
+        XCTAssertEqual(InteractionCodeFlowError.successResponseMissing,
+                       InteractionCodeFlowError.successResponseMissing)
+        XCTAssertEqual(InteractionCodeFlowError.serverError(message: "Message", localizationKey: "key", type: "type"),
+                       InteractionCodeFlowError.serverError(message: "Message", localizationKey: "key", type: "type"))
+        XCTAssertEqual(InteractionCodeFlowError.invalidParameter(name: "name"),
+                       InteractionCodeFlowError.invalidParameter(name: "name"))
+        XCTAssertEqual(InteractionCodeFlowError.invalidParameterValue(name: "name", type: "type"),
+                       InteractionCodeFlowError.invalidParameterValue(name: "name", type: "type"))
+        XCTAssertEqual(InteractionCodeFlowError.parameterImmutable(name: "name"),
+                       InteractionCodeFlowError.parameterImmutable(name: "name"))
+        XCTAssertEqual(InteractionCodeFlowError.missingRequiredParameter(name: "name"),
+                       InteractionCodeFlowError.missingRequiredParameter(name: "name"))
+        XCTAssertEqual(InteractionCodeFlowError.unknownRemediationOption(name: "name"),
+                       InteractionCodeFlowError.unknownRemediationOption(name: "name"))
         
-        XCTAssertNotEqual(IDXAuthenticationFlowError.serverError(message: "Message", localizationKey: "key", type: "type"),
-                          IDXAuthenticationFlowError.serverError(message: "Other", localizationKey: "other", type: "type"))
-        XCTAssertNotEqual(IDXAuthenticationFlowError.invalidParameter(name: "name1"),
-                          IDXAuthenticationFlowError.invalidParameter(name: "name2"))
-        XCTAssertNotEqual(IDXAuthenticationFlowError.invalidParameterValue(name: "name1", type: "type"),
-                          IDXAuthenticationFlowError.invalidParameterValue(name: "name2", type: "type"))
-        XCTAssertNotEqual(IDXAuthenticationFlowError.parameterImmutable(name: "name1"),
-                          IDXAuthenticationFlowError.parameterImmutable(name: "name2"))
-        XCTAssertNotEqual(IDXAuthenticationFlowError.missingRequiredParameter(name: "name1"),
-                          IDXAuthenticationFlowError.missingRequiredParameter(name: "name2"))
-        XCTAssertNotEqual(IDXAuthenticationFlowError.unknownRemediationOption(name: "option1"),
-                          IDXAuthenticationFlowError.unknownRemediationOption(name: "option2"))
+        XCTAssertNotEqual(InteractionCodeFlowError.serverError(message: "Message", localizationKey: "key", type: "type"),
+                          InteractionCodeFlowError.serverError(message: "Other", localizationKey: "other", type: "type"))
+        XCTAssertNotEqual(InteractionCodeFlowError.invalidParameter(name: "name1"),
+                          InteractionCodeFlowError.invalidParameter(name: "name2"))
+        XCTAssertNotEqual(InteractionCodeFlowError.invalidParameterValue(name: "name1", type: "type"),
+                          InteractionCodeFlowError.invalidParameterValue(name: "name2", type: "type"))
+        XCTAssertNotEqual(InteractionCodeFlowError.parameterImmutable(name: "name1"),
+                          InteractionCodeFlowError.parameterImmutable(name: "name2"))
+        XCTAssertNotEqual(InteractionCodeFlowError.missingRequiredParameter(name: "name1"),
+                          InteractionCodeFlowError.missingRequiredParameter(name: "name2"))
+        XCTAssertNotEqual(InteractionCodeFlowError.unknownRemediationOption(name: "option1"),
+                          InteractionCodeFlowError.unknownRemediationOption(name: "option2"))
         
-        XCTAssertNotEqual(IDXAuthenticationFlowError.invalidFlow,
-                          IDXAuthenticationFlowError.invalidHTTPResponse)
+        XCTAssertNotEqual(InteractionCodeFlowError.invalidFlow,
+                          InteractionCodeFlowError.invalidHTTPResponse)
     }
     
     func testDescription() {
-        XCTAssertEqual(IDXAuthenticationFlowError.invalidFlow.localizedDescription,
-                       "IDXAuthenticationFlow instance is invalid.")
-        XCTAssertEqual(IDXAuthenticationFlowError.cannotCreateRequest.localizedDescription,
+        XCTAssertEqual(InteractionCodeFlowError.invalidFlow.localizedDescription,
+                       "InteractionCodeFlow instance is invalid.")
+        XCTAssertEqual(InteractionCodeFlowError.cannotCreateRequest.localizedDescription,
                        "Could not create a URL request for this action.")
-        XCTAssertEqual(IDXAuthenticationFlowError.invalidHTTPResponse.localizedDescription,
+        XCTAssertEqual(InteractionCodeFlowError.invalidHTTPResponse.localizedDescription,
                        "Response received from a URL request is invalid.")
-        XCTAssertEqual(IDXAuthenticationFlowError.invalidResponseData.localizedDescription,
+        XCTAssertEqual(InteractionCodeFlowError.invalidResponseData.localizedDescription,
                        "Response data is invalid or could not be parsed.")
-        XCTAssertEqual(IDXAuthenticationFlowError.invalidRequestData.localizedDescription,
+        XCTAssertEqual(InteractionCodeFlowError.invalidRequestData.localizedDescription,
                        "Request data is invalid or could not be parsed.")
-        XCTAssertEqual(IDXAuthenticationFlowError.serverError(message: "Message", localizationKey: "key", type: "type").localizedDescription,
+        XCTAssertEqual(InteractionCodeFlowError.serverError(message: "Message", localizationKey: "key", type: "type").localizedDescription,
                        "Message")
-        XCTAssertEqual(IDXAuthenticationFlowError.invalidParameter(name: "name").localizedDescription,
+        XCTAssertEqual(InteractionCodeFlowError.invalidParameter(name: "name").localizedDescription,
                        "Invalid parameter \"name\" supplied to a remediation option.")
-        XCTAssertEqual(IDXAuthenticationFlowError.internalMessage("name").localizedDescription,
+        XCTAssertEqual(InteractionCodeFlowError.internalMessage("name").localizedDescription,
                        "name")
-        XCTAssertEqual(IDXAuthenticationFlowError.invalidParameterValue(name: "name", type: "string").localizedDescription,
+        XCTAssertEqual(InteractionCodeFlowError.invalidParameterValue(name: "name", type: "string").localizedDescription,
                        "Parameter \"name\" was supplied a string value which is unsupported.")
-        XCTAssertEqual(IDXAuthenticationFlowError.parameterImmutable(name: "name").localizedDescription,
+        XCTAssertEqual(InteractionCodeFlowError.parameterImmutable(name: "name").localizedDescription,
                        "Cannot override immutable remediation parameter \"name\".")
-        XCTAssertEqual(IDXAuthenticationFlowError.missingRequiredParameter(name: "name").localizedDescription,
+        XCTAssertEqual(InteractionCodeFlowError.missingRequiredParameter(name: "name").localizedDescription,
                        "Required parameter \"name\" missing.")
-        XCTAssertEqual(IDXAuthenticationFlowError.unknownRemediationOption(name: "name").localizedDescription,
+        XCTAssertEqual(InteractionCodeFlowError.unknownRemediationOption(name: "name").localizedDescription,
                        "Unknown remediation option \"name\".")
-        XCTAssertEqual(IDXAuthenticationFlowError.successResponseMissing.localizedDescription,
+        XCTAssertEqual(InteractionCodeFlowError.successResponseMissing.localizedDescription,
                        "Success response is missing or unavailable.")
     }
 }

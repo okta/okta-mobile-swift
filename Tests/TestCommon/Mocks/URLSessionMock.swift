@@ -21,10 +21,10 @@ import FoundationNetworking
 #endif
 
 extension Response {
-    class func response(flow: IDXAuthenticationFlowAPI,
+    class func response(flow: InteractionCodeFlowAPI,
                         data: Data) throws -> Response
     {
-        let response = try IDXAuthenticationFlow.IntrospectRequest.jsonDecoder.decode(IonResponse.self, from: data)
+        let response = try InteractionCodeFlow.IntrospectRequest.jsonDecoder.decode(IonResponse.self, from: data)
         return try Response(flow: flow, ion: response)
     }
 }

@@ -27,7 +27,7 @@ class IDXStartViewController: UIViewController, IDXSigninController {
             return
         }
         
-        var options = [IDXAuthenticationFlow.Option:String]()
+        var options = [InteractionCodeFlow.Option:String]()
         if let recoveryToken = ClientConfiguration.active?.recoveryToken {
             options[.recoveryToken] = recoveryToken
         }

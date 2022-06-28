@@ -13,17 +13,17 @@
 import Foundation
 import AuthFoundation
 
-protocol IDXAuthenticationFlowAPI: AnyObject {
+protocol InteractionCodeFlowAPI: AnyObject {
     var client: OAuth2Client { get }
     var redirectUri: URL { get }
-    var context: IDXAuthenticationFlow.Context? { get }
+    var context: InteractionCodeFlow.Context? { get }
 
-    func send(response: Response, completion: IDXAuthenticationFlow.ResponseResult?)
-    func send(response: Token, completion: IDXAuthenticationFlow.TokenResult?)
-    func send(error: IDXAuthenticationFlowError, completion: IDXAuthenticationFlow.ResponseResult?)
-    func send(error: IDXAuthenticationFlowError, completion: IDXAuthenticationFlow.TokenResult?)
-    func redirectResult(for url: URL) -> IDXAuthenticationFlow.RedirectResult
+    func send(response: Response, completion: InteractionCodeFlow.ResponseResult?)
+    func send(response: Token, completion: InteractionCodeFlow.TokenResult?)
+    func send(error: InteractionCodeFlowError, completion: InteractionCodeFlow.ResponseResult?)
+    func send(error: InteractionCodeFlowError, completion: InteractionCodeFlow.TokenResult?)
+    func redirectResult(for url: URL) -> InteractionCodeFlow.RedirectResult
     func reset()
 }
 
-extension IDXAuthenticationFlow: IDXAuthenticationFlowAPI {}
+extension InteractionCodeFlow: InteractionCodeFlowAPI {}
