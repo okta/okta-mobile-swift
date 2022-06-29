@@ -69,11 +69,12 @@ final class AuthorizationCodeFlowSuccessTests: XCTestCase {
         urlSession.expect("https://example.okta.com/oauth2/v1/token",
                           data: try data(from: .module, for: "token", in: "MockResponses"),
                           contentType: "application/json")
-        flow = client.authorizationCodeFlow(redirectUri: redirectUri,
-                                            additionalParameters: ["additional": "param"])
         urlSession.expect("https://example.okta.com/oauth2/v1/keys?client_id=clientId",
                           data: try data(from: .module, for: "keys", in: "MockResponses"),
                           contentType: "application/json")
+
+        flow = client.authorizationCodeFlow(redirectUri: redirectUri,
+                                            additionalParameters: ["additional": "param"])
     }
     
     override func tearDownWithError() throws {
@@ -93,7 +94,7 @@ final class AuthorizationCodeFlowSuccessTests: XCTestCase {
         // Begin
         let context = AuthorizationCodeFlow.Context(state: "ABC123", nonce: "nonce_string", pkce: nil)
         var expect = expectation(description: "network request")
-        try flow.start(with: context) { _ in
+        flow.start(with: context) { _ in
             expect.fulfill()
         }
         waitForExpectations(timeout: 1.0) { error in
@@ -132,7 +133,7 @@ final class AuthorizationCodeFlowSuccessTests: XCTestCase {
         let context = AuthorizationCodeFlow.Context(state: "ABC123", nonce: "nonce_string", pkce: nil)
         var wait = expectation(description: "resume")
         var url: URL?
-        try flow.start(with: context) { result in
+        flow.start(with: context) { result in
             switch result {
             case .success(let redirectUrl):
                 url = redirectUrl

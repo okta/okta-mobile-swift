@@ -47,7 +47,7 @@ class WebAuthenticationProviderMock: WebAuthenticationProvider {
     func start(context: AuthorizationCodeFlow.Context?) {
         state = .started
         
-        try! loginFlow.start(with: nil) { result in
+        loginFlow.start(with: nil) { result in
             
         }
     }
