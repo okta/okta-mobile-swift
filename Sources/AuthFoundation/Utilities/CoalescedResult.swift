@@ -12,7 +12,7 @@
 
 import Foundation
 
-class CoalescedResult<T> {
+final class CoalescedResult<T> {
     private var completionHandlers: [(T) -> Void] = []
     
     func add(_ completion: @escaping (T) -> Void) {

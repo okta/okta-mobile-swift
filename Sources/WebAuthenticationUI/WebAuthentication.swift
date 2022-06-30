@@ -93,7 +93,7 @@ public class WebAuthentication {
     /// - Parameters:
     ///   - window: Window from which the sign in process will be started.
     ///   - completion: Completion block that will be invoked when authentication finishes.
-    public func signIn(from window: WindowAnchor?, completion: @escaping (Result<Token, WebAuthenticationError>) -> Void) {
+    public final func signIn(from window: WindowAnchor?, completion: @escaping (Result<Token, WebAuthenticationError>) -> Void) {
         if provider != nil {
             cancel()
         }
@@ -113,7 +113,7 @@ public class WebAuthentication {
     ///   - window: Window from which the sign in process will be started.
     ///   - credential: Stored credentials that will retrieve the ID token.
     ///   - completion: Completion block that will be invoked when log-out finishes.
-    public func signOut(from window: WindowAnchor? = nil, credential: Credential? = .default, completion: @escaping (Result<Void, WebAuthenticationError>) -> Void) {
+    public final func signOut(from window: WindowAnchor? = nil, credential: Credential? = .default, completion: @escaping (Result<Void, WebAuthenticationError>) -> Void) {
         guard let token = credential?.token else {
             completion(.failure(.missingIdToken))
             return
@@ -127,7 +127,7 @@ public class WebAuthentication {
     ///   - window: Window from which the sign in process will be started.
     ///   - token: Token object that will retrieve the ID token.
     ///   - completion: Completion block that will be invoked when sign-out finishes.
-    public func signOut(from window: WindowAnchor? = nil, token: Token, completion: @escaping (Result<Void, WebAuthenticationError>) -> Void) {
+    public final func signOut(from window: WindowAnchor? = nil, token: Token, completion: @escaping (Result<Void, WebAuthenticationError>) -> Void) {
         guard let idToken = token.idToken else {
             completion(.failure(.missingIdToken))
             return
@@ -141,7 +141,7 @@ public class WebAuthentication {
     ///   - window: Window from which the sign in process will be started.
     ///   - token: The ID token string used for log-out.
     ///   - completion: Completion block that will be invoked when sign-out finishes.
-    public func signOut(from window: WindowAnchor? = nil, token: String, completion: @escaping (Result<Void, WebAuthenticationError>) -> Void) {
+    public final func signOut(from window: WindowAnchor? = nil, token: String, completion: @escaping (Result<Void, WebAuthenticationError>) -> Void) {
         var provider = provider
         
         if provider != nil {
@@ -161,7 +161,7 @@ public class WebAuthentication {
     }
     
     /// Cancels the authentication session.
-    public func cancel() {
+    public final func cancel() {
         signInFlow.reset()
         signOutFlow?.reset()
         provider?.cancel()
@@ -174,7 +174,7 @@ public class WebAuthentication {
     /// This is a convenience method that can simplify apps that use a UISceneDelegate. Scene-based applications receive URLs when the `UIWindowSceneDelegate.scene(_:openURLContexts:)` method is called; the set of contexts can be supplied to this method, which will filter out only those URLs that match the URL scheme defined in the client configuration. If no matching URLs are found, the call is ignored.
     /// - Parameter URLContexts: Set of `UIOpenURLContext` objects from which to attempt to resume authentication.
     @available(iOS 13.0, *)
-    public func resume(with URLContexts: Set<UIOpenURLContext>) throws {
+    public final func resume(with URLContexts: Set<UIOpenURLContext>) throws {
         try URLContexts
             .filter { $0.url.scheme?.lowercased() == signInFlow.redirectUri.scheme?.lowercased() }
             .map(\.url)
@@ -188,7 +188,7 @@ public class WebAuthentication {
     ///
     /// If the URI does not match the configured URI scheme, this method will thrown an error.
     /// - Parameter url: URL from which to attempt to resume authentication.
-    public func resume(with url: URL) throws {
+    public final func resume(with url: URL) throws {
         guard url.scheme?.lowercased() == signInFlow.redirectUri.scheme?.lowercased()
         else {
             throw WebAuthenticationError.invalidRedirectScheme(url.scheme)
@@ -317,7 +317,7 @@ extension WebAuthentication {
     /// Asynchronously initiates authentication from the given window.
     /// - Parameter window: The window from which the authentication browser should be shown.
     /// - Returns: The token representing the signed-in user.
-    public func signIn(from window: WindowAnchor?) async throws -> Token {
+    public final func signIn(from window: WindowAnchor?) async throws -> Token {
         try await withCheckedThrowingContinuation { continuation in
             self.signIn(from: window) { continuation.resume(with: $0) }
         }
@@ -328,7 +328,7 @@ extension WebAuthentication {
     ///   - window: Window from which the sign in process will be started.
     ///   - credential: Stored credentials that will retrieve the ID token.
     ///   - completion: Completion block that will be invoked when log-out finishes.
-    public func signOut(from window: WindowAnchor?, credential: Credential? = .default) async throws {
+    public final func signOut(from window: WindowAnchor?, credential: Credential? = .default) async throws {
         try await withCheckedThrowingContinuation { continuation in
             self.signOut(from: window, credential: credential) { continuation.resume(with: $0) }
         }
@@ -339,7 +339,7 @@ extension WebAuthentication {
     ///   - window: Window from which the sign in process will be started.
     ///   - token: Token object that will retrieve the ID token.
     ///   - completion: Completion block that will be invoked when sign-out finishes.
-    public func signOut(from window: WindowAnchor?, token: Token) async throws {
+    public final func signOut(from window: WindowAnchor?, token: Token) async throws {
         try await withCheckedThrowingContinuation { continuation in
             self.signOut(from: window, token: token) { continuation.resume(with: $0) }
         }
@@ -350,7 +350,7 @@ extension WebAuthentication {
     ///   - window: Window from which the sign in process will be started.
     ///   - idToken: The ID token used for log-out.
     ///   - completion: Completion block that will be invoked when sign-out finishes.
-    public func signOut(from window: WindowAnchor?, token: String) async throws {
+    public final func signOut(from window: WindowAnchor?, token: String) async throws {
         try await withCheckedThrowingContinuation { continuation in
             self.signOut(from: window, token: token) { continuation.resume(with: $0) }
         }

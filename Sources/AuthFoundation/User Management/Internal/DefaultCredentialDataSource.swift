@@ -12,7 +12,7 @@
 
 import Foundation
 
-class DefaultCredentialDataSource: CredentialDataSource {
+final class DefaultCredentialDataSource: CredentialDataSource {
     private let queue = DispatchQueue(label: "com.okta.credentialDataSource.credentials",
                                       attributes: .concurrent)
 

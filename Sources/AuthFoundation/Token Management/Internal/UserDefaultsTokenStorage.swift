@@ -24,7 +24,7 @@ private struct UserDefaultsKeys {
     static let allTokensKey = "com.okta.authfoundation.allTokens"
 }
 
-class UserDefaultsTokenStorage: TokenStorage {
+final class UserDefaultsTokenStorage: TokenStorage {
     private let userDefaults: UserDefaults
     
     weak var delegate: TokenStorageDelegate?

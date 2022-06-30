@@ -65,7 +65,7 @@ public protocol AuthorizationCodeFlowDelegate: AuthenticationDelegate {
 /// let redirectUri: URL
 /// let token = try await flow.resume(with: redirectUri)
 /// ```
-public class AuthorizationCodeFlow: AuthenticationFlow {
+public final class AuthorizationCodeFlow: AuthenticationFlow {
     /// A model representing the context and current state for an authorization session.
     public struct Context: Equatable {
         /// The `PKCE` credentials to use in the authorization request.

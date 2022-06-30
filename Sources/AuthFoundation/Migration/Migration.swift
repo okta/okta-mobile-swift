@@ -38,7 +38,7 @@ extension SDKVersion {
     }
     
     /// Namespace used for a variety of version migration agents.
-    public class Migration {
+    public final class Migration {
         static var shared: Migration = {
             Migration()
         }()

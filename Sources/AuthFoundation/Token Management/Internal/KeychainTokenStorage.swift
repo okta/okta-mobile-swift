@@ -18,7 +18,7 @@ import Foundation
 import LocalAuthentication
 #endif
 
-class KeychainTokenStorage: TokenStorage {
+final class KeychainTokenStorage: TokenStorage {
     static let serviceName = "com.okta.authfoundation.keychain.storage"
     static let metadataName = "com.okta.authfoundation.keychain.metadata"
     static let defaultTokenName = "com.okta.authfoundation.keychain.default"
