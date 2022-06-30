@@ -14,7 +14,7 @@ import UIKit
 import OktaOAuth2
 import OktaAuthNative
 
-class SignInViewController: UIViewController, UITextFieldDelegate {
+class NativeSignInViewController: UIViewController {
     enum State {
         case normal, canSignIn, isSigningIn, notConfigured
     }
@@ -35,16 +35,19 @@ class SignInViewController: UIViewController, UITextFieldDelegate {
                 passwordField.isEnabled = false
                 signInButton.isEnabled = false
                 activityIndicator.stopAnimating()
+                
             case .normal:
                 usernameField.isEnabled = true
                 passwordField.isEnabled = true
                 signInButton.isEnabled = false
                 activityIndicator.stopAnimating()
+                
             case .canSignIn:
                 usernameField.isEnabled = true
                 passwordField.isEnabled = true
                 signInButton.isEnabled = true
                 activityIndicator.stopAnimating()
+                
             case .isSigningIn:
                 usernameField.isEnabled = false
                 passwordField.isEnabled = false
@@ -59,6 +62,7 @@ class SignInViewController: UIViewController, UITextFieldDelegate {
         
         if let clientId = config?.clientId {
             clientIdLabel.text = clientId
+            state = .normal
         } else {
             clientIdLabel.text = "Not configured"
             state = .notConfigured
@@ -66,9 +70,75 @@ class SignInViewController: UIViewController, UITextFieldDelegate {
     }
 
     @IBAction func signIn(_ sender: Any) {
+        guard let username = usernameField.text,
+              let password = passwordField.text,
+              let issuer = config?.issuer
+        else {
+            show("Invalid username or password")
+            return
+        }
+        
         state = .isSigningIn
+        
+        OktaAuthSdk.authenticate(with: issuer,
+                                 username: username,
+                                 password: password) { newStatus in
+            self.handle(status: newStatus)
+        } onError: { error in
+            self.show(error)
+            self.state = .canSignIn
+        }
+
     }
     
+    func show(_ error: Error) {
+        show(error.localizedDescription)
+    }
+
+    func show(_ message: String) {
+        DispatchQueue.main.async {
+            let alert = UIAlertController(title: "Error", message: message, preferredStyle: .alert)
+            alert.addAction(.init(title: "OK", style: .default))
+            self.present(alert, animated: true)
+        }
+    }
+}
+
+extension NativeSignInViewController {
+    func handle(status: OktaAuthStatus) {
+        switch status.statusType {
+        case .success:
+            guard let status = status as? OktaAuthStatusSuccess,
+                  let sessionToken = status.sessionToken
+            else {
+                self.show("Invalid success response")
+                return
+            }
+            
+            let flow: SessionTokenFlow
+            do {
+                flow = try SessionTokenFlow()
+            } catch {
+                self.show(error)
+                return
+            }
+            
+            Task {
+                do {
+                    let token = try await flow.start(with: sessionToken)
+                    try Credential.store(token)
+                } catch {
+                    self.show(error)
+                }
+            }
+
+        default:
+            show("Status \(status.statusType.rawValue) not handled")
+        }
+    }
+}
+
+extension NativeSignInViewController: UITextFieldDelegate {
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
         guard let textFieldText = textField.text,
               let textRange = Range(range, in: textFieldText)
@@ -88,5 +158,13 @@ class SignInViewController: UIViewController, UITextFieldDelegate {
         
         return true
     }
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        if textField === usernameField {
+            passwordField.becomeFirstResponder()
+        } else if textField === passwordField {
+            signIn(textField)
+        }
+        return true
+    }
 }
-

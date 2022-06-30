@@ -10,6 +10,13 @@
 		96A0C447286BDA410086D1DD /* AuthFoundation in Frameworks */ = {isa = PBXBuildFile; productRef = 96A0C446286BDA410086D1DD /* AuthFoundation */; };
 		96A0C449286BDA410086D1DD /* OktaOAuth2 in Frameworks */ = {isa = PBXBuildFile; productRef = 96A0C448286BDA410086D1DD /* OktaOAuth2 */; };
 		96A0C44C286BDD120086D1DD /* Keychain+Token.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96A0C44B286BDD120086D1DD /* Keychain+Token.swift */; };
+		96A0C44D286CBA010086D1DD /* Okta.plist in Resources */ = {isa = PBXBuildFile; fileRef = 96E90C96286BCDC70037EA5E /* Okta.plist */; };
+		96A0C455286D14020086D1DD /* ClassicAuthSignInTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96A0C454286D14020086D1DD /* ClassicAuthSignInTests.swift */; };
+		96A0C45F286D15300086D1DD /* ClassicSignInScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96A0C45E286D15300086D1DD /* ClassicSignInScreen.swift */; };
+		96A0C460286D164A0086D1DD /* ProfileScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96E90C9D286BD6E20037EA5E /* ProfileScreen.swift */; };
+		96A0C461286D164A0086D1DD /* XCTest+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96E90C99286BD6E20037EA5E /* XCTest+Extensions.swift */; };
+		96A0C462286D164A0086D1DD /* Screen+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96E90C9A286BD6E20037EA5E /* Screen+Extensions.swift */; };
+		96A0C463286D164A0086D1DD /* Screen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96E90C9B286BD6E20037EA5E /* Screen.swift */; };
 		96E90C7E286BCD100037EA5E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96E90C7D286BCD100037EA5E /* AppDelegate.swift */; };
 		96E90C80286BCD100037EA5E /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96E90C7F286BCD100037EA5E /* SceneDelegate.swift */; };
 		96E90C82286BCD100037EA5E /* SignInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96E90C81286BCD100037EA5E /* SignInViewController.swift */; };
@@ -22,8 +29,21 @@
 		96E90CAC286BD6E20037EA5E /* TokenDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96E90CA2286BD6E20037EA5E /* TokenDetailViewController.swift */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXContainerItemProxy section */
+		96A0C458286D14020086D1DD /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 96E90C72286BCD100037EA5E /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 96E90C79286BCD100037EA5E;
+			remoteInfo = ClassicNativeAuth;
+		};
+/* End PBXContainerItemProxy section */
+
 /* Begin PBXFileReference section */
 		96A0C44B286BDD120086D1DD /* Keychain+Token.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Keychain+Token.swift"; sourceTree = "<group>"; };
+		96A0C452286D14020086D1DD /* ClassicNativeAuthUITests (iOS).xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "ClassicNativeAuthUITests (iOS).xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		96A0C454286D14020086D1DD /* ClassicAuthSignInTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClassicAuthSignInTests.swift; sourceTree = "<group>"; };
+		96A0C45E286D15300086D1DD /* ClassicSignInScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClassicSignInScreen.swift; sourceTree = "<group>"; };
 		96E90C7A286BCD100037EA5E /* Classic Native Auth.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Classic Native Auth.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		96E90C7D286BCD100037EA5E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		96E90C7F286BCD100037EA5E /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -45,6 +65,13 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		96A0C44F286D14020086D1DD /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		96E90C77286BCD100037EA5E /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -73,10 +100,28 @@
 			path = Keychain;
 			sourceTree = "<group>";
 		};
+		96A0C453286D14020086D1DD /* ClassicNativeAuthUITests (iOS) */ = {
+			isa = PBXGroup;
+			children = (
+				96A0C45D286D151F0086D1DD /* Pages */,
+				96A0C454286D14020086D1DD /* ClassicAuthSignInTests.swift */,
+			);
+			path = "ClassicNativeAuthUITests (iOS)";
+			sourceTree = "<group>";
+		};
+		96A0C45D286D151F0086D1DD /* Pages */ = {
+			isa = PBXGroup;
+			children = (
+				96A0C45E286D15300086D1DD /* ClassicSignInScreen.swift */,
+			);
+			path = Pages;
+			sourceTree = "<group>";
+		};
 		96E90C71286BCD100037EA5E = {
 			isa = PBXGroup;
 			children = (
-				96E90C7C286BCD100037EA5E /* ClassicNativeAuth */,
+				96E90C7C286BCD100037EA5E /* ClassicNativeAuth (iOS) */,
+				96A0C453286D14020086D1DD /* ClassicNativeAuthUITests (iOS) */,
 				96E90C97286BD6E20037EA5E /* Common */,
 				96E90C92286BCD2C0037EA5E /* SampleCode.xcconfig */,
 				96E90C91286BCD2C0037EA5E /* TestConfiguration.xcconfig */,
@@ -89,11 +134,12 @@
 			isa = PBXGroup;
 			children = (
 				96E90C7A286BCD100037EA5E /* Classic Native Auth.app */,
+				96A0C452286D14020086D1DD /* ClassicNativeAuthUITests (iOS).xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
 		};
-		96E90C7C286BCD100037EA5E /* ClassicNativeAuth */ = {
+		96E90C7C286BCD100037EA5E /* ClassicNativeAuth (iOS) */ = {
 			isa = PBXGroup;
 			children = (
 				96E90C7D286BCD100037EA5E /* AppDelegate.swift */,
@@ -105,7 +151,7 @@
 				96E90C8B286BCD120037EA5E /* Info.plist */,
 				96E90C96286BCDC70037EA5E /* Okta.plist */,
 			);
-			path = ClassicNativeAuth;
+			path = "ClassicNativeAuth (iOS)";
 			sourceTree = "<group>";
 		};
 		96E90C97286BD6E20037EA5E /* Common */ = {
@@ -151,9 +197,27 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		96E90C79286BCD100037EA5E /* ClassicNativeAuth */ = {
+		96A0C451286D14020086D1DD /* ClassicNativeAuthUITests (iOS) */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 96E90C8E286BCD120037EA5E /* Build configuration list for PBXNativeTarget "ClassicNativeAuth" */;
+			buildConfigurationList = 96A0C45C286D14020086D1DD /* Build configuration list for PBXNativeTarget "ClassicNativeAuthUITests (iOS)" */;
+			buildPhases = (
+				96A0C44E286D14020086D1DD /* Sources */,
+				96A0C44F286D14020086D1DD /* Frameworks */,
+				96A0C450286D14020086D1DD /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				96A0C459286D14020086D1DD /* PBXTargetDependency */,
+			);
+			name = "ClassicNativeAuthUITests (iOS)";
+			productName = "ClassicNativeAuthUITests (iOS)";
+			productReference = 96A0C452286D14020086D1DD /* ClassicNativeAuthUITests (iOS).xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+		96E90C79286BCD100037EA5E /* ClassicNativeAuth (iOS) */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 96E90C8E286BCD120037EA5E /* Build configuration list for PBXNativeTarget "ClassicNativeAuth (iOS)" */;
 			buildPhases = (
 				96E90C76286BCD100037EA5E /* Sources */,
 				96E90C77286BCD100037EA5E /* Frameworks */,
@@ -163,7 +227,7 @@
 			);
 			dependencies = (
 			);
-			name = ClassicNativeAuth;
+			name = "ClassicNativeAuth (iOS)";
 			packageProductDependencies = (
 				96E90C94286BCDAE0037EA5E /* OktaAuthNative */,
 				96A0C446286BDA410086D1DD /* AuthFoundation */,
@@ -183,6 +247,10 @@
 				LastSwiftUpdateCheck = 1340;
 				LastUpgradeCheck = 1340;
 				TargetAttributes = {
+					96A0C451286D14020086D1DD = {
+						CreatedOnToolsVersion = 13.4.1;
+						TestTargetID = 96E90C79286BCD100037EA5E;
+					};
 					96E90C79286BCD100037EA5E = {
 						CreatedOnToolsVersion = 13.4.1;
 					};
@@ -204,16 +272,25 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				96E90C79286BCD100037EA5E /* ClassicNativeAuth */,
+				96E90C79286BCD100037EA5E /* ClassicNativeAuth (iOS) */,
+				96A0C451286D14020086D1DD /* ClassicNativeAuthUITests (iOS) */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		96A0C450286D14020086D1DD /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		96E90C78286BCD100037EA5E /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				96A0C44D286CBA010086D1DD /* Okta.plist in Resources */,
 				96E90C8A286BCD120037EA5E /* LaunchScreen.storyboard in Resources */,
 				96E90C87286BCD120037EA5E /* Assets.xcassets in Resources */,
 				96E90CA9286BD6E20037EA5E /* Profile.storyboard in Resources */,
@@ -224,6 +301,19 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		96A0C44E286D14020086D1DD /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				96A0C461286D164A0086D1DD /* XCTest+Extensions.swift in Sources */,
+				96A0C45F286D15300086D1DD /* ClassicSignInScreen.swift in Sources */,
+				96A0C460286D164A0086D1DD /* ProfileScreen.swift in Sources */,
+				96A0C462286D164A0086D1DD /* Screen+Extensions.swift in Sources */,
+				96A0C455286D14020086D1DD /* ClassicAuthSignInTests.swift in Sources */,
+				96A0C463286D164A0086D1DD /* Screen.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		96E90C76286BCD100037EA5E /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -238,6 +328,14 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		96A0C459286D14020086D1DD /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 96E90C79286BCD100037EA5E /* ClassicNativeAuth (iOS) */;
+			targetProxy = 96A0C458286D14020086D1DD /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		96E90C83286BCD100037EA5E /* Main.storyboard */ = {
@@ -259,8 +357,47 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
+		96A0C45A286D14020086D1DD /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 96E90C91286BCD2C0037EA5E /* TestConfiguration.xcconfig */;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.5;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.example.okta-sample.ClassicNativeAuthUITests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = "ClassicNativeAuth (iOS)";
+			};
+			name = Debug;
+		};
+		96A0C45B286D14020086D1DD /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 96E90C91286BCD2C0037EA5E /* TestConfiguration.xcconfig */;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.5;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.example.okta-sample.ClassicNativeAuthUITests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = "ClassicNativeAuth (iOS)";
+			};
+			name = Release;
+		};
 		96E90C8C286BCD120037EA5E /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 96E90C92286BCD2C0037EA5E /* SampleCode.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ANALYZER_NONNULL = YES;
@@ -321,6 +458,7 @@
 		};
 		96E90C8D286BCD120037EA5E /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 96E90C92286BCD2C0037EA5E /* SampleCode.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ANALYZER_NONNULL = YES;
@@ -381,7 +519,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = ClassicNativeAuth/Info.plist;
+				INFOPLIST_FILE = "ClassicNativeAuth (iOS)/Info.plist";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
@@ -408,7 +546,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = ClassicNativeAuth/Info.plist;
+				INFOPLIST_FILE = "ClassicNativeAuth (iOS)/Info.plist";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
@@ -430,6 +568,15 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		96A0C45C286D14020086D1DD /* Build configuration list for PBXNativeTarget "ClassicNativeAuthUITests (iOS)" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				96A0C45A286D14020086D1DD /* Debug */,
+				96A0C45B286D14020086D1DD /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		96E90C75286BCD100037EA5E /* Build configuration list for PBXProject "ClassicNativeAuth" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
@@ -439,7 +586,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		96E90C8E286BCD120037EA5E /* Build configuration list for PBXNativeTarget "ClassicNativeAuth" */ = {
+		96E90C8E286BCD120037EA5E /* Build configuration list for PBXNativeTarget "ClassicNativeAuth (iOS)" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				96E90C8F286BCD120037EA5E /* Debug */,
