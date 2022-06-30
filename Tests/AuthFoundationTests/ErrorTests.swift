@@ -72,7 +72,7 @@ final class ErrorTests: XCTestCase {
         XCTAssertNotEqual(OAuth2Error.missingClientConfiguration.errorDescription,
                           "missing_client_configuration_description")
         XCTAssertNotEqual(OAuth2Error.signatureInvalid.errorDescription,
-                          "signature_invalid")
+                          "signature_invalid_description")
         
         XCTAssertEqual(OAuth2Error.network(error: APIClientError.serverError(TestLocalizedError.nestedError)).errorDescription,
                           "Nested Error")
@@ -83,6 +83,9 @@ final class ErrorTests: XCTestCase {
 
         XCTAssertNotEqual(OAuth2Error.missingToken(type: .accessToken).errorDescription,
                           "missing_token_description")
+        
+        XCTAssertNotEqual(OAuth2Error.missingLocationHeader.errorDescription,
+                          "missing_location_header_description")
         
         XCTAssertNotEqual(OAuth2Error.error(TestUnlocalizedError.nestedError).errorDescription,
                           "error_description")

@@ -12,5 +12,5 @@ runs:
     - name: Write shared secrets
       shell: bash
       run: |
-        echo "${{ inputs.okta_plist }}" > Samples/WebSignIn/Okta.plist
+        echo "${{ inputs.okta_plist }}" > Samples/Shared/Okta.plist
         echo "${{ inputs.test_configuration }}" > Samples/Shared/TestConfiguration.xcconfig

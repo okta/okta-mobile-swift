@@ -82,13 +82,7 @@ class SafariBrowserProvider: NSObject, WebAuthenticationProvider {
     }
     
     func start(context: AuthorizationCodeFlow.Context?) {
-        guard let delegate = delegate else { return }
-        
-        do {
-            try loginFlow.start(with: context)
-        } catch {
-            delegate.authentication(provider: self, received: error)
-        }
+        loginFlow.start(with: context)
     }
     
     func logout(context: SessionLogoutFlow.Context) {

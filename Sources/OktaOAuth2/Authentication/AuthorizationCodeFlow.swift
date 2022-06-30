@@ -157,9 +157,9 @@ public class AuthorizationCodeFlow: AuthenticationFlow {
     {
         self.init(redirectUri: redirectUri,
                   additionalParameters: additionalParameters,
-                  client: OAuth2Client(baseURL: issuer,
-                                       clientId: clientId,
-                                       scopes: scopes))
+                  client: .init(baseURL: issuer,
+                                clientId: clientId,
+                                scopes: scopes))
     }
     
     /// Initializer to construct an authentication flow from a pre-defined configuration and client.
@@ -182,13 +182,13 @@ public class AuthorizationCodeFlow: AuthenticationFlow {
     
     /// Initializer that uses the configuration defined within the application's `Okta.plist` file.
     public convenience init() throws {
-        try self.init(try OAuth2Client.PropertyListConfiguration())
+        try self.init(try .init())
     }
     
     /// Initializer that uses the configuration defined within the given file URL.
     /// - Parameter fileURL: File URL to a `plist` containing client configuration.
     public convenience init(plist fileURL: URL) throws {
-        try self.init(try OAuth2Client.PropertyListConfiguration(plist: fileURL))
+        try self.init(try .init(plist: fileURL))
     }
     
     private convenience init(_ config: OAuth2Client.PropertyListConfiguration) throws {
@@ -209,7 +209,7 @@ public class AuthorizationCodeFlow: AuthenticationFlow {
     /// - Parameters:
     ///   - context: Optional context to provide when customizing the state parameter.
     ///   - completion: Optional completion block for receiving the response. If `nil`, you may rely upon the appropriate delegate API methods.
-    public func start(with context: Context? = nil, completion: ((Result<URL, OAuth2Error>) -> Void)? = nil) throws {
+    public func start(with context: Context? = nil, completion: ((Result<URL, OAuth2Error>) -> Void)? = nil) {
         var context = context ?? Context()
         isAuthenticating = true
 
@@ -247,7 +247,7 @@ public class AuthorizationCodeFlow: AuthenticationFlow {
     /// - Parameters:
     ///   - url: Authorization redirect URI
     ///   - completion: Optional completion block to retrieve the returned result.
-    public func resume(with url: URL, completion: ((Result<Token, APIClientError>) -> Void)? = nil) throws {
+    public func resume(with url: URL, completion: ((Result<Token, OAuth2Error>) -> Void)? = nil) throws {
         let code = try authorizationCode(from: url)
         
         client.openIdConfiguration { result in
@@ -270,7 +270,7 @@ public class AuthorizationCodeFlow: AuthenticationFlow {
                         completion?(.success(response.result))
                     case .failure(let error):
                         self.delegateCollection.invoke { $0.authentication(flow: self, received: .network(error: error)) }
-                        completion?(.failure(error))
+                        completion?(.failure(.network(error: error)))
                     }
                 }
                 
@@ -300,14 +300,8 @@ extension AuthorizationCodeFlow {
     /// - Returns: The URL a user should be presented with within a browser, to continue authorization.
     public func start(with context: Context? = nil) async throws -> URL {
         try await withCheckedThrowingContinuation { continuation in
-            do {
-                try start(with: context) { result in
-                    continuation.resume(with: result)
-                }
-            } catch let error as APIClientError {
-                continuation.resume(with: .failure(error))
-            } catch {
-                continuation.resume(with: .failure(APIClientError.serverError(error)))
+            start(with: context) { result in
+                continuation.resume(with: result)
             }
         }
     }

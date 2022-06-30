@@ -68,13 +68,7 @@ class AuthenticationServicesProvider: NSObject, WebAuthenticationProvider {
     }
 
     func start(context: AuthorizationCodeFlow.Context? = nil) {
-        guard let delegate = delegate else { return }
-        
-        do {
-            try loginFlow.start(with: context)
-        } catch {
-            delegate.authentication(provider: self, received: error)
-        }
+        loginFlow.start(with: context)
     }
     
     func createSession(url: URL, callbackURLScheme: String?, completionHandler: @escaping ASWebAuthenticationSession.CompletionHandler) -> AuthenticationServicesProviderSession {

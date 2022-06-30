@@ -34,3 +34,7 @@ You can use OktaOAuth2 when you want to:
 ### Resource Owner Flow
 
 - ``ResourceOwnerFlow``
+
+### Session Token Flow
+
+- ``SessionTokenFlow``

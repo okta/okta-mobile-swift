@@ -14,8 +14,10 @@ import UIKit
 
 #if os(tvOS)
 import OktaOAuth2
-#else
+#elseif canImport(WebAuthenticationUI)
 import WebAuthenticationUI
+#else
+import OktaOAuth2
 #endif
 
 class ProfileTableViewController: UITableViewController {
@@ -159,7 +161,7 @@ class ProfileTableViewController: UITableViewController {
             }
         }))
         
-        #if !os(tvOS)
+        #if !os(tvOS) && canImport(WebAuthenticationUI)
         if let token = Credential.default?.token {
             alert.addAction(.init(title: "End a session", style: .destructive) { _ in
                 WebAuthentication.shared?.signOut(token: token) { result in

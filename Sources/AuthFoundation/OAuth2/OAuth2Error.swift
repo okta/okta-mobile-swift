@@ -21,6 +21,7 @@ public enum OAuth2Error: Error {
     case missingToken(type: Token.Kind)
     case missingClientConfiguration
     case signatureInvalid
+    case missingLocationHeader
     case error(_ error: Error)
 }
 
@@ -78,6 +79,12 @@ extension OAuth2Error: LocalizedError {
                                      tableName: "AuthFoundation",
                                      bundle: .authFoundation,
                                      comment: "Invalid URL")
+
+        case .missingLocationHeader:
+            return NSLocalizedString("missing_location_header",
+                                     tableName: "AuthFoundation",
+                                     bundle: .authFoundation,
+                                     comment: "Missing redirect Location header for token exchange")
 
         case .error(let error):
             if let error = error as? LocalizedError {
