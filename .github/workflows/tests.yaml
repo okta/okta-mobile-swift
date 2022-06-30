@@ -1,20 +1,90 @@
-name: UI Tests
+name: Tests
 
 on:
-  workflow_run:
-    workflows: ["Unit Tests"]
-    types:
-      - completed
+  push:
+    paths:
+      - '.github/workflows/unittests.yml'
+      - 'Package.swift'
+      - 'Sources/**/*.swift'
+      - 'Samples/**/*.swift'
+      - 'Tests/**/*.swift'
+    branches:
+      - master
+      - dev-*
+      - release-*
+  pull_request:
+    branches:
+      - master
+      - dev-*
+      - release-*
+    paths:
+      - '.github/workflows/unittests.yml'
+      - 'Package.swift'
+      - 'Sources/**/*.swift'
+      - 'Samples/**/*.swift'
+      - 'Tests/**/*.swift'
 
 env:
   DEVELOPER_DIR: /Applications/Xcode_13.3.app/Contents/Developer
 
 jobs:
+  SwiftBuild:
+    name: Swift Unit Tests
+    runs-on: macos-12
+    timeout-minutes: 10
+    steps:
+    - name: Get swift version
+      run: swift --version
+    - uses: actions/checkout@master
+    - name: Build
+      run: swift build --build-tests
+    - name: Test
+      run: swift test
+
+  XcodeBuild:
+    name: Xcode Unit Tests
+    runs-on: macos-12
+    timeout-minutes: 10
+    steps:
+    - uses: actions/checkout@master
+    - name: Test AuthFoundation
+      run: |
+        set -o pipefail
+        env NSUnbufferedIO=YES xcodebuild test \
+          -derivedDataPath ../Build/DerivedData \
+          -clonedSourcePackagesDirPath ../Build/ClonedSources \
+          -resultBundlePath ../TestResults/AuthFoundation.xcresult \
+          -scheme AuthFoundation \
+          -sdk iphonesimulator \
+          -destination "platform=iOS Simulator,OS=latest,name=iPhone 12" | xcpretty
+    - name: Test OktaOAuth2
+      run: |
+        set -o pipefail
+        env NSUnbufferedIO=YES xcodebuild test \
+          -derivedDataPath ../Build/DerivedData \
+          -clonedSourcePackagesDirPath ../Build/ClonedSources \
+          -resultBundlePath ../TestResults/OktaOAuth2.xcresult \
+          -scheme OktaOAuth2 \
+          -sdk iphonesimulator \
+          -destination "platform=iOS Simulator,OS=latest,name=iPhone 12" | xcpretty
+    - name: Test WebAuthenticationUI
+      run: |
+        set -o pipefail
+        env NSUnbufferedIO=YES xcodebuild test \
+          -derivedDataPath ../Build/DerivedData \
+          -clonedSourcePackagesDirPath ../Build/ClonedSources \
+          -resultBundlePath ../TestResults/WebAuthenticationUI.xcresult \
+          -scheme WebAuthenticationUI \
+          -sdk iphonesimulator \
+          -destination "platform=iOS Simulator,OS=latest,name=iPhone 12" | xcpretty
+
   UITest-WebSignIn:
     name: Web Sign In / Single Sign On (iOS)
     runs-on: macos-12
     timeout-minutes: 10
-    if: ${{ github.event.workflow_run.conclusion == 'success' }}
+    needs: 
+      - XcodeBuild
+      - SwiftBuild
     steps:
     - uses: actions/checkout@master
     - uses: ./.github/actions/setup-secrets
@@ -54,7 +124,9 @@ jobs:
     name: Device Auth Sign In (iOS)
     runs-on: macos-12
     timeout-minutes: 10
-    if: ${{ github.event.workflow_run.conclusion == 'success' }}
+    needs: 
+      - XcodeBuild
+      - SwiftBuild
     steps:
     - uses: actions/checkout@master
     - uses: ./.github/actions/setup-secrets
@@ -83,7 +155,9 @@ jobs:
     name: Device Auth Sign In (tvOS)
     runs-on: macos-12
     timeout-minutes: 10
-    if: ${{ github.event.workflow_run.conclusion == 'success' }}
+    needs: 
+      - XcodeBuild
+      - SwiftBuild
     steps:
     - uses: actions/checkout@master
     - uses: ./.github/actions/setup-secrets
@@ -112,7 +186,9 @@ jobs:
     name: User Password Sign In (macOS)
     runs-on: macos-12
     timeout-minutes: 10
-    if: ${{ github.event.workflow_run.conclusion == 'success' }}
+    needs: 
+      - XcodeBuild
+      - SwiftBuild
     steps:
     - uses: actions/checkout@master
     - uses: ./.github/actions/setup-secrets
@@ -140,7 +216,9 @@ jobs:
     name: Classic Native Auth (iOS)
     runs-on: macos-12
     timeout-minutes: 10
-    if: ${{ github.event.workflow_run.conclusion == 'success' }}
+    needs: 
+      - XcodeBuild
+      - SwiftBuild
     steps:
     - uses: actions/checkout@master
     - uses: ./.github/actions/setup-secrets
@@ -162,15 +240,14 @@ jobs:
       uses: actions/upload-artifact@v2
       with:
         path: ~/TestResults/*.xcresult
-        name: DeviceAuthSignIn-iOS-Results
+        name: ClassicNativeAuth-iOS-Results
       if: success() || failure()
 
   Results:
-    name: UI Test Results
+    name: Test Results
     runs-on: macos-12
     timeout-minutes: 5
-    if: ${{ github.event.workflow_run.conclusion == 'success' }}
-    needs:
+    needs: 
       - UITest-WebSignIn
       - UITest-DeviceAuthSignIniOS
       - UITest-DeviceAuthSignIntvOS
@@ -184,6 +261,9 @@ jobs:
     - uses: kishikawakatsumi/xcresulttool@v1
       with:
         path: |
+          ../TestResults/AuthFoundation.xcresult
+          ../TestResults/OktaOAuth2.xcresult
+          ../TestResults/WebAuthenticationUI.xcresult
           ../TestResults/DeviceAuthSignIn-iOS-Results/DeviceAuthSignIn-iOS.xcresult
           ../TestResults/WebSignIn-iOS-Results/WebSignIn-iOS.xcresult
           ../TestResults/WebSignIn-iOS-Results/SingleSignOn-iOS.xcresult
