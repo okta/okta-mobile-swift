@@ -3,7 +3,7 @@ name: Tests
 on:
   push:
     paths:
-      - '.github/workflows/tests.yml'
+      - '.github/workflows/tests.yaml'
       - 'Package.swift'
       - 'Sources/**/*.swift'
       - 'Samples/**/*.swift'
@@ -18,7 +18,7 @@ on:
       - dev-*
       - release-*
     paths:
-      - '.github/workflows/tests.yml'
+      - '.github/workflows/tests.yaml'
       - 'Package.swift'
       - 'Sources/**/*.swift'
       - 'Samples/**/*.swift'
