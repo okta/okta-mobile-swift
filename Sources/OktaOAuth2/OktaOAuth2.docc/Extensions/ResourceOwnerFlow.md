@@ -1,5 +1,9 @@
 # ``OktaOAuth2/ResourceOwnerFlow``
 
+@Metadata {
+    @DocumentationExtension(mergeBehavior: append)
+}
+
 ## Usage
 
 As an example, we'll use Swift Concurrency, since these asynchronous methods can be used inline easily.

@@ -14,8 +14,6 @@ import Foundation
 import AuthFoundation
 
 /// An authentication flow class that exchanges a Session Token for access tokens.
-///
-/// This flow is typically used in conjunction with the [classic Okta native authentication library](https://github.com/okta/okta-auth-swift). For native authentication using the Okta Identity Engine (OIE), please use the [Okta IDX library](https://github.com/okta/okta-idx-swift).
 public class SessionTokenFlow: AuthenticationFlow {
     /// The OAuth2Client this authentication flow will use.
     public let client: OAuth2Client
@@ -27,7 +25,6 @@ public class SessionTokenFlow: AuthenticationFlow {
     public let additionalParameters: [String: String]?
     
     /// Indicates whether or not this flow is currently in the process of authenticating a user.
-    /// ``SessionTokenFlow/init(issuer:clientId:scopes:)``
     public private(set) var isAuthenticating: Bool = false {
         didSet {
             guard oldValue != isAuthenticating else {
