@@ -136,6 +136,35 @@ jobs:
         name: UserPasswordSignIn-macOS-Results
       if: success() || failure()
 
+  UITest-ClassicNativeAuthiOS:
+    name: Classic Native Auth (iOS)
+    runs-on: macos-12
+    timeout-minutes: 10
+    if: ${{ github.event.workflow_run.conclusion == 'success' }}
+    steps:
+    - uses: actions/checkout@master
+    - uses: ./.github/actions/setup-secrets
+      with:
+        okta_plist: "${{ secrets.TEST_OKTA_PLIST }}"
+        test_configuration: "${{ secrets.TEST_CONFIGURATION }}"
+    - name: Test
+      run: |
+        xcodebuild \
+            -derivedDataPath ~/Build/DerivedData \
+            -clonedSourcePackagesDirPath ~/Build/ClonedSources \
+            -resultBundlePath ~/TestResults/ClassicNativeAuth-iOS.xcresult \
+            -workspace OktaMobileSDK.xcworkspace \
+            -scheme "ClassicNativeAuth (iOS)" \
+            -sdk iphonesimulator \
+            -destination 'platform=iOS Simulator,name=iPhone 12,OS=15.4' \
+            test
+    - name: Upload Test Results
+      uses: actions/upload-artifact@v2
+      with:
+        path: ~/TestResults/*.xcresult
+        name: DeviceAuthSignIn-iOS-Results
+      if: success() || failure()
+
   Results:
     name: UI Test Results
     runs-on: macos-12
@@ -146,6 +175,7 @@ jobs:
       - UITest-DeviceAuthSignIniOS
       - UITest-DeviceAuthSignIntvOS
       - UITest-UserPasswordSignInmacOS
+      - UITest-ClassicNativeAuthiOS
     steps:
     - name: Download Test Results
       uses: actions/download-artifact@v2
@@ -159,6 +189,7 @@ jobs:
           ../TestResults/WebSignIn-iOS-Results/SingleSignOn-iOS.xcresult
           ../TestResults/DeviceAuthSignIn-tvOS-Results/DeviceAuthSignIn-tvOS.xcresult
           ../TestResults/UserPasswordSignIn-macOS-Results/UserPasswordSignIn-macOS.xcresult
+          ../TestResults/ClassicNativeAuth-iOS-Results/ClassicNativeAuth-iOS.xcresult
         title: UI Test Results
         show-passed-tests: false
       if: success() || failure()
