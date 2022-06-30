@@ -77,6 +77,12 @@ jobs:
           -scheme WebAuthenticationUI \
           -sdk iphonesimulator \
           -destination "platform=iOS Simulator,OS=latest,name=iPhone 12" | xcpretty
+    - name: Upload Test Results
+      uses: actions/upload-artifact@v2
+      with:
+        path: ~/TestResults/*.xcresult
+        name: XcodeBuild-Results
+      if: success() || failure()
 
   UITest-WebSignIn:
     name: Web Sign In / Single Sign On (iOS)
@@ -261,9 +267,9 @@ jobs:
     - uses: kishikawakatsumi/xcresulttool@v1
       with:
         path: |
-          ../TestResults/AuthFoundation.xcresult
-          ../TestResults/OktaOAuth2.xcresult
-          ../TestResults/WebAuthenticationUI.xcresult
+          ../TestResults/XcodeBuild-Results/AuthFoundation.xcresult
+          ../TestResults/XcodeBuild-Results/OktaOAuth2.xcresult
+          ../TestResults/XcodeBuild-Results/WebAuthenticationUI.xcresult
           ../TestResults/DeviceAuthSignIn-iOS-Results/DeviceAuthSignIn-iOS.xcresult
           ../TestResults/WebSignIn-iOS-Results/WebSignIn-iOS.xcresult
           ../TestResults/WebSignIn-iOS-Results/SingleSignOn-iOS.xcresult
