@@ -17,12 +17,12 @@ on:
       - master
       - dev-*
       - release-*
-    #paths:
-    #  - '.github/workflows/unittests.yml'
-    #  - 'Package.swift'
-    #  - 'Sources/**/*.swift'
-    #  - 'Samples/**/*.swift'
-    #  - 'Tests/**/*.swift'
+    paths:
+      - '.github/workflows/unittests.yml'
+      - 'Package.swift'
+      - 'Sources/**/*.swift'
+      - 'Samples/**/*.swift'
+      - 'Tests/**/*.swift'
 
 env:
   DEVELOPER_DIR: /Applications/Xcode_13.3.app/Contents/Developer
