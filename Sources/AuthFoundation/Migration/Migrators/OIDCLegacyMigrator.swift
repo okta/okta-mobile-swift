@@ -30,7 +30,7 @@ extension SDKVersion.Migration {
     ///     return true
     /// }
     /// ```
-    public class LegacyOIDC: SDKVersionMigrator {
+    public final class LegacyOIDC: SDKVersionMigrator {
         /// Registers the legacy OIDC migration using the OIDC configuration settings from your application's `Okta.plist` file.
         public static func register() throws {
             try register(try OAuth2Client.PropertyListConfiguration())

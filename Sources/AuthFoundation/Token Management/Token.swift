@@ -13,7 +13,7 @@
 import Foundation
 
 /// Token information representing a user's access to a resource server, including access token, refresh token, and other related information.
-public class Token: Codable, Equatable, Hashable, Identifiable, Expires {
+public final class Token: Codable, Equatable, Hashable, Identifiable, Expires {
     /// The object used to ensure ID tokens are valid.
     public static var idTokenValidator: IDTokenValidator = DefaultIDTokenValidator()
     

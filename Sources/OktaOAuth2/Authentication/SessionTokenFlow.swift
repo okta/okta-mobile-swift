@@ -14,7 +14,7 @@ import Foundation
 import AuthFoundation
 
 /// An authentication flow class that exchanges a Session Token for access tokens.
-public class SessionTokenFlow: AuthenticationFlow {
+public final class SessionTokenFlow: AuthenticationFlow {
     /// The OAuth2Client this authentication flow will use.
     public let client: OAuth2Client
     
@@ -193,7 +193,7 @@ protocol SessionTokenFlowURLExchange {
     func follow(url: URL, completion: @escaping (Result<URL, OAuth2Error>) -> Void)
 }
 
-class SessionTokenFlowExchange: NSObject, SessionTokenFlowURLExchange, URLSessionTaskDelegate {
+final class SessionTokenFlowExchange: NSObject, SessionTokenFlowURLExchange, URLSessionTaskDelegate {
     let scheme: String
 
     private var activeTask: URLSessionTask?

@@ -31,11 +31,11 @@ extension OAuth2ClientDelegate {
 }
 
 /// An OAuth2 client, used to interact with a given authorization server.
-public class OAuth2Client {
+public final class OAuth2Client {
     /// The configuration for an ``OAuth2Client``.
     ///
     /// This defines the basic information necessary for interacting with an OAuth2 authorization server.
-    public class Configuration: Codable, Equatable, Hashable, APIClientConfiguration {
+    public final class Configuration: Codable, Equatable, Hashable, APIClientConfiguration {
         /// The base URL for interactions with this OAuth2 server.
         public let baseURL: URL
         

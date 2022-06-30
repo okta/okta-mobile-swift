@@ -16,7 +16,7 @@ import Foundation
 import FoundationNetworking
 #endif
 
-class CredentialCoordinatorImpl: CredentialCoordinator {
+final class CredentialCoordinatorImpl: CredentialCoordinator {
     var credentialDataSource: CredentialDataSource {
         didSet {
             credentialDataSource.delegate = self

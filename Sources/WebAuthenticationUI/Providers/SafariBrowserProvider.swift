@@ -17,7 +17,7 @@ import OktaOAuth2
 import SafariServices
 
 @available(iOS, introduced: 9.0, deprecated: 11.0)
-class SafariBrowserProvider: NSObject, WebAuthenticationProvider {
+final class SafariBrowserProvider: NSObject, WebAuthenticationProvider {
     let loginFlow: AuthorizationCodeFlow
     let logoutFlow: SessionLogoutFlow?
     private(set) weak var delegate: WebAuthenticationProviderDelegate?

@@ -63,7 +63,7 @@ public protocol DeviceAuthorizationFlowDelegate: AuthenticationDelegate {
 /// // the code.
 /// let token = try await flow.resume(with: context)
 /// ```
-public class DeviceAuthorizationFlow: AuthenticationFlow {
+public final class DeviceAuthorizationFlow: AuthenticationFlow {
     /// A model representing the context and current state for an authorization session.
     public struct Context: Decodable, Equatable, Expires {
         let deviceCode: String

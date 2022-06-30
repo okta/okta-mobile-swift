@@ -14,7 +14,7 @@ import AuthFoundation
 import Foundation
 
 /// An authentication flow class that implements the Token Exchange Flow.
-public class TokenExchangeFlow: AuthenticationFlow {
+public final class TokenExchangeFlow: AuthenticationFlow {
     /// Identifies the audience of the authorization server.
     public enum Audience {
         case `default`

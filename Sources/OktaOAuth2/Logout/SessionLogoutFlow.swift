@@ -54,7 +54,7 @@ public protocol SessionLogoutFlowDelegate: LogoutFlowDelegate {
 /// // Create the logout URL. Open this in a browser.
 /// let authorizeUrl = try await flow.start()
 /// ```
-public class SessionLogoutFlow: LogoutFlow {
+public final class SessionLogoutFlow: LogoutFlow {
     /// A model representing the context and current state for a logout session.
     public struct Context: Codable, Equatable {
         /// The ID token string used for log-out.

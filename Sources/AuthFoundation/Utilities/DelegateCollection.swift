@@ -25,7 +25,7 @@ extension UsesDelegateCollection {
     public func remove(delegate: Delegate) { delegateCollection.remove(delegate) }
 }
 
-public class DelegateCollection<D> {
+public final class DelegateCollection<D> {
     @WeakCollection
     private var delegates: [AnyObject?]
     
