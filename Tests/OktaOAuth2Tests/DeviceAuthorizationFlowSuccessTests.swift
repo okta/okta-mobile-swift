@@ -163,4 +163,23 @@ final class DeviceAuthorizationFlowSuccessTests: XCTestCase {
         XCTAssertNotNil(token)
     }
     #endif
+    
+    func testContextResponse() throws {
+        let data = data(for: """
+            {
+                "device_code": "1a521d9f-0922-4e6d-8db9-8b654297435a",
+                "user_code": "GDLMZQCT",
+                "verification_uri": "https://example.okta.com/activate",
+                "expires_in": 600
+            }
+        """)
+        let context = try defaultJSONDecoder.decode(DeviceAuthorizationFlow.Context.self, from: data)
+
+        XCTAssertEqual(context.deviceCode, "1a521d9f-0922-4e6d-8db9-8b654297435a")
+        XCTAssertEqual(context.userCode, "GDLMZQCT")
+        XCTAssertEqual(context.verificationUri.absoluteString, "https://example.okta.com/activate")
+        XCTAssertEqual(context.expiresIn, 600)
+        XCTAssertEqual(context.interval, 5)
+        XCTAssertNil(context.verificationUriComplete)
+    }
 }

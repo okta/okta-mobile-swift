@@ -38,4 +38,32 @@ final class JWKTests: XCTestCase {
         let decodedJwks = try JSONDecoder().decode(JWKS.self, from: data)
         XCTAssertEqual(jwks, decodedJwks)
     }
+    
+    func testDefaultRSAAlgorithmFallback() throws {
+        let keyData = data(for: """
+            {
+              "keys": [
+                  {
+                      "kty": "RSA",
+                      "kid": "p014K-d3IwPWLc0od5LHM1s1u0YDqX4LIl1xg6ik3j4",
+                      "use": "sig",
+                      "e": "AQAB",
+                      "n": "yUPh0wNqXh1CMSxzud4uHkfBKkNX7powR4cRS_i0VxkbiicbNZ0IQhw-enDhZieRti4NhygOJfN8DPmtHsWJxt_pCsibc--bNgylcESpn9K4OxtiQrjUvtRM4WX3PWsKUREDZ0Vp-WAXC2nibvqRP_Ky38DkZMinzvCLabr0IOzyGc9AJrUHib61X6FucSoLM_YrKi2hd2UUHqeGiZrmUcHCrgrxcJIBTSbJq47hZrFzFN5RDq0Ium-lm8DU3bfoSlyc7minHlCWcOd90LtjonIHYqUVlpRYUzj_n4AM7DPKI6DDxC0-hio37qxfdmV_5Zvo6fpxIe8EUbI-oUoS3Q"
+                  }
+              ]
+            }
+            """)
+        let jwks = try JSONDecoder().decode(JWKS.self, from: keyData)
+        
+        XCTAssertEqual(jwks.count, 1)
+        
+        let keyId = "p014K-d3IwPWLc0od5LHM1s1u0YDqX4LIl1xg6ik3j4"
+        let key = try XCTUnwrap(jwks[keyId])
+        XCTAssertEqual(key.id, keyId)
+        XCTAssertEqual(key.type, .rsa)
+        XCTAssertEqual(key.algorithm, .rs256)
+        XCTAssertEqual(key.usage, .signature)
+        XCTAssertNotNil(key.rsaModulus)
+        XCTAssertEqual(key.rsaExponent, "AQAB")
+    }
 }

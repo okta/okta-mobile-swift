@@ -79,7 +79,7 @@ public final class DeviceAuthorizationFlow: AuthenticationFlow {
         public let verificationUri: URL
         
         /// A convenience URI that combines the ``verificationUri`` and the ``userCode``, to make a clickable link.
-        public let verificationUriComplete: URL
+        public let verificationUriComplete: URL?
         
         /// The time interval after which the authorization context will expire.
         public let expiresIn: TimeInterval
@@ -100,9 +100,9 @@ public final class DeviceAuthorizationFlow: AuthenticationFlow {
             deviceCode = try container.decode(String.self, forKey: .deviceCode)
             userCode = try container.decode(String.self, forKey: .userCode)
             verificationUri = try container.decode(URL.self, forKey: .verificationUri)
-            verificationUriComplete = try container.decode(URL.self, forKey: .verificationUriComplete)
+            verificationUriComplete = try container.decodeIfPresent(URL.self, forKey: .verificationUriComplete)
             expiresIn = try container.decode(TimeInterval.self, forKey: .expiresIn)
-            interval = try container.decode(TimeInterval.self, forKey: .interval)
+            interval = try container.decodeIfPresent(TimeInterval.self, forKey: .interval) ?? 5.0
         }
     }
     
