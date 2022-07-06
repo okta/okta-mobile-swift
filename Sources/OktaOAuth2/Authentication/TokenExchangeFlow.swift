@@ -87,9 +87,9 @@ public final class TokenExchangeFlow: AuthenticationFlow {
                   scopes: config.scopes)
     }
     
-    /// Initializer to construct a flow from a pre-defined configuration and client.
+    /// Initializer to construct a flow from a default audience and client.
     /// - Parameters:
-    ///   - configuration: The configuration to use for this flow.
+    ///   - audience: The audience of the authorization server.
     ///   - client: The `OAuth2Client` to use with this flow.
     public init(audience: Audience = .default, client: OAuth2Client) {
         // Ensure this SDK's static version is included in the user agent.
