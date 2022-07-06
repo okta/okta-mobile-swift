@@ -39,7 +39,7 @@ public final class Token: Codable, Equatable, Hashable, Identifiable, Expires {
     public let accessToken: String
     
     /// The scopes requested when this token was generated.
-    public let scope: String
+    public let scope: String?
     
     /// The refresh token, if requested.
     public let refreshToken: String?
@@ -115,7 +115,7 @@ public final class Token: Codable, Equatable, Hashable, Identifiable, Expires {
                   tokenType: String,
                   expiresIn: TimeInterval,
                   accessToken: String,
-                  scope: String,
+                  scope: String?,
                   refreshToken: String?,
                   idToken: JWT?,
                   deviceSecret: String?,
@@ -165,7 +165,7 @@ public final class Token: Codable, Equatable, Hashable, Identifiable, Expires {
                   tokenType: try container.decode(String.self, forKey: .tokenType),
                   expiresIn: try container.decode(TimeInterval.self, forKey: .expiresIn),
                   accessToken: try container.decode(String.self, forKey: .accessToken),
-                  scope: try container.decode(String.self, forKey: .scope),
+                  scope: try container.decodeIfPresent(String.self, forKey: .scope),
                   refreshToken: try container.decodeIfPresent(String.self, forKey: .refreshToken),
                   idToken: idToken,
                   deviceSecret: try container.decodeIfPresent(String.self, forKey: .deviceSecret),
