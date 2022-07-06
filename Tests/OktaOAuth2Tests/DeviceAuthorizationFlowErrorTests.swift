@@ -15,7 +15,7 @@ import XCTest
 @testable import AuthFoundation
 @testable import OktaOAuth2
 
-final class DeviceAuthorizationFlowSuccessTests: XCTestCase {
+final class DeviceAuthorizationFlowErrorTests: XCTestCase {
     let issuer = URL(string: "https://example.com")!
     let clientMock = OAuth2ClientMock()
     let urlSession = URLSessionMock()
@@ -30,19 +30,6 @@ final class DeviceAuthorizationFlowSuccessTests: XCTestCase {
         JWK.validator = MockJWKValidator()
         Token.idTokenValidator = MockIDTokenValidator()
         Token.accessTokenValidator = MockTokenHashValidator()
-
-        urlSession.expect("https://example.com/.well-known/openid-configuration",
-                          data: try data(from: .module, for: "openid-configuration", in: "MockResponses"),
-                          contentType: "application/json")
-        urlSession.expect("https://example.okta.com/oauth2/v1/device/authorize",
-                          data: try data(from: .module, for: "device-authorize", in: "MockResponses"),
-                          contentType: "application/json")
-        urlSession.expect("https://example.okta.com/oauth2/v1/token",
-                          data: try data(from: .module, for: "token", in: "MockResponses"),
-                          contentType: "application/json")
-        urlSession.expect("https://example.okta.com/oauth2/v1/keys?client_id=clientId",
-                          data: try data(from: .module, for: "keys", in: "MockResponses"),
-                          contentType: "application/json")
         flow = client.deviceAuthorizationFlow()
     }
     
@@ -50,48 +37,52 @@ final class DeviceAuthorizationFlowSuccessTests: XCTestCase {
         JWK.resetToDefault()
         Token.resetToDefault()
     }
+    
+    func testSlowDown() throws {
+        urlSession.expect("https://example.com/.well-known/openid-configuration",
+                          data: try data(from: .module, for: "openid-configuration", in: "MockResponses"),
+                          contentType: "application/json")
+        urlSession.expect("https://example.okta.com/oauth2/v1/device/authorize",
+                          data: try data(from: .module, for: "device-authorize", in: "MockResponses"),
+                          contentType: "application/json")
+        urlSession.expect("https://example.okta.com/oauth2/v1/token",
+                          data: try data(from: .module, for: "token-slow_down", in: "MockResponses"),
+                          statusCode: 400,
+                          contentType: "application/json")
+        urlSession.expect("https://example.okta.com/oauth2/v1/token",
+                          data: try data(from: .module, for: "token", in: "MockResponses"),
+                          contentType: "application/json")
+        urlSession.expect("https://example.okta.com/oauth2/v1/keys?client_id=clientId",
+                          data: try data(from: .module, for: "keys", in: "MockResponses"),
+                          contentType: "application/json")
+        DeviceAuthorizationFlow.slowDownInterval = 1
 
-    func testWithDelegate() throws {
-        let delegate = DeviceAuthorizationFlowDelegateRecorder()
-        flow.add(delegate: delegate)
-
-        // Ensure the initial state
-        XCTAssertNil(flow.context)
-        XCTAssertFalse(flow.isAuthenticating)
-        XCTAssertFalse(delegate.started)
-        
-        // Begin
-        var expect = expectation(description: "resume")
-        flow.start() { _ in
-            expect.fulfill()
-        }
-        waitForExpectations(timeout: 1) { error in
-            XCTAssertNil(error)
-        }
-
-        XCTAssertNotNil(delegate.context)
-        XCTAssertEqual(flow.context, delegate.context)
-        XCTAssertTrue(flow.isAuthenticating)
-        XCTAssertEqual(delegate.context?.verificationUri.absoluteString, "https://example.okta.com/activate")
-        XCTAssertTrue(delegate.started)
-        
-        let context = try XCTUnwrap(delegate.context)
-
-        // Exchange code
-        expect = expectation(description: "Wait for timer")
-        flow.resume(with: context) { _ in
-            expect.fulfill()
-        }
-        waitForExpectations(timeout: 5) { error in
-            XCTAssertNil(error)
-        }
-        XCTAssertNil(flow.context)
-        XCTAssertFalse(flow.isAuthenticating)
-        XCTAssertNotNil(delegate.token)
-        XCTAssertTrue(delegate.finished)
+        try performAuthenticationFlow()
     }
 
-    func testWithBlocks() throws {
+    func testAuthorizationPending() throws {
+        urlSession.expect("https://example.com/.well-known/openid-configuration",
+                          data: try data(from: .module, for: "openid-configuration", in: "MockResponses"),
+                          contentType: "application/json")
+        urlSession.expect("https://example.okta.com/oauth2/v1/device/authorize",
+                          data: try data(from: .module, for: "device-authorize", in: "MockResponses"),
+                          contentType: "application/json")
+        urlSession.expect("https://example.okta.com/oauth2/v1/token",
+                          data: try data(from: .module, for: "token-authorization_pending", in: "MockResponses"),
+                          statusCode: 400,
+                          contentType: "application/json")
+        urlSession.expect("https://example.okta.com/oauth2/v1/token",
+                          data: try data(from: .module, for: "token", in: "MockResponses"),
+                          contentType: "application/json")
+        urlSession.expect("https://example.okta.com/oauth2/v1/keys?client_id=clientId",
+                          data: try data(from: .module, for: "keys", in: "MockResponses"),
+                          contentType: "application/json")
+        DeviceAuthorizationFlow.slowDownInterval = 1
+
+        try performAuthenticationFlow()
+    }
+
+    func performAuthenticationFlow() throws {
         // Ensure the initial state
         XCTAssertNil(flow.context)
         XCTAssertFalse(flow.isAuthenticating)
@@ -131,7 +122,7 @@ final class DeviceAuthorizationFlowSuccessTests: XCTestCase {
             }
             wait.fulfill()
         }
-        waitForExpectations(timeout: 2) { error in
+        waitForExpectations(timeout: 5) { error in
             XCTAssertNil(error)
         }
 
@@ -140,27 +131,4 @@ final class DeviceAuthorizationFlowSuccessTests: XCTestCase {
         XCTAssertNotNil(token)
     }
 
-    #if swift(>=5.5.1)
-    @available(iOS 15.0, tvOS 15.0, macOS 12.0, watchOS 8, *)
-    func testWithAsync() async throws {
-        // Ensure the initial state
-        XCTAssertNil(flow.context)
-        XCTAssertFalse(flow.isAuthenticating)
-
-        // Begin
-        let context = try await flow.start()
-
-        XCTAssertEqual(flow.context, context)
-        XCTAssertTrue(flow.isAuthenticating)
-        XCTAssertEqual(context, flow.context)
-        XCTAssertEqual(flow.context?.verificationUri.absoluteString, "https://example.okta.com/activate")
-
-        // Exchange code
-        let token = try await flow.resume(with: context)
-
-        XCTAssertNil(flow.context)
-        XCTAssertFalse(flow.isAuthenticating)
-        XCTAssertNotNil(token)
-    }
-    #endif
 }

@@ -42,9 +42,11 @@ class ViewController: UIViewController {
                                            clientId: clientId,
                                            scopes: "openid profile email offline_access")
         } else {
-            let alert = UIAlertController(title: "Client not configured", message: "Please update ViewController.swift", preferredStyle: .alert)
-            alert.addAction(UIAlertAction(title: "OK", style: .default))
-            present(alert, animated: true)
+            DispatchQueue.main.async {
+                let alert = UIAlertController(title: "Client not configured", message: "Please update ViewController.swift", preferredStyle: .alert)
+                alert.addAction(UIAlertAction(title: "OK", style: .default))
+                self.present(alert, animated: true)
+            }
         }
 
         codeStackView.isHidden = true
