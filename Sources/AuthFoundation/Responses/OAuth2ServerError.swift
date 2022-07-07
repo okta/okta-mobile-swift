@@ -15,7 +15,7 @@ import Foundation
 /// Describes errors reported from an OAuth2 server.
 public struct OAuth2ServerError: Decodable, Error, LocalizedError {
     /// Error code.
-    public let code: String
+    public let code: OAuth2ServerErrorCode
     
     /// Error message, or description.
     public let description: String
@@ -24,12 +24,44 @@ public struct OAuth2ServerError: Decodable, Error, LocalizedError {
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        code = try container.decode(String.self, forKey: .code)
+        code = try container.decode(OAuth2ServerErrorCode.self, forKey: .code)
         description = try container.decode(String.self, forKey: .description)
     }
 
     enum CodingKeys: String, CodingKey, CaseIterable {
         case code = "error"
         case description = "errorDescription"
+    }
+}
+
+extension OAuth2ServerError {
+    ///  Possible  OAuth 2.0 server error code
+    public enum OAuth2ServerErrorCode: String, Decodable {
+        /// The authorization request is still pending as the end user hasn't yet completed the user-interaction step
+        case authorization_pending
+        /// the authorization request is still pending and polling should continue
+        case slow_down
+        //The "device_code" has expired, and the device authorization session has concluded.
+        case expired_token
+        /// The server denied the request.
+        case access_denied
+        /// The specified client ID is invalid.
+        case invalid_client
+        /// The specified grant is invalid, expired, revoked, or doesn't match the redirect URI used in the authorization request.
+        case invalid_grant
+        /// The request is missing a necessary parameter, the parameter has an invalid value, or the request contains duplicate parameters.
+        case invalid_request
+        /// The scopes list contains an invalid or unsupported value.
+        case invalid_scope
+        /// The provided access token is invalid.
+        case invalid_token
+        /// The server encountered an internal error.
+        case server_error
+        /// The server is temporarily unavailable, but should be able to process the request at a later time.
+        case temporarily_unavailable
+        /// The specified response type is invalid or unsupported.
+        case unsupported_response_type
+        /// The specified response mode is invalid or unsupported. This error is also thrown for disallowed response modes.
+        case unsupported_response_mode
     }
 }

@@ -320,7 +320,7 @@ extension DeviceAuthorizationFlow {
                     case .failure(let error):
                         if case let APIClientError.serverError(serverError) = error,
                            let oauthError = serverError as? OAuth2ServerError,
-                           oauthError.code == "authorization_pending"
+                           oauthError.code == .authorization_pending
                         {
                             completion(.success(nil))
                         } else {
