@@ -109,6 +109,7 @@ final class DeviceAuthorizationFlowErrorTests: XCTestCase {
         XCTAssertNotNil(flow.context?.verificationUri)
         XCTAssertEqual(context, flow.context)
         XCTAssertEqual(flow.context?.verificationUri.absoluteString, "https://example.okta.com/activate")
+        XCTAssertEqual(flow.context?.interval, 1)
 
         // Exchange code
         var token: Token?

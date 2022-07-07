@@ -320,11 +320,6 @@ extension DeviceAuthorizationFlow: UsesDelegateCollection {
 }
 
 extension DeviceAuthorizationFlow {
-    struct TimerInfo {
-        let context: Context
-        let completion: ((Result<Token, APIClientError>) -> Void)?
-    }
-    
     func getToken(using context: Context, completion: @escaping(Result<Token?, APIClientError>) -> Void) {
         client.openIdConfiguration { result in
             switch result {
@@ -366,10 +361,6 @@ extension DeviceAuthorizationFlow {
                 self.delegateCollection.invoke { $0.authentication(flow: self, received: error) }
             }
         }
-    }
-    
-    func finish(_ result: Result<Token?, APIClientError>) {
-        
     }
 }
 
