@@ -15,7 +15,7 @@ import Foundation
 /// Describes errors reported from an OAuth2 server.
 public struct OAuth2ServerError: Decodable, Error, LocalizedError {
     /// Error code.
-    public let code: OAuth2ServerErrorCode
+    public let code: Code
     
     /// Error message, or description.
     public let description: String
@@ -24,7 +24,7 @@ public struct OAuth2ServerError: Decodable, Error, LocalizedError {
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        code = try container.decode(OAuth2ServerErrorCode.self, forKey: .code)
+        code = try container.decode(Code.self, forKey: .code)
         description = try container.decode(String.self, forKey: .description)
     }
 
@@ -36,32 +36,32 @@ public struct OAuth2ServerError: Decodable, Error, LocalizedError {
 
 extension OAuth2ServerError {
     ///  Possible  OAuth 2.0 server error code
-    public enum OAuth2ServerErrorCode: String, Decodable {
+    public enum Code: String, Decodable {
         /// The authorization request is still pending as the end user hasn't yet completed the user-interaction step
-        case authorization_pending
+        case authorizationPending = "authorization_pending"
         /// the authorization request is still pending and polling should continue
-        case slow_down
+        case slowDown = "slow_down"
         //The "device_code" has expired, and the device authorization session has concluded.
-        case expired_token
+        case expiredToken = "expired_token"
         /// The server denied the request.
-        case access_denied
+        case accessDenied = "access_denied"
         /// The specified client ID is invalid.
-        case invalid_client
+        case invalidClient = "invalid_client"
         /// The specified grant is invalid, expired, revoked, or doesn't match the redirect URI used in the authorization request.
-        case invalid_grant
+        case invalidGrant = "invalid_grant"
         /// The request is missing a necessary parameter, the parameter has an invalid value, or the request contains duplicate parameters.
-        case invalid_request
+        case invalidRequest = "invalid_request"
         /// The scopes list contains an invalid or unsupported value.
-        case invalid_scope
+        case invalidScope = "invalid_scope"
         /// The provided access token is invalid.
-        case invalid_token
+        case invalidToken = "invalid_token"
         /// The server encountered an internal error.
-        case server_error
+        case serverError = "server_error"
         /// The server is temporarily unavailable, but should be able to process the request at a later time.
-        case temporarily_unavailable
+        case temporarilyUnavailable = "temporarily_unavailable"
         /// The specified response type is invalid or unsupported.
-        case unsupported_response_type
+        case unsupportedResponseType = "unsupported_response_type"
         /// The specified response mode is invalid or unsupported. This error is also thrown for disallowed response modes.
-        case unsupported_response_mode
+        case unsupportedResponseMode = "unsupported_response_mode"
     }
 }

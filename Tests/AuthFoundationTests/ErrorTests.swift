@@ -182,7 +182,7 @@ final class ErrorTests: XCTestCase {
             }
         """.data(using: .utf8)!
         let error = try defaultJSONDecoder.decode(OAuth2ServerError.self, from: json)
-        XCTAssertEqual(error.code, OAuth2ServerError.OAuth2ServerErrorCode.invalid_request)
+        XCTAssertEqual(error.code, .invalidRequest)
         XCTAssertEqual(error.description, "Description")
         XCTAssertEqual(error.errorDescription, "Description")
     }
