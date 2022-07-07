@@ -77,6 +77,8 @@ class AuthenticationServicesProviderTests: ProviderTestBase {
     
     override func tearDownWithError() throws {
         provider.authenticationSession?.cancel()
+        MockAuthenticationServicesProviderSession.redirectUri = nil
+        MockAuthenticationServicesProviderSession.redirectError = nil
     }
     
     func testSuccessfulAuthentication() throws {
@@ -157,7 +159,7 @@ class AuthenticationServicesProviderTests: ProviderTestBase {
     }
     
     func testLogoutError() throws {
-        MockAuthenticationServicesProviderSession.redirectError = WebAuthenticationError.cannotComposeAuthenticationURL
+        MockAuthenticationServicesProviderSession.redirectError = WebAuthenticationError.userCancelledLogin
 
         provider.logout(context: .init(idToken: "idToken", state: "state"))
         try waitFor(.logoutUrl)
