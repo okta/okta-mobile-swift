@@ -334,12 +334,12 @@ extension DeviceAuthorizationFlow {
                            let oauthError = serverError as? OAuth2ServerError
                         {
                             switch oauthError.code {
-                            case "authorization_pending":
+                            case .authorizationPending:
                                 // Keep polling, since we haven't received a token yet.
                                 completion(.success(nil))
                                 return
                                 
-                            case "slow_down":
+                            case .slowDown:
                                 // Increase the polling interval for all subsequent requests, according to the specification.
                                 self.scheduleTimer(offsetBy: DeviceAuthorizationFlow.slowDownInterval)
                                 completion(.success(nil))
