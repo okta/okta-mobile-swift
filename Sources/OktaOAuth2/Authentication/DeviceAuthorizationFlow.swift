@@ -67,7 +67,7 @@ public final class DeviceAuthorizationFlow: AuthenticationFlow {
     /// A model representing the context and current state for an authorization session.
     public struct Context: Decodable, Equatable, Expires {
         let deviceCode: String
-        let interval: TimeInterval
+        var interval: TimeInterval
         
         /// The date this context was created.
         public let issuedAt: Date?
@@ -226,7 +226,37 @@ public final class DeviceAuthorizationFlow: AuthenticationFlow {
     ///   - context: Device authorization context object.
     ///   - completion: Optional completion block for receiving the token, or error result. If `nil`, you may rely upon the ``DeviceAuthorizationFlowDelegate/authentication(flow:received:)`` method instead.
     public func resume(with context: Context, completion: ((Result<Token, APIClientError>) -> Void)? = nil) {
+        self.completion = completion
+        scheduleTimer()
+    }
+    
+    /// Resets the flow for later reuse.
+    public func reset() {
         timer?.cancel()
+        timer = nil
+        context = nil
+        completion = nil
+        isAuthenticating = false
+    }
+
+    // MARK: Private properties / methods
+    static var slowDownInterval: TimeInterval = 5
+    
+    var timer: DispatchSourceTimer?
+    var completion: ((Result<Token, APIClientError>) -> Void)?
+    public let delegateCollection = DelegateCollection<DeviceAuthorizationFlowDelegate>()
+    
+    func scheduleTimer(offsetBy interval: TimeInterval? = nil) {
+        guard var context = context else {
+            return
+        }
+        
+        if let interval = interval {
+            context.interval += interval
+            self.context = context
+        }
+        
+        let completion = self.completion
         
         let timerSource = DispatchSource.makeTimerSource()
         timerSource.schedule(deadline: .now() + context.interval, repeating: context.interval)
@@ -241,28 +271,15 @@ public final class DeviceAuthorizationFlow: AuthenticationFlow {
                     if let token = token {
                         self.reset()
                         completion?(.success(token))
-                    } else {
-                        // Return early, so we don't reset the timer
-                        return
                     }
                 }
             }
         }
+
+        timer?.cancel()
         timer = timerSource
         timerSource.resume()
     }
-    
-    /// Resets the flow for later reuse.
-    public func reset() {
-        timer?.cancel()
-        timer = nil
-        context = nil
-        isAuthenticating = false
-    }
-
-    // MARK: Private properties / methods
-    var timer: DispatchSourceTimer?
-    public let delegateCollection = DelegateCollection<DeviceAuthorizationFlowDelegate>()
 }
 
 #if swift(>=5.5.1)
@@ -303,11 +320,6 @@ extension DeviceAuthorizationFlow: UsesDelegateCollection {
 }
 
 extension DeviceAuthorizationFlow {
-    struct TimerInfo {
-        let context: Context
-        let completion: ((Result<Token, APIClientError>) -> Void)?
-    }
-    
     func getToken(using context: Context, completion: @escaping(Result<Token?, APIClientError>) -> Void) {
         client.openIdConfiguration { result in
             switch result {
@@ -319,14 +331,26 @@ extension DeviceAuthorizationFlow {
                     switch result {
                     case .failure(let error):
                         if case let APIClientError.serverError(serverError) = error,
-                           let oauthError = serverError as? OAuth2ServerError,
-                           oauthError.code == .authorization_pending
+                           let oauthError = serverError as? OAuth2ServerError
                         {
-                            completion(.success(nil))
-                        } else {
-                            self.delegateCollection.invoke { $0.authentication(flow: self, received: .network(error: error)) }
-                            completion(.failure(error))
+                            switch oauthError.code {
+                            case "authorization_pending":
+                                // Keep polling, since we haven't received a token yet.
+                                completion(.success(nil))
+                                return
+                                
+                            case "slow_down":
+                                // Increase the polling interval for all subsequent requests, according to the specification.
+                                self.scheduleTimer(offsetBy: DeviceAuthorizationFlow.slowDownInterval)
+                                completion(.success(nil))
+                                return
+                                
+                            default: break
+                            }
                         }
+
+                        self.delegateCollection.invoke { $0.authentication(flow: self, received: .network(error: error)) }
+                        completion(.failure(error))
                     case .success(let response):
                         self.delegateCollection.invoke { $0.authentication(flow: self, received: response.result) }
                         completion(.success(response.result))
@@ -337,10 +361,6 @@ extension DeviceAuthorizationFlow {
                 self.delegateCollection.invoke { $0.authentication(flow: self, received: error) }
             }
         }
-    }
-    
-    func finish(_ result: Result<Token?, APIClientError>) {
-        
     }
 }
 
