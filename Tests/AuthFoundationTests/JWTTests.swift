@@ -53,4 +53,9 @@ final class JWTTests: XCTestCase {
         XCTAssertEqual(token[.preferredUsername], "arthur.dent@example.com")
         XCTAssertEqual(token[.name], "Arthur Dent")
     }
+
+    func testAuthMethods() throws {
+        let token = try JWT(idToken)
+        XCTAssertEqual(token.authenticationMethods, ["pwd"])
+    }
 }
