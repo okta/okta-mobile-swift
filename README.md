@@ -344,17 +344,32 @@ After the okta-mobile-swift SDK becomes generally available, we intend all new f
 
 ## Development
 
+### Protecting Test Configuration
+
+This repository contains two files within `Samples/Shared` which are used to expose test credentials to automated tests as well as the sample applications.
+
+* [Okta.plist](Samples/Shared/Okta.plist)
+* [TestConfiguration.xcconfig](Samples/Shared/TestConfiguration.xcconfig)
+
+To protect against accidental changes being introduced to these files, it is recommended that you use the following command after cloning this repository:
+
+```bash
+git config core.hooksPath ./.githooks
+```
+
+This will run checks before committing changes to ensure these files are not altered.
+
 ### Running Tests
 
 Tests can be run on macOS from the command-line using:
 
-```
+```bash
 swift test
 ```
 
 Alternatively, if you wish to run tests within Linux, you can utilize Docker from a macOS environment to run Linux tests:
 
-```
+```bash
 docker run --rm --privileged --interactive --tty \
     --volume "$(pwd):/src" --workdir "/src" swift:5.6.1 \
     swift test
