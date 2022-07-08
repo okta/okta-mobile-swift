@@ -127,7 +127,12 @@ class ViewController: UIViewController {
         urlPromptLabel.attributedText = mutableString
     }
     
-    func update(qrCode url: URL) {
+    func update(qrCode url: URL?) {
+        guard let url = url else {
+            codeImageView.isHidden = true
+            return
+        }
+        
         var image: UIImage? = nil
         defer {
             codeImageView.image = image
@@ -149,6 +154,7 @@ class ViewController: UIViewController {
         }
         
         image = UIImage(cgImage: cgImage)
+        codeImageView.isHidden = false
     }
     
     func update(code: String) {

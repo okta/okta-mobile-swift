@@ -29,7 +29,7 @@ If your code conforms to the `AuthorizationCodeFlowDelegate` protocol, and imple
 
 ```swift
 let auth = try WebAuthentication()
-auth.add(delegate: self)
+auth.signInFlow.add(delegate: self)
 
 let token = try await auth.signIn()
 ```

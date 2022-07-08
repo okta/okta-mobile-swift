@@ -44,9 +44,16 @@ public struct JWK: Codable, Equatable, Identifiable {
         type = try container.decode(KeyType.self, forKey: .keyType)
         id = try container.decodeIfPresent(String.self, forKey: .keyId)
         usage = try container.decode(Usage.self, forKey: .usage)
-        algorithm = try container.decodeIfPresent(JWK.Algorithm.self, forKey: .algorithm)
         rsaModulus = try container.decodeIfPresent(String.self, forKey: .rsaModulus)
         rsaExponent = try container.decodeIfPresent(String.self, forKey: .rsaExponent)
+
+        if let algorithm = try container.decodeIfPresent(JWK.Algorithm.self, forKey: .algorithm) {
+            self.algorithm = algorithm
+        } else if type == .rsa {
+            self.algorithm = .rs256
+        } else {
+            self.algorithm = nil
+        }
     }
 
     public func encode(to encoder: Encoder) throws {

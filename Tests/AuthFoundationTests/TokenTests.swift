@@ -12,6 +12,7 @@
 
 import XCTest
 @testable import AuthFoundation
+@testable import TestCommon
 
 final class TokenTests: XCTestCase {
     let configuration = OAuth2Client.Configuration(baseURL: URL(string: "https://example.com")!,
@@ -45,6 +46,22 @@ final class TokenTests: XCTestCase {
         let data = try JSONEncoder().encode(context)
         let decodedContext = try JSONDecoder().decode(Token.Context.self, from: data)
         XCTAssertEqual(context, decodedContext)
+    }
+    
+    func testNilScope() throws {
+        let data = data(for: """
+        {
+           "token_type": "Bearer",
+           "expires_in": 3600,
+           "access_token": "\(JWT.mockAccessToken)"
+         }
+        """)
+        
+        let decoder = defaultJSONDecoder
+        decoder.userInfo = [.apiClientConfiguration: configuration]
+        
+        let token = try decoder.decode(Token.self, from: data)
+        XCTAssertNil(token.scope)
     }
     
     func testToken() throws {

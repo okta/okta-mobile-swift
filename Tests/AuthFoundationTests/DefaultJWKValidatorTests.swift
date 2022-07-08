@@ -69,7 +69,7 @@ final class DefaultJWKValidatorTests: XCTestCase {
             """))
         let jwt = try JWT(String.mockIdToken)
         XCTAssertThrowsError(try validator.validate(token: jwt, using: jwks)) { error in
-            XCTAssertEqual(error as? JWTError, JWTError.invalidSigningAlgorithm)
+            XCTAssertEqual(error as? JWTError, JWTError.invalidKey)
         }
     }
 
