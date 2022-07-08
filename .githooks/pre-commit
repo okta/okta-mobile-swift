@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 #
 # Pre-commit hook used to ensure changes to test configuration files
 # are not inadvertently committed.
@@ -18,9 +18,9 @@ done
 function checkPlist() {
     local key=$1
     local expect=$2
-    local value=plutil -extract "$key" raw -o - Samples/Shared/Okta.plist
+    local value=$(plutil -extract "$key" raw -o - Samples/Shared/Okta.plist)
 
-    if [[ $value -ne $expect ]]; then
+    if [[ $value != $expect ]]; then
         cat <<\EOF
 Error: Attempt to commit changes to Samples/Shared/Okta.plist
 
