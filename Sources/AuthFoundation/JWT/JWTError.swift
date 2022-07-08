@@ -19,6 +19,7 @@ public enum JWTError: Error, Equatable {
     case invalidIssuer
     case invalidAudience
     case invalidSubject
+    case invalidAuthenticationTime
     case issuerRequiresHTTPS
     case invalidSigningAlgorithm
     case expired
@@ -30,104 +31,117 @@ public enum JWTError: Error, Equatable {
     case cannotGenerateHash
     case signatureVerificationUnavailable
     case signatureInvalid
+    case exceedsMaxAge
 }
 
 extension JWTError: LocalizedError {
     public var errorDescription: String? {
         switch self {
         case .invalidBase64Encoding:
-            return NSLocalizedString("invalid_base64_encoding",
+            return NSLocalizedString("jwt_invalid_base64_encoding",
                                      tableName: "AuthFoundation",
                                      bundle: .authFoundation,
                                      comment: "")
 
         case .badTokenStructure:
-            return NSLocalizedString("bad_token_structure",
+            return NSLocalizedString("jwt_bad_token_structure",
                                      tableName: "AuthFoundation",
                                      bundle: .authFoundation,
                                      comment: "")
         case .invalidIssuer:
-            return NSLocalizedString("invalid_issuer",
+            return NSLocalizedString("jwt_invalid_issuer",
                                      tableName: "AuthFoundation",
                                      bundle: .authFoundation,
                                      comment: "")
 
         case .invalidAudience:
-            return NSLocalizedString("invalid_audience",
+            return NSLocalizedString("jwt_invalid_audience",
                                      tableName: "AuthFoundation",
                                      bundle: .authFoundation,
                                      comment: "")
 
         case .invalidSubject:
-            return NSLocalizedString("invalid_subject",
+            return NSLocalizedString("jwt_invalid_subject",
+                                     tableName: "AuthFoundation",
+                                     bundle: .authFoundation,
+                                     comment: "")
+
+        case .invalidAuthenticationTime:
+            return NSLocalizedString("jwt_invalid_authentication_time",
                                      tableName: "AuthFoundation",
                                      bundle: .authFoundation,
                                      comment: "")
 
         case .issuerRequiresHTTPS:
-            return NSLocalizedString("issuer_requires_https",
+            return NSLocalizedString("jwt_issuer_requires_https",
                                      tableName: "AuthFoundation",
                                      bundle: .authFoundation,
                                      comment: "")
 
         case .invalidSigningAlgorithm:
-            return NSLocalizedString("invalid_signing_algorithm",
+            return NSLocalizedString("jwt_invalid_signing_algorithm",
                                      tableName: "AuthFoundation",
                                      bundle: .authFoundation,
                                      comment: "")
 
         case .expired:
-            return NSLocalizedString("token_expired",
+            return NSLocalizedString("jwt_token_expired",
                                      tableName: "AuthFoundation",
                                      bundle: .authFoundation,
                                      comment: "")
 
         case .issuedAtTimeExceedsGraceInterval:
-            return NSLocalizedString("issuedAt_time_exceeds_grace_interval",
+            return NSLocalizedString("jwt_issuedAt_time_exceeds_grace_interval",
                                      tableName: "AuthFoundation",
                                      bundle: .authFoundation,
                                      comment: "")
 
         case .nonceMismatch:
-            return NSLocalizedString("nonce_mismatch",
+            return NSLocalizedString("jwt_nonce_mismatch",
                                      tableName: "AuthFoundation",
                                      bundle: .authFoundation,
                                      comment: "")
 
         case .cannotCreateKey(code: _, description: _):
-            return NSLocalizedString("cannot_create_key",
+            return NSLocalizedString("jwt_cannot_create_key",
                                      tableName: "AuthFoundation",
                                      bundle: .authFoundation,
                                      comment: "")
 
         case .invalidKey:
-            return NSLocalizedString("invalid_key",
+            return NSLocalizedString("jwt_invalid_key",
                                      tableName: "AuthFoundation",
                                      bundle: .authFoundation,
                                      comment: "")
 
         case .signatureInvalid:
-            return NSLocalizedString("signature_invalid",
+            return NSLocalizedString("jwt_signature_invalid",
                                      tableName: "AuthFoundation",
                                      bundle: .authFoundation,
                                      comment: "")
             
         case .signatureVerificationUnavailable:
-            return NSLocalizedString("signature_verification_unavailable",
+            return NSLocalizedString("jwt_signature_verification_unavailable",
                                      tableName: "AuthFoundation",
                                      bundle: .authFoundation,
                                      comment: "")
             
         case .unsupportedAlgorithm(let algorithm):
             return String.localizedStringWithFormat(
-                NSLocalizedString("unsupported_algorithm",
+                NSLocalizedString("jwt_unsupported_algorithm",
                                   tableName: "AuthFoundation",
                                   bundle: .authFoundation,
                                   comment: ""),
                 algorithm.rawValue)
-        
+            
         case .cannotGenerateHash:
-            return NSLocalizedString("cannot_generate_hash",
+            return NSLocalizedString("jwt_cannot_generate_hash",
+                                     tableName: "AuthFoundation",
+                                     bundle: .authFoundation,
+                                     comment: "")
+
+        case .exceedsMaxAge:
+            return NSLocalizedString("jwt_exceeds_max_age",
                                      tableName: "AuthFoundation",
                                      bundle: .authFoundation,
                                      comment: "")

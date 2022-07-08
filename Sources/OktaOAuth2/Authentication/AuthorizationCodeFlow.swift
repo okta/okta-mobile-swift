@@ -79,19 +79,26 @@ public final class AuthorizationCodeFlow: AuthenticationFlow {
         /// The "nonce" value to send with this authorization request.
         public let nonce: String
         
+        /// The maximum age an ID token can be when authenticating.
+        public let maxAge: TimeInterval?
+        
         /// The current authentication URL, or `nil` if one has not yet been generated.
         public internal(set) var authenticationURL: URL?
         
         /// Initializer for creating a context with a custom state string.
-        /// - Parameter state: State string to use, or `nil` to accept an automatically generated default.
-        public init(state: String? = nil) {
+        /// - Parameters:
+        ///   - state: State string to use, or `nil` to accept an automatically generated default.
+        ///   - maxAge: The maximum age an ID token can be when authenticating.
+        public init(state: String? = nil, maxAge: TimeInterval? = nil) {
             self.init(state: state ?? UUID().uuidString,
+                      maxAge: maxAge,
                       nonce: [UInt8].random(count: 16).base64URLEncodedString,
                       pkce: PKCE())
         }
         
-        init(state: String, nonce: String, pkce: PKCE?) {
+        init(state: String, maxAge: TimeInterval?, nonce: String, pkce: PKCE?) {
             self.state = state
+            self.maxAge = maxAge
             self.nonce = nonce
             self.pkce = pkce
         }
@@ -260,7 +267,8 @@ public final class AuthorizationCodeFlow: AuthenticationFlow {
                                            grantType: .authorizationCode,
                                            grantValue: code,
                                            pkce: self.context?.pkce,
-                                           nonce: self.context?.nonce)
+                                           nonce: self.context?.nonce,
+                                           maxAge: self.context?.maxAge)
                 self.client.exchange(token: request) { result in
                     self.reset()
                     

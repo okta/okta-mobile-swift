@@ -23,22 +23,24 @@
 "missing_location_header_description" = "Missing location header for token redirect.";
 
 /* JWTError */
-"invalid_base64_encoding" = "The token is invalid (incorrect Base64 encoding).";
-"bad_token_structure" = "The token is not structured correctly.";
-"invalid_issuer" = "The token's issuer is either not well-formed, or does not match.";
-"invalid_audience" = "The token's audience does not match.";
-"invalid_subject" = "The token's subject is missing or is invalid.";
-"issuer_requires_https" = "Token issuer addresses must use HTTPS.";
-"invalid_signing_algorithm" = "The token's signing algorithm is invalid or unsupported.";
-"token_expired" = "The token has expired.";
-"issuedAt_time_exceeds_grace_interval" = "This token was issued at a time that exceeds the allowed grace interval.";
-"nonce_mismatch" = "The nonce value does not match the value expected.";
-"cannot_create_key" = "Cannot create a public key.";
-"invalid_key" = "Invalid key data.";
-"signature_invalid" = "Token signature is invalid.";
-"signature_verification_unavailable" = "Signature verification is unavailable on this platform.";
-"unsupported_algorithm" = "Signing algorithm \"%@\" is unsupported.";
-"cannot_generate_hash" = "Cannot generate hash signature.";
+"jwt_invalid_base64_encoding" = "The token is invalid (incorrect Base64 encoding).";
+"jwt_bad_token_structure" = "The token is not structured correctly.";
+"jwt_invalid_issuer" = "The token's issuer is either not well-formed, or does not match.";
+"jwt_invalid_audience" = "The token's audience does not match.";
+"jwt_invalid_subject" = "The token's subject is missing or is invalid.";
+"jwt_invalid_authentication_time" = "The token's authentication time is missing or is invalid.";
+"jwt_issuer_requires_https" = "Token issuer addresses must use HTTPS.";
+"jwt_invalid_signing_algorithm" = "The token's signing algorithm is invalid or unsupported.";
+"jwt_token_expired" = "The token has expired.";
+"jwt_issuedAt_time_exceeds_grace_interval" = "This token was issued at a time that exceeds the allowed grace jwt_interval.";
+"jwt_nonce_mismatch" = "The nonce value does not match the value expected.";
+"jwt_cannot_create_key" = "Cannot create a public key.";
+"jwt_invalid_key" = "Invalid key data.";
+"jwt_signature_invalid" = "Token signature is invalid.";
+"jwt_signature_verification_unavailable" = "Signature verification is unavailable on this platform.";
+"jwt_unsupported_algorithm" = "Signing algorithm \"%@\" is unsupported.";
+"jwt_cannot_generate_hash" = "Cannot generate hash signature.";
+"jwt_exceeds_max_age" = "Cannot generate hash signature.";
 
 /* KeychainError */
 "keychain_cannot_get" = "There was a failure getting a keychain item (%d).";

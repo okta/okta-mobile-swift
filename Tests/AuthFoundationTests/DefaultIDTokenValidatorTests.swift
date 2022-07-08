@@ -65,6 +65,7 @@ import TestCommon
 
 struct MockTokenContext: IDTokenValidatorContext {
     let nonce: String?
+    let maxAge: TimeInterval?
 }
 
 final class DefaultIDTokenValidatorTests: XCTestCase {
@@ -145,11 +146,11 @@ final class DefaultIDTokenValidatorTests: XCTestCase {
             XCTAssertEqual(error as? JWTError, JWTError.nonceMismatch)
         }
 
-        XCTAssertThrowsError(try validator.validate(token: jwt, issuer: issuer, clientId: clientId, context: MockTokenContext(nonce: "does_not_match"))) { error in
+        XCTAssertThrowsError(try validator.validate(token: jwt, issuer: issuer, clientId: clientId, context: MockTokenContext(nonce: "does_not_match", maxAge: nil))) { error in
             XCTAssertEqual(error as? JWTError, JWTError.nonceMismatch)
         }
 
-        XCTAssertNoThrow(try validator.validate(token: jwt, issuer: issuer, clientId: clientId, context: MockTokenContext(nonce: "B34AAE01-5757-4A0B-9362-B02F6F02A3B1")))
+        XCTAssertNoThrow(try validator.validate(token: jwt, issuer: issuer, clientId: clientId, context: MockTokenContext(nonce: "B34AAE01-5757-4A0B-9362-B02F6F02A3B1", maxAge: nil)))
     }
 
     func testMissingSubject() throws {
@@ -157,6 +158,28 @@ final class DefaultIDTokenValidatorTests: XCTestCase {
 
         XCTAssertThrowsError(try validator.validate(token: jwt, issuer: issuer, clientId: clientId, context: nil)) { error in
             XCTAssertEqual(error as? JWTError, JWTError.invalidSubject)
+        }
+    }
+    
+    func testInvalidAuthTime() throws {
+        let jwt = try JWT("eyJraWQiOiJGSkEwSEdOdHN1dWRhX1BsNDVKNDJrdlFxY3N1XzBDNEZnN3BiSkxYVEhZIiwiYWxnIjoiUlMyNTYifQ.eyJzdWIiOiIwMHViNDF6N21nek5xcnlNdjY5NiIsInZlciI6MSwiaXNzIjoiaHR0cHM6Ly9leGFtcGxlLm9rdGEuY29tL29hdXRoMi9kZWZhdWx0IiwiYXVkIjoidW5pdF90ZXN0X2NsaWVudF9pZCIsImlhdCI6MTY0NDM0NzM2OSwiZXhwIjoxNjQ0MzUwOTY5LCJqdGkiOiJJRC41NWN4QnRkWWw4bDZhcktJU1BCd2QweU9ULTlVQ1RhWGFRVFh0MmxhUkxzIiwiYW1yIjpbInB3ZCJdLCJpZHAiOiIwMG84Zm91N3NSYUdHd2RuNDY5NiIsInNpZCI6ImlkeFd4a2xwXzRrU3h1Q19uVTFwWEQtbkEifQ.04MxyXdDjihUpRKPYyBuHEbxVTlAfVk4Jm7_Of1eZ1SybQNRIEEgEEcvUzMv2VNjLOVpkJJ6mWuozrV6HgG-gEbhQvweVVhJld1dxkAGb0Z7z6ESBA-ZXvVMfm7BYip3aIdcyn7PN-2VD5r92-gvhRbZikwYaDMNLpnyfi1sZysPt251E4YOmmmxyFgKNz2kofFtEef2c1tT1Il0ILt1HYpwDA0RntRdrJKVsJryAuvl0IYIvHi8qrGuy36TM0XgMEtA_Tw_qt8662l4EhVxyLx6lrStnqeokF83g0PCT1tUaEH1bQHaJ5Q0dOkYIRFKwxdXz8YzjQO6rcObEKVPYg")
+
+        XCTAssertNoThrow(try validator.validate(token: jwt, issuer: issuer, clientId: clientId, context: nil))
+
+        XCTAssertThrowsError(try validator.validate(token: jwt, issuer: issuer, clientId: clientId, context: MockTokenContext(nonce: nil, maxAge: 300))) { error in
+            XCTAssertEqual(error as? JWTError, JWTError.invalidAuthenticationTime)
+        }
+    }
+
+    func testExceedsMaxAge() throws {
+        let jwt = try JWT("eyJraWQiOiJGSkEwSEdOdHN1dWRhX1BsNDVKNDJrdlFxY3N1XzBDNEZnN3BiSkxYVEhZIiwiYWxnIjoiUlMyNTYifQ.eyJzdWIiOiIwMHViNDF6N21nek5xcnlNdjY5NiIsInZlciI6MSwiaXNzIjoiaHR0cHM6Ly9leGFtcGxlLm9rdGEuY29tL29hdXRoMi9kZWZhdWx0IiwiYXVkIjoidW5pdF90ZXN0X2NsaWVudF9pZCIsImlhdCI6MTY0NDM0NzM2OSwiZXhwIjoxNjQ0MzUwOTY5LCJqdGkiOiJJRC41NWN4QnRkWWw4bDZhcktJU1BCd2QweU9ULTlVQ1RhWGFRVFh0MmxhUkxzIiwiYW1yIjpbInB3ZCJdLCJpZHAiOiIwMG84Zm91N3NSYUdHd2RuNDY5NiIsInNpZCI6ImlkeFd4a2xwXzRrU3h1Q19uVTFwWEQtbkEiLCJhdXRoX3RpbWUiOjE2NDQzNDcwNjh9.fvcOQ1wUMu-ODi6WIVwKIZb4Q1wvK_aHUOZ-l3TlZCNuywqcv96_ziv9n5CI9YKKForZjTJCmbJ6r9aXDdhKC2sz6M17NRpe8QbtKkFrXITOcEOOK3OYvTUQAK0ctsuXRdnP4m9s_F938o_xciWIhx_9eMw2RXZ_bO5avlPDWkHQ8frXhEo2dDlrCG5nsERV7c352KsPCKm5p7Z0ymV5lblW68vHYf3VyWwxnzhooajz5iuIa8GRt8QjRZJ9A_6Jo7Vk5LR8uCTEckkE1cNLAQGf_d2-2fjsg6vGzmvY8s9_ulFX3VXxoO91bJtoHu3jSYUbu2yrMpiZwX9-Ql4q3Q")
+
+        XCTAssertNoThrow(try validator.validate(token: jwt, issuer: issuer, clientId: clientId, context: nil))
+
+        XCTAssertNoThrow(try validator.validate(token: jwt, issuer: issuer, clientId: clientId, context: MockTokenContext(nonce: nil, maxAge: 400)))
+
+        XCTAssertThrowsError(try validator.validate(token: jwt, issuer: issuer, clientId: clientId, context: MockTokenContext(nonce: nil, maxAge: 200))) { error in
+            XCTAssertEqual(error as? JWTError, JWTError.exceedsMaxAge)
         }
     }
 }
