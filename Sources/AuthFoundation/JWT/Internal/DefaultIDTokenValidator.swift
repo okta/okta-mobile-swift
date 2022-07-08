@@ -57,5 +57,22 @@ struct DefaultIDTokenValidator: IDTokenValidator {
         guard token["nonce"] == context?.nonce else {
             throw JWTError.nonceMismatch
         }
+
+        if let maxAge = context?.maxAge {
+            guard let authTime = token.authTime else {
+                throw JWTError.invalidAuthenticationTime
+            }
+            
+            let elapsedTime = issuedAt.timeIntervalSince(authTime)
+            guard elapsedTime > 0 && elapsedTime <= maxAge else {
+                throw JWTError.exceedsMaxAge
+            }
+        }
+        
+        guard let subject = token.subject,
+              !subject.isEmpty
+        else {
+            throw JWTError.invalidSubject
+        }
     }
 }

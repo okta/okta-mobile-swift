@@ -124,36 +124,40 @@ final class ErrorTests: XCTestCase {
     
     func testJWTError() {
         XCTAssertNotEqual(JWTError.invalidBase64Encoding.errorDescription,
-                          "invalid_base64_encoding")
+                          "jwt_invalid_base64_encoding")
         XCTAssertNotEqual(JWTError.badTokenStructure.errorDescription,
-                          "bad_token_structure")
+                          "jwt_bad_token_structure")
         XCTAssertNotEqual(JWTError.invalidIssuer.errorDescription,
-                          "invalid_issuer")
+                          "jwt_invalid_issuer")
         XCTAssertNotEqual(JWTError.invalidAudience.errorDescription,
-                          "invalid_audience")
+                          "jwt_invalid_audience")
+        XCTAssertNotEqual(JWTError.invalidSubject.errorDescription,
+                          "jwt_invalid_subject")
+        XCTAssertNotEqual(JWTError.invalidAuthenticationTime.errorDescription,
+                          "jwt_invalid_authentication_time")
         XCTAssertNotEqual(JWTError.issuerRequiresHTTPS.errorDescription,
-                          "issuer_requires_https")
+                          "jwt_issuer_requires_https")
         XCTAssertNotEqual(JWTError.invalidSigningAlgorithm.errorDescription,
-                          "invalid_signing_algorithm")
+                          "jwt_invalid_signing_algorithm")
         XCTAssertNotEqual(JWTError.expired.errorDescription,
-                          "token_expired")
+                          "jwt_token_expired")
         XCTAssertNotEqual(JWTError.issuedAtTimeExceedsGraceInterval.errorDescription,
-                          "issuedAt_time_exceeds_grace_interval")
+                          "jwt_issuedAt_time_exceeds_grace_interval")
         XCTAssertNotEqual(JWTError.nonceMismatch.errorDescription,
-                          "nonce_mismatch")
+                          "jwt_nonce_mismatch")
         XCTAssertNotEqual(JWTError.invalidKey.errorDescription,
-                          "invalid_key")
+                          "jwt_invalid_key")
         XCTAssertNotEqual(JWTError.signatureInvalid.errorDescription,
-                          "signature_invalid")
+                          "jwt_signature_invalid")
         XCTAssertNotEqual(JWTError.signatureVerificationUnavailable.errorDescription,
-                          "signature_verification_unavailable")
+                          "jwt_signature_verification_unavailable")
         XCTAssertNotEqual(JWTError.cannotGenerateHash.errorDescription,
-                          "cannot_generate_hash")
+                          "jwt_cannot_generate_hash")
 
         XCTAssertNotEqual(JWTError.cannotCreateKey(code: 123, description: "Description").errorDescription,
-                          "cannot_create_key")
+                          "jwt_cannot_create_key")
         XCTAssertNotEqual(JWTError.unsupportedAlgorithm(.es384).errorDescription,
-                          "unsupported_algorithm")
+                          "jwt_unsupported_algorithm")
     }
 
     func testOktaAPIError() throws {

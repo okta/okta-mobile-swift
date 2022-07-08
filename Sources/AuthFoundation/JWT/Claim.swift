@@ -213,6 +213,9 @@ public extension HasClaims {
     /// The date the resource was updated at.
     var updatedAt: Date? { self[.updatedAt] }
     
+    /// The date at which authentication occurred.
+    var authTime: Date? { self[.authTime] }
+    
     /// The full name of the resource.
     var name: String? { self[.name] }
     

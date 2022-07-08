@@ -23,6 +23,7 @@ extension AuthorizationCodeFlow {
         let grantValue: String
         let pkce: PKCE?
         let nonce: String?
+        let maxAge: TimeInterval?
     }
 }
 

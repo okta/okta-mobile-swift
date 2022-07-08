@@ -27,6 +27,13 @@ public protocol IDTokenValidator {
     func validate(token: JWT, issuer: URL, clientId: String, context: IDTokenValidatorContext?) throws
 }
 
+/// Protocol used to supply contextual information to a validator.
+///
+/// The ``IDTokenValidator`` can use this information to enable or disable certain verification checks.
 public protocol IDTokenValidatorContext {
+    /// The `nonce` value used when beginning the authentication process.
     var nonce: String? { get }
+    
+    /// The maximum age the token should support when authenticating.
+    var maxAge: TimeInterval? { get }
 }
