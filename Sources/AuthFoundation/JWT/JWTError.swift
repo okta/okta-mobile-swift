@@ -18,6 +18,7 @@ public enum JWTError: Error, Equatable {
     case badTokenStructure
     case invalidIssuer
     case invalidAudience
+    case invalidSubject
     case issuerRequiresHTTPS
     case invalidSigningAlgorithm
     case expired
@@ -53,6 +54,12 @@ extension JWTError: LocalizedError {
 
         case .invalidAudience:
             return NSLocalizedString("invalid_audience",
+                                     tableName: "AuthFoundation",
+                                     bundle: .authFoundation,
+                                     comment: "")
+
+        case .invalidSubject:
+            return NSLocalizedString("invalid_subject",
                                      tableName: "AuthFoundation",
                                      bundle: .authFoundation,
                                      comment: "")

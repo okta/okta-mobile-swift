@@ -151,4 +151,12 @@ final class DefaultIDTokenValidatorTests: XCTestCase {
 
         XCTAssertNoThrow(try validator.validate(token: jwt, issuer: issuer, clientId: clientId, context: MockTokenContext(nonce: "B34AAE01-5757-4A0B-9362-B02F6F02A3B1")))
     }
+
+    func testMissingSubject() throws {
+        let jwt = try JWT("eyJraWQiOiJGSkEwSEdOdHN1dWRhX1BsNDVKNDJrdlFxY3N1XzBDNEZnN3BiSkxYVEhZIiwiYWxnIjoiUlMyNTYifQ.eyJ2ZXIiOjEsImlzcyI6Imh0dHBzOi8vZXhhbXBsZS5va3RhLmNvbS9vYXV0aDIvZGVmYXVsdCIsImF1ZCI6InVuaXRfdGVzdF9jbGllbnRfaWQiLCJpYXQiOjE2NDQzNDcwNjksImV4cCI6MTY0NDM1MDY2OSwianRpIjoiSUQuNTVjeEJ0ZFlsOGw2YXJLSVNQQndkMHlPVC05VUNUYVhhUVRYdDJsYVJMcyIsImFtciI6WyJwd2QiXSwiaWRwIjoiMDBvOGZvdTdzUmFHR3dkbjQ2OTYiLCJzaWQiOiJpZHhXeGtscF80a1N4dUNfblUxcFhELW5BIiwiYXV0aF90aW1lIjoxNjQ0MzQ3MDY4fQ.SJSlvVEdwQh29Fi2Py4cNEvGSU8tuutsQlAhTJNpT40g_EuXRFIXOk7x6XII2r0ymN5oJBUP1ZTxi2-ME1JdeM6Dhp2BZEZg-uFW7bCGHDS5c_PlqISWydiXs74BbnyMFX2kX5aJHVOcWW_XC8z-A127i-Ur3cAhrptDPpajpYDg9tTTsURENXwBAn2vVNWEmDCC1h8A8lhlJniEIj3pjHnNnq6Lr-L2P_aSm6yiD4MnuBOToJ9hRRAWGvOz7LkmVuqBEIJY7k1LXEdakBC3eyFx-xJjjTfSx8JBx5VEnaPVwl_MDr3h3wJjW9idpUML_-NtMR2RmPS4PgDD1pS4gQ")
+
+        XCTAssertThrowsError(try validator.validate(token: jwt, issuer: issuer, clientId: clientId, context: nil)) { error in
+            XCTAssertEqual(error as? JWTError, JWTError.invalidSubject)
+        }
+    }
 }

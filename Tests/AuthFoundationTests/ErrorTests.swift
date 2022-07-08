@@ -131,6 +131,8 @@ final class ErrorTests: XCTestCase {
                           "invalid_issuer")
         XCTAssertNotEqual(JWTError.invalidAudience.errorDescription,
                           "invalid_audience")
+        XCTAssertNotEqual(JWTError.invalidSubject.errorDescription,
+                          "invalid_subject")
         XCTAssertNotEqual(JWTError.issuerRequiresHTTPS.errorDescription,
                           "issuer_requires_https")
         XCTAssertNotEqual(JWTError.invalidSigningAlgorithm.errorDescription,

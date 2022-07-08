@@ -57,5 +57,11 @@ struct DefaultIDTokenValidator: IDTokenValidator {
         guard token["nonce"] == context?.nonce else {
             throw JWTError.nonceMismatch
         }
+        
+        guard let subject = token.subject,
+              !subject.isEmpty
+        else {
+            throw JWTError.invalidSubject
+        }
     }
 }
