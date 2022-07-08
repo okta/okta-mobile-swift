@@ -64,14 +64,4 @@ class BrowserSignInScreen: Screen {
         app.webViews.buttons["Sign in"].tap()
         testCase.save(screenshot: "Sign in")
     }
-    
-    func waitForAuthorization() {
-        XCTAssertTrue(app.webViews.staticTexts["Device activated"].waitForExistence(timeout: .veryLong))
-        testCase.save(screenshot: "Device Activated")
-        
-        if app.webViews.firstMatch.exists {
-            app.buttons["Done"].tap()
-            XCTAssertTrue(app.webViews.firstMatch.waitForNonExistence(timeout: .short))
-        }
-    }
 }

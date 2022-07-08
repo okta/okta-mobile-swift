@@ -73,8 +73,6 @@ class DeviceSignInTests: XCTestCase {
         save(screenshot: "Login Screen")
         browserSignInScreen.login(username: username, password: password)
 
-        browserSignInScreen.waitForAuthorization()
-
         profileScreen.wait()
         save(screenshot: "Profile Screen")
         
