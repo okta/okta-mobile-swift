@@ -28,25 +28,17 @@ jobs:
     - name: Prepare directory
       run: |
         mkdir -p docs/development
-    - name: AuthFoundation
-      run: |
         mkdir -p .build/symbol-graphs
+    - name: Build Symbol Graphs
+      run: |
         swift build \
             --target AuthFoundation \
             --target OktaOAuth2 \
             --target WebAuthenticationUI \
             -Xswiftc -emit-symbol-graph -Xswiftc -emit-symbol-graph -Xswiftc -emit-symbol-graph-dir -Xswiftc .build/symbol-graphs
         export DOCC_JSON_PRETTYPRINT=YES
-
-        swift package \
-          --allow-writing-to-directory docs \
-          generate-documentation \
-          --target AuthFoundation \
-          --disable-indexing \
-          --transform-for-static-hosting \
-          --hosting-base-path PACKAGENAME \
-          --output-path docs/development/AuthFoundation
-
+    - name: Generate Documentation
+      run: |
         set +e
         VERSION=$(git describe --tags)
         if [[ $? -ne 0 ]]; then
@@ -55,22 +47,26 @@ jobs:
         set -e
 
         for TARGET in AuthFoundation OktaOAuth2 WebAuthenticationUI; do
+            local NAME=$(echo "$TARGET" | tr '[:upper:]' '[:lower:]')
+
             xcrun docc convert \
                 Sources/$TARGET/$TARGET.docc \
                 --enable-inherited-docs \
                 --output-path $TARGET.doccarchive \
                 --fallback-display-name $TARGET \
-                --fallback-bundle-identifier com.okta.mobile.${TARGET,,} \
+                --fallback-bundle-identifier com.okta.mobile.$NAME \
                 --fallback-bundle-version $VERSION \
                 --additional-symbol-graph-dir .build/symbol-graphs
         done
 
         mkdir -p docs/$VERSION
         for TARGET in AuthFoundation OktaOAuth2 WebAuthenticationUI; do
+            local NAME=$(echo "$TARGET" | tr '[:upper:]' '[:lower:]')
+
             $(xcrun --find docc) process-archive transform-for-static-hosting \
                 $TARGET.doccarchive \
-                --hosting-base-path okta-mobile-swift/$VERSION/${TARGET,,} \
-                --output-path docs/$VERSION/${TARGET,,}
+                --hosting-base-path okta-mobile-swift/$VERSION/$NAME \
+                --output-path docs/$VERSION/$NAME
         done
     - name: Deploy documentation to Github Pages
       uses: peaceiris/actions-gh-pages@v3
