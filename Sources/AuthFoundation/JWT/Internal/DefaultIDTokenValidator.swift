@@ -39,25 +39,25 @@ public struct ValidationOption: OptionSet  {
     ]
     
     /// Validate the Issuer claim of the token
-    static let validateIssuer = ValidationOption(rawValue:  1 << 0)
+    static let validateIssuer = ValidationOption(rawValue: 1 << 0)
     /// Validate the Audience claim
-    static let validateAudience = ValidationOption(rawValue:  1 << 1)
+    static let validateAudience = ValidationOption(rawValue: 1 << 1)
     /// Validate the Issuer scheme  of the URL.
-    static let validateScheme = ValidationOption(rawValue:  1 << 2)
+    static let validateScheme = ValidationOption(rawValue: 1 << 2)
     /// Validate the signing algorithm used to sign this JWT token.
-    static let validateAlgorithm = ValidationOption(rawValue:  1 << 3)
+    static let validateAlgorithm = ValidationOption(rawValue: 1 << 3)
     /// Validate the Expiration Time. exp claim
-    static let validateExpirationTime = ValidationOption(rawValue:  1 << 4)
+    static let validateExpirationTime = ValidationOption(rawValue: 1 << 4)
     /// Validate the date this token was issued. iat claim
-    static let validateIssuedAtTime = ValidationOption(rawValue:  1 << 5)
+    static let validateIssuedAtTime = ValidationOption(rawValue: 1 << 5)
     /// Validate the nonce claim
-    static let validateNonce = ValidationOption(rawValue:  1 << 6)
+    static let validateNonce = ValidationOption(rawValue: 1 << 6)
     /// Validate the date at which authentication occurred.
-    static let validateAuthTime = ValidationOption(rawValue:  1 << 7)
+    static let validateAuthTime = ValidationOption(rawValue: 1 << 7)
     /// Validate the maximum age the token should support when authenticating.
-    static let validateMaxAge = ValidationOption(rawValue:  1 << 8)
+    static let validateMaxAge = ValidationOption(rawValue: 1 << 8)
     /// Validate the subject of the resource, if available.
-    static let validateSubject = ValidationOption(rawValue:  1 << 9)
+    static let validateSubject = ValidationOption(rawValue: 1 << 9)
 }
 
 struct DefaultIDTokenValidator: IDTokenValidator {
