@@ -16,70 +16,99 @@ import Foundation
 import CommonCrypto
 #endif
 
+/// This represents the possible option using in validating a claim
+public struct ValidationOption: OptionSet  {
+    public let rawValue: Int
+    
+    public init(rawValue: Int) {
+        self.rawValue = rawValue
+    }
+    
+    ///  This represents the default validation checks in-order using to validate a claim
+    public static let all: ValidationOption = [
+        .validateIssuer,
+        .validateAudience,
+        .validateScheme,
+        .validateAlgorithm,
+        .validateExpirationTime,
+        .validateIssuedAtTime,
+        .validateNonce,
+        .validateAuthTime,
+        .validateMaxAge,
+        .validateSubject
+    ]
+    
+    /// Validate the Issuer claim of the token
+    static let validateIssuer = ValidationOption(rawValue:  1 << 0)
+    /// Validate the Audience claim
+    static let validateAudience = ValidationOption(rawValue:  1 << 1)
+    /// Validate the Issuer scheme  of the URL.
+    static let validateScheme = ValidationOption(rawValue:  1 << 2)
+    /// Validate the signing algorithm used to sign this JWT token.
+    static let validateAlgorithm = ValidationOption(rawValue:  1 << 3)
+    /// Validate the Expiration Time. exp claim
+    static let validateExpirationTime = ValidationOption(rawValue:  1 << 4)
+    /// Validate the date this token was issued. iat claim
+    static let validateIssuedAtTime = ValidationOption(rawValue:  1 << 5)
+    /// Validate the nonce claim
+    static let validateNonce = ValidationOption(rawValue:  1 << 6)
+    /// Validate the date at which authentication occurred.
+    static let validateAuthTime = ValidationOption(rawValue:  1 << 7)
+    /// Validate the maximum age the token should support when authenticating.
+    static let validateMaxAge = ValidationOption(rawValue:  1 << 8)
+    /// Validate the subject of the resource, if available.
+    static let validateSubject = ValidationOption(rawValue:  1 << 9)
+}
+
 struct DefaultIDTokenValidator: IDTokenValidator {
     var issuedAtGraceInterval: TimeInterval = 300
-    
-    ///  This represents the validation checks using to  validate the claim
-    enum Intent {
-        case validateIssuer(token: JWT, issuer: URL)
-        case validateAudience(token: JWT, clientId: String)
-        case validateScheme(token: JWT)
-        case validateAlgorithm(token: JWT)
-        case validateNonce(token: JWT, context: IDTokenValidatorContext?)
-        case validateIssuedAtTime(token: JWT)
-        case validateExpirationTime(token: JWT)
-        case validateAuthTime(token: JWT, context: IDTokenValidatorContext?)
-        case validateMaxAge(token: JWT, context: IDTokenValidatorContext?)
-        case validateSubject(token: JWT)
-    }
-
+        
     func validate(token: JWT, issuer: URL, clientId: String, context: IDTokenValidatorContext?) throws {
-        let validationIntent: [Intent] = [
-            .validateIssuer(token: token, issuer: issuer),
-            .validateAudience(token: token, clientId: clientId),
-            .validateScheme(token: token),
-            .validateAlgorithm(token: token),
-            .validateExpirationTime(token: token),
-            .validateIssuedAtTime(token: token),
-            .validateNonce(token: token, context: context),
-            .validateAuthTime(token: token, context: context),
-            .validateMaxAge(token: token, context: context),
-            .validateSubject(token: token)
-        ]
-        return try self.validate(using: validationIntent)
+        let validationOptions = context?.validationOptions ?? .all
+        
+        if validationOptions.contains(.validateIssuer) {
+            try self.validateIssuer(using: token, issuer: issuer)
+        }
+
+        if validationOptions.contains(.validateAudience) {
+            try self.validateAudience(using: token, clientId: clientId)
+        }
+
+        if validationOptions.contains(.validateScheme) {
+            try self.validateScheme(using: token)
+        }
+
+        if validationOptions.contains(.validateAlgorithm) {
+            try self.validateAlgorithm(using: token)
+        }
+
+        if validationOptions.contains(.validateExpirationTime) {
+            try self.validateExpirationTime(using: token)
+        }
+
+        if validationOptions.contains(.validateIssuedAtTime) {
+            try self.validateIssuedAtTime(using: token)
+        }
+
+        if validationOptions.contains(.validateNonce) {
+            try self.validateNonce(using: token, context: context)
+        }
+
+        if validationOptions.contains(.validateAuthTime) {
+            try self.validateAuthTime(using: token, context: context)
+        }
+
+        if validationOptions.contains(.validateMaxAge) {
+            try self.validateMaxAge(using: token, context: context)
+        }
+
+        if validationOptions.contains(.validateSubject) {
+            try self.validateSubject(using: token)
+        }
     }
 }
 
 extension DefaultIDTokenValidator {
-    /// Validates the claims in the given token, using the supplied intent
-    /// - Parameter intent: The validation check requirement
-    func validate(using intent: [Intent]) throws {
-         try intent.forEach({ validationIntent in
-            switch validationIntent {
-            case .validateAudience(token: let token, clientId: let clientID):
-                try self.validateAudience(using: token, clientId: clientID)
-            case .validateIssuer(token: let token, issuer: let issuer):
-                try self.validateIssuer(using: token, issuer: issuer)
-            case .validateScheme(token: let token):
-                try self.validateScheme(using: token)
-            case .validateAlgorithm(token: let token):
-                try self.validateAlgorithm(using: token)
-            case .validateNonce(token: let token, context: let context):
-                try self.validateNonce(using: token, context: context)
-            case .validateIssuedAtTime(token: let token):
-                try self.validateIssuedAtTime(using: token)
-            case .validateExpirationTime(token: let token):
-                try self.validateExpirationTime(using: token)
-            case .validateAuthTime(token: let token, context: let context):
-                try self.validateAuthTime(using: token, context: context)
-            case .validateMaxAge(token: let token, context: let context):
-                try self.validateMaxAge(using: token, context: context)
-            case .validateSubject(token: let token):
-                try self.validateSubject(using: token)
-            }
-        })
-    }
-    
     /// Validate the Issuer claim of the token
     /// - Parameters:
     ///   - token: JWT token, providing access to its payload contents.
@@ -122,7 +151,7 @@ extension DefaultIDTokenValidator {
         }
     }
     
-    /// Validate rhe signing algorithm used to sign this JWT token.
+    /// Validate the signing algorithm used to sign this JWT token.
     /// - Parameter token: JWT token, providing access to its payload contents.
     private func validateAlgorithm(using token: JWT) throws {
         guard token.header.algorithm == .rs256 else {
