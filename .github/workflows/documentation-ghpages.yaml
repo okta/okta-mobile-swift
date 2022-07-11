@@ -40,14 +40,14 @@ jobs:
     - name: Generate Documentation
       run: |
         set +e
-        VERSION=$(git describe --tags)
+        VERSION=$(git describe --tags 2>/dev/null)
         if [[ $? -ne 0 ]]; then
             VERSION=development
         fi
         set -e
 
         for TARGET in AuthFoundation OktaOAuth2 WebAuthenticationUI; do
-            local NAME=$(echo "$TARGET" | tr '[:upper:]' '[:lower:]')
+            NAME=$(echo "$TARGET" | tr '[:upper:]' '[:lower:]')
 
             xcrun docc convert \
                 Sources/$TARGET/$TARGET.docc \
@@ -61,7 +61,7 @@ jobs:
 
         mkdir -p docs/$VERSION
         for TARGET in AuthFoundation OktaOAuth2 WebAuthenticationUI; do
-            local NAME=$(echo "$TARGET" | tr '[:upper:]' '[:lower:]')
+            NAME=$(echo "$TARGET" | tr '[:upper:]' '[:lower:]')
 
             $(xcrun --find docc) process-archive transform-for-static-hosting \
                 $TARGET.doccarchive \
