@@ -620,6 +620,20 @@ class LoginManager: InteractionCodeFlowDelegate {
 
 ## Development
 
+### Protecting Test Configuration
+
+This repository contains common configuration files within `Samples/Shared` which are used to expose test credentials to automated tests as well as the sample applications.
+
+* [TestConfiguration.xcconfig](Samples/Shared/TestConfiguration.xcconfig)
+
+To protect against accidental changes being introduced to this file, it is recommended that you use the following command after cloning this repository:
+
+```bash
+git config core.hooksPath ./.githooks
+```
+
+This will run checks before committing changes to ensure confidential test configuration is not altered.
+
 ### Running Tests
 
 To perform an end-to-end test, edit the `Samples/Shared/TestCredentials.xcconfig` to match your configuration as specified in the [prerequisites](#prerequisites). Next, you can run the test targets for both `okta-idx-ios` and `EmbeddedAuth` (in the [Samples/EmbeddedAuthWithSDKs](Samples/EmbeddedAuthWithSDKs) directory).
