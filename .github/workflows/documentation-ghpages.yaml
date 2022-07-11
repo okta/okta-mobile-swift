@@ -4,6 +4,9 @@ on:
   push:
     branches:
       - master
+  pull_request:
+    branches:
+      - master
 
 env:
   DEVELOPER_DIR: /Applications/Xcode_13.3.app/Contents/Developer
@@ -27,6 +30,14 @@ jobs:
         mkdir -p docs/development
     - name: AuthFoundation
       run: |
+        mkdir -p .build/symbol-graphs
+        swift build \
+            --target AuthFoundation \
+            --target OktaOAuth2 \
+            --target WebAuthenticationUI \
+            -Xswiftc -emit-symbol-graph -Xswiftc -emit-symbol-graph -Xswiftc -emit-symbol-graph-dir -Xswiftc .build/symbol-graphs
+        export DOCC_JSON_PRETTYPRINT=YES
+
         swift package \
           --allow-writing-to-directory docs \
           generate-documentation \
@@ -35,50 +46,32 @@ jobs:
           --transform-for-static-hosting \
           --hosting-base-path PACKAGENAME \
           --output-path docs/development/AuthFoundation
-        find docs/development/AuthFoundation -type f | while read file; do \
-          perl -pi -e "s#PACKAGENAME#okta-mobile-swift/development/AuthFoundation#g" "$file"; \
+
+        set +e
+        VERSION=$(git describe --tags)
+        if [[ $? -ne 0 ]]; then
+            VERSION=development
+        fi
+        set -e
+
+        for TARGET in AuthFoundation OktaOAuth2 WebAuthenticationUI; do
+            xcrun docc convert \
+                Sources/$TARGET/$TARGET.docc \
+                --enable-inherited-docs \
+                --output-path $TARGET.doccarchive \
+                --fallback-display-name $TARGET \
+                --fallback-bundle-identifier com.okta.mobile.${TARGET,,} \
+                --fallback-bundle-version $VERSION \
+                --additional-symbol-graph-dir .build/symbol-graphs
         done
-        find docs/development/AuthFoundation -type f -name '*.js' | while read file; do \
-          perl -pi -e "s#\\{\\{BASE_PATH\\}\\}#okta-mobile-swift/development/AuthFoundation#g" "$file"; \
-          perl -pi -e 's#n\+"(theme-settings.json)"#"/okta-mobile-swift/development/AuthFoundation/$1"#g' "$file"; \
+
+        mkdir -p docs/$VERSION
+        for TARGET in AuthFoundation OktaOAuth2 WebAuthenticationUI; do
+            $(xcrun --find docc) process-archive transform-for-static-hosting \
+                $TARGET.doccarchive \
+                --hosting-base-path okta-mobile-swift/$VERSION/${TARGET,,} \
+                --output-path docs/$VERSION/${TARGET,,}
         done
-        perl -pi -e "s#/(js|css)#/okta-mobile-swift/development/AuthFoundation/\$1#g" docs/development/AuthFoundation/index.html
-    - name: OktaOAuth2
-      run: |
-        swift package \
-          --allow-writing-to-directory docs \
-          generate-documentation \
-          --target OktaOAuth2 \
-          --disable-indexing \
-          --transform-for-static-hosting \
-          --hosting-base-path PACKAGENAME \
-          --output-path docs/development/OktaOAuth2
-        find docs/development/OktaOAuth2 -type f | while read file; do \
-          perl -pi -e "s#PACKAGENAME#okta-mobile-swift/development/OktaOAuth2#g" "$file"; \
-        done
-        find docs/development/OktaOAuth2 -type f -name '*.js' | while read file; do \
-          perl -pi -e "s#\\{\\{BASE_PATH\\}\\}#okta-mobile-swift/development/OktaOAuth2#g" "$file"; \
-          perl -pi -e 's#n\+"(theme-settings.json)"#"/okta-mobile-swift/development/OktaOAuth2/$1"#g' "$file"; \
-        done
-        perl -pi -e "s#/(js|css)#/okta-mobile-swift/development/OktaOAuth2/\$1#g" docs/development/OktaOAuth2/index.html
-    - name: WebAuthenticationUI
-      run: |
-        swift package \
-          --allow-writing-to-directory docs \
-          generate-documentation \
-          --target WebAuthenticationUI \
-          --disable-indexing \
-          --transform-for-static-hosting \
-          --hosting-base-path PACKAGENAME \
-          --output-path docs/development/WebAuthenticationUI
-        find docs/development/WebAuthenticationUI -type f | while read file; do \
-          perl -pi -e "s#PACKAGENAME#okta-mobile-swift/development/WebAuthenticationUI#g" "$file"; \
-        done
-        find docs/development/WebAuthenticationUI -type f -name '*.js' | while read file; do \
-          perl -pi -e "s#\\{\\{BASE_PATH\\}\\}#okta-mobile-swift/development/WebAuthenticationUI#g" "$file"; \
-          perl -pi -e 's#n\+"(theme-settings.json)"#"/okta-mobile-swift/development/WebAuthenticationUI/$1"#g' "$file"; \
-        done
-        perl -pi -e "s#/(js|css)#/okta-mobile-swift/development/WebAuthenticationUI/\$1#g" docs/development/WebAuthenticationUI/index.html
     - name: Deploy documentation to Github Pages
       uses: peaceiris/actions-gh-pages@v3
       with:
