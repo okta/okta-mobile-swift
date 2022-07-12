@@ -10,7 +10,7 @@ Since this URL is typically generated at runtime, APIs are needed to give you th
 
 ## Query String Parameters
 
-The simplest approach to customizing your authorization URL is adding additional parameters to the query string. These values can be supplied to the initializer, either through the ``WebAuthentication/init(issuer:clientId:scopes:responseType:redirectUri:logoutRedirectUri:additionalParameters:)`` initializer, or through the `Okta.plist` configuration format (see <doc:ConfiguringYourClient> for more information).
+The simplest approach to customizing your authorization URL is adding additional parameters to the query string. These values can be supplied to the initializer, either through the ``WebAuthentication/init(issuer:clientId:scopes:redirectUri:logoutRedirectUri:additionalParameters:)`` initializer, or through the `Okta.plist` configuration format (see <doc:ConfiguringYourClient> for more information).
 
 ```swift
 let auth = WebAuthentication(issuer: issuer,
