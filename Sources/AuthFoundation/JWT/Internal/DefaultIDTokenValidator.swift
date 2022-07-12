@@ -32,7 +32,7 @@ struct DefaultIDTokenValidator: IDTokenValidator {
             throw JWTError.invalidIssuer
         }
         
-        try checks.forEach({ check in
+        for check in checks {
             switch check {
             case .issuer:
                 guard tokenIssuer.absoluteString == issuer.absoluteString
@@ -84,6 +84,6 @@ struct DefaultIDTokenValidator: IDTokenValidator {
                     throw JWTError.invalidSubject
                 }
             }
-        })
+        }
     }
 }
