@@ -65,8 +65,8 @@ jobs:
 
             $(xcrun --find docc) process-archive transform-for-static-hosting \
                 $TARGET.doccarchive \
-                --hosting-base-path okta-mobile-swift/$VERSION/$NAME \
-                --output-path docs/$VERSION/$NAME
+                --hosting-base-path okta-mobile-swift/$VERSION \
+                --output-path docs/$VERSION
         done
     - name: Deploy documentation to Github Pages
       uses: peaceiris/actions-gh-pages@v3
