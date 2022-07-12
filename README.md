@@ -34,6 +34,7 @@ The latest release can always be found on the [releases page][github-releases].
 
 If you run into problems using the SDK, you can:
 
+* Review the API documentation for [AuthFoundation][authentication-docs], [OktaOAuth2][oktaoauth2-docs], and [WebAuthenticationUI][webauthenticationui-docs]
 * Ask questions on the [Okta Developer Forums][devforum]
 * Post [issues][github-issues] here on GitHub (for code errors)
 
