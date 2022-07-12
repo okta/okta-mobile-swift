@@ -67,7 +67,7 @@ jobs:
                 $TARGET.doccarchive \
                 --hosting-base-path okta-mobile-swift/$VERSION/$NAME \
                 --output-path docs/$VERSION/$NAME
-            sed -I -e "s/<head>/<head><meta name=\"redirect\" http-equiv=\"0; url=.\/documentation\/$NAME\//\">/" \
+            sed -I -e "s/<head>/<head><meta name='redirect' http-equiv='0; url=.\\\/documentation\\\/$NAME\\\//'>/" \
                 docs/$VERSION/$NAME/index.html
         done
     - name: Deploy documentation to Github Pages
