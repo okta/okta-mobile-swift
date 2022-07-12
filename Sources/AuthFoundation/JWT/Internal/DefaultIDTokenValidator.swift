@@ -21,7 +21,7 @@ struct DefaultIDTokenValidator: IDTokenValidator {
     var checks: [ValidationCheck] = ValidationCheck.allCases
     
     enum ValidationCheck: CaseIterable {
-        case issuer, audience, scheme, algorithm, expirationTime, issuedAtTime, nonce, authTime, maxAge, subject
+        case issuer, audience, scheme, algorithm, expirationTime, issuedAtTime, nonce, maxAge, subject
     }
     
     func validate(token: JWT, issuer: URL, clientId: String, context: IDTokenValidatorContext?) throws {
@@ -60,14 +60,14 @@ struct DefaultIDTokenValidator: IDTokenValidator {
                 guard token["nonce"] == context?.nonce else {
                     throw JWTError.nonceMismatch
                 }
-            case .issuedAtTime, .authTime, .maxAge:
+            case .issuedAtTime:
                 guard let issuedAt = token.issuedAt,
                       abs(issuedAt.timeIntervalSince(Date.nowCoordinated)) <= issuedAtGraceInterval
                 else {
                     throw JWTError.issuedAtTimeExceedsGraceInterval
                 }
-                
-                if let maxAge = context?.maxAge {
+            case .maxAge:
+                if let maxAge = context?.maxAge, let issuedAt = token.issuedAt {
                     guard let authTime = token.authTime else {
                         throw JWTError.invalidAuthenticationTime
                     }

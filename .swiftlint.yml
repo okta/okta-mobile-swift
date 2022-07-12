@@ -109,7 +109,8 @@ anyobject_protocol:
 class_delegate_protocol:
   severity: error
 cyclomatic_complexity:
-  severity: error
+  warning: 10
+  error: 30
 
 # Paths to ignore
 excluded:
