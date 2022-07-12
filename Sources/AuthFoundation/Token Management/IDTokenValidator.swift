@@ -36,7 +36,4 @@ public protocol IDTokenValidatorContext {
     
     /// The maximum age the token should support when authenticating.
     var maxAge: TimeInterval? { get }
-    
-    /// The possible option using  in validating a claim
-    var validationOptions: ValidationOption? { get }
 }

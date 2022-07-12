@@ -65,8 +65,4 @@ extension AuthorizationCodeFlow.TokenRequest: APIParsingContext {
     }
 }
 
-extension AuthorizationCodeFlow.TokenRequest: IDTokenValidatorContext {
-    var validationOptions: ValidationOption? {
-        return .all
-    }
-}
+extension AuthorizationCodeFlow.TokenRequest: IDTokenValidatorContext { }
