@@ -4,9 +4,6 @@ on:
   push:
     branches:
       - master
-  pull_request:
-    branches:
-      - master
 
 env:
   DEVELOPER_DIR: /Applications/Xcode_13.3.app/Contents/Developer
@@ -36,7 +33,6 @@ jobs:
             --target OktaOAuth2 \
             --target WebAuthenticationUI \
             -Xswiftc -emit-symbol-graph -Xswiftc -emit-symbol-graph -Xswiftc -emit-symbol-graph-dir -Xswiftc .build/symbol-graphs
-        export DOCC_JSON_PRETTYPRINT=YES
     - name: Generate Documentation
       run: |
         set +e
@@ -46,6 +42,7 @@ jobs:
         fi
         set -e
 
+        export DOCC_JSON_PRETTYPRINT=YES
         for TARGET in AuthFoundation OktaOAuth2 WebAuthenticationUI; do
             NAME=$(echo "$TARGET" | tr '[:upper:]' '[:lower:]')
 
