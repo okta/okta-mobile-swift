@@ -1,0 +1,482 @@
+{
+  "abstract" : [
+    {
+      "text" : "Initializes a web authentication session using the supplied AuthorizationCodeFlow and optional context.",
+      "type" : "text"
+    }
+  ],
+  "hierarchy" : {
+    "paths" : [
+      [
+        "doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/WebAuthenticationUI",
+        "doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/WebAuthenticationUI\/WebAuthentication"
+      ]
+    ]
+  },
+  "identifier" : {
+    "interfaceLanguage" : "swift",
+    "url" : "doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/WebAuthenticationUI\/WebAuthentication\/init(loginFlow:logoutFlow:context:)"
+  },
+  "kind" : "symbol",
+  "metadata" : {
+    "externalID" : "s:19WebAuthenticationUI0aB0C9loginFlow06logoutE07contextAC10OktaOAuth2017AuthorizationCodeE0C_AG013SessionLogoutE0CSgAI7ContextVSgtcfc",
+    "fragments" : [
+      {
+        "kind" : "identifier",
+        "text" : "init"
+      },
+      {
+        "kind" : "text",
+        "text" : "("
+      },
+      {
+        "kind" : "externalParam",
+        "text" : "loginFlow"
+      },
+      {
+        "kind" : "text",
+        "text" : ": "
+      },
+      {
+        "kind" : "typeIdentifier",
+        "preciseIdentifier" : "s:10OktaOAuth221AuthorizationCodeFlowC",
+        "text" : "AuthorizationCodeFlow"
+      },
+      {
+        "kind" : "text",
+        "text" : ", "
+      },
+      {
+        "kind" : "externalParam",
+        "text" : "logoutFlow"
+      },
+      {
+        "kind" : "text",
+        "text" : ": "
+      },
+      {
+        "kind" : "typeIdentifier",
+        "preciseIdentifier" : "s:10OktaOAuth217SessionLogoutFlowC",
+        "text" : "SessionLogoutFlow"
+      },
+      {
+        "kind" : "text",
+        "text" : "?, "
+      },
+      {
+        "kind" : "externalParam",
+        "text" : "context"
+      },
+      {
+        "kind" : "text",
+        "text" : ": "
+      },
+      {
+        "kind" : "typeIdentifier",
+        "preciseIdentifier" : "s:10OktaOAuth221AuthorizationCodeFlowC",
+        "text" : "AuthorizationCodeFlow"
+      },
+      {
+        "kind" : "text",
+        "text" : "."
+      },
+      {
+        "kind" : "typeIdentifier",
+        "preciseIdentifier" : "s:10OktaOAuth221AuthorizationCodeFlowC7ContextV",
+        "text" : "Context"
+      },
+      {
+        "kind" : "text",
+        "text" : "?)"
+      }
+    ],
+    "modules" : [
+      {
+        "name" : "WebAuthenticationUI"
+      }
+    ],
+    "role" : "symbol",
+    "roleHeading" : "Initializer",
+    "symbolKind" : "init",
+    "title" : "init(loginFlow:logoutFlow:context:)"
+  },
+  "primaryContentSections" : [
+    {
+      "declarations" : [
+        {
+          "languages" : [
+            "swift"
+          ],
+          "platforms" : [
+            "macOS"
+          ],
+          "tokens" : [
+            {
+              "kind" : "keyword",
+              "text" : "init"
+            },
+            {
+              "kind" : "text",
+              "text" : "("
+            },
+            {
+              "kind" : "externalParam",
+              "text" : "loginFlow"
+            },
+            {
+              "kind" : "text",
+              "text" : ": "
+            },
+            {
+              "identifier" : "doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/OktaOAuth2\/AuthorizationCodeFlow",
+              "kind" : "typeIdentifier",
+              "preciseIdentifier" : "s:10OktaOAuth221AuthorizationCodeFlowC",
+              "text" : "AuthorizationCodeFlow"
+            },
+            {
+              "kind" : "text",
+              "text" : ", "
+            },
+            {
+              "kind" : "externalParam",
+              "text" : "logoutFlow"
+            },
+            {
+              "kind" : "text",
+              "text" : ": "
+            },
+            {
+              "identifier" : "doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/OktaOAuth2\/SessionLogoutFlow",
+              "kind" : "typeIdentifier",
+              "preciseIdentifier" : "s:10OktaOAuth217SessionLogoutFlowC",
+              "text" : "SessionLogoutFlow"
+            },
+            {
+              "kind" : "text",
+              "text" : "?, "
+            },
+            {
+              "kind" : "externalParam",
+              "text" : "context"
+            },
+            {
+              "kind" : "text",
+              "text" : ": "
+            },
+            {
+              "identifier" : "doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/OktaOAuth2\/AuthorizationCodeFlow",
+              "kind" : "typeIdentifier",
+              "preciseIdentifier" : "s:10OktaOAuth221AuthorizationCodeFlowC",
+              "text" : "AuthorizationCodeFlow"
+            },
+            {
+              "kind" : "text",
+              "text" : "."
+            },
+            {
+              "identifier" : "doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/OktaOAuth2\/AuthorizationCodeFlow\/Context-swift.struct",
+              "kind" : "typeIdentifier",
+              "preciseIdentifier" : "s:10OktaOAuth221AuthorizationCodeFlowC7ContextV",
+              "text" : "Context"
+            },
+            {
+              "kind" : "text",
+              "text" : "? = nil)"
+            }
+          ]
+        }
+      ],
+      "kind" : "declarations"
+    },
+    {
+      "kind" : "parameters",
+      "parameters" : [
+        {
+          "content" : [
+            {
+              "inlineContent" : [
+                {
+                  "text" : "Authorization code flow instance for this client.",
+                  "type" : "text"
+                }
+              ],
+              "type" : "paragraph"
+            }
+          ],
+          "name" : "flow"
+        },
+        {
+          "content" : [
+            {
+              "inlineContent" : [
+                {
+                  "text" : "Optional context to initialize authentication with.",
+                  "type" : "text"
+                }
+              ],
+              "type" : "paragraph"
+            }
+          ],
+          "name" : "context"
+        }
+      ]
+    }
+  ],
+  "schemaVersion" : {
+    "major" : 0,
+    "minor" : 2,
+    "patch" : 0
+  },
+  "sections" : [
+
+  ],
+  "variants" : [
+    {
+      "paths" : [
+        "\/documentation\/webauthenticationui\/webauthentication\/init(loginflow:logoutflow:context:)"
+      ],
+      "traits" : [
+        {
+          "interfaceLanguage" : "swift"
+        }
+      ]
+    }
+  ]
+, 
+"references": {
+"doc://com.okta.mobile.webauthenticationui/documentation/OktaOAuth2/AuthorizationCodeFlow": {
+  "abstract" : [
+    {
+      "text" : "An authentication flow class that implements the Authorization Code Flow exchange.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "class"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "AuthorizationCodeFlow"
+    }
+  ],
+  "identifier" : "doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/OktaOAuth2\/AuthorizationCodeFlow",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "AuthorizationCodeFlow"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "AuthorizationCodeFlow",
+  "type" : "topic",
+  "url" : "\/documentation\/oktaoauth2\/authorizationcodeflow"
+},
+"doc://com.okta.mobile.webauthenticationui/documentation/OktaOAuth2/AuthorizationCodeFlow/Context-swift.struct": {
+  "abstract" : [
+    {
+      "text" : "A model representing the context and current state for an authorization session.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "struct"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "Context"
+    }
+  ],
+  "identifier" : "doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/OktaOAuth2\/AuthorizationCodeFlow\/Context-swift.struct",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "Context"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "AuthorizationCodeFlow.Context",
+  "type" : "topic",
+  "url" : "\/documentation\/oktaoauth2\/authorizationcodeflow\/context-swift.struct"
+},
+"doc://com.okta.mobile.webauthenticationui/documentation/OktaOAuth2/SessionLogoutFlow": {
+  "abstract" : [
+    {
+      "text" : "An logout flow class that implements the Session Logout Flow.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "class"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "SessionLogoutFlow"
+    }
+  ],
+  "identifier" : "doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/OktaOAuth2\/SessionLogoutFlow",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "SessionLogoutFlow"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "SessionLogoutFlow",
+  "type" : "topic",
+  "url" : "\/documentation\/oktaoauth2\/sessionlogoutflow"
+},
+"doc://com.okta.mobile.webauthenticationui/documentation/WebAuthenticationUI": {
+  "abstract" : [
+    {
+      "text" : "Make it easy to enable users to sign in to your app through browser-based sign on.",
+      "type" : "text"
+    }
+  ],
+  "identifier" : "doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/WebAuthenticationUI",
+  "kind" : "symbol",
+  "role" : "collection",
+  "title" : "WebAuthenticationUI",
+  "type" : "topic",
+  "url" : "\/documentation\/webauthenticationui"
+},
+"doc://com.okta.mobile.webauthenticationui/documentation/WebAuthenticationUI/WebAuthentication": {
+  "abstract" : [
+    {
+      "text" : "Authentication coordinator that simplifies signing users in using browser-based OIDC authentication flows.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "class"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "WebAuthentication"
+    }
+  ],
+  "identifier" : "doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/WebAuthenticationUI\/WebAuthentication",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "WebAuthentication"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "WebAuthentication",
+  "type" : "topic",
+  "url" : "\/documentation\/webauthenticationui\/webauthentication"
+},
+"doc://com.okta.mobile.webauthenticationui/documentation/WebAuthenticationUI/WebAuthentication/init(loginFlow:logoutFlow:context:)": {
+  "abstract" : [
+    {
+      "text" : "Initializes a web authentication session using the supplied AuthorizationCodeFlow and optional context.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "identifier",
+      "text" : "init"
+    },
+    {
+      "kind" : "text",
+      "text" : "("
+    },
+    {
+      "kind" : "externalParam",
+      "text" : "loginFlow"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:10OktaOAuth221AuthorizationCodeFlowC",
+      "text" : "AuthorizationCodeFlow"
+    },
+    {
+      "kind" : "text",
+      "text" : ", "
+    },
+    {
+      "kind" : "externalParam",
+      "text" : "logoutFlow"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:10OktaOAuth217SessionLogoutFlowC",
+      "text" : "SessionLogoutFlow"
+    },
+    {
+      "kind" : "text",
+      "text" : "?, "
+    },
+    {
+      "kind" : "externalParam",
+      "text" : "context"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:10OktaOAuth221AuthorizationCodeFlowC",
+      "text" : "AuthorizationCodeFlow"
+    },
+    {
+      "kind" : "text",
+      "text" : "."
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:10OktaOAuth221AuthorizationCodeFlowC7ContextV",
+      "text" : "Context"
+    },
+    {
+      "kind" : "text",
+      "text" : "?)"
+    }
+  ],
+  "identifier" : "doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/WebAuthenticationUI\/WebAuthentication\/init(loginFlow:logoutFlow:context:)",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "init(loginFlow:logoutFlow:context:)",
+  "type" : "topic",
+  "url" : "\/documentation\/webauthenticationui\/webauthentication\/init(loginflow:logoutflow:context:)"
+}
+}
+}

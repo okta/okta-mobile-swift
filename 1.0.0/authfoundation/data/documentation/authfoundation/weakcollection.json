@@ -1,0 +1,592 @@
+{
+  "abstract" : [
+    {
+      "text" : "Property wrapper representing a collection of weak values.",
+      "type" : "text"
+    }
+  ],
+  "hierarchy" : {
+    "paths" : [
+      [
+        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation"
+      ]
+    ]
+  },
+  "identifier" : {
+    "interfaceLanguage" : "swift",
+    "url" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/WeakCollection"
+  },
+  "kind" : "symbol",
+  "metadata" : {
+    "externalID" : "s:14AuthFoundation14WeakCollectionV",
+    "fragments" : [
+      {
+        "kind" : "keyword",
+        "text" : "struct"
+      },
+      {
+        "kind" : "text",
+        "text" : " "
+      },
+      {
+        "kind" : "identifier",
+        "text" : "WeakCollection"
+      }
+    ],
+    "modules" : [
+      {
+        "name" : "AuthFoundation"
+      }
+    ],
+    "navigatorTitle" : [
+      {
+        "kind" : "identifier",
+        "text" : "WeakCollection"
+      }
+    ],
+    "role" : "symbol",
+    "roleHeading" : "Structure",
+    "symbolKind" : "struct",
+    "title" : "WeakCollection"
+  },
+  "primaryContentSections" : [
+    {
+      "declarations" : [
+        {
+          "languages" : [
+            "swift"
+          ],
+          "platforms" : [
+            "macOS"
+          ],
+          "tokens" : [
+            {
+              "kind" : "attribute",
+              "text" : "@propertyWrapper"
+            },
+            {
+              "kind" : "text",
+              "text" : " "
+            },
+            {
+              "kind" : "keyword",
+              "text" : "struct"
+            },
+            {
+              "kind" : "text",
+              "text" : " "
+            },
+            {
+              "kind" : "identifier",
+              "text" : "WeakCollection"
+            },
+            {
+              "kind" : "text",
+              "text" : "<"
+            },
+            {
+              "kind" : "genericParameter",
+              "text" : "Collect"
+            },
+            {
+              "kind" : "text",
+              "text" : ", "
+            },
+            {
+              "kind" : "genericParameter",
+              "text" : "Element"
+            },
+            {
+              "kind" : "text",
+              "text" : "> "
+            },
+            {
+              "kind" : "keyword",
+              "text" : "where"
+            },
+            {
+              "kind" : "text",
+              "text" : " "
+            },
+            {
+              "kind" : "typeIdentifier",
+              "text" : "Collect"
+            },
+            {
+              "kind" : "text",
+              "text" : " : "
+            },
+            {
+              "kind" : "typeIdentifier",
+              "preciseIdentifier" : "s:Sm",
+              "text" : "RangeReplaceableCollection"
+            },
+            {
+              "kind" : "text",
+              "text" : ", "
+            },
+            {
+              "kind" : "typeIdentifier",
+              "text" : "Element"
+            },
+            {
+              "kind" : "text",
+              "text" : " : AnyObject, "
+            },
+            {
+              "kind" : "typeIdentifier",
+              "text" : "Collect"
+            },
+            {
+              "kind" : "text",
+              "text" : "."
+            },
+            {
+              "kind" : "typeIdentifier",
+              "text" : "Element"
+            },
+            {
+              "kind" : "text",
+              "text" : " == "
+            },
+            {
+              "kind" : "typeIdentifier",
+              "preciseIdentifier" : "s:Sq",
+              "text" : "Optional"
+            },
+            {
+              "kind" : "text",
+              "text" : "<"
+            },
+            {
+              "kind" : "typeIdentifier",
+              "text" : "Element"
+            },
+            {
+              "kind" : "text",
+              "text" : ">"
+            }
+          ]
+        }
+      ],
+      "kind" : "declarations"
+    }
+  ],
+  "relationshipsSections" : [
+    {
+      "identifiers" : [
+        "doc:\/\/com.okta.mobile.authfoundation\/SQ",
+        "doc:\/\/com.okta.mobile.authfoundation\/SH"
+      ],
+      "kind" : "relationships",
+      "title" : "Conforms To",
+      "type" : "conformsTo"
+    }
+  ],
+  "schemaVersion" : {
+    "major" : 0,
+    "minor" : 2,
+    "patch" : 0
+  },
+  "sections" : [
+
+  ],
+  "seeAlsoSections" : [
+    {
+      "generated" : true,
+      "identifiers" : [
+        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/DelegateCollection",
+        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/UsesDelegateCollection",
+        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/URLSessionProtocol",
+        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/URLSessionDataTaskProtocol",
+        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/Weak",
+        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/TimeSensitive"
+      ],
+      "title" : "Internals and mocking"
+    }
+  ],
+  "topicSections" : [
+    {
+      "identifiers" : [
+        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/WeakCollection\/init(wrappedValue:)"
+      ],
+      "title" : "Initializers"
+    },
+    {
+      "identifiers" : [
+        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/WeakCollection\/wrappedValue"
+      ],
+      "title" : "Instance Properties"
+    },
+    {
+      "generated" : true,
+      "identifiers" : [
+        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/WeakCollection\/Equatable-Implementations",
+        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/WeakCollection\/Hashable-Implementations"
+      ],
+      "title" : "Default Implementations"
+    }
+  ],
+  "variants" : [
+    {
+      "paths" : [
+        "\/documentation\/authfoundation\/weakcollection"
+      ],
+      "traits" : [
+        {
+          "interfaceLanguage" : "swift"
+        }
+      ]
+    }
+  ]
+, 
+"references": {
+"doc://com.okta.mobile.authfoundation/SH": {
+  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/SH",
+  "title" : "Swift.Hashable",
+  "type" : "unresolvable"
+},
+"doc://com.okta.mobile.authfoundation/SQ": {
+  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/SQ",
+  "title" : "Swift.Equatable",
+  "type" : "unresolvable"
+},
+"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation": {
+  "abstract" : [
+    {
+      "text" : "Library that provides foundational features used by Okta’s authentication libraries, as well as APIs used to work with tokens and user credentials.",
+      "type" : "text"
+    }
+  ],
+  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation",
+  "kind" : "symbol",
+  "role" : "collection",
+  "title" : "AuthFoundation",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation"
+},
+"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/DelegateCollection": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "class"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "DelegateCollection"
+    }
+  ],
+  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/DelegateCollection",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "DelegateCollection"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "DelegateCollection",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/delegatecollection"
+},
+"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/TimeSensitive": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "struct"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "TimeSensitive"
+    }
+  ],
+  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/TimeSensitive",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "TimeSensitive"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "TimeSensitive",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/timesensitive"
+},
+"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/URLSessionDataTaskProtocol": {
+  "abstract" : [
+    {
+      "text" : "Protocol defining the interface for interacting with a URLSession. This is used to provide mocking for unit tests.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "protocol"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "URLSessionDataTaskProtocol"
+    }
+  ],
+  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/URLSessionDataTaskProtocol",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "URLSessionDataTaskProtocol"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "URLSessionDataTaskProtocol",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/urlsessiondatataskprotocol"
+},
+"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/URLSessionProtocol": {
+  "abstract" : [
+    {
+      "text" : "Protocol defining the interface for interacting with a URLSession. This is used to provide mocking for unit tests.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "protocol"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "URLSessionProtocol"
+    }
+  ],
+  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/URLSessionProtocol",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "URLSessionProtocol"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "URLSessionProtocol",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/urlsessionprotocol"
+},
+"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/UsesDelegateCollection": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "protocol"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "UsesDelegateCollection"
+    }
+  ],
+  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/UsesDelegateCollection",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "UsesDelegateCollection"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "UsesDelegateCollection",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/usesdelegatecollection"
+},
+"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/Weak": {
+  "abstract" : [
+    {
+      "text" : "Property wrapper representing a weak value.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "struct"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "Weak"
+    }
+  ],
+  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/Weak",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "Weak"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "Weak",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/weak"
+},
+"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/WeakCollection": {
+  "abstract" : [
+    {
+      "text" : "Property wrapper representing a collection of weak values.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "struct"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "WeakCollection"
+    }
+  ],
+  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/WeakCollection",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "WeakCollection"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "WeakCollection",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/weakcollection"
+},
+"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/WeakCollection/Equatable-Implementations": {
+  "abstract" : [
+
+  ],
+  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/WeakCollection\/Equatable-Implementations",
+  "kind" : "article",
+  "role" : "collectionGroup",
+  "title" : "Equatable Implementations",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/weakcollection\/equatable-implementations"
+},
+"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/WeakCollection/Hashable-Implementations": {
+  "abstract" : [
+
+  ],
+  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/WeakCollection\/Hashable-Implementations",
+  "kind" : "article",
+  "role" : "collectionGroup",
+  "title" : "Hashable Implementations",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/weakcollection\/hashable-implementations"
+},
+"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/WeakCollection/init(wrappedValue:)": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "identifier",
+      "text" : "init"
+    },
+    {
+      "kind" : "text",
+      "text" : "("
+    },
+    {
+      "kind" : "externalParam",
+      "text" : "wrappedValue"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:14AuthFoundation14WeakCollectionV7Collectxmfp",
+      "text" : "Collect"
+    },
+    {
+      "kind" : "text",
+      "text" : ")"
+    }
+  ],
+  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/WeakCollection\/init(wrappedValue:)",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "init(wrappedValue:)",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/weakcollection\/init(wrappedvalue:)"
+},
+"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/WeakCollection/wrappedValue": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "var"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "wrappedValue"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:14AuthFoundation14WeakCollectionV7Collectxmfp",
+      "text" : "Collect"
+    }
+  ],
+  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/WeakCollection\/wrappedValue",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "wrappedValue",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/weakcollection\/wrappedvalue"
+}
+}
+}

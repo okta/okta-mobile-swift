@@ -1,0 +1,1216 @@
+{
+  "abstract" : [
+    {
+      "text" : "An authentication flow class that implements the Token Exchange Flow.",
+      "type" : "text"
+    }
+  ],
+  "hierarchy" : {
+    "paths" : [
+      [
+        "doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/OktaOAuth2"
+      ]
+    ]
+  },
+  "identifier" : {
+    "interfaceLanguage" : "swift",
+    "url" : "doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/OktaOAuth2\/TokenExchangeFlow"
+  },
+  "kind" : "symbol",
+  "metadata" : {
+    "externalID" : "s:10OktaOAuth217TokenExchangeFlowC",
+    "fragments" : [
+      {
+        "kind" : "keyword",
+        "text" : "class"
+      },
+      {
+        "kind" : "text",
+        "text" : " "
+      },
+      {
+        "kind" : "identifier",
+        "text" : "TokenExchangeFlow"
+      }
+    ],
+    "modules" : [
+      {
+        "name" : "OktaOAuth2"
+      }
+    ],
+    "navigatorTitle" : [
+      {
+        "kind" : "identifier",
+        "text" : "TokenExchangeFlow"
+      }
+    ],
+    "role" : "symbol",
+    "roleHeading" : "Class",
+    "symbolKind" : "class",
+    "title" : "TokenExchangeFlow"
+  },
+  "primaryContentSections" : [
+    {
+      "declarations" : [
+        {
+          "languages" : [
+            "swift"
+          ],
+          "platforms" : [
+            "macOS"
+          ],
+          "tokens" : [
+            {
+              "kind" : "keyword",
+              "text" : "final"
+            },
+            {
+              "kind" : "text",
+              "text" : " "
+            },
+            {
+              "kind" : "keyword",
+              "text" : "class"
+            },
+            {
+              "kind" : "text",
+              "text" : " "
+            },
+            {
+              "kind" : "identifier",
+              "text" : "TokenExchangeFlow"
+            }
+          ]
+        }
+      ],
+      "kind" : "declarations"
+    },
+    {
+      "content" : [
+        {
+          "anchor" : "overview",
+          "level" : 2,
+          "text" : "Overview",
+          "type" : "heading"
+        },
+        {
+          "inlineContent" : [
+            {
+              "text" : "The Token Exchange Flow allows a client to get the Access Token exchanging other tokens.",
+              "type" : "text"
+            }
+          ],
+          "type" : "paragraph"
+        },
+        {
+          "inlineContent" : [
+            {
+              "text" : "As an example, consider ",
+              "type" : "text"
+            },
+            {
+              "identifier" : "https:\/\/developer.okta.com\/docs\/guides\/configure-native-sso\/main\/#native-sso-flow",
+              "isActive" : true,
+              "type" : "reference"
+            },
+            {
+              "text" : " where a client exchanges the ID and the Device Secret tokens to get the access to the resource.",
+              "type" : "text"
+            }
+          ],
+          "type" : "paragraph"
+        },
+        {
+          "inlineContent" : [
+            {
+              "text" : "You can create an instance of  ",
+              "type" : "text"
+            },
+            {
+              "identifier" : "doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/OktaOAuth2\/TokenExchangeFlow",
+              "isActive" : true,
+              "type" : "reference"
+            },
+            {
+              "text" : " either through the ",
+              "type" : "text"
+            },
+            {
+              "code" : "resourceOwnerFlow()",
+              "type" : "codeVoice"
+            },
+            {
+              "text" : " method on ",
+              "type" : "text"
+            },
+            {
+              "code" : "OAuth2Client",
+              "type" : "codeVoice"
+            },
+            {
+              "text" : ", or you can use any of the designated initializers to construct the flow.",
+              "type" : "text"
+            }
+          ],
+          "type" : "paragraph"
+        },
+        {
+          "inlineContent" : [
+            {
+              "text" : "As an example, we’ll use Swift Concurrency, since these asynchronous methods can be used inline easily, though ",
+              "type" : "text"
+            },
+            {
+              "identifier" : "doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/OktaOAuth2\/TokenExchangeFlow",
+              "isActive" : true,
+              "type" : "reference"
+            },
+            {
+              "text" : " can just as easily be used with completion blocks or through the use of the ",
+              "type" : "text"
+            },
+            {
+              "code" : "AuthenticationDelegate",
+              "type" : "codeVoice"
+            },
+            {
+              "text" : ".",
+              "type" : "text"
+            }
+          ],
+          "type" : "paragraph"
+        },
+        {
+          "code" : [
+            "let flow = TokenExchangeFlow(",
+            "    issuer: URL(string: \"https:\/\/example.okta.com\")!,",
+            "    clientId: \"abc123client\",",
+            "    scopes: \"openid offline_access email profile\",",
+            "    audience: .default)",
+            "",
+            "let tokens: [TokenType] = [",
+            "    .actor(type: .deviceSecret, value: \"DeviceToken\"),",
+            "    .subject(type: .idToken, value: \"IDToken\")",
+            "]",
+            "let token = try await flow.start(with: tokens)"
+          ],
+          "syntax" : "swift",
+          "type" : "codeListing"
+        }
+      ],
+      "kind" : "content"
+    }
+  ],
+  "relationshipsSections" : [
+    {
+      "identifiers" : [
+        "doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/AuthFoundation\/APIClientDelegate",
+        "doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/AuthFoundation\/AuthenticationFlow",
+        "doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/AuthFoundation\/OAuth2ClientDelegate",
+        "doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/AuthFoundation\/UsesDelegateCollection"
+      ],
+      "kind" : "relationships",
+      "title" : "Conforms To",
+      "type" : "conformsTo"
+    }
+  ],
+  "schemaVersion" : {
+    "major" : 0,
+    "minor" : 2,
+    "patch" : 0
+  },
+  "sections" : [
+
+  ],
+  "topicSections" : [
+    {
+      "identifiers" : [
+        "doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/OktaOAuth2\/TokenExchangeFlow\/init()",
+        "doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/OktaOAuth2\/TokenExchangeFlow\/init(audience:client:)",
+        "doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/OktaOAuth2\/TokenExchangeFlow\/init(issuer:clientId:scopes:audience:)",
+        "doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/OktaOAuth2\/TokenExchangeFlow\/init(plist:)"
+      ],
+      "title" : "Initializers"
+    },
+    {
+      "identifiers" : [
+        "doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/OktaOAuth2\/TokenExchangeFlow\/audience-swift.property",
+        "doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/OktaOAuth2\/TokenExchangeFlow\/client",
+        "doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/OktaOAuth2\/TokenExchangeFlow\/delegateCollection",
+        "doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/OktaOAuth2\/TokenExchangeFlow\/isAuthenticating"
+      ],
+      "title" : "Instance Properties"
+    },
+    {
+      "identifiers" : [
+        "doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/OktaOAuth2\/TokenExchangeFlow\/reset()",
+        "doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/OktaOAuth2\/TokenExchangeFlow\/start(with:)",
+        "doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/OktaOAuth2\/TokenExchangeFlow\/start(with:completion:)"
+      ],
+      "title" : "Instance Methods"
+    },
+    {
+      "identifiers" : [
+        "doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/OktaOAuth2\/TokenExchangeFlow\/Audience-swift.enum",
+        "doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/OktaOAuth2\/TokenExchangeFlow\/TokenType"
+      ],
+      "title" : "Enumerations"
+    },
+    {
+      "generated" : true,
+      "identifiers" : [
+        "doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/OktaOAuth2\/TokenExchangeFlow\/APIClientDelegate-Implementations",
+        "doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/OktaOAuth2\/TokenExchangeFlow\/OAuth2ClientDelegate-Implementations",
+        "doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/OktaOAuth2\/TokenExchangeFlow\/UsesDelegateCollection-Implementations"
+      ],
+      "title" : "Default Implementations"
+    }
+  ],
+  "variants" : [
+    {
+      "paths" : [
+        "\/documentation\/oktaoauth2\/tokenexchangeflow"
+      ],
+      "traits" : [
+        {
+          "interfaceLanguage" : "swift"
+        }
+      ]
+    }
+  ]
+, 
+"references": {
+"doc://com.okta.mobile.oktaoauth2/documentation/AuthFoundation/APIClientDelegate": {
+  "abstract" : [
+    {
+      "text" : "Protocol that delegates of APIClient instances can conform to.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "protocol"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "APIClientDelegate"
+    }
+  ],
+  "identifier" : "doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/AuthFoundation\/APIClientDelegate",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "APIClientDelegate"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "APIClientDelegate",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/apiclientdelegate"
+},
+"doc://com.okta.mobile.oktaoauth2/documentation/AuthFoundation/AuthenticationFlow": {
+  "abstract" : [
+    {
+      "text" : "A protocol defining a type of authentication flow.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "protocol"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "AuthenticationFlow"
+    }
+  ],
+  "identifier" : "doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/AuthFoundation\/AuthenticationFlow",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "AuthenticationFlow"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "AuthenticationFlow",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/authenticationflow"
+},
+"doc://com.okta.mobile.oktaoauth2/documentation/AuthFoundation/OAuth2Client": {
+  "abstract" : [
+    {
+      "text" : "An OAuth2 client, used to interact with a given authorization server.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "class"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "OAuth2Client"
+    }
+  ],
+  "identifier" : "doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/AuthFoundation\/OAuth2Client",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "OAuth2Client"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "OAuth2Client",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/oauth2client"
+},
+"doc://com.okta.mobile.oktaoauth2/documentation/AuthFoundation/OAuth2ClientDelegate": {
+  "abstract" : [
+    {
+      "text" : "Delegate protocol used by ",
+      "type" : "text"
+    },
+    {
+      "identifier" : "doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/AuthFoundation\/OAuth2Client",
+      "isActive" : true,
+      "type" : "reference"
+    },
+    {
+      "text" : " to communicate important events.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "protocol"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "OAuth2ClientDelegate"
+    }
+  ],
+  "identifier" : "doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/AuthFoundation\/OAuth2ClientDelegate",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "OAuth2ClientDelegate"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "OAuth2ClientDelegate",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/oauth2clientdelegate"
+},
+"doc://com.okta.mobile.oktaoauth2/documentation/AuthFoundation/UsesDelegateCollection": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "protocol"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "UsesDelegateCollection"
+    }
+  ],
+  "identifier" : "doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/AuthFoundation\/UsesDelegateCollection",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "UsesDelegateCollection"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "UsesDelegateCollection",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/usesdelegatecollection"
+},
+"doc://com.okta.mobile.oktaoauth2/documentation/OktaOAuth2": {
+  "abstract" : [
+    {
+      "text" : "Interact with Okta’s OAuth2 APIs to authenticate users, and interact with user resources.",
+      "type" : "text"
+    }
+  ],
+  "identifier" : "doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/OktaOAuth2",
+  "kind" : "symbol",
+  "role" : "collection",
+  "title" : "OktaOAuth2",
+  "type" : "topic",
+  "url" : "\/documentation\/oktaoauth2"
+},
+"doc://com.okta.mobile.oktaoauth2/documentation/OktaOAuth2/TokenExchangeFlow": {
+  "abstract" : [
+    {
+      "text" : "An authentication flow class that implements the Token Exchange Flow.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "class"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "TokenExchangeFlow"
+    }
+  ],
+  "identifier" : "doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/OktaOAuth2\/TokenExchangeFlow",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "TokenExchangeFlow"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "TokenExchangeFlow",
+  "type" : "topic",
+  "url" : "\/documentation\/oktaoauth2\/tokenexchangeflow"
+},
+"doc://com.okta.mobile.oktaoauth2/documentation/OktaOAuth2/TokenExchangeFlow/APIClientDelegate-Implementations": {
+  "abstract" : [
+
+  ],
+  "identifier" : "doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/OktaOAuth2\/TokenExchangeFlow\/APIClientDelegate-Implementations",
+  "kind" : "article",
+  "role" : "collectionGroup",
+  "title" : "APIClientDelegate Implementations",
+  "type" : "topic",
+  "url" : "\/documentation\/oktaoauth2\/tokenexchangeflow\/apiclientdelegate-implementations"
+},
+"doc://com.okta.mobile.oktaoauth2/documentation/OktaOAuth2/TokenExchangeFlow/Audience-swift.enum": {
+  "abstract" : [
+    {
+      "text" : "Identifies the audience of the authorization server.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "enum"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "Audience"
+    }
+  ],
+  "identifier" : "doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/OktaOAuth2\/TokenExchangeFlow\/Audience-swift.enum",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "Audience"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "TokenExchangeFlow.Audience",
+  "type" : "topic",
+  "url" : "\/documentation\/oktaoauth2\/tokenexchangeflow\/audience-swift.enum"
+},
+"doc://com.okta.mobile.oktaoauth2/documentation/OktaOAuth2/TokenExchangeFlow/OAuth2ClientDelegate-Implementations": {
+  "abstract" : [
+
+  ],
+  "identifier" : "doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/OktaOAuth2\/TokenExchangeFlow\/OAuth2ClientDelegate-Implementations",
+  "kind" : "article",
+  "role" : "collectionGroup",
+  "title" : "OAuth2ClientDelegate Implementations",
+  "type" : "topic",
+  "url" : "\/documentation\/oktaoauth2\/tokenexchangeflow\/oauth2clientdelegate-implementations"
+},
+"doc://com.okta.mobile.oktaoauth2/documentation/OktaOAuth2/TokenExchangeFlow/TokenType": {
+  "abstract" : [
+    {
+      "text" : "Types specify token’s identity.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "enum"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "TokenType"
+    }
+  ],
+  "identifier" : "doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/OktaOAuth2\/TokenExchangeFlow\/TokenType",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "TokenType"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "TokenExchangeFlow.TokenType",
+  "type" : "topic",
+  "url" : "\/documentation\/oktaoauth2\/tokenexchangeflow\/tokentype"
+},
+"doc://com.okta.mobile.oktaoauth2/documentation/OktaOAuth2/TokenExchangeFlow/UsesDelegateCollection-Implementations": {
+  "abstract" : [
+
+  ],
+  "identifier" : "doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/OktaOAuth2\/TokenExchangeFlow\/UsesDelegateCollection-Implementations",
+  "kind" : "article",
+  "role" : "collectionGroup",
+  "title" : "UsesDelegateCollection Implementations",
+  "type" : "topic",
+  "url" : "\/documentation\/oktaoauth2\/tokenexchangeflow\/usesdelegatecollection-implementations"
+},
+"doc://com.okta.mobile.oktaoauth2/documentation/OktaOAuth2/TokenExchangeFlow/audience-swift.property": {
+  "abstract" : [
+    {
+      "text" : "Server audience.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "let"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "audience"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:10OktaOAuth217TokenExchangeFlowC8AudienceO",
+      "text" : "Audience"
+    }
+  ],
+  "identifier" : "doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/OktaOAuth2\/TokenExchangeFlow\/audience-swift.property",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "audience",
+  "type" : "topic",
+  "url" : "\/documentation\/oktaoauth2\/tokenexchangeflow\/audience-swift.property"
+},
+"doc://com.okta.mobile.oktaoauth2/documentation/OktaOAuth2/TokenExchangeFlow/client": {
+  "abstract" : [
+    {
+      "text" : "The OAuth2 client this authentication flow will use.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "let"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "client"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:14AuthFoundation12OAuth2ClientC",
+      "text" : "OAuth2Client"
+    }
+  ],
+  "identifier" : "doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/OktaOAuth2\/TokenExchangeFlow\/client",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "client",
+  "type" : "topic",
+  "url" : "\/documentation\/oktaoauth2\/tokenexchangeflow\/client"
+},
+"doc://com.okta.mobile.oktaoauth2/documentation/OktaOAuth2/TokenExchangeFlow/delegateCollection": {
+  "abstract" : [
+    {
+      "text" : "Collection of the ",
+      "type" : "text"
+    },
+    {
+      "code" : "AuthenticationDelegate",
+      "type" : "codeVoice"
+    },
+    {
+      "text" : " objects.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "let"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "delegateCollection"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:14AuthFoundation18DelegateCollectionC",
+      "text" : "DelegateCollection"
+    },
+    {
+      "kind" : "text",
+      "text" : "<"
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:14AuthFoundation22AuthenticationDelegateP",
+      "text" : "AuthenticationDelegate"
+    },
+    {
+      "kind" : "text",
+      "text" : ">"
+    }
+  ],
+  "identifier" : "doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/OktaOAuth2\/TokenExchangeFlow\/delegateCollection",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "delegateCollection",
+  "type" : "topic",
+  "url" : "\/documentation\/oktaoauth2\/tokenexchangeflow\/delegatecollection"
+},
+"doc://com.okta.mobile.oktaoauth2/documentation/OktaOAuth2/TokenExchangeFlow/init()": {
+  "abstract" : [
+    {
+      "text" : "Initializer that uses the configuration defined within the application’s ",
+      "type" : "text"
+    },
+    {
+      "code" : "Okta.plist",
+      "type" : "codeVoice"
+    },
+    {
+      "text" : " file.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "identifier",
+      "text" : "init"
+    },
+    {
+      "kind" : "text",
+      "text" : "() "
+    },
+    {
+      "kind" : "keyword",
+      "text" : "throws"
+    }
+  ],
+  "identifier" : "doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/OktaOAuth2\/TokenExchangeFlow\/init()",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "init()",
+  "type" : "topic",
+  "url" : "\/documentation\/oktaoauth2\/tokenexchangeflow\/init()"
+},
+"doc://com.okta.mobile.oktaoauth2/documentation/OktaOAuth2/TokenExchangeFlow/init(audience:client:)": {
+  "abstract" : [
+    {
+      "text" : "Initializer to construct a flow from a default audience and client.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "identifier",
+      "text" : "init"
+    },
+    {
+      "kind" : "text",
+      "text" : "("
+    },
+    {
+      "kind" : "externalParam",
+      "text" : "audience"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:10OktaOAuth217TokenExchangeFlowC8AudienceO",
+      "text" : "Audience"
+    },
+    {
+      "kind" : "text",
+      "text" : ", "
+    },
+    {
+      "kind" : "externalParam",
+      "text" : "client"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:14AuthFoundation12OAuth2ClientC",
+      "text" : "OAuth2Client"
+    },
+    {
+      "kind" : "text",
+      "text" : ")"
+    }
+  ],
+  "identifier" : "doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/OktaOAuth2\/TokenExchangeFlow\/init(audience:client:)",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "init(audience:client:)",
+  "type" : "topic",
+  "url" : "\/documentation\/oktaoauth2\/tokenexchangeflow\/init(audience:client:)"
+},
+"doc://com.okta.mobile.oktaoauth2/documentation/OktaOAuth2/TokenExchangeFlow/init(issuer:clientId:scopes:audience:)": {
+  "abstract" : [
+    {
+      "text" : "Convenience initializer to construct a flow from variables.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "identifier",
+      "text" : "init"
+    },
+    {
+      "kind" : "text",
+      "text" : "("
+    },
+    {
+      "kind" : "externalParam",
+      "text" : "issuer"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:10Foundation3URLV",
+      "text" : "URL"
+    },
+    {
+      "kind" : "text",
+      "text" : ", "
+    },
+    {
+      "kind" : "externalParam",
+      "text" : "clientId"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:SS",
+      "text" : "String"
+    },
+    {
+      "kind" : "text",
+      "text" : ", "
+    },
+    {
+      "kind" : "externalParam",
+      "text" : "scopes"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:SS",
+      "text" : "String"
+    },
+    {
+      "kind" : "text",
+      "text" : ", "
+    },
+    {
+      "kind" : "externalParam",
+      "text" : "audience"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:10OktaOAuth217TokenExchangeFlowC8AudienceO",
+      "text" : "Audience"
+    },
+    {
+      "kind" : "text",
+      "text" : ")"
+    }
+  ],
+  "identifier" : "doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/OktaOAuth2\/TokenExchangeFlow\/init(issuer:clientId:scopes:audience:)",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "init(issuer:clientId:scopes:audience:)",
+  "type" : "topic",
+  "url" : "\/documentation\/oktaoauth2\/tokenexchangeflow\/init(issuer:clientid:scopes:audience:)"
+},
+"doc://com.okta.mobile.oktaoauth2/documentation/OktaOAuth2/TokenExchangeFlow/init(plist:)": {
+  "abstract" : [
+    {
+      "text" : "Initializer that uses the configuration defined within the given file URL.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "identifier",
+      "text" : "init"
+    },
+    {
+      "kind" : "text",
+      "text" : "("
+    },
+    {
+      "kind" : "externalParam",
+      "text" : "plist"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:10Foundation3URLV",
+      "text" : "URL"
+    },
+    {
+      "kind" : "text",
+      "text" : ") "
+    },
+    {
+      "kind" : "keyword",
+      "text" : "throws"
+    }
+  ],
+  "identifier" : "doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/OktaOAuth2\/TokenExchangeFlow\/init(plist:)",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "init(plist:)",
+  "type" : "topic",
+  "url" : "\/documentation\/oktaoauth2\/tokenexchangeflow\/init(plist:)"
+},
+"doc://com.okta.mobile.oktaoauth2/documentation/OktaOAuth2/TokenExchangeFlow/isAuthenticating": {
+  "abstract" : [
+    {
+      "text" : "Indicates whether or not this flow is currently in the process of authenticating a user.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "var"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "isAuthenticating"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:Sb",
+      "text" : "Bool"
+    }
+  ],
+  "identifier" : "doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/OktaOAuth2\/TokenExchangeFlow\/isAuthenticating",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "isAuthenticating",
+  "type" : "topic",
+  "url" : "\/documentation\/oktaoauth2\/tokenexchangeflow\/isauthenticating"
+},
+"doc://com.okta.mobile.oktaoauth2/documentation/OktaOAuth2/TokenExchangeFlow/reset()": {
+  "abstract" : [
+    {
+      "text" : "Resets the authentication session.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "func"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "reset"
+    },
+    {
+      "kind" : "text",
+      "text" : "()"
+    }
+  ],
+  "identifier" : "doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/OktaOAuth2\/TokenExchangeFlow\/reset()",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "reset()",
+  "type" : "topic",
+  "url" : "\/documentation\/oktaoauth2\/tokenexchangeflow\/reset()"
+},
+"doc://com.okta.mobile.oktaoauth2/documentation/OktaOAuth2/TokenExchangeFlow/start(with:)": {
+  "abstract" : [
+    {
+      "text" : "Asynchronously initiates a token exchange flow.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "func"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "start"
+    },
+    {
+      "kind" : "text",
+      "text" : "("
+    },
+    {
+      "kind" : "externalParam",
+      "text" : "with"
+    },
+    {
+      "kind" : "text",
+      "text" : ": ["
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:10OktaOAuth217TokenExchangeFlowC0C4TypeO",
+      "text" : "TokenType"
+    },
+    {
+      "kind" : "text",
+      "text" : "]) "
+    },
+    {
+      "kind" : "keyword",
+      "text" : "async"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "keyword",
+      "text" : "throws"
+    },
+    {
+      "kind" : "text",
+      "text" : " -> "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:14AuthFoundation5TokenC",
+      "text" : "Token"
+    }
+  ],
+  "identifier" : "doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/OktaOAuth2\/TokenExchangeFlow\/start(with:)",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "start(with:)",
+  "type" : "topic",
+  "url" : "\/documentation\/oktaoauth2\/tokenexchangeflow\/start(with:)"
+},
+"doc://com.okta.mobile.oktaoauth2/documentation/OktaOAuth2/TokenExchangeFlow/start(with:completion:)": {
+  "abstract" : [
+    {
+      "text" : "Initiates a token exchange flow.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "func"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "start"
+    },
+    {
+      "kind" : "text",
+      "text" : "("
+    },
+    {
+      "kind" : "externalParam",
+      "text" : "with"
+    },
+    {
+      "kind" : "text",
+      "text" : ": ["
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:10OktaOAuth217TokenExchangeFlowC0C4TypeO",
+      "text" : "TokenType"
+    },
+    {
+      "kind" : "text",
+      "text" : "], "
+    },
+    {
+      "kind" : "externalParam",
+      "text" : "completion"
+    },
+    {
+      "kind" : "text",
+      "text" : ": (("
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:s6ResultO",
+      "text" : "Result"
+    },
+    {
+      "kind" : "text",
+      "text" : "<"
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:14AuthFoundation5TokenC",
+      "text" : "Token"
+    },
+    {
+      "kind" : "text",
+      "text" : ", "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:14AuthFoundation11OAuth2ErrorO",
+      "text" : "OAuth2Error"
+    },
+    {
+      "kind" : "text",
+      "text" : ">) -> "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:s4Voida",
+      "text" : "Void"
+    },
+    {
+      "kind" : "text",
+      "text" : ")?)"
+    }
+  ],
+  "identifier" : "doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/OktaOAuth2\/TokenExchangeFlow\/start(with:completion:)",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "start(with:completion:)",
+  "type" : "topic",
+  "url" : "\/documentation\/oktaoauth2\/tokenexchangeflow\/start(with:completion:)"
+},
+"https://developer.okta.com/docs/guides/configure-native-sso/main/#native-sso-flow": {
+  "identifier" : "https:\/\/developer.okta.com\/docs\/guides\/configure-native-sso\/main\/#native-sso-flow",
+  "title" : "SSO for Native Apps",
+  "titleInlineContent" : [
+    {
+      "text" : "SSO for Native Apps",
+      "type" : "text"
+    }
+  ],
+  "type" : "link",
+  "url" : "https:\/\/developer.okta.com\/docs\/guides\/configure-native-sso\/main\/#native-sso-flow"
+}
+}
+}

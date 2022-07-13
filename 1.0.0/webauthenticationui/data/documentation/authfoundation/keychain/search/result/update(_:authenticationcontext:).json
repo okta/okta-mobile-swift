@@ -1,0 +1,496 @@
+{
+  "abstract" : [
+    {
+      "text" : "Updates the keychain item with the values supplied in the included item.",
+      "type" : "text"
+    }
+  ],
+  "hierarchy" : {
+    "paths" : [
+      [
+        "doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/AuthFoundation",
+        "doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/AuthFoundation\/Keychain",
+        "doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/AuthFoundation\/Keychain\/Search",
+        "doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/AuthFoundation\/Keychain\/Search\/Result"
+      ]
+    ]
+  },
+  "identifier" : {
+    "interfaceLanguage" : "swift",
+    "url" : "doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/AuthFoundation\/Keychain\/Search\/Result\/update(_:authenticationContext:)"
+  },
+  "kind" : "symbol",
+  "metadata" : {
+    "externalID" : "s:14AuthFoundation8KeychainV6SearchV6ResultV6update_21authenticationContextyAC4ItemV_AA0c14AuthenticationH0_pSgtKF",
+    "fragments" : [
+      {
+        "kind" : "keyword",
+        "text" : "func"
+      },
+      {
+        "kind" : "text",
+        "text" : " "
+      },
+      {
+        "kind" : "identifier",
+        "text" : "update"
+      },
+      {
+        "kind" : "text",
+        "text" : "("
+      },
+      {
+        "kind" : "typeIdentifier",
+        "preciseIdentifier" : "s:14AuthFoundation8KeychainV",
+        "text" : "Keychain"
+      },
+      {
+        "kind" : "text",
+        "text" : "."
+      },
+      {
+        "kind" : "typeIdentifier",
+        "preciseIdentifier" : "s:14AuthFoundation8KeychainV4ItemV",
+        "text" : "Item"
+      },
+      {
+        "kind" : "text",
+        "text" : ", "
+      },
+      {
+        "kind" : "externalParam",
+        "text" : "authenticationContext"
+      },
+      {
+        "kind" : "text",
+        "text" : ": "
+      },
+      {
+        "kind" : "typeIdentifier",
+        "preciseIdentifier" : "s:14AuthFoundation29KeychainAuthenticationContextP",
+        "text" : "KeychainAuthenticationContext"
+      },
+      {
+        "kind" : "text",
+        "text" : "?) "
+      },
+      {
+        "kind" : "keyword",
+        "text" : "throws"
+      }
+    ],
+    "modules" : [
+      {
+        "name" : "AuthFoundation"
+      }
+    ],
+    "role" : "symbol",
+    "roleHeading" : "Instance Method",
+    "symbolKind" : "method",
+    "title" : "update(_:authenticationContext:)"
+  },
+  "primaryContentSections" : [
+    {
+      "declarations" : [
+        {
+          "languages" : [
+            "swift"
+          ],
+          "platforms" : [
+            "macOS"
+          ],
+          "tokens" : [
+            {
+              "kind" : "keyword",
+              "text" : "func"
+            },
+            {
+              "kind" : "text",
+              "text" : " "
+            },
+            {
+              "kind" : "identifier",
+              "text" : "update"
+            },
+            {
+              "kind" : "text",
+              "text" : "("
+            },
+            {
+              "kind" : "externalParam",
+              "text" : "_"
+            },
+            {
+              "kind" : "text",
+              "text" : " "
+            },
+            {
+              "kind" : "internalParam",
+              "text" : "item"
+            },
+            {
+              "kind" : "text",
+              "text" : ": "
+            },
+            {
+              "identifier" : "doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/AuthFoundation\/Keychain",
+              "kind" : "typeIdentifier",
+              "preciseIdentifier" : "s:14AuthFoundation8KeychainV",
+              "text" : "Keychain"
+            },
+            {
+              "kind" : "text",
+              "text" : "."
+            },
+            {
+              "identifier" : "doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/AuthFoundation\/Keychain\/Item",
+              "kind" : "typeIdentifier",
+              "preciseIdentifier" : "s:14AuthFoundation8KeychainV4ItemV",
+              "text" : "Item"
+            },
+            {
+              "kind" : "text",
+              "text" : ", "
+            },
+            {
+              "kind" : "externalParam",
+              "text" : "authenticationContext"
+            },
+            {
+              "kind" : "text",
+              "text" : ": "
+            },
+            {
+              "identifier" : "doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/AuthFoundation\/KeychainAuthenticationContext",
+              "kind" : "typeIdentifier",
+              "preciseIdentifier" : "s:14AuthFoundation29KeychainAuthenticationContextP",
+              "text" : "KeychainAuthenticationContext"
+            },
+            {
+              "kind" : "text",
+              "text" : "? = nil) "
+            },
+            {
+              "kind" : "keyword",
+              "text" : "throws"
+            }
+          ]
+        }
+      ],
+      "kind" : "declarations"
+    },
+    {
+      "kind" : "parameters",
+      "parameters" : [
+        {
+          "content" : [
+            {
+              "inlineContent" : [
+                {
+                  "text" : "Item whose values should replace the receiver’s keychain item.",
+                  "type" : "text"
+                }
+              ],
+              "type" : "paragraph"
+            }
+          ],
+          "name" : "item"
+        },
+        {
+          "content" : [
+            {
+              "inlineContent" : [
+                {
+                  "text" : "Optional ",
+                  "type" : "text"
+                },
+                {
+                  "code" : "LAContext",
+                  "type" : "codeVoice"
+                },
+                {
+                  "text" : " to use when updating the item, on platforms that support it.",
+                  "type" : "text"
+                }
+              ],
+              "type" : "paragraph"
+            }
+          ],
+          "name" : "authenticationContext"
+        }
+      ]
+    }
+  ],
+  "schemaVersion" : {
+    "major" : 0,
+    "minor" : 2,
+    "patch" : 0
+  },
+  "sections" : [
+
+  ],
+  "variants" : [
+    {
+      "paths" : [
+        "\/documentation\/authfoundation\/keychain\/search\/result\/update(_:authenticationcontext:)"
+      ],
+      "traits" : [
+        {
+          "interfaceLanguage" : "swift"
+        }
+      ]
+    }
+  ]
+, 
+"references": {
+"doc://com.okta.mobile.webauthenticationui/documentation/AuthFoundation": {
+  "abstract" : [
+
+  ],
+  "identifier" : "doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/AuthFoundation",
+  "kind" : "symbol",
+  "role" : "collection",
+  "title" : "AuthFoundation",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation"
+},
+"doc://com.okta.mobile.webauthenticationui/documentation/AuthFoundation/Keychain": {
+  "abstract" : [
+    {
+      "text" : "Defines convenience mechanisms for interacting with the keychain, including searching, creating, and deleting keychain items.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "struct"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "Keychain"
+    }
+  ],
+  "identifier" : "doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/AuthFoundation\/Keychain",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "Keychain"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "Keychain",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/keychain"
+},
+"doc://com.okta.mobile.webauthenticationui/documentation/AuthFoundation/Keychain/Item": {
+  "abstract" : [
+    {
+      "text" : "Defines an individual keychain item. This may be created using the designated initializer for the purposes of saving a new keychain item, or may be created as the result of getting a preexisting item from the keychain.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "struct"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "Item"
+    }
+  ],
+  "identifier" : "doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/AuthFoundation\/Keychain\/Item",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "Item"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "Keychain.Item",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/keychain\/item"
+},
+"doc://com.okta.mobile.webauthenticationui/documentation/AuthFoundation/Keychain/Search": {
+  "abstract" : [
+    {
+      "text" : "Defines a search for keychain items.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "struct"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "Search"
+    }
+  ],
+  "identifier" : "doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/AuthFoundation\/Keychain\/Search",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "Search"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "Keychain.Search",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/keychain\/search"
+},
+"doc://com.okta.mobile.webauthenticationui/documentation/AuthFoundation/Keychain/Search/Result": {
+  "abstract" : [
+    {
+      "text" : "An individual result within a keychain search.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "struct"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "Result"
+    }
+  ],
+  "identifier" : "doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/AuthFoundation\/Keychain\/Search\/Result",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "Result"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "Keychain.Search.Result",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/keychain\/search\/result"
+},
+"doc://com.okta.mobile.webauthenticationui/documentation/AuthFoundation/Keychain/Search/Result/update(_:authenticationContext:)": {
+  "abstract" : [
+    {
+      "text" : "Updates the keychain item with the values supplied in the included item.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "func"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "update"
+    },
+    {
+      "kind" : "text",
+      "text" : "("
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:14AuthFoundation8KeychainV",
+      "text" : "Keychain"
+    },
+    {
+      "kind" : "text",
+      "text" : "."
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:14AuthFoundation8KeychainV4ItemV",
+      "text" : "Item"
+    },
+    {
+      "kind" : "text",
+      "text" : ", "
+    },
+    {
+      "kind" : "externalParam",
+      "text" : "authenticationContext"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:14AuthFoundation29KeychainAuthenticationContextP",
+      "text" : "KeychainAuthenticationContext"
+    },
+    {
+      "kind" : "text",
+      "text" : "?) "
+    },
+    {
+      "kind" : "keyword",
+      "text" : "throws"
+    }
+  ],
+  "identifier" : "doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/AuthFoundation\/Keychain\/Search\/Result\/update(_:authenticationContext:)",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "update(_:authenticationContext:)",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/keychain\/search\/result\/update(_:authenticationcontext:)"
+},
+"doc://com.okta.mobile.webauthenticationui/documentation/AuthFoundation/KeychainAuthenticationContext": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "protocol"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "KeychainAuthenticationContext"
+    }
+  ],
+  "identifier" : "doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/AuthFoundation\/KeychainAuthenticationContext",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "KeychainAuthenticationContext"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "KeychainAuthenticationContext",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/keychainauthenticationcontext"
+}
+}
+}

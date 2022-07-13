@@ -1,0 +1,225 @@
+{
+  "abstract" : [
+    {
+      "text" : "No overview available.",
+      "type" : "text"
+    }
+  ],
+  "hierarchy" : {
+    "paths" : [
+      [
+        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation",
+        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/AuthenticationDelegate"
+      ]
+    ]
+  },
+  "identifier" : {
+    "interfaceLanguage" : "swift",
+    "url" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/AuthenticationDelegate\/AuthenticationDelegate-Implementations"
+  },
+  "kind" : "article",
+  "metadata" : {
+    "modules" : [
+      {
+        "name" : "AuthFoundation"
+      }
+    ],
+    "role" : "collectionGroup",
+    "title" : "AuthenticationDelegate Implementations"
+  },
+  "schemaVersion" : {
+    "major" : 0,
+    "minor" : 2,
+    "patch" : 0
+  },
+  "sections" : [
+
+  ],
+  "topicSections" : [
+    {
+      "generated" : true,
+      "identifiers" : [
+        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/AuthenticationDelegate\/authenticationFinished(flow:)-77aa5",
+        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/AuthenticationDelegate\/authenticationStarted(flow:)-4e7ep"
+      ],
+      "title" : "Instance Methods"
+    }
+  ],
+  "variants" : [
+    {
+      "paths" : [
+        "\/documentation\/authfoundation\/authenticationdelegate\/authenticationdelegate-implementations"
+      ],
+      "traits" : [
+        {
+          "interfaceLanguage" : "swift"
+        }
+      ]
+    }
+  ]
+, 
+"references": {
+"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation": {
+  "abstract" : [
+    {
+      "text" : "Library that provides foundational features used by Okta’s authentication libraries, as well as APIs used to work with tokens and user credentials.",
+      "type" : "text"
+    }
+  ],
+  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation",
+  "kind" : "symbol",
+  "role" : "collection",
+  "title" : "AuthFoundation",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation"
+},
+"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/AuthenticationDelegate": {
+  "abstract" : [
+    {
+      "text" : "A common delegate protocol that all authentication flows should support.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "protocol"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "AuthenticationDelegate"
+    }
+  ],
+  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/AuthenticationDelegate",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "AuthenticationDelegate"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "AuthenticationDelegate",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/authenticationdelegate"
+},
+"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/AuthenticationDelegate/authenticationFinished(flow:)-77aa5": {
+  "abstract" : [
+    {
+      "text" : "Sent when an authentication session finishes.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "func"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "authenticationFinished"
+    },
+    {
+      "kind" : "text",
+      "text" : "<"
+    },
+    {
+      "kind" : "genericParameter",
+      "text" : "Flow"
+    },
+    {
+      "kind" : "text",
+      "text" : ">("
+    },
+    {
+      "kind" : "externalParam",
+      "text" : "flow"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:14AuthFoundation22AuthenticationDelegateP10OktaOAuth2E22authenticationFinished4flowyqd___tlF4FlowL_qd__mfp",
+      "text" : "Flow"
+    },
+    {
+      "kind" : "text",
+      "text" : ")"
+    }
+  ],
+  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/AuthenticationDelegate\/authenticationFinished(flow:)-77aa5",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "authenticationFinished(flow:)",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/authenticationdelegate\/authenticationfinished(flow:)-77aa5"
+},
+"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/AuthenticationDelegate/authenticationStarted(flow:)-4e7ep": {
+  "abstract" : [
+    {
+      "text" : "Sent when an authentication session starts.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "func"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "authenticationStarted"
+    },
+    {
+      "kind" : "text",
+      "text" : "<"
+    },
+    {
+      "kind" : "genericParameter",
+      "text" : "Flow"
+    },
+    {
+      "kind" : "text",
+      "text" : ">("
+    },
+    {
+      "kind" : "externalParam",
+      "text" : "flow"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:14AuthFoundation22AuthenticationDelegateP10OktaOAuth2E21authenticationStarted4flowyqd___tlF4FlowL_qd__mfp",
+      "text" : "Flow"
+    },
+    {
+      "kind" : "text",
+      "text" : ")"
+    }
+  ],
+  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/AuthenticationDelegate\/authenticationStarted(flow:)-4e7ep",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "authenticationStarted(flow:)",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/authenticationdelegate\/authenticationstarted(flow:)-4e7ep"
+}
+}
+}

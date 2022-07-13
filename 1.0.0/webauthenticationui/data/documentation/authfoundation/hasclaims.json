@@ -1,0 +1,1772 @@
+{
+  "abstract" : [
+    {
+      "text" : "Used by classes that contains OAuth2 claims.",
+      "type" : "text"
+    }
+  ],
+  "hierarchy" : {
+    "paths" : [
+      [
+        "doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/AuthFoundation"
+      ]
+    ]
+  },
+  "identifier" : {
+    "interfaceLanguage" : "swift",
+    "url" : "doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/AuthFoundation\/HasClaims"
+  },
+  "kind" : "symbol",
+  "metadata" : {
+    "externalID" : "s:14AuthFoundation9HasClaimsP",
+    "fragments" : [
+      {
+        "kind" : "keyword",
+        "text" : "protocol"
+      },
+      {
+        "kind" : "text",
+        "text" : " "
+      },
+      {
+        "kind" : "identifier",
+        "text" : "HasClaims"
+      }
+    ],
+    "modules" : [
+      {
+        "name" : "AuthFoundation"
+      }
+    ],
+    "navigatorTitle" : [
+      {
+        "kind" : "identifier",
+        "text" : "HasClaims"
+      }
+    ],
+    "role" : "symbol",
+    "roleHeading" : "Protocol",
+    "symbolKind" : "protocol",
+    "title" : "HasClaims"
+  },
+  "primaryContentSections" : [
+    {
+      "declarations" : [
+        {
+          "languages" : [
+            "swift"
+          ],
+          "platforms" : [
+            "macOS"
+          ],
+          "tokens" : [
+            {
+              "kind" : "keyword",
+              "text" : "protocol"
+            },
+            {
+              "kind" : "text",
+              "text" : " "
+            },
+            {
+              "kind" : "identifier",
+              "text" : "HasClaims"
+            }
+          ]
+        }
+      ],
+      "kind" : "declarations"
+    },
+    {
+      "content" : [
+        {
+          "anchor" : "overview",
+          "level" : 2,
+          "text" : "Overview",
+          "type" : "heading"
+        },
+        {
+          "inlineContent" : [
+            {
+              "text" : "This provides common conveniences for interacting with user or token information within those claims. For example, iterating through ",
+              "type" : "text"
+            },
+            {
+              "identifier" : "doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/AuthFoundation\/HasClaims\/allClaims-4c54a",
+              "isActive" : true,
+              "type" : "reference"
+            },
+            {
+              "text" : " or using keyed subscripting to access specific claims.",
+              "type" : "text"
+            }
+          ],
+          "type" : "paragraph"
+        }
+      ],
+      "kind" : "content"
+    }
+  ],
+  "relationshipsSections" : [
+    {
+      "identifiers" : [
+        "doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/AuthFoundation\/JWT",
+        "doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/AuthFoundation\/Token\/Metadata",
+        "doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/AuthFoundation\/TokenInfo",
+        "doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/AuthFoundation\/UserInfo"
+      ],
+      "kind" : "relationships",
+      "title" : "Conforming Types",
+      "type" : "conformingTypes"
+    }
+  ],
+  "schemaVersion" : {
+    "major" : 0,
+    "minor" : 2,
+    "patch" : 0
+  },
+  "sections" : [
+
+  ],
+  "topicSections" : [
+    {
+      "identifiers" : [
+        "doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/AuthFoundation\/HasClaims\/address",
+        "doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/AuthFoundation\/HasClaims\/allClaims-4c54a",
+        "doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/AuthFoundation\/HasClaims\/authTime",
+        "doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/AuthFoundation\/HasClaims\/authenticationClass",
+        "doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/AuthFoundation\/HasClaims\/authenticationMethods",
+        "doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/AuthFoundation\/HasClaims\/birthdate",
+        "doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/AuthFoundation\/HasClaims\/claims",
+        "doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/AuthFoundation\/HasClaims\/customClaims",
+        "doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/AuthFoundation\/HasClaims\/email",
+        "doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/AuthFoundation\/HasClaims\/emailVerified",
+        "doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/AuthFoundation\/HasClaims\/familyName",
+        "doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/AuthFoundation\/HasClaims\/gender",
+        "doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/AuthFoundation\/HasClaims\/givenName",
+        "doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/AuthFoundation\/HasClaims\/locale",
+        "doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/AuthFoundation\/HasClaims\/middleName",
+        "doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/AuthFoundation\/HasClaims\/name",
+        "doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/AuthFoundation\/HasClaims\/nameComponents",
+        "doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/AuthFoundation\/HasClaims\/nickname",
+        "doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/AuthFoundation\/HasClaims\/phoneNumber",
+        "doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/AuthFoundation\/HasClaims\/phoneNumberVerified",
+        "doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/AuthFoundation\/HasClaims\/picture",
+        "doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/AuthFoundation\/HasClaims\/preferredUsername",
+        "doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/AuthFoundation\/HasClaims\/profile",
+        "doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/AuthFoundation\/HasClaims\/subject",
+        "doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/AuthFoundation\/HasClaims\/timeZone",
+        "doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/AuthFoundation\/HasClaims\/updatedAt",
+        "doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/AuthFoundation\/HasClaims\/userLocale",
+        "doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/AuthFoundation\/HasClaims\/website",
+        "doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/AuthFoundation\/HasClaims\/zoneinfo"
+      ],
+      "title" : "Instance Properties"
+    },
+    {
+      "identifiers" : [
+        "doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/AuthFoundation\/HasClaims\/value(_:for:)"
+      ],
+      "title" : "Instance Methods"
+    },
+    {
+      "identifiers" : [
+        "doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/AuthFoundation\/HasClaims\/subscript(_:)-3hvf1",
+        "doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/AuthFoundation\/HasClaims\/subscript(_:)-4t0dl"
+      ],
+      "title" : "Subscripts"
+    }
+  ],
+  "variants" : [
+    {
+      "paths" : [
+        "\/documentation\/authfoundation\/hasclaims"
+      ],
+      "traits" : [
+        {
+          "interfaceLanguage" : "swift"
+        }
+      ]
+    }
+  ]
+, 
+"references": {
+"doc://com.okta.mobile.webauthenticationui/documentation/AuthFoundation": {
+  "abstract" : [
+
+  ],
+  "identifier" : "doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/AuthFoundation",
+  "kind" : "symbol",
+  "role" : "collection",
+  "title" : "AuthFoundation",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation"
+},
+"doc://com.okta.mobile.webauthenticationui/documentation/AuthFoundation/HasClaims": {
+  "abstract" : [
+    {
+      "text" : "Used by classes that contains OAuth2 claims.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "protocol"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "HasClaims"
+    }
+  ],
+  "identifier" : "doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/AuthFoundation\/HasClaims",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "HasClaims"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "HasClaims",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/hasclaims"
+},
+"doc://com.okta.mobile.webauthenticationui/documentation/AuthFoundation/HasClaims/address": {
+  "abstract" : [
+    {
+      "text" : "The address components for this user.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "var"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "address"
+    },
+    {
+      "kind" : "text",
+      "text" : ": ["
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:SS",
+      "text" : "String"
+    },
+    {
+      "kind" : "text",
+      "text" : " : "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:SS",
+      "text" : "String"
+    },
+    {
+      "kind" : "text",
+      "text" : "]?"
+    }
+  ],
+  "identifier" : "doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/AuthFoundation\/HasClaims\/address",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "address",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/hasclaims\/address"
+},
+"doc://com.okta.mobile.webauthenticationui/documentation/AuthFoundation/HasClaims/allClaims-4c54a": {
+  "abstract" : [
+    {
+      "text" : "All claims, across both standard ",
+      "type" : "text"
+    },
+    {
+      "identifier" : "doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/AuthFoundation\/HasClaims\/claims",
+      "isActive" : true,
+      "type" : "reference"
+    },
+    {
+      "text" : " and ",
+      "type" : "text"
+    },
+    {
+      "identifier" : "doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/AuthFoundation\/HasClaims\/customClaims",
+      "isActive" : true,
+      "type" : "reference"
+    },
+    {
+      "text" : ".",
+      "type" : "text"
+    }
+  ],
+  "defaultImplementations" : 1,
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "var"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "allClaims"
+    },
+    {
+      "kind" : "text",
+      "text" : ": ["
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:SS",
+      "text" : "String"
+    },
+    {
+      "kind" : "text",
+      "text" : "]"
+    }
+  ],
+  "identifier" : "doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/AuthFoundation\/HasClaims\/allClaims-4c54a",
+  "kind" : "symbol",
+  "required" : true,
+  "role" : "symbol",
+  "title" : "allClaims",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/hasclaims\/allclaims-4c54a"
+},
+"doc://com.okta.mobile.webauthenticationui/documentation/AuthFoundation/HasClaims/authTime": {
+  "abstract" : [
+    {
+      "text" : "The date at which authentication occurred.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "var"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "authTime"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:10Foundation4DateV",
+      "text" : "Date"
+    },
+    {
+      "kind" : "text",
+      "text" : "?"
+    }
+  ],
+  "identifier" : "doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/AuthFoundation\/HasClaims\/authTime",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "authTime",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/hasclaims\/authtime"
+},
+"doc://com.okta.mobile.webauthenticationui/documentation/AuthFoundation/HasClaims/authenticationClass": {
+  "abstract" : [
+    {
+      "text" : "Returns the Authentication Context Class Reference for this token.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "var"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "authenticationClass"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:SS",
+      "text" : "String"
+    },
+    {
+      "kind" : "text",
+      "text" : "?"
+    }
+  ],
+  "identifier" : "doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/AuthFoundation\/HasClaims\/authenticationClass",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "authenticationClass",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/hasclaims\/authenticationclass"
+},
+"doc://com.okta.mobile.webauthenticationui/documentation/AuthFoundation/HasClaims/authenticationMethods": {
+  "abstract" : [
+    {
+      "text" : "The list of authentication methods included in this token.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "var"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "authenticationMethods"
+    },
+    {
+      "kind" : "text",
+      "text" : ": ["
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:SS",
+      "text" : "String"
+    },
+    {
+      "kind" : "text",
+      "text" : "]?"
+    }
+  ],
+  "identifier" : "doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/AuthFoundation\/HasClaims\/authenticationMethods",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "authenticationMethods",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/hasclaims\/authenticationmethods"
+},
+"doc://com.okta.mobile.webauthenticationui/documentation/AuthFoundation/HasClaims/birthdate": {
+  "abstract" : [
+    {
+      "text" : "The user’s birth date.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "var"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "birthdate"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:SS",
+      "text" : "String"
+    },
+    {
+      "kind" : "text",
+      "text" : "?"
+    }
+  ],
+  "identifier" : "doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/AuthFoundation\/HasClaims\/birthdate",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "birthdate",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/hasclaims\/birthdate"
+},
+"doc://com.okta.mobile.webauthenticationui/documentation/AuthFoundation/HasClaims/claims": {
+  "abstract" : [
+    {
+      "text" : "Returns the collection of claims this object contains.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "var"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "claims"
+    },
+    {
+      "kind" : "text",
+      "text" : ": ["
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:14AuthFoundation5ClaimO",
+      "text" : "Claim"
+    },
+    {
+      "kind" : "text",
+      "text" : "]"
+    }
+  ],
+  "identifier" : "doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/AuthFoundation\/HasClaims\/claims",
+  "kind" : "symbol",
+  "required" : true,
+  "role" : "symbol",
+  "title" : "claims",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/hasclaims\/claims"
+},
+"doc://com.okta.mobile.webauthenticationui/documentation/AuthFoundation/HasClaims/customClaims": {
+  "abstract" : [
+    {
+      "text" : "Returns the collection of custom claims this object contains.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "var"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "customClaims"
+    },
+    {
+      "kind" : "text",
+      "text" : ": ["
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:SS",
+      "text" : "String"
+    },
+    {
+      "kind" : "text",
+      "text" : "]"
+    }
+  ],
+  "identifier" : "doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/AuthFoundation\/HasClaims\/customClaims",
+  "kind" : "symbol",
+  "required" : true,
+  "role" : "symbol",
+  "title" : "customClaims",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/hasclaims\/customclaims"
+},
+"doc://com.okta.mobile.webauthenticationui/documentation/AuthFoundation/HasClaims/email": {
+  "abstract" : [
+    {
+      "text" : "The user’s email address.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "var"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "email"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:SS",
+      "text" : "String"
+    },
+    {
+      "kind" : "text",
+      "text" : "?"
+    }
+  ],
+  "identifier" : "doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/AuthFoundation\/HasClaims\/email",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "email",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/hasclaims\/email"
+},
+"doc://com.okta.mobile.webauthenticationui/documentation/AuthFoundation/HasClaims/emailVerified": {
+  "abstract" : [
+    {
+      "text" : "Indicates whether or not the user’s email address has been verified.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "var"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "emailVerified"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:Sb",
+      "text" : "Bool"
+    },
+    {
+      "kind" : "text",
+      "text" : "?"
+    }
+  ],
+  "identifier" : "doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/AuthFoundation\/HasClaims\/emailVerified",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "emailVerified",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/hasclaims\/emailverified"
+},
+"doc://com.okta.mobile.webauthenticationui/documentation/AuthFoundation/HasClaims/familyName": {
+  "abstract" : [
+    {
+      "text" : "The person’s family, or last, name.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "var"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "familyName"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:SS",
+      "text" : "String"
+    },
+    {
+      "kind" : "text",
+      "text" : "?"
+    }
+  ],
+  "identifier" : "doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/AuthFoundation\/HasClaims\/familyName",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "familyName",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/hasclaims\/familyname"
+},
+"doc://com.okta.mobile.webauthenticationui/documentation/AuthFoundation/HasClaims/gender": {
+  "abstract" : [
+    {
+      "text" : "The user’s gender.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "var"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "gender"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:SS",
+      "text" : "String"
+    },
+    {
+      "kind" : "text",
+      "text" : "?"
+    }
+  ],
+  "identifier" : "doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/AuthFoundation\/HasClaims\/gender",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "gender",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/hasclaims\/gender"
+},
+"doc://com.okta.mobile.webauthenticationui/documentation/AuthFoundation/HasClaims/givenName": {
+  "abstract" : [
+    {
+      "text" : "The person’s given, or first, name.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "var"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "givenName"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:SS",
+      "text" : "String"
+    },
+    {
+      "kind" : "text",
+      "text" : "?"
+    }
+  ],
+  "identifier" : "doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/AuthFoundation\/HasClaims\/givenName",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "givenName",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/hasclaims\/givenname"
+},
+"doc://com.okta.mobile.webauthenticationui/documentation/AuthFoundation/HasClaims/locale": {
+  "abstract" : [
+    {
+      "text" : "The user’s locale.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "var"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "locale"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:SS",
+      "text" : "String"
+    },
+    {
+      "kind" : "text",
+      "text" : "?"
+    }
+  ],
+  "identifier" : "doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/AuthFoundation\/HasClaims\/locale",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "locale",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/hasclaims\/locale"
+},
+"doc://com.okta.mobile.webauthenticationui/documentation/AuthFoundation/HasClaims/middleName": {
+  "abstract" : [
+    {
+      "text" : "The person’s middle name.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "var"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "middleName"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:SS",
+      "text" : "String"
+    },
+    {
+      "kind" : "text",
+      "text" : "?"
+    }
+  ],
+  "identifier" : "doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/AuthFoundation\/HasClaims\/middleName",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "middleName",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/hasclaims\/middlename"
+},
+"doc://com.okta.mobile.webauthenticationui/documentation/AuthFoundation/HasClaims/name": {
+  "abstract" : [
+    {
+      "text" : "The full name of the resource.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "var"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "name"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:SS",
+      "text" : "String"
+    },
+    {
+      "kind" : "text",
+      "text" : "?"
+    }
+  ],
+  "identifier" : "doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/AuthFoundation\/HasClaims\/name",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "name",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/hasclaims\/name"
+},
+"doc://com.okta.mobile.webauthenticationui/documentation/AuthFoundation/HasClaims/nameComponents": {
+  "abstract" : [
+    {
+      "text" : "The person’s name components, pre-assigned to a PersonNameComponents object.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "var"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "nameComponents"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:10Foundation20PersonNameComponentsV",
+      "text" : "PersonNameComponents"
+    }
+  ],
+  "identifier" : "doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/AuthFoundation\/HasClaims\/nameComponents",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "nameComponents",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/hasclaims\/namecomponents"
+},
+"doc://com.okta.mobile.webauthenticationui/documentation/AuthFoundation/HasClaims/nickname": {
+  "abstract" : [
+    {
+      "text" : "The person’s nickname.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "var"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "nickname"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:SS",
+      "text" : "String"
+    },
+    {
+      "kind" : "text",
+      "text" : "?"
+    }
+  ],
+  "identifier" : "doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/AuthFoundation\/HasClaims\/nickname",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "nickname",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/hasclaims\/nickname"
+},
+"doc://com.okta.mobile.webauthenticationui/documentation/AuthFoundation/HasClaims/phoneNumber": {
+  "abstract" : [
+    {
+      "text" : "The user’s phone number.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "var"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "phoneNumber"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:SS",
+      "text" : "String"
+    },
+    {
+      "kind" : "text",
+      "text" : "?"
+    }
+  ],
+  "identifier" : "doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/AuthFoundation\/HasClaims\/phoneNumber",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "phoneNumber",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/hasclaims\/phonenumber"
+},
+"doc://com.okta.mobile.webauthenticationui/documentation/AuthFoundation/HasClaims/phoneNumberVerified": {
+  "abstract" : [
+    {
+      "text" : "Indicates whether or not the user’s phone number has been verified.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "var"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "phoneNumberVerified"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:Sb",
+      "text" : "Bool"
+    },
+    {
+      "kind" : "text",
+      "text" : "?"
+    }
+  ],
+  "identifier" : "doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/AuthFoundation\/HasClaims\/phoneNumberVerified",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "phoneNumberVerified",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/hasclaims\/phonenumberverified"
+},
+"doc://com.okta.mobile.webauthenticationui/documentation/AuthFoundation/HasClaims/picture": {
+  "abstract" : [
+    {
+      "text" : "The user’s picture address.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "var"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "picture"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:SS",
+      "text" : "String"
+    },
+    {
+      "kind" : "text",
+      "text" : "?"
+    }
+  ],
+  "identifier" : "doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/AuthFoundation\/HasClaims\/picture",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "picture",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/hasclaims\/picture"
+},
+"doc://com.okta.mobile.webauthenticationui/documentation/AuthFoundation/HasClaims/preferredUsername": {
+  "abstract" : [
+    {
+      "text" : "The person’s preferred username.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "var"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "preferredUsername"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:SS",
+      "text" : "String"
+    },
+    {
+      "kind" : "text",
+      "text" : "?"
+    }
+  ],
+  "identifier" : "doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/AuthFoundation\/HasClaims\/preferredUsername",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "preferredUsername",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/hasclaims\/preferredusername"
+},
+"doc://com.okta.mobile.webauthenticationui/documentation/AuthFoundation/HasClaims/profile": {
+  "abstract" : [
+    {
+      "text" : "The user’s profile address.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "var"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "profile"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:SS",
+      "text" : "String"
+    },
+    {
+      "kind" : "text",
+      "text" : "?"
+    }
+  ],
+  "identifier" : "doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/AuthFoundation\/HasClaims\/profile",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "profile",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/hasclaims\/profile"
+},
+"doc://com.okta.mobile.webauthenticationui/documentation/AuthFoundation/HasClaims/subject": {
+  "abstract" : [
+    {
+      "text" : "The subject of the resource, if available.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "var"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "subject"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:SS",
+      "text" : "String"
+    },
+    {
+      "kind" : "text",
+      "text" : "?"
+    }
+  ],
+  "identifier" : "doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/AuthFoundation\/HasClaims\/subject",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "subject",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/hasclaims\/subject"
+},
+"doc://com.okta.mobile.webauthenticationui/documentation/AuthFoundation/HasClaims/subscript(_:)-3hvf1": {
+  "abstract" : [
+    {
+      "text" : "Return the given claim’s value.",
+      "type" : "text"
+    }
+  ],
+  "defaultImplementations" : 2,
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "subscript"
+    },
+    {
+      "kind" : "text",
+      "text" : "<"
+    },
+    {
+      "kind" : "genericParameter",
+      "text" : "T"
+    },
+    {
+      "kind" : "text",
+      "text" : ">("
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:14AuthFoundation5ClaimO",
+      "text" : "Claim"
+    },
+    {
+      "kind" : "text",
+      "text" : ") -> "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:14AuthFoundation9HasClaimsPyqd__SgAA5ClaimOcluip1TL_qd__mfp",
+      "text" : "T"
+    },
+    {
+      "kind" : "text",
+      "text" : "?"
+    }
+  ],
+  "identifier" : "doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/AuthFoundation\/HasClaims\/subscript(_:)-3hvf1",
+  "kind" : "symbol",
+  "required" : true,
+  "role" : "symbol",
+  "title" : "subscript(_:)",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/hasclaims\/subscript(_:)-3hvf1"
+},
+"doc://com.okta.mobile.webauthenticationui/documentation/AuthFoundation/HasClaims/subscript(_:)-4t0dl": {
+  "abstract" : [
+    {
+      "text" : "Return the given claim’s value.",
+      "type" : "text"
+    }
+  ],
+  "defaultImplementations" : 2,
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "subscript"
+    },
+    {
+      "kind" : "text",
+      "text" : "<"
+    },
+    {
+      "kind" : "genericParameter",
+      "text" : "T"
+    },
+    {
+      "kind" : "text",
+      "text" : ">("
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:SS",
+      "text" : "String"
+    },
+    {
+      "kind" : "text",
+      "text" : ") -> "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:14AuthFoundation9HasClaimsPyqd__SgSScluip1TL_qd__mfp",
+      "text" : "T"
+    },
+    {
+      "kind" : "text",
+      "text" : "?"
+    }
+  ],
+  "identifier" : "doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/AuthFoundation\/HasClaims\/subscript(_:)-4t0dl",
+  "kind" : "symbol",
+  "required" : true,
+  "role" : "symbol",
+  "title" : "subscript(_:)",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/hasclaims\/subscript(_:)-4t0dl"
+},
+"doc://com.okta.mobile.webauthenticationui/documentation/AuthFoundation/HasClaims/timeZone": {
+  "abstract" : [
+    {
+      "text" : "The user’s timezone, represented as a TimeZone object.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "var"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "timeZone"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:10Foundation8TimeZoneV",
+      "text" : "TimeZone"
+    },
+    {
+      "kind" : "text",
+      "text" : "?"
+    }
+  ],
+  "identifier" : "doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/AuthFoundation\/HasClaims\/timeZone",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "timeZone",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/hasclaims\/timezone"
+},
+"doc://com.okta.mobile.webauthenticationui/documentation/AuthFoundation/HasClaims/updatedAt": {
+  "abstract" : [
+    {
+      "text" : "The date the resource was updated at.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "var"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "updatedAt"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:10Foundation4DateV",
+      "text" : "Date"
+    },
+    {
+      "kind" : "text",
+      "text" : "?"
+    }
+  ],
+  "identifier" : "doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/AuthFoundation\/HasClaims\/updatedAt",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "updatedAt",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/hasclaims\/updatedat"
+},
+"doc://com.okta.mobile.webauthenticationui/documentation/AuthFoundation/HasClaims/userLocale": {
+  "abstract" : [
+    {
+      "text" : "The user’s locale, represnted as a Locale object.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "var"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "userLocale"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:10Foundation6LocaleV",
+      "text" : "Locale"
+    },
+    {
+      "kind" : "text",
+      "text" : "?"
+    }
+  ],
+  "identifier" : "doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/AuthFoundation\/HasClaims\/userLocale",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "userLocale",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/hasclaims\/userlocale"
+},
+"doc://com.okta.mobile.webauthenticationui/documentation/AuthFoundation/HasClaims/value(_:for:)": {
+  "abstract" : [
+    {
+      "text" : "Return the value of the requested claim, for the given type.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "func"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "value"
+    },
+    {
+      "kind" : "text",
+      "text" : "<"
+    },
+    {
+      "kind" : "genericParameter",
+      "text" : "T"
+    },
+    {
+      "kind" : "text",
+      "text" : ">("
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:14AuthFoundation9HasClaimsP5value_3forqd__Sgqd__m_SStlF1TL_qd__mfp",
+      "text" : "T"
+    },
+    {
+      "kind" : "text",
+      "text" : ".Type, "
+    },
+    {
+      "kind" : "externalParam",
+      "text" : "for"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:SS",
+      "text" : "String"
+    },
+    {
+      "kind" : "text",
+      "text" : ") -> "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:14AuthFoundation9HasClaimsP5value_3forqd__Sgqd__m_SStlF1TL_qd__mfp",
+      "text" : "T"
+    },
+    {
+      "kind" : "text",
+      "text" : "?"
+    }
+  ],
+  "identifier" : "doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/AuthFoundation\/HasClaims\/value(_:for:)",
+  "kind" : "symbol",
+  "required" : true,
+  "role" : "symbol",
+  "title" : "value(_:for:)",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/hasclaims\/value(_:for:)"
+},
+"doc://com.okta.mobile.webauthenticationui/documentation/AuthFoundation/HasClaims/website": {
+  "abstract" : [
+    {
+      "text" : "The user’s website address.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "var"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "website"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:SS",
+      "text" : "String"
+    },
+    {
+      "kind" : "text",
+      "text" : "?"
+    }
+  ],
+  "identifier" : "doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/AuthFoundation\/HasClaims\/website",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "website",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/hasclaims\/website"
+},
+"doc://com.okta.mobile.webauthenticationui/documentation/AuthFoundation/HasClaims/zoneinfo": {
+  "abstract" : [
+    {
+      "text" : "The user’s timezone code.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "var"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "zoneinfo"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:SS",
+      "text" : "String"
+    },
+    {
+      "kind" : "text",
+      "text" : "?"
+    }
+  ],
+  "identifier" : "doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/AuthFoundation\/HasClaims\/zoneinfo",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "zoneinfo",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/hasclaims\/zoneinfo"
+},
+"doc://com.okta.mobile.webauthenticationui/documentation/AuthFoundation/JWT": {
+  "abstract" : [
+    {
+      "text" : "Represents the contents of a JWT token, providing access to its payload contents.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "struct"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "JWT"
+    }
+  ],
+  "identifier" : "doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/AuthFoundation\/JWT",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "JWT"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "JWT",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/jwt"
+},
+"doc://com.okta.mobile.webauthenticationui/documentation/AuthFoundation/Token/Metadata": {
+  "abstract" : [
+    {
+      "text" : "Describes the metadata associated with a token.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "struct"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "Metadata"
+    }
+  ],
+  "identifier" : "doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/AuthFoundation\/Token\/Metadata",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "Metadata"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "Token.Metadata",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/token\/metadata"
+},
+"doc://com.okta.mobile.webauthenticationui/documentation/AuthFoundation/TokenInfo": {
+  "abstract" : [
+    {
+      "text" : "Introspected token information.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "struct"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "TokenInfo"
+    }
+  ],
+  "identifier" : "doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/AuthFoundation\/TokenInfo",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "TokenInfo"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "TokenInfo",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/tokeninfo"
+},
+"doc://com.okta.mobile.webauthenticationui/documentation/AuthFoundation/UserInfo": {
+  "abstract" : [
+    {
+      "text" : "User profile information.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "struct"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "UserInfo"
+    }
+  ],
+  "identifier" : "doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/AuthFoundation\/UserInfo",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "UserInfo"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "UserInfo",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/userinfo"
+}
+}
+}

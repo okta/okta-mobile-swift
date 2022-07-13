@@ -1,0 +1,271 @@
+{
+  "abstract" : [
+    {
+      "text" : "Performs the version migration work necessary for this migrator.",
+      "type" : "text"
+    }
+  ],
+  "hierarchy" : {
+    "paths" : [
+      [
+        "doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/AuthFoundation",
+        "doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/AuthFoundation\/SDKVersion",
+        "doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/AuthFoundation\/SDKVersion\/Migration",
+        "doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/AuthFoundation\/SDKVersion\/Migration\/LegacyOIDC"
+      ]
+    ]
+  },
+  "identifier" : {
+    "interfaceLanguage" : "swift",
+    "url" : "doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/AuthFoundation\/SDKVersion\/Migration\/LegacyOIDC\/migrate()"
+  },
+  "kind" : "symbol",
+  "metadata" : {
+    "externalID" : "s:14AuthFoundation10SDKVersionC9MigrationC10LegacyOIDCC7migrateyyKF",
+    "fragments" : [
+      {
+        "kind" : "keyword",
+        "text" : "func"
+      },
+      {
+        "kind" : "text",
+        "text" : " "
+      },
+      {
+        "kind" : "identifier",
+        "text" : "migrate"
+      },
+      {
+        "kind" : "text",
+        "text" : "() "
+      },
+      {
+        "kind" : "keyword",
+        "text" : "throws"
+      }
+    ],
+    "modules" : [
+      {
+        "name" : "AuthFoundation"
+      }
+    ],
+    "role" : "symbol",
+    "roleHeading" : "Instance Method",
+    "symbolKind" : "method",
+    "title" : "migrate()"
+  },
+  "primaryContentSections" : [
+    {
+      "declarations" : [
+        {
+          "languages" : [
+            "swift"
+          ],
+          "platforms" : [
+            "macOS"
+          ],
+          "tokens" : [
+            {
+              "kind" : "keyword",
+              "text" : "func"
+            },
+            {
+              "kind" : "text",
+              "text" : " "
+            },
+            {
+              "kind" : "identifier",
+              "text" : "migrate"
+            },
+            {
+              "kind" : "text",
+              "text" : "() "
+            },
+            {
+              "kind" : "keyword",
+              "text" : "throws"
+            }
+          ]
+        }
+      ],
+      "kind" : "declarations"
+    }
+  ],
+  "schemaVersion" : {
+    "major" : 0,
+    "minor" : 2,
+    "patch" : 0
+  },
+  "sections" : [
+
+  ],
+  "variants" : [
+    {
+      "paths" : [
+        "\/documentation\/authfoundation\/sdkversion\/migration\/legacyoidc\/migrate()"
+      ],
+      "traits" : [
+        {
+          "interfaceLanguage" : "swift"
+        }
+      ]
+    }
+  ]
+, 
+"references": {
+"doc://com.okta.mobile.webauthenticationui/documentation/AuthFoundation": {
+  "abstract" : [
+
+  ],
+  "identifier" : "doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/AuthFoundation",
+  "kind" : "symbol",
+  "role" : "collection",
+  "title" : "AuthFoundation",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation"
+},
+"doc://com.okta.mobile.webauthenticationui/documentation/AuthFoundation/SDKVersion": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "class"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "SDKVersion"
+    }
+  ],
+  "identifier" : "doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/AuthFoundation\/SDKVersion",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "SDKVersion"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "SDKVersion",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/sdkversion"
+},
+"doc://com.okta.mobile.webauthenticationui/documentation/AuthFoundation/SDKVersion/Migration": {
+  "abstract" : [
+    {
+      "text" : "Namespace used for a variety of version migration agents.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "class"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "Migration"
+    }
+  ],
+  "identifier" : "doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/AuthFoundation\/SDKVersion\/Migration",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "Migration"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "SDKVersion.Migration",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/sdkversion\/migration"
+},
+"doc://com.okta.mobile.webauthenticationui/documentation/AuthFoundation/SDKVersion/Migration/LegacyOIDC": {
+  "abstract" : [
+    {
+      "text" : "Migrator capable of importing credentials from the legacy ",
+      "type" : "text"
+    },
+    {
+      "code" : "OktaOidc",
+      "type" : "codeVoice"
+    },
+    {
+      "text" : " SDK.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "class"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "LegacyOIDC"
+    }
+  ],
+  "identifier" : "doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/AuthFoundation\/SDKVersion\/Migration\/LegacyOIDC",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "LegacyOIDC"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "SDKVersion.Migration.LegacyOIDC",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/sdkversion\/migration\/legacyoidc"
+},
+"doc://com.okta.mobile.webauthenticationui/documentation/AuthFoundation/SDKVersion/Migration/LegacyOIDC/migrate()": {
+  "abstract" : [
+    {
+      "text" : "Performs the version migration work necessary for this migrator.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "func"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "migrate"
+    },
+    {
+      "kind" : "text",
+      "text" : "() "
+    },
+    {
+      "kind" : "keyword",
+      "text" : "throws"
+    }
+  ],
+  "identifier" : "doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/AuthFoundation\/SDKVersion\/Migration\/LegacyOIDC\/migrate()",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "migrate()",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/sdkversion\/migration\/legacyoidc\/migrate()"
+}
+}
+}

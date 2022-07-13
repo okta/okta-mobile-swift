@@ -1,0 +1,1142 @@
+{
+  "abstract" : [
+    {
+      "text" : "Abstract protocol defining the structure of an API request.",
+      "type" : "text"
+    }
+  ],
+  "hierarchy" : {
+    "paths" : [
+      [
+        "doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/AuthFoundation"
+      ]
+    ]
+  },
+  "identifier" : {
+    "interfaceLanguage" : "swift",
+    "url" : "doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/AuthFoundation\/APIRequest"
+  },
+  "kind" : "symbol",
+  "metadata" : {
+    "externalID" : "s:14AuthFoundation10APIRequestP",
+    "fragments" : [
+      {
+        "kind" : "keyword",
+        "text" : "protocol"
+      },
+      {
+        "kind" : "text",
+        "text" : " "
+      },
+      {
+        "kind" : "identifier",
+        "text" : "APIRequest"
+      }
+    ],
+    "modules" : [
+      {
+        "name" : "AuthFoundation"
+      }
+    ],
+    "navigatorTitle" : [
+      {
+        "kind" : "identifier",
+        "text" : "APIRequest"
+      }
+    ],
+    "role" : "symbol",
+    "roleHeading" : "Protocol",
+    "symbolKind" : "protocol",
+    "title" : "APIRequest"
+  },
+  "primaryContentSections" : [
+    {
+      "declarations" : [
+        {
+          "languages" : [
+            "swift"
+          ],
+          "platforms" : [
+            "macOS"
+          ],
+          "tokens" : [
+            {
+              "kind" : "keyword",
+              "text" : "protocol"
+            },
+            {
+              "kind" : "text",
+              "text" : " "
+            },
+            {
+              "kind" : "identifier",
+              "text" : "APIRequest"
+            }
+          ]
+        }
+      ],
+      "kind" : "declarations"
+    }
+  ],
+  "relationshipsSections" : [
+    {
+      "identifiers" : [
+        "doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/AuthFoundation\/OAuth2APIRequest",
+        "doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/AuthFoundation\/OAuth2TokenRequest"
+      ],
+      "kind" : "relationships",
+      "title" : "Inherited By",
+      "type" : "inheritedBy"
+    }
+  ],
+  "schemaVersion" : {
+    "major" : 0,
+    "minor" : 2,
+    "patch" : 0
+  },
+  "sections" : [
+
+  ],
+  "topicSections" : [
+    {
+      "identifiers" : [
+        "doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/AuthFoundation\/APIRequest\/ResponseType"
+      ],
+      "title" : "Associated Types"
+    },
+    {
+      "identifiers" : [
+        "doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/AuthFoundation\/APIRequest\/acceptsType-529gv",
+        "doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/AuthFoundation\/APIRequest\/authorization-7539h",
+        "doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/AuthFoundation\/APIRequest\/cachePolicy-8eox0",
+        "doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/AuthFoundation\/APIRequest\/contentType-2rqd7",
+        "doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/AuthFoundation\/APIRequest\/headers-8ieky",
+        "doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/AuthFoundation\/APIRequest\/httpMethod-3kav0",
+        "doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/AuthFoundation\/APIRequest\/query-96683",
+        "doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/AuthFoundation\/APIRequest\/timeoutInterval-7fbtk",
+        "doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/AuthFoundation\/APIRequest\/url"
+      ],
+      "title" : "Instance Properties"
+    },
+    {
+      "identifiers" : [
+        "doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/AuthFoundation\/APIRequest\/body()-2l9s0",
+        "doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/AuthFoundation\/APIRequest\/request(for:)-20zou",
+        "doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/AuthFoundation\/APIRequest\/send(to:parsing:)-5wi6c",
+        "doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/AuthFoundation\/APIRequest\/send(to:parsing:completion:)-66wgf"
+      ],
+      "title" : "Instance Methods"
+    }
+  ],
+  "variants" : [
+    {
+      "paths" : [
+        "\/documentation\/authfoundation\/apirequest"
+      ],
+      "traits" : [
+        {
+          "interfaceLanguage" : "swift"
+        }
+      ]
+    }
+  ]
+, 
+"references": {
+"doc://com.okta.mobile.webauthenticationui/documentation/AuthFoundation": {
+  "abstract" : [
+
+  ],
+  "identifier" : "doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/AuthFoundation",
+  "kind" : "symbol",
+  "role" : "collection",
+  "title" : "AuthFoundation",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation"
+},
+"doc://com.okta.mobile.webauthenticationui/documentation/AuthFoundation/APIClient": {
+  "abstract" : [
+    {
+      "text" : "Protocol defining the interfaces and capabilities that API clients can conform to.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "protocol"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "APIClient"
+    }
+  ],
+  "identifier" : "doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/AuthFoundation\/APIClient",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "APIClient"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "APIClient",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/apiclient"
+},
+"doc://com.okta.mobile.webauthenticationui/documentation/AuthFoundation/APIRequest": {
+  "abstract" : [
+    {
+      "text" : "Abstract protocol defining the structure of an API request.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "protocol"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "APIRequest"
+    }
+  ],
+  "identifier" : "doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/AuthFoundation\/APIRequest",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "APIRequest"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "APIRequest",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/apirequest"
+},
+"doc://com.okta.mobile.webauthenticationui/documentation/AuthFoundation/APIRequest/ResponseType": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "associatedtype"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "ResponseType"
+    },
+    {
+      "kind" : "text",
+      "text" : " : "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:Se",
+      "text" : "Decodable"
+    }
+  ],
+  "identifier" : "doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/AuthFoundation\/APIRequest\/ResponseType",
+  "kind" : "symbol",
+  "required" : true,
+  "role" : "symbol",
+  "title" : "ResponseType",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/apirequest\/responsetype"
+},
+"doc://com.okta.mobile.webauthenticationui/documentation/AuthFoundation/APIRequest/acceptsType-529gv": {
+  "abstract" : [
+    {
+      "text" : "Optional accept type to request.",
+      "type" : "text"
+    }
+  ],
+  "defaultImplementations" : 1,
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "var"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "acceptsType"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:14AuthFoundation14APIContentTypeO",
+      "text" : "APIContentType"
+    },
+    {
+      "kind" : "text",
+      "text" : "?"
+    }
+  ],
+  "identifier" : "doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/AuthFoundation\/APIRequest\/acceptsType-529gv",
+  "kind" : "symbol",
+  "required" : true,
+  "role" : "symbol",
+  "title" : "acceptsType",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/apirequest\/acceptstype-529gv"
+},
+"doc://com.okta.mobile.webauthenticationui/documentation/AuthFoundation/APIRequest/authorization-7539h": {
+  "abstract" : [
+    {
+      "text" : "Optional API authorization information to use.",
+      "type" : "text"
+    }
+  ],
+  "defaultImplementations" : 1,
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "var"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "authorization"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:14AuthFoundation16APIAuthorizationP",
+      "text" : "APIAuthorization"
+    },
+    {
+      "kind" : "text",
+      "text" : "?"
+    }
+  ],
+  "identifier" : "doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/AuthFoundation\/APIRequest\/authorization-7539h",
+  "kind" : "symbol",
+  "required" : true,
+  "role" : "symbol",
+  "title" : "authorization",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/apirequest\/authorization-7539h"
+},
+"doc://com.okta.mobile.webauthenticationui/documentation/AuthFoundation/APIRequest/body()-2l9s0": {
+  "abstract" : [
+    {
+      "text" : "Function to generate the HTTP request body.",
+      "type" : "text"
+    }
+  ],
+  "defaultImplementations" : 3,
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "func"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "body"
+    },
+    {
+      "kind" : "text",
+      "text" : "() "
+    },
+    {
+      "kind" : "keyword",
+      "text" : "throws"
+    },
+    {
+      "kind" : "text",
+      "text" : " -> "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:10Foundation4DataV",
+      "text" : "Data"
+    },
+    {
+      "kind" : "text",
+      "text" : "?"
+    }
+  ],
+  "identifier" : "doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/AuthFoundation\/APIRequest\/body()-2l9s0",
+  "kind" : "symbol",
+  "required" : true,
+  "role" : "symbol",
+  "title" : "body()",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/apirequest\/body()-2l9s0"
+},
+"doc://com.okta.mobile.webauthenticationui/documentation/AuthFoundation/APIRequest/cachePolicy-8eox0": {
+  "abstract" : [
+    {
+      "text" : "The HTTP request cache policy to use.",
+      "type" : "text"
+    }
+  ],
+  "defaultImplementations" : 1,
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "var"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "cachePolicy"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:10Foundation10URLRequestV",
+      "text" : "URLRequest"
+    },
+    {
+      "kind" : "text",
+      "text" : "."
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:10Foundation10URLRequestV11CachePolicya",
+      "text" : "CachePolicy"
+    }
+  ],
+  "identifier" : "doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/AuthFoundation\/APIRequest\/cachePolicy-8eox0",
+  "kind" : "symbol",
+  "required" : true,
+  "role" : "symbol",
+  "title" : "cachePolicy",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/apirequest\/cachepolicy-8eox0"
+},
+"doc://com.okta.mobile.webauthenticationui/documentation/AuthFoundation/APIRequest/contentType-2rqd7": {
+  "abstract" : [
+    {
+      "text" : "Optional request body content type.",
+      "type" : "text"
+    }
+  ],
+  "defaultImplementations" : 1,
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "var"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "contentType"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:14AuthFoundation14APIContentTypeO",
+      "text" : "APIContentType"
+    },
+    {
+      "kind" : "text",
+      "text" : "?"
+    }
+  ],
+  "identifier" : "doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/AuthFoundation\/APIRequest\/contentType-2rqd7",
+  "kind" : "symbol",
+  "required" : true,
+  "role" : "symbol",
+  "title" : "contentType",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/apirequest\/contenttype-2rqd7"
+},
+"doc://com.okta.mobile.webauthenticationui/documentation/AuthFoundation/APIRequest/headers-8ieky": {
+  "abstract" : [
+    {
+      "text" : "Optional HTTP headers to supply.",
+      "type" : "text"
+    }
+  ],
+  "defaultImplementations" : 1,
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "var"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "headers"
+    },
+    {
+      "kind" : "text",
+      "text" : ": ["
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:SS",
+      "text" : "String"
+    },
+    {
+      "kind" : "text",
+      "text" : " : "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:14AuthFoundation18APIRequestArgumentP",
+      "text" : "APIRequestArgument"
+    },
+    {
+      "kind" : "text",
+      "text" : "?]?"
+    }
+  ],
+  "identifier" : "doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/AuthFoundation\/APIRequest\/headers-8ieky",
+  "kind" : "symbol",
+  "required" : true,
+  "role" : "symbol",
+  "title" : "headers",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/apirequest\/headers-8ieky"
+},
+"doc://com.okta.mobile.webauthenticationui/documentation/AuthFoundation/APIRequest/httpMethod-3kav0": {
+  "abstract" : [
+    {
+      "text" : "HTTP method to perform.",
+      "type" : "text"
+    }
+  ],
+  "defaultImplementations" : 1,
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "var"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "httpMethod"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:14AuthFoundation16APIRequestMethodO",
+      "text" : "APIRequestMethod"
+    }
+  ],
+  "identifier" : "doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/AuthFoundation\/APIRequest\/httpMethod-3kav0",
+  "kind" : "symbol",
+  "required" : true,
+  "role" : "symbol",
+  "title" : "httpMethod",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/apirequest\/httpmethod-3kav0"
+},
+"doc://com.okta.mobile.webauthenticationui/documentation/AuthFoundation/APIRequest/query-96683": {
+  "abstract" : [
+    {
+      "text" : "Optional query string arguments.",
+      "type" : "text"
+    }
+  ],
+  "defaultImplementations" : 1,
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "var"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "query"
+    },
+    {
+      "kind" : "text",
+      "text" : ": ["
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:SS",
+      "text" : "String"
+    },
+    {
+      "kind" : "text",
+      "text" : " : "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:14AuthFoundation18APIRequestArgumentP",
+      "text" : "APIRequestArgument"
+    },
+    {
+      "kind" : "text",
+      "text" : "?]?"
+    }
+  ],
+  "identifier" : "doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/AuthFoundation\/APIRequest\/query-96683",
+  "kind" : "symbol",
+  "required" : true,
+  "role" : "symbol",
+  "title" : "query",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/apirequest\/query-96683"
+},
+"doc://com.okta.mobile.webauthenticationui/documentation/AuthFoundation/APIRequest/request(for:)-20zou": {
+  "abstract" : [
+    {
+      "text" : "Composes a URLRequest for this object.",
+      "type" : "text"
+    }
+  ],
+  "defaultImplementations" : 1,
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "func"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "request"
+    },
+    {
+      "kind" : "text",
+      "text" : "("
+    },
+    {
+      "kind" : "externalParam",
+      "text" : "for"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:14AuthFoundation9APIClientP",
+      "text" : "APIClient"
+    },
+    {
+      "kind" : "text",
+      "text" : ") "
+    },
+    {
+      "kind" : "keyword",
+      "text" : "throws"
+    },
+    {
+      "kind" : "text",
+      "text" : " -> "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:10Foundation10URLRequestV",
+      "text" : "URLRequest"
+    }
+  ],
+  "identifier" : "doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/AuthFoundation\/APIRequest\/request(for:)-20zou",
+  "kind" : "symbol",
+  "required" : true,
+  "role" : "symbol",
+  "title" : "request(for:)",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/apirequest\/request(for:)-20zou"
+},
+"doc://com.okta.mobile.webauthenticationui/documentation/AuthFoundation/APIRequest/send(to:parsing:)-5wi6c": {
+  "abstract" : [
+    {
+      "text" : "Asynchronously sends the request to the given ",
+      "type" : "text"
+    },
+    {
+      "identifier" : "doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/AuthFoundation\/APIClient",
+      "isActive" : true,
+      "type" : "reference"
+    },
+    {
+      "text" : ".",
+      "type" : "text"
+    }
+  ],
+  "defaultImplementations" : 1,
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "func"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "send"
+    },
+    {
+      "kind" : "text",
+      "text" : "("
+    },
+    {
+      "kind" : "externalParam",
+      "text" : "to"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:14AuthFoundation9APIClientP",
+      "text" : "APIClient"
+    },
+    {
+      "kind" : "text",
+      "text" : ", "
+    },
+    {
+      "kind" : "externalParam",
+      "text" : "parsing"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:14AuthFoundation17APIParsingContextP",
+      "text" : "APIParsingContext"
+    },
+    {
+      "kind" : "text",
+      "text" : "?) "
+    },
+    {
+      "kind" : "keyword",
+      "text" : "async"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "keyword",
+      "text" : "throws"
+    },
+    {
+      "kind" : "text",
+      "text" : " -> "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:14AuthFoundation11APIResponseV",
+      "text" : "APIResponse"
+    },
+    {
+      "kind" : "text",
+      "text" : "<"
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:14AuthFoundation10APIRequestP12ResponseTypeQa",
+      "text" : "ResponseType"
+    },
+    {
+      "kind" : "text",
+      "text" : ">"
+    }
+  ],
+  "identifier" : "doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/AuthFoundation\/APIRequest\/send(to:parsing:)-5wi6c",
+  "kind" : "symbol",
+  "required" : true,
+  "role" : "symbol",
+  "title" : "send(to:parsing:)",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/apirequest\/send(to:parsing:)-5wi6c"
+},
+"doc://com.okta.mobile.webauthenticationui/documentation/AuthFoundation/APIRequest/send(to:parsing:completion:)-66wgf": {
+  "abstract" : [
+    {
+      "text" : "Sends the request to the given ",
+      "type" : "text"
+    },
+    {
+      "identifier" : "doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/AuthFoundation\/APIClient",
+      "isActive" : true,
+      "type" : "reference"
+    },
+    {
+      "text" : ".",
+      "type" : "text"
+    }
+  ],
+  "defaultImplementations" : 1,
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "func"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "send"
+    },
+    {
+      "kind" : "text",
+      "text" : "("
+    },
+    {
+      "kind" : "externalParam",
+      "text" : "to"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:14AuthFoundation9APIClientP",
+      "text" : "APIClient"
+    },
+    {
+      "kind" : "text",
+      "text" : ", "
+    },
+    {
+      "kind" : "externalParam",
+      "text" : "parsing"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:14AuthFoundation17APIParsingContextP",
+      "text" : "APIParsingContext"
+    },
+    {
+      "kind" : "text",
+      "text" : "?, "
+    },
+    {
+      "kind" : "externalParam",
+      "text" : "completion"
+    },
+    {
+      "kind" : "text",
+      "text" : ": ("
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:s6ResultO",
+      "text" : "Result"
+    },
+    {
+      "kind" : "text",
+      "text" : "<"
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:14AuthFoundation11APIResponseV",
+      "text" : "APIResponse"
+    },
+    {
+      "kind" : "text",
+      "text" : "<"
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:14AuthFoundation10APIRequestP12ResponseTypeQa",
+      "text" : "ResponseType"
+    },
+    {
+      "kind" : "text",
+      "text" : ">, "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:14AuthFoundation14APIClientErrorO",
+      "text" : "APIClientError"
+    },
+    {
+      "kind" : "text",
+      "text" : ">) -> "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:s4Voida",
+      "text" : "Void"
+    },
+    {
+      "kind" : "text",
+      "text" : ")"
+    }
+  ],
+  "identifier" : "doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/AuthFoundation\/APIRequest\/send(to:parsing:completion:)-66wgf",
+  "kind" : "symbol",
+  "required" : true,
+  "role" : "symbol",
+  "title" : "send(to:parsing:completion:)",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/apirequest\/send(to:parsing:completion:)-66wgf"
+},
+"doc://com.okta.mobile.webauthenticationui/documentation/AuthFoundation/APIRequest/timeoutInterval-7fbtk": {
+  "abstract" : [
+    {
+      "text" : "The HTTP timeout interval.",
+      "type" : "text"
+    }
+  ],
+  "defaultImplementations" : 1,
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "var"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "timeoutInterval"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "c:@T@NSTimeInterval",
+      "text" : "TimeInterval"
+    }
+  ],
+  "identifier" : "doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/AuthFoundation\/APIRequest\/timeoutInterval-7fbtk",
+  "kind" : "symbol",
+  "required" : true,
+  "role" : "symbol",
+  "title" : "timeoutInterval",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/apirequest\/timeoutinterval-7fbtk"
+},
+"doc://com.okta.mobile.webauthenticationui/documentation/AuthFoundation/APIRequest/url": {
+  "abstract" : [
+    {
+      "text" : "The URL to perform the API request against.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "var"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "url"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:10Foundation3URLV",
+      "text" : "URL"
+    }
+  ],
+  "identifier" : "doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/AuthFoundation\/APIRequest\/url",
+  "kind" : "symbol",
+  "required" : true,
+  "role" : "symbol",
+  "title" : "url",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/apirequest\/url"
+},
+"doc://com.okta.mobile.webauthenticationui/documentation/AuthFoundation/OAuth2APIRequest": {
+  "abstract" : [
+    {
+      "text" : "Sub-protocol of ",
+      "type" : "text"
+    },
+    {
+      "identifier" : "doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/AuthFoundation\/APIRequest",
+      "isActive" : true,
+      "type" : "reference"
+    },
+    {
+      "text" : " used to define requests that are performed using links supplied via an organization’s ",
+      "type" : "text"
+    },
+    {
+      "identifier" : "doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/AuthFoundation\/OpenIdConfiguration",
+      "isActive" : true,
+      "type" : "reference"
+    },
+    {
+      "text" : ".",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "protocol"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "OAuth2APIRequest"
+    }
+  ],
+  "identifier" : "doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/AuthFoundation\/OAuth2APIRequest",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "OAuth2APIRequest"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "OAuth2APIRequest",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/oauth2apirequest"
+},
+"doc://com.okta.mobile.webauthenticationui/documentation/AuthFoundation/OAuth2TokenRequest": {
+  "abstract" : [
+    {
+      "text" : "Protocol that represents a type of ",
+      "type" : "text"
+    },
+    {
+      "identifier" : "doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/AuthFoundation\/APIRequest",
+      "isActive" : true,
+      "type" : "reference"
+    },
+    {
+      "text" : " that can be used to exchange a token.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "protocol"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "OAuth2TokenRequest"
+    }
+  ],
+  "identifier" : "doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/AuthFoundation\/OAuth2TokenRequest",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "OAuth2TokenRequest"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "OAuth2TokenRequest",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/oauth2tokenrequest"
+},
+"doc://com.okta.mobile.webauthenticationui/documentation/AuthFoundation/OpenIdConfiguration": {
+  "abstract" : [
+    {
+      "text" : "Describes the configuration of an OpenID server.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "struct"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "OpenIdConfiguration"
+    }
+  ],
+  "identifier" : "doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/AuthFoundation\/OpenIdConfiguration",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "OpenIdConfiguration"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "OpenIdConfiguration",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/openidconfiguration"
+}
+}
+}

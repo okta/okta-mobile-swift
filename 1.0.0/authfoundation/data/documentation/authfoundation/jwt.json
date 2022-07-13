@@ -1,0 +1,1675 @@
+{
+  "abstract" : [
+    {
+      "text" : "Represents the contents of a JWT token, providing access to its payload contents.",
+      "type" : "text"
+    }
+  ],
+  "hierarchy" : {
+    "paths" : [
+      [
+        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation"
+      ]
+    ]
+  },
+  "identifier" : {
+    "interfaceLanguage" : "swift",
+    "url" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/JWT"
+  },
+  "kind" : "symbol",
+  "metadata" : {
+    "externalID" : "s:14AuthFoundation3JWTV",
+    "fragments" : [
+      {
+        "kind" : "keyword",
+        "text" : "struct"
+      },
+      {
+        "kind" : "text",
+        "text" : " "
+      },
+      {
+        "kind" : "identifier",
+        "text" : "JWT"
+      }
+    ],
+    "modules" : [
+      {
+        "name" : "AuthFoundation"
+      }
+    ],
+    "navigatorTitle" : [
+      {
+        "kind" : "identifier",
+        "text" : "JWT"
+      }
+    ],
+    "role" : "symbol",
+    "roleHeading" : "Structure",
+    "symbolKind" : "struct",
+    "title" : "JWT"
+  },
+  "primaryContentSections" : [
+    {
+      "declarations" : [
+        {
+          "languages" : [
+            "swift"
+          ],
+          "platforms" : [
+            "macOS"
+          ],
+          "tokens" : [
+            {
+              "kind" : "keyword",
+              "text" : "struct"
+            },
+            {
+              "kind" : "text",
+              "text" : " "
+            },
+            {
+              "kind" : "identifier",
+              "text" : "JWT"
+            }
+          ]
+        }
+      ],
+      "kind" : "declarations"
+    },
+    {
+      "content" : [
+        {
+          "anchor" : "overview",
+          "level" : 2,
+          "text" : "Overview",
+          "type" : "heading"
+        },
+        {
+          "inlineContent" : [
+            {
+              "text" : "A JWT object represents information encoded within a JSON Web Token, a base64-encoded JSON object that contains a header, a payload, and a signature that is used to verify the validity of the token itself. The contents of the payload, referred to as “Claims”, can then be read within your application.",
+              "type" : "text"
+            }
+          ],
+          "type" : "paragraph"
+        },
+        {
+          "inlineContent" : [
+            {
+              "text" : "These objects conform to both the ",
+              "type" : "text"
+            },
+            {
+              "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/HasClaims",
+              "isActive" : true,
+              "type" : "reference"
+            },
+            {
+              "text" : " and ",
+              "type" : "text"
+            },
+            {
+              "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/Expires",
+              "isActive" : true,
+              "type" : "reference"
+            },
+            {
+              "text" : " protocols, to provide conveniences for accessing information within the token, as well as to determine whether or not the token has expired.  In addition to accessing arbitrary claims within a token, this class adds conveniences to simplify access to, and to normalize the expected result types of, properties common to JWT tokens.",
+              "type" : "text"
+            }
+          ],
+          "type" : "paragraph"
+        },
+        {
+          "anchor" : "Accessing-claims",
+          "level" : 2,
+          "text" : "Accessing claims",
+          "type" : "heading"
+        },
+        {
+          "inlineContent" : [
+            {
+              "text" : "Reading information, or “Claims”, from a JWT token can be done in three different ways:",
+              "type" : "text"
+            }
+          ],
+          "type" : "paragraph"
+        },
+        {
+          "items" : [
+            {
+              "content" : [
+                {
+                  "inlineContent" : [
+                    {
+                      "text" : "Accessing values using convenience properties",
+                      "type" : "text"
+                    }
+                  ],
+                  "type" : "paragraph"
+                }
+              ]
+            },
+            {
+              "content" : [
+                {
+                  "inlineContent" : [
+                    {
+                      "text" : "Using keyed subscripting of common claims using the ",
+                      "type" : "text"
+                    },
+                    {
+                      "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/Claim",
+                      "isActive" : true,
+                      "type" : "reference"
+                    },
+                    {
+                      "text" : " enum",
+                      "type" : "text"
+                    }
+                  ],
+                  "type" : "paragraph"
+                }
+              ]
+            },
+            {
+              "content" : [
+                {
+                  "inlineContent" : [
+                    {
+                      "text" : "Using keyed subscripting of custom claims using the claim’s string name.",
+                      "type" : "text"
+                    }
+                  ],
+                  "type" : "paragraph"
+                }
+              ]
+            }
+          ],
+          "type" : "orderedList"
+        },
+        {
+          "inlineContent" : [
+            {
+              "text" : "Some common properties, such as ",
+              "type" : "text"
+            },
+            {
+              "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/HasClaims\/subject",
+              "isActive" : true,
+              "type" : "reference"
+            },
+            {
+              "text" : " or ",
+              "type" : "text"
+            },
+            {
+              "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/JWT\/issuer",
+              "isActive" : true,
+              "type" : "reference"
+            },
+            {
+              "text" : ", are defined as properties on the JWT object, to simplify access to these values. Additionally, some claims that return dates or time intervals have conveniences such as ",
+              "type" : "text"
+            },
+            {
+              "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/JWT\/issuedAt",
+              "isActive" : true,
+              "type" : "reference"
+            },
+            {
+              "text" : ", ",
+              "type" : "text"
+            },
+            {
+              "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/JWT\/expirationTime",
+              "isActive" : true,
+              "type" : "reference"
+            },
+            {
+              "text" : ", ",
+              "type" : "text"
+            },
+            {
+              "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/JWT\/expiresIn",
+              "isActive" : true,
+              "type" : "reference"
+            },
+            {
+              "text" : ", or ",
+              "type" : "text"
+            },
+            {
+              "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/JWT\/scope",
+              "isActive" : true,
+              "type" : "reference"
+            },
+            {
+              "text" : ", that returns their values in the expected type.",
+              "type" : "text"
+            }
+          ],
+          "type" : "paragraph"
+        },
+        {
+          "inlineContent" : [
+            {
+              "text" : "When you wish to interact with other claims more dynamically, the ",
+              "type" : "text"
+            },
+            {
+              "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/HasClaims\/claims",
+              "isActive" : true,
+              "type" : "reference"
+            },
+            {
+              "text" : " or ",
+              "type" : "text"
+            },
+            {
+              "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/HasClaims\/customClaims",
+              "isActive" : true,
+              "type" : "reference"
+            },
+            {
+              "text" : " properties can be used to identify which claims are present in the JWT token.",
+              "type" : "text"
+            }
+          ],
+          "type" : "paragraph"
+        },
+        {
+          "inlineContent" : [
+            {
+              "text" : "For example, to access or interact with the predetermine claims:",
+              "type" : "text"
+            }
+          ],
+          "type" : "paragraph"
+        },
+        {
+          "code" : [
+            "for claim in token.claims {",
+            "    let value = token[claim] \/\/ Use the claim",
+            "}"
+          ],
+          "syntax" : "swift",
+          "type" : "codeListing"
+        },
+        {
+          "inlineContent" : [
+            {
+              "text" : "If you anticipate specific claims within your application, you can interact with them directly.  For example:",
+              "type" : "text"
+            }
+          ],
+          "type" : "paragraph"
+        },
+        {
+          "code" : [
+            "if let email = token[.email] {",
+            "    \/\/ Do something with the token's email address",
+            "}",
+            "",
+            "if let customValue = token[\"customClaim\"] {",
+            "    \/\/ Use the custom value",
+            "}"
+          ],
+          "syntax" : "swift",
+          "type" : "codeListing"
+        }
+      ],
+      "kind" : "content"
+    }
+  ],
+  "relationshipsSections" : [
+    {
+      "identifiers" : [
+        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/Expires",
+        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/HasClaims",
+        "doc:\/\/com.okta.mobile.authfoundation\/Se",
+        "doc:\/\/com.okta.mobile.authfoundation\/SE",
+        "doc:\/\/com.okta.mobile.authfoundation\/SY"
+      ],
+      "kind" : "relationships",
+      "title" : "Conforms To",
+      "type" : "conformsTo"
+    }
+  ],
+  "schemaVersion" : {
+    "major" : 0,
+    "minor" : 2,
+    "patch" : 0
+  },
+  "sections" : [
+
+  ],
+  "seeAlsoSections" : [
+    {
+      "generated" : true,
+      "identifiers" : [
+        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/JWK",
+        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/JWKS",
+        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/Claim",
+        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/HasClaims",
+        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/ClaimContainer",
+        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/Expires"
+      ],
+      "title" : "JWT and Token Verification"
+    }
+  ],
+  "topicSections" : [
+    {
+      "identifiers" : [
+        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/JWT\/Header-swift.struct"
+      ],
+      "title" : "Structures"
+    },
+    {
+      "identifiers" : [
+        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/JWT\/init(_:)",
+        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/JWT\/init(rawValue:)"
+      ],
+      "title" : "Initializers"
+    },
+    {
+      "identifiers" : [
+        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/JWT\/audience",
+        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/JWT\/authenticationContext",
+        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/JWT\/authenticationMethods-8d0og",
+        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/JWT\/claims",
+        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/JWT\/customClaims",
+        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/JWT\/expirationTime",
+        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/JWT\/expiresIn",
+        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/JWT\/header-swift.property",
+        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/JWT\/issuedAt",
+        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/JWT\/issuer",
+        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/JWT\/notBefore",
+        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/JWT\/rawValue-swift.property",
+        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/JWT\/scope"
+      ],
+      "title" : "Instance Properties"
+    },
+    {
+      "identifiers" : [
+        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/JWT\/validate(using:)",
+        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/JWT\/value(_:for:)"
+      ],
+      "title" : "Instance Methods"
+    },
+    {
+      "identifiers" : [
+        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/JWT\/RawValue-swift.typealias"
+      ],
+      "title" : "Type Aliases"
+    },
+    {
+      "generated" : true,
+      "identifiers" : [
+        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/JWT\/Expires-Implementations",
+        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/JWT\/HasClaims-Implementations",
+        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/JWT\/RawRepresentable-Implementations"
+      ],
+      "title" : "Default Implementations"
+    }
+  ],
+  "variants" : [
+    {
+      "paths" : [
+        "\/documentation\/authfoundation\/jwt"
+      ],
+      "traits" : [
+        {
+          "interfaceLanguage" : "swift"
+        }
+      ]
+    }
+  ]
+, 
+"references": {
+"doc://com.okta.mobile.authfoundation/SE": {
+  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/SE",
+  "title" : "Swift.Encodable",
+  "type" : "unresolvable"
+},
+"doc://com.okta.mobile.authfoundation/SY": {
+  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/SY",
+  "title" : "Swift.RawRepresentable",
+  "type" : "unresolvable"
+},
+"doc://com.okta.mobile.authfoundation/Se": {
+  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/Se",
+  "title" : "Swift.Decodable",
+  "type" : "unresolvable"
+},
+"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation": {
+  "abstract" : [
+    {
+      "text" : "Library that provides foundational features used by Okta’s authentication libraries, as well as APIs used to work with tokens and user credentials.",
+      "type" : "text"
+    }
+  ],
+  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation",
+  "kind" : "symbol",
+  "role" : "collection",
+  "title" : "AuthFoundation",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation"
+},
+"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/Claim": {
+  "abstract" : [
+    {
+      "text" : "List of registered and public claims.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "enum"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "Claim"
+    }
+  ],
+  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/Claim",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "Claim"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "Claim",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/claim"
+},
+"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/ClaimContainer": {
+  "abstract" : [
+    {
+      "text" : "Protocol used to define shared behavior when an object can contain claims.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "protocol"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "ClaimContainer"
+    }
+  ],
+  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/ClaimContainer",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "ClaimContainer"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "ClaimContainer",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/claimcontainer"
+},
+"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/Expires": {
+  "abstract" : [
+    {
+      "text" : "Protocol that indicates an object is capable of expiring.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "protocol"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "Expires"
+    }
+  ],
+  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/Expires",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "Expires"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "Expires",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/expires"
+},
+"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/HasClaims": {
+  "abstract" : [
+    {
+      "text" : "Used by classes that contains OAuth2 claims.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "protocol"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "HasClaims"
+    }
+  ],
+  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/HasClaims",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "HasClaims"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "HasClaims",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/hasclaims"
+},
+"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/HasClaims/claims": {
+  "abstract" : [
+    {
+      "text" : "Returns the collection of claims this object contains.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "var"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "claims"
+    },
+    {
+      "kind" : "text",
+      "text" : ": ["
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:14AuthFoundation5ClaimO",
+      "text" : "Claim"
+    },
+    {
+      "kind" : "text",
+      "text" : "]"
+    }
+  ],
+  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/HasClaims\/claims",
+  "kind" : "symbol",
+  "required" : true,
+  "role" : "symbol",
+  "title" : "claims",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/hasclaims\/claims"
+},
+"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/HasClaims/customClaims": {
+  "abstract" : [
+    {
+      "text" : "Returns the collection of custom claims this object contains.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "var"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "customClaims"
+    },
+    {
+      "kind" : "text",
+      "text" : ": ["
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:SS",
+      "text" : "String"
+    },
+    {
+      "kind" : "text",
+      "text" : "]"
+    }
+  ],
+  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/HasClaims\/customClaims",
+  "kind" : "symbol",
+  "required" : true,
+  "role" : "symbol",
+  "title" : "customClaims",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/hasclaims\/customclaims"
+},
+"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/HasClaims/subject": {
+  "abstract" : [
+    {
+      "text" : "The subject of the resource, if available.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "var"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "subject"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:SS",
+      "text" : "String"
+    },
+    {
+      "kind" : "text",
+      "text" : "?"
+    }
+  ],
+  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/HasClaims\/subject",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "subject",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/hasclaims\/subject"
+},
+"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/JWK": {
+  "abstract" : [
+    {
+      "text" : "Describes an individual key from an authorization server, which can be used to validate tokens or encrypt content.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "struct"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "JWK"
+    }
+  ],
+  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/JWK",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "JWK"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "JWK",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/jwk"
+},
+"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/JWKS": {
+  "abstract" : [
+    {
+      "text" : "Describes the collection of keys associated with an authorization server.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "struct"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "JWKS"
+    }
+  ],
+  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/JWKS",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "JWKS"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "JWKS",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/jwks"
+},
+"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/JWT": {
+  "abstract" : [
+    {
+      "text" : "Represents the contents of a JWT token, providing access to its payload contents.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "struct"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "JWT"
+    }
+  ],
+  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/JWT",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "JWT"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "JWT",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/jwt"
+},
+"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/JWT/Expires-Implementations": {
+  "abstract" : [
+
+  ],
+  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/JWT\/Expires-Implementations",
+  "kind" : "article",
+  "role" : "collectionGroup",
+  "title" : "Expires Implementations",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/jwt\/expires-implementations"
+},
+"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/JWT/HasClaims-Implementations": {
+  "abstract" : [
+
+  ],
+  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/JWT\/HasClaims-Implementations",
+  "kind" : "article",
+  "role" : "collectionGroup",
+  "title" : "HasClaims Implementations",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/jwt\/hasclaims-implementations"
+},
+"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/JWT/Header-swift.struct": {
+  "abstract" : [
+    {
+      "text" : "JWT header information describing the contents of the token.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "struct"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "Header"
+    }
+  ],
+  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/JWT\/Header-swift.struct",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "Header"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "JWT.Header",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/jwt\/header-swift.struct"
+},
+"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/JWT/RawRepresentable-Implementations": {
+  "abstract" : [
+
+  ],
+  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/JWT\/RawRepresentable-Implementations",
+  "kind" : "article",
+  "role" : "collectionGroup",
+  "title" : "RawRepresentable Implementations",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/jwt\/rawrepresentable-implementations"
+},
+"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/JWT/RawValue-swift.typealias": {
+  "abstract" : [
+    {
+      "text" : "The raw type that can be used to represent all values of the conforming",
+      "type" : "text"
+    },
+    {
+      "text" : " ",
+      "type" : "text"
+    },
+    {
+      "text" : "type.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "typealias"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "RawValue"
+    }
+  ],
+  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/JWT\/RawValue-swift.typealias",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "RawValue"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "JWT.RawValue",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/jwt\/rawvalue-swift.typealias"
+},
+"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/JWT/audience": {
+  "abstract" : [
+    {
+      "text" : "The intended audience for this token.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "var"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "audience"
+    },
+    {
+      "kind" : "text",
+      "text" : ": ["
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:SS",
+      "text" : "String"
+    },
+    {
+      "kind" : "text",
+      "text" : "]?"
+    }
+  ],
+  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/JWT\/audience",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "audience",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/jwt\/audience"
+},
+"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/JWT/authenticationContext": {
+  "abstract" : [
+    {
+      "text" : "The authentication context class reference.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "var"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "authenticationContext"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:SS",
+      "text" : "String"
+    },
+    {
+      "kind" : "text",
+      "text" : "?"
+    }
+  ],
+  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/JWT\/authenticationContext",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "authenticationContext",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/jwt\/authenticationcontext"
+},
+"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/JWT/authenticationMethods-8d0og": {
+  "abstract" : [
+    {
+      "text" : "The array of authentication methods.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "var"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "authenticationMethods"
+    },
+    {
+      "kind" : "text",
+      "text" : ": ["
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:SS",
+      "text" : "String"
+    },
+    {
+      "kind" : "text",
+      "text" : "]?"
+    }
+  ],
+  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/JWT\/authenticationMethods-8d0og",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "authenticationMethods",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/jwt\/authenticationmethods-8d0og"
+},
+"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/JWT/claims": {
+  "abstract" : [
+    {
+      "text" : "The list of standard claims contained within this JWT token.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "var"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "claims"
+    },
+    {
+      "kind" : "text",
+      "text" : ": ["
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:14AuthFoundation5ClaimO",
+      "text" : "Claim"
+    },
+    {
+      "kind" : "text",
+      "text" : "]"
+    }
+  ],
+  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/JWT\/claims",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "claims",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/jwt\/claims"
+},
+"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/JWT/customClaims": {
+  "abstract" : [
+    {
+      "text" : "The list of custom claims contained within this JWT token.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "var"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "customClaims"
+    },
+    {
+      "kind" : "text",
+      "text" : ": ["
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:SS",
+      "text" : "String"
+    },
+    {
+      "kind" : "text",
+      "text" : "]"
+    }
+  ],
+  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/JWT\/customClaims",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "customClaims",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/jwt\/customclaims"
+},
+"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/JWT/expirationTime": {
+  "abstract" : [
+    {
+      "text" : "The date this token will expire.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "var"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "expirationTime"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:10Foundation4DateV",
+      "text" : "Date"
+    },
+    {
+      "kind" : "text",
+      "text" : "?"
+    }
+  ],
+  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/JWT\/expirationTime",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "expirationTime",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/jwt\/expirationtime"
+},
+"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/JWT/expiresIn": {
+  "abstract" : [
+    {
+      "text" : "The time interval in which the token will expire.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "var"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "expiresIn"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "c:@T@NSTimeInterval",
+      "text" : "TimeInterval"
+    }
+  ],
+  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/JWT\/expiresIn",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "expiresIn",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/jwt\/expiresin"
+},
+"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/JWT/header-swift.property": {
+  "abstract" : [
+    {
+      "text" : "The header portion of the JWT token.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "let"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "header"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:14AuthFoundation3JWTV6HeaderV",
+      "text" : "Header"
+    }
+  ],
+  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/JWT\/header-swift.property",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "header",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/jwt\/header-swift.property"
+},
+"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/JWT/init(_:)": {
+  "abstract" : [
+    {
+      "text" : "Designated initializer, accepting the token string.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "identifier",
+      "text" : "init"
+    },
+    {
+      "kind" : "text",
+      "text" : "("
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:SS",
+      "text" : "String"
+    },
+    {
+      "kind" : "text",
+      "text" : ") "
+    },
+    {
+      "kind" : "keyword",
+      "text" : "throws"
+    }
+  ],
+  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/JWT\/init(_:)",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "init(_:)",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/jwt\/init(_:)"
+},
+"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/JWT/init(rawValue:)": {
+  "abstract" : [
+    {
+      "text" : "Creates a new instance with the specified raw value.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "identifier",
+      "text" : "init"
+    },
+    {
+      "kind" : "text",
+      "text" : "?("
+    },
+    {
+      "kind" : "externalParam",
+      "text" : "rawValue"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:14AuthFoundation3JWTV8RawValuea",
+      "text" : "RawValue"
+    },
+    {
+      "kind" : "text",
+      "text" : ")"
+    }
+  ],
+  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/JWT\/init(rawValue:)",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "init(rawValue:)",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/jwt\/init(rawvalue:)"
+},
+"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/JWT/issuedAt": {
+  "abstract" : [
+    {
+      "text" : "The date this token was issued.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "var"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "issuedAt"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:10Foundation4DateV",
+      "text" : "Date"
+    },
+    {
+      "kind" : "text",
+      "text" : "?"
+    }
+  ],
+  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/JWT\/issuedAt",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "issuedAt",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/jwt\/issuedat"
+},
+"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/JWT/issuer": {
+  "abstract" : [
+    {
+      "text" : "The issuer claim for this token.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "var"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "issuer"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:SS",
+      "text" : "String"
+    },
+    {
+      "kind" : "text",
+      "text" : "?"
+    }
+  ],
+  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/JWT\/issuer",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "issuer",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/jwt\/issuer"
+},
+"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/JWT/notBefore": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "var"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "notBefore"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:10Foundation4DateV",
+      "text" : "Date"
+    },
+    {
+      "kind" : "text",
+      "text" : "?"
+    }
+  ],
+  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/JWT\/notBefore",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "notBefore",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/jwt\/notbefore"
+},
+"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/JWT/rawValue-swift.property": {
+  "abstract" : [
+    {
+      "text" : "The raw string representation of this JWT token.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "let"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "rawValue"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:SS",
+      "text" : "String"
+    }
+  ],
+  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/JWT\/rawValue-swift.property",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "rawValue",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/jwt\/rawvalue-swift.property"
+},
+"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/JWT/scope": {
+  "abstract" : [
+    {
+      "text" : "The array of scopes this token is valid for.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "var"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "scope"
+    },
+    {
+      "kind" : "text",
+      "text" : ": ["
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:SS",
+      "text" : "String"
+    },
+    {
+      "kind" : "text",
+      "text" : "]?"
+    }
+  ],
+  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/JWT\/scope",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "scope",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/jwt\/scope"
+},
+"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/JWT/validate(using:)": {
+  "abstract" : [
+    {
+      "text" : "Verifies the JWT token using the given ",
+      "type" : "text"
+    },
+    {
+      "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/JWK",
+      "isActive" : true,
+      "type" : "reference"
+    },
+    {
+      "text" : " key.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "func"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "validate"
+    },
+    {
+      "kind" : "text",
+      "text" : "("
+    },
+    {
+      "kind" : "externalParam",
+      "text" : "using"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:14AuthFoundation4JWKSV",
+      "text" : "JWKS"
+    },
+    {
+      "kind" : "text",
+      "text" : ") "
+    },
+    {
+      "kind" : "keyword",
+      "text" : "throws"
+    },
+    {
+      "kind" : "text",
+      "text" : " -> "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:Sb",
+      "text" : "Bool"
+    }
+  ],
+  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/JWT\/validate(using:)",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "validate(using:)",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/jwt\/validate(using:)"
+},
+"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/JWT/value(_:for:)": {
+  "abstract" : [
+    {
+      "text" : "Returns a claim value from this JWT token, with the given key and expected return type.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "func"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "value"
+    },
+    {
+      "kind" : "text",
+      "text" : "<"
+    },
+    {
+      "kind" : "genericParameter",
+      "text" : "T"
+    },
+    {
+      "kind" : "text",
+      "text" : ">("
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:14AuthFoundation3JWTV5value_3forxSgxm_SStlF1TL_xmfp",
+      "text" : "T"
+    },
+    {
+      "kind" : "text",
+      "text" : ".Type, "
+    },
+    {
+      "kind" : "externalParam",
+      "text" : "for"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:SS",
+      "text" : "String"
+    },
+    {
+      "kind" : "text",
+      "text" : ") -> "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:14AuthFoundation3JWTV5value_3forxSgxm_SStlF1TL_xmfp",
+      "text" : "T"
+    },
+    {
+      "kind" : "text",
+      "text" : "?"
+    }
+  ],
+  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/JWT\/value(_:for:)",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "value(_:for:)",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/jwt\/value(_:for:)"
+}
+}
+}

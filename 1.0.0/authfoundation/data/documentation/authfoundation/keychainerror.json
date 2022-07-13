@@ -1,0 +1,959 @@
+{
+  "abstract" : [
+    {
+      "text" : "Describes errors that may occur when interacting with the keychain.",
+      "type" : "text"
+    }
+  ],
+  "hierarchy" : {
+    "paths" : [
+      [
+        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation"
+      ]
+    ]
+  },
+  "identifier" : {
+    "interfaceLanguage" : "swift",
+    "url" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/KeychainError"
+  },
+  "kind" : "symbol",
+  "metadata" : {
+    "externalID" : "s:14AuthFoundation13KeychainErrorO",
+    "fragments" : [
+      {
+        "kind" : "keyword",
+        "text" : "enum"
+      },
+      {
+        "kind" : "text",
+        "text" : " "
+      },
+      {
+        "kind" : "identifier",
+        "text" : "KeychainError"
+      }
+    ],
+    "modules" : [
+      {
+        "name" : "AuthFoundation"
+      }
+    ],
+    "navigatorTitle" : [
+      {
+        "kind" : "identifier",
+        "text" : "KeychainError"
+      }
+    ],
+    "role" : "symbol",
+    "roleHeading" : "Enumeration",
+    "symbolKind" : "enum",
+    "title" : "KeychainError"
+  },
+  "primaryContentSections" : [
+    {
+      "declarations" : [
+        {
+          "languages" : [
+            "swift"
+          ],
+          "platforms" : [
+            "macOS"
+          ],
+          "tokens" : [
+            {
+              "kind" : "keyword",
+              "text" : "enum"
+            },
+            {
+              "kind" : "text",
+              "text" : " "
+            },
+            {
+              "kind" : "identifier",
+              "text" : "KeychainError"
+            }
+          ]
+        }
+      ],
+      "kind" : "declarations"
+    }
+  ],
+  "relationshipsSections" : [
+    {
+      "identifiers" : [
+        "doc:\/\/com.okta.mobile.authfoundation\/10Foundation14LocalizedErrorP",
+        "doc:\/\/com.okta.mobile.authfoundation\/s5ErrorP",
+        "doc:\/\/com.okta.mobile.authfoundation\/s8SendableP"
+      ],
+      "kind" : "relationships",
+      "title" : "Conforms To",
+      "type" : "conformsTo"
+    }
+  ],
+  "schemaVersion" : {
+    "major" : 0,
+    "minor" : 2,
+    "patch" : 0
+  },
+  "sections" : [
+
+  ],
+  "seeAlsoSections" : [
+    {
+      "generated" : true,
+      "identifiers" : [
+        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/APIClientError",
+        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/OAuth2Error",
+        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/OAuth2ServerError",
+        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/OktaAPIError",
+        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/CredentialError",
+        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/TokenError",
+        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/JWTError",
+        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/AuthenticationError"
+      ],
+      "title" : "Error Types"
+    }
+  ],
+  "topicSections" : [
+    {
+      "identifiers" : [
+        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/KeychainError\/accessControlInvalid(code:description:)",
+        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/KeychainError\/cannotDelete(code:)",
+        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/KeychainError\/cannotGet(code:)",
+        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/KeychainError\/cannotList(code:)",
+        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/KeychainError\/cannotSave(code:)",
+        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/KeychainError\/cannotUpdate(code:)",
+        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/KeychainError\/invalidAccessibilityOption",
+        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/KeychainError\/invalidFormat",
+        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/KeychainError\/missingAccount",
+        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/KeychainError\/missingAttribute",
+        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/KeychainError\/missingValueData",
+        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/KeychainError\/notFound"
+      ],
+      "title" : "Enumeration Cases"
+    },
+    {
+      "generated" : true,
+      "identifiers" : [
+        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/KeychainError\/Error-Implementations",
+        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/KeychainError\/LocalizedError-Implementations"
+      ],
+      "title" : "Default Implementations"
+    }
+  ],
+  "variants" : [
+    {
+      "paths" : [
+        "\/documentation\/authfoundation\/keychainerror"
+      ],
+      "traits" : [
+        {
+          "interfaceLanguage" : "swift"
+        }
+      ]
+    }
+  ]
+, 
+"references": {
+"doc://com.okta.mobile.authfoundation/10Foundation14LocalizedErrorP": {
+  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/10Foundation14LocalizedErrorP",
+  "title" : "Foundation.LocalizedError",
+  "type" : "unresolvable"
+},
+"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation": {
+  "abstract" : [
+    {
+      "text" : "Library that provides foundational features used by Okta’s authentication libraries, as well as APIs used to work with tokens and user credentials.",
+      "type" : "text"
+    }
+  ],
+  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation",
+  "kind" : "symbol",
+  "role" : "collection",
+  "title" : "AuthFoundation",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation"
+},
+"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/APIClientError": {
+  "abstract" : [
+    {
+      "text" : "Errors that may occur at the API or network level.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "enum"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "APIClientError"
+    }
+  ],
+  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/APIClientError",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "APIClientError"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "APIClientError",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/apiclienterror"
+},
+"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/AuthenticationError": {
+  "abstract" : [
+    {
+      "text" : "Errors that may be generated during the process of authenticating with a variety of authentication flows.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "enum"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "AuthenticationError"
+    }
+  ],
+  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/AuthenticationError",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "AuthenticationError"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "AuthenticationError",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/authenticationerror"
+},
+"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/CredentialError": {
+  "abstract" : [
+    {
+      "text" : "Errors that may occur in the process of managing credentials.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "enum"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "CredentialError"
+    }
+  ],
+  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/CredentialError",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "CredentialError"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "CredentialError",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/credentialerror"
+},
+"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/JWTError": {
+  "abstract" : [
+    {
+      "text" : "Describes errors that may occur with parsing or validating JWT tokens.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "enum"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "JWTError"
+    }
+  ],
+  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/JWTError",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "JWTError"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "JWTError",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/jwterror"
+},
+"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/KeychainError": {
+  "abstract" : [
+    {
+      "text" : "Describes errors that may occur when interacting with the keychain.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "enum"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "KeychainError"
+    }
+  ],
+  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/KeychainError",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "KeychainError"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "KeychainError",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/keychainerror"
+},
+"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/KeychainError/Error-Implementations": {
+  "abstract" : [
+
+  ],
+  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/KeychainError\/Error-Implementations",
+  "kind" : "article",
+  "role" : "collectionGroup",
+  "title" : "Error Implementations",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/keychainerror\/error-implementations"
+},
+"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/KeychainError/LocalizedError-Implementations": {
+  "abstract" : [
+
+  ],
+  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/KeychainError\/LocalizedError-Implementations",
+  "kind" : "article",
+  "role" : "collectionGroup",
+  "title" : "LocalizedError Implementations",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/keychainerror\/localizederror-implementations"
+},
+"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/KeychainError/accessControlInvalid(code:description:)": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "case"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "accessControlInvalid"
+    },
+    {
+      "kind" : "text",
+      "text" : "("
+    },
+    {
+      "kind" : "externalParam",
+      "text" : "code"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "c:@T@OSStatus",
+      "text" : "OSStatus"
+    },
+    {
+      "kind" : "text",
+      "text" : ", "
+    },
+    {
+      "kind" : "externalParam",
+      "text" : "description"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:SS",
+      "text" : "String"
+    },
+    {
+      "kind" : "text",
+      "text" : "?)"
+    }
+  ],
+  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/KeychainError\/accessControlInvalid(code:description:)",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "KeychainError.accessControlInvalid(code:description:)",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/keychainerror\/accesscontrolinvalid(code:description:)"
+},
+"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/KeychainError/cannotDelete(code:)": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "case"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "cannotDelete"
+    },
+    {
+      "kind" : "text",
+      "text" : "("
+    },
+    {
+      "kind" : "externalParam",
+      "text" : "code"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "c:@T@OSStatus",
+      "text" : "OSStatus"
+    },
+    {
+      "kind" : "text",
+      "text" : ")"
+    }
+  ],
+  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/KeychainError\/cannotDelete(code:)",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "KeychainError.cannotDelete(code:)",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/keychainerror\/cannotdelete(code:)"
+},
+"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/KeychainError/cannotGet(code:)": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "case"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "cannotGet"
+    },
+    {
+      "kind" : "text",
+      "text" : "("
+    },
+    {
+      "kind" : "externalParam",
+      "text" : "code"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "c:@T@OSStatus",
+      "text" : "OSStatus"
+    },
+    {
+      "kind" : "text",
+      "text" : ")"
+    }
+  ],
+  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/KeychainError\/cannotGet(code:)",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "KeychainError.cannotGet(code:)",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/keychainerror\/cannotget(code:)"
+},
+"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/KeychainError/cannotList(code:)": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "case"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "cannotList"
+    },
+    {
+      "kind" : "text",
+      "text" : "("
+    },
+    {
+      "kind" : "externalParam",
+      "text" : "code"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "c:@T@OSStatus",
+      "text" : "OSStatus"
+    },
+    {
+      "kind" : "text",
+      "text" : ")"
+    }
+  ],
+  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/KeychainError\/cannotList(code:)",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "KeychainError.cannotList(code:)",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/keychainerror\/cannotlist(code:)"
+},
+"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/KeychainError/cannotSave(code:)": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "case"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "cannotSave"
+    },
+    {
+      "kind" : "text",
+      "text" : "("
+    },
+    {
+      "kind" : "externalParam",
+      "text" : "code"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "c:@T@OSStatus",
+      "text" : "OSStatus"
+    },
+    {
+      "kind" : "text",
+      "text" : ")"
+    }
+  ],
+  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/KeychainError\/cannotSave(code:)",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "KeychainError.cannotSave(code:)",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/keychainerror\/cannotsave(code:)"
+},
+"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/KeychainError/cannotUpdate(code:)": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "case"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "cannotUpdate"
+    },
+    {
+      "kind" : "text",
+      "text" : "("
+    },
+    {
+      "kind" : "externalParam",
+      "text" : "code"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "c:@T@OSStatus",
+      "text" : "OSStatus"
+    },
+    {
+      "kind" : "text",
+      "text" : ")"
+    }
+  ],
+  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/KeychainError\/cannotUpdate(code:)",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "KeychainError.cannotUpdate(code:)",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/keychainerror\/cannotupdate(code:)"
+},
+"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/KeychainError/invalidAccessibilityOption": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "case"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "invalidAccessibilityOption"
+    }
+  ],
+  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/KeychainError\/invalidAccessibilityOption",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "KeychainError.invalidAccessibilityOption",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/keychainerror\/invalidaccessibilityoption"
+},
+"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/KeychainError/invalidFormat": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "case"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "invalidFormat"
+    }
+  ],
+  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/KeychainError\/invalidFormat",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "KeychainError.invalidFormat",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/keychainerror\/invalidformat"
+},
+"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/KeychainError/missingAccount": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "case"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "missingAccount"
+    }
+  ],
+  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/KeychainError\/missingAccount",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "KeychainError.missingAccount",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/keychainerror\/missingaccount"
+},
+"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/KeychainError/missingAttribute": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "case"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "missingAttribute"
+    }
+  ],
+  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/KeychainError\/missingAttribute",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "KeychainError.missingAttribute",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/keychainerror\/missingattribute"
+},
+"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/KeychainError/missingValueData": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "case"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "missingValueData"
+    }
+  ],
+  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/KeychainError\/missingValueData",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "KeychainError.missingValueData",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/keychainerror\/missingvaluedata"
+},
+"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/KeychainError/notFound": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "case"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "notFound"
+    }
+  ],
+  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/KeychainError\/notFound",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "KeychainError.notFound",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/keychainerror\/notfound"
+},
+"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/OAuth2Error": {
+  "abstract" : [
+    {
+      "text" : "Errors that may occur when interacting with OAuth2 endpoints.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "enum"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "OAuth2Error"
+    }
+  ],
+  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/OAuth2Error",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "OAuth2Error"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "OAuth2Error",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/oauth2error"
+},
+"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/OAuth2ServerError": {
+  "abstract" : [
+    {
+      "text" : "Describes errors reported from an OAuth2 server.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "struct"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "OAuth2ServerError"
+    }
+  ],
+  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/OAuth2ServerError",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "OAuth2ServerError"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "OAuth2ServerError",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/oauth2servererror"
+},
+"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/OktaAPIError": {
+  "abstract" : [
+    {
+      "text" : "Describes errors that may be reported from an Okta API endpoint.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "struct"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "OktaAPIError"
+    }
+  ],
+  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/OktaAPIError",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "OktaAPIError"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "OktaAPIError",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/oktaapierror"
+},
+"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/TokenError": {
+  "abstract" : [
+    {
+      "text" : "Describes errors that may occur when working with tokens.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "enum"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "TokenError"
+    }
+  ],
+  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/TokenError",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "TokenError"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "TokenError",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/tokenerror"
+},
+"doc://com.okta.mobile.authfoundation/s5ErrorP": {
+  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/s5ErrorP",
+  "title" : "Swift.Error",
+  "type" : "unresolvable"
+},
+"doc://com.okta.mobile.authfoundation/s8SendableP": {
+  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/s8SendableP",
+  "title" : "Swift.Sendable",
+  "type" : "unresolvable"
+}
+}
+}
