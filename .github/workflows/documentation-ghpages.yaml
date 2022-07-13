@@ -4,6 +4,8 @@ on:
   push:
     branches:
       - master
+  tags:
+      - '*'
 
 env:
   DEVELOPER_DIR: /Applications/Xcode_13.3.app/Contents/Developer
