@@ -4,9 +4,8 @@ on:
   push:
     branches:
       - master
-  pull_request:
-    branches:
-      - master
+  tags:
+      - '*'
 
 env:
   DEVELOPER_DIR: /Applications/Xcode_13.3.app/Contents/Developer
@@ -39,11 +38,10 @@ jobs:
     - name: Generate Documentation
       run: |
         set +e
-        #VERSION=$(git describe --tags 2>/dev/null)
-        #if [[ $? -ne 0 ]]; then
-        #    VERSION=development
-        #fi
-        VERSION=1.0.0
+        VERSION=$(git describe --tags 2>/dev/null)
+        if [[ $? -ne 0 ]]; then
+            VERSION=development
+        fi
         set -e
 
         export DOCC_JSON_PRETTYPRINT=YES
