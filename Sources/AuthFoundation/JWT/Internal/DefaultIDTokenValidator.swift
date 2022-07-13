@@ -40,24 +40,29 @@ struct DefaultIDTokenValidator: IDTokenValidator {
                     throw JWTError.invalidIssuer
                 }
             case .audience:
-                guard token[.audience] == clientId else {
+                guard token[.audience] == clientId
+                else {
                     throw JWTError.invalidAudience
                 }
             case .scheme:
-                guard tokenIssuer.scheme == "https" else {
+                guard tokenIssuer.scheme == "https"
+                else {
                     throw JWTError.issuerRequiresHTTPS
                 }
             case .algorithm:
-                guard token.header.algorithm == .rs256 else {
+                guard token.header.algorithm == .rs256
+                else {
                     throw JWTError.unsupportedAlgorithm(token.header.algorithm)
                 }
             case .expirationTime:
                 guard let expirationTime = token.expirationTime,
-                      expirationTime > Date.nowCoordinated else {
+                      expirationTime > Date.nowCoordinated
+                else {
                     throw JWTError.expired
                 }
             case .nonce:
-                guard token["nonce"] == context?.nonce else {
+                guard token["nonce"] == context?.nonce
+                else {
                     throw JWTError.nonceMismatch
                 }
             case .issuedAtTime:
@@ -67,13 +72,16 @@ struct DefaultIDTokenValidator: IDTokenValidator {
                     throw JWTError.issuedAtTimeExceedsGraceInterval
                 }
             case .maxAge:
-                if let maxAge = context?.maxAge, let issuedAt = token.issuedAt {
-                    guard let authTime = token.authTime else {
+                if let maxAge = context?.maxAge,
+                   let issuedAt = token.issuedAt {
+                    guard let authTime = token.authTime
+                    else {
                         throw JWTError.invalidAuthenticationTime
                     }
                     
                     let elapsedTime = issuedAt.timeIntervalSince(authTime)
-                    guard elapsedTime > 0 && elapsedTime <= maxAge else {
+                    guard elapsedTime > 0 && elapsedTime <= maxAge
+                    else {
                         throw JWTError.exceedsMaxAge
                     }
                 }
