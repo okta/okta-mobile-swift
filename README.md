@@ -39,6 +39,7 @@ The latest release can always be found on the [releases page][github-releases].
  
 If you run into problems using the SDK, you can:
  
+* Review the [OktaIdx API documentation][oktaidx-docs]
 * Ask questions on the [Okta Developer Forums][devforum]
 * Post [issues][github-issues] here on GitHub (for code errors)
 
@@ -647,6 +648,7 @@ We are happy to accept contributions and PRs! Please see the [contribution guide
 [devforum]: https://devforum.okta.com/
 [swiftdocs]: https://developer.okta.com/okta-idx-swift/latest/
 [lang-landing]: https://developer.okta.com/code/swift/
+[oktaidx-docs]: https://okta.github.io/okta-idx-swift/development/oktaidx/
 [github-issues]: https://github.com/okta/okta-idx-swift/issues
 [github-releases]: https://github.com/okta/okta-idx-swift/releases
 [Rate Limiting at Okta]: https://developer.okta.com/docs/api/getting_started/rate-limits

@@ -24,28 +24,43 @@ jobs:
     - uses: actions/checkout@master
     - name: Prepare directory
       run: |
-        mkdir -p docs/development
-    - name: OktaIdx
+        mkdir -p .build/symbol-graphs
+    - name: Build Symbol Graphs
       run: |
-        swift package \
-          --allow-writing-to-directory docs \
-          generate-documentation \
-          --target OktaIdx \
-          --disable-indexing \
-          --transform-for-static-hosting \
-          --hosting-base-path PACKAGENAME \
-          --output-path docs/development/OktaIdx
-        find docs/development/OktaIdx -type f | while read file; do \
-          perl -pi -e "s#PACKAGENAME#okta-idx-swift/development/OktaIdx#g" "$file"; \
-        done
-        find docs/development/OktaIdx -type f -name '*.js' | while read file; do \
-          perl -pi -e "s#\\{\\{BASE_PATH\\}\\}#okta-idx-swift/development/OktaIdx#g" "$file"; \
-          perl -pi -e 's#n\+"(theme-settings.json)"#"/okta-idx-swift/development/OktaIdx/$1"#g' "$file"; \
-        done
-        perl -pi -e "s#/(js|css)#/okta-idx-swift/development/OktaIdx/\$1#g" docs/development/OktaIdx/index.html
+        swift build \
+            --target OktaIdx \
+            -Xswiftc -emit-symbol-graph -Xswiftc -emit-symbol-graph -Xswiftc -emit-symbol-graph-dir -Xswiftc .build/symbol-graphs
+    - name: Generate Documentation
+      run: |
+        set +e
+        VERSION=$(git describe --tags 2>/dev/null)
+        if [[ $? -ne 0 ]]; then
+            VERSION=development
+        fi
+        set -e
+
+        export DOCC_JSON_PRETTYPRINT=YES
+
+        xcrun docc convert \
+            Sources/OktaIdx/OktaIdx.docc \
+            --enable-inherited-docs \
+            --output-path OktaIdx.doccarchive \
+            --fallback-display-name OktaIdx \
+            --fallback-bundle-identifier com.okta.mobile.oktaidx \
+            --fallback-bundle-version $VERSION \
+            --additional-symbol-graph-dir .build/symbol-graphs
+
+        mkdir -p docs/$VERSION
+
+        $(xcrun --find docc) process-archive transform-for-static-hosting \
+            OktaIdx.doccarchive \
+            --hosting-base-path okta-idx-swift/$VERSION/oktaidx \
+            --output-path docs/$VERSION/oktaidx
+        sed -I -e "s#<head>#<head><meta http-equiv='refresh' content='0;url=./documentation/oktaidx/'>#" \
+            docs/$VERSION/oktaidx/index.html
     - name: Deploy documentation to Github Pages
       uses: peaceiris/actions-gh-pages@v3
       with:
         github_token: ${{ secrets.GITHUB_TOKEN }}
         publish_dir: ./docs
-        keep_files: true
+        keep_files: false
