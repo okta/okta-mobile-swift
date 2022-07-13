@@ -34,6 +34,7 @@ The latest release can always be found on the [releases page][github-releases].
 
 If you run into problems using the SDK, you can:
 
+* Review the API documentation for [AuthFoundation][authfoundation-docs], [OktaOAuth2][oktaoauth2-docs], and [WebAuthenticationUI][webauthenticationui-docs]
 * Ask questions on the [Okta Developer Forums][devforum]
 * Post [issues][github-issues] here on GitHub (for code errors)
 
@@ -47,9 +48,9 @@ This SDK consists of several different libraries, each with detailed documentati
     OktaOAuth2-->WebAuthenticationUI;
 ```
 
-- AuthFoundation -- Common classes for managing credentials and used as a foundation for other libraries.
-- OktaOAuth2 -- OAuth2 authentication capabilities for advanced use-cases.
-- WebAuthenticationUI -- Authenticate users using web-based OIDC flows.
+- [AuthFoundation][authfoundation-docs] -- Common classes for managing credentials and used as a foundation for other libraries.
+- [OktaOAuth2][oktaoauth2-docs] -- OAuth2 authentication capabilities for advanced use-cases.
+- [WebAuthenticationUI][webauthenticationui-docs] -- Authenticate users using web-based OIDC flows.
 
 This SDK enables you to build or support a myriad of different authentication flows and approaches.
 
@@ -386,6 +387,9 @@ We are happy to accept contributions and PRs! Please see the [contribution guide
 [lang-landing]: https://developer.okta.com/code/swift/
 [github-issues]: https://github.com/okta/okta-mobile-swift/issues
 [github-releases]: https://github.com/okta/okta-mobile-swift/releases
+[authfoundation-docs]: https://okta.github.io/okta-mobile-swift/development/authfoundation/
+[oktaoauth2-docs]: https://okta.github.io/okta-mobile-swift/development/oktaoauth2/
+[webauthenticationui-docs]: https://okta.github.io/okta-mobile-swift/development/webauthenticationui/
 [Rate Limiting at Okta]: https://developer.okta.com/docs/api/getting_started/rate-limits
 [okta-library-versioning]: https://developer.okta.com/code/library-versions
 [support-policy]: #support-policy
