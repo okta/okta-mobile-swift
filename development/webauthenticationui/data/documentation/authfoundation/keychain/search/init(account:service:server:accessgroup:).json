@@ -1,1 +1,470 @@
-{"primaryContentSections":[{"kind":"declarations","declarations":[{"tokens":[{"kind":"keyword","text":"init"},{"kind":"text","text":"("},{"kind":"externalParam","text":"account"},{"kind":"text","text":": "},{"kind":"typeIdentifier","text":"String","preciseIdentifier":"s:SS"},{"kind":"text","text":"? = nil, "},{"kind":"externalParam","text":"service"},{"kind":"text","text":": "},{"kind":"typeIdentifier","text":"String","preciseIdentifier":"s:SS"},{"kind":"text","text":"? = nil, "},{"kind":"externalParam","text":"server"},{"kind":"text","text":": "},{"kind":"typeIdentifier","text":"String","preciseIdentifier":"s:SS"},{"kind":"text","text":"? = nil, "},{"kind":"externalParam","text":"accessGroup"},{"kind":"text","text":": "},{"kind":"typeIdentifier","text":"String","preciseIdentifier":"s:SS"},{"kind":"text","text":"? = nil)"}],"languages":["swift"],"platforms":["macOS"]}]},{"kind":"parameters","parameters":[{"name":"account","content":[{"type":"paragraph","inlineContent":[{"type":"text","text":"The account to search for, or "},{"type":"codeVoice","code":"nil"},{"type":"text","text":" to return all accounts."}]}]},{"name":"service","content":[{"type":"paragraph","inlineContent":[{"type":"text","text":"The service to search for, or "},{"type":"codeVoice","code":"nil"},{"type":"text","text":" to return all services."}]}]},{"name":"accessGroup","content":[{"type":"paragraph","inlineContent":[{"type":"text","text":"The access group to search within, or "},{"type":"codeVoice","code":"nil"},{"type":"text","text":" to return all access groups."}]}]}]}],"schemaVersion":{"major":0,"minor":2,"patch":0},"sections":[],"variants":[{"paths":["\/documentation\/authfoundation\/keychain\/search\/init(account:service:server:accessgroup:)"],"traits":[{"interfaceLanguage":"swift"}]}],"identifier":{"url":"doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/AuthFoundation\/Keychain\/Search\/init(account:service:server:accessGroup:)","interfaceLanguage":"swift"},"abstract":[{"type":"text","text":"Designated initializer."}],"kind":"symbol","metadata":{"fragments":[{"kind":"identifier","text":"init"},{"kind":"text","text":"("},{"kind":"externalParam","text":"account"},{"kind":"text","text":": "},{"kind":"typeIdentifier","text":"String","preciseIdentifier":"s:SS"},{"kind":"text","text":"?, "},{"kind":"externalParam","text":"service"},{"kind":"text","text":": "},{"kind":"typeIdentifier","text":"String","preciseIdentifier":"s:SS"},{"kind":"text","text":"?, "},{"kind":"externalParam","text":"server"},{"kind":"text","text":": "},{"kind":"typeIdentifier","text":"String","preciseIdentifier":"s:SS"},{"kind":"text","text":"?, "},{"kind":"externalParam","text":"accessGroup"},{"kind":"text","text":": "},{"kind":"typeIdentifier","text":"String","preciseIdentifier":"s:SS"},{"kind":"text","text":"?)"}],"title":"init(account:service:server:accessGroup:)","roleHeading":"Initializer","role":"symbol","symbolKind":"init","externalID":"s:14AuthFoundation8KeychainV6SearchV7account7service6server11accessGroupAESSSg_A3Jtcfc","modules":[{"name":"AuthFoundation"}]},"hierarchy":{"paths":[["doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/AuthFoundation","doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/AuthFoundation\/Keychain","doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/AuthFoundation\/Keychain\/Search"]]},"references":{"doc://com.okta.mobile.webauthenticationui/documentation/AuthFoundation/Keychain/Search/init(account:service:server:accessGroup:)":{"role":"symbol","title":"init(account:service:server:accessGroup:)","fragments":[{"kind":"identifier","text":"init"},{"kind":"text","text":"("},{"kind":"externalParam","text":"account"},{"kind":"text","text":": "},{"kind":"typeIdentifier","text":"String","preciseIdentifier":"s:SS"},{"kind":"text","text":"?, "},{"kind":"externalParam","text":"service"},{"kind":"text","text":": "},{"kind":"typeIdentifier","text":"String","preciseIdentifier":"s:SS"},{"kind":"text","text":"?, "},{"kind":"externalParam","text":"server"},{"kind":"text","text":": "},{"kind":"typeIdentifier","text":"String","preciseIdentifier":"s:SS"},{"kind":"text","text":"?, "},{"kind":"externalParam","text":"accessGroup"},{"kind":"text","text":": "},{"kind":"typeIdentifier","text":"String","preciseIdentifier":"s:SS"},{"kind":"text","text":"?)"}],"abstract":[{"type":"text","text":"Designated initializer."}],"identifier":"doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/AuthFoundation\/Keychain\/Search\/init(account:service:server:accessGroup:)","kind":"symbol","type":"topic","url":"\/documentation\/authfoundation\/keychain\/search\/init(account:service:server:accessgroup:)"},"doc://com.okta.mobile.webauthenticationui/documentation/AuthFoundation/Keychain/Search":{"role":"symbol","title":"Keychain.Search","fragments":[{"kind":"keyword","text":"struct"},{"kind":"text","text":" "},{"kind":"identifier","text":"Search"}],"abstract":[{"type":"text","text":"Defines a search for keychain items."}],"identifier":"doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/AuthFoundation\/Keychain\/Search","kind":"symbol","type":"topic","navigatorTitle":[{"kind":"identifier","text":"Search"}],"url":"\/documentation\/authfoundation\/keychain\/search"},"doc://com.okta.mobile.webauthenticationui/documentation/AuthFoundation/Keychain":{"role":"symbol","title":"Keychain","fragments":[{"kind":"keyword","text":"struct"},{"kind":"text","text":" "},{"kind":"identifier","text":"Keychain"}],"abstract":[{"type":"text","text":"Defines convenience mechanisms for interacting with the keychain, including searching, creating, and deleting keychain items."}],"identifier":"doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/AuthFoundation\/Keychain","kind":"symbol","type":"topic","navigatorTitle":[{"kind":"identifier","text":"Keychain"}],"url":"\/documentation\/authfoundation\/keychain"},"doc://com.okta.mobile.webauthenticationui/documentation/AuthFoundation":{"role":"collection","title":"AuthFoundation","abstract":[],"identifier":"doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/AuthFoundation","kind":"symbol","type":"topic","url":"\/documentation\/authfoundation"}}}
+{
+  "abstract" : [
+    {
+      "text" : "Designated initializer.",
+      "type" : "text"
+    }
+  ],
+  "hierarchy" : {
+    "paths" : [
+      [
+        "doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/AuthFoundation",
+        "doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/AuthFoundation\/Keychain",
+        "doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/AuthFoundation\/Keychain\/Search"
+      ]
+    ]
+  },
+  "identifier" : {
+    "interfaceLanguage" : "swift",
+    "url" : "doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/AuthFoundation\/Keychain\/Search\/init(account:service:server:accessGroup:)"
+  },
+  "kind" : "symbol",
+  "metadata" : {
+    "externalID" : "s:14AuthFoundation8KeychainV6SearchV7account7service6server11accessGroupAESSSg_A3Jtcfc",
+    "fragments" : [
+      {
+        "kind" : "identifier",
+        "text" : "init"
+      },
+      {
+        "kind" : "text",
+        "text" : "("
+      },
+      {
+        "kind" : "externalParam",
+        "text" : "account"
+      },
+      {
+        "kind" : "text",
+        "text" : ": "
+      },
+      {
+        "kind" : "typeIdentifier",
+        "preciseIdentifier" : "s:SS",
+        "text" : "String"
+      },
+      {
+        "kind" : "text",
+        "text" : "?, "
+      },
+      {
+        "kind" : "externalParam",
+        "text" : "service"
+      },
+      {
+        "kind" : "text",
+        "text" : ": "
+      },
+      {
+        "kind" : "typeIdentifier",
+        "preciseIdentifier" : "s:SS",
+        "text" : "String"
+      },
+      {
+        "kind" : "text",
+        "text" : "?, "
+      },
+      {
+        "kind" : "externalParam",
+        "text" : "server"
+      },
+      {
+        "kind" : "text",
+        "text" : ": "
+      },
+      {
+        "kind" : "typeIdentifier",
+        "preciseIdentifier" : "s:SS",
+        "text" : "String"
+      },
+      {
+        "kind" : "text",
+        "text" : "?, "
+      },
+      {
+        "kind" : "externalParam",
+        "text" : "accessGroup"
+      },
+      {
+        "kind" : "text",
+        "text" : ": "
+      },
+      {
+        "kind" : "typeIdentifier",
+        "preciseIdentifier" : "s:SS",
+        "text" : "String"
+      },
+      {
+        "kind" : "text",
+        "text" : "?)"
+      }
+    ],
+    "modules" : [
+      {
+        "name" : "AuthFoundation"
+      }
+    ],
+    "role" : "symbol",
+    "roleHeading" : "Initializer",
+    "symbolKind" : "init",
+    "title" : "init(account:service:server:accessGroup:)"
+  },
+  "primaryContentSections" : [
+    {
+      "declarations" : [
+        {
+          "languages" : [
+            "swift"
+          ],
+          "platforms" : [
+            "macOS"
+          ],
+          "tokens" : [
+            {
+              "kind" : "keyword",
+              "text" : "init"
+            },
+            {
+              "kind" : "text",
+              "text" : "("
+            },
+            {
+              "kind" : "externalParam",
+              "text" : "account"
+            },
+            {
+              "kind" : "text",
+              "text" : ": "
+            },
+            {
+              "kind" : "typeIdentifier",
+              "preciseIdentifier" : "s:SS",
+              "text" : "String"
+            },
+            {
+              "kind" : "text",
+              "text" : "? = nil, "
+            },
+            {
+              "kind" : "externalParam",
+              "text" : "service"
+            },
+            {
+              "kind" : "text",
+              "text" : ": "
+            },
+            {
+              "kind" : "typeIdentifier",
+              "preciseIdentifier" : "s:SS",
+              "text" : "String"
+            },
+            {
+              "kind" : "text",
+              "text" : "? = nil, "
+            },
+            {
+              "kind" : "externalParam",
+              "text" : "server"
+            },
+            {
+              "kind" : "text",
+              "text" : ": "
+            },
+            {
+              "kind" : "typeIdentifier",
+              "preciseIdentifier" : "s:SS",
+              "text" : "String"
+            },
+            {
+              "kind" : "text",
+              "text" : "? = nil, "
+            },
+            {
+              "kind" : "externalParam",
+              "text" : "accessGroup"
+            },
+            {
+              "kind" : "text",
+              "text" : ": "
+            },
+            {
+              "kind" : "typeIdentifier",
+              "preciseIdentifier" : "s:SS",
+              "text" : "String"
+            },
+            {
+              "kind" : "text",
+              "text" : "? = nil)"
+            }
+          ]
+        }
+      ],
+      "kind" : "declarations"
+    },
+    {
+      "kind" : "parameters",
+      "parameters" : [
+        {
+          "content" : [
+            {
+              "inlineContent" : [
+                {
+                  "text" : "The account to search for, or ",
+                  "type" : "text"
+                },
+                {
+                  "code" : "nil",
+                  "type" : "codeVoice"
+                },
+                {
+                  "text" : " to return all accounts.",
+                  "type" : "text"
+                }
+              ],
+              "type" : "paragraph"
+            }
+          ],
+          "name" : "account"
+        },
+        {
+          "content" : [
+            {
+              "inlineContent" : [
+                {
+                  "text" : "The service to search for, or ",
+                  "type" : "text"
+                },
+                {
+                  "code" : "nil",
+                  "type" : "codeVoice"
+                },
+                {
+                  "text" : " to return all services.",
+                  "type" : "text"
+                }
+              ],
+              "type" : "paragraph"
+            }
+          ],
+          "name" : "service"
+        },
+        {
+          "content" : [
+            {
+              "inlineContent" : [
+                {
+                  "text" : "The access group to search within, or ",
+                  "type" : "text"
+                },
+                {
+                  "code" : "nil",
+                  "type" : "codeVoice"
+                },
+                {
+                  "text" : " to return all access groups.",
+                  "type" : "text"
+                }
+              ],
+              "type" : "paragraph"
+            }
+          ],
+          "name" : "accessGroup"
+        }
+      ]
+    }
+  ],
+  "schemaVersion" : {
+    "major" : 0,
+    "minor" : 2,
+    "patch" : 0
+  },
+  "sections" : [
+
+  ],
+  "variants" : [
+    {
+      "paths" : [
+        "\/documentation\/authfoundation\/keychain\/search\/init(account:service:server:accessgroup:)"
+      ],
+      "traits" : [
+        {
+          "interfaceLanguage" : "swift"
+        }
+      ]
+    }
+  ]
+, 
+"references": {
+"doc://com.okta.mobile.webauthenticationui/documentation/AuthFoundation": {
+  "abstract" : [
+
+  ],
+  "identifier" : "doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/AuthFoundation",
+  "kind" : "symbol",
+  "role" : "collection",
+  "title" : "AuthFoundation",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation"
+},
+"doc://com.okta.mobile.webauthenticationui/documentation/AuthFoundation/Keychain": {
+  "abstract" : [
+    {
+      "text" : "Defines convenience mechanisms for interacting with the keychain, including searching, creating, and deleting keychain items.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "struct"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "Keychain"
+    }
+  ],
+  "identifier" : "doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/AuthFoundation\/Keychain",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "Keychain"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "Keychain",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/keychain"
+},
+"doc://com.okta.mobile.webauthenticationui/documentation/AuthFoundation/Keychain/Search": {
+  "abstract" : [
+    {
+      "text" : "Defines a search for keychain items.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "struct"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "Search"
+    }
+  ],
+  "identifier" : "doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/AuthFoundation\/Keychain\/Search",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "Search"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "Keychain.Search",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/keychain\/search"
+},
+"doc://com.okta.mobile.webauthenticationui/documentation/AuthFoundation/Keychain/Search/init(account:service:server:accessGroup:)": {
+  "abstract" : [
+    {
+      "text" : "Designated initializer.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "identifier",
+      "text" : "init"
+    },
+    {
+      "kind" : "text",
+      "text" : "("
+    },
+    {
+      "kind" : "externalParam",
+      "text" : "account"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:SS",
+      "text" : "String"
+    },
+    {
+      "kind" : "text",
+      "text" : "?, "
+    },
+    {
+      "kind" : "externalParam",
+      "text" : "service"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:SS",
+      "text" : "String"
+    },
+    {
+      "kind" : "text",
+      "text" : "?, "
+    },
+    {
+      "kind" : "externalParam",
+      "text" : "server"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:SS",
+      "text" : "String"
+    },
+    {
+      "kind" : "text",
+      "text" : "?, "
+    },
+    {
+      "kind" : "externalParam",
+      "text" : "accessGroup"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:SS",
+      "text" : "String"
+    },
+    {
+      "kind" : "text",
+      "text" : "?)"
+    }
+  ],
+  "identifier" : "doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/AuthFoundation\/Keychain\/Search\/init(account:service:server:accessGroup:)",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "init(account:service:server:accessGroup:)",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/keychain\/search\/init(account:service:server:accessgroup:)"
+}
+}
+}

@@ -1,1 +1,169 @@
-{"primaryContentSections":[{"kind":"declarations","declarations":[{"tokens":[{"kind":"keyword","text":"case"},{"kind":"text","text":" "},{"kind":"identifier","text":"invalidKey"}],"languages":["swift"],"platforms":["macOS"]}]}],"schemaVersion":{"major":0,"minor":2,"patch":0},"sections":[],"variants":[{"paths":["\/documentation\/authfoundation\/jwterror\/invalidkey"],"traits":[{"interfaceLanguage":"swift"}]}],"identifier":{"url":"doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/AuthFoundation\/JWTError\/invalidKey","interfaceLanguage":"swift"},"abstract":[{"type":"text","text":"No overview available."}],"kind":"symbol","metadata":{"fragments":[{"kind":"keyword","text":"case"},{"kind":"text","text":" "},{"kind":"identifier","text":"invalidKey"}],"title":"JWTError.invalidKey","roleHeading":"Case","role":"symbol","symbolKind":"case","externalID":"s:14AuthFoundation8JWTErrorO10invalidKeyyA2CmF","modules":[{"name":"AuthFoundation"}]},"hierarchy":{"paths":[["doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/AuthFoundation","doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/AuthFoundation\/JWTError"]]},"references":{"doc://com.okta.mobile.webauthenticationui/documentation/AuthFoundation/JWTError/invalidKey":{"role":"symbol","title":"JWTError.invalidKey","fragments":[{"kind":"keyword","text":"case"},{"kind":"text","text":" "},{"kind":"identifier","text":"invalidKey"}],"abstract":[],"identifier":"doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/AuthFoundation\/JWTError\/invalidKey","kind":"symbol","type":"topic","url":"\/documentation\/authfoundation\/jwterror\/invalidkey"},"doc://com.okta.mobile.webauthenticationui/documentation/AuthFoundation/JWTError":{"role":"symbol","title":"JWTError","fragments":[{"kind":"keyword","text":"enum"},{"kind":"text","text":" "},{"kind":"identifier","text":"JWTError"}],"abstract":[{"type":"text","text":"Describes errors that may occur with parsing or validating JWT tokens."}],"identifier":"doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/AuthFoundation\/JWTError","kind":"symbol","type":"topic","navigatorTitle":[{"kind":"identifier","text":"JWTError"}],"url":"\/documentation\/authfoundation\/jwterror"},"doc://com.okta.mobile.webauthenticationui/documentation/AuthFoundation":{"role":"collection","title":"AuthFoundation","abstract":[],"identifier":"doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/AuthFoundation","kind":"symbol","type":"topic","url":"\/documentation\/authfoundation"}}}
+{
+  "abstract" : [
+    {
+      "text" : "No overview available.",
+      "type" : "text"
+    }
+  ],
+  "hierarchy" : {
+    "paths" : [
+      [
+        "doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/AuthFoundation",
+        "doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/AuthFoundation\/JWTError"
+      ]
+    ]
+  },
+  "identifier" : {
+    "interfaceLanguage" : "swift",
+    "url" : "doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/AuthFoundation\/JWTError\/invalidKey"
+  },
+  "kind" : "symbol",
+  "metadata" : {
+    "externalID" : "s:14AuthFoundation8JWTErrorO10invalidKeyyA2CmF",
+    "fragments" : [
+      {
+        "kind" : "keyword",
+        "text" : "case"
+      },
+      {
+        "kind" : "text",
+        "text" : " "
+      },
+      {
+        "kind" : "identifier",
+        "text" : "invalidKey"
+      }
+    ],
+    "modules" : [
+      {
+        "name" : "AuthFoundation"
+      }
+    ],
+    "role" : "symbol",
+    "roleHeading" : "Case",
+    "symbolKind" : "case",
+    "title" : "JWTError.invalidKey"
+  },
+  "primaryContentSections" : [
+    {
+      "declarations" : [
+        {
+          "languages" : [
+            "swift"
+          ],
+          "platforms" : [
+            "macOS"
+          ],
+          "tokens" : [
+            {
+              "kind" : "keyword",
+              "text" : "case"
+            },
+            {
+              "kind" : "text",
+              "text" : " "
+            },
+            {
+              "kind" : "identifier",
+              "text" : "invalidKey"
+            }
+          ]
+        }
+      ],
+      "kind" : "declarations"
+    }
+  ],
+  "schemaVersion" : {
+    "major" : 0,
+    "minor" : 2,
+    "patch" : 0
+  },
+  "sections" : [
+
+  ],
+  "variants" : [
+    {
+      "paths" : [
+        "\/documentation\/authfoundation\/jwterror\/invalidkey"
+      ],
+      "traits" : [
+        {
+          "interfaceLanguage" : "swift"
+        }
+      ]
+    }
+  ]
+, 
+"references": {
+"doc://com.okta.mobile.webauthenticationui/documentation/AuthFoundation": {
+  "abstract" : [
+
+  ],
+  "identifier" : "doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/AuthFoundation",
+  "kind" : "symbol",
+  "role" : "collection",
+  "title" : "AuthFoundation",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation"
+},
+"doc://com.okta.mobile.webauthenticationui/documentation/AuthFoundation/JWTError": {
+  "abstract" : [
+    {
+      "text" : "Describes errors that may occur with parsing or validating JWT tokens.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "enum"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "JWTError"
+    }
+  ],
+  "identifier" : "doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/AuthFoundation\/JWTError",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "JWTError"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "JWTError",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/jwterror"
+},
+"doc://com.okta.mobile.webauthenticationui/documentation/AuthFoundation/JWTError/invalidKey": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "case"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "invalidKey"
+    }
+  ],
+  "identifier" : "doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/AuthFoundation\/JWTError\/invalidKey",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "JWTError.invalidKey",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/jwterror\/invalidkey"
+}
+}
+}

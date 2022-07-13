@@ -1,1 +1,152 @@
-{"variants":[{"paths":["\/documentation\/authfoundation\/userinfo\/jsondecodable-implementations"],"traits":[{"interfaceLanguage":"swift"}]}],"schemaVersion":{"major":0,"minor":2,"patch":0},"sections":[],"identifier":{"url":"doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/UserInfo\/JSONDecodable-Implementations","interfaceLanguage":"swift"},"abstract":[{"type":"text","text":"No overview available."}],"kind":"article","metadata":{"modules":[{"name":"AuthFoundation"}],"role":"collectionGroup","title":"JSONDecodable Implementations"},"hierarchy":{"paths":[["doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation","doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/UserInfo"]]},"topicSections":[{"title":"Type Properties","identifiers":["doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/UserInfo\/jsonDecoder"],"generated":true}],"references":{"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation":{"role":"collection","title":"AuthFoundation","abstract":[{"type":"text","text":"Library that provides foundational features used by Okta’s authentication libraries, as well as APIs used to work with tokens and user credentials."}],"identifier":"doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation","kind":"symbol","type":"topic","url":"\/documentation\/authfoundation"},"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/UserInfo/jsonDecoder":{"role":"symbol","title":"jsonDecoder","fragments":[{"kind":"keyword","text":"static"},{"kind":"text","text":" "},{"kind":"keyword","text":"var"},{"kind":"text","text":" "},{"kind":"identifier","text":"jsonDecoder"},{"kind":"text","text":": "},{"kind":"typeIdentifier","text":"JSONDecoder","preciseIdentifier":"s:10Foundation11JSONDecoderC"}],"abstract":[],"identifier":"doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/UserInfo\/jsonDecoder","kind":"symbol","type":"topic","url":"\/documentation\/authfoundation\/userinfo\/jsondecoder"},"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/UserInfo":{"role":"symbol","title":"UserInfo","fragments":[{"kind":"keyword","text":"struct"},{"kind":"text","text":" "},{"kind":"identifier","text":"UserInfo"}],"abstract":[{"type":"text","text":"User profile information."}],"identifier":"doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/UserInfo","kind":"symbol","type":"topic","navigatorTitle":[{"kind":"identifier","text":"UserInfo"}],"url":"\/documentation\/authfoundation\/userinfo"}}}
+{
+  "abstract" : [
+    {
+      "text" : "No overview available.",
+      "type" : "text"
+    }
+  ],
+  "hierarchy" : {
+    "paths" : [
+      [
+        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation",
+        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/UserInfo"
+      ]
+    ]
+  },
+  "identifier" : {
+    "interfaceLanguage" : "swift",
+    "url" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/UserInfo\/JSONDecodable-Implementations"
+  },
+  "kind" : "article",
+  "metadata" : {
+    "modules" : [
+      {
+        "name" : "AuthFoundation"
+      }
+    ],
+    "role" : "collectionGroup",
+    "title" : "JSONDecodable Implementations"
+  },
+  "schemaVersion" : {
+    "major" : 0,
+    "minor" : 2,
+    "patch" : 0
+  },
+  "sections" : [
+
+  ],
+  "topicSections" : [
+    {
+      "generated" : true,
+      "identifiers" : [
+        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/UserInfo\/jsonDecoder"
+      ],
+      "title" : "Type Properties"
+    }
+  ],
+  "variants" : [
+    {
+      "paths" : [
+        "\/documentation\/authfoundation\/userinfo\/jsondecodable-implementations"
+      ],
+      "traits" : [
+        {
+          "interfaceLanguage" : "swift"
+        }
+      ]
+    }
+  ]
+, 
+"references": {
+"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation": {
+  "abstract" : [
+    {
+      "text" : "Library that provides foundational features used by Okta’s authentication libraries, as well as APIs used to work with tokens and user credentials.",
+      "type" : "text"
+    }
+  ],
+  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation",
+  "kind" : "symbol",
+  "role" : "collection",
+  "title" : "AuthFoundation",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation"
+},
+"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/UserInfo": {
+  "abstract" : [
+    {
+      "text" : "User profile information.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "struct"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "UserInfo"
+    }
+  ],
+  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/UserInfo",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "UserInfo"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "UserInfo",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/userinfo"
+},
+"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/UserInfo/jsonDecoder": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "static"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "keyword",
+      "text" : "var"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "jsonDecoder"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:10Foundation11JSONDecoderC",
+      "text" : "JSONDecoder"
+    }
+  ],
+  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/UserInfo\/jsonDecoder",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "jsonDecoder",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/userinfo\/jsondecoder"
+}
+}
+}

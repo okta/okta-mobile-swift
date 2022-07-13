@@ -1,1 +1,215 @@
-{"primaryContentSections":[{"kind":"declarations","declarations":[{"tokens":[{"kind":"keyword","text":"case"},{"kind":"text","text":" "},{"kind":"identifier","text":"json"}],"languages":["swift"],"platforms":["macOS"]}]}],"schemaVersion":{"major":0,"minor":2,"patch":0},"sections":[],"variants":[{"paths":["\/documentation\/authfoundation\/apicontenttype\/json"],"traits":[{"interfaceLanguage":"swift"}]}],"identifier":{"url":"doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/APIContentType\/json","interfaceLanguage":"swift"},"abstract":[{"type":"text","text":"No overview available."}],"kind":"symbol","metadata":{"fragments":[{"kind":"keyword","text":"case"},{"kind":"text","text":" "},{"kind":"identifier","text":"json"}],"title":"APIContentType.json","roleHeading":"Case","role":"symbol","symbolKind":"case","externalID":"s:14AuthFoundation14APIContentTypeO4jsonyA2CmF","modules":[{"name":"AuthFoundation"}]},"hierarchy":{"paths":[["doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation","doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/APIContentType"]]},"references":{"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/APIContentType/json":{"role":"symbol","title":"APIContentType.json","fragments":[{"kind":"keyword","text":"case"},{"kind":"text","text":" "},{"kind":"identifier","text":"json"}],"abstract":[],"identifier":"doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/APIContentType\/json","kind":"symbol","type":"topic","url":"\/documentation\/authfoundation\/apicontenttype\/json"},"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/APIContentType":{"role":"symbol","title":"APIContentType","fragments":[{"kind":"keyword","text":"enum"},{"kind":"text","text":" "},{"kind":"identifier","text":"APIContentType"}],"abstract":[{"type":"text","text":"Describes the "},{"type":"reference","isActive":true,"identifier":"doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/APIRequest"},{"type":"text","text":" content type."}],"identifier":"doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/APIContentType","kind":"symbol","type":"topic","navigatorTitle":[{"kind":"identifier","text":"APIContentType"}],"url":"\/documentation\/authfoundation\/apicontenttype"},"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/APIRequest":{"role":"symbol","title":"APIRequest","fragments":[{"kind":"keyword","text":"protocol"},{"kind":"text","text":" "},{"kind":"identifier","text":"APIRequest"}],"abstract":[{"type":"text","text":"Abstract protocol defining the structure of an API request."}],"identifier":"doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/APIRequest","kind":"symbol","type":"topic","navigatorTitle":[{"kind":"identifier","text":"APIRequest"}],"url":"\/documentation\/authfoundation\/apirequest"},"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation":{"role":"collection","title":"AuthFoundation","abstract":[{"type":"text","text":"Library that provides foundational features used by Okta’s authentication libraries, as well as APIs used to work with tokens and user credentials."}],"identifier":"doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation","kind":"symbol","type":"topic","url":"\/documentation\/authfoundation"}}}
+{
+  "abstract" : [
+    {
+      "text" : "No overview available.",
+      "type" : "text"
+    }
+  ],
+  "hierarchy" : {
+    "paths" : [
+      [
+        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation",
+        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/APIContentType"
+      ]
+    ]
+  },
+  "identifier" : {
+    "interfaceLanguage" : "swift",
+    "url" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/APIContentType\/json"
+  },
+  "kind" : "symbol",
+  "metadata" : {
+    "externalID" : "s:14AuthFoundation14APIContentTypeO4jsonyA2CmF",
+    "fragments" : [
+      {
+        "kind" : "keyword",
+        "text" : "case"
+      },
+      {
+        "kind" : "text",
+        "text" : " "
+      },
+      {
+        "kind" : "identifier",
+        "text" : "json"
+      }
+    ],
+    "modules" : [
+      {
+        "name" : "AuthFoundation"
+      }
+    ],
+    "role" : "symbol",
+    "roleHeading" : "Case",
+    "symbolKind" : "case",
+    "title" : "APIContentType.json"
+  },
+  "primaryContentSections" : [
+    {
+      "declarations" : [
+        {
+          "languages" : [
+            "swift"
+          ],
+          "platforms" : [
+            "macOS"
+          ],
+          "tokens" : [
+            {
+              "kind" : "keyword",
+              "text" : "case"
+            },
+            {
+              "kind" : "text",
+              "text" : " "
+            },
+            {
+              "kind" : "identifier",
+              "text" : "json"
+            }
+          ]
+        }
+      ],
+      "kind" : "declarations"
+    }
+  ],
+  "schemaVersion" : {
+    "major" : 0,
+    "minor" : 2,
+    "patch" : 0
+  },
+  "sections" : [
+
+  ],
+  "variants" : [
+    {
+      "paths" : [
+        "\/documentation\/authfoundation\/apicontenttype\/json"
+      ],
+      "traits" : [
+        {
+          "interfaceLanguage" : "swift"
+        }
+      ]
+    }
+  ]
+, 
+"references": {
+"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation": {
+  "abstract" : [
+    {
+      "text" : "Library that provides foundational features used by Okta’s authentication libraries, as well as APIs used to work with tokens and user credentials.",
+      "type" : "text"
+    }
+  ],
+  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation",
+  "kind" : "symbol",
+  "role" : "collection",
+  "title" : "AuthFoundation",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation"
+},
+"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/APIContentType": {
+  "abstract" : [
+    {
+      "text" : "Describes the ",
+      "type" : "text"
+    },
+    {
+      "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/APIRequest",
+      "isActive" : true,
+      "type" : "reference"
+    },
+    {
+      "text" : " content type.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "enum"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "APIContentType"
+    }
+  ],
+  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/APIContentType",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "APIContentType"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "APIContentType",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/apicontenttype"
+},
+"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/APIContentType/json": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "case"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "json"
+    }
+  ],
+  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/APIContentType\/json",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "APIContentType.json",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/apicontenttype\/json"
+},
+"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/APIRequest": {
+  "abstract" : [
+    {
+      "text" : "Abstract protocol defining the structure of an API request.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "protocol"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "APIRequest"
+    }
+  ],
+  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/APIRequest",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "APIRequest"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "APIRequest",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/apirequest"
+}
+}
+}

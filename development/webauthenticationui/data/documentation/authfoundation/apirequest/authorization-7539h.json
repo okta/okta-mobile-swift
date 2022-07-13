@@ -1,1 +1,315 @@
-{"primaryContentSections":[{"kind":"declarations","declarations":[{"tokens":[{"kind":"keyword","text":"var"},{"kind":"text","text":" "},{"kind":"identifier","text":"authorization"},{"kind":"text","text":": "},{"kind":"typeIdentifier","identifier":"doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/AuthFoundation\/APIAuthorization","preciseIdentifier":"s:14AuthFoundation16APIAuthorizationP","text":"APIAuthorization"},{"kind":"text","text":"? { "},{"kind":"keyword","text":"get"},{"kind":"text","text":" }"}],"languages":["swift"],"platforms":["macOS"]}]}],"schemaVersion":{"major":0,"minor":2,"patch":0},"sections":[],"variants":[{"paths":["\/documentation\/authfoundation\/apirequest\/authorization-7539h"],"traits":[{"interfaceLanguage":"swift"}]}],"defaultImplementationsSections":[{"title":"APIRequest Implementations","identifiers":["doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/AuthFoundation\/APIRequest\/authorization-9d1g4"]}],"identifier":{"url":"doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/AuthFoundation\/APIRequest\/authorization-7539h","interfaceLanguage":"swift"},"abstract":[{"type":"text","text":"Optional API authorization information to use."}],"kind":"symbol","metadata":{"role":"symbol","title":"authorization","roleHeading":"Instance Property","fragments":[{"kind":"keyword","text":"var"},{"kind":"text","text":" "},{"kind":"identifier","text":"authorization"},{"kind":"text","text":": "},{"kind":"typeIdentifier","text":"APIAuthorization","preciseIdentifier":"s:14AuthFoundation16APIAuthorizationP"},{"kind":"text","text":"?"}],"symbolKind":"property","externalID":"s:14AuthFoundation10APIRequestP13authorizationAA16APIAuthorization_pSgvp","required":true,"modules":[{"name":"AuthFoundation"}]},"hierarchy":{"paths":[["doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/AuthFoundation","doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/AuthFoundation\/APIRequest"]]},"references":{"doc://com.okta.mobile.webauthenticationui/documentation/AuthFoundation/APIAuthorization":{"role":"symbol","title":"APIAuthorization","fragments":[{"kind":"keyword","text":"protocol"},{"kind":"text","text":" "},{"kind":"identifier","text":"APIAuthorization"}],"abstract":[{"type":"text","text":"Defines how "},{"type":"reference","isActive":true,"identifier":"doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/AuthFoundation\/APIRequest"},{"type":"text","text":" authorization headers are generated."}],"identifier":"doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/AuthFoundation\/APIAuthorization","kind":"symbol","type":"topic","navigatorTitle":[{"kind":"identifier","text":"APIAuthorization"}],"url":"\/documentation\/authfoundation\/apiauthorization"},"doc://com.okta.mobile.webauthenticationui/documentation/AuthFoundation/APIRequest/authorization-7539h":{"defaultImplementations":1,"role":"symbol","title":"authorization","fragments":[{"kind":"keyword","text":"var"},{"kind":"text","text":" "},{"kind":"identifier","text":"authorization"},{"kind":"text","text":": "},{"kind":"typeIdentifier","text":"APIAuthorization","preciseIdentifier":"s:14AuthFoundation16APIAuthorizationP"},{"kind":"text","text":"?"}],"abstract":[{"type":"text","text":"Optional API authorization information to use."}],"identifier":"doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/AuthFoundation\/APIRequest\/authorization-7539h","kind":"symbol","required":true,"type":"topic","url":"\/documentation\/authfoundation\/apirequest\/authorization-7539h"},"doc://com.okta.mobile.webauthenticationui/documentation/AuthFoundation/APIRequest":{"role":"symbol","title":"APIRequest","fragments":[{"kind":"keyword","text":"protocol"},{"kind":"text","text":" "},{"kind":"identifier","text":"APIRequest"}],"abstract":[{"type":"text","text":"Abstract protocol defining the structure of an API request."}],"identifier":"doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/AuthFoundation\/APIRequest","kind":"symbol","type":"topic","navigatorTitle":[{"kind":"identifier","text":"APIRequest"}],"url":"\/documentation\/authfoundation\/apirequest"},"doc://com.okta.mobile.webauthenticationui/documentation/AuthFoundation/APIRequest/authorization-9d1g4":{"role":"symbol","title":"authorization","fragments":[{"kind":"keyword","text":"var"},{"kind":"text","text":" "},{"kind":"identifier","text":"authorization"},{"kind":"text","text":": "},{"kind":"typeIdentifier","text":"APIAuthorization","preciseIdentifier":"s:14AuthFoundation16APIAuthorizationP"},{"kind":"text","text":"?"}],"abstract":[{"type":"text","text":"Optional API authorization information to use."}],"identifier":"doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/AuthFoundation\/APIRequest\/authorization-9d1g4","kind":"symbol","type":"topic","url":"\/documentation\/authfoundation\/apirequest\/authorization-9d1g4"},"doc://com.okta.mobile.webauthenticationui/documentation/AuthFoundation":{"role":"collection","title":"AuthFoundation","abstract":[],"identifier":"doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/AuthFoundation","kind":"symbol","type":"topic","url":"\/documentation\/authfoundation"}}}
+{
+  "abstract" : [
+    {
+      "text" : "Optional API authorization information to use.",
+      "type" : "text"
+    }
+  ],
+  "defaultImplementationsSections" : [
+    {
+      "identifiers" : [
+        "doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/AuthFoundation\/APIRequest\/authorization-9d1g4"
+      ],
+      "title" : "APIRequest Implementations"
+    }
+  ],
+  "hierarchy" : {
+    "paths" : [
+      [
+        "doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/AuthFoundation",
+        "doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/AuthFoundation\/APIRequest"
+      ]
+    ]
+  },
+  "identifier" : {
+    "interfaceLanguage" : "swift",
+    "url" : "doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/AuthFoundation\/APIRequest\/authorization-7539h"
+  },
+  "kind" : "symbol",
+  "metadata" : {
+    "externalID" : "s:14AuthFoundation10APIRequestP13authorizationAA16APIAuthorization_pSgvp",
+    "fragments" : [
+      {
+        "kind" : "keyword",
+        "text" : "var"
+      },
+      {
+        "kind" : "text",
+        "text" : " "
+      },
+      {
+        "kind" : "identifier",
+        "text" : "authorization"
+      },
+      {
+        "kind" : "text",
+        "text" : ": "
+      },
+      {
+        "kind" : "typeIdentifier",
+        "preciseIdentifier" : "s:14AuthFoundation16APIAuthorizationP",
+        "text" : "APIAuthorization"
+      },
+      {
+        "kind" : "text",
+        "text" : "?"
+      }
+    ],
+    "modules" : [
+      {
+        "name" : "AuthFoundation"
+      }
+    ],
+    "required" : true,
+    "role" : "symbol",
+    "roleHeading" : "Instance Property",
+    "symbolKind" : "property",
+    "title" : "authorization"
+  },
+  "primaryContentSections" : [
+    {
+      "declarations" : [
+        {
+          "languages" : [
+            "swift"
+          ],
+          "platforms" : [
+            "macOS"
+          ],
+          "tokens" : [
+            {
+              "kind" : "keyword",
+              "text" : "var"
+            },
+            {
+              "kind" : "text",
+              "text" : " "
+            },
+            {
+              "kind" : "identifier",
+              "text" : "authorization"
+            },
+            {
+              "kind" : "text",
+              "text" : ": "
+            },
+            {
+              "identifier" : "doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/AuthFoundation\/APIAuthorization",
+              "kind" : "typeIdentifier",
+              "preciseIdentifier" : "s:14AuthFoundation16APIAuthorizationP",
+              "text" : "APIAuthorization"
+            },
+            {
+              "kind" : "text",
+              "text" : "? { "
+            },
+            {
+              "kind" : "keyword",
+              "text" : "get"
+            },
+            {
+              "kind" : "text",
+              "text" : " }"
+            }
+          ]
+        }
+      ],
+      "kind" : "declarations"
+    }
+  ],
+  "schemaVersion" : {
+    "major" : 0,
+    "minor" : 2,
+    "patch" : 0
+  },
+  "sections" : [
+
+  ],
+  "variants" : [
+    {
+      "paths" : [
+        "\/documentation\/authfoundation\/apirequest\/authorization-7539h"
+      ],
+      "traits" : [
+        {
+          "interfaceLanguage" : "swift"
+        }
+      ]
+    }
+  ]
+, 
+"references": {
+"doc://com.okta.mobile.webauthenticationui/documentation/AuthFoundation": {
+  "abstract" : [
+
+  ],
+  "identifier" : "doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/AuthFoundation",
+  "kind" : "symbol",
+  "role" : "collection",
+  "title" : "AuthFoundation",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation"
+},
+"doc://com.okta.mobile.webauthenticationui/documentation/AuthFoundation/APIAuthorization": {
+  "abstract" : [
+    {
+      "text" : "Defines how ",
+      "type" : "text"
+    },
+    {
+      "identifier" : "doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/AuthFoundation\/APIRequest",
+      "isActive" : true,
+      "type" : "reference"
+    },
+    {
+      "text" : " authorization headers are generated.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "protocol"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "APIAuthorization"
+    }
+  ],
+  "identifier" : "doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/AuthFoundation\/APIAuthorization",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "APIAuthorization"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "APIAuthorization",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/apiauthorization"
+},
+"doc://com.okta.mobile.webauthenticationui/documentation/AuthFoundation/APIRequest": {
+  "abstract" : [
+    {
+      "text" : "Abstract protocol defining the structure of an API request.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "protocol"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "APIRequest"
+    }
+  ],
+  "identifier" : "doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/AuthFoundation\/APIRequest",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "APIRequest"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "APIRequest",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/apirequest"
+},
+"doc://com.okta.mobile.webauthenticationui/documentation/AuthFoundation/APIRequest/authorization-7539h": {
+  "abstract" : [
+    {
+      "text" : "Optional API authorization information to use.",
+      "type" : "text"
+    }
+  ],
+  "defaultImplementations" : 1,
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "var"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "authorization"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:14AuthFoundation16APIAuthorizationP",
+      "text" : "APIAuthorization"
+    },
+    {
+      "kind" : "text",
+      "text" : "?"
+    }
+  ],
+  "identifier" : "doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/AuthFoundation\/APIRequest\/authorization-7539h",
+  "kind" : "symbol",
+  "required" : true,
+  "role" : "symbol",
+  "title" : "authorization",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/apirequest\/authorization-7539h"
+},
+"doc://com.okta.mobile.webauthenticationui/documentation/AuthFoundation/APIRequest/authorization-9d1g4": {
+  "abstract" : [
+    {
+      "text" : "Optional API authorization information to use.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "var"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "authorization"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:14AuthFoundation16APIAuthorizationP",
+      "text" : "APIAuthorization"
+    },
+    {
+      "kind" : "text",
+      "text" : "?"
+    }
+  ],
+  "identifier" : "doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/AuthFoundation\/APIRequest\/authorization-9d1g4",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "authorization",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/apirequest\/authorization-9d1g4"
+}
+}
+}

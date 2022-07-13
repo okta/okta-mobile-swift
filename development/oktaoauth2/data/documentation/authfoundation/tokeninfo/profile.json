@@ -1,1 +1,232 @@
-{"primaryContentSections":[{"kind":"declarations","declarations":[{"tokens":[{"kind":"keyword","text":"var"},{"kind":"text","text":" "},{"kind":"identifier","text":"profile"},{"kind":"text","text":": "},{"kind":"typeIdentifier","text":"String","preciseIdentifier":"s:SS"},{"kind":"text","text":"? { "},{"kind":"keyword","text":"get"},{"kind":"text","text":" }"}],"languages":["swift"],"platforms":["macOS"]}]}],"schemaVersion":{"major":0,"minor":2,"patch":0},"sections":[],"variants":[{"paths":["\/documentation\/authfoundation\/tokeninfo\/profile"],"traits":[{"interfaceLanguage":"swift"}]}],"identifier":{"url":"doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/AuthFoundation\/TokenInfo\/profile","interfaceLanguage":"swift"},"abstract":[{"type":"text","text":"The user’s profile address."}],"kind":"symbol","metadata":{"role":"symbol","title":"profile","roleHeading":"Instance Property","fragments":[{"kind":"keyword","text":"var"},{"kind":"text","text":" "},{"kind":"identifier","text":"profile"},{"kind":"text","text":": "},{"kind":"typeIdentifier","text":"String","preciseIdentifier":"s:SS"},{"kind":"text","text":"?"}],"symbolKind":"property","externalID":"s:14AuthFoundation9HasClaimsPAAE7profileSSSgvp::SYNTHESIZED::s:14AuthFoundation9TokenInfoV","extendedModule":"AuthFoundation","modules":[{"name":"AuthFoundation"}]},"hierarchy":{"paths":[["doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/AuthFoundation","doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/AuthFoundation\/TokenInfo","doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/AuthFoundation\/TokenInfo\/HasClaims-Implementations"]]},"references":{"doc://com.okta.mobile.oktaoauth2/documentation/AuthFoundation":{"role":"collection","title":"AuthFoundation","abstract":[],"identifier":"doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/AuthFoundation","kind":"symbol","type":"topic","url":"\/documentation\/authfoundation"},"doc://com.okta.mobile.oktaoauth2/documentation/AuthFoundation/TokenInfo":{"role":"symbol","title":"TokenInfo","fragments":[{"kind":"keyword","text":"struct"},{"kind":"text","text":" "},{"kind":"identifier","text":"TokenInfo"}],"abstract":[{"type":"text","text":"Introspected token information."}],"identifier":"doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/AuthFoundation\/TokenInfo","kind":"symbol","type":"topic","navigatorTitle":[{"kind":"identifier","text":"TokenInfo"}],"url":"\/documentation\/authfoundation\/tokeninfo"},"doc://com.okta.mobile.oktaoauth2/documentation/AuthFoundation/TokenInfo/HasClaims-Implementations":{"role":"collectionGroup","title":"HasClaims Implementations","abstract":[],"identifier":"doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/AuthFoundation\/TokenInfo\/HasClaims-Implementations","kind":"article","type":"topic","url":"\/documentation\/authfoundation\/tokeninfo\/hasclaims-implementations"},"doc://com.okta.mobile.oktaoauth2/documentation/AuthFoundation/TokenInfo/profile":{"role":"symbol","title":"profile","fragments":[{"kind":"keyword","text":"var"},{"kind":"text","text":" "},{"kind":"identifier","text":"profile"},{"kind":"text","text":": "},{"kind":"typeIdentifier","text":"String","preciseIdentifier":"s:SS"},{"kind":"text","text":"?"}],"abstract":[{"type":"text","text":"The user’s profile address."}],"identifier":"doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/AuthFoundation\/TokenInfo\/profile","kind":"symbol","type":"topic","url":"\/documentation\/authfoundation\/tokeninfo\/profile"}}}
+{
+  "abstract" : [
+    {
+      "text" : "The user’s profile address.",
+      "type" : "text"
+    }
+  ],
+  "hierarchy" : {
+    "paths" : [
+      [
+        "doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/AuthFoundation",
+        "doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/AuthFoundation\/TokenInfo",
+        "doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/AuthFoundation\/TokenInfo\/HasClaims-Implementations"
+      ]
+    ]
+  },
+  "identifier" : {
+    "interfaceLanguage" : "swift",
+    "url" : "doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/AuthFoundation\/TokenInfo\/profile"
+  },
+  "kind" : "symbol",
+  "metadata" : {
+    "extendedModule" : "AuthFoundation",
+    "externalID" : "s:14AuthFoundation9HasClaimsPAAE7profileSSSgvp::SYNTHESIZED::s:14AuthFoundation9TokenInfoV",
+    "fragments" : [
+      {
+        "kind" : "keyword",
+        "text" : "var"
+      },
+      {
+        "kind" : "text",
+        "text" : " "
+      },
+      {
+        "kind" : "identifier",
+        "text" : "profile"
+      },
+      {
+        "kind" : "text",
+        "text" : ": "
+      },
+      {
+        "kind" : "typeIdentifier",
+        "preciseIdentifier" : "s:SS",
+        "text" : "String"
+      },
+      {
+        "kind" : "text",
+        "text" : "?"
+      }
+    ],
+    "modules" : [
+      {
+        "name" : "AuthFoundation"
+      }
+    ],
+    "role" : "symbol",
+    "roleHeading" : "Instance Property",
+    "symbolKind" : "property",
+    "title" : "profile"
+  },
+  "primaryContentSections" : [
+    {
+      "declarations" : [
+        {
+          "languages" : [
+            "swift"
+          ],
+          "platforms" : [
+            "macOS"
+          ],
+          "tokens" : [
+            {
+              "kind" : "keyword",
+              "text" : "var"
+            },
+            {
+              "kind" : "text",
+              "text" : " "
+            },
+            {
+              "kind" : "identifier",
+              "text" : "profile"
+            },
+            {
+              "kind" : "text",
+              "text" : ": "
+            },
+            {
+              "kind" : "typeIdentifier",
+              "preciseIdentifier" : "s:SS",
+              "text" : "String"
+            },
+            {
+              "kind" : "text",
+              "text" : "? { "
+            },
+            {
+              "kind" : "keyword",
+              "text" : "get"
+            },
+            {
+              "kind" : "text",
+              "text" : " }"
+            }
+          ]
+        }
+      ],
+      "kind" : "declarations"
+    }
+  ],
+  "schemaVersion" : {
+    "major" : 0,
+    "minor" : 2,
+    "patch" : 0
+  },
+  "sections" : [
+
+  ],
+  "variants" : [
+    {
+      "paths" : [
+        "\/documentation\/authfoundation\/tokeninfo\/profile"
+      ],
+      "traits" : [
+        {
+          "interfaceLanguage" : "swift"
+        }
+      ]
+    }
+  ]
+, 
+"references": {
+"doc://com.okta.mobile.oktaoauth2/documentation/AuthFoundation": {
+  "abstract" : [
+
+  ],
+  "identifier" : "doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/AuthFoundation",
+  "kind" : "symbol",
+  "role" : "collection",
+  "title" : "AuthFoundation",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation"
+},
+"doc://com.okta.mobile.oktaoauth2/documentation/AuthFoundation/TokenInfo": {
+  "abstract" : [
+    {
+      "text" : "Introspected token information.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "struct"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "TokenInfo"
+    }
+  ],
+  "identifier" : "doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/AuthFoundation\/TokenInfo",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "TokenInfo"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "TokenInfo",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/tokeninfo"
+},
+"doc://com.okta.mobile.oktaoauth2/documentation/AuthFoundation/TokenInfo/HasClaims-Implementations": {
+  "abstract" : [
+
+  ],
+  "identifier" : "doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/AuthFoundation\/TokenInfo\/HasClaims-Implementations",
+  "kind" : "article",
+  "role" : "collectionGroup",
+  "title" : "HasClaims Implementations",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/tokeninfo\/hasclaims-implementations"
+},
+"doc://com.okta.mobile.oktaoauth2/documentation/AuthFoundation/TokenInfo/profile": {
+  "abstract" : [
+    {
+      "text" : "The user’s profile address.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "var"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "profile"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:SS",
+      "text" : "String"
+    },
+    {
+      "kind" : "text",
+      "text" : "?"
+    }
+  ],
+  "identifier" : "doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/AuthFoundation\/TokenInfo\/profile",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "profile",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/tokeninfo\/profile"
+}
+}
+}

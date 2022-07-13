@@ -1,1 +1,234 @@
-{"primaryContentSections":[{"kind":"declarations","declarations":[{"tokens":[{"kind":"keyword","text":"init"},{"kind":"text","text":"("},{"kind":"externalParam","text":"_"},{"kind":"text","text":" "},{"kind":"internalParam","text":"token"},{"kind":"text","text":": "},{"kind":"typeIdentifier","text":"String","preciseIdentifier":"s:SS"},{"kind":"text","text":") "},{"kind":"keyword","text":"throws"}],"languages":["swift"],"platforms":["macOS"]}]},{"kind":"parameters","parameters":[{"name":"token","content":[{"type":"paragraph","inlineContent":[{"type":"text","text":"Token string."}]}]}]}],"schemaVersion":{"major":0,"minor":2,"patch":0},"sections":[],"variants":[{"paths":["\/documentation\/authfoundation\/jwt\/init(_:)"],"traits":[{"interfaceLanguage":"swift"}]}],"identifier":{"url":"doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/AuthFoundation\/JWT\/init(_:)","interfaceLanguage":"swift"},"abstract":[{"type":"text","text":"Designated initializer, accepting the token string."}],"kind":"symbol","metadata":{"fragments":[{"kind":"identifier","text":"init"},{"kind":"text","text":"("},{"kind":"typeIdentifier","text":"String","preciseIdentifier":"s:SS"},{"kind":"text","text":") "},{"kind":"keyword","text":"throws"}],"title":"init(_:)","roleHeading":"Initializer","role":"symbol","symbolKind":"init","externalID":"s:14AuthFoundation3JWTVyACSSKcfc","modules":[{"name":"AuthFoundation"}]},"hierarchy":{"paths":[["doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/AuthFoundation","doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/AuthFoundation\/JWT"]]},"references":{"doc://com.okta.mobile.webauthenticationui/documentation/AuthFoundation/JWT":{"role":"symbol","title":"JWT","fragments":[{"kind":"keyword","text":"struct"},{"kind":"text","text":" "},{"kind":"identifier","text":"JWT"}],"abstract":[{"type":"text","text":"Represents the contents of a JWT token, providing access to its payload contents."}],"identifier":"doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/AuthFoundation\/JWT","kind":"symbol","type":"topic","navigatorTitle":[{"kind":"identifier","text":"JWT"}],"url":"\/documentation\/authfoundation\/jwt"},"doc://com.okta.mobile.webauthenticationui/documentation/AuthFoundation":{"role":"collection","title":"AuthFoundation","abstract":[],"identifier":"doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/AuthFoundation","kind":"symbol","type":"topic","url":"\/documentation\/authfoundation"},"doc://com.okta.mobile.webauthenticationui/documentation/AuthFoundation/JWT/init(_:)":{"role":"symbol","title":"init(_:)","fragments":[{"kind":"identifier","text":"init"},{"kind":"text","text":"("},{"kind":"typeIdentifier","text":"String","preciseIdentifier":"s:SS"},{"kind":"text","text":") "},{"kind":"keyword","text":"throws"}],"abstract":[{"type":"text","text":"Designated initializer, accepting the token string."}],"identifier":"doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/AuthFoundation\/JWT\/init(_:)","kind":"symbol","type":"topic","url":"\/documentation\/authfoundation\/jwt\/init(_:)"}}}
+{
+  "abstract" : [
+    {
+      "text" : "Designated initializer, accepting the token string.",
+      "type" : "text"
+    }
+  ],
+  "hierarchy" : {
+    "paths" : [
+      [
+        "doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/AuthFoundation",
+        "doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/AuthFoundation\/JWT"
+      ]
+    ]
+  },
+  "identifier" : {
+    "interfaceLanguage" : "swift",
+    "url" : "doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/AuthFoundation\/JWT\/init(_:)"
+  },
+  "kind" : "symbol",
+  "metadata" : {
+    "externalID" : "s:14AuthFoundation3JWTVyACSSKcfc",
+    "fragments" : [
+      {
+        "kind" : "identifier",
+        "text" : "init"
+      },
+      {
+        "kind" : "text",
+        "text" : "("
+      },
+      {
+        "kind" : "typeIdentifier",
+        "preciseIdentifier" : "s:SS",
+        "text" : "String"
+      },
+      {
+        "kind" : "text",
+        "text" : ") "
+      },
+      {
+        "kind" : "keyword",
+        "text" : "throws"
+      }
+    ],
+    "modules" : [
+      {
+        "name" : "AuthFoundation"
+      }
+    ],
+    "role" : "symbol",
+    "roleHeading" : "Initializer",
+    "symbolKind" : "init",
+    "title" : "init(_:)"
+  },
+  "primaryContentSections" : [
+    {
+      "declarations" : [
+        {
+          "languages" : [
+            "swift"
+          ],
+          "platforms" : [
+            "macOS"
+          ],
+          "tokens" : [
+            {
+              "kind" : "keyword",
+              "text" : "init"
+            },
+            {
+              "kind" : "text",
+              "text" : "("
+            },
+            {
+              "kind" : "externalParam",
+              "text" : "_"
+            },
+            {
+              "kind" : "text",
+              "text" : " "
+            },
+            {
+              "kind" : "internalParam",
+              "text" : "token"
+            },
+            {
+              "kind" : "text",
+              "text" : ": "
+            },
+            {
+              "kind" : "typeIdentifier",
+              "preciseIdentifier" : "s:SS",
+              "text" : "String"
+            },
+            {
+              "kind" : "text",
+              "text" : ") "
+            },
+            {
+              "kind" : "keyword",
+              "text" : "throws"
+            }
+          ]
+        }
+      ],
+      "kind" : "declarations"
+    },
+    {
+      "kind" : "parameters",
+      "parameters" : [
+        {
+          "content" : [
+            {
+              "inlineContent" : [
+                {
+                  "text" : "Token string.",
+                  "type" : "text"
+                }
+              ],
+              "type" : "paragraph"
+            }
+          ],
+          "name" : "token"
+        }
+      ]
+    }
+  ],
+  "schemaVersion" : {
+    "major" : 0,
+    "minor" : 2,
+    "patch" : 0
+  },
+  "sections" : [
+
+  ],
+  "variants" : [
+    {
+      "paths" : [
+        "\/documentation\/authfoundation\/jwt\/init(_:)"
+      ],
+      "traits" : [
+        {
+          "interfaceLanguage" : "swift"
+        }
+      ]
+    }
+  ]
+, 
+"references": {
+"doc://com.okta.mobile.webauthenticationui/documentation/AuthFoundation": {
+  "abstract" : [
+
+  ],
+  "identifier" : "doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/AuthFoundation",
+  "kind" : "symbol",
+  "role" : "collection",
+  "title" : "AuthFoundation",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation"
+},
+"doc://com.okta.mobile.webauthenticationui/documentation/AuthFoundation/JWT": {
+  "abstract" : [
+    {
+      "text" : "Represents the contents of a JWT token, providing access to its payload contents.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "struct"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "JWT"
+    }
+  ],
+  "identifier" : "doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/AuthFoundation\/JWT",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "JWT"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "JWT",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/jwt"
+},
+"doc://com.okta.mobile.webauthenticationui/documentation/AuthFoundation/JWT/init(_:)": {
+  "abstract" : [
+    {
+      "text" : "Designated initializer, accepting the token string.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "identifier",
+      "text" : "init"
+    },
+    {
+      "kind" : "text",
+      "text" : "("
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:SS",
+      "text" : "String"
+    },
+    {
+      "kind" : "text",
+      "text" : ") "
+    },
+    {
+      "kind" : "keyword",
+      "text" : "throws"
+    }
+  ],
+  "identifier" : "doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/AuthFoundation\/JWT\/init(_:)",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "init(_:)",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/jwt\/init(_:)"
+}
+}
+}

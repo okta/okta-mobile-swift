@@ -1,1 +1,144 @@
-{"variants":[{"paths":["\/documentation\/authfoundation\/jwterror\/error-implementations"],"traits":[{"interfaceLanguage":"swift"}]}],"schemaVersion":{"major":0,"minor":2,"patch":0},"sections":[],"identifier":{"url":"doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/AuthFoundation\/JWTError\/Error-Implementations","interfaceLanguage":"swift"},"abstract":[{"type":"text","text":"No overview available."}],"kind":"article","metadata":{"modules":[{"name":"AuthFoundation"}],"role":"collectionGroup","title":"Error Implementations"},"hierarchy":{"paths":[["doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/AuthFoundation","doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/AuthFoundation\/JWTError"]]},"topicSections":[{"title":"Instance Properties","identifiers":["doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/AuthFoundation\/JWTError\/localizedDescription"],"generated":true}],"references":{"doc://com.okta.mobile.oktaoauth2/documentation/AuthFoundation/JWTError/localizedDescription":{"role":"symbol","title":"localizedDescription","fragments":[{"kind":"keyword","text":"var"},{"kind":"text","text":" "},{"kind":"identifier","text":"localizedDescription"},{"kind":"text","text":": "},{"kind":"typeIdentifier","text":"String","preciseIdentifier":"s:SS"}],"abstract":[{"type":"text","text":"Retrieve the localized description for this error."}],"identifier":"doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/AuthFoundation\/JWTError\/localizedDescription","kind":"symbol","type":"topic","url":"\/documentation\/authfoundation\/jwterror\/localizeddescription"},"doc://com.okta.mobile.oktaoauth2/documentation/AuthFoundation":{"role":"collection","title":"AuthFoundation","abstract":[],"identifier":"doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/AuthFoundation","kind":"symbol","type":"topic","url":"\/documentation\/authfoundation"},"doc://com.okta.mobile.oktaoauth2/documentation/AuthFoundation/JWTError":{"role":"symbol","title":"JWTError","fragments":[{"kind":"keyword","text":"enum"},{"kind":"text","text":" "},{"kind":"identifier","text":"JWTError"}],"abstract":[{"type":"text","text":"Describes errors that may occur with parsing or validating JWT tokens."}],"identifier":"doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/AuthFoundation\/JWTError","kind":"symbol","type":"topic","navigatorTitle":[{"kind":"identifier","text":"JWTError"}],"url":"\/documentation\/authfoundation\/jwterror"}}}
+{
+  "abstract" : [
+    {
+      "text" : "No overview available.",
+      "type" : "text"
+    }
+  ],
+  "hierarchy" : {
+    "paths" : [
+      [
+        "doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/AuthFoundation",
+        "doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/AuthFoundation\/JWTError"
+      ]
+    ]
+  },
+  "identifier" : {
+    "interfaceLanguage" : "swift",
+    "url" : "doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/AuthFoundation\/JWTError\/Error-Implementations"
+  },
+  "kind" : "article",
+  "metadata" : {
+    "modules" : [
+      {
+        "name" : "AuthFoundation"
+      }
+    ],
+    "role" : "collectionGroup",
+    "title" : "Error Implementations"
+  },
+  "schemaVersion" : {
+    "major" : 0,
+    "minor" : 2,
+    "patch" : 0
+  },
+  "sections" : [
+
+  ],
+  "topicSections" : [
+    {
+      "generated" : true,
+      "identifiers" : [
+        "doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/AuthFoundation\/JWTError\/localizedDescription"
+      ],
+      "title" : "Instance Properties"
+    }
+  ],
+  "variants" : [
+    {
+      "paths" : [
+        "\/documentation\/authfoundation\/jwterror\/error-implementations"
+      ],
+      "traits" : [
+        {
+          "interfaceLanguage" : "swift"
+        }
+      ]
+    }
+  ]
+, 
+"references": {
+"doc://com.okta.mobile.oktaoauth2/documentation/AuthFoundation": {
+  "abstract" : [
+
+  ],
+  "identifier" : "doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/AuthFoundation",
+  "kind" : "symbol",
+  "role" : "collection",
+  "title" : "AuthFoundation",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation"
+},
+"doc://com.okta.mobile.oktaoauth2/documentation/AuthFoundation/JWTError": {
+  "abstract" : [
+    {
+      "text" : "Describes errors that may occur with parsing or validating JWT tokens.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "enum"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "JWTError"
+    }
+  ],
+  "identifier" : "doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/AuthFoundation\/JWTError",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "JWTError"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "JWTError",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/jwterror"
+},
+"doc://com.okta.mobile.oktaoauth2/documentation/AuthFoundation/JWTError/localizedDescription": {
+  "abstract" : [
+    {
+      "text" : "Retrieve the localized description for this error.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "var"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "localizedDescription"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:SS",
+      "text" : "String"
+    }
+  ],
+  "identifier" : "doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/AuthFoundation\/JWTError\/localizedDescription",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "localizedDescription",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/jwterror\/localizeddescription"
+}
+}
+}

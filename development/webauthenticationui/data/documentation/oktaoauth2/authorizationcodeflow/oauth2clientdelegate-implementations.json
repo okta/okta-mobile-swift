@@ -1,1 +1,257 @@
-{"variants":[{"paths":["\/documentation\/oktaoauth2\/authorizationcodeflow\/oauth2clientdelegate-implementations"],"traits":[{"interfaceLanguage":"swift"}]}],"schemaVersion":{"major":0,"minor":2,"patch":0},"sections":[],"identifier":{"url":"doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/OktaOAuth2\/AuthorizationCodeFlow\/OAuth2ClientDelegate-Implementations","interfaceLanguage":"swift"},"abstract":[{"type":"text","text":"No overview available."}],"kind":"article","metadata":{"modules":[{"name":"OktaOAuth2"}],"role":"collectionGroup","title":"OAuth2ClientDelegate Implementations"},"hierarchy":{"paths":[["doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/OktaOAuth2","doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/OktaOAuth2\/AuthorizationCodeFlow"]]},"topicSections":[{"title":"Instance Methods","identifiers":["doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/OktaOAuth2\/AuthorizationCodeFlow\/oauth(client:didRefresh:replacedWith:)","doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/OktaOAuth2\/AuthorizationCodeFlow\/oauth(client:willRefresh:)"],"generated":true}],"references":{"doc://com.okta.mobile.webauthenticationui/documentation/OktaOAuth2":{"role":"collection","title":"OktaOAuth2","abstract":[],"identifier":"doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/OktaOAuth2","kind":"symbol","type":"topic","url":"\/documentation\/oktaoauth2"},"doc://com.okta.mobile.webauthenticationui/documentation/OktaOAuth2/AuthorizationCodeFlow/oauth(client:willRefresh:)":{"role":"symbol","title":"oauth(client:willRefresh:)","fragments":[{"kind":"keyword","text":"func"},{"kind":"text","text":" "},{"kind":"identifier","text":"oauth"},{"kind":"text","text":"("},{"kind":"externalParam","text":"client"},{"kind":"text","text":": "},{"kind":"typeIdentifier","text":"OAuth2Client","preciseIdentifier":"s:14AuthFoundation12OAuth2ClientC"},{"kind":"text","text":", "},{"kind":"externalParam","text":"willRefresh"},{"kind":"text","text":": "},{"kind":"typeIdentifier","text":"Token","preciseIdentifier":"s:14AuthFoundation5TokenC"},{"kind":"text","text":")"}],"abstract":[{"type":"text","text":"Sent before a token will begin to refresh."}],"identifier":"doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/OktaOAuth2\/AuthorizationCodeFlow\/oauth(client:willRefresh:)","kind":"symbol","type":"topic","url":"\/documentation\/oktaoauth2\/authorizationcodeflow\/oauth(client:willrefresh:)"},"doc://com.okta.mobile.webauthenticationui/documentation/OktaOAuth2/AuthorizationCodeFlow/oauth(client:didRefresh:replacedWith:)":{"role":"symbol","title":"oauth(client:didRefresh:replacedWith:)","fragments":[{"kind":"keyword","text":"func"},{"kind":"text","text":" "},{"kind":"identifier","text":"oauth"},{"kind":"text","text":"("},{"kind":"externalParam","text":"client"},{"kind":"text","text":": "},{"kind":"typeIdentifier","text":"OAuth2Client","preciseIdentifier":"s:14AuthFoundation12OAuth2ClientC"},{"kind":"text","text":", "},{"kind":"externalParam","text":"didRefresh"},{"kind":"text","text":": "},{"kind":"typeIdentifier","text":"Token","preciseIdentifier":"s:14AuthFoundation5TokenC"},{"kind":"text","text":", "},{"kind":"externalParam","text":"replacedWith"},{"kind":"text","text":": "},{"kind":"typeIdentifier","text":"Token","preciseIdentifier":"s:14AuthFoundation5TokenC"},{"kind":"text","text":"?)"}],"abstract":[{"type":"text","text":"Sent when a token has finished refreshing."}],"identifier":"doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/OktaOAuth2\/AuthorizationCodeFlow\/oauth(client:didRefresh:replacedWith:)","kind":"symbol","type":"topic","url":"\/documentation\/oktaoauth2\/authorizationcodeflow\/oauth(client:didrefresh:replacedwith:)"},"doc://com.okta.mobile.webauthenticationui/documentation/OktaOAuth2/AuthorizationCodeFlow":{"role":"symbol","title":"AuthorizationCodeFlow","fragments":[{"kind":"keyword","text":"class"},{"kind":"text","text":" "},{"kind":"identifier","text":"AuthorizationCodeFlow"}],"abstract":[{"type":"text","text":"An authentication flow class that implements the Authorization Code Flow exchange."}],"identifier":"doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/OktaOAuth2\/AuthorizationCodeFlow","kind":"symbol","type":"topic","navigatorTitle":[{"kind":"identifier","text":"AuthorizationCodeFlow"}],"url":"\/documentation\/oktaoauth2\/authorizationcodeflow"}}}
+{
+  "abstract" : [
+    {
+      "text" : "No overview available.",
+      "type" : "text"
+    }
+  ],
+  "hierarchy" : {
+    "paths" : [
+      [
+        "doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/OktaOAuth2",
+        "doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/OktaOAuth2\/AuthorizationCodeFlow"
+      ]
+    ]
+  },
+  "identifier" : {
+    "interfaceLanguage" : "swift",
+    "url" : "doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/OktaOAuth2\/AuthorizationCodeFlow\/OAuth2ClientDelegate-Implementations"
+  },
+  "kind" : "article",
+  "metadata" : {
+    "modules" : [
+      {
+        "name" : "OktaOAuth2"
+      }
+    ],
+    "role" : "collectionGroup",
+    "title" : "OAuth2ClientDelegate Implementations"
+  },
+  "schemaVersion" : {
+    "major" : 0,
+    "minor" : 2,
+    "patch" : 0
+  },
+  "sections" : [
+
+  ],
+  "topicSections" : [
+    {
+      "generated" : true,
+      "identifiers" : [
+        "doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/OktaOAuth2\/AuthorizationCodeFlow\/oauth(client:didRefresh:replacedWith:)",
+        "doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/OktaOAuth2\/AuthorizationCodeFlow\/oauth(client:willRefresh:)"
+      ],
+      "title" : "Instance Methods"
+    }
+  ],
+  "variants" : [
+    {
+      "paths" : [
+        "\/documentation\/oktaoauth2\/authorizationcodeflow\/oauth2clientdelegate-implementations"
+      ],
+      "traits" : [
+        {
+          "interfaceLanguage" : "swift"
+        }
+      ]
+    }
+  ]
+, 
+"references": {
+"doc://com.okta.mobile.webauthenticationui/documentation/OktaOAuth2": {
+  "abstract" : [
+
+  ],
+  "identifier" : "doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/OktaOAuth2",
+  "kind" : "symbol",
+  "role" : "collection",
+  "title" : "OktaOAuth2",
+  "type" : "topic",
+  "url" : "\/documentation\/oktaoauth2"
+},
+"doc://com.okta.mobile.webauthenticationui/documentation/OktaOAuth2/AuthorizationCodeFlow": {
+  "abstract" : [
+    {
+      "text" : "An authentication flow class that implements the Authorization Code Flow exchange.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "class"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "AuthorizationCodeFlow"
+    }
+  ],
+  "identifier" : "doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/OktaOAuth2\/AuthorizationCodeFlow",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "AuthorizationCodeFlow"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "AuthorizationCodeFlow",
+  "type" : "topic",
+  "url" : "\/documentation\/oktaoauth2\/authorizationcodeflow"
+},
+"doc://com.okta.mobile.webauthenticationui/documentation/OktaOAuth2/AuthorizationCodeFlow/oauth(client:didRefresh:replacedWith:)": {
+  "abstract" : [
+    {
+      "text" : "Sent when a token has finished refreshing.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "func"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "oauth"
+    },
+    {
+      "kind" : "text",
+      "text" : "("
+    },
+    {
+      "kind" : "externalParam",
+      "text" : "client"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:14AuthFoundation12OAuth2ClientC",
+      "text" : "OAuth2Client"
+    },
+    {
+      "kind" : "text",
+      "text" : ", "
+    },
+    {
+      "kind" : "externalParam",
+      "text" : "didRefresh"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:14AuthFoundation5TokenC",
+      "text" : "Token"
+    },
+    {
+      "kind" : "text",
+      "text" : ", "
+    },
+    {
+      "kind" : "externalParam",
+      "text" : "replacedWith"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:14AuthFoundation5TokenC",
+      "text" : "Token"
+    },
+    {
+      "kind" : "text",
+      "text" : "?)"
+    }
+  ],
+  "identifier" : "doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/OktaOAuth2\/AuthorizationCodeFlow\/oauth(client:didRefresh:replacedWith:)",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "oauth(client:didRefresh:replacedWith:)",
+  "type" : "topic",
+  "url" : "\/documentation\/oktaoauth2\/authorizationcodeflow\/oauth(client:didrefresh:replacedwith:)"
+},
+"doc://com.okta.mobile.webauthenticationui/documentation/OktaOAuth2/AuthorizationCodeFlow/oauth(client:willRefresh:)": {
+  "abstract" : [
+    {
+      "text" : "Sent before a token will begin to refresh.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "func"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "oauth"
+    },
+    {
+      "kind" : "text",
+      "text" : "("
+    },
+    {
+      "kind" : "externalParam",
+      "text" : "client"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:14AuthFoundation12OAuth2ClientC",
+      "text" : "OAuth2Client"
+    },
+    {
+      "kind" : "text",
+      "text" : ", "
+    },
+    {
+      "kind" : "externalParam",
+      "text" : "willRefresh"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:14AuthFoundation5TokenC",
+      "text" : "Token"
+    },
+    {
+      "kind" : "text",
+      "text" : ")"
+    }
+  ],
+  "identifier" : "doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/OktaOAuth2\/AuthorizationCodeFlow\/oauth(client:willRefresh:)",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "oauth(client:willRefresh:)",
+  "type" : "topic",
+  "url" : "\/documentation\/oktaoauth2\/authorizationcodeflow\/oauth(client:willrefresh:)"
+}
+}
+}

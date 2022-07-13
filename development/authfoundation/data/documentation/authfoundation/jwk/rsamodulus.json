@@ -1,1 +1,214 @@
-{"primaryContentSections":[{"kind":"declarations","declarations":[{"tokens":[{"kind":"keyword","text":"let"},{"kind":"text","text":" "},{"kind":"identifier","text":"rsaModulus"},{"kind":"text","text":": "},{"kind":"typeIdentifier","text":"String","preciseIdentifier":"s:SS"},{"kind":"text","text":"?"}],"languages":["swift"],"platforms":["macOS"]}]}],"schemaVersion":{"major":0,"minor":2,"patch":0},"sections":[],"variants":[{"paths":["\/documentation\/authfoundation\/jwk\/rsamodulus"],"traits":[{"interfaceLanguage":"swift"}]}],"identifier":{"url":"doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/JWK\/rsaModulus","interfaceLanguage":"swift"},"abstract":[{"type":"text","text":"The RSA modulus value."}],"kind":"symbol","metadata":{"fragments":[{"kind":"keyword","text":"let"},{"kind":"text","text":" "},{"kind":"identifier","text":"rsaModulus"},{"kind":"text","text":": "},{"kind":"typeIdentifier","text":"String","preciseIdentifier":"s:SS"},{"kind":"text","text":"?"}],"title":"rsaModulus","roleHeading":"Instance Property","role":"symbol","symbolKind":"property","externalID":"s:14AuthFoundation3JWKV10rsaModulusSSSgvp","modules":[{"name":"AuthFoundation"}]},"hierarchy":{"paths":[["doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation","doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/JWK"]]},"references":{"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/JWK":{"role":"symbol","title":"JWK","fragments":[{"kind":"keyword","text":"struct"},{"kind":"text","text":" "},{"kind":"identifier","text":"JWK"}],"abstract":[{"type":"text","text":"Describes an individual key from an authorization server, which can be used to validate tokens or encrypt content."}],"identifier":"doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/JWK","kind":"symbol","type":"topic","navigatorTitle":[{"kind":"identifier","text":"JWK"}],"url":"\/documentation\/authfoundation\/jwk"},"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation":{"role":"collection","title":"AuthFoundation","abstract":[{"type":"text","text":"Library that provides foundational features used by Okta’s authentication libraries, as well as APIs used to work with tokens and user credentials."}],"identifier":"doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation","kind":"symbol","type":"topic","url":"\/documentation\/authfoundation"},"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/JWK/rsaModulus":{"role":"symbol","title":"rsaModulus","fragments":[{"kind":"keyword","text":"let"},{"kind":"text","text":" "},{"kind":"identifier","text":"rsaModulus"},{"kind":"text","text":": "},{"kind":"typeIdentifier","text":"String","preciseIdentifier":"s:SS"},{"kind":"text","text":"?"}],"abstract":[{"type":"text","text":"The RSA modulus value."}],"identifier":"doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/JWK\/rsaModulus","kind":"symbol","type":"topic","url":"\/documentation\/authfoundation\/jwk\/rsamodulus"}}}
+{
+  "abstract" : [
+    {
+      "text" : "The RSA modulus value.",
+      "type" : "text"
+    }
+  ],
+  "hierarchy" : {
+    "paths" : [
+      [
+        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation",
+        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/JWK"
+      ]
+    ]
+  },
+  "identifier" : {
+    "interfaceLanguage" : "swift",
+    "url" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/JWK\/rsaModulus"
+  },
+  "kind" : "symbol",
+  "metadata" : {
+    "externalID" : "s:14AuthFoundation3JWKV10rsaModulusSSSgvp",
+    "fragments" : [
+      {
+        "kind" : "keyword",
+        "text" : "let"
+      },
+      {
+        "kind" : "text",
+        "text" : " "
+      },
+      {
+        "kind" : "identifier",
+        "text" : "rsaModulus"
+      },
+      {
+        "kind" : "text",
+        "text" : ": "
+      },
+      {
+        "kind" : "typeIdentifier",
+        "preciseIdentifier" : "s:SS",
+        "text" : "String"
+      },
+      {
+        "kind" : "text",
+        "text" : "?"
+      }
+    ],
+    "modules" : [
+      {
+        "name" : "AuthFoundation"
+      }
+    ],
+    "role" : "symbol",
+    "roleHeading" : "Instance Property",
+    "symbolKind" : "property",
+    "title" : "rsaModulus"
+  },
+  "primaryContentSections" : [
+    {
+      "declarations" : [
+        {
+          "languages" : [
+            "swift"
+          ],
+          "platforms" : [
+            "macOS"
+          ],
+          "tokens" : [
+            {
+              "kind" : "keyword",
+              "text" : "let"
+            },
+            {
+              "kind" : "text",
+              "text" : " "
+            },
+            {
+              "kind" : "identifier",
+              "text" : "rsaModulus"
+            },
+            {
+              "kind" : "text",
+              "text" : ": "
+            },
+            {
+              "kind" : "typeIdentifier",
+              "preciseIdentifier" : "s:SS",
+              "text" : "String"
+            },
+            {
+              "kind" : "text",
+              "text" : "?"
+            }
+          ]
+        }
+      ],
+      "kind" : "declarations"
+    }
+  ],
+  "schemaVersion" : {
+    "major" : 0,
+    "minor" : 2,
+    "patch" : 0
+  },
+  "sections" : [
+
+  ],
+  "variants" : [
+    {
+      "paths" : [
+        "\/documentation\/authfoundation\/jwk\/rsamodulus"
+      ],
+      "traits" : [
+        {
+          "interfaceLanguage" : "swift"
+        }
+      ]
+    }
+  ]
+, 
+"references": {
+"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation": {
+  "abstract" : [
+    {
+      "text" : "Library that provides foundational features used by Okta’s authentication libraries, as well as APIs used to work with tokens and user credentials.",
+      "type" : "text"
+    }
+  ],
+  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation",
+  "kind" : "symbol",
+  "role" : "collection",
+  "title" : "AuthFoundation",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation"
+},
+"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/JWK": {
+  "abstract" : [
+    {
+      "text" : "Describes an individual key from an authorization server, which can be used to validate tokens or encrypt content.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "struct"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "JWK"
+    }
+  ],
+  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/JWK",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "JWK"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "JWK",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/jwk"
+},
+"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/JWK/rsaModulus": {
+  "abstract" : [
+    {
+      "text" : "The RSA modulus value.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "let"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "rsaModulus"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:SS",
+      "text" : "String"
+    },
+    {
+      "kind" : "text",
+      "text" : "?"
+    }
+  ],
+  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/JWK\/rsaModulus",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "rsaModulus",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/jwk\/rsamodulus"
+}
+}
+}

@@ -1,1 +1,353 @@
-{"variants":[{"paths":["\/documentation\/authfoundation\/weakcollection\/equatable-implementations"],"traits":[{"interfaceLanguage":"swift"}]}],"schemaVersion":{"major":0,"minor":2,"patch":0},"sections":[],"identifier":{"url":"doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/AuthFoundation\/WeakCollection\/Equatable-Implementations","interfaceLanguage":"swift"},"abstract":[{"type":"text","text":"No overview available."}],"kind":"article","metadata":{"modules":[{"name":"AuthFoundation"}],"role":"collectionGroup","title":"Equatable Implementations"},"hierarchy":{"paths":[["doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/AuthFoundation","doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/AuthFoundation\/WeakCollection"]]},"topicSections":[{"title":"Operators","identifiers":["doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/AuthFoundation\/WeakCollection\/!=(_:_:)","doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/AuthFoundation\/WeakCollection\/==(_:_:)"],"generated":true}],"references":{"doc://com.okta.mobile.oktaoauth2/documentation/AuthFoundation/WeakCollection":{"role":"symbol","title":"WeakCollection","fragments":[{"kind":"keyword","text":"struct"},{"kind":"text","text":" "},{"kind":"identifier","text":"WeakCollection"}],"abstract":[{"type":"text","text":"Property wrapper representing a collection of weak values."}],"identifier":"doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/AuthFoundation\/WeakCollection","kind":"symbol","type":"topic","navigatorTitle":[{"kind":"identifier","text":"WeakCollection"}],"url":"\/documentation\/authfoundation\/weakcollection"},"doc://com.okta.mobile.oktaoauth2/documentation/AuthFoundation/WeakCollection/==(_:_:)":{"conformance":{"constraints":[{"type":"codeVoice","code":"Collect"},{"type":"text","text":" conforms to "},{"type":"codeVoice","code":"Equatable"},{"type":"text","text":", "},{"type":"codeVoice","code":"Collect"},{"type":"text","text":" conforms to "},{"type":"codeVoice","code":"RangeReplaceableCollection"},{"type":"text","text":", "},{"type":"codeVoice","code":"Element"},{"type":"text","text":" conforms to "},{"type":"codeVoice","code":"Hashable"},{"type":"text","text":", and "},{"type":"codeVoice","code":"Collect.Element"},{"type":"text","text":" is "},{"type":"codeVoice","code":"Optional<Element>"},{"type":"text","text":"."}],"availabilityPrefix":[{"type":"text","text":"Available when"}],"conformancePrefix":[{"type":"text","text":"Conforms when"}]},"role":"symbol","title":"==(_:_:)","fragments":[{"kind":"keyword","text":"static"},{"kind":"text","text":" "},{"kind":"keyword","text":"func"},{"kind":"text","text":" "},{"kind":"identifier","text":"=="},{"kind":"text","text":" "},{"kind":"text","text":"("},{"kind":"typeIdentifier","text":"WeakCollection","preciseIdentifier":"s:14AuthFoundation14WeakCollectionV"},{"kind":"text","text":"<"},{"kind":"typeIdentifier","text":"Collect","preciseIdentifier":"s:14AuthFoundation14WeakCollectionVAASQRzSHR_rlE7Collectxmfp"},{"kind":"text","text":", "},{"kind":"typeIdentifier","text":"Element","preciseIdentifier":"s:14AuthFoundation14WeakCollectionVAASQRzSHR_rlE7Elementq_mfp"},{"kind":"text","text":">, "},{"kind":"typeIdentifier","text":"WeakCollection","preciseIdentifier":"s:14AuthFoundation14WeakCollectionV"},{"kind":"text","text":"<"},{"kind":"typeIdentifier","text":"Collect","preciseIdentifier":"s:14AuthFoundation14WeakCollectionVAASQRzSHR_rlE7Collectxmfp"},{"kind":"text","text":", "},{"kind":"typeIdentifier","text":"Element","preciseIdentifier":"s:14AuthFoundation14WeakCollectionVAASQRzSHR_rlE7Elementq_mfp"},{"kind":"text","text":">) -> "},{"kind":"typeIdentifier","text":"Bool","preciseIdentifier":"s:Sb"}],"abstract":[{"type":"text","text":"Returns a Boolean value indicating whether two values are equal."}],"identifier":"doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/AuthFoundation\/WeakCollection\/==(_:_:)","kind":"symbol","type":"topic","url":"\/documentation\/authfoundation\/weakcollection\/==(_:_:)"},"doc://com.okta.mobile.oktaoauth2/documentation/AuthFoundation":{"role":"collection","title":"AuthFoundation","abstract":[],"identifier":"doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/AuthFoundation","kind":"symbol","type":"topic","url":"\/documentation\/authfoundation"},"doc://com.okta.mobile.oktaoauth2/documentation/AuthFoundation/WeakCollection/!=(_:_:)":{"role":"symbol","title":"!=(_:_:)","fragments":[{"kind":"keyword","text":"static"},{"kind":"text","text":" "},{"kind":"keyword","text":"func"},{"kind":"text","text":" "},{"kind":"identifier","text":"!="},{"kind":"text","text":" "},{"kind":"text","text":"("},{"kind":"typeIdentifier","text":"Self"},{"kind":"text","text":", "},{"kind":"typeIdentifier","text":"Self"},{"kind":"text","text":") -> "},{"kind":"typeIdentifier","text":"Bool","preciseIdentifier":"s:Sb"}],"abstract":[],"identifier":"doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/AuthFoundation\/WeakCollection\/!=(_:_:)","kind":"symbol","type":"topic","url":"\/documentation\/authfoundation\/weakcollection\/!=(_:_:)"}}}
+{
+  "abstract" : [
+    {
+      "text" : "No overview available.",
+      "type" : "text"
+    }
+  ],
+  "hierarchy" : {
+    "paths" : [
+      [
+        "doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/AuthFoundation",
+        "doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/AuthFoundation\/WeakCollection"
+      ]
+    ]
+  },
+  "identifier" : {
+    "interfaceLanguage" : "swift",
+    "url" : "doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/AuthFoundation\/WeakCollection\/Equatable-Implementations"
+  },
+  "kind" : "article",
+  "metadata" : {
+    "modules" : [
+      {
+        "name" : "AuthFoundation"
+      }
+    ],
+    "role" : "collectionGroup",
+    "title" : "Equatable Implementations"
+  },
+  "schemaVersion" : {
+    "major" : 0,
+    "minor" : 2,
+    "patch" : 0
+  },
+  "sections" : [
+
+  ],
+  "topicSections" : [
+    {
+      "generated" : true,
+      "identifiers" : [
+        "doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/AuthFoundation\/WeakCollection\/!=(_:_:)",
+        "doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/AuthFoundation\/WeakCollection\/==(_:_:)"
+      ],
+      "title" : "Operators"
+    }
+  ],
+  "variants" : [
+    {
+      "paths" : [
+        "\/documentation\/authfoundation\/weakcollection\/equatable-implementations"
+      ],
+      "traits" : [
+        {
+          "interfaceLanguage" : "swift"
+        }
+      ]
+    }
+  ]
+, 
+"references": {
+"doc://com.okta.mobile.oktaoauth2/documentation/AuthFoundation": {
+  "abstract" : [
+
+  ],
+  "identifier" : "doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/AuthFoundation",
+  "kind" : "symbol",
+  "role" : "collection",
+  "title" : "AuthFoundation",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation"
+},
+"doc://com.okta.mobile.oktaoauth2/documentation/AuthFoundation/WeakCollection": {
+  "abstract" : [
+    {
+      "text" : "Property wrapper representing a collection of weak values.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "struct"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "WeakCollection"
+    }
+  ],
+  "identifier" : "doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/AuthFoundation\/WeakCollection",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "WeakCollection"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "WeakCollection",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/weakcollection"
+},
+"doc://com.okta.mobile.oktaoauth2/documentation/AuthFoundation/WeakCollection/!=(_:_:)": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "static"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "keyword",
+      "text" : "func"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "!="
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "text",
+      "text" : "("
+    },
+    {
+      "kind" : "typeIdentifier",
+      "text" : "Self"
+    },
+    {
+      "kind" : "text",
+      "text" : ", "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "text" : "Self"
+    },
+    {
+      "kind" : "text",
+      "text" : ") -> "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:Sb",
+      "text" : "Bool"
+    }
+  ],
+  "identifier" : "doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/AuthFoundation\/WeakCollection\/!=(_:_:)",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "!=(_:_:)",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/weakcollection\/!=(_:_:)"
+},
+"doc://com.okta.mobile.oktaoauth2/documentation/AuthFoundation/WeakCollection/==(_:_:)": {
+  "abstract" : [
+    {
+      "text" : "Returns a Boolean value indicating whether two values are equal.",
+      "type" : "text"
+    }
+  ],
+  "conformance" : {
+    "availabilityPrefix" : [
+      {
+        "text" : "Available when",
+        "type" : "text"
+      }
+    ],
+    "conformancePrefix" : [
+      {
+        "text" : "Conforms when",
+        "type" : "text"
+      }
+    ],
+    "constraints" : [
+      {
+        "code" : "Collect",
+        "type" : "codeVoice"
+      },
+      {
+        "text" : " conforms to ",
+        "type" : "text"
+      },
+      {
+        "code" : "Equatable",
+        "type" : "codeVoice"
+      },
+      {
+        "text" : ", ",
+        "type" : "text"
+      },
+      {
+        "code" : "Collect",
+        "type" : "codeVoice"
+      },
+      {
+        "text" : " conforms to ",
+        "type" : "text"
+      },
+      {
+        "code" : "RangeReplaceableCollection",
+        "type" : "codeVoice"
+      },
+      {
+        "text" : ", ",
+        "type" : "text"
+      },
+      {
+        "code" : "Element",
+        "type" : "codeVoice"
+      },
+      {
+        "text" : " conforms to ",
+        "type" : "text"
+      },
+      {
+        "code" : "Hashable",
+        "type" : "codeVoice"
+      },
+      {
+        "text" : ", and ",
+        "type" : "text"
+      },
+      {
+        "code" : "Collect.Element",
+        "type" : "codeVoice"
+      },
+      {
+        "text" : " is ",
+        "type" : "text"
+      },
+      {
+        "code" : "Optional<Element>",
+        "type" : "codeVoice"
+      },
+      {
+        "text" : ".",
+        "type" : "text"
+      }
+    ]
+  },
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "static"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "keyword",
+      "text" : "func"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "=="
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "text",
+      "text" : "("
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:14AuthFoundation14WeakCollectionV",
+      "text" : "WeakCollection"
+    },
+    {
+      "kind" : "text",
+      "text" : "<"
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:14AuthFoundation14WeakCollectionVAASQRzSHR_rlE7Collectxmfp",
+      "text" : "Collect"
+    },
+    {
+      "kind" : "text",
+      "text" : ", "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:14AuthFoundation14WeakCollectionVAASQRzSHR_rlE7Elementq_mfp",
+      "text" : "Element"
+    },
+    {
+      "kind" : "text",
+      "text" : ">, "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:14AuthFoundation14WeakCollectionV",
+      "text" : "WeakCollection"
+    },
+    {
+      "kind" : "text",
+      "text" : "<"
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:14AuthFoundation14WeakCollectionVAASQRzSHR_rlE7Collectxmfp",
+      "text" : "Collect"
+    },
+    {
+      "kind" : "text",
+      "text" : ", "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:14AuthFoundation14WeakCollectionVAASQRzSHR_rlE7Elementq_mfp",
+      "text" : "Element"
+    },
+    {
+      "kind" : "text",
+      "text" : ">) -> "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:Sb",
+      "text" : "Bool"
+    }
+  ],
+  "identifier" : "doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/AuthFoundation\/WeakCollection\/==(_:_:)",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "==(_:_:)",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/weakcollection\/==(_:_:)"
+}
+}
+}

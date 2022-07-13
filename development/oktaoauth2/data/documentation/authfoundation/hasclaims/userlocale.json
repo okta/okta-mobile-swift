@@ -1,1 +1,220 @@
-{"primaryContentSections":[{"kind":"declarations","declarations":[{"tokens":[{"kind":"keyword","text":"var"},{"kind":"text","text":" "},{"kind":"identifier","text":"userLocale"},{"kind":"text","text":": "},{"kind":"typeIdentifier","text":"Locale","preciseIdentifier":"s:10Foundation6LocaleV"},{"kind":"text","text":"? { "},{"kind":"keyword","text":"get"},{"kind":"text","text":" }"}],"languages":["swift"],"platforms":["macOS"]}]}],"schemaVersion":{"major":0,"minor":2,"patch":0},"sections":[],"variants":[{"paths":["\/documentation\/authfoundation\/hasclaims\/userlocale"],"traits":[{"interfaceLanguage":"swift"}]}],"identifier":{"url":"doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/AuthFoundation\/HasClaims\/userLocale","interfaceLanguage":"swift"},"abstract":[{"type":"text","text":"The user’s locale, represnted as a Locale object."}],"kind":"symbol","metadata":{"role":"symbol","title":"userLocale","roleHeading":"Instance Property","fragments":[{"kind":"keyword","text":"var"},{"kind":"text","text":" "},{"kind":"identifier","text":"userLocale"},{"kind":"text","text":": "},{"kind":"typeIdentifier","text":"Locale","preciseIdentifier":"s:10Foundation6LocaleV"},{"kind":"text","text":"?"}],"symbolKind":"property","externalID":"s:14AuthFoundation9HasClaimsPAAE10userLocale0B00F0VSgvp","extendedModule":"AuthFoundation","modules":[{"name":"AuthFoundation"}]},"hierarchy":{"paths":[["doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/AuthFoundation","doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/AuthFoundation\/HasClaims"]]},"references":{"doc://com.okta.mobile.oktaoauth2/documentation/AuthFoundation/HasClaims":{"role":"symbol","title":"HasClaims","fragments":[{"kind":"keyword","text":"protocol"},{"kind":"text","text":" "},{"kind":"identifier","text":"HasClaims"}],"abstract":[{"type":"text","text":"Used by classes that contains OAuth2 claims."}],"identifier":"doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/AuthFoundation\/HasClaims","kind":"symbol","type":"topic","navigatorTitle":[{"kind":"identifier","text":"HasClaims"}],"url":"\/documentation\/authfoundation\/hasclaims"},"doc://com.okta.mobile.oktaoauth2/documentation/AuthFoundation":{"role":"collection","title":"AuthFoundation","abstract":[],"identifier":"doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/AuthFoundation","kind":"symbol","type":"topic","url":"\/documentation\/authfoundation"},"doc://com.okta.mobile.oktaoauth2/documentation/AuthFoundation/HasClaims/userLocale":{"role":"symbol","title":"userLocale","fragments":[{"kind":"keyword","text":"var"},{"kind":"text","text":" "},{"kind":"identifier","text":"userLocale"},{"kind":"text","text":": "},{"kind":"typeIdentifier","text":"Locale","preciseIdentifier":"s:10Foundation6LocaleV"},{"kind":"text","text":"?"}],"abstract":[{"type":"text","text":"The user’s locale, represnted as a Locale object."}],"identifier":"doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/AuthFoundation\/HasClaims\/userLocale","kind":"symbol","type":"topic","url":"\/documentation\/authfoundation\/hasclaims\/userlocale"}}}
+{
+  "abstract" : [
+    {
+      "text" : "The user’s locale, represnted as a Locale object.",
+      "type" : "text"
+    }
+  ],
+  "hierarchy" : {
+    "paths" : [
+      [
+        "doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/AuthFoundation",
+        "doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/AuthFoundation\/HasClaims"
+      ]
+    ]
+  },
+  "identifier" : {
+    "interfaceLanguage" : "swift",
+    "url" : "doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/AuthFoundation\/HasClaims\/userLocale"
+  },
+  "kind" : "symbol",
+  "metadata" : {
+    "extendedModule" : "AuthFoundation",
+    "externalID" : "s:14AuthFoundation9HasClaimsPAAE10userLocale0B00F0VSgvp",
+    "fragments" : [
+      {
+        "kind" : "keyword",
+        "text" : "var"
+      },
+      {
+        "kind" : "text",
+        "text" : " "
+      },
+      {
+        "kind" : "identifier",
+        "text" : "userLocale"
+      },
+      {
+        "kind" : "text",
+        "text" : ": "
+      },
+      {
+        "kind" : "typeIdentifier",
+        "preciseIdentifier" : "s:10Foundation6LocaleV",
+        "text" : "Locale"
+      },
+      {
+        "kind" : "text",
+        "text" : "?"
+      }
+    ],
+    "modules" : [
+      {
+        "name" : "AuthFoundation"
+      }
+    ],
+    "role" : "symbol",
+    "roleHeading" : "Instance Property",
+    "symbolKind" : "property",
+    "title" : "userLocale"
+  },
+  "primaryContentSections" : [
+    {
+      "declarations" : [
+        {
+          "languages" : [
+            "swift"
+          ],
+          "platforms" : [
+            "macOS"
+          ],
+          "tokens" : [
+            {
+              "kind" : "keyword",
+              "text" : "var"
+            },
+            {
+              "kind" : "text",
+              "text" : " "
+            },
+            {
+              "kind" : "identifier",
+              "text" : "userLocale"
+            },
+            {
+              "kind" : "text",
+              "text" : ": "
+            },
+            {
+              "kind" : "typeIdentifier",
+              "preciseIdentifier" : "s:10Foundation6LocaleV",
+              "text" : "Locale"
+            },
+            {
+              "kind" : "text",
+              "text" : "? { "
+            },
+            {
+              "kind" : "keyword",
+              "text" : "get"
+            },
+            {
+              "kind" : "text",
+              "text" : " }"
+            }
+          ]
+        }
+      ],
+      "kind" : "declarations"
+    }
+  ],
+  "schemaVersion" : {
+    "major" : 0,
+    "minor" : 2,
+    "patch" : 0
+  },
+  "sections" : [
+
+  ],
+  "variants" : [
+    {
+      "paths" : [
+        "\/documentation\/authfoundation\/hasclaims\/userlocale"
+      ],
+      "traits" : [
+        {
+          "interfaceLanguage" : "swift"
+        }
+      ]
+    }
+  ]
+, 
+"references": {
+"doc://com.okta.mobile.oktaoauth2/documentation/AuthFoundation": {
+  "abstract" : [
+
+  ],
+  "identifier" : "doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/AuthFoundation",
+  "kind" : "symbol",
+  "role" : "collection",
+  "title" : "AuthFoundation",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation"
+},
+"doc://com.okta.mobile.oktaoauth2/documentation/AuthFoundation/HasClaims": {
+  "abstract" : [
+    {
+      "text" : "Used by classes that contains OAuth2 claims.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "protocol"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "HasClaims"
+    }
+  ],
+  "identifier" : "doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/AuthFoundation\/HasClaims",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "HasClaims"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "HasClaims",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/hasclaims"
+},
+"doc://com.okta.mobile.oktaoauth2/documentation/AuthFoundation/HasClaims/userLocale": {
+  "abstract" : [
+    {
+      "text" : "The user’s locale, represnted as a Locale object.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "var"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "userLocale"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:10Foundation6LocaleV",
+      "text" : "Locale"
+    },
+    {
+      "kind" : "text",
+      "text" : "?"
+    }
+  ],
+  "identifier" : "doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/AuthFoundation\/HasClaims\/userLocale",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "userLocale",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/hasclaims\/userlocale"
+}
+}
+}

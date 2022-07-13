@@ -1,1 +1,367 @@
-{"primaryContentSections":[{"kind":"declarations","declarations":[{"tokens":[{"kind":"keyword","text":"var"},{"kind":"text","text":" "},{"kind":"identifier","text":"count"},{"kind":"text","text":": "},{"kind":"typeIdentifier","text":"Int","preciseIdentifier":"s:Si"},{"kind":"text","text":" { "},{"kind":"keyword","text":"get"},{"kind":"text","text":" }"}],"languages":["swift"],"platforms":["macOS"]}]},{"kind":"content","content":[{"anchor":"discussion","level":2,"type":"heading","text":"Discussion"},{"type":"paragraph","inlineContent":[{"type":"text","text":"To check whether a collection is empty, use its "},{"type":"codeVoice","code":"isEmpty"},{"type":"text","text":" property"},{"type":"text","text":" "},{"type":"text","text":"instead of comparing "},{"type":"codeVoice","code":"count"},{"type":"text","text":" to zero. Unless the collection guarantees"},{"type":"text","text":" "},{"type":"text","text":"random-access performance, calculating "},{"type":"codeVoice","code":"count"},{"type":"text","text":" can be an O("},{"type":"emphasis","inlineContent":[{"type":"text","text":"n"}]},{"type":"text","text":")"},{"type":"text","text":" "},{"type":"text","text":"operation."}]},{"style":"note","content":[{"type":"paragraph","inlineContent":[{"type":"text","text":"O(1) if the collection conforms to"},{"type":"text","text":" "},{"type":"codeVoice","code":"RandomAccessCollection"},{"type":"text","text":"; otherwise, O("},{"type":"emphasis","inlineContent":[{"type":"text","text":"n"}]},{"type":"text","text":"), where "},{"type":"emphasis","inlineContent":[{"type":"text","text":"n"}]},{"type":"text","text":" is the length"},{"type":"text","text":" "},{"type":"text","text":"of the collection."}]}],"type":"aside","name":"Complexity"}]}],"schemaVersion":{"major":0,"minor":2,"patch":0},"sections":[],"variants":[{"paths":["\/documentation\/authfoundation\/jwks\/count"],"traits":[{"interfaceLanguage":"swift"}]}],"identifier":{"url":"doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/AuthFoundation\/JWKS\/count","interfaceLanguage":"swift"},"abstract":[{"type":"text","text":"The number of elements in the collection."}],"kind":"symbol","metadata":{"role":"symbol","title":"count","roleHeading":"Instance Property","fragments":[{"kind":"keyword","text":"var"},{"kind":"text","text":" "},{"kind":"identifier","text":"count"},{"kind":"text","text":": "},{"kind":"typeIdentifier","text":"Int","preciseIdentifier":"s:Si"}],"symbolKind":"property","externalID":"s:SlsE5countSivp::SYNTHESIZED::s:14AuthFoundation4JWKSV","extendedModule":"Swift","modules":[{"name":"AuthFoundation"}]},"hierarchy":{"paths":[["doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/AuthFoundation","doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/AuthFoundation\/JWKS","doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/AuthFoundation\/JWKS\/Collection-Implementations"]]},"references":{"doc://com.okta.mobile.webauthenticationui/documentation/AuthFoundation/JWKS":{"role":"symbol","title":"JWKS","fragments":[{"kind":"keyword","text":"struct"},{"kind":"text","text":" "},{"kind":"identifier","text":"JWKS"}],"abstract":[{"type":"text","text":"Describes the collection of keys associated with an authorization server."}],"identifier":"doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/AuthFoundation\/JWKS","kind":"symbol","type":"topic","navigatorTitle":[{"kind":"identifier","text":"JWKS"}],"url":"\/documentation\/authfoundation\/jwks"},"doc://com.okta.mobile.webauthenticationui/documentation/AuthFoundation/JWKS/count":{"role":"symbol","title":"count","fragments":[{"kind":"keyword","text":"var"},{"kind":"text","text":" "},{"kind":"identifier","text":"count"},{"kind":"text","text":": "},{"kind":"typeIdentifier","text":"Int","preciseIdentifier":"s:Si"}],"abstract":[{"type":"text","text":"The number of elements in the collection."}],"identifier":"doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/AuthFoundation\/JWKS\/count","kind":"symbol","type":"topic","url":"\/documentation\/authfoundation\/jwks\/count"},"doc://com.okta.mobile.webauthenticationui/documentation/AuthFoundation":{"role":"collection","title":"AuthFoundation","abstract":[],"identifier":"doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/AuthFoundation","kind":"symbol","type":"topic","url":"\/documentation\/authfoundation"},"doc://com.okta.mobile.webauthenticationui/documentation/AuthFoundation/JWKS/Collection-Implementations":{"role":"collectionGroup","title":"Collection Implementations","abstract":[],"identifier":"doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/AuthFoundation\/JWKS\/Collection-Implementations","kind":"article","type":"topic","url":"\/documentation\/authfoundation\/jwks\/collection-implementations"}}}
+{
+  "abstract" : [
+    {
+      "text" : "The number of elements in the collection.",
+      "type" : "text"
+    }
+  ],
+  "hierarchy" : {
+    "paths" : [
+      [
+        "doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/AuthFoundation",
+        "doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/AuthFoundation\/JWKS",
+        "doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/AuthFoundation\/JWKS\/Collection-Implementations"
+      ]
+    ]
+  },
+  "identifier" : {
+    "interfaceLanguage" : "swift",
+    "url" : "doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/AuthFoundation\/JWKS\/count"
+  },
+  "kind" : "symbol",
+  "metadata" : {
+    "extendedModule" : "Swift",
+    "externalID" : "s:SlsE5countSivp::SYNTHESIZED::s:14AuthFoundation4JWKSV",
+    "fragments" : [
+      {
+        "kind" : "keyword",
+        "text" : "var"
+      },
+      {
+        "kind" : "text",
+        "text" : " "
+      },
+      {
+        "kind" : "identifier",
+        "text" : "count"
+      },
+      {
+        "kind" : "text",
+        "text" : ": "
+      },
+      {
+        "kind" : "typeIdentifier",
+        "preciseIdentifier" : "s:Si",
+        "text" : "Int"
+      }
+    ],
+    "modules" : [
+      {
+        "name" : "AuthFoundation"
+      }
+    ],
+    "role" : "symbol",
+    "roleHeading" : "Instance Property",
+    "symbolKind" : "property",
+    "title" : "count"
+  },
+  "primaryContentSections" : [
+    {
+      "declarations" : [
+        {
+          "languages" : [
+            "swift"
+          ],
+          "platforms" : [
+            "macOS"
+          ],
+          "tokens" : [
+            {
+              "kind" : "keyword",
+              "text" : "var"
+            },
+            {
+              "kind" : "text",
+              "text" : " "
+            },
+            {
+              "kind" : "identifier",
+              "text" : "count"
+            },
+            {
+              "kind" : "text",
+              "text" : ": "
+            },
+            {
+              "kind" : "typeIdentifier",
+              "preciseIdentifier" : "s:Si",
+              "text" : "Int"
+            },
+            {
+              "kind" : "text",
+              "text" : " { "
+            },
+            {
+              "kind" : "keyword",
+              "text" : "get"
+            },
+            {
+              "kind" : "text",
+              "text" : " }"
+            }
+          ]
+        }
+      ],
+      "kind" : "declarations"
+    },
+    {
+      "content" : [
+        {
+          "anchor" : "discussion",
+          "level" : 2,
+          "text" : "Discussion",
+          "type" : "heading"
+        },
+        {
+          "inlineContent" : [
+            {
+              "text" : "To check whether a collection is empty, use its ",
+              "type" : "text"
+            },
+            {
+              "code" : "isEmpty",
+              "type" : "codeVoice"
+            },
+            {
+              "text" : " property",
+              "type" : "text"
+            },
+            {
+              "text" : " ",
+              "type" : "text"
+            },
+            {
+              "text" : "instead of comparing ",
+              "type" : "text"
+            },
+            {
+              "code" : "count",
+              "type" : "codeVoice"
+            },
+            {
+              "text" : " to zero. Unless the collection guarantees",
+              "type" : "text"
+            },
+            {
+              "text" : " ",
+              "type" : "text"
+            },
+            {
+              "text" : "random-access performance, calculating ",
+              "type" : "text"
+            },
+            {
+              "code" : "count",
+              "type" : "codeVoice"
+            },
+            {
+              "text" : " can be an O(",
+              "type" : "text"
+            },
+            {
+              "inlineContent" : [
+                {
+                  "text" : "n",
+                  "type" : "text"
+                }
+              ],
+              "type" : "emphasis"
+            },
+            {
+              "text" : ")",
+              "type" : "text"
+            },
+            {
+              "text" : " ",
+              "type" : "text"
+            },
+            {
+              "text" : "operation.",
+              "type" : "text"
+            }
+          ],
+          "type" : "paragraph"
+        },
+        {
+          "content" : [
+            {
+              "inlineContent" : [
+                {
+                  "text" : "O(1) if the collection conforms to",
+                  "type" : "text"
+                },
+                {
+                  "text" : " ",
+                  "type" : "text"
+                },
+                {
+                  "code" : "RandomAccessCollection",
+                  "type" : "codeVoice"
+                },
+                {
+                  "text" : "; otherwise, O(",
+                  "type" : "text"
+                },
+                {
+                  "inlineContent" : [
+                    {
+                      "text" : "n",
+                      "type" : "text"
+                    }
+                  ],
+                  "type" : "emphasis"
+                },
+                {
+                  "text" : "), where ",
+                  "type" : "text"
+                },
+                {
+                  "inlineContent" : [
+                    {
+                      "text" : "n",
+                      "type" : "text"
+                    }
+                  ],
+                  "type" : "emphasis"
+                },
+                {
+                  "text" : " is the length",
+                  "type" : "text"
+                },
+                {
+                  "text" : " ",
+                  "type" : "text"
+                },
+                {
+                  "text" : "of the collection.",
+                  "type" : "text"
+                }
+              ],
+              "type" : "paragraph"
+            }
+          ],
+          "name" : "Complexity",
+          "style" : "note",
+          "type" : "aside"
+        }
+      ],
+      "kind" : "content"
+    }
+  ],
+  "schemaVersion" : {
+    "major" : 0,
+    "minor" : 2,
+    "patch" : 0
+  },
+  "sections" : [
+
+  ],
+  "variants" : [
+    {
+      "paths" : [
+        "\/documentation\/authfoundation\/jwks\/count"
+      ],
+      "traits" : [
+        {
+          "interfaceLanguage" : "swift"
+        }
+      ]
+    }
+  ]
+, 
+"references": {
+"doc://com.okta.mobile.webauthenticationui/documentation/AuthFoundation": {
+  "abstract" : [
+
+  ],
+  "identifier" : "doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/AuthFoundation",
+  "kind" : "symbol",
+  "role" : "collection",
+  "title" : "AuthFoundation",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation"
+},
+"doc://com.okta.mobile.webauthenticationui/documentation/AuthFoundation/JWKS": {
+  "abstract" : [
+    {
+      "text" : "Describes the collection of keys associated with an authorization server.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "struct"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "JWKS"
+    }
+  ],
+  "identifier" : "doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/AuthFoundation\/JWKS",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "JWKS"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "JWKS",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/jwks"
+},
+"doc://com.okta.mobile.webauthenticationui/documentation/AuthFoundation/JWKS/Collection-Implementations": {
+  "abstract" : [
+
+  ],
+  "identifier" : "doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/AuthFoundation\/JWKS\/Collection-Implementations",
+  "kind" : "article",
+  "role" : "collectionGroup",
+  "title" : "Collection Implementations",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/jwks\/collection-implementations"
+},
+"doc://com.okta.mobile.webauthenticationui/documentation/AuthFoundation/JWKS/count": {
+  "abstract" : [
+    {
+      "text" : "The number of elements in the collection.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "var"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "count"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:Si",
+      "text" : "Int"
+    }
+  ],
+  "identifier" : "doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/AuthFoundation\/JWKS\/count",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "count",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/jwks\/count"
+}
+}
+}

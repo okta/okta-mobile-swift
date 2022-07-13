@@ -1,1 +1,175 @@
-{"primaryContentSections":[{"kind":"declarations","declarations":[{"tokens":[{"kind":"keyword","text":"case"},{"kind":"text","text":" "},{"kind":"identifier","text":"metadataConsistency"}],"languages":["swift"],"platforms":["macOS"]}]}],"schemaVersion":{"major":0,"minor":2,"patch":0},"sections":[],"variants":[{"paths":["\/documentation\/authfoundation\/credentialerror\/metadataconsistency"],"traits":[{"interfaceLanguage":"swift"}]}],"identifier":{"url":"doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/CredentialError\/metadataConsistency","interfaceLanguage":"swift"},"abstract":[{"type":"text","text":"Thrown when the metadata associated with a token has become inconsistent."}],"kind":"symbol","metadata":{"fragments":[{"kind":"keyword","text":"case"},{"kind":"text","text":" "},{"kind":"identifier","text":"metadataConsistency"}],"title":"CredentialError.metadataConsistency","roleHeading":"Case","role":"symbol","symbolKind":"case","externalID":"s:14AuthFoundation15CredentialErrorO19metadataConsistencyyA2CmF","modules":[{"name":"AuthFoundation"}]},"hierarchy":{"paths":[["doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation","doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/CredentialError"]]},"references":{"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/CredentialError":{"role":"symbol","title":"CredentialError","fragments":[{"kind":"keyword","text":"enum"},{"kind":"text","text":" "},{"kind":"identifier","text":"CredentialError"}],"abstract":[{"type":"text","text":"Errors that may occur in the process of managing credentials."}],"identifier":"doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/CredentialError","kind":"symbol","type":"topic","navigatorTitle":[{"kind":"identifier","text":"CredentialError"}],"url":"\/documentation\/authfoundation\/credentialerror"},"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/CredentialError/metadataConsistency":{"role":"symbol","title":"CredentialError.metadataConsistency","fragments":[{"kind":"keyword","text":"case"},{"kind":"text","text":" "},{"kind":"identifier","text":"metadataConsistency"}],"abstract":[{"type":"text","text":"Thrown when the metadata associated with a token has become inconsistent."}],"identifier":"doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/CredentialError\/metadataConsistency","kind":"symbol","type":"topic","url":"\/documentation\/authfoundation\/credentialerror\/metadataconsistency"},"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation":{"role":"collection","title":"AuthFoundation","abstract":[{"type":"text","text":"Library that provides foundational features used by Okta’s authentication libraries, as well as APIs used to work with tokens and user credentials."}],"identifier":"doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation","kind":"symbol","type":"topic","url":"\/documentation\/authfoundation"}}}
+{
+  "abstract" : [
+    {
+      "text" : "Thrown when the metadata associated with a token has become inconsistent.",
+      "type" : "text"
+    }
+  ],
+  "hierarchy" : {
+    "paths" : [
+      [
+        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation",
+        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/CredentialError"
+      ]
+    ]
+  },
+  "identifier" : {
+    "interfaceLanguage" : "swift",
+    "url" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/CredentialError\/metadataConsistency"
+  },
+  "kind" : "symbol",
+  "metadata" : {
+    "externalID" : "s:14AuthFoundation15CredentialErrorO19metadataConsistencyyA2CmF",
+    "fragments" : [
+      {
+        "kind" : "keyword",
+        "text" : "case"
+      },
+      {
+        "kind" : "text",
+        "text" : " "
+      },
+      {
+        "kind" : "identifier",
+        "text" : "metadataConsistency"
+      }
+    ],
+    "modules" : [
+      {
+        "name" : "AuthFoundation"
+      }
+    ],
+    "role" : "symbol",
+    "roleHeading" : "Case",
+    "symbolKind" : "case",
+    "title" : "CredentialError.metadataConsistency"
+  },
+  "primaryContentSections" : [
+    {
+      "declarations" : [
+        {
+          "languages" : [
+            "swift"
+          ],
+          "platforms" : [
+            "macOS"
+          ],
+          "tokens" : [
+            {
+              "kind" : "keyword",
+              "text" : "case"
+            },
+            {
+              "kind" : "text",
+              "text" : " "
+            },
+            {
+              "kind" : "identifier",
+              "text" : "metadataConsistency"
+            }
+          ]
+        }
+      ],
+      "kind" : "declarations"
+    }
+  ],
+  "schemaVersion" : {
+    "major" : 0,
+    "minor" : 2,
+    "patch" : 0
+  },
+  "sections" : [
+
+  ],
+  "variants" : [
+    {
+      "paths" : [
+        "\/documentation\/authfoundation\/credentialerror\/metadataconsistency"
+      ],
+      "traits" : [
+        {
+          "interfaceLanguage" : "swift"
+        }
+      ]
+    }
+  ]
+, 
+"references": {
+"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation": {
+  "abstract" : [
+    {
+      "text" : "Library that provides foundational features used by Okta’s authentication libraries, as well as APIs used to work with tokens and user credentials.",
+      "type" : "text"
+    }
+  ],
+  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation",
+  "kind" : "symbol",
+  "role" : "collection",
+  "title" : "AuthFoundation",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation"
+},
+"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/CredentialError": {
+  "abstract" : [
+    {
+      "text" : "Errors that may occur in the process of managing credentials.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "enum"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "CredentialError"
+    }
+  ],
+  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/CredentialError",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "CredentialError"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "CredentialError",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/credentialerror"
+},
+"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/CredentialError/metadataConsistency": {
+  "abstract" : [
+    {
+      "text" : "Thrown when the metadata associated with a token has become inconsistent.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "case"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "metadataConsistency"
+    }
+  ],
+  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/CredentialError\/metadataConsistency",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "CredentialError.metadataConsistency",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/credentialerror\/metadataconsistency"
+}
+}
+}

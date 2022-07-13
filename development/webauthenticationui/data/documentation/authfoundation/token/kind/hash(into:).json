@@ -1,1 +1,408 @@
-{"primaryContentSections":[{"kind":"declarations","declarations":[{"tokens":[{"kind":"keyword","text":"func"},{"kind":"text","text":" "},{"kind":"identifier","text":"hash"},{"kind":"text","text":"("},{"kind":"externalParam","text":"into"},{"kind":"text","text":" "},{"kind":"internalParam","text":"hasher"},{"kind":"text","text":": "},{"kind":"keyword","text":"inout"},{"kind":"text","text":" "},{"kind":"typeIdentifier","text":"Hasher","preciseIdentifier":"s:s6HasherV"},{"kind":"text","text":")"}],"languages":["swift"],"platforms":["macOS"]}]}],"schemaVersion":{"major":0,"minor":2,"patch":0},"sections":[],"variants":[{"paths":["\/documentation\/authfoundation\/token\/kind\/hash(into:)"],"traits":[{"interfaceLanguage":"swift"}]}],"identifier":{"url":"doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/AuthFoundation\/Token\/Kind\/hash(into:)","interfaceLanguage":"swift"},"abstract":[{"type":"text","text":"No overview available."}],"kind":"symbol","metadata":{"conformance":{"constraints":[{"type":"codeVoice","code":"Self"},{"type":"text","text":" conforms to "},{"type":"codeVoice","code":"Hashable"},{"type":"text","text":" and "},{"type":"codeVoice","code":"RawValue"},{"type":"text","text":" conforms to "},{"type":"codeVoice","code":"Hashable"},{"type":"text","text":"."}],"availabilityPrefix":[{"type":"text","text":"Available when"}],"conformancePrefix":[{"type":"text","text":"Conforms when"}]},"role":"symbol","title":"hash(into:)","roleHeading":"Instance Method","fragments":[{"kind":"keyword","text":"func"},{"kind":"text","text":" "},{"kind":"identifier","text":"hash"},{"kind":"text","text":"("},{"kind":"externalParam","text":"into"},{"kind":"text","text":": "},{"kind":"keyword","text":"inout"},{"kind":"text","text":" "},{"kind":"typeIdentifier","text":"Hasher","preciseIdentifier":"s:s6HasherV"},{"kind":"text","text":")"}],"symbolKind":"method","externalID":"s:SYsSHRzSH8RawValueSYRpzrlE4hash4intoys6HasherVz_tF::SYNTHESIZED::s:14AuthFoundation5TokenC4KindO","extendedModule":"Swift","modules":[{"name":"AuthFoundation"}]},"hierarchy":{"paths":[["doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/AuthFoundation","doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/AuthFoundation\/Token","doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/AuthFoundation\/Token\/Kind","doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/AuthFoundation\/Token\/Kind\/RawRepresentable-Implementations"]]},"references":{"doc://com.okta.mobile.webauthenticationui/documentation/AuthFoundation/Token/Kind":{"role":"symbol","title":"Token.Kind","fragments":[{"kind":"keyword","text":"enum"},{"kind":"text","text":" "},{"kind":"identifier","text":"Kind"}],"abstract":[{"type":"text","text":"The kind of access token an operation should be used with."}],"identifier":"doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/AuthFoundation\/Token\/Kind","kind":"symbol","type":"topic","navigatorTitle":[{"kind":"identifier","text":"Kind"}],"url":"\/documentation\/authfoundation\/token\/kind"},"doc://com.okta.mobile.webauthenticationui/documentation/AuthFoundation":{"role":"collection","title":"AuthFoundation","abstract":[],"identifier":"doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/AuthFoundation","kind":"symbol","type":"topic","url":"\/documentation\/authfoundation"},"doc://com.okta.mobile.webauthenticationui/documentation/AuthFoundation/Token":{"role":"symbol","title":"Token","fragments":[{"kind":"keyword","text":"class"},{"kind":"text","text":" "},{"kind":"identifier","text":"Token"}],"abstract":[{"type":"text","text":"Token information representing a user’s access to a resource server, including access token, refresh token, and other related information."}],"identifier":"doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/AuthFoundation\/Token","kind":"symbol","type":"topic","navigatorTitle":[{"kind":"identifier","text":"Token"}],"url":"\/documentation\/authfoundation\/token"},"doc://com.okta.mobile.webauthenticationui/documentation/AuthFoundation/Token/Kind/RawRepresentable-Implementations":{"role":"collectionGroup","title":"RawRepresentable Implementations","abstract":[],"identifier":"doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/AuthFoundation\/Token\/Kind\/RawRepresentable-Implementations","kind":"article","type":"topic","url":"\/documentation\/authfoundation\/token\/kind\/rawrepresentable-implementations"},"doc://com.okta.mobile.webauthenticationui/documentation/AuthFoundation/Token/Kind/hash(into:)":{"conformance":{"constraints":[{"type":"codeVoice","code":"Self"},{"type":"text","text":" conforms to "},{"type":"codeVoice","code":"Hashable"},{"type":"text","text":" and "},{"type":"codeVoice","code":"RawValue"},{"type":"text","text":" conforms to "},{"type":"codeVoice","code":"Hashable"},{"type":"text","text":"."}],"availabilityPrefix":[{"type":"text","text":"Available when"}],"conformancePrefix":[{"type":"text","text":"Conforms when"}]},"role":"symbol","title":"hash(into:)","fragments":[{"kind":"keyword","text":"func"},{"kind":"text","text":" "},{"kind":"identifier","text":"hash"},{"kind":"text","text":"("},{"kind":"externalParam","text":"into"},{"kind":"text","text":": "},{"kind":"keyword","text":"inout"},{"kind":"text","text":" "},{"kind":"typeIdentifier","text":"Hasher","preciseIdentifier":"s:s6HasherV"},{"kind":"text","text":")"}],"abstract":[],"identifier":"doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/AuthFoundation\/Token\/Kind\/hash(into:)","kind":"symbol","type":"topic","url":"\/documentation\/authfoundation\/token\/kind\/hash(into:)"}}}
+{
+  "abstract" : [
+    {
+      "text" : "No overview available.",
+      "type" : "text"
+    }
+  ],
+  "hierarchy" : {
+    "paths" : [
+      [
+        "doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/AuthFoundation",
+        "doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/AuthFoundation\/Token",
+        "doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/AuthFoundation\/Token\/Kind",
+        "doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/AuthFoundation\/Token\/Kind\/RawRepresentable-Implementations"
+      ]
+    ]
+  },
+  "identifier" : {
+    "interfaceLanguage" : "swift",
+    "url" : "doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/AuthFoundation\/Token\/Kind\/hash(into:)"
+  },
+  "kind" : "symbol",
+  "metadata" : {
+    "conformance" : {
+      "availabilityPrefix" : [
+        {
+          "text" : "Available when",
+          "type" : "text"
+        }
+      ],
+      "conformancePrefix" : [
+        {
+          "text" : "Conforms when",
+          "type" : "text"
+        }
+      ],
+      "constraints" : [
+        {
+          "code" : "Self",
+          "type" : "codeVoice"
+        },
+        {
+          "text" : " conforms to ",
+          "type" : "text"
+        },
+        {
+          "code" : "Hashable",
+          "type" : "codeVoice"
+        },
+        {
+          "text" : " and ",
+          "type" : "text"
+        },
+        {
+          "code" : "RawValue",
+          "type" : "codeVoice"
+        },
+        {
+          "text" : " conforms to ",
+          "type" : "text"
+        },
+        {
+          "code" : "Hashable",
+          "type" : "codeVoice"
+        },
+        {
+          "text" : ".",
+          "type" : "text"
+        }
+      ]
+    },
+    "extendedModule" : "Swift",
+    "externalID" : "s:SYsSHRzSH8RawValueSYRpzrlE4hash4intoys6HasherVz_tF::SYNTHESIZED::s:14AuthFoundation5TokenC4KindO",
+    "fragments" : [
+      {
+        "kind" : "keyword",
+        "text" : "func"
+      },
+      {
+        "kind" : "text",
+        "text" : " "
+      },
+      {
+        "kind" : "identifier",
+        "text" : "hash"
+      },
+      {
+        "kind" : "text",
+        "text" : "("
+      },
+      {
+        "kind" : "externalParam",
+        "text" : "into"
+      },
+      {
+        "kind" : "text",
+        "text" : ": "
+      },
+      {
+        "kind" : "keyword",
+        "text" : "inout"
+      },
+      {
+        "kind" : "text",
+        "text" : " "
+      },
+      {
+        "kind" : "typeIdentifier",
+        "preciseIdentifier" : "s:s6HasherV",
+        "text" : "Hasher"
+      },
+      {
+        "kind" : "text",
+        "text" : ")"
+      }
+    ],
+    "modules" : [
+      {
+        "name" : "AuthFoundation"
+      }
+    ],
+    "role" : "symbol",
+    "roleHeading" : "Instance Method",
+    "symbolKind" : "method",
+    "title" : "hash(into:)"
+  },
+  "primaryContentSections" : [
+    {
+      "declarations" : [
+        {
+          "languages" : [
+            "swift"
+          ],
+          "platforms" : [
+            "macOS"
+          ],
+          "tokens" : [
+            {
+              "kind" : "keyword",
+              "text" : "func"
+            },
+            {
+              "kind" : "text",
+              "text" : " "
+            },
+            {
+              "kind" : "identifier",
+              "text" : "hash"
+            },
+            {
+              "kind" : "text",
+              "text" : "("
+            },
+            {
+              "kind" : "externalParam",
+              "text" : "into"
+            },
+            {
+              "kind" : "text",
+              "text" : " "
+            },
+            {
+              "kind" : "internalParam",
+              "text" : "hasher"
+            },
+            {
+              "kind" : "text",
+              "text" : ": "
+            },
+            {
+              "kind" : "keyword",
+              "text" : "inout"
+            },
+            {
+              "kind" : "text",
+              "text" : " "
+            },
+            {
+              "kind" : "typeIdentifier",
+              "preciseIdentifier" : "s:s6HasherV",
+              "text" : "Hasher"
+            },
+            {
+              "kind" : "text",
+              "text" : ")"
+            }
+          ]
+        }
+      ],
+      "kind" : "declarations"
+    }
+  ],
+  "schemaVersion" : {
+    "major" : 0,
+    "minor" : 2,
+    "patch" : 0
+  },
+  "sections" : [
+
+  ],
+  "variants" : [
+    {
+      "paths" : [
+        "\/documentation\/authfoundation\/token\/kind\/hash(into:)"
+      ],
+      "traits" : [
+        {
+          "interfaceLanguage" : "swift"
+        }
+      ]
+    }
+  ]
+, 
+"references": {
+"doc://com.okta.mobile.webauthenticationui/documentation/AuthFoundation": {
+  "abstract" : [
+
+  ],
+  "identifier" : "doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/AuthFoundation",
+  "kind" : "symbol",
+  "role" : "collection",
+  "title" : "AuthFoundation",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation"
+},
+"doc://com.okta.mobile.webauthenticationui/documentation/AuthFoundation/Token": {
+  "abstract" : [
+    {
+      "text" : "Token information representing a user’s access to a resource server, including access token, refresh token, and other related information.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "class"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "Token"
+    }
+  ],
+  "identifier" : "doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/AuthFoundation\/Token",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "Token"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "Token",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/token"
+},
+"doc://com.okta.mobile.webauthenticationui/documentation/AuthFoundation/Token/Kind": {
+  "abstract" : [
+    {
+      "text" : "The kind of access token an operation should be used with.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "enum"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "Kind"
+    }
+  ],
+  "identifier" : "doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/AuthFoundation\/Token\/Kind",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "Kind"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "Token.Kind",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/token\/kind"
+},
+"doc://com.okta.mobile.webauthenticationui/documentation/AuthFoundation/Token/Kind/RawRepresentable-Implementations": {
+  "abstract" : [
+
+  ],
+  "identifier" : "doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/AuthFoundation\/Token\/Kind\/RawRepresentable-Implementations",
+  "kind" : "article",
+  "role" : "collectionGroup",
+  "title" : "RawRepresentable Implementations",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/token\/kind\/rawrepresentable-implementations"
+},
+"doc://com.okta.mobile.webauthenticationui/documentation/AuthFoundation/Token/Kind/hash(into:)": {
+  "abstract" : [
+
+  ],
+  "conformance" : {
+    "availabilityPrefix" : [
+      {
+        "text" : "Available when",
+        "type" : "text"
+      }
+    ],
+    "conformancePrefix" : [
+      {
+        "text" : "Conforms when",
+        "type" : "text"
+      }
+    ],
+    "constraints" : [
+      {
+        "code" : "Self",
+        "type" : "codeVoice"
+      },
+      {
+        "text" : " conforms to ",
+        "type" : "text"
+      },
+      {
+        "code" : "Hashable",
+        "type" : "codeVoice"
+      },
+      {
+        "text" : " and ",
+        "type" : "text"
+      },
+      {
+        "code" : "RawValue",
+        "type" : "codeVoice"
+      },
+      {
+        "text" : " conforms to ",
+        "type" : "text"
+      },
+      {
+        "code" : "Hashable",
+        "type" : "codeVoice"
+      },
+      {
+        "text" : ".",
+        "type" : "text"
+      }
+    ]
+  },
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "func"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "hash"
+    },
+    {
+      "kind" : "text",
+      "text" : "("
+    },
+    {
+      "kind" : "externalParam",
+      "text" : "into"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "keyword",
+      "text" : "inout"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:s6HasherV",
+      "text" : "Hasher"
+    },
+    {
+      "kind" : "text",
+      "text" : ")"
+    }
+  ],
+  "identifier" : "doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/AuthFoundation\/Token\/Kind\/hash(into:)",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "hash(into:)",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/token\/kind\/hash(into:)"
+}
+}
+}

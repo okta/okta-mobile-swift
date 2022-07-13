@@ -1,1 +1,234 @@
-{"primaryContentSections":[{"kind":"declarations","declarations":[{"tokens":[{"kind":"keyword","text":"let"},{"kind":"text","text":" "},{"kind":"identifier","text":"header"},{"kind":"text","text":": "},{"kind":"typeIdentifier","identifier":"doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/AuthFoundation\/JWT\/Header-swift.struct","preciseIdentifier":"s:14AuthFoundation3JWTV6HeaderV","text":"Header"}],"languages":["swift"],"platforms":["macOS"]}]}],"schemaVersion":{"major":0,"minor":2,"patch":0},"sections":[],"variants":[{"paths":["\/documentation\/authfoundation\/jwt\/header-swift.property"],"traits":[{"interfaceLanguage":"swift"}]}],"identifier":{"url":"doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/AuthFoundation\/JWT\/header-swift.property","interfaceLanguage":"swift"},"abstract":[{"type":"text","text":"The header portion of the JWT token."}],"kind":"symbol","metadata":{"fragments":[{"kind":"keyword","text":"let"},{"kind":"text","text":" "},{"kind":"identifier","text":"header"},{"kind":"text","text":": "},{"kind":"typeIdentifier","text":"Header","preciseIdentifier":"s:14AuthFoundation3JWTV6HeaderV"}],"title":"header","roleHeading":"Instance Property","role":"symbol","symbolKind":"property","externalID":"s:14AuthFoundation3JWTV6headerAC6HeaderVvp","modules":[{"name":"AuthFoundation"}]},"hierarchy":{"paths":[["doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/AuthFoundation","doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/AuthFoundation\/JWT"]]},"references":{"doc://com.okta.mobile.oktaoauth2/documentation/AuthFoundation/JWT/header-swift.property":{"role":"symbol","title":"header","fragments":[{"kind":"keyword","text":"let"},{"kind":"text","text":" "},{"kind":"identifier","text":"header"},{"kind":"text","text":": "},{"kind":"typeIdentifier","text":"Header","preciseIdentifier":"s:14AuthFoundation3JWTV6HeaderV"}],"abstract":[{"type":"text","text":"The header portion of the JWT token."}],"identifier":"doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/AuthFoundation\/JWT\/header-swift.property","kind":"symbol","type":"topic","url":"\/documentation\/authfoundation\/jwt\/header-swift.property"},"doc://com.okta.mobile.oktaoauth2/documentation/AuthFoundation/JWT":{"role":"symbol","title":"JWT","fragments":[{"kind":"keyword","text":"struct"},{"kind":"text","text":" "},{"kind":"identifier","text":"JWT"}],"abstract":[{"type":"text","text":"Represents the contents of a JWT token, providing access to its payload contents."}],"identifier":"doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/AuthFoundation\/JWT","kind":"symbol","type":"topic","navigatorTitle":[{"kind":"identifier","text":"JWT"}],"url":"\/documentation\/authfoundation\/jwt"},"doc://com.okta.mobile.oktaoauth2/documentation/AuthFoundation/JWT/Header-swift.struct":{"role":"symbol","title":"JWT.Header","fragments":[{"kind":"keyword","text":"struct"},{"kind":"text","text":" "},{"kind":"identifier","text":"Header"}],"abstract":[{"type":"text","text":"JWT header information describing the contents of the token."}],"identifier":"doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/AuthFoundation\/JWT\/Header-swift.struct","kind":"symbol","type":"topic","navigatorTitle":[{"kind":"identifier","text":"Header"}],"url":"\/documentation\/authfoundation\/jwt\/header-swift.struct"},"doc://com.okta.mobile.oktaoauth2/documentation/AuthFoundation":{"role":"collection","title":"AuthFoundation","abstract":[],"identifier":"doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/AuthFoundation","kind":"symbol","type":"topic","url":"\/documentation\/authfoundation"}}}
+{
+  "abstract" : [
+    {
+      "text" : "The header portion of the JWT token.",
+      "type" : "text"
+    }
+  ],
+  "hierarchy" : {
+    "paths" : [
+      [
+        "doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/AuthFoundation",
+        "doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/AuthFoundation\/JWT"
+      ]
+    ]
+  },
+  "identifier" : {
+    "interfaceLanguage" : "swift",
+    "url" : "doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/AuthFoundation\/JWT\/header-swift.property"
+  },
+  "kind" : "symbol",
+  "metadata" : {
+    "externalID" : "s:14AuthFoundation3JWTV6headerAC6HeaderVvp",
+    "fragments" : [
+      {
+        "kind" : "keyword",
+        "text" : "let"
+      },
+      {
+        "kind" : "text",
+        "text" : " "
+      },
+      {
+        "kind" : "identifier",
+        "text" : "header"
+      },
+      {
+        "kind" : "text",
+        "text" : ": "
+      },
+      {
+        "kind" : "typeIdentifier",
+        "preciseIdentifier" : "s:14AuthFoundation3JWTV6HeaderV",
+        "text" : "Header"
+      }
+    ],
+    "modules" : [
+      {
+        "name" : "AuthFoundation"
+      }
+    ],
+    "role" : "symbol",
+    "roleHeading" : "Instance Property",
+    "symbolKind" : "property",
+    "title" : "header"
+  },
+  "primaryContentSections" : [
+    {
+      "declarations" : [
+        {
+          "languages" : [
+            "swift"
+          ],
+          "platforms" : [
+            "macOS"
+          ],
+          "tokens" : [
+            {
+              "kind" : "keyword",
+              "text" : "let"
+            },
+            {
+              "kind" : "text",
+              "text" : " "
+            },
+            {
+              "kind" : "identifier",
+              "text" : "header"
+            },
+            {
+              "kind" : "text",
+              "text" : ": "
+            },
+            {
+              "identifier" : "doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/AuthFoundation\/JWT\/Header-swift.struct",
+              "kind" : "typeIdentifier",
+              "preciseIdentifier" : "s:14AuthFoundation3JWTV6HeaderV",
+              "text" : "Header"
+            }
+          ]
+        }
+      ],
+      "kind" : "declarations"
+    }
+  ],
+  "schemaVersion" : {
+    "major" : 0,
+    "minor" : 2,
+    "patch" : 0
+  },
+  "sections" : [
+
+  ],
+  "variants" : [
+    {
+      "paths" : [
+        "\/documentation\/authfoundation\/jwt\/header-swift.property"
+      ],
+      "traits" : [
+        {
+          "interfaceLanguage" : "swift"
+        }
+      ]
+    }
+  ]
+, 
+"references": {
+"doc://com.okta.mobile.oktaoauth2/documentation/AuthFoundation": {
+  "abstract" : [
+
+  ],
+  "identifier" : "doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/AuthFoundation",
+  "kind" : "symbol",
+  "role" : "collection",
+  "title" : "AuthFoundation",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation"
+},
+"doc://com.okta.mobile.oktaoauth2/documentation/AuthFoundation/JWT": {
+  "abstract" : [
+    {
+      "text" : "Represents the contents of a JWT token, providing access to its payload contents.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "struct"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "JWT"
+    }
+  ],
+  "identifier" : "doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/AuthFoundation\/JWT",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "JWT"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "JWT",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/jwt"
+},
+"doc://com.okta.mobile.oktaoauth2/documentation/AuthFoundation/JWT/Header-swift.struct": {
+  "abstract" : [
+    {
+      "text" : "JWT header information describing the contents of the token.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "struct"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "Header"
+    }
+  ],
+  "identifier" : "doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/AuthFoundation\/JWT\/Header-swift.struct",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "Header"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "JWT.Header",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/jwt\/header-swift.struct"
+},
+"doc://com.okta.mobile.oktaoauth2/documentation/AuthFoundation/JWT/header-swift.property": {
+  "abstract" : [
+    {
+      "text" : "The header portion of the JWT token.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "let"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "header"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:14AuthFoundation3JWTV6HeaderV",
+      "text" : "Header"
+    }
+  ],
+  "identifier" : "doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/AuthFoundation\/JWT\/header-swift.property",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "header",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/jwt\/header-swift.property"
+}
+}
+}

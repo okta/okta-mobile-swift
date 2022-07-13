@@ -1,1 +1,202 @@
-{"primaryContentSections":[{"kind":"declarations","declarations":[{"tokens":[{"kind":"keyword","text":"let"},{"kind":"text","text":" "},{"kind":"identifier","text":"result"},{"kind":"text","text":": "},{"kind":"typeIdentifier","text":"T","preciseIdentifier":"s:14AuthFoundation11APIResponseV1Txmfp"}],"languages":["swift"],"platforms":["macOS"]}]}],"schemaVersion":{"major":0,"minor":2,"patch":0},"sections":[],"variants":[{"paths":["\/documentation\/authfoundation\/apiresponse\/result"],"traits":[{"interfaceLanguage":"swift"}]}],"identifier":{"url":"doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/APIResponse\/result","interfaceLanguage":"swift"},"abstract":[{"type":"text","text":"Result provided from the request."}],"kind":"symbol","metadata":{"fragments":[{"kind":"keyword","text":"let"},{"kind":"text","text":" "},{"kind":"identifier","text":"result"},{"kind":"text","text":": "},{"kind":"typeIdentifier","text":"T","preciseIdentifier":"s:14AuthFoundation11APIResponseV1Txmfp"}],"title":"result","roleHeading":"Instance Property","role":"symbol","symbolKind":"property","externalID":"s:14AuthFoundation11APIResponseV6resultxvp","modules":[{"name":"AuthFoundation"}]},"hierarchy":{"paths":[["doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation","doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/APIResponse"]]},"references":{"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/APIResponse/result":{"role":"symbol","title":"result","fragments":[{"kind":"keyword","text":"let"},{"kind":"text","text":" "},{"kind":"identifier","text":"result"},{"kind":"text","text":": "},{"kind":"typeIdentifier","text":"T","preciseIdentifier":"s:14AuthFoundation11APIResponseV1Txmfp"}],"abstract":[{"type":"text","text":"Result provided from the request."}],"identifier":"doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/APIResponse\/result","kind":"symbol","type":"topic","url":"\/documentation\/authfoundation\/apiresponse\/result"},"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/APIResponse":{"role":"symbol","title":"APIResponse","fragments":[{"kind":"keyword","text":"struct"},{"kind":"text","text":" "},{"kind":"identifier","text":"APIResponse"}],"abstract":[{"type":"text","text":"Describes a response from an Okta request, which includes the supplied result, and other associated response metadata."}],"identifier":"doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/APIResponse","kind":"symbol","type":"topic","navigatorTitle":[{"kind":"identifier","text":"APIResponse"}],"url":"\/documentation\/authfoundation\/apiresponse"},"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation":{"role":"collection","title":"AuthFoundation","abstract":[{"type":"text","text":"Library that provides foundational features used by Okta’s authentication libraries, as well as APIs used to work with tokens and user credentials."}],"identifier":"doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation","kind":"symbol","type":"topic","url":"\/documentation\/authfoundation"}}}
+{
+  "abstract" : [
+    {
+      "text" : "Result provided from the request.",
+      "type" : "text"
+    }
+  ],
+  "hierarchy" : {
+    "paths" : [
+      [
+        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation",
+        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/APIResponse"
+      ]
+    ]
+  },
+  "identifier" : {
+    "interfaceLanguage" : "swift",
+    "url" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/APIResponse\/result"
+  },
+  "kind" : "symbol",
+  "metadata" : {
+    "externalID" : "s:14AuthFoundation11APIResponseV6resultxvp",
+    "fragments" : [
+      {
+        "kind" : "keyword",
+        "text" : "let"
+      },
+      {
+        "kind" : "text",
+        "text" : " "
+      },
+      {
+        "kind" : "identifier",
+        "text" : "result"
+      },
+      {
+        "kind" : "text",
+        "text" : ": "
+      },
+      {
+        "kind" : "typeIdentifier",
+        "preciseIdentifier" : "s:14AuthFoundation11APIResponseV1Txmfp",
+        "text" : "T"
+      }
+    ],
+    "modules" : [
+      {
+        "name" : "AuthFoundation"
+      }
+    ],
+    "role" : "symbol",
+    "roleHeading" : "Instance Property",
+    "symbolKind" : "property",
+    "title" : "result"
+  },
+  "primaryContentSections" : [
+    {
+      "declarations" : [
+        {
+          "languages" : [
+            "swift"
+          ],
+          "platforms" : [
+            "macOS"
+          ],
+          "tokens" : [
+            {
+              "kind" : "keyword",
+              "text" : "let"
+            },
+            {
+              "kind" : "text",
+              "text" : " "
+            },
+            {
+              "kind" : "identifier",
+              "text" : "result"
+            },
+            {
+              "kind" : "text",
+              "text" : ": "
+            },
+            {
+              "kind" : "typeIdentifier",
+              "preciseIdentifier" : "s:14AuthFoundation11APIResponseV1Txmfp",
+              "text" : "T"
+            }
+          ]
+        }
+      ],
+      "kind" : "declarations"
+    }
+  ],
+  "schemaVersion" : {
+    "major" : 0,
+    "minor" : 2,
+    "patch" : 0
+  },
+  "sections" : [
+
+  ],
+  "variants" : [
+    {
+      "paths" : [
+        "\/documentation\/authfoundation\/apiresponse\/result"
+      ],
+      "traits" : [
+        {
+          "interfaceLanguage" : "swift"
+        }
+      ]
+    }
+  ]
+, 
+"references": {
+"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation": {
+  "abstract" : [
+    {
+      "text" : "Library that provides foundational features used by Okta’s authentication libraries, as well as APIs used to work with tokens and user credentials.",
+      "type" : "text"
+    }
+  ],
+  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation",
+  "kind" : "symbol",
+  "role" : "collection",
+  "title" : "AuthFoundation",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation"
+},
+"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/APIResponse": {
+  "abstract" : [
+    {
+      "text" : "Describes a response from an Okta request, which includes the supplied result, and other associated response metadata.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "struct"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "APIResponse"
+    }
+  ],
+  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/APIResponse",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "APIResponse"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "APIResponse",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/apiresponse"
+},
+"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/APIResponse/result": {
+  "abstract" : [
+    {
+      "text" : "Result provided from the request.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "let"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "result"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:14AuthFoundation11APIResponseV1Txmfp",
+      "text" : "T"
+    }
+  ],
+  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/APIResponse\/result",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "result",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/apiresponse\/result"
+}
+}
+}

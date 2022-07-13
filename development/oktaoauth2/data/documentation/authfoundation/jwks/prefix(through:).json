@@ -1,1 +1,559 @@
-{"primaryContentSections":[{"kind":"declarations","declarations":[{"tokens":[{"kind":"keyword","text":"func"},{"kind":"text","text":" "},{"kind":"identifier","text":"prefix"},{"kind":"text","text":"("},{"kind":"externalParam","text":"through"},{"kind":"text","text":" "},{"kind":"internalParam","text":"position"},{"kind":"text","text":": "},{"kind":"typeIdentifier","text":"Self"},{"kind":"text","text":"."},{"kind":"typeIdentifier","text":"Index"},{"kind":"text","text":") -> "},{"kind":"typeIdentifier","text":"Self"},{"kind":"text","text":"."},{"kind":"typeIdentifier","text":"SubSequence"}],"languages":["swift"],"platforms":["macOS"]}]},{"kind":"content","content":[{"anchor":"return-value","level":2,"type":"heading","text":"Return Value"},{"type":"paragraph","inlineContent":[{"type":"text","text":"A subsequence up to, and including, the "},{"type":"codeVoice","code":"end"},{"type":"text","text":" position."}]}]},{"kind":"parameters","parameters":[{"name":"end","content":[{"type":"paragraph","inlineContent":[{"type":"text","text":"The index of the last element to include in the"},{"type":"text","text":" "},{"type":"text","text":"resulting subsequence. "},{"type":"codeVoice","code":"end"},{"type":"text","text":" must be a valid index of the collection"},{"type":"text","text":" "},{"type":"text","text":"that is not equal to the "},{"type":"codeVoice","code":"endIndex"},{"type":"text","text":" property."}]}]}]},{"kind":"content","content":[{"anchor":"discussion","level":2,"type":"heading","text":"Discussion"},{"type":"paragraph","inlineContent":[{"type":"text","text":"The resulting subsequence "},{"type":"emphasis","inlineContent":[{"type":"text","text":"includes"}]},{"type":"text","text":" the element at the position "},{"type":"codeVoice","code":"end"},{"type":"text","text":"."},{"type":"text","text":" "},{"type":"text","text":"The following example searches for the index of the number "},{"type":"codeVoice","code":"40"},{"type":"text","text":" in an"},{"type":"text","text":" "},{"type":"text","text":"array of integers, and then prints the prefix of the array up to, and"},{"type":"text","text":" "},{"type":"text","text":"including, that index:"}]},{"type":"codeListing","syntax":null,"code":["let numbers = [10, 20, 30, 40, 50, 60]","if let i = numbers.firstIndex(of: 40) {","    print(numbers.prefix(through: i))","}","\/\/ Prints \"[10, 20, 30, 40]\""]},{"type":"paragraph","inlineContent":[{"type":"text","text":"Using the "},{"type":"codeVoice","code":"prefix(through:)"},{"type":"text","text":" method is equivalent to using a partial"},{"type":"text","text":" "},{"type":"text","text":"closed range as the collection’s subscript. The subscript notation is"},{"type":"text","text":" "},{"type":"text","text":"preferred over "},{"type":"codeVoice","code":"prefix(through:)"},{"type":"text","text":"."}]},{"type":"codeListing","syntax":null,"code":["if let i = numbers.firstIndex(of: 40) {","    print(numbers[...i])","}","\/\/ Prints \"[10, 20, 30, 40]\""]},{"style":"note","content":[{"type":"paragraph","inlineContent":[{"type":"text","text":"O(1)"}]}],"type":"aside","name":"Complexity"}]}],"schemaVersion":{"major":0,"minor":2,"patch":0},"sections":[],"variants":[{"paths":["\/documentation\/authfoundation\/jwks\/prefix(through:)"],"traits":[{"interfaceLanguage":"swift"}]}],"identifier":{"url":"doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/AuthFoundation\/JWKS\/prefix(through:)","interfaceLanguage":"swift"},"abstract":[{"type":"text","text":"Returns a subsequence from the start of the collection through the"},{"type":"text","text":" "},{"type":"text","text":"specified position."}],"kind":"symbol","metadata":{"role":"symbol","title":"prefix(through:)","roleHeading":"Instance Method","fragments":[{"kind":"keyword","text":"func"},{"kind":"text","text":" "},{"kind":"identifier","text":"prefix"},{"kind":"text","text":"("},{"kind":"externalParam","text":"through"},{"kind":"text","text":": "},{"kind":"typeIdentifier","text":"Self"},{"kind":"text","text":"."},{"kind":"typeIdentifier","text":"Index"},{"kind":"text","text":") -> "},{"kind":"typeIdentifier","text":"Self"},{"kind":"text","text":"."},{"kind":"typeIdentifier","text":"SubSequence"}],"symbolKind":"method","externalID":"s:SlsE6prefix7through11SubSequenceQz5IndexQz_tF::SYNTHESIZED::s:14AuthFoundation4JWKSV","extendedModule":"Swift","modules":[{"name":"AuthFoundation"}]},"hierarchy":{"paths":[["doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/AuthFoundation","doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/AuthFoundation\/JWKS","doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/AuthFoundation\/JWKS\/Collection-Implementations"]]},"references":{"doc://com.okta.mobile.oktaoauth2/documentation/AuthFoundation/JWKS/prefix(through:)":{"role":"symbol","title":"prefix(through:)","fragments":[{"kind":"keyword","text":"func"},{"kind":"text","text":" "},{"kind":"identifier","text":"prefix"},{"kind":"text","text":"("},{"kind":"externalParam","text":"through"},{"kind":"text","text":": "},{"kind":"typeIdentifier","text":"Self"},{"kind":"text","text":"."},{"kind":"typeIdentifier","text":"Index"},{"kind":"text","text":") -> "},{"kind":"typeIdentifier","text":"Self"},{"kind":"text","text":"."},{"kind":"typeIdentifier","text":"SubSequence"}],"abstract":[{"type":"text","text":"Returns a subsequence from the start of the collection through the"},{"type":"text","text":" "},{"type":"text","text":"specified position."}],"identifier":"doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/AuthFoundation\/JWKS\/prefix(through:)","kind":"symbol","type":"topic","url":"\/documentation\/authfoundation\/jwks\/prefix(through:)"},"doc://com.okta.mobile.oktaoauth2/documentation/AuthFoundation/JWKS/Collection-Implementations":{"role":"collectionGroup","title":"Collection Implementations","abstract":[],"identifier":"doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/AuthFoundation\/JWKS\/Collection-Implementations","kind":"article","type":"topic","url":"\/documentation\/authfoundation\/jwks\/collection-implementations"},"doc://com.okta.mobile.oktaoauth2/documentation/AuthFoundation":{"role":"collection","title":"AuthFoundation","abstract":[],"identifier":"doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/AuthFoundation","kind":"symbol","type":"topic","url":"\/documentation\/authfoundation"},"doc://com.okta.mobile.oktaoauth2/documentation/AuthFoundation/JWKS":{"role":"symbol","title":"JWKS","fragments":[{"kind":"keyword","text":"struct"},{"kind":"text","text":" "},{"kind":"identifier","text":"JWKS"}],"abstract":[{"type":"text","text":"Describes the collection of keys associated with an authorization server."}],"identifier":"doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/AuthFoundation\/JWKS","kind":"symbol","type":"topic","navigatorTitle":[{"kind":"identifier","text":"JWKS"}],"url":"\/documentation\/authfoundation\/jwks"}}}
+{
+  "abstract" : [
+    {
+      "text" : "Returns a subsequence from the start of the collection through the",
+      "type" : "text"
+    },
+    {
+      "text" : " ",
+      "type" : "text"
+    },
+    {
+      "text" : "specified position.",
+      "type" : "text"
+    }
+  ],
+  "hierarchy" : {
+    "paths" : [
+      [
+        "doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/AuthFoundation",
+        "doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/AuthFoundation\/JWKS",
+        "doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/AuthFoundation\/JWKS\/Collection-Implementations"
+      ]
+    ]
+  },
+  "identifier" : {
+    "interfaceLanguage" : "swift",
+    "url" : "doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/AuthFoundation\/JWKS\/prefix(through:)"
+  },
+  "kind" : "symbol",
+  "metadata" : {
+    "extendedModule" : "Swift",
+    "externalID" : "s:SlsE6prefix7through11SubSequenceQz5IndexQz_tF::SYNTHESIZED::s:14AuthFoundation4JWKSV",
+    "fragments" : [
+      {
+        "kind" : "keyword",
+        "text" : "func"
+      },
+      {
+        "kind" : "text",
+        "text" : " "
+      },
+      {
+        "kind" : "identifier",
+        "text" : "prefix"
+      },
+      {
+        "kind" : "text",
+        "text" : "("
+      },
+      {
+        "kind" : "externalParam",
+        "text" : "through"
+      },
+      {
+        "kind" : "text",
+        "text" : ": "
+      },
+      {
+        "kind" : "typeIdentifier",
+        "text" : "Self"
+      },
+      {
+        "kind" : "text",
+        "text" : "."
+      },
+      {
+        "kind" : "typeIdentifier",
+        "text" : "Index"
+      },
+      {
+        "kind" : "text",
+        "text" : ") -> "
+      },
+      {
+        "kind" : "typeIdentifier",
+        "text" : "Self"
+      },
+      {
+        "kind" : "text",
+        "text" : "."
+      },
+      {
+        "kind" : "typeIdentifier",
+        "text" : "SubSequence"
+      }
+    ],
+    "modules" : [
+      {
+        "name" : "AuthFoundation"
+      }
+    ],
+    "role" : "symbol",
+    "roleHeading" : "Instance Method",
+    "symbolKind" : "method",
+    "title" : "prefix(through:)"
+  },
+  "primaryContentSections" : [
+    {
+      "declarations" : [
+        {
+          "languages" : [
+            "swift"
+          ],
+          "platforms" : [
+            "macOS"
+          ],
+          "tokens" : [
+            {
+              "kind" : "keyword",
+              "text" : "func"
+            },
+            {
+              "kind" : "text",
+              "text" : " "
+            },
+            {
+              "kind" : "identifier",
+              "text" : "prefix"
+            },
+            {
+              "kind" : "text",
+              "text" : "("
+            },
+            {
+              "kind" : "externalParam",
+              "text" : "through"
+            },
+            {
+              "kind" : "text",
+              "text" : " "
+            },
+            {
+              "kind" : "internalParam",
+              "text" : "position"
+            },
+            {
+              "kind" : "text",
+              "text" : ": "
+            },
+            {
+              "kind" : "typeIdentifier",
+              "text" : "Self"
+            },
+            {
+              "kind" : "text",
+              "text" : "."
+            },
+            {
+              "kind" : "typeIdentifier",
+              "text" : "Index"
+            },
+            {
+              "kind" : "text",
+              "text" : ") -> "
+            },
+            {
+              "kind" : "typeIdentifier",
+              "text" : "Self"
+            },
+            {
+              "kind" : "text",
+              "text" : "."
+            },
+            {
+              "kind" : "typeIdentifier",
+              "text" : "SubSequence"
+            }
+          ]
+        }
+      ],
+      "kind" : "declarations"
+    },
+    {
+      "content" : [
+        {
+          "anchor" : "return-value",
+          "level" : 2,
+          "text" : "Return Value",
+          "type" : "heading"
+        },
+        {
+          "inlineContent" : [
+            {
+              "text" : "A subsequence up to, and including, the ",
+              "type" : "text"
+            },
+            {
+              "code" : "end",
+              "type" : "codeVoice"
+            },
+            {
+              "text" : " position.",
+              "type" : "text"
+            }
+          ],
+          "type" : "paragraph"
+        }
+      ],
+      "kind" : "content"
+    },
+    {
+      "kind" : "parameters",
+      "parameters" : [
+        {
+          "content" : [
+            {
+              "inlineContent" : [
+                {
+                  "text" : "The index of the last element to include in the",
+                  "type" : "text"
+                },
+                {
+                  "text" : " ",
+                  "type" : "text"
+                },
+                {
+                  "text" : "resulting subsequence. ",
+                  "type" : "text"
+                },
+                {
+                  "code" : "end",
+                  "type" : "codeVoice"
+                },
+                {
+                  "text" : " must be a valid index of the collection",
+                  "type" : "text"
+                },
+                {
+                  "text" : " ",
+                  "type" : "text"
+                },
+                {
+                  "text" : "that is not equal to the ",
+                  "type" : "text"
+                },
+                {
+                  "code" : "endIndex",
+                  "type" : "codeVoice"
+                },
+                {
+                  "text" : " property.",
+                  "type" : "text"
+                }
+              ],
+              "type" : "paragraph"
+            }
+          ],
+          "name" : "end"
+        }
+      ]
+    },
+    {
+      "content" : [
+        {
+          "anchor" : "discussion",
+          "level" : 2,
+          "text" : "Discussion",
+          "type" : "heading"
+        },
+        {
+          "inlineContent" : [
+            {
+              "text" : "The resulting subsequence ",
+              "type" : "text"
+            },
+            {
+              "inlineContent" : [
+                {
+                  "text" : "includes",
+                  "type" : "text"
+                }
+              ],
+              "type" : "emphasis"
+            },
+            {
+              "text" : " the element at the position ",
+              "type" : "text"
+            },
+            {
+              "code" : "end",
+              "type" : "codeVoice"
+            },
+            {
+              "text" : ".",
+              "type" : "text"
+            },
+            {
+              "text" : " ",
+              "type" : "text"
+            },
+            {
+              "text" : "The following example searches for the index of the number ",
+              "type" : "text"
+            },
+            {
+              "code" : "40",
+              "type" : "codeVoice"
+            },
+            {
+              "text" : " in an",
+              "type" : "text"
+            },
+            {
+              "text" : " ",
+              "type" : "text"
+            },
+            {
+              "text" : "array of integers, and then prints the prefix of the array up to, and",
+              "type" : "text"
+            },
+            {
+              "text" : " ",
+              "type" : "text"
+            },
+            {
+              "text" : "including, that index:",
+              "type" : "text"
+            }
+          ],
+          "type" : "paragraph"
+        },
+        {
+          "code" : [
+            "let numbers = [10, 20, 30, 40, 50, 60]",
+            "if let i = numbers.firstIndex(of: 40) {",
+            "    print(numbers.prefix(through: i))",
+            "}",
+            "\/\/ Prints \"[10, 20, 30, 40]\""
+          ],
+          "syntax" : null,
+          "type" : "codeListing"
+        },
+        {
+          "inlineContent" : [
+            {
+              "text" : "Using the ",
+              "type" : "text"
+            },
+            {
+              "code" : "prefix(through:)",
+              "type" : "codeVoice"
+            },
+            {
+              "text" : " method is equivalent to using a partial",
+              "type" : "text"
+            },
+            {
+              "text" : " ",
+              "type" : "text"
+            },
+            {
+              "text" : "closed range as the collection’s subscript. The subscript notation is",
+              "type" : "text"
+            },
+            {
+              "text" : " ",
+              "type" : "text"
+            },
+            {
+              "text" : "preferred over ",
+              "type" : "text"
+            },
+            {
+              "code" : "prefix(through:)",
+              "type" : "codeVoice"
+            },
+            {
+              "text" : ".",
+              "type" : "text"
+            }
+          ],
+          "type" : "paragraph"
+        },
+        {
+          "code" : [
+            "if let i = numbers.firstIndex(of: 40) {",
+            "    print(numbers[...i])",
+            "}",
+            "\/\/ Prints \"[10, 20, 30, 40]\""
+          ],
+          "syntax" : null,
+          "type" : "codeListing"
+        },
+        {
+          "content" : [
+            {
+              "inlineContent" : [
+                {
+                  "text" : "O(1)",
+                  "type" : "text"
+                }
+              ],
+              "type" : "paragraph"
+            }
+          ],
+          "name" : "Complexity",
+          "style" : "note",
+          "type" : "aside"
+        }
+      ],
+      "kind" : "content"
+    }
+  ],
+  "schemaVersion" : {
+    "major" : 0,
+    "minor" : 2,
+    "patch" : 0
+  },
+  "sections" : [
+
+  ],
+  "variants" : [
+    {
+      "paths" : [
+        "\/documentation\/authfoundation\/jwks\/prefix(through:)"
+      ],
+      "traits" : [
+        {
+          "interfaceLanguage" : "swift"
+        }
+      ]
+    }
+  ]
+, 
+"references": {
+"doc://com.okta.mobile.oktaoauth2/documentation/AuthFoundation": {
+  "abstract" : [
+
+  ],
+  "identifier" : "doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/AuthFoundation",
+  "kind" : "symbol",
+  "role" : "collection",
+  "title" : "AuthFoundation",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation"
+},
+"doc://com.okta.mobile.oktaoauth2/documentation/AuthFoundation/JWKS": {
+  "abstract" : [
+    {
+      "text" : "Describes the collection of keys associated with an authorization server.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "struct"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "JWKS"
+    }
+  ],
+  "identifier" : "doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/AuthFoundation\/JWKS",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "JWKS"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "JWKS",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/jwks"
+},
+"doc://com.okta.mobile.oktaoauth2/documentation/AuthFoundation/JWKS/Collection-Implementations": {
+  "abstract" : [
+
+  ],
+  "identifier" : "doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/AuthFoundation\/JWKS\/Collection-Implementations",
+  "kind" : "article",
+  "role" : "collectionGroup",
+  "title" : "Collection Implementations",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/jwks\/collection-implementations"
+},
+"doc://com.okta.mobile.oktaoauth2/documentation/AuthFoundation/JWKS/prefix(through:)": {
+  "abstract" : [
+    {
+      "text" : "Returns a subsequence from the start of the collection through the",
+      "type" : "text"
+    },
+    {
+      "text" : " ",
+      "type" : "text"
+    },
+    {
+      "text" : "specified position.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "func"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "prefix"
+    },
+    {
+      "kind" : "text",
+      "text" : "("
+    },
+    {
+      "kind" : "externalParam",
+      "text" : "through"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "text" : "Self"
+    },
+    {
+      "kind" : "text",
+      "text" : "."
+    },
+    {
+      "kind" : "typeIdentifier",
+      "text" : "Index"
+    },
+    {
+      "kind" : "text",
+      "text" : ") -> "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "text" : "Self"
+    },
+    {
+      "kind" : "text",
+      "text" : "."
+    },
+    {
+      "kind" : "typeIdentifier",
+      "text" : "SubSequence"
+    }
+  ],
+  "identifier" : "doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/AuthFoundation\/JWKS\/prefix(through:)",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "prefix(through:)",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/jwks\/prefix(through:)"
+}
+}
+}

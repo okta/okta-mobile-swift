@@ -1,1 +1,472 @@
-{"primaryContentSections":[{"kind":"declarations","declarations":[{"tokens":[{"kind":"keyword","text":"struct"},{"kind":"text","text":" "},{"kind":"identifier","text":"Context"}],"languages":["swift"],"platforms":["macOS"]}]}],"schemaVersion":{"major":0,"minor":2,"patch":0},"sections":[],"variants":[{"paths":["\/documentation\/oktaoauth2\/sessionlogoutflow\/context-swift.struct"],"traits":[{"interfaceLanguage":"swift"}]}],"relationshipsSections":[{"identifiers":["doc:\/\/com.okta.mobile.webauthenticationui\/Se","doc:\/\/com.okta.mobile.webauthenticationui\/SE","doc:\/\/com.okta.mobile.webauthenticationui\/SQ"],"kind":"relationships","title":"Conforms To","type":"conformsTo"}],"identifier":{"url":"doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/OktaOAuth2\/SessionLogoutFlow\/Context-swift.struct","interfaceLanguage":"swift"},"abstract":[{"type":"text","text":"A model representing the context and current state for a logout session."}],"kind":"symbol","metadata":{"fragments":[{"kind":"keyword","text":"struct"},{"kind":"text","text":" "},{"kind":"identifier","text":"Context"}],"title":"SessionLogoutFlow.Context","roleHeading":"Structure","role":"symbol","symbolKind":"struct","externalID":"s:10OktaOAuth217SessionLogoutFlowC7ContextV","modules":[{"name":"OktaOAuth2"}],"navigatorTitle":[{"kind":"identifier","text":"Context"}]},"hierarchy":{"paths":[["doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/OktaOAuth2","doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/OktaOAuth2\/SessionLogoutFlow"]]},"topicSections":[{"title":"Initializers","identifiers":["doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/OktaOAuth2\/SessionLogoutFlow\/Context-swift.struct\/init(from:)","doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/OktaOAuth2\/SessionLogoutFlow\/Context-swift.struct\/init(idToken:state:)"]},{"title":"Instance Properties","identifiers":["doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/OktaOAuth2\/SessionLogoutFlow\/Context-swift.struct\/idToken","doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/OktaOAuth2\/SessionLogoutFlow\/Context-swift.struct\/logoutURL","doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/OktaOAuth2\/SessionLogoutFlow\/Context-swift.struct\/state"]},{"title":"Default Implementations","identifiers":["doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/OktaOAuth2\/SessionLogoutFlow\/Context-swift.struct\/Equatable-Implementations"],"generated":true}],"references":{"doc://com.okta.mobile.webauthenticationui/SE":{"type":"unresolvable","title":"Swift.Encodable","identifier":"doc:\/\/com.okta.mobile.webauthenticationui\/SE"},"doc://com.okta.mobile.webauthenticationui/documentation/OktaOAuth2/SessionLogoutFlow/Context-swift.struct/init(from:)":{"role":"symbol","title":"init(from:)","fragments":[{"kind":"identifier","text":"init"},{"kind":"text","text":"("},{"kind":"externalParam","text":"from"},{"kind":"text","text":": "},{"kind":"typeIdentifier","text":"Decoder","preciseIdentifier":"s:s7DecoderP"},{"kind":"text","text":") "},{"kind":"keyword","text":"throws"}],"abstract":[{"type":"text","text":"Creates a new instance by decoding from the given decoder."}],"identifier":"doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/OktaOAuth2\/SessionLogoutFlow\/Context-swift.struct\/init(from:)","kind":"symbol","type":"topic","url":"\/documentation\/oktaoauth2\/sessionlogoutflow\/context-swift.struct\/init(from:)"},"doc://com.okta.mobile.webauthenticationui/documentation/OktaOAuth2/SessionLogoutFlow/Context-swift.struct":{"role":"symbol","title":"SessionLogoutFlow.Context","fragments":[{"kind":"keyword","text":"struct"},{"kind":"text","text":" "},{"kind":"identifier","text":"Context"}],"abstract":[{"type":"text","text":"A model representing the context and current state for a logout session."}],"identifier":"doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/OktaOAuth2\/SessionLogoutFlow\/Context-swift.struct","kind":"symbol","type":"topic","navigatorTitle":[{"kind":"identifier","text":"Context"}],"url":"\/documentation\/oktaoauth2\/sessionlogoutflow\/context-swift.struct"},"doc://com.okta.mobile.webauthenticationui/documentation/OktaOAuth2/SessionLogoutFlow/Context-swift.struct/logoutURL":{"role":"symbol","title":"logoutURL","fragments":[{"kind":"keyword","text":"var"},{"kind":"text","text":" "},{"kind":"identifier","text":"logoutURL"},{"kind":"text","text":": "},{"kind":"typeIdentifier","text":"URL","preciseIdentifier":"s:10Foundation3URLV"},{"kind":"text","text":"?"}],"abstract":[{"type":"text","text":"The current logout URL, or "},{"type":"codeVoice","code":"nil"},{"type":"text","text":" if one has not yet been generated."}],"identifier":"doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/OktaOAuth2\/SessionLogoutFlow\/Context-swift.struct\/logoutURL","kind":"symbol","type":"topic","url":"\/documentation\/oktaoauth2\/sessionlogoutflow\/context-swift.struct\/logouturl"},"doc://com.okta.mobile.webauthenticationui/documentation/OktaOAuth2/SessionLogoutFlow":{"role":"symbol","title":"SessionLogoutFlow","fragments":[{"kind":"keyword","text":"class"},{"kind":"text","text":" "},{"kind":"identifier","text":"SessionLogoutFlow"}],"abstract":[{"type":"text","text":"An logout flow class that implements the Session Logout Flow."}],"identifier":"doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/OktaOAuth2\/SessionLogoutFlow","kind":"symbol","type":"topic","navigatorTitle":[{"kind":"identifier","text":"SessionLogoutFlow"}],"url":"\/documentation\/oktaoauth2\/sessionlogoutflow"},"doc://com.okta.mobile.webauthenticationui/Se":{"type":"unresolvable","title":"Swift.Decodable","identifier":"doc:\/\/com.okta.mobile.webauthenticationui\/Se"},"doc://com.okta.mobile.webauthenticationui/documentation/OktaOAuth2":{"role":"collection","title":"OktaOAuth2","abstract":[],"identifier":"doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/OktaOAuth2","kind":"symbol","type":"topic","url":"\/documentation\/oktaoauth2"},"doc://com.okta.mobile.webauthenticationui/documentation/OktaOAuth2/SessionLogoutFlow/Context-swift.struct/idToken":{"role":"symbol","title":"idToken","fragments":[{"kind":"keyword","text":"let"},{"kind":"text","text":" "},{"kind":"identifier","text":"idToken"},{"kind":"text","text":": "},{"kind":"typeIdentifier","text":"String","preciseIdentifier":"s:SS"}],"abstract":[{"type":"text","text":"The ID token string used for log-out."}],"identifier":"doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/OktaOAuth2\/SessionLogoutFlow\/Context-swift.struct\/idToken","kind":"symbol","type":"topic","url":"\/documentation\/oktaoauth2\/sessionlogoutflow\/context-swift.struct\/idtoken"},"doc://com.okta.mobile.webauthenticationui/SQ":{"type":"unresolvable","title":"Swift.Equatable","identifier":"doc:\/\/com.okta.mobile.webauthenticationui\/SQ"},"doc://com.okta.mobile.webauthenticationui/documentation/OktaOAuth2/SessionLogoutFlow/Context-swift.struct/init(idToken:state:)":{"role":"symbol","title":"init(idToken:state:)","fragments":[{"kind":"identifier","text":"init"},{"kind":"text","text":"("},{"kind":"externalParam","text":"idToken"},{"kind":"text","text":": "},{"kind":"typeIdentifier","text":"String","preciseIdentifier":"s:SS"},{"kind":"text","text":", "},{"kind":"externalParam","text":"state"},{"kind":"text","text":": "},{"kind":"typeIdentifier","text":"String","preciseIdentifier":"s:SS"},{"kind":"text","text":"?)"}],"abstract":[{"type":"text","text":"Initializer for creating a context."}],"identifier":"doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/OktaOAuth2\/SessionLogoutFlow\/Context-swift.struct\/init(idToken:state:)","kind":"symbol","type":"topic","url":"\/documentation\/oktaoauth2\/sessionlogoutflow\/context-swift.struct\/init(idtoken:state:)"},"doc://com.okta.mobile.webauthenticationui/documentation/OktaOAuth2/SessionLogoutFlow/Context-swift.struct/state":{"role":"symbol","title":"state","fragments":[{"kind":"keyword","text":"let"},{"kind":"text","text":" "},{"kind":"identifier","text":"state"},{"kind":"text","text":": "},{"kind":"typeIdentifier","text":"String","preciseIdentifier":"s:SS"}],"abstract":[{"type":"text","text":"The state string to use when creating an logout URL."}],"identifier":"doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/OktaOAuth2\/SessionLogoutFlow\/Context-swift.struct\/state","kind":"symbol","type":"topic","url":"\/documentation\/oktaoauth2\/sessionlogoutflow\/context-swift.struct\/state"},"doc://com.okta.mobile.webauthenticationui/documentation/OktaOAuth2/SessionLogoutFlow/Context-swift.struct/Equatable-Implementations":{"role":"collectionGroup","title":"Equatable Implementations","abstract":[],"identifier":"doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/OktaOAuth2\/SessionLogoutFlow\/Context-swift.struct\/Equatable-Implementations","kind":"article","type":"topic","url":"\/documentation\/oktaoauth2\/sessionlogoutflow\/context-swift.struct\/equatable-implementations"}}}
+{
+  "abstract" : [
+    {
+      "text" : "A model representing the context and current state for a logout session.",
+      "type" : "text"
+    }
+  ],
+  "hierarchy" : {
+    "paths" : [
+      [
+        "doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/OktaOAuth2",
+        "doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/OktaOAuth2\/SessionLogoutFlow"
+      ]
+    ]
+  },
+  "identifier" : {
+    "interfaceLanguage" : "swift",
+    "url" : "doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/OktaOAuth2\/SessionLogoutFlow\/Context-swift.struct"
+  },
+  "kind" : "symbol",
+  "metadata" : {
+    "externalID" : "s:10OktaOAuth217SessionLogoutFlowC7ContextV",
+    "fragments" : [
+      {
+        "kind" : "keyword",
+        "text" : "struct"
+      },
+      {
+        "kind" : "text",
+        "text" : " "
+      },
+      {
+        "kind" : "identifier",
+        "text" : "Context"
+      }
+    ],
+    "modules" : [
+      {
+        "name" : "OktaOAuth2"
+      }
+    ],
+    "navigatorTitle" : [
+      {
+        "kind" : "identifier",
+        "text" : "Context"
+      }
+    ],
+    "role" : "symbol",
+    "roleHeading" : "Structure",
+    "symbolKind" : "struct",
+    "title" : "SessionLogoutFlow.Context"
+  },
+  "primaryContentSections" : [
+    {
+      "declarations" : [
+        {
+          "languages" : [
+            "swift"
+          ],
+          "platforms" : [
+            "macOS"
+          ],
+          "tokens" : [
+            {
+              "kind" : "keyword",
+              "text" : "struct"
+            },
+            {
+              "kind" : "text",
+              "text" : " "
+            },
+            {
+              "kind" : "identifier",
+              "text" : "Context"
+            }
+          ]
+        }
+      ],
+      "kind" : "declarations"
+    }
+  ],
+  "relationshipsSections" : [
+    {
+      "identifiers" : [
+        "doc:\/\/com.okta.mobile.webauthenticationui\/Se",
+        "doc:\/\/com.okta.mobile.webauthenticationui\/SE",
+        "doc:\/\/com.okta.mobile.webauthenticationui\/SQ"
+      ],
+      "kind" : "relationships",
+      "title" : "Conforms To",
+      "type" : "conformsTo"
+    }
+  ],
+  "schemaVersion" : {
+    "major" : 0,
+    "minor" : 2,
+    "patch" : 0
+  },
+  "sections" : [
+
+  ],
+  "topicSections" : [
+    {
+      "identifiers" : [
+        "doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/OktaOAuth2\/SessionLogoutFlow\/Context-swift.struct\/init(from:)",
+        "doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/OktaOAuth2\/SessionLogoutFlow\/Context-swift.struct\/init(idToken:state:)"
+      ],
+      "title" : "Initializers"
+    },
+    {
+      "identifiers" : [
+        "doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/OktaOAuth2\/SessionLogoutFlow\/Context-swift.struct\/idToken",
+        "doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/OktaOAuth2\/SessionLogoutFlow\/Context-swift.struct\/logoutURL",
+        "doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/OktaOAuth2\/SessionLogoutFlow\/Context-swift.struct\/state"
+      ],
+      "title" : "Instance Properties"
+    },
+    {
+      "generated" : true,
+      "identifiers" : [
+        "doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/OktaOAuth2\/SessionLogoutFlow\/Context-swift.struct\/Equatable-Implementations"
+      ],
+      "title" : "Default Implementations"
+    }
+  ],
+  "variants" : [
+    {
+      "paths" : [
+        "\/documentation\/oktaoauth2\/sessionlogoutflow\/context-swift.struct"
+      ],
+      "traits" : [
+        {
+          "interfaceLanguage" : "swift"
+        }
+      ]
+    }
+  ]
+, 
+"references": {
+"doc://com.okta.mobile.webauthenticationui/SE": {
+  "identifier" : "doc:\/\/com.okta.mobile.webauthenticationui\/SE",
+  "title" : "Swift.Encodable",
+  "type" : "unresolvable"
+},
+"doc://com.okta.mobile.webauthenticationui/SQ": {
+  "identifier" : "doc:\/\/com.okta.mobile.webauthenticationui\/SQ",
+  "title" : "Swift.Equatable",
+  "type" : "unresolvable"
+},
+"doc://com.okta.mobile.webauthenticationui/Se": {
+  "identifier" : "doc:\/\/com.okta.mobile.webauthenticationui\/Se",
+  "title" : "Swift.Decodable",
+  "type" : "unresolvable"
+},
+"doc://com.okta.mobile.webauthenticationui/documentation/OktaOAuth2": {
+  "abstract" : [
+
+  ],
+  "identifier" : "doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/OktaOAuth2",
+  "kind" : "symbol",
+  "role" : "collection",
+  "title" : "OktaOAuth2",
+  "type" : "topic",
+  "url" : "\/documentation\/oktaoauth2"
+},
+"doc://com.okta.mobile.webauthenticationui/documentation/OktaOAuth2/SessionLogoutFlow": {
+  "abstract" : [
+    {
+      "text" : "An logout flow class that implements the Session Logout Flow.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "class"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "SessionLogoutFlow"
+    }
+  ],
+  "identifier" : "doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/OktaOAuth2\/SessionLogoutFlow",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "SessionLogoutFlow"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "SessionLogoutFlow",
+  "type" : "topic",
+  "url" : "\/documentation\/oktaoauth2\/sessionlogoutflow"
+},
+"doc://com.okta.mobile.webauthenticationui/documentation/OktaOAuth2/SessionLogoutFlow/Context-swift.struct": {
+  "abstract" : [
+    {
+      "text" : "A model representing the context and current state for a logout session.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "struct"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "Context"
+    }
+  ],
+  "identifier" : "doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/OktaOAuth2\/SessionLogoutFlow\/Context-swift.struct",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "Context"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "SessionLogoutFlow.Context",
+  "type" : "topic",
+  "url" : "\/documentation\/oktaoauth2\/sessionlogoutflow\/context-swift.struct"
+},
+"doc://com.okta.mobile.webauthenticationui/documentation/OktaOAuth2/SessionLogoutFlow/Context-swift.struct/Equatable-Implementations": {
+  "abstract" : [
+
+  ],
+  "identifier" : "doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/OktaOAuth2\/SessionLogoutFlow\/Context-swift.struct\/Equatable-Implementations",
+  "kind" : "article",
+  "role" : "collectionGroup",
+  "title" : "Equatable Implementations",
+  "type" : "topic",
+  "url" : "\/documentation\/oktaoauth2\/sessionlogoutflow\/context-swift.struct\/equatable-implementations"
+},
+"doc://com.okta.mobile.webauthenticationui/documentation/OktaOAuth2/SessionLogoutFlow/Context-swift.struct/idToken": {
+  "abstract" : [
+    {
+      "text" : "The ID token string used for log-out.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "let"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "idToken"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:SS",
+      "text" : "String"
+    }
+  ],
+  "identifier" : "doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/OktaOAuth2\/SessionLogoutFlow\/Context-swift.struct\/idToken",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "idToken",
+  "type" : "topic",
+  "url" : "\/documentation\/oktaoauth2\/sessionlogoutflow\/context-swift.struct\/idtoken"
+},
+"doc://com.okta.mobile.webauthenticationui/documentation/OktaOAuth2/SessionLogoutFlow/Context-swift.struct/init(from:)": {
+  "abstract" : [
+    {
+      "text" : "Creates a new instance by decoding from the given decoder.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "identifier",
+      "text" : "init"
+    },
+    {
+      "kind" : "text",
+      "text" : "("
+    },
+    {
+      "kind" : "externalParam",
+      "text" : "from"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:s7DecoderP",
+      "text" : "Decoder"
+    },
+    {
+      "kind" : "text",
+      "text" : ") "
+    },
+    {
+      "kind" : "keyword",
+      "text" : "throws"
+    }
+  ],
+  "identifier" : "doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/OktaOAuth2\/SessionLogoutFlow\/Context-swift.struct\/init(from:)",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "init(from:)",
+  "type" : "topic",
+  "url" : "\/documentation\/oktaoauth2\/sessionlogoutflow\/context-swift.struct\/init(from:)"
+},
+"doc://com.okta.mobile.webauthenticationui/documentation/OktaOAuth2/SessionLogoutFlow/Context-swift.struct/init(idToken:state:)": {
+  "abstract" : [
+    {
+      "text" : "Initializer for creating a context.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "identifier",
+      "text" : "init"
+    },
+    {
+      "kind" : "text",
+      "text" : "("
+    },
+    {
+      "kind" : "externalParam",
+      "text" : "idToken"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:SS",
+      "text" : "String"
+    },
+    {
+      "kind" : "text",
+      "text" : ", "
+    },
+    {
+      "kind" : "externalParam",
+      "text" : "state"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:SS",
+      "text" : "String"
+    },
+    {
+      "kind" : "text",
+      "text" : "?)"
+    }
+  ],
+  "identifier" : "doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/OktaOAuth2\/SessionLogoutFlow\/Context-swift.struct\/init(idToken:state:)",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "init(idToken:state:)",
+  "type" : "topic",
+  "url" : "\/documentation\/oktaoauth2\/sessionlogoutflow\/context-swift.struct\/init(idtoken:state:)"
+},
+"doc://com.okta.mobile.webauthenticationui/documentation/OktaOAuth2/SessionLogoutFlow/Context-swift.struct/logoutURL": {
+  "abstract" : [
+    {
+      "text" : "The current logout URL, or ",
+      "type" : "text"
+    },
+    {
+      "code" : "nil",
+      "type" : "codeVoice"
+    },
+    {
+      "text" : " if one has not yet been generated.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "var"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "logoutURL"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:10Foundation3URLV",
+      "text" : "URL"
+    },
+    {
+      "kind" : "text",
+      "text" : "?"
+    }
+  ],
+  "identifier" : "doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/OktaOAuth2\/SessionLogoutFlow\/Context-swift.struct\/logoutURL",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "logoutURL",
+  "type" : "topic",
+  "url" : "\/documentation\/oktaoauth2\/sessionlogoutflow\/context-swift.struct\/logouturl"
+},
+"doc://com.okta.mobile.webauthenticationui/documentation/OktaOAuth2/SessionLogoutFlow/Context-swift.struct/state": {
+  "abstract" : [
+    {
+      "text" : "The state string to use when creating an logout URL.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "let"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "state"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:SS",
+      "text" : "String"
+    }
+  ],
+  "identifier" : "doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/OktaOAuth2\/SessionLogoutFlow\/Context-swift.struct\/state",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "state",
+  "type" : "topic",
+  "url" : "\/documentation\/oktaoauth2\/sessionlogoutflow\/context-swift.struct\/state"
+}
+}
+}

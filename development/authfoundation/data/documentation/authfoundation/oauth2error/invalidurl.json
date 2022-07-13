@@ -1,1 +1,172 @@
-{"primaryContentSections":[{"kind":"declarations","declarations":[{"tokens":[{"kind":"keyword","text":"case"},{"kind":"text","text":" "},{"kind":"identifier","text":"invalidUrl"}],"languages":["swift"],"platforms":["macOS"]}]}],"schemaVersion":{"major":0,"minor":2,"patch":0},"sections":[],"variants":[{"paths":["\/documentation\/authfoundation\/oauth2error\/invalidurl"],"traits":[{"interfaceLanguage":"swift"}]}],"identifier":{"url":"doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/OAuth2Error\/invalidUrl","interfaceLanguage":"swift"},"abstract":[{"type":"text","text":"No overview available."}],"kind":"symbol","metadata":{"fragments":[{"kind":"keyword","text":"case"},{"kind":"text","text":" "},{"kind":"identifier","text":"invalidUrl"}],"title":"OAuth2Error.invalidUrl","roleHeading":"Case","role":"symbol","symbolKind":"case","externalID":"s:14AuthFoundation11OAuth2ErrorO10invalidUrlyA2CmF","modules":[{"name":"AuthFoundation"}]},"hierarchy":{"paths":[["doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation","doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/OAuth2Error"]]},"references":{"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/OAuth2Error":{"role":"symbol","title":"OAuth2Error","fragments":[{"kind":"keyword","text":"enum"},{"kind":"text","text":" "},{"kind":"identifier","text":"OAuth2Error"}],"abstract":[{"type":"text","text":"Errors that may occur when interacting with OAuth2 endpoints."}],"identifier":"doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/OAuth2Error","kind":"symbol","type":"topic","navigatorTitle":[{"kind":"identifier","text":"OAuth2Error"}],"url":"\/documentation\/authfoundation\/oauth2error"},"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/OAuth2Error/invalidUrl":{"role":"symbol","title":"OAuth2Error.invalidUrl","fragments":[{"kind":"keyword","text":"case"},{"kind":"text","text":" "},{"kind":"identifier","text":"invalidUrl"}],"abstract":[],"identifier":"doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/OAuth2Error\/invalidUrl","kind":"symbol","type":"topic","url":"\/documentation\/authfoundation\/oauth2error\/invalidurl"},"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation":{"role":"collection","title":"AuthFoundation","abstract":[{"type":"text","text":"Library that provides foundational features used by Okta’s authentication libraries, as well as APIs used to work with tokens and user credentials."}],"identifier":"doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation","kind":"symbol","type":"topic","url":"\/documentation\/authfoundation"}}}
+{
+  "abstract" : [
+    {
+      "text" : "No overview available.",
+      "type" : "text"
+    }
+  ],
+  "hierarchy" : {
+    "paths" : [
+      [
+        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation",
+        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/OAuth2Error"
+      ]
+    ]
+  },
+  "identifier" : {
+    "interfaceLanguage" : "swift",
+    "url" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/OAuth2Error\/invalidUrl"
+  },
+  "kind" : "symbol",
+  "metadata" : {
+    "externalID" : "s:14AuthFoundation11OAuth2ErrorO10invalidUrlyA2CmF",
+    "fragments" : [
+      {
+        "kind" : "keyword",
+        "text" : "case"
+      },
+      {
+        "kind" : "text",
+        "text" : " "
+      },
+      {
+        "kind" : "identifier",
+        "text" : "invalidUrl"
+      }
+    ],
+    "modules" : [
+      {
+        "name" : "AuthFoundation"
+      }
+    ],
+    "role" : "symbol",
+    "roleHeading" : "Case",
+    "symbolKind" : "case",
+    "title" : "OAuth2Error.invalidUrl"
+  },
+  "primaryContentSections" : [
+    {
+      "declarations" : [
+        {
+          "languages" : [
+            "swift"
+          ],
+          "platforms" : [
+            "macOS"
+          ],
+          "tokens" : [
+            {
+              "kind" : "keyword",
+              "text" : "case"
+            },
+            {
+              "kind" : "text",
+              "text" : " "
+            },
+            {
+              "kind" : "identifier",
+              "text" : "invalidUrl"
+            }
+          ]
+        }
+      ],
+      "kind" : "declarations"
+    }
+  ],
+  "schemaVersion" : {
+    "major" : 0,
+    "minor" : 2,
+    "patch" : 0
+  },
+  "sections" : [
+
+  ],
+  "variants" : [
+    {
+      "paths" : [
+        "\/documentation\/authfoundation\/oauth2error\/invalidurl"
+      ],
+      "traits" : [
+        {
+          "interfaceLanguage" : "swift"
+        }
+      ]
+    }
+  ]
+, 
+"references": {
+"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation": {
+  "abstract" : [
+    {
+      "text" : "Library that provides foundational features used by Okta’s authentication libraries, as well as APIs used to work with tokens and user credentials.",
+      "type" : "text"
+    }
+  ],
+  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation",
+  "kind" : "symbol",
+  "role" : "collection",
+  "title" : "AuthFoundation",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation"
+},
+"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/OAuth2Error": {
+  "abstract" : [
+    {
+      "text" : "Errors that may occur when interacting with OAuth2 endpoints.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "enum"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "OAuth2Error"
+    }
+  ],
+  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/OAuth2Error",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "OAuth2Error"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "OAuth2Error",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/oauth2error"
+},
+"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/OAuth2Error/invalidUrl": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "case"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "invalidUrl"
+    }
+  ],
+  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/OAuth2Error\/invalidUrl",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "OAuth2Error.invalidUrl",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/oauth2error\/invalidurl"
+}
+}
+}

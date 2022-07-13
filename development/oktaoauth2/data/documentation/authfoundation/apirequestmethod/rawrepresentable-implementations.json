@@ -1,1 +1,298 @@
-{"variants":[{"paths":["\/documentation\/authfoundation\/apirequestmethod\/rawrepresentable-implementations"],"traits":[{"interfaceLanguage":"swift"}]}],"schemaVersion":{"major":0,"minor":2,"patch":0},"sections":[],"identifier":{"url":"doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/AuthFoundation\/APIRequestMethod\/RawRepresentable-Implementations","interfaceLanguage":"swift"},"abstract":[{"type":"text","text":"No overview available."}],"kind":"article","metadata":{"modules":[{"name":"AuthFoundation"}],"role":"collectionGroup","title":"RawRepresentable Implementations"},"hierarchy":{"paths":[["doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/AuthFoundation","doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/AuthFoundation\/APIRequestMethod"]]},"topicSections":[{"title":"Instance Properties","identifiers":["doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/AuthFoundation\/APIRequestMethod\/hashValue"],"generated":true},{"title":"Instance Methods","identifiers":["doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/AuthFoundation\/APIRequestMethod\/hash(into:)"],"generated":true}],"references":{"doc://com.okta.mobile.oktaoauth2/documentation/AuthFoundation/APIRequestMethod":{"role":"symbol","title":"APIRequestMethod","fragments":[{"kind":"keyword","text":"enum"},{"kind":"text","text":" "},{"kind":"identifier","text":"APIRequestMethod"}],"abstract":[{"type":"text","text":"API HTTP request method."}],"identifier":"doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/AuthFoundation\/APIRequestMethod","kind":"symbol","type":"topic","navigatorTitle":[{"kind":"identifier","text":"APIRequestMethod"}],"url":"\/documentation\/authfoundation\/apirequestmethod"},"doc://com.okta.mobile.oktaoauth2/documentation/AuthFoundation/APIRequestMethod/hashValue":{"conformance":{"constraints":[{"type":"codeVoice","code":"Self"},{"type":"text","text":" conforms to "},{"type":"codeVoice","code":"Hashable"},{"type":"text","text":" and "},{"type":"codeVoice","code":"RawValue"},{"type":"text","text":" conforms to "},{"type":"codeVoice","code":"Hashable"},{"type":"text","text":"."}],"availabilityPrefix":[{"type":"text","text":"Available when"}],"conformancePrefix":[{"type":"text","text":"Conforms when"}]},"role":"symbol","title":"hashValue","fragments":[{"kind":"keyword","text":"var"},{"kind":"text","text":" "},{"kind":"identifier","text":"hashValue"},{"kind":"text","text":": "},{"kind":"typeIdentifier","text":"Int","preciseIdentifier":"s:Si"}],"abstract":[],"identifier":"doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/AuthFoundation\/APIRequestMethod\/hashValue","kind":"symbol","type":"topic","url":"\/documentation\/authfoundation\/apirequestmethod\/hashvalue"},"doc://com.okta.mobile.oktaoauth2/documentation/AuthFoundation/APIRequestMethod/hash(into:)":{"conformance":{"constraints":[{"type":"codeVoice","code":"Self"},{"type":"text","text":" conforms to "},{"type":"codeVoice","code":"Hashable"},{"type":"text","text":" and "},{"type":"codeVoice","code":"RawValue"},{"type":"text","text":" conforms to "},{"type":"codeVoice","code":"Hashable"},{"type":"text","text":"."}],"availabilityPrefix":[{"type":"text","text":"Available when"}],"conformancePrefix":[{"type":"text","text":"Conforms when"}]},"role":"symbol","title":"hash(into:)","fragments":[{"kind":"keyword","text":"func"},{"kind":"text","text":" "},{"kind":"identifier","text":"hash"},{"kind":"text","text":"("},{"kind":"externalParam","text":"into"},{"kind":"text","text":": "},{"kind":"keyword","text":"inout"},{"kind":"text","text":" "},{"kind":"typeIdentifier","text":"Hasher","preciseIdentifier":"s:s6HasherV"},{"kind":"text","text":")"}],"abstract":[],"identifier":"doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/AuthFoundation\/APIRequestMethod\/hash(into:)","kind":"symbol","type":"topic","url":"\/documentation\/authfoundation\/apirequestmethod\/hash(into:)"},"doc://com.okta.mobile.oktaoauth2/documentation/AuthFoundation":{"role":"collection","title":"AuthFoundation","abstract":[],"identifier":"doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/AuthFoundation","kind":"symbol","type":"topic","url":"\/documentation\/authfoundation"}}}
+{
+  "abstract" : [
+    {
+      "text" : "No overview available.",
+      "type" : "text"
+    }
+  ],
+  "hierarchy" : {
+    "paths" : [
+      [
+        "doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/AuthFoundation",
+        "doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/AuthFoundation\/APIRequestMethod"
+      ]
+    ]
+  },
+  "identifier" : {
+    "interfaceLanguage" : "swift",
+    "url" : "doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/AuthFoundation\/APIRequestMethod\/RawRepresentable-Implementations"
+  },
+  "kind" : "article",
+  "metadata" : {
+    "modules" : [
+      {
+        "name" : "AuthFoundation"
+      }
+    ],
+    "role" : "collectionGroup",
+    "title" : "RawRepresentable Implementations"
+  },
+  "schemaVersion" : {
+    "major" : 0,
+    "minor" : 2,
+    "patch" : 0
+  },
+  "sections" : [
+
+  ],
+  "topicSections" : [
+    {
+      "generated" : true,
+      "identifiers" : [
+        "doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/AuthFoundation\/APIRequestMethod\/hashValue"
+      ],
+      "title" : "Instance Properties"
+    },
+    {
+      "generated" : true,
+      "identifiers" : [
+        "doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/AuthFoundation\/APIRequestMethod\/hash(into:)"
+      ],
+      "title" : "Instance Methods"
+    }
+  ],
+  "variants" : [
+    {
+      "paths" : [
+        "\/documentation\/authfoundation\/apirequestmethod\/rawrepresentable-implementations"
+      ],
+      "traits" : [
+        {
+          "interfaceLanguage" : "swift"
+        }
+      ]
+    }
+  ]
+, 
+"references": {
+"doc://com.okta.mobile.oktaoauth2/documentation/AuthFoundation": {
+  "abstract" : [
+
+  ],
+  "identifier" : "doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/AuthFoundation",
+  "kind" : "symbol",
+  "role" : "collection",
+  "title" : "AuthFoundation",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation"
+},
+"doc://com.okta.mobile.oktaoauth2/documentation/AuthFoundation/APIRequestMethod": {
+  "abstract" : [
+    {
+      "text" : "API HTTP request method.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "enum"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "APIRequestMethod"
+    }
+  ],
+  "identifier" : "doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/AuthFoundation\/APIRequestMethod",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "APIRequestMethod"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "APIRequestMethod",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/apirequestmethod"
+},
+"doc://com.okta.mobile.oktaoauth2/documentation/AuthFoundation/APIRequestMethod/hash(into:)": {
+  "abstract" : [
+
+  ],
+  "conformance" : {
+    "availabilityPrefix" : [
+      {
+        "text" : "Available when",
+        "type" : "text"
+      }
+    ],
+    "conformancePrefix" : [
+      {
+        "text" : "Conforms when",
+        "type" : "text"
+      }
+    ],
+    "constraints" : [
+      {
+        "code" : "Self",
+        "type" : "codeVoice"
+      },
+      {
+        "text" : " conforms to ",
+        "type" : "text"
+      },
+      {
+        "code" : "Hashable",
+        "type" : "codeVoice"
+      },
+      {
+        "text" : " and ",
+        "type" : "text"
+      },
+      {
+        "code" : "RawValue",
+        "type" : "codeVoice"
+      },
+      {
+        "text" : " conforms to ",
+        "type" : "text"
+      },
+      {
+        "code" : "Hashable",
+        "type" : "codeVoice"
+      },
+      {
+        "text" : ".",
+        "type" : "text"
+      }
+    ]
+  },
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "func"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "hash"
+    },
+    {
+      "kind" : "text",
+      "text" : "("
+    },
+    {
+      "kind" : "externalParam",
+      "text" : "into"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "keyword",
+      "text" : "inout"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:s6HasherV",
+      "text" : "Hasher"
+    },
+    {
+      "kind" : "text",
+      "text" : ")"
+    }
+  ],
+  "identifier" : "doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/AuthFoundation\/APIRequestMethod\/hash(into:)",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "hash(into:)",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/apirequestmethod\/hash(into:)"
+},
+"doc://com.okta.mobile.oktaoauth2/documentation/AuthFoundation/APIRequestMethod/hashValue": {
+  "abstract" : [
+
+  ],
+  "conformance" : {
+    "availabilityPrefix" : [
+      {
+        "text" : "Available when",
+        "type" : "text"
+      }
+    ],
+    "conformancePrefix" : [
+      {
+        "text" : "Conforms when",
+        "type" : "text"
+      }
+    ],
+    "constraints" : [
+      {
+        "code" : "Self",
+        "type" : "codeVoice"
+      },
+      {
+        "text" : " conforms to ",
+        "type" : "text"
+      },
+      {
+        "code" : "Hashable",
+        "type" : "codeVoice"
+      },
+      {
+        "text" : " and ",
+        "type" : "text"
+      },
+      {
+        "code" : "RawValue",
+        "type" : "codeVoice"
+      },
+      {
+        "text" : " conforms to ",
+        "type" : "text"
+      },
+      {
+        "code" : "Hashable",
+        "type" : "codeVoice"
+      },
+      {
+        "text" : ".",
+        "type" : "text"
+      }
+    ]
+  },
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "var"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "hashValue"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:Si",
+      "text" : "Int"
+    }
+  ],
+  "identifier" : "doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/AuthFoundation\/APIRequestMethod\/hashValue",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "hashValue",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/apirequestmethod\/hashvalue"
+}
+}
+}

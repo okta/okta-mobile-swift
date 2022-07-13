@@ -1,1 +1,661 @@
-{"seeAlsoSections":[{"title":"Authorization Code Flow","identifiers":["doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/OktaOAuth2\/AuthorizationCodeFlow","doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/OktaOAuth2\/SessionLogoutFlow","doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/OktaOAuth2\/SessionLogoutFlowDelegate"],"generated":true}],"schemaVersion":{"major":0,"minor":2,"patch":0},"metadata":{"fragments":[{"kind":"keyword","text":"protocol"},{"kind":"text","text":" "},{"kind":"identifier","text":"AuthorizationCodeFlowDelegate"}],"title":"AuthorizationCodeFlowDelegate","roleHeading":"Protocol","role":"symbol","symbolKind":"protocol","externalID":"s:10OktaOAuth229AuthorizationCodeFlowDelegateP","modules":[{"name":"OktaOAuth2"}],"navigatorTitle":[{"kind":"identifier","text":"AuthorizationCodeFlowDelegate"}]},"abstract":[{"type":"text","text":"The delegate of a "},{"type":"reference","isActive":true,"identifier":"doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/OktaOAuth2\/AuthorizationCodeFlow"},{"type":"text","text":" may adopt some, or all, of the methods described here. These allow a developer to customize or interact with the authentication flow during authentication."}],"sections":[],"identifier":{"url":"doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/OktaOAuth2\/AuthorizationCodeFlowDelegate","interfaceLanguage":"swift"},"relationshipsSections":[{"identifiers":["doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/AuthFoundation\/AuthenticationDelegate"],"kind":"relationships","title":"Inherits From","type":"inheritsFrom"}],"hierarchy":{"paths":[["doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/OktaOAuth2"]]},"topicSections":[{"title":"Instance Methods","identifiers":["doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/OktaOAuth2\/AuthorizationCodeFlowDelegate\/authentication(flow:customizeUrl:)-3hges","doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/OktaOAuth2\/AuthorizationCodeFlowDelegate\/authentication(flow:shouldAuthenticateUsing:)-9ux29","doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/OktaOAuth2\/AuthorizationCodeFlowDelegate\/authenticationFinished(flow:)","doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/OktaOAuth2\/AuthorizationCodeFlowDelegate\/authenticationStarted(flow:)"]}],"variants":[{"paths":["\/documentation\/oktaoauth2\/authorizationcodeflowdelegate"],"traits":[{"interfaceLanguage":"swift"}]}],"kind":"symbol","primaryContentSections":[{"kind":"declarations","declarations":[{"tokens":[{"kind":"keyword","text":"protocol"},{"kind":"text","text":" "},{"kind":"identifier","text":"AuthorizationCodeFlowDelegate"},{"kind":"text","text":" : "},{"kind":"typeIdentifier","identifier":"doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/AuthFoundation\/AuthenticationDelegate","preciseIdentifier":"s:14AuthFoundation22AuthenticationDelegateP","text":"AuthenticationDelegate"}],"languages":["swift"],"platforms":["macOS"]}]},{"kind":"content","content":[{"anchor":"overview","level":2,"type":"heading","text":"Overview"},{"type":"paragraph","inlineContent":[{"type":"text","text":"This protocol extends the basic "},{"type":"codeVoice","code":"AuthenticationDelegate"},{"type":"text","text":" which all authentication flows support."}]}]}],"references":{"doc://com.okta.mobile.oktaoauth2/documentation/OktaOAuth2/AuthorizationCodeFlowDelegate/authenticationFinished(flow:)":{"role":"symbol","title":"authenticationFinished(flow:)","fragments":[{"kind":"keyword","text":"func"},{"kind":"text","text":" "},{"kind":"identifier","text":"authenticationFinished"},{"kind":"text","text":"<"},{"kind":"genericParameter","text":"Flow"},{"kind":"text","text":">("},{"kind":"externalParam","text":"flow"},{"kind":"text","text":": "},{"kind":"typeIdentifier","text":"Flow","preciseIdentifier":"s:10OktaOAuth229AuthorizationCodeFlowDelegateP22authenticationFinished4flowyqd___tAA0cdE0CRbd__lF0E0L_qd__mfp"},{"kind":"text","text":")"}],"abstract":[{"type":"text","text":"Called after authentication completes."}],"identifier":"doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/OktaOAuth2\/AuthorizationCodeFlowDelegate\/authenticationFinished(flow:)","kind":"symbol","required":true,"type":"topic","url":"\/documentation\/oktaoauth2\/authorizationcodeflowdelegate\/authenticationfinished(flow:)"},"doc://com.okta.mobile.oktaoauth2/documentation/OktaOAuth2/SessionLogoutFlow":{"role":"symbol","title":"SessionLogoutFlow","fragments":[{"kind":"keyword","text":"class"},{"kind":"text","text":" "},{"kind":"identifier","text":"SessionLogoutFlow"}],"abstract":[{"type":"text","text":"An logout flow class that implements the Session Logout Flow."}],"identifier":"doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/OktaOAuth2\/SessionLogoutFlow","kind":"symbol","type":"topic","navigatorTitle":[{"kind":"identifier","text":"SessionLogoutFlow"}],"url":"\/documentation\/oktaoauth2\/sessionlogoutflow"},"doc://com.okta.mobile.oktaoauth2/documentation/AuthFoundation/AuthenticationDelegate":{"role":"symbol","title":"AuthenticationDelegate","fragments":[{"kind":"keyword","text":"protocol"},{"kind":"text","text":" "},{"kind":"identifier","text":"AuthenticationDelegate"}],"abstract":[{"type":"text","text":"A common delegate protocol that all authentication flows should support."}],"identifier":"doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/AuthFoundation\/AuthenticationDelegate","kind":"symbol","type":"topic","navigatorTitle":[{"kind":"identifier","text":"AuthenticationDelegate"}],"url":"\/documentation\/authfoundation\/authenticationdelegate"},"doc://com.okta.mobile.oktaoauth2/documentation/OktaOAuth2/SessionLogoutFlowDelegate":{"role":"symbol","title":"SessionLogoutFlowDelegate","fragments":[{"kind":"keyword","text":"protocol"},{"kind":"text","text":" "},{"kind":"identifier","text":"SessionLogoutFlowDelegate"}],"abstract":[{"type":"text","text":"The delegate of a "},{"type":"reference","isActive":true,"identifier":"doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/OktaOAuth2\/SessionLogoutFlow"},{"type":"text","text":" may adopt some, or all, of the methods described here. These allow a developer to customize or interact with the logout flow during logout session."}],"identifier":"doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/OktaOAuth2\/SessionLogoutFlowDelegate","kind":"symbol","type":"topic","navigatorTitle":[{"kind":"identifier","text":"SessionLogoutFlowDelegate"}],"url":"\/documentation\/oktaoauth2\/sessionlogoutflowdelegate"},"doc://com.okta.mobile.oktaoauth2/documentation/OktaOAuth2":{"role":"collection","title":"OktaOAuth2","abstract":[{"type":"text","text":"Interact with Okta’s OAuth2 APIs to authenticate users, and interact with user resources."}],"identifier":"doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/OktaOAuth2","kind":"symbol","type":"topic","url":"\/documentation\/oktaoauth2"},"doc://com.okta.mobile.oktaoauth2/documentation/OktaOAuth2/AuthorizationCodeFlowDelegate/authenticationStarted(flow:)":{"role":"symbol","title":"authenticationStarted(flow:)","fragments":[{"kind":"keyword","text":"func"},{"kind":"text","text":" "},{"kind":"identifier","text":"authenticationStarted"},{"kind":"text","text":"<"},{"kind":"genericParameter","text":"Flow"},{"kind":"text","text":">("},{"kind":"externalParam","text":"flow"},{"kind":"text","text":": "},{"kind":"typeIdentifier","text":"Flow","preciseIdentifier":"s:10OktaOAuth229AuthorizationCodeFlowDelegateP21authenticationStarted4flowyqd___tAA0cdE0CRbd__lF0E0L_qd__mfp"},{"kind":"text","text":")"}],"abstract":[{"type":"text","text":"Called before authentication begins."}],"identifier":"doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/OktaOAuth2\/AuthorizationCodeFlowDelegate\/authenticationStarted(flow:)","kind":"symbol","required":true,"type":"topic","url":"\/documentation\/oktaoauth2\/authorizationcodeflowdelegate\/authenticationstarted(flow:)"},"doc://com.okta.mobile.oktaoauth2/documentation/OktaOAuth2/AuthorizationCodeFlowDelegate":{"role":"symbol","title":"AuthorizationCodeFlowDelegate","fragments":[{"kind":"keyword","text":"protocol"},{"kind":"text","text":" "},{"kind":"identifier","text":"AuthorizationCodeFlowDelegate"}],"abstract":[{"type":"text","text":"The delegate of a "},{"type":"reference","isActive":true,"identifier":"doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/OktaOAuth2\/AuthorizationCodeFlow"},{"type":"text","text":" may adopt some, or all, of the methods described here. These allow a developer to customize or interact with the authentication flow during authentication."}],"identifier":"doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/OktaOAuth2\/AuthorizationCodeFlowDelegate","kind":"symbol","type":"topic","navigatorTitle":[{"kind":"identifier","text":"AuthorizationCodeFlowDelegate"}],"url":"\/documentation\/oktaoauth2\/authorizationcodeflowdelegate"},"doc://com.okta.mobile.oktaoauth2/documentation/OktaOAuth2/AuthorizationCodeFlowDelegate/authentication(flow:customizeUrl:)-3hges":{"defaultImplementations":1,"role":"symbol","title":"authentication(flow:customizeUrl:)","fragments":[{"kind":"keyword","text":"func"},{"kind":"text","text":" "},{"kind":"identifier","text":"authentication"},{"kind":"text","text":"<"},{"kind":"genericParameter","text":"Flow"},{"kind":"text","text":">("},{"kind":"externalParam","text":"flow"},{"kind":"text","text":": "},{"kind":"typeIdentifier","text":"Flow","preciseIdentifier":"s:10OktaOAuth229AuthorizationCodeFlowDelegateP14authentication4flow12customizeUrlyqd___10Foundation13URLComponentsVztAA0cdE0CRbd__lF0E0L_qd__mfp"},{"kind":"text","text":", "},{"kind":"externalParam","text":"customizeUrl"},{"kind":"text","text":": "},{"kind":"keyword","text":"inout"},{"kind":"text","text":" "},{"kind":"typeIdentifier","text":"URLComponents","preciseIdentifier":"s:10Foundation13URLComponentsV"},{"kind":"text","text":")"}],"abstract":[{"type":"text","text":"Provides the opportunity to customize the authorization URL."}],"identifier":"doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/OktaOAuth2\/AuthorizationCodeFlowDelegate\/authentication(flow:customizeUrl:)-3hges","kind":"symbol","required":true,"type":"topic","url":"\/documentation\/oktaoauth2\/authorizationcodeflowdelegate\/authentication(flow:customizeurl:)-3hges"},"doc://com.okta.mobile.oktaoauth2/documentation/OktaOAuth2/AuthorizationCodeFlowDelegate/authentication(flow:shouldAuthenticateUsing:)-9ux29":{"defaultImplementations":1,"role":"symbol","title":"authentication(flow:shouldAuthenticateUsing:)","fragments":[{"kind":"keyword","text":"func"},{"kind":"text","text":" "},{"kind":"identifier","text":"authentication"},{"kind":"text","text":"<"},{"kind":"genericParameter","text":"Flow"},{"kind":"text","text":">("},{"kind":"externalParam","text":"flow"},{"kind":"text","text":": "},{"kind":"typeIdentifier","text":"Flow","preciseIdentifier":"s:10OktaOAuth229AuthorizationCodeFlowDelegateP14authentication4flow23shouldAuthenticateUsingyqd___10Foundation3URLVtAA0cdE0CRbd__lF0E0L_qd__mfp"},{"kind":"text","text":", "},{"kind":"externalParam","text":"shouldAuthenticateUsing"},{"kind":"text","text":": "},{"kind":"typeIdentifier","text":"URL","preciseIdentifier":"s:10Foundation3URLV"},{"kind":"text","text":")"}],"abstract":[{"type":"text","text":"Called when the authorization URL has been created, indicating the URL should be presented to the user."}],"identifier":"doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/OktaOAuth2\/AuthorizationCodeFlowDelegate\/authentication(flow:shouldAuthenticateUsing:)-9ux29","kind":"symbol","required":true,"type":"topic","url":"\/documentation\/oktaoauth2\/authorizationcodeflowdelegate\/authentication(flow:shouldauthenticateusing:)-9ux29"},"doc://com.okta.mobile.oktaoauth2/documentation/OktaOAuth2/AuthorizationCodeFlow":{"role":"symbol","title":"AuthorizationCodeFlow","fragments":[{"kind":"keyword","text":"class"},{"kind":"text","text":" "},{"kind":"identifier","text":"AuthorizationCodeFlow"}],"abstract":[{"type":"text","text":"An authentication flow class that implements the Authorization Code Flow exchange."}],"identifier":"doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/OktaOAuth2\/AuthorizationCodeFlow","kind":"symbol","type":"topic","navigatorTitle":[{"kind":"identifier","text":"AuthorizationCodeFlow"}],"url":"\/documentation\/oktaoauth2\/authorizationcodeflow"}}}
+{
+  "abstract" : [
+    {
+      "text" : "The delegate of a ",
+      "type" : "text"
+    },
+    {
+      "identifier" : "doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/OktaOAuth2\/AuthorizationCodeFlow",
+      "isActive" : true,
+      "type" : "reference"
+    },
+    {
+      "text" : " may adopt some, or all, of the methods described here. These allow a developer to customize or interact with the authentication flow during authentication.",
+      "type" : "text"
+    }
+  ],
+  "hierarchy" : {
+    "paths" : [
+      [
+        "doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/OktaOAuth2"
+      ]
+    ]
+  },
+  "identifier" : {
+    "interfaceLanguage" : "swift",
+    "url" : "doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/OktaOAuth2\/AuthorizationCodeFlowDelegate"
+  },
+  "kind" : "symbol",
+  "metadata" : {
+    "externalID" : "s:10OktaOAuth229AuthorizationCodeFlowDelegateP",
+    "fragments" : [
+      {
+        "kind" : "keyword",
+        "text" : "protocol"
+      },
+      {
+        "kind" : "text",
+        "text" : " "
+      },
+      {
+        "kind" : "identifier",
+        "text" : "AuthorizationCodeFlowDelegate"
+      }
+    ],
+    "modules" : [
+      {
+        "name" : "OktaOAuth2"
+      }
+    ],
+    "navigatorTitle" : [
+      {
+        "kind" : "identifier",
+        "text" : "AuthorizationCodeFlowDelegate"
+      }
+    ],
+    "role" : "symbol",
+    "roleHeading" : "Protocol",
+    "symbolKind" : "protocol",
+    "title" : "AuthorizationCodeFlowDelegate"
+  },
+  "primaryContentSections" : [
+    {
+      "declarations" : [
+        {
+          "languages" : [
+            "swift"
+          ],
+          "platforms" : [
+            "macOS"
+          ],
+          "tokens" : [
+            {
+              "kind" : "keyword",
+              "text" : "protocol"
+            },
+            {
+              "kind" : "text",
+              "text" : " "
+            },
+            {
+              "kind" : "identifier",
+              "text" : "AuthorizationCodeFlowDelegate"
+            },
+            {
+              "kind" : "text",
+              "text" : " : "
+            },
+            {
+              "identifier" : "doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/AuthFoundation\/AuthenticationDelegate",
+              "kind" : "typeIdentifier",
+              "preciseIdentifier" : "s:14AuthFoundation22AuthenticationDelegateP",
+              "text" : "AuthenticationDelegate"
+            }
+          ]
+        }
+      ],
+      "kind" : "declarations"
+    },
+    {
+      "content" : [
+        {
+          "anchor" : "overview",
+          "level" : 2,
+          "text" : "Overview",
+          "type" : "heading"
+        },
+        {
+          "inlineContent" : [
+            {
+              "text" : "This protocol extends the basic ",
+              "type" : "text"
+            },
+            {
+              "code" : "AuthenticationDelegate",
+              "type" : "codeVoice"
+            },
+            {
+              "text" : " which all authentication flows support.",
+              "type" : "text"
+            }
+          ],
+          "type" : "paragraph"
+        }
+      ],
+      "kind" : "content"
+    }
+  ],
+  "relationshipsSections" : [
+    {
+      "identifiers" : [
+        "doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/AuthFoundation\/AuthenticationDelegate"
+      ],
+      "kind" : "relationships",
+      "title" : "Inherits From",
+      "type" : "inheritsFrom"
+    }
+  ],
+  "schemaVersion" : {
+    "major" : 0,
+    "minor" : 2,
+    "patch" : 0
+  },
+  "sections" : [
+
+  ],
+  "seeAlsoSections" : [
+    {
+      "generated" : true,
+      "identifiers" : [
+        "doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/OktaOAuth2\/AuthorizationCodeFlow",
+        "doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/OktaOAuth2\/SessionLogoutFlow",
+        "doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/OktaOAuth2\/SessionLogoutFlowDelegate"
+      ],
+      "title" : "Authorization Code Flow"
+    }
+  ],
+  "topicSections" : [
+    {
+      "identifiers" : [
+        "doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/OktaOAuth2\/AuthorizationCodeFlowDelegate\/authentication(flow:customizeUrl:)-3hges",
+        "doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/OktaOAuth2\/AuthorizationCodeFlowDelegate\/authentication(flow:shouldAuthenticateUsing:)-9ux29",
+        "doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/OktaOAuth2\/AuthorizationCodeFlowDelegate\/authenticationFinished(flow:)",
+        "doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/OktaOAuth2\/AuthorizationCodeFlowDelegate\/authenticationStarted(flow:)"
+      ],
+      "title" : "Instance Methods"
+    }
+  ],
+  "variants" : [
+    {
+      "paths" : [
+        "\/documentation\/oktaoauth2\/authorizationcodeflowdelegate"
+      ],
+      "traits" : [
+        {
+          "interfaceLanguage" : "swift"
+        }
+      ]
+    }
+  ]
+, 
+"references": {
+"doc://com.okta.mobile.oktaoauth2/documentation/AuthFoundation/AuthenticationDelegate": {
+  "abstract" : [
+    {
+      "text" : "A common delegate protocol that all authentication flows should support.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "protocol"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "AuthenticationDelegate"
+    }
+  ],
+  "identifier" : "doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/AuthFoundation\/AuthenticationDelegate",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "AuthenticationDelegate"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "AuthenticationDelegate",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/authenticationdelegate"
+},
+"doc://com.okta.mobile.oktaoauth2/documentation/OktaOAuth2": {
+  "abstract" : [
+    {
+      "text" : "Interact with Okta’s OAuth2 APIs to authenticate users, and interact with user resources.",
+      "type" : "text"
+    }
+  ],
+  "identifier" : "doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/OktaOAuth2",
+  "kind" : "symbol",
+  "role" : "collection",
+  "title" : "OktaOAuth2",
+  "type" : "topic",
+  "url" : "\/documentation\/oktaoauth2"
+},
+"doc://com.okta.mobile.oktaoauth2/documentation/OktaOAuth2/AuthorizationCodeFlow": {
+  "abstract" : [
+    {
+      "text" : "An authentication flow class that implements the Authorization Code Flow exchange.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "class"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "AuthorizationCodeFlow"
+    }
+  ],
+  "identifier" : "doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/OktaOAuth2\/AuthorizationCodeFlow",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "AuthorizationCodeFlow"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "AuthorizationCodeFlow",
+  "type" : "topic",
+  "url" : "\/documentation\/oktaoauth2\/authorizationcodeflow"
+},
+"doc://com.okta.mobile.oktaoauth2/documentation/OktaOAuth2/AuthorizationCodeFlowDelegate": {
+  "abstract" : [
+    {
+      "text" : "The delegate of a ",
+      "type" : "text"
+    },
+    {
+      "identifier" : "doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/OktaOAuth2\/AuthorizationCodeFlow",
+      "isActive" : true,
+      "type" : "reference"
+    },
+    {
+      "text" : " may adopt some, or all, of the methods described here. These allow a developer to customize or interact with the authentication flow during authentication.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "protocol"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "AuthorizationCodeFlowDelegate"
+    }
+  ],
+  "identifier" : "doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/OktaOAuth2\/AuthorizationCodeFlowDelegate",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "AuthorizationCodeFlowDelegate"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "AuthorizationCodeFlowDelegate",
+  "type" : "topic",
+  "url" : "\/documentation\/oktaoauth2\/authorizationcodeflowdelegate"
+},
+"doc://com.okta.mobile.oktaoauth2/documentation/OktaOAuth2/AuthorizationCodeFlowDelegate/authentication(flow:customizeUrl:)-3hges": {
+  "abstract" : [
+    {
+      "text" : "Provides the opportunity to customize the authorization URL.",
+      "type" : "text"
+    }
+  ],
+  "defaultImplementations" : 1,
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "func"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "authentication"
+    },
+    {
+      "kind" : "text",
+      "text" : "<"
+    },
+    {
+      "kind" : "genericParameter",
+      "text" : "Flow"
+    },
+    {
+      "kind" : "text",
+      "text" : ">("
+    },
+    {
+      "kind" : "externalParam",
+      "text" : "flow"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:10OktaOAuth229AuthorizationCodeFlowDelegateP14authentication4flow12customizeUrlyqd___10Foundation13URLComponentsVztAA0cdE0CRbd__lF0E0L_qd__mfp",
+      "text" : "Flow"
+    },
+    {
+      "kind" : "text",
+      "text" : ", "
+    },
+    {
+      "kind" : "externalParam",
+      "text" : "customizeUrl"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "keyword",
+      "text" : "inout"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:10Foundation13URLComponentsV",
+      "text" : "URLComponents"
+    },
+    {
+      "kind" : "text",
+      "text" : ")"
+    }
+  ],
+  "identifier" : "doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/OktaOAuth2\/AuthorizationCodeFlowDelegate\/authentication(flow:customizeUrl:)-3hges",
+  "kind" : "symbol",
+  "required" : true,
+  "role" : "symbol",
+  "title" : "authentication(flow:customizeUrl:)",
+  "type" : "topic",
+  "url" : "\/documentation\/oktaoauth2\/authorizationcodeflowdelegate\/authentication(flow:customizeurl:)-3hges"
+},
+"doc://com.okta.mobile.oktaoauth2/documentation/OktaOAuth2/AuthorizationCodeFlowDelegate/authentication(flow:shouldAuthenticateUsing:)-9ux29": {
+  "abstract" : [
+    {
+      "text" : "Called when the authorization URL has been created, indicating the URL should be presented to the user.",
+      "type" : "text"
+    }
+  ],
+  "defaultImplementations" : 1,
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "func"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "authentication"
+    },
+    {
+      "kind" : "text",
+      "text" : "<"
+    },
+    {
+      "kind" : "genericParameter",
+      "text" : "Flow"
+    },
+    {
+      "kind" : "text",
+      "text" : ">("
+    },
+    {
+      "kind" : "externalParam",
+      "text" : "flow"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:10OktaOAuth229AuthorizationCodeFlowDelegateP14authentication4flow23shouldAuthenticateUsingyqd___10Foundation3URLVtAA0cdE0CRbd__lF0E0L_qd__mfp",
+      "text" : "Flow"
+    },
+    {
+      "kind" : "text",
+      "text" : ", "
+    },
+    {
+      "kind" : "externalParam",
+      "text" : "shouldAuthenticateUsing"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:10Foundation3URLV",
+      "text" : "URL"
+    },
+    {
+      "kind" : "text",
+      "text" : ")"
+    }
+  ],
+  "identifier" : "doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/OktaOAuth2\/AuthorizationCodeFlowDelegate\/authentication(flow:shouldAuthenticateUsing:)-9ux29",
+  "kind" : "symbol",
+  "required" : true,
+  "role" : "symbol",
+  "title" : "authentication(flow:shouldAuthenticateUsing:)",
+  "type" : "topic",
+  "url" : "\/documentation\/oktaoauth2\/authorizationcodeflowdelegate\/authentication(flow:shouldauthenticateusing:)-9ux29"
+},
+"doc://com.okta.mobile.oktaoauth2/documentation/OktaOAuth2/AuthorizationCodeFlowDelegate/authenticationFinished(flow:)": {
+  "abstract" : [
+    {
+      "text" : "Called after authentication completes.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "func"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "authenticationFinished"
+    },
+    {
+      "kind" : "text",
+      "text" : "<"
+    },
+    {
+      "kind" : "genericParameter",
+      "text" : "Flow"
+    },
+    {
+      "kind" : "text",
+      "text" : ">("
+    },
+    {
+      "kind" : "externalParam",
+      "text" : "flow"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:10OktaOAuth229AuthorizationCodeFlowDelegateP22authenticationFinished4flowyqd___tAA0cdE0CRbd__lF0E0L_qd__mfp",
+      "text" : "Flow"
+    },
+    {
+      "kind" : "text",
+      "text" : ")"
+    }
+  ],
+  "identifier" : "doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/OktaOAuth2\/AuthorizationCodeFlowDelegate\/authenticationFinished(flow:)",
+  "kind" : "symbol",
+  "required" : true,
+  "role" : "symbol",
+  "title" : "authenticationFinished(flow:)",
+  "type" : "topic",
+  "url" : "\/documentation\/oktaoauth2\/authorizationcodeflowdelegate\/authenticationfinished(flow:)"
+},
+"doc://com.okta.mobile.oktaoauth2/documentation/OktaOAuth2/AuthorizationCodeFlowDelegate/authenticationStarted(flow:)": {
+  "abstract" : [
+    {
+      "text" : "Called before authentication begins.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "func"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "authenticationStarted"
+    },
+    {
+      "kind" : "text",
+      "text" : "<"
+    },
+    {
+      "kind" : "genericParameter",
+      "text" : "Flow"
+    },
+    {
+      "kind" : "text",
+      "text" : ">("
+    },
+    {
+      "kind" : "externalParam",
+      "text" : "flow"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:10OktaOAuth229AuthorizationCodeFlowDelegateP21authenticationStarted4flowyqd___tAA0cdE0CRbd__lF0E0L_qd__mfp",
+      "text" : "Flow"
+    },
+    {
+      "kind" : "text",
+      "text" : ")"
+    }
+  ],
+  "identifier" : "doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/OktaOAuth2\/AuthorizationCodeFlowDelegate\/authenticationStarted(flow:)",
+  "kind" : "symbol",
+  "required" : true,
+  "role" : "symbol",
+  "title" : "authenticationStarted(flow:)",
+  "type" : "topic",
+  "url" : "\/documentation\/oktaoauth2\/authorizationcodeflowdelegate\/authenticationstarted(flow:)"
+},
+"doc://com.okta.mobile.oktaoauth2/documentation/OktaOAuth2/SessionLogoutFlow": {
+  "abstract" : [
+    {
+      "text" : "An logout flow class that implements the Session Logout Flow.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "class"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "SessionLogoutFlow"
+    }
+  ],
+  "identifier" : "doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/OktaOAuth2\/SessionLogoutFlow",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "SessionLogoutFlow"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "SessionLogoutFlow",
+  "type" : "topic",
+  "url" : "\/documentation\/oktaoauth2\/sessionlogoutflow"
+},
+"doc://com.okta.mobile.oktaoauth2/documentation/OktaOAuth2/SessionLogoutFlowDelegate": {
+  "abstract" : [
+    {
+      "text" : "The delegate of a ",
+      "type" : "text"
+    },
+    {
+      "identifier" : "doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/OktaOAuth2\/SessionLogoutFlow",
+      "isActive" : true,
+      "type" : "reference"
+    },
+    {
+      "text" : " may adopt some, or all, of the methods described here. These allow a developer to customize or interact with the logout flow during logout session.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "protocol"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "SessionLogoutFlowDelegate"
+    }
+  ],
+  "identifier" : "doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/OktaOAuth2\/SessionLogoutFlowDelegate",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "SessionLogoutFlowDelegate"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "SessionLogoutFlowDelegate",
+  "type" : "topic",
+  "url" : "\/documentation\/oktaoauth2\/sessionlogoutflowdelegate"
+}
+}
+}

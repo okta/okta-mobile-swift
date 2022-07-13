@@ -1,1 +1,256 @@
-{"primaryContentSections":[{"kind":"declarations","declarations":[{"tokens":[{"kind":"keyword","text":"subscript"},{"kind":"text","text":"("},{"kind":"internalParam","text":"x"},{"kind":"text","text":": ("},{"kind":"typeIdentifier","text":"UnboundedRange_","preciseIdentifier":"s:s15UnboundedRange_O"},{"kind":"text","text":") -> ()) -> "},{"kind":"typeIdentifier","text":"Self"},{"kind":"text","text":"."},{"kind":"typeIdentifier","text":"SubSequence"},{"kind":"text","text":" { "},{"kind":"keyword","text":"get"},{"kind":"text","text":" }"}],"languages":["swift"],"platforms":["macOS"]}]}],"schemaVersion":{"major":0,"minor":2,"patch":0},"sections":[],"variants":[{"paths":["\/documentation\/authfoundation\/jwks\/subscript(_:)-5kdvj"],"traits":[{"interfaceLanguage":"swift"}]}],"identifier":{"url":"doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/JWKS\/subscript(_:)-5kdvj","interfaceLanguage":"swift"},"abstract":[{"type":"text","text":"No overview available."}],"kind":"symbol","metadata":{"role":"symbol","title":"subscript(_:)","roleHeading":"Instance Subscript","fragments":[{"kind":"keyword","text":"subscript"},{"kind":"text","text":"(("},{"kind":"typeIdentifier","text":"UnboundedRange_","preciseIdentifier":"s:s15UnboundedRange_O"},{"kind":"text","text":") -> ()) -> "},{"kind":"typeIdentifier","text":"Self"},{"kind":"text","text":"."},{"kind":"typeIdentifier","text":"SubSequence"}],"symbolKind":"subscript","externalID":"s:SlsEy11SubSequenceQzys15UnboundedRange_OXEcip::SYNTHESIZED::s:14AuthFoundation4JWKSV","extendedModule":"Swift","modules":[{"name":"AuthFoundation"}]},"hierarchy":{"paths":[["doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation","doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/JWKS","doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/JWKS\/Collection-Implementations"]]},"references":{"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/JWKS/Collection-Implementations":{"role":"collectionGroup","title":"Collection Implementations","abstract":[],"identifier":"doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/JWKS\/Collection-Implementations","kind":"article","type":"topic","url":"\/documentation\/authfoundation\/jwks\/collection-implementations"},"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/JWKS/subscript(_:)-5kdvj":{"role":"symbol","title":"subscript(_:)","fragments":[{"kind":"keyword","text":"subscript"},{"kind":"text","text":"(("},{"kind":"typeIdentifier","text":"UnboundedRange_","preciseIdentifier":"s:s15UnboundedRange_O"},{"kind":"text","text":") -> ()) -> "},{"kind":"typeIdentifier","text":"Self"},{"kind":"text","text":"."},{"kind":"typeIdentifier","text":"SubSequence"}],"abstract":[],"identifier":"doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/JWKS\/subscript(_:)-5kdvj","kind":"symbol","type":"topic","url":"\/documentation\/authfoundation\/jwks\/subscript(_:)-5kdvj"},"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/JWKS":{"role":"symbol","title":"JWKS","fragments":[{"kind":"keyword","text":"struct"},{"kind":"text","text":" "},{"kind":"identifier","text":"JWKS"}],"abstract":[{"type":"text","text":"Describes the collection of keys associated with an authorization server."}],"identifier":"doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/JWKS","kind":"symbol","type":"topic","navigatorTitle":[{"kind":"identifier","text":"JWKS"}],"url":"\/documentation\/authfoundation\/jwks"},"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation":{"role":"collection","title":"AuthFoundation","abstract":[{"type":"text","text":"Library that provides foundational features used by Okta’s authentication libraries, as well as APIs used to work with tokens and user credentials."}],"identifier":"doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation","kind":"symbol","type":"topic","url":"\/documentation\/authfoundation"}}}
+{
+  "abstract" : [
+    {
+      "text" : "No overview available.",
+      "type" : "text"
+    }
+  ],
+  "hierarchy" : {
+    "paths" : [
+      [
+        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation",
+        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/JWKS",
+        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/JWKS\/Collection-Implementations"
+      ]
+    ]
+  },
+  "identifier" : {
+    "interfaceLanguage" : "swift",
+    "url" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/JWKS\/subscript(_:)-5kdvj"
+  },
+  "kind" : "symbol",
+  "metadata" : {
+    "extendedModule" : "Swift",
+    "externalID" : "s:SlsEy11SubSequenceQzys15UnboundedRange_OXEcip::SYNTHESIZED::s:14AuthFoundation4JWKSV",
+    "fragments" : [
+      {
+        "kind" : "keyword",
+        "text" : "subscript"
+      },
+      {
+        "kind" : "text",
+        "text" : "(("
+      },
+      {
+        "kind" : "typeIdentifier",
+        "preciseIdentifier" : "s:s15UnboundedRange_O",
+        "text" : "UnboundedRange_"
+      },
+      {
+        "kind" : "text",
+        "text" : ") -> ()) -> "
+      },
+      {
+        "kind" : "typeIdentifier",
+        "text" : "Self"
+      },
+      {
+        "kind" : "text",
+        "text" : "."
+      },
+      {
+        "kind" : "typeIdentifier",
+        "text" : "SubSequence"
+      }
+    ],
+    "modules" : [
+      {
+        "name" : "AuthFoundation"
+      }
+    ],
+    "role" : "symbol",
+    "roleHeading" : "Instance Subscript",
+    "symbolKind" : "subscript",
+    "title" : "subscript(_:)"
+  },
+  "primaryContentSections" : [
+    {
+      "declarations" : [
+        {
+          "languages" : [
+            "swift"
+          ],
+          "platforms" : [
+            "macOS"
+          ],
+          "tokens" : [
+            {
+              "kind" : "keyword",
+              "text" : "subscript"
+            },
+            {
+              "kind" : "text",
+              "text" : "("
+            },
+            {
+              "kind" : "internalParam",
+              "text" : "x"
+            },
+            {
+              "kind" : "text",
+              "text" : ": ("
+            },
+            {
+              "kind" : "typeIdentifier",
+              "preciseIdentifier" : "s:s15UnboundedRange_O",
+              "text" : "UnboundedRange_"
+            },
+            {
+              "kind" : "text",
+              "text" : ") -> ()) -> "
+            },
+            {
+              "kind" : "typeIdentifier",
+              "text" : "Self"
+            },
+            {
+              "kind" : "text",
+              "text" : "."
+            },
+            {
+              "kind" : "typeIdentifier",
+              "text" : "SubSequence"
+            },
+            {
+              "kind" : "text",
+              "text" : " { "
+            },
+            {
+              "kind" : "keyword",
+              "text" : "get"
+            },
+            {
+              "kind" : "text",
+              "text" : " }"
+            }
+          ]
+        }
+      ],
+      "kind" : "declarations"
+    }
+  ],
+  "schemaVersion" : {
+    "major" : 0,
+    "minor" : 2,
+    "patch" : 0
+  },
+  "sections" : [
+
+  ],
+  "variants" : [
+    {
+      "paths" : [
+        "\/documentation\/authfoundation\/jwks\/subscript(_:)-5kdvj"
+      ],
+      "traits" : [
+        {
+          "interfaceLanguage" : "swift"
+        }
+      ]
+    }
+  ]
+, 
+"references": {
+"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation": {
+  "abstract" : [
+    {
+      "text" : "Library that provides foundational features used by Okta’s authentication libraries, as well as APIs used to work with tokens and user credentials.",
+      "type" : "text"
+    }
+  ],
+  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation",
+  "kind" : "symbol",
+  "role" : "collection",
+  "title" : "AuthFoundation",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation"
+},
+"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/JWKS": {
+  "abstract" : [
+    {
+      "text" : "Describes the collection of keys associated with an authorization server.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "struct"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "JWKS"
+    }
+  ],
+  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/JWKS",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "JWKS"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "JWKS",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/jwks"
+},
+"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/JWKS/Collection-Implementations": {
+  "abstract" : [
+
+  ],
+  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/JWKS\/Collection-Implementations",
+  "kind" : "article",
+  "role" : "collectionGroup",
+  "title" : "Collection Implementations",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/jwks\/collection-implementations"
+},
+"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/JWKS/subscript(_:)-5kdvj": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "subscript"
+    },
+    {
+      "kind" : "text",
+      "text" : "(("
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:s15UnboundedRange_O",
+      "text" : "UnboundedRange_"
+    },
+    {
+      "kind" : "text",
+      "text" : ") -> ()) -> "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "text" : "Self"
+    },
+    {
+      "kind" : "text",
+      "text" : "."
+    },
+    {
+      "kind" : "typeIdentifier",
+      "text" : "SubSequence"
+    }
+  ],
+  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/JWKS\/subscript(_:)-5kdvj",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "subscript(_:)",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/jwks\/subscript(_:)-5kdvj"
+}
+}
+}

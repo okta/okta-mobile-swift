@@ -1,1 +1,271 @@
-{"primaryContentSections":[{"kind":"declarations","declarations":[{"tokens":[{"kind":"keyword","text":"var"},{"kind":"text","text":" "},{"kind":"identifier","text":"expiresAt"},{"kind":"text","text":": "},{"kind":"typeIdentifier","text":"Date","preciseIdentifier":"s:10Foundation4DateV"},{"kind":"text","text":"? { "},{"kind":"keyword","text":"get"},{"kind":"text","text":" }"}],"languages":["swift"],"platforms":["macOS"]}]}],"schemaVersion":{"major":0,"minor":2,"patch":0},"sections":[],"variants":[{"paths":["\/documentation\/authfoundation\/expires\/expiresat-8h3jt"],"traits":[{"interfaceLanguage":"swift"}]}],"defaultImplementationsSections":[{"title":"Expires Implementations","identifiers":["doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/AuthFoundation\/Expires\/expiresAt-579iu"]}],"identifier":{"url":"doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/AuthFoundation\/Expires\/expiresAt-8h3jt","interfaceLanguage":"swift"},"abstract":[{"type":"text","text":"The calculated date at which this object will expire."}],"kind":"symbol","metadata":{"role":"symbol","title":"expiresAt","roleHeading":"Instance Property","fragments":[{"kind":"keyword","text":"var"},{"kind":"text","text":" "},{"kind":"identifier","text":"expiresAt"},{"kind":"text","text":": "},{"kind":"typeIdentifier","text":"Date","preciseIdentifier":"s:10Foundation4DateV"},{"kind":"text","text":"?"}],"symbolKind":"property","externalID":"s:14AuthFoundation7ExpiresP9expiresAt0B04DateVSgvp","required":true,"modules":[{"name":"AuthFoundation"}]},"hierarchy":{"paths":[["doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/AuthFoundation","doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/AuthFoundation\/Expires"]]},"references":{"doc://com.okta.mobile.oktaoauth2/documentation/AuthFoundation":{"role":"collection","title":"AuthFoundation","abstract":[],"identifier":"doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/AuthFoundation","kind":"symbol","type":"topic","url":"\/documentation\/authfoundation"},"doc://com.okta.mobile.oktaoauth2/documentation/AuthFoundation/Expires":{"role":"symbol","title":"Expires","fragments":[{"kind":"keyword","text":"protocol"},{"kind":"text","text":" "},{"kind":"identifier","text":"Expires"}],"abstract":[{"type":"text","text":"Protocol that indicates an object is capable of expiring."}],"identifier":"doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/AuthFoundation\/Expires","kind":"symbol","type":"topic","navigatorTitle":[{"kind":"identifier","text":"Expires"}],"url":"\/documentation\/authfoundation\/expires"},"doc://com.okta.mobile.oktaoauth2/documentation/AuthFoundation/Expires/expiresAt-8h3jt":{"defaultImplementations":1,"role":"symbol","title":"expiresAt","fragments":[{"kind":"keyword","text":"var"},{"kind":"text","text":" "},{"kind":"identifier","text":"expiresAt"},{"kind":"text","text":": "},{"kind":"typeIdentifier","text":"Date","preciseIdentifier":"s:10Foundation4DateV"},{"kind":"text","text":"?"}],"abstract":[{"type":"text","text":"The calculated date at which this object will expire."}],"identifier":"doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/AuthFoundation\/Expires\/expiresAt-8h3jt","kind":"symbol","required":true,"type":"topic","url":"\/documentation\/authfoundation\/expires\/expiresat-8h3jt"},"doc://com.okta.mobile.oktaoauth2/documentation/AuthFoundation/Expires/expiresAt-579iu":{"role":"symbol","title":"expiresAt","fragments":[{"kind":"keyword","text":"var"},{"kind":"text","text":" "},{"kind":"identifier","text":"expiresAt"},{"kind":"text","text":": "},{"kind":"typeIdentifier","text":"Date","preciseIdentifier":"s:10Foundation4DateV"},{"kind":"text","text":"?"}],"abstract":[{"type":"text","text":"The calculated date at which this object will expire."}],"identifier":"doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/AuthFoundation\/Expires\/expiresAt-579iu","kind":"symbol","type":"topic","url":"\/documentation\/authfoundation\/expires\/expiresat-579iu"}}}
+{
+  "abstract" : [
+    {
+      "text" : "The calculated date at which this object will expire.",
+      "type" : "text"
+    }
+  ],
+  "defaultImplementationsSections" : [
+    {
+      "identifiers" : [
+        "doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/AuthFoundation\/Expires\/expiresAt-579iu"
+      ],
+      "title" : "Expires Implementations"
+    }
+  ],
+  "hierarchy" : {
+    "paths" : [
+      [
+        "doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/AuthFoundation",
+        "doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/AuthFoundation\/Expires"
+      ]
+    ]
+  },
+  "identifier" : {
+    "interfaceLanguage" : "swift",
+    "url" : "doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/AuthFoundation\/Expires\/expiresAt-8h3jt"
+  },
+  "kind" : "symbol",
+  "metadata" : {
+    "externalID" : "s:14AuthFoundation7ExpiresP9expiresAt0B04DateVSgvp",
+    "fragments" : [
+      {
+        "kind" : "keyword",
+        "text" : "var"
+      },
+      {
+        "kind" : "text",
+        "text" : " "
+      },
+      {
+        "kind" : "identifier",
+        "text" : "expiresAt"
+      },
+      {
+        "kind" : "text",
+        "text" : ": "
+      },
+      {
+        "kind" : "typeIdentifier",
+        "preciseIdentifier" : "s:10Foundation4DateV",
+        "text" : "Date"
+      },
+      {
+        "kind" : "text",
+        "text" : "?"
+      }
+    ],
+    "modules" : [
+      {
+        "name" : "AuthFoundation"
+      }
+    ],
+    "required" : true,
+    "role" : "symbol",
+    "roleHeading" : "Instance Property",
+    "symbolKind" : "property",
+    "title" : "expiresAt"
+  },
+  "primaryContentSections" : [
+    {
+      "declarations" : [
+        {
+          "languages" : [
+            "swift"
+          ],
+          "platforms" : [
+            "macOS"
+          ],
+          "tokens" : [
+            {
+              "kind" : "keyword",
+              "text" : "var"
+            },
+            {
+              "kind" : "text",
+              "text" : " "
+            },
+            {
+              "kind" : "identifier",
+              "text" : "expiresAt"
+            },
+            {
+              "kind" : "text",
+              "text" : ": "
+            },
+            {
+              "kind" : "typeIdentifier",
+              "preciseIdentifier" : "s:10Foundation4DateV",
+              "text" : "Date"
+            },
+            {
+              "kind" : "text",
+              "text" : "? { "
+            },
+            {
+              "kind" : "keyword",
+              "text" : "get"
+            },
+            {
+              "kind" : "text",
+              "text" : " }"
+            }
+          ]
+        }
+      ],
+      "kind" : "declarations"
+    }
+  ],
+  "schemaVersion" : {
+    "major" : 0,
+    "minor" : 2,
+    "patch" : 0
+  },
+  "sections" : [
+
+  ],
+  "variants" : [
+    {
+      "paths" : [
+        "\/documentation\/authfoundation\/expires\/expiresat-8h3jt"
+      ],
+      "traits" : [
+        {
+          "interfaceLanguage" : "swift"
+        }
+      ]
+    }
+  ]
+, 
+"references": {
+"doc://com.okta.mobile.oktaoauth2/documentation/AuthFoundation": {
+  "abstract" : [
+
+  ],
+  "identifier" : "doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/AuthFoundation",
+  "kind" : "symbol",
+  "role" : "collection",
+  "title" : "AuthFoundation",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation"
+},
+"doc://com.okta.mobile.oktaoauth2/documentation/AuthFoundation/Expires": {
+  "abstract" : [
+    {
+      "text" : "Protocol that indicates an object is capable of expiring.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "protocol"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "Expires"
+    }
+  ],
+  "identifier" : "doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/AuthFoundation\/Expires",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "Expires"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "Expires",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/expires"
+},
+"doc://com.okta.mobile.oktaoauth2/documentation/AuthFoundation/Expires/expiresAt-579iu": {
+  "abstract" : [
+    {
+      "text" : "The calculated date at which this object will expire.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "var"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "expiresAt"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:10Foundation4DateV",
+      "text" : "Date"
+    },
+    {
+      "kind" : "text",
+      "text" : "?"
+    }
+  ],
+  "identifier" : "doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/AuthFoundation\/Expires\/expiresAt-579iu",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "expiresAt",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/expires\/expiresat-579iu"
+},
+"doc://com.okta.mobile.oktaoauth2/documentation/AuthFoundation/Expires/expiresAt-8h3jt": {
+  "abstract" : [
+    {
+      "text" : "The calculated date at which this object will expire.",
+      "type" : "text"
+    }
+  ],
+  "defaultImplementations" : 1,
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "var"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "expiresAt"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:10Foundation4DateV",
+      "text" : "Date"
+    },
+    {
+      "kind" : "text",
+      "text" : "?"
+    }
+  ],
+  "identifier" : "doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/AuthFoundation\/Expires\/expiresAt-8h3jt",
+  "kind" : "symbol",
+  "required" : true,
+  "role" : "symbol",
+  "title" : "expiresAt",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/expires\/expiresat-8h3jt"
+}
+}
+}

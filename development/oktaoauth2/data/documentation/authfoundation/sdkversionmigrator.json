@@ -1,1 +1,314 @@
-{"primaryContentSections":[{"kind":"declarations","declarations":[{"tokens":[{"kind":"keyword","text":"protocol"},{"kind":"text","text":" "},{"kind":"identifier","text":"SDKVersionMigrator"},{"kind":"text","text":" : AnyObject"}],"languages":["swift"],"platforms":["macOS"]}]},{"kind":"content","content":[{"anchor":"overview","level":2,"type":"heading","text":"Overview"},{"type":"paragraph","inlineContent":[{"type":"text","text":"Version migrators are used to both determine a) if any migration operations need to be performed during app start-up, and b) perform migrations to upgrade user data."}]}]}],"schemaVersion":{"major":0,"minor":2,"patch":0},"sections":[],"variants":[{"paths":["\/documentation\/authfoundation\/sdkversionmigrator"],"traits":[{"interfaceLanguage":"swift"}]}],"relationshipsSections":[{"identifiers":["doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/AuthFoundation\/SDKVersion\/Migration\/LegacyOIDC"],"kind":"relationships","title":"Conforming Types","type":"conformingTypes"}],"identifier":{"url":"doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/AuthFoundation\/SDKVersionMigrator","interfaceLanguage":"swift"},"abstract":[{"type":"text","text":"Protocol describing a version migrator."}],"kind":"symbol","metadata":{"fragments":[{"kind":"keyword","text":"protocol"},{"kind":"text","text":" "},{"kind":"identifier","text":"SDKVersionMigrator"}],"title":"SDKVersionMigrator","roleHeading":"Protocol","role":"symbol","symbolKind":"protocol","externalID":"s:14AuthFoundation18SDKVersionMigratorP","modules":[{"name":"AuthFoundation"}],"navigatorTitle":[{"kind":"identifier","text":"SDKVersionMigrator"}]},"hierarchy":{"paths":[["doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/AuthFoundation"]]},"topicSections":[{"title":"Instance Properties","identifiers":["doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/AuthFoundation\/SDKVersionMigrator\/needsMigration"]},{"title":"Instance Methods","identifiers":["doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/AuthFoundation\/SDKVersionMigrator\/migrate()"]}],"references":{"doc://com.okta.mobile.oktaoauth2/documentation/AuthFoundation/SDKVersionMigrator/needsMigration":{"role":"symbol","title":"needsMigration","fragments":[{"kind":"keyword","text":"var"},{"kind":"text","text":" "},{"kind":"identifier","text":"needsMigration"},{"kind":"text","text":": "},{"kind":"typeIdentifier","text":"Bool","preciseIdentifier":"s:Sb"}],"abstract":[{"type":"text","text":"Used to indicate if an individual migrator needs to perform any migration operations.  It is recommended that this value be cached."}],"identifier":"doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/AuthFoundation\/SDKVersionMigrator\/needsMigration","kind":"symbol","required":true,"type":"topic","url":"\/documentation\/authfoundation\/sdkversionmigrator\/needsmigration"},"doc://com.okta.mobile.oktaoauth2/documentation/AuthFoundation":{"role":"collection","title":"AuthFoundation","abstract":[],"identifier":"doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/AuthFoundation","kind":"symbol","type":"topic","url":"\/documentation\/authfoundation"},"doc://com.okta.mobile.oktaoauth2/documentation/AuthFoundation/SDKVersion/Migration/LegacyOIDC":{"role":"symbol","title":"SDKVersion.Migration.LegacyOIDC","fragments":[{"kind":"keyword","text":"class"},{"kind":"text","text":" "},{"kind":"identifier","text":"LegacyOIDC"}],"abstract":[{"type":"text","text":"Migrator capable of importing credentials from the legacy "},{"type":"codeVoice","code":"OktaOidc"},{"type":"text","text":" SDK."}],"identifier":"doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/AuthFoundation\/SDKVersion\/Migration\/LegacyOIDC","kind":"symbol","type":"topic","navigatorTitle":[{"kind":"identifier","text":"LegacyOIDC"}],"url":"\/documentation\/authfoundation\/sdkversion\/migration\/legacyoidc"},"doc://com.okta.mobile.oktaoauth2/documentation/AuthFoundation/SDKVersionMigrator":{"role":"symbol","title":"SDKVersionMigrator","fragments":[{"kind":"keyword","text":"protocol"},{"kind":"text","text":" "},{"kind":"identifier","text":"SDKVersionMigrator"}],"abstract":[{"type":"text","text":"Protocol describing a version migrator."}],"identifier":"doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/AuthFoundation\/SDKVersionMigrator","kind":"symbol","type":"topic","navigatorTitle":[{"kind":"identifier","text":"SDKVersionMigrator"}],"url":"\/documentation\/authfoundation\/sdkversionmigrator"},"doc://com.okta.mobile.oktaoauth2/documentation/AuthFoundation/SDKVersionMigrator/migrate()":{"role":"symbol","title":"migrate()","fragments":[{"kind":"keyword","text":"func"},{"kind":"text","text":" "},{"kind":"identifier","text":"migrate"},{"kind":"text","text":"() "},{"kind":"keyword","text":"throws"}],"abstract":[{"type":"text","text":"Performs the version migration work necessary for this migrator."}],"identifier":"doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/AuthFoundation\/SDKVersionMigrator\/migrate()","kind":"symbol","required":true,"type":"topic","url":"\/documentation\/authfoundation\/sdkversionmigrator\/migrate()"}}}
+{
+  "abstract" : [
+    {
+      "text" : "Protocol describing a version migrator.",
+      "type" : "text"
+    }
+  ],
+  "hierarchy" : {
+    "paths" : [
+      [
+        "doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/AuthFoundation"
+      ]
+    ]
+  },
+  "identifier" : {
+    "interfaceLanguage" : "swift",
+    "url" : "doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/AuthFoundation\/SDKVersionMigrator"
+  },
+  "kind" : "symbol",
+  "metadata" : {
+    "externalID" : "s:14AuthFoundation18SDKVersionMigratorP",
+    "fragments" : [
+      {
+        "kind" : "keyword",
+        "text" : "protocol"
+      },
+      {
+        "kind" : "text",
+        "text" : " "
+      },
+      {
+        "kind" : "identifier",
+        "text" : "SDKVersionMigrator"
+      }
+    ],
+    "modules" : [
+      {
+        "name" : "AuthFoundation"
+      }
+    ],
+    "navigatorTitle" : [
+      {
+        "kind" : "identifier",
+        "text" : "SDKVersionMigrator"
+      }
+    ],
+    "role" : "symbol",
+    "roleHeading" : "Protocol",
+    "symbolKind" : "protocol",
+    "title" : "SDKVersionMigrator"
+  },
+  "primaryContentSections" : [
+    {
+      "declarations" : [
+        {
+          "languages" : [
+            "swift"
+          ],
+          "platforms" : [
+            "macOS"
+          ],
+          "tokens" : [
+            {
+              "kind" : "keyword",
+              "text" : "protocol"
+            },
+            {
+              "kind" : "text",
+              "text" : " "
+            },
+            {
+              "kind" : "identifier",
+              "text" : "SDKVersionMigrator"
+            },
+            {
+              "kind" : "text",
+              "text" : " : AnyObject"
+            }
+          ]
+        }
+      ],
+      "kind" : "declarations"
+    },
+    {
+      "content" : [
+        {
+          "anchor" : "overview",
+          "level" : 2,
+          "text" : "Overview",
+          "type" : "heading"
+        },
+        {
+          "inlineContent" : [
+            {
+              "text" : "Version migrators are used to both determine a) if any migration operations need to be performed during app start-up, and b) perform migrations to upgrade user data.",
+              "type" : "text"
+            }
+          ],
+          "type" : "paragraph"
+        }
+      ],
+      "kind" : "content"
+    }
+  ],
+  "relationshipsSections" : [
+    {
+      "identifiers" : [
+        "doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/AuthFoundation\/SDKVersion\/Migration\/LegacyOIDC"
+      ],
+      "kind" : "relationships",
+      "title" : "Conforming Types",
+      "type" : "conformingTypes"
+    }
+  ],
+  "schemaVersion" : {
+    "major" : 0,
+    "minor" : 2,
+    "patch" : 0
+  },
+  "sections" : [
+
+  ],
+  "topicSections" : [
+    {
+      "identifiers" : [
+        "doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/AuthFoundation\/SDKVersionMigrator\/needsMigration"
+      ],
+      "title" : "Instance Properties"
+    },
+    {
+      "identifiers" : [
+        "doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/AuthFoundation\/SDKVersionMigrator\/migrate()"
+      ],
+      "title" : "Instance Methods"
+    }
+  ],
+  "variants" : [
+    {
+      "paths" : [
+        "\/documentation\/authfoundation\/sdkversionmigrator"
+      ],
+      "traits" : [
+        {
+          "interfaceLanguage" : "swift"
+        }
+      ]
+    }
+  ]
+, 
+"references": {
+"doc://com.okta.mobile.oktaoauth2/documentation/AuthFoundation": {
+  "abstract" : [
+
+  ],
+  "identifier" : "doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/AuthFoundation",
+  "kind" : "symbol",
+  "role" : "collection",
+  "title" : "AuthFoundation",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation"
+},
+"doc://com.okta.mobile.oktaoauth2/documentation/AuthFoundation/SDKVersion/Migration/LegacyOIDC": {
+  "abstract" : [
+    {
+      "text" : "Migrator capable of importing credentials from the legacy ",
+      "type" : "text"
+    },
+    {
+      "code" : "OktaOidc",
+      "type" : "codeVoice"
+    },
+    {
+      "text" : " SDK.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "class"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "LegacyOIDC"
+    }
+  ],
+  "identifier" : "doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/AuthFoundation\/SDKVersion\/Migration\/LegacyOIDC",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "LegacyOIDC"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "SDKVersion.Migration.LegacyOIDC",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/sdkversion\/migration\/legacyoidc"
+},
+"doc://com.okta.mobile.oktaoauth2/documentation/AuthFoundation/SDKVersionMigrator": {
+  "abstract" : [
+    {
+      "text" : "Protocol describing a version migrator.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "protocol"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "SDKVersionMigrator"
+    }
+  ],
+  "identifier" : "doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/AuthFoundation\/SDKVersionMigrator",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "SDKVersionMigrator"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "SDKVersionMigrator",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/sdkversionmigrator"
+},
+"doc://com.okta.mobile.oktaoauth2/documentation/AuthFoundation/SDKVersionMigrator/migrate()": {
+  "abstract" : [
+    {
+      "text" : "Performs the version migration work necessary for this migrator.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "func"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "migrate"
+    },
+    {
+      "kind" : "text",
+      "text" : "() "
+    },
+    {
+      "kind" : "keyword",
+      "text" : "throws"
+    }
+  ],
+  "identifier" : "doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/AuthFoundation\/SDKVersionMigrator\/migrate()",
+  "kind" : "symbol",
+  "required" : true,
+  "role" : "symbol",
+  "title" : "migrate()",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/sdkversionmigrator\/migrate()"
+},
+"doc://com.okta.mobile.oktaoauth2/documentation/AuthFoundation/SDKVersionMigrator/needsMigration": {
+  "abstract" : [
+    {
+      "text" : "Used to indicate if an individual migrator needs to perform any migration operations.  It is recommended that this value be cached.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "var"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "needsMigration"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:Sb",
+      "text" : "Bool"
+    }
+  ],
+  "identifier" : "doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/AuthFoundation\/SDKVersionMigrator\/needsMigration",
+  "kind" : "symbol",
+  "required" : true,
+  "role" : "symbol",
+  "title" : "needsMigration",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/sdkversionmigrator\/needsmigration"
+}
+}
+}

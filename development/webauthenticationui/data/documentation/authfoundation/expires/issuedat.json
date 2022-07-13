@@ -1,1 +1,221 @@
-{"primaryContentSections":[{"kind":"declarations","declarations":[{"tokens":[{"kind":"keyword","text":"var"},{"kind":"text","text":" "},{"kind":"identifier","text":"issuedAt"},{"kind":"text","text":": "},{"kind":"typeIdentifier","text":"Date","preciseIdentifier":"s:10Foundation4DateV"},{"kind":"text","text":"? { "},{"kind":"keyword","text":"get"},{"kind":"text","text":" }"}],"languages":["swift"],"platforms":["macOS"]}]}],"schemaVersion":{"major":0,"minor":2,"patch":0},"sections":[],"variants":[{"paths":["\/documentation\/authfoundation\/expires\/issuedat"],"traits":[{"interfaceLanguage":"swift"}]}],"identifier":{"url":"doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/AuthFoundation\/Expires\/issuedAt","interfaceLanguage":"swift"},"abstract":[{"type":"text","text":"The date this object was issued, from which the expiration time will be calculated."}],"kind":"symbol","metadata":{"role":"symbol","title":"issuedAt","roleHeading":"Instance Property","fragments":[{"kind":"keyword","text":"var"},{"kind":"text","text":" "},{"kind":"identifier","text":"issuedAt"},{"kind":"text","text":": "},{"kind":"typeIdentifier","text":"Date","preciseIdentifier":"s:10Foundation4DateV"},{"kind":"text","text":"?"}],"symbolKind":"property","externalID":"s:14AuthFoundation7ExpiresP8issuedAt0B04DateVSgvp","required":true,"modules":[{"name":"AuthFoundation"}]},"hierarchy":{"paths":[["doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/AuthFoundation","doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/AuthFoundation\/Expires"]]},"references":{"doc://com.okta.mobile.webauthenticationui/documentation/AuthFoundation/Expires":{"role":"symbol","title":"Expires","fragments":[{"kind":"keyword","text":"protocol"},{"kind":"text","text":" "},{"kind":"identifier","text":"Expires"}],"abstract":[{"type":"text","text":"Protocol that indicates an object is capable of expiring."}],"identifier":"doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/AuthFoundation\/Expires","kind":"symbol","type":"topic","navigatorTitle":[{"kind":"identifier","text":"Expires"}],"url":"\/documentation\/authfoundation\/expires"},"doc://com.okta.mobile.webauthenticationui/documentation/AuthFoundation":{"role":"collection","title":"AuthFoundation","abstract":[],"identifier":"doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/AuthFoundation","kind":"symbol","type":"topic","url":"\/documentation\/authfoundation"},"doc://com.okta.mobile.webauthenticationui/documentation/AuthFoundation/Expires/issuedAt":{"role":"symbol","title":"issuedAt","fragments":[{"kind":"keyword","text":"var"},{"kind":"text","text":" "},{"kind":"identifier","text":"issuedAt"},{"kind":"text","text":": "},{"kind":"typeIdentifier","text":"Date","preciseIdentifier":"s:10Foundation4DateV"},{"kind":"text","text":"?"}],"abstract":[{"type":"text","text":"The date this object was issued, from which the expiration time will be calculated."}],"identifier":"doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/AuthFoundation\/Expires\/issuedAt","kind":"symbol","required":true,"type":"topic","url":"\/documentation\/authfoundation\/expires\/issuedat"}}}
+{
+  "abstract" : [
+    {
+      "text" : "The date this object was issued, from which the expiration time will be calculated.",
+      "type" : "text"
+    }
+  ],
+  "hierarchy" : {
+    "paths" : [
+      [
+        "doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/AuthFoundation",
+        "doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/AuthFoundation\/Expires"
+      ]
+    ]
+  },
+  "identifier" : {
+    "interfaceLanguage" : "swift",
+    "url" : "doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/AuthFoundation\/Expires\/issuedAt"
+  },
+  "kind" : "symbol",
+  "metadata" : {
+    "externalID" : "s:14AuthFoundation7ExpiresP8issuedAt0B04DateVSgvp",
+    "fragments" : [
+      {
+        "kind" : "keyword",
+        "text" : "var"
+      },
+      {
+        "kind" : "text",
+        "text" : " "
+      },
+      {
+        "kind" : "identifier",
+        "text" : "issuedAt"
+      },
+      {
+        "kind" : "text",
+        "text" : ": "
+      },
+      {
+        "kind" : "typeIdentifier",
+        "preciseIdentifier" : "s:10Foundation4DateV",
+        "text" : "Date"
+      },
+      {
+        "kind" : "text",
+        "text" : "?"
+      }
+    ],
+    "modules" : [
+      {
+        "name" : "AuthFoundation"
+      }
+    ],
+    "required" : true,
+    "role" : "symbol",
+    "roleHeading" : "Instance Property",
+    "symbolKind" : "property",
+    "title" : "issuedAt"
+  },
+  "primaryContentSections" : [
+    {
+      "declarations" : [
+        {
+          "languages" : [
+            "swift"
+          ],
+          "platforms" : [
+            "macOS"
+          ],
+          "tokens" : [
+            {
+              "kind" : "keyword",
+              "text" : "var"
+            },
+            {
+              "kind" : "text",
+              "text" : " "
+            },
+            {
+              "kind" : "identifier",
+              "text" : "issuedAt"
+            },
+            {
+              "kind" : "text",
+              "text" : ": "
+            },
+            {
+              "kind" : "typeIdentifier",
+              "preciseIdentifier" : "s:10Foundation4DateV",
+              "text" : "Date"
+            },
+            {
+              "kind" : "text",
+              "text" : "? { "
+            },
+            {
+              "kind" : "keyword",
+              "text" : "get"
+            },
+            {
+              "kind" : "text",
+              "text" : " }"
+            }
+          ]
+        }
+      ],
+      "kind" : "declarations"
+    }
+  ],
+  "schemaVersion" : {
+    "major" : 0,
+    "minor" : 2,
+    "patch" : 0
+  },
+  "sections" : [
+
+  ],
+  "variants" : [
+    {
+      "paths" : [
+        "\/documentation\/authfoundation\/expires\/issuedat"
+      ],
+      "traits" : [
+        {
+          "interfaceLanguage" : "swift"
+        }
+      ]
+    }
+  ]
+, 
+"references": {
+"doc://com.okta.mobile.webauthenticationui/documentation/AuthFoundation": {
+  "abstract" : [
+
+  ],
+  "identifier" : "doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/AuthFoundation",
+  "kind" : "symbol",
+  "role" : "collection",
+  "title" : "AuthFoundation",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation"
+},
+"doc://com.okta.mobile.webauthenticationui/documentation/AuthFoundation/Expires": {
+  "abstract" : [
+    {
+      "text" : "Protocol that indicates an object is capable of expiring.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "protocol"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "Expires"
+    }
+  ],
+  "identifier" : "doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/AuthFoundation\/Expires",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "Expires"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "Expires",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/expires"
+},
+"doc://com.okta.mobile.webauthenticationui/documentation/AuthFoundation/Expires/issuedAt": {
+  "abstract" : [
+    {
+      "text" : "The date this object was issued, from which the expiration time will be calculated.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "var"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "issuedAt"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:10Foundation4DateV",
+      "text" : "Date"
+    },
+    {
+      "kind" : "text",
+      "text" : "?"
+    }
+  ],
+  "identifier" : "doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/AuthFoundation\/Expires\/issuedAt",
+  "kind" : "symbol",
+  "required" : true,
+  "role" : "symbol",
+  "title" : "issuedAt",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/expires\/issuedat"
+}
+}
+}

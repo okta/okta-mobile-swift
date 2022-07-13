@@ -1,1 +1,281 @@
-{"primaryContentSections":[{"kind":"declarations","declarations":[{"tokens":[{"kind":"keyword","text":"let"},{"kind":"text","text":" "},{"kind":"identifier","text":"label"},{"kind":"text","text":": "},{"kind":"typeIdentifier","text":"String","preciseIdentifier":"s:SS"},{"kind":"text","text":"?"}],"languages":["swift"],"platforms":["macOS"]}]}],"schemaVersion":{"major":0,"minor":2,"patch":0},"sections":[],"variants":[{"paths":["\/documentation\/authfoundation\/keychain\/search\/result\/label"],"traits":[{"interfaceLanguage":"swift"}]}],"identifier":{"url":"doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/AuthFoundation\/Keychain\/Search\/Result\/label","interfaceLanguage":"swift"},"abstract":[{"type":"text","text":"The label that summarizes this keychain item."}],"kind":"symbol","metadata":{"fragments":[{"kind":"keyword","text":"let"},{"kind":"text","text":" "},{"kind":"identifier","text":"label"},{"kind":"text","text":": "},{"kind":"typeIdentifier","text":"String","preciseIdentifier":"s:SS"},{"kind":"text","text":"?"}],"title":"label","roleHeading":"Instance Property","role":"symbol","symbolKind":"property","externalID":"s:14AuthFoundation8KeychainV6SearchV6ResultV5labelSSSgvp","modules":[{"name":"AuthFoundation"}]},"hierarchy":{"paths":[["doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/AuthFoundation","doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/AuthFoundation\/Keychain","doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/AuthFoundation\/Keychain\/Search","doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/AuthFoundation\/Keychain\/Search\/Result"]]},"references":{"doc://com.okta.mobile.webauthenticationui/documentation/AuthFoundation/Keychain/Search/Result":{"role":"symbol","title":"Keychain.Search.Result","fragments":[{"kind":"keyword","text":"struct"},{"kind":"text","text":" "},{"kind":"identifier","text":"Result"}],"abstract":[{"type":"text","text":"An individual result within a keychain search."}],"identifier":"doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/AuthFoundation\/Keychain\/Search\/Result","kind":"symbol","type":"topic","navigatorTitle":[{"kind":"identifier","text":"Result"}],"url":"\/documentation\/authfoundation\/keychain\/search\/result"},"doc://com.okta.mobile.webauthenticationui/documentation/AuthFoundation/Keychain/Search/Result/label":{"role":"symbol","title":"label","fragments":[{"kind":"keyword","text":"let"},{"kind":"text","text":" "},{"kind":"identifier","text":"label"},{"kind":"text","text":": "},{"kind":"typeIdentifier","text":"String","preciseIdentifier":"s:SS"},{"kind":"text","text":"?"}],"abstract":[{"type":"text","text":"The label that summarizes this keychain item."}],"identifier":"doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/AuthFoundation\/Keychain\/Search\/Result\/label","kind":"symbol","type":"topic","url":"\/documentation\/authfoundation\/keychain\/search\/result\/label"},"doc://com.okta.mobile.webauthenticationui/documentation/AuthFoundation/Keychain/Search":{"role":"symbol","title":"Keychain.Search","fragments":[{"kind":"keyword","text":"struct"},{"kind":"text","text":" "},{"kind":"identifier","text":"Search"}],"abstract":[{"type":"text","text":"Defines a search for keychain items."}],"identifier":"doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/AuthFoundation\/Keychain\/Search","kind":"symbol","type":"topic","navigatorTitle":[{"kind":"identifier","text":"Search"}],"url":"\/documentation\/authfoundation\/keychain\/search"},"doc://com.okta.mobile.webauthenticationui/documentation/AuthFoundation/Keychain":{"role":"symbol","title":"Keychain","fragments":[{"kind":"keyword","text":"struct"},{"kind":"text","text":" "},{"kind":"identifier","text":"Keychain"}],"abstract":[{"type":"text","text":"Defines convenience mechanisms for interacting with the keychain, including searching, creating, and deleting keychain items."}],"identifier":"doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/AuthFoundation\/Keychain","kind":"symbol","type":"topic","navigatorTitle":[{"kind":"identifier","text":"Keychain"}],"url":"\/documentation\/authfoundation\/keychain"},"doc://com.okta.mobile.webauthenticationui/documentation/AuthFoundation":{"role":"collection","title":"AuthFoundation","abstract":[],"identifier":"doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/AuthFoundation","kind":"symbol","type":"topic","url":"\/documentation\/authfoundation"}}}
+{
+  "abstract" : [
+    {
+      "text" : "The label that summarizes this keychain item.",
+      "type" : "text"
+    }
+  ],
+  "hierarchy" : {
+    "paths" : [
+      [
+        "doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/AuthFoundation",
+        "doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/AuthFoundation\/Keychain",
+        "doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/AuthFoundation\/Keychain\/Search",
+        "doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/AuthFoundation\/Keychain\/Search\/Result"
+      ]
+    ]
+  },
+  "identifier" : {
+    "interfaceLanguage" : "swift",
+    "url" : "doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/AuthFoundation\/Keychain\/Search\/Result\/label"
+  },
+  "kind" : "symbol",
+  "metadata" : {
+    "externalID" : "s:14AuthFoundation8KeychainV6SearchV6ResultV5labelSSSgvp",
+    "fragments" : [
+      {
+        "kind" : "keyword",
+        "text" : "let"
+      },
+      {
+        "kind" : "text",
+        "text" : " "
+      },
+      {
+        "kind" : "identifier",
+        "text" : "label"
+      },
+      {
+        "kind" : "text",
+        "text" : ": "
+      },
+      {
+        "kind" : "typeIdentifier",
+        "preciseIdentifier" : "s:SS",
+        "text" : "String"
+      },
+      {
+        "kind" : "text",
+        "text" : "?"
+      }
+    ],
+    "modules" : [
+      {
+        "name" : "AuthFoundation"
+      }
+    ],
+    "role" : "symbol",
+    "roleHeading" : "Instance Property",
+    "symbolKind" : "property",
+    "title" : "label"
+  },
+  "primaryContentSections" : [
+    {
+      "declarations" : [
+        {
+          "languages" : [
+            "swift"
+          ],
+          "platforms" : [
+            "macOS"
+          ],
+          "tokens" : [
+            {
+              "kind" : "keyword",
+              "text" : "let"
+            },
+            {
+              "kind" : "text",
+              "text" : " "
+            },
+            {
+              "kind" : "identifier",
+              "text" : "label"
+            },
+            {
+              "kind" : "text",
+              "text" : ": "
+            },
+            {
+              "kind" : "typeIdentifier",
+              "preciseIdentifier" : "s:SS",
+              "text" : "String"
+            },
+            {
+              "kind" : "text",
+              "text" : "?"
+            }
+          ]
+        }
+      ],
+      "kind" : "declarations"
+    }
+  ],
+  "schemaVersion" : {
+    "major" : 0,
+    "minor" : 2,
+    "patch" : 0
+  },
+  "sections" : [
+
+  ],
+  "variants" : [
+    {
+      "paths" : [
+        "\/documentation\/authfoundation\/keychain\/search\/result\/label"
+      ],
+      "traits" : [
+        {
+          "interfaceLanguage" : "swift"
+        }
+      ]
+    }
+  ]
+, 
+"references": {
+"doc://com.okta.mobile.webauthenticationui/documentation/AuthFoundation": {
+  "abstract" : [
+
+  ],
+  "identifier" : "doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/AuthFoundation",
+  "kind" : "symbol",
+  "role" : "collection",
+  "title" : "AuthFoundation",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation"
+},
+"doc://com.okta.mobile.webauthenticationui/documentation/AuthFoundation/Keychain": {
+  "abstract" : [
+    {
+      "text" : "Defines convenience mechanisms for interacting with the keychain, including searching, creating, and deleting keychain items.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "struct"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "Keychain"
+    }
+  ],
+  "identifier" : "doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/AuthFoundation\/Keychain",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "Keychain"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "Keychain",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/keychain"
+},
+"doc://com.okta.mobile.webauthenticationui/documentation/AuthFoundation/Keychain/Search": {
+  "abstract" : [
+    {
+      "text" : "Defines a search for keychain items.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "struct"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "Search"
+    }
+  ],
+  "identifier" : "doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/AuthFoundation\/Keychain\/Search",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "Search"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "Keychain.Search",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/keychain\/search"
+},
+"doc://com.okta.mobile.webauthenticationui/documentation/AuthFoundation/Keychain/Search/Result": {
+  "abstract" : [
+    {
+      "text" : "An individual result within a keychain search.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "struct"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "Result"
+    }
+  ],
+  "identifier" : "doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/AuthFoundation\/Keychain\/Search\/Result",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "Result"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "Keychain.Search.Result",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/keychain\/search\/result"
+},
+"doc://com.okta.mobile.webauthenticationui/documentation/AuthFoundation/Keychain/Search/Result/label": {
+  "abstract" : [
+    {
+      "text" : "The label that summarizes this keychain item.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "let"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "label"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:SS",
+      "text" : "String"
+    },
+    {
+      "kind" : "text",
+      "text" : "?"
+    }
+  ],
+  "identifier" : "doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/AuthFoundation\/Keychain\/Search\/Result\/label",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "label",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/keychain\/search\/result\/label"
+}
+}
+}

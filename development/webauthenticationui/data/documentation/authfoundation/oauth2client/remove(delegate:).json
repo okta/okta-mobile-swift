@@ -1,1 +1,272 @@
-{"primaryContentSections":[{"kind":"declarations","declarations":[{"tokens":[{"kind":"keyword","text":"func"},{"kind":"text","text":" "},{"kind":"identifier","text":"remove"},{"kind":"text","text":"("},{"kind":"externalParam","text":"delegate"},{"kind":"text","text":": "},{"kind":"typeIdentifier","identifier":"doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/AuthFoundation\/UsesDelegateCollection\/Delegate","preciseIdentifier":"s:14AuthFoundation22UsesDelegateCollectionP0D0Qa","text":"Delegate"},{"kind":"text","text":")"}],"languages":["swift"],"platforms":["macOS"]}]}],"schemaVersion":{"major":0,"minor":2,"patch":0},"sections":[],"variants":[{"paths":["\/documentation\/authfoundation\/oauth2client\/remove(delegate:)"],"traits":[{"interfaceLanguage":"swift"}]}],"identifier":{"url":"doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/AuthFoundation\/OAuth2Client\/remove(delegate:)","interfaceLanguage":"swift"},"abstract":[{"type":"text","text":"No overview available."}],"kind":"symbol","metadata":{"role":"symbol","title":"remove(delegate:)","roleHeading":"Instance Method","fragments":[{"kind":"keyword","text":"func"},{"kind":"text","text":" "},{"kind":"identifier","text":"remove"},{"kind":"text","text":"("},{"kind":"externalParam","text":"delegate"},{"kind":"text","text":": "},{"kind":"typeIdentifier","text":"Delegate","preciseIdentifier":"s:14AuthFoundation22UsesDelegateCollectionP0D0Qa"},{"kind":"text","text":")"}],"symbolKind":"method","externalID":"s:14AuthFoundation22UsesDelegateCollectionPAAE6remove8delegatey0D0Qz_tF::SYNTHESIZED::s:14AuthFoundation12OAuth2ClientC","extendedModule":"AuthFoundation","modules":[{"name":"AuthFoundation"}]},"hierarchy":{"paths":[["doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/AuthFoundation","doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/AuthFoundation\/OAuth2Client","doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/AuthFoundation\/OAuth2Client\/UsesDelegateCollection-Implementations"]]},"references":{"doc://com.okta.mobile.webauthenticationui/documentation/AuthFoundation":{"role":"collection","title":"AuthFoundation","abstract":[],"identifier":"doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/AuthFoundation","kind":"symbol","type":"topic","url":"\/documentation\/authfoundation"},"doc://com.okta.mobile.webauthenticationui/documentation/AuthFoundation/OAuth2Client":{"role":"symbol","title":"OAuth2Client","fragments":[{"kind":"keyword","text":"class"},{"kind":"text","text":" "},{"kind":"identifier","text":"OAuth2Client"}],"abstract":[{"type":"text","text":"An OAuth2 client, used to interact with a given authorization server."}],"identifier":"doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/AuthFoundation\/OAuth2Client","kind":"symbol","type":"topic","navigatorTitle":[{"kind":"identifier","text":"OAuth2Client"}],"url":"\/documentation\/authfoundation\/oauth2client"},"doc://com.okta.mobile.webauthenticationui/documentation/AuthFoundation/UsesDelegateCollection/Delegate":{"role":"symbol","title":"Delegate","fragments":[{"kind":"keyword","text":"associatedtype"},{"kind":"text","text":" "},{"kind":"identifier","text":"Delegate"}],"abstract":[],"identifier":"doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/AuthFoundation\/UsesDelegateCollection\/Delegate","kind":"symbol","required":true,"type":"topic","url":"\/documentation\/authfoundation\/usesdelegatecollection\/delegate"},"doc://com.okta.mobile.webauthenticationui/documentation/AuthFoundation/OAuth2Client/remove(delegate:)":{"role":"symbol","title":"remove(delegate:)","fragments":[{"kind":"keyword","text":"func"},{"kind":"text","text":" "},{"kind":"identifier","text":"remove"},{"kind":"text","text":"("},{"kind":"externalParam","text":"delegate"},{"kind":"text","text":": "},{"kind":"typeIdentifier","text":"Delegate","preciseIdentifier":"s:14AuthFoundation22UsesDelegateCollectionP0D0Qa"},{"kind":"text","text":")"}],"abstract":[],"identifier":"doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/AuthFoundation\/OAuth2Client\/remove(delegate:)","kind":"symbol","type":"topic","url":"\/documentation\/authfoundation\/oauth2client\/remove(delegate:)"},"doc://com.okta.mobile.webauthenticationui/documentation/AuthFoundation/OAuth2Client/UsesDelegateCollection-Implementations":{"role":"collectionGroup","title":"UsesDelegateCollection Implementations","abstract":[],"identifier":"doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/AuthFoundation\/OAuth2Client\/UsesDelegateCollection-Implementations","kind":"article","type":"topic","url":"\/documentation\/authfoundation\/oauth2client\/usesdelegatecollection-implementations"}}}
+{
+  "abstract" : [
+    {
+      "text" : "No overview available.",
+      "type" : "text"
+    }
+  ],
+  "hierarchy" : {
+    "paths" : [
+      [
+        "doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/AuthFoundation",
+        "doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/AuthFoundation\/OAuth2Client",
+        "doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/AuthFoundation\/OAuth2Client\/UsesDelegateCollection-Implementations"
+      ]
+    ]
+  },
+  "identifier" : {
+    "interfaceLanguage" : "swift",
+    "url" : "doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/AuthFoundation\/OAuth2Client\/remove(delegate:)"
+  },
+  "kind" : "symbol",
+  "metadata" : {
+    "extendedModule" : "AuthFoundation",
+    "externalID" : "s:14AuthFoundation22UsesDelegateCollectionPAAE6remove8delegatey0D0Qz_tF::SYNTHESIZED::s:14AuthFoundation12OAuth2ClientC",
+    "fragments" : [
+      {
+        "kind" : "keyword",
+        "text" : "func"
+      },
+      {
+        "kind" : "text",
+        "text" : " "
+      },
+      {
+        "kind" : "identifier",
+        "text" : "remove"
+      },
+      {
+        "kind" : "text",
+        "text" : "("
+      },
+      {
+        "kind" : "externalParam",
+        "text" : "delegate"
+      },
+      {
+        "kind" : "text",
+        "text" : ": "
+      },
+      {
+        "kind" : "typeIdentifier",
+        "preciseIdentifier" : "s:14AuthFoundation22UsesDelegateCollectionP0D0Qa",
+        "text" : "Delegate"
+      },
+      {
+        "kind" : "text",
+        "text" : ")"
+      }
+    ],
+    "modules" : [
+      {
+        "name" : "AuthFoundation"
+      }
+    ],
+    "role" : "symbol",
+    "roleHeading" : "Instance Method",
+    "symbolKind" : "method",
+    "title" : "remove(delegate:)"
+  },
+  "primaryContentSections" : [
+    {
+      "declarations" : [
+        {
+          "languages" : [
+            "swift"
+          ],
+          "platforms" : [
+            "macOS"
+          ],
+          "tokens" : [
+            {
+              "kind" : "keyword",
+              "text" : "func"
+            },
+            {
+              "kind" : "text",
+              "text" : " "
+            },
+            {
+              "kind" : "identifier",
+              "text" : "remove"
+            },
+            {
+              "kind" : "text",
+              "text" : "("
+            },
+            {
+              "kind" : "externalParam",
+              "text" : "delegate"
+            },
+            {
+              "kind" : "text",
+              "text" : ": "
+            },
+            {
+              "identifier" : "doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/AuthFoundation\/UsesDelegateCollection\/Delegate",
+              "kind" : "typeIdentifier",
+              "preciseIdentifier" : "s:14AuthFoundation22UsesDelegateCollectionP0D0Qa",
+              "text" : "Delegate"
+            },
+            {
+              "kind" : "text",
+              "text" : ")"
+            }
+          ]
+        }
+      ],
+      "kind" : "declarations"
+    }
+  ],
+  "schemaVersion" : {
+    "major" : 0,
+    "minor" : 2,
+    "patch" : 0
+  },
+  "sections" : [
+
+  ],
+  "variants" : [
+    {
+      "paths" : [
+        "\/documentation\/authfoundation\/oauth2client\/remove(delegate:)"
+      ],
+      "traits" : [
+        {
+          "interfaceLanguage" : "swift"
+        }
+      ]
+    }
+  ]
+, 
+"references": {
+"doc://com.okta.mobile.webauthenticationui/documentation/AuthFoundation": {
+  "abstract" : [
+
+  ],
+  "identifier" : "doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/AuthFoundation",
+  "kind" : "symbol",
+  "role" : "collection",
+  "title" : "AuthFoundation",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation"
+},
+"doc://com.okta.mobile.webauthenticationui/documentation/AuthFoundation/OAuth2Client": {
+  "abstract" : [
+    {
+      "text" : "An OAuth2 client, used to interact with a given authorization server.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "class"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "OAuth2Client"
+    }
+  ],
+  "identifier" : "doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/AuthFoundation\/OAuth2Client",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "OAuth2Client"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "OAuth2Client",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/oauth2client"
+},
+"doc://com.okta.mobile.webauthenticationui/documentation/AuthFoundation/OAuth2Client/UsesDelegateCollection-Implementations": {
+  "abstract" : [
+
+  ],
+  "identifier" : "doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/AuthFoundation\/OAuth2Client\/UsesDelegateCollection-Implementations",
+  "kind" : "article",
+  "role" : "collectionGroup",
+  "title" : "UsesDelegateCollection Implementations",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/oauth2client\/usesdelegatecollection-implementations"
+},
+"doc://com.okta.mobile.webauthenticationui/documentation/AuthFoundation/OAuth2Client/remove(delegate:)": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "func"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "remove"
+    },
+    {
+      "kind" : "text",
+      "text" : "("
+    },
+    {
+      "kind" : "externalParam",
+      "text" : "delegate"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:14AuthFoundation22UsesDelegateCollectionP0D0Qa",
+      "text" : "Delegate"
+    },
+    {
+      "kind" : "text",
+      "text" : ")"
+    }
+  ],
+  "identifier" : "doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/AuthFoundation\/OAuth2Client\/remove(delegate:)",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "remove(delegate:)",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/oauth2client\/remove(delegate:)"
+},
+"doc://com.okta.mobile.webauthenticationui/documentation/AuthFoundation/UsesDelegateCollection/Delegate": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "associatedtype"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "Delegate"
+    }
+  ],
+  "identifier" : "doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/AuthFoundation\/UsesDelegateCollection\/Delegate",
+  "kind" : "symbol",
+  "required" : true,
+  "role" : "symbol",
+  "title" : "Delegate",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/usesdelegatecollection\/delegate"
+}
+}
+}

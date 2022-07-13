@@ -1,1 +1,901 @@
-{"primaryContentSections":[{"kind":"declarations","declarations":[{"tokens":[{"kind":"keyword","text":"func"},{"kind":"text","text":" "},{"kind":"identifier","text":"elementsEqual"},{"kind":"text","text":"<"},{"kind":"genericParameter","text":"OtherSequence"},{"kind":"text","text":">("},{"kind":"externalParam","text":"_"},{"kind":"text","text":" "},{"kind":"internalParam","text":"other"},{"kind":"text","text":": "},{"kind":"typeIdentifier","text":"OtherSequence"},{"kind":"text","text":", "},{"kind":"externalParam","text":"by"},{"kind":"text","text":" "},{"kind":"internalParam","text":"areEquivalent"},{"kind":"text","text":": ("},{"kind":"typeIdentifier","text":"Self"},{"kind":"text","text":"."},{"kind":"typeIdentifier","text":"Element"},{"kind":"text","text":", "},{"kind":"typeIdentifier","text":"OtherSequence"},{"kind":"text","text":"."},{"kind":"typeIdentifier","text":"Element"},{"kind":"text","text":") "},{"kind":"keyword","text":"throws"},{"kind":"text","text":" -> "},{"kind":"typeIdentifier","text":"Bool","preciseIdentifier":"s:Sb"},{"kind":"text","text":") "},{"kind":"keyword","text":"rethrows"},{"kind":"text","text":" -> "},{"kind":"typeIdentifier","text":"Bool","preciseIdentifier":"s:Sb"},{"kind":"text","text":" "},{"kind":"keyword","text":"where"},{"kind":"text","text":" "},{"kind":"typeIdentifier","text":"OtherSequence"},{"kind":"text","text":" : "},{"kind":"typeIdentifier","text":"Sequence","preciseIdentifier":"s:ST"}],"languages":["swift"],"platforms":["macOS"]}]},{"kind":"content","content":[{"anchor":"return-value","level":2,"type":"heading","text":"Return Value"},{"type":"paragraph","inlineContent":[{"type":"text","text":""},{"type":"codeVoice","code":"true"},{"type":"text","text":" if this sequence and "},{"type":"codeVoice","code":"other"},{"type":"text","text":" contain equivalent items,"},{"type":"text","text":" "},{"type":"text","text":"using "},{"type":"codeVoice","code":"areEquivalent"},{"type":"text","text":" as the equivalence test; otherwise, "},{"type":"codeVoice","code":"false."}]}]},{"kind":"parameters","parameters":[{"name":"other","content":[{"type":"paragraph","inlineContent":[{"type":"text","text":"A sequence to compare to this sequence."}]}]},{"name":"areEquivalent","content":[{"type":"paragraph","inlineContent":[{"type":"text","text":"A predicate that returns "},{"type":"codeVoice","code":"true"},{"type":"text","text":" if its two arguments"},{"type":"text","text":" "},{"type":"text","text":"are equivalent; otherwise, "},{"type":"codeVoice","code":"false"},{"type":"text","text":"."}]}]}]},{"kind":"content","content":[{"anchor":"discussion","level":2,"type":"heading","text":"Discussion"},{"type":"paragraph","inlineContent":[{"type":"text","text":"At least one of the sequences must be finite."}]},{"type":"paragraph","inlineContent":[{"type":"text","text":"The predicate must be a "},{"type":"emphasis","inlineContent":[{"type":"text","text":"equivalence relation"}]},{"type":"text","text":" over the elements. That"},{"type":"text","text":" "},{"type":"text","text":"is, for any elements "},{"type":"codeVoice","code":"a"},{"type":"text","text":", "},{"type":"codeVoice","code":"b"},{"type":"text","text":", and "},{"type":"codeVoice","code":"c"},{"type":"text","text":", the following conditions must"},{"type":"text","text":" "},{"type":"text","text":"hold:"}]},{"type":"unorderedList","items":[{"content":[{"type":"paragraph","inlineContent":[{"type":"codeVoice","code":"areEquivalent(a, a)"},{"type":"text","text":" is always "},{"type":"codeVoice","code":"true"},{"type":"text","text":". (Reflexivity)"}]}]},{"content":[{"type":"paragraph","inlineContent":[{"type":"codeVoice","code":"areEquivalent(a, b)"},{"type":"text","text":" implies "},{"type":"codeVoice","code":"areEquivalent(b, a)"},{"type":"text","text":". (Symmetry)"}]}]},{"content":[{"type":"paragraph","inlineContent":[{"type":"text","text":"If "},{"type":"codeVoice","code":"areEquivalent(a, b)"},{"type":"text","text":" and "},{"type":"codeVoice","code":"areEquivalent(b, c)"},{"type":"text","text":" are both "},{"type":"codeVoice","code":"true"},{"type":"text","text":", then"},{"type":"text","text":" "},{"type":"codeVoice","code":"areEquivalent(a, c)"},{"type":"text","text":" is also "},{"type":"codeVoice","code":"true"},{"type":"text","text":". (Transitivity)"}]}]}]},{"style":"note","content":[{"type":"paragraph","inlineContent":[{"type":"text","text":"O("},{"type":"emphasis","inlineContent":[{"type":"text","text":"m"}]},{"type":"text","text":"), where "},{"type":"emphasis","inlineContent":[{"type":"text","text":"m"}]},{"type":"text","text":" is the lesser of the length of the"},{"type":"text","text":" "},{"type":"text","text":"sequence and the length of "},{"type":"codeVoice","code":"other"},{"type":"text","text":"."}]}],"type":"aside","name":"Complexity"}]}],"schemaVersion":{"major":0,"minor":2,"patch":0},"sections":[],"variants":[{"paths":["\/documentation\/authfoundation\/jwks\/elementsequal(_:by:)"],"traits":[{"interfaceLanguage":"swift"}]}],"identifier":{"url":"doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/AuthFoundation\/JWKS\/elementsEqual(_:by:)","interfaceLanguage":"swift"},"abstract":[{"type":"text","text":"Returns a Boolean value indicating whether this sequence and another"},{"type":"text","text":" "},{"type":"text","text":"sequence contain equivalent elements in the same order, using the given"},{"type":"text","text":" "},{"type":"text","text":"predicate as the equivalence test."}],"kind":"symbol","metadata":{"role":"symbol","title":"elementsEqual(_:by:)","roleHeading":"Instance Method","fragments":[{"kind":"keyword","text":"func"},{"kind":"text","text":" "},{"kind":"identifier","text":"elementsEqual"},{"kind":"text","text":"<"},{"kind":"genericParameter","text":"OtherSequence"},{"kind":"text","text":">("},{"kind":"typeIdentifier","text":"OtherSequence"},{"kind":"text","text":", "},{"kind":"externalParam","text":"by"},{"kind":"text","text":": ("},{"kind":"typeIdentifier","text":"Self"},{"kind":"text","text":"."},{"kind":"typeIdentifier","text":"Element"},{"kind":"text","text":", "},{"kind":"typeIdentifier","text":"OtherSequence"},{"kind":"text","text":"."},{"kind":"typeIdentifier","text":"Element"},{"kind":"text","text":") "},{"kind":"keyword","text":"throws"},{"kind":"text","text":" -> "},{"kind":"typeIdentifier","text":"Bool","preciseIdentifier":"s:Sb"},{"kind":"text","text":") "},{"kind":"keyword","text":"rethrows"},{"kind":"text","text":" -> "},{"kind":"typeIdentifier","text":"Bool","preciseIdentifier":"s:Sb"}],"symbolKind":"method","externalID":"s:STsE13elementsEqual_2bySbqd___Sb7ElementQz_ACQyd__tKXEtKSTRd__lF::SYNTHESIZED::s:14AuthFoundation4JWKSV","extendedModule":"Swift","modules":[{"name":"AuthFoundation"}]},"hierarchy":{"paths":[["doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/AuthFoundation","doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/AuthFoundation\/JWKS","doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/AuthFoundation\/JWKS\/Sequence-Implementations"]]},"references":{"doc://com.okta.mobile.oktaoauth2/documentation/AuthFoundation/JWKS/Sequence-Implementations":{"role":"collectionGroup","title":"Sequence Implementations","abstract":[],"identifier":"doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/AuthFoundation\/JWKS\/Sequence-Implementations","kind":"article","type":"topic","url":"\/documentation\/authfoundation\/jwks\/sequence-implementations"},"doc://com.okta.mobile.oktaoauth2/documentation/AuthFoundation":{"role":"collection","title":"AuthFoundation","abstract":[],"identifier":"doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/AuthFoundation","kind":"symbol","type":"topic","url":"\/documentation\/authfoundation"},"doc://com.okta.mobile.oktaoauth2/documentation/AuthFoundation/JWKS":{"role":"symbol","title":"JWKS","fragments":[{"kind":"keyword","text":"struct"},{"kind":"text","text":" "},{"kind":"identifier","text":"JWKS"}],"abstract":[{"type":"text","text":"Describes the collection of keys associated with an authorization server."}],"identifier":"doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/AuthFoundation\/JWKS","kind":"symbol","type":"topic","navigatorTitle":[{"kind":"identifier","text":"JWKS"}],"url":"\/documentation\/authfoundation\/jwks"},"doc://com.okta.mobile.oktaoauth2/documentation/AuthFoundation/JWKS/elementsEqual(_:by:)":{"role":"symbol","title":"elementsEqual(_:by:)","fragments":[{"kind":"keyword","text":"func"},{"kind":"text","text":" "},{"kind":"identifier","text":"elementsEqual"},{"kind":"text","text":"<"},{"kind":"genericParameter","text":"OtherSequence"},{"kind":"text","text":">("},{"kind":"typeIdentifier","text":"OtherSequence"},{"kind":"text","text":", "},{"kind":"externalParam","text":"by"},{"kind":"text","text":": ("},{"kind":"typeIdentifier","text":"Self"},{"kind":"text","text":"."},{"kind":"typeIdentifier","text":"Element"},{"kind":"text","text":", "},{"kind":"typeIdentifier","text":"OtherSequence"},{"kind":"text","text":"."},{"kind":"typeIdentifier","text":"Element"},{"kind":"text","text":") "},{"kind":"keyword","text":"throws"},{"kind":"text","text":" -> "},{"kind":"typeIdentifier","text":"Bool","preciseIdentifier":"s:Sb"},{"kind":"text","text":") "},{"kind":"keyword","text":"rethrows"},{"kind":"text","text":" -> "},{"kind":"typeIdentifier","text":"Bool","preciseIdentifier":"s:Sb"}],"abstract":[{"type":"text","text":"Returns a Boolean value indicating whether this sequence and another"},{"type":"text","text":" "},{"type":"text","text":"sequence contain equivalent elements in the same order, using the given"},{"type":"text","text":" "},{"type":"text","text":"predicate as the equivalence test."}],"identifier":"doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/AuthFoundation\/JWKS\/elementsEqual(_:by:)","kind":"symbol","type":"topic","url":"\/documentation\/authfoundation\/jwks\/elementsequal(_:by:)"}}}
+{
+  "abstract" : [
+    {
+      "text" : "Returns a Boolean value indicating whether this sequence and another",
+      "type" : "text"
+    },
+    {
+      "text" : " ",
+      "type" : "text"
+    },
+    {
+      "text" : "sequence contain equivalent elements in the same order, using the given",
+      "type" : "text"
+    },
+    {
+      "text" : " ",
+      "type" : "text"
+    },
+    {
+      "text" : "predicate as the equivalence test.",
+      "type" : "text"
+    }
+  ],
+  "hierarchy" : {
+    "paths" : [
+      [
+        "doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/AuthFoundation",
+        "doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/AuthFoundation\/JWKS",
+        "doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/AuthFoundation\/JWKS\/Sequence-Implementations"
+      ]
+    ]
+  },
+  "identifier" : {
+    "interfaceLanguage" : "swift",
+    "url" : "doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/AuthFoundation\/JWKS\/elementsEqual(_:by:)"
+  },
+  "kind" : "symbol",
+  "metadata" : {
+    "extendedModule" : "Swift",
+    "externalID" : "s:STsE13elementsEqual_2bySbqd___Sb7ElementQz_ACQyd__tKXEtKSTRd__lF::SYNTHESIZED::s:14AuthFoundation4JWKSV",
+    "fragments" : [
+      {
+        "kind" : "keyword",
+        "text" : "func"
+      },
+      {
+        "kind" : "text",
+        "text" : " "
+      },
+      {
+        "kind" : "identifier",
+        "text" : "elementsEqual"
+      },
+      {
+        "kind" : "text",
+        "text" : "<"
+      },
+      {
+        "kind" : "genericParameter",
+        "text" : "OtherSequence"
+      },
+      {
+        "kind" : "text",
+        "text" : ">("
+      },
+      {
+        "kind" : "typeIdentifier",
+        "text" : "OtherSequence"
+      },
+      {
+        "kind" : "text",
+        "text" : ", "
+      },
+      {
+        "kind" : "externalParam",
+        "text" : "by"
+      },
+      {
+        "kind" : "text",
+        "text" : ": ("
+      },
+      {
+        "kind" : "typeIdentifier",
+        "text" : "Self"
+      },
+      {
+        "kind" : "text",
+        "text" : "."
+      },
+      {
+        "kind" : "typeIdentifier",
+        "text" : "Element"
+      },
+      {
+        "kind" : "text",
+        "text" : ", "
+      },
+      {
+        "kind" : "typeIdentifier",
+        "text" : "OtherSequence"
+      },
+      {
+        "kind" : "text",
+        "text" : "."
+      },
+      {
+        "kind" : "typeIdentifier",
+        "text" : "Element"
+      },
+      {
+        "kind" : "text",
+        "text" : ") "
+      },
+      {
+        "kind" : "keyword",
+        "text" : "throws"
+      },
+      {
+        "kind" : "text",
+        "text" : " -> "
+      },
+      {
+        "kind" : "typeIdentifier",
+        "preciseIdentifier" : "s:Sb",
+        "text" : "Bool"
+      },
+      {
+        "kind" : "text",
+        "text" : ") "
+      },
+      {
+        "kind" : "keyword",
+        "text" : "rethrows"
+      },
+      {
+        "kind" : "text",
+        "text" : " -> "
+      },
+      {
+        "kind" : "typeIdentifier",
+        "preciseIdentifier" : "s:Sb",
+        "text" : "Bool"
+      }
+    ],
+    "modules" : [
+      {
+        "name" : "AuthFoundation"
+      }
+    ],
+    "role" : "symbol",
+    "roleHeading" : "Instance Method",
+    "symbolKind" : "method",
+    "title" : "elementsEqual(_:by:)"
+  },
+  "primaryContentSections" : [
+    {
+      "declarations" : [
+        {
+          "languages" : [
+            "swift"
+          ],
+          "platforms" : [
+            "macOS"
+          ],
+          "tokens" : [
+            {
+              "kind" : "keyword",
+              "text" : "func"
+            },
+            {
+              "kind" : "text",
+              "text" : " "
+            },
+            {
+              "kind" : "identifier",
+              "text" : "elementsEqual"
+            },
+            {
+              "kind" : "text",
+              "text" : "<"
+            },
+            {
+              "kind" : "genericParameter",
+              "text" : "OtherSequence"
+            },
+            {
+              "kind" : "text",
+              "text" : ">("
+            },
+            {
+              "kind" : "externalParam",
+              "text" : "_"
+            },
+            {
+              "kind" : "text",
+              "text" : " "
+            },
+            {
+              "kind" : "internalParam",
+              "text" : "other"
+            },
+            {
+              "kind" : "text",
+              "text" : ": "
+            },
+            {
+              "kind" : "typeIdentifier",
+              "text" : "OtherSequence"
+            },
+            {
+              "kind" : "text",
+              "text" : ", "
+            },
+            {
+              "kind" : "externalParam",
+              "text" : "by"
+            },
+            {
+              "kind" : "text",
+              "text" : " "
+            },
+            {
+              "kind" : "internalParam",
+              "text" : "areEquivalent"
+            },
+            {
+              "kind" : "text",
+              "text" : ": ("
+            },
+            {
+              "kind" : "typeIdentifier",
+              "text" : "Self"
+            },
+            {
+              "kind" : "text",
+              "text" : "."
+            },
+            {
+              "kind" : "typeIdentifier",
+              "text" : "Element"
+            },
+            {
+              "kind" : "text",
+              "text" : ", "
+            },
+            {
+              "kind" : "typeIdentifier",
+              "text" : "OtherSequence"
+            },
+            {
+              "kind" : "text",
+              "text" : "."
+            },
+            {
+              "kind" : "typeIdentifier",
+              "text" : "Element"
+            },
+            {
+              "kind" : "text",
+              "text" : ") "
+            },
+            {
+              "kind" : "keyword",
+              "text" : "throws"
+            },
+            {
+              "kind" : "text",
+              "text" : " -> "
+            },
+            {
+              "kind" : "typeIdentifier",
+              "preciseIdentifier" : "s:Sb",
+              "text" : "Bool"
+            },
+            {
+              "kind" : "text",
+              "text" : ") "
+            },
+            {
+              "kind" : "keyword",
+              "text" : "rethrows"
+            },
+            {
+              "kind" : "text",
+              "text" : " -> "
+            },
+            {
+              "kind" : "typeIdentifier",
+              "preciseIdentifier" : "s:Sb",
+              "text" : "Bool"
+            },
+            {
+              "kind" : "text",
+              "text" : " "
+            },
+            {
+              "kind" : "keyword",
+              "text" : "where"
+            },
+            {
+              "kind" : "text",
+              "text" : " "
+            },
+            {
+              "kind" : "typeIdentifier",
+              "text" : "OtherSequence"
+            },
+            {
+              "kind" : "text",
+              "text" : " : "
+            },
+            {
+              "kind" : "typeIdentifier",
+              "preciseIdentifier" : "s:ST",
+              "text" : "Sequence"
+            }
+          ]
+        }
+      ],
+      "kind" : "declarations"
+    },
+    {
+      "content" : [
+        {
+          "anchor" : "return-value",
+          "level" : 2,
+          "text" : "Return Value",
+          "type" : "heading"
+        },
+        {
+          "inlineContent" : [
+            {
+              "text" : "",
+              "type" : "text"
+            },
+            {
+              "code" : "true",
+              "type" : "codeVoice"
+            },
+            {
+              "text" : " if this sequence and ",
+              "type" : "text"
+            },
+            {
+              "code" : "other",
+              "type" : "codeVoice"
+            },
+            {
+              "text" : " contain equivalent items,",
+              "type" : "text"
+            },
+            {
+              "text" : " ",
+              "type" : "text"
+            },
+            {
+              "text" : "using ",
+              "type" : "text"
+            },
+            {
+              "code" : "areEquivalent",
+              "type" : "codeVoice"
+            },
+            {
+              "text" : " as the equivalence test; otherwise, ",
+              "type" : "text"
+            },
+            {
+              "code" : "false.",
+              "type" : "codeVoice"
+            }
+          ],
+          "type" : "paragraph"
+        }
+      ],
+      "kind" : "content"
+    },
+    {
+      "kind" : "parameters",
+      "parameters" : [
+        {
+          "content" : [
+            {
+              "inlineContent" : [
+                {
+                  "text" : "A sequence to compare to this sequence.",
+                  "type" : "text"
+                }
+              ],
+              "type" : "paragraph"
+            }
+          ],
+          "name" : "other"
+        },
+        {
+          "content" : [
+            {
+              "inlineContent" : [
+                {
+                  "text" : "A predicate that returns ",
+                  "type" : "text"
+                },
+                {
+                  "code" : "true",
+                  "type" : "codeVoice"
+                },
+                {
+                  "text" : " if its two arguments",
+                  "type" : "text"
+                },
+                {
+                  "text" : " ",
+                  "type" : "text"
+                },
+                {
+                  "text" : "are equivalent; otherwise, ",
+                  "type" : "text"
+                },
+                {
+                  "code" : "false",
+                  "type" : "codeVoice"
+                },
+                {
+                  "text" : ".",
+                  "type" : "text"
+                }
+              ],
+              "type" : "paragraph"
+            }
+          ],
+          "name" : "areEquivalent"
+        }
+      ]
+    },
+    {
+      "content" : [
+        {
+          "anchor" : "discussion",
+          "level" : 2,
+          "text" : "Discussion",
+          "type" : "heading"
+        },
+        {
+          "inlineContent" : [
+            {
+              "text" : "At least one of the sequences must be finite.",
+              "type" : "text"
+            }
+          ],
+          "type" : "paragraph"
+        },
+        {
+          "inlineContent" : [
+            {
+              "text" : "The predicate must be a ",
+              "type" : "text"
+            },
+            {
+              "inlineContent" : [
+                {
+                  "text" : "equivalence relation",
+                  "type" : "text"
+                }
+              ],
+              "type" : "emphasis"
+            },
+            {
+              "text" : " over the elements. That",
+              "type" : "text"
+            },
+            {
+              "text" : " ",
+              "type" : "text"
+            },
+            {
+              "text" : "is, for any elements ",
+              "type" : "text"
+            },
+            {
+              "code" : "a",
+              "type" : "codeVoice"
+            },
+            {
+              "text" : ", ",
+              "type" : "text"
+            },
+            {
+              "code" : "b",
+              "type" : "codeVoice"
+            },
+            {
+              "text" : ", and ",
+              "type" : "text"
+            },
+            {
+              "code" : "c",
+              "type" : "codeVoice"
+            },
+            {
+              "text" : ", the following conditions must",
+              "type" : "text"
+            },
+            {
+              "text" : " ",
+              "type" : "text"
+            },
+            {
+              "text" : "hold:",
+              "type" : "text"
+            }
+          ],
+          "type" : "paragraph"
+        },
+        {
+          "items" : [
+            {
+              "content" : [
+                {
+                  "inlineContent" : [
+                    {
+                      "code" : "areEquivalent(a, a)",
+                      "type" : "codeVoice"
+                    },
+                    {
+                      "text" : " is always ",
+                      "type" : "text"
+                    },
+                    {
+                      "code" : "true",
+                      "type" : "codeVoice"
+                    },
+                    {
+                      "text" : ". (Reflexivity)",
+                      "type" : "text"
+                    }
+                  ],
+                  "type" : "paragraph"
+                }
+              ]
+            },
+            {
+              "content" : [
+                {
+                  "inlineContent" : [
+                    {
+                      "code" : "areEquivalent(a, b)",
+                      "type" : "codeVoice"
+                    },
+                    {
+                      "text" : " implies ",
+                      "type" : "text"
+                    },
+                    {
+                      "code" : "areEquivalent(b, a)",
+                      "type" : "codeVoice"
+                    },
+                    {
+                      "text" : ". (Symmetry)",
+                      "type" : "text"
+                    }
+                  ],
+                  "type" : "paragraph"
+                }
+              ]
+            },
+            {
+              "content" : [
+                {
+                  "inlineContent" : [
+                    {
+                      "text" : "If ",
+                      "type" : "text"
+                    },
+                    {
+                      "code" : "areEquivalent(a, b)",
+                      "type" : "codeVoice"
+                    },
+                    {
+                      "text" : " and ",
+                      "type" : "text"
+                    },
+                    {
+                      "code" : "areEquivalent(b, c)",
+                      "type" : "codeVoice"
+                    },
+                    {
+                      "text" : " are both ",
+                      "type" : "text"
+                    },
+                    {
+                      "code" : "true",
+                      "type" : "codeVoice"
+                    },
+                    {
+                      "text" : ", then",
+                      "type" : "text"
+                    },
+                    {
+                      "text" : " ",
+                      "type" : "text"
+                    },
+                    {
+                      "code" : "areEquivalent(a, c)",
+                      "type" : "codeVoice"
+                    },
+                    {
+                      "text" : " is also ",
+                      "type" : "text"
+                    },
+                    {
+                      "code" : "true",
+                      "type" : "codeVoice"
+                    },
+                    {
+                      "text" : ". (Transitivity)",
+                      "type" : "text"
+                    }
+                  ],
+                  "type" : "paragraph"
+                }
+              ]
+            }
+          ],
+          "type" : "unorderedList"
+        },
+        {
+          "content" : [
+            {
+              "inlineContent" : [
+                {
+                  "text" : "O(",
+                  "type" : "text"
+                },
+                {
+                  "inlineContent" : [
+                    {
+                      "text" : "m",
+                      "type" : "text"
+                    }
+                  ],
+                  "type" : "emphasis"
+                },
+                {
+                  "text" : "), where ",
+                  "type" : "text"
+                },
+                {
+                  "inlineContent" : [
+                    {
+                      "text" : "m",
+                      "type" : "text"
+                    }
+                  ],
+                  "type" : "emphasis"
+                },
+                {
+                  "text" : " is the lesser of the length of the",
+                  "type" : "text"
+                },
+                {
+                  "text" : " ",
+                  "type" : "text"
+                },
+                {
+                  "text" : "sequence and the length of ",
+                  "type" : "text"
+                },
+                {
+                  "code" : "other",
+                  "type" : "codeVoice"
+                },
+                {
+                  "text" : ".",
+                  "type" : "text"
+                }
+              ],
+              "type" : "paragraph"
+            }
+          ],
+          "name" : "Complexity",
+          "style" : "note",
+          "type" : "aside"
+        }
+      ],
+      "kind" : "content"
+    }
+  ],
+  "schemaVersion" : {
+    "major" : 0,
+    "minor" : 2,
+    "patch" : 0
+  },
+  "sections" : [
+
+  ],
+  "variants" : [
+    {
+      "paths" : [
+        "\/documentation\/authfoundation\/jwks\/elementsequal(_:by:)"
+      ],
+      "traits" : [
+        {
+          "interfaceLanguage" : "swift"
+        }
+      ]
+    }
+  ]
+, 
+"references": {
+"doc://com.okta.mobile.oktaoauth2/documentation/AuthFoundation": {
+  "abstract" : [
+
+  ],
+  "identifier" : "doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/AuthFoundation",
+  "kind" : "symbol",
+  "role" : "collection",
+  "title" : "AuthFoundation",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation"
+},
+"doc://com.okta.mobile.oktaoauth2/documentation/AuthFoundation/JWKS": {
+  "abstract" : [
+    {
+      "text" : "Describes the collection of keys associated with an authorization server.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "struct"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "JWKS"
+    }
+  ],
+  "identifier" : "doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/AuthFoundation\/JWKS",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "JWKS"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "JWKS",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/jwks"
+},
+"doc://com.okta.mobile.oktaoauth2/documentation/AuthFoundation/JWKS/Sequence-Implementations": {
+  "abstract" : [
+
+  ],
+  "identifier" : "doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/AuthFoundation\/JWKS\/Sequence-Implementations",
+  "kind" : "article",
+  "role" : "collectionGroup",
+  "title" : "Sequence Implementations",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/jwks\/sequence-implementations"
+},
+"doc://com.okta.mobile.oktaoauth2/documentation/AuthFoundation/JWKS/elementsEqual(_:by:)": {
+  "abstract" : [
+    {
+      "text" : "Returns a Boolean value indicating whether this sequence and another",
+      "type" : "text"
+    },
+    {
+      "text" : " ",
+      "type" : "text"
+    },
+    {
+      "text" : "sequence contain equivalent elements in the same order, using the given",
+      "type" : "text"
+    },
+    {
+      "text" : " ",
+      "type" : "text"
+    },
+    {
+      "text" : "predicate as the equivalence test.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "func"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "elementsEqual"
+    },
+    {
+      "kind" : "text",
+      "text" : "<"
+    },
+    {
+      "kind" : "genericParameter",
+      "text" : "OtherSequence"
+    },
+    {
+      "kind" : "text",
+      "text" : ">("
+    },
+    {
+      "kind" : "typeIdentifier",
+      "text" : "OtherSequence"
+    },
+    {
+      "kind" : "text",
+      "text" : ", "
+    },
+    {
+      "kind" : "externalParam",
+      "text" : "by"
+    },
+    {
+      "kind" : "text",
+      "text" : ": ("
+    },
+    {
+      "kind" : "typeIdentifier",
+      "text" : "Self"
+    },
+    {
+      "kind" : "text",
+      "text" : "."
+    },
+    {
+      "kind" : "typeIdentifier",
+      "text" : "Element"
+    },
+    {
+      "kind" : "text",
+      "text" : ", "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "text" : "OtherSequence"
+    },
+    {
+      "kind" : "text",
+      "text" : "."
+    },
+    {
+      "kind" : "typeIdentifier",
+      "text" : "Element"
+    },
+    {
+      "kind" : "text",
+      "text" : ") "
+    },
+    {
+      "kind" : "keyword",
+      "text" : "throws"
+    },
+    {
+      "kind" : "text",
+      "text" : " -> "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:Sb",
+      "text" : "Bool"
+    },
+    {
+      "kind" : "text",
+      "text" : ") "
+    },
+    {
+      "kind" : "keyword",
+      "text" : "rethrows"
+    },
+    {
+      "kind" : "text",
+      "text" : " -> "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:Sb",
+      "text" : "Bool"
+    }
+  ],
+  "identifier" : "doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/AuthFoundation\/JWKS\/elementsEqual(_:by:)",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "elementsEqual(_:by:)",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/jwks\/elementsequal(_:by:)"
+}
+}
+}

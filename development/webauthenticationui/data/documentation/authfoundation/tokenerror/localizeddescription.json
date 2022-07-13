@@ -1,1 +1,224 @@
-{"primaryContentSections":[{"kind":"declarations","declarations":[{"tokens":[{"kind":"keyword","text":"var"},{"kind":"text","text":" "},{"kind":"identifier","text":"localizedDescription"},{"kind":"text","text":": "},{"kind":"typeIdentifier","text":"String","preciseIdentifier":"s:SS"},{"kind":"text","text":" { "},{"kind":"keyword","text":"get"},{"kind":"text","text":" }"}],"languages":["swift"],"platforms":["macOS"]}]}],"schemaVersion":{"major":0,"minor":2,"patch":0},"sections":[],"variants":[{"paths":["\/documentation\/authfoundation\/tokenerror\/localizeddescription"],"traits":[{"interfaceLanguage":"swift"}]}],"identifier":{"url":"doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/AuthFoundation\/TokenError\/localizedDescription","interfaceLanguage":"swift"},"abstract":[{"type":"text","text":"Retrieve the localized description for this error."}],"kind":"symbol","metadata":{"role":"symbol","title":"localizedDescription","roleHeading":"Instance Property","fragments":[{"kind":"keyword","text":"var"},{"kind":"text","text":" "},{"kind":"identifier","text":"localizedDescription"},{"kind":"text","text":": "},{"kind":"typeIdentifier","text":"String","preciseIdentifier":"s:SS"}],"symbolKind":"property","externalID":"s:s5ErrorP10FoundationE20localizedDescriptionSSvp::SYNTHESIZED::s:14AuthFoundation10TokenErrorO","extendedModule":"Swift","modules":[{"name":"AuthFoundation"}]},"hierarchy":{"paths":[["doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/AuthFoundation","doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/AuthFoundation\/TokenError","doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/AuthFoundation\/TokenError\/Error-Implementations"]]},"references":{"doc://com.okta.mobile.webauthenticationui/documentation/AuthFoundation/TokenError":{"role":"symbol","title":"TokenError","fragments":[{"kind":"keyword","text":"enum"},{"kind":"text","text":" "},{"kind":"identifier","text":"TokenError"}],"abstract":[{"type":"text","text":"Describes errors that may occur when working with tokens."}],"identifier":"doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/AuthFoundation\/TokenError","kind":"symbol","type":"topic","navigatorTitle":[{"kind":"identifier","text":"TokenError"}],"url":"\/documentation\/authfoundation\/tokenerror"},"doc://com.okta.mobile.webauthenticationui/documentation/AuthFoundation/TokenError/localizedDescription":{"role":"symbol","title":"localizedDescription","fragments":[{"kind":"keyword","text":"var"},{"kind":"text","text":" "},{"kind":"identifier","text":"localizedDescription"},{"kind":"text","text":": "},{"kind":"typeIdentifier","text":"String","preciseIdentifier":"s:SS"}],"abstract":[{"type":"text","text":"Retrieve the localized description for this error."}],"identifier":"doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/AuthFoundation\/TokenError\/localizedDescription","kind":"symbol","type":"topic","url":"\/documentation\/authfoundation\/tokenerror\/localizeddescription"},"doc://com.okta.mobile.webauthenticationui/documentation/AuthFoundation/TokenError/Error-Implementations":{"role":"collectionGroup","title":"Error Implementations","abstract":[],"identifier":"doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/AuthFoundation\/TokenError\/Error-Implementations","kind":"article","type":"topic","url":"\/documentation\/authfoundation\/tokenerror\/error-implementations"},"doc://com.okta.mobile.webauthenticationui/documentation/AuthFoundation":{"role":"collection","title":"AuthFoundation","abstract":[],"identifier":"doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/AuthFoundation","kind":"symbol","type":"topic","url":"\/documentation\/authfoundation"}}}
+{
+  "abstract" : [
+    {
+      "text" : "Retrieve the localized description for this error.",
+      "type" : "text"
+    }
+  ],
+  "hierarchy" : {
+    "paths" : [
+      [
+        "doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/AuthFoundation",
+        "doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/AuthFoundation\/TokenError",
+        "doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/AuthFoundation\/TokenError\/Error-Implementations"
+      ]
+    ]
+  },
+  "identifier" : {
+    "interfaceLanguage" : "swift",
+    "url" : "doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/AuthFoundation\/TokenError\/localizedDescription"
+  },
+  "kind" : "symbol",
+  "metadata" : {
+    "extendedModule" : "Swift",
+    "externalID" : "s:s5ErrorP10FoundationE20localizedDescriptionSSvp::SYNTHESIZED::s:14AuthFoundation10TokenErrorO",
+    "fragments" : [
+      {
+        "kind" : "keyword",
+        "text" : "var"
+      },
+      {
+        "kind" : "text",
+        "text" : " "
+      },
+      {
+        "kind" : "identifier",
+        "text" : "localizedDescription"
+      },
+      {
+        "kind" : "text",
+        "text" : ": "
+      },
+      {
+        "kind" : "typeIdentifier",
+        "preciseIdentifier" : "s:SS",
+        "text" : "String"
+      }
+    ],
+    "modules" : [
+      {
+        "name" : "AuthFoundation"
+      }
+    ],
+    "role" : "symbol",
+    "roleHeading" : "Instance Property",
+    "symbolKind" : "property",
+    "title" : "localizedDescription"
+  },
+  "primaryContentSections" : [
+    {
+      "declarations" : [
+        {
+          "languages" : [
+            "swift"
+          ],
+          "platforms" : [
+            "macOS"
+          ],
+          "tokens" : [
+            {
+              "kind" : "keyword",
+              "text" : "var"
+            },
+            {
+              "kind" : "text",
+              "text" : " "
+            },
+            {
+              "kind" : "identifier",
+              "text" : "localizedDescription"
+            },
+            {
+              "kind" : "text",
+              "text" : ": "
+            },
+            {
+              "kind" : "typeIdentifier",
+              "preciseIdentifier" : "s:SS",
+              "text" : "String"
+            },
+            {
+              "kind" : "text",
+              "text" : " { "
+            },
+            {
+              "kind" : "keyword",
+              "text" : "get"
+            },
+            {
+              "kind" : "text",
+              "text" : " }"
+            }
+          ]
+        }
+      ],
+      "kind" : "declarations"
+    }
+  ],
+  "schemaVersion" : {
+    "major" : 0,
+    "minor" : 2,
+    "patch" : 0
+  },
+  "sections" : [
+
+  ],
+  "variants" : [
+    {
+      "paths" : [
+        "\/documentation\/authfoundation\/tokenerror\/localizeddescription"
+      ],
+      "traits" : [
+        {
+          "interfaceLanguage" : "swift"
+        }
+      ]
+    }
+  ]
+, 
+"references": {
+"doc://com.okta.mobile.webauthenticationui/documentation/AuthFoundation": {
+  "abstract" : [
+
+  ],
+  "identifier" : "doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/AuthFoundation",
+  "kind" : "symbol",
+  "role" : "collection",
+  "title" : "AuthFoundation",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation"
+},
+"doc://com.okta.mobile.webauthenticationui/documentation/AuthFoundation/TokenError": {
+  "abstract" : [
+    {
+      "text" : "Describes errors that may occur when working with tokens.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "enum"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "TokenError"
+    }
+  ],
+  "identifier" : "doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/AuthFoundation\/TokenError",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "TokenError"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "TokenError",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/tokenerror"
+},
+"doc://com.okta.mobile.webauthenticationui/documentation/AuthFoundation/TokenError/Error-Implementations": {
+  "abstract" : [
+
+  ],
+  "identifier" : "doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/AuthFoundation\/TokenError\/Error-Implementations",
+  "kind" : "article",
+  "role" : "collectionGroup",
+  "title" : "Error Implementations",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/tokenerror\/error-implementations"
+},
+"doc://com.okta.mobile.webauthenticationui/documentation/AuthFoundation/TokenError/localizedDescription": {
+  "abstract" : [
+    {
+      "text" : "Retrieve the localized description for this error.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "var"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "localizedDescription"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:SS",
+      "text" : "String"
+    }
+  ],
+  "identifier" : "doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/AuthFoundation\/TokenError\/localizedDescription",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "localizedDescription",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/tokenerror\/localizeddescription"
+}
+}
+}

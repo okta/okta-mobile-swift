@@ -1,1 +1,210 @@
-{"primaryContentSections":[{"kind":"declarations","declarations":[{"tokens":[{"kind":"keyword","text":"case"},{"kind":"text","text":" "},{"kind":"identifier","text":"invalidClient"}],"languages":["swift"],"platforms":["macOS"]}]}],"schemaVersion":{"major":0,"minor":2,"patch":0},"sections":[],"variants":[{"paths":["\/documentation\/authfoundation\/oauth2servererror\/code-swift.enum\/invalidclient"],"traits":[{"interfaceLanguage":"swift"}]}],"identifier":{"url":"doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/OAuth2ServerError\/Code-swift.enum\/invalidClient","interfaceLanguage":"swift"},"abstract":[{"type":"text","text":"The specified client ID is invalid."}],"kind":"symbol","metadata":{"fragments":[{"kind":"keyword","text":"case"},{"kind":"text","text":" "},{"kind":"identifier","text":"invalidClient"}],"title":"OAuth2ServerError.Code.invalidClient","roleHeading":"Case","role":"symbol","symbolKind":"case","externalID":"s:14AuthFoundation17OAuth2ServerErrorV4CodeO13invalidClientyA2EmF","modules":[{"name":"AuthFoundation"}]},"hierarchy":{"paths":[["doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation","doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/OAuth2ServerError","doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/OAuth2ServerError\/Code-swift.enum"]]},"references":{"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/OAuth2ServerError/Code-swift.enum":{"role":"symbol","title":"OAuth2ServerError.Code","fragments":[{"kind":"keyword","text":"enum"},{"kind":"text","text":" "},{"kind":"identifier","text":"Code"}],"abstract":[{"type":"text","text":"Possible  OAuth 2.0 server error code"}],"identifier":"doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/OAuth2ServerError\/Code-swift.enum","kind":"symbol","type":"topic","navigatorTitle":[{"kind":"identifier","text":"Code"}],"url":"\/documentation\/authfoundation\/oauth2servererror\/code-swift.enum"},"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation":{"role":"collection","title":"AuthFoundation","abstract":[{"type":"text","text":"Library that provides foundational features used by Okta’s authentication libraries, as well as APIs used to work with tokens and user credentials."}],"identifier":"doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation","kind":"symbol","type":"topic","url":"\/documentation\/authfoundation"},"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/OAuth2ServerError":{"role":"symbol","title":"OAuth2ServerError","fragments":[{"kind":"keyword","text":"struct"},{"kind":"text","text":" "},{"kind":"identifier","text":"OAuth2ServerError"}],"abstract":[{"type":"text","text":"Describes errors reported from an OAuth2 server."}],"identifier":"doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/OAuth2ServerError","kind":"symbol","type":"topic","navigatorTitle":[{"kind":"identifier","text":"OAuth2ServerError"}],"url":"\/documentation\/authfoundation\/oauth2servererror"},"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/OAuth2ServerError/Code-swift.enum/invalidClient":{"role":"symbol","title":"OAuth2ServerError.Code.invalidClient","fragments":[{"kind":"keyword","text":"case"},{"kind":"text","text":" "},{"kind":"identifier","text":"invalidClient"}],"abstract":[{"type":"text","text":"The specified client ID is invalid."}],"identifier":"doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/OAuth2ServerError\/Code-swift.enum\/invalidClient","kind":"symbol","type":"topic","url":"\/documentation\/authfoundation\/oauth2servererror\/code-swift.enum\/invalidclient"}}}
+{
+  "abstract" : [
+    {
+      "text" : "The specified client ID is invalid.",
+      "type" : "text"
+    }
+  ],
+  "hierarchy" : {
+    "paths" : [
+      [
+        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation",
+        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/OAuth2ServerError",
+        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/OAuth2ServerError\/Code-swift.enum"
+      ]
+    ]
+  },
+  "identifier" : {
+    "interfaceLanguage" : "swift",
+    "url" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/OAuth2ServerError\/Code-swift.enum\/invalidClient"
+  },
+  "kind" : "symbol",
+  "metadata" : {
+    "externalID" : "s:14AuthFoundation17OAuth2ServerErrorV4CodeO13invalidClientyA2EmF",
+    "fragments" : [
+      {
+        "kind" : "keyword",
+        "text" : "case"
+      },
+      {
+        "kind" : "text",
+        "text" : " "
+      },
+      {
+        "kind" : "identifier",
+        "text" : "invalidClient"
+      }
+    ],
+    "modules" : [
+      {
+        "name" : "AuthFoundation"
+      }
+    ],
+    "role" : "symbol",
+    "roleHeading" : "Case",
+    "symbolKind" : "case",
+    "title" : "OAuth2ServerError.Code.invalidClient"
+  },
+  "primaryContentSections" : [
+    {
+      "declarations" : [
+        {
+          "languages" : [
+            "swift"
+          ],
+          "platforms" : [
+            "macOS"
+          ],
+          "tokens" : [
+            {
+              "kind" : "keyword",
+              "text" : "case"
+            },
+            {
+              "kind" : "text",
+              "text" : " "
+            },
+            {
+              "kind" : "identifier",
+              "text" : "invalidClient"
+            }
+          ]
+        }
+      ],
+      "kind" : "declarations"
+    }
+  ],
+  "schemaVersion" : {
+    "major" : 0,
+    "minor" : 2,
+    "patch" : 0
+  },
+  "sections" : [
+
+  ],
+  "variants" : [
+    {
+      "paths" : [
+        "\/documentation\/authfoundation\/oauth2servererror\/code-swift.enum\/invalidclient"
+      ],
+      "traits" : [
+        {
+          "interfaceLanguage" : "swift"
+        }
+      ]
+    }
+  ]
+, 
+"references": {
+"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation": {
+  "abstract" : [
+    {
+      "text" : "Library that provides foundational features used by Okta’s authentication libraries, as well as APIs used to work with tokens and user credentials.",
+      "type" : "text"
+    }
+  ],
+  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation",
+  "kind" : "symbol",
+  "role" : "collection",
+  "title" : "AuthFoundation",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation"
+},
+"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/OAuth2ServerError": {
+  "abstract" : [
+    {
+      "text" : "Describes errors reported from an OAuth2 server.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "struct"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "OAuth2ServerError"
+    }
+  ],
+  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/OAuth2ServerError",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "OAuth2ServerError"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "OAuth2ServerError",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/oauth2servererror"
+},
+"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/OAuth2ServerError/Code-swift.enum": {
+  "abstract" : [
+    {
+      "text" : "Possible  OAuth 2.0 server error code",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "enum"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "Code"
+    }
+  ],
+  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/OAuth2ServerError\/Code-swift.enum",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "Code"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "OAuth2ServerError.Code",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/oauth2servererror\/code-swift.enum"
+},
+"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/OAuth2ServerError/Code-swift.enum/invalidClient": {
+  "abstract" : [
+    {
+      "text" : "The specified client ID is invalid.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "case"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "invalidClient"
+    }
+  ],
+  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/OAuth2ServerError\/Code-swift.enum\/invalidClient",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "OAuth2ServerError.Code.invalidClient",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/oauth2servererror\/code-swift.enum\/invalidclient"
+}
+}
+}

@@ -1,1 +1,265 @@
-{"primaryContentSections":[{"kind":"declarations","declarations":[{"tokens":[{"kind":"keyword","text":"subscript"},{"kind":"text","text":"("},{"kind":"internalParam","text":"keyId"},{"kind":"text","text":": "},{"kind":"typeIdentifier","text":"String","preciseIdentifier":"s:SS"},{"kind":"text","text":") -> "},{"kind":"typeIdentifier","identifier":"doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/JWK","preciseIdentifier":"s:14AuthFoundation3JWKV","text":"JWK"},{"kind":"text","text":"? { "},{"kind":"keyword","text":"get"},{"kind":"text","text":" }"}],"languages":["swift"],"platforms":["macOS"]}]}],"schemaVersion":{"major":0,"minor":2,"patch":0},"sections":[],"variants":[{"paths":["\/documentation\/authfoundation\/jwks\/subscript(_:)-1lvoo"],"traits":[{"interfaceLanguage":"swift"}]}],"identifier":{"url":"doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/JWKS\/subscript(_:)-1lvoo","interfaceLanguage":"swift"},"abstract":[{"type":"text","text":"No overview available."}],"kind":"symbol","metadata":{"fragments":[{"kind":"keyword","text":"subscript"},{"kind":"text","text":"("},{"kind":"typeIdentifier","text":"String","preciseIdentifier":"s:SS"},{"kind":"text","text":") -> "},{"kind":"typeIdentifier","text":"JWK","preciseIdentifier":"s:14AuthFoundation3JWKV"},{"kind":"text","text":"?"}],"title":"subscript(_:)","roleHeading":"Instance Subscript","role":"symbol","symbolKind":"subscript","externalID":"s:14AuthFoundation4JWKSVyAA3JWKVSgSScip","modules":[{"name":"AuthFoundation"}]},"hierarchy":{"paths":[["doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation","doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/JWKS"]]},"references":{"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/JWK":{"role":"symbol","title":"JWK","fragments":[{"kind":"keyword","text":"struct"},{"kind":"text","text":" "},{"kind":"identifier","text":"JWK"}],"abstract":[{"type":"text","text":"Describes an individual key from an authorization server, which can be used to validate tokens or encrypt content."}],"identifier":"doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/JWK","kind":"symbol","type":"topic","navigatorTitle":[{"kind":"identifier","text":"JWK"}],"url":"\/documentation\/authfoundation\/jwk"},"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation":{"role":"collection","title":"AuthFoundation","abstract":[{"type":"text","text":"Library that provides foundational features used by Okta’s authentication libraries, as well as APIs used to work with tokens and user credentials."}],"identifier":"doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation","kind":"symbol","type":"topic","url":"\/documentation\/authfoundation"},"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/JWKS/subscript(_:)-1lvoo":{"role":"symbol","title":"subscript(_:)","fragments":[{"kind":"keyword","text":"subscript"},{"kind":"text","text":"("},{"kind":"typeIdentifier","text":"String","preciseIdentifier":"s:SS"},{"kind":"text","text":") -> "},{"kind":"typeIdentifier","text":"JWK","preciseIdentifier":"s:14AuthFoundation3JWKV"},{"kind":"text","text":"?"}],"abstract":[],"identifier":"doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/JWKS\/subscript(_:)-1lvoo","kind":"symbol","type":"topic","url":"\/documentation\/authfoundation\/jwks\/subscript(_:)-1lvoo"},"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/JWKS":{"role":"symbol","title":"JWKS","fragments":[{"kind":"keyword","text":"struct"},{"kind":"text","text":" "},{"kind":"identifier","text":"JWKS"}],"abstract":[{"type":"text","text":"Describes the collection of keys associated with an authorization server."}],"identifier":"doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/JWKS","kind":"symbol","type":"topic","navigatorTitle":[{"kind":"identifier","text":"JWKS"}],"url":"\/documentation\/authfoundation\/jwks"}}}
+{
+  "abstract" : [
+    {
+      "text" : "No overview available.",
+      "type" : "text"
+    }
+  ],
+  "hierarchy" : {
+    "paths" : [
+      [
+        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation",
+        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/JWKS"
+      ]
+    ]
+  },
+  "identifier" : {
+    "interfaceLanguage" : "swift",
+    "url" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/JWKS\/subscript(_:)-1lvoo"
+  },
+  "kind" : "symbol",
+  "metadata" : {
+    "externalID" : "s:14AuthFoundation4JWKSVyAA3JWKVSgSScip",
+    "fragments" : [
+      {
+        "kind" : "keyword",
+        "text" : "subscript"
+      },
+      {
+        "kind" : "text",
+        "text" : "("
+      },
+      {
+        "kind" : "typeIdentifier",
+        "preciseIdentifier" : "s:SS",
+        "text" : "String"
+      },
+      {
+        "kind" : "text",
+        "text" : ") -> "
+      },
+      {
+        "kind" : "typeIdentifier",
+        "preciseIdentifier" : "s:14AuthFoundation3JWKV",
+        "text" : "JWK"
+      },
+      {
+        "kind" : "text",
+        "text" : "?"
+      }
+    ],
+    "modules" : [
+      {
+        "name" : "AuthFoundation"
+      }
+    ],
+    "role" : "symbol",
+    "roleHeading" : "Instance Subscript",
+    "symbolKind" : "subscript",
+    "title" : "subscript(_:)"
+  },
+  "primaryContentSections" : [
+    {
+      "declarations" : [
+        {
+          "languages" : [
+            "swift"
+          ],
+          "platforms" : [
+            "macOS"
+          ],
+          "tokens" : [
+            {
+              "kind" : "keyword",
+              "text" : "subscript"
+            },
+            {
+              "kind" : "text",
+              "text" : "("
+            },
+            {
+              "kind" : "internalParam",
+              "text" : "keyId"
+            },
+            {
+              "kind" : "text",
+              "text" : ": "
+            },
+            {
+              "kind" : "typeIdentifier",
+              "preciseIdentifier" : "s:SS",
+              "text" : "String"
+            },
+            {
+              "kind" : "text",
+              "text" : ") -> "
+            },
+            {
+              "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/JWK",
+              "kind" : "typeIdentifier",
+              "preciseIdentifier" : "s:14AuthFoundation3JWKV",
+              "text" : "JWK"
+            },
+            {
+              "kind" : "text",
+              "text" : "? { "
+            },
+            {
+              "kind" : "keyword",
+              "text" : "get"
+            },
+            {
+              "kind" : "text",
+              "text" : " }"
+            }
+          ]
+        }
+      ],
+      "kind" : "declarations"
+    }
+  ],
+  "schemaVersion" : {
+    "major" : 0,
+    "minor" : 2,
+    "patch" : 0
+  },
+  "sections" : [
+
+  ],
+  "variants" : [
+    {
+      "paths" : [
+        "\/documentation\/authfoundation\/jwks\/subscript(_:)-1lvoo"
+      ],
+      "traits" : [
+        {
+          "interfaceLanguage" : "swift"
+        }
+      ]
+    }
+  ]
+, 
+"references": {
+"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation": {
+  "abstract" : [
+    {
+      "text" : "Library that provides foundational features used by Okta’s authentication libraries, as well as APIs used to work with tokens and user credentials.",
+      "type" : "text"
+    }
+  ],
+  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation",
+  "kind" : "symbol",
+  "role" : "collection",
+  "title" : "AuthFoundation",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation"
+},
+"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/JWK": {
+  "abstract" : [
+    {
+      "text" : "Describes an individual key from an authorization server, which can be used to validate tokens or encrypt content.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "struct"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "JWK"
+    }
+  ],
+  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/JWK",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "JWK"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "JWK",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/jwk"
+},
+"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/JWKS": {
+  "abstract" : [
+    {
+      "text" : "Describes the collection of keys associated with an authorization server.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "struct"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "JWKS"
+    }
+  ],
+  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/JWKS",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "JWKS"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "JWKS",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/jwks"
+},
+"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/JWKS/subscript(_:)-1lvoo": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "subscript"
+    },
+    {
+      "kind" : "text",
+      "text" : "("
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:SS",
+      "text" : "String"
+    },
+    {
+      "kind" : "text",
+      "text" : ") -> "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:14AuthFoundation3JWKV",
+      "text" : "JWK"
+    },
+    {
+      "kind" : "text",
+      "text" : "?"
+    }
+  ],
+  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/JWKS\/subscript(_:)-1lvoo",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "subscript(_:)",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/jwks\/subscript(_:)-1lvoo"
+}
+}
+}

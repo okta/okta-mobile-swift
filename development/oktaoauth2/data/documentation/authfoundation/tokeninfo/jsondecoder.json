@@ -1,1 +1,233 @@
-{"primaryContentSections":[{"kind":"declarations","declarations":[{"tokens":[{"kind":"keyword","text":"static"},{"kind":"text","text":" "},{"kind":"keyword","text":"var"},{"kind":"text","text":" "},{"kind":"identifier","text":"jsonDecoder"},{"kind":"text","text":": "},{"kind":"typeIdentifier","text":"JSONDecoder","preciseIdentifier":"s:10Foundation11JSONDecoderC"}],"languages":["swift"],"platforms":["macOS"]}]}],"schemaVersion":{"major":0,"minor":2,"patch":0},"sections":[],"variants":[{"paths":["\/documentation\/authfoundation\/tokeninfo\/jsondecoder"],"traits":[{"interfaceLanguage":"swift"}]}],"identifier":{"url":"doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/AuthFoundation\/TokenInfo\/jsonDecoder","interfaceLanguage":"swift"},"abstract":[{"type":"text","text":"No overview available."}],"kind":"symbol","metadata":{"role":"symbol","title":"jsonDecoder","roleHeading":"Type Property","fragments":[{"kind":"keyword","text":"static"},{"kind":"text","text":" "},{"kind":"keyword","text":"var"},{"kind":"text","text":" "},{"kind":"identifier","text":"jsonDecoder"},{"kind":"text","text":": "},{"kind":"typeIdentifier","text":"JSONDecoder","preciseIdentifier":"s:10Foundation11JSONDecoderC"}],"symbolKind":"property","externalID":"s:14AuthFoundation9TokenInfoV11jsonDecoder0B011JSONDecoderCvpZ","extendedModule":"AuthFoundation","modules":[{"name":"AuthFoundation"}]},"hierarchy":{"paths":[["doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/AuthFoundation","doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/AuthFoundation\/TokenInfo","doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/AuthFoundation\/TokenInfo\/JSONDecodable-Implementations"]]},"references":{"doc://com.okta.mobile.oktaoauth2/documentation/AuthFoundation/TokenInfo/jsonDecoder":{"role":"symbol","title":"jsonDecoder","fragments":[{"kind":"keyword","text":"static"},{"kind":"text","text":" "},{"kind":"keyword","text":"var"},{"kind":"text","text":" "},{"kind":"identifier","text":"jsonDecoder"},{"kind":"text","text":": "},{"kind":"typeIdentifier","text":"JSONDecoder","preciseIdentifier":"s:10Foundation11JSONDecoderC"}],"abstract":[],"identifier":"doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/AuthFoundation\/TokenInfo\/jsonDecoder","kind":"symbol","type":"topic","url":"\/documentation\/authfoundation\/tokeninfo\/jsondecoder"},"doc://com.okta.mobile.oktaoauth2/documentation/AuthFoundation":{"role":"collection","title":"AuthFoundation","abstract":[],"identifier":"doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/AuthFoundation","kind":"symbol","type":"topic","url":"\/documentation\/authfoundation"},"doc://com.okta.mobile.oktaoauth2/documentation/AuthFoundation/TokenInfo":{"role":"symbol","title":"TokenInfo","fragments":[{"kind":"keyword","text":"struct"},{"kind":"text","text":" "},{"kind":"identifier","text":"TokenInfo"}],"abstract":[{"type":"text","text":"Introspected token information."}],"identifier":"doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/AuthFoundation\/TokenInfo","kind":"symbol","type":"topic","navigatorTitle":[{"kind":"identifier","text":"TokenInfo"}],"url":"\/documentation\/authfoundation\/tokeninfo"},"doc://com.okta.mobile.oktaoauth2/documentation/AuthFoundation/TokenInfo/JSONDecodable-Implementations":{"role":"collectionGroup","title":"JSONDecodable Implementations","abstract":[],"identifier":"doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/AuthFoundation\/TokenInfo\/JSONDecodable-Implementations","kind":"article","type":"topic","url":"\/documentation\/authfoundation\/tokeninfo\/jsondecodable-implementations"}}}
+{
+  "abstract" : [
+    {
+      "text" : "No overview available.",
+      "type" : "text"
+    }
+  ],
+  "hierarchy" : {
+    "paths" : [
+      [
+        "doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/AuthFoundation",
+        "doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/AuthFoundation\/TokenInfo",
+        "doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/AuthFoundation\/TokenInfo\/JSONDecodable-Implementations"
+      ]
+    ]
+  },
+  "identifier" : {
+    "interfaceLanguage" : "swift",
+    "url" : "doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/AuthFoundation\/TokenInfo\/jsonDecoder"
+  },
+  "kind" : "symbol",
+  "metadata" : {
+    "extendedModule" : "AuthFoundation",
+    "externalID" : "s:14AuthFoundation9TokenInfoV11jsonDecoder0B011JSONDecoderCvpZ",
+    "fragments" : [
+      {
+        "kind" : "keyword",
+        "text" : "static"
+      },
+      {
+        "kind" : "text",
+        "text" : " "
+      },
+      {
+        "kind" : "keyword",
+        "text" : "var"
+      },
+      {
+        "kind" : "text",
+        "text" : " "
+      },
+      {
+        "kind" : "identifier",
+        "text" : "jsonDecoder"
+      },
+      {
+        "kind" : "text",
+        "text" : ": "
+      },
+      {
+        "kind" : "typeIdentifier",
+        "preciseIdentifier" : "s:10Foundation11JSONDecoderC",
+        "text" : "JSONDecoder"
+      }
+    ],
+    "modules" : [
+      {
+        "name" : "AuthFoundation"
+      }
+    ],
+    "role" : "symbol",
+    "roleHeading" : "Type Property",
+    "symbolKind" : "property",
+    "title" : "jsonDecoder"
+  },
+  "primaryContentSections" : [
+    {
+      "declarations" : [
+        {
+          "languages" : [
+            "swift"
+          ],
+          "platforms" : [
+            "macOS"
+          ],
+          "tokens" : [
+            {
+              "kind" : "keyword",
+              "text" : "static"
+            },
+            {
+              "kind" : "text",
+              "text" : " "
+            },
+            {
+              "kind" : "keyword",
+              "text" : "var"
+            },
+            {
+              "kind" : "text",
+              "text" : " "
+            },
+            {
+              "kind" : "identifier",
+              "text" : "jsonDecoder"
+            },
+            {
+              "kind" : "text",
+              "text" : ": "
+            },
+            {
+              "kind" : "typeIdentifier",
+              "preciseIdentifier" : "s:10Foundation11JSONDecoderC",
+              "text" : "JSONDecoder"
+            }
+          ]
+        }
+      ],
+      "kind" : "declarations"
+    }
+  ],
+  "schemaVersion" : {
+    "major" : 0,
+    "minor" : 2,
+    "patch" : 0
+  },
+  "sections" : [
+
+  ],
+  "variants" : [
+    {
+      "paths" : [
+        "\/documentation\/authfoundation\/tokeninfo\/jsondecoder"
+      ],
+      "traits" : [
+        {
+          "interfaceLanguage" : "swift"
+        }
+      ]
+    }
+  ]
+, 
+"references": {
+"doc://com.okta.mobile.oktaoauth2/documentation/AuthFoundation": {
+  "abstract" : [
+
+  ],
+  "identifier" : "doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/AuthFoundation",
+  "kind" : "symbol",
+  "role" : "collection",
+  "title" : "AuthFoundation",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation"
+},
+"doc://com.okta.mobile.oktaoauth2/documentation/AuthFoundation/TokenInfo": {
+  "abstract" : [
+    {
+      "text" : "Introspected token information.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "struct"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "TokenInfo"
+    }
+  ],
+  "identifier" : "doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/AuthFoundation\/TokenInfo",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "TokenInfo"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "TokenInfo",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/tokeninfo"
+},
+"doc://com.okta.mobile.oktaoauth2/documentation/AuthFoundation/TokenInfo/JSONDecodable-Implementations": {
+  "abstract" : [
+
+  ],
+  "identifier" : "doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/AuthFoundation\/TokenInfo\/JSONDecodable-Implementations",
+  "kind" : "article",
+  "role" : "collectionGroup",
+  "title" : "JSONDecodable Implementations",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/tokeninfo\/jsondecodable-implementations"
+},
+"doc://com.okta.mobile.oktaoauth2/documentation/AuthFoundation/TokenInfo/jsonDecoder": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "static"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "keyword",
+      "text" : "var"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "jsonDecoder"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:10Foundation11JSONDecoderC",
+      "text" : "JSONDecoder"
+    }
+  ],
+  "identifier" : "doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/AuthFoundation\/TokenInfo\/jsonDecoder",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "jsonDecoder",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/tokeninfo\/jsondecoder"
+}
+}
+}

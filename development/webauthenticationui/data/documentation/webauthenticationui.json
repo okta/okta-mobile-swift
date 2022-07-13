@@ -1,1 +1,533 @@
-{"primaryContentSections":[{"kind":"content","content":[{"anchor":"Overview","level":2,"type":"heading","text":"Overview"},{"type":"paragraph","inlineContent":[{"type":"text","text":"Use the WebAuthenticationUI framework to quickly and easily integrate user sign on within your application."}]},{"type":"unorderedList","items":[{"content":[{"type":"paragraph","inlineContent":[{"type":"text","text":"Simple API for initiating a browser-based sign-in flow."}]}]},{"content":[{"type":"paragraph","inlineContent":[{"type":"text","text":"Provides convenient hooks for customizing the sign on process."}]}]},{"content":[{"type":"paragraph","inlineContent":[{"type":"text","text":"Utilizes the appropriate underlying platform services to sign on, regardless of which iOS or macOS version is being used."}]}]},{"content":[{"type":"paragraph","inlineContent":[{"type":"text","text":"Supports single sign-on (SSO) experiences across applications."}]}]}]},{"anchor":"Platform-Compatibility","level":2,"type":"heading","text":"Platform Compatibility"},{"type":"paragraph","inlineContent":[{"type":"text","text":"To maximize the number of platforms and OS versions your application can support, this SDK builds in a compatibility support for legacy iOS and macOS versions."}]},{"type":"table","rows":[[[{"type":"paragraph","inlineContent":[{"type":"text","text":"Platform"}]}],[{"type":"paragraph","inlineContent":[{"type":"text","text":"Versions"}]}],[{"type":"paragraph","inlineContent":[{"type":"text","text":"Description"}]}]],[[{"type":"paragraph","inlineContent":[{"type":"text","text":"iOS"}]}],[{"type":"paragraph","inlineContent":[{"type":"text","text":"9.0 - 10.x"}]}],[{"type":"paragraph","inlineContent":[{"type":"text","text":"Uses SFSafariViewController"}]}]],[[{"type":"paragraph","inlineContent":[{"type":"text","text":"iOS"}]}],[{"type":"paragraph","inlineContent":[{"type":"text","text":"11.0"}]}],[{"type":"paragraph","inlineContent":[{"type":"text","text":"Uses SFAuthenticationSession"}]}]],[[{"type":"paragraph","inlineContent":[{"type":"text","text":"iOS"}]}],[{"type":"paragraph","inlineContent":[{"type":"text","text":"12.0 - Current"}]}],[{"type":"paragraph","inlineContent":[{"type":"text","text":"Uses ASWebAuthenticationSession"}]}]],[[{"type":"paragraph","inlineContent":[{"type":"text","text":"macOS"}]}],[{"type":"paragraph","inlineContent":[{"type":"text","text":"10.15 - Current"}]}],[{"type":"paragraph","inlineContent":[{"type":"text","text":"Uses ASWebAuthenticationSession"}]}]],[[{"type":"paragraph","inlineContent":[{"type":"text","text":"macOS Catalyst"}]}],[{"type":"paragraph","inlineContent":[{"type":"text","text":"13.0 - Current"}]}],[{"type":"paragraph","inlineContent":[{"type":"text","text":"Uses ASWebAuthenticationSession"}]}]]],"header":"row"}]}],"schemaVersion":{"major":0,"minor":2,"patch":0},"sections":[],"variants":[{"paths":["\/documentation\/webauthenticationui"],"traits":[{"interfaceLanguage":"swift"}]}],"identifier":{"url":"doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/WebAuthenticationUI","interfaceLanguage":"swift"},"abstract":[{"type":"text","text":"Make it easy to enable users to sign in to your app through browser-based sign on."}],"kind":"symbol","metadata":{"roleHeading":"Framework","externalID":"WebAuthenticationUI","title":"WebAuthenticationUI","symbolKind":"module","role":"collection","modules":[{"name":"WebAuthenticationUI"}]},"hierarchy":{"paths":[[]]},"topicSections":[{"title":"Essentials","identifiers":["doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/WebAuthenticationUI\/ConfiguringYourClient","doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/WebAuthenticationUI\/WebAuthentication"]},{"title":"Customizations","identifiers":["doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/WebAuthenticationUI\/CustomizingAuthorizationURL"]},{"title":"Variables","identifiers":["doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/WebAuthenticationUI\/Version"]},{"title":"Enumerations","identifiers":["doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/WebAuthenticationUI\/WebAuthenticationError"]}],"references":{"doc://com.okta.mobile.webauthenticationui/documentation/WebAuthenticationUI/WebAuthentication":{"role":"symbol","title":"WebAuthentication","fragments":[{"kind":"keyword","text":"class"},{"kind":"text","text":" "},{"kind":"identifier","text":"WebAuthentication"}],"abstract":[{"type":"text","text":"Authentication coordinator that simplifies signing users in using browser-based OIDC authentication flows."}],"identifier":"doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/WebAuthenticationUI\/WebAuthentication","kind":"symbol","type":"topic","navigatorTitle":[{"kind":"identifier","text":"WebAuthentication"}],"url":"\/documentation\/webauthenticationui\/webauthentication"},"doc://com.okta.mobile.webauthenticationui/documentation/WebAuthenticationUI/ConfiguringYourClient":{"role":"article","title":"Configuring Your Client","abstract":[{"type":"text","text":"Configure your WebAuthentication client to connect to your OAuth2 application."}],"identifier":"doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/WebAuthenticationUI\/ConfiguringYourClient","kind":"article","type":"topic","url":"\/documentation\/webauthenticationui\/configuringyourclient"},"doc://com.okta.mobile.webauthenticationui/documentation/WebAuthenticationUI/Version":{"role":"symbol","title":"Version","fragments":[{"kind":"keyword","text":"let"},{"kind":"text","text":" "},{"kind":"identifier","text":"Version"},{"kind":"text","text":": "},{"kind":"typeIdentifier","text":"SDKVersion","preciseIdentifier":"s:14AuthFoundation10SDKVersionC"}],"abstract":[],"identifier":"doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/WebAuthenticationUI\/Version","kind":"symbol","type":"topic","url":"\/documentation\/webauthenticationui\/version"},"doc://com.okta.mobile.webauthenticationui/documentation/WebAuthenticationUI/WebAuthenticationError":{"role":"symbol","title":"WebAuthenticationError","fragments":[{"kind":"keyword","text":"enum"},{"kind":"text","text":" "},{"kind":"identifier","text":"WebAuthenticationError"}],"abstract":[],"identifier":"doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/WebAuthenticationUI\/WebAuthenticationError","kind":"symbol","type":"topic","navigatorTitle":[{"kind":"identifier","text":"WebAuthenticationError"}],"url":"\/documentation\/webauthenticationui\/webauthenticationerror"},"doc://com.okta.mobile.webauthenticationui/documentation/WebAuthenticationUI":{"role":"collection","title":"WebAuthenticationUI","abstract":[{"type":"text","text":"Make it easy to enable users to sign in to your app through browser-based sign on."}],"identifier":"doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/WebAuthenticationUI","kind":"symbol","type":"topic","url":"\/documentation\/webauthenticationui"},"doc://com.okta.mobile.webauthenticationui/documentation/WebAuthenticationUI/CustomizingAuthorizationURL":{"role":"article","title":"Customizing the Authorization URL","abstract":[{"type":"text","text":"Features and APIs to enable customization of the authorization URL."}],"identifier":"doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/WebAuthenticationUI\/CustomizingAuthorizationURL","kind":"article","type":"topic","url":"\/documentation\/webauthenticationui\/customizingauthorizationurl"}}}
+{
+  "abstract" : [
+    {
+      "text" : "Make it easy to enable users to sign in to your app through browser-based sign on.",
+      "type" : "text"
+    }
+  ],
+  "hierarchy" : {
+    "paths" : [
+      [
+
+      ]
+    ]
+  },
+  "identifier" : {
+    "interfaceLanguage" : "swift",
+    "url" : "doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/WebAuthenticationUI"
+  },
+  "kind" : "symbol",
+  "metadata" : {
+    "externalID" : "WebAuthenticationUI",
+    "modules" : [
+      {
+        "name" : "WebAuthenticationUI"
+      }
+    ],
+    "role" : "collection",
+    "roleHeading" : "Framework",
+    "symbolKind" : "module",
+    "title" : "WebAuthenticationUI"
+  },
+  "primaryContentSections" : [
+    {
+      "content" : [
+        {
+          "anchor" : "Overview",
+          "level" : 2,
+          "text" : "Overview",
+          "type" : "heading"
+        },
+        {
+          "inlineContent" : [
+            {
+              "text" : "Use the WebAuthenticationUI framework to quickly and easily integrate user sign on within your application.",
+              "type" : "text"
+            }
+          ],
+          "type" : "paragraph"
+        },
+        {
+          "items" : [
+            {
+              "content" : [
+                {
+                  "inlineContent" : [
+                    {
+                      "text" : "Simple API for initiating a browser-based sign-in flow.",
+                      "type" : "text"
+                    }
+                  ],
+                  "type" : "paragraph"
+                }
+              ]
+            },
+            {
+              "content" : [
+                {
+                  "inlineContent" : [
+                    {
+                      "text" : "Provides convenient hooks for customizing the sign on process.",
+                      "type" : "text"
+                    }
+                  ],
+                  "type" : "paragraph"
+                }
+              ]
+            },
+            {
+              "content" : [
+                {
+                  "inlineContent" : [
+                    {
+                      "text" : "Utilizes the appropriate underlying platform services to sign on, regardless of which iOS or macOS version is being used.",
+                      "type" : "text"
+                    }
+                  ],
+                  "type" : "paragraph"
+                }
+              ]
+            },
+            {
+              "content" : [
+                {
+                  "inlineContent" : [
+                    {
+                      "text" : "Supports single sign-on (SSO) experiences across applications.",
+                      "type" : "text"
+                    }
+                  ],
+                  "type" : "paragraph"
+                }
+              ]
+            }
+          ],
+          "type" : "unorderedList"
+        },
+        {
+          "anchor" : "Platform-Compatibility",
+          "level" : 2,
+          "text" : "Platform Compatibility",
+          "type" : "heading"
+        },
+        {
+          "inlineContent" : [
+            {
+              "text" : "To maximize the number of platforms and OS versions your application can support, this SDK builds in a compatibility support for legacy iOS and macOS versions.",
+              "type" : "text"
+            }
+          ],
+          "type" : "paragraph"
+        },
+        {
+          "header" : "row",
+          "rows" : [
+            [
+              [
+                {
+                  "inlineContent" : [
+                    {
+                      "text" : "Platform",
+                      "type" : "text"
+                    }
+                  ],
+                  "type" : "paragraph"
+                }
+              ],
+              [
+                {
+                  "inlineContent" : [
+                    {
+                      "text" : "Versions",
+                      "type" : "text"
+                    }
+                  ],
+                  "type" : "paragraph"
+                }
+              ],
+              [
+                {
+                  "inlineContent" : [
+                    {
+                      "text" : "Description",
+                      "type" : "text"
+                    }
+                  ],
+                  "type" : "paragraph"
+                }
+              ]
+            ],
+            [
+              [
+                {
+                  "inlineContent" : [
+                    {
+                      "text" : "iOS",
+                      "type" : "text"
+                    }
+                  ],
+                  "type" : "paragraph"
+                }
+              ],
+              [
+                {
+                  "inlineContent" : [
+                    {
+                      "text" : "9.0 - 10.x",
+                      "type" : "text"
+                    }
+                  ],
+                  "type" : "paragraph"
+                }
+              ],
+              [
+                {
+                  "inlineContent" : [
+                    {
+                      "text" : "Uses SFSafariViewController",
+                      "type" : "text"
+                    }
+                  ],
+                  "type" : "paragraph"
+                }
+              ]
+            ],
+            [
+              [
+                {
+                  "inlineContent" : [
+                    {
+                      "text" : "iOS",
+                      "type" : "text"
+                    }
+                  ],
+                  "type" : "paragraph"
+                }
+              ],
+              [
+                {
+                  "inlineContent" : [
+                    {
+                      "text" : "11.0",
+                      "type" : "text"
+                    }
+                  ],
+                  "type" : "paragraph"
+                }
+              ],
+              [
+                {
+                  "inlineContent" : [
+                    {
+                      "text" : "Uses SFAuthenticationSession",
+                      "type" : "text"
+                    }
+                  ],
+                  "type" : "paragraph"
+                }
+              ]
+            ],
+            [
+              [
+                {
+                  "inlineContent" : [
+                    {
+                      "text" : "iOS",
+                      "type" : "text"
+                    }
+                  ],
+                  "type" : "paragraph"
+                }
+              ],
+              [
+                {
+                  "inlineContent" : [
+                    {
+                      "text" : "12.0 - Current",
+                      "type" : "text"
+                    }
+                  ],
+                  "type" : "paragraph"
+                }
+              ],
+              [
+                {
+                  "inlineContent" : [
+                    {
+                      "text" : "Uses ASWebAuthenticationSession",
+                      "type" : "text"
+                    }
+                  ],
+                  "type" : "paragraph"
+                }
+              ]
+            ],
+            [
+              [
+                {
+                  "inlineContent" : [
+                    {
+                      "text" : "macOS",
+                      "type" : "text"
+                    }
+                  ],
+                  "type" : "paragraph"
+                }
+              ],
+              [
+                {
+                  "inlineContent" : [
+                    {
+                      "text" : "10.15 - Current",
+                      "type" : "text"
+                    }
+                  ],
+                  "type" : "paragraph"
+                }
+              ],
+              [
+                {
+                  "inlineContent" : [
+                    {
+                      "text" : "Uses ASWebAuthenticationSession",
+                      "type" : "text"
+                    }
+                  ],
+                  "type" : "paragraph"
+                }
+              ]
+            ],
+            [
+              [
+                {
+                  "inlineContent" : [
+                    {
+                      "text" : "macOS Catalyst",
+                      "type" : "text"
+                    }
+                  ],
+                  "type" : "paragraph"
+                }
+              ],
+              [
+                {
+                  "inlineContent" : [
+                    {
+                      "text" : "13.0 - Current",
+                      "type" : "text"
+                    }
+                  ],
+                  "type" : "paragraph"
+                }
+              ],
+              [
+                {
+                  "inlineContent" : [
+                    {
+                      "text" : "Uses ASWebAuthenticationSession",
+                      "type" : "text"
+                    }
+                  ],
+                  "type" : "paragraph"
+                }
+              ]
+            ]
+          ],
+          "type" : "table"
+        }
+      ],
+      "kind" : "content"
+    }
+  ],
+  "schemaVersion" : {
+    "major" : 0,
+    "minor" : 2,
+    "patch" : 0
+  },
+  "sections" : [
+
+  ],
+  "topicSections" : [
+    {
+      "identifiers" : [
+        "doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/WebAuthenticationUI\/ConfiguringYourClient",
+        "doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/WebAuthenticationUI\/WebAuthentication"
+      ],
+      "title" : "Essentials"
+    },
+    {
+      "identifiers" : [
+        "doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/WebAuthenticationUI\/CustomizingAuthorizationURL"
+      ],
+      "title" : "Customizations"
+    },
+    {
+      "identifiers" : [
+        "doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/WebAuthenticationUI\/Version"
+      ],
+      "title" : "Variables"
+    },
+    {
+      "identifiers" : [
+        "doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/WebAuthenticationUI\/WebAuthenticationError"
+      ],
+      "title" : "Enumerations"
+    }
+  ],
+  "variants" : [
+    {
+      "paths" : [
+        "\/documentation\/webauthenticationui"
+      ],
+      "traits" : [
+        {
+          "interfaceLanguage" : "swift"
+        }
+      ]
+    }
+  ]
+, 
+"references": {
+"doc://com.okta.mobile.webauthenticationui/documentation/WebAuthenticationUI": {
+  "abstract" : [
+    {
+      "text" : "Make it easy to enable users to sign in to your app through browser-based sign on.",
+      "type" : "text"
+    }
+  ],
+  "identifier" : "doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/WebAuthenticationUI",
+  "kind" : "symbol",
+  "role" : "collection",
+  "title" : "WebAuthenticationUI",
+  "type" : "topic",
+  "url" : "\/documentation\/webauthenticationui"
+},
+"doc://com.okta.mobile.webauthenticationui/documentation/WebAuthenticationUI/ConfiguringYourClient": {
+  "abstract" : [
+    {
+      "text" : "Configure your WebAuthentication client to connect to your OAuth2 application.",
+      "type" : "text"
+    }
+  ],
+  "identifier" : "doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/WebAuthenticationUI\/ConfiguringYourClient",
+  "kind" : "article",
+  "role" : "article",
+  "title" : "Configuring Your Client",
+  "type" : "topic",
+  "url" : "\/documentation\/webauthenticationui\/configuringyourclient"
+},
+"doc://com.okta.mobile.webauthenticationui/documentation/WebAuthenticationUI/CustomizingAuthorizationURL": {
+  "abstract" : [
+    {
+      "text" : "Features and APIs to enable customization of the authorization URL.",
+      "type" : "text"
+    }
+  ],
+  "identifier" : "doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/WebAuthenticationUI\/CustomizingAuthorizationURL",
+  "kind" : "article",
+  "role" : "article",
+  "title" : "Customizing the Authorization URL",
+  "type" : "topic",
+  "url" : "\/documentation\/webauthenticationui\/customizingauthorizationurl"
+},
+"doc://com.okta.mobile.webauthenticationui/documentation/WebAuthenticationUI/Version": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "let"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "Version"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:14AuthFoundation10SDKVersionC",
+      "text" : "SDKVersion"
+    }
+  ],
+  "identifier" : "doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/WebAuthenticationUI\/Version",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "Version",
+  "type" : "topic",
+  "url" : "\/documentation\/webauthenticationui\/version"
+},
+"doc://com.okta.mobile.webauthenticationui/documentation/WebAuthenticationUI/WebAuthentication": {
+  "abstract" : [
+    {
+      "text" : "Authentication coordinator that simplifies signing users in using browser-based OIDC authentication flows.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "class"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "WebAuthentication"
+    }
+  ],
+  "identifier" : "doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/WebAuthenticationUI\/WebAuthentication",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "WebAuthentication"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "WebAuthentication",
+  "type" : "topic",
+  "url" : "\/documentation\/webauthenticationui\/webauthentication"
+},
+"doc://com.okta.mobile.webauthenticationui/documentation/WebAuthenticationUI/WebAuthenticationError": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "enum"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "WebAuthenticationError"
+    }
+  ],
+  "identifier" : "doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/WebAuthenticationUI\/WebAuthenticationError",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "WebAuthenticationError"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "WebAuthenticationError",
+  "type" : "topic",
+  "url" : "\/documentation\/webauthenticationui\/webauthenticationerror"
+}
+}
+}

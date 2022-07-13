@@ -1,1 +1,316 @@
-{"primaryContentSections":[{"kind":"declarations","declarations":[{"tokens":[{"kind":"keyword","text":"var"},{"kind":"text","text":" "},{"kind":"identifier","text":"delegate"},{"kind":"text","text":": "},{"kind":"typeIdentifier","identifier":"doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/AuthFoundation\/CredentialDataSourceDelegate","preciseIdentifier":"s:14AuthFoundation28CredentialDataSourceDelegateP","text":"CredentialDataSourceDelegate"},{"kind":"text","text":"? { "},{"kind":"keyword","text":"get"},{"kind":"text","text":" "},{"kind":"keyword","text":"set"},{"kind":"text","text":" }"}],"languages":["swift"],"platforms":["macOS"]}]}],"schemaVersion":{"major":0,"minor":2,"patch":0},"sections":[],"variants":[{"paths":["\/documentation\/authfoundation\/credentialdatasource\/delegate"],"traits":[{"interfaceLanguage":"swift"}]}],"identifier":{"url":"doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/AuthFoundation\/CredentialDataSource\/delegate","interfaceLanguage":"swift"},"abstract":[{"type":"text","text":"Mandatory delegate property that is used to communicate when credentials within this data source are created or changed."}],"kind":"symbol","metadata":{"role":"symbol","title":"delegate","roleHeading":"Instance Property","fragments":[{"kind":"keyword","text":"var"},{"kind":"text","text":" "},{"kind":"identifier","text":"delegate"},{"kind":"text","text":": "},{"kind":"typeIdentifier","text":"CredentialDataSourceDelegate","preciseIdentifier":"s:14AuthFoundation28CredentialDataSourceDelegateP"},{"kind":"text","text":"?"}],"symbolKind":"property","externalID":"s:14AuthFoundation20CredentialDataSourceP8delegateAA0cdE8Delegate_pSgvp","required":true,"modules":[{"name":"AuthFoundation"}]},"hierarchy":{"paths":[["doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/AuthFoundation","doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/AuthFoundation\/CredentialDataSource"]]},"references":{"doc://com.okta.mobile.oktaoauth2/documentation/AuthFoundation/CredentialDataSource":{"role":"symbol","title":"CredentialDataSource","fragments":[{"kind":"keyword","text":"protocol"},{"kind":"text","text":" "},{"kind":"identifier","text":"CredentialDataSource"}],"abstract":[{"type":"text","text":"Protocol that enables a developer to interact with, and override, the default behavior for the lifecycle of "},{"type":"reference","isActive":true,"identifier":"doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/AuthFoundation\/Credential"},{"type":"text","text":" instances."}],"identifier":"doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/AuthFoundation\/CredentialDataSource","kind":"symbol","type":"topic","navigatorTitle":[{"kind":"identifier","text":"CredentialDataSource"}],"url":"\/documentation\/authfoundation\/credentialdatasource"},"doc://com.okta.mobile.oktaoauth2/documentation/AuthFoundation/CredentialDataSource/delegate":{"role":"symbol","title":"delegate","fragments":[{"kind":"keyword","text":"var"},{"kind":"text","text":" "},{"kind":"identifier","text":"delegate"},{"kind":"text","text":": "},{"kind":"typeIdentifier","text":"CredentialDataSourceDelegate","preciseIdentifier":"s:14AuthFoundation28CredentialDataSourceDelegateP"},{"kind":"text","text":"?"}],"abstract":[{"type":"text","text":"Mandatory delegate property that is used to communicate when credentials within this data source are created or changed."}],"identifier":"doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/AuthFoundation\/CredentialDataSource\/delegate","kind":"symbol","required":true,"type":"topic","url":"\/documentation\/authfoundation\/credentialdatasource\/delegate"},"doc://com.okta.mobile.oktaoauth2/documentation/AuthFoundation":{"role":"collection","title":"AuthFoundation","abstract":[],"identifier":"doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/AuthFoundation","kind":"symbol","type":"topic","url":"\/documentation\/authfoundation"},"doc://com.okta.mobile.oktaoauth2/documentation/AuthFoundation/CredentialDataSourceDelegate":{"role":"symbol","title":"CredentialDataSourceDelegate","fragments":[{"kind":"keyword","text":"protocol"},{"kind":"text","text":" "},{"kind":"identifier","text":"CredentialDataSourceDelegate"}],"abstract":[{"type":"text","text":"Protocol that a custom "},{"type":"reference","isActive":true,"identifier":"doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/AuthFoundation\/CredentialDataSource"},{"type":"text","text":" instances are required to communicate changes to."}],"identifier":"doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/AuthFoundation\/CredentialDataSourceDelegate","kind":"symbol","type":"topic","navigatorTitle":[{"kind":"identifier","text":"CredentialDataSourceDelegate"}],"url":"\/documentation\/authfoundation\/credentialdatasourcedelegate"},"doc://com.okta.mobile.oktaoauth2/documentation/AuthFoundation/Credential":{"role":"symbol","title":"Credential","fragments":[{"kind":"keyword","text":"class"},{"kind":"text","text":" "},{"kind":"identifier","text":"Credential"}],"abstract":[{"type":"text","text":"Convenience object that provides methods and properties for using a user’s authentication tokens."}],"identifier":"doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/AuthFoundation\/Credential","kind":"symbol","type":"topic","navigatorTitle":[{"kind":"identifier","text":"Credential"}],"url":"\/documentation\/authfoundation\/credential"}}}
+{
+  "abstract" : [
+    {
+      "text" : "Mandatory delegate property that is used to communicate when credentials within this data source are created or changed.",
+      "type" : "text"
+    }
+  ],
+  "hierarchy" : {
+    "paths" : [
+      [
+        "doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/AuthFoundation",
+        "doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/AuthFoundation\/CredentialDataSource"
+      ]
+    ]
+  },
+  "identifier" : {
+    "interfaceLanguage" : "swift",
+    "url" : "doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/AuthFoundation\/CredentialDataSource\/delegate"
+  },
+  "kind" : "symbol",
+  "metadata" : {
+    "externalID" : "s:14AuthFoundation20CredentialDataSourceP8delegateAA0cdE8Delegate_pSgvp",
+    "fragments" : [
+      {
+        "kind" : "keyword",
+        "text" : "var"
+      },
+      {
+        "kind" : "text",
+        "text" : " "
+      },
+      {
+        "kind" : "identifier",
+        "text" : "delegate"
+      },
+      {
+        "kind" : "text",
+        "text" : ": "
+      },
+      {
+        "kind" : "typeIdentifier",
+        "preciseIdentifier" : "s:14AuthFoundation28CredentialDataSourceDelegateP",
+        "text" : "CredentialDataSourceDelegate"
+      },
+      {
+        "kind" : "text",
+        "text" : "?"
+      }
+    ],
+    "modules" : [
+      {
+        "name" : "AuthFoundation"
+      }
+    ],
+    "required" : true,
+    "role" : "symbol",
+    "roleHeading" : "Instance Property",
+    "symbolKind" : "property",
+    "title" : "delegate"
+  },
+  "primaryContentSections" : [
+    {
+      "declarations" : [
+        {
+          "languages" : [
+            "swift"
+          ],
+          "platforms" : [
+            "macOS"
+          ],
+          "tokens" : [
+            {
+              "kind" : "keyword",
+              "text" : "var"
+            },
+            {
+              "kind" : "text",
+              "text" : " "
+            },
+            {
+              "kind" : "identifier",
+              "text" : "delegate"
+            },
+            {
+              "kind" : "text",
+              "text" : ": "
+            },
+            {
+              "identifier" : "doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/AuthFoundation\/CredentialDataSourceDelegate",
+              "kind" : "typeIdentifier",
+              "preciseIdentifier" : "s:14AuthFoundation28CredentialDataSourceDelegateP",
+              "text" : "CredentialDataSourceDelegate"
+            },
+            {
+              "kind" : "text",
+              "text" : "? { "
+            },
+            {
+              "kind" : "keyword",
+              "text" : "get"
+            },
+            {
+              "kind" : "text",
+              "text" : " "
+            },
+            {
+              "kind" : "keyword",
+              "text" : "set"
+            },
+            {
+              "kind" : "text",
+              "text" : " }"
+            }
+          ]
+        }
+      ],
+      "kind" : "declarations"
+    }
+  ],
+  "schemaVersion" : {
+    "major" : 0,
+    "minor" : 2,
+    "patch" : 0
+  },
+  "sections" : [
+
+  ],
+  "variants" : [
+    {
+      "paths" : [
+        "\/documentation\/authfoundation\/credentialdatasource\/delegate"
+      ],
+      "traits" : [
+        {
+          "interfaceLanguage" : "swift"
+        }
+      ]
+    }
+  ]
+, 
+"references": {
+"doc://com.okta.mobile.oktaoauth2/documentation/AuthFoundation": {
+  "abstract" : [
+
+  ],
+  "identifier" : "doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/AuthFoundation",
+  "kind" : "symbol",
+  "role" : "collection",
+  "title" : "AuthFoundation",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation"
+},
+"doc://com.okta.mobile.oktaoauth2/documentation/AuthFoundation/Credential": {
+  "abstract" : [
+    {
+      "text" : "Convenience object that provides methods and properties for using a user’s authentication tokens.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "class"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "Credential"
+    }
+  ],
+  "identifier" : "doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/AuthFoundation\/Credential",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "Credential"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "Credential",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/credential"
+},
+"doc://com.okta.mobile.oktaoauth2/documentation/AuthFoundation/CredentialDataSource": {
+  "abstract" : [
+    {
+      "text" : "Protocol that enables a developer to interact with, and override, the default behavior for the lifecycle of ",
+      "type" : "text"
+    },
+    {
+      "identifier" : "doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/AuthFoundation\/Credential",
+      "isActive" : true,
+      "type" : "reference"
+    },
+    {
+      "text" : " instances.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "protocol"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "CredentialDataSource"
+    }
+  ],
+  "identifier" : "doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/AuthFoundation\/CredentialDataSource",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "CredentialDataSource"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "CredentialDataSource",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/credentialdatasource"
+},
+"doc://com.okta.mobile.oktaoauth2/documentation/AuthFoundation/CredentialDataSource/delegate": {
+  "abstract" : [
+    {
+      "text" : "Mandatory delegate property that is used to communicate when credentials within this data source are created or changed.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "var"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "delegate"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:14AuthFoundation28CredentialDataSourceDelegateP",
+      "text" : "CredentialDataSourceDelegate"
+    },
+    {
+      "kind" : "text",
+      "text" : "?"
+    }
+  ],
+  "identifier" : "doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/AuthFoundation\/CredentialDataSource\/delegate",
+  "kind" : "symbol",
+  "required" : true,
+  "role" : "symbol",
+  "title" : "delegate",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/credentialdatasource\/delegate"
+},
+"doc://com.okta.mobile.oktaoauth2/documentation/AuthFoundation/CredentialDataSourceDelegate": {
+  "abstract" : [
+    {
+      "text" : "Protocol that a custom ",
+      "type" : "text"
+    },
+    {
+      "identifier" : "doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/AuthFoundation\/CredentialDataSource",
+      "isActive" : true,
+      "type" : "reference"
+    },
+    {
+      "text" : " instances are required to communicate changes to.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "protocol"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "CredentialDataSourceDelegate"
+    }
+  ],
+  "identifier" : "doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/AuthFoundation\/CredentialDataSourceDelegate",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "CredentialDataSourceDelegate"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "CredentialDataSourceDelegate",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/credentialdatasourcedelegate"
+}
+}
+}

@@ -1,1 +1,224 @@
-{"variants":[{"paths":["\/documentation\/authfoundation\/jwt\/expires-implementations"],"traits":[{"interfaceLanguage":"swift"}]}],"schemaVersion":{"major":0,"minor":2,"patch":0},"sections":[],"identifier":{"url":"doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/AuthFoundation\/JWT\/Expires-Implementations","interfaceLanguage":"swift"},"abstract":[{"type":"text","text":"No overview available."}],"kind":"article","metadata":{"modules":[{"name":"AuthFoundation"}],"role":"collectionGroup","title":"Expires Implementations"},"hierarchy":{"paths":[["doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/AuthFoundation","doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/AuthFoundation\/JWT"]]},"topicSections":[{"title":"Instance Properties","identifiers":["doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/AuthFoundation\/JWT\/expiresAt","doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/AuthFoundation\/JWT\/isExpired","doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/AuthFoundation\/JWT\/isValid"],"generated":true}],"references":{"doc://com.okta.mobile.oktaoauth2/documentation/AuthFoundation/JWT/isExpired":{"role":"symbol","title":"isExpired","fragments":[{"kind":"keyword","text":"var"},{"kind":"text","text":" "},{"kind":"identifier","text":"isExpired"},{"kind":"text","text":": "},{"kind":"typeIdentifier","text":"Bool","preciseIdentifier":"s:Sb"}],"abstract":[{"type":"text","text":"Indicates if this object has expired."}],"identifier":"doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/AuthFoundation\/JWT\/isExpired","kind":"symbol","type":"topic","url":"\/documentation\/authfoundation\/jwt\/isexpired"},"doc://com.okta.mobile.oktaoauth2/documentation/AuthFoundation/JWT":{"role":"symbol","title":"JWT","fragments":[{"kind":"keyword","text":"struct"},{"kind":"text","text":" "},{"kind":"identifier","text":"JWT"}],"abstract":[{"type":"text","text":"Represents the contents of a JWT token, providing access to its payload contents."}],"identifier":"doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/AuthFoundation\/JWT","kind":"symbol","type":"topic","navigatorTitle":[{"kind":"identifier","text":"JWT"}],"url":"\/documentation\/authfoundation\/jwt"},"doc://com.okta.mobile.oktaoauth2/documentation/AuthFoundation/JWT/expiresAt":{"role":"symbol","title":"expiresAt","fragments":[{"kind":"keyword","text":"var"},{"kind":"text","text":" "},{"kind":"identifier","text":"expiresAt"},{"kind":"text","text":": "},{"kind":"typeIdentifier","text":"Date","preciseIdentifier":"s:10Foundation4DateV"},{"kind":"text","text":"?"}],"abstract":[{"type":"text","text":"The calculated date at which this object will expire."}],"identifier":"doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/AuthFoundation\/JWT\/expiresAt","kind":"symbol","type":"topic","url":"\/documentation\/authfoundation\/jwt\/expiresat"},"doc://com.okta.mobile.oktaoauth2/documentation/AuthFoundation/JWT/isValid":{"role":"symbol","title":"isValid","fragments":[{"kind":"keyword","text":"var"},{"kind":"text","text":" "},{"kind":"identifier","text":"isValid"},{"kind":"text","text":": "},{"kind":"typeIdentifier","text":"Bool","preciseIdentifier":"s:Sb"}],"abstract":[{"type":"text","text":"Indicates if this object is valid."}],"identifier":"doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/AuthFoundation\/JWT\/isValid","kind":"symbol","type":"topic","url":"\/documentation\/authfoundation\/jwt\/isvalid"},"doc://com.okta.mobile.oktaoauth2/documentation/AuthFoundation":{"role":"collection","title":"AuthFoundation","abstract":[],"identifier":"doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/AuthFoundation","kind":"symbol","type":"topic","url":"\/documentation\/authfoundation"}}}
+{
+  "abstract" : [
+    {
+      "text" : "No overview available.",
+      "type" : "text"
+    }
+  ],
+  "hierarchy" : {
+    "paths" : [
+      [
+        "doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/AuthFoundation",
+        "doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/AuthFoundation\/JWT"
+      ]
+    ]
+  },
+  "identifier" : {
+    "interfaceLanguage" : "swift",
+    "url" : "doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/AuthFoundation\/JWT\/Expires-Implementations"
+  },
+  "kind" : "article",
+  "metadata" : {
+    "modules" : [
+      {
+        "name" : "AuthFoundation"
+      }
+    ],
+    "role" : "collectionGroup",
+    "title" : "Expires Implementations"
+  },
+  "schemaVersion" : {
+    "major" : 0,
+    "minor" : 2,
+    "patch" : 0
+  },
+  "sections" : [
+
+  ],
+  "topicSections" : [
+    {
+      "generated" : true,
+      "identifiers" : [
+        "doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/AuthFoundation\/JWT\/expiresAt",
+        "doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/AuthFoundation\/JWT\/isExpired",
+        "doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/AuthFoundation\/JWT\/isValid"
+      ],
+      "title" : "Instance Properties"
+    }
+  ],
+  "variants" : [
+    {
+      "paths" : [
+        "\/documentation\/authfoundation\/jwt\/expires-implementations"
+      ],
+      "traits" : [
+        {
+          "interfaceLanguage" : "swift"
+        }
+      ]
+    }
+  ]
+, 
+"references": {
+"doc://com.okta.mobile.oktaoauth2/documentation/AuthFoundation": {
+  "abstract" : [
+
+  ],
+  "identifier" : "doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/AuthFoundation",
+  "kind" : "symbol",
+  "role" : "collection",
+  "title" : "AuthFoundation",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation"
+},
+"doc://com.okta.mobile.oktaoauth2/documentation/AuthFoundation/JWT": {
+  "abstract" : [
+    {
+      "text" : "Represents the contents of a JWT token, providing access to its payload contents.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "struct"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "JWT"
+    }
+  ],
+  "identifier" : "doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/AuthFoundation\/JWT",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "JWT"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "JWT",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/jwt"
+},
+"doc://com.okta.mobile.oktaoauth2/documentation/AuthFoundation/JWT/expiresAt": {
+  "abstract" : [
+    {
+      "text" : "The calculated date at which this object will expire.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "var"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "expiresAt"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:10Foundation4DateV",
+      "text" : "Date"
+    },
+    {
+      "kind" : "text",
+      "text" : "?"
+    }
+  ],
+  "identifier" : "doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/AuthFoundation\/JWT\/expiresAt",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "expiresAt",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/jwt\/expiresat"
+},
+"doc://com.okta.mobile.oktaoauth2/documentation/AuthFoundation/JWT/isExpired": {
+  "abstract" : [
+    {
+      "text" : "Indicates if this object has expired.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "var"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "isExpired"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:Sb",
+      "text" : "Bool"
+    }
+  ],
+  "identifier" : "doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/AuthFoundation\/JWT\/isExpired",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "isExpired",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/jwt\/isexpired"
+},
+"doc://com.okta.mobile.oktaoauth2/documentation/AuthFoundation/JWT/isValid": {
+  "abstract" : [
+    {
+      "text" : "Indicates if this object is valid.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "var"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "isValid"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:Sb",
+      "text" : "Bool"
+    }
+  ],
+  "identifier" : "doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/AuthFoundation\/JWT\/isValid",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "isValid",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/jwt\/isvalid"
+}
+}
+}

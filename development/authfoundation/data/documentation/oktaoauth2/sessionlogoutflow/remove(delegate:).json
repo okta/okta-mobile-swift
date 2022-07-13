@@ -1,1 +1,266 @@
-{"primaryContentSections":[{"kind":"declarations","declarations":[{"tokens":[{"kind":"keyword","text":"func"},{"kind":"text","text":" "},{"kind":"identifier","text":"remove"},{"kind":"text","text":"("},{"kind":"externalParam","text":"delegate"},{"kind":"text","text":": "},{"kind":"typeIdentifier","text":"Self"},{"kind":"text","text":"."},{"kind":"typeIdentifier","text":"Delegate"},{"kind":"text","text":")"}],"languages":["swift"],"platforms":["macOS"]}]}],"schemaVersion":{"major":0,"minor":2,"patch":0},"sections":[],"variants":[{"paths":["\/documentation\/oktaoauth2\/sessionlogoutflow\/remove(delegate:)"],"traits":[{"interfaceLanguage":"swift"}]}],"identifier":{"url":"doc:\/\/com.okta.mobile.authfoundation\/documentation\/OktaOAuth2\/SessionLogoutFlow\/remove(delegate:)","interfaceLanguage":"swift"},"abstract":[{"type":"text","text":"No overview available."}],"kind":"symbol","metadata":{"role":"symbol","title":"remove(delegate:)","roleHeading":"Instance Method","fragments":[{"kind":"keyword","text":"func"},{"kind":"text","text":" "},{"kind":"identifier","text":"remove"},{"kind":"text","text":"("},{"kind":"externalParam","text":"delegate"},{"kind":"text","text":": "},{"kind":"typeIdentifier","text":"Self"},{"kind":"text","text":"."},{"kind":"typeIdentifier","text":"Delegate"},{"kind":"text","text":")"}],"symbolKind":"method","externalID":"s:14AuthFoundation22UsesDelegateCollectionPAAE6remove8delegatey0D0Qz_tF::SYNTHESIZED::s:10OktaOAuth217SessionLogoutFlowC","extendedModule":"AuthFoundation","modules":[{"name":"OktaOAuth2"}]},"hierarchy":{"paths":[["doc:\/\/com.okta.mobile.authfoundation\/documentation\/OktaOAuth2","doc:\/\/com.okta.mobile.authfoundation\/documentation\/OktaOAuth2\/SessionLogoutFlow","doc:\/\/com.okta.mobile.authfoundation\/documentation\/OktaOAuth2\/SessionLogoutFlow\/UsesDelegateCollection-Implementations"]]},"references":{"doc://com.okta.mobile.authfoundation/documentation/OktaOAuth2/SessionLogoutFlow":{"role":"symbol","title":"SessionLogoutFlow","fragments":[{"kind":"keyword","text":"class"},{"kind":"text","text":" "},{"kind":"identifier","text":"SessionLogoutFlow"}],"abstract":[{"type":"text","text":"An logout flow class that implements the Session Logout Flow."}],"identifier":"doc:\/\/com.okta.mobile.authfoundation\/documentation\/OktaOAuth2\/SessionLogoutFlow","kind":"symbol","type":"topic","navigatorTitle":[{"kind":"identifier","text":"SessionLogoutFlow"}],"url":"\/documentation\/oktaoauth2\/sessionlogoutflow"},"doc://com.okta.mobile.authfoundation/documentation/OktaOAuth2/SessionLogoutFlow/UsesDelegateCollection-Implementations":{"role":"collectionGroup","title":"UsesDelegateCollection Implementations","abstract":[],"identifier":"doc:\/\/com.okta.mobile.authfoundation\/documentation\/OktaOAuth2\/SessionLogoutFlow\/UsesDelegateCollection-Implementations","kind":"article","type":"topic","url":"\/documentation\/oktaoauth2\/sessionlogoutflow\/usesdelegatecollection-implementations"},"doc://com.okta.mobile.authfoundation/documentation/OktaOAuth2":{"role":"collection","title":"OktaOAuth2","abstract":[],"identifier":"doc:\/\/com.okta.mobile.authfoundation\/documentation\/OktaOAuth2","kind":"symbol","type":"topic","url":"\/documentation\/oktaoauth2"},"doc://com.okta.mobile.authfoundation/documentation/OktaOAuth2/SessionLogoutFlow/remove(delegate:)":{"role":"symbol","title":"remove(delegate:)","fragments":[{"kind":"keyword","text":"func"},{"kind":"text","text":" "},{"kind":"identifier","text":"remove"},{"kind":"text","text":"("},{"kind":"externalParam","text":"delegate"},{"kind":"text","text":": "},{"kind":"typeIdentifier","text":"Self"},{"kind":"text","text":"."},{"kind":"typeIdentifier","text":"Delegate"},{"kind":"text","text":")"}],"abstract":[],"identifier":"doc:\/\/com.okta.mobile.authfoundation\/documentation\/OktaOAuth2\/SessionLogoutFlow\/remove(delegate:)","kind":"symbol","type":"topic","url":"\/documentation\/oktaoauth2\/sessionlogoutflow\/remove(delegate:)"}}}
+{
+  "abstract" : [
+    {
+      "text" : "No overview available.",
+      "type" : "text"
+    }
+  ],
+  "hierarchy" : {
+    "paths" : [
+      [
+        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/OktaOAuth2",
+        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/OktaOAuth2\/SessionLogoutFlow",
+        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/OktaOAuth2\/SessionLogoutFlow\/UsesDelegateCollection-Implementations"
+      ]
+    ]
+  },
+  "identifier" : {
+    "interfaceLanguage" : "swift",
+    "url" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/OktaOAuth2\/SessionLogoutFlow\/remove(delegate:)"
+  },
+  "kind" : "symbol",
+  "metadata" : {
+    "extendedModule" : "AuthFoundation",
+    "externalID" : "s:14AuthFoundation22UsesDelegateCollectionPAAE6remove8delegatey0D0Qz_tF::SYNTHESIZED::s:10OktaOAuth217SessionLogoutFlowC",
+    "fragments" : [
+      {
+        "kind" : "keyword",
+        "text" : "func"
+      },
+      {
+        "kind" : "text",
+        "text" : " "
+      },
+      {
+        "kind" : "identifier",
+        "text" : "remove"
+      },
+      {
+        "kind" : "text",
+        "text" : "("
+      },
+      {
+        "kind" : "externalParam",
+        "text" : "delegate"
+      },
+      {
+        "kind" : "text",
+        "text" : ": "
+      },
+      {
+        "kind" : "typeIdentifier",
+        "text" : "Self"
+      },
+      {
+        "kind" : "text",
+        "text" : "."
+      },
+      {
+        "kind" : "typeIdentifier",
+        "text" : "Delegate"
+      },
+      {
+        "kind" : "text",
+        "text" : ")"
+      }
+    ],
+    "modules" : [
+      {
+        "name" : "OktaOAuth2"
+      }
+    ],
+    "role" : "symbol",
+    "roleHeading" : "Instance Method",
+    "symbolKind" : "method",
+    "title" : "remove(delegate:)"
+  },
+  "primaryContentSections" : [
+    {
+      "declarations" : [
+        {
+          "languages" : [
+            "swift"
+          ],
+          "platforms" : [
+            "macOS"
+          ],
+          "tokens" : [
+            {
+              "kind" : "keyword",
+              "text" : "func"
+            },
+            {
+              "kind" : "text",
+              "text" : " "
+            },
+            {
+              "kind" : "identifier",
+              "text" : "remove"
+            },
+            {
+              "kind" : "text",
+              "text" : "("
+            },
+            {
+              "kind" : "externalParam",
+              "text" : "delegate"
+            },
+            {
+              "kind" : "text",
+              "text" : ": "
+            },
+            {
+              "kind" : "typeIdentifier",
+              "text" : "Self"
+            },
+            {
+              "kind" : "text",
+              "text" : "."
+            },
+            {
+              "kind" : "typeIdentifier",
+              "text" : "Delegate"
+            },
+            {
+              "kind" : "text",
+              "text" : ")"
+            }
+          ]
+        }
+      ],
+      "kind" : "declarations"
+    }
+  ],
+  "schemaVersion" : {
+    "major" : 0,
+    "minor" : 2,
+    "patch" : 0
+  },
+  "sections" : [
+
+  ],
+  "variants" : [
+    {
+      "paths" : [
+        "\/documentation\/oktaoauth2\/sessionlogoutflow\/remove(delegate:)"
+      ],
+      "traits" : [
+        {
+          "interfaceLanguage" : "swift"
+        }
+      ]
+    }
+  ]
+, 
+"references": {
+"doc://com.okta.mobile.authfoundation/documentation/OktaOAuth2": {
+  "abstract" : [
+
+  ],
+  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/OktaOAuth2",
+  "kind" : "symbol",
+  "role" : "collection",
+  "title" : "OktaOAuth2",
+  "type" : "topic",
+  "url" : "\/documentation\/oktaoauth2"
+},
+"doc://com.okta.mobile.authfoundation/documentation/OktaOAuth2/SessionLogoutFlow": {
+  "abstract" : [
+    {
+      "text" : "An logout flow class that implements the Session Logout Flow.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "class"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "SessionLogoutFlow"
+    }
+  ],
+  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/OktaOAuth2\/SessionLogoutFlow",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "SessionLogoutFlow"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "SessionLogoutFlow",
+  "type" : "topic",
+  "url" : "\/documentation\/oktaoauth2\/sessionlogoutflow"
+},
+"doc://com.okta.mobile.authfoundation/documentation/OktaOAuth2/SessionLogoutFlow/UsesDelegateCollection-Implementations": {
+  "abstract" : [
+
+  ],
+  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/OktaOAuth2\/SessionLogoutFlow\/UsesDelegateCollection-Implementations",
+  "kind" : "article",
+  "role" : "collectionGroup",
+  "title" : "UsesDelegateCollection Implementations",
+  "type" : "topic",
+  "url" : "\/documentation\/oktaoauth2\/sessionlogoutflow\/usesdelegatecollection-implementations"
+},
+"doc://com.okta.mobile.authfoundation/documentation/OktaOAuth2/SessionLogoutFlow/remove(delegate:)": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "func"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "remove"
+    },
+    {
+      "kind" : "text",
+      "text" : "("
+    },
+    {
+      "kind" : "externalParam",
+      "text" : "delegate"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "text" : "Self"
+    },
+    {
+      "kind" : "text",
+      "text" : "."
+    },
+    {
+      "kind" : "typeIdentifier",
+      "text" : "Delegate"
+    },
+    {
+      "kind" : "text",
+      "text" : ")"
+    }
+  ],
+  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/OktaOAuth2\/SessionLogoutFlow\/remove(delegate:)",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "remove(delegate:)",
+  "type" : "topic",
+  "url" : "\/documentation\/oktaoauth2\/sessionlogoutflow\/remove(delegate:)"
+}
+}
+}

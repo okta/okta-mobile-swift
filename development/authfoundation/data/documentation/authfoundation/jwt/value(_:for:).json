@@ -1,1 +1,360 @@
-{"primaryContentSections":[{"kind":"declarations","declarations":[{"tokens":[{"kind":"keyword","text":"func"},{"kind":"text","text":" "},{"kind":"identifier","text":"value"},{"kind":"text","text":"<"},{"kind":"genericParameter","text":"T"},{"kind":"text","text":">("},{"kind":"externalParam","text":"_"},{"kind":"text","text":" "},{"kind":"internalParam","text":"type"},{"kind":"text","text":": "},{"kind":"typeIdentifier","text":"T","preciseIdentifier":"s:14AuthFoundation3JWTV5value_3forxSgxm_SStlF1TL_xmfp"},{"kind":"text","text":".Type, "},{"kind":"externalParam","text":"for"},{"kind":"text","text":" "},{"kind":"internalParam","text":"key"},{"kind":"text","text":": "},{"kind":"typeIdentifier","text":"String","preciseIdentifier":"s:SS"},{"kind":"text","text":") -> "},{"kind":"typeIdentifier","text":"T","preciseIdentifier":"s:14AuthFoundation3JWTV5value_3forxSgxm_SStlF1TL_xmfp"},{"kind":"text","text":"?"}],"languages":["swift"],"platforms":["macOS"]}]},{"kind":"content","content":[{"anchor":"return-value","level":2,"type":"heading","text":"Return Value"},{"type":"paragraph","inlineContent":[{"type":"text","text":"The value for the supplied claim."}]}]}],"schemaVersion":{"major":0,"minor":2,"patch":0},"sections":[],"variants":[{"paths":["\/documentation\/authfoundation\/jwt\/value(_:for:)"],"traits":[{"interfaceLanguage":"swift"}]}],"identifier":{"url":"doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/JWT\/value(_:for:)","interfaceLanguage":"swift"},"abstract":[{"type":"text","text":"Returns a claim value from this JWT token, with the given key and expected return type."}],"kind":"symbol","metadata":{"fragments":[{"kind":"keyword","text":"func"},{"kind":"text","text":" "},{"kind":"identifier","text":"value"},{"kind":"text","text":"<"},{"kind":"genericParameter","text":"T"},{"kind":"text","text":">("},{"kind":"typeIdentifier","text":"T","preciseIdentifier":"s:14AuthFoundation3JWTV5value_3forxSgxm_SStlF1TL_xmfp"},{"kind":"text","text":".Type, "},{"kind":"externalParam","text":"for"},{"kind":"text","text":": "},{"kind":"typeIdentifier","text":"String","preciseIdentifier":"s:SS"},{"kind":"text","text":") -> "},{"kind":"typeIdentifier","text":"T","preciseIdentifier":"s:14AuthFoundation3JWTV5value_3forxSgxm_SStlF1TL_xmfp"},{"kind":"text","text":"?"}],"title":"value(_:for:)","roleHeading":"Instance Method","role":"symbol","symbolKind":"method","externalID":"s:14AuthFoundation3JWTV5value_3forxSgxm_SStlF","modules":[{"name":"AuthFoundation"}]},"hierarchy":{"paths":[["doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation","doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/JWT"]]},"references":{"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/JWT/value(_:for:)":{"role":"symbol","title":"value(_:for:)","fragments":[{"kind":"keyword","text":"func"},{"kind":"text","text":" "},{"kind":"identifier","text":"value"},{"kind":"text","text":"<"},{"kind":"genericParameter","text":"T"},{"kind":"text","text":">("},{"kind":"typeIdentifier","text":"T","preciseIdentifier":"s:14AuthFoundation3JWTV5value_3forxSgxm_SStlF1TL_xmfp"},{"kind":"text","text":".Type, "},{"kind":"externalParam","text":"for"},{"kind":"text","text":": "},{"kind":"typeIdentifier","text":"String","preciseIdentifier":"s:SS"},{"kind":"text","text":") -> "},{"kind":"typeIdentifier","text":"T","preciseIdentifier":"s:14AuthFoundation3JWTV5value_3forxSgxm_SStlF1TL_xmfp"},{"kind":"text","text":"?"}],"abstract":[{"type":"text","text":"Returns a claim value from this JWT token, with the given key and expected return type."}],"identifier":"doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/JWT\/value(_:for:)","kind":"symbol","type":"topic","url":"\/documentation\/authfoundation\/jwt\/value(_:for:)"},"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation":{"role":"collection","title":"AuthFoundation","abstract":[{"type":"text","text":"Library that provides foundational features used by Okta’s authentication libraries, as well as APIs used to work with tokens and user credentials."}],"identifier":"doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation","kind":"symbol","type":"topic","url":"\/documentation\/authfoundation"},"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/JWT":{"role":"symbol","title":"JWT","fragments":[{"kind":"keyword","text":"struct"},{"kind":"text","text":" "},{"kind":"identifier","text":"JWT"}],"abstract":[{"type":"text","text":"Represents the contents of a JWT token, providing access to its payload contents."}],"identifier":"doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/JWT","kind":"symbol","type":"topic","navigatorTitle":[{"kind":"identifier","text":"JWT"}],"url":"\/documentation\/authfoundation\/jwt"}}}
+{
+  "abstract" : [
+    {
+      "text" : "Returns a claim value from this JWT token, with the given key and expected return type.",
+      "type" : "text"
+    }
+  ],
+  "hierarchy" : {
+    "paths" : [
+      [
+        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation",
+        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/JWT"
+      ]
+    ]
+  },
+  "identifier" : {
+    "interfaceLanguage" : "swift",
+    "url" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/JWT\/value(_:for:)"
+  },
+  "kind" : "symbol",
+  "metadata" : {
+    "externalID" : "s:14AuthFoundation3JWTV5value_3forxSgxm_SStlF",
+    "fragments" : [
+      {
+        "kind" : "keyword",
+        "text" : "func"
+      },
+      {
+        "kind" : "text",
+        "text" : " "
+      },
+      {
+        "kind" : "identifier",
+        "text" : "value"
+      },
+      {
+        "kind" : "text",
+        "text" : "<"
+      },
+      {
+        "kind" : "genericParameter",
+        "text" : "T"
+      },
+      {
+        "kind" : "text",
+        "text" : ">("
+      },
+      {
+        "kind" : "typeIdentifier",
+        "preciseIdentifier" : "s:14AuthFoundation3JWTV5value_3forxSgxm_SStlF1TL_xmfp",
+        "text" : "T"
+      },
+      {
+        "kind" : "text",
+        "text" : ".Type, "
+      },
+      {
+        "kind" : "externalParam",
+        "text" : "for"
+      },
+      {
+        "kind" : "text",
+        "text" : ": "
+      },
+      {
+        "kind" : "typeIdentifier",
+        "preciseIdentifier" : "s:SS",
+        "text" : "String"
+      },
+      {
+        "kind" : "text",
+        "text" : ") -> "
+      },
+      {
+        "kind" : "typeIdentifier",
+        "preciseIdentifier" : "s:14AuthFoundation3JWTV5value_3forxSgxm_SStlF1TL_xmfp",
+        "text" : "T"
+      },
+      {
+        "kind" : "text",
+        "text" : "?"
+      }
+    ],
+    "modules" : [
+      {
+        "name" : "AuthFoundation"
+      }
+    ],
+    "role" : "symbol",
+    "roleHeading" : "Instance Method",
+    "symbolKind" : "method",
+    "title" : "value(_:for:)"
+  },
+  "primaryContentSections" : [
+    {
+      "declarations" : [
+        {
+          "languages" : [
+            "swift"
+          ],
+          "platforms" : [
+            "macOS"
+          ],
+          "tokens" : [
+            {
+              "kind" : "keyword",
+              "text" : "func"
+            },
+            {
+              "kind" : "text",
+              "text" : " "
+            },
+            {
+              "kind" : "identifier",
+              "text" : "value"
+            },
+            {
+              "kind" : "text",
+              "text" : "<"
+            },
+            {
+              "kind" : "genericParameter",
+              "text" : "T"
+            },
+            {
+              "kind" : "text",
+              "text" : ">("
+            },
+            {
+              "kind" : "externalParam",
+              "text" : "_"
+            },
+            {
+              "kind" : "text",
+              "text" : " "
+            },
+            {
+              "kind" : "internalParam",
+              "text" : "type"
+            },
+            {
+              "kind" : "text",
+              "text" : ": "
+            },
+            {
+              "kind" : "typeIdentifier",
+              "preciseIdentifier" : "s:14AuthFoundation3JWTV5value_3forxSgxm_SStlF1TL_xmfp",
+              "text" : "T"
+            },
+            {
+              "kind" : "text",
+              "text" : ".Type, "
+            },
+            {
+              "kind" : "externalParam",
+              "text" : "for"
+            },
+            {
+              "kind" : "text",
+              "text" : " "
+            },
+            {
+              "kind" : "internalParam",
+              "text" : "key"
+            },
+            {
+              "kind" : "text",
+              "text" : ": "
+            },
+            {
+              "kind" : "typeIdentifier",
+              "preciseIdentifier" : "s:SS",
+              "text" : "String"
+            },
+            {
+              "kind" : "text",
+              "text" : ") -> "
+            },
+            {
+              "kind" : "typeIdentifier",
+              "preciseIdentifier" : "s:14AuthFoundation3JWTV5value_3forxSgxm_SStlF1TL_xmfp",
+              "text" : "T"
+            },
+            {
+              "kind" : "text",
+              "text" : "?"
+            }
+          ]
+        }
+      ],
+      "kind" : "declarations"
+    },
+    {
+      "content" : [
+        {
+          "anchor" : "return-value",
+          "level" : 2,
+          "text" : "Return Value",
+          "type" : "heading"
+        },
+        {
+          "inlineContent" : [
+            {
+              "text" : "The value for the supplied claim.",
+              "type" : "text"
+            }
+          ],
+          "type" : "paragraph"
+        }
+      ],
+      "kind" : "content"
+    }
+  ],
+  "schemaVersion" : {
+    "major" : 0,
+    "minor" : 2,
+    "patch" : 0
+  },
+  "sections" : [
+
+  ],
+  "variants" : [
+    {
+      "paths" : [
+        "\/documentation\/authfoundation\/jwt\/value(_:for:)"
+      ],
+      "traits" : [
+        {
+          "interfaceLanguage" : "swift"
+        }
+      ]
+    }
+  ]
+, 
+"references": {
+"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation": {
+  "abstract" : [
+    {
+      "text" : "Library that provides foundational features used by Okta’s authentication libraries, as well as APIs used to work with tokens and user credentials.",
+      "type" : "text"
+    }
+  ],
+  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation",
+  "kind" : "symbol",
+  "role" : "collection",
+  "title" : "AuthFoundation",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation"
+},
+"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/JWT": {
+  "abstract" : [
+    {
+      "text" : "Represents the contents of a JWT token, providing access to its payload contents.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "struct"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "JWT"
+    }
+  ],
+  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/JWT",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "JWT"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "JWT",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/jwt"
+},
+"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/JWT/value(_:for:)": {
+  "abstract" : [
+    {
+      "text" : "Returns a claim value from this JWT token, with the given key and expected return type.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "func"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "value"
+    },
+    {
+      "kind" : "text",
+      "text" : "<"
+    },
+    {
+      "kind" : "genericParameter",
+      "text" : "T"
+    },
+    {
+      "kind" : "text",
+      "text" : ">("
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:14AuthFoundation3JWTV5value_3forxSgxm_SStlF1TL_xmfp",
+      "text" : "T"
+    },
+    {
+      "kind" : "text",
+      "text" : ".Type, "
+    },
+    {
+      "kind" : "externalParam",
+      "text" : "for"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:SS",
+      "text" : "String"
+    },
+    {
+      "kind" : "text",
+      "text" : ") -> "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:14AuthFoundation3JWTV5value_3forxSgxm_SStlF1TL_xmfp",
+      "text" : "T"
+    },
+    {
+      "kind" : "text",
+      "text" : "?"
+    }
+  ],
+  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/JWT\/value(_:for:)",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "value(_:for:)",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/jwt\/value(_:for:)"
+}
+}
+}

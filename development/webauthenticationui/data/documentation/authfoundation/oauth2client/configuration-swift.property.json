@@ -1,1 +1,243 @@
-{"primaryContentSections":[{"kind":"declarations","declarations":[{"tokens":[{"kind":"keyword","text":"let"},{"kind":"text","text":" "},{"kind":"identifier","text":"configuration"},{"kind":"text","text":": "},{"kind":"typeIdentifier","identifier":"doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/AuthFoundation\/OAuth2Client\/Configuration-swift.class","preciseIdentifier":"s:14AuthFoundation12OAuth2ClientC13ConfigurationC","text":"Configuration"}],"languages":["swift"],"platforms":["macOS"]}]}],"schemaVersion":{"major":0,"minor":2,"patch":0},"sections":[],"variants":[{"paths":["\/documentation\/authfoundation\/oauth2client\/configuration-swift.property"],"traits":[{"interfaceLanguage":"swift"}]}],"identifier":{"url":"doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/AuthFoundation\/OAuth2Client\/configuration-swift.property","interfaceLanguage":"swift"},"abstract":[{"type":"text","text":"The configuration that identifies this OAuth2 client."}],"kind":"symbol","metadata":{"fragments":[{"kind":"keyword","text":"let"},{"kind":"text","text":" "},{"kind":"identifier","text":"configuration"},{"kind":"text","text":": "},{"kind":"typeIdentifier","text":"Configuration","preciseIdentifier":"s:14AuthFoundation12OAuth2ClientC13ConfigurationC"}],"title":"configuration","roleHeading":"Instance Property","role":"symbol","symbolKind":"property","externalID":"s:14AuthFoundation12OAuth2ClientC13configurationAC13ConfigurationCvp","modules":[{"name":"AuthFoundation"}]},"hierarchy":{"paths":[["doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/AuthFoundation","doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/AuthFoundation\/OAuth2Client"]]},"references":{"doc://com.okta.mobile.webauthenticationui/documentation/AuthFoundation/OAuth2Client":{"role":"symbol","title":"OAuth2Client","fragments":[{"kind":"keyword","text":"class"},{"kind":"text","text":" "},{"kind":"identifier","text":"OAuth2Client"}],"abstract":[{"type":"text","text":"An OAuth2 client, used to interact with a given authorization server."}],"identifier":"doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/AuthFoundation\/OAuth2Client","kind":"symbol","type":"topic","navigatorTitle":[{"kind":"identifier","text":"OAuth2Client"}],"url":"\/documentation\/authfoundation\/oauth2client"},"doc://com.okta.mobile.webauthenticationui/documentation/AuthFoundation/OAuth2Client/configuration-swift.property":{"role":"symbol","title":"configuration","fragments":[{"kind":"keyword","text":"let"},{"kind":"text","text":" "},{"kind":"identifier","text":"configuration"},{"kind":"text","text":": "},{"kind":"typeIdentifier","text":"Configuration","preciseIdentifier":"s:14AuthFoundation12OAuth2ClientC13ConfigurationC"}],"abstract":[{"type":"text","text":"The configuration that identifies this OAuth2 client."}],"identifier":"doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/AuthFoundation\/OAuth2Client\/configuration-swift.property","kind":"symbol","type":"topic","url":"\/documentation\/authfoundation\/oauth2client\/configuration-swift.property"},"doc://com.okta.mobile.webauthenticationui/documentation/AuthFoundation":{"role":"collection","title":"AuthFoundation","abstract":[],"identifier":"doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/AuthFoundation","kind":"symbol","type":"topic","url":"\/documentation\/authfoundation"},"doc://com.okta.mobile.webauthenticationui/documentation/AuthFoundation/OAuth2Client/Configuration-swift.class":{"role":"symbol","title":"OAuth2Client.Configuration","fragments":[{"kind":"keyword","text":"class"},{"kind":"text","text":" "},{"kind":"identifier","text":"Configuration"}],"abstract":[{"type":"text","text":"The configuration for an "},{"type":"reference","isActive":true,"identifier":"doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/AuthFoundation\/OAuth2Client"},{"type":"text","text":"."}],"identifier":"doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/AuthFoundation\/OAuth2Client\/Configuration-swift.class","kind":"symbol","type":"topic","navigatorTitle":[{"kind":"identifier","text":"Configuration"}],"url":"\/documentation\/authfoundation\/oauth2client\/configuration-swift.class"}}}
+{
+  "abstract" : [
+    {
+      "text" : "The configuration that identifies this OAuth2 client.",
+      "type" : "text"
+    }
+  ],
+  "hierarchy" : {
+    "paths" : [
+      [
+        "doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/AuthFoundation",
+        "doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/AuthFoundation\/OAuth2Client"
+      ]
+    ]
+  },
+  "identifier" : {
+    "interfaceLanguage" : "swift",
+    "url" : "doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/AuthFoundation\/OAuth2Client\/configuration-swift.property"
+  },
+  "kind" : "symbol",
+  "metadata" : {
+    "externalID" : "s:14AuthFoundation12OAuth2ClientC13configurationAC13ConfigurationCvp",
+    "fragments" : [
+      {
+        "kind" : "keyword",
+        "text" : "let"
+      },
+      {
+        "kind" : "text",
+        "text" : " "
+      },
+      {
+        "kind" : "identifier",
+        "text" : "configuration"
+      },
+      {
+        "kind" : "text",
+        "text" : ": "
+      },
+      {
+        "kind" : "typeIdentifier",
+        "preciseIdentifier" : "s:14AuthFoundation12OAuth2ClientC13ConfigurationC",
+        "text" : "Configuration"
+      }
+    ],
+    "modules" : [
+      {
+        "name" : "AuthFoundation"
+      }
+    ],
+    "role" : "symbol",
+    "roleHeading" : "Instance Property",
+    "symbolKind" : "property",
+    "title" : "configuration"
+  },
+  "primaryContentSections" : [
+    {
+      "declarations" : [
+        {
+          "languages" : [
+            "swift"
+          ],
+          "platforms" : [
+            "macOS"
+          ],
+          "tokens" : [
+            {
+              "kind" : "keyword",
+              "text" : "let"
+            },
+            {
+              "kind" : "text",
+              "text" : " "
+            },
+            {
+              "kind" : "identifier",
+              "text" : "configuration"
+            },
+            {
+              "kind" : "text",
+              "text" : ": "
+            },
+            {
+              "identifier" : "doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/AuthFoundation\/OAuth2Client\/Configuration-swift.class",
+              "kind" : "typeIdentifier",
+              "preciseIdentifier" : "s:14AuthFoundation12OAuth2ClientC13ConfigurationC",
+              "text" : "Configuration"
+            }
+          ]
+        }
+      ],
+      "kind" : "declarations"
+    }
+  ],
+  "schemaVersion" : {
+    "major" : 0,
+    "minor" : 2,
+    "patch" : 0
+  },
+  "sections" : [
+
+  ],
+  "variants" : [
+    {
+      "paths" : [
+        "\/documentation\/authfoundation\/oauth2client\/configuration-swift.property"
+      ],
+      "traits" : [
+        {
+          "interfaceLanguage" : "swift"
+        }
+      ]
+    }
+  ]
+, 
+"references": {
+"doc://com.okta.mobile.webauthenticationui/documentation/AuthFoundation": {
+  "abstract" : [
+
+  ],
+  "identifier" : "doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/AuthFoundation",
+  "kind" : "symbol",
+  "role" : "collection",
+  "title" : "AuthFoundation",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation"
+},
+"doc://com.okta.mobile.webauthenticationui/documentation/AuthFoundation/OAuth2Client": {
+  "abstract" : [
+    {
+      "text" : "An OAuth2 client, used to interact with a given authorization server.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "class"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "OAuth2Client"
+    }
+  ],
+  "identifier" : "doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/AuthFoundation\/OAuth2Client",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "OAuth2Client"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "OAuth2Client",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/oauth2client"
+},
+"doc://com.okta.mobile.webauthenticationui/documentation/AuthFoundation/OAuth2Client/Configuration-swift.class": {
+  "abstract" : [
+    {
+      "text" : "The configuration for an ",
+      "type" : "text"
+    },
+    {
+      "identifier" : "doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/AuthFoundation\/OAuth2Client",
+      "isActive" : true,
+      "type" : "reference"
+    },
+    {
+      "text" : ".",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "class"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "Configuration"
+    }
+  ],
+  "identifier" : "doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/AuthFoundation\/OAuth2Client\/Configuration-swift.class",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "Configuration"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "OAuth2Client.Configuration",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/oauth2client\/configuration-swift.class"
+},
+"doc://com.okta.mobile.webauthenticationui/documentation/AuthFoundation/OAuth2Client/configuration-swift.property": {
+  "abstract" : [
+    {
+      "text" : "The configuration that identifies this OAuth2 client.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "let"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "configuration"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:14AuthFoundation12OAuth2ClientC13ConfigurationC",
+      "text" : "Configuration"
+    }
+  ],
+  "identifier" : "doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/AuthFoundation\/OAuth2Client\/configuration-swift.property",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "configuration",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/oauth2client\/configuration-swift.property"
+}
+}
+}

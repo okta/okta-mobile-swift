@@ -1,1 +1,285 @@
-{"primaryContentSections":[{"kind":"declarations","declarations":[{"tokens":[{"kind":"keyword","text":"var"},{"kind":"text","text":" "},{"kind":"identifier","text":"claims"},{"kind":"text","text":": ["},{"kind":"typeIdentifier","identifier":"doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/AuthFoundation\/Claim","preciseIdentifier":"s:14AuthFoundation5ClaimO","text":"Claim"},{"kind":"text","text":"] { "},{"kind":"keyword","text":"get"},{"kind":"text","text":" }"}],"languages":["swift"],"platforms":["macOS"]}]}],"schemaVersion":{"major":0,"minor":2,"patch":0},"sections":[],"variants":[{"paths":["\/documentation\/authfoundation\/userinfo\/claims"],"traits":[{"interfaceLanguage":"swift"}]}],"identifier":{"url":"doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/AuthFoundation\/UserInfo\/claims","interfaceLanguage":"swift"},"abstract":[{"type":"text","text":"Returns the list of all claims contained within this "},{"type":"reference","isActive":true,"identifier":"doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/AuthFoundation\/UserInfo"},{"type":"text","text":"."}],"kind":"symbol","metadata":{"role":"symbol","title":"claims","roleHeading":"Instance Property","fragments":[{"kind":"keyword","text":"var"},{"kind":"text","text":" "},{"kind":"identifier","text":"claims"},{"kind":"text","text":": ["},{"kind":"typeIdentifier","text":"Claim","preciseIdentifier":"s:14AuthFoundation5ClaimO"},{"kind":"text","text":"]"}],"symbolKind":"property","externalID":"s:14AuthFoundation14ClaimContainerPAAE6claimsSayAA0C0OGvp::SYNTHESIZED::s:14AuthFoundation8UserInfoV","extendedModule":"AuthFoundation","modules":[{"name":"AuthFoundation"}]},"hierarchy":{"paths":[["doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/AuthFoundation","doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/AuthFoundation\/UserInfo","doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/AuthFoundation\/UserInfo\/ClaimContainer-Implementations"]]},"references":{"doc://com.okta.mobile.webauthenticationui/documentation/AuthFoundation/Claim":{"role":"symbol","title":"Claim","fragments":[{"kind":"keyword","text":"enum"},{"kind":"text","text":" "},{"kind":"identifier","text":"Claim"}],"abstract":[{"type":"text","text":"List of registered and public claims."}],"identifier":"doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/AuthFoundation\/Claim","kind":"symbol","type":"topic","navigatorTitle":[{"kind":"identifier","text":"Claim"}],"url":"\/documentation\/authfoundation\/claim"},"doc://com.okta.mobile.webauthenticationui/documentation/AuthFoundation/UserInfo":{"role":"symbol","title":"UserInfo","fragments":[{"kind":"keyword","text":"struct"},{"kind":"text","text":" "},{"kind":"identifier","text":"UserInfo"}],"abstract":[{"type":"text","text":"User profile information."}],"identifier":"doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/AuthFoundation\/UserInfo","kind":"symbol","type":"topic","navigatorTitle":[{"kind":"identifier","text":"UserInfo"}],"url":"\/documentation\/authfoundation\/userinfo"},"doc://com.okta.mobile.webauthenticationui/documentation/AuthFoundation/UserInfo/ClaimContainer-Implementations":{"role":"collectionGroup","title":"ClaimContainer Implementations","abstract":[],"identifier":"doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/AuthFoundation\/UserInfo\/ClaimContainer-Implementations","kind":"article","type":"topic","url":"\/documentation\/authfoundation\/userinfo\/claimcontainer-implementations"},"doc://com.okta.mobile.webauthenticationui/documentation/AuthFoundation/UserInfo/claims":{"role":"symbol","title":"claims","fragments":[{"kind":"keyword","text":"var"},{"kind":"text","text":" "},{"kind":"identifier","text":"claims"},{"kind":"text","text":": ["},{"kind":"typeIdentifier","text":"Claim","preciseIdentifier":"s:14AuthFoundation5ClaimO"},{"kind":"text","text":"]"}],"abstract":[{"type":"text","text":"Returns the list of all claims contained within this "},{"type":"reference","isActive":true,"identifier":"doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/AuthFoundation\/UserInfo"},{"type":"text","text":"."}],"identifier":"doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/AuthFoundation\/UserInfo\/claims","kind":"symbol","type":"topic","url":"\/documentation\/authfoundation\/userinfo\/claims"},"doc://com.okta.mobile.webauthenticationui/documentation/AuthFoundation":{"role":"collection","title":"AuthFoundation","abstract":[],"identifier":"doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/AuthFoundation","kind":"symbol","type":"topic","url":"\/documentation\/authfoundation"}}}
+{
+  "abstract" : [
+    {
+      "text" : "Returns the list of all claims contained within this ",
+      "type" : "text"
+    },
+    {
+      "identifier" : "doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/AuthFoundation\/UserInfo",
+      "isActive" : true,
+      "type" : "reference"
+    },
+    {
+      "text" : ".",
+      "type" : "text"
+    }
+  ],
+  "hierarchy" : {
+    "paths" : [
+      [
+        "doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/AuthFoundation",
+        "doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/AuthFoundation\/UserInfo",
+        "doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/AuthFoundation\/UserInfo\/ClaimContainer-Implementations"
+      ]
+    ]
+  },
+  "identifier" : {
+    "interfaceLanguage" : "swift",
+    "url" : "doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/AuthFoundation\/UserInfo\/claims"
+  },
+  "kind" : "symbol",
+  "metadata" : {
+    "extendedModule" : "AuthFoundation",
+    "externalID" : "s:14AuthFoundation14ClaimContainerPAAE6claimsSayAA0C0OGvp::SYNTHESIZED::s:14AuthFoundation8UserInfoV",
+    "fragments" : [
+      {
+        "kind" : "keyword",
+        "text" : "var"
+      },
+      {
+        "kind" : "text",
+        "text" : " "
+      },
+      {
+        "kind" : "identifier",
+        "text" : "claims"
+      },
+      {
+        "kind" : "text",
+        "text" : ": ["
+      },
+      {
+        "kind" : "typeIdentifier",
+        "preciseIdentifier" : "s:14AuthFoundation5ClaimO",
+        "text" : "Claim"
+      },
+      {
+        "kind" : "text",
+        "text" : "]"
+      }
+    ],
+    "modules" : [
+      {
+        "name" : "AuthFoundation"
+      }
+    ],
+    "role" : "symbol",
+    "roleHeading" : "Instance Property",
+    "symbolKind" : "property",
+    "title" : "claims"
+  },
+  "primaryContentSections" : [
+    {
+      "declarations" : [
+        {
+          "languages" : [
+            "swift"
+          ],
+          "platforms" : [
+            "macOS"
+          ],
+          "tokens" : [
+            {
+              "kind" : "keyword",
+              "text" : "var"
+            },
+            {
+              "kind" : "text",
+              "text" : " "
+            },
+            {
+              "kind" : "identifier",
+              "text" : "claims"
+            },
+            {
+              "kind" : "text",
+              "text" : ": ["
+            },
+            {
+              "identifier" : "doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/AuthFoundation\/Claim",
+              "kind" : "typeIdentifier",
+              "preciseIdentifier" : "s:14AuthFoundation5ClaimO",
+              "text" : "Claim"
+            },
+            {
+              "kind" : "text",
+              "text" : "] { "
+            },
+            {
+              "kind" : "keyword",
+              "text" : "get"
+            },
+            {
+              "kind" : "text",
+              "text" : " }"
+            }
+          ]
+        }
+      ],
+      "kind" : "declarations"
+    }
+  ],
+  "schemaVersion" : {
+    "major" : 0,
+    "minor" : 2,
+    "patch" : 0
+  },
+  "sections" : [
+
+  ],
+  "variants" : [
+    {
+      "paths" : [
+        "\/documentation\/authfoundation\/userinfo\/claims"
+      ],
+      "traits" : [
+        {
+          "interfaceLanguage" : "swift"
+        }
+      ]
+    }
+  ]
+, 
+"references": {
+"doc://com.okta.mobile.webauthenticationui/documentation/AuthFoundation": {
+  "abstract" : [
+
+  ],
+  "identifier" : "doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/AuthFoundation",
+  "kind" : "symbol",
+  "role" : "collection",
+  "title" : "AuthFoundation",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation"
+},
+"doc://com.okta.mobile.webauthenticationui/documentation/AuthFoundation/Claim": {
+  "abstract" : [
+    {
+      "text" : "List of registered and public claims.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "enum"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "Claim"
+    }
+  ],
+  "identifier" : "doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/AuthFoundation\/Claim",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "Claim"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "Claim",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/claim"
+},
+"doc://com.okta.mobile.webauthenticationui/documentation/AuthFoundation/UserInfo": {
+  "abstract" : [
+    {
+      "text" : "User profile information.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "struct"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "UserInfo"
+    }
+  ],
+  "identifier" : "doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/AuthFoundation\/UserInfo",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "UserInfo"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "UserInfo",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/userinfo"
+},
+"doc://com.okta.mobile.webauthenticationui/documentation/AuthFoundation/UserInfo/ClaimContainer-Implementations": {
+  "abstract" : [
+
+  ],
+  "identifier" : "doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/AuthFoundation\/UserInfo\/ClaimContainer-Implementations",
+  "kind" : "article",
+  "role" : "collectionGroup",
+  "title" : "ClaimContainer Implementations",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/userinfo\/claimcontainer-implementations"
+},
+"doc://com.okta.mobile.webauthenticationui/documentation/AuthFoundation/UserInfo/claims": {
+  "abstract" : [
+    {
+      "text" : "Returns the list of all claims contained within this ",
+      "type" : "text"
+    },
+    {
+      "identifier" : "doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/AuthFoundation\/UserInfo",
+      "isActive" : true,
+      "type" : "reference"
+    },
+    {
+      "text" : ".",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "var"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "claims"
+    },
+    {
+      "kind" : "text",
+      "text" : ": ["
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:14AuthFoundation5ClaimO",
+      "text" : "Claim"
+    },
+    {
+      "kind" : "text",
+      "text" : "]"
+    }
+  ],
+  "identifier" : "doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/AuthFoundation\/UserInfo\/claims",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "claims",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/userinfo\/claims"
+}
+}
+}

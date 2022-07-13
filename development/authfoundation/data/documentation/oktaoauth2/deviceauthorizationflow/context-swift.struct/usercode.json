@@ -1,1 +1,234 @@
-{"primaryContentSections":[{"kind":"declarations","declarations":[{"tokens":[{"kind":"keyword","text":"let"},{"kind":"text","text":" "},{"kind":"identifier","text":"userCode"},{"kind":"text","text":": "},{"kind":"typeIdentifier","text":"String","preciseIdentifier":"s:SS"}],"languages":["swift"],"platforms":["macOS"]}]}],"schemaVersion":{"major":0,"minor":2,"patch":0},"sections":[],"variants":[{"paths":["\/documentation\/oktaoauth2\/deviceauthorizationflow\/context-swift.struct\/usercode"],"traits":[{"interfaceLanguage":"swift"}]}],"identifier":{"url":"doc:\/\/com.okta.mobile.authfoundation\/documentation\/OktaOAuth2\/DeviceAuthorizationFlow\/Context-swift.struct\/userCode","interfaceLanguage":"swift"},"abstract":[{"type":"text","text":"The code that should be displayed to the user."}],"kind":"symbol","metadata":{"fragments":[{"kind":"keyword","text":"let"},{"kind":"text","text":" "},{"kind":"identifier","text":"userCode"},{"kind":"text","text":": "},{"kind":"typeIdentifier","text":"String","preciseIdentifier":"s:SS"}],"title":"userCode","roleHeading":"Instance Property","role":"symbol","symbolKind":"property","externalID":"s:10OktaOAuth223DeviceAuthorizationFlowC7ContextV8userCodeSSvp","modules":[{"name":"OktaOAuth2"}]},"hierarchy":{"paths":[["doc:\/\/com.okta.mobile.authfoundation\/documentation\/OktaOAuth2","doc:\/\/com.okta.mobile.authfoundation\/documentation\/OktaOAuth2\/DeviceAuthorizationFlow","doc:\/\/com.okta.mobile.authfoundation\/documentation\/OktaOAuth2\/DeviceAuthorizationFlow\/Context-swift.struct"]]},"references":{"doc://com.okta.mobile.authfoundation/documentation/OktaOAuth2":{"role":"collection","title":"OktaOAuth2","abstract":[],"identifier":"doc:\/\/com.okta.mobile.authfoundation\/documentation\/OktaOAuth2","kind":"symbol","type":"topic","url":"\/documentation\/oktaoauth2"},"doc://com.okta.mobile.authfoundation/documentation/OktaOAuth2/DeviceAuthorizationFlow":{"role":"symbol","title":"DeviceAuthorizationFlow","fragments":[{"kind":"keyword","text":"class"},{"kind":"text","text":" "},{"kind":"identifier","text":"DeviceAuthorizationFlow"}],"abstract":[{"type":"text","text":"An authentication flow class that implements the Device Authorization Grant flow exchange."}],"identifier":"doc:\/\/com.okta.mobile.authfoundation\/documentation\/OktaOAuth2\/DeviceAuthorizationFlow","kind":"symbol","type":"topic","navigatorTitle":[{"kind":"identifier","text":"DeviceAuthorizationFlow"}],"url":"\/documentation\/oktaoauth2\/deviceauthorizationflow"},"doc://com.okta.mobile.authfoundation/documentation/OktaOAuth2/DeviceAuthorizationFlow/Context-swift.struct":{"role":"symbol","title":"DeviceAuthorizationFlow.Context","fragments":[{"kind":"keyword","text":"struct"},{"kind":"text","text":" "},{"kind":"identifier","text":"Context"}],"abstract":[{"type":"text","text":"A model representing the context and current state for an authorization session."}],"identifier":"doc:\/\/com.okta.mobile.authfoundation\/documentation\/OktaOAuth2\/DeviceAuthorizationFlow\/Context-swift.struct","kind":"symbol","type":"topic","navigatorTitle":[{"kind":"identifier","text":"Context"}],"url":"\/documentation\/oktaoauth2\/deviceauthorizationflow\/context-swift.struct"},"doc://com.okta.mobile.authfoundation/documentation/OktaOAuth2/DeviceAuthorizationFlow/Context-swift.struct/userCode":{"role":"symbol","title":"userCode","fragments":[{"kind":"keyword","text":"let"},{"kind":"text","text":" "},{"kind":"identifier","text":"userCode"},{"kind":"text","text":": "},{"kind":"typeIdentifier","text":"String","preciseIdentifier":"s:SS"}],"abstract":[{"type":"text","text":"The code that should be displayed to the user."}],"identifier":"doc:\/\/com.okta.mobile.authfoundation\/documentation\/OktaOAuth2\/DeviceAuthorizationFlow\/Context-swift.struct\/userCode","kind":"symbol","type":"topic","url":"\/documentation\/oktaoauth2\/deviceauthorizationflow\/context-swift.struct\/usercode"}}}
+{
+  "abstract" : [
+    {
+      "text" : "The code that should be displayed to the user.",
+      "type" : "text"
+    }
+  ],
+  "hierarchy" : {
+    "paths" : [
+      [
+        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/OktaOAuth2",
+        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/OktaOAuth2\/DeviceAuthorizationFlow",
+        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/OktaOAuth2\/DeviceAuthorizationFlow\/Context-swift.struct"
+      ]
+    ]
+  },
+  "identifier" : {
+    "interfaceLanguage" : "swift",
+    "url" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/OktaOAuth2\/DeviceAuthorizationFlow\/Context-swift.struct\/userCode"
+  },
+  "kind" : "symbol",
+  "metadata" : {
+    "externalID" : "s:10OktaOAuth223DeviceAuthorizationFlowC7ContextV8userCodeSSvp",
+    "fragments" : [
+      {
+        "kind" : "keyword",
+        "text" : "let"
+      },
+      {
+        "kind" : "text",
+        "text" : " "
+      },
+      {
+        "kind" : "identifier",
+        "text" : "userCode"
+      },
+      {
+        "kind" : "text",
+        "text" : ": "
+      },
+      {
+        "kind" : "typeIdentifier",
+        "preciseIdentifier" : "s:SS",
+        "text" : "String"
+      }
+    ],
+    "modules" : [
+      {
+        "name" : "OktaOAuth2"
+      }
+    ],
+    "role" : "symbol",
+    "roleHeading" : "Instance Property",
+    "symbolKind" : "property",
+    "title" : "userCode"
+  },
+  "primaryContentSections" : [
+    {
+      "declarations" : [
+        {
+          "languages" : [
+            "swift"
+          ],
+          "platforms" : [
+            "macOS"
+          ],
+          "tokens" : [
+            {
+              "kind" : "keyword",
+              "text" : "let"
+            },
+            {
+              "kind" : "text",
+              "text" : " "
+            },
+            {
+              "kind" : "identifier",
+              "text" : "userCode"
+            },
+            {
+              "kind" : "text",
+              "text" : ": "
+            },
+            {
+              "kind" : "typeIdentifier",
+              "preciseIdentifier" : "s:SS",
+              "text" : "String"
+            }
+          ]
+        }
+      ],
+      "kind" : "declarations"
+    }
+  ],
+  "schemaVersion" : {
+    "major" : 0,
+    "minor" : 2,
+    "patch" : 0
+  },
+  "sections" : [
+
+  ],
+  "variants" : [
+    {
+      "paths" : [
+        "\/documentation\/oktaoauth2\/deviceauthorizationflow\/context-swift.struct\/usercode"
+      ],
+      "traits" : [
+        {
+          "interfaceLanguage" : "swift"
+        }
+      ]
+    }
+  ]
+, 
+"references": {
+"doc://com.okta.mobile.authfoundation/documentation/OktaOAuth2": {
+  "abstract" : [
+
+  ],
+  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/OktaOAuth2",
+  "kind" : "symbol",
+  "role" : "collection",
+  "title" : "OktaOAuth2",
+  "type" : "topic",
+  "url" : "\/documentation\/oktaoauth2"
+},
+"doc://com.okta.mobile.authfoundation/documentation/OktaOAuth2/DeviceAuthorizationFlow": {
+  "abstract" : [
+    {
+      "text" : "An authentication flow class that implements the Device Authorization Grant flow exchange.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "class"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "DeviceAuthorizationFlow"
+    }
+  ],
+  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/OktaOAuth2\/DeviceAuthorizationFlow",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "DeviceAuthorizationFlow"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "DeviceAuthorizationFlow",
+  "type" : "topic",
+  "url" : "\/documentation\/oktaoauth2\/deviceauthorizationflow"
+},
+"doc://com.okta.mobile.authfoundation/documentation/OktaOAuth2/DeviceAuthorizationFlow/Context-swift.struct": {
+  "abstract" : [
+    {
+      "text" : "A model representing the context and current state for an authorization session.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "struct"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "Context"
+    }
+  ],
+  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/OktaOAuth2\/DeviceAuthorizationFlow\/Context-swift.struct",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "Context"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "DeviceAuthorizationFlow.Context",
+  "type" : "topic",
+  "url" : "\/documentation\/oktaoauth2\/deviceauthorizationflow\/context-swift.struct"
+},
+"doc://com.okta.mobile.authfoundation/documentation/OktaOAuth2/DeviceAuthorizationFlow/Context-swift.struct/userCode": {
+  "abstract" : [
+    {
+      "text" : "The code that should be displayed to the user.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "let"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "userCode"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:SS",
+      "text" : "String"
+    }
+  ],
+  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/OktaOAuth2\/DeviceAuthorizationFlow\/Context-swift.struct\/userCode",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "userCode",
+  "type" : "topic",
+  "url" : "\/documentation\/oktaoauth2\/deviceauthorizationflow\/context-swift.struct\/usercode"
+}
+}
+}

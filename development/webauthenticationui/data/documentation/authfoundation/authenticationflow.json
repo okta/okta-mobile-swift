@@ -1,1 +1,487 @@
-{"primaryContentSections":[{"kind":"declarations","declarations":[{"tokens":[{"kind":"keyword","text":"protocol"},{"kind":"text","text":" "},{"kind":"identifier","text":"AuthenticationFlow"},{"kind":"text","text":" : AnyObject, "},{"kind":"typeIdentifier","identifier":"doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/AuthFoundation\/UsesDelegateCollection","preciseIdentifier":"s:14AuthFoundation22UsesDelegateCollectionP","text":"UsesDelegateCollection"}],"languages":["swift"],"platforms":["macOS"]}]},{"kind":"content","content":[{"anchor":"overview","level":2,"type":"heading","text":"Overview"},{"type":"paragraph","inlineContent":[{"type":"text","text":"OAuth2 supports a variety of authentication flows, each with its own capabilities, configuration, and limitations. To normalize these differences, the AuthenticationFlow protocol is used to represent the common capabilities provided by all flows."}]}]}],"schemaVersion":{"major":0,"minor":2,"patch":0},"sections":[],"variants":[{"paths":["\/documentation\/authfoundation\/authenticationflow"],"traits":[{"interfaceLanguage":"swift"}]}],"relationshipsSections":[{"identifiers":["doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/AuthFoundation\/UsesDelegateCollection"],"kind":"relationships","title":"Inherits From","type":"inheritsFrom"},{"identifiers":["doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/OktaOAuth2\/AuthorizationCodeFlow","doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/OktaOAuth2\/DeviceAuthorizationFlow","doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/OktaOAuth2\/ResourceOwnerFlow","doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/OktaOAuth2\/SessionTokenFlow","doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/OktaOAuth2\/TokenExchangeFlow"],"kind":"relationships","title":"Conforming Types","type":"conformingTypes"}],"identifier":{"url":"doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/AuthFoundation\/AuthenticationFlow","interfaceLanguage":"swift"},"abstract":[{"type":"text","text":"A protocol defining a type of authentication flow."}],"kind":"symbol","metadata":{"fragments":[{"kind":"keyword","text":"protocol"},{"kind":"text","text":" "},{"kind":"identifier","text":"AuthenticationFlow"}],"title":"AuthenticationFlow","roleHeading":"Protocol","role":"symbol","symbolKind":"protocol","externalID":"s:14AuthFoundation18AuthenticationFlowP","modules":[{"name":"AuthFoundation"}],"navigatorTitle":[{"kind":"identifier","text":"AuthenticationFlow"}]},"hierarchy":{"paths":[["doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/AuthFoundation"]]},"topicSections":[{"title":"Instance Properties","identifiers":["doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/AuthFoundation\/AuthenticationFlow\/isAuthenticating"]},{"title":"Instance Methods","identifiers":["doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/AuthFoundation\/AuthenticationFlow\/reset()"]}],"references":{"doc://com.okta.mobile.webauthenticationui/documentation/OktaOAuth2/DeviceAuthorizationFlow":{"role":"symbol","title":"DeviceAuthorizationFlow","fragments":[{"kind":"keyword","text":"class"},{"kind":"text","text":" "},{"kind":"identifier","text":"DeviceAuthorizationFlow"}],"abstract":[{"type":"text","text":"An authentication flow class that implements the Device Authorization Grant flow exchange."}],"identifier":"doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/OktaOAuth2\/DeviceAuthorizationFlow","kind":"symbol","type":"topic","navigatorTitle":[{"kind":"identifier","text":"DeviceAuthorizationFlow"}],"url":"\/documentation\/oktaoauth2\/deviceauthorizationflow"},"doc://com.okta.mobile.webauthenticationui/documentation/OktaOAuth2/SessionTokenFlow":{"role":"symbol","title":"SessionTokenFlow","fragments":[{"kind":"keyword","text":"class"},{"kind":"text","text":" "},{"kind":"identifier","text":"SessionTokenFlow"}],"abstract":[{"type":"text","text":"An authentication flow class that exchanges a Session Token for access tokens."}],"identifier":"doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/OktaOAuth2\/SessionTokenFlow","kind":"symbol","type":"topic","navigatorTitle":[{"kind":"identifier","text":"SessionTokenFlow"}],"url":"\/documentation\/oktaoauth2\/sessiontokenflow"},"doc://com.okta.mobile.webauthenticationui/documentation/AuthFoundation/AuthenticationFlow/reset()":{"role":"symbol","title":"reset()","fragments":[{"kind":"keyword","text":"func"},{"kind":"text","text":" "},{"kind":"identifier","text":"reset"},{"kind":"text","text":"()"}],"abstract":[{"type":"text","text":"Resets the authentication session."}],"identifier":"doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/AuthFoundation\/AuthenticationFlow\/reset()","kind":"symbol","required":true,"type":"topic","url":"\/documentation\/authfoundation\/authenticationflow\/reset()"},"doc://com.okta.mobile.webauthenticationui/documentation/AuthFoundation/AuthenticationFlow/isAuthenticating":{"role":"symbol","title":"isAuthenticating","fragments":[{"kind":"keyword","text":"var"},{"kind":"text","text":" "},{"kind":"identifier","text":"isAuthenticating"},{"kind":"text","text":": "},{"kind":"typeIdentifier","text":"Bool","preciseIdentifier":"s:Sb"}],"abstract":[{"type":"text","text":"Indicates if this flow is currently authenticating."}],"identifier":"doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/AuthFoundation\/AuthenticationFlow\/isAuthenticating","kind":"symbol","required":true,"type":"topic","url":"\/documentation\/authfoundation\/authenticationflow\/isauthenticating"},"doc://com.okta.mobile.webauthenticationui/documentation/AuthFoundation":{"role":"collection","title":"AuthFoundation","abstract":[],"identifier":"doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/AuthFoundation","kind":"symbol","type":"topic","url":"\/documentation\/authfoundation"},"doc://com.okta.mobile.webauthenticationui/documentation/OktaOAuth2/TokenExchangeFlow":{"role":"symbol","title":"TokenExchangeFlow","fragments":[{"kind":"keyword","text":"class"},{"kind":"text","text":" "},{"kind":"identifier","text":"TokenExchangeFlow"}],"abstract":[{"type":"text","text":"An authentication flow class that implements the Token Exchange Flow."}],"identifier":"doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/OktaOAuth2\/TokenExchangeFlow","kind":"symbol","type":"topic","navigatorTitle":[{"kind":"identifier","text":"TokenExchangeFlow"}],"url":"\/documentation\/oktaoauth2\/tokenexchangeflow"},"doc://com.okta.mobile.webauthenticationui/documentation/OktaOAuth2/ResourceOwnerFlow":{"role":"symbol","title":"ResourceOwnerFlow","fragments":[{"kind":"keyword","text":"class"},{"kind":"text","text":" "},{"kind":"identifier","text":"ResourceOwnerFlow"}],"abstract":[{"type":"text","text":"An authentication flow class that implements the Resource Owner Flow exchange."}],"identifier":"doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/OktaOAuth2\/ResourceOwnerFlow","kind":"symbol","type":"topic","navigatorTitle":[{"kind":"identifier","text":"ResourceOwnerFlow"}],"url":"\/documentation\/oktaoauth2\/resourceownerflow"},"doc://com.okta.mobile.webauthenticationui/documentation/AuthFoundation/AuthenticationFlow":{"role":"symbol","title":"AuthenticationFlow","fragments":[{"kind":"keyword","text":"protocol"},{"kind":"text","text":" "},{"kind":"identifier","text":"AuthenticationFlow"}],"abstract":[{"type":"text","text":"A protocol defining a type of authentication flow."}],"identifier":"doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/AuthFoundation\/AuthenticationFlow","kind":"symbol","type":"topic","navigatorTitle":[{"kind":"identifier","text":"AuthenticationFlow"}],"url":"\/documentation\/authfoundation\/authenticationflow"},"doc://com.okta.mobile.webauthenticationui/documentation/OktaOAuth2/AuthorizationCodeFlow":{"role":"symbol","title":"AuthorizationCodeFlow","fragments":[{"kind":"keyword","text":"class"},{"kind":"text","text":" "},{"kind":"identifier","text":"AuthorizationCodeFlow"}],"abstract":[{"type":"text","text":"An authentication flow class that implements the Authorization Code Flow exchange."}],"identifier":"doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/OktaOAuth2\/AuthorizationCodeFlow","kind":"symbol","type":"topic","navigatorTitle":[{"kind":"identifier","text":"AuthorizationCodeFlow"}],"url":"\/documentation\/oktaoauth2\/authorizationcodeflow"},"doc://com.okta.mobile.webauthenticationui/documentation/AuthFoundation/UsesDelegateCollection":{"role":"symbol","title":"UsesDelegateCollection","fragments":[{"kind":"keyword","text":"protocol"},{"kind":"text","text":" "},{"kind":"identifier","text":"UsesDelegateCollection"}],"abstract":[],"identifier":"doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/AuthFoundation\/UsesDelegateCollection","kind":"symbol","type":"topic","navigatorTitle":[{"kind":"identifier","text":"UsesDelegateCollection"}],"url":"\/documentation\/authfoundation\/usesdelegatecollection"}}}
+{
+  "abstract" : [
+    {
+      "text" : "A protocol defining a type of authentication flow.",
+      "type" : "text"
+    }
+  ],
+  "hierarchy" : {
+    "paths" : [
+      [
+        "doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/AuthFoundation"
+      ]
+    ]
+  },
+  "identifier" : {
+    "interfaceLanguage" : "swift",
+    "url" : "doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/AuthFoundation\/AuthenticationFlow"
+  },
+  "kind" : "symbol",
+  "metadata" : {
+    "externalID" : "s:14AuthFoundation18AuthenticationFlowP",
+    "fragments" : [
+      {
+        "kind" : "keyword",
+        "text" : "protocol"
+      },
+      {
+        "kind" : "text",
+        "text" : " "
+      },
+      {
+        "kind" : "identifier",
+        "text" : "AuthenticationFlow"
+      }
+    ],
+    "modules" : [
+      {
+        "name" : "AuthFoundation"
+      }
+    ],
+    "navigatorTitle" : [
+      {
+        "kind" : "identifier",
+        "text" : "AuthenticationFlow"
+      }
+    ],
+    "role" : "symbol",
+    "roleHeading" : "Protocol",
+    "symbolKind" : "protocol",
+    "title" : "AuthenticationFlow"
+  },
+  "primaryContentSections" : [
+    {
+      "declarations" : [
+        {
+          "languages" : [
+            "swift"
+          ],
+          "platforms" : [
+            "macOS"
+          ],
+          "tokens" : [
+            {
+              "kind" : "keyword",
+              "text" : "protocol"
+            },
+            {
+              "kind" : "text",
+              "text" : " "
+            },
+            {
+              "kind" : "identifier",
+              "text" : "AuthenticationFlow"
+            },
+            {
+              "kind" : "text",
+              "text" : " : AnyObject, "
+            },
+            {
+              "identifier" : "doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/AuthFoundation\/UsesDelegateCollection",
+              "kind" : "typeIdentifier",
+              "preciseIdentifier" : "s:14AuthFoundation22UsesDelegateCollectionP",
+              "text" : "UsesDelegateCollection"
+            }
+          ]
+        }
+      ],
+      "kind" : "declarations"
+    },
+    {
+      "content" : [
+        {
+          "anchor" : "overview",
+          "level" : 2,
+          "text" : "Overview",
+          "type" : "heading"
+        },
+        {
+          "inlineContent" : [
+            {
+              "text" : "OAuth2 supports a variety of authentication flows, each with its own capabilities, configuration, and limitations. To normalize these differences, the AuthenticationFlow protocol is used to represent the common capabilities provided by all flows.",
+              "type" : "text"
+            }
+          ],
+          "type" : "paragraph"
+        }
+      ],
+      "kind" : "content"
+    }
+  ],
+  "relationshipsSections" : [
+    {
+      "identifiers" : [
+        "doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/AuthFoundation\/UsesDelegateCollection"
+      ],
+      "kind" : "relationships",
+      "title" : "Inherits From",
+      "type" : "inheritsFrom"
+    },
+    {
+      "identifiers" : [
+        "doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/OktaOAuth2\/AuthorizationCodeFlow",
+        "doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/OktaOAuth2\/DeviceAuthorizationFlow",
+        "doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/OktaOAuth2\/ResourceOwnerFlow",
+        "doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/OktaOAuth2\/SessionTokenFlow",
+        "doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/OktaOAuth2\/TokenExchangeFlow"
+      ],
+      "kind" : "relationships",
+      "title" : "Conforming Types",
+      "type" : "conformingTypes"
+    }
+  ],
+  "schemaVersion" : {
+    "major" : 0,
+    "minor" : 2,
+    "patch" : 0
+  },
+  "sections" : [
+
+  ],
+  "topicSections" : [
+    {
+      "identifiers" : [
+        "doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/AuthFoundation\/AuthenticationFlow\/isAuthenticating"
+      ],
+      "title" : "Instance Properties"
+    },
+    {
+      "identifiers" : [
+        "doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/AuthFoundation\/AuthenticationFlow\/reset()"
+      ],
+      "title" : "Instance Methods"
+    }
+  ],
+  "variants" : [
+    {
+      "paths" : [
+        "\/documentation\/authfoundation\/authenticationflow"
+      ],
+      "traits" : [
+        {
+          "interfaceLanguage" : "swift"
+        }
+      ]
+    }
+  ]
+, 
+"references": {
+"doc://com.okta.mobile.webauthenticationui/documentation/AuthFoundation": {
+  "abstract" : [
+
+  ],
+  "identifier" : "doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/AuthFoundation",
+  "kind" : "symbol",
+  "role" : "collection",
+  "title" : "AuthFoundation",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation"
+},
+"doc://com.okta.mobile.webauthenticationui/documentation/AuthFoundation/AuthenticationFlow": {
+  "abstract" : [
+    {
+      "text" : "A protocol defining a type of authentication flow.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "protocol"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "AuthenticationFlow"
+    }
+  ],
+  "identifier" : "doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/AuthFoundation\/AuthenticationFlow",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "AuthenticationFlow"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "AuthenticationFlow",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/authenticationflow"
+},
+"doc://com.okta.mobile.webauthenticationui/documentation/AuthFoundation/AuthenticationFlow/isAuthenticating": {
+  "abstract" : [
+    {
+      "text" : "Indicates if this flow is currently authenticating.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "var"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "isAuthenticating"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:Sb",
+      "text" : "Bool"
+    }
+  ],
+  "identifier" : "doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/AuthFoundation\/AuthenticationFlow\/isAuthenticating",
+  "kind" : "symbol",
+  "required" : true,
+  "role" : "symbol",
+  "title" : "isAuthenticating",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/authenticationflow\/isauthenticating"
+},
+"doc://com.okta.mobile.webauthenticationui/documentation/AuthFoundation/AuthenticationFlow/reset()": {
+  "abstract" : [
+    {
+      "text" : "Resets the authentication session.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "func"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "reset"
+    },
+    {
+      "kind" : "text",
+      "text" : "()"
+    }
+  ],
+  "identifier" : "doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/AuthFoundation\/AuthenticationFlow\/reset()",
+  "kind" : "symbol",
+  "required" : true,
+  "role" : "symbol",
+  "title" : "reset()",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/authenticationflow\/reset()"
+},
+"doc://com.okta.mobile.webauthenticationui/documentation/AuthFoundation/UsesDelegateCollection": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "protocol"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "UsesDelegateCollection"
+    }
+  ],
+  "identifier" : "doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/AuthFoundation\/UsesDelegateCollection",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "UsesDelegateCollection"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "UsesDelegateCollection",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/usesdelegatecollection"
+},
+"doc://com.okta.mobile.webauthenticationui/documentation/OktaOAuth2/AuthorizationCodeFlow": {
+  "abstract" : [
+    {
+      "text" : "An authentication flow class that implements the Authorization Code Flow exchange.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "class"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "AuthorizationCodeFlow"
+    }
+  ],
+  "identifier" : "doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/OktaOAuth2\/AuthorizationCodeFlow",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "AuthorizationCodeFlow"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "AuthorizationCodeFlow",
+  "type" : "topic",
+  "url" : "\/documentation\/oktaoauth2\/authorizationcodeflow"
+},
+"doc://com.okta.mobile.webauthenticationui/documentation/OktaOAuth2/DeviceAuthorizationFlow": {
+  "abstract" : [
+    {
+      "text" : "An authentication flow class that implements the Device Authorization Grant flow exchange.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "class"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "DeviceAuthorizationFlow"
+    }
+  ],
+  "identifier" : "doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/OktaOAuth2\/DeviceAuthorizationFlow",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "DeviceAuthorizationFlow"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "DeviceAuthorizationFlow",
+  "type" : "topic",
+  "url" : "\/documentation\/oktaoauth2\/deviceauthorizationflow"
+},
+"doc://com.okta.mobile.webauthenticationui/documentation/OktaOAuth2/ResourceOwnerFlow": {
+  "abstract" : [
+    {
+      "text" : "An authentication flow class that implements the Resource Owner Flow exchange.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "class"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "ResourceOwnerFlow"
+    }
+  ],
+  "identifier" : "doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/OktaOAuth2\/ResourceOwnerFlow",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "ResourceOwnerFlow"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "ResourceOwnerFlow",
+  "type" : "topic",
+  "url" : "\/documentation\/oktaoauth2\/resourceownerflow"
+},
+"doc://com.okta.mobile.webauthenticationui/documentation/OktaOAuth2/SessionTokenFlow": {
+  "abstract" : [
+    {
+      "text" : "An authentication flow class that exchanges a Session Token for access tokens.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "class"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "SessionTokenFlow"
+    }
+  ],
+  "identifier" : "doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/OktaOAuth2\/SessionTokenFlow",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "SessionTokenFlow"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "SessionTokenFlow",
+  "type" : "topic",
+  "url" : "\/documentation\/oktaoauth2\/sessiontokenflow"
+},
+"doc://com.okta.mobile.webauthenticationui/documentation/OktaOAuth2/TokenExchangeFlow": {
+  "abstract" : [
+    {
+      "text" : "An authentication flow class that implements the Token Exchange Flow.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "class"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "TokenExchangeFlow"
+    }
+  ],
+  "identifier" : "doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/OktaOAuth2\/TokenExchangeFlow",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "TokenExchangeFlow"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "TokenExchangeFlow",
+  "type" : "topic",
+  "url" : "\/documentation\/oktaoauth2\/tokenexchangeflow"
+}
+}
+}

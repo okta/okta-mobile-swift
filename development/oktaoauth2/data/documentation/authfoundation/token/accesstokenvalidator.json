@@ -1,1 +1,274 @@
-{"primaryContentSections":[{"kind":"declarations","declarations":[{"tokens":[{"kind":"keyword","text":"static"},{"kind":"text","text":" "},{"kind":"keyword","text":"var"},{"kind":"text","text":" "},{"kind":"identifier","text":"accessTokenValidator"},{"kind":"text","text":": "},{"kind":"typeIdentifier","identifier":"doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/AuthFoundation\/TokenHashValidator","preciseIdentifier":"s:14AuthFoundation18TokenHashValidatorP","text":"TokenHashValidator"}],"languages":["swift"],"platforms":["macOS"]}]}],"schemaVersion":{"major":0,"minor":2,"patch":0},"sections":[],"variants":[{"paths":["\/documentation\/authfoundation\/token\/accesstokenvalidator"],"traits":[{"interfaceLanguage":"swift"}]}],"identifier":{"url":"doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/AuthFoundation\/Token\/accessTokenValidator","interfaceLanguage":"swift"},"abstract":[{"type":"text","text":"The object used to ensure access tokens can be validated against its associated ID token."}],"kind":"symbol","metadata":{"fragments":[{"kind":"keyword","text":"static"},{"kind":"text","text":" "},{"kind":"keyword","text":"var"},{"kind":"text","text":" "},{"kind":"identifier","text":"accessTokenValidator"},{"kind":"text","text":": "},{"kind":"typeIdentifier","text":"TokenHashValidator","preciseIdentifier":"s:14AuthFoundation18TokenHashValidatorP"}],"title":"accessTokenValidator","roleHeading":"Type Property","role":"symbol","symbolKind":"property","externalID":"s:14AuthFoundation5TokenC06accessC9ValidatorAA0c4HashE0_pvpZ","modules":[{"name":"AuthFoundation"}]},"hierarchy":{"paths":[["doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/AuthFoundation","doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/AuthFoundation\/Token"]]},"references":{"doc://com.okta.mobile.oktaoauth2/documentation/AuthFoundation":{"role":"collection","title":"AuthFoundation","abstract":[],"identifier":"doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/AuthFoundation","kind":"symbol","type":"topic","url":"\/documentation\/authfoundation"},"doc://com.okta.mobile.oktaoauth2/documentation/AuthFoundation/Token":{"role":"symbol","title":"Token","fragments":[{"kind":"keyword","text":"class"},{"kind":"text","text":" "},{"kind":"identifier","text":"Token"}],"abstract":[{"type":"text","text":"Token information representing a user’s access to a resource server, including access token, refresh token, and other related information."}],"identifier":"doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/AuthFoundation\/Token","kind":"symbol","type":"topic","navigatorTitle":[{"kind":"identifier","text":"Token"}],"url":"\/documentation\/authfoundation\/token"},"doc://com.okta.mobile.oktaoauth2/documentation/AuthFoundation/TokenHashValidator":{"role":"symbol","title":"TokenHashValidator","fragments":[{"kind":"keyword","text":"protocol"},{"kind":"text","text":" "},{"kind":"identifier","text":"TokenHashValidator"}],"abstract":[{"type":"text","text":"Protocol used to implement token validation using either the "},{"type":"codeVoice","code":"at_hash"},{"type":"text","text":" or "},{"type":"codeVoice","code":"ds_hash"},{"type":"text","text":" properties from an ID token."}],"identifier":"doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/AuthFoundation\/TokenHashValidator","kind":"symbol","type":"topic","navigatorTitle":[{"kind":"identifier","text":"TokenHashValidator"}],"url":"\/documentation\/authfoundation\/tokenhashvalidator"},"doc://com.okta.mobile.oktaoauth2/documentation/AuthFoundation/Token/accessTokenValidator":{"role":"symbol","title":"accessTokenValidator","fragments":[{"kind":"keyword","text":"static"},{"kind":"text","text":" "},{"kind":"keyword","text":"var"},{"kind":"text","text":" "},{"kind":"identifier","text":"accessTokenValidator"},{"kind":"text","text":": "},{"kind":"typeIdentifier","text":"TokenHashValidator","preciseIdentifier":"s:14AuthFoundation18TokenHashValidatorP"}],"abstract":[{"type":"text","text":"The object used to ensure access tokens can be validated against its associated ID token."}],"identifier":"doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/AuthFoundation\/Token\/accessTokenValidator","kind":"symbol","type":"topic","url":"\/documentation\/authfoundation\/token\/accesstokenvalidator"}}}
+{
+  "abstract" : [
+    {
+      "text" : "The object used to ensure access tokens can be validated against its associated ID token.",
+      "type" : "text"
+    }
+  ],
+  "hierarchy" : {
+    "paths" : [
+      [
+        "doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/AuthFoundation",
+        "doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/AuthFoundation\/Token"
+      ]
+    ]
+  },
+  "identifier" : {
+    "interfaceLanguage" : "swift",
+    "url" : "doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/AuthFoundation\/Token\/accessTokenValidator"
+  },
+  "kind" : "symbol",
+  "metadata" : {
+    "externalID" : "s:14AuthFoundation5TokenC06accessC9ValidatorAA0c4HashE0_pvpZ",
+    "fragments" : [
+      {
+        "kind" : "keyword",
+        "text" : "static"
+      },
+      {
+        "kind" : "text",
+        "text" : " "
+      },
+      {
+        "kind" : "keyword",
+        "text" : "var"
+      },
+      {
+        "kind" : "text",
+        "text" : " "
+      },
+      {
+        "kind" : "identifier",
+        "text" : "accessTokenValidator"
+      },
+      {
+        "kind" : "text",
+        "text" : ": "
+      },
+      {
+        "kind" : "typeIdentifier",
+        "preciseIdentifier" : "s:14AuthFoundation18TokenHashValidatorP",
+        "text" : "TokenHashValidator"
+      }
+    ],
+    "modules" : [
+      {
+        "name" : "AuthFoundation"
+      }
+    ],
+    "role" : "symbol",
+    "roleHeading" : "Type Property",
+    "symbolKind" : "property",
+    "title" : "accessTokenValidator"
+  },
+  "primaryContentSections" : [
+    {
+      "declarations" : [
+        {
+          "languages" : [
+            "swift"
+          ],
+          "platforms" : [
+            "macOS"
+          ],
+          "tokens" : [
+            {
+              "kind" : "keyword",
+              "text" : "static"
+            },
+            {
+              "kind" : "text",
+              "text" : " "
+            },
+            {
+              "kind" : "keyword",
+              "text" : "var"
+            },
+            {
+              "kind" : "text",
+              "text" : " "
+            },
+            {
+              "kind" : "identifier",
+              "text" : "accessTokenValidator"
+            },
+            {
+              "kind" : "text",
+              "text" : ": "
+            },
+            {
+              "identifier" : "doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/AuthFoundation\/TokenHashValidator",
+              "kind" : "typeIdentifier",
+              "preciseIdentifier" : "s:14AuthFoundation18TokenHashValidatorP",
+              "text" : "TokenHashValidator"
+            }
+          ]
+        }
+      ],
+      "kind" : "declarations"
+    }
+  ],
+  "schemaVersion" : {
+    "major" : 0,
+    "minor" : 2,
+    "patch" : 0
+  },
+  "sections" : [
+
+  ],
+  "variants" : [
+    {
+      "paths" : [
+        "\/documentation\/authfoundation\/token\/accesstokenvalidator"
+      ],
+      "traits" : [
+        {
+          "interfaceLanguage" : "swift"
+        }
+      ]
+    }
+  ]
+, 
+"references": {
+"doc://com.okta.mobile.oktaoauth2/documentation/AuthFoundation": {
+  "abstract" : [
+
+  ],
+  "identifier" : "doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/AuthFoundation",
+  "kind" : "symbol",
+  "role" : "collection",
+  "title" : "AuthFoundation",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation"
+},
+"doc://com.okta.mobile.oktaoauth2/documentation/AuthFoundation/Token": {
+  "abstract" : [
+    {
+      "text" : "Token information representing a user’s access to a resource server, including access token, refresh token, and other related information.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "class"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "Token"
+    }
+  ],
+  "identifier" : "doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/AuthFoundation\/Token",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "Token"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "Token",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/token"
+},
+"doc://com.okta.mobile.oktaoauth2/documentation/AuthFoundation/Token/accessTokenValidator": {
+  "abstract" : [
+    {
+      "text" : "The object used to ensure access tokens can be validated against its associated ID token.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "static"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "keyword",
+      "text" : "var"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "accessTokenValidator"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:14AuthFoundation18TokenHashValidatorP",
+      "text" : "TokenHashValidator"
+    }
+  ],
+  "identifier" : "doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/AuthFoundation\/Token\/accessTokenValidator",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "accessTokenValidator",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/token\/accesstokenvalidator"
+},
+"doc://com.okta.mobile.oktaoauth2/documentation/AuthFoundation/TokenHashValidator": {
+  "abstract" : [
+    {
+      "text" : "Protocol used to implement token validation using either the ",
+      "type" : "text"
+    },
+    {
+      "code" : "at_hash",
+      "type" : "codeVoice"
+    },
+    {
+      "text" : " or ",
+      "type" : "text"
+    },
+    {
+      "code" : "ds_hash",
+      "type" : "codeVoice"
+    },
+    {
+      "text" : " properties from an ID token.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "protocol"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "TokenHashValidator"
+    }
+  ],
+  "identifier" : "doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/AuthFoundation\/TokenHashValidator",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "TokenHashValidator"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "TokenHashValidator",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/tokenhashvalidator"
+}
+}
+}

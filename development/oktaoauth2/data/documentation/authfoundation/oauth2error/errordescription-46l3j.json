@@ -1,1 +1,232 @@
-{"primaryContentSections":[{"kind":"declarations","declarations":[{"tokens":[{"kind":"keyword","text":"var"},{"kind":"text","text":" "},{"kind":"identifier","text":"errorDescription"},{"kind":"text","text":": "},{"kind":"typeIdentifier","text":"String","preciseIdentifier":"s:SS"},{"kind":"text","text":"? { "},{"kind":"keyword","text":"get"},{"kind":"text","text":" }"}],"languages":["swift"],"platforms":["macOS"]}]}],"schemaVersion":{"major":0,"minor":2,"patch":0},"sections":[],"variants":[{"paths":["\/documentation\/authfoundation\/oauth2error\/errordescription-46l3j"],"traits":[{"interfaceLanguage":"swift"}]}],"identifier":{"url":"doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/AuthFoundation\/OAuth2Error\/errorDescription-46l3j","interfaceLanguage":"swift"},"abstract":[{"type":"text","text":"A localized message describing what error occurred."}],"kind":"symbol","metadata":{"role":"symbol","title":"errorDescription","roleHeading":"Instance Property","fragments":[{"kind":"keyword","text":"var"},{"kind":"text","text":" "},{"kind":"identifier","text":"errorDescription"},{"kind":"text","text":": "},{"kind":"typeIdentifier","text":"String","preciseIdentifier":"s:SS"},{"kind":"text","text":"?"}],"symbolKind":"property","externalID":"s:14AuthFoundation11OAuth2ErrorO16errorDescriptionSSSgvp","extendedModule":"AuthFoundation","modules":[{"name":"AuthFoundation"}]},"hierarchy":{"paths":[["doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/AuthFoundation","doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/AuthFoundation\/OAuth2Error","doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/AuthFoundation\/OAuth2Error\/LocalizedError-Implementations"]]},"references":{"doc://com.okta.mobile.oktaoauth2/documentation/AuthFoundation/OAuth2Error":{"role":"symbol","title":"OAuth2Error","fragments":[{"kind":"keyword","text":"enum"},{"kind":"text","text":" "},{"kind":"identifier","text":"OAuth2Error"}],"abstract":[{"type":"text","text":"Errors that may occur when interacting with OAuth2 endpoints."}],"identifier":"doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/AuthFoundation\/OAuth2Error","kind":"symbol","type":"topic","navigatorTitle":[{"kind":"identifier","text":"OAuth2Error"}],"url":"\/documentation\/authfoundation\/oauth2error"},"doc://com.okta.mobile.oktaoauth2/documentation/AuthFoundation":{"role":"collection","title":"AuthFoundation","abstract":[],"identifier":"doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/AuthFoundation","kind":"symbol","type":"topic","url":"\/documentation\/authfoundation"},"doc://com.okta.mobile.oktaoauth2/documentation/AuthFoundation/OAuth2Error/LocalizedError-Implementations":{"role":"collectionGroup","title":"LocalizedError Implementations","abstract":[],"identifier":"doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/AuthFoundation\/OAuth2Error\/LocalizedError-Implementations","kind":"article","type":"topic","url":"\/documentation\/authfoundation\/oauth2error\/localizederror-implementations"},"doc://com.okta.mobile.oktaoauth2/documentation/AuthFoundation/OAuth2Error/errorDescription-46l3j":{"role":"symbol","title":"errorDescription","fragments":[{"kind":"keyword","text":"var"},{"kind":"text","text":" "},{"kind":"identifier","text":"errorDescription"},{"kind":"text","text":": "},{"kind":"typeIdentifier","text":"String","preciseIdentifier":"s:SS"},{"kind":"text","text":"?"}],"abstract":[{"type":"text","text":"A localized message describing what error occurred."}],"identifier":"doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/AuthFoundation\/OAuth2Error\/errorDescription-46l3j","kind":"symbol","type":"topic","url":"\/documentation\/authfoundation\/oauth2error\/errordescription-46l3j"}}}
+{
+  "abstract" : [
+    {
+      "text" : "A localized message describing what error occurred.",
+      "type" : "text"
+    }
+  ],
+  "hierarchy" : {
+    "paths" : [
+      [
+        "doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/AuthFoundation",
+        "doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/AuthFoundation\/OAuth2Error",
+        "doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/AuthFoundation\/OAuth2Error\/LocalizedError-Implementations"
+      ]
+    ]
+  },
+  "identifier" : {
+    "interfaceLanguage" : "swift",
+    "url" : "doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/AuthFoundation\/OAuth2Error\/errorDescription-46l3j"
+  },
+  "kind" : "symbol",
+  "metadata" : {
+    "extendedModule" : "AuthFoundation",
+    "externalID" : "s:14AuthFoundation11OAuth2ErrorO16errorDescriptionSSSgvp",
+    "fragments" : [
+      {
+        "kind" : "keyword",
+        "text" : "var"
+      },
+      {
+        "kind" : "text",
+        "text" : " "
+      },
+      {
+        "kind" : "identifier",
+        "text" : "errorDescription"
+      },
+      {
+        "kind" : "text",
+        "text" : ": "
+      },
+      {
+        "kind" : "typeIdentifier",
+        "preciseIdentifier" : "s:SS",
+        "text" : "String"
+      },
+      {
+        "kind" : "text",
+        "text" : "?"
+      }
+    ],
+    "modules" : [
+      {
+        "name" : "AuthFoundation"
+      }
+    ],
+    "role" : "symbol",
+    "roleHeading" : "Instance Property",
+    "symbolKind" : "property",
+    "title" : "errorDescription"
+  },
+  "primaryContentSections" : [
+    {
+      "declarations" : [
+        {
+          "languages" : [
+            "swift"
+          ],
+          "platforms" : [
+            "macOS"
+          ],
+          "tokens" : [
+            {
+              "kind" : "keyword",
+              "text" : "var"
+            },
+            {
+              "kind" : "text",
+              "text" : " "
+            },
+            {
+              "kind" : "identifier",
+              "text" : "errorDescription"
+            },
+            {
+              "kind" : "text",
+              "text" : ": "
+            },
+            {
+              "kind" : "typeIdentifier",
+              "preciseIdentifier" : "s:SS",
+              "text" : "String"
+            },
+            {
+              "kind" : "text",
+              "text" : "? { "
+            },
+            {
+              "kind" : "keyword",
+              "text" : "get"
+            },
+            {
+              "kind" : "text",
+              "text" : " }"
+            }
+          ]
+        }
+      ],
+      "kind" : "declarations"
+    }
+  ],
+  "schemaVersion" : {
+    "major" : 0,
+    "minor" : 2,
+    "patch" : 0
+  },
+  "sections" : [
+
+  ],
+  "variants" : [
+    {
+      "paths" : [
+        "\/documentation\/authfoundation\/oauth2error\/errordescription-46l3j"
+      ],
+      "traits" : [
+        {
+          "interfaceLanguage" : "swift"
+        }
+      ]
+    }
+  ]
+, 
+"references": {
+"doc://com.okta.mobile.oktaoauth2/documentation/AuthFoundation": {
+  "abstract" : [
+
+  ],
+  "identifier" : "doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/AuthFoundation",
+  "kind" : "symbol",
+  "role" : "collection",
+  "title" : "AuthFoundation",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation"
+},
+"doc://com.okta.mobile.oktaoauth2/documentation/AuthFoundation/OAuth2Error": {
+  "abstract" : [
+    {
+      "text" : "Errors that may occur when interacting with OAuth2 endpoints.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "enum"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "OAuth2Error"
+    }
+  ],
+  "identifier" : "doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/AuthFoundation\/OAuth2Error",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "OAuth2Error"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "OAuth2Error",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/oauth2error"
+},
+"doc://com.okta.mobile.oktaoauth2/documentation/AuthFoundation/OAuth2Error/LocalizedError-Implementations": {
+  "abstract" : [
+
+  ],
+  "identifier" : "doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/AuthFoundation\/OAuth2Error\/LocalizedError-Implementations",
+  "kind" : "article",
+  "role" : "collectionGroup",
+  "title" : "LocalizedError Implementations",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/oauth2error\/localizederror-implementations"
+},
+"doc://com.okta.mobile.oktaoauth2/documentation/AuthFoundation/OAuth2Error/errorDescription-46l3j": {
+  "abstract" : [
+    {
+      "text" : "A localized message describing what error occurred.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "var"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "errorDescription"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:SS",
+      "text" : "String"
+    },
+    {
+      "kind" : "text",
+      "text" : "?"
+    }
+  ],
+  "identifier" : "doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/AuthFoundation\/OAuth2Error\/errorDescription-46l3j",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "errorDescription",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/oauth2error\/errordescription-46l3j"
+}
+}
+}

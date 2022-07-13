@@ -1,1 +1,263 @@
-{"primaryContentSections":[{"kind":"declarations","declarations":[{"tokens":[{"kind":"keyword","text":"enum"},{"kind":"text","text":" "},{"kind":"identifier","text":"AuthenticationError"}],"languages":["swift"],"platforms":["macOS"]}]}],"schemaVersion":{"major":0,"minor":2,"patch":0},"sections":[],"variants":[{"paths":["\/documentation\/authfoundation\/authenticationerror"],"traits":[{"interfaceLanguage":"swift"}]}],"relationshipsSections":[{"identifiers":["doc:\/\/com.okta.mobile.oktaoauth2\/10Foundation14LocalizedErrorP","doc:\/\/com.okta.mobile.oktaoauth2\/SQ","doc:\/\/com.okta.mobile.oktaoauth2\/s5ErrorP","doc:\/\/com.okta.mobile.oktaoauth2\/SH","doc:\/\/com.okta.mobile.oktaoauth2\/s8SendableP"],"kind":"relationships","title":"Conforms To","type":"conformsTo"}],"identifier":{"url":"doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/AuthFoundation\/AuthenticationError","interfaceLanguage":"swift"},"abstract":[{"type":"text","text":"Errors that may be generated during the process of authenticating with a variety of authentication flows."}],"kind":"symbol","metadata":{"fragments":[{"kind":"keyword","text":"enum"},{"kind":"text","text":" "},{"kind":"identifier","text":"AuthenticationError"}],"title":"AuthenticationError","roleHeading":"Enumeration","role":"symbol","symbolKind":"enum","externalID":"s:14AuthFoundation19AuthenticationErrorO","modules":[{"name":"AuthFoundation"}],"navigatorTitle":[{"kind":"identifier","text":"AuthenticationError"}]},"hierarchy":{"paths":[["doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/AuthFoundation"]]},"topicSections":[{"title":"Enumeration Cases","identifiers":["doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/AuthFoundation\/AuthenticationError\/flowNotReady"]},{"title":"Default Implementations","identifiers":["doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/AuthFoundation\/AuthenticationError\/Equatable-Implementations","doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/AuthFoundation\/AuthenticationError\/Error-Implementations","doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/AuthFoundation\/AuthenticationError\/LocalizedError-Implementations"],"generated":true}],"references":{"doc://com.okta.mobile.oktaoauth2/documentation/AuthFoundation/AuthenticationError/LocalizedError-Implementations":{"role":"collectionGroup","title":"LocalizedError Implementations","abstract":[],"identifier":"doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/AuthFoundation\/AuthenticationError\/LocalizedError-Implementations","kind":"article","type":"topic","url":"\/documentation\/authfoundation\/authenticationerror\/localizederror-implementations"},"doc://com.okta.mobile.oktaoauth2/SH":{"type":"unresolvable","title":"Swift.Hashable","identifier":"doc:\/\/com.okta.mobile.oktaoauth2\/SH"},"doc://com.okta.mobile.oktaoauth2/s8SendableP":{"type":"unresolvable","title":"Swift.Sendable","identifier":"doc:\/\/com.okta.mobile.oktaoauth2\/s8SendableP"},"doc://com.okta.mobile.oktaoauth2/SQ":{"type":"unresolvable","title":"Swift.Equatable","identifier":"doc:\/\/com.okta.mobile.oktaoauth2\/SQ"},"doc://com.okta.mobile.oktaoauth2/documentation/AuthFoundation/AuthenticationError/Error-Implementations":{"role":"collectionGroup","title":"Error Implementations","abstract":[],"identifier":"doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/AuthFoundation\/AuthenticationError\/Error-Implementations","kind":"article","type":"topic","url":"\/documentation\/authfoundation\/authenticationerror\/error-implementations"},"doc://com.okta.mobile.oktaoauth2/10Foundation14LocalizedErrorP":{"type":"unresolvable","title":"Foundation.LocalizedError","identifier":"doc:\/\/com.okta.mobile.oktaoauth2\/10Foundation14LocalizedErrorP"},"doc://com.okta.mobile.oktaoauth2/documentation/AuthFoundation":{"role":"collection","title":"AuthFoundation","abstract":[],"identifier":"doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/AuthFoundation","kind":"symbol","type":"topic","url":"\/documentation\/authfoundation"},"doc://com.okta.mobile.oktaoauth2/documentation/AuthFoundation/AuthenticationError":{"role":"symbol","title":"AuthenticationError","fragments":[{"kind":"keyword","text":"enum"},{"kind":"text","text":" "},{"kind":"identifier","text":"AuthenticationError"}],"abstract":[{"type":"text","text":"Errors that may be generated during the process of authenticating with a variety of authentication flows."}],"identifier":"doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/AuthFoundation\/AuthenticationError","kind":"symbol","type":"topic","navigatorTitle":[{"kind":"identifier","text":"AuthenticationError"}],"url":"\/documentation\/authfoundation\/authenticationerror"},"doc://com.okta.mobile.oktaoauth2/s5ErrorP":{"type":"unresolvable","title":"Swift.Error","identifier":"doc:\/\/com.okta.mobile.oktaoauth2\/s5ErrorP"},"doc://com.okta.mobile.oktaoauth2/documentation/AuthFoundation/AuthenticationError/flowNotReady":{"role":"symbol","title":"AuthenticationError.flowNotReady","fragments":[{"kind":"keyword","text":"case"},{"kind":"text","text":" "},{"kind":"identifier","text":"flowNotReady"}],"abstract":[],"identifier":"doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/AuthFoundation\/AuthenticationError\/flowNotReady","kind":"symbol","type":"topic","url":"\/documentation\/authfoundation\/authenticationerror\/flownotready"},"doc://com.okta.mobile.oktaoauth2/documentation/AuthFoundation/AuthenticationError/Equatable-Implementations":{"role":"collectionGroup","title":"Equatable Implementations","abstract":[],"identifier":"doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/AuthFoundation\/AuthenticationError\/Equatable-Implementations","kind":"article","type":"topic","url":"\/documentation\/authfoundation\/authenticationerror\/equatable-implementations"}}}
+{
+  "abstract" : [
+    {
+      "text" : "Errors that may be generated during the process of authenticating with a variety of authentication flows.",
+      "type" : "text"
+    }
+  ],
+  "hierarchy" : {
+    "paths" : [
+      [
+        "doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/AuthFoundation"
+      ]
+    ]
+  },
+  "identifier" : {
+    "interfaceLanguage" : "swift",
+    "url" : "doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/AuthFoundation\/AuthenticationError"
+  },
+  "kind" : "symbol",
+  "metadata" : {
+    "externalID" : "s:14AuthFoundation19AuthenticationErrorO",
+    "fragments" : [
+      {
+        "kind" : "keyword",
+        "text" : "enum"
+      },
+      {
+        "kind" : "text",
+        "text" : " "
+      },
+      {
+        "kind" : "identifier",
+        "text" : "AuthenticationError"
+      }
+    ],
+    "modules" : [
+      {
+        "name" : "AuthFoundation"
+      }
+    ],
+    "navigatorTitle" : [
+      {
+        "kind" : "identifier",
+        "text" : "AuthenticationError"
+      }
+    ],
+    "role" : "symbol",
+    "roleHeading" : "Enumeration",
+    "symbolKind" : "enum",
+    "title" : "AuthenticationError"
+  },
+  "primaryContentSections" : [
+    {
+      "declarations" : [
+        {
+          "languages" : [
+            "swift"
+          ],
+          "platforms" : [
+            "macOS"
+          ],
+          "tokens" : [
+            {
+              "kind" : "keyword",
+              "text" : "enum"
+            },
+            {
+              "kind" : "text",
+              "text" : " "
+            },
+            {
+              "kind" : "identifier",
+              "text" : "AuthenticationError"
+            }
+          ]
+        }
+      ],
+      "kind" : "declarations"
+    }
+  ],
+  "relationshipsSections" : [
+    {
+      "identifiers" : [
+        "doc:\/\/com.okta.mobile.oktaoauth2\/10Foundation14LocalizedErrorP",
+        "doc:\/\/com.okta.mobile.oktaoauth2\/SQ",
+        "doc:\/\/com.okta.mobile.oktaoauth2\/s5ErrorP",
+        "doc:\/\/com.okta.mobile.oktaoauth2\/SH",
+        "doc:\/\/com.okta.mobile.oktaoauth2\/s8SendableP"
+      ],
+      "kind" : "relationships",
+      "title" : "Conforms To",
+      "type" : "conformsTo"
+    }
+  ],
+  "schemaVersion" : {
+    "major" : 0,
+    "minor" : 2,
+    "patch" : 0
+  },
+  "sections" : [
+
+  ],
+  "topicSections" : [
+    {
+      "identifiers" : [
+        "doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/AuthFoundation\/AuthenticationError\/flowNotReady"
+      ],
+      "title" : "Enumeration Cases"
+    },
+    {
+      "generated" : true,
+      "identifiers" : [
+        "doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/AuthFoundation\/AuthenticationError\/Equatable-Implementations",
+        "doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/AuthFoundation\/AuthenticationError\/Error-Implementations",
+        "doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/AuthFoundation\/AuthenticationError\/LocalizedError-Implementations"
+      ],
+      "title" : "Default Implementations"
+    }
+  ],
+  "variants" : [
+    {
+      "paths" : [
+        "\/documentation\/authfoundation\/authenticationerror"
+      ],
+      "traits" : [
+        {
+          "interfaceLanguage" : "swift"
+        }
+      ]
+    }
+  ]
+, 
+"references": {
+"doc://com.okta.mobile.oktaoauth2/10Foundation14LocalizedErrorP": {
+  "identifier" : "doc:\/\/com.okta.mobile.oktaoauth2\/10Foundation14LocalizedErrorP",
+  "title" : "Foundation.LocalizedError",
+  "type" : "unresolvable"
+},
+"doc://com.okta.mobile.oktaoauth2/SH": {
+  "identifier" : "doc:\/\/com.okta.mobile.oktaoauth2\/SH",
+  "title" : "Swift.Hashable",
+  "type" : "unresolvable"
+},
+"doc://com.okta.mobile.oktaoauth2/SQ": {
+  "identifier" : "doc:\/\/com.okta.mobile.oktaoauth2\/SQ",
+  "title" : "Swift.Equatable",
+  "type" : "unresolvable"
+},
+"doc://com.okta.mobile.oktaoauth2/documentation/AuthFoundation": {
+  "abstract" : [
+
+  ],
+  "identifier" : "doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/AuthFoundation",
+  "kind" : "symbol",
+  "role" : "collection",
+  "title" : "AuthFoundation",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation"
+},
+"doc://com.okta.mobile.oktaoauth2/documentation/AuthFoundation/AuthenticationError": {
+  "abstract" : [
+    {
+      "text" : "Errors that may be generated during the process of authenticating with a variety of authentication flows.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "enum"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "AuthenticationError"
+    }
+  ],
+  "identifier" : "doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/AuthFoundation\/AuthenticationError",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "AuthenticationError"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "AuthenticationError",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/authenticationerror"
+},
+"doc://com.okta.mobile.oktaoauth2/documentation/AuthFoundation/AuthenticationError/Equatable-Implementations": {
+  "abstract" : [
+
+  ],
+  "identifier" : "doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/AuthFoundation\/AuthenticationError\/Equatable-Implementations",
+  "kind" : "article",
+  "role" : "collectionGroup",
+  "title" : "Equatable Implementations",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/authenticationerror\/equatable-implementations"
+},
+"doc://com.okta.mobile.oktaoauth2/documentation/AuthFoundation/AuthenticationError/Error-Implementations": {
+  "abstract" : [
+
+  ],
+  "identifier" : "doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/AuthFoundation\/AuthenticationError\/Error-Implementations",
+  "kind" : "article",
+  "role" : "collectionGroup",
+  "title" : "Error Implementations",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/authenticationerror\/error-implementations"
+},
+"doc://com.okta.mobile.oktaoauth2/documentation/AuthFoundation/AuthenticationError/LocalizedError-Implementations": {
+  "abstract" : [
+
+  ],
+  "identifier" : "doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/AuthFoundation\/AuthenticationError\/LocalizedError-Implementations",
+  "kind" : "article",
+  "role" : "collectionGroup",
+  "title" : "LocalizedError Implementations",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/authenticationerror\/localizederror-implementations"
+},
+"doc://com.okta.mobile.oktaoauth2/documentation/AuthFoundation/AuthenticationError/flowNotReady": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "case"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "flowNotReady"
+    }
+  ],
+  "identifier" : "doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/AuthFoundation\/AuthenticationError\/flowNotReady",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "AuthenticationError.flowNotReady",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/authenticationerror\/flownotready"
+},
+"doc://com.okta.mobile.oktaoauth2/s5ErrorP": {
+  "identifier" : "doc:\/\/com.okta.mobile.oktaoauth2\/s5ErrorP",
+  "title" : "Swift.Error",
+  "type" : "unresolvable"
+},
+"doc://com.okta.mobile.oktaoauth2/s8SendableP": {
+  "identifier" : "doc:\/\/com.okta.mobile.oktaoauth2\/s8SendableP",
+  "title" : "Swift.Sendable",
+  "type" : "unresolvable"
+}
+}
+}

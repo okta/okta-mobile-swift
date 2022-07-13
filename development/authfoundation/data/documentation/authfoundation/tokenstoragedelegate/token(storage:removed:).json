@@ -1,1 +1,343 @@
-{"primaryContentSections":[{"kind":"declarations","declarations":[{"tokens":[{"kind":"keyword","text":"func"},{"kind":"text","text":" "},{"kind":"identifier","text":"token"},{"kind":"text","text":"("},{"kind":"externalParam","text":"storage"},{"kind":"text","text":": "},{"kind":"typeIdentifier","identifier":"doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/TokenStorage","preciseIdentifier":"s:14AuthFoundation12TokenStorageP","text":"TokenStorage"},{"kind":"text","text":", "},{"kind":"externalParam","text":"removed"},{"kind":"text","text":" "},{"kind":"internalParam","text":"id"},{"kind":"text","text":": "},{"kind":"typeIdentifier","text":"String","preciseIdentifier":"s:SS"},{"kind":"text","text":")"}],"languages":["swift"],"platforms":["macOS"]}]}],"schemaVersion":{"major":0,"minor":2,"patch":0},"sections":[],"variants":[{"paths":["\/documentation\/authfoundation\/tokenstoragedelegate\/token(storage:removed:)"],"traits":[{"interfaceLanguage":"swift"}]}],"identifier":{"url":"doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/TokenStorageDelegate\/token(storage:removed:)","interfaceLanguage":"swift"},"abstract":[{"type":"text","text":"Sent when a token has been removed from storage."}],"kind":"symbol","metadata":{"role":"symbol","title":"token(storage:removed:)","roleHeading":"Instance Method","fragments":[{"kind":"keyword","text":"func"},{"kind":"text","text":" "},{"kind":"identifier","text":"token"},{"kind":"text","text":"("},{"kind":"externalParam","text":"storage"},{"kind":"text","text":": "},{"kind":"typeIdentifier","text":"TokenStorage","preciseIdentifier":"s:14AuthFoundation12TokenStorageP"},{"kind":"text","text":", "},{"kind":"externalParam","text":"removed"},{"kind":"text","text":": "},{"kind":"typeIdentifier","text":"String","preciseIdentifier":"s:SS"},{"kind":"text","text":")"}],"symbolKind":"method","externalID":"s:14AuthFoundation20TokenStorageDelegateP5token7storage7removedyAA0cD0_p_SStF","required":true,"modules":[{"name":"AuthFoundation"}]},"hierarchy":{"paths":[["doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation","doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/TokenStorageDelegate"]]},"references":{"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/TokenStorageDelegate":{"role":"symbol","title":"TokenStorageDelegate","fragments":[{"kind":"keyword","text":"protocol"},{"kind":"text","text":" "},{"kind":"identifier","text":"TokenStorageDelegate"}],"abstract":[{"type":"text","text":"Protocol that custom "},{"type":"reference","isActive":true,"identifier":"doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/TokenStorage"},{"type":"text","text":" instances are required to communicate changes to."}],"identifier":"doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/TokenStorageDelegate","kind":"symbol","type":"topic","navigatorTitle":[{"kind":"identifier","text":"TokenStorageDelegate"}],"url":"\/documentation\/authfoundation\/tokenstoragedelegate"},"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/TokenStorage":{"role":"symbol","title":"TokenStorage","fragments":[{"kind":"keyword","text":"protocol"},{"kind":"text","text":" "},{"kind":"identifier","text":"TokenStorage"}],"abstract":[{"type":"text","text":"Protocol used to customize the way tokens are stored, updated, and removed throughout the lifecycle of an application."}],"identifier":"doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/TokenStorage","kind":"symbol","type":"topic","navigatorTitle":[{"kind":"identifier","text":"TokenStorage"}],"url":"\/documentation\/authfoundation\/tokenstorage"},"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/TokenStorageDelegate/token(storage:removed:)":{"role":"symbol","title":"token(storage:removed:)","fragments":[{"kind":"keyword","text":"func"},{"kind":"text","text":" "},{"kind":"identifier","text":"token"},{"kind":"text","text":"("},{"kind":"externalParam","text":"storage"},{"kind":"text","text":": "},{"kind":"typeIdentifier","text":"TokenStorage","preciseIdentifier":"s:14AuthFoundation12TokenStorageP"},{"kind":"text","text":", "},{"kind":"externalParam","text":"removed"},{"kind":"text","text":": "},{"kind":"typeIdentifier","text":"String","preciseIdentifier":"s:SS"},{"kind":"text","text":")"}],"abstract":[{"type":"text","text":"Sent when a token has been removed from storage."}],"identifier":"doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/TokenStorageDelegate\/token(storage:removed:)","kind":"symbol","required":true,"type":"topic","url":"\/documentation\/authfoundation\/tokenstoragedelegate\/token(storage:removed:)"},"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation":{"role":"collection","title":"AuthFoundation","abstract":[{"type":"text","text":"Library that provides foundational features used by Okta’s authentication libraries, as well as APIs used to work with tokens and user credentials."}],"identifier":"doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation","kind":"symbol","type":"topic","url":"\/documentation\/authfoundation"}}}
+{
+  "abstract" : [
+    {
+      "text" : "Sent when a token has been removed from storage.",
+      "type" : "text"
+    }
+  ],
+  "hierarchy" : {
+    "paths" : [
+      [
+        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation",
+        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/TokenStorageDelegate"
+      ]
+    ]
+  },
+  "identifier" : {
+    "interfaceLanguage" : "swift",
+    "url" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/TokenStorageDelegate\/token(storage:removed:)"
+  },
+  "kind" : "symbol",
+  "metadata" : {
+    "externalID" : "s:14AuthFoundation20TokenStorageDelegateP5token7storage7removedyAA0cD0_p_SStF",
+    "fragments" : [
+      {
+        "kind" : "keyword",
+        "text" : "func"
+      },
+      {
+        "kind" : "text",
+        "text" : " "
+      },
+      {
+        "kind" : "identifier",
+        "text" : "token"
+      },
+      {
+        "kind" : "text",
+        "text" : "("
+      },
+      {
+        "kind" : "externalParam",
+        "text" : "storage"
+      },
+      {
+        "kind" : "text",
+        "text" : ": "
+      },
+      {
+        "kind" : "typeIdentifier",
+        "preciseIdentifier" : "s:14AuthFoundation12TokenStorageP",
+        "text" : "TokenStorage"
+      },
+      {
+        "kind" : "text",
+        "text" : ", "
+      },
+      {
+        "kind" : "externalParam",
+        "text" : "removed"
+      },
+      {
+        "kind" : "text",
+        "text" : ": "
+      },
+      {
+        "kind" : "typeIdentifier",
+        "preciseIdentifier" : "s:SS",
+        "text" : "String"
+      },
+      {
+        "kind" : "text",
+        "text" : ")"
+      }
+    ],
+    "modules" : [
+      {
+        "name" : "AuthFoundation"
+      }
+    ],
+    "required" : true,
+    "role" : "symbol",
+    "roleHeading" : "Instance Method",
+    "symbolKind" : "method",
+    "title" : "token(storage:removed:)"
+  },
+  "primaryContentSections" : [
+    {
+      "declarations" : [
+        {
+          "languages" : [
+            "swift"
+          ],
+          "platforms" : [
+            "macOS"
+          ],
+          "tokens" : [
+            {
+              "kind" : "keyword",
+              "text" : "func"
+            },
+            {
+              "kind" : "text",
+              "text" : " "
+            },
+            {
+              "kind" : "identifier",
+              "text" : "token"
+            },
+            {
+              "kind" : "text",
+              "text" : "("
+            },
+            {
+              "kind" : "externalParam",
+              "text" : "storage"
+            },
+            {
+              "kind" : "text",
+              "text" : ": "
+            },
+            {
+              "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/TokenStorage",
+              "kind" : "typeIdentifier",
+              "preciseIdentifier" : "s:14AuthFoundation12TokenStorageP",
+              "text" : "TokenStorage"
+            },
+            {
+              "kind" : "text",
+              "text" : ", "
+            },
+            {
+              "kind" : "externalParam",
+              "text" : "removed"
+            },
+            {
+              "kind" : "text",
+              "text" : " "
+            },
+            {
+              "kind" : "internalParam",
+              "text" : "id"
+            },
+            {
+              "kind" : "text",
+              "text" : ": "
+            },
+            {
+              "kind" : "typeIdentifier",
+              "preciseIdentifier" : "s:SS",
+              "text" : "String"
+            },
+            {
+              "kind" : "text",
+              "text" : ")"
+            }
+          ]
+        }
+      ],
+      "kind" : "declarations"
+    }
+  ],
+  "schemaVersion" : {
+    "major" : 0,
+    "minor" : 2,
+    "patch" : 0
+  },
+  "sections" : [
+
+  ],
+  "variants" : [
+    {
+      "paths" : [
+        "\/documentation\/authfoundation\/tokenstoragedelegate\/token(storage:removed:)"
+      ],
+      "traits" : [
+        {
+          "interfaceLanguage" : "swift"
+        }
+      ]
+    }
+  ]
+, 
+"references": {
+"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation": {
+  "abstract" : [
+    {
+      "text" : "Library that provides foundational features used by Okta’s authentication libraries, as well as APIs used to work with tokens and user credentials.",
+      "type" : "text"
+    }
+  ],
+  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation",
+  "kind" : "symbol",
+  "role" : "collection",
+  "title" : "AuthFoundation",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation"
+},
+"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/TokenStorage": {
+  "abstract" : [
+    {
+      "text" : "Protocol used to customize the way tokens are stored, updated, and removed throughout the lifecycle of an application.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "protocol"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "TokenStorage"
+    }
+  ],
+  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/TokenStorage",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "TokenStorage"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "TokenStorage",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/tokenstorage"
+},
+"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/TokenStorageDelegate": {
+  "abstract" : [
+    {
+      "text" : "Protocol that custom ",
+      "type" : "text"
+    },
+    {
+      "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/TokenStorage",
+      "isActive" : true,
+      "type" : "reference"
+    },
+    {
+      "text" : " instances are required to communicate changes to.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "protocol"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "TokenStorageDelegate"
+    }
+  ],
+  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/TokenStorageDelegate",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "TokenStorageDelegate"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "TokenStorageDelegate",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/tokenstoragedelegate"
+},
+"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/TokenStorageDelegate/token(storage:removed:)": {
+  "abstract" : [
+    {
+      "text" : "Sent when a token has been removed from storage.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "func"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "token"
+    },
+    {
+      "kind" : "text",
+      "text" : "("
+    },
+    {
+      "kind" : "externalParam",
+      "text" : "storage"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:14AuthFoundation12TokenStorageP",
+      "text" : "TokenStorage"
+    },
+    {
+      "kind" : "text",
+      "text" : ", "
+    },
+    {
+      "kind" : "externalParam",
+      "text" : "removed"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:SS",
+      "text" : "String"
+    },
+    {
+      "kind" : "text",
+      "text" : ")"
+    }
+  ],
+  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/TokenStorageDelegate\/token(storage:removed:)",
+  "kind" : "symbol",
+  "required" : true,
+  "role" : "symbol",
+  "title" : "token(storage:removed:)",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/tokenstoragedelegate\/token(storage:removed:)"
+}
+}
+}

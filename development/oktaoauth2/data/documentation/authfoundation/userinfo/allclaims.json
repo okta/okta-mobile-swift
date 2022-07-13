@@ -1,1 +1,359 @@
-{"primaryContentSections":[{"kind":"declarations","declarations":[{"tokens":[{"kind":"keyword","text":"var"},{"kind":"text","text":" "},{"kind":"identifier","text":"allClaims"},{"kind":"text","text":": ["},{"kind":"typeIdentifier","text":"String","preciseIdentifier":"s:SS"},{"kind":"text","text":"] { "},{"kind":"keyword","text":"get"},{"kind":"text","text":" }"}],"languages":["swift"],"platforms":["macOS"]}]}],"schemaVersion":{"major":0,"minor":2,"patch":0},"sections":[],"variants":[{"paths":["\/documentation\/authfoundation\/userinfo\/allclaims"],"traits":[{"interfaceLanguage":"swift"}]}],"identifier":{"url":"doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/AuthFoundation\/UserInfo\/allClaims","interfaceLanguage":"swift"},"abstract":[{"type":"text","text":"All claims, across both standard "},{"type":"reference","isActive":true,"identifier":"doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/AuthFoundation\/UserInfo\/claims"},{"type":"text","text":" and "},{"type":"reference","isActive":true,"identifier":"doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/AuthFoundation\/UserInfo\/customClaims"},{"type":"text","text":"."}],"kind":"symbol","metadata":{"role":"symbol","title":"allClaims","roleHeading":"Instance Property","fragments":[{"kind":"keyword","text":"var"},{"kind":"text","text":" "},{"kind":"identifier","text":"allClaims"},{"kind":"text","text":": ["},{"kind":"typeIdentifier","text":"String","preciseIdentifier":"s:SS"},{"kind":"text","text":"]"}],"symbolKind":"property","externalID":"s:14AuthFoundation9HasClaimsPAAE03allD0SaySSGvp::SYNTHESIZED::s:14AuthFoundation8UserInfoV","extendedModule":"AuthFoundation","modules":[{"name":"AuthFoundation"}]},"hierarchy":{"paths":[["doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/AuthFoundation","doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/AuthFoundation\/UserInfo","doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/AuthFoundation\/UserInfo\/HasClaims-Implementations"]]},"references":{"doc://com.okta.mobile.oktaoauth2/documentation/AuthFoundation/UserInfo/claims":{"role":"symbol","title":"claims","fragments":[{"kind":"keyword","text":"var"},{"kind":"text","text":" "},{"kind":"identifier","text":"claims"},{"kind":"text","text":": ["},{"kind":"typeIdentifier","text":"Claim","preciseIdentifier":"s:14AuthFoundation5ClaimO"},{"kind":"text","text":"]"}],"abstract":[{"type":"text","text":"Returns the list of all claims contained within this "},{"type":"reference","isActive":true,"identifier":"doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/AuthFoundation\/UserInfo"},{"type":"text","text":"."}],"identifier":"doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/AuthFoundation\/UserInfo\/claims","kind":"symbol","type":"topic","url":"\/documentation\/authfoundation\/userinfo\/claims"},"doc://com.okta.mobile.oktaoauth2/documentation/AuthFoundation/UserInfo/HasClaims-Implementations":{"role":"collectionGroup","title":"HasClaims Implementations","abstract":[],"identifier":"doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/AuthFoundation\/UserInfo\/HasClaims-Implementations","kind":"article","type":"topic","url":"\/documentation\/authfoundation\/userinfo\/hasclaims-implementations"},"doc://com.okta.mobile.oktaoauth2/documentation/AuthFoundation/UserInfo/customClaims":{"role":"symbol","title":"customClaims","fragments":[{"kind":"keyword","text":"var"},{"kind":"text","text":" "},{"kind":"identifier","text":"customClaims"},{"kind":"text","text":": ["},{"kind":"typeIdentifier","text":"String","preciseIdentifier":"s:SS"},{"kind":"text","text":"]"}],"abstract":[{"type":"text","text":"Returns the list of custom claims this instance might contain."}],"identifier":"doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/AuthFoundation\/UserInfo\/customClaims","kind":"symbol","type":"topic","url":"\/documentation\/authfoundation\/userinfo\/customclaims"},"doc://com.okta.mobile.oktaoauth2/documentation/AuthFoundation":{"role":"collection","title":"AuthFoundation","abstract":[],"identifier":"doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/AuthFoundation","kind":"symbol","type":"topic","url":"\/documentation\/authfoundation"},"doc://com.okta.mobile.oktaoauth2/documentation/AuthFoundation/UserInfo/allClaims":{"role":"symbol","title":"allClaims","fragments":[{"kind":"keyword","text":"var"},{"kind":"text","text":" "},{"kind":"identifier","text":"allClaims"},{"kind":"text","text":": ["},{"kind":"typeIdentifier","text":"String","preciseIdentifier":"s:SS"},{"kind":"text","text":"]"}],"abstract":[{"type":"text","text":"All claims, across both standard "},{"type":"reference","isActive":true,"identifier":"doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/AuthFoundation\/UserInfo\/claims"},{"type":"text","text":" and "},{"type":"reference","isActive":true,"identifier":"doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/AuthFoundation\/UserInfo\/customClaims"},{"type":"text","text":"."}],"identifier":"doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/AuthFoundation\/UserInfo\/allClaims","kind":"symbol","type":"topic","url":"\/documentation\/authfoundation\/userinfo\/allclaims"},"doc://com.okta.mobile.oktaoauth2/documentation/AuthFoundation/UserInfo":{"role":"symbol","title":"UserInfo","fragments":[{"kind":"keyword","text":"struct"},{"kind":"text","text":" "},{"kind":"identifier","text":"UserInfo"}],"abstract":[{"type":"text","text":"User profile information."}],"identifier":"doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/AuthFoundation\/UserInfo","kind":"symbol","type":"topic","navigatorTitle":[{"kind":"identifier","text":"UserInfo"}],"url":"\/documentation\/authfoundation\/userinfo"}}}
+{
+  "abstract" : [
+    {
+      "text" : "All claims, across both standard ",
+      "type" : "text"
+    },
+    {
+      "identifier" : "doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/AuthFoundation\/UserInfo\/claims",
+      "isActive" : true,
+      "type" : "reference"
+    },
+    {
+      "text" : " and ",
+      "type" : "text"
+    },
+    {
+      "identifier" : "doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/AuthFoundation\/UserInfo\/customClaims",
+      "isActive" : true,
+      "type" : "reference"
+    },
+    {
+      "text" : ".",
+      "type" : "text"
+    }
+  ],
+  "hierarchy" : {
+    "paths" : [
+      [
+        "doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/AuthFoundation",
+        "doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/AuthFoundation\/UserInfo",
+        "doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/AuthFoundation\/UserInfo\/HasClaims-Implementations"
+      ]
+    ]
+  },
+  "identifier" : {
+    "interfaceLanguage" : "swift",
+    "url" : "doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/AuthFoundation\/UserInfo\/allClaims"
+  },
+  "kind" : "symbol",
+  "metadata" : {
+    "extendedModule" : "AuthFoundation",
+    "externalID" : "s:14AuthFoundation9HasClaimsPAAE03allD0SaySSGvp::SYNTHESIZED::s:14AuthFoundation8UserInfoV",
+    "fragments" : [
+      {
+        "kind" : "keyword",
+        "text" : "var"
+      },
+      {
+        "kind" : "text",
+        "text" : " "
+      },
+      {
+        "kind" : "identifier",
+        "text" : "allClaims"
+      },
+      {
+        "kind" : "text",
+        "text" : ": ["
+      },
+      {
+        "kind" : "typeIdentifier",
+        "preciseIdentifier" : "s:SS",
+        "text" : "String"
+      },
+      {
+        "kind" : "text",
+        "text" : "]"
+      }
+    ],
+    "modules" : [
+      {
+        "name" : "AuthFoundation"
+      }
+    ],
+    "role" : "symbol",
+    "roleHeading" : "Instance Property",
+    "symbolKind" : "property",
+    "title" : "allClaims"
+  },
+  "primaryContentSections" : [
+    {
+      "declarations" : [
+        {
+          "languages" : [
+            "swift"
+          ],
+          "platforms" : [
+            "macOS"
+          ],
+          "tokens" : [
+            {
+              "kind" : "keyword",
+              "text" : "var"
+            },
+            {
+              "kind" : "text",
+              "text" : " "
+            },
+            {
+              "kind" : "identifier",
+              "text" : "allClaims"
+            },
+            {
+              "kind" : "text",
+              "text" : ": ["
+            },
+            {
+              "kind" : "typeIdentifier",
+              "preciseIdentifier" : "s:SS",
+              "text" : "String"
+            },
+            {
+              "kind" : "text",
+              "text" : "] { "
+            },
+            {
+              "kind" : "keyword",
+              "text" : "get"
+            },
+            {
+              "kind" : "text",
+              "text" : " }"
+            }
+          ]
+        }
+      ],
+      "kind" : "declarations"
+    }
+  ],
+  "schemaVersion" : {
+    "major" : 0,
+    "minor" : 2,
+    "patch" : 0
+  },
+  "sections" : [
+
+  ],
+  "variants" : [
+    {
+      "paths" : [
+        "\/documentation\/authfoundation\/userinfo\/allclaims"
+      ],
+      "traits" : [
+        {
+          "interfaceLanguage" : "swift"
+        }
+      ]
+    }
+  ]
+, 
+"references": {
+"doc://com.okta.mobile.oktaoauth2/documentation/AuthFoundation": {
+  "abstract" : [
+
+  ],
+  "identifier" : "doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/AuthFoundation",
+  "kind" : "symbol",
+  "role" : "collection",
+  "title" : "AuthFoundation",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation"
+},
+"doc://com.okta.mobile.oktaoauth2/documentation/AuthFoundation/UserInfo": {
+  "abstract" : [
+    {
+      "text" : "User profile information.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "struct"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "UserInfo"
+    }
+  ],
+  "identifier" : "doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/AuthFoundation\/UserInfo",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "UserInfo"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "UserInfo",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/userinfo"
+},
+"doc://com.okta.mobile.oktaoauth2/documentation/AuthFoundation/UserInfo/HasClaims-Implementations": {
+  "abstract" : [
+
+  ],
+  "identifier" : "doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/AuthFoundation\/UserInfo\/HasClaims-Implementations",
+  "kind" : "article",
+  "role" : "collectionGroup",
+  "title" : "HasClaims Implementations",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/userinfo\/hasclaims-implementations"
+},
+"doc://com.okta.mobile.oktaoauth2/documentation/AuthFoundation/UserInfo/allClaims": {
+  "abstract" : [
+    {
+      "text" : "All claims, across both standard ",
+      "type" : "text"
+    },
+    {
+      "identifier" : "doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/AuthFoundation\/UserInfo\/claims",
+      "isActive" : true,
+      "type" : "reference"
+    },
+    {
+      "text" : " and ",
+      "type" : "text"
+    },
+    {
+      "identifier" : "doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/AuthFoundation\/UserInfo\/customClaims",
+      "isActive" : true,
+      "type" : "reference"
+    },
+    {
+      "text" : ".",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "var"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "allClaims"
+    },
+    {
+      "kind" : "text",
+      "text" : ": ["
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:SS",
+      "text" : "String"
+    },
+    {
+      "kind" : "text",
+      "text" : "]"
+    }
+  ],
+  "identifier" : "doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/AuthFoundation\/UserInfo\/allClaims",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "allClaims",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/userinfo\/allclaims"
+},
+"doc://com.okta.mobile.oktaoauth2/documentation/AuthFoundation/UserInfo/claims": {
+  "abstract" : [
+    {
+      "text" : "Returns the list of all claims contained within this ",
+      "type" : "text"
+    },
+    {
+      "identifier" : "doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/AuthFoundation\/UserInfo",
+      "isActive" : true,
+      "type" : "reference"
+    },
+    {
+      "text" : ".",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "var"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "claims"
+    },
+    {
+      "kind" : "text",
+      "text" : ": ["
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:14AuthFoundation5ClaimO",
+      "text" : "Claim"
+    },
+    {
+      "kind" : "text",
+      "text" : "]"
+    }
+  ],
+  "identifier" : "doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/AuthFoundation\/UserInfo\/claims",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "claims",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/userinfo\/claims"
+},
+"doc://com.okta.mobile.oktaoauth2/documentation/AuthFoundation/UserInfo/customClaims": {
+  "abstract" : [
+    {
+      "text" : "Returns the list of custom claims this instance might contain.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "var"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "customClaims"
+    },
+    {
+      "kind" : "text",
+      "text" : ": ["
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:SS",
+      "text" : "String"
+    },
+    {
+      "kind" : "text",
+      "text" : "]"
+    }
+  ],
+  "identifier" : "doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/AuthFoundation\/UserInfo\/customClaims",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "customClaims",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/userinfo\/customclaims"
+}
+}
+}

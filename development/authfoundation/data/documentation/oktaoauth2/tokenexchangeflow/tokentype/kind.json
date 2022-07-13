@@ -1,1 +1,452 @@
-{"primaryContentSections":[{"kind":"declarations","declarations":[{"tokens":[{"kind":"keyword","text":"enum"},{"kind":"text","text":" "},{"kind":"identifier","text":"Kind"}],"languages":["swift"],"platforms":["macOS"]}]}],"schemaVersion":{"major":0,"minor":2,"patch":0},"sections":[],"variants":[{"paths":["\/documentation\/oktaoauth2\/tokenexchangeflow\/tokentype\/kind"],"traits":[{"interfaceLanguage":"swift"}]}],"relationshipsSections":[{"identifiers":["doc:\/\/com.okta.mobile.authfoundation\/SQ","doc:\/\/com.okta.mobile.authfoundation\/SH","doc:\/\/com.okta.mobile.authfoundation\/SY"],"kind":"relationships","title":"Conforms To","type":"conformsTo"}],"identifier":{"url":"doc:\/\/com.okta.mobile.authfoundation\/documentation\/OktaOAuth2\/TokenExchangeFlow\/TokenType\/Kind","interfaceLanguage":"swift"},"abstract":[{"type":"text","text":"Describes specific token used by "},{"type":"reference","isActive":true,"identifier":"doc:\/\/com.okta.mobile.authfoundation\/documentation\/OktaOAuth2\/TokenExchangeFlow\/TokenType"},{"type":"text","text":"."}],"kind":"symbol","metadata":{"fragments":[{"kind":"keyword","text":"enum"},{"kind":"text","text":" "},{"kind":"identifier","text":"Kind"}],"title":"TokenExchangeFlow.TokenType.Kind","roleHeading":"Enumeration","role":"symbol","symbolKind":"enum","externalID":"s:10OktaOAuth217TokenExchangeFlowC0C4TypeO4KindO","modules":[{"name":"OktaOAuth2"}],"navigatorTitle":[{"kind":"identifier","text":"Kind"}]},"hierarchy":{"paths":[["doc:\/\/com.okta.mobile.authfoundation\/documentation\/OktaOAuth2","doc:\/\/com.okta.mobile.authfoundation\/documentation\/OktaOAuth2\/TokenExchangeFlow","doc:\/\/com.okta.mobile.authfoundation\/documentation\/OktaOAuth2\/TokenExchangeFlow\/TokenType"]]},"topicSections":[{"title":"Enumeration Cases","identifiers":["doc:\/\/com.okta.mobile.authfoundation\/documentation\/OktaOAuth2\/TokenExchangeFlow\/TokenType\/Kind\/accessToken","doc:\/\/com.okta.mobile.authfoundation\/documentation\/OktaOAuth2\/TokenExchangeFlow\/TokenType\/Kind\/deviceSecret","doc:\/\/com.okta.mobile.authfoundation\/documentation\/OktaOAuth2\/TokenExchangeFlow\/TokenType\/Kind\/idToken","doc:\/\/com.okta.mobile.authfoundation\/documentation\/OktaOAuth2\/TokenExchangeFlow\/TokenType\/Kind\/refreshToken"]},{"title":"Initializers","identifiers":["doc:\/\/com.okta.mobile.authfoundation\/documentation\/OktaOAuth2\/TokenExchangeFlow\/TokenType\/Kind\/init(rawValue:)"]},{"title":"Default Implementations","identifiers":["doc:\/\/com.okta.mobile.authfoundation\/documentation\/OktaOAuth2\/TokenExchangeFlow\/TokenType\/Kind\/Equatable-Implementations","doc:\/\/com.okta.mobile.authfoundation\/documentation\/OktaOAuth2\/TokenExchangeFlow\/TokenType\/Kind\/RawRepresentable-Implementations"],"generated":true}],"references":{"doc://com.okta.mobile.authfoundation/SH":{"type":"unresolvable","title":"Swift.Hashable","identifier":"doc:\/\/com.okta.mobile.authfoundation\/SH"},"doc://com.okta.mobile.authfoundation/documentation/OktaOAuth2/TokenExchangeFlow/TokenType/Kind/refreshToken":{"role":"symbol","title":"TokenExchangeFlow.TokenType.Kind.refreshToken","fragments":[{"kind":"keyword","text":"case"},{"kind":"text","text":" "},{"kind":"identifier","text":"refreshToken"}],"abstract":[],"identifier":"doc:\/\/com.okta.mobile.authfoundation\/documentation\/OktaOAuth2\/TokenExchangeFlow\/TokenType\/Kind\/refreshToken","kind":"symbol","type":"topic","url":"\/documentation\/oktaoauth2\/tokenexchangeflow\/tokentype\/kind\/refreshtoken"},"doc://com.okta.mobile.authfoundation/documentation/OktaOAuth2":{"role":"collection","title":"OktaOAuth2","abstract":[],"identifier":"doc:\/\/com.okta.mobile.authfoundation\/documentation\/OktaOAuth2","kind":"symbol","type":"topic","url":"\/documentation\/oktaoauth2"},"doc://com.okta.mobile.authfoundation/documentation/OktaOAuth2/TokenExchangeFlow/TokenType/Kind/idToken":{"role":"symbol","title":"TokenExchangeFlow.TokenType.Kind.idToken","fragments":[{"kind":"keyword","text":"case"},{"kind":"text","text":" "},{"kind":"identifier","text":"idToken"}],"abstract":[],"identifier":"doc:\/\/com.okta.mobile.authfoundation\/documentation\/OktaOAuth2\/TokenExchangeFlow\/TokenType\/Kind\/idToken","kind":"symbol","type":"topic","url":"\/documentation\/oktaoauth2\/tokenexchangeflow\/tokentype\/kind\/idtoken"},"doc://com.okta.mobile.authfoundation/SY":{"type":"unresolvable","title":"Swift.RawRepresentable","identifier":"doc:\/\/com.okta.mobile.authfoundation\/SY"},"doc://com.okta.mobile.authfoundation/documentation/OktaOAuth2/TokenExchangeFlow/TokenType/Kind/Equatable-Implementations":{"role":"collectionGroup","title":"Equatable Implementations","abstract":[],"identifier":"doc:\/\/com.okta.mobile.authfoundation\/documentation\/OktaOAuth2\/TokenExchangeFlow\/TokenType\/Kind\/Equatable-Implementations","kind":"article","type":"topic","url":"\/documentation\/oktaoauth2\/tokenexchangeflow\/tokentype\/kind\/equatable-implementations"},"doc://com.okta.mobile.authfoundation/documentation/OktaOAuth2/TokenExchangeFlow":{"role":"symbol","title":"TokenExchangeFlow","fragments":[{"kind":"keyword","text":"class"},{"kind":"text","text":" "},{"kind":"identifier","text":"TokenExchangeFlow"}],"abstract":[{"type":"text","text":"An authentication flow class that implements the Token Exchange Flow."}],"identifier":"doc:\/\/com.okta.mobile.authfoundation\/documentation\/OktaOAuth2\/TokenExchangeFlow","kind":"symbol","type":"topic","navigatorTitle":[{"kind":"identifier","text":"TokenExchangeFlow"}],"url":"\/documentation\/oktaoauth2\/tokenexchangeflow"},"doc://com.okta.mobile.authfoundation/documentation/OktaOAuth2/TokenExchangeFlow/TokenType/Kind":{"role":"symbol","title":"TokenExchangeFlow.TokenType.Kind","fragments":[{"kind":"keyword","text":"enum"},{"kind":"text","text":" "},{"kind":"identifier","text":"Kind"}],"abstract":[{"type":"text","text":"Describes specific token used by "},{"type":"reference","isActive":true,"identifier":"doc:\/\/com.okta.mobile.authfoundation\/documentation\/OktaOAuth2\/TokenExchangeFlow\/TokenType"},{"type":"text","text":"."}],"identifier":"doc:\/\/com.okta.mobile.authfoundation\/documentation\/OktaOAuth2\/TokenExchangeFlow\/TokenType\/Kind","kind":"symbol","type":"topic","navigatorTitle":[{"kind":"identifier","text":"Kind"}],"url":"\/documentation\/oktaoauth2\/tokenexchangeflow\/tokentype\/kind"},"doc://com.okta.mobile.authfoundation/documentation/OktaOAuth2/TokenExchangeFlow/TokenType/Kind/RawRepresentable-Implementations":{"role":"collectionGroup","title":"RawRepresentable Implementations","abstract":[],"identifier":"doc:\/\/com.okta.mobile.authfoundation\/documentation\/OktaOAuth2\/TokenExchangeFlow\/TokenType\/Kind\/RawRepresentable-Implementations","kind":"article","type":"topic","url":"\/documentation\/oktaoauth2\/tokenexchangeflow\/tokentype\/kind\/rawrepresentable-implementations"},"doc://com.okta.mobile.authfoundation/documentation/OktaOAuth2/TokenExchangeFlow/TokenType/Kind/deviceSecret":{"role":"symbol","title":"TokenExchangeFlow.TokenType.Kind.deviceSecret","fragments":[{"kind":"keyword","text":"case"},{"kind":"text","text":" "},{"kind":"identifier","text":"deviceSecret"}],"abstract":[],"identifier":"doc:\/\/com.okta.mobile.authfoundation\/documentation\/OktaOAuth2\/TokenExchangeFlow\/TokenType\/Kind\/deviceSecret","kind":"symbol","type":"topic","url":"\/documentation\/oktaoauth2\/tokenexchangeflow\/tokentype\/kind\/devicesecret"},"doc://com.okta.mobile.authfoundation/documentation/OktaOAuth2/TokenExchangeFlow/TokenType/Kind/init(rawValue:)":{"role":"symbol","title":"init(rawValue:)","fragments":[{"kind":"identifier","text":"init"},{"kind":"text","text":"?("},{"kind":"externalParam","text":"rawValue"},{"kind":"text","text":": "},{"kind":"typeIdentifier","text":"String","preciseIdentifier":"s:SS"},{"kind":"text","text":")"}],"abstract":[{"type":"text","text":"Creates a new instance with the specified raw value."}],"identifier":"doc:\/\/com.okta.mobile.authfoundation\/documentation\/OktaOAuth2\/TokenExchangeFlow\/TokenType\/Kind\/init(rawValue:)","kind":"symbol","type":"topic","url":"\/documentation\/oktaoauth2\/tokenexchangeflow\/tokentype\/kind\/init(rawvalue:)"},"doc://com.okta.mobile.authfoundation/documentation/OktaOAuth2/TokenExchangeFlow/TokenType/Kind/accessToken":{"role":"symbol","title":"TokenExchangeFlow.TokenType.Kind.accessToken","fragments":[{"kind":"keyword","text":"case"},{"kind":"text","text":" "},{"kind":"identifier","text":"accessToken"}],"abstract":[],"identifier":"doc:\/\/com.okta.mobile.authfoundation\/documentation\/OktaOAuth2\/TokenExchangeFlow\/TokenType\/Kind\/accessToken","kind":"symbol","type":"topic","url":"\/documentation\/oktaoauth2\/tokenexchangeflow\/tokentype\/kind\/accesstoken"},"doc://com.okta.mobile.authfoundation/documentation/OktaOAuth2/TokenExchangeFlow/TokenType":{"role":"symbol","title":"TokenExchangeFlow.TokenType","fragments":[{"kind":"keyword","text":"enum"},{"kind":"text","text":" "},{"kind":"identifier","text":"TokenType"}],"abstract":[{"type":"text","text":"Types specify token’s identity."}],"identifier":"doc:\/\/com.okta.mobile.authfoundation\/documentation\/OktaOAuth2\/TokenExchangeFlow\/TokenType","kind":"symbol","type":"topic","navigatorTitle":[{"kind":"identifier","text":"TokenType"}],"url":"\/documentation\/oktaoauth2\/tokenexchangeflow\/tokentype"},"doc://com.okta.mobile.authfoundation/SQ":{"type":"unresolvable","title":"Swift.Equatable","identifier":"doc:\/\/com.okta.mobile.authfoundation\/SQ"}}}
+{
+  "abstract" : [
+    {
+      "text" : "Describes specific token used by ",
+      "type" : "text"
+    },
+    {
+      "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/OktaOAuth2\/TokenExchangeFlow\/TokenType",
+      "isActive" : true,
+      "type" : "reference"
+    },
+    {
+      "text" : ".",
+      "type" : "text"
+    }
+  ],
+  "hierarchy" : {
+    "paths" : [
+      [
+        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/OktaOAuth2",
+        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/OktaOAuth2\/TokenExchangeFlow",
+        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/OktaOAuth2\/TokenExchangeFlow\/TokenType"
+      ]
+    ]
+  },
+  "identifier" : {
+    "interfaceLanguage" : "swift",
+    "url" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/OktaOAuth2\/TokenExchangeFlow\/TokenType\/Kind"
+  },
+  "kind" : "symbol",
+  "metadata" : {
+    "externalID" : "s:10OktaOAuth217TokenExchangeFlowC0C4TypeO4KindO",
+    "fragments" : [
+      {
+        "kind" : "keyword",
+        "text" : "enum"
+      },
+      {
+        "kind" : "text",
+        "text" : " "
+      },
+      {
+        "kind" : "identifier",
+        "text" : "Kind"
+      }
+    ],
+    "modules" : [
+      {
+        "name" : "OktaOAuth2"
+      }
+    ],
+    "navigatorTitle" : [
+      {
+        "kind" : "identifier",
+        "text" : "Kind"
+      }
+    ],
+    "role" : "symbol",
+    "roleHeading" : "Enumeration",
+    "symbolKind" : "enum",
+    "title" : "TokenExchangeFlow.TokenType.Kind"
+  },
+  "primaryContentSections" : [
+    {
+      "declarations" : [
+        {
+          "languages" : [
+            "swift"
+          ],
+          "platforms" : [
+            "macOS"
+          ],
+          "tokens" : [
+            {
+              "kind" : "keyword",
+              "text" : "enum"
+            },
+            {
+              "kind" : "text",
+              "text" : " "
+            },
+            {
+              "kind" : "identifier",
+              "text" : "Kind"
+            }
+          ]
+        }
+      ],
+      "kind" : "declarations"
+    }
+  ],
+  "relationshipsSections" : [
+    {
+      "identifiers" : [
+        "doc:\/\/com.okta.mobile.authfoundation\/SQ",
+        "doc:\/\/com.okta.mobile.authfoundation\/SH",
+        "doc:\/\/com.okta.mobile.authfoundation\/SY"
+      ],
+      "kind" : "relationships",
+      "title" : "Conforms To",
+      "type" : "conformsTo"
+    }
+  ],
+  "schemaVersion" : {
+    "major" : 0,
+    "minor" : 2,
+    "patch" : 0
+  },
+  "sections" : [
+
+  ],
+  "topicSections" : [
+    {
+      "identifiers" : [
+        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/OktaOAuth2\/TokenExchangeFlow\/TokenType\/Kind\/accessToken",
+        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/OktaOAuth2\/TokenExchangeFlow\/TokenType\/Kind\/deviceSecret",
+        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/OktaOAuth2\/TokenExchangeFlow\/TokenType\/Kind\/idToken",
+        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/OktaOAuth2\/TokenExchangeFlow\/TokenType\/Kind\/refreshToken"
+      ],
+      "title" : "Enumeration Cases"
+    },
+    {
+      "identifiers" : [
+        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/OktaOAuth2\/TokenExchangeFlow\/TokenType\/Kind\/init(rawValue:)"
+      ],
+      "title" : "Initializers"
+    },
+    {
+      "generated" : true,
+      "identifiers" : [
+        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/OktaOAuth2\/TokenExchangeFlow\/TokenType\/Kind\/Equatable-Implementations",
+        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/OktaOAuth2\/TokenExchangeFlow\/TokenType\/Kind\/RawRepresentable-Implementations"
+      ],
+      "title" : "Default Implementations"
+    }
+  ],
+  "variants" : [
+    {
+      "paths" : [
+        "\/documentation\/oktaoauth2\/tokenexchangeflow\/tokentype\/kind"
+      ],
+      "traits" : [
+        {
+          "interfaceLanguage" : "swift"
+        }
+      ]
+    }
+  ]
+, 
+"references": {
+"doc://com.okta.mobile.authfoundation/SH": {
+  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/SH",
+  "title" : "Swift.Hashable",
+  "type" : "unresolvable"
+},
+"doc://com.okta.mobile.authfoundation/SQ": {
+  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/SQ",
+  "title" : "Swift.Equatable",
+  "type" : "unresolvable"
+},
+"doc://com.okta.mobile.authfoundation/SY": {
+  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/SY",
+  "title" : "Swift.RawRepresentable",
+  "type" : "unresolvable"
+},
+"doc://com.okta.mobile.authfoundation/documentation/OktaOAuth2": {
+  "abstract" : [
+
+  ],
+  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/OktaOAuth2",
+  "kind" : "symbol",
+  "role" : "collection",
+  "title" : "OktaOAuth2",
+  "type" : "topic",
+  "url" : "\/documentation\/oktaoauth2"
+},
+"doc://com.okta.mobile.authfoundation/documentation/OktaOAuth2/TokenExchangeFlow": {
+  "abstract" : [
+    {
+      "text" : "An authentication flow class that implements the Token Exchange Flow.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "class"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "TokenExchangeFlow"
+    }
+  ],
+  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/OktaOAuth2\/TokenExchangeFlow",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "TokenExchangeFlow"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "TokenExchangeFlow",
+  "type" : "topic",
+  "url" : "\/documentation\/oktaoauth2\/tokenexchangeflow"
+},
+"doc://com.okta.mobile.authfoundation/documentation/OktaOAuth2/TokenExchangeFlow/TokenType": {
+  "abstract" : [
+    {
+      "text" : "Types specify token’s identity.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "enum"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "TokenType"
+    }
+  ],
+  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/OktaOAuth2\/TokenExchangeFlow\/TokenType",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "TokenType"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "TokenExchangeFlow.TokenType",
+  "type" : "topic",
+  "url" : "\/documentation\/oktaoauth2\/tokenexchangeflow\/tokentype"
+},
+"doc://com.okta.mobile.authfoundation/documentation/OktaOAuth2/TokenExchangeFlow/TokenType/Kind": {
+  "abstract" : [
+    {
+      "text" : "Describes specific token used by ",
+      "type" : "text"
+    },
+    {
+      "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/OktaOAuth2\/TokenExchangeFlow\/TokenType",
+      "isActive" : true,
+      "type" : "reference"
+    },
+    {
+      "text" : ".",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "enum"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "Kind"
+    }
+  ],
+  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/OktaOAuth2\/TokenExchangeFlow\/TokenType\/Kind",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "Kind"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "TokenExchangeFlow.TokenType.Kind",
+  "type" : "topic",
+  "url" : "\/documentation\/oktaoauth2\/tokenexchangeflow\/tokentype\/kind"
+},
+"doc://com.okta.mobile.authfoundation/documentation/OktaOAuth2/TokenExchangeFlow/TokenType/Kind/Equatable-Implementations": {
+  "abstract" : [
+
+  ],
+  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/OktaOAuth2\/TokenExchangeFlow\/TokenType\/Kind\/Equatable-Implementations",
+  "kind" : "article",
+  "role" : "collectionGroup",
+  "title" : "Equatable Implementations",
+  "type" : "topic",
+  "url" : "\/documentation\/oktaoauth2\/tokenexchangeflow\/tokentype\/kind\/equatable-implementations"
+},
+"doc://com.okta.mobile.authfoundation/documentation/OktaOAuth2/TokenExchangeFlow/TokenType/Kind/RawRepresentable-Implementations": {
+  "abstract" : [
+
+  ],
+  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/OktaOAuth2\/TokenExchangeFlow\/TokenType\/Kind\/RawRepresentable-Implementations",
+  "kind" : "article",
+  "role" : "collectionGroup",
+  "title" : "RawRepresentable Implementations",
+  "type" : "topic",
+  "url" : "\/documentation\/oktaoauth2\/tokenexchangeflow\/tokentype\/kind\/rawrepresentable-implementations"
+},
+"doc://com.okta.mobile.authfoundation/documentation/OktaOAuth2/TokenExchangeFlow/TokenType/Kind/accessToken": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "case"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "accessToken"
+    }
+  ],
+  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/OktaOAuth2\/TokenExchangeFlow\/TokenType\/Kind\/accessToken",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "TokenExchangeFlow.TokenType.Kind.accessToken",
+  "type" : "topic",
+  "url" : "\/documentation\/oktaoauth2\/tokenexchangeflow\/tokentype\/kind\/accesstoken"
+},
+"doc://com.okta.mobile.authfoundation/documentation/OktaOAuth2/TokenExchangeFlow/TokenType/Kind/deviceSecret": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "case"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "deviceSecret"
+    }
+  ],
+  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/OktaOAuth2\/TokenExchangeFlow\/TokenType\/Kind\/deviceSecret",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "TokenExchangeFlow.TokenType.Kind.deviceSecret",
+  "type" : "topic",
+  "url" : "\/documentation\/oktaoauth2\/tokenexchangeflow\/tokentype\/kind\/devicesecret"
+},
+"doc://com.okta.mobile.authfoundation/documentation/OktaOAuth2/TokenExchangeFlow/TokenType/Kind/idToken": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "case"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "idToken"
+    }
+  ],
+  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/OktaOAuth2\/TokenExchangeFlow\/TokenType\/Kind\/idToken",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "TokenExchangeFlow.TokenType.Kind.idToken",
+  "type" : "topic",
+  "url" : "\/documentation\/oktaoauth2\/tokenexchangeflow\/tokentype\/kind\/idtoken"
+},
+"doc://com.okta.mobile.authfoundation/documentation/OktaOAuth2/TokenExchangeFlow/TokenType/Kind/init(rawValue:)": {
+  "abstract" : [
+    {
+      "text" : "Creates a new instance with the specified raw value.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "identifier",
+      "text" : "init"
+    },
+    {
+      "kind" : "text",
+      "text" : "?("
+    },
+    {
+      "kind" : "externalParam",
+      "text" : "rawValue"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:SS",
+      "text" : "String"
+    },
+    {
+      "kind" : "text",
+      "text" : ")"
+    }
+  ],
+  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/OktaOAuth2\/TokenExchangeFlow\/TokenType\/Kind\/init(rawValue:)",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "init(rawValue:)",
+  "type" : "topic",
+  "url" : "\/documentation\/oktaoauth2\/tokenexchangeflow\/tokentype\/kind\/init(rawvalue:)"
+},
+"doc://com.okta.mobile.authfoundation/documentation/OktaOAuth2/TokenExchangeFlow/TokenType/Kind/refreshToken": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "case"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "refreshToken"
+    }
+  ],
+  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/OktaOAuth2\/TokenExchangeFlow\/TokenType\/Kind\/refreshToken",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "TokenExchangeFlow.TokenType.Kind.refreshToken",
+  "type" : "topic",
+  "url" : "\/documentation\/oktaoauth2\/tokenexchangeflow\/tokentype\/kind\/refreshtoken"
+}
+}
+}

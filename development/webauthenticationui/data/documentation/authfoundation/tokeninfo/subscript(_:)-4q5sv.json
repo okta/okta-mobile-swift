@@ -1,1 +1,261 @@
-{"primaryContentSections":[{"kind":"declarations","declarations":[{"tokens":[{"kind":"keyword","text":"subscript"},{"kind":"text","text":"<"},{"kind":"genericParameter","text":"T"},{"kind":"text","text":">("},{"kind":"internalParam","text":"claim"},{"kind":"text","text":": "},{"kind":"typeIdentifier","text":"String","preciseIdentifier":"s:SS"},{"kind":"text","text":") -> "},{"kind":"typeIdentifier","text":"T"},{"kind":"text","text":"? { "},{"kind":"keyword","text":"get"},{"kind":"text","text":" }"}],"languages":["swift"],"platforms":["macOS"]}]}],"schemaVersion":{"major":0,"minor":2,"patch":0},"sections":[],"variants":[{"paths":["\/documentation\/authfoundation\/tokeninfo\/subscript(_:)-4q5sv"],"traits":[{"interfaceLanguage":"swift"}]}],"identifier":{"url":"doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/AuthFoundation\/TokenInfo\/subscript(_:)-4q5sv","interfaceLanguage":"swift"},"abstract":[{"type":"text","text":"No overview available."}],"kind":"symbol","metadata":{"role":"symbol","title":"subscript(_:)","roleHeading":"Instance Subscript","fragments":[{"kind":"keyword","text":"subscript"},{"kind":"text","text":"<"},{"kind":"genericParameter","text":"T"},{"kind":"text","text":">("},{"kind":"typeIdentifier","text":"String","preciseIdentifier":"s:SS"},{"kind":"text","text":") -> "},{"kind":"typeIdentifier","text":"T"},{"kind":"text","text":"?"}],"symbolKind":"subscript","externalID":"s:14AuthFoundation9HasClaimsPAAEyqd__SgSScluip::SYNTHESIZED::s:14AuthFoundation9TokenInfoV","extendedModule":"AuthFoundation","modules":[{"name":"AuthFoundation"}]},"hierarchy":{"paths":[["doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/AuthFoundation","doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/AuthFoundation\/TokenInfo","doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/AuthFoundation\/TokenInfo\/HasClaims-Implementations"]]},"references":{"doc://com.okta.mobile.webauthenticationui/documentation/AuthFoundation/TokenInfo":{"role":"symbol","title":"TokenInfo","fragments":[{"kind":"keyword","text":"struct"},{"kind":"text","text":" "},{"kind":"identifier","text":"TokenInfo"}],"abstract":[{"type":"text","text":"Introspected token information."}],"identifier":"doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/AuthFoundation\/TokenInfo","kind":"symbol","type":"topic","navigatorTitle":[{"kind":"identifier","text":"TokenInfo"}],"url":"\/documentation\/authfoundation\/tokeninfo"},"doc://com.okta.mobile.webauthenticationui/documentation/AuthFoundation":{"role":"collection","title":"AuthFoundation","abstract":[],"identifier":"doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/AuthFoundation","kind":"symbol","type":"topic","url":"\/documentation\/authfoundation"},"doc://com.okta.mobile.webauthenticationui/documentation/AuthFoundation/TokenInfo/subscript(_:)-4q5sv":{"role":"symbol","title":"subscript(_:)","fragments":[{"kind":"keyword","text":"subscript"},{"kind":"text","text":"<"},{"kind":"genericParameter","text":"T"},{"kind":"text","text":">("},{"kind":"typeIdentifier","text":"String","preciseIdentifier":"s:SS"},{"kind":"text","text":") -> "},{"kind":"typeIdentifier","text":"T"},{"kind":"text","text":"?"}],"abstract":[],"identifier":"doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/AuthFoundation\/TokenInfo\/subscript(_:)-4q5sv","kind":"symbol","type":"topic","url":"\/documentation\/authfoundation\/tokeninfo\/subscript(_:)-4q5sv"},"doc://com.okta.mobile.webauthenticationui/documentation/AuthFoundation/TokenInfo/HasClaims-Implementations":{"role":"collectionGroup","title":"HasClaims Implementations","abstract":[],"identifier":"doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/AuthFoundation\/TokenInfo\/HasClaims-Implementations","kind":"article","type":"topic","url":"\/documentation\/authfoundation\/tokeninfo\/hasclaims-implementations"}}}
+{
+  "abstract" : [
+    {
+      "text" : "No overview available.",
+      "type" : "text"
+    }
+  ],
+  "hierarchy" : {
+    "paths" : [
+      [
+        "doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/AuthFoundation",
+        "doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/AuthFoundation\/TokenInfo",
+        "doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/AuthFoundation\/TokenInfo\/HasClaims-Implementations"
+      ]
+    ]
+  },
+  "identifier" : {
+    "interfaceLanguage" : "swift",
+    "url" : "doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/AuthFoundation\/TokenInfo\/subscript(_:)-4q5sv"
+  },
+  "kind" : "symbol",
+  "metadata" : {
+    "extendedModule" : "AuthFoundation",
+    "externalID" : "s:14AuthFoundation9HasClaimsPAAEyqd__SgSScluip::SYNTHESIZED::s:14AuthFoundation9TokenInfoV",
+    "fragments" : [
+      {
+        "kind" : "keyword",
+        "text" : "subscript"
+      },
+      {
+        "kind" : "text",
+        "text" : "<"
+      },
+      {
+        "kind" : "genericParameter",
+        "text" : "T"
+      },
+      {
+        "kind" : "text",
+        "text" : ">("
+      },
+      {
+        "kind" : "typeIdentifier",
+        "preciseIdentifier" : "s:SS",
+        "text" : "String"
+      },
+      {
+        "kind" : "text",
+        "text" : ") -> "
+      },
+      {
+        "kind" : "typeIdentifier",
+        "text" : "T"
+      },
+      {
+        "kind" : "text",
+        "text" : "?"
+      }
+    ],
+    "modules" : [
+      {
+        "name" : "AuthFoundation"
+      }
+    ],
+    "role" : "symbol",
+    "roleHeading" : "Instance Subscript",
+    "symbolKind" : "subscript",
+    "title" : "subscript(_:)"
+  },
+  "primaryContentSections" : [
+    {
+      "declarations" : [
+        {
+          "languages" : [
+            "swift"
+          ],
+          "platforms" : [
+            "macOS"
+          ],
+          "tokens" : [
+            {
+              "kind" : "keyword",
+              "text" : "subscript"
+            },
+            {
+              "kind" : "text",
+              "text" : "<"
+            },
+            {
+              "kind" : "genericParameter",
+              "text" : "T"
+            },
+            {
+              "kind" : "text",
+              "text" : ">("
+            },
+            {
+              "kind" : "internalParam",
+              "text" : "claim"
+            },
+            {
+              "kind" : "text",
+              "text" : ": "
+            },
+            {
+              "kind" : "typeIdentifier",
+              "preciseIdentifier" : "s:SS",
+              "text" : "String"
+            },
+            {
+              "kind" : "text",
+              "text" : ") -> "
+            },
+            {
+              "kind" : "typeIdentifier",
+              "text" : "T"
+            },
+            {
+              "kind" : "text",
+              "text" : "? { "
+            },
+            {
+              "kind" : "keyword",
+              "text" : "get"
+            },
+            {
+              "kind" : "text",
+              "text" : " }"
+            }
+          ]
+        }
+      ],
+      "kind" : "declarations"
+    }
+  ],
+  "schemaVersion" : {
+    "major" : 0,
+    "minor" : 2,
+    "patch" : 0
+  },
+  "sections" : [
+
+  ],
+  "variants" : [
+    {
+      "paths" : [
+        "\/documentation\/authfoundation\/tokeninfo\/subscript(_:)-4q5sv"
+      ],
+      "traits" : [
+        {
+          "interfaceLanguage" : "swift"
+        }
+      ]
+    }
+  ]
+, 
+"references": {
+"doc://com.okta.mobile.webauthenticationui/documentation/AuthFoundation": {
+  "abstract" : [
+
+  ],
+  "identifier" : "doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/AuthFoundation",
+  "kind" : "symbol",
+  "role" : "collection",
+  "title" : "AuthFoundation",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation"
+},
+"doc://com.okta.mobile.webauthenticationui/documentation/AuthFoundation/TokenInfo": {
+  "abstract" : [
+    {
+      "text" : "Introspected token information.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "struct"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "TokenInfo"
+    }
+  ],
+  "identifier" : "doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/AuthFoundation\/TokenInfo",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "TokenInfo"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "TokenInfo",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/tokeninfo"
+},
+"doc://com.okta.mobile.webauthenticationui/documentation/AuthFoundation/TokenInfo/HasClaims-Implementations": {
+  "abstract" : [
+
+  ],
+  "identifier" : "doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/AuthFoundation\/TokenInfo\/HasClaims-Implementations",
+  "kind" : "article",
+  "role" : "collectionGroup",
+  "title" : "HasClaims Implementations",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/tokeninfo\/hasclaims-implementations"
+},
+"doc://com.okta.mobile.webauthenticationui/documentation/AuthFoundation/TokenInfo/subscript(_:)-4q5sv": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "subscript"
+    },
+    {
+      "kind" : "text",
+      "text" : "<"
+    },
+    {
+      "kind" : "genericParameter",
+      "text" : "T"
+    },
+    {
+      "kind" : "text",
+      "text" : ">("
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:SS",
+      "text" : "String"
+    },
+    {
+      "kind" : "text",
+      "text" : ") -> "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "text" : "T"
+    },
+    {
+      "kind" : "text",
+      "text" : "?"
+    }
+  ],
+  "identifier" : "doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/AuthFoundation\/TokenInfo\/subscript(_:)-4q5sv",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "subscript(_:)",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/tokeninfo\/subscript(_:)-4q5sv"
+}
+}
+}

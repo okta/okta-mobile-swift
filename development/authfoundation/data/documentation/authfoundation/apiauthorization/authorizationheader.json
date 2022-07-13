@@ -1,1 +1,283 @@
-{"primaryContentSections":[{"kind":"declarations","declarations":[{"tokens":[{"kind":"keyword","text":"var"},{"kind":"text","text":" "},{"kind":"identifier","text":"authorizationHeader"},{"kind":"text","text":": "},{"kind":"typeIdentifier","text":"String","preciseIdentifier":"s:SS"},{"kind":"text","text":"? { "},{"kind":"keyword","text":"get"},{"kind":"text","text":" }"}],"languages":["swift"],"platforms":["macOS"]}]}],"schemaVersion":{"major":0,"minor":2,"patch":0},"sections":[],"variants":[{"paths":["\/documentation\/authfoundation\/apiauthorization\/authorizationheader"],"traits":[{"interfaceLanguage":"swift"}]}],"identifier":{"url":"doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/APIAuthorization\/authorizationHeader","interfaceLanguage":"swift"},"abstract":[{"type":"text","text":"The value of the authorization header, or "},{"type":"codeVoice","code":"nil"},{"type":"text","text":" if none should be set."}],"kind":"symbol","metadata":{"role":"symbol","title":"authorizationHeader","roleHeading":"Instance Property","fragments":[{"kind":"keyword","text":"var"},{"kind":"text","text":" "},{"kind":"identifier","text":"authorizationHeader"},{"kind":"text","text":": "},{"kind":"typeIdentifier","text":"String","preciseIdentifier":"s:SS"},{"kind":"text","text":"?"}],"symbolKind":"property","externalID":"s:14AuthFoundation16APIAuthorizationP19authorizationHeaderSSSgvp","required":true,"modules":[{"name":"AuthFoundation"}]},"hierarchy":{"paths":[["doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation","doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/APIAuthorization"]]},"references":{"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/APIAuthorization/authorizationHeader":{"role":"symbol","title":"authorizationHeader","fragments":[{"kind":"keyword","text":"var"},{"kind":"text","text":" "},{"kind":"identifier","text":"authorizationHeader"},{"kind":"text","text":": "},{"kind":"typeIdentifier","text":"String","preciseIdentifier":"s:SS"},{"kind":"text","text":"?"}],"abstract":[{"type":"text","text":"The value of the authorization header, or "},{"type":"codeVoice","code":"nil"},{"type":"text","text":" if none should be set."}],"identifier":"doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/APIAuthorization\/authorizationHeader","kind":"symbol","required":true,"type":"topic","url":"\/documentation\/authfoundation\/apiauthorization\/authorizationheader"},"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation":{"role":"collection","title":"AuthFoundation","abstract":[{"type":"text","text":"Library that provides foundational features used by Okta’s authentication libraries, as well as APIs used to work with tokens and user credentials."}],"identifier":"doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation","kind":"symbol","type":"topic","url":"\/documentation\/authfoundation"},"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/APIRequest":{"role":"symbol","title":"APIRequest","fragments":[{"kind":"keyword","text":"protocol"},{"kind":"text","text":" "},{"kind":"identifier","text":"APIRequest"}],"abstract":[{"type":"text","text":"Abstract protocol defining the structure of an API request."}],"identifier":"doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/APIRequest","kind":"symbol","type":"topic","navigatorTitle":[{"kind":"identifier","text":"APIRequest"}],"url":"\/documentation\/authfoundation\/apirequest"},"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/APIAuthorization":{"role":"symbol","title":"APIAuthorization","fragments":[{"kind":"keyword","text":"protocol"},{"kind":"text","text":" "},{"kind":"identifier","text":"APIAuthorization"}],"abstract":[{"type":"text","text":"Defines how "},{"type":"reference","isActive":true,"identifier":"doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/APIRequest"},{"type":"text","text":" authorization headers are generated."}],"identifier":"doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/APIAuthorization","kind":"symbol","type":"topic","navigatorTitle":[{"kind":"identifier","text":"APIAuthorization"}],"url":"\/documentation\/authfoundation\/apiauthorization"}}}
+{
+  "abstract" : [
+    {
+      "text" : "The value of the authorization header, or ",
+      "type" : "text"
+    },
+    {
+      "code" : "nil",
+      "type" : "codeVoice"
+    },
+    {
+      "text" : " if none should be set.",
+      "type" : "text"
+    }
+  ],
+  "hierarchy" : {
+    "paths" : [
+      [
+        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation",
+        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/APIAuthorization"
+      ]
+    ]
+  },
+  "identifier" : {
+    "interfaceLanguage" : "swift",
+    "url" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/APIAuthorization\/authorizationHeader"
+  },
+  "kind" : "symbol",
+  "metadata" : {
+    "externalID" : "s:14AuthFoundation16APIAuthorizationP19authorizationHeaderSSSgvp",
+    "fragments" : [
+      {
+        "kind" : "keyword",
+        "text" : "var"
+      },
+      {
+        "kind" : "text",
+        "text" : " "
+      },
+      {
+        "kind" : "identifier",
+        "text" : "authorizationHeader"
+      },
+      {
+        "kind" : "text",
+        "text" : ": "
+      },
+      {
+        "kind" : "typeIdentifier",
+        "preciseIdentifier" : "s:SS",
+        "text" : "String"
+      },
+      {
+        "kind" : "text",
+        "text" : "?"
+      }
+    ],
+    "modules" : [
+      {
+        "name" : "AuthFoundation"
+      }
+    ],
+    "required" : true,
+    "role" : "symbol",
+    "roleHeading" : "Instance Property",
+    "symbolKind" : "property",
+    "title" : "authorizationHeader"
+  },
+  "primaryContentSections" : [
+    {
+      "declarations" : [
+        {
+          "languages" : [
+            "swift"
+          ],
+          "platforms" : [
+            "macOS"
+          ],
+          "tokens" : [
+            {
+              "kind" : "keyword",
+              "text" : "var"
+            },
+            {
+              "kind" : "text",
+              "text" : " "
+            },
+            {
+              "kind" : "identifier",
+              "text" : "authorizationHeader"
+            },
+            {
+              "kind" : "text",
+              "text" : ": "
+            },
+            {
+              "kind" : "typeIdentifier",
+              "preciseIdentifier" : "s:SS",
+              "text" : "String"
+            },
+            {
+              "kind" : "text",
+              "text" : "? { "
+            },
+            {
+              "kind" : "keyword",
+              "text" : "get"
+            },
+            {
+              "kind" : "text",
+              "text" : " }"
+            }
+          ]
+        }
+      ],
+      "kind" : "declarations"
+    }
+  ],
+  "schemaVersion" : {
+    "major" : 0,
+    "minor" : 2,
+    "patch" : 0
+  },
+  "sections" : [
+
+  ],
+  "variants" : [
+    {
+      "paths" : [
+        "\/documentation\/authfoundation\/apiauthorization\/authorizationheader"
+      ],
+      "traits" : [
+        {
+          "interfaceLanguage" : "swift"
+        }
+      ]
+    }
+  ]
+, 
+"references": {
+"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation": {
+  "abstract" : [
+    {
+      "text" : "Library that provides foundational features used by Okta’s authentication libraries, as well as APIs used to work with tokens and user credentials.",
+      "type" : "text"
+    }
+  ],
+  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation",
+  "kind" : "symbol",
+  "role" : "collection",
+  "title" : "AuthFoundation",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation"
+},
+"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/APIAuthorization": {
+  "abstract" : [
+    {
+      "text" : "Defines how ",
+      "type" : "text"
+    },
+    {
+      "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/APIRequest",
+      "isActive" : true,
+      "type" : "reference"
+    },
+    {
+      "text" : " authorization headers are generated.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "protocol"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "APIAuthorization"
+    }
+  ],
+  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/APIAuthorization",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "APIAuthorization"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "APIAuthorization",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/apiauthorization"
+},
+"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/APIAuthorization/authorizationHeader": {
+  "abstract" : [
+    {
+      "text" : "The value of the authorization header, or ",
+      "type" : "text"
+    },
+    {
+      "code" : "nil",
+      "type" : "codeVoice"
+    },
+    {
+      "text" : " if none should be set.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "var"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "authorizationHeader"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:SS",
+      "text" : "String"
+    },
+    {
+      "kind" : "text",
+      "text" : "?"
+    }
+  ],
+  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/APIAuthorization\/authorizationHeader",
+  "kind" : "symbol",
+  "required" : true,
+  "role" : "symbol",
+  "title" : "authorizationHeader",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/apiauthorization\/authorizationheader"
+},
+"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/APIRequest": {
+  "abstract" : [
+    {
+      "text" : "Abstract protocol defining the structure of an API request.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "protocol"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "APIRequest"
+    }
+  ],
+  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/APIRequest",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "APIRequest"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "APIRequest",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/apirequest"
+}
+}
+}

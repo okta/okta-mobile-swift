@@ -1,1 +1,591 @@
-{"primaryContentSections":[{"kind":"declarations","declarations":[{"tokens":[{"kind":"keyword","text":"func"},{"kind":"text","text":" "},{"kind":"identifier","text":"distance"},{"kind":"text","text":"("},{"kind":"externalParam","text":"from"},{"kind":"text","text":" "},{"kind":"internalParam","text":"start"},{"kind":"text","text":": "},{"kind":"typeIdentifier","text":"Self"},{"kind":"text","text":"."},{"kind":"typeIdentifier","text":"Index"},{"kind":"text","text":", "},{"kind":"externalParam","text":"to"},{"kind":"text","text":" "},{"kind":"internalParam","text":"end"},{"kind":"text","text":": "},{"kind":"typeIdentifier","text":"Self"},{"kind":"text","text":"."},{"kind":"typeIdentifier","text":"Index"},{"kind":"text","text":") -> "},{"kind":"typeIdentifier","text":"Int","preciseIdentifier":"s:Si"}],"languages":["swift"],"platforms":["macOS"]}]},{"kind":"content","content":[{"anchor":"return-value","level":2,"type":"heading","text":"Return Value"},{"type":"paragraph","inlineContent":[{"type":"text","text":"The distance between "},{"type":"codeVoice","code":"start"},{"type":"text","text":" and "},{"type":"codeVoice","code":"end"},{"type":"text","text":". The result can be"},{"type":"text","text":" "},{"type":"text","text":"negative only if the collection conforms to the"},{"type":"text","text":" "},{"type":"codeVoice","code":"BidirectionalCollection"},{"type":"text","text":" protocol."}]}]},{"kind":"parameters","parameters":[{"name":"start","content":[{"type":"paragraph","inlineContent":[{"type":"text","text":"A valid index of the collection."}]}]},{"name":"end","content":[{"type":"paragraph","inlineContent":[{"type":"text","text":"Another valid index of the collection. If "},{"type":"codeVoice","code":"end"},{"type":"text","text":" is equal to"},{"type":"text","text":" "},{"type":"codeVoice","code":"start"},{"type":"text","text":", the result is zero."}]}]}]},{"kind":"content","content":[{"anchor":"discussion","level":2,"type":"heading","text":"Discussion"},{"type":"paragraph","inlineContent":[{"type":"text","text":"Unless the collection conforms to the "},{"type":"codeVoice","code":"BidirectionalCollection"},{"type":"text","text":" protocol,"},{"type":"text","text":" "},{"type":"codeVoice","code":"start"},{"type":"text","text":" must be less than or equal to "},{"type":"codeVoice","code":"end"},{"type":"text","text":"."}]},{"style":"note","content":[{"type":"paragraph","inlineContent":[{"type":"text","text":"O(1) if the collection conforms to"},{"type":"text","text":" "},{"type":"codeVoice","code":"RandomAccessCollection"},{"type":"text","text":"; otherwise, O("},{"type":"emphasis","inlineContent":[{"type":"text","text":"k"}]},{"type":"text","text":"), where "},{"type":"emphasis","inlineContent":[{"type":"text","text":"k"}]},{"type":"text","text":" is the"},{"type":"text","text":" "},{"type":"text","text":"resulting distance."}]}],"type":"aside","name":"Complexity"}]}],"schemaVersion":{"major":0,"minor":2,"patch":0},"sections":[],"variants":[{"paths":["\/documentation\/authfoundation\/jwks\/distance(from:to:)"],"traits":[{"interfaceLanguage":"swift"}]}],"identifier":{"url":"doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/AuthFoundation\/JWKS\/distance(from:to:)","interfaceLanguage":"swift"},"abstract":[{"type":"text","text":"Returns the distance between two indices."}],"kind":"symbol","metadata":{"role":"symbol","title":"distance(from:to:)","roleHeading":"Instance Method","fragments":[{"kind":"keyword","text":"func"},{"kind":"text","text":" "},{"kind":"identifier","text":"distance"},{"kind":"text","text":"("},{"kind":"externalParam","text":"from"},{"kind":"text","text":": "},{"kind":"typeIdentifier","text":"Self"},{"kind":"text","text":"."},{"kind":"typeIdentifier","text":"Index"},{"kind":"text","text":", "},{"kind":"externalParam","text":"to"},{"kind":"text","text":": "},{"kind":"typeIdentifier","text":"Self"},{"kind":"text","text":"."},{"kind":"typeIdentifier","text":"Index"},{"kind":"text","text":") -> "},{"kind":"typeIdentifier","text":"Int","preciseIdentifier":"s:Si"}],"symbolKind":"method","externalID":"s:SlsE8distance4from2toSi5IndexQz_AEtF::SYNTHESIZED::s:14AuthFoundation4JWKSV","extendedModule":"Swift","modules":[{"name":"AuthFoundation"}]},"hierarchy":{"paths":[["doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/AuthFoundation","doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/AuthFoundation\/JWKS","doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/AuthFoundation\/JWKS\/Collection-Implementations"]]},"references":{"doc://com.okta.mobile.webauthenticationui/documentation/AuthFoundation/JWKS":{"role":"symbol","title":"JWKS","fragments":[{"kind":"keyword","text":"struct"},{"kind":"text","text":" "},{"kind":"identifier","text":"JWKS"}],"abstract":[{"type":"text","text":"Describes the collection of keys associated with an authorization server."}],"identifier":"doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/AuthFoundation\/JWKS","kind":"symbol","type":"topic","navigatorTitle":[{"kind":"identifier","text":"JWKS"}],"url":"\/documentation\/authfoundation\/jwks"},"doc://com.okta.mobile.webauthenticationui/documentation/AuthFoundation":{"role":"collection","title":"AuthFoundation","abstract":[],"identifier":"doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/AuthFoundation","kind":"symbol","type":"topic","url":"\/documentation\/authfoundation"},"doc://com.okta.mobile.webauthenticationui/documentation/AuthFoundation/JWKS/distance(from:to:)":{"role":"symbol","title":"distance(from:to:)","fragments":[{"kind":"keyword","text":"func"},{"kind":"text","text":" "},{"kind":"identifier","text":"distance"},{"kind":"text","text":"("},{"kind":"externalParam","text":"from"},{"kind":"text","text":": "},{"kind":"typeIdentifier","text":"Self"},{"kind":"text","text":"."},{"kind":"typeIdentifier","text":"Index"},{"kind":"text","text":", "},{"kind":"externalParam","text":"to"},{"kind":"text","text":": "},{"kind":"typeIdentifier","text":"Self"},{"kind":"text","text":"."},{"kind":"typeIdentifier","text":"Index"},{"kind":"text","text":") -> "},{"kind":"typeIdentifier","text":"Int","preciseIdentifier":"s:Si"}],"abstract":[{"type":"text","text":"Returns the distance between two indices."}],"identifier":"doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/AuthFoundation\/JWKS\/distance(from:to:)","kind":"symbol","type":"topic","url":"\/documentation\/authfoundation\/jwks\/distance(from:to:)"},"doc://com.okta.mobile.webauthenticationui/documentation/AuthFoundation/JWKS/Collection-Implementations":{"role":"collectionGroup","title":"Collection Implementations","abstract":[],"identifier":"doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/AuthFoundation\/JWKS\/Collection-Implementations","kind":"article","type":"topic","url":"\/documentation\/authfoundation\/jwks\/collection-implementations"}}}
+{
+  "abstract" : [
+    {
+      "text" : "Returns the distance between two indices.",
+      "type" : "text"
+    }
+  ],
+  "hierarchy" : {
+    "paths" : [
+      [
+        "doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/AuthFoundation",
+        "doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/AuthFoundation\/JWKS",
+        "doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/AuthFoundation\/JWKS\/Collection-Implementations"
+      ]
+    ]
+  },
+  "identifier" : {
+    "interfaceLanguage" : "swift",
+    "url" : "doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/AuthFoundation\/JWKS\/distance(from:to:)"
+  },
+  "kind" : "symbol",
+  "metadata" : {
+    "extendedModule" : "Swift",
+    "externalID" : "s:SlsE8distance4from2toSi5IndexQz_AEtF::SYNTHESIZED::s:14AuthFoundation4JWKSV",
+    "fragments" : [
+      {
+        "kind" : "keyword",
+        "text" : "func"
+      },
+      {
+        "kind" : "text",
+        "text" : " "
+      },
+      {
+        "kind" : "identifier",
+        "text" : "distance"
+      },
+      {
+        "kind" : "text",
+        "text" : "("
+      },
+      {
+        "kind" : "externalParam",
+        "text" : "from"
+      },
+      {
+        "kind" : "text",
+        "text" : ": "
+      },
+      {
+        "kind" : "typeIdentifier",
+        "text" : "Self"
+      },
+      {
+        "kind" : "text",
+        "text" : "."
+      },
+      {
+        "kind" : "typeIdentifier",
+        "text" : "Index"
+      },
+      {
+        "kind" : "text",
+        "text" : ", "
+      },
+      {
+        "kind" : "externalParam",
+        "text" : "to"
+      },
+      {
+        "kind" : "text",
+        "text" : ": "
+      },
+      {
+        "kind" : "typeIdentifier",
+        "text" : "Self"
+      },
+      {
+        "kind" : "text",
+        "text" : "."
+      },
+      {
+        "kind" : "typeIdentifier",
+        "text" : "Index"
+      },
+      {
+        "kind" : "text",
+        "text" : ") -> "
+      },
+      {
+        "kind" : "typeIdentifier",
+        "preciseIdentifier" : "s:Si",
+        "text" : "Int"
+      }
+    ],
+    "modules" : [
+      {
+        "name" : "AuthFoundation"
+      }
+    ],
+    "role" : "symbol",
+    "roleHeading" : "Instance Method",
+    "symbolKind" : "method",
+    "title" : "distance(from:to:)"
+  },
+  "primaryContentSections" : [
+    {
+      "declarations" : [
+        {
+          "languages" : [
+            "swift"
+          ],
+          "platforms" : [
+            "macOS"
+          ],
+          "tokens" : [
+            {
+              "kind" : "keyword",
+              "text" : "func"
+            },
+            {
+              "kind" : "text",
+              "text" : " "
+            },
+            {
+              "kind" : "identifier",
+              "text" : "distance"
+            },
+            {
+              "kind" : "text",
+              "text" : "("
+            },
+            {
+              "kind" : "externalParam",
+              "text" : "from"
+            },
+            {
+              "kind" : "text",
+              "text" : " "
+            },
+            {
+              "kind" : "internalParam",
+              "text" : "start"
+            },
+            {
+              "kind" : "text",
+              "text" : ": "
+            },
+            {
+              "kind" : "typeIdentifier",
+              "text" : "Self"
+            },
+            {
+              "kind" : "text",
+              "text" : "."
+            },
+            {
+              "kind" : "typeIdentifier",
+              "text" : "Index"
+            },
+            {
+              "kind" : "text",
+              "text" : ", "
+            },
+            {
+              "kind" : "externalParam",
+              "text" : "to"
+            },
+            {
+              "kind" : "text",
+              "text" : " "
+            },
+            {
+              "kind" : "internalParam",
+              "text" : "end"
+            },
+            {
+              "kind" : "text",
+              "text" : ": "
+            },
+            {
+              "kind" : "typeIdentifier",
+              "text" : "Self"
+            },
+            {
+              "kind" : "text",
+              "text" : "."
+            },
+            {
+              "kind" : "typeIdentifier",
+              "text" : "Index"
+            },
+            {
+              "kind" : "text",
+              "text" : ") -> "
+            },
+            {
+              "kind" : "typeIdentifier",
+              "preciseIdentifier" : "s:Si",
+              "text" : "Int"
+            }
+          ]
+        }
+      ],
+      "kind" : "declarations"
+    },
+    {
+      "content" : [
+        {
+          "anchor" : "return-value",
+          "level" : 2,
+          "text" : "Return Value",
+          "type" : "heading"
+        },
+        {
+          "inlineContent" : [
+            {
+              "text" : "The distance between ",
+              "type" : "text"
+            },
+            {
+              "code" : "start",
+              "type" : "codeVoice"
+            },
+            {
+              "text" : " and ",
+              "type" : "text"
+            },
+            {
+              "code" : "end",
+              "type" : "codeVoice"
+            },
+            {
+              "text" : ". The result can be",
+              "type" : "text"
+            },
+            {
+              "text" : " ",
+              "type" : "text"
+            },
+            {
+              "text" : "negative only if the collection conforms to the",
+              "type" : "text"
+            },
+            {
+              "text" : " ",
+              "type" : "text"
+            },
+            {
+              "code" : "BidirectionalCollection",
+              "type" : "codeVoice"
+            },
+            {
+              "text" : " protocol.",
+              "type" : "text"
+            }
+          ],
+          "type" : "paragraph"
+        }
+      ],
+      "kind" : "content"
+    },
+    {
+      "kind" : "parameters",
+      "parameters" : [
+        {
+          "content" : [
+            {
+              "inlineContent" : [
+                {
+                  "text" : "A valid index of the collection.",
+                  "type" : "text"
+                }
+              ],
+              "type" : "paragraph"
+            }
+          ],
+          "name" : "start"
+        },
+        {
+          "content" : [
+            {
+              "inlineContent" : [
+                {
+                  "text" : "Another valid index of the collection. If ",
+                  "type" : "text"
+                },
+                {
+                  "code" : "end",
+                  "type" : "codeVoice"
+                },
+                {
+                  "text" : " is equal to",
+                  "type" : "text"
+                },
+                {
+                  "text" : " ",
+                  "type" : "text"
+                },
+                {
+                  "code" : "start",
+                  "type" : "codeVoice"
+                },
+                {
+                  "text" : ", the result is zero.",
+                  "type" : "text"
+                }
+              ],
+              "type" : "paragraph"
+            }
+          ],
+          "name" : "end"
+        }
+      ]
+    },
+    {
+      "content" : [
+        {
+          "anchor" : "discussion",
+          "level" : 2,
+          "text" : "Discussion",
+          "type" : "heading"
+        },
+        {
+          "inlineContent" : [
+            {
+              "text" : "Unless the collection conforms to the ",
+              "type" : "text"
+            },
+            {
+              "code" : "BidirectionalCollection",
+              "type" : "codeVoice"
+            },
+            {
+              "text" : " protocol,",
+              "type" : "text"
+            },
+            {
+              "text" : " ",
+              "type" : "text"
+            },
+            {
+              "code" : "start",
+              "type" : "codeVoice"
+            },
+            {
+              "text" : " must be less than or equal to ",
+              "type" : "text"
+            },
+            {
+              "code" : "end",
+              "type" : "codeVoice"
+            },
+            {
+              "text" : ".",
+              "type" : "text"
+            }
+          ],
+          "type" : "paragraph"
+        },
+        {
+          "content" : [
+            {
+              "inlineContent" : [
+                {
+                  "text" : "O(1) if the collection conforms to",
+                  "type" : "text"
+                },
+                {
+                  "text" : " ",
+                  "type" : "text"
+                },
+                {
+                  "code" : "RandomAccessCollection",
+                  "type" : "codeVoice"
+                },
+                {
+                  "text" : "; otherwise, O(",
+                  "type" : "text"
+                },
+                {
+                  "inlineContent" : [
+                    {
+                      "text" : "k",
+                      "type" : "text"
+                    }
+                  ],
+                  "type" : "emphasis"
+                },
+                {
+                  "text" : "), where ",
+                  "type" : "text"
+                },
+                {
+                  "inlineContent" : [
+                    {
+                      "text" : "k",
+                      "type" : "text"
+                    }
+                  ],
+                  "type" : "emphasis"
+                },
+                {
+                  "text" : " is the",
+                  "type" : "text"
+                },
+                {
+                  "text" : " ",
+                  "type" : "text"
+                },
+                {
+                  "text" : "resulting distance.",
+                  "type" : "text"
+                }
+              ],
+              "type" : "paragraph"
+            }
+          ],
+          "name" : "Complexity",
+          "style" : "note",
+          "type" : "aside"
+        }
+      ],
+      "kind" : "content"
+    }
+  ],
+  "schemaVersion" : {
+    "major" : 0,
+    "minor" : 2,
+    "patch" : 0
+  },
+  "sections" : [
+
+  ],
+  "variants" : [
+    {
+      "paths" : [
+        "\/documentation\/authfoundation\/jwks\/distance(from:to:)"
+      ],
+      "traits" : [
+        {
+          "interfaceLanguage" : "swift"
+        }
+      ]
+    }
+  ]
+, 
+"references": {
+"doc://com.okta.mobile.webauthenticationui/documentation/AuthFoundation": {
+  "abstract" : [
+
+  ],
+  "identifier" : "doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/AuthFoundation",
+  "kind" : "symbol",
+  "role" : "collection",
+  "title" : "AuthFoundation",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation"
+},
+"doc://com.okta.mobile.webauthenticationui/documentation/AuthFoundation/JWKS": {
+  "abstract" : [
+    {
+      "text" : "Describes the collection of keys associated with an authorization server.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "struct"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "JWKS"
+    }
+  ],
+  "identifier" : "doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/AuthFoundation\/JWKS",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "JWKS"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "JWKS",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/jwks"
+},
+"doc://com.okta.mobile.webauthenticationui/documentation/AuthFoundation/JWKS/Collection-Implementations": {
+  "abstract" : [
+
+  ],
+  "identifier" : "doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/AuthFoundation\/JWKS\/Collection-Implementations",
+  "kind" : "article",
+  "role" : "collectionGroup",
+  "title" : "Collection Implementations",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/jwks\/collection-implementations"
+},
+"doc://com.okta.mobile.webauthenticationui/documentation/AuthFoundation/JWKS/distance(from:to:)": {
+  "abstract" : [
+    {
+      "text" : "Returns the distance between two indices.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "func"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "distance"
+    },
+    {
+      "kind" : "text",
+      "text" : "("
+    },
+    {
+      "kind" : "externalParam",
+      "text" : "from"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "text" : "Self"
+    },
+    {
+      "kind" : "text",
+      "text" : "."
+    },
+    {
+      "kind" : "typeIdentifier",
+      "text" : "Index"
+    },
+    {
+      "kind" : "text",
+      "text" : ", "
+    },
+    {
+      "kind" : "externalParam",
+      "text" : "to"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "text" : "Self"
+    },
+    {
+      "kind" : "text",
+      "text" : "."
+    },
+    {
+      "kind" : "typeIdentifier",
+      "text" : "Index"
+    },
+    {
+      "kind" : "text",
+      "text" : ") -> "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:Si",
+      "text" : "Int"
+    }
+  ],
+  "identifier" : "doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/AuthFoundation\/JWKS\/distance(from:to:)",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "distance(from:to:)",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/jwks\/distance(from:to:)"
+}
+}
+}

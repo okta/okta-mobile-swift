@@ -1,1 +1,986 @@
-{"seeAlsoSections":[{"title":"Networking","identifiers":["doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/APIClient","doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/APIClientDelegate","doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/APIClientConfiguration","doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/APIContentType","doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/APIRequest","doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/APIRequestBody","doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/APIRequestArgument","doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/APIRequestMethod","doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/APIResponse","doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/APIAuthorization","doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/OAuth2APIRequest","doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/JSONDecodable","doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/Empty"],"generated":true}],"schemaVersion":{"major":0,"minor":2,"patch":0},"sections":[],"primaryContentSections":[{"kind":"declarations","declarations":[{"tokens":[{"kind":"keyword","text":"protocol"},{"kind":"text","text":" "},{"kind":"identifier","text":"APIParsingContext"}],"languages":["swift"],"platforms":["macOS"]}]}],"variants":[{"paths":["\/documentation\/authfoundation\/apiparsingcontext"],"traits":[{"interfaceLanguage":"swift"}]}],"identifier":{"url":"doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/APIParsingContext","interfaceLanguage":"swift"},"abstract":[{"type":"text","text":"Provides contextual information when parsing and decoding "},{"type":"reference","isActive":true,"identifier":"doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/APIRequest"},{"type":"text","text":" responses, or errors."}],"kind":"symbol","metadata":{"fragments":[{"kind":"keyword","text":"protocol"},{"kind":"text","text":" "},{"kind":"identifier","text":"APIParsingContext"}],"title":"APIParsingContext","roleHeading":"Protocol","role":"symbol","symbolKind":"protocol","externalID":"s:14AuthFoundation17APIParsingContextP","modules":[{"name":"AuthFoundation"}],"navigatorTitle":[{"kind":"identifier","text":"APIParsingContext"}]},"hierarchy":{"paths":[["doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation"]]},"topicSections":[{"title":"Instance Properties","identifiers":["doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/APIParsingContext\/codingUserInfo"]},{"title":"Instance Methods","identifiers":["doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/APIParsingContext\/error(from:)-5p5cl"]}],"references":{"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/APIContentType":{"role":"symbol","title":"APIContentType","fragments":[{"kind":"keyword","text":"enum"},{"kind":"text","text":" "},{"kind":"identifier","text":"APIContentType"}],"abstract":[{"type":"text","text":"Describes the "},{"type":"reference","isActive":true,"identifier":"doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/APIRequest"},{"type":"text","text":" content type."}],"identifier":"doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/APIContentType","kind":"symbol","type":"topic","navigatorTitle":[{"kind":"identifier","text":"APIContentType"}],"url":"\/documentation\/authfoundation\/apicontenttype"},"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/OAuth2APIRequest":{"role":"symbol","title":"OAuth2APIRequest","fragments":[{"kind":"keyword","text":"protocol"},{"kind":"text","text":" "},{"kind":"identifier","text":"OAuth2APIRequest"}],"abstract":[{"type":"text","text":"Sub-protocol of "},{"type":"reference","isActive":true,"identifier":"doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/APIRequest"},{"type":"text","text":" used to define requests that are performed using links supplied via an organization’s "},{"type":"reference","isActive":true,"identifier":"doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/OpenIdConfiguration"},{"type":"text","text":"."}],"identifier":"doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/OAuth2APIRequest","kind":"symbol","type":"topic","navigatorTitle":[{"kind":"identifier","text":"OAuth2APIRequest"}],"url":"\/documentation\/authfoundation\/oauth2apirequest"},"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/APIRequest/headers-8ieky":{"defaultImplementations":1,"role":"symbol","title":"headers","fragments":[{"kind":"keyword","text":"var"},{"kind":"text","text":" "},{"kind":"identifier","text":"headers"},{"kind":"text","text":": ["},{"kind":"typeIdentifier","text":"String","preciseIdentifier":"s:SS"},{"kind":"text","text":" : "},{"kind":"typeIdentifier","text":"APIRequestArgument","preciseIdentifier":"s:14AuthFoundation18APIRequestArgumentP"},{"kind":"text","text":"?]?"}],"abstract":[{"type":"text","text":"Optional HTTP headers to supply."}],"identifier":"doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/APIRequest\/headers-8ieky","kind":"symbol","required":true,"type":"topic","url":"\/documentation\/authfoundation\/apirequest\/headers-8ieky"},"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/APIRequest":{"role":"symbol","title":"APIRequest","fragments":[{"kind":"keyword","text":"protocol"},{"kind":"text","text":" "},{"kind":"identifier","text":"APIRequest"}],"abstract":[{"type":"text","text":"Abstract protocol defining the structure of an API request."}],"identifier":"doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/APIRequest","kind":"symbol","type":"topic","navigatorTitle":[{"kind":"identifier","text":"APIRequest"}],"url":"\/documentation\/authfoundation\/apirequest"},"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/APIRequestMethod":{"role":"symbol","title":"APIRequestMethod","fragments":[{"kind":"keyword","text":"enum"},{"kind":"text","text":" "},{"kind":"identifier","text":"APIRequestMethod"}],"abstract":[{"type":"text","text":"API HTTP request method."}],"identifier":"doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/APIRequestMethod","kind":"symbol","type":"topic","navigatorTitle":[{"kind":"identifier","text":"APIRequestMethod"}],"url":"\/documentation\/authfoundation\/apirequestmethod"},"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/APIRequest/query-730ld":{"role":"symbol","title":"query","fragments":[{"kind":"keyword","text":"var"},{"kind":"text","text":" "},{"kind":"identifier","text":"query"},{"kind":"text","text":": ["},{"kind":"typeIdentifier","text":"String","preciseIdentifier":"s:SS"},{"kind":"text","text":" : "},{"kind":"typeIdentifier","text":"APIRequestArgument","preciseIdentifier":"s:14AuthFoundation18APIRequestArgumentP"},{"kind":"text","text":"?]?"}],"abstract":[{"type":"text","text":"Optional query string arguments."}],"identifier":"doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/APIRequest\/query-730ld","kind":"symbol","type":"topic","url":"\/documentation\/authfoundation\/apirequest\/query-730ld"},"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/OpenIdConfiguration":{"role":"symbol","title":"OpenIdConfiguration","fragments":[{"kind":"keyword","text":"struct"},{"kind":"text","text":" "},{"kind":"identifier","text":"OpenIdConfiguration"}],"abstract":[{"type":"text","text":"Describes the configuration of an OpenID server."}],"identifier":"doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/OpenIdConfiguration","kind":"symbol","type":"topic","navigatorTitle":[{"kind":"identifier","text":"OpenIdConfiguration"}],"url":"\/documentation\/authfoundation\/openidconfiguration"},"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/APIParsingContext/error(from:)-5p5cl":{"defaultImplementations":1,"role":"symbol","title":"error(from:)","fragments":[{"kind":"keyword","text":"func"},{"kind":"text","text":" "},{"kind":"identifier","text":"error"},{"kind":"text","text":"("},{"kind":"externalParam","text":"from"},{"kind":"text","text":": "},{"kind":"typeIdentifier","text":"Data","preciseIdentifier":"s:10Foundation4DataV"},{"kind":"text","text":") -> "},{"kind":"typeIdentifier","text":"Error","preciseIdentifier":"s:s5ErrorP"},{"kind":"text","text":"?"}],"abstract":[{"type":"text","text":"Generates an error response from an "},{"type":"reference","isActive":true,"identifier":"doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/APIRequest"},{"type":"text","text":" result when an HTTP error occurs."}],"identifier":"doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/APIParsingContext\/error(from:)-5p5cl","kind":"symbol","required":true,"type":"topic","url":"\/documentation\/authfoundation\/apiparsingcontext\/error(from:)-5p5cl"},"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/APIParsingContext/codingUserInfo":{"role":"symbol","title":"codingUserInfo","fragments":[{"kind":"keyword","text":"var"},{"kind":"text","text":" "},{"kind":"identifier","text":"codingUserInfo"},{"kind":"text","text":": ["},{"kind":"typeIdentifier","text":"CodingUserInfoKey","preciseIdentifier":"s:s17CodingUserInfoKeyV"},{"kind":"text","text":" : "},{"kind":"keyword","text":"Any"},{"kind":"text","text":"]?"}],"abstract":[{"type":"text","text":"Optional coding user info to use when parsing "},{"type":"reference","isActive":true,"identifier":"doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/APIRequest"},{"type":"text","text":" responses."}],"identifier":"doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/APIParsingContext\/codingUserInfo","kind":"symbol","required":true,"type":"topic","url":"\/documentation\/authfoundation\/apiparsingcontext\/codinguserinfo"},"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/APIClient":{"role":"symbol","title":"APIClient","fragments":[{"kind":"keyword","text":"protocol"},{"kind":"text","text":" "},{"kind":"identifier","text":"APIClient"}],"abstract":[{"type":"text","text":"Protocol defining the interfaces and capabilities that API clients can conform to."}],"identifier":"doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/APIClient","kind":"symbol","type":"topic","navigatorTitle":[{"kind":"identifier","text":"APIClient"}],"url":"\/documentation\/authfoundation\/apiclient"},"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/APIRequestArgument":{"role":"symbol","title":"APIRequestArgument","fragments":[{"kind":"keyword","text":"protocol"},{"kind":"text","text":" "},{"kind":"identifier","text":"APIRequestArgument"}],"abstract":[{"type":"text","text":"Defines an argument to an "},{"type":"reference","isActive":true,"identifier":"doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/APIRequest"},{"type":"text","text":". Used within "},{"type":"reference","isActive":true,"identifier":"doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/APIRequest\/headers-8ieky"},{"type":"text","text":" and "},{"type":"reference","isActive":true,"identifier":"doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/APIRequest\/query-730ld"},{"type":"text","text":"."}],"identifier":"doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/APIRequestArgument","kind":"symbol","type":"topic","navigatorTitle":[{"kind":"identifier","text":"APIRequestArgument"}],"url":"\/documentation\/authfoundation\/apirequestargument"},"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/APIResponse":{"role":"symbol","title":"APIResponse","fragments":[{"kind":"keyword","text":"struct"},{"kind":"text","text":" "},{"kind":"identifier","text":"APIResponse"}],"abstract":[{"type":"text","text":"Describes a response from an Okta request, which includes the supplied result, and other associated response metadata."}],"identifier":"doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/APIResponse","kind":"symbol","type":"topic","navigatorTitle":[{"kind":"identifier","text":"APIResponse"}],"url":"\/documentation\/authfoundation\/apiresponse"},"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/APIAuthorization":{"role":"symbol","title":"APIAuthorization","fragments":[{"kind":"keyword","text":"protocol"},{"kind":"text","text":" "},{"kind":"identifier","text":"APIAuthorization"}],"abstract":[{"type":"text","text":"Defines how "},{"type":"reference","isActive":true,"identifier":"doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/APIRequest"},{"type":"text","text":" authorization headers are generated."}],"identifier":"doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/APIAuthorization","kind":"symbol","type":"topic","navigatorTitle":[{"kind":"identifier","text":"APIAuthorization"}],"url":"\/documentation\/authfoundation\/apiauthorization"},"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/Empty":{"role":"symbol","title":"Empty","fragments":[{"kind":"keyword","text":"struct"},{"kind":"text","text":" "},{"kind":"identifier","text":"Empty"}],"abstract":[{"type":"text","text":"Describes an empty server response when a "},{"type":"reference","isActive":true,"identifier":"doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/APIResponse"},{"type":"text","text":" is received without a response body."}],"identifier":"doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/Empty","kind":"symbol","type":"topic","navigatorTitle":[{"kind":"identifier","text":"Empty"}],"url":"\/documentation\/authfoundation\/empty"},"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation":{"role":"collection","title":"AuthFoundation","abstract":[{"type":"text","text":"Library that provides foundational features used by Okta’s authentication libraries, as well as APIs used to work with tokens and user credentials."}],"identifier":"doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation","kind":"symbol","type":"topic","url":"\/documentation\/authfoundation"},"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/APIParsingContext":{"role":"symbol","title":"APIParsingContext","fragments":[{"kind":"keyword","text":"protocol"},{"kind":"text","text":" "},{"kind":"identifier","text":"APIParsingContext"}],"abstract":[{"type":"text","text":"Provides contextual information when parsing and decoding "},{"type":"reference","isActive":true,"identifier":"doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/APIRequest"},{"type":"text","text":" responses, or errors."}],"identifier":"doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/APIParsingContext","kind":"symbol","type":"topic","navigatorTitle":[{"kind":"identifier","text":"APIParsingContext"}],"url":"\/documentation\/authfoundation\/apiparsingcontext"},"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/JSONDecodable":{"role":"symbol","title":"JSONDecodable","fragments":[{"kind":"keyword","text":"protocol"},{"kind":"text","text":" "},{"kind":"identifier","text":"JSONDecodable"}],"abstract":[],"identifier":"doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/JSONDecodable","kind":"symbol","type":"topic","navigatorTitle":[{"kind":"identifier","text":"JSONDecodable"}],"url":"\/documentation\/authfoundation\/jsondecodable"},"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/APIClientConfiguration":{"role":"symbol","title":"APIClientConfiguration","fragments":[{"kind":"keyword","text":"protocol"},{"kind":"text","text":" "},{"kind":"identifier","text":"APIClientConfiguration"}],"abstract":[],"identifier":"doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/APIClientConfiguration","kind":"symbol","type":"topic","navigatorTitle":[{"kind":"identifier","text":"APIClientConfiguration"}],"url":"\/documentation\/authfoundation\/apiclientconfiguration"},"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/APIRequestBody":{"role":"symbol","title":"APIRequestBody","fragments":[{"kind":"keyword","text":"protocol"},{"kind":"text","text":" "},{"kind":"identifier","text":"APIRequestBody"}],"abstract":[{"type":"text","text":"Defines key\/value pairs for an "},{"type":"reference","isActive":true,"identifier":"doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/APIRequest"},{"type":"text","text":" body."}],"identifier":"doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/APIRequestBody","kind":"symbol","type":"topic","navigatorTitle":[{"kind":"identifier","text":"APIRequestBody"}],"url":"\/documentation\/authfoundation\/apirequestbody"},"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/APIClientDelegate":{"role":"symbol","title":"APIClientDelegate","fragments":[{"kind":"keyword","text":"protocol"},{"kind":"text","text":" "},{"kind":"identifier","text":"APIClientDelegate"}],"abstract":[{"type":"text","text":"Protocol that delegates of APIClient instances can conform to."}],"identifier":"doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/APIClientDelegate","kind":"symbol","type":"topic","navigatorTitle":[{"kind":"identifier","text":"APIClientDelegate"}],"url":"\/documentation\/authfoundation\/apiclientdelegate"}}}
+{
+  "abstract" : [
+    {
+      "text" : "Provides contextual information when parsing and decoding ",
+      "type" : "text"
+    },
+    {
+      "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/APIRequest",
+      "isActive" : true,
+      "type" : "reference"
+    },
+    {
+      "text" : " responses, or errors.",
+      "type" : "text"
+    }
+  ],
+  "hierarchy" : {
+    "paths" : [
+      [
+        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation"
+      ]
+    ]
+  },
+  "identifier" : {
+    "interfaceLanguage" : "swift",
+    "url" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/APIParsingContext"
+  },
+  "kind" : "symbol",
+  "metadata" : {
+    "externalID" : "s:14AuthFoundation17APIParsingContextP",
+    "fragments" : [
+      {
+        "kind" : "keyword",
+        "text" : "protocol"
+      },
+      {
+        "kind" : "text",
+        "text" : " "
+      },
+      {
+        "kind" : "identifier",
+        "text" : "APIParsingContext"
+      }
+    ],
+    "modules" : [
+      {
+        "name" : "AuthFoundation"
+      }
+    ],
+    "navigatorTitle" : [
+      {
+        "kind" : "identifier",
+        "text" : "APIParsingContext"
+      }
+    ],
+    "role" : "symbol",
+    "roleHeading" : "Protocol",
+    "symbolKind" : "protocol",
+    "title" : "APIParsingContext"
+  },
+  "primaryContentSections" : [
+    {
+      "declarations" : [
+        {
+          "languages" : [
+            "swift"
+          ],
+          "platforms" : [
+            "macOS"
+          ],
+          "tokens" : [
+            {
+              "kind" : "keyword",
+              "text" : "protocol"
+            },
+            {
+              "kind" : "text",
+              "text" : " "
+            },
+            {
+              "kind" : "identifier",
+              "text" : "APIParsingContext"
+            }
+          ]
+        }
+      ],
+      "kind" : "declarations"
+    }
+  ],
+  "schemaVersion" : {
+    "major" : 0,
+    "minor" : 2,
+    "patch" : 0
+  },
+  "sections" : [
+
+  ],
+  "seeAlsoSections" : [
+    {
+      "generated" : true,
+      "identifiers" : [
+        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/APIClient",
+        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/APIClientDelegate",
+        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/APIClientConfiguration",
+        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/APIContentType",
+        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/APIRequest",
+        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/APIRequestBody",
+        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/APIRequestArgument",
+        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/APIRequestMethod",
+        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/APIResponse",
+        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/APIAuthorization",
+        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/OAuth2APIRequest",
+        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/JSONDecodable",
+        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/Empty"
+      ],
+      "title" : "Networking"
+    }
+  ],
+  "topicSections" : [
+    {
+      "identifiers" : [
+        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/APIParsingContext\/codingUserInfo"
+      ],
+      "title" : "Instance Properties"
+    },
+    {
+      "identifiers" : [
+        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/APIParsingContext\/error(from:)-5p5cl"
+      ],
+      "title" : "Instance Methods"
+    }
+  ],
+  "variants" : [
+    {
+      "paths" : [
+        "\/documentation\/authfoundation\/apiparsingcontext"
+      ],
+      "traits" : [
+        {
+          "interfaceLanguage" : "swift"
+        }
+      ]
+    }
+  ]
+, 
+"references": {
+"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation": {
+  "abstract" : [
+    {
+      "text" : "Library that provides foundational features used by Okta’s authentication libraries, as well as APIs used to work with tokens and user credentials.",
+      "type" : "text"
+    }
+  ],
+  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation",
+  "kind" : "symbol",
+  "role" : "collection",
+  "title" : "AuthFoundation",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation"
+},
+"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/APIAuthorization": {
+  "abstract" : [
+    {
+      "text" : "Defines how ",
+      "type" : "text"
+    },
+    {
+      "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/APIRequest",
+      "isActive" : true,
+      "type" : "reference"
+    },
+    {
+      "text" : " authorization headers are generated.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "protocol"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "APIAuthorization"
+    }
+  ],
+  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/APIAuthorization",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "APIAuthorization"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "APIAuthorization",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/apiauthorization"
+},
+"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/APIClient": {
+  "abstract" : [
+    {
+      "text" : "Protocol defining the interfaces and capabilities that API clients can conform to.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "protocol"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "APIClient"
+    }
+  ],
+  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/APIClient",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "APIClient"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "APIClient",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/apiclient"
+},
+"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/APIClientConfiguration": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "protocol"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "APIClientConfiguration"
+    }
+  ],
+  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/APIClientConfiguration",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "APIClientConfiguration"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "APIClientConfiguration",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/apiclientconfiguration"
+},
+"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/APIClientDelegate": {
+  "abstract" : [
+    {
+      "text" : "Protocol that delegates of APIClient instances can conform to.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "protocol"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "APIClientDelegate"
+    }
+  ],
+  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/APIClientDelegate",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "APIClientDelegate"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "APIClientDelegate",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/apiclientdelegate"
+},
+"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/APIContentType": {
+  "abstract" : [
+    {
+      "text" : "Describes the ",
+      "type" : "text"
+    },
+    {
+      "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/APIRequest",
+      "isActive" : true,
+      "type" : "reference"
+    },
+    {
+      "text" : " content type.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "enum"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "APIContentType"
+    }
+  ],
+  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/APIContentType",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "APIContentType"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "APIContentType",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/apicontenttype"
+},
+"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/APIParsingContext": {
+  "abstract" : [
+    {
+      "text" : "Provides contextual information when parsing and decoding ",
+      "type" : "text"
+    },
+    {
+      "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/APIRequest",
+      "isActive" : true,
+      "type" : "reference"
+    },
+    {
+      "text" : " responses, or errors.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "protocol"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "APIParsingContext"
+    }
+  ],
+  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/APIParsingContext",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "APIParsingContext"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "APIParsingContext",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/apiparsingcontext"
+},
+"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/APIParsingContext/codingUserInfo": {
+  "abstract" : [
+    {
+      "text" : "Optional coding user info to use when parsing ",
+      "type" : "text"
+    },
+    {
+      "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/APIRequest",
+      "isActive" : true,
+      "type" : "reference"
+    },
+    {
+      "text" : " responses.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "var"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "codingUserInfo"
+    },
+    {
+      "kind" : "text",
+      "text" : ": ["
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:s17CodingUserInfoKeyV",
+      "text" : "CodingUserInfoKey"
+    },
+    {
+      "kind" : "text",
+      "text" : " : "
+    },
+    {
+      "kind" : "keyword",
+      "text" : "Any"
+    },
+    {
+      "kind" : "text",
+      "text" : "]?"
+    }
+  ],
+  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/APIParsingContext\/codingUserInfo",
+  "kind" : "symbol",
+  "required" : true,
+  "role" : "symbol",
+  "title" : "codingUserInfo",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/apiparsingcontext\/codinguserinfo"
+},
+"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/APIParsingContext/error(from:)-5p5cl": {
+  "abstract" : [
+    {
+      "text" : "Generates an error response from an ",
+      "type" : "text"
+    },
+    {
+      "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/APIRequest",
+      "isActive" : true,
+      "type" : "reference"
+    },
+    {
+      "text" : " result when an HTTP error occurs.",
+      "type" : "text"
+    }
+  ],
+  "defaultImplementations" : 1,
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "func"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "error"
+    },
+    {
+      "kind" : "text",
+      "text" : "("
+    },
+    {
+      "kind" : "externalParam",
+      "text" : "from"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:10Foundation4DataV",
+      "text" : "Data"
+    },
+    {
+      "kind" : "text",
+      "text" : ") -> "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:s5ErrorP",
+      "text" : "Error"
+    },
+    {
+      "kind" : "text",
+      "text" : "?"
+    }
+  ],
+  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/APIParsingContext\/error(from:)-5p5cl",
+  "kind" : "symbol",
+  "required" : true,
+  "role" : "symbol",
+  "title" : "error(from:)",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/apiparsingcontext\/error(from:)-5p5cl"
+},
+"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/APIRequest": {
+  "abstract" : [
+    {
+      "text" : "Abstract protocol defining the structure of an API request.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "protocol"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "APIRequest"
+    }
+  ],
+  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/APIRequest",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "APIRequest"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "APIRequest",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/apirequest"
+},
+"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/APIRequest/headers-8ieky": {
+  "abstract" : [
+    {
+      "text" : "Optional HTTP headers to supply.",
+      "type" : "text"
+    }
+  ],
+  "defaultImplementations" : 1,
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "var"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "headers"
+    },
+    {
+      "kind" : "text",
+      "text" : ": ["
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:SS",
+      "text" : "String"
+    },
+    {
+      "kind" : "text",
+      "text" : " : "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:14AuthFoundation18APIRequestArgumentP",
+      "text" : "APIRequestArgument"
+    },
+    {
+      "kind" : "text",
+      "text" : "?]?"
+    }
+  ],
+  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/APIRequest\/headers-8ieky",
+  "kind" : "symbol",
+  "required" : true,
+  "role" : "symbol",
+  "title" : "headers",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/apirequest\/headers-8ieky"
+},
+"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/APIRequest/query-730ld": {
+  "abstract" : [
+    {
+      "text" : "Optional query string arguments.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "var"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "query"
+    },
+    {
+      "kind" : "text",
+      "text" : ": ["
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:SS",
+      "text" : "String"
+    },
+    {
+      "kind" : "text",
+      "text" : " : "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:14AuthFoundation18APIRequestArgumentP",
+      "text" : "APIRequestArgument"
+    },
+    {
+      "kind" : "text",
+      "text" : "?]?"
+    }
+  ],
+  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/APIRequest\/query-730ld",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "query",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/apirequest\/query-730ld"
+},
+"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/APIRequestArgument": {
+  "abstract" : [
+    {
+      "text" : "Defines an argument to an ",
+      "type" : "text"
+    },
+    {
+      "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/APIRequest",
+      "isActive" : true,
+      "type" : "reference"
+    },
+    {
+      "text" : ". Used within ",
+      "type" : "text"
+    },
+    {
+      "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/APIRequest\/headers-8ieky",
+      "isActive" : true,
+      "type" : "reference"
+    },
+    {
+      "text" : " and ",
+      "type" : "text"
+    },
+    {
+      "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/APIRequest\/query-730ld",
+      "isActive" : true,
+      "type" : "reference"
+    },
+    {
+      "text" : ".",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "protocol"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "APIRequestArgument"
+    }
+  ],
+  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/APIRequestArgument",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "APIRequestArgument"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "APIRequestArgument",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/apirequestargument"
+},
+"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/APIRequestBody": {
+  "abstract" : [
+    {
+      "text" : "Defines key\/value pairs for an ",
+      "type" : "text"
+    },
+    {
+      "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/APIRequest",
+      "isActive" : true,
+      "type" : "reference"
+    },
+    {
+      "text" : " body.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "protocol"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "APIRequestBody"
+    }
+  ],
+  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/APIRequestBody",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "APIRequestBody"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "APIRequestBody",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/apirequestbody"
+},
+"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/APIRequestMethod": {
+  "abstract" : [
+    {
+      "text" : "API HTTP request method.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "enum"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "APIRequestMethod"
+    }
+  ],
+  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/APIRequestMethod",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "APIRequestMethod"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "APIRequestMethod",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/apirequestmethod"
+},
+"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/APIResponse": {
+  "abstract" : [
+    {
+      "text" : "Describes a response from an Okta request, which includes the supplied result, and other associated response metadata.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "struct"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "APIResponse"
+    }
+  ],
+  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/APIResponse",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "APIResponse"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "APIResponse",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/apiresponse"
+},
+"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/Empty": {
+  "abstract" : [
+    {
+      "text" : "Describes an empty server response when a ",
+      "type" : "text"
+    },
+    {
+      "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/APIResponse",
+      "isActive" : true,
+      "type" : "reference"
+    },
+    {
+      "text" : " is received without a response body.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "struct"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "Empty"
+    }
+  ],
+  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/Empty",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "Empty"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "Empty",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/empty"
+},
+"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/JSONDecodable": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "protocol"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "JSONDecodable"
+    }
+  ],
+  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/JSONDecodable",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "JSONDecodable"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "JSONDecodable",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/jsondecodable"
+},
+"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/OAuth2APIRequest": {
+  "abstract" : [
+    {
+      "text" : "Sub-protocol of ",
+      "type" : "text"
+    },
+    {
+      "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/APIRequest",
+      "isActive" : true,
+      "type" : "reference"
+    },
+    {
+      "text" : " used to define requests that are performed using links supplied via an organization’s ",
+      "type" : "text"
+    },
+    {
+      "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/OpenIdConfiguration",
+      "isActive" : true,
+      "type" : "reference"
+    },
+    {
+      "text" : ".",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "protocol"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "OAuth2APIRequest"
+    }
+  ],
+  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/OAuth2APIRequest",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "OAuth2APIRequest"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "OAuth2APIRequest",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/oauth2apirequest"
+},
+"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/OpenIdConfiguration": {
+  "abstract" : [
+    {
+      "text" : "Describes the configuration of an OpenID server.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "struct"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "OpenIdConfiguration"
+    }
+  ],
+  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/OpenIdConfiguration",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "OpenIdConfiguration"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "OpenIdConfiguration",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/openidconfiguration"
+}
+}
+}

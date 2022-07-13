@@ -1,1 +1,265 @@
-{"primaryContentSections":[{"kind":"declarations","declarations":[{"tokens":[{"kind":"keyword","text":"func"},{"kind":"text","text":" "},{"kind":"identifier","text":"encode"},{"kind":"text","text":"("},{"kind":"externalParam","text":"to"},{"kind":"text","text":" "},{"kind":"internalParam","text":"encoder"},{"kind":"text","text":": "},{"kind":"typeIdentifier","text":"Encoder","preciseIdentifier":"s:s7EncoderP"},{"kind":"text","text":") "},{"kind":"keyword","text":"throws"}],"languages":["swift"],"platforms":["macOS"]}]}],"schemaVersion":{"major":0,"minor":2,"patch":0},"sections":[],"variants":[{"paths":["\/documentation\/authfoundation\/tokeninfo\/encode(to:)"],"traits":[{"interfaceLanguage":"swift"}]}],"identifier":{"url":"doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/AuthFoundation\/TokenInfo\/encode(to:)","interfaceLanguage":"swift"},"abstract":[{"type":"text","text":"No overview available."}],"kind":"symbol","metadata":{"role":"symbol","title":"encode(to:)","roleHeading":"Instance Method","fragments":[{"kind":"keyword","text":"func"},{"kind":"text","text":" "},{"kind":"identifier","text":"encode"},{"kind":"text","text":"("},{"kind":"externalParam","text":"to"},{"kind":"text","text":": "},{"kind":"typeIdentifier","text":"Encoder","preciseIdentifier":"s:s7EncoderP"},{"kind":"text","text":") "},{"kind":"keyword","text":"throws"}],"symbolKind":"method","externalID":"s:14AuthFoundation14ClaimContainerPAAE6encode2toys7Encoder_p_tKF::SYNTHESIZED::s:14AuthFoundation9TokenInfoV","extendedModule":"AuthFoundation","modules":[{"name":"AuthFoundation"}]},"hierarchy":{"paths":[["doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/AuthFoundation","doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/AuthFoundation\/TokenInfo","doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/AuthFoundation\/TokenInfo\/ClaimContainer-Implementations"]]},"references":{"doc://com.okta.mobile.oktaoauth2/documentation/AuthFoundation/TokenInfo/encode(to:)":{"role":"symbol","title":"encode(to:)","fragments":[{"kind":"keyword","text":"func"},{"kind":"text","text":" "},{"kind":"identifier","text":"encode"},{"kind":"text","text":"("},{"kind":"externalParam","text":"to"},{"kind":"text","text":": "},{"kind":"typeIdentifier","text":"Encoder","preciseIdentifier":"s:s7EncoderP"},{"kind":"text","text":") "},{"kind":"keyword","text":"throws"}],"abstract":[],"identifier":"doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/AuthFoundation\/TokenInfo\/encode(to:)","kind":"symbol","type":"topic","url":"\/documentation\/authfoundation\/tokeninfo\/encode(to:)"},"doc://com.okta.mobile.oktaoauth2/documentation/AuthFoundation/TokenInfo/ClaimContainer-Implementations":{"role":"collectionGroup","title":"ClaimContainer Implementations","abstract":[],"identifier":"doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/AuthFoundation\/TokenInfo\/ClaimContainer-Implementations","kind":"article","type":"topic","url":"\/documentation\/authfoundation\/tokeninfo\/claimcontainer-implementations"},"doc://com.okta.mobile.oktaoauth2/documentation/AuthFoundation":{"role":"collection","title":"AuthFoundation","abstract":[],"identifier":"doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/AuthFoundation","kind":"symbol","type":"topic","url":"\/documentation\/authfoundation"},"doc://com.okta.mobile.oktaoauth2/documentation/AuthFoundation/TokenInfo":{"role":"symbol","title":"TokenInfo","fragments":[{"kind":"keyword","text":"struct"},{"kind":"text","text":" "},{"kind":"identifier","text":"TokenInfo"}],"abstract":[{"type":"text","text":"Introspected token information."}],"identifier":"doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/AuthFoundation\/TokenInfo","kind":"symbol","type":"topic","navigatorTitle":[{"kind":"identifier","text":"TokenInfo"}],"url":"\/documentation\/authfoundation\/tokeninfo"}}}
+{
+  "abstract" : [
+    {
+      "text" : "No overview available.",
+      "type" : "text"
+    }
+  ],
+  "hierarchy" : {
+    "paths" : [
+      [
+        "doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/AuthFoundation",
+        "doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/AuthFoundation\/TokenInfo",
+        "doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/AuthFoundation\/TokenInfo\/ClaimContainer-Implementations"
+      ]
+    ]
+  },
+  "identifier" : {
+    "interfaceLanguage" : "swift",
+    "url" : "doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/AuthFoundation\/TokenInfo\/encode(to:)"
+  },
+  "kind" : "symbol",
+  "metadata" : {
+    "extendedModule" : "AuthFoundation",
+    "externalID" : "s:14AuthFoundation14ClaimContainerPAAE6encode2toys7Encoder_p_tKF::SYNTHESIZED::s:14AuthFoundation9TokenInfoV",
+    "fragments" : [
+      {
+        "kind" : "keyword",
+        "text" : "func"
+      },
+      {
+        "kind" : "text",
+        "text" : " "
+      },
+      {
+        "kind" : "identifier",
+        "text" : "encode"
+      },
+      {
+        "kind" : "text",
+        "text" : "("
+      },
+      {
+        "kind" : "externalParam",
+        "text" : "to"
+      },
+      {
+        "kind" : "text",
+        "text" : ": "
+      },
+      {
+        "kind" : "typeIdentifier",
+        "preciseIdentifier" : "s:s7EncoderP",
+        "text" : "Encoder"
+      },
+      {
+        "kind" : "text",
+        "text" : ") "
+      },
+      {
+        "kind" : "keyword",
+        "text" : "throws"
+      }
+    ],
+    "modules" : [
+      {
+        "name" : "AuthFoundation"
+      }
+    ],
+    "role" : "symbol",
+    "roleHeading" : "Instance Method",
+    "symbolKind" : "method",
+    "title" : "encode(to:)"
+  },
+  "primaryContentSections" : [
+    {
+      "declarations" : [
+        {
+          "languages" : [
+            "swift"
+          ],
+          "platforms" : [
+            "macOS"
+          ],
+          "tokens" : [
+            {
+              "kind" : "keyword",
+              "text" : "func"
+            },
+            {
+              "kind" : "text",
+              "text" : " "
+            },
+            {
+              "kind" : "identifier",
+              "text" : "encode"
+            },
+            {
+              "kind" : "text",
+              "text" : "("
+            },
+            {
+              "kind" : "externalParam",
+              "text" : "to"
+            },
+            {
+              "kind" : "text",
+              "text" : " "
+            },
+            {
+              "kind" : "internalParam",
+              "text" : "encoder"
+            },
+            {
+              "kind" : "text",
+              "text" : ": "
+            },
+            {
+              "kind" : "typeIdentifier",
+              "preciseIdentifier" : "s:s7EncoderP",
+              "text" : "Encoder"
+            },
+            {
+              "kind" : "text",
+              "text" : ") "
+            },
+            {
+              "kind" : "keyword",
+              "text" : "throws"
+            }
+          ]
+        }
+      ],
+      "kind" : "declarations"
+    }
+  ],
+  "schemaVersion" : {
+    "major" : 0,
+    "minor" : 2,
+    "patch" : 0
+  },
+  "sections" : [
+
+  ],
+  "variants" : [
+    {
+      "paths" : [
+        "\/documentation\/authfoundation\/tokeninfo\/encode(to:)"
+      ],
+      "traits" : [
+        {
+          "interfaceLanguage" : "swift"
+        }
+      ]
+    }
+  ]
+, 
+"references": {
+"doc://com.okta.mobile.oktaoauth2/documentation/AuthFoundation": {
+  "abstract" : [
+
+  ],
+  "identifier" : "doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/AuthFoundation",
+  "kind" : "symbol",
+  "role" : "collection",
+  "title" : "AuthFoundation",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation"
+},
+"doc://com.okta.mobile.oktaoauth2/documentation/AuthFoundation/TokenInfo": {
+  "abstract" : [
+    {
+      "text" : "Introspected token information.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "struct"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "TokenInfo"
+    }
+  ],
+  "identifier" : "doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/AuthFoundation\/TokenInfo",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "TokenInfo"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "TokenInfo",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/tokeninfo"
+},
+"doc://com.okta.mobile.oktaoauth2/documentation/AuthFoundation/TokenInfo/ClaimContainer-Implementations": {
+  "abstract" : [
+
+  ],
+  "identifier" : "doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/AuthFoundation\/TokenInfo\/ClaimContainer-Implementations",
+  "kind" : "article",
+  "role" : "collectionGroup",
+  "title" : "ClaimContainer Implementations",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/tokeninfo\/claimcontainer-implementations"
+},
+"doc://com.okta.mobile.oktaoauth2/documentation/AuthFoundation/TokenInfo/encode(to:)": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "func"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "encode"
+    },
+    {
+      "kind" : "text",
+      "text" : "("
+    },
+    {
+      "kind" : "externalParam",
+      "text" : "to"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:s7EncoderP",
+      "text" : "Encoder"
+    },
+    {
+      "kind" : "text",
+      "text" : ") "
+    },
+    {
+      "kind" : "keyword",
+      "text" : "throws"
+    }
+  ],
+  "identifier" : "doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/AuthFoundation\/TokenInfo\/encode(to:)",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "encode(to:)",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/tokeninfo\/encode(to:)"
+}
+}
+}

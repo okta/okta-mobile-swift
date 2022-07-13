@@ -1,1 +1,229 @@
-{"primaryContentSections":[{"kind":"declarations","declarations":[{"tokens":[{"kind":"keyword","text":"var"},{"kind":"text","text":" "},{"kind":"identifier","text":"errorDescription"},{"kind":"text","text":": "},{"kind":"typeIdentifier","text":"String","preciseIdentifier":"s:SS"},{"kind":"text","text":"? { "},{"kind":"keyword","text":"get"},{"kind":"text","text":" }"}],"languages":["swift"],"platforms":["macOS"]}]}],"schemaVersion":{"major":0,"minor":2,"patch":0},"sections":[],"variants":[{"paths":["\/documentation\/webauthenticationui\/webauthenticationerror\/errordescription-3wen2"],"traits":[{"interfaceLanguage":"swift"}]}],"identifier":{"url":"doc:\/\/com.okta.mobile.authfoundation\/documentation\/WebAuthenticationUI\/WebAuthenticationError\/errorDescription-3wen2","interfaceLanguage":"swift"},"abstract":[{"type":"text","text":"A localized message describing what error occurred."}],"kind":"symbol","metadata":{"role":"symbol","title":"errorDescription","roleHeading":"Instance Property","fragments":[{"kind":"keyword","text":"var"},{"kind":"text","text":" "},{"kind":"identifier","text":"errorDescription"},{"kind":"text","text":": "},{"kind":"typeIdentifier","text":"String","preciseIdentifier":"s:SS"},{"kind":"text","text":"?"}],"symbolKind":"property","externalID":"s:19WebAuthenticationUI0aB5ErrorO16errorDescriptionSSSgvp","extendedModule":"WebAuthenticationUI","modules":[{"name":"WebAuthenticationUI"}]},"hierarchy":{"paths":[["doc:\/\/com.okta.mobile.authfoundation\/documentation\/WebAuthenticationUI","doc:\/\/com.okta.mobile.authfoundation\/documentation\/WebAuthenticationUI\/WebAuthenticationError","doc:\/\/com.okta.mobile.authfoundation\/documentation\/WebAuthenticationUI\/WebAuthenticationError\/LocalizedError-Implementations"]]},"references":{"doc://com.okta.mobile.authfoundation/documentation/WebAuthenticationUI/WebAuthenticationError/LocalizedError-Implementations":{"role":"collectionGroup","title":"LocalizedError Implementations","abstract":[],"identifier":"doc:\/\/com.okta.mobile.authfoundation\/documentation\/WebAuthenticationUI\/WebAuthenticationError\/LocalizedError-Implementations","kind":"article","type":"topic","url":"\/documentation\/webauthenticationui\/webauthenticationerror\/localizederror-implementations"},"doc://com.okta.mobile.authfoundation/documentation/WebAuthenticationUI/WebAuthenticationError/errorDescription-3wen2":{"role":"symbol","title":"errorDescription","fragments":[{"kind":"keyword","text":"var"},{"kind":"text","text":" "},{"kind":"identifier","text":"errorDescription"},{"kind":"text","text":": "},{"kind":"typeIdentifier","text":"String","preciseIdentifier":"s:SS"},{"kind":"text","text":"?"}],"abstract":[{"type":"text","text":"A localized message describing what error occurred."}],"identifier":"doc:\/\/com.okta.mobile.authfoundation\/documentation\/WebAuthenticationUI\/WebAuthenticationError\/errorDescription-3wen2","kind":"symbol","type":"topic","url":"\/documentation\/webauthenticationui\/webauthenticationerror\/errordescription-3wen2"},"doc://com.okta.mobile.authfoundation/documentation/WebAuthenticationUI":{"role":"collection","title":"WebAuthenticationUI","abstract":[],"identifier":"doc:\/\/com.okta.mobile.authfoundation\/documentation\/WebAuthenticationUI","kind":"symbol","type":"topic","url":"\/documentation\/webauthenticationui"},"doc://com.okta.mobile.authfoundation/documentation/WebAuthenticationUI/WebAuthenticationError":{"role":"symbol","title":"WebAuthenticationError","fragments":[{"kind":"keyword","text":"enum"},{"kind":"text","text":" "},{"kind":"identifier","text":"WebAuthenticationError"}],"abstract":[],"identifier":"doc:\/\/com.okta.mobile.authfoundation\/documentation\/WebAuthenticationUI\/WebAuthenticationError","kind":"symbol","type":"topic","navigatorTitle":[{"kind":"identifier","text":"WebAuthenticationError"}],"url":"\/documentation\/webauthenticationui\/webauthenticationerror"}}}
+{
+  "abstract" : [
+    {
+      "text" : "A localized message describing what error occurred.",
+      "type" : "text"
+    }
+  ],
+  "hierarchy" : {
+    "paths" : [
+      [
+        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/WebAuthenticationUI",
+        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/WebAuthenticationUI\/WebAuthenticationError",
+        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/WebAuthenticationUI\/WebAuthenticationError\/LocalizedError-Implementations"
+      ]
+    ]
+  },
+  "identifier" : {
+    "interfaceLanguage" : "swift",
+    "url" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/WebAuthenticationUI\/WebAuthenticationError\/errorDescription-3wen2"
+  },
+  "kind" : "symbol",
+  "metadata" : {
+    "extendedModule" : "WebAuthenticationUI",
+    "externalID" : "s:19WebAuthenticationUI0aB5ErrorO16errorDescriptionSSSgvp",
+    "fragments" : [
+      {
+        "kind" : "keyword",
+        "text" : "var"
+      },
+      {
+        "kind" : "text",
+        "text" : " "
+      },
+      {
+        "kind" : "identifier",
+        "text" : "errorDescription"
+      },
+      {
+        "kind" : "text",
+        "text" : ": "
+      },
+      {
+        "kind" : "typeIdentifier",
+        "preciseIdentifier" : "s:SS",
+        "text" : "String"
+      },
+      {
+        "kind" : "text",
+        "text" : "?"
+      }
+    ],
+    "modules" : [
+      {
+        "name" : "WebAuthenticationUI"
+      }
+    ],
+    "role" : "symbol",
+    "roleHeading" : "Instance Property",
+    "symbolKind" : "property",
+    "title" : "errorDescription"
+  },
+  "primaryContentSections" : [
+    {
+      "declarations" : [
+        {
+          "languages" : [
+            "swift"
+          ],
+          "platforms" : [
+            "macOS"
+          ],
+          "tokens" : [
+            {
+              "kind" : "keyword",
+              "text" : "var"
+            },
+            {
+              "kind" : "text",
+              "text" : " "
+            },
+            {
+              "kind" : "identifier",
+              "text" : "errorDescription"
+            },
+            {
+              "kind" : "text",
+              "text" : ": "
+            },
+            {
+              "kind" : "typeIdentifier",
+              "preciseIdentifier" : "s:SS",
+              "text" : "String"
+            },
+            {
+              "kind" : "text",
+              "text" : "? { "
+            },
+            {
+              "kind" : "keyword",
+              "text" : "get"
+            },
+            {
+              "kind" : "text",
+              "text" : " }"
+            }
+          ]
+        }
+      ],
+      "kind" : "declarations"
+    }
+  ],
+  "schemaVersion" : {
+    "major" : 0,
+    "minor" : 2,
+    "patch" : 0
+  },
+  "sections" : [
+
+  ],
+  "variants" : [
+    {
+      "paths" : [
+        "\/documentation\/webauthenticationui\/webauthenticationerror\/errordescription-3wen2"
+      ],
+      "traits" : [
+        {
+          "interfaceLanguage" : "swift"
+        }
+      ]
+    }
+  ]
+, 
+"references": {
+"doc://com.okta.mobile.authfoundation/documentation/WebAuthenticationUI": {
+  "abstract" : [
+
+  ],
+  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/WebAuthenticationUI",
+  "kind" : "symbol",
+  "role" : "collection",
+  "title" : "WebAuthenticationUI",
+  "type" : "topic",
+  "url" : "\/documentation\/webauthenticationui"
+},
+"doc://com.okta.mobile.authfoundation/documentation/WebAuthenticationUI/WebAuthenticationError": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "enum"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "WebAuthenticationError"
+    }
+  ],
+  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/WebAuthenticationUI\/WebAuthenticationError",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "WebAuthenticationError"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "WebAuthenticationError",
+  "type" : "topic",
+  "url" : "\/documentation\/webauthenticationui\/webauthenticationerror"
+},
+"doc://com.okta.mobile.authfoundation/documentation/WebAuthenticationUI/WebAuthenticationError/LocalizedError-Implementations": {
+  "abstract" : [
+
+  ],
+  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/WebAuthenticationUI\/WebAuthenticationError\/LocalizedError-Implementations",
+  "kind" : "article",
+  "role" : "collectionGroup",
+  "title" : "LocalizedError Implementations",
+  "type" : "topic",
+  "url" : "\/documentation\/webauthenticationui\/webauthenticationerror\/localizederror-implementations"
+},
+"doc://com.okta.mobile.authfoundation/documentation/WebAuthenticationUI/WebAuthenticationError/errorDescription-3wen2": {
+  "abstract" : [
+    {
+      "text" : "A localized message describing what error occurred.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "var"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "errorDescription"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:SS",
+      "text" : "String"
+    },
+    {
+      "kind" : "text",
+      "text" : "?"
+    }
+  ],
+  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/WebAuthenticationUI\/WebAuthenticationError\/errorDescription-3wen2",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "errorDescription",
+  "type" : "topic",
+  "url" : "\/documentation\/webauthenticationui\/webauthenticationerror\/errordescription-3wen2"
+}
+}
+}

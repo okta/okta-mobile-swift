@@ -1,1 +1,377 @@
-{"variants":[{"paths":["\/documentation\/oktaoauth2\/tokenexchangeflow\/tokentype\/kind\/rawrepresentable-implementations"],"traits":[{"interfaceLanguage":"swift"}]}],"schemaVersion":{"major":0,"minor":2,"patch":0},"sections":[],"identifier":{"url":"doc:\/\/com.okta.mobile.authfoundation\/documentation\/OktaOAuth2\/TokenExchangeFlow\/TokenType\/Kind\/RawRepresentable-Implementations","interfaceLanguage":"swift"},"abstract":[{"type":"text","text":"No overview available."}],"kind":"article","metadata":{"modules":[{"name":"OktaOAuth2"}],"role":"collectionGroup","title":"RawRepresentable Implementations"},"hierarchy":{"paths":[["doc:\/\/com.okta.mobile.authfoundation\/documentation\/OktaOAuth2","doc:\/\/com.okta.mobile.authfoundation\/documentation\/OktaOAuth2\/TokenExchangeFlow","doc:\/\/com.okta.mobile.authfoundation\/documentation\/OktaOAuth2\/TokenExchangeFlow\/TokenType","doc:\/\/com.okta.mobile.authfoundation\/documentation\/OktaOAuth2\/TokenExchangeFlow\/TokenType\/Kind"]]},"topicSections":[{"title":"Instance Properties","identifiers":["doc:\/\/com.okta.mobile.authfoundation\/documentation\/OktaOAuth2\/TokenExchangeFlow\/TokenType\/Kind\/hashValue"],"generated":true},{"title":"Instance Methods","identifiers":["doc:\/\/com.okta.mobile.authfoundation\/documentation\/OktaOAuth2\/TokenExchangeFlow\/TokenType\/Kind\/hash(into:)"],"generated":true}],"references":{"doc://com.okta.mobile.authfoundation/documentation/OktaOAuth2/TokenExchangeFlow/TokenType/Kind":{"role":"symbol","title":"TokenExchangeFlow.TokenType.Kind","fragments":[{"kind":"keyword","text":"enum"},{"kind":"text","text":" "},{"kind":"identifier","text":"Kind"}],"abstract":[{"type":"text","text":"Describes specific token used by "},{"type":"reference","isActive":true,"identifier":"doc:\/\/com.okta.mobile.authfoundation\/documentation\/OktaOAuth2\/TokenExchangeFlow\/TokenType"},{"type":"text","text":"."}],"identifier":"doc:\/\/com.okta.mobile.authfoundation\/documentation\/OktaOAuth2\/TokenExchangeFlow\/TokenType\/Kind","kind":"symbol","type":"topic","navigatorTitle":[{"kind":"identifier","text":"Kind"}],"url":"\/documentation\/oktaoauth2\/tokenexchangeflow\/tokentype\/kind"},"doc://com.okta.mobile.authfoundation/documentation/OktaOAuth2/TokenExchangeFlow/TokenType/Kind/hash(into:)":{"conformance":{"constraints":[{"type":"codeVoice","code":"Self"},{"type":"text","text":" conforms to "},{"type":"codeVoice","code":"Hashable"},{"type":"text","text":" and "},{"type":"codeVoice","code":"RawValue"},{"type":"text","text":" conforms to "},{"type":"codeVoice","code":"Hashable"},{"type":"text","text":"."}],"availabilityPrefix":[{"type":"text","text":"Available when"}],"conformancePrefix":[{"type":"text","text":"Conforms when"}]},"role":"symbol","title":"hash(into:)","fragments":[{"kind":"keyword","text":"func"},{"kind":"text","text":" "},{"kind":"identifier","text":"hash"},{"kind":"text","text":"("},{"kind":"externalParam","text":"into"},{"kind":"text","text":": "},{"kind":"keyword","text":"inout"},{"kind":"text","text":" "},{"kind":"typeIdentifier","text":"Hasher","preciseIdentifier":"s:s6HasherV"},{"kind":"text","text":")"}],"abstract":[],"identifier":"doc:\/\/com.okta.mobile.authfoundation\/documentation\/OktaOAuth2\/TokenExchangeFlow\/TokenType\/Kind\/hash(into:)","kind":"symbol","type":"topic","url":"\/documentation\/oktaoauth2\/tokenexchangeflow\/tokentype\/kind\/hash(into:)"},"doc://com.okta.mobile.authfoundation/documentation/OktaOAuth2/TokenExchangeFlow/TokenType":{"role":"symbol","title":"TokenExchangeFlow.TokenType","fragments":[{"kind":"keyword","text":"enum"},{"kind":"text","text":" "},{"kind":"identifier","text":"TokenType"}],"abstract":[{"type":"text","text":"Types specify token’s identity."}],"identifier":"doc:\/\/com.okta.mobile.authfoundation\/documentation\/OktaOAuth2\/TokenExchangeFlow\/TokenType","kind":"symbol","type":"topic","navigatorTitle":[{"kind":"identifier","text":"TokenType"}],"url":"\/documentation\/oktaoauth2\/tokenexchangeflow\/tokentype"},"doc://com.okta.mobile.authfoundation/documentation/OktaOAuth2/TokenExchangeFlow":{"role":"symbol","title":"TokenExchangeFlow","fragments":[{"kind":"keyword","text":"class"},{"kind":"text","text":" "},{"kind":"identifier","text":"TokenExchangeFlow"}],"abstract":[{"type":"text","text":"An authentication flow class that implements the Token Exchange Flow."}],"identifier":"doc:\/\/com.okta.mobile.authfoundation\/documentation\/OktaOAuth2\/TokenExchangeFlow","kind":"symbol","type":"topic","navigatorTitle":[{"kind":"identifier","text":"TokenExchangeFlow"}],"url":"\/documentation\/oktaoauth2\/tokenexchangeflow"},"doc://com.okta.mobile.authfoundation/documentation/OktaOAuth2/TokenExchangeFlow/TokenType/Kind/hashValue":{"conformance":{"constraints":[{"type":"codeVoice","code":"Self"},{"type":"text","text":" conforms to "},{"type":"codeVoice","code":"Hashable"},{"type":"text","text":" and "},{"type":"codeVoice","code":"RawValue"},{"type":"text","text":" conforms to "},{"type":"codeVoice","code":"Hashable"},{"type":"text","text":"."}],"availabilityPrefix":[{"type":"text","text":"Available when"}],"conformancePrefix":[{"type":"text","text":"Conforms when"}]},"role":"symbol","title":"hashValue","fragments":[{"kind":"keyword","text":"var"},{"kind":"text","text":" "},{"kind":"identifier","text":"hashValue"},{"kind":"text","text":": "},{"kind":"typeIdentifier","text":"Int","preciseIdentifier":"s:Si"}],"abstract":[],"identifier":"doc:\/\/com.okta.mobile.authfoundation\/documentation\/OktaOAuth2\/TokenExchangeFlow\/TokenType\/Kind\/hashValue","kind":"symbol","type":"topic","url":"\/documentation\/oktaoauth2\/tokenexchangeflow\/tokentype\/kind\/hashvalue"},"doc://com.okta.mobile.authfoundation/documentation/OktaOAuth2":{"role":"collection","title":"OktaOAuth2","abstract":[],"identifier":"doc:\/\/com.okta.mobile.authfoundation\/documentation\/OktaOAuth2","kind":"symbol","type":"topic","url":"\/documentation\/oktaoauth2"}}}
+{
+  "abstract" : [
+    {
+      "text" : "No overview available.",
+      "type" : "text"
+    }
+  ],
+  "hierarchy" : {
+    "paths" : [
+      [
+        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/OktaOAuth2",
+        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/OktaOAuth2\/TokenExchangeFlow",
+        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/OktaOAuth2\/TokenExchangeFlow\/TokenType",
+        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/OktaOAuth2\/TokenExchangeFlow\/TokenType\/Kind"
+      ]
+    ]
+  },
+  "identifier" : {
+    "interfaceLanguage" : "swift",
+    "url" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/OktaOAuth2\/TokenExchangeFlow\/TokenType\/Kind\/RawRepresentable-Implementations"
+  },
+  "kind" : "article",
+  "metadata" : {
+    "modules" : [
+      {
+        "name" : "OktaOAuth2"
+      }
+    ],
+    "role" : "collectionGroup",
+    "title" : "RawRepresentable Implementations"
+  },
+  "schemaVersion" : {
+    "major" : 0,
+    "minor" : 2,
+    "patch" : 0
+  },
+  "sections" : [
+
+  ],
+  "topicSections" : [
+    {
+      "generated" : true,
+      "identifiers" : [
+        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/OktaOAuth2\/TokenExchangeFlow\/TokenType\/Kind\/hashValue"
+      ],
+      "title" : "Instance Properties"
+    },
+    {
+      "generated" : true,
+      "identifiers" : [
+        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/OktaOAuth2\/TokenExchangeFlow\/TokenType\/Kind\/hash(into:)"
+      ],
+      "title" : "Instance Methods"
+    }
+  ],
+  "variants" : [
+    {
+      "paths" : [
+        "\/documentation\/oktaoauth2\/tokenexchangeflow\/tokentype\/kind\/rawrepresentable-implementations"
+      ],
+      "traits" : [
+        {
+          "interfaceLanguage" : "swift"
+        }
+      ]
+    }
+  ]
+, 
+"references": {
+"doc://com.okta.mobile.authfoundation/documentation/OktaOAuth2": {
+  "abstract" : [
+
+  ],
+  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/OktaOAuth2",
+  "kind" : "symbol",
+  "role" : "collection",
+  "title" : "OktaOAuth2",
+  "type" : "topic",
+  "url" : "\/documentation\/oktaoauth2"
+},
+"doc://com.okta.mobile.authfoundation/documentation/OktaOAuth2/TokenExchangeFlow": {
+  "abstract" : [
+    {
+      "text" : "An authentication flow class that implements the Token Exchange Flow.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "class"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "TokenExchangeFlow"
+    }
+  ],
+  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/OktaOAuth2\/TokenExchangeFlow",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "TokenExchangeFlow"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "TokenExchangeFlow",
+  "type" : "topic",
+  "url" : "\/documentation\/oktaoauth2\/tokenexchangeflow"
+},
+"doc://com.okta.mobile.authfoundation/documentation/OktaOAuth2/TokenExchangeFlow/TokenType": {
+  "abstract" : [
+    {
+      "text" : "Types specify token’s identity.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "enum"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "TokenType"
+    }
+  ],
+  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/OktaOAuth2\/TokenExchangeFlow\/TokenType",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "TokenType"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "TokenExchangeFlow.TokenType",
+  "type" : "topic",
+  "url" : "\/documentation\/oktaoauth2\/tokenexchangeflow\/tokentype"
+},
+"doc://com.okta.mobile.authfoundation/documentation/OktaOAuth2/TokenExchangeFlow/TokenType/Kind": {
+  "abstract" : [
+    {
+      "text" : "Describes specific token used by ",
+      "type" : "text"
+    },
+    {
+      "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/OktaOAuth2\/TokenExchangeFlow\/TokenType",
+      "isActive" : true,
+      "type" : "reference"
+    },
+    {
+      "text" : ".",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "enum"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "Kind"
+    }
+  ],
+  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/OktaOAuth2\/TokenExchangeFlow\/TokenType\/Kind",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "Kind"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "TokenExchangeFlow.TokenType.Kind",
+  "type" : "topic",
+  "url" : "\/documentation\/oktaoauth2\/tokenexchangeflow\/tokentype\/kind"
+},
+"doc://com.okta.mobile.authfoundation/documentation/OktaOAuth2/TokenExchangeFlow/TokenType/Kind/hash(into:)": {
+  "abstract" : [
+
+  ],
+  "conformance" : {
+    "availabilityPrefix" : [
+      {
+        "text" : "Available when",
+        "type" : "text"
+      }
+    ],
+    "conformancePrefix" : [
+      {
+        "text" : "Conforms when",
+        "type" : "text"
+      }
+    ],
+    "constraints" : [
+      {
+        "code" : "Self",
+        "type" : "codeVoice"
+      },
+      {
+        "text" : " conforms to ",
+        "type" : "text"
+      },
+      {
+        "code" : "Hashable",
+        "type" : "codeVoice"
+      },
+      {
+        "text" : " and ",
+        "type" : "text"
+      },
+      {
+        "code" : "RawValue",
+        "type" : "codeVoice"
+      },
+      {
+        "text" : " conforms to ",
+        "type" : "text"
+      },
+      {
+        "code" : "Hashable",
+        "type" : "codeVoice"
+      },
+      {
+        "text" : ".",
+        "type" : "text"
+      }
+    ]
+  },
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "func"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "hash"
+    },
+    {
+      "kind" : "text",
+      "text" : "("
+    },
+    {
+      "kind" : "externalParam",
+      "text" : "into"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "keyword",
+      "text" : "inout"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:s6HasherV",
+      "text" : "Hasher"
+    },
+    {
+      "kind" : "text",
+      "text" : ")"
+    }
+  ],
+  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/OktaOAuth2\/TokenExchangeFlow\/TokenType\/Kind\/hash(into:)",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "hash(into:)",
+  "type" : "topic",
+  "url" : "\/documentation\/oktaoauth2\/tokenexchangeflow\/tokentype\/kind\/hash(into:)"
+},
+"doc://com.okta.mobile.authfoundation/documentation/OktaOAuth2/TokenExchangeFlow/TokenType/Kind/hashValue": {
+  "abstract" : [
+
+  ],
+  "conformance" : {
+    "availabilityPrefix" : [
+      {
+        "text" : "Available when",
+        "type" : "text"
+      }
+    ],
+    "conformancePrefix" : [
+      {
+        "text" : "Conforms when",
+        "type" : "text"
+      }
+    ],
+    "constraints" : [
+      {
+        "code" : "Self",
+        "type" : "codeVoice"
+      },
+      {
+        "text" : " conforms to ",
+        "type" : "text"
+      },
+      {
+        "code" : "Hashable",
+        "type" : "codeVoice"
+      },
+      {
+        "text" : " and ",
+        "type" : "text"
+      },
+      {
+        "code" : "RawValue",
+        "type" : "codeVoice"
+      },
+      {
+        "text" : " conforms to ",
+        "type" : "text"
+      },
+      {
+        "code" : "Hashable",
+        "type" : "codeVoice"
+      },
+      {
+        "text" : ".",
+        "type" : "text"
+      }
+    ]
+  },
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "var"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "hashValue"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:Si",
+      "text" : "Int"
+    }
+  ],
+  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/OktaOAuth2\/TokenExchangeFlow\/TokenType\/Kind\/hashValue",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "hashValue",
+  "type" : "topic",
+  "url" : "\/documentation\/oktaoauth2\/tokenexchangeflow\/tokentype\/kind\/hashvalue"
+}
+}
+}

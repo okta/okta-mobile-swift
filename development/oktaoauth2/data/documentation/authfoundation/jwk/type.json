@@ -1,1 +1,234 @@
-{"primaryContentSections":[{"kind":"declarations","declarations":[{"tokens":[{"kind":"keyword","text":"let"},{"kind":"text","text":" "},{"kind":"identifier","text":"type"},{"kind":"text","text":": "},{"kind":"typeIdentifier","identifier":"doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/AuthFoundation\/JWK\/KeyType","preciseIdentifier":"s:14AuthFoundation3JWKV7KeyTypeO","text":"KeyType"}],"languages":["swift"],"platforms":["macOS"]}]}],"schemaVersion":{"major":0,"minor":2,"patch":0},"sections":[],"variants":[{"paths":["\/documentation\/authfoundation\/jwk\/type"],"traits":[{"interfaceLanguage":"swift"}]}],"identifier":{"url":"doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/AuthFoundation\/JWK\/type","interfaceLanguage":"swift"},"abstract":[{"type":"text","text":"The type of this key."}],"kind":"symbol","metadata":{"fragments":[{"kind":"keyword","text":"let"},{"kind":"text","text":" "},{"kind":"identifier","text":"type"},{"kind":"text","text":": "},{"kind":"typeIdentifier","text":"KeyType","preciseIdentifier":"s:14AuthFoundation3JWKV7KeyTypeO"}],"title":"type","roleHeading":"Instance Property","role":"symbol","symbolKind":"property","externalID":"s:14AuthFoundation3JWKV4typeAC7KeyTypeOvp","modules":[{"name":"AuthFoundation"}]},"hierarchy":{"paths":[["doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/AuthFoundation","doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/AuthFoundation\/JWK"]]},"references":{"doc://com.okta.mobile.oktaoauth2/documentation/AuthFoundation/JWK/type":{"role":"symbol","title":"type","fragments":[{"kind":"keyword","text":"let"},{"kind":"text","text":" "},{"kind":"identifier","text":"type"},{"kind":"text","text":": "},{"kind":"typeIdentifier","text":"KeyType","preciseIdentifier":"s:14AuthFoundation3JWKV7KeyTypeO"}],"abstract":[{"type":"text","text":"The type of this key."}],"identifier":"doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/AuthFoundation\/JWK\/type","kind":"symbol","type":"topic","url":"\/documentation\/authfoundation\/jwk\/type"},"doc://com.okta.mobile.oktaoauth2/documentation/AuthFoundation/JWK":{"role":"symbol","title":"JWK","fragments":[{"kind":"keyword","text":"struct"},{"kind":"text","text":" "},{"kind":"identifier","text":"JWK"}],"abstract":[{"type":"text","text":"Describes an individual key from an authorization server, which can be used to validate tokens or encrypt content."}],"identifier":"doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/AuthFoundation\/JWK","kind":"symbol","type":"topic","navigatorTitle":[{"kind":"identifier","text":"JWK"}],"url":"\/documentation\/authfoundation\/jwk"},"doc://com.okta.mobile.oktaoauth2/documentation/AuthFoundation":{"role":"collection","title":"AuthFoundation","abstract":[],"identifier":"doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/AuthFoundation","kind":"symbol","type":"topic","url":"\/documentation\/authfoundation"},"doc://com.okta.mobile.oktaoauth2/documentation/AuthFoundation/JWK/KeyType":{"role":"symbol","title":"JWK.KeyType","fragments":[{"kind":"keyword","text":"enum"},{"kind":"text","text":" "},{"kind":"identifier","text":"KeyType"}],"abstract":[{"type":"text","text":"The type of JWK key."}],"identifier":"doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/AuthFoundation\/JWK\/KeyType","kind":"symbol","type":"topic","navigatorTitle":[{"kind":"identifier","text":"KeyType"}],"url":"\/documentation\/authfoundation\/jwk\/keytype"}}}
+{
+  "abstract" : [
+    {
+      "text" : "The type of this key.",
+      "type" : "text"
+    }
+  ],
+  "hierarchy" : {
+    "paths" : [
+      [
+        "doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/AuthFoundation",
+        "doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/AuthFoundation\/JWK"
+      ]
+    ]
+  },
+  "identifier" : {
+    "interfaceLanguage" : "swift",
+    "url" : "doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/AuthFoundation\/JWK\/type"
+  },
+  "kind" : "symbol",
+  "metadata" : {
+    "externalID" : "s:14AuthFoundation3JWKV4typeAC7KeyTypeOvp",
+    "fragments" : [
+      {
+        "kind" : "keyword",
+        "text" : "let"
+      },
+      {
+        "kind" : "text",
+        "text" : " "
+      },
+      {
+        "kind" : "identifier",
+        "text" : "type"
+      },
+      {
+        "kind" : "text",
+        "text" : ": "
+      },
+      {
+        "kind" : "typeIdentifier",
+        "preciseIdentifier" : "s:14AuthFoundation3JWKV7KeyTypeO",
+        "text" : "KeyType"
+      }
+    ],
+    "modules" : [
+      {
+        "name" : "AuthFoundation"
+      }
+    ],
+    "role" : "symbol",
+    "roleHeading" : "Instance Property",
+    "symbolKind" : "property",
+    "title" : "type"
+  },
+  "primaryContentSections" : [
+    {
+      "declarations" : [
+        {
+          "languages" : [
+            "swift"
+          ],
+          "platforms" : [
+            "macOS"
+          ],
+          "tokens" : [
+            {
+              "kind" : "keyword",
+              "text" : "let"
+            },
+            {
+              "kind" : "text",
+              "text" : " "
+            },
+            {
+              "kind" : "identifier",
+              "text" : "type"
+            },
+            {
+              "kind" : "text",
+              "text" : ": "
+            },
+            {
+              "identifier" : "doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/AuthFoundation\/JWK\/KeyType",
+              "kind" : "typeIdentifier",
+              "preciseIdentifier" : "s:14AuthFoundation3JWKV7KeyTypeO",
+              "text" : "KeyType"
+            }
+          ]
+        }
+      ],
+      "kind" : "declarations"
+    }
+  ],
+  "schemaVersion" : {
+    "major" : 0,
+    "minor" : 2,
+    "patch" : 0
+  },
+  "sections" : [
+
+  ],
+  "variants" : [
+    {
+      "paths" : [
+        "\/documentation\/authfoundation\/jwk\/type"
+      ],
+      "traits" : [
+        {
+          "interfaceLanguage" : "swift"
+        }
+      ]
+    }
+  ]
+, 
+"references": {
+"doc://com.okta.mobile.oktaoauth2/documentation/AuthFoundation": {
+  "abstract" : [
+
+  ],
+  "identifier" : "doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/AuthFoundation",
+  "kind" : "symbol",
+  "role" : "collection",
+  "title" : "AuthFoundation",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation"
+},
+"doc://com.okta.mobile.oktaoauth2/documentation/AuthFoundation/JWK": {
+  "abstract" : [
+    {
+      "text" : "Describes an individual key from an authorization server, which can be used to validate tokens or encrypt content.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "struct"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "JWK"
+    }
+  ],
+  "identifier" : "doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/AuthFoundation\/JWK",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "JWK"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "JWK",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/jwk"
+},
+"doc://com.okta.mobile.oktaoauth2/documentation/AuthFoundation/JWK/KeyType": {
+  "abstract" : [
+    {
+      "text" : "The type of JWK key.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "enum"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "KeyType"
+    }
+  ],
+  "identifier" : "doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/AuthFoundation\/JWK\/KeyType",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "KeyType"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "JWK.KeyType",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/jwk\/keytype"
+},
+"doc://com.okta.mobile.oktaoauth2/documentation/AuthFoundation/JWK/type": {
+  "abstract" : [
+    {
+      "text" : "The type of this key.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "let"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "type"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:14AuthFoundation3JWKV7KeyTypeO",
+      "text" : "KeyType"
+    }
+  ],
+  "identifier" : "doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/AuthFoundation\/JWK\/type",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "type",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/jwk\/type"
+}
+}
+}

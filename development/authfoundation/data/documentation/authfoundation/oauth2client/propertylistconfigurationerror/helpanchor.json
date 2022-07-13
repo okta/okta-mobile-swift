@@ -1,1 +1,267 @@
-{"primaryContentSections":[{"kind":"declarations","declarations":[{"tokens":[{"kind":"keyword","text":"var"},{"kind":"text","text":" "},{"kind":"identifier","text":"helpAnchor"},{"kind":"text","text":": "},{"kind":"typeIdentifier","text":"String","preciseIdentifier":"s:SS"},{"kind":"text","text":"? { "},{"kind":"keyword","text":"get"},{"kind":"text","text":" }"}],"languages":["swift"],"platforms":["macOS"]}]}],"schemaVersion":{"major":0,"minor":2,"patch":0},"sections":[],"variants":[{"paths":["\/documentation\/authfoundation\/oauth2client\/propertylistconfigurationerror\/helpanchor"],"traits":[{"interfaceLanguage":"swift"}]}],"identifier":{"url":"doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/OAuth2Client\/PropertyListConfigurationError\/helpAnchor","interfaceLanguage":"swift"},"abstract":[{"type":"text","text":"A localized message providing “help” text if the user requests help."}],"kind":"symbol","metadata":{"role":"symbol","title":"helpAnchor","roleHeading":"Instance Property","fragments":[{"kind":"keyword","text":"var"},{"kind":"text","text":" "},{"kind":"identifier","text":"helpAnchor"},{"kind":"text","text":": "},{"kind":"typeIdentifier","text":"String","preciseIdentifier":"s:SS"},{"kind":"text","text":"?"}],"symbolKind":"property","externalID":"s:10Foundation14LocalizedErrorPAAE10helpAnchorSSSgvp::SYNTHESIZED::s:14AuthFoundation12OAuth2ClientC30PropertyListConfigurationErrorO","extendedModule":"Foundation","modules":[{"name":"AuthFoundation"}]},"hierarchy":{"paths":[["doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation","doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/OAuth2Client","doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/OAuth2Client\/PropertyListConfigurationError","doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/OAuth2Client\/PropertyListConfigurationError\/LocalizedError-Implementations"]]},"references":{"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/OAuth2Client/PropertyListConfigurationError":{"role":"symbol","title":"OAuth2Client.PropertyListConfigurationError","fragments":[{"kind":"keyword","text":"enum"},{"kind":"text","text":" "},{"kind":"identifier","text":"PropertyListConfigurationError"}],"abstract":[],"identifier":"doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/OAuth2Client\/PropertyListConfigurationError","kind":"symbol","type":"topic","navigatorTitle":[{"kind":"identifier","text":"PropertyListConfigurationError"}],"url":"\/documentation\/authfoundation\/oauth2client\/propertylistconfigurationerror"},"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/OAuth2Client/PropertyListConfigurationError/helpAnchor":{"role":"symbol","title":"helpAnchor","fragments":[{"kind":"keyword","text":"var"},{"kind":"text","text":" "},{"kind":"identifier","text":"helpAnchor"},{"kind":"text","text":": "},{"kind":"typeIdentifier","text":"String","preciseIdentifier":"s:SS"},{"kind":"text","text":"?"}],"abstract":[{"type":"text","text":"A localized message providing “help” text if the user requests help."}],"identifier":"doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/OAuth2Client\/PropertyListConfigurationError\/helpAnchor","kind":"symbol","type":"topic","url":"\/documentation\/authfoundation\/oauth2client\/propertylistconfigurationerror\/helpanchor"},"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/OAuth2Client/PropertyListConfigurationError/LocalizedError-Implementations":{"role":"collectionGroup","title":"LocalizedError Implementations","abstract":[],"identifier":"doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/OAuth2Client\/PropertyListConfigurationError\/LocalizedError-Implementations","kind":"article","type":"topic","url":"\/documentation\/authfoundation\/oauth2client\/propertylistconfigurationerror\/localizederror-implementations"},"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation":{"role":"collection","title":"AuthFoundation","abstract":[{"type":"text","text":"Library that provides foundational features used by Okta’s authentication libraries, as well as APIs used to work with tokens and user credentials."}],"identifier":"doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation","kind":"symbol","type":"topic","url":"\/documentation\/authfoundation"},"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/OAuth2Client":{"role":"symbol","title":"OAuth2Client","fragments":[{"kind":"keyword","text":"class"},{"kind":"text","text":" "},{"kind":"identifier","text":"OAuth2Client"}],"abstract":[{"type":"text","text":"An OAuth2 client, used to interact with a given authorization server."}],"identifier":"doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/OAuth2Client","kind":"symbol","type":"topic","navigatorTitle":[{"kind":"identifier","text":"OAuth2Client"}],"url":"\/documentation\/authfoundation\/oauth2client"}}}
+{
+  "abstract" : [
+    {
+      "text" : "A localized message providing “help” text if the user requests help.",
+      "type" : "text"
+    }
+  ],
+  "hierarchy" : {
+    "paths" : [
+      [
+        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation",
+        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/OAuth2Client",
+        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/OAuth2Client\/PropertyListConfigurationError",
+        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/OAuth2Client\/PropertyListConfigurationError\/LocalizedError-Implementations"
+      ]
+    ]
+  },
+  "identifier" : {
+    "interfaceLanguage" : "swift",
+    "url" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/OAuth2Client\/PropertyListConfigurationError\/helpAnchor"
+  },
+  "kind" : "symbol",
+  "metadata" : {
+    "extendedModule" : "Foundation",
+    "externalID" : "s:10Foundation14LocalizedErrorPAAE10helpAnchorSSSgvp::SYNTHESIZED::s:14AuthFoundation12OAuth2ClientC30PropertyListConfigurationErrorO",
+    "fragments" : [
+      {
+        "kind" : "keyword",
+        "text" : "var"
+      },
+      {
+        "kind" : "text",
+        "text" : " "
+      },
+      {
+        "kind" : "identifier",
+        "text" : "helpAnchor"
+      },
+      {
+        "kind" : "text",
+        "text" : ": "
+      },
+      {
+        "kind" : "typeIdentifier",
+        "preciseIdentifier" : "s:SS",
+        "text" : "String"
+      },
+      {
+        "kind" : "text",
+        "text" : "?"
+      }
+    ],
+    "modules" : [
+      {
+        "name" : "AuthFoundation"
+      }
+    ],
+    "role" : "symbol",
+    "roleHeading" : "Instance Property",
+    "symbolKind" : "property",
+    "title" : "helpAnchor"
+  },
+  "primaryContentSections" : [
+    {
+      "declarations" : [
+        {
+          "languages" : [
+            "swift"
+          ],
+          "platforms" : [
+            "macOS"
+          ],
+          "tokens" : [
+            {
+              "kind" : "keyword",
+              "text" : "var"
+            },
+            {
+              "kind" : "text",
+              "text" : " "
+            },
+            {
+              "kind" : "identifier",
+              "text" : "helpAnchor"
+            },
+            {
+              "kind" : "text",
+              "text" : ": "
+            },
+            {
+              "kind" : "typeIdentifier",
+              "preciseIdentifier" : "s:SS",
+              "text" : "String"
+            },
+            {
+              "kind" : "text",
+              "text" : "? { "
+            },
+            {
+              "kind" : "keyword",
+              "text" : "get"
+            },
+            {
+              "kind" : "text",
+              "text" : " }"
+            }
+          ]
+        }
+      ],
+      "kind" : "declarations"
+    }
+  ],
+  "schemaVersion" : {
+    "major" : 0,
+    "minor" : 2,
+    "patch" : 0
+  },
+  "sections" : [
+
+  ],
+  "variants" : [
+    {
+      "paths" : [
+        "\/documentation\/authfoundation\/oauth2client\/propertylistconfigurationerror\/helpanchor"
+      ],
+      "traits" : [
+        {
+          "interfaceLanguage" : "swift"
+        }
+      ]
+    }
+  ]
+, 
+"references": {
+"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation": {
+  "abstract" : [
+    {
+      "text" : "Library that provides foundational features used by Okta’s authentication libraries, as well as APIs used to work with tokens and user credentials.",
+      "type" : "text"
+    }
+  ],
+  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation",
+  "kind" : "symbol",
+  "role" : "collection",
+  "title" : "AuthFoundation",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation"
+},
+"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/OAuth2Client": {
+  "abstract" : [
+    {
+      "text" : "An OAuth2 client, used to interact with a given authorization server.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "class"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "OAuth2Client"
+    }
+  ],
+  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/OAuth2Client",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "OAuth2Client"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "OAuth2Client",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/oauth2client"
+},
+"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/OAuth2Client/PropertyListConfigurationError": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "enum"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "PropertyListConfigurationError"
+    }
+  ],
+  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/OAuth2Client\/PropertyListConfigurationError",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "PropertyListConfigurationError"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "OAuth2Client.PropertyListConfigurationError",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/oauth2client\/propertylistconfigurationerror"
+},
+"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/OAuth2Client/PropertyListConfigurationError/LocalizedError-Implementations": {
+  "abstract" : [
+
+  ],
+  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/OAuth2Client\/PropertyListConfigurationError\/LocalizedError-Implementations",
+  "kind" : "article",
+  "role" : "collectionGroup",
+  "title" : "LocalizedError Implementations",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/oauth2client\/propertylistconfigurationerror\/localizederror-implementations"
+},
+"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/OAuth2Client/PropertyListConfigurationError/helpAnchor": {
+  "abstract" : [
+    {
+      "text" : "A localized message providing “help” text if the user requests help.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "var"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "helpAnchor"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:SS",
+      "text" : "String"
+    },
+    {
+      "kind" : "text",
+      "text" : "?"
+    }
+  ],
+  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/OAuth2Client\/PropertyListConfigurationError\/helpAnchor",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "helpAnchor",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/oauth2client\/propertylistconfigurationerror\/helpanchor"
+}
+}
+}

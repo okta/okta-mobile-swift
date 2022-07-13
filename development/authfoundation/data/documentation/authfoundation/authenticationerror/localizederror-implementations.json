@@ -1,1 +1,319 @@
-{"variants":[{"paths":["\/documentation\/authfoundation\/authenticationerror\/localizederror-implementations"],"traits":[{"interfaceLanguage":"swift"}]}],"schemaVersion":{"major":0,"minor":2,"patch":0},"sections":[],"identifier":{"url":"doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/AuthenticationError\/LocalizedError-Implementations","interfaceLanguage":"swift"},"abstract":[{"type":"text","text":"No overview available."}],"kind":"article","metadata":{"modules":[{"name":"AuthFoundation"}],"role":"collectionGroup","title":"LocalizedError Implementations"},"hierarchy":{"paths":[["doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation","doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/AuthenticationError"]]},"topicSections":[{"title":"Instance Properties","identifiers":["doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/AuthenticationError\/errorDescription-830w9","doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/AuthenticationError\/errorDescription-ezhp","doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/AuthenticationError\/failureReason","doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/AuthenticationError\/helpAnchor","doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/AuthenticationError\/recoverySuggestion"],"generated":true}],"references":{"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/AuthenticationError/failureReason":{"role":"symbol","title":"failureReason","fragments":[{"kind":"keyword","text":"var"},{"kind":"text","text":" "},{"kind":"identifier","text":"failureReason"},{"kind":"text","text":": "},{"kind":"typeIdentifier","text":"String","preciseIdentifier":"s:SS"},{"kind":"text","text":"?"}],"abstract":[{"type":"text","text":"A localized message describing the reason for the failure."}],"identifier":"doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/AuthenticationError\/failureReason","kind":"symbol","type":"topic","url":"\/documentation\/authfoundation\/authenticationerror\/failurereason"},"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/AuthenticationError/helpAnchor":{"role":"symbol","title":"helpAnchor","fragments":[{"kind":"keyword","text":"var"},{"kind":"text","text":" "},{"kind":"identifier","text":"helpAnchor"},{"kind":"text","text":": "},{"kind":"typeIdentifier","text":"String","preciseIdentifier":"s:SS"},{"kind":"text","text":"?"}],"abstract":[{"type":"text","text":"A localized message providing “help” text if the user requests help."}],"identifier":"doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/AuthenticationError\/helpAnchor","kind":"symbol","type":"topic","url":"\/documentation\/authfoundation\/authenticationerror\/helpanchor"},"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/AuthenticationError":{"role":"symbol","title":"AuthenticationError","fragments":[{"kind":"keyword","text":"enum"},{"kind":"text","text":" "},{"kind":"identifier","text":"AuthenticationError"}],"abstract":[{"type":"text","text":"Errors that may be generated during the process of authenticating with a variety of authentication flows."}],"identifier":"doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/AuthenticationError","kind":"symbol","type":"topic","navigatorTitle":[{"kind":"identifier","text":"AuthenticationError"}],"url":"\/documentation\/authfoundation\/authenticationerror"},"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation":{"role":"collection","title":"AuthFoundation","abstract":[{"type":"text","text":"Library that provides foundational features used by Okta’s authentication libraries, as well as APIs used to work with tokens and user credentials."}],"identifier":"doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation","kind":"symbol","type":"topic","url":"\/documentation\/authfoundation"},"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/AuthenticationError/errorDescription-830w9":{"role":"symbol","title":"errorDescription","fragments":[{"kind":"keyword","text":"var"},{"kind":"text","text":" "},{"kind":"identifier","text":"errorDescription"},{"kind":"text","text":": "},{"kind":"typeIdentifier","text":"String","preciseIdentifier":"s:SS"},{"kind":"text","text":"?"}],"abstract":[{"type":"text","text":"A localized message describing what error occurred."}],"identifier":"doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/AuthenticationError\/errorDescription-830w9","kind":"symbol","type":"topic","url":"\/documentation\/authfoundation\/authenticationerror\/errordescription-830w9"},"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/AuthenticationError/errorDescription-ezhp":{"role":"symbol","title":"errorDescription","fragments":[{"kind":"keyword","text":"var"},{"kind":"text","text":" "},{"kind":"identifier","text":"errorDescription"},{"kind":"text","text":": "},{"kind":"typeIdentifier","text":"String","preciseIdentifier":"s:SS"},{"kind":"text","text":"?"}],"abstract":[{"type":"text","text":"A localized message describing what error occurred."}],"identifier":"doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/AuthenticationError\/errorDescription-ezhp","kind":"symbol","type":"topic","url":"\/documentation\/authfoundation\/authenticationerror\/errordescription-ezhp"},"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/AuthenticationError/recoverySuggestion":{"role":"symbol","title":"recoverySuggestion","fragments":[{"kind":"keyword","text":"var"},{"kind":"text","text":" "},{"kind":"identifier","text":"recoverySuggestion"},{"kind":"text","text":": "},{"kind":"typeIdentifier","text":"String","preciseIdentifier":"s:SS"},{"kind":"text","text":"?"}],"abstract":[{"type":"text","text":"A localized message describing how one might recover from the failure."}],"identifier":"doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/AuthenticationError\/recoverySuggestion","kind":"symbol","type":"topic","url":"\/documentation\/authfoundation\/authenticationerror\/recoverysuggestion"}}}
+{
+  "abstract" : [
+    {
+      "text" : "No overview available.",
+      "type" : "text"
+    }
+  ],
+  "hierarchy" : {
+    "paths" : [
+      [
+        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation",
+        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/AuthenticationError"
+      ]
+    ]
+  },
+  "identifier" : {
+    "interfaceLanguage" : "swift",
+    "url" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/AuthenticationError\/LocalizedError-Implementations"
+  },
+  "kind" : "article",
+  "metadata" : {
+    "modules" : [
+      {
+        "name" : "AuthFoundation"
+      }
+    ],
+    "role" : "collectionGroup",
+    "title" : "LocalizedError Implementations"
+  },
+  "schemaVersion" : {
+    "major" : 0,
+    "minor" : 2,
+    "patch" : 0
+  },
+  "sections" : [
+
+  ],
+  "topicSections" : [
+    {
+      "generated" : true,
+      "identifiers" : [
+        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/AuthenticationError\/errorDescription-830w9",
+        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/AuthenticationError\/errorDescription-ezhp",
+        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/AuthenticationError\/failureReason",
+        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/AuthenticationError\/helpAnchor",
+        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/AuthenticationError\/recoverySuggestion"
+      ],
+      "title" : "Instance Properties"
+    }
+  ],
+  "variants" : [
+    {
+      "paths" : [
+        "\/documentation\/authfoundation\/authenticationerror\/localizederror-implementations"
+      ],
+      "traits" : [
+        {
+          "interfaceLanguage" : "swift"
+        }
+      ]
+    }
+  ]
+, 
+"references": {
+"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation": {
+  "abstract" : [
+    {
+      "text" : "Library that provides foundational features used by Okta’s authentication libraries, as well as APIs used to work with tokens and user credentials.",
+      "type" : "text"
+    }
+  ],
+  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation",
+  "kind" : "symbol",
+  "role" : "collection",
+  "title" : "AuthFoundation",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation"
+},
+"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/AuthenticationError": {
+  "abstract" : [
+    {
+      "text" : "Errors that may be generated during the process of authenticating with a variety of authentication flows.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "enum"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "AuthenticationError"
+    }
+  ],
+  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/AuthenticationError",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "AuthenticationError"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "AuthenticationError",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/authenticationerror"
+},
+"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/AuthenticationError/errorDescription-830w9": {
+  "abstract" : [
+    {
+      "text" : "A localized message describing what error occurred.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "var"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "errorDescription"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:SS",
+      "text" : "String"
+    },
+    {
+      "kind" : "text",
+      "text" : "?"
+    }
+  ],
+  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/AuthenticationError\/errorDescription-830w9",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "errorDescription",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/authenticationerror\/errordescription-830w9"
+},
+"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/AuthenticationError/errorDescription-ezhp": {
+  "abstract" : [
+    {
+      "text" : "A localized message describing what error occurred.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "var"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "errorDescription"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:SS",
+      "text" : "String"
+    },
+    {
+      "kind" : "text",
+      "text" : "?"
+    }
+  ],
+  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/AuthenticationError\/errorDescription-ezhp",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "errorDescription",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/authenticationerror\/errordescription-ezhp"
+},
+"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/AuthenticationError/failureReason": {
+  "abstract" : [
+    {
+      "text" : "A localized message describing the reason for the failure.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "var"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "failureReason"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:SS",
+      "text" : "String"
+    },
+    {
+      "kind" : "text",
+      "text" : "?"
+    }
+  ],
+  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/AuthenticationError\/failureReason",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "failureReason",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/authenticationerror\/failurereason"
+},
+"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/AuthenticationError/helpAnchor": {
+  "abstract" : [
+    {
+      "text" : "A localized message providing “help” text if the user requests help.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "var"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "helpAnchor"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:SS",
+      "text" : "String"
+    },
+    {
+      "kind" : "text",
+      "text" : "?"
+    }
+  ],
+  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/AuthenticationError\/helpAnchor",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "helpAnchor",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/authenticationerror\/helpanchor"
+},
+"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/AuthenticationError/recoverySuggestion": {
+  "abstract" : [
+    {
+      "text" : "A localized message describing how one might recover from the failure.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "var"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "recoverySuggestion"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:SS",
+      "text" : "String"
+    },
+    {
+      "kind" : "text",
+      "text" : "?"
+    }
+  ],
+  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/AuthenticationError\/recoverySuggestion",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "recoverySuggestion",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/authenticationerror\/recoverysuggestion"
+}
+}
+}

@@ -1,1 +1,580 @@
-{"primaryContentSections":[{"kind":"declarations","declarations":[{"tokens":[{"kind":"keyword","text":"enum"},{"kind":"text","text":" "},{"kind":"identifier","text":"APIClientError"}],"languages":["swift"],"platforms":["macOS"]}]}],"schemaVersion":{"major":0,"minor":2,"patch":0},"sections":[],"variants":[{"paths":["\/documentation\/authfoundation\/apiclienterror"],"traits":[{"interfaceLanguage":"swift"}]}],"relationshipsSections":[{"identifiers":["doc:\/\/com.okta.mobile.oktaoauth2\/10Foundation14LocalizedErrorP","doc:\/\/com.okta.mobile.oktaoauth2\/s5ErrorP","doc:\/\/com.okta.mobile.oktaoauth2\/s8SendableP"],"kind":"relationships","title":"Conforms To","type":"conformsTo"}],"identifier":{"url":"doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/AuthFoundation\/APIClientError","interfaceLanguage":"swift"},"abstract":[{"type":"text","text":"Errors that may occur at the API or network level."}],"kind":"symbol","metadata":{"fragments":[{"kind":"keyword","text":"enum"},{"kind":"text","text":" "},{"kind":"identifier","text":"APIClientError"}],"title":"APIClientError","roleHeading":"Enumeration","role":"symbol","symbolKind":"enum","externalID":"s:14AuthFoundation14APIClientErrorO","modules":[{"name":"AuthFoundation"}],"navigatorTitle":[{"kind":"identifier","text":"APIClientError"}]},"hierarchy":{"paths":[["doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/AuthFoundation"]]},"topicSections":[{"title":"Enumeration Cases","identifiers":["doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/AuthFoundation\/APIClientError\/cannotParseResponse(error:)","doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/AuthFoundation\/APIClientError\/invalidRequestData","doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/AuthFoundation\/APIClientError\/invalidResponse","doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/AuthFoundation\/APIClientError\/invalidUrl","doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/AuthFoundation\/APIClientError\/missingRefreshSettings","doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/AuthFoundation\/APIClientError\/missingResponse","doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/AuthFoundation\/APIClientError\/serverError(_:)","doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/AuthFoundation\/APIClientError\/statusCode(_:)","doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/AuthFoundation\/APIClientError\/unknown","doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/AuthFoundation\/APIClientError\/unsupportedContentType(_:)","doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/AuthFoundation\/APIClientError\/validation(error:)"]},{"title":"Default Implementations","identifiers":["doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/AuthFoundation\/APIClientError\/Error-Implementations","doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/AuthFoundation\/APIClientError\/LocalizedError-Implementations"],"generated":true}],"references":{"doc://com.okta.mobile.oktaoauth2/documentation/AuthFoundation/APIClientError/unknown":{"role":"symbol","title":"APIClientError.unknown","fragments":[{"kind":"keyword","text":"case"},{"kind":"text","text":" "},{"kind":"identifier","text":"unknown"}],"abstract":[],"identifier":"doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/AuthFoundation\/APIClientError\/unknown","kind":"symbol","type":"topic","url":"\/documentation\/authfoundation\/apiclienterror\/unknown"},"doc://com.okta.mobile.oktaoauth2/documentation/AuthFoundation/APIClientError/serverError(_:)":{"role":"symbol","title":"APIClientError.serverError(_:)","fragments":[{"kind":"keyword","text":"case"},{"kind":"text","text":" "},{"kind":"identifier","text":"serverError"},{"kind":"text","text":"("},{"kind":"typeIdentifier","text":"Error","preciseIdentifier":"s:s5ErrorP"},{"kind":"text","text":")"}],"abstract":[],"identifier":"doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/AuthFoundation\/APIClientError\/serverError(_:)","kind":"symbol","type":"topic","url":"\/documentation\/authfoundation\/apiclienterror\/servererror(_:)"},"doc://com.okta.mobile.oktaoauth2/documentation/AuthFoundation/APIClientError/invalidUrl":{"role":"symbol","title":"APIClientError.invalidUrl","fragments":[{"kind":"keyword","text":"case"},{"kind":"text","text":" "},{"kind":"identifier","text":"invalidUrl"}],"abstract":[],"identifier":"doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/AuthFoundation\/APIClientError\/invalidUrl","kind":"symbol","type":"topic","url":"\/documentation\/authfoundation\/apiclienterror\/invalidurl"},"doc://com.okta.mobile.oktaoauth2/documentation/AuthFoundation/APIClientError/invalidRequestData":{"role":"symbol","title":"APIClientError.invalidRequestData","fragments":[{"kind":"keyword","text":"case"},{"kind":"text","text":" "},{"kind":"identifier","text":"invalidRequestData"}],"abstract":[],"identifier":"doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/AuthFoundation\/APIClientError\/invalidRequestData","kind":"symbol","type":"topic","url":"\/documentation\/authfoundation\/apiclienterror\/invalidrequestdata"},"doc://com.okta.mobile.oktaoauth2/documentation/AuthFoundation/APIClientError/missingRefreshSettings":{"role":"symbol","title":"APIClientError.missingRefreshSettings","fragments":[{"kind":"keyword","text":"case"},{"kind":"text","text":" "},{"kind":"identifier","text":"missingRefreshSettings"}],"abstract":[],"identifier":"doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/AuthFoundation\/APIClientError\/missingRefreshSettings","kind":"symbol","type":"topic","url":"\/documentation\/authfoundation\/apiclienterror\/missingrefreshsettings"},"doc://com.okta.mobile.oktaoauth2/documentation/AuthFoundation/APIClientError/cannotParseResponse(error:)":{"role":"symbol","title":"APIClientError.cannotParseResponse(error:)","fragments":[{"kind":"keyword","text":"case"},{"kind":"text","text":" "},{"kind":"identifier","text":"cannotParseResponse"},{"kind":"text","text":"("},{"kind":"externalParam","text":"error"},{"kind":"text","text":": "},{"kind":"typeIdentifier","text":"Error","preciseIdentifier":"s:s5ErrorP"},{"kind":"text","text":")"}],"abstract":[],"identifier":"doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/AuthFoundation\/APIClientError\/cannotParseResponse(error:)","kind":"symbol","type":"topic","url":"\/documentation\/authfoundation\/apiclienterror\/cannotparseresponse(error:)"},"doc://com.okta.mobile.oktaoauth2/documentation/AuthFoundation/APIClientError/invalidResponse":{"role":"symbol","title":"APIClientError.invalidResponse","fragments":[{"kind":"keyword","text":"case"},{"kind":"text","text":" "},{"kind":"identifier","text":"invalidResponse"}],"abstract":[],"identifier":"doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/AuthFoundation\/APIClientError\/invalidResponse","kind":"symbol","type":"topic","url":"\/documentation\/authfoundation\/apiclienterror\/invalidresponse"},"doc://com.okta.mobile.oktaoauth2/documentation/AuthFoundation/APIClientError/statusCode(_:)":{"role":"symbol","title":"APIClientError.statusCode(_:)","fragments":[{"kind":"keyword","text":"case"},{"kind":"text","text":" "},{"kind":"identifier","text":"statusCode"},{"kind":"text","text":"("},{"kind":"typeIdentifier","text":"Int","preciseIdentifier":"s:Si"},{"kind":"text","text":")"}],"abstract":[],"identifier":"doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/AuthFoundation\/APIClientError\/statusCode(_:)","kind":"symbol","type":"topic","url":"\/documentation\/authfoundation\/apiclienterror\/statuscode(_:)"},"doc://com.okta.mobile.oktaoauth2/documentation/AuthFoundation":{"role":"collection","title":"AuthFoundation","abstract":[],"identifier":"doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/AuthFoundation","kind":"symbol","type":"topic","url":"\/documentation\/authfoundation"},"doc://com.okta.mobile.oktaoauth2/documentation/AuthFoundation/APIClientError/Error-Implementations":{"role":"collectionGroup","title":"Error Implementations","abstract":[],"identifier":"doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/AuthFoundation\/APIClientError\/Error-Implementations","kind":"article","type":"topic","url":"\/documentation\/authfoundation\/apiclienterror\/error-implementations"},"doc://com.okta.mobile.oktaoauth2/documentation/AuthFoundation/APIClientError/missingResponse":{"role":"symbol","title":"APIClientError.missingResponse","fragments":[{"kind":"keyword","text":"case"},{"kind":"text","text":" "},{"kind":"identifier","text":"missingResponse"}],"abstract":[],"identifier":"doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/AuthFoundation\/APIClientError\/missingResponse","kind":"symbol","type":"topic","url":"\/documentation\/authfoundation\/apiclienterror\/missingresponse"},"doc://com.okta.mobile.oktaoauth2/documentation/AuthFoundation/APIClientError/unsupportedContentType(_:)":{"role":"symbol","title":"APIClientError.unsupportedContentType(_:)","fragments":[{"kind":"keyword","text":"case"},{"kind":"text","text":" "},{"kind":"identifier","text":"unsupportedContentType"},{"kind":"text","text":"("},{"kind":"typeIdentifier","text":"APIContentType","preciseIdentifier":"s:14AuthFoundation14APIContentTypeO"},{"kind":"text","text":")"}],"abstract":[],"identifier":"doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/AuthFoundation\/APIClientError\/unsupportedContentType(_:)","kind":"symbol","type":"topic","url":"\/documentation\/authfoundation\/apiclienterror\/unsupportedcontenttype(_:)"},"doc://com.okta.mobile.oktaoauth2/documentation/AuthFoundation/APIClientError/LocalizedError-Implementations":{"role":"collectionGroup","title":"LocalizedError Implementations","abstract":[],"identifier":"doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/AuthFoundation\/APIClientError\/LocalizedError-Implementations","kind":"article","type":"topic","url":"\/documentation\/authfoundation\/apiclienterror\/localizederror-implementations"},"doc://com.okta.mobile.oktaoauth2/10Foundation14LocalizedErrorP":{"type":"unresolvable","title":"Foundation.LocalizedError","identifier":"doc:\/\/com.okta.mobile.oktaoauth2\/10Foundation14LocalizedErrorP"},"doc://com.okta.mobile.oktaoauth2/documentation/AuthFoundation/APIClientError/validation(error:)":{"role":"symbol","title":"APIClientError.validation(error:)","fragments":[{"kind":"keyword","text":"case"},{"kind":"text","text":" "},{"kind":"identifier","text":"validation"},{"kind":"text","text":"("},{"kind":"externalParam","text":"error"},{"kind":"text","text":": "},{"kind":"typeIdentifier","text":"Error","preciseIdentifier":"s:s5ErrorP"},{"kind":"text","text":")"}],"abstract":[],"identifier":"doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/AuthFoundation\/APIClientError\/validation(error:)","kind":"symbol","type":"topic","url":"\/documentation\/authfoundation\/apiclienterror\/validation(error:)"},"doc://com.okta.mobile.oktaoauth2/s5ErrorP":{"type":"unresolvable","title":"Swift.Error","identifier":"doc:\/\/com.okta.mobile.oktaoauth2\/s5ErrorP"},"doc://com.okta.mobile.oktaoauth2/s8SendableP":{"type":"unresolvable","title":"Swift.Sendable","identifier":"doc:\/\/com.okta.mobile.oktaoauth2\/s8SendableP"},"doc://com.okta.mobile.oktaoauth2/documentation/AuthFoundation/APIClientError":{"role":"symbol","title":"APIClientError","fragments":[{"kind":"keyword","text":"enum"},{"kind":"text","text":" "},{"kind":"identifier","text":"APIClientError"}],"abstract":[{"type":"text","text":"Errors that may occur at the API or network level."}],"identifier":"doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/AuthFoundation\/APIClientError","kind":"symbol","type":"topic","navigatorTitle":[{"kind":"identifier","text":"APIClientError"}],"url":"\/documentation\/authfoundation\/apiclienterror"}}}
+{
+  "abstract" : [
+    {
+      "text" : "Errors that may occur at the API or network level.",
+      "type" : "text"
+    }
+  ],
+  "hierarchy" : {
+    "paths" : [
+      [
+        "doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/AuthFoundation"
+      ]
+    ]
+  },
+  "identifier" : {
+    "interfaceLanguage" : "swift",
+    "url" : "doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/AuthFoundation\/APIClientError"
+  },
+  "kind" : "symbol",
+  "metadata" : {
+    "externalID" : "s:14AuthFoundation14APIClientErrorO",
+    "fragments" : [
+      {
+        "kind" : "keyword",
+        "text" : "enum"
+      },
+      {
+        "kind" : "text",
+        "text" : " "
+      },
+      {
+        "kind" : "identifier",
+        "text" : "APIClientError"
+      }
+    ],
+    "modules" : [
+      {
+        "name" : "AuthFoundation"
+      }
+    ],
+    "navigatorTitle" : [
+      {
+        "kind" : "identifier",
+        "text" : "APIClientError"
+      }
+    ],
+    "role" : "symbol",
+    "roleHeading" : "Enumeration",
+    "symbolKind" : "enum",
+    "title" : "APIClientError"
+  },
+  "primaryContentSections" : [
+    {
+      "declarations" : [
+        {
+          "languages" : [
+            "swift"
+          ],
+          "platforms" : [
+            "macOS"
+          ],
+          "tokens" : [
+            {
+              "kind" : "keyword",
+              "text" : "enum"
+            },
+            {
+              "kind" : "text",
+              "text" : " "
+            },
+            {
+              "kind" : "identifier",
+              "text" : "APIClientError"
+            }
+          ]
+        }
+      ],
+      "kind" : "declarations"
+    }
+  ],
+  "relationshipsSections" : [
+    {
+      "identifiers" : [
+        "doc:\/\/com.okta.mobile.oktaoauth2\/10Foundation14LocalizedErrorP",
+        "doc:\/\/com.okta.mobile.oktaoauth2\/s5ErrorP",
+        "doc:\/\/com.okta.mobile.oktaoauth2\/s8SendableP"
+      ],
+      "kind" : "relationships",
+      "title" : "Conforms To",
+      "type" : "conformsTo"
+    }
+  ],
+  "schemaVersion" : {
+    "major" : 0,
+    "minor" : 2,
+    "patch" : 0
+  },
+  "sections" : [
+
+  ],
+  "topicSections" : [
+    {
+      "identifiers" : [
+        "doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/AuthFoundation\/APIClientError\/cannotParseResponse(error:)",
+        "doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/AuthFoundation\/APIClientError\/invalidRequestData",
+        "doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/AuthFoundation\/APIClientError\/invalidResponse",
+        "doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/AuthFoundation\/APIClientError\/invalidUrl",
+        "doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/AuthFoundation\/APIClientError\/missingRefreshSettings",
+        "doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/AuthFoundation\/APIClientError\/missingResponse",
+        "doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/AuthFoundation\/APIClientError\/serverError(_:)",
+        "doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/AuthFoundation\/APIClientError\/statusCode(_:)",
+        "doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/AuthFoundation\/APIClientError\/unknown",
+        "doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/AuthFoundation\/APIClientError\/unsupportedContentType(_:)",
+        "doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/AuthFoundation\/APIClientError\/validation(error:)"
+      ],
+      "title" : "Enumeration Cases"
+    },
+    {
+      "generated" : true,
+      "identifiers" : [
+        "doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/AuthFoundation\/APIClientError\/Error-Implementations",
+        "doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/AuthFoundation\/APIClientError\/LocalizedError-Implementations"
+      ],
+      "title" : "Default Implementations"
+    }
+  ],
+  "variants" : [
+    {
+      "paths" : [
+        "\/documentation\/authfoundation\/apiclienterror"
+      ],
+      "traits" : [
+        {
+          "interfaceLanguage" : "swift"
+        }
+      ]
+    }
+  ]
+, 
+"references": {
+"doc://com.okta.mobile.oktaoauth2/10Foundation14LocalizedErrorP": {
+  "identifier" : "doc:\/\/com.okta.mobile.oktaoauth2\/10Foundation14LocalizedErrorP",
+  "title" : "Foundation.LocalizedError",
+  "type" : "unresolvable"
+},
+"doc://com.okta.mobile.oktaoauth2/documentation/AuthFoundation": {
+  "abstract" : [
+
+  ],
+  "identifier" : "doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/AuthFoundation",
+  "kind" : "symbol",
+  "role" : "collection",
+  "title" : "AuthFoundation",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation"
+},
+"doc://com.okta.mobile.oktaoauth2/documentation/AuthFoundation/APIClientError": {
+  "abstract" : [
+    {
+      "text" : "Errors that may occur at the API or network level.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "enum"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "APIClientError"
+    }
+  ],
+  "identifier" : "doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/AuthFoundation\/APIClientError",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "APIClientError"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "APIClientError",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/apiclienterror"
+},
+"doc://com.okta.mobile.oktaoauth2/documentation/AuthFoundation/APIClientError/Error-Implementations": {
+  "abstract" : [
+
+  ],
+  "identifier" : "doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/AuthFoundation\/APIClientError\/Error-Implementations",
+  "kind" : "article",
+  "role" : "collectionGroup",
+  "title" : "Error Implementations",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/apiclienterror\/error-implementations"
+},
+"doc://com.okta.mobile.oktaoauth2/documentation/AuthFoundation/APIClientError/LocalizedError-Implementations": {
+  "abstract" : [
+
+  ],
+  "identifier" : "doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/AuthFoundation\/APIClientError\/LocalizedError-Implementations",
+  "kind" : "article",
+  "role" : "collectionGroup",
+  "title" : "LocalizedError Implementations",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/apiclienterror\/localizederror-implementations"
+},
+"doc://com.okta.mobile.oktaoauth2/documentation/AuthFoundation/APIClientError/cannotParseResponse(error:)": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "case"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "cannotParseResponse"
+    },
+    {
+      "kind" : "text",
+      "text" : "("
+    },
+    {
+      "kind" : "externalParam",
+      "text" : "error"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:s5ErrorP",
+      "text" : "Error"
+    },
+    {
+      "kind" : "text",
+      "text" : ")"
+    }
+  ],
+  "identifier" : "doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/AuthFoundation\/APIClientError\/cannotParseResponse(error:)",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "APIClientError.cannotParseResponse(error:)",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/apiclienterror\/cannotparseresponse(error:)"
+},
+"doc://com.okta.mobile.oktaoauth2/documentation/AuthFoundation/APIClientError/invalidRequestData": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "case"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "invalidRequestData"
+    }
+  ],
+  "identifier" : "doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/AuthFoundation\/APIClientError\/invalidRequestData",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "APIClientError.invalidRequestData",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/apiclienterror\/invalidrequestdata"
+},
+"doc://com.okta.mobile.oktaoauth2/documentation/AuthFoundation/APIClientError/invalidResponse": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "case"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "invalidResponse"
+    }
+  ],
+  "identifier" : "doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/AuthFoundation\/APIClientError\/invalidResponse",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "APIClientError.invalidResponse",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/apiclienterror\/invalidresponse"
+},
+"doc://com.okta.mobile.oktaoauth2/documentation/AuthFoundation/APIClientError/invalidUrl": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "case"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "invalidUrl"
+    }
+  ],
+  "identifier" : "doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/AuthFoundation\/APIClientError\/invalidUrl",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "APIClientError.invalidUrl",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/apiclienterror\/invalidurl"
+},
+"doc://com.okta.mobile.oktaoauth2/documentation/AuthFoundation/APIClientError/missingRefreshSettings": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "case"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "missingRefreshSettings"
+    }
+  ],
+  "identifier" : "doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/AuthFoundation\/APIClientError\/missingRefreshSettings",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "APIClientError.missingRefreshSettings",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/apiclienterror\/missingrefreshsettings"
+},
+"doc://com.okta.mobile.oktaoauth2/documentation/AuthFoundation/APIClientError/missingResponse": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "case"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "missingResponse"
+    }
+  ],
+  "identifier" : "doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/AuthFoundation\/APIClientError\/missingResponse",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "APIClientError.missingResponse",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/apiclienterror\/missingresponse"
+},
+"doc://com.okta.mobile.oktaoauth2/documentation/AuthFoundation/APIClientError/serverError(_:)": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "case"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "serverError"
+    },
+    {
+      "kind" : "text",
+      "text" : "("
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:s5ErrorP",
+      "text" : "Error"
+    },
+    {
+      "kind" : "text",
+      "text" : ")"
+    }
+  ],
+  "identifier" : "doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/AuthFoundation\/APIClientError\/serverError(_:)",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "APIClientError.serverError(_:)",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/apiclienterror\/servererror(_:)"
+},
+"doc://com.okta.mobile.oktaoauth2/documentation/AuthFoundation/APIClientError/statusCode(_:)": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "case"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "statusCode"
+    },
+    {
+      "kind" : "text",
+      "text" : "("
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:Si",
+      "text" : "Int"
+    },
+    {
+      "kind" : "text",
+      "text" : ")"
+    }
+  ],
+  "identifier" : "doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/AuthFoundation\/APIClientError\/statusCode(_:)",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "APIClientError.statusCode(_:)",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/apiclienterror\/statuscode(_:)"
+},
+"doc://com.okta.mobile.oktaoauth2/documentation/AuthFoundation/APIClientError/unknown": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "case"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "unknown"
+    }
+  ],
+  "identifier" : "doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/AuthFoundation\/APIClientError\/unknown",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "APIClientError.unknown",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/apiclienterror\/unknown"
+},
+"doc://com.okta.mobile.oktaoauth2/documentation/AuthFoundation/APIClientError/unsupportedContentType(_:)": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "case"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "unsupportedContentType"
+    },
+    {
+      "kind" : "text",
+      "text" : "("
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:14AuthFoundation14APIContentTypeO",
+      "text" : "APIContentType"
+    },
+    {
+      "kind" : "text",
+      "text" : ")"
+    }
+  ],
+  "identifier" : "doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/AuthFoundation\/APIClientError\/unsupportedContentType(_:)",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "APIClientError.unsupportedContentType(_:)",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/apiclienterror\/unsupportedcontenttype(_:)"
+},
+"doc://com.okta.mobile.oktaoauth2/documentation/AuthFoundation/APIClientError/validation(error:)": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "case"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "validation"
+    },
+    {
+      "kind" : "text",
+      "text" : "("
+    },
+    {
+      "kind" : "externalParam",
+      "text" : "error"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:s5ErrorP",
+      "text" : "Error"
+    },
+    {
+      "kind" : "text",
+      "text" : ")"
+    }
+  ],
+  "identifier" : "doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/AuthFoundation\/APIClientError\/validation(error:)",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "APIClientError.validation(error:)",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/apiclienterror\/validation(error:)"
+},
+"doc://com.okta.mobile.oktaoauth2/s5ErrorP": {
+  "identifier" : "doc:\/\/com.okta.mobile.oktaoauth2\/s5ErrorP",
+  "title" : "Swift.Error",
+  "type" : "unresolvable"
+},
+"doc://com.okta.mobile.oktaoauth2/s8SendableP": {
+  "identifier" : "doc:\/\/com.okta.mobile.oktaoauth2\/s8SendableP",
+  "title" : "Swift.Sendable",
+  "type" : "unresolvable"
+}
+}
+}

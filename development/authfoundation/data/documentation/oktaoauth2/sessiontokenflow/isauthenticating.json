@@ -1,1 +1,219 @@
-{"primaryContentSections":[{"kind":"declarations","declarations":[{"tokens":[{"kind":"keyword","text":"var"},{"kind":"text","text":" "},{"kind":"identifier","text":"isAuthenticating"},{"kind":"text","text":": "},{"kind":"typeIdentifier","text":"Bool","preciseIdentifier":"s:Sb"},{"kind":"text","text":" { "},{"kind":"keyword","text":"get"},{"kind":"text","text":" "},{"kind":"keyword","text":"set"},{"kind":"text","text":" }"}],"languages":["swift"],"platforms":["macOS"]}]}],"schemaVersion":{"major":0,"minor":2,"patch":0},"sections":[],"variants":[{"paths":["\/documentation\/oktaoauth2\/sessiontokenflow\/isauthenticating"],"traits":[{"interfaceLanguage":"swift"}]}],"identifier":{"url":"doc:\/\/com.okta.mobile.authfoundation\/documentation\/OktaOAuth2\/SessionTokenFlow\/isAuthenticating","interfaceLanguage":"swift"},"abstract":[{"type":"text","text":"Indicates whether or not this flow is currently in the process of authenticating a user."}],"kind":"symbol","metadata":{"fragments":[{"kind":"keyword","text":"var"},{"kind":"text","text":" "},{"kind":"identifier","text":"isAuthenticating"},{"kind":"text","text":": "},{"kind":"typeIdentifier","text":"Bool","preciseIdentifier":"s:Sb"}],"title":"isAuthenticating","roleHeading":"Instance Property","role":"symbol","symbolKind":"property","externalID":"s:10OktaOAuth216SessionTokenFlowC16isAuthenticatingSbvp","modules":[{"name":"OktaOAuth2"}]},"hierarchy":{"paths":[["doc:\/\/com.okta.mobile.authfoundation\/documentation\/OktaOAuth2","doc:\/\/com.okta.mobile.authfoundation\/documentation\/OktaOAuth2\/SessionTokenFlow"]]},"references":{"doc://com.okta.mobile.authfoundation/documentation/OktaOAuth2":{"role":"collection","title":"OktaOAuth2","abstract":[],"identifier":"doc:\/\/com.okta.mobile.authfoundation\/documentation\/OktaOAuth2","kind":"symbol","type":"topic","url":"\/documentation\/oktaoauth2"},"doc://com.okta.mobile.authfoundation/documentation/OktaOAuth2/SessionTokenFlow":{"role":"symbol","title":"SessionTokenFlow","fragments":[{"kind":"keyword","text":"class"},{"kind":"text","text":" "},{"kind":"identifier","text":"SessionTokenFlow"}],"abstract":[{"type":"text","text":"An authentication flow class that exchanges a Session Token for access tokens."}],"identifier":"doc:\/\/com.okta.mobile.authfoundation\/documentation\/OktaOAuth2\/SessionTokenFlow","kind":"symbol","type":"topic","navigatorTitle":[{"kind":"identifier","text":"SessionTokenFlow"}],"url":"\/documentation\/oktaoauth2\/sessiontokenflow"},"doc://com.okta.mobile.authfoundation/documentation/OktaOAuth2/SessionTokenFlow/isAuthenticating":{"role":"symbol","title":"isAuthenticating","fragments":[{"kind":"keyword","text":"var"},{"kind":"text","text":" "},{"kind":"identifier","text":"isAuthenticating"},{"kind":"text","text":": "},{"kind":"typeIdentifier","text":"Bool","preciseIdentifier":"s:Sb"}],"abstract":[{"type":"text","text":"Indicates whether or not this flow is currently in the process of authenticating a user."}],"identifier":"doc:\/\/com.okta.mobile.authfoundation\/documentation\/OktaOAuth2\/SessionTokenFlow\/isAuthenticating","kind":"symbol","type":"topic","url":"\/documentation\/oktaoauth2\/sessiontokenflow\/isauthenticating"}}}
+{
+  "abstract" : [
+    {
+      "text" : "Indicates whether or not this flow is currently in the process of authenticating a user.",
+      "type" : "text"
+    }
+  ],
+  "hierarchy" : {
+    "paths" : [
+      [
+        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/OktaOAuth2",
+        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/OktaOAuth2\/SessionTokenFlow"
+      ]
+    ]
+  },
+  "identifier" : {
+    "interfaceLanguage" : "swift",
+    "url" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/OktaOAuth2\/SessionTokenFlow\/isAuthenticating"
+  },
+  "kind" : "symbol",
+  "metadata" : {
+    "externalID" : "s:10OktaOAuth216SessionTokenFlowC16isAuthenticatingSbvp",
+    "fragments" : [
+      {
+        "kind" : "keyword",
+        "text" : "var"
+      },
+      {
+        "kind" : "text",
+        "text" : " "
+      },
+      {
+        "kind" : "identifier",
+        "text" : "isAuthenticating"
+      },
+      {
+        "kind" : "text",
+        "text" : ": "
+      },
+      {
+        "kind" : "typeIdentifier",
+        "preciseIdentifier" : "s:Sb",
+        "text" : "Bool"
+      }
+    ],
+    "modules" : [
+      {
+        "name" : "OktaOAuth2"
+      }
+    ],
+    "role" : "symbol",
+    "roleHeading" : "Instance Property",
+    "symbolKind" : "property",
+    "title" : "isAuthenticating"
+  },
+  "primaryContentSections" : [
+    {
+      "declarations" : [
+        {
+          "languages" : [
+            "swift"
+          ],
+          "platforms" : [
+            "macOS"
+          ],
+          "tokens" : [
+            {
+              "kind" : "keyword",
+              "text" : "var"
+            },
+            {
+              "kind" : "text",
+              "text" : " "
+            },
+            {
+              "kind" : "identifier",
+              "text" : "isAuthenticating"
+            },
+            {
+              "kind" : "text",
+              "text" : ": "
+            },
+            {
+              "kind" : "typeIdentifier",
+              "preciseIdentifier" : "s:Sb",
+              "text" : "Bool"
+            },
+            {
+              "kind" : "text",
+              "text" : " { "
+            },
+            {
+              "kind" : "keyword",
+              "text" : "get"
+            },
+            {
+              "kind" : "text",
+              "text" : " "
+            },
+            {
+              "kind" : "keyword",
+              "text" : "set"
+            },
+            {
+              "kind" : "text",
+              "text" : " }"
+            }
+          ]
+        }
+      ],
+      "kind" : "declarations"
+    }
+  ],
+  "schemaVersion" : {
+    "major" : 0,
+    "minor" : 2,
+    "patch" : 0
+  },
+  "sections" : [
+
+  ],
+  "variants" : [
+    {
+      "paths" : [
+        "\/documentation\/oktaoauth2\/sessiontokenflow\/isauthenticating"
+      ],
+      "traits" : [
+        {
+          "interfaceLanguage" : "swift"
+        }
+      ]
+    }
+  ]
+, 
+"references": {
+"doc://com.okta.mobile.authfoundation/documentation/OktaOAuth2": {
+  "abstract" : [
+
+  ],
+  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/OktaOAuth2",
+  "kind" : "symbol",
+  "role" : "collection",
+  "title" : "OktaOAuth2",
+  "type" : "topic",
+  "url" : "\/documentation\/oktaoauth2"
+},
+"doc://com.okta.mobile.authfoundation/documentation/OktaOAuth2/SessionTokenFlow": {
+  "abstract" : [
+    {
+      "text" : "An authentication flow class that exchanges a Session Token for access tokens.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "class"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "SessionTokenFlow"
+    }
+  ],
+  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/OktaOAuth2\/SessionTokenFlow",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "SessionTokenFlow"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "SessionTokenFlow",
+  "type" : "topic",
+  "url" : "\/documentation\/oktaoauth2\/sessiontokenflow"
+},
+"doc://com.okta.mobile.authfoundation/documentation/OktaOAuth2/SessionTokenFlow/isAuthenticating": {
+  "abstract" : [
+    {
+      "text" : "Indicates whether or not this flow is currently in the process of authenticating a user.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "var"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "isAuthenticating"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:Sb",
+      "text" : "Bool"
+    }
+  ],
+  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/OktaOAuth2\/SessionTokenFlow\/isAuthenticating",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "isAuthenticating",
+  "type" : "topic",
+  "url" : "\/documentation\/oktaoauth2\/sessiontokenflow\/isauthenticating"
+}
+}
+}

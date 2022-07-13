@@ -1,1 +1,190 @@
-{"primaryContentSections":[{"kind":"declarations","declarations":[{"tokens":[{"kind":"keyword","text":"typealias"},{"kind":"text","text":" "},{"kind":"identifier","text":"WindowAnchor"},{"kind":"text","text":" = "},{"kind":"typeIdentifier","text":"NSWindow","preciseIdentifier":"c:objc(cs)NSWindow"}],"languages":["swift"],"platforms":["macOS"]}]}],"schemaVersion":{"major":0,"minor":2,"patch":0},"sections":[],"variants":[{"paths":["\/documentation\/webauthenticationui\/webauthentication\/windowanchor"],"traits":[{"interfaceLanguage":"swift"}]}],"identifier":{"url":"doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/WebAuthenticationUI\/WebAuthentication\/WindowAnchor","interfaceLanguage":"swift"},"abstract":[{"type":"text","text":"No overview available."}],"kind":"symbol","metadata":{"fragments":[{"kind":"keyword","text":"typealias"},{"kind":"text","text":" "},{"kind":"identifier","text":"WindowAnchor"}],"title":"WebAuthentication.WindowAnchor","roleHeading":"Type Alias","role":"symbol","symbolKind":"typealias","externalID":"s:19WebAuthenticationUI0aB0C12WindowAnchora","modules":[{"name":"WebAuthenticationUI"}],"navigatorTitle":[{"kind":"identifier","text":"WindowAnchor"}]},"hierarchy":{"paths":[["doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/WebAuthenticationUI","doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/WebAuthenticationUI\/WebAuthentication"]]},"references":{"doc://com.okta.mobile.oktaoauth2/documentation/WebAuthenticationUI":{"role":"collection","title":"WebAuthenticationUI","abstract":[],"identifier":"doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/WebAuthenticationUI","kind":"symbol","type":"topic","url":"\/documentation\/webauthenticationui"},"doc://com.okta.mobile.oktaoauth2/documentation/WebAuthenticationUI/WebAuthentication/WindowAnchor":{"role":"symbol","title":"WebAuthentication.WindowAnchor","fragments":[{"kind":"keyword","text":"typealias"},{"kind":"text","text":" "},{"kind":"identifier","text":"WindowAnchor"}],"abstract":[],"identifier":"doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/WebAuthenticationUI\/WebAuthentication\/WindowAnchor","kind":"symbol","type":"topic","navigatorTitle":[{"kind":"identifier","text":"WindowAnchor"}],"url":"\/documentation\/webauthenticationui\/webauthentication\/windowanchor"},"doc://com.okta.mobile.oktaoauth2/documentation/WebAuthenticationUI/WebAuthentication":{"role":"symbol","title":"WebAuthentication","fragments":[{"kind":"keyword","text":"class"},{"kind":"text","text":" "},{"kind":"identifier","text":"WebAuthentication"}],"abstract":[{"type":"text","text":"Authentication coordinator that simplifies signing users in using browser-based OIDC authentication flows."}],"identifier":"doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/WebAuthenticationUI\/WebAuthentication","kind":"symbol","type":"topic","navigatorTitle":[{"kind":"identifier","text":"WebAuthentication"}],"url":"\/documentation\/webauthenticationui\/webauthentication"}}}
+{
+  "abstract" : [
+    {
+      "text" : "No overview available.",
+      "type" : "text"
+    }
+  ],
+  "hierarchy" : {
+    "paths" : [
+      [
+        "doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/WebAuthenticationUI",
+        "doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/WebAuthenticationUI\/WebAuthentication"
+      ]
+    ]
+  },
+  "identifier" : {
+    "interfaceLanguage" : "swift",
+    "url" : "doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/WebAuthenticationUI\/WebAuthentication\/WindowAnchor"
+  },
+  "kind" : "symbol",
+  "metadata" : {
+    "externalID" : "s:19WebAuthenticationUI0aB0C12WindowAnchora",
+    "fragments" : [
+      {
+        "kind" : "keyword",
+        "text" : "typealias"
+      },
+      {
+        "kind" : "text",
+        "text" : " "
+      },
+      {
+        "kind" : "identifier",
+        "text" : "WindowAnchor"
+      }
+    ],
+    "modules" : [
+      {
+        "name" : "WebAuthenticationUI"
+      }
+    ],
+    "navigatorTitle" : [
+      {
+        "kind" : "identifier",
+        "text" : "WindowAnchor"
+      }
+    ],
+    "role" : "symbol",
+    "roleHeading" : "Type Alias",
+    "symbolKind" : "typealias",
+    "title" : "WebAuthentication.WindowAnchor"
+  },
+  "primaryContentSections" : [
+    {
+      "declarations" : [
+        {
+          "languages" : [
+            "swift"
+          ],
+          "platforms" : [
+            "macOS"
+          ],
+          "tokens" : [
+            {
+              "kind" : "keyword",
+              "text" : "typealias"
+            },
+            {
+              "kind" : "text",
+              "text" : " "
+            },
+            {
+              "kind" : "identifier",
+              "text" : "WindowAnchor"
+            },
+            {
+              "kind" : "text",
+              "text" : " = "
+            },
+            {
+              "kind" : "typeIdentifier",
+              "preciseIdentifier" : "c:objc(cs)NSWindow",
+              "text" : "NSWindow"
+            }
+          ]
+        }
+      ],
+      "kind" : "declarations"
+    }
+  ],
+  "schemaVersion" : {
+    "major" : 0,
+    "minor" : 2,
+    "patch" : 0
+  },
+  "sections" : [
+
+  ],
+  "variants" : [
+    {
+      "paths" : [
+        "\/documentation\/webauthenticationui\/webauthentication\/windowanchor"
+      ],
+      "traits" : [
+        {
+          "interfaceLanguage" : "swift"
+        }
+      ]
+    }
+  ]
+, 
+"references": {
+"doc://com.okta.mobile.oktaoauth2/documentation/WebAuthenticationUI": {
+  "abstract" : [
+
+  ],
+  "identifier" : "doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/WebAuthenticationUI",
+  "kind" : "symbol",
+  "role" : "collection",
+  "title" : "WebAuthenticationUI",
+  "type" : "topic",
+  "url" : "\/documentation\/webauthenticationui"
+},
+"doc://com.okta.mobile.oktaoauth2/documentation/WebAuthenticationUI/WebAuthentication": {
+  "abstract" : [
+    {
+      "text" : "Authentication coordinator that simplifies signing users in using browser-based OIDC authentication flows.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "class"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "WebAuthentication"
+    }
+  ],
+  "identifier" : "doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/WebAuthenticationUI\/WebAuthentication",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "WebAuthentication"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "WebAuthentication",
+  "type" : "topic",
+  "url" : "\/documentation\/webauthenticationui\/webauthentication"
+},
+"doc://com.okta.mobile.oktaoauth2/documentation/WebAuthenticationUI/WebAuthentication/WindowAnchor": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "typealias"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "WindowAnchor"
+    }
+  ],
+  "identifier" : "doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/WebAuthenticationUI\/WebAuthentication\/WindowAnchor",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "WindowAnchor"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "WebAuthentication.WindowAnchor",
+  "type" : "topic",
+  "url" : "\/documentation\/webauthenticationui\/webauthentication\/windowanchor"
+}
+}
+}

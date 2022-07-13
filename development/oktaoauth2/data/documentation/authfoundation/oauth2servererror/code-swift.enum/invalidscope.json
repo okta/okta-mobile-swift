@@ -1,1 +1,207 @@
-{"primaryContentSections":[{"kind":"declarations","declarations":[{"tokens":[{"kind":"keyword","text":"case"},{"kind":"text","text":" "},{"kind":"identifier","text":"invalidScope"}],"languages":["swift"],"platforms":["macOS"]}]}],"schemaVersion":{"major":0,"minor":2,"patch":0},"sections":[],"variants":[{"paths":["\/documentation\/authfoundation\/oauth2servererror\/code-swift.enum\/invalidscope"],"traits":[{"interfaceLanguage":"swift"}]}],"identifier":{"url":"doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/AuthFoundation\/OAuth2ServerError\/Code-swift.enum\/invalidScope","interfaceLanguage":"swift"},"abstract":[{"type":"text","text":"The scopes list contains an invalid or unsupported value."}],"kind":"symbol","metadata":{"fragments":[{"kind":"keyword","text":"case"},{"kind":"text","text":" "},{"kind":"identifier","text":"invalidScope"}],"title":"OAuth2ServerError.Code.invalidScope","roleHeading":"Case","role":"symbol","symbolKind":"case","externalID":"s:14AuthFoundation17OAuth2ServerErrorV4CodeO12invalidScopeyA2EmF","modules":[{"name":"AuthFoundation"}]},"hierarchy":{"paths":[["doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/AuthFoundation","doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/AuthFoundation\/OAuth2ServerError","doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/AuthFoundation\/OAuth2ServerError\/Code-swift.enum"]]},"references":{"doc://com.okta.mobile.oktaoauth2/documentation/AuthFoundation/OAuth2ServerError/Code-swift.enum":{"role":"symbol","title":"OAuth2ServerError.Code","fragments":[{"kind":"keyword","text":"enum"},{"kind":"text","text":" "},{"kind":"identifier","text":"Code"}],"abstract":[{"type":"text","text":"Possible  OAuth 2.0 server error code"}],"identifier":"doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/AuthFoundation\/OAuth2ServerError\/Code-swift.enum","kind":"symbol","type":"topic","navigatorTitle":[{"kind":"identifier","text":"Code"}],"url":"\/documentation\/authfoundation\/oauth2servererror\/code-swift.enum"},"doc://com.okta.mobile.oktaoauth2/documentation/AuthFoundation/OAuth2ServerError/Code-swift.enum/invalidScope":{"role":"symbol","title":"OAuth2ServerError.Code.invalidScope","fragments":[{"kind":"keyword","text":"case"},{"kind":"text","text":" "},{"kind":"identifier","text":"invalidScope"}],"abstract":[{"type":"text","text":"The scopes list contains an invalid or unsupported value."}],"identifier":"doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/AuthFoundation\/OAuth2ServerError\/Code-swift.enum\/invalidScope","kind":"symbol","type":"topic","url":"\/documentation\/authfoundation\/oauth2servererror\/code-swift.enum\/invalidscope"},"doc://com.okta.mobile.oktaoauth2/documentation/AuthFoundation/OAuth2ServerError":{"role":"symbol","title":"OAuth2ServerError","fragments":[{"kind":"keyword","text":"struct"},{"kind":"text","text":" "},{"kind":"identifier","text":"OAuth2ServerError"}],"abstract":[{"type":"text","text":"Describes errors reported from an OAuth2 server."}],"identifier":"doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/AuthFoundation\/OAuth2ServerError","kind":"symbol","type":"topic","navigatorTitle":[{"kind":"identifier","text":"OAuth2ServerError"}],"url":"\/documentation\/authfoundation\/oauth2servererror"},"doc://com.okta.mobile.oktaoauth2/documentation/AuthFoundation":{"role":"collection","title":"AuthFoundation","abstract":[],"identifier":"doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/AuthFoundation","kind":"symbol","type":"topic","url":"\/documentation\/authfoundation"}}}
+{
+  "abstract" : [
+    {
+      "text" : "The scopes list contains an invalid or unsupported value.",
+      "type" : "text"
+    }
+  ],
+  "hierarchy" : {
+    "paths" : [
+      [
+        "doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/AuthFoundation",
+        "doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/AuthFoundation\/OAuth2ServerError",
+        "doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/AuthFoundation\/OAuth2ServerError\/Code-swift.enum"
+      ]
+    ]
+  },
+  "identifier" : {
+    "interfaceLanguage" : "swift",
+    "url" : "doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/AuthFoundation\/OAuth2ServerError\/Code-swift.enum\/invalidScope"
+  },
+  "kind" : "symbol",
+  "metadata" : {
+    "externalID" : "s:14AuthFoundation17OAuth2ServerErrorV4CodeO12invalidScopeyA2EmF",
+    "fragments" : [
+      {
+        "kind" : "keyword",
+        "text" : "case"
+      },
+      {
+        "kind" : "text",
+        "text" : " "
+      },
+      {
+        "kind" : "identifier",
+        "text" : "invalidScope"
+      }
+    ],
+    "modules" : [
+      {
+        "name" : "AuthFoundation"
+      }
+    ],
+    "role" : "symbol",
+    "roleHeading" : "Case",
+    "symbolKind" : "case",
+    "title" : "OAuth2ServerError.Code.invalidScope"
+  },
+  "primaryContentSections" : [
+    {
+      "declarations" : [
+        {
+          "languages" : [
+            "swift"
+          ],
+          "platforms" : [
+            "macOS"
+          ],
+          "tokens" : [
+            {
+              "kind" : "keyword",
+              "text" : "case"
+            },
+            {
+              "kind" : "text",
+              "text" : " "
+            },
+            {
+              "kind" : "identifier",
+              "text" : "invalidScope"
+            }
+          ]
+        }
+      ],
+      "kind" : "declarations"
+    }
+  ],
+  "schemaVersion" : {
+    "major" : 0,
+    "minor" : 2,
+    "patch" : 0
+  },
+  "sections" : [
+
+  ],
+  "variants" : [
+    {
+      "paths" : [
+        "\/documentation\/authfoundation\/oauth2servererror\/code-swift.enum\/invalidscope"
+      ],
+      "traits" : [
+        {
+          "interfaceLanguage" : "swift"
+        }
+      ]
+    }
+  ]
+, 
+"references": {
+"doc://com.okta.mobile.oktaoauth2/documentation/AuthFoundation": {
+  "abstract" : [
+
+  ],
+  "identifier" : "doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/AuthFoundation",
+  "kind" : "symbol",
+  "role" : "collection",
+  "title" : "AuthFoundation",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation"
+},
+"doc://com.okta.mobile.oktaoauth2/documentation/AuthFoundation/OAuth2ServerError": {
+  "abstract" : [
+    {
+      "text" : "Describes errors reported from an OAuth2 server.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "struct"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "OAuth2ServerError"
+    }
+  ],
+  "identifier" : "doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/AuthFoundation\/OAuth2ServerError",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "OAuth2ServerError"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "OAuth2ServerError",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/oauth2servererror"
+},
+"doc://com.okta.mobile.oktaoauth2/documentation/AuthFoundation/OAuth2ServerError/Code-swift.enum": {
+  "abstract" : [
+    {
+      "text" : "Possible  OAuth 2.0 server error code",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "enum"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "Code"
+    }
+  ],
+  "identifier" : "doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/AuthFoundation\/OAuth2ServerError\/Code-swift.enum",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "Code"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "OAuth2ServerError.Code",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/oauth2servererror\/code-swift.enum"
+},
+"doc://com.okta.mobile.oktaoauth2/documentation/AuthFoundation/OAuth2ServerError/Code-swift.enum/invalidScope": {
+  "abstract" : [
+    {
+      "text" : "The scopes list contains an invalid or unsupported value.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "case"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "invalidScope"
+    }
+  ],
+  "identifier" : "doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/AuthFoundation\/OAuth2ServerError\/Code-swift.enum\/invalidScope",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "OAuth2ServerError.Code.invalidScope",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/oauth2servererror\/code-swift.enum\/invalidscope"
+}
+}
+}

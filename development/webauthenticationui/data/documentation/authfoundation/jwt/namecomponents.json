@@ -1,1 +1,293 @@
-{"primaryContentSections":[{"kind":"declarations","declarations":[{"tokens":[{"kind":"keyword","text":"var"},{"kind":"text","text":" "},{"kind":"identifier","text":"nameComponents"},{"kind":"text","text":": "},{"kind":"typeIdentifier","text":"PersonNameComponents","preciseIdentifier":"s:10Foundation20PersonNameComponentsV"},{"kind":"text","text":" { "},{"kind":"keyword","text":"get"},{"kind":"text","text":" }"}],"languages":["swift"],"platforms":["macOS"]}]},{"kind":"content","content":[{"anchor":"discussion","level":2,"type":"heading","text":"Discussion"},{"type":"paragraph","inlineContent":[{"type":"text","text":"This property can be used as a convenience to generate a string representation of the user’s name, based on the user’s current locale."}]},{"type":"paragraph","inlineContent":[{"type":"text","text":"For example:"}]},{"type":"codeListing","syntax":"swift","code":["let formatter = PersonNameComponentsFormatter()","formatter.style = .medium","","let name = formatter.string(from: userInfo.nameComponents)"]}]}],"schemaVersion":{"major":0,"minor":2,"patch":0},"sections":[],"variants":[{"paths":["\/documentation\/authfoundation\/jwt\/namecomponents"],"traits":[{"interfaceLanguage":"swift"}]}],"identifier":{"url":"doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/AuthFoundation\/JWT\/nameComponents","interfaceLanguage":"swift"},"abstract":[{"type":"text","text":"The person’s name components, pre-assigned to a PersonNameComponents object."}],"kind":"symbol","metadata":{"modules":[{"name":"AuthFoundation"}],"role":"symbol","title":"nameComponents","roleHeading":"Instance Property","fragments":[{"kind":"keyword","text":"var"},{"kind":"text","text":" "},{"kind":"identifier","text":"nameComponents"},{"kind":"text","text":": "},{"kind":"typeIdentifier","text":"PersonNameComponents","preciseIdentifier":"s:10Foundation20PersonNameComponentsV"}],"symbolKind":"property","externalID":"s:14AuthFoundation9HasClaimsPAAE14nameComponents0B0010PersonNameF0Vvp::SYNTHESIZED::s:14AuthFoundation3JWTV","extendedModule":"AuthFoundation","platforms":[{"beta":false,"unavailable":false,"name":"iOS","introducedAt":"15.0","deprecated":false},{"beta":false,"unavailable":false,"name":"macOS","introducedAt":"12.0","deprecated":false},{"beta":false,"unavailable":false,"name":"tvOS","introducedAt":"15.0","deprecated":false},{"beta":false,"unavailable":false,"name":"watchOS","introducedAt":"8.0","deprecated":false}]},"hierarchy":{"paths":[["doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/AuthFoundation","doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/AuthFoundation\/JWT","doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/AuthFoundation\/JWT\/HasClaims-Implementations"]]},"references":{"doc://com.okta.mobile.webauthenticationui/documentation/AuthFoundation/JWT/nameComponents":{"role":"symbol","title":"nameComponents","fragments":[{"kind":"keyword","text":"var"},{"kind":"text","text":" "},{"kind":"identifier","text":"nameComponents"},{"kind":"text","text":": "},{"kind":"typeIdentifier","text":"PersonNameComponents","preciseIdentifier":"s:10Foundation20PersonNameComponentsV"}],"abstract":[{"type":"text","text":"The person’s name components, pre-assigned to a PersonNameComponents object."}],"identifier":"doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/AuthFoundation\/JWT\/nameComponents","kind":"symbol","type":"topic","url":"\/documentation\/authfoundation\/jwt\/namecomponents"},"doc://com.okta.mobile.webauthenticationui/documentation/AuthFoundation":{"role":"collection","title":"AuthFoundation","abstract":[],"identifier":"doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/AuthFoundation","kind":"symbol","type":"topic","url":"\/documentation\/authfoundation"},"doc://com.okta.mobile.webauthenticationui/documentation/AuthFoundation/JWT":{"role":"symbol","title":"JWT","fragments":[{"kind":"keyword","text":"struct"},{"kind":"text","text":" "},{"kind":"identifier","text":"JWT"}],"abstract":[{"type":"text","text":"Represents the contents of a JWT token, providing access to its payload contents."}],"identifier":"doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/AuthFoundation\/JWT","kind":"symbol","type":"topic","navigatorTitle":[{"kind":"identifier","text":"JWT"}],"url":"\/documentation\/authfoundation\/jwt"},"doc://com.okta.mobile.webauthenticationui/documentation/AuthFoundation/JWT/HasClaims-Implementations":{"role":"collectionGroup","title":"HasClaims Implementations","abstract":[],"identifier":"doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/AuthFoundation\/JWT\/HasClaims-Implementations","kind":"article","type":"topic","url":"\/documentation\/authfoundation\/jwt\/hasclaims-implementations"}}}
+{
+  "abstract" : [
+    {
+      "text" : "The person’s name components, pre-assigned to a PersonNameComponents object.",
+      "type" : "text"
+    }
+  ],
+  "hierarchy" : {
+    "paths" : [
+      [
+        "doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/AuthFoundation",
+        "doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/AuthFoundation\/JWT",
+        "doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/AuthFoundation\/JWT\/HasClaims-Implementations"
+      ]
+    ]
+  },
+  "identifier" : {
+    "interfaceLanguage" : "swift",
+    "url" : "doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/AuthFoundation\/JWT\/nameComponents"
+  },
+  "kind" : "symbol",
+  "metadata" : {
+    "extendedModule" : "AuthFoundation",
+    "externalID" : "s:14AuthFoundation9HasClaimsPAAE14nameComponents0B0010PersonNameF0Vvp::SYNTHESIZED::s:14AuthFoundation3JWTV",
+    "fragments" : [
+      {
+        "kind" : "keyword",
+        "text" : "var"
+      },
+      {
+        "kind" : "text",
+        "text" : " "
+      },
+      {
+        "kind" : "identifier",
+        "text" : "nameComponents"
+      },
+      {
+        "kind" : "text",
+        "text" : ": "
+      },
+      {
+        "kind" : "typeIdentifier",
+        "preciseIdentifier" : "s:10Foundation20PersonNameComponentsV",
+        "text" : "PersonNameComponents"
+      }
+    ],
+    "modules" : [
+      {
+        "name" : "AuthFoundation"
+      }
+    ],
+    "platforms" : [
+      {
+        "beta" : false,
+        "deprecated" : false,
+        "introducedAt" : "15.0",
+        "name" : "iOS",
+        "unavailable" : false
+      },
+      {
+        "beta" : false,
+        "deprecated" : false,
+        "introducedAt" : "12.0",
+        "name" : "macOS",
+        "unavailable" : false
+      },
+      {
+        "beta" : false,
+        "deprecated" : false,
+        "introducedAt" : "15.0",
+        "name" : "tvOS",
+        "unavailable" : false
+      },
+      {
+        "beta" : false,
+        "deprecated" : false,
+        "introducedAt" : "8.0",
+        "name" : "watchOS",
+        "unavailable" : false
+      }
+    ],
+    "role" : "symbol",
+    "roleHeading" : "Instance Property",
+    "symbolKind" : "property",
+    "title" : "nameComponents"
+  },
+  "primaryContentSections" : [
+    {
+      "declarations" : [
+        {
+          "languages" : [
+            "swift"
+          ],
+          "platforms" : [
+            "macOS"
+          ],
+          "tokens" : [
+            {
+              "kind" : "keyword",
+              "text" : "var"
+            },
+            {
+              "kind" : "text",
+              "text" : " "
+            },
+            {
+              "kind" : "identifier",
+              "text" : "nameComponents"
+            },
+            {
+              "kind" : "text",
+              "text" : ": "
+            },
+            {
+              "kind" : "typeIdentifier",
+              "preciseIdentifier" : "s:10Foundation20PersonNameComponentsV",
+              "text" : "PersonNameComponents"
+            },
+            {
+              "kind" : "text",
+              "text" : " { "
+            },
+            {
+              "kind" : "keyword",
+              "text" : "get"
+            },
+            {
+              "kind" : "text",
+              "text" : " }"
+            }
+          ]
+        }
+      ],
+      "kind" : "declarations"
+    },
+    {
+      "content" : [
+        {
+          "anchor" : "discussion",
+          "level" : 2,
+          "text" : "Discussion",
+          "type" : "heading"
+        },
+        {
+          "inlineContent" : [
+            {
+              "text" : "This property can be used as a convenience to generate a string representation of the user’s name, based on the user’s current locale.",
+              "type" : "text"
+            }
+          ],
+          "type" : "paragraph"
+        },
+        {
+          "inlineContent" : [
+            {
+              "text" : "For example:",
+              "type" : "text"
+            }
+          ],
+          "type" : "paragraph"
+        },
+        {
+          "code" : [
+            "let formatter = PersonNameComponentsFormatter()",
+            "formatter.style = .medium",
+            "",
+            "let name = formatter.string(from: userInfo.nameComponents)"
+          ],
+          "syntax" : "swift",
+          "type" : "codeListing"
+        }
+      ],
+      "kind" : "content"
+    }
+  ],
+  "schemaVersion" : {
+    "major" : 0,
+    "minor" : 2,
+    "patch" : 0
+  },
+  "sections" : [
+
+  ],
+  "variants" : [
+    {
+      "paths" : [
+        "\/documentation\/authfoundation\/jwt\/namecomponents"
+      ],
+      "traits" : [
+        {
+          "interfaceLanguage" : "swift"
+        }
+      ]
+    }
+  ]
+, 
+"references": {
+"doc://com.okta.mobile.webauthenticationui/documentation/AuthFoundation": {
+  "abstract" : [
+
+  ],
+  "identifier" : "doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/AuthFoundation",
+  "kind" : "symbol",
+  "role" : "collection",
+  "title" : "AuthFoundation",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation"
+},
+"doc://com.okta.mobile.webauthenticationui/documentation/AuthFoundation/JWT": {
+  "abstract" : [
+    {
+      "text" : "Represents the contents of a JWT token, providing access to its payload contents.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "struct"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "JWT"
+    }
+  ],
+  "identifier" : "doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/AuthFoundation\/JWT",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "JWT"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "JWT",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/jwt"
+},
+"doc://com.okta.mobile.webauthenticationui/documentation/AuthFoundation/JWT/HasClaims-Implementations": {
+  "abstract" : [
+
+  ],
+  "identifier" : "doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/AuthFoundation\/JWT\/HasClaims-Implementations",
+  "kind" : "article",
+  "role" : "collectionGroup",
+  "title" : "HasClaims Implementations",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/jwt\/hasclaims-implementations"
+},
+"doc://com.okta.mobile.webauthenticationui/documentation/AuthFoundation/JWT/nameComponents": {
+  "abstract" : [
+    {
+      "text" : "The person’s name components, pre-assigned to a PersonNameComponents object.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "var"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "nameComponents"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:10Foundation20PersonNameComponentsV",
+      "text" : "PersonNameComponents"
+    }
+  ],
+  "identifier" : "doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/AuthFoundation\/JWT\/nameComponents",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "nameComponents",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/jwt\/namecomponents"
+}
+}
+}
