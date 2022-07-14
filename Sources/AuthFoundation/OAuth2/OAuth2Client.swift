@@ -429,14 +429,21 @@ public final class OAuth2Client {
                 return
             }
             
-            // Perform idToken/accessToken validation
-            do {
-                try response.result.validate(using: self, with: request as? IDTokenValidatorContext)
-            } catch {
-                completion(.failure(.validation(error: error)))
-                return
+            self.openIdConfiguration { result in
+                switch result {
+                case .success(let openIdConfiguration):
+                    // Perform idToken/accessToken validation
+                    do {
+                        try response.result.validate(using: self, issuer: openIdConfiguration.issuer, with: request as? IDTokenValidatorContext)
+                    } catch {
+                        completion(.failure(.validation(error: error)))
+                        return
+                    }
+                case .failure(let error):
+                    completion(.failure(.validation(error: error)))
+                }
             }
-            
+        
             // Wait for the JWKS keys, if necessary
             group.notify(queue: DispatchQueue.global()) {
                 guard let idToken = response.result.idToken else {
