@@ -78,6 +78,7 @@ public final class Token: Codable, Equatable, Hashable, Expires {
     
     /// Validates the claims within this JWT token, to ensure it matches the given ``OAuth2Client``.
     /// - Parameter client: Client to validate the token's claims against.
+    /// - Parameter issuer: The client issuer URL.
     public func validate(using client: OAuth2Client, issuer: URL, with context: IDTokenValidatorContext?) throws {
         guard let idToken = idToken else {
             return
