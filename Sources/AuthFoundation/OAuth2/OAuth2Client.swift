@@ -425,9 +425,9 @@ public final class OAuth2Client {
         // Exchange the token
         request.send(to: self) { result in
             // Wait for the JWKS keys, if necessary
-            group.notify(queue: DispatchQueue.global()) {
+            group.notify(queue: DispatchQueue.global()) { [weak self] in
                 // Perform idToken/accessToken validation
-                self.validateToken(
+                self?.validateToken(
                     request: request,
                     keySet: keySet,
                     oauthTokenResponse: result,
