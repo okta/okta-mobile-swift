@@ -424,7 +424,7 @@ public final class OAuth2Client {
 
         openIdConfiguration { result in
             switch result {
-            case .success(let config):
+            case .success(let configuration):
                 // Exchange the token
                 request.send(to: self) { result in
                     guard case let .success(response) = result else {
@@ -433,7 +433,7 @@ public final class OAuth2Client {
                     }
                     
                     do {
-                        try response.result.validate(using: self, issuer: config.issuer, with: request as? IDTokenValidatorContext)
+                        try response.result.validate(using: self, issuer: configuration.issuer, with: request as? IDTokenValidatorContext)
                     } catch {
                         completion(.failure(.validation(error: error)))
                         return
