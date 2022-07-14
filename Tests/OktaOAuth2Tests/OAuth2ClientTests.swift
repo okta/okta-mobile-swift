@@ -85,7 +85,12 @@ final class OAuth2ClientTests: XCTestCase {
 
     func testExchangeFailed() throws {
         let pkce = PKCE()
-        client = OAuth2Client(baseURL: issuer, clientId: "theClientId", scopes: "openid profile offline_access", session: urlSession)
+        client = OAuth2Client(
+            baseURL: issuer,
+            clientId: "theClientId",
+            scopes: "openid profile offline_access",
+            session: urlSession
+        )
 
         let request = AuthorizationCodeFlow.TokenRequest(openIdConfiguration: openIdConfiguration,
                                                          clientId: "client_id",
@@ -109,7 +114,8 @@ final class OAuth2ClientTests: XCTestCase {
     
         let expect = expectation(description: "network request")
         client.exchange(token: request) { result in
-            guard case let .failure(error) = result, case let .validation(error: invalidIssuer) = error
+            guard case let .failure(error) = result,
+                  case let .validation(error: invalidIssuer) = error
             else {
                 XCTFail()
                 return

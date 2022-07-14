@@ -421,51 +421,57 @@ public final class OAuth2Client {
                 }
             }
         }
-
-        openIdConfiguration { result in
-            switch result {
-            case .success(let configuration):
-                // Exchange the token
-                request.send(to: self) { result in
-                    guard case let .success(response) = result else {
-                        completion(result)
-                        return
-                    }
-                    
+        
+        // Exchange the token
+        request.send(to: self) { result in
+            guard case let .success(response) = result else {
+                completion(result)
+                return
+            }
+            
+            group.enter()
+            self.openIdConfiguration { result in
+                switch result {
+                case .success(let configuration):
                     do {
-                        try response.result.validate(using: self, issuer: configuration.issuer, with: request as? IDTokenValidatorContext)
+                        try response.result.validate(
+                            using: self,
+                            issuer: configuration.issuer,
+                            with: request as? IDTokenValidatorContext
+                        )
                     } catch {
                         completion(.failure(.validation(error: error)))
                         return
                     }
-                
-                    // Wait for the JWKS keys, if necessary
-                    group.notify(queue: DispatchQueue.global()) {
-                        guard let idToken = response.result.idToken else {
-                            completion(result)
-                            return
-                        }
-                        
-                        guard let keySet = keySet else {
-                            completion(.failure(.validation(error: JWTError.invalidKey)))
-                            return
-                        }
-                            
-                        do {
-                            if try idToken.validate(using: keySet) == false {
-                                completion(.failure(.validation(error: JWTError.signatureInvalid)))
-                                return
-                            }
-                        } catch {
-                            completion(.failure(.validation(error: error)))
-                            return
-                        }
-                        
-                        completion(result)
-                    }
+                case .failure(let error):
+                    completion(.failure(.validation(error: error)))
                 }
-            case .failure(let error):
-                completion(.failure(.validation(error: error)))
+                group.leave()
+            }
+        
+            // Wait for the JWKS keys, if necessary
+            group.notify(queue: DispatchQueue.global()) {
+                guard let idToken = response.result.idToken else {
+                    completion(result)
+                    return
+                }
+                
+                guard let keySet = keySet else {
+                    completion(.failure(.validation(error: JWTError.invalidKey)))
+                    return
+                }
+                    
+                do {
+                    if try idToken.validate(using: keySet) == false {
+                        completion(.failure(.validation(error: JWTError.signatureInvalid)))
+                        return
+                    }
+                } catch {
+                    completion(.failure(.validation(error: error)))
+                    return
+                }
+                
+                completion(result)
             }
         }
     }
