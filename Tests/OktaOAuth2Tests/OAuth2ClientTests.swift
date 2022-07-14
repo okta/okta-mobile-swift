@@ -82,7 +82,6 @@ final class OAuth2ClientTests: XCTestCase {
         XCTAssertEqual(token?.scope, "openid profile offline_access")
     }
     
-
     func testExchangeFailed() throws {
         let pkce = PKCE()
         client = OAuth2Client(
@@ -101,7 +100,7 @@ final class OAuth2ClientTests: XCTestCase {
                                                          pkce: pkce,
                                                          nonce: nil,
                                                          maxAge: nil)
-        
+
         urlSession.expect("https://example.com/oauth2/default/.well-known/openid-configuration",
                           data: try data(from: .module, for: "openid-configuration", in: "MockResponses"),
                           contentType: "application/json")
@@ -111,7 +110,7 @@ final class OAuth2ClientTests: XCTestCase {
         urlSession.expect("https://example.okta.com/oauth2/v1/token",
                           data: try data(from: .module, for: "token", in: "MockResponses"),
                           contentType: "application/json")
-    
+
         let expect = expectation(description: "network request")
         client.exchange(token: request) { result in
             guard case let .failure(error) = result,
@@ -123,7 +122,7 @@ final class OAuth2ClientTests: XCTestCase {
             XCTAssertEqual(invalidIssuer as? JWTError, JWTError.invalidIssuer)
         }
         expect.fulfill()
-        
+
         waitForExpectations(timeout: 1.0) { error in
             XCTAssertNil(error)
         }

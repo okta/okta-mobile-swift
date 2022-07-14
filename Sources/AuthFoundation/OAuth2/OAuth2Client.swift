@@ -422,30 +422,38 @@ public final class OAuth2Client {
             }
         }
         
-        var configuration = openIdConfiguration
-        if configuration == nil {
-            group.enter()
-            self.openIdConfiguration { result in
-                defer { group.leave() }
-                if case let .success(response) = result {
-                    configuration = response
-                }
+        // Exchange the token
+        request.send(to: self) { result in
+            // Wait for the JWKS keys, if necessary
+            group.notify(queue: DispatchQueue.global()) {
+                // Perform idToken/accessToken validation
+                self.validateToken(
+                    request: request,
+                    keySet: keySet,
+                    oauthTokenResponse: result,
+                    completion: completion
+                )
             }
         }
+    }
+    
+    private func validateToken<T: OAuth2TokenRequest>(
+        request: T,
+        keySet: JWKS?,
+        oauthTokenResponse: Result<APIResponse<Token>, APIClientError>,
+        completion: @escaping (Result<APIResponse<Token>, APIClientError>) -> Void
+    ) {
+        guard case let .success(response) = oauthTokenResponse else {
+            completion(oauthTokenResponse)
+            return
+        }
         
-        group.notify(queue: DispatchQueue.global()) {
-            // Exchange the token
-            request.send(to: self) { result in
-                guard case let .success(response) = result else {
-                    completion(result)
-                    return
-                }
-        
-                guard let configuration = configuration else {
-                    completion(.failure(.validation(error: JWTError.invalidIssuer)))
-                    return
-                }
-                
+        // Retrieves the org's OpenID configuration
+        self.openIdConfiguration { result in
+            switch result {
+            case .failure(let error):
+                completion(.failure(.serverError(error)))
+            case .success(let configuration):
                 do {
                     try response.result.validate(
                         using: self,
@@ -457,30 +465,26 @@ public final class OAuth2Client {
                     return
                 }
                 
-                // Wait for the JWKS keys, if necessary
-                group.notify(queue: DispatchQueue.global()) {
-                    guard let idToken = response.result.idToken else {
-                        completion(result)
-                        return
-                    }
-                    
-                    guard let keySet = keySet else {
-                        completion(.failure(.validation(error: JWTError.invalidKey)))
-                        return
-                    }
-                        
-                    do {
-                        if try idToken.validate(using: keySet) == false {
-                            completion(.failure(.validation(error: JWTError.signatureInvalid)))
-                            return
-                        }
-                    } catch {
-                        completion(.failure(.validation(error: error)))
-                        return
-                    }
-                    
-                    completion(result)
+                guard let idToken = response.result.idToken else {
+                    completion(oauthTokenResponse)
+                    return
                 }
+                
+                guard let keySet = keySet else {
+                    completion(.failure(.validation(error: JWTError.invalidKey)))
+                    return
+                }
+                
+                do {
+                    if try idToken.validate(using: keySet) == false {
+                        completion(.failure(.validation(error: JWTError.signatureInvalid)))
+                        return
+                    }
+                } catch {
+                    completion(.failure(.validation(error: error)))
+                    return
+                }
+                completion(oauthTokenResponse)
             }
         }
     }
