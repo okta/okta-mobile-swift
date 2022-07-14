@@ -427,22 +427,19 @@ public final class OAuth2Client {
             // Wait for the JWKS keys, if necessary
             group.notify(queue: DispatchQueue.global()) { [weak self] in
                 // Perform idToken/accessToken validation
-                self?.validateToken(
-                    request: request,
-                    keySet: keySet,
-                    oauthTokenResponse: result,
-                    completion: completion
-                )
+                self?.validateToken(request: request,
+                                    keySet: keySet,
+                                    oauthTokenResponse: result,
+                                    completion: completion)
             }
         }
     }
     
-    private func validateToken<T: OAuth2TokenRequest>(
-        request: T,
-        keySet: JWKS?,
-        oauthTokenResponse: Result<APIResponse<Token>, APIClientError>,
-        completion: @escaping (Result<APIResponse<Token>, APIClientError>) -> Void
-    ) {
+    private func validateToken<T: OAuth2TokenRequest>(request: T,
+                                                      keySet: JWKS?,
+                                                      oauthTokenResponse: Result<APIResponse<Token>, APIClientError>,
+                                                      completion: @escaping (Result<APIResponse<Token>, APIClientError>) -> Void)
+    {
         guard case let .success(response) = oauthTokenResponse else {
             completion(oauthTokenResponse)
             return
@@ -455,11 +452,9 @@ public final class OAuth2Client {
                 completion(.failure(.serverError(error)))
             case .success(let configuration):
                 do {
-                    try response.result.validate(
-                        using: self,
-                        issuer: configuration.issuer,
-                        with: request as? IDTokenValidatorContext
-                    )
+                    try response.result.validate(using: self,
+                                                 issuer: configuration.issuer,
+                                                 with: request as? IDTokenValidatorContext)
                 } catch {
                     completion(.failure(.validation(error: error)))
                     return
