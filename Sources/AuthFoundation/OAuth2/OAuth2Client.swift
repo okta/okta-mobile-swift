@@ -450,11 +450,9 @@ public final class OAuth2Client {
             switch result {
             case .failure(let error):
                 completion(.failure(.serverError(error)))
-            case .success(let configuration):
+            case .success:
                 do {
-                    try response.result.validate(using: self,
-                                                 issuer: configuration.issuer,
-                                                 with: request as? IDTokenValidatorContext)
+                    try response.result.validate(using: self, with: request as? IDTokenValidatorContext)
                 } catch {
                     completion(.failure(.validation(error: error)))
                     return
