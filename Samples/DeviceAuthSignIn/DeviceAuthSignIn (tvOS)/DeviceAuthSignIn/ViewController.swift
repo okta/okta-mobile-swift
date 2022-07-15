@@ -85,7 +85,7 @@ class ViewController: UIViewController {
     
     func show(_ context: DeviceAuthorizationFlow.Context) {
         update(prompt: context.verificationUri)
-        update(qrCode: context.verificationUriComplete)
+        update(image: context.qrCode)
         update(code: context.userCode)
         codeStackView.isHidden = false
         activityIndicator.stopAnimating()
@@ -127,34 +127,9 @@ class ViewController: UIViewController {
         urlPromptLabel.attributedText = mutableString
     }
     
-    func update(qrCode url: URL?) {
-        guard let url = url else {
-            codeImageView.isHidden = true
-            return
-        }
-        
-        var image: UIImage? = nil
-        defer {
-            codeImageView.image = image
-        }
-        
-        let context = CIContext()
-        let filter = CIFilter.qrCodeGenerator()
-
-        guard let data = url.absoluteString.data(using: .utf8) else {
-            return
-        }
-        
-        filter.message = data
-        
-        guard let outputImage = filter.outputImage,
-              let cgImage = context.createCGImage(outputImage, from: outputImage.extent)
-        else {
-            return
-        }
-        
-        image = UIImage(cgImage: cgImage)
-        codeImageView.isHidden = false
+    func update(image: UIImage?) {
+        codeImageView.image = image
+        codeImageView.isHidden = (image == nil)
     }
     
     func update(code: String) {

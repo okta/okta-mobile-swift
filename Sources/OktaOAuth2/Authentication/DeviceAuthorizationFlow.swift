@@ -63,49 +63,7 @@ public protocol DeviceAuthorizationFlowDelegate: AuthenticationDelegate {
 /// // the code.
 /// let token = try await flow.resume(with: context)
 /// ```
-public final class DeviceAuthorizationFlow: AuthenticationFlow {
-    /// A model representing the context and current state for an authorization session.
-    public struct Context: Decodable, Equatable, Expires {
-        let deviceCode: String
-        var interval: TimeInterval
-        
-        /// The date this context was created.
-        public let issuedAt: Date?
-
-        /// The code that should be displayed to the user.
-        public let userCode: String
-        
-        /// The URI the user should be prompted to open in order to authorize the application.
-        public let verificationUri: URL
-        
-        /// A convenience URI that combines the ``verificationUri`` and the ``userCode``, to make a clickable link.
-        public let verificationUriComplete: URL?
-        
-        /// The time interval after which the authorization context will expire.
-        public let expiresIn: TimeInterval
-        
-        enum CodingKeys: String, CodingKey, CaseIterable {
-            case issuedAt
-            case userCode
-            case verificationUri
-            case verificationUriComplete
-            case expiresIn
-            case deviceCode
-            case interval
-        }
-        
-        public init(from decoder: Decoder) throws {
-            let container = try decoder.container(keyedBy: CodingKeys.self)
-            issuedAt = try container.decodeIfPresent(Date.self, forKey: .issuedAt) ?? Date()
-            deviceCode = try container.decode(String.self, forKey: .deviceCode)
-            userCode = try container.decode(String.self, forKey: .userCode)
-            verificationUri = try container.decode(URL.self, forKey: .verificationUri)
-            verificationUriComplete = try container.decodeIfPresent(URL.self, forKey: .verificationUriComplete)
-            expiresIn = try container.decode(TimeInterval.self, forKey: .expiresIn)
-            interval = try container.decodeIfPresent(TimeInterval.self, forKey: .interval) ?? 5.0
-        }
-    }
-    
+public final class DeviceAuthorizationFlow: AuthenticationFlow {    
     /// The OAuth2Client this authentication flow will use.
     public let client: OAuth2Client
     
