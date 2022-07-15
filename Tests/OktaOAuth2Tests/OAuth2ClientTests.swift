@@ -127,42 +127,4 @@ final class OAuth2ClientTests: XCTestCase {
             XCTAssertNil(error)
         }
     }
-    
-    func testExchangeWhenOpenIdConfigurationIsMissingResponse() throws {
-        let pkce = PKCE()
-        let request = AuthorizationCodeFlow.TokenRequest(openIdConfiguration: openIdConfiguration,
-                                                         clientId: "client_id",
-                                                         scope: "openid profile offline_access",
-                                                         redirectUri: redirectUri.absoluteString,
-                                                         grantType: .authorizationCode,
-                                                         grantValue: "abc123",
-                                                         pkce: pkce,
-                                                         nonce: nil,
-                                                         maxAge: nil)
-
-        urlSession.expect("https://example.com/oauth2/default/.well-known/openid-configuration",
-                          data: nil, statusCode: 500)
-        urlSession.expect("https://example.okta.com/oauth2/v1/keys?client_id=theClientId",
-                          data: try data(from: .module, for: "keys", in: "MockResponses"),
-                          contentType: "application/json")
-        urlSession.expect("https://example.okta.com/oauth2/v1/token",
-                          data: try data(from: .module, for: "token", in: "MockResponses"),
-                          contentType: "application/json")
-
-        let expect = expectation(description: "network request")
-        client.exchange(token: request) { result in
-            guard case let .failure(error) = result,
-                  case let .serverError(missingResponse) = error
-            else {
-                XCTFail()
-                return
-            }
-            XCTAssertEqual(missingResponse.localizedDescription, APIClientError.missingResponse.localizedDescription)
-        }
-        expect.fulfill()
-
-        waitForExpectations(timeout: 1.0) { error in
-            XCTAssertNil(error)
-        }
-    }
 }
