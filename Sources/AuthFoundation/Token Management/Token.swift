@@ -82,9 +82,13 @@ public final class Token: Codable, Equatable, Hashable, Expires {
         guard let idToken = idToken else {
             return
         }
+        
+        guard let issuer = client.openIdConfiguration?.issuer else {
+            throw JWTError.invalidIssuer
+        }
 
         try Token.idTokenValidator.validate(token: idToken,
-                                            issuer: client.configuration.baseURL,
+                                            issuer: issuer,
                                             clientId: client.configuration.clientId,
                                             context: context)
         try Token.accessTokenValidator.validate(accessToken, idToken: idToken)

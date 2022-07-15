@@ -424,23 +424,42 @@ public final class OAuth2Client {
         
         // Exchange the token
         request.send(to: self) { result in
-            guard case let .success(response) = result else {
-                completion(result)
-                return
-            }
-            
-            // Perform idToken/accessToken validation
-            do {
-                try response.result.validate(using: self, with: request as? IDTokenValidatorContext)
-            } catch {
-                completion(.failure(.validation(error: error)))
-                return
-            }
-            
             // Wait for the JWKS keys, if necessary
             group.notify(queue: DispatchQueue.global()) {
+                // Perform idToken/accessToken validation
+                self.validateToken(request: request,
+                                    keySet: keySet,
+                                    oauthTokenResponse: result,
+                                    completion: completion)
+            }
+        }
+    }
+    
+    private func validateToken<T: OAuth2TokenRequest>(request: T,
+                                                      keySet: JWKS?,
+                                                      oauthTokenResponse: Result<APIResponse<Token>, APIClientError>,
+                                                      completion: @escaping (Result<APIResponse<Token>, APIClientError>) -> Void)
+    {
+        guard case let .success(response) = oauthTokenResponse else {
+            completion(oauthTokenResponse)
+            return
+        }
+        
+        // Retrieves the org's OpenID configuration
+        self.openIdConfiguration { result in
+            switch result {
+            case .failure(let error):
+                completion(.failure(.serverError(error)))
+            case .success:
+                do {
+                    try response.result.validate(using: self, with: request as? IDTokenValidatorContext)
+                } catch {
+                    completion(.failure(.validation(error: error)))
+                    return
+                }
+                
                 guard let idToken = response.result.idToken else {
-                    completion(result)
+                    completion(oauthTokenResponse)
                     return
                 }
                 
@@ -448,7 +467,7 @@ public final class OAuth2Client {
                     completion(.failure(.validation(error: JWTError.invalidKey)))
                     return
                 }
-                    
+                
                 do {
                     if try idToken.validate(using: keySet) == false {
                         completion(.failure(.validation(error: JWTError.signatureInvalid)))
@@ -458,8 +477,7 @@ public final class OAuth2Client {
                     completion(.failure(.validation(error: error)))
                     return
                 }
-                
-                completion(result)
+                completion(oauthTokenResponse)
             }
         }
     }
