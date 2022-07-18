@@ -66,6 +66,17 @@ extension Credential {
     }
     
     /// Attempt to revoke one or more of the tokens.
+    ///
+    /// Revoking a token causes it to become invalidated on the server. The `type` argument can be used to specify which token to revoke.
+    /// * ``Token/RevokeType/accessToken`` – Revokes the access token. If the `offline_access` scope was specified when authenticating, the refresh token may be used to recreate a new access token.
+    /// * ``Token/RevokeType/refreshToken`` – If a refresh token is present (e.g. the `offline_access` scope was specified when authenticating), both the access token _and_ refresh token will become invalidated.
+    /// * ``Token/RevokeType/deviceSecret`` – If the `device_sso` scope was specified when authenticating, this will invalidate the device secret, which will prevent other clients from creating new tokens using Device SSO.
+    ///
+    /// If a credential is no longer valid, it will automatically be removed from storage. This is to prevent an application from thinking a valid user is signed in while having credentials that are incapable of being used.
+    ///
+    /// This may occur if the credential:
+    /// 1. Has both an access token and a refresh token, and the ``Token/RevokeType/refreshToken`` type is supplied, or
+    /// 1. Does not have a refresh token and the ``Token/RevokeType/accessToken`` type is supplied.
     /// - Parameters:
     ///   - type: The token type to revoke.
     public func revoke(type: Token.RevokeType = .accessToken) async throws {

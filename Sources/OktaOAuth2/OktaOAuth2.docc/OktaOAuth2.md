@@ -22,17 +22,21 @@ You can use OktaOAuth2 when you want to:
 
 - ``AuthorizationCodeFlow``
 - ``AuthorizationCodeFlowDelegate``
+- ``AuthorizationCodeFlow/Context-swift.struct``
 - ``SessionLogoutFlow``
+- ``SessionLogoutFlow/Context-swift.struct``
 - ``SessionLogoutFlowDelegate``
 
 ### Device Authorization Flow
 
 - ``DeviceAuthorizationFlow``
 - ``DeviceAuthorizationFlowDelegate``
+- ``DeviceAuthorizationFlow/Context-swift.struct``
 
 ### Token Exchange Flow
 
 - ``TokenExchangeFlow``
+- ``TokenExchangeFlow/Audience-swift.enum``
 
 ### Resource Owner Flow
 

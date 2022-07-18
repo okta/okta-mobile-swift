@@ -17,10 +17,10 @@ You can use AuthFoundation when you want to:
 ### Essentials
 
 - ``Credential``
-
-### User Management
-
 - <doc:ManagingUserCredentials>
+
+### Token Information
+
 - ``Token``
 - ``UserInfo``
 - ``TokenInfo``

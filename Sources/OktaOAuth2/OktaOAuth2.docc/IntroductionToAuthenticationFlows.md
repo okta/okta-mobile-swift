@@ -59,7 +59,7 @@ let token = try await flow.resume(with: context)
 
 ### Multi-Step Flows
 
-Finally, the `IDXAuthenticationFlow` (implemented in the `OktaIdx` library) supports a many-step workflow, that adapts to user choices and server-driven policy settings. This workflow, while fundamentally simliar, has many more steps that guides a user through authentication. For more information, please see the documentation for that library.
+`InteractionCodeFlow` (implemented in the `OktaIdx` library) supports a many-step workflow, that adapts to user choices and server-driven policy settings. This workflow, while fundamentally simliar, has many more steps that guides a user through authentication. For more information, please see the documentation for that library.
 
 ## Using Delegation
 
