@@ -17,218 +17,218 @@ public enum Claim: Codable {
     /// Issuer
     case issuer
 
-    case version                   
+    case version
 
-    case userId                    
+    case userId
 
-    case identityProvider          
+    case identityProvider
 
     /// Subject
-    case subject                   
+    case subject
 
     /// Audience
-    case audience                  
+    case audience
 
     /// Expiration Time
-    case expirationTime            
+    case expirationTime
 
     /// Not Before
-    case notBefore                 
+    case notBefore
 
     /// Issued At
-    case issuedAt                  
+    case issuedAt
 
     /// JWT ID
-    case jwtId                     
+    case jwtId
 
     /// Full name
-    case name                      
+    case name
 
     /// Given name(s) or first name(s)
-    case givenName                 
+    case givenName
 
     /// Surname(s) or last name(s)
-    case familyName                
+    case familyName
 
     /// Middle name(s)
-    case middleName                
+    case middleName
 
     /// Casual name
-    case nickname                  
+    case nickname
 
     /// Shorthand name by which the End-User wishes to be referred to
-    case preferredUsername         
+    case preferredUsername
 
     /// Profile page URL
-    case profile                   
+    case profile
 
     /// Profile picture URL
-    case picture                   
+    case picture
 
     /// Web page or blog URL
-    case website                   
+    case website
 
     /// Preferred e-mail address
-    case email                     
+    case email
 
     /// True if the e-mail address has been verified; otherwise false
-    case emailVerified             
+    case emailVerified
 
     /// Gender
-    case gender                    
+    case gender
 
     /// Birthday
-    case birthdate                 
+    case birthdate
 
     /// Time zone
-    case zoneinfo                  
+    case zoneinfo
 
     /// Locale
-    case locale                    
+    case locale
 
     /// Preferred telephone number
-    case phoneNumber               
+    case phoneNumber
 
     /// True if the phone number has been verified; otherwise false
-    case phoneNumberVerified       
+    case phoneNumberVerified
 
     /// Preferred postal address
-    case address                   
+    case address
 
     /// Time the information was last updated
-    case updatedAt                 
+    case updatedAt
 
     /// Authorized party - the party to which the ID Token was issued
-    case authorizedParty           
+    case authorizedParty
 
     /// Value used to associate a Client session with an ID Token
-    case nonce                     
+    case nonce
 
     /// Time when the authentication occurred
-    case authTime                  
+    case authTime
 
     /// Access Token hash value
-    case accessTokenHash           
+    case accessTokenHash
 
     /// Code hash value
-    case codeHash                  
+    case codeHash
 
     /// Authentication Context Class Reference
-    case authContextClassReference 
+    case authContextClassReference
 
     /// Authentication Methods References
-    case authMethodsReference      
+    case authMethodsReference
 
     /// Public key used to check the signature of an ID Token
-    case subjectPublicKey          
+    case subjectPublicKey
 
     /// Confirmation
-    case confirmation              
+    case confirmation
 
     /// SIP From tag header field parameter value
-    case sipFromTag                
+    case sipFromTag
 
     /// SIP Date header field value
-    case sipDate                   
+    case sipDate
 
     /// SIP Call-Id header field value
-    case sipCallId                 
+    case sipCallId
 
     /// SIP CSeq numeric header field parameter value
-    case sipCSeqNum                
+    case sipCSeqNum
 
     /// SIP Via branch header field parameter value
-    case sipViaBranch              
+    case sipViaBranch
 
     /// Originating Identity String
-    case originatingIdentity       
+    case originatingIdentity
 
     /// Destination Identity String
-    case destinationIdentity       
+    case destinationIdentity
 
     /// Media Key Fingerprint String
-    case mediaKeyFingerprint       
+    case mediaKeyFingerprint
 
     /// Security Events
-    case events                    
+    case events
 
     /// Time of Event
-    case timeOfEvent               
+    case timeOfEvent
 
     /// Transaction Identifier
-    case transactionId             
+    case transactionId
 
     /// Resource Priority Header Authorization
-    case resourcePriorityHeader    
+    case resourcePriorityHeader
 
     /// Session ID
-    case sessionId                 
+    case sessionId
 
     /// Vector of Trust value
-    case vectorOfTrust             
+    case vectorOfTrust
 
     /// Vector of Trust trustmark URL
-    case vectorOfTrustMark         
+    case vectorOfTrustMark
 
     /// Attestation level as defined in SHAKEN framework
-    case attestationLevel          
+    case attestationLevel
 
     /// Originating Identifier as defined in SHAKEN framework
-    case originatingId             
+    case originatingId
 
     /// Actor
-    case actor                     
+    case actor
 
     /// Scope Values
-    case scope                     
+    case scope
 
     /// Client Identifier
-    case clientId                  
+    case clientId
 
     /// "Authorized Actor - the party that is authorized to become the actor"
-    case authorizedActor           
+    case authorizedActor
 
     /// jCard data
-    case jcardData                 
+    case jcardData
 
     /// Number of API requests for which the access token can be used
-    case maxAPIRequestCount        
+    case maxAPIRequestCount
 
     /// Diverted Target of a Call
-    case divertedTarget            
+    case divertedTarget
 
     /// Original PASSporT (in Full Form)
-    case originalPassport          
+    case originalPassport
 
     /// Verifiable Credential as specified in the W3C Recommendation
-    case verifiableCredential      
+    case verifiableCredential
 
     /// Verifiable Presentation as specified in the W3C Recommendation
-    case verifiablePresentation    
+    case verifiablePresentation
 
     /// SIP Priority header field
-    case sipPriorityHeader         
+    case sipPriorityHeader
 
     /// "The ACE profile a token is supposed to be used with."
-    case aceProfile                
+    case aceProfile
 
     /// A nonce previously provided to the AS by the RS via the client.  Used to verify token freshness when the RS cannot synchronize its clock with the AS."
-    case clientNonce               
+    case clientNonce
 
     /// "Expires in.  Lifetime of the token in seconds from the time the RS first sees it.  Used to implement a weaker from of token expiration for devices that cannot synchronize their internal clocks."
-    case expiresIn                 
+    case expiresIn
 
     /// Roles
-    case roles                     
+    case roles
 
     /// Groups
-    case groups                    
+    case groups
 
     /// Entitlements
-    case entitlements              
+    case entitlements
 
     /// Token introspection response
-    case tokenIntrospection        
+    case tokenIntrospection
 
     /// Custom claim with the given name
     case custom(_ name: String)
