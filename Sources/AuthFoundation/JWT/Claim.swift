@@ -13,150 +13,225 @@
 import Foundation
 
 /// List of registered and public claims.
-public enum Claim: String, Codable {
+public enum Claim: Codable {
     /// Issuer
-    case issuer                    = "iss"
-    case version                   = "ver"
-    case userId                    = "uid"
-    case identityProvider          = "idp"
+    case issuer
+
+    case version                   
+
+    case userId                    
+
+    case identityProvider          
+
     /// Subject
-    case subject                   = "sub"
+    case subject                   
+
     /// Audience
-    case audience                  = "aud"
+    case audience                  
+
     /// Expiration Time
-    case expirationTime            = "exp"
+    case expirationTime            
+
     /// Not Before
-    case notBefore                 = "nbf"
+    case notBefore                 
+
     /// Issued At
-    case issuedAt                  = "iat"
+    case issuedAt                  
+
     /// JWT ID
-    case jwtId                     = "jti"
+    case jwtId                     
+
     /// Full name
-    case name                      = "name"
+    case name                      
+
     /// Given name(s) or first name(s)
-    case givenName                 = "given_name"
+    case givenName                 
+
     /// Surname(s) or last name(s)
-    case familyName                = "family_name"
+    case familyName                
+
     /// Middle name(s)
-    case middleName                = "middle_name"
+    case middleName                
+
     /// Casual name
-    case nickname                  = "nickname"
+    case nickname                  
+
     /// Shorthand name by which the End-User wishes to be referred to
-    case preferredUsername         = "preferred_username"
+    case preferredUsername         
+
     /// Profile page URL
-    case profile                   = "profile"
+    case profile                   
+
     /// Profile picture URL
-    case picture                   = "picture"
+    case picture                   
+
     /// Web page or blog URL
-    case website                   = "website"
+    case website                   
+
     /// Preferred e-mail address
-    case email                     = "email"
+    case email                     
+
     /// True if the e-mail address has been verified; otherwise false
-    case emailVerified             = "email_verified"
+    case emailVerified             
+
     /// Gender
-    case gender                    = "gender"
+    case gender                    
+
     /// Birthday
-    case birthdate                 = "birthdate"
+    case birthdate                 
+
     /// Time zone
-    case zoneinfo                  = "zoneinfo"
+    case zoneinfo                  
+
     /// Locale
-    case locale                    = "locale"
+    case locale                    
+
     /// Preferred telephone number
-    case phoneNumber               = "phone_number"
+    case phoneNumber               
+
     /// True if the phone number has been verified; otherwise false
-    case phoneNumberVerified       = "phone_number_verified"
+    case phoneNumberVerified       
+
     /// Preferred postal address
-    case address                   = "address"
+    case address                   
+
     /// Time the information was last updated
-    case updatedAt                 = "updated_at"
+    case updatedAt                 
+
     /// Authorized party - the party to which the ID Token was issued
-    case authorizedParty           = "azp"
+    case authorizedParty           
+
     /// Value used to associate a Client session with an ID Token
-    case nonce                     = "nonce"
+    case nonce                     
+
     /// Time when the authentication occurred
-    case authTime                  = "auth_time"
+    case authTime                  
+
     /// Access Token hash value
-    case accessTokenHash           = "at_hash"
+    case accessTokenHash           
+
     /// Code hash value
-    case codeHash                  = "c_hash"
+    case codeHash                  
+
     /// Authentication Context Class Reference
-    case authContextClassReference = "acr"
+    case authContextClassReference 
+
     /// Authentication Methods References
-    case authMethodsReference      = "amr"
+    case authMethodsReference      
+
     /// Public key used to check the signature of an ID Token
-    case subjectPublicKey          = "sub_jwk"
+    case subjectPublicKey          
+
     /// Confirmation
-    case confirmation              = "cnf"
+    case confirmation              
+
     /// SIP From tag header field parameter value
-    case sipFromTag                = "sip_from_tag"
+    case sipFromTag                
+
     /// SIP Date header field value
-    case sipDate                   = "sip_date"
+    case sipDate                   
+
     /// SIP Call-Id header field value
-    case sipCallId                 = "sip_callid"
+    case sipCallId                 
+
     /// SIP CSeq numeric header field parameter value
-    case sipCSeqNum                = "sip_cseq_num"
+    case sipCSeqNum                
+
     /// SIP Via branch header field parameter value
-    case sipViaBranch              = "sip_via_branch"
+    case sipViaBranch              
+
     /// Originating Identity String
-    case originatingIdentity       = "orig"
+    case originatingIdentity       
+
     /// Destination Identity String
-    case destinationIdentity       = "dest"
+    case destinationIdentity       
+
     /// Media Key Fingerprint String
-    case mediaKeyFingerprint       = "mky"
+    case mediaKeyFingerprint       
+
     /// Security Events
-    case events                    = "events"
+    case events                    
+
     /// Time of Event
-    case timeOfEvent               = "toe"
+    case timeOfEvent               
+
     /// Transaction Identifier
-    case transactionId             = "txn"
+    case transactionId             
+
     /// Resource Priority Header Authorization
-    case resourcePriorityHeader    = "rph"
+    case resourcePriorityHeader    
+
     /// Session ID
-    case sessionId                 = "sid"
+    case sessionId                 
+
     /// Vector of Trust value
-    case vectorOfTrust             = "vot"
+    case vectorOfTrust             
+
     /// Vector of Trust trustmark URL
-    case vectorOfTrustMark         = "vtm"
+    case vectorOfTrustMark         
+
     /// Attestation level as defined in SHAKEN framework
-    case attestationLevel          = "attest"
+    case attestationLevel          
+
     /// Originating Identifier as defined in SHAKEN framework
-    case originatingId             = "origid"
+    case originatingId             
+
     /// Actor
-    case actor                     = "act"
+    case actor                     
+
     /// Scope Values
-    case scope                     = "scp"
+    case scope                     
+
     /// Client Identifier
-    case clientId                  = "cid"
+    case clientId                  
+
     /// "Authorized Actor - the party that is authorized to become the actor"
-    case authorizedActor           = "may_act"
+    case authorizedActor           
+
     /// jCard data
-    case jcardData                 = "jcard"
+    case jcardData                 
+
     /// Number of API requests for which the access token can be used
-    case maxAPIRequestCount        = "at_use_nbr"
+    case maxAPIRequestCount        
+
     /// Diverted Target of a Call
-    case divertedTarget            = "div"
+    case divertedTarget            
+
     /// Original PASSporT (in Full Form)
-    case originalPassport          = "opt"
+    case originalPassport          
+
     /// Verifiable Credential as specified in the W3C Recommendation
-    case verifiableCredential      = "vc"
+    case verifiableCredential      
+
     /// Verifiable Presentation as specified in the W3C Recommendation
-    case verifiablePresentation    = "vp"
+    case verifiablePresentation    
+
     /// SIP Priority header field
-    case sipPriorityHeader         = "sph"
+    case sipPriorityHeader         
+
     /// "The ACE profile a token is supposed to be used with."
-    case aceProfile                = "ace_profile"
+    case aceProfile                
+
     /// A nonce previously provided to the AS by the RS via the client.  Used to verify token freshness when the RS cannot synchronize its clock with the AS."
-    case clientNonce               = "cnonce"
+    case clientNonce               
+
     /// "Expires in.  Lifetime of the token in seconds from the time the RS first sees it.  Used to implement a weaker from of token expiration for devices that cannot synchronize their internal clocks."
-    case expiresIn                 = "exi"
+    case expiresIn                 
+
     /// Roles
-    case roles                     = "roles"
+    case roles                     
+
     /// Groups
-    case groups                    = "groups"
+    case groups                    
+
     /// Entitlements
-    case entitlements              = "entitlements"
+    case entitlements              
+
     /// Token introspection response
-    case tokenIntrospection        = "token_introspection"
+    case tokenIntrospection        
+
+    /// Custom claim with the given name
+    case custom(_ name: String)
 }
 
 /// Used by classes that contains OAuth2 claims.

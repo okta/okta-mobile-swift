@@ -136,15 +136,68 @@ final class OpenIDConfigurationTests: XCTestCase {
         
         XCTAssertEqual(config.issuer.absoluteString, "https://example.okta.com")
         XCTAssertEqual(config.authorizationEndpoint.absoluteString, "https://example.okta.com/oauth2/v1/authorize")
-        XCTAssertEqual(config.endSessionEndpoint.absoluteString, "https://example.okta.com/oauth2/v1/logout")
-        XCTAssertEqual(config.introspectionEndpoint.absoluteString, "https://example.okta.com/oauth2/v1/introspect")
+        XCTAssertEqual(config.endSessionEndpoint?.absoluteString, "https://example.okta.com/oauth2/v1/logout")
+        XCTAssertEqual(config.introspectionEndpoint?.absoluteString, "https://example.okta.com/oauth2/v1/introspect")
         XCTAssertEqual(config.jwksUri.absoluteString, "https://example.okta.com/oauth2/v1/keys")
-        XCTAssertEqual(config.registrationEndpoint.absoluteString, "https://example.okta.com/oauth2/v1/clients")
+        XCTAssertEqual(config.registrationEndpoint?.absoluteString, "https://example.okta.com/oauth2/v1/clients")
         XCTAssertEqual(config.revocationEndpoint.absoluteString, "https://example.okta.com/oauth2/v1/revoke")
         XCTAssertEqual(config.tokenEndpoint.absoluteString, "https://example.okta.com/oauth2/v1/token")
-        XCTAssertEqual(config.userinfoEndpoint.absoluteString, "https://example.okta.com/oauth2/v1/userinfo")
+        XCTAssertEqual(config.userinfoEndpoint?.absoluteString, "https://example.okta.com/oauth2/v1/userinfo")
         
         XCTAssertEqual(config.subjectTypesSupported.first, "public")
-        
+    }
+    
+    func testAppleIdConfiguration() throws {
+        let config = try decode(type: OpenIdConfiguration.self, """
+        {
+           "authorization_endpoint" : "https://appleid.apple.com/auth/authorize",
+           "claims_supported" : [
+              "aud",
+              "email",
+              "email_verified",
+              "exp",
+              "iat",
+              "is_private_email",
+              "iss",
+              "nonce",
+              "nonce_supported",
+              "real_user_status",
+              "sub",
+              "transfer_sub"
+           ],
+           "id_token_signing_alg_values_supported" : [
+              "RS256"
+           ],
+           "issuer" : "https://appleid.apple.com",
+           "jwks_uri" : "https://appleid.apple.com/auth/keys",
+           "response_modes_supported" : [
+              "query",
+              "fragment",
+              "form_post"
+           ],
+           "response_types_supported" : [
+              "code"
+           ],
+           "revocation_endpoint" : "https://appleid.apple.com/auth/revoke",
+           "scopes_supported" : [
+              "openid",
+              "email",
+              "name"
+           ],
+           "subject_types_supported" : [
+              "pairwise"
+           ],
+           "token_endpoint" : "https://appleid.apple.com/auth/token",
+           "token_endpoint_auth_methods_supported" : [
+              "client_secret_post"
+           ]
+        }
+        """)
+
+        XCTAssertNil(config.endSessionEndpoint)
+        XCTAssertNil(config.introspectionEndpoint)
+        XCTAssertNil(config.registrationEndpoint)
+        XCTAssertNil(config.userinfoEndpoint)
+        XCTAssertTrue(config.claimsSupported.contains(.custom("is_private_email")))
     }
 }

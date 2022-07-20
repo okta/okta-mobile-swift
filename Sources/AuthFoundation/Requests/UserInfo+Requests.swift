@@ -16,6 +16,19 @@ extension UserInfo {
     struct Request {
         let openIdConfiguration: OpenIdConfiguration
         let token: Token
+        let url: URL
+        
+        init(openIdConfiguration: OpenIdConfiguration,
+             token: Token) throws
+        {
+            self.openIdConfiguration = openIdConfiguration
+            self.token = token
+            
+            guard let url = openIdConfiguration.userinfoEndpoint else {
+                throw OAuth2Error.missingOpenIdConfiguration(attribute: "userinfo_endpoint")
+            }
+            self.url = url
+        }
     }
 }
 
@@ -23,7 +36,6 @@ extension UserInfo.Request: APIRequest, OAuth2APIRequest {
     typealias ResponseType = UserInfo
     
     var httpMethod: APIRequestMethod { .get }
-    var url: URL { openIdConfiguration.userinfoEndpoint }
     var acceptsType: APIContentType? { .json }
     var authorization: APIAuthorization? { token }
 }

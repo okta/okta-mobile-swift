@@ -29,6 +29,21 @@ extension Token {
         let openIdConfiguration: OpenIdConfiguration
         let token: Token
         let type: Token.Kind
+        let url: URL
+        
+        init(openIdConfiguration: OpenIdConfiguration,
+             token: Token,
+             type: Token.Kind) throws
+        {
+            self.openIdConfiguration = openIdConfiguration
+            self.token = token
+            self.type = type
+            
+            guard let url = openIdConfiguration.introspectionEndpoint else {
+                throw OAuth2Error.missingOpenIdConfiguration(attribute: "introspection_endpoint")
+            }
+            self.url = url
+        }
     }
 }
 
@@ -65,7 +80,6 @@ extension Token.IntrospectRequest: OAuth2APIRequest, APIRequestBody {
     typealias ResponseType = TokenInfo
 
     var httpMethod: APIRequestMethod { .post }
-    var url: URL { openIdConfiguration.introspectionEndpoint }
     var contentType: APIContentType? { .formEncoded }
     var acceptsType: APIContentType? { .json }
     var authorization: APIAuthorization? { token }
