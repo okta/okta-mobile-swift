@@ -22,6 +22,7 @@ public enum OAuth2Error: Error {
     case missingClientConfiguration
     case signatureInvalid
     case missingLocationHeader
+    case missingOpenIdConfiguration(attribute: String)
     case error(_ error: Error)
 }
 
@@ -85,6 +86,14 @@ extension OAuth2Error: LocalizedError {
                                      tableName: "AuthFoundation",
                                      bundle: .authFoundation,
                                      comment: "Missing redirect Location header for token exchange")
+
+        case .missingOpenIdConfiguration(attribute: let name):
+            return String.localizedStringWithFormat(
+                NSLocalizedString("missing_openid_configuration_attribute",
+                                  tableName: "AuthFoundation",
+                                  bundle: .authFoundation,
+                                  comment: "Invalid URL"),
+                name)
 
         case .error(let error):
             if let error = error as? LocalizedError {

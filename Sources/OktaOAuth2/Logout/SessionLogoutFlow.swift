@@ -166,7 +166,11 @@ public final class SessionLogoutFlow: LogoutFlow {
                 completion?(.failure(error))
             case .success(let configuration):
                 do {
-                    let url = try self.createLogoutURL(from: configuration.endSessionEndpoint,
+                    guard let endSessionEndpoint = configuration.endSessionEndpoint else {
+                        throw OAuth2Error.missingOpenIdConfiguration(attribute: "end_session_endpoint")
+                    }
+                    
+                    let url = try self.createLogoutURL(from: endSessionEndpoint,
                                                        using: context)
                     var context = context
                     context.logoutURL = url

@@ -24,6 +24,7 @@ struct DefaultIDTokenValidator: IDTokenValidator {
         case issuer, audience, scheme, algorithm, expirationTime, issuedAtTime, nonce, maxAge, subject
     }
     
+    // swiftlint:disable cyclomatic_complexity
     func validate(token: JWT, issuer: URL, clientId: String, context: IDTokenValidatorContext?) throws {
         guard let tokenIssuerString = token.issuer,
               let tokenIssuer = URL(string: tokenIssuerString),
@@ -94,4 +95,5 @@ struct DefaultIDTokenValidator: IDTokenValidator {
             }
         }
     }
+    // swiftlint:enable cyclomatic_complexity
 }

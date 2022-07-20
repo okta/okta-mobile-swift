@@ -18,14 +18,14 @@ public struct OAuth2ServerError: Decodable, Error, LocalizedError {
     public let code: Code
     
     /// Error message, or description.
-    public let description: String
+    public let description: String?
     
     public var errorDescription: String? { description }
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         code = try container.decode(Code.self, forKey: .code)
-        description = try container.decode(String.self, forKey: .description)
+        description = try container.decodeIfPresent(String.self, forKey: .description)
     }
 
     enum CodingKeys: String, CodingKey, CaseIterable {

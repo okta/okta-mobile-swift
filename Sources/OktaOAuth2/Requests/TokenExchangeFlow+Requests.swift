@@ -68,7 +68,7 @@ extension TokenExchangeFlow {
         let tokens: [TokenType]
         let scope: String
         let audience: String
-        let grantType = GrantType.other("urn:ietf:params:oauth:grant-type:token-exchange")
+        let grantType = GrantType.tokenExchange
     }
 }
 

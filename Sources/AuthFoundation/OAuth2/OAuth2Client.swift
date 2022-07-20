@@ -313,9 +313,19 @@ public final class OAuth2Client {
         openIdConfiguration { result in
             switch result {
             case .success(let configuration):
-                let request = Token.IntrospectRequest(openIdConfiguration: configuration,
-                                                      token: token,
-                                                      type: type)
+                let request: Token.IntrospectRequest
+                do {
+                    request = try Token.IntrospectRequest(openIdConfiguration: configuration,
+                                                          token: token,
+                                                          type: type)
+                } catch let error as OAuth2Error {
+                    completion(.failure(error))
+                    return
+                } catch {
+                    completion(.failure(.error(error)))
+                    return
+                }
+                
                 request.send(to: self) { result in
                     switch result {
                     case .success(let response):
@@ -338,8 +348,18 @@ public final class OAuth2Client {
         openIdConfiguration { result in
             switch result {
             case .success(let configuration):
-                let request = UserInfo.Request(openIdConfiguration: configuration,
-                                               token: token)
+                let request: UserInfo.Request
+                do {
+                    request = try UserInfo.Request(openIdConfiguration: configuration,
+                                                   token: token)
+                } catch let error as OAuth2Error {
+                    completion(.failure(error))
+                    return
+                } catch {
+                    completion(.failure(.error(error)))
+                    return
+                }
+                
                 request.send(to: self) { result in
                     switch result {
                     case .success(let response):
