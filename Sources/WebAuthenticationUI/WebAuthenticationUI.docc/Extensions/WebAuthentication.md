@@ -1,5 +1,48 @@
 # ``WebAuthenticationUI/WebAuthentication``
 
+## Topics
+
+### Essentials
+
+- <doc:ConfiguringYourClient>
+- ``shared``
+- ``ephemeralSession``
+
+### Initializers
+
+- ``init()``
+- ``init(plist:)``
+- ``init(issuer:clientId:scopes:redirectUri:logoutRedirectUri:additionalParameters:)``
+- ``init(loginFlow:logoutFlow:context:)``
+
+### Sign In
+
+- ``signIn(from:)``
+- ``signIn(from:completion:)``
+
+### Sign Out Using Credential
+
+- ``signOut(from:credential:)``
+- ``signOut(from:credential:completion:)``
+
+### Sign Out Using Token
+
+- ``signOut(from:token:)-2cj8w``
+- ``signOut(from:token:)-6qrgc``
+- ``signOut(from:token:completion:)-8o8xk``
+- ``signOut(from:token:completion:)-4ae85``
+
+### Sign In Using App Link
+
+- ``resume(with:)-9xiuc``
+- ``resume(with:)-5hhn1``
+
+### Customizing OAuth2 Flows
+
+- ``signInFlow``
+- ``signOutFlow``
+- ``context``
+
 @Metadata {
     @DocumentationExtension(mergeBehavior: append)
 }
