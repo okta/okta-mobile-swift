@@ -217,6 +217,7 @@ public final class Credential: Equatable, OAuth2ClientDelegate {
     /// * ``Token/RevokeType/accessToken`` – Revokes the access token. If the `offline_access` scope was specified when authenticating, the refresh token may be used to recreate a new access token.
     /// * ``Token/RevokeType/refreshToken`` – If a refresh token is present (e.g. the `offline_access` scope was specified when authenticating), both the access token _and_ refresh token will become invalidated.
     /// * ``Token/RevokeType/deviceSecret`` – If the `device_sso` scope was specified when authenticating, this will invalidate the device secret, which will prevent other clients from creating new tokens using Device SSO.
+    /// * ``Token/RevokeType/all`` - Revokes all applicable tokens associated with this object.
     ///
     /// If a credential is no longer valid, it will automatically be removed from storage. This is to prevent an application from thinking a valid user is signed in while having credentials that are incapable of being used.
     ///
@@ -224,15 +225,12 @@ public final class Credential: Equatable, OAuth2ClientDelegate {
     /// 1. Has both an access token and a refresh token, and the ``Token/RevokeType/refreshToken`` type is supplied, or
     /// 1. Does not have a refresh token and the ``Token/RevokeType/accessToken`` type is supplied.
     /// - Parameters:
-    ///   - type: The token type to revoke.
+    ///   - type: The token type to revoke, defaulting to `.all`.
     ///   - completion: Completion block called when the operation completes.
-    public func revoke(type: Token.RevokeType = .accessToken, completion: ((Result<Void, OAuth2Error>) -> Void)? = nil) {
-        var shouldRemove = false
-        if type == .refreshToken && token.refreshToken != nil {
-            shouldRemove = true
-        } else if type == .accessToken {
-            shouldRemove = true
-        }
+    public func revoke(type: Token.RevokeType = .all, completion: ((Result<Void, OAuth2Error>) -> Void)? = nil) {
+        let shouldRemove = (type == .all ||
+                            (type == .refreshToken && token.refreshToken != nil) ||
+                            type == .accessToken)
         
         oauth2.revoke(token, type: type) { result in
             defer { completion?(result) }

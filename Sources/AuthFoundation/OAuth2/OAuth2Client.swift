@@ -272,7 +272,16 @@ public final class OAuth2Client {
     ///   - type: Type of token to revoke.
     ///   - completion: Completion block to invoke once complete.
     public func revoke(_ token: Token, type: Token.RevokeType, completion: @escaping (Result<Void, OAuth2Error>) -> Void) {
-        let tokenType = type.tokenType
+        if type == .all {
+            revokeAll(token, completion: completion)
+            return
+        }
+        
+        guard let tokenType = type.tokenType else {
+            completion(.failure(.cannotRevoke(type: type)))
+            return
+        }
+        
         guard let tokenString = token.token(of: tokenType) else {
             completion(.failure(.missingToken(type: tokenType)))
             return
@@ -455,6 +464,43 @@ public final class OAuth2Client {
         }
     }
     
+    private func revokeAll(_ token: Token, completion: @escaping (Result<Void, OAuth2Error>) -> Void) {
+        let types: [Token.RevokeType] = [.accessToken, .refreshToken, .deviceSecret]
+        
+        var errors = [OAuth2Error]()
+        let group = DispatchGroup()
+        for type in types {
+            guard let revokeType = type.tokenType,
+                  token.token(of: revokeType) != nil
+            else {
+                continue
+            }
+            
+            group.enter()
+            revoke(token, type: type) { result in
+                if case let .failure(error) = result {
+                    errors.append(error)
+                }
+                group.leave()
+            }
+        }
+        
+        group.notify(queue: DispatchQueue.global()) {
+            switch errors.count {
+            case 0:
+                completion(.success(()))
+            case 1:
+                if let error = errors.first {
+                    completion(.failure(error))
+                } else {
+                    fallthrough
+                }
+            default:
+                completion(.failure(.multiple(errors: errors)))
+            }
+        }
+    }
+
     private func validateToken<T: OAuth2TokenRequest>(request: T,
                                                       keySet: JWKS?,
                                                       oauthTokenResponse: Result<APIResponse<Token>, APIClientError>,
