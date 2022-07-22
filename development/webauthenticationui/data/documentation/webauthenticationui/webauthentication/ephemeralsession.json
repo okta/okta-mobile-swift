@@ -99,6 +99,16 @@
   "sections" : [
 
   ],
+  "seeAlsoSections" : [
+    {
+      "generated" : true,
+      "identifiers" : [
+        "doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/WebAuthenticationUI\/ConfiguringYourClient",
+        "doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/WebAuthenticationUI\/WebAuthentication\/shared"
+      ],
+      "title" : "Essentials"
+    }
+  ],
   "variants" : [
     {
       "paths" : [
@@ -126,6 +136,20 @@
   "title" : "WebAuthenticationUI",
   "type" : "topic",
   "url" : "\/documentation\/webauthenticationui"
+},
+"doc://com.okta.mobile.webauthenticationui/documentation/WebAuthenticationUI/ConfiguringYourClient": {
+  "abstract" : [
+    {
+      "text" : "Configure your WebAuthentication client to connect to your OAuth2 application.",
+      "type" : "text"
+    }
+  ],
+  "identifier" : "doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/WebAuthenticationUI\/ConfiguringYourClient",
+  "kind" : "article",
+  "role" : "article",
+  "title" : "Configuring Your Client",
+  "type" : "topic",
+  "url" : "\/documentation\/webauthenticationui\/configuringyourclient"
 },
 "doc://com.okta.mobile.webauthenticationui/documentation/WebAuthenticationUI/WebAuthentication": {
   "abstract" : [
@@ -197,6 +221,64 @@
   "title" : "ephemeralSession",
   "type" : "topic",
   "url" : "\/documentation\/webauthenticationui\/webauthentication\/ephemeralsession"
+},
+"doc://com.okta.mobile.webauthenticationui/documentation/WebAuthenticationUI/WebAuthentication/shared": {
+  "abstract" : [
+    {
+      "text" : "Active \/ default shared instance of the ",
+      "type" : "text"
+    },
+    {
+      "identifier" : "doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/WebAuthenticationUI\/WebAuthentication",
+      "isActive" : true,
+      "type" : "reference"
+    },
+    {
+      "text" : " session.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "static"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "keyword",
+      "text" : "var"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "shared"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:19WebAuthenticationUI0aB0C",
+      "text" : "WebAuthentication"
+    },
+    {
+      "kind" : "text",
+      "text" : "?"
+    }
+  ],
+  "identifier" : "doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/WebAuthenticationUI\/WebAuthentication\/shared",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "shared",
+  "type" : "topic",
+  "url" : "\/documentation\/webauthenticationui\/webauthentication\/shared"
 }
 }
 }

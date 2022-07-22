@@ -151,15 +151,60 @@
         {
           "inlineContent" : [
             {
-              "text" : "This convenience property exposes either the msot recent WebAuthentication instance, or will construct the default based on client details configured within your app’s ",
+              "text" : "This convenience property can be used in one of two ways:",
+              "type" : "text"
+            }
+          ],
+          "type" : "paragraph"
+        },
+        {
+          "items" : [
+            {
+              "content" : [
+                {
+                  "inlineContent" : [
+                    {
+                      "text" : "Access a shared instance using the settings configured within a file named ",
+                      "type" : "text"
+                    },
+                    {
+                      "code" : "Okta.plist",
+                      "type" : "codeVoice"
+                    }
+                  ],
+                  "type" : "paragraph"
+                }
+              ]
+            },
+            {
+              "content" : [
+                {
+                  "inlineContent" : [
+                    {
+                      "text" : "Programmatically create an instance that can be shared across your application.",
+                      "type" : "text"
+                    }
+                  ],
+                  "type" : "paragraph"
+                }
+              ]
+            }
+          ],
+          "type" : "orderedList"
+        },
+        {
+          "inlineContent" : [
+            {
+              "text" : "For more information on how to configure your client, see ",
               "type" : "text"
             },
             {
-              "code" : "Okta.plist",
-              "type" : "codeVoice"
+              "identifier" : "doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/WebAuthenticationUI\/ConfiguringYourClient",
+              "isActive" : true,
+              "type" : "reference"
             },
             {
-              "text" : " configuration file.",
+              "text" : " for more details.",
               "type" : "text"
             }
           ],
@@ -176,6 +221,16 @@
   },
   "sections" : [
 
+  ],
+  "seeAlsoSections" : [
+    {
+      "generated" : true,
+      "identifiers" : [
+        "doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/WebAuthenticationUI\/ConfiguringYourClient",
+        "doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/WebAuthenticationUI\/WebAuthentication\/ephemeralSession"
+      ],
+      "title" : "Essentials"
+    }
   ],
   "variants" : [
     {
@@ -204,6 +259,20 @@
   "title" : "WebAuthenticationUI",
   "type" : "topic",
   "url" : "\/documentation\/webauthenticationui"
+},
+"doc://com.okta.mobile.webauthenticationui/documentation/WebAuthenticationUI/ConfiguringYourClient": {
+  "abstract" : [
+    {
+      "text" : "Configure your WebAuthentication client to connect to your OAuth2 application.",
+      "type" : "text"
+    }
+  ],
+  "identifier" : "doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/WebAuthenticationUI\/ConfiguringYourClient",
+  "kind" : "article",
+  "role" : "article",
+  "title" : "Configuring Your Client",
+  "type" : "topic",
+  "url" : "\/documentation\/webauthenticationui\/configuringyourclient"
 },
 "doc://com.okta.mobile.webauthenticationui/documentation/WebAuthenticationUI/WebAuthentication": {
   "abstract" : [
@@ -238,6 +307,43 @@
   "title" : "WebAuthentication",
   "type" : "topic",
   "url" : "\/documentation\/webauthenticationui\/webauthentication"
+},
+"doc://com.okta.mobile.webauthenticationui/documentation/WebAuthenticationUI/WebAuthentication/ephemeralSession": {
+  "abstract" : [
+    {
+      "text" : "Indicates whether or not the developer prefers an ephemeral browser session, or if the user’s browser state should be shared with the system browser.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "var"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "ephemeralSession"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:Sb",
+      "text" : "Bool"
+    }
+  ],
+  "identifier" : "doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/WebAuthenticationUI\/WebAuthentication\/ephemeralSession",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "ephemeralSession",
+  "type" : "topic",
+  "url" : "\/documentation\/webauthenticationui\/webauthentication\/ephemeralsession"
 },
 "doc://com.okta.mobile.webauthenticationui/documentation/WebAuthenticationUI/WebAuthentication/shared": {
   "abstract" : [

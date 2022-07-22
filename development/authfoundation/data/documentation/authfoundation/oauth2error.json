@@ -122,6 +122,7 @@
         "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/OAuth2Error\/invalidUrl",
         "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/OAuth2Error\/missingClientConfiguration",
         "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/OAuth2Error\/missingLocationHeader",
+        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/OAuth2Error\/missingOpenIdConfiguration(attribute:)",
         "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/OAuth2Error\/missingToken(type:)",
         "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/OAuth2Error\/network(error:)",
         "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/OAuth2Error\/oauth2Error(code:description:)",
@@ -534,6 +535,52 @@
   "title" : "OAuth2Error.missingLocationHeader",
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/oauth2error\/missinglocationheader"
+},
+"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/OAuth2Error/missingOpenIdConfiguration(attribute:)": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "case"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "missingOpenIdConfiguration"
+    },
+    {
+      "kind" : "text",
+      "text" : "("
+    },
+    {
+      "kind" : "externalParam",
+      "text" : "attribute"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:SS",
+      "text" : "String"
+    },
+    {
+      "kind" : "text",
+      "text" : ")"
+    }
+  ],
+  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/OAuth2Error\/missingOpenIdConfiguration(attribute:)",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "OAuth2Error.missingOpenIdConfiguration(attribute:)",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/oauth2error\/missingopenidconfiguration(attribute:)"
 },
 "doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/OAuth2Error/missingToken(type:)": {
   "abstract" : [

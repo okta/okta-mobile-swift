@@ -84,7 +84,6 @@
         "doc:\/\/com.okta.mobile.authfoundation\/Se",
         "doc:\/\/com.okta.mobile.authfoundation\/SE",
         "doc:\/\/com.okta.mobile.authfoundation\/SQ",
-        "doc:\/\/com.okta.mobile.authfoundation\/SH",
         "doc:\/\/com.okta.mobile.authfoundation\/SY"
       ],
       "kind" : "relationships",
@@ -133,6 +132,7 @@
         "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/Claim\/clientNonce",
         "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/Claim\/codeHash",
         "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/Claim\/confirmation",
+        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/Claim\/custom(_:)",
         "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/Claim\/destinationIdentity",
         "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/Claim\/divertedTarget",
         "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/Claim\/email",
@@ -194,12 +194,6 @@
       "title" : "Enumeration Cases"
     },
     {
-      "identifiers" : [
-        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/Claim\/init(rawValue:)"
-      ],
-      "title" : "Initializers"
-    },
-    {
       "generated" : true,
       "identifiers" : [
         "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/Claim\/Equatable-Implementations",
@@ -225,11 +219,6 @@
 "doc://com.okta.mobile.authfoundation/SE": {
   "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/SE",
   "title" : "Swift.Encodable",
-  "type" : "unresolvable"
-},
-"doc://com.okta.mobile.authfoundation/SH": {
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/SH",
-  "title" : "Swift.Hashable",
   "type" : "unresolvable"
 },
 "doc://com.okta.mobile.authfoundation/SQ": {
@@ -765,6 +754,47 @@
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/claim\/confirmation"
 },
+"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/Claim/custom(_:)": {
+  "abstract" : [
+    {
+      "text" : "Custom claim with the given name",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "case"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "custom"
+    },
+    {
+      "kind" : "text",
+      "text" : "("
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:SS",
+      "text" : "String"
+    },
+    {
+      "kind" : "text",
+      "text" : ")"
+    }
+  ],
+  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/Claim\/custom(_:)",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "Claim.custom(_:)",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/claim\/custom(_:)"
+},
 "doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/Claim/destinationIdentity": {
   "abstract" : [
     {
@@ -1125,47 +1155,6 @@
   "title" : "Claim.identityProvider",
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/claim\/identityprovider"
-},
-"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/Claim/init(rawValue:)": {
-  "abstract" : [
-    {
-      "text" : "Creates a new instance with the specified raw value.",
-      "type" : "text"
-    }
-  ],
-  "fragments" : [
-    {
-      "kind" : "identifier",
-      "text" : "init"
-    },
-    {
-      "kind" : "text",
-      "text" : "?("
-    },
-    {
-      "kind" : "externalParam",
-      "text" : "rawValue"
-    },
-    {
-      "kind" : "text",
-      "text" : ": "
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:SS",
-      "text" : "String"
-    },
-    {
-      "kind" : "text",
-      "text" : ")"
-    }
-  ],
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/Claim\/init(rawValue:)",
-  "kind" : "symbol",
-  "role" : "symbol",
-  "title" : "init(rawValue:)",
-  "type" : "topic",
-  "url" : "\/documentation\/authfoundation\/claim\/init(rawvalue:)"
 },
 "doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/Claim/issuedAt": {
   "abstract" : [

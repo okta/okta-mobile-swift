@@ -9,6 +9,10 @@
     "paths" : [
       [
         "doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/WebAuthenticationUI"
+      ],
+      [
+        "doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/WebAuthenticationUI",
+        "doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/WebAuthenticationUI\/WebAuthentication"
       ]
     ]
   },
@@ -486,6 +490,96 @@
           ],
           "style" : "note",
           "type" : "aside"
+        },
+        {
+          "anchor" : "Singleton-Access",
+          "level" : 2,
+          "text" : "Singleton Access",
+          "type" : "heading"
+        },
+        {
+          "inlineContent" : [
+            {
+              "text" : "The ",
+              "type" : "text"
+            },
+            {
+              "identifier" : "doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/WebAuthenticationUI\/WebAuthentication\/shared",
+              "isActive" : true,
+              "type" : "reference"
+            },
+            {
+              "text" : " singleton provides convenient access to your client’s authentication instance. By default this value will use the ",
+              "type" : "text"
+            },
+            {
+              "code" : "Okta.plist",
+              "type" : "codeVoice"
+            },
+            {
+              "text" : " file to configure the client, if one is available.",
+              "type" : "text"
+            }
+          ],
+          "type" : "paragraph"
+        },
+        {
+          "inlineContent" : [
+            {
+              "text" : "If your application constructs a ",
+              "type" : "text"
+            },
+            {
+              "identifier" : "doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/WebAuthenticationUI\/WebAuthentication",
+              "isActive" : true,
+              "type" : "reference"
+            },
+            {
+              "text" : " client using a custom property list, or through one of the other initializers, the ",
+              "type" : "text"
+            },
+            {
+              "identifier" : "doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/WebAuthenticationUI\/WebAuthentication\/shared",
+              "isActive" : true,
+              "type" : "reference"
+            },
+            {
+              "text" : " property will retain that value for you.",
+              "type" : "text"
+            }
+          ],
+          "type" : "paragraph"
+        },
+        {
+          "inlineContent" : [
+            {
+              "text" : "For example:",
+              "type" : "text"
+            }
+          ],
+          "type" : "paragraph"
+        },
+        {
+          "code" : [
+            "func application(_ application: UIApplication, ",
+            "                 didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool",
+            "{",
+            "    let _ = WebAuthentication(issuer: issuerUrl,",
+            "                              clientId: \"my-client-id\",",
+            "                              scopes: \"openid offline_access profile\",",
+            "                              redirectUri: redirectUri)",
+            "    return true",
+            "}",
+            "",
+            "\/\/ In another part of your application",
+            "@IBAction func signIn(_ sender: Any) {",
+            "    WebAuthentication.shared?.signIn(from: view.window) { result in",
+            "        \/\/ Handle the response",
+            "    }",
+            "}"
+          ],
+          "syntax" : "swift",
+          "type" : "codeListing"
         },
         {
           "anchor" : "Supply-a-custom-URLSession",

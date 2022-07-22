@@ -108,7 +108,8 @@
         "doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/AuthFoundation\/GrantType\/implicit",
         "doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/AuthFoundation\/GrantType\/other(_:)",
         "doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/AuthFoundation\/GrantType\/password",
-        "doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/AuthFoundation\/GrantType\/refreshToken"
+        "doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/AuthFoundation\/GrantType\/refreshToken",
+        "doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/AuthFoundation\/GrantType\/tokenExchange"
       ],
       "title" : "Enumeration Cases"
     },
@@ -386,6 +387,31 @@
   "title" : "GrantType.refreshToken",
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/granttype\/refreshtoken"
+},
+"doc://com.okta.mobile.webauthenticationui/documentation/AuthFoundation/GrantType/tokenExchange": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "case"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "tokenExchange"
+    }
+  ],
+  "identifier" : "doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/AuthFoundation\/GrantType\/tokenExchange",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "GrantType.tokenExchange",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/granttype\/tokenexchange"
 }
 }
 }

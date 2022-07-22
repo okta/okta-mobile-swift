@@ -151,15 +151,59 @@
         {
           "inlineContent" : [
             {
-              "text" : "This convenience property exposes either the msot recent WebAuthentication instance, or will construct the default based on client details configured within your app’s ",
+              "text" : "This convenience property can be used in one of two ways:",
+              "type" : "text"
+            }
+          ],
+          "type" : "paragraph"
+        },
+        {
+          "items" : [
+            {
+              "content" : [
+                {
+                  "inlineContent" : [
+                    {
+                      "text" : "Access a shared instance using the settings configured within a file named ",
+                      "type" : "text"
+                    },
+                    {
+                      "code" : "Okta.plist",
+                      "type" : "codeVoice"
+                    }
+                  ],
+                  "type" : "paragraph"
+                }
+              ]
+            },
+            {
+              "content" : [
+                {
+                  "inlineContent" : [
+                    {
+                      "text" : "Programmatically create an instance that can be shared across your application.",
+                      "type" : "text"
+                    }
+                  ],
+                  "type" : "paragraph"
+                }
+              ]
+            }
+          ],
+          "type" : "orderedList"
+        },
+        {
+          "inlineContent" : [
+            {
+              "text" : "For more information on how to configure your client, see ",
               "type" : "text"
             },
             {
-              "code" : "Okta.plist",
-              "type" : "codeVoice"
+              "text" : "doc:ConfiguringYourClient",
+              "type" : "text"
             },
             {
-              "text" : " configuration file.",
+              "text" : " for more details.",
               "type" : "text"
             }
           ],
