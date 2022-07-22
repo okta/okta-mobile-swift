@@ -84,6 +84,33 @@ Another approach can be to use an initializer that passes those configuration va
 
 > Note: You'll note in this example we don't have to use the `try` keyword when initializing the session. This is because the previous property list-based approaches could fail when reading the file. 
 
+## Singleton Access
+
+The ``WebAuthentication/shared`` singleton provides convenient access to your client's authentication instance. By default this value will use the `Okta.plist` file to configure the client, if one is available.
+
+If your application constructs a ``WebAuthentication`` client using a custom property list, or through one of the other initializers, the ``WebAuthentication/shared`` property will retain that value for you.
+
+For example:
+
+```swift
+func application(_ application: UIApplication, 
+                 didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool
+{
+    let _ = WebAuthentication(issuer: issuerUrl,
+                              clientId: "my-client-id",
+                              scopes: "openid offline_access profile",
+                              redirectUri: redirectUri)
+    return true
+}
+
+// In another part of your application
+@IBAction func signIn(_ sender: Any) {
+    WebAuthentication.shared?.signIn(from: view.window) { result in
+        // Handle the response
+    }
+}
+```
+
 ## Supply a custom URLSession
 
 If you need to have control over the URLSession instance that is used when authenticating a user, you can construct an `OktaOAuth2` `AuthorizationCodeFlow.Configuration` object and supply the custom session to the initializer.

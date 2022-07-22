@@ -259,6 +259,7 @@ jobs:
       - UITest-DeviceAuthSignIntvOS
       - UITest-UserPasswordSignInmacOS
       - UITest-ClassicNativeAuthiOS
+    if: always()
     steps:
     - name: Download Test Results
       uses: actions/download-artifact@v2
@@ -278,4 +279,3 @@ jobs:
           ../TestResults/ClassicNativeAuth-iOS-Results/ClassicNativeAuth-iOS.xcresult
         title: UI Test Results
         show-passed-tests: false
-      if: success() || failure()

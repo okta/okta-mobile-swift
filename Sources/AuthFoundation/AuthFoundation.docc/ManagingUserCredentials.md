@@ -14,7 +14,7 @@ Within AuthFoundation a ``Token`` instance is used to store information related 
 
 Instances of ``Credential`` not only contain a reference to that user's ``Credential/token``, but exposes convenience methods and properties to simplify common operations, such as ``Credential/refresh()``, ``Credential/userInfo()``, or ``Credential/revoke(type:)``. To ensure these operations can function, a ``Credential/oauth2`` client is automatically created on your behalf, which can be used to perform other operations as needed.
 
-## Storing a token
+## Storing credentials
 
 When you first receive a ``Token``, you can use the ``Credential/store(_:tags:security:)`` static function to save the token in local storage. This function lets you supply optional tags to assign to the token to simplify the process of retrieving those credentials at a later date, or security settings to control how the token is stored.
 
@@ -48,6 +48,28 @@ NotificationCenter.default.addObserver(forName: .defaultCredentialChanged,
     // Do something with the user
 }
 ```
+
+## Removing credentials
+
+When you no longer need a credential (usually when a user chooses to sign out), there are two options within Credential:
+
+* ``Credential/revoke(type:)``
+* ``Credential/remove()``
+* `WebAuthentication/signOut(from:credential:)` (when using WebAuthenticationUI)
+
+### When to use `signOut`
+
+When authenticating using a web browser, there are circumstances where cookies representing the user's session are saved within the browser. To properly sign out in this situation, it's important to use the `WebAuthentication` class' `signOut` function to ensure those cookies are properly reset.
+
+### When to use `revoke`
+
+When authenticating a user via a browser without cookies (see the `ephemeralSession` option on `WebAuthentication`), or when authenticating using a non-browser flow, signing a user out is simpler when using the ``Credential/revoke(type:)`` function. See that function's documentation for more information.
+
+### When to use `remove`
+
+Finally, at a minimum you can use the ``Credential/remove()`` function to simply remove that credential from storage. This will effectively make the application forget those tokens.
+
+> Important: Removing a credential from your application won't invalidate it on the server. For that reason it's recommended to use ``Credential/revoke(type:)`` wherever possible.
 
 ## Managing multiple credentials
 
@@ -92,7 +114,3 @@ let userCredentials = try Credential.find { metadata in
     metadata.subject == "jane.doe@example.com"
 }
 ```
-
-### Removing a credential
-
-To clean up credentials that are no longer needed, the ``Credential/remove()`` method removes the token from storage, and removes the Credential's ID from ``Credential/allIDs``.

@@ -61,7 +61,12 @@ public class WebAuthentication {
     
     /// Active / default shared instance of the ``WebAuthentication`` session.
     ///
-    /// This convenience property exposes either the msot recent WebAuthentication instance, or will construct the default based on client details configured within your app's `Okta.plist` configuration file.
+    /// This convenience property can be used in one of two ways:
+    ///
+    /// 1. Access a shared instance using the settings configured within a file named `Okta.plist`
+    /// 2. Programmatically create an instance that can be shared across your application.
+    ///
+    /// For more information on how to configure your client, see <doc:ConfiguringYourClient> for more details.
     public private(set) static var shared: WebAuthentication? {
         set {
             _shared = newValue

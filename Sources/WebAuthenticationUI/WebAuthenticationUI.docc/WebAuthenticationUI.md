@@ -15,20 +15,20 @@ Use the WebAuthenticationUI framework to quickly and easily integrate user sign 
 
 To maximize the number of platforms and OS versions your application can support, this SDK builds in a compatibility support for legacy iOS and macOS versions.
 
-Platform | Versions | Description |
+Platform | Versions | Authentication Controller |
 ---|---|---
-iOS | 9.0 - 10.x | Uses SFSafariViewController 
-iOS | 11.0 | Uses SFAuthenticationSession 
-iOS | 12.0 - Current | Uses ASWebAuthenticationSession 
-macOS | 10.15 - Current | Uses ASWebAuthenticationSession
-macOS Catalyst  | 13.0 - Current | Uses ASWebAuthenticationSession
+iOS | 9.0 - 10.x | SFSafariViewController 
+iOS | 11.0 | SFAuthenticationSession 
+iOS | 12.0 - Current | ASWebAuthenticationSession 
+macOS | 10.15 - Current | ASWebAuthenticationSession
+macOS Catalyst  | 13.0 - Current | ASWebAuthenticationSession
 
 ## Topics
 
 ### Essentials
 
-- <doc:ConfiguringYourClient>
 - ``WebAuthentication``
+- <doc:ConfiguringYourClient>
 
 ### Customizations
 
