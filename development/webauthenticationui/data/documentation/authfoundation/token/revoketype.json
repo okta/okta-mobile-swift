@@ -103,6 +103,7 @@
     {
       "identifiers" : [
         "doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/AuthFoundation\/Token\/RevokeType\/accessToken",
+        "doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/AuthFoundation\/Token\/RevokeType\/all",
         "doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/AuthFoundation\/Token\/RevokeType\/deviceSecret",
         "doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/AuthFoundation\/Token\/RevokeType\/refreshToken"
       ],
@@ -257,6 +258,34 @@
   "title" : "Token.RevokeType.accessToken",
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/token\/revoketype\/accesstoken"
+},
+"doc://com.okta.mobile.webauthenticationui/documentation/AuthFoundation/Token/RevokeType/all": {
+  "abstract" : [
+    {
+      "text" : "Indicates that all tokens should be revoked.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "case"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "all"
+    }
+  ],
+  "identifier" : "doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/AuthFoundation\/Token\/RevokeType\/all",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "Token.RevokeType.all",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/token\/revoketype\/all"
 },
 "doc://com.okta.mobile.webauthenticationui/documentation/AuthFoundation/Token/RevokeType/deviceSecret": {
   "abstract" : [

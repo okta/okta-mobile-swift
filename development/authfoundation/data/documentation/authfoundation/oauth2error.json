@@ -118,12 +118,14 @@
     {
       "identifiers" : [
         "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/OAuth2Error\/cannotComposeUrl",
+        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/OAuth2Error\/cannotRevoke(type:)",
         "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/OAuth2Error\/error(_:)",
         "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/OAuth2Error\/invalidUrl",
         "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/OAuth2Error\/missingClientConfiguration",
         "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/OAuth2Error\/missingLocationHeader",
         "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/OAuth2Error\/missingOpenIdConfiguration(attribute:)",
         "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/OAuth2Error\/missingToken(type:)",
+        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/OAuth2Error\/multiple(errors:)",
         "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/OAuth2Error\/network(error:)",
         "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/OAuth2Error\/oauth2Error(code:description:)",
         "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/OAuth2Error\/signatureInvalid"
@@ -423,6 +425,61 @@
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/oauth2error\/cannotcomposeurl"
 },
+"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/OAuth2Error/cannotRevoke(type:)": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "case"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "cannotRevoke"
+    },
+    {
+      "kind" : "text",
+      "text" : "("
+    },
+    {
+      "kind" : "externalParam",
+      "text" : "type"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:14AuthFoundation5TokenC",
+      "text" : "Token"
+    },
+    {
+      "kind" : "text",
+      "text" : "."
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:14AuthFoundation5TokenC10RevokeTypeO",
+      "text" : "RevokeType"
+    },
+    {
+      "kind" : "text",
+      "text" : ")"
+    }
+  ],
+  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/OAuth2Error\/cannotRevoke(type:)",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "OAuth2Error.cannotRevoke(type:)",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/oauth2error\/cannotrevoke(type:)"
+},
 "doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/OAuth2Error/error(_:)": {
   "abstract" : [
 
@@ -636,6 +693,52 @@
   "title" : "OAuth2Error.missingToken(type:)",
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/oauth2error\/missingtoken(type:)"
+},
+"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/OAuth2Error/multiple(errors:)": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "case"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "multiple"
+    },
+    {
+      "kind" : "text",
+      "text" : "("
+    },
+    {
+      "kind" : "externalParam",
+      "text" : "errors"
+    },
+    {
+      "kind" : "text",
+      "text" : ": ["
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:14AuthFoundation11OAuth2ErrorO",
+      "text" : "OAuth2Error"
+    },
+    {
+      "kind" : "text",
+      "text" : "])"
+    }
+  ],
+  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/OAuth2Error\/multiple(errors:)",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "OAuth2Error.multiple(errors:)",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/oauth2error\/multiple(errors:)"
 },
 "doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/OAuth2Error/network(error:)": {
   "abstract" : [

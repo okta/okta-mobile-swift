@@ -226,10 +226,17 @@
     },
     {
       "identifiers" : [
+        "doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/WebAuthenticationUI\/HowToSignOut",
         "doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/WebAuthenticationUI\/WebAuthentication\/signOut(from:credential:)",
         "doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/WebAuthenticationUI\/WebAuthentication\/signOut(from:credential:completion:)"
       ],
       "title" : "Sign Out Using Credential"
+    },
+    {
+      "identifiers" : [
+        "doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/WebAuthenticationUI\/HowToSignOut"
+      ],
+      "title" : "Sign Out Using Token"
     },
     {
       "identifiers" : [
@@ -298,6 +305,20 @@
   "title" : "Configuring Your Client",
   "type" : "topic",
   "url" : "\/documentation\/webauthenticationui\/configuringyourclient"
+},
+"doc://com.okta.mobile.webauthenticationui/documentation/WebAuthenticationUI/HowToSignOut": {
+  "abstract" : [
+    {
+      "text" : "Determine the optimal approach to signing users out of your application.",
+      "type" : "text"
+    }
+  ],
+  "identifier" : "doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/WebAuthenticationUI\/HowToSignOut",
+  "kind" : "article",
+  "role" : "article",
+  "title" : "How To Sign Out",
+  "type" : "topic",
+  "url" : "\/documentation\/webauthenticationui\/howtosignout"
 },
 "doc://com.okta.mobile.webauthenticationui/documentation/WebAuthenticationUI/WebAuthentication": {
   "abstract" : [
