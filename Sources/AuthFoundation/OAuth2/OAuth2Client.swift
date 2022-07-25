@@ -272,7 +272,7 @@ public final class OAuth2Client {
     ///   - type: Type of token to revoke.
     ///   - completion: Completion block to invoke once complete.
     public func revoke(_ token: Token, type: Token.RevokeType, completion: @escaping (Result<Void, OAuth2Error>) -> Void) {
-        if type == .all {
+        guard type != .all else {
             revokeAll(token, completion: completion)
             return
         }
