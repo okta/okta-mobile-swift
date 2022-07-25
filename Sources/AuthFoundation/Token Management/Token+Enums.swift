@@ -23,6 +23,9 @@ public extension Token {
         
         /// Indicates the device secret should be revoked.
         case deviceSecret
+        
+        /// Indicates that all tokens should be revoked.
+        case all
     }
     
     /// The kind of access token an operation should be used with.

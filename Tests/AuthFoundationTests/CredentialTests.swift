@@ -25,9 +25,9 @@ final class CredentialTests: XCTestCase {
                       expiresIn: 300,
                       accessToken: "abcd123",
                       scope: "openid",
-                      refreshToken: nil,
+                      refreshToken: "refresh123",
                       idToken: nil,
-                      deviceSecret: nil,
+                      deviceSecret: "device123",
                       context: Token.Context(configuration: .init(baseURL: URL(string: "https://example.com/oauth2/default")!,
                                                                   clientId: "clientid",
                                                                   scopes: "openid"),
@@ -69,6 +69,87 @@ final class CredentialTests: XCTestCase {
         waitForExpectations(timeout: 1.0) { error in
             XCTAssertNil(error)
         }
+        
+        let revokeRequest = try XCTUnwrap(urlSession.requests.first(where: { request in
+            request.url?.absoluteString == "https://example.com/oauth2/v1/revoke"
+        }))
+        XCTAssertEqual(revokeRequest.bodyString, "client_id=foo&token=abcd123&token_type_hint=access_token")
     }
-    
+
+    func testRevokeFailure() throws {
+        urlSession.expect("https://example.com/oauth2/default/.well-known/openid-configuration",
+                          data: try data(from: .module, for: "openid-configuration", in: "MockResponses"),
+                          contentType: "application/json")
+        urlSession.expect("https://example.com/oauth2/v1/revoke",
+                          data: data(for: """
+                                        {"error": "invalid_token", "errorDescription": "Invalid token"}
+                                    """),
+                          statusCode: 400,
+                          contentType: "application/json")
+        
+        let expect = expectation(description: "network request")
+        credential.revoke(type: .accessToken) { result in
+            switch result {
+            case .success():
+                XCTFail()
+                
+            case .failure(let error):
+                guard case let .network(error: apiError) = error,
+                      case let .serverError(serverError) = apiError,
+                      let oauth2Error = serverError as? OAuth2ServerError
+                else {
+                    XCTFail()
+                    return
+                }
+
+                XCTAssertEqual(oauth2Error.code, .invalidToken)
+            }
+            expect.fulfill()
+        }
+        waitForExpectations(timeout: 1.0) { error in
+            XCTAssertNil(error)
+        }
+    }
+
+    func testRevokeAll() throws {
+        urlSession.expect("https://example.com/oauth2/default/.well-known/openid-configuration",
+                          data: try data(from: .module, for: "openid-configuration", in: "MockResponses"),
+                          contentType: "application/json")
+        urlSession.expect("https://example.com/oauth2/v1/revoke",
+                          data: Data())
+        urlSession.expect("https://example.com/oauth2/v1/revoke",
+                          data: Data())
+        urlSession.expect("https://example.com/oauth2/v1/revoke",
+                          data: Data())
+        
+        let expect = expectation(description: "network request")
+        credential.revoke(type: .all) { result in
+            switch result {
+            case .success(): break
+            case .failure(let error):
+                XCTAssertNil(error)
+            }
+            expect.fulfill()
+        }
+        waitForExpectations(timeout: 1.0) { error in
+            XCTAssertNil(error)
+        }
+        
+        let accessTokenRequest = try XCTUnwrap(urlSession.requests.first(where: { request in
+            request.bodyString?.contains("abcd123") ?? false
+        }))
+        let refreshTokenRequest = try XCTUnwrap(urlSession.requests.first(where: { request in
+            request.bodyString?.contains("refresh123") ?? false
+        }))
+        let deviceSecretRequest = try XCTUnwrap(urlSession.requests.first(where: { request in
+            request.bodyString?.contains("device123") ?? false
+        }))
+
+        XCTAssertEqual(accessTokenRequest.bodyString,
+                       "client_id=foo&token=abcd123&token_type_hint=access_token")
+        XCTAssertEqual(refreshTokenRequest.bodyString,
+                       "client_id=foo&token=refresh123&token_type_hint=refresh_token")
+        XCTAssertEqual(deviceSecretRequest.bodyString,
+                       "client_id=foo&token=device123&token_type_hint=device_secret")
+    }
 }

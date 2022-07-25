@@ -24,6 +24,8 @@ public enum OAuth2Error: Error {
     case missingLocationHeader
     case missingOpenIdConfiguration(attribute: String)
     case error(_ error: Error)
+    case cannotRevoke(type: Token.RevokeType)
+    case multiple(errors: [OAuth2Error])
 }
 
 extension OAuth2Error: LocalizedError {
@@ -106,6 +108,24 @@ extension OAuth2Error: LocalizedError {
                                   tableName: "AuthFoundation",
                                   bundle: .authFoundation,
                                   comment: "Invalid URL"),
+                errorString)
+
+        case .cannotRevoke(type: _):
+            return NSLocalizedString("cannot_revoke_token",
+                                     tableName: "AuthFoundation",
+                                     bundle: .authFoundation,
+                                     comment: "")
+
+        case .multiple(errors: let errors):
+            let errorString = errors
+                .map({ $0.localizedDescription })
+                .joined(separator: ", ")
+            
+            return String.localizedStringWithFormat(
+                NSLocalizedString("multiple_oauth2_errors",
+                                  tableName: "AuthFoundation",
+                                  bundle: .authFoundation,
+                                  comment: ""),
                 errorString)
         }
     }

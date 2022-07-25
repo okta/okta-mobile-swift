@@ -22,11 +22,13 @@
 
 ### Sign Out Using Credential
 
+- <doc:HowToSignOut>
 - ``signOut(from:credential:)``
 - ``signOut(from:credential:completion:)``
 
 ### Sign Out Using Token
 
+- <doc:HowToSignOut>
 - ``signOut(from:token:)-2cj8w``
 - ``signOut(from:token:)-6qrgc``
 - ``signOut(from:token:completion:)-8o8xk``
