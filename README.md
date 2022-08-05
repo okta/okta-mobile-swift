@@ -88,7 +88,7 @@ When a remediation is selected and its inputs have been supplied by the user, th
 
 The below code snippets will help you understand how to use this library.
 
-Once you initialize an `IDXClient`, you can call methods to make requests to the Okta IDX API. Please see the [configuration reference](#configuration-reference) section for more details.
+Once you initialize an `InteractionCodeFlow`, you can call methods to make requests to the Okta IDX API. Please see the [configuration reference](#configuration-reference) section for more details.
 
 ### Create the flow
 
@@ -98,6 +98,12 @@ let flow = InteractionCodeFlow(
     clientId: "<#clientId#>",
     scopes: ["openid", "email", "offline_access", "<#otherScopes#>"],
     redirectUri: "<#redirectUri#>") // Must match the redirect uri in client app settings/console
+```
+
+Alternatively, if you define an `Okta.plist` configuration file within your application, you can use the default initializer to create a flow using that configuration.
+
+```swift
+let flow = try InteractionCodeFlow()
 ```
 
 > **Note:** While your issuer URL may vary for advanced configurations, for most uses it will be your Okta Domain, followed by `/oauth2/default`.

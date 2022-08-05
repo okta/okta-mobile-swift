@@ -13,7 +13,7 @@
 import UIKit
 import OktaIdx
 
-/// Sign in controller used when initializing the signin process. This encapsulates the `IDXClient.start()` API call.
+/// Sign in controller used when initializing the signin process. This encapsulates the `InteractionCodeFlow.start()` API call.
 class IDXStartViewController: UIViewController, IDXSigninController {
     var signin: Signin?
 

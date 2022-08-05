@@ -10,14 +10,14 @@ For specific suggestions on how to implement the various capabilities that `okta
 ### Configuring and initializing your client
 
 ```swift
-let config = IDXClient.Configuration(
+let flow = InteractionCodeFlow(
     issuer: "https://{yourOktaDomain}/oauth2/default",
     clientId: "clientId",
     clientSecret: nil,
     scopes: ["openid", "email", "offline_access"],
     redirectUri: "com.myapp:/redirect/uri")
     
-IDXClient.start(configuration: config) { result in
+flow.start() { result in
     switch result {
     case .failure(let error):
         // Handle the error
