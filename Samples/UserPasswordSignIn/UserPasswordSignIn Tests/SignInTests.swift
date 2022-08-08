@@ -15,7 +15,7 @@ import XCTest
 class SignInTests: XCTestCase {
     var commandPath: URL?
     
-    lazy var domain: String?  = {
+    lazy var domain: String? = {
         ProcessInfo.processInfo.environment["E2E_DOMAIN"]
     }()
     
