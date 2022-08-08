@@ -82,10 +82,12 @@ extension Token.IntrospectRequest: OAuth2APIRequest, APIRequestBody {
     var httpMethod: APIRequestMethod { .post }
     var contentType: APIContentType? { .formEncoded }
     var acceptsType: APIContentType? { .json }
-    var authorization: APIAuthorization? { token }
+    var authorization: APIAuthorization? { nil }
+    private var clientId: String? { token.idToken?[.clientId] }
     var bodyParameters: [String: Any]? {
         [
             "token": (token.token(of: type) ?? "") as String,
+            "client_id": token.context.configuration.clientId,
             "token_type_hint": type.rawValue
         ]
     }

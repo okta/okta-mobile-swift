@@ -181,6 +181,40 @@ final class OAuth2ClientTests: XCTestCase {
         XCTAssertEqual(tokenInfo?.subject, "john.doe@example.com")
     }
     
+    func testIntrospectError() throws {
+        let token = Token(id: "TokenId",
+                      issuedAt: Date(),
+                      tokenType: "Bearer",
+                      expiresIn: 300,
+                      accessToken: "abcd123",
+                      scope: "openid",
+                      refreshToken: nil,
+                      idToken: nil,
+                      deviceSecret: nil,
+                      context: Token.Context(configuration: self.configuration,
+                                             clientSettings: nil))
+        urlSession.expect("https://example.com/.well-known/openid-configuration",
+                          data: try data(from: .module, for: "openid-configuration", in: "MockResponses"),
+                          contentType: "application/json")
+        urlSession.expect("https://example.com/oauth2/v1/introspect", data: nil, statusCode: 401)
+        let expect = expectation(description: "network request")
+        client.introspect(token: token, type: .refreshToken) { result in
+            switch result {
+            case .success:
+                XCTFail()
+            case .failure(let error):
+                XCTAssertNotNil(error)
+                XCTAssertEqual(error.localizedDescription,
+                               OAuth2Error.network(error: APIClientError.missingResponse).localizedDescription)
+            }
+            expect.fulfill()
+        }
+        
+        waitForExpectations(timeout: 1.0) { error in
+            XCTAssertNil(error)
+        }
+    }
+    
     func testRevoke() throws {
         urlSession.expect("https://example.com/.well-known/openid-configuration",
                           data: try data(from: .module, for: "openid-configuration", in: "MockResponses"),
