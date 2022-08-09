@@ -83,7 +83,6 @@ extension Token.IntrospectRequest: OAuth2APIRequest, APIRequestBody {
     var contentType: APIContentType? { .formEncoded }
     var acceptsType: APIContentType? { .json }
     var authorization: APIAuthorization? { nil }
-    private var clientId: String? { token.idToken?[.clientId] }
     var bodyParameters: [String: Any]? {
         [
             "token": (token.token(of: type) ?? "") as String,
