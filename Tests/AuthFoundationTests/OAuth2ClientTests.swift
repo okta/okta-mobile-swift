@@ -143,7 +143,91 @@ final class OAuth2ClientTests: XCTestCase {
         XCTAssertEqual(userInfo?.subject, "00uid4BxXw6I6TV4m0g3")
     }
 
-    func testIntrospect() throws {
+    func testIntrospectTokenRequest() throws {
+        let openIdConfiguration = try OpenIdConfiguration.jsonDecoder.decode(
+            OpenIdConfiguration.self,
+            from: try data(from: .module,
+                           for: "openid-configuration",
+                           in: "MockResponses"))
+        let request = try Token.IntrospectRequest(openIdConfiguration: openIdConfiguration,
+                                                  token: token,
+                                                  type: .accessToken)
+        XCTAssertNil(request.authorization)
+        XCTAssertEqual((request.bodyParameters?["client_id"] as? String), "clientid")
+        XCTAssertEqual(request.bodyParameters?["token"] as? String, "abcd123")
+        XCTAssertEqual(request.bodyParameters?["token_type_hint"] as? String, "access_token")
+    }
+    
+    func testIntrospectActiveAccessToken() throws {
+        urlSession.expect("https://example.com/.well-known/openid-configuration",
+                          data: try data(from: .module, for: "openid-configuration", in: "MockResponses"),
+                          contentType: "application/json")
+        urlSession.expect("https://example.com/oauth2/v1/introspect",
+                          data: data(for: """
+                            {
+                              "active" : true,
+                              "token_type" : "Bearer",
+                              "scope" : "openid profile email",
+                              "client_id" : "a9VpZDRCeFh3Nkk2VdYa",
+                              "username" : "john.doe@example.com",
+                              "exp" : 1451606400,
+                              "sub" : "john.doe@example.com",
+                              "device_id" : "q4SZgrA9sOeHkfst5uaa"
+                            }
+                          """),
+                          contentType: "application/json")
+
+        var tokenInfo: TokenInfo?
+        let expect = expectation(description: "network request")
+        client.introspect(token: token, type: .accessToken) { result in
+            switch result {
+            case .success(let response):
+                tokenInfo = response
+            case .failure(let error):
+                XCTAssertNil(error)
+            }
+            expect.fulfill()
+        }
+        
+        waitForExpectations(timeout: 1.0) { error in
+            XCTAssertNil(error)
+        }
+        
+        XCTAssertEqual(tokenInfo?.subject, "john.doe@example.com")
+        XCTAssertEqual(tokenInfo?.active, true)
+    }
+    
+    func testIntrospectInactiveAccessToken() throws {
+        urlSession.expect("https://example.com/.well-known/openid-configuration",
+                          data: try data(from: .module, for: "openid-configuration", in: "MockResponses"),
+                          contentType: "application/json")
+        urlSession.expect("https://example.com/oauth2/v1/introspect",
+                          data: data(for: """
+                            {
+                              "active" : false
+                            }
+                          """),
+                          contentType: "application/json")
+        var tokenInfo: TokenInfo?
+        let expect = expectation(description: "network request")
+        client.introspect(token: token, type: .accessToken) { result in
+            switch result {
+            case .success(let response):
+                tokenInfo = response
+            case .failure(let error):
+                XCTAssertNil(error)
+            }
+            expect.fulfill()
+        }
+        
+        waitForExpectations(timeout: 1.0) { error in
+            XCTAssertNil(error)
+        }
+        
+        XCTAssertEqual(tokenInfo?.active, false)
+    }
+    
+    func testIntrospectActiveRefreshToken() throws {
         urlSession.expect("https://example.com/.well-known/openid-configuration",
                           data: try data(from: .module, for: "openid-configuration", in: "MockResponses"),
                           contentType: "application/json")
@@ -179,8 +263,121 @@ final class OAuth2ClientTests: XCTestCase {
         }
         
         XCTAssertEqual(tokenInfo?.subject, "john.doe@example.com")
+        XCTAssertEqual(tokenInfo?.active, true)
     }
     
+    func testIntrospectActiveIdToken() throws {
+        urlSession.expect("https://example.com/.well-known/openid-configuration",
+                          data: try data(from: .module, for: "openid-configuration", in: "MockResponses"),
+                          contentType: "application/json")
+        urlSession.expect("https://example.com/oauth2/v1/introspect",
+                          data: data(for: """
+                            {
+                              "active" : true,
+                              "token_type" : "Bearer",
+                              "scope" : "openid profile email",
+                              "client_id" : "a9VpZDRCeFh3Nkk2VdYa",
+                              "username" : "john.doe@example.com",
+                              "exp" : 1451606400,
+                              "sub" : "john.doe@example.com",
+                              "device_id" : "q4SZgrA9sOeHkfst5uaa"
+                            }
+                          """),
+                          contentType: "application/json")
+
+        var tokenInfo: TokenInfo?
+        let expect = expectation(description: "network request")
+        client.introspect(token: token, type: .idToken) { result in
+            switch result {
+            case .success(let response):
+                tokenInfo = response
+            case .failure(let error):
+                XCTAssertNil(error)
+            }
+            expect.fulfill()
+        }
+        
+        waitForExpectations(timeout: 1.0) { error in
+            XCTAssertNil(error)
+        }
+        
+        XCTAssertEqual(tokenInfo?.subject, "john.doe@example.com")
+        XCTAssertEqual(tokenInfo?.active, true)
+    }
+    
+    func testIntrospectActiveDeviceSecret() throws {
+        urlSession.expect("https://example.com/.well-known/openid-configuration",
+                          data: try data(from: .module, for: "openid-configuration", in: "MockResponses"),
+                          contentType: "application/json")
+        urlSession.expect("https://example.com/oauth2/v1/introspect",
+                          data: data(for: """
+                            {
+                              "active" : true,
+                              "token_type" : "Bearer",
+                              "scope" : "openid profile email",
+                              "client_id" : "a9VpZDRCeFh3Nkk2VdYa",
+                              "username" : "john.doe@example.com",
+                              "exp" : 1451606400,
+                              "sub" : "john.doe@example.com",
+                              "device_id" : "q4SZgrA9sOeHkfst5uaa"
+                            }
+                          """),
+                          contentType: "application/json")
+
+        var tokenInfo: TokenInfo?
+        let expect = expectation(description: "network request")
+        client.introspect(token: token, type: .deviceSecret) { result in
+            switch result {
+            case .success(let response):
+                tokenInfo = response
+            case .failure(let error):
+                XCTAssertNil(error)
+            }
+            expect.fulfill()
+        }
+        
+        waitForExpectations(timeout: 1.0) { error in
+            XCTAssertNil(error)
+        }
+        
+        XCTAssertEqual(tokenInfo?.subject, "john.doe@example.com")
+        XCTAssertEqual(tokenInfo?.active, true)
+    }
+    
+    func testIntrospectFailed() throws {
+            let token = Token(id: "TokenId",
+                          issuedAt: Date(),
+                          tokenType: "Bearer",
+                          expiresIn: 300,
+                          accessToken: "abcd123",
+                          scope: "openid",
+                          refreshToken: nil,
+                          idToken: nil,
+                          deviceSecret: nil,
+                          context: Token.Context(configuration: self.configuration,
+                                                 clientSettings: []))
+            urlSession.expect("https://example.com/.well-known/openid-configuration",
+                              data: try data(from: .module, for: "openid-configuration", in: "MockResponses"),
+                              contentType: "application/json")
+            urlSession.expect("https://example.com/oauth2/v1/introspect", data: nil, statusCode: 401)
+            let expect = expectation(description: "network request")
+            client.introspect(token: token, type: .refreshToken) { result in
+                switch result {
+                case .success:
+                    XCTFail()
+                case .failure(let error):
+                    XCTAssertNotNil(error)
+                    XCTAssertEqual(error.localizedDescription,
+                                   OAuth2Error.network(error: APIClientError.missingResponse).localizedDescription)
+                }
+                expect.fulfill()
+            }
+
+            waitForExpectations(timeout: 1.0) { error in
+                XCTAssertNil(error)
+            }
+        }
+ 
     func testRevoke() throws {
         urlSession.expect("https://example.com/.well-known/openid-configuration",
                           data: try data(from: .module, for: "openid-configuration", in: "MockResponses"),
