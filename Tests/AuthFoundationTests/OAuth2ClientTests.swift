@@ -153,9 +153,9 @@ final class OAuth2ClientTests: XCTestCase {
                                                   token: token,
                                                   type: .accessToken)
         XCTAssertNil(request.authorization)
-        XCTAssertEqual((request.bodyParameters?["client_id"] as? String), token.context.configuration.clientId)
-        XCTAssertEqual(request.bodyParameters?["token"] as? String, token.accessToken)
-        XCTAssertEqual(request.bodyParameters?["token_type_hint"] as? String, Token.Kind.accessToken.rawValue)
+        XCTAssertEqual((request.bodyParameters?["client_id"] as? String), "clientid")
+        XCTAssertEqual(request.bodyParameters?["token"] as? String, "abcd123")
+        XCTAssertEqual(request.bodyParameters?["token_type_hint"] as? String, "access_token")
     }
     
     func testIntrospectActiveAccessToken() throws {
