@@ -102,7 +102,7 @@ class InteractionCodeFlowTests: XCTestCase {
                 return
             }
             
-            XCTAssertEqual(oauthError.code, "invalid_request")
+            XCTAssertEqual(oauthError.code, .invalidRequest)
             XCTAssertEqual(oauthError.description,
                            "PKCE code challenge is required when the token endpoint authentication method is \'NONE\'.")
         }
