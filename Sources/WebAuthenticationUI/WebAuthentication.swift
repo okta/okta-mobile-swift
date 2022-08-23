@@ -46,7 +46,7 @@ public enum WebAuthenticationError: Error {
 /// The simplest way to authenticate a user is to use the ``shared`` property to access your default session, and calling ``signIn(from:)`` to present the browser to the user.
 ///
 /// ```swift
-/// let token = try await WebAuthentication.shared.signIn(from: view.window)
+/// let token = try await WebAuthentication.shared?.signIn(from: view.window)
 /// ```
 ///
 /// To customize the authentication flow, please read more about the underlying OAuth2 client within the OktaOAuth2 library, and how that relates to the ``signInFlow`` or ``signOutFlow`` properties.
