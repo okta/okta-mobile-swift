@@ -34,7 +34,7 @@ extension UserPasswordSignIn {
     }
     
     func createFlow() throws -> ResourceOwnerFlow {
-        guard let issuerUrl = URL(string: "https://\(domain)") else {
+        guard let issuerUrl = URL(string: issuer) else {
             throw UserPasswordError.invalidDomain
         }
         

@@ -1,13 +1,30 @@
 # DeviceAuthSignIn
 
-This sample contains two separate sample application schemes:
+## Abstract
 
-## DeviceAuthSignIn (tvOS)
+Add sign-in using the OAuth 2.0 device authorization grant flow to your tvOS app.
 
-This sample demonstrates the Device Code Flow (referred to as `DeviceAuthorizationFlow` within OktaOAuth2), and how this can be used to sign in to a tvOS application.
+## Overview
 
-To configure the sample, open the `ViewController.swift` file, and configure the flow with your application's settings.
+The Okta Mobile SDK for Swift provides a number of utility classes that manage standard sign-on flows. The `DeviceAuthorizationFlow` class manages the OAuth 2.0 device authorization code flow.
 
-## DeviceAuthSignIn (iOS)
+The sample contains two different targets:
 
-Similar to the `DeviceAuthSignIn (tvOS)` application, this sample demonstrates the flow within an iOS application, solely for the purposes of automated testing. This is necessary since tvOS does not contain a web browser, and as such cannot support end-to-end testing the authentication process.
+- **DeviceAuthSignIn(tvOS):** The tvOS app that implements the sign-in flow.
+- **DeviceAuthSignIn(iOS):** An implementation of the app on iOS used for automated testing.
+
+## Configuring the App
+
+Add the issuer URL for your Okta org and the client ID for your Okta Application Integration to the tvOS app to the file DeviceAuthSignIn (tvOS) > DeviceAuthSignIn > ViewController.swift. There are two placeholders in that file:
+
+- **`domain`:** The domain of your registered Okta org followed by `/oauth2/default`, such as `https://dev-1234567.okta.com/oauth2/default`.
+- **`client_id`:** The client ID from the Application Integration in the Okta Admin console, such as `0ux3rutxocxFX9xyz3t9`.
+
+## See Also
+
+- OktaBrowserSignIn > OktaOAuth2 > [Introduction to Authentication Flows](https://okta.github.io/okta-mobile-swift/development/oktaoauth2/documentation/oktaoauth2/introductiontoauthenticationflows) in the Okta Mobile SDK documentation.
+
+## Related Resources
+
+- For information on configuring the device authorization grant flow in your Okta Admin Console, see [Configure Device Authorization Grant Flow](https://developer.okta.com/docs/guides/device-authorization-grant/main/#configure-the-authorization-server-policy-rule-for-device-authorization).
+- [Okta Mobile SDK for Swift](https://github.com/okta/okta-mobile-swift)

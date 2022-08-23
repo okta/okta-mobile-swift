@@ -1,6 +1,10 @@
 # ClassicNativeAuth
 
-## ClassicNativeAuth (iOS)
+## Abstract
 
-Demonstrates how to use the classic [OktaAuthSdk](https://github.com/okta/okta-auth-swift) with the Okta Mobile SDK to enable native authentication.
+Use the Okta Mobile SDK for Swift to add native authentication to your app that uses the classic OktaAuthSdk.
 
+## Related Resources
+
+- [Okta Mobile SDK for Swift](https://github.com/okta/okta-mobile-swift)
+- [OktaAuthSdk](https://github.com/okta/okta-auth-swift)

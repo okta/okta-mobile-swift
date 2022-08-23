@@ -1,6 +1,10 @@
 # OIDCMigration
 
-## OIDCMigration (iOS)
+## Abstract
 
-Demonstrates how to migrate existing users from the legacy [OktaOidc](https://github.com/okta/okta-oidc-ios) SDK to the new Okta Mobile SDK.
+Migrate your app to the new Okta Mobile SDK for Swift from legacy SDKs.
 
+## Related Resources
+
+- [Okta Mobile SDK for Swift](https://github.com/okta/okta-mobile-swift)
+- [OktaAuthSdk](https://github.com/okta/okta-auth-swift)
