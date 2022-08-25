@@ -1,30 +1,25 @@
-# WebSignIn Samples
+# WebSignIn
 
-This sample contains three separate sample application schemes:
+## Abstract
 
-## WebSignIn (iOS)
+Use the Web Authentication UI library from this SDK to add sign-in to your app, and use the OAuth 2.0 token exchange flow to perform single sign-on in a companion app.
 
-This sample demonstrates web authentication using the WebAuthenticationUI library.  To get started, open the `Okta.plist` file and update its contents with your application's configuration settings to run the sample.
+## Overview
 
- Key | Required | Description |
----|---|---
-`issuer` | ✔ | Issuer URL for the client.
-`clientId` | ✔ | Client ID for the Okta application.
-`scopes` | ✔ | Scopes the client is requesting.
-`redirectUri` | ✔  | Redirect URI for the Okta application.
-`logoutRedirectUri` | | Logout URI used for the Okta application.
-Other... | | Any additional keys will be passed to the `additionalParameters` argument of the initializer.
+The Okta Mobile SDK for Swift provides a libraries and utility classes that manage standard sign-on flows. The `WebAuthentication` class manages the web-based sign-on process, while the `TokenExchangeFlow` class manages the OAuth 2.0 token exchange flow used to implement Single Sign On (SSO).
 
-## SingleSignOn (iOS)
+The sample contains two different targets:
 
-This application demonstrates Device SSO authentication (also referred to as `TokenExchangeFlow` within OktaOAuth2). This sample works in conjuction with the WebSignIn (iOS) sample. 
+- **WebSignIn (iOS):** The iOS app that implements web-based sign on.
+- **SingleSignOn (iOS):** A companion app that uses the account information from _WebSignIn (iOS)_ to sign the user on.
 
-Configure the client by opening the `SingleSignOnViewController.swift` file, and input the client's settings.
+## Configuring the App
 
-If the `Okta.plist` file (from the WebSignIn sample) is configured with the `device_sso` scope, the device secret that is created when authenticating using the web sign in sample is saved to a common keychain entry within a shared App Group.
+Update the `WebSignIn (iOS) > WebSignIn > Okta.plist` file with the information for your Okta Org Application Integration. See the [Readme in the Shared folder](../Shared/README#okta_property_list) for a the definition of the keys in Okta property list file.
 
-After signing in, launch the SingleSignOn demo application, and your user should be logged in automatically.
+> **IMPORTANT:** This sample requires a value for the optional `logoutRedirectUri`key. The `device_sso` scope should be included if you wish to try the SingleSignOn sample app.
+   
+## Related Resources
 
-## WebSignIn (macOS)
-
-This is a counterpart to the iOS web sign in sample, and demonstrates a simple macOS SwiftUI application, authenticating over the web.  This application's `Okta.plist` file is shared with the iOS application.
+- For information on configuring the device SSO feature in your Okta Admin Console, see [Configure Native SSO for your Okta org](https://developer.okta.com/docs/guides/configure-native-sso/-/main/#configure-native-sso-for-your-okta-org).
+- [Okta Mobile SDK for Swift](https://github.com/okta/okta-mobile-swift)

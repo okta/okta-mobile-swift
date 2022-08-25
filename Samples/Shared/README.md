@@ -33,7 +33,7 @@ Update the values for the keys in the file to configure the connection to your O
 
 Any other keys and values that you add to the plist are passed to the `additionalParameters` argument of the initializer.
 
-> **NOTE:** This file is referenced from the various sample applications included in the OktaMobileSDK workspace, and may be edited directly within the sample projects.
+> **NOTE:** You can edit this file in any of the sample app projects. Editing the file in one sample changes it for all samples.
 
 ## TestConfiguration File
 
@@ -47,4 +47,4 @@ E2E_PASSWORD | The password for the test user.
 E2E_SCOPES | A space-delimited list of the permissions, or OAuth scopes requested by the client. The existing list may not need updating.
 E2E_USERNAME | The username for the test user.
 
-> **NOTE:** This file is referenced from the various sample applications included in the OktaMobileSDK workspace, and may be edited directly within the sample projects.
+> **NOTE:** You can edit this file in any of the sample app projects. Editing the file in one sample changes it for all samples.
