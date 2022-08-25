@@ -1,32 +1,50 @@
 # Shared Sample Resources
 
-This directory contains shared resources used by the various sample applications in this repo.
+The `Shared` folder contains code, storyboards, property lists, and configuration files that are used by many of the sample applications.
 
-## Common
+> **IMPORTANT:**
+> The samples include file paths that reference the files in this folder.
 
-Contains common classes and protocols used by either the automated test targets, or sample applications, to prevent unnecessary duplication of effort. In particular, this contains the files used to display the user's profile and account information when sign in is successful.
+There are different types of content:
 
-## Shared Secrets / Credentials
+- **Common:** A folder that contains code and storyboards.
+- **Okta.plist:** A property list that contains the configuration for the Okta org Application Integration that's used by the app.
+- **TestConfiguration.xcconfig:** A file that defines the configuration for the Okta org Application Integration used that's used for testing.
 
-This directory contains configuratino files used by the various sample applications within this repository for storing per-developer secrets. This can simplify the time it takes for a developer to experiment with the various samples, without needing to update the same client credentials across multiple files.
+## Common Folder
 
-> **NOTE:** To ensure secrets don't accidentally get committed, please refer to the "Protecting Test Configuration" section of the main [SDK README](../../README.md).
+The contents of the folders are:
 
-### `Okta.plist`
+- **Keychain:** Convenience extensions to Keychain for tokens.
+- **Testing:** Extensions to XCTest and other classes used for testing the sample apps.
+- **View Controllers:** A view controller that displays the information for a user after they've signed in.
 
-This configuration file is used by various sign in flows, and is a convenient way to store client configuration. 
+## Okta Property List
 
-The SDK expects the following keys to be present:
+Update the values for the keys in the file to configure the connection to your Okta Org Application Integration for your app.
 
  Key | Required | Description |
----|---|---
-`issuer` | ✔ | Issuer URL for the client.
-`clientId` | ✔ | Client ID for the Okta application.
-`scopes` | ✔ | Scopes the client is requesting.
-`redirectUri` |    | Redirect URI for the Okta application.
-`logoutRedirectUri` | | Logout URI used for the Okta application.
-Other... | | Any additional keys will be passed to the `additionalParameters` argument of the initializer.
+ ---|---|---
+`issuer` | ✔ | The domain of your registered Okta org followed by `/oauth2/default`, such as `https://dev-1234567.okta.com/oauth2/default`.
+`clientId` | ✔ | The client ID from the Application Integration in the Okta Admin console, such as `0ux3rutxocxFX9xyz3t9`.
+`scopes` | ✔ | A space-delimited list of the permissions, or OAuth scopes requested by the client. The existing list may not need updating.
+`redirectUri` | ✔  | Redirect URI for the Okta application, such as `com.okta.1234567:/callback`.
+`logoutRedirectUri` | | Logout URI used for the Okta application, such as `com.okta.1234567:/logout`
 
-### `TestConfiguration.xcconfig`
+Any other keys and values that you add to the plist are passed to the `additionalParameters` argument of the initializer.
 
-This configuration file is used solely for the benefit of automated testing. When running any of the UI test targets within these sample repos, this configuration file is used to supply client settings and user credentials to enable the tests to authenticate against a live organization in Okta.
+> **NOTE:** This file is referenced from the various sample applications included in the OktaMobileSDK workspace, and may be edited directly within the sample projects.
+
+## TestConfiguration File
+
+Update the for the constants in the file to configure the connection to your Okta Org Application Integration for your tests.
+
+ Constant | Description |
+ ---|---
+E2E_CLIENT_ID  | The client ID from the Application Integration in the Okta Admin console, such as `0ux3rutxocxFX9xyz3t9`.
+E2E_DOMAIN | The domain portion of your registered Okta org.
+E2E_PASSWORD | The password for the test user.
+E2E_SCOPES | A space-delimited list of the permissions, or OAuth scopes requested by the client. The existing list may not need updating.
+E2E_USERNAME | The username for the test user.
+
+> **NOTE:** This file is referenced from the various sample applications included in the OktaMobileSDK workspace, and may be edited directly within the sample projects.
