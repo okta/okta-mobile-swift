@@ -2,7 +2,7 @@
 
 ## Abstract
 
-Add web-based sign in and single sign-on with the WebAuthenticationUI library and OAuth 2.0 token exchange flow.
+Add web-based sign in and single sign-on that uses the token exchange flow from the OAuth 2.0 specification with the WebAuthenticationUI Library.
 
 ## Overview
 
