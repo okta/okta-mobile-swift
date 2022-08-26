@@ -50,7 +50,7 @@ class SignInTests: XCTestCase {
         let password = try XCTUnwrap(password)
 
         let command = Command(commandPath, arguments: [
-            "--issuer", URL(string: "https://\(domain)/oauth2/default"),
+            "--issuer", "https://\(domain)/oauth2/default",
             "--client-id", clientId,
             "--scopes", scopes
         ])

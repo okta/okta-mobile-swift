@@ -2,7 +2,7 @@
 
 ## Abstract
 
-Use the Web Authentication UI library from this SDK to add sign-in to your app, and use the OAuth 2.0 token exchange flow to perform single sign-on in a companion app.
+Add web-based sign in and single sign-on with the WebAuthenticationUI library and OAuth 2.0 token exchange flow.
 
 ## Overview
 
