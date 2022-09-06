@@ -19,10 +19,10 @@ let redirectUri = "<#redirectUri#>"
 
 func signInWithWeb() async throws {
     // Sign in using the default configuration
-    let token = try await WebAuthentication.signIn(from: view.window)
+    let token = try await WebAuthentication.shared?.signIn(from: view.window)
     
     // Save the user's tokens
-    Credential.default = Credential(token: token)
+    try Credential.store(token)
 }
 
 func signInWithWebUsingCustomConfiguration() async throws {

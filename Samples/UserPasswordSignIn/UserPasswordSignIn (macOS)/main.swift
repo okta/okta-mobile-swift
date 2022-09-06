@@ -22,8 +22,8 @@ typealias Command = ParsableCommand
 
 @main
 struct UserPasswordSignIn: Command {
-    @Option(help: "The domain of the issuer.")
-    var domain: String
+    @Option(help: "The application's issuer URL.")
+    var issuer: String
     
     @Option(help: "The application's client ID.")
     var clientId: String

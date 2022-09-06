@@ -87,7 +87,7 @@ jobs:
   UITest-WebSignIn:
     name: Web Sign In / Single Sign On (iOS)
     runs-on: macos-12
-    timeout-minutes: 10
+    timeout-minutes: 18
     needs: 
       - XcodeBuild
       - SwiftBuild
