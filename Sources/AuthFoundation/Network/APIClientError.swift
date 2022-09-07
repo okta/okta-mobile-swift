@@ -17,6 +17,7 @@ public enum APIClientError: Error {
     case invalidUrl
     case missingResponse
     case invalidResponse
+    case noRequestId
     case cannotParseResponse(error: Error)
     case invalidRequestData
     case missingRefreshSettings
@@ -119,6 +120,12 @@ extension APIClientError: LocalizedError {
                                      tableName: "AuthFoundation",
                                      bundle: .authFoundation,
                                      comment: "Invalid URL")
+        case .noRequestId:
+            return NSLocalizedString("no_request_id",
+                                     tableName: "AuthFoundation",
+                                     bundle: .authFoundation,
+                                     comment: "")
+
         }
     }
 }

@@ -671,6 +671,10 @@ extension OAuth2Client: APIClient {
     public func didSend<T>(request: URLRequest, received response: APIResponse<T>) where T: Decodable {
         delegateCollection.invoke { $0.api(client: self, didSend: request, received: response) }
     }
+    
+    public func shouldRetry(request: URLRequest) -> APIRetry {
+        return delegateCollection.call({ $0.api(client: self, shouldRetry: request) }).first ?? .default
+    }
 }
 
 extension OAuth2Client: UsesDelegateCollection {

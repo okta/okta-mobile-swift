@@ -42,6 +42,8 @@ final class ErrorTests: XCTestCase {
                           "missing_refresh_settings_description")
         XCTAssertNotEqual(APIClientError.unknown.errorDescription,
                           "unknown_description")
+        XCTAssertNotEqual(APIClientError.noRequestId.errorDescription,
+                          "no_request_id")
         
         XCTAssertNotEqual(APIClientError.cannotParseResponse(error: TestUnlocalizedError.nestedError).errorDescription,
                           "cannot_parse_response_description")
