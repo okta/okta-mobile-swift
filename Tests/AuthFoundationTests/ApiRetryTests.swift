@@ -57,7 +57,7 @@ class ApiRetryTests: XCTestCase {
             expect.fulfill()
         })
         
-        XCTAssertNil(client.request?.allHTTPHeaderFields?["x-okta-retry-count"])
+        XCTAssertNil(client.request?.allHTTPHeaderFields?["X-Okta-Retry-Count"])
         waitForExpectations(timeout: 1.0) { error in
             XCTAssertNil(error)
         }
@@ -120,8 +120,8 @@ class ApiRetryTests: XCTestCase {
             XCTAssertNil(error)
         }
         
-        XCTAssertEqual(client.request?.allHTTPHeaderFields?["x-okta-retry-count"], "3")
-        XCTAssertEqual(client.request?.allHTTPHeaderFields?["x-okta-request-id"], requestId)
+        XCTAssertEqual(client.request?.allHTTPHeaderFields?["X-Okta-Retry-Count"], "3")
+        XCTAssertEqual(client.request?.allHTTPHeaderFields?["X-Okta-Retry-For"], requestId)
     }
 
     func testApiRetryReturnsSuccessStatusCode() throws {
@@ -154,8 +154,8 @@ class ApiRetryTests: XCTestCase {
             XCTAssertNil(error)
         }
         
-        XCTAssertEqual(client.request?.allHTTPHeaderFields?["x-okta-retry-count"], "1")
-        XCTAssertEqual(client.request?.allHTTPHeaderFields?["x-okta-request-id"], requestId)
+        XCTAssertEqual(client.request?.allHTTPHeaderFields?["X-Okta-Retry-Count"], "1")
+        XCTAssertEqual(client.request?.allHTTPHeaderFields?["X-Okta-Retry-For"], requestId)
     }
     
     func testNoRequestId() throws {
@@ -232,8 +232,8 @@ class ApiRetryTests: XCTestCase {
         waitForExpectations(timeout: 2.0) { error in
             XCTAssertNil(error)
         }
-        XCTAssertEqual(client.request?.allHTTPHeaderFields?["x-okta-retry-count"], "3")
-        XCTAssertEqual(client.request?.allHTTPHeaderFields?["x-okta-request-id"], requestId)
+        XCTAssertEqual(client.request?.allHTTPHeaderFields?["X-Okta-Retry-Count"], "3")
+        XCTAssertEqual(client.request?.allHTTPHeaderFields?["X-Okta-Retry-For"], requestId)
     }
     
     func testCustomRetryCount() throws {
@@ -315,8 +315,8 @@ class ApiRetryTests: XCTestCase {
             XCTAssertNil(error)
         }
         
-        XCTAssertEqual(client.request?.allHTTPHeaderFields?["x-okta-retry-count"], "5")
-        XCTAssertEqual(client.request?.allHTTPHeaderFields?["x-okta-request-id"], requestId)
+        XCTAssertEqual(client.request?.allHTTPHeaderFields?["X-Okta-Retry-Count"], "5")
+        XCTAssertEqual(client.request?.allHTTPHeaderFields?["X-Okta-Retry-For"], requestId)
     }
     
     func testApiRateLimit() throws {

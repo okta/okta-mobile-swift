@@ -223,8 +223,8 @@ extension APIClient {
     
     private func addRetryHeaderToRequest(state: APIRetry.State) -> URLRequest {
         var request = state.originalRequest
-        request.allHTTPHeaderFields?.updateValue(state.requestId, forKey: "x-okta-request-id")
-        request.allHTTPHeaderFields?.updateValue(state.retryCount.stringValue, forKey: "x-okta-retry-count")
+        request.allHTTPHeaderFields?.updateValue(state.requestId, forKey: "X-Okta-Retry-For")
+        request.allHTTPHeaderFields?.updateValue(state.retryCount.stringValue, forKey: "X-Okta-Retry-Count")
         return request
     }
 }
