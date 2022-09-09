@@ -118,8 +118,7 @@ extension APIClientError: LocalizedError {
             return NSLocalizedString("no_request_id",
                                      tableName: "AuthFoundation",
                                      bundle: .authFoundation,
-                                     comment: "")
-
+                                     comment: "Invalid URL")
         case .unknown:
             return NSLocalizedString("unknown_description",
                                      tableName: "AuthFoundation",
