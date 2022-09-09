@@ -197,7 +197,7 @@ extension APIClient {
                         guard retryState.retryCount <= maximumRetryCount else {
                             break
                         }
-                        let urlRequest = addRetryHeaderToRequest(state: retryState)
+                        let urlRequest = addRetryHeadersToRequest(state: retryState)
                         queue.asyncAfter(deadline: .now() + rateInfo.delay) {
                             self.send(urlRequest, parsing: context, state: retryState, completion: completion)
                         }
