@@ -130,7 +130,7 @@ extension APIClient {
     public func didSend<T>(request: URLRequest, received response: APIResponse<T>) {}
     
     public func send<T>(_ request: URLRequest, parsing context: APIParsingContext? = nil, completion: @escaping (Result<APIResponse<T>, APIClientError>) -> Void) {
-        send(request, parsing: context, state: nil , completion: completion)
+        send(request, parsing: context, state: nil, completion: completion)
     }
     
     public func shouldRetry(request: URLRequest, rateLimit: ApiRateLimit) -> APIRetry { .default }
