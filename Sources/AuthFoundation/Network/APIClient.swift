@@ -106,10 +106,10 @@ public enum APIRetry {
         let retryCount: Int
         
         func nextState() -> State {
-            .init(type: type,
-                  requestId: requestId,
-                  originalRequest: originalRequest,
-                  retryCount: retryCount + 1)
+            APIRetry.State(type: type,
+                           requestId: requestId,
+                           originalRequest: originalRequest,
+                           retryCount: retryCount + 1)
         }
     }
 }
@@ -139,6 +139,7 @@ extension APIClient {
     private func send<T>(_ request: URLRequest,
                          parsing context: APIParsingContext? = nil,
                          state: APIRetry.State?,
+                         queue: DispatchQueue = .global(),
                          completion: @escaping (Result<APIResponse<T>, APIClientError>) -> Void) {
         var urlRequest = request
         willSend(request: &urlRequest)
@@ -197,7 +198,7 @@ extension APIClient {
                             break
                         }
                         let urlRequest = addRetryHeaderToRequest(state: retryState)
-                        DispatchQueue.global().asyncAfter(deadline: .now() + rateInfo.delay) {
+                        queue.asyncAfter(deadline: .now() + rateInfo.delay) {
                             self.send(urlRequest, parsing: context, state: retryState, completion: completion)
                         }
                         return
@@ -221,7 +222,7 @@ extension APIClient {
         }.resume()
     }
     
-    private func addRetryHeaderToRequest(state: APIRetry.State) -> URLRequest {
+    private func addRetryHeadersToRequest(state: APIRetry.State) -> URLRequest {
         var request = state.originalRequest
         request.allHTTPHeaderFields?.updateValue(state.requestId, forKey: "X-Okta-Retry-For")
         request.allHTTPHeaderFields?.updateValue(state.retryCount.stringValue, forKey: "X-Okta-Retry-Count")
