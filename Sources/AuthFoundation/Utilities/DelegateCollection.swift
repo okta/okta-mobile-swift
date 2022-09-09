@@ -52,4 +52,11 @@ extension DelegateCollection {
             block(delegate)
         }
     }
+    
+    public func call<T>(_ block: (D) -> T) -> [T] {
+          delegates.compactMap {
+              guard let delegate = $0 as? D else { return nil }
+              return block(delegate)
+          }
+      }
 }
