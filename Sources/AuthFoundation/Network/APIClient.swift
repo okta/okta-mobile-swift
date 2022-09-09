@@ -96,6 +96,7 @@ public enum APIRetry {
     case doNotRetry
     case retry(maximumRetryCount: Int)
     
+    /// The default retry option.
     public static let `default` = APIRetry.retry(maximumRetryCount: 3)
     
     struct State {
