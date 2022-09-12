@@ -7,6 +7,7 @@ Authenticate users using policy-driven native authentication with the Okta Ident
 ### Essentials
 
 - ``InteractionCodeFlow``
+- ``InteractionCodeFlowDelegate``
 - ``Response``
 - ``Remediation``
 
@@ -35,6 +36,7 @@ Authenticate users using policy-driven native authentication with the Okta Ident
 
 - ``Capability``
 - ``CapabilityCollection``
+- ``IDXCapability``
 - ``AuthenticatorCapability``
 - ``RemediationCapability``
 - ``Capability/NumberChallenge``
@@ -46,3 +48,12 @@ Authenticate users using policy-driven native authentication with the Okta Ident
 - ``Capability/Resendable``
 - ``Capability/SocialIDP``
 - ``Capability/OTP``
+
+### Errors
+
+- ``IDXServerError``
+- ``InteractionCodeFlowError``
+
+### Deprecations
+
+- ``IDXClient``
