@@ -101,7 +101,7 @@ public enum APIRetry {
     
     struct State {
         let type: APIRetry
-        let requestId: String
+        let requestId: String?
         let originalRequest: URLRequest
         let retryCount: Int
         
@@ -184,10 +184,9 @@ extension APIClient {
                         if let state = state {
                             retryState = state.nextState()
                         } else {
-                            guard let requestIdHeader = requestIdHeader,
-                                  let requestId = httpResponse.allHeaderFields[requestIdHeader] as? String
-                            else {
-                                throw APIClientError.noRequestId
+                            var requestId: String? = nil
+                            if let requestIdHeader = requestIdHeader {
+                                requestId = httpResponse.allHeaderFields[requestIdHeader] as? String
                             }
                             retryState = APIRetry.State(type: retry,
                                                         requestId: requestId,
@@ -224,7 +223,9 @@ extension APIClient {
     
     private func addRetryHeadersToRequest(state: APIRetry.State) -> URLRequest {
         var request = state.originalRequest
-        request.allHTTPHeaderFields?.updateValue(state.requestId, forKey: "X-Okta-Retry-For")
+        if let requestId = state.requestId {
+            request.allHTTPHeaderFields?.updateValue(requestId, forKey: "X-Okta-Retry-For")
+        }
         request.allHTTPHeaderFields?.updateValue(state.retryCount.stringValue, forKey: "X-Okta-Retry-Count")
         return request
     }

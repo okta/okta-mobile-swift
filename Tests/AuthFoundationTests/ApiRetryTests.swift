@@ -20,7 +20,7 @@ class ApiRetryTests: XCTestCase {
     var configuration: OAuth2Client.Configuration!
     let urlSession = URLSessionMock()
     var apiRequest: MockApiRequest!
-
+    
     override func setUpWithError() throws {
         configuration = OAuth2Client.Configuration(baseURL: baseUrl,
                                                    clientId: "clientid",
@@ -40,8 +40,7 @@ class ApiRetryTests: XCTestCase {
                           headerFields: ["x-rate-limit-limit": "0",
                                          "x-rate-limit-remaining": "0",
                                          "x-rate-limit-reset": "1609459200",
-                                         "Date": "\(date)",
-                                         "x-okta-request-id": UUID().uuidString])
+                                         "Date": "\(date)"])
         let client = MockApiClient(configuration: configuration,
                                    session: urlSession,
                                    baseURL: baseUrl,
@@ -65,8 +64,6 @@ class ApiRetryTests: XCTestCase {
     
     func testDefaultRetryCount() throws {
         let date = Date()
-        let requestId = UUID().uuidString
-
         urlSession.expect("https://example.okta.com/oauth2/v1/token",
                           data: try data(from: .module, for: "token", in: "MockResponses"),
                           statusCode: 429,
@@ -74,8 +71,7 @@ class ApiRetryTests: XCTestCase {
                           headerFields: ["x-rate-limit-limit": "0",
                                          "x-rate-limit-remaining": "0",
                                          "x-rate-limit-reset": "1609459200",
-                                         "Date": "\(date)",
-                                         "x-okta-request-id": requestId])
+                                         "Date": "\(date)"])
         urlSession.expect("https://example.okta.com/oauth2/v1/token",
                           data: try data(from: .module, for: "token", in: "MockResponses"),
                           statusCode: 429,
@@ -83,8 +79,7 @@ class ApiRetryTests: XCTestCase {
                           headerFields: ["x-rate-limit-limit": "0",
                                          "x-rate-limit-remaining": "0",
                                          "x-rate-limit-reset": "1609459200",
-                                         "Date": "\(date)",
-                                         "x-okta-request-id": requestId])
+                                         "Date": "\(date)"])
         
         urlSession.expect("https://example.okta.com/oauth2/v1/token",
                           data: try data(from: .module, for: "token", in: "MockResponses"),
@@ -93,8 +88,7 @@ class ApiRetryTests: XCTestCase {
                           headerFields: ["x-rate-limit-limit": "0",
                                          "x-rate-limit-remaining": "0",
                                          "x-rate-limit-reset": "1609459200",
-                                         "Date" : "\(date)",
-                                         "x-okta-request-id": requestId])
+                                         "Date" : "\(date)"])
         
         urlSession.expect("https://example.okta.com/oauth2/v1/token",
                           data: try data(from: .module, for: "token", in: "MockResponses"),
@@ -103,8 +97,7 @@ class ApiRetryTests: XCTestCase {
                           headerFields: ["x-rate-limit-limit": "0",
                                          "x-rate-limit-remaining": "0",
                                          "x-rate-limit-reset": "1609459200",
-                                         "Date": "\(date)",
-                                         "x-okta-request-id": requestId])
+                                         "Date": "\(date)"])
         
         let expect = expectation(description: "network request")
         apiRequest.send(to: client, completion: { result in
@@ -121,12 +114,10 @@ class ApiRetryTests: XCTestCase {
         }
         
         XCTAssertEqual(client.request?.allHTTPHeaderFields?["X-Okta-Retry-Count"], "3")
-        XCTAssertEqual(client.request?.allHTTPHeaderFields?["X-Okta-Retry-For"], requestId)
     }
 
     func testApiRetryReturnsSuccessStatusCode() throws {
         let date = Date()
-        let requestId = UUID().uuidString
         urlSession.expect("https://example.okta.com/oauth2/v1/token",
                           data: try data(from: .module, for: "token", in: "MockResponses"),
                           statusCode: 429,
@@ -134,8 +125,7 @@ class ApiRetryTests: XCTestCase {
                           headerFields: ["x-rate-limit-limit": "0",
                                          "x-rate-limit-remaining": "0",
                                          "x-rate-limit-reset": "1609459200",
-                                         "Date": "\(date)",
-                                         "x-okta-request-id": requestId])
+                                         "Date": "\(date)"])
         urlSession.expect("https://example.okta.com/oauth2/v1/token",
                           data: try data(from: .module, for: "token", in: "MockResponses"),
                           contentType: "application/json")
@@ -155,10 +145,9 @@ class ApiRetryTests: XCTestCase {
         }
         
         XCTAssertEqual(client.request?.allHTTPHeaderFields?["X-Okta-Retry-Count"], "1")
-        XCTAssertEqual(client.request?.allHTTPHeaderFields?["X-Okta-Retry-For"], requestId)
     }
     
-    func testNoRequestId() throws {
+    func testApiRetryUsingMaximumRetryAttempt() throws {
         let date = Date()
         urlSession.expect("https://example.okta.com/oauth2/v1/token",
                           data: try data(from: .module, for: "token", in: "MockResponses"),
@@ -168,25 +157,6 @@ class ApiRetryTests: XCTestCase {
                                          "x-rate-limit-remaining": "0",
                                          "x-rate-limit-reset": "1609459200",
                                          "Date": "\(date)"])
-        
-        let expect = expectation(description: "network request")
-        apiRequest.send(to: client, completion: { result in
-            guard case let .failure(error) = result else {
-                XCTFail()
-                return
-            }
-            XCTAssertEqual(error.errorDescription, APIClientError.noRequestId.errorDescription)
-            expect.fulfill()
-        })
-        
-        waitForExpectations(timeout: 2.0) { error in
-            XCTAssertNil(error)
-        }
-    }
-    
-    func testApiRetryUsingMaximumRetryAttempt() throws {
-        let date = Date()
-        let requestId = UUID().uuidString
         urlSession.expect("https://example.okta.com/oauth2/v1/token",
                           data: try data(from: .module, for: "token", in: "MockResponses"),
                           statusCode: 429,
@@ -194,8 +164,7 @@ class ApiRetryTests: XCTestCase {
                           headerFields: ["x-rate-limit-limit": "0",
                                          "x-rate-limit-remaining": "0",
                                          "x-rate-limit-reset": "1609459200",
-                                         "Date": "\(date)",
-                                         "x-okta-request-id": requestId])
+                                         "Date": "\(date)"])
         urlSession.expect("https://example.okta.com/oauth2/v1/token",
                           data: try data(from: .module, for: "token", in: "MockResponses"),
                           statusCode: 429,
@@ -203,17 +172,7 @@ class ApiRetryTests: XCTestCase {
                           headerFields: ["x-rate-limit-limit": "0",
                                          "x-rate-limit-remaining": "0",
                                          "x-rate-limit-reset": "1609459200",
-                                         "Date": "\(date)",
-                                         "x-okta-request-id": requestId])
-        urlSession.expect("https://example.okta.com/oauth2/v1/token",
-                          data: try data(from: .module, for: "token", in: "MockResponses"),
-                          statusCode: 429,
-                          contentType: "application/json",
-                          headerFields: ["x-rate-limit-limit": "0",
-                                         "x-rate-limit-remaining": "0",
-                                         "x-rate-limit-reset": "1609459200",
-                                         "Date": "\(date)",
-                                         "x-okta-request-id": requestId])
+                                         "Date": "\(date)"])
         urlSession.expect("https://example.okta.com/oauth2/v1/token",
                           data: try data(from: .module, for: "token", in: "MockResponses"),
                           contentType: "application/json")
@@ -233,12 +192,10 @@ class ApiRetryTests: XCTestCase {
             XCTAssertNil(error)
         }
         XCTAssertEqual(client.request?.allHTTPHeaderFields?["X-Okta-Retry-Count"], "3")
-        XCTAssertEqual(client.request?.allHTTPHeaderFields?["X-Okta-Retry-For"], requestId)
     }
     
     func testCustomRetryCount() throws {
         let date = Date()
-        let requestId = UUID().uuidString
         let client = MockApiClient(configuration: configuration,
                                    session: urlSession,
                                    baseURL: baseUrl,
@@ -251,8 +208,7 @@ class ApiRetryTests: XCTestCase {
                           headerFields: ["x-rate-limit-limit": "0",
                                          "x-rate-limit-remaining": "0",
                                          "x-rate-limit-reset": "1609459200",
-                                         "Date": "\(date)",
-                                         "x-okta-request-id": requestId])
+                                         "Date": "\(date)"])
         urlSession.expect("https://example.okta.com/oauth2/v1/token",
                           data: try data(from: .module, for: "token", in: "MockResponses"),
                           statusCode: 429,
@@ -260,8 +216,7 @@ class ApiRetryTests: XCTestCase {
                           headerFields: ["x-rate-limit-limit": "0",
                                          "x-rate-limit-remaining": "0",
                                          "x-rate-limit-reset": "1609459200",
-                                         "Date": "\(date)",
-                                         "x-okta-request-id": requestId])
+                                         "Date": "\(date)"])
         urlSession.expect("https://example.okta.com/oauth2/v1/token",
                           data: try data(from: .module, for: "token", in: "MockResponses"),
                           statusCode: 429,
@@ -269,8 +224,7 @@ class ApiRetryTests: XCTestCase {
                           headerFields: ["x-rate-limit-limit": "0",
                                          "x-rate-limit-remaining": "0",
                                          "x-rate-limit-reset": "1609459200",
-                                         "Date": "\(date)",
-                                         "x-okta-request-id": requestId])
+                                         "Date": "\(date)"])
         
         urlSession.expect("https://example.okta.com/oauth2/v1/token",
                           data: try data(from: .module, for: "token", in: "MockResponses"),
@@ -279,8 +233,7 @@ class ApiRetryTests: XCTestCase {
                           headerFields: ["x-rate-limit-limit": "0",
                                          "x-rate-limit-remaining": "0",
                                          "x-rate-limit-reset": "1609459200",
-                                         "Date": "\(date)",
-                                         "x-okta-request-id": requestId])
+                                         "Date": "\(date)"])
         
         urlSession.expect("https://example.okta.com/oauth2/v1/token",
                           data: try data(from: .module, for: "token", in: "MockResponses"),
@@ -289,8 +242,7 @@ class ApiRetryTests: XCTestCase {
                           headerFields: ["x-rate-limit-limit": "0",
                                          "x-rate-limit-remaining": "0",
                                          "x-rate-limit-reset": "1609459200",
-                                         "Date": "\(date)",
-                                         "x-okta-request-id": requestId])
+                                         "Date": "\(date)"])
         urlSession.expect("https://example.okta.com/oauth2/v1/token",
                           data: try data(from: .module, for: "token", in: "MockResponses"),
                           statusCode: 429,
@@ -298,8 +250,7 @@ class ApiRetryTests: XCTestCase {
                           headerFields: ["x-rate-limit-limit": "0",
                                          "x-rate-limit-remaining": "0",
                                          "x-rate-limit-reset": "1609459200",
-                                         "Date": "\(date)",
-                                         "x-okta-request-id": requestId])
+                                         "Date": "\(date)"])
         
         let expect = expectation(description: "network request")
         apiRequest.send(to: client, completion: { result in
@@ -316,7 +267,6 @@ class ApiRetryTests: XCTestCase {
         }
         
         XCTAssertEqual(client.request?.allHTTPHeaderFields?["X-Okta-Retry-Count"], "5")
-        XCTAssertEqual(client.request?.allHTTPHeaderFields?["X-Okta-Retry-For"], requestId)
     }
     
     func testApiRateLimit() throws {

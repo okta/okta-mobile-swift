@@ -16,7 +16,7 @@ import Foundation
 struct MockApiRequest: APIRequest {
     var url: URL
     typealias ResponseType = Token
-    
+
     init(url: URL) {
         self.url = url
     }
