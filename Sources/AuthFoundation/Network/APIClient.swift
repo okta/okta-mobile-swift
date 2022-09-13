@@ -63,7 +63,7 @@ public protocol APIClient {
     /// Send the given URLRequest.
     func send<T: Decodable>(_ request: URLRequest, parsing context: APIParsingContext?, completion: @escaping (Result<APIResponse<T>, APIClientError>) -> Void)
     
-    /// Provides the APIRetry configurations from the delegate in responds to a retry request.
+    /// Provides the ``APIRetry`` configurations from the delegate in response to a retry request.
     func shouldRetry(request: URLRequest, rateLimit: ApiRateLimit) -> APIRetry
 }
 
