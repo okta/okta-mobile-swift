@@ -79,6 +79,30 @@ class APIRetryTests: XCTestCase {
         XCTAssertEqual(rateLimit?.delay, 59.0)
     }
     
+    func testMissingResetHeader() throws {
+        urlSession.expect("https://example.okta.com/oauth2/v1/token",
+                          data: try data(from: .module, for: "token", in: "MockResponses"),
+                          statusCode: 429,
+                          contentType: "application/json",
+                          headerFields: ["x-rate-limit-limit": "0",
+                                         "x-rate-limit-remaining": "0",
+                                         "x-okta-request-id": requestId])
+        
+        let expect = expectation(description: "network request")
+        apiRequest.send(to: client, completion: { result in
+            guard case .failure(let error) = result else {
+                XCTFail()
+                return
+            }
+            XCTAssertEqual(error.localizedDescription, APIClientError.statusCode(429).localizedDescription)
+            expect.fulfill()
+        })
+        
+        waitForExpectations(timeout: 1.0) { error in
+            XCTAssertNil(error)
+        }
+    }
+    
     func performRetryRequest(count: Int, isSuccess: Bool = false) throws {
         let date = Date()
         for _ in 0..<count {
