@@ -16,6 +16,7 @@ import Foundation
 public struct APIResponse<T: Decodable>: Decodable {
     @available(*, deprecated, renamed: "APIRateLimit")
     public typealias RateLimit = APIRateLimit
+    
     /// Links between response resources.
     public enum Link: String, Codable {
         case current = "self", next, previous

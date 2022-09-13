@@ -139,7 +139,6 @@ extension APIClient {
     private func send<T>(_ request: URLRequest,
                          parsing context: APIParsingContext? = nil,
                          state: APIRetry.State?,
-                         queue: DispatchQueue = .global(),
                          completion: @escaping (Result<APIResponse<T>, APIClientError>) -> Void) {
         var urlRequest = request
         willSend(request: &urlRequest)
@@ -203,7 +202,7 @@ extension APIClient {
                         
                         let urlRequest = addRetryHeadersToRequest(state: retryState)
                         
-                        queue.asyncAfter(deadline: .now() + rateInfo.delay) {
+                        DispatchQueue.global().asyncAfter(deadline: .now() + rateInfo.delay) {
                             self.send(urlRequest, parsing: context, state: retryState, completion: completion)
                         }
                         return
