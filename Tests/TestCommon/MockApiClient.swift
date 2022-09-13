@@ -57,7 +57,7 @@ class MockApiClient: APIClient {
         self.request = request
     }
     
-    func shouldRetry(request: URLRequest, rateLimit: ApiRateLimit) -> APIRetry {
+    func shouldRetry(request: URLRequest, rateLimit: APIRateLimit) -> APIRetry {
         return shouldRetry
     }
 }

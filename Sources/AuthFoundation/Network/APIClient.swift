@@ -64,7 +64,7 @@ public protocol APIClient {
     func send<T: Decodable>(_ request: URLRequest, parsing context: APIParsingContext?, completion: @escaping (Result<APIResponse<T>, APIClientError>) -> Void)
     
     /// Provides the ``APIRetry`` configurations from the delegate in response to a retry request.
-    func shouldRetry(request: URLRequest, rateLimit: ApiRateLimit) -> APIRetry
+    func shouldRetry(request: URLRequest, rateLimit: APIRateLimit) -> APIRetry
 }
 
 /// Protocol that delegates of APIClient instances can conform to.
@@ -94,10 +94,10 @@ extension APIClientDelegate {
 /// List of retry options
 public enum APIRetry {
     case doNotRetry
-    case retry(maximumRetryCount: Int)
+    case retry(maximumCount: Int)
     
     /// The default retry option.
-    public static let `default` = APIRetry.retry(maximumRetryCount: 3)
+    public static let `default` = APIRetry.retry(maximumCount: 3)
     
     struct State {
         let type: APIRetry
@@ -134,7 +134,7 @@ extension APIClient {
         send(request, parsing: context, state: nil, completion: completion)
     }
     
-    public func shouldRetry(request: URLRequest, rateLimit: ApiRateLimit) -> APIRetry { .default }
+    public func shouldRetry(request: URLRequest, rateLimit: APIRateLimit) -> APIRetry { .default }
     
     private func send<T>(_ request: URLRequest,
                          parsing context: APIParsingContext? = nil,
@@ -163,7 +163,7 @@ extension APIClient {
                     throw APIClientError.invalidResponse
                 }
                 
-                let rateInfo = ApiRateLimit(with: httpResponse.allHeaderFields)
+                let rateInfo = APIRateLimit(with: httpResponse.allHeaderFields)
                 switch httpResponse.statusCode {
                 case 200..<300:
                     let response: APIResponse<T> = try self.validate(data: data,
@@ -177,9 +177,10 @@ extension APIClient {
                         fallthrough
                     }
                     let retry = state?.type ?? self.shouldRetry(request: request, rateLimit: rateInfo)
+                    
                     switch retry {
                     case .doNotRetry: break
-                    case .retry(let maximumRetryCount):
+                    case .retry(let maximumCount):
                         let retryState: APIRetry.State
                         if let state = state {
                             retryState = state.nextState()
@@ -188,15 +189,20 @@ extension APIClient {
                             if let requestIdHeader = requestIdHeader {
                                 requestId = httpResponse.allHeaderFields[requestIdHeader] as? String
                             }
+                            
                             retryState = APIRetry.State(type: retry,
                                                         requestId: requestId,
                                                         originalRequest: request,
                                                         retryCount: 1)
                         }
-                        guard retryState.retryCount <= maximumRetryCount else {
+                        
+                        // Fall-through to the default case if the maximum retry attempt has been reached.
+                        guard retryState.retryCount <= maximumCount else {
                             break
                         }
+                        
                         let urlRequest = addRetryHeadersToRequest(state: retryState)
+                        
                         queue.asyncAfter(deadline: .now() + rateInfo.delay) {
                             self.send(urlRequest, parsing: context, state: retryState, completion: completion)
                         }
@@ -255,7 +261,7 @@ extension APIClient {
         return links
     }
     
-    private func validate<T>(data: Data, response: HTTPURLResponse, rateInfo: ApiRateLimit?, parsing context: APIParsingContext? = nil) throws -> APIResponse<T> {
+    private func validate<T>(data: Data, response: HTTPURLResponse, rateInfo: APIRateLimit?, parsing context: APIParsingContext? = nil) throws -> APIResponse<T> {
         var requestId: String? = nil
         if let requestIdHeader = requestIdHeader {
             requestId = response.allHeaderFields[requestIdHeader] as? String
