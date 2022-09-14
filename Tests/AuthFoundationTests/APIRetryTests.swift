@@ -104,7 +104,7 @@ class APIRetryTests: XCTestCase {
     }
     
     func performRetryRequest(count: Int, isSuccess: Bool = false) throws {
-        let date = Date()
+        let date = "Fri, 09 Sep 2022 02:22:14 GMT"
         for _ in 0..<count {
             urlSession.expect("https://example.okta.com/oauth2/v1/token",
                               data: try data(from: .module, for: "token", in: "MockResponses"),

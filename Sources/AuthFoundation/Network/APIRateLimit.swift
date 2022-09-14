@@ -32,7 +32,9 @@ public struct APIRateLimit: Decodable {
               let remainingString = httpHeaders["x-rate-limit-remaining"] as? String,
               let remaining = Int(remainingString),
               let resetString = httpHeaders["x-rate-limit-reset"] as? String,
-              let reset = TimeInterval(resetString)
+              let reset = TimeInterval(resetString),
+              let dateString = httpHeaders["Date"] as? String,
+              let date = httpDateFormatter.date(from: dateString)
         else {
             return nil
         }
@@ -40,12 +42,6 @@ public struct APIRateLimit: Decodable {
         self.limit = rateLimit
         self.remaining = remaining
         self.reset = reset
-       
-        var date: Date? = nil
-        if let dateString = httpHeaders["Date"] as? String {
-            date = httpDateFormatter.date(from: dateString)
-        }
-        
-        self.delay = reset - (date ?? Date.nowCoordinated).timeIntervalSince1970
+        self.delay = reset - date.timeIntervalSince1970
     }
 }
