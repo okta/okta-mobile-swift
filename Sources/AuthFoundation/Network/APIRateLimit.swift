@@ -23,6 +23,7 @@ public struct APIRateLimit: Decodable {
     /// The time offset from UTC when the rate limit will reset, and a request may be retried.
     public let reset: TimeInterval
     
+    /// The calculated delay from the reset limit and the date header.
     public let delay: TimeInterval
     
     init?(with httpHeaders: [AnyHashable: Any]) {
