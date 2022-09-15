@@ -123,7 +123,7 @@
         },
         {
           "code" : [
-            "let token = try await WebAuthentication.shared.signIn(from: view.window)"
+            "let token = try await WebAuthentication.shared?.signIn(from: view.window)"
           ],
           "syntax" : "swift",
           "type" : "codeListing"
