@@ -35,5 +35,4 @@ if [[ -f Samples/Shared/Okta.plist ]]; then
     checkPlist "clientId"          "{clientId}"
     checkPlist "issuer"            "https://{orgDomain}/oauth2/default"
     checkPlist "redirectUri"       "{appScheme}:/callback"
-    checkPlist "logoutRedirectUri" "{appScheme}:/"
 fi

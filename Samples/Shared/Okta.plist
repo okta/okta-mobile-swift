@@ -13,13 +13,13 @@ See the License for the specific language governing permissions and limitations 
 -->
 <plist version="1.0">
 <dict>
-    <key>scopes</key>
-    <string>openid profile offline_access</string>
-    <key>redirectUri</key>
-    <string>{redirectUri}</string>
-    <key>clientId</key>
-    <string>{clientId}</string>
-    <key>issuer</key>
-    <string>{issuer}</string>
+	<key>issuer</key>
+	<string>https://{orgDomain}/oauth2/default</string>
+	<key>clientId</key>
+	<string>{clientId}</string>
+	<key>scopes</key>
+	<string>openid profile offline_access</string>
+	<key>redirectUri</key>
+	<string>{appScheme}:/callback</string>
 </dict>
 </plist>

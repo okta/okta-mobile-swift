@@ -1,6 +1,11 @@
 # Embedded Auth with SDKs
 
-## Introduction
+## Abstract
+
+Add native sign in to a mobile application that leverages the Okta Identity Engine to support server-driven policy decisions for authenticating users.
+
+## Overview
+
 > :grey_exclamation: This Sample uses an SDK that requires usage of the Okta Identity Engine. 
 This functionality is in [General Availability](https://developer.okta.com/docs/reference/releases-at-okta/#general-availability-ga) but is being gradually rolled out to customers. If you want to gain access to the Okta Identity Engine, please reach out to your account manager. If you 
 do not have an account manager, please reach out to oie@okta.com for more information.
@@ -8,7 +13,9 @@ do not have an account manager, please reach out to oie@okta.com for more inform
 This Sample Application will show you the best practices for integrating Authentication into your app
 using [Okta's Identity Engine](https://developer.okta.com/docs/guides/oie-intro/). Specifically, this 
 application will cover some basic use cases to get you up and running quickly with Okta.
+
 These examples are:
+
 1. Sign In
 2. Sign Out
 3. Sign Up

@@ -138,7 +138,7 @@
 		962A81B12677C942003BC5E7 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		964D59ED2657121000DDBCBB /* Notifications.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Notifications.swift; sourceTree = "<group>"; };
 		964D59F126580AA600DDBCBB /* SigninCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SigninCoordinator.swift; sourceTree = "<group>"; };
-		964D59FB26580E3300DDBCBB /* Okta.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Okta.plist; sourceTree = "<group>"; };
+		964D59FB26580E3300DDBCBB /* Okta.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Okta.plist; path = ../../Shared/Okta.plist; sourceTree = "<group>"; };
 		964D5A02265819A900DDBCBB /* ProfileTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileTableViewController.swift; sourceTree = "<group>"; };
 		964F744F25A3E5F0003EE300 /* EmbeddedAuth.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = EmbeddedAuth.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		964F745225A3E5F0003EE300 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -184,7 +184,7 @@
 		96ADA06025B0D173008BF50D /* FormRows.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormRows.swift; sourceTree = "<group>"; };
 		96ADA06625B0F5D5008BF50D /* IDXLabelTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IDXLabelTableViewCell.swift; sourceTree = "<group>"; };
 		96ADA06C25B111AA008BF50D /* IDXMessageTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IDXMessageTableViewCell.swift; sourceTree = "<group>"; };
-		96C51E7E25BA578F007A2519 /* TestCredentials.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; name = TestCredentials.xcconfig; path = ../Shared/TestCredentials.xcconfig; sourceTree = "<group>"; };
+		96C51E7E25BA578F007A2519 /* TestConfiguration.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; name = TestConfiguration.xcconfig; path = ../Shared/TestConfiguration.xcconfig; sourceTree = "<group>"; };
 		96C51E9225BA591F007A2519 /* SelfServiceRegistrationScenarioTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelfServiceRegistrationScenarioTests.swift; sourceTree = "<group>"; };
 		96D82B7E2763D70700F8C622 /* AccountUnlockScenarioTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountUnlockScenarioTests.swift; sourceTree = "<group>"; };
 		96D82B802763DF3000F8C622 /* AccountUnlockScenarioValidator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountUnlockScenarioValidator.swift; sourceTree = "<group>"; };
@@ -271,7 +271,7 @@
 				964F745025A3E5F0003EE300 /* Products */,
 				964F748525A3E602003EE300 /* Frameworks */,
 				964FE4A92860D43A00946727 /* SampleCode.xcconfig */,
-				96C51E7E25BA578F007A2519 /* TestCredentials.xcconfig */,
+				96C51E7E25BA578F007A2519 /* TestConfiguration.xcconfig */,
 			);
 			sourceTree = "<group>";
 		};
@@ -858,7 +858,7 @@
 		};
 		964F747A25A3E5F3003EE300 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 96C51E7E25BA578F007A2519 /* TestCredentials.xcconfig */;
+			baseConfigurationReference = 96C51E7E25BA578F007A2519 /* TestConfiguration.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -878,7 +878,7 @@
 		};
 		964F747B25A3E5F3003EE300 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 96C51E7E25BA578F007A2519 /* TestCredentials.xcconfig */;
+			baseConfigurationReference = 96C51E7E25BA578F007A2519 /* TestConfiguration.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -940,7 +940,7 @@
 		};
 		964F748025A3E5F3003EE300 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 96C51E7E25BA578F007A2519 /* TestCredentials.xcconfig */;
+			baseConfigurationReference = 96C51E7E25BA578F007A2519 /* TestConfiguration.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
@@ -964,7 +964,7 @@
 		};
 		964F748125A3E5F3003EE300 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 96C51E7E25BA578F007A2519 /* TestCredentials.xcconfig */;
+			baseConfigurationReference = 96C51E7E25BA578F007A2519 /* TestConfiguration.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
