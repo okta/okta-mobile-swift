@@ -136,7 +136,7 @@ class APIRetryTests: XCTestCase {
             }
             expect.fulfill()
         })
-        waitForExpectations(timeout: 2.0) { error in
+        waitForExpectations(timeout: 9.0) { error in
             XCTAssertNil(error)
         }
     }
