@@ -195,14 +195,14 @@ extension APIClient {
                                                         retryCount: 1)
                         }
                         
-                        // Fall-through to the default case if the maximum retry attempt has been reached.
-                        guard retryState.retryCount <= maximumCount else {
+                        // Fall-through to the default case if the maximum retry attempt has been reached and if the delay can not be calculated.
+                        guard retryState.retryCount <= maximumCount, let delay = rateInfo.delay else {
                             break
                         }
                         
                         let urlRequest = addRetryHeadersToRequest(state: retryState)
                         
-                        DispatchQueue.global().asyncAfter(deadline: .now() + rateInfo.delay) {
+                        DispatchQueue.global().asyncAfter(deadline: .now() + delay) {
                             self.send(urlRequest, parsing: context, state: retryState, completion: completion)
                         }
                         return

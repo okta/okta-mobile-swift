@@ -24,7 +24,7 @@ public struct APIRateLimit: Decodable {
     public let reset: TimeInterval
     
     /// The calculated delay from the reset limit and the date header.
-    public let delay: TimeInterval
+    public let delay: TimeInterval?
     
     init?(with httpHeaders: [AnyHashable: Any]) {
         guard let rateLimitString = httpHeaders["x-rate-limit-limit"] as? String,
@@ -42,6 +42,7 @@ public struct APIRateLimit: Decodable {
         self.limit = rateLimit
         self.remaining = remaining
         self.reset = reset
-        self.delay = reset - date.timeIntervalSince1970
+        let calculatedDelay = reset - date.timeIntervalSince1970
+        self.delay = max(calculatedDelay, TimeInterval(1))
     }
 }
