@@ -15,7 +15,7 @@ The sample contains two different targets:
 
 ## Configuring the App
 
-Update the `WebSignIn (iOS) > WebSignIn > Okta.plist` file with the information for your Okta Org Application Integration. See the [Readme in the Shared folder](../Shared/README#okta_property_list) for a the definition of the keys in Okta property list file.
+Update the `WebSignIn (iOS) > WebSignIn > Okta.plist` file with the information for your Okta Org Application Integration. See the [Readme in the Shared folder](../Shared/README.md#okta_property_list) for a the definition of the keys in Okta property list file.
 
 > **IMPORTANT:** This sample requires a value for the optional `logoutRedirectUri`key. The `device_sso` scope should be included if you wish to try the SingleSignOn sample app.
    
