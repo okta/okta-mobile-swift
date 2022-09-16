@@ -14,6 +14,9 @@ import Foundation
 
 /// Describes a response from an Okta request, which includes the supplied result, and other associated response metadata.
 public struct APIResponse<T: Decodable>: Decodable {
+    @available(*, deprecated, renamed: "APIRateLimit")
+    public typealias RateLimit = APIRateLimit
+    
     /// Links between response resources.
     public enum Link: String, Codable {
         case current = "self", next, previous
@@ -29,39 +32,10 @@ public struct APIResponse<T: Decodable>: Decodable {
     public let links: [Link: URL]
     
     /// Information about the current rate limit.
-    public let rateInfo: RateLimit?
+    public let rateInfo: APIRateLimit?
     
     /// The ID for the current request.
     public let requestId: String?
-    
-    /// Describes information related to the organization's current rate limit.
-    public struct RateLimit: Decodable {
-        /// The current limit.
-        public let limit: Int
-        
-        /// The rate limit remaining.
-        public let remaining: Int
-
-        /// The time offset from UTC when the rate limit will reset, and a request may be retried.
-        public let reset: TimeInterval
-        
-        init?(with httpHeaders: [AnyHashable: Any]) {
-            guard let rateLimitString = httpHeaders["x-rate-limit-limit"] as? String,
-                  let rateLimit = Int(rateLimitString),
-                  let remainingString = httpHeaders["x-rate-limit-remaining"] as? String,
-                  let remaining = Int(remainingString),
-                  let resetString = httpHeaders["x-rate-limit-reset"] as? String,
-                  let reset = TimeInterval(resetString)
-            else {
-                return nil
-            }
-            
-            self.limit = rateLimit
-            self.remaining = remaining
-            self.reset = reset
-        }
-    }
-    
 }
 
 /// Describes an empty server response when a ``APIResponse`` is received without a response body.

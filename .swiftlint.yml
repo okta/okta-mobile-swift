@@ -76,7 +76,7 @@ empty_string:
   severity: error
 
 closure_body_length:
-  warning: 50
+  warning: 70
   error: 100
 closure_end_indentation:
   severity: error
@@ -109,7 +109,7 @@ anyobject_protocol:
 class_delegate_protocol:
   severity: error
 cyclomatic_complexity:
-  warning: 10
+  warning: 20
   error: 30
 
 # Paths to ignore

@@ -43,12 +43,14 @@ class URLSessionMock: URLSessionProtocol {
                 data: Data?,
                 statusCode: Int = 200,
                 contentType: String = "application/x-www-form-urlencoded",
+                headerFields: [String : String]? = nil,
                 error: Error? = nil)
     {
+        let headerFields = ["Content-Type": contentType].merging(headerFields ?? [:]){ (_, new) in new }
         let response = HTTPURLResponse(url: URL(string: url)!,
                                        statusCode: statusCode,
                                        httpVersion: "http/1.1",
-                                       headerFields: ["Content-Type": contentType])
+                                       headerFields: headerFields)
         
         expect(call: Call(url: url,
                           data: data,
