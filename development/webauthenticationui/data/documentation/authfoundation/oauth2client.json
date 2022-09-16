@@ -153,6 +153,7 @@
         "doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/AuthFoundation\/OAuth2Client\/revoke(_:type:completion:)",
         "doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/AuthFoundation\/OAuth2Client\/sessionLogoutFlow(logoutRedirectUri:)",
         "doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/AuthFoundation\/OAuth2Client\/sessionTokenFlow(redirectUri:additionalParameters:)",
+        "doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/AuthFoundation\/OAuth2Client\/shouldRetry(request:)",
         "doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/AuthFoundation\/OAuth2Client\/tokenExchangeFlow(audience:)",
         "doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/AuthFoundation\/OAuth2Client\/userInfo(token:completion:)"
       ],
@@ -2026,6 +2027,57 @@
   "title" : "sessionTokenFlow(redirectUri:additionalParameters:)",
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/oauth2client\/sessiontokenflow(redirecturi:additionalparameters:)"
+},
+"doc://com.okta.mobile.webauthenticationui/documentation/AuthFoundation/OAuth2Client/shouldRetry(request:)": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "func"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "shouldRetry"
+    },
+    {
+      "kind" : "text",
+      "text" : "("
+    },
+    {
+      "kind" : "externalParam",
+      "text" : "request"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:10Foundation10URLRequestV",
+      "text" : "URLRequest"
+    },
+    {
+      "kind" : "text",
+      "text" : ") -> "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:14AuthFoundation8APIRetryO",
+      "text" : "APIRetry"
+    }
+  ],
+  "identifier" : "doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/AuthFoundation\/OAuth2Client\/shouldRetry(request:)",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "shouldRetry(request:)",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/oauth2client\/shouldretry(request:)"
 },
 "doc://com.okta.mobile.webauthenticationui/documentation/AuthFoundation/OAuth2Client/tokenExchangeFlow(audience:)": {
   "abstract" : [

@@ -1,7 +1,7 @@
 {
   "abstract" : [
     {
-      "text" : "Describes information related to the organization’s current rate limit.",
+      "text" : "No overview available.",
       "type" : "text"
     }
   ],
@@ -19,11 +19,11 @@
   },
   "kind" : "symbol",
   "metadata" : {
-    "externalID" : "s:14AuthFoundation11APIResponseV9RateLimitV",
+    "externalID" : "s:14AuthFoundation11APIResponseV9RateLimita",
     "fragments" : [
       {
         "kind" : "keyword",
-        "text" : "struct"
+        "text" : "typealias"
       },
       {
         "kind" : "text",
@@ -45,9 +45,12 @@
         "text" : "RateLimit"
       }
     ],
+    "platforms" : [
+
+    ],
     "role" : "symbol",
-    "roleHeading" : "Structure",
-    "symbolKind" : "struct",
+    "roleHeading" : "Type Alias",
+    "symbolKind" : "typealias",
     "title" : "APIResponse.RateLimit"
   },
   "primaryContentSections" : [
@@ -63,7 +66,7 @@
           "tokens" : [
             {
               "kind" : "keyword",
-              "text" : "struct"
+              "text" : "typealias"
             },
             {
               "kind" : "text",
@@ -72,21 +75,21 @@
             {
               "kind" : "identifier",
               "text" : "RateLimit"
+            },
+            {
+              "kind" : "text",
+              "text" : " = "
+            },
+            {
+              "identifier" : "doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/AuthFoundation\/APIRateLimit",
+              "kind" : "typeIdentifier",
+              "preciseIdentifier" : "s:14AuthFoundation12APIRateLimitV",
+              "text" : "APIRateLimit"
             }
           ]
         }
       ],
       "kind" : "declarations"
-    }
-  ],
-  "relationshipsSections" : [
-    {
-      "identifiers" : [
-        "doc:\/\/com.okta.mobile.oktaoauth2\/Se"
-      ],
-      "kind" : "relationships",
-      "title" : "Conforms To",
-      "type" : "conformsTo"
     }
   ],
   "schemaVersion" : {
@@ -96,22 +99,6 @@
   },
   "sections" : [
 
-  ],
-  "topicSections" : [
-    {
-      "identifiers" : [
-        "doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/AuthFoundation\/APIResponse\/RateLimit\/init(from:)"
-      ],
-      "title" : "Initializers"
-    },
-    {
-      "identifiers" : [
-        "doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/AuthFoundation\/APIResponse\/RateLimit\/limit",
-        "doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/AuthFoundation\/APIResponse\/RateLimit\/remaining",
-        "doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/AuthFoundation\/APIResponse\/RateLimit\/reset"
-      ],
-      "title" : "Instance Properties"
-    }
   ],
   "variants" : [
     {
@@ -127,11 +114,6 @@
   ]
 , 
 "references": {
-"doc://com.okta.mobile.oktaoauth2/Se": {
-  "identifier" : "doc:\/\/com.okta.mobile.oktaoauth2\/Se",
-  "title" : "Swift.Decodable",
-  "type" : "unresolvable"
-},
 "doc://com.okta.mobile.oktaoauth2/documentation/AuthFoundation": {
   "abstract" : [
 
@@ -142,6 +124,40 @@
   "title" : "AuthFoundation",
   "type" : "topic",
   "url" : "\/documentation\/authfoundation"
+},
+"doc://com.okta.mobile.oktaoauth2/documentation/AuthFoundation/APIRateLimit": {
+  "abstract" : [
+    {
+      "text" : "Describes information related to the organization’s current rate limit.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "struct"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "APIRateLimit"
+    }
+  ],
+  "identifier" : "doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/AuthFoundation\/APIRateLimit",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "APIRateLimit"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "APIRateLimit",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/apiratelimit"
 },
 "doc://com.okta.mobile.oktaoauth2/documentation/AuthFoundation/APIResponse": {
   "abstract" : [
@@ -179,15 +195,13 @@
 },
 "doc://com.okta.mobile.oktaoauth2/documentation/AuthFoundation/APIResponse/RateLimit": {
   "abstract" : [
-    {
-      "text" : "Describes information related to the organization’s current rate limit.",
-      "type" : "text"
-    }
+
   ],
+  "deprecated" : true,
   "fragments" : [
     {
       "kind" : "keyword",
-      "text" : "struct"
+      "text" : "typealias"
     },
     {
       "kind" : "text",
@@ -210,162 +224,6 @@
   "title" : "APIResponse.RateLimit",
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/apiresponse\/ratelimit"
-},
-"doc://com.okta.mobile.oktaoauth2/documentation/AuthFoundation/APIResponse/RateLimit/init(from:)": {
-  "abstract" : [
-    {
-      "text" : "Creates a new instance by decoding from the given decoder.",
-      "type" : "text"
-    }
-  ],
-  "fragments" : [
-    {
-      "kind" : "identifier",
-      "text" : "init"
-    },
-    {
-      "kind" : "text",
-      "text" : "("
-    },
-    {
-      "kind" : "externalParam",
-      "text" : "from"
-    },
-    {
-      "kind" : "text",
-      "text" : ": "
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:s7DecoderP",
-      "text" : "Decoder"
-    },
-    {
-      "kind" : "text",
-      "text" : ") "
-    },
-    {
-      "kind" : "keyword",
-      "text" : "throws"
-    }
-  ],
-  "identifier" : "doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/AuthFoundation\/APIResponse\/RateLimit\/init(from:)",
-  "kind" : "symbol",
-  "role" : "symbol",
-  "title" : "init(from:)",
-  "type" : "topic",
-  "url" : "\/documentation\/authfoundation\/apiresponse\/ratelimit\/init(from:)"
-},
-"doc://com.okta.mobile.oktaoauth2/documentation/AuthFoundation/APIResponse/RateLimit/limit": {
-  "abstract" : [
-    {
-      "text" : "The current limit.",
-      "type" : "text"
-    }
-  ],
-  "fragments" : [
-    {
-      "kind" : "keyword",
-      "text" : "let"
-    },
-    {
-      "kind" : "text",
-      "text" : " "
-    },
-    {
-      "kind" : "identifier",
-      "text" : "limit"
-    },
-    {
-      "kind" : "text",
-      "text" : ": "
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:Si",
-      "text" : "Int"
-    }
-  ],
-  "identifier" : "doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/AuthFoundation\/APIResponse\/RateLimit\/limit",
-  "kind" : "symbol",
-  "role" : "symbol",
-  "title" : "limit",
-  "type" : "topic",
-  "url" : "\/documentation\/authfoundation\/apiresponse\/ratelimit\/limit"
-},
-"doc://com.okta.mobile.oktaoauth2/documentation/AuthFoundation/APIResponse/RateLimit/remaining": {
-  "abstract" : [
-    {
-      "text" : "The rate limit remaining.",
-      "type" : "text"
-    }
-  ],
-  "fragments" : [
-    {
-      "kind" : "keyword",
-      "text" : "let"
-    },
-    {
-      "kind" : "text",
-      "text" : " "
-    },
-    {
-      "kind" : "identifier",
-      "text" : "remaining"
-    },
-    {
-      "kind" : "text",
-      "text" : ": "
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:Si",
-      "text" : "Int"
-    }
-  ],
-  "identifier" : "doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/AuthFoundation\/APIResponse\/RateLimit\/remaining",
-  "kind" : "symbol",
-  "role" : "symbol",
-  "title" : "remaining",
-  "type" : "topic",
-  "url" : "\/documentation\/authfoundation\/apiresponse\/ratelimit\/remaining"
-},
-"doc://com.okta.mobile.oktaoauth2/documentation/AuthFoundation/APIResponse/RateLimit/reset": {
-  "abstract" : [
-    {
-      "text" : "The time offset from UTC when the rate limit will reset, and a request may be retried.",
-      "type" : "text"
-    }
-  ],
-  "fragments" : [
-    {
-      "kind" : "keyword",
-      "text" : "let"
-    },
-    {
-      "kind" : "text",
-      "text" : " "
-    },
-    {
-      "kind" : "identifier",
-      "text" : "reset"
-    },
-    {
-      "kind" : "text",
-      "text" : ": "
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "c:@T@NSTimeInterval",
-      "text" : "TimeInterval"
-    }
-  ],
-  "identifier" : "doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/AuthFoundation\/APIResponse\/RateLimit\/reset",
-  "kind" : "symbol",
-  "role" : "symbol",
-  "title" : "reset",
-  "type" : "topic",
-  "url" : "\/documentation\/authfoundation\/apiresponse\/ratelimit\/reset"
 }
 }
 }

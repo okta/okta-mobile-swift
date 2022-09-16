@@ -153,12 +153,6 @@
   "topicSections" : [
     {
       "identifiers" : [
-        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/APIResponse\/RateLimit"
-      ],
-      "title" : "Structures"
-    },
-    {
-      "identifiers" : [
         "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/APIResponse\/init(from:)"
       ],
       "title" : "Initializers"
@@ -172,6 +166,12 @@
         "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/APIResponse\/result"
       ],
       "title" : "Instance Properties"
+    },
+    {
+      "identifiers" : [
+        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/APIResponse\/RateLimit"
+      ],
+      "title" : "Type Aliases"
     },
     {
       "identifiers" : [
@@ -785,15 +785,13 @@
 },
 "doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/APIResponse/RateLimit": {
   "abstract" : [
-    {
-      "text" : "Describes information related to the organization’s current rate limit.",
-      "type" : "text"
-    }
+
   ],
+  "deprecated" : true,
   "fragments" : [
     {
       "kind" : "keyword",
-      "text" : "struct"
+      "text" : "typealias"
     },
     {
       "kind" : "text",
@@ -975,8 +973,8 @@
     },
     {
       "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:14AuthFoundation11APIResponseV9RateLimitV",
-      "text" : "RateLimit"
+      "preciseIdentifier" : "s:14AuthFoundation12APIRateLimitV",
+      "text" : "APIRateLimit"
     },
     {
       "kind" : "text",

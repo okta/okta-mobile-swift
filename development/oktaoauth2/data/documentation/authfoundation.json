@@ -88,6 +88,7 @@
     },
     {
       "identifiers" : [
+        "doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/AuthFoundation\/APIRateLimit",
         "doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/AuthFoundation\/APIResponse",
         "doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/AuthFoundation\/Empty",
         "doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/AuthFoundation\/JWK",
@@ -117,6 +118,7 @@
         "doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/AuthFoundation\/APIClientError",
         "doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/AuthFoundation\/APIContentType",
         "doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/AuthFoundation\/APIRequestMethod",
+        "doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/AuthFoundation\/APIRetry",
         "doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/AuthFoundation\/AuthenticationError",
         "doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/AuthFoundation\/Claim",
         "doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/AuthFoundation\/CredentialError",
@@ -415,6 +417,40 @@
   "title" : "APIParsingContext",
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/apiparsingcontext"
+},
+"doc://com.okta.mobile.oktaoauth2/documentation/AuthFoundation/APIRateLimit": {
+  "abstract" : [
+    {
+      "text" : "Describes information related to the organization’s current rate limit.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "struct"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "APIRateLimit"
+    }
+  ],
+  "identifier" : "doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/AuthFoundation\/APIRateLimit",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "APIRateLimit"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "APIRateLimit",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/apiratelimit"
 },
 "doc://com.okta.mobile.oktaoauth2/documentation/AuthFoundation/APIRequest": {
   "abstract" : [
@@ -723,6 +759,40 @@
   "title" : "APIResponse",
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/apiresponse"
+},
+"doc://com.okta.mobile.oktaoauth2/documentation/AuthFoundation/APIRetry": {
+  "abstract" : [
+    {
+      "text" : "List of retry options",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "enum"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "APIRetry"
+    }
+  ],
+  "identifier" : "doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/AuthFoundation\/APIRetry",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "APIRetry"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "APIRetry",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/apiretry"
 },
 "doc://com.okta.mobile.oktaoauth2/documentation/AuthFoundation/AuthenticationDelegate": {
   "abstract" : [

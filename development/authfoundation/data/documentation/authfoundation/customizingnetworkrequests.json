@@ -524,15 +524,13 @@
 },
 "doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/APIResponse/RateLimit": {
   "abstract" : [
-    {
-      "text" : "Describes information related to the organization’s current rate limit.",
-      "type" : "text"
-    }
+
   ],
+  "deprecated" : true,
   "fragments" : [
     {
       "kind" : "keyword",
-      "text" : "struct"
+      "text" : "typealias"
     },
     {
       "kind" : "text",

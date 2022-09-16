@@ -130,6 +130,7 @@
     {
       "identifiers" : [
         "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/DelegateCollection\/add(_:)",
+        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/DelegateCollection\/call(_:)",
         "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/DelegateCollection\/invoke(_:)",
         "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/DelegateCollection\/remove(_:)"
       ],
@@ -232,6 +233,70 @@
   "title" : "add(_:)",
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/delegatecollection\/add(_:)"
+},
+"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/DelegateCollection/call(_:)": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "func"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "call"
+    },
+    {
+      "kind" : "text",
+      "text" : "<"
+    },
+    {
+      "kind" : "genericParameter",
+      "text" : "T"
+    },
+    {
+      "kind" : "text",
+      "text" : ">(("
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:14AuthFoundation18DelegateCollectionC1Dxmfp",
+      "text" : "D"
+    },
+    {
+      "kind" : "text",
+      "text" : ") -> "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:14AuthFoundation18DelegateCollectionC4callySayqd__Gqd__xXElF1TL_qd__mfp",
+      "text" : "T"
+    },
+    {
+      "kind" : "text",
+      "text" : ") -> ["
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:14AuthFoundation18DelegateCollectionC4callySayqd__Gqd__xXElF1TL_qd__mfp",
+      "text" : "T"
+    },
+    {
+      "kind" : "text",
+      "text" : "]"
+    }
+  ],
+  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/DelegateCollection\/call(_:)",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "call(_:)",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/delegatecollection\/call(_:)"
 },
 "doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/DelegateCollection/init()": {
   "abstract" : [

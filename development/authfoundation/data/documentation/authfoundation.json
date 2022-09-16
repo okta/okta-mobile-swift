@@ -236,9 +236,21 @@
     },
     {
       "identifiers" : [
+        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/APIRateLimit"
+      ],
+      "title" : "Structures"
+    },
+    {
+      "identifiers" : [
         "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/Version"
       ],
       "title" : "Variables"
+    },
+    {
+      "identifiers" : [
+        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/APIRetry"
+      ],
+      "title" : "Enumerations"
     }
   ],
   "variants" : [
@@ -530,6 +542,40 @@
   "title" : "APIParsingContext",
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/apiparsingcontext"
+},
+"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/APIRateLimit": {
+  "abstract" : [
+    {
+      "text" : "Describes information related to the organization’s current rate limit.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "struct"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "APIRateLimit"
+    }
+  ],
+  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/APIRateLimit",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "APIRateLimit"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "APIRateLimit",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/apiratelimit"
 },
 "doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/APIRequest": {
   "abstract" : [
@@ -838,6 +884,40 @@
   "title" : "APIResponse",
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/apiresponse"
+},
+"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/APIRetry": {
+  "abstract" : [
+    {
+      "text" : "List of retry options",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "enum"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "APIRetry"
+    }
+  ],
+  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/APIRetry",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "APIRetry"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "APIRetry",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/apiretry"
 },
 "doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/AuthenticationDelegate": {
   "abstract" : [
