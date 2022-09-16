@@ -293,6 +293,29 @@ if let credential = try Credential.find(where: { $0.email == "user@example.com" 
 }
 ```
 
+### Rate Limit Handling
+
+The Okta API will return 429 responses if too many requests are made within a given time. Please see [Rate Limiting at Okta](https://developer.okta.com/docs/api/getting_started/rate-limits) for a complete
+list of which endpoints are rate limited. This SDK automatically retries requests on 429 errors. The default configuration is as follows:
+
+| Configuration Option | Description |
+| ---------------------- | -------------- |
+| maximumCount         | The number of times to retry. The default value is `3`. |
+
+#### Configuring retry parameters
+
+To configure the retry parameters, extend the `OAuth2Client` and override the `shouldRetry` functions. This intercepts any request with a 429 status code. The `APIRetry` enum provides options to enable or disable the retry behaviour either using the default configuration or by providing a custom retry count value `retry(maximumCount: Int)`.
+
+```swift
+import AuthFoundation
+
+extension OAuth2Client {
+    public func shouldRetry(request: URLRequest, rateLimit: APIRateLimit) -> APIRetry {
+        // Specify the APIRetry option
+    }
+}
+```
+
 ## Migration from legacy SDKs
 
 This collection of SDKs intend to replace the following SDKs:
