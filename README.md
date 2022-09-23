@@ -302,19 +302,26 @@ list of which endpoints are rate limited. This SDK automatically retries request
 | ---------------------- | -------------- |
 | maximumCount         | The number of times to retry. The default value is `3`. |
 
-#### Configuring retry parameters
+#### Customizing Rate Limit 
 
-To configure the retry parameters, extend the `OAuth2Client` and override the `shouldRetry` functions. This intercepts any request with a 429 status code. The `APIRetry` enum provides options to enable or disable the retry behaviour either using the default configuration or by providing a custom retry count value `retry(maximumCount: Int)`.
+To customize how rate limit is handled, conform to the `APIClientDelegate` protocol, implement the `shouldRetry(request:rateLimit:)` method, and add your class as a delegate for the appropriate client. When any request sent through that client receives an HTTP 429 error response, it will allow you to customize the rate limit behavior.
 
 ```swift
 import AuthFoundation
 
+func login() {
+    // Configure your authentication flow, before running the following command
+    flow.client.add(delegate: self)
+}
+
 extension OAuth2Client {
-    public func shouldRetry(request: URLRequest, rateLimit: APIRateLimit) -> APIRetry {
-        // Specify the APIRetry option
+    public func api(client: APIClient, shouldRetry request: URLRequest) -> APIRetry {
+        return .doNotRetry
     }
 }
 ```
+
+For more information, refer to the API documentation for the `APIRetry` enumeration.
 
 ## Migration from legacy SDKs
 

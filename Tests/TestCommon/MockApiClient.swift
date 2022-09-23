@@ -17,13 +17,14 @@ class MockApiClient: APIClient {
     var baseURL: URL
     var session: URLSessionProtocol
     let configuration: APIClientConfiguration
-    let shouldRetry: APIRetry
+    let shouldRetry: APIRetry?
     var request: URLRequest?
+    var delegate: APIClientDelegate?
     
     init(configuration: APIClientConfiguration,
          session: URLSessionProtocol,
          baseURL: URL,
-         shouldRetry: APIRetry = .default) {
+         shouldRetry: APIRetry? = nil) {
         self.configuration = configuration
         self.session = session
         self.baseURL = baseURL
@@ -50,14 +51,15 @@ class MockApiClient: APIClient {
     
     func didSend(request: URLRequest, received error: APIClientError) {
         self.request = request
+        delegate?.api(client: self, didSend: request, received: error)
     }
-    
     
     func willSend(request: inout URLRequest) {
         self.request = request
+        delegate?.api(client: self, willSend: &request)
     }
     
     func shouldRetry(request: URLRequest, rateLimit: APIRateLimit) -> APIRetry {
-        return shouldRetry
+        shouldRetry ?? delegate?.api(client: self, shouldRetry: request) ?? .default
     }
 }
