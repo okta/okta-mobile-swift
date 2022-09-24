@@ -14,6 +14,21 @@ import XCTest
 @testable import AuthFoundation
 @testable import TestCommon
 
+class APIRetryDelegateRecorder: APIClientDelegate {
+    var response: APIRetry?
+    private(set) var requests: [URLRequest] = []
+
+    func api(client: APIClient, shouldRetry request: URLRequest) -> APIRetry {
+        requests.append(request)
+        return response ?? .default
+    }
+    
+    func reset() {
+        response = nil
+        requests.removeAll()
+    }
+}
+
 class APIRetryTests: XCTestCase {
     var client: MockApiClient!
     let baseUrl = URL(string: "https://example.okta.com/oauth2/v1/token")!
@@ -65,6 +80,27 @@ class APIRetryTests: XCTestCase {
                                    baseURL: baseUrl,
                                    shouldRetry: .retry(maximumCount: 5))
         try performRetryRequest(count: 6)
+        XCTAssertEqual(client.request?.allHTTPHeaderFields?["X-Okta-Retry-Count"], "5")
+        XCTAssertEqual(client.request?.allHTTPHeaderFields?["X-Okta-Retry-For"], requestId)
+    }
+    
+    func testRetryDelegateDoNotRetry() throws {
+        let delegate = APIRetryDelegateRecorder()
+        delegate.response = .doNotRetry
+        client.delegate = delegate
+        
+        try performRetryRequest(count: 1, isSuccess: false)
+        XCTAssertEqual(delegate.requests.count, 1)
+        XCTAssertNil(client.request?.allHTTPHeaderFields?["X-Okta-Retry-Count"])
+    }
+    
+    func testRetryDelegateRetry() throws {
+        let delegate = APIRetryDelegateRecorder()
+        delegate.response = .retry(maximumCount: 5)
+        client.delegate = delegate
+        
+        try performRetryRequest(count: 5, isSuccess: true)
+        XCTAssertEqual(delegate.requests.count, 1)
         XCTAssertEqual(client.request?.allHTTPHeaderFields?["X-Okta-Retry-Count"], "5")
         XCTAssertEqual(client.request?.allHTTPHeaderFields?["X-Okta-Retry-For"], requestId)
     }
