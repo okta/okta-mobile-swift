@@ -103,7 +103,7 @@ final class CredentialCoordinatorImpl: CredentialCoordinator {
     {
         if let defaultTokenId = tokenStorage.defaultTokenID {
             var context: TokenAuthenticationContext?
-            #if canImport(LocalAuthentication)
+            #if canImport(LocalAuthentication) && !os(tvOS)
             context = Credential.Security.standard.context
             #endif
             
