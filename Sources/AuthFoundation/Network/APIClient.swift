@@ -114,6 +114,23 @@ public enum APIRetry {
     }
 }
 
+public enum APIResponseResult {
+    case success
+    case retry
+    case error
+
+    init(statusCode: Int) {
+        switch statusCode {
+        case 200..<300:
+            self = .success
+        case 429:
+            self = .retry
+        default:
+            self = .error
+        }
+    }
+}
+
 extension APIClient {
     public var additionalHttpHeaders: [String: String]? { nil }
     public var requestIdHeader: String? { "x-okta-request-id" }
@@ -163,15 +180,17 @@ extension APIClient {
                 }
                 
                 let rateInfo = APIRateLimit(with: httpResponse.allHeaderFields)
-                switch httpResponse.statusCode {
-                case 200..<300:
+                let responseType = context?.resultType(from: httpResponse) ?? APIResponseResult(statusCode: httpResponse.statusCode)
+                
+                switch responseType {
+                case .success:
                     let response: APIResponse<T> = try self.validate(data: data,
                                                                      response: httpResponse,
                                                                      rateInfo: rateInfo,
                                                                      parsing: context)
                     self.didSend(request: request, received: response)
                     completion(.success(response))
-                case 429:
+                case .retry:
                     guard let rateInfo = rateInfo else {
                         fallthrough
                     }
@@ -208,7 +227,7 @@ extension APIClient {
                         return
                     }
                     fallthrough
-                default:
+                case .error:
                     if let error = error(from: data) ?? context?.error(from: data) {
                         throw APIClientError.serverError(error)
                     } else {
