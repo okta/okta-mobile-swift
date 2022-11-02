@@ -31,6 +31,9 @@ class SafariBrowserProviderTests: ProviderTestBase {
         provider.start(context: nil)
         try waitFor(.authenticateUrl)
 
+        // Wait for the controller to dismiss / deallocate
+        sleep(1)
+        
         XCTAssertNotNil(provider.safariController)
     }
 }
