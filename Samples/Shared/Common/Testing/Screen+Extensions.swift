@@ -46,15 +46,15 @@ extension WebLogin where Self: Screen {
             app.tap()
         }
 
-        guard app.webViews.firstMatch.waitForExistence(timeout: 5) else { return }
+        guard app.webViews.firstMatch.waitForExistence(timeout: .long) else { return }
         
+        let keyboardDoneQuery = app.toolbars.matching(identifier: "Toolbar").buttons["Done"]
+
         if let username = username,
-           app.webViews.textFields.firstMatch.waitForExistence(timeout: 5)
+           app.webViews.textFields.firstMatch.waitForExistence(timeout: .veryLong)
         {
             let field = app.webViews.textFields.element(boundBy: 0)
-            if !field.hasFocus {
-                field.tap()
-            }
+            field.tap()
             
             if !isEphemeral,
                let fieldValue = field.value as? String,
@@ -64,21 +64,22 @@ extension WebLogin where Self: Screen {
             }
             
             field.typeText(username)
+            keyboardDoneQuery.tap()
         }
         
         if let password = password,
            app.webViews.secureTextFields.firstMatch.waitForExistence(timeout: 5)
         {
             let field = app.webViews.secureTextFields.element(boundBy: 0)
-            if !field.hasFocus {
-                field.tap()
-            }
-            
+            field.tap()
             field.typeText(password)
+            keyboardDoneQuery.tap()
         }
         
         if username != nil || password != nil {
-            app.webViews.buttons.firstMatch.tap()
+            let button = app.webViews.buttons["Sign in"]
+            button.waitForExistence(timeout: .short)
+            button.tap()
         }
         
         _ = app.webViews.firstMatch.waitForNonExistence(timeout: .standard)
