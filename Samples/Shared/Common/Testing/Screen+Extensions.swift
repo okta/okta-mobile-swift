@@ -30,20 +30,11 @@ extension WebLogin where Self: Screen {
     }
     
     func login(username: String? = nil, password: String? = nil) {
-        let alertObserver = testCase.addUIInterruptionMonitor(withDescription: "System Dialog") { (alert) -> Bool in
-            alert.buttons["Continue"].tap()
-            return true
-        }
-        
-        defer {
-            testCase.removeUIInterruptionMonitor(alertObserver)
-        }
-
         signInButton.tap()
 
         let isEphemeral = ephemeralSwitch.isOn ?? false
         if !isEphemeral {
-            app.tap()
+            testCase.tapAlertButton(named: "Continue")
         }
 
         guard app.webViews.firstMatch.waitForExistence(timeout: .long) else { return }
@@ -78,7 +69,7 @@ extension WebLogin where Self: Screen {
         
         if username != nil || password != nil {
             let button = app.webViews.buttons["Sign in"]
-            button.waitForExistence(timeout: .short)
+            _ = button.waitForExistence(timeout: .short)
             button.tap()
         }
         

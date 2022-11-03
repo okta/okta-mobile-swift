@@ -27,6 +27,16 @@ extension XCTestCase {
         attachment.lifetime = .deleteOnSuccess
         add(attachment)
     }
+    
+    func tapAlertButton(named label: String) {
+        // addUIInterruptionMonitor is flaky within CI tests, so triggering the continue
+        // action on the alert directly on Springboard is more reliable.
+        let springboard = XCUIApplication(bundleIdentifier: "com.apple.springboard")
+        let button = springboard.buttons[label]
+        if button.waitForExistence(timeout: .veryLong) {
+            button.tap()
+        }
+    }
 }
 
 extension XCUIElement {
