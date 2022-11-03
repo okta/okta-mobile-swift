@@ -60,7 +60,7 @@ extension WebLogin where Self: Screen {
                let fieldValue = field.value as? String,
                !fieldValue.isEmpty
             {
-                field.clearText()
+                field.tap(withNumberOfTaps: 3, numberOfTouches: 1)
             }
             
             field.typeText(username)
