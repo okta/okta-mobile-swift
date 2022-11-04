@@ -183,11 +183,7 @@ extension APIRequest {
             throw APIClientError.invalidUrl
         }
         
-        components.queryItems = query?
-            .map { ($0.key, $0.value?.stringValue) }
-            .filter { $0.1 != nil }
-            .map { URLQueryItem(name: $0.0, value: $0.1) }
-            .sorted(by: { $0.name < $1.name })
+        components.percentEncodedQuery = query?.percentQueryEncoded
 
         guard let requestUrl = components.url else {
             throw APIClientError.invalidUrl

@@ -34,8 +34,8 @@ class SingleSignOnTests: XCTestCase {
         
         let app = XCUIApplication(bundleIdentifier: "com.example.okta-sample.WebSignIn\(codeDisambuguator)")
         app.launchEnvironment = ["AutoCorrection": "Disabled"]
-        app.launchArguments = ["--reset-keychain"]
-        
+        app.launchArguments = ["--reset-keychain", "--disable-keyboard"]
+
         return app
     }()
     

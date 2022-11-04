@@ -27,6 +27,21 @@ extension XCTestCase {
         attachment.lifetime = .deleteOnSuccess
         add(attachment)
     }
+    
+    func tapAlertButton(named label: String) {
+        // addUIInterruptionMonitor is flaky within CI tests, so triggering the continue
+        // action on the alert directly on Springboard is more reliable.
+        let springboard = XCUIApplication(bundleIdentifier: "com.apple.springboard")
+        let button = springboard.buttons[label]
+        if button.waitForExistence(timeout: .veryLong) {
+            #if os(tvOS)
+            // TODO: Update this in the future to select the appropriately named button.
+            XCUIRemote.shared.press(.select)
+            #else
+            button.tap()
+            #endif
+        }
+    }
 }
 
 extension XCUIElement {
@@ -45,17 +60,6 @@ extension XCUIElement {
         
         return false
     }
-    
-    func clearText() {
-        guard let stringValue = self.value as? String else {
-            XCTFail("Tried to clear and enter text into a non string value")
-            return
-        }
-
-        let deleteString = String(repeating: XCUIKeyboardKey.delete.rawValue, count: stringValue.count)
-        self.typeText(deleteString)
-    }
-
 }
 
 extension XCUIElementQuery {
