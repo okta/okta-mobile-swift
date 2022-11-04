@@ -34,7 +34,12 @@ extension XCTestCase {
         let springboard = XCUIApplication(bundleIdentifier: "com.apple.springboard")
         let button = springboard.buttons[label]
         if button.waitForExistence(timeout: .veryLong) {
+            #if os(tvOS)
+            // TODO: Update this in the future to select the appropriately named button.
+            XCUIRemote.shared.press(.select)
+            #else
             button.tap()
+            #endif
         }
     }
 }
