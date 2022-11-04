@@ -40,7 +40,8 @@ class DeviceSignInTests: XCTestCase {
         let app = XCUIApplication()
         app.launchArguments = [
             "--reset-keychain",
-            "--enable-browser"
+            "--enable-browser",
+            "--disable-keyboard"
         ]
         app.launchEnvironment = [
             "E2E_DOMAIN": domain,

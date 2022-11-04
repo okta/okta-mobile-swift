@@ -20,11 +20,7 @@ extension AuthorizationCodeFlow {
             throw OAuth2Error.invalidUrl
         }
         
-        components.queryItems = queryParameters(using: context).map { (key, value) in
-            URLQueryItem(name: key, value: value)
-        }.sorted(by: { lhs, rhs in
-            lhs.name < rhs.name
-        })
+        components.percentEncodedQuery = queryParameters(using: context).percentQueryEncoded
 
         return components
     }

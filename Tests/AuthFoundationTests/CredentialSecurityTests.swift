@@ -15,7 +15,7 @@ import XCTest
 @testable import TestCommon
 @testable import AuthFoundation
 
-#if canImport(LocalAuthentication)
+#if canImport(LocalAuthentication) && !os(tvOS)
 import LocalAuthentication
 
 final class CredentialSecurityTests: XCTestCase {

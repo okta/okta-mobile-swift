@@ -55,9 +55,8 @@ class ProfileScreen: Screen {
         let fieldQuery = app.cells
             .containing(.staticText, identifier: field.rawValue)
 
-        _ = fieldQuery.firstMatch.waitForExistence(timeout: .standard)
-        return fieldQuery.staticTexts
-            .allElementsBoundByIndex[1]
+        _ = fieldQuery.staticTexts.firstMatch.waitForExistence(timeout: .standard)
+        return fieldQuery.staticTexts.element(boundBy: 1)
     }
     
     func signOut(_ option: SignOutOption) {

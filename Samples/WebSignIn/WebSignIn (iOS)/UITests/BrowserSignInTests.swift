@@ -27,7 +27,7 @@ class BrowserSignInUITests: XCTestCase {
     override func setUpWithError() throws {
         let app = XCUIApplication()
         app.launchEnvironment = ["AutoCorrection": "Disabled"]
-        app.launchArguments = ["--reset-keychain"]
+        app.launchArguments = ["--reset-keychain", "--disable-keyboard"]
         app.launch()
         
         continueAfterFailure = false

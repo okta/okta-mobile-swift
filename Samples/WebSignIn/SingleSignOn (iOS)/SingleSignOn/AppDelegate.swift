@@ -17,6 +17,16 @@ import AuthFoundation
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
+        // Note: This is a workaround to address problems when running XCUI automated tests.
+        #if targetEnvironment(simulator)
+        if ProcessInfo.processInfo.arguments.contains("--disable-keyboard") {
+            let setHardwareLayout = NSSelectorFromString("setHardwareLayout:")
+            UITextInputMode.activeInputModes
+                .filter({ $0.responds(to: setHardwareLayout) })
+                .forEach { $0.perform(setHardwareLayout, with: nil) }
+        }
+        #endif
+
         if ProcessInfo.processInfo.arguments.contains("--reset-keychain") {
             try? Keychain.Search().delete()
         }

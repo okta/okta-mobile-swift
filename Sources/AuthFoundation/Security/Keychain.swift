@@ -14,7 +14,7 @@ import Foundation
 
 #if os(iOS) || os(macOS) || os(tvOS) || os(watchOS)
 
-#if canImport(LocalAuthentication)
+#if canImport(LocalAuthentication) && !os(tvOS)
 import LocalAuthentication
 extension LAContext: KeychainAuthenticationContext {}
 #endif
