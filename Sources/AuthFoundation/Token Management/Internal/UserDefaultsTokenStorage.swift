@@ -12,7 +12,7 @@
 
 import Foundation
 
-#if canImport(LocalAuthentication)
+#if canImport(LocalAuthentication) && !os(tvOS)
 import LocalAuthentication
 #else
 typealias LAContext = Void

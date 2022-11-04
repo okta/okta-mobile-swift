@@ -101,7 +101,7 @@ final class KeychainTokenStorage: TokenStorage {
                                          value: try encoder.encode(metadata))
 
         var context: KeychainAuthenticationContext? = nil
-        #if canImport(LocalAuthentication)
+        #if canImport(LocalAuthentication) && !os(tvOS)
         context = security.context
         #endif
 
@@ -144,7 +144,7 @@ final class KeychainTokenStorage: TokenStorage {
                                     value: data)
         
         var context: KeychainAuthenticationContext? = nil
-        #if canImport(LocalAuthentication)
+        #if canImport(LocalAuthentication) && !os(tvOS)
         context = security?.context
         #endif
 

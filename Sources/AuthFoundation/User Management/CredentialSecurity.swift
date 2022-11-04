@@ -12,7 +12,7 @@
 
 import Foundation
 
-#if canImport(LocalAuthentication)
+#if canImport(LocalAuthentication) && !os(tvOS)
 import LocalAuthentication
 #endif
 
@@ -37,7 +37,7 @@ extension Credential {
         /// Assigns a custom access group for this credential.
         case accessGroup(_ name: String)
 
-        #if canImport(LocalAuthentication)
+        #if canImport(LocalAuthentication) && !os(tvOS)
         /// Defines a custom LocalAuthentication context for interactions with this credential, for systems that support it.
         case context(_ obj: LAContext)
         #endif
