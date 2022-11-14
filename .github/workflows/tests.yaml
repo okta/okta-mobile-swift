@@ -291,3 +291,5 @@ jobs:
           ../TestResults/ClassicNativeAuth-iOS-Results/ClassicNativeAuth-iOS.xcresult
         title: UI Test Results
         show-passed-tests: false
+        upload-bundles: failure
+      if: success() || failure()
