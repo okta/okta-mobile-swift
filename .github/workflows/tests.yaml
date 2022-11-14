@@ -39,7 +39,7 @@ jobs:
     - name: Build
       run: swift build --build-tests
     - name: Test
-      run: swift test
+      run: swift test --parallel
 
   XcodeBuild:
     name: Xcode Unit Tests
