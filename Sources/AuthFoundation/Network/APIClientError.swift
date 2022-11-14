@@ -121,3 +121,39 @@ extension APIClientError: LocalizedError {
         }
     }
 }
+
+extension APIClientError: Equatable {
+    private static func compare(lhs: NSError, rhs: NSError) -> Bool {
+        (lhs.code == rhs.code &&
+         lhs.domain == rhs.domain)
+    }
+    
+    public static func == (lhs: APIClientError, rhs: APIClientError) -> Bool {
+        switch (lhs, rhs) {
+        case (.invalidUrl, .invalidUrl): return true
+        case (.missingResponse, .missingResponse): return true
+        case (.invalidResponse, .invalidResponse): return true
+        case (.invalidRequestData, .invalidRequestData): return true
+        case (.missingRefreshSettings, .missingRefreshSettings): return true
+        case (.unknown, .unknown): return true
+            
+        case (.unsupportedContentType(let lhsType), .unsupportedContentType(let rhsType)):
+            return lhsType == rhsType
+            
+        case (.statusCode(let lhsStatusCode), .statusCode(let rhsStatusCode)):
+            return lhsStatusCode == rhsStatusCode
+            
+        case (.cannotParseResponse(error: let lhsError), .cannotParseResponse(error: let rhsError)):
+            return compare(lhs: lhsError as NSError, rhs: rhsError as NSError)
+            
+        case (.serverError(let lhsError), .serverError(let rhsError)):
+            return compare(lhs: lhsError as NSError, rhs: rhsError as NSError)
+
+        case (.validation(error: let lhsError), .validation(error: let rhsError)):
+            return compare(lhs: lhsError as NSError, rhs: rhsError as NSError)
+            
+        default:
+            return false
+        }
+    }
+}

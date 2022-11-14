@@ -13,7 +13,7 @@
 import Foundation
 
 /// Describes errors reported from an OAuth2 server.
-public struct OAuth2ServerError: Decodable, Error, LocalizedError {
+public struct OAuth2ServerError: Decodable, Error, LocalizedError, Equatable {
     /// Error code.
     public let code: Code
     

@@ -22,11 +22,11 @@ final class OAuth2ClientTests: XCTestCase {
                       expiresIn: 300,
                       accessToken: "abcd123",
                       scope: "openid",
-                      refreshToken: nil,
+                      refreshToken: "refresh",
                       idToken: nil,
                       deviceSecret: nil,
                       context: Token.Context(configuration: self.configuration,
-                                             clientSettings: [ "client_id": "clientid" ]))
+                                             clientSettings: [ "client_id": "clientid", "refresh_token": "refresh" ]))
         
         urlSession.requestDelay = 0.1
     }

@@ -158,6 +158,27 @@ final class CredentialRefreshTests: XCTestCase, OAuth2ClientDelegate {
         XCTAssertNotNil(credentialNotification.userInfo?["error"])
     }
     
+    func testRefreshWithoutRefreshToken() throws {
+        let credential = try credential(for: Token.mockToken(id: "TokenID",
+                                                             refreshToken: nil))
+
+        let expect = expectation(description: "refresh")
+        credential.refresh { result in
+            switch result {
+            case .success(_):
+                XCTFail("Did not expect a success response")
+            case .failure(let error):
+                XCTAssertNotNil(error)
+                XCTAssertEqual(error, .missingToken(type: .refreshToken))
+            }
+            expect.fulfill()
+        }
+        
+        waitForExpectations(timeout: 3.0) { error in
+            XCTAssertNil(error)
+        }
+    }
+
     func testRefreshWithoutOptionalValues() throws {
         let credential = try credential(for: Token.mockToken(id: "TokenID",
                                                              deviceSecret: "theDeviceSecret"))

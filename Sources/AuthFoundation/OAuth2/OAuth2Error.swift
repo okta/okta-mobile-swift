@@ -130,3 +130,44 @@ extension OAuth2Error: LocalizedError {
         }
     }
 }
+
+extension OAuth2Error: Equatable {
+    private static func compare(lhs: NSError, rhs: NSError) -> Bool {
+        (lhs.code == rhs.code &&
+         lhs.domain == rhs.domain)
+    }
+    
+    public static func == (lhs: OAuth2Error, rhs: OAuth2Error) -> Bool {
+        switch (lhs, rhs) {
+        case (.invalidUrl, .invalidUrl): return true
+        case (.cannotComposeUrl, .cannotComposeUrl): return true
+        case (.signatureInvalid, .signatureInvalid): return true
+        case (.missingLocationHeader, .missingLocationHeader): return true
+        case (.missingClientConfiguration, .missingClientConfiguration): return true
+
+        case (.oauth2Error(code: let lhsCode, description: let lhsDescription), .oauth2Error(code: let rhsCode, description: let rhsDescription)):
+            return (lhsCode == rhsCode && lhsDescription == rhsDescription)
+            
+        case (.network(error: let lhsError), .network(error: let rhsError)):
+            return lhsError == rhsError
+            
+        case (.missingToken(type: let lhsKind), .missingToken(type: let rhsKind)):
+            return lhsKind == rhsKind
+            
+        case (.missingOpenIdConfiguration(attribute: let lhsAttribute), .missingOpenIdConfiguration(attribute: let rhsAttribute)):
+            return lhsAttribute == rhsAttribute
+            
+        case (.error(let lhsError), .error(let rhsError)):
+            return compare(lhs: lhsError as NSError, rhs: rhsError as NSError)
+
+        case (.cannotRevoke(type: let lhsType), .cannotRevoke(type: let rhsType)):
+            return lhsType == rhsType
+            
+        case (.multiple(errors: let lhsErrors), .multiple(errors: let rhsErrors)):
+            return lhsErrors == rhsErrors
+            
+        default:
+            return false
+        }
+    }
+}
