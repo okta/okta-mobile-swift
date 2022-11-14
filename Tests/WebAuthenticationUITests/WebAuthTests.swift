@@ -42,8 +42,6 @@ class WebAuthenticationUITests: XCTestCase {
     }
     
     func testStart() throws {
-        XCTAssertNotNil(WebAuthentication.shared)
-        
         let webAuth = WebAuthenticationMock(loginFlow: loginFlow, logoutFlow: logoutFlow, context: .init(state: "qwe"))
         
         webAuth.signIn(from: nil) { result in }
