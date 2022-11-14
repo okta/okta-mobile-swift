@@ -13,7 +13,7 @@
 import Foundation
 
 /// Describes errors that may be reported from an Okta API endpoint.
-public struct OktaAPIError: Decodable, Error, LocalizedError {
+public struct OktaAPIError: Decodable, Error, LocalizedError, Equatable {
     /// An Okta code for this type of error.
     public let code: String
     
