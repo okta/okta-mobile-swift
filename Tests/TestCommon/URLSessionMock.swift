@@ -20,6 +20,8 @@ import FoundationNetworking
 @testable import AuthFoundation
 
 class URLSessionMock: URLSessionProtocol {
+    var configuration: URLSessionConfiguration = .ephemeral
+    
     struct Call {
         let url: String
         let data: Data?

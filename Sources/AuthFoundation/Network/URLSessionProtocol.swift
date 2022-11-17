@@ -20,6 +20,7 @@ import FoundationNetworking
 public protocol URLSessionProtocol {
     typealias DataTaskResult = (Data?, HTTPURLResponse?, Error?) -> Void
     func dataTaskWithRequest(_ request: URLRequest, completionHandler: @escaping (Data?, URLResponse?, Error?) -> Void) -> URLSessionDataTaskProtocol
+    var configuration: URLSessionConfiguration { get }
 }
 
 /// Protocol defining the interface for interacting with a URLSession. This is used to provide mocking for unit tests.
