@@ -103,6 +103,12 @@
   "topicSections" : [
     {
       "identifiers" : [
+        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/URLSessionProtocol\/configuration"
+      ],
+      "title" : "Instance Properties"
+    },
+    {
+      "identifiers" : [
         "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/URLSessionProtocol\/dataTaskWithRequest(_:completionHandler:)"
       ],
       "title" : "Instance Methods"
@@ -302,6 +308,41 @@
   "title" : "URLSessionProtocol.DataTaskResult",
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/urlsessionprotocol\/datataskresult"
+},
+"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/URLSessionProtocol/configuration": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "var"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "configuration"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "c:objc(cs)NSURLSessionConfiguration",
+      "text" : "URLSessionConfiguration"
+    }
+  ],
+  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/URLSessionProtocol\/configuration",
+  "kind" : "symbol",
+  "required" : true,
+  "role" : "symbol",
+  "title" : "configuration",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/urlsessionprotocol\/configuration"
 },
 "doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/URLSessionProtocol/dataTaskWithRequest(_:completionHandler:)": {
   "abstract" : [
