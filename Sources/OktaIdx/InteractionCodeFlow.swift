@@ -102,7 +102,7 @@ public final class InteractionCodeFlow: AuthenticationFlow {
         self.client = client
         self.redirectUri = redirectUri
         self.additionalParameters = additionalParameters
-        
+
         client.add(delegate: self)
     }
     
@@ -289,6 +289,7 @@ public final class InteractionCodeFlow: AuthenticationFlow {
                     switch result {
                     case .success(let token):
                         self.send(response: token.result, completion: completion)
+                        self.reset()
                     case .failure(let error):
                         self.send(error: .apiError(error), completion: completion)
                     }
@@ -308,9 +309,32 @@ public final class InteractionCodeFlow: AuthenticationFlow {
     public func reset() {
         context = nil
         isAuthenticating = false
+
+        // Remove any previous `idx` cookies so it won't leak into other sessions.
+        let storage = client.session.configuration.httpCookieStorage ?? HTTPCookieStorage.shared
+        storage.cookies(for: client.baseURL)?
+            .filter({ $0.name == "idx" })
+            .forEach({ storage.deleteCookie($0) })
     }
 
     // MARK: Private properties / methods
+    private(set) lazy var deviceTokenCookie: HTTPCookie? = {
+        guard let deviceToken = InteractionCodeFlow.deviceIdentifier,
+              let host = client.baseURL.host
+        else {
+            return nil
+        }
+        
+        return HTTPCookie(properties: [
+            .name: "DT",
+            .value: deviceToken,
+            .domain: host,
+            .path: "/",
+            .secure: "TRUE",
+            .expires: Date.distantFuture,
+        ])
+    }()
+    
     public let delegateCollection = DelegateCollection<InteractionCodeFlowDelegate>()
 }
 
@@ -362,7 +386,23 @@ extension InteractionCodeFlow: UsesDelegateCollection {
 }
 
 extension InteractionCodeFlow: OAuth2ClientDelegate {
-    
+    public func api(client: APIClient, willSend request: inout URLRequest) {
+        guard let url = request.url,
+              let deviceTokenCookie = deviceTokenCookie
+        else {
+            return
+        }
+        
+        let storage = client.session.configuration.httpCookieStorage ?? HTTPCookieStorage.shared
+        var cookies = storage.cookies(for: url) ?? []
+        cookies.insert(deviceTokenCookie, at: 0)
+        
+        var headers = request.allHTTPHeaderFields ?? [:]
+        headers.merge(HTTPCookie.requestHeaderFields(with: cookies)) { old, new in
+            new
+        }
+        request.allHTTPHeaderFields = headers
+    }
 }
 
 extension OAuth2Client {

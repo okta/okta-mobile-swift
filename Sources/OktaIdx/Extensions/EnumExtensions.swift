@@ -129,7 +129,7 @@ extension Capability.SocialIDP.Service {
         case "OIDC":         self = .oidc
         case "OKTA":         self = .okta
         case "IWA":          self = .iwa
-        case "AgentlessDSSO":self = .agentlessIwa
+        case "AgentlessDSSO": self = .agentlessIwa
         case "X509":         self = .x509
         case "APPLE":        self = .apple
         case "OIN_SOCIAL":   self = .oinSocial

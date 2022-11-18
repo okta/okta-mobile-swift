@@ -37,6 +37,7 @@ class URLSessionMock: URLSessionProtocol {
         let error: Error?
     }
     
+    var configuration: URLSessionConfiguration = .ephemeral
     var requestDelay: TimeInterval?
 
     private(set) var requests: [URLRequest] = []

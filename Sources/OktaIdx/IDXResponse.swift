@@ -97,6 +97,7 @@ public class Response: NSObject {
                 switch result {
                 case .success(let token):
                     self.flow.send(response: token.result, completion: completion)
+                    self.flow.reset()
                 case .failure(let error):
                     self.flow.send(error: .apiError(error), completion: completion)
                 }
