@@ -17,5 +17,32 @@ extension Response {
     public struct User {
         /// Unique identifier for this user.
         public let id: String
+        
+        /// Username for this user.
+        ///
+        /// This value may not be available at all times.
+        public let username: String?
+        
+        /// Profile information for this user.
+        ///
+        /// This value may not be available at all times.
+        public let profile: Profile?
+    }
+}
+
+extension Response.User {
+    /// Optional profile information that describes the user.
+    public struct Profile {
+        /// The user's first name.
+        public let firstName: String?
+        
+        /// The user's last name.
+        public let lastName: String?
+        
+        /// The user's time zone.
+        public let timeZone: TimeZone?
+        
+        /// The user's locale.
+        public let locale: Locale?
     }
 }

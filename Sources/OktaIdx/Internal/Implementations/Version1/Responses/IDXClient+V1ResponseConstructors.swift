@@ -58,9 +58,31 @@ extension Response.User {
         guard let object = object,
               let userId = object.id
         else { return nil }
-        self.init(id: userId)
+        self.init(id: userId, username: object.identifier, profile: .init(ion: object.profile))
     }
 }
+
+extension Response.User.Profile {
+    internal init?(ion object: [String: String]?) {
+        guard let object = object else { return nil }
+
+        var timeZone: TimeZone?
+        if let string = object["timeZone"] {
+            timeZone = TimeZone(identifier: string)
+        }
+
+        var locale: Locale?
+        if let string = object["locale"] {
+            locale = Locale(identifier: string)
+        }
+
+        self.init(firstName: object["firstName"],
+                  lastName: object["lastName"],
+                  timeZone: timeZone,
+                  locale: locale)
+    }
+}
+
 
 extension IonResponse {
     struct AuthenticatorMapping {

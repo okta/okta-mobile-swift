@@ -475,7 +475,7 @@ class IDXClientV1ResponseTests: XCTestCase {
         XCTAssertEqual(publicObj?.name, "client")
     }
 
-    func testUser() throws {
+    func testSimpleUser() throws {
         let obj = try decode(type: IonObject<IonUser>.self, """
            {
               "type" : "object",
@@ -492,6 +492,42 @@ class IDXClientV1ResponseTests: XCTestCase {
         let publicObj = Response.User(ion: obj.value)
         XCTAssertNotNil(publicObj)
         XCTAssertEqual(publicObj?.id, "0ZczewGCFPlxNYYcLq5i")
+    }
+
+    func testUserProfile() throws {
+        let obj = try decode(type: IonObject<IonUser>.self, """
+           {
+               "type" : "object",
+               "value" : {
+                 "id" : "0ZczewGCFPlxNYYcLq5i",
+                 "profile" : {
+                   "firstName": "Arthur",
+                   "lastName": "Dent",
+                   "timeZone": "America/Los_Angeles",
+                   "locale": "en_US"
+                 },
+                 "identifier" : "arthur.dent@example.com"
+               }
+           }
+        """)
+        
+        XCTAssertNotNil(obj)
+        XCTAssertEqual(obj.type, "object")
+        XCTAssertEqual(obj.value.id, "0ZczewGCFPlxNYYcLq5i")
+        XCTAssertEqual(obj.value.profile?.keys.sorted(), ["firstName", "lastName", "locale", "timeZone"])
+        XCTAssertEqual(obj.value.profile?["firstName"], "Arthur")
+        XCTAssertEqual(obj.value.profile?["lastName"], "Dent")
+        XCTAssertEqual(obj.value.profile?["lastName"], "Dent")
+        XCTAssertEqual(obj.value.identifier, "arthur.dent@example.com")
+
+        let publicObj = Response.User(ion: obj.value)
+        XCTAssertNotNil(publicObj)
+        XCTAssertEqual(publicObj?.id, "0ZczewGCFPlxNYYcLq5i")
+        XCTAssertEqual(publicObj?.profile?.firstName, "Arthur")
+        XCTAssertEqual(publicObj?.profile?.lastName, "Dent")
+        XCTAssertEqual(publicObj?.profile?.timeZone?.identifier, "America/Los_Angeles")
+        XCTAssertEqual(publicObj?.profile?.locale?.identifier, "en_US")
+        XCTAssertEqual(publicObj?.username, "arthur.dent@example.com")
     }
 
     func testPasswordAuthenticatorWithSettings() throws {
