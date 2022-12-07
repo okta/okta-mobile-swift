@@ -27,10 +27,7 @@ extension Token {
                           issuedOffset: TimeInterval = 0,
                           expiresIn: TimeInterval = 3600) -> Token
     {
-        var clientSettings = [ "client_id": mockConfiguration.clientId ]
-        if let refreshToken = refreshToken {
-            clientSettings["refresh_token"] = refreshToken
-        }
+        let clientSettings = [ "client_id": mockConfiguration.clientId ]
         
         return Token(id: id,
               issuedAt: Date(timeIntervalSinceNow: -issuedOffset),
