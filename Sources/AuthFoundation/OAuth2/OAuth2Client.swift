@@ -200,11 +200,10 @@ public final class OAuth2Client {
     ///   - token: Token to refresh.
     ///   - completion: Completion bock invoked with the result.
     public func refresh(_ token: Token, completion: @escaping (Result<Token, OAuth2Error>) -> Void) {
-        let type = Token.Kind.refreshToken
         guard let clientSettings = token.context.clientSettings,
-              clientSettings[type.rawValue] != nil
+              token.refreshToken != nil
         else {
-            completion(.failure(.missingToken(type: type)))
+            completion(.failure(.missingToken(type: .refreshToken)))
             return
         }
         
