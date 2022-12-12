@@ -88,6 +88,18 @@ class IDXRemediationTableViewController: UITableViewController, IDXResponseContr
         signin?.failure(with: SigninError.genericError(message: "Cancelled"))
     }
     
+    func authorize(magicLink code: String) {
+        guard let remediation = response?.remediations[.challengeAuthenticator],
+              remediation.authenticators.current?.type == .email,
+              let passcodeField = remediation["credentials.passcode"]
+        else {
+            return
+        }
+        
+        passcodeField.value = code
+        proceed(to: remediation)
+    }
+
     func proceed(to remediationOption: Remediation?, from sender: Any? = nil) {
         guard let signin = signin else {
             showError(SigninError.genericError(message: "Signin session deallocated"))
