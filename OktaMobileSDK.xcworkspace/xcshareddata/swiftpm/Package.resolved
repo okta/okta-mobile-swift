@@ -1,43 +1,32 @@
 {
-  "object": {
-    "pins": [
-      {
-        "package": "OktaAuthNative",
-        "repositoryURL": "https://github.com/okta/okta-auth-swift",
-        "state": {
-          "branch": "master",
-          "revision": "54b40d5c7f7867f6370b0a1311c2e005f57c8bb3",
-          "version": null
-        }
-      },
-      {
-        "package": "OktaOidc",
-        "repositoryURL": "https://github.com/okta/okta-oidc-ios",
-        "state": {
-          "branch": null,
-          "revision": "91eac722b8e859ba7f15d65a9085a64a296bc065",
-          "version": "3.11.2"
-        }
-      },
-      {
-        "package": "swift-argument-parser",
-        "repositoryURL": "https://github.com/apple/swift-argument-parser.git",
-        "state": {
-          "branch": null,
-          "revision": "f3c9084a71ef4376f2fabbdf1d3d90a49f1fabdb",
-          "version": "1.1.2"
-        }
-      },
-      {
-        "package": "SwiftDocCPlugin",
-        "repositoryURL": "https://github.com/apple/swift-docc-plugin",
-        "state": {
-          "branch": null,
-          "revision": "3303b164430d9a7055ba484c8ead67a52f7b74f6",
-          "version": "1.0.0"
-        }
+  "pins" : [
+    {
+      "identity" : "okta-auth-swift",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/okta/okta-auth-swift",
+      "state" : {
+        "branch" : "master",
+        "revision" : "54b40d5c7f7867f6370b0a1311c2e005f57c8bb3"
       }
-    ]
-  },
-  "version": 1
+    },
+    {
+      "identity" : "okta-oidc-ios",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/okta/okta-oidc-ios",
+      "state" : {
+        "revision" : "91eac722b8e859ba7f15d65a9085a64a296bc065",
+        "version" : "3.11.2"
+      }
+    },
+    {
+      "identity" : "swift-argument-parser",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/apple/swift-argument-parser.git",
+      "state" : {
+        "revision" : "f3c9084a71ef4376f2fabbdf1d3d90a49f1fabdb",
+        "version" : "1.1.2"
+      }
+    }
+  ],
+  "version" : 2
 }

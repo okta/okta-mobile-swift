@@ -114,6 +114,20 @@ public enum APIRetry {
     }
 }
 
+extension Data {
+    func urlFormEncoded() -> [String:String?]? {
+        guard let string = String(data: self, encoding: .utf8),
+              let url = URL(string: "?\(string)"),
+              let components = URLComponents(url: url, resolvingAgainstBaseURL: false),
+              let queryItems = components.queryItems
+        else { return nil }
+
+        return queryItems.reduce(into: [String:String?]()) {
+            $0[$1.name] = $1.value
+        }
+    }
+}
+
 public enum APIResponseResult {
     case success
     case retry
@@ -159,6 +173,22 @@ extension APIClient {
                          completion: @escaping (Result<APIResponse<T>, APIClientError>) -> Void) {
         var urlRequest = request
         willSend(request: &urlRequest)
+                
+        print("====================================\nREQUEST")
+        debugPrint(urlRequest)
+        if let data = urlRequest.httpBody {
+            if let object = try? JSONSerialization.jsonObject(with: data, options: []),
+               let jsonData = try? JSONSerialization.data(withJSONObject: object, options: [.prettyPrinted]),
+               let prettyPrintedString = NSString(data: jsonData, encoding: String.Encoding.utf8.rawValue)
+            {
+                debugPrint(prettyPrintedString)
+            }
+        
+            else if let object = data.urlFormEncoded() {
+                debugPrint(object)
+            }
+        }
+
         session.dataTaskWithRequest(urlRequest) { data, response, httpError in
             guard let data = data,
                   let response = response
@@ -189,6 +219,15 @@ extension APIClient {
                                                                      rateInfo: rateInfo,
                                                                      parsing: context)
                     self.didSend(request: request, received: response)
+                    
+                    if let object = try? JSONSerialization.jsonObject(with: data, options: []),
+                       let jsonData = try? JSONSerialization.data(withJSONObject: object, options: [.prettyPrinted]),
+                       let prettyPrintedString = NSString(data: jsonData, encoding: String.Encoding.utf8.rawValue)
+                    {
+                        print("RESPONSE")
+                        debugPrint(prettyPrintedString)
+                    }
+
                     completion(.success(response))
                 case .retry:
                     guard let rateInfo = rateInfo else {
