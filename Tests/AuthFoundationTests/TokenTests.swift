@@ -85,4 +85,18 @@ final class TokenTests: XCTestCase {
         let decodedToken = try JSONDecoder().decode(Token.self, from: data)
         XCTAssertEqual(token, decodedToken)
     }
+    
+    func testTokenEquality() throws {
+        var token1 = Token.mockToken()
+        var token2 = Token.mockToken()
+        
+        XCTAssertEqual(token1, token2)
+        
+        token2 = Token.mockToken(refreshToken: "SomethingDifferent")
+        XCTAssertNotEqual(token1, token2)
+        
+        token1 = Token.mockToken(deviceSecret: "First")
+        token2 = Token.mockToken(deviceSecret: "Second")
+        XCTAssertNotEqual(token1, token2)
+    }
 }
