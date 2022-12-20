@@ -101,6 +101,7 @@ public final class Token: Codable, Equatable, Hashable, Expires {
     public static func == (lhs: Token, rhs: Token) -> Bool {
         lhs.context == rhs.context &&
         lhs.accessToken == rhs.accessToken &&
+        lhs.refreshToken == rhs.refreshToken &&
         lhs.scope == rhs.scope &&
         lhs.idToken?.rawValue == rhs.idToken?.rawValue &&
         lhs.deviceSecret == rhs.deviceSecret
