@@ -47,12 +47,18 @@ class ProfileTableViewController: UITableViewController {
         didSet {
             configure(credential?.userInfo)
             credential?.automaticRefresh = true
-            credential?.refreshIfNeeded { _ in
-                self.credential?.userInfo { result in
-                    guard case let .success(userInfo) = result else { return }
-                    DispatchQueue.main.async {
-                        self.configure(userInfo)
+            credential?.refreshIfNeeded { result in
+                switch result {
+                case .success():
+                    self.credential?.userInfo { result in
+                        guard case let .success(userInfo) = result else { return }
+                        DispatchQueue.main.async {
+                            self.configure(userInfo)
+                        }
                     }
+                    
+                case .failure(let error):
+                    self.show(error: error)
                 }
             }
         }
