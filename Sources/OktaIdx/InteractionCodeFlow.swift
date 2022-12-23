@@ -26,6 +26,9 @@ public final class InteractionCodeFlow: AuthenticationFlow {
         
         /// Option used when a user is authenticating using a recovery token.
         case recoveryToken = "recovery_token"
+
+        /// Option indicating whether or not a device identifier should be sent on API requests, which enables the device to be remembered.
+        case omitDeviceToken
     }
     
     /// The type used for the completion  handler result from any method that returns an ``Response``.
@@ -69,6 +72,11 @@ public final class InteractionCodeFlow: AuthenticationFlow {
     /// This value is used when resuming authentication at a later date or after app launch, and to ensure the final token exchange can be completed.
     public internal(set) var context: Context?
     
+    /// The options used when starting an authentication flow.
+    ///
+    /// This is updated when the ``start(options:completion:)`` (or ``start(options:)``) method is invoked, and is cleared when ``reset()`` is called.
+    public internal(set) var options: [Option: Any]?
+
     /// Convenience initializer to construct an authentication flow from variables.
     /// - Parameters:
     ///   - issuer: The issuer URL.
@@ -133,7 +141,7 @@ public final class InteractionCodeFlow: AuthenticationFlow {
     /// - Parameters:
     ///   - options: Options to include within the OAuth2 transaction.
     ///   - completion: Completion block to be invoked when the session is started.
-    public func start(options: [Option: String]? = nil,
+    public func start(options: [Option: Any]? = nil,
                       completion: @escaping ResponseResult)
     {
         if isAuthenticating {
@@ -141,7 +149,7 @@ public final class InteractionCodeFlow: AuthenticationFlow {
         }
         
         // Ensure we have, at minimum, a state value
-        let state = options?[.state] ?? UUID().uuidString
+        let state: String = options?[.state] as? String ?? UUID().uuidString
         var options = options ?? [:]
         options[.state] = state
         
@@ -151,6 +159,8 @@ public final class InteractionCodeFlow: AuthenticationFlow {
         }
         
         self.isAuthenticating = true
+        self.options = options
+
         let request = InteractRequest(baseURL: client.baseURL,
                                       clientId: client.configuration.clientId,
                                       scope: client.configuration.scopes,
@@ -309,6 +319,7 @@ public final class InteractionCodeFlow: AuthenticationFlow {
     public func reset() {
         context = nil
         isAuthenticating = false
+        options = nil
 
         // Remove any previous `idx` cookies so it won't leak into other sessions.
         let storage = client.session.configuration.httpCookieStorage ?? HTTPCookieStorage.shared
@@ -346,7 +357,7 @@ extension InteractionCodeFlow {
     ///   - configuration: Configuration describing the app settings to contact.
     ///   - options: Options to include within the OAuth2 transaction.
     /// - Returns: A ``Response``.
-    public func start(options: [Option: String]? = nil) async throws -> Response {
+    public func start(options: [Option: Any]? = nil) async throws -> Response {
         try await withCheckedThrowingContinuation { continuation in
             start(options: options) { result in
                 continuation.resume(with: result)
@@ -387,7 +398,8 @@ extension InteractionCodeFlow: UsesDelegateCollection {
 
 extension InteractionCodeFlow: OAuth2ClientDelegate {
     public func api(client: APIClient, willSend request: inout URLRequest) {
-        guard let url = request.url,
+        guard options?[.omitDeviceToken] as? Bool ?? false == false,
+              let url = request.url,
               let deviceTokenCookie = deviceTokenCookie
         else {
             return

@@ -80,3 +80,12 @@ extension InteractionCodeFlow {
         return deviceToken
     }
 }
+
+extension InteractionCodeFlow.Option {
+    var includeInInteractRequest: Bool {
+        switch self {
+        case .omitDeviceToken: return false
+        default: return true
+        }
+    }
+}

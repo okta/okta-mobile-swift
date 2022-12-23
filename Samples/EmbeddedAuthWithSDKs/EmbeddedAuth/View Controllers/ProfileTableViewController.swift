@@ -39,11 +39,21 @@ class ProfileTableViewController: UITableViewController {
     var credential: Credential? {
         didSet {
             if let credential = credential {
-                credential.refreshIfNeeded { _ in
-                    credential.userInfo { _ in
-                        DispatchQueue.main.async {
-                            self.configure(credential)
+                DispatchQueue.main.async {
+                    self.configure(credential)
+                }
+
+                credential.refreshIfNeeded { result in
+                    switch result {
+                    case .success():
+                        credential.userInfo { _ in
+                            DispatchQueue.main.async {
+                                self.configure(credential)
+                            }
                         }
+
+                    case .failure(let error):
+                        self.show(error: error)
                     }
                 }
             }
@@ -78,6 +88,12 @@ class ProfileTableViewController: UITableViewController {
         dateFormatter.timeStyle = .long
         
         guard let info = credential.userInfo else {
+            tableContent = [
+                .actions: [
+                    .init(kind: .destructive, id: "signout", title: "Sign Out")
+                ]
+            ]
+            tableView.reloadData()
             return
         }
         
@@ -117,7 +133,7 @@ class ProfileTableViewController: UITableViewController {
         DispatchQueue.main.async {
             let alert = UIAlertController(title: nil, message: error.localizedDescription, preferredStyle: .alert)
             alert.addAction(.init(title: "OK", style: .default))
-            self.show(alert, sender: nil)
+            self.present(alert, animated: true)
         }
     }
     
@@ -151,7 +167,7 @@ class ProfileTableViewController: UITableViewController {
 
     func refresh() {
         guard let credential = Credential.default else { return }
-        credential.refreshIfNeeded { result in
+        credential.refresh { result in
             if case let .failure(error) = result {
                 self.show(error: error)
             }

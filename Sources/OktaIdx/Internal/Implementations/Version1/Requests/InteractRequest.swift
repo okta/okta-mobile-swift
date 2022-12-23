@@ -19,14 +19,14 @@ extension InteractionCodeFlow {
         let clientId: String
         let scope: String
         let redirectUri: URL
-        let options: [InteractionCodeFlow.Option: String]?
+        let options: [InteractionCodeFlow.Option: Any]?
         let pkce: PKCE
 
         init(baseURL: URL,
              clientId: String,
              scope: String,
              redirectUri: URL,
-             options: [InteractionCodeFlow.Option: String]?,
+             options: [InteractionCodeFlow.Option: Any]?,
              pkce: PKCE)
         {
             url = baseURL.appendingPathComponent("v1/interact")
@@ -59,10 +59,12 @@ extension InteractionCodeFlow.InteractRequest: APIRequest, APIRequestBody {
             "code_challenge_method": pkce.method.rawValue
         ]
         
-        options?.forEach { (key: InteractionCodeFlow.Option, value: String) in
-            result[key.rawValue] = value
-        }
-        
+        options?.filter { $0.key.includeInInteractRequest }
+            .compactMapValues { $0 as? String }
+            .forEach { (key: InteractionCodeFlow.Option, value: String) in
+                result[key.rawValue] = value
+            }
+
         return result
     }
 }

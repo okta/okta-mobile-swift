@@ -76,6 +76,40 @@ class InteractionCodeFlowTests: XCTestCase {
 
         XCTAssertEqual(delegate.calls.count, 1)
         XCTAssertEqual(delegate.calls.first?.type, .response)
+        
+        if InteractionCodeFlow.deviceIdentifier != nil {
+            let deviceToken = try XCTUnwrap(flow.deviceTokenCookie?.value)
+            XCTAssertEqual(urlSession.requests.first?.allHTTPHeaderFields?["Cookie"],
+                           "DT=\(deviceToken)")
+        }
+    }
+    
+    func testStartWithOptions() throws {
+        urlSession.expect("https://example.com/oauth2/default/v1/interact",
+                          data: try data(from: .module,
+                                         for: "interact-response"))
+        urlSession.expect("https://example.com/idp/idx/introspect",
+                          data: try data(from: .module,
+                                         for: "introspect-response"))
+        
+        let wait = expectation(description: "start")
+        flow.start(options: [
+            .omitDeviceToken: true,
+            .state: "CustomState"
+        ]) { result in
+            defer { wait.fulfill() }
+            
+            guard case let Result.success(response) = result else {
+                XCTFail("Received a failure when a success was expected")
+                return
+            }
+            
+            XCTAssertNotNil(response.remediations[.identify])
+        }
+        waitForExpectations(timeout: 1.0)
+        
+        XCTAssertNil(urlSession.requests.first?.allHTTPHeaderFields?["Cookie"])
+        XCTAssertEqual(flow.context?.state, "CustomState")
     }
 
     func testStartFailedInteract() throws {
