@@ -21,4 +21,7 @@ class MockCredentialCoordinator: CredentialCoordinator {
         credentialDataSource.remove(credential: credential)
         try tokenStorage.remove(id: credential.token.id)
     }
+    
+    func observe(oauth2 client: OAuth2Client) {
+    }
 }

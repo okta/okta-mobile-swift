@@ -149,6 +149,9 @@ public final class OAuth2Client {
         self.session = session ?? URLSession.shared
         
         NotificationCenter.default.post(name: .oauth2ClientCreated, object: self)
+
+        // Ensure the Credential Coordinator can monitor this client for token refresh changes.
+        Credential.coordinator.observe(oauth2: self)
     }
     
     /// Retrieves the org's OpenID configuration.
@@ -240,18 +243,19 @@ public final class OAuth2Client {
                         case .success(let response):
                             let newToken = response.result.token(merging: token)
                             
-                            action.finish(.success(newToken))
-                            
                             self.delegateCollection.invoke { $0.oauth(client: self, didRefresh: token, replacedWith: newToken) }
                             NotificationCenter.default.post(name: .tokenRefreshed, object: newToken)
+                            action.finish(.success(newToken))
                             
+
                         case .failure(let error):
-                            action.finish(.failure(.network(error: error)))
                             self.delegateCollection.invoke { $0.oauth(client: self, didRefresh: token, replacedWith: nil) }
                             
                             NotificationCenter.default.post(name: .tokenRefreshFailed,
                                                             object: token,
                                                             userInfo: ["error": error])
+
+                            action.finish(.failure(.network(error: error)))
                         }
                         
                         token.refreshAction = nil

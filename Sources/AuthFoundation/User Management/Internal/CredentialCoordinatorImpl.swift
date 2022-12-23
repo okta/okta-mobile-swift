@@ -34,7 +34,12 @@ final class CredentialCoordinatorImpl: CredentialCoordinator {
         }
     }
         
-    private var _default: Credential?
+    private lazy var _default: Credential? = {
+        try? CredentialCoordinatorImpl.defaultCredential(
+            tokenStorage: tokenStorage,
+            credentialDataSource: credentialDataSource,
+            coordinator: self)
+    }()
     var `default`: Credential? {
         get { _default }
         set {
@@ -123,35 +128,10 @@ final class CredentialCoordinatorImpl: CredentialCoordinator {
 
         self.credentialDataSource.delegate = self
         self.tokenStorage.delegate = self
-
-        _default = try? CredentialCoordinatorImpl.defaultCredential(
-            tokenStorage: tokenStorage,
-            credentialDataSource: credentialDataSource,
-            coordinator: self)
-
-        self.observer = NotificationCenter
-            .default
-            .addObserver(forName: .oauth2ClientCreated,
-                         object: nil,
-                         queue: nil) { [weak self] notification in
-                self?.received(notification: notification)
-            }
     }
     
-    deinit {
-        if let observer = observer {
-            NotificationCenter.default.removeObserver(observer as Any)
-        }
-    }
-    
-    private var observer: NSObjectProtocol?
-    private func received(notification: Notification) {
-        switch notification.name {
-        case .oauth2ClientCreated:
-            guard let client = notification.object as? OAuth2Client else { break }
-            client.add(delegate: self)
-        default: break
-        }
+    func observe(oauth2 client: OAuth2Client) {
+        client.add(delegate: self)
     }
 }
 

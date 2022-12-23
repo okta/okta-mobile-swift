@@ -319,7 +319,7 @@ public final class Credential: Equatable, OAuth2ClientDelegate {
     
     // MARK: OAuth2ClientDelegate
     public func oauth(client: OAuth2Client, didRefresh token: Token, replacedWith newToken: Token?) {
-        guard token == self.token,
+        guard token.id == self.token.id,
               let newToken = newToken
         else {
             return
@@ -329,8 +329,8 @@ public final class Credential: Equatable, OAuth2ClientDelegate {
     }
     
     // MARK: Private properties
-    fileprivate static let coordinator = CredentialCoordinatorImpl()
-    internal weak var coordinator: CredentialCoordinator?
+    static let coordinator = CredentialCoordinatorImpl()
+    weak var coordinator: CredentialCoordinator?
 
     private lazy var _metadata: Token.Metadata = {
         if let metadata = try? coordinator?.tokenStorage.metadata(for: token.id) {
