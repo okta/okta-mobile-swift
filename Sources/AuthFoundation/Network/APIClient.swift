@@ -93,7 +93,9 @@ extension APIClientDelegate {
 
 /// List of retry options
 public enum APIRetry {
+    /// Indicates the APIRequest should not be retried.
     case doNotRetry
+    /// The APIRequest should be retried, up to the given maximum number of times.
     case retry(maximumCount: Int)
     
     /// The default retry option.
@@ -114,9 +116,13 @@ public enum APIRetry {
     }
 }
 
+/// Defines the possible results for an API request.
 public enum APIResponseResult {
+    /// Indicates the request was successful.
     case success
+    /// The server is indicating the request should be retried.
     case retry
+    /// The server reports the response represents an error.
     case error
 
     init(statusCode: Int) {
@@ -298,6 +304,7 @@ extension APIClient {
                                               from: jsonData,
                                               userInfo: context?.codingUserInfo),
                            date: date ?? Date(),
+                           statusCode: response.statusCode,
                            links: relatedLinks(from: response.allHeaderFields["Link"] as? String),
                            rateInfo: rateInfo,
                            requestId: requestId)
