@@ -63,5 +63,7 @@ extension OAuth2ServerError {
         case unsupportedResponseType = "unsupported_response_type"
         /// The specified response mode is invalid or unsupported. This error is also thrown for disallowed response modes.
         case unsupportedResponseMode = "unsupported_response_mode"
+        /// The client specified is not authorized to utilize the supplied grant type.
+        case unauthorizedClient = "unauthorized_client"
     }
 }
