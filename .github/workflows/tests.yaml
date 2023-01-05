@@ -51,7 +51,7 @@ jobs:
     - uses: actions/checkout@master
     - uses: ./.github/actions/start-simulator
       with:
-        destination: "${{ iOS_DESTINATION }}"
+        destination: "$iOS_DESTINATION"
     - name: Build AuthFoundation
       run: |
         set -o pipefail
@@ -127,7 +127,7 @@ jobs:
     - uses: actions/checkout@master
     - uses: ./.github/actions/start-simulator
       with:
-        destination: "${{ iOS_DESTINATION }}"
+        destination: "$iOS_DESTINATION"
     - name: Download build artifacts
       uses: actions/download-artifact@v3
       with:
@@ -172,7 +172,7 @@ jobs:
     - uses: actions/checkout@master
     - uses: ./.github/actions/start-simulator
       with:
-        destination: "${{ iOS_DESTINATION }}"
+        destination: "$iOS_DESTINATION"
     - name: Download build artifacts
       uses: actions/download-artifact@v3
       with:
@@ -207,7 +207,7 @@ jobs:
     - uses: actions/checkout@master
     - uses: ./.github/actions/start-simulator
       with:
-        destination: "${{ iOS_DESTINATION }}"
+        destination: "$tvOS_DESTINATION"
     - uses: ./.github/actions/setup-secrets
       with:
         okta_plist: "${{ secrets.TEST_OKTA_PLIST }}"
@@ -257,7 +257,7 @@ jobs:
     - uses: actions/checkout@master
     - uses: ./.github/actions/start-simulator
       with:
-        destination: "${{ iOS_DESTINATION }}"
+        destination: "$iOS_DESTINATION"
     - name: Download build artifacts
       uses: actions/download-artifact@v3
       with:
