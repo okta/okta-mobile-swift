@@ -79,7 +79,7 @@ jobs:
           -destination "$iOS_DESTINATION" | xcpretty
     - name: Prepare build artifacts
       run: |
-        tar -czf ~/iOS-Build.tgz ../Build
+        tar -czf $RUNNER_WORKSPACE/iOS-Build.tgz ../Build
     - name: Test AuthFoundation
       run: |
         set -o pipefail
@@ -110,7 +110,7 @@ jobs:
     - name: Upload Test Results
       uses: actions/upload-artifact@v3
       with:
-        path: ~/iOS-Build.tgz
+        path: $RUNNER_WORKSPACE/iOS-Build.tgz
         name: iOS-Build
         retention-days: 1
 
@@ -126,11 +126,11 @@ jobs:
     - name: Download build artifacts
       uses: actions/download-artifact@v3
       with:
-        path: ~/iOS-Build.tgz
+        path: $RUNNER_WORKSPACE/iOS-Build.tgz
         name: iOS-Build
     - name: Prepare build artifacts
       run: |
-        tar -xzf ~/iOS-Build.tgz
+        tar -xzf $RUNNER_WORKSPACE/iOS-Build.tgz
     - uses: ./.github/actions/setup-secrets
       with:
         okta_plist: "${{ secrets.TEST_OKTA_PLIST }}"
@@ -168,11 +168,11 @@ jobs:
     - name: Download build artifacts
       uses: actions/download-artifact@v3
       with:
-        path: ~/iOS-Build.tgz
+        path: $RUNNER_WORKSPACE/iOS-Build.tgz
         name: iOS-Build
     - name: Prepare build artifacts
       run: |
-        tar -xzf ~/iOS-Build.tgz
+        tar -xzf $RUNNER_WORKSPACE/iOS-Build.tgz
     - uses: ./.github/actions/setup-secrets
       with:
         okta_plist: "${{ secrets.TEST_OKTA_PLIST }}"
@@ -247,11 +247,11 @@ jobs:
     - name: Download build artifacts
       uses: actions/download-artifact@v3
       with:
-        path: ~/iOS-Build.tgz
+        path: $RUNNER_WORKSPACE/iOS-Build.tgz
         name: iOS-Build
     - name: Prepare build artifacts
       run: |
-        tar -xzf ~/iOS-Build.tgz
+        tar -xzf $RUNNER_WORKSPACE/iOS-Build.tgz
     - uses: ./.github/actions/setup-secrets
       with:
         okta_plist: "${{ secrets.TEST_OKTA_PLIST }}"
