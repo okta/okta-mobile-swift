@@ -48,10 +48,10 @@ jobs:
     runs-on: macos-12
     timeout-minutes: 15
     steps:
+    - uses: actions/checkout@master
     - uses: ./.github/actions/start-simulator
       with:
         destination: "$iOS_DESTINATION"
-    - uses: actions/checkout@master
     - name: Build AuthFoundation
       run: |
         set -o pipefail
@@ -124,10 +124,10 @@ jobs:
       - XcodeBuild
       - SwiftBuild
     steps:
+    - uses: actions/checkout@master
     - uses: ./.github/actions/start-simulator
       with:
         destination: "$iOS_DESTINATION"
-    - uses: actions/checkout@master
     - name: Download build artifacts
       uses: actions/download-artifact@v3
       with:
@@ -169,10 +169,10 @@ jobs:
       - XcodeBuild
       - SwiftBuild
     steps:
+    - uses: actions/checkout@master
     - uses: ./.github/actions/start-simulator
       with:
         destination: "$iOS_DESTINATION"
-    - uses: actions/checkout@master
     - name: Download build artifacts
       uses: actions/download-artifact@v3
       with:
@@ -204,10 +204,10 @@ jobs:
       - XcodeBuild
       - SwiftBuild
     steps:
+    - uses: actions/checkout@master
     - uses: ./.github/actions/start-simulator
       with:
         destination: "$tvOS_DESTINATION"
-    - uses: actions/checkout@master
     - uses: ./.github/actions/setup-secrets
       with:
         okta_plist: "${{ secrets.TEST_OKTA_PLIST }}"
@@ -254,10 +254,10 @@ jobs:
       - XcodeBuild
       - SwiftBuild
     steps:
+    - uses: actions/checkout@master
     - uses: ./.github/actions/start-simulator
       with:
         destination: "$iOS_DESTINATION"
-    - uses: actions/checkout@master
     - name: Download build artifacts
       uses: actions/download-artifact@v3
       with:
