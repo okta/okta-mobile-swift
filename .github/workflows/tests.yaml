@@ -25,7 +25,9 @@ on:
       - 'Tests/**/*.swift'
 
 env:
-  DEVELOPER_DIR: /Applications/Xcode_13.3.app/Contents/Developer
+  DEVELOPER_DIR: /Applications/Xcode_14.2.app/Contents/Developer
+  iOS_DESTINATION: "platform=iOS Simulator,OS=16.0,name=iPhone 12"
+  tvOS_DESTINATION: "platform=tvOS Simulator,OS=16.0,name=Apple TV"
 
 jobs:
   SwiftBuild:
@@ -47,44 +49,69 @@ jobs:
     timeout-minutes: 15
     steps:
     - uses: actions/checkout@master
+    - name: Build AuthFoundation
+      run: |
+        set -o pipefail
+        env NSUnbufferedIO=YES xcodebuild build \
+          -derivedDataPath ../Build/DerivedData \
+          -clonedSourcePackagesDirPath ../Build/ClonedSources \
+          -scheme AuthFoundation \
+          -sdk iphonesimulator \
+          -destination "$iOS_DESTINATION" | xcpretty
     - name: Test AuthFoundation
       run: |
         set -o pipefail
         env NSUnbufferedIO=YES xcodebuild test \
           -derivedDataPath ../Build/DerivedData \
           -clonedSourcePackagesDirPath ../Build/ClonedSources \
-          -resultBundlePath ../TestResults/AuthFoundation.xcresult \
           -scheme AuthFoundation \
           -sdk iphonesimulator \
-          -destination "platform=iOS Simulator,OS=latest,name=iPhone 12" | xcpretty
+          -destination "$iOS_DESTINATION" | xcpretty
+    - name: Build OktaOAuth2
+      run: |
+        set -o pipefail
+        env NSUnbufferedIO=YES xcodebuild build \
+          -derivedDataPath ../Build/DerivedData \
+          -clonedSourcePackagesDirPath ../Build/ClonedSources \
+          -scheme OktaOAuth2 \
+          -sdk iphonesimulator \
+          -destination "$iOS_DESTINATION" | xcpretty
     - name: Test OktaOAuth2
       run: |
         set -o pipefail
         env NSUnbufferedIO=YES xcodebuild test \
           -derivedDataPath ../Build/DerivedData \
           -clonedSourcePackagesDirPath ../Build/ClonedSources \
-          -resultBundlePath ../TestResults/OktaOAuth2.xcresult \
           -scheme OktaOAuth2 \
           -sdk iphonesimulator \
-          -destination "platform=iOS Simulator,OS=latest,name=iPhone 12" | xcpretty
+          -destination "$iOS_DESTINATION" | xcpretty
+    - name: Build WebAuthenticationUI
+      run: |
+        set -o pipefail
+        env NSUnbufferedIO=YES xcodebuild build \
+          -derivedDataPath ../Build/DerivedData \
+          -clonedSourcePackagesDirPath ../Build/ClonedSources \
+          -scheme WebAuthenticationUI \
+          -sdk iphonesimulator \
+          -destination "$iOS_DESTINATION" | xcpretty
     - name: Test WebAuthenticationUI
       run: |
         set -o pipefail
         env NSUnbufferedIO=YES xcodebuild test \
           -derivedDataPath ../Build/DerivedData \
           -clonedSourcePackagesDirPath ../Build/ClonedSources \
-          -resultBundlePath ../TestResults/WebAuthenticationUI.xcresult \
           -scheme WebAuthenticationUI \
           -sdk iphonesimulator \
-          -destination "platform=iOS Simulator,OS=latest,name=iPhone 12" | xcpretty
+          -destination "$iOS_DESTINATION" | xcpretty
+    - name: Prepare build artifacts
+      run: |
+        tar -czf ../iOS-Build.tgz ../Build
     - name: Upload Test Results
       uses: actions/upload-artifact@v3
       with:
-        path: ~/TestResults/*.xcresult
-        name: XcodeBuild-Results
-        if-no-files-found: warn
+        path: ../iOS-Build.tgz
+        name: iOS-Build
         retention-days: 1
-      if: success() || failure()
 
   UITest-WebSignIn:
     name: Web Sign In / Single Sign On (iOS)
@@ -95,6 +122,14 @@ jobs:
       - SwiftBuild
     steps:
     - uses: actions/checkout@master
+    - name: Download build artifacts
+      uses: actions/download-artifact@v3
+      with:
+        path: ../iOS-Build.tgz
+        name: iOS-Build
+    - name: Prepare build artifacts
+      run: |
+        tar -xzf ../iOS-Build.tgz
     - uses: ./.github/actions/setup-secrets
       with:
         okta_plist: "${{ secrets.TEST_OKTA_PLIST }}"
@@ -102,33 +137,23 @@ jobs:
     - name: Test Web Sign In
       run: |
         xcodebuild \
-            -derivedDataPath ~/Build/DerivedData \
-            -clonedSourcePackagesDirPath ~/Build/ClonedSources \
-            -resultBundlePath ~/TestResults/WebSignIn-iOS.xcresult \
+            -derivedDataPath ../Build/DerivedData \
+            -clonedSourcePackagesDirPath ../Build/ClonedSources \
             -workspace OktaMobileSDK.xcworkspace \
             -scheme "WebSignIn (iOS)" \
             -sdk iphonesimulator \
-            -destination 'platform=iOS Simulator,name=iPhone 12,OS=15.4' \
+            -destination "$iOS_DESTINATION" \
             test
     - name: Test Single Sign In
       run: |
         xcodebuild \
-            -derivedDataPath ~/Build/DerivedData \
-            -clonedSourcePackagesDirPath ~/Build/ClonedSources \
-            -resultBundlePath ~/TestResults/SingleSignOn-iOS.xcresult \
+            -derivedDataPath ../Build/DerivedData \
+            -clonedSourcePackagesDirPath ../Build/ClonedSources \
             -workspace OktaMobileSDK.xcworkspace \
             -scheme "SingleSignOn (iOS)" \
             -sdk iphonesimulator \
-            -destination 'platform=iOS Simulator,name=iPhone 12,OS=15.4' \
+            -destination "$iOS_DESTINATION" \
             test
-    - name: Upload Test Results
-      uses: actions/upload-artifact@v3
-      with:
-        path: ~/TestResults/*.xcresult
-        name: WebSignIn-iOS-Results
-        if-no-files-found: warn
-        retention-days: 1
-      if: success() || failure()
 
   UITest-DeviceAuthSignIniOS:
     name: Device Auth Sign In (iOS)
@@ -139,6 +164,14 @@ jobs:
       - SwiftBuild
     steps:
     - uses: actions/checkout@master
+    - name: Download build artifacts
+      uses: actions/download-artifact@v3
+      with:
+        path: ../iOS-Build.tgz
+        name: iOS-Build
+    - name: Prepare build artifacts
+      run: |
+        tar -xzf ../iOS-Build.tgz
     - uses: ./.github/actions/setup-secrets
       with:
         okta_plist: "${{ secrets.TEST_OKTA_PLIST }}"
@@ -146,22 +179,13 @@ jobs:
     - name: Test
       run: |
         xcodebuild \
-            -derivedDataPath ~/Build/DerivedData \
-            -clonedSourcePackagesDirPath ~/Build/ClonedSources \
-            -resultBundlePath ~/TestResults/DeviceAuthSignIn-iOS.xcresult \
+            -derivedDataPath ../Build/DerivedData \
+            -clonedSourcePackagesDirPath ../Build/ClonedSources \
             -workspace OktaMobileSDK.xcworkspace \
             -scheme "DeviceAuthSignIn (iOS)" \
             -sdk iphonesimulator \
-            -destination 'platform=iOS Simulator,name=iPhone 12,OS=15.4' \
+            -destination "$iOS_DESTINATION" \
             test
-    - name: Upload Test Results
-      uses: actions/upload-artifact@v3
-      with:
-        path: ~/TestResults/*.xcresult
-        name: DeviceAuthSignIn-iOS-Results
-        if-no-files-found: warn
-        retention-days: 1
-      if: success() || failure()
 
   UITest-DeviceAuthSignIntvOS:
     name: Device Auth Sign In (tvOS)
@@ -179,22 +203,13 @@ jobs:
     - name: Test
       run: |
         xcodebuild \
-            -derivedDataPath ~/Build/DerivedData \
-            -clonedSourcePackagesDirPath ~/Build/ClonedSources \
-            -resultBundlePath ~/TestResults/DeviceAuthSignIn-tvOS.xcresult \
+            -derivedDataPath ../Build/DerivedData \
+            -clonedSourcePackagesDirPath ../Build/ClonedSources \
             -workspace OktaMobileSDK.xcworkspace \
             -scheme "DeviceAuthSignIn (tvOS)" \
             -sdk appletvsimulator \
-            -destination 'platform=tvOS Simulator,name=Apple TV,OS=15.4' \
+            -destination "$tvOS_DESTINATION" \
             test
-    - name: Upload Test Results
-      uses: actions/upload-artifact@v3
-      with:
-        path: ~/TestResults/*.xcresult
-        name: DeviceAuthSignIn-tvOS-Results
-        if-no-files-found: warn
-        retention-days: 1
-      if: success() || failure()
 
   UITest-UserPasswordSignInmacOS:
     name: User Password Sign In (macOS)
@@ -212,21 +227,12 @@ jobs:
     - name: Test
       run: |
         xcodebuild \
-            -derivedDataPath ~/Build/DerivedData \
-            -clonedSourcePackagesDirPath ~/Build/ClonedSources \
-            -resultBundlePath ~/TestResults/UserPasswordSignIn-macOS.xcresult \
+            -derivedDataPath ../Build/DerivedData \
+            -clonedSourcePackagesDirPath ../Build/ClonedSources \
             -workspace OktaMobileSDK.xcworkspace \
             -sdk macosx \
             -scheme "UserPasswordSignIn (macOS)" \
-            build test
-    - name: Upload Test Results
-      uses: actions/upload-artifact@v3
-      with:
-        path: ~/TestResults/*.xcresult
-        name: UserPasswordSignIn-macOS-Results
-        if-no-files-found: warn
-        retention-days: 1
-      if: success() || failure()
+            test
 
   UITest-ClassicNativeAuthiOS:
     name: Classic Native Auth (iOS)
@@ -237,6 +243,14 @@ jobs:
       - SwiftBuild
     steps:
     - uses: actions/checkout@master
+    - name: Download build artifacts
+      uses: actions/download-artifact@v3
+      with:
+        path: ../iOS-Build.tgz
+        name: iOS-Build
+    - name: Prepare build artifacts
+      run: |
+        tar -xzf ../iOS-Build.tgz
     - uses: ./.github/actions/setup-secrets
       with:
         okta_plist: "${{ secrets.TEST_OKTA_PLIST }}"
@@ -244,52 +258,10 @@ jobs:
     - name: Test
       run: |
         xcodebuild \
-            -derivedDataPath ~/Build/DerivedData \
-            -clonedSourcePackagesDirPath ~/Build/ClonedSources \
-            -resultBundlePath ~/TestResults/ClassicNativeAuth-iOS.xcresult \
+            -derivedDataPath ../Build/DerivedData \
+            -clonedSourcePackagesDirPath ../Build/ClonedSources \
             -workspace OktaMobileSDK.xcworkspace \
             -scheme "ClassicNativeAuth (iOS)" \
             -sdk iphonesimulator \
-            -destination 'platform=iOS Simulator,name=iPhone 12,OS=15.4' \
+            -destination "$iOS_DESTINATION" \
             test
-    - name: Upload Test Results
-      uses: actions/upload-artifact@v3
-      with:
-        path: ~/TestResults/*.xcresult
-        name: ClassicNativeAuth-iOS-Results
-        if-no-files-found: warn
-        retention-days: 1
-      if: success() || failure()
-
-  Results:
-    name: Test Results
-    runs-on: macos-12
-    timeout-minutes: 5
-    needs: 
-      - UITest-WebSignIn
-      - UITest-DeviceAuthSignIniOS
-      - UITest-DeviceAuthSignIntvOS
-      - UITest-UserPasswordSignInmacOS
-      - UITest-ClassicNativeAuthiOS
-    if: always()
-    steps:
-    - name: Download Test Results
-      uses: actions/download-artifact@v2
-      with:
-        path: ~/work/okta-mobile-swift/TestResults
-    - uses: kishikawakatsumi/xcresulttool@v1
-      with:
-        path: |
-          ../TestResults/XcodeBuild-Results/AuthFoundation.xcresult
-          ../TestResults/XcodeBuild-Results/OktaOAuth2.xcresult
-          ../TestResults/XcodeBuild-Results/WebAuthenticationUI.xcresult
-          ../TestResults/DeviceAuthSignIn-iOS-Results/DeviceAuthSignIn-iOS.xcresult
-          ../TestResults/WebSignIn-iOS-Results/WebSignIn-iOS.xcresult
-          ../TestResults/WebSignIn-iOS-Results/SingleSignOn-iOS.xcresult
-          ../TestResults/DeviceAuthSignIn-tvOS-Results/DeviceAuthSignIn-tvOS.xcresult
-          ../TestResults/UserPasswordSignIn-macOS-Results/UserPasswordSignIn-macOS.xcresult
-          ../TestResults/ClassicNativeAuth-iOS-Results/ClassicNativeAuth-iOS.xcresult
-        title: UI Test Results
-        show-passed-tests: false
-        upload-bundles: failure
-      if: success() || failure()
