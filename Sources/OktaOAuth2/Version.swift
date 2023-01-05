@@ -12,4 +12,4 @@
 
 @_exported import AuthFoundation
 
-public let Version = SDKVersion(sdk: "okta-oauth2-swift", version: "1.1.5")
+public let Version = SDKVersion(sdk: "okta-oauth2-swift", version: "1.2.0")

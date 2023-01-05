@@ -93,7 +93,9 @@ extension APIClientDelegate {
 
 /// List of retry options
 public enum APIRetry {
+    /// Indicates the APIRequest should not be retried.
     case doNotRetry
+    /// The APIRequest should be retried, up to the given maximum number of times.
     case retry(maximumCount: Int)
     
     /// The default retry option.
@@ -110,6 +112,27 @@ public enum APIRetry {
                            requestId: requestId,
                            originalRequest: originalRequest,
                            retryCount: retryCount + 1)
+        }
+    }
+}
+
+/// Defines the possible results for an API request.
+public enum APIResponseResult {
+    /// Indicates the request was successful.
+    case success
+    /// The server is indicating the request should be retried.
+    case retry
+    /// The server reports the response represents an error.
+    case error
+
+    init(statusCode: Int) {
+        switch statusCode {
+        case 200..<300:
+            self = .success
+        case 429:
+            self = .retry
+        default:
+            self = .error
         }
     }
 }
@@ -163,15 +186,17 @@ extension APIClient {
                 }
                 
                 let rateInfo = APIRateLimit(with: httpResponse.allHeaderFields)
-                switch httpResponse.statusCode {
-                case 200..<300:
+                let responseType = context?.resultType(from: httpResponse) ?? APIResponseResult(statusCode: httpResponse.statusCode)
+                
+                switch responseType {
+                case .success:
                     let response: APIResponse<T> = try self.validate(data: data,
                                                                      response: httpResponse,
                                                                      rateInfo: rateInfo,
                                                                      parsing: context)
                     self.didSend(request: request, received: response)
                     completion(.success(response))
-                case 429:
+                case .retry:
                     guard let rateInfo = rateInfo else {
                         fallthrough
                     }
@@ -208,7 +233,7 @@ extension APIClient {
                         return
                     }
                     fallthrough
-                default:
+                case .error:
                     if let error = error(from: data) ?? context?.error(from: data) {
                         throw APIClientError.serverError(error)
                     } else {
@@ -279,6 +304,7 @@ extension APIClient {
                                               from: jsonData,
                                               userInfo: context?.codingUserInfo),
                            date: date ?? Date(),
+                           statusCode: response.statusCode,
                            links: relatedLinks(from: response.allHeaderFields["Link"] as? String),
                            rateInfo: rateInfo,
                            requestId: requestId)

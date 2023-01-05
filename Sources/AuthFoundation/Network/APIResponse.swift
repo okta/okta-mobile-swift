@@ -28,6 +28,9 @@ public struct APIResponse<T: Decodable>: Decodable {
     /// The date the response was received, as reported by the server.
     public let date: Date
     
+    /// The actual HTTP status code for the result.
+    public let statusCode: Int
+    
     /// Information about links between related resources.
     public let links: [Link: URL]
     

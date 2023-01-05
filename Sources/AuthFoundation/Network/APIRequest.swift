@@ -136,6 +136,13 @@ public protocol APIParsingContext {
     /// Optional coding user info to use when parsing ``APIRequest`` responses.
     var codingUserInfo: [CodingUserInfoKey: Any]? { get }
     
+    /// Enables the response from an ``APIRequest`` to be customized.
+    ///
+    /// The default implementation utilizes the response's status code to report the appropriate result.
+    /// - Parameter response: The response returned from the server.
+    /// - Returns: The result that should be inferred from this response.
+    func resultType(from response: HTTPURLResponse) -> APIResponseResult
+    
     /// Generates an error response from an ``APIRequest`` result when an HTTP error occurs.
     /// - Parameter data: Raw data returned from the HTTP response.
     /// - Returns: Optional error option described within the supplied data.
@@ -144,6 +151,9 @@ public protocol APIParsingContext {
 
 extension APIParsingContext {
     public func error(from data: Data) -> Error? { nil }
+    public func resultType(from response: HTTPURLResponse) -> APIResponseResult {
+        APIResponseResult(statusCode: response.statusCode)
+    }
 }
 
 extension APIRequest where Self: APIRequestBody {
