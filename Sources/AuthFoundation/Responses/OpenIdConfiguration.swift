@@ -23,7 +23,7 @@ public struct OpenIdConfiguration: Codable, JSONDecodable {
     public let issuer: URL
     public let jwksUri: URL
     public let registrationEndpoint: URL?
-    public let revocationEndpoint: URL
+    public let revocationEndpoint: URL?
     public let tokenEndpoint: URL
     public let userinfoEndpoint: URL?
     public let scopesSupported: [String]?

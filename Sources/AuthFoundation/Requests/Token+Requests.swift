@@ -61,7 +61,7 @@ extension Token.RevokeRequest: OAuth2APIRequest, APIRequestBody {
     typealias ResponseType = Empty
     
     var httpMethod: APIRequestMethod { .post }
-    var url: URL { openIdConfiguration.revocationEndpoint }
+    var url: URL { openIdConfiguration.revocationEndpoint ?? URL(string: "ADFS Does not use this feature. If you hit this url you will crash.")! }
     var contentType: APIContentType? { .formEncoded }
     var acceptsType: APIContentType? { .json }
     var bodyParameters: [String: Any]? {

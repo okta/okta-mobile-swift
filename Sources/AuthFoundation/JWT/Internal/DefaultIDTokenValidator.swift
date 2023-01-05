@@ -18,10 +18,14 @@ import CommonCrypto
 
 struct DefaultIDTokenValidator: IDTokenValidator {
     var issuedAtGraceInterval: TimeInterval = 300
-    var checks: [ValidationCheck] = ValidationCheck.allCases
+    var checks: [ValidationCheck] = ValidationCheck.vipIssuedChecks
     
     enum ValidationCheck: CaseIterable {
         case issuer, audience, scheme, algorithm, expirationTime, issuedAtTime, nonce, maxAge, subject
+
+        static var vipIssuedChecks: [ValidationCheck] {
+            return [.issuer, .audience, .issuedAtTime, subject]
+        }
     }
     
     // swiftlint:disable cyclomatic_complexity
