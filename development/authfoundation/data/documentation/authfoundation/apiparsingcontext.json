@@ -125,7 +125,8 @@
     },
     {
       "identifiers" : [
-        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/APIParsingContext\/error(from:)-5p5cl"
+        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/APIParsingContext\/error(from:)-5p5cl",
+        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/APIParsingContext\/resultType(from:)-4ldi5"
       ],
       "title" : "Instance Methods"
     }
@@ -513,6 +514,71 @@
   "title" : "error(from:)",
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/apiparsingcontext\/error(from:)-5p5cl"
+},
+"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/APIParsingContext/resultType(from:)-4ldi5": {
+  "abstract" : [
+    {
+      "text" : "Enables the response from an ",
+      "type" : "text"
+    },
+    {
+      "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/APIRequest",
+      "isActive" : true,
+      "type" : "reference"
+    },
+    {
+      "text" : " to be customized.",
+      "type" : "text"
+    }
+  ],
+  "defaultImplementations" : 1,
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "func"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "resultType"
+    },
+    {
+      "kind" : "text",
+      "text" : "("
+    },
+    {
+      "kind" : "externalParam",
+      "text" : "from"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "c:objc(cs)NSHTTPURLResponse",
+      "text" : "HTTPURLResponse"
+    },
+    {
+      "kind" : "text",
+      "text" : ") -> "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:14AuthFoundation17APIResponseResultO",
+      "text" : "APIResponseResult"
+    }
+  ],
+  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/APIParsingContext\/resultType(from:)-4ldi5",
+  "kind" : "symbol",
+  "required" : true,
+  "role" : "symbol",
+  "title" : "resultType(from:)",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/apiparsingcontext\/resulttype(from:)-4ldi5"
 },
 "doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/APIRequest": {
   "abstract" : [

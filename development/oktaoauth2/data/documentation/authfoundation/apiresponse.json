@@ -142,7 +142,8 @@
         "doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/AuthFoundation\/APIResponse\/links",
         "doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/AuthFoundation\/APIResponse\/rateInfo",
         "doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/AuthFoundation\/APIResponse\/requestId",
-        "doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/AuthFoundation\/APIResponse\/result"
+        "doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/AuthFoundation\/APIResponse\/result",
+        "doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/AuthFoundation\/APIResponse\/statusCode"
       ],
       "title" : "Instance Properties"
     },
@@ -539,6 +540,43 @@
   "title" : "result",
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/apiresponse\/result"
+},
+"doc://com.okta.mobile.oktaoauth2/documentation/AuthFoundation/APIResponse/statusCode": {
+  "abstract" : [
+    {
+      "text" : "The actual HTTP status code for the result.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "let"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "statusCode"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:Si",
+      "text" : "Int"
+    }
+  ],
+  "identifier" : "doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/AuthFoundation\/APIResponse\/statusCode",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "statusCode",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/apiresponse\/statuscode"
 }
 }
 }

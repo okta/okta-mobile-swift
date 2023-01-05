@@ -118,6 +118,7 @@
         "doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/AuthFoundation\/APIClientError",
         "doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/AuthFoundation\/APIContentType",
         "doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/AuthFoundation\/APIRequestMethod",
+        "doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/AuthFoundation\/APIResponseResult",
         "doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/AuthFoundation\/APIRetry",
         "doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/AuthFoundation\/AuthenticationError",
         "doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/AuthFoundation\/Claim",
@@ -759,6 +760,40 @@
   "title" : "APIResponse",
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/apiresponse"
+},
+"doc://com.okta.mobile.webauthenticationui/documentation/AuthFoundation/APIResponseResult": {
+  "abstract" : [
+    {
+      "text" : "Defines the possible results for an API request.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "enum"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "APIResponseResult"
+    }
+  ],
+  "identifier" : "doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/AuthFoundation\/APIResponseResult",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "APIResponseResult"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "APIResponseResult",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/apiresponseresult"
 },
 "doc://com.okta.mobile.webauthenticationui/documentation/AuthFoundation/APIRetry": {
   "abstract" : [

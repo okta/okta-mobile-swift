@@ -1,7 +1,7 @@
 {
   "abstract" : [
     {
-      "text" : "No overview available.",
+      "text" : "Indicates the APIRequest should not be retried.",
       "type" : "text"
     }
   ],
@@ -145,7 +145,10 @@
 },
 "doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/APIRetry/doNotRetry": {
   "abstract" : [
-
+    {
+      "text" : "Indicates the APIRequest should not be retried.",
+      "type" : "text"
+    }
   ],
   "fragments" : [
     {

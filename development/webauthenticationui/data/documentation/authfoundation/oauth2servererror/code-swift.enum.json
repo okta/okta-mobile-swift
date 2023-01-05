@@ -85,7 +85,6 @@
       "identifiers" : [
         "doc:\/\/com.okta.mobile.webauthenticationui\/Se",
         "doc:\/\/com.okta.mobile.webauthenticationui\/SQ",
-        "doc:\/\/com.okta.mobile.webauthenticationui\/SH",
         "doc:\/\/com.okta.mobile.webauthenticationui\/SY"
       ],
       "kind" : "relationships",
@@ -112,19 +111,15 @@
         "doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/AuthFoundation\/OAuth2ServerError\/Code-swift.enum\/invalidRequest",
         "doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/AuthFoundation\/OAuth2ServerError\/Code-swift.enum\/invalidScope",
         "doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/AuthFoundation\/OAuth2ServerError\/Code-swift.enum\/invalidToken",
+        "doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/AuthFoundation\/OAuth2ServerError\/Code-swift.enum\/other(code:)",
         "doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/AuthFoundation\/OAuth2ServerError\/Code-swift.enum\/serverError",
         "doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/AuthFoundation\/OAuth2ServerError\/Code-swift.enum\/slowDown",
         "doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/AuthFoundation\/OAuth2ServerError\/Code-swift.enum\/temporarilyUnavailable",
+        "doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/AuthFoundation\/OAuth2ServerError\/Code-swift.enum\/unauthorizedClient",
         "doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/AuthFoundation\/OAuth2ServerError\/Code-swift.enum\/unsupportedResponseMode",
         "doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/AuthFoundation\/OAuth2ServerError\/Code-swift.enum\/unsupportedResponseType"
       ],
       "title" : "Enumeration Cases"
-    },
-    {
-      "identifiers" : [
-        "doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/AuthFoundation\/OAuth2ServerError\/Code-swift.enum\/init(rawValue:)"
-      ],
-      "title" : "Initializers"
     },
     {
       "generated" : true,
@@ -149,11 +144,6 @@
   ]
 , 
 "references": {
-"doc://com.okta.mobile.webauthenticationui/SH": {
-  "identifier" : "doc:\/\/com.okta.mobile.webauthenticationui\/SH",
-  "title" : "Swift.Hashable",
-  "type" : "unresolvable"
-},
 "doc://com.okta.mobile.webauthenticationui/SQ": {
   "identifier" : "doc:\/\/com.okta.mobile.webauthenticationui\/SQ",
   "title" : "Swift.Equatable",
@@ -351,47 +341,6 @@
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/oauth2servererror\/code-swift.enum\/expiredtoken"
 },
-"doc://com.okta.mobile.webauthenticationui/documentation/AuthFoundation/OAuth2ServerError/Code-swift.enum/init(rawValue:)": {
-  "abstract" : [
-    {
-      "text" : "Creates a new instance with the specified raw value.",
-      "type" : "text"
-    }
-  ],
-  "fragments" : [
-    {
-      "kind" : "identifier",
-      "text" : "init"
-    },
-    {
-      "kind" : "text",
-      "text" : "?("
-    },
-    {
-      "kind" : "externalParam",
-      "text" : "rawValue"
-    },
-    {
-      "kind" : "text",
-      "text" : ": "
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:SS",
-      "text" : "String"
-    },
-    {
-      "kind" : "text",
-      "text" : ")"
-    }
-  ],
-  "identifier" : "doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/AuthFoundation\/OAuth2ServerError\/Code-swift.enum\/init(rawValue:)",
-  "kind" : "symbol",
-  "role" : "symbol",
-  "title" : "init(rawValue:)",
-  "type" : "topic",
-  "url" : "\/documentation\/authfoundation\/oauth2servererror\/code-swift.enum\/init(rawvalue:)"
-},
 "doc://com.okta.mobile.webauthenticationui/documentation/AuthFoundation/OAuth2ServerError/Code-swift.enum/invalidClient": {
   "abstract" : [
     {
@@ -532,6 +481,55 @@
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/oauth2servererror\/code-swift.enum\/invalidtoken"
 },
+"doc://com.okta.mobile.webauthenticationui/documentation/AuthFoundation/OAuth2ServerError/Code-swift.enum/other(code:)": {
+  "abstract" : [
+    {
+      "text" : "An error code other than one of the standard ones defined above.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "case"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "other"
+    },
+    {
+      "kind" : "text",
+      "text" : "("
+    },
+    {
+      "kind" : "externalParam",
+      "text" : "code"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:SS",
+      "text" : "String"
+    },
+    {
+      "kind" : "text",
+      "text" : ")"
+    }
+  ],
+  "identifier" : "doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/AuthFoundation\/OAuth2ServerError\/Code-swift.enum\/other(code:)",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "OAuth2ServerError.Code.other(code:)",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/oauth2servererror\/code-swift.enum\/other(code:)"
+},
 "doc://com.okta.mobile.webauthenticationui/documentation/AuthFoundation/OAuth2ServerError/Code-swift.enum/serverError": {
   "abstract" : [
     {
@@ -615,6 +613,34 @@
   "title" : "OAuth2ServerError.Code.temporarilyUnavailable",
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/oauth2servererror\/code-swift.enum\/temporarilyunavailable"
+},
+"doc://com.okta.mobile.webauthenticationui/documentation/AuthFoundation/OAuth2ServerError/Code-swift.enum/unauthorizedClient": {
+  "abstract" : [
+    {
+      "text" : "The client specified is not authorized to utilize the supplied grant type.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "case"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "unauthorizedClient"
+    }
+  ],
+  "identifier" : "doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/AuthFoundation\/OAuth2ServerError\/Code-swift.enum\/unauthorizedClient",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "OAuth2ServerError.Code.unauthorizedClient",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/oauth2servererror\/code-swift.enum\/unauthorizedclient"
 },
 "doc://com.okta.mobile.webauthenticationui/documentation/AuthFoundation/OAuth2ServerError/Code-swift.enum/unsupportedResponseMode": {
   "abstract" : [

@@ -207,7 +207,10 @@
 },
 "doc://com.okta.mobile.webauthenticationui/documentation/AuthFoundation/APIRetry/doNotRetry": {
   "abstract" : [
-
+    {
+      "text" : "Indicates the APIRequest should not be retried.",
+      "type" : "text"
+    }
   ],
   "fragments" : [
     {
@@ -232,7 +235,10 @@
 },
 "doc://com.okta.mobile.webauthenticationui/documentation/AuthFoundation/APIRetry/retry(maximumCount:)": {
   "abstract" : [
-
+    {
+      "text" : "The APIRequest should be retried, up to the given maximum number of times.",
+      "type" : "text"
+    }
   ],
   "fragments" : [
     {

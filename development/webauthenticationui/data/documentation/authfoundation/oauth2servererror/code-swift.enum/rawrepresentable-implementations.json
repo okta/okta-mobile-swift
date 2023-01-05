@@ -40,23 +40,24 @@
     {
       "generated" : true,
       "identifiers" : [
-        "doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/AuthFoundation\/OAuth2ServerError\/Code-swift.enum\/init(from:)"
+        "doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/AuthFoundation\/OAuth2ServerError\/Code-swift.enum\/init(from:)",
+        "doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/AuthFoundation\/OAuth2ServerError\/Code-swift.enum\/init(rawValue:)"
       ],
       "title" : "Initializers"
     },
     {
       "generated" : true,
       "identifiers" : [
-        "doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/AuthFoundation\/OAuth2ServerError\/Code-swift.enum\/hashValue"
+        "doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/AuthFoundation\/OAuth2ServerError\/Code-swift.enum\/rawValue-swift.property"
       ],
       "title" : "Instance Properties"
     },
     {
       "generated" : true,
       "identifiers" : [
-        "doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/AuthFoundation\/OAuth2ServerError\/Code-swift.enum\/hash(into:)"
+        "doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/AuthFoundation\/OAuth2ServerError\/Code-swift.enum\/RawValue-swift.typealias"
       ],
-      "title" : "Instance Methods"
+      "title" : "Type Aliases"
     }
   ],
   "variants" : [
@@ -152,62 +153,25 @@
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/oauth2servererror\/code-swift.enum"
 },
-"doc://com.okta.mobile.webauthenticationui/documentation/AuthFoundation/OAuth2ServerError/Code-swift.enum/hash(into:)": {
+"doc://com.okta.mobile.webauthenticationui/documentation/AuthFoundation/OAuth2ServerError/Code-swift.enum/RawValue-swift.typealias": {
   "abstract" : [
-
+    {
+      "text" : "The raw type that can be used to represent all values of the conforming",
+      "type" : "text"
+    },
+    {
+      "text" : " ",
+      "type" : "text"
+    },
+    {
+      "text" : "type.",
+      "type" : "text"
+    }
   ],
-  "conformance" : {
-    "availabilityPrefix" : [
-      {
-        "text" : "Available when",
-        "type" : "text"
-      }
-    ],
-    "conformancePrefix" : [
-      {
-        "text" : "Conforms when",
-        "type" : "text"
-      }
-    ],
-    "constraints" : [
-      {
-        "code" : "Self",
-        "type" : "codeVoice"
-      },
-      {
-        "text" : " conforms to ",
-        "type" : "text"
-      },
-      {
-        "code" : "Hashable",
-        "type" : "codeVoice"
-      },
-      {
-        "text" : " and ",
-        "type" : "text"
-      },
-      {
-        "code" : "RawValue",
-        "type" : "codeVoice"
-      },
-      {
-        "text" : " conforms to ",
-        "type" : "text"
-      },
-      {
-        "code" : "Hashable",
-        "type" : "codeVoice"
-      },
-      {
-        "text" : ".",
-        "type" : "text"
-      }
-    ]
-  },
   "fragments" : [
     {
       "kind" : "keyword",
-      "text" : "func"
+      "text" : "typealias"
     },
     {
       "kind" : "text",
@@ -215,126 +179,21 @@
     },
     {
       "kind" : "identifier",
-      "text" : "hash"
-    },
-    {
-      "kind" : "text",
-      "text" : "("
-    },
-    {
-      "kind" : "externalParam",
-      "text" : "into"
-    },
-    {
-      "kind" : "text",
-      "text" : ": "
-    },
-    {
-      "kind" : "keyword",
-      "text" : "inout"
-    },
-    {
-      "kind" : "text",
-      "text" : " "
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:s6HasherV",
-      "text" : "Hasher"
-    },
-    {
-      "kind" : "text",
-      "text" : ")"
+      "text" : "RawValue"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/AuthFoundation\/OAuth2ServerError\/Code-swift.enum\/hash(into:)",
+  "identifier" : "doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/AuthFoundation\/OAuth2ServerError\/Code-swift.enum\/RawValue-swift.typealias",
   "kind" : "symbol",
-  "role" : "symbol",
-  "title" : "hash(into:)",
-  "type" : "topic",
-  "url" : "\/documentation\/authfoundation\/oauth2servererror\/code-swift.enum\/hash(into:)"
-},
-"doc://com.okta.mobile.webauthenticationui/documentation/AuthFoundation/OAuth2ServerError/Code-swift.enum/hashValue": {
-  "abstract" : [
-
-  ],
-  "conformance" : {
-    "availabilityPrefix" : [
-      {
-        "text" : "Available when",
-        "type" : "text"
-      }
-    ],
-    "conformancePrefix" : [
-      {
-        "text" : "Conforms when",
-        "type" : "text"
-      }
-    ],
-    "constraints" : [
-      {
-        "code" : "Self",
-        "type" : "codeVoice"
-      },
-      {
-        "text" : " conforms to ",
-        "type" : "text"
-      },
-      {
-        "code" : "Hashable",
-        "type" : "codeVoice"
-      },
-      {
-        "text" : " and ",
-        "type" : "text"
-      },
-      {
-        "code" : "RawValue",
-        "type" : "codeVoice"
-      },
-      {
-        "text" : " conforms to ",
-        "type" : "text"
-      },
-      {
-        "code" : "Hashable",
-        "type" : "codeVoice"
-      },
-      {
-        "text" : ".",
-        "type" : "text"
-      }
-    ]
-  },
-  "fragments" : [
-    {
-      "kind" : "keyword",
-      "text" : "var"
-    },
-    {
-      "kind" : "text",
-      "text" : " "
-    },
+  "navigatorTitle" : [
     {
       "kind" : "identifier",
-      "text" : "hashValue"
-    },
-    {
-      "kind" : "text",
-      "text" : ": "
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:Si",
-      "text" : "Int"
+      "text" : "RawValue"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/AuthFoundation\/OAuth2ServerError\/Code-swift.enum\/hashValue",
-  "kind" : "symbol",
   "role" : "symbol",
-  "title" : "hashValue",
+  "title" : "OAuth2ServerError.Code.RawValue",
   "type" : "topic",
-  "url" : "\/documentation\/authfoundation\/oauth2servererror\/code-swift.enum\/hashvalue"
+  "url" : "\/documentation\/authfoundation\/oauth2servererror\/code-swift.enum\/rawvalue-swift.typealias"
 },
 "doc://com.okta.mobile.webauthenticationui/documentation/AuthFoundation/OAuth2ServerError/Code-swift.enum/init(from:)": {
   "abstract" : [
@@ -452,6 +311,84 @@
   "title" : "init(from:)",
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/oauth2servererror\/code-swift.enum\/init(from:)"
+},
+"doc://com.okta.mobile.webauthenticationui/documentation/AuthFoundation/OAuth2ServerError/Code-swift.enum/init(rawValue:)": {
+  "abstract" : [
+    {
+      "text" : "Creates a new instance with the specified raw value.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "identifier",
+      "text" : "init"
+    },
+    {
+      "kind" : "text",
+      "text" : "?("
+    },
+    {
+      "kind" : "externalParam",
+      "text" : "rawValue"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:SS",
+      "text" : "String"
+    },
+    {
+      "kind" : "text",
+      "text" : ")"
+    }
+  ],
+  "identifier" : "doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/AuthFoundation\/OAuth2ServerError\/Code-swift.enum\/init(rawValue:)",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "init(rawValue:)",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/oauth2servererror\/code-swift.enum\/init(rawvalue:)"
+},
+"doc://com.okta.mobile.webauthenticationui/documentation/AuthFoundation/OAuth2ServerError/Code-swift.enum/rawValue-swift.property": {
+  "abstract" : [
+    {
+      "text" : "The corresponding value of the raw type.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "var"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "rawValue"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:SS",
+      "text" : "String"
+    }
+  ],
+  "identifier" : "doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/AuthFoundation\/OAuth2ServerError\/Code-swift.enum\/rawValue-swift.property",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "rawValue",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/oauth2servererror\/code-swift.enum\/rawvalue-swift.property"
 }
 }
 }
