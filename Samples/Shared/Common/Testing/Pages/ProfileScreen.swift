@@ -19,9 +19,9 @@ class ProfileScreen: Screen {
 
     private lazy var refreshButton = app.buttons["Refresh"]
     private lazy var signOutButton = app.tables.staticTexts["Sign Out"]
-    private lazy var removeButton = app.sheets.buttons["Remove"]
-    private lazy var revokeButton = app.sheets.buttons["Revoke tokens"]
-    private lazy var endSessionButton = app.sheets.buttons["End a session"]
+    private lazy var removeButton = app.buttons["Remove"]
+    private lazy var revokeButton = app.buttons["Revoke tokens"]
+    private lazy var endSessionButton = app.buttons["End a session"]
 
     init(_ testCase: XCTestCase, app: XCUIApplication = XCUIApplication()) {
         self.testCase = testCase
