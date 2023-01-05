@@ -13,7 +13,7 @@
 import Foundation
 import XCTest
 
-class ProfileScreen: Screen {
+class ProfileScreen: Screen, TestExtensions {
     let app: XCUIApplication
     let testCase: XCTestCase
 
@@ -73,16 +73,8 @@ class ProfileScreen: Screen {
         case .revoke:
             revokeButton.tap()
         case .endSession:
-            let alertObserver = testCase.addUIInterruptionMonitor(withDescription: "System Dialog") { (alert) -> Bool in
-                alert.buttons["Continue"].tap()
-                return true
-            }
-            
-            defer {
-                testCase.removeUIInterruptionMonitor(alertObserver)
-            }
-
             endSessionButton.tap()
+            tapAlertButton(named: "Continue")
             app.tap()
             XCTAssertTrue(app.webViews.element.waitForNonExistence(timeout: .standard))
         }
