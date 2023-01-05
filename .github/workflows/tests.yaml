@@ -48,6 +48,9 @@ jobs:
     runs-on: macos-12
     timeout-minutes: 15
     steps:
+    - uses: ./.github/actions/start-simulator
+      with:
+        destination: "$iOS_DESTINATION"
     - uses: actions/checkout@master
     - name: Build AuthFoundation
       run: |
@@ -122,6 +125,9 @@ jobs:
       - XcodeBuild
       - SwiftBuild
     steps:
+    - uses: ./.github/actions/start-simulator
+      with:
+        destination: "$iOS_DESTINATION"
     - uses: actions/checkout@master
     - name: Download build artifacts
       uses: actions/download-artifact@v3
@@ -164,6 +170,9 @@ jobs:
       - XcodeBuild
       - SwiftBuild
     steps:
+    - uses: ./.github/actions/start-simulator
+      with:
+        destination: "$iOS_DESTINATION"
     - uses: actions/checkout@master
     - name: Download build artifacts
       uses: actions/download-artifact@v3
@@ -196,6 +205,9 @@ jobs:
       - XcodeBuild
       - SwiftBuild
     steps:
+    - uses: ./.github/actions/start-simulator
+      with:
+        destination: "$tvOS_DESTINATION"
     - uses: actions/checkout@master
     - uses: ./.github/actions/setup-secrets
       with:
@@ -243,6 +255,9 @@ jobs:
       - XcodeBuild
       - SwiftBuild
     steps:
+    - uses: ./.github/actions/start-simulator
+      with:
+        destination: "$iOS_DESTINATION"
     - uses: actions/checkout@master
     - name: Download build artifacts
       uses: actions/download-artifact@v3
