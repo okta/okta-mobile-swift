@@ -26,9 +26,7 @@ on:
 
 env:
   DEVELOPER_DIR: /Applications/Xcode_14.2.app/Contents/Developer
-  iOS_VERSION: "16.2"
-  iOS_NAME: "iPhone 12"
-  iOS_DESTINATION: "platform=iOS Simulator,OS=$iOS_VERSION,name=$iOS_NAME"
+  iOS_DESTINATION: "platform=iOS Simulator,OS=16.2,name=iPhone 14"
   tvOS_DESTINATION: "platform=tvOS Simulator,OS=16.1,name=Apple TV"
 
 jobs:
@@ -51,12 +49,6 @@ jobs:
     timeout-minutes: 15
     steps:
     - uses: actions/checkout@master
-    - name: Boot simulator
-      run: |
-        echo xcrun simctl list -j devices available "$iOS_VERSION" | jq ".devices[][] | select(.name == \"$iOS_NAME\") | .udid"
-        simulator_udid=$(xcrun simctl list -j devices available "$iOS_VERSION" | jq ".devices[][] | select(.name == \"$iOS_NAME\") | .udid")
-        echo $simulator_udid
-        xcrun simctl boot $simulator_udid
     - name: Build AuthFoundation
       run: |
         set -o pipefail
