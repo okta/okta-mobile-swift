@@ -53,7 +53,9 @@ jobs:
     - uses: actions/checkout@master
     - name: Boot simulator
       run: |
-        simulator_udid=$(xcrun simctl list -j devices available "$iOS_VERSION" | jq ".devices[][] | select(.name == '$iOS_NAME') | .udid")
+        echo xcrun simctl list -j devices available "$iOS_VERSION" | jq ".devices[][] | select(.name == \"$iOS_NAME\") | .udid"
+        simulator_udid=$(xcrun simctl list -j devices available "$iOS_VERSION" | jq ".devices[][] | select(.name == \"$iOS_NAME\") | .udid")
+        echo $simulator_udid
         xcrun simctl boot $simulator_udid
     - name: Build AuthFoundation
       run: |
