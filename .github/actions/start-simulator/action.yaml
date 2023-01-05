@@ -13,7 +13,7 @@ runs:
       shell: bash
       run: |
         getKey() {
-            echo $iOS_DESTINATION | awk -v key="$1" -v RS=',' -F'=' '$1==key{print $2}' | tr -d '\n'
+            echo "${{ inputs.destination }}" | awk -v key="$1" -v RS=',' -F'=' '$1==key{print $2}' | tr -d '\n'
         }
 
         if [[ -n "${{ inputs.destination }}" ]]; then
@@ -29,6 +29,8 @@ runs:
         else
             filterString="$model Simulator"
         fi
+
+        echo "Starting $filterString"
         
         udid=$(xctrace list devices | grep -m 1 "$filterString" | awk '{print substr($0,length($0)-36,36)}')
-        xcrun simctl boot $udid
+        xcrun simctl boot $udid || true

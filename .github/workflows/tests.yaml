@@ -51,7 +51,7 @@ jobs:
     - uses: actions/checkout@master
     - uses: ./.github/actions/start-simulator
       with:
-        destination: "$iOS_DESTINATION"
+        destination: "${{ iOS_DESTINATION }}"
     - name: Build AuthFoundation
       run: |
         set -o pipefail
@@ -60,7 +60,7 @@ jobs:
           -clonedSourcePackagesDirPath ../Build/ClonedSources \
           -scheme AuthFoundation \
           -sdk iphonesimulator \
-          -destination "$iOS_DESTINATION" | xcpretty
+          -destination "$iOS_DESTINATION" | xcpretty -f `xcpretty-actions-formatter`
     - name: Build OktaOAuth2
       run: |
         set -o pipefail
@@ -69,7 +69,7 @@ jobs:
           -clonedSourcePackagesDirPath ../Build/ClonedSources \
           -scheme OktaOAuth2 \
           -sdk iphonesimulator \
-          -destination "$iOS_DESTINATION" | xcpretty
+          -destination "$iOS_DESTINATION" | xcpretty -f `xcpretty-actions-formatter`
     - name: Build WebAuthenticationUI
       run: |
         set -o pipefail
@@ -78,7 +78,7 @@ jobs:
           -clonedSourcePackagesDirPath ../Build/ClonedSources \
           -scheme WebAuthenticationUI \
           -sdk iphonesimulator \
-          -destination "$iOS_DESTINATION" | xcpretty
+          -destination "$iOS_DESTINATION" | xcpretty -f `xcpretty-actions-formatter`
     - name: Prepare build artifacts
       run: |
         tar -czf ~/iOS-Build.tgz ../Build
@@ -90,7 +90,7 @@ jobs:
           -clonedSourcePackagesDirPath ../Build/ClonedSources \
           -scheme AuthFoundation \
           -sdk iphonesimulator \
-          -destination "$iOS_DESTINATION" | xcpretty
+          -destination "$iOS_DESTINATION" | xcpretty -f `xcpretty-actions-formatter`
     - name: Test OktaOAuth2
       run: |
         set -o pipefail
@@ -99,7 +99,7 @@ jobs:
           -clonedSourcePackagesDirPath ../Build/ClonedSources \
           -scheme OktaOAuth2 \
           -sdk iphonesimulator \
-          -destination "$iOS_DESTINATION" | xcpretty
+          -destination "$iOS_DESTINATION" | xcpretty -f `xcpretty-actions-formatter`
     - name: Test WebAuthenticationUI
       run: |
         set -o pipefail
@@ -108,7 +108,7 @@ jobs:
           -clonedSourcePackagesDirPath ../Build/ClonedSources \
           -scheme WebAuthenticationUI \
           -sdk iphonesimulator \
-          -destination "$iOS_DESTINATION" | xcpretty
+          -destination "$iOS_DESTINATION" | xcpretty -f `xcpretty-actions-formatter`
     - name: Upload build artifacts
       uses: actions/upload-artifact@v3
       with:
@@ -127,7 +127,7 @@ jobs:
     - uses: actions/checkout@master
     - uses: ./.github/actions/start-simulator
       with:
-        destination: "$iOS_DESTINATION"
+        destination: "${{ iOS_DESTINATION }}"
     - name: Download build artifacts
       uses: actions/download-artifact@v3
       with:
@@ -149,7 +149,7 @@ jobs:
             -scheme "WebSignIn (iOS)" \
             -sdk iphonesimulator \
             -destination "$iOS_DESTINATION" \
-            test | xcpretty
+            test | xcpretty -f `xcpretty-actions-formatter`
     - name: Test Single Sign In
       run: |
         xcodebuild \
@@ -159,7 +159,7 @@ jobs:
             -scheme "SingleSignOn (iOS)" \
             -sdk iphonesimulator \
             -destination "$iOS_DESTINATION" \
-            test | xcpretty
+            test | xcpretty -f `xcpretty-actions-formatter`
 
   UITest-DeviceAuthSignIniOS:
     name: Device Auth Sign In (iOS)
@@ -172,7 +172,7 @@ jobs:
     - uses: actions/checkout@master
     - uses: ./.github/actions/start-simulator
       with:
-        destination: "$iOS_DESTINATION"
+        destination: "${{ iOS_DESTINATION }}"
     - name: Download build artifacts
       uses: actions/download-artifact@v3
       with:
@@ -194,7 +194,7 @@ jobs:
             -scheme "DeviceAuthSignIn (iOS)" \
             -sdk iphonesimulator \
             -destination "$iOS_DESTINATION" \
-            test | xcpretty
+            test | xcpretty -f `xcpretty-actions-formatter`
 
   UITest-DeviceAuthSignIntvOS:
     name: Device Auth Sign In (tvOS)
@@ -207,7 +207,7 @@ jobs:
     - uses: actions/checkout@master
     - uses: ./.github/actions/start-simulator
       with:
-        destination: "$tvOS_DESTINATION"
+        destination: "${{ iOS_DESTINATION }}"
     - uses: ./.github/actions/setup-secrets
       with:
         okta_plist: "${{ secrets.TEST_OKTA_PLIST }}"
@@ -221,7 +221,7 @@ jobs:
             -scheme "DeviceAuthSignIn (tvOS)" \
             -sdk appletvsimulator \
             -destination "$tvOS_DESTINATION" \
-            test | xcpretty
+            test | xcpretty -f `xcpretty-actions-formatter`
 
   UITest-UserPasswordSignInmacOS:
     name: User Password Sign In (macOS)
@@ -244,7 +244,7 @@ jobs:
             -workspace OktaMobileSDK.xcworkspace \
             -sdk macosx \
             -scheme "UserPasswordSignIn (macOS)" \
-            test | xcpretty
+            test | xcpretty -f `xcpretty-actions-formatter`
 
   UITest-ClassicNativeAuthiOS:
     name: Classic Native Auth (iOS)
@@ -257,7 +257,7 @@ jobs:
     - uses: actions/checkout@master
     - uses: ./.github/actions/start-simulator
       with:
-        destination: "$iOS_DESTINATION"
+        destination: "${{ iOS_DESTINATION }}"
     - name: Download build artifacts
       uses: actions/download-artifact@v3
       with:
@@ -279,4 +279,4 @@ jobs:
             -scheme "ClassicNativeAuth (iOS)" \
             -sdk iphonesimulator \
             -destination "$iOS_DESTINATION" \
-            test | xcpretty
+            test | xcpretty -f `xcpretty-actions-formatter`
