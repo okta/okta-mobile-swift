@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
     s.name             = "OktaOAuth2"
-    s.version          = "1.1.5"
+    s.version          = "1.2.0"
     s.summary          = "Okta OAuth2 Authentication"
     s.description      = <<-DESC
 Enables application developers to authenticate users utilizing a variety of OAuth2 authentication flows.
