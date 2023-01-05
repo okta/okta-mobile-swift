@@ -190,4 +190,11 @@ final class ErrorTests: XCTestCase {
         XCTAssertEqual(error.description, "Description")
         XCTAssertEqual(error.errorDescription, "Description")
     }
+    
+    func testOAuth2ServerErrorCodes() {
+        typealias Code = OAuth2ServerError.Code
+        XCTAssertEqual(Code(rawValue: "access_denied"), .accessDenied)
+        XCTAssertEqual(Code.accessDenied.rawValue, "access_denied")
+        XCTAssertEqual(Code.accessDenied, Code.other(code: "access_denied"))
+    }
 }
