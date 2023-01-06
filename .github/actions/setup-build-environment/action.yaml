@@ -1,4 +1,4 @@
-name: Start Simulator
+name: Setup Build Environment
 inputs:
   model:
     description: 'Simulator model name'
@@ -9,6 +9,10 @@ inputs:
 runs:
   using: composite
   steps:
+    - name: Install dependencies
+      shell: bash
+      run: |
+        brew install xcbeautify
     - name: Start simulator
       shell: bash
       run: |
