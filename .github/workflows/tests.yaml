@@ -61,7 +61,7 @@ jobs:
           -clonedSourcePackagesDirPath ../Build/ClonedSources \
           -scheme AuthFoundation \
           -sdk iphonesimulator \
-          -destination "$iOS_DESTINATION" 2>&1 | xcbeautify --preserve-unbeautified
+          -destination "$iOS_DESTINATION" 2>&1
     - name: Build OktaOAuth2
       run: |
         set -o pipefail && xcodebuild build \
@@ -69,7 +69,7 @@ jobs:
           -clonedSourcePackagesDirPath ../Build/ClonedSources \
           -scheme OktaOAuth2 \
           -sdk iphonesimulator \
-          -destination "$iOS_DESTINATION" 2>&1 | xcbeautify --preserve-unbeautified
+          -destination "$iOS_DESTINATION" 2>&1
     - name: Build WebAuthenticationUI
       run: |
         set -o pipefail && xcodebuild build \
@@ -77,7 +77,7 @@ jobs:
           -clonedSourcePackagesDirPath ../Build/ClonedSources \
           -scheme WebAuthenticationUI \
           -sdk iphonesimulator \
-          -destination "$iOS_DESTINATION" 2>&1 | xcbeautify --preserve-unbeautified
+          -destination "$iOS_DESTINATION" 2>&1
     - name: Prepare build artifacts
       run: |
         tar -czf ~/iOS-Build.tgz ../Build
@@ -89,7 +89,7 @@ jobs:
           -clonedSourcePackagesDirPath ../Build/ClonedSources \
           -scheme AuthFoundation \
           -sdk iphonesimulator \
-          -destination "$iOS_DESTINATION" 2>&1 | xcbeautify --preserve-unbeautified
+          -destination "$iOS_DESTINATION" 2>&1
     - name: Test OktaOAuth2
       run: |
         set -o pipefail && xcodebuild test \
@@ -97,7 +97,7 @@ jobs:
           -clonedSourcePackagesDirPath ../Build/ClonedSources \
           -scheme OktaOAuth2 \
           -sdk iphonesimulator \
-          -destination "$iOS_DESTINATION" 2>&1 | xcbeautify --preserve-unbeautified
+          -destination "$iOS_DESTINATION" 2>&1
     - name: Test WebAuthenticationUI
       run: |
         set -o pipefail && xcodebuild test \
@@ -105,7 +105,7 @@ jobs:
           -clonedSourcePackagesDirPath ../Build/ClonedSources \
           -scheme WebAuthenticationUI \
           -sdk iphonesimulator \
-          -destination "$iOS_DESTINATION" 2>&1 | xcbeautify --preserve-unbeautified
+          -destination "$iOS_DESTINATION" 2>&1
     - name: Upload build artifacts
       uses: actions/upload-artifact@v3
       with:
@@ -147,7 +147,7 @@ jobs:
             -scheme "WebSignIn (iOS)" \
             -sdk iphonesimulator \
             -destination "$iOS_DESTINATION" \
-            test 2>&1 | xcbeautify --preserve-unbeautified
+            test 2>&1
     - name: Test Single Sign In
       run: |
         set -o pipefail && xcodebuild \
@@ -157,7 +157,7 @@ jobs:
             -scheme "SingleSignOn (iOS)" \
             -sdk iphonesimulator \
             -destination "$iOS_DESTINATION" \
-            test 2>&1 | xcbeautify --preserve-unbeautified
+            test 2>&1
 
   UITest-DeviceAuthSignIniOS:
     name: Device Auth Sign In (iOS)
@@ -192,7 +192,7 @@ jobs:
             -scheme "DeviceAuthSignIn (iOS)" \
             -sdk iphonesimulator \
             -destination "$iOS_DESTINATION" \
-            test 2>&1 | xcbeautify --preserve-unbeautified
+            test 2>&1
 
   UITest-DeviceAuthSignIntvOS:
     name: Device Auth Sign In (tvOS)
@@ -219,7 +219,7 @@ jobs:
             -scheme "DeviceAuthSignIn (tvOS)" \
             -sdk appletvsimulator \
             -destination "$tvOS_DESTINATION" \
-            test 2>&1 | xcbeautify --preserve-unbeautified
+            test 2>&1
 
   UITest-UserPasswordSignInmacOS:
     name: User Password Sign In (macOS)
@@ -242,7 +242,7 @@ jobs:
             -workspace OktaMobileSDK.xcworkspace \
             -sdk macosx \
             -scheme "UserPasswordSignIn (macOS)" \
-            test 2>&1 | xcbeautify --preserve-unbeautified
+            test 2>&1
 
   UITest-ClassicNativeAuthiOS:
     name: Classic Native Auth (iOS)
@@ -277,4 +277,4 @@ jobs:
             -scheme "ClassicNativeAuth (iOS)" \
             -sdk iphonesimulator \
             -destination "$iOS_DESTINATION" \
-            test 2>&1 | xcbeautify --preserve-unbeautified
+            test 2>&1
