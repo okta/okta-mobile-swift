@@ -81,6 +81,7 @@ jobs:
     - name: Prepare build artifacts
       run: |
         tar -czf ~/iOS-Build.tgz ../Build
+        ls -lah ~
     - name: Test AuthFoundation
       run: |
         set -o pipefail && xcodebuild test \
@@ -131,7 +132,8 @@ jobs:
         name: iOS-Build
     - name: Prepare build artifacts
       run: |
-        tar -xzf ~/iOS-Build.tgz
+        ls -lah ~
+        tar -xzf ~/iOS-Build.tgz --strip-components=1 -C ..
     - uses: ./.github/actions/setup-secrets
       with:
         okta_plist: "${{ secrets.TEST_OKTA_PLIST }}"
@@ -176,7 +178,7 @@ jobs:
         name: iOS-Build
     - name: Prepare build artifacts
       run: |
-        tar -xzf ~/iOS-Build.tgz
+        tar -xzf ~/iOS-Build.tgz --strip-components=1 -C ..
     - uses: ./.github/actions/setup-secrets
       with:
         okta_plist: "${{ secrets.TEST_OKTA_PLIST }}"
@@ -261,7 +263,7 @@ jobs:
         name: iOS-Build
     - name: Prepare build artifacts
       run: |
-        tar -xzf ~/iOS-Build.tgz
+        tar -xzf ~/iOS-Build.tgz --strip-components=1 -C ..
     - uses: ./.github/actions/setup-secrets
       with:
         okta_plist: "${{ secrets.TEST_OKTA_PLIST }}"
