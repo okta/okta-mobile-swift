@@ -50,9 +50,9 @@ jobs:
     timeout-minutes: 25
     steps:
     - uses: actions/checkout@master
-    - uses: ./.github/actions/setup-build-environment
-      with:
-        destination: "$iOS_DESTINATION"
+    #- uses: ./.github/actions/setup-build-environment
+    #  with:
+    #    destination: "$iOS_DESTINATION"
     - name: Build AuthFoundation
       run: |
         set -o pipefail
@@ -123,9 +123,9 @@ jobs:
       - SwiftBuild
     steps:
     - uses: actions/checkout@master
-    - uses: ./.github/actions/setup-build-environment
-      with:
-        destination: "$iOS_DESTINATION"
+    #- uses: ./.github/actions/setup-build-environment
+    #  with:
+    #    destination: "$iOS_DESTINATION"
     - name: Download build artifacts
       uses: actions/download-artifact@v3
       with:
@@ -165,9 +165,9 @@ jobs:
       - SwiftBuild
     steps:
     - uses: actions/checkout@master
-    - uses: ./.github/actions/setup-build-environment
-      with:
-        destination: "$iOS_DESTINATION"
+    #- uses: ./.github/actions/setup-build-environment
+    #  with:
+    #    destination: "$iOS_DESTINATION"
     - name: Download build artifacts
       uses: actions/download-artifact@v3
       with:
@@ -197,9 +197,9 @@ jobs:
       - SwiftBuild
     steps:
     - uses: actions/checkout@master
-    - uses: ./.github/actions/setup-build-environment
-      with:
-        destination: "$tvOS_DESTINATION"
+    #- uses: ./.github/actions/setup-build-environment
+    #  with:
+    #    destination: "$tvOS_DESTINATION"
     - uses: ./.github/actions/setup-secrets
       with:
         okta_plist: "${{ secrets.TEST_OKTA_PLIST }}"
@@ -247,9 +247,9 @@ jobs:
       - SwiftBuild
     steps:
     - uses: actions/checkout@master
-    - uses: ./.github/actions/setup-build-environment
-      with:
-        destination: "$iOS_DESTINATION"
+    #- uses: ./.github/actions/setup-build-environment
+    #  with:
+    #    destination: "$iOS_DESTINATION"
     - name: Download build artifacts
       uses: actions/download-artifact@v3
       with:
