@@ -116,7 +116,7 @@ final class OAuth2ClientTests: XCTestCase {
             guard case let .failure(error) = result,
                   case let .validation(error: invalidIssuer) = error
             else {
-                XCTFail()
+                XCTFail("Did not receive an expected validation failure. \(result)")
                 return
             }
             XCTAssertEqual(invalidIssuer as? JWTError, JWTError.invalidIssuer)
