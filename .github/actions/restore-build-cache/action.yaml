@@ -1,0 +1,12 @@
+name: Restore Build Cache
+runs:
+  using: composite
+  steps:
+    - name: Download build artifacts
+      uses: actions/download-artifact@v3
+      with:
+        path: $GITHUB_WORKSPACE
+        name: iOS-Build
+    - name: Prepare build artifacts
+      run: |
+        tar -xzpf ~/iOS-Build.tgz --strip-components=1 -C ..

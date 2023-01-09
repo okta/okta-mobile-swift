@@ -27,6 +27,7 @@ on:
 env:
   DEVELOPER_DIR: /Applications/Xcode_14.2.app/Contents/Developer
   NSUnbufferedIO: YES 
+  IgnoreFileSystemDeviceInodeChanges: YES
   iOS_DESTINATION: "platform=iOS Simulator,OS=16.2,name=iPhone 14"
   tvOS_DESTINATION: "platform=tvOS Simulator,OS=16.1,name=Apple TV"
 
@@ -78,11 +79,7 @@ jobs:
           -scheme WebAuthenticationUI \
           -sdk iphonesimulator \
           -destination "$iOS_DESTINATION" 2>&1
-    - name: Prepare build artifacts
-      run: |
-        tar -czf ~/iOS-Build.tgz ../Build
-        ls -lah ~
-        ls -lah $GITHUB_WORKSPACE
+    - uses: ./.github/actions/save-build-cache
     - name: Test AuthFoundation
       run: |
         set -o pipefail && xcodebuild test \
@@ -107,30 +104,21 @@ jobs:
           -scheme WebAuthenticationUI \
           -sdk iphonesimulator \
           -destination "$iOS_DESTINATION" 2>&1
-    - name: Upload build artifacts
-      uses: actions/upload-artifact@v3
-      with:
-        path: ~/iOS-Build.tgz
-        name: iOS-Build
-        retention-days: 1
+    - uses: ./.github/actions/upload-build-cache
 
   UITest-WebSignIn:
     name: Web Sign In / Single Sign On (iOS)
     runs-on: macos-12
-    timeout-minutes: 18
+    timeout-minutes: 20
     needs: 
       - XcodeBuild
       - SwiftBuild
     steps:
+    - uses: ./.github/actions/restore-build-cache
     - uses: actions/checkout@master
-    #- uses: ./.github/actions/setup-build-environment
-    #  with:
-    #    destination: "$iOS_DESTINATION"
-    - name: Download build artifacts
-      uses: actions/download-artifact@v3
+    - uses: ./.github/actions/setup-build-environment
       with:
-        path: $GITHUB_WORKSPACE
-        name: iOS-Build
+        destination: "$iOS_DESTINATION"
     - uses: ./.github/actions/setup-secrets
       with:
         okta_plist: "${{ secrets.TEST_OKTA_PLIST }}"
@@ -164,15 +152,11 @@ jobs:
       - XcodeBuild
       - SwiftBuild
     steps:
+    - uses: ./.github/actions/restore-build-cache
     - uses: actions/checkout@master
-    #- uses: ./.github/actions/setup-build-environment
-    #  with:
-    #    destination: "$iOS_DESTINATION"
-    - name: Download build artifacts
-      uses: actions/download-artifact@v3
+    - uses: ./.github/actions/setup-build-environment
       with:
-        path: $GITHUB_WORKSPACE
-        name: iOS-Build
+        destination: "$iOS_DESTINATION"
     - uses: ./.github/actions/setup-secrets
       with:
         okta_plist: "${{ secrets.TEST_OKTA_PLIST }}"
@@ -196,10 +180,10 @@ jobs:
       - XcodeBuild
       - SwiftBuild
     steps:
+    - uses: ./.github/actions/setup-build-environment
+      with:
+        destination: "$tvOS_DESTINATION"
     - uses: actions/checkout@master
-    #- uses: ./.github/actions/setup-build-environment
-    #  with:
-    #    destination: "$tvOS_DESTINATION"
     - uses: ./.github/actions/setup-secrets
       with:
         okta_plist: "${{ secrets.TEST_OKTA_PLIST }}"
@@ -246,15 +230,11 @@ jobs:
       - XcodeBuild
       - SwiftBuild
     steps:
-    - uses: actions/checkout@master
-    #- uses: ./.github/actions/setup-build-environment
-    #  with:
-    #    destination: "$iOS_DESTINATION"
-    - name: Download build artifacts
-      uses: actions/download-artifact@v3
+    - uses: ./.github/actions/setup-build-environment
       with:
-        path: $GITHUB_WORKSPACE
-        name: iOS-Build
+        destination: "$iOS_DESTINATION"
+    - uses: ./.github/actions/restore-build-cache
+    - uses: actions/checkout@master
     - uses: ./.github/actions/setup-secrets
       with:
         okta_plist: "${{ secrets.TEST_OKTA_PLIST }}"

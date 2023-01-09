@@ -1,0 +1,7 @@
+name: Save Build Cache
+runs:
+  using: composite
+  steps:
+    - name: Prepare build artifacts
+      run: |
+        tar -czpf ~/iOS-Build.tgz ../Build
