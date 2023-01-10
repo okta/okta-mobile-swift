@@ -5,7 +5,7 @@ runs:
     - name: Download build artifacts
       uses: actions/download-artifact@v3
       with:
-        path: $GITHUB_WORKSPACE
+        path: ~/iOS-Build.tgz
         name: iOS-Build
     - name: Prepare build artifacts
       shell: bash
