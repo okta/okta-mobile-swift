@@ -40,6 +40,22 @@ extension InteractionCodeFlow.RemediationRequest: APIRequest, APIRequestBody, Re
     }
     
     var acceptsType: APIContentType? { .ionJson }
+}
+
+extension InteractionCodeFlow.RemediationRequest: APIParsingContext {
+    func resultType(from response: HTTPURLResponse) -> APIResponseResult {
+        switch response.statusCode {
+        case 429:
+            return .retry
+        case 200..<500:
+            // IDX returns error codes that contain valid ION responses, meaning
+            // such errors are not terminal and should be reported to the developer
+            // with its full payload.
+            return .success
+        default:
+            return .error
+        }
+    }
 
     var codingUserInfo: [CodingUserInfoKey: Any]? {
         nil
