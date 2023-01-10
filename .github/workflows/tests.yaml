@@ -114,8 +114,8 @@ jobs:
       - XcodeBuild
       - SwiftBuild
     steps:
-    - uses: ./.github/actions/restore-build-cache
     - uses: actions/checkout@master
+    - uses: ./.github/actions/restore-build-cache
     - uses: ./.github/actions/setup-build-environment
       with:
         destination: "$iOS_DESTINATION"
@@ -152,8 +152,8 @@ jobs:
       - XcodeBuild
       - SwiftBuild
     steps:
-    - uses: ./.github/actions/restore-build-cache
     - uses: actions/checkout@master
+    - uses: ./.github/actions/restore-build-cache
     - uses: ./.github/actions/setup-build-environment
       with:
         destination: "$iOS_DESTINATION"
@@ -230,11 +230,11 @@ jobs:
       - XcodeBuild
       - SwiftBuild
     steps:
+    - uses: actions/checkout@master
     - uses: ./.github/actions/setup-build-environment
       with:
         destination: "$iOS_DESTINATION"
     - uses: ./.github/actions/restore-build-cache
-    - uses: actions/checkout@master
     - uses: ./.github/actions/setup-secrets
       with:
         okta_plist: "${{ secrets.TEST_OKTA_PLIST }}"

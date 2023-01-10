@@ -26,17 +26,12 @@ struct DefaultIDTokenValidator: IDTokenValidator {
     
     // swiftlint:disable cyclomatic_complexity
     func validate(token: JWT, issuer: URL, clientId: String, context: IDTokenValidatorContext?) throws {
-        guard let tokenIssuerString = token.issuer,
-              let tokenIssuer = URL(string: tokenIssuerString),
-              tokenIssuer.absoluteString == issuer.absoluteString
-        else {
-            throw JWTError.invalidIssuer
-        }
-        
         for check in checks {
             switch check {
             case .issuer:
-                guard tokenIssuer.absoluteString == issuer.absoluteString
+                guard let tokenIssuerString = token.issuer,
+                      let tokenIssuer = URL(string: tokenIssuerString),
+                      tokenIssuer.absoluteString == issuer.absoluteString
                 else {
                     throw JWTError.invalidIssuer
                 }
@@ -46,7 +41,9 @@ struct DefaultIDTokenValidator: IDTokenValidator {
                     throw JWTError.invalidAudience
                 }
             case .scheme:
-                guard tokenIssuer.scheme == "https"
+                guard let tokenIssuerString = token.issuer,
+                      let tokenIssuer = URL(string: tokenIssuerString),
+                      tokenIssuer.scheme == "https"
                 else {
                     throw JWTError.issuerRequiresHTTPS
                 }
