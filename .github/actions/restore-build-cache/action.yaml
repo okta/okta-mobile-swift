@@ -11,3 +11,5 @@ runs:
       shell: bash
       run: |
         mv ~/Build ../Build
+        ls -lah ..
+        find ../Build -type f -exec touch '{}' ';'

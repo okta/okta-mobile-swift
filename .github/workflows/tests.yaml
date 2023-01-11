@@ -180,10 +180,10 @@ jobs:
       - XcodeBuild
       - SwiftBuild
     steps:
+    - uses: actions/checkout@master
     - uses: ./.github/actions/setup-build-environment
       with:
         destination: "$tvOS_DESTINATION"
-    - uses: actions/checkout@master
     - uses: ./.github/actions/setup-secrets
       with:
         okta_plist: "${{ secrets.TEST_OKTA_PLIST }}"
