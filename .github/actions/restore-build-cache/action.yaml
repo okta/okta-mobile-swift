@@ -10,4 +10,6 @@ runs:
     - name: Prepare build artifacts
       shell: bash
       run: |
-        tar -xzpf ~/iOS-Build.tgz --strip-components=1 -C ..
+        ls -lah ~
+        ls -lah ~/iOS-Build
+        mv ~/iOS-Build ../Build
