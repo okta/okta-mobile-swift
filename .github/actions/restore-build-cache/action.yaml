@@ -5,11 +5,9 @@ runs:
     - name: Download build artifacts
       uses: actions/download-artifact@v3
       with:
-        path: ~/iOS-Build.tgz
+        path: ~/Build
         name: iOS-Build
     - name: Prepare build artifacts
       shell: bash
       run: |
-        ls -lah ~
-        ls -lah ~/iOS-Build
-        mv ~/iOS-Build ../Build
+        mv ~/Build ../Build
