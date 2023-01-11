@@ -18,7 +18,7 @@ extension Credential {
             return nil
         }
         
-        refreshIfNeeded()
+        refreshIfNeeded { _ in }
         
         automaticRefreshTimer?.cancel()
         
@@ -31,7 +31,7 @@ extension Credential {
                              repeating: repeating)
         timerSource.setEventHandler { [weak self] in
             guard let self = self else { return }
-            self.refreshIfNeeded()
+            self.refreshIfNeeded { _ in }
         }
         
         return timerSource
