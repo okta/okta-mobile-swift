@@ -10,6 +10,7 @@ runs:
     - name: Prepare build artifacts
       shell: bash
       run: |
-        mv ~/Build ../Build
+        mkdir ../Build
+        tar -xzpf ~/Build/iOS-Build.tgz --strip-components=1 -C ..
         ls -lah ../Build
         find ../Build -type f -exec touch '{}' ';'
