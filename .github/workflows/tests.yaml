@@ -40,6 +40,8 @@ jobs:
     - name: Get swift version
       run: swift --version
     - uses: actions/checkout@master
+      with:
+        fetch-depth: 0
     - name: Build
       run: swift build --build-tests
     - name: Test
@@ -51,6 +53,8 @@ jobs:
     timeout-minutes: 25
     steps:
     - uses: actions/checkout@master
+      with:
+        fetch-depth: 0
     - name: Build AuthFoundation
       run: |
         set -o pipefail
@@ -112,6 +116,8 @@ jobs:
       - SwiftBuild
     steps:
     - uses: actions/checkout@master
+      with:
+        fetch-depth: 0
     - uses: ./.github/actions/restore-build-cache
     - uses: ./.github/actions/setup-build-environment
       with:
@@ -150,6 +156,8 @@ jobs:
       - SwiftBuild
     steps:
     - uses: actions/checkout@master
+      with:
+        fetch-depth: 0
     - uses: ./.github/actions/restore-build-cache
     - uses: ./.github/actions/setup-build-environment
       with:
@@ -178,6 +186,8 @@ jobs:
       - SwiftBuild
     steps:
     - uses: actions/checkout@master
+      with:
+        fetch-depth: 0
     - uses: ./.github/actions/setup-build-environment
       with:
         destination: "$tvOS_DESTINATION"
@@ -205,6 +215,8 @@ jobs:
       - SwiftBuild
     steps:
     - uses: actions/checkout@master
+      with:
+        fetch-depth: 0
     - uses: ./.github/actions/setup-secrets
       with:
         okta_plist: "${{ secrets.TEST_OKTA_PLIST }}"
@@ -228,6 +240,8 @@ jobs:
       - SwiftBuild
     steps:
     - uses: actions/checkout@master
+      with:
+        fetch-depth: 0
     - uses: ./.github/actions/setup-build-environment
       with:
         destination: "$iOS_DESTINATION"
