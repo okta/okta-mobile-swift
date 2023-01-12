@@ -6,11 +6,12 @@ import XCTest
 final class OAuth2ClientTests: XCTestCase {
     let issuer = URL(string: "https://example.com/oauth2/default")!
     let redirectUri = URL(string: "com.example:/callback")!
-    let urlSession = URLSessionMock()
+    var urlSession: URLSessionMock!
     var client: OAuth2Client!
     var openIdConfiguration: OpenIdConfiguration!
     
     override func setUpWithError() throws {
+        urlSession = URLSessionMock()
         client = OAuth2Client(baseURL: issuer, clientId: "theClientId", scopes: "openid profile offline_access", session: urlSession)
         openIdConfiguration = try OpenIdConfiguration.jsonDecoder.decode(
             OpenIdConfiguration.self,
