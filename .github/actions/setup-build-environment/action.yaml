@@ -9,6 +9,9 @@ inputs:
 runs:
   using: composite
   steps:
+    - name: Install tools
+      run: |
+        sudo apt-get install -y git-restore-mtime && git restore-mtime
     - name: Start simulator
       shell: bash
       run: |

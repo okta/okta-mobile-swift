@@ -12,6 +12,5 @@ runs:
       run: |
         mkdir ../Build
         tar -xzpf ~/Build/iOS-Build.tgz --strip-components=1 -C ..
-        find ../Build -type f -exec touch '{}' ';'
         defaults write com.apple.dt.XCBuild IgnoreFileSystemDeviceInodeChanges -bool YES
 
