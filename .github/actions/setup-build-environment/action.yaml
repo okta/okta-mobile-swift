@@ -12,7 +12,7 @@ runs:
     - name: Install tools
       shell: bash
       run: |
-        sudo apt install -y git-restore-mtime && git restore-mtime
+        yum install -y git-restore-mtime && git restore-mtime
     - name: Start simulator
       shell: bash
       run: |
