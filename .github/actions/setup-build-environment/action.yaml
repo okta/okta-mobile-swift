@@ -9,10 +9,8 @@ inputs:
 runs:
   using: composite
   steps:
-    - name: Install tools
-      shell: bash
-      run: |
-        yum install -y git-restore-mtime && git restore-mtime
+    - name: Restore timestamps
+      uses: chetan/git-restore-mtime-action@v1
     - name: Start simulator
       shell: bash
       run: |
