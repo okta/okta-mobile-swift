@@ -27,7 +27,6 @@ on:
 env:
   DEVELOPER_DIR: /Applications/Xcode_14.2.app/Contents/Developer
   NSUnbufferedIO: YES 
-  IgnoreFileSystemDeviceInodeChanges: 1
   iOS_DESTINATION: "platform=iOS Simulator,OS=16.2,name=iPhone 14"
   tvOS_DESTINATION: "platform=tvOS Simulator,OS=16.1,name=Apple TV"
 
@@ -40,8 +39,6 @@ jobs:
     - name: Get swift version
       run: swift --version
     - uses: actions/checkout@master
-      with:
-        fetch-depth: 0
     - name: Build
       run: swift build --build-tests
     - name: Test
@@ -53,8 +50,6 @@ jobs:
     timeout-minutes: 25
     steps:
     - uses: actions/checkout@master
-      with:
-        fetch-depth: 0
     - name: Build AuthFoundation
       run: |
         set -o pipefail
@@ -105,6 +100,15 @@ jobs:
           -sdk iphonesimulator \
           -destination "$iOS_DESTINATION" 2>&1
 
+  UITest-WebSignIn:
+    name: Web Sign In / Single Sign On (iOS)
+    runs-on: macos-12
+    timeout-minutes: 20
+    needs: 
+      - XcodeBuild
+      - SwiftBuild
+    steps:
+    - uses: actions/checkout@master
     - uses: ./.github/actions/setup-secrets
       with:
         okta_plist: "${{ secrets.TEST_OKTA_PLIST }}"
@@ -129,7 +133,21 @@ jobs:
             -sdk iphonesimulator \
             -destination "$iOS_DESTINATION" \
             test 2>&1
-    - name: Test Device Auth Sign In (iOS)
+
+  UITest-DeviceAuthSignIniOS:
+    name: Device Auth Sign In (iOS)
+    runs-on: macos-12
+    timeout-minutes: 10
+    needs: 
+      - XcodeBuild
+      - SwiftBuild
+    steps:
+    - uses: actions/checkout@master
+    - uses: ./.github/actions/setup-secrets
+      with:
+        okta_plist: "${{ secrets.TEST_OKTA_PLIST }}"
+        test_configuration: "${{ secrets.TEST_CONFIGURATION }}"
+    - name: Test
       run: |
         set -o pipefail && xcodebuild \
             -derivedDataPath ../Build/DerivedData \
@@ -140,7 +158,20 @@ jobs:
             -destination "$iOS_DESTINATION" \
             test 2>&1
 
-    - name: Test Device Auth Sign In (tvOS)
+  UITest-DeviceAuthSignIntvOS:
+    name: Device Auth Sign In (tvOS)
+    runs-on: macos-12
+    timeout-minutes: 10
+    needs: 
+      - XcodeBuild
+      - SwiftBuild
+    steps:
+    - uses: actions/checkout@master
+    - uses: ./.github/actions/setup-secrets
+      with:
+        okta_plist: "${{ secrets.TEST_OKTA_PLIST }}"
+        test_configuration: "${{ secrets.TEST_CONFIGURATION }}"
+    - name: Test
       run: |
         set -o pipefail && xcodebuild \
             -derivedDataPath ../Build/DerivedData \
@@ -151,7 +182,20 @@ jobs:
             -destination "$tvOS_DESTINATION" \
             test 2>&1
 
-    - name: Test User Password Sign In (macOS)
+  UITest-UserPasswordSignInmacOS:
+    name: User Password Sign In (macOS)
+    runs-on: macos-12
+    timeout-minutes: 10
+    needs: 
+      - XcodeBuild
+      - SwiftBuild
+    steps:
+    - uses: actions/checkout@master
+    - uses: ./.github/actions/setup-secrets
+      with:
+        okta_plist: "${{ secrets.TEST_OKTA_PLIST }}"
+        test_configuration: "${{ secrets.TEST_CONFIGURATION }}"
+    - name: Test
       run: |
         set -o pipefail && xcodebuild \
             -derivedDataPath ../Build/DerivedData \
@@ -161,7 +205,20 @@ jobs:
             -scheme "UserPasswordSignIn (macOS)" \
             test 2>&1
 
-    - name: Test Classic Native Auth (iOS)
+  UITest-ClassicNativeAuthiOS:
+    name: Classic Native Auth (iOS)
+    runs-on: macos-12
+    timeout-minutes: 10
+    needs: 
+      - XcodeBuild
+      - SwiftBuild
+    steps:
+    - uses: actions/checkout@master
+    - uses: ./.github/actions/setup-secrets
+      with:
+        okta_plist: "${{ secrets.TEST_OKTA_PLIST }}"
+        test_configuration: "${{ secrets.TEST_CONFIGURATION }}"
+    - name: Test
       run: |
         set -o pipefail && xcodebuild \
             -derivedDataPath ../Build/DerivedData \
