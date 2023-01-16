@@ -80,7 +80,6 @@ jobs:
           -scheme WebAuthenticationUI \
           -sdk iphonesimulator \
           -destination "$iOS_DESTINATION" 2>&1
-    - uses: ./.github/actions/save-build-cache
     - name: Test AuthFoundation
       run: |
         set -o pipefail && xcodebuild test \
@@ -105,23 +104,7 @@ jobs:
           -scheme WebAuthenticationUI \
           -sdk iphonesimulator \
           -destination "$iOS_DESTINATION" 2>&1
-    - uses: ./.github/actions/upload-build-cache
 
-  UITest-WebSignIn:
-    name: Web Sign In / Single Sign On (iOS)
-    runs-on: macos-12
-    timeout-minutes: 20
-    needs: 
-      - XcodeBuild
-      - SwiftBuild
-    steps:
-    - uses: actions/checkout@master
-      with:
-        fetch-depth: 0
-    - uses: ./.github/actions/restore-build-cache
-    - uses: ./.github/actions/setup-build-environment
-      with:
-        destination: "$iOS_DESTINATION"
     - uses: ./.github/actions/setup-secrets
       with:
         okta_plist: "${{ secrets.TEST_OKTA_PLIST }}"
@@ -146,27 +129,7 @@ jobs:
             -sdk iphonesimulator \
             -destination "$iOS_DESTINATION" \
             test 2>&1
-
-  UITest-DeviceAuthSignIniOS:
-    name: Device Auth Sign In (iOS)
-    runs-on: macos-12
-    timeout-minutes: 10
-    needs: 
-      - XcodeBuild
-      - SwiftBuild
-    steps:
-    - uses: actions/checkout@master
-      with:
-        fetch-depth: 0
-    - uses: ./.github/actions/restore-build-cache
-    - uses: ./.github/actions/setup-build-environment
-      with:
-        destination: "$iOS_DESTINATION"
-    - uses: ./.github/actions/setup-secrets
-      with:
-        okta_plist: "${{ secrets.TEST_OKTA_PLIST }}"
-        test_configuration: "${{ secrets.TEST_CONFIGURATION }}"
-    - name: Test
+    - name: Test Device Auth Sign In (iOS)
       run: |
         set -o pipefail && xcodebuild \
             -derivedDataPath ../Build/DerivedData \
@@ -177,25 +140,7 @@ jobs:
             -destination "$iOS_DESTINATION" \
             test 2>&1
 
-  UITest-DeviceAuthSignIntvOS:
-    name: Device Auth Sign In (tvOS)
-    runs-on: macos-12
-    timeout-minutes: 10
-    needs: 
-      - XcodeBuild
-      - SwiftBuild
-    steps:
-    - uses: actions/checkout@master
-      with:
-        fetch-depth: 0
-    - uses: ./.github/actions/setup-build-environment
-      with:
-        destination: "$tvOS_DESTINATION"
-    - uses: ./.github/actions/setup-secrets
-      with:
-        okta_plist: "${{ secrets.TEST_OKTA_PLIST }}"
-        test_configuration: "${{ secrets.TEST_CONFIGURATION }}"
-    - name: Test
+    - name: Test Device Auth Sign In (tvOS)
       run: |
         set -o pipefail && xcodebuild \
             -derivedDataPath ../Build/DerivedData \
@@ -206,22 +151,7 @@ jobs:
             -destination "$tvOS_DESTINATION" \
             test 2>&1
 
-  UITest-UserPasswordSignInmacOS:
-    name: User Password Sign In (macOS)
-    runs-on: macos-12
-    timeout-minutes: 10
-    needs: 
-      - XcodeBuild
-      - SwiftBuild
-    steps:
-    - uses: actions/checkout@master
-      with:
-        fetch-depth: 0
-    - uses: ./.github/actions/setup-secrets
-      with:
-        okta_plist: "${{ secrets.TEST_OKTA_PLIST }}"
-        test_configuration: "${{ secrets.TEST_CONFIGURATION }}"
-    - name: Test
+    - name: Test User Password Sign In (macOS)
       run: |
         set -o pipefail && xcodebuild \
             -derivedDataPath ../Build/DerivedData \
@@ -231,26 +161,7 @@ jobs:
             -scheme "UserPasswordSignIn (macOS)" \
             test 2>&1
 
-  UITest-ClassicNativeAuthiOS:
-    name: Classic Native Auth (iOS)
-    runs-on: macos-12
-    timeout-minutes: 10
-    needs: 
-      - XcodeBuild
-      - SwiftBuild
-    steps:
-    - uses: actions/checkout@master
-      with:
-        fetch-depth: 0
-    - uses: ./.github/actions/setup-build-environment
-      with:
-        destination: "$iOS_DESTINATION"
-    - uses: ./.github/actions/restore-build-cache
-    - uses: ./.github/actions/setup-secrets
-      with:
-        okta_plist: "${{ secrets.TEST_OKTA_PLIST }}"
-        test_configuration: "${{ secrets.TEST_CONFIGURATION }}"
-    - name: Test
+    - name: Test Classic Native Auth (iOS)
       run: |
         set -o pipefail && xcodebuild \
             -derivedDataPath ../Build/DerivedData \
