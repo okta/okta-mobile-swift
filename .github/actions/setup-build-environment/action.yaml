@@ -9,8 +9,6 @@ inputs:
 runs:
   using: composite
   steps:
-    - name: Restore timestamps
-      uses: chetan/git-restore-mtime-action@v1
     - name: Start simulator
       shell: bash
       run: |

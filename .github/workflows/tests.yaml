@@ -185,7 +185,7 @@ jobs:
   UITest-UserPasswordSignInmacOS:
     name: User Password Sign In (macOS)
     runs-on: macos-12
-    timeout-minutes: 10
+    timeout-minutes: 6
     needs: 
       - XcodeBuild
       - SwiftBuild
@@ -208,7 +208,7 @@ jobs:
   UITest-ClassicNativeAuthiOS:
     name: Classic Native Auth (iOS)
     runs-on: macos-12
-    timeout-minutes: 10
+    timeout-minutes: 12
     needs: 
       - XcodeBuild
       - SwiftBuild
