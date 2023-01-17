@@ -13,15 +13,15 @@
 import Foundation
 import XCTest
 
-class ProfileScreen: Screen {
+class ProfileScreen: Screen, TestExtensions {
     let app: XCUIApplication
     let testCase: XCTestCase
 
     private lazy var refreshButton = app.buttons["Refresh"]
     private lazy var signOutButton = app.tables.staticTexts["Sign Out"]
-    private lazy var removeButton = app.sheets.buttons["Remove"]
-    private lazy var revokeButton = app.sheets.buttons["Revoke tokens"]
-    private lazy var endSessionButton = app.sheets.buttons["End a session"]
+    private lazy var removeButton = app.buttons["Remove"]
+    private lazy var revokeButton = app.buttons["Revoke tokens"]
+    private lazy var endSessionButton = app.buttons["End a session"]
 
     init(_ testCase: XCTestCase, app: XCUIApplication = XCUIApplication()) {
         self.testCase = testCase
@@ -73,16 +73,8 @@ class ProfileScreen: Screen {
         case .revoke:
             revokeButton.tap()
         case .endSession:
-            let alertObserver = testCase.addUIInterruptionMonitor(withDescription: "System Dialog") { (alert) -> Bool in
-                alert.buttons["Continue"].tap()
-                return true
-            }
-            
-            defer {
-                testCase.removeUIInterruptionMonitor(alertObserver)
-            }
-
             endSessionButton.tap()
+            tapAlertButton(named: "Continue")
             app.tap()
             XCTAssertTrue(app.webViews.element.waitForNonExistence(timeout: .standard))
         }

@@ -6,17 +6,12 @@ import XCTest
 final class OAuth2ClientTests: XCTestCase {
     let issuer = URL(string: "https://example.com/oauth2/default")!
     let redirectUri = URL(string: "com.example:/callback")!
-    let urlSession = URLSessionMock()
+    var urlSession: URLSessionMock!
     var client: OAuth2Client!
-    var openIdConfiguration: OpenIdConfiguration!
     
     override func setUpWithError() throws {
+        urlSession = URLSessionMock()
         client = OAuth2Client(baseURL: issuer, clientId: "theClientId", scopes: "openid profile offline_access", session: urlSession)
-        openIdConfiguration = try OpenIdConfiguration.jsonDecoder.decode(
-            OpenIdConfiguration.self,
-            from: try data(from: .module,
-                           for: "openid-configuration",
-                           in: "MockResponses"))
         
         JWK.validator = MockJWKValidator()
         Token.idTokenValidator = MockIDTokenValidator()
@@ -26,6 +21,15 @@ final class OAuth2ClientTests: XCTestCase {
     override func tearDownWithError() throws {
         JWK.resetToDefault()
         Token.resetToDefault()
+    }
+    
+    func openIdConfiguration(named: String = "openid-configuration") throws -> (OpenIdConfiguration, Data) {
+        let data = try data(from: .module,
+                           for: named,
+                           in: "MockResponses")
+        let configuration = try OpenIdConfiguration.jsonDecoder.decode(OpenIdConfiguration.self,
+                                                                       from: data)
+        return (configuration, data)
     }
 
     func testAuthorizationCodeConstructor() throws {
@@ -38,6 +42,7 @@ final class OAuth2ClientTests: XCTestCase {
     
     func testExchange() throws {
         let pkce = PKCE()
+        let (openIdConfiguration, openIdData) = try openIdConfiguration()
         let request = AuthorizationCodeFlow.TokenRequest(openIdConfiguration: openIdConfiguration,
                                                          clientId: "client_id",
                                                          scope: "openid profile offline_access",
@@ -47,9 +52,9 @@ final class OAuth2ClientTests: XCTestCase {
                                                          pkce: pkce,
                                                          nonce: nil,
                                                          maxAge: nil)
-        
+
         urlSession.expect("https://example.com/oauth2/default/.well-known/openid-configuration",
-                          data: try data(from: .module, for: "openid-configuration", in: "MockResponses"),
+                          data: openIdData,
                           contentType: "application/json")
         urlSession.expect("https://example.okta.com/oauth2/v1/keys?client_id=theClientId",
                           data: try data(from: .module, for: "keys", in: "MockResponses"),
@@ -84,13 +89,7 @@ final class OAuth2ClientTests: XCTestCase {
     
     func testExchangeFailed() throws {
         let pkce = PKCE()
-        client = OAuth2Client(
-            baseURL: issuer,
-            clientId: "theClientId",
-            scopes: "openid profile offline_access",
-            session: urlSession
-        )
-
+        let (openIdConfiguration, openIdData) = try openIdConfiguration(named: "openid-configuration-invalid-issuer")
         let request = AuthorizationCodeFlow.TokenRequest(openIdConfiguration: openIdConfiguration,
                                                          clientId: "client_id",
                                                          scope: "openid profile offline_access",
@@ -102,7 +101,7 @@ final class OAuth2ClientTests: XCTestCase {
                                                          maxAge: nil)
 
         urlSession.expect("https://example.com/oauth2/default/.well-known/openid-configuration",
-                          data: try data(from: .module, for: "openid-configuration", in: "MockResponses"),
+                          data: openIdData,
                           contentType: "application/json")
         urlSession.expect("https://example.okta.com/oauth2/v1/keys?client_id=theClientId",
                           data: try data(from: .module, for: "keys", in: "MockResponses"),
@@ -116,7 +115,7 @@ final class OAuth2ClientTests: XCTestCase {
             guard case let .failure(error) = result,
                   case let .validation(error: invalidIssuer) = error
             else {
-                XCTFail()
+                XCTFail("Did not receive an expected validation failure. \(result)")
                 return
             }
             XCTAssertEqual(invalidIssuer as? JWTError, JWTError.invalidIssuer)
