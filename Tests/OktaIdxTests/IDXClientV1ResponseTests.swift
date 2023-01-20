@@ -530,6 +530,29 @@ class IDXClientV1ResponseTests: XCTestCase {
         XCTAssertEqual(publicObj?.username, "arthur.dent@example.com")
     }
 
+    func testNullUserProfile() throws {
+        let obj = try decode(type: IonObject<IonUser>.self, """
+           {
+               "type" : "object",
+               "value" : {
+                 "id" : "0ZczewGCFPlxNYYcLq5i",
+                 "profile" : {
+                   "firstName": null,
+                   "lastName": null,
+                   "timeZone": "America/Los_Angeles",
+                   "locale": "en_US"
+                 },
+                 "identifier" : "arthur.dent@example.com"
+               }
+           }
+        """)
+        
+        let publicObj = Response.User(ion: obj.value)
+        XCTAssertNotNil(publicObj)
+        XCTAssertNil(publicObj?.profile?.firstName)
+        XCTAssertNil(publicObj?.profile?.lastName)
+    }
+
     func testPasswordAuthenticatorWithSettings() throws {
         let obj = try decode(type: IonObject<IonAuthenticator>.self, """
         {

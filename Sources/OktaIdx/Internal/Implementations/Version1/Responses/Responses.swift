@@ -78,7 +78,7 @@ struct IonCollection<T>: Decodable where T: Decodable {
 
 struct IonUser: Decodable, ReceivesIDXResponse {
     let id: String?
-    let profile: [String: String]?
+    let profile: [String: String?]?
     let identifier: String?
 }
 

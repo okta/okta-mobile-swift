@@ -58,7 +58,9 @@ extension Response.User {
         guard let object = object,
               let userId = object.id
         else { return nil }
-        self.init(id: userId, username: object.identifier, profile: .init(ion: object.profile))
+        self.init(id: userId,
+                  username: object.identifier,
+                  profile: .init(ion: object.profile?.compactMapValues({ $0 })))
     }
 }
 

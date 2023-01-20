@@ -32,8 +32,6 @@ jobs:
     env:
       DEVELOPER_DIR: /Applications/Xcode_13.3.app/Contents/Developer
     steps:
-    - name: Get swift version
-      run: swift --version
     - uses: actions/checkout@master
     - name: Build
       run: swift build --build-tests
