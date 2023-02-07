@@ -133,9 +133,9 @@ class IDXClientRequestTests: XCTestCase {
         XCTAssertEqual(urlRequest.allHTTPHeaderFields?["Accept"], "application/json; charset=UTF-8")
         
         let data = try XCTUnwrap(urlRequest.httpBody?.urlFormEncoded())
-        XCTAssertEqual(data.keys.sorted(), ["client_id", "code", "code_verifier", "grant_type"])
+        XCTAssertEqual(data.keys.sorted(), ["client_id", "code_verifier", "grant_type", "interaction_code"])
         XCTAssertEqual(data["client_id"], "clientId")
-        XCTAssertEqual(data["code"], "interaction_code")
+        XCTAssertEqual(data["interaction_code"], "interaction_code")
         XCTAssertEqual(data["code_verifier"], pkce.codeVerifier)
         XCTAssertEqual(data["grant_type"], "interaction_code")
     }

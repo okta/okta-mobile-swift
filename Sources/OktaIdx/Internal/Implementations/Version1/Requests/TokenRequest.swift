@@ -96,7 +96,7 @@ extension InteractionCodeFlow.RedirectURLTokenRequest: OAuth2TokenRequest, APIRe
         [
             "client_id": clientId,
             "grant_type": "interaction_code",
-            "code": interactionCode,
+            "interaction_code": interactionCode,
             "code_verifier": pkce.codeVerifier
         ]
     }
