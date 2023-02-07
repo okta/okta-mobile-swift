@@ -65,14 +65,7 @@ jobs:
         env NSUnbufferedIO=YES xcodebuild test \
           -derivedDataPath ../Build/DerivedData \
           -clonedSourcePackagesDirPath ../Build/ClonedSources \
-          -resultBundlePath ../TestResults/OktaIdx.xcresult \
           -workspace OktaIdx.xcworkspace \
           -scheme OktaIdx \
           -sdk iphonesimulator \
           -destination "platform=iOS Simulator,OS=latest,name=iPhone 12" | xcpretty
-    - uses: kishikawakatsumi/xcresulttool@v1
-      with:
-        path: |
-          ../TestResults/OktaIdx.xcresult
-        title: Unit Test Results
-      if: success() || failure()
