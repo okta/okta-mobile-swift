@@ -618,8 +618,8 @@ extension OAuth2Client {
     ///
     /// - Parameters:
     ///   - token: Token object.
-    ///   - type: Type of token to revoke, default: ``Token/RevokeType/accessToken``
-    public func revoke(_ token: Token, type: Token.RevokeType = .accessToken) async throws {
+    ///   - type: Type of token to revoke, default: ``Token/RevokeType/all``
+    public func revoke(_ token: Token, type: Token.RevokeType = .all) async throws {
         try await withCheckedThrowingContinuation { continuation in
             revoke(token, type: type) { result in
                 continuation.resume(with: result)

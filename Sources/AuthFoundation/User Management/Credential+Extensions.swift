@@ -78,8 +78,8 @@ extension Credential {
     /// 1. Has both an access token and a refresh token, and the ``Token/RevokeType/refreshToken`` type is supplied, or
     /// 1. Does not have a refresh token and the ``Token/RevokeType/accessToken`` type is supplied.
     /// - Parameters:
-    ///   - type: The token type to revoke.
-    public func revoke(type: Token.RevokeType = .accessToken) async throws {
+    ///   - type: The token type to revoke, defaulting to `.all`.
+    public func revoke(type: Token.RevokeType = .all) async throws {
         try await withCheckedThrowingContinuation { continuation in
             revoke(type: type) { result in
                 continuation.resume(with: result)
