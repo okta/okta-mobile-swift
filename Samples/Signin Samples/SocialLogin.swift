@@ -21,153 +21,102 @@ import AuthenticationServices
 /// Example:
 ///
 /// ```swift
-/// self.authHandler = SocialLogin(configuration: configuration)
-/// self.authHandler?.login(service: .facebook)
-/// { result in
-///     switch result {
-///     case .success(let token):
-///         print(token)
-///     case .failure(let error):
-///         print(error)
-///     }
-/// }
+/// let auth = SocialLogin(issuer: URL(string: "https://example.okta.com/oauth2/default")!,
+///                        clientId: "0oabcde12345",
+///                        scopes: "openid profile offline_access",
+///                        redirectUri: URL(string: "com.example.myapp:/callback")!))
+/// let token = try await auth.login(service: .facebook)
 /// ```
 ///
 /// If you want to use a custom presentation context, you can optionally supply it to the login method.
 public class SocialLogin {
-    private let configuration: IDXClient.Configuration
-    private weak var presentationContext: ASWebAuthenticationPresentationContextProviding?
-    private var webAuthSession: ASWebAuthenticationSession?
+    private let flow: InteractionCodeFlow
 
-    private var client: IDXClient?
-    private var completion: ((Result<Token, LoginError>) -> Void)?
-    
-    public init(configuration: IDXClient.Configuration) {
-        self.configuration = configuration
+    public init(issuer: URL,
+                clientId: String,
+                scopes: String,
+                redirectUri: URL)
+    {
+        // Initializes the flow which can be used later in the process.
+        flow = InteractionCodeFlow(issuer: issuer,
+                                   clientId: clientId,
+                                   scopes: scopes,
+                                   redirectUri: redirectUri)
     }
-    
+
     /// Public function used to initiate login using a given Social Authentication service.
     ///
     /// Optionally, a presentation context can be supplied when presenting the ASWebAuthenticationSession instance.
     /// - Parameters:
     ///   - service: Social service to authenticate against.
     ///   - presentationContext: Optional presentation context to present login from.
-    ///   - completion: Completion handler called when authentication completes.
-    public func login(service: Remediation.SocialAuth.Service, from presentationContext: ASWebAuthenticationPresentationContextProviding? = nil, completion: @escaping (Result<Token, LoginError>) -> Void) {
-        self.presentationContext = presentationContext
-        self.completion = completion
+    public func login(service: Capability.SocialIDP.Service,
+                      from presentationContext: ASWebAuthenticationPresentationContextProviding? = nil) async throws -> Token
+    {
+        // Begin the authentication flow, returning the list of remediations.
+        let response = try await flow.start()
         
-        // Initializes a new IDXClient with the supplied configuration.
-        IDXClient.start(with: configuration) { (client, error) in
-            guard let client = client else {
-                self.finish(with: error)
-                return
-            }
-            
-            self.client = client
-
-            // Performs the first request to IDX to retrieve the first response.
-            client.resume { (response, error) in
-                guard let response = response else {
-                    self.finish(with: error)
-                    return
-                }
-                
-                // Find the Social IDP remediation that matches the requested social auth service.
-                guard let remediation = response.remediations.first(where: { remediation in
-                    let socialRemediation = remediation as? Remediation.SocialAuth
-                    return socialRemediation?.service == service
-                }) as? Remediation.SocialAuth
-                else {
-                    self.finish(with: .cannotProceed)
-                    return
-                }
-                
-                // Switch to the main queue to initiate the AuthenticationServices workflow.
-                DispatchQueue.main.async {
-                    self.login(with: remediation)
-                }
-            }
-        }
-    }
-    
-    func login(with remediation: Remediation.SocialAuth) {
-        // Retrieve the Redirect URL scheme from our configuration, to
-         // supply it to the ASWebAuthenticationSession instance.
-        guard let client = client,
-              let scheme = URL(string: client.context.configuration.redirectUri)?.scheme
+        // Find the Social IDP capability within the response that matches our desired service.
+        guard let remediation = response.remediations.first(where: { $0.socialIdp?.service == service }),
+              let capability = remediation.socialIdp
         else {
-            finish(with: .cannotProceed)
-            return
+            throw LoginError.cannotProceed
         }
 
-        // Create an ASWebAuthenticationSession to trigger the IDP OAuth2 flow.
-        let session = ASWebAuthenticationSession(url: remediation.redirectUrl,
-                                                 callbackURLScheme: scheme)
-        { [weak self] (callbackURL, error) in
-            // Ensure no error occurred, and that the callback URL is valid.
-            guard error == nil,
-                  let callbackURL = callbackURL,
-                  let client = self?.client
-            else {
-                self?.finish(with: error)
-                return
-            }
-            
-            // Ask the IDXClient for what the result of the social login was.
-            let result = client.redirectResult(for: callbackURL)
-            
-            switch result {
-            case .authenticated:
-                // When the social login result is `authenticated`, use the
-                // IDXClient to exchange the callback URL returned from
-                // ASWebAuthenticationSession with an Okta token.
-                client.exchangeCode(redirect: callbackURL) { (token, error) in
-                    guard let token = token else {
-                        self?.finish(with: error)
-                        return
-                    }
-                    self?.finish(with: token)
+        // Present the user with a web sign in form for the social provider,
+        // and receive the subsequent redirect URL.
+        let callbackUrl = try await socialRedirect(using: capability,
+                                                   from: presentationContext)
+
+        // Inspect the redirect URL to deterine what the result was.
+        switch flow.redirectResult(for: callbackUrl) {
+        case .authenticated:
+            // When the social login result is `authenticated`, use the
+            // flow to exchange the callback URL returned from
+            // ASWebAuthenticationSession with an Okta token.
+            return try await flow.exchangeCode(redirect: callbackUrl)
+
+        default:
+            throw LoginError.cannotProceed
+        }
+    }
+
+    // Present a browser with the social IDP's redirect URL, returning
+    // the callback it subsequently redirects to.
+    func socialRedirect(using capability: Capability.SocialIDP,
+                        from presentationContext: ASWebAuthenticationPresentationContextProviding?) async throws -> URL
+    {
+        // Retrieve the Redirect URL scheme from our configuration, to
+        // supply it to the ASWebAuthenticationSession instance.
+        guard let scheme = flow.redirectUri.scheme else {
+            throw LoginError.cannotProceed
+        }
+
+        // Convert the completion block API to Swift Concurrency async/await.
+        return try await withCheckedThrowingContinuation { continuation in
+            // Create an ASWebAuthenticationSession to trigger the IDP OAuth2 flow.
+            let session = ASWebAuthenticationSession(url: capability.redirectUrl,
+                                                     callbackURLScheme: scheme)
+            { (callbackURL, error) in
+                // Ensure no error occurred, and that the callback URL is valid.
+                guard error == nil,
+                      let callbackURL = callbackURL
+                else {
+                    continuation.resume(throwing: error ?? LoginError.cannotProceed)
+                    return
                 }
-
-            default:
-                self?.finish(with: .cannotProceed)
+                
+                continuation.resume(returning: callbackURL)
             }
+            
+            // Start and present the web authentication session.
+            session.presentationContextProvider = presentationContext
+            session.prefersEphemeralWebBrowserSession = true
+            session.start()
         }
-        
-        // Start and present the web authentication session.
-        session.presentationContextProvider = presentationContext
-        session.prefersEphemeralWebBrowserSession = true
-        session.start()
-        
-        self.webAuthSession = session
     }
-    
-    public enum LoginError: Error {
-        case error(_ error: Error)
-        case message(_ string: String)
-        case cannotProceed
-        case unknown
-    }
-}
 
-// Utility functions to help return responses to the caller.
-extension SocialLogin {
-    func finish(with error: Error?) {
-        if let error = error {
-            finish(with: .error(error))
-        } else {
-            finish(with: .unknown)
-        }
-    }
-    
-    func finish(with error: LoginError) {
-        completion?(.failure(error))
-        completion = nil
-    }
-    
-    func finish(with token: Token) {
-        completion?(.success(token))
-        completion = nil
+    public enum LoginError: Error {
+        case cannotProceed
     }
 }

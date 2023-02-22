@@ -15,60 +15,89 @@ import OktaIdx
 
 /// This class demonstrates how implementing signin with basic username / password can be implemented.
 ///
-/// The completion handler supplied to the `login` function will be invoked once, either with a fatal error, or with a token.
-///
 /// Example:
 ///
 /// ```swift
-/// self.authHandler = BasicLogin(configuration: configuration)
-/// self.authHandler?.login(username: "user@example.com",
-///                         password: "secretPassword")
-/// { result in
-///     switch result {
-///     case .success(let token):
-///         print(token)
-///     case .failure(let error):
-///         print(error)
-///     }
-/// }
+/// let auth = BasicLogin(issuer: URL(string: "https://example.okta.com/oauth2/default")!,
+///                       clientId: "0oabcde12345",
+///                       scopes: "openid profile offline_access",
+///                       redirectUri: URL(string: "com.example.myapp:/callback")!)
+/// let token = try await auth.login(username: "user@example.com",
+///                                  password: "secretPassword")
 /// ```
+@available(iOS 15.0, tvOS 15.0, macOS 12.0, *)
 public class BasicLogin {
-    let configuration: IDXClient.Configuration
-    var username: String?
-    var password: String?
+    let flow: InteractionCodeFlow
     
-    var client: IDXClient?
-    var completion: ((Result<Token, LoginError>) -> Void)?
-    
-    public init(configuration: IDXClient.Configuration) {
-        self.configuration = configuration
+    public init(issuer: URL,
+                clientId: String,
+                scopes: String,
+                redirectUri: URL)
+    {
+        // Initializes the flow which can be used later in the process.
+        flow = InteractionCodeFlow(issuer: issuer,
+                                   clientId: clientId,
+                                   scopes: scopes,
+                                   redirectUri: redirectUri)
     }
     
     /// Public method that initiates the login flow.
     /// - Parameters:
     ///   - username: Username to log in with.
     ///   - password: Password for the given username.
-    ///   - completion: Comletion block invoked when login completes.
-    public func login(username: String, password: String, completion: @escaping (Result<Token, LoginError>) -> Void) {
-        self.username = username
-        self.password = password
-        self.completion = completion
-        
-        IDXClient.start(with: configuration) { (client, error) in
-            guard let client = client else {
-                self.finish(with: error)
-                return
+    public func login(username: String, password: String) async throws -> Token {
+        // Starts authentication, getting the first initial response. This
+        // usually is a prompt to input the user's identifier (username), and
+        // depending on policy settings, may also include a field for the user's
+        // password.
+        var response = try await flow.start()
+
+        // Proceed through each form response, until we successfully sign in.
+        while !response.isLoginSuccessful {
+            // If any error messages are returned, report them and abort the process.
+            if let message = response.messages.allMessages.first {
+                throw LoginError.message(message.message)
             }
             
-            self.client = client
-
-            // Assign ourselves as the delegate receiver, to be notified
-            // when responses or errors are returned.
-            client.delegate = self
+            // Find the remediation asking for the user's identifier, and supply
+            // the user's username.
+            if let remediation = response.remediations[.identify],
+               let usernameField = remediation["identifier"]
+            {
+                usernameField.value = username
+                
+                // Sometimes the form allows the password to be supplied in the same
+                // remediation, so we should try to pass that along now.
+                remediation["credentials.passcode"]?.value = password
+                
+                // Proceed through the remediation to receive the next form.
+                response = try await remediation.proceed()
+            }
             
-            // Calls the IDX API to receive the first IDX response.
-            client.resume(completion: nil)
+            // Find the password authenticator challenge remediation, to supply
+            // the user's password.
+            else if let remediation = response.remediations[.challengeAuthenticator],
+                    let passwordField = remediation["credentials.passcode"]
+            {
+                guard remediation.authenticators.contains(where: { $0.type == .password })
+                else {
+                    throw LoginError.unexpectedAuthenticator
+                }
+                
+                passwordField.value = password
+                
+                // Proceed through the remediation to receive the next form.
+                response = try await remediation.proceed()
+            }
+            
+            // We've received a remediation we don't expect.
+            else {
+                throw LoginError.cannotProceed
+            }
         }
+        
+        // Exchange the successful response with a token.
+        return try await response.exchangeCode()
     }
     
     public enum LoginError: Error {
@@ -77,82 +106,5 @@ public class BasicLogin {
         case cannotProceed
         case unexpectedAuthenticator
         case unknown
-    }
-}
-
-/// Implementation details of performing basic username/password authentication.
-extension BasicLogin: IDXClientDelegate {
-    // Delegate method sent when an error occurs.
-    public func idx(client: IDXClient, didReceive error: Error) {
-        finish(with: error)
-    }
-    
-    // Delegate method sent when a token is successfully exchanged.
-    public func idx(client: IDXClient, didReceive token: Token) {
-        finish(with: token)
-    }
-    
-    // Delegate method invoked whenever an IDX response is received, regardless
-    // of what action or remediation is called.
-    public func idx(client: IDXClient, didReceive response: Response) {
-        // If a response is successful, immediately exchange it for a token.
-        guard !response.isLoginSuccessful else {
-            response.exchangeCode(completion: nil)
-            return
-        }
-        
-        // If no remediations are present, abort the login process.
-        guard let remediation = response.remediations.first else {
-            finish(with: .cannotProceed)
-            return
-        }
-        
-        // If any error messages are returned, report them and abort the process.
-        if let message = response.messages.allMessages.first {
-            finish(with: .message(message.message))
-            return
-        }
-        
-        // Handle the various remediation choices the client may be presented with within this policy.
-        switch remediation.type {
-        case .identify:
-            remediation.identifier?.value = username
-            remediation.credentials?.passcode?.value = password
-            remediation.proceed(completion: nil)
-                        
-        // In identify-first policies, the password is supplied on a separate response.
-        case .challengeAuthenticator:
-            guard remediation.authenticators.first?.type == .password else {
-                finish(with: .unexpectedAuthenticator)
-                return
-            }
-            
-            remediation.credentials?.passcode?.value = password
-            remediation.proceed(completion: nil)
-            
-        default:
-            finish(with: .cannotProceed)
-        }
-    }
-}
-
-// Utility functions to help return responses to the caller.
-extension BasicLogin {
-    func finish(with error: Error?) {
-        if let error = error {
-            finish(with: .error(error))
-        } else {
-            finish(with: .unknown)
-        }
-    }
-    
-    func finish(with error: LoginError) {
-        completion?(.failure(error))
-        completion = nil
-    }
-    
-    func finish(with token: Token) {
-        completion?(.success(token))
-        completion = nil
     }
 }

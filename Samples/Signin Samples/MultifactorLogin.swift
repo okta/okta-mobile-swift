@@ -20,7 +20,11 @@ import OktaIdx
 /// Example:
 ///
 /// ```swift
-/// self.authHandler = MultifactorLogin(configuration: configuration)
+/// self.authHandler = MultifactorLogin(
+///     issuer: URL(string: "https://example.okta.com/oauth2/default")!,
+///     clientId: "0oabcde12345",
+///     scopes: "openid profile offline_access",
+///     redirectUri: URL(string: "com.example.myapp:/callback")!))
 /// { step in
 ///     switch step {
 ///     case .chooseFactor(let factors):
@@ -89,42 +93,36 @@ import OktaIdx
 /// }
 ///```
 public class MultifactorLogin {
-    let configuration: IDXClient.Configuration
     var username: String?
     var password: String?
     let stepHandler: ((Step) -> Void)?
     var profile: [ProfileField: String]?
 
-    var client: IDXClient?
+    let flow: InteractionCodeFlow
     var response: Response?
     var completion: ((Result<Token, LoginError>) -> Void)?
     
     /// Initializer used to create a multifactor login session.
     /// - Parameters:
-    ///   - configuration: IDX client configuration.
+    ///   - issuer: The authorization server issuer URL.
+    ///   - clientId: The application's client ID.
+    ///   - scopes: The scopes to use for the resulting token.
+    ///   - redirectUri: The application's redirect URI.
     ///   - stepHandler: Closure used when input from the user is needed.
-    public init(configuration: IDXClient.Configuration, stepHandler: ((Step) -> Void)? = nil) {
-        self.configuration = configuration
+    public init(issuer: URL,
+                clientId: String,
+                scopes: String,
+                redirectUri: URL,
+                stepHandler: @escaping (Step) -> Void)
+    {
+        // Initializes the flow which can be used later in the process.
+        flow = InteractionCodeFlow(issuer: issuer,
+                                   clientId: clientId,
+                                   scopes: scopes,
+                                   redirectUri: redirectUri)
         self.stepHandler = stepHandler
-    }
-    
-    // Internal convenience method used to initialize an IDXClient.
-    func start() {
-        IDXClient.start(with: configuration) { (client, error) in
-            guard let client = client else {
-                self.finish(with: error)
-                return
-            }
-            
-            self.client = client
-
-            // Assign ourselves as the delegate receiver, to be notified
-            // when responses or errors are returned.
-            client.delegate = self
-
-            // Calls the IDX API to receive the first IDX response.
-            client.resume(completion: nil)
-        }
+        
+        flow.add(delegate: self)
     }
     
     /// Public method that initiates the login flow.
@@ -137,7 +135,7 @@ public class MultifactorLogin {
         self.password = password
         self.completion = completion
         
-        start()
+        flow.start(completion: nil)
     }
     
     /// Public function used to initiate self-service user registration.
@@ -152,7 +150,7 @@ public class MultifactorLogin {
         self.profile = profile
         self.completion = completion
         
-        start()
+        flow.start(completion: nil)
     }
     
     /// Public function to initiate a password reset for an existing user.
@@ -165,7 +163,7 @@ public class MultifactorLogin {
         self.username = username
         self.completion = completion
        
-        start()
+        flow.start(completion: nil)
     }
     
     /// Method called by you to select an authenticator. This can be used in response to a `Step.chooseFactor` stepHandler call.
@@ -267,20 +265,20 @@ public class MultifactorLogin {
     }
 }
 
-extension MultifactorLogin: IDXClientDelegate {
+extension MultifactorLogin: InteractionCodeFlowDelegate {
     // Delegate method sent when an error occurs.
-    public func idx(client: IDXClient, didReceive error: Error) {
+    public func authentication<Flow: InteractionCodeFlow>(flow: Flow, didReceive error: Error) {
         finish(with: error)
     }
     
     // Delegate method sent when a token is successfully exchanged.
-    public func idx(client: IDXClient, didReceive token: Token) {
+    public func authentication<Flow: InteractionCodeFlow>(flow: Flow, didReceive token: Token) {
         finish(with: token)
     }
     
     // Delegate method invoked whenever an IDX response is received, regardless
     // of what action or remediation is called.
-    public func idx(client: IDXClient, didReceive response: Response) {
+    public func authentication<Flow: InteractionCodeFlow>(flow: Flow, didReceive response: Response) {
         self.response = response
         
         // If a response is successful, immediately exchange it for a token.

@@ -19,7 +19,9 @@ import Foundation
 ///
 /// This class is used to communicate which application, defined within Okta, the user is being authenticated with. From this point a workflow is initiated, consisting of a series of authentication ``Remediation`` steps. At each step, your application can introspect the ``Response`` object to determine which UI should be presented to your user to guide them through to login.
 public final class InteractionCodeFlow: AuthenticationFlow {
-    /// Options to use when initiating an ``InteractionCodeFlow``.
+    /// Options to use when initiating a ``InteractionCodeFlow`` sign in flow.
+    ///
+    /// These options enable you to customize certain attributes used during the beginning of a session.
     public enum Option: String {
         /// Option used when a client needs to supply its own custom state value when initiating an authenticaiton flow.
         case state
@@ -28,6 +30,8 @@ public final class InteractionCodeFlow: AuthenticationFlow {
         case recoveryToken = "recovery_token"
 
         /// Option indicating whether or not a device identifier should be sent on API requests, which enables the device to be remembered.
+        ///
+        /// This option should be used when you _do not want_ the device to be remembered by Okta.
         case omitDeviceToken
     }
     
