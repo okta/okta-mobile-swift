@@ -109,6 +109,7 @@ public final class ResourceOwnerFlow: AuthenticationFlow {
 
             case .failure(let error):
                 self.delegateCollection.invoke { $0.authentication(flow: self, received: error) }
+                completion?(.failure(.serverError(error)))
             }
         }
     }

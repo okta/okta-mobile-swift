@@ -18,6 +18,7 @@ extension OAuth2Client {
         case invalidPropertyList(url: URL)
         case cannotParsePropertyList(_ error: Error?)
         case missingConfigurationValues
+        case invalidConfiguration(name: String, value: String?)
     }
     
     /// Utility struct used internally to process `Okta.plist` and other similar client configuration files.

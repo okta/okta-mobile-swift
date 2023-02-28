@@ -16,6 +16,7 @@ var package = Package(
     products: [
         .library(name: "AuthFoundation", targets: ["AuthFoundation"]),
         .library(name: "OktaOAuth2", targets: ["OktaOAuth2"]),
+        .library(name: "OktaDirectAuth", targets: ["OktaDirectAuth"]),
         .library(name: "WebAuthenticationUI", targets: ["WebAuthenticationUI"])
     ],
     dependencies: [
@@ -25,6 +26,11 @@ var package = Package(
                 dependencies: [],
                 resources: [.process("Resources")]),
         .target(name: "OktaOAuth2",
+                dependencies: [
+                    .target(name: "AuthFoundation")
+                ],
+                resources: [.process("Resources")]),
+        .target(name: "OktaDirectAuth",
                 dependencies: [
                     .target(name: "AuthFoundation")
                 ],
@@ -43,6 +49,9 @@ var package = Package(
                     resources: [ .copy("MockResponses") ]),
         .testTarget(name: "OktaOAuth2Tests",
                     dependencies: ["OktaOAuth2", "TestCommon"],
+                    resources: [ .copy("MockResponses") ]),
+        .testTarget(name: "OktaDirectAuthTests",
+                    dependencies: ["OktaDirectAuth", "TestCommon"],
                     resources: [ .copy("MockResponses") ]),
         .testTarget(name: "WebAuthenticationUITests",
                     dependencies: ["WebAuthenticationUI", "TestCommon"],
