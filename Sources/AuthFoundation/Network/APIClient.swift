@@ -55,7 +55,7 @@ public protocol APIClient {
     func willSend(request: inout URLRequest)
     
     /// Invoked when a request fails.
-    func didSend(request: URLRequest, received error: APIClientError)
+    func didSend(request: URLRequest, received error: APIClientError, requestId: String?, rateLimit: APIRateLimit?)
     
     /// Invoked when a request returns a successful response.
     func didSend<T>(request: URLRequest, received response: APIResponse<T>)
@@ -73,7 +73,7 @@ public protocol APIClientDelegate: AnyObject {
     func api(client: APIClient, willSend request: inout URLRequest)
     
     /// Invoked when a request fails.
-    func api(client: APIClient, didSend request: URLRequest, received error: APIClientError)
+    func api(client: APIClient, didSend request: URLRequest, received error: APIClientError, requestId: String?, rateLimit: APIRateLimit?)
     
     /// Invoked when a request returns a successful response.
     func api<T>(client: APIClient, didSend request: URLRequest, received response: APIResponse<T>)
@@ -84,7 +84,7 @@ public protocol APIClientDelegate: AnyObject {
 
 extension APIClientDelegate {
     public func api(client: APIClient, willSend request: inout URLRequest) {}
-    public func api(client: APIClient, didSend request: URLRequest, received error: APIClientError) {}
+    public func api(client: APIClient, didSend request: URLRequest, received error: APIClientError, requestId: String?, rateLimit: APIRateLimit?) {}
     public func api<T>(client: APIClient, didSend request: URLRequest, received response: APIResponse<T>) {}
     public func api(client: APIClient, shouldRetry request: URLRequest) -> APIRetry {
         return .default
@@ -180,14 +180,19 @@ extension APIClient {
                 return
             }
             
+            var rateInfo: APIRateLimit?
+            var requestId: String?
             do {
                 guard let httpResponse = response as? HTTPURLResponse else {
                     throw APIClientError.invalidResponse
                 }
                 
-                let rateInfo = APIRateLimit(with: httpResponse.allHeaderFields)
+                rateInfo = APIRateLimit(with: httpResponse.allHeaderFields)
                 let responseType = context?.resultType(from: httpResponse) ?? APIResponseResult(statusCode: httpResponse.statusCode)
-                
+                if let requestIdHeader = requestIdHeader {
+                    requestId = httpResponse.allHeaderFields[requestIdHeader] as? String
+                }
+
                 switch responseType {
                 case .success:
                     let response: APIResponse<T> = try self.validate(data: data,
@@ -209,11 +214,6 @@ extension APIClient {
                         if let state = state {
                             retryState = state.nextState()
                         } else {
-                            var requestId: String? = nil
-                            if let requestIdHeader = requestIdHeader {
-                                requestId = httpResponse.allHeaderFields[requestIdHeader] as? String
-                            }
-                            
                             retryState = APIRetry.State(type: retry,
                                                         requestId: requestId,
                                                         originalRequest: request,
@@ -241,11 +241,11 @@ extension APIClient {
                     }
                 }
             } catch let error as APIClientError {
-                self.didSend(request: request, received: error)
+                self.didSend(request: request, received: error, requestId: requestId, rateLimit: rateInfo)
                 completion(.failure(error))
             } catch {
                 let apiError = APIClientError.cannotParseResponse(error: error)
-                self.didSend(request: request, received: apiError)
+                self.didSend(request: request, received: apiError, requestId: requestId, rateLimit: rateInfo)
                 completion(.failure(apiError))
             }
         }.resume()

@@ -49,9 +49,9 @@ class MockApiClient: APIClient {
         return try jsonDecoder.decode(type, from: data)
     }
     
-    func didSend(request: URLRequest, received error: APIClientError) {
+    func didSend(request: URLRequest, received error: AuthFoundation.APIClientError, requestId: String?, rateLimit: AuthFoundation.APIRateLimit?) {
         self.request = request
-        delegate?.api(client: self, didSend: request, received: error)
+        delegate?.api(client: self, didSend: request, received: error, requestId: nil, rateLimit: nil)
     }
     
     func willSend(request: inout URLRequest) {

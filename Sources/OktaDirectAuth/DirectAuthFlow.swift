@@ -145,9 +145,9 @@ public final class DirectAuthenticationFlow: AuthenticationFlow {
             case .success(let configuration):
                 do {
                     self.stepHandler = try factor.stepHandler(flow: self,
-                                                         openIdConfiguration: configuration,
-                                                         loginHint: loginHint,
-                                                         factor: factor)
+                                                              openIdConfiguration: configuration,
+                                                              loginHint: loginHint,
+                                                              factor: factor)
                     self.stepHandler?.process(completion: { result in
                         self.stepHandler = nil
                         completion(result)

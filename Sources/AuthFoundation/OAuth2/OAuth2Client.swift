@@ -670,8 +670,8 @@ extension OAuth2Client: APIClient {
         delegateCollection.invoke { $0.api(client: self, willSend: &request) }
     }
     
-    public func didSend(request: URLRequest, received error: APIClientError) {
-        delegateCollection.invoke { $0.api(client: self, didSend: request, received: error) }
+    public func didSend(request: URLRequest, received error: APIClientError, requestId: String?, rateLimit: APIRateLimit?) {
+        delegateCollection.invoke { $0.api(client: self, didSend: request, received: error, requestId: requestId, rateLimit: rateLimit) }
     }
 
     public func shouldRetry(request: URLRequest) -> APIRetry {

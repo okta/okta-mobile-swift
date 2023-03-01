@@ -75,6 +75,7 @@ extension OAuth2ServerError {
         case unsupportedResponseMode
         /// The client specified is not authorized to utilize the supplied grant type.
         case unauthorizedClient
+        case directAuthAuthorizationPending
         case mfaRequired
         case invalidOTP
         case oobRejected
@@ -117,6 +118,8 @@ extension OAuth2ServerError.Code: RawRepresentable, Equatable {
             self = .unsupportedResponseMode
         case "unauthorized_client":
             self = .unauthorizedClient
+        case "direct_auth_authorization_pending":
+            self = .directAuthAuthorizationPending
         case "mfa_required":
             self = .mfaRequired
         case "invalid_otp":
@@ -160,6 +163,8 @@ extension OAuth2ServerError.Code: RawRepresentable, Equatable {
             return "unsupported_response_mode"
         case .unauthorizedClient:
             return "unauthorized_client"
+        case .directAuthAuthorizationPending:
+            return "direct_auth_authorization_pending"
         case .mfaRequired:
             return "mfa_required"
         case .invalidOTP:
