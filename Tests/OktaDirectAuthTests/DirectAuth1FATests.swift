@@ -15,7 +15,7 @@ import XCTest
 @testable import AuthFoundation
 @testable import OktaDirectAuth
 
-final class SessionTests: XCTestCase {
+final class DirectAuth1FATests: XCTestCase {
     let issuer = URL(string: "https://example.com/oauth2/default")!
     var urlSession: URLSessionMock!
     var client: OAuth2Client!
@@ -27,7 +27,7 @@ final class SessionTests: XCTestCase {
                               clientId: "theClientId",
                               scopes: "openid profile offline_access",
                               session: urlSession)
-        flow = client.directAuthenticationFlow(additionalParameters: ["additional": "param"])
+        flow = client.directAuthenticationFlow(additionalParameters: [:])
 
         JWK.validator = MockJWKValidator()
         Token.idTokenValidator = MockIDTokenValidator()
@@ -41,7 +41,7 @@ final class SessionTests: XCTestCase {
     
 #if swift(>=5.5.1)
     @available(iOS 15.0, tvOS 15.0, macOS 12.0, watchOS 8, *)
-    func test1FAUserAndPassword() async throws {
+    func testUserAndPassword() async throws {
         // Ensure the initial state
         XCTAssertFalse(flow.isAuthenticating)
         
@@ -61,7 +61,7 @@ final class SessionTests: XCTestCase {
     }
 
     @available(iOS 15.0, tvOS 15.0, macOS 12.0, watchOS 8, *)
-    func test1FAUserAndOTP() async throws {
+    func testUserAndOTP() async throws {
         // Ensure the initial state
         XCTAssertFalse(flow.isAuthenticating)
         
@@ -81,7 +81,7 @@ final class SessionTests: XCTestCase {
     }
 
     @available(iOS 15.0, tvOS 15.0, macOS 12.0, watchOS 8, *)
-    func test1FAUserAndOOBPush() async throws {
+    func testUserAndOOBPush() async throws {
         // Ensure the initial state
         XCTAssertFalse(flow.isAuthenticating)
         
