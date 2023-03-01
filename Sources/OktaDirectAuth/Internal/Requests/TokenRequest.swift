@@ -57,7 +57,13 @@ extension TokenRequest: OAuth2TokenRequest, OAuth2APIRequest, APIRequestBody {
         }
         
         if let loginHint = loginHint {
-            result[factor.loginHintKey] = loginHint
+            let key: String
+            if let factor = factor as? DirectAuthenticationFlow.PrimaryFactor {
+                key = factor.loginHintKey
+            } else {
+                key = "login_hint"
+            }
+            result[key] = loginHint
         }
         
         if let grantTypesSupported = grantTypesSupported?.map({ $0.rawValue }) {

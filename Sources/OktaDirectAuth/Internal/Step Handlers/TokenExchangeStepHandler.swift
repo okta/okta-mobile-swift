@@ -17,7 +17,7 @@ struct TokenExchangeStepHandler: StepHandler {
     let flow: DirectAuthenticationFlow
     let request: any OAuth2TokenRequest
     
-    func process(completion: @escaping (Result<DirectAuthenticationFlow.State, OAuth2Error>) -> Void) {
+    func process(completion: @escaping (Result<DirectAuthenticationFlow.Status, OAuth2Error>) -> Void) {
         flow.client.exchange(token: request) { result in
             switch result {
             case .failure(let error):

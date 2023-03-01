@@ -20,9 +20,6 @@ protocol AuthenticationFactor {
     /// Parameters to include in the API request.
     var tokenParameters: [String: Any]? { get }
     
-    /// The name for the login hint key.
-    var loginHintKey: String { get }
-    
     /// Returns a step handler capable of handling this authentication factor.
     /// - Parameters:
     ///   - flow: The current flow for this authentication step.
@@ -32,6 +29,6 @@ protocol AuthenticationFactor {
     /// - Returns: A step handler capable of processing this authentication factor.
     func stepHandler(flow: DirectAuthenticationFlow,
                      openIdConfiguration: OpenIdConfiguration,
-                     loginHint: String,
-                     factor: DirectAuthenticationFlow.PrimaryFactor) throws -> any StepHandler
+                     loginHint: String?,
+                     factor: Self) throws -> any StepHandler
 }

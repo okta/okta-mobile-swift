@@ -15,5 +15,5 @@ import AuthFoundation
 
 protocol StepHandler {
     var flow: DirectAuthenticationFlow { get }
-    func process(completion: @escaping (Result<DirectAuthenticationFlow.State, OAuth2Error>) -> Void)
+    func process(completion: @escaping (Result<DirectAuthenticationFlow.Status, OAuth2Error>) -> Void)
 }

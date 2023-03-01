@@ -13,21 +13,41 @@
 import Foundation
 import AuthFoundation
 
-class OOBStepHandler: StepHandler {
+class OOBStepHandler<Factor: AuthenticationFactor>: StepHandler {
     let flow: DirectAuthenticationFlow
     let openIdConfiguration: OpenIdConfiguration
     let request: OOBAuthenticateRequest
-    let factor: DirectAuthenticationFlow.PrimaryFactor
+    let factor: Factor
     private var poll: PollingHandler<TokenRequest>?
     
-    init(flow: DirectAuthenticationFlow, openIdConfiguration: OpenIdConfiguration, request: OOBAuthenticateRequest, factor: DirectAuthenticationFlow.PrimaryFactor) {
+    init(flow: DirectAuthenticationFlow,
+         openIdConfiguration: OpenIdConfiguration,
+         request: OOBAuthenticateRequest,
+         factor: Factor)
+    {
         self.flow = flow
         self.openIdConfiguration = openIdConfiguration
         self.request = request
         self.factor = factor
     }
     
-    func process(completion: @escaping (Result<DirectAuthenticationFlow.State, OAuth2Error>) -> Void) {
+    convenience init(flow: DirectAuthenticationFlow,
+                     openIdConfiguration: OpenIdConfiguration,
+                     loginHint: String?,
+                     channel: DirectAuthenticationFlow.Channel,
+                     factor: Factor) throws
+    {
+        let request = try OOBAuthenticateRequest(openIdConfiguration: openIdConfiguration,
+                                                 clientId: flow.client.configuration.clientId,
+                                                 loginHint: loginHint,
+                                                 channelHint: channel)
+        self.init(flow: flow,
+                  openIdConfiguration: openIdConfiguration,
+                  request: request,
+                  factor: factor)
+    }
+    
+    func process(completion: @escaping (Result<DirectAuthenticationFlow.Status, OAuth2Error>) -> Void) {
         request.send(to: flow.client) { result in
             switch result {
             case .failure(let error):

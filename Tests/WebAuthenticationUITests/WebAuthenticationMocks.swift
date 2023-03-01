@@ -32,11 +32,11 @@ class WebAuthenticationProviderMock: WebAuthenticationProvider {
     var logoutFlow: SessionLogoutFlow?
     var delegate: WebAuthenticationProviderDelegate?
     
-    enum State {
+    enum Status {
         case initialized, started, cancelled, logout
     }
     
-    var state: State = .initialized
+    var state: Status = .initialized
     
     init(loginFlow: AuthorizationCodeFlow, logoutFlow: SessionLogoutFlow?, delegate: WebAuthenticationProviderDelegate) {
         self.loginFlow = loginFlow

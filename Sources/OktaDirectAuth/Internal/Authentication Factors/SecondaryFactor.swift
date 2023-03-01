@@ -13,29 +13,17 @@
 import Foundation
 import AuthFoundation
 
-extension DirectAuthenticationFlow.PrimaryFactor {
-    var loginHintKey: String {
-        switch self {
-        case .password(_):
-            return "username"
-        default:
-            return "login_hint"
-        }
-    }
-}
-
-extension DirectAuthenticationFlow.PrimaryFactor: AuthenticationFactor {
+extension DirectAuthenticationFlow.SecondaryFactor: AuthenticationFactor {
     func stepHandler(flow: DirectAuthenticationFlow,
                      openIdConfiguration: AuthFoundation.OpenIdConfiguration,
                      loginHint: String? = nil,
-                     factor: DirectAuthenticationFlow.PrimaryFactor) throws -> StepHandler
+                     factor: DirectAuthenticationFlow.SecondaryFactor) throws -> StepHandler
     {
         let clientId = flow.client.configuration.clientId
         let scope = flow.client.configuration.scopes
 
         switch self {
-        case .otp(code: _): fallthrough
-        case .password(_):
+        case .otp(code: _):
             let request = TokenRequest(openIdConfiguration: openIdConfiguration,
                                        clientId: clientId,
                                        scope: scope,
@@ -59,11 +47,6 @@ extension DirectAuthenticationFlow.PrimaryFactor: AuthenticationFactor {
                 "grant_type": grantType.rawValue,
                 "otp": code
             ]
-        case .password(let password):
-            return [
-                "grant_type": grantType.rawValue,
-                "password": password
-            ]
         case .oob(channel: _):
             return nil
         }
@@ -74,8 +57,6 @@ extension DirectAuthenticationFlow.PrimaryFactor: AuthenticationFactor {
         switch self {
         case .otp(code: _):
             return .otp
-        case .password(_):
-            return .password
         case .oob(channel: _):
             return .oob
         }
