@@ -14,7 +14,7 @@ import Foundation
 
 extension DirectAuthenticationFlow {
     func process(_ error: APIClientError,
-                 completion: @escaping (Result<DirectAuthenticationFlow.State, OAuth2Error>) -> Void)
+                 completion: @escaping (Result<DirectAuthenticationFlow.Status, OAuth2Error>) -> Void)
     {
         guard case let .serverError(serverError) = error,
            let oauthError = serverError as? OAuth2ServerError
@@ -32,7 +32,7 @@ extension DirectAuthenticationFlow {
         }
     }
     
-    func process(_ error: OAuth2ServerError) throws -> State {
+    func process(_ error: OAuth2ServerError) throws -> Status {
         switch error.code {
         case .mfaRequired:
             guard let mfaToken = error.additionalValues["mfaToken"] as? String else {

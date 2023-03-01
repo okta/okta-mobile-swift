@@ -15,17 +15,27 @@ import AuthFoundation
 
 public protocol DirectAuthenticationFlowDelegate: AuthenticationDelegate {
     /// Sent when an authentication session receives a token.
-    func authentication<Flow>(flow: Flow, received state: DirectAuthenticationFlow.State)
+    func authentication<Flow>(flow: Flow, received state: DirectAuthenticationFlow.Status)
 }
 
 protocol DirectAuthTokenRequest {
     
 }
 
+public enum DirectAuthenticationFlowError: Error {
+    case missingArgument(_ name: String)
+    case currentStatusMissing
+}
+
 public final class DirectAuthenticationFlow: AuthenticationFlow {
     public enum PrimaryFactor {
         case otp(code: String)
         case password(String)
+        case oob(channel: Channel)
+    }
+    
+    public enum SecondaryFactor {
+        case otp(code: String)
         case oob(channel: Channel)
     }
     
@@ -38,7 +48,7 @@ public final class DirectAuthenticationFlow: AuthenticationFlow {
         let mfaToken: String
     }
     
-    public enum State {
+    public enum Status {
         case success(_ token: Token)
         case failure(_ error: Error)
         
@@ -50,10 +60,10 @@ public final class DirectAuthenticationFlow: AuthenticationFlow {
     public let client: OAuth2Client
     
     public let supportedGrantTypes: [GrantType]
-
+    
     /// Any additional query string parameters you would like to supply to the authorization server.
     public let additionalParameters: [String: String]?
-
+    
     /// Indicates whether or not this flow is currently in the process of authenticating a user.
     public private(set) var isAuthenticating: Bool = false {
         didSet {
@@ -68,7 +78,7 @@ public final class DirectAuthenticationFlow: AuthenticationFlow {
             }
         }
     }
-
+    
     /// Convenience initializer to construct an authentication flow from variables.
     /// - Parameters:
     ///   - issuer: The issuer URL.
@@ -131,13 +141,33 @@ public final class DirectAuthenticationFlow: AuthenticationFlow {
                   supportedGrants: supportedGrantTypes,
                   additionalParameters: config.additionalParameters)
     }
-
+    
     var stepHandler: (any StepHandler)?
     
     public func start(_ loginHint: String,
                       with factor: PrimaryFactor,
-                      completion: @escaping (Result<DirectAuthenticationFlow.State, OAuth2Error>) -> Void)
+                      completion: @escaping (Result<Status, OAuth2Error>) -> Void)
     {
+        runStep(loginHint: loginHint, with: factor, completion: completion)
+    }
+    
+    public func resume(_ status: DirectAuthenticationFlow.Status,
+                       with factor: SecondaryFactor,
+                       completion: @escaping (Result<Status, OAuth2Error>) -> Void)
+    {
+        runStep(currentStatus: status, with: factor, completion: completion)
+    }
+    
+    private func runStep<Factor: AuthenticationFactor>(loginHint: String? = nil,
+                                                       currentStatus: Status? = nil,
+                                                       with factor: Factor,
+                                                       completion: @escaping (Result<DirectAuthenticationFlow.Status, OAuth2Error>) -> Void)
+    {
+        guard let currentStatus = currentStatus else {
+            send(error: .error(DirectAuthenticationFlowError.currentStatusMissing), completion: completion)
+            return
+        }
+        
         isAuthenticating = true
         
         client.openIdConfiguration { result in
@@ -148,10 +178,10 @@ public final class DirectAuthenticationFlow: AuthenticationFlow {
                                                               openIdConfiguration: configuration,
                                                               loginHint: loginHint,
                                                               factor: factor)
-                    self.stepHandler?.process(completion: { result in
+                    self.stepHandler?.process { result in
                         self.stepHandler = nil
                         completion(result)
-                    })
+                    }
                 } catch {
                     self.send(error: .error(error), completion: completion)
                 }
@@ -173,15 +203,17 @@ public final class DirectAuthenticationFlow: AuthenticationFlow {
 #if swift(>=5.5.1)
 @available(iOS 15.0, tvOS 15.0, macOS 12.0, watchOS 8, *)
 extension DirectAuthenticationFlow {
-    /// Asynchronously initiates an authentication flow, with an optional ``Context-swift.struct``, using Swift Concurrency.
-    ///
-    /// This method is used to begin an authentication session.
-    /// - Parameters:
-    ///   - context: Optional context to provide when customizing the state parameter.
-    /// - Returns: The URL a user should be presented with within a browser, to continue authorization.
-    public func start(_ loginHint: String, with factor: PrimaryFactor) async throws -> DirectAuthenticationFlow.State {
+    public func start(_ loginHint: String, with factor: PrimaryFactor) async throws -> DirectAuthenticationFlow.Status {
         try await withCheckedThrowingContinuation { continuation in
             start(loginHint, with: factor) { result in
+                continuation.resume(with: result)
+            }
+        }
+    }
+    
+    public func resume(_ status: DirectAuthenticationFlow.Status, with factor: SecondaryFactor) async throws -> DirectAuthenticationFlow.Status {
+        try await withCheckedThrowingContinuation { continuation in
+            resume(status, with: factor) { result in
                 continuation.resume(with: result)
             }
         }

@@ -32,11 +32,15 @@ struct OOBAuthenticateRequest {
     
     init(openIdConfiguration: OpenIdConfiguration,
          clientId: String,
-         loginHint: String,
+         loginHint: String?,
          channelHint: DirectAuthenticationFlow.Channel) throws
     {
         guard let url = openIdConfiguration.oobAuthenticateEndpoint else {
             throw OAuth2Error.cannotComposeUrl
+        }
+        
+        guard let loginHint = loginHint else {
+            throw DirectAuthenticationFlowError.missingArgument("loginHint")
         }
         
         self.url = url
