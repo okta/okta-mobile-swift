@@ -23,14 +23,14 @@ protocol DirectAuthTokenRequest {
 }
 
 public enum DirectAuthenticationFlowError: Error {
-    case missingArgument(_ name: String)
+    case missingArguments(_ names: [String])
     case currentStatusMissing
 }
 
 public final class DirectAuthenticationFlow: AuthenticationFlow {
     public enum PrimaryFactor {
-        case otp(code: String)
         case password(String)
+        case otp(code: String)
         case oob(channel: Channel)
     }
     
@@ -61,9 +61,6 @@ public final class DirectAuthenticationFlow: AuthenticationFlow {
     
     public let supportedGrantTypes: [GrantType]
     
-    /// Any additional query string parameters you would like to supply to the authorization server.
-    public let additionalParameters: [String: String]?
-    
     /// Indicates whether or not this flow is currently in the process of authenticating a user.
     public private(set) var isAuthenticating: Bool = false {
         didSet {
@@ -88,11 +85,9 @@ public final class DirectAuthenticationFlow: AuthenticationFlow {
     public convenience init(issuer: URL,
                             clientId: String,
                             scopes: String,
-                            supportedGrants grantTypes: [GrantType] = .directAuth,
-                            additionalParameters: [String: String]? = nil)
+                            supportedGrants grantTypes: [GrantType] = .directAuth)
     {
         self.init(supportedGrants: grantTypes,
-                  additionalParameters: additionalParameters,
                   client: .init(baseURL: issuer,
                                 clientId: clientId,
                                 scopes: scopes))
@@ -103,7 +98,6 @@ public final class DirectAuthenticationFlow: AuthenticationFlow {
     ///   - configuration: The configuration to use for this authentication flow.
     ///   - client: The `OAuth2Client` to use with this flow.
     public init(supportedGrants grantTypes: [GrantType] = .directAuth,
-                additionalParameters: [String: String]? = nil,
                 client: OAuth2Client)
     {
         // Ensure this SDK's static version is included in the user agent.
@@ -111,7 +105,6 @@ public final class DirectAuthenticationFlow: AuthenticationFlow {
         
         self.client = client
         self.supportedGrantTypes = grantTypes
-        self.additionalParameters = additionalParameters
         
         client.add(delegate: self)
     }
@@ -138,8 +131,7 @@ public final class DirectAuthenticationFlow: AuthenticationFlow {
         self.init(issuer: config.issuer,
                   clientId: config.clientId,
                   scopes: config.scopes,
-                  supportedGrants: supportedGrantTypes,
-                  additionalParameters: config.additionalParameters)
+                  supportedGrants: supportedGrantTypes)
     }
     
     var stepHandler: (any StepHandler)?
@@ -163,11 +155,6 @@ public final class DirectAuthenticationFlow: AuthenticationFlow {
                                                        with factor: Factor,
                                                        completion: @escaping (Result<DirectAuthenticationFlow.Status, OAuth2Error>) -> Void)
     {
-        guard let currentStatus = currentStatus else {
-            send(error: .error(DirectAuthenticationFlowError.currentStatusMissing), completion: completion)
-            return
-        }
-        
         isAuthenticating = true
         
         client.openIdConfiguration { result in
@@ -177,9 +164,15 @@ public final class DirectAuthenticationFlow: AuthenticationFlow {
                     self.stepHandler = try factor.stepHandler(flow: self,
                                                               openIdConfiguration: configuration,
                                                               loginHint: loginHint,
+                                                              currentStatus: currentStatus,
                                                               factor: factor)
                     self.stepHandler?.process { result in
                         self.stepHandler = nil
+                        if case let .success(status) = result,
+                            case .success(_) = status
+                        {
+                            self.reset()
+                        }
                         completion(result)
                     }
                 } catch {
@@ -230,11 +223,9 @@ extension DirectAuthenticationFlow: OAuth2ClientDelegate {
 }
 
 extension OAuth2Client {
-    public func directAuthenticationFlow(supportedGrants grantTypes: [GrantType] = .directAuth,
-                                         additionalParameters: [String: String]? = nil) -> DirectAuthenticationFlow
+    public func directAuthenticationFlow(supportedGrants grantTypes: [GrantType] = .directAuth) -> DirectAuthenticationFlow
     {
         DirectAuthenticationFlow(supportedGrants: grantTypes,
-                                 additionalParameters: additionalParameters,
                                  client: self)
     }
 }

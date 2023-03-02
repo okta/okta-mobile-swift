@@ -16,39 +16,29 @@ import AuthFoundation
 class OOBStepHandler<Factor: AuthenticationFactor>: StepHandler {
     let flow: DirectAuthenticationFlow
     let openIdConfiguration: OpenIdConfiguration
-    let request: OOBAuthenticateRequest
+    let loginHint: String?
+    let mfaToken: String?
+    let channel: DirectAuthenticationFlow.Channel
     let factor: Factor
     private var poll: PollingHandler<TokenRequest>?
     
     init(flow: DirectAuthenticationFlow,
          openIdConfiguration: OpenIdConfiguration,
-         request: OOBAuthenticateRequest,
-         factor: Factor)
+         loginHint: String?,
+         mfaToken: String?,
+         channel: DirectAuthenticationFlow.Channel,
+         factor: Factor) throws
     {
         self.flow = flow
         self.openIdConfiguration = openIdConfiguration
-        self.request = request
+        self.loginHint = loginHint
+        self.mfaToken = mfaToken
+        self.channel = channel
         self.factor = factor
     }
     
-    convenience init(flow: DirectAuthenticationFlow,
-                     openIdConfiguration: OpenIdConfiguration,
-                     loginHint: String?,
-                     channel: DirectAuthenticationFlow.Channel,
-                     factor: Factor) throws
-    {
-        let request = try OOBAuthenticateRequest(openIdConfiguration: openIdConfiguration,
-                                                 clientId: flow.client.configuration.clientId,
-                                                 loginHint: loginHint,
-                                                 channelHint: channel)
-        self.init(flow: flow,
-                  openIdConfiguration: openIdConfiguration,
-                  request: request,
-                  factor: factor)
-    }
-    
     func process(completion: @escaping (Result<DirectAuthenticationFlow.Status, OAuth2Error>) -> Void) {
-        request.send(to: flow.client) { result in
+        requestOOBCode { result in
             switch result {
             case .failure(let error):
                 self.flow.process(error, completion: completion)
@@ -58,12 +48,13 @@ class OOBStepHandler<Factor: AuthenticationFactor>: StepHandler {
                                            clientId: self.flow.client.configuration.clientId,
                                            scope: self.flow.client.configuration.scopes,
                                            factor: self.factor,
-                                           oobCode: response.result.oobCode,
+                                           mfaToken: self.mfaToken,
+                                           oobCode: response.oobCode,
                                            grantTypesSupported: self.flow.supportedGrantTypes)
                 self.poll = PollingHandler(client: self.flow.client,
                                            request: request,
-                                           expiresIn: response.result.expiresIn,
-                                           interval: response.result.interval) { pollHandler, result in
+                                           expiresIn: response.expiresIn,
+                                           interval: response.interval) { pollHandler, result in
                     switch result {
                     case .success(let response):
                         return .success(response.result)
@@ -102,6 +93,72 @@ class OOBStepHandler<Factor: AuthenticationFactor>: StepHandler {
                     self.poll = nil
                 }
             }
+        }
+    }
+    
+    // OOB authentication requests differ whether it's used as a primary factor, or a secondary factor.
+    // To simplify the code below, we separate this request logic into separate functions to work
+    // around differences in the response data.
+    func requestOOBCode(completion: @escaping (Result<OOBResponse, APIClientError>) -> Void) {
+        // Request where OOB is used as the primary factor
+        if let loginHint = loginHint {
+            requestOOBCode(loginHint: loginHint, completion: completion)
+        }
+        
+        // Request where OOB is used as the secondary factor
+        else if let mfaToken = mfaToken {
+            requestOOBCode(mfaToken: mfaToken, completion: completion)
+        }
+        
+        // Cannot create a request
+        else {
+            completion(.failure(.validation(error: DirectAuthenticationFlowError.missingArguments(["login_hint", "mfa_token"]))))
+        }
+    }
+    
+    func requestOOBCode(loginHint: String,
+                        completion: @escaping (Result<OOBResponse, APIClientError>) -> Void)
+    {
+        do {
+            let request = try OOBAuthenticateRequest(openIdConfiguration: openIdConfiguration,
+                                                     clientId: flow.client.configuration.clientId,
+                                                     loginHint: loginHint,
+                                                     channelHint: channel)
+            request.send(to: flow.client) { result in
+                switch result {
+                case .failure(let error):
+                    completion(.failure(error))
+                case .success(let response):
+                    completion(.success(response.result))
+                }
+            }
+        } catch {
+            completion(.failure(.validation(error: error)))
+        }
+    }
+    
+    func requestOOBCode(mfaToken: String,
+                        completion: @escaping (Result<OOBResponse, APIClientError>) -> Void)
+    {
+        do {
+            let request = try ChallengeRequest(openIdConfiguration: openIdConfiguration,
+                                               clientId: flow.client.configuration.clientId,
+                                               mfaToken: mfaToken,
+                                               challengeTypesSupported: [factor.grantType])
+            request.send(to: flow.client) { result in
+                switch result {
+                case .failure(let error):
+                    completion(.failure(error))
+                case .success(let response):
+                    if let oobResponse = response.result.oobResponse {
+                        completion(.success(oobResponse))
+                    } else {
+                        completion(.failure(.invalidResponse))
+                    }
+                }
+            }
+        } catch {
+            completion(.failure(.validation(error: error)))
         }
     }
 }

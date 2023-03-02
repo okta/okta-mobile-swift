@@ -19,6 +19,7 @@ struct TokenRequest {
     let scope: String
     let loginHint: String?
     let factor: any AuthenticationFactor
+    let mfaToken: String?
     let oobCode: String?
     let grantTypesSupported: [GrantType]?
     
@@ -27,6 +28,7 @@ struct TokenRequest {
          scope: String,
          loginHint: String? = nil,
          factor: any AuthenticationFactor,
+         mfaToken: String? = nil,
          oobCode: String? = nil,
          grantTypesSupported: [GrantType]? = nil)
     {
@@ -35,6 +37,7 @@ struct TokenRequest {
         self.scope = scope
         self.loginHint = loginHint
         self.factor = factor
+        self.mfaToken = mfaToken
         self.oobCode = oobCode
         self.grantTypesSupported = grantTypesSupported
     }
@@ -51,6 +54,10 @@ extension TokenRequest: OAuth2TokenRequest, OAuth2APIRequest, APIRequestBody {
             "grant_type": factor.grantType.rawValue,
             "scope": scope
         ]
+        
+        if let mfaToken = mfaToken {
+            result["mfa_token"] = mfaToken
+        }
         
         if let oobCode = oobCode {
             result["oob_code"] = oobCode

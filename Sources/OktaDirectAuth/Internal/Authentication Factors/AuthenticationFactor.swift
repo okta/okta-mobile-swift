@@ -30,5 +30,6 @@ protocol AuthenticationFactor {
     func stepHandler(flow: DirectAuthenticationFlow,
                      openIdConfiguration: OpenIdConfiguration,
                      loginHint: String?,
+                     currentStatus: DirectAuthenticationFlow.Status?,
                      factor: Self) throws -> any StepHandler
 }

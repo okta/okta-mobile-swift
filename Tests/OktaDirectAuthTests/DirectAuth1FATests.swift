@@ -27,7 +27,7 @@ final class DirectAuth1FATests: XCTestCase {
                               clientId: "theClientId",
                               scopes: "openid profile offline_access",
                               session: urlSession)
-        flow = client.directAuthenticationFlow(additionalParameters: [:])
+        flow = client.directAuthenticationFlow()
 
         JWK.validator = MockJWKValidator()
         Token.idTokenValidator = MockIDTokenValidator()
