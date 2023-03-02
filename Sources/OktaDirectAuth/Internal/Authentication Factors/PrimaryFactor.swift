@@ -28,6 +28,7 @@ extension DirectAuthenticationFlow.PrimaryFactor: AuthenticationFactor {
     func stepHandler(flow: DirectAuthenticationFlow,
                      openIdConfiguration: AuthFoundation.OpenIdConfiguration,
                      loginHint: String? = nil,
+                     currentStatus: DirectAuthenticationFlow.Status? = nil,
                      factor: DirectAuthenticationFlow.PrimaryFactor) throws -> StepHandler
     {
         let clientId = flow.client.configuration.clientId
@@ -47,6 +48,7 @@ extension DirectAuthenticationFlow.PrimaryFactor: AuthenticationFactor {
             return try OOBStepHandler(flow: flow,
                                       openIdConfiguration: openIdConfiguration,
                                       loginHint: loginHint,
+                                      mfaToken: currentStatus?.mfaToken,
                                       channel: channel,
                                       factor: factor)
         }

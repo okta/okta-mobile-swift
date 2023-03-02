@@ -27,7 +27,7 @@ final class DirectAuth2FATests: XCTestCase {
                               clientId: "theClientId",
                               scopes: "openid profile offline_access",
                               session: urlSession)
-        flow = client.directAuthenticationFlow(additionalParameters: [:])
+        flow = client.directAuthenticationFlow()
 
         JWK.validator = MockJWKValidator()
         Token.idTokenValidator = MockIDTokenValidator()
@@ -41,7 +41,7 @@ final class DirectAuth2FATests: XCTestCase {
     
 #if swift(>=5.5.1)
     @available(iOS 15.0, tvOS 15.0, macOS 12.0, watchOS 8, *)
-    func testUserPasswordAndOTP() async throws {
+    func testUserPasswordAndOOB() async throws {
         // Ensure the initial state
         XCTAssertFalse(flow.isAuthenticating)
         
@@ -49,7 +49,7 @@ final class DirectAuth2FATests: XCTestCase {
         let state = try await flow.start("jane.doe@example.com",
                                          with: .password("SuperSecret"))
         
-        XCTAssertFalse(flow.isAuthenticating)
+        XCTAssertTrue(flow.isAuthenticating)
         switch state {
         case .success(_):
             XCTFail("Not expecting a successful token response")
@@ -57,16 +57,18 @@ final class DirectAuth2FATests: XCTestCase {
             XCTFail(error.localizedDescription)
         case .mfaRequired(let context):
             XCTAssertFalse(context.mfaToken.isEmpty)
-            let newState = try await flow.resume(state, with: .otp(code: "123456"))
+            let newState = try await flow.resume(state, with: .oob(channel: .push))
             switch newState {
-            case .success(let token):
-                XCTAssertNotNil(token.refreshToken)
+            case .success(_):
+                // Success!
+                break
             case .failure(let error):
                 XCTFail(error.localizedDescription)
             case .mfaRequired(_):
                 XCTFail("Not expecting MFA Required")
             }
         }
+        XCTAssertFalse(flow.isAuthenticating)
     }
 #endif
 }

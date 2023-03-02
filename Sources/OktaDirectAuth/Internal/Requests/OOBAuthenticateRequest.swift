@@ -14,14 +14,16 @@ import Foundation
 
 extension OpenIdConfiguration {
     var oobAuthenticateEndpoint: URL? {
-        guard var components = URLComponents(url: tokenEndpoint, resolvingAgainstBaseURL: true),
-            let tokenRange = components.path.range(of: "/token")
-        else {
-            return nil
-        }
-        components.path.replaceSubrange(tokenRange, with: "/oob-authenticate")
-        return components.url
+        tokenEndpoint.url(replacing: "/token", with: "/oob-authenticate")
     }
+}
+
+struct OOBResponse: Codable {
+    let oobCode: String
+    let expiresIn: TimeInterval
+    let interval: TimeInterval
+    let channel: DirectAuthenticationFlow.Channel
+    let bindingMethod: BindingMethod
 }
 
 struct OOBAuthenticateRequest {
@@ -32,29 +34,17 @@ struct OOBAuthenticateRequest {
     
     init(openIdConfiguration: OpenIdConfiguration,
          clientId: String,
-         loginHint: String?,
+         loginHint: String,
          channelHint: DirectAuthenticationFlow.Channel) throws
     {
         guard let url = openIdConfiguration.oobAuthenticateEndpoint else {
             throw OAuth2Error.cannotComposeUrl
         }
         
-        guard let loginHint = loginHint else {
-            throw DirectAuthenticationFlowError.missingArgument("loginHint")
-        }
-        
         self.url = url
         self.clientId = clientId
         self.loginHint = loginHint
         self.channelHint = channelHint
-    }
-    
-    struct Response: Codable {
-        let oobCode: String
-        let expiresIn: TimeInterval
-        let interval: TimeInterval
-        let channel: DirectAuthenticationFlow.Channel
-        let bindingMethod: BindingMethod
     }
 }
 
@@ -63,7 +53,7 @@ enum BindingMethod: String, Codable {
 }
 
 extension OOBAuthenticateRequest: APIRequest, APIRequestBody {
-    typealias ResponseType = OOBAuthenticateRequest.Response
+    typealias ResponseType = OOBResponse
 
     var httpMethod: APIRequestMethod { .post }
     var contentType: APIContentType? { .formEncoded }

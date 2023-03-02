@@ -17,6 +17,7 @@ extension DirectAuthenticationFlow.SecondaryFactor: AuthenticationFactor {
     func stepHandler(flow: DirectAuthenticationFlow,
                      openIdConfiguration: AuthFoundation.OpenIdConfiguration,
                      loginHint: String? = nil,
+                     currentStatus: DirectAuthenticationFlow.Status?,
                      factor: DirectAuthenticationFlow.SecondaryFactor) throws -> StepHandler
     {
         let clientId = flow.client.configuration.clientId
@@ -35,6 +36,7 @@ extension DirectAuthenticationFlow.SecondaryFactor: AuthenticationFactor {
             return try OOBStepHandler(flow: flow,
                                       openIdConfiguration: openIdConfiguration,
                                       loginHint: loginHint,
+                                      mfaToken: currentStatus?.mfaToken,
                                       channel: channel,
                                       factor: factor)
         }
@@ -56,9 +58,9 @@ extension DirectAuthenticationFlow.SecondaryFactor: AuthenticationFactor {
     var grantType: GrantType {
         switch self {
         case .otp(code: _):
-            return .otp
+            return .otpMFA
         case .oob(channel: _):
-            return .oob
+            return .oobMFA
         }
     }
 }
