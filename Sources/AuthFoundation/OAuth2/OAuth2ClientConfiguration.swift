@@ -30,6 +30,9 @@ extension OAuth2Client {
         /// The client ID, defined in the "clientId" key.
         public let clientId: String
         
+        /// The client secret, defined in the "clientSecret" key.
+        public let clientSecret: String?
+        
         /// The client scopes, defined in the "scopes" key.
         public let scopes: String
         
@@ -82,6 +85,8 @@ extension OAuth2Client {
                 throw PropertyListConfigurationError.missingConfigurationValues
             }
             
+            let clientSecret = dict["clientSecret"] as? String
+            
             let redirectUri: URL?
             if let redirectUriString = dict["redirectUri"] {
                 redirectUri = URL(string: redirectUriString)
@@ -98,11 +103,12 @@ extension OAuth2Client {
             
             // Filter only additional parameters
             let additionalParameters = dict.filter {
-                !["clientId", "issuer", "scopes", "redirectUri", "logoutRedirectUri"].contains($0.key)
+                !["clientId", "clientSecret", "issuer", "scopes", "redirectUri", "logoutRedirectUri"].contains($0.key)
             }
 
             self.init(issuer: issuerUrl,
                       clientId: clientId,
+                      clientSecret: clientSecret,
                       scopes: scopes,
                       redirectUri: redirectUri,
                       logoutRedirectUri: logoutRedirectUri,
@@ -111,6 +117,7 @@ extension OAuth2Client {
         
         init(issuer: URL,
              clientId: String,
+             clientSecret: String?,
              scopes: String,
              redirectUri: URL? = nil,
              logoutRedirectUri: URL? = nil,
@@ -118,6 +125,7 @@ extension OAuth2Client {
         {
             self.issuer = issuer
             self.clientId = clientId
+            self.clientSecret = clientSecret
             self.scopes = scopes
             self.redirectUri = redirectUri
             self.logoutRedirectUri = logoutRedirectUri

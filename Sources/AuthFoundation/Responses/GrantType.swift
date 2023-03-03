@@ -17,6 +17,7 @@ public enum GrantType: Codable, Hashable {
     case implicit
     case refreshToken
     case password
+    case jwtBearer
     case deviceCode
     case tokenExchange
     case other(_ type: String)
@@ -27,6 +28,7 @@ fileprivate let Mapping: [String: GrantType] = [
     "implicit": .implicit,
     "refresh_token": .refreshToken,
     "password": .password,
+    "urn:ietf:params:oauth:grant-type:jwt-bearer": .jwtBearer,
     "urn:ietf:params:oauth:grant-type:token-exchange": .tokenExchange,
     "urn:ietf:params:oauth:grant-type:device_code": .deviceCode
 ]
@@ -54,6 +56,8 @@ extension GrantType: RawRepresentable {
             return "refresh_token"
         case .password:
             return "password"
+        case .jwtBearer:
+            return "urn:ietf:params:oauth:grant-type:jwt-bearer"
         case .tokenExchange:
             return "urn:ietf:params:oauth:grant-type:token-exchange"
         case .deviceCode:

@@ -45,6 +45,9 @@ public final class OAuth2Client {
         /// The unique client ID representing this ``OAuth2Client``.
         public let clientId: String
         
+        /// The unique client secret representing this ``OAuth2Client``.
+        public let clientSecret: String?
+        
         /// The list of OAuth2 scopes requested for this client.
         public let scopes: String
         
@@ -54,7 +57,7 @@ public final class OAuth2Client {
         ///   - discoveryURL: Discovery URL, or `nil` to accept the default OpenIDConfiguration endpoint.
         ///   - clientId: The client ID.
         ///   - scopes: The list of OAuth2 scopes.
-        public init(baseURL: URL, discoveryURL: URL? = nil, clientId: String, scopes: String) {
+        public init(baseURL: URL, discoveryURL: URL? = nil, clientId: String, clientSecret: String? = nil, scopes: String) {
             var relativeURL = baseURL
 
             // Ensure the base URL contains a trailing slash in its path, so request paths can be safely appended.
@@ -65,6 +68,7 @@ public final class OAuth2Client {
             self.baseURL = baseURL
             self.discoveryURL = discoveryURL ?? relativeURL.appendingPathComponent(".well-known/openid-configuration")
             self.clientId = clientId
+            self.clientSecret = clientSecret
             self.scopes = scopes
         }
         
@@ -73,23 +77,25 @@ public final class OAuth2Client {
         ///   - domain: Domain name for the OAuth2 client.
         ///   - clientId: The client ID.
         ///   - scopes: The list of OAuth2 scopes.
-        public convenience init(domain: String, clientId: String, scopes: String) throws {
+        public convenience init(domain: String, clientId: String, clientSecret: String? = nil, scopes: String) throws {
             guard let url = URL(string: "https://\(domain)") else {
                 throw OAuth2Error.invalidUrl
             }
 
-            self.init(baseURL: url, clientId: clientId, scopes: scopes)
+            self.init(baseURL: url, clientId: clientId, clientSecret: clientSecret, scopes: scopes)
         }
 
         public static func == (lhs: OAuth2Client.Configuration, rhs: OAuth2Client.Configuration) -> Bool {
             lhs.baseURL == rhs.baseURL &&
             lhs.clientId == rhs.clientId &&
+            lhs.clientSecret == rhs.clientSecret &&
             lhs.scopes == rhs.scopes
         }
         
         public func hash(into hasher: inout Hasher) {
             hasher.combine(baseURL)
             hasher.combine(clientId)
+            hasher.combine(clientSecret)
             hasher.combine(scopes)
         }
     }
@@ -119,9 +125,10 @@ public final class OAuth2Client {
     /// - Parameters:
     ///   - domain: Okta domain to use for the base URL.
     ///   - session: Optional URLSession to use for network requests.
-    public convenience init(domain: String, clientId: String, scopes: String, session: URLSessionProtocol? = nil) throws {
+    public convenience init(domain: String, clientId: String, clientSecret: String? = nil, scopes: String, session: URLSessionProtocol? = nil) throws {
         self.init(try Configuration(domain: domain,
                                     clientId: clientId,
+                                    clientSecret: clientSecret,
                                     scopes: scopes),
                   session: session)
     }
@@ -130,9 +137,10 @@ public final class OAuth2Client {
     /// - Parameters:
     ///   - domain: Okta domain to use for the base URL.
     ///   - session: Optional URLSession to use for network requests.
-    public convenience init(baseURL: URL, clientId: String, scopes: String, session: URLSessionProtocol? = nil) {
+    public convenience init(baseURL: URL, clientId: String, clientSecret: String? = nil, scopes: String, session: URLSessionProtocol? = nil) {
         self.init(Configuration(baseURL: baseURL,
                                 clientId: clientId,
+                                clientSecret: clientSecret,
                                 scopes: scopes),
                   session: session)
     }
