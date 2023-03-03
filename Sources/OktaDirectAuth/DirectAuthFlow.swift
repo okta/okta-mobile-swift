@@ -43,7 +43,7 @@ public final class DirectAuthenticationFlow: AuthenticationFlow {
         case otp(code: String)
         
         /// Authenticate the user out-of-band using Okta Verify.
-        case oob(channel: Channel)
+        case oob(channel: OOBChannel)
     }
     
     /// Enumeration defining the list of possible secondary authentication factors.

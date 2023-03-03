@@ -22,7 +22,7 @@ struct OOBResponse: Codable {
     let oobCode: String
     let expiresIn: TimeInterval
     let interval: TimeInterval
-    let channel: DirectAuthenticationFlow.Channel
+    let channel: DirectAuthenticationFlow.OOBChannel
     let bindingMethod: BindingMethod
 }
 
@@ -30,12 +30,12 @@ struct OOBAuthenticateRequest {
     let url: URL
     let clientId: String
     let loginHint: String
-    let channelHint: DirectAuthenticationFlow.Channel
+    let channelHint: DirectAuthenticationFlow.OOBChannel
     
     init(openIdConfiguration: OpenIdConfiguration,
          clientId: String,
          loginHint: String,
-         channelHint: DirectAuthenticationFlow.Channel) throws
+         channelHint: DirectAuthenticationFlow.OOBChannel) throws
     {
         guard let url = openIdConfiguration.oobAuthenticateEndpoint else {
             throw OAuth2Error.cannotComposeUrl

@@ -45,7 +45,7 @@ struct ChallengeRequest {
         let oobCode: String?
         let expiresIn: TimeInterval?
         let interval: TimeInterval?
-        let channel: DirectAuthenticationFlow.Channel?
+        let channel: DirectAuthenticationFlow.OOBChannel?
         let bindingMethod: BindingMethod?
         
         var oobResponse: OOBResponse? {
