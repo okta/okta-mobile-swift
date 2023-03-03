@@ -87,7 +87,7 @@ extension TokenRequest: OAuth2TokenRequest, OAuth2APIRequest, APIRequestBody {
     }
 }
 
-extension DirectAuthenticationFlow.TokenRequest: APIParsingContext {
+extension TokenRequest: APIParsingContext {
     var codingUserInfo: [CodingUserInfoKey: Any]? {
         [
             .clientSettings: [

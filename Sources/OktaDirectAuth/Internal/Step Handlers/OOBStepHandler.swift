@@ -18,7 +18,7 @@ class OOBStepHandler<Factor: AuthenticationFactor>: StepHandler {
     let openIdConfiguration: OpenIdConfiguration
     let loginHint: String?
     let mfaToken: String?
-    let channel: DirectAuthenticationFlow.Channel
+    let channel: DirectAuthenticationFlow.OOBChannel
     let factor: Factor
     private var poll: PollingHandler<TokenRequest>?
     
@@ -26,7 +26,7 @@ class OOBStepHandler<Factor: AuthenticationFactor>: StepHandler {
          openIdConfiguration: OpenIdConfiguration,
          loginHint: String?,
          mfaToken: String?,
-         channel: DirectAuthenticationFlow.Channel,
+         channel: DirectAuthenticationFlow.OOBChannel,
          factor: Factor) throws
     {
         self.flow = flow
