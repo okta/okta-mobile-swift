@@ -13,13 +13,12 @@
 import Foundation
 import AuthFoundation
 
+/// Delegate protocol used by ``DirectAuthenticationFlow``.
+///
+/// This extends the parent protocol `AuthenticationDelegate`.
 public protocol DirectAuthenticationFlowDelegate: AuthenticationDelegate {
     /// Sent when an authentication session receives a token.
     func authentication<Flow>(flow: Flow, received state: DirectAuthenticationFlow.Status)
-}
-
-protocol DirectAuthTokenRequest {
-    
 }
 
 public enum DirectAuthenticationFlowError: Error {
@@ -27,38 +26,72 @@ public enum DirectAuthenticationFlowError: Error {
     case currentStatusMissing
 }
 
+/// An authentication flow that implements the Direct Authentication Okta API.
+///
+/// This enables developers to integrate native authentication workflows into their applications, while still leveraging MFA to securely authenticate users.
 public final class DirectAuthenticationFlow: AuthenticationFlow {
+    /// Enumeration defining the list of possible primary authentication factors.
+    ///
+    /// These values are used by the ``DirectAuthenticationFlow/start(_:with:)`` function.
     public enum PrimaryFactor {
+        /// Authenticate the user with the given password.
         case password(String)
+        
+        /// Authenticate the user with the given OTP code.
+        ///
+        /// This usually represents app authenticators such as Google Authenticator.
         case otp(code: String)
+        
+        /// Authenticate the user out-of-band using Okta Verify.
         case oob(channel: Channel)
     }
     
+    /// Enumeration defining the list of possible secondary authentication factors.
+    ///
+    /// These values are used by ``DirectAuthenticationFlow/resume(_:with:)``.
     public enum SecondaryFactor {
+        /// Authenticate the user with the given OTP code.
+        ///
+        /// This usually represents app authenticators such as Google Authenticator.
         case otp(code: String)
-        case oob(channel: Channel)
+        
+        /// Authenticate the user out-of-band using Okta Verify.
+        case oob(channel: OOBChannel)
     }
     
-    public enum Channel: String, Codable {
+    /// Channel used when authenticating an out-of-band factor using Okta Verify.
+    public enum OOBChannel: String, Codable {
+        /// Utilize Okta Verify Push notifications to authenticate the user.
         case push
     }
     
+    /// Context information used to define a request from the server to perform a multifactor authentication.
     public struct MFAContext {
+        /// The list of possible grant types that the user can be challenged with.
         public let supportedChallengeTypes: [GrantType]?
         let mfaToken: String
     }
     
+    /// The current status of the authentication flow.
+    ///
+    /// This value is returned from ``DirectAuthenticationFlow/start(_:with:)`` and ``DirectAuthenticationFlow/resume(_:with:)`` to indicate the result of an individual authentication step. This can be used to drive your application's sign-in workflow.
     public enum Status {
+        /// Authentication was successful, returning the given token.
         case success(_ token: Token)
+        
+        /// Authentication failed, with the given error.
         case failure(_ error: Error)
         
-        // Only needed for 2FA
+        /// Indicates the user should be challenged with some other secondary factor.
+        ///
+        /// When this status is returned, the developer should use the ``DirectAuthenticationFlow/resume(_:with:)`` function to supply a secondary factor to verify the user.
         case mfaRequired(_ context: MFAContext)
     }
     
     /// The OAuth2Client this authentication flow will use.
     public let client: OAuth2Client
     
+    /// The list of grant types the application supports.
     public let supportedGrantTypes: [GrantType]
     
     /// Indicates whether or not this flow is currently in the process of authenticating a user.
@@ -81,7 +114,7 @@ public final class DirectAuthenticationFlow: AuthenticationFlow {
     ///   - issuer: The issuer URL.
     ///   - clientId: The client ID
     ///   - scopes: The scopes to request
-    ///   - additionalParameters: Additional parameters to supply to the server.
+    ///   - supportedGrants: The list of grants this application supports. Defaults to the full list of values supported by this SDK.
     public convenience init(issuer: URL,
                             clientId: String,
                             scopes: String,
@@ -136,6 +169,11 @@ public final class DirectAuthenticationFlow: AuthenticationFlow {
     
     var stepHandler: (any StepHandler)?
     
+    /// Start user authentication, with the given username login hint and primary factor.
+    /// - Parameters:
+    ///   - loginHint: The login hint, or username, to authenticate.
+    ///   - factor: The primary factor to use when authenticating the user.
+    ///   - completion: Completion block called when the operation completes.
     public func start(_ loginHint: String,
                       with factor: PrimaryFactor,
                       completion: @escaping (Result<Status, OAuth2Error>) -> Void)
@@ -143,6 +181,13 @@ public final class DirectAuthenticationFlow: AuthenticationFlow {
         runStep(loginHint: loginHint, with: factor, completion: completion)
     }
     
+    /// Resumes authentication when an additional (secondary) factor is required to verify the user.
+    ///
+    /// This function should be used when ``Status/mfaRequired(_:)`` is received.
+    /// - Parameters:
+    ///   - status: The previous status returned from the server.
+    ///   - factor: The secondary factor to use when authenticating the user.
+    ///   - completion: Completion block called when the operation completes.
     public func resume(_ status: DirectAuthenticationFlow.Status,
                        with factor: SecondaryFactor,
                        completion: @escaping (Result<Status, OAuth2Error>) -> Void)
@@ -196,6 +241,11 @@ public final class DirectAuthenticationFlow: AuthenticationFlow {
 #if swift(>=5.5.1)
 @available(iOS 15.0, tvOS 15.0, macOS 12.0, watchOS 8, *)
 extension DirectAuthenticationFlow {
+    /// Start user authentication, with the given username login hint and primary factor.
+    /// - Parameters:
+    ///   - loginHint: The login hint, or username, to authenticate.
+    ///   - factor: The primary factor to use when authenticating the user.
+    /// - Returns: Status returned when the operation completes.
     public func start(_ loginHint: String, with factor: PrimaryFactor) async throws -> DirectAuthenticationFlow.Status {
         try await withCheckedThrowingContinuation { continuation in
             start(loginHint, with: factor) { result in
@@ -204,6 +254,13 @@ extension DirectAuthenticationFlow {
         }
     }
     
+    /// Resumes authentication when an additional (secondary) factor is required to verify the user.
+    ///
+    /// This function should be used when ``Status/mfaRequired(_:)`` is received.
+    /// - Parameters:
+    ///   - status: The previous status returned from the server.
+    ///   - factor: The secondary factor to use when authenticating the user.
+    /// - Returns: Status returned when the operation completes.
     public func resume(_ status: DirectAuthenticationFlow.Status, with factor: SecondaryFactor) async throws -> DirectAuthenticationFlow.Status {
         try await withCheckedThrowingContinuation { continuation in
             resume(status, with: factor) { result in
@@ -223,6 +280,9 @@ extension DirectAuthenticationFlow: OAuth2ClientDelegate {
 }
 
 extension OAuth2Client {
+    /// Creates a new flow to authenticate users, with the given grants the application supports.
+    /// - Parameter grantTypes: The list of grants this application supports. Defaults to the full list of values supported by this SDK.
+    /// - Returns: Initialized authentication flow.
     public func directAuthenticationFlow(supportedGrants grantTypes: [GrantType] = .directAuth) -> DirectAuthenticationFlow
     {
         DirectAuthenticationFlow(supportedGrants: grantTypes,
