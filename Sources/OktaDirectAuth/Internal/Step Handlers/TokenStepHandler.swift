@@ -13,7 +13,7 @@
 import Foundation
 import AuthFoundation
 
-struct TokenExchangeStepHandler: StepHandler {
+struct TokenStepHandler: StepHandler {
     let flow: DirectAuthenticationFlow
     let request: any OAuth2TokenRequest
     
