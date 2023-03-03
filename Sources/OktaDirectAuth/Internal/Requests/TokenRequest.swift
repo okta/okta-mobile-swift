@@ -86,3 +86,14 @@ extension TokenRequest: OAuth2TokenRequest, OAuth2APIRequest, APIRequestBody {
         return result
     }
 }
+
+extension DirectAuthenticationFlow.TokenRequest: APIParsingContext {
+    var codingUserInfo: [CodingUserInfoKey: Any]? {
+        [
+            .clientSettings: [
+                "client_id": clientId,
+                "scope": scope
+            ]
+        ]
+    }
+}
