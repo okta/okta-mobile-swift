@@ -18,7 +18,7 @@ import AuthFoundation
 /// This extends the parent protocol `AuthenticationDelegate`.
 public protocol DirectAuthenticationFlowDelegate: AuthenticationDelegate {
     /// Sent when an authentication session receives a token.
-    func authentication<Flow>(flow: Flow, received state: DirectAuthenticationFlow.Status)
+    func authentication<Flow>(flow: Flow, received status: DirectAuthenticationFlow.Status)
 }
 
 public enum DirectAuthenticationFlowError: Error {
