@@ -44,12 +44,12 @@ final class SafariServicesProvider: NSObject, WebAuthenticationProvider {
     }
     
     func start(context: AuthorizationCodeFlow.Context?) {
-        loginFlow.start(with: context)
+        loginFlow.start(with: context) { _ in }
     }
     
     func logout(context: SessionLogoutFlow.Context) {
         // LogoutFlow invokes delegate, so an error is propagated from delegate method
-        try? logoutFlow?.start(with: context)
+        try? logoutFlow?.start(with: context) { _ in }
     }
     
     func authenticate(using url: URL) {
@@ -100,7 +100,7 @@ final class SafariServicesProvider: NSObject, WebAuthenticationProvider {
         }
         
         do {
-            try loginFlow.resume(with: url)
+            try loginFlow.resume(with: url) { _ in }
         } catch {
             received(error: .authenticationProviderError(error))
         }

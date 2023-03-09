@@ -106,11 +106,11 @@ public final class TokenExchangeFlow: AuthenticationFlow {
     /// This method is used to begin a token exchange.  This method is asynchronous, and will invoke the appropriate delegate methods when a response is received.
     /// - Parameters:
     ///   - tokens: Tokens to exchange.
-    ///   - completion: Optional completion block for receiving the response. If `nil`, you may rely upon the appropriate delegate API methods.
-    public func start(with tokens: [TokenType], completion: ((Result<Token, OAuth2Error>) -> Void)? = nil) {
+    ///   - completion: Completion block for receiving the response.
+    public func start(with tokens: [TokenType], completion: @escaping (Result<Token, OAuth2Error>) -> Void) {
         guard !tokens.isEmpty else {
             delegateCollection.invoke { $0.authentication(flow: self, received: OAuth2Error.cannotComposeUrl) }
-            completion?(.failure(OAuth2Error.cannotComposeUrl))
+            completion(.failure(OAuth2Error.cannotComposeUrl))
             
             return
         }
@@ -130,10 +130,10 @@ public final class TokenExchangeFlow: AuthenticationFlow {
                     case .failure(let error):
                         let oauthError = OAuth2Error.error(error)
                         self.delegateCollection.invoke { $0.authentication(flow: self, received: oauthError) }
-                        completion?(.failure(oauthError))
+                        completion(.failure(oauthError))
                     case .success(let response):
                         self.delegateCollection.invoke { $0.authentication(flow: self, received: response.result) }
-                        completion?(.success(response.result))
+                        completion(.success(response.result))
                     }
                     
                     self.isAuthenticating = false
@@ -141,6 +141,7 @@ public final class TokenExchangeFlow: AuthenticationFlow {
                 
             case .failure(let error):
                 self.delegateCollection.invoke { $0.authentication(flow: self, received: error) }
+                completion(.failure(error))
             }
         }
     }

@@ -215,8 +215,8 @@ public final class AuthorizationCodeFlow: AuthenticationFlow {
     /// This method is used to begin an authentication session. It is asynchronous, and will invoke the appropriate delegate methods when a response is received.
     /// - Parameters:
     ///   - context: Optional context to provide when customizing the state parameter.
-    ///   - completion: Optional completion block for receiving the response. If `nil`, you may rely upon the appropriate delegate API methods.
-    public func start(with context: Context? = nil, completion: ((Result<URL, OAuth2Error>) -> Void)? = nil) {
+    ///   - completion: Completion block for receiving the response.
+    public func start(with context: Context? = nil, completion: @escaping (Result<URL, OAuth2Error>) -> Void) {
         var context = context ?? Context()
         isAuthenticating = true
 
@@ -226,7 +226,7 @@ public final class AuthorizationCodeFlow: AuthenticationFlow {
                 self.reset()
                 
                 self.delegateCollection.invoke { $0.authentication(flow: self, received: error) }
-                completion?(.failure(error))
+                completion(.failure(error))
             case .success(let configuration):
                 do {
                     let url = try self.createAuthenticationURL(from: configuration.authorizationEndpoint,
@@ -234,13 +234,13 @@ public final class AuthorizationCodeFlow: AuthenticationFlow {
                     context.authenticationURL = url
                     self.context = context
                     
-                    completion?(.success(url))
+                    completion(.success(url))
                 } catch {
                     self.reset()
                     
                     let oauthError = error as? OAuth2Error ?? .error(error)
                     self.delegateCollection.invoke { $0.authentication(flow: self, received: oauthError) }
-                    completion?(.failure(oauthError))
+                    completion(.failure(oauthError))
                 }
             }
         }
@@ -253,8 +253,8 @@ public final class AuthorizationCodeFlow: AuthenticationFlow {
     /// This method takes the returned redirect URI, and communicates with Okta to exchange that for a token.
     /// - Parameters:
     ///   - url: Authorization redirect URI
-    ///   - completion: Optional completion block to retrieve the returned result.
-    public func resume(with url: URL, completion: ((Result<Token, OAuth2Error>) -> Void)? = nil) throws {
+    ///   - completion: Completion block to retrieve the returned result.
+    public func resume(with url: URL, completion: @escaping (Result<Token, OAuth2Error>) -> Void) throws {
         let code = try authorizationCode(from: url)
         
         client.openIdConfiguration { result in
@@ -275,15 +275,16 @@ public final class AuthorizationCodeFlow: AuthenticationFlow {
                     switch result {
                     case .success(let response):
                         self.delegateCollection.invoke { $0.authentication(flow: self, received: response.result) }
-                        completion?(.success(response.result))
+                        completion(.success(response.result))
                     case .failure(let error):
                         self.delegateCollection.invoke { $0.authentication(flow: self, received: .network(error: error)) }
-                        completion?(.failure(.network(error: error)))
+                        completion(.failure(.network(error: error)))
                     }
                 }
                 
             case .failure(let error):
                 self.delegateCollection.invoke { $0.authentication(flow: self, received: error) }
+                completion(.failure(error))
             }
         }
     }

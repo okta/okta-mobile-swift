@@ -139,7 +139,7 @@ public final class SessionLogoutFlow: LogoutFlow {
     /// - Parameters:
     ///   - idToken: The ID token string.
     ///   - completion: Optional completion block for receiving the response. If `nil`, you may rely upon the appropriate delegate API methods.
-    public func start(idToken: String, completion: ((Result<URL, OAuth2Error>) -> Void)? = nil) throws {
+    public func start(idToken: String, completion: @escaping (Result<URL, OAuth2Error>) -> Void) throws {
         try start(with: Context(idToken: idToken), completion: completion)
     }
 
@@ -149,9 +149,9 @@ public final class SessionLogoutFlow: LogoutFlow {
     /// - Parameters:
     ///   - context: Represents current state for a logout session.
     ///   - completion: Optional completion block for receiving the response. If `nil`, you may rely upon the appropriate delegate API methods.
-    public func start(with context: Context, completion: ((Result<URL, OAuth2Error>) -> Void)? = nil) throws {
+    public func start(with context: Context, completion: @escaping (Result<URL, OAuth2Error>) -> Void) throws {
         guard !inProgress else {
-            completion?(.failure(.missingClientConfiguration))
+            completion(.failure(.missingClientConfiguration))
             return
         }
         
@@ -163,7 +163,7 @@ public final class SessionLogoutFlow: LogoutFlow {
             switch result {
             case .failure(let error):
                 self.delegateCollection.invoke { $0.logout(flow: self, received: error) }
-                completion?(.failure(error))
+                completion(.failure(error))
             case .success(let configuration):
                 do {
                     guard let endSessionEndpoint = configuration.endSessionEndpoint else {
@@ -176,11 +176,11 @@ public final class SessionLogoutFlow: LogoutFlow {
                     context.logoutURL = url
                     self.context = context
                     
-                    completion?(.success(url))
+                    completion(.success(url))
                 } catch {
                     let oauthError = error as? OAuth2Error ?? .error(error)
                     self.delegateCollection.invoke { $0.logout(flow: self, received: oauthError) }
-                    completion?(.failure(oauthError))
+                    completion(.failure(oauthError))
                 }
             }
         }

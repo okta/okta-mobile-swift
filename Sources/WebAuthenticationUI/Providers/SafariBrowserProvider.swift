@@ -82,7 +82,7 @@ final class SafariBrowserProvider: NSObject, WebAuthenticationProvider {
     }
     
     func start(context: AuthorizationCodeFlow.Context?) {
-        loginFlow.start(with: context)
+        loginFlow.start(with: context) { _ in }
     }
     
     func logout(context: SessionLogoutFlow.Context) {
@@ -91,7 +91,7 @@ final class SafariBrowserProvider: NSObject, WebAuthenticationProvider {
         }
 
         // LogoutFlow invokes delegate, so an error is propagated from delegate method
-        try? logoutFlow.start(with: context)
+        try? logoutFlow.start(with: context) { _ in }
     }
     
     func cancel() {

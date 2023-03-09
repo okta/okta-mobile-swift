@@ -68,7 +68,7 @@ class AuthenticationServicesProvider: NSObject, WebAuthenticationProvider {
     }
 
     func start(context: AuthorizationCodeFlow.Context? = nil) {
-        loginFlow.start(with: context)
+        loginFlow.start(with: context) { _ in }
     }
     
     func createSession(url: URL, callbackURLScheme: String?, completionHandler: @escaping ASWebAuthenticationSession.CompletionHandler) -> AuthenticationServicesProviderSession {
@@ -103,7 +103,7 @@ class AuthenticationServicesProvider: NSObject, WebAuthenticationProvider {
         }
 
         // LogoutFlow invokes delegate, so an error is propagated from delegate method
-        try? logoutFlow.start(with: context)
+        try? logoutFlow.start(with: context) { _ in }
     }
     
     func logout(using url: URL) {
@@ -173,7 +173,7 @@ class AuthenticationServicesProvider: NSObject, WebAuthenticationProvider {
         }
         
         do {
-            try loginFlow.resume(with: url)
+            try loginFlow.resume(with: url) { _ in }
         } catch {
             received(error: .authenticationProviderError(error))
         }
