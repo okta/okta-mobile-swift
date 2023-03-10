@@ -205,7 +205,7 @@
             },
             {
               "kind" : "text",
-              "text" : " = .accessToken) "
+              "text" : " = .all) "
             },
             {
               "kind" : "keyword",
@@ -250,7 +250,7 @@
                   "type" : "text"
                 },
                 {
-                  "identifier" : "doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/AuthFoundation\/Token\/RevokeType\/accessToken",
+                  "identifier" : "doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/AuthFoundation\/Token\/RevokeType\/all",
                   "isActive" : true,
                   "type" : "reference"
                 }
@@ -524,10 +524,10 @@
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/token\/revoketype"
 },
-"doc://com.okta.mobile.oktaoauth2/documentation/AuthFoundation/Token/RevokeType/accessToken": {
+"doc://com.okta.mobile.oktaoauth2/documentation/AuthFoundation/Token/RevokeType/all": {
   "abstract" : [
     {
-      "text" : "Indicates the access token should be revoked.",
+      "text" : "Indicates that all tokens should be revoked.",
       "type" : "text"
     }
   ],
@@ -542,15 +542,15 @@
     },
     {
       "kind" : "identifier",
-      "text" : "accessToken"
+      "text" : "all"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/AuthFoundation\/Token\/RevokeType\/accessToken",
+  "identifier" : "doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/AuthFoundation\/Token\/RevokeType\/all",
   "kind" : "symbol",
   "role" : "symbol",
-  "title" : "Token.RevokeType.accessToken",
+  "title" : "Token.RevokeType.all",
   "type" : "topic",
-  "url" : "\/documentation\/authfoundation\/token\/revoketype\/accesstoken"
+  "url" : "\/documentation\/authfoundation\/token\/revoketype\/all"
 },
 "doc://com.okta.mobile.oktaoauth2/documentation/AuthFoundation/Token/accessToken": {
   "abstract" : [
