@@ -153,9 +153,10 @@ public final class AuthorizationCodeFlow: AuthenticationFlow {
     /// Convenience initializer to construct an authentication flow from variables.
     /// - Parameters:
     ///   - issuer: The issuer URL.
-    ///   - clientId: The client ID
-    ///   - scopes: The scopes to request
+    ///   - clientId: The client ID.
+    ///   - scopes: The scopes to request.
     ///   - redirectUri: The redirect URI for the client.
+    ///   - additionalParameters: Optional additional query string parameters you would like to supply to the authorization server.
     public convenience init(issuer: URL,
                             clientId: String,
                             scopes: String,
@@ -171,7 +172,8 @@ public final class AuthorizationCodeFlow: AuthenticationFlow {
     
     /// Initializer to construct an authentication flow from a pre-defined configuration and client.
     /// - Parameters:
-    ///   - configuration: The configuration to use for this authentication flow.
+    ///   - redirectUri: The redirect URI for the client.
+    ///   - additionalParameters: Optional additional query string parameters you would like to supply to the authorization server.
     ///   - client: The `OAuth2Client` to use with this flow.
     public init(redirectUri: URL,
                 additionalParameters: [String: String]? = nil,
@@ -215,8 +217,12 @@ public final class AuthorizationCodeFlow: AuthenticationFlow {
     /// This method is used to begin an authentication session. It is asynchronous, and will invoke the appropriate delegate methods when a response is received.
     /// - Parameters:
     ///   - context: Optional context to provide when customizing the state parameter.
+    ///   - additionalParameters: Optional additional query string parameters you would like to supply to the authorization server.
     ///   - completion: Completion block for receiving the response.
-    public func start(with context: Context? = nil, completion: @escaping (Result<URL, OAuth2Error>) -> Void) {
+    public func start(with context: Context? = nil,
+                      additionalParameters: [String: String]? = nil,
+                      completion: @escaping (Result<URL, OAuth2Error>) -> Void)
+    {
         var context = context ?? Context()
         isAuthenticating = true
 
@@ -230,7 +236,8 @@ public final class AuthorizationCodeFlow: AuthenticationFlow {
             case .success(let configuration):
                 do {
                     let url = try self.createAuthenticationURL(from: configuration.authorizationEndpoint,
-                                                               using: context)
+                                                               using: context,
+                                                               additionalParameters: additionalParameters)
                     context.authenticationURL = url
                     self.context = context
                     
@@ -306,10 +313,11 @@ extension AuthorizationCodeFlow {
     /// This method is used to begin an authentication session.
     /// - Parameters:
     ///   - context: Optional context to provide when customizing the state parameter.
+    ///   - additionalParameters: Optional additional query string parameters you would like to supply to the authorization server.
     /// - Returns: The URL a user should be presented with within a browser, to continue authorization.
-    public func start(with context: Context? = nil) async throws -> URL {
+    public func start(with context: Context? = nil, additionalParameters: [String: String]? = nil) async throws -> URL {
         try await withCheckedThrowingContinuation { continuation in
-            start(with: context) { result in
+            start(with: context, additionalParameters: additionalParameters) { result in
                 continuation.resume(with: result)
             }
         }

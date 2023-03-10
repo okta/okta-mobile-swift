@@ -67,8 +67,8 @@ class AuthenticationServicesProvider: NSObject, WebAuthenticationProvider {
         self.logoutFlow?.remove(delegate: self)
     }
 
-    func start(context: AuthorizationCodeFlow.Context? = nil) {
-        loginFlow.start(with: context) { _ in }
+    func start(context: AuthorizationCodeFlow.Context?, additionalParameters: [String: String]?) {
+        loginFlow.start(with: context, additionalParameters: additionalParameters) { _ in }
     }
     
     func createSession(url: URL, callbackURLScheme: String?, completionHandler: @escaping ASWebAuthenticationSession.CompletionHandler) -> AuthenticationServicesProviderSession {
@@ -97,13 +97,13 @@ class AuthenticationServicesProvider: NSObject, WebAuthenticationProvider {
         }
     }
     
-    func logout(context: SessionLogoutFlow.Context) {
+    func logout(context: SessionLogoutFlow.Context, additionalParameters: [String: String]?) {
         guard let logoutFlow = logoutFlow else {
             return
         }
 
         // LogoutFlow invokes delegate, so an error is propagated from delegate method
-        try? logoutFlow.start(with: context) { _ in }
+        try? logoutFlow.start(with: context, additionalParameters: additionalParameters) { _ in }
     }
     
     func logout(using url: URL) {

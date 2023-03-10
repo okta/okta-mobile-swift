@@ -97,8 +97,12 @@ public class WebAuthentication {
     /// Starts sign-in using the configured client.
     /// - Parameters:
     ///   - window: Window from which the sign in process will be started.
+    ///   - additionalParameters: Optional parameters to add to the authorization query string.
     ///   - completion: Completion block that will be invoked when authentication finishes.
-    public final func signIn(from window: WindowAnchor?, completion: @escaping (Result<Token, WebAuthenticationError>) -> Void) {
+    public final func signIn(from window: WindowAnchor?,
+                             additionalParameters: [String: String]? = nil,
+                             completion: @escaping (Result<Token, WebAuthenticationError>) -> Void)
+    {
         if provider != nil {
             cancel()
         }
@@ -110,43 +114,58 @@ public class WebAuthentication {
         self.completionBlock = completion
         self.provider = provider
 
-        provider?.start(context: context)
+        provider?.start(context: context, additionalParameters: additionalParameters)
     }
     
     /// Starts log-out using the credential.
     /// - Parameters:
     ///   - window: Window from which the sign in process will be started.
     ///   - credential: Stored credentials that will retrieve the ID token.
+    ///   - additionalParameters: Optional parameters to add to the authorization query string.
     ///   - completion: Completion block that will be invoked when log-out finishes.
-    public final func signOut(from window: WindowAnchor? = nil, credential: Credential? = .default, completion: @escaping (Result<Void, WebAuthenticationError>) -> Void) {
+    public final func signOut(from window: WindowAnchor? = nil,
+                              credential: Credential? = .default,
+                              additionalParameters: [String: String]? = nil,
+                              completion: @escaping (Result<Void, WebAuthenticationError>) -> Void)
+    {
         guard let token = credential?.token else {
             completion(.failure(.missingIdToken))
             return
         }
         
-        signOut(from: window, token: token, completion: completion)
+        signOut(from: window, token: token, additionalParameters: additionalParameters, completion: completion)
     }
     
     /// Starts log-out using the `Token` object.
     /// - Parameters:
     ///   - window: Window from which the sign in process will be started.
     ///   - token: Token object that will retrieve the ID token.
+    ///   - additionalParameters: Optional parameters to add to the authorization query string.
     ///   - completion: Completion block that will be invoked when sign-out finishes.
-    public final func signOut(from window: WindowAnchor? = nil, token: Token, completion: @escaping (Result<Void, WebAuthenticationError>) -> Void) {
+    public final func signOut(from window: WindowAnchor? = nil,
+                              token: Token,
+                              additionalParameters: [String: String]? = nil,
+                              completion: @escaping (Result<Void, WebAuthenticationError>) -> Void)
+    {
         guard let idToken = token.idToken else {
             completion(.failure(.missingIdToken))
             return
         }
         
-        signOut(from: window, token: idToken.rawValue, completion: completion)
+        signOut(from: window, token: idToken.rawValue, additionalParameters: additionalParameters, completion: completion)
     }
 
     /// Starts log-out using the ID token.
     /// - Parameters:
     ///   - window: Window from which the sign in process will be started.
     ///   - token: The ID token string used for log-out.
+    ///   - additionalParameters: Optional parameters to add to the authorization query string.
     ///   - completion: Completion block that will be invoked when sign-out finishes.
-    public final func signOut(from window: WindowAnchor? = nil, token: String, completion: @escaping (Result<Void, WebAuthenticationError>) -> Void) {
+    public final func signOut(from window: WindowAnchor? = nil,
+                              token: String,
+                              additionalParameters: [String: String]? = nil,
+                              completion: @escaping (Result<Void, WebAuthenticationError>) -> Void)
+    {
         var provider = provider
         
         if provider != nil {
@@ -162,7 +181,7 @@ public class WebAuthentication {
         self.provider = provider
         
         let context = SessionLogoutFlow.Context(idToken: token)
-        provider?.logout(context: context)
+        provider?.logout(context: context, additionalParameters: additionalParameters)
     }
     
     /// Cancels the authentication session.
@@ -239,7 +258,9 @@ public class WebAuthentication {
         
         let logoutFlow: SessionLogoutFlow?
         if let logoutRedirectUri = logoutRedirectUri {
-            logoutFlow = SessionLogoutFlow(logoutRedirectUri: logoutRedirectUri, client: client)
+            logoutFlow = SessionLogoutFlow(logoutRedirectUri: logoutRedirectUri,
+                                           additionalParameters: additionalParameters,
+                                           client: client)
         } else {
             logoutFlow = nil
         }
@@ -320,11 +341,15 @@ public class WebAuthentication {
 @available(iOS 15.0, tvOS 15.0, macOS 12.0, watchOS 8, *)
 extension WebAuthentication {
     /// Asynchronously initiates authentication from the given window.
-    /// - Parameter window: The window from which the authentication browser should be shown.
+    /// - Parameters:
+    ///   - window: The window from which the authentication browser should be shown.
+    ///   - additionalParameters: Optional parameters to add to the authorization query string.
     /// - Returns: The token representing the signed-in user.
-    public final func signIn(from window: WindowAnchor?) async throws -> Token {
+    public final func signIn(from window: WindowAnchor?,
+                             additionalParameters: [String: String]? = nil) async throws -> Token
+    {
         try await withCheckedThrowingContinuation { continuation in
-            self.signIn(from: window) { continuation.resume(with: $0) }
+            self.signIn(from: window, additionalParameters: additionalParameters) { continuation.resume(with: $0) }
         }
     }
     
@@ -332,10 +357,13 @@ extension WebAuthentication {
     /// - Parameters:
     ///   - window: Window from which the sign in process will be started.
     ///   - credential: Stored credentials that will retrieve the ID token.
-    ///   - completion: Completion block that will be invoked when log-out finishes.
-    public final func signOut(from window: WindowAnchor?, credential: Credential? = .default) async throws {
+    ///   - additionalParameters: Optional parameters to add to the authorization query string.
+    public final func signOut(from window: WindowAnchor?,
+                              credential: Credential? = .default,
+                              additionalParameters: [String: String]? = nil) async throws
+    {
         try await withCheckedThrowingContinuation { continuation in
-            self.signOut(from: window, credential: credential) { continuation.resume(with: $0) }
+            self.signOut(from: window, credential: credential, additionalParameters: additionalParameters) { continuation.resume(with: $0) }
         }
     }
     
@@ -343,10 +371,13 @@ extension WebAuthentication {
     /// - Parameters:
     ///   - window: Window from which the sign in process will be started.
     ///   - token: Token object that will retrieve the ID token.
-    ///   - completion: Completion block that will be invoked when sign-out finishes.
-    public final func signOut(from window: WindowAnchor?, token: Token) async throws {
+    ///   - additionalParameters: Optional parameters to add to the authorization query string.
+    public final func signOut(from window: WindowAnchor?,
+                              token: Token,
+                              additionalParameters: [String: String]? = nil) async throws
+    {
         try await withCheckedThrowingContinuation { continuation in
-            self.signOut(from: window, token: token) { continuation.resume(with: $0) }
+            self.signOut(from: window, token: token, additionalParameters: additionalParameters) { continuation.resume(with: $0) }
         }
     }
     
@@ -354,10 +385,12 @@ extension WebAuthentication {
     /// - Parameters:
     ///   - window: Window from which the sign in process will be started.
     ///   - idToken: The ID token used for log-out.
-    ///   - completion: Completion block that will be invoked when sign-out finishes.
-    public final func signOut(from window: WindowAnchor?, token: String) async throws {
+    ///   - additionalParameters: Optional parameters to add to the authorization query string.
+    public final func signOut(from window: WindowAnchor?,
+                              token: String,
+                              additionalParameters: [String: String]? = nil) async throws {
         try await withCheckedThrowingContinuation { continuation in
-            self.signOut(from: window, token: token) { continuation.resume(with: $0) }
+            self.signOut(from: window, token: token, additionalParameters: additionalParameters) { continuation.resume(with: $0) }
         }
     }
 }
