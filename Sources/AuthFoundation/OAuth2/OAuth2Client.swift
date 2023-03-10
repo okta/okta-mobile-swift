@@ -159,10 +159,10 @@ public final class OAuth2Client {
     /// If this value has recently been retrieved, the cached result is returned.
     /// - Parameter completion: Completion block invoked with the result.
     public func openIdConfiguration(completion: @escaping (Result<OpenIdConfiguration, OAuth2Error>) -> Void) {
-        if let openIdConfiguration = openIdConfiguration {
-            completion(.success(openIdConfiguration))
-        } else {
-            configurationQueue.sync {
+        configurationQueue.sync {
+            if let openIdConfiguration = openIdConfiguration {
+                completion(.success(openIdConfiguration))
+            } else {
                 guard openIdConfigurationAction == nil else {
                     openIdConfigurationAction?.add(completion)
                     return
