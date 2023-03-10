@@ -19,7 +19,7 @@
   },
   "kind" : "symbol",
   "metadata" : {
-    "externalID" : "s:10OktaOAuth216SessionTokenFlowC5start4with7context10completionySS_AA017AuthorizationCodeE0C7ContextVSgys6ResultOy14AuthFoundation0D0CAO0B5ErrorOGcSgtF",
+    "externalID" : "s:10OktaOAuth216SessionTokenFlowC5start4with7context10completionySS_AA017AuthorizationCodeE0C7ContextVSgys6ResultOy14AuthFoundation0D0CAO0B5ErrorOGctF",
     "fragments" : [
       {
         "kind" : "keyword",
@@ -86,7 +86,7 @@
       },
       {
         "kind" : "text",
-        "text" : ": (("
+        "text" : ": ("
       },
       {
         "kind" : "typeIdentifier",
@@ -122,7 +122,7 @@
       },
       {
         "kind" : "text",
-        "text" : ")?)"
+        "text" : ")"
       }
     ],
     "modules" : [
@@ -221,7 +221,15 @@
             },
             {
               "kind" : "text",
-              "text" : ": (("
+              "text" : ": "
+            },
+            {
+              "kind" : "attribute",
+              "text" : "@escaping"
+            },
+            {
+              "kind" : "text",
+              "text" : " ("
             },
             {
               "kind" : "typeIdentifier",
@@ -259,7 +267,7 @@
             },
             {
               "kind" : "text",
-              "text" : ")? = nil)"
+              "text" : ")"
             }
           ]
         }
@@ -590,7 +598,7 @@
     },
     {
       "kind" : "text",
-      "text" : ": (("
+      "text" : ": ("
     },
     {
       "kind" : "typeIdentifier",
@@ -626,7 +634,7 @@
     },
     {
       "kind" : "text",
-      "text" : ")?)"
+      "text" : ")"
     }
   ],
   "identifier" : "doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/OktaOAuth2\/SessionTokenFlow\/start(with:context:completion:)",

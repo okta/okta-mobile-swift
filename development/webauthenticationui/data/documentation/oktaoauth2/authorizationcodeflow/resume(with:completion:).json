@@ -19,7 +19,7 @@
   },
   "kind" : "symbol",
   "metadata" : {
-    "externalID" : "s:10OktaOAuth221AuthorizationCodeFlowC6resume4with10completiony10Foundation3URLV_ys6ResultOy04AuthI05TokenCAL0B5ErrorOGcSgtKF",
+    "externalID" : "s:10OktaOAuth221AuthorizationCodeFlowC6resume4with10completiony10Foundation3URLV_ys6ResultOy04AuthI05TokenCAL0B5ErrorOGctKF",
     "fragments" : [
       {
         "kind" : "keyword",
@@ -60,7 +60,7 @@
       },
       {
         "kind" : "text",
-        "text" : ": (("
+        "text" : ": ("
       },
       {
         "kind" : "typeIdentifier",
@@ -96,7 +96,7 @@
       },
       {
         "kind" : "text",
-        "text" : ")?) "
+        "text" : ") "
       },
       {
         "kind" : "keyword",
@@ -171,7 +171,15 @@
             },
             {
               "kind" : "text",
-              "text" : ": (("
+              "text" : ": "
+            },
+            {
+              "kind" : "attribute",
+              "text" : "@escaping"
+            },
+            {
+              "kind" : "text",
+              "text" : " ("
             },
             {
               "kind" : "typeIdentifier",
@@ -209,7 +217,7 @@
             },
             {
               "kind" : "text",
-              "text" : ")? = nil) "
+              "text" : ") "
             },
             {
               "kind" : "keyword",
@@ -242,7 +250,7 @@
             {
               "inlineContent" : [
                 {
-                  "text" : "Optional completion block to retrieve the returned result.",
+                  "text" : "Completion block to retrieve the returned result.",
                   "type" : "text"
                 }
               ],
@@ -554,7 +562,7 @@
     },
     {
       "kind" : "text",
-      "text" : ": (("
+      "text" : ": ("
     },
     {
       "kind" : "typeIdentifier",
@@ -590,7 +598,7 @@
     },
     {
       "kind" : "text",
-      "text" : ")?) "
+      "text" : ") "
     },
     {
       "kind" : "keyword",
@@ -660,7 +668,7 @@
     },
     {
       "kind" : "text",
-      "text" : ": (("
+      "text" : ": ("
     },
     {
       "kind" : "typeIdentifier",
@@ -696,7 +704,7 @@
     },
     {
       "kind" : "text",
-      "text" : ")?)"
+      "text" : ")"
     }
   ],
   "identifier" : "doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/OktaOAuth2\/AuthorizationCodeFlow\/start(with:completion:)",

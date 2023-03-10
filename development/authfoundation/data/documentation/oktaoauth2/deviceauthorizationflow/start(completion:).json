@@ -19,7 +19,7 @@
   },
   "kind" : "symbol",
   "metadata" : {
-    "externalID" : "s:10OktaOAuth223DeviceAuthorizationFlowC5start10completionyys6ResultOyAC7ContextV14AuthFoundation14APIClientErrorOGcSg_tF",
+    "externalID" : "s:10OktaOAuth223DeviceAuthorizationFlowC5start10completionyys6ResultOyAC7ContextV14AuthFoundation0B5ErrorOGc_tF",
     "fragments" : [
       {
         "kind" : "keyword",
@@ -43,7 +43,7 @@
       },
       {
         "kind" : "text",
-        "text" : ": (("
+        "text" : ": ("
       },
       {
         "kind" : "typeIdentifier",
@@ -65,8 +65,8 @@
       },
       {
         "kind" : "typeIdentifier",
-        "preciseIdentifier" : "s:14AuthFoundation14APIClientErrorO",
-        "text" : "APIClientError"
+        "preciseIdentifier" : "s:14AuthFoundation11OAuth2ErrorO",
+        "text" : "OAuth2Error"
       },
       {
         "kind" : "text",
@@ -79,7 +79,7 @@
       },
       {
         "kind" : "text",
-        "text" : ")?)"
+        "text" : ")"
       }
     ],
     "modules" : [
@@ -125,7 +125,15 @@
             },
             {
               "kind" : "text",
-              "text" : ": (("
+              "text" : ": "
+            },
+            {
+              "kind" : "attribute",
+              "text" : "@escaping"
+            },
+            {
+              "kind" : "text",
+              "text" : " ("
             },
             {
               "kind" : "typeIdentifier",
@@ -147,10 +155,10 @@
               "text" : ", "
             },
             {
-              "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/APIClientError",
+              "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/OAuth2Error",
               "kind" : "typeIdentifier",
-              "preciseIdentifier" : "s:14AuthFoundation14APIClientErrorO",
-              "text" : "APIClientError"
+              "preciseIdentifier" : "s:14AuthFoundation11OAuth2ErrorO",
+              "text" : "OAuth2Error"
             },
             {
               "kind" : "text",
@@ -163,7 +171,7 @@
             },
             {
               "kind" : "text",
-              "text" : ")? = nil)"
+              "text" : ")"
             }
           ]
         }
@@ -178,24 +186,7 @@
             {
               "inlineContent" : [
                 {
-                  "text" : "Optional completion block for receiving the context. If ",
-                  "type" : "text"
-                },
-                {
-                  "code" : "nil",
-                  "type" : "codeVoice"
-                },
-                {
-                  "text" : ", you may rely upon the ",
-                  "type" : "text"
-                },
-                {
-                  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/OktaOAuth2\/DeviceAuthorizationFlowDelegate\/authentication(flow:received:)",
-                  "isActive" : true,
-                  "type" : "reference"
-                },
-                {
-                  "text" : " method instead.",
+                  "text" : "Completion block for receiving the context.",
                   "type" : "text"
                 }
               ],
@@ -276,10 +267,10 @@
   ]
 , 
 "references": {
-"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/APIClientError": {
+"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/OAuth2Error": {
   "abstract" : [
     {
-      "text" : "Errors that may occur at the API or network level.",
+      "text" : "Errors that may occur when interacting with OAuth2 endpoints.",
       "type" : "text"
     }
   ],
@@ -294,21 +285,21 @@
     },
     {
       "kind" : "identifier",
-      "text" : "APIClientError"
+      "text" : "OAuth2Error"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/APIClientError",
+  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/OAuth2Error",
   "kind" : "symbol",
   "navigatorTitle" : [
     {
       "kind" : "identifier",
-      "text" : "APIClientError"
+      "text" : "OAuth2Error"
     }
   ],
   "role" : "symbol",
-  "title" : "APIClientError",
+  "title" : "OAuth2Error",
   "type" : "topic",
-  "url" : "\/documentation\/authfoundation\/apiclienterror"
+  "url" : "\/documentation\/authfoundation\/oauth2error"
 },
 "doc://com.okta.mobile.authfoundation/documentation/OktaOAuth2": {
   "abstract" : [
@@ -445,7 +436,7 @@
     },
     {
       "kind" : "text",
-      "text" : ": (("
+      "text" : ": ("
     },
     {
       "kind" : "typeIdentifier",
@@ -467,8 +458,8 @@
     },
     {
       "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:14AuthFoundation14APIClientErrorO",
-      "text" : "APIClientError"
+      "preciseIdentifier" : "s:14AuthFoundation11OAuth2ErrorO",
+      "text" : "OAuth2Error"
     },
     {
       "kind" : "text",
@@ -481,7 +472,7 @@
     },
     {
       "kind" : "text",
-      "text" : ")?)"
+      "text" : ")"
     }
   ],
   "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/OktaOAuth2\/DeviceAuthorizationFlow\/resume(with:completion:)",
@@ -521,7 +512,7 @@
     },
     {
       "kind" : "text",
-      "text" : ": (("
+      "text" : ": ("
     },
     {
       "kind" : "typeIdentifier",
@@ -543,8 +534,8 @@
     },
     {
       "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:14AuthFoundation14APIClientErrorO",
-      "text" : "APIClientError"
+      "preciseIdentifier" : "s:14AuthFoundation11OAuth2ErrorO",
+      "text" : "OAuth2Error"
     },
     {
       "kind" : "text",
@@ -557,7 +548,7 @@
     },
     {
       "kind" : "text",
-      "text" : ")?)"
+      "text" : ")"
     }
   ],
   "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/OktaOAuth2\/DeviceAuthorizationFlow\/start(completion:)",
@@ -566,108 +557,6 @@
   "title" : "start(completion:)",
   "type" : "topic",
   "url" : "\/documentation\/oktaoauth2\/deviceauthorizationflow\/start(completion:)"
-},
-"doc://com.okta.mobile.authfoundation/documentation/OktaOAuth2/DeviceAuthorizationFlowDelegate/authentication(flow:received:)": {
-  "abstract" : [
-    {
-      "text" : "Called when a ",
-      "type" : "text"
-    },
-    {
-      "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/OktaOAuth2\/DeviceAuthorizationFlow\/Context-swift.struct",
-      "isActive" : true,
-      "type" : "reference"
-    },
-    {
-      "text" : " instance is returned from the ",
-      "type" : "text"
-    },
-    {
-      "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/OktaOAuth2\/DeviceAuthorizationFlow\/start(completion:)",
-      "isActive" : true,
-      "type" : "reference"
-    },
-    {
-      "text" : " method.",
-      "type" : "text"
-    }
-  ],
-  "fragments" : [
-    {
-      "kind" : "keyword",
-      "text" : "func"
-    },
-    {
-      "kind" : "text",
-      "text" : " "
-    },
-    {
-      "kind" : "identifier",
-      "text" : "authentication"
-    },
-    {
-      "kind" : "text",
-      "text" : "<"
-    },
-    {
-      "kind" : "genericParameter",
-      "text" : "Flow"
-    },
-    {
-      "kind" : "text",
-      "text" : ">("
-    },
-    {
-      "kind" : "externalParam",
-      "text" : "flow"
-    },
-    {
-      "kind" : "text",
-      "text" : ": "
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:10OktaOAuth231DeviceAuthorizationFlowDelegateP14authentication4flow8receivedyqd___AA0cdE0C7ContextVtAHRbd__lF0E0L_qd__mfp",
-      "text" : "Flow"
-    },
-    {
-      "kind" : "text",
-      "text" : ", "
-    },
-    {
-      "kind" : "externalParam",
-      "text" : "received"
-    },
-    {
-      "kind" : "text",
-      "text" : ": "
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:10OktaOAuth223DeviceAuthorizationFlowC",
-      "text" : "DeviceAuthorizationFlow"
-    },
-    {
-      "kind" : "text",
-      "text" : "."
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:10OktaOAuth223DeviceAuthorizationFlowC7ContextV",
-      "text" : "Context"
-    },
-    {
-      "kind" : "text",
-      "text" : ")"
-    }
-  ],
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/OktaOAuth2\/DeviceAuthorizationFlowDelegate\/authentication(flow:received:)",
-  "kind" : "symbol",
-  "required" : true,
-  "role" : "symbol",
-  "title" : "authentication(flow:received:)",
-  "type" : "topic",
-  "url" : "\/documentation\/oktaoauth2\/deviceauthorizationflowdelegate\/authentication(flow:received:)"
 }
 }
 }

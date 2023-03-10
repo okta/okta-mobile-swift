@@ -19,7 +19,7 @@
   },
   "kind" : "symbol",
   "metadata" : {
-    "externalID" : "s:10OktaOAuth217TokenExchangeFlowC5start4with10completionySayAC0C4TypeOG_ys6ResultOy14AuthFoundation0C0CAL0B5ErrorOGcSgtF",
+    "externalID" : "s:10OktaOAuth217TokenExchangeFlowC5start4with10completionySayAC0C4TypeOG_ys6ResultOy14AuthFoundation0C0CAL0B5ErrorOGctF",
     "fragments" : [
       {
         "kind" : "keyword",
@@ -60,7 +60,7 @@
       },
       {
         "kind" : "text",
-        "text" : ": (("
+        "text" : ": ("
       },
       {
         "kind" : "typeIdentifier",
@@ -96,7 +96,7 @@
       },
       {
         "kind" : "text",
-        "text" : ")?)"
+        "text" : ")"
       }
     ],
     "modules" : [
@@ -168,7 +168,15 @@
             },
             {
               "kind" : "text",
-              "text" : ": (("
+              "text" : ": "
+            },
+            {
+              "kind" : "attribute",
+              "text" : "@escaping"
+            },
+            {
+              "kind" : "text",
+              "text" : " ("
             },
             {
               "kind" : "typeIdentifier",
@@ -206,7 +214,7 @@
             },
             {
               "kind" : "text",
-              "text" : ")? = nil)"
+              "text" : ")"
             }
           ]
         }
@@ -235,15 +243,7 @@
             {
               "inlineContent" : [
                 {
-                  "text" : "Optional completion block for receiving the response. If ",
-                  "type" : "text"
-                },
-                {
-                  "code" : "nil",
-                  "type" : "codeVoice"
-                },
-                {
-                  "text" : ", you may rely upon the appropriate delegate API methods.",
+                  "text" : "Completion block for receiving the response.",
                   "type" : "text"
                 }
               ],
@@ -491,7 +491,7 @@
     },
     {
       "kind" : "text",
-      "text" : ": (("
+      "text" : ": ("
     },
     {
       "kind" : "typeIdentifier",
@@ -527,7 +527,7 @@
     },
     {
       "kind" : "text",
-      "text" : ")?)"
+      "text" : ")"
     }
   ],
   "identifier" : "doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/OktaOAuth2\/TokenExchangeFlow\/start(with:completion:)",
