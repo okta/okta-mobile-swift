@@ -230,7 +230,7 @@ public final class Credential: Equatable, OAuth2ClientDelegate {
     public func revoke(type: Token.RevokeType = .all, completion: ((Result<Void, OAuth2Error>) -> Void)?) {
         let shouldRemove = (type == .all ||
                             (type == .refreshToken && token.refreshToken != nil) ||
-                            type == .accessToken)
+                            type == .accessToken && token.refreshToken == nil)
         
         oauth2.revoke(token, type: type) { result in
             defer { completion?(result) }

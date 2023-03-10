@@ -38,7 +38,7 @@ func signInWithWebUsingCustomConfiguration() async throws {
                                  redirectUri: redirectUrl)
     
     // Sign in using the above configuration
-    let token = try await auth.start(from: view.window)
+    let token = try await auth.signIn(from: view.window)
     
     // Save the user's tokens
     let credential = try Credential.store(token)

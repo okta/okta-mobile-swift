@@ -159,10 +159,10 @@ public final class OAuth2Client {
     /// If this value has recently been retrieved, the cached result is returned.
     /// - Parameter completion: Completion block invoked with the result.
     public func openIdConfiguration(completion: @escaping (Result<OpenIdConfiguration, OAuth2Error>) -> Void) {
-        if let openIdConfiguration = openIdConfiguration {
-            completion(.success(openIdConfiguration))
-        } else {
-            configurationQueue.sync {
+        configurationQueue.sync {
+            if let openIdConfiguration = openIdConfiguration {
+                completion(.success(openIdConfiguration))
+            } else {
                 guard openIdConfigurationAction == nil else {
                     openIdConfigurationAction?.add(completion)
                     return
@@ -618,8 +618,8 @@ extension OAuth2Client {
     ///
     /// - Parameters:
     ///   - token: Token object.
-    ///   - type: Type of token to revoke, default: ``Token/RevokeType/accessToken``
-    public func revoke(_ token: Token, type: Token.RevokeType = .accessToken) async throws {
+    ///   - type: Type of token to revoke, default: ``Token/RevokeType/all``
+    public func revoke(_ token: Token, type: Token.RevokeType = .all) async throws {
         try await withCheckedThrowingContinuation { continuation in
             revoke(token, type: type) { result in
                 continuation.resume(with: result)
