@@ -185,8 +185,8 @@ public final class DeviceAuthorizationFlow: AuthenticationFlow {
     ///
     /// The ``resume(with:completion:)`` method also uses this context, to poll the server to determine when the user approves the authorization request.
     /// - Parameters:
-    ///   - completion: Optional completion block for receiving the context. If `nil`, you may rely upon the ``DeviceAuthorizationFlowDelegate/authentication(flow:received:)`` method instead.
-    public func start(completion: ((Result<Context, APIClientError>) -> Void)? = nil) {
+    ///   - completion: Completion block for receiving the context.
+    public func start(completion: @escaping (Result<Context, OAuth2Error>) -> Void) {
         isAuthenticating = true
 
         client.openIdConfiguration { result in
@@ -194,7 +194,7 @@ public final class DeviceAuthorizationFlow: AuthenticationFlow {
             case .success(let configuration):
                 guard let url = configuration.deviceAuthorizationEndpoint else {
                     self.delegateCollection.invoke { $0.authentication(flow: self, received: .invalidUrl) }
-                    completion?(.failure(.invalidUrl))
+                    completion(.failure(.invalidUrl))
                     return
                 }
                 
@@ -205,16 +205,17 @@ public final class DeviceAuthorizationFlow: AuthenticationFlow {
                     switch result {
                     case .failure(let error):
                         self.delegateCollection.invoke { $0.authentication(flow: self, received: .network(error: error)) }
-                        completion?(.failure(error))
+                        completion(.failure(.network(error: error)))
                     case .success(let response):
                         self.context = response.result
                         self.delegateCollection.invoke { $0.authentication(flow: self, received: response.result) }
-                        completion?(.success(response.result))
+                        completion(.success(response.result))
                     }
                 }
                 
             case .failure(let error):
                 self.delegateCollection.invoke { $0.authentication(flow: self, received: error) }
+                completion(.failure(error))
             }
         }
     }
@@ -224,8 +225,8 @@ public final class DeviceAuthorizationFlow: AuthenticationFlow {
     /// Once an authentication session has begun, using ``start(completion:)``, the user should be presented with the user code and verification URI. This method is used to poll the server, to determine when a user completes authorizing this device. At that point, the result is exchanged for a token.
     /// - Parameters:
     ///   - context: Device authorization context object.
-    ///   - completion: Optional completion block for receiving the token, or error result. If `nil`, you may rely upon the ``DeviceAuthorizationFlowDelegate/authentication(flow:received:)`` method instead.
-    public func resume(with context: Context, completion: ((Result<Token, APIClientError>) -> Void)? = nil) {
+    ///   - completion: Completion block for receiving the token.
+    public func resume(with context: Context, completion: @escaping (Result<Token, OAuth2Error>) -> Void) {
         self.completion = completion
         scheduleTimer()
     }
@@ -243,7 +244,7 @@ public final class DeviceAuthorizationFlow: AuthenticationFlow {
     static var slowDownInterval: TimeInterval = 5
     
     var timer: DispatchSourceTimer?
-    var completion: ((Result<Token, APIClientError>) -> Void)?
+    var completion: ((Result<Token, OAuth2Error>) -> Void)?
     public let delegateCollection = DelegateCollection<DeviceAuthorizationFlowDelegate>()
     
     func scheduleTimer(offsetBy interval: TimeInterval? = nil) {
@@ -265,7 +266,7 @@ public final class DeviceAuthorizationFlow: AuthenticationFlow {
                 switch result {
                 case .failure(let error):
                     self.reset()
-                    completion?(.failure(error))
+                    completion?(.failure(.network(error: error)))
                     
                 case .success(let token):
                     if let token = token {

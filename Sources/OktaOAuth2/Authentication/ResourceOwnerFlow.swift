@@ -83,7 +83,7 @@ public final class ResourceOwnerFlow: AuthenticationFlow {
     ///   - username: Username
     ///   - password: Password
     ///   - completion: Completion invoked when a response is received.
-    public func start(username: String, password: String, completion: ((Result<Token, APIClientError>) -> Void)? = nil) {
+    public func start(username: String, password: String, completion: @escaping (Result<Token, OAuth2Error>) -> Void) {
         isAuthenticating = true
 
         client.openIdConfiguration { result in
@@ -100,15 +100,16 @@ public final class ResourceOwnerFlow: AuthenticationFlow {
                     switch result {
                     case .failure(let error):
                         self.delegateCollection.invoke { $0.authentication(flow: self, received: .network(error: error)) }
-                        completion?(.failure(error))
+                        completion(.failure(.network(error: error)))
                     case .success(let response):
                         self.delegateCollection.invoke { $0.authentication(flow: self, received: response.result) }
-                        completion?(.success(response.result))
+                        completion(.success(response.result))
                     }
                 }
 
             case .failure(let error):
                 self.delegateCollection.invoke { $0.authentication(flow: self, received: error) }
+                completion(.failure(error))
             }
         }
     }

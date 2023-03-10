@@ -103,7 +103,7 @@ public final class SessionTokenFlow: AuthenticationFlow {
     ///   - completion: Completion invoked when a response is received.
     public func start(with sessionToken: String,
                       context: AuthorizationCodeFlow.Context? = nil,
-                      completion: ((Result<Token, OAuth2Error>) -> Void)? = nil)
+                      completion: @escaping (Result<Token, OAuth2Error>) -> Void)
     {
         isAuthenticating = true
 
@@ -117,7 +117,7 @@ public final class SessionTokenFlow: AuthenticationFlow {
             switch result {
             case .failure(let error):
                 self.delegateCollection.invoke { $0.authentication(flow: self, received: error) }
-                completion?(.failure(error))
+                completion(.failure(error))
             case .success(let response):
                 self.complete(using: flow, url: response) { result in
                     self.reset()
@@ -125,10 +125,10 @@ public final class SessionTokenFlow: AuthenticationFlow {
                     switch result {
                     case .failure(let error):
                         self.delegateCollection.invoke { $0.authentication(flow: self, received: error) }
-                        completion?(.failure(error))
+                        completion(.failure(error))
                     case .success(let response):
                         self.delegateCollection.invoke { $0.authentication(flow: self, received: response) }
-                        completion?(.success(response))
+                        completion(.success(response))
                     }
                 }
             }
