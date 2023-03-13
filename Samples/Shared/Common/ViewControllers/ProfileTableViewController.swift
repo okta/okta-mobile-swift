@@ -254,7 +254,7 @@ class ProfileTableViewController: UITableViewController {
         switch segue.identifier {
         case "TokenDetail":
             guard let target = segue.destination as? TokenDetailViewController else { break }
-            target.token = Credential.default?.token
+            target.credential = Credential.default
 
         default: break
         }

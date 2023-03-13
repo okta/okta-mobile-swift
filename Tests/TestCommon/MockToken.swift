@@ -14,6 +14,12 @@ import Foundation
 @testable import AuthFoundation
 
 extension Token {
+    enum MockOptions {
+        case refreshToken
+        case deviceSecret
+        case idToken
+    }
+
     static let mockConfiguration = OAuth2Client.Configuration(
         baseURL: URL(string: "https://example.com")!,
         clientId: "0oa3en4fIMQ3ddc204w5",
@@ -41,4 +47,40 @@ extension Token {
               context: .init(configuration: mockConfiguration,
                              clientSettings: clientSettings))
     }
+    
+    static func token(with options: [MockOptions] = []) -> Token {
+        var scopes = "openid"
+        
+        var refreshToken: String? = nil
+        if options.contains(.refreshToken) {
+            refreshToken = "refresh123"
+            scopes += " offline_access"
+        }
+        
+        var deviceSecret: String? = nil
+        if options.contains(.deviceSecret) {
+            deviceSecret = "device123"
+            scopes += " device_sso"
+        }
+        
+        var idToken: JWT? = nil
+        if options.contains(.idToken) {
+            idToken = try! JWT(JWT.mockIDToken)
+        }
+        
+        return Token(id: "TokenId",
+                     issuedAt: Date(),
+                     tokenType: "Bearer",
+                     expiresIn: 300,
+                     accessToken: JWT.mockAccessToken,
+                     scope: scopes,
+                     refreshToken: refreshToken,
+                     idToken: idToken,
+                     deviceSecret: deviceSecret,
+                     context: Token.Context(configuration: .init(baseURL: URL(string: "https://example.com/oauth2/default")!,
+                                                                 clientId: "clientid",
+                                                                 scopes: scopes),
+                                            clientSettings: [ "client_id": "clientid" ]))
+    }
+
 }
