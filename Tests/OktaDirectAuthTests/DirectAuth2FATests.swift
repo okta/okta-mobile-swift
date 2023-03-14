@@ -53,8 +53,6 @@ final class DirectAuth2FATests: XCTestCase {
         switch state {
         case .success(_):
             XCTFail("Not expecting a successful token response")
-        case .failure(let error):
-            XCTFail(error.localizedDescription)
         case .mfaRequired(let context):
             XCTAssertFalse(context.mfaToken.isEmpty)
             let newState = try await flow.resume(state, with: .oob(channel: .push))
@@ -62,8 +60,6 @@ final class DirectAuth2FATests: XCTestCase {
             case .success(_):
                 // Success!
                 break
-            case .failure(let error):
-                XCTFail(error.localizedDescription)
             case .mfaRequired(_):
                 XCTFail("Not expecting MFA Required")
             }

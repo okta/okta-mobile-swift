@@ -37,7 +37,7 @@ class OOBStepHandler<Factor: AuthenticationFactor>: StepHandler {
         self.factor = factor
     }
     
-    func process(completion: @escaping (Result<DirectAuthenticationFlow.Status, OAuth2Error>) -> Void) {
+    func process(completion: @escaping (Result<DirectAuthenticationFlow.Status, DirectAuthenticationFlowError>) -> Void) {
         requestOOBCode { result in
             switch result {
             case .failure(let error):
@@ -85,9 +85,9 @@ class OOBStepHandler<Factor: AuthenticationFactor>: StepHandler {
                     case .failure(let error):
                         switch error {
                         case .apiClientError(let error):
-                            completion(.failure(.error(error)))
+                            completion(.failure(.network(error: error)))
                         case .timeout:
-                            completion(.failure(.error(error)))
+                            completion(.failure(.pollingTimeoutExceeded))
                         }
                     }
                     self.poll = nil
