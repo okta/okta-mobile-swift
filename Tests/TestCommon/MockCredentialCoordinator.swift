@@ -24,4 +24,9 @@ class MockCredentialCoordinator: CredentialCoordinator {
     
     func observe(oauth2 client: OAuth2Client) {
     }
+    
+    
+    func credential(with options: [Token.MockOptions] = []) -> Credential {
+        credentialDataSource.credential(for: Token.token(with: options), coordinator: self)
+    }
 }

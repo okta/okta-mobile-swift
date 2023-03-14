@@ -36,4 +36,10 @@ extension Credential {
         
         return timerSource
     }
+    
+    func shouldRemove(for type: Token.RevokeType) -> Bool {
+        type == .all ||
+        (type == .refreshToken && token.refreshToken != nil) ||
+        (type == .accessToken && token.refreshToken == nil)
+    }
 }
