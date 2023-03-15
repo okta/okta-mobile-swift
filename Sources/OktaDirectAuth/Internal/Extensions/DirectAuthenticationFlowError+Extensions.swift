@@ -32,6 +32,8 @@ extension DirectAuthenticationFlowError {
                     self = .invalidOTP
                 case .oobRejected:
                     self = .oobRejected
+                case .invalidGrant:
+                    self = .invalidGrant
                 case .invalidChallengeTypesSupported:
                     self = .invalidChallengeTypesSupported
                 default:
