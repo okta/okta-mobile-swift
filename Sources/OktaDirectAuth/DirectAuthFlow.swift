@@ -22,10 +22,6 @@ public protocol DirectAuthenticationFlowDelegate: AuthenticationDelegate {
 }
 
 public enum DirectAuthenticationFlowError: Error {
-    case invalidOTP
-    case oobRejected
-    case invalidGrant
-    case invalidChallengeTypesSupported
     case pollingTimeoutExceeded
     case missingArguments(_ names: [String])
     case network(error: APIClientError)

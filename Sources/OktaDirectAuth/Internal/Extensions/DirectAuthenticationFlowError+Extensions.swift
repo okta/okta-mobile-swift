@@ -18,6 +18,8 @@ extension DirectAuthenticationFlowError {
             self = DirectAuthenticationFlowError(error)
         } else if let error = error as? APIClientError {
             self = DirectAuthenticationFlowError(error)
+        } else if let error = error as? OAuth2ServerError {
+            self = .server(error: error)
         } else {
             self = .other(error: error)
         }
@@ -27,18 +29,7 @@ extension DirectAuthenticationFlowError {
         switch error {
         case .serverError(let error):
             if let error = error as? OAuth2ServerError {
-                switch error.code {
-                case .invalidOTP:
-                    self = .invalidOTP
-                case .oobRejected:
-                    self = .oobRejected
-                case .invalidGrant:
-                    self = .invalidGrant
-                case .invalidChallengeTypesSupported:
-                    self = .invalidChallengeTypesSupported
-                default:
-                    self = .server(error: error)
-                }
+                self = DirectAuthenticationFlowError(error)
             } else {
                 fallthrough
             }
