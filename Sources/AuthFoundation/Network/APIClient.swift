@@ -56,6 +56,9 @@ public protocol APIClient {
     
     /// Invoked when a request fails.
     func didSend(request: URLRequest, received error: APIClientError)
+
+    /// Invoked when a request fails.
+    func didSend(request: URLRequest, received response: HTTPURLResponse)
     
     /// Invoked when a request returns a successful response.
     func didSend<T>(request: URLRequest, received response: APIResponse<T>)
@@ -76,6 +79,9 @@ public protocol APIClientDelegate: AnyObject {
     func api(client: APIClient, didSend request: URLRequest, received error: APIClientError)
     
     /// Invoked when a request returns a successful response.
+    func api(client: APIClient, didSend request: URLRequest, received response: HTTPURLResponse)
+
+    /// Invoked when a request returns a successful response.
     func api<T>(client: APIClient, didSend request: URLRequest, received response: APIResponse<T>)
     
     /// Provides the APIRetry configurations from the delegate in responds to a retry request.
@@ -85,6 +91,7 @@ public protocol APIClientDelegate: AnyObject {
 extension APIClientDelegate {
     public func api(client: APIClient, willSend request: inout URLRequest) {}
     public func api(client: APIClient, didSend request: URLRequest, received error: APIClientError) {}
+    public func api(client: APIClient, didSend request: URLRequest, received response: HTTPURLResponse) {}
     public func api<T>(client: APIClient, didSend request: URLRequest, received response: APIResponse<T>) {}
     public func api(client: APIClient, shouldRetry request: URLRequest) -> APIRetry {
         return .default
@@ -151,6 +158,8 @@ extension APIClient {
     
     public func didSend(request: URLRequest, received error: APIClientError) {}
     
+    public func didSend(request: URLRequest, received response: HTTPURLResponse) {}
+    
     public func didSend<T>(request: URLRequest, received response: APIResponse<T>) {}
     
     public func send<T>(_ request: URLRequest, parsing context: APIParsingContext? = nil, completion: @escaping (Result<APIResponse<T>, APIClientError>) -> Void) {
@@ -184,6 +193,8 @@ extension APIClient {
                 guard let httpResponse = response as? HTTPURLResponse else {
                     throw APIClientError.invalidResponse
                 }
+                
+                self.didSend(request: request, received: httpResponse)
                 
                 let rateInfo = APIRateLimit(with: httpResponse.allHeaderFields)
                 let responseType = context?.resultType(from: httpResponse) ?? APIResponseResult(statusCode: httpResponse.statusCode)
