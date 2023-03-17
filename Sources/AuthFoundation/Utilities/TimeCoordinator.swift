@@ -71,6 +71,12 @@ class DefaultTimeCoordinator: TimeCoordinator, OAuth2ClientDelegate {
         })
     }
     
+    deinit {
+        if let observer = observer {
+            NotificationCenter.default.removeObserver(observer)
+        }
+    }
+    
     var now: Date {
         Date(timeIntervalSinceNow: offset)
     }

@@ -19,10 +19,9 @@ import Foundation
 public struct ThreadSafe<T> {
     private var value: T
     private let lock = NSLock()
-    private let queue: DispatchQueue
 
     public var wrappedValue: T {
-        get { queue.sync { value } }
+        get { value }
         
         _modify {
             lock.lock()
@@ -37,10 +36,7 @@ public struct ThreadSafe<T> {
         }
     }
 
-    public init(wrappedValue: T,
-                queue: DispatchQueue? = nil)
-    {
+    public init(wrappedValue: T) {
         self.value = wrappedValue
-        self.queue = queue ?? DispatchQueue(label: "\(String(describing: wrappedValue.self)).ThreadSafe")
     }
 }
