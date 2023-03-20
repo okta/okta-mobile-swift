@@ -14,21 +14,19 @@ import Foundation
 
 extension DirectAuthenticationFlow {
     func process(_ error: APIClientError,
-                 completion: @escaping (Result<DirectAuthenticationFlow.Status, OAuth2Error>) -> Void)
+                 completion: @escaping (Result<DirectAuthenticationFlow.Status, DirectAuthenticationFlowError>) -> Void)
     {
         guard case let .serverError(serverError) = error,
            let oauthError = serverError as? OAuth2ServerError
         else {
-            send(error: .network(error: error), completion: completion)
+            send(error: DirectAuthenticationFlowError(error), completion: completion)
             return
         }
         
         do {
             send(state: try process(oauthError), completion: completion)
-        } catch let error as OAuth2Error {
-            send(error: error, completion: completion)
         } catch {
-            send(error: .error(error), completion: completion)
+            send(error: DirectAuthenticationFlowError(error), completion: completion)
         }
     }
     
@@ -45,7 +43,7 @@ extension DirectAuthenticationFlow {
                                       mfaToken: mfaToken))
             
         default:
-            return .failure(error)
+            throw error
         }
     }
 }

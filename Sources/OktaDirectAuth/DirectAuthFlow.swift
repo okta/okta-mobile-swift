@@ -22,8 +22,12 @@ public protocol DirectAuthenticationFlowDelegate: AuthenticationDelegate {
 }
 
 public enum DirectAuthenticationFlowError: Error {
+    case pollingTimeoutExceeded
     case missingArguments(_ names: [String])
-    case currentStatusMissing
+    case network(error: APIClientError)
+    case oauth2(error: OAuth2Error)
+    case server(error: OAuth2ServerError)
+    case other(error: Error)
 }
 
 /// An authentication flow that implements the Direct Authentication Okta API.
@@ -78,9 +82,6 @@ public final class DirectAuthenticationFlow: AuthenticationFlow {
     public enum Status {
         /// Authentication was successful, returning the given token.
         case success(_ token: Token)
-        
-        /// Authentication failed, with the given error.
-        case failure(_ error: Error)
         
         /// Indicates the user should be challenged with some other secondary factor.
         ///
@@ -176,7 +177,7 @@ public final class DirectAuthenticationFlow: AuthenticationFlow {
     ///   - completion: Completion block called when the operation completes.
     public func start(_ loginHint: String,
                       with factor: PrimaryFactor,
-                      completion: @escaping (Result<Status, OAuth2Error>) -> Void)
+                      completion: @escaping (Result<Status, DirectAuthenticationFlowError>) -> Void)
     {
         runStep(loginHint: loginHint, with: factor, completion: completion)
     }
@@ -190,7 +191,7 @@ public final class DirectAuthenticationFlow: AuthenticationFlow {
     ///   - completion: Completion block called when the operation completes.
     public func resume(_ status: DirectAuthenticationFlow.Status,
                        with factor: SecondaryFactor,
-                       completion: @escaping (Result<Status, OAuth2Error>) -> Void)
+                       completion: @escaping (Result<Status, DirectAuthenticationFlowError>) -> Void)
     {
         runStep(currentStatus: status, with: factor, completion: completion)
     }
@@ -198,7 +199,7 @@ public final class DirectAuthenticationFlow: AuthenticationFlow {
     private func runStep<Factor: AuthenticationFactor>(loginHint: String? = nil,
                                                        currentStatus: Status? = nil,
                                                        with factor: Factor,
-                                                       completion: @escaping (Result<DirectAuthenticationFlow.Status, OAuth2Error>) -> Void)
+                                                       completion: @escaping (Result<DirectAuthenticationFlow.Status, DirectAuthenticationFlowError>) -> Void)
     {
         isAuthenticating = true
         
@@ -221,7 +222,7 @@ public final class DirectAuthenticationFlow: AuthenticationFlow {
                         completion(result)
                     }
                 } catch {
-                    self.send(error: .error(error), completion: completion)
+                    self.send(error: error, completion: completion)
                 }
                 
             case .failure(let error):

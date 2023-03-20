@@ -53,8 +53,6 @@ final class DirectAuth1FATests: XCTestCase {
         switch state {
         case .success(let token):
             XCTAssertNotNil(token.refreshToken)
-        case .failure(let error):
-            XCTFail(error.localizedDescription)
         case .mfaRequired(_):
             XCTFail("Not expecting MFA Required")
         }
@@ -73,8 +71,6 @@ final class DirectAuth1FATests: XCTestCase {
         switch state {
         case .success(let token):
             XCTAssertNotNil(token.refreshToken)
-        case .failure(let error):
-            XCTFail(error.localizedDescription)
         case .mfaRequired(_):
             XCTFail("Not expecting MFA Required")
         }
@@ -93,8 +89,6 @@ final class DirectAuth1FATests: XCTestCase {
         switch state {
         case .success(let token):
             XCTAssertNotNil(token.refreshToken)
-        case .failure(let error):
-            XCTFail(error.localizedDescription)
         case .mfaRequired(_):
             XCTFail("Not expecting MFA Required")
         }

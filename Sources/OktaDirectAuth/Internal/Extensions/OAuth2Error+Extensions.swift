@@ -11,9 +11,24 @@
 //
 
 import Foundation
-import AuthFoundation
 
-protocol StepHandler {
-    var flow: DirectAuthenticationFlow { get }
-    func process(completion: @escaping (Result<DirectAuthenticationFlow.Status, DirectAuthenticationFlowError>) -> Void)
+extension OAuth2Error {
+    init(_ error: Error) {
+        if let error = error as? OAuth2Error {
+            self = error
+        } else if let error = error as? APIClientError {
+            self = .network(error: error)
+        } else if let error = error as? DirectAuthenticationFlowError {
+            switch error {
+            case .network(error: let error):
+                self = OAuth2Error(error)
+            case .oauth2(error: let error):
+                self = error
+            default:
+                self = .error(error)
+            }
+        } else {
+            self = .error(error)
+        }
+    }
 }

@@ -14,7 +14,7 @@ import Foundation
 
 extension DirectAuthenticationFlow {
     func send(success response: APIResponse<Token>,
-              completion: @escaping (Result<Status, OAuth2Error>) -> Void)
+              completion: @escaping (Result<Status, DirectAuthenticationFlowError>) -> Void)
     {
         reset()
         delegateCollection.invoke { $0.authentication(flow: self, received: response.result) }
@@ -22,17 +22,20 @@ extension DirectAuthenticationFlow {
     }
 
     func send(state: Status,
-              completion: @escaping (Result<Status, OAuth2Error>) -> Void)
+              completion: @escaping (Result<Status, DirectAuthenticationFlowError>) -> Void)
     {
         delegateCollection.invoke { $0.authentication(flow: self, received: state) }
         completion(.success(state))
     }
 
-    func send(error: OAuth2Error,
-              completion: @escaping (Result<Status, OAuth2Error>) -> Void)
+    func send(error: Error,
+              completion: @escaping (Result<Status, DirectAuthenticationFlowError>) -> Void)
     {
         reset()
-        delegateCollection.invoke { $0.authentication(flow: self, received: error) }
-        completion(.failure(error))
+        
+        let oauth2Error = OAuth2Error(error)
+        delegateCollection.invoke { $0.authentication(flow: self, received: oauth2Error) }
+
+        completion(.failure(DirectAuthenticationFlowError(error)))
     }
 }
