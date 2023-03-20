@@ -1,7 +1,7 @@
 {
   "abstract" : [
     {
-      "text" : "Creates a new instance with the specified raw value.",
+      "text" : "Initializer to create a JWT instance from a raw string value.",
       "type" : "text"
     }
   ],
@@ -107,7 +107,7 @@
             {
               "inlineContent" : [
                 {
-                  "text" : "The raw value to use for the new instance.",
+                  "text" : "Raw string value of the JWT.",
                   "type" : "text"
                 }
               ],
@@ -117,57 +117,6 @@
           "name" : "rawValue"
         }
       ]
-    },
-    {
-      "content" : [
-        {
-          "anchor" : "discussion",
-          "level" : 2,
-          "text" : "Discussion",
-          "type" : "heading"
-        },
-        {
-          "inlineContent" : [
-            {
-              "text" : "If there is no value of the type that corresponds with the specified raw",
-              "type" : "text"
-            },
-            {
-              "text" : " ",
-              "type" : "text"
-            },
-            {
-              "text" : "value, this initializer returns ",
-              "type" : "text"
-            },
-            {
-              "code" : "nil",
-              "type" : "codeVoice"
-            },
-            {
-              "text" : ". For example:",
-              "type" : "text"
-            }
-          ],
-          "type" : "paragraph"
-        },
-        {
-          "code" : [
-            "enum PaperSize: String {",
-            "    case A4, A5, Letter, Legal",
-            "}",
-            "",
-            "print(PaperSize(rawValue: \"Legal\"))",
-            "\/\/ Prints \"Optional(\"PaperSize.Legal\")\"",
-            "",
-            "print(PaperSize(rawValue: \"Tabloid\"))",
-            "\/\/ Prints \"nil\""
-          ],
-          "syntax" : null,
-          "type" : "codeListing"
-        }
-      ],
-      "kind" : "content"
     }
   ],
   "schemaVersion" : {
@@ -285,7 +234,7 @@
 "doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/JWT/init(rawValue:)": {
   "abstract" : [
     {
-      "text" : "Creates a new instance with the specified raw value.",
+      "text" : "Initializer to create a JWT instance from a raw string value.",
       "type" : "text"
     }
   ],

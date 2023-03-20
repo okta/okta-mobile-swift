@@ -149,6 +149,7 @@
         "doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/AuthFoundation\/HasClaims\/name",
         "doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/AuthFoundation\/HasClaims\/nameComponents",
         "doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/AuthFoundation\/HasClaims\/nickname",
+        "doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/AuthFoundation\/HasClaims\/payload",
         "doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/AuthFoundation\/HasClaims\/phoneNumber",
         "doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/AuthFoundation\/HasClaims\/phoneNumberVerified",
         "doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/AuthFoundation\/HasClaims\/picture",
@@ -1000,6 +1001,56 @@
   "title" : "nickname",
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/hasclaims\/nickname"
+},
+"doc://com.okta.mobile.webauthenticationui/documentation/AuthFoundation/HasClaims/payload": {
+  "abstract" : [
+    {
+      "text" : "Raw paylaod of claims, as a dictionary representation.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "var"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "payload"
+    },
+    {
+      "kind" : "text",
+      "text" : ": ["
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:SS",
+      "text" : "String"
+    },
+    {
+      "kind" : "text",
+      "text" : " : "
+    },
+    {
+      "kind" : "keyword",
+      "text" : "Any"
+    },
+    {
+      "kind" : "text",
+      "text" : "]"
+    }
+  ],
+  "identifier" : "doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/AuthFoundation\/HasClaims\/payload",
+  "kind" : "symbol",
+  "required" : true,
+  "role" : "symbol",
+  "title" : "payload",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/hasclaims\/payload"
 },
 "doc://com.okta.mobile.webauthenticationui/documentation/AuthFoundation/HasClaims/phoneNumber": {
   "abstract" : [

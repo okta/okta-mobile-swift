@@ -127,6 +127,7 @@
         "doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/AuthFoundation\/JWT\/issuedAt",
         "doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/AuthFoundation\/JWT\/issuer",
         "doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/AuthFoundation\/JWT\/notBefore",
+        "doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/AuthFoundation\/JWT\/payload",
         "doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/AuthFoundation\/JWT\/rawValue-swift.property",
         "doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/AuthFoundation\/JWT\/scope"
       ],
@@ -800,7 +801,7 @@
 "doc://com.okta.mobile.oktaoauth2/documentation/AuthFoundation/JWT/init(rawValue:)": {
   "abstract" : [
     {
-      "text" : "Creates a new instance with the specified raw value.",
+      "text" : "Initializer to create a JWT instance from a raw string value.",
       "type" : "text"
     }
   ],
@@ -957,6 +958,55 @@
   "title" : "notBefore",
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/jwt\/notbefore"
+},
+"doc://com.okta.mobile.oktaoauth2/documentation/AuthFoundation/JWT/payload": {
+  "abstract" : [
+    {
+      "text" : "Raw paylaod of claims, as a dictionary representation.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "let"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "payload"
+    },
+    {
+      "kind" : "text",
+      "text" : ": ["
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:SS",
+      "text" : "String"
+    },
+    {
+      "kind" : "text",
+      "text" : " : "
+    },
+    {
+      "kind" : "keyword",
+      "text" : "Any"
+    },
+    {
+      "kind" : "text",
+      "text" : "]"
+    }
+  ],
+  "identifier" : "doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/AuthFoundation\/JWT\/payload",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "payload",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/jwt\/payload"
 },
 "doc://com.okta.mobile.oktaoauth2/documentation/AuthFoundation/JWT/rawValue-swift.property": {
   "abstract" : [
