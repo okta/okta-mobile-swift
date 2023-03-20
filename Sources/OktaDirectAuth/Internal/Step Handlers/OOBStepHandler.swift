@@ -85,7 +85,7 @@ class OOBStepHandler<Factor: AuthenticationFactor>: StepHandler {
                     case .failure(let error):
                         switch error {
                         case .apiClientError(let error):
-                            completion(.failure(.network(error: error)))
+                            completion(.failure(.init(error)))
                         case .timeout:
                             completion(.failure(.pollingTimeoutExceeded))
                         }
