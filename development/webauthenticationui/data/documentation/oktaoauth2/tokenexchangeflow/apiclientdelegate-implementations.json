@@ -39,7 +39,9 @@
     {
       "generated" : true,
       "identifiers" : [
-        "doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/OktaOAuth2\/TokenExchangeFlow\/api(client:didSend:received:)",
+        "doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/OktaOAuth2\/TokenExchangeFlow\/api(client:didSend:received:)-35svt",
+        "doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/OktaOAuth2\/TokenExchangeFlow\/api(client:didSend:received:)-5l4i3",
+        "doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/OktaOAuth2\/TokenExchangeFlow\/api(client:didSend:received:)-7c2ug",
         "doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/OktaOAuth2\/TokenExchangeFlow\/api(client:shouldRetry:)",
         "doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/OktaOAuth2\/TokenExchangeFlow\/api(client:willSend:)"
       ],
@@ -105,7 +107,87 @@
   "type" : "topic",
   "url" : "\/documentation\/oktaoauth2\/tokenexchangeflow"
 },
-"doc://com.okta.mobile.webauthenticationui/documentation/OktaOAuth2/TokenExchangeFlow/api(client:didSend:received:)": {
+"doc://com.okta.mobile.webauthenticationui/documentation/OktaOAuth2/TokenExchangeFlow/api(client:didSend:received:)-35svt": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "func"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "api"
+    },
+    {
+      "kind" : "text",
+      "text" : "("
+    },
+    {
+      "kind" : "externalParam",
+      "text" : "client"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:14AuthFoundation9APIClientP",
+      "text" : "APIClient"
+    },
+    {
+      "kind" : "text",
+      "text" : ", "
+    },
+    {
+      "kind" : "externalParam",
+      "text" : "didSend"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:10Foundation10URLRequestV",
+      "text" : "URLRequest"
+    },
+    {
+      "kind" : "text",
+      "text" : ", "
+    },
+    {
+      "kind" : "externalParam",
+      "text" : "received"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "c:objc(cs)NSHTTPURLResponse",
+      "text" : "HTTPURLResponse"
+    },
+    {
+      "kind" : "text",
+      "text" : ")"
+    }
+  ],
+  "identifier" : "doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/OktaOAuth2\/TokenExchangeFlow\/api(client:didSend:received:)-35svt",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "api(client:didSend:received:)",
+  "type" : "topic",
+  "url" : "\/documentation\/oktaoauth2\/tokenexchangeflow\/api(client:didsend:received:)-35svt"
+},
+"doc://com.okta.mobile.webauthenticationui/documentation/OktaOAuth2/TokenExchangeFlow/api(client:didSend:received:)-5l4i3": {
   "abstract" : [
 
   ],
@@ -178,12 +260,108 @@
       "text" : ")"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/OktaOAuth2\/TokenExchangeFlow\/api(client:didSend:received:)",
+  "identifier" : "doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/OktaOAuth2\/TokenExchangeFlow\/api(client:didSend:received:)-5l4i3",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "api(client:didSend:received:)",
   "type" : "topic",
-  "url" : "\/documentation\/oktaoauth2\/tokenexchangeflow\/api(client:didsend:received:)"
+  "url" : "\/documentation\/oktaoauth2\/tokenexchangeflow\/api(client:didsend:received:)-5l4i3"
+},
+"doc://com.okta.mobile.webauthenticationui/documentation/OktaOAuth2/TokenExchangeFlow/api(client:didSend:received:)-7c2ug": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "func"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "api"
+    },
+    {
+      "kind" : "text",
+      "text" : "<"
+    },
+    {
+      "kind" : "genericParameter",
+      "text" : "T"
+    },
+    {
+      "kind" : "text",
+      "text" : ">("
+    },
+    {
+      "kind" : "externalParam",
+      "text" : "client"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:14AuthFoundation9APIClientP",
+      "text" : "APIClient"
+    },
+    {
+      "kind" : "text",
+      "text" : ", "
+    },
+    {
+      "kind" : "externalParam",
+      "text" : "didSend"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:10Foundation10URLRequestV",
+      "text" : "URLRequest"
+    },
+    {
+      "kind" : "text",
+      "text" : ", "
+    },
+    {
+      "kind" : "externalParam",
+      "text" : "received"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:14AuthFoundation11APIResponseV",
+      "text" : "APIResponse"
+    },
+    {
+      "kind" : "text",
+      "text" : "<"
+    },
+    {
+      "kind" : "typeIdentifier",
+      "text" : "T"
+    },
+    {
+      "kind" : "text",
+      "text" : ">)"
+    }
+  ],
+  "identifier" : "doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/OktaOAuth2\/TokenExchangeFlow\/api(client:didSend:received:)-7c2ug",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "api(client:didSend:received:)",
+  "type" : "topic",
+  "url" : "\/documentation\/oktaoauth2\/tokenexchangeflow\/api(client:didsend:received:)-7c2ug"
 },
 "doc://com.okta.mobile.webauthenticationui/documentation/OktaOAuth2/TokenExchangeFlow/api(client:shouldRetry:)": {
   "abstract" : [

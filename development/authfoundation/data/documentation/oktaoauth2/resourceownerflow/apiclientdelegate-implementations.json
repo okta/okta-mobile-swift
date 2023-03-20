@@ -39,7 +39,9 @@
     {
       "generated" : true,
       "identifiers" : [
-        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/OktaOAuth2\/ResourceOwnerFlow\/api(client:didSend:received:)",
+        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/OktaOAuth2\/ResourceOwnerFlow\/api(client:didSend:received:)-48bl3",
+        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/OktaOAuth2\/ResourceOwnerFlow\/api(client:didSend:received:)-5aid3",
+        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/OktaOAuth2\/ResourceOwnerFlow\/api(client:didSend:received:)-5pho",
         "doc:\/\/com.okta.mobile.authfoundation\/documentation\/OktaOAuth2\/ResourceOwnerFlow\/api(client:shouldRetry:)",
         "doc:\/\/com.okta.mobile.authfoundation\/documentation\/OktaOAuth2\/ResourceOwnerFlow\/api(client:willSend:)"
       ],
@@ -105,7 +107,103 @@
   "type" : "topic",
   "url" : "\/documentation\/oktaoauth2\/resourceownerflow"
 },
-"doc://com.okta.mobile.authfoundation/documentation/OktaOAuth2/ResourceOwnerFlow/api(client:didSend:received:)": {
+"doc://com.okta.mobile.authfoundation/documentation/OktaOAuth2/ResourceOwnerFlow/api(client:didSend:received:)-48bl3": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "func"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "api"
+    },
+    {
+      "kind" : "text",
+      "text" : "<"
+    },
+    {
+      "kind" : "genericParameter",
+      "text" : "T"
+    },
+    {
+      "kind" : "text",
+      "text" : ">("
+    },
+    {
+      "kind" : "externalParam",
+      "text" : "client"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:14AuthFoundation9APIClientP",
+      "text" : "APIClient"
+    },
+    {
+      "kind" : "text",
+      "text" : ", "
+    },
+    {
+      "kind" : "externalParam",
+      "text" : "didSend"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:10Foundation10URLRequestV",
+      "text" : "URLRequest"
+    },
+    {
+      "kind" : "text",
+      "text" : ", "
+    },
+    {
+      "kind" : "externalParam",
+      "text" : "received"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:14AuthFoundation11APIResponseV",
+      "text" : "APIResponse"
+    },
+    {
+      "kind" : "text",
+      "text" : "<"
+    },
+    {
+      "kind" : "typeIdentifier",
+      "text" : "T"
+    },
+    {
+      "kind" : "text",
+      "text" : ">)"
+    }
+  ],
+  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/OktaOAuth2\/ResourceOwnerFlow\/api(client:didSend:received:)-48bl3",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "api(client:didSend:received:)",
+  "type" : "topic",
+  "url" : "\/documentation\/oktaoauth2\/resourceownerflow\/api(client:didsend:received:)-48bl3"
+},
+"doc://com.okta.mobile.authfoundation/documentation/OktaOAuth2/ResourceOwnerFlow/api(client:didSend:received:)-5aid3": {
   "abstract" : [
 
   ],
@@ -178,12 +276,92 @@
       "text" : ")"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/OktaOAuth2\/ResourceOwnerFlow\/api(client:didSend:received:)",
+  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/OktaOAuth2\/ResourceOwnerFlow\/api(client:didSend:received:)-5aid3",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "api(client:didSend:received:)",
   "type" : "topic",
-  "url" : "\/documentation\/oktaoauth2\/resourceownerflow\/api(client:didsend:received:)"
+  "url" : "\/documentation\/oktaoauth2\/resourceownerflow\/api(client:didsend:received:)-5aid3"
+},
+"doc://com.okta.mobile.authfoundation/documentation/OktaOAuth2/ResourceOwnerFlow/api(client:didSend:received:)-5pho": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "func"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "api"
+    },
+    {
+      "kind" : "text",
+      "text" : "("
+    },
+    {
+      "kind" : "externalParam",
+      "text" : "client"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:14AuthFoundation9APIClientP",
+      "text" : "APIClient"
+    },
+    {
+      "kind" : "text",
+      "text" : ", "
+    },
+    {
+      "kind" : "externalParam",
+      "text" : "didSend"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:10Foundation10URLRequestV",
+      "text" : "URLRequest"
+    },
+    {
+      "kind" : "text",
+      "text" : ", "
+    },
+    {
+      "kind" : "externalParam",
+      "text" : "received"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "c:objc(cs)NSHTTPURLResponse",
+      "text" : "HTTPURLResponse"
+    },
+    {
+      "kind" : "text",
+      "text" : ")"
+    }
+  ],
+  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/OktaOAuth2\/ResourceOwnerFlow\/api(client:didSend:received:)-5pho",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "api(client:didSend:received:)",
+  "type" : "topic",
+  "url" : "\/documentation\/oktaoauth2\/resourceownerflow\/api(client:didsend:received:)-5pho"
 },
 "doc://com.okta.mobile.authfoundation/documentation/OktaOAuth2/ResourceOwnerFlow/api(client:shouldRetry:)": {
   "abstract" : [

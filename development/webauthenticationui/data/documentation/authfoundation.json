@@ -99,7 +99,7 @@
         "doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/AuthFoundation\/OktaAPIError",
         "doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/AuthFoundation\/OpenIdConfiguration",
         "doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/AuthFoundation\/PKCE",
-        "doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/AuthFoundation\/TimeSensitive",
+        "doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/AuthFoundation\/ThreadSafe",
         "doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/AuthFoundation\/TokenInfo",
         "doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/AuthFoundation\/UserInfo",
         "doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/AuthFoundation\/Weak",
@@ -2153,6 +2153,40 @@
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/sdkversionmigrator"
 },
+"doc://com.okta.mobile.webauthenticationui/documentation/AuthFoundation/ThreadSafe": {
+  "abstract" : [
+    {
+      "text" : "Property wrapper that implements thread-safe locking for wrapped property values.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "struct"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "ThreadSafe"
+    }
+  ],
+  "identifier" : "doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/AuthFoundation\/ThreadSafe",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "ThreadSafe"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "ThreadSafe",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/threadsafe"
+},
 "doc://com.okta.mobile.webauthenticationui/documentation/AuthFoundation/TimeCoordinator": {
   "abstract" : [
     {
@@ -2186,37 +2220,6 @@
   "title" : "TimeCoordinator",
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/timecoordinator"
-},
-"doc://com.okta.mobile.webauthenticationui/documentation/AuthFoundation/TimeSensitive": {
-  "abstract" : [
-
-  ],
-  "fragments" : [
-    {
-      "kind" : "keyword",
-      "text" : "struct"
-    },
-    {
-      "kind" : "text",
-      "text" : " "
-    },
-    {
-      "kind" : "identifier",
-      "text" : "TimeSensitive"
-    }
-  ],
-  "identifier" : "doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/AuthFoundation\/TimeSensitive",
-  "kind" : "symbol",
-  "navigatorTitle" : [
-    {
-      "kind" : "identifier",
-      "text" : "TimeSensitive"
-    }
-  ],
-  "role" : "symbol",
-  "title" : "TimeSensitive",
-  "type" : "topic",
-  "url" : "\/documentation\/authfoundation\/timesensitive"
 },
 "doc://com.okta.mobile.webauthenticationui/documentation/AuthFoundation/Token": {
   "abstract" : [

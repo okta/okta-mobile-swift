@@ -221,8 +221,7 @@
         "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/URLSessionProtocol",
         "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/URLSessionDataTaskProtocol",
         "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/Weak",
-        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/WeakCollection",
-        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/TimeSensitive"
+        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/WeakCollection"
       ],
       "title" : "Internals and mocking"
     },
@@ -236,7 +235,8 @@
     },
     {
       "identifiers" : [
-        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/APIRateLimit"
+        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/APIRateLimit",
+        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/ThreadSafe"
       ],
       "title" : "Structures"
     },
@@ -2306,6 +2306,40 @@
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/sdkversionmigrator"
 },
+"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/ThreadSafe": {
+  "abstract" : [
+    {
+      "text" : "Property wrapper that implements thread-safe locking for wrapped property values.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "struct"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "ThreadSafe"
+    }
+  ],
+  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/ThreadSafe",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "ThreadSafe"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "ThreadSafe",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/threadsafe"
+},
 "doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/TimeCoordinator": {
   "abstract" : [
     {
@@ -2339,37 +2373,6 @@
   "title" : "TimeCoordinator",
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/timecoordinator"
-},
-"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/TimeSensitive": {
-  "abstract" : [
-
-  ],
-  "fragments" : [
-    {
-      "kind" : "keyword",
-      "text" : "struct"
-    },
-    {
-      "kind" : "text",
-      "text" : " "
-    },
-    {
-      "kind" : "identifier",
-      "text" : "TimeSensitive"
-    }
-  ],
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/TimeSensitive",
-  "kind" : "symbol",
-  "navigatorTitle" : [
-    {
-      "kind" : "identifier",
-      "text" : "TimeSensitive"
-    }
-  ],
-  "role" : "symbol",
-  "title" : "TimeSensitive",
-  "type" : "topic",
-  "url" : "\/documentation\/authfoundation\/timesensitive"
 },
 "doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/Token": {
   "abstract" : [
