@@ -45,24 +45,54 @@ extension Date {
 }
 
 fileprivate var SharedTimeCoordinator: TimeCoordinator = DefaultTimeCoordinator()
-struct DefaultTimeCoordinator: TimeCoordinator {
+class DefaultTimeCoordinator: TimeCoordinator, OAuth2ClientDelegate {
     static func resetToDefault() {
         Date.coordinator = DefaultTimeCoordinator()
     }
     
-    var now: Date {
-        #if !os(Linux)
-        if #available(macOS 12, iOS 15, tvOS 15, watchOS 8, *) {
-            return .now
-        } else {
-            return Date()
+    @ThreadSafe
+    private(set) var offset: TimeInterval
+    
+    private var observer: NSObjectProtocol?
+
+    init() {
+        self.offset = 0
+        self.observer = NotificationCenter.default.addObserver(forName: .oauth2ClientCreated,
+                                                               object: nil,
+                                                               queue: nil,
+                                                               using: { [weak self] notification in
+            guard let self = self,
+                  let client = notification.object as? OAuth2Client
+            else {
+                return
+            }
+            
+            client.add(delegate: self)
+        })
+    }
+    
+    deinit {
+        if let observer = observer {
+            NotificationCenter.default.removeObserver(observer)
         }
-        #else
-        return Date()
-        #endif
+    }
+    
+    var now: Date {
+        Date(timeIntervalSinceNow: offset)
     }
     
     func date(from date: Date) -> Date {
-        date
+        Date(timeInterval: offset, since: date)
+    }
+    
+    func api(client: APIClient, didSend request: URLRequest, received response: HTTPURLResponse) {
+        guard request.cachePolicy == .reloadIgnoringLocalAndRemoteCacheData,
+              let dateString = response.allHeaderFields["Date"] as? String,
+              let date = httpDateFormatter.date(from: dateString)
+        else {
+            return
+        }
+        
+        offset = date.timeIntervalSinceNow
     }
 }

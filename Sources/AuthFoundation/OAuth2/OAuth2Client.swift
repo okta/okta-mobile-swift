@@ -106,13 +106,11 @@ public final class OAuth2Client {
     /// The OpenID configuration for this org.
     ///
     /// This value will be `nil` until the configuration has been retrieved through the ``openIdConfiguration(completion:)`` or ``openIdConfiguration()`` functions.
-    @TimeSensitive
     public private(set) var openIdConfiguration: OpenIdConfiguration?
 
     /// The ``JWKS`` key set for this org.
     ///
     /// This value will be `nil` until the keys have been retrieved through the ``jwks(completion:)`` or ``jwks()`` functions.
-    @TimeSensitive
     public private(set) var jwks: JWKS?
 
     /// Constructs an OAuth2Client for the given domain.
@@ -144,6 +142,9 @@ public final class OAuth2Client {
     public init(_ configuration: Configuration, session: URLSessionProtocol? = nil) {
         // Ensure this SDK's static version is included in the user agent.
         SDKVersion.register(sdk: Version)
+        
+        // Ensure the time coordinator is properly initialized
+        _ = Date.coordinator
         
         self.configuration = configuration
         self.session = session ?? URLSession.shared
@@ -678,6 +679,10 @@ extension OAuth2Client: APIClient {
         return delegateCollection.call({ $0.api(client: self, shouldRetry: request) }).first ?? .default
     }
     
+    public func didSend(request: URLRequest, received response: HTTPURLResponse) {
+        delegateCollection.invoke { $0.api(client: self, didSend: request, received: response) }
+    }
+
     public func didSend<T>(request: URLRequest, received response: APIResponse<T>) where T: Decodable {
         delegateCollection.invoke { $0.api(client: self, didSend: request, received: response) }
     }

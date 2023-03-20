@@ -141,7 +141,6 @@ public final class Credential: Equatable, OAuth2ClientDelegate {
     }
     
     /// The token this credential represents.
-    @TimeSensitive<Token>
     public private(set) var token: Token {
         didSet {
             observeToken(token)
@@ -151,7 +150,6 @@ public final class Credential: Equatable, OAuth2ClientDelegate {
     /// The ``UserInfo`` describing this user.
     ///
     /// This value may be nil if the ``userInfo()`` or ``userInfo(completion:)`` methods haven't yet been called.
-    @TimeSensitive<UserInfo?>
     public private(set) var userInfo: UserInfo?
     
     /// Indicates this credential's token should automatically be refreshed prior to its expiration.
