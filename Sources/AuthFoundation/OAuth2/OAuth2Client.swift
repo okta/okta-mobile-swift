@@ -199,7 +199,7 @@ public final class OAuth2Client {
     /// - Parameters:
     ///   - token: Token to refresh.
     ///   - completion: Completion bock invoked with the result.
-    public func refresh(_ token: Token, completion: @escaping (Result<Token, OAuth2Error>) -> Void) {
+    public func refresh(_ token: Token, clientSecret: String, resource: String, completion: @escaping (Result<Token, OAuth2Error>) -> Void) {
         let type = Token.Kind.refreshToken
         guard let clientSettings = token.context.clientSettings,
               clientSettings[type.rawValue] != nil
@@ -216,7 +216,7 @@ public final class OAuth2Client {
             
             token.refreshAction = CoalescedResult()
             token.refreshAction?.add(completion)
-            performRefresh(token: token, clientSettings: clientSettings)
+            performRefresh(token: token, clientSecret: clientSecret, resource: resource, clientSettings: clientSettings)
         }
     }
     
@@ -225,7 +225,8 @@ public final class OAuth2Client {
                       qos: .userInitiated,
                       attributes: .concurrent)
     }()
-    private func performRefresh(token: Token, clientSettings: [String: String]) {
+
+    private func performRefresh(token: Token, clientSecret: String, resource: String, clientSettings: [String: String]) {
         guard let action = token.refreshAction else { return }
         
         delegateCollection.invoke { $0.oauth(client: self, willRefresh: token) }
@@ -234,6 +235,8 @@ public final class OAuth2Client {
             case .success(let configuration):
                 let request = Token.RefreshRequest(openIdConfiguration: configuration,
                                                    token: token,
+                                                   resource: resource,
+                                                   clientSecret: clientSecret,
                                                    configuration: clientSettings)
                 request.send(to: self) { result in
                     self.refreshQueue.sync(flags: .barrier) {
@@ -601,9 +604,9 @@ extension OAuth2Client {
     /// This method prevents multiple concurrent refresh requests to be performed for a given token, though all applicable results will be returned once the token refresh has completed.
     /// - Parameters:
     ///   - token: Token to refresh.
-    public func refresh(_ token: Token) async throws -> Token {
+    public func refresh(_ token: Token, clientSecret: String, resource: String) async throws -> Token {
         try await withCheckedThrowingContinuation { continuation in
-            refresh(token) { result in
+            refresh(token, clientSecret: clientSecret, resource: resource) { result in
                 continuation.resume(with: result)
             }
         }

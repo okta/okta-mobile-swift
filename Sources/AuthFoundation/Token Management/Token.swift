@@ -140,7 +140,7 @@ public final class Token: Codable, Equatable, Hashable, Expires {
     public required convenience init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         
-        let context: Context
+        var context: Context
         if container.contains(.context) {
             context = try container.decode(Context.self, forKey: .context)
         } else if let configuration = decoder.userInfo[.apiClientConfiguration] as? OAuth2Client.Configuration {
@@ -149,7 +149,8 @@ public final class Token: Codable, Equatable, Hashable, Expires {
         } else {
             throw TokenError.contextMissing
         }
-
+        context.clientSettings?[Token.Kind.refreshToken.rawValue] = try? container.decode(String.self, forKey: .refreshToken)
+        
         let id: String
         if let userInfoId = decoder.userInfo[.tokenId] as? String {
             id = userInfoId

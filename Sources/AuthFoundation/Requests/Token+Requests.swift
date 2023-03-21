@@ -22,6 +22,8 @@ extension Token {
     struct RefreshRequest {
         let openIdConfiguration: OpenIdConfiguration
         let token: Token
+        let resource: String
+        let clientSecret: String
         let configuration: [String: String]
     }
     
@@ -105,6 +107,8 @@ extension Token.RefreshRequest: OAuth2APIRequest, APIRequestBody, APIParsingCont
         var result = configuration
         result["grant_type"] = "refresh_token"
         result["refresh_token"] = refreshToken
+        result["resource"] = resource
+        result["client_secret"] = clientSecret
         
         return result
     }

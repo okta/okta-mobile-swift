@@ -21,7 +21,7 @@ extension Token {
         public let configuration: OAuth2Client.Configuration
         
         /// Settings required to be supplied to the authorization server when refreshing this token.
-        let clientSettings: [String: String]?
+        var clientSettings: [String: String]?
         
         init(configuration: OAuth2Client.Configuration, clientSettings: Any?) {
             self.configuration = configuration

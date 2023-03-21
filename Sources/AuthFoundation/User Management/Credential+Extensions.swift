@@ -39,9 +39,18 @@ extension Notification.Name {
 @available(iOS 15.0, tvOS 15.0, macOS 12.0, watchOS 8, *)
 extension Credential {
     /// Attempt to refresh the token.
+    public func refresh(clientSecret: String, resource: String) async throws {
+        try await withCheckedThrowingContinuation { continuation in
+            refresh(clientSecret: clientSecret, resource: resource) { result in
+                continuation.resume(with: result)
+            }
+        }
+    }
+
+    /// Attempt to refresh the token.
     public func refresh() async throws {
         try await withCheckedThrowingContinuation { continuation in
-            refresh() { result in
+            refresh(clientSecret: "", resource: "") { result in
                 continuation.resume(with: result)
             }
         }

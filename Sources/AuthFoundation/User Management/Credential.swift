@@ -185,8 +185,8 @@ public final class Credential: Equatable, OAuth2ClientDelegate {
     
     /// Attempt to refresh the token.
     /// - Parameter completion: Completion block invoked when a result is returned.
-    public func refresh(completion: ((Result<Void, OAuth2Error>) -> Void)? = nil) {
-        oauth2.refresh(token) { result in
+    public func refresh(clientSecret: String, resource: String, completion: ((Result<Void, OAuth2Error>) -> Void)? = nil) {
+        oauth2.refresh(token, clientSecret: clientSecret, resource: resource) { result in
             switch result {
             case .success(let token):
                 self.token = token
@@ -205,7 +205,7 @@ public final class Credential: Equatable, OAuth2ClientDelegate {
         if let expiresAt = token.expiresAt,
             expiresAt.timeIntervalSinceNow <= graceInterval
         {
-            refresh(completion: completion)
+            refresh(clientSecret: "", resource: "", completion: completion)
         } else {
             completion?(.success(()))
         }
