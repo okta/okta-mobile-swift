@@ -78,7 +78,7 @@ extension WebAuthentication {
                 result.append(.prompt(prompt))
             case "max_age":
                 let age: TimeInterval
-                if #available(iOS 15.0, *) {
+                if #available(macOS 12.0, iOS 15.0, tvOS 15.0, watchOS 8.0, *) {
                     guard let value = try? TimeInterval(item.value, format: .number) else { return }
                     age = value
                 } else {
