@@ -37,7 +37,7 @@ extension WebAuthentication.Option {
 extension Collection where Element == WebAuthentication.Option {
     var additionalParameters: [String: String] {
         map { $0.queryItems }
-            .reduce([:]) { $0.merging($1) { current, _ in current }}
+            .reduce([:]) { $0.merging($1) { current, _ in current } }
     }
     
     var state: String? {

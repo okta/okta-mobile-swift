@@ -224,7 +224,7 @@ extension SessionLogoutFlow {
     /// This method is used to begin a logout session. The method will invoke the appropriate delegate methods when a response is received.
     /// - Parameters:
     ///   - idToken: The ID token string.
-    ///   - additionalParameters: Optional 
+    ///   - additionalParameters: Optional
     /// - Returns: The URL a user should be presented with within a broser, to befing a logout flow.
     public func start(idToken: String,
                       additionalParameters: [String: String]? = nil) async throws -> URL
