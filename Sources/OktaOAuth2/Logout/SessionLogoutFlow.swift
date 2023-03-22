@@ -54,7 +54,7 @@ public protocol SessionLogoutFlowDelegate: LogoutFlowDelegate {
 /// // Create the logout URL. Open this in a browser.
 /// let authorizeUrl = try await flow.start()
 /// ```
-public final class SessionLogoutFlow: LogoutFlow {
+public class SessionLogoutFlow: LogoutFlow {
     /// A model representing the context and current state for a logout session.
     public struct Context: Codable, Equatable {
         /// The ID token string used for log-out.
@@ -82,6 +82,9 @@ public final class SessionLogoutFlow: LogoutFlow {
     /// The logout redirect URI.
     public let logoutRedirectUri: URL
     
+    /// Any additional query string parameters you would like to supply to the authorization server.
+    public let additionalParameters: [String: String]?
+
     /// Indicates if this flow is currently in progress.
     public private(set) var inProgress: Bool = false
     
@@ -132,6 +135,7 @@ public final class SessionLogoutFlow: LogoutFlow {
         
         self.client = client
         self.logoutRedirectUri = logoutRedirectUri
+        self.additionalParameters = additionalParameters
         
         client.add(delegate: self)
     }
@@ -277,14 +281,24 @@ private extension SessionLogoutFlow {
     
     func queryParameters(using context: SessionLogoutFlow.Context,
                          additionalParameters: [String: String]?) -> [String: String] {
-        var result = [
-            "id_token_hint": context.idToken,
-            "post_logout_redirect_uri": logoutRedirectUri.absoluteString,
-            "state": context.state
-        ].compactMapValues { $0 }
+        var result = [String: String]()
+        if let additional = self.additionalParameters {
+            result.merge(additional, uniquingKeysWith: { $1 })
+        }
+
+        if let additional = additionalParameters {
+            result.merge(additional, uniquingKeysWith: { $1 })
+        }
+
+        result["id_token_hint"] = context.idToken
+        result["post_logout_redirect_uri"] = logoutRedirectUri.absoluteString
+        result["state"] = context.state
         
-        if let additionalParameters = additionalParameters {
-            result.merge(additionalParameters, uniquingKeysWith: { $0 })
+        // If requesting a login prompt, the post_logout_redirect_uri should be omitted.
+        if let prompt = additionalParameters?["prompt"]?.lowercased(),
+           ["login", "consent", "login consent", "consent login"].contains(prompt)
+        {
+            result.removeValue(forKey: "post_logout_redirect_uri")
         }
         
         return result

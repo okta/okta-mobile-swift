@@ -42,9 +42,9 @@ class WebAuthenticationUITests: XCTestCase {
     }
     
     func testStart() throws {
-        let webAuth = WebAuthenticationMock(loginFlow: loginFlow, logoutFlow: logoutFlow, context: .init(state: "qwe"))
+        let webAuth = WebAuthenticationMock(loginFlow: loginFlow, logoutFlow: logoutFlow)
         
-        webAuth.signIn(from: nil) { result in }
+        webAuth.signIn(from: nil, options: [.state("qwe")]) { result in }
         
         let webAuthProvider = try XCTUnwrap(webAuth.provider as? WebAuthenticationProviderMock)
 
@@ -53,9 +53,9 @@ class WebAuthenticationUITests: XCTestCase {
     }
     
     func testLogout() throws {
-        let webAuth = WebAuthenticationMock(loginFlow: loginFlow, logoutFlow: logoutFlow, context: .init(state: "qwe"))
+        let webAuth = WebAuthenticationMock(loginFlow: loginFlow, logoutFlow: logoutFlow)
         
-        webAuth.signOut(from: nil, token: "idToken") { result in }
+        webAuth.signOut(from: nil, token: "idToken", options: [.state("qwe")]) { result in }
         
         let provider = try XCTUnwrap(webAuth.provider as? WebAuthenticationProviderMock)
         XCTAssertNil(webAuth.completionBlock)
@@ -64,11 +64,11 @@ class WebAuthenticationUITests: XCTestCase {
     }
     
     func testCancel() throws {
-        let webAuth = WebAuthenticationMock(loginFlow: loginFlow, logoutFlow: logoutFlow, context: .init(state: "qwe"))
+        let webAuth = WebAuthenticationMock(loginFlow: loginFlow, logoutFlow: logoutFlow)
         
         XCTAssertNil(webAuth.provider)
         
-        webAuth.signIn(from: nil) { result in }
+        webAuth.signIn(from: nil, options: [.state("qwe")]) { result in }
 
         let webAuthProvider = try XCTUnwrap(webAuth.provider as? WebAuthenticationProviderMock)
 

@@ -65,7 +65,7 @@ public protocol AuthorizationCodeFlowDelegate: AuthenticationDelegate {
 /// let redirectUri: URL
 /// let token = try await flow.resume(with: redirectUri)
 /// ```
-public final class AuthorizationCodeFlow: AuthenticationFlow {
+public class AuthorizationCodeFlow: AuthenticationFlow {
     /// A model representing the context and current state for an authorization session.
     public struct Context: Equatable {
         /// The `PKCE` credentials to use in the authorization request.
@@ -106,8 +106,8 @@ public final class AuthorizationCodeFlow: AuthenticationFlow {
     
     /// Errors reported during processing and handling of redirect URLs.
     ///
-    /// These errors are mostly reported as a result of the ``start(with:completion:)`` or ``start(with:)`` methods.
-    public enum RedirectError: Error {
+    /// These errors are mostly reported as a result of the ``start(with:additionalParameters:completion:)`` or ``start(with:additionalParameters:)`` methods.
+    public enum RedirectError: Error, Equatable {
         case invalidRedirectUrl
         case unexpectedScheme(_ scheme: String?)
         case missingQueryArguments
@@ -255,7 +255,7 @@ public final class AuthorizationCodeFlow: AuthenticationFlow {
     
     /// Continues an authentication flow using the given authentication redirect URI.
     ///
-    /// Once the user completes authorization, using the URL provided by the ``start(with:completion:)`` method within a browser, the browser will redirect to a URL that matches the scheme provided in the client configuration's ``redirectUri``. This URI will contain either an error response from the authorization server, or an authorization code which can be used to exchange a token.
+    /// Once the user completes authorization, using the URL provided by the ``start(with:additionalParameters:completion:)`` method within a browser, the browser will redirect to a URL that matches the scheme provided in the client configuration's ``redirectUri``. This URI will contain either an error response from the authorization server, or an authorization code which can be used to exchange a token.
     ///
     /// This method takes the returned redirect URI, and communicates with Okta to exchange that for a token.
     /// - Parameters:
@@ -325,7 +325,7 @@ extension AuthorizationCodeFlow {
     
     /// Asynchronously continues an authentication flow using the given authentication redirect URI, using Swift Concurrency.
     ///
-    /// Once the user completes authorization, using the URL provided by the ``start(with:)`` method within a browser, the browser will redirect to a URL that matches the scheme provided in the client configuration's ``redirectUri``. This URI will contain either an error response from the authorization server, or an authorization code which can be used to exchange a token.
+    /// Once the user completes authorization, using the URL provided by the ``start(with:additionalParameters:)`` method within a browser, the browser will redirect to a URL that matches the scheme provided in the client configuration's ``redirectUri``. This URI will contain either an error response from the authorization server, or an authorization code which can be used to exchange a token.
     ///
     /// This method takes the returned redirect URI, and communicates with Okta to exchange that for a token.
     /// - Parameters:

@@ -17,22 +17,22 @@
 
 ### Sign In
 
-- ``signIn(from:)``
-- ``signIn(from:completion:)``
+- ``signIn(from:options:)``
+- ``signIn(from:options:completion:)``
 
 ### Sign Out Using Credential
 
 - <doc:HowToSignOut>
-- ``signOut(from:credential:)``
-- ``signOut(from:credential:completion:)``
+- ``signOut(from:credential:options:)``
+- ``signOut(from:credential:options:completion:)``
 
 ### Sign Out Using Token
 
 - <doc:HowToSignOut>
-- ``signOut(from:token:)-2cj8w``
-- ``signOut(from:token:)-6qrgc``
-- ``signOut(from:token:completion:)-8o8xk``
-- ``signOut(from:token:completion:)-4ae85``
+- ``signOut(from:token:options:)-4x9ic``
+- ``signOut(from:token:options:)-33i36``
+- ``signOut(from:token:options:completion:)-3q66k``
+- ``signOut(from:token:options:completion:)-2jka2``
 
 ### Sign In Using App Link
 
@@ -53,6 +53,6 @@
 
 Signing in and -out is intended to be simple using this class, with several options for configuring your client (see <doc:ConfiguringYourClient> for more information). Once your client is configured, it is available through a shared singleton property ``shared``, or can be directly accessed if you create an instance directly.
 
-The ``signIn(from:)`` function (or ``signIn(from:completion:)`` for applications not using Swift Concurrency) presents a browser from the window supplied to the `from` argument, which the user can use to enter their account information.  After the sign in completes, the result is returned allowing your application to continue.
+The ``signIn(from:options:)`` function (or ``signIn(from:options:completion:)`` for applications not using Swift Concurrency) presents a browser from the window supplied to the `from` argument, which the user can use to enter their account information.  After the sign in completes, the result is returned allowing your application to continue.
 
-When signing a user out, the ``signOut(from:credential:)`` function similarly presents a browser to the user, in order to clear cookies and other browser state that is associated with the user's session.
+When signing a user out, the ``signOut(from:credential:options:)`` function similarly presents a browser to the user, in order to clear cookies and other browser state that is associated with the user's session.

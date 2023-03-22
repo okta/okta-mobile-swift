@@ -18,6 +18,10 @@ class SignInViewController: UIViewController {
     @IBOutlet weak var clientIdLabel: UILabel!
 
     let auth = WebAuthentication.shared
+    let options: [WebAuthentication.Option]? = [
+        // .login(hint: "jane.doe@example.com"),
+        // .prompt(.login)
+    ]
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -51,7 +55,7 @@ class SignInViewController: UIViewController {
 
     @IBAction func signIn(_ sender: Any) {
         let window = viewIfLoaded?.window
-        auth?.signIn(from: window) { result in
+        auth?.signIn(from: window, options: options) { result in
             switch result {
             case .success(let token):
                 do {

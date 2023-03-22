@@ -94,7 +94,7 @@ final class AuthorizationCodeFlowSuccessTests: XCTestCase {
         // Begin
         let context = AuthorizationCodeFlow.Context(state: "ABC123", maxAge: nil, nonce: "nonce_string", pkce: nil)
         var expect = expectation(description: "network request")
-        flow.start(with: context) { _ in
+        flow.start(with: context, additionalParameters: ["foo": "bar"]) { _ in
             expect.fulfill()
         }
         waitForExpectations(timeout: 1.0) { error in
@@ -105,7 +105,7 @@ final class AuthorizationCodeFlowSuccessTests: XCTestCase {
         XCTAssertTrue(flow.isAuthenticating)
         XCTAssertNotNil(flow.context?.authenticationURL)
         XCTAssertEqual(flow.context?.authenticationURL?.absoluteString,
-                       "https://example.okta.com/oauth2/v1/authorize?additional=param&client_id=clientId&nonce=nonce_string&redirect_uri=com.example:/callback&response_type=code&scope=openid%20profile&state=ABC123#customizedUrl")
+                       "https://example.okta.com/oauth2/v1/authorize?additional=param&client_id=clientId&foo=bar&nonce=nonce_string&redirect_uri=com.example:/callback&response_type=code&scope=openid%20profile&state=ABC123#customizedUrl")
         XCTAssertTrue(delegate.started)
         XCTAssertEqual(flow.context?.authenticationURL, delegate.url)
         
@@ -133,7 +133,7 @@ final class AuthorizationCodeFlowSuccessTests: XCTestCase {
         let context = AuthorizationCodeFlow.Context(state: "ABC123", maxAge: nil, nonce: "nonce_string", pkce: nil)
         var wait = expectation(description: "resume")
         var url: URL?
-        flow.start(with: context) { result in
+        flow.start(with: context, additionalParameters: ["foo": "bar"]) { result in
             switch result {
             case .success(let redirectUrl):
                 url = redirectUrl
@@ -151,7 +151,7 @@ final class AuthorizationCodeFlowSuccessTests: XCTestCase {
         XCTAssertNotNil(flow.context?.authenticationURL)
         XCTAssertEqual(url, flow.context?.authenticationURL)
         XCTAssertEqual(flow.context?.authenticationURL?.absoluteString,
-                       "https://example.okta.com/oauth2/v1/authorize?additional=param&client_id=clientId&nonce=nonce_string&redirect_uri=com.example:/callback&response_type=code&scope=openid%20profile&state=ABC123")
+                       "https://example.okta.com/oauth2/v1/authorize?additional=param&client_id=clientId&foo=bar&nonce=nonce_string&redirect_uri=com.example:/callback&response_type=code&scope=openid%20profile&state=ABC123")
 
         // Exchange code
         var token: Token?
@@ -183,14 +183,14 @@ final class AuthorizationCodeFlowSuccessTests: XCTestCase {
 
         // Begin
         let context = AuthorizationCodeFlow.Context(state: "ABC123", maxAge: nil, nonce: "nonce_string", pkce: nil)
-        let url = try await flow.start(with: context)
+        let url = try await flow.start(with: context, additionalParameters: ["foo": "bar"])
         
         XCTAssertEqual(flow.context?.state, context.state)
         XCTAssertTrue(flow.isAuthenticating)
         XCTAssertNotNil(flow.context?.authenticationURL)
         XCTAssertEqual(url, flow.context?.authenticationURL)
         XCTAssertEqual(flow.context?.authenticationURL?.absoluteString,
-                       "https://example.okta.com/oauth2/v1/authorize?additional=param&client_id=clientId&nonce=nonce_string&redirect_uri=com.example:/callback&response_type=code&scope=openid%20profile&state=ABC123")
+                       "https://example.okta.com/oauth2/v1/authorize?additional=param&client_id=clientId&foo=bar&nonce=nonce_string&redirect_uri=com.example:/callback&response_type=code&scope=openid%20profile&state=ABC123")
 
         // Exchange code
         let token = try await flow.resume(with: URL(string: "com.example:/callback?code=ABCEasyAs123&state=ABC123")!)
@@ -200,4 +200,44 @@ final class AuthorizationCodeFlowSuccessTests: XCTestCase {
         XCTAssertNotNil(token)
     }
     #endif
+    
+    func testAuthorizationCodeFromURL() throws {
+        typealias RedirectError = AuthorizationCodeFlow.RedirectError
+        
+        XCTAssertThrowsError(try flow.authorizationCode(from: URL(string: "https://example.com")!)) { error in
+            XCTAssertEqual(error as? AuthenticationError, .flowNotReady)
+        }
+        
+        let wait = expectation(description: "Start the flow")
+        flow.start(with: .init(state: "ABC123")) { _ in
+            wait.fulfill()
+        }
+        waitForExpectations(timeout: 1)
+        
+        XCTAssertThrowsError(try flow.authorizationCode(from: URL(string: "urn:foo:bar")!)) { error in
+            XCTAssertEqual(error as? RedirectError, .unexpectedScheme("urn"))
+        }
+        
+        XCTAssertThrowsError(try flow.authorizationCode(from: URL(string: "com.example:/")!)) { error in
+            XCTAssertEqual(error as? RedirectError, .missingQueryArguments)
+        }
+        
+        XCTAssertThrowsError(try flow.authorizationCode(from: URL(string: "com.example:/?foo=bar")!)) { error in
+            XCTAssertEqual(error as? RedirectError, .invalidState(nil))
+        }
+        
+        XCTAssertThrowsError(try flow.authorizationCode(from: URL(string: "com.example:/?foo=bar&state=abcd")!)) { error in
+            XCTAssertEqual(error as? RedirectError, .invalidState("abcd"))
+        }
+        
+        XCTAssertThrowsError(try flow.authorizationCode(from: URL(string: "com.example:/?state=ABC123&error=some_error&error_description=some+error+message")!)) { error in
+            XCTAssertEqual(error as? OAuth2Error, .oauth2Error(code: "some_error", description: "some error message"))
+        }
+        
+        XCTAssertThrowsError(try flow.authorizationCode(from: URL(string: "com.example:/?state=ABC123")!)) { error in
+            XCTAssertEqual(error as? RedirectError, .missingAuthorizationCode)
+        }
+
+        XCTAssertEqual(try flow.authorizationCode(from: URL(string: "com.example:/?state=ABC123&code=foo")!), "foo")
+    }
 }
