@@ -150,7 +150,7 @@ public class WebAuthentication {
     /// Starts sign-in using the configured client.
     /// - Parameters:
     ///   - window: Window from which the sign in process will be started.
-    ///   - additionalParameters: Optional parameters to add to the authorization query string.
+    ///   - options: Options to add to the authorization URL.
     ///   - completion: Completion block that will be invoked when authentication finishes.
     public final func signIn(from window: WindowAnchor?,
                              options: [Option]? = nil,
@@ -175,7 +175,7 @@ public class WebAuthentication {
     /// - Parameters:
     ///   - window: Window from which the sign in process will be started.
     ///   - credential: Stored credentials that will retrieve the ID token.
-    ///   - additionalParameters: Optional parameters to add to the authorization query string.
+    ///   - options: Options to add to the authorization URL.
     ///   - completion: Completion block that will be invoked when log-out finishes.
     public final func signOut(from window: WindowAnchor? = nil,
                               credential: Credential? = .default,
@@ -194,7 +194,7 @@ public class WebAuthentication {
     /// - Parameters:
     ///   - window: Window from which the sign in process will be started.
     ///   - token: Token object that will retrieve the ID token.
-    ///   - additionalParameters: Optional parameters to add to the authorization query string.
+    ///   - options: Options to add to the authorization URL.
     ///   - completion: Completion block that will be invoked when sign-out finishes.
     public final func signOut(from window: WindowAnchor? = nil,
                               token: Token,
@@ -213,7 +213,7 @@ public class WebAuthentication {
     /// - Parameters:
     ///   - window: Window from which the sign in process will be started.
     ///   - token: The ID token string used for log-out.
-    ///   - options: Options to add to the authorization query string.
+    ///   - options: Options to add to the authorization URL.
     ///   - completion: Completion block that will be invoked when sign-out finishes.
     public final func signOut(from window: WindowAnchor? = nil,
                               token: String,
@@ -409,7 +409,7 @@ extension WebAuthentication {
     /// Asynchronously initiates authentication from the given window.
     /// - Parameters:
     ///   - window: The window from which the authentication browser should be shown.
-    ///   - additionalParameters: Optional parameters to add to the authorization query string.
+    ///   - options: Options to add to the authorization URL.
     /// - Returns: The token representing the signed-in user.
     public final func signIn(from window: WindowAnchor?,
                              options: [Option]? = nil) async throws -> Token
@@ -423,7 +423,7 @@ extension WebAuthentication {
     /// - Parameters:
     ///   - window: Window from which the sign in process will be started.
     ///   - credential: Stored credentials that will retrieve the ID token.
-    ///   - additionalParameters: Optional parameters to add to the authorization query string.
+    ///   - options: Options to add to the authorization URL.
     public final func signOut(from window: WindowAnchor?,
                               credential: Credential? = .default,
                               options: [Option]? = nil) async throws
@@ -437,7 +437,7 @@ extension WebAuthentication {
     /// - Parameters:
     ///   - window: Window from which the sign in process will be started.
     ///   - token: Token object that will retrieve the ID token.
-    ///   - additionalParameters: Optional parameters to add to the authorization query string.
+    ///   - options: Options to add to the authorization URL.
     public final func signOut(from window: WindowAnchor?,
                               token: Token,
                               options: [Option]? = nil) async throws
@@ -451,7 +451,7 @@ extension WebAuthentication {
     /// - Parameters:
     ///   - window: Window from which the sign in process will be started.
     ///   - idToken: The ID token used for log-out.
-    ///   - additionalParameters: Optional parameters to add to the authorization query string.
+    ///   - options: Options to add to the authorization URL.
     public final func signOut(from window: WindowAnchor?,
                               token: String,
                               options: [Option]? = nil) async throws {

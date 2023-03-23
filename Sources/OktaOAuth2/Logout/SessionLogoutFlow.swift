@@ -145,6 +145,7 @@ public class SessionLogoutFlow: LogoutFlow {
     /// This method is used to begin a logout session. It is asynchronous, and will invoke the appropriate delegate methods when a response is received.
     /// - Parameters:
     ///   - idToken: The ID token string.
+    ///   - additionalParameters: Optional parameters to add to the authorization URL query string.
     ///   - completion: Optional completion block for receiving the response. If `nil`, you may rely upon the appropriate delegate API methods.
     public func start(idToken: String,
                       additionalParameters: [String: String]? = nil,
@@ -160,6 +161,7 @@ public class SessionLogoutFlow: LogoutFlow {
     /// This method is used to begin a logout session. It is asynchronous, and will invoke the appropriate delegate methods when a response is received.
     /// - Parameters:
     ///   - context: Represents current state for a logout session.
+    ///   - additionalParameters: Optional parameters to add to the authorization URL query string.
     ///   - completion: Optional completion block for receiving the response. If `nil`, you may rely upon the appropriate delegate API methods.
     public func start(with context: Context,
                       additionalParameters: [String: String]? = nil,
@@ -224,7 +226,7 @@ extension SessionLogoutFlow {
     /// This method is used to begin a logout session. The method will invoke the appropriate delegate methods when a response is received.
     /// - Parameters:
     ///   - idToken: The ID token string.
-    ///   - additionalParameters: Optional
+    ///   - additionalParameters: Optional parameters to add to the authorization URL query string.
     /// - Returns: The URL a user should be presented with within a broser, to befing a logout flow.
     public func start(idToken: String,
                       additionalParameters: [String: String]? = nil) async throws -> URL
@@ -238,6 +240,7 @@ extension SessionLogoutFlow {
     /// This method is used to begin a logout session. The method will invoke the appropriate delegate methods when a response is received.
     /// - Parameters:
     ///   - context: Represents current state for a logout session.
+    ///   - additionalParameters: Optional parameters to add to the authorization URL query string.
     /// - Returns: The URL a user should be presented with within a broser, to befing a logout flow.
     public func start(with context: Context,
                       additionalParameters: [String: String]? = nil) async throws -> URL
