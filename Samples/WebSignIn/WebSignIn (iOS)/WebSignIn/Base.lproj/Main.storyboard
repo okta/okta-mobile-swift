@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="20037" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="IiQ-U1-iKI">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="21507" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="IiQ-U1-iKI">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="20020"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21505"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -17,13 +18,13 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Have an account?" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qYK-wq-WOb">
-                                <rect key="frame" x="88" y="204" width="238.5" height="37"/>
+                                <rect key="frame" x="77" y="208" width="260.5" height="41"/>
                                 <fontDescription key="fontDescription" style="UICTFontTextStyleTitle0"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" role="primary" translatesAutoresizingMaskIntoConstraints="NO" id="oZI-Lq-sTN">
-                                <rect key="frame" x="172" y="265" width="70" height="31"/>
+                                <rect key="frame" x="168" y="273" width="78" height="34.5"/>
                                 <accessibility key="accessibilityConfiguration" identifier="sign_in_button"/>
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="filled" title="Sign In"/>
@@ -32,16 +33,16 @@
                                 </connections>
                             </button>
                             <stackView opaque="NO" contentMode="scaleToFill" spacing="6" translatesAutoresizingMaskIntoConstraints="NO" id="hng-Fi-9UO">
-                                <rect key="frame" x="165.5" y="840.5" width="83" height="13.5"/>
+                                <rect key="frame" x="162.5" y="839.5" width="89" height="14.5"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Client ID:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="p8a-Qh-1W8">
-                                        <rect key="frame" x="0.0" y="0.0" width="48.5" height="13.5"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="52" height="14.5"/>
                                         <fontDescription key="fontDescription" style="UICTFontTextStyleCaption1"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QTg-J0-M7a">
-                                        <rect key="frame" x="54.5" y="0.0" width="28.5" height="13.5"/>
+                                        <rect key="frame" x="58" y="0.0" width="31" height="14.5"/>
                                         <accessibility key="accessibilityConfiguration" identifier="client_id_label"/>
                                         <fontDescription key="fontDescription" style="UICTFontTextStyleCaption1"/>
                                         <nil key="textColor"/>
@@ -50,7 +51,7 @@
                                 </subviews>
                             </stackView>
                             <stackView opaque="NO" contentMode="scaleToFill" spacing="12" translatesAutoresizingMaskIntoConstraints="NO" id="gMW-B0-lKN">
-                                <rect key="frame" x="104" y="785" width="206" height="31"/>
+                                <rect key="frame" x="104" y="784" width="206" height="31"/>
                                 <subviews>
                                     <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="I1r-V4-AlX">
                                         <rect key="frame" x="0.0" y="0.0" width="51" height="31"/>
@@ -67,11 +68,21 @@
                                     </label>
                                 </subviews>
                             </stackView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="J00-k3-8JA">
+                                <rect key="frame" x="92" y="349" width="230" height="34.5"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain" title="Sign In with a refresh token"/>
+                                <connections>
+                                    <action selector="signInWithRefreshToken:" destination="oA1-3v-UXn" eventType="touchUpInside" id="PQZ-dP-YUR"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="scU-IK-zcF"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="qYK-wq-WOb" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="scU-IK-zcF" secondAttribute="leading" constant="24" id="4pH-hB-1Uh"/>
+                            <constraint firstItem="J00-k3-8JA" firstAttribute="centerX" secondItem="scU-IK-zcF" secondAttribute="centerX" id="6Lo-iS-Ndj"/>
+                            <constraint firstItem="J00-k3-8JA" firstAttribute="top" secondItem="oZI-Lq-sTN" secondAttribute="bottom" constant="41.5" id="I2Z-ed-3hL"/>
                             <constraint firstItem="qYK-wq-WOb" firstAttribute="top" secondItem="scU-IK-zcF" secondAttribute="top" constant="64" id="YdN-DH-IkO"/>
                             <constraint firstItem="scU-IK-zcF" firstAttribute="bottom" secondItem="hng-Fi-9UO" secondAttribute="bottom" constant="8" id="Zdh-VZ-cU8"/>
                             <constraint firstItem="oZI-Lq-sTN" firstAttribute="top" secondItem="qYK-wq-WOb" secondAttribute="bottom" constant="24" id="chr-S3-jUS"/>
@@ -86,7 +97,9 @@
                     <navigationItem key="navigationItem" title="Okta Web Sign In" id="tjy-j0-hZu"/>
                     <connections>
                         <outlet property="clientIdLabel" destination="QTg-J0-M7a" id="0fx-Sg-j1e"/>
+                        <outlet property="ephemeralSwitch" destination="I1r-V4-AlX" id="ROu-9q-YiV"/>
                         <outlet property="signInButton" destination="oZI-Lq-sTN" id="FOW-Tb-nBB"/>
+                        <outlet property="signInWithRefreshButton" destination="J00-k3-8JA" id="dbJ-iJ-n3e"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Cuh-LB-yv5" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -98,7 +111,7 @@
             <objects>
                 <navigationController storyboardIdentifier="SignIn" modalTransitionStyle="crossDissolve" modalPresentationStyle="fullScreen" id="IiQ-U1-iKI" sceneMemberID="viewController">
                     <navigationBar key="navigationBar" contentMode="scaleToFill" largeTitles="YES" id="2cG-tS-WJT">
-                        <rect key="frame" x="0.0" y="44" width="414" height="96"/>
+                        <rect key="frame" x="0.0" y="48" width="414" height="96"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <connections>

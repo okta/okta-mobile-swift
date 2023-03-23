@@ -21,8 +21,12 @@ extension Token {
 
     struct RefreshRequest {
         let openIdConfiguration: OpenIdConfiguration
-        let token: Token
+        let clientId: String
+        let refreshToken: String
+        let id: String
         let configuration: [String: String]
+        
+        static let placeholderId = "temporary_id"
     }
     
     struct IntrospectRequest {
@@ -92,7 +96,7 @@ extension Token.IntrospectRequest: OAuth2APIRequest, APIRequestBody {
     }
 }
 
-extension Token.RefreshRequest: OAuth2APIRequest, APIRequestBody, APIParsingContext {
+extension Token.RefreshRequest: OAuth2APIRequest, APIRequestBody, APIParsingContext, OAuth2TokenRequest {
     typealias ResponseType = Token
 
     var httpMethod: APIRequestMethod { .post }
@@ -100,8 +104,6 @@ extension Token.RefreshRequest: OAuth2APIRequest, APIRequestBody, APIParsingCont
     var contentType: APIContentType? { .formEncoded }
     var acceptsType: APIContentType? { .json }
     var bodyParameters: [String: Any]? {
-        guard let refreshToken = token.refreshToken else { return nil }
-
         var result = configuration
         result["grant_type"] = "refresh_token"
         result["refresh_token"] = refreshToken
@@ -110,15 +112,19 @@ extension Token.RefreshRequest: OAuth2APIRequest, APIRequestBody, APIParsingCont
     }
     
     var codingUserInfo: [CodingUserInfoKey: Any]? {
-        guard let clientSettings = token.context.clientSettings,
-              let settings = clientSettings.reduce(into: [:], { partialResult, item in
+        guard let settings = configuration.reduce(into: [:], { partialResult, item in
             guard let key = CodingUserInfoKey(rawValue: item.key) else { return }
             partialResult?[key] = item.value
         }) else { return nil }
         
-        return [
-            .clientSettings: settings,
-            .tokenId: token.id
+        var result: [CodingUserInfoKey: Any] = [
+            .clientSettings: settings
         ]
+        
+        if id != Self.placeholderId {
+            result[.tokenId] = id
+        }
+        
+        return result
     }
 }
