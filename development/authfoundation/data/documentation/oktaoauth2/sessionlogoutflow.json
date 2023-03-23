@@ -62,14 +62,6 @@
           "tokens" : [
             {
               "kind" : "keyword",
-              "text" : "final"
-            },
-            {
-              "kind" : "text",
-              "text" : " "
-            },
-            {
-              "kind" : "keyword",
               "text" : "class"
             },
             {
@@ -192,13 +184,14 @@
     },
     {
       "identifiers" : [
-        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/OktaOAuth2\/SessionLogoutFlow\/init(issuer:clientId:scopes:logoutRedirectUri:)",
-        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/OktaOAuth2\/SessionLogoutFlow\/init(logoutRedirectUri:client:)"
+        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/OktaOAuth2\/SessionLogoutFlow\/init(issuer:clientId:scopes:logoutRedirectUri:additionalParameters:)",
+        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/OktaOAuth2\/SessionLogoutFlow\/init(logoutRedirectUri:additionalParameters:client:)"
       ],
       "title" : "Initializers"
     },
     {
       "identifiers" : [
+        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/OktaOAuth2\/SessionLogoutFlow\/additionalParameters",
         "doc:\/\/com.okta.mobile.authfoundation\/documentation\/OktaOAuth2\/SessionLogoutFlow\/client",
         "doc:\/\/com.okta.mobile.authfoundation\/documentation\/OktaOAuth2\/SessionLogoutFlow\/context-swift.property",
         "doc:\/\/com.okta.mobile.authfoundation\/documentation\/OktaOAuth2\/SessionLogoutFlow\/delegateCollection",
@@ -211,10 +204,10 @@
       "identifiers" : [
         "doc:\/\/com.okta.mobile.authfoundation\/documentation\/OktaOAuth2\/SessionLogoutFlow\/cancel()",
         "doc:\/\/com.okta.mobile.authfoundation\/documentation\/OktaOAuth2\/SessionLogoutFlow\/reset()",
-        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/OktaOAuth2\/SessionLogoutFlow\/start(idToken:)",
-        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/OktaOAuth2\/SessionLogoutFlow\/start(idToken:completion:)",
-        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/OktaOAuth2\/SessionLogoutFlow\/start(with:)",
-        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/OktaOAuth2\/SessionLogoutFlow\/start(with:completion:)"
+        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/OktaOAuth2\/SessionLogoutFlow\/start(idToken:additionalParameters:)",
+        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/OktaOAuth2\/SessionLogoutFlow\/start(idToken:additionalParameters:completion:)",
+        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/OktaOAuth2\/SessionLogoutFlow\/start(with:additionalParameters:)",
+        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/OktaOAuth2\/SessionLogoutFlow\/start(with:additionalParameters:completion:)"
       ],
       "title" : "Instance Methods"
     },
@@ -530,6 +523,56 @@
   "type" : "topic",
   "url" : "\/documentation\/oktaoauth2\/sessionlogoutflow\/usesdelegatecollection-implementations"
 },
+"doc://com.okta.mobile.authfoundation/documentation/OktaOAuth2/SessionLogoutFlow/additionalParameters": {
+  "abstract" : [
+    {
+      "text" : "Any additional query string parameters you would like to supply to the authorization server.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "let"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "additionalParameters"
+    },
+    {
+      "kind" : "text",
+      "text" : ": ["
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:SS",
+      "text" : "String"
+    },
+    {
+      "kind" : "text",
+      "text" : " : "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:SS",
+      "text" : "String"
+    },
+    {
+      "kind" : "text",
+      "text" : "]?"
+    }
+  ],
+  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/OktaOAuth2\/SessionLogoutFlow\/additionalParameters",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "additionalParameters",
+  "type" : "topic",
+  "url" : "\/documentation\/oktaoauth2\/sessionlogoutflow\/additionalparameters"
+},
 "doc://com.okta.mobile.authfoundation/documentation/OktaOAuth2/SessionLogoutFlow/cancel()": {
   "abstract" : [
     {
@@ -724,7 +767,7 @@
   "type" : "topic",
   "url" : "\/documentation\/oktaoauth2\/sessionlogoutflow\/inprogress"
 },
-"doc://com.okta.mobile.authfoundation/documentation/OktaOAuth2/SessionLogoutFlow/init(issuer:clientId:scopes:logoutRedirectUri:)": {
+"doc://com.okta.mobile.authfoundation/documentation/OktaOAuth2/SessionLogoutFlow/init(issuer:clientId:scopes:logoutRedirectUri:additionalParameters:)": {
   "abstract" : [
     {
       "text" : "Convenience initializer to construct a logout flow.",
@@ -806,17 +849,43 @@
     },
     {
       "kind" : "text",
-      "text" : "?)"
+      "text" : "?, "
+    },
+    {
+      "kind" : "externalParam",
+      "text" : "additionalParameters"
+    },
+    {
+      "kind" : "text",
+      "text" : ": ["
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:SS",
+      "text" : "String"
+    },
+    {
+      "kind" : "text",
+      "text" : " : "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:SS",
+      "text" : "String"
+    },
+    {
+      "kind" : "text",
+      "text" : "]?)"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/OktaOAuth2\/SessionLogoutFlow\/init(issuer:clientId:scopes:logoutRedirectUri:)",
+  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/OktaOAuth2\/SessionLogoutFlow\/init(issuer:clientId:scopes:logoutRedirectUri:additionalParameters:)",
   "kind" : "symbol",
   "role" : "symbol",
-  "title" : "init(issuer:clientId:scopes:logoutRedirectUri:)",
+  "title" : "init(issuer:clientId:scopes:logoutRedirectUri:additionalParameters:)",
   "type" : "topic",
-  "url" : "\/documentation\/oktaoauth2\/sessionlogoutflow\/init(issuer:clientid:scopes:logoutredirecturi:)"
+  "url" : "\/documentation\/oktaoauth2\/sessionlogoutflow\/init(issuer:clientid:scopes:logoutredirecturi:additionalparameters:)"
 },
-"doc://com.okta.mobile.authfoundation/documentation/OktaOAuth2/SessionLogoutFlow/init(logoutRedirectUri:client:)": {
+"doc://com.okta.mobile.authfoundation/documentation/OktaOAuth2/SessionLogoutFlow/init(logoutRedirectUri:additionalParameters:client:)": {
   "abstract" : [
     {
       "text" : "Initializer to construct a logout flow from a pre-defined client.",
@@ -851,6 +920,32 @@
     },
     {
       "kind" : "externalParam",
+      "text" : "additionalParameters"
+    },
+    {
+      "kind" : "text",
+      "text" : ": ["
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:SS",
+      "text" : "String"
+    },
+    {
+      "kind" : "text",
+      "text" : " : "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:SS",
+      "text" : "String"
+    },
+    {
+      "kind" : "text",
+      "text" : "]?, "
+    },
+    {
+      "kind" : "externalParam",
       "text" : "client"
     },
     {
@@ -867,12 +962,12 @@
       "text" : ")"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/OktaOAuth2\/SessionLogoutFlow\/init(logoutRedirectUri:client:)",
+  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/OktaOAuth2\/SessionLogoutFlow\/init(logoutRedirectUri:additionalParameters:client:)",
   "kind" : "symbol",
   "role" : "symbol",
-  "title" : "init(logoutRedirectUri:client:)",
+  "title" : "init(logoutRedirectUri:additionalParameters:client:)",
   "type" : "topic",
-  "url" : "\/documentation\/oktaoauth2\/sessionlogoutflow\/init(logoutredirecturi:client:)"
+  "url" : "\/documentation\/oktaoauth2\/sessionlogoutflow\/init(logoutredirecturi:additionalparameters:client:)"
 },
 "doc://com.okta.mobile.authfoundation/documentation/OktaOAuth2/SessionLogoutFlow/logoutRedirectUri": {
   "abstract" : [
@@ -943,7 +1038,7 @@
   "type" : "topic",
   "url" : "\/documentation\/oktaoauth2\/sessionlogoutflow\/reset()"
 },
-"doc://com.okta.mobile.authfoundation/documentation/OktaOAuth2/SessionLogoutFlow/start(idToken:)": {
+"doc://com.okta.mobile.authfoundation/documentation/OktaOAuth2/SessionLogoutFlow/start(idToken:additionalParameters:)": {
   "abstract" : [
     {
       "text" : "Asynchronously initiates a logout flow, with a required ID Token.",
@@ -982,7 +1077,33 @@
     },
     {
       "kind" : "text",
-      "text" : ") "
+      "text" : ", "
+    },
+    {
+      "kind" : "externalParam",
+      "text" : "additionalParameters"
+    },
+    {
+      "kind" : "text",
+      "text" : ": ["
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:SS",
+      "text" : "String"
+    },
+    {
+      "kind" : "text",
+      "text" : " : "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:SS",
+      "text" : "String"
+    },
+    {
+      "kind" : "text",
+      "text" : "]?) "
     },
     {
       "kind" : "keyword",
@@ -1006,14 +1127,14 @@
       "text" : "URL"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/OktaOAuth2\/SessionLogoutFlow\/start(idToken:)",
+  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/OktaOAuth2\/SessionLogoutFlow\/start(idToken:additionalParameters:)",
   "kind" : "symbol",
   "role" : "symbol",
-  "title" : "start(idToken:)",
+  "title" : "start(idToken:additionalParameters:)",
   "type" : "topic",
-  "url" : "\/documentation\/oktaoauth2\/sessionlogoutflow\/start(idtoken:)"
+  "url" : "\/documentation\/oktaoauth2\/sessionlogoutflow\/start(idtoken:additionalparameters:)"
 },
-"doc://com.okta.mobile.authfoundation/documentation/OktaOAuth2/SessionLogoutFlow/start(idToken:completion:)": {
+"doc://com.okta.mobile.authfoundation/documentation/OktaOAuth2/SessionLogoutFlow/start(idToken:additionalParameters:completion:)": {
   "abstract" : [
     {
       "text" : "Initiates a logout flow, with a required ID Token.",
@@ -1056,6 +1177,32 @@
     },
     {
       "kind" : "externalParam",
+      "text" : "additionalParameters"
+    },
+    {
+      "kind" : "text",
+      "text" : ": ["
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:SS",
+      "text" : "String"
+    },
+    {
+      "kind" : "text",
+      "text" : " : "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:SS",
+      "text" : "String"
+    },
+    {
+      "kind" : "text",
+      "text" : "]?, "
+    },
+    {
+      "kind" : "externalParam",
       "text" : "completion"
     },
     {
@@ -1103,14 +1250,14 @@
       "text" : "throws"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/OktaOAuth2\/SessionLogoutFlow\/start(idToken:completion:)",
+  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/OktaOAuth2\/SessionLogoutFlow\/start(idToken:additionalParameters:completion:)",
   "kind" : "symbol",
   "role" : "symbol",
-  "title" : "start(idToken:completion:)",
+  "title" : "start(idToken:additionalParameters:completion:)",
   "type" : "topic",
-  "url" : "\/documentation\/oktaoauth2\/sessionlogoutflow\/start(idtoken:completion:)"
+  "url" : "\/documentation\/oktaoauth2\/sessionlogoutflow\/start(idtoken:additionalparameters:completion:)"
 },
-"doc://com.okta.mobile.authfoundation/documentation/OktaOAuth2/SessionLogoutFlow/start(with:)": {
+"doc://com.okta.mobile.authfoundation/documentation/OktaOAuth2/SessionLogoutFlow/start(with:additionalParameters:)": {
   "abstract" : [
     {
       "text" : "Initiates an logout flow, with a required ",
@@ -1158,7 +1305,33 @@
     },
     {
       "kind" : "text",
-      "text" : ") "
+      "text" : ", "
+    },
+    {
+      "kind" : "externalParam",
+      "text" : "additionalParameters"
+    },
+    {
+      "kind" : "text",
+      "text" : ": ["
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:SS",
+      "text" : "String"
+    },
+    {
+      "kind" : "text",
+      "text" : " : "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:SS",
+      "text" : "String"
+    },
+    {
+      "kind" : "text",
+      "text" : "]?) "
     },
     {
       "kind" : "keyword",
@@ -1182,14 +1355,14 @@
       "text" : "URL"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/OktaOAuth2\/SessionLogoutFlow\/start(with:)",
+  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/OktaOAuth2\/SessionLogoutFlow\/start(with:additionalParameters:)",
   "kind" : "symbol",
   "role" : "symbol",
-  "title" : "start(with:)",
+  "title" : "start(with:additionalParameters:)",
   "type" : "topic",
-  "url" : "\/documentation\/oktaoauth2\/sessionlogoutflow\/start(with:)"
+  "url" : "\/documentation\/oktaoauth2\/sessionlogoutflow\/start(with:additionalparameters:)"
 },
-"doc://com.okta.mobile.authfoundation/documentation/OktaOAuth2/SessionLogoutFlow/start(with:completion:)": {
+"doc://com.okta.mobile.authfoundation/documentation/OktaOAuth2/SessionLogoutFlow/start(with:additionalParameters:completion:)": {
   "abstract" : [
     {
       "text" : "Initiates an logout flow, with a required ",
@@ -1241,6 +1414,32 @@
     },
     {
       "kind" : "externalParam",
+      "text" : "additionalParameters"
+    },
+    {
+      "kind" : "text",
+      "text" : ": ["
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:SS",
+      "text" : "String"
+    },
+    {
+      "kind" : "text",
+      "text" : " : "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:SS",
+      "text" : "String"
+    },
+    {
+      "kind" : "text",
+      "text" : "]?, "
+    },
+    {
+      "kind" : "externalParam",
       "text" : "completion"
     },
     {
@@ -1288,12 +1487,12 @@
       "text" : "throws"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/OktaOAuth2\/SessionLogoutFlow\/start(with:completion:)",
+  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/OktaOAuth2\/SessionLogoutFlow\/start(with:additionalParameters:completion:)",
   "kind" : "symbol",
   "role" : "symbol",
-  "title" : "start(with:completion:)",
+  "title" : "start(with:additionalParameters:completion:)",
   "type" : "topic",
-  "url" : "\/documentation\/oktaoauth2\/sessionlogoutflow\/start(with:completion:)"
+  "url" : "\/documentation\/oktaoauth2\/sessionlogoutflow\/start(with:additionalparameters:completion:)"
 },
 "doc://com.okta.mobile.authfoundation/documentation/OktaOAuth2/SessionLogoutFlowDelegate": {
   "abstract" : [

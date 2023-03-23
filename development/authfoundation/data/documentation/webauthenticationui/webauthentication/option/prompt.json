@@ -1,0 +1,537 @@
+{
+  "abstract" : [
+    {
+      "text" : "Defines how a user will be prompted to sign in.",
+      "type" : "text"
+    }
+  ],
+  "hierarchy" : {
+    "paths" : [
+      [
+        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/WebAuthenticationUI",
+        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/WebAuthenticationUI\/WebAuthentication",
+        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/WebAuthenticationUI\/WebAuthentication\/Option"
+      ]
+    ]
+  },
+  "identifier" : {
+    "interfaceLanguage" : "swift",
+    "url" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/WebAuthenticationUI\/WebAuthentication\/Option\/Prompt"
+  },
+  "kind" : "symbol",
+  "metadata" : {
+    "externalID" : "s:19WebAuthenticationUI0aB0C6OptionO6PromptO",
+    "fragments" : [
+      {
+        "kind" : "keyword",
+        "text" : "enum"
+      },
+      {
+        "kind" : "text",
+        "text" : " "
+      },
+      {
+        "kind" : "identifier",
+        "text" : "Prompt"
+      }
+    ],
+    "modules" : [
+      {
+        "name" : "WebAuthenticationUI"
+      }
+    ],
+    "navigatorTitle" : [
+      {
+        "kind" : "identifier",
+        "text" : "Prompt"
+      }
+    ],
+    "role" : "symbol",
+    "roleHeading" : "Enumeration",
+    "symbolKind" : "enum",
+    "title" : "WebAuthentication.Option.Prompt"
+  },
+  "primaryContentSections" : [
+    {
+      "declarations" : [
+        {
+          "languages" : [
+            "swift"
+          ],
+          "platforms" : [
+            "macOS"
+          ],
+          "tokens" : [
+            {
+              "kind" : "keyword",
+              "text" : "enum"
+            },
+            {
+              "kind" : "text",
+              "text" : " "
+            },
+            {
+              "kind" : "identifier",
+              "text" : "Prompt"
+            }
+          ]
+        }
+      ],
+      "kind" : "declarations"
+    },
+    {
+      "content" : [
+        {
+          "anchor" : "overview",
+          "level" : 2,
+          "text" : "Overview",
+          "type" : "heading"
+        },
+        {
+          "inlineContent" : [
+            {
+              "text" : "This is used with the ",
+              "type" : "text"
+            },
+            {
+              "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/WebAuthenticationUI\/WebAuthentication\/Option\/prompt(_:)",
+              "isActive" : true,
+              "type" : "reference"
+            },
+            {
+              "text" : " enumeration. For more information, see the ",
+              "type" : "text"
+            },
+            {
+              "identifier" : "https:\/\/developer.okta.com\/docs\/reference\/api\/oidc\/#parameter-details",
+              "isActive" : true,
+              "type" : "reference"
+            },
+            {
+              "text" : ".",
+              "type" : "text"
+            }
+          ],
+          "type" : "paragraph"
+        }
+      ],
+      "kind" : "content"
+    }
+  ],
+  "relationshipsSections" : [
+    {
+      "identifiers" : [
+        "doc:\/\/com.okta.mobile.authfoundation\/SQ",
+        "doc:\/\/com.okta.mobile.authfoundation\/SH",
+        "doc:\/\/com.okta.mobile.authfoundation\/SY"
+      ],
+      "kind" : "relationships",
+      "title" : "Conforms To",
+      "type" : "conformsTo"
+    }
+  ],
+  "schemaVersion" : {
+    "major" : 0,
+    "minor" : 2,
+    "patch" : 0
+  },
+  "sections" : [
+
+  ],
+  "topicSections" : [
+    {
+      "identifiers" : [
+        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/WebAuthenticationUI\/WebAuthentication\/Option\/Prompt\/consent",
+        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/WebAuthenticationUI\/WebAuthentication\/Option\/Prompt\/login",
+        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/WebAuthenticationUI\/WebAuthentication\/Option\/Prompt\/loginAndConsent",
+        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/WebAuthenticationUI\/WebAuthentication\/Option\/Prompt\/none"
+      ],
+      "title" : "Enumeration Cases"
+    },
+    {
+      "identifiers" : [
+        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/WebAuthenticationUI\/WebAuthentication\/Option\/Prompt\/init(rawValue:)"
+      ],
+      "title" : "Initializers"
+    },
+    {
+      "generated" : true,
+      "identifiers" : [
+        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/WebAuthenticationUI\/WebAuthentication\/Option\/Prompt\/Equatable-Implementations",
+        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/WebAuthenticationUI\/WebAuthentication\/Option\/Prompt\/RawRepresentable-Implementations"
+      ],
+      "title" : "Default Implementations"
+    }
+  ],
+  "variants" : [
+    {
+      "paths" : [
+        "\/documentation\/webauthenticationui\/webauthentication\/option\/prompt"
+      ],
+      "traits" : [
+        {
+          "interfaceLanguage" : "swift"
+        }
+      ]
+    }
+  ]
+, 
+"references": {
+"doc://com.okta.mobile.authfoundation/SH": {
+  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/SH",
+  "title" : "Swift.Hashable",
+  "type" : "unresolvable"
+},
+"doc://com.okta.mobile.authfoundation/SQ": {
+  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/SQ",
+  "title" : "Swift.Equatable",
+  "type" : "unresolvable"
+},
+"doc://com.okta.mobile.authfoundation/SY": {
+  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/SY",
+  "title" : "Swift.RawRepresentable",
+  "type" : "unresolvable"
+},
+"doc://com.okta.mobile.authfoundation/documentation/WebAuthenticationUI": {
+  "abstract" : [
+
+  ],
+  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/WebAuthenticationUI",
+  "kind" : "symbol",
+  "role" : "collection",
+  "title" : "WebAuthenticationUI",
+  "type" : "topic",
+  "url" : "\/documentation\/webauthenticationui"
+},
+"doc://com.okta.mobile.authfoundation/documentation/WebAuthenticationUI/WebAuthentication": {
+  "abstract" : [
+    {
+      "text" : "Authentication coordinator that simplifies signing users in using browser-based OIDC authentication flows.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "class"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "WebAuthentication"
+    }
+  ],
+  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/WebAuthenticationUI\/WebAuthentication",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "WebAuthentication"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "WebAuthentication",
+  "type" : "topic",
+  "url" : "\/documentation\/webauthenticationui\/webauthentication"
+},
+"doc://com.okta.mobile.authfoundation/documentation/WebAuthenticationUI/WebAuthentication/Option": {
+  "abstract" : [
+    {
+      "text" : "Describes available options for customizing the sign on process.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "enum"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "Option"
+    }
+  ],
+  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/WebAuthenticationUI\/WebAuthentication\/Option",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "Option"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "WebAuthentication.Option",
+  "type" : "topic",
+  "url" : "\/documentation\/webauthenticationui\/webauthentication\/option"
+},
+"doc://com.okta.mobile.authfoundation/documentation/WebAuthenticationUI/WebAuthentication/Option/Prompt": {
+  "abstract" : [
+    {
+      "text" : "Defines how a user will be prompted to sign in.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "enum"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "Prompt"
+    }
+  ],
+  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/WebAuthenticationUI\/WebAuthentication\/Option\/Prompt",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "Prompt"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "WebAuthentication.Option.Prompt",
+  "type" : "topic",
+  "url" : "\/documentation\/webauthenticationui\/webauthentication\/option\/prompt"
+},
+"doc://com.okta.mobile.authfoundation/documentation/WebAuthenticationUI/WebAuthentication/Option/Prompt/Equatable-Implementations": {
+  "abstract" : [
+
+  ],
+  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/WebAuthenticationUI\/WebAuthentication\/Option\/Prompt\/Equatable-Implementations",
+  "kind" : "article",
+  "role" : "collectionGroup",
+  "title" : "Equatable Implementations",
+  "type" : "topic",
+  "url" : "\/documentation\/webauthenticationui\/webauthentication\/option\/prompt\/equatable-implementations"
+},
+"doc://com.okta.mobile.authfoundation/documentation/WebAuthenticationUI/WebAuthentication/Option/Prompt/RawRepresentable-Implementations": {
+  "abstract" : [
+
+  ],
+  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/WebAuthenticationUI\/WebAuthentication\/Option\/Prompt\/RawRepresentable-Implementations",
+  "kind" : "article",
+  "role" : "collectionGroup",
+  "title" : "RawRepresentable Implementations",
+  "type" : "topic",
+  "url" : "\/documentation\/webauthenticationui\/webauthentication\/option\/prompt\/rawrepresentable-implementations"
+},
+"doc://com.okta.mobile.authfoundation/documentation/WebAuthenticationUI/WebAuthentication/Option/Prompt/consent": {
+  "abstract" : [
+    {
+      "text" : "Display the Okta consent dialog, even if the user has already given consent.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "case"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "consent"
+    }
+  ],
+  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/WebAuthenticationUI\/WebAuthentication\/Option\/Prompt\/consent",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "WebAuthentication.Option.Prompt.consent",
+  "type" : "topic",
+  "url" : "\/documentation\/webauthenticationui\/webauthentication\/option\/prompt\/consent"
+},
+"doc://com.okta.mobile.authfoundation/documentation/WebAuthenticationUI/WebAuthentication/Option/Prompt/init(rawValue:)": {
+  "abstract" : [
+    {
+      "text" : "Creates a new instance with the specified raw value.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "identifier",
+      "text" : "init"
+    },
+    {
+      "kind" : "text",
+      "text" : "?("
+    },
+    {
+      "kind" : "externalParam",
+      "text" : "rawValue"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:SS",
+      "text" : "String"
+    },
+    {
+      "kind" : "text",
+      "text" : ")"
+    }
+  ],
+  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/WebAuthenticationUI\/WebAuthentication\/Option\/Prompt\/init(rawValue:)",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "init(rawValue:)",
+  "type" : "topic",
+  "url" : "\/documentation\/webauthenticationui\/webauthentication\/option\/prompt\/init(rawvalue:)"
+},
+"doc://com.okta.mobile.authfoundation/documentation/WebAuthenticationUI/WebAuthentication/Option/Prompt/login": {
+  "abstract" : [
+    {
+      "text" : "Always prompt the user for authentication.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "case"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "login"
+    }
+  ],
+  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/WebAuthenticationUI\/WebAuthentication\/Option\/Prompt\/login",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "WebAuthentication.Option.Prompt.login",
+  "type" : "topic",
+  "url" : "\/documentation\/webauthenticationui\/webauthentication\/option\/prompt\/login"
+},
+"doc://com.okta.mobile.authfoundation/documentation/WebAuthenticationUI/WebAuthentication/Option/Prompt/loginAndConsent": {
+  "abstract" : [
+    {
+      "text" : "The user is always prompted for authentication, and the user consent dialog appears.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "case"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "loginAndConsent"
+    }
+  ],
+  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/WebAuthenticationUI\/WebAuthentication\/Option\/Prompt\/loginAndConsent",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "WebAuthentication.Option.Prompt.loginAndConsent",
+  "type" : "topic",
+  "url" : "\/documentation\/webauthenticationui\/webauthentication\/option\/prompt\/loginandconsent"
+},
+"doc://com.okta.mobile.authfoundation/documentation/WebAuthenticationUI/WebAuthentication/Option/Prompt/none": {
+  "abstract" : [
+    {
+      "text" : "If an Okta session already exists, the user is silently authenticated. Otherwise, the user is prompted to authenticate.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "case"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "none"
+    }
+  ],
+  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/WebAuthenticationUI\/WebAuthentication\/Option\/Prompt\/none",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "WebAuthentication.Option.Prompt.none",
+  "type" : "topic",
+  "url" : "\/documentation\/webauthenticationui\/webauthentication\/option\/prompt\/none"
+},
+"doc://com.okta.mobile.authfoundation/documentation/WebAuthenticationUI/WebAuthentication/Option/prompt(_:)": {
+  "abstract" : [
+    {
+      "text" : "Control how the user is prompted when authentication starts.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "case"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "prompt"
+    },
+    {
+      "kind" : "text",
+      "text" : "("
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:19WebAuthenticationUI0aB0C6OptionO6PromptO",
+      "text" : "Prompt"
+    },
+    {
+      "kind" : "text",
+      "text" : ")"
+    }
+  ],
+  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/WebAuthenticationUI\/WebAuthentication\/Option\/prompt(_:)",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "WebAuthentication.Option.prompt(_:)",
+  "type" : "topic",
+  "url" : "\/documentation\/webauthenticationui\/webauthentication\/option\/prompt(_:)"
+},
+"https://developer.okta.com/docs/reference/api/oidc/#parameter-details": {
+  "identifier" : "https:\/\/developer.okta.com\/docs\/reference\/api\/oidc\/#parameter-details",
+  "title" : "API documentation for this parameter",
+  "titleInlineContent" : [
+    {
+      "text" : "API documentation for this parameter",
+      "type" : "text"
+    }
+  ],
+  "type" : "link",
+  "url" : "https:\/\/developer.okta.com\/docs\/reference\/api\/oidc\/#parameter-details"
+}
+}
+}

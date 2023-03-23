@@ -193,14 +193,28 @@
             {
               "inlineContent" : [
                 {
-                  "text" : "The configuration to use for this authentication flow.",
+                  "text" : "The redirect URI for the client.",
                   "type" : "text"
                 }
               ],
               "type" : "paragraph"
             }
           ],
-          "name" : "configuration"
+          "name" : "redirectUri"
+        },
+        {
+          "content" : [
+            {
+              "inlineContent" : [
+                {
+                  "text" : "Optional additional query string parameters you would like to supply to the authorization server.",
+                  "type" : "text"
+                }
+              ],
+              "type" : "paragraph"
+            }
+          ],
+          "name" : "additionalParameters"
         },
         {
           "content" : [

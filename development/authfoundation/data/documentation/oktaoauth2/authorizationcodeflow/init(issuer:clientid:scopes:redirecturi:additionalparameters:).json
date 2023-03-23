@@ -282,7 +282,7 @@
             {
               "inlineContent" : [
                 {
-                  "text" : "The client ID",
+                  "text" : "The client ID.",
                   "type" : "text"
                 }
               ],
@@ -296,7 +296,7 @@
             {
               "inlineContent" : [
                 {
-                  "text" : "The scopes to request",
+                  "text" : "The scopes to request.",
                   "type" : "text"
                 }
               ],
@@ -318,6 +318,20 @@
             }
           ],
           "name" : "redirectUri"
+        },
+        {
+          "content" : [
+            {
+              "inlineContent" : [
+                {
+                  "text" : "Optional additional query string parameters you would like to supply to the authorization server.",
+                  "type" : "text"
+                }
+              ],
+              "type" : "paragraph"
+            }
+          ],
+          "name" : "additionalParameters"
         }
       ]
     }

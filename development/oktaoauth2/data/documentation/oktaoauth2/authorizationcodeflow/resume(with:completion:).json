@@ -276,7 +276,7 @@
               "type" : "text"
             },
             {
-              "identifier" : "doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/OktaOAuth2\/AuthorizationCodeFlow\/start(with:completion:)",
+              "identifier" : "doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/OktaOAuth2\/AuthorizationCodeFlow\/start(with:additionalParameters:completion:)",
               "isActive" : true,
               "type" : "reference"
             },
@@ -615,7 +615,7 @@
   "type" : "topic",
   "url" : "\/documentation\/oktaoauth2\/authorizationcodeflow\/resume(with:completion:)"
 },
-"doc://com.okta.mobile.oktaoauth2/documentation/OktaOAuth2/AuthorizationCodeFlow/start(with:completion:)": {
+"doc://com.okta.mobile.oktaoauth2/documentation/OktaOAuth2/AuthorizationCodeFlow/start(with:additionalParameters:completion:)": {
   "abstract" : [
     {
       "text" : "Initiates an authentication flow, with an optional ",
@@ -667,6 +667,32 @@
     },
     {
       "kind" : "externalParam",
+      "text" : "additionalParameters"
+    },
+    {
+      "kind" : "text",
+      "text" : ": ["
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:SS",
+      "text" : "String"
+    },
+    {
+      "kind" : "text",
+      "text" : " : "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:SS",
+      "text" : "String"
+    },
+    {
+      "kind" : "text",
+      "text" : "]?, "
+    },
+    {
+      "kind" : "externalParam",
       "text" : "completion"
     },
     {
@@ -710,12 +736,12 @@
       "text" : ")"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/OktaOAuth2\/AuthorizationCodeFlow\/start(with:completion:)",
+  "identifier" : "doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/OktaOAuth2\/AuthorizationCodeFlow\/start(with:additionalParameters:completion:)",
   "kind" : "symbol",
   "role" : "symbol",
-  "title" : "start(with:completion:)",
+  "title" : "start(with:additionalParameters:completion:)",
   "type" : "topic",
-  "url" : "\/documentation\/oktaoauth2\/authorizationcodeflow\/start(with:completion:)"
+  "url" : "\/documentation\/oktaoauth2\/authorizationcodeflow\/start(with:additionalparameters:completion:)"
 }
 }
 }

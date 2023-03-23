@@ -62,14 +62,6 @@
           "tokens" : [
             {
               "kind" : "keyword",
-              "text" : "final"
-            },
-            {
-              "kind" : "text",
-              "text" : " "
-            },
-            {
-              "kind" : "keyword",
               "text" : "class"
             },
             {
@@ -231,8 +223,8 @@
         "doc:\/\/com.okta.mobile.authfoundation\/documentation\/OktaOAuth2\/AuthorizationCodeFlow\/reset()",
         "doc:\/\/com.okta.mobile.authfoundation\/documentation\/OktaOAuth2\/AuthorizationCodeFlow\/resume(with:)",
         "doc:\/\/com.okta.mobile.authfoundation\/documentation\/OktaOAuth2\/AuthorizationCodeFlow\/resume(with:completion:)",
-        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/OktaOAuth2\/AuthorizationCodeFlow\/start(with:)",
-        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/OktaOAuth2\/AuthorizationCodeFlow\/start(with:completion:)"
+        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/OktaOAuth2\/AuthorizationCodeFlow\/start(with:additionalParameters:)",
+        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/OktaOAuth2\/AuthorizationCodeFlow\/start(with:additionalParameters:completion:)"
       ],
       "title" : "Instance Methods"
     },
@@ -1319,7 +1311,7 @@
   "type" : "topic",
   "url" : "\/documentation\/oktaoauth2\/authorizationcodeflow\/resume(with:completion:)"
 },
-"doc://com.okta.mobile.authfoundation/documentation/OktaOAuth2/AuthorizationCodeFlow/start(with:)": {
+"doc://com.okta.mobile.authfoundation/documentation/OktaOAuth2/AuthorizationCodeFlow/start(with:additionalParameters:)": {
   "abstract" : [
     {
       "text" : "Asynchronously initiates an authentication flow, with an optional ",
@@ -1367,7 +1359,33 @@
     },
     {
       "kind" : "text",
-      "text" : "?) "
+      "text" : "?, "
+    },
+    {
+      "kind" : "externalParam",
+      "text" : "additionalParameters"
+    },
+    {
+      "kind" : "text",
+      "text" : ": ["
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:SS",
+      "text" : "String"
+    },
+    {
+      "kind" : "text",
+      "text" : " : "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:SS",
+      "text" : "String"
+    },
+    {
+      "kind" : "text",
+      "text" : "]?) "
     },
     {
       "kind" : "keyword",
@@ -1391,14 +1409,14 @@
       "text" : "URL"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/OktaOAuth2\/AuthorizationCodeFlow\/start(with:)",
+  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/OktaOAuth2\/AuthorizationCodeFlow\/start(with:additionalParameters:)",
   "kind" : "symbol",
   "role" : "symbol",
-  "title" : "start(with:)",
+  "title" : "start(with:additionalParameters:)",
   "type" : "topic",
-  "url" : "\/documentation\/oktaoauth2\/authorizationcodeflow\/start(with:)"
+  "url" : "\/documentation\/oktaoauth2\/authorizationcodeflow\/start(with:additionalparameters:)"
 },
-"doc://com.okta.mobile.authfoundation/documentation/OktaOAuth2/AuthorizationCodeFlow/start(with:completion:)": {
+"doc://com.okta.mobile.authfoundation/documentation/OktaOAuth2/AuthorizationCodeFlow/start(with:additionalParameters:completion:)": {
   "abstract" : [
     {
       "text" : "Initiates an authentication flow, with an optional ",
@@ -1450,6 +1468,32 @@
     },
     {
       "kind" : "externalParam",
+      "text" : "additionalParameters"
+    },
+    {
+      "kind" : "text",
+      "text" : ": ["
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:SS",
+      "text" : "String"
+    },
+    {
+      "kind" : "text",
+      "text" : " : "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:SS",
+      "text" : "String"
+    },
+    {
+      "kind" : "text",
+      "text" : "]?, "
+    },
+    {
+      "kind" : "externalParam",
       "text" : "completion"
     },
     {
@@ -1493,12 +1537,12 @@
       "text" : ")"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/OktaOAuth2\/AuthorizationCodeFlow\/start(with:completion:)",
+  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/OktaOAuth2\/AuthorizationCodeFlow\/start(with:additionalParameters:completion:)",
   "kind" : "symbol",
   "role" : "symbol",
-  "title" : "start(with:completion:)",
+  "title" : "start(with:additionalParameters:completion:)",
   "type" : "topic",
-  "url" : "\/documentation\/oktaoauth2\/authorizationcodeflow\/start(with:completion:)"
+  "url" : "\/documentation\/oktaoauth2\/authorizationcodeflow\/start(with:additionalparameters:completion:)"
 },
 "doc://com.okta.mobile.authfoundation/documentation/OktaOAuth2/AuthorizationCodeFlowDelegate": {
   "abstract" : [

@@ -71,6 +71,63 @@
           "type" : "paragraph"
         },
         {
+          "anchor" : "signIn-and-signOut-Options",
+          "level" : 2,
+          "text" : "signIn and signOut Options",
+          "type" : "heading"
+        },
+        {
+          "inlineContent" : [
+            {
+              "text" : "The simplest approach to customizing your authorization URL is by specifying options when invoking the ",
+              "type" : "text"
+            },
+            {
+              "identifier" : "doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/WebAuthenticationUI\/WebAuthentication\/signIn(from:options:)",
+              "isActive" : true,
+              "type" : "reference"
+            },
+            {
+              "text" : " or ",
+              "type" : "text"
+            },
+            {
+              "identifier" : "doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/WebAuthenticationUI\/WebAuthentication\/signOut(from:credential:options:)",
+              "isActive" : true,
+              "type" : "reference"
+            },
+            {
+              "text" : " functions. These options are defined in the ",
+              "type" : "text"
+            },
+            {
+              "identifier" : "doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/WebAuthenticationUI\/WebAuthentication\/Option",
+              "isActive" : true,
+              "type" : "reference"
+            },
+            {
+              "text" : " enumeration, and gives you control over the behavior of the sign-in experience within the browser.",
+              "type" : "text"
+            }
+          ],
+          "type" : "paragraph"
+        },
+        {
+          "code" : [
+            "let auth = WebAuthentication(issuer: issuer,",
+            "                             clientId: clientId,",
+            "                             scopes: \"openid profile offline_access\",",
+            "                             redirectUri: redirectUri)",
+            "let token = try await auth.signIn(from: view.window,",
+            "                                  options: [",
+            "                                      .login(hint: \"user@example.com\"),",
+            "                                      .prompt(.login),",
+            "                                  ])"
+          ],
+          "syntax" : "swift",
+          "type" : "codeListing"
+        },
+        {
           "anchor" : "Query-String-Parameters",
           "level" : 2,
           "text" : "Query String Parameters",
@@ -79,7 +136,7 @@
         {
           "inlineContent" : [
             {
-              "text" : "The simplest approach to customizing your authorization URL is adding additional parameters to the query string. These values can be supplied to the initializer, either through the ",
+              "text" : "Another approach to customizing your authorization URL is through adding additional parameters to the query string. These values can be supplied to the initializer through the ",
               "type" : "text"
             },
             {
@@ -88,7 +145,7 @@
               "type" : "reference"
             },
             {
-              "text" : " initializer, or through the ",
+              "text" : " initializer or through the ",
               "type" : "text"
             },
             {
@@ -105,7 +162,34 @@
               "type" : "reference"
             },
             {
-              "text" : " for more information).",
+              "text" : " for more information), or by when invoking the ",
+              "type" : "text"
+            },
+            {
+              "identifier" : "doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/WebAuthenticationUI\/WebAuthentication\/signIn(from:options:)",
+              "isActive" : true,
+              "type" : "reference"
+            },
+            {
+              "text" : " or ",
+              "type" : "text"
+            },
+            {
+              "identifier" : "doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/WebAuthenticationUI\/WebAuthentication\/signOut(from:credential:options:)",
+              "isActive" : true,
+              "type" : "reference"
+            },
+            {
+              "text" : " functions.",
+              "type" : "text"
+            }
+          ],
+          "type" : "paragraph"
+        },
+        {
+          "inlineContent" : [
+            {
+              "text" : "When passing values to the initializer, you can supply raw string key\/value pairs.",
               "type" : "text"
             }
           ],
@@ -309,6 +393,40 @@
   "type" : "topic",
   "url" : "\/documentation\/webauthenticationui\/webauthentication"
 },
+"doc://com.okta.mobile.webauthenticationui/documentation/WebAuthenticationUI/WebAuthentication/Option": {
+  "abstract" : [
+    {
+      "text" : "Describes available options for customizing the sign on process.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "enum"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "Option"
+    }
+  ],
+  "identifier" : "doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/WebAuthenticationUI\/WebAuthentication\/Option",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "Option"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "WebAuthentication.Option",
+  "type" : "topic",
+  "url" : "\/documentation\/webauthenticationui\/webauthentication\/option"
+},
 "doc://com.okta.mobile.webauthenticationui/documentation/WebAuthenticationUI/WebAuthentication/init(issuer:clientId:scopes:redirectUri:logoutRedirectUri:additionalParameters:)": {
   "abstract" : [
     {
@@ -444,6 +562,93 @@
   "type" : "topic",
   "url" : "\/documentation\/webauthenticationui\/webauthentication\/init(issuer:clientid:scopes:redirecturi:logoutredirecturi:additionalparameters:)"
 },
+"doc://com.okta.mobile.webauthenticationui/documentation/WebAuthenticationUI/WebAuthentication/signIn(from:options:)": {
+  "abstract" : [
+    {
+      "text" : "Asynchronously initiates authentication from the given window.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "func"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "signIn"
+    },
+    {
+      "kind" : "text",
+      "text" : "("
+    },
+    {
+      "kind" : "externalParam",
+      "text" : "from"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:19WebAuthenticationUI0aB0C12WindowAnchora",
+      "text" : "WindowAnchor"
+    },
+    {
+      "kind" : "text",
+      "text" : "?, "
+    },
+    {
+      "kind" : "externalParam",
+      "text" : "options"
+    },
+    {
+      "kind" : "text",
+      "text" : ": ["
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:19WebAuthenticationUI0aB0C6OptionO",
+      "text" : "Option"
+    },
+    {
+      "kind" : "text",
+      "text" : "]?) "
+    },
+    {
+      "kind" : "keyword",
+      "text" : "async"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "keyword",
+      "text" : "throws"
+    },
+    {
+      "kind" : "text",
+      "text" : " -> "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:14AuthFoundation5TokenC",
+      "text" : "Token"
+    }
+  ],
+  "identifier" : "doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/WebAuthenticationUI\/WebAuthentication\/signIn(from:options:)",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "signIn(from:options:)",
+  "type" : "topic",
+  "url" : "\/documentation\/webauthenticationui\/webauthentication\/signin(from:options:)"
+},
 "doc://com.okta.mobile.webauthenticationui/documentation/WebAuthenticationUI/WebAuthentication/signInFlow": {
   "abstract" : [
     {
@@ -480,6 +685,101 @@
   "title" : "signInFlow",
   "type" : "topic",
   "url" : "\/documentation\/webauthenticationui\/webauthentication\/signinflow"
+},
+"doc://com.okta.mobile.webauthenticationui/documentation/WebAuthenticationUI/WebAuthentication/signOut(from:credential:options:)": {
+  "abstract" : [
+    {
+      "text" : "Asynchronous convenience method that initiates log-out using the credential object, throwing the error if fails.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "func"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "signOut"
+    },
+    {
+      "kind" : "text",
+      "text" : "("
+    },
+    {
+      "kind" : "externalParam",
+      "text" : "from"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:19WebAuthenticationUI0aB0C12WindowAnchora",
+      "text" : "WindowAnchor"
+    },
+    {
+      "kind" : "text",
+      "text" : "?, "
+    },
+    {
+      "kind" : "externalParam",
+      "text" : "credential"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:14AuthFoundation10CredentialC",
+      "text" : "Credential"
+    },
+    {
+      "kind" : "text",
+      "text" : "?, "
+    },
+    {
+      "kind" : "externalParam",
+      "text" : "options"
+    },
+    {
+      "kind" : "text",
+      "text" : ": ["
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:19WebAuthenticationUI0aB0C6OptionO",
+      "text" : "Option"
+    },
+    {
+      "kind" : "text",
+      "text" : "]?) "
+    },
+    {
+      "kind" : "keyword",
+      "text" : "async"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "keyword",
+      "text" : "throws"
+    }
+  ],
+  "identifier" : "doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/WebAuthenticationUI\/WebAuthentication\/signOut(from:credential:options:)",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "signOut(from:credential:options:)",
+  "type" : "topic",
+  "url" : "\/documentation\/webauthenticationui\/webauthentication\/signout(from:credential:options:)"
 }
 }
 }

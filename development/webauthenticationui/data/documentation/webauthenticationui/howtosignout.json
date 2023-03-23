@@ -176,9 +176,8 @@
               "type" : "text"
             },
             {
-              "identifier" : "doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/WebAuthenticationUI\/WebAuthentication\/signOut(from:credential:)",
-              "isActive" : true,
-              "type" : "reference"
+              "code" : "WebAuthentication\/signOut(from:credential:)",
+              "type" : "codeVoice"
             },
             {
               "text" : " to sign your user out.  In this scenario, no browser session is stored within the browser’s cookie storage.",
@@ -273,8 +272,8 @@
     {
       "generated" : true,
       "identifiers" : [
-        "doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/WebAuthenticationUI\/WebAuthentication\/signOut(from:credential:)",
-        "doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/WebAuthenticationUI\/WebAuthentication\/signOut(from:credential:completion:)"
+        "doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/WebAuthenticationUI\/WebAuthentication\/signOut(from:credential:options:)",
+        "doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/WebAuthenticationUI\/WebAuthentication\/signOut(from:credential:options:completion:)"
       ],
       "title" : "Sign Out Using Credential"
     }
@@ -392,7 +391,7 @@
   "type" : "topic",
   "url" : "\/documentation\/webauthenticationui\/webauthentication\/ephemeralsession"
 },
-"doc://com.okta.mobile.webauthenticationui/documentation/WebAuthenticationUI/WebAuthentication/signOut(from:credential:)": {
+"doc://com.okta.mobile.webauthenticationui/documentation/WebAuthenticationUI/WebAuthentication/signOut(from:credential:options:)": {
   "abstract" : [
     {
       "text" : "Asynchronous convenience method that initiates log-out using the credential object, throwing the error if fails.",
@@ -448,7 +447,24 @@
     },
     {
       "kind" : "text",
-      "text" : "?) "
+      "text" : "?, "
+    },
+    {
+      "kind" : "externalParam",
+      "text" : "options"
+    },
+    {
+      "kind" : "text",
+      "text" : ": ["
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:19WebAuthenticationUI0aB0C6OptionO",
+      "text" : "Option"
+    },
+    {
+      "kind" : "text",
+      "text" : "]?) "
     },
     {
       "kind" : "keyword",
@@ -463,14 +479,14 @@
       "text" : "throws"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/WebAuthenticationUI\/WebAuthentication\/signOut(from:credential:)",
+  "identifier" : "doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/WebAuthenticationUI\/WebAuthentication\/signOut(from:credential:options:)",
   "kind" : "symbol",
   "role" : "symbol",
-  "title" : "signOut(from:credential:)",
+  "title" : "signOut(from:credential:options:)",
   "type" : "topic",
-  "url" : "\/documentation\/webauthenticationui\/webauthentication\/signout(from:credential:)"
+  "url" : "\/documentation\/webauthenticationui\/webauthentication\/signout(from:credential:options:)"
 },
-"doc://com.okta.mobile.webauthenticationui/documentation/WebAuthenticationUI/WebAuthentication/signOut(from:credential:completion:)": {
+"doc://com.okta.mobile.webauthenticationui/documentation/WebAuthenticationUI/WebAuthentication/signOut(from:credential:options:completion:)": {
   "abstract" : [
     {
       "text" : "Starts log-out using the credential.",
@@ -530,6 +546,23 @@
     },
     {
       "kind" : "externalParam",
+      "text" : "options"
+    },
+    {
+      "kind" : "text",
+      "text" : ": ["
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:19WebAuthenticationUI0aB0C6OptionO",
+      "text" : "Option"
+    },
+    {
+      "kind" : "text",
+      "text" : "]?, "
+    },
+    {
+      "kind" : "externalParam",
       "text" : "completion"
     },
     {
@@ -573,12 +606,12 @@
       "text" : ")"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/WebAuthenticationUI\/WebAuthentication\/signOut(from:credential:completion:)",
+  "identifier" : "doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/WebAuthenticationUI\/WebAuthentication\/signOut(from:credential:options:completion:)",
   "kind" : "symbol",
   "role" : "symbol",
-  "title" : "signOut(from:credential:completion:)",
+  "title" : "signOut(from:credential:options:completion:)",
   "type" : "topic",
-  "url" : "\/documentation\/webauthenticationui\/webauthentication\/signout(from:credential:completion:)"
+  "url" : "\/documentation\/webauthenticationui\/webauthentication\/signout(from:credential:options:completion:)"
 }
 }
 }

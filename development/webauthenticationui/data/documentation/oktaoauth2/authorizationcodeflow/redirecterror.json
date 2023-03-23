@@ -93,7 +93,7 @@
               "type" : "text"
             },
             {
-              "identifier" : "doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/OktaOAuth2\/AuthorizationCodeFlow\/start(with:completion:)",
+              "identifier" : "doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/OktaOAuth2\/AuthorizationCodeFlow\/start(with:additionalParameters:completion:)",
               "isActive" : true,
               "type" : "reference"
             },
@@ -102,7 +102,7 @@
               "type" : "text"
             },
             {
-              "identifier" : "doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/OktaOAuth2\/AuthorizationCodeFlow\/start(with:)",
+              "identifier" : "doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/OktaOAuth2\/AuthorizationCodeFlow\/start(with:additionalParameters:)",
               "isActive" : true,
               "type" : "reference"
             },
@@ -121,6 +121,7 @@
     {
       "identifiers" : [
         "doc:\/\/com.okta.mobile.webauthenticationui\/10Foundation14LocalizedErrorP",
+        "doc:\/\/com.okta.mobile.webauthenticationui\/SQ",
         "doc:\/\/com.okta.mobile.webauthenticationui\/s5ErrorP",
         "doc:\/\/com.okta.mobile.webauthenticationui\/s8SendableP"
       ],
@@ -151,6 +152,7 @@
     {
       "generated" : true,
       "identifiers" : [
+        "doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/OktaOAuth2\/AuthorizationCodeFlow\/RedirectError\/Equatable-Implementations",
         "doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/OktaOAuth2\/AuthorizationCodeFlow\/RedirectError\/Error-Implementations",
         "doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/OktaOAuth2\/AuthorizationCodeFlow\/RedirectError\/LocalizedError-Implementations"
       ],
@@ -174,6 +176,11 @@
 "doc://com.okta.mobile.webauthenticationui/10Foundation14LocalizedErrorP": {
   "identifier" : "doc:\/\/com.okta.mobile.webauthenticationui\/10Foundation14LocalizedErrorP",
   "title" : "Foundation.LocalizedError",
+  "type" : "unresolvable"
+},
+"doc://com.okta.mobile.webauthenticationui/SQ": {
+  "identifier" : "doc:\/\/com.okta.mobile.webauthenticationui\/SQ",
+  "title" : "Swift.Equatable",
   "type" : "unresolvable"
 },
 "doc://com.okta.mobile.webauthenticationui/documentation/OktaOAuth2": {
@@ -288,6 +295,17 @@
   "title" : "AuthorizationCodeFlow.RedirectError",
   "type" : "topic",
   "url" : "\/documentation\/oktaoauth2\/authorizationcodeflow\/redirecterror"
+},
+"doc://com.okta.mobile.webauthenticationui/documentation/OktaOAuth2/AuthorizationCodeFlow/RedirectError/Equatable-Implementations": {
+  "abstract" : [
+
+  ],
+  "identifier" : "doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/OktaOAuth2\/AuthorizationCodeFlow\/RedirectError\/Equatable-Implementations",
+  "kind" : "article",
+  "role" : "collectionGroup",
+  "title" : "Equatable Implementations",
+  "type" : "topic",
+  "url" : "\/documentation\/oktaoauth2\/authorizationcodeflow\/redirecterror\/equatable-implementations"
 },
 "doc://com.okta.mobile.webauthenticationui/documentation/OktaOAuth2/AuthorizationCodeFlow/RedirectError/Error-Implementations": {
   "abstract" : [
@@ -462,7 +480,7 @@
   "type" : "topic",
   "url" : "\/documentation\/oktaoauth2\/authorizationcodeflow\/redirecterror\/unexpectedscheme(_:)"
 },
-"doc://com.okta.mobile.webauthenticationui/documentation/OktaOAuth2/AuthorizationCodeFlow/start(with:)": {
+"doc://com.okta.mobile.webauthenticationui/documentation/OktaOAuth2/AuthorizationCodeFlow/start(with:additionalParameters:)": {
   "abstract" : [
     {
       "text" : "Asynchronously initiates an authentication flow, with an optional ",
@@ -510,7 +528,33 @@
     },
     {
       "kind" : "text",
-      "text" : "?) "
+      "text" : "?, "
+    },
+    {
+      "kind" : "externalParam",
+      "text" : "additionalParameters"
+    },
+    {
+      "kind" : "text",
+      "text" : ": ["
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:SS",
+      "text" : "String"
+    },
+    {
+      "kind" : "text",
+      "text" : " : "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:SS",
+      "text" : "String"
+    },
+    {
+      "kind" : "text",
+      "text" : "]?) "
     },
     {
       "kind" : "keyword",
@@ -534,14 +578,14 @@
       "text" : "URL"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/OktaOAuth2\/AuthorizationCodeFlow\/start(with:)",
+  "identifier" : "doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/OktaOAuth2\/AuthorizationCodeFlow\/start(with:additionalParameters:)",
   "kind" : "symbol",
   "role" : "symbol",
-  "title" : "start(with:)",
+  "title" : "start(with:additionalParameters:)",
   "type" : "topic",
-  "url" : "\/documentation\/oktaoauth2\/authorizationcodeflow\/start(with:)"
+  "url" : "\/documentation\/oktaoauth2\/authorizationcodeflow\/start(with:additionalparameters:)"
 },
-"doc://com.okta.mobile.webauthenticationui/documentation/OktaOAuth2/AuthorizationCodeFlow/start(with:completion:)": {
+"doc://com.okta.mobile.webauthenticationui/documentation/OktaOAuth2/AuthorizationCodeFlow/start(with:additionalParameters:completion:)": {
   "abstract" : [
     {
       "text" : "Initiates an authentication flow, with an optional ",
@@ -593,6 +637,32 @@
     },
     {
       "kind" : "externalParam",
+      "text" : "additionalParameters"
+    },
+    {
+      "kind" : "text",
+      "text" : ": ["
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:SS",
+      "text" : "String"
+    },
+    {
+      "kind" : "text",
+      "text" : " : "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:SS",
+      "text" : "String"
+    },
+    {
+      "kind" : "text",
+      "text" : "]?, "
+    },
+    {
+      "kind" : "externalParam",
       "text" : "completion"
     },
     {
@@ -636,12 +706,12 @@
       "text" : ")"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/OktaOAuth2\/AuthorizationCodeFlow\/start(with:completion:)",
+  "identifier" : "doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/OktaOAuth2\/AuthorizationCodeFlow\/start(with:additionalParameters:completion:)",
   "kind" : "symbol",
   "role" : "symbol",
-  "title" : "start(with:completion:)",
+  "title" : "start(with:additionalParameters:completion:)",
   "type" : "topic",
-  "url" : "\/documentation\/oktaoauth2\/authorizationcodeflow\/start(with:completion:)"
+  "url" : "\/documentation\/oktaoauth2\/authorizationcodeflow\/start(with:additionalparameters:completion:)"
 },
 "doc://com.okta.mobile.webauthenticationui/s5ErrorP": {
   "identifier" : "doc:\/\/com.okta.mobile.webauthenticationui\/s5ErrorP",
