@@ -19,6 +19,17 @@ final class TokenTests: XCTestCase {
                                                    clientId: "clientid",
                                                    scopes: "openid")
     
+    override func setUpWithError() throws {
+        JWK.validator = MockJWKValidator()
+        Token.idTokenValidator = MockIDTokenValidator()
+        Token.accessTokenValidator = MockTokenHashValidator()
+    }
+    
+    override func tearDownWithError() throws {
+        JWK.resetToDefault()
+        Token.resetToDefault()
+    }
+    
     func testTokenContextNilSettings() throws {
         let context = Token.Context(configuration: configuration, clientSettings: nil)
         XCTAssertEqual(context.configuration, configuration)
@@ -98,5 +109,63 @@ final class TokenTests: XCTestCase {
         token1 = Token.mockToken(deviceSecret: "First")
         token2 = Token.mockToken(deviceSecret: "Second")
         XCTAssertNotEqual(token1, token2)
+    }
+
+    func testTokenFromRefreshToken() throws {
+        let client = try mockClient()
+        
+        var tokenResult: Token?
+        let wait = expectation(description: "Token exchange")
+        Token.from(refreshToken: "the_refresh_token", using: client) { result in
+            switch result {
+            case .success(let success):
+                tokenResult = success
+            case .failure(let failure):
+                XCTAssertNil(failure)
+            }
+            wait.fulfill()
+        }
+        waitForExpectations(timeout: 1)
+        
+        let token = try XCTUnwrap(tokenResult)
+        
+        XCTAssertEqual(token.token(of: .accessToken), String.mockAccessToken)
+        XCTAssertNotEqual(token.id, Token.RefreshRequest.placeholderId)
+    }
+    
+    #if swift(>=5.5.1)
+    @available(iOS 15.0, tvOS 15.0, macOS 12.0, watchOS 8, *)
+    func testTokenFromRefreshTokenAsync() async throws {
+        let client = try mockClient()
+        let token = try await Token.from(refreshToken: "the_refresh_token", using: client)
+        XCTAssertEqual(token.token(of: .accessToken), String.mockAccessToken)
+        XCTAssertNotEqual(token.id, Token.RefreshRequest.placeholderId)
+    }
+    #endif
+    
+    func mockClient() throws -> OAuth2Client {
+        let urlSession = URLSessionMock()
+        urlSession.expect("https://example.com/.well-known/openid-configuration",
+                          data: try data(from: .module, for: "openid-configuration", in: "MockResponses"),
+                          contentType: "application/json")
+        urlSession.expect("https://example.com/oauth2/v1/keys?client_id=clientId",
+                          data: try data(from: .module, for: "keys", in: "MockResponses"),
+                          contentType: "application/json")
+        urlSession.expect("https://example.com/oauth2/v1/token",
+                          data: data(for: """
+            {
+               "token_type": "Bearer",
+               "expires_in": 3000,
+               "access_token": "\(String.mockAccessToken)",
+               "scope": "openid profile offline_access",
+               "refresh_token": "therefreshtoken",
+               "id_token": "\(String.mockIdToken)"
+             }
+            """))
+        
+        return OAuth2Client(baseURL: URL(string: "https://example.com/")!,
+                            clientId: "clientId",
+                            scopes: "openid profile offline_access",
+                            session: urlSession)
     }
 }

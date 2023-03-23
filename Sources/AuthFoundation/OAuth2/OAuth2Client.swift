@@ -232,11 +232,19 @@ public final class OAuth2Client {
         guard let action = token.refreshAction else { return }
         
         delegateCollection.invoke { $0.oauth(client: self, willRefresh: token) }
+        guard let refreshToken = token.refreshToken else {
+            action.finish(.failure(.missingToken(type: .refreshToken)))
+            token.refreshAction = nil
+            return
+        }
+        
         openIdConfiguration { result in
             switch result {
             case .success(let configuration):
                 let request = Token.RefreshRequest(openIdConfiguration: configuration,
-                                                   token: token,
+                                                   clientId: self.configuration.clientId,
+                                                   refreshToken: refreshToken,
+                                                   id: token.id,
                                                    configuration: clientSettings)
                 request.send(to: self) { result in
                     self.refreshQueue.sync(flags: .barrier) {
