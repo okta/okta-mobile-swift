@@ -12,6 +12,25 @@
 
 import Foundation
 
+extension AuthorizationCodeFlow.RedirectError {
+    public static func == (lhs: Self, rhs: Self) -> Bool {
+        switch (lhs, rhs) {
+        case (.invalidRedirectUrl, .invalidRedirectUrl): return true
+        case (.missingQueryArguments, .missingQueryArguments): return true
+        case (.missingAuthorizationCode, .missingAuthorizationCode): return true
+            
+        case (.unexpectedScheme(let lhsValue), .unexpectedScheme(let rhsValue)):
+            return lhsValue == rhsValue
+            
+        case (.invalidState(let lhsValue), .invalidState(let rhsValue)):
+            return lhsValue == rhsValue
+            
+        default:
+            return false
+        }
+    }
+}
+    
 extension AuthenticationError: LocalizedError {
     public var errorDescription: String? {
         switch self {

@@ -59,6 +59,54 @@ public class WebAuthentication {
     public typealias WindowAnchor = UIWindow
     #endif
     
+    /// Describes available options for customizing the sign on process.
+    public enum Option {
+        /// The username to pre-populate if prompting for authentication.
+        case login(hint: String)
+        
+        /// Value passed to the Social IdP when performing social login.
+        case display(String)
+        
+        /// Allowable elapsed time since the user was last authenticated.
+        case maxAge(TimeInterval)
+        
+        /// Specify a custom state to use when authorizing.
+        ///
+        /// If this value is not specified, one will be automatically generated.
+        case state(String)
+
+        /// Identity Provider to use if there's no Okta session.
+        case idp(url: URL)
+
+        /// Identity Provider to use if there's no Okta session.
+        case idpScope(String)
+        
+        /// Control how the user is prompted when authentication starts.
+        ///
+        /// > Note: The default behavior is ``Prompt/none``.
+        case prompt(Prompt)
+        
+        /// Supply a custom key/value pair to the authorization server.
+        case custom(key: String, value: String)
+        
+        /// Defines how a user will be prompted to sign in.
+        ///
+        /// This is used with the ``WebAuthentication/Option/prompt(_:)`` enumeration. For more information, see the [API documentation for this parameter](https://developer.okta.com/docs/reference/api/oidc/#parameter-details).
+        public enum Prompt: String {
+            /// If an Okta session already exists, the user is silently authenticated. Otherwise, the user is prompted to authenticate.
+            case none
+            
+            /// Display the Okta consent dialog, even if the user has already given consent.
+            case consent
+            
+            /// Always prompt the user for authentication.
+            case login
+            
+            /// The user is always prompted for authentication, and the user consent dialog appears.
+            case loginAndConsent = "login consent"
+        }
+    }
+    
     /// Active / default shared instance of the ``WebAuthentication`` session.
     ///
     /// This convenience property can be used in one of two ways:
@@ -89,7 +137,12 @@ public class WebAuthentication {
     /// Context information about the current authorization code flow.
     ///
     /// This represents the state and other challenge data necessary to resume the authentication flow.
-    public let context: AuthorizationCodeFlow.Context?
+    ///
+    /// > Warning: This is deprecated, and will be removed in a future release.
+    @available(*, deprecated, renamed: "signInFlow.context")
+    public var context: AuthorizationCodeFlow.Context? {
+        signInFlow.context
+    }
     
     /// Indicates whether or not the developer prefers an ephemeral browser session, or if the user's browser state should be shared with the system browser.
     public var ephemeralSession: Bool = false
@@ -97,8 +150,12 @@ public class WebAuthentication {
     /// Starts sign-in using the configured client.
     /// - Parameters:
     ///   - window: Window from which the sign in process will be started.
+    ///   - options: Options to add to the authorization URL.
     ///   - completion: Completion block that will be invoked when authentication finishes.
-    public final func signIn(from window: WindowAnchor?, completion: @escaping (Result<Token, WebAuthenticationError>) -> Void) {
+    public final func signIn(from window: WindowAnchor?,
+                             options: [Option]? = nil,
+                             completion: @escaping (Result<Token, WebAuthenticationError>) -> Void)
+    {
         if provider != nil {
             cancel()
         }
@@ -110,43 +167,59 @@ public class WebAuthentication {
         self.completionBlock = completion
         self.provider = provider
 
-        provider?.start(context: context)
+        provider?.start(context: options?.context,
+                        additionalParameters: options?.additionalParameters)
     }
     
     /// Starts log-out using the credential.
     /// - Parameters:
     ///   - window: Window from which the sign in process will be started.
     ///   - credential: Stored credentials that will retrieve the ID token.
+    ///   - options: Options to add to the authorization URL.
     ///   - completion: Completion block that will be invoked when log-out finishes.
-    public final func signOut(from window: WindowAnchor? = nil, credential: Credential? = .default, completion: @escaping (Result<Void, WebAuthenticationError>) -> Void) {
+    public final func signOut(from window: WindowAnchor? = nil,
+                              credential: Credential? = .default,
+                              options: [Option]? = nil,
+                              completion: @escaping (Result<Void, WebAuthenticationError>) -> Void)
+    {
         guard let token = credential?.token else {
             completion(.failure(.missingIdToken))
             return
         }
         
-        signOut(from: window, token: token, completion: completion)
+        signOut(from: window, token: token, options: options, completion: completion)
     }
     
     /// Starts log-out using the `Token` object.
     /// - Parameters:
     ///   - window: Window from which the sign in process will be started.
     ///   - token: Token object that will retrieve the ID token.
+    ///   - options: Options to add to the authorization URL.
     ///   - completion: Completion block that will be invoked when sign-out finishes.
-    public final func signOut(from window: WindowAnchor? = nil, token: Token, completion: @escaping (Result<Void, WebAuthenticationError>) -> Void) {
+    public final func signOut(from window: WindowAnchor? = nil,
+                              token: Token,
+                              options: [Option]? = nil,
+                              completion: @escaping (Result<Void, WebAuthenticationError>) -> Void)
+    {
         guard let idToken = token.idToken else {
             completion(.failure(.missingIdToken))
             return
         }
         
-        signOut(from: window, token: idToken.rawValue, completion: completion)
+        signOut(from: window, token: idToken.rawValue, options: options, completion: completion)
     }
 
     /// Starts log-out using the ID token.
     /// - Parameters:
     ///   - window: Window from which the sign in process will be started.
     ///   - token: The ID token string used for log-out.
+    ///   - options: Options to add to the authorization URL.
     ///   - completion: Completion block that will be invoked when sign-out finishes.
-    public final func signOut(from window: WindowAnchor? = nil, token: String, completion: @escaping (Result<Void, WebAuthenticationError>) -> Void) {
+    public final func signOut(from window: WindowAnchor? = nil,
+                              token: String,
+                              options: [Option]? = nil,
+                              completion: @escaping (Result<Void, WebAuthenticationError>) -> Void)
+    {
         var provider = provider
         
         if provider != nil {
@@ -161,8 +234,10 @@ public class WebAuthentication {
         self.logoutCompletionBlock = completion
         self.provider = provider
         
-        let context = SessionLogoutFlow.Context(idToken: token)
-        provider?.logout(context: context)
+        let context = SessionLogoutFlow.Context(idToken: token,
+                                                state: options?.state)
+        provider?.logout(context: context,
+                         additionalParameters: options?.additionalParameters)
     }
     
     /// Cancels the authentication session.
@@ -239,7 +314,9 @@ public class WebAuthentication {
         
         let logoutFlow: SessionLogoutFlow?
         if let logoutRedirectUri = logoutRedirectUri {
-            logoutFlow = SessionLogoutFlow(logoutRedirectUri: logoutRedirectUri, client: client)
+            logoutFlow = SessionLogoutFlow(logoutRedirectUri: logoutRedirectUri,
+                                           additionalParameters: additionalParameters,
+                                           client: client)
         } else {
             logoutFlow = nil
         }
@@ -247,8 +324,7 @@ public class WebAuthentication {
         self.init(loginFlow: AuthorizationCodeFlow(redirectUri: redirectUri,
                                                    additionalParameters: additionalParameters,
                                                    client: client),
-                  logoutFlow: logoutFlow,
-                  context: nil)
+                  logoutFlow: logoutFlow)
     }
     
     convenience init(_ config: OAuth2Client.PropertyListConfiguration) throws {
@@ -299,13 +375,24 @@ public class WebAuthentication {
     /// - Parameters:
     ///   - flow: Authorization code flow instance for this client.
     ///   - context: Optional context to initialize authentication with.
-    public init(loginFlow: AuthorizationCodeFlow, logoutFlow: SessionLogoutFlow?, context: AuthorizationCodeFlow.Context? = nil) {
+    ///
+    /// > Warning: This is deprecated, and will be removed in a future release.
+    @available(*, deprecated, renamed: "init(loginFlow:logoutFlow:)")
+    public convenience init(loginFlow: AuthorizationCodeFlow, logoutFlow: SessionLogoutFlow?, context: AuthorizationCodeFlow.Context?) {
+        self.init(loginFlow: loginFlow, logoutFlow: logoutFlow)
+    }
+    
+    /// Initializes a web authentication session using the supplied AuthorizationCodeFlow and optional context.
+    /// - Parameters:
+    ///   - flow: Authorization code flow instance for this client.
+    ///   - context: Optional context to initialize authentication with.
+    public init(loginFlow: AuthorizationCodeFlow, logoutFlow: SessionLogoutFlow?) {
         // Ensure this SDK's static version is included in the user agent.
         SDKVersion.register(sdk: Version)
         
         self.signInFlow = loginFlow
         self.signOutFlow = logoutFlow
-        self.context = context
+
         WebAuthentication.shared = self
     }
     
@@ -320,11 +407,15 @@ public class WebAuthentication {
 @available(iOS 15.0, tvOS 15.0, macOS 12.0, watchOS 8, *)
 extension WebAuthentication {
     /// Asynchronously initiates authentication from the given window.
-    /// - Parameter window: The window from which the authentication browser should be shown.
+    /// - Parameters:
+    ///   - window: The window from which the authentication browser should be shown.
+    ///   - options: Options to add to the authorization URL.
     /// - Returns: The token representing the signed-in user.
-    public final func signIn(from window: WindowAnchor?) async throws -> Token {
+    public final func signIn(from window: WindowAnchor?,
+                             options: [Option]? = nil) async throws -> Token
+    {
         try await withCheckedThrowingContinuation { continuation in
-            self.signIn(from: window) { continuation.resume(with: $0) }
+            self.signIn(from: window, options: options) { continuation.resume(with: $0) }
         }
     }
     
@@ -332,10 +423,13 @@ extension WebAuthentication {
     /// - Parameters:
     ///   - window: Window from which the sign in process will be started.
     ///   - credential: Stored credentials that will retrieve the ID token.
-    ///   - completion: Completion block that will be invoked when log-out finishes.
-    public final func signOut(from window: WindowAnchor?, credential: Credential? = .default) async throws {
+    ///   - options: Options to add to the authorization URL.
+    public final func signOut(from window: WindowAnchor?,
+                              credential: Credential? = .default,
+                              options: [Option]? = nil) async throws
+    {
         try await withCheckedThrowingContinuation { continuation in
-            self.signOut(from: window, credential: credential) { continuation.resume(with: $0) }
+            self.signOut(from: window, credential: credential, options: options) { continuation.resume(with: $0) }
         }
     }
     
@@ -343,10 +437,13 @@ extension WebAuthentication {
     /// - Parameters:
     ///   - window: Window from which the sign in process will be started.
     ///   - token: Token object that will retrieve the ID token.
-    ///   - completion: Completion block that will be invoked when sign-out finishes.
-    public final func signOut(from window: WindowAnchor?, token: Token) async throws {
+    ///   - options: Options to add to the authorization URL.
+    public final func signOut(from window: WindowAnchor?,
+                              token: Token,
+                              options: [Option]? = nil) async throws
+    {
         try await withCheckedThrowingContinuation { continuation in
-            self.signOut(from: window, token: token) { continuation.resume(with: $0) }
+            self.signOut(from: window, token: token, options: options) { continuation.resume(with: $0) }
         }
     }
     
@@ -354,10 +451,12 @@ extension WebAuthentication {
     /// - Parameters:
     ///   - window: Window from which the sign in process will be started.
     ///   - idToken: The ID token used for log-out.
-    ///   - completion: Completion block that will be invoked when sign-out finishes.
-    public final func signOut(from window: WindowAnchor?, token: String) async throws {
+    ///   - options: Options to add to the authorization URL.
+    public final func signOut(from window: WindowAnchor?,
+                              token: String,
+                              options: [Option]? = nil) async throws {
         try await withCheckedThrowingContinuation { continuation in
-            self.signOut(from: window, token: token) { continuation.resume(with: $0) }
+            self.signOut(from: window, token: token, options: options) { continuation.resume(with: $0) }
         }
     }
 }

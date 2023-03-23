@@ -28,7 +28,7 @@ class SafariBrowserProviderTests: ProviderTestBase {
     }
     
     func testControllerCreation() throws {
-        provider.start(context: nil)
+        provider.start(context: nil, additionalParameters: nil)
         try waitFor(.authenticateUrl)
 
         // Wait for the controller to dismiss / deallocate
