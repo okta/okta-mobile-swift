@@ -12,4 +12,4 @@
 
 import Foundation
 
-public let Version = SDKVersion(sdk: "okta-authfoundation-swift", version: "1.2.1")
+public let Version = SDKVersion(sdk: "okta-authfoundation-swift", version: "1.3.0")

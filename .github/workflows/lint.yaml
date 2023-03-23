@@ -9,8 +9,6 @@ on:
       - 'Samples/**/*.swift'
     branches: 
       - master
-      - dev-*
-      - release-*
   push:
     paths:
       - '.github/workflows/lint.yml'
@@ -19,8 +17,6 @@ on:
       - 'Samples/**/*.swift'
     branches:
       - master
-      - dev-*
-      - release-*
 
 jobs:
   SwiftLint:
