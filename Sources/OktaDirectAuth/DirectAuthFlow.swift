@@ -74,6 +74,11 @@ public final class DirectAuthenticationFlow: AuthenticationFlow {
         /// The list of possible grant types that the user can be challenged with.
         public let supportedChallengeTypes: [GrantType]?
         let mfaToken: String
+        
+        public init(supportedChallengeTypes: [GrantType]?, mfaToken: String) {
+            self.supportedChallengeTypes = supportedChallengeTypes
+            self.mfaToken = mfaToken
+        }
     }
     
     /// The current status of the authentication flow.
