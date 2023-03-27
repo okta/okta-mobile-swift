@@ -33,8 +33,8 @@ fileprivate let Mapping: [String: GrantType] = [
     "password": .password,
     "urn:ietf:params:oauth:grant-type:token-exchange": .tokenExchange,
     "urn:ietf:params:oauth:grant-type:device_code": .deviceCode,
-    "http://auth0.com/oauth/grant-type/otp": .otp,
-    "http://auth0.com/oauth/grant-type/oob": .oob,
+    "urn:okta:params:oauth:grant-type:otp": .otp,
+    "urn:okta:params:oauth:grant-type:oob": .oob,
     "http://auth0.com/oauth/grant-type/mfa-otp": .otpMFA,
     "http://auth0.com/oauth/grant-type/mfa-oob": .oobMFA
 
@@ -68,9 +68,9 @@ extension GrantType: RawRepresentable {
         case .deviceCode:
             return "urn:ietf:params:oauth:grant-type:device_code"
         case .otp:
-            return "http://auth0.com/oauth/grant-type/otp"
+            return "urn:okta:params:oauth:grant-type:otp"
         case .oob:
-            return "http://auth0.com/oauth/grant-type/oob"
+            return "urn:okta:params:oauth:grant-type:oob"
         case .otpMFA:
             return "http://auth0.com/oauth/grant-type/mfa-otp"
         case .oobMFA:
