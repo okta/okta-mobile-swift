@@ -66,4 +66,45 @@ final class JWKTests: XCTestCase {
         XCTAssertNotNil(key.rsaModulus)
         XCTAssertEqual(key.rsaExponent, "AQAB")
     }
+    
+    func testJWSAndJWEKeys() throws {
+        let keyData = data(for: """
+            {
+               "keys" : [
+                  {
+                     "alg" : "RSA-OAEP",
+                     "e" : "AQAB",
+                     "kid" : "{removed}",
+                     "kty" : "RSA",
+                     "n" : "{removed}",
+                     "use" : "enc",
+                     "x5c" : [
+                        "{removed}"
+                     ],
+                     "x5t" : "{removed}",
+                     "x5t#S256" : "{removed}"
+                  },
+                  {
+                     "alg" : "RS256",
+                     "e" : "AQAB",
+                     "kid" : "{removed}",
+                     "kty" : "RSA",
+                     "n" : "{removed}",
+                     "use" : "sig",
+                     "x5c" : [
+                        "{removed}"
+                     ],
+                     "x5t" : "{removed}",
+                     "x5t#S256" : "{removed}"
+                  }
+               ]
+            }
+        """)
+        
+        let jwks = try JSONDecoder().decode(JWKS.self, from: keyData)
+        
+        XCTAssertEqual(jwks.count, 2)
+        XCTAssertEqual(jwks[0].algorithm, .rsaOAEP)
+        XCTAssertEqual(jwks[1].algorithm, .rs256)
+    }
 }
