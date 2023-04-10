@@ -105,15 +105,36 @@
   "topicSections" : [
     {
       "identifiers" : [
+        "doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/AuthFoundation\/JWK\/Algorithm-swift.enum\/a128GCMKW",
+        "doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/AuthFoundation\/JWK\/Algorithm-swift.enum\/a128KW",
+        "doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/AuthFoundation\/JWK\/Algorithm-swift.enum\/a192GCMKW",
+        "doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/AuthFoundation\/JWK\/Algorithm-swift.enum\/a192KW",
+        "doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/AuthFoundation\/JWK\/Algorithm-swift.enum\/a256GCMKW",
+        "doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/AuthFoundation\/JWK\/Algorithm-swift.enum\/a256KW",
+        "doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/AuthFoundation\/JWK\/Algorithm-swift.enum\/dir",
+        "doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/AuthFoundation\/JWK\/Algorithm-swift.enum\/ecdhES",
+        "doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/AuthFoundation\/JWK\/Algorithm-swift.enum\/ecdhES_a128KW",
+        "doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/AuthFoundation\/JWK\/Algorithm-swift.enum\/ecdhES_a192KW",
+        "doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/AuthFoundation\/JWK\/Algorithm-swift.enum\/ecdhES_a256KW",
         "doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/AuthFoundation\/JWK\/Algorithm-swift.enum\/es256",
         "doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/AuthFoundation\/JWK\/Algorithm-swift.enum\/es384",
         "doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/AuthFoundation\/JWK\/Algorithm-swift.enum\/es512",
         "doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/AuthFoundation\/JWK\/Algorithm-swift.enum\/hs256",
         "doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/AuthFoundation\/JWK\/Algorithm-swift.enum\/hs384",
         "doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/AuthFoundation\/JWK\/Algorithm-swift.enum\/hs512",
+        "doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/AuthFoundation\/JWK\/Algorithm-swift.enum\/none",
+        "doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/AuthFoundation\/JWK\/Algorithm-swift.enum\/pbes2_HS256_A128KW",
+        "doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/AuthFoundation\/JWK\/Algorithm-swift.enum\/pbes2_HS384_A192KW",
+        "doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/AuthFoundation\/JWK\/Algorithm-swift.enum\/pbes2_HS512_A256KW",
+        "doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/AuthFoundation\/JWK\/Algorithm-swift.enum\/ps256",
+        "doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/AuthFoundation\/JWK\/Algorithm-swift.enum\/ps384",
+        "doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/AuthFoundation\/JWK\/Algorithm-swift.enum\/ps512",
         "doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/AuthFoundation\/JWK\/Algorithm-swift.enum\/rs256",
         "doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/AuthFoundation\/JWK\/Algorithm-swift.enum\/rs384",
-        "doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/AuthFoundation\/JWK\/Algorithm-swift.enum\/rs512"
+        "doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/AuthFoundation\/JWK\/Algorithm-swift.enum\/rs512",
+        "doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/AuthFoundation\/JWK\/Algorithm-swift.enum\/rsa1_5",
+        "doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/AuthFoundation\/JWK\/Algorithm-swift.enum\/rsaOAEP",
+        "doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/AuthFoundation\/JWK\/Algorithm-swift.enum\/rsaOAEP256"
       ],
       "title" : "Enumeration Cases"
     },
@@ -271,6 +292,281 @@
   "title" : "RawRepresentable Implementations",
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/jwk\/algorithm-swift.enum\/rawrepresentable-implementations"
+},
+"doc://com.okta.mobile.oktaoauth2/documentation/AuthFoundation/JWK/Algorithm-swift.enum/a128GCMKW": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "case"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "a128GCMKW"
+    }
+  ],
+  "identifier" : "doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/AuthFoundation\/JWK\/Algorithm-swift.enum\/a128GCMKW",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "JWK.Algorithm.a128GCMKW",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/jwk\/algorithm-swift.enum\/a128gcmkw"
+},
+"doc://com.okta.mobile.oktaoauth2/documentation/AuthFoundation/JWK/Algorithm-swift.enum/a128KW": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "case"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "a128KW"
+    }
+  ],
+  "identifier" : "doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/AuthFoundation\/JWK\/Algorithm-swift.enum\/a128KW",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "JWK.Algorithm.a128KW",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/jwk\/algorithm-swift.enum\/a128kw"
+},
+"doc://com.okta.mobile.oktaoauth2/documentation/AuthFoundation/JWK/Algorithm-swift.enum/a192GCMKW": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "case"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "a192GCMKW"
+    }
+  ],
+  "identifier" : "doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/AuthFoundation\/JWK\/Algorithm-swift.enum\/a192GCMKW",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "JWK.Algorithm.a192GCMKW",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/jwk\/algorithm-swift.enum\/a192gcmkw"
+},
+"doc://com.okta.mobile.oktaoauth2/documentation/AuthFoundation/JWK/Algorithm-swift.enum/a192KW": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "case"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "a192KW"
+    }
+  ],
+  "identifier" : "doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/AuthFoundation\/JWK\/Algorithm-swift.enum\/a192KW",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "JWK.Algorithm.a192KW",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/jwk\/algorithm-swift.enum\/a192kw"
+},
+"doc://com.okta.mobile.oktaoauth2/documentation/AuthFoundation/JWK/Algorithm-swift.enum/a256GCMKW": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "case"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "a256GCMKW"
+    }
+  ],
+  "identifier" : "doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/AuthFoundation\/JWK\/Algorithm-swift.enum\/a256GCMKW",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "JWK.Algorithm.a256GCMKW",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/jwk\/algorithm-swift.enum\/a256gcmkw"
+},
+"doc://com.okta.mobile.oktaoauth2/documentation/AuthFoundation/JWK/Algorithm-swift.enum/a256KW": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "case"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "a256KW"
+    }
+  ],
+  "identifier" : "doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/AuthFoundation\/JWK\/Algorithm-swift.enum\/a256KW",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "JWK.Algorithm.a256KW",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/jwk\/algorithm-swift.enum\/a256kw"
+},
+"doc://com.okta.mobile.oktaoauth2/documentation/AuthFoundation/JWK/Algorithm-swift.enum/dir": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "case"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "dir"
+    }
+  ],
+  "identifier" : "doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/AuthFoundation\/JWK\/Algorithm-swift.enum\/dir",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "JWK.Algorithm.dir",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/jwk\/algorithm-swift.enum\/dir"
+},
+"doc://com.okta.mobile.oktaoauth2/documentation/AuthFoundation/JWK/Algorithm-swift.enum/ecdhES": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "case"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "ecdhES"
+    }
+  ],
+  "identifier" : "doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/AuthFoundation\/JWK\/Algorithm-swift.enum\/ecdhES",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "JWK.Algorithm.ecdhES",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/jwk\/algorithm-swift.enum\/ecdhes"
+},
+"doc://com.okta.mobile.oktaoauth2/documentation/AuthFoundation/JWK/Algorithm-swift.enum/ecdhES_a128KW": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "case"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "ecdhES_a128KW"
+    }
+  ],
+  "identifier" : "doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/AuthFoundation\/JWK\/Algorithm-swift.enum\/ecdhES_a128KW",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "JWK.Algorithm.ecdhES_a128KW",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/jwk\/algorithm-swift.enum\/ecdhes_a128kw"
+},
+"doc://com.okta.mobile.oktaoauth2/documentation/AuthFoundation/JWK/Algorithm-swift.enum/ecdhES_a192KW": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "case"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "ecdhES_a192KW"
+    }
+  ],
+  "identifier" : "doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/AuthFoundation\/JWK\/Algorithm-swift.enum\/ecdhES_a192KW",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "JWK.Algorithm.ecdhES_a192KW",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/jwk\/algorithm-swift.enum\/ecdhes_a192kw"
+},
+"doc://com.okta.mobile.oktaoauth2/documentation/AuthFoundation/JWK/Algorithm-swift.enum/ecdhES_a256KW": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "case"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "ecdhES_a256KW"
+    }
+  ],
+  "identifier" : "doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/AuthFoundation\/JWK\/Algorithm-swift.enum\/ecdhES_a256KW",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "JWK.Algorithm.ecdhES_a256KW",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/jwk\/algorithm-swift.enum\/ecdhes_a256kw"
 },
 "doc://com.okta.mobile.oktaoauth2/documentation/AuthFoundation/JWK/Algorithm-swift.enum/es256": {
   "abstract" : [
@@ -463,6 +759,181 @@
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/jwk\/algorithm-swift.enum\/init(rawvalue:)"
 },
+"doc://com.okta.mobile.oktaoauth2/documentation/AuthFoundation/JWK/Algorithm-swift.enum/none": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "case"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "none"
+    }
+  ],
+  "identifier" : "doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/AuthFoundation\/JWK\/Algorithm-swift.enum\/none",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "JWK.Algorithm.none",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/jwk\/algorithm-swift.enum\/none"
+},
+"doc://com.okta.mobile.oktaoauth2/documentation/AuthFoundation/JWK/Algorithm-swift.enum/pbes2_HS256_A128KW": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "case"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "pbes2_HS256_A128KW"
+    }
+  ],
+  "identifier" : "doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/AuthFoundation\/JWK\/Algorithm-swift.enum\/pbes2_HS256_A128KW",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "JWK.Algorithm.pbes2_HS256_A128KW",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/jwk\/algorithm-swift.enum\/pbes2_hs256_a128kw"
+},
+"doc://com.okta.mobile.oktaoauth2/documentation/AuthFoundation/JWK/Algorithm-swift.enum/pbes2_HS384_A192KW": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "case"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "pbes2_HS384_A192KW"
+    }
+  ],
+  "identifier" : "doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/AuthFoundation\/JWK\/Algorithm-swift.enum\/pbes2_HS384_A192KW",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "JWK.Algorithm.pbes2_HS384_A192KW",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/jwk\/algorithm-swift.enum\/pbes2_hs384_a192kw"
+},
+"doc://com.okta.mobile.oktaoauth2/documentation/AuthFoundation/JWK/Algorithm-swift.enum/pbes2_HS512_A256KW": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "case"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "pbes2_HS512_A256KW"
+    }
+  ],
+  "identifier" : "doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/AuthFoundation\/JWK\/Algorithm-swift.enum\/pbes2_HS512_A256KW",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "JWK.Algorithm.pbes2_HS512_A256KW",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/jwk\/algorithm-swift.enum\/pbes2_hs512_a256kw"
+},
+"doc://com.okta.mobile.oktaoauth2/documentation/AuthFoundation/JWK/Algorithm-swift.enum/ps256": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "case"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "ps256"
+    }
+  ],
+  "identifier" : "doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/AuthFoundation\/JWK\/Algorithm-swift.enum\/ps256",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "JWK.Algorithm.ps256",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/jwk\/algorithm-swift.enum\/ps256"
+},
+"doc://com.okta.mobile.oktaoauth2/documentation/AuthFoundation/JWK/Algorithm-swift.enum/ps384": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "case"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "ps384"
+    }
+  ],
+  "identifier" : "doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/AuthFoundation\/JWK\/Algorithm-swift.enum\/ps384",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "JWK.Algorithm.ps384",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/jwk\/algorithm-swift.enum\/ps384"
+},
+"doc://com.okta.mobile.oktaoauth2/documentation/AuthFoundation/JWK/Algorithm-swift.enum/ps512": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "case"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "ps512"
+    }
+  ],
+  "identifier" : "doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/AuthFoundation\/JWK\/Algorithm-swift.enum\/ps512",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "JWK.Algorithm.ps512",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/jwk\/algorithm-swift.enum\/ps512"
+},
 "doc://com.okta.mobile.oktaoauth2/documentation/AuthFoundation/JWK/Algorithm-swift.enum/rs256": {
   "abstract" : [
 
@@ -537,6 +1008,81 @@
   "title" : "JWK.Algorithm.rs512",
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/jwk\/algorithm-swift.enum\/rs512"
+},
+"doc://com.okta.mobile.oktaoauth2/documentation/AuthFoundation/JWK/Algorithm-swift.enum/rsa1_5": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "case"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "rsa1_5"
+    }
+  ],
+  "identifier" : "doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/AuthFoundation\/JWK\/Algorithm-swift.enum\/rsa1_5",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "JWK.Algorithm.rsa1_5",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/jwk\/algorithm-swift.enum\/rsa1_5"
+},
+"doc://com.okta.mobile.oktaoauth2/documentation/AuthFoundation/JWK/Algorithm-swift.enum/rsaOAEP": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "case"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "rsaOAEP"
+    }
+  ],
+  "identifier" : "doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/AuthFoundation\/JWK\/Algorithm-swift.enum\/rsaOAEP",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "JWK.Algorithm.rsaOAEP",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/jwk\/algorithm-swift.enum\/rsaoaep"
+},
+"doc://com.okta.mobile.oktaoauth2/documentation/AuthFoundation/JWK/Algorithm-swift.enum/rsaOAEP256": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "case"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "rsaOAEP256"
+    }
+  ],
+  "identifier" : "doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/AuthFoundation\/JWK\/Algorithm-swift.enum\/rsaOAEP256",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "JWK.Algorithm.rsaOAEP256",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/jwk\/algorithm-swift.enum\/rsaoaep256"
 }
 }
 }
