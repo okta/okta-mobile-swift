@@ -207,6 +207,8 @@ public final class OAuth2Client {
             completion(.failure(.missingToken(type: type)))
             return
         }
+
+        guard !clientSecret.isEmpty && !resource.isEmpty else { return }
         
         refreshQueue.sync {
             guard token.refreshAction == nil else {
