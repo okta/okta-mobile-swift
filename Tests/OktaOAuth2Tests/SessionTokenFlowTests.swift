@@ -40,7 +40,6 @@ class MockSessionTokenFlowURLExchange: SessionTokenFlowURLExchange {
 final class SessionTokenFlowSuccessTests: XCTestCase {
     let issuer = URL(string: "https://example.com")!
     let redirectUri = URL(string: "com.example:/callback")!
-    let clientMock = OAuth2ClientMock()
     let urlSession = URLSessionMock()
     var client: OAuth2Client!
     var flow: SessionTokenFlow!

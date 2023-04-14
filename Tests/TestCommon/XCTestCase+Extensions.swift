@@ -19,6 +19,15 @@ enum TestError: Error {
 }
 
 public extension XCTestCase {
+    func mock<T: Decodable & JSONDecodable>(from bundle: Bundle,
+                 for filename: String,
+                 in folder: String? = nil) throws -> T
+    {
+        let data = try data(from: bundle, for: filename, in: folder)
+        let string = try XCTUnwrap(String(data: data, encoding: .utf8))
+        return try decode(type: T.self, string)
+    }
+    
     func data(for json: String) -> Data {
         return json.data(using: .utf8)!
     }
@@ -44,12 +53,12 @@ public extension XCTestCase {
         return try Data(contentsOf: file)
     }
     
-    func decode<T>(type: T.Type, _ file: URL) throws -> T where T : Decodable {
+    func decode<T>(type: T.Type, _ file: URL) throws -> T where T : Decodable & JSONDecodable {
         let json = String(data: try data(for: file), encoding: .utf8)
         return try decode(type: type, json!)
     }
 
-    func decode<T>(type: T.Type, _ file: URL, _ test: ((T) throws -> Void)) throws where T : Decodable {
+    func decode<T>(type: T.Type, _ file: URL, _ test: ((T) throws -> Void)) throws where T : Decodable & JSONDecodable {
         let json = String(data: try data(for: file), encoding: .utf8)
         try test(try decode(type: type, json!))
     }
@@ -58,11 +67,7 @@ public extension XCTestCase {
         try decode(type: type, decoder: T.jsonDecoder, json)
     }
 
-    func decode<T>(type: T.Type, _ json: String) throws -> T where T : Decodable {
-        try decode(type: type, decoder: JSONDecoder(), json)
-    }
-
-    func decode<T>(type: T.Type, _ json: String, _ test: ((T) throws -> Void)) throws where T : Decodable {
+    func decode<T>(type: T.Type, _ json: String, _ test: ((T) throws -> Void)) throws where T : Decodable & JSONDecodable {
         try test(try decode(type: type, json))
     }
 

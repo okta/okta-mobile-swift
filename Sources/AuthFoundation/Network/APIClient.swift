@@ -198,7 +198,7 @@ extension APIClient {
                 
                 self.didSend(request: request, received: httpResponse)
                 
-                let rateInfo = APIRateLimit(with: httpResponse.allHeaderFields)
+                rateInfo = APIRateLimit(with: httpResponse.allHeaderFields)
                 let responseType = context?.resultType(from: httpResponse) ?? APIResponseResult(statusCode: httpResponse.statusCode)
                 if let requestIdHeader = requestIdHeader {
                     requestId = httpResponse.allHeaderFields[requestIdHeader] as? String

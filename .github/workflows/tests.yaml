@@ -55,6 +55,14 @@ jobs:
           -scheme AuthFoundation \
           -sdk iphonesimulator \
           -destination "$iOS_DESTINATION" 2>&1
+    - name: Build OktaDirectAuth
+      run: |
+        set -o pipefail && xcodebuild build \
+          -derivedDataPath ../Build/DerivedData \
+          -clonedSourcePackagesDirPath ../Build/ClonedSources \
+          -scheme OktaDirectAuth \
+          -sdk iphonesimulator \
+          -destination "$iOS_DESTINATION" 2>&1
     - name: Build OktaOAuth2
       run: |
         set -o pipefail && xcodebuild build \
@@ -77,6 +85,14 @@ jobs:
           -derivedDataPath ../Build/DerivedData \
           -clonedSourcePackagesDirPath ../Build/ClonedSources \
           -scheme AuthFoundation \
+          -sdk iphonesimulator \
+          -destination "$iOS_DESTINATION" 2>&1
+    - name: Test OktaDirectAuth
+      run: |
+        set -o pipefail && xcodebuild test \
+          -derivedDataPath ../Build/DerivedData \
+          -clonedSourcePackagesDirPath ../Build/ClonedSources \
+          -scheme OktaDirectAuth \
           -sdk iphonesimulator \
           -destination "$iOS_DESTINATION" 2>&1
     - name: Test OktaOAuth2

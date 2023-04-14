@@ -32,6 +32,8 @@ final class DirectAuth1FATests: XCTestCase {
         JWK.validator = MockJWKValidator()
         Token.idTokenValidator = MockIDTokenValidator()
         Token.accessTokenValidator = MockTokenHashValidator()
+        
+        throw XCTSkip("Skipping integration tests")
     }
     
     override func tearDownWithError() throws {

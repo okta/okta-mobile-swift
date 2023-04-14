@@ -30,11 +30,7 @@ extension DirectAuthenticationFlowError {
     init(_ error: APIClientError) {
         switch error {
         case .serverError(let error):
-            if let error = error as? OAuth2ServerError {
-                self = DirectAuthenticationFlowError(error)
-            } else {
-                fallthrough
-            }
+            self = DirectAuthenticationFlowError(error)
         default:
             self = .network(error: error)
         }
