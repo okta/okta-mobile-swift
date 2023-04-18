@@ -11,7 +11,7 @@
 //
 
 import UIKit
-import OktaOAuth2
+import AuthFoundation
 
 class TokenDetailViewController: UIViewController {
     var credential: Credential? {
