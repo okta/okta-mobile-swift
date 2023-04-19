@@ -59,6 +59,6 @@ extension WeakCollection: Hashable where Collect: Equatable, Element: Hashable {
 
 extension WeakCollection: Equatable where Collect: Equatable, Element: Hashable {
     public static func == (lhs: WeakCollection<Collect, Element>, rhs: WeakCollection<Collect, Element>) -> Bool {
-        lhs.weakObjects == rhs.weakObjects
+        Set(lhs.weakObjects) == Set(rhs.weakObjects)
     }
 }

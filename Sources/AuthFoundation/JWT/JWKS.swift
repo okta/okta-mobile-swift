@@ -42,6 +42,6 @@ public struct JWKS: Codable, Equatable, Collection {
     }
 
     public static func == (lhs: JWKS, rhs: JWKS) -> Bool {
-        lhs.keys == rhs.keys
+        Set(lhs.keys) == Set(rhs.keys)
     }
 }

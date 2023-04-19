@@ -22,7 +22,7 @@ extension DirectAuthenticationFlowError: Equatable {
         switch (lhs, rhs) {
         case (.pollingTimeoutExceeded, .pollingTimeoutExceeded): return true
         case (.missingArguments(let lhsNames), .missingArguments(let rhsNames)):
-            return lhsNames == rhsNames
+            return lhsNames.sorted() == rhsNames.sorted()
         case (.network(error: let lhsError), .network(error: let rhsError)):
             return lhsError == rhsError
         case (.oauth2(error: let lhsError), .oauth2(error: let rhsError)):
