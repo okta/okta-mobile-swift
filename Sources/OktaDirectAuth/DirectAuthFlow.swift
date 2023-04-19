@@ -23,7 +23,7 @@ public protocol DirectAuthenticationFlowDelegate: AuthenticationDelegate {
     func authentication<Flow>(flow: Flow, received status: DirectAuthenticationFlow.Status)
 }
 
-/// Errors that may be generated while authenticating using DirectAuthenticationFlow.
+/// Errors that may be generated while authenticating using ``DirectAuthenticationFlow``.
 public enum DirectAuthenticationFlowError: Error {
     case pollingTimeoutExceeded
     case missingArguments(_ names: [String])
