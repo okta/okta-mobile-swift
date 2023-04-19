@@ -13,13 +13,13 @@
 import Foundation
 import AuthFoundation
 
-class PollingHandler<RequestType: APIRequest> {
+class PollingHandler<RequestType: OAuth2TokenRequest> {
     private(set) var isPolling: Bool = false
     let expirationDate: Date
     var interval: TimeInterval
     let request: RequestType
     
-    private let client: APIClient
+    private let client: OAuth2Client
     private let statusCheck: (PollingHandler, Result<APIResponse<RequestType.ResponseType>, APIClientError>) -> Status
 
     enum Status {
@@ -33,7 +33,7 @@ class PollingHandler<RequestType: APIRequest> {
         case timeout
     }
     
-    init(client: APIClient,
+    init(client: OAuth2Client,
          request: RequestType,
          expiresIn: TimeInterval,
          interval: TimeInterval,
@@ -77,7 +77,7 @@ class PollingHandler<RequestType: APIRequest> {
                 return
             }
             
-            self.request.send(to: self.client, parsing: self.request as? APIParsingContext) { [weak self] result in
+            self.client.exchange(token: self.request) { [weak self] result in
                 guard let self = self else { return }
                 
                 if self.isPolling == false {

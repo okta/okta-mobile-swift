@@ -136,9 +136,6 @@ final class CredentialCoordinatorImpl: CredentialCoordinator {
 }
 
 extension CredentialCoordinatorImpl: OAuth2ClientDelegate {
-    func api(client: APIClient, didSend request: URLRequest, received error: APIClientError) {
-    }
-
     func oauth(client: OAuth2Client, didRefresh token: Token, replacedWith newToken: Token?) {
         guard let newToken = newToken else {
             return

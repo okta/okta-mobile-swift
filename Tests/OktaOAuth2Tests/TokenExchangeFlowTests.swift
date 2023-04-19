@@ -44,7 +44,6 @@ final class TokenExchangeFlowDelegateRecorder: AuthenticationDelegate {
 final class TokenExchangeFlowTests: XCTestCase {
     let issuer = URL(string: "https://example.okta.com")!
     let redirectUri = URL(string: "com.example:/callback")!
-    let clientMock = OAuth2ClientMock()
     let urlSession = URLSessionMock()
     var client: OAuth2Client!
     var flow: TokenExchangeFlow!

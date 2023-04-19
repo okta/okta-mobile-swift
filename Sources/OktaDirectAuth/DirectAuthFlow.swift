@@ -37,7 +37,7 @@ public final class DirectAuthenticationFlow: AuthenticationFlow {
     /// Enumeration defining the list of possible primary authentication factors.
     ///
     /// These values are used by the ``DirectAuthenticationFlow/start(_:with:)`` function.
-    public enum PrimaryFactor {
+    public enum PrimaryFactor: Equatable {
         /// Authenticate the user with the given password.
         case password(String)
         
@@ -53,7 +53,7 @@ public final class DirectAuthenticationFlow: AuthenticationFlow {
     /// Enumeration defining the list of possible secondary authentication factors.
     ///
     /// These values are used by ``DirectAuthenticationFlow/resume(_:with:)``.
-    public enum SecondaryFactor {
+    public enum SecondaryFactor: Equatable {
         /// Authenticate the user with the given OTP code.
         ///
         /// This usually represents app authenticators such as Google Authenticator.
@@ -70,7 +70,7 @@ public final class DirectAuthenticationFlow: AuthenticationFlow {
     }
     
     /// Context information used to define a request from the server to perform a multifactor authentication.
-    public struct MFAContext {
+    public struct MFAContext: Equatable {
         /// The list of possible grant types that the user can be challenged with.
         public let supportedChallengeTypes: [GrantType]?
         let mfaToken: String
@@ -84,7 +84,7 @@ public final class DirectAuthenticationFlow: AuthenticationFlow {
     /// The current status of the authentication flow.
     ///
     /// This value is returned from ``DirectAuthenticationFlow/start(_:with:)`` and ``DirectAuthenticationFlow/resume(_:with:)`` to indicate the result of an individual authentication step. This can be used to drive your application's sign-in workflow.
-    public enum Status {
+    public enum Status: Equatable {
         /// Authentication was successful, returning the given token.
         case success(_ token: Token)
         
@@ -201,10 +201,10 @@ public final class DirectAuthenticationFlow: AuthenticationFlow {
         runStep(currentStatus: status, with: factor, completion: completion)
     }
     
-    private func runStep<Factor: AuthenticationFactor>(loginHint: String? = nil,
-                                                       currentStatus: Status? = nil,
-                                                       with factor: Factor,
-                                                       completion: @escaping (Result<DirectAuthenticationFlow.Status, DirectAuthenticationFlowError>) -> Void)
+    func runStep<Factor: AuthenticationFactor>(loginHint: String? = nil,
+                                               currentStatus: Status? = nil,
+                                               with factor: Factor,
+                                               completion: @escaping (Result<DirectAuthenticationFlow.Status, DirectAuthenticationFlowError>) -> Void)
     {
         isAuthenticating = true
         
