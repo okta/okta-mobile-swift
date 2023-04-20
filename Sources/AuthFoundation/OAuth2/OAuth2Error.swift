@@ -119,7 +119,7 @@ extension OAuth2Error: LocalizedError {
 
         case .multiple(errors: let errors):
             let errorString = errors
-                .map({ $0.localizedDescription })
+                .map(\.localizedDescription)
                 .joined(separator: ", ")
             
             return String.localizedStringWithFormat(
