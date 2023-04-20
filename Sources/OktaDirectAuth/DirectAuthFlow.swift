@@ -17,10 +17,13 @@ import AuthFoundation
 ///
 /// This extends the parent protocol `AuthenticationDelegate`.
 public protocol DirectAuthenticationFlowDelegate: AuthenticationDelegate {
-    /// Sent when an authentication session receives a token.
+    /// Sent when an authentication session receives a new status response.
+    ///
+    /// This function is invoked when a new status is returned either from ``DirectAuthenticationFlow/start(_:with:)`` or ``DirectAuthenticationFlow/resume(_:with:)`` (or their block-based counterparts).
     func authentication<Flow>(flow: Flow, received status: DirectAuthenticationFlow.Status)
 }
 
+/// Errors that may be generated while authenticating using ``DirectAuthenticationFlow``.
 public enum DirectAuthenticationFlowError: Error {
     case pollingTimeoutExceeded
     case missingArguments(_ names: [String])
@@ -30,24 +33,42 @@ public enum DirectAuthenticationFlowError: Error {
     case other(error: Error)
 }
 
-/// An authentication flow that implements the Direct Authentication Okta API.
+/// An authentication flow that implements the Okta Direct Authentication API.
 ///
-/// This enables developers to integrate native authentication workflows into their applications, while still leveraging MFA to securely authenticate users.
-public final class DirectAuthenticationFlow: AuthenticationFlow {
+/// This enables developers to build native sign-in workflows into their applications, while leveraging MFA to securely authenticate users, without the need to present a browser. Furthermore, this enables passwordless authentication scenarios by giving developers the power to choose which primary and secondary authentication factors to use when challenging a user for their credentials.
+public class DirectAuthenticationFlow: AuthenticationFlow {
     /// Enumeration defining the list of possible primary authentication factors.
     ///
     /// These values are used by the ``DirectAuthenticationFlow/start(_:with:)`` function.
     public enum PrimaryFactor: Equatable {
         /// Authenticate the user with the given password.
+        ///
+        /// This is used when supplying a password as a primary factor. For example:
+        ///
+        /// ```swift
+        /// let status = try await flow.start("jane.doe@example.com", with: .password("SuperSecret"))
+        /// ```
         case password(String)
         
         /// Authenticate the user with the given OTP code.
         ///
-        /// This usually represents app authenticators such as Google Authenticator.
+        /// This usually represents app authenticators such as Google Authenticator, and can be supplied along with a user identifier. For example:
+        ///
+        /// ```swift
+        /// let status = try await flow.start("jane.doe@example.com", with: .otp("123456"))
+        /// ```
         case otp(code: String)
         
         /// Authenticate the user out-of-band using Okta Verify.
-        case oob(channel: OOBChannel)
+        ///
+        /// This is used along with a user identifier to perform a passwordless sign in using Okta Verify. For example:
+        ///
+        /// ```swift
+        /// let status = try await flow.start("jane.doe@example.com", with: .push)
+        /// ```
+        ///
+        /// > Note: While `.oob` accepts a `channel` argument, at this time only the `push` option is available.
+        case oob(channel: OOBChannel = .push)
     }
     
     /// Enumeration defining the list of possible secondary authentication factors.
@@ -56,10 +77,20 @@ public final class DirectAuthenticationFlow: AuthenticationFlow {
     public enum SecondaryFactor: Equatable {
         /// Authenticate the user with the given OTP code.
         ///
-        /// This usually represents app authenticators such as Google Authenticator.
+        /// This usually represents app authenticators such as Google Authenticator, and can be supplied along with a user identifier. For example:
+        ///
+        /// ```swift
+        /// let newStatus = try await flow.resume(status, with: .otp("123456"))
+        /// ```
         case otp(code: String)
         
         /// Authenticate the user out-of-band using Okta Verify.
+        ///
+        /// ```swift
+        /// let newStatus = try await flow.resume(status, with: .push)
+        /// ```
+        ///
+        /// > Note: While `.oob` accepts a `channel` argument, at this time only the `push` option is available.
         case oob(channel: OOBChannel)
     }
     
@@ -236,6 +267,7 @@ public final class DirectAuthenticationFlow: AuthenticationFlow {
         }
     }
     
+    /// Resets the authentication session.
     public func reset() {
         isAuthenticating = false
     }
