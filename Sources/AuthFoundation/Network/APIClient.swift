@@ -168,6 +168,7 @@ extension APIClient {
     
     public func shouldRetry(request: URLRequest, rateLimit: APIRateLimit) -> APIRetry { .default }
     
+    // swiftlint:disable closure_body_length
     private func send<T>(_ request: URLRequest,
                          parsing context: APIParsingContext? = nil,
                          state: APIRetry.State?,
@@ -261,7 +262,8 @@ extension APIClient {
             }
         }.resume()
     }
-    
+    // swiftlint:enable closure_body_length
+
     private func addRetryHeadersToRequest(state: APIRetry.State) -> URLRequest {
         var request = state.originalRequest
         if let requestId = state.requestId {
