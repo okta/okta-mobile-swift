@@ -258,7 +258,7 @@ public class WebAuthentication {
         try URLContexts
             .filter { $0.url.scheme?.lowercased() == signInFlow.redirectUri.scheme?.lowercased() }
             .map(\.url)
-            .forEach { try resume(with: $0) }
+            .forEach(resume(with:))
     }
     #endif
     

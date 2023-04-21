@@ -64,12 +64,12 @@ extension SDKVersion {
         }
         
         var needsMigration: Bool {
-            !migrators.filter({ $0.needsMigration }).isEmpty
+            !migrators.filter(\.needsMigration).isEmpty
         }
         
         func migrate() throws {
             try migrators
-                .filter({ $0.needsMigration })
+                .filter(\.needsMigration)
                 .forEach { migrator in
                     try migrator.migrate()
                 }

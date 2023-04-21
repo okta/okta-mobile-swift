@@ -78,7 +78,7 @@ extension ChallengeRequest: APIRequest, APIRequestBody {
             "client_id": clientId,
             "mfa_token": mfaToken,
             "challenge_types_supported": challengeTypesSupported
-                .map({ $0.rawValue })
+                .map(\.rawValue)
                 .joined(separator: " ")
         ]
     }

@@ -73,7 +73,7 @@ extension TokenRequest: OAuth2TokenRequest, OAuth2APIRequest, APIRequestBody {
             result[key] = loginHint
         }
         
-        if let grantTypesSupported = grantTypesSupported?.map({ $0.rawValue }) {
+        if let grantTypesSupported = grantTypesSupported?.map(\.rawValue) {
             result["grant_types_supported"] = grantTypesSupported.joined(separator: " ")
         }
         
