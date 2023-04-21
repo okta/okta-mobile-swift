@@ -17,7 +17,8 @@ on:
       - 'Sources/**/*.md'
 
 env:
-  DEVELOPER_DIR: /Applications/Xcode_13.3.app/Contents/Developer
+  DEVELOPER_DIR: /Applications/Xcode_14.2.app/Contents/Developer
+  NSUnbufferedIO: YES 
 
 jobs:
   BuildDocumentation:
@@ -28,28 +29,28 @@ jobs:
     - name: AuthFoundation
       run: |
         set -o pipefail
-        env NSUnbufferedIO=YES xcodebuild docbuild \
+        xcodebuild docbuild \
           -derivedDataPath ~/Build/DerivedData \
           -clonedSourcePackagesDirPath ~/Build/ClonedSources \
           -scheme AuthFoundation | xcpretty
     - name: OktaDirectAuth
       run: |
         set -o pipefail
-        env NSUnbufferedIO=YES xcodebuild docbuild \
+        xcodebuild docbuild \
           -derivedDataPath ~/Build/DerivedData \
           -clonedSourcePackagesDirPath ~/Build/ClonedSources \
           -scheme OktaDirectAuth | xcpretty
     - name: OktaOAuth2
       run: |
         set -o pipefail
-        env NSUnbufferedIO=YES xcodebuild docbuild \
+        xcodebuild docbuild \
           -derivedDataPath ~/Build/DerivedData \
           -clonedSourcePackagesDirPath ~/Build/ClonedSources \
           -scheme OktaOAuth2 | xcpretty
     - name: WebAuthenticationUI
       run: |
         set -o pipefail
-        env NSUnbufferedIO=YES xcodebuild docbuild \
+        xcodebuild docbuild \
           -derivedDataPath ~/Build/DerivedData \
           -clonedSourcePackagesDirPath ~/Build/ClonedSources \
           -scheme WebAuthenticationUI | xcpretty
