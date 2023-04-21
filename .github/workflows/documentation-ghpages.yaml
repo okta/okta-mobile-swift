@@ -30,6 +30,7 @@ jobs:
       run: |
         swift build \
             --target AuthFoundation \
+            --target OktaDirectAuth \
             --target OktaOAuth2 \
             --target WebAuthenticationUI \
             -Xswiftc -emit-symbol-graph -Xswiftc -emit-symbol-graph -Xswiftc -emit-symbol-graph-dir -Xswiftc .build/symbol-graphs
@@ -43,7 +44,7 @@ jobs:
         set -e
 
         export DOCC_JSON_PRETTYPRINT=YES
-        for TARGET in AuthFoundation OktaOAuth2 WebAuthenticationUI; do
+        for TARGET in AuthFoundation OktaDirectAuth OktaOAuth2 WebAuthenticationUI; do
             NAME=$(echo "$TARGET" | tr '[:upper:]' '[:lower:]')
 
             xcrun docc convert \
@@ -57,7 +58,7 @@ jobs:
         done
 
         mkdir -p docs/$VERSION
-        for TARGET in AuthFoundation OktaOAuth2 WebAuthenticationUI; do
+        for TARGET in AuthFoundation OktaDirectAuth OktaOAuth2 WebAuthenticationUI; do
             NAME=$(echo "$TARGET" | tr '[:upper:]' '[:lower:]')
 
             $(xcrun --find docc) process-archive transform-for-static-hosting \
