@@ -54,7 +54,7 @@ extension DirectAuthenticationFlow.PrimaryFactor: AuthenticationFactor {
         }
     }
     
-    var tokenParameters: [String : Any]? {
+    var tokenParameters: [String: Any]? {
         switch self {
         case .otp(code: let code):
             return [
