@@ -130,6 +130,6 @@ public struct JWT: RawRepresentable, Codable, HasClaims, Expires {
     static func tokenComponents(from token: String) -> [String] {
         token
             .components(separatedBy: ".")
-            .map { $0.base64URLDecoded }
+            .map(\.base64URLDecoded)
     }
 }

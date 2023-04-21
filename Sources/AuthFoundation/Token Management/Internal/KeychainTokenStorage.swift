@@ -49,7 +49,7 @@ final class KeychainTokenStorage: TokenStorage {
             return try Keychain
                 .Search(service: KeychainTokenStorage.metadataName)
                 .list()
-                .map { $0.account }
+                .map(\.account)
         } catch {
             return []
         }

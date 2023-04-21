@@ -76,9 +76,7 @@ final class CredentialCoordinatorImpl: CredentialCoordinator {
               authenticationContext: TokenAuthenticationContext? = nil) throws -> [Credential]
     {
         try allIDs
-            .map({ id in
-                try self.tokenStorage.metadata(for: id)
-            })
+            .map(tokenStorage.metadata(for:))
             .filter(expression)
             .compactMap({ metadata in
                 try self.with(id: metadata.id, prompt: prompt, authenticationContext: authenticationContext)

@@ -46,7 +46,7 @@ public struct WeakCollection<Collect, Element> where Collect: RangeReplaceableCo
     }
 
     public var wrappedValue: Collect {
-        get { Collect(weakObjects.compactMap { $0.wrappedValue }) }
+        get { Collect(weakObjects.compactMap(\.wrappedValue)) }
         set (newValues) { save(collection: newValues) }
     }
 }
