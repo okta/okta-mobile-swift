@@ -30,24 +30,28 @@ jobs:
         set -o pipefail
         env NSUnbufferedIO=YES xcodebuild docbuild \
           -derivedDataPath ~/Build/DerivedData \
+          -clonedSourcePackagesDirPath ~/Build/ClonedSources \
           -scheme AuthFoundation | xcpretty
     - name: OktaDirectAuth
       run: |
         set -o pipefail
         env NSUnbufferedIO=YES xcodebuild docbuild \
           -derivedDataPath ~/Build/DerivedData \
+          -clonedSourcePackagesDirPath ~/Build/ClonedSources \
           -scheme OktaDirectAuth | xcpretty
     - name: OktaOAuth2
       run: |
         set -o pipefail
         env NSUnbufferedIO=YES xcodebuild docbuild \
           -derivedDataPath ~/Build/DerivedData \
+          -clonedSourcePackagesDirPath ~/Build/ClonedSources \
           -scheme OktaOAuth2 | xcpretty
     - name: WebAuthenticationUI
       run: |
         set -o pipefail
         env NSUnbufferedIO=YES xcodebuild docbuild \
           -derivedDataPath ~/Build/DerivedData \
+          -clonedSourcePackagesDirPath ~/Build/ClonedSources \
           -scheme WebAuthenticationUI | xcpretty
     - name: Compress DocC archives
       run: |
