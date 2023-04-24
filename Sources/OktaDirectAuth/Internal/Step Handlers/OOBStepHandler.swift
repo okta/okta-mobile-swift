@@ -99,7 +99,7 @@ class OOBStepHandler<Factor: AuthenticationFactor>: StepHandler {
     // OOB authentication requests differ whether it's used as a primary factor, or a secondary factor.
     // To simplify the code below, we separate this request logic into separate functions to work
     // around differences in the response data.
-    func requestOOBCode(completion: @escaping (Result<OOBResponse, APIClientError>) -> Void) {
+    private func requestOOBCode(completion: @escaping (Result<OOBResponse, APIClientError>) -> Void) {
         // Request where OOB is used as the primary factor
         if let loginHint = loginHint {
             requestOOBCode(loginHint: loginHint, completion: completion)
@@ -116,8 +116,8 @@ class OOBStepHandler<Factor: AuthenticationFactor>: StepHandler {
         }
     }
     
-    func requestOOBCode(loginHint: String,
-                        completion: @escaping (Result<OOBResponse, APIClientError>) -> Void)
+    private func requestOOBCode(loginHint: String,
+                                completion: @escaping (Result<OOBResponse, APIClientError>) -> Void)
     {
         do {
             let request = try OOBAuthenticateRequest(openIdConfiguration: openIdConfiguration,
@@ -137,8 +137,8 @@ class OOBStepHandler<Factor: AuthenticationFactor>: StepHandler {
         }
     }
     
-    func requestOOBCode(mfaToken: String,
-                        completion: @escaping (Result<OOBResponse, APIClientError>) -> Void)
+    private func requestOOBCode(mfaToken: String,
+                                completion: @escaping (Result<OOBResponse, APIClientError>) -> Void)
     {
         do {
             let request = try ChallengeRequest(openIdConfiguration: openIdConfiguration,
