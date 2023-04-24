@@ -20,6 +20,7 @@ public struct OAuth2ServerError: Decodable, Error, LocalizedError, Equatable {
     /// Error message, or description.
     public let description: String?
     
+    /// Contains any additional values the server error reported alongside the code and description.
     public var additionalValues: [String: Any]
     
     public var errorDescription: String? { description }

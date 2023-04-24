@@ -13,6 +13,7 @@
 import Foundation
 import AuthFoundation
 
+/// Defines the common properties and functions shared between factor types.
 protocol AuthenticationFactor {
     /// The grant type supported by this factor.
     var grantType: GrantType { get }
