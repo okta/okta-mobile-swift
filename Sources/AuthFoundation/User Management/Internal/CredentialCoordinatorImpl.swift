@@ -76,9 +76,7 @@ final class CredentialCoordinatorImpl: CredentialCoordinator {
               authenticationContext: TokenAuthenticationContext? = nil) throws -> [Credential]
     {
         try allIDs
-            .map({ id in
-                try self.tokenStorage.metadata(for: id)
-            })
+            .map(tokenStorage.metadata(for:))
             .filter(expression)
             .compactMap({ metadata in
                 try self.with(id: metadata.id, prompt: prompt, authenticationContext: authenticationContext)
@@ -136,9 +134,6 @@ final class CredentialCoordinatorImpl: CredentialCoordinator {
 }
 
 extension CredentialCoordinatorImpl: OAuth2ClientDelegate {
-    func api(client: APIClient, didSend request: URLRequest, received error: APIClientError) {
-    }
-
     func oauth(client: OAuth2Client, didRefresh token: Token, replacedWith newToken: Token?) {
         guard let newToken = newToken else {
             return

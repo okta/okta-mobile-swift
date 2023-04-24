@@ -40,7 +40,6 @@ class AuthenticationDelegateRecorder: AuthenticationDelegate {
 
 final class ResourceOwnerFlowSuccessTests: XCTestCase {
     let issuer = URL(string: "https://example.com")!
-    let clientMock = OAuth2ClientMock()
     let urlSession = URLSessionMock()
     var client: OAuth2Client!
     var flow: ResourceOwnerFlow!

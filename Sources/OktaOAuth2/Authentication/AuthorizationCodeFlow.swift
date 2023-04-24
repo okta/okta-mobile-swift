@@ -381,8 +381,13 @@ extension AuthorizationCodeFlow {
             let description = query["error_description"]?
                 .removingPercentEncoding?
                 .replacingOccurrences(of: "+", with: " ")
+            let additionalKeys = query.filter { element in
+                element.key != "error" && element.key != "error_description"
+            }
+            
             throw OAuth2Error.oauth2Error(code: errorCode,
-                                          description: description)
+                                          description: description,
+                                          additionalKeys: additionalKeys)
         }
         
         guard let code = query["code"] else {

@@ -20,14 +20,25 @@ public struct OAuth2ServerError: Decodable, Error, LocalizedError, Equatable {
     /// Error message, or description.
     public let description: String?
     
+    /// Contains any additional values the server error reported alongside the code and description.
+    public var additionalValues: [String: Any]
+    
     public var errorDescription: String? { description }
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         code = try container.decode(Code.self, forKey: .code)
         description = try container.decodeIfPresent(String.self, forKey: .description)
+        
+        let additionalContainer = try decoder.container(keyedBy: AdditionalValuesCodingKeys.self)
+        self.additionalValues = additionalContainer.decodeUnkeyedContainer(exclude: CodingKeys.self)
     }
 
+    public static func == (lhs: OAuth2ServerError, rhs: OAuth2ServerError) -> Bool {
+        lhs.code == rhs.code &&
+        lhs.description == rhs.description
+    }
+    
     enum CodingKeys: String, CodingKey, CaseIterable {
         case code = "error"
         case description = "errorDescription"
@@ -65,6 +76,11 @@ extension OAuth2ServerError {
         case unsupportedResponseMode
         /// The client specified is not authorized to utilize the supplied grant type.
         case unauthorizedClient
+        case directAuthAuthorizationPending
+        case mfaRequired
+        case invalidOTP
+        case oobRejected
+        case invalidChallengeTypesSupported
         /// An error code other than one of the standard ones defined above.
         case other(code: String)
     }
@@ -103,6 +119,16 @@ extension OAuth2ServerError.Code: RawRepresentable, Equatable {
             self = .unsupportedResponseMode
         case "unauthorized_client":
             self = .unauthorizedClient
+        case "direct_auth_authorization_pending":
+            self = .directAuthAuthorizationPending
+        case "mfa_required":
+            self = .mfaRequired
+        case "invalid_otp":
+            self = .invalidOTP
+        case "oob_rejected":
+            self = .oobRejected
+        case "invalid_challenge_types_supported":
+            self = .invalidChallengeTypesSupported
         default:
             self = .other(code: rawValue)
         }
@@ -138,6 +164,16 @@ extension OAuth2ServerError.Code: RawRepresentable, Equatable {
             return "unsupported_response_mode"
         case .unauthorizedClient:
             return "unauthorized_client"
+        case .directAuthAuthorizationPending:
+            return "direct_auth_authorization_pending"
+        case .mfaRequired:
+            return "mfa_required"
+        case .invalidOTP:
+            return "invalid_otp"
+        case .oobRejected:
+            return "oob_rejected"
+        case .invalidChallengeTypesSupported:
+            return "invalid_challenge_types_supported"
         case .other(code: let code):
             return code
         }

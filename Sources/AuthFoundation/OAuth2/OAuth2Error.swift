@@ -16,12 +16,13 @@ import Foundation
 public enum OAuth2Error: Error {
     case invalidUrl
     case cannotComposeUrl
-    case oauth2Error(code: String, description: String?)
+    case oauth2Error(code: String, description: String?, additionalKeys: [String: String]? = nil)
     case network(error: APIClientError)
     case missingToken(type: Token.Kind)
     case missingClientConfiguration
     case signatureInvalid
     case missingLocationHeader
+    case missingOAuth2ResponseKey(_ name: String)
     case missingOpenIdConfiguration(attribute: String)
     case error(_ error: Error)
     case cannotRevoke(type: Token.RevokeType)
@@ -43,7 +44,7 @@ extension OAuth2Error: LocalizedError {
                                      bundle: .authFoundation,
                                      comment: "Invalid URL")
 
-        case .oauth2Error(let code, let description):
+        case .oauth2Error(let code, let description, _):
             if let description = description {
                 return String.localizedStringWithFormat(
                     NSLocalizedString("oauth2_error_description",
@@ -118,7 +119,7 @@ extension OAuth2Error: LocalizedError {
 
         case .multiple(errors: let errors):
             let errorString = errors
-                .map({ $0.localizedDescription })
+                .map(\.localizedDescription)
                 .joined(separator: ", ")
             
             return String.localizedStringWithFormat(
@@ -127,6 +128,15 @@ extension OAuth2Error: LocalizedError {
                                   bundle: .authFoundation,
                                   comment: ""),
                 errorString)
+            
+        case .missingOAuth2ResponseKey(let key):
+            return String.localizedStringWithFormat(
+                NSLocalizedString("missing_oauth2_response_key",
+                                  tableName: "AuthFoundation",
+                                  bundle: .authFoundation,
+                                  comment: ""),
+                key)
+
         }
     }
 }
@@ -145,7 +155,7 @@ extension OAuth2Error: Equatable {
         case (.missingLocationHeader, .missingLocationHeader): return true
         case (.missingClientConfiguration, .missingClientConfiguration): return true
 
-        case (.oauth2Error(code: let lhsCode, description: let lhsDescription), .oauth2Error(code: let rhsCode, description: let rhsDescription)):
+        case (.oauth2Error(code: let lhsCode, description: let lhsDescription, additionalKeys: _), .oauth2Error(code: let rhsCode, description: let rhsDescription, additionalKeys: _)):
             return (lhsCode == rhsCode && lhsDescription == rhsDescription)
             
         case (.network(error: let lhsError), .network(error: let rhsError)):

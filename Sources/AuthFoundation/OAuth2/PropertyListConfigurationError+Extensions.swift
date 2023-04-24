@@ -56,6 +56,13 @@ extension OAuth2Client.PropertyListConfigurationError: LocalizedError {
                                      tableName: "AuthFoundation",
                                      bundle: .authFoundation,
                                      comment: "")
+        case .invalidConfiguration(name: let name, value: let value):
+            return String.localizedStringWithFormat(
+                NSLocalizedString("invalid_configuration",
+                                  tableName: "AuthFoundation",
+                                  bundle: .authFoundation,
+                                  comment: ""),
+                name, value ?? "")
         }
     }
 }

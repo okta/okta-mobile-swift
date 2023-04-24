@@ -280,7 +280,7 @@ public extension HasClaims {
     
     var allClaims: [String] {
         Array([
-            claims.map({ $0.rawValue }),
+            claims.map(\.rawValue),
             customClaims
         ].joined())
     }

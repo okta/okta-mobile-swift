@@ -19,6 +19,10 @@ public enum GrantType: Codable, Hashable {
     case password
     case deviceCode
     case tokenExchange
+    case otp
+    case oob
+    case otpMFA
+    case oobMFA
     case other(_ type: String)
 }
 
@@ -28,7 +32,12 @@ fileprivate let Mapping: [String: GrantType] = [
     "refresh_token": .refreshToken,
     "password": .password,
     "urn:ietf:params:oauth:grant-type:token-exchange": .tokenExchange,
-    "urn:ietf:params:oauth:grant-type:device_code": .deviceCode
+    "urn:ietf:params:oauth:grant-type:device_code": .deviceCode,
+    "urn:okta:params:oauth:grant-type:otp": .otp,
+    "urn:okta:params:oauth:grant-type:oob": .oob,
+    "http://auth0.com/oauth/grant-type/mfa-otp": .otpMFA,
+    "http://auth0.com/oauth/grant-type/mfa-oob": .oobMFA
+
 ]
 
 extension GrantType: RawRepresentable {
@@ -58,6 +67,14 @@ extension GrantType: RawRepresentable {
             return "urn:ietf:params:oauth:grant-type:token-exchange"
         case .deviceCode:
             return "urn:ietf:params:oauth:grant-type:device_code"
+        case .otp:
+            return "urn:okta:params:oauth:grant-type:otp"
+        case .oob:
+            return "urn:okta:params:oauth:grant-type:oob"
+        case .otpMFA:
+            return "http://auth0.com/oauth/grant-type/mfa-otp"
+        case .oobMFA:
+            return "http://auth0.com/oauth/grant-type/mfa-oob"
         }
     }
 }
