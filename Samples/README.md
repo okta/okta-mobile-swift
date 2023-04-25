@@ -18,3 +18,4 @@ Sample | Summary |
 [OIDCMigration Sample](OIDCMigration) | Migrate your app to the new Okta Mobile SDK for Swift from legacy SDKs.
 [UserPasswordSignIn Samples](UserPasswordSignIn) | Add sign-in with a username and password to a macOS app.
 [WebSignIn Samples](WebSignIn) | Add web-based sign in and single sign-on that uses the token exchange flow from the OAuth 2.0 specification with the WebAuthenticationUI Library.
+[DirectAuthSignIn Samples](DirectAuthSignIn) | Add native sign-in and sign out that uses the Okta Direct Authentication API (EA) using the OktaDirectAuth library.

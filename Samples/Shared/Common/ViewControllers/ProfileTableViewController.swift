@@ -17,7 +17,7 @@ import OktaOAuth2
 #elseif canImport(WebAuthenticationUI) && !WEB_AUTH_DISABLED
 import WebAuthenticationUI
 #else
-import OktaOAuth2
+import AuthFoundation
 #endif
 
 class ProfileTableViewController: UITableViewController {

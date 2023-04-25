@@ -14,10 +14,10 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "92088F8927A9936D00A4DC1B"
-               BuildableName = "WebSignIn (macOS).app"
-               BlueprintName = "WebSignIn (macOS)"
-               ReferencedContainer = "container:WebSignIn.xcodeproj">
+               BlueprintIdentifier = "967D0A2829EA1BE4002A5AD3"
+               BuildableName = "DirectAuthSignIn (iOS).app"
+               BlueprintName = "DirectAuthSignIn (iOS)"
+               ReferencedContainer = "container:DirectAuthSignIn.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -28,6 +28,28 @@
       selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
       shouldUseLaunchSchemeArgsEnv = "YES">
       <Testables>
+         <TestableReference
+            skipped = "NO"
+            parallelizable = "YES">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "967D0A3E29EA1BE6002A5AD3"
+               BuildableName = "DirectAuthSignInTests.xctest"
+               BlueprintName = "DirectAuthSignInTests"
+               ReferencedContainer = "container:DirectAuthSignIn.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
+         <TestableReference
+            skipped = "NO"
+            parallelizable = "YES">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "967D0A4829EA1BE6002A5AD3"
+               BuildableName = "DirectAuthSignInUITests.xctest"
+               BlueprintName = "DirectAuthSignInUITests"
+               ReferencedContainer = "container:DirectAuthSignIn.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
       </Testables>
    </TestAction>
    <LaunchAction
@@ -44,10 +66,10 @@
          runnableDebuggingMode = "0">
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "92088F8927A9936D00A4DC1B"
-            BuildableName = "WebSignIn (macOS).app"
-            BlueprintName = "WebSignIn (macOS)"
-            ReferencedContainer = "container:WebSignIn.xcodeproj">
+            BlueprintIdentifier = "967D0A2829EA1BE4002A5AD3"
+            BuildableName = "DirectAuthSignIn (iOS).app"
+            BlueprintName = "DirectAuthSignIn (iOS)"
+            ReferencedContainer = "container:DirectAuthSignIn.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </LaunchAction>
@@ -61,10 +83,10 @@
          runnableDebuggingMode = "0">
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "92088F8927A9936D00A4DC1B"
-            BuildableName = "WebSignIn (macOS).app"
-            BlueprintName = "WebSignIn (macOS)"
-            ReferencedContainer = "container:WebSignIn.xcodeproj">
+            BlueprintIdentifier = "967D0A2829EA1BE4002A5AD3"
+            BuildableName = "DirectAuthSignIn (iOS).app"
+            BlueprintName = "DirectAuthSignIn (iOS)"
+            ReferencedContainer = "container:DirectAuthSignIn.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </ProfileAction>

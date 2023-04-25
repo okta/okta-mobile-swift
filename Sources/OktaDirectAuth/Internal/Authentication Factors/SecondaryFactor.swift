@@ -30,6 +30,7 @@ extension DirectAuthenticationFlow.SecondaryFactor: AuthenticationFactor {
                                        scope: scope,
                                        loginHint: loginHint,
                                        factor: factor,
+                                       mfaToken: currentStatus?.mfaToken,
                                        grantTypesSupported: flow.supportedGrantTypes)
             return TokenStepHandler(flow: flow, request: request)
         case .oob(channel: let channel):
