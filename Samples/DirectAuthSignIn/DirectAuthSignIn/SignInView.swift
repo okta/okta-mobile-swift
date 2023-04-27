@@ -38,7 +38,7 @@ struct SignInView: View {
     var body: some View {
         VStack {
             VStack(alignment: .leading, spacing: 15) {
-                Text("Have an account?")
+                Text("Direct Authentication Sign In")
                     .font(.title)
                 
                 if let flow = flow {
@@ -63,6 +63,7 @@ struct SignInView: View {
                 Text("Client ID:")
                 if let clientId = flow?.client.configuration.clientId {
                     Text(clientId)
+                        .accessibilityIdentifier("client_id_label")
                 } else {
                     Text("Not configured")
                 }

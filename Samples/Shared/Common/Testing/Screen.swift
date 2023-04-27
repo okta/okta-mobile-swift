@@ -16,4 +16,18 @@ import XCTest
 protocol Screen {
     var app: XCUIApplication { get }
     var testCase: XCTestCase { get }
+    
+    func dismissKeyboard()
+}
+
+extension Screen {
+    func dismissKeyboard() {
+        if app.keyboards.element(boundBy: 0).exists {
+            if UIDevice.current.userInterfaceIdiom == .pad {
+                app.keyboards.buttons["Hide keyboard"].tap()
+            } else {
+                app.toolbars.buttons["Done"].tap()
+            }
+        }
+    }
 }
