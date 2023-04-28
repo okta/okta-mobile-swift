@@ -22,6 +22,10 @@ protocol Screen {
 
 extension Screen {
     func dismissKeyboard() {
+        #if os(tvOS)
+        // TODO: Update this in the future to select the appropriately named button.
+        XCUIRemote.shared.press(.select)
+        #else
         if app.keyboards.element(boundBy: 0).exists {
             if UIDevice.current.userInterfaceIdiom == .pad {
                 app.keyboards.buttons["Hide keyboard"].tap()
@@ -29,5 +33,6 @@ extension Screen {
                 app.toolbars.buttons["Done"].tap()
             }
         }
+        #endif
     }
 }
