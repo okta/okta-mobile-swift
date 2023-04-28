@@ -146,6 +146,30 @@ jobs:
             -destination "$iOS_DESTINATION" \
             test 2>&1
 
+  UITest-DirectAuthSignIniOS:
+    name: Direct Auth Sign In (iOS)
+    runs-on: macos-12
+    timeout-minutes: 15
+    needs: 
+      - XcodeBuild
+      - SwiftBuild
+    steps:
+    - uses: actions/checkout@master
+    - uses: ./.github/actions/setup-secrets
+      with:
+        okta_plist: "${{ secrets.TEST_OKTA_PLIST }}"
+        test_configuration: "${{ secrets.TEST_CONFIGURATION }}"
+    - name: Test
+      run: |
+        set -o pipefail && xcodebuild \
+            -derivedDataPath ../Build/DerivedData \
+            -clonedSourcePackagesDirPath ../Build/ClonedSources \
+            -workspace OktaMobileSDK.xcworkspace \
+            -scheme "DirectAuthSignIn (iOS)" \
+            -sdk iphonesimulator \
+            -destination "$iOS_DESTINATION" \
+            test 2>&1
+
   UITest-DeviceAuthSignIniOS:
     name: Device Auth Sign In (iOS)
     runs-on: macos-12
