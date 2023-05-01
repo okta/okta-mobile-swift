@@ -130,6 +130,7 @@ jobs:
         set -o pipefail && xcodebuild \
             -derivedDataPath ../Build/DerivedData \
             -clonedSourcePackagesDirPath ../Build/ClonedSources \
+            -resultBundlePath ~/TestResults/WebSignIn.xcresult \
             -workspace OktaMobileSDK.xcworkspace \
             -scheme "WebSignIn (iOS)" \
             -sdk iphonesimulator \
@@ -140,11 +141,20 @@ jobs:
         set -o pipefail && xcodebuild \
             -derivedDataPath ../Build/DerivedData \
             -clonedSourcePackagesDirPath ../Build/ClonedSources \
+            -resultBundlePath ~/TestResults/SingleSignOn.xcresult \
             -workspace OktaMobileSDK.xcworkspace \
             -scheme "SingleSignOn (iOS)" \
             -sdk iphonesimulator \
             -destination "$iOS_DESTINATION" \
             test 2>&1
+    - name: Upload Test Results
+      uses: actions/upload-artifact@v3
+      with:
+        path: ~/TestResults/*.xcresult
+        name: WebSignIn-Results
+        if-no-files-found: warn
+        retention-days: 7
+      if: success() || failure()
 
   UITest-DirectAuthSignIniOS:
     name: Direct Auth Sign In (iOS)
@@ -164,11 +174,20 @@ jobs:
         set -o pipefail && xcodebuild \
             -derivedDataPath ../Build/DerivedData \
             -clonedSourcePackagesDirPath ../Build/ClonedSources \
+            -resultBundlePath ~/TestResults/DirectAuthSignIn.xcresult \
             -workspace OktaMobileSDK.xcworkspace \
             -scheme "DirectAuthSignIn (iOS)" \
             -sdk iphonesimulator \
             -destination "$iOS_DESTINATION" \
             test 2>&1
+    - name: Upload Test Results
+      uses: actions/upload-artifact@v3
+      with:
+        path: ~/TestResults/*.xcresult
+        name: DeviceAuthSignIn-Results
+        if-no-files-found: warn
+        retention-days: 7
+      if: success() || failure()
 
   UITest-DeviceAuthSignIniOS:
     name: Device Auth Sign In (iOS)
@@ -188,11 +207,20 @@ jobs:
         set -o pipefail && xcodebuild \
             -derivedDataPath ../Build/DerivedData \
             -clonedSourcePackagesDirPath ../Build/ClonedSources \
+            -resultBundlePath ~/TestResults/DeviceAuthSignIn-iOS.xcresult \
             -workspace OktaMobileSDK.xcworkspace \
             -scheme "DeviceAuthSignIn (iOS)" \
             -sdk iphonesimulator \
             -destination "$iOS_DESTINATION" \
             test 2>&1
+    - name: Upload Test Results
+      uses: actions/upload-artifact@v3
+      with:
+        path: ~/TestResults/*.xcresult
+        name: DeviceAuthSignIn-iOS-Results
+        if-no-files-found: warn
+        retention-days: 7
+      if: success() || failure()
 
   UITest-DeviceAuthSignIntvOS:
     name: Device Auth Sign In (tvOS)
@@ -212,11 +240,20 @@ jobs:
         set -o pipefail && xcodebuild \
             -derivedDataPath ../Build/DerivedData \
             -clonedSourcePackagesDirPath ../Build/ClonedSources \
+            -resultBundlePath ~/TestResults/DeviceAuthSignIn-tvOS.xcresult \
             -workspace OktaMobileSDK.xcworkspace \
             -scheme "DeviceAuthSignIn (tvOS)" \
             -sdk appletvsimulator \
             -destination "$tvOS_DESTINATION" \
             test 2>&1
+    - name: Upload Test Results
+      uses: actions/upload-artifact@v3
+      with:
+        path: ~/TestResults/*.xcresult
+        name: DeviceAuthSignIn-tvOS-Results
+        if-no-files-found: warn
+        retention-days: 7
+      if: success() || failure()
 
   UITest-UserPasswordSignInmacOS:
     name: User Password Sign In (macOS)
@@ -236,10 +273,19 @@ jobs:
         set -o pipefail && xcodebuild \
             -derivedDataPath ../Build/DerivedData \
             -clonedSourcePackagesDirPath ../Build/ClonedSources \
+            -resultBundlePath ~/TestResults/UserPasswordSignIn.xcresult \
             -workspace OktaMobileSDK.xcworkspace \
             -sdk macosx \
             -scheme "UserPasswordSignIn (macOS)" \
             test 2>&1
+    - name: Upload Test Results
+      uses: actions/upload-artifact@v3
+      with:
+        path: ~/TestResults/*.xcresult
+        name: UserPasswordSignIn-Results
+        if-no-files-found: warn
+        retention-days: 7
+      if: success() || failure()
 
   UITest-ClassicNativeAuthiOS:
     name: Classic Native Auth (iOS)
@@ -259,8 +305,17 @@ jobs:
         set -o pipefail && xcodebuild \
             -derivedDataPath ../Build/DerivedData \
             -clonedSourcePackagesDirPath ../Build/ClonedSources \
+            -resultBundlePath ~/TestResults/ClassicNativeAuth.xcresult \
             -workspace OktaMobileSDK.xcworkspace \
             -scheme "ClassicNativeAuth (iOS)" \
             -sdk iphonesimulator \
             -destination "$iOS_DESTINATION" \
             test 2>&1
+    - name: Upload Test Results
+      uses: actions/upload-artifact@v3
+      with:
+        path: ~/TestResults/*.xcresult
+        name: ClassicNativeAuth-Results
+        if-no-files-found: warn
+        retention-days: 7
+      if: success() || failure()
