@@ -12,28 +12,11 @@
 
 import UIKit
 import SwiftUI
-import AuthFoundation
 import OktaDirectAuth
 
 class SignInViewController: UIHostingController<SignInView> {
     required init?(coder aDecoder: NSCoder) {
-        let flow: DirectAuthenticationFlow?
-        
-        // Workaround to remove the `device_sso` scope, when included in the property list.
-        if let configuration = try? OAuth2Client.PropertyListConfiguration(),
-           let ssoRange = configuration.scopes.range(of: "device_sso")
-        {
-            var scopes = configuration.scopes
-            scopes.removeSubrange(ssoRange)
-            
-            flow = DirectAuthenticationFlow(issuer: configuration.issuer,
-                                            clientId: configuration.clientId,
-                                            scopes: scopes)
-        } else {
-            flow = try? DirectAuthenticationFlow()
-        }
-        
-        super.init(coder: aDecoder, rootView: SignInView(flow: flow))
+        super.init(coder: aDecoder, rootView: SignInView(flow: try? DirectAuthenticationFlow()))
     }
 }
 
