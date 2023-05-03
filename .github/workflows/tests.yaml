@@ -154,12 +154,12 @@ jobs:
         name: WebSignIn-Results
         if-no-files-found: warn
         retention-days: 7
-      if: success() || failure()
+      if: always()
 
   UITest-DirectAuthSignIniOS:
     name: Direct Auth Sign In (iOS)
     runs-on: macos-12
-    timeout-minutes: 15
+    timeout-minutes: 20
     needs: 
       - XcodeBuild
       - SwiftBuild
@@ -187,7 +187,7 @@ jobs:
         name: DeviceAuthSignIn-Results
         if-no-files-found: warn
         retention-days: 7
-      if: success() || failure()
+      if: always()
 
   UITest-DeviceAuthSignIniOS:
     name: Device Auth Sign In (iOS)
@@ -220,7 +220,7 @@ jobs:
         name: DeviceAuthSignIn-iOS-Results
         if-no-files-found: warn
         retention-days: 7
-      if: success() || failure()
+      if: always()
 
   UITest-DeviceAuthSignIntvOS:
     name: Device Auth Sign In (tvOS)
@@ -253,7 +253,7 @@ jobs:
         name: DeviceAuthSignIn-tvOS-Results
         if-no-files-found: warn
         retention-days: 7
-      if: success() || failure()
+      if: always()
 
   UITest-UserPasswordSignInmacOS:
     name: User Password Sign In (macOS)
@@ -285,7 +285,7 @@ jobs:
         name: UserPasswordSignIn-Results
         if-no-files-found: warn
         retention-days: 7
-      if: success() || failure()
+      if: always()
 
   UITest-ClassicNativeAuthiOS:
     name: Classic Native Auth (iOS)
@@ -318,4 +318,4 @@ jobs:
         name: ClassicNativeAuth-Results
         if-no-files-found: warn
         retention-days: 7
-      if: success() || failure()
+      if: always()
