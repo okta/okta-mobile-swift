@@ -16,10 +16,17 @@ import XCTest
 protocol WebLogin {
     var signInButton: XCUIElement { get }
     var ephemeralSwitch: XCUIElement { get }
-
+    var isEphemeral: Bool { get }
+    
     func setEphemeral(_ enabled: Bool)
     func login(username: String?, password: String?)
     func cancel()
+}
+
+extension WebLogin {
+    var isEphemeral: Bool {
+        ephemeralSwitch.isOn ?? false
+    }
 }
 
 extension WebLogin where Self: Screen {
@@ -30,32 +37,75 @@ extension WebLogin where Self: Screen {
     }
     
     func login(username: String? = nil, password: String? = nil) {
-        signInButton.tap()
-
-        let isEphemeral = ephemeralSwitch.isOn ?? false
-        if !isEphemeral {
-            testCase.tapAlertButton(named: "Continue")
+        if !app.webViews.firstMatch.exists {
+            if signInButton.exists {
+                signInButton.tap()
+            }
+            
+            if !isEphemeral {
+                testCase.tapAlertButton(named: "Continue")
+            }
         }
 
         guard app.webViews.firstMatch.waitForExistence(timeout: .long) else { return }
+        send(username: username)
         
-        let keyboardDoneQuery = app.toolbars.matching(identifier: "Toolbar").buttons["Done"]
+        let nextButton = app.webViews.buttons["Next"]
+        if nextButton.exists {
+            nextButton.tap()
+        }
+        
+        send(password: password)
+        
+        if username != nil || password != nil {
+            if verifyButton.exists {
+                verifyButton.tap()
+            } else if signInButton.waitForNonExistence(timeout: .short) {
+                signInButton.tap()
+            }
+        }
 
+        _ = app.webViews.firstMatch.waitForNonExistence(timeout: .standard)
+    }
+    
+    func send(username: String? = nil) {
         if let username = username,
            app.webViews.textFields.firstMatch.waitForExistence(timeout: .veryLong)
         {
             let field = app.webViews.textFields.element(boundBy: 0)
-            field.tap()
             
             if !isEphemeral,
                let fieldValue = field.value as? String,
                !fieldValue.isEmpty
             {
                 field.tap(withNumberOfTaps: 3, numberOfTouches: 1)
+            } else {
+                field.tap()
             }
             
             field.typeText(username)
-            keyboardDoneQuery.tap()
+
+            dismissKeyboard()
+        }
+    }
+    
+    func select(authenticator: String) {
+        let frame = app.webViews.staticTexts[authenticator].frame
+        for link in app.webViews.links {
+            guard link.label == "Select" else { continue }
+            
+            if link.frame.midY > frame.minY,
+               link.frame.midY < frame.maxY
+            {
+                link.tap()
+                return
+            }
+        }
+    }
+    
+    func send(password: String? = nil) {
+        if app.webViews.staticTexts["Select from the following options"].waitForExistence(timeout: 1) {
+            select(authenticator: "Password")
         }
         
         if let password = password,
@@ -64,16 +114,9 @@ extension WebLogin where Self: Screen {
             let field = app.webViews.secureTextFields.element(boundBy: 0)
             field.tap()
             field.typeText(password)
-            keyboardDoneQuery.tap()
+            
+            dismissKeyboard()
         }
-        
-        if username != nil || password != nil {
-            let button = app.webViews.buttons["Sign in"]
-            _ = button.waitForExistence(timeout: .short)
-            button.tap()
-        }
-        
-        _ = app.webViews.firstMatch.waitForNonExistence(timeout: .standard)
     }
     
     func cancel() {
@@ -84,5 +127,21 @@ extension WebLogin where Self: Screen {
             .waitForExistence(timeout: .short))
         
         app.alerts.buttons["OK"].tap()
+    }
+    
+    private var keyboardDoneQuery: XCUIElement {
+        app.toolbars.matching(identifier: "Toolbar").buttons["Done"]
+    }
+    
+    private var signInButton: XCUIElement {
+        app.webViews.buttons["Sign in"]
+    }
+    
+    private var nextButton: XCUIElement {
+        app.webViews.buttons["Next"]
+    }
+    
+    private var verifyButton: XCUIElement {
+        app.webViews.buttons["Verify"]
     }
 }

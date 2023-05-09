@@ -26,13 +26,9 @@ jobs:
     - name: Prepare directory
       run: |
         mkdir -p docs/development .build/symbol-graphs
-    - name: Find target list
-      run: |
-        export TARGET_LIST=$(swift package describe --type json | jq ".products[].name" | sed -e 's/"//g')
-        echo "::set-env name=TARGET_LIST::$TARGET_LIST"
     - name: Build Symbol Graphs
       run: |
-        for TARGET in $TARGET_LIST; do
+        for TARGET in $(swift package describe --type json | jq ".products[].name" | sed -e 's/"//g'); do
             echo "Building $TARGET"
             swift build \
                 --target $TARGET \
@@ -53,7 +49,7 @@ jobs:
 
         export DOCC_JSON_PRETTYPRINT=YES
         mkdir -p docs/$VERSION
-        for TARGET in $TARGET_LIST; do
+        for TARGET in $(swift package describe --type json | jq ".products[].name" | sed -e 's/"//g'); do
             NAME=$(echo "$TARGET" | tr '[:upper:]' '[:lower:]')
 
             xcrun docc convert \

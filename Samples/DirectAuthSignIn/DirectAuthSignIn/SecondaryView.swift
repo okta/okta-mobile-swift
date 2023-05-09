@@ -46,12 +46,14 @@ extension SignInView {
                             Text($0.title)
                         }
                     }.pickerStyle(.menu)
+                        .accessibilityIdentifier("factor_type_button")
                         .padding(.horizontal, -10)
                         .padding(.vertical, -4)
                     
                     if selectedFactor == .otp {
                         TextField("123456", text: $oneTimeCode)
                             .textContentType(.oneTimeCode)
+                            .accessibilityIdentifier("one_time_code_button")
                             .padding(10)
                             .overlay {
                                 RoundedRectangle(cornerRadius: 6)
@@ -73,6 +75,7 @@ extension SignInView {
                                 }
                             }
                         }
+                        .accessibilityIdentifier("signin_button")
                         .font(.headline)
                         .buttonStyle(.borderedProminent)
                     }

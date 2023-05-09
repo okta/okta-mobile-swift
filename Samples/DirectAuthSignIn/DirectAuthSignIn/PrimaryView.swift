@@ -42,6 +42,7 @@ extension SignInView {
                 VStack(alignment: .leading, spacing: 4) {
                     Text("Username:")
                     TextField("jane.doe@example.com", text: $username)
+                        .accessibilityIdentifier("username_field")
                         .keyboardType(.emailAddress)
                         .autocorrectionDisabled(true)
                         .textInputAutocapitalization(.never)
@@ -59,6 +60,7 @@ extension SignInView {
                             Text($0.title)
                         }
                     }.pickerStyle(.menu)
+                        .accessibilityIdentifier("factor_type_button")
                         .padding(.horizontal, -10)
                         .padding(.vertical, -4)
                     
@@ -66,6 +68,7 @@ extension SignInView {
                     case .password:
                         SecureField("Password", text: $password)
                             .textContentType(.password)
+                            .accessibilityIdentifier("password_button")
                             .padding(10)
                             .overlay {
                                 RoundedRectangle(cornerRadius: 6)
@@ -74,6 +77,7 @@ extension SignInView {
                     case .otp:
                         TextField("123456", text: $oneTimeCode)
                             .textContentType(.oneTimeCode)
+                            .accessibilityIdentifier("one_time_code_button")
                             .padding(10)
                             .overlay {
                                 RoundedRectangle(cornerRadius: 6)
@@ -96,6 +100,7 @@ extension SignInView {
                         }
                     }
                 }
+                .accessibilityIdentifier("signin_button")
                 .font(.headline)
                 .buttonStyle(.borderedProminent)
             }.padding()

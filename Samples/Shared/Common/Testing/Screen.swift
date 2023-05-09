@@ -16,4 +16,23 @@ import XCTest
 protocol Screen {
     var app: XCUIApplication { get }
     var testCase: XCTestCase { get }
+    
+    func dismissKeyboard()
+}
+
+extension Screen {
+    func dismissKeyboard() {
+        #if os(tvOS)
+        // TODO: Update this in the future to select the appropriately named button.
+        XCUIRemote.shared.press(.select)
+        #else
+        if app.keyboards.element(boundBy: 0).exists {
+            if UIDevice.current.userInterfaceIdiom == .pad {
+                app.keyboards.buttons["Hide keyboard"].tap()
+            } else {
+                app.toolbars.buttons["Done"].tap()
+            }
+        }
+        #endif
+    }
 }

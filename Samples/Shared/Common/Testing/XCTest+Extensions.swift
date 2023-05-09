@@ -79,3 +79,16 @@ extension XCUIElementQuery {
     }
 }
 
+extension XCUIElementQuery: Sequence {
+    public typealias Iterator = AnyIterator<XCUIElement>
+    public func makeIterator() -> Iterator {
+        var index = UInt(0)
+        return AnyIterator {
+            guard index < self.count else { return nil }
+
+            let element = self.element(boundBy: Int(index))
+            index = index + 1
+            return element
+        }
+    }
+}
