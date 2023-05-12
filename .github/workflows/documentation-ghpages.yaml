@@ -47,7 +47,7 @@ jobs:
                 --transform-for-static-hosting \
                 --hosting-base-path \
                 okta-mobile-swift/$VERSION/$NAME \
-                --output-path ./docs
+                --output-path ./docs/okta-mobile-swift/$VERSION/$NAME
             sed -I -e "s#<head>#<head><meta http-equiv='refresh' content='0;url=./documentation/$NAME/'>#" \
                 docs/$VERSION/$NAME/index.html
         done
