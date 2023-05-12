@@ -26,22 +26,7 @@ jobs:
     runs-on: macos-12
     steps:
     - uses: actions/checkout@master
-    - name: Prepare directory
-      run: |
-        mkdir -p docs/development .build/symbol-graphs
-    - name: Build Symbol Graphs
-      run: |
-        for TARGET in $(swift package describe --type json | jq ".products[].name" | sed -e 's/"//g'); do
-            echo "Building $TARGET"
-            swift build \
-                --target $TARGET \
-                -Xswiftc \
-                -emit-symbol-graph \
-                -Xswiftc \
-                -emit-symbol-graph-dir \
-                -Xswiftc .build/symbol-graphs
-        done
-    - name: Generate Documentation
+    - name: Build Documentation
       run: |
         set +ex
         VERSION=$(git describe --tags 2>/dev/null)
@@ -49,25 +34,20 @@ jobs:
             VERSION=development
         fi
         set -e
-
         export DOCC_JSON_PRETTYPRINT=YES
-        mkdir -p docs/$VERSION
+
         for TARGET in $(swift package describe --type json | jq ".products[].name" | sed -e 's/"//g'); do
+            echo "Building $TARGET"
             NAME=$(echo "$TARGET" | tr '[:upper:]' '[:lower:]')
-
-            xcrun docc convert \
-                Sources/$TARGET/$TARGET.docc \
-                --enable-inherited-docs \
-                --output-path $TARGET.doccarchive \
-                --fallback-display-name $TARGET \
-                --fallback-bundle-identifier com.okta.mobile.$NAME \
-                --fallback-bundle-version $VERSION \
-                --additional-symbol-graph-dir .build/symbol-graphs
-
-            $(xcrun --find docc) process-archive transform-for-static-hosting \
-                $TARGET.doccarchive \
-                --hosting-base-path okta-mobile-swift/$VERSION/$NAME \
-                --output-path docs/$VERSION/$NAME
+            swift package \
+                --allow-writing-to-directory docs \
+                generate-documentation \
+                --target $TARGET \
+                --disable-indexing \
+                --transform-for-static-hosting \
+                --hosting-base-path \
+                okta-mobile-swift/$VERSION/$NAME \
+                --output-path ./docs
             sed -I -e "s#<head>#<head><meta http-equiv='refresh' content='0;url=./documentation/$NAME/'>#" \
                 docs/$VERSION/$NAME/index.html
         done
