@@ -32,4 +32,4 @@ When you add your delegate (e.g. using ``OAuth2Client/add(delegate:)``), your cl
 
 ### Monitoring outgoing network requests
 
-Building upon the previous section, another method ``APIClientDelegate`` supports is handling responses to requests, through the use of ``APIClientDelegate/api(client:didSend:received:)-10od2``. Information about the raw response, including ``APIResponse/RateLimit``, associated links (e.g. next, previous, and current pagination results), and information about the request ID (which can be used for debugging purposes).
+Building upon the previous section, another method ``APIClientDelegate`` supports is handling responses to requests, through the use of ``APIClientDelegate/api(client:didSend:received:)-4mcbm``. Information about the raw response, including ``APIResponse/RateLimit``, associated links (e.g. next, previous, and current pagination results), and information about the request ID (which can be used for debugging purposes).
