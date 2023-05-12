@@ -8,15 +8,15 @@
   "hierarchy" : {
     "paths" : [
       [
-        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation",
-        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/OAuth2Client",
-        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/OAuth2Client\/APIClient-Implementations"
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/OAuth2Client",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/OAuth2Client\/APIClient-Implementations"
       ]
     ]
   },
   "identifier" : {
     "interfaceLanguage" : "swift",
-    "url" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/OAuth2Client\/error(from:)"
+    "url" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/OAuth2Client\/error(from:)"
   },
   "kind" : "symbol",
   "metadata" : {
@@ -157,7 +157,7 @@
               "type" : "text"
             },
             {
-              "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/OktaAPIError",
+              "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/OktaAPIError",
               "isActive" : true,
               "type" : "reference"
             },
@@ -166,7 +166,7 @@
               "type" : "text"
             },
             {
-              "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/OAuth2ServerError",
+              "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/OAuth2ServerError",
               "isActive" : true,
               "type" : "reference"
             },
@@ -202,7 +202,7 @@
   ],
   "schemaVersion" : {
     "major" : 0,
-    "minor" : 2,
+    "minor" : 3,
     "patch" : 0
   },
   "sections" : [
@@ -222,21 +222,21 @@
   ]
 , 
 "references": {
-"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation": {
+"doc://AuthFoundation/documentation/AuthFoundation": {
   "abstract" : [
     {
       "text" : "Library that provides foundational features used by Okta’s authentication libraries, as well as APIs used to work with tokens and user credentials.",
       "type" : "text"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation",
   "kind" : "symbol",
   "role" : "collection",
   "title" : "AuthFoundation",
   "type" : "topic",
   "url" : "\/documentation\/authfoundation"
 },
-"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/OAuth2Client": {
+"doc://AuthFoundation/documentation/AuthFoundation/OAuth2Client": {
   "abstract" : [
     {
       "text" : "An OAuth2 client, used to interact with a given authorization server.",
@@ -257,7 +257,7 @@
       "text" : "OAuth2Client"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/OAuth2Client",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/OAuth2Client",
   "kind" : "symbol",
   "navigatorTitle" : [
     {
@@ -270,18 +270,18 @@
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/oauth2client"
 },
-"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/OAuth2Client/APIClient-Implementations": {
+"doc://AuthFoundation/documentation/AuthFoundation/OAuth2Client/APIClient-Implementations": {
   "abstract" : [
 
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/OAuth2Client\/APIClient-Implementations",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/OAuth2Client\/APIClient-Implementations",
   "kind" : "article",
   "role" : "collectionGroup",
   "title" : "APIClient Implementations",
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/oauth2client\/apiclient-implementations"
 },
-"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/OAuth2Client/error(from:)": {
+"doc://AuthFoundation/documentation/AuthFoundation/OAuth2Client/error(from:)": {
   "abstract" : [
     {
       "text" : "Transforms HTTP response data into the appropriate error type, when requests are unsuccessful.",
@@ -332,14 +332,14 @@
       "text" : "?"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/OAuth2Client\/error(from:)",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/OAuth2Client\/error(from:)",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "error(from:)",
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/oauth2client\/error(from:)"
 },
-"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/OAuth2ServerError": {
+"doc://AuthFoundation/documentation/AuthFoundation/OAuth2ServerError": {
   "abstract" : [
     {
       "text" : "Describes errors reported from an OAuth2 server.",
@@ -360,7 +360,7 @@
       "text" : "OAuth2ServerError"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/OAuth2ServerError",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/OAuth2ServerError",
   "kind" : "symbol",
   "navigatorTitle" : [
     {
@@ -373,7 +373,7 @@
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/oauth2servererror"
 },
-"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/OktaAPIError": {
+"doc://AuthFoundation/documentation/AuthFoundation/OktaAPIError": {
   "abstract" : [
     {
       "text" : "Describes errors that may be reported from an Okta API endpoint.",
@@ -394,7 +394,7 @@
       "text" : "OktaAPIError"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/OktaAPIError",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/OktaAPIError",
   "kind" : "symbol",
   "navigatorTitle" : [
     {

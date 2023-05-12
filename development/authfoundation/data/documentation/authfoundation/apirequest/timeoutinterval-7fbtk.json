@@ -8,7 +8,7 @@
   "defaultImplementationsSections" : [
     {
       "identifiers" : [
-        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/APIRequest\/timeoutInterval-58cfn"
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/APIRequest\/timeoutInterval-58cfn"
       ],
       "title" : "APIRequest Implementations"
     }
@@ -16,14 +16,14 @@
   "hierarchy" : {
     "paths" : [
       [
-        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation",
-        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/APIRequest"
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/APIRequest"
       ]
     ]
   },
   "identifier" : {
     "interfaceLanguage" : "swift",
-    "url" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/APIRequest\/timeoutInterval-7fbtk"
+    "url" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/APIRequest\/timeoutInterval-7fbtk"
   },
   "kind" : "symbol",
   "metadata" : {
@@ -114,7 +114,7 @@
   ],
   "schemaVersion" : {
     "major" : 0,
-    "minor" : 2,
+    "minor" : 3,
     "patch" : 0
   },
   "sections" : [
@@ -134,21 +134,21 @@
   ]
 , 
 "references": {
-"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation": {
+"doc://AuthFoundation/documentation/AuthFoundation": {
   "abstract" : [
     {
       "text" : "Library that provides foundational features used by Okta’s authentication libraries, as well as APIs used to work with tokens and user credentials.",
       "type" : "text"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation",
   "kind" : "symbol",
   "role" : "collection",
   "title" : "AuthFoundation",
   "type" : "topic",
   "url" : "\/documentation\/authfoundation"
 },
-"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/APIRequest": {
+"doc://AuthFoundation/documentation/AuthFoundation/APIRequest": {
   "abstract" : [
     {
       "text" : "Abstract protocol defining the structure of an API request.",
@@ -169,7 +169,7 @@
       "text" : "APIRequest"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/APIRequest",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/APIRequest",
   "kind" : "symbol",
   "navigatorTitle" : [
     {
@@ -182,12 +182,9 @@
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/apirequest"
 },
-"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/APIRequest/timeoutInterval-58cfn": {
+"doc://AuthFoundation/documentation/AuthFoundation/APIRequest/timeoutInterval-58cfn": {
   "abstract" : [
-    {
-      "text" : "The HTTP timeout interval.",
-      "type" : "text"
-    }
+
   ],
   "fragments" : [
     {
@@ -212,14 +209,14 @@
       "text" : "TimeInterval"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/APIRequest\/timeoutInterval-58cfn",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/APIRequest\/timeoutInterval-58cfn",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "timeoutInterval",
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/apirequest\/timeoutinterval-58cfn"
 },
-"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/APIRequest/timeoutInterval-7fbtk": {
+"doc://AuthFoundation/documentation/AuthFoundation/APIRequest/timeoutInterval-7fbtk": {
   "abstract" : [
     {
       "text" : "The HTTP timeout interval.",
@@ -250,7 +247,7 @@
       "text" : "TimeInterval"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/APIRequest\/timeoutInterval-7fbtk",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/APIRequest\/timeoutInterval-7fbtk",
   "kind" : "symbol",
   "required" : true,
   "role" : "symbol",

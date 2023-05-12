@@ -8,14 +8,14 @@
   "hierarchy" : {
     "paths" : [
       [
-        "doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/OktaOAuth2",
-        "doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/OktaOAuth2\/TokenExchangeFlow"
+        "doc:\/\/OktaOAuth2\/documentation\/OktaOAuth2",
+        "doc:\/\/OktaOAuth2\/documentation\/OktaOAuth2\/TokenExchangeFlow"
       ]
     ]
   },
   "identifier" : {
     "interfaceLanguage" : "swift",
-    "url" : "doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/OktaOAuth2\/TokenExchangeFlow\/init(audience:client:)"
+    "url" : "doc:\/\/OktaOAuth2\/documentation\/OktaOAuth2\/TokenExchangeFlow\/init(audience:client:)"
   },
   "kind" : "symbol",
   "metadata" : {
@@ -36,6 +36,15 @@
       {
         "kind" : "text",
         "text" : ": "
+      },
+      {
+        "kind" : "typeIdentifier",
+        "preciseIdentifier" : "s:10OktaOAuth217TokenExchangeFlowC",
+        "text" : "TokenExchangeFlow"
+      },
+      {
+        "kind" : "text",
+        "text" : "."
       },
       {
         "kind" : "typeIdentifier",
@@ -102,7 +111,17 @@
               "text" : ": "
             },
             {
-              "identifier" : "doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/OktaOAuth2\/TokenExchangeFlow\/Audience-swift.enum",
+              "identifier" : "doc:\/\/OktaOAuth2\/documentation\/OktaOAuth2\/TokenExchangeFlow",
+              "kind" : "typeIdentifier",
+              "preciseIdentifier" : "s:10OktaOAuth217TokenExchangeFlowC",
+              "text" : "TokenExchangeFlow"
+            },
+            {
+              "kind" : "text",
+              "text" : "."
+            },
+            {
+              "identifier" : "doc:\/\/OktaOAuth2\/documentation\/OktaOAuth2\/TokenExchangeFlow\/Audience-swift.enum",
               "kind" : "typeIdentifier",
               "preciseIdentifier" : "s:10OktaOAuth217TokenExchangeFlowC8AudienceO",
               "text" : "Audience"
@@ -120,7 +139,6 @@
               "text" : ": "
             },
             {
-              "identifier" : "doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/AuthFoundation\/OAuth2Client",
               "kind" : "typeIdentifier",
               "preciseIdentifier" : "s:14AuthFoundation12OAuth2ClientC",
               "text" : "OAuth2Client"
@@ -178,7 +196,7 @@
   ],
   "schemaVersion" : {
     "major" : 0,
-    "minor" : 2,
+    "minor" : 3,
     "patch" : 0
   },
   "sections" : [
@@ -198,55 +216,21 @@
   ]
 , 
 "references": {
-"doc://com.okta.mobile.oktaoauth2/documentation/AuthFoundation/OAuth2Client": {
-  "abstract" : [
-    {
-      "text" : "An OAuth2 client, used to interact with a given authorization server.",
-      "type" : "text"
-    }
-  ],
-  "fragments" : [
-    {
-      "kind" : "keyword",
-      "text" : "class"
-    },
-    {
-      "kind" : "text",
-      "text" : " "
-    },
-    {
-      "kind" : "identifier",
-      "text" : "OAuth2Client"
-    }
-  ],
-  "identifier" : "doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/AuthFoundation\/OAuth2Client",
-  "kind" : "symbol",
-  "navigatorTitle" : [
-    {
-      "kind" : "identifier",
-      "text" : "OAuth2Client"
-    }
-  ],
-  "role" : "symbol",
-  "title" : "OAuth2Client",
-  "type" : "topic",
-  "url" : "\/documentation\/authfoundation\/oauth2client"
-},
-"doc://com.okta.mobile.oktaoauth2/documentation/OktaOAuth2": {
+"doc://OktaOAuth2/documentation/OktaOAuth2": {
   "abstract" : [
     {
       "text" : "Interact with Okta’s OAuth2 APIs to authenticate users, and interact with user resources.",
       "type" : "text"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/OktaOAuth2",
+  "identifier" : "doc:\/\/OktaOAuth2\/documentation\/OktaOAuth2",
   "kind" : "symbol",
   "role" : "collection",
   "title" : "OktaOAuth2",
   "type" : "topic",
   "url" : "\/documentation\/oktaoauth2"
 },
-"doc://com.okta.mobile.oktaoauth2/documentation/OktaOAuth2/TokenExchangeFlow": {
+"doc://OktaOAuth2/documentation/OktaOAuth2/TokenExchangeFlow": {
   "abstract" : [
     {
       "text" : "An authentication flow class that implements the Token Exchange Flow.",
@@ -267,7 +251,7 @@
       "text" : "TokenExchangeFlow"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/OktaOAuth2\/TokenExchangeFlow",
+  "identifier" : "doc:\/\/OktaOAuth2\/documentation\/OktaOAuth2\/TokenExchangeFlow",
   "kind" : "symbol",
   "navigatorTitle" : [
     {
@@ -280,7 +264,7 @@
   "type" : "topic",
   "url" : "\/documentation\/oktaoauth2\/tokenexchangeflow"
 },
-"doc://com.okta.mobile.oktaoauth2/documentation/OktaOAuth2/TokenExchangeFlow/Audience-swift.enum": {
+"doc://OktaOAuth2/documentation/OktaOAuth2/TokenExchangeFlow/Audience-swift.enum": {
   "abstract" : [
     {
       "text" : "Identifies the audience of the authorization server.",
@@ -301,7 +285,7 @@
       "text" : "Audience"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/OktaOAuth2\/TokenExchangeFlow\/Audience-swift.enum",
+  "identifier" : "doc:\/\/OktaOAuth2\/documentation\/OktaOAuth2\/TokenExchangeFlow\/Audience-swift.enum",
   "kind" : "symbol",
   "navigatorTitle" : [
     {
@@ -314,7 +298,7 @@
   "type" : "topic",
   "url" : "\/documentation\/oktaoauth2\/tokenexchangeflow\/audience-swift.enum"
 },
-"doc://com.okta.mobile.oktaoauth2/documentation/OktaOAuth2/TokenExchangeFlow/init(audience:client:)": {
+"doc://OktaOAuth2/documentation/OktaOAuth2/TokenExchangeFlow/init(audience:client:)": {
   "abstract" : [
     {
       "text" : "Initializer to construct a flow from a default audience and client.",
@@ -337,6 +321,15 @@
     {
       "kind" : "text",
       "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:10OktaOAuth217TokenExchangeFlowC",
+      "text" : "TokenExchangeFlow"
+    },
+    {
+      "kind" : "text",
+      "text" : "."
     },
     {
       "kind" : "typeIdentifier",
@@ -365,7 +358,7 @@
       "text" : ")"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/OktaOAuth2\/TokenExchangeFlow\/init(audience:client:)",
+  "identifier" : "doc:\/\/OktaOAuth2\/documentation\/OktaOAuth2\/TokenExchangeFlow\/init(audience:client:)",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "init(audience:client:)",

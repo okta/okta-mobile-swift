@@ -1,21 +1,15 @@
 {
-  "abstract" : [
-    {
-      "text" : "No overview available.",
-      "type" : "text"
-    }
-  ],
   "hierarchy" : {
     "paths" : [
       [
-        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation",
-        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/ClaimContainer"
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/ClaimContainer"
       ]
     ]
   },
   "identifier" : {
     "interfaceLanguage" : "swift",
-    "url" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/ClaimContainer\/encode(to:)"
+    "url" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/ClaimContainer\/encode(to:)"
   },
   "kind" : "symbol",
   "metadata" : {
@@ -134,7 +128,7 @@
   ],
   "schemaVersion" : {
     "major" : 0,
-    "minor" : 2,
+    "minor" : 3,
     "patch" : 0
   },
   "sections" : [
@@ -154,21 +148,21 @@
   ]
 , 
 "references": {
-"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation": {
+"doc://AuthFoundation/documentation/AuthFoundation": {
   "abstract" : [
     {
       "text" : "Library that provides foundational features used by Okta’s authentication libraries, as well as APIs used to work with tokens and user credentials.",
       "type" : "text"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation",
   "kind" : "symbol",
   "role" : "collection",
   "title" : "AuthFoundation",
   "type" : "topic",
   "url" : "\/documentation\/authfoundation"
 },
-"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/ClaimContainer": {
+"doc://AuthFoundation/documentation/AuthFoundation/ClaimContainer": {
   "abstract" : [
     {
       "text" : "Protocol used to define shared behavior when an object can contain claims.",
@@ -189,7 +183,7 @@
       "text" : "ClaimContainer"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/ClaimContainer",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/ClaimContainer",
   "kind" : "symbol",
   "navigatorTitle" : [
     {
@@ -202,7 +196,7 @@
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/claimcontainer"
 },
-"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/ClaimContainer/encode(to:)": {
+"doc://AuthFoundation/documentation/AuthFoundation/ClaimContainer/encode(to:)": {
   "abstract" : [
 
   ],
@@ -245,7 +239,7 @@
       "text" : "throws"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/ClaimContainer\/encode(to:)",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/ClaimContainer\/encode(to:)",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "encode(to:)",

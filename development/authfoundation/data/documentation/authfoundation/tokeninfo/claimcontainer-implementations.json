@@ -1,21 +1,15 @@
 {
-  "abstract" : [
-    {
-      "text" : "No overview available.",
-      "type" : "text"
-    }
-  ],
   "hierarchy" : {
     "paths" : [
       [
-        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation",
-        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/TokenInfo"
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/TokenInfo"
       ]
     ]
   },
   "identifier" : {
     "interfaceLanguage" : "swift",
-    "url" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/TokenInfo\/ClaimContainer-Implementations"
+    "url" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/TokenInfo\/ClaimContainer-Implementations"
   },
   "kind" : "article",
   "metadata" : {
@@ -29,7 +23,7 @@
   },
   "schemaVersion" : {
     "major" : 0,
-    "minor" : 2,
+    "minor" : 3,
     "patch" : 0
   },
   "sections" : [
@@ -39,16 +33,16 @@
     {
       "generated" : true,
       "identifiers" : [
-        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/TokenInfo\/claims",
-        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/TokenInfo\/customClaims"
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/TokenInfo\/claims",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/TokenInfo\/customClaims"
       ],
       "title" : "Instance Properties"
     },
     {
       "generated" : true,
       "identifiers" : [
-        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/TokenInfo\/encode(to:)",
-        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/TokenInfo\/value(_:for:)"
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/TokenInfo\/encode(to:)",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/TokenInfo\/value(_:for:)"
       ],
       "title" : "Instance Methods"
     }
@@ -67,21 +61,21 @@
   ]
 , 
 "references": {
-"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation": {
+"doc://AuthFoundation/documentation/AuthFoundation": {
   "abstract" : [
     {
       "text" : "Library that provides foundational features used by Okta’s authentication libraries, as well as APIs used to work with tokens and user credentials.",
       "type" : "text"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation",
   "kind" : "symbol",
   "role" : "collection",
   "title" : "AuthFoundation",
   "type" : "topic",
   "url" : "\/documentation\/authfoundation"
 },
-"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/TokenInfo": {
+"doc://AuthFoundation/documentation/AuthFoundation/TokenInfo": {
   "abstract" : [
     {
       "text" : "Introspected token information.",
@@ -102,7 +96,7 @@
       "text" : "TokenInfo"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/TokenInfo",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/TokenInfo",
   "kind" : "symbol",
   "navigatorTitle" : [
     {
@@ -115,14 +109,14 @@
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/tokeninfo"
 },
-"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/TokenInfo/claims": {
+"doc://AuthFoundation/documentation/AuthFoundation/TokenInfo/claims": {
   "abstract" : [
     {
       "text" : "Returns the list of all claims contained within this ",
       "type" : "text"
     },
     {
-      "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/UserInfo",
+      "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/UserInfo",
       "isActive" : true,
       "type" : "reference"
     },
@@ -158,14 +152,14 @@
       "text" : "]"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/TokenInfo\/claims",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/TokenInfo\/claims",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "claims",
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/tokeninfo\/claims"
 },
-"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/TokenInfo/customClaims": {
+"doc://AuthFoundation/documentation/AuthFoundation/TokenInfo/customClaims": {
   "abstract" : [
     {
       "text" : "Returns the list of custom claims this instance might contain.",
@@ -199,14 +193,14 @@
       "text" : "]"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/TokenInfo\/customClaims",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/TokenInfo\/customClaims",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "customClaims",
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/tokeninfo\/customclaims"
 },
-"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/TokenInfo/encode(to:)": {
+"doc://AuthFoundation/documentation/AuthFoundation/TokenInfo/encode(to:)": {
   "abstract" : [
 
   ],
@@ -249,14 +243,14 @@
       "text" : "throws"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/TokenInfo\/encode(to:)",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/TokenInfo\/encode(to:)",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "encode(to:)",
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/tokeninfo\/encode(to:)"
 },
-"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/TokenInfo/value(_:for:)": {
+"doc://AuthFoundation/documentation/AuthFoundation/TokenInfo/value(_:for:)": {
   "abstract" : [
     {
       "text" : "Returns the value for the supplied key, of the expected type.",
@@ -322,14 +316,14 @@
       "text" : "?"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/TokenInfo\/value(_:for:)",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/TokenInfo\/value(_:for:)",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "value(_:for:)",
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/tokeninfo\/value(_:for:)"
 },
-"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/UserInfo": {
+"doc://AuthFoundation/documentation/AuthFoundation/UserInfo": {
   "abstract" : [
     {
       "text" : "User profile information.",
@@ -350,7 +344,7 @@
       "text" : "UserInfo"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/UserInfo",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/UserInfo",
   "kind" : "symbol",
   "navigatorTitle" : [
     {

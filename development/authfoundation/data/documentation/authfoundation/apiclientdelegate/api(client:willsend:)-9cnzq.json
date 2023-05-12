@@ -1,22 +1,30 @@
 {
   "abstract" : [
     {
-      "text" : "Invoked immediately prior to a URLRequest being converted to a DataTask.",
+      "text" : "Inherited from ",
+      "type" : "text"
+    },
+    {
+      "code" : "APIClientDelegate.api(client:willSend:)",
+      "type" : "codeVoice"
+    },
+    {
+      "text" : ".",
       "type" : "text"
     }
   ],
   "hierarchy" : {
     "paths" : [
       [
-        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation",
-        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/APIClientDelegate",
-        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/APIClientDelegate\/api(client:willSend:)-9p8jr"
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/APIClientDelegate",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/APIClientDelegate\/api(client:willSend:)-9p8jr"
       ]
     ]
   },
   "identifier" : {
     "interfaceLanguage" : "swift",
-    "url" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/APIClientDelegate\/api(client:willSend:)-9cnzq"
+    "url" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/APIClientDelegate\/api(client:willSend:)-9cnzq"
   },
   "kind" : "symbol",
   "metadata" : {
@@ -128,7 +136,7 @@
               "text" : ": "
             },
             {
-              "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/APIClient",
+              "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/APIClient",
               "kind" : "typeIdentifier",
               "preciseIdentifier" : "s:14AuthFoundation9APIClientP",
               "text" : "APIClient"
@@ -178,7 +186,7 @@
   ],
   "schemaVersion" : {
     "major" : 0,
-    "minor" : 2,
+    "minor" : 3,
     "patch" : 0
   },
   "sections" : [
@@ -198,21 +206,21 @@
   ]
 , 
 "references": {
-"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation": {
+"doc://AuthFoundation/documentation/AuthFoundation": {
   "abstract" : [
     {
       "text" : "Library that provides foundational features used by Okta’s authentication libraries, as well as APIs used to work with tokens and user credentials.",
       "type" : "text"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation",
   "kind" : "symbol",
   "role" : "collection",
   "title" : "AuthFoundation",
   "type" : "topic",
   "url" : "\/documentation\/authfoundation"
 },
-"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/APIClient": {
+"doc://AuthFoundation/documentation/AuthFoundation/APIClient": {
   "abstract" : [
     {
       "text" : "Protocol defining the interfaces and capabilities that API clients can conform to.",
@@ -233,7 +241,7 @@
       "text" : "APIClient"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/APIClient",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/APIClient",
   "kind" : "symbol",
   "navigatorTitle" : [
     {
@@ -246,7 +254,7 @@
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/apiclient"
 },
-"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/APIClientDelegate": {
+"doc://AuthFoundation/documentation/AuthFoundation/APIClientDelegate": {
   "abstract" : [
     {
       "text" : "Protocol that delegates of APIClient instances can conform to.",
@@ -267,7 +275,7 @@
       "text" : "APIClientDelegate"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/APIClientDelegate",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/APIClientDelegate",
   "kind" : "symbol",
   "navigatorTitle" : [
     {
@@ -280,12 +288,9 @@
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/apiclientdelegate"
 },
-"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/APIClientDelegate/api(client:willSend:)-9cnzq": {
+"doc://AuthFoundation/documentation/AuthFoundation/APIClientDelegate/api(client:willSend:)-9cnzq": {
   "abstract" : [
-    {
-      "text" : "Invoked immediately prior to a URLRequest being converted to a DataTask.",
-      "type" : "text"
-    }
+
   ],
   "fragments" : [
     {
@@ -347,14 +352,14 @@
       "text" : ")"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/APIClientDelegate\/api(client:willSend:)-9cnzq",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/APIClientDelegate\/api(client:willSend:)-9cnzq",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "api(client:willSend:)",
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/apiclientdelegate\/api(client:willsend:)-9cnzq"
 },
-"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/APIClientDelegate/api(client:willSend:)-9p8jr": {
+"doc://AuthFoundation/documentation/AuthFoundation/APIClientDelegate/api(client:willSend:)-9p8jr": {
   "abstract" : [
     {
       "text" : "Invoked immediately prior to a URLRequest being converted to a DataTask.",
@@ -422,7 +427,7 @@
       "text" : ")"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/APIClientDelegate\/api(client:willSend:)-9p8jr",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/APIClientDelegate\/api(client:willSend:)-9p8jr",
   "kind" : "symbol",
   "required" : true,
   "role" : "symbol",

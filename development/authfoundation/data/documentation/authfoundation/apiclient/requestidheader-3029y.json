@@ -8,7 +8,7 @@
   "defaultImplementationsSections" : [
     {
       "identifiers" : [
-        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/APIClient\/requestIdHeader-3s9s1"
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/APIClient\/requestIdHeader-3s9s1"
       ],
       "title" : "APIClient Implementations"
     }
@@ -16,14 +16,14 @@
   "hierarchy" : {
     "paths" : [
       [
-        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation",
-        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/APIClient"
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/APIClient"
       ]
     ]
   },
   "identifier" : {
     "interfaceLanguage" : "swift",
-    "url" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/APIClient\/requestIdHeader-3029y"
+    "url" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/APIClient\/requestIdHeader-3029y"
   },
   "kind" : "symbol",
   "metadata" : {
@@ -118,7 +118,7 @@
   ],
   "schemaVersion" : {
     "major" : 0,
-    "minor" : 2,
+    "minor" : 3,
     "patch" : 0
   },
   "sections" : [
@@ -138,21 +138,21 @@
   ]
 , 
 "references": {
-"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation": {
+"doc://AuthFoundation/documentation/AuthFoundation": {
   "abstract" : [
     {
       "text" : "Library that provides foundational features used by Okta’s authentication libraries, as well as APIs used to work with tokens and user credentials.",
       "type" : "text"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation",
   "kind" : "symbol",
   "role" : "collection",
   "title" : "AuthFoundation",
   "type" : "topic",
   "url" : "\/documentation\/authfoundation"
 },
-"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/APIClient": {
+"doc://AuthFoundation/documentation/AuthFoundation/APIClient": {
   "abstract" : [
     {
       "text" : "Protocol defining the interfaces and capabilities that API clients can conform to.",
@@ -173,7 +173,7 @@
       "text" : "APIClient"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/APIClient",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/APIClient",
   "kind" : "symbol",
   "navigatorTitle" : [
     {
@@ -186,7 +186,7 @@
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/apiclient"
 },
-"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/APIClient/requestIdHeader-3029y": {
+"doc://AuthFoundation/documentation/AuthFoundation/APIClient/requestIdHeader-3029y": {
   "abstract" : [
     {
       "text" : "The name of the HTTP response header where unique request IDs can be found.",
@@ -221,7 +221,7 @@
       "text" : "?"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/APIClient\/requestIdHeader-3029y",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/APIClient\/requestIdHeader-3029y",
   "kind" : "symbol",
   "required" : true,
   "role" : "symbol",
@@ -229,12 +229,9 @@
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/apiclient\/requestidheader-3029y"
 },
-"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/APIClient/requestIdHeader-3s9s1": {
+"doc://AuthFoundation/documentation/AuthFoundation/APIClient/requestIdHeader-3s9s1": {
   "abstract" : [
-    {
-      "text" : "The name of the HTTP response header where unique request IDs can be found.",
-      "type" : "text"
-    }
+
   ],
   "fragments" : [
     {
@@ -263,7 +260,7 @@
       "text" : "?"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/APIClient\/requestIdHeader-3s9s1",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/APIClient\/requestIdHeader-3s9s1",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "requestIdHeader",

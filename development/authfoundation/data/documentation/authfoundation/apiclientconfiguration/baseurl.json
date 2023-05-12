@@ -1,21 +1,15 @@
 {
-  "abstract" : [
-    {
-      "text" : "No overview available.",
-      "type" : "text"
-    }
-  ],
   "hierarchy" : {
     "paths" : [
       [
-        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation",
-        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/APIClientConfiguration"
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/APIClientConfiguration"
       ]
     ]
   },
   "identifier" : {
     "interfaceLanguage" : "swift",
-    "url" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/APIClientConfiguration\/baseURL"
+    "url" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/APIClientConfiguration\/baseURL"
   },
   "kind" : "symbol",
   "metadata" : {
@@ -106,7 +100,7 @@
   ],
   "schemaVersion" : {
     "major" : 0,
-    "minor" : 2,
+    "minor" : 3,
     "patch" : 0
   },
   "sections" : [
@@ -126,21 +120,21 @@
   ]
 , 
 "references": {
-"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation": {
+"doc://AuthFoundation/documentation/AuthFoundation": {
   "abstract" : [
     {
       "text" : "Library that provides foundational features used by Okta’s authentication libraries, as well as APIs used to work with tokens and user credentials.",
       "type" : "text"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation",
   "kind" : "symbol",
   "role" : "collection",
   "title" : "AuthFoundation",
   "type" : "topic",
   "url" : "\/documentation\/authfoundation"
 },
-"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/APIClientConfiguration": {
+"doc://AuthFoundation/documentation/AuthFoundation/APIClientConfiguration": {
   "abstract" : [
 
   ],
@@ -158,7 +152,7 @@
       "text" : "APIClientConfiguration"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/APIClientConfiguration",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/APIClientConfiguration",
   "kind" : "symbol",
   "navigatorTitle" : [
     {
@@ -171,7 +165,7 @@
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/apiclientconfiguration"
 },
-"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/APIClientConfiguration/baseURL": {
+"doc://AuthFoundation/documentation/AuthFoundation/APIClientConfiguration/baseURL": {
   "abstract" : [
 
   ],
@@ -198,7 +192,7 @@
       "text" : "URL"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/APIClientConfiguration\/baseURL",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/APIClientConfiguration\/baseURL",
   "kind" : "symbol",
   "required" : true,
   "role" : "symbol",

@@ -8,14 +8,14 @@
   "hierarchy" : {
     "paths" : [
       [
-        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation",
-        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/JWK"
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JWK"
       ]
     ]
   },
   "identifier" : {
     "interfaceLanguage" : "swift",
-    "url" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/JWK\/Usage-swift.enum"
+    "url" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JWK\/Usage-swift.enum"
   },
   "kind" : "symbol",
   "metadata" : {
@@ -83,11 +83,11 @@
   "relationshipsSections" : [
     {
       "identifiers" : [
-        "doc:\/\/com.okta.mobile.authfoundation\/Se",
-        "doc:\/\/com.okta.mobile.authfoundation\/SE",
-        "doc:\/\/com.okta.mobile.authfoundation\/SQ",
-        "doc:\/\/com.okta.mobile.authfoundation\/SH",
-        "doc:\/\/com.okta.mobile.authfoundation\/SY"
+        "doc:\/\/AuthFoundation\/Se",
+        "doc:\/\/AuthFoundation\/SE",
+        "doc:\/\/AuthFoundation\/SQ",
+        "doc:\/\/AuthFoundation\/SH",
+        "doc:\/\/AuthFoundation\/SY"
       ],
       "kind" : "relationships",
       "title" : "Conforms To",
@@ -96,7 +96,7 @@
   ],
   "schemaVersion" : {
     "major" : 0,
-    "minor" : 2,
+    "minor" : 3,
     "patch" : 0
   },
   "sections" : [
@@ -105,22 +105,22 @@
   "topicSections" : [
     {
       "identifiers" : [
-        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/JWK\/Usage-swift.enum\/encryption",
-        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/JWK\/Usage-swift.enum\/signature"
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JWK\/Usage-swift.enum\/encryption",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JWK\/Usage-swift.enum\/signature"
       ],
       "title" : "Enumeration Cases"
     },
     {
       "identifiers" : [
-        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/JWK\/Usage-swift.enum\/init(rawValue:)"
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JWK\/Usage-swift.enum\/init(rawValue:)"
       ],
       "title" : "Initializers"
     },
     {
       "generated" : true,
       "identifiers" : [
-        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/JWK\/Usage-swift.enum\/Equatable-Implementations",
-        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/JWK\/Usage-swift.enum\/RawRepresentable-Implementations"
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JWK\/Usage-swift.enum\/Equatable-Implementations",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JWK\/Usage-swift.enum\/RawRepresentable-Implementations"
       ],
       "title" : "Default Implementations"
     }
@@ -139,46 +139,46 @@
   ]
 , 
 "references": {
-"doc://com.okta.mobile.authfoundation/SE": {
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/SE",
+"doc://AuthFoundation/SE": {
+  "identifier" : "doc:\/\/AuthFoundation\/SE",
   "title" : "Swift.Encodable",
   "type" : "unresolvable"
 },
-"doc://com.okta.mobile.authfoundation/SH": {
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/SH",
+"doc://AuthFoundation/SH": {
+  "identifier" : "doc:\/\/AuthFoundation\/SH",
   "title" : "Swift.Hashable",
   "type" : "unresolvable"
 },
-"doc://com.okta.mobile.authfoundation/SQ": {
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/SQ",
+"doc://AuthFoundation/SQ": {
+  "identifier" : "doc:\/\/AuthFoundation\/SQ",
   "title" : "Swift.Equatable",
   "type" : "unresolvable"
 },
-"doc://com.okta.mobile.authfoundation/SY": {
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/SY",
+"doc://AuthFoundation/SY": {
+  "identifier" : "doc:\/\/AuthFoundation\/SY",
   "title" : "Swift.RawRepresentable",
   "type" : "unresolvable"
 },
-"doc://com.okta.mobile.authfoundation/Se": {
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/Se",
+"doc://AuthFoundation/Se": {
+  "identifier" : "doc:\/\/AuthFoundation\/Se",
   "title" : "Swift.Decodable",
   "type" : "unresolvable"
 },
-"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation": {
+"doc://AuthFoundation/documentation/AuthFoundation": {
   "abstract" : [
     {
       "text" : "Library that provides foundational features used by Okta’s authentication libraries, as well as APIs used to work with tokens and user credentials.",
       "type" : "text"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation",
   "kind" : "symbol",
   "role" : "collection",
   "title" : "AuthFoundation",
   "type" : "topic",
   "url" : "\/documentation\/authfoundation"
 },
-"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/JWK": {
+"doc://AuthFoundation/documentation/AuthFoundation/JWK": {
   "abstract" : [
     {
       "text" : "Describes an individual key from an authorization server, which can be used to validate tokens or encrypt content.",
@@ -199,7 +199,7 @@
       "text" : "JWK"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/JWK",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JWK",
   "kind" : "symbol",
   "navigatorTitle" : [
     {
@@ -212,7 +212,7 @@
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/jwk"
 },
-"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/JWK/Usage-swift.enum": {
+"doc://AuthFoundation/documentation/AuthFoundation/JWK/Usage-swift.enum": {
   "abstract" : [
     {
       "text" : "The intended usage for this key (e.g. signing or encryption).",
@@ -233,7 +233,7 @@
       "text" : "Usage"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/JWK\/Usage-swift.enum",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JWK\/Usage-swift.enum",
   "kind" : "symbol",
   "navigatorTitle" : [
     {
@@ -246,29 +246,29 @@
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/jwk\/usage-swift.enum"
 },
-"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/JWK/Usage-swift.enum/Equatable-Implementations": {
+"doc://AuthFoundation/documentation/AuthFoundation/JWK/Usage-swift.enum/Equatable-Implementations": {
   "abstract" : [
 
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/JWK\/Usage-swift.enum\/Equatable-Implementations",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JWK\/Usage-swift.enum\/Equatable-Implementations",
   "kind" : "article",
   "role" : "collectionGroup",
   "title" : "Equatable Implementations",
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/jwk\/usage-swift.enum\/equatable-implementations"
 },
-"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/JWK/Usage-swift.enum/RawRepresentable-Implementations": {
+"doc://AuthFoundation/documentation/AuthFoundation/JWK/Usage-swift.enum/RawRepresentable-Implementations": {
   "abstract" : [
 
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/JWK\/Usage-swift.enum\/RawRepresentable-Implementations",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JWK\/Usage-swift.enum\/RawRepresentable-Implementations",
   "kind" : "article",
   "role" : "collectionGroup",
   "title" : "RawRepresentable Implementations",
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/jwk\/usage-swift.enum\/rawrepresentable-implementations"
 },
-"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/JWK/Usage-swift.enum/encryption": {
+"doc://AuthFoundation/documentation/AuthFoundation/JWK/Usage-swift.enum/encryption": {
   "abstract" : [
 
   ],
@@ -286,19 +286,16 @@
       "text" : "encryption"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/JWK\/Usage-swift.enum\/encryption",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JWK\/Usage-swift.enum\/encryption",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "JWK.Usage.encryption",
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/jwk\/usage-swift.enum\/encryption"
 },
-"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/JWK/Usage-swift.enum/init(rawValue:)": {
+"doc://AuthFoundation/documentation/AuthFoundation/JWK/Usage-swift.enum/init(rawValue:)": {
   "abstract" : [
-    {
-      "text" : "Creates a new instance with the specified raw value.",
-      "type" : "text"
-    }
+
   ],
   "fragments" : [
     {
@@ -327,14 +324,14 @@
       "text" : ")"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/JWK\/Usage-swift.enum\/init(rawValue:)",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JWK\/Usage-swift.enum\/init(rawValue:)",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "init(rawValue:)",
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/jwk\/usage-swift.enum\/init(rawvalue:)"
 },
-"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/JWK/Usage-swift.enum/signature": {
+"doc://AuthFoundation/documentation/AuthFoundation/JWK/Usage-swift.enum/signature": {
   "abstract" : [
 
   ],
@@ -352,7 +349,7 @@
       "text" : "signature"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/JWK\/Usage-swift.enum\/signature",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JWK\/Usage-swift.enum\/signature",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "JWK.Usage.signature",

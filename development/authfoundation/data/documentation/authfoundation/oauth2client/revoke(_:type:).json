@@ -8,14 +8,14 @@
   "hierarchy" : {
     "paths" : [
       [
-        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation",
-        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/OAuth2Client"
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/OAuth2Client"
       ]
     ]
   },
   "identifier" : {
     "interfaceLanguage" : "swift",
-    "url" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/OAuth2Client\/revoke(_:type:)"
+    "url" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/OAuth2Client\/revoke(_:type:)"
   },
   "kind" : "symbol",
   "metadata" : {
@@ -170,7 +170,7 @@
               "text" : ": "
             },
             {
-              "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/Token",
+              "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/Token",
               "kind" : "typeIdentifier",
               "preciseIdentifier" : "s:14AuthFoundation5TokenC",
               "text" : "Token"
@@ -188,7 +188,7 @@
               "text" : ": "
             },
             {
-              "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/Token",
+              "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/Token",
               "kind" : "typeIdentifier",
               "preciseIdentifier" : "s:14AuthFoundation5TokenC",
               "text" : "Token"
@@ -198,7 +198,7 @@
               "text" : "."
             },
             {
-              "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/Token\/RevokeType",
+              "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/Token\/RevokeType",
               "kind" : "typeIdentifier",
               "preciseIdentifier" : "s:14AuthFoundation5TokenC10RevokeTypeO",
               "text" : "RevokeType"
@@ -250,7 +250,7 @@
                   "type" : "text"
                 },
                 {
-                  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/Token\/RevokeType\/all",
+                  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/Token\/RevokeType\/all",
                   "isActive" : true,
                   "type" : "reference"
                 }
@@ -277,7 +277,7 @@
               "type" : "text"
             },
             {
-              "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/Token",
+              "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/Token",
               "isActive" : true,
               "type" : "reference"
             },
@@ -286,7 +286,7 @@
               "type" : "text"
             },
             {
-              "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/Token\/accessToken",
+              "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/Token\/accessToken",
               "isActive" : true,
               "type" : "reference"
             },
@@ -295,7 +295,7 @@
               "type" : "text"
             },
             {
-              "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/Token\/refreshToken",
+              "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/Token\/refreshToken",
               "isActive" : true,
               "type" : "reference"
             },
@@ -312,7 +312,7 @@
   ],
   "schemaVersion" : {
     "major" : 0,
-    "minor" : 2,
+    "minor" : 3,
     "patch" : 0
   },
   "sections" : [
@@ -332,21 +332,21 @@
   ]
 , 
 "references": {
-"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation": {
+"doc://AuthFoundation/documentation/AuthFoundation": {
   "abstract" : [
     {
       "text" : "Library that provides foundational features used by Okta’s authentication libraries, as well as APIs used to work with tokens and user credentials.",
       "type" : "text"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation",
   "kind" : "symbol",
   "role" : "collection",
   "title" : "AuthFoundation",
   "type" : "topic",
   "url" : "\/documentation\/authfoundation"
 },
-"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/OAuth2Client": {
+"doc://AuthFoundation/documentation/AuthFoundation/OAuth2Client": {
   "abstract" : [
     {
       "text" : "An OAuth2 client, used to interact with a given authorization server.",
@@ -367,7 +367,7 @@
       "text" : "OAuth2Client"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/OAuth2Client",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/OAuth2Client",
   "kind" : "symbol",
   "navigatorTitle" : [
     {
@@ -380,7 +380,7 @@
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/oauth2client"
 },
-"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/OAuth2Client/revoke(_:type:)": {
+"doc://AuthFoundation/documentation/AuthFoundation/OAuth2Client/revoke(_:type:)": {
   "abstract" : [
     {
       "text" : "Attempts to revoke the given token.",
@@ -452,14 +452,14 @@
       "text" : "throws"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/OAuth2Client\/revoke(_:type:)",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/OAuth2Client\/revoke(_:type:)",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "revoke(_:type:)",
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/oauth2client\/revoke(_:type:)"
 },
-"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/Token": {
+"doc://AuthFoundation/documentation/AuthFoundation/Token": {
   "abstract" : [
     {
       "text" : "Token information representing a user’s access to a resource server, including access token, refresh token, and other related information.",
@@ -480,7 +480,7 @@
       "text" : "Token"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/Token",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/Token",
   "kind" : "symbol",
   "navigatorTitle" : [
     {
@@ -493,7 +493,7 @@
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/token"
 },
-"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/Token/RevokeType": {
+"doc://AuthFoundation/documentation/AuthFoundation/Token/RevokeType": {
   "abstract" : [
     {
       "text" : "The possible token types that can be revoked.",
@@ -514,7 +514,7 @@
       "text" : "RevokeType"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/Token\/RevokeType",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/Token\/RevokeType",
   "kind" : "symbol",
   "navigatorTitle" : [
     {
@@ -527,7 +527,7 @@
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/token\/revoketype"
 },
-"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/Token/RevokeType/all": {
+"doc://AuthFoundation/documentation/AuthFoundation/Token/RevokeType/all": {
   "abstract" : [
     {
       "text" : "Indicates that all tokens should be revoked.",
@@ -548,14 +548,14 @@
       "text" : "all"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/Token\/RevokeType\/all",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/Token\/RevokeType\/all",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "Token.RevokeType.all",
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/token\/revoketype\/all"
 },
-"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/Token/accessToken": {
+"doc://AuthFoundation/documentation/AuthFoundation/Token/accessToken": {
   "abstract" : [
     {
       "text" : "Access token.",
@@ -585,14 +585,14 @@
       "text" : "String"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/Token\/accessToken",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/Token\/accessToken",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "accessToken",
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/token\/accesstoken"
 },
-"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/Token/refreshToken": {
+"doc://AuthFoundation/documentation/AuthFoundation/Token/refreshToken": {
   "abstract" : [
     {
       "text" : "The refresh token, if requested.",
@@ -626,7 +626,7 @@
       "text" : "?"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/Token\/refreshToken",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/Token\/refreshToken",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "refreshToken",

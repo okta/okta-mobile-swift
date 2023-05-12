@@ -1,22 +1,30 @@
 {
   "abstract" : [
     {
-      "text" : "Creates a new instance by decoding from the given decoder.",
+      "text" : "Inherited from ",
+      "type" : "text"
+    },
+    {
+      "code" : "Decodable.init(from:)",
+      "type" : "codeVoice"
+    },
+    {
+      "text" : ".",
       "type" : "text"
     }
   ],
   "hierarchy" : {
     "paths" : [
       [
-        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation",
-        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/JWT",
-        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/JWT\/Header-swift.struct"
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JWT",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JWT\/Header-swift.struct"
       ]
     ]
   },
   "identifier" : {
     "interfaceLanguage" : "swift",
-    "url" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/JWT\/Header-swift.struct\/init(from:)"
+    "url" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JWT\/Header-swift.struct\/init(from:)"
   },
   "kind" : "symbol",
   "metadata" : {
@@ -114,58 +122,11 @@
         }
       ],
       "kind" : "declarations"
-    },
-    {
-      "kind" : "parameters",
-      "parameters" : [
-        {
-          "content" : [
-            {
-              "inlineContent" : [
-                {
-                  "text" : "The decoder to read data from.",
-                  "type" : "text"
-                }
-              ],
-              "type" : "paragraph"
-            }
-          ],
-          "name" : "decoder"
-        }
-      ]
-    },
-    {
-      "content" : [
-        {
-          "anchor" : "discussion",
-          "level" : 2,
-          "text" : "Discussion",
-          "type" : "heading"
-        },
-        {
-          "inlineContent" : [
-            {
-              "text" : "This initializer throws an error if reading from the decoder fails, or",
-              "type" : "text"
-            },
-            {
-              "text" : " ",
-              "type" : "text"
-            },
-            {
-              "text" : "if the data read is corrupted or otherwise invalid.",
-              "type" : "text"
-            }
-          ],
-          "type" : "paragraph"
-        }
-      ],
-      "kind" : "content"
     }
   ],
   "schemaVersion" : {
     "major" : 0,
-    "minor" : 2,
+    "minor" : 3,
     "patch" : 0
   },
   "sections" : [
@@ -185,21 +146,21 @@
   ]
 , 
 "references": {
-"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation": {
+"doc://AuthFoundation/documentation/AuthFoundation": {
   "abstract" : [
     {
       "text" : "Library that provides foundational features used by Okta’s authentication libraries, as well as APIs used to work with tokens and user credentials.",
       "type" : "text"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation",
   "kind" : "symbol",
   "role" : "collection",
   "title" : "AuthFoundation",
   "type" : "topic",
   "url" : "\/documentation\/authfoundation"
 },
-"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/JWT": {
+"doc://AuthFoundation/documentation/AuthFoundation/JWT": {
   "abstract" : [
     {
       "text" : "Represents the contents of a JWT token, providing access to its payload contents.",
@@ -220,7 +181,7 @@
       "text" : "JWT"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/JWT",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JWT",
   "kind" : "symbol",
   "navigatorTitle" : [
     {
@@ -233,7 +194,7 @@
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/jwt"
 },
-"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/JWT/Header-swift.struct": {
+"doc://AuthFoundation/documentation/AuthFoundation/JWT/Header-swift.struct": {
   "abstract" : [
     {
       "text" : "JWT header information describing the contents of the token.",
@@ -254,7 +215,7 @@
       "text" : "Header"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/JWT\/Header-swift.struct",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JWT\/Header-swift.struct",
   "kind" : "symbol",
   "navigatorTitle" : [
     {
@@ -267,12 +228,9 @@
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/jwt\/header-swift.struct"
 },
-"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/JWT/Header-swift.struct/init(from:)": {
+"doc://AuthFoundation/documentation/AuthFoundation/JWT/Header-swift.struct/init(from:)": {
   "abstract" : [
-    {
-      "text" : "Creates a new instance by decoding from the given decoder.",
-      "type" : "text"
-    }
+
   ],
   "fragments" : [
     {
@@ -305,7 +263,7 @@
       "text" : "throws"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/JWT\/Header-swift.struct\/init(from:)",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JWT\/Header-swift.struct\/init(from:)",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "init(from:)",

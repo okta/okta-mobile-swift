@@ -5,7 +5,7 @@
       "type" : "text"
     },
     {
-      "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/JWKS",
+      "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JWKS",
       "isActive" : true,
       "type" : "reference"
     },
@@ -17,14 +17,14 @@
   "hierarchy" : {
     "paths" : [
       [
-        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation",
-        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/OAuth2Client"
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/OAuth2Client"
       ]
     ]
   },
   "identifier" : {
     "interfaceLanguage" : "swift",
-    "url" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/OAuth2Client\/jwks(completion:)"
+    "url" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/OAuth2Client\/jwks(completion:)"
   },
   "kind" : "symbol",
   "metadata" : {
@@ -137,7 +137,7 @@
               "text" : ": "
             },
             {
-              "kind" : "attribute",
+              "kind" : "keyword",
               "text" : "@escaping"
             },
             {
@@ -154,7 +154,7 @@
               "text" : "<"
             },
             {
-              "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/JWKS",
+              "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JWKS",
               "kind" : "typeIdentifier",
               "preciseIdentifier" : "s:14AuthFoundation4JWKSV",
               "text" : "JWKS"
@@ -164,7 +164,7 @@
               "text" : ", "
             },
             {
-              "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/OAuth2Error",
+              "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/OAuth2Error",
               "kind" : "typeIdentifier",
               "preciseIdentifier" : "s:14AuthFoundation11OAuth2ErrorO",
               "text" : "OAuth2Error"
@@ -229,7 +229,7 @@
   ],
   "schemaVersion" : {
     "major" : 0,
-    "minor" : 2,
+    "minor" : 3,
     "patch" : 0
   },
   "sections" : [
@@ -249,21 +249,21 @@
   ]
 , 
 "references": {
-"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation": {
+"doc://AuthFoundation/documentation/AuthFoundation": {
   "abstract" : [
     {
       "text" : "Library that provides foundational features used by Okta’s authentication libraries, as well as APIs used to work with tokens and user credentials.",
       "type" : "text"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation",
   "kind" : "symbol",
   "role" : "collection",
   "title" : "AuthFoundation",
   "type" : "topic",
   "url" : "\/documentation\/authfoundation"
 },
-"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/JWKS": {
+"doc://AuthFoundation/documentation/AuthFoundation/JWKS": {
   "abstract" : [
     {
       "text" : "Describes the collection of keys associated with an authorization server.",
@@ -284,7 +284,7 @@
       "text" : "JWKS"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/JWKS",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JWKS",
   "kind" : "symbol",
   "navigatorTitle" : [
     {
@@ -297,7 +297,7 @@
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/jwks"
 },
-"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/OAuth2Client": {
+"doc://AuthFoundation/documentation/AuthFoundation/OAuth2Client": {
   "abstract" : [
     {
       "text" : "An OAuth2 client, used to interact with a given authorization server.",
@@ -318,7 +318,7 @@
       "text" : "OAuth2Client"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/OAuth2Client",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/OAuth2Client",
   "kind" : "symbol",
   "navigatorTitle" : [
     {
@@ -331,14 +331,14 @@
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/oauth2client"
 },
-"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/OAuth2Client/jwks(completion:)": {
+"doc://AuthFoundation/documentation/AuthFoundation/OAuth2Client/jwks(completion:)": {
   "abstract" : [
     {
       "text" : "Retrieves the org’s ",
       "type" : "text"
     },
     {
-      "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/JWKS",
+      "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JWKS",
       "isActive" : true,
       "type" : "reference"
     },
@@ -409,14 +409,14 @@
       "text" : ")"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/OAuth2Client\/jwks(completion:)",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/OAuth2Client\/jwks(completion:)",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "jwks(completion:)",
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/oauth2client\/jwks(completion:)"
 },
-"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/OAuth2Error": {
+"doc://AuthFoundation/documentation/AuthFoundation/OAuth2Error": {
   "abstract" : [
     {
       "text" : "Errors that may occur when interacting with OAuth2 endpoints.",
@@ -437,7 +437,7 @@
       "text" : "OAuth2Error"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/OAuth2Error",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/OAuth2Error",
   "kind" : "symbol",
   "navigatorTitle" : [
     {

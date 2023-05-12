@@ -1,22 +1,30 @@
 {
   "abstract" : [
     {
-      "text" : "No overview available.",
+      "text" : "Inherited from ",
+      "type" : "text"
+    },
+    {
+      "code" : "Sequence.formatted(_:)",
+      "type" : "codeVoice"
+    },
+    {
+      "text" : ".",
       "type" : "text"
     }
   ],
   "hierarchy" : {
     "paths" : [
       [
-        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation",
-        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/JWKS",
-        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/JWKS\/Sequence-Implementations"
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JWKS",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JWKS\/Sequence-Implementations"
       ]
     ]
   },
   "identifier" : {
     "interfaceLanguage" : "swift",
-    "url" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/JWKS\/formatted(_:)"
+    "url" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JWKS\/formatted(_:)"
   },
   "kind" : "symbol",
   "metadata" : {
@@ -236,7 +244,7 @@
   ],
   "schemaVersion" : {
     "major" : 0,
-    "minor" : 2,
+    "minor" : 3,
     "patch" : 0
   },
   "sections" : [
@@ -256,21 +264,21 @@
   ]
 , 
 "references": {
-"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation": {
+"doc://AuthFoundation/documentation/AuthFoundation": {
   "abstract" : [
     {
       "text" : "Library that provides foundational features used by Okta’s authentication libraries, as well as APIs used to work with tokens and user credentials.",
       "type" : "text"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation",
   "kind" : "symbol",
   "role" : "collection",
   "title" : "AuthFoundation",
   "type" : "topic",
   "url" : "\/documentation\/authfoundation"
 },
-"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/JWKS": {
+"doc://AuthFoundation/documentation/AuthFoundation/JWKS": {
   "abstract" : [
     {
       "text" : "Describes the collection of keys associated with an authorization server.",
@@ -291,7 +299,7 @@
       "text" : "JWKS"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/JWKS",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JWKS",
   "kind" : "symbol",
   "navigatorTitle" : [
     {
@@ -304,18 +312,18 @@
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/jwks"
 },
-"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/JWKS/Sequence-Implementations": {
+"doc://AuthFoundation/documentation/AuthFoundation/JWKS/Sequence-Implementations": {
   "abstract" : [
 
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/JWKS\/Sequence-Implementations",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JWKS\/Sequence-Implementations",
   "kind" : "article",
   "role" : "collectionGroup",
   "title" : "Sequence Implementations",
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/jwks\/sequence-implementations"
 },
-"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/JWKS/formatted(_:)": {
+"doc://AuthFoundation/documentation/AuthFoundation/JWKS/formatted(_:)": {
   "abstract" : [
 
   ],
@@ -365,7 +373,7 @@
       "text" : "FormatOutput"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/JWKS\/formatted(_:)",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JWKS\/formatted(_:)",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "formatted(_:)",

@@ -8,14 +8,14 @@
   "hierarchy" : {
     "paths" : [
       [
-        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation",
-        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/JWT"
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JWT"
       ]
     ]
   },
   "identifier" : {
     "interfaceLanguage" : "swift",
-    "url" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/JWT\/init(rawValue:)"
+    "url" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JWT\/init(rawValue:)"
   },
   "kind" : "symbol",
   "metadata" : {
@@ -36,6 +36,15 @@
       {
         "kind" : "text",
         "text" : ": "
+      },
+      {
+        "kind" : "typeIdentifier",
+        "preciseIdentifier" : "s:14AuthFoundation3JWTV",
+        "text" : "JWT"
+      },
+      {
+        "kind" : "text",
+        "text" : "."
       },
       {
         "kind" : "typeIdentifier",
@@ -85,7 +94,17 @@
               "text" : ": "
             },
             {
-              "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/JWT\/RawValue-swift.typealias",
+              "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JWT",
+              "kind" : "typeIdentifier",
+              "preciseIdentifier" : "s:14AuthFoundation3JWTV",
+              "text" : "JWT"
+            },
+            {
+              "kind" : "text",
+              "text" : "."
+            },
+            {
+              "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JWT\/RawValue-swift.typealias",
               "kind" : "typeIdentifier",
               "preciseIdentifier" : "s:14AuthFoundation3JWTV8RawValuea",
               "text" : "RawValue"
@@ -121,7 +140,7 @@
   ],
   "schemaVersion" : {
     "major" : 0,
-    "minor" : 2,
+    "minor" : 3,
     "patch" : 0
   },
   "sections" : [
@@ -141,21 +160,21 @@
   ]
 , 
 "references": {
-"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation": {
+"doc://AuthFoundation/documentation/AuthFoundation": {
   "abstract" : [
     {
       "text" : "Library that provides foundational features used by Okta’s authentication libraries, as well as APIs used to work with tokens and user credentials.",
       "type" : "text"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation",
   "kind" : "symbol",
   "role" : "collection",
   "title" : "AuthFoundation",
   "type" : "topic",
   "url" : "\/documentation\/authfoundation"
 },
-"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/JWT": {
+"doc://AuthFoundation/documentation/AuthFoundation/JWT": {
   "abstract" : [
     {
       "text" : "Represents the contents of a JWT token, providing access to its payload contents.",
@@ -176,7 +195,7 @@
       "text" : "JWT"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/JWT",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JWT",
   "kind" : "symbol",
   "navigatorTitle" : [
     {
@@ -189,20 +208,9 @@
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/jwt"
 },
-"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/JWT/RawValue-swift.typealias": {
+"doc://AuthFoundation/documentation/AuthFoundation/JWT/RawValue-swift.typealias": {
   "abstract" : [
-    {
-      "text" : "The raw type that can be used to represent all values of the conforming",
-      "type" : "text"
-    },
-    {
-      "text" : " ",
-      "type" : "text"
-    },
-    {
-      "text" : "type.",
-      "type" : "text"
-    }
+
   ],
   "fragments" : [
     {
@@ -218,7 +226,7 @@
       "text" : "RawValue"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/JWT\/RawValue-swift.typealias",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JWT\/RawValue-swift.typealias",
   "kind" : "symbol",
   "navigatorTitle" : [
     {
@@ -231,7 +239,7 @@
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/jwt\/rawvalue-swift.typealias"
 },
-"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/JWT/init(rawValue:)": {
+"doc://AuthFoundation/documentation/AuthFoundation/JWT/init(rawValue:)": {
   "abstract" : [
     {
       "text" : "Initializer to create a JWT instance from a raw string value.",
@@ -257,6 +265,15 @@
     },
     {
       "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:14AuthFoundation3JWTV",
+      "text" : "JWT"
+    },
+    {
+      "kind" : "text",
+      "text" : "."
+    },
+    {
+      "kind" : "typeIdentifier",
       "preciseIdentifier" : "s:14AuthFoundation3JWTV8RawValuea",
       "text" : "RawValue"
     },
@@ -265,7 +282,7 @@
       "text" : ")"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/JWT\/init(rawValue:)",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JWT\/init(rawValue:)",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "init(rawValue:)",

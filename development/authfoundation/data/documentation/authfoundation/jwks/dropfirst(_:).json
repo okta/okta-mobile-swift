@@ -1,30 +1,30 @@
 {
   "abstract" : [
     {
-      "text" : "Returns a subsequence containing all but the given number of initial",
+      "text" : "Inherited from ",
       "type" : "text"
     },
     {
-      "text" : " ",
-      "type" : "text"
+      "code" : "Collection.dropFirst(_:)",
+      "type" : "codeVoice"
     },
     {
-      "text" : "elements.",
+      "text" : ".",
       "type" : "text"
     }
   ],
   "hierarchy" : {
     "paths" : [
       [
-        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation",
-        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/JWKS",
-        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/JWKS\/Collection-Implementations"
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JWKS",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JWKS\/Collection-Implementations"
       ]
     ]
   },
   "identifier" : {
     "interfaceLanguage" : "swift",
-    "url" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/JWKS\/dropFirst(_:)"
+    "url" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JWKS\/dropFirst(_:)"
   },
   "kind" : "symbol",
   "metadata" : {
@@ -147,175 +147,11 @@
         }
       ],
       "kind" : "declarations"
-    },
-    {
-      "content" : [
-        {
-          "anchor" : "return-value",
-          "level" : 2,
-          "text" : "Return Value",
-          "type" : "heading"
-        },
-        {
-          "inlineContent" : [
-            {
-              "text" : "A subsequence starting after the specified number of",
-              "type" : "text"
-            },
-            {
-              "text" : " ",
-              "type" : "text"
-            },
-            {
-              "text" : "elements.",
-              "type" : "text"
-            }
-          ],
-          "type" : "paragraph"
-        }
-      ],
-      "kind" : "content"
-    },
-    {
-      "kind" : "parameters",
-      "parameters" : [
-        {
-          "content" : [
-            {
-              "inlineContent" : [
-                {
-                  "text" : "The number of elements to drop from the beginning of",
-                  "type" : "text"
-                },
-                {
-                  "text" : " ",
-                  "type" : "text"
-                },
-                {
-                  "text" : "the collection. ",
-                  "type" : "text"
-                },
-                {
-                  "code" : "k",
-                  "type" : "codeVoice"
-                },
-                {
-                  "text" : " must be greater than or equal to zero.",
-                  "type" : "text"
-                }
-              ],
-              "type" : "paragraph"
-            }
-          ],
-          "name" : "k"
-        }
-      ]
-    },
-    {
-      "content" : [
-        {
-          "anchor" : "discussion",
-          "level" : 2,
-          "text" : "Discussion",
-          "type" : "heading"
-        },
-        {
-          "inlineContent" : [
-            {
-              "text" : "If the number of elements to drop exceeds the number of elements in",
-              "type" : "text"
-            },
-            {
-              "text" : " ",
-              "type" : "text"
-            },
-            {
-              "text" : "the collection, the result is an empty subsequence.",
-              "type" : "text"
-            }
-          ],
-          "type" : "paragraph"
-        },
-        {
-          "code" : [
-            "let numbers = [1, 2, 3, 4, 5]",
-            "print(numbers.dropFirst(2))",
-            "\/\/ Prints \"[3, 4, 5]\"",
-            "print(numbers.dropFirst(10))",
-            "\/\/ Prints \"[]\""
-          ],
-          "syntax" : null,
-          "type" : "codeListing"
-        },
-        {
-          "content" : [
-            {
-              "inlineContent" : [
-                {
-                  "text" : "O(1) if the collection conforms to",
-                  "type" : "text"
-                },
-                {
-                  "text" : " ",
-                  "type" : "text"
-                },
-                {
-                  "code" : "RandomAccessCollection",
-                  "type" : "codeVoice"
-                },
-                {
-                  "text" : "; otherwise, O(",
-                  "type" : "text"
-                },
-                {
-                  "inlineContent" : [
-                    {
-                      "text" : "k",
-                      "type" : "text"
-                    }
-                  ],
-                  "type" : "emphasis"
-                },
-                {
-                  "text" : "), where ",
-                  "type" : "text"
-                },
-                {
-                  "inlineContent" : [
-                    {
-                      "text" : "k",
-                      "type" : "text"
-                    }
-                  ],
-                  "type" : "emphasis"
-                },
-                {
-                  "text" : " is the number of",
-                  "type" : "text"
-                },
-                {
-                  "text" : " ",
-                  "type" : "text"
-                },
-                {
-                  "text" : "elements to drop from the beginning of the collection.",
-                  "type" : "text"
-                }
-              ],
-              "type" : "paragraph"
-            }
-          ],
-          "name" : "Complexity",
-          "style" : "note",
-          "type" : "aside"
-        }
-      ],
-      "kind" : "content"
     }
   ],
   "schemaVersion" : {
     "major" : 0,
-    "minor" : 2,
+    "minor" : 3,
     "patch" : 0
   },
   "sections" : [
@@ -335,21 +171,21 @@
   ]
 , 
 "references": {
-"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation": {
+"doc://AuthFoundation/documentation/AuthFoundation": {
   "abstract" : [
     {
       "text" : "Library that provides foundational features used by Okta’s authentication libraries, as well as APIs used to work with tokens and user credentials.",
       "type" : "text"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation",
   "kind" : "symbol",
   "role" : "collection",
   "title" : "AuthFoundation",
   "type" : "topic",
   "url" : "\/documentation\/authfoundation"
 },
-"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/JWKS": {
+"doc://AuthFoundation/documentation/AuthFoundation/JWKS": {
   "abstract" : [
     {
       "text" : "Describes the collection of keys associated with an authorization server.",
@@ -370,7 +206,7 @@
       "text" : "JWKS"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/JWKS",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JWKS",
   "kind" : "symbol",
   "navigatorTitle" : [
     {
@@ -383,31 +219,20 @@
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/jwks"
 },
-"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/JWKS/Collection-Implementations": {
+"doc://AuthFoundation/documentation/AuthFoundation/JWKS/Collection-Implementations": {
   "abstract" : [
 
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/JWKS\/Collection-Implementations",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JWKS\/Collection-Implementations",
   "kind" : "article",
   "role" : "collectionGroup",
   "title" : "Collection Implementations",
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/jwks\/collection-implementations"
 },
-"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/JWKS/dropFirst(_:)": {
+"doc://AuthFoundation/documentation/AuthFoundation/JWKS/dropFirst(_:)": {
   "abstract" : [
-    {
-      "text" : "Returns a subsequence containing all but the given number of initial",
-      "type" : "text"
-    },
-    {
-      "text" : " ",
-      "type" : "text"
-    },
-    {
-      "text" : "elements.",
-      "type" : "text"
-    }
+
   ],
   "fragments" : [
     {
@@ -448,7 +273,7 @@
       "text" : "SubSequence"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/JWKS\/dropFirst(_:)",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JWKS\/dropFirst(_:)",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "dropFirst(_:)",

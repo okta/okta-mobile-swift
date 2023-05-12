@@ -1,22 +1,30 @@
 {
   "abstract" : [
     {
-      "text" : "A localized message describing how one might recover from the failure.",
+      "text" : "Inherited from ",
+      "type" : "text"
+    },
+    {
+      "code" : "LocalizedError.recoverySuggestion",
+      "type" : "codeVoice"
+    },
+    {
+      "text" : ".",
       "type" : "text"
     }
   ],
   "hierarchy" : {
     "paths" : [
       [
-        "doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/WebAuthenticationUI",
-        "doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/WebAuthenticationUI\/WebAuthenticationError",
-        "doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/WebAuthenticationUI\/WebAuthenticationError\/LocalizedError-Implementations"
+        "doc:\/\/WebAuthenticationUI\/documentation\/WebAuthenticationUI",
+        "doc:\/\/WebAuthenticationUI\/documentation\/WebAuthenticationUI\/WebAuthenticationError",
+        "doc:\/\/WebAuthenticationUI\/documentation\/WebAuthenticationUI\/WebAuthenticationError\/LocalizedError-Implementations"
       ]
     ]
   },
   "identifier" : {
     "interfaceLanguage" : "swift",
-    "url" : "doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/WebAuthenticationUI\/WebAuthenticationError\/recoverySuggestion"
+    "url" : "doc:\/\/WebAuthenticationUI\/documentation\/WebAuthenticationUI\/WebAuthenticationError\/recoverySuggestion"
   },
   "kind" : "symbol",
   "metadata" : {
@@ -111,7 +119,7 @@
   ],
   "schemaVersion" : {
     "major" : 0,
-    "minor" : 2,
+    "minor" : 3,
     "patch" : 0
   },
   "sections" : [
@@ -131,21 +139,21 @@
   ]
 , 
 "references": {
-"doc://com.okta.mobile.webauthenticationui/documentation/WebAuthenticationUI": {
+"doc://WebAuthenticationUI/documentation/WebAuthenticationUI": {
   "abstract" : [
     {
       "text" : "Make it easy to enable users to sign in to your app through browser-based sign on.",
       "type" : "text"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/WebAuthenticationUI",
+  "identifier" : "doc:\/\/WebAuthenticationUI\/documentation\/WebAuthenticationUI",
   "kind" : "symbol",
   "role" : "collection",
   "title" : "WebAuthenticationUI",
   "type" : "topic",
   "url" : "\/documentation\/webauthenticationui"
 },
-"doc://com.okta.mobile.webauthenticationui/documentation/WebAuthenticationUI/WebAuthenticationError": {
+"doc://WebAuthenticationUI/documentation/WebAuthenticationUI/WebAuthenticationError": {
   "abstract" : [
 
   ],
@@ -163,7 +171,7 @@
       "text" : "WebAuthenticationError"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/WebAuthenticationUI\/WebAuthenticationError",
+  "identifier" : "doc:\/\/WebAuthenticationUI\/documentation\/WebAuthenticationUI\/WebAuthenticationError",
   "kind" : "symbol",
   "navigatorTitle" : [
     {
@@ -176,23 +184,20 @@
   "type" : "topic",
   "url" : "\/documentation\/webauthenticationui\/webauthenticationerror"
 },
-"doc://com.okta.mobile.webauthenticationui/documentation/WebAuthenticationUI/WebAuthenticationError/LocalizedError-Implementations": {
+"doc://WebAuthenticationUI/documentation/WebAuthenticationUI/WebAuthenticationError/LocalizedError-Implementations": {
   "abstract" : [
 
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/WebAuthenticationUI\/WebAuthenticationError\/LocalizedError-Implementations",
+  "identifier" : "doc:\/\/WebAuthenticationUI\/documentation\/WebAuthenticationUI\/WebAuthenticationError\/LocalizedError-Implementations",
   "kind" : "article",
   "role" : "collectionGroup",
   "title" : "LocalizedError Implementations",
   "type" : "topic",
   "url" : "\/documentation\/webauthenticationui\/webauthenticationerror\/localizederror-implementations"
 },
-"doc://com.okta.mobile.webauthenticationui/documentation/WebAuthenticationUI/WebAuthenticationError/recoverySuggestion": {
+"doc://WebAuthenticationUI/documentation/WebAuthenticationUI/WebAuthenticationError/recoverySuggestion": {
   "abstract" : [
-    {
-      "text" : "A localized message describing how one might recover from the failure.",
-      "type" : "text"
-    }
+
   ],
   "fragments" : [
     {
@@ -221,7 +226,7 @@
       "text" : "?"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/WebAuthenticationUI\/WebAuthenticationError\/recoverySuggestion",
+  "identifier" : "doc:\/\/WebAuthenticationUI\/documentation\/WebAuthenticationUI\/WebAuthenticationError\/recoverySuggestion",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "recoverySuggestion",

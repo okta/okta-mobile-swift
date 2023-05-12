@@ -8,13 +8,13 @@
   "hierarchy" : {
     "paths" : [
       [
-        "doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/OktaOAuth2"
+        "doc:\/\/OktaOAuth2\/documentation\/OktaOAuth2"
       ]
     ]
   },
   "identifier" : {
     "interfaceLanguage" : "swift",
-    "url" : "doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/OktaOAuth2\/LogoutFlowDelegate"
+    "url" : "doc:\/\/OktaOAuth2\/documentation\/OktaOAuth2\/LogoutFlowDelegate"
   },
   "kind" : "symbol",
   "metadata" : {
@@ -85,7 +85,7 @@
   "relationshipsSections" : [
     {
       "identifiers" : [
-        "doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/OktaOAuth2\/SessionLogoutFlowDelegate"
+        "doc:\/\/OktaOAuth2\/documentation\/OktaOAuth2\/SessionLogoutFlowDelegate"
       ],
       "kind" : "relationships",
       "title" : "Inherited By",
@@ -94,7 +94,7 @@
   ],
   "schemaVersion" : {
     "major" : 0,
-    "minor" : 2,
+    "minor" : 3,
     "patch" : 0
   },
   "sections" : [
@@ -103,7 +103,7 @@
   "topicSections" : [
     {
       "identifiers" : [
-        "doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/OktaOAuth2\/LogoutFlowDelegate\/logout(flow:received:)"
+        "doc:\/\/OktaOAuth2\/documentation\/OktaOAuth2\/LogoutFlowDelegate\/logout(flow:received:)"
       ],
       "title" : "Instance Methods"
     }
@@ -122,21 +122,21 @@
   ]
 , 
 "references": {
-"doc://com.okta.mobile.oktaoauth2/documentation/OktaOAuth2": {
+"doc://OktaOAuth2/documentation/OktaOAuth2": {
   "abstract" : [
     {
       "text" : "Interact with Okta’s OAuth2 APIs to authenticate users, and interact with user resources.",
       "type" : "text"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/OktaOAuth2",
+  "identifier" : "doc:\/\/OktaOAuth2\/documentation\/OktaOAuth2",
   "kind" : "symbol",
   "role" : "collection",
   "title" : "OktaOAuth2",
   "type" : "topic",
   "url" : "\/documentation\/oktaoauth2"
 },
-"doc://com.okta.mobile.oktaoauth2/documentation/OktaOAuth2/LogoutFlowDelegate": {
+"doc://OktaOAuth2/documentation/OktaOAuth2/LogoutFlowDelegate": {
   "abstract" : [
     {
       "text" : "A common delegate protocol that all logout flows should support.",
@@ -157,7 +157,7 @@
       "text" : "LogoutFlowDelegate"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/OktaOAuth2\/LogoutFlowDelegate",
+  "identifier" : "doc:\/\/OktaOAuth2\/documentation\/OktaOAuth2\/LogoutFlowDelegate",
   "kind" : "symbol",
   "navigatorTitle" : [
     {
@@ -170,7 +170,7 @@
   "type" : "topic",
   "url" : "\/documentation\/oktaoauth2\/logoutflowdelegate"
 },
-"doc://com.okta.mobile.oktaoauth2/documentation/OktaOAuth2/LogoutFlowDelegate/logout(flow:received:)": {
+"doc://OktaOAuth2/documentation/OktaOAuth2/LogoutFlowDelegate/logout(flow:received:)": {
   "abstract" : [
     {
       "text" : "Sent when an logout flow receives an error.",
@@ -212,7 +212,6 @@
     },
     {
       "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:10OktaOAuth218LogoutFlowDelegateP6logout4flow8receivedyqd___14AuthFoundation0B5ErrorOtlF0D0L_qd__mfp",
       "text" : "Flow"
     },
     {
@@ -237,7 +236,7 @@
       "text" : ")"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/OktaOAuth2\/LogoutFlowDelegate\/logout(flow:received:)",
+  "identifier" : "doc:\/\/OktaOAuth2\/documentation\/OktaOAuth2\/LogoutFlowDelegate\/logout(flow:received:)",
   "kind" : "symbol",
   "required" : true,
   "role" : "symbol",
@@ -245,7 +244,7 @@
   "type" : "topic",
   "url" : "\/documentation\/oktaoauth2\/logoutflowdelegate\/logout(flow:received:)"
 },
-"doc://com.okta.mobile.oktaoauth2/documentation/OktaOAuth2/SessionLogoutFlow": {
+"doc://OktaOAuth2/documentation/OktaOAuth2/SessionLogoutFlow": {
   "abstract" : [
     {
       "text" : "An logout flow class that implements the Session Logout Flow.",
@@ -266,7 +265,7 @@
       "text" : "SessionLogoutFlow"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/OktaOAuth2\/SessionLogoutFlow",
+  "identifier" : "doc:\/\/OktaOAuth2\/documentation\/OktaOAuth2\/SessionLogoutFlow",
   "kind" : "symbol",
   "navigatorTitle" : [
     {
@@ -279,14 +278,14 @@
   "type" : "topic",
   "url" : "\/documentation\/oktaoauth2\/sessionlogoutflow"
 },
-"doc://com.okta.mobile.oktaoauth2/documentation/OktaOAuth2/SessionLogoutFlowDelegate": {
+"doc://OktaOAuth2/documentation/OktaOAuth2/SessionLogoutFlowDelegate": {
   "abstract" : [
     {
       "text" : "The delegate of a ",
       "type" : "text"
     },
     {
-      "identifier" : "doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/OktaOAuth2\/SessionLogoutFlow",
+      "identifier" : "doc:\/\/OktaOAuth2\/documentation\/OktaOAuth2\/SessionLogoutFlow",
       "isActive" : true,
       "type" : "reference"
     },
@@ -309,7 +308,7 @@
       "text" : "SessionLogoutFlowDelegate"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/OktaOAuth2\/SessionLogoutFlowDelegate",
+  "identifier" : "doc:\/\/OktaOAuth2\/documentation\/OktaOAuth2\/SessionLogoutFlowDelegate",
   "kind" : "symbol",
   "navigatorTitle" : [
     {

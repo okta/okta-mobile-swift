@@ -1,21 +1,15 @@
 {
-  "abstract" : [
-    {
-      "text" : "No overview available.",
-      "type" : "text"
-    }
-  ],
   "hierarchy" : {
     "paths" : [
       [
-        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation",
-        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/OAuth2Client"
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/OAuth2Client"
       ]
     ]
   },
   "identifier" : {
     "interfaceLanguage" : "swift",
-    "url" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/OAuth2Client\/APIClient-Implementations"
+    "url" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/OAuth2Client\/APIClient-Implementations"
   },
   "kind" : "article",
   "metadata" : {
@@ -29,7 +23,7 @@
   },
   "schemaVersion" : {
     "major" : 0,
-    "minor" : 2,
+    "minor" : 3,
     "patch" : 0
   },
   "sections" : [
@@ -39,27 +33,24 @@
     {
       "generated" : true,
       "identifiers" : [
-        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/OAuth2Client\/additionalHttpHeaders-g28t",
-        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/OAuth2Client\/baseURL",
-        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/OAuth2Client\/requestIdHeader",
-        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/OAuth2Client\/userAgent"
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/OAuth2Client\/additionalHttpHeaders-g28t",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/OAuth2Client\/baseURL",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/OAuth2Client\/requestIdHeader",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/OAuth2Client\/userAgent"
       ],
       "title" : "Instance Properties"
     },
     {
       "generated" : true,
       "identifiers" : [
-        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/OAuth2Client\/decode(_:from:userInfo:)",
-        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/OAuth2Client\/didSend(request:received:)-1nrf4",
-        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/OAuth2Client\/didSend(request:received:)-2abw8",
-        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/OAuth2Client\/didSend(request:received:)-5eswo",
-        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/OAuth2Client\/didSend(request:received:)-8no60",
-        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/OAuth2Client\/didSend(request:received:)-9p2t5",
-        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/OAuth2Client\/didSend(request:received:)-xdb1",
-        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/OAuth2Client\/error(from:)",
-        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/OAuth2Client\/send(_:parsing:completion:)",
-        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/OAuth2Client\/shouldRetry(request:rateLimit:)",
-        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/OAuth2Client\/willSend(request:)"
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/OAuth2Client\/decode(_:from:userInfo:)",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/OAuth2Client\/didSend(request:received:)-2abw8",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/OAuth2Client\/didSend(request:received:)-8no60",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/OAuth2Client\/didSend(request:received:requestId:rateLimit:)",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/OAuth2Client\/error(from:)",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/OAuth2Client\/send(_:parsing:completion:)",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/OAuth2Client\/shouldRetry(request:rateLimit:)",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/OAuth2Client\/willSend(request:)"
       ],
       "title" : "Instance Methods"
     }
@@ -78,55 +69,21 @@
   ]
 , 
 "references": {
-"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation": {
+"doc://AuthFoundation/documentation/AuthFoundation": {
   "abstract" : [
     {
       "text" : "Library that provides foundational features used by Okta’s authentication libraries, as well as APIs used to work with tokens and user credentials.",
       "type" : "text"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation",
   "kind" : "symbol",
   "role" : "collection",
   "title" : "AuthFoundation",
   "type" : "topic",
   "url" : "\/documentation\/authfoundation"
 },
-"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/APIRetry": {
-  "abstract" : [
-    {
-      "text" : "List of retry options",
-      "type" : "text"
-    }
-  ],
-  "fragments" : [
-    {
-      "kind" : "keyword",
-      "text" : "enum"
-    },
-    {
-      "kind" : "text",
-      "text" : " "
-    },
-    {
-      "kind" : "identifier",
-      "text" : "APIRetry"
-    }
-  ],
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/APIRetry",
-  "kind" : "symbol",
-  "navigatorTitle" : [
-    {
-      "kind" : "identifier",
-      "text" : "APIRetry"
-    }
-  ],
-  "role" : "symbol",
-  "title" : "APIRetry",
-  "type" : "topic",
-  "url" : "\/documentation\/authfoundation\/apiretry"
-},
-"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/OAuth2Client": {
+"doc://AuthFoundation/documentation/AuthFoundation/OAuth2Client": {
   "abstract" : [
     {
       "text" : "An OAuth2 client, used to interact with a given authorization server.",
@@ -147,7 +104,7 @@
       "text" : "OAuth2Client"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/OAuth2Client",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/OAuth2Client",
   "kind" : "symbol",
   "navigatorTitle" : [
     {
@@ -160,12 +117,9 @@
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/oauth2client"
 },
-"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/OAuth2Client/additionalHttpHeaders-g28t": {
+"doc://AuthFoundation/documentation/AuthFoundation/OAuth2Client/additionalHttpHeaders-g28t": {
   "abstract" : [
-    {
-      "text" : "Any additional headers that should be added to all requests sent through this client.",
-      "type" : "text"
-    }
+
   ],
   "fragments" : [
     {
@@ -203,14 +157,14 @@
       "text" : "]?"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/OAuth2Client\/additionalHttpHeaders-g28t",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/OAuth2Client\/additionalHttpHeaders-g28t",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "additionalHttpHeaders",
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/oauth2client\/additionalhttpheaders-g28t"
 },
-"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/OAuth2Client/baseURL": {
+"doc://AuthFoundation/documentation/AuthFoundation/OAuth2Client/baseURL": {
   "abstract" : [
     {
       "text" : "Exposes the base URL this authorization server is represented by.",
@@ -240,19 +194,16 @@
       "text" : "URL"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/OAuth2Client\/baseURL",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/OAuth2Client\/baseURL",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "baseURL",
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/oauth2client\/baseurl"
 },
-"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/OAuth2Client/decode(_:from:userInfo:)": {
+"doc://AuthFoundation/documentation/AuthFoundation/OAuth2Client/decode(_:from:userInfo:)": {
   "abstract" : [
-    {
-      "text" : "Decodes HTTP response data into an expected type.",
-      "type" : "text"
-    }
+
   ],
   "fragments" : [
     {
@@ -281,7 +232,6 @@
     },
     {
       "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:14AuthFoundation12OAuth2ClientC6decode_4from8userInfoxxm_0B04DataVSDys010CodingUserH3KeyVypGSgtKSeRzlF1TL_xmfp",
       "text" : "T"
     },
     {
@@ -340,86 +290,19 @@
     },
     {
       "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:14AuthFoundation12OAuth2ClientC6decode_4from8userInfoxxm_0B04DataVSDys010CodingUserH3KeyVypGSgtKSeRzlF1TL_xmfp",
       "text" : "T"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/OAuth2Client\/decode(_:from:userInfo:)",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/OAuth2Client\/decode(_:from:userInfo:)",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "decode(_:from:userInfo:)",
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/oauth2client\/decode(_:from:userinfo:)"
 },
-"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/OAuth2Client/didSend(request:received:)-1nrf4": {
+"doc://AuthFoundation/documentation/AuthFoundation/OAuth2Client/didSend(request:received:)-2abw8": {
   "abstract" : [
 
-  ],
-  "fragments" : [
-    {
-      "kind" : "keyword",
-      "text" : "func"
-    },
-    {
-      "kind" : "text",
-      "text" : " "
-    },
-    {
-      "kind" : "identifier",
-      "text" : "didSend"
-    },
-    {
-      "kind" : "text",
-      "text" : "("
-    },
-    {
-      "kind" : "externalParam",
-      "text" : "request"
-    },
-    {
-      "kind" : "text",
-      "text" : ": "
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:10Foundation10URLRequestV",
-      "text" : "URLRequest"
-    },
-    {
-      "kind" : "text",
-      "text" : ", "
-    },
-    {
-      "kind" : "externalParam",
-      "text" : "received"
-    },
-    {
-      "kind" : "text",
-      "text" : ": "
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:14AuthFoundation14APIClientErrorO",
-      "text" : "APIClientError"
-    },
-    {
-      "kind" : "text",
-      "text" : ")"
-    }
-  ],
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/OAuth2Client\/didSend(request:received:)-1nrf4",
-  "kind" : "symbol",
-  "role" : "symbol",
-  "title" : "didSend(request:received:)",
-  "type" : "topic",
-  "url" : "\/documentation\/authfoundation\/oauth2client\/didsend(request:received:)-1nrf4"
-},
-"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/OAuth2Client/didSend(request:received:)-2abw8": {
-  "abstract" : [
-    {
-      "text" : "Invoked when a request returns a successful response.",
-      "type" : "text"
-    }
   ],
   "fragments" : [
     {
@@ -482,7 +365,6 @@
     },
     {
       "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:14AuthFoundation12OAuth2ClientC7didSend7request8receivedy0B010URLRequestV_AA11APIResponseVyxGtSeRzlF1TL_xmfp",
       "text" : "T"
     },
     {
@@ -490,14 +372,14 @@
       "text" : ">)"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/OAuth2Client\/didSend(request:received:)-2abw8",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/OAuth2Client\/didSend(request:received:)-2abw8",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "didSend(request:received:)",
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/oauth2client\/didsend(request:received:)-2abw8"
 },
-"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/OAuth2Client/didSend(request:received:)-5eswo": {
+"doc://AuthFoundation/documentation/AuthFoundation/OAuth2Client/didSend(request:received:)-8no60": {
   "abstract" : [
 
   ],
@@ -553,85 +435,16 @@
       "text" : ")"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/OAuth2Client\/didSend(request:received:)-5eswo",
-  "kind" : "symbol",
-  "role" : "symbol",
-  "title" : "didSend(request:received:)",
-  "type" : "topic",
-  "url" : "\/documentation\/authfoundation\/oauth2client\/didsend(request:received:)-5eswo"
-},
-"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/OAuth2Client/didSend(request:received:)-8no60": {
-  "abstract" : [
-    {
-      "text" : "Invoked when a request fails.",
-      "type" : "text"
-    }
-  ],
-  "fragments" : [
-    {
-      "kind" : "keyword",
-      "text" : "func"
-    },
-    {
-      "kind" : "text",
-      "text" : " "
-    },
-    {
-      "kind" : "identifier",
-      "text" : "didSend"
-    },
-    {
-      "kind" : "text",
-      "text" : "("
-    },
-    {
-      "kind" : "externalParam",
-      "text" : "request"
-    },
-    {
-      "kind" : "text",
-      "text" : ": "
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:10Foundation10URLRequestV",
-      "text" : "URLRequest"
-    },
-    {
-      "kind" : "text",
-      "text" : ", "
-    },
-    {
-      "kind" : "externalParam",
-      "text" : "received"
-    },
-    {
-      "kind" : "text",
-      "text" : ": "
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "c:objc(cs)NSHTTPURLResponse",
-      "text" : "HTTPURLResponse"
-    },
-    {
-      "kind" : "text",
-      "text" : ")"
-    }
-  ],
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/OAuth2Client\/didSend(request:received:)-8no60",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/OAuth2Client\/didSend(request:received:)-8no60",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "didSend(request:received:)",
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/oauth2client\/didsend(request:received:)-8no60"
 },
-"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/OAuth2Client/didSend(request:received:)-9p2t5": {
+"doc://AuthFoundation/documentation/AuthFoundation/OAuth2Client/didSend(request:received:requestId:rateLimit:)": {
   "abstract" : [
-    {
-      "text" : "Invoked when a request fails.",
-      "type" : "text"
-    }
+
   ],
   "fragments" : [
     {
@@ -682,65 +495,11 @@
     },
     {
       "kind" : "text",
-      "text" : ")"
-    }
-  ],
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/OAuth2Client\/didSend(request:received:)-9p2t5",
-  "kind" : "symbol",
-  "role" : "symbol",
-  "title" : "didSend(request:received:)",
-  "type" : "topic",
-  "url" : "\/documentation\/authfoundation\/oauth2client\/didsend(request:received:)-9p2t5"
-},
-"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/OAuth2Client/didSend(request:received:)-xdb1": {
-  "abstract" : [
-
-  ],
-  "fragments" : [
-    {
-      "kind" : "keyword",
-      "text" : "func"
-    },
-    {
-      "kind" : "text",
-      "text" : " "
-    },
-    {
-      "kind" : "identifier",
-      "text" : "didSend"
-    },
-    {
-      "kind" : "text",
-      "text" : "<"
-    },
-    {
-      "kind" : "genericParameter",
-      "text" : "T"
-    },
-    {
-      "kind" : "text",
-      "text" : ">("
-    },
-    {
-      "kind" : "externalParam",
-      "text" : "request"
-    },
-    {
-      "kind" : "text",
-      "text" : ": "
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:10Foundation10URLRequestV",
-      "text" : "URLRequest"
-    },
-    {
-      "kind" : "text",
       "text" : ", "
     },
     {
       "kind" : "externalParam",
-      "text" : "received"
+      "text" : "requestId"
     },
     {
       "kind" : "text",
@@ -748,31 +507,39 @@
     },
     {
       "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:14AuthFoundation11APIResponseV",
-      "text" : "APIResponse"
+      "preciseIdentifier" : "s:SS",
+      "text" : "String"
     },
     {
       "kind" : "text",
-      "text" : "<"
+      "text" : "?, "
+    },
+    {
+      "kind" : "externalParam",
+      "text" : "rateLimit"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
     },
     {
       "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:14AuthFoundation9APIClientPAAE7didSend7request8receivedy0B010URLRequestV_AA11APIResponseVyqd__GtSeRd__lF1TL_qd__mfp",
-      "text" : "T"
+      "preciseIdentifier" : "s:14AuthFoundation12APIRateLimitV",
+      "text" : "APIRateLimit"
     },
     {
       "kind" : "text",
-      "text" : ">)"
+      "text" : "?)"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/OAuth2Client\/didSend(request:received:)-xdb1",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/OAuth2Client\/didSend(request:received:requestId:rateLimit:)",
   "kind" : "symbol",
   "role" : "symbol",
-  "title" : "didSend(request:received:)",
+  "title" : "didSend(request:received:requestId:rateLimit:)",
   "type" : "topic",
-  "url" : "\/documentation\/authfoundation\/oauth2client\/didsend(request:received:)-xdb1"
+  "url" : "\/documentation\/authfoundation\/oauth2client\/didsend(request:received:requestid:ratelimit:)"
 },
-"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/OAuth2Client/error(from:)": {
+"doc://AuthFoundation/documentation/AuthFoundation/OAuth2Client/error(from:)": {
   "abstract" : [
     {
       "text" : "Transforms HTTP response data into the appropriate error type, when requests are unsuccessful.",
@@ -823,19 +590,16 @@
       "text" : "?"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/OAuth2Client\/error(from:)",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/OAuth2Client\/error(from:)",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "error(from:)",
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/oauth2client\/error(from:)"
 },
-"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/OAuth2Client/requestIdHeader": {
+"doc://AuthFoundation/documentation/AuthFoundation/OAuth2Client/requestIdHeader": {
   "abstract" : [
-    {
-      "text" : "The name of the HTTP response header where unique request IDs can be found.",
-      "type" : "text"
-    }
+
   ],
   "fragments" : [
     {
@@ -864,19 +628,16 @@
       "text" : "?"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/OAuth2Client\/requestIdHeader",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/OAuth2Client\/requestIdHeader",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "requestIdHeader",
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/oauth2client\/requestidheader"
 },
-"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/OAuth2Client/send(_:parsing:completion:)": {
+"doc://AuthFoundation/documentation/AuthFoundation/OAuth2Client/send(_:parsing:completion:)": {
   "abstract" : [
-    {
-      "text" : "Send the given URLRequest.",
-      "type" : "text"
-    }
+
   ],
   "fragments" : [
     {
@@ -957,7 +718,6 @@
     },
     {
       "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:14AuthFoundation9APIClientPAAE4send_7parsing10completiony0B010URLRequestV_AA17APIParsingContext_pSgys6ResultOyAA11APIResponseVyqd__GAA0C5ErrorOGctSeRd__lF1TL_qd__mfp",
       "text" : "T"
     },
     {
@@ -983,28 +743,16 @@
       "text" : ")"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/OAuth2Client\/send(_:parsing:completion:)",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/OAuth2Client\/send(_:parsing:completion:)",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "send(_:parsing:completion:)",
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/oauth2client\/send(_:parsing:completion:)"
 },
-"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/OAuth2Client/shouldRetry(request:rateLimit:)": {
+"doc://AuthFoundation/documentation/AuthFoundation/OAuth2Client/shouldRetry(request:rateLimit:)": {
   "abstract" : [
-    {
-      "text" : "Provides the ",
-      "type" : "text"
-    },
-    {
-      "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/APIRetry",
-      "isActive" : true,
-      "type" : "reference"
-    },
-    {
-      "text" : " configurations from the delegate in response to a retry request.",
-      "type" : "text"
-    }
+
   ],
   "fragments" : [
     {
@@ -1063,19 +811,16 @@
       "text" : "APIRetry"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/OAuth2Client\/shouldRetry(request:rateLimit:)",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/OAuth2Client\/shouldRetry(request:rateLimit:)",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "shouldRetry(request:rateLimit:)",
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/oauth2client\/shouldretry(request:ratelimit:)"
 },
-"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/OAuth2Client/userAgent": {
+"doc://AuthFoundation/documentation/AuthFoundation/OAuth2Client/userAgent": {
   "abstract" : [
-    {
-      "text" : "The User-Agent string to be sent along with all outgoing requests.",
-      "type" : "text"
-    }
+
   ],
   "fragments" : [
     {
@@ -1100,19 +845,16 @@
       "text" : "String"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/OAuth2Client\/userAgent",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/OAuth2Client\/userAgent",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "userAgent",
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/oauth2client\/useragent"
 },
-"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/OAuth2Client/willSend(request:)": {
+"doc://AuthFoundation/documentation/AuthFoundation/OAuth2Client/willSend(request:)": {
   "abstract" : [
-    {
-      "text" : "Invoked immediately prior to a URLRequest being converted to a DataTask.",
-      "type" : "text"
-    }
+
   ],
   "fragments" : [
     {
@@ -1157,7 +899,7 @@
       "text" : ")"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/OAuth2Client\/willSend(request:)",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/OAuth2Client\/willSend(request:)",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "willSend(request:)",

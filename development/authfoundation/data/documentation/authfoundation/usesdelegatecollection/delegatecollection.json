@@ -1,21 +1,15 @@
 {
-  "abstract" : [
-    {
-      "text" : "No overview available.",
-      "type" : "text"
-    }
-  ],
   "hierarchy" : {
     "paths" : [
       [
-        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation",
-        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/UsesDelegateCollection"
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/UsesDelegateCollection"
       ]
     ]
   },
   "identifier" : {
     "interfaceLanguage" : "swift",
-    "url" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/UsesDelegateCollection\/delegateCollection"
+    "url" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/UsesDelegateCollection\/delegateCollection"
   },
   "kind" : "symbol",
   "metadata" : {
@@ -48,7 +42,14 @@
       },
       {
         "kind" : "typeIdentifier",
-        "preciseIdentifier" : "s:14AuthFoundation22UsesDelegateCollectionP0D0Qa",
+        "text" : "Self"
+      },
+      {
+        "kind" : "text",
+        "text" : "."
+      },
+      {
+        "kind" : "typeIdentifier",
         "text" : "Delegate"
       },
       {
@@ -95,7 +96,7 @@
               "text" : ": "
             },
             {
-              "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/DelegateCollection",
+              "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/DelegateCollection",
               "kind" : "typeIdentifier",
               "preciseIdentifier" : "s:14AuthFoundation18DelegateCollectionC",
               "text" : "DelegateCollection"
@@ -105,9 +106,15 @@
               "text" : "<"
             },
             {
-              "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/UsesDelegateCollection\/Delegate",
               "kind" : "typeIdentifier",
-              "preciseIdentifier" : "s:14AuthFoundation22UsesDelegateCollectionP0D0Qa",
+              "text" : "Self"
+            },
+            {
+              "kind" : "text",
+              "text" : "."
+            },
+            {
+              "kind" : "typeIdentifier",
               "text" : "Delegate"
             },
             {
@@ -130,7 +137,7 @@
   ],
   "schemaVersion" : {
     "major" : 0,
-    "minor" : 2,
+    "minor" : 3,
     "patch" : 0
   },
   "sections" : [
@@ -150,21 +157,21 @@
   ]
 , 
 "references": {
-"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation": {
+"doc://AuthFoundation/documentation/AuthFoundation": {
   "abstract" : [
     {
       "text" : "Library that provides foundational features used by Okta’s authentication libraries, as well as APIs used to work with tokens and user credentials.",
       "type" : "text"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation",
   "kind" : "symbol",
   "role" : "collection",
   "title" : "AuthFoundation",
   "type" : "topic",
   "url" : "\/documentation\/authfoundation"
 },
-"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/DelegateCollection": {
+"doc://AuthFoundation/documentation/AuthFoundation/DelegateCollection": {
   "abstract" : [
 
   ],
@@ -182,7 +189,7 @@
       "text" : "DelegateCollection"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/DelegateCollection",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/DelegateCollection",
   "kind" : "symbol",
   "navigatorTitle" : [
     {
@@ -195,7 +202,7 @@
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/delegatecollection"
 },
-"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/UsesDelegateCollection": {
+"doc://AuthFoundation/documentation/AuthFoundation/UsesDelegateCollection": {
   "abstract" : [
 
   ],
@@ -213,7 +220,7 @@
       "text" : "UsesDelegateCollection"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/UsesDelegateCollection",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/UsesDelegateCollection",
   "kind" : "symbol",
   "navigatorTitle" : [
     {
@@ -226,33 +233,7 @@
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/usesdelegatecollection"
 },
-"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/UsesDelegateCollection/Delegate": {
-  "abstract" : [
-
-  ],
-  "fragments" : [
-    {
-      "kind" : "keyword",
-      "text" : "associatedtype"
-    },
-    {
-      "kind" : "text",
-      "text" : " "
-    },
-    {
-      "kind" : "identifier",
-      "text" : "Delegate"
-    }
-  ],
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/UsesDelegateCollection\/Delegate",
-  "kind" : "symbol",
-  "required" : true,
-  "role" : "symbol",
-  "title" : "Delegate",
-  "type" : "topic",
-  "url" : "\/documentation\/authfoundation\/usesdelegatecollection\/delegate"
-},
-"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/UsesDelegateCollection/delegateCollection": {
+"doc://AuthFoundation/documentation/AuthFoundation/UsesDelegateCollection/delegateCollection": {
   "abstract" : [
 
   ],
@@ -284,7 +265,14 @@
     },
     {
       "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:14AuthFoundation22UsesDelegateCollectionP0D0Qa",
+      "text" : "Self"
+    },
+    {
+      "kind" : "text",
+      "text" : "."
+    },
+    {
+      "kind" : "typeIdentifier",
       "text" : "Delegate"
     },
     {
@@ -292,7 +280,7 @@
       "text" : ">"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/UsesDelegateCollection\/delegateCollection",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/UsesDelegateCollection\/delegateCollection",
   "kind" : "symbol",
   "required" : true,
   "role" : "symbol",

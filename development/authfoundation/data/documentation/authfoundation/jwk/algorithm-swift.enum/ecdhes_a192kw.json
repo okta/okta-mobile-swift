@@ -1,22 +1,16 @@
 {
-  "abstract" : [
-    {
-      "text" : "No overview available.",
-      "type" : "text"
-    }
-  ],
   "hierarchy" : {
     "paths" : [
       [
-        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation",
-        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/JWK",
-        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/JWK\/Algorithm-swift.enum"
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JWK",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JWK\/Algorithm-swift.enum"
       ]
     ]
   },
   "identifier" : {
     "interfaceLanguage" : "swift",
-    "url" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/JWK\/Algorithm-swift.enum\/ecdhES_a192KW"
+    "url" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JWK\/Algorithm-swift.enum\/ecdhES_a192KW"
   },
   "kind" : "symbol",
   "metadata" : {
@@ -76,7 +70,7 @@
   ],
   "schemaVersion" : {
     "major" : 0,
-    "minor" : 2,
+    "minor" : 3,
     "patch" : 0
   },
   "sections" : [
@@ -96,21 +90,21 @@
   ]
 , 
 "references": {
-"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation": {
+"doc://AuthFoundation/documentation/AuthFoundation": {
   "abstract" : [
     {
       "text" : "Library that provides foundational features used by Okta’s authentication libraries, as well as APIs used to work with tokens and user credentials.",
       "type" : "text"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation",
   "kind" : "symbol",
   "role" : "collection",
   "title" : "AuthFoundation",
   "type" : "topic",
   "url" : "\/documentation\/authfoundation"
 },
-"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/JWK": {
+"doc://AuthFoundation/documentation/AuthFoundation/JWK": {
   "abstract" : [
     {
       "text" : "Describes an individual key from an authorization server, which can be used to validate tokens or encrypt content.",
@@ -131,7 +125,7 @@
       "text" : "JWK"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/JWK",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JWK",
   "kind" : "symbol",
   "navigatorTitle" : [
     {
@@ -144,7 +138,7 @@
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/jwk"
 },
-"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/JWK/Algorithm-swift.enum": {
+"doc://AuthFoundation/documentation/AuthFoundation/JWK/Algorithm-swift.enum": {
   "abstract" : [
     {
       "text" : "The algorithm this key is intended to be used with.",
@@ -165,7 +159,7 @@
       "text" : "Algorithm"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/JWK\/Algorithm-swift.enum",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JWK\/Algorithm-swift.enum",
   "kind" : "symbol",
   "navigatorTitle" : [
     {
@@ -178,7 +172,7 @@
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/jwk\/algorithm-swift.enum"
 },
-"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/JWK/Algorithm-swift.enum/ecdhES_a192KW": {
+"doc://AuthFoundation/documentation/AuthFoundation/JWK/Algorithm-swift.enum/ecdhES_a192KW": {
   "abstract" : [
 
   ],
@@ -196,7 +190,7 @@
       "text" : "ecdhES_a192KW"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/JWK\/Algorithm-swift.enum\/ecdhES_a192KW",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JWK\/Algorithm-swift.enum\/ecdhES_a192KW",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "JWK.Algorithm.ecdhES_a192KW",

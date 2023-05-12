@@ -1,20 +1,14 @@
 {
-  "abstract" : [
-    {
-      "text" : "No overview available.",
-      "type" : "text"
-    }
-  ],
   "hierarchy" : {
     "paths" : [
       [
-        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation"
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation"
       ]
     ]
   },
   "identifier" : {
     "interfaceLanguage" : "swift",
-    "url" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/SDKVersion"
+    "url" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/SDKVersion"
   },
   "kind" : "symbol",
   "metadata" : {
@@ -88,7 +82,7 @@
   ],
   "schemaVersion" : {
     "major" : 0,
-    "minor" : 2,
+    "minor" : 3,
     "patch" : 0
   },
   "sections" : [
@@ -98,7 +92,7 @@
     {
       "generated" : true,
       "identifiers" : [
-        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/SDKVersionMigrator"
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/SDKVersionMigrator"
       ],
       "title" : "Migration and versioning"
     }
@@ -106,36 +100,36 @@
   "topicSections" : [
     {
       "identifiers" : [
-        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/SDKVersion\/Migration"
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/SDKVersion\/Migration"
       ],
       "title" : "Classes"
     },
     {
       "identifiers" : [
-        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/SDKVersion\/init(sdk:version:)"
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/SDKVersion\/init(sdk:version:)"
       ],
       "title" : "Initializers"
     },
     {
       "identifiers" : [
-        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/SDKVersion\/displayName",
-        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/SDKVersion\/name",
-        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/SDKVersion\/version"
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/SDKVersion\/displayName",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/SDKVersion\/name",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/SDKVersion\/version"
       ],
       "title" : "Instance Properties"
     },
     {
       "identifiers" : [
-        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/SDKVersion\/isMigrationNeeded",
-        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/SDKVersion\/userAgent"
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/SDKVersion\/isMigrationNeeded",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/SDKVersion\/userAgent"
       ],
       "title" : "Type Properties"
     },
     {
       "identifiers" : [
-        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/SDKVersion\/migrateIfNeeded()",
-        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/SDKVersion\/register(migrator:)",
-        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/SDKVersion\/register(sdk:)"
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/SDKVersion\/migrateIfNeeded()",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/SDKVersion\/register(migrator:)",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/SDKVersion\/register(sdk:)"
       ],
       "title" : "Type Methods"
     }
@@ -154,21 +148,21 @@
   ]
 , 
 "references": {
-"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation": {
+"doc://AuthFoundation/documentation/AuthFoundation": {
   "abstract" : [
     {
       "text" : "Library that provides foundational features used by Okta’s authentication libraries, as well as APIs used to work with tokens and user credentials.",
       "type" : "text"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation",
   "kind" : "symbol",
   "role" : "collection",
   "title" : "AuthFoundation",
   "type" : "topic",
   "url" : "\/documentation\/authfoundation"
 },
-"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/SDKVersion": {
+"doc://AuthFoundation/documentation/AuthFoundation/SDKVersion": {
   "abstract" : [
 
   ],
@@ -186,7 +180,7 @@
       "text" : "SDKVersion"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/SDKVersion",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/SDKVersion",
   "kind" : "symbol",
   "navigatorTitle" : [
     {
@@ -199,7 +193,7 @@
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/sdkversion"
 },
-"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/SDKVersion/Migration": {
+"doc://AuthFoundation/documentation/AuthFoundation/SDKVersion/Migration": {
   "abstract" : [
     {
       "text" : "Namespace used for a variety of version migration agents.",
@@ -220,7 +214,7 @@
       "text" : "Migration"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/SDKVersion\/Migration",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/SDKVersion\/Migration",
   "kind" : "symbol",
   "navigatorTitle" : [
     {
@@ -233,7 +227,7 @@
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/sdkversion\/migration"
 },
-"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/SDKVersion/displayName": {
+"doc://AuthFoundation/documentation/AuthFoundation/SDKVersion/displayName": {
   "abstract" : [
 
   ],
@@ -260,14 +254,14 @@
       "text" : "String"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/SDKVersion\/displayName",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/SDKVersion\/displayName",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "displayName",
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/sdkversion\/displayname"
 },
-"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/SDKVersion/init(sdk:version:)": {
+"doc://AuthFoundation/documentation/AuthFoundation/SDKVersion/init(sdk:version:)": {
   "abstract" : [
 
   ],
@@ -315,14 +309,14 @@
       "text" : ")"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/SDKVersion\/init(sdk:version:)",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/SDKVersion\/init(sdk:version:)",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "init(sdk:version:)",
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/sdkversion\/init(sdk:version:)"
 },
-"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/SDKVersion/isMigrationNeeded": {
+"doc://AuthFoundation/documentation/AuthFoundation/SDKVersion/isMigrationNeeded": {
   "abstract" : [
     {
       "text" : "Determines whether or not some user data needs to be migrated.",
@@ -360,14 +354,14 @@
       "text" : "Bool"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/SDKVersion\/isMigrationNeeded",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/SDKVersion\/isMigrationNeeded",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "isMigrationNeeded",
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/sdkversion\/ismigrationneeded"
 },
-"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/SDKVersion/migrateIfNeeded()": {
+"doc://AuthFoundation/documentation/AuthFoundation/SDKVersion/migrateIfNeeded()": {
   "abstract" : [
     {
       "text" : "Migrates user data, if necessary.",
@@ -404,14 +398,14 @@
       "text" : "throws"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/SDKVersion\/migrateIfNeeded()",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/SDKVersion\/migrateIfNeeded()",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "migrateIfNeeded()",
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/sdkversion\/migrateifneeded()"
 },
-"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/SDKVersion/name": {
+"doc://AuthFoundation/documentation/AuthFoundation/SDKVersion/name": {
   "abstract" : [
 
   ],
@@ -438,14 +432,14 @@
       "text" : "String"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/SDKVersion\/name",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/SDKVersion\/name",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "name",
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/sdkversion\/name"
 },
-"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/SDKVersion/register(migrator:)": {
+"doc://AuthFoundation/documentation/AuthFoundation/SDKVersion/register(migrator:)": {
   "abstract" : [
     {
       "text" : "Registers an SDK version migrator for use within a migration process.",
@@ -495,14 +489,14 @@
       "text" : ")"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/SDKVersion\/register(migrator:)",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/SDKVersion\/register(migrator:)",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "register(migrator:)",
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/sdkversion\/register(migrator:)"
 },
-"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/SDKVersion/register(sdk:)": {
+"doc://AuthFoundation/documentation/AuthFoundation/SDKVersion/register(sdk:)": {
   "abstract" : [
 
   ],
@@ -549,14 +543,14 @@
       "text" : ")"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/SDKVersion\/register(sdk:)",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/SDKVersion\/register(sdk:)",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "register(sdk:)",
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/sdkversion\/register(sdk:)"
 },
-"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/SDKVersion/userAgent": {
+"doc://AuthFoundation/documentation/AuthFoundation/SDKVersion/userAgent": {
   "abstract" : [
 
   ],
@@ -591,14 +585,14 @@
       "text" : "String"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/SDKVersion\/userAgent",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/SDKVersion\/userAgent",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "userAgent",
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/sdkversion\/useragent"
 },
-"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/SDKVersion/version": {
+"doc://AuthFoundation/documentation/AuthFoundation/SDKVersion/version": {
   "abstract" : [
 
   ],
@@ -625,14 +619,14 @@
       "text" : "String"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/SDKVersion\/version",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/SDKVersion\/version",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "version",
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/sdkversion\/version"
 },
-"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/SDKVersionMigrator": {
+"doc://AuthFoundation/documentation/AuthFoundation/SDKVersionMigrator": {
   "abstract" : [
     {
       "text" : "Protocol describing a version migrator.",
@@ -653,7 +647,7 @@
       "text" : "SDKVersionMigrator"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/SDKVersionMigrator",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/SDKVersionMigrator",
   "kind" : "symbol",
   "navigatorTitle" : [
     {

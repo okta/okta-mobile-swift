@@ -1,21 +1,15 @@
 {
-  "abstract" : [
-    {
-      "text" : "No overview available.",
-      "type" : "text"
-    }
-  ],
   "hierarchy" : {
     "paths" : [
       [
-        "doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/OktaOAuth2",
-        "doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/OktaOAuth2\/ResourceOwnerFlow"
+        "doc:\/\/OktaOAuth2\/documentation\/OktaOAuth2",
+        "doc:\/\/OktaOAuth2\/documentation\/OktaOAuth2\/ResourceOwnerFlow"
       ]
     ]
   },
   "identifier" : {
     "interfaceLanguage" : "swift",
-    "url" : "doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/OktaOAuth2\/ResourceOwnerFlow\/APIClientDelegate-Implementations"
+    "url" : "doc:\/\/OktaOAuth2\/documentation\/OktaOAuth2\/ResourceOwnerFlow\/APIClientDelegate-Implementations"
   },
   "kind" : "article",
   "metadata" : {
@@ -29,7 +23,7 @@
   },
   "schemaVersion" : {
     "major" : 0,
-    "minor" : 2,
+    "minor" : 3,
     "patch" : 0
   },
   "sections" : [
@@ -39,11 +33,10 @@
     {
       "generated" : true,
       "identifiers" : [
-        "doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/OktaOAuth2\/ResourceOwnerFlow\/api(client:didSend:received:)-48bl3",
-        "doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/OktaOAuth2\/ResourceOwnerFlow\/api(client:didSend:received:)-5aid3",
-        "doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/OktaOAuth2\/ResourceOwnerFlow\/api(client:didSend:received:)-5pho",
-        "doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/OktaOAuth2\/ResourceOwnerFlow\/api(client:shouldRetry:)",
-        "doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/OktaOAuth2\/ResourceOwnerFlow\/api(client:willSend:)"
+        "doc:\/\/OktaOAuth2\/documentation\/OktaOAuth2\/ResourceOwnerFlow\/api(client:didSend:received:)",
+        "doc:\/\/OktaOAuth2\/documentation\/OktaOAuth2\/ResourceOwnerFlow\/api(client:didSend:received:requestId:rateLimit:)",
+        "doc:\/\/OktaOAuth2\/documentation\/OktaOAuth2\/ResourceOwnerFlow\/api(client:shouldRetry:)",
+        "doc:\/\/OktaOAuth2\/documentation\/OktaOAuth2\/ResourceOwnerFlow\/api(client:willSend:)"
       ],
       "title" : "Instance Methods"
     }
@@ -62,27 +55,28 @@
   ]
 , 
 "references": {
-"doc://com.okta.mobile.oktaoauth2/documentation/OktaOAuth2": {
+"doc://OktaOAuth2/documentation/OktaOAuth2": {
   "abstract" : [
     {
       "text" : "Interact with Okta’s OAuth2 APIs to authenticate users, and interact with user resources.",
       "type" : "text"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/OktaOAuth2",
+  "identifier" : "doc:\/\/OktaOAuth2\/documentation\/OktaOAuth2",
   "kind" : "symbol",
   "role" : "collection",
   "title" : "OktaOAuth2",
   "type" : "topic",
   "url" : "\/documentation\/oktaoauth2"
 },
-"doc://com.okta.mobile.oktaoauth2/documentation/OktaOAuth2/ResourceOwnerFlow": {
+"doc://OktaOAuth2/documentation/OktaOAuth2/ResourceOwnerFlow": {
   "abstract" : [
     {
       "text" : "An authentication flow class that implements the Resource Owner Flow exchange.",
       "type" : "text"
     }
   ],
+  "deprecated" : true,
   "fragments" : [
     {
       "kind" : "keyword",
@@ -97,7 +91,7 @@
       "text" : "ResourceOwnerFlow"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/OktaOAuth2\/ResourceOwnerFlow",
+  "identifier" : "doc:\/\/OktaOAuth2\/documentation\/OktaOAuth2\/ResourceOwnerFlow",
   "kind" : "symbol",
   "navigatorTitle" : [
     {
@@ -110,183 +104,7 @@
   "type" : "topic",
   "url" : "\/documentation\/oktaoauth2\/resourceownerflow"
 },
-"doc://com.okta.mobile.oktaoauth2/documentation/OktaOAuth2/ResourceOwnerFlow/api(client:didSend:received:)-48bl3": {
-  "abstract" : [
-
-  ],
-  "fragments" : [
-    {
-      "kind" : "keyword",
-      "text" : "func"
-    },
-    {
-      "kind" : "text",
-      "text" : " "
-    },
-    {
-      "kind" : "identifier",
-      "text" : "api"
-    },
-    {
-      "kind" : "text",
-      "text" : "<"
-    },
-    {
-      "kind" : "genericParameter",
-      "text" : "T"
-    },
-    {
-      "kind" : "text",
-      "text" : ">("
-    },
-    {
-      "kind" : "externalParam",
-      "text" : "client"
-    },
-    {
-      "kind" : "text",
-      "text" : ": "
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:14AuthFoundation9APIClientP",
-      "text" : "APIClient"
-    },
-    {
-      "kind" : "text",
-      "text" : ", "
-    },
-    {
-      "kind" : "externalParam",
-      "text" : "didSend"
-    },
-    {
-      "kind" : "text",
-      "text" : ": "
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:10Foundation10URLRequestV",
-      "text" : "URLRequest"
-    },
-    {
-      "kind" : "text",
-      "text" : ", "
-    },
-    {
-      "kind" : "externalParam",
-      "text" : "received"
-    },
-    {
-      "kind" : "text",
-      "text" : ": "
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:14AuthFoundation11APIResponseV",
-      "text" : "APIResponse"
-    },
-    {
-      "kind" : "text",
-      "text" : "<"
-    },
-    {
-      "kind" : "typeIdentifier",
-      "text" : "T"
-    },
-    {
-      "kind" : "text",
-      "text" : ">)"
-    }
-  ],
-  "identifier" : "doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/OktaOAuth2\/ResourceOwnerFlow\/api(client:didSend:received:)-48bl3",
-  "kind" : "symbol",
-  "role" : "symbol",
-  "title" : "api(client:didSend:received:)",
-  "type" : "topic",
-  "url" : "\/documentation\/oktaoauth2\/resourceownerflow\/api(client:didsend:received:)-48bl3"
-},
-"doc://com.okta.mobile.oktaoauth2/documentation/OktaOAuth2/ResourceOwnerFlow/api(client:didSend:received:)-5aid3": {
-  "abstract" : [
-
-  ],
-  "fragments" : [
-    {
-      "kind" : "keyword",
-      "text" : "func"
-    },
-    {
-      "kind" : "text",
-      "text" : " "
-    },
-    {
-      "kind" : "identifier",
-      "text" : "api"
-    },
-    {
-      "kind" : "text",
-      "text" : "("
-    },
-    {
-      "kind" : "externalParam",
-      "text" : "client"
-    },
-    {
-      "kind" : "text",
-      "text" : ": "
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:14AuthFoundation9APIClientP",
-      "text" : "APIClient"
-    },
-    {
-      "kind" : "text",
-      "text" : ", "
-    },
-    {
-      "kind" : "externalParam",
-      "text" : "didSend"
-    },
-    {
-      "kind" : "text",
-      "text" : ": "
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:10Foundation10URLRequestV",
-      "text" : "URLRequest"
-    },
-    {
-      "kind" : "text",
-      "text" : ", "
-    },
-    {
-      "kind" : "externalParam",
-      "text" : "received"
-    },
-    {
-      "kind" : "text",
-      "text" : ": "
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:14AuthFoundation14APIClientErrorO",
-      "text" : "APIClientError"
-    },
-    {
-      "kind" : "text",
-      "text" : ")"
-    }
-  ],
-  "identifier" : "doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/OktaOAuth2\/ResourceOwnerFlow\/api(client:didSend:received:)-5aid3",
-  "kind" : "symbol",
-  "role" : "symbol",
-  "title" : "api(client:didSend:received:)",
-  "type" : "topic",
-  "url" : "\/documentation\/oktaoauth2\/resourceownerflow\/api(client:didsend:received:)-5aid3"
-},
-"doc://com.okta.mobile.oktaoauth2/documentation/OktaOAuth2/ResourceOwnerFlow/api(client:didSend:received:)-5pho": {
+"doc://OktaOAuth2/documentation/OktaOAuth2/ResourceOwnerFlow/api(client:didSend:received:)": {
   "abstract" : [
 
   ],
@@ -359,19 +177,130 @@
       "text" : ")"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/OktaOAuth2\/ResourceOwnerFlow\/api(client:didSend:received:)-5pho",
+  "identifier" : "doc:\/\/OktaOAuth2\/documentation\/OktaOAuth2\/ResourceOwnerFlow\/api(client:didSend:received:)",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "api(client:didSend:received:)",
   "type" : "topic",
-  "url" : "\/documentation\/oktaoauth2\/resourceownerflow\/api(client:didsend:received:)-5pho"
+  "url" : "\/documentation\/oktaoauth2\/resourceownerflow\/api(client:didsend:received:)"
 },
-"doc://com.okta.mobile.oktaoauth2/documentation/OktaOAuth2/ResourceOwnerFlow/api(client:shouldRetry:)": {
+"doc://OktaOAuth2/documentation/OktaOAuth2/ResourceOwnerFlow/api(client:didSend:received:requestId:rateLimit:)": {
   "abstract" : [
+
+  ],
+  "fragments" : [
     {
-      "text" : "Provides the APIRetry configurations from the delegate in responds to a retry request.",
-      "type" : "text"
+      "kind" : "keyword",
+      "text" : "func"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "api"
+    },
+    {
+      "kind" : "text",
+      "text" : "("
+    },
+    {
+      "kind" : "externalParam",
+      "text" : "client"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:14AuthFoundation9APIClientP",
+      "text" : "APIClient"
+    },
+    {
+      "kind" : "text",
+      "text" : ", "
+    },
+    {
+      "kind" : "externalParam",
+      "text" : "didSend"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:10Foundation10URLRequestV",
+      "text" : "URLRequest"
+    },
+    {
+      "kind" : "text",
+      "text" : ", "
+    },
+    {
+      "kind" : "externalParam",
+      "text" : "received"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:14AuthFoundation14APIClientErrorO",
+      "text" : "APIClientError"
+    },
+    {
+      "kind" : "text",
+      "text" : ", "
+    },
+    {
+      "kind" : "externalParam",
+      "text" : "requestId"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:SS",
+      "text" : "String"
+    },
+    {
+      "kind" : "text",
+      "text" : "?, "
+    },
+    {
+      "kind" : "externalParam",
+      "text" : "rateLimit"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:14AuthFoundation12APIRateLimitV",
+      "text" : "APIRateLimit"
+    },
+    {
+      "kind" : "text",
+      "text" : "?)"
     }
+  ],
+  "identifier" : "doc:\/\/OktaOAuth2\/documentation\/OktaOAuth2\/ResourceOwnerFlow\/api(client:didSend:received:requestId:rateLimit:)",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "api(client:didSend:received:requestId:rateLimit:)",
+  "type" : "topic",
+  "url" : "\/documentation\/oktaoauth2\/resourceownerflow\/api(client:didsend:received:requestid:ratelimit:)"
+},
+"doc://OktaOAuth2/documentation/OktaOAuth2/ResourceOwnerFlow/api(client:shouldRetry:)": {
+  "abstract" : [
+
   ],
   "fragments" : [
     {
@@ -430,19 +359,16 @@
       "text" : "APIRetry"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/OktaOAuth2\/ResourceOwnerFlow\/api(client:shouldRetry:)",
+  "identifier" : "doc:\/\/OktaOAuth2\/documentation\/OktaOAuth2\/ResourceOwnerFlow\/api(client:shouldRetry:)",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "api(client:shouldRetry:)",
   "type" : "topic",
   "url" : "\/documentation\/oktaoauth2\/resourceownerflow\/api(client:shouldretry:)"
 },
-"doc://com.okta.mobile.oktaoauth2/documentation/OktaOAuth2/ResourceOwnerFlow/api(client:willSend:)": {
+"doc://OktaOAuth2/documentation/OktaOAuth2/ResourceOwnerFlow/api(client:willSend:)": {
   "abstract" : [
-    {
-      "text" : "Invoked immediately prior to a URLRequest being converted to a DataTask.",
-      "type" : "text"
-    }
+
   ],
   "fragments" : [
     {
@@ -504,7 +430,7 @@
       "text" : ")"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/OktaOAuth2\/ResourceOwnerFlow\/api(client:willSend:)",
+  "identifier" : "doc:\/\/OktaOAuth2\/documentation\/OktaOAuth2\/ResourceOwnerFlow\/api(client:willSend:)",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "api(client:willSend:)",

@@ -1,30 +1,30 @@
 {
   "abstract" : [
     {
-      "text" : "Returns an array containing the results of mapping the given closure",
+      "text" : "Inherited from ",
       "type" : "text"
     },
     {
-      "text" : " ",
-      "type" : "text"
+      "code" : "Collection.map(_:)",
+      "type" : "codeVoice"
     },
     {
-      "text" : "over the sequence’s elements.",
+      "text" : ".",
       "type" : "text"
     }
   ],
   "hierarchy" : {
     "paths" : [
       [
-        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation",
-        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/JWKS",
-        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/JWKS\/Collection-Implementations"
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JWKS",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JWKS\/Collection-Implementations"
       ]
     ]
   },
   "identifier" : {
     "interfaceLanguage" : "swift",
-    "url" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/JWKS\/map(_:)-1a04p"
+    "url" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JWKS\/map(_:)-1a04p"
   },
   "kind" : "symbol",
   "metadata" : {
@@ -217,129 +217,11 @@
         }
       ],
       "kind" : "declarations"
-    },
-    {
-      "content" : [
-        {
-          "anchor" : "return-value",
-          "level" : 2,
-          "text" : "Return Value",
-          "type" : "heading"
-        },
-        {
-          "inlineContent" : [
-            {
-              "text" : "An array containing the transformed elements of this",
-              "type" : "text"
-            },
-            {
-              "text" : " ",
-              "type" : "text"
-            },
-            {
-              "text" : "sequence.",
-              "type" : "text"
-            }
-          ],
-          "type" : "paragraph"
-        }
-      ],
-      "kind" : "content"
-    },
-    {
-      "kind" : "parameters",
-      "parameters" : [
-        {
-          "content" : [
-            {
-              "inlineContent" : [
-                {
-                  "text" : "A mapping closure. ",
-                  "type" : "text"
-                },
-                {
-                  "code" : "transform",
-                  "type" : "codeVoice"
-                },
-                {
-                  "text" : " accepts an",
-                  "type" : "text"
-                },
-                {
-                  "text" : " ",
-                  "type" : "text"
-                },
-                {
-                  "text" : "element of this sequence as its parameter and returns a transformed",
-                  "type" : "text"
-                },
-                {
-                  "text" : " ",
-                  "type" : "text"
-                },
-                {
-                  "text" : "value of the same or of a different type.",
-                  "type" : "text"
-                }
-              ],
-              "type" : "paragraph"
-            }
-          ],
-          "name" : "transform"
-        }
-      ]
-    },
-    {
-      "content" : [
-        {
-          "anchor" : "discussion",
-          "level" : 2,
-          "text" : "Discussion",
-          "type" : "heading"
-        },
-        {
-          "inlineContent" : [
-            {
-              "text" : "In this example, ",
-              "type" : "text"
-            },
-            {
-              "code" : "map",
-              "type" : "codeVoice"
-            },
-            {
-              "text" : " is used first to convert the names in the array",
-              "type" : "text"
-            },
-            {
-              "text" : " ",
-              "type" : "text"
-            },
-            {
-              "text" : "to lowercase strings and then to count their characters.",
-              "type" : "text"
-            }
-          ],
-          "type" : "paragraph"
-        },
-        {
-          "code" : [
-            "let cast = [\"Vivien\", \"Marlon\", \"Kim\", \"Karl\"]",
-            "let lowercaseNames = cast.map { $0.lowercased() }",
-            "\/\/ 'lowercaseNames' == [\"vivien\", \"marlon\", \"kim\", \"karl\"]",
-            "let letterCounts = cast.map { $0.count }",
-            "\/\/ 'letterCounts' == [6, 6, 3, 4]"
-          ],
-          "syntax" : null,
-          "type" : "codeListing"
-        }
-      ],
-      "kind" : "content"
     }
   ],
   "schemaVersion" : {
     "major" : 0,
-    "minor" : 2,
+    "minor" : 3,
     "patch" : 0
   },
   "sections" : [
@@ -359,21 +241,21 @@
   ]
 , 
 "references": {
-"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation": {
+"doc://AuthFoundation/documentation/AuthFoundation": {
   "abstract" : [
     {
       "text" : "Library that provides foundational features used by Okta’s authentication libraries, as well as APIs used to work with tokens and user credentials.",
       "type" : "text"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation",
   "kind" : "symbol",
   "role" : "collection",
   "title" : "AuthFoundation",
   "type" : "topic",
   "url" : "\/documentation\/authfoundation"
 },
-"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/JWKS": {
+"doc://AuthFoundation/documentation/AuthFoundation/JWKS": {
   "abstract" : [
     {
       "text" : "Describes the collection of keys associated with an authorization server.",
@@ -394,7 +276,7 @@
       "text" : "JWKS"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/JWKS",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JWKS",
   "kind" : "symbol",
   "navigatorTitle" : [
     {
@@ -407,31 +289,20 @@
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/jwks"
 },
-"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/JWKS/Collection-Implementations": {
+"doc://AuthFoundation/documentation/AuthFoundation/JWKS/Collection-Implementations": {
   "abstract" : [
 
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/JWKS\/Collection-Implementations",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JWKS\/Collection-Implementations",
   "kind" : "article",
   "role" : "collectionGroup",
   "title" : "Collection Implementations",
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/jwks\/collection-implementations"
 },
-"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/JWKS/map(_:)-1a04p": {
+"doc://AuthFoundation/documentation/AuthFoundation/JWKS/map(_:)-1a04p": {
   "abstract" : [
-    {
-      "text" : "Returns an array containing the results of mapping the given closure",
-      "type" : "text"
-    },
-    {
-      "text" : " ",
-      "type" : "text"
-    },
-    {
-      "text" : "over the sequence’s elements.",
-      "type" : "text"
-    }
+
   ],
   "fragments" : [
     {
@@ -507,7 +378,7 @@
       "text" : "]"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/JWKS\/map(_:)-1a04p",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JWKS\/map(_:)-1a04p",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "map(_:)",

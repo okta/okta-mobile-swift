@@ -8,19 +8,27 @@
   "hierarchy" : {
     "paths" : [
       [
-        "doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/OktaOAuth2",
-        "doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/OktaOAuth2\/TokenExchangeFlow"
+        "doc:\/\/OktaOAuth2\/documentation\/OktaOAuth2",
+        "doc:\/\/OktaOAuth2\/documentation\/OktaOAuth2\/TokenExchangeFlow"
       ]
     ]
   },
   "identifier" : {
     "interfaceLanguage" : "swift",
-    "url" : "doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/OktaOAuth2\/TokenExchangeFlow\/init(issuer:clientId:scopes:audience:)"
+    "url" : "doc:\/\/OktaOAuth2\/documentation\/OktaOAuth2\/TokenExchangeFlow\/init(issuer:clientId:scopes:audience:)"
   },
   "kind" : "symbol",
   "metadata" : {
     "externalID" : "s:10OktaOAuth217TokenExchangeFlowC6issuer8clientId6scopes8audienceAC10Foundation3URLV_S2SAC8AudienceOtcfc",
     "fragments" : [
+      {
+        "kind" : "keyword",
+        "text" : "convenience"
+      },
+      {
+        "kind" : "text",
+        "text" : " "
+      },
       {
         "kind" : "identifier",
         "text" : "init"
@@ -87,6 +95,15 @@
       {
         "kind" : "text",
         "text" : ": "
+      },
+      {
+        "kind" : "typeIdentifier",
+        "preciseIdentifier" : "s:10OktaOAuth217TokenExchangeFlowC",
+        "text" : "TokenExchangeFlow"
+      },
+      {
+        "kind" : "text",
+        "text" : "."
       },
       {
         "kind" : "typeIdentifier",
@@ -195,7 +212,17 @@
               "text" : ": "
             },
             {
-              "identifier" : "doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/OktaOAuth2\/TokenExchangeFlow\/Audience-swift.enum",
+              "identifier" : "doc:\/\/OktaOAuth2\/documentation\/OktaOAuth2\/TokenExchangeFlow",
+              "kind" : "typeIdentifier",
+              "preciseIdentifier" : "s:10OktaOAuth217TokenExchangeFlowC",
+              "text" : "TokenExchangeFlow"
+            },
+            {
+              "kind" : "text",
+              "text" : "."
+            },
+            {
+              "identifier" : "doc:\/\/OktaOAuth2\/documentation\/OktaOAuth2\/TokenExchangeFlow\/Audience-swift.enum",
               "kind" : "typeIdentifier",
               "preciseIdentifier" : "s:10OktaOAuth217TokenExchangeFlowC8AudienceO",
               "text" : "Audience"
@@ -273,7 +300,7 @@
   ],
   "schemaVersion" : {
     "major" : 0,
-    "minor" : 2,
+    "minor" : 3,
     "patch" : 0
   },
   "sections" : [
@@ -293,21 +320,21 @@
   ]
 , 
 "references": {
-"doc://com.okta.mobile.oktaoauth2/documentation/OktaOAuth2": {
+"doc://OktaOAuth2/documentation/OktaOAuth2": {
   "abstract" : [
     {
       "text" : "Interact with Okta’s OAuth2 APIs to authenticate users, and interact with user resources.",
       "type" : "text"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/OktaOAuth2",
+  "identifier" : "doc:\/\/OktaOAuth2\/documentation\/OktaOAuth2",
   "kind" : "symbol",
   "role" : "collection",
   "title" : "OktaOAuth2",
   "type" : "topic",
   "url" : "\/documentation\/oktaoauth2"
 },
-"doc://com.okta.mobile.oktaoauth2/documentation/OktaOAuth2/TokenExchangeFlow": {
+"doc://OktaOAuth2/documentation/OktaOAuth2/TokenExchangeFlow": {
   "abstract" : [
     {
       "text" : "An authentication flow class that implements the Token Exchange Flow.",
@@ -328,7 +355,7 @@
       "text" : "TokenExchangeFlow"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/OktaOAuth2\/TokenExchangeFlow",
+  "identifier" : "doc:\/\/OktaOAuth2\/documentation\/OktaOAuth2\/TokenExchangeFlow",
   "kind" : "symbol",
   "navigatorTitle" : [
     {
@@ -341,7 +368,7 @@
   "type" : "topic",
   "url" : "\/documentation\/oktaoauth2\/tokenexchangeflow"
 },
-"doc://com.okta.mobile.oktaoauth2/documentation/OktaOAuth2/TokenExchangeFlow/Audience-swift.enum": {
+"doc://OktaOAuth2/documentation/OktaOAuth2/TokenExchangeFlow/Audience-swift.enum": {
   "abstract" : [
     {
       "text" : "Identifies the audience of the authorization server.",
@@ -362,7 +389,7 @@
       "text" : "Audience"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/OktaOAuth2\/TokenExchangeFlow\/Audience-swift.enum",
+  "identifier" : "doc:\/\/OktaOAuth2\/documentation\/OktaOAuth2\/TokenExchangeFlow\/Audience-swift.enum",
   "kind" : "symbol",
   "navigatorTitle" : [
     {
@@ -375,7 +402,7 @@
   "type" : "topic",
   "url" : "\/documentation\/oktaoauth2\/tokenexchangeflow\/audience-swift.enum"
 },
-"doc://com.okta.mobile.oktaoauth2/documentation/OktaOAuth2/TokenExchangeFlow/init(issuer:clientId:scopes:audience:)": {
+"doc://OktaOAuth2/documentation/OktaOAuth2/TokenExchangeFlow/init(issuer:clientId:scopes:audience:)": {
   "abstract" : [
     {
       "text" : "Convenience initializer to construct a flow from variables.",
@@ -383,6 +410,14 @@
     }
   ],
   "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "convenience"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
     {
       "kind" : "identifier",
       "text" : "init"
@@ -452,6 +487,15 @@
     },
     {
       "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:10OktaOAuth217TokenExchangeFlowC",
+      "text" : "TokenExchangeFlow"
+    },
+    {
+      "kind" : "text",
+      "text" : "."
+    },
+    {
+      "kind" : "typeIdentifier",
       "preciseIdentifier" : "s:10OktaOAuth217TokenExchangeFlowC8AudienceO",
       "text" : "Audience"
     },
@@ -460,7 +504,7 @@
       "text" : ")"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/OktaOAuth2\/TokenExchangeFlow\/init(issuer:clientId:scopes:audience:)",
+  "identifier" : "doc:\/\/OktaOAuth2\/documentation\/OktaOAuth2\/TokenExchangeFlow\/init(issuer:clientId:scopes:audience:)",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "init(issuer:clientId:scopes:audience:)",

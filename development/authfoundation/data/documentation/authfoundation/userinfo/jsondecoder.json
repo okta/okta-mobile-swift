@@ -1,22 +1,30 @@
 {
   "abstract" : [
     {
-      "text" : "No overview available.",
+      "text" : "Inherited from ",
+      "type" : "text"
+    },
+    {
+      "code" : "JSONDecodable.jsonDecoder",
+      "type" : "codeVoice"
+    },
+    {
+      "text" : ".",
       "type" : "text"
     }
   ],
   "hierarchy" : {
     "paths" : [
       [
-        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation",
-        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/UserInfo",
-        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/UserInfo\/JSONDecodable-Implementations"
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/UserInfo",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/UserInfo\/JSONDecodable-Implementations"
       ]
     ]
   },
   "identifier" : {
     "interfaceLanguage" : "swift",
-    "url" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/UserInfo\/jsonDecoder"
+    "url" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/UserInfo\/jsonDecoder"
   },
   "kind" : "symbol",
   "metadata" : {
@@ -111,7 +119,7 @@
   ],
   "schemaVersion" : {
     "major" : 0,
-    "minor" : 2,
+    "minor" : 3,
     "patch" : 0
   },
   "sections" : [
@@ -131,21 +139,21 @@
   ]
 , 
 "references": {
-"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation": {
+"doc://AuthFoundation/documentation/AuthFoundation": {
   "abstract" : [
     {
       "text" : "Library that provides foundational features used by Okta’s authentication libraries, as well as APIs used to work with tokens and user credentials.",
       "type" : "text"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation",
   "kind" : "symbol",
   "role" : "collection",
   "title" : "AuthFoundation",
   "type" : "topic",
   "url" : "\/documentation\/authfoundation"
 },
-"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/UserInfo": {
+"doc://AuthFoundation/documentation/AuthFoundation/UserInfo": {
   "abstract" : [
     {
       "text" : "User profile information.",
@@ -166,7 +174,7 @@
       "text" : "UserInfo"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/UserInfo",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/UserInfo",
   "kind" : "symbol",
   "navigatorTitle" : [
     {
@@ -179,18 +187,18 @@
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/userinfo"
 },
-"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/UserInfo/JSONDecodable-Implementations": {
+"doc://AuthFoundation/documentation/AuthFoundation/UserInfo/JSONDecodable-Implementations": {
   "abstract" : [
 
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/UserInfo\/JSONDecodable-Implementations",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/UserInfo\/JSONDecodable-Implementations",
   "kind" : "article",
   "role" : "collectionGroup",
   "title" : "JSONDecodable Implementations",
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/userinfo\/jsondecodable-implementations"
 },
-"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/UserInfo/jsonDecoder": {
+"doc://AuthFoundation/documentation/AuthFoundation/UserInfo/jsonDecoder": {
   "abstract" : [
 
   ],
@@ -225,7 +233,7 @@
       "text" : "JSONDecoder"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/UserInfo\/jsonDecoder",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/UserInfo\/jsonDecoder",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "jsonDecoder",

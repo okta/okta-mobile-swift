@@ -1,20 +1,14 @@
 {
-  "abstract" : [
-    {
-      "text" : "No overview available.",
-      "type" : "text"
-    }
-  ],
   "hierarchy" : {
     "paths" : [
       [
-        "doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/OktaOAuth2"
+        "doc:\/\/OktaOAuth2\/documentation\/OktaOAuth2"
       ]
     ]
   },
   "identifier" : {
     "interfaceLanguage" : "swift",
-    "url" : "doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/OktaOAuth2\/Version"
+    "url" : "doc:\/\/OktaOAuth2\/documentation\/OktaOAuth2\/Version"
   },
   "kind" : "symbol",
   "metadata" : {
@@ -80,7 +74,6 @@
               "text" : ": "
             },
             {
-              "identifier" : "doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/AuthFoundation\/SDKVersion",
               "kind" : "typeIdentifier",
               "preciseIdentifier" : "s:14AuthFoundation10SDKVersionC",
               "text" : "SDKVersion"
@@ -93,7 +86,7 @@
   ],
   "schemaVersion" : {
     "major" : 0,
-    "minor" : 2,
+    "minor" : 3,
     "patch" : 0
   },
   "sections" : [
@@ -113,52 +106,21 @@
   ]
 , 
 "references": {
-"doc://com.okta.mobile.oktaoauth2/documentation/AuthFoundation/SDKVersion": {
-  "abstract" : [
-
-  ],
-  "fragments" : [
-    {
-      "kind" : "keyword",
-      "text" : "class"
-    },
-    {
-      "kind" : "text",
-      "text" : " "
-    },
-    {
-      "kind" : "identifier",
-      "text" : "SDKVersion"
-    }
-  ],
-  "identifier" : "doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/AuthFoundation\/SDKVersion",
-  "kind" : "symbol",
-  "navigatorTitle" : [
-    {
-      "kind" : "identifier",
-      "text" : "SDKVersion"
-    }
-  ],
-  "role" : "symbol",
-  "title" : "SDKVersion",
-  "type" : "topic",
-  "url" : "\/documentation\/authfoundation\/sdkversion"
-},
-"doc://com.okta.mobile.oktaoauth2/documentation/OktaOAuth2": {
+"doc://OktaOAuth2/documentation/OktaOAuth2": {
   "abstract" : [
     {
       "text" : "Interact with Okta’s OAuth2 APIs to authenticate users, and interact with user resources.",
       "type" : "text"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/OktaOAuth2",
+  "identifier" : "doc:\/\/OktaOAuth2\/documentation\/OktaOAuth2",
   "kind" : "symbol",
   "role" : "collection",
   "title" : "OktaOAuth2",
   "type" : "topic",
   "url" : "\/documentation\/oktaoauth2"
 },
-"doc://com.okta.mobile.oktaoauth2/documentation/OktaOAuth2/Version": {
+"doc://OktaOAuth2/documentation/OktaOAuth2/Version": {
   "abstract" : [
 
   ],
@@ -185,7 +147,7 @@
       "text" : "SDKVersion"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/OktaOAuth2\/Version",
+  "identifier" : "doc:\/\/OktaOAuth2\/documentation\/OktaOAuth2\/Version",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "Version",

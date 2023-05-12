@@ -1,22 +1,30 @@
 {
   "abstract" : [
     {
-      "text" : "A localized message providing “help” text if the user requests help.",
+      "text" : "Inherited from ",
+      "type" : "text"
+    },
+    {
+      "code" : "LocalizedError.helpAnchor",
+      "type" : "codeVoice"
+    },
+    {
+      "text" : ".",
       "type" : "text"
     }
   ],
   "hierarchy" : {
     "paths" : [
       [
-        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation",
-        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/OktaAPIError",
-        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/OktaAPIError\/LocalizedError-Implementations"
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/OktaAPIError",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/OktaAPIError\/LocalizedError-Implementations"
       ]
     ]
   },
   "identifier" : {
     "interfaceLanguage" : "swift",
-    "url" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/OktaAPIError\/helpAnchor"
+    "url" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/OktaAPIError\/helpAnchor"
   },
   "kind" : "symbol",
   "metadata" : {
@@ -111,7 +119,7 @@
   ],
   "schemaVersion" : {
     "major" : 0,
-    "minor" : 2,
+    "minor" : 3,
     "patch" : 0
   },
   "sections" : [
@@ -131,21 +139,21 @@
   ]
 , 
 "references": {
-"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation": {
+"doc://AuthFoundation/documentation/AuthFoundation": {
   "abstract" : [
     {
       "text" : "Library that provides foundational features used by Okta’s authentication libraries, as well as APIs used to work with tokens and user credentials.",
       "type" : "text"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation",
   "kind" : "symbol",
   "role" : "collection",
   "title" : "AuthFoundation",
   "type" : "topic",
   "url" : "\/documentation\/authfoundation"
 },
-"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/OktaAPIError": {
+"doc://AuthFoundation/documentation/AuthFoundation/OktaAPIError": {
   "abstract" : [
     {
       "text" : "Describes errors that may be reported from an Okta API endpoint.",
@@ -166,7 +174,7 @@
       "text" : "OktaAPIError"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/OktaAPIError",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/OktaAPIError",
   "kind" : "symbol",
   "navigatorTitle" : [
     {
@@ -179,23 +187,20 @@
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/oktaapierror"
 },
-"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/OktaAPIError/LocalizedError-Implementations": {
+"doc://AuthFoundation/documentation/AuthFoundation/OktaAPIError/LocalizedError-Implementations": {
   "abstract" : [
 
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/OktaAPIError\/LocalizedError-Implementations",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/OktaAPIError\/LocalizedError-Implementations",
   "kind" : "article",
   "role" : "collectionGroup",
   "title" : "LocalizedError Implementations",
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/oktaapierror\/localizederror-implementations"
 },
-"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/OktaAPIError/helpAnchor": {
+"doc://AuthFoundation/documentation/AuthFoundation/OktaAPIError/helpAnchor": {
   "abstract" : [
-    {
-      "text" : "A localized message providing “help” text if the user requests help.",
-      "type" : "text"
-    }
+
   ],
   "fragments" : [
     {
@@ -224,7 +229,7 @@
       "text" : "?"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/OktaAPIError\/helpAnchor",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/OktaAPIError\/helpAnchor",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "helpAnchor",

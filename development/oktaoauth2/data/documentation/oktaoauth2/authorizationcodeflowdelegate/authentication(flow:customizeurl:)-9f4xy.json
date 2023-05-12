@@ -1,22 +1,30 @@
 {
   "abstract" : [
     {
-      "text" : "Provides the opportunity to customize the authorization URL.",
+      "text" : "Inherited from ",
+      "type" : "text"
+    },
+    {
+      "code" : "AuthorizationCodeFlowDelegate.authentication(flow:customizeUrl:)",
+      "type" : "codeVoice"
+    },
+    {
+      "text" : ".",
       "type" : "text"
     }
   ],
   "hierarchy" : {
     "paths" : [
       [
-        "doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/OktaOAuth2",
-        "doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/OktaOAuth2\/AuthorizationCodeFlowDelegate",
-        "doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/OktaOAuth2\/AuthorizationCodeFlowDelegate\/authentication(flow:customizeUrl:)-3hges"
+        "doc:\/\/OktaOAuth2\/documentation\/OktaOAuth2",
+        "doc:\/\/OktaOAuth2\/documentation\/OktaOAuth2\/AuthorizationCodeFlowDelegate",
+        "doc:\/\/OktaOAuth2\/documentation\/OktaOAuth2\/AuthorizationCodeFlowDelegate\/authentication(flow:customizeUrl:)-3hges"
       ]
     ]
   },
   "identifier" : {
     "interfaceLanguage" : "swift",
-    "url" : "doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/OktaOAuth2\/AuthorizationCodeFlowDelegate\/authentication(flow:customizeUrl:)-9f4xy"
+    "url" : "doc:\/\/OktaOAuth2\/documentation\/OktaOAuth2\/AuthorizationCodeFlowDelegate\/authentication(flow:customizeUrl:)-9f4xy"
   },
   "kind" : "symbol",
   "metadata" : {
@@ -57,7 +65,6 @@
       },
       {
         "kind" : "typeIdentifier",
-        "preciseIdentifier" : "s:10OktaOAuth229AuthorizationCodeFlowDelegatePAAE14authentication4flow12customizeUrlyqd___10Foundation13URLComponentsVztAA0cdE0CRbd__lF0E0L_qd__mfp",
         "text" : "Flow"
       },
       {
@@ -145,7 +152,6 @@
             },
             {
               "kind" : "typeIdentifier",
-              "preciseIdentifier" : "s:10OktaOAuth229AuthorizationCodeFlowDelegatePAAE14authentication4flow12customizeUrlyqd___10Foundation13URLComponentsVztAA0cdE0CRbd__lF0E0L_qd__mfp",
               "text" : "Flow"
             },
             {
@@ -202,7 +208,7 @@
               "text" : " : "
             },
             {
-              "identifier" : "doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/OktaOAuth2\/AuthorizationCodeFlow",
+              "identifier" : "doc:\/\/OktaOAuth2\/documentation\/OktaOAuth2\/AuthorizationCodeFlow",
               "kind" : "typeIdentifier",
               "preciseIdentifier" : "s:10OktaOAuth221AuthorizationCodeFlowC",
               "text" : "AuthorizationCodeFlow"
@@ -211,72 +217,11 @@
         }
       ],
       "kind" : "declarations"
-    },
-    {
-      "kind" : "parameters",
-      "parameters" : [
-        {
-          "content" : [
-            {
-              "inlineContent" : [
-                {
-                  "text" : "The authentication flow.",
-                  "type" : "text"
-                }
-              ],
-              "type" : "paragraph"
-            }
-          ],
-          "name" : "flow"
-        },
-        {
-          "content" : [
-            {
-              "inlineContent" : [
-                {
-                  "text" : "A ",
-                  "type" : "text"
-                },
-                {
-                  "code" : "URLComponents",
-                  "type" : "codeVoice"
-                },
-                {
-                  "text" : " instance that represents the authorization URL, prior to conversion to a URL.",
-                  "type" : "text"
-                }
-              ],
-              "type" : "paragraph"
-            }
-          ],
-          "name" : "urlComponents"
-        }
-      ]
-    },
-    {
-      "content" : [
-        {
-          "anchor" : "discussion",
-          "level" : 2,
-          "text" : "Discussion",
-          "type" : "heading"
-        },
-        {
-          "inlineContent" : [
-            {
-              "text" : "The authorization URL is generated from a combination of configuration sources, as well as the issuer’s OpenID configuration. When specific values need to be added to the URL, such as custom query string or other URL parameters, this delegate method enables you to manipulate the URL before it is passed to a web browser.",
-              "type" : "text"
-            }
-          ],
-          "type" : "paragraph"
-        }
-      ],
-      "kind" : "content"
     }
   ],
   "schemaVersion" : {
     "major" : 0,
-    "minor" : 2,
+    "minor" : 3,
     "patch" : 0
   },
   "sections" : [
@@ -296,21 +241,21 @@
   ]
 , 
 "references": {
-"doc://com.okta.mobile.oktaoauth2/documentation/OktaOAuth2": {
+"doc://OktaOAuth2/documentation/OktaOAuth2": {
   "abstract" : [
     {
       "text" : "Interact with Okta’s OAuth2 APIs to authenticate users, and interact with user resources.",
       "type" : "text"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/OktaOAuth2",
+  "identifier" : "doc:\/\/OktaOAuth2\/documentation\/OktaOAuth2",
   "kind" : "symbol",
   "role" : "collection",
   "title" : "OktaOAuth2",
   "type" : "topic",
   "url" : "\/documentation\/oktaoauth2"
 },
-"doc://com.okta.mobile.oktaoauth2/documentation/OktaOAuth2/AuthorizationCodeFlow": {
+"doc://OktaOAuth2/documentation/OktaOAuth2/AuthorizationCodeFlow": {
   "abstract" : [
     {
       "text" : "An authentication flow class that implements the Authorization Code Flow exchange.",
@@ -331,7 +276,7 @@
       "text" : "AuthorizationCodeFlow"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/OktaOAuth2\/AuthorizationCodeFlow",
+  "identifier" : "doc:\/\/OktaOAuth2\/documentation\/OktaOAuth2\/AuthorizationCodeFlow",
   "kind" : "symbol",
   "navigatorTitle" : [
     {
@@ -344,14 +289,14 @@
   "type" : "topic",
   "url" : "\/documentation\/oktaoauth2\/authorizationcodeflow"
 },
-"doc://com.okta.mobile.oktaoauth2/documentation/OktaOAuth2/AuthorizationCodeFlowDelegate": {
+"doc://OktaOAuth2/documentation/OktaOAuth2/AuthorizationCodeFlowDelegate": {
   "abstract" : [
     {
       "text" : "The delegate of a ",
       "type" : "text"
     },
     {
-      "identifier" : "doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/OktaOAuth2\/AuthorizationCodeFlow",
+      "identifier" : "doc:\/\/OktaOAuth2\/documentation\/OktaOAuth2\/AuthorizationCodeFlow",
       "isActive" : true,
       "type" : "reference"
     },
@@ -374,7 +319,7 @@
       "text" : "AuthorizationCodeFlowDelegate"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/OktaOAuth2\/AuthorizationCodeFlowDelegate",
+  "identifier" : "doc:\/\/OktaOAuth2\/documentation\/OktaOAuth2\/AuthorizationCodeFlowDelegate",
   "kind" : "symbol",
   "navigatorTitle" : [
     {
@@ -387,7 +332,7 @@
   "type" : "topic",
   "url" : "\/documentation\/oktaoauth2\/authorizationcodeflowdelegate"
 },
-"doc://com.okta.mobile.oktaoauth2/documentation/OktaOAuth2/AuthorizationCodeFlowDelegate/authentication(flow:customizeUrl:)-3hges": {
+"doc://OktaOAuth2/documentation/OktaOAuth2/AuthorizationCodeFlowDelegate/authentication(flow:customizeUrl:)-3hges": {
   "abstract" : [
     {
       "text" : "Provides the opportunity to customize the authorization URL.",
@@ -430,7 +375,6 @@
     },
     {
       "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:10OktaOAuth229AuthorizationCodeFlowDelegateP14authentication4flow12customizeUrlyqd___10Foundation13URLComponentsVztAA0cdE0CRbd__lF0E0L_qd__mfp",
       "text" : "Flow"
     },
     {
@@ -463,7 +407,7 @@
       "text" : ")"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/OktaOAuth2\/AuthorizationCodeFlowDelegate\/authentication(flow:customizeUrl:)-3hges",
+  "identifier" : "doc:\/\/OktaOAuth2\/documentation\/OktaOAuth2\/AuthorizationCodeFlowDelegate\/authentication(flow:customizeUrl:)-3hges",
   "kind" : "symbol",
   "required" : true,
   "role" : "symbol",
@@ -471,12 +415,9 @@
   "type" : "topic",
   "url" : "\/documentation\/oktaoauth2\/authorizationcodeflowdelegate\/authentication(flow:customizeurl:)-3hges"
 },
-"doc://com.okta.mobile.oktaoauth2/documentation/OktaOAuth2/AuthorizationCodeFlowDelegate/authentication(flow:customizeUrl:)-9f4xy": {
+"doc://OktaOAuth2/documentation/OktaOAuth2/AuthorizationCodeFlowDelegate/authentication(flow:customizeUrl:)-9f4xy": {
   "abstract" : [
-    {
-      "text" : "Provides the opportunity to customize the authorization URL.",
-      "type" : "text"
-    }
+
   ],
   "fragments" : [
     {
@@ -513,7 +454,6 @@
     },
     {
       "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:10OktaOAuth229AuthorizationCodeFlowDelegatePAAE14authentication4flow12customizeUrlyqd___10Foundation13URLComponentsVztAA0cdE0CRbd__lF0E0L_qd__mfp",
       "text" : "Flow"
     },
     {
@@ -546,7 +486,7 @@
       "text" : ")"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/OktaOAuth2\/AuthorizationCodeFlowDelegate\/authentication(flow:customizeUrl:)-9f4xy",
+  "identifier" : "doc:\/\/OktaOAuth2\/documentation\/OktaOAuth2\/AuthorizationCodeFlowDelegate\/authentication(flow:customizeUrl:)-9f4xy",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "authentication(flow:customizeUrl:)",

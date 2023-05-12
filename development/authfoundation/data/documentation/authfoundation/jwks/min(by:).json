@@ -1,30 +1,30 @@
 {
   "abstract" : [
     {
-      "text" : "Returns the minimum element in the sequence, using the given predicate as",
+      "text" : "Inherited from ",
       "type" : "text"
     },
     {
-      "text" : " ",
-      "type" : "text"
+      "code" : "Sequence.min(by:)",
+      "type" : "codeVoice"
     },
     {
-      "text" : "the comparison between elements.",
+      "text" : ".",
       "type" : "text"
     }
   ],
   "hierarchy" : {
     "paths" : [
       [
-        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation",
-        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/JWKS",
-        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/JWKS\/Sequence-Implementations"
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JWKS",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JWKS\/Sequence-Implementations"
       ]
     ]
   },
   "identifier" : {
     "interfaceLanguage" : "swift",
-    "url" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/JWKS\/min(by:)"
+    "url" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JWKS\/min(by:)"
   },
   "kind" : "symbol",
   "metadata" : {
@@ -267,441 +267,11 @@
         }
       ],
       "kind" : "declarations"
-    },
-    {
-      "content" : [
-        {
-          "anchor" : "return-value",
-          "level" : 2,
-          "text" : "Return Value",
-          "type" : "heading"
-        },
-        {
-          "inlineContent" : [
-            {
-              "text" : "The sequence’s minimum element, according to",
-              "type" : "text"
-            },
-            {
-              "text" : " ",
-              "type" : "text"
-            },
-            {
-              "code" : "areInIncreasingOrder",
-              "type" : "codeVoice"
-            },
-            {
-              "text" : ". If the sequence has no elements, returns",
-              "type" : "text"
-            },
-            {
-              "text" : " ",
-              "type" : "text"
-            },
-            {
-              "code" : "nil",
-              "type" : "codeVoice"
-            },
-            {
-              "text" : ".",
-              "type" : "text"
-            }
-          ],
-          "type" : "paragraph"
-        }
-      ],
-      "kind" : "content"
-    },
-    {
-      "kind" : "parameters",
-      "parameters" : [
-        {
-          "content" : [
-            {
-              "inlineContent" : [
-                {
-                  "text" : "A predicate that returns ",
-                  "type" : "text"
-                },
-                {
-                  "code" : "true",
-                  "type" : "codeVoice"
-                },
-                {
-                  "text" : " ",
-                  "type" : "text"
-                },
-                {
-                  "text" : "if its first argument should be ordered before its second",
-                  "type" : "text"
-                },
-                {
-                  "text" : " ",
-                  "type" : "text"
-                },
-                {
-                  "text" : "argument; otherwise, ",
-                  "type" : "text"
-                },
-                {
-                  "code" : "false",
-                  "type" : "codeVoice"
-                },
-                {
-                  "text" : ".",
-                  "type" : "text"
-                }
-              ],
-              "type" : "paragraph"
-            }
-          ],
-          "name" : "areInIncreasingOrder"
-        }
-      ]
-    },
-    {
-      "content" : [
-        {
-          "anchor" : "discussion",
-          "level" : 2,
-          "text" : "Discussion",
-          "type" : "heading"
-        },
-        {
-          "inlineContent" : [
-            {
-              "text" : "The predicate must be a ",
-              "type" : "text"
-            },
-            {
-              "inlineContent" : [
-                {
-                  "text" : "strict weak ordering",
-                  "type" : "text"
-                }
-              ],
-              "type" : "emphasis"
-            },
-            {
-              "text" : " over the elements. That",
-              "type" : "text"
-            },
-            {
-              "text" : " ",
-              "type" : "text"
-            },
-            {
-              "text" : "is, for any elements ",
-              "type" : "text"
-            },
-            {
-              "code" : "a",
-              "type" : "codeVoice"
-            },
-            {
-              "text" : ", ",
-              "type" : "text"
-            },
-            {
-              "code" : "b",
-              "type" : "codeVoice"
-            },
-            {
-              "text" : ", and ",
-              "type" : "text"
-            },
-            {
-              "code" : "c",
-              "type" : "codeVoice"
-            },
-            {
-              "text" : ", the following conditions must",
-              "type" : "text"
-            },
-            {
-              "text" : " ",
-              "type" : "text"
-            },
-            {
-              "text" : "hold:",
-              "type" : "text"
-            }
-          ],
-          "type" : "paragraph"
-        },
-        {
-          "items" : [
-            {
-              "content" : [
-                {
-                  "inlineContent" : [
-                    {
-                      "code" : "areInIncreasingOrder(a, a)",
-                      "type" : "codeVoice"
-                    },
-                    {
-                      "text" : " is always ",
-                      "type" : "text"
-                    },
-                    {
-                      "code" : "false",
-                      "type" : "codeVoice"
-                    },
-                    {
-                      "text" : ". (Irreflexivity)",
-                      "type" : "text"
-                    }
-                  ],
-                  "type" : "paragraph"
-                }
-              ]
-            },
-            {
-              "content" : [
-                {
-                  "inlineContent" : [
-                    {
-                      "text" : "If ",
-                      "type" : "text"
-                    },
-                    {
-                      "code" : "areInIncreasingOrder(a, b)",
-                      "type" : "codeVoice"
-                    },
-                    {
-                      "text" : " and ",
-                      "type" : "text"
-                    },
-                    {
-                      "code" : "areInIncreasingOrder(b, c)",
-                      "type" : "codeVoice"
-                    },
-                    {
-                      "text" : " are",
-                      "type" : "text"
-                    },
-                    {
-                      "text" : " ",
-                      "type" : "text"
-                    },
-                    {
-                      "text" : "both ",
-                      "type" : "text"
-                    },
-                    {
-                      "code" : "true",
-                      "type" : "codeVoice"
-                    },
-                    {
-                      "text" : ", then ",
-                      "type" : "text"
-                    },
-                    {
-                      "code" : "areInIncreasingOrder(a, c)",
-                      "type" : "codeVoice"
-                    },
-                    {
-                      "text" : " is also",
-                      "type" : "text"
-                    },
-                    {
-                      "text" : " ",
-                      "type" : "text"
-                    },
-                    {
-                      "code" : "true",
-                      "type" : "codeVoice"
-                    },
-                    {
-                      "text" : ". (Transitive comparability)",
-                      "type" : "text"
-                    }
-                  ],
-                  "type" : "paragraph"
-                }
-              ]
-            },
-            {
-              "content" : [
-                {
-                  "inlineContent" : [
-                    {
-                      "text" : "Two elements are ",
-                      "type" : "text"
-                    },
-                    {
-                      "inlineContent" : [
-                        {
-                          "text" : "incomparable",
-                          "type" : "text"
-                        }
-                      ],
-                      "type" : "emphasis"
-                    },
-                    {
-                      "text" : " if neither is ordered before the other",
-                      "type" : "text"
-                    },
-                    {
-                      "text" : " ",
-                      "type" : "text"
-                    },
-                    {
-                      "text" : "according to the predicate. If ",
-                      "type" : "text"
-                    },
-                    {
-                      "code" : "a",
-                      "type" : "codeVoice"
-                    },
-                    {
-                      "text" : " and ",
-                      "type" : "text"
-                    },
-                    {
-                      "code" : "b",
-                      "type" : "codeVoice"
-                    },
-                    {
-                      "text" : " are incomparable, and ",
-                      "type" : "text"
-                    },
-                    {
-                      "code" : "b",
-                      "type" : "codeVoice"
-                    },
-                    {
-                      "text" : " ",
-                      "type" : "text"
-                    },
-                    {
-                      "text" : "and ",
-                      "type" : "text"
-                    },
-                    {
-                      "code" : "c",
-                      "type" : "codeVoice"
-                    },
-                    {
-                      "text" : " are incomparable, then ",
-                      "type" : "text"
-                    },
-                    {
-                      "code" : "a",
-                      "type" : "codeVoice"
-                    },
-                    {
-                      "text" : " and ",
-                      "type" : "text"
-                    },
-                    {
-                      "code" : "c",
-                      "type" : "codeVoice"
-                    },
-                    {
-                      "text" : " are also incomparable.",
-                      "type" : "text"
-                    },
-                    {
-                      "text" : " ",
-                      "type" : "text"
-                    },
-                    {
-                      "text" : "(Transitive incomparability)",
-                      "type" : "text"
-                    }
-                  ],
-                  "type" : "paragraph"
-                }
-              ]
-            }
-          ],
-          "type" : "unorderedList"
-        },
-        {
-          "inlineContent" : [
-            {
-              "text" : "This example shows how to use the ",
-              "type" : "text"
-            },
-            {
-              "code" : "min(by:)",
-              "type" : "codeVoice"
-            },
-            {
-              "text" : " method on a",
-              "type" : "text"
-            },
-            {
-              "text" : " ",
-              "type" : "text"
-            },
-            {
-              "text" : "dictionary to find the key-value pair with the lowest value.",
-              "type" : "text"
-            }
-          ],
-          "type" : "paragraph"
-        },
-        {
-          "code" : [
-            "let hues = [\"Heliotrope\": 296, \"Coral\": 16, \"Aquamarine\": 156]",
-            "let leastHue = hues.min { a, b in a.value < b.value }",
-            "print(leastHue)",
-            "\/\/ Prints \"Optional((key: \"Coral\", value: 16))\""
-          ],
-          "syntax" : null,
-          "type" : "codeListing"
-        },
-        {
-          "content" : [
-            {
-              "inlineContent" : [
-                {
-                  "text" : "O(",
-                  "type" : "text"
-                },
-                {
-                  "inlineContent" : [
-                    {
-                      "text" : "n",
-                      "type" : "text"
-                    }
-                  ],
-                  "type" : "emphasis"
-                },
-                {
-                  "text" : "), where ",
-                  "type" : "text"
-                },
-                {
-                  "inlineContent" : [
-                    {
-                      "text" : "n",
-                      "type" : "text"
-                    }
-                  ],
-                  "type" : "emphasis"
-                },
-                {
-                  "text" : " is the length of the sequence.",
-                  "type" : "text"
-                }
-              ],
-              "type" : "paragraph"
-            }
-          ],
-          "name" : "Complexity",
-          "style" : "note",
-          "type" : "aside"
-        }
-      ],
-      "kind" : "content"
     }
   ],
   "schemaVersion" : {
     "major" : 0,
-    "minor" : 2,
+    "minor" : 3,
     "patch" : 0
   },
   "sections" : [
@@ -721,21 +291,21 @@
   ]
 , 
 "references": {
-"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation": {
+"doc://AuthFoundation/documentation/AuthFoundation": {
   "abstract" : [
     {
       "text" : "Library that provides foundational features used by Okta’s authentication libraries, as well as APIs used to work with tokens and user credentials.",
       "type" : "text"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation",
   "kind" : "symbol",
   "role" : "collection",
   "title" : "AuthFoundation",
   "type" : "topic",
   "url" : "\/documentation\/authfoundation"
 },
-"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/JWKS": {
+"doc://AuthFoundation/documentation/AuthFoundation/JWKS": {
   "abstract" : [
     {
       "text" : "Describes the collection of keys associated with an authorization server.",
@@ -756,7 +326,7 @@
       "text" : "JWKS"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/JWKS",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JWKS",
   "kind" : "symbol",
   "navigatorTitle" : [
     {
@@ -769,31 +339,20 @@
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/jwks"
 },
-"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/JWKS/Sequence-Implementations": {
+"doc://AuthFoundation/documentation/AuthFoundation/JWKS/Sequence-Implementations": {
   "abstract" : [
 
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/JWKS\/Sequence-Implementations",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JWKS\/Sequence-Implementations",
   "kind" : "article",
   "role" : "collectionGroup",
   "title" : "Sequence Implementations",
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/jwks\/sequence-implementations"
 },
-"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/JWKS/min(by:)": {
+"doc://AuthFoundation/documentation/AuthFoundation/JWKS/min(by:)": {
   "abstract" : [
-    {
-      "text" : "Returns the minimum element in the sequence, using the given predicate as",
-      "type" : "text"
-    },
-    {
-      "text" : " ",
-      "type" : "text"
-    },
-    {
-      "text" : "the comparison between elements.",
-      "type" : "text"
-    }
+
   ],
   "fragments" : [
     {
@@ -894,7 +453,7 @@
       "text" : "?"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/JWKS\/min(by:)",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JWKS\/min(by:)",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "min(by:)",

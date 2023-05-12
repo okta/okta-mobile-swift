@@ -16,19 +16,27 @@
   "hierarchy" : {
     "paths" : [
       [
-        "doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/OktaOAuth2",
-        "doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/OktaOAuth2\/DeviceAuthorizationFlow"
+        "doc:\/\/OktaOAuth2\/documentation\/OktaOAuth2",
+        "doc:\/\/OktaOAuth2\/documentation\/OktaOAuth2\/DeviceAuthorizationFlow"
       ]
     ]
   },
   "identifier" : {
     "interfaceLanguage" : "swift",
-    "url" : "doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/OktaOAuth2\/DeviceAuthorizationFlow\/init()"
+    "url" : "doc:\/\/OktaOAuth2\/documentation\/OktaOAuth2\/DeviceAuthorizationFlow\/init()"
   },
   "kind" : "symbol",
   "metadata" : {
     "externalID" : "s:10OktaOAuth223DeviceAuthorizationFlowCACyKcfc",
     "fragments" : [
+      {
+        "kind" : "keyword",
+        "text" : "convenience"
+      },
+      {
+        "kind" : "text",
+        "text" : " "
+      },
       {
         "kind" : "identifier",
         "text" : "init"
@@ -91,7 +99,7 @@
   ],
   "schemaVersion" : {
     "major" : 0,
-    "minor" : 2,
+    "minor" : 3,
     "patch" : 0
   },
   "sections" : [
@@ -111,21 +119,21 @@
   ]
 , 
 "references": {
-"doc://com.okta.mobile.oktaoauth2/documentation/OktaOAuth2": {
+"doc://OktaOAuth2/documentation/OktaOAuth2": {
   "abstract" : [
     {
       "text" : "Interact with Okta’s OAuth2 APIs to authenticate users, and interact with user resources.",
       "type" : "text"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/OktaOAuth2",
+  "identifier" : "doc:\/\/OktaOAuth2\/documentation\/OktaOAuth2",
   "kind" : "symbol",
   "role" : "collection",
   "title" : "OktaOAuth2",
   "type" : "topic",
   "url" : "\/documentation\/oktaoauth2"
 },
-"doc://com.okta.mobile.oktaoauth2/documentation/OktaOAuth2/DeviceAuthorizationFlow": {
+"doc://OktaOAuth2/documentation/OktaOAuth2/DeviceAuthorizationFlow": {
   "abstract" : [
     {
       "text" : "An authentication flow class that implements the Device Authorization Grant flow exchange.",
@@ -146,7 +154,7 @@
       "text" : "DeviceAuthorizationFlow"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/OktaOAuth2\/DeviceAuthorizationFlow",
+  "identifier" : "doc:\/\/OktaOAuth2\/documentation\/OktaOAuth2\/DeviceAuthorizationFlow",
   "kind" : "symbol",
   "navigatorTitle" : [
     {
@@ -159,7 +167,7 @@
   "type" : "topic",
   "url" : "\/documentation\/oktaoauth2\/deviceauthorizationflow"
 },
-"doc://com.okta.mobile.oktaoauth2/documentation/OktaOAuth2/DeviceAuthorizationFlow/init()": {
+"doc://OktaOAuth2/documentation/OktaOAuth2/DeviceAuthorizationFlow/init()": {
   "abstract" : [
     {
       "text" : "Initializer that uses the configuration defined within the application’s ",
@@ -176,6 +184,14 @@
   ],
   "fragments" : [
     {
+      "kind" : "keyword",
+      "text" : "convenience"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
       "kind" : "identifier",
       "text" : "init"
     },
@@ -188,7 +204,7 @@
       "text" : "throws"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/OktaOAuth2\/DeviceAuthorizationFlow\/init()",
+  "identifier" : "doc:\/\/OktaOAuth2\/documentation\/OktaOAuth2\/DeviceAuthorizationFlow\/init()",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "init()",

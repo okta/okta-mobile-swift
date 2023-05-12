@@ -8,14 +8,14 @@
   "hierarchy" : {
     "paths" : [
       [
-        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation",
-        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/APIClient"
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/APIClient"
       ]
     ]
   },
   "identifier" : {
     "interfaceLanguage" : "swift",
-    "url" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/APIClient\/decode(_:from:userInfo:)"
+    "url" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/APIClient\/decode(_:from:userInfo:)"
   },
   "kind" : "symbol",
   "metadata" : {
@@ -47,7 +47,6 @@
       },
       {
         "kind" : "typeIdentifier",
-        "preciseIdentifier" : "s:14AuthFoundation9APIClientP6decode_4from8userInfoqd__qd__m_0B04DataVSDys010CodingUserG3KeyVypGSgtKSeRd__lF1TL_qd__mfp",
         "text" : "T"
       },
       {
@@ -106,7 +105,6 @@
       },
       {
         "kind" : "typeIdentifier",
-        "preciseIdentifier" : "s:14AuthFoundation9APIClientP6decode_4from8userInfoqd__qd__m_0B04DataVSDys010CodingUserG3KeyVypGSgtKSeRd__lF1TL_qd__mfp",
         "text" : "T"
       }
     ],
@@ -174,7 +172,6 @@
             },
             {
               "kind" : "typeIdentifier",
-              "preciseIdentifier" : "s:14AuthFoundation9APIClientP6decode_4from8userInfoqd__qd__m_0B04DataVSDys010CodingUserG3KeyVypGSgtKSeRd__lF1TL_qd__mfp",
               "text" : "T"
             },
             {
@@ -241,7 +238,6 @@
             },
             {
               "kind" : "typeIdentifier",
-              "preciseIdentifier" : "s:14AuthFoundation9APIClientP6decode_4from8userInfoqd__qd__m_0B04DataVSDys010CodingUserG3KeyVypGSgtKSeRd__lF1TL_qd__mfp",
               "text" : "T"
             },
             {
@@ -317,7 +313,7 @@
   ],
   "schemaVersion" : {
     "major" : 0,
-    "minor" : 2,
+    "minor" : 3,
     "patch" : 0
   },
   "sections" : [
@@ -337,21 +333,21 @@
   ]
 , 
 "references": {
-"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation": {
+"doc://AuthFoundation/documentation/AuthFoundation": {
   "abstract" : [
     {
       "text" : "Library that provides foundational features used by Okta’s authentication libraries, as well as APIs used to work with tokens and user credentials.",
       "type" : "text"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation",
   "kind" : "symbol",
   "role" : "collection",
   "title" : "AuthFoundation",
   "type" : "topic",
   "url" : "\/documentation\/authfoundation"
 },
-"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/APIClient": {
+"doc://AuthFoundation/documentation/AuthFoundation/APIClient": {
   "abstract" : [
     {
       "text" : "Protocol defining the interfaces and capabilities that API clients can conform to.",
@@ -372,7 +368,7 @@
       "text" : "APIClient"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/APIClient",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/APIClient",
   "kind" : "symbol",
   "navigatorTitle" : [
     {
@@ -385,7 +381,7 @@
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/apiclient"
 },
-"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/APIClient/decode(_:from:userInfo:)": {
+"doc://AuthFoundation/documentation/AuthFoundation/APIClient/decode(_:from:userInfo:)": {
   "abstract" : [
     {
       "text" : "Decodes HTTP response data into an expected type.",
@@ -419,7 +415,6 @@
     },
     {
       "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:14AuthFoundation9APIClientP6decode_4from8userInfoqd__qd__m_0B04DataVSDys010CodingUserG3KeyVypGSgtKSeRd__lF1TL_qd__mfp",
       "text" : "T"
     },
     {
@@ -478,11 +473,10 @@
     },
     {
       "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:14AuthFoundation9APIClientP6decode_4from8userInfoqd__qd__m_0B04DataVSDys010CodingUserG3KeyVypGSgtKSeRd__lF1TL_qd__mfp",
       "text" : "T"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/APIClient\/decode(_:from:userInfo:)",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/APIClient\/decode(_:from:userInfo:)",
   "kind" : "symbol",
   "required" : true,
   "role" : "symbol",

@@ -1,21 +1,15 @@
 {
-  "abstract" : [
-    {
-      "text" : "No overview available.",
-      "type" : "text"
-    }
-  ],
   "hierarchy" : {
     "paths" : [
       [
-        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation",
-        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/URLSessionProtocol"
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/URLSessionProtocol"
       ]
     ]
   },
   "identifier" : {
     "interfaceLanguage" : "swift",
-    "url" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/URLSessionProtocol\/configuration"
+    "url" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/URLSessionProtocol\/configuration"
   },
   "kind" : "symbol",
   "metadata" : {
@@ -106,7 +100,7 @@
   ],
   "schemaVersion" : {
     "major" : 0,
-    "minor" : 2,
+    "minor" : 3,
     "patch" : 0
   },
   "sections" : [
@@ -126,21 +120,21 @@
   ]
 , 
 "references": {
-"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation": {
+"doc://AuthFoundation/documentation/AuthFoundation": {
   "abstract" : [
     {
       "text" : "Library that provides foundational features used by Okta’s authentication libraries, as well as APIs used to work with tokens and user credentials.",
       "type" : "text"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation",
   "kind" : "symbol",
   "role" : "collection",
   "title" : "AuthFoundation",
   "type" : "topic",
   "url" : "\/documentation\/authfoundation"
 },
-"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/URLSessionProtocol": {
+"doc://AuthFoundation/documentation/AuthFoundation/URLSessionProtocol": {
   "abstract" : [
     {
       "text" : "Protocol defining the interface for interacting with a URLSession. This is used to provide mocking for unit tests.",
@@ -161,7 +155,7 @@
       "text" : "URLSessionProtocol"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/URLSessionProtocol",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/URLSessionProtocol",
   "kind" : "symbol",
   "navigatorTitle" : [
     {
@@ -174,7 +168,7 @@
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/urlsessionprotocol"
 },
-"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/URLSessionProtocol/configuration": {
+"doc://AuthFoundation/documentation/AuthFoundation/URLSessionProtocol/configuration": {
   "abstract" : [
 
   ],
@@ -201,7 +195,7 @@
       "text" : "URLSessionConfiguration"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/URLSessionProtocol\/configuration",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/URLSessionProtocol\/configuration",
   "kind" : "symbol",
   "required" : true,
   "role" : "symbol",

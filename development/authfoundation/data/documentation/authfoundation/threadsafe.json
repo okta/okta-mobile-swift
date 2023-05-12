@@ -8,13 +8,13 @@
   "hierarchy" : {
     "paths" : [
       [
-        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation"
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation"
       ]
     ]
   },
   "identifier" : {
     "interfaceLanguage" : "swift",
-    "url" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/ThreadSafe"
+    "url" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/ThreadSafe"
   },
   "kind" : "symbol",
   "metadata" : {
@@ -117,6 +117,7 @@
               "type" : "paragraph"
             }
           ],
+          "name" : "Important",
           "style" : "important",
           "type" : "aside"
         }
@@ -126,7 +127,7 @@
   ],
   "schemaVersion" : {
     "major" : 0,
-    "minor" : 2,
+    "minor" : 3,
     "patch" : 0
   },
   "sections" : [
@@ -135,13 +136,13 @@
   "topicSections" : [
     {
       "identifiers" : [
-        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/ThreadSafe\/init(wrappedValue:)"
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/ThreadSafe\/init(wrappedValue:)"
       ],
       "title" : "Initializers"
     },
     {
       "identifiers" : [
-        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/ThreadSafe\/wrappedValue"
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/ThreadSafe\/wrappedValue"
       ],
       "title" : "Instance Properties"
     }
@@ -160,21 +161,21 @@
   ]
 , 
 "references": {
-"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation": {
+"doc://AuthFoundation/documentation/AuthFoundation": {
   "abstract" : [
     {
       "text" : "Library that provides foundational features used by Okta’s authentication libraries, as well as APIs used to work with tokens and user credentials.",
       "type" : "text"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation",
   "kind" : "symbol",
   "role" : "collection",
   "title" : "AuthFoundation",
   "type" : "topic",
   "url" : "\/documentation\/authfoundation"
 },
-"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/ThreadSafe": {
+"doc://AuthFoundation/documentation/AuthFoundation/ThreadSafe": {
   "abstract" : [
     {
       "text" : "Property wrapper that implements thread-safe locking for wrapped property values.",
@@ -195,7 +196,7 @@
       "text" : "ThreadSafe"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/ThreadSafe",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/ThreadSafe",
   "kind" : "symbol",
   "navigatorTitle" : [
     {
@@ -208,7 +209,7 @@
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/threadsafe"
 },
-"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/ThreadSafe/init(wrappedValue:)": {
+"doc://AuthFoundation/documentation/AuthFoundation/ThreadSafe/init(wrappedValue:)": {
   "abstract" : [
 
   ],
@@ -231,7 +232,6 @@
     },
     {
       "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:14AuthFoundation10ThreadSafeV1Txmfp",
       "text" : "T"
     },
     {
@@ -239,14 +239,14 @@
       "text" : ")"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/ThreadSafe\/init(wrappedValue:)",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/ThreadSafe\/init(wrappedValue:)",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "init(wrappedValue:)",
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/threadsafe\/init(wrappedvalue:)"
 },
-"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/ThreadSafe/wrappedValue": {
+"doc://AuthFoundation/documentation/AuthFoundation/ThreadSafe/wrappedValue": {
   "abstract" : [
 
   ],
@@ -269,11 +269,10 @@
     },
     {
       "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:14AuthFoundation10ThreadSafeV1Txmfp",
       "text" : "T"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/ThreadSafe\/wrappedValue",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/ThreadSafe\/wrappedValue",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "wrappedValue",

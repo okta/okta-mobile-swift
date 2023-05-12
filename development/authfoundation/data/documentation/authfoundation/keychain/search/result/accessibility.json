@@ -8,16 +8,16 @@
   "hierarchy" : {
     "paths" : [
       [
-        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation",
-        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/Keychain",
-        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/Keychain\/Search",
-        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/Keychain\/Search\/Result"
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/Keychain",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/Keychain\/Search",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/Keychain\/Search\/Result"
       ]
     ]
   },
   "identifier" : {
     "interfaceLanguage" : "swift",
-    "url" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/Keychain\/Search\/Result\/accessibility"
+    "url" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/Keychain\/Search\/Result\/accessibility"
   },
   "kind" : "symbol",
   "metadata" : {
@@ -38,6 +38,15 @@
       {
         "kind" : "text",
         "text" : ": "
+      },
+      {
+        "kind" : "typeIdentifier",
+        "preciseIdentifier" : "s:14AuthFoundation8KeychainV",
+        "text" : "Keychain"
+      },
+      {
+        "kind" : "text",
+        "text" : "."
       },
       {
         "kind" : "typeIdentifier",
@@ -87,7 +96,17 @@
               "text" : ": "
             },
             {
-              "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/Keychain\/Accessibility",
+              "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/Keychain",
+              "kind" : "typeIdentifier",
+              "preciseIdentifier" : "s:14AuthFoundation8KeychainV",
+              "text" : "Keychain"
+            },
+            {
+              "kind" : "text",
+              "text" : "."
+            },
+            {
+              "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/Keychain\/Accessibility",
               "kind" : "typeIdentifier",
               "preciseIdentifier" : "s:14AuthFoundation8KeychainV13AccessibilityO",
               "text" : "Accessibility"
@@ -104,7 +123,7 @@
   ],
   "schemaVersion" : {
     "major" : 0,
-    "minor" : 2,
+    "minor" : 3,
     "patch" : 0
   },
   "sections" : [
@@ -124,21 +143,21 @@
   ]
 , 
 "references": {
-"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation": {
+"doc://AuthFoundation/documentation/AuthFoundation": {
   "abstract" : [
     {
       "text" : "Library that provides foundational features used by Okta’s authentication libraries, as well as APIs used to work with tokens and user credentials.",
       "type" : "text"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation",
   "kind" : "symbol",
   "role" : "collection",
   "title" : "AuthFoundation",
   "type" : "topic",
   "url" : "\/documentation\/authfoundation"
 },
-"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/Keychain": {
+"doc://AuthFoundation/documentation/AuthFoundation/Keychain": {
   "abstract" : [
     {
       "text" : "Defines convenience mechanisms for interacting with the keychain, including searching, creating, and deleting keychain items.",
@@ -159,7 +178,7 @@
       "text" : "Keychain"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/Keychain",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/Keychain",
   "kind" : "symbol",
   "navigatorTitle" : [
     {
@@ -172,7 +191,7 @@
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/keychain"
 },
-"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/Keychain/Accessibility": {
+"doc://AuthFoundation/documentation/AuthFoundation/Keychain/Accessibility": {
   "abstract" : [
     {
       "text" : "Defines the accessibility level for keychain items.",
@@ -193,7 +212,7 @@
       "text" : "Accessibility"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/Keychain\/Accessibility",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/Keychain\/Accessibility",
   "kind" : "symbol",
   "navigatorTitle" : [
     {
@@ -206,7 +225,7 @@
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/keychain\/accessibility"
 },
-"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/Keychain/Search": {
+"doc://AuthFoundation/documentation/AuthFoundation/Keychain/Search": {
   "abstract" : [
     {
       "text" : "Defines a search for keychain items.",
@@ -227,7 +246,7 @@
       "text" : "Search"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/Keychain\/Search",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/Keychain\/Search",
   "kind" : "symbol",
   "navigatorTitle" : [
     {
@@ -240,7 +259,7 @@
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/keychain\/search"
 },
-"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/Keychain/Search/Result": {
+"doc://AuthFoundation/documentation/AuthFoundation/Keychain/Search/Result": {
   "abstract" : [
     {
       "text" : "An individual result within a keychain search.",
@@ -261,7 +280,7 @@
       "text" : "Result"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/Keychain\/Search\/Result",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/Keychain\/Search\/Result",
   "kind" : "symbol",
   "navigatorTitle" : [
     {
@@ -274,7 +293,7 @@
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/keychain\/search\/result"
 },
-"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/Keychain/Search/Result/accessibility": {
+"doc://AuthFoundation/documentation/AuthFoundation/Keychain/Search/Result/accessibility": {
   "abstract" : [
     {
       "text" : "The accessibility level for this keychain item.",
@@ -300,6 +319,15 @@
     },
     {
       "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:14AuthFoundation8KeychainV",
+      "text" : "Keychain"
+    },
+    {
+      "kind" : "text",
+      "text" : "."
+    },
+    {
+      "kind" : "typeIdentifier",
       "preciseIdentifier" : "s:14AuthFoundation8KeychainV13AccessibilityO",
       "text" : "Accessibility"
     },
@@ -308,7 +336,7 @@
       "text" : "?"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/Keychain\/Search\/Result\/accessibility",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/Keychain\/Search\/Result\/accessibility",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "accessibility",

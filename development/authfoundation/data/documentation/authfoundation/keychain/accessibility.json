@@ -8,14 +8,14 @@
   "hierarchy" : {
     "paths" : [
       [
-        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation",
-        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/Keychain"
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/Keychain"
       ]
     ]
   },
   "identifier" : {
     "interfaceLanguage" : "swift",
-    "url" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/Keychain\/Accessibility"
+    "url" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/Keychain\/Accessibility"
   },
   "kind" : "symbol",
   "metadata" : {
@@ -110,9 +110,9 @@
   "relationshipsSections" : [
     {
       "identifiers" : [
-        "doc:\/\/com.okta.mobile.authfoundation\/SQ",
-        "doc:\/\/com.okta.mobile.authfoundation\/SH",
-        "doc:\/\/com.okta.mobile.authfoundation\/SY"
+        "doc:\/\/AuthFoundation\/SQ",
+        "doc:\/\/AuthFoundation\/SH",
+        "doc:\/\/AuthFoundation\/SY"
       ],
       "kind" : "relationships",
       "title" : "Conforms To",
@@ -121,7 +121,7 @@
   ],
   "schemaVersion" : {
     "major" : 0,
-    "minor" : 2,
+    "minor" : 3,
     "patch" : 0
   },
   "sections" : [
@@ -130,21 +130,21 @@
   "topicSections" : [
     {
       "identifiers" : [
-        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/Keychain\/Accessibility\/afterFirstUnlock",
-        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/Keychain\/Accessibility\/afterFirstUnlockThisDeviceOnly",
-        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/Keychain\/Accessibility\/always",
-        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/Keychain\/Accessibility\/alwaysThisDeviceOnly",
-        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/Keychain\/Accessibility\/unlocked",
-        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/Keychain\/Accessibility\/unlockedThisDeviceOnly",
-        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/Keychain\/Accessibility\/whenPasswordSetThisDeviceOnly"
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/Keychain\/Accessibility\/afterFirstUnlock",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/Keychain\/Accessibility\/afterFirstUnlockThisDeviceOnly",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/Keychain\/Accessibility\/always",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/Keychain\/Accessibility\/alwaysThisDeviceOnly",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/Keychain\/Accessibility\/unlocked",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/Keychain\/Accessibility\/unlockedThisDeviceOnly",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/Keychain\/Accessibility\/whenPasswordSetThisDeviceOnly"
       ],
       "title" : "Enumeration Cases"
     },
     {
       "generated" : true,
       "identifiers" : [
-        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/Keychain\/Accessibility\/Equatable-Implementations",
-        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/Keychain\/Accessibility\/RawRepresentable-Implementations"
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/Keychain\/Accessibility\/Equatable-Implementations",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/Keychain\/Accessibility\/RawRepresentable-Implementations"
       ],
       "title" : "Default Implementations"
     }
@@ -163,36 +163,36 @@
   ]
 , 
 "references": {
-"doc://com.okta.mobile.authfoundation/SH": {
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/SH",
+"doc://AuthFoundation/SH": {
+  "identifier" : "doc:\/\/AuthFoundation\/SH",
   "title" : "Swift.Hashable",
   "type" : "unresolvable"
 },
-"doc://com.okta.mobile.authfoundation/SQ": {
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/SQ",
+"doc://AuthFoundation/SQ": {
+  "identifier" : "doc:\/\/AuthFoundation\/SQ",
   "title" : "Swift.Equatable",
   "type" : "unresolvable"
 },
-"doc://com.okta.mobile.authfoundation/SY": {
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/SY",
+"doc://AuthFoundation/SY": {
+  "identifier" : "doc:\/\/AuthFoundation\/SY",
   "title" : "Swift.RawRepresentable",
   "type" : "unresolvable"
 },
-"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation": {
+"doc://AuthFoundation/documentation/AuthFoundation": {
   "abstract" : [
     {
       "text" : "Library that provides foundational features used by Okta’s authentication libraries, as well as APIs used to work with tokens and user credentials.",
       "type" : "text"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation",
   "kind" : "symbol",
   "role" : "collection",
   "title" : "AuthFoundation",
   "type" : "topic",
   "url" : "\/documentation\/authfoundation"
 },
-"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/Keychain": {
+"doc://AuthFoundation/documentation/AuthFoundation/Keychain": {
   "abstract" : [
     {
       "text" : "Defines convenience mechanisms for interacting with the keychain, including searching, creating, and deleting keychain items.",
@@ -213,7 +213,7 @@
       "text" : "Keychain"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/Keychain",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/Keychain",
   "kind" : "symbol",
   "navigatorTitle" : [
     {
@@ -226,7 +226,7 @@
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/keychain"
 },
-"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/Keychain/Accessibility": {
+"doc://AuthFoundation/documentation/AuthFoundation/Keychain/Accessibility": {
   "abstract" : [
     {
       "text" : "Defines the accessibility level for keychain items.",
@@ -247,7 +247,7 @@
       "text" : "Accessibility"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/Keychain\/Accessibility",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/Keychain\/Accessibility",
   "kind" : "symbol",
   "navigatorTitle" : [
     {
@@ -260,29 +260,29 @@
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/keychain\/accessibility"
 },
-"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/Keychain/Accessibility/Equatable-Implementations": {
+"doc://AuthFoundation/documentation/AuthFoundation/Keychain/Accessibility/Equatable-Implementations": {
   "abstract" : [
 
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/Keychain\/Accessibility\/Equatable-Implementations",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/Keychain\/Accessibility\/Equatable-Implementations",
   "kind" : "article",
   "role" : "collectionGroup",
   "title" : "Equatable Implementations",
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/keychain\/accessibility\/equatable-implementations"
 },
-"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/Keychain/Accessibility/RawRepresentable-Implementations": {
+"doc://AuthFoundation/documentation/AuthFoundation/Keychain/Accessibility/RawRepresentable-Implementations": {
   "abstract" : [
 
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/Keychain\/Accessibility\/RawRepresentable-Implementations",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/Keychain\/Accessibility\/RawRepresentable-Implementations",
   "kind" : "article",
   "role" : "collectionGroup",
   "title" : "RawRepresentable Implementations",
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/keychain\/accessibility\/rawrepresentable-implementations"
 },
-"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/Keychain/Accessibility/afterFirstUnlock": {
+"doc://AuthFoundation/documentation/AuthFoundation/Keychain/Accessibility/afterFirstUnlock": {
   "abstract" : [
     {
       "text" : "Requires the device to have been unlocked at some point.",
@@ -303,14 +303,14 @@
       "text" : "afterFirstUnlock"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/Keychain\/Accessibility\/afterFirstUnlock",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/Keychain\/Accessibility\/afterFirstUnlock",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "Keychain.Accessibility.afterFirstUnlock",
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/keychain\/accessibility\/afterfirstunlock"
 },
-"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/Keychain/Accessibility/afterFirstUnlockThisDeviceOnly": {
+"doc://AuthFoundation/documentation/AuthFoundation/Keychain/Accessibility/afterFirstUnlockThisDeviceOnly": {
   "abstract" : [
     {
       "text" : "Requires the device to have been unlocked at some point, and disallows iCloud keychain sharing.",
@@ -331,14 +331,14 @@
       "text" : "afterFirstUnlockThisDeviceOnly"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/Keychain\/Accessibility\/afterFirstUnlockThisDeviceOnly",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/Keychain\/Accessibility\/afterFirstUnlockThisDeviceOnly",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "Keychain.Accessibility.afterFirstUnlockThisDeviceOnly",
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/keychain\/accessibility\/afterfirstunlockthisdeviceonly"
 },
-"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/Keychain/Accessibility/always": {
+"doc://AuthFoundation/documentation/AuthFoundation/Keychain/Accessibility/always": {
   "abstract" : [
     {
       "text" : "Allows the keychain item to always be accessible.",
@@ -360,14 +360,14 @@
       "text" : "always"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/Keychain\/Accessibility\/always",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/Keychain\/Accessibility\/always",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "Keychain.Accessibility.always",
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/keychain\/accessibility\/always"
 },
-"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/Keychain/Accessibility/alwaysThisDeviceOnly": {
+"doc://AuthFoundation/documentation/AuthFoundation/Keychain/Accessibility/alwaysThisDeviceOnly": {
   "abstract" : [
     {
       "text" : "Allows the keychain item to always be accessible, and disallows iCloud keychain sharing.",
@@ -389,14 +389,14 @@
       "text" : "alwaysThisDeviceOnly"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/Keychain\/Accessibility\/alwaysThisDeviceOnly",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/Keychain\/Accessibility\/alwaysThisDeviceOnly",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "Keychain.Accessibility.alwaysThisDeviceOnly",
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/keychain\/accessibility\/alwaysthisdeviceonly"
 },
-"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/Keychain/Accessibility/unlocked": {
+"doc://AuthFoundation/documentation/AuthFoundation/Keychain/Accessibility/unlocked": {
   "abstract" : [
     {
       "text" : "Requires the device to be actively unlocked.",
@@ -417,14 +417,14 @@
       "text" : "unlocked"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/Keychain\/Accessibility\/unlocked",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/Keychain\/Accessibility\/unlocked",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "Keychain.Accessibility.unlocked",
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/keychain\/accessibility\/unlocked"
 },
-"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/Keychain/Accessibility/unlockedThisDeviceOnly": {
+"doc://AuthFoundation/documentation/AuthFoundation/Keychain/Accessibility/unlockedThisDeviceOnly": {
   "abstract" : [
     {
       "text" : "Requires the device to be actively unlocked, and disallows iCloud keychain sharing.",
@@ -445,14 +445,14 @@
       "text" : "unlockedThisDeviceOnly"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/Keychain\/Accessibility\/unlockedThisDeviceOnly",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/Keychain\/Accessibility\/unlockedThisDeviceOnly",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "Keychain.Accessibility.unlockedThisDeviceOnly",
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/keychain\/accessibility\/unlockedthisdeviceonly"
 },
-"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/Keychain/Accessibility/whenPasswordSetThisDeviceOnly": {
+"doc://AuthFoundation/documentation/AuthFoundation/Keychain/Accessibility/whenPasswordSetThisDeviceOnly": {
   "abstract" : [
     {
       "text" : "Requires the device to have a passcode set, and disallows iCloud keychain sharing.",
@@ -473,7 +473,7 @@
       "text" : "whenPasswordSetThisDeviceOnly"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/Keychain\/Accessibility\/whenPasswordSetThisDeviceOnly",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/Keychain\/Accessibility\/whenPasswordSetThisDeviceOnly",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "Keychain.Accessibility.whenPasswordSetThisDeviceOnly",

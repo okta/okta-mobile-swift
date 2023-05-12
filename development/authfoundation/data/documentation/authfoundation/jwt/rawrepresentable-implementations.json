@@ -1,21 +1,15 @@
 {
-  "abstract" : [
-    {
-      "text" : "No overview available.",
-      "type" : "text"
-    }
-  ],
   "hierarchy" : {
     "paths" : [
       [
-        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation",
-        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/JWT"
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JWT"
       ]
     ]
   },
   "identifier" : {
     "interfaceLanguage" : "swift",
-    "url" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/JWT\/RawRepresentable-Implementations"
+    "url" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JWT\/RawRepresentable-Implementations"
   },
   "kind" : "article",
   "metadata" : {
@@ -29,7 +23,7 @@
   },
   "schemaVersion" : {
     "major" : 0,
-    "minor" : 2,
+    "minor" : 3,
     "patch" : 0
   },
   "sections" : [
@@ -39,14 +33,14 @@
     {
       "generated" : true,
       "identifiers" : [
-        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/JWT\/init(from:)"
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JWT\/init(from:)"
       ],
       "title" : "Initializers"
     },
     {
       "generated" : true,
       "identifiers" : [
-        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/JWT\/encode(to:)"
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JWT\/encode(to:)"
       ],
       "title" : "Instance Methods"
     }
@@ -65,21 +59,21 @@
   ]
 , 
 "references": {
-"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation": {
+"doc://AuthFoundation/documentation/AuthFoundation": {
   "abstract" : [
     {
       "text" : "Library that provides foundational features used by Okta’s authentication libraries, as well as APIs used to work with tokens and user credentials.",
       "type" : "text"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation",
   "kind" : "symbol",
   "role" : "collection",
   "title" : "AuthFoundation",
   "type" : "topic",
   "url" : "\/documentation\/authfoundation"
 },
-"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/JWT": {
+"doc://AuthFoundation/documentation/AuthFoundation/JWT": {
   "abstract" : [
     {
       "text" : "Represents the contents of a JWT token, providing access to its payload contents.",
@@ -100,7 +94,7 @@
       "text" : "JWT"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/JWT",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JWT",
   "kind" : "symbol",
   "navigatorTitle" : [
     {
@@ -113,32 +107,9 @@
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/jwt"
 },
-"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/JWT/encode(to:)": {
+"doc://AuthFoundation/documentation/AuthFoundation/JWT/encode(to:)": {
   "abstract" : [
-    {
-      "text" : "Encodes this value into the given encoder, when the type’s ",
-      "type" : "text"
-    },
-    {
-      "code" : "RawValue",
-      "type" : "codeVoice"
-    },
-    {
-      "text" : " ",
-      "type" : "text"
-    },
-    {
-      "text" : "is ",
-      "type" : "text"
-    },
-    {
-      "code" : "String",
-      "type" : "codeVoice"
-    },
-    {
-      "text" : ".",
-      "type" : "text"
-    }
+
   ],
   "conformance" : {
     "availabilityPrefix" : [
@@ -227,43 +198,16 @@
       "text" : "throws"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/JWT\/encode(to:)",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JWT\/encode(to:)",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "encode(to:)",
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/jwt\/encode(to:)"
 },
-"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/JWT/init(from:)": {
+"doc://AuthFoundation/documentation/AuthFoundation/JWT/init(from:)": {
   "abstract" : [
-    {
-      "text" : "Creates a new instance by decoding from the given decoder, when the",
-      "type" : "text"
-    },
-    {
-      "text" : " ",
-      "type" : "text"
-    },
-    {
-      "text" : "type’s ",
-      "type" : "text"
-    },
-    {
-      "code" : "RawValue",
-      "type" : "codeVoice"
-    },
-    {
-      "text" : " is ",
-      "type" : "text"
-    },
-    {
-      "code" : "String",
-      "type" : "codeVoice"
-    },
-    {
-      "text" : ".",
-      "type" : "text"
-    }
+
   ],
   "conformance" : {
     "availabilityPrefix" : [
@@ -344,7 +288,7 @@
       "text" : "throws"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/JWT\/init(from:)",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JWT\/init(from:)",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "init(from:)",

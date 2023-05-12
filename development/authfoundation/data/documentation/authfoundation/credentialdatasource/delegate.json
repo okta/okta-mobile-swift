@@ -8,14 +8,14 @@
   "hierarchy" : {
     "paths" : [
       [
-        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation",
-        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/CredentialDataSource"
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/CredentialDataSource"
       ]
     ]
   },
   "identifier" : {
     "interfaceLanguage" : "swift",
-    "url" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/CredentialDataSource\/delegate"
+    "url" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/CredentialDataSource\/delegate"
   },
   "kind" : "symbol",
   "metadata" : {
@@ -86,7 +86,7 @@
               "text" : ": "
             },
             {
-              "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/CredentialDataSourceDelegate",
+              "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/CredentialDataSourceDelegate",
               "kind" : "typeIdentifier",
               "preciseIdentifier" : "s:14AuthFoundation28CredentialDataSourceDelegateP",
               "text" : "CredentialDataSourceDelegate"
@@ -119,7 +119,7 @@
   ],
   "schemaVersion" : {
     "major" : 0,
-    "minor" : 2,
+    "minor" : 3,
     "patch" : 0
   },
   "sections" : [
@@ -139,21 +139,21 @@
   ]
 , 
 "references": {
-"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation": {
+"doc://AuthFoundation/documentation/AuthFoundation": {
   "abstract" : [
     {
       "text" : "Library that provides foundational features used by Okta’s authentication libraries, as well as APIs used to work with tokens and user credentials.",
       "type" : "text"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation",
   "kind" : "symbol",
   "role" : "collection",
   "title" : "AuthFoundation",
   "type" : "topic",
   "url" : "\/documentation\/authfoundation"
 },
-"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/Credential": {
+"doc://AuthFoundation/documentation/AuthFoundation/Credential": {
   "abstract" : [
     {
       "text" : "Convenience object that provides methods and properties for using a user’s authentication tokens.",
@@ -174,7 +174,7 @@
       "text" : "Credential"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/Credential",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/Credential",
   "kind" : "symbol",
   "navigatorTitle" : [
     {
@@ -187,14 +187,14 @@
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/credential"
 },
-"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/CredentialDataSource": {
+"doc://AuthFoundation/documentation/AuthFoundation/CredentialDataSource": {
   "abstract" : [
     {
       "text" : "Protocol that enables a developer to interact with, and override, the default behavior for the lifecycle of ",
       "type" : "text"
     },
     {
-      "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/Credential",
+      "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/Credential",
       "isActive" : true,
       "type" : "reference"
     },
@@ -217,7 +217,7 @@
       "text" : "CredentialDataSource"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/CredentialDataSource",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/CredentialDataSource",
   "kind" : "symbol",
   "navigatorTitle" : [
     {
@@ -230,7 +230,7 @@
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/credentialdatasource"
 },
-"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/CredentialDataSource/delegate": {
+"doc://AuthFoundation/documentation/AuthFoundation/CredentialDataSource/delegate": {
   "abstract" : [
     {
       "text" : "Mandatory delegate property that is used to communicate when credentials within this data source are created or changed.",
@@ -264,7 +264,7 @@
       "text" : "?"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/CredentialDataSource\/delegate",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/CredentialDataSource\/delegate",
   "kind" : "symbol",
   "required" : true,
   "role" : "symbol",
@@ -272,14 +272,14 @@
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/credentialdatasource\/delegate"
 },
-"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/CredentialDataSourceDelegate": {
+"doc://AuthFoundation/documentation/AuthFoundation/CredentialDataSourceDelegate": {
   "abstract" : [
     {
       "text" : "Protocol that a custom ",
       "type" : "text"
     },
     {
-      "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/CredentialDataSource",
+      "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/CredentialDataSource",
       "isActive" : true,
       "type" : "reference"
     },
@@ -302,7 +302,7 @@
       "text" : "CredentialDataSourceDelegate"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/CredentialDataSourceDelegate",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/CredentialDataSourceDelegate",
   "kind" : "symbol",
   "navigatorTitle" : [
     {

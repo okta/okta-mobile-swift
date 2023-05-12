@@ -8,14 +8,14 @@
   "hierarchy" : {
     "paths" : [
       [
-        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation",
-        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/TokenStorageDelegate"
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/TokenStorageDelegate"
       ]
     ]
   },
   "identifier" : {
     "interfaceLanguage" : "swift",
-    "url" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/TokenStorageDelegate\/token(storage:replaced:with:)"
+    "url" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/TokenStorageDelegate\/token(storage:replaced:with:)"
   },
   "kind" : "symbol",
   "metadata" : {
@@ -136,7 +136,7 @@
               "text" : ": "
             },
             {
-              "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/TokenStorage",
+              "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/TokenStorage",
               "kind" : "typeIdentifier",
               "preciseIdentifier" : "s:14AuthFoundation12TokenStorageP",
               "text" : "TokenStorage"
@@ -187,7 +187,7 @@
               "text" : ": "
             },
             {
-              "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/Token",
+              "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/Token",
               "kind" : "typeIdentifier",
               "preciseIdentifier" : "s:14AuthFoundation5TokenC",
               "text" : "Token"
@@ -233,7 +233,7 @@
   ],
   "schemaVersion" : {
     "major" : 0,
-    "minor" : 2,
+    "minor" : 3,
     "patch" : 0
   },
   "sections" : [
@@ -253,21 +253,21 @@
   ]
 , 
 "references": {
-"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation": {
+"doc://AuthFoundation/documentation/AuthFoundation": {
   "abstract" : [
     {
       "text" : "Library that provides foundational features used by Okta’s authentication libraries, as well as APIs used to work with tokens and user credentials.",
       "type" : "text"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation",
   "kind" : "symbol",
   "role" : "collection",
   "title" : "AuthFoundation",
   "type" : "topic",
   "url" : "\/documentation\/authfoundation"
 },
-"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/Token": {
+"doc://AuthFoundation/documentation/AuthFoundation/Token": {
   "abstract" : [
     {
       "text" : "Token information representing a user’s access to a resource server, including access token, refresh token, and other related information.",
@@ -288,7 +288,7 @@
       "text" : "Token"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/Token",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/Token",
   "kind" : "symbol",
   "navigatorTitle" : [
     {
@@ -301,7 +301,7 @@
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/token"
 },
-"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/TokenStorage": {
+"doc://AuthFoundation/documentation/AuthFoundation/TokenStorage": {
   "abstract" : [
     {
       "text" : "Protocol used to customize the way tokens are stored, updated, and removed throughout the lifecycle of an application.",
@@ -322,7 +322,7 @@
       "text" : "TokenStorage"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/TokenStorage",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/TokenStorage",
   "kind" : "symbol",
   "navigatorTitle" : [
     {
@@ -335,14 +335,14 @@
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/tokenstorage"
 },
-"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/TokenStorageDelegate": {
+"doc://AuthFoundation/documentation/AuthFoundation/TokenStorageDelegate": {
   "abstract" : [
     {
       "text" : "Protocol that custom ",
       "type" : "text"
     },
     {
-      "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/TokenStorage",
+      "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/TokenStorage",
       "isActive" : true,
       "type" : "reference"
     },
@@ -365,7 +365,7 @@
       "text" : "TokenStorageDelegate"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/TokenStorageDelegate",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/TokenStorageDelegate",
   "kind" : "symbol",
   "navigatorTitle" : [
     {
@@ -378,7 +378,7 @@
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/tokenstoragedelegate"
 },
-"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/TokenStorageDelegate/token(storage:replaced:with:)": {
+"doc://AuthFoundation/documentation/AuthFoundation/TokenStorageDelegate/token(storage:replaced:with:)": {
   "abstract" : [
     {
       "text" : "Sent when a token has been updated within storage.",
@@ -454,7 +454,7 @@
       "text" : ")"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/TokenStorageDelegate\/token(storage:replaced:with:)",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/TokenStorageDelegate\/token(storage:replaced:with:)",
   "kind" : "symbol",
   "required" : true,
   "role" : "symbol",

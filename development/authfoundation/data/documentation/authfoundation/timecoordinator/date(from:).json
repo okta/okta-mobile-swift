@@ -8,14 +8,14 @@
   "hierarchy" : {
     "paths" : [
       [
-        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation",
-        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/TimeCoordinator"
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/TimeCoordinator"
       ]
     ]
   },
   "identifier" : {
     "interfaceLanguage" : "swift",
-    "url" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/TimeCoordinator\/date(from:)"
+    "url" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/TimeCoordinator\/date(from:)"
   },
   "kind" : "symbol",
   "metadata" : {
@@ -156,7 +156,7 @@
   ],
   "schemaVersion" : {
     "major" : 0,
-    "minor" : 2,
+    "minor" : 3,
     "patch" : 0
   },
   "sections" : [
@@ -176,21 +176,21 @@
   ]
 , 
 "references": {
-"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation": {
+"doc://AuthFoundation/documentation/AuthFoundation": {
   "abstract" : [
     {
       "text" : "Library that provides foundational features used by Okta’s authentication libraries, as well as APIs used to work with tokens and user credentials.",
       "type" : "text"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation",
   "kind" : "symbol",
   "role" : "collection",
   "title" : "AuthFoundation",
   "type" : "topic",
   "url" : "\/documentation\/authfoundation"
 },
-"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/TimeCoordinator": {
+"doc://AuthFoundation/documentation/AuthFoundation/TimeCoordinator": {
   "abstract" : [
     {
       "text" : "Protocol used to return dates and times coordinated against trusted sources.",
@@ -211,7 +211,7 @@
       "text" : "TimeCoordinator"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/TimeCoordinator",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/TimeCoordinator",
   "kind" : "symbol",
   "navigatorTitle" : [
     {
@@ -224,7 +224,7 @@
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/timecoordinator"
 },
-"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/TimeCoordinator/date(from:)": {
+"doc://AuthFoundation/documentation/AuthFoundation/TimeCoordinator/date(from:)": {
   "abstract" : [
     {
       "text" : "Returns a coordinated version of the given date.",
@@ -271,7 +271,7 @@
       "text" : "Date"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/TimeCoordinator\/date(from:)",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/TimeCoordinator\/date(from:)",
   "kind" : "symbol",
   "required" : true,
   "role" : "symbol",

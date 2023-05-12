@@ -8,7 +8,7 @@
   "defaultImplementationsSections" : [
     {
       "identifiers" : [
-        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/APIRequest\/headers-9k3go"
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/APIRequest\/headers-9k3go"
       ],
       "title" : "APIRequest Implementations"
     }
@@ -16,14 +16,14 @@
   "hierarchy" : {
     "paths" : [
       [
-        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation",
-        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/APIRequest"
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/APIRequest"
       ]
     ]
   },
   "identifier" : {
     "interfaceLanguage" : "swift",
-    "url" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/APIRequest\/headers-8ieky"
+    "url" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/APIRequest\/headers-8ieky"
   },
   "kind" : "symbol",
   "metadata" : {
@@ -112,7 +112,7 @@
               "text" : " : "
             },
             {
-              "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/APIRequestArgument",
+              "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/APIRequestArgument",
               "kind" : "typeIdentifier",
               "preciseIdentifier" : "s:14AuthFoundation18APIRequestArgumentP",
               "text" : "APIRequestArgument"
@@ -137,7 +137,7 @@
   ],
   "schemaVersion" : {
     "major" : 0,
-    "minor" : 2,
+    "minor" : 3,
     "patch" : 0
   },
   "sections" : [
@@ -157,21 +157,21 @@
   ]
 , 
 "references": {
-"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation": {
+"doc://AuthFoundation/documentation/AuthFoundation": {
   "abstract" : [
     {
       "text" : "Library that provides foundational features used by Okta’s authentication libraries, as well as APIs used to work with tokens and user credentials.",
       "type" : "text"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation",
   "kind" : "symbol",
   "role" : "collection",
   "title" : "AuthFoundation",
   "type" : "topic",
   "url" : "\/documentation\/authfoundation"
 },
-"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/APIRequest": {
+"doc://AuthFoundation/documentation/AuthFoundation/APIRequest": {
   "abstract" : [
     {
       "text" : "Abstract protocol defining the structure of an API request.",
@@ -192,7 +192,7 @@
       "text" : "APIRequest"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/APIRequest",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/APIRequest",
   "kind" : "symbol",
   "navigatorTitle" : [
     {
@@ -205,7 +205,7 @@
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/apirequest"
 },
-"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/APIRequest/headers-8ieky": {
+"doc://AuthFoundation/documentation/AuthFoundation/APIRequest/headers-8ieky": {
   "abstract" : [
     {
       "text" : "Optional HTTP headers to supply.",
@@ -249,7 +249,7 @@
       "text" : "?]?"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/APIRequest\/headers-8ieky",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/APIRequest\/headers-8ieky",
   "kind" : "symbol",
   "required" : true,
   "role" : "symbol",
@@ -257,12 +257,9 @@
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/apirequest\/headers-8ieky"
 },
-"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/APIRequest/headers-9k3go": {
+"doc://AuthFoundation/documentation/AuthFoundation/APIRequest/headers-9k3go": {
   "abstract" : [
-    {
-      "text" : "Optional HTTP headers to supply.",
-      "type" : "text"
-    }
+
   ],
   "fragments" : [
     {
@@ -300,19 +297,16 @@
       "text" : "?]?"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/APIRequest\/headers-9k3go",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/APIRequest\/headers-9k3go",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "headers",
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/apirequest\/headers-9k3go"
 },
-"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/APIRequest/query-730ld": {
+"doc://AuthFoundation/documentation/AuthFoundation/APIRequest/query-730ld": {
   "abstract" : [
-    {
-      "text" : "Optional query string arguments.",
-      "type" : "text"
-    }
+
   ],
   "fragments" : [
     {
@@ -350,21 +344,21 @@
       "text" : "?]?"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/APIRequest\/query-730ld",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/APIRequest\/query-730ld",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "query",
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/apirequest\/query-730ld"
 },
-"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/APIRequestArgument": {
+"doc://AuthFoundation/documentation/AuthFoundation/APIRequestArgument": {
   "abstract" : [
     {
       "text" : "Defines an argument to an ",
       "type" : "text"
     },
     {
-      "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/APIRequest",
+      "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/APIRequest",
       "isActive" : true,
       "type" : "reference"
     },
@@ -373,7 +367,7 @@
       "type" : "text"
     },
     {
-      "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/APIRequest\/headers-8ieky",
+      "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/APIRequest\/headers-8ieky",
       "isActive" : true,
       "type" : "reference"
     },
@@ -382,7 +376,7 @@
       "type" : "text"
     },
     {
-      "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/APIRequest\/query-730ld",
+      "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/APIRequest\/query-730ld",
       "isActive" : true,
       "type" : "reference"
     },
@@ -405,7 +399,7 @@
       "text" : "APIRequestArgument"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/APIRequestArgument",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/APIRequestArgument",
   "kind" : "symbol",
   "navigatorTitle" : [
     {

@@ -8,14 +8,14 @@
   "hierarchy" : {
     "paths" : [
       [
-        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation",
-        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/Token"
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/Token"
       ]
     ]
   },
   "identifier" : {
     "interfaceLanguage" : "swift",
-    "url" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/Token\/context-swift.property"
+    "url" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/Token\/context-swift.property"
   },
   "kind" : "symbol",
   "metadata" : {
@@ -36,6 +36,15 @@
       {
         "kind" : "text",
         "text" : ": "
+      },
+      {
+        "kind" : "typeIdentifier",
+        "preciseIdentifier" : "s:14AuthFoundation5TokenC",
+        "text" : "Token"
+      },
+      {
+        "kind" : "text",
+        "text" : "."
       },
       {
         "kind" : "typeIdentifier",
@@ -81,7 +90,17 @@
               "text" : ": "
             },
             {
-              "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/Token\/Context-swift.struct",
+              "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/Token",
+              "kind" : "typeIdentifier",
+              "preciseIdentifier" : "s:14AuthFoundation5TokenC",
+              "text" : "Token"
+            },
+            {
+              "kind" : "text",
+              "text" : "."
+            },
+            {
+              "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/Token\/Context-swift.struct",
               "kind" : "typeIdentifier",
               "preciseIdentifier" : "s:14AuthFoundation5TokenC7ContextV",
               "text" : "Context"
@@ -94,7 +113,7 @@
   ],
   "schemaVersion" : {
     "major" : 0,
-    "minor" : 2,
+    "minor" : 3,
     "patch" : 0
   },
   "sections" : [
@@ -114,21 +133,21 @@
   ]
 , 
 "references": {
-"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation": {
+"doc://AuthFoundation/documentation/AuthFoundation": {
   "abstract" : [
     {
       "text" : "Library that provides foundational features used by Okta’s authentication libraries, as well as APIs used to work with tokens and user credentials.",
       "type" : "text"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation",
   "kind" : "symbol",
   "role" : "collection",
   "title" : "AuthFoundation",
   "type" : "topic",
   "url" : "\/documentation\/authfoundation"
 },
-"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/Token": {
+"doc://AuthFoundation/documentation/AuthFoundation/Token": {
   "abstract" : [
     {
       "text" : "Token information representing a user’s access to a resource server, including access token, refresh token, and other related information.",
@@ -149,7 +168,7 @@
       "text" : "Token"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/Token",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/Token",
   "kind" : "symbol",
   "navigatorTitle" : [
     {
@@ -162,7 +181,7 @@
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/token"
 },
-"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/Token/Context-swift.struct": {
+"doc://AuthFoundation/documentation/AuthFoundation/Token/Context-swift.struct": {
   "abstract" : [
     {
       "text" : "Summarizes the context in which a token is valid.",
@@ -183,7 +202,7 @@
       "text" : "Context"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/Token\/Context-swift.struct",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/Token\/Context-swift.struct",
   "kind" : "symbol",
   "navigatorTitle" : [
     {
@@ -196,7 +215,7 @@
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/token\/context-swift.struct"
 },
-"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/Token/context-swift.property": {
+"doc://AuthFoundation/documentation/AuthFoundation/Token/context-swift.property": {
   "abstract" : [
     {
       "text" : "Defines the context this token was issued from.",
@@ -222,11 +241,20 @@
     },
     {
       "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:14AuthFoundation5TokenC",
+      "text" : "Token"
+    },
+    {
+      "kind" : "text",
+      "text" : "."
+    },
+    {
+      "kind" : "typeIdentifier",
       "preciseIdentifier" : "s:14AuthFoundation5TokenC7ContextV",
       "text" : "Context"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/Token\/context-swift.property",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/Token\/context-swift.property",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "context",

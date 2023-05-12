@@ -1,21 +1,29 @@
 {
   "abstract" : [
     {
-      "text" : "Raw paylaod of claims, as a dictionary representation.",
+      "text" : "Inherited from ",
+      "type" : "text"
+    },
+    {
+      "code" : "HasClaims.payload",
+      "type" : "codeVoice"
+    },
+    {
+      "text" : ".",
       "type" : "text"
     }
   ],
   "hierarchy" : {
     "paths" : [
       [
-        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation",
-        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/TokenInfo"
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/TokenInfo"
       ]
     ]
   },
   "identifier" : {
     "interfaceLanguage" : "swift",
-    "url" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/TokenInfo\/payload"
+    "url" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/TokenInfo\/payload"
   },
   "kind" : "symbol",
   "metadata" : {
@@ -117,7 +125,7 @@
   ],
   "schemaVersion" : {
     "major" : 0,
-    "minor" : 2,
+    "minor" : 3,
     "patch" : 0
   },
   "sections" : [
@@ -137,21 +145,21 @@
   ]
 , 
 "references": {
-"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation": {
+"doc://AuthFoundation/documentation/AuthFoundation": {
   "abstract" : [
     {
       "text" : "Library that provides foundational features used by Okta’s authentication libraries, as well as APIs used to work with tokens and user credentials.",
       "type" : "text"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation",
   "kind" : "symbol",
   "role" : "collection",
   "title" : "AuthFoundation",
   "type" : "topic",
   "url" : "\/documentation\/authfoundation"
 },
-"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/TokenInfo": {
+"doc://AuthFoundation/documentation/AuthFoundation/TokenInfo": {
   "abstract" : [
     {
       "text" : "Introspected token information.",
@@ -172,7 +180,7 @@
       "text" : "TokenInfo"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/TokenInfo",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/TokenInfo",
   "kind" : "symbol",
   "navigatorTitle" : [
     {
@@ -185,12 +193,9 @@
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/tokeninfo"
 },
-"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/TokenInfo/payload": {
+"doc://AuthFoundation/documentation/AuthFoundation/TokenInfo/payload": {
   "abstract" : [
-    {
-      "text" : "Raw paylaod of claims, as a dictionary representation.",
-      "type" : "text"
-    }
+
   ],
   "fragments" : [
     {
@@ -227,7 +232,7 @@
       "text" : "]"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/TokenInfo\/payload",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/TokenInfo\/payload",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "payload",

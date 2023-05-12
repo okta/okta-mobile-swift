@@ -1,22 +1,30 @@
 {
   "abstract" : [
     {
-      "text" : "No overview available.",
+      "text" : "Inherited from ",
+      "type" : "text"
+    },
+    {
+      "code" : "Equatable.!=(_:_:)",
+      "type" : "codeVoice"
+    },
+    {
+      "text" : ".",
       "type" : "text"
     }
   ],
   "hierarchy" : {
     "paths" : [
       [
-        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation",
-        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/AuthenticationError",
-        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/AuthenticationError\/Equatable-Implementations"
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/AuthenticationError",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/AuthenticationError\/Equatable-Implementations"
       ]
     ]
   },
   "identifier" : {
     "interfaceLanguage" : "swift",
-    "url" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/AuthenticationError\/!=(_:_:)"
+    "url" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/AuthenticationError\/!=(_:_:)"
   },
   "kind" : "symbol",
   "metadata" : {
@@ -167,7 +175,7 @@
   ],
   "schemaVersion" : {
     "major" : 0,
-    "minor" : 2,
+    "minor" : 3,
     "patch" : 0
   },
   "sections" : [
@@ -187,21 +195,21 @@
   ]
 , 
 "references": {
-"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation": {
+"doc://AuthFoundation/documentation/AuthFoundation": {
   "abstract" : [
     {
       "text" : "Library that provides foundational features used by Okta’s authentication libraries, as well as APIs used to work with tokens and user credentials.",
       "type" : "text"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation",
   "kind" : "symbol",
   "role" : "collection",
   "title" : "AuthFoundation",
   "type" : "topic",
   "url" : "\/documentation\/authfoundation"
 },
-"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/AuthenticationError": {
+"doc://AuthFoundation/documentation/AuthFoundation/AuthenticationError": {
   "abstract" : [
     {
       "text" : "Errors that may be generated during the process of authenticating with a variety of authentication flows.",
@@ -222,7 +230,7 @@
       "text" : "AuthenticationError"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/AuthenticationError",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/AuthenticationError",
   "kind" : "symbol",
   "navigatorTitle" : [
     {
@@ -235,7 +243,7 @@
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/authenticationerror"
 },
-"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/AuthenticationError/!=(_:_:)": {
+"doc://AuthFoundation/documentation/AuthFoundation/AuthenticationError/!=(_:_:)": {
   "abstract" : [
 
   ],
@@ -290,18 +298,18 @@
       "text" : "Bool"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/AuthenticationError\/!=(_:_:)",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/AuthenticationError\/!=(_:_:)",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "!=(_:_:)",
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/authenticationerror\/!=(_:_:)"
 },
-"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/AuthenticationError/Equatable-Implementations": {
+"doc://AuthFoundation/documentation/AuthFoundation/AuthenticationError/Equatable-Implementations": {
   "abstract" : [
 
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/AuthenticationError\/Equatable-Implementations",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/AuthenticationError\/Equatable-Implementations",
   "kind" : "article",
   "role" : "collectionGroup",
   "title" : "Equatable Implementations",

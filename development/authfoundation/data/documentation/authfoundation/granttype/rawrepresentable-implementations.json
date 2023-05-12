@@ -1,21 +1,15 @@
 {
-  "abstract" : [
-    {
-      "text" : "No overview available.",
-      "type" : "text"
-    }
-  ],
   "hierarchy" : {
     "paths" : [
       [
-        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation",
-        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/GrantType"
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/GrantType"
       ]
     ]
   },
   "identifier" : {
     "interfaceLanguage" : "swift",
-    "url" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/GrantType\/RawRepresentable-Implementations"
+    "url" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/GrantType\/RawRepresentable-Implementations"
   },
   "kind" : "article",
   "metadata" : {
@@ -29,7 +23,7 @@
   },
   "schemaVersion" : {
     "major" : 0,
-    "minor" : 2,
+    "minor" : 3,
     "patch" : 0
   },
   "sections" : [
@@ -39,31 +33,31 @@
     {
       "generated" : true,
       "identifiers" : [
-        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/GrantType\/init(from:)",
-        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/GrantType\/init(rawValue:)"
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/GrantType\/init(from:)",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/GrantType\/init(rawValue:)"
       ],
       "title" : "Initializers"
     },
     {
       "generated" : true,
       "identifiers" : [
-        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/GrantType\/hashValue",
-        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/GrantType\/rawValue-swift.property"
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/GrantType\/hashValue",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/GrantType\/rawValue-swift.property"
       ],
       "title" : "Instance Properties"
     },
     {
       "generated" : true,
       "identifiers" : [
-        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/GrantType\/encode(to:)",
-        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/GrantType\/hash(into:)"
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/GrantType\/encode(to:)",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/GrantType\/hash(into:)"
       ],
       "title" : "Instance Methods"
     },
     {
       "generated" : true,
       "identifiers" : [
-        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/GrantType\/RawValue-swift.typealias"
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/GrantType\/RawValue-swift.typealias"
       ],
       "title" : "Type Aliases"
     }
@@ -82,21 +76,21 @@
   ]
 , 
 "references": {
-"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation": {
+"doc://AuthFoundation/documentation/AuthFoundation": {
   "abstract" : [
     {
       "text" : "Library that provides foundational features used by Okta’s authentication libraries, as well as APIs used to work with tokens and user credentials.",
       "type" : "text"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation",
   "kind" : "symbol",
   "role" : "collection",
   "title" : "AuthFoundation",
   "type" : "topic",
   "url" : "\/documentation\/authfoundation"
 },
-"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/GrantType": {
+"doc://AuthFoundation/documentation/AuthFoundation/GrantType": {
   "abstract" : [
 
   ],
@@ -114,7 +108,7 @@
       "text" : "GrantType"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/GrantType",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/GrantType",
   "kind" : "symbol",
   "navigatorTitle" : [
     {
@@ -127,20 +121,9 @@
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/granttype"
 },
-"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/GrantType/RawValue-swift.typealias": {
+"doc://AuthFoundation/documentation/AuthFoundation/GrantType/RawValue-swift.typealias": {
   "abstract" : [
-    {
-      "text" : "The raw type that can be used to represent all values of the conforming",
-      "type" : "text"
-    },
-    {
-      "text" : " ",
-      "type" : "text"
-    },
-    {
-      "text" : "type.",
-      "type" : "text"
-    }
+
   ],
   "fragments" : [
     {
@@ -156,7 +139,7 @@
       "text" : "RawValue"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/GrantType\/RawValue-swift.typealias",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/GrantType\/RawValue-swift.typealias",
   "kind" : "symbol",
   "navigatorTitle" : [
     {
@@ -169,32 +152,9 @@
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/granttype\/rawvalue-swift.typealias"
 },
-"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/GrantType/encode(to:)": {
+"doc://AuthFoundation/documentation/AuthFoundation/GrantType/encode(to:)": {
   "abstract" : [
-    {
-      "text" : "Encodes this value into the given encoder, when the type’s ",
-      "type" : "text"
-    },
-    {
-      "code" : "RawValue",
-      "type" : "codeVoice"
-    },
-    {
-      "text" : " ",
-      "type" : "text"
-    },
-    {
-      "text" : "is ",
-      "type" : "text"
-    },
-    {
-      "code" : "String",
-      "type" : "codeVoice"
-    },
-    {
-      "text" : ".",
-      "type" : "text"
-    }
+
   ],
   "conformance" : {
     "availabilityPrefix" : [
@@ -283,14 +243,14 @@
       "text" : "throws"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/GrantType\/encode(to:)",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/GrantType\/encode(to:)",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "encode(to:)",
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/granttype\/encode(to:)"
 },
-"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/GrantType/hash(into:)": {
+"doc://AuthFoundation/documentation/AuthFoundation/GrantType/hash(into:)": {
   "abstract" : [
 
   ],
@@ -385,14 +345,14 @@
       "text" : ")"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/GrantType\/hash(into:)",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/GrantType\/hash(into:)",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "hash(into:)",
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/granttype\/hash(into:)"
 },
-"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/GrantType/hashValue": {
+"doc://AuthFoundation/documentation/AuthFoundation/GrantType/hashValue": {
   "abstract" : [
 
   ],
@@ -467,43 +427,16 @@
       "text" : "Int"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/GrantType\/hashValue",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/GrantType\/hashValue",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "hashValue",
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/granttype\/hashvalue"
 },
-"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/GrantType/init(from:)": {
+"doc://AuthFoundation/documentation/AuthFoundation/GrantType/init(from:)": {
   "abstract" : [
-    {
-      "text" : "Creates a new instance by decoding from the given decoder, when the",
-      "type" : "text"
-    },
-    {
-      "text" : " ",
-      "type" : "text"
-    },
-    {
-      "text" : "type’s ",
-      "type" : "text"
-    },
-    {
-      "code" : "RawValue",
-      "type" : "codeVoice"
-    },
-    {
-      "text" : " is ",
-      "type" : "text"
-    },
-    {
-      "code" : "String",
-      "type" : "codeVoice"
-    },
-    {
-      "text" : ".",
-      "type" : "text"
-    }
+
   ],
   "conformance" : {
     "availabilityPrefix" : [
@@ -584,19 +517,16 @@
       "text" : "throws"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/GrantType\/init(from:)",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/GrantType\/init(from:)",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "init(from:)",
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/granttype\/init(from:)"
 },
-"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/GrantType/init(rawValue:)": {
+"doc://AuthFoundation/documentation/AuthFoundation/GrantType/init(rawValue:)": {
   "abstract" : [
-    {
-      "text" : "Creates a new instance with the specified raw value.",
-      "type" : "text"
-    }
+
   ],
   "fragments" : [
     {
@@ -625,19 +555,16 @@
       "text" : ")"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/GrantType\/init(rawValue:)",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/GrantType\/init(rawValue:)",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "init(rawValue:)",
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/granttype\/init(rawvalue:)"
 },
-"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/GrantType/rawValue-swift.property": {
+"doc://AuthFoundation/documentation/AuthFoundation/GrantType/rawValue-swift.property": {
   "abstract" : [
-    {
-      "text" : "The corresponding value of the raw type.",
-      "type" : "text"
-    }
+
   ],
   "fragments" : [
     {
@@ -662,7 +589,7 @@
       "text" : "String"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/GrantType\/rawValue-swift.property",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/GrantType\/rawValue-swift.property",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "rawValue",

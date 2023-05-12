@@ -8,14 +8,14 @@
   "hierarchy" : {
     "paths" : [
       [
-        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation",
-        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/TokenStorage"
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/TokenStorage"
       ]
     ]
   },
   "identifier" : {
     "interfaceLanguage" : "swift",
-    "url" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/TokenStorage\/remove(id:)"
+    "url" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/TokenStorage\/remove(id:)"
   },
   "kind" : "symbol",
   "metadata" : {
@@ -140,7 +140,7 @@
                   "type" : "text"
                 },
                 {
-                  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/TokenStorageDelegate\/token(storage:removed:)",
+                  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/TokenStorageDelegate\/token(storage:removed:)",
                   "isActive" : true,
                   "type" : "reference"
                 },
@@ -152,6 +152,7 @@
               "type" : "paragraph"
             }
           ],
+          "name" : "Note",
           "style" : "note",
           "type" : "aside"
         }
@@ -161,7 +162,7 @@
   ],
   "schemaVersion" : {
     "major" : 0,
-    "minor" : 2,
+    "minor" : 3,
     "patch" : 0
   },
   "sections" : [
@@ -181,21 +182,21 @@
   ]
 , 
 "references": {
-"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation": {
+"doc://AuthFoundation/documentation/AuthFoundation": {
   "abstract" : [
     {
       "text" : "Library that provides foundational features used by Okta’s authentication libraries, as well as APIs used to work with tokens and user credentials.",
       "type" : "text"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation",
   "kind" : "symbol",
   "role" : "collection",
   "title" : "AuthFoundation",
   "type" : "topic",
   "url" : "\/documentation\/authfoundation"
 },
-"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/TokenStorage": {
+"doc://AuthFoundation/documentation/AuthFoundation/TokenStorage": {
   "abstract" : [
     {
       "text" : "Protocol used to customize the way tokens are stored, updated, and removed throughout the lifecycle of an application.",
@@ -216,7 +217,7 @@
       "text" : "TokenStorage"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/TokenStorage",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/TokenStorage",
   "kind" : "symbol",
   "navigatorTitle" : [
     {
@@ -229,7 +230,7 @@
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/tokenstorage"
 },
-"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/TokenStorage/remove(id:)": {
+"doc://AuthFoundation/documentation/AuthFoundation/TokenStorage/remove(id:)": {
   "abstract" : [
     {
       "text" : "Removes the given token.",
@@ -275,7 +276,7 @@
       "text" : "throws"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/TokenStorage\/remove(id:)",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/TokenStorage\/remove(id:)",
   "kind" : "symbol",
   "required" : true,
   "role" : "symbol",
@@ -283,7 +284,7 @@
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/tokenstorage\/remove(id:)"
 },
-"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/TokenStorageDelegate/token(storage:removed:)": {
+"doc://AuthFoundation/documentation/AuthFoundation/TokenStorageDelegate/token(storage:removed:)": {
   "abstract" : [
     {
       "text" : "Sent when a token has been removed from storage.",
@@ -342,7 +343,7 @@
       "text" : ")"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/TokenStorageDelegate\/token(storage:removed:)",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/TokenStorageDelegate\/token(storage:removed:)",
   "kind" : "symbol",
   "required" : true,
   "role" : "symbol",

@@ -8,14 +8,14 @@
   "hierarchy" : {
     "paths" : [
       [
-        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation",
-        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/Keychain"
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/Keychain"
       ]
     ]
   },
   "identifier" : {
     "interfaceLanguage" : "swift",
-    "url" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/Keychain\/Search"
+    "url" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/Keychain\/Search"
   },
   "kind" : "symbol",
   "metadata" : {
@@ -81,7 +81,7 @@
   ],
   "schemaVersion" : {
     "major" : 0,
-    "minor" : 2,
+    "minor" : 3,
     "patch" : 0
   },
   "sections" : [
@@ -90,30 +90,30 @@
   "topicSections" : [
     {
       "identifiers" : [
-        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/Keychain\/Search\/Result"
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/Keychain\/Search\/Result"
       ],
       "title" : "Structures"
     },
     {
       "identifiers" : [
-        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/Keychain\/Search\/init(account:service:server:accessGroup:)"
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/Keychain\/Search\/init(account:service:server:accessGroup:)"
       ],
       "title" : "Initializers"
     },
     {
       "identifiers" : [
-        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/Keychain\/Search\/accessGroup",
-        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/Keychain\/Search\/account",
-        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/Keychain\/Search\/server",
-        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/Keychain\/Search\/service"
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/Keychain\/Search\/accessGroup",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/Keychain\/Search\/account",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/Keychain\/Search\/server",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/Keychain\/Search\/service"
       ],
       "title" : "Instance Properties"
     },
     {
       "identifiers" : [
-        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/Keychain\/Search\/delete()",
-        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/Keychain\/Search\/get(prompt:authenticationContext:)",
-        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/Keychain\/Search\/list()"
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/Keychain\/Search\/delete()",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/Keychain\/Search\/get(prompt:authenticationContext:)",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/Keychain\/Search\/list()"
       ],
       "title" : "Instance Methods"
     }
@@ -132,21 +132,21 @@
   ]
 , 
 "references": {
-"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation": {
+"doc://AuthFoundation/documentation/AuthFoundation": {
   "abstract" : [
     {
       "text" : "Library that provides foundational features used by Okta’s authentication libraries, as well as APIs used to work with tokens and user credentials.",
       "type" : "text"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation",
   "kind" : "symbol",
   "role" : "collection",
   "title" : "AuthFoundation",
   "type" : "topic",
   "url" : "\/documentation\/authfoundation"
 },
-"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/Keychain": {
+"doc://AuthFoundation/documentation/AuthFoundation/Keychain": {
   "abstract" : [
     {
       "text" : "Defines convenience mechanisms for interacting with the keychain, including searching, creating, and deleting keychain items.",
@@ -167,7 +167,7 @@
       "text" : "Keychain"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/Keychain",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/Keychain",
   "kind" : "symbol",
   "navigatorTitle" : [
     {
@@ -180,7 +180,7 @@
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/keychain"
 },
-"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/Keychain/Search": {
+"doc://AuthFoundation/documentation/AuthFoundation/Keychain/Search": {
   "abstract" : [
     {
       "text" : "Defines a search for keychain items.",
@@ -201,7 +201,7 @@
       "text" : "Search"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/Keychain\/Search",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/Keychain\/Search",
   "kind" : "symbol",
   "navigatorTitle" : [
     {
@@ -214,7 +214,7 @@
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/keychain\/search"
 },
-"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/Keychain/Search/Result": {
+"doc://AuthFoundation/documentation/AuthFoundation/Keychain/Search/Result": {
   "abstract" : [
     {
       "text" : "An individual result within a keychain search.",
@@ -235,7 +235,7 @@
       "text" : "Result"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/Keychain\/Search\/Result",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/Keychain\/Search\/Result",
   "kind" : "symbol",
   "navigatorTitle" : [
     {
@@ -248,7 +248,7 @@
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/keychain\/search\/result"
 },
-"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/Keychain/Search/accessGroup": {
+"doc://AuthFoundation/documentation/AuthFoundation/Keychain/Search/accessGroup": {
   "abstract" : [
     {
       "text" : "The access group the items returned should be stored in.",
@@ -282,14 +282,14 @@
       "text" : "?"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/Keychain\/Search\/accessGroup",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/Keychain\/Search\/accessGroup",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "accessGroup",
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/keychain\/search\/accessgroup"
 },
-"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/Keychain/Search/account": {
+"doc://AuthFoundation/documentation/AuthFoundation/Keychain/Search/account": {
   "abstract" : [
     {
       "text" : "The account ID or key to use for searching.",
@@ -323,14 +323,14 @@
       "text" : "?"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/Keychain\/Search\/account",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/Keychain\/Search\/account",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "account",
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/keychain\/search\/account"
 },
-"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/Keychain/Search/delete()": {
+"doc://AuthFoundation/documentation/AuthFoundation/Keychain/Search/delete()": {
   "abstract" : [
     {
       "text" : "Deletes all items mathcing this search.",
@@ -359,14 +359,14 @@
       "text" : "throws"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/Keychain\/Search\/delete()",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/Keychain\/Search\/delete()",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "delete()",
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/keychain\/search\/delete()"
 },
-"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/Keychain/Search/get(prompt:authenticationContext:)": {
+"doc://AuthFoundation/documentation/AuthFoundation/Keychain/Search/get(prompt:authenticationContext:)": {
   "abstract" : [
     {
       "text" : "Gets the first item matching this search criteria.",
@@ -434,18 +434,27 @@
     },
     {
       "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:14AuthFoundation8KeychainV",
+      "text" : "Keychain"
+    },
+    {
+      "kind" : "text",
+      "text" : "."
+    },
+    {
+      "kind" : "typeIdentifier",
       "preciseIdentifier" : "s:14AuthFoundation8KeychainV4ItemV",
       "text" : "Item"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/Keychain\/Search\/get(prompt:authenticationContext:)",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/Keychain\/Search\/get(prompt:authenticationContext:)",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "get(prompt:authenticationContext:)",
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/keychain\/search\/get(prompt:authenticationcontext:)"
 },
-"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/Keychain/Search/init(account:service:server:accessGroup:)": {
+"doc://AuthFoundation/documentation/AuthFoundation/Keychain/Search/init(account:service:server:accessGroup:)": {
   "abstract" : [
     {
       "text" : "Designated initializer.",
@@ -530,14 +539,14 @@
       "text" : "?)"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/Keychain\/Search\/init(account:service:server:accessGroup:)",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/Keychain\/Search\/init(account:service:server:accessGroup:)",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "init(account:service:server:accessGroup:)",
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/keychain\/search\/init(account:service:server:accessgroup:)"
 },
-"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/Keychain/Search/list()": {
+"doc://AuthFoundation/documentation/AuthFoundation/Keychain/Search/list()": {
   "abstract" : [
     {
       "text" : "Returns the list of keychain items matching this search criteria.",
@@ -571,6 +580,24 @@
     },
     {
       "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:14AuthFoundation8KeychainV",
+      "text" : "Keychain"
+    },
+    {
+      "kind" : "text",
+      "text" : "."
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:14AuthFoundation8KeychainV6SearchV",
+      "text" : "Search"
+    },
+    {
+      "kind" : "text",
+      "text" : "."
+    },
+    {
+      "kind" : "typeIdentifier",
       "preciseIdentifier" : "s:14AuthFoundation8KeychainV6SearchV6ResultV",
       "text" : "Result"
     },
@@ -579,14 +606,14 @@
       "text" : "]"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/Keychain\/Search\/list()",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/Keychain\/Search\/list()",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "list()",
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/keychain\/search\/list()"
 },
-"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/Keychain/Search/server": {
+"doc://AuthFoundation/documentation/AuthFoundation/Keychain/Search/server": {
   "abstract" : [
     {
       "text" : "The server the various accounts are grouped within.",
@@ -620,14 +647,14 @@
       "text" : "?"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/Keychain\/Search\/server",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/Keychain\/Search\/server",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "server",
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/keychain\/search\/server"
 },
-"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/Keychain/Search/service": {
+"doc://AuthFoundation/documentation/AuthFoundation/Keychain/Search/service": {
   "abstract" : [
     {
       "text" : "The service name the various accounts are grouped within.",
@@ -661,7 +688,7 @@
       "text" : "?"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/Keychain\/Search\/service",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/Keychain\/Search\/service",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "service",

@@ -1,22 +1,30 @@
 {
   "abstract" : [
     {
-      "text" : "A localized message describing what error occurred.",
+      "text" : "Inherited from ",
+      "type" : "text"
+    },
+    {
+      "code" : "LocalizedError.errorDescription",
+      "type" : "codeVoice"
+    },
+    {
+      "text" : ".",
       "type" : "text"
     }
   ],
   "hierarchy" : {
     "paths" : [
       [
-        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation",
-        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/OAuth2ServerError",
-        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/OAuth2ServerError\/LocalizedError-Implementations"
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/OAuth2ServerError",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/OAuth2ServerError\/LocalizedError-Implementations"
       ]
     ]
   },
   "identifier" : {
     "interfaceLanguage" : "swift",
-    "url" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/OAuth2ServerError\/errorDescription-3vcs"
+    "url" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/OAuth2ServerError\/errorDescription-3vcs"
   },
   "kind" : "symbol",
   "metadata" : {
@@ -111,7 +119,7 @@
   ],
   "schemaVersion" : {
     "major" : 0,
-    "minor" : 2,
+    "minor" : 3,
     "patch" : 0
   },
   "sections" : [
@@ -131,21 +139,21 @@
   ]
 , 
 "references": {
-"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation": {
+"doc://AuthFoundation/documentation/AuthFoundation": {
   "abstract" : [
     {
       "text" : "Library that provides foundational features used by Okta’s authentication libraries, as well as APIs used to work with tokens and user credentials.",
       "type" : "text"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation",
   "kind" : "symbol",
   "role" : "collection",
   "title" : "AuthFoundation",
   "type" : "topic",
   "url" : "\/documentation\/authfoundation"
 },
-"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/OAuth2ServerError": {
+"doc://AuthFoundation/documentation/AuthFoundation/OAuth2ServerError": {
   "abstract" : [
     {
       "text" : "Describes errors reported from an OAuth2 server.",
@@ -166,7 +174,7 @@
       "text" : "OAuth2ServerError"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/OAuth2ServerError",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/OAuth2ServerError",
   "kind" : "symbol",
   "navigatorTitle" : [
     {
@@ -179,23 +187,20 @@
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/oauth2servererror"
 },
-"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/OAuth2ServerError/LocalizedError-Implementations": {
+"doc://AuthFoundation/documentation/AuthFoundation/OAuth2ServerError/LocalizedError-Implementations": {
   "abstract" : [
 
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/OAuth2ServerError\/LocalizedError-Implementations",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/OAuth2ServerError\/LocalizedError-Implementations",
   "kind" : "article",
   "role" : "collectionGroup",
   "title" : "LocalizedError Implementations",
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/oauth2servererror\/localizederror-implementations"
 },
-"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/OAuth2ServerError/errorDescription-3vcs": {
+"doc://AuthFoundation/documentation/AuthFoundation/OAuth2ServerError/errorDescription-3vcs": {
   "abstract" : [
-    {
-      "text" : "A localized message describing what error occurred.",
-      "type" : "text"
-    }
+
   ],
   "fragments" : [
     {
@@ -224,7 +229,7 @@
       "text" : "?"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/OAuth2ServerError\/errorDescription-3vcs",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/OAuth2ServerError\/errorDescription-3vcs",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "errorDescription",

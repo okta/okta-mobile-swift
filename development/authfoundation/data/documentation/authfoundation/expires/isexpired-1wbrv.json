@@ -8,7 +8,7 @@
   "defaultImplementationsSections" : [
     {
       "identifiers" : [
-        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/Expires\/isExpired-zfoq"
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/Expires\/isExpired-zfoq"
       ],
       "title" : "Expires Implementations"
     }
@@ -16,14 +16,14 @@
   "hierarchy" : {
     "paths" : [
       [
-        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation",
-        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/Expires"
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/Expires"
       ]
     ]
   },
   "identifier" : {
     "interfaceLanguage" : "swift",
-    "url" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/Expires\/isExpired-1wbrv"
+    "url" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/Expires\/isExpired-1wbrv"
   },
   "kind" : "symbol",
   "metadata" : {
@@ -114,7 +114,7 @@
   ],
   "schemaVersion" : {
     "major" : 0,
-    "minor" : 2,
+    "minor" : 3,
     "patch" : 0
   },
   "sections" : [
@@ -134,21 +134,21 @@
   ]
 , 
 "references": {
-"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation": {
+"doc://AuthFoundation/documentation/AuthFoundation": {
   "abstract" : [
     {
       "text" : "Library that provides foundational features used by Okta’s authentication libraries, as well as APIs used to work with tokens and user credentials.",
       "type" : "text"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation",
   "kind" : "symbol",
   "role" : "collection",
   "title" : "AuthFoundation",
   "type" : "topic",
   "url" : "\/documentation\/authfoundation"
 },
-"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/Expires": {
+"doc://AuthFoundation/documentation/AuthFoundation/Expires": {
   "abstract" : [
     {
       "text" : "Protocol that indicates an object is capable of expiring.",
@@ -169,7 +169,7 @@
       "text" : "Expires"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/Expires",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/Expires",
   "kind" : "symbol",
   "navigatorTitle" : [
     {
@@ -182,7 +182,7 @@
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/expires"
 },
-"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/Expires/isExpired-1wbrv": {
+"doc://AuthFoundation/documentation/AuthFoundation/Expires/isExpired-1wbrv": {
   "abstract" : [
     {
       "text" : "Indicates if this object has expired.",
@@ -213,7 +213,7 @@
       "text" : "Bool"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/Expires\/isExpired-1wbrv",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/Expires\/isExpired-1wbrv",
   "kind" : "symbol",
   "required" : true,
   "role" : "symbol",
@@ -221,12 +221,9 @@
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/expires\/isexpired-1wbrv"
 },
-"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/Expires/isExpired-zfoq": {
+"doc://AuthFoundation/documentation/AuthFoundation/Expires/isExpired-zfoq": {
   "abstract" : [
-    {
-      "text" : "Indicates if this object has expired.",
-      "type" : "text"
-    }
+
   ],
   "fragments" : [
     {
@@ -251,7 +248,7 @@
       "text" : "Bool"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/Expires\/isExpired-zfoq",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/Expires\/isExpired-zfoq",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "isExpired",

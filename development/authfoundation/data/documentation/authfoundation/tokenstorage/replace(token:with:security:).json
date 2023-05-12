@@ -8,14 +8,14 @@
   "hierarchy" : {
     "paths" : [
       [
-        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation",
-        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/TokenStorage"
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/TokenStorage"
       ]
     ]
   },
   "identifier" : {
     "interfaceLanguage" : "swift",
-    "url" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/TokenStorage\/replace(token:with:security:)"
+    "url" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/TokenStorage\/replace(token:with:security:)"
   },
   "kind" : "symbol",
   "metadata" : {
@@ -182,7 +182,7 @@
               "text" : ": "
             },
             {
-              "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/Token",
+              "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/Token",
               "kind" : "typeIdentifier",
               "preciseIdentifier" : "s:14AuthFoundation5TokenC",
               "text" : "Token"
@@ -200,7 +200,7 @@
               "text" : ": ["
             },
             {
-              "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/Credential",
+              "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/Credential",
               "kind" : "typeIdentifier",
               "preciseIdentifier" : "s:14AuthFoundation10CredentialC",
               "text" : "Credential"
@@ -210,7 +210,7 @@
               "text" : "."
             },
             {
-              "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/Credential\/Security",
+              "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/Credential\/Security",
               "kind" : "typeIdentifier",
               "preciseIdentifier" : "s:14AuthFoundation10CredentialC8SecurityO",
               "text" : "Security"
@@ -254,7 +254,7 @@
                   "type" : "text"
                 },
                 {
-                  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/TokenStorageDelegate\/token(storage:replaced:with:)",
+                  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/TokenStorageDelegate\/token(storage:replaced:with:)",
                   "isActive" : true,
                   "type" : "reference"
                 },
@@ -263,7 +263,7 @@
                   "type" : "text"
                 },
                 {
-                  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/TokenStorageDelegate\/token(storage:defaultChanged:)",
+                  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/TokenStorageDelegate\/token(storage:defaultChanged:)",
                   "isActive" : true,
                   "type" : "reference"
                 },
@@ -275,6 +275,7 @@
               "type" : "paragraph"
             }
           ],
+          "name" : "Note",
           "style" : "note",
           "type" : "aside"
         }
@@ -284,7 +285,7 @@
   ],
   "schemaVersion" : {
     "major" : 0,
-    "minor" : 2,
+    "minor" : 3,
     "patch" : 0
   },
   "sections" : [
@@ -304,21 +305,21 @@
   ]
 , 
 "references": {
-"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation": {
+"doc://AuthFoundation/documentation/AuthFoundation": {
   "abstract" : [
     {
       "text" : "Library that provides foundational features used by Okta’s authentication libraries, as well as APIs used to work with tokens and user credentials.",
       "type" : "text"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation",
   "kind" : "symbol",
   "role" : "collection",
   "title" : "AuthFoundation",
   "type" : "topic",
   "url" : "\/documentation\/authfoundation"
 },
-"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/Credential": {
+"doc://AuthFoundation/documentation/AuthFoundation/Credential": {
   "abstract" : [
     {
       "text" : "Convenience object that provides methods and properties for using a user’s authentication tokens.",
@@ -339,7 +340,7 @@
       "text" : "Credential"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/Credential",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/Credential",
   "kind" : "symbol",
   "navigatorTitle" : [
     {
@@ -352,7 +353,7 @@
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/credential"
 },
-"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/Credential/Security": {
+"doc://AuthFoundation/documentation/AuthFoundation/Credential/Security": {
   "abstract" : [
     {
       "text" : "Defines the security options that are applicable to individual credentials.",
@@ -373,7 +374,7 @@
       "text" : "Security"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/Credential\/Security",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/Credential\/Security",
   "kind" : "symbol",
   "navigatorTitle" : [
     {
@@ -386,7 +387,7 @@
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/credential\/security"
 },
-"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/Token": {
+"doc://AuthFoundation/documentation/AuthFoundation/Token": {
   "abstract" : [
     {
       "text" : "Token information representing a user’s access to a resource server, including access token, refresh token, and other related information.",
@@ -407,7 +408,7 @@
       "text" : "Token"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/Token",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/Token",
   "kind" : "symbol",
   "navigatorTitle" : [
     {
@@ -420,7 +421,7 @@
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/token"
 },
-"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/TokenStorage": {
+"doc://AuthFoundation/documentation/AuthFoundation/TokenStorage": {
   "abstract" : [
     {
       "text" : "Protocol used to customize the way tokens are stored, updated, and removed throughout the lifecycle of an application.",
@@ -441,7 +442,7 @@
       "text" : "TokenStorage"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/TokenStorage",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/TokenStorage",
   "kind" : "symbol",
   "navigatorTitle" : [
     {
@@ -454,7 +455,7 @@
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/tokenstorage"
 },
-"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/TokenStorage/replace(token:with:security:)": {
+"doc://AuthFoundation/documentation/AuthFoundation/TokenStorage/replace(token:with:security:)": {
   "abstract" : [
     {
       "text" : "Replaces an existing token with a new one.",
@@ -543,7 +544,7 @@
       "text" : "throws"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/TokenStorage\/replace(token:with:security:)",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/TokenStorage\/replace(token:with:security:)",
   "kind" : "symbol",
   "required" : true,
   "role" : "symbol",
@@ -551,7 +552,7 @@
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/tokenstorage\/replace(token:with:security:)"
 },
-"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/TokenStorageDelegate/token(storage:defaultChanged:)": {
+"doc://AuthFoundation/documentation/AuthFoundation/TokenStorageDelegate/token(storage:defaultChanged:)": {
   "abstract" : [
     {
       "text" : "Sent when the default token has been changed.",
@@ -610,7 +611,7 @@
       "text" : "?)"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/TokenStorageDelegate\/token(storage:defaultChanged:)",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/TokenStorageDelegate\/token(storage:defaultChanged:)",
   "kind" : "symbol",
   "required" : true,
   "role" : "symbol",
@@ -618,7 +619,7 @@
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/tokenstoragedelegate\/token(storage:defaultchanged:)"
 },
-"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/TokenStorageDelegate/token(storage:replaced:with:)": {
+"doc://AuthFoundation/documentation/AuthFoundation/TokenStorageDelegate/token(storage:replaced:with:)": {
   "abstract" : [
     {
       "text" : "Sent when a token has been updated within storage.",
@@ -694,7 +695,7 @@
       "text" : ")"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/TokenStorageDelegate\/token(storage:replaced:with:)",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/TokenStorageDelegate\/token(storage:replaced:with:)",
   "kind" : "symbol",
   "required" : true,
   "role" : "symbol",

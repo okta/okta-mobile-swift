@@ -1,23 +1,31 @@
 {
   "abstract" : [
     {
-      "text" : "The corresponding value of the raw type.",
+      "text" : "Inherited from ",
+      "type" : "text"
+    },
+    {
+      "code" : "RawRepresentable.rawValue",
+      "type" : "codeVoice"
+    },
+    {
+      "text" : ".",
       "type" : "text"
     }
   ],
   "hierarchy" : {
     "paths" : [
       [
-        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation",
-        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/OAuth2ServerError",
-        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/OAuth2ServerError\/Code-swift.enum",
-        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/OAuth2ServerError\/Code-swift.enum\/RawRepresentable-Implementations"
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/OAuth2ServerError",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/OAuth2ServerError\/Code-swift.enum",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/OAuth2ServerError\/Code-swift.enum\/RawRepresentable-Implementations"
       ]
     ]
   },
   "identifier" : {
     "interfaceLanguage" : "swift",
-    "url" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/OAuth2ServerError\/Code-swift.enum\/rawValue-swift.property"
+    "url" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/OAuth2ServerError\/Code-swift.enum\/rawValue-swift.property"
   },
   "kind" : "symbol",
   "metadata" : {
@@ -104,63 +112,11 @@
         }
       ],
       "kind" : "declarations"
-    },
-    {
-      "content" : [
-        {
-          "anchor" : "discussion",
-          "level" : 2,
-          "text" : "Discussion",
-          "type" : "heading"
-        },
-        {
-          "inlineContent" : [
-            {
-              "text" : "A new instance initialized with ",
-              "type" : "text"
-            },
-            {
-              "code" : "rawValue",
-              "type" : "codeVoice"
-            },
-            {
-              "text" : " will be equivalent to this",
-              "type" : "text"
-            },
-            {
-              "text" : " ",
-              "type" : "text"
-            },
-            {
-              "text" : "instance. For example:",
-              "type" : "text"
-            }
-          ],
-          "type" : "paragraph"
-        },
-        {
-          "code" : [
-            "enum PaperSize: String {",
-            "    case A4, A5, Letter, Legal",
-            "}",
-            "",
-            "let selectedSize = PaperSize.Letter",
-            "print(selectedSize.rawValue)",
-            "\/\/ Prints \"Letter\"",
-            "",
-            "print(selectedSize == PaperSize(rawValue: selectedSize.rawValue)!)",
-            "\/\/ Prints \"true\""
-          ],
-          "syntax" : null,
-          "type" : "codeListing"
-        }
-      ],
-      "kind" : "content"
     }
   ],
   "schemaVersion" : {
     "major" : 0,
-    "minor" : 2,
+    "minor" : 3,
     "patch" : 0
   },
   "sections" : [
@@ -180,21 +136,21 @@
   ]
 , 
 "references": {
-"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation": {
+"doc://AuthFoundation/documentation/AuthFoundation": {
   "abstract" : [
     {
       "text" : "Library that provides foundational features used by Okta’s authentication libraries, as well as APIs used to work with tokens and user credentials.",
       "type" : "text"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation",
   "kind" : "symbol",
   "role" : "collection",
   "title" : "AuthFoundation",
   "type" : "topic",
   "url" : "\/documentation\/authfoundation"
 },
-"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/OAuth2ServerError": {
+"doc://AuthFoundation/documentation/AuthFoundation/OAuth2ServerError": {
   "abstract" : [
     {
       "text" : "Describes errors reported from an OAuth2 server.",
@@ -215,7 +171,7 @@
       "text" : "OAuth2ServerError"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/OAuth2ServerError",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/OAuth2ServerError",
   "kind" : "symbol",
   "navigatorTitle" : [
     {
@@ -228,7 +184,7 @@
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/oauth2servererror"
 },
-"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/OAuth2ServerError/Code-swift.enum": {
+"doc://AuthFoundation/documentation/AuthFoundation/OAuth2ServerError/Code-swift.enum": {
   "abstract" : [
     {
       "text" : "Possible  OAuth 2.0 server error code",
@@ -249,7 +205,7 @@
       "text" : "Code"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/OAuth2ServerError\/Code-swift.enum",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/OAuth2ServerError\/Code-swift.enum",
   "kind" : "symbol",
   "navigatorTitle" : [
     {
@@ -262,23 +218,20 @@
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/oauth2servererror\/code-swift.enum"
 },
-"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/OAuth2ServerError/Code-swift.enum/RawRepresentable-Implementations": {
+"doc://AuthFoundation/documentation/AuthFoundation/OAuth2ServerError/Code-swift.enum/RawRepresentable-Implementations": {
   "abstract" : [
 
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/OAuth2ServerError\/Code-swift.enum\/RawRepresentable-Implementations",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/OAuth2ServerError\/Code-swift.enum\/RawRepresentable-Implementations",
   "kind" : "article",
   "role" : "collectionGroup",
   "title" : "RawRepresentable Implementations",
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/oauth2servererror\/code-swift.enum\/rawrepresentable-implementations"
 },
-"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/OAuth2ServerError/Code-swift.enum/rawValue-swift.property": {
+"doc://AuthFoundation/documentation/AuthFoundation/OAuth2ServerError/Code-swift.enum/rawValue-swift.property": {
   "abstract" : [
-    {
-      "text" : "The corresponding value of the raw type.",
-      "type" : "text"
-    }
+
   ],
   "fragments" : [
     {
@@ -303,7 +256,7 @@
       "text" : "String"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/OAuth2ServerError\/Code-swift.enum\/rawValue-swift.property",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/OAuth2ServerError\/Code-swift.enum\/rawValue-swift.property",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "rawValue",

@@ -1,22 +1,30 @@
 {
   "abstract" : [
     {
-      "text" : "Creates a new instance with the specified raw value.",
+      "text" : "Inherited from ",
+      "type" : "text"
+    },
+    {
+      "code" : "RawRepresentable.init(rawValue:)",
+      "type" : "codeVoice"
+    },
+    {
+      "text" : ".",
       "type" : "text"
     }
   ],
   "hierarchy" : {
     "paths" : [
       [
-        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation",
-        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/APIResponse",
-        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/APIResponse\/Link"
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/APIResponse",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/APIResponse\/Link"
       ]
     ]
   },
   "identifier" : {
     "interfaceLanguage" : "swift",
-    "url" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/APIResponse\/Link\/init(rawValue:)"
+    "url" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/APIResponse\/Link\/init(rawValue:)"
   },
   "kind" : "symbol",
   "metadata" : {
@@ -98,81 +106,11 @@
         }
       ],
       "kind" : "declarations"
-    },
-    {
-      "kind" : "parameters",
-      "parameters" : [
-        {
-          "content" : [
-            {
-              "inlineContent" : [
-                {
-                  "text" : "The raw value to use for the new instance.",
-                  "type" : "text"
-                }
-              ],
-              "type" : "paragraph"
-            }
-          ],
-          "name" : "rawValue"
-        }
-      ]
-    },
-    {
-      "content" : [
-        {
-          "anchor" : "discussion",
-          "level" : 2,
-          "text" : "Discussion",
-          "type" : "heading"
-        },
-        {
-          "inlineContent" : [
-            {
-              "text" : "If there is no value of the type that corresponds with the specified raw",
-              "type" : "text"
-            },
-            {
-              "text" : " ",
-              "type" : "text"
-            },
-            {
-              "text" : "value, this initializer returns ",
-              "type" : "text"
-            },
-            {
-              "code" : "nil",
-              "type" : "codeVoice"
-            },
-            {
-              "text" : ". For example:",
-              "type" : "text"
-            }
-          ],
-          "type" : "paragraph"
-        },
-        {
-          "code" : [
-            "enum PaperSize: String {",
-            "    case A4, A5, Letter, Legal",
-            "}",
-            "",
-            "print(PaperSize(rawValue: \"Legal\"))",
-            "\/\/ Prints \"Optional(\"PaperSize.Legal\")\"",
-            "",
-            "print(PaperSize(rawValue: \"Tabloid\"))",
-            "\/\/ Prints \"nil\""
-          ],
-          "syntax" : null,
-          "type" : "codeListing"
-        }
-      ],
-      "kind" : "content"
     }
   ],
   "schemaVersion" : {
     "major" : 0,
-    "minor" : 2,
+    "minor" : 3,
     "patch" : 0
   },
   "sections" : [
@@ -192,21 +130,21 @@
   ]
 , 
 "references": {
-"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation": {
+"doc://AuthFoundation/documentation/AuthFoundation": {
   "abstract" : [
     {
       "text" : "Library that provides foundational features used by Okta’s authentication libraries, as well as APIs used to work with tokens and user credentials.",
       "type" : "text"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation",
   "kind" : "symbol",
   "role" : "collection",
   "title" : "AuthFoundation",
   "type" : "topic",
   "url" : "\/documentation\/authfoundation"
 },
-"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/APIResponse": {
+"doc://AuthFoundation/documentation/AuthFoundation/APIResponse": {
   "abstract" : [
     {
       "text" : "Describes a response from an Okta request, which includes the supplied result, and other associated response metadata.",
@@ -227,7 +165,7 @@
       "text" : "APIResponse"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/APIResponse",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/APIResponse",
   "kind" : "symbol",
   "navigatorTitle" : [
     {
@@ -240,7 +178,7 @@
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/apiresponse"
 },
-"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/APIResponse/Link": {
+"doc://AuthFoundation/documentation/AuthFoundation/APIResponse/Link": {
   "abstract" : [
     {
       "text" : "Links between response resources.",
@@ -261,7 +199,7 @@
       "text" : "Link"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/APIResponse\/Link",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/APIResponse\/Link",
   "kind" : "symbol",
   "navigatorTitle" : [
     {
@@ -274,12 +212,9 @@
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/apiresponse\/link"
 },
-"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/APIResponse/Link/init(rawValue:)": {
+"doc://AuthFoundation/documentation/AuthFoundation/APIResponse/Link/init(rawValue:)": {
   "abstract" : [
-    {
-      "text" : "Creates a new instance with the specified raw value.",
-      "type" : "text"
-    }
+
   ],
   "fragments" : [
     {
@@ -308,7 +243,7 @@
       "text" : ")"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/APIResponse\/Link\/init(rawValue:)",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/APIResponse\/Link\/init(rawValue:)",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "init(rawValue:)",

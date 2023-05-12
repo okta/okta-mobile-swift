@@ -1,22 +1,30 @@
 {
   "abstract" : [
     {
-      "text" : "The calculated date at which this object will expire.",
+      "text" : "Inherited from ",
+      "type" : "text"
+    },
+    {
+      "code" : "Expires.expiresAt",
+      "type" : "codeVoice"
+    },
+    {
+      "text" : ".",
       "type" : "text"
     }
   ],
   "hierarchy" : {
     "paths" : [
       [
-        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation",
-        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/Expires",
-        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/Expires\/expiresAt-8h3jt"
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/Expires",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/Expires\/expiresAt-8h3jt"
       ]
     ]
   },
   "identifier" : {
     "interfaceLanguage" : "swift",
-    "url" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/Expires\/expiresAt-579iu"
+    "url" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/Expires\/expiresAt-579iu"
   },
   "kind" : "symbol",
   "metadata" : {
@@ -111,7 +119,7 @@
   ],
   "schemaVersion" : {
     "major" : 0,
-    "minor" : 2,
+    "minor" : 3,
     "patch" : 0
   },
   "sections" : [
@@ -131,21 +139,21 @@
   ]
 , 
 "references": {
-"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation": {
+"doc://AuthFoundation/documentation/AuthFoundation": {
   "abstract" : [
     {
       "text" : "Library that provides foundational features used by Okta’s authentication libraries, as well as APIs used to work with tokens and user credentials.",
       "type" : "text"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation",
   "kind" : "symbol",
   "role" : "collection",
   "title" : "AuthFoundation",
   "type" : "topic",
   "url" : "\/documentation\/authfoundation"
 },
-"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/Expires": {
+"doc://AuthFoundation/documentation/AuthFoundation/Expires": {
   "abstract" : [
     {
       "text" : "Protocol that indicates an object is capable of expiring.",
@@ -166,7 +174,7 @@
       "text" : "Expires"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/Expires",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/Expires",
   "kind" : "symbol",
   "navigatorTitle" : [
     {
@@ -179,12 +187,9 @@
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/expires"
 },
-"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/Expires/expiresAt-579iu": {
+"doc://AuthFoundation/documentation/AuthFoundation/Expires/expiresAt-579iu": {
   "abstract" : [
-    {
-      "text" : "The calculated date at which this object will expire.",
-      "type" : "text"
-    }
+
   ],
   "fragments" : [
     {
@@ -213,14 +218,14 @@
       "text" : "?"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/Expires\/expiresAt-579iu",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/Expires\/expiresAt-579iu",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "expiresAt",
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/expires\/expiresat-579iu"
 },
-"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/Expires/expiresAt-8h3jt": {
+"doc://AuthFoundation/documentation/AuthFoundation/Expires/expiresAt-8h3jt": {
   "abstract" : [
     {
       "text" : "The calculated date at which this object will expire.",
@@ -255,7 +260,7 @@
       "text" : "?"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/Expires\/expiresAt-8h3jt",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/Expires\/expiresAt-8h3jt",
   "kind" : "symbol",
   "required" : true,
   "role" : "symbol",

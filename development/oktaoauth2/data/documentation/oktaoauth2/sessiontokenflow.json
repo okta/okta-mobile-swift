@@ -8,13 +8,13 @@
   "hierarchy" : {
     "paths" : [
       [
-        "doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/OktaOAuth2"
+        "doc:\/\/OktaOAuth2\/documentation\/OktaOAuth2"
       ]
     ]
   },
   "identifier" : {
     "interfaceLanguage" : "swift",
-    "url" : "doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/OktaOAuth2\/SessionTokenFlow"
+    "url" : "doc:\/\/OktaOAuth2\/documentation\/OktaOAuth2\/SessionTokenFlow"
   },
   "kind" : "symbol",
   "metadata" : {
@@ -141,7 +141,7 @@
               "type" : "text"
             },
             {
-              "identifier" : "doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/OktaOAuth2\/SessionTokenFlow\/start(with:context:)",
+              "identifier" : "doc:\/\/OktaOAuth2\/documentation\/OktaOAuth2\/SessionTokenFlow\/start(with:context:)",
               "isActive" : true,
               "type" : "reference"
             },
@@ -196,10 +196,10 @@
   "relationshipsSections" : [
     {
       "identifiers" : [
-        "doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/AuthFoundation\/APIClientDelegate",
-        "doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/AuthFoundation\/AuthenticationFlow",
-        "doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/AuthFoundation\/OAuth2ClientDelegate",
-        "doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/AuthFoundation\/UsesDelegateCollection"
+        "doc:\/\/OktaOAuth2\/14AuthFoundation17APIClientDelegateP",
+        "doc:\/\/OktaOAuth2\/14AuthFoundation18AuthenticationFlowP",
+        "doc:\/\/OktaOAuth2\/14AuthFoundation20OAuth2ClientDelegateP",
+        "doc:\/\/OktaOAuth2\/14AuthFoundation22UsesDelegateCollectionP"
       ],
       "kind" : "relationships",
       "title" : "Conforms To",
@@ -208,7 +208,7 @@
   ],
   "schemaVersion" : {
     "major" : 0,
-    "minor" : 2,
+    "minor" : 3,
     "patch" : 0
   },
   "sections" : [
@@ -217,37 +217,37 @@
   "topicSections" : [
     {
       "identifiers" : [
-        "doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/OktaOAuth2\/SessionTokenFlow\/init()",
-        "doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/OktaOAuth2\/SessionTokenFlow\/init(issuer:clientId:scopes:redirectUri:additionalParameters:)",
-        "doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/OktaOAuth2\/SessionTokenFlow\/init(plist:)",
-        "doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/OktaOAuth2\/SessionTokenFlow\/init(redirectUri:additionalParameters:client:)"
+        "doc:\/\/OktaOAuth2\/documentation\/OktaOAuth2\/SessionTokenFlow\/init()",
+        "doc:\/\/OktaOAuth2\/documentation\/OktaOAuth2\/SessionTokenFlow\/init(issuer:clientId:scopes:redirectUri:additionalParameters:)",
+        "doc:\/\/OktaOAuth2\/documentation\/OktaOAuth2\/SessionTokenFlow\/init(plist:)",
+        "doc:\/\/OktaOAuth2\/documentation\/OktaOAuth2\/SessionTokenFlow\/init(redirectUri:additionalParameters:client:)"
       ],
       "title" : "Initializers"
     },
     {
       "identifiers" : [
-        "doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/OktaOAuth2\/SessionTokenFlow\/additionalParameters",
-        "doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/OktaOAuth2\/SessionTokenFlow\/client",
-        "doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/OktaOAuth2\/SessionTokenFlow\/delegateCollection",
-        "doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/OktaOAuth2\/SessionTokenFlow\/isAuthenticating",
-        "doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/OktaOAuth2\/SessionTokenFlow\/redirectUri"
+        "doc:\/\/OktaOAuth2\/documentation\/OktaOAuth2\/SessionTokenFlow\/additionalParameters",
+        "doc:\/\/OktaOAuth2\/documentation\/OktaOAuth2\/SessionTokenFlow\/client",
+        "doc:\/\/OktaOAuth2\/documentation\/OktaOAuth2\/SessionTokenFlow\/delegateCollection",
+        "doc:\/\/OktaOAuth2\/documentation\/OktaOAuth2\/SessionTokenFlow\/isAuthenticating",
+        "doc:\/\/OktaOAuth2\/documentation\/OktaOAuth2\/SessionTokenFlow\/redirectUri"
       ],
       "title" : "Instance Properties"
     },
     {
       "identifiers" : [
-        "doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/OktaOAuth2\/SessionTokenFlow\/reset()",
-        "doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/OktaOAuth2\/SessionTokenFlow\/start(with:context:)",
-        "doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/OktaOAuth2\/SessionTokenFlow\/start(with:context:completion:)"
+        "doc:\/\/OktaOAuth2\/documentation\/OktaOAuth2\/SessionTokenFlow\/reset()",
+        "doc:\/\/OktaOAuth2\/documentation\/OktaOAuth2\/SessionTokenFlow\/start(with:context:)",
+        "doc:\/\/OktaOAuth2\/documentation\/OktaOAuth2\/SessionTokenFlow\/start(with:context:completion:)"
       ],
       "title" : "Instance Methods"
     },
     {
       "generated" : true,
       "identifiers" : [
-        "doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/OktaOAuth2\/SessionTokenFlow\/APIClientDelegate-Implementations",
-        "doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/OktaOAuth2\/SessionTokenFlow\/OAuth2ClientDelegate-Implementations",
-        "doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/OktaOAuth2\/SessionTokenFlow\/UsesDelegateCollection-Implementations"
+        "doc:\/\/OktaOAuth2\/documentation\/OktaOAuth2\/SessionTokenFlow\/APIClientDelegate-Implementations",
+        "doc:\/\/OktaOAuth2\/documentation\/OktaOAuth2\/SessionTokenFlow\/OAuth2ClientDelegate-Implementations",
+        "doc:\/\/OktaOAuth2\/documentation\/OktaOAuth2\/SessionTokenFlow\/UsesDelegateCollection-Implementations"
       ],
       "title" : "Default Implementations"
     }
@@ -266,197 +266,41 @@
   ]
 , 
 "references": {
-"doc://com.okta.mobile.oktaoauth2/documentation/AuthFoundation/APIClientDelegate": {
-  "abstract" : [
-    {
-      "text" : "Protocol that delegates of APIClient instances can conform to.",
-      "type" : "text"
-    }
-  ],
-  "fragments" : [
-    {
-      "kind" : "keyword",
-      "text" : "protocol"
-    },
-    {
-      "kind" : "text",
-      "text" : " "
-    },
-    {
-      "kind" : "identifier",
-      "text" : "APIClientDelegate"
-    }
-  ],
-  "identifier" : "doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/AuthFoundation\/APIClientDelegate",
-  "kind" : "symbol",
-  "navigatorTitle" : [
-    {
-      "kind" : "identifier",
-      "text" : "APIClientDelegate"
-    }
-  ],
-  "role" : "symbol",
-  "title" : "APIClientDelegate",
-  "type" : "topic",
-  "url" : "\/documentation\/authfoundation\/apiclientdelegate"
+"doc://OktaOAuth2/14AuthFoundation17APIClientDelegateP": {
+  "identifier" : "doc:\/\/OktaOAuth2\/14AuthFoundation17APIClientDelegateP",
+  "title" : "AuthFoundation.APIClientDelegate",
+  "type" : "unresolvable"
 },
-"doc://com.okta.mobile.oktaoauth2/documentation/AuthFoundation/AuthenticationFlow": {
-  "abstract" : [
-    {
-      "text" : "A protocol defining a type of authentication flow.",
-      "type" : "text"
-    }
-  ],
-  "fragments" : [
-    {
-      "kind" : "keyword",
-      "text" : "protocol"
-    },
-    {
-      "kind" : "text",
-      "text" : " "
-    },
-    {
-      "kind" : "identifier",
-      "text" : "AuthenticationFlow"
-    }
-  ],
-  "identifier" : "doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/AuthFoundation\/AuthenticationFlow",
-  "kind" : "symbol",
-  "navigatorTitle" : [
-    {
-      "kind" : "identifier",
-      "text" : "AuthenticationFlow"
-    }
-  ],
-  "role" : "symbol",
-  "title" : "AuthenticationFlow",
-  "type" : "topic",
-  "url" : "\/documentation\/authfoundation\/authenticationflow"
+"doc://OktaOAuth2/14AuthFoundation18AuthenticationFlowP": {
+  "identifier" : "doc:\/\/OktaOAuth2\/14AuthFoundation18AuthenticationFlowP",
+  "title" : "AuthFoundation.AuthenticationFlow",
+  "type" : "unresolvable"
 },
-"doc://com.okta.mobile.oktaoauth2/documentation/AuthFoundation/OAuth2Client": {
-  "abstract" : [
-    {
-      "text" : "An OAuth2 client, used to interact with a given authorization server.",
-      "type" : "text"
-    }
-  ],
-  "fragments" : [
-    {
-      "kind" : "keyword",
-      "text" : "class"
-    },
-    {
-      "kind" : "text",
-      "text" : " "
-    },
-    {
-      "kind" : "identifier",
-      "text" : "OAuth2Client"
-    }
-  ],
-  "identifier" : "doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/AuthFoundation\/OAuth2Client",
-  "kind" : "symbol",
-  "navigatorTitle" : [
-    {
-      "kind" : "identifier",
-      "text" : "OAuth2Client"
-    }
-  ],
-  "role" : "symbol",
-  "title" : "OAuth2Client",
-  "type" : "topic",
-  "url" : "\/documentation\/authfoundation\/oauth2client"
+"doc://OktaOAuth2/14AuthFoundation20OAuth2ClientDelegateP": {
+  "identifier" : "doc:\/\/OktaOAuth2\/14AuthFoundation20OAuth2ClientDelegateP",
+  "title" : "AuthFoundation.OAuth2ClientDelegate",
+  "type" : "unresolvable"
 },
-"doc://com.okta.mobile.oktaoauth2/documentation/AuthFoundation/OAuth2ClientDelegate": {
-  "abstract" : [
-    {
-      "text" : "Delegate protocol used by ",
-      "type" : "text"
-    },
-    {
-      "identifier" : "doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/AuthFoundation\/OAuth2Client",
-      "isActive" : true,
-      "type" : "reference"
-    },
-    {
-      "text" : " to communicate important events.",
-      "type" : "text"
-    }
-  ],
-  "fragments" : [
-    {
-      "kind" : "keyword",
-      "text" : "protocol"
-    },
-    {
-      "kind" : "text",
-      "text" : " "
-    },
-    {
-      "kind" : "identifier",
-      "text" : "OAuth2ClientDelegate"
-    }
-  ],
-  "identifier" : "doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/AuthFoundation\/OAuth2ClientDelegate",
-  "kind" : "symbol",
-  "navigatorTitle" : [
-    {
-      "kind" : "identifier",
-      "text" : "OAuth2ClientDelegate"
-    }
-  ],
-  "role" : "symbol",
-  "title" : "OAuth2ClientDelegate",
-  "type" : "topic",
-  "url" : "\/documentation\/authfoundation\/oauth2clientdelegate"
+"doc://OktaOAuth2/14AuthFoundation22UsesDelegateCollectionP": {
+  "identifier" : "doc:\/\/OktaOAuth2\/14AuthFoundation22UsesDelegateCollectionP",
+  "title" : "AuthFoundation.UsesDelegateCollection",
+  "type" : "unresolvable"
 },
-"doc://com.okta.mobile.oktaoauth2/documentation/AuthFoundation/UsesDelegateCollection": {
-  "abstract" : [
-
-  ],
-  "fragments" : [
-    {
-      "kind" : "keyword",
-      "text" : "protocol"
-    },
-    {
-      "kind" : "text",
-      "text" : " "
-    },
-    {
-      "kind" : "identifier",
-      "text" : "UsesDelegateCollection"
-    }
-  ],
-  "identifier" : "doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/AuthFoundation\/UsesDelegateCollection",
-  "kind" : "symbol",
-  "navigatorTitle" : [
-    {
-      "kind" : "identifier",
-      "text" : "UsesDelegateCollection"
-    }
-  ],
-  "role" : "symbol",
-  "title" : "UsesDelegateCollection",
-  "type" : "topic",
-  "url" : "\/documentation\/authfoundation\/usesdelegatecollection"
-},
-"doc://com.okta.mobile.oktaoauth2/documentation/OktaOAuth2": {
+"doc://OktaOAuth2/documentation/OktaOAuth2": {
   "abstract" : [
     {
       "text" : "Interact with Okta’s OAuth2 APIs to authenticate users, and interact with user resources.",
       "type" : "text"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/OktaOAuth2",
+  "identifier" : "doc:\/\/OktaOAuth2\/documentation\/OktaOAuth2",
   "kind" : "symbol",
   "role" : "collection",
   "title" : "OktaOAuth2",
   "type" : "topic",
   "url" : "\/documentation\/oktaoauth2"
 },
-"doc://com.okta.mobile.oktaoauth2/documentation/OktaOAuth2/SessionTokenFlow": {
+"doc://OktaOAuth2/documentation/OktaOAuth2/SessionTokenFlow": {
   "abstract" : [
     {
       "text" : "An authentication flow class that exchanges a Session Token for access tokens.",
@@ -477,7 +321,7 @@
       "text" : "SessionTokenFlow"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/OktaOAuth2\/SessionTokenFlow",
+  "identifier" : "doc:\/\/OktaOAuth2\/documentation\/OktaOAuth2\/SessionTokenFlow",
   "kind" : "symbol",
   "navigatorTitle" : [
     {
@@ -490,40 +334,40 @@
   "type" : "topic",
   "url" : "\/documentation\/oktaoauth2\/sessiontokenflow"
 },
-"doc://com.okta.mobile.oktaoauth2/documentation/OktaOAuth2/SessionTokenFlow/APIClientDelegate-Implementations": {
+"doc://OktaOAuth2/documentation/OktaOAuth2/SessionTokenFlow/APIClientDelegate-Implementations": {
   "abstract" : [
 
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/OktaOAuth2\/SessionTokenFlow\/APIClientDelegate-Implementations",
+  "identifier" : "doc:\/\/OktaOAuth2\/documentation\/OktaOAuth2\/SessionTokenFlow\/APIClientDelegate-Implementations",
   "kind" : "article",
   "role" : "collectionGroup",
   "title" : "APIClientDelegate Implementations",
   "type" : "topic",
   "url" : "\/documentation\/oktaoauth2\/sessiontokenflow\/apiclientdelegate-implementations"
 },
-"doc://com.okta.mobile.oktaoauth2/documentation/OktaOAuth2/SessionTokenFlow/OAuth2ClientDelegate-Implementations": {
+"doc://OktaOAuth2/documentation/OktaOAuth2/SessionTokenFlow/OAuth2ClientDelegate-Implementations": {
   "abstract" : [
 
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/OktaOAuth2\/SessionTokenFlow\/OAuth2ClientDelegate-Implementations",
+  "identifier" : "doc:\/\/OktaOAuth2\/documentation\/OktaOAuth2\/SessionTokenFlow\/OAuth2ClientDelegate-Implementations",
   "kind" : "article",
   "role" : "collectionGroup",
   "title" : "OAuth2ClientDelegate Implementations",
   "type" : "topic",
   "url" : "\/documentation\/oktaoauth2\/sessiontokenflow\/oauth2clientdelegate-implementations"
 },
-"doc://com.okta.mobile.oktaoauth2/documentation/OktaOAuth2/SessionTokenFlow/UsesDelegateCollection-Implementations": {
+"doc://OktaOAuth2/documentation/OktaOAuth2/SessionTokenFlow/UsesDelegateCollection-Implementations": {
   "abstract" : [
 
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/OktaOAuth2\/SessionTokenFlow\/UsesDelegateCollection-Implementations",
+  "identifier" : "doc:\/\/OktaOAuth2\/documentation\/OktaOAuth2\/SessionTokenFlow\/UsesDelegateCollection-Implementations",
   "kind" : "article",
   "role" : "collectionGroup",
   "title" : "UsesDelegateCollection Implementations",
   "type" : "topic",
   "url" : "\/documentation\/oktaoauth2\/sessiontokenflow\/usesdelegatecollection-implementations"
 },
-"doc://com.okta.mobile.oktaoauth2/documentation/OktaOAuth2/SessionTokenFlow/additionalParameters": {
+"doc://OktaOAuth2/documentation/OktaOAuth2/SessionTokenFlow/additionalParameters": {
   "abstract" : [
     {
       "text" : "Any additional query string parameters you would like to supply to the authorization server.",
@@ -566,14 +410,14 @@
       "text" : "]?"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/OktaOAuth2\/SessionTokenFlow\/additionalParameters",
+  "identifier" : "doc:\/\/OktaOAuth2\/documentation\/OktaOAuth2\/SessionTokenFlow\/additionalParameters",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "additionalParameters",
   "type" : "topic",
   "url" : "\/documentation\/oktaoauth2\/sessiontokenflow\/additionalparameters"
 },
-"doc://com.okta.mobile.oktaoauth2/documentation/OktaOAuth2/SessionTokenFlow/client": {
+"doc://OktaOAuth2/documentation/OktaOAuth2/SessionTokenFlow/client": {
   "abstract" : [
     {
       "text" : "The OAuth2Client this authentication flow will use.",
@@ -603,14 +447,14 @@
       "text" : "OAuth2Client"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/OktaOAuth2\/SessionTokenFlow\/client",
+  "identifier" : "doc:\/\/OktaOAuth2\/documentation\/OktaOAuth2\/SessionTokenFlow\/client",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "client",
   "type" : "topic",
   "url" : "\/documentation\/oktaoauth2\/sessiontokenflow\/client"
 },
-"doc://com.okta.mobile.oktaoauth2/documentation/OktaOAuth2/SessionTokenFlow/delegateCollection": {
+"doc://OktaOAuth2/documentation/OktaOAuth2/SessionTokenFlow/delegateCollection": {
   "abstract" : [
 
   ],
@@ -659,14 +503,14 @@
       "text" : ">"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/OktaOAuth2\/SessionTokenFlow\/delegateCollection",
+  "identifier" : "doc:\/\/OktaOAuth2\/documentation\/OktaOAuth2\/SessionTokenFlow\/delegateCollection",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "delegateCollection",
   "type" : "topic",
   "url" : "\/documentation\/oktaoauth2\/sessiontokenflow\/delegatecollection"
 },
-"doc://com.okta.mobile.oktaoauth2/documentation/OktaOAuth2/SessionTokenFlow/init()": {
+"doc://OktaOAuth2/documentation/OktaOAuth2/SessionTokenFlow/init()": {
   "abstract" : [
     {
       "text" : "Initializer that uses the configuration defined within the application’s ",
@@ -683,6 +527,14 @@
   ],
   "fragments" : [
     {
+      "kind" : "keyword",
+      "text" : "convenience"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
       "kind" : "identifier",
       "text" : "init"
     },
@@ -695,14 +547,14 @@
       "text" : "throws"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/OktaOAuth2\/SessionTokenFlow\/init()",
+  "identifier" : "doc:\/\/OktaOAuth2\/documentation\/OktaOAuth2\/SessionTokenFlow\/init()",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "init()",
   "type" : "topic",
   "url" : "\/documentation\/oktaoauth2\/sessiontokenflow\/init()"
 },
-"doc://com.okta.mobile.oktaoauth2/documentation/OktaOAuth2/SessionTokenFlow/init(issuer:clientId:scopes:redirectUri:additionalParameters:)": {
+"doc://OktaOAuth2/documentation/OktaOAuth2/SessionTokenFlow/init(issuer:clientId:scopes:redirectUri:additionalParameters:)": {
   "abstract" : [
     {
       "text" : "Convenience initializer to construct an authentication flow from variables.",
@@ -710,6 +562,14 @@
     }
   ],
   "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "convenience"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
     {
       "kind" : "identifier",
       "text" : "init"
@@ -813,14 +673,14 @@
       "text" : "]?)"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/OktaOAuth2\/SessionTokenFlow\/init(issuer:clientId:scopes:redirectUri:additionalParameters:)",
+  "identifier" : "doc:\/\/OktaOAuth2\/documentation\/OktaOAuth2\/SessionTokenFlow\/init(issuer:clientId:scopes:redirectUri:additionalParameters:)",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "init(issuer:clientId:scopes:redirectUri:additionalParameters:)",
   "type" : "topic",
   "url" : "\/documentation\/oktaoauth2\/sessiontokenflow\/init(issuer:clientid:scopes:redirecturi:additionalparameters:)"
 },
-"doc://com.okta.mobile.oktaoauth2/documentation/OktaOAuth2/SessionTokenFlow/init(plist:)": {
+"doc://OktaOAuth2/documentation/OktaOAuth2/SessionTokenFlow/init(plist:)": {
   "abstract" : [
     {
       "text" : "Initializer that uses the configuration defined within the given file URL.",
@@ -828,6 +688,14 @@
     }
   ],
   "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "convenience"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
     {
       "kind" : "identifier",
       "text" : "init"
@@ -858,14 +726,14 @@
       "text" : "throws"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/OktaOAuth2\/SessionTokenFlow\/init(plist:)",
+  "identifier" : "doc:\/\/OktaOAuth2\/documentation\/OktaOAuth2\/SessionTokenFlow\/init(plist:)",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "init(plist:)",
   "type" : "topic",
   "url" : "\/documentation\/oktaoauth2\/sessiontokenflow\/init(plist:)"
 },
-"doc://com.okta.mobile.oktaoauth2/documentation/OktaOAuth2/SessionTokenFlow/init(redirectUri:additionalParameters:client:)": {
+"doc://OktaOAuth2/documentation/OktaOAuth2/SessionTokenFlow/init(redirectUri:additionalParameters:client:)": {
   "abstract" : [
 
   ],
@@ -939,14 +807,14 @@
       "text" : ")"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/OktaOAuth2\/SessionTokenFlow\/init(redirectUri:additionalParameters:client:)",
+  "identifier" : "doc:\/\/OktaOAuth2\/documentation\/OktaOAuth2\/SessionTokenFlow\/init(redirectUri:additionalParameters:client:)",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "init(redirectUri:additionalParameters:client:)",
   "type" : "topic",
   "url" : "\/documentation\/oktaoauth2\/sessiontokenflow\/init(redirecturi:additionalparameters:client:)"
 },
-"doc://com.okta.mobile.oktaoauth2/documentation/OktaOAuth2/SessionTokenFlow/isAuthenticating": {
+"doc://OktaOAuth2/documentation/OktaOAuth2/SessionTokenFlow/isAuthenticating": {
   "abstract" : [
     {
       "text" : "Indicates whether or not this flow is currently in the process of authenticating a user.",
@@ -976,14 +844,14 @@
       "text" : "Bool"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/OktaOAuth2\/SessionTokenFlow\/isAuthenticating",
+  "identifier" : "doc:\/\/OktaOAuth2\/documentation\/OktaOAuth2\/SessionTokenFlow\/isAuthenticating",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "isAuthenticating",
   "type" : "topic",
   "url" : "\/documentation\/oktaoauth2\/sessiontokenflow\/isauthenticating"
 },
-"doc://com.okta.mobile.oktaoauth2/documentation/OktaOAuth2/SessionTokenFlow/redirectUri": {
+"doc://OktaOAuth2/documentation/OktaOAuth2/SessionTokenFlow/redirectUri": {
   "abstract" : [
     {
       "text" : "The redirect URI defined for your client.",
@@ -1013,14 +881,14 @@
       "text" : "URL"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/OktaOAuth2\/SessionTokenFlow\/redirectUri",
+  "identifier" : "doc:\/\/OktaOAuth2\/documentation\/OktaOAuth2\/SessionTokenFlow\/redirectUri",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "redirectUri",
   "type" : "topic",
   "url" : "\/documentation\/oktaoauth2\/sessiontokenflow\/redirecturi"
 },
-"doc://com.okta.mobile.oktaoauth2/documentation/OktaOAuth2/SessionTokenFlow/reset()": {
+"doc://OktaOAuth2/documentation/OktaOAuth2/SessionTokenFlow/reset()": {
   "abstract" : [
     {
       "text" : "Resets the flow for later reuse.",
@@ -1045,14 +913,14 @@
       "text" : "()"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/OktaOAuth2\/SessionTokenFlow\/reset()",
+  "identifier" : "doc:\/\/OktaOAuth2\/documentation\/OktaOAuth2\/SessionTokenFlow\/reset()",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "reset()",
   "type" : "topic",
   "url" : "\/documentation\/oktaoauth2\/sessiontokenflow\/reset()"
 },
-"doc://com.okta.mobile.oktaoauth2/documentation/OktaOAuth2/SessionTokenFlow/start(with:context:)": {
+"doc://OktaOAuth2/documentation/OktaOAuth2/SessionTokenFlow/start(with:context:)": {
   "abstract" : [
     {
       "text" : "Asynchronously authenticates with the given session token.",
@@ -1141,14 +1009,14 @@
       "text" : "Token"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/OktaOAuth2\/SessionTokenFlow\/start(with:context:)",
+  "identifier" : "doc:\/\/OktaOAuth2\/documentation\/OktaOAuth2\/SessionTokenFlow\/start(with:context:)",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "start(with:context:)",
   "type" : "topic",
   "url" : "\/documentation\/oktaoauth2\/sessiontokenflow\/start(with:context:)"
 },
-"doc://com.okta.mobile.oktaoauth2/documentation/OktaOAuth2/SessionTokenFlow/start(with:context:completion:)": {
+"doc://OktaOAuth2/documentation/OktaOAuth2/SessionTokenFlow/start(with:context:completion:)": {
   "abstract" : [
     {
       "text" : "Authenticates using the supplied session token.",
@@ -1260,7 +1128,7 @@
       "text" : ")"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/OktaOAuth2\/SessionTokenFlow\/start(with:context:completion:)",
+  "identifier" : "doc:\/\/OktaOAuth2\/documentation\/OktaOAuth2\/SessionTokenFlow\/start(with:context:completion:)",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "start(with:context:completion:)",

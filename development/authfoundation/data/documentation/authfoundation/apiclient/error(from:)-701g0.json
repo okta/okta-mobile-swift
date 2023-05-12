@@ -8,7 +8,7 @@
   "defaultImplementationsSections" : [
     {
       "identifiers" : [
-        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/APIClient\/error(from:)-2zqym"
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/APIClient\/error(from:)-2zqym"
       ],
       "title" : "APIClient Implementations"
     }
@@ -16,14 +16,14 @@
   "hierarchy" : {
     "paths" : [
       [
-        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation",
-        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/APIClient"
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/APIClient"
       ]
     ]
   },
   "identifier" : {
     "interfaceLanguage" : "swift",
-    "url" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/APIClient\/error(from:)-701g0"
+    "url" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/APIClient\/error(from:)-701g0"
   },
   "kind" : "symbol",
   "metadata" : {
@@ -172,7 +172,7 @@
   ],
   "schemaVersion" : {
     "major" : 0,
-    "minor" : 2,
+    "minor" : 3,
     "patch" : 0
   },
   "sections" : [
@@ -192,21 +192,21 @@
   ]
 , 
 "references": {
-"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation": {
+"doc://AuthFoundation/documentation/AuthFoundation": {
   "abstract" : [
     {
       "text" : "Library that provides foundational features used by Okta’s authentication libraries, as well as APIs used to work with tokens and user credentials.",
       "type" : "text"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation",
   "kind" : "symbol",
   "role" : "collection",
   "title" : "AuthFoundation",
   "type" : "topic",
   "url" : "\/documentation\/authfoundation"
 },
-"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/APIClient": {
+"doc://AuthFoundation/documentation/AuthFoundation/APIClient": {
   "abstract" : [
     {
       "text" : "Protocol defining the interfaces and capabilities that API clients can conform to.",
@@ -227,7 +227,7 @@
       "text" : "APIClient"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/APIClient",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/APIClient",
   "kind" : "symbol",
   "navigatorTitle" : [
     {
@@ -240,12 +240,9 @@
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/apiclient"
 },
-"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/APIClient/error(from:)-2zqym": {
+"doc://AuthFoundation/documentation/AuthFoundation/APIClient/error(from:)-2zqym": {
   "abstract" : [
-    {
-      "text" : "Parses HTTP response body data when a request fails.",
-      "type" : "text"
-    }
+
   ],
   "fragments" : [
     {
@@ -291,14 +288,14 @@
       "text" : "?"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/APIClient\/error(from:)-2zqym",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/APIClient\/error(from:)-2zqym",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "error(from:)",
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/apiclient\/error(from:)-2zqym"
 },
-"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/APIClient/error(from:)-701g0": {
+"doc://AuthFoundation/documentation/AuthFoundation/APIClient/error(from:)-701g0": {
   "abstract" : [
     {
       "text" : "Parses HTTP response body data when a request fails.",
@@ -350,7 +347,7 @@
       "text" : "?"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/APIClient\/error(from:)-701g0",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/APIClient\/error(from:)-701g0",
   "kind" : "symbol",
   "required" : true,
   "role" : "symbol",

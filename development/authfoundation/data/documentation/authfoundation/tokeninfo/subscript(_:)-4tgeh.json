@@ -1,22 +1,30 @@
 {
   "abstract" : [
     {
-      "text" : "No overview available.",
+      "text" : "Inherited from ",
+      "type" : "text"
+    },
+    {
+      "code" : "HasClaims.subscript(_:)",
+      "type" : "codeVoice"
+    },
+    {
+      "text" : ".",
       "type" : "text"
     }
   ],
   "hierarchy" : {
     "paths" : [
       [
-        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation",
-        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/TokenInfo",
-        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/TokenInfo\/HasClaims-Implementations"
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/TokenInfo",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/TokenInfo\/HasClaims-Implementations"
       ]
     ]
   },
   "identifier" : {
     "interfaceLanguage" : "swift",
-    "url" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/TokenInfo\/subscript(_:)-4tgeh"
+    "url" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/TokenInfo\/subscript(_:)-4tgeh"
   },
   "kind" : "symbol",
   "metadata" : {
@@ -103,7 +111,7 @@
               "text" : ": "
             },
             {
-              "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/Claim",
+              "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/Claim",
               "kind" : "typeIdentifier",
               "preciseIdentifier" : "s:14AuthFoundation5ClaimO",
               "text" : "Claim"
@@ -136,7 +144,7 @@
   ],
   "schemaVersion" : {
     "major" : 0,
-    "minor" : 2,
+    "minor" : 3,
     "patch" : 0
   },
   "sections" : [
@@ -156,21 +164,21 @@
   ]
 , 
 "references": {
-"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation": {
+"doc://AuthFoundation/documentation/AuthFoundation": {
   "abstract" : [
     {
       "text" : "Library that provides foundational features used by Okta’s authentication libraries, as well as APIs used to work with tokens and user credentials.",
       "type" : "text"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation",
   "kind" : "symbol",
   "role" : "collection",
   "title" : "AuthFoundation",
   "type" : "topic",
   "url" : "\/documentation\/authfoundation"
 },
-"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/Claim": {
+"doc://AuthFoundation/documentation/AuthFoundation/Claim": {
   "abstract" : [
     {
       "text" : "List of registered and public claims.",
@@ -191,7 +199,7 @@
       "text" : "Claim"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/Claim",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/Claim",
   "kind" : "symbol",
   "navigatorTitle" : [
     {
@@ -204,7 +212,7 @@
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/claim"
 },
-"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/TokenInfo": {
+"doc://AuthFoundation/documentation/AuthFoundation/TokenInfo": {
   "abstract" : [
     {
       "text" : "Introspected token information.",
@@ -225,7 +233,7 @@
       "text" : "TokenInfo"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/TokenInfo",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/TokenInfo",
   "kind" : "symbol",
   "navigatorTitle" : [
     {
@@ -238,18 +246,18 @@
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/tokeninfo"
 },
-"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/TokenInfo/HasClaims-Implementations": {
+"doc://AuthFoundation/documentation/AuthFoundation/TokenInfo/HasClaims-Implementations": {
   "abstract" : [
 
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/TokenInfo\/HasClaims-Implementations",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/TokenInfo\/HasClaims-Implementations",
   "kind" : "article",
   "role" : "collectionGroup",
   "title" : "HasClaims Implementations",
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/tokeninfo\/hasclaims-implementations"
 },
-"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/TokenInfo/subscript(_:)-4tgeh": {
+"doc://AuthFoundation/documentation/AuthFoundation/TokenInfo/subscript(_:)-4tgeh": {
   "abstract" : [
 
   ],
@@ -288,7 +296,7 @@
       "text" : "?"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/TokenInfo\/subscript(_:)-4tgeh",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/TokenInfo\/subscript(_:)-4tgeh",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "subscript(_:)",

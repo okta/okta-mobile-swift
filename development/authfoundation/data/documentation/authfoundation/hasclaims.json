@@ -8,13 +8,13 @@
   "hierarchy" : {
     "paths" : [
       [
-        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation"
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation"
       ]
     ]
   },
   "identifier" : {
     "interfaceLanguage" : "swift",
-    "url" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/HasClaims"
+    "url" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/HasClaims"
   },
   "kind" : "symbol",
   "metadata" : {
@@ -92,7 +92,7 @@
               "type" : "text"
             },
             {
-              "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/HasClaims\/allClaims-4c54a",
+              "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/HasClaims\/allClaims-4c54a",
               "isActive" : true,
               "type" : "reference"
             },
@@ -110,10 +110,10 @@
   "relationshipsSections" : [
     {
       "identifiers" : [
-        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/JWT",
-        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/Token\/Metadata",
-        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/TokenInfo",
-        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/UserInfo"
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JWT",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/Token\/Metadata",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/TokenInfo",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/UserInfo"
       ],
       "kind" : "relationships",
       "title" : "Conforming Types",
@@ -122,7 +122,7 @@
   ],
   "schemaVersion" : {
     "major" : 0,
-    "minor" : 2,
+    "minor" : 3,
     "patch" : 0
   },
   "sections" : [
@@ -132,12 +132,12 @@
     {
       "generated" : true,
       "identifiers" : [
-        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/JWT",
-        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/JWK",
-        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/JWKS",
-        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/Claim",
-        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/ClaimContainer",
-        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/Expires"
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JWT",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JWK",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JWKS",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/Claim",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/ClaimContainer",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/Expires"
       ],
       "title" : "JWT and Token Verification"
     }
@@ -145,49 +145,49 @@
   "topicSections" : [
     {
       "identifiers" : [
-        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/HasClaims\/address",
-        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/HasClaims\/allClaims-4c54a",
-        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/HasClaims\/authTime",
-        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/HasClaims\/authenticationClass",
-        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/HasClaims\/authenticationMethods",
-        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/HasClaims\/birthdate",
-        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/HasClaims\/claims",
-        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/HasClaims\/customClaims",
-        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/HasClaims\/email",
-        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/HasClaims\/emailVerified",
-        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/HasClaims\/familyName",
-        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/HasClaims\/gender",
-        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/HasClaims\/givenName",
-        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/HasClaims\/locale",
-        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/HasClaims\/middleName",
-        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/HasClaims\/name",
-        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/HasClaims\/nameComponents",
-        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/HasClaims\/nickname",
-        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/HasClaims\/payload",
-        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/HasClaims\/phoneNumber",
-        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/HasClaims\/phoneNumberVerified",
-        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/HasClaims\/picture",
-        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/HasClaims\/preferredUsername",
-        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/HasClaims\/profile",
-        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/HasClaims\/subject",
-        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/HasClaims\/timeZone",
-        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/HasClaims\/updatedAt",
-        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/HasClaims\/userLocale",
-        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/HasClaims\/website",
-        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/HasClaims\/zoneinfo"
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/HasClaims\/address",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/HasClaims\/allClaims-4c54a",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/HasClaims\/authTime",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/HasClaims\/authenticationClass",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/HasClaims\/authenticationMethods",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/HasClaims\/birthdate",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/HasClaims\/claims",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/HasClaims\/customClaims",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/HasClaims\/email",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/HasClaims\/emailVerified",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/HasClaims\/familyName",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/HasClaims\/gender",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/HasClaims\/givenName",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/HasClaims\/locale",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/HasClaims\/middleName",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/HasClaims\/name",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/HasClaims\/nameComponents",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/HasClaims\/nickname",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/HasClaims\/payload",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/HasClaims\/phoneNumber",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/HasClaims\/phoneNumberVerified",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/HasClaims\/picture",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/HasClaims\/preferredUsername",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/HasClaims\/profile",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/HasClaims\/subject",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/HasClaims\/timeZone",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/HasClaims\/updatedAt",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/HasClaims\/userLocale",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/HasClaims\/website",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/HasClaims\/zoneinfo"
       ],
       "title" : "Instance Properties"
     },
     {
       "identifiers" : [
-        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/HasClaims\/value(_:for:)"
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/HasClaims\/value(_:for:)"
       ],
       "title" : "Instance Methods"
     },
     {
       "identifiers" : [
-        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/HasClaims\/subscript(_:)-3hvf1",
-        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/HasClaims\/subscript(_:)-4t0dl"
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/HasClaims\/subscript(_:)-3hvf1",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/HasClaims\/subscript(_:)-4t0dl"
       ],
       "title" : "Subscripts"
     }
@@ -206,21 +206,21 @@
   ]
 , 
 "references": {
-"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation": {
+"doc://AuthFoundation/documentation/AuthFoundation": {
   "abstract" : [
     {
       "text" : "Library that provides foundational features used by Okta’s authentication libraries, as well as APIs used to work with tokens and user credentials.",
       "type" : "text"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation",
   "kind" : "symbol",
   "role" : "collection",
   "title" : "AuthFoundation",
   "type" : "topic",
   "url" : "\/documentation\/authfoundation"
 },
-"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/Claim": {
+"doc://AuthFoundation/documentation/AuthFoundation/Claim": {
   "abstract" : [
     {
       "text" : "List of registered and public claims.",
@@ -241,7 +241,7 @@
       "text" : "Claim"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/Claim",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/Claim",
   "kind" : "symbol",
   "navigatorTitle" : [
     {
@@ -254,7 +254,7 @@
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/claim"
 },
-"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/ClaimContainer": {
+"doc://AuthFoundation/documentation/AuthFoundation/ClaimContainer": {
   "abstract" : [
     {
       "text" : "Protocol used to define shared behavior when an object can contain claims.",
@@ -275,7 +275,7 @@
       "text" : "ClaimContainer"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/ClaimContainer",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/ClaimContainer",
   "kind" : "symbol",
   "navigatorTitle" : [
     {
@@ -288,7 +288,7 @@
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/claimcontainer"
 },
-"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/Expires": {
+"doc://AuthFoundation/documentation/AuthFoundation/Expires": {
   "abstract" : [
     {
       "text" : "Protocol that indicates an object is capable of expiring.",
@@ -309,7 +309,7 @@
       "text" : "Expires"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/Expires",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/Expires",
   "kind" : "symbol",
   "navigatorTitle" : [
     {
@@ -322,7 +322,7 @@
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/expires"
 },
-"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/HasClaims": {
+"doc://AuthFoundation/documentation/AuthFoundation/HasClaims": {
   "abstract" : [
     {
       "text" : "Used by classes that contains OAuth2 claims.",
@@ -343,7 +343,7 @@
       "text" : "HasClaims"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/HasClaims",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/HasClaims",
   "kind" : "symbol",
   "navigatorTitle" : [
     {
@@ -356,7 +356,7 @@
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/hasclaims"
 },
-"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/HasClaims/address": {
+"doc://AuthFoundation/documentation/AuthFoundation/HasClaims/address": {
   "abstract" : [
     {
       "text" : "The address components for this user.",
@@ -399,21 +399,21 @@
       "text" : "]?"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/HasClaims\/address",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/HasClaims\/address",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "address",
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/hasclaims\/address"
 },
-"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/HasClaims/allClaims-4c54a": {
+"doc://AuthFoundation/documentation/AuthFoundation/HasClaims/allClaims-4c54a": {
   "abstract" : [
     {
       "text" : "All claims, across both standard ",
       "type" : "text"
     },
     {
-      "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/HasClaims\/claims",
+      "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/HasClaims\/claims",
       "isActive" : true,
       "type" : "reference"
     },
@@ -422,7 +422,7 @@
       "type" : "text"
     },
     {
-      "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/HasClaims\/customClaims",
+      "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/HasClaims\/customClaims",
       "isActive" : true,
       "type" : "reference"
     },
@@ -459,7 +459,7 @@
       "text" : "]"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/HasClaims\/allClaims-4c54a",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/HasClaims\/allClaims-4c54a",
   "kind" : "symbol",
   "required" : true,
   "role" : "symbol",
@@ -467,7 +467,7 @@
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/hasclaims\/allclaims-4c54a"
 },
-"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/HasClaims/authTime": {
+"doc://AuthFoundation/documentation/AuthFoundation/HasClaims/authTime": {
   "abstract" : [
     {
       "text" : "The date at which authentication occurred.",
@@ -501,14 +501,14 @@
       "text" : "?"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/HasClaims\/authTime",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/HasClaims\/authTime",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "authTime",
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/hasclaims\/authtime"
 },
-"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/HasClaims/authenticationClass": {
+"doc://AuthFoundation/documentation/AuthFoundation/HasClaims/authenticationClass": {
   "abstract" : [
     {
       "text" : "Returns the Authentication Context Class Reference for this token.",
@@ -542,14 +542,14 @@
       "text" : "?"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/HasClaims\/authenticationClass",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/HasClaims\/authenticationClass",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "authenticationClass",
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/hasclaims\/authenticationclass"
 },
-"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/HasClaims/authenticationMethods": {
+"doc://AuthFoundation/documentation/AuthFoundation/HasClaims/authenticationMethods": {
   "abstract" : [
     {
       "text" : "The list of authentication methods included in this token.",
@@ -583,14 +583,14 @@
       "text" : "]?"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/HasClaims\/authenticationMethods",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/HasClaims\/authenticationMethods",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "authenticationMethods",
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/hasclaims\/authenticationmethods"
 },
-"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/HasClaims/birthdate": {
+"doc://AuthFoundation/documentation/AuthFoundation/HasClaims/birthdate": {
   "abstract" : [
     {
       "text" : "The user’s birth date.",
@@ -624,14 +624,14 @@
       "text" : "?"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/HasClaims\/birthdate",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/HasClaims\/birthdate",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "birthdate",
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/hasclaims\/birthdate"
 },
-"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/HasClaims/claims": {
+"doc://AuthFoundation/documentation/AuthFoundation/HasClaims/claims": {
   "abstract" : [
     {
       "text" : "Returns the collection of claims this object contains.",
@@ -665,7 +665,7 @@
       "text" : "]"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/HasClaims\/claims",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/HasClaims\/claims",
   "kind" : "symbol",
   "required" : true,
   "role" : "symbol",
@@ -673,7 +673,7 @@
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/hasclaims\/claims"
 },
-"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/HasClaims/customClaims": {
+"doc://AuthFoundation/documentation/AuthFoundation/HasClaims/customClaims": {
   "abstract" : [
     {
       "text" : "Returns the collection of custom claims this object contains.",
@@ -707,7 +707,7 @@
       "text" : "]"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/HasClaims\/customClaims",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/HasClaims\/customClaims",
   "kind" : "symbol",
   "required" : true,
   "role" : "symbol",
@@ -715,7 +715,7 @@
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/hasclaims\/customclaims"
 },
-"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/HasClaims/email": {
+"doc://AuthFoundation/documentation/AuthFoundation/HasClaims/email": {
   "abstract" : [
     {
       "text" : "The user’s email address.",
@@ -749,14 +749,14 @@
       "text" : "?"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/HasClaims\/email",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/HasClaims\/email",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "email",
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/hasclaims\/email"
 },
-"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/HasClaims/emailVerified": {
+"doc://AuthFoundation/documentation/AuthFoundation/HasClaims/emailVerified": {
   "abstract" : [
     {
       "text" : "Indicates whether or not the user’s email address has been verified.",
@@ -790,14 +790,14 @@
       "text" : "?"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/HasClaims\/emailVerified",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/HasClaims\/emailVerified",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "emailVerified",
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/hasclaims\/emailverified"
 },
-"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/HasClaims/familyName": {
+"doc://AuthFoundation/documentation/AuthFoundation/HasClaims/familyName": {
   "abstract" : [
     {
       "text" : "The person’s family, or last, name.",
@@ -831,14 +831,14 @@
       "text" : "?"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/HasClaims\/familyName",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/HasClaims\/familyName",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "familyName",
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/hasclaims\/familyname"
 },
-"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/HasClaims/gender": {
+"doc://AuthFoundation/documentation/AuthFoundation/HasClaims/gender": {
   "abstract" : [
     {
       "text" : "The user’s gender.",
@@ -872,14 +872,14 @@
       "text" : "?"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/HasClaims\/gender",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/HasClaims\/gender",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "gender",
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/hasclaims\/gender"
 },
-"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/HasClaims/givenName": {
+"doc://AuthFoundation/documentation/AuthFoundation/HasClaims/givenName": {
   "abstract" : [
     {
       "text" : "The person’s given, or first, name.",
@@ -913,14 +913,14 @@
       "text" : "?"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/HasClaims\/givenName",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/HasClaims\/givenName",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "givenName",
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/hasclaims\/givenname"
 },
-"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/HasClaims/locale": {
+"doc://AuthFoundation/documentation/AuthFoundation/HasClaims/locale": {
   "abstract" : [
     {
       "text" : "The user’s locale.",
@@ -954,14 +954,14 @@
       "text" : "?"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/HasClaims\/locale",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/HasClaims\/locale",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "locale",
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/hasclaims\/locale"
 },
-"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/HasClaims/middleName": {
+"doc://AuthFoundation/documentation/AuthFoundation/HasClaims/middleName": {
   "abstract" : [
     {
       "text" : "The person’s middle name.",
@@ -995,14 +995,14 @@
       "text" : "?"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/HasClaims\/middleName",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/HasClaims\/middleName",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "middleName",
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/hasclaims\/middlename"
 },
-"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/HasClaims/name": {
+"doc://AuthFoundation/documentation/AuthFoundation/HasClaims/name": {
   "abstract" : [
     {
       "text" : "The full name of the resource.",
@@ -1036,14 +1036,14 @@
       "text" : "?"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/HasClaims\/name",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/HasClaims\/name",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "name",
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/hasclaims\/name"
 },
-"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/HasClaims/nameComponents": {
+"doc://AuthFoundation/documentation/AuthFoundation/HasClaims/nameComponents": {
   "abstract" : [
     {
       "text" : "The person’s name components, pre-assigned to a PersonNameComponents object.",
@@ -1073,14 +1073,14 @@
       "text" : "PersonNameComponents"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/HasClaims\/nameComponents",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/HasClaims\/nameComponents",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "nameComponents",
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/hasclaims\/namecomponents"
 },
-"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/HasClaims/nickname": {
+"doc://AuthFoundation/documentation/AuthFoundation/HasClaims/nickname": {
   "abstract" : [
     {
       "text" : "The person’s nickname.",
@@ -1114,14 +1114,14 @@
       "text" : "?"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/HasClaims\/nickname",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/HasClaims\/nickname",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "nickname",
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/hasclaims\/nickname"
 },
-"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/HasClaims/payload": {
+"doc://AuthFoundation/documentation/AuthFoundation/HasClaims/payload": {
   "abstract" : [
     {
       "text" : "Raw paylaod of claims, as a dictionary representation.",
@@ -1163,7 +1163,7 @@
       "text" : "]"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/HasClaims\/payload",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/HasClaims\/payload",
   "kind" : "symbol",
   "required" : true,
   "role" : "symbol",
@@ -1171,7 +1171,7 @@
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/hasclaims\/payload"
 },
-"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/HasClaims/phoneNumber": {
+"doc://AuthFoundation/documentation/AuthFoundation/HasClaims/phoneNumber": {
   "abstract" : [
     {
       "text" : "The user’s phone number.",
@@ -1205,14 +1205,14 @@
       "text" : "?"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/HasClaims\/phoneNumber",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/HasClaims\/phoneNumber",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "phoneNumber",
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/hasclaims\/phonenumber"
 },
-"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/HasClaims/phoneNumberVerified": {
+"doc://AuthFoundation/documentation/AuthFoundation/HasClaims/phoneNumberVerified": {
   "abstract" : [
     {
       "text" : "Indicates whether or not the user’s phone number has been verified.",
@@ -1246,14 +1246,14 @@
       "text" : "?"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/HasClaims\/phoneNumberVerified",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/HasClaims\/phoneNumberVerified",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "phoneNumberVerified",
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/hasclaims\/phonenumberverified"
 },
-"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/HasClaims/picture": {
+"doc://AuthFoundation/documentation/AuthFoundation/HasClaims/picture": {
   "abstract" : [
     {
       "text" : "The user’s picture address.",
@@ -1287,14 +1287,14 @@
       "text" : "?"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/HasClaims\/picture",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/HasClaims\/picture",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "picture",
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/hasclaims\/picture"
 },
-"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/HasClaims/preferredUsername": {
+"doc://AuthFoundation/documentation/AuthFoundation/HasClaims/preferredUsername": {
   "abstract" : [
     {
       "text" : "The person’s preferred username.",
@@ -1328,14 +1328,14 @@
       "text" : "?"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/HasClaims\/preferredUsername",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/HasClaims\/preferredUsername",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "preferredUsername",
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/hasclaims\/preferredusername"
 },
-"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/HasClaims/profile": {
+"doc://AuthFoundation/documentation/AuthFoundation/HasClaims/profile": {
   "abstract" : [
     {
       "text" : "The user’s profile address.",
@@ -1369,14 +1369,14 @@
       "text" : "?"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/HasClaims\/profile",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/HasClaims\/profile",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "profile",
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/hasclaims\/profile"
 },
-"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/HasClaims/subject": {
+"doc://AuthFoundation/documentation/AuthFoundation/HasClaims/subject": {
   "abstract" : [
     {
       "text" : "The subject of the resource, if available.",
@@ -1410,14 +1410,14 @@
       "text" : "?"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/HasClaims\/subject",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/HasClaims\/subject",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "subject",
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/hasclaims\/subject"
 },
-"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/HasClaims/subscript(_:)-3hvf1": {
+"doc://AuthFoundation/documentation/AuthFoundation/HasClaims/subscript(_:)-3hvf1": {
   "abstract" : [
     {
       "text" : "Return the given claim’s value.",
@@ -1453,7 +1453,6 @@
     },
     {
       "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:14AuthFoundation9HasClaimsPyqd__SgAA5ClaimOcluip1TL_qd__mfp",
       "text" : "T"
     },
     {
@@ -1461,7 +1460,7 @@
       "text" : "?"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/HasClaims\/subscript(_:)-3hvf1",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/HasClaims\/subscript(_:)-3hvf1",
   "kind" : "symbol",
   "required" : true,
   "role" : "symbol",
@@ -1469,7 +1468,7 @@
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/hasclaims\/subscript(_:)-3hvf1"
 },
-"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/HasClaims/subscript(_:)-4t0dl": {
+"doc://AuthFoundation/documentation/AuthFoundation/HasClaims/subscript(_:)-4t0dl": {
   "abstract" : [
     {
       "text" : "Return the given claim’s value.",
@@ -1505,7 +1504,6 @@
     },
     {
       "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:14AuthFoundation9HasClaimsPyqd__SgSScluip1TL_qd__mfp",
       "text" : "T"
     },
     {
@@ -1513,7 +1511,7 @@
       "text" : "?"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/HasClaims\/subscript(_:)-4t0dl",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/HasClaims\/subscript(_:)-4t0dl",
   "kind" : "symbol",
   "required" : true,
   "role" : "symbol",
@@ -1521,7 +1519,7 @@
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/hasclaims\/subscript(_:)-4t0dl"
 },
-"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/HasClaims/timeZone": {
+"doc://AuthFoundation/documentation/AuthFoundation/HasClaims/timeZone": {
   "abstract" : [
     {
       "text" : "The user’s timezone, represented as a TimeZone object.",
@@ -1555,14 +1553,14 @@
       "text" : "?"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/HasClaims\/timeZone",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/HasClaims\/timeZone",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "timeZone",
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/hasclaims\/timezone"
 },
-"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/HasClaims/updatedAt": {
+"doc://AuthFoundation/documentation/AuthFoundation/HasClaims/updatedAt": {
   "abstract" : [
     {
       "text" : "The date the resource was updated at.",
@@ -1596,14 +1594,14 @@
       "text" : "?"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/HasClaims\/updatedAt",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/HasClaims\/updatedAt",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "updatedAt",
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/hasclaims\/updatedat"
 },
-"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/HasClaims/userLocale": {
+"doc://AuthFoundation/documentation/AuthFoundation/HasClaims/userLocale": {
   "abstract" : [
     {
       "text" : "The user’s locale, represnted as a Locale object.",
@@ -1637,14 +1635,14 @@
       "text" : "?"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/HasClaims\/userLocale",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/HasClaims\/userLocale",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "userLocale",
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/hasclaims\/userlocale"
 },
-"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/HasClaims/value(_:for:)": {
+"doc://AuthFoundation/documentation/AuthFoundation/HasClaims/value(_:for:)": {
   "abstract" : [
     {
       "text" : "Return the value of the requested claim, for the given type.",
@@ -1678,7 +1676,6 @@
     },
     {
       "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:14AuthFoundation9HasClaimsP5value_3forqd__Sgqd__m_SStlF1TL_qd__mfp",
       "text" : "T"
     },
     {
@@ -1704,7 +1701,6 @@
     },
     {
       "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:14AuthFoundation9HasClaimsP5value_3forqd__Sgqd__m_SStlF1TL_qd__mfp",
       "text" : "T"
     },
     {
@@ -1712,7 +1708,7 @@
       "text" : "?"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/HasClaims\/value(_:for:)",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/HasClaims\/value(_:for:)",
   "kind" : "symbol",
   "required" : true,
   "role" : "symbol",
@@ -1720,7 +1716,7 @@
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/hasclaims\/value(_:for:)"
 },
-"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/HasClaims/website": {
+"doc://AuthFoundation/documentation/AuthFoundation/HasClaims/website": {
   "abstract" : [
     {
       "text" : "The user’s website address.",
@@ -1754,14 +1750,14 @@
       "text" : "?"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/HasClaims\/website",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/HasClaims\/website",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "website",
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/hasclaims\/website"
 },
-"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/HasClaims/zoneinfo": {
+"doc://AuthFoundation/documentation/AuthFoundation/HasClaims/zoneinfo": {
   "abstract" : [
     {
       "text" : "The user’s timezone code.",
@@ -1795,14 +1791,14 @@
       "text" : "?"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/HasClaims\/zoneinfo",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/HasClaims\/zoneinfo",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "zoneinfo",
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/hasclaims\/zoneinfo"
 },
-"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/JWK": {
+"doc://AuthFoundation/documentation/AuthFoundation/JWK": {
   "abstract" : [
     {
       "text" : "Describes an individual key from an authorization server, which can be used to validate tokens or encrypt content.",
@@ -1823,7 +1819,7 @@
       "text" : "JWK"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/JWK",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JWK",
   "kind" : "symbol",
   "navigatorTitle" : [
     {
@@ -1836,7 +1832,7 @@
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/jwk"
 },
-"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/JWKS": {
+"doc://AuthFoundation/documentation/AuthFoundation/JWKS": {
   "abstract" : [
     {
       "text" : "Describes the collection of keys associated with an authorization server.",
@@ -1857,7 +1853,7 @@
       "text" : "JWKS"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/JWKS",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JWKS",
   "kind" : "symbol",
   "navigatorTitle" : [
     {
@@ -1870,7 +1866,7 @@
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/jwks"
 },
-"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/JWT": {
+"doc://AuthFoundation/documentation/AuthFoundation/JWT": {
   "abstract" : [
     {
       "text" : "Represents the contents of a JWT token, providing access to its payload contents.",
@@ -1891,7 +1887,7 @@
       "text" : "JWT"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/JWT",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JWT",
   "kind" : "symbol",
   "navigatorTitle" : [
     {
@@ -1904,7 +1900,7 @@
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/jwt"
 },
-"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/Token/Metadata": {
+"doc://AuthFoundation/documentation/AuthFoundation/Token/Metadata": {
   "abstract" : [
     {
       "text" : "Describes the metadata associated with a token.",
@@ -1925,7 +1921,7 @@
       "text" : "Metadata"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/Token\/Metadata",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/Token\/Metadata",
   "kind" : "symbol",
   "navigatorTitle" : [
     {
@@ -1938,7 +1934,7 @@
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/token\/metadata"
 },
-"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/TokenInfo": {
+"doc://AuthFoundation/documentation/AuthFoundation/TokenInfo": {
   "abstract" : [
     {
       "text" : "Introspected token information.",
@@ -1959,7 +1955,7 @@
       "text" : "TokenInfo"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/TokenInfo",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/TokenInfo",
   "kind" : "symbol",
   "navigatorTitle" : [
     {
@@ -1972,7 +1968,7 @@
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/tokeninfo"
 },
-"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/UserInfo": {
+"doc://AuthFoundation/documentation/AuthFoundation/UserInfo": {
   "abstract" : [
     {
       "text" : "User profile information.",
@@ -1993,7 +1989,7 @@
       "text" : "UserInfo"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/UserInfo",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/UserInfo",
   "kind" : "symbol",
   "navigatorTitle" : [
     {

@@ -8,16 +8,16 @@
   "hierarchy" : {
     "paths" : [
       [
-        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation",
-        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/Token",
-        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/Token\/Metadata",
-        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/Token\/Metadata\/ClaimContainer-Implementations"
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/Token",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/Token\/Metadata",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/Token\/Metadata\/ClaimContainer-Implementations"
       ]
     ]
   },
   "identifier" : {
     "interfaceLanguage" : "swift",
-    "url" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/Token\/Metadata\/customClaims"
+    "url" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/Token\/Metadata\/customClaims"
   },
   "kind" : "symbol",
   "metadata" : {
@@ -112,7 +112,7 @@
   ],
   "schemaVersion" : {
     "major" : 0,
-    "minor" : 2,
+    "minor" : 3,
     "patch" : 0
   },
   "sections" : [
@@ -132,21 +132,21 @@
   ]
 , 
 "references": {
-"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation": {
+"doc://AuthFoundation/documentation/AuthFoundation": {
   "abstract" : [
     {
       "text" : "Library that provides foundational features used by Okta’s authentication libraries, as well as APIs used to work with tokens and user credentials.",
       "type" : "text"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation",
   "kind" : "symbol",
   "role" : "collection",
   "title" : "AuthFoundation",
   "type" : "topic",
   "url" : "\/documentation\/authfoundation"
 },
-"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/Token": {
+"doc://AuthFoundation/documentation/AuthFoundation/Token": {
   "abstract" : [
     {
       "text" : "Token information representing a user’s access to a resource server, including access token, refresh token, and other related information.",
@@ -167,7 +167,7 @@
       "text" : "Token"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/Token",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/Token",
   "kind" : "symbol",
   "navigatorTitle" : [
     {
@@ -180,7 +180,7 @@
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/token"
 },
-"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/Token/Metadata": {
+"doc://AuthFoundation/documentation/AuthFoundation/Token/Metadata": {
   "abstract" : [
     {
       "text" : "Describes the metadata associated with a token.",
@@ -201,7 +201,7 @@
       "text" : "Metadata"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/Token\/Metadata",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/Token\/Metadata",
   "kind" : "symbol",
   "navigatorTitle" : [
     {
@@ -214,18 +214,18 @@
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/token\/metadata"
 },
-"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/Token/Metadata/ClaimContainer-Implementations": {
+"doc://AuthFoundation/documentation/AuthFoundation/Token/Metadata/ClaimContainer-Implementations": {
   "abstract" : [
 
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/Token\/Metadata\/ClaimContainer-Implementations",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/Token\/Metadata\/ClaimContainer-Implementations",
   "kind" : "article",
   "role" : "collectionGroup",
   "title" : "ClaimContainer Implementations",
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/token\/metadata\/claimcontainer-implementations"
 },
-"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/Token/Metadata/customClaims": {
+"doc://AuthFoundation/documentation/AuthFoundation/Token/Metadata/customClaims": {
   "abstract" : [
     {
       "text" : "Returns the list of custom claims this instance might contain.",
@@ -259,7 +259,7 @@
       "text" : "]"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/Token\/Metadata\/customClaims",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/Token\/Metadata\/customClaims",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "customClaims",

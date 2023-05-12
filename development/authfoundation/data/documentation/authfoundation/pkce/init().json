@@ -1,21 +1,15 @@
 {
-  "abstract" : [
-    {
-      "text" : "No overview available.",
-      "type" : "text"
-    }
-  ],
   "hierarchy" : {
     "paths" : [
       [
-        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation",
-        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/PKCE"
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/PKCE"
       ]
     ]
   },
   "identifier" : {
     "interfaceLanguage" : "swift",
-    "url" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/PKCE\/init()"
+    "url" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/PKCE\/init()"
   },
   "kind" : "symbol",
   "metadata" : {
@@ -67,7 +61,7 @@
   ],
   "schemaVersion" : {
     "major" : 0,
-    "minor" : 2,
+    "minor" : 3,
     "patch" : 0
   },
   "sections" : [
@@ -87,21 +81,21 @@
   ]
 , 
 "references": {
-"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation": {
+"doc://AuthFoundation/documentation/AuthFoundation": {
   "abstract" : [
     {
       "text" : "Library that provides foundational features used by Okta’s authentication libraries, as well as APIs used to work with tokens and user credentials.",
       "type" : "text"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation",
   "kind" : "symbol",
   "role" : "collection",
   "title" : "AuthFoundation",
   "type" : "topic",
   "url" : "\/documentation\/authfoundation"
 },
-"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/PKCE": {
+"doc://AuthFoundation/documentation/AuthFoundation/PKCE": {
   "abstract" : [
     {
       "text" : "Object defining the structure and settings of a PKCE challenge, including the verifier code, the encoded challenge, and the method used to exchange this information with the server.",
@@ -122,7 +116,7 @@
       "text" : "PKCE"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/PKCE",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/PKCE",
   "kind" : "symbol",
   "navigatorTitle" : [
     {
@@ -135,7 +129,7 @@
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/pkce"
 },
-"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/PKCE/init()": {
+"doc://AuthFoundation/documentation/AuthFoundation/PKCE/init()": {
   "abstract" : [
 
   ],
@@ -149,7 +143,7 @@
       "text" : "?()"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/PKCE\/init()",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/PKCE\/init()",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "init()",

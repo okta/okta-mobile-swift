@@ -1,21 +1,15 @@
 {
-  "abstract" : [
-    {
-      "text" : "No overview available.",
-      "type" : "text"
-    }
-  ],
   "hierarchy" : {
     "paths" : [
       [
-        "doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/OktaOAuth2",
-        "doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/OktaOAuth2\/ResourceOwnerFlow"
+        "doc:\/\/OktaOAuth2\/documentation\/OktaOAuth2",
+        "doc:\/\/OktaOAuth2\/documentation\/OktaOAuth2\/ResourceOwnerFlow"
       ]
     ]
   },
   "identifier" : {
     "interfaceLanguage" : "swift",
-    "url" : "doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/OktaOAuth2\/ResourceOwnerFlow\/UsesDelegateCollection-Implementations"
+    "url" : "doc:\/\/OktaOAuth2\/documentation\/OktaOAuth2\/ResourceOwnerFlow\/UsesDelegateCollection-Implementations"
   },
   "kind" : "article",
   "metadata" : {
@@ -29,7 +23,7 @@
   },
   "schemaVersion" : {
     "major" : 0,
-    "minor" : 2,
+    "minor" : 3,
     "patch" : 0
   },
   "sections" : [
@@ -39,15 +33,15 @@
     {
       "generated" : true,
       "identifiers" : [
-        "doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/OktaOAuth2\/ResourceOwnerFlow\/add(delegate:)",
-        "doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/OktaOAuth2\/ResourceOwnerFlow\/remove(delegate:)"
+        "doc:\/\/OktaOAuth2\/documentation\/OktaOAuth2\/ResourceOwnerFlow\/add(delegate:)",
+        "doc:\/\/OktaOAuth2\/documentation\/OktaOAuth2\/ResourceOwnerFlow\/remove(delegate:)"
       ],
       "title" : "Instance Methods"
     },
     {
       "generated" : true,
       "identifiers" : [
-        "doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/OktaOAuth2\/ResourceOwnerFlow\/Delegate"
+        "doc:\/\/OktaOAuth2\/documentation\/OktaOAuth2\/ResourceOwnerFlow\/Delegate"
       ],
       "title" : "Type Aliases"
     }
@@ -66,27 +60,28 @@
   ]
 , 
 "references": {
-"doc://com.okta.mobile.oktaoauth2/documentation/OktaOAuth2": {
+"doc://OktaOAuth2/documentation/OktaOAuth2": {
   "abstract" : [
     {
       "text" : "Interact with Okta’s OAuth2 APIs to authenticate users, and interact with user resources.",
       "type" : "text"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/OktaOAuth2",
+  "identifier" : "doc:\/\/OktaOAuth2\/documentation\/OktaOAuth2",
   "kind" : "symbol",
   "role" : "collection",
   "title" : "OktaOAuth2",
   "type" : "topic",
   "url" : "\/documentation\/oktaoauth2"
 },
-"doc://com.okta.mobile.oktaoauth2/documentation/OktaOAuth2/ResourceOwnerFlow": {
+"doc://OktaOAuth2/documentation/OktaOAuth2/ResourceOwnerFlow": {
   "abstract" : [
     {
       "text" : "An authentication flow class that implements the Resource Owner Flow exchange.",
       "type" : "text"
     }
   ],
+  "deprecated" : true,
   "fragments" : [
     {
       "kind" : "keyword",
@@ -101,7 +96,7 @@
       "text" : "ResourceOwnerFlow"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/OktaOAuth2\/ResourceOwnerFlow",
+  "identifier" : "doc:\/\/OktaOAuth2\/documentation\/OktaOAuth2\/ResourceOwnerFlow",
   "kind" : "symbol",
   "navigatorTitle" : [
     {
@@ -114,7 +109,7 @@
   "type" : "topic",
   "url" : "\/documentation\/oktaoauth2\/resourceownerflow"
 },
-"doc://com.okta.mobile.oktaoauth2/documentation/OktaOAuth2/ResourceOwnerFlow/Delegate": {
+"doc://OktaOAuth2/documentation/OktaOAuth2/ResourceOwnerFlow/Delegate": {
   "abstract" : [
 
   ],
@@ -132,7 +127,7 @@
       "text" : "Delegate"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/OktaOAuth2\/ResourceOwnerFlow\/Delegate",
+  "identifier" : "doc:\/\/OktaOAuth2\/documentation\/OktaOAuth2\/ResourceOwnerFlow\/Delegate",
   "kind" : "symbol",
   "navigatorTitle" : [
     {
@@ -145,7 +140,7 @@
   "type" : "topic",
   "url" : "\/documentation\/oktaoauth2\/resourceownerflow\/delegate"
 },
-"doc://com.okta.mobile.oktaoauth2/documentation/OktaOAuth2/ResourceOwnerFlow/add(delegate:)": {
+"doc://OktaOAuth2/documentation/OktaOAuth2/ResourceOwnerFlow/add(delegate:)": {
   "abstract" : [
 
   ],
@@ -191,14 +186,14 @@
       "text" : ")"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/OktaOAuth2\/ResourceOwnerFlow\/add(delegate:)",
+  "identifier" : "doc:\/\/OktaOAuth2\/documentation\/OktaOAuth2\/ResourceOwnerFlow\/add(delegate:)",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "add(delegate:)",
   "type" : "topic",
   "url" : "\/documentation\/oktaoauth2\/resourceownerflow\/add(delegate:)"
 },
-"doc://com.okta.mobile.oktaoauth2/documentation/OktaOAuth2/ResourceOwnerFlow/remove(delegate:)": {
+"doc://OktaOAuth2/documentation/OktaOAuth2/ResourceOwnerFlow/remove(delegate:)": {
   "abstract" : [
 
   ],
@@ -244,7 +239,7 @@
       "text" : ")"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/OktaOAuth2\/ResourceOwnerFlow\/remove(delegate:)",
+  "identifier" : "doc:\/\/OktaOAuth2\/documentation\/OktaOAuth2\/ResourceOwnerFlow\/remove(delegate:)",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "remove(delegate:)",

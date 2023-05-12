@@ -1,21 +1,15 @@
 {
-  "abstract" : [
-    {
-      "text" : "No overview available.",
-      "type" : "text"
-    }
-  ],
   "hierarchy" : {
     "paths" : [
       [
-        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation",
-        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/OktaAPIError"
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/OktaAPIError"
       ]
     ]
   },
   "identifier" : {
     "interfaceLanguage" : "swift",
-    "url" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/OktaAPIError\/LocalizedError-Implementations"
+    "url" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/OktaAPIError\/LocalizedError-Implementations"
   },
   "kind" : "article",
   "metadata" : {
@@ -29,7 +23,7 @@
   },
   "schemaVersion" : {
     "major" : 0,
-    "minor" : 2,
+    "minor" : 3,
     "patch" : 0
   },
   "sections" : [
@@ -39,10 +33,10 @@
     {
       "generated" : true,
       "identifiers" : [
-        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/OktaAPIError\/errorDescription-31v0k",
-        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/OktaAPIError\/failureReason",
-        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/OktaAPIError\/helpAnchor",
-        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/OktaAPIError\/recoverySuggestion"
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/OktaAPIError\/errorDescription-31v0k",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/OktaAPIError\/failureReason",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/OktaAPIError\/helpAnchor",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/OktaAPIError\/recoverySuggestion"
       ],
       "title" : "Instance Properties"
     }
@@ -61,21 +55,21 @@
   ]
 , 
 "references": {
-"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation": {
+"doc://AuthFoundation/documentation/AuthFoundation": {
   "abstract" : [
     {
       "text" : "Library that provides foundational features used by Okta’s authentication libraries, as well as APIs used to work with tokens and user credentials.",
       "type" : "text"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation",
   "kind" : "symbol",
   "role" : "collection",
   "title" : "AuthFoundation",
   "type" : "topic",
   "url" : "\/documentation\/authfoundation"
 },
-"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/OktaAPIError": {
+"doc://AuthFoundation/documentation/AuthFoundation/OktaAPIError": {
   "abstract" : [
     {
       "text" : "Describes errors that may be reported from an Okta API endpoint.",
@@ -96,7 +90,7 @@
       "text" : "OktaAPIError"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/OktaAPIError",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/OktaAPIError",
   "kind" : "symbol",
   "navigatorTitle" : [
     {
@@ -109,12 +103,9 @@
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/oktaapierror"
 },
-"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/OktaAPIError/errorDescription-31v0k": {
+"doc://AuthFoundation/documentation/AuthFoundation/OktaAPIError/errorDescription-31v0k": {
   "abstract" : [
-    {
-      "text" : "A localized message describing what error occurred.",
-      "type" : "text"
-    }
+
   ],
   "fragments" : [
     {
@@ -143,19 +134,16 @@
       "text" : "?"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/OktaAPIError\/errorDescription-31v0k",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/OktaAPIError\/errorDescription-31v0k",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "errorDescription",
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/oktaapierror\/errordescription-31v0k"
 },
-"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/OktaAPIError/failureReason": {
+"doc://AuthFoundation/documentation/AuthFoundation/OktaAPIError/failureReason": {
   "abstract" : [
-    {
-      "text" : "A localized message describing the reason for the failure.",
-      "type" : "text"
-    }
+
   ],
   "fragments" : [
     {
@@ -184,19 +172,16 @@
       "text" : "?"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/OktaAPIError\/failureReason",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/OktaAPIError\/failureReason",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "failureReason",
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/oktaapierror\/failurereason"
 },
-"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/OktaAPIError/helpAnchor": {
+"doc://AuthFoundation/documentation/AuthFoundation/OktaAPIError/helpAnchor": {
   "abstract" : [
-    {
-      "text" : "A localized message providing “help” text if the user requests help.",
-      "type" : "text"
-    }
+
   ],
   "fragments" : [
     {
@@ -225,19 +210,16 @@
       "text" : "?"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/OktaAPIError\/helpAnchor",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/OktaAPIError\/helpAnchor",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "helpAnchor",
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/oktaapierror\/helpanchor"
 },
-"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/OktaAPIError/recoverySuggestion": {
+"doc://AuthFoundation/documentation/AuthFoundation/OktaAPIError/recoverySuggestion": {
   "abstract" : [
-    {
-      "text" : "A localized message describing how one might recover from the failure.",
-      "type" : "text"
-    }
+
   ],
   "fragments" : [
     {
@@ -266,7 +248,7 @@
       "text" : "?"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/OktaAPIError\/recoverySuggestion",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/OktaAPIError\/recoverySuggestion",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "recoverySuggestion",

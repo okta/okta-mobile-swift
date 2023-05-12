@@ -8,15 +8,15 @@
   "hierarchy" : {
     "paths" : [
       [
-        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation",
-        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/Keychain",
-        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/Keychain\/Item"
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/Keychain",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/Keychain\/Item"
       ]
     ]
   },
   "identifier" : {
     "interfaceLanguage" : "swift",
-    "url" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/Keychain\/Item\/init(account:service:server:accessibility:accessGroup:accessControl:synchronizable:label:description:generic:value:)"
+    "url" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/Keychain\/Item\/init(account:service:server:accessibility:accessGroup:accessControl:synchronizable:label:description:generic:value:)"
   },
   "kind" : "symbol",
   "metadata" : {
@@ -88,6 +88,15 @@
       {
         "kind" : "text",
         "text" : ": "
+      },
+      {
+        "kind" : "typeIdentifier",
+        "preciseIdentifier" : "s:14AuthFoundation8KeychainV",
+        "text" : "Keychain"
+      },
+      {
+        "kind" : "text",
+        "text" : "."
       },
       {
         "kind" : "typeIdentifier",
@@ -307,7 +316,17 @@
               "text" : ": "
             },
             {
-              "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/Keychain\/Accessibility",
+              "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/Keychain",
+              "kind" : "typeIdentifier",
+              "preciseIdentifier" : "s:14AuthFoundation8KeychainV",
+              "text" : "Keychain"
+            },
+            {
+              "kind" : "text",
+              "text" : "."
+            },
+            {
+              "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/Keychain\/Accessibility",
               "kind" : "typeIdentifier",
               "preciseIdentifier" : "s:14AuthFoundation8KeychainV13AccessibilityO",
               "text" : "Accessibility"
@@ -550,7 +569,7 @@
                   "type" : "text"
                 },
                 {
-                  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/Keychain\/Item\/accessibility",
+                  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/Keychain\/Item\/accessibility",
                   "isActive" : true,
                   "type" : "reference"
                 },
@@ -583,7 +602,7 @@
   ],
   "schemaVersion" : {
     "major" : 0,
-    "minor" : 2,
+    "minor" : 3,
     "patch" : 0
   },
   "sections" : [
@@ -603,21 +622,21 @@
   ]
 , 
 "references": {
-"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation": {
+"doc://AuthFoundation/documentation/AuthFoundation": {
   "abstract" : [
     {
       "text" : "Library that provides foundational features used by Okta’s authentication libraries, as well as APIs used to work with tokens and user credentials.",
       "type" : "text"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation",
   "kind" : "symbol",
   "role" : "collection",
   "title" : "AuthFoundation",
   "type" : "topic",
   "url" : "\/documentation\/authfoundation"
 },
-"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/Keychain": {
+"doc://AuthFoundation/documentation/AuthFoundation/Keychain": {
   "abstract" : [
     {
       "text" : "Defines convenience mechanisms for interacting with the keychain, including searching, creating, and deleting keychain items.",
@@ -638,7 +657,7 @@
       "text" : "Keychain"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/Keychain",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/Keychain",
   "kind" : "symbol",
   "navigatorTitle" : [
     {
@@ -651,7 +670,7 @@
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/keychain"
 },
-"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/Keychain/Accessibility": {
+"doc://AuthFoundation/documentation/AuthFoundation/Keychain/Accessibility": {
   "abstract" : [
     {
       "text" : "Defines the accessibility level for keychain items.",
@@ -672,7 +691,7 @@
       "text" : "Accessibility"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/Keychain\/Accessibility",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/Keychain\/Accessibility",
   "kind" : "symbol",
   "navigatorTitle" : [
     {
@@ -685,7 +704,7 @@
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/keychain\/accessibility"
 },
-"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/Keychain/Item": {
+"doc://AuthFoundation/documentation/AuthFoundation/Keychain/Item": {
   "abstract" : [
     {
       "text" : "Defines an individual keychain item. This may be created using the designated initializer for the purposes of saving a new keychain item, or may be created as the result of getting a preexisting item from the keychain.",
@@ -706,7 +725,7 @@
       "text" : "Item"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/Keychain\/Item",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/Keychain\/Item",
   "kind" : "symbol",
   "navigatorTitle" : [
     {
@@ -719,7 +738,7 @@
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/keychain\/item"
 },
-"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/Keychain/Item/accessibility": {
+"doc://AuthFoundation/documentation/AuthFoundation/Keychain/Item/accessibility": {
   "abstract" : [
     {
       "text" : "The accessibility level for this keychain item.",
@@ -745,6 +764,15 @@
     },
     {
       "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:14AuthFoundation8KeychainV",
+      "text" : "Keychain"
+    },
+    {
+      "kind" : "text",
+      "text" : "."
+    },
+    {
+      "kind" : "typeIdentifier",
       "preciseIdentifier" : "s:14AuthFoundation8KeychainV13AccessibilityO",
       "text" : "Accessibility"
     },
@@ -753,14 +781,14 @@
       "text" : "?"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/Keychain\/Item\/accessibility",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/Keychain\/Item\/accessibility",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "accessibility",
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/keychain\/item\/accessibility"
 },
-"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/Keychain/Item/init(account:service:server:accessibility:accessGroup:accessControl:synchronizable:label:description:generic:value:)": {
+"doc://AuthFoundation/documentation/AuthFoundation/Keychain/Item/init(account:service:server:accessibility:accessGroup:accessControl:synchronizable:label:description:generic:value:)": {
   "abstract" : [
     {
       "text" : "Designated initializer, used for creating a new keychain item.",
@@ -834,6 +862,15 @@
     {
       "kind" : "text",
       "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:14AuthFoundation8KeychainV",
+      "text" : "Keychain"
+    },
+    {
+      "kind" : "text",
+      "text" : "."
     },
     {
       "kind" : "typeIdentifier",
@@ -964,7 +1001,7 @@
       "text" : ")"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/Keychain\/Item\/init(account:service:server:accessibility:accessGroup:accessControl:synchronizable:label:description:generic:value:)",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/Keychain\/Item\/init(account:service:server:accessibility:accessGroup:accessControl:synchronizable:label:description:generic:value:)",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "init(account:service:server:accessibility:accessGroup:accessControl:synchronizable:label:description:generic:value:)",

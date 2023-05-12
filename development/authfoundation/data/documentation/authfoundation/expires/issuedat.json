@@ -8,14 +8,14 @@
   "hierarchy" : {
     "paths" : [
       [
-        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation",
-        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/Expires"
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/Expires"
       ]
     ]
   },
   "identifier" : {
     "interfaceLanguage" : "swift",
-    "url" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/Expires\/issuedAt"
+    "url" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/Expires\/issuedAt"
   },
   "kind" : "symbol",
   "metadata" : {
@@ -110,7 +110,7 @@
   ],
   "schemaVersion" : {
     "major" : 0,
-    "minor" : 2,
+    "minor" : 3,
     "patch" : 0
   },
   "sections" : [
@@ -130,21 +130,21 @@
   ]
 , 
 "references": {
-"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation": {
+"doc://AuthFoundation/documentation/AuthFoundation": {
   "abstract" : [
     {
       "text" : "Library that provides foundational features used by Okta’s authentication libraries, as well as APIs used to work with tokens and user credentials.",
       "type" : "text"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation",
   "kind" : "symbol",
   "role" : "collection",
   "title" : "AuthFoundation",
   "type" : "topic",
   "url" : "\/documentation\/authfoundation"
 },
-"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/Expires": {
+"doc://AuthFoundation/documentation/AuthFoundation/Expires": {
   "abstract" : [
     {
       "text" : "Protocol that indicates an object is capable of expiring.",
@@ -165,7 +165,7 @@
       "text" : "Expires"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/Expires",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/Expires",
   "kind" : "symbol",
   "navigatorTitle" : [
     {
@@ -178,7 +178,7 @@
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/expires"
 },
-"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/Expires/issuedAt": {
+"doc://AuthFoundation/documentation/AuthFoundation/Expires/issuedAt": {
   "abstract" : [
     {
       "text" : "The date this object was issued, from which the expiration time will be calculated.",
@@ -212,7 +212,7 @@
       "text" : "?"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/Expires\/issuedAt",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/Expires\/issuedAt",
   "kind" : "symbol",
   "required" : true,
   "role" : "symbol",

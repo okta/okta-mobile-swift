@@ -1,22 +1,30 @@
 {
   "abstract" : [
     {
-      "text" : "Provides the opportunity to customize the logout URL.",
+      "text" : "Inherited from ",
+      "type" : "text"
+    },
+    {
+      "code" : "SessionLogoutFlowDelegate.logout(flow:customizeUrl:)",
+      "type" : "codeVoice"
+    },
+    {
+      "text" : ".",
       "type" : "text"
     }
   ],
   "hierarchy" : {
     "paths" : [
       [
-        "doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/OktaOAuth2",
-        "doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/OktaOAuth2\/SessionLogoutFlowDelegate",
-        "doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/OktaOAuth2\/SessionLogoutFlowDelegate\/logout(flow:customizeUrl:)-9isfs"
+        "doc:\/\/OktaOAuth2\/documentation\/OktaOAuth2",
+        "doc:\/\/OktaOAuth2\/documentation\/OktaOAuth2\/SessionLogoutFlowDelegate",
+        "doc:\/\/OktaOAuth2\/documentation\/OktaOAuth2\/SessionLogoutFlowDelegate\/logout(flow:customizeUrl:)-9isfs"
       ]
     ]
   },
   "identifier" : {
     "interfaceLanguage" : "swift",
-    "url" : "doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/OktaOAuth2\/SessionLogoutFlowDelegate\/logout(flow:customizeUrl:)-95xcf"
+    "url" : "doc:\/\/OktaOAuth2\/documentation\/OktaOAuth2\/SessionLogoutFlowDelegate\/logout(flow:customizeUrl:)-95xcf"
   },
   "kind" : "symbol",
   "metadata" : {
@@ -57,7 +65,6 @@
       },
       {
         "kind" : "typeIdentifier",
-        "preciseIdentifier" : "s:10OktaOAuth225SessionLogoutFlowDelegatePAAE6logout4flow12customizeUrlyqd___10Foundation13URLComponentsVztAA0cdE0CRbd__lF0E0L_qd__mfp",
         "text" : "Flow"
       },
       {
@@ -145,7 +152,6 @@
             },
             {
               "kind" : "typeIdentifier",
-              "preciseIdentifier" : "s:10OktaOAuth225SessionLogoutFlowDelegatePAAE6logout4flow12customizeUrlyqd___10Foundation13URLComponentsVztAA0cdE0CRbd__lF0E0L_qd__mfp",
               "text" : "Flow"
             },
             {
@@ -202,7 +208,7 @@
               "text" : " : "
             },
             {
-              "identifier" : "doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/OktaOAuth2\/SessionLogoutFlow",
+              "identifier" : "doc:\/\/OktaOAuth2\/documentation\/OktaOAuth2\/SessionLogoutFlow",
               "kind" : "typeIdentifier",
               "preciseIdentifier" : "s:10OktaOAuth217SessionLogoutFlowC",
               "text" : "SessionLogoutFlow"
@@ -211,72 +217,11 @@
         }
       ],
       "kind" : "declarations"
-    },
-    {
-      "kind" : "parameters",
-      "parameters" : [
-        {
-          "content" : [
-            {
-              "inlineContent" : [
-                {
-                  "text" : "The logout flow.",
-                  "type" : "text"
-                }
-              ],
-              "type" : "paragraph"
-            }
-          ],
-          "name" : "flow"
-        },
-        {
-          "content" : [
-            {
-              "inlineContent" : [
-                {
-                  "text" : "A ",
-                  "type" : "text"
-                },
-                {
-                  "code" : "URLComponents",
-                  "type" : "codeVoice"
-                },
-                {
-                  "text" : " instance that represents the logout URL, prior to conversion to a URL.",
-                  "type" : "text"
-                }
-              ],
-              "type" : "paragraph"
-            }
-          ],
-          "name" : "urlComponents"
-        }
-      ]
-    },
-    {
-      "content" : [
-        {
-          "anchor" : "discussion",
-          "level" : 2,
-          "text" : "Discussion",
-          "type" : "heading"
-        },
-        {
-          "inlineContent" : [
-            {
-              "text" : "The logout URL is generated from a combination of configuration sources, as well as the end session endpoint’s OpenID configuration. When specific values need to be added to the URL, such as custom query string or other URL parameters, this delegate method enables you to manipulate the URL before it is passed to a web browser.",
-              "type" : "text"
-            }
-          ],
-          "type" : "paragraph"
-        }
-      ],
-      "kind" : "content"
     }
   ],
   "schemaVersion" : {
     "major" : 0,
-    "minor" : 2,
+    "minor" : 3,
     "patch" : 0
   },
   "sections" : [
@@ -296,21 +241,21 @@
   ]
 , 
 "references": {
-"doc://com.okta.mobile.oktaoauth2/documentation/OktaOAuth2": {
+"doc://OktaOAuth2/documentation/OktaOAuth2": {
   "abstract" : [
     {
       "text" : "Interact with Okta’s OAuth2 APIs to authenticate users, and interact with user resources.",
       "type" : "text"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/OktaOAuth2",
+  "identifier" : "doc:\/\/OktaOAuth2\/documentation\/OktaOAuth2",
   "kind" : "symbol",
   "role" : "collection",
   "title" : "OktaOAuth2",
   "type" : "topic",
   "url" : "\/documentation\/oktaoauth2"
 },
-"doc://com.okta.mobile.oktaoauth2/documentation/OktaOAuth2/SessionLogoutFlow": {
+"doc://OktaOAuth2/documentation/OktaOAuth2/SessionLogoutFlow": {
   "abstract" : [
     {
       "text" : "An logout flow class that implements the Session Logout Flow.",
@@ -331,7 +276,7 @@
       "text" : "SessionLogoutFlow"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/OktaOAuth2\/SessionLogoutFlow",
+  "identifier" : "doc:\/\/OktaOAuth2\/documentation\/OktaOAuth2\/SessionLogoutFlow",
   "kind" : "symbol",
   "navigatorTitle" : [
     {
@@ -344,14 +289,14 @@
   "type" : "topic",
   "url" : "\/documentation\/oktaoauth2\/sessionlogoutflow"
 },
-"doc://com.okta.mobile.oktaoauth2/documentation/OktaOAuth2/SessionLogoutFlowDelegate": {
+"doc://OktaOAuth2/documentation/OktaOAuth2/SessionLogoutFlowDelegate": {
   "abstract" : [
     {
       "text" : "The delegate of a ",
       "type" : "text"
     },
     {
-      "identifier" : "doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/OktaOAuth2\/SessionLogoutFlow",
+      "identifier" : "doc:\/\/OktaOAuth2\/documentation\/OktaOAuth2\/SessionLogoutFlow",
       "isActive" : true,
       "type" : "reference"
     },
@@ -374,7 +319,7 @@
       "text" : "SessionLogoutFlowDelegate"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/OktaOAuth2\/SessionLogoutFlowDelegate",
+  "identifier" : "doc:\/\/OktaOAuth2\/documentation\/OktaOAuth2\/SessionLogoutFlowDelegate",
   "kind" : "symbol",
   "navigatorTitle" : [
     {
@@ -387,12 +332,9 @@
   "type" : "topic",
   "url" : "\/documentation\/oktaoauth2\/sessionlogoutflowdelegate"
 },
-"doc://com.okta.mobile.oktaoauth2/documentation/OktaOAuth2/SessionLogoutFlowDelegate/logout(flow:customizeUrl:)-95xcf": {
+"doc://OktaOAuth2/documentation/OktaOAuth2/SessionLogoutFlowDelegate/logout(flow:customizeUrl:)-95xcf": {
   "abstract" : [
-    {
-      "text" : "Provides the opportunity to customize the logout URL.",
-      "type" : "text"
-    }
+
   ],
   "fragments" : [
     {
@@ -429,7 +371,6 @@
     },
     {
       "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:10OktaOAuth225SessionLogoutFlowDelegatePAAE6logout4flow12customizeUrlyqd___10Foundation13URLComponentsVztAA0cdE0CRbd__lF0E0L_qd__mfp",
       "text" : "Flow"
     },
     {
@@ -462,14 +403,14 @@
       "text" : ")"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/OktaOAuth2\/SessionLogoutFlowDelegate\/logout(flow:customizeUrl:)-95xcf",
+  "identifier" : "doc:\/\/OktaOAuth2\/documentation\/OktaOAuth2\/SessionLogoutFlowDelegate\/logout(flow:customizeUrl:)-95xcf",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "logout(flow:customizeUrl:)",
   "type" : "topic",
   "url" : "\/documentation\/oktaoauth2\/sessionlogoutflowdelegate\/logout(flow:customizeurl:)-95xcf"
 },
-"doc://com.okta.mobile.oktaoauth2/documentation/OktaOAuth2/SessionLogoutFlowDelegate/logout(flow:customizeUrl:)-9isfs": {
+"doc://OktaOAuth2/documentation/OktaOAuth2/SessionLogoutFlowDelegate/logout(flow:customizeUrl:)-9isfs": {
   "abstract" : [
     {
       "text" : "Provides the opportunity to customize the logout URL.",
@@ -512,7 +453,6 @@
     },
     {
       "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:10OktaOAuth225SessionLogoutFlowDelegateP6logout4flow12customizeUrlyqd___10Foundation13URLComponentsVztAA0cdE0CRbd__lF0E0L_qd__mfp",
       "text" : "Flow"
     },
     {
@@ -545,7 +485,7 @@
       "text" : ")"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/OktaOAuth2\/SessionLogoutFlowDelegate\/logout(flow:customizeUrl:)-9isfs",
+  "identifier" : "doc:\/\/OktaOAuth2\/documentation\/OktaOAuth2\/SessionLogoutFlowDelegate\/logout(flow:customizeUrl:)-9isfs",
   "kind" : "symbol",
   "required" : true,
   "role" : "symbol",

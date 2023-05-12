@@ -8,14 +8,14 @@
   "hierarchy" : {
     "paths" : [
       [
-        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation",
-        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/JWK"
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JWK"
       ]
     ]
   },
   "identifier" : {
     "interfaceLanguage" : "swift",
-    "url" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/JWK\/validator"
+    "url" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JWK\/validator"
   },
   "kind" : "symbol",
   "metadata" : {
@@ -97,7 +97,7 @@
               "text" : ": "
             },
             {
-              "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/JWKValidator",
+              "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JWKValidator",
               "kind" : "typeIdentifier",
               "preciseIdentifier" : "s:14AuthFoundation12JWKValidatorP",
               "text" : "JWKValidator"
@@ -122,7 +122,7 @@
               "type" : "text"
             },
             {
-              "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/JWKValidator",
+              "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JWKValidator",
               "isActive" : true,
               "type" : "reference"
             },
@@ -139,7 +139,7 @@
   ],
   "schemaVersion" : {
     "major" : 0,
-    "minor" : 2,
+    "minor" : 3,
     "patch" : 0
   },
   "sections" : [
@@ -159,21 +159,21 @@
   ]
 , 
 "references": {
-"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation": {
+"doc://AuthFoundation/documentation/AuthFoundation": {
   "abstract" : [
     {
       "text" : "Library that provides foundational features used by Okta’s authentication libraries, as well as APIs used to work with tokens and user credentials.",
       "type" : "text"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation",
   "kind" : "symbol",
   "role" : "collection",
   "title" : "AuthFoundation",
   "type" : "topic",
   "url" : "\/documentation\/authfoundation"
 },
-"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/JWK": {
+"doc://AuthFoundation/documentation/AuthFoundation/JWK": {
   "abstract" : [
     {
       "text" : "Describes an individual key from an authorization server, which can be used to validate tokens or encrypt content.",
@@ -194,7 +194,7 @@
       "text" : "JWK"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/JWK",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JWK",
   "kind" : "symbol",
   "navigatorTitle" : [
     {
@@ -207,7 +207,7 @@
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/jwk"
 },
-"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/JWK/validator": {
+"doc://AuthFoundation/documentation/AuthFoundation/JWK/validator": {
   "abstract" : [
     {
       "text" : "The validator instance used to perform verification steps on JWT tokens.",
@@ -245,14 +245,14 @@
       "text" : "JWKValidator"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/JWK\/validator",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JWK\/validator",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "validator",
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/jwk\/validator"
 },
-"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/JWKValidator": {
+"doc://AuthFoundation/documentation/AuthFoundation/JWKValidator": {
   "abstract" : [
     {
       "text" : "Protocol used to implement JWK token validation.",
@@ -273,7 +273,7 @@
       "text" : "JWKValidator"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/JWKValidator",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JWKValidator",
   "kind" : "symbol",
   "navigatorTitle" : [
     {

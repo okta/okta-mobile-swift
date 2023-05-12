@@ -1,22 +1,30 @@
 {
   "abstract" : [
     {
-      "text" : "Called when the authorization URL has been created, indicating the URL should be presented to the user.",
+      "text" : "Inherited from ",
+      "type" : "text"
+    },
+    {
+      "code" : "AuthorizationCodeFlowDelegate.authentication(flow:shouldAuthenticateUsing:)",
+      "type" : "codeVoice"
+    },
+    {
+      "text" : ".",
       "type" : "text"
     }
   ],
   "hierarchy" : {
     "paths" : [
       [
-        "doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/OktaOAuth2",
-        "doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/OktaOAuth2\/AuthorizationCodeFlowDelegate",
-        "doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/OktaOAuth2\/AuthorizationCodeFlowDelegate\/authentication(flow:shouldAuthenticateUsing:)-9ux29"
+        "doc:\/\/OktaOAuth2\/documentation\/OktaOAuth2",
+        "doc:\/\/OktaOAuth2\/documentation\/OktaOAuth2\/AuthorizationCodeFlowDelegate",
+        "doc:\/\/OktaOAuth2\/documentation\/OktaOAuth2\/AuthorizationCodeFlowDelegate\/authentication(flow:shouldAuthenticateUsing:)-9ux29"
       ]
     ]
   },
   "identifier" : {
     "interfaceLanguage" : "swift",
-    "url" : "doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/OktaOAuth2\/AuthorizationCodeFlowDelegate\/authentication(flow:shouldAuthenticateUsing:)-5dd7o"
+    "url" : "doc:\/\/OktaOAuth2\/documentation\/OktaOAuth2\/AuthorizationCodeFlowDelegate\/authentication(flow:shouldAuthenticateUsing:)-5dd7o"
   },
   "kind" : "symbol",
   "metadata" : {
@@ -57,7 +65,6 @@
       },
       {
         "kind" : "typeIdentifier",
-        "preciseIdentifier" : "s:10OktaOAuth229AuthorizationCodeFlowDelegatePAAE14authentication4flow23shouldAuthenticateUsingyqd___10Foundation3URLVtAA0cdE0CRbd__lF0E0L_qd__mfp",
         "text" : "Flow"
       },
       {
@@ -137,7 +144,6 @@
             },
             {
               "kind" : "typeIdentifier",
-              "preciseIdentifier" : "s:10OktaOAuth229AuthorizationCodeFlowDelegatePAAE14authentication4flow23shouldAuthenticateUsingyqd___10Foundation3URLVtAA0cdE0CRbd__lF0E0L_qd__mfp",
               "text" : "Flow"
             },
             {
@@ -186,7 +192,7 @@
               "text" : " : "
             },
             {
-              "identifier" : "doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/OktaOAuth2\/AuthorizationCodeFlow",
+              "identifier" : "doc:\/\/OktaOAuth2\/documentation\/OktaOAuth2\/AuthorizationCodeFlow",
               "kind" : "typeIdentifier",
               "preciseIdentifier" : "s:10OktaOAuth221AuthorizationCodeFlowC",
               "text" : "AuthorizationCodeFlow"
@@ -195,44 +201,11 @@
         }
       ],
       "kind" : "declarations"
-    },
-    {
-      "kind" : "parameters",
-      "parameters" : [
-        {
-          "content" : [
-            {
-              "inlineContent" : [
-                {
-                  "text" : "The authentication flow.",
-                  "type" : "text"
-                }
-              ],
-              "type" : "paragraph"
-            }
-          ],
-          "name" : "flow"
-        },
-        {
-          "content" : [
-            {
-              "inlineContent" : [
-                {
-                  "text" : "The authorization URL to display in a browser to the user.",
-                  "type" : "text"
-                }
-              ],
-              "type" : "paragraph"
-            }
-          ],
-          "name" : "url"
-        }
-      ]
     }
   ],
   "schemaVersion" : {
     "major" : 0,
-    "minor" : 2,
+    "minor" : 3,
     "patch" : 0
   },
   "sections" : [
@@ -252,21 +225,21 @@
   ]
 , 
 "references": {
-"doc://com.okta.mobile.oktaoauth2/documentation/OktaOAuth2": {
+"doc://OktaOAuth2/documentation/OktaOAuth2": {
   "abstract" : [
     {
       "text" : "Interact with Okta’s OAuth2 APIs to authenticate users, and interact with user resources.",
       "type" : "text"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/OktaOAuth2",
+  "identifier" : "doc:\/\/OktaOAuth2\/documentation\/OktaOAuth2",
   "kind" : "symbol",
   "role" : "collection",
   "title" : "OktaOAuth2",
   "type" : "topic",
   "url" : "\/documentation\/oktaoauth2"
 },
-"doc://com.okta.mobile.oktaoauth2/documentation/OktaOAuth2/AuthorizationCodeFlow": {
+"doc://OktaOAuth2/documentation/OktaOAuth2/AuthorizationCodeFlow": {
   "abstract" : [
     {
       "text" : "An authentication flow class that implements the Authorization Code Flow exchange.",
@@ -287,7 +260,7 @@
       "text" : "AuthorizationCodeFlow"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/OktaOAuth2\/AuthorizationCodeFlow",
+  "identifier" : "doc:\/\/OktaOAuth2\/documentation\/OktaOAuth2\/AuthorizationCodeFlow",
   "kind" : "symbol",
   "navigatorTitle" : [
     {
@@ -300,14 +273,14 @@
   "type" : "topic",
   "url" : "\/documentation\/oktaoauth2\/authorizationcodeflow"
 },
-"doc://com.okta.mobile.oktaoauth2/documentation/OktaOAuth2/AuthorizationCodeFlowDelegate": {
+"doc://OktaOAuth2/documentation/OktaOAuth2/AuthorizationCodeFlowDelegate": {
   "abstract" : [
     {
       "text" : "The delegate of a ",
       "type" : "text"
     },
     {
-      "identifier" : "doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/OktaOAuth2\/AuthorizationCodeFlow",
+      "identifier" : "doc:\/\/OktaOAuth2\/documentation\/OktaOAuth2\/AuthorizationCodeFlow",
       "isActive" : true,
       "type" : "reference"
     },
@@ -330,7 +303,7 @@
       "text" : "AuthorizationCodeFlowDelegate"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/OktaOAuth2\/AuthorizationCodeFlowDelegate",
+  "identifier" : "doc:\/\/OktaOAuth2\/documentation\/OktaOAuth2\/AuthorizationCodeFlowDelegate",
   "kind" : "symbol",
   "navigatorTitle" : [
     {
@@ -343,12 +316,9 @@
   "type" : "topic",
   "url" : "\/documentation\/oktaoauth2\/authorizationcodeflowdelegate"
 },
-"doc://com.okta.mobile.oktaoauth2/documentation/OktaOAuth2/AuthorizationCodeFlowDelegate/authentication(flow:shouldAuthenticateUsing:)-5dd7o": {
+"doc://OktaOAuth2/documentation/OktaOAuth2/AuthorizationCodeFlowDelegate/authentication(flow:shouldAuthenticateUsing:)-5dd7o": {
   "abstract" : [
-    {
-      "text" : "Called when the authorization URL has been created, indicating the URL should be presented to the user.",
-      "type" : "text"
-    }
+
   ],
   "fragments" : [
     {
@@ -385,7 +355,6 @@
     },
     {
       "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:10OktaOAuth229AuthorizationCodeFlowDelegatePAAE14authentication4flow23shouldAuthenticateUsingyqd___10Foundation3URLVtAA0cdE0CRbd__lF0E0L_qd__mfp",
       "text" : "Flow"
     },
     {
@@ -410,14 +379,14 @@
       "text" : ")"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/OktaOAuth2\/AuthorizationCodeFlowDelegate\/authentication(flow:shouldAuthenticateUsing:)-5dd7o",
+  "identifier" : "doc:\/\/OktaOAuth2\/documentation\/OktaOAuth2\/AuthorizationCodeFlowDelegate\/authentication(flow:shouldAuthenticateUsing:)-5dd7o",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "authentication(flow:shouldAuthenticateUsing:)",
   "type" : "topic",
   "url" : "\/documentation\/oktaoauth2\/authorizationcodeflowdelegate\/authentication(flow:shouldauthenticateusing:)-5dd7o"
 },
-"doc://com.okta.mobile.oktaoauth2/documentation/OktaOAuth2/AuthorizationCodeFlowDelegate/authentication(flow:shouldAuthenticateUsing:)-9ux29": {
+"doc://OktaOAuth2/documentation/OktaOAuth2/AuthorizationCodeFlowDelegate/authentication(flow:shouldAuthenticateUsing:)-9ux29": {
   "abstract" : [
     {
       "text" : "Called when the authorization URL has been created, indicating the URL should be presented to the user.",
@@ -460,7 +429,6 @@
     },
     {
       "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:10OktaOAuth229AuthorizationCodeFlowDelegateP14authentication4flow23shouldAuthenticateUsingyqd___10Foundation3URLVtAA0cdE0CRbd__lF0E0L_qd__mfp",
       "text" : "Flow"
     },
     {
@@ -485,7 +453,7 @@
       "text" : ")"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/OktaOAuth2\/AuthorizationCodeFlowDelegate\/authentication(flow:shouldAuthenticateUsing:)-9ux29",
+  "identifier" : "doc:\/\/OktaOAuth2\/documentation\/OktaOAuth2\/AuthorizationCodeFlowDelegate\/authentication(flow:shouldAuthenticateUsing:)-9ux29",
   "kind" : "symbol",
   "required" : true,
   "role" : "symbol",

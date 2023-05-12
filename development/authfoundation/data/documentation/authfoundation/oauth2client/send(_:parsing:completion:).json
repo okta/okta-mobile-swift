@@ -1,22 +1,30 @@
 {
   "abstract" : [
     {
-      "text" : "Send the given URLRequest.",
+      "text" : "Inherited from ",
+      "type" : "text"
+    },
+    {
+      "code" : "APIClient.send(_:parsing:completion:)",
+      "type" : "codeVoice"
+    },
+    {
+      "text" : ".",
       "type" : "text"
     }
   ],
   "hierarchy" : {
     "paths" : [
       [
-        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation",
-        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/OAuth2Client",
-        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/OAuth2Client\/APIClient-Implementations"
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/OAuth2Client",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/OAuth2Client\/APIClient-Implementations"
       ]
     ]
   },
   "identifier" : {
     "interfaceLanguage" : "swift",
-    "url" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/OAuth2Client\/send(_:parsing:completion:)"
+    "url" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/OAuth2Client\/send(_:parsing:completion:)"
   },
   "kind" : "symbol",
   "metadata" : {
@@ -101,7 +109,6 @@
       },
       {
         "kind" : "typeIdentifier",
-        "preciseIdentifier" : "s:14AuthFoundation9APIClientPAAE4send_7parsing10completiony0B010URLRequestV_AA17APIParsingContext_pSgys6ResultOyAA11APIResponseVyqd__GAA0C5ErrorOGctSeRd__lF1TL_qd__mfp",
         "text" : "T"
       },
       {
@@ -214,7 +221,7 @@
               "text" : ": "
             },
             {
-              "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/APIParsingContext",
+              "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/APIParsingContext",
               "kind" : "typeIdentifier",
               "preciseIdentifier" : "s:14AuthFoundation17APIParsingContextP",
               "text" : "APIParsingContext"
@@ -232,7 +239,7 @@
               "text" : ": "
             },
             {
-              "kind" : "attribute",
+              "kind" : "keyword",
               "text" : "@escaping"
             },
             {
@@ -249,7 +256,7 @@
               "text" : "<"
             },
             {
-              "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/APIResponse",
+              "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/APIResponse",
               "kind" : "typeIdentifier",
               "preciseIdentifier" : "s:14AuthFoundation11APIResponseV",
               "text" : "APIResponse"
@@ -260,7 +267,6 @@
             },
             {
               "kind" : "typeIdentifier",
-              "preciseIdentifier" : "s:14AuthFoundation9APIClientPAAE4send_7parsing10completiony0B010URLRequestV_AA17APIParsingContext_pSgys6ResultOyAA11APIResponseVyqd__GAA0C5ErrorOGctSeRd__lF1TL_qd__mfp",
               "text" : "T"
             },
             {
@@ -268,7 +274,7 @@
               "text" : ">, "
             },
             {
-              "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/APIClientError",
+              "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/APIClientError",
               "kind" : "typeIdentifier",
               "preciseIdentifier" : "s:14AuthFoundation14APIClientErrorO",
               "text" : "APIClientError"
@@ -315,7 +321,7 @@
   ],
   "schemaVersion" : {
     "major" : 0,
-    "minor" : 2,
+    "minor" : 3,
     "patch" : 0
   },
   "sections" : [
@@ -335,21 +341,21 @@
   ]
 , 
 "references": {
-"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation": {
+"doc://AuthFoundation/documentation/AuthFoundation": {
   "abstract" : [
     {
       "text" : "Library that provides foundational features used by Okta’s authentication libraries, as well as APIs used to work with tokens and user credentials.",
       "type" : "text"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation",
   "kind" : "symbol",
   "role" : "collection",
   "title" : "AuthFoundation",
   "type" : "topic",
   "url" : "\/documentation\/authfoundation"
 },
-"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/APIClientError": {
+"doc://AuthFoundation/documentation/AuthFoundation/APIClientError": {
   "abstract" : [
     {
       "text" : "Errors that may occur at the API or network level.",
@@ -370,7 +376,7 @@
       "text" : "APIClientError"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/APIClientError",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/APIClientError",
   "kind" : "symbol",
   "navigatorTitle" : [
     {
@@ -383,14 +389,14 @@
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/apiclienterror"
 },
-"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/APIParsingContext": {
+"doc://AuthFoundation/documentation/AuthFoundation/APIParsingContext": {
   "abstract" : [
     {
       "text" : "Provides contextual information when parsing and decoding ",
       "type" : "text"
     },
     {
-      "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/APIRequest",
+      "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/APIRequest",
       "isActive" : true,
       "type" : "reference"
     },
@@ -413,7 +419,7 @@
       "text" : "APIParsingContext"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/APIParsingContext",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/APIParsingContext",
   "kind" : "symbol",
   "navigatorTitle" : [
     {
@@ -426,7 +432,7 @@
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/apiparsingcontext"
 },
-"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/APIRequest": {
+"doc://AuthFoundation/documentation/AuthFoundation/APIRequest": {
   "abstract" : [
     {
       "text" : "Abstract protocol defining the structure of an API request.",
@@ -447,7 +453,7 @@
       "text" : "APIRequest"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/APIRequest",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/APIRequest",
   "kind" : "symbol",
   "navigatorTitle" : [
     {
@@ -460,7 +466,7 @@
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/apirequest"
 },
-"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/APIResponse": {
+"doc://AuthFoundation/documentation/AuthFoundation/APIResponse": {
   "abstract" : [
     {
       "text" : "Describes a response from an Okta request, which includes the supplied result, and other associated response metadata.",
@@ -481,7 +487,7 @@
       "text" : "APIResponse"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/APIResponse",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/APIResponse",
   "kind" : "symbol",
   "navigatorTitle" : [
     {
@@ -494,7 +500,7 @@
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/apiresponse"
 },
-"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/OAuth2Client": {
+"doc://AuthFoundation/documentation/AuthFoundation/OAuth2Client": {
   "abstract" : [
     {
       "text" : "An OAuth2 client, used to interact with a given authorization server.",
@@ -515,7 +521,7 @@
       "text" : "OAuth2Client"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/OAuth2Client",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/OAuth2Client",
   "kind" : "symbol",
   "navigatorTitle" : [
     {
@@ -528,23 +534,20 @@
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/oauth2client"
 },
-"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/OAuth2Client/APIClient-Implementations": {
+"doc://AuthFoundation/documentation/AuthFoundation/OAuth2Client/APIClient-Implementations": {
   "abstract" : [
 
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/OAuth2Client\/APIClient-Implementations",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/OAuth2Client\/APIClient-Implementations",
   "kind" : "article",
   "role" : "collectionGroup",
   "title" : "APIClient Implementations",
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/oauth2client\/apiclient-implementations"
 },
-"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/OAuth2Client/send(_:parsing:completion:)": {
+"doc://AuthFoundation/documentation/AuthFoundation/OAuth2Client/send(_:parsing:completion:)": {
   "abstract" : [
-    {
-      "text" : "Send the given URLRequest.",
-      "type" : "text"
-    }
+
   ],
   "fragments" : [
     {
@@ -625,7 +628,6 @@
     },
     {
       "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:14AuthFoundation9APIClientPAAE4send_7parsing10completiony0B010URLRequestV_AA17APIParsingContext_pSgys6ResultOyAA11APIResponseVyqd__GAA0C5ErrorOGctSeRd__lF1TL_qd__mfp",
       "text" : "T"
     },
     {
@@ -651,7 +653,7 @@
       "text" : ")"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/OAuth2Client\/send(_:parsing:completion:)",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/OAuth2Client\/send(_:parsing:completion:)",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "send(_:parsing:completion:)",

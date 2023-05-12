@@ -1,31 +1,30 @@
 {
   "abstract" : [
     {
-      "text" : "Provides the ",
+      "text" : "Inherited from ",
       "type" : "text"
     },
     {
-      "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/APIRetry",
-      "isActive" : true,
-      "type" : "reference"
+      "code" : "APIClient.shouldRetry(request:rateLimit:)",
+      "type" : "codeVoice"
     },
     {
-      "text" : " configurations from the delegate in response to a retry request.",
+      "text" : ".",
       "type" : "text"
     }
   ],
   "hierarchy" : {
     "paths" : [
       [
-        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation",
-        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/OAuth2Client",
-        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/OAuth2Client\/APIClient-Implementations"
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/OAuth2Client",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/OAuth2Client\/APIClient-Implementations"
       ]
     ]
   },
   "identifier" : {
     "interfaceLanguage" : "swift",
-    "url" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/OAuth2Client\/shouldRetry(request:rateLimit:)"
+    "url" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/OAuth2Client\/shouldRetry(request:rateLimit:)"
   },
   "kind" : "symbol",
   "metadata" : {
@@ -151,7 +150,7 @@
               "text" : ": "
             },
             {
-              "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/APIRateLimit",
+              "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/APIRateLimit",
               "kind" : "typeIdentifier",
               "preciseIdentifier" : "s:14AuthFoundation12APIRateLimitV",
               "text" : "APIRateLimit"
@@ -161,7 +160,7 @@
               "text" : ") -> "
             },
             {
-              "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/APIRetry",
+              "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/APIRetry",
               "kind" : "typeIdentifier",
               "preciseIdentifier" : "s:14AuthFoundation8APIRetryO",
               "text" : "APIRetry"
@@ -174,7 +173,7 @@
   ],
   "schemaVersion" : {
     "major" : 0,
-    "minor" : 2,
+    "minor" : 3,
     "patch" : 0
   },
   "sections" : [
@@ -194,21 +193,21 @@
   ]
 , 
 "references": {
-"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation": {
+"doc://AuthFoundation/documentation/AuthFoundation": {
   "abstract" : [
     {
       "text" : "Library that provides foundational features used by Okta’s authentication libraries, as well as APIs used to work with tokens and user credentials.",
       "type" : "text"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation",
   "kind" : "symbol",
   "role" : "collection",
   "title" : "AuthFoundation",
   "type" : "topic",
   "url" : "\/documentation\/authfoundation"
 },
-"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/APIRateLimit": {
+"doc://AuthFoundation/documentation/AuthFoundation/APIRateLimit": {
   "abstract" : [
     {
       "text" : "Describes information related to the organization’s current rate limit.",
@@ -229,7 +228,7 @@
       "text" : "APIRateLimit"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/APIRateLimit",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/APIRateLimit",
   "kind" : "symbol",
   "navigatorTitle" : [
     {
@@ -242,7 +241,7 @@
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/apiratelimit"
 },
-"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/APIRetry": {
+"doc://AuthFoundation/documentation/AuthFoundation/APIRetry": {
   "abstract" : [
     {
       "text" : "List of retry options",
@@ -263,7 +262,7 @@
       "text" : "APIRetry"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/APIRetry",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/APIRetry",
   "kind" : "symbol",
   "navigatorTitle" : [
     {
@@ -276,7 +275,7 @@
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/apiretry"
 },
-"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/OAuth2Client": {
+"doc://AuthFoundation/documentation/AuthFoundation/OAuth2Client": {
   "abstract" : [
     {
       "text" : "An OAuth2 client, used to interact with a given authorization server.",
@@ -297,7 +296,7 @@
       "text" : "OAuth2Client"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/OAuth2Client",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/OAuth2Client",
   "kind" : "symbol",
   "navigatorTitle" : [
     {
@@ -310,32 +309,20 @@
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/oauth2client"
 },
-"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/OAuth2Client/APIClient-Implementations": {
+"doc://AuthFoundation/documentation/AuthFoundation/OAuth2Client/APIClient-Implementations": {
   "abstract" : [
 
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/OAuth2Client\/APIClient-Implementations",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/OAuth2Client\/APIClient-Implementations",
   "kind" : "article",
   "role" : "collectionGroup",
   "title" : "APIClient Implementations",
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/oauth2client\/apiclient-implementations"
 },
-"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/OAuth2Client/shouldRetry(request:rateLimit:)": {
+"doc://AuthFoundation/documentation/AuthFoundation/OAuth2Client/shouldRetry(request:rateLimit:)": {
   "abstract" : [
-    {
-      "text" : "Provides the ",
-      "type" : "text"
-    },
-    {
-      "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/APIRetry",
-      "isActive" : true,
-      "type" : "reference"
-    },
-    {
-      "text" : " configurations from the delegate in response to a retry request.",
-      "type" : "text"
-    }
+
   ],
   "fragments" : [
     {
@@ -394,7 +381,7 @@
       "text" : "APIRetry"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/OAuth2Client\/shouldRetry(request:rateLimit:)",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/OAuth2Client\/shouldRetry(request:rateLimit:)",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "shouldRetry(request:rateLimit:)",

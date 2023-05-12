@@ -8,17 +8,17 @@
   "hierarchy" : {
     "paths" : [
       [
-        "doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/WebAuthenticationUI"
+        "doc:\/\/WebAuthenticationUI\/documentation\/WebAuthenticationUI"
       ],
       [
-        "doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/WebAuthenticationUI",
-        "doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/WebAuthenticationUI\/WebAuthentication"
+        "doc:\/\/WebAuthenticationUI\/documentation\/WebAuthenticationUI",
+        "doc:\/\/WebAuthenticationUI\/documentation\/WebAuthenticationUI\/WebAuthentication"
       ]
     ]
   },
   "identifier" : {
     "interfaceLanguage" : "swift",
-    "url" : "doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/WebAuthenticationUI\/ConfiguringYourClient"
+    "url" : "doc:\/\/WebAuthenticationUI\/documentation\/WebAuthenticationUI\/ConfiguringYourClient"
   },
   "kind" : "article",
   "metadata" : {
@@ -59,7 +59,7 @@
           "type" : "paragraph"
         },
         {
-          "anchor" : "Utilize-an-Okta.plist-file",
+          "anchor" : "Utilize-an-Oktaplist-file",
           "level" : 2,
           "text" : "Utilize an Okta.plist file",
           "type" : "heading"
@@ -371,7 +371,7 @@
               "type" : "text"
             },
             {
-              "identifier" : "doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/WebAuthenticationUI\/WebAuthentication\/shared",
+              "identifier" : "doc:\/\/WebAuthenticationUI\/documentation\/WebAuthenticationUI\/WebAuthentication\/shared",
               "isActive" : true,
               "type" : "reference"
             },
@@ -406,7 +406,7 @@
               "type" : "text"
             },
             {
-              "identifier" : "doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/WebAuthenticationUI\/WebAuthentication\/init(plist:)",
+              "identifier" : "doc:\/\/WebAuthenticationUI\/documentation\/WebAuthenticationUI\/WebAuthentication\/init(plist:)",
               "isActive" : true,
               "type" : "reference"
             },
@@ -488,6 +488,7 @@
               "type" : "paragraph"
             }
           ],
+          "name" : "Note",
           "style" : "note",
           "type" : "aside"
         },
@@ -504,7 +505,7 @@
               "type" : "text"
             },
             {
-              "identifier" : "doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/WebAuthenticationUI\/WebAuthentication\/shared",
+              "identifier" : "doc:\/\/WebAuthenticationUI\/documentation\/WebAuthenticationUI\/WebAuthentication\/shared",
               "isActive" : true,
               "type" : "reference"
             },
@@ -530,7 +531,7 @@
               "type" : "text"
             },
             {
-              "identifier" : "doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/WebAuthenticationUI\/WebAuthentication",
+              "identifier" : "doc:\/\/WebAuthenticationUI\/documentation\/WebAuthenticationUI\/WebAuthentication",
               "isActive" : true,
               "type" : "reference"
             },
@@ -539,7 +540,7 @@
               "type" : "text"
             },
             {
-              "identifier" : "doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/WebAuthenticationUI\/WebAuthentication\/shared",
+              "identifier" : "doc:\/\/WebAuthenticationUI\/documentation\/WebAuthenticationUI\/WebAuthentication\/shared",
               "isActive" : true,
               "type" : "reference"
             },
@@ -628,7 +629,7 @@
           "type" : "codeListing"
         },
         {
-          "anchor" : "Utilize-a-pre-configured-OAuth2Client-\/-use-a-pre-configured-context",
+          "anchor" : "Utilize-a-pre-configured-OAuth2Client--use-a-pre-configured-context",
           "level" : 2,
           "text" : "Utilize a pre-configured OAuth2Client \/ use a pre-configured context",
           "type" : "heading"
@@ -680,7 +681,7 @@
   ],
   "schemaVersion" : {
     "major" : 0,
-    "minor" : 2,
+    "minor" : 3,
     "patch" : 0
   },
   "sections" : [
@@ -690,7 +691,7 @@
     {
       "generated" : true,
       "identifiers" : [
-        "doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/WebAuthenticationUI\/WebAuthentication"
+        "doc:\/\/WebAuthenticationUI\/documentation\/WebAuthenticationUI\/WebAuthentication"
       ],
       "title" : "Essentials"
     }
@@ -709,21 +710,21 @@
   ]
 , 
 "references": {
-"doc://com.okta.mobile.webauthenticationui/documentation/WebAuthenticationUI": {
+"doc://WebAuthenticationUI/documentation/WebAuthenticationUI": {
   "abstract" : [
     {
       "text" : "Make it easy to enable users to sign in to your app through browser-based sign on.",
       "type" : "text"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/WebAuthenticationUI",
+  "identifier" : "doc:\/\/WebAuthenticationUI\/documentation\/WebAuthenticationUI",
   "kind" : "symbol",
   "role" : "collection",
   "title" : "WebAuthenticationUI",
   "type" : "topic",
   "url" : "\/documentation\/webauthenticationui"
 },
-"doc://com.okta.mobile.webauthenticationui/documentation/WebAuthenticationUI/WebAuthentication": {
+"doc://WebAuthenticationUI/documentation/WebAuthenticationUI/WebAuthentication": {
   "abstract" : [
     {
       "text" : "Authentication coordinator that simplifies signing users in using browser-based OIDC authentication flows.",
@@ -744,7 +745,7 @@
       "text" : "WebAuthentication"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/WebAuthenticationUI\/WebAuthentication",
+  "identifier" : "doc:\/\/WebAuthenticationUI\/documentation\/WebAuthenticationUI\/WebAuthentication",
   "kind" : "symbol",
   "navigatorTitle" : [
     {
@@ -757,7 +758,7 @@
   "type" : "topic",
   "url" : "\/documentation\/webauthenticationui\/webauthentication"
 },
-"doc://com.okta.mobile.webauthenticationui/documentation/WebAuthenticationUI/WebAuthentication/init(plist:)": {
+"doc://WebAuthenticationUI/documentation/WebAuthenticationUI/WebAuthentication/init(plist:)": {
   "abstract" : [
     {
       "text" : "Initializes a web authentication session using client credentials defined within the provided file URL.",
@@ -765,6 +766,14 @@
     }
   ],
   "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "convenience"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
     {
       "kind" : "identifier",
       "text" : "init"
@@ -795,21 +804,21 @@
       "text" : "throws"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/WebAuthenticationUI\/WebAuthentication\/init(plist:)",
+  "identifier" : "doc:\/\/WebAuthenticationUI\/documentation\/WebAuthenticationUI\/WebAuthentication\/init(plist:)",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "init(plist:)",
   "type" : "topic",
   "url" : "\/documentation\/webauthenticationui\/webauthentication\/init(plist:)"
 },
-"doc://com.okta.mobile.webauthenticationui/documentation/WebAuthenticationUI/WebAuthentication/shared": {
+"doc://WebAuthenticationUI/documentation/WebAuthenticationUI/WebAuthentication/shared": {
   "abstract" : [
     {
       "text" : "Active \/ default shared instance of the ",
       "type" : "text"
     },
     {
-      "identifier" : "doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/WebAuthenticationUI\/WebAuthentication",
+      "identifier" : "doc:\/\/WebAuthenticationUI\/documentation\/WebAuthenticationUI\/WebAuthentication",
       "isActive" : true,
       "type" : "reference"
     },
@@ -853,7 +862,7 @@
       "text" : "?"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/WebAuthenticationUI\/WebAuthentication\/shared",
+  "identifier" : "doc:\/\/WebAuthenticationUI\/documentation\/WebAuthenticationUI\/WebAuthentication\/shared",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "shared",

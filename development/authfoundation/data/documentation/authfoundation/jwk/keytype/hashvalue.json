@@ -1,23 +1,31 @@
 {
   "abstract" : [
     {
-      "text" : "No overview available.",
+      "text" : "Inherited from ",
+      "type" : "text"
+    },
+    {
+      "code" : "RawRepresentable.hashValue",
+      "type" : "codeVoice"
+    },
+    {
+      "text" : ".",
       "type" : "text"
     }
   ],
   "hierarchy" : {
     "paths" : [
       [
-        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation",
-        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/JWK",
-        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/JWK\/KeyType",
-        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/JWK\/KeyType\/RawRepresentable-Implementations"
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JWK",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JWK\/KeyType",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JWK\/KeyType\/RawRepresentable-Implementations"
       ]
     ]
   },
   "identifier" : {
     "interfaceLanguage" : "swift",
-    "url" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/JWK\/KeyType\/hashValue"
+    "url" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JWK\/KeyType\/hashValue"
   },
   "kind" : "symbol",
   "metadata" : {
@@ -156,7 +164,7 @@
   ],
   "schemaVersion" : {
     "major" : 0,
-    "minor" : 2,
+    "minor" : 3,
     "patch" : 0
   },
   "sections" : [
@@ -176,21 +184,21 @@
   ]
 , 
 "references": {
-"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation": {
+"doc://AuthFoundation/documentation/AuthFoundation": {
   "abstract" : [
     {
       "text" : "Library that provides foundational features used by Okta’s authentication libraries, as well as APIs used to work with tokens and user credentials.",
       "type" : "text"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation",
   "kind" : "symbol",
   "role" : "collection",
   "title" : "AuthFoundation",
   "type" : "topic",
   "url" : "\/documentation\/authfoundation"
 },
-"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/JWK": {
+"doc://AuthFoundation/documentation/AuthFoundation/JWK": {
   "abstract" : [
     {
       "text" : "Describes an individual key from an authorization server, which can be used to validate tokens or encrypt content.",
@@ -211,7 +219,7 @@
       "text" : "JWK"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/JWK",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JWK",
   "kind" : "symbol",
   "navigatorTitle" : [
     {
@@ -224,7 +232,7 @@
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/jwk"
 },
-"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/JWK/KeyType": {
+"doc://AuthFoundation/documentation/AuthFoundation/JWK/KeyType": {
   "abstract" : [
     {
       "text" : "The type of JWK key.",
@@ -245,7 +253,7 @@
       "text" : "KeyType"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/JWK\/KeyType",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JWK\/KeyType",
   "kind" : "symbol",
   "navigatorTitle" : [
     {
@@ -258,18 +266,18 @@
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/jwk\/keytype"
 },
-"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/JWK/KeyType/RawRepresentable-Implementations": {
+"doc://AuthFoundation/documentation/AuthFoundation/JWK/KeyType/RawRepresentable-Implementations": {
   "abstract" : [
 
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/JWK\/KeyType\/RawRepresentable-Implementations",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JWK\/KeyType\/RawRepresentable-Implementations",
   "kind" : "article",
   "role" : "collectionGroup",
   "title" : "RawRepresentable Implementations",
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/jwk\/keytype\/rawrepresentable-implementations"
 },
-"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/JWK/KeyType/hashValue": {
+"doc://AuthFoundation/documentation/AuthFoundation/JWK/KeyType/hashValue": {
   "abstract" : [
 
   ],
@@ -344,7 +352,7 @@
       "text" : "Int"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/JWK\/KeyType\/hashValue",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JWK\/KeyType\/hashValue",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "hashValue",

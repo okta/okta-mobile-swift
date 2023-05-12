@@ -1,22 +1,30 @@
 {
   "abstract" : [
     {
-      "text" : "Retrieve the localized description for this error.",
+      "text" : "Inherited from ",
+      "type" : "text"
+    },
+    {
+      "code" : "Error.localizedDescription",
+      "type" : "codeVoice"
+    },
+    {
+      "text" : ".",
       "type" : "text"
     }
   ],
   "hierarchy" : {
     "paths" : [
       [
-        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation",
-        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/OktaAPIError",
-        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/OktaAPIError\/Error-Implementations"
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/OktaAPIError",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/OktaAPIError\/Error-Implementations"
       ]
     ]
   },
   "identifier" : {
     "interfaceLanguage" : "swift",
-    "url" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/OktaAPIError\/localizedDescription"
+    "url" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/OktaAPIError\/localizedDescription"
   },
   "kind" : "symbol",
   "metadata" : {
@@ -107,7 +115,7 @@
   ],
   "schemaVersion" : {
     "major" : 0,
-    "minor" : 2,
+    "minor" : 3,
     "patch" : 0
   },
   "sections" : [
@@ -127,21 +135,21 @@
   ]
 , 
 "references": {
-"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation": {
+"doc://AuthFoundation/documentation/AuthFoundation": {
   "abstract" : [
     {
       "text" : "Library that provides foundational features used by Okta’s authentication libraries, as well as APIs used to work with tokens and user credentials.",
       "type" : "text"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation",
   "kind" : "symbol",
   "role" : "collection",
   "title" : "AuthFoundation",
   "type" : "topic",
   "url" : "\/documentation\/authfoundation"
 },
-"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/OktaAPIError": {
+"doc://AuthFoundation/documentation/AuthFoundation/OktaAPIError": {
   "abstract" : [
     {
       "text" : "Describes errors that may be reported from an Okta API endpoint.",
@@ -162,7 +170,7 @@
       "text" : "OktaAPIError"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/OktaAPIError",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/OktaAPIError",
   "kind" : "symbol",
   "navigatorTitle" : [
     {
@@ -175,23 +183,20 @@
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/oktaapierror"
 },
-"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/OktaAPIError/Error-Implementations": {
+"doc://AuthFoundation/documentation/AuthFoundation/OktaAPIError/Error-Implementations": {
   "abstract" : [
 
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/OktaAPIError\/Error-Implementations",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/OktaAPIError\/Error-Implementations",
   "kind" : "article",
   "role" : "collectionGroup",
   "title" : "Error Implementations",
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/oktaapierror\/error-implementations"
 },
-"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/OktaAPIError/localizedDescription": {
+"doc://AuthFoundation/documentation/AuthFoundation/OktaAPIError/localizedDescription": {
   "abstract" : [
-    {
-      "text" : "Retrieve the localized description for this error.",
-      "type" : "text"
-    }
+
   ],
   "fragments" : [
     {
@@ -216,7 +221,7 @@
       "text" : "String"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/OktaAPIError\/localizedDescription",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/OktaAPIError\/localizedDescription",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "localizedDescription",

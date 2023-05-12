@@ -8,14 +8,14 @@
   "hierarchy" : {
     "paths" : [
       [
-        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation",
-        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/AuthenticationDelegate"
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/AuthenticationDelegate"
       ]
     ]
   },
   "identifier" : {
     "interfaceLanguage" : "swift",
-    "url" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/AuthenticationDelegate\/authentication(flow:received:)-3zd8n"
+    "url" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/AuthenticationDelegate\/authentication(flow:received:)-3zd8n"
   },
   "kind" : "symbol",
   "metadata" : {
@@ -55,7 +55,6 @@
       },
       {
         "kind" : "typeIdentifier",
-        "preciseIdentifier" : "s:14AuthFoundation22AuthenticationDelegateP14authentication4flow8receivedyqd___AA5TokenCtlF4FlowL_qd__mfp",
         "text" : "Flow"
       },
       {
@@ -136,7 +135,6 @@
             },
             {
               "kind" : "typeIdentifier",
-              "preciseIdentifier" : "s:14AuthFoundation22AuthenticationDelegateP14authentication4flow8receivedyqd___AA5TokenCtlF4FlowL_qd__mfp",
               "text" : "Flow"
             },
             {
@@ -160,7 +158,7 @@
               "text" : ": "
             },
             {
-              "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/Token",
+              "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/Token",
               "kind" : "typeIdentifier",
               "preciseIdentifier" : "s:14AuthFoundation5TokenC",
               "text" : "Token"
@@ -177,7 +175,7 @@
   ],
   "schemaVersion" : {
     "major" : 0,
-    "minor" : 2,
+    "minor" : 3,
     "patch" : 0
   },
   "sections" : [
@@ -197,21 +195,21 @@
   ]
 , 
 "references": {
-"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation": {
+"doc://AuthFoundation/documentation/AuthFoundation": {
   "abstract" : [
     {
       "text" : "Library that provides foundational features used by Okta’s authentication libraries, as well as APIs used to work with tokens and user credentials.",
       "type" : "text"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation",
   "kind" : "symbol",
   "role" : "collection",
   "title" : "AuthFoundation",
   "type" : "topic",
   "url" : "\/documentation\/authfoundation"
 },
-"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/AuthenticationDelegate": {
+"doc://AuthFoundation/documentation/AuthFoundation/AuthenticationDelegate": {
   "abstract" : [
     {
       "text" : "A common delegate protocol that all authentication flows should support.",
@@ -232,7 +230,7 @@
       "text" : "AuthenticationDelegate"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/AuthenticationDelegate",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/AuthenticationDelegate",
   "kind" : "symbol",
   "navigatorTitle" : [
     {
@@ -245,7 +243,7 @@
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/authenticationdelegate"
 },
-"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/AuthenticationDelegate/authentication(flow:received:)-3zd8n": {
+"doc://AuthFoundation/documentation/AuthFoundation/AuthenticationDelegate/authentication(flow:received:)-3zd8n": {
   "abstract" : [
     {
       "text" : "Sent when an authentication session receives a token.",
@@ -287,7 +285,6 @@
     },
     {
       "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:14AuthFoundation22AuthenticationDelegateP14authentication4flow8receivedyqd___AA5TokenCtlF4FlowL_qd__mfp",
       "text" : "Flow"
     },
     {
@@ -312,7 +309,7 @@
       "text" : ")"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/AuthenticationDelegate\/authentication(flow:received:)-3zd8n",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/AuthenticationDelegate\/authentication(flow:received:)-3zd8n",
   "kind" : "symbol",
   "required" : true,
   "role" : "symbol",
@@ -320,7 +317,7 @@
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/authenticationdelegate\/authentication(flow:received:)-3zd8n"
 },
-"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/Token": {
+"doc://AuthFoundation/documentation/AuthFoundation/Token": {
   "abstract" : [
     {
       "text" : "Token information representing a user’s access to a resource server, including access token, refresh token, and other related information.",
@@ -341,7 +338,7 @@
       "text" : "Token"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/Token",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/Token",
   "kind" : "symbol",
   "navigatorTitle" : [
     {

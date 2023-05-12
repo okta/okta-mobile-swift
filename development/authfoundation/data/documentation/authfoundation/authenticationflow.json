@@ -8,13 +8,13 @@
   "hierarchy" : {
     "paths" : [
       [
-        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation"
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation"
       ]
     ]
   },
   "identifier" : {
     "interfaceLanguage" : "swift",
-    "url" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/AuthenticationFlow"
+    "url" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/AuthenticationFlow"
   },
   "kind" : "symbol",
   "metadata" : {
@@ -77,7 +77,7 @@
               "text" : " : AnyObject, "
             },
             {
-              "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/UsesDelegateCollection",
+              "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/UsesDelegateCollection",
               "kind" : "typeIdentifier",
               "preciseIdentifier" : "s:14AuthFoundation22UsesDelegateCollectionP",
               "text" : "UsesDelegateCollection"
@@ -111,28 +111,16 @@
   "relationshipsSections" : [
     {
       "identifiers" : [
-        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/UsesDelegateCollection"
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/UsesDelegateCollection"
       ],
       "kind" : "relationships",
       "title" : "Inherits From",
       "type" : "inheritsFrom"
-    },
-    {
-      "identifiers" : [
-        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/OktaOAuth2\/AuthorizationCodeFlow",
-        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/OktaOAuth2\/DeviceAuthorizationFlow",
-        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/OktaOAuth2\/ResourceOwnerFlow",
-        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/OktaOAuth2\/SessionTokenFlow",
-        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/OktaOAuth2\/TokenExchangeFlow"
-      ],
-      "kind" : "relationships",
-      "title" : "Conforming Types",
-      "type" : "conformingTypes"
     }
   ],
   "schemaVersion" : {
     "major" : 0,
-    "minor" : 2,
+    "minor" : 3,
     "patch" : 0
   },
   "sections" : [
@@ -142,13 +130,13 @@
     {
       "generated" : true,
       "identifiers" : [
-        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/OAuth2Client",
-        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/OAuth2ClientDelegate",
-        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/OpenIdConfiguration",
-        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/AuthenticationDelegate",
-        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/OAuth2TokenRequest",
-        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/GrantType",
-        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/PKCE"
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/OAuth2Client",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/OAuth2ClientDelegate",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/OpenIdConfiguration",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/AuthenticationDelegate",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/OAuth2TokenRequest",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/GrantType",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/PKCE"
       ],
       "title" : "OAuth2 Client Operations"
     }
@@ -156,13 +144,13 @@
   "topicSections" : [
     {
       "identifiers" : [
-        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/AuthenticationFlow\/isAuthenticating"
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/AuthenticationFlow\/isAuthenticating"
       ],
       "title" : "Instance Properties"
     },
     {
       "identifiers" : [
-        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/AuthenticationFlow\/reset()"
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/AuthenticationFlow\/reset()"
       ],
       "title" : "Instance Methods"
     }
@@ -181,21 +169,21 @@
   ]
 , 
 "references": {
-"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation": {
+"doc://AuthFoundation/documentation/AuthFoundation": {
   "abstract" : [
     {
       "text" : "Library that provides foundational features used by Okta’s authentication libraries, as well as APIs used to work with tokens and user credentials.",
       "type" : "text"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation",
   "kind" : "symbol",
   "role" : "collection",
   "title" : "AuthFoundation",
   "type" : "topic",
   "url" : "\/documentation\/authfoundation"
 },
-"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/APIRequest": {
+"doc://AuthFoundation/documentation/AuthFoundation/APIRequest": {
   "abstract" : [
     {
       "text" : "Abstract protocol defining the structure of an API request.",
@@ -216,7 +204,7 @@
       "text" : "APIRequest"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/APIRequest",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/APIRequest",
   "kind" : "symbol",
   "navigatorTitle" : [
     {
@@ -229,7 +217,7 @@
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/apirequest"
 },
-"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/AuthenticationDelegate": {
+"doc://AuthFoundation/documentation/AuthFoundation/AuthenticationDelegate": {
   "abstract" : [
     {
       "text" : "A common delegate protocol that all authentication flows should support.",
@@ -250,7 +238,7 @@
       "text" : "AuthenticationDelegate"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/AuthenticationDelegate",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/AuthenticationDelegate",
   "kind" : "symbol",
   "navigatorTitle" : [
     {
@@ -263,7 +251,7 @@
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/authenticationdelegate"
 },
-"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/AuthenticationFlow": {
+"doc://AuthFoundation/documentation/AuthFoundation/AuthenticationFlow": {
   "abstract" : [
     {
       "text" : "A protocol defining a type of authentication flow.",
@@ -284,7 +272,7 @@
       "text" : "AuthenticationFlow"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/AuthenticationFlow",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/AuthenticationFlow",
   "kind" : "symbol",
   "navigatorTitle" : [
     {
@@ -297,7 +285,7 @@
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/authenticationflow"
 },
-"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/AuthenticationFlow/isAuthenticating": {
+"doc://AuthFoundation/documentation/AuthFoundation/AuthenticationFlow/isAuthenticating": {
   "abstract" : [
     {
       "text" : "Indicates if this flow is currently authenticating.",
@@ -327,7 +315,7 @@
       "text" : "Bool"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/AuthenticationFlow\/isAuthenticating",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/AuthenticationFlow\/isAuthenticating",
   "kind" : "symbol",
   "required" : true,
   "role" : "symbol",
@@ -335,7 +323,7 @@
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/authenticationflow\/isauthenticating"
 },
-"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/AuthenticationFlow/reset()": {
+"doc://AuthFoundation/documentation/AuthFoundation/AuthenticationFlow/reset()": {
   "abstract" : [
     {
       "text" : "Resets the authentication session.",
@@ -360,7 +348,7 @@
       "text" : "()"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/AuthenticationFlow\/reset()",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/AuthenticationFlow\/reset()",
   "kind" : "symbol",
   "required" : true,
   "role" : "symbol",
@@ -368,7 +356,7 @@
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/authenticationflow\/reset()"
 },
-"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/GrantType": {
+"doc://AuthFoundation/documentation/AuthFoundation/GrantType": {
   "abstract" : [
 
   ],
@@ -386,7 +374,7 @@
       "text" : "GrantType"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/GrantType",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/GrantType",
   "kind" : "symbol",
   "navigatorTitle" : [
     {
@@ -399,7 +387,7 @@
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/granttype"
 },
-"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/OAuth2Client": {
+"doc://AuthFoundation/documentation/AuthFoundation/OAuth2Client": {
   "abstract" : [
     {
       "text" : "An OAuth2 client, used to interact with a given authorization server.",
@@ -420,7 +408,7 @@
       "text" : "OAuth2Client"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/OAuth2Client",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/OAuth2Client",
   "kind" : "symbol",
   "navigatorTitle" : [
     {
@@ -433,14 +421,14 @@
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/oauth2client"
 },
-"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/OAuth2ClientDelegate": {
+"doc://AuthFoundation/documentation/AuthFoundation/OAuth2ClientDelegate": {
   "abstract" : [
     {
       "text" : "Delegate protocol used by ",
       "type" : "text"
     },
     {
-      "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/OAuth2Client",
+      "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/OAuth2Client",
       "isActive" : true,
       "type" : "reference"
     },
@@ -463,7 +451,7 @@
       "text" : "OAuth2ClientDelegate"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/OAuth2ClientDelegate",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/OAuth2ClientDelegate",
   "kind" : "symbol",
   "navigatorTitle" : [
     {
@@ -476,14 +464,14 @@
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/oauth2clientdelegate"
 },
-"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/OAuth2TokenRequest": {
+"doc://AuthFoundation/documentation/AuthFoundation/OAuth2TokenRequest": {
   "abstract" : [
     {
       "text" : "Protocol that represents a type of ",
       "type" : "text"
     },
     {
-      "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/APIRequest",
+      "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/APIRequest",
       "isActive" : true,
       "type" : "reference"
     },
@@ -506,7 +494,7 @@
       "text" : "OAuth2TokenRequest"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/OAuth2TokenRequest",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/OAuth2TokenRequest",
   "kind" : "symbol",
   "navigatorTitle" : [
     {
@@ -519,7 +507,7 @@
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/oauth2tokenrequest"
 },
-"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/OpenIdConfiguration": {
+"doc://AuthFoundation/documentation/AuthFoundation/OpenIdConfiguration": {
   "abstract" : [
     {
       "text" : "Describes the configuration of an OpenID server.",
@@ -540,7 +528,7 @@
       "text" : "OpenIdConfiguration"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/OpenIdConfiguration",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/OpenIdConfiguration",
   "kind" : "symbol",
   "navigatorTitle" : [
     {
@@ -553,7 +541,7 @@
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/openidconfiguration"
 },
-"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/PKCE": {
+"doc://AuthFoundation/documentation/AuthFoundation/PKCE": {
   "abstract" : [
     {
       "text" : "Object defining the structure and settings of a PKCE challenge, including the verifier code, the encoded challenge, and the method used to exchange this information with the server.",
@@ -574,7 +562,7 @@
       "text" : "PKCE"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/PKCE",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/PKCE",
   "kind" : "symbol",
   "navigatorTitle" : [
     {
@@ -587,7 +575,7 @@
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/pkce"
 },
-"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/UsesDelegateCollection": {
+"doc://AuthFoundation/documentation/AuthFoundation/UsesDelegateCollection": {
   "abstract" : [
 
   ],
@@ -605,7 +593,7 @@
       "text" : "UsesDelegateCollection"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/UsesDelegateCollection",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/UsesDelegateCollection",
   "kind" : "symbol",
   "navigatorTitle" : [
     {
@@ -617,176 +605,6 @@
   "title" : "UsesDelegateCollection",
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/usesdelegatecollection"
-},
-"doc://com.okta.mobile.authfoundation/documentation/OktaOAuth2/AuthorizationCodeFlow": {
-  "abstract" : [
-    {
-      "text" : "An authentication flow class that implements the Authorization Code Flow exchange.",
-      "type" : "text"
-    }
-  ],
-  "fragments" : [
-    {
-      "kind" : "keyword",
-      "text" : "class"
-    },
-    {
-      "kind" : "text",
-      "text" : " "
-    },
-    {
-      "kind" : "identifier",
-      "text" : "AuthorizationCodeFlow"
-    }
-  ],
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/OktaOAuth2\/AuthorizationCodeFlow",
-  "kind" : "symbol",
-  "navigatorTitle" : [
-    {
-      "kind" : "identifier",
-      "text" : "AuthorizationCodeFlow"
-    }
-  ],
-  "role" : "symbol",
-  "title" : "AuthorizationCodeFlow",
-  "type" : "topic",
-  "url" : "\/documentation\/oktaoauth2\/authorizationcodeflow"
-},
-"doc://com.okta.mobile.authfoundation/documentation/OktaOAuth2/DeviceAuthorizationFlow": {
-  "abstract" : [
-    {
-      "text" : "An authentication flow class that implements the Device Authorization Grant flow exchange.",
-      "type" : "text"
-    }
-  ],
-  "fragments" : [
-    {
-      "kind" : "keyword",
-      "text" : "class"
-    },
-    {
-      "kind" : "text",
-      "text" : " "
-    },
-    {
-      "kind" : "identifier",
-      "text" : "DeviceAuthorizationFlow"
-    }
-  ],
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/OktaOAuth2\/DeviceAuthorizationFlow",
-  "kind" : "symbol",
-  "navigatorTitle" : [
-    {
-      "kind" : "identifier",
-      "text" : "DeviceAuthorizationFlow"
-    }
-  ],
-  "role" : "symbol",
-  "title" : "DeviceAuthorizationFlow",
-  "type" : "topic",
-  "url" : "\/documentation\/oktaoauth2\/deviceauthorizationflow"
-},
-"doc://com.okta.mobile.authfoundation/documentation/OktaOAuth2/ResourceOwnerFlow": {
-  "abstract" : [
-    {
-      "text" : "An authentication flow class that implements the Resource Owner Flow exchange.",
-      "type" : "text"
-    }
-  ],
-  "fragments" : [
-    {
-      "kind" : "keyword",
-      "text" : "class"
-    },
-    {
-      "kind" : "text",
-      "text" : " "
-    },
-    {
-      "kind" : "identifier",
-      "text" : "ResourceOwnerFlow"
-    }
-  ],
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/OktaOAuth2\/ResourceOwnerFlow",
-  "kind" : "symbol",
-  "navigatorTitle" : [
-    {
-      "kind" : "identifier",
-      "text" : "ResourceOwnerFlow"
-    }
-  ],
-  "role" : "symbol",
-  "title" : "ResourceOwnerFlow",
-  "type" : "topic",
-  "url" : "\/documentation\/oktaoauth2\/resourceownerflow"
-},
-"doc://com.okta.mobile.authfoundation/documentation/OktaOAuth2/SessionTokenFlow": {
-  "abstract" : [
-    {
-      "text" : "An authentication flow class that exchanges a Session Token for access tokens.",
-      "type" : "text"
-    }
-  ],
-  "fragments" : [
-    {
-      "kind" : "keyword",
-      "text" : "class"
-    },
-    {
-      "kind" : "text",
-      "text" : " "
-    },
-    {
-      "kind" : "identifier",
-      "text" : "SessionTokenFlow"
-    }
-  ],
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/OktaOAuth2\/SessionTokenFlow",
-  "kind" : "symbol",
-  "navigatorTitle" : [
-    {
-      "kind" : "identifier",
-      "text" : "SessionTokenFlow"
-    }
-  ],
-  "role" : "symbol",
-  "title" : "SessionTokenFlow",
-  "type" : "topic",
-  "url" : "\/documentation\/oktaoauth2\/sessiontokenflow"
-},
-"doc://com.okta.mobile.authfoundation/documentation/OktaOAuth2/TokenExchangeFlow": {
-  "abstract" : [
-    {
-      "text" : "An authentication flow class that implements the Token Exchange Flow.",
-      "type" : "text"
-    }
-  ],
-  "fragments" : [
-    {
-      "kind" : "keyword",
-      "text" : "class"
-    },
-    {
-      "kind" : "text",
-      "text" : " "
-    },
-    {
-      "kind" : "identifier",
-      "text" : "TokenExchangeFlow"
-    }
-  ],
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/OktaOAuth2\/TokenExchangeFlow",
-  "kind" : "symbol",
-  "navigatorTitle" : [
-    {
-      "kind" : "identifier",
-      "text" : "TokenExchangeFlow"
-    }
-  ],
-  "role" : "symbol",
-  "title" : "TokenExchangeFlow",
-  "type" : "topic",
-  "url" : "\/documentation\/oktaoauth2\/tokenexchangeflow"
 }
 }
 }

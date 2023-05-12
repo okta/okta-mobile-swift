@@ -8,14 +8,14 @@
   "hierarchy" : {
     "paths" : [
       [
-        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation",
-        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/HasClaims"
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/HasClaims"
       ]
     ]
   },
   "identifier" : {
     "interfaceLanguage" : "swift",
-    "url" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/HasClaims\/customClaims"
+    "url" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/HasClaims\/customClaims"
   },
   "kind" : "symbol",
   "metadata" : {
@@ -122,7 +122,7 @@
               "type" : "text"
             },
             {
-              "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/HasClaims\/claims",
+              "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/HasClaims\/claims",
               "isActive" : true,
               "type" : "reference"
             },
@@ -139,7 +139,7 @@
   ],
   "schemaVersion" : {
     "major" : 0,
-    "minor" : 2,
+    "minor" : 3,
     "patch" : 0
   },
   "sections" : [
@@ -159,21 +159,21 @@
   ]
 , 
 "references": {
-"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation": {
+"doc://AuthFoundation/documentation/AuthFoundation": {
   "abstract" : [
     {
       "text" : "Library that provides foundational features used by Okta’s authentication libraries, as well as APIs used to work with tokens and user credentials.",
       "type" : "text"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation",
   "kind" : "symbol",
   "role" : "collection",
   "title" : "AuthFoundation",
   "type" : "topic",
   "url" : "\/documentation\/authfoundation"
 },
-"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/HasClaims": {
+"doc://AuthFoundation/documentation/AuthFoundation/HasClaims": {
   "abstract" : [
     {
       "text" : "Used by classes that contains OAuth2 claims.",
@@ -194,7 +194,7 @@
       "text" : "HasClaims"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/HasClaims",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/HasClaims",
   "kind" : "symbol",
   "navigatorTitle" : [
     {
@@ -207,7 +207,7 @@
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/hasclaims"
 },
-"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/HasClaims/claims": {
+"doc://AuthFoundation/documentation/AuthFoundation/HasClaims/claims": {
   "abstract" : [
     {
       "text" : "Returns the collection of claims this object contains.",
@@ -241,7 +241,7 @@
       "text" : "]"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/HasClaims\/claims",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/HasClaims\/claims",
   "kind" : "symbol",
   "required" : true,
   "role" : "symbol",
@@ -249,7 +249,7 @@
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/hasclaims\/claims"
 },
-"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/HasClaims/customClaims": {
+"doc://AuthFoundation/documentation/AuthFoundation/HasClaims/customClaims": {
   "abstract" : [
     {
       "text" : "Returns the collection of custom claims this object contains.",
@@ -283,7 +283,7 @@
       "text" : "]"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/HasClaims\/customClaims",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/HasClaims\/customClaims",
   "kind" : "symbol",
   "required" : true,
   "role" : "symbol",

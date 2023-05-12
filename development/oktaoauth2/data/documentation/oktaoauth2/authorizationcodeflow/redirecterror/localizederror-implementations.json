@@ -1,22 +1,16 @@
 {
-  "abstract" : [
-    {
-      "text" : "No overview available.",
-      "type" : "text"
-    }
-  ],
   "hierarchy" : {
     "paths" : [
       [
-        "doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/OktaOAuth2",
-        "doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/OktaOAuth2\/AuthorizationCodeFlow",
-        "doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/OktaOAuth2\/AuthorizationCodeFlow\/RedirectError"
+        "doc:\/\/OktaOAuth2\/documentation\/OktaOAuth2",
+        "doc:\/\/OktaOAuth2\/documentation\/OktaOAuth2\/AuthorizationCodeFlow",
+        "doc:\/\/OktaOAuth2\/documentation\/OktaOAuth2\/AuthorizationCodeFlow\/RedirectError"
       ]
     ]
   },
   "identifier" : {
     "interfaceLanguage" : "swift",
-    "url" : "doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/OktaOAuth2\/AuthorizationCodeFlow\/RedirectError\/LocalizedError-Implementations"
+    "url" : "doc:\/\/OktaOAuth2\/documentation\/OktaOAuth2\/AuthorizationCodeFlow\/RedirectError\/LocalizedError-Implementations"
   },
   "kind" : "article",
   "metadata" : {
@@ -30,7 +24,7 @@
   },
   "schemaVersion" : {
     "major" : 0,
-    "minor" : 2,
+    "minor" : 3,
     "patch" : 0
   },
   "sections" : [
@@ -40,11 +34,11 @@
     {
       "generated" : true,
       "identifiers" : [
-        "doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/OktaOAuth2\/AuthorizationCodeFlow\/RedirectError\/errorDescription-1d2qw",
-        "doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/OktaOAuth2\/AuthorizationCodeFlow\/RedirectError\/errorDescription-8fgw1",
-        "doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/OktaOAuth2\/AuthorizationCodeFlow\/RedirectError\/failureReason",
-        "doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/OktaOAuth2\/AuthorizationCodeFlow\/RedirectError\/helpAnchor",
-        "doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/OktaOAuth2\/AuthorizationCodeFlow\/RedirectError\/recoverySuggestion"
+        "doc:\/\/OktaOAuth2\/documentation\/OktaOAuth2\/AuthorizationCodeFlow\/RedirectError\/errorDescription-1d2qw",
+        "doc:\/\/OktaOAuth2\/documentation\/OktaOAuth2\/AuthorizationCodeFlow\/RedirectError\/errorDescription-8fgw1",
+        "doc:\/\/OktaOAuth2\/documentation\/OktaOAuth2\/AuthorizationCodeFlow\/RedirectError\/failureReason",
+        "doc:\/\/OktaOAuth2\/documentation\/OktaOAuth2\/AuthorizationCodeFlow\/RedirectError\/helpAnchor",
+        "doc:\/\/OktaOAuth2\/documentation\/OktaOAuth2\/AuthorizationCodeFlow\/RedirectError\/recoverySuggestion"
       ],
       "title" : "Instance Properties"
     }
@@ -63,21 +57,21 @@
   ]
 , 
 "references": {
-"doc://com.okta.mobile.oktaoauth2/documentation/OktaOAuth2": {
+"doc://OktaOAuth2/documentation/OktaOAuth2": {
   "abstract" : [
     {
       "text" : "Interact with Okta’s OAuth2 APIs to authenticate users, and interact with user resources.",
       "type" : "text"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/OktaOAuth2",
+  "identifier" : "doc:\/\/OktaOAuth2\/documentation\/OktaOAuth2",
   "kind" : "symbol",
   "role" : "collection",
   "title" : "OktaOAuth2",
   "type" : "topic",
   "url" : "\/documentation\/oktaoauth2"
 },
-"doc://com.okta.mobile.oktaoauth2/documentation/OktaOAuth2/AuthorizationCodeFlow": {
+"doc://OktaOAuth2/documentation/OktaOAuth2/AuthorizationCodeFlow": {
   "abstract" : [
     {
       "text" : "An authentication flow class that implements the Authorization Code Flow exchange.",
@@ -98,7 +92,7 @@
       "text" : "AuthorizationCodeFlow"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/OktaOAuth2\/AuthorizationCodeFlow",
+  "identifier" : "doc:\/\/OktaOAuth2\/documentation\/OktaOAuth2\/AuthorizationCodeFlow",
   "kind" : "symbol",
   "navigatorTitle" : [
     {
@@ -111,7 +105,7 @@
   "type" : "topic",
   "url" : "\/documentation\/oktaoauth2\/authorizationcodeflow"
 },
-"doc://com.okta.mobile.oktaoauth2/documentation/OktaOAuth2/AuthorizationCodeFlow/RedirectError": {
+"doc://OktaOAuth2/documentation/OktaOAuth2/AuthorizationCodeFlow/RedirectError": {
   "abstract" : [
     {
       "text" : "Errors reported during processing and handling of redirect URLs.",
@@ -132,7 +126,7 @@
       "text" : "RedirectError"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/OktaOAuth2\/AuthorizationCodeFlow\/RedirectError",
+  "identifier" : "doc:\/\/OktaOAuth2\/documentation\/OktaOAuth2\/AuthorizationCodeFlow\/RedirectError",
   "kind" : "symbol",
   "navigatorTitle" : [
     {
@@ -145,12 +139,9 @@
   "type" : "topic",
   "url" : "\/documentation\/oktaoauth2\/authorizationcodeflow\/redirecterror"
 },
-"doc://com.okta.mobile.oktaoauth2/documentation/OktaOAuth2/AuthorizationCodeFlow/RedirectError/errorDescription-1d2qw": {
+"doc://OktaOAuth2/documentation/OktaOAuth2/AuthorizationCodeFlow/RedirectError/errorDescription-1d2qw": {
   "abstract" : [
-    {
-      "text" : "A localized message describing what error occurred.",
-      "type" : "text"
-    }
+
   ],
   "fragments" : [
     {
@@ -179,19 +170,16 @@
       "text" : "?"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/OktaOAuth2\/AuthorizationCodeFlow\/RedirectError\/errorDescription-1d2qw",
+  "identifier" : "doc:\/\/OktaOAuth2\/documentation\/OktaOAuth2\/AuthorizationCodeFlow\/RedirectError\/errorDescription-1d2qw",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "errorDescription",
   "type" : "topic",
   "url" : "\/documentation\/oktaoauth2\/authorizationcodeflow\/redirecterror\/errordescription-1d2qw"
 },
-"doc://com.okta.mobile.oktaoauth2/documentation/OktaOAuth2/AuthorizationCodeFlow/RedirectError/errorDescription-8fgw1": {
+"doc://OktaOAuth2/documentation/OktaOAuth2/AuthorizationCodeFlow/RedirectError/errorDescription-8fgw1": {
   "abstract" : [
-    {
-      "text" : "A localized message describing what error occurred.",
-      "type" : "text"
-    }
+
   ],
   "fragments" : [
     {
@@ -220,19 +208,16 @@
       "text" : "?"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/OktaOAuth2\/AuthorizationCodeFlow\/RedirectError\/errorDescription-8fgw1",
+  "identifier" : "doc:\/\/OktaOAuth2\/documentation\/OktaOAuth2\/AuthorizationCodeFlow\/RedirectError\/errorDescription-8fgw1",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "errorDescription",
   "type" : "topic",
   "url" : "\/documentation\/oktaoauth2\/authorizationcodeflow\/redirecterror\/errordescription-8fgw1"
 },
-"doc://com.okta.mobile.oktaoauth2/documentation/OktaOAuth2/AuthorizationCodeFlow/RedirectError/failureReason": {
+"doc://OktaOAuth2/documentation/OktaOAuth2/AuthorizationCodeFlow/RedirectError/failureReason": {
   "abstract" : [
-    {
-      "text" : "A localized message describing the reason for the failure.",
-      "type" : "text"
-    }
+
   ],
   "fragments" : [
     {
@@ -261,19 +246,16 @@
       "text" : "?"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/OktaOAuth2\/AuthorizationCodeFlow\/RedirectError\/failureReason",
+  "identifier" : "doc:\/\/OktaOAuth2\/documentation\/OktaOAuth2\/AuthorizationCodeFlow\/RedirectError\/failureReason",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "failureReason",
   "type" : "topic",
   "url" : "\/documentation\/oktaoauth2\/authorizationcodeflow\/redirecterror\/failurereason"
 },
-"doc://com.okta.mobile.oktaoauth2/documentation/OktaOAuth2/AuthorizationCodeFlow/RedirectError/helpAnchor": {
+"doc://OktaOAuth2/documentation/OktaOAuth2/AuthorizationCodeFlow/RedirectError/helpAnchor": {
   "abstract" : [
-    {
-      "text" : "A localized message providing “help” text if the user requests help.",
-      "type" : "text"
-    }
+
   ],
   "fragments" : [
     {
@@ -302,19 +284,16 @@
       "text" : "?"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/OktaOAuth2\/AuthorizationCodeFlow\/RedirectError\/helpAnchor",
+  "identifier" : "doc:\/\/OktaOAuth2\/documentation\/OktaOAuth2\/AuthorizationCodeFlow\/RedirectError\/helpAnchor",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "helpAnchor",
   "type" : "topic",
   "url" : "\/documentation\/oktaoauth2\/authorizationcodeflow\/redirecterror\/helpanchor"
 },
-"doc://com.okta.mobile.oktaoauth2/documentation/OktaOAuth2/AuthorizationCodeFlow/RedirectError/recoverySuggestion": {
+"doc://OktaOAuth2/documentation/OktaOAuth2/AuthorizationCodeFlow/RedirectError/recoverySuggestion": {
   "abstract" : [
-    {
-      "text" : "A localized message describing how one might recover from the failure.",
-      "type" : "text"
-    }
+
   ],
   "fragments" : [
     {
@@ -343,7 +322,7 @@
       "text" : "?"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/OktaOAuth2\/AuthorizationCodeFlow\/RedirectError\/recoverySuggestion",
+  "identifier" : "doc:\/\/OktaOAuth2\/documentation\/OktaOAuth2\/AuthorizationCodeFlow\/RedirectError\/recoverySuggestion",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "recoverySuggestion",

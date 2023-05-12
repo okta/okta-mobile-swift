@@ -1,32 +1,21 @@
 {
-  "abstract" : [
-    {
-      "text" : "No overview available.",
-      "type" : "text"
-    }
-  ],
   "hierarchy" : {
     "paths" : [
       [
-        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation",
-        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/APIClientDelegate",
-        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/APIClientDelegate\/api(client:didSend:received:)-4ob1d"
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/APIClientDelegate",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/APIClientDelegate\/api(client:didSend:received:)-4ob1d"
       ],
       [
-        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation",
-        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/APIClientDelegate",
-        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/APIClientDelegate\/api(client:didSend:received:)-75hyt"
-      ],
-      [
-        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation",
-        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/APIClientDelegate",
-        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/APIClientDelegate\/api(client:didSend:received:)-8l08k"
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/APIClientDelegate",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/APIClientDelegate\/api(client:didSend:received:)-8l08k"
       ]
     ]
   },
   "identifier" : {
     "interfaceLanguage" : "swift",
-    "url" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/APIClientDelegate\/api(client:didSend:received:)-4mcbm"
+    "url" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/APIClientDelegate\/api(client:didSend:received:)-4mcbm"
   },
   "kind" : "symbol",
   "metadata" : {
@@ -147,7 +136,7 @@
               "text" : ": "
             },
             {
-              "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/APIClient",
+              "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/APIClient",
               "kind" : "typeIdentifier",
               "preciseIdentifier" : "s:14AuthFoundation9APIClientP",
               "text" : "APIClient"
@@ -214,7 +203,7 @@
   ],
   "schemaVersion" : {
     "major" : 0,
-    "minor" : 2,
+    "minor" : 3,
     "patch" : 0
   },
   "sections" : [
@@ -234,21 +223,21 @@
   ]
 , 
 "references": {
-"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation": {
+"doc://AuthFoundation/documentation/AuthFoundation": {
   "abstract" : [
     {
       "text" : "Library that provides foundational features used by Okta’s authentication libraries, as well as APIs used to work with tokens and user credentials.",
       "type" : "text"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation",
   "kind" : "symbol",
   "role" : "collection",
   "title" : "AuthFoundation",
   "type" : "topic",
   "url" : "\/documentation\/authfoundation"
 },
-"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/APIClient": {
+"doc://AuthFoundation/documentation/AuthFoundation/APIClient": {
   "abstract" : [
     {
       "text" : "Protocol defining the interfaces and capabilities that API clients can conform to.",
@@ -269,7 +258,7 @@
       "text" : "APIClient"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/APIClient",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/APIClient",
   "kind" : "symbol",
   "navigatorTitle" : [
     {
@@ -282,7 +271,7 @@
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/apiclient"
 },
-"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/APIClientDelegate": {
+"doc://AuthFoundation/documentation/AuthFoundation/APIClientDelegate": {
   "abstract" : [
     {
       "text" : "Protocol that delegates of APIClient instances can conform to.",
@@ -303,7 +292,7 @@
       "text" : "APIClientDelegate"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/APIClientDelegate",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/APIClientDelegate",
   "kind" : "symbol",
   "navigatorTitle" : [
     {
@@ -316,7 +305,7 @@
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/apiclientdelegate"
 },
-"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/APIClientDelegate/api(client:didSend:received:)-4mcbm": {
+"doc://AuthFoundation/documentation/AuthFoundation/APIClientDelegate/api(client:didSend:received:)-4mcbm": {
   "abstract" : [
 
   ],
@@ -389,21 +378,21 @@
       "text" : ")"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/APIClientDelegate\/api(client:didSend:received:)-4mcbm",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/APIClientDelegate\/api(client:didSend:received:)-4mcbm",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "api(client:didSend:received:)",
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/apiclientdelegate\/api(client:didsend:received:)-4mcbm"
 },
-"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/APIClientDelegate/api(client:didSend:received:)-4ob1d": {
+"doc://AuthFoundation/documentation/AuthFoundation/APIClientDelegate/api(client:didSend:received:)-4ob1d": {
   "abstract" : [
     {
       "text" : "Invoked when a request returns a successful response.",
       "type" : "text"
     }
   ],
-  "defaultImplementations" : 3,
+  "defaultImplementations" : 2,
   "fragments" : [
     {
       "kind" : "keyword",
@@ -473,7 +462,7 @@
       "text" : ")"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/APIClientDelegate\/api(client:didSend:received:)-4ob1d",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/APIClientDelegate\/api(client:didSend:received:)-4ob1d",
   "kind" : "symbol",
   "required" : true,
   "role" : "symbol",
@@ -481,99 +470,14 @@
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/apiclientdelegate\/api(client:didsend:received:)-4ob1d"
 },
-"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/APIClientDelegate/api(client:didSend:received:)-75hyt": {
-  "abstract" : [
-    {
-      "text" : "Invoked when a request fails.",
-      "type" : "text"
-    }
-  ],
-  "defaultImplementations" : 3,
-  "fragments" : [
-    {
-      "kind" : "keyword",
-      "text" : "func"
-    },
-    {
-      "kind" : "text",
-      "text" : " "
-    },
-    {
-      "kind" : "identifier",
-      "text" : "api"
-    },
-    {
-      "kind" : "text",
-      "text" : "("
-    },
-    {
-      "kind" : "externalParam",
-      "text" : "client"
-    },
-    {
-      "kind" : "text",
-      "text" : ": "
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:14AuthFoundation9APIClientP",
-      "text" : "APIClient"
-    },
-    {
-      "kind" : "text",
-      "text" : ", "
-    },
-    {
-      "kind" : "externalParam",
-      "text" : "didSend"
-    },
-    {
-      "kind" : "text",
-      "text" : ": "
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:10Foundation10URLRequestV",
-      "text" : "URLRequest"
-    },
-    {
-      "kind" : "text",
-      "text" : ", "
-    },
-    {
-      "kind" : "externalParam",
-      "text" : "received"
-    },
-    {
-      "kind" : "text",
-      "text" : ": "
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:14AuthFoundation14APIClientErrorO",
-      "text" : "APIClientError"
-    },
-    {
-      "kind" : "text",
-      "text" : ")"
-    }
-  ],
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/APIClientDelegate\/api(client:didSend:received:)-75hyt",
-  "kind" : "symbol",
-  "required" : true,
-  "role" : "symbol",
-  "title" : "api(client:didSend:received:)",
-  "type" : "topic",
-  "url" : "\/documentation\/authfoundation\/apiclientdelegate\/api(client:didsend:received:)-75hyt"
-},
-"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/APIClientDelegate/api(client:didSend:received:)-8l08k": {
+"doc://AuthFoundation/documentation/AuthFoundation/APIClientDelegate/api(client:didSend:received:)-8l08k": {
   "abstract" : [
     {
       "text" : "Invoked when a request returns a successful response.",
       "type" : "text"
     }
   ],
-  "defaultImplementations" : 3,
+  "defaultImplementations" : 2,
   "fragments" : [
     {
       "kind" : "keyword",
@@ -652,7 +556,6 @@
     },
     {
       "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:14AuthFoundation17APIClientDelegateP3api6client7didSend8receivedyAA0C0_p_0B010URLRequestVAA11APIResponseVyqd__GtSeRd__lF1TL_qd__mfp",
       "text" : "T"
     },
     {
@@ -660,7 +563,7 @@
       "text" : ">)"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/APIClientDelegate\/api(client:didSend:received:)-8l08k",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/APIClientDelegate\/api(client:didSend:received:)-8l08k",
   "kind" : "symbol",
   "required" : true,
   "role" : "symbol",

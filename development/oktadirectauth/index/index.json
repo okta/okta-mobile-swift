@@ -1,0 +1,701 @@
+{
+  "interfaceLanguages" : {
+    "swift" : [
+      {
+        "children" : [
+          {
+            "title" : "Essentials",
+            "type" : "groupMarker"
+          },
+          {
+            "children" : [
+              {
+                "title" : "Creating a flow",
+                "type" : "groupMarker"
+              },
+              {
+                "path" : "\/documentation\/oktadirectauth\/directauthenticationflow\/init()",
+                "title" : "convenience init() throws",
+                "type" : "init"
+              },
+              {
+                "path" : "\/documentation\/oktadirectauth\/directauthenticationflow\/init(plist:)",
+                "title" : "convenience init(plist: URL) throws",
+                "type" : "init"
+              },
+              {
+                "path" : "\/documentation\/oktadirectauth\/directauthenticationflow\/init(issuer:clientid:scopes:supportedgrants:)",
+                "title" : "convenience init(issuer: URL, clientId: String, scopes: String, supportedGrants: [GrantType])",
+                "type" : "init"
+              },
+              {
+                "path" : "\/documentation\/oktadirectauth\/directauthenticationflow\/init(supportedgrants:client:)",
+                "title" : "init(supportedGrants: [GrantType], client: OAuth2Client)",
+                "type" : "init"
+              },
+              {
+                "title" : "Starting MFA or signing in with 1FA",
+                "type" : "groupMarker"
+              },
+              {
+                "path" : "\/documentation\/oktadirectauth\/directauthenticationflow\/start(_:with:)",
+                "title" : "func start(String, with: DirectAuthenticationFlow.PrimaryFactor) async throws -> DirectAuthenticationFlow.Status",
+                "type" : "method"
+              },
+              {
+                "path" : "\/documentation\/oktadirectauth\/directauthenticationflow\/start(_:with:completion:)",
+                "title" : "func start(String, with: DirectAuthenticationFlow.PrimaryFactor, completion: (Result<DirectAuthenticationFlow.Status, DirectAuthenticationFlowError>) -> Void)",
+                "type" : "method"
+              },
+              {
+                "children" : [
+                  {
+                    "title" : "Enumeration Cases",
+                    "type" : "groupMarker"
+                  },
+                  {
+                    "path" : "\/documentation\/oktadirectauth\/directauthenticationflow\/primaryfactor\/oob(channel:)",
+                    "title" : "case oob(channel: DirectAuthenticationFlow.OOBChannel)",
+                    "type" : "case"
+                  },
+                  {
+                    "path" : "\/documentation\/oktadirectauth\/directauthenticationflow\/primaryfactor\/otp(code:)",
+                    "title" : "case otp(code: String)",
+                    "type" : "case"
+                  },
+                  {
+                    "path" : "\/documentation\/oktadirectauth\/directauthenticationflow\/primaryfactor\/password(_:)",
+                    "title" : "case password(String)",
+                    "type" : "case"
+                  },
+                  {
+                    "title" : "Default Implementations",
+                    "type" : "groupMarker"
+                  },
+                  {
+                    "children" : [
+                      {
+                        "title" : "Operators",
+                        "type" : "groupMarker"
+                      },
+                      {
+                        "path" : "\/documentation\/oktadirectauth\/directauthenticationflow\/primaryfactor\/!=(_:_:)",
+                        "title" : "static func != (Self, Self) -> Bool",
+                        "type" : "op"
+                      }
+                    ],
+                    "path" : "\/documentation\/oktadirectauth\/directauthenticationflow\/primaryfactor\/equatable-implementations",
+                    "title" : "Equatable Implementations",
+                    "type" : "symbol"
+                  }
+                ],
+                "path" : "\/documentation\/oktadirectauth\/directauthenticationflow\/primaryfactor",
+                "title" : "DirectAuthenticationFlow.PrimaryFactor",
+                "type" : "enum"
+              },
+              {
+                "children" : [
+                  {
+                    "title" : "Enumeration Cases",
+                    "type" : "groupMarker"
+                  },
+                  {
+                    "path" : "\/documentation\/oktadirectauth\/directauthenticationflow\/oobchannel\/push",
+                    "title" : "case push",
+                    "type" : "case"
+                  },
+                  {
+                    "title" : "Initializers",
+                    "type" : "groupMarker"
+                  },
+                  {
+                    "path" : "\/documentation\/oktadirectauth\/directauthenticationflow\/oobchannel\/init(rawvalue:)",
+                    "title" : "init?(rawValue: String)",
+                    "type" : "init"
+                  },
+                  {
+                    "title" : "Default Implementations",
+                    "type" : "groupMarker"
+                  },
+                  {
+                    "children" : [
+                      {
+                        "title" : "Operators",
+                        "type" : "groupMarker"
+                      },
+                      {
+                        "path" : "\/documentation\/oktadirectauth\/directauthenticationflow\/oobchannel\/!=(_:_:)",
+                        "title" : "static func != (Self, Self) -> Bool",
+                        "type" : "op"
+                      }
+                    ],
+                    "path" : "\/documentation\/oktadirectauth\/directauthenticationflow\/oobchannel\/equatable-implementations",
+                    "title" : "Equatable Implementations",
+                    "type" : "symbol"
+                  },
+                  {
+                    "children" : [
+                      {
+                        "title" : "Initializers",
+                        "type" : "groupMarker"
+                      },
+                      {
+                        "path" : "\/documentation\/oktadirectauth\/directauthenticationflow\/oobchannel\/init(from:)",
+                        "title" : "init(from: Decoder) throws",
+                        "type" : "init"
+                      },
+                      {
+                        "title" : "Instance Properties",
+                        "type" : "groupMarker"
+                      },
+                      {
+                        "path" : "\/documentation\/oktadirectauth\/directauthenticationflow\/oobchannel\/hashvalue",
+                        "title" : "var hashValue: Int",
+                        "type" : "property"
+                      },
+                      {
+                        "title" : "Instance Methods",
+                        "type" : "groupMarker"
+                      },
+                      {
+                        "path" : "\/documentation\/oktadirectauth\/directauthenticationflow\/oobchannel\/encode(to:)",
+                        "title" : "func encode(to: Encoder) throws",
+                        "type" : "method"
+                      },
+                      {
+                        "path" : "\/documentation\/oktadirectauth\/directauthenticationflow\/oobchannel\/hash(into:)",
+                        "title" : "func hash(into: inout Hasher)",
+                        "type" : "method"
+                      }
+                    ],
+                    "path" : "\/documentation\/oktadirectauth\/directauthenticationflow\/oobchannel\/rawrepresentable-implementations",
+                    "title" : "RawRepresentable Implementations",
+                    "type" : "symbol"
+                  }
+                ],
+                "path" : "\/documentation\/oktadirectauth\/directauthenticationflow\/oobchannel",
+                "title" : "DirectAuthenticationFlow.OOBChannel",
+                "type" : "enum"
+              },
+              {
+                "title" : "Continuing sign in with MFA",
+                "type" : "groupMarker"
+              },
+              {
+                "path" : "\/documentation\/oktadirectauth\/directauthenticationflow\/resume(_:with:)",
+                "title" : "func resume(DirectAuthenticationFlow.Status, with: DirectAuthenticationFlow.SecondaryFactor) async throws -> DirectAuthenticationFlow.Status",
+                "type" : "method"
+              },
+              {
+                "path" : "\/documentation\/oktadirectauth\/directauthenticationflow\/resume(_:with:completion:)",
+                "title" : "func resume(DirectAuthenticationFlow.Status, with: DirectAuthenticationFlow.SecondaryFactor, completion: (Result<DirectAuthenticationFlow.Status, DirectAuthenticationFlowError>) -> Void)",
+                "type" : "method"
+              },
+              {
+                "children" : [
+                  {
+                    "title" : "Enumeration Cases",
+                    "type" : "groupMarker"
+                  },
+                  {
+                    "path" : "\/documentation\/oktadirectauth\/directauthenticationflow\/secondaryfactor\/oob(channel:)",
+                    "title" : "case oob(channel: DirectAuthenticationFlow.OOBChannel)",
+                    "type" : "case"
+                  },
+                  {
+                    "path" : "\/documentation\/oktadirectauth\/directauthenticationflow\/secondaryfactor\/otp(code:)",
+                    "title" : "case otp(code: String)",
+                    "type" : "case"
+                  },
+                  {
+                    "title" : "Default Implementations",
+                    "type" : "groupMarker"
+                  },
+                  {
+                    "children" : [
+                      {
+                        "title" : "Operators",
+                        "type" : "groupMarker"
+                      },
+                      {
+                        "path" : "\/documentation\/oktadirectauth\/directauthenticationflow\/secondaryfactor\/!=(_:_:)",
+                        "title" : "static func != (Self, Self) -> Bool",
+                        "type" : "op"
+                      }
+                    ],
+                    "path" : "\/documentation\/oktadirectauth\/directauthenticationflow\/secondaryfactor\/equatable-implementations",
+                    "title" : "Equatable Implementations",
+                    "type" : "symbol"
+                  }
+                ],
+                "path" : "\/documentation\/oktadirectauth\/directauthenticationflow\/secondaryfactor",
+                "title" : "DirectAuthenticationFlow.SecondaryFactor",
+                "type" : "enum"
+              },
+              {
+                "children" : [
+                  {
+                    "title" : "Enumeration Cases",
+                    "type" : "groupMarker"
+                  },
+                  {
+                    "path" : "\/documentation\/oktadirectauth\/directauthenticationflow\/oobchannel\/push",
+                    "title" : "case push",
+                    "type" : "case"
+                  },
+                  {
+                    "title" : "Initializers",
+                    "type" : "groupMarker"
+                  },
+                  {
+                    "path" : "\/documentation\/oktadirectauth\/directauthenticationflow\/oobchannel\/init(rawvalue:)",
+                    "title" : "init?(rawValue: String)",
+                    "type" : "init"
+                  },
+                  {
+                    "title" : "Default Implementations",
+                    "type" : "groupMarker"
+                  },
+                  {
+                    "children" : [
+                      {
+                        "title" : "Operators",
+                        "type" : "groupMarker"
+                      },
+                      {
+                        "path" : "\/documentation\/oktadirectauth\/directauthenticationflow\/oobchannel\/!=(_:_:)",
+                        "title" : "static func != (Self, Self) -> Bool",
+                        "type" : "op"
+                      }
+                    ],
+                    "path" : "\/documentation\/oktadirectauth\/directauthenticationflow\/oobchannel\/equatable-implementations",
+                    "title" : "Equatable Implementations",
+                    "type" : "symbol"
+                  },
+                  {
+                    "children" : [
+                      {
+                        "title" : "Initializers",
+                        "type" : "groupMarker"
+                      },
+                      {
+                        "path" : "\/documentation\/oktadirectauth\/directauthenticationflow\/oobchannel\/init(from:)",
+                        "title" : "init(from: Decoder) throws",
+                        "type" : "init"
+                      },
+                      {
+                        "title" : "Instance Properties",
+                        "type" : "groupMarker"
+                      },
+                      {
+                        "path" : "\/documentation\/oktadirectauth\/directauthenticationflow\/oobchannel\/hashvalue",
+                        "title" : "var hashValue: Int",
+                        "type" : "property"
+                      },
+                      {
+                        "title" : "Instance Methods",
+                        "type" : "groupMarker"
+                      },
+                      {
+                        "path" : "\/documentation\/oktadirectauth\/directauthenticationflow\/oobchannel\/encode(to:)",
+                        "title" : "func encode(to: Encoder) throws",
+                        "type" : "method"
+                      },
+                      {
+                        "path" : "\/documentation\/oktadirectauth\/directauthenticationflow\/oobchannel\/hash(into:)",
+                        "title" : "func hash(into: inout Hasher)",
+                        "type" : "method"
+                      }
+                    ],
+                    "path" : "\/documentation\/oktadirectauth\/directauthenticationflow\/oobchannel\/rawrepresentable-implementations",
+                    "title" : "RawRepresentable Implementations",
+                    "type" : "symbol"
+                  }
+                ],
+                "path" : "\/documentation\/oktadirectauth\/directauthenticationflow\/oobchannel",
+                "title" : "DirectAuthenticationFlow.OOBChannel",
+                "type" : "enum"
+              },
+              {
+                "title" : "Sign in responses",
+                "type" : "groupMarker"
+              },
+              {
+                "children" : [
+                  {
+                    "title" : "Enumeration Cases",
+                    "type" : "groupMarker"
+                  },
+                  {
+                    "path" : "\/documentation\/oktadirectauth\/directauthenticationflow\/status\/mfarequired(_:)",
+                    "title" : "case mfaRequired(DirectAuthenticationFlow.MFAContext)",
+                    "type" : "case"
+                  },
+                  {
+                    "path" : "\/documentation\/oktadirectauth\/directauthenticationflow\/status\/success(_:)",
+                    "title" : "case success(Token)",
+                    "type" : "case"
+                  },
+                  {
+                    "title" : "Default Implementations",
+                    "type" : "groupMarker"
+                  },
+                  {
+                    "children" : [
+                      {
+                        "title" : "Operators",
+                        "type" : "groupMarker"
+                      },
+                      {
+                        "path" : "\/documentation\/oktadirectauth\/directauthenticationflow\/status\/!=(_:_:)",
+                        "title" : "static func != (Self, Self) -> Bool",
+                        "type" : "op"
+                      },
+                      {
+                        "path" : "\/documentation\/oktadirectauth\/directauthenticationflow\/status\/==(_:_:)",
+                        "title" : "static func == (DirectAuthenticationFlow.Status, DirectAuthenticationFlow.Status) -> Bool",
+                        "type" : "op"
+                      }
+                    ],
+                    "path" : "\/documentation\/oktadirectauth\/directauthenticationflow\/status\/equatable-implementations",
+                    "title" : "Equatable Implementations",
+                    "type" : "symbol"
+                  }
+                ],
+                "path" : "\/documentation\/oktadirectauth\/directauthenticationflow\/status",
+                "title" : "DirectAuthenticationFlow.Status",
+                "type" : "enum"
+              },
+              {
+                "children" : [
+                  {
+                    "title" : "Initializers",
+                    "type" : "groupMarker"
+                  },
+                  {
+                    "path" : "\/documentation\/oktadirectauth\/directauthenticationflow\/mfacontext\/init(supportedchallengetypes:mfatoken:)",
+                    "title" : "init(supportedChallengeTypes: [GrantType]?, mfaToken: String)",
+                    "type" : "init"
+                  },
+                  {
+                    "title" : "Instance Properties",
+                    "type" : "groupMarker"
+                  },
+                  {
+                    "path" : "\/documentation\/oktadirectauth\/directauthenticationflow\/mfacontext\/supportedchallengetypes",
+                    "title" : "let supportedChallengeTypes: [GrantType]?",
+                    "type" : "property"
+                  },
+                  {
+                    "title" : "Default Implementations",
+                    "type" : "groupMarker"
+                  },
+                  {
+                    "children" : [
+                      {
+                        "title" : "Operators",
+                        "type" : "groupMarker"
+                      },
+                      {
+                        "path" : "\/documentation\/oktadirectauth\/directauthenticationflow\/mfacontext\/!=(_:_:)",
+                        "title" : "static func != (Self, Self) -> Bool",
+                        "type" : "op"
+                      }
+                    ],
+                    "path" : "\/documentation\/oktadirectauth\/directauthenticationflow\/mfacontext\/equatable-implementations",
+                    "title" : "Equatable Implementations",
+                    "type" : "symbol"
+                  }
+                ],
+                "path" : "\/documentation\/oktadirectauth\/directauthenticationflow\/mfacontext",
+                "title" : "DirectAuthenticationFlow.MFAContext",
+                "type" : "struct"
+              },
+              {
+                "title" : "Flow configuration values",
+                "type" : "groupMarker"
+              },
+              {
+                "path" : "\/documentation\/oktadirectauth\/directauthenticationflow\/client",
+                "title" : "let client: OAuth2Client",
+                "type" : "property"
+              },
+              {
+                "path" : "\/documentation\/oktadirectauth\/directauthenticationflow\/supportedgranttypes",
+                "title" : "let supportedGrantTypes: [GrantType]",
+                "type" : "property"
+              },
+              {
+                "title" : "Responding to changes",
+                "type" : "groupMarker"
+              },
+              {
+                "path" : "\/documentation\/oktadirectauth\/directauthenticationflow\/delegatecollection",
+                "title" : "let delegateCollection: DelegateCollection<DirectAuthenticationFlowDelegate>",
+                "type" : "property"
+              },
+              {
+                "path" : "\/documentation\/oktadirectauth\/directauthenticationflow\/isauthenticating",
+                "title" : "var isAuthenticating: Bool",
+                "type" : "property"
+              },
+              {
+                "title" : "Resetting a flow",
+                "type" : "groupMarker"
+              },
+              {
+                "path" : "\/documentation\/oktadirectauth\/directauthenticationflow\/reset()",
+                "title" : "func reset()",
+                "type" : "method"
+              },
+              {
+                "title" : "Default Implementations",
+                "type" : "groupMarker"
+              },
+              {
+                "children" : [
+                  {
+                    "title" : "Instance Methods",
+                    "type" : "groupMarker"
+                  },
+                  {
+                    "path" : "\/documentation\/oktadirectauth\/directauthenticationflow\/api(client:didsend:received:)",
+                    "title" : "func api(client: APIClient, didSend: URLRequest, received: HTTPURLResponse)",
+                    "type" : "method"
+                  },
+                  {
+                    "path" : "\/documentation\/oktadirectauth\/directauthenticationflow\/api(client:didsend:received:requestid:ratelimit:)",
+                    "title" : "func api(client: APIClient, didSend: URLRequest, received: APIClientError, requestId: String?, rateLimit: APIRateLimit?)",
+                    "type" : "method"
+                  },
+                  {
+                    "path" : "\/documentation\/oktadirectauth\/directauthenticationflow\/api(client:shouldretry:)",
+                    "title" : "func api(client: APIClient, shouldRetry: URLRequest) -> APIRetry",
+                    "type" : "method"
+                  },
+                  {
+                    "path" : "\/documentation\/oktadirectauth\/directauthenticationflow\/api(client:willsend:)",
+                    "title" : "func api(client: APIClient, willSend: inout URLRequest)",
+                    "type" : "method"
+                  }
+                ],
+                "path" : "\/documentation\/oktadirectauth\/directauthenticationflow\/apiclientdelegate-implementations",
+                "title" : "APIClientDelegate Implementations",
+                "type" : "symbol"
+              },
+              {
+                "children" : [
+                  {
+                    "title" : "Instance Methods",
+                    "type" : "groupMarker"
+                  },
+                  {
+                    "path" : "\/documentation\/oktadirectauth\/directauthenticationflow\/oauth(client:didrefresh:replacedwith:)",
+                    "title" : "func oauth(client: OAuth2Client, didRefresh: Token, replacedWith: Token?)",
+                    "type" : "method"
+                  },
+                  {
+                    "path" : "\/documentation\/oktadirectauth\/directauthenticationflow\/oauth(client:willrefresh:)",
+                    "title" : "func oauth(client: OAuth2Client, willRefresh: Token)",
+                    "type" : "method"
+                  }
+                ],
+                "path" : "\/documentation\/oktadirectauth\/directauthenticationflow\/oauth2clientdelegate-implementations",
+                "title" : "OAuth2ClientDelegate Implementations",
+                "type" : "symbol"
+              },
+              {
+                "children" : [
+                  {
+                    "title" : "Instance Methods",
+                    "type" : "groupMarker"
+                  },
+                  {
+                    "path" : "\/documentation\/oktadirectauth\/directauthenticationflow\/add(delegate:)",
+                    "title" : "func add(delegate: Self.Delegate)",
+                    "type" : "method"
+                  },
+                  {
+                    "path" : "\/documentation\/oktadirectauth\/directauthenticationflow\/remove(delegate:)",
+                    "title" : "func remove(delegate: Self.Delegate)",
+                    "type" : "method"
+                  },
+                  {
+                    "title" : "Type Aliases",
+                    "type" : "groupMarker"
+                  },
+                  {
+                    "path" : "\/documentation\/oktadirectauth\/directauthenticationflow\/delegate",
+                    "title" : "DirectAuthenticationFlow.Delegate",
+                    "type" : "typealias"
+                  }
+                ],
+                "path" : "\/documentation\/oktadirectauth\/directauthenticationflow\/usesdelegatecollection-implementations",
+                "title" : "UsesDelegateCollection Implementations",
+                "type" : "symbol"
+              }
+            ],
+            "path" : "\/documentation\/oktadirectauth\/directauthenticationflow",
+            "title" : "DirectAuthenticationFlow",
+            "type" : "class"
+          },
+          {
+            "children" : [
+              {
+                "title" : "Instance Methods",
+                "type" : "groupMarker"
+              },
+              {
+                "path" : "\/documentation\/oktadirectauth\/directauthenticationflowdelegate\/authentication(flow:received:)",
+                "title" : "func authentication<Flow>(flow: Flow, received: DirectAuthenticationFlow.Status)",
+                "type" : "method"
+              }
+            ],
+            "path" : "\/documentation\/oktadirectauth\/directauthenticationflowdelegate",
+            "title" : "DirectAuthenticationFlowDelegate",
+            "type" : "protocol"
+          },
+          {
+            "title" : "Variables",
+            "type" : "groupMarker"
+          },
+          {
+            "path" : "\/documentation\/oktadirectauth\/version",
+            "title" : "let Version: SDKVersion",
+            "type" : "var"
+          },
+          {
+            "title" : "Enumerations",
+            "type" : "groupMarker"
+          },
+          {
+            "children" : [
+              {
+                "title" : "Enumeration Cases",
+                "type" : "groupMarker"
+              },
+              {
+                "path" : "\/documentation\/oktadirectauth\/directauthenticationflowerror\/missingarguments(_:)",
+                "title" : "case missingArguments([String])",
+                "type" : "case"
+              },
+              {
+                "path" : "\/documentation\/oktadirectauth\/directauthenticationflowerror\/network(error:)",
+                "title" : "case network(error: APIClientError)",
+                "type" : "case"
+              },
+              {
+                "path" : "\/documentation\/oktadirectauth\/directauthenticationflowerror\/oauth2(error:)",
+                "title" : "case oauth2(error: OAuth2Error)",
+                "type" : "case"
+              },
+              {
+                "path" : "\/documentation\/oktadirectauth\/directauthenticationflowerror\/other(error:)",
+                "title" : "case other(error: Error)",
+                "type" : "case"
+              },
+              {
+                "path" : "\/documentation\/oktadirectauth\/directauthenticationflowerror\/pollingtimeoutexceeded",
+                "title" : "case pollingTimeoutExceeded",
+                "type" : "case"
+              },
+              {
+                "path" : "\/documentation\/oktadirectauth\/directauthenticationflowerror\/server(error:)",
+                "title" : "case server(error: OAuth2ServerError)",
+                "type" : "case"
+              },
+              {
+                "title" : "Default Implementations",
+                "type" : "groupMarker"
+              },
+              {
+                "children" : [
+                  {
+                    "title" : "Operators",
+                    "type" : "groupMarker"
+                  },
+                  {
+                    "path" : "\/documentation\/oktadirectauth\/directauthenticationflowerror\/!=(_:_:)",
+                    "title" : "static func != (Self, Self) -> Bool",
+                    "type" : "op"
+                  },
+                  {
+                    "path" : "\/documentation\/oktadirectauth\/directauthenticationflowerror\/==(_:_:)",
+                    "title" : "static func == (DirectAuthenticationFlowError, DirectAuthenticationFlowError) -> Bool",
+                    "type" : "op"
+                  }
+                ],
+                "path" : "\/documentation\/oktadirectauth\/directauthenticationflowerror\/equatable-implementations",
+                "title" : "Equatable Implementations",
+                "type" : "symbol"
+              },
+              {
+                "children" : [
+                  {
+                    "title" : "Instance Properties",
+                    "type" : "groupMarker"
+                  },
+                  {
+                    "path" : "\/documentation\/oktadirectauth\/directauthenticationflowerror\/localizeddescription",
+                    "title" : "var localizedDescription: String",
+                    "type" : "property"
+                  }
+                ],
+                "path" : "\/documentation\/oktadirectauth\/directauthenticationflowerror\/error-implementations",
+                "title" : "Error Implementations",
+                "type" : "symbol"
+              },
+              {
+                "children" : [
+                  {
+                    "title" : "Instance Properties",
+                    "type" : "groupMarker"
+                  },
+                  {
+                    "path" : "\/documentation\/oktadirectauth\/directauthenticationflowerror\/errordescription-39i33",
+                    "title" : "var errorDescription: String?",
+                    "type" : "property"
+                  },
+                  {
+                    "path" : "\/documentation\/oktadirectauth\/directauthenticationflowerror\/errordescription-4mlbs",
+                    "title" : "var errorDescription: String?",
+                    "type" : "property"
+                  },
+                  {
+                    "path" : "\/documentation\/oktadirectauth\/directauthenticationflowerror\/failurereason",
+                    "title" : "var failureReason: String?",
+                    "type" : "property"
+                  },
+                  {
+                    "path" : "\/documentation\/oktadirectauth\/directauthenticationflowerror\/helpanchor",
+                    "title" : "var helpAnchor: String?",
+                    "type" : "property"
+                  },
+                  {
+                    "path" : "\/documentation\/oktadirectauth\/directauthenticationflowerror\/recoverysuggestion",
+                    "title" : "var recoverySuggestion: String?",
+                    "type" : "property"
+                  }
+                ],
+                "path" : "\/documentation\/oktadirectauth\/directauthenticationflowerror\/localizederror-implementations",
+                "title" : "LocalizedError Implementations",
+                "type" : "symbol"
+              }
+            ],
+            "path" : "\/documentation\/oktadirectauth\/directauthenticationflowerror",
+            "title" : "DirectAuthenticationFlowError",
+            "type" : "enum"
+          }
+        ],
+        "path" : "\/documentation\/oktadirectauth",
+        "title" : "OktaDirectAuth",
+        "type" : "module"
+      }
+    ]
+  },
+  "schemaVersion" : {
+    "major" : 0,
+    "minor" : 1,
+    "patch" : 0
+  }
+}

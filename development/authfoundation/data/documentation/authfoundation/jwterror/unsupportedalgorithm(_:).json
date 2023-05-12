@@ -1,21 +1,15 @@
 {
-  "abstract" : [
-    {
-      "text" : "No overview available.",
-      "type" : "text"
-    }
-  ],
   "hierarchy" : {
     "paths" : [
       [
-        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation",
-        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/JWTError"
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JWTError"
       ]
     ]
   },
   "identifier" : {
     "interfaceLanguage" : "swift",
-    "url" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/JWTError\/unsupportedAlgorithm(_:)"
+    "url" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JWTError\/unsupportedAlgorithm(_:)"
   },
   "kind" : "symbol",
   "metadata" : {
@@ -102,7 +96,7 @@
               "text" : ": "
             },
             {
-              "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/JWK",
+              "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JWK",
               "kind" : "typeIdentifier",
               "preciseIdentifier" : "s:14AuthFoundation3JWKV",
               "text" : "JWK"
@@ -112,7 +106,7 @@
               "text" : "."
             },
             {
-              "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/JWK\/Algorithm-swift.enum",
+              "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JWK\/Algorithm-swift.enum",
               "kind" : "typeIdentifier",
               "preciseIdentifier" : "s:14AuthFoundation3JWKV9AlgorithmO",
               "text" : "Algorithm"
@@ -129,7 +123,7 @@
   ],
   "schemaVersion" : {
     "major" : 0,
-    "minor" : 2,
+    "minor" : 3,
     "patch" : 0
   },
   "sections" : [
@@ -149,21 +143,21 @@
   ]
 , 
 "references": {
-"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation": {
+"doc://AuthFoundation/documentation/AuthFoundation": {
   "abstract" : [
     {
       "text" : "Library that provides foundational features used by Okta’s authentication libraries, as well as APIs used to work with tokens and user credentials.",
       "type" : "text"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation",
   "kind" : "symbol",
   "role" : "collection",
   "title" : "AuthFoundation",
   "type" : "topic",
   "url" : "\/documentation\/authfoundation"
 },
-"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/JWK": {
+"doc://AuthFoundation/documentation/AuthFoundation/JWK": {
   "abstract" : [
     {
       "text" : "Describes an individual key from an authorization server, which can be used to validate tokens or encrypt content.",
@@ -184,7 +178,7 @@
       "text" : "JWK"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/JWK",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JWK",
   "kind" : "symbol",
   "navigatorTitle" : [
     {
@@ -197,7 +191,7 @@
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/jwk"
 },
-"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/JWK/Algorithm-swift.enum": {
+"doc://AuthFoundation/documentation/AuthFoundation/JWK/Algorithm-swift.enum": {
   "abstract" : [
     {
       "text" : "The algorithm this key is intended to be used with.",
@@ -218,7 +212,7 @@
       "text" : "Algorithm"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/JWK\/Algorithm-swift.enum",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JWK\/Algorithm-swift.enum",
   "kind" : "symbol",
   "navigatorTitle" : [
     {
@@ -231,7 +225,7 @@
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/jwk\/algorithm-swift.enum"
 },
-"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/JWTError": {
+"doc://AuthFoundation/documentation/AuthFoundation/JWTError": {
   "abstract" : [
     {
       "text" : "Describes errors that may occur with parsing or validating JWT tokens.",
@@ -252,7 +246,7 @@
       "text" : "JWTError"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/JWTError",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JWTError",
   "kind" : "symbol",
   "navigatorTitle" : [
     {
@@ -265,7 +259,7 @@
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/jwterror"
 },
-"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/JWTError/unsupportedAlgorithm(_:)": {
+"doc://AuthFoundation/documentation/AuthFoundation/JWTError/unsupportedAlgorithm(_:)": {
   "abstract" : [
 
   ],
@@ -305,7 +299,7 @@
       "text" : ")"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/JWTError\/unsupportedAlgorithm(_:)",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JWTError\/unsupportedAlgorithm(_:)",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "JWTError.unsupportedAlgorithm(_:)",

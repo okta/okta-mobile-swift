@@ -1,22 +1,30 @@
 {
   "abstract" : [
     {
-      "text" : "No overview available.",
+      "text" : "Inherited from ",
+      "type" : "text"
+    },
+    {
+      "code" : "HasClaims.subscript(_:)",
+      "type" : "codeVoice"
+    },
+    {
+      "text" : ".",
       "type" : "text"
     }
   ],
   "hierarchy" : {
     "paths" : [
       [
-        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation",
-        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/JWT",
-        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/JWT\/HasClaims-Implementations"
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JWT",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JWT\/HasClaims-Implementations"
       ]
     ]
   },
   "identifier" : {
     "interfaceLanguage" : "swift",
-    "url" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/JWT\/subscript(_:)-9g5qo"
+    "url" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JWT\/subscript(_:)-9g5qo"
   },
   "kind" : "symbol",
   "metadata" : {
@@ -50,7 +58,6 @@
       },
       {
         "kind" : "typeIdentifier",
-        "preciseIdentifier" : "s:14AuthFoundation9HasClaimsPAAEyqd__SgSScluip1TL_qd__mfp",
         "text" : "T"
       },
       {
@@ -114,7 +121,6 @@
             },
             {
               "kind" : "typeIdentifier",
-              "preciseIdentifier" : "s:14AuthFoundation9HasClaimsPAAEyqd__SgSScluip1TL_qd__mfp",
               "text" : "T"
             },
             {
@@ -137,7 +143,7 @@
   ],
   "schemaVersion" : {
     "major" : 0,
-    "minor" : 2,
+    "minor" : 3,
     "patch" : 0
   },
   "sections" : [
@@ -157,21 +163,21 @@
   ]
 , 
 "references": {
-"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation": {
+"doc://AuthFoundation/documentation/AuthFoundation": {
   "abstract" : [
     {
       "text" : "Library that provides foundational features used by Okta’s authentication libraries, as well as APIs used to work with tokens and user credentials.",
       "type" : "text"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation",
   "kind" : "symbol",
   "role" : "collection",
   "title" : "AuthFoundation",
   "type" : "topic",
   "url" : "\/documentation\/authfoundation"
 },
-"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/JWT": {
+"doc://AuthFoundation/documentation/AuthFoundation/JWT": {
   "abstract" : [
     {
       "text" : "Represents the contents of a JWT token, providing access to its payload contents.",
@@ -192,7 +198,7 @@
       "text" : "JWT"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/JWT",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JWT",
   "kind" : "symbol",
   "navigatorTitle" : [
     {
@@ -205,18 +211,18 @@
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/jwt"
 },
-"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/JWT/HasClaims-Implementations": {
+"doc://AuthFoundation/documentation/AuthFoundation/JWT/HasClaims-Implementations": {
   "abstract" : [
 
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/JWT\/HasClaims-Implementations",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JWT\/HasClaims-Implementations",
   "kind" : "article",
   "role" : "collectionGroup",
   "title" : "HasClaims Implementations",
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/jwt\/hasclaims-implementations"
 },
-"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/JWT/subscript(_:)-9g5qo": {
+"doc://AuthFoundation/documentation/AuthFoundation/JWT/subscript(_:)-9g5qo": {
   "abstract" : [
 
   ],
@@ -248,7 +254,6 @@
     },
     {
       "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:14AuthFoundation9HasClaimsPAAEyqd__SgSScluip1TL_qd__mfp",
       "text" : "T"
     },
     {
@@ -256,7 +261,7 @@
       "text" : "?"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/JWT\/subscript(_:)-9g5qo",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JWT\/subscript(_:)-9g5qo",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "subscript(_:)",

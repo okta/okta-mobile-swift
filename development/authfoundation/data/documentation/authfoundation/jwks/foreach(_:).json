@@ -1,46 +1,30 @@
 {
   "abstract" : [
     {
-      "text" : "Calls the given closure on each element in the sequence in the same order",
+      "text" : "Inherited from ",
       "type" : "text"
     },
     {
-      "text" : " ",
-      "type" : "text"
-    },
-    {
-      "text" : "as a ",
-      "type" : "text"
-    },
-    {
-      "code" : "for",
+      "code" : "Sequence.forEach(_:)",
       "type" : "codeVoice"
     },
     {
-      "text" : "-",
-      "type" : "text"
-    },
-    {
-      "code" : "in",
-      "type" : "codeVoice"
-    },
-    {
-      "text" : " loop.",
+      "text" : ".",
       "type" : "text"
     }
   ],
   "hierarchy" : {
     "paths" : [
       [
-        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation",
-        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/JWKS",
-        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/JWKS\/Sequence-Implementations"
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JWKS",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JWKS\/Sequence-Implementations"
       ]
     ]
   },
   "identifier" : {
     "interfaceLanguage" : "swift",
-    "url" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/JWKS\/forEach(_:)"
+    "url" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JWKS\/forEach(_:)"
   },
   "kind" : "symbol",
   "metadata" : {
@@ -195,220 +179,11 @@
         }
       ],
       "kind" : "declarations"
-    },
-    {
-      "kind" : "parameters",
-      "parameters" : [
-        {
-          "content" : [
-            {
-              "inlineContent" : [
-                {
-                  "text" : "A closure that takes an element of the sequence as a",
-                  "type" : "text"
-                },
-                {
-                  "text" : " ",
-                  "type" : "text"
-                },
-                {
-                  "text" : "parameter.",
-                  "type" : "text"
-                }
-              ],
-              "type" : "paragraph"
-            }
-          ],
-          "name" : "body"
-        }
-      ]
-    },
-    {
-      "content" : [
-        {
-          "anchor" : "discussion",
-          "level" : 2,
-          "text" : "Discussion",
-          "type" : "heading"
-        },
-        {
-          "inlineContent" : [
-            {
-              "text" : "The two loops in the following example produce the same output:",
-              "type" : "text"
-            }
-          ],
-          "type" : "paragraph"
-        },
-        {
-          "code" : [
-            "let numberWords = [\"one\", \"two\", \"three\"]",
-            "for word in numberWords {",
-            "    print(word)",
-            "}",
-            "\/\/ Prints \"one\"",
-            "\/\/ Prints \"two\"",
-            "\/\/ Prints \"three\"",
-            "",
-            "numberWords.forEach { word in",
-            "    print(word)",
-            "}",
-            "\/\/ Same as above"
-          ],
-          "syntax" : null,
-          "type" : "codeListing"
-        },
-        {
-          "inlineContent" : [
-            {
-              "text" : "Using the ",
-              "type" : "text"
-            },
-            {
-              "code" : "forEach",
-              "type" : "codeVoice"
-            },
-            {
-              "text" : " method is distinct from a ",
-              "type" : "text"
-            },
-            {
-              "code" : "for",
-              "type" : "codeVoice"
-            },
-            {
-              "text" : "-",
-              "type" : "text"
-            },
-            {
-              "code" : "in",
-              "type" : "codeVoice"
-            },
-            {
-              "text" : " loop in two",
-              "type" : "text"
-            },
-            {
-              "text" : " ",
-              "type" : "text"
-            },
-            {
-              "text" : "important ways:",
-              "type" : "text"
-            }
-          ],
-          "type" : "paragraph"
-        },
-        {
-          "items" : [
-            {
-              "content" : [
-                {
-                  "inlineContent" : [
-                    {
-                      "text" : "You cannot use a ",
-                      "type" : "text"
-                    },
-                    {
-                      "code" : "break",
-                      "type" : "codeVoice"
-                    },
-                    {
-                      "text" : " or ",
-                      "type" : "text"
-                    },
-                    {
-                      "code" : "continue",
-                      "type" : "codeVoice"
-                    },
-                    {
-                      "text" : " statement to exit the current",
-                      "type" : "text"
-                    },
-                    {
-                      "text" : " ",
-                      "type" : "text"
-                    },
-                    {
-                      "text" : "call of the ",
-                      "type" : "text"
-                    },
-                    {
-                      "code" : "body",
-                      "type" : "codeVoice"
-                    },
-                    {
-                      "text" : " closure or skip subsequent calls.",
-                      "type" : "text"
-                    }
-                  ],
-                  "type" : "paragraph"
-                }
-              ]
-            },
-            {
-              "content" : [
-                {
-                  "inlineContent" : [
-                    {
-                      "text" : "Using the ",
-                      "type" : "text"
-                    },
-                    {
-                      "code" : "return",
-                      "type" : "codeVoice"
-                    },
-                    {
-                      "text" : " statement in the ",
-                      "type" : "text"
-                    },
-                    {
-                      "code" : "body",
-                      "type" : "codeVoice"
-                    },
-                    {
-                      "text" : " closure will exit only from",
-                      "type" : "text"
-                    },
-                    {
-                      "text" : " ",
-                      "type" : "text"
-                    },
-                    {
-                      "text" : "the current call to ",
-                      "type" : "text"
-                    },
-                    {
-                      "code" : "body",
-                      "type" : "codeVoice"
-                    },
-                    {
-                      "text" : ", not from any outer scope, and won’t skip",
-                      "type" : "text"
-                    },
-                    {
-                      "text" : " ",
-                      "type" : "text"
-                    },
-                    {
-                      "text" : "subsequent calls.",
-                      "type" : "text"
-                    }
-                  ],
-                  "type" : "paragraph"
-                }
-              ]
-            }
-          ],
-          "type" : "orderedList"
-        }
-      ],
-      "kind" : "content"
     }
   ],
   "schemaVersion" : {
     "major" : 0,
-    "minor" : 2,
+    "minor" : 3,
     "patch" : 0
   },
   "sections" : [
@@ -428,21 +203,21 @@
   ]
 , 
 "references": {
-"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation": {
+"doc://AuthFoundation/documentation/AuthFoundation": {
   "abstract" : [
     {
       "text" : "Library that provides foundational features used by Okta’s authentication libraries, as well as APIs used to work with tokens and user credentials.",
       "type" : "text"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation",
   "kind" : "symbol",
   "role" : "collection",
   "title" : "AuthFoundation",
   "type" : "topic",
   "url" : "\/documentation\/authfoundation"
 },
-"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/JWKS": {
+"doc://AuthFoundation/documentation/AuthFoundation/JWKS": {
   "abstract" : [
     {
       "text" : "Describes the collection of keys associated with an authorization server.",
@@ -463,7 +238,7 @@
       "text" : "JWKS"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/JWKS",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JWKS",
   "kind" : "symbol",
   "navigatorTitle" : [
     {
@@ -476,47 +251,20 @@
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/jwks"
 },
-"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/JWKS/Sequence-Implementations": {
+"doc://AuthFoundation/documentation/AuthFoundation/JWKS/Sequence-Implementations": {
   "abstract" : [
 
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/JWKS\/Sequence-Implementations",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JWKS\/Sequence-Implementations",
   "kind" : "article",
   "role" : "collectionGroup",
   "title" : "Sequence Implementations",
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/jwks\/sequence-implementations"
 },
-"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/JWKS/forEach(_:)": {
+"doc://AuthFoundation/documentation/AuthFoundation/JWKS/forEach(_:)": {
   "abstract" : [
-    {
-      "text" : "Calls the given closure on each element in the sequence in the same order",
-      "type" : "text"
-    },
-    {
-      "text" : " ",
-      "type" : "text"
-    },
-    {
-      "text" : "as a ",
-      "type" : "text"
-    },
-    {
-      "code" : "for",
-      "type" : "codeVoice"
-    },
-    {
-      "text" : "-",
-      "type" : "text"
-    },
-    {
-      "code" : "in",
-      "type" : "codeVoice"
-    },
-    {
-      "text" : " loop.",
-      "type" : "text"
-    }
+
   ],
   "fragments" : [
     {
@@ -573,7 +321,7 @@
       "text" : "rethrows"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/JWKS\/forEach(_:)",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JWKS\/forEach(_:)",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "forEach(_:)",

@@ -1,22 +1,30 @@
 {
   "abstract" : [
     {
-      "text" : "No overview available.",
+      "text" : "Inherited from ",
+      "type" : "text"
+    },
+    {
+      "code" : "RawRepresentable.hash(into:)",
+      "type" : "codeVoice"
+    },
+    {
+      "text" : ".",
       "type" : "text"
     }
   ],
   "hierarchy" : {
     "paths" : [
       [
-        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation",
-        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/APIRequestMethod",
-        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/APIRequestMethod\/RawRepresentable-Implementations"
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/APIRequestMethod",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/APIRequestMethod\/RawRepresentable-Implementations"
       ]
     ]
   },
   "identifier" : {
     "interfaceLanguage" : "swift",
-    "url" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/APIRequestMethod\/hash(into:)"
+    "url" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/APIRequestMethod\/hash(into:)"
   },
   "kind" : "symbol",
   "metadata" : {
@@ -191,7 +199,7 @@
   ],
   "schemaVersion" : {
     "major" : 0,
-    "minor" : 2,
+    "minor" : 3,
     "patch" : 0
   },
   "sections" : [
@@ -211,21 +219,21 @@
   ]
 , 
 "references": {
-"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation": {
+"doc://AuthFoundation/documentation/AuthFoundation": {
   "abstract" : [
     {
       "text" : "Library that provides foundational features used by Okta’s authentication libraries, as well as APIs used to work with tokens and user credentials.",
       "type" : "text"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation",
   "kind" : "symbol",
   "role" : "collection",
   "title" : "AuthFoundation",
   "type" : "topic",
   "url" : "\/documentation\/authfoundation"
 },
-"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/APIRequestMethod": {
+"doc://AuthFoundation/documentation/AuthFoundation/APIRequestMethod": {
   "abstract" : [
     {
       "text" : "API HTTP request method.",
@@ -246,7 +254,7 @@
       "text" : "APIRequestMethod"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/APIRequestMethod",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/APIRequestMethod",
   "kind" : "symbol",
   "navigatorTitle" : [
     {
@@ -259,18 +267,18 @@
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/apirequestmethod"
 },
-"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/APIRequestMethod/RawRepresentable-Implementations": {
+"doc://AuthFoundation/documentation/AuthFoundation/APIRequestMethod/RawRepresentable-Implementations": {
   "abstract" : [
 
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/APIRequestMethod\/RawRepresentable-Implementations",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/APIRequestMethod\/RawRepresentable-Implementations",
   "kind" : "article",
   "role" : "collectionGroup",
   "title" : "RawRepresentable Implementations",
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/apirequestmethod\/rawrepresentable-implementations"
 },
-"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/APIRequestMethod/hash(into:)": {
+"doc://AuthFoundation/documentation/AuthFoundation/APIRequestMethod/hash(into:)": {
   "abstract" : [
 
   ],
@@ -365,7 +373,7 @@
       "text" : ")"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/APIRequestMethod\/hash(into:)",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/APIRequestMethod\/hash(into:)",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "hash(into:)",

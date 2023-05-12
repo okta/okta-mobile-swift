@@ -8,14 +8,14 @@
   "hierarchy" : {
     "paths" : [
       [
-        "doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/OktaOAuth2",
-        "doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/OktaOAuth2\/AuthorizationCodeFlow"
+        "doc:\/\/OktaOAuth2\/documentation\/OktaOAuth2",
+        "doc:\/\/OktaOAuth2\/documentation\/OktaOAuth2\/AuthorizationCodeFlow"
       ]
     ]
   },
   "identifier" : {
     "interfaceLanguage" : "swift",
-    "url" : "doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/OktaOAuth2\/AuthorizationCodeFlow\/RedirectError"
+    "url" : "doc:\/\/OktaOAuth2\/documentation\/OktaOAuth2\/AuthorizationCodeFlow\/RedirectError"
   },
   "kind" : "symbol",
   "metadata" : {
@@ -93,7 +93,7 @@
               "type" : "text"
             },
             {
-              "identifier" : "doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/OktaOAuth2\/AuthorizationCodeFlow\/start(with:additionalParameters:completion:)",
+              "identifier" : "doc:\/\/OktaOAuth2\/documentation\/OktaOAuth2\/AuthorizationCodeFlow\/start(with:additionalParameters:completion:)",
               "isActive" : true,
               "type" : "reference"
             },
@@ -102,7 +102,7 @@
               "type" : "text"
             },
             {
-              "identifier" : "doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/OktaOAuth2\/AuthorizationCodeFlow\/start(with:additionalParameters:)",
+              "identifier" : "doc:\/\/OktaOAuth2\/documentation\/OktaOAuth2\/AuthorizationCodeFlow\/start(with:additionalParameters:)",
               "isActive" : true,
               "type" : "reference"
             },
@@ -120,10 +120,10 @@
   "relationshipsSections" : [
     {
       "identifiers" : [
-        "doc:\/\/com.okta.mobile.oktaoauth2\/10Foundation14LocalizedErrorP",
-        "doc:\/\/com.okta.mobile.oktaoauth2\/SQ",
-        "doc:\/\/com.okta.mobile.oktaoauth2\/s5ErrorP",
-        "doc:\/\/com.okta.mobile.oktaoauth2\/s8SendableP"
+        "doc:\/\/OktaOAuth2\/10Foundation14LocalizedErrorP",
+        "doc:\/\/OktaOAuth2\/SQ",
+        "doc:\/\/OktaOAuth2\/s5ErrorP",
+        "doc:\/\/OktaOAuth2\/s8SendableP"
       ],
       "kind" : "relationships",
       "title" : "Conforms To",
@@ -132,7 +132,7 @@
   ],
   "schemaVersion" : {
     "major" : 0,
-    "minor" : 2,
+    "minor" : 3,
     "patch" : 0
   },
   "sections" : [
@@ -141,20 +141,20 @@
   "topicSections" : [
     {
       "identifiers" : [
-        "doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/OktaOAuth2\/AuthorizationCodeFlow\/RedirectError\/invalidRedirectUrl",
-        "doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/OktaOAuth2\/AuthorizationCodeFlow\/RedirectError\/invalidState(_:)",
-        "doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/OktaOAuth2\/AuthorizationCodeFlow\/RedirectError\/missingAuthorizationCode",
-        "doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/OktaOAuth2\/AuthorizationCodeFlow\/RedirectError\/missingQueryArguments",
-        "doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/OktaOAuth2\/AuthorizationCodeFlow\/RedirectError\/unexpectedScheme(_:)"
+        "doc:\/\/OktaOAuth2\/documentation\/OktaOAuth2\/AuthorizationCodeFlow\/RedirectError\/invalidRedirectUrl",
+        "doc:\/\/OktaOAuth2\/documentation\/OktaOAuth2\/AuthorizationCodeFlow\/RedirectError\/invalidState(_:)",
+        "doc:\/\/OktaOAuth2\/documentation\/OktaOAuth2\/AuthorizationCodeFlow\/RedirectError\/missingAuthorizationCode",
+        "doc:\/\/OktaOAuth2\/documentation\/OktaOAuth2\/AuthorizationCodeFlow\/RedirectError\/missingQueryArguments",
+        "doc:\/\/OktaOAuth2\/documentation\/OktaOAuth2\/AuthorizationCodeFlow\/RedirectError\/unexpectedScheme(_:)"
       ],
       "title" : "Enumeration Cases"
     },
     {
       "generated" : true,
       "identifiers" : [
-        "doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/OktaOAuth2\/AuthorizationCodeFlow\/RedirectError\/Equatable-Implementations",
-        "doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/OktaOAuth2\/AuthorizationCodeFlow\/RedirectError\/Error-Implementations",
-        "doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/OktaOAuth2\/AuthorizationCodeFlow\/RedirectError\/LocalizedError-Implementations"
+        "doc:\/\/OktaOAuth2\/documentation\/OktaOAuth2\/AuthorizationCodeFlow\/RedirectError\/Equatable-Implementations",
+        "doc:\/\/OktaOAuth2\/documentation\/OktaOAuth2\/AuthorizationCodeFlow\/RedirectError\/Error-Implementations",
+        "doc:\/\/OktaOAuth2\/documentation\/OktaOAuth2\/AuthorizationCodeFlow\/RedirectError\/LocalizedError-Implementations"
       ],
       "title" : "Default Implementations"
     }
@@ -173,31 +173,31 @@
   ]
 , 
 "references": {
-"doc://com.okta.mobile.oktaoauth2/10Foundation14LocalizedErrorP": {
-  "identifier" : "doc:\/\/com.okta.mobile.oktaoauth2\/10Foundation14LocalizedErrorP",
+"doc://OktaOAuth2/10Foundation14LocalizedErrorP": {
+  "identifier" : "doc:\/\/OktaOAuth2\/10Foundation14LocalizedErrorP",
   "title" : "Foundation.LocalizedError",
   "type" : "unresolvable"
 },
-"doc://com.okta.mobile.oktaoauth2/SQ": {
-  "identifier" : "doc:\/\/com.okta.mobile.oktaoauth2\/SQ",
+"doc://OktaOAuth2/SQ": {
+  "identifier" : "doc:\/\/OktaOAuth2\/SQ",
   "title" : "Swift.Equatable",
   "type" : "unresolvable"
 },
-"doc://com.okta.mobile.oktaoauth2/documentation/OktaOAuth2": {
+"doc://OktaOAuth2/documentation/OktaOAuth2": {
   "abstract" : [
     {
       "text" : "Interact with Okta’s OAuth2 APIs to authenticate users, and interact with user resources.",
       "type" : "text"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/OktaOAuth2",
+  "identifier" : "doc:\/\/OktaOAuth2\/documentation\/OktaOAuth2",
   "kind" : "symbol",
   "role" : "collection",
   "title" : "OktaOAuth2",
   "type" : "topic",
   "url" : "\/documentation\/oktaoauth2"
 },
-"doc://com.okta.mobile.oktaoauth2/documentation/OktaOAuth2/AuthorizationCodeFlow": {
+"doc://OktaOAuth2/documentation/OktaOAuth2/AuthorizationCodeFlow": {
   "abstract" : [
     {
       "text" : "An authentication flow class that implements the Authorization Code Flow exchange.",
@@ -218,7 +218,7 @@
       "text" : "AuthorizationCodeFlow"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/OktaOAuth2\/AuthorizationCodeFlow",
+  "identifier" : "doc:\/\/OktaOAuth2\/documentation\/OktaOAuth2\/AuthorizationCodeFlow",
   "kind" : "symbol",
   "navigatorTitle" : [
     {
@@ -231,7 +231,7 @@
   "type" : "topic",
   "url" : "\/documentation\/oktaoauth2\/authorizationcodeflow"
 },
-"doc://com.okta.mobile.oktaoauth2/documentation/OktaOAuth2/AuthorizationCodeFlow/Context-swift.struct": {
+"doc://OktaOAuth2/documentation/OktaOAuth2/AuthorizationCodeFlow/Context-swift.struct": {
   "abstract" : [
     {
       "text" : "A model representing the context and current state for an authorization session.",
@@ -252,7 +252,7 @@
       "text" : "Context"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/OktaOAuth2\/AuthorizationCodeFlow\/Context-swift.struct",
+  "identifier" : "doc:\/\/OktaOAuth2\/documentation\/OktaOAuth2\/AuthorizationCodeFlow\/Context-swift.struct",
   "kind" : "symbol",
   "navigatorTitle" : [
     {
@@ -265,7 +265,7 @@
   "type" : "topic",
   "url" : "\/documentation\/oktaoauth2\/authorizationcodeflow\/context-swift.struct"
 },
-"doc://com.okta.mobile.oktaoauth2/documentation/OktaOAuth2/AuthorizationCodeFlow/RedirectError": {
+"doc://OktaOAuth2/documentation/OktaOAuth2/AuthorizationCodeFlow/RedirectError": {
   "abstract" : [
     {
       "text" : "Errors reported during processing and handling of redirect URLs.",
@@ -286,7 +286,7 @@
       "text" : "RedirectError"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/OktaOAuth2\/AuthorizationCodeFlow\/RedirectError",
+  "identifier" : "doc:\/\/OktaOAuth2\/documentation\/OktaOAuth2\/AuthorizationCodeFlow\/RedirectError",
   "kind" : "symbol",
   "navigatorTitle" : [
     {
@@ -299,40 +299,40 @@
   "type" : "topic",
   "url" : "\/documentation\/oktaoauth2\/authorizationcodeflow\/redirecterror"
 },
-"doc://com.okta.mobile.oktaoauth2/documentation/OktaOAuth2/AuthorizationCodeFlow/RedirectError/Equatable-Implementations": {
+"doc://OktaOAuth2/documentation/OktaOAuth2/AuthorizationCodeFlow/RedirectError/Equatable-Implementations": {
   "abstract" : [
 
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/OktaOAuth2\/AuthorizationCodeFlow\/RedirectError\/Equatable-Implementations",
+  "identifier" : "doc:\/\/OktaOAuth2\/documentation\/OktaOAuth2\/AuthorizationCodeFlow\/RedirectError\/Equatable-Implementations",
   "kind" : "article",
   "role" : "collectionGroup",
   "title" : "Equatable Implementations",
   "type" : "topic",
   "url" : "\/documentation\/oktaoauth2\/authorizationcodeflow\/redirecterror\/equatable-implementations"
 },
-"doc://com.okta.mobile.oktaoauth2/documentation/OktaOAuth2/AuthorizationCodeFlow/RedirectError/Error-Implementations": {
+"doc://OktaOAuth2/documentation/OktaOAuth2/AuthorizationCodeFlow/RedirectError/Error-Implementations": {
   "abstract" : [
 
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/OktaOAuth2\/AuthorizationCodeFlow\/RedirectError\/Error-Implementations",
+  "identifier" : "doc:\/\/OktaOAuth2\/documentation\/OktaOAuth2\/AuthorizationCodeFlow\/RedirectError\/Error-Implementations",
   "kind" : "article",
   "role" : "collectionGroup",
   "title" : "Error Implementations",
   "type" : "topic",
   "url" : "\/documentation\/oktaoauth2\/authorizationcodeflow\/redirecterror\/error-implementations"
 },
-"doc://com.okta.mobile.oktaoauth2/documentation/OktaOAuth2/AuthorizationCodeFlow/RedirectError/LocalizedError-Implementations": {
+"doc://OktaOAuth2/documentation/OktaOAuth2/AuthorizationCodeFlow/RedirectError/LocalizedError-Implementations": {
   "abstract" : [
 
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/OktaOAuth2\/AuthorizationCodeFlow\/RedirectError\/LocalizedError-Implementations",
+  "identifier" : "doc:\/\/OktaOAuth2\/documentation\/OktaOAuth2\/AuthorizationCodeFlow\/RedirectError\/LocalizedError-Implementations",
   "kind" : "article",
   "role" : "collectionGroup",
   "title" : "LocalizedError Implementations",
   "type" : "topic",
   "url" : "\/documentation\/oktaoauth2\/authorizationcodeflow\/redirecterror\/localizederror-implementations"
 },
-"doc://com.okta.mobile.oktaoauth2/documentation/OktaOAuth2/AuthorizationCodeFlow/RedirectError/invalidRedirectUrl": {
+"doc://OktaOAuth2/documentation/OktaOAuth2/AuthorizationCodeFlow/RedirectError/invalidRedirectUrl": {
   "abstract" : [
 
   ],
@@ -350,14 +350,14 @@
       "text" : "invalidRedirectUrl"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/OktaOAuth2\/AuthorizationCodeFlow\/RedirectError\/invalidRedirectUrl",
+  "identifier" : "doc:\/\/OktaOAuth2\/documentation\/OktaOAuth2\/AuthorizationCodeFlow\/RedirectError\/invalidRedirectUrl",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "AuthorizationCodeFlow.RedirectError.invalidRedirectUrl",
   "type" : "topic",
   "url" : "\/documentation\/oktaoauth2\/authorizationcodeflow\/redirecterror\/invalidredirecturl"
 },
-"doc://com.okta.mobile.oktaoauth2/documentation/OktaOAuth2/AuthorizationCodeFlow/RedirectError/invalidState(_:)": {
+"doc://OktaOAuth2/documentation/OktaOAuth2/AuthorizationCodeFlow/RedirectError/invalidState(_:)": {
   "abstract" : [
 
   ],
@@ -388,14 +388,14 @@
       "text" : "?)"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/OktaOAuth2\/AuthorizationCodeFlow\/RedirectError\/invalidState(_:)",
+  "identifier" : "doc:\/\/OktaOAuth2\/documentation\/OktaOAuth2\/AuthorizationCodeFlow\/RedirectError\/invalidState(_:)",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "AuthorizationCodeFlow.RedirectError.invalidState(_:)",
   "type" : "topic",
   "url" : "\/documentation\/oktaoauth2\/authorizationcodeflow\/redirecterror\/invalidstate(_:)"
 },
-"doc://com.okta.mobile.oktaoauth2/documentation/OktaOAuth2/AuthorizationCodeFlow/RedirectError/missingAuthorizationCode": {
+"doc://OktaOAuth2/documentation/OktaOAuth2/AuthorizationCodeFlow/RedirectError/missingAuthorizationCode": {
   "abstract" : [
 
   ],
@@ -413,14 +413,14 @@
       "text" : "missingAuthorizationCode"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/OktaOAuth2\/AuthorizationCodeFlow\/RedirectError\/missingAuthorizationCode",
+  "identifier" : "doc:\/\/OktaOAuth2\/documentation\/OktaOAuth2\/AuthorizationCodeFlow\/RedirectError\/missingAuthorizationCode",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "AuthorizationCodeFlow.RedirectError.missingAuthorizationCode",
   "type" : "topic",
   "url" : "\/documentation\/oktaoauth2\/authorizationcodeflow\/redirecterror\/missingauthorizationcode"
 },
-"doc://com.okta.mobile.oktaoauth2/documentation/OktaOAuth2/AuthorizationCodeFlow/RedirectError/missingQueryArguments": {
+"doc://OktaOAuth2/documentation/OktaOAuth2/AuthorizationCodeFlow/RedirectError/missingQueryArguments": {
   "abstract" : [
 
   ],
@@ -438,14 +438,14 @@
       "text" : "missingQueryArguments"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/OktaOAuth2\/AuthorizationCodeFlow\/RedirectError\/missingQueryArguments",
+  "identifier" : "doc:\/\/OktaOAuth2\/documentation\/OktaOAuth2\/AuthorizationCodeFlow\/RedirectError\/missingQueryArguments",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "AuthorizationCodeFlow.RedirectError.missingQueryArguments",
   "type" : "topic",
   "url" : "\/documentation\/oktaoauth2\/authorizationcodeflow\/redirecterror\/missingqueryarguments"
 },
-"doc://com.okta.mobile.oktaoauth2/documentation/OktaOAuth2/AuthorizationCodeFlow/RedirectError/unexpectedScheme(_:)": {
+"doc://OktaOAuth2/documentation/OktaOAuth2/AuthorizationCodeFlow/RedirectError/unexpectedScheme(_:)": {
   "abstract" : [
 
   ],
@@ -476,21 +476,21 @@
       "text" : "?)"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/OktaOAuth2\/AuthorizationCodeFlow\/RedirectError\/unexpectedScheme(_:)",
+  "identifier" : "doc:\/\/OktaOAuth2\/documentation\/OktaOAuth2\/AuthorizationCodeFlow\/RedirectError\/unexpectedScheme(_:)",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "AuthorizationCodeFlow.RedirectError.unexpectedScheme(_:)",
   "type" : "topic",
   "url" : "\/documentation\/oktaoauth2\/authorizationcodeflow\/redirecterror\/unexpectedscheme(_:)"
 },
-"doc://com.okta.mobile.oktaoauth2/documentation/OktaOAuth2/AuthorizationCodeFlow/start(with:additionalParameters:)": {
+"doc://OktaOAuth2/documentation/OktaOAuth2/AuthorizationCodeFlow/start(with:additionalParameters:)": {
   "abstract" : [
     {
       "text" : "Asynchronously initiates an authentication flow, with an optional ",
       "type" : "text"
     },
     {
-      "identifier" : "doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/OktaOAuth2\/AuthorizationCodeFlow\/Context-swift.struct",
+      "identifier" : "doc:\/\/OktaOAuth2\/documentation\/OktaOAuth2\/AuthorizationCodeFlow\/Context-swift.struct",
       "isActive" : true,
       "type" : "reference"
     },
@@ -523,6 +523,15 @@
     {
       "kind" : "text",
       "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:10OktaOAuth221AuthorizationCodeFlowC",
+      "text" : "AuthorizationCodeFlow"
+    },
+    {
+      "kind" : "text",
+      "text" : "."
     },
     {
       "kind" : "typeIdentifier",
@@ -581,21 +590,21 @@
       "text" : "URL"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/OktaOAuth2\/AuthorizationCodeFlow\/start(with:additionalParameters:)",
+  "identifier" : "doc:\/\/OktaOAuth2\/documentation\/OktaOAuth2\/AuthorizationCodeFlow\/start(with:additionalParameters:)",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "start(with:additionalParameters:)",
   "type" : "topic",
   "url" : "\/documentation\/oktaoauth2\/authorizationcodeflow\/start(with:additionalparameters:)"
 },
-"doc://com.okta.mobile.oktaoauth2/documentation/OktaOAuth2/AuthorizationCodeFlow/start(with:additionalParameters:completion:)": {
+"doc://OktaOAuth2/documentation/OktaOAuth2/AuthorizationCodeFlow/start(with:additionalParameters:completion:)": {
   "abstract" : [
     {
       "text" : "Initiates an authentication flow, with an optional ",
       "type" : "text"
     },
     {
-      "identifier" : "doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/OktaOAuth2\/AuthorizationCodeFlow\/Context-swift.struct",
+      "identifier" : "doc:\/\/OktaOAuth2\/documentation\/OktaOAuth2\/AuthorizationCodeFlow\/Context-swift.struct",
       "isActive" : true,
       "type" : "reference"
     },
@@ -628,6 +637,15 @@
     {
       "kind" : "text",
       "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:10OktaOAuth221AuthorizationCodeFlowC",
+      "text" : "AuthorizationCodeFlow"
+    },
+    {
+      "kind" : "text",
+      "text" : "."
     },
     {
       "kind" : "typeIdentifier",
@@ -709,20 +727,20 @@
       "text" : ")"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/OktaOAuth2\/AuthorizationCodeFlow\/start(with:additionalParameters:completion:)",
+  "identifier" : "doc:\/\/OktaOAuth2\/documentation\/OktaOAuth2\/AuthorizationCodeFlow\/start(with:additionalParameters:completion:)",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "start(with:additionalParameters:completion:)",
   "type" : "topic",
   "url" : "\/documentation\/oktaoauth2\/authorizationcodeflow\/start(with:additionalparameters:completion:)"
 },
-"doc://com.okta.mobile.oktaoauth2/s5ErrorP": {
-  "identifier" : "doc:\/\/com.okta.mobile.oktaoauth2\/s5ErrorP",
+"doc://OktaOAuth2/s5ErrorP": {
+  "identifier" : "doc:\/\/OktaOAuth2\/s5ErrorP",
   "title" : "Swift.Error",
   "type" : "unresolvable"
 },
-"doc://com.okta.mobile.oktaoauth2/s8SendableP": {
-  "identifier" : "doc:\/\/com.okta.mobile.oktaoauth2\/s8SendableP",
+"doc://OktaOAuth2/s8SendableP": {
+  "identifier" : "doc:\/\/OktaOAuth2\/s8SendableP",
   "title" : "Swift.Sendable",
   "type" : "unresolvable"
 }

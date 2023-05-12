@@ -1,21 +1,15 @@
 {
-  "abstract" : [
-    {
-      "text" : "No overview available.",
-      "type" : "text"
-    }
-  ],
   "hierarchy" : {
     "paths" : [
       [
-        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation",
-        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/OpenIdConfiguration"
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/OpenIdConfiguration"
       ]
     ]
   },
   "identifier" : {
     "interfaceLanguage" : "swift",
-    "url" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/OpenIdConfiguration\/grantTypesSupported"
+    "url" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/OpenIdConfiguration\/grantTypesSupported"
   },
   "kind" : "symbol",
   "metadata" : {
@@ -85,7 +79,7 @@
               "text" : ": ["
             },
             {
-              "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/GrantType",
+              "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/GrantType",
               "kind" : "typeIdentifier",
               "preciseIdentifier" : "s:14AuthFoundation9GrantTypeO",
               "text" : "GrantType"
@@ -102,7 +96,7 @@
   ],
   "schemaVersion" : {
     "major" : 0,
-    "minor" : 2,
+    "minor" : 3,
     "patch" : 0
   },
   "sections" : [
@@ -122,21 +116,21 @@
   ]
 , 
 "references": {
-"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation": {
+"doc://AuthFoundation/documentation/AuthFoundation": {
   "abstract" : [
     {
       "text" : "Library that provides foundational features used by Okta’s authentication libraries, as well as APIs used to work with tokens and user credentials.",
       "type" : "text"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation",
   "kind" : "symbol",
   "role" : "collection",
   "title" : "AuthFoundation",
   "type" : "topic",
   "url" : "\/documentation\/authfoundation"
 },
-"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/GrantType": {
+"doc://AuthFoundation/documentation/AuthFoundation/GrantType": {
   "abstract" : [
 
   ],
@@ -154,7 +148,7 @@
       "text" : "GrantType"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/GrantType",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/GrantType",
   "kind" : "symbol",
   "navigatorTitle" : [
     {
@@ -167,7 +161,7 @@
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/granttype"
 },
-"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/OpenIdConfiguration": {
+"doc://AuthFoundation/documentation/AuthFoundation/OpenIdConfiguration": {
   "abstract" : [
     {
       "text" : "Describes the configuration of an OpenID server.",
@@ -188,7 +182,7 @@
       "text" : "OpenIdConfiguration"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/OpenIdConfiguration",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/OpenIdConfiguration",
   "kind" : "symbol",
   "navigatorTitle" : [
     {
@@ -201,7 +195,7 @@
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/openidconfiguration"
 },
-"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/OpenIdConfiguration/grantTypesSupported": {
+"doc://AuthFoundation/documentation/AuthFoundation/OpenIdConfiguration/grantTypesSupported": {
   "abstract" : [
 
   ],
@@ -232,7 +226,7 @@
       "text" : "]?"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/OpenIdConfiguration\/grantTypesSupported",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/OpenIdConfiguration\/grantTypesSupported",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "grantTypesSupported",

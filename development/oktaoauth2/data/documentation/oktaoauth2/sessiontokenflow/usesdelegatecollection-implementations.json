@@ -1,21 +1,15 @@
 {
-  "abstract" : [
-    {
-      "text" : "No overview available.",
-      "type" : "text"
-    }
-  ],
   "hierarchy" : {
     "paths" : [
       [
-        "doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/OktaOAuth2",
-        "doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/OktaOAuth2\/SessionTokenFlow"
+        "doc:\/\/OktaOAuth2\/documentation\/OktaOAuth2",
+        "doc:\/\/OktaOAuth2\/documentation\/OktaOAuth2\/SessionTokenFlow"
       ]
     ]
   },
   "identifier" : {
     "interfaceLanguage" : "swift",
-    "url" : "doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/OktaOAuth2\/SessionTokenFlow\/UsesDelegateCollection-Implementations"
+    "url" : "doc:\/\/OktaOAuth2\/documentation\/OktaOAuth2\/SessionTokenFlow\/UsesDelegateCollection-Implementations"
   },
   "kind" : "article",
   "metadata" : {
@@ -29,7 +23,7 @@
   },
   "schemaVersion" : {
     "major" : 0,
-    "minor" : 2,
+    "minor" : 3,
     "patch" : 0
   },
   "sections" : [
@@ -39,15 +33,15 @@
     {
       "generated" : true,
       "identifiers" : [
-        "doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/OktaOAuth2\/SessionTokenFlow\/add(delegate:)",
-        "doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/OktaOAuth2\/SessionTokenFlow\/remove(delegate:)"
+        "doc:\/\/OktaOAuth2\/documentation\/OktaOAuth2\/SessionTokenFlow\/add(delegate:)",
+        "doc:\/\/OktaOAuth2\/documentation\/OktaOAuth2\/SessionTokenFlow\/remove(delegate:)"
       ],
       "title" : "Instance Methods"
     },
     {
       "generated" : true,
       "identifiers" : [
-        "doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/OktaOAuth2\/SessionTokenFlow\/Delegate"
+        "doc:\/\/OktaOAuth2\/documentation\/OktaOAuth2\/SessionTokenFlow\/Delegate"
       ],
       "title" : "Type Aliases"
     }
@@ -66,21 +60,21 @@
   ]
 , 
 "references": {
-"doc://com.okta.mobile.oktaoauth2/documentation/OktaOAuth2": {
+"doc://OktaOAuth2/documentation/OktaOAuth2": {
   "abstract" : [
     {
       "text" : "Interact with Okta’s OAuth2 APIs to authenticate users, and interact with user resources.",
       "type" : "text"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/OktaOAuth2",
+  "identifier" : "doc:\/\/OktaOAuth2\/documentation\/OktaOAuth2",
   "kind" : "symbol",
   "role" : "collection",
   "title" : "OktaOAuth2",
   "type" : "topic",
   "url" : "\/documentation\/oktaoauth2"
 },
-"doc://com.okta.mobile.oktaoauth2/documentation/OktaOAuth2/SessionTokenFlow": {
+"doc://OktaOAuth2/documentation/OktaOAuth2/SessionTokenFlow": {
   "abstract" : [
     {
       "text" : "An authentication flow class that exchanges a Session Token for access tokens.",
@@ -101,7 +95,7 @@
       "text" : "SessionTokenFlow"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/OktaOAuth2\/SessionTokenFlow",
+  "identifier" : "doc:\/\/OktaOAuth2\/documentation\/OktaOAuth2\/SessionTokenFlow",
   "kind" : "symbol",
   "navigatorTitle" : [
     {
@@ -114,7 +108,7 @@
   "type" : "topic",
   "url" : "\/documentation\/oktaoauth2\/sessiontokenflow"
 },
-"doc://com.okta.mobile.oktaoauth2/documentation/OktaOAuth2/SessionTokenFlow/Delegate": {
+"doc://OktaOAuth2/documentation/OktaOAuth2/SessionTokenFlow/Delegate": {
   "abstract" : [
 
   ],
@@ -132,7 +126,7 @@
       "text" : "Delegate"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/OktaOAuth2\/SessionTokenFlow\/Delegate",
+  "identifier" : "doc:\/\/OktaOAuth2\/documentation\/OktaOAuth2\/SessionTokenFlow\/Delegate",
   "kind" : "symbol",
   "navigatorTitle" : [
     {
@@ -145,7 +139,7 @@
   "type" : "topic",
   "url" : "\/documentation\/oktaoauth2\/sessiontokenflow\/delegate"
 },
-"doc://com.okta.mobile.oktaoauth2/documentation/OktaOAuth2/SessionTokenFlow/add(delegate:)": {
+"doc://OktaOAuth2/documentation/OktaOAuth2/SessionTokenFlow/add(delegate:)": {
   "abstract" : [
 
   ],
@@ -191,14 +185,14 @@
       "text" : ")"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/OktaOAuth2\/SessionTokenFlow\/add(delegate:)",
+  "identifier" : "doc:\/\/OktaOAuth2\/documentation\/OktaOAuth2\/SessionTokenFlow\/add(delegate:)",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "add(delegate:)",
   "type" : "topic",
   "url" : "\/documentation\/oktaoauth2\/sessiontokenflow\/add(delegate:)"
 },
-"doc://com.okta.mobile.oktaoauth2/documentation/OktaOAuth2/SessionTokenFlow/remove(delegate:)": {
+"doc://OktaOAuth2/documentation/OktaOAuth2/SessionTokenFlow/remove(delegate:)": {
   "abstract" : [
 
   ],
@@ -244,7 +238,7 @@
       "text" : ")"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/OktaOAuth2\/SessionTokenFlow\/remove(delegate:)",
+  "identifier" : "doc:\/\/OktaOAuth2\/documentation\/OktaOAuth2\/SessionTokenFlow\/remove(delegate:)",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "remove(delegate:)",

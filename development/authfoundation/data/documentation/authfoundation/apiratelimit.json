@@ -8,13 +8,13 @@
   "hierarchy" : {
     "paths" : [
       [
-        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation"
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation"
       ]
     ]
   },
   "identifier" : {
     "interfaceLanguage" : "swift",
-    "url" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/APIRateLimit"
+    "url" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/APIRateLimit"
   },
   "kind" : "symbol",
   "metadata" : {
@@ -81,7 +81,7 @@
   "relationshipsSections" : [
     {
       "identifiers" : [
-        "doc:\/\/com.okta.mobile.authfoundation\/Se"
+        "doc:\/\/AuthFoundation\/Se"
       ],
       "kind" : "relationships",
       "title" : "Conforms To",
@@ -90,7 +90,7 @@
   ],
   "schemaVersion" : {
     "major" : 0,
-    "minor" : 2,
+    "minor" : 3,
     "patch" : 0
   },
   "sections" : [
@@ -99,16 +99,16 @@
   "topicSections" : [
     {
       "identifiers" : [
-        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/APIRateLimit\/init(from:)"
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/APIRateLimit\/init(from:)"
       ],
       "title" : "Initializers"
     },
     {
       "identifiers" : [
-        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/APIRateLimit\/delay",
-        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/APIRateLimit\/limit",
-        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/APIRateLimit\/remaining",
-        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/APIRateLimit\/reset"
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/APIRateLimit\/delay",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/APIRateLimit\/limit",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/APIRateLimit\/remaining",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/APIRateLimit\/reset"
       ],
       "title" : "Instance Properties"
     }
@@ -127,26 +127,26 @@
   ]
 , 
 "references": {
-"doc://com.okta.mobile.authfoundation/Se": {
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/Se",
+"doc://AuthFoundation/Se": {
+  "identifier" : "doc:\/\/AuthFoundation\/Se",
   "title" : "Swift.Decodable",
   "type" : "unresolvable"
 },
-"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation": {
+"doc://AuthFoundation/documentation/AuthFoundation": {
   "abstract" : [
     {
       "text" : "Library that provides foundational features used by Okta’s authentication libraries, as well as APIs used to work with tokens and user credentials.",
       "type" : "text"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation",
   "kind" : "symbol",
   "role" : "collection",
   "title" : "AuthFoundation",
   "type" : "topic",
   "url" : "\/documentation\/authfoundation"
 },
-"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/APIRateLimit": {
+"doc://AuthFoundation/documentation/AuthFoundation/APIRateLimit": {
   "abstract" : [
     {
       "text" : "Describes information related to the organization’s current rate limit.",
@@ -167,7 +167,7 @@
       "text" : "APIRateLimit"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/APIRateLimit",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/APIRateLimit",
   "kind" : "symbol",
   "navigatorTitle" : [
     {
@@ -180,7 +180,7 @@
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/apiratelimit"
 },
-"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/APIRateLimit/delay": {
+"doc://AuthFoundation/documentation/AuthFoundation/APIRateLimit/delay": {
   "abstract" : [
     {
       "text" : "The calculated delay from the reset limit and the date header.",
@@ -214,19 +214,16 @@
       "text" : "?"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/APIRateLimit\/delay",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/APIRateLimit\/delay",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "delay",
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/apiratelimit\/delay"
 },
-"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/APIRateLimit/init(from:)": {
+"doc://AuthFoundation/documentation/AuthFoundation/APIRateLimit/init(from:)": {
   "abstract" : [
-    {
-      "text" : "Creates a new instance by decoding from the given decoder.",
-      "type" : "text"
-    }
+
   ],
   "fragments" : [
     {
@@ -259,14 +256,14 @@
       "text" : "throws"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/APIRateLimit\/init(from:)",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/APIRateLimit\/init(from:)",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "init(from:)",
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/apiratelimit\/init(from:)"
 },
-"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/APIRateLimit/limit": {
+"doc://AuthFoundation/documentation/AuthFoundation/APIRateLimit/limit": {
   "abstract" : [
     {
       "text" : "The current limit.",
@@ -296,14 +293,14 @@
       "text" : "Int"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/APIRateLimit\/limit",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/APIRateLimit\/limit",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "limit",
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/apiratelimit\/limit"
 },
-"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/APIRateLimit/remaining": {
+"doc://AuthFoundation/documentation/AuthFoundation/APIRateLimit/remaining": {
   "abstract" : [
     {
       "text" : "The rate limit remaining.",
@@ -333,14 +330,14 @@
       "text" : "Int"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/APIRateLimit\/remaining",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/APIRateLimit\/remaining",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "remaining",
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/apiratelimit\/remaining"
 },
-"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/APIRateLimit/reset": {
+"doc://AuthFoundation/documentation/AuthFoundation/APIRateLimit/reset": {
   "abstract" : [
     {
       "text" : "The time offset from UTC when the rate limit will reset, and a request may be retried.",
@@ -370,7 +367,7 @@
       "text" : "TimeInterval"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/APIRateLimit\/reset",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/APIRateLimit\/reset",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "reset",

@@ -1,23 +1,31 @@
 {
   "abstract" : [
     {
-      "text" : "Creates a new instance with the specified raw value.",
+      "text" : "Inherited from ",
+      "type" : "text"
+    },
+    {
+      "code" : "RawRepresentable.init(rawValue:)",
+      "type" : "codeVoice"
+    },
+    {
+      "text" : ".",
       "type" : "text"
     }
   ],
   "hierarchy" : {
     "paths" : [
       [
-        "doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/OktaOAuth2",
-        "doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/OktaOAuth2\/TokenExchangeFlow",
-        "doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/OktaOAuth2\/TokenExchangeFlow\/TokenType",
-        "doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/OktaOAuth2\/TokenExchangeFlow\/TokenType\/Kind"
+        "doc:\/\/OktaOAuth2\/documentation\/OktaOAuth2",
+        "doc:\/\/OktaOAuth2\/documentation\/OktaOAuth2\/TokenExchangeFlow",
+        "doc:\/\/OktaOAuth2\/documentation\/OktaOAuth2\/TokenExchangeFlow\/TokenType",
+        "doc:\/\/OktaOAuth2\/documentation\/OktaOAuth2\/TokenExchangeFlow\/TokenType\/Kind"
       ]
     ]
   },
   "identifier" : {
     "interfaceLanguage" : "swift",
-    "url" : "doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/OktaOAuth2\/TokenExchangeFlow\/TokenType\/Kind\/init(rawValue:)"
+    "url" : "doc:\/\/OktaOAuth2\/documentation\/OktaOAuth2\/TokenExchangeFlow\/TokenType\/Kind\/init(rawValue:)"
   },
   "kind" : "symbol",
   "metadata" : {
@@ -99,81 +107,11 @@
         }
       ],
       "kind" : "declarations"
-    },
-    {
-      "kind" : "parameters",
-      "parameters" : [
-        {
-          "content" : [
-            {
-              "inlineContent" : [
-                {
-                  "text" : "The raw value to use for the new instance.",
-                  "type" : "text"
-                }
-              ],
-              "type" : "paragraph"
-            }
-          ],
-          "name" : "rawValue"
-        }
-      ]
-    },
-    {
-      "content" : [
-        {
-          "anchor" : "discussion",
-          "level" : 2,
-          "text" : "Discussion",
-          "type" : "heading"
-        },
-        {
-          "inlineContent" : [
-            {
-              "text" : "If there is no value of the type that corresponds with the specified raw",
-              "type" : "text"
-            },
-            {
-              "text" : " ",
-              "type" : "text"
-            },
-            {
-              "text" : "value, this initializer returns ",
-              "type" : "text"
-            },
-            {
-              "code" : "nil",
-              "type" : "codeVoice"
-            },
-            {
-              "text" : ". For example:",
-              "type" : "text"
-            }
-          ],
-          "type" : "paragraph"
-        },
-        {
-          "code" : [
-            "enum PaperSize: String {",
-            "    case A4, A5, Letter, Legal",
-            "}",
-            "",
-            "print(PaperSize(rawValue: \"Legal\"))",
-            "\/\/ Prints \"Optional(\"PaperSize.Legal\")\"",
-            "",
-            "print(PaperSize(rawValue: \"Tabloid\"))",
-            "\/\/ Prints \"nil\""
-          ],
-          "syntax" : null,
-          "type" : "codeListing"
-        }
-      ],
-      "kind" : "content"
     }
   ],
   "schemaVersion" : {
     "major" : 0,
-    "minor" : 2,
+    "minor" : 3,
     "patch" : 0
   },
   "sections" : [
@@ -193,21 +131,21 @@
   ]
 , 
 "references": {
-"doc://com.okta.mobile.oktaoauth2/documentation/OktaOAuth2": {
+"doc://OktaOAuth2/documentation/OktaOAuth2": {
   "abstract" : [
     {
       "text" : "Interact with Okta’s OAuth2 APIs to authenticate users, and interact with user resources.",
       "type" : "text"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/OktaOAuth2",
+  "identifier" : "doc:\/\/OktaOAuth2\/documentation\/OktaOAuth2",
   "kind" : "symbol",
   "role" : "collection",
   "title" : "OktaOAuth2",
   "type" : "topic",
   "url" : "\/documentation\/oktaoauth2"
 },
-"doc://com.okta.mobile.oktaoauth2/documentation/OktaOAuth2/TokenExchangeFlow": {
+"doc://OktaOAuth2/documentation/OktaOAuth2/TokenExchangeFlow": {
   "abstract" : [
     {
       "text" : "An authentication flow class that implements the Token Exchange Flow.",
@@ -228,7 +166,7 @@
       "text" : "TokenExchangeFlow"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/OktaOAuth2\/TokenExchangeFlow",
+  "identifier" : "doc:\/\/OktaOAuth2\/documentation\/OktaOAuth2\/TokenExchangeFlow",
   "kind" : "symbol",
   "navigatorTitle" : [
     {
@@ -241,7 +179,7 @@
   "type" : "topic",
   "url" : "\/documentation\/oktaoauth2\/tokenexchangeflow"
 },
-"doc://com.okta.mobile.oktaoauth2/documentation/OktaOAuth2/TokenExchangeFlow/TokenType": {
+"doc://OktaOAuth2/documentation/OktaOAuth2/TokenExchangeFlow/TokenType": {
   "abstract" : [
     {
       "text" : "Types specify token’s identity.",
@@ -262,7 +200,7 @@
       "text" : "TokenType"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/OktaOAuth2\/TokenExchangeFlow\/TokenType",
+  "identifier" : "doc:\/\/OktaOAuth2\/documentation\/OktaOAuth2\/TokenExchangeFlow\/TokenType",
   "kind" : "symbol",
   "navigatorTitle" : [
     {
@@ -275,14 +213,14 @@
   "type" : "topic",
   "url" : "\/documentation\/oktaoauth2\/tokenexchangeflow\/tokentype"
 },
-"doc://com.okta.mobile.oktaoauth2/documentation/OktaOAuth2/TokenExchangeFlow/TokenType/Kind": {
+"doc://OktaOAuth2/documentation/OktaOAuth2/TokenExchangeFlow/TokenType/Kind": {
   "abstract" : [
     {
       "text" : "Describes specific token used by ",
       "type" : "text"
     },
     {
-      "identifier" : "doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/OktaOAuth2\/TokenExchangeFlow\/TokenType",
+      "identifier" : "doc:\/\/OktaOAuth2\/documentation\/OktaOAuth2\/TokenExchangeFlow\/TokenType",
       "isActive" : true,
       "type" : "reference"
     },
@@ -305,7 +243,7 @@
       "text" : "Kind"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/OktaOAuth2\/TokenExchangeFlow\/TokenType\/Kind",
+  "identifier" : "doc:\/\/OktaOAuth2\/documentation\/OktaOAuth2\/TokenExchangeFlow\/TokenType\/Kind",
   "kind" : "symbol",
   "navigatorTitle" : [
     {
@@ -318,12 +256,9 @@
   "type" : "topic",
   "url" : "\/documentation\/oktaoauth2\/tokenexchangeflow\/tokentype\/kind"
 },
-"doc://com.okta.mobile.oktaoauth2/documentation/OktaOAuth2/TokenExchangeFlow/TokenType/Kind/init(rawValue:)": {
+"doc://OktaOAuth2/documentation/OktaOAuth2/TokenExchangeFlow/TokenType/Kind/init(rawValue:)": {
   "abstract" : [
-    {
-      "text" : "Creates a new instance with the specified raw value.",
-      "type" : "text"
-    }
+
   ],
   "fragments" : [
     {
@@ -352,7 +287,7 @@
       "text" : ")"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/OktaOAuth2\/TokenExchangeFlow\/TokenType\/Kind\/init(rawValue:)",
+  "identifier" : "doc:\/\/OktaOAuth2\/documentation\/OktaOAuth2\/TokenExchangeFlow\/TokenType\/Kind\/init(rawValue:)",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "init(rawValue:)",

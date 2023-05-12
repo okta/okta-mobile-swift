@@ -8,13 +8,13 @@
   "hierarchy" : {
     "paths" : [
       [
-        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation"
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation"
       ]
     ]
   },
   "identifier" : {
     "interfaceLanguage" : "swift",
-    "url" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/PKCE"
+    "url" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/PKCE"
   },
   "kind" : "symbol",
   "metadata" : {
@@ -81,9 +81,9 @@
   "relationshipsSections" : [
     {
       "identifiers" : [
-        "doc:\/\/com.okta.mobile.authfoundation\/Se",
-        "doc:\/\/com.okta.mobile.authfoundation\/SE",
-        "doc:\/\/com.okta.mobile.authfoundation\/SQ"
+        "doc:\/\/AuthFoundation\/Se",
+        "doc:\/\/AuthFoundation\/SE",
+        "doc:\/\/AuthFoundation\/SQ"
       ],
       "kind" : "relationships",
       "title" : "Conforms To",
@@ -92,7 +92,7 @@
   ],
   "schemaVersion" : {
     "major" : 0,
-    "minor" : 2,
+    "minor" : 3,
     "patch" : 0
   },
   "sections" : [
@@ -102,13 +102,13 @@
     {
       "generated" : true,
       "identifiers" : [
-        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/OAuth2Client",
-        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/OAuth2ClientDelegate",
-        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/OpenIdConfiguration",
-        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/AuthenticationFlow",
-        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/AuthenticationDelegate",
-        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/OAuth2TokenRequest",
-        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/GrantType"
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/OAuth2Client",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/OAuth2ClientDelegate",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/OpenIdConfiguration",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/AuthenticationFlow",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/AuthenticationDelegate",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/OAuth2TokenRequest",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/GrantType"
       ],
       "title" : "OAuth2 Client Operations"
     }
@@ -116,29 +116,29 @@
   "topicSections" : [
     {
       "identifiers" : [
-        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/PKCE\/init()",
-        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/PKCE\/init(from:)"
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/PKCE\/init()",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/PKCE\/init(from:)"
       ],
       "title" : "Initializers"
     },
     {
       "identifiers" : [
-        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/PKCE\/codeChallenge",
-        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/PKCE\/codeVerifier",
-        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/PKCE\/method-swift.property"
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/PKCE\/codeChallenge",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/PKCE\/codeVerifier",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/PKCE\/method-swift.property"
       ],
       "title" : "Instance Properties"
     },
     {
       "identifiers" : [
-        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/PKCE\/Method-swift.enum"
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/PKCE\/Method-swift.enum"
       ],
       "title" : "Enumerations"
     },
     {
       "generated" : true,
       "identifiers" : [
-        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/PKCE\/Equatable-Implementations"
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/PKCE\/Equatable-Implementations"
       ],
       "title" : "Default Implementations"
     }
@@ -157,36 +157,36 @@
   ]
 , 
 "references": {
-"doc://com.okta.mobile.authfoundation/SE": {
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/SE",
+"doc://AuthFoundation/SE": {
+  "identifier" : "doc:\/\/AuthFoundation\/SE",
   "title" : "Swift.Encodable",
   "type" : "unresolvable"
 },
-"doc://com.okta.mobile.authfoundation/SQ": {
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/SQ",
+"doc://AuthFoundation/SQ": {
+  "identifier" : "doc:\/\/AuthFoundation\/SQ",
   "title" : "Swift.Equatable",
   "type" : "unresolvable"
 },
-"doc://com.okta.mobile.authfoundation/Se": {
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/Se",
+"doc://AuthFoundation/Se": {
+  "identifier" : "doc:\/\/AuthFoundation\/Se",
   "title" : "Swift.Decodable",
   "type" : "unresolvable"
 },
-"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation": {
+"doc://AuthFoundation/documentation/AuthFoundation": {
   "abstract" : [
     {
       "text" : "Library that provides foundational features used by Okta’s authentication libraries, as well as APIs used to work with tokens and user credentials.",
       "type" : "text"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation",
   "kind" : "symbol",
   "role" : "collection",
   "title" : "AuthFoundation",
   "type" : "topic",
   "url" : "\/documentation\/authfoundation"
 },
-"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/APIRequest": {
+"doc://AuthFoundation/documentation/AuthFoundation/APIRequest": {
   "abstract" : [
     {
       "text" : "Abstract protocol defining the structure of an API request.",
@@ -207,7 +207,7 @@
       "text" : "APIRequest"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/APIRequest",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/APIRequest",
   "kind" : "symbol",
   "navigatorTitle" : [
     {
@@ -220,7 +220,7 @@
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/apirequest"
 },
-"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/AuthenticationDelegate": {
+"doc://AuthFoundation/documentation/AuthFoundation/AuthenticationDelegate": {
   "abstract" : [
     {
       "text" : "A common delegate protocol that all authentication flows should support.",
@@ -241,7 +241,7 @@
       "text" : "AuthenticationDelegate"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/AuthenticationDelegate",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/AuthenticationDelegate",
   "kind" : "symbol",
   "navigatorTitle" : [
     {
@@ -254,7 +254,7 @@
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/authenticationdelegate"
 },
-"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/AuthenticationFlow": {
+"doc://AuthFoundation/documentation/AuthFoundation/AuthenticationFlow": {
   "abstract" : [
     {
       "text" : "A protocol defining a type of authentication flow.",
@@ -275,7 +275,7 @@
       "text" : "AuthenticationFlow"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/AuthenticationFlow",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/AuthenticationFlow",
   "kind" : "symbol",
   "navigatorTitle" : [
     {
@@ -288,7 +288,7 @@
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/authenticationflow"
 },
-"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/GrantType": {
+"doc://AuthFoundation/documentation/AuthFoundation/GrantType": {
   "abstract" : [
 
   ],
@@ -306,7 +306,7 @@
       "text" : "GrantType"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/GrantType",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/GrantType",
   "kind" : "symbol",
   "navigatorTitle" : [
     {
@@ -319,7 +319,7 @@
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/granttype"
 },
-"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/OAuth2Client": {
+"doc://AuthFoundation/documentation/AuthFoundation/OAuth2Client": {
   "abstract" : [
     {
       "text" : "An OAuth2 client, used to interact with a given authorization server.",
@@ -340,7 +340,7 @@
       "text" : "OAuth2Client"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/OAuth2Client",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/OAuth2Client",
   "kind" : "symbol",
   "navigatorTitle" : [
     {
@@ -353,14 +353,14 @@
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/oauth2client"
 },
-"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/OAuth2ClientDelegate": {
+"doc://AuthFoundation/documentation/AuthFoundation/OAuth2ClientDelegate": {
   "abstract" : [
     {
       "text" : "Delegate protocol used by ",
       "type" : "text"
     },
     {
-      "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/OAuth2Client",
+      "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/OAuth2Client",
       "isActive" : true,
       "type" : "reference"
     },
@@ -383,7 +383,7 @@
       "text" : "OAuth2ClientDelegate"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/OAuth2ClientDelegate",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/OAuth2ClientDelegate",
   "kind" : "symbol",
   "navigatorTitle" : [
     {
@@ -396,14 +396,14 @@
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/oauth2clientdelegate"
 },
-"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/OAuth2TokenRequest": {
+"doc://AuthFoundation/documentation/AuthFoundation/OAuth2TokenRequest": {
   "abstract" : [
     {
       "text" : "Protocol that represents a type of ",
       "type" : "text"
     },
     {
-      "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/APIRequest",
+      "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/APIRequest",
       "isActive" : true,
       "type" : "reference"
     },
@@ -426,7 +426,7 @@
       "text" : "OAuth2TokenRequest"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/OAuth2TokenRequest",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/OAuth2TokenRequest",
   "kind" : "symbol",
   "navigatorTitle" : [
     {
@@ -439,7 +439,7 @@
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/oauth2tokenrequest"
 },
-"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/OpenIdConfiguration": {
+"doc://AuthFoundation/documentation/AuthFoundation/OpenIdConfiguration": {
   "abstract" : [
     {
       "text" : "Describes the configuration of an OpenID server.",
@@ -460,7 +460,7 @@
       "text" : "OpenIdConfiguration"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/OpenIdConfiguration",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/OpenIdConfiguration",
   "kind" : "symbol",
   "navigatorTitle" : [
     {
@@ -473,7 +473,7 @@
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/openidconfiguration"
 },
-"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/PKCE": {
+"doc://AuthFoundation/documentation/AuthFoundation/PKCE": {
   "abstract" : [
     {
       "text" : "Object defining the structure and settings of a PKCE challenge, including the verifier code, the encoded challenge, and the method used to exchange this information with the server.",
@@ -494,7 +494,7 @@
       "text" : "PKCE"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/PKCE",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/PKCE",
   "kind" : "symbol",
   "navigatorTitle" : [
     {
@@ -507,18 +507,18 @@
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/pkce"
 },
-"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/PKCE/Equatable-Implementations": {
+"doc://AuthFoundation/documentation/AuthFoundation/PKCE/Equatable-Implementations": {
   "abstract" : [
 
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/PKCE\/Equatable-Implementations",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/PKCE\/Equatable-Implementations",
   "kind" : "article",
   "role" : "collectionGroup",
   "title" : "Equatable Implementations",
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/pkce\/equatable-implementations"
 },
-"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/PKCE/Method-swift.enum": {
+"doc://AuthFoundation/documentation/AuthFoundation/PKCE/Method-swift.enum": {
   "abstract" : [
     {
       "text" : "Enumeration describing the possible challenge encoding methods.",
@@ -539,7 +539,7 @@
       "text" : "Method"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/PKCE\/Method-swift.enum",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/PKCE\/Method-swift.enum",
   "kind" : "symbol",
   "navigatorTitle" : [
     {
@@ -552,7 +552,7 @@
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/pkce\/method-swift.enum"
 },
-"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/PKCE/codeChallenge": {
+"doc://AuthFoundation/documentation/AuthFoundation/PKCE/codeChallenge": {
   "abstract" : [
     {
       "text" : "The challenge sent to the server in the initial OAuth2 call.",
@@ -582,14 +582,14 @@
       "text" : "String"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/PKCE\/codeChallenge",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/PKCE\/codeChallenge",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "codeChallenge",
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/pkce\/codechallenge"
 },
-"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/PKCE/codeVerifier": {
+"doc://AuthFoundation/documentation/AuthFoundation/PKCE/codeVerifier": {
   "abstract" : [
     {
       "text" : "The auto-generated code verifier data, randmonly-generated.",
@@ -619,14 +619,14 @@
       "text" : "String"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/PKCE\/codeVerifier",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/PKCE\/codeVerifier",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "codeVerifier",
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/pkce\/codeverifier"
 },
-"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/PKCE/init()": {
+"doc://AuthFoundation/documentation/AuthFoundation/PKCE/init()": {
   "abstract" : [
 
   ],
@@ -640,19 +640,16 @@
       "text" : "?()"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/PKCE\/init()",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/PKCE\/init()",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "init()",
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/pkce\/init()"
 },
-"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/PKCE/init(from:)": {
+"doc://AuthFoundation/documentation/AuthFoundation/PKCE/init(from:)": {
   "abstract" : [
-    {
-      "text" : "Creates a new instance by decoding from the given decoder.",
-      "type" : "text"
-    }
+
   ],
   "fragments" : [
     {
@@ -685,14 +682,14 @@
       "text" : "throws"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/PKCE\/init(from:)",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/PKCE\/init(from:)",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "init(from:)",
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/pkce\/init(from:)"
 },
-"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/PKCE/method-swift.property": {
+"doc://AuthFoundation/documentation/AuthFoundation/PKCE/method-swift.property": {
   "abstract" : [
     {
       "text" : "The challenge method to be sent to the server.",
@@ -718,11 +715,20 @@
     },
     {
       "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:14AuthFoundation4PKCEV",
+      "text" : "PKCE"
+    },
+    {
+      "kind" : "text",
+      "text" : "."
+    },
+    {
+      "kind" : "typeIdentifier",
       "preciseIdentifier" : "s:14AuthFoundation4PKCEV6MethodO",
       "text" : "Method"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/PKCE\/method-swift.property",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/PKCE\/method-swift.property",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "method",

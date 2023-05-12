@@ -8,14 +8,14 @@
   "hierarchy" : {
     "paths" : [
       [
-        "doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/WebAuthenticationUI",
-        "doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/WebAuthenticationUI\/WebAuthentication"
+        "doc:\/\/WebAuthenticationUI\/documentation\/WebAuthenticationUI",
+        "doc:\/\/WebAuthenticationUI\/documentation\/WebAuthenticationUI\/WebAuthentication"
       ]
     ]
   },
   "identifier" : {
     "interfaceLanguage" : "swift",
-    "url" : "doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/WebAuthenticationUI\/WebAuthentication\/resume(with:)"
+    "url" : "doc:\/\/WebAuthenticationUI\/documentation\/WebAuthenticationUI\/WebAuthentication\/resume(with:)"
   },
   "kind" : "symbol",
   "metadata" : {
@@ -189,7 +189,7 @@
   ],
   "schemaVersion" : {
     "major" : 0,
-    "minor" : 2,
+    "minor" : 3,
     "patch" : 0
   },
   "sections" : [
@@ -209,21 +209,21 @@
   ]
 , 
 "references": {
-"doc://com.okta.mobile.webauthenticationui/documentation/WebAuthenticationUI": {
+"doc://WebAuthenticationUI/documentation/WebAuthenticationUI": {
   "abstract" : [
     {
       "text" : "Make it easy to enable users to sign in to your app through browser-based sign on.",
       "type" : "text"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/WebAuthenticationUI",
+  "identifier" : "doc:\/\/WebAuthenticationUI\/documentation\/WebAuthenticationUI",
   "kind" : "symbol",
   "role" : "collection",
   "title" : "WebAuthenticationUI",
   "type" : "topic",
   "url" : "\/documentation\/webauthenticationui"
 },
-"doc://com.okta.mobile.webauthenticationui/documentation/WebAuthenticationUI/WebAuthentication": {
+"doc://WebAuthenticationUI/documentation/WebAuthenticationUI/WebAuthentication": {
   "abstract" : [
     {
       "text" : "Authentication coordinator that simplifies signing users in using browser-based OIDC authentication flows.",
@@ -244,7 +244,7 @@
       "text" : "WebAuthentication"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/WebAuthenticationUI\/WebAuthentication",
+  "identifier" : "doc:\/\/WebAuthenticationUI\/documentation\/WebAuthenticationUI\/WebAuthentication",
   "kind" : "symbol",
   "navigatorTitle" : [
     {
@@ -257,7 +257,7 @@
   "type" : "topic",
   "url" : "\/documentation\/webauthenticationui\/webauthentication"
 },
-"doc://com.okta.mobile.webauthenticationui/documentation/WebAuthenticationUI/WebAuthentication/resume(with:)": {
+"doc://WebAuthenticationUI/documentation/WebAuthenticationUI/WebAuthentication/resume(with:)": {
   "abstract" : [
     {
       "text" : "Attempts to resume sign in when the app is launched from a redirect URI.",
@@ -303,7 +303,7 @@
       "text" : "throws"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/WebAuthenticationUI\/WebAuthentication\/resume(with:)",
+  "identifier" : "doc:\/\/WebAuthenticationUI\/documentation\/WebAuthenticationUI\/WebAuthentication\/resume(with:)",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "resume(with:)",

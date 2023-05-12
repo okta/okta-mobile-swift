@@ -1,22 +1,30 @@
 {
   "abstract" : [
     {
-      "text" : "The User-Agent string to be sent along with all outgoing requests.",
+      "text" : "Inherited from ",
+      "type" : "text"
+    },
+    {
+      "code" : "APIClient.userAgent",
+      "type" : "codeVoice"
+    },
+    {
+      "text" : ".",
       "type" : "text"
     }
   ],
   "hierarchy" : {
     "paths" : [
       [
-        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation",
-        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/APIClient",
-        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/APIClient\/userAgent-8m9b4"
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/APIClient",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/APIClient\/userAgent-8m9b4"
       ]
     ]
   },
   "identifier" : {
     "interfaceLanguage" : "swift",
-    "url" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/APIClient\/userAgent-1c89v"
+    "url" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/APIClient\/userAgent-1c89v"
   },
   "kind" : "symbol",
   "metadata" : {
@@ -107,7 +115,7 @@
   ],
   "schemaVersion" : {
     "major" : 0,
-    "minor" : 2,
+    "minor" : 3,
     "patch" : 0
   },
   "sections" : [
@@ -127,21 +135,21 @@
   ]
 , 
 "references": {
-"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation": {
+"doc://AuthFoundation/documentation/AuthFoundation": {
   "abstract" : [
     {
       "text" : "Library that provides foundational features used by Okta’s authentication libraries, as well as APIs used to work with tokens and user credentials.",
       "type" : "text"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation",
   "kind" : "symbol",
   "role" : "collection",
   "title" : "AuthFoundation",
   "type" : "topic",
   "url" : "\/documentation\/authfoundation"
 },
-"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/APIClient": {
+"doc://AuthFoundation/documentation/AuthFoundation/APIClient": {
   "abstract" : [
     {
       "text" : "Protocol defining the interfaces and capabilities that API clients can conform to.",
@@ -162,7 +170,7 @@
       "text" : "APIClient"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/APIClient",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/APIClient",
   "kind" : "symbol",
   "navigatorTitle" : [
     {
@@ -175,12 +183,9 @@
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/apiclient"
 },
-"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/APIClient/userAgent-1c89v": {
+"doc://AuthFoundation/documentation/AuthFoundation/APIClient/userAgent-1c89v": {
   "abstract" : [
-    {
-      "text" : "The User-Agent string to be sent along with all outgoing requests.",
-      "type" : "text"
-    }
+
   ],
   "fragments" : [
     {
@@ -205,14 +210,14 @@
       "text" : "String"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/APIClient\/userAgent-1c89v",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/APIClient\/userAgent-1c89v",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "userAgent",
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/apiclient\/useragent-1c89v"
 },
-"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/APIClient/userAgent-8m9b4": {
+"doc://AuthFoundation/documentation/AuthFoundation/APIClient/userAgent-8m9b4": {
   "abstract" : [
     {
       "text" : "The User-Agent string to be sent along with all outgoing requests.",
@@ -243,7 +248,7 @@
       "text" : "String"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/APIClient\/userAgent-8m9b4",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/APIClient\/userAgent-8m9b4",
   "kind" : "symbol",
   "required" : true,
   "role" : "symbol",

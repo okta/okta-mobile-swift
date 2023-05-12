@@ -1,20 +1,14 @@
 {
-  "abstract" : [
-    {
-      "text" : "No overview available.",
-      "type" : "text"
-    }
-  ],
   "hierarchy" : {
     "paths" : [
       [
-        "doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/WebAuthenticationUI"
+        "doc:\/\/WebAuthenticationUI\/documentation\/WebAuthenticationUI"
       ]
     ]
   },
   "identifier" : {
     "interfaceLanguage" : "swift",
-    "url" : "doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/WebAuthenticationUI\/WebAuthenticationError"
+    "url" : "doc:\/\/WebAuthenticationUI\/documentation\/WebAuthenticationUI\/WebAuthenticationError"
   },
   "kind" : "symbol",
   "metadata" : {
@@ -81,9 +75,9 @@
   "relationshipsSections" : [
     {
       "identifiers" : [
-        "doc:\/\/com.okta.mobile.webauthenticationui\/10Foundation14LocalizedErrorP",
-        "doc:\/\/com.okta.mobile.webauthenticationui\/s5ErrorP",
-        "doc:\/\/com.okta.mobile.webauthenticationui\/s8SendableP"
+        "doc:\/\/WebAuthenticationUI\/10Foundation14LocalizedErrorP",
+        "doc:\/\/WebAuthenticationUI\/s5ErrorP",
+        "doc:\/\/WebAuthenticationUI\/s8SendableP"
       ],
       "kind" : "relationships",
       "title" : "Conforms To",
@@ -92,7 +86,7 @@
   ],
   "schemaVersion" : {
     "major" : 0,
-    "minor" : 2,
+    "minor" : 3,
     "patch" : 0
   },
   "sections" : [
@@ -101,23 +95,23 @@
   "topicSections" : [
     {
       "identifiers" : [
-        "doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/WebAuthenticationUI\/WebAuthenticationError\/authenticationProviderError(_:)",
-        "doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/WebAuthenticationUI\/WebAuthenticationError\/cannotComposeAuthenticationURL",
-        "doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/WebAuthenticationUI\/WebAuthenticationError\/generic(error:)",
-        "doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/WebAuthenticationUI\/WebAuthenticationError\/genericError(message:)",
-        "doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/WebAuthenticationUI\/WebAuthenticationError\/invalidRedirectScheme(_:)",
-        "doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/WebAuthenticationUI\/WebAuthenticationError\/missingIdToken",
-        "doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/WebAuthenticationUI\/WebAuthenticationError\/noCompatibleAuthenticationProviders",
-        "doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/WebAuthenticationUI\/WebAuthenticationError\/oauth2(error:)",
-        "doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/WebAuthenticationUI\/WebAuthenticationError\/userCancelledLogin"
+        "doc:\/\/WebAuthenticationUI\/documentation\/WebAuthenticationUI\/WebAuthenticationError\/authenticationProviderError(_:)",
+        "doc:\/\/WebAuthenticationUI\/documentation\/WebAuthenticationUI\/WebAuthenticationError\/cannotComposeAuthenticationURL",
+        "doc:\/\/WebAuthenticationUI\/documentation\/WebAuthenticationUI\/WebAuthenticationError\/generic(error:)",
+        "doc:\/\/WebAuthenticationUI\/documentation\/WebAuthenticationUI\/WebAuthenticationError\/genericError(message:)",
+        "doc:\/\/WebAuthenticationUI\/documentation\/WebAuthenticationUI\/WebAuthenticationError\/invalidRedirectScheme(_:)",
+        "doc:\/\/WebAuthenticationUI\/documentation\/WebAuthenticationUI\/WebAuthenticationError\/missingIdToken",
+        "doc:\/\/WebAuthenticationUI\/documentation\/WebAuthenticationUI\/WebAuthenticationError\/noCompatibleAuthenticationProviders",
+        "doc:\/\/WebAuthenticationUI\/documentation\/WebAuthenticationUI\/WebAuthenticationError\/oauth2(error:)",
+        "doc:\/\/WebAuthenticationUI\/documentation\/WebAuthenticationUI\/WebAuthenticationError\/userCancelledLogin"
       ],
       "title" : "Enumeration Cases"
     },
     {
       "generated" : true,
       "identifiers" : [
-        "doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/WebAuthenticationUI\/WebAuthenticationError\/Error-Implementations",
-        "doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/WebAuthenticationUI\/WebAuthenticationError\/LocalizedError-Implementations"
+        "doc:\/\/WebAuthenticationUI\/documentation\/WebAuthenticationUI\/WebAuthenticationError\/Error-Implementations",
+        "doc:\/\/WebAuthenticationUI\/documentation\/WebAuthenticationUI\/WebAuthenticationError\/LocalizedError-Implementations"
       ],
       "title" : "Default Implementations"
     }
@@ -136,26 +130,26 @@
   ]
 , 
 "references": {
-"doc://com.okta.mobile.webauthenticationui/10Foundation14LocalizedErrorP": {
-  "identifier" : "doc:\/\/com.okta.mobile.webauthenticationui\/10Foundation14LocalizedErrorP",
+"doc://WebAuthenticationUI/10Foundation14LocalizedErrorP": {
+  "identifier" : "doc:\/\/WebAuthenticationUI\/10Foundation14LocalizedErrorP",
   "title" : "Foundation.LocalizedError",
   "type" : "unresolvable"
 },
-"doc://com.okta.mobile.webauthenticationui/documentation/WebAuthenticationUI": {
+"doc://WebAuthenticationUI/documentation/WebAuthenticationUI": {
   "abstract" : [
     {
       "text" : "Make it easy to enable users to sign in to your app through browser-based sign on.",
       "type" : "text"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/WebAuthenticationUI",
+  "identifier" : "doc:\/\/WebAuthenticationUI\/documentation\/WebAuthenticationUI",
   "kind" : "symbol",
   "role" : "collection",
   "title" : "WebAuthenticationUI",
   "type" : "topic",
   "url" : "\/documentation\/webauthenticationui"
 },
-"doc://com.okta.mobile.webauthenticationui/documentation/WebAuthenticationUI/WebAuthenticationError": {
+"doc://WebAuthenticationUI/documentation/WebAuthenticationUI/WebAuthenticationError": {
   "abstract" : [
 
   ],
@@ -173,7 +167,7 @@
       "text" : "WebAuthenticationError"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/WebAuthenticationUI\/WebAuthenticationError",
+  "identifier" : "doc:\/\/WebAuthenticationUI\/documentation\/WebAuthenticationUI\/WebAuthenticationError",
   "kind" : "symbol",
   "navigatorTitle" : [
     {
@@ -186,29 +180,29 @@
   "type" : "topic",
   "url" : "\/documentation\/webauthenticationui\/webauthenticationerror"
 },
-"doc://com.okta.mobile.webauthenticationui/documentation/WebAuthenticationUI/WebAuthenticationError/Error-Implementations": {
+"doc://WebAuthenticationUI/documentation/WebAuthenticationUI/WebAuthenticationError/Error-Implementations": {
   "abstract" : [
 
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/WebAuthenticationUI\/WebAuthenticationError\/Error-Implementations",
+  "identifier" : "doc:\/\/WebAuthenticationUI\/documentation\/WebAuthenticationUI\/WebAuthenticationError\/Error-Implementations",
   "kind" : "article",
   "role" : "collectionGroup",
   "title" : "Error Implementations",
   "type" : "topic",
   "url" : "\/documentation\/webauthenticationui\/webauthenticationerror\/error-implementations"
 },
-"doc://com.okta.mobile.webauthenticationui/documentation/WebAuthenticationUI/WebAuthenticationError/LocalizedError-Implementations": {
+"doc://WebAuthenticationUI/documentation/WebAuthenticationUI/WebAuthenticationError/LocalizedError-Implementations": {
   "abstract" : [
 
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/WebAuthenticationUI\/WebAuthenticationError\/LocalizedError-Implementations",
+  "identifier" : "doc:\/\/WebAuthenticationUI\/documentation\/WebAuthenticationUI\/WebAuthenticationError\/LocalizedError-Implementations",
   "kind" : "article",
   "role" : "collectionGroup",
   "title" : "LocalizedError Implementations",
   "type" : "topic",
   "url" : "\/documentation\/webauthenticationui\/webauthenticationerror\/localizederror-implementations"
 },
-"doc://com.okta.mobile.webauthenticationui/documentation/WebAuthenticationUI/WebAuthenticationError/authenticationProviderError(_:)": {
+"doc://WebAuthenticationUI/documentation/WebAuthenticationUI/WebAuthenticationError/authenticationProviderError(_:)": {
   "abstract" : [
 
   ],
@@ -239,14 +233,14 @@
       "text" : ")"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/WebAuthenticationUI\/WebAuthenticationError\/authenticationProviderError(_:)",
+  "identifier" : "doc:\/\/WebAuthenticationUI\/documentation\/WebAuthenticationUI\/WebAuthenticationError\/authenticationProviderError(_:)",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "WebAuthenticationError.authenticationProviderError(_:)",
   "type" : "topic",
   "url" : "\/documentation\/webauthenticationui\/webauthenticationerror\/authenticationprovidererror(_:)"
 },
-"doc://com.okta.mobile.webauthenticationui/documentation/WebAuthenticationUI/WebAuthenticationError/cannotComposeAuthenticationURL": {
+"doc://WebAuthenticationUI/documentation/WebAuthenticationUI/WebAuthenticationError/cannotComposeAuthenticationURL": {
   "abstract" : [
 
   ],
@@ -264,14 +258,14 @@
       "text" : "cannotComposeAuthenticationURL"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/WebAuthenticationUI\/WebAuthenticationError\/cannotComposeAuthenticationURL",
+  "identifier" : "doc:\/\/WebAuthenticationUI\/documentation\/WebAuthenticationUI\/WebAuthenticationError\/cannotComposeAuthenticationURL",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "WebAuthenticationError.cannotComposeAuthenticationURL",
   "type" : "topic",
   "url" : "\/documentation\/webauthenticationui\/webauthenticationerror\/cannotcomposeauthenticationurl"
 },
-"doc://com.okta.mobile.webauthenticationui/documentation/WebAuthenticationUI/WebAuthenticationError/generic(error:)": {
+"doc://WebAuthenticationUI/documentation/WebAuthenticationUI/WebAuthenticationError/generic(error:)": {
   "abstract" : [
 
   ],
@@ -310,14 +304,14 @@
       "text" : ")"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/WebAuthenticationUI\/WebAuthenticationError\/generic(error:)",
+  "identifier" : "doc:\/\/WebAuthenticationUI\/documentation\/WebAuthenticationUI\/WebAuthenticationError\/generic(error:)",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "WebAuthenticationError.generic(error:)",
   "type" : "topic",
   "url" : "\/documentation\/webauthenticationui\/webauthenticationerror\/generic(error:)"
 },
-"doc://com.okta.mobile.webauthenticationui/documentation/WebAuthenticationUI/WebAuthenticationError/genericError(message:)": {
+"doc://WebAuthenticationUI/documentation/WebAuthenticationUI/WebAuthenticationError/genericError(message:)": {
   "abstract" : [
 
   ],
@@ -356,14 +350,14 @@
       "text" : ")"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/WebAuthenticationUI\/WebAuthenticationError\/genericError(message:)",
+  "identifier" : "doc:\/\/WebAuthenticationUI\/documentation\/WebAuthenticationUI\/WebAuthenticationError\/genericError(message:)",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "WebAuthenticationError.genericError(message:)",
   "type" : "topic",
   "url" : "\/documentation\/webauthenticationui\/webauthenticationerror\/genericerror(message:)"
 },
-"doc://com.okta.mobile.webauthenticationui/documentation/WebAuthenticationUI/WebAuthenticationError/invalidRedirectScheme(_:)": {
+"doc://WebAuthenticationUI/documentation/WebAuthenticationUI/WebAuthenticationError/invalidRedirectScheme(_:)": {
   "abstract" : [
 
   ],
@@ -394,14 +388,14 @@
       "text" : "?)"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/WebAuthenticationUI\/WebAuthenticationError\/invalidRedirectScheme(_:)",
+  "identifier" : "doc:\/\/WebAuthenticationUI\/documentation\/WebAuthenticationUI\/WebAuthenticationError\/invalidRedirectScheme(_:)",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "WebAuthenticationError.invalidRedirectScheme(_:)",
   "type" : "topic",
   "url" : "\/documentation\/webauthenticationui\/webauthenticationerror\/invalidredirectscheme(_:)"
 },
-"doc://com.okta.mobile.webauthenticationui/documentation/WebAuthenticationUI/WebAuthenticationError/missingIdToken": {
+"doc://WebAuthenticationUI/documentation/WebAuthenticationUI/WebAuthenticationError/missingIdToken": {
   "abstract" : [
 
   ],
@@ -419,14 +413,14 @@
       "text" : "missingIdToken"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/WebAuthenticationUI\/WebAuthenticationError\/missingIdToken",
+  "identifier" : "doc:\/\/WebAuthenticationUI\/documentation\/WebAuthenticationUI\/WebAuthenticationError\/missingIdToken",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "WebAuthenticationError.missingIdToken",
   "type" : "topic",
   "url" : "\/documentation\/webauthenticationui\/webauthenticationerror\/missingidtoken"
 },
-"doc://com.okta.mobile.webauthenticationui/documentation/WebAuthenticationUI/WebAuthenticationError/noCompatibleAuthenticationProviders": {
+"doc://WebAuthenticationUI/documentation/WebAuthenticationUI/WebAuthenticationError/noCompatibleAuthenticationProviders": {
   "abstract" : [
 
   ],
@@ -444,14 +438,14 @@
       "text" : "noCompatibleAuthenticationProviders"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/WebAuthenticationUI\/WebAuthenticationError\/noCompatibleAuthenticationProviders",
+  "identifier" : "doc:\/\/WebAuthenticationUI\/documentation\/WebAuthenticationUI\/WebAuthenticationError\/noCompatibleAuthenticationProviders",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "WebAuthenticationError.noCompatibleAuthenticationProviders",
   "type" : "topic",
   "url" : "\/documentation\/webauthenticationui\/webauthenticationerror\/nocompatibleauthenticationproviders"
 },
-"doc://com.okta.mobile.webauthenticationui/documentation/WebAuthenticationUI/WebAuthenticationError/oauth2(error:)": {
+"doc://WebAuthenticationUI/documentation/WebAuthenticationUI/WebAuthenticationError/oauth2(error:)": {
   "abstract" : [
 
   ],
@@ -490,14 +484,14 @@
       "text" : ")"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/WebAuthenticationUI\/WebAuthenticationError\/oauth2(error:)",
+  "identifier" : "doc:\/\/WebAuthenticationUI\/documentation\/WebAuthenticationUI\/WebAuthenticationError\/oauth2(error:)",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "WebAuthenticationError.oauth2(error:)",
   "type" : "topic",
   "url" : "\/documentation\/webauthenticationui\/webauthenticationerror\/oauth2(error:)"
 },
-"doc://com.okta.mobile.webauthenticationui/documentation/WebAuthenticationUI/WebAuthenticationError/userCancelledLogin": {
+"doc://WebAuthenticationUI/documentation/WebAuthenticationUI/WebAuthenticationError/userCancelledLogin": {
   "abstract" : [
 
   ],
@@ -515,20 +509,20 @@
       "text" : "userCancelledLogin"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/WebAuthenticationUI\/WebAuthenticationError\/userCancelledLogin",
+  "identifier" : "doc:\/\/WebAuthenticationUI\/documentation\/WebAuthenticationUI\/WebAuthenticationError\/userCancelledLogin",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "WebAuthenticationError.userCancelledLogin",
   "type" : "topic",
   "url" : "\/documentation\/webauthenticationui\/webauthenticationerror\/usercancelledlogin"
 },
-"doc://com.okta.mobile.webauthenticationui/s5ErrorP": {
-  "identifier" : "doc:\/\/com.okta.mobile.webauthenticationui\/s5ErrorP",
+"doc://WebAuthenticationUI/s5ErrorP": {
+  "identifier" : "doc:\/\/WebAuthenticationUI\/s5ErrorP",
   "title" : "Swift.Error",
   "type" : "unresolvable"
 },
-"doc://com.okta.mobile.webauthenticationui/s8SendableP": {
-  "identifier" : "doc:\/\/com.okta.mobile.webauthenticationui\/s8SendableP",
+"doc://WebAuthenticationUI/s8SendableP": {
+  "identifier" : "doc:\/\/WebAuthenticationUI\/s8SendableP",
   "title" : "Swift.Sendable",
   "type" : "unresolvable"
 }

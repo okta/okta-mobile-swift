@@ -8,14 +8,14 @@
   "hierarchy" : {
     "paths" : [
       [
-        "doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/OktaOAuth2",
-        "doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/OktaOAuth2\/LogoutFlowDelegate"
+        "doc:\/\/OktaOAuth2\/documentation\/OktaOAuth2",
+        "doc:\/\/OktaOAuth2\/documentation\/OktaOAuth2\/LogoutFlowDelegate"
       ]
     ]
   },
   "identifier" : {
     "interfaceLanguage" : "swift",
-    "url" : "doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/OktaOAuth2\/LogoutFlowDelegate\/logout(flow:received:)"
+    "url" : "doc:\/\/OktaOAuth2\/documentation\/OktaOAuth2\/LogoutFlowDelegate\/logout(flow:received:)"
   },
   "kind" : "symbol",
   "metadata" : {
@@ -55,7 +55,6 @@
       },
       {
         "kind" : "typeIdentifier",
-        "preciseIdentifier" : "s:10OktaOAuth218LogoutFlowDelegateP6logout4flow8receivedyqd___14AuthFoundation0B5ErrorOtlF0D0L_qd__mfp",
         "text" : "Flow"
       },
       {
@@ -136,7 +135,6 @@
             },
             {
               "kind" : "typeIdentifier",
-              "preciseIdentifier" : "s:10OktaOAuth218LogoutFlowDelegateP6logout4flow8receivedyqd___14AuthFoundation0B5ErrorOtlF0D0L_qd__mfp",
               "text" : "Flow"
             },
             {
@@ -160,7 +158,6 @@
               "text" : ": "
             },
             {
-              "identifier" : "doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/AuthFoundation\/OAuth2Error",
               "kind" : "typeIdentifier",
               "preciseIdentifier" : "s:14AuthFoundation11OAuth2ErrorO",
               "text" : "OAuth2Error"
@@ -177,7 +174,7 @@
   ],
   "schemaVersion" : {
     "major" : 0,
-    "minor" : 2,
+    "minor" : 3,
     "patch" : 0
   },
   "sections" : [
@@ -197,55 +194,21 @@
   ]
 , 
 "references": {
-"doc://com.okta.mobile.oktaoauth2/documentation/AuthFoundation/OAuth2Error": {
-  "abstract" : [
-    {
-      "text" : "Errors that may occur when interacting with OAuth2 endpoints.",
-      "type" : "text"
-    }
-  ],
-  "fragments" : [
-    {
-      "kind" : "keyword",
-      "text" : "enum"
-    },
-    {
-      "kind" : "text",
-      "text" : " "
-    },
-    {
-      "kind" : "identifier",
-      "text" : "OAuth2Error"
-    }
-  ],
-  "identifier" : "doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/AuthFoundation\/OAuth2Error",
-  "kind" : "symbol",
-  "navigatorTitle" : [
-    {
-      "kind" : "identifier",
-      "text" : "OAuth2Error"
-    }
-  ],
-  "role" : "symbol",
-  "title" : "OAuth2Error",
-  "type" : "topic",
-  "url" : "\/documentation\/authfoundation\/oauth2error"
-},
-"doc://com.okta.mobile.oktaoauth2/documentation/OktaOAuth2": {
+"doc://OktaOAuth2/documentation/OktaOAuth2": {
   "abstract" : [
     {
       "text" : "Interact with Okta’s OAuth2 APIs to authenticate users, and interact with user resources.",
       "type" : "text"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/OktaOAuth2",
+  "identifier" : "doc:\/\/OktaOAuth2\/documentation\/OktaOAuth2",
   "kind" : "symbol",
   "role" : "collection",
   "title" : "OktaOAuth2",
   "type" : "topic",
   "url" : "\/documentation\/oktaoauth2"
 },
-"doc://com.okta.mobile.oktaoauth2/documentation/OktaOAuth2/LogoutFlowDelegate": {
+"doc://OktaOAuth2/documentation/OktaOAuth2/LogoutFlowDelegate": {
   "abstract" : [
     {
       "text" : "A common delegate protocol that all logout flows should support.",
@@ -266,7 +229,7 @@
       "text" : "LogoutFlowDelegate"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/OktaOAuth2\/LogoutFlowDelegate",
+  "identifier" : "doc:\/\/OktaOAuth2\/documentation\/OktaOAuth2\/LogoutFlowDelegate",
   "kind" : "symbol",
   "navigatorTitle" : [
     {
@@ -279,7 +242,7 @@
   "type" : "topic",
   "url" : "\/documentation\/oktaoauth2\/logoutflowdelegate"
 },
-"doc://com.okta.mobile.oktaoauth2/documentation/OktaOAuth2/LogoutFlowDelegate/logout(flow:received:)": {
+"doc://OktaOAuth2/documentation/OktaOAuth2/LogoutFlowDelegate/logout(flow:received:)": {
   "abstract" : [
     {
       "text" : "Sent when an logout flow receives an error.",
@@ -321,7 +284,6 @@
     },
     {
       "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:10OktaOAuth218LogoutFlowDelegateP6logout4flow8receivedyqd___14AuthFoundation0B5ErrorOtlF0D0L_qd__mfp",
       "text" : "Flow"
     },
     {
@@ -346,7 +308,7 @@
       "text" : ")"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/OktaOAuth2\/LogoutFlowDelegate\/logout(flow:received:)",
+  "identifier" : "doc:\/\/OktaOAuth2\/documentation\/OktaOAuth2\/LogoutFlowDelegate\/logout(flow:received:)",
   "kind" : "symbol",
   "required" : true,
   "role" : "symbol",

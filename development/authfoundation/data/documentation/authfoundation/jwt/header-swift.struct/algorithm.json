@@ -8,15 +8,15 @@
   "hierarchy" : {
     "paths" : [
       [
-        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation",
-        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/JWT",
-        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/JWT\/Header-swift.struct"
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JWT",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JWT\/Header-swift.struct"
       ]
     ]
   },
   "identifier" : {
     "interfaceLanguage" : "swift",
-    "url" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/JWT\/Header-swift.struct\/algorithm"
+    "url" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JWT\/Header-swift.struct\/algorithm"
   },
   "kind" : "symbol",
   "metadata" : {
@@ -91,7 +91,7 @@
               "text" : ": "
             },
             {
-              "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/JWK",
+              "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JWK",
               "kind" : "typeIdentifier",
               "preciseIdentifier" : "s:14AuthFoundation3JWKV",
               "text" : "JWK"
@@ -101,7 +101,7 @@
               "text" : "."
             },
             {
-              "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/JWK\/Algorithm-swift.enum",
+              "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JWK\/Algorithm-swift.enum",
               "kind" : "typeIdentifier",
               "preciseIdentifier" : "s:14AuthFoundation3JWKV9AlgorithmO",
               "text" : "Algorithm"
@@ -114,7 +114,7 @@
   ],
   "schemaVersion" : {
     "major" : 0,
-    "minor" : 2,
+    "minor" : 3,
     "patch" : 0
   },
   "sections" : [
@@ -134,21 +134,21 @@
   ]
 , 
 "references": {
-"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation": {
+"doc://AuthFoundation/documentation/AuthFoundation": {
   "abstract" : [
     {
       "text" : "Library that provides foundational features used by Okta’s authentication libraries, as well as APIs used to work with tokens and user credentials.",
       "type" : "text"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation",
   "kind" : "symbol",
   "role" : "collection",
   "title" : "AuthFoundation",
   "type" : "topic",
   "url" : "\/documentation\/authfoundation"
 },
-"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/JWK": {
+"doc://AuthFoundation/documentation/AuthFoundation/JWK": {
   "abstract" : [
     {
       "text" : "Describes an individual key from an authorization server, which can be used to validate tokens or encrypt content.",
@@ -169,7 +169,7 @@
       "text" : "JWK"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/JWK",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JWK",
   "kind" : "symbol",
   "navigatorTitle" : [
     {
@@ -182,7 +182,7 @@
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/jwk"
 },
-"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/JWK/Algorithm-swift.enum": {
+"doc://AuthFoundation/documentation/AuthFoundation/JWK/Algorithm-swift.enum": {
   "abstract" : [
     {
       "text" : "The algorithm this key is intended to be used with.",
@@ -203,7 +203,7 @@
       "text" : "Algorithm"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/JWK\/Algorithm-swift.enum",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JWK\/Algorithm-swift.enum",
   "kind" : "symbol",
   "navigatorTitle" : [
     {
@@ -216,7 +216,7 @@
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/jwk\/algorithm-swift.enum"
 },
-"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/JWT": {
+"doc://AuthFoundation/documentation/AuthFoundation/JWT": {
   "abstract" : [
     {
       "text" : "Represents the contents of a JWT token, providing access to its payload contents.",
@@ -237,7 +237,7 @@
       "text" : "JWT"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/JWT",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JWT",
   "kind" : "symbol",
   "navigatorTitle" : [
     {
@@ -250,7 +250,7 @@
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/jwt"
 },
-"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/JWT/Header-swift.struct": {
+"doc://AuthFoundation/documentation/AuthFoundation/JWT/Header-swift.struct": {
   "abstract" : [
     {
       "text" : "JWT header information describing the contents of the token.",
@@ -271,7 +271,7 @@
       "text" : "Header"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/JWT\/Header-swift.struct",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JWT\/Header-swift.struct",
   "kind" : "symbol",
   "navigatorTitle" : [
     {
@@ -284,7 +284,7 @@
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/jwt\/header-swift.struct"
 },
-"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/JWT/Header-swift.struct/algorithm": {
+"doc://AuthFoundation/documentation/AuthFoundation/JWT/Header-swift.struct/algorithm": {
   "abstract" : [
     {
       "text" : "The signing algorithm used to sign this JWT token.",
@@ -323,7 +323,7 @@
       "text" : "Algorithm"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/JWT\/Header-swift.struct\/algorithm",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JWT\/Header-swift.struct\/algorithm",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "algorithm",

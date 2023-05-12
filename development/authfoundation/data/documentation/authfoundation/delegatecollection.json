@@ -1,20 +1,14 @@
 {
-  "abstract" : [
-    {
-      "text" : "No overview available.",
-      "type" : "text"
-    }
-  ],
   "hierarchy" : {
     "paths" : [
       [
-        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation"
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation"
       ]
     ]
   },
   "identifier" : {
     "interfaceLanguage" : "swift",
-    "url" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/DelegateCollection"
+    "url" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/DelegateCollection"
   },
   "kind" : "symbol",
   "metadata" : {
@@ -100,7 +94,7 @@
   ],
   "schemaVersion" : {
     "major" : 0,
-    "minor" : 2,
+    "minor" : 3,
     "patch" : 0
   },
   "sections" : [
@@ -110,11 +104,11 @@
     {
       "generated" : true,
       "identifiers" : [
-        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/UsesDelegateCollection",
-        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/URLSessionProtocol",
-        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/URLSessionDataTaskProtocol",
-        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/Weak",
-        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/WeakCollection"
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/UsesDelegateCollection",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/URLSessionProtocol",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/URLSessionDataTaskProtocol",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/Weak",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/WeakCollection"
       ],
       "title" : "Internals and mocking"
     }
@@ -122,16 +116,16 @@
   "topicSections" : [
     {
       "identifiers" : [
-        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/DelegateCollection\/init()"
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/DelegateCollection\/init()"
       ],
       "title" : "Initializers"
     },
     {
       "identifiers" : [
-        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/DelegateCollection\/add(_:)",
-        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/DelegateCollection\/call(_:)",
-        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/DelegateCollection\/invoke(_:)",
-        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/DelegateCollection\/remove(_:)"
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/DelegateCollection\/add(_:)",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/DelegateCollection\/call(_:)",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/DelegateCollection\/invoke(_:)",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/DelegateCollection\/remove(_:)"
       ],
       "title" : "Instance Methods"
     }
@@ -150,21 +144,21 @@
   ]
 , 
 "references": {
-"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation": {
+"doc://AuthFoundation/documentation/AuthFoundation": {
   "abstract" : [
     {
       "text" : "Library that provides foundational features used by Okta’s authentication libraries, as well as APIs used to work with tokens and user credentials.",
       "type" : "text"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation",
   "kind" : "symbol",
   "role" : "collection",
   "title" : "AuthFoundation",
   "type" : "topic",
   "url" : "\/documentation\/authfoundation"
 },
-"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/DelegateCollection": {
+"doc://AuthFoundation/documentation/AuthFoundation/DelegateCollection": {
   "abstract" : [
 
   ],
@@ -182,7 +176,7 @@
       "text" : "DelegateCollection"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/DelegateCollection",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/DelegateCollection",
   "kind" : "symbol",
   "navigatorTitle" : [
     {
@@ -195,7 +189,7 @@
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/delegatecollection"
 },
-"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/DelegateCollection/add(_:)": {
+"doc://AuthFoundation/documentation/AuthFoundation/DelegateCollection/add(_:)": {
   "abstract" : [
 
   ],
@@ -218,7 +212,6 @@
     },
     {
       "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:14AuthFoundation18DelegateCollectionC1Dxmfp",
       "text" : "D"
     },
     {
@@ -226,14 +219,14 @@
       "text" : ")"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/DelegateCollection\/add(_:)",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/DelegateCollection\/add(_:)",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "add(_:)",
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/delegatecollection\/add(_:)"
 },
-"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/DelegateCollection/call(_:)": {
+"doc://AuthFoundation/documentation/AuthFoundation/DelegateCollection/call(_:)": {
   "abstract" : [
 
   ],
@@ -264,7 +257,6 @@
     },
     {
       "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:14AuthFoundation18DelegateCollectionC1Dxmfp",
       "text" : "D"
     },
     {
@@ -273,7 +265,6 @@
     },
     {
       "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:14AuthFoundation18DelegateCollectionC4callySayqd__Gqd__xXElF1TL_qd__mfp",
       "text" : "T"
     },
     {
@@ -282,7 +273,6 @@
     },
     {
       "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:14AuthFoundation18DelegateCollectionC4callySayqd__Gqd__xXElF1TL_qd__mfp",
       "text" : "T"
     },
     {
@@ -290,14 +280,14 @@
       "text" : "]"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/DelegateCollection\/call(_:)",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/DelegateCollection\/call(_:)",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "call(_:)",
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/delegatecollection\/call(_:)"
 },
-"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/DelegateCollection/init()": {
+"doc://AuthFoundation/documentation/AuthFoundation/DelegateCollection/init()": {
   "abstract" : [
 
   ],
@@ -311,14 +301,14 @@
       "text" : "()"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/DelegateCollection\/init()",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/DelegateCollection\/init()",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "init()",
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/delegatecollection\/init()"
 },
-"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/DelegateCollection/invoke(_:)": {
+"doc://AuthFoundation/documentation/AuthFoundation/DelegateCollection/invoke(_:)": {
   "abstract" : [
 
   ],
@@ -341,7 +331,6 @@
     },
     {
       "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:14AuthFoundation18DelegateCollectionC1Dxmfp",
       "text" : "D"
     },
     {
@@ -358,14 +347,14 @@
       "text" : ")"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/DelegateCollection\/invoke(_:)",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/DelegateCollection\/invoke(_:)",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "invoke(_:)",
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/delegatecollection\/invoke(_:)"
 },
-"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/DelegateCollection/remove(_:)": {
+"doc://AuthFoundation/documentation/AuthFoundation/DelegateCollection/remove(_:)": {
   "abstract" : [
 
   ],
@@ -388,7 +377,6 @@
     },
     {
       "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:14AuthFoundation18DelegateCollectionC1Dxmfp",
       "text" : "D"
     },
     {
@@ -396,14 +384,14 @@
       "text" : ")"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/DelegateCollection\/remove(_:)",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/DelegateCollection\/remove(_:)",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "remove(_:)",
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/delegatecollection\/remove(_:)"
 },
-"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/URLSessionDataTaskProtocol": {
+"doc://AuthFoundation/documentation/AuthFoundation/URLSessionDataTaskProtocol": {
   "abstract" : [
     {
       "text" : "Protocol defining the interface for interacting with a URLSession. This is used to provide mocking for unit tests.",
@@ -424,7 +412,7 @@
       "text" : "URLSessionDataTaskProtocol"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/URLSessionDataTaskProtocol",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/URLSessionDataTaskProtocol",
   "kind" : "symbol",
   "navigatorTitle" : [
     {
@@ -437,7 +425,7 @@
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/urlsessiondatataskprotocol"
 },
-"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/URLSessionProtocol": {
+"doc://AuthFoundation/documentation/AuthFoundation/URLSessionProtocol": {
   "abstract" : [
     {
       "text" : "Protocol defining the interface for interacting with a URLSession. This is used to provide mocking for unit tests.",
@@ -458,7 +446,7 @@
       "text" : "URLSessionProtocol"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/URLSessionProtocol",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/URLSessionProtocol",
   "kind" : "symbol",
   "navigatorTitle" : [
     {
@@ -471,7 +459,7 @@
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/urlsessionprotocol"
 },
-"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/UsesDelegateCollection": {
+"doc://AuthFoundation/documentation/AuthFoundation/UsesDelegateCollection": {
   "abstract" : [
 
   ],
@@ -489,7 +477,7 @@
       "text" : "UsesDelegateCollection"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/UsesDelegateCollection",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/UsesDelegateCollection",
   "kind" : "symbol",
   "navigatorTitle" : [
     {
@@ -502,7 +490,7 @@
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/usesdelegatecollection"
 },
-"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/Weak": {
+"doc://AuthFoundation/documentation/AuthFoundation/Weak": {
   "abstract" : [
     {
       "text" : "Property wrapper representing a weak value.",
@@ -523,7 +511,7 @@
       "text" : "Weak"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/Weak",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/Weak",
   "kind" : "symbol",
   "navigatorTitle" : [
     {
@@ -536,7 +524,7 @@
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/weak"
 },
-"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/WeakCollection": {
+"doc://AuthFoundation/documentation/AuthFoundation/WeakCollection": {
   "abstract" : [
     {
       "text" : "Property wrapper representing a collection of weak values.",
@@ -557,7 +545,7 @@
       "text" : "WeakCollection"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/WeakCollection",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/WeakCollection",
   "kind" : "symbol",
   "navigatorTitle" : [
     {

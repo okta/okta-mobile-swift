@@ -1,22 +1,30 @@
 {
   "abstract" : [
     {
-      "text" : "Invoked immediately prior to a URLRequest being converted to a DataTask.",
+      "text" : "Inherited from ",
+      "type" : "text"
+    },
+    {
+      "code" : "APIClientDelegate.api(client:willSend:)",
+      "type" : "codeVoice"
+    },
+    {
+      "text" : ".",
       "type" : "text"
     }
   ],
   "hierarchy" : {
     "paths" : [
       [
-        "doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/OktaOAuth2",
-        "doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/OktaOAuth2\/TokenExchangeFlow",
-        "doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/OktaOAuth2\/TokenExchangeFlow\/APIClientDelegate-Implementations"
+        "doc:\/\/OktaOAuth2\/documentation\/OktaOAuth2",
+        "doc:\/\/OktaOAuth2\/documentation\/OktaOAuth2\/TokenExchangeFlow",
+        "doc:\/\/OktaOAuth2\/documentation\/OktaOAuth2\/TokenExchangeFlow\/APIClientDelegate-Implementations"
       ]
     ]
   },
   "identifier" : {
     "interfaceLanguage" : "swift",
-    "url" : "doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/OktaOAuth2\/TokenExchangeFlow\/api(client:willSend:)"
+    "url" : "doc:\/\/OktaOAuth2\/documentation\/OktaOAuth2\/TokenExchangeFlow\/api(client:willSend:)"
   },
   "kind" : "symbol",
   "metadata" : {
@@ -128,7 +136,6 @@
               "text" : ": "
             },
             {
-              "identifier" : "doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/AuthFoundation\/APIClient",
               "kind" : "typeIdentifier",
               "preciseIdentifier" : "s:14AuthFoundation9APIClientP",
               "text" : "APIClient"
@@ -178,7 +185,7 @@
   ],
   "schemaVersion" : {
     "major" : 0,
-    "minor" : 2,
+    "minor" : 3,
     "patch" : 0
   },
   "sections" : [
@@ -198,55 +205,21 @@
   ]
 , 
 "references": {
-"doc://com.okta.mobile.oktaoauth2/documentation/AuthFoundation/APIClient": {
-  "abstract" : [
-    {
-      "text" : "Protocol defining the interfaces and capabilities that API clients can conform to.",
-      "type" : "text"
-    }
-  ],
-  "fragments" : [
-    {
-      "kind" : "keyword",
-      "text" : "protocol"
-    },
-    {
-      "kind" : "text",
-      "text" : " "
-    },
-    {
-      "kind" : "identifier",
-      "text" : "APIClient"
-    }
-  ],
-  "identifier" : "doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/AuthFoundation\/APIClient",
-  "kind" : "symbol",
-  "navigatorTitle" : [
-    {
-      "kind" : "identifier",
-      "text" : "APIClient"
-    }
-  ],
-  "role" : "symbol",
-  "title" : "APIClient",
-  "type" : "topic",
-  "url" : "\/documentation\/authfoundation\/apiclient"
-},
-"doc://com.okta.mobile.oktaoauth2/documentation/OktaOAuth2": {
+"doc://OktaOAuth2/documentation/OktaOAuth2": {
   "abstract" : [
     {
       "text" : "Interact with Okta’s OAuth2 APIs to authenticate users, and interact with user resources.",
       "type" : "text"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/OktaOAuth2",
+  "identifier" : "doc:\/\/OktaOAuth2\/documentation\/OktaOAuth2",
   "kind" : "symbol",
   "role" : "collection",
   "title" : "OktaOAuth2",
   "type" : "topic",
   "url" : "\/documentation\/oktaoauth2"
 },
-"doc://com.okta.mobile.oktaoauth2/documentation/OktaOAuth2/TokenExchangeFlow": {
+"doc://OktaOAuth2/documentation/OktaOAuth2/TokenExchangeFlow": {
   "abstract" : [
     {
       "text" : "An authentication flow class that implements the Token Exchange Flow.",
@@ -267,7 +240,7 @@
       "text" : "TokenExchangeFlow"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/OktaOAuth2\/TokenExchangeFlow",
+  "identifier" : "doc:\/\/OktaOAuth2\/documentation\/OktaOAuth2\/TokenExchangeFlow",
   "kind" : "symbol",
   "navigatorTitle" : [
     {
@@ -280,23 +253,20 @@
   "type" : "topic",
   "url" : "\/documentation\/oktaoauth2\/tokenexchangeflow"
 },
-"doc://com.okta.mobile.oktaoauth2/documentation/OktaOAuth2/TokenExchangeFlow/APIClientDelegate-Implementations": {
+"doc://OktaOAuth2/documentation/OktaOAuth2/TokenExchangeFlow/APIClientDelegate-Implementations": {
   "abstract" : [
 
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/OktaOAuth2\/TokenExchangeFlow\/APIClientDelegate-Implementations",
+  "identifier" : "doc:\/\/OktaOAuth2\/documentation\/OktaOAuth2\/TokenExchangeFlow\/APIClientDelegate-Implementations",
   "kind" : "article",
   "role" : "collectionGroup",
   "title" : "APIClientDelegate Implementations",
   "type" : "topic",
   "url" : "\/documentation\/oktaoauth2\/tokenexchangeflow\/apiclientdelegate-implementations"
 },
-"doc://com.okta.mobile.oktaoauth2/documentation/OktaOAuth2/TokenExchangeFlow/api(client:willSend:)": {
+"doc://OktaOAuth2/documentation/OktaOAuth2/TokenExchangeFlow/api(client:willSend:)": {
   "abstract" : [
-    {
-      "text" : "Invoked immediately prior to a URLRequest being converted to a DataTask.",
-      "type" : "text"
-    }
+
   ],
   "fragments" : [
     {
@@ -358,7 +328,7 @@
       "text" : ")"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/OktaOAuth2\/TokenExchangeFlow\/api(client:willSend:)",
+  "identifier" : "doc:\/\/OktaOAuth2\/documentation\/OktaOAuth2\/TokenExchangeFlow\/api(client:willSend:)",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "api(client:willSend:)",

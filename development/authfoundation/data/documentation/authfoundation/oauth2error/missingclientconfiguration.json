@@ -1,21 +1,15 @@
 {
-  "abstract" : [
-    {
-      "text" : "No overview available.",
-      "type" : "text"
-    }
-  ],
   "hierarchy" : {
     "paths" : [
       [
-        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation",
-        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/OAuth2Error"
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/OAuth2Error"
       ]
     ]
   },
   "identifier" : {
     "interfaceLanguage" : "swift",
-    "url" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/OAuth2Error\/missingClientConfiguration"
+    "url" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/OAuth2Error\/missingClientConfiguration"
   },
   "kind" : "symbol",
   "metadata" : {
@@ -75,7 +69,7 @@
   ],
   "schemaVersion" : {
     "major" : 0,
-    "minor" : 2,
+    "minor" : 3,
     "patch" : 0
   },
   "sections" : [
@@ -95,21 +89,21 @@
   ]
 , 
 "references": {
-"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation": {
+"doc://AuthFoundation/documentation/AuthFoundation": {
   "abstract" : [
     {
       "text" : "Library that provides foundational features used by Okta’s authentication libraries, as well as APIs used to work with tokens and user credentials.",
       "type" : "text"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation",
   "kind" : "symbol",
   "role" : "collection",
   "title" : "AuthFoundation",
   "type" : "topic",
   "url" : "\/documentation\/authfoundation"
 },
-"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/OAuth2Error": {
+"doc://AuthFoundation/documentation/AuthFoundation/OAuth2Error": {
   "abstract" : [
     {
       "text" : "Errors that may occur when interacting with OAuth2 endpoints.",
@@ -130,7 +124,7 @@
       "text" : "OAuth2Error"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/OAuth2Error",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/OAuth2Error",
   "kind" : "symbol",
   "navigatorTitle" : [
     {
@@ -143,7 +137,7 @@
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/oauth2error"
 },
-"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/OAuth2Error/missingClientConfiguration": {
+"doc://AuthFoundation/documentation/AuthFoundation/OAuth2Error/missingClientConfiguration": {
   "abstract" : [
 
   ],
@@ -161,7 +155,7 @@
       "text" : "missingClientConfiguration"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/OAuth2Error\/missingClientConfiguration",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/OAuth2Error\/missingClientConfiguration",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "OAuth2Error.missingClientConfiguration",

@@ -1,21 +1,15 @@
 {
-  "abstract" : [
-    {
-      "text" : "No overview available.",
-      "type" : "text"
-    }
-  ],
   "hierarchy" : {
     "paths" : [
       [
-        "doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/OktaOAuth2",
-        "doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/OktaOAuth2\/SessionTokenFlow"
+        "doc:\/\/OktaOAuth2\/documentation\/OktaOAuth2",
+        "doc:\/\/OktaOAuth2\/documentation\/OktaOAuth2\/SessionTokenFlow"
       ]
     ]
   },
   "identifier" : {
     "interfaceLanguage" : "swift",
-    "url" : "doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/OktaOAuth2\/SessionTokenFlow\/APIClientDelegate-Implementations"
+    "url" : "doc:\/\/OktaOAuth2\/documentation\/OktaOAuth2\/SessionTokenFlow\/APIClientDelegate-Implementations"
   },
   "kind" : "article",
   "metadata" : {
@@ -29,7 +23,7 @@
   },
   "schemaVersion" : {
     "major" : 0,
-    "minor" : 2,
+    "minor" : 3,
     "patch" : 0
   },
   "sections" : [
@@ -39,11 +33,10 @@
     {
       "generated" : true,
       "identifiers" : [
-        "doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/OktaOAuth2\/SessionTokenFlow\/api(client:didSend:received:)-2xozo",
-        "doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/OktaOAuth2\/SessionTokenFlow\/api(client:didSend:received:)-4glxa",
-        "doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/OktaOAuth2\/SessionTokenFlow\/api(client:didSend:received:)-7apwl",
-        "doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/OktaOAuth2\/SessionTokenFlow\/api(client:shouldRetry:)",
-        "doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/OktaOAuth2\/SessionTokenFlow\/api(client:willSend:)"
+        "doc:\/\/OktaOAuth2\/documentation\/OktaOAuth2\/SessionTokenFlow\/api(client:didSend:received:)",
+        "doc:\/\/OktaOAuth2\/documentation\/OktaOAuth2\/SessionTokenFlow\/api(client:didSend:received:requestId:rateLimit:)",
+        "doc:\/\/OktaOAuth2\/documentation\/OktaOAuth2\/SessionTokenFlow\/api(client:shouldRetry:)",
+        "doc:\/\/OktaOAuth2\/documentation\/OktaOAuth2\/SessionTokenFlow\/api(client:willSend:)"
       ],
       "title" : "Instance Methods"
     }
@@ -62,21 +55,21 @@
   ]
 , 
 "references": {
-"doc://com.okta.mobile.oktaoauth2/documentation/OktaOAuth2": {
+"doc://OktaOAuth2/documentation/OktaOAuth2": {
   "abstract" : [
     {
       "text" : "Interact with Okta’s OAuth2 APIs to authenticate users, and interact with user resources.",
       "type" : "text"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/OktaOAuth2",
+  "identifier" : "doc:\/\/OktaOAuth2\/documentation\/OktaOAuth2",
   "kind" : "symbol",
   "role" : "collection",
   "title" : "OktaOAuth2",
   "type" : "topic",
   "url" : "\/documentation\/oktaoauth2"
 },
-"doc://com.okta.mobile.oktaoauth2/documentation/OktaOAuth2/SessionTokenFlow": {
+"doc://OktaOAuth2/documentation/OktaOAuth2/SessionTokenFlow": {
   "abstract" : [
     {
       "text" : "An authentication flow class that exchanges a Session Token for access tokens.",
@@ -97,7 +90,7 @@
       "text" : "SessionTokenFlow"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/OktaOAuth2\/SessionTokenFlow",
+  "identifier" : "doc:\/\/OktaOAuth2\/documentation\/OktaOAuth2\/SessionTokenFlow",
   "kind" : "symbol",
   "navigatorTitle" : [
     {
@@ -110,7 +103,7 @@
   "type" : "topic",
   "url" : "\/documentation\/oktaoauth2\/sessiontokenflow"
 },
-"doc://com.okta.mobile.oktaoauth2/documentation/OktaOAuth2/SessionTokenFlow/api(client:didSend:received:)-2xozo": {
+"doc://OktaOAuth2/documentation/OktaOAuth2/SessionTokenFlow/api(client:didSend:received:)": {
   "abstract" : [
 
   ],
@@ -183,14 +176,14 @@
       "text" : ")"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/OktaOAuth2\/SessionTokenFlow\/api(client:didSend:received:)-2xozo",
+  "identifier" : "doc:\/\/OktaOAuth2\/documentation\/OktaOAuth2\/SessionTokenFlow\/api(client:didSend:received:)",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "api(client:didSend:received:)",
   "type" : "topic",
-  "url" : "\/documentation\/oktaoauth2\/sessiontokenflow\/api(client:didsend:received:)-2xozo"
+  "url" : "\/documentation\/oktaoauth2\/sessiontokenflow\/api(client:didsend:received:)"
 },
-"doc://com.okta.mobile.oktaoauth2/documentation/OktaOAuth2/SessionTokenFlow/api(client:didSend:received:)-4glxa": {
+"doc://OktaOAuth2/documentation/OktaOAuth2/SessionTokenFlow/api(client:didSend:received:requestId:rateLimit:)": {
   "abstract" : [
 
   ],
@@ -260,118 +253,53 @@
     },
     {
       "kind" : "text",
-      "text" : ")"
+      "text" : ", "
+    },
+    {
+      "kind" : "externalParam",
+      "text" : "requestId"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:SS",
+      "text" : "String"
+    },
+    {
+      "kind" : "text",
+      "text" : "?, "
+    },
+    {
+      "kind" : "externalParam",
+      "text" : "rateLimit"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:14AuthFoundation12APIRateLimitV",
+      "text" : "APIRateLimit"
+    },
+    {
+      "kind" : "text",
+      "text" : "?)"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/OktaOAuth2\/SessionTokenFlow\/api(client:didSend:received:)-4glxa",
+  "identifier" : "doc:\/\/OktaOAuth2\/documentation\/OktaOAuth2\/SessionTokenFlow\/api(client:didSend:received:requestId:rateLimit:)",
   "kind" : "symbol",
   "role" : "symbol",
-  "title" : "api(client:didSend:received:)",
+  "title" : "api(client:didSend:received:requestId:rateLimit:)",
   "type" : "topic",
-  "url" : "\/documentation\/oktaoauth2\/sessiontokenflow\/api(client:didsend:received:)-4glxa"
+  "url" : "\/documentation\/oktaoauth2\/sessiontokenflow\/api(client:didsend:received:requestid:ratelimit:)"
 },
-"doc://com.okta.mobile.oktaoauth2/documentation/OktaOAuth2/SessionTokenFlow/api(client:didSend:received:)-7apwl": {
+"doc://OktaOAuth2/documentation/OktaOAuth2/SessionTokenFlow/api(client:shouldRetry:)": {
   "abstract" : [
 
-  ],
-  "fragments" : [
-    {
-      "kind" : "keyword",
-      "text" : "func"
-    },
-    {
-      "kind" : "text",
-      "text" : " "
-    },
-    {
-      "kind" : "identifier",
-      "text" : "api"
-    },
-    {
-      "kind" : "text",
-      "text" : "<"
-    },
-    {
-      "kind" : "genericParameter",
-      "text" : "T"
-    },
-    {
-      "kind" : "text",
-      "text" : ">("
-    },
-    {
-      "kind" : "externalParam",
-      "text" : "client"
-    },
-    {
-      "kind" : "text",
-      "text" : ": "
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:14AuthFoundation9APIClientP",
-      "text" : "APIClient"
-    },
-    {
-      "kind" : "text",
-      "text" : ", "
-    },
-    {
-      "kind" : "externalParam",
-      "text" : "didSend"
-    },
-    {
-      "kind" : "text",
-      "text" : ": "
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:10Foundation10URLRequestV",
-      "text" : "URLRequest"
-    },
-    {
-      "kind" : "text",
-      "text" : ", "
-    },
-    {
-      "kind" : "externalParam",
-      "text" : "received"
-    },
-    {
-      "kind" : "text",
-      "text" : ": "
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:14AuthFoundation11APIResponseV",
-      "text" : "APIResponse"
-    },
-    {
-      "kind" : "text",
-      "text" : "<"
-    },
-    {
-      "kind" : "typeIdentifier",
-      "text" : "T"
-    },
-    {
-      "kind" : "text",
-      "text" : ">)"
-    }
-  ],
-  "identifier" : "doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/OktaOAuth2\/SessionTokenFlow\/api(client:didSend:received:)-7apwl",
-  "kind" : "symbol",
-  "role" : "symbol",
-  "title" : "api(client:didSend:received:)",
-  "type" : "topic",
-  "url" : "\/documentation\/oktaoauth2\/sessiontokenflow\/api(client:didsend:received:)-7apwl"
-},
-"doc://com.okta.mobile.oktaoauth2/documentation/OktaOAuth2/SessionTokenFlow/api(client:shouldRetry:)": {
-  "abstract" : [
-    {
-      "text" : "Provides the APIRetry configurations from the delegate in responds to a retry request.",
-      "type" : "text"
-    }
   ],
   "fragments" : [
     {
@@ -430,19 +358,16 @@
       "text" : "APIRetry"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/OktaOAuth2\/SessionTokenFlow\/api(client:shouldRetry:)",
+  "identifier" : "doc:\/\/OktaOAuth2\/documentation\/OktaOAuth2\/SessionTokenFlow\/api(client:shouldRetry:)",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "api(client:shouldRetry:)",
   "type" : "topic",
   "url" : "\/documentation\/oktaoauth2\/sessiontokenflow\/api(client:shouldretry:)"
 },
-"doc://com.okta.mobile.oktaoauth2/documentation/OktaOAuth2/SessionTokenFlow/api(client:willSend:)": {
+"doc://OktaOAuth2/documentation/OktaOAuth2/SessionTokenFlow/api(client:willSend:)": {
   "abstract" : [
-    {
-      "text" : "Invoked immediately prior to a URLRequest being converted to a DataTask.",
-      "type" : "text"
-    }
+
   ],
   "fragments" : [
     {
@@ -504,7 +429,7 @@
       "text" : ")"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/OktaOAuth2\/SessionTokenFlow\/api(client:willSend:)",
+  "identifier" : "doc:\/\/OktaOAuth2\/documentation\/OktaOAuth2\/SessionTokenFlow\/api(client:willSend:)",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "api(client:willSend:)",

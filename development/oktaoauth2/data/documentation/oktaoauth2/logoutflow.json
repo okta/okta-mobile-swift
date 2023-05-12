@@ -8,13 +8,13 @@
   "hierarchy" : {
     "paths" : [
       [
-        "doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/OktaOAuth2"
+        "doc:\/\/OktaOAuth2\/documentation\/OktaOAuth2"
       ]
     ]
   },
   "identifier" : {
     "interfaceLanguage" : "swift",
-    "url" : "doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/OktaOAuth2\/LogoutFlow"
+    "url" : "doc:\/\/OktaOAuth2\/documentation\/OktaOAuth2\/LogoutFlow"
   },
   "kind" : "symbol",
   "metadata" : {
@@ -77,7 +77,6 @@
               "text" : " : AnyObject, "
             },
             {
-              "identifier" : "doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/AuthFoundation\/UsesDelegateCollection",
               "kind" : "typeIdentifier",
               "preciseIdentifier" : "s:14AuthFoundation22UsesDelegateCollectionP",
               "text" : "UsesDelegateCollection"
@@ -91,7 +90,7 @@
   "relationshipsSections" : [
     {
       "identifiers" : [
-        "doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/AuthFoundation\/UsesDelegateCollection"
+        "doc:\/\/OktaOAuth2\/14AuthFoundation22UsesDelegateCollectionP"
       ],
       "kind" : "relationships",
       "title" : "Inherits From",
@@ -99,7 +98,7 @@
     },
     {
       "identifiers" : [
-        "doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/OktaOAuth2\/SessionLogoutFlow"
+        "doc:\/\/OktaOAuth2\/documentation\/OktaOAuth2\/SessionLogoutFlow"
       ],
       "kind" : "relationships",
       "title" : "Conforming Types",
@@ -108,7 +107,7 @@
   ],
   "schemaVersion" : {
     "major" : 0,
-    "minor" : 2,
+    "minor" : 3,
     "patch" : 0
   },
   "sections" : [
@@ -117,14 +116,14 @@
   "topicSections" : [
     {
       "identifiers" : [
-        "doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/OktaOAuth2\/LogoutFlow\/inProgress"
+        "doc:\/\/OktaOAuth2\/documentation\/OktaOAuth2\/LogoutFlow\/inProgress"
       ],
       "title" : "Instance Properties"
     },
     {
       "identifiers" : [
-        "doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/OktaOAuth2\/LogoutFlow\/cancel()",
-        "doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/OktaOAuth2\/LogoutFlow\/reset()"
+        "doc:\/\/OktaOAuth2\/documentation\/OktaOAuth2\/LogoutFlow\/cancel()",
+        "doc:\/\/OktaOAuth2\/documentation\/OktaOAuth2\/LogoutFlow\/reset()"
       ],
       "title" : "Instance Methods"
     }
@@ -143,52 +142,26 @@
   ]
 , 
 "references": {
-"doc://com.okta.mobile.oktaoauth2/documentation/AuthFoundation/UsesDelegateCollection": {
-  "abstract" : [
-
-  ],
-  "fragments" : [
-    {
-      "kind" : "keyword",
-      "text" : "protocol"
-    },
-    {
-      "kind" : "text",
-      "text" : " "
-    },
-    {
-      "kind" : "identifier",
-      "text" : "UsesDelegateCollection"
-    }
-  ],
-  "identifier" : "doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/AuthFoundation\/UsesDelegateCollection",
-  "kind" : "symbol",
-  "navigatorTitle" : [
-    {
-      "kind" : "identifier",
-      "text" : "UsesDelegateCollection"
-    }
-  ],
-  "role" : "symbol",
-  "title" : "UsesDelegateCollection",
-  "type" : "topic",
-  "url" : "\/documentation\/authfoundation\/usesdelegatecollection"
+"doc://OktaOAuth2/14AuthFoundation22UsesDelegateCollectionP": {
+  "identifier" : "doc:\/\/OktaOAuth2\/14AuthFoundation22UsesDelegateCollectionP",
+  "title" : "AuthFoundation.UsesDelegateCollection",
+  "type" : "unresolvable"
 },
-"doc://com.okta.mobile.oktaoauth2/documentation/OktaOAuth2": {
+"doc://OktaOAuth2/documentation/OktaOAuth2": {
   "abstract" : [
     {
       "text" : "Interact with Okta’s OAuth2 APIs to authenticate users, and interact with user resources.",
       "type" : "text"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/OktaOAuth2",
+  "identifier" : "doc:\/\/OktaOAuth2\/documentation\/OktaOAuth2",
   "kind" : "symbol",
   "role" : "collection",
   "title" : "OktaOAuth2",
   "type" : "topic",
   "url" : "\/documentation\/oktaoauth2"
 },
-"doc://com.okta.mobile.oktaoauth2/documentation/OktaOAuth2/LogoutFlow": {
+"doc://OktaOAuth2/documentation/OktaOAuth2/LogoutFlow": {
   "abstract" : [
     {
       "text" : "A protocol defining a type of logout flow.",
@@ -209,7 +182,7 @@
       "text" : "LogoutFlow"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/OktaOAuth2\/LogoutFlow",
+  "identifier" : "doc:\/\/OktaOAuth2\/documentation\/OktaOAuth2\/LogoutFlow",
   "kind" : "symbol",
   "navigatorTitle" : [
     {
@@ -222,7 +195,7 @@
   "type" : "topic",
   "url" : "\/documentation\/oktaoauth2\/logoutflow"
 },
-"doc://com.okta.mobile.oktaoauth2/documentation/OktaOAuth2/LogoutFlow/cancel()": {
+"doc://OktaOAuth2/documentation/OktaOAuth2/LogoutFlow/cancel()": {
   "abstract" : [
     {
       "text" : "Cancels the logout flow.",
@@ -247,7 +220,7 @@
       "text" : "()"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/OktaOAuth2\/LogoutFlow\/cancel()",
+  "identifier" : "doc:\/\/OktaOAuth2\/documentation\/OktaOAuth2\/LogoutFlow\/cancel()",
   "kind" : "symbol",
   "required" : true,
   "role" : "symbol",
@@ -255,7 +228,7 @@
   "type" : "topic",
   "url" : "\/documentation\/oktaoauth2\/logoutflow\/cancel()"
 },
-"doc://com.okta.mobile.oktaoauth2/documentation/OktaOAuth2/LogoutFlow/inProgress": {
+"doc://OktaOAuth2/documentation/OktaOAuth2/LogoutFlow/inProgress": {
   "abstract" : [
     {
       "text" : "Indicates if this flow is currently in progress.",
@@ -285,7 +258,7 @@
       "text" : "Bool"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/OktaOAuth2\/LogoutFlow\/inProgress",
+  "identifier" : "doc:\/\/OktaOAuth2\/documentation\/OktaOAuth2\/LogoutFlow\/inProgress",
   "kind" : "symbol",
   "required" : true,
   "role" : "symbol",
@@ -293,7 +266,7 @@
   "type" : "topic",
   "url" : "\/documentation\/oktaoauth2\/logoutflow\/inprogress"
 },
-"doc://com.okta.mobile.oktaoauth2/documentation/OktaOAuth2/LogoutFlow/reset()": {
+"doc://OktaOAuth2/documentation/OktaOAuth2/LogoutFlow/reset()": {
   "abstract" : [
     {
       "text" : "Resets the logout flow.",
@@ -318,7 +291,7 @@
       "text" : "()"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/OktaOAuth2\/LogoutFlow\/reset()",
+  "identifier" : "doc:\/\/OktaOAuth2\/documentation\/OktaOAuth2\/LogoutFlow\/reset()",
   "kind" : "symbol",
   "required" : true,
   "role" : "symbol",
@@ -326,7 +299,7 @@
   "type" : "topic",
   "url" : "\/documentation\/oktaoauth2\/logoutflow\/reset()"
 },
-"doc://com.okta.mobile.oktaoauth2/documentation/OktaOAuth2/SessionLogoutFlow": {
+"doc://OktaOAuth2/documentation/OktaOAuth2/SessionLogoutFlow": {
   "abstract" : [
     {
       "text" : "An logout flow class that implements the Session Logout Flow.",
@@ -347,7 +320,7 @@
       "text" : "SessionLogoutFlow"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/OktaOAuth2\/SessionLogoutFlow",
+  "identifier" : "doc:\/\/OktaOAuth2\/documentation\/OktaOAuth2\/SessionLogoutFlow",
   "kind" : "symbol",
   "navigatorTitle" : [
     {

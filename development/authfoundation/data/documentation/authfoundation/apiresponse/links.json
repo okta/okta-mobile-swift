@@ -8,14 +8,14 @@
   "hierarchy" : {
     "paths" : [
       [
-        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation",
-        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/APIResponse"
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/APIResponse"
       ]
     ]
   },
   "identifier" : {
     "interfaceLanguage" : "swift",
-    "url" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/APIResponse\/links"
+    "url" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/APIResponse\/links"
   },
   "kind" : "symbol",
   "metadata" : {
@@ -36,6 +36,23 @@
       {
         "kind" : "text",
         "text" : ": ["
+      },
+      {
+        "kind" : "typeIdentifier",
+        "preciseIdentifier" : "s:14AuthFoundation11APIResponseV",
+        "text" : "APIResponse"
+      },
+      {
+        "kind" : "text",
+        "text" : "<"
+      },
+      {
+        "kind" : "typeIdentifier",
+        "text" : "T"
+      },
+      {
+        "kind" : "text",
+        "text" : ">."
       },
       {
         "kind" : "typeIdentifier",
@@ -94,7 +111,25 @@
               "text" : ": ["
             },
             {
-              "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/APIResponse\/Link",
+              "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/APIResponse",
+              "kind" : "typeIdentifier",
+              "preciseIdentifier" : "s:14AuthFoundation11APIResponseV",
+              "text" : "APIResponse"
+            },
+            {
+              "kind" : "text",
+              "text" : "<"
+            },
+            {
+              "kind" : "typeIdentifier",
+              "text" : "T"
+            },
+            {
+              "kind" : "text",
+              "text" : ">."
+            },
+            {
+              "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/APIResponse\/Link",
               "kind" : "typeIdentifier",
               "preciseIdentifier" : "s:14AuthFoundation11APIResponseV4LinkO",
               "text" : "Link"
@@ -120,7 +155,7 @@
   ],
   "schemaVersion" : {
     "major" : 0,
-    "minor" : 2,
+    "minor" : 3,
     "patch" : 0
   },
   "sections" : [
@@ -140,21 +175,21 @@
   ]
 , 
 "references": {
-"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation": {
+"doc://AuthFoundation/documentation/AuthFoundation": {
   "abstract" : [
     {
       "text" : "Library that provides foundational features used by Okta’s authentication libraries, as well as APIs used to work with tokens and user credentials.",
       "type" : "text"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation",
   "kind" : "symbol",
   "role" : "collection",
   "title" : "AuthFoundation",
   "type" : "topic",
   "url" : "\/documentation\/authfoundation"
 },
-"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/APIResponse": {
+"doc://AuthFoundation/documentation/AuthFoundation/APIResponse": {
   "abstract" : [
     {
       "text" : "Describes a response from an Okta request, which includes the supplied result, and other associated response metadata.",
@@ -175,7 +210,7 @@
       "text" : "APIResponse"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/APIResponse",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/APIResponse",
   "kind" : "symbol",
   "navigatorTitle" : [
     {
@@ -188,7 +223,7 @@
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/apiresponse"
 },
-"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/APIResponse/Link": {
+"doc://AuthFoundation/documentation/AuthFoundation/APIResponse/Link": {
   "abstract" : [
     {
       "text" : "Links between response resources.",
@@ -209,7 +244,7 @@
       "text" : "Link"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/APIResponse\/Link",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/APIResponse\/Link",
   "kind" : "symbol",
   "navigatorTitle" : [
     {
@@ -222,7 +257,7 @@
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/apiresponse\/link"
 },
-"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/APIResponse/links": {
+"doc://AuthFoundation/documentation/AuthFoundation/APIResponse/links": {
   "abstract" : [
     {
       "text" : "Information about links between related resources.",
@@ -248,6 +283,23 @@
     },
     {
       "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:14AuthFoundation11APIResponseV",
+      "text" : "APIResponse"
+    },
+    {
+      "kind" : "text",
+      "text" : "<"
+    },
+    {
+      "kind" : "typeIdentifier",
+      "text" : "T"
+    },
+    {
+      "kind" : "text",
+      "text" : ">."
+    },
+    {
+      "kind" : "typeIdentifier",
       "preciseIdentifier" : "s:14AuthFoundation11APIResponseV4LinkO",
       "text" : "Link"
     },
@@ -265,7 +317,7 @@
       "text" : "]"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/APIResponse\/links",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/APIResponse\/links",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "links",

@@ -1,30 +1,30 @@
 {
   "abstract" : [
     {
-      "text" : "The value of the authorization header, or ",
+      "text" : "Inherited from ",
       "type" : "text"
     },
     {
-      "code" : "nil",
+      "code" : "APIAuthorization.authorizationHeader",
       "type" : "codeVoice"
     },
     {
-      "text" : " if none should be set.",
+      "text" : ".",
       "type" : "text"
     }
   ],
   "hierarchy" : {
     "paths" : [
       [
-        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation",
-        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/Token",
-        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/Token\/APIAuthorization-Implementations"
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/Token",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/Token\/APIAuthorization-Implementations"
       ]
     ]
   },
   "identifier" : {
     "interfaceLanguage" : "swift",
-    "url" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/Token\/authorizationHeader"
+    "url" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/Token\/authorizationHeader"
   },
   "kind" : "symbol",
   "metadata" : {
@@ -119,7 +119,7 @@
   ],
   "schemaVersion" : {
     "major" : 0,
-    "minor" : 2,
+    "minor" : 3,
     "patch" : 0
   },
   "sections" : [
@@ -139,21 +139,21 @@
   ]
 , 
 "references": {
-"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation": {
+"doc://AuthFoundation/documentation/AuthFoundation": {
   "abstract" : [
     {
       "text" : "Library that provides foundational features used by Okta’s authentication libraries, as well as APIs used to work with tokens and user credentials.",
       "type" : "text"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation",
   "kind" : "symbol",
   "role" : "collection",
   "title" : "AuthFoundation",
   "type" : "topic",
   "url" : "\/documentation\/authfoundation"
 },
-"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/Token": {
+"doc://AuthFoundation/documentation/AuthFoundation/Token": {
   "abstract" : [
     {
       "text" : "Token information representing a user’s access to a resource server, including access token, refresh token, and other related information.",
@@ -174,7 +174,7 @@
       "text" : "Token"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/Token",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/Token",
   "kind" : "symbol",
   "navigatorTitle" : [
     {
@@ -187,31 +187,20 @@
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/token"
 },
-"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/Token/APIAuthorization-Implementations": {
+"doc://AuthFoundation/documentation/AuthFoundation/Token/APIAuthorization-Implementations": {
   "abstract" : [
 
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/Token\/APIAuthorization-Implementations",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/Token\/APIAuthorization-Implementations",
   "kind" : "article",
   "role" : "collectionGroup",
   "title" : "APIAuthorization Implementations",
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/token\/apiauthorization-implementations"
 },
-"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/Token/authorizationHeader": {
+"doc://AuthFoundation/documentation/AuthFoundation/Token/authorizationHeader": {
   "abstract" : [
-    {
-      "text" : "The value of the authorization header, or ",
-      "type" : "text"
-    },
-    {
-      "code" : "nil",
-      "type" : "codeVoice"
-    },
-    {
-      "text" : " if none should be set.",
-      "type" : "text"
-    }
+
   ],
   "fragments" : [
     {
@@ -240,7 +229,7 @@
       "text" : "?"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/Token\/authorizationHeader",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/Token\/authorizationHeader",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "authorizationHeader",

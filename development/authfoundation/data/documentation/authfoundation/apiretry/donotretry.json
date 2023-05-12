@@ -8,14 +8,14 @@
   "hierarchy" : {
     "paths" : [
       [
-        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation",
-        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/APIRetry"
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/APIRetry"
       ]
     ]
   },
   "identifier" : {
     "interfaceLanguage" : "swift",
-    "url" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/APIRetry\/doNotRetry"
+    "url" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/APIRetry\/doNotRetry"
   },
   "kind" : "symbol",
   "metadata" : {
@@ -75,7 +75,7 @@
   ],
   "schemaVersion" : {
     "major" : 0,
-    "minor" : 2,
+    "minor" : 3,
     "patch" : 0
   },
   "sections" : [
@@ -95,21 +95,21 @@
   ]
 , 
 "references": {
-"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation": {
+"doc://AuthFoundation/documentation/AuthFoundation": {
   "abstract" : [
     {
       "text" : "Library that provides foundational features used by Okta’s authentication libraries, as well as APIs used to work with tokens and user credentials.",
       "type" : "text"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation",
   "kind" : "symbol",
   "role" : "collection",
   "title" : "AuthFoundation",
   "type" : "topic",
   "url" : "\/documentation\/authfoundation"
 },
-"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/APIRetry": {
+"doc://AuthFoundation/documentation/AuthFoundation/APIRetry": {
   "abstract" : [
     {
       "text" : "List of retry options",
@@ -130,7 +130,7 @@
       "text" : "APIRetry"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/APIRetry",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/APIRetry",
   "kind" : "symbol",
   "navigatorTitle" : [
     {
@@ -143,7 +143,7 @@
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/apiretry"
 },
-"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/APIRetry/doNotRetry": {
+"doc://AuthFoundation/documentation/AuthFoundation/APIRetry/doNotRetry": {
   "abstract" : [
     {
       "text" : "Indicates the APIRequest should not be retried.",
@@ -164,7 +164,7 @@
       "text" : "doNotRetry"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/APIRetry\/doNotRetry",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/APIRetry\/doNotRetry",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "APIRetry.doNotRetry",

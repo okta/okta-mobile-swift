@@ -8,13 +8,13 @@
   "hierarchy" : {
     "paths" : [
       [
-        "doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/OktaOAuth2"
+        "doc:\/\/OktaOAuth2\/documentation\/OktaOAuth2"
       ]
     ]
   },
   "identifier" : {
     "interfaceLanguage" : "swift",
-    "url" : "doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/OktaOAuth2\/SessionLogoutFlow\/Context-swift.struct"
+    "url" : "doc:\/\/OktaOAuth2\/documentation\/OktaOAuth2\/SessionLogoutFlow\/Context-swift.struct"
   },
   "kind" : "symbol",
   "metadata" : {
@@ -81,9 +81,9 @@
   "relationshipsSections" : [
     {
       "identifiers" : [
-        "doc:\/\/com.okta.mobile.oktaoauth2\/Se",
-        "doc:\/\/com.okta.mobile.oktaoauth2\/SE",
-        "doc:\/\/com.okta.mobile.oktaoauth2\/SQ"
+        "doc:\/\/OktaOAuth2\/Se",
+        "doc:\/\/OktaOAuth2\/SE",
+        "doc:\/\/OktaOAuth2\/SQ"
       ],
       "kind" : "relationships",
       "title" : "Conforms To",
@@ -92,7 +92,7 @@
   ],
   "schemaVersion" : {
     "major" : 0,
-    "minor" : 2,
+    "minor" : 3,
     "patch" : 0
   },
   "sections" : [
@@ -102,11 +102,11 @@
     {
       "generated" : true,
       "identifiers" : [
-        "doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/OktaOAuth2\/AuthorizationCodeFlow",
-        "doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/OktaOAuth2\/AuthorizationCodeFlowDelegate",
-        "doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/OktaOAuth2\/AuthorizationCodeFlow\/Context-swift.struct",
-        "doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/OktaOAuth2\/SessionLogoutFlow",
-        "doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/OktaOAuth2\/SessionLogoutFlowDelegate"
+        "doc:\/\/OktaOAuth2\/documentation\/OktaOAuth2\/AuthorizationCodeFlow",
+        "doc:\/\/OktaOAuth2\/documentation\/OktaOAuth2\/AuthorizationCodeFlowDelegate",
+        "doc:\/\/OktaOAuth2\/documentation\/OktaOAuth2\/AuthorizationCodeFlow\/Context-swift.struct",
+        "doc:\/\/OktaOAuth2\/documentation\/OktaOAuth2\/SessionLogoutFlow",
+        "doc:\/\/OktaOAuth2\/documentation\/OktaOAuth2\/SessionLogoutFlowDelegate"
       ],
       "title" : "Authorization Code Flow"
     }
@@ -114,23 +114,23 @@
   "topicSections" : [
     {
       "identifiers" : [
-        "doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/OktaOAuth2\/SessionLogoutFlow\/Context-swift.struct\/init(from:)",
-        "doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/OktaOAuth2\/SessionLogoutFlow\/Context-swift.struct\/init(idToken:state:)"
+        "doc:\/\/OktaOAuth2\/documentation\/OktaOAuth2\/SessionLogoutFlow\/Context-swift.struct\/init(from:)",
+        "doc:\/\/OktaOAuth2\/documentation\/OktaOAuth2\/SessionLogoutFlow\/Context-swift.struct\/init(idToken:state:)"
       ],
       "title" : "Initializers"
     },
     {
       "identifiers" : [
-        "doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/OktaOAuth2\/SessionLogoutFlow\/Context-swift.struct\/idToken",
-        "doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/OktaOAuth2\/SessionLogoutFlow\/Context-swift.struct\/logoutURL",
-        "doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/OktaOAuth2\/SessionLogoutFlow\/Context-swift.struct\/state"
+        "doc:\/\/OktaOAuth2\/documentation\/OktaOAuth2\/SessionLogoutFlow\/Context-swift.struct\/idToken",
+        "doc:\/\/OktaOAuth2\/documentation\/OktaOAuth2\/SessionLogoutFlow\/Context-swift.struct\/logoutURL",
+        "doc:\/\/OktaOAuth2\/documentation\/OktaOAuth2\/SessionLogoutFlow\/Context-swift.struct\/state"
       ],
       "title" : "Instance Properties"
     },
     {
       "generated" : true,
       "identifiers" : [
-        "doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/OktaOAuth2\/SessionLogoutFlow\/Context-swift.struct\/Equatable-Implementations"
+        "doc:\/\/OktaOAuth2\/documentation\/OktaOAuth2\/SessionLogoutFlow\/Context-swift.struct\/Equatable-Implementations"
       ],
       "title" : "Default Implementations"
     }
@@ -149,36 +149,36 @@
   ]
 , 
 "references": {
-"doc://com.okta.mobile.oktaoauth2/SE": {
-  "identifier" : "doc:\/\/com.okta.mobile.oktaoauth2\/SE",
+"doc://OktaOAuth2/SE": {
+  "identifier" : "doc:\/\/OktaOAuth2\/SE",
   "title" : "Swift.Encodable",
   "type" : "unresolvable"
 },
-"doc://com.okta.mobile.oktaoauth2/SQ": {
-  "identifier" : "doc:\/\/com.okta.mobile.oktaoauth2\/SQ",
+"doc://OktaOAuth2/SQ": {
+  "identifier" : "doc:\/\/OktaOAuth2\/SQ",
   "title" : "Swift.Equatable",
   "type" : "unresolvable"
 },
-"doc://com.okta.mobile.oktaoauth2/Se": {
-  "identifier" : "doc:\/\/com.okta.mobile.oktaoauth2\/Se",
+"doc://OktaOAuth2/Se": {
+  "identifier" : "doc:\/\/OktaOAuth2\/Se",
   "title" : "Swift.Decodable",
   "type" : "unresolvable"
 },
-"doc://com.okta.mobile.oktaoauth2/documentation/OktaOAuth2": {
+"doc://OktaOAuth2/documentation/OktaOAuth2": {
   "abstract" : [
     {
       "text" : "Interact with Okta’s OAuth2 APIs to authenticate users, and interact with user resources.",
       "type" : "text"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/OktaOAuth2",
+  "identifier" : "doc:\/\/OktaOAuth2\/documentation\/OktaOAuth2",
   "kind" : "symbol",
   "role" : "collection",
   "title" : "OktaOAuth2",
   "type" : "topic",
   "url" : "\/documentation\/oktaoauth2"
 },
-"doc://com.okta.mobile.oktaoauth2/documentation/OktaOAuth2/AuthorizationCodeFlow": {
+"doc://OktaOAuth2/documentation/OktaOAuth2/AuthorizationCodeFlow": {
   "abstract" : [
     {
       "text" : "An authentication flow class that implements the Authorization Code Flow exchange.",
@@ -199,7 +199,7 @@
       "text" : "AuthorizationCodeFlow"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/OktaOAuth2\/AuthorizationCodeFlow",
+  "identifier" : "doc:\/\/OktaOAuth2\/documentation\/OktaOAuth2\/AuthorizationCodeFlow",
   "kind" : "symbol",
   "navigatorTitle" : [
     {
@@ -212,7 +212,7 @@
   "type" : "topic",
   "url" : "\/documentation\/oktaoauth2\/authorizationcodeflow"
 },
-"doc://com.okta.mobile.oktaoauth2/documentation/OktaOAuth2/AuthorizationCodeFlow/Context-swift.struct": {
+"doc://OktaOAuth2/documentation/OktaOAuth2/AuthorizationCodeFlow/Context-swift.struct": {
   "abstract" : [
     {
       "text" : "A model representing the context and current state for an authorization session.",
@@ -233,7 +233,7 @@
       "text" : "Context"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/OktaOAuth2\/AuthorizationCodeFlow\/Context-swift.struct",
+  "identifier" : "doc:\/\/OktaOAuth2\/documentation\/OktaOAuth2\/AuthorizationCodeFlow\/Context-swift.struct",
   "kind" : "symbol",
   "navigatorTitle" : [
     {
@@ -246,14 +246,14 @@
   "type" : "topic",
   "url" : "\/documentation\/oktaoauth2\/authorizationcodeflow\/context-swift.struct"
 },
-"doc://com.okta.mobile.oktaoauth2/documentation/OktaOAuth2/AuthorizationCodeFlowDelegate": {
+"doc://OktaOAuth2/documentation/OktaOAuth2/AuthorizationCodeFlowDelegate": {
   "abstract" : [
     {
       "text" : "The delegate of a ",
       "type" : "text"
     },
     {
-      "identifier" : "doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/OktaOAuth2\/AuthorizationCodeFlow",
+      "identifier" : "doc:\/\/OktaOAuth2\/documentation\/OktaOAuth2\/AuthorizationCodeFlow",
       "isActive" : true,
       "type" : "reference"
     },
@@ -276,7 +276,7 @@
       "text" : "AuthorizationCodeFlowDelegate"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/OktaOAuth2\/AuthorizationCodeFlowDelegate",
+  "identifier" : "doc:\/\/OktaOAuth2\/documentation\/OktaOAuth2\/AuthorizationCodeFlowDelegate",
   "kind" : "symbol",
   "navigatorTitle" : [
     {
@@ -289,7 +289,7 @@
   "type" : "topic",
   "url" : "\/documentation\/oktaoauth2\/authorizationcodeflowdelegate"
 },
-"doc://com.okta.mobile.oktaoauth2/documentation/OktaOAuth2/SessionLogoutFlow": {
+"doc://OktaOAuth2/documentation/OktaOAuth2/SessionLogoutFlow": {
   "abstract" : [
     {
       "text" : "An logout flow class that implements the Session Logout Flow.",
@@ -310,7 +310,7 @@
       "text" : "SessionLogoutFlow"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/OktaOAuth2\/SessionLogoutFlow",
+  "identifier" : "doc:\/\/OktaOAuth2\/documentation\/OktaOAuth2\/SessionLogoutFlow",
   "kind" : "symbol",
   "navigatorTitle" : [
     {
@@ -323,7 +323,7 @@
   "type" : "topic",
   "url" : "\/documentation\/oktaoauth2\/sessionlogoutflow"
 },
-"doc://com.okta.mobile.oktaoauth2/documentation/OktaOAuth2/SessionLogoutFlow/Context-swift.struct": {
+"doc://OktaOAuth2/documentation/OktaOAuth2/SessionLogoutFlow/Context-swift.struct": {
   "abstract" : [
     {
       "text" : "A model representing the context and current state for a logout session.",
@@ -344,7 +344,7 @@
       "text" : "Context"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/OktaOAuth2\/SessionLogoutFlow\/Context-swift.struct",
+  "identifier" : "doc:\/\/OktaOAuth2\/documentation\/OktaOAuth2\/SessionLogoutFlow\/Context-swift.struct",
   "kind" : "symbol",
   "navigatorTitle" : [
     {
@@ -357,18 +357,18 @@
   "type" : "topic",
   "url" : "\/documentation\/oktaoauth2\/sessionlogoutflow\/context-swift.struct"
 },
-"doc://com.okta.mobile.oktaoauth2/documentation/OktaOAuth2/SessionLogoutFlow/Context-swift.struct/Equatable-Implementations": {
+"doc://OktaOAuth2/documentation/OktaOAuth2/SessionLogoutFlow/Context-swift.struct/Equatable-Implementations": {
   "abstract" : [
 
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/OktaOAuth2\/SessionLogoutFlow\/Context-swift.struct\/Equatable-Implementations",
+  "identifier" : "doc:\/\/OktaOAuth2\/documentation\/OktaOAuth2\/SessionLogoutFlow\/Context-swift.struct\/Equatable-Implementations",
   "kind" : "article",
   "role" : "collectionGroup",
   "title" : "Equatable Implementations",
   "type" : "topic",
   "url" : "\/documentation\/oktaoauth2\/sessionlogoutflow\/context-swift.struct\/equatable-implementations"
 },
-"doc://com.okta.mobile.oktaoauth2/documentation/OktaOAuth2/SessionLogoutFlow/Context-swift.struct/idToken": {
+"doc://OktaOAuth2/documentation/OktaOAuth2/SessionLogoutFlow/Context-swift.struct/idToken": {
   "abstract" : [
     {
       "text" : "The ID token string used for log-out.",
@@ -398,19 +398,16 @@
       "text" : "String"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/OktaOAuth2\/SessionLogoutFlow\/Context-swift.struct\/idToken",
+  "identifier" : "doc:\/\/OktaOAuth2\/documentation\/OktaOAuth2\/SessionLogoutFlow\/Context-swift.struct\/idToken",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "idToken",
   "type" : "topic",
   "url" : "\/documentation\/oktaoauth2\/sessionlogoutflow\/context-swift.struct\/idtoken"
 },
-"doc://com.okta.mobile.oktaoauth2/documentation/OktaOAuth2/SessionLogoutFlow/Context-swift.struct/init(from:)": {
+"doc://OktaOAuth2/documentation/OktaOAuth2/SessionLogoutFlow/Context-swift.struct/init(from:)": {
   "abstract" : [
-    {
-      "text" : "Creates a new instance by decoding from the given decoder.",
-      "type" : "text"
-    }
+
   ],
   "fragments" : [
     {
@@ -443,14 +440,14 @@
       "text" : "throws"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/OktaOAuth2\/SessionLogoutFlow\/Context-swift.struct\/init(from:)",
+  "identifier" : "doc:\/\/OktaOAuth2\/documentation\/OktaOAuth2\/SessionLogoutFlow\/Context-swift.struct\/init(from:)",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "init(from:)",
   "type" : "topic",
   "url" : "\/documentation\/oktaoauth2\/sessionlogoutflow\/context-swift.struct\/init(from:)"
 },
-"doc://com.okta.mobile.oktaoauth2/documentation/OktaOAuth2/SessionLogoutFlow/Context-swift.struct/init(idToken:state:)": {
+"doc://OktaOAuth2/documentation/OktaOAuth2/SessionLogoutFlow/Context-swift.struct/init(idToken:state:)": {
   "abstract" : [
     {
       "text" : "Initializer for creating a context.",
@@ -501,14 +498,14 @@
       "text" : "?)"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/OktaOAuth2\/SessionLogoutFlow\/Context-swift.struct\/init(idToken:state:)",
+  "identifier" : "doc:\/\/OktaOAuth2\/documentation\/OktaOAuth2\/SessionLogoutFlow\/Context-swift.struct\/init(idToken:state:)",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "init(idToken:state:)",
   "type" : "topic",
   "url" : "\/documentation\/oktaoauth2\/sessionlogoutflow\/context-swift.struct\/init(idtoken:state:)"
 },
-"doc://com.okta.mobile.oktaoauth2/documentation/OktaOAuth2/SessionLogoutFlow/Context-swift.struct/logoutURL": {
+"doc://OktaOAuth2/documentation/OktaOAuth2/SessionLogoutFlow/Context-swift.struct/logoutURL": {
   "abstract" : [
     {
       "text" : "The current logout URL, or ",
@@ -550,14 +547,14 @@
       "text" : "?"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/OktaOAuth2\/SessionLogoutFlow\/Context-swift.struct\/logoutURL",
+  "identifier" : "doc:\/\/OktaOAuth2\/documentation\/OktaOAuth2\/SessionLogoutFlow\/Context-swift.struct\/logoutURL",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "logoutURL",
   "type" : "topic",
   "url" : "\/documentation\/oktaoauth2\/sessionlogoutflow\/context-swift.struct\/logouturl"
 },
-"doc://com.okta.mobile.oktaoauth2/documentation/OktaOAuth2/SessionLogoutFlow/Context-swift.struct/state": {
+"doc://OktaOAuth2/documentation/OktaOAuth2/SessionLogoutFlow/Context-swift.struct/state": {
   "abstract" : [
     {
       "text" : "The state string to use when creating an logout URL.",
@@ -587,21 +584,21 @@
       "text" : "String"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/OktaOAuth2\/SessionLogoutFlow\/Context-swift.struct\/state",
+  "identifier" : "doc:\/\/OktaOAuth2\/documentation\/OktaOAuth2\/SessionLogoutFlow\/Context-swift.struct\/state",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "state",
   "type" : "topic",
   "url" : "\/documentation\/oktaoauth2\/sessionlogoutflow\/context-swift.struct\/state"
 },
-"doc://com.okta.mobile.oktaoauth2/documentation/OktaOAuth2/SessionLogoutFlowDelegate": {
+"doc://OktaOAuth2/documentation/OktaOAuth2/SessionLogoutFlowDelegate": {
   "abstract" : [
     {
       "text" : "The delegate of a ",
       "type" : "text"
     },
     {
-      "identifier" : "doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/OktaOAuth2\/SessionLogoutFlow",
+      "identifier" : "doc:\/\/OktaOAuth2\/documentation\/OktaOAuth2\/SessionLogoutFlow",
       "isActive" : true,
       "type" : "reference"
     },
@@ -624,7 +621,7 @@
       "text" : "SessionLogoutFlowDelegate"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/OktaOAuth2\/SessionLogoutFlowDelegate",
+  "identifier" : "doc:\/\/OktaOAuth2\/documentation\/OktaOAuth2\/SessionLogoutFlowDelegate",
   "kind" : "symbol",
   "navigatorTitle" : [
     {

@@ -1,22 +1,30 @@
 {
   "abstract" : [
     {
-      "text" : "No overview available.",
+      "text" : "Inherited from ",
+      "type" : "text"
+    },
+    {
+      "code" : "UsesDelegateCollection.Delegate",
+      "type" : "codeVoice"
+    },
+    {
+      "text" : ".",
       "type" : "text"
     }
   ],
   "hierarchy" : {
     "paths" : [
       [
-        "doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/OktaOAuth2",
-        "doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/OktaOAuth2\/DeviceAuthorizationFlow",
-        "doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/OktaOAuth2\/DeviceAuthorizationFlow\/UsesDelegateCollection-Implementations"
+        "doc:\/\/OktaOAuth2\/documentation\/OktaOAuth2",
+        "doc:\/\/OktaOAuth2\/documentation\/OktaOAuth2\/DeviceAuthorizationFlow",
+        "doc:\/\/OktaOAuth2\/documentation\/OktaOAuth2\/DeviceAuthorizationFlow\/UsesDelegateCollection-Implementations"
       ]
     ]
   },
   "identifier" : {
     "interfaceLanguage" : "swift",
-    "url" : "doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/OktaOAuth2\/DeviceAuthorizationFlow\/Delegate"
+    "url" : "doc:\/\/OktaOAuth2\/documentation\/OktaOAuth2\/DeviceAuthorizationFlow\/Delegate"
   },
   "kind" : "symbol",
   "metadata" : {
@@ -80,7 +88,7 @@
               "text" : " = "
             },
             {
-              "identifier" : "doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/OktaOAuth2\/DeviceAuthorizationFlowDelegate",
+              "identifier" : "doc:\/\/OktaOAuth2\/documentation\/OktaOAuth2\/DeviceAuthorizationFlowDelegate",
               "kind" : "typeIdentifier",
               "preciseIdentifier" : "s:10OktaOAuth231DeviceAuthorizationFlowDelegateP",
               "text" : "DeviceAuthorizationFlowDelegate"
@@ -93,7 +101,7 @@
   ],
   "schemaVersion" : {
     "major" : 0,
-    "minor" : 2,
+    "minor" : 3,
     "patch" : 0
   },
   "sections" : [
@@ -113,21 +121,21 @@
   ]
 , 
 "references": {
-"doc://com.okta.mobile.oktaoauth2/documentation/OktaOAuth2": {
+"doc://OktaOAuth2/documentation/OktaOAuth2": {
   "abstract" : [
     {
       "text" : "Interact with Okta’s OAuth2 APIs to authenticate users, and interact with user resources.",
       "type" : "text"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/OktaOAuth2",
+  "identifier" : "doc:\/\/OktaOAuth2\/documentation\/OktaOAuth2",
   "kind" : "symbol",
   "role" : "collection",
   "title" : "OktaOAuth2",
   "type" : "topic",
   "url" : "\/documentation\/oktaoauth2"
 },
-"doc://com.okta.mobile.oktaoauth2/documentation/OktaOAuth2/DeviceAuthorizationFlow": {
+"doc://OktaOAuth2/documentation/OktaOAuth2/DeviceAuthorizationFlow": {
   "abstract" : [
     {
       "text" : "An authentication flow class that implements the Device Authorization Grant flow exchange.",
@@ -148,7 +156,7 @@
       "text" : "DeviceAuthorizationFlow"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/OktaOAuth2\/DeviceAuthorizationFlow",
+  "identifier" : "doc:\/\/OktaOAuth2\/documentation\/OktaOAuth2\/DeviceAuthorizationFlow",
   "kind" : "symbol",
   "navigatorTitle" : [
     {
@@ -161,7 +169,7 @@
   "type" : "topic",
   "url" : "\/documentation\/oktaoauth2\/deviceauthorizationflow"
 },
-"doc://com.okta.mobile.oktaoauth2/documentation/OktaOAuth2/DeviceAuthorizationFlow/Delegate": {
+"doc://OktaOAuth2/documentation/OktaOAuth2/DeviceAuthorizationFlow/Delegate": {
   "abstract" : [
 
   ],
@@ -179,7 +187,7 @@
       "text" : "Delegate"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/OktaOAuth2\/DeviceAuthorizationFlow\/Delegate",
+  "identifier" : "doc:\/\/OktaOAuth2\/documentation\/OktaOAuth2\/DeviceAuthorizationFlow\/Delegate",
   "kind" : "symbol",
   "navigatorTitle" : [
     {
@@ -192,25 +200,25 @@
   "type" : "topic",
   "url" : "\/documentation\/oktaoauth2\/deviceauthorizationflow\/delegate"
 },
-"doc://com.okta.mobile.oktaoauth2/documentation/OktaOAuth2/DeviceAuthorizationFlow/UsesDelegateCollection-Implementations": {
+"doc://OktaOAuth2/documentation/OktaOAuth2/DeviceAuthorizationFlow/UsesDelegateCollection-Implementations": {
   "abstract" : [
 
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/OktaOAuth2\/DeviceAuthorizationFlow\/UsesDelegateCollection-Implementations",
+  "identifier" : "doc:\/\/OktaOAuth2\/documentation\/OktaOAuth2\/DeviceAuthorizationFlow\/UsesDelegateCollection-Implementations",
   "kind" : "article",
   "role" : "collectionGroup",
   "title" : "UsesDelegateCollection Implementations",
   "type" : "topic",
   "url" : "\/documentation\/oktaoauth2\/deviceauthorizationflow\/usesdelegatecollection-implementations"
 },
-"doc://com.okta.mobile.oktaoauth2/documentation/OktaOAuth2/DeviceAuthorizationFlowDelegate": {
+"doc://OktaOAuth2/documentation/OktaOAuth2/DeviceAuthorizationFlowDelegate": {
   "abstract" : [
     {
       "text" : "The delegate of ",
       "type" : "text"
     },
     {
-      "identifier" : "doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/OktaOAuth2\/DeviceAuthorizationFlow",
+      "identifier" : "doc:\/\/OktaOAuth2\/documentation\/OktaOAuth2\/DeviceAuthorizationFlow",
       "isActive" : true,
       "type" : "reference"
     },
@@ -233,7 +241,7 @@
       "text" : "DeviceAuthorizationFlowDelegate"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/OktaOAuth2\/DeviceAuthorizationFlowDelegate",
+  "identifier" : "doc:\/\/OktaOAuth2\/documentation\/OktaOAuth2\/DeviceAuthorizationFlowDelegate",
   "kind" : "symbol",
   "navigatorTitle" : [
     {

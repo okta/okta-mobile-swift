@@ -1,22 +1,30 @@
 {
   "abstract" : [
     {
-      "text" : "No overview available.",
+      "text" : "Inherited from ",
+      "type" : "text"
+    },
+    {
+      "code" : "Equatable.!=(_:_:)",
+      "type" : "codeVoice"
+    },
+    {
+      "text" : ".",
       "type" : "text"
     }
   ],
   "hierarchy" : {
     "paths" : [
       [
-        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation",
-        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/APIResponseResult",
-        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/APIResponseResult\/Equatable-Implementations"
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/APIResponseResult",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/APIResponseResult\/Equatable-Implementations"
       ]
     ]
   },
   "identifier" : {
     "interfaceLanguage" : "swift",
-    "url" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/APIResponseResult\/!=(_:_:)"
+    "url" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/APIResponseResult\/!=(_:_:)"
   },
   "kind" : "symbol",
   "metadata" : {
@@ -167,7 +175,7 @@
   ],
   "schemaVersion" : {
     "major" : 0,
-    "minor" : 2,
+    "minor" : 3,
     "patch" : 0
   },
   "sections" : [
@@ -187,21 +195,21 @@
   ]
 , 
 "references": {
-"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation": {
+"doc://AuthFoundation/documentation/AuthFoundation": {
   "abstract" : [
     {
       "text" : "Library that provides foundational features used by Okta’s authentication libraries, as well as APIs used to work with tokens and user credentials.",
       "type" : "text"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation",
   "kind" : "symbol",
   "role" : "collection",
   "title" : "AuthFoundation",
   "type" : "topic",
   "url" : "\/documentation\/authfoundation"
 },
-"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/APIResponseResult": {
+"doc://AuthFoundation/documentation/AuthFoundation/APIResponseResult": {
   "abstract" : [
     {
       "text" : "Defines the possible results for an API request.",
@@ -222,7 +230,7 @@
       "text" : "APIResponseResult"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/APIResponseResult",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/APIResponseResult",
   "kind" : "symbol",
   "navigatorTitle" : [
     {
@@ -235,7 +243,7 @@
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/apiresponseresult"
 },
-"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/APIResponseResult/!=(_:_:)": {
+"doc://AuthFoundation/documentation/AuthFoundation/APIResponseResult/!=(_:_:)": {
   "abstract" : [
 
   ],
@@ -290,18 +298,18 @@
       "text" : "Bool"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/APIResponseResult\/!=(_:_:)",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/APIResponseResult\/!=(_:_:)",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "!=(_:_:)",
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/apiresponseresult\/!=(_:_:)"
 },
-"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/APIResponseResult/Equatable-Implementations": {
+"doc://AuthFoundation/documentation/AuthFoundation/APIResponseResult/Equatable-Implementations": {
   "abstract" : [
 
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/APIResponseResult\/Equatable-Implementations",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/APIResponseResult\/Equatable-Implementations",
   "kind" : "article",
   "role" : "collectionGroup",
   "title" : "Equatable Implementations",

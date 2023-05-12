@@ -8,8 +8,8 @@
   "defaultImplementationsSections" : [
     {
       "identifiers" : [
-        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/HasClaims\/subscript(_:)-5oltt",
-        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/HasClaims\/subscript(_:)-36se2"
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/HasClaims\/subscript(_:)-5oltt",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/HasClaims\/subscript(_:)-36se2"
       ],
       "title" : "HasClaims Implementations"
     }
@@ -17,14 +17,14 @@
   "hierarchy" : {
     "paths" : [
       [
-        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation",
-        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/HasClaims"
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/HasClaims"
       ]
     ]
   },
   "identifier" : {
     "interfaceLanguage" : "swift",
-    "url" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/HasClaims\/subscript(_:)-3hvf1"
+    "url" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/HasClaims\/subscript(_:)-3hvf1"
   },
   "kind" : "symbol",
   "metadata" : {
@@ -57,7 +57,6 @@
       },
       {
         "kind" : "typeIdentifier",
-        "preciseIdentifier" : "s:14AuthFoundation9HasClaimsPyqd__SgAA5ClaimOcluip1TL_qd__mfp",
         "text" : "T"
       },
       {
@@ -112,7 +111,7 @@
               "text" : ": "
             },
             {
-              "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/Claim",
+              "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/Claim",
               "kind" : "typeIdentifier",
               "preciseIdentifier" : "s:14AuthFoundation5ClaimO",
               "text" : "Claim"
@@ -123,7 +122,6 @@
             },
             {
               "kind" : "typeIdentifier",
-              "preciseIdentifier" : "s:14AuthFoundation9HasClaimsPyqd__SgAA5ClaimOcluip1TL_qd__mfp",
               "text" : "T"
             },
             {
@@ -146,7 +144,7 @@
   ],
   "schemaVersion" : {
     "major" : 0,
-    "minor" : 2,
+    "minor" : 3,
     "patch" : 0
   },
   "sections" : [
@@ -166,21 +164,21 @@
   ]
 , 
 "references": {
-"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation": {
+"doc://AuthFoundation/documentation/AuthFoundation": {
   "abstract" : [
     {
       "text" : "Library that provides foundational features used by Okta’s authentication libraries, as well as APIs used to work with tokens and user credentials.",
       "type" : "text"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation",
   "kind" : "symbol",
   "role" : "collection",
   "title" : "AuthFoundation",
   "type" : "topic",
   "url" : "\/documentation\/authfoundation"
 },
-"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/Claim": {
+"doc://AuthFoundation/documentation/AuthFoundation/Claim": {
   "abstract" : [
     {
       "text" : "List of registered and public claims.",
@@ -201,7 +199,7 @@
       "text" : "Claim"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/Claim",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/Claim",
   "kind" : "symbol",
   "navigatorTitle" : [
     {
@@ -214,7 +212,7 @@
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/claim"
 },
-"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/HasClaims": {
+"doc://AuthFoundation/documentation/AuthFoundation/HasClaims": {
   "abstract" : [
     {
       "text" : "Used by classes that contains OAuth2 claims.",
@@ -235,7 +233,7 @@
       "text" : "HasClaims"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/HasClaims",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/HasClaims",
   "kind" : "symbol",
   "navigatorTitle" : [
     {
@@ -248,7 +246,7 @@
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/hasclaims"
 },
-"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/HasClaims/subscript(_:)-36se2": {
+"doc://AuthFoundation/documentation/AuthFoundation/HasClaims/subscript(_:)-36se2": {
   "abstract" : [
 
   ],
@@ -280,7 +278,6 @@
     },
     {
       "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:14AuthFoundation9HasClaimsPAAEyqd__SgSScluip1TL_qd__mfp",
       "text" : "T"
     },
     {
@@ -288,14 +285,14 @@
       "text" : "?"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/HasClaims\/subscript(_:)-36se2",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/HasClaims\/subscript(_:)-36se2",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "subscript(_:)",
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/hasclaims\/subscript(_:)-36se2"
 },
-"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/HasClaims/subscript(_:)-3hvf1": {
+"doc://AuthFoundation/documentation/AuthFoundation/HasClaims/subscript(_:)-3hvf1": {
   "abstract" : [
     {
       "text" : "Return the given claim’s value.",
@@ -331,7 +328,6 @@
     },
     {
       "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:14AuthFoundation9HasClaimsPyqd__SgAA5ClaimOcluip1TL_qd__mfp",
       "text" : "T"
     },
     {
@@ -339,7 +335,7 @@
       "text" : "?"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/HasClaims\/subscript(_:)-3hvf1",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/HasClaims\/subscript(_:)-3hvf1",
   "kind" : "symbol",
   "required" : true,
   "role" : "symbol",
@@ -347,7 +343,7 @@
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/hasclaims\/subscript(_:)-3hvf1"
 },
-"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/HasClaims/subscript(_:)-5oltt": {
+"doc://AuthFoundation/documentation/AuthFoundation/HasClaims/subscript(_:)-5oltt": {
   "abstract" : [
 
   ],
@@ -379,7 +375,6 @@
     },
     {
       "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:14AuthFoundation9HasClaimsPAAEyqd__SgAA5ClaimOcluip1TL_qd__mfp",
       "text" : "T"
     },
     {
@@ -387,7 +382,7 @@
       "text" : "?"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/HasClaims\/subscript(_:)-5oltt",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/HasClaims\/subscript(_:)-5oltt",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "subscript(_:)",

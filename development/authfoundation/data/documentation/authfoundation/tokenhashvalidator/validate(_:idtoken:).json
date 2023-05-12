@@ -16,14 +16,14 @@
   "hierarchy" : {
     "paths" : [
       [
-        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation",
-        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/TokenHashValidator"
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/TokenHashValidator"
       ]
     ]
   },
   "identifier" : {
     "interfaceLanguage" : "swift",
-    "url" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/TokenHashValidator\/validate(_:idToken:)"
+    "url" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/TokenHashValidator\/validate(_:idToken:)"
   },
   "kind" : "symbol",
   "metadata" : {
@@ -148,7 +148,7 @@
               "text" : ": "
             },
             {
-              "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/JWT",
+              "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JWT",
               "kind" : "typeIdentifier",
               "preciseIdentifier" : "s:14AuthFoundation3JWTV",
               "text" : "JWT"
@@ -169,7 +169,7 @@
   ],
   "schemaVersion" : {
     "major" : 0,
-    "minor" : 2,
+    "minor" : 3,
     "patch" : 0
   },
   "sections" : [
@@ -189,21 +189,21 @@
   ]
 , 
 "references": {
-"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation": {
+"doc://AuthFoundation/documentation/AuthFoundation": {
   "abstract" : [
     {
       "text" : "Library that provides foundational features used by Okta’s authentication libraries, as well as APIs used to work with tokens and user credentials.",
       "type" : "text"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation",
   "kind" : "symbol",
   "role" : "collection",
   "title" : "AuthFoundation",
   "type" : "topic",
   "url" : "\/documentation\/authfoundation"
 },
-"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/JWT": {
+"doc://AuthFoundation/documentation/AuthFoundation/JWT": {
   "abstract" : [
     {
       "text" : "Represents the contents of a JWT token, providing access to its payload contents.",
@@ -224,7 +224,7 @@
       "text" : "JWT"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/JWT",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JWT",
   "kind" : "symbol",
   "navigatorTitle" : [
     {
@@ -237,7 +237,7 @@
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/jwt"
 },
-"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/TokenHashValidator": {
+"doc://AuthFoundation/documentation/AuthFoundation/TokenHashValidator": {
   "abstract" : [
     {
       "text" : "Protocol used to implement token validation using either the ",
@@ -274,7 +274,7 @@
       "text" : "TokenHashValidator"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/TokenHashValidator",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/TokenHashValidator",
   "kind" : "symbol",
   "navigatorTitle" : [
     {
@@ -287,7 +287,7 @@
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/tokenhashvalidator"
 },
-"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/TokenHashValidator/validate(_:idToken:)": {
+"doc://AuthFoundation/documentation/AuthFoundation/TokenHashValidator/validate(_:idToken:)": {
   "abstract" : [
     {
       "text" : "Validates the given access token, using the ",
@@ -350,7 +350,7 @@
       "text" : "throws"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/TokenHashValidator\/validate(_:idToken:)",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/TokenHashValidator\/validate(_:idToken:)",
   "kind" : "symbol",
   "required" : true,
   "role" : "symbol",

@@ -8,14 +8,14 @@
   "hierarchy" : {
     "paths" : [
       [
-        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation",
-        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/OAuth2ServerError"
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/OAuth2ServerError"
       ]
     ]
   },
   "identifier" : {
     "interfaceLanguage" : "swift",
-    "url" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/OAuth2ServerError\/Code-swift.enum"
+    "url" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/OAuth2ServerError\/Code-swift.enum"
   },
   "kind" : "symbol",
   "metadata" : {
@@ -83,9 +83,9 @@
   "relationshipsSections" : [
     {
       "identifiers" : [
-        "doc:\/\/com.okta.mobile.authfoundation\/Se",
-        "doc:\/\/com.okta.mobile.authfoundation\/SQ",
-        "doc:\/\/com.okta.mobile.authfoundation\/SY"
+        "doc:\/\/AuthFoundation\/Se",
+        "doc:\/\/AuthFoundation\/SQ",
+        "doc:\/\/AuthFoundation\/SY"
       ],
       "kind" : "relationships",
       "title" : "Conforms To",
@@ -94,7 +94,7 @@
   ],
   "schemaVersion" : {
     "major" : 0,
-    "minor" : 2,
+    "minor" : 3,
     "patch" : 0
   },
   "sections" : [
@@ -103,29 +103,34 @@
   "topicSections" : [
     {
       "identifiers" : [
-        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/OAuth2ServerError\/Code-swift.enum\/accessDenied",
-        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/OAuth2ServerError\/Code-swift.enum\/authorizationPending",
-        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/OAuth2ServerError\/Code-swift.enum\/expiredToken",
-        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/OAuth2ServerError\/Code-swift.enum\/invalidClient",
-        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/OAuth2ServerError\/Code-swift.enum\/invalidGrant",
-        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/OAuth2ServerError\/Code-swift.enum\/invalidRequest",
-        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/OAuth2ServerError\/Code-swift.enum\/invalidScope",
-        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/OAuth2ServerError\/Code-swift.enum\/invalidToken",
-        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/OAuth2ServerError\/Code-swift.enum\/other(code:)",
-        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/OAuth2ServerError\/Code-swift.enum\/serverError",
-        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/OAuth2ServerError\/Code-swift.enum\/slowDown",
-        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/OAuth2ServerError\/Code-swift.enum\/temporarilyUnavailable",
-        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/OAuth2ServerError\/Code-swift.enum\/unauthorizedClient",
-        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/OAuth2ServerError\/Code-swift.enum\/unsupportedResponseMode",
-        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/OAuth2ServerError\/Code-swift.enum\/unsupportedResponseType"
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/OAuth2ServerError\/Code-swift.enum\/accessDenied",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/OAuth2ServerError\/Code-swift.enum\/authorizationPending",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/OAuth2ServerError\/Code-swift.enum\/directAuthAuthorizationPending",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/OAuth2ServerError\/Code-swift.enum\/expiredToken",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/OAuth2ServerError\/Code-swift.enum\/invalidChallengeTypesSupported",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/OAuth2ServerError\/Code-swift.enum\/invalidClient",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/OAuth2ServerError\/Code-swift.enum\/invalidGrant",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/OAuth2ServerError\/Code-swift.enum\/invalidOTP",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/OAuth2ServerError\/Code-swift.enum\/invalidRequest",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/OAuth2ServerError\/Code-swift.enum\/invalidScope",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/OAuth2ServerError\/Code-swift.enum\/invalidToken",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/OAuth2ServerError\/Code-swift.enum\/mfaRequired",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/OAuth2ServerError\/Code-swift.enum\/oobRejected",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/OAuth2ServerError\/Code-swift.enum\/other(code:)",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/OAuth2ServerError\/Code-swift.enum\/serverError",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/OAuth2ServerError\/Code-swift.enum\/slowDown",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/OAuth2ServerError\/Code-swift.enum\/temporarilyUnavailable",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/OAuth2ServerError\/Code-swift.enum\/unauthorizedClient",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/OAuth2ServerError\/Code-swift.enum\/unsupportedResponseMode",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/OAuth2ServerError\/Code-swift.enum\/unsupportedResponseType"
       ],
       "title" : "Enumeration Cases"
     },
     {
       "generated" : true,
       "identifiers" : [
-        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/OAuth2ServerError\/Code-swift.enum\/Equatable-Implementations",
-        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/OAuth2ServerError\/Code-swift.enum\/RawRepresentable-Implementations"
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/OAuth2ServerError\/Code-swift.enum\/Equatable-Implementations",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/OAuth2ServerError\/Code-swift.enum\/RawRepresentable-Implementations"
       ],
       "title" : "Default Implementations"
     }
@@ -144,36 +149,36 @@
   ]
 , 
 "references": {
-"doc://com.okta.mobile.authfoundation/SQ": {
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/SQ",
+"doc://AuthFoundation/SQ": {
+  "identifier" : "doc:\/\/AuthFoundation\/SQ",
   "title" : "Swift.Equatable",
   "type" : "unresolvable"
 },
-"doc://com.okta.mobile.authfoundation/SY": {
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/SY",
+"doc://AuthFoundation/SY": {
+  "identifier" : "doc:\/\/AuthFoundation\/SY",
   "title" : "Swift.RawRepresentable",
   "type" : "unresolvable"
 },
-"doc://com.okta.mobile.authfoundation/Se": {
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/Se",
+"doc://AuthFoundation/Se": {
+  "identifier" : "doc:\/\/AuthFoundation\/Se",
   "title" : "Swift.Decodable",
   "type" : "unresolvable"
 },
-"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation": {
+"doc://AuthFoundation/documentation/AuthFoundation": {
   "abstract" : [
     {
       "text" : "Library that provides foundational features used by Okta’s authentication libraries, as well as APIs used to work with tokens and user credentials.",
       "type" : "text"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation",
   "kind" : "symbol",
   "role" : "collection",
   "title" : "AuthFoundation",
   "type" : "topic",
   "url" : "\/documentation\/authfoundation"
 },
-"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/OAuth2ServerError": {
+"doc://AuthFoundation/documentation/AuthFoundation/OAuth2ServerError": {
   "abstract" : [
     {
       "text" : "Describes errors reported from an OAuth2 server.",
@@ -194,7 +199,7 @@
       "text" : "OAuth2ServerError"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/OAuth2ServerError",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/OAuth2ServerError",
   "kind" : "symbol",
   "navigatorTitle" : [
     {
@@ -207,7 +212,7 @@
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/oauth2servererror"
 },
-"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/OAuth2ServerError/Code-swift.enum": {
+"doc://AuthFoundation/documentation/AuthFoundation/OAuth2ServerError/Code-swift.enum": {
   "abstract" : [
     {
       "text" : "Possible  OAuth 2.0 server error code",
@@ -228,7 +233,7 @@
       "text" : "Code"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/OAuth2ServerError\/Code-swift.enum",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/OAuth2ServerError\/Code-swift.enum",
   "kind" : "symbol",
   "navigatorTitle" : [
     {
@@ -241,29 +246,29 @@
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/oauth2servererror\/code-swift.enum"
 },
-"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/OAuth2ServerError/Code-swift.enum/Equatable-Implementations": {
+"doc://AuthFoundation/documentation/AuthFoundation/OAuth2ServerError/Code-swift.enum/Equatable-Implementations": {
   "abstract" : [
 
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/OAuth2ServerError\/Code-swift.enum\/Equatable-Implementations",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/OAuth2ServerError\/Code-swift.enum\/Equatable-Implementations",
   "kind" : "article",
   "role" : "collectionGroup",
   "title" : "Equatable Implementations",
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/oauth2servererror\/code-swift.enum\/equatable-implementations"
 },
-"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/OAuth2ServerError/Code-swift.enum/RawRepresentable-Implementations": {
+"doc://AuthFoundation/documentation/AuthFoundation/OAuth2ServerError/Code-swift.enum/RawRepresentable-Implementations": {
   "abstract" : [
 
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/OAuth2ServerError\/Code-swift.enum\/RawRepresentable-Implementations",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/OAuth2ServerError\/Code-swift.enum\/RawRepresentable-Implementations",
   "kind" : "article",
   "role" : "collectionGroup",
   "title" : "RawRepresentable Implementations",
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/oauth2servererror\/code-swift.enum\/rawrepresentable-implementations"
 },
-"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/OAuth2ServerError/Code-swift.enum/accessDenied": {
+"doc://AuthFoundation/documentation/AuthFoundation/OAuth2ServerError/Code-swift.enum/accessDenied": {
   "abstract" : [
     {
       "text" : "The server denied the request.",
@@ -284,14 +289,14 @@
       "text" : "accessDenied"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/OAuth2ServerError\/Code-swift.enum\/accessDenied",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/OAuth2ServerError\/Code-swift.enum\/accessDenied",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "OAuth2ServerError.Code.accessDenied",
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/oauth2servererror\/code-swift.enum\/accessdenied"
 },
-"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/OAuth2ServerError/Code-swift.enum/authorizationPending": {
+"doc://AuthFoundation/documentation/AuthFoundation/OAuth2ServerError/Code-swift.enum/authorizationPending": {
   "abstract" : [
     {
       "text" : "The authorization request is still pending as the end user hasn’t yet completed the user-interaction step",
@@ -312,14 +317,39 @@
       "text" : "authorizationPending"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/OAuth2ServerError\/Code-swift.enum\/authorizationPending",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/OAuth2ServerError\/Code-swift.enum\/authorizationPending",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "OAuth2ServerError.Code.authorizationPending",
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/oauth2servererror\/code-swift.enum\/authorizationpending"
 },
-"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/OAuth2ServerError/Code-swift.enum/expiredToken": {
+"doc://AuthFoundation/documentation/AuthFoundation/OAuth2ServerError/Code-swift.enum/directAuthAuthorizationPending": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "case"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "directAuthAuthorizationPending"
+    }
+  ],
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/OAuth2ServerError\/Code-swift.enum\/directAuthAuthorizationPending",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "OAuth2ServerError.Code.directAuthAuthorizationPending",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/oauth2servererror\/code-swift.enum\/directauthauthorizationpending"
+},
+"doc://AuthFoundation/documentation/AuthFoundation/OAuth2ServerError/Code-swift.enum/expiredToken": {
   "abstract" : [
 
   ],
@@ -337,14 +367,39 @@
       "text" : "expiredToken"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/OAuth2ServerError\/Code-swift.enum\/expiredToken",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/OAuth2ServerError\/Code-swift.enum\/expiredToken",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "OAuth2ServerError.Code.expiredToken",
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/oauth2servererror\/code-swift.enum\/expiredtoken"
 },
-"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/OAuth2ServerError/Code-swift.enum/invalidClient": {
+"doc://AuthFoundation/documentation/AuthFoundation/OAuth2ServerError/Code-swift.enum/invalidChallengeTypesSupported": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "case"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "invalidChallengeTypesSupported"
+    }
+  ],
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/OAuth2ServerError\/Code-swift.enum\/invalidChallengeTypesSupported",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "OAuth2ServerError.Code.invalidChallengeTypesSupported",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/oauth2servererror\/code-swift.enum\/invalidchallengetypessupported"
+},
+"doc://AuthFoundation/documentation/AuthFoundation/OAuth2ServerError/Code-swift.enum/invalidClient": {
   "abstract" : [
     {
       "text" : "The specified client ID is invalid.",
@@ -365,14 +420,14 @@
       "text" : "invalidClient"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/OAuth2ServerError\/Code-swift.enum\/invalidClient",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/OAuth2ServerError\/Code-swift.enum\/invalidClient",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "OAuth2ServerError.Code.invalidClient",
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/oauth2servererror\/code-swift.enum\/invalidclient"
 },
-"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/OAuth2ServerError/Code-swift.enum/invalidGrant": {
+"doc://AuthFoundation/documentation/AuthFoundation/OAuth2ServerError/Code-swift.enum/invalidGrant": {
   "abstract" : [
     {
       "text" : "The specified grant is invalid, expired, revoked, or doesn’t match the redirect URI used in the authorization request.",
@@ -393,14 +448,39 @@
       "text" : "invalidGrant"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/OAuth2ServerError\/Code-swift.enum\/invalidGrant",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/OAuth2ServerError\/Code-swift.enum\/invalidGrant",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "OAuth2ServerError.Code.invalidGrant",
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/oauth2servererror\/code-swift.enum\/invalidgrant"
 },
-"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/OAuth2ServerError/Code-swift.enum/invalidRequest": {
+"doc://AuthFoundation/documentation/AuthFoundation/OAuth2ServerError/Code-swift.enum/invalidOTP": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "case"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "invalidOTP"
+    }
+  ],
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/OAuth2ServerError\/Code-swift.enum\/invalidOTP",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "OAuth2ServerError.Code.invalidOTP",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/oauth2servererror\/code-swift.enum\/invalidotp"
+},
+"doc://AuthFoundation/documentation/AuthFoundation/OAuth2ServerError/Code-swift.enum/invalidRequest": {
   "abstract" : [
     {
       "text" : "The request is missing a necessary parameter, the parameter has an invalid value, or the request contains duplicate parameters.",
@@ -421,14 +501,14 @@
       "text" : "invalidRequest"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/OAuth2ServerError\/Code-swift.enum\/invalidRequest",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/OAuth2ServerError\/Code-swift.enum\/invalidRequest",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "OAuth2ServerError.Code.invalidRequest",
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/oauth2servererror\/code-swift.enum\/invalidrequest"
 },
-"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/OAuth2ServerError/Code-swift.enum/invalidScope": {
+"doc://AuthFoundation/documentation/AuthFoundation/OAuth2ServerError/Code-swift.enum/invalidScope": {
   "abstract" : [
     {
       "text" : "The scopes list contains an invalid or unsupported value.",
@@ -449,14 +529,14 @@
       "text" : "invalidScope"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/OAuth2ServerError\/Code-swift.enum\/invalidScope",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/OAuth2ServerError\/Code-swift.enum\/invalidScope",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "OAuth2ServerError.Code.invalidScope",
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/oauth2servererror\/code-swift.enum\/invalidscope"
 },
-"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/OAuth2ServerError/Code-swift.enum/invalidToken": {
+"doc://AuthFoundation/documentation/AuthFoundation/OAuth2ServerError/Code-swift.enum/invalidToken": {
   "abstract" : [
     {
       "text" : "The provided access token is invalid.",
@@ -477,14 +557,64 @@
       "text" : "invalidToken"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/OAuth2ServerError\/Code-swift.enum\/invalidToken",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/OAuth2ServerError\/Code-swift.enum\/invalidToken",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "OAuth2ServerError.Code.invalidToken",
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/oauth2servererror\/code-swift.enum\/invalidtoken"
 },
-"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/OAuth2ServerError/Code-swift.enum/other(code:)": {
+"doc://AuthFoundation/documentation/AuthFoundation/OAuth2ServerError/Code-swift.enum/mfaRequired": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "case"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "mfaRequired"
+    }
+  ],
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/OAuth2ServerError\/Code-swift.enum\/mfaRequired",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "OAuth2ServerError.Code.mfaRequired",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/oauth2servererror\/code-swift.enum\/mfarequired"
+},
+"doc://AuthFoundation/documentation/AuthFoundation/OAuth2ServerError/Code-swift.enum/oobRejected": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "case"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "oobRejected"
+    }
+  ],
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/OAuth2ServerError\/Code-swift.enum\/oobRejected",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "OAuth2ServerError.Code.oobRejected",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/oauth2servererror\/code-swift.enum\/oobrejected"
+},
+"doc://AuthFoundation/documentation/AuthFoundation/OAuth2ServerError/Code-swift.enum/other(code:)": {
   "abstract" : [
     {
       "text" : "An error code other than one of the standard ones defined above.",
@@ -526,14 +656,14 @@
       "text" : ")"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/OAuth2ServerError\/Code-swift.enum\/other(code:)",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/OAuth2ServerError\/Code-swift.enum\/other(code:)",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "OAuth2ServerError.Code.other(code:)",
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/oauth2servererror\/code-swift.enum\/other(code:)"
 },
-"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/OAuth2ServerError/Code-swift.enum/serverError": {
+"doc://AuthFoundation/documentation/AuthFoundation/OAuth2ServerError/Code-swift.enum/serverError": {
   "abstract" : [
     {
       "text" : "The server encountered an internal error.",
@@ -554,14 +684,14 @@
       "text" : "serverError"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/OAuth2ServerError\/Code-swift.enum\/serverError",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/OAuth2ServerError\/Code-swift.enum\/serverError",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "OAuth2ServerError.Code.serverError",
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/oauth2servererror\/code-swift.enum\/servererror"
 },
-"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/OAuth2ServerError/Code-swift.enum/slowDown": {
+"doc://AuthFoundation/documentation/AuthFoundation/OAuth2ServerError/Code-swift.enum/slowDown": {
   "abstract" : [
     {
       "text" : "the authorization request is still pending and polling should continue",
@@ -582,14 +712,14 @@
       "text" : "slowDown"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/OAuth2ServerError\/Code-swift.enum\/slowDown",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/OAuth2ServerError\/Code-swift.enum\/slowDown",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "OAuth2ServerError.Code.slowDown",
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/oauth2servererror\/code-swift.enum\/slowdown"
 },
-"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/OAuth2ServerError/Code-swift.enum/temporarilyUnavailable": {
+"doc://AuthFoundation/documentation/AuthFoundation/OAuth2ServerError/Code-swift.enum/temporarilyUnavailable": {
   "abstract" : [
     {
       "text" : "The server is temporarily unavailable, but should be able to process the request at a later time.",
@@ -610,14 +740,14 @@
       "text" : "temporarilyUnavailable"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/OAuth2ServerError\/Code-swift.enum\/temporarilyUnavailable",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/OAuth2ServerError\/Code-swift.enum\/temporarilyUnavailable",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "OAuth2ServerError.Code.temporarilyUnavailable",
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/oauth2servererror\/code-swift.enum\/temporarilyunavailable"
 },
-"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/OAuth2ServerError/Code-swift.enum/unauthorizedClient": {
+"doc://AuthFoundation/documentation/AuthFoundation/OAuth2ServerError/Code-swift.enum/unauthorizedClient": {
   "abstract" : [
     {
       "text" : "The client specified is not authorized to utilize the supplied grant type.",
@@ -638,14 +768,14 @@
       "text" : "unauthorizedClient"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/OAuth2ServerError\/Code-swift.enum\/unauthorizedClient",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/OAuth2ServerError\/Code-swift.enum\/unauthorizedClient",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "OAuth2ServerError.Code.unauthorizedClient",
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/oauth2servererror\/code-swift.enum\/unauthorizedclient"
 },
-"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/OAuth2ServerError/Code-swift.enum/unsupportedResponseMode": {
+"doc://AuthFoundation/documentation/AuthFoundation/OAuth2ServerError/Code-swift.enum/unsupportedResponseMode": {
   "abstract" : [
     {
       "text" : "The specified response mode is invalid or unsupported. This error is also thrown for disallowed response modes.",
@@ -666,14 +796,14 @@
       "text" : "unsupportedResponseMode"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/OAuth2ServerError\/Code-swift.enum\/unsupportedResponseMode",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/OAuth2ServerError\/Code-swift.enum\/unsupportedResponseMode",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "OAuth2ServerError.Code.unsupportedResponseMode",
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/oauth2servererror\/code-swift.enum\/unsupportedresponsemode"
 },
-"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/OAuth2ServerError/Code-swift.enum/unsupportedResponseType": {
+"doc://AuthFoundation/documentation/AuthFoundation/OAuth2ServerError/Code-swift.enum/unsupportedResponseType": {
   "abstract" : [
     {
       "text" : "The specified response type is invalid or unsupported.",
@@ -694,7 +824,7 @@
       "text" : "unsupportedResponseType"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/OAuth2ServerError\/Code-swift.enum\/unsupportedResponseType",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/OAuth2ServerError\/Code-swift.enum\/unsupportedResponseType",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "OAuth2ServerError.Code.unsupportedResponseType",

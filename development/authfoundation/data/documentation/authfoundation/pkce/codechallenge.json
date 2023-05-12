@@ -8,14 +8,14 @@
   "hierarchy" : {
     "paths" : [
       [
-        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation",
-        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/PKCE"
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/PKCE"
       ]
     ]
   },
   "identifier" : {
     "interfaceLanguage" : "swift",
-    "url" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/PKCE\/codeChallenge"
+    "url" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/PKCE\/codeChallenge"
   },
   "kind" : "symbol",
   "metadata" : {
@@ -113,7 +113,7 @@
   ],
   "schemaVersion" : {
     "major" : 0,
-    "minor" : 2,
+    "minor" : 3,
     "patch" : 0
   },
   "sections" : [
@@ -133,21 +133,21 @@
   ]
 , 
 "references": {
-"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation": {
+"doc://AuthFoundation/documentation/AuthFoundation": {
   "abstract" : [
     {
       "text" : "Library that provides foundational features used by Okta’s authentication libraries, as well as APIs used to work with tokens and user credentials.",
       "type" : "text"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation",
   "kind" : "symbol",
   "role" : "collection",
   "title" : "AuthFoundation",
   "type" : "topic",
   "url" : "\/documentation\/authfoundation"
 },
-"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/PKCE": {
+"doc://AuthFoundation/documentation/AuthFoundation/PKCE": {
   "abstract" : [
     {
       "text" : "Object defining the structure and settings of a PKCE challenge, including the verifier code, the encoded challenge, and the method used to exchange this information with the server.",
@@ -168,7 +168,7 @@
       "text" : "PKCE"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/PKCE",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/PKCE",
   "kind" : "symbol",
   "navigatorTitle" : [
     {
@@ -181,7 +181,7 @@
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/pkce"
 },
-"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/PKCE/codeChallenge": {
+"doc://AuthFoundation/documentation/AuthFoundation/PKCE/codeChallenge": {
   "abstract" : [
     {
       "text" : "The challenge sent to the server in the initial OAuth2 call.",
@@ -211,7 +211,7 @@
       "text" : "String"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/PKCE\/codeChallenge",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/PKCE\/codeChallenge",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "codeChallenge",

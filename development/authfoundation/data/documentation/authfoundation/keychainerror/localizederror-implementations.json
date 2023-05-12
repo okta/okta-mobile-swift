@@ -1,21 +1,15 @@
 {
-  "abstract" : [
-    {
-      "text" : "No overview available.",
-      "type" : "text"
-    }
-  ],
   "hierarchy" : {
     "paths" : [
       [
-        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation",
-        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/KeychainError"
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/KeychainError"
       ]
     ]
   },
   "identifier" : {
     "interfaceLanguage" : "swift",
-    "url" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/KeychainError\/LocalizedError-Implementations"
+    "url" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/KeychainError\/LocalizedError-Implementations"
   },
   "kind" : "article",
   "metadata" : {
@@ -29,7 +23,7 @@
   },
   "schemaVersion" : {
     "major" : 0,
-    "minor" : 2,
+    "minor" : 3,
     "patch" : 0
   },
   "sections" : [
@@ -39,11 +33,11 @@
     {
       "generated" : true,
       "identifiers" : [
-        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/KeychainError\/errorDescription-1617j",
-        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/KeychainError\/errorDescription-8iygp",
-        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/KeychainError\/failureReason",
-        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/KeychainError\/helpAnchor",
-        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/KeychainError\/recoverySuggestion"
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/KeychainError\/errorDescription-1617j",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/KeychainError\/errorDescription-8iygp",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/KeychainError\/failureReason",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/KeychainError\/helpAnchor",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/KeychainError\/recoverySuggestion"
       ],
       "title" : "Instance Properties"
     }
@@ -62,21 +56,21 @@
   ]
 , 
 "references": {
-"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation": {
+"doc://AuthFoundation/documentation/AuthFoundation": {
   "abstract" : [
     {
       "text" : "Library that provides foundational features used by Okta’s authentication libraries, as well as APIs used to work with tokens and user credentials.",
       "type" : "text"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation",
   "kind" : "symbol",
   "role" : "collection",
   "title" : "AuthFoundation",
   "type" : "topic",
   "url" : "\/documentation\/authfoundation"
 },
-"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/KeychainError": {
+"doc://AuthFoundation/documentation/AuthFoundation/KeychainError": {
   "abstract" : [
     {
       "text" : "Describes errors that may occur when interacting with the keychain.",
@@ -97,7 +91,7 @@
       "text" : "KeychainError"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/KeychainError",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/KeychainError",
   "kind" : "symbol",
   "navigatorTitle" : [
     {
@@ -110,12 +104,9 @@
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/keychainerror"
 },
-"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/KeychainError/errorDescription-1617j": {
+"doc://AuthFoundation/documentation/AuthFoundation/KeychainError/errorDescription-1617j": {
   "abstract" : [
-    {
-      "text" : "A localized message describing what error occurred.",
-      "type" : "text"
-    }
+
   ],
   "fragments" : [
     {
@@ -144,19 +135,16 @@
       "text" : "?"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/KeychainError\/errorDescription-1617j",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/KeychainError\/errorDescription-1617j",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "errorDescription",
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/keychainerror\/errordescription-1617j"
 },
-"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/KeychainError/errorDescription-8iygp": {
+"doc://AuthFoundation/documentation/AuthFoundation/KeychainError/errorDescription-8iygp": {
   "abstract" : [
-    {
-      "text" : "A localized message describing what error occurred.",
-      "type" : "text"
-    }
+
   ],
   "fragments" : [
     {
@@ -185,19 +173,16 @@
       "text" : "?"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/KeychainError\/errorDescription-8iygp",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/KeychainError\/errorDescription-8iygp",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "errorDescription",
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/keychainerror\/errordescription-8iygp"
 },
-"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/KeychainError/failureReason": {
+"doc://AuthFoundation/documentation/AuthFoundation/KeychainError/failureReason": {
   "abstract" : [
-    {
-      "text" : "A localized message describing the reason for the failure.",
-      "type" : "text"
-    }
+
   ],
   "fragments" : [
     {
@@ -226,19 +211,16 @@
       "text" : "?"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/KeychainError\/failureReason",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/KeychainError\/failureReason",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "failureReason",
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/keychainerror\/failurereason"
 },
-"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/KeychainError/helpAnchor": {
+"doc://AuthFoundation/documentation/AuthFoundation/KeychainError/helpAnchor": {
   "abstract" : [
-    {
-      "text" : "A localized message providing “help” text if the user requests help.",
-      "type" : "text"
-    }
+
   ],
   "fragments" : [
     {
@@ -267,19 +249,16 @@
       "text" : "?"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/KeychainError\/helpAnchor",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/KeychainError\/helpAnchor",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "helpAnchor",
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/keychainerror\/helpanchor"
 },
-"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/KeychainError/recoverySuggestion": {
+"doc://AuthFoundation/documentation/AuthFoundation/KeychainError/recoverySuggestion": {
   "abstract" : [
-    {
-      "text" : "A localized message describing how one might recover from the failure.",
-      "type" : "text"
-    }
+
   ],
   "fragments" : [
     {
@@ -308,7 +287,7 @@
       "text" : "?"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/KeychainError\/recoverySuggestion",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/KeychainError\/recoverySuggestion",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "recoverySuggestion",

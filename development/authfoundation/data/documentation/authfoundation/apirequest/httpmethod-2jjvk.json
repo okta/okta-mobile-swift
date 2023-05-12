@@ -1,22 +1,30 @@
 {
   "abstract" : [
     {
-      "text" : "HTTP method to perform.",
+      "text" : "Inherited from ",
+      "type" : "text"
+    },
+    {
+      "code" : "APIRequest.httpMethod",
+      "type" : "codeVoice"
+    },
+    {
+      "text" : ".",
       "type" : "text"
     }
   ],
   "hierarchy" : {
     "paths" : [
       [
-        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation",
-        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/APIRequest",
-        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/APIRequest\/httpMethod-3kav0"
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/APIRequest",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/APIRequest\/httpMethod-3kav0"
       ]
     ]
   },
   "identifier" : {
     "interfaceLanguage" : "swift",
-    "url" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/APIRequest\/httpMethod-2jjvk"
+    "url" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/APIRequest\/httpMethod-2jjvk"
   },
   "kind" : "symbol",
   "metadata" : {
@@ -83,7 +91,7 @@
               "text" : ": "
             },
             {
-              "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/APIRequestMethod",
+              "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/APIRequestMethod",
               "kind" : "typeIdentifier",
               "preciseIdentifier" : "s:14AuthFoundation16APIRequestMethodO",
               "text" : "APIRequestMethod"
@@ -108,7 +116,7 @@
   ],
   "schemaVersion" : {
     "major" : 0,
-    "minor" : 2,
+    "minor" : 3,
     "patch" : 0
   },
   "sections" : [
@@ -128,21 +136,21 @@
   ]
 , 
 "references": {
-"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation": {
+"doc://AuthFoundation/documentation/AuthFoundation": {
   "abstract" : [
     {
       "text" : "Library that provides foundational features used by Okta’s authentication libraries, as well as APIs used to work with tokens and user credentials.",
       "type" : "text"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation",
   "kind" : "symbol",
   "role" : "collection",
   "title" : "AuthFoundation",
   "type" : "topic",
   "url" : "\/documentation\/authfoundation"
 },
-"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/APIRequest": {
+"doc://AuthFoundation/documentation/AuthFoundation/APIRequest": {
   "abstract" : [
     {
       "text" : "Abstract protocol defining the structure of an API request.",
@@ -163,7 +171,7 @@
       "text" : "APIRequest"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/APIRequest",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/APIRequest",
   "kind" : "symbol",
   "navigatorTitle" : [
     {
@@ -176,12 +184,9 @@
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/apirequest"
 },
-"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/APIRequest/httpMethod-2jjvk": {
+"doc://AuthFoundation/documentation/AuthFoundation/APIRequest/httpMethod-2jjvk": {
   "abstract" : [
-    {
-      "text" : "HTTP method to perform.",
-      "type" : "text"
-    }
+
   ],
   "fragments" : [
     {
@@ -206,14 +211,14 @@
       "text" : "APIRequestMethod"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/APIRequest\/httpMethod-2jjvk",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/APIRequest\/httpMethod-2jjvk",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "httpMethod",
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/apirequest\/httpmethod-2jjvk"
 },
-"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/APIRequest/httpMethod-3kav0": {
+"doc://AuthFoundation/documentation/AuthFoundation/APIRequest/httpMethod-3kav0": {
   "abstract" : [
     {
       "text" : "HTTP method to perform.",
@@ -244,7 +249,7 @@
       "text" : "APIRequestMethod"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/APIRequest\/httpMethod-3kav0",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/APIRequest\/httpMethod-3kav0",
   "kind" : "symbol",
   "required" : true,
   "role" : "symbol",
@@ -252,7 +257,7 @@
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/apirequest\/httpmethod-3kav0"
 },
-"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/APIRequestMethod": {
+"doc://AuthFoundation/documentation/AuthFoundation/APIRequestMethod": {
   "abstract" : [
     {
       "text" : "API HTTP request method.",
@@ -273,7 +278,7 @@
       "text" : "APIRequestMethod"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/APIRequestMethod",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/APIRequestMethod",
   "kind" : "symbol",
   "navigatorTitle" : [
     {

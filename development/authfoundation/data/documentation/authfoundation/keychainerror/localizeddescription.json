@@ -1,22 +1,30 @@
 {
   "abstract" : [
     {
-      "text" : "Retrieve the localized description for this error.",
+      "text" : "Inherited from ",
+      "type" : "text"
+    },
+    {
+      "code" : "Error.localizedDescription",
+      "type" : "codeVoice"
+    },
+    {
+      "text" : ".",
       "type" : "text"
     }
   ],
   "hierarchy" : {
     "paths" : [
       [
-        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation",
-        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/KeychainError",
-        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/KeychainError\/Error-Implementations"
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/KeychainError",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/KeychainError\/Error-Implementations"
       ]
     ]
   },
   "identifier" : {
     "interfaceLanguage" : "swift",
-    "url" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/KeychainError\/localizedDescription"
+    "url" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/KeychainError\/localizedDescription"
   },
   "kind" : "symbol",
   "metadata" : {
@@ -107,7 +115,7 @@
   ],
   "schemaVersion" : {
     "major" : 0,
-    "minor" : 2,
+    "minor" : 3,
     "patch" : 0
   },
   "sections" : [
@@ -127,21 +135,21 @@
   ]
 , 
 "references": {
-"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation": {
+"doc://AuthFoundation/documentation/AuthFoundation": {
   "abstract" : [
     {
       "text" : "Library that provides foundational features used by Okta’s authentication libraries, as well as APIs used to work with tokens and user credentials.",
       "type" : "text"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation",
   "kind" : "symbol",
   "role" : "collection",
   "title" : "AuthFoundation",
   "type" : "topic",
   "url" : "\/documentation\/authfoundation"
 },
-"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/KeychainError": {
+"doc://AuthFoundation/documentation/AuthFoundation/KeychainError": {
   "abstract" : [
     {
       "text" : "Describes errors that may occur when interacting with the keychain.",
@@ -162,7 +170,7 @@
       "text" : "KeychainError"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/KeychainError",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/KeychainError",
   "kind" : "symbol",
   "navigatorTitle" : [
     {
@@ -175,23 +183,20 @@
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/keychainerror"
 },
-"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/KeychainError/Error-Implementations": {
+"doc://AuthFoundation/documentation/AuthFoundation/KeychainError/Error-Implementations": {
   "abstract" : [
 
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/KeychainError\/Error-Implementations",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/KeychainError\/Error-Implementations",
   "kind" : "article",
   "role" : "collectionGroup",
   "title" : "Error Implementations",
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/keychainerror\/error-implementations"
 },
-"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/KeychainError/localizedDescription": {
+"doc://AuthFoundation/documentation/AuthFoundation/KeychainError/localizedDescription": {
   "abstract" : [
-    {
-      "text" : "Retrieve the localized description for this error.",
-      "type" : "text"
-    }
+
   ],
   "fragments" : [
     {
@@ -216,7 +221,7 @@
       "text" : "String"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/KeychainError\/localizedDescription",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/KeychainError\/localizedDescription",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "localizedDescription",

@@ -8,14 +8,14 @@
   "hierarchy" : {
     "paths" : [
       [
-        "doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/WebAuthenticationUI",
-        "doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/WebAuthenticationUI\/WebAuthentication"
+        "doc:\/\/WebAuthenticationUI\/documentation\/WebAuthenticationUI",
+        "doc:\/\/WebAuthenticationUI\/documentation\/WebAuthenticationUI\/WebAuthentication"
       ]
     ]
   },
   "identifier" : {
     "interfaceLanguage" : "swift",
-    "url" : "doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/WebAuthenticationUI\/WebAuthentication\/signOut(from:token:options:completion:)-8kp2p"
+    "url" : "doc:\/\/WebAuthenticationUI\/documentation\/WebAuthenticationUI\/WebAuthentication\/signOut(from:token:options:completion:)-8kp2p"
   },
   "kind" : "symbol",
   "metadata" : {
@@ -44,6 +44,15 @@
       {
         "kind" : "text",
         "text" : ": "
+      },
+      {
+        "kind" : "typeIdentifier",
+        "preciseIdentifier" : "s:19WebAuthenticationUI0aB0C",
+        "text" : "WebAuthentication"
+      },
+      {
+        "kind" : "text",
+        "text" : "."
       },
       {
         "kind" : "typeIdentifier",
@@ -78,6 +87,15 @@
       {
         "kind" : "text",
         "text" : ": ["
+      },
+      {
+        "kind" : "typeIdentifier",
+        "preciseIdentifier" : "s:19WebAuthenticationUI0aB0C",
+        "text" : "WebAuthentication"
+      },
+      {
+        "kind" : "text",
+        "text" : "."
       },
       {
         "kind" : "typeIdentifier",
@@ -195,7 +213,17 @@
               "text" : ": "
             },
             {
-              "identifier" : "doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/WebAuthenticationUI\/WebAuthentication\/WindowAnchor",
+              "identifier" : "doc:\/\/WebAuthenticationUI\/documentation\/WebAuthenticationUI\/WebAuthentication",
+              "kind" : "typeIdentifier",
+              "preciseIdentifier" : "s:19WebAuthenticationUI0aB0C",
+              "text" : "WebAuthentication"
+            },
+            {
+              "kind" : "text",
+              "text" : "."
+            },
+            {
+              "identifier" : "doc:\/\/WebAuthenticationUI\/documentation\/WebAuthenticationUI\/WebAuthentication\/WindowAnchor",
               "kind" : "typeIdentifier",
               "preciseIdentifier" : "s:19WebAuthenticationUI0aB0C12WindowAnchora",
               "text" : "WindowAnchor"
@@ -230,7 +258,17 @@
               "text" : ": ["
             },
             {
-              "identifier" : "doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/WebAuthenticationUI\/WebAuthentication\/Option",
+              "identifier" : "doc:\/\/WebAuthenticationUI\/documentation\/WebAuthenticationUI\/WebAuthentication",
+              "kind" : "typeIdentifier",
+              "preciseIdentifier" : "s:19WebAuthenticationUI0aB0C",
+              "text" : "WebAuthentication"
+            },
+            {
+              "kind" : "text",
+              "text" : "."
+            },
+            {
+              "identifier" : "doc:\/\/WebAuthenticationUI\/documentation\/WebAuthenticationUI\/WebAuthentication\/Option",
               "kind" : "typeIdentifier",
               "preciseIdentifier" : "s:19WebAuthenticationUI0aB0C6OptionO",
               "text" : "Option"
@@ -248,7 +286,7 @@
               "text" : ": "
             },
             {
-              "kind" : "attribute",
+              "kind" : "keyword",
               "text" : "@escaping"
             },
             {
@@ -274,7 +312,7 @@
               "text" : ", "
             },
             {
-              "identifier" : "doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/WebAuthenticationUI\/WebAuthenticationError",
+              "identifier" : "doc:\/\/WebAuthenticationUI\/documentation\/WebAuthenticationUI\/WebAuthenticationError",
               "kind" : "typeIdentifier",
               "preciseIdentifier" : "s:19WebAuthenticationUI0aB5ErrorO",
               "text" : "WebAuthenticationError"
@@ -361,7 +399,7 @@
   ],
   "schemaVersion" : {
     "major" : 0,
-    "minor" : 2,
+    "minor" : 3,
     "patch" : 0
   },
   "sections" : [
@@ -381,21 +419,21 @@
   ]
 , 
 "references": {
-"doc://com.okta.mobile.webauthenticationui/documentation/WebAuthenticationUI": {
+"doc://WebAuthenticationUI/documentation/WebAuthenticationUI": {
   "abstract" : [
     {
       "text" : "Make it easy to enable users to sign in to your app through browser-based sign on.",
       "type" : "text"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/WebAuthenticationUI",
+  "identifier" : "doc:\/\/WebAuthenticationUI\/documentation\/WebAuthenticationUI",
   "kind" : "symbol",
   "role" : "collection",
   "title" : "WebAuthenticationUI",
   "type" : "topic",
   "url" : "\/documentation\/webauthenticationui"
 },
-"doc://com.okta.mobile.webauthenticationui/documentation/WebAuthenticationUI/WebAuthentication": {
+"doc://WebAuthenticationUI/documentation/WebAuthenticationUI/WebAuthentication": {
   "abstract" : [
     {
       "text" : "Authentication coordinator that simplifies signing users in using browser-based OIDC authentication flows.",
@@ -416,7 +454,7 @@
       "text" : "WebAuthentication"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/WebAuthenticationUI\/WebAuthentication",
+  "identifier" : "doc:\/\/WebAuthenticationUI\/documentation\/WebAuthenticationUI\/WebAuthentication",
   "kind" : "symbol",
   "navigatorTitle" : [
     {
@@ -429,7 +467,7 @@
   "type" : "topic",
   "url" : "\/documentation\/webauthenticationui\/webauthentication"
 },
-"doc://com.okta.mobile.webauthenticationui/documentation/WebAuthenticationUI/WebAuthentication/Option": {
+"doc://WebAuthenticationUI/documentation/WebAuthenticationUI/WebAuthentication/Option": {
   "abstract" : [
     {
       "text" : "Describes available options for customizing the sign on process.",
@@ -450,7 +488,7 @@
       "text" : "Option"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/WebAuthenticationUI\/WebAuthentication\/Option",
+  "identifier" : "doc:\/\/WebAuthenticationUI\/documentation\/WebAuthenticationUI\/WebAuthentication\/Option",
   "kind" : "symbol",
   "navigatorTitle" : [
     {
@@ -463,7 +501,7 @@
   "type" : "topic",
   "url" : "\/documentation\/webauthenticationui\/webauthentication\/option"
 },
-"doc://com.okta.mobile.webauthenticationui/documentation/WebAuthenticationUI/WebAuthentication/WindowAnchor": {
+"doc://WebAuthenticationUI/documentation/WebAuthenticationUI/WebAuthentication/WindowAnchor": {
   "abstract" : [
 
   ],
@@ -481,7 +519,7 @@
       "text" : "WindowAnchor"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/WebAuthenticationUI\/WebAuthentication\/WindowAnchor",
+  "identifier" : "doc:\/\/WebAuthenticationUI\/documentation\/WebAuthenticationUI\/WebAuthentication\/WindowAnchor",
   "kind" : "symbol",
   "navigatorTitle" : [
     {
@@ -494,7 +532,7 @@
   "type" : "topic",
   "url" : "\/documentation\/webauthenticationui\/webauthentication\/windowanchor"
 },
-"doc://com.okta.mobile.webauthenticationui/documentation/WebAuthenticationUI/WebAuthentication/signOut(from:token:options:completion:)-8kp2p": {
+"doc://WebAuthenticationUI/documentation/WebAuthenticationUI/WebAuthentication/signOut(from:token:options:completion:)-8kp2p": {
   "abstract" : [
     {
       "text" : "Starts log-out using the ID token.",
@@ -525,6 +563,15 @@
     {
       "kind" : "text",
       "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:19WebAuthenticationUI0aB0C",
+      "text" : "WebAuthentication"
+    },
+    {
+      "kind" : "text",
+      "text" : "."
     },
     {
       "kind" : "typeIdentifier",
@@ -559,6 +606,15 @@
     {
       "kind" : "text",
       "text" : ": ["
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:19WebAuthenticationUI0aB0C",
+      "text" : "WebAuthentication"
+    },
+    {
+      "kind" : "text",
+      "text" : "."
     },
     {
       "kind" : "typeIdentifier",
@@ -614,14 +670,14 @@
       "text" : ")"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/WebAuthenticationUI\/WebAuthentication\/signOut(from:token:options:completion:)-8kp2p",
+  "identifier" : "doc:\/\/WebAuthenticationUI\/documentation\/WebAuthenticationUI\/WebAuthentication\/signOut(from:token:options:completion:)-8kp2p",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "signOut(from:token:options:completion:)",
   "type" : "topic",
   "url" : "\/documentation\/webauthenticationui\/webauthentication\/signout(from:token:options:completion:)-8kp2p"
 },
-"doc://com.okta.mobile.webauthenticationui/documentation/WebAuthenticationUI/WebAuthenticationError": {
+"doc://WebAuthenticationUI/documentation/WebAuthenticationUI/WebAuthenticationError": {
   "abstract" : [
 
   ],
@@ -639,7 +695,7 @@
       "text" : "WebAuthenticationError"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/WebAuthenticationUI\/WebAuthenticationError",
+  "identifier" : "doc:\/\/WebAuthenticationUI\/documentation\/WebAuthenticationUI\/WebAuthenticationError",
   "kind" : "symbol",
   "navigatorTitle" : [
     {

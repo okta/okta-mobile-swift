@@ -1,31 +1,30 @@
 {
   "abstract" : [
     {
-      "text" : "Generates an error response from an ",
+      "text" : "Inherited from ",
       "type" : "text"
     },
     {
-      "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/APIRequest",
-      "isActive" : true,
-      "type" : "reference"
+      "code" : "APIParsingContext.error(from:)",
+      "type" : "codeVoice"
     },
     {
-      "text" : " result when an HTTP error occurs.",
+      "text" : ".",
       "type" : "text"
     }
   ],
   "hierarchy" : {
     "paths" : [
       [
-        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation",
-        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/APIParsingContext",
-        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/APIParsingContext\/error(from:)-5p5cl"
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/APIParsingContext",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/APIParsingContext\/error(from:)-5p5cl"
       ]
     ]
   },
   "identifier" : {
     "interfaceLanguage" : "swift",
-    "url" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/APIParsingContext\/error(from:)-422es"
+    "url" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/APIParsingContext\/error(from:)-422es"
   },
   "kind" : "symbol",
   "metadata" : {
@@ -150,50 +149,11 @@
         }
       ],
       "kind" : "declarations"
-    },
-    {
-      "content" : [
-        {
-          "anchor" : "return-value",
-          "level" : 2,
-          "text" : "Return Value",
-          "type" : "heading"
-        },
-        {
-          "inlineContent" : [
-            {
-              "text" : "Optional error option described within the supplied data.",
-              "type" : "text"
-            }
-          ],
-          "type" : "paragraph"
-        }
-      ],
-      "kind" : "content"
-    },
-    {
-      "kind" : "parameters",
-      "parameters" : [
-        {
-          "content" : [
-            {
-              "inlineContent" : [
-                {
-                  "text" : "Raw data returned from the HTTP response.",
-                  "type" : "text"
-                }
-              ],
-              "type" : "paragraph"
-            }
-          ],
-          "name" : "data"
-        }
-      ]
     }
   ],
   "schemaVersion" : {
     "major" : 0,
-    "minor" : 2,
+    "minor" : 3,
     "patch" : 0
   },
   "sections" : [
@@ -213,28 +173,28 @@
   ]
 , 
 "references": {
-"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation": {
+"doc://AuthFoundation/documentation/AuthFoundation": {
   "abstract" : [
     {
       "text" : "Library that provides foundational features used by Okta’s authentication libraries, as well as APIs used to work with tokens and user credentials.",
       "type" : "text"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation",
   "kind" : "symbol",
   "role" : "collection",
   "title" : "AuthFoundation",
   "type" : "topic",
   "url" : "\/documentation\/authfoundation"
 },
-"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/APIParsingContext": {
+"doc://AuthFoundation/documentation/AuthFoundation/APIParsingContext": {
   "abstract" : [
     {
       "text" : "Provides contextual information when parsing and decoding ",
       "type" : "text"
     },
     {
-      "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/APIRequest",
+      "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/APIRequest",
       "isActive" : true,
       "type" : "reference"
     },
@@ -257,7 +217,7 @@
       "text" : "APIParsingContext"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/APIParsingContext",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/APIParsingContext",
   "kind" : "symbol",
   "navigatorTitle" : [
     {
@@ -270,21 +230,9 @@
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/apiparsingcontext"
 },
-"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/APIParsingContext/error(from:)-422es": {
+"doc://AuthFoundation/documentation/AuthFoundation/APIParsingContext/error(from:)-422es": {
   "abstract" : [
-    {
-      "text" : "Generates an error response from an ",
-      "type" : "text"
-    },
-    {
-      "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/APIRequest",
-      "isActive" : true,
-      "type" : "reference"
-    },
-    {
-      "text" : " result when an HTTP error occurs.",
-      "type" : "text"
-    }
+
   ],
   "fragments" : [
     {
@@ -330,21 +278,21 @@
       "text" : "?"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/APIParsingContext\/error(from:)-422es",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/APIParsingContext\/error(from:)-422es",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "error(from:)",
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/apiparsingcontext\/error(from:)-422es"
 },
-"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/APIParsingContext/error(from:)-5p5cl": {
+"doc://AuthFoundation/documentation/AuthFoundation/APIParsingContext/error(from:)-5p5cl": {
   "abstract" : [
     {
       "text" : "Generates an error response from an ",
       "type" : "text"
     },
     {
-      "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/APIRequest",
+      "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/APIRequest",
       "isActive" : true,
       "type" : "reference"
     },
@@ -398,7 +346,7 @@
       "text" : "?"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/APIParsingContext\/error(from:)-5p5cl",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/APIParsingContext\/error(from:)-5p5cl",
   "kind" : "symbol",
   "required" : true,
   "role" : "symbol",
@@ -406,7 +354,7 @@
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/apiparsingcontext\/error(from:)-5p5cl"
 },
-"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/APIRequest": {
+"doc://AuthFoundation/documentation/AuthFoundation/APIRequest": {
   "abstract" : [
     {
       "text" : "Abstract protocol defining the structure of an API request.",
@@ -427,7 +375,7 @@
       "text" : "APIRequest"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/APIRequest",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/APIRequest",
   "kind" : "symbol",
   "navigatorTitle" : [
     {

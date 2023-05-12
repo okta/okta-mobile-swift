@@ -1,22 +1,30 @@
 {
   "abstract" : [
     {
-      "text" : "A localized message describing the reason for the failure.",
+      "text" : "Inherited from ",
+      "type" : "text"
+    },
+    {
+      "code" : "LocalizedError.failureReason",
+      "type" : "codeVoice"
+    },
+    {
+      "text" : ".",
       "type" : "text"
     }
   ],
   "hierarchy" : {
     "paths" : [
       [
-        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation",
-        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/KeychainError",
-        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/KeychainError\/LocalizedError-Implementations"
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/KeychainError",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/KeychainError\/LocalizedError-Implementations"
       ]
     ]
   },
   "identifier" : {
     "interfaceLanguage" : "swift",
-    "url" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/KeychainError\/failureReason"
+    "url" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/KeychainError\/failureReason"
   },
   "kind" : "symbol",
   "metadata" : {
@@ -111,7 +119,7 @@
   ],
   "schemaVersion" : {
     "major" : 0,
-    "minor" : 2,
+    "minor" : 3,
     "patch" : 0
   },
   "sections" : [
@@ -131,21 +139,21 @@
   ]
 , 
 "references": {
-"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation": {
+"doc://AuthFoundation/documentation/AuthFoundation": {
   "abstract" : [
     {
       "text" : "Library that provides foundational features used by Okta’s authentication libraries, as well as APIs used to work with tokens and user credentials.",
       "type" : "text"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation",
   "kind" : "symbol",
   "role" : "collection",
   "title" : "AuthFoundation",
   "type" : "topic",
   "url" : "\/documentation\/authfoundation"
 },
-"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/KeychainError": {
+"doc://AuthFoundation/documentation/AuthFoundation/KeychainError": {
   "abstract" : [
     {
       "text" : "Describes errors that may occur when interacting with the keychain.",
@@ -166,7 +174,7 @@
       "text" : "KeychainError"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/KeychainError",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/KeychainError",
   "kind" : "symbol",
   "navigatorTitle" : [
     {
@@ -179,23 +187,20 @@
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/keychainerror"
 },
-"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/KeychainError/LocalizedError-Implementations": {
+"doc://AuthFoundation/documentation/AuthFoundation/KeychainError/LocalizedError-Implementations": {
   "abstract" : [
 
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/KeychainError\/LocalizedError-Implementations",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/KeychainError\/LocalizedError-Implementations",
   "kind" : "article",
   "role" : "collectionGroup",
   "title" : "LocalizedError Implementations",
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/keychainerror\/localizederror-implementations"
 },
-"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/KeychainError/failureReason": {
+"doc://AuthFoundation/documentation/AuthFoundation/KeychainError/failureReason": {
   "abstract" : [
-    {
-      "text" : "A localized message describing the reason for the failure.",
-      "type" : "text"
-    }
+
   ],
   "fragments" : [
     {
@@ -224,7 +229,7 @@
       "text" : "?"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/KeychainError\/failureReason",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/KeychainError\/failureReason",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "failureReason",

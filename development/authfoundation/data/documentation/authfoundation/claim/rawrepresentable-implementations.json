@@ -1,21 +1,15 @@
 {
-  "abstract" : [
-    {
-      "text" : "No overview available.",
-      "type" : "text"
-    }
-  ],
   "hierarchy" : {
     "paths" : [
       [
-        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation",
-        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/Claim"
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/Claim"
       ]
     ]
   },
   "identifier" : {
     "interfaceLanguage" : "swift",
-    "url" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/Claim\/RawRepresentable-Implementations"
+    "url" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/Claim\/RawRepresentable-Implementations"
   },
   "kind" : "article",
   "metadata" : {
@@ -29,7 +23,7 @@
   },
   "schemaVersion" : {
     "major" : 0,
-    "minor" : 2,
+    "minor" : 3,
     "patch" : 0
   },
   "sections" : [
@@ -39,29 +33,29 @@
     {
       "generated" : true,
       "identifiers" : [
-        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/Claim\/init(from:)",
-        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/Claim\/init(rawValue:)"
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/Claim\/init(from:)",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/Claim\/init(rawValue:)"
       ],
       "title" : "Initializers"
     },
     {
       "generated" : true,
       "identifiers" : [
-        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/Claim\/rawValue-swift.property"
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/Claim\/rawValue-swift.property"
       ],
       "title" : "Instance Properties"
     },
     {
       "generated" : true,
       "identifiers" : [
-        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/Claim\/encode(to:)"
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/Claim\/encode(to:)"
       ],
       "title" : "Instance Methods"
     },
     {
       "generated" : true,
       "identifiers" : [
-        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/Claim\/RawValue-swift.typealias"
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/Claim\/RawValue-swift.typealias"
       ],
       "title" : "Type Aliases"
     }
@@ -80,21 +74,21 @@
   ]
 , 
 "references": {
-"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation": {
+"doc://AuthFoundation/documentation/AuthFoundation": {
   "abstract" : [
     {
       "text" : "Library that provides foundational features used by Okta’s authentication libraries, as well as APIs used to work with tokens and user credentials.",
       "type" : "text"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation",
   "kind" : "symbol",
   "role" : "collection",
   "title" : "AuthFoundation",
   "type" : "topic",
   "url" : "\/documentation\/authfoundation"
 },
-"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/Claim": {
+"doc://AuthFoundation/documentation/AuthFoundation/Claim": {
   "abstract" : [
     {
       "text" : "List of registered and public claims.",
@@ -115,7 +109,7 @@
       "text" : "Claim"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/Claim",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/Claim",
   "kind" : "symbol",
   "navigatorTitle" : [
     {
@@ -128,20 +122,9 @@
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/claim"
 },
-"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/Claim/RawValue-swift.typealias": {
+"doc://AuthFoundation/documentation/AuthFoundation/Claim/RawValue-swift.typealias": {
   "abstract" : [
-    {
-      "text" : "The raw type that can be used to represent all values of the conforming",
-      "type" : "text"
-    },
-    {
-      "text" : " ",
-      "type" : "text"
-    },
-    {
-      "text" : "type.",
-      "type" : "text"
-    }
+
   ],
   "fragments" : [
     {
@@ -157,7 +140,7 @@
       "text" : "RawValue"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/Claim\/RawValue-swift.typealias",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/Claim\/RawValue-swift.typealias",
   "kind" : "symbol",
   "navigatorTitle" : [
     {
@@ -170,32 +153,9 @@
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/claim\/rawvalue-swift.typealias"
 },
-"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/Claim/encode(to:)": {
+"doc://AuthFoundation/documentation/AuthFoundation/Claim/encode(to:)": {
   "abstract" : [
-    {
-      "text" : "Encodes this value into the given encoder, when the type’s ",
-      "type" : "text"
-    },
-    {
-      "code" : "RawValue",
-      "type" : "codeVoice"
-    },
-    {
-      "text" : " ",
-      "type" : "text"
-    },
-    {
-      "text" : "is ",
-      "type" : "text"
-    },
-    {
-      "code" : "String",
-      "type" : "codeVoice"
-    },
-    {
-      "text" : ".",
-      "type" : "text"
-    }
+
   ],
   "conformance" : {
     "availabilityPrefix" : [
@@ -284,43 +244,16 @@
       "text" : "throws"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/Claim\/encode(to:)",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/Claim\/encode(to:)",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "encode(to:)",
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/claim\/encode(to:)"
 },
-"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/Claim/init(from:)": {
+"doc://AuthFoundation/documentation/AuthFoundation/Claim/init(from:)": {
   "abstract" : [
-    {
-      "text" : "Creates a new instance by decoding from the given decoder, when the",
-      "type" : "text"
-    },
-    {
-      "text" : " ",
-      "type" : "text"
-    },
-    {
-      "text" : "type’s ",
-      "type" : "text"
-    },
-    {
-      "code" : "RawValue",
-      "type" : "codeVoice"
-    },
-    {
-      "text" : " is ",
-      "type" : "text"
-    },
-    {
-      "code" : "String",
-      "type" : "codeVoice"
-    },
-    {
-      "text" : ".",
-      "type" : "text"
-    }
+
   ],
   "conformance" : {
     "availabilityPrefix" : [
@@ -401,19 +334,16 @@
       "text" : "throws"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/Claim\/init(from:)",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/Claim\/init(from:)",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "init(from:)",
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/claim\/init(from:)"
 },
-"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/Claim/init(rawValue:)": {
+"doc://AuthFoundation/documentation/AuthFoundation/Claim/init(rawValue:)": {
   "abstract" : [
-    {
-      "text" : "Creates a new instance with the specified raw value.",
-      "type" : "text"
-    }
+
   ],
   "fragments" : [
     {
@@ -442,19 +372,16 @@
       "text" : ")"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/Claim\/init(rawValue:)",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/Claim\/init(rawValue:)",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "init(rawValue:)",
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/claim\/init(rawvalue:)"
 },
-"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/Claim/rawValue-swift.property": {
+"doc://AuthFoundation/documentation/AuthFoundation/Claim/rawValue-swift.property": {
   "abstract" : [
-    {
-      "text" : "The corresponding value of the raw type.",
-      "type" : "text"
-    }
+
   ],
   "fragments" : [
     {
@@ -479,7 +406,7 @@
       "text" : "String"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/Claim\/rawValue-swift.property",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/Claim\/rawValue-swift.property",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "rawValue",

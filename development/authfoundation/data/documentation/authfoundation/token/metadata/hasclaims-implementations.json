@@ -1,22 +1,16 @@
 {
-  "abstract" : [
-    {
-      "text" : "No overview available.",
-      "type" : "text"
-    }
-  ],
   "hierarchy" : {
     "paths" : [
       [
-        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation",
-        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/Token",
-        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/Token\/Metadata"
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/Token",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/Token\/Metadata"
       ]
     ]
   },
   "identifier" : {
     "interfaceLanguage" : "swift",
-    "url" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/Token\/Metadata\/HasClaims-Implementations"
+    "url" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/Token\/Metadata\/HasClaims-Implementations"
   },
   "kind" : "article",
   "metadata" : {
@@ -30,7 +24,7 @@
   },
   "schemaVersion" : {
     "major" : 0,
-    "minor" : 2,
+    "minor" : 3,
     "patch" : 0
   },
   "sections" : [
@@ -40,41 +34,41 @@
     {
       "generated" : true,
       "identifiers" : [
-        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/Token\/Metadata\/address",
-        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/Token\/Metadata\/allClaims",
-        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/Token\/Metadata\/authTime",
-        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/Token\/Metadata\/authenticationClass",
-        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/Token\/Metadata\/authenticationMethods",
-        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/Token\/Metadata\/birthdate",
-        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/Token\/Metadata\/email",
-        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/Token\/Metadata\/emailVerified",
-        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/Token\/Metadata\/familyName",
-        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/Token\/Metadata\/gender",
-        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/Token\/Metadata\/givenName",
-        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/Token\/Metadata\/locale",
-        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/Token\/Metadata\/middleName",
-        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/Token\/Metadata\/name",
-        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/Token\/Metadata\/nameComponents",
-        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/Token\/Metadata\/nickname",
-        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/Token\/Metadata\/phoneNumber",
-        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/Token\/Metadata\/phoneNumberVerified",
-        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/Token\/Metadata\/picture",
-        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/Token\/Metadata\/preferredUsername",
-        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/Token\/Metadata\/profile",
-        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/Token\/Metadata\/subject",
-        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/Token\/Metadata\/timeZone",
-        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/Token\/Metadata\/updatedAt",
-        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/Token\/Metadata\/userLocale",
-        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/Token\/Metadata\/website",
-        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/Token\/Metadata\/zoneinfo"
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/Token\/Metadata\/address",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/Token\/Metadata\/allClaims",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/Token\/Metadata\/authTime",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/Token\/Metadata\/authenticationClass",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/Token\/Metadata\/authenticationMethods",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/Token\/Metadata\/birthdate",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/Token\/Metadata\/email",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/Token\/Metadata\/emailVerified",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/Token\/Metadata\/familyName",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/Token\/Metadata\/gender",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/Token\/Metadata\/givenName",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/Token\/Metadata\/locale",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/Token\/Metadata\/middleName",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/Token\/Metadata\/name",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/Token\/Metadata\/nameComponents",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/Token\/Metadata\/nickname",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/Token\/Metadata\/phoneNumber",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/Token\/Metadata\/phoneNumberVerified",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/Token\/Metadata\/picture",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/Token\/Metadata\/preferredUsername",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/Token\/Metadata\/profile",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/Token\/Metadata\/subject",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/Token\/Metadata\/timeZone",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/Token\/Metadata\/updatedAt",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/Token\/Metadata\/userLocale",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/Token\/Metadata\/website",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/Token\/Metadata\/zoneinfo"
       ],
       "title" : "Instance Properties"
     },
     {
       "generated" : true,
       "identifiers" : [
-        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/Token\/Metadata\/subscript(_:)-1k55j",
-        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/Token\/Metadata\/subscript(_:)-3573v"
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/Token\/Metadata\/subscript(_:)-1k55j",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/Token\/Metadata\/subscript(_:)-3573v"
       ],
       "title" : "Subscripts"
     }
@@ -93,21 +87,21 @@
   ]
 , 
 "references": {
-"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation": {
+"doc://AuthFoundation/documentation/AuthFoundation": {
   "abstract" : [
     {
       "text" : "Library that provides foundational features used by Okta’s authentication libraries, as well as APIs used to work with tokens and user credentials.",
       "type" : "text"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation",
   "kind" : "symbol",
   "role" : "collection",
   "title" : "AuthFoundation",
   "type" : "topic",
   "url" : "\/documentation\/authfoundation"
 },
-"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/Token": {
+"doc://AuthFoundation/documentation/AuthFoundation/Token": {
   "abstract" : [
     {
       "text" : "Token information representing a user’s access to a resource server, including access token, refresh token, and other related information.",
@@ -128,7 +122,7 @@
       "text" : "Token"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/Token",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/Token",
   "kind" : "symbol",
   "navigatorTitle" : [
     {
@@ -141,7 +135,7 @@
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/token"
 },
-"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/Token/Metadata": {
+"doc://AuthFoundation/documentation/AuthFoundation/Token/Metadata": {
   "abstract" : [
     {
       "text" : "Describes the metadata associated with a token.",
@@ -162,7 +156,7 @@
       "text" : "Metadata"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/Token\/Metadata",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/Token\/Metadata",
   "kind" : "symbol",
   "navigatorTitle" : [
     {
@@ -175,7 +169,7 @@
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/token\/metadata"
 },
-"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/Token/Metadata/address": {
+"doc://AuthFoundation/documentation/AuthFoundation/Token/Metadata/address": {
   "abstract" : [
     {
       "text" : "The address components for this user.",
@@ -218,37 +212,16 @@
       "text" : "]?"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/Token\/Metadata\/address",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/Token\/Metadata\/address",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "address",
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/token\/metadata\/address"
 },
-"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/Token/Metadata/allClaims": {
+"doc://AuthFoundation/documentation/AuthFoundation/Token/Metadata/allClaims": {
   "abstract" : [
-    {
-      "text" : "All claims, across both standard ",
-      "type" : "text"
-    },
-    {
-      "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/Token\/Metadata\/claims",
-      "isActive" : true,
-      "type" : "reference"
-    },
-    {
-      "text" : " and ",
-      "type" : "text"
-    },
-    {
-      "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/Token\/Metadata\/customClaims",
-      "isActive" : true,
-      "type" : "reference"
-    },
-    {
-      "text" : ".",
-      "type" : "text"
-    }
+
   ],
   "fragments" : [
     {
@@ -277,14 +250,14 @@
       "text" : "]"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/Token\/Metadata\/allClaims",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/Token\/Metadata\/allClaims",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "allClaims",
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/token\/metadata\/allclaims"
 },
-"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/Token/Metadata/authTime": {
+"doc://AuthFoundation/documentation/AuthFoundation/Token/Metadata/authTime": {
   "abstract" : [
     {
       "text" : "The date at which authentication occurred.",
@@ -318,14 +291,14 @@
       "text" : "?"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/Token\/Metadata\/authTime",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/Token\/Metadata\/authTime",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "authTime",
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/token\/metadata\/authtime"
 },
-"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/Token/Metadata/authenticationClass": {
+"doc://AuthFoundation/documentation/AuthFoundation/Token/Metadata/authenticationClass": {
   "abstract" : [
     {
       "text" : "Returns the Authentication Context Class Reference for this token.",
@@ -359,14 +332,14 @@
       "text" : "?"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/Token\/Metadata\/authenticationClass",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/Token\/Metadata\/authenticationClass",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "authenticationClass",
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/token\/metadata\/authenticationclass"
 },
-"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/Token/Metadata/authenticationMethods": {
+"doc://AuthFoundation/documentation/AuthFoundation/Token/Metadata/authenticationMethods": {
   "abstract" : [
     {
       "text" : "The list of authentication methods included in this token.",
@@ -400,14 +373,14 @@
       "text" : "]?"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/Token\/Metadata\/authenticationMethods",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/Token\/Metadata\/authenticationMethods",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "authenticationMethods",
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/token\/metadata\/authenticationmethods"
 },
-"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/Token/Metadata/birthdate": {
+"doc://AuthFoundation/documentation/AuthFoundation/Token/Metadata/birthdate": {
   "abstract" : [
     {
       "text" : "The user’s birth date.",
@@ -441,105 +414,14 @@
       "text" : "?"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/Token\/Metadata\/birthdate",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/Token\/Metadata\/birthdate",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "birthdate",
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/token\/metadata\/birthdate"
 },
-"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/Token/Metadata/claims": {
-  "abstract" : [
-    {
-      "text" : "Returns the list of all claims contained within this ",
-      "type" : "text"
-    },
-    {
-      "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/UserInfo",
-      "isActive" : true,
-      "type" : "reference"
-    },
-    {
-      "text" : ".",
-      "type" : "text"
-    }
-  ],
-  "fragments" : [
-    {
-      "kind" : "keyword",
-      "text" : "var"
-    },
-    {
-      "kind" : "text",
-      "text" : " "
-    },
-    {
-      "kind" : "identifier",
-      "text" : "claims"
-    },
-    {
-      "kind" : "text",
-      "text" : ": ["
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:14AuthFoundation5ClaimO",
-      "text" : "Claim"
-    },
-    {
-      "kind" : "text",
-      "text" : "]"
-    }
-  ],
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/Token\/Metadata\/claims",
-  "kind" : "symbol",
-  "role" : "symbol",
-  "title" : "claims",
-  "type" : "topic",
-  "url" : "\/documentation\/authfoundation\/token\/metadata\/claims"
-},
-"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/Token/Metadata/customClaims": {
-  "abstract" : [
-    {
-      "text" : "Returns the list of custom claims this instance might contain.",
-      "type" : "text"
-    }
-  ],
-  "fragments" : [
-    {
-      "kind" : "keyword",
-      "text" : "var"
-    },
-    {
-      "kind" : "text",
-      "text" : " "
-    },
-    {
-      "kind" : "identifier",
-      "text" : "customClaims"
-    },
-    {
-      "kind" : "text",
-      "text" : ": ["
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:SS",
-      "text" : "String"
-    },
-    {
-      "kind" : "text",
-      "text" : "]"
-    }
-  ],
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/Token\/Metadata\/customClaims",
-  "kind" : "symbol",
-  "role" : "symbol",
-  "title" : "customClaims",
-  "type" : "topic",
-  "url" : "\/documentation\/authfoundation\/token\/metadata\/customclaims"
-},
-"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/Token/Metadata/email": {
+"doc://AuthFoundation/documentation/AuthFoundation/Token/Metadata/email": {
   "abstract" : [
     {
       "text" : "The user’s email address.",
@@ -573,14 +455,14 @@
       "text" : "?"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/Token\/Metadata\/email",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/Token\/Metadata\/email",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "email",
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/token\/metadata\/email"
 },
-"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/Token/Metadata/emailVerified": {
+"doc://AuthFoundation/documentation/AuthFoundation/Token/Metadata/emailVerified": {
   "abstract" : [
     {
       "text" : "Indicates whether or not the user’s email address has been verified.",
@@ -614,14 +496,14 @@
       "text" : "?"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/Token\/Metadata\/emailVerified",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/Token\/Metadata\/emailVerified",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "emailVerified",
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/token\/metadata\/emailverified"
 },
-"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/Token/Metadata/familyName": {
+"doc://AuthFoundation/documentation/AuthFoundation/Token/Metadata/familyName": {
   "abstract" : [
     {
       "text" : "The person’s family, or last, name.",
@@ -655,14 +537,14 @@
       "text" : "?"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/Token\/Metadata\/familyName",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/Token\/Metadata\/familyName",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "familyName",
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/token\/metadata\/familyname"
 },
-"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/Token/Metadata/gender": {
+"doc://AuthFoundation/documentation/AuthFoundation/Token/Metadata/gender": {
   "abstract" : [
     {
       "text" : "The user’s gender.",
@@ -696,14 +578,14 @@
       "text" : "?"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/Token\/Metadata\/gender",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/Token\/Metadata\/gender",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "gender",
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/token\/metadata\/gender"
 },
-"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/Token/Metadata/givenName": {
+"doc://AuthFoundation/documentation/AuthFoundation/Token/Metadata/givenName": {
   "abstract" : [
     {
       "text" : "The person’s given, or first, name.",
@@ -737,14 +619,14 @@
       "text" : "?"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/Token\/Metadata\/givenName",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/Token\/Metadata\/givenName",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "givenName",
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/token\/metadata\/givenname"
 },
-"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/Token/Metadata/locale": {
+"doc://AuthFoundation/documentation/AuthFoundation/Token/Metadata/locale": {
   "abstract" : [
     {
       "text" : "The user’s locale.",
@@ -778,14 +660,14 @@
       "text" : "?"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/Token\/Metadata\/locale",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/Token\/Metadata\/locale",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "locale",
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/token\/metadata\/locale"
 },
-"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/Token/Metadata/middleName": {
+"doc://AuthFoundation/documentation/AuthFoundation/Token/Metadata/middleName": {
   "abstract" : [
     {
       "text" : "The person’s middle name.",
@@ -819,14 +701,14 @@
       "text" : "?"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/Token\/Metadata\/middleName",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/Token\/Metadata\/middleName",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "middleName",
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/token\/metadata\/middlename"
 },
-"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/Token/Metadata/name": {
+"doc://AuthFoundation/documentation/AuthFoundation/Token/Metadata/name": {
   "abstract" : [
     {
       "text" : "The full name of the resource.",
@@ -860,14 +742,14 @@
       "text" : "?"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/Token\/Metadata\/name",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/Token\/Metadata\/name",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "name",
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/token\/metadata\/name"
 },
-"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/Token/Metadata/nameComponents": {
+"doc://AuthFoundation/documentation/AuthFoundation/Token/Metadata/nameComponents": {
   "abstract" : [
     {
       "text" : "The person’s name components, pre-assigned to a PersonNameComponents object.",
@@ -897,14 +779,14 @@
       "text" : "PersonNameComponents"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/Token\/Metadata\/nameComponents",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/Token\/Metadata\/nameComponents",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "nameComponents",
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/token\/metadata\/namecomponents"
 },
-"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/Token/Metadata/nickname": {
+"doc://AuthFoundation/documentation/AuthFoundation/Token/Metadata/nickname": {
   "abstract" : [
     {
       "text" : "The person’s nickname.",
@@ -938,14 +820,14 @@
       "text" : "?"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/Token\/Metadata\/nickname",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/Token\/Metadata\/nickname",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "nickname",
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/token\/metadata\/nickname"
 },
-"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/Token/Metadata/phoneNumber": {
+"doc://AuthFoundation/documentation/AuthFoundation/Token/Metadata/phoneNumber": {
   "abstract" : [
     {
       "text" : "The user’s phone number.",
@@ -979,14 +861,14 @@
       "text" : "?"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/Token\/Metadata\/phoneNumber",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/Token\/Metadata\/phoneNumber",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "phoneNumber",
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/token\/metadata\/phonenumber"
 },
-"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/Token/Metadata/phoneNumberVerified": {
+"doc://AuthFoundation/documentation/AuthFoundation/Token/Metadata/phoneNumberVerified": {
   "abstract" : [
     {
       "text" : "Indicates whether or not the user’s phone number has been verified.",
@@ -1020,14 +902,14 @@
       "text" : "?"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/Token\/Metadata\/phoneNumberVerified",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/Token\/Metadata\/phoneNumberVerified",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "phoneNumberVerified",
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/token\/metadata\/phonenumberverified"
 },
-"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/Token/Metadata/picture": {
+"doc://AuthFoundation/documentation/AuthFoundation/Token/Metadata/picture": {
   "abstract" : [
     {
       "text" : "The user’s picture address.",
@@ -1061,14 +943,14 @@
       "text" : "?"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/Token\/Metadata\/picture",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/Token\/Metadata\/picture",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "picture",
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/token\/metadata\/picture"
 },
-"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/Token/Metadata/preferredUsername": {
+"doc://AuthFoundation/documentation/AuthFoundation/Token/Metadata/preferredUsername": {
   "abstract" : [
     {
       "text" : "The person’s preferred username.",
@@ -1102,14 +984,14 @@
       "text" : "?"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/Token\/Metadata\/preferredUsername",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/Token\/Metadata\/preferredUsername",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "preferredUsername",
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/token\/metadata\/preferredusername"
 },
-"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/Token/Metadata/profile": {
+"doc://AuthFoundation/documentation/AuthFoundation/Token/Metadata/profile": {
   "abstract" : [
     {
       "text" : "The user’s profile address.",
@@ -1143,14 +1025,14 @@
       "text" : "?"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/Token\/Metadata\/profile",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/Token\/Metadata\/profile",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "profile",
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/token\/metadata\/profile"
 },
-"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/Token/Metadata/subject": {
+"doc://AuthFoundation/documentation/AuthFoundation/Token/Metadata/subject": {
   "abstract" : [
     {
       "text" : "The subject of the resource, if available.",
@@ -1184,14 +1066,14 @@
       "text" : "?"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/Token\/Metadata\/subject",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/Token\/Metadata\/subject",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "subject",
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/token\/metadata\/subject"
 },
-"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/Token/Metadata/subscript(_:)-1k55j": {
+"doc://AuthFoundation/documentation/AuthFoundation/Token/Metadata/subscript(_:)-1k55j": {
   "abstract" : [
 
   ],
@@ -1230,14 +1112,14 @@
       "text" : "?"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/Token\/Metadata\/subscript(_:)-1k55j",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/Token\/Metadata\/subscript(_:)-1k55j",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "subscript(_:)",
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/token\/metadata\/subscript(_:)-1k55j"
 },
-"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/Token/Metadata/subscript(_:)-3573v": {
+"doc://AuthFoundation/documentation/AuthFoundation/Token/Metadata/subscript(_:)-3573v": {
   "abstract" : [
 
   ],
@@ -1276,14 +1158,14 @@
       "text" : "?"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/Token\/Metadata\/subscript(_:)-3573v",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/Token\/Metadata\/subscript(_:)-3573v",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "subscript(_:)",
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/token\/metadata\/subscript(_:)-3573v"
 },
-"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/Token/Metadata/timeZone": {
+"doc://AuthFoundation/documentation/AuthFoundation/Token/Metadata/timeZone": {
   "abstract" : [
     {
       "text" : "The user’s timezone, represented as a TimeZone object.",
@@ -1317,14 +1199,14 @@
       "text" : "?"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/Token\/Metadata\/timeZone",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/Token\/Metadata\/timeZone",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "timeZone",
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/token\/metadata\/timezone"
 },
-"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/Token/Metadata/updatedAt": {
+"doc://AuthFoundation/documentation/AuthFoundation/Token/Metadata/updatedAt": {
   "abstract" : [
     {
       "text" : "The date the resource was updated at.",
@@ -1358,14 +1240,14 @@
       "text" : "?"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/Token\/Metadata\/updatedAt",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/Token\/Metadata\/updatedAt",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "updatedAt",
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/token\/metadata\/updatedat"
 },
-"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/Token/Metadata/userLocale": {
+"doc://AuthFoundation/documentation/AuthFoundation/Token/Metadata/userLocale": {
   "abstract" : [
     {
       "text" : "The user’s locale, represnted as a Locale object.",
@@ -1399,14 +1281,14 @@
       "text" : "?"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/Token\/Metadata\/userLocale",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/Token\/Metadata\/userLocale",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "userLocale",
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/token\/metadata\/userlocale"
 },
-"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/Token/Metadata/website": {
+"doc://AuthFoundation/documentation/AuthFoundation/Token/Metadata/website": {
   "abstract" : [
     {
       "text" : "The user’s website address.",
@@ -1440,14 +1322,14 @@
       "text" : "?"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/Token\/Metadata\/website",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/Token\/Metadata\/website",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "website",
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/token\/metadata\/website"
 },
-"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/Token/Metadata/zoneinfo": {
+"doc://AuthFoundation/documentation/AuthFoundation/Token/Metadata/zoneinfo": {
   "abstract" : [
     {
       "text" : "The user’s timezone code.",
@@ -1481,7 +1363,7 @@
       "text" : "?"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/Token\/Metadata\/zoneinfo",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/Token\/Metadata\/zoneinfo",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "zoneinfo",

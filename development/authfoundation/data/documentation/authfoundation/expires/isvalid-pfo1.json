@@ -1,22 +1,30 @@
 {
   "abstract" : [
     {
-      "text" : "Indicates if this object is valid.",
+      "text" : "Inherited from ",
+      "type" : "text"
+    },
+    {
+      "code" : "Expires.isValid",
+      "type" : "codeVoice"
+    },
+    {
+      "text" : ".",
       "type" : "text"
     }
   ],
   "hierarchy" : {
     "paths" : [
       [
-        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation",
-        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/Expires",
-        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/Expires\/isValid-24xas"
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/Expires",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/Expires\/isValid-24xas"
       ]
     ]
   },
   "identifier" : {
     "interfaceLanguage" : "swift",
-    "url" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/Expires\/isValid-pfo1"
+    "url" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/Expires\/isValid-pfo1"
   },
   "kind" : "symbol",
   "metadata" : {
@@ -107,7 +115,7 @@
   ],
   "schemaVersion" : {
     "major" : 0,
-    "minor" : 2,
+    "minor" : 3,
     "patch" : 0
   },
   "sections" : [
@@ -127,21 +135,21 @@
   ]
 , 
 "references": {
-"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation": {
+"doc://AuthFoundation/documentation/AuthFoundation": {
   "abstract" : [
     {
       "text" : "Library that provides foundational features used by Okta’s authentication libraries, as well as APIs used to work with tokens and user credentials.",
       "type" : "text"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation",
   "kind" : "symbol",
   "role" : "collection",
   "title" : "AuthFoundation",
   "type" : "topic",
   "url" : "\/documentation\/authfoundation"
 },
-"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/Expires": {
+"doc://AuthFoundation/documentation/AuthFoundation/Expires": {
   "abstract" : [
     {
       "text" : "Protocol that indicates an object is capable of expiring.",
@@ -162,7 +170,7 @@
       "text" : "Expires"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/Expires",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/Expires",
   "kind" : "symbol",
   "navigatorTitle" : [
     {
@@ -175,7 +183,7 @@
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/expires"
 },
-"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/Expires/isValid-24xas": {
+"doc://AuthFoundation/documentation/AuthFoundation/Expires/isValid-24xas": {
   "abstract" : [
     {
       "text" : "Indicates if this object is valid.",
@@ -206,7 +214,7 @@
       "text" : "Bool"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/Expires\/isValid-24xas",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/Expires\/isValid-24xas",
   "kind" : "symbol",
   "required" : true,
   "role" : "symbol",
@@ -214,12 +222,9 @@
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/expires\/isvalid-24xas"
 },
-"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/Expires/isValid-pfo1": {
+"doc://AuthFoundation/documentation/AuthFoundation/Expires/isValid-pfo1": {
   "abstract" : [
-    {
-      "text" : "Indicates if this object is valid.",
-      "type" : "text"
-    }
+
   ],
   "fragments" : [
     {
@@ -244,7 +249,7 @@
       "text" : "Bool"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/Expires\/isValid-pfo1",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/Expires\/isValid-pfo1",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "isValid",

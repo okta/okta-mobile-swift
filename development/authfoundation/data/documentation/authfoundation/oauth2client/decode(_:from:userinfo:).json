@@ -1,22 +1,30 @@
 {
   "abstract" : [
     {
-      "text" : "Decodes HTTP response data into an expected type.",
+      "text" : "Inherited from ",
+      "type" : "text"
+    },
+    {
+      "code" : "APIClient.decode(_:from:userInfo:)",
+      "type" : "codeVoice"
+    },
+    {
+      "text" : ".",
       "type" : "text"
     }
   ],
   "hierarchy" : {
     "paths" : [
       [
-        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation",
-        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/OAuth2Client",
-        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/OAuth2Client\/APIClient-Implementations"
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/OAuth2Client",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/OAuth2Client\/APIClient-Implementations"
       ]
     ]
   },
   "identifier" : {
     "interfaceLanguage" : "swift",
-    "url" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/OAuth2Client\/decode(_:from:userInfo:)"
+    "url" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/OAuth2Client\/decode(_:from:userInfo:)"
   },
   "kind" : "symbol",
   "metadata" : {
@@ -49,7 +57,6 @@
       },
       {
         "kind" : "typeIdentifier",
-        "preciseIdentifier" : "s:14AuthFoundation12OAuth2ClientC6decode_4from8userInfoxxm_0B04DataVSDys010CodingUserH3KeyVypGSgtKSeRzlF1TL_xmfp",
         "text" : "T"
       },
       {
@@ -108,7 +115,6 @@
       },
       {
         "kind" : "typeIdentifier",
-        "preciseIdentifier" : "s:14AuthFoundation12OAuth2ClientC6decode_4from8userInfoxxm_0B04DataVSDys010CodingUserH3KeyVypGSgtKSeRzlF1TL_xmfp",
         "text" : "T"
       }
     ],
@@ -175,7 +181,6 @@
             },
             {
               "kind" : "typeIdentifier",
-              "preciseIdentifier" : "s:14AuthFoundation12OAuth2ClientC6decode_4from8userInfoxxm_0B04DataVSDys010CodingUserH3KeyVypGSgtKSeRzlF1TL_xmfp",
               "text" : "T"
             },
             {
@@ -242,7 +247,6 @@
             },
             {
               "kind" : "typeIdentifier",
-              "preciseIdentifier" : "s:14AuthFoundation12OAuth2ClientC6decode_4from8userInfoxxm_0B04DataVSDys010CodingUserH3KeyVypGSgtKSeRzlF1TL_xmfp",
               "text" : "T"
             },
             {
@@ -274,51 +278,11 @@
         }
       ],
       "kind" : "declarations"
-    },
-    {
-      "content" : [
-        {
-          "anchor" : "return-value",
-          "level" : 2,
-          "text" : "Return Value",
-          "type" : "heading"
-        },
-        {
-          "inlineContent" : [
-            {
-              "text" : "Decoded object.",
-              "type" : "text"
-            }
-          ],
-          "type" : "paragraph"
-        }
-      ],
-      "kind" : "content"
-    },
-    {
-      "content" : [
-        {
-          "anchor" : "discussion",
-          "level" : 2,
-          "text" : "Discussion",
-          "type" : "heading"
-        },
-        {
-          "inlineContent" : [
-            {
-              "text" : "The userInfo property may be included, which can include contextual information that can help decoders formulate objects.",
-              "type" : "text"
-            }
-          ],
-          "type" : "paragraph"
-        }
-      ],
-      "kind" : "content"
     }
   ],
   "schemaVersion" : {
     "major" : 0,
-    "minor" : 2,
+    "minor" : 3,
     "patch" : 0
   },
   "sections" : [
@@ -338,21 +302,21 @@
   ]
 , 
 "references": {
-"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation": {
+"doc://AuthFoundation/documentation/AuthFoundation": {
   "abstract" : [
     {
       "text" : "Library that provides foundational features used by Okta’s authentication libraries, as well as APIs used to work with tokens and user credentials.",
       "type" : "text"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation",
   "kind" : "symbol",
   "role" : "collection",
   "title" : "AuthFoundation",
   "type" : "topic",
   "url" : "\/documentation\/authfoundation"
 },
-"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/OAuth2Client": {
+"doc://AuthFoundation/documentation/AuthFoundation/OAuth2Client": {
   "abstract" : [
     {
       "text" : "An OAuth2 client, used to interact with a given authorization server.",
@@ -373,7 +337,7 @@
       "text" : "OAuth2Client"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/OAuth2Client",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/OAuth2Client",
   "kind" : "symbol",
   "navigatorTitle" : [
     {
@@ -386,23 +350,20 @@
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/oauth2client"
 },
-"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/OAuth2Client/APIClient-Implementations": {
+"doc://AuthFoundation/documentation/AuthFoundation/OAuth2Client/APIClient-Implementations": {
   "abstract" : [
 
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/OAuth2Client\/APIClient-Implementations",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/OAuth2Client\/APIClient-Implementations",
   "kind" : "article",
   "role" : "collectionGroup",
   "title" : "APIClient Implementations",
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/oauth2client\/apiclient-implementations"
 },
-"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/OAuth2Client/decode(_:from:userInfo:)": {
+"doc://AuthFoundation/documentation/AuthFoundation/OAuth2Client/decode(_:from:userInfo:)": {
   "abstract" : [
-    {
-      "text" : "Decodes HTTP response data into an expected type.",
-      "type" : "text"
-    }
+
   ],
   "fragments" : [
     {
@@ -431,7 +392,6 @@
     },
     {
       "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:14AuthFoundation12OAuth2ClientC6decode_4from8userInfoxxm_0B04DataVSDys010CodingUserH3KeyVypGSgtKSeRzlF1TL_xmfp",
       "text" : "T"
     },
     {
@@ -490,11 +450,10 @@
     },
     {
       "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:14AuthFoundation12OAuth2ClientC6decode_4from8userInfoxxm_0B04DataVSDys010CodingUserH3KeyVypGSgtKSeRzlF1TL_xmfp",
       "text" : "T"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/OAuth2Client\/decode(_:from:userInfo:)",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/OAuth2Client\/decode(_:from:userInfo:)",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "decode(_:from:userInfo:)",

@@ -8,14 +8,14 @@
   "hierarchy" : {
     "paths" : [
       [
-        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation",
-        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/JWK"
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JWK"
       ]
     ]
   },
   "identifier" : {
     "interfaceLanguage" : "swift",
-    "url" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/JWK\/KeyType"
+    "url" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JWK\/KeyType"
   },
   "kind" : "symbol",
   "metadata" : {
@@ -83,11 +83,11 @@
   "relationshipsSections" : [
     {
       "identifiers" : [
-        "doc:\/\/com.okta.mobile.authfoundation\/Se",
-        "doc:\/\/com.okta.mobile.authfoundation\/SE",
-        "doc:\/\/com.okta.mobile.authfoundation\/SQ",
-        "doc:\/\/com.okta.mobile.authfoundation\/SH",
-        "doc:\/\/com.okta.mobile.authfoundation\/SY"
+        "doc:\/\/AuthFoundation\/Se",
+        "doc:\/\/AuthFoundation\/SE",
+        "doc:\/\/AuthFoundation\/SQ",
+        "doc:\/\/AuthFoundation\/SH",
+        "doc:\/\/AuthFoundation\/SY"
       ],
       "kind" : "relationships",
       "title" : "Conforms To",
@@ -96,7 +96,7 @@
   ],
   "schemaVersion" : {
     "major" : 0,
-    "minor" : 2,
+    "minor" : 3,
     "patch" : 0
   },
   "sections" : [
@@ -105,23 +105,23 @@
   "topicSections" : [
     {
       "identifiers" : [
-        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/JWK\/KeyType\/ellipticCurve",
-        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/JWK\/KeyType\/octetSequence",
-        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/JWK\/KeyType\/rsa"
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JWK\/KeyType\/ellipticCurve",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JWK\/KeyType\/octetSequence",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JWK\/KeyType\/rsa"
       ],
       "title" : "Enumeration Cases"
     },
     {
       "identifiers" : [
-        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/JWK\/KeyType\/init(rawValue:)"
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JWK\/KeyType\/init(rawValue:)"
       ],
       "title" : "Initializers"
     },
     {
       "generated" : true,
       "identifiers" : [
-        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/JWK\/KeyType\/Equatable-Implementations",
-        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/JWK\/KeyType\/RawRepresentable-Implementations"
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JWK\/KeyType\/Equatable-Implementations",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JWK\/KeyType\/RawRepresentable-Implementations"
       ],
       "title" : "Default Implementations"
     }
@@ -140,46 +140,46 @@
   ]
 , 
 "references": {
-"doc://com.okta.mobile.authfoundation/SE": {
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/SE",
+"doc://AuthFoundation/SE": {
+  "identifier" : "doc:\/\/AuthFoundation\/SE",
   "title" : "Swift.Encodable",
   "type" : "unresolvable"
 },
-"doc://com.okta.mobile.authfoundation/SH": {
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/SH",
+"doc://AuthFoundation/SH": {
+  "identifier" : "doc:\/\/AuthFoundation\/SH",
   "title" : "Swift.Hashable",
   "type" : "unresolvable"
 },
-"doc://com.okta.mobile.authfoundation/SQ": {
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/SQ",
+"doc://AuthFoundation/SQ": {
+  "identifier" : "doc:\/\/AuthFoundation\/SQ",
   "title" : "Swift.Equatable",
   "type" : "unresolvable"
 },
-"doc://com.okta.mobile.authfoundation/SY": {
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/SY",
+"doc://AuthFoundation/SY": {
+  "identifier" : "doc:\/\/AuthFoundation\/SY",
   "title" : "Swift.RawRepresentable",
   "type" : "unresolvable"
 },
-"doc://com.okta.mobile.authfoundation/Se": {
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/Se",
+"doc://AuthFoundation/Se": {
+  "identifier" : "doc:\/\/AuthFoundation\/Se",
   "title" : "Swift.Decodable",
   "type" : "unresolvable"
 },
-"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation": {
+"doc://AuthFoundation/documentation/AuthFoundation": {
   "abstract" : [
     {
       "text" : "Library that provides foundational features used by Okta’s authentication libraries, as well as APIs used to work with tokens and user credentials.",
       "type" : "text"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation",
   "kind" : "symbol",
   "role" : "collection",
   "title" : "AuthFoundation",
   "type" : "topic",
   "url" : "\/documentation\/authfoundation"
 },
-"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/JWK": {
+"doc://AuthFoundation/documentation/AuthFoundation/JWK": {
   "abstract" : [
     {
       "text" : "Describes an individual key from an authorization server, which can be used to validate tokens or encrypt content.",
@@ -200,7 +200,7 @@
       "text" : "JWK"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/JWK",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JWK",
   "kind" : "symbol",
   "navigatorTitle" : [
     {
@@ -213,7 +213,7 @@
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/jwk"
 },
-"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/JWK/KeyType": {
+"doc://AuthFoundation/documentation/AuthFoundation/JWK/KeyType": {
   "abstract" : [
     {
       "text" : "The type of JWK key.",
@@ -234,7 +234,7 @@
       "text" : "KeyType"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/JWK\/KeyType",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JWK\/KeyType",
   "kind" : "symbol",
   "navigatorTitle" : [
     {
@@ -247,29 +247,29 @@
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/jwk\/keytype"
 },
-"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/JWK/KeyType/Equatable-Implementations": {
+"doc://AuthFoundation/documentation/AuthFoundation/JWK/KeyType/Equatable-Implementations": {
   "abstract" : [
 
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/JWK\/KeyType\/Equatable-Implementations",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JWK\/KeyType\/Equatable-Implementations",
   "kind" : "article",
   "role" : "collectionGroup",
   "title" : "Equatable Implementations",
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/jwk\/keytype\/equatable-implementations"
 },
-"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/JWK/KeyType/RawRepresentable-Implementations": {
+"doc://AuthFoundation/documentation/AuthFoundation/JWK/KeyType/RawRepresentable-Implementations": {
   "abstract" : [
 
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/JWK\/KeyType\/RawRepresentable-Implementations",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JWK\/KeyType\/RawRepresentable-Implementations",
   "kind" : "article",
   "role" : "collectionGroup",
   "title" : "RawRepresentable Implementations",
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/jwk\/keytype\/rawrepresentable-implementations"
 },
-"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/JWK/KeyType/ellipticCurve": {
+"doc://AuthFoundation/documentation/AuthFoundation/JWK/KeyType/ellipticCurve": {
   "abstract" : [
 
   ],
@@ -287,19 +287,16 @@
       "text" : "ellipticCurve"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/JWK\/KeyType\/ellipticCurve",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JWK\/KeyType\/ellipticCurve",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "JWK.KeyType.ellipticCurve",
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/jwk\/keytype\/ellipticcurve"
 },
-"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/JWK/KeyType/init(rawValue:)": {
+"doc://AuthFoundation/documentation/AuthFoundation/JWK/KeyType/init(rawValue:)": {
   "abstract" : [
-    {
-      "text" : "Creates a new instance with the specified raw value.",
-      "type" : "text"
-    }
+
   ],
   "fragments" : [
     {
@@ -328,14 +325,14 @@
       "text" : ")"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/JWK\/KeyType\/init(rawValue:)",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JWK\/KeyType\/init(rawValue:)",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "init(rawValue:)",
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/jwk\/keytype\/init(rawvalue:)"
 },
-"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/JWK/KeyType/octetSequence": {
+"doc://AuthFoundation/documentation/AuthFoundation/JWK/KeyType/octetSequence": {
   "abstract" : [
 
   ],
@@ -353,14 +350,14 @@
       "text" : "octetSequence"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/JWK\/KeyType\/octetSequence",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JWK\/KeyType\/octetSequence",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "JWK.KeyType.octetSequence",
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/jwk\/keytype\/octetsequence"
 },
-"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/JWK/KeyType/rsa": {
+"doc://AuthFoundation/documentation/AuthFoundation/JWK/KeyType/rsa": {
   "abstract" : [
 
   ],
@@ -378,7 +375,7 @@
       "text" : "rsa"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/JWK\/KeyType\/rsa",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JWK\/KeyType\/rsa",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "JWK.KeyType.rsa",

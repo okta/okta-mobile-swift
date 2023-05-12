@@ -8,14 +8,14 @@
   "hierarchy" : {
     "paths" : [
       [
-        "doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/WebAuthenticationUI",
-        "doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/WebAuthenticationUI\/WebAuthentication"
+        "doc:\/\/WebAuthenticationUI\/documentation\/WebAuthenticationUI",
+        "doc:\/\/WebAuthenticationUI\/documentation\/WebAuthenticationUI\/WebAuthentication"
       ]
     ]
   },
   "identifier" : {
     "interfaceLanguage" : "swift",
-    "url" : "doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/WebAuthenticationUI\/WebAuthentication\/Option"
+    "url" : "doc:\/\/WebAuthenticationUI\/documentation\/WebAuthenticationUI\/WebAuthentication\/Option"
   },
   "kind" : "symbol",
   "metadata" : {
@@ -81,7 +81,7 @@
   ],
   "schemaVersion" : {
     "major" : 0,
-    "minor" : 2,
+    "minor" : 3,
     "patch" : 0
   },
   "sections" : [
@@ -90,20 +90,20 @@
   "topicSections" : [
     {
       "identifiers" : [
-        "doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/WebAuthenticationUI\/WebAuthentication\/Option\/custom(key:value:)",
-        "doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/WebAuthenticationUI\/WebAuthentication\/Option\/display(_:)",
-        "doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/WebAuthenticationUI\/WebAuthentication\/Option\/idp(url:)",
-        "doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/WebAuthenticationUI\/WebAuthentication\/Option\/idpScope(_:)",
-        "doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/WebAuthenticationUI\/WebAuthentication\/Option\/login(hint:)",
-        "doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/WebAuthenticationUI\/WebAuthentication\/Option\/maxAge(_:)",
-        "doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/WebAuthenticationUI\/WebAuthentication\/Option\/prompt(_:)",
-        "doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/WebAuthenticationUI\/WebAuthentication\/Option\/state(_:)"
+        "doc:\/\/WebAuthenticationUI\/documentation\/WebAuthenticationUI\/WebAuthentication\/Option\/custom(key:value:)",
+        "doc:\/\/WebAuthenticationUI\/documentation\/WebAuthenticationUI\/WebAuthentication\/Option\/display(_:)",
+        "doc:\/\/WebAuthenticationUI\/documentation\/WebAuthenticationUI\/WebAuthentication\/Option\/idp(url:)",
+        "doc:\/\/WebAuthenticationUI\/documentation\/WebAuthenticationUI\/WebAuthentication\/Option\/idpScope(_:)",
+        "doc:\/\/WebAuthenticationUI\/documentation\/WebAuthenticationUI\/WebAuthentication\/Option\/login(hint:)",
+        "doc:\/\/WebAuthenticationUI\/documentation\/WebAuthenticationUI\/WebAuthentication\/Option\/maxAge(_:)",
+        "doc:\/\/WebAuthenticationUI\/documentation\/WebAuthenticationUI\/WebAuthentication\/Option\/prompt(_:)",
+        "doc:\/\/WebAuthenticationUI\/documentation\/WebAuthenticationUI\/WebAuthentication\/Option\/state(_:)"
       ],
       "title" : "Enumeration Cases"
     },
     {
       "identifiers" : [
-        "doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/WebAuthenticationUI\/WebAuthentication\/Option\/Prompt"
+        "doc:\/\/WebAuthenticationUI\/documentation\/WebAuthenticationUI\/WebAuthentication\/Option\/Prompt"
       ],
       "title" : "Enumerations"
     }
@@ -122,21 +122,21 @@
   ]
 , 
 "references": {
-"doc://com.okta.mobile.webauthenticationui/documentation/WebAuthenticationUI": {
+"doc://WebAuthenticationUI/documentation/WebAuthenticationUI": {
   "abstract" : [
     {
       "text" : "Make it easy to enable users to sign in to your app through browser-based sign on.",
       "type" : "text"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/WebAuthenticationUI",
+  "identifier" : "doc:\/\/WebAuthenticationUI\/documentation\/WebAuthenticationUI",
   "kind" : "symbol",
   "role" : "collection",
   "title" : "WebAuthenticationUI",
   "type" : "topic",
   "url" : "\/documentation\/webauthenticationui"
 },
-"doc://com.okta.mobile.webauthenticationui/documentation/WebAuthenticationUI/WebAuthentication": {
+"doc://WebAuthenticationUI/documentation/WebAuthenticationUI/WebAuthentication": {
   "abstract" : [
     {
       "text" : "Authentication coordinator that simplifies signing users in using browser-based OIDC authentication flows.",
@@ -157,7 +157,7 @@
       "text" : "WebAuthentication"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/WebAuthenticationUI\/WebAuthentication",
+  "identifier" : "doc:\/\/WebAuthenticationUI\/documentation\/WebAuthenticationUI\/WebAuthentication",
   "kind" : "symbol",
   "navigatorTitle" : [
     {
@@ -170,7 +170,7 @@
   "type" : "topic",
   "url" : "\/documentation\/webauthenticationui\/webauthentication"
 },
-"doc://com.okta.mobile.webauthenticationui/documentation/WebAuthenticationUI/WebAuthentication/Option": {
+"doc://WebAuthenticationUI/documentation/WebAuthenticationUI/WebAuthentication/Option": {
   "abstract" : [
     {
       "text" : "Describes available options for customizing the sign on process.",
@@ -191,7 +191,7 @@
       "text" : "Option"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/WebAuthenticationUI\/WebAuthentication\/Option",
+  "identifier" : "doc:\/\/WebAuthenticationUI\/documentation\/WebAuthenticationUI\/WebAuthentication\/Option",
   "kind" : "symbol",
   "navigatorTitle" : [
     {
@@ -204,7 +204,7 @@
   "type" : "topic",
   "url" : "\/documentation\/webauthenticationui\/webauthentication\/option"
 },
-"doc://com.okta.mobile.webauthenticationui/documentation/WebAuthenticationUI/WebAuthentication/Option/Prompt": {
+"doc://WebAuthenticationUI/documentation/WebAuthenticationUI/WebAuthentication/Option/Prompt": {
   "abstract" : [
     {
       "text" : "Defines how a user will be prompted to sign in.",
@@ -225,7 +225,7 @@
       "text" : "Prompt"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/WebAuthenticationUI\/WebAuthentication\/Option\/Prompt",
+  "identifier" : "doc:\/\/WebAuthenticationUI\/documentation\/WebAuthenticationUI\/WebAuthentication\/Option\/Prompt",
   "kind" : "symbol",
   "navigatorTitle" : [
     {
@@ -238,7 +238,7 @@
   "type" : "topic",
   "url" : "\/documentation\/webauthenticationui\/webauthentication\/option\/prompt"
 },
-"doc://com.okta.mobile.webauthenticationui/documentation/WebAuthenticationUI/WebAuthentication/Option/custom(key:value:)": {
+"doc://WebAuthenticationUI/documentation/WebAuthenticationUI/WebAuthentication/Option/custom(key:value:)": {
   "abstract" : [
     {
       "text" : "Supply a custom key\/value pair to the authorization server.",
@@ -297,14 +297,14 @@
       "text" : ")"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/WebAuthenticationUI\/WebAuthentication\/Option\/custom(key:value:)",
+  "identifier" : "doc:\/\/WebAuthenticationUI\/documentation\/WebAuthenticationUI\/WebAuthentication\/Option\/custom(key:value:)",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "WebAuthentication.Option.custom(key:value:)",
   "type" : "topic",
   "url" : "\/documentation\/webauthenticationui\/webauthentication\/option\/custom(key:value:)"
 },
-"doc://com.okta.mobile.webauthenticationui/documentation/WebAuthenticationUI/WebAuthentication/Option/display(_:)": {
+"doc://WebAuthenticationUI/documentation/WebAuthenticationUI/WebAuthentication/Option/display(_:)": {
   "abstract" : [
     {
       "text" : "Value passed to the Social IdP when performing social login.",
@@ -338,14 +338,14 @@
       "text" : ")"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/WebAuthenticationUI\/WebAuthentication\/Option\/display(_:)",
+  "identifier" : "doc:\/\/WebAuthenticationUI\/documentation\/WebAuthenticationUI\/WebAuthentication\/Option\/display(_:)",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "WebAuthentication.Option.display(_:)",
   "type" : "topic",
   "url" : "\/documentation\/webauthenticationui\/webauthentication\/option\/display(_:)"
 },
-"doc://com.okta.mobile.webauthenticationui/documentation/WebAuthenticationUI/WebAuthentication/Option/idp(url:)": {
+"doc://WebAuthenticationUI/documentation/WebAuthenticationUI/WebAuthentication/Option/idp(url:)": {
   "abstract" : [
     {
       "text" : "Identity Provider to use if there’s no Okta session.",
@@ -387,14 +387,14 @@
       "text" : ")"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/WebAuthenticationUI\/WebAuthentication\/Option\/idp(url:)",
+  "identifier" : "doc:\/\/WebAuthenticationUI\/documentation\/WebAuthenticationUI\/WebAuthentication\/Option\/idp(url:)",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "WebAuthentication.Option.idp(url:)",
   "type" : "topic",
   "url" : "\/documentation\/webauthenticationui\/webauthentication\/option\/idp(url:)"
 },
-"doc://com.okta.mobile.webauthenticationui/documentation/WebAuthenticationUI/WebAuthentication/Option/idpScope(_:)": {
+"doc://WebAuthenticationUI/documentation/WebAuthenticationUI/WebAuthentication/Option/idpScope(_:)": {
   "abstract" : [
     {
       "text" : "Identity Provider to use if there’s no Okta session.",
@@ -428,14 +428,14 @@
       "text" : ")"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/WebAuthenticationUI\/WebAuthentication\/Option\/idpScope(_:)",
+  "identifier" : "doc:\/\/WebAuthenticationUI\/documentation\/WebAuthenticationUI\/WebAuthentication\/Option\/idpScope(_:)",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "WebAuthentication.Option.idpScope(_:)",
   "type" : "topic",
   "url" : "\/documentation\/webauthenticationui\/webauthentication\/option\/idpscope(_:)"
 },
-"doc://com.okta.mobile.webauthenticationui/documentation/WebAuthenticationUI/WebAuthentication/Option/login(hint:)": {
+"doc://WebAuthenticationUI/documentation/WebAuthenticationUI/WebAuthentication/Option/login(hint:)": {
   "abstract" : [
     {
       "text" : "The username to pre-populate if prompting for authentication.",
@@ -477,14 +477,14 @@
       "text" : ")"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/WebAuthenticationUI\/WebAuthentication\/Option\/login(hint:)",
+  "identifier" : "doc:\/\/WebAuthenticationUI\/documentation\/WebAuthenticationUI\/WebAuthentication\/Option\/login(hint:)",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "WebAuthentication.Option.login(hint:)",
   "type" : "topic",
   "url" : "\/documentation\/webauthenticationui\/webauthentication\/option\/login(hint:)"
 },
-"doc://com.okta.mobile.webauthenticationui/documentation/WebAuthenticationUI/WebAuthentication/Option/maxAge(_:)": {
+"doc://WebAuthenticationUI/documentation/WebAuthenticationUI/WebAuthentication/Option/maxAge(_:)": {
   "abstract" : [
     {
       "text" : "Allowable elapsed time since the user was last authenticated.",
@@ -518,14 +518,14 @@
       "text" : ")"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/WebAuthenticationUI\/WebAuthentication\/Option\/maxAge(_:)",
+  "identifier" : "doc:\/\/WebAuthenticationUI\/documentation\/WebAuthenticationUI\/WebAuthentication\/Option\/maxAge(_:)",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "WebAuthentication.Option.maxAge(_:)",
   "type" : "topic",
   "url" : "\/documentation\/webauthenticationui\/webauthentication\/option\/maxage(_:)"
 },
-"doc://com.okta.mobile.webauthenticationui/documentation/WebAuthenticationUI/WebAuthentication/Option/prompt(_:)": {
+"doc://WebAuthenticationUI/documentation/WebAuthenticationUI/WebAuthentication/Option/prompt(_:)": {
   "abstract" : [
     {
       "text" : "Control how the user is prompted when authentication starts.",
@@ -551,6 +551,24 @@
     },
     {
       "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:19WebAuthenticationUI0aB0C",
+      "text" : "WebAuthentication"
+    },
+    {
+      "kind" : "text",
+      "text" : "."
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:19WebAuthenticationUI0aB0C6OptionO",
+      "text" : "Option"
+    },
+    {
+      "kind" : "text",
+      "text" : "."
+    },
+    {
+      "kind" : "typeIdentifier",
       "preciseIdentifier" : "s:19WebAuthenticationUI0aB0C6OptionO6PromptO",
       "text" : "Prompt"
     },
@@ -559,14 +577,14 @@
       "text" : ")"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/WebAuthenticationUI\/WebAuthentication\/Option\/prompt(_:)",
+  "identifier" : "doc:\/\/WebAuthenticationUI\/documentation\/WebAuthenticationUI\/WebAuthentication\/Option\/prompt(_:)",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "WebAuthentication.Option.prompt(_:)",
   "type" : "topic",
   "url" : "\/documentation\/webauthenticationui\/webauthentication\/option\/prompt(_:)"
 },
-"doc://com.okta.mobile.webauthenticationui/documentation/WebAuthenticationUI/WebAuthentication/Option/state(_:)": {
+"doc://WebAuthenticationUI/documentation/WebAuthenticationUI/WebAuthentication/Option/state(_:)": {
   "abstract" : [
     {
       "text" : "Specify a custom state to use when authorizing.",
@@ -600,7 +618,7 @@
       "text" : ")"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.webauthenticationui\/documentation\/WebAuthenticationUI\/WebAuthentication\/Option\/state(_:)",
+  "identifier" : "doc:\/\/WebAuthenticationUI\/documentation\/WebAuthenticationUI\/WebAuthentication\/Option\/state(_:)",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "WebAuthentication.Option.state(_:)",

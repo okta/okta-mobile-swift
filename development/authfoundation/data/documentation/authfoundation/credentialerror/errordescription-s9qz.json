@@ -1,22 +1,30 @@
 {
   "abstract" : [
     {
-      "text" : "A localized message describing what error occurred.",
+      "text" : "Inherited from ",
+      "type" : "text"
+    },
+    {
+      "code" : "LocalizedError.errorDescription",
+      "type" : "codeVoice"
+    },
+    {
+      "text" : ".",
       "type" : "text"
     }
   ],
   "hierarchy" : {
     "paths" : [
       [
-        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation",
-        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/CredentialError",
-        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/CredentialError\/LocalizedError-Implementations"
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/CredentialError",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/CredentialError\/LocalizedError-Implementations"
       ]
     ]
   },
   "identifier" : {
     "interfaceLanguage" : "swift",
-    "url" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/CredentialError\/errorDescription-s9qz"
+    "url" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/CredentialError\/errorDescription-s9qz"
   },
   "kind" : "symbol",
   "metadata" : {
@@ -111,7 +119,7 @@
   ],
   "schemaVersion" : {
     "major" : 0,
-    "minor" : 2,
+    "minor" : 3,
     "patch" : 0
   },
   "sections" : [
@@ -131,21 +139,21 @@
   ]
 , 
 "references": {
-"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation": {
+"doc://AuthFoundation/documentation/AuthFoundation": {
   "abstract" : [
     {
       "text" : "Library that provides foundational features used by Okta’s authentication libraries, as well as APIs used to work with tokens and user credentials.",
       "type" : "text"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation",
   "kind" : "symbol",
   "role" : "collection",
   "title" : "AuthFoundation",
   "type" : "topic",
   "url" : "\/documentation\/authfoundation"
 },
-"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/CredentialError": {
+"doc://AuthFoundation/documentation/AuthFoundation/CredentialError": {
   "abstract" : [
     {
       "text" : "Errors that may occur in the process of managing credentials.",
@@ -166,7 +174,7 @@
       "text" : "CredentialError"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/CredentialError",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/CredentialError",
   "kind" : "symbol",
   "navigatorTitle" : [
     {
@@ -179,23 +187,20 @@
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/credentialerror"
 },
-"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/CredentialError/LocalizedError-Implementations": {
+"doc://AuthFoundation/documentation/AuthFoundation/CredentialError/LocalizedError-Implementations": {
   "abstract" : [
 
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/CredentialError\/LocalizedError-Implementations",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/CredentialError\/LocalizedError-Implementations",
   "kind" : "article",
   "role" : "collectionGroup",
   "title" : "LocalizedError Implementations",
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/credentialerror\/localizederror-implementations"
 },
-"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/CredentialError/errorDescription-s9qz": {
+"doc://AuthFoundation/documentation/AuthFoundation/CredentialError/errorDescription-s9qz": {
   "abstract" : [
-    {
-      "text" : "A localized message describing what error occurred.",
-      "type" : "text"
-    }
+
   ],
   "fragments" : [
     {
@@ -224,7 +229,7 @@
       "text" : "?"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/CredentialError\/errorDescription-s9qz",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/CredentialError\/errorDescription-s9qz",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "errorDescription",

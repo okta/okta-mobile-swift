@@ -1,27 +1,35 @@
 {
   "abstract" : [
     {
-      "text" : "No overview available.",
+      "text" : "Inherited from ",
+      "type" : "text"
+    },
+    {
+      "code" : "APIClientDelegate.api(client:didSend:received:)",
+      "type" : "codeVoice"
+    },
+    {
+      "text" : ".",
       "type" : "text"
     }
   ],
   "hierarchy" : {
     "paths" : [
       [
-        "doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/OktaOAuth2",
-        "doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/OktaOAuth2\/ResourceOwnerFlow",
-        "doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/OktaOAuth2\/ResourceOwnerFlow\/APIClientDelegate-Implementations"
+        "doc:\/\/OktaOAuth2\/documentation\/OktaOAuth2",
+        "doc:\/\/OktaOAuth2\/documentation\/OktaOAuth2\/ResourceOwnerFlow",
+        "doc:\/\/OktaOAuth2\/documentation\/OktaOAuth2\/ResourceOwnerFlow\/APIClientDelegate-Implementations"
       ]
     ]
   },
   "identifier" : {
     "interfaceLanguage" : "swift",
-    "url" : "doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/OktaOAuth2\/ResourceOwnerFlow\/api(client:didSend:received:)"
+    "url" : "doc:\/\/OktaOAuth2\/documentation\/OktaOAuth2\/ResourceOwnerFlow\/api(client:didSend:received:)"
   },
   "kind" : "symbol",
   "metadata" : {
     "extendedModule" : "AuthFoundation",
-    "externalID" : "s:14AuthFoundation17APIClientDelegatePAAE3api6client7didSend8receivedyAA0C0_p_0B010URLRequestVAA0C5ErrorOtF::SYNTHESIZED::s:10OktaOAuth217ResourceOwnerFlowC",
+    "externalID" : "s:14AuthFoundation17APIClientDelegatePAAE3api6client7didSend8receivedyAA0C0_p_0B010URLRequestVSo17NSHTTPURLResponseCtF::SYNTHESIZED::s:10OktaOAuth217ResourceOwnerFlowC",
     "fragments" : [
       {
         "kind" : "keyword",
@@ -83,8 +91,8 @@
       },
       {
         "kind" : "typeIdentifier",
-        "preciseIdentifier" : "s:14AuthFoundation14APIClientErrorO",
-        "text" : "APIClientError"
+        "preciseIdentifier" : "c:objc(cs)NSHTTPURLResponse",
+        "text" : "HTTPURLResponse"
       },
       {
         "kind" : "text",
@@ -137,7 +145,6 @@
               "text" : ": "
             },
             {
-              "identifier" : "doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/AuthFoundation\/APIClient",
               "kind" : "typeIdentifier",
               "preciseIdentifier" : "s:14AuthFoundation9APIClientP",
               "text" : "APIClient"
@@ -181,17 +188,16 @@
             },
             {
               "kind" : "internalParam",
-              "text" : "error"
+              "text" : "response"
             },
             {
               "kind" : "text",
               "text" : ": "
             },
             {
-              "identifier" : "doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/AuthFoundation\/APIClientError",
               "kind" : "typeIdentifier",
-              "preciseIdentifier" : "s:14AuthFoundation14APIClientErrorO",
-              "text" : "APIClientError"
+              "preciseIdentifier" : "c:objc(cs)NSHTTPURLResponse",
+              "text" : "HTTPURLResponse"
             },
             {
               "kind" : "text",
@@ -205,7 +211,7 @@
   ],
   "schemaVersion" : {
     "major" : 0,
-    "minor" : 2,
+    "minor" : 3,
     "patch" : 0
   },
   "sections" : [
@@ -225,95 +231,28 @@
   ]
 , 
 "references": {
-"doc://com.okta.mobile.oktaoauth2/documentation/AuthFoundation/APIClient": {
-  "abstract" : [
-    {
-      "text" : "Protocol defining the interfaces and capabilities that API clients can conform to.",
-      "type" : "text"
-    }
-  ],
-  "fragments" : [
-    {
-      "kind" : "keyword",
-      "text" : "protocol"
-    },
-    {
-      "kind" : "text",
-      "text" : " "
-    },
-    {
-      "kind" : "identifier",
-      "text" : "APIClient"
-    }
-  ],
-  "identifier" : "doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/AuthFoundation\/APIClient",
-  "kind" : "symbol",
-  "navigatorTitle" : [
-    {
-      "kind" : "identifier",
-      "text" : "APIClient"
-    }
-  ],
-  "role" : "symbol",
-  "title" : "APIClient",
-  "type" : "topic",
-  "url" : "\/documentation\/authfoundation\/apiclient"
-},
-"doc://com.okta.mobile.oktaoauth2/documentation/AuthFoundation/APIClientError": {
-  "abstract" : [
-    {
-      "text" : "Errors that may occur at the API or network level.",
-      "type" : "text"
-    }
-  ],
-  "fragments" : [
-    {
-      "kind" : "keyword",
-      "text" : "enum"
-    },
-    {
-      "kind" : "text",
-      "text" : " "
-    },
-    {
-      "kind" : "identifier",
-      "text" : "APIClientError"
-    }
-  ],
-  "identifier" : "doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/AuthFoundation\/APIClientError",
-  "kind" : "symbol",
-  "navigatorTitle" : [
-    {
-      "kind" : "identifier",
-      "text" : "APIClientError"
-    }
-  ],
-  "role" : "symbol",
-  "title" : "APIClientError",
-  "type" : "topic",
-  "url" : "\/documentation\/authfoundation\/apiclienterror"
-},
-"doc://com.okta.mobile.oktaoauth2/documentation/OktaOAuth2": {
+"doc://OktaOAuth2/documentation/OktaOAuth2": {
   "abstract" : [
     {
       "text" : "Interact with Okta’s OAuth2 APIs to authenticate users, and interact with user resources.",
       "type" : "text"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/OktaOAuth2",
+  "identifier" : "doc:\/\/OktaOAuth2\/documentation\/OktaOAuth2",
   "kind" : "symbol",
   "role" : "collection",
   "title" : "OktaOAuth2",
   "type" : "topic",
   "url" : "\/documentation\/oktaoauth2"
 },
-"doc://com.okta.mobile.oktaoauth2/documentation/OktaOAuth2/ResourceOwnerFlow": {
+"doc://OktaOAuth2/documentation/OktaOAuth2/ResourceOwnerFlow": {
   "abstract" : [
     {
       "text" : "An authentication flow class that implements the Resource Owner Flow exchange.",
       "type" : "text"
     }
   ],
+  "deprecated" : true,
   "fragments" : [
     {
       "kind" : "keyword",
@@ -328,7 +267,7 @@
       "text" : "ResourceOwnerFlow"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/OktaOAuth2\/ResourceOwnerFlow",
+  "identifier" : "doc:\/\/OktaOAuth2\/documentation\/OktaOAuth2\/ResourceOwnerFlow",
   "kind" : "symbol",
   "navigatorTitle" : [
     {
@@ -341,18 +280,18 @@
   "type" : "topic",
   "url" : "\/documentation\/oktaoauth2\/resourceownerflow"
 },
-"doc://com.okta.mobile.oktaoauth2/documentation/OktaOAuth2/ResourceOwnerFlow/APIClientDelegate-Implementations": {
+"doc://OktaOAuth2/documentation/OktaOAuth2/ResourceOwnerFlow/APIClientDelegate-Implementations": {
   "abstract" : [
 
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/OktaOAuth2\/ResourceOwnerFlow\/APIClientDelegate-Implementations",
+  "identifier" : "doc:\/\/OktaOAuth2\/documentation\/OktaOAuth2\/ResourceOwnerFlow\/APIClientDelegate-Implementations",
   "kind" : "article",
   "role" : "collectionGroup",
   "title" : "APIClientDelegate Implementations",
   "type" : "topic",
   "url" : "\/documentation\/oktaoauth2\/resourceownerflow\/apiclientdelegate-implementations"
 },
-"doc://com.okta.mobile.oktaoauth2/documentation/OktaOAuth2/ResourceOwnerFlow/api(client:didSend:received:)": {
+"doc://OktaOAuth2/documentation/OktaOAuth2/ResourceOwnerFlow/api(client:didSend:received:)": {
   "abstract" : [
 
   ],
@@ -417,15 +356,15 @@
     },
     {
       "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:14AuthFoundation14APIClientErrorO",
-      "text" : "APIClientError"
+      "preciseIdentifier" : "c:objc(cs)NSHTTPURLResponse",
+      "text" : "HTTPURLResponse"
     },
     {
       "kind" : "text",
       "text" : ")"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/OktaOAuth2\/ResourceOwnerFlow\/api(client:didSend:received:)",
+  "identifier" : "doc:\/\/OktaOAuth2\/documentation\/OktaOAuth2\/ResourceOwnerFlow\/api(client:didSend:received:)",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "api(client:didSend:received:)",

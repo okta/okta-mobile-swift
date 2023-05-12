@@ -1,20 +1,14 @@
 {
-  "abstract" : [
-    {
-      "text" : "No overview available.",
-      "type" : "text"
-    }
-  ],
   "hierarchy" : {
     "paths" : [
       [
-        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation"
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation"
       ]
     ]
   },
   "identifier" : {
     "interfaceLanguage" : "swift",
-    "url" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/GrantType"
+    "url" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/GrantType"
   },
   "kind" : "symbol",
   "metadata" : {
@@ -81,11 +75,11 @@
   "relationshipsSections" : [
     {
       "identifiers" : [
-        "doc:\/\/com.okta.mobile.authfoundation\/Se",
-        "doc:\/\/com.okta.mobile.authfoundation\/SE",
-        "doc:\/\/com.okta.mobile.authfoundation\/SQ",
-        "doc:\/\/com.okta.mobile.authfoundation\/SH",
-        "doc:\/\/com.okta.mobile.authfoundation\/SY"
+        "doc:\/\/AuthFoundation\/Se",
+        "doc:\/\/AuthFoundation\/SE",
+        "doc:\/\/AuthFoundation\/SQ",
+        "doc:\/\/AuthFoundation\/SH",
+        "doc:\/\/AuthFoundation\/SY"
       ],
       "kind" : "relationships",
       "title" : "Conforms To",
@@ -94,7 +88,7 @@
   ],
   "schemaVersion" : {
     "major" : 0,
-    "minor" : 2,
+    "minor" : 3,
     "patch" : 0
   },
   "sections" : [
@@ -104,13 +98,13 @@
     {
       "generated" : true,
       "identifiers" : [
-        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/OAuth2Client",
-        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/OAuth2ClientDelegate",
-        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/OpenIdConfiguration",
-        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/AuthenticationFlow",
-        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/AuthenticationDelegate",
-        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/OAuth2TokenRequest",
-        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/PKCE"
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/OAuth2Client",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/OAuth2ClientDelegate",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/OpenIdConfiguration",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/AuthenticationFlow",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/AuthenticationDelegate",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/OAuth2TokenRequest",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/PKCE"
       ],
       "title" : "OAuth2 Client Operations"
     }
@@ -118,21 +112,25 @@
   "topicSections" : [
     {
       "identifiers" : [
-        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/GrantType\/authorizationCode",
-        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/GrantType\/deviceCode",
-        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/GrantType\/implicit",
-        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/GrantType\/other(_:)",
-        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/GrantType\/password",
-        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/GrantType\/refreshToken",
-        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/GrantType\/tokenExchange"
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/GrantType\/authorizationCode",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/GrantType\/deviceCode",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/GrantType\/implicit",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/GrantType\/oob",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/GrantType\/oobMFA",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/GrantType\/other(_:)",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/GrantType\/otp",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/GrantType\/otpMFA",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/GrantType\/password",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/GrantType\/refreshToken",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/GrantType\/tokenExchange"
       ],
       "title" : "Enumeration Cases"
     },
     {
       "generated" : true,
       "identifiers" : [
-        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/GrantType\/Equatable-Implementations",
-        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/GrantType\/RawRepresentable-Implementations"
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/GrantType\/Equatable-Implementations",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/GrantType\/RawRepresentable-Implementations"
       ],
       "title" : "Default Implementations"
     }
@@ -151,46 +149,46 @@
   ]
 , 
 "references": {
-"doc://com.okta.mobile.authfoundation/SE": {
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/SE",
+"doc://AuthFoundation/SE": {
+  "identifier" : "doc:\/\/AuthFoundation\/SE",
   "title" : "Swift.Encodable",
   "type" : "unresolvable"
 },
-"doc://com.okta.mobile.authfoundation/SH": {
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/SH",
+"doc://AuthFoundation/SH": {
+  "identifier" : "doc:\/\/AuthFoundation\/SH",
   "title" : "Swift.Hashable",
   "type" : "unresolvable"
 },
-"doc://com.okta.mobile.authfoundation/SQ": {
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/SQ",
+"doc://AuthFoundation/SQ": {
+  "identifier" : "doc:\/\/AuthFoundation\/SQ",
   "title" : "Swift.Equatable",
   "type" : "unresolvable"
 },
-"doc://com.okta.mobile.authfoundation/SY": {
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/SY",
+"doc://AuthFoundation/SY": {
+  "identifier" : "doc:\/\/AuthFoundation\/SY",
   "title" : "Swift.RawRepresentable",
   "type" : "unresolvable"
 },
-"doc://com.okta.mobile.authfoundation/Se": {
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/Se",
+"doc://AuthFoundation/Se": {
+  "identifier" : "doc:\/\/AuthFoundation\/Se",
   "title" : "Swift.Decodable",
   "type" : "unresolvable"
 },
-"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation": {
+"doc://AuthFoundation/documentation/AuthFoundation": {
   "abstract" : [
     {
       "text" : "Library that provides foundational features used by Okta’s authentication libraries, as well as APIs used to work with tokens and user credentials.",
       "type" : "text"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation",
   "kind" : "symbol",
   "role" : "collection",
   "title" : "AuthFoundation",
   "type" : "topic",
   "url" : "\/documentation\/authfoundation"
 },
-"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/APIRequest": {
+"doc://AuthFoundation/documentation/AuthFoundation/APIRequest": {
   "abstract" : [
     {
       "text" : "Abstract protocol defining the structure of an API request.",
@@ -211,7 +209,7 @@
       "text" : "APIRequest"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/APIRequest",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/APIRequest",
   "kind" : "symbol",
   "navigatorTitle" : [
     {
@@ -224,7 +222,7 @@
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/apirequest"
 },
-"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/AuthenticationDelegate": {
+"doc://AuthFoundation/documentation/AuthFoundation/AuthenticationDelegate": {
   "abstract" : [
     {
       "text" : "A common delegate protocol that all authentication flows should support.",
@@ -245,7 +243,7 @@
       "text" : "AuthenticationDelegate"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/AuthenticationDelegate",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/AuthenticationDelegate",
   "kind" : "symbol",
   "navigatorTitle" : [
     {
@@ -258,7 +256,7 @@
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/authenticationdelegate"
 },
-"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/AuthenticationFlow": {
+"doc://AuthFoundation/documentation/AuthFoundation/AuthenticationFlow": {
   "abstract" : [
     {
       "text" : "A protocol defining a type of authentication flow.",
@@ -279,7 +277,7 @@
       "text" : "AuthenticationFlow"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/AuthenticationFlow",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/AuthenticationFlow",
   "kind" : "symbol",
   "navigatorTitle" : [
     {
@@ -292,7 +290,7 @@
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/authenticationflow"
 },
-"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/GrantType": {
+"doc://AuthFoundation/documentation/AuthFoundation/GrantType": {
   "abstract" : [
 
   ],
@@ -310,7 +308,7 @@
       "text" : "GrantType"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/GrantType",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/GrantType",
   "kind" : "symbol",
   "navigatorTitle" : [
     {
@@ -323,29 +321,29 @@
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/granttype"
 },
-"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/GrantType/Equatable-Implementations": {
+"doc://AuthFoundation/documentation/AuthFoundation/GrantType/Equatable-Implementations": {
   "abstract" : [
 
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/GrantType\/Equatable-Implementations",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/GrantType\/Equatable-Implementations",
   "kind" : "article",
   "role" : "collectionGroup",
   "title" : "Equatable Implementations",
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/granttype\/equatable-implementations"
 },
-"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/GrantType/RawRepresentable-Implementations": {
+"doc://AuthFoundation/documentation/AuthFoundation/GrantType/RawRepresentable-Implementations": {
   "abstract" : [
 
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/GrantType\/RawRepresentable-Implementations",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/GrantType\/RawRepresentable-Implementations",
   "kind" : "article",
   "role" : "collectionGroup",
   "title" : "RawRepresentable Implementations",
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/granttype\/rawrepresentable-implementations"
 },
-"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/GrantType/authorizationCode": {
+"doc://AuthFoundation/documentation/AuthFoundation/GrantType/authorizationCode": {
   "abstract" : [
 
   ],
@@ -363,14 +361,14 @@
       "text" : "authorizationCode"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/GrantType\/authorizationCode",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/GrantType\/authorizationCode",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "GrantType.authorizationCode",
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/granttype\/authorizationcode"
 },
-"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/GrantType/deviceCode": {
+"doc://AuthFoundation/documentation/AuthFoundation/GrantType/deviceCode": {
   "abstract" : [
 
   ],
@@ -388,14 +386,14 @@
       "text" : "deviceCode"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/GrantType\/deviceCode",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/GrantType\/deviceCode",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "GrantType.deviceCode",
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/granttype\/devicecode"
 },
-"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/GrantType/implicit": {
+"doc://AuthFoundation/documentation/AuthFoundation/GrantType/implicit": {
   "abstract" : [
 
   ],
@@ -413,14 +411,64 @@
       "text" : "implicit"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/GrantType\/implicit",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/GrantType\/implicit",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "GrantType.implicit",
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/granttype\/implicit"
 },
-"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/GrantType/other(_:)": {
+"doc://AuthFoundation/documentation/AuthFoundation/GrantType/oob": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "case"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "oob"
+    }
+  ],
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/GrantType\/oob",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "GrantType.oob",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/granttype\/oob"
+},
+"doc://AuthFoundation/documentation/AuthFoundation/GrantType/oobMFA": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "case"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "oobMFA"
+    }
+  ],
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/GrantType\/oobMFA",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "GrantType.oobMFA",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/granttype\/oobmfa"
+},
+"doc://AuthFoundation/documentation/AuthFoundation/GrantType/other(_:)": {
   "abstract" : [
 
   ],
@@ -451,14 +499,64 @@
       "text" : ")"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/GrantType\/other(_:)",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/GrantType\/other(_:)",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "GrantType.other(_:)",
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/granttype\/other(_:)"
 },
-"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/GrantType/password": {
+"doc://AuthFoundation/documentation/AuthFoundation/GrantType/otp": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "case"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "otp"
+    }
+  ],
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/GrantType\/otp",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "GrantType.otp",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/granttype\/otp"
+},
+"doc://AuthFoundation/documentation/AuthFoundation/GrantType/otpMFA": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "case"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "otpMFA"
+    }
+  ],
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/GrantType\/otpMFA",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "GrantType.otpMFA",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/granttype\/otpmfa"
+},
+"doc://AuthFoundation/documentation/AuthFoundation/GrantType/password": {
   "abstract" : [
 
   ],
@@ -476,14 +574,14 @@
       "text" : "password"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/GrantType\/password",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/GrantType\/password",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "GrantType.password",
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/granttype\/password"
 },
-"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/GrantType/refreshToken": {
+"doc://AuthFoundation/documentation/AuthFoundation/GrantType/refreshToken": {
   "abstract" : [
 
   ],
@@ -501,14 +599,14 @@
       "text" : "refreshToken"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/GrantType\/refreshToken",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/GrantType\/refreshToken",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "GrantType.refreshToken",
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/granttype\/refreshtoken"
 },
-"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/GrantType/tokenExchange": {
+"doc://AuthFoundation/documentation/AuthFoundation/GrantType/tokenExchange": {
   "abstract" : [
 
   ],
@@ -526,14 +624,14 @@
       "text" : "tokenExchange"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/GrantType\/tokenExchange",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/GrantType\/tokenExchange",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "GrantType.tokenExchange",
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/granttype\/tokenexchange"
 },
-"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/OAuth2Client": {
+"doc://AuthFoundation/documentation/AuthFoundation/OAuth2Client": {
   "abstract" : [
     {
       "text" : "An OAuth2 client, used to interact with a given authorization server.",
@@ -554,7 +652,7 @@
       "text" : "OAuth2Client"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/OAuth2Client",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/OAuth2Client",
   "kind" : "symbol",
   "navigatorTitle" : [
     {
@@ -567,14 +665,14 @@
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/oauth2client"
 },
-"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/OAuth2ClientDelegate": {
+"doc://AuthFoundation/documentation/AuthFoundation/OAuth2ClientDelegate": {
   "abstract" : [
     {
       "text" : "Delegate protocol used by ",
       "type" : "text"
     },
     {
-      "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/OAuth2Client",
+      "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/OAuth2Client",
       "isActive" : true,
       "type" : "reference"
     },
@@ -597,7 +695,7 @@
       "text" : "OAuth2ClientDelegate"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/OAuth2ClientDelegate",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/OAuth2ClientDelegate",
   "kind" : "symbol",
   "navigatorTitle" : [
     {
@@ -610,14 +708,14 @@
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/oauth2clientdelegate"
 },
-"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/OAuth2TokenRequest": {
+"doc://AuthFoundation/documentation/AuthFoundation/OAuth2TokenRequest": {
   "abstract" : [
     {
       "text" : "Protocol that represents a type of ",
       "type" : "text"
     },
     {
-      "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/APIRequest",
+      "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/APIRequest",
       "isActive" : true,
       "type" : "reference"
     },
@@ -640,7 +738,7 @@
       "text" : "OAuth2TokenRequest"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/OAuth2TokenRequest",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/OAuth2TokenRequest",
   "kind" : "symbol",
   "navigatorTitle" : [
     {
@@ -653,7 +751,7 @@
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/oauth2tokenrequest"
 },
-"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/OpenIdConfiguration": {
+"doc://AuthFoundation/documentation/AuthFoundation/OpenIdConfiguration": {
   "abstract" : [
     {
       "text" : "Describes the configuration of an OpenID server.",
@@ -674,7 +772,7 @@
       "text" : "OpenIdConfiguration"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/OpenIdConfiguration",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/OpenIdConfiguration",
   "kind" : "symbol",
   "navigatorTitle" : [
     {
@@ -687,7 +785,7 @@
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/openidconfiguration"
 },
-"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/PKCE": {
+"doc://AuthFoundation/documentation/AuthFoundation/PKCE": {
   "abstract" : [
     {
       "text" : "Object defining the structure and settings of a PKCE challenge, including the verifier code, the encoded challenge, and the method used to exchange this information with the server.",
@@ -708,7 +806,7 @@
       "text" : "PKCE"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/PKCE",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/PKCE",
   "kind" : "symbol",
   "navigatorTitle" : [
     {

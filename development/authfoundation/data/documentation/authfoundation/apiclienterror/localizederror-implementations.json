@@ -1,21 +1,15 @@
 {
-  "abstract" : [
-    {
-      "text" : "No overview available.",
-      "type" : "text"
-    }
-  ],
   "hierarchy" : {
     "paths" : [
       [
-        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation",
-        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/APIClientError"
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/APIClientError"
       ]
     ]
   },
   "identifier" : {
     "interfaceLanguage" : "swift",
-    "url" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/APIClientError\/LocalizedError-Implementations"
+    "url" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/APIClientError\/LocalizedError-Implementations"
   },
   "kind" : "article",
   "metadata" : {
@@ -29,7 +23,7 @@
   },
   "schemaVersion" : {
     "major" : 0,
-    "minor" : 2,
+    "minor" : 3,
     "patch" : 0
   },
   "sections" : [
@@ -39,11 +33,11 @@
     {
       "generated" : true,
       "identifiers" : [
-        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/APIClientError\/errorDescription-7e35h",
-        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/APIClientError\/errorDescription-7unw",
-        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/APIClientError\/failureReason",
-        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/APIClientError\/helpAnchor",
-        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/APIClientError\/recoverySuggestion"
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/APIClientError\/errorDescription-7e35h",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/APIClientError\/errorDescription-7unw",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/APIClientError\/failureReason",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/APIClientError\/helpAnchor",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/APIClientError\/recoverySuggestion"
       ],
       "title" : "Instance Properties"
     }
@@ -62,21 +56,21 @@
   ]
 , 
 "references": {
-"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation": {
+"doc://AuthFoundation/documentation/AuthFoundation": {
   "abstract" : [
     {
       "text" : "Library that provides foundational features used by Okta’s authentication libraries, as well as APIs used to work with tokens and user credentials.",
       "type" : "text"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation",
   "kind" : "symbol",
   "role" : "collection",
   "title" : "AuthFoundation",
   "type" : "topic",
   "url" : "\/documentation\/authfoundation"
 },
-"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/APIClientError": {
+"doc://AuthFoundation/documentation/AuthFoundation/APIClientError": {
   "abstract" : [
     {
       "text" : "Errors that may occur at the API or network level.",
@@ -97,7 +91,7 @@
       "text" : "APIClientError"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/APIClientError",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/APIClientError",
   "kind" : "symbol",
   "navigatorTitle" : [
     {
@@ -110,12 +104,9 @@
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/apiclienterror"
 },
-"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/APIClientError/errorDescription-7e35h": {
+"doc://AuthFoundation/documentation/AuthFoundation/APIClientError/errorDescription-7e35h": {
   "abstract" : [
-    {
-      "text" : "A localized message describing what error occurred.",
-      "type" : "text"
-    }
+
   ],
   "fragments" : [
     {
@@ -144,19 +135,16 @@
       "text" : "?"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/APIClientError\/errorDescription-7e35h",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/APIClientError\/errorDescription-7e35h",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "errorDescription",
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/apiclienterror\/errordescription-7e35h"
 },
-"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/APIClientError/errorDescription-7unw": {
+"doc://AuthFoundation/documentation/AuthFoundation/APIClientError/errorDescription-7unw": {
   "abstract" : [
-    {
-      "text" : "A localized message describing what error occurred.",
-      "type" : "text"
-    }
+
   ],
   "fragments" : [
     {
@@ -185,19 +173,16 @@
       "text" : "?"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/APIClientError\/errorDescription-7unw",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/APIClientError\/errorDescription-7unw",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "errorDescription",
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/apiclienterror\/errordescription-7unw"
 },
-"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/APIClientError/failureReason": {
+"doc://AuthFoundation/documentation/AuthFoundation/APIClientError/failureReason": {
   "abstract" : [
-    {
-      "text" : "A localized message describing the reason for the failure.",
-      "type" : "text"
-    }
+
   ],
   "fragments" : [
     {
@@ -226,19 +211,16 @@
       "text" : "?"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/APIClientError\/failureReason",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/APIClientError\/failureReason",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "failureReason",
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/apiclienterror\/failurereason"
 },
-"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/APIClientError/helpAnchor": {
+"doc://AuthFoundation/documentation/AuthFoundation/APIClientError/helpAnchor": {
   "abstract" : [
-    {
-      "text" : "A localized message providing “help” text if the user requests help.",
-      "type" : "text"
-    }
+
   ],
   "fragments" : [
     {
@@ -267,19 +249,16 @@
       "text" : "?"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/APIClientError\/helpAnchor",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/APIClientError\/helpAnchor",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "helpAnchor",
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/apiclienterror\/helpanchor"
 },
-"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/APIClientError/recoverySuggestion": {
+"doc://AuthFoundation/documentation/AuthFoundation/APIClientError/recoverySuggestion": {
   "abstract" : [
-    {
-      "text" : "A localized message describing how one might recover from the failure.",
-      "type" : "text"
-    }
+
   ],
   "fragments" : [
     {
@@ -308,7 +287,7 @@
       "text" : "?"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/APIClientError\/recoverySuggestion",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/APIClientError\/recoverySuggestion",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "recoverySuggestion",

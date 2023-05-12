@@ -8,13 +8,13 @@
   "hierarchy" : {
     "paths" : [
       [
-        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation"
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation"
       ]
     ]
   },
   "identifier" : {
     "interfaceLanguage" : "swift",
-    "url" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/APIResponseResult"
+    "url" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/APIResponseResult"
   },
   "kind" : "symbol",
   "metadata" : {
@@ -81,8 +81,8 @@
   "relationshipsSections" : [
     {
       "identifiers" : [
-        "doc:\/\/com.okta.mobile.authfoundation\/SQ",
-        "doc:\/\/com.okta.mobile.authfoundation\/SH"
+        "doc:\/\/AuthFoundation\/SQ",
+        "doc:\/\/AuthFoundation\/SH"
       ],
       "kind" : "relationships",
       "title" : "Conforms To",
@@ -91,7 +91,7 @@
   ],
   "schemaVersion" : {
     "major" : 0,
-    "minor" : 2,
+    "minor" : 3,
     "patch" : 0
   },
   "sections" : [
@@ -100,16 +100,16 @@
   "topicSections" : [
     {
       "identifiers" : [
-        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/APIResponseResult\/error",
-        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/APIResponseResult\/retry",
-        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/APIResponseResult\/success"
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/APIResponseResult\/error",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/APIResponseResult\/retry",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/APIResponseResult\/success"
       ],
       "title" : "Enumeration Cases"
     },
     {
       "generated" : true,
       "identifiers" : [
-        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/APIResponseResult\/Equatable-Implementations"
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/APIResponseResult\/Equatable-Implementations"
       ],
       "title" : "Default Implementations"
     }
@@ -128,31 +128,31 @@
   ]
 , 
 "references": {
-"doc://com.okta.mobile.authfoundation/SH": {
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/SH",
+"doc://AuthFoundation/SH": {
+  "identifier" : "doc:\/\/AuthFoundation\/SH",
   "title" : "Swift.Hashable",
   "type" : "unresolvable"
 },
-"doc://com.okta.mobile.authfoundation/SQ": {
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/SQ",
+"doc://AuthFoundation/SQ": {
+  "identifier" : "doc:\/\/AuthFoundation\/SQ",
   "title" : "Swift.Equatable",
   "type" : "unresolvable"
 },
-"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation": {
+"doc://AuthFoundation/documentation/AuthFoundation": {
   "abstract" : [
     {
       "text" : "Library that provides foundational features used by Okta’s authentication libraries, as well as APIs used to work with tokens and user credentials.",
       "type" : "text"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation",
   "kind" : "symbol",
   "role" : "collection",
   "title" : "AuthFoundation",
   "type" : "topic",
   "url" : "\/documentation\/authfoundation"
 },
-"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/APIResponseResult": {
+"doc://AuthFoundation/documentation/AuthFoundation/APIResponseResult": {
   "abstract" : [
     {
       "text" : "Defines the possible results for an API request.",
@@ -173,7 +173,7 @@
       "text" : "APIResponseResult"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/APIResponseResult",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/APIResponseResult",
   "kind" : "symbol",
   "navigatorTitle" : [
     {
@@ -186,18 +186,18 @@
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/apiresponseresult"
 },
-"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/APIResponseResult/Equatable-Implementations": {
+"doc://AuthFoundation/documentation/AuthFoundation/APIResponseResult/Equatable-Implementations": {
   "abstract" : [
 
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/APIResponseResult\/Equatable-Implementations",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/APIResponseResult\/Equatable-Implementations",
   "kind" : "article",
   "role" : "collectionGroup",
   "title" : "Equatable Implementations",
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/apiresponseresult\/equatable-implementations"
 },
-"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/APIResponseResult/error": {
+"doc://AuthFoundation/documentation/AuthFoundation/APIResponseResult/error": {
   "abstract" : [
     {
       "text" : "The server reports the response represents an error.",
@@ -218,14 +218,14 @@
       "text" : "error"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/APIResponseResult\/error",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/APIResponseResult\/error",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "APIResponseResult.error",
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/apiresponseresult\/error"
 },
-"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/APIResponseResult/retry": {
+"doc://AuthFoundation/documentation/AuthFoundation/APIResponseResult/retry": {
   "abstract" : [
     {
       "text" : "The server is indicating the request should be retried.",
@@ -246,14 +246,14 @@
       "text" : "retry"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/APIResponseResult\/retry",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/APIResponseResult\/retry",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "APIResponseResult.retry",
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/apiresponseresult\/retry"
 },
-"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/APIResponseResult/success": {
+"doc://AuthFoundation/documentation/AuthFoundation/APIResponseResult/success": {
   "abstract" : [
     {
       "text" : "Indicates the request was successful.",
@@ -274,7 +274,7 @@
       "text" : "success"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/APIResponseResult\/success",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/APIResponseResult\/success",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "APIResponseResult.success",

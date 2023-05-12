@@ -1,21 +1,15 @@
 {
-  "abstract" : [
-    {
-      "text" : "No overview available.",
-      "type" : "text"
-    }
-  ],
   "hierarchy" : {
     "paths" : [
       [
-        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation",
-        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/WeakCollection"
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/WeakCollection"
       ]
     ]
   },
   "identifier" : {
     "interfaceLanguage" : "swift",
-    "url" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/WeakCollection\/Hashable-Implementations"
+    "url" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/WeakCollection\/Hashable-Implementations"
   },
   "kind" : "article",
   "metadata" : {
@@ -29,7 +23,7 @@
   },
   "schemaVersion" : {
     "major" : 0,
-    "minor" : 2,
+    "minor" : 3,
     "patch" : 0
   },
   "sections" : [
@@ -39,7 +33,7 @@
     {
       "generated" : true,
       "identifiers" : [
-        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/WeakCollection\/hash(into:)"
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/WeakCollection\/hash(into:)"
       ],
       "title" : "Instance Methods"
     }
@@ -58,21 +52,21 @@
   ]
 , 
 "references": {
-"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation": {
+"doc://AuthFoundation/documentation/AuthFoundation": {
   "abstract" : [
     {
       "text" : "Library that provides foundational features used by Okta’s authentication libraries, as well as APIs used to work with tokens and user credentials.",
       "type" : "text"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation",
   "kind" : "symbol",
   "role" : "collection",
   "title" : "AuthFoundation",
   "type" : "topic",
   "url" : "\/documentation\/authfoundation"
 },
-"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/WeakCollection": {
+"doc://AuthFoundation/documentation/AuthFoundation/WeakCollection": {
   "abstract" : [
     {
       "text" : "Property wrapper representing a collection of weak values.",
@@ -93,7 +87,7 @@
       "text" : "WeakCollection"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/WeakCollection",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/WeakCollection",
   "kind" : "symbol",
   "navigatorTitle" : [
     {
@@ -106,20 +100,9 @@
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/weakcollection"
 },
-"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/WeakCollection/hash(into:)": {
+"doc://AuthFoundation/documentation/AuthFoundation/WeakCollection/hash(into:)": {
   "abstract" : [
-    {
-      "text" : "Hashes the essential components of this value by feeding them into the",
-      "type" : "text"
-    },
-    {
-      "text" : " ",
-      "type" : "text"
-    },
-    {
-      "text" : "given hasher.",
-      "type" : "text"
-    }
+
   ],
   "conformance" : {
     "availabilityPrefix" : [
@@ -192,7 +175,7 @@
         "type" : "text"
       },
       {
-        "code" : "Optional<Element>",
+        "code" : "Element?",
         "type" : "codeVoice"
       },
       {
@@ -244,7 +227,7 @@
       "text" : ")"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/WeakCollection\/hash(into:)",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/WeakCollection\/hash(into:)",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "hash(into:)",

@@ -8,13 +8,13 @@
   "hierarchy" : {
     "paths" : [
       [
-        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation"
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation"
       ]
     ]
   },
   "identifier" : {
     "interfaceLanguage" : "swift",
-    "url" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/ClaimContainer"
+    "url" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/ClaimContainer"
   },
   "kind" : "symbol",
   "metadata" : {
@@ -77,7 +77,7 @@
               "text" : " : "
             },
             {
-              "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/JSONDecodable",
+              "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JSONDecodable",
               "kind" : "typeIdentifier",
               "preciseIdentifier" : "s:14AuthFoundation13JSONDecodableP",
               "text" : "JSONDecodable"
@@ -107,6 +107,7 @@
               "type" : "paragraph"
             }
           ],
+          "name" : "Note",
           "style" : "note",
           "type" : "aside"
         }
@@ -117,7 +118,7 @@
   "relationshipsSections" : [
     {
       "identifiers" : [
-        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/JSONDecodable"
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JSONDecodable"
       ],
       "kind" : "relationships",
       "title" : "Inherits From",
@@ -125,9 +126,9 @@
     },
     {
       "identifiers" : [
-        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/Token\/Metadata",
-        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/TokenInfo",
-        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/UserInfo"
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/Token\/Metadata",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/TokenInfo",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/UserInfo"
       ],
       "kind" : "relationships",
       "title" : "Conforming Types",
@@ -136,7 +137,7 @@
   ],
   "schemaVersion" : {
     "major" : 0,
-    "minor" : 2,
+    "minor" : 3,
     "patch" : 0
   },
   "sections" : [
@@ -146,12 +147,12 @@
     {
       "generated" : true,
       "identifiers" : [
-        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/JWT",
-        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/JWK",
-        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/JWKS",
-        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/Claim",
-        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/HasClaims",
-        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/Expires"
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JWT",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JWK",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JWKS",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/Claim",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/HasClaims",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/Expires"
       ],
       "title" : "JWT and Token Verification"
     }
@@ -159,16 +160,16 @@
   "topicSections" : [
     {
       "identifiers" : [
-        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/ClaimContainer\/claims",
-        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/ClaimContainer\/customClaims",
-        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/ClaimContainer\/payload"
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/ClaimContainer\/claims",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/ClaimContainer\/customClaims",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/ClaimContainer\/payload"
       ],
       "title" : "Instance Properties"
     },
     {
       "identifiers" : [
-        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/ClaimContainer\/encode(to:)",
-        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/ClaimContainer\/value(_:for:)"
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/ClaimContainer\/encode(to:)",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/ClaimContainer\/value(_:for:)"
       ],
       "title" : "Instance Methods"
     }
@@ -187,21 +188,21 @@
   ]
 , 
 "references": {
-"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation": {
+"doc://AuthFoundation/documentation/AuthFoundation": {
   "abstract" : [
     {
       "text" : "Library that provides foundational features used by Okta’s authentication libraries, as well as APIs used to work with tokens and user credentials.",
       "type" : "text"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation",
   "kind" : "symbol",
   "role" : "collection",
   "title" : "AuthFoundation",
   "type" : "topic",
   "url" : "\/documentation\/authfoundation"
 },
-"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/Claim": {
+"doc://AuthFoundation/documentation/AuthFoundation/Claim": {
   "abstract" : [
     {
       "text" : "List of registered and public claims.",
@@ -222,7 +223,7 @@
       "text" : "Claim"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/Claim",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/Claim",
   "kind" : "symbol",
   "navigatorTitle" : [
     {
@@ -235,7 +236,7 @@
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/claim"
 },
-"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/ClaimContainer": {
+"doc://AuthFoundation/documentation/AuthFoundation/ClaimContainer": {
   "abstract" : [
     {
       "text" : "Protocol used to define shared behavior when an object can contain claims.",
@@ -256,7 +257,7 @@
       "text" : "ClaimContainer"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/ClaimContainer",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/ClaimContainer",
   "kind" : "symbol",
   "navigatorTitle" : [
     {
@@ -269,14 +270,14 @@
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/claimcontainer"
 },
-"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/ClaimContainer/claims": {
+"doc://AuthFoundation/documentation/AuthFoundation/ClaimContainer/claims": {
   "abstract" : [
     {
       "text" : "Returns the list of all claims contained within this ",
       "type" : "text"
     },
     {
-      "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/UserInfo",
+      "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/UserInfo",
       "isActive" : true,
       "type" : "reference"
     },
@@ -312,14 +313,14 @@
       "text" : "]"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/ClaimContainer\/claims",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/ClaimContainer\/claims",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "claims",
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/claimcontainer\/claims"
 },
-"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/ClaimContainer/customClaims": {
+"doc://AuthFoundation/documentation/AuthFoundation/ClaimContainer/customClaims": {
   "abstract" : [
     {
       "text" : "Returns the list of custom claims this instance might contain.",
@@ -353,14 +354,14 @@
       "text" : "]"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/ClaimContainer\/customClaims",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/ClaimContainer\/customClaims",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "customClaims",
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/claimcontainer\/customclaims"
 },
-"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/ClaimContainer/encode(to:)": {
+"doc://AuthFoundation/documentation/AuthFoundation/ClaimContainer/encode(to:)": {
   "abstract" : [
 
   ],
@@ -403,14 +404,14 @@
       "text" : "throws"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/ClaimContainer\/encode(to:)",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/ClaimContainer\/encode(to:)",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "encode(to:)",
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/claimcontainer\/encode(to:)"
 },
-"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/ClaimContainer/payload": {
+"doc://AuthFoundation/documentation/AuthFoundation/ClaimContainer/payload": {
   "abstract" : [
 
   ],
@@ -449,7 +450,7 @@
       "text" : "]"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/ClaimContainer\/payload",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/ClaimContainer\/payload",
   "kind" : "symbol",
   "required" : true,
   "role" : "symbol",
@@ -457,7 +458,7 @@
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/claimcontainer\/payload"
 },
-"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/ClaimContainer/value(_:for:)": {
+"doc://AuthFoundation/documentation/AuthFoundation/ClaimContainer/value(_:for:)": {
   "abstract" : [
     {
       "text" : "Returns the value for the supplied key, of the expected type.",
@@ -491,7 +492,6 @@
     },
     {
       "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:14AuthFoundation14ClaimContainerPAAE5value_3forqd__Sgqd__m_SStlF1TL_qd__mfp",
       "text" : "T"
     },
     {
@@ -517,7 +517,6 @@
     },
     {
       "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:14AuthFoundation14ClaimContainerPAAE5value_3forqd__Sgqd__m_SStlF1TL_qd__mfp",
       "text" : "T"
     },
     {
@@ -525,14 +524,14 @@
       "text" : "?"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/ClaimContainer\/value(_:for:)",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/ClaimContainer\/value(_:for:)",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "value(_:for:)",
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/claimcontainer\/value(_:for:)"
 },
-"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/Expires": {
+"doc://AuthFoundation/documentation/AuthFoundation/Expires": {
   "abstract" : [
     {
       "text" : "Protocol that indicates an object is capable of expiring.",
@@ -553,7 +552,7 @@
       "text" : "Expires"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/Expires",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/Expires",
   "kind" : "symbol",
   "navigatorTitle" : [
     {
@@ -566,7 +565,7 @@
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/expires"
 },
-"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/HasClaims": {
+"doc://AuthFoundation/documentation/AuthFoundation/HasClaims": {
   "abstract" : [
     {
       "text" : "Used by classes that contains OAuth2 claims.",
@@ -587,7 +586,7 @@
       "text" : "HasClaims"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/HasClaims",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/HasClaims",
   "kind" : "symbol",
   "navigatorTitle" : [
     {
@@ -600,7 +599,7 @@
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/hasclaims"
 },
-"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/JSONDecodable": {
+"doc://AuthFoundation/documentation/AuthFoundation/JSONDecodable": {
   "abstract" : [
 
   ],
@@ -618,7 +617,7 @@
       "text" : "JSONDecodable"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/JSONDecodable",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JSONDecodable",
   "kind" : "symbol",
   "navigatorTitle" : [
     {
@@ -631,7 +630,7 @@
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/jsondecodable"
 },
-"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/JWK": {
+"doc://AuthFoundation/documentation/AuthFoundation/JWK": {
   "abstract" : [
     {
       "text" : "Describes an individual key from an authorization server, which can be used to validate tokens or encrypt content.",
@@ -652,7 +651,7 @@
       "text" : "JWK"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/JWK",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JWK",
   "kind" : "symbol",
   "navigatorTitle" : [
     {
@@ -665,7 +664,7 @@
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/jwk"
 },
-"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/JWKS": {
+"doc://AuthFoundation/documentation/AuthFoundation/JWKS": {
   "abstract" : [
     {
       "text" : "Describes the collection of keys associated with an authorization server.",
@@ -686,7 +685,7 @@
       "text" : "JWKS"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/JWKS",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JWKS",
   "kind" : "symbol",
   "navigatorTitle" : [
     {
@@ -699,7 +698,7 @@
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/jwks"
 },
-"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/JWT": {
+"doc://AuthFoundation/documentation/AuthFoundation/JWT": {
   "abstract" : [
     {
       "text" : "Represents the contents of a JWT token, providing access to its payload contents.",
@@ -720,7 +719,7 @@
       "text" : "JWT"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/JWT",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JWT",
   "kind" : "symbol",
   "navigatorTitle" : [
     {
@@ -733,7 +732,7 @@
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/jwt"
 },
-"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/Token/Metadata": {
+"doc://AuthFoundation/documentation/AuthFoundation/Token/Metadata": {
   "abstract" : [
     {
       "text" : "Describes the metadata associated with a token.",
@@ -754,7 +753,7 @@
       "text" : "Metadata"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/Token\/Metadata",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/Token\/Metadata",
   "kind" : "symbol",
   "navigatorTitle" : [
     {
@@ -767,7 +766,7 @@
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/token\/metadata"
 },
-"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/TokenInfo": {
+"doc://AuthFoundation/documentation/AuthFoundation/TokenInfo": {
   "abstract" : [
     {
       "text" : "Introspected token information.",
@@ -788,7 +787,7 @@
       "text" : "TokenInfo"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/TokenInfo",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/TokenInfo",
   "kind" : "symbol",
   "navigatorTitle" : [
     {
@@ -801,7 +800,7 @@
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/tokeninfo"
 },
-"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/UserInfo": {
+"doc://AuthFoundation/documentation/AuthFoundation/UserInfo": {
   "abstract" : [
     {
       "text" : "User profile information.",
@@ -822,7 +821,7 @@
       "text" : "UserInfo"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/UserInfo",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/UserInfo",
   "kind" : "symbol",
   "navigatorTitle" : [
     {

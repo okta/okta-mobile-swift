@@ -24,13 +24,13 @@
   "hierarchy" : {
     "paths" : [
       [
-        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation"
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation"
       ]
     ]
   },
   "identifier" : {
     "interfaceLanguage" : "swift",
-    "url" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/TokenHashValidator"
+    "url" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/TokenHashValidator"
   },
   "kind" : "symbol",
   "metadata" : {
@@ -108,7 +108,7 @@
               "type" : "text"
             },
             {
-              "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/Token\/accessTokenValidator",
+              "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/Token\/accessTokenValidator",
               "isActive" : true,
               "type" : "reference"
             },
@@ -117,7 +117,7 @@
               "type" : "text"
             },
             {
-              "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/Token\/deviceSecretValidator",
+              "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/Token\/deviceSecretValidator",
               "isActive" : true,
               "type" : "reference"
             },
@@ -140,6 +140,7 @@
               "type" : "paragraph"
             }
           ],
+          "name" : "Note",
           "style" : "note",
           "type" : "aside"
         }
@@ -149,7 +150,7 @@
   ],
   "schemaVersion" : {
     "major" : 0,
-    "minor" : 2,
+    "minor" : 3,
     "patch" : 0
   },
   "sections" : [
@@ -159,15 +160,15 @@
     {
       "generated" : true,
       "identifiers" : [
-        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/CustomizingNetworkRequests",
-        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/TimeCoordinator",
-        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/CredentialCoordinator",
-        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/CredentialDataSource",
-        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/CredentialDataSourceDelegate",
-        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/TokenStorage",
-        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/TokenStorageDelegate",
-        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/JWKValidator",
-        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/IDTokenValidator"
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/CustomizingNetworkRequests",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/TimeCoordinator",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/CredentialCoordinator",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/CredentialDataSource",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/CredentialDataSourceDelegate",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/TokenStorage",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/TokenStorageDelegate",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JWKValidator",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/IDTokenValidator"
       ],
       "title" : "Customizations"
     }
@@ -175,7 +176,7 @@
   "topicSections" : [
     {
       "identifiers" : [
-        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/TokenHashValidator\/validate(_:idToken:)"
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/TokenHashValidator\/validate(_:idToken:)"
       ],
       "title" : "Instance Methods"
     }
@@ -194,21 +195,21 @@
   ]
 , 
 "references": {
-"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation": {
+"doc://AuthFoundation/documentation/AuthFoundation": {
   "abstract" : [
     {
       "text" : "Library that provides foundational features used by Okta’s authentication libraries, as well as APIs used to work with tokens and user credentials.",
       "type" : "text"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation",
   "kind" : "symbol",
   "role" : "collection",
   "title" : "AuthFoundation",
   "type" : "topic",
   "url" : "\/documentation\/authfoundation"
 },
-"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/Credential": {
+"doc://AuthFoundation/documentation/AuthFoundation/Credential": {
   "abstract" : [
     {
       "text" : "Convenience object that provides methods and properties for using a user’s authentication tokens.",
@@ -229,7 +230,7 @@
       "text" : "Credential"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/Credential",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/Credential",
   "kind" : "symbol",
   "navigatorTitle" : [
     {
@@ -242,14 +243,14 @@
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/credential"
 },
-"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/CredentialCoordinator": {
+"doc://AuthFoundation/documentation/AuthFoundation/CredentialCoordinator": {
   "abstract" : [
     {
       "text" : "Represents the class that manages the relationship between ",
       "type" : "text"
     },
     {
-      "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/TokenStorage",
+      "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/TokenStorage",
       "isActive" : true,
       "type" : "reference"
     },
@@ -258,7 +259,7 @@
       "type" : "text"
     },
     {
-      "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/CredentialDataSource",
+      "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/CredentialDataSource",
       "isActive" : true,
       "type" : "reference"
     },
@@ -281,7 +282,7 @@
       "text" : "CredentialCoordinator"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/CredentialCoordinator",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/CredentialCoordinator",
   "kind" : "symbol",
   "navigatorTitle" : [
     {
@@ -294,14 +295,14 @@
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/credentialcoordinator"
 },
-"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/CredentialDataSource": {
+"doc://AuthFoundation/documentation/AuthFoundation/CredentialDataSource": {
   "abstract" : [
     {
       "text" : "Protocol that enables a developer to interact with, and override, the default behavior for the lifecycle of ",
       "type" : "text"
     },
     {
-      "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/Credential",
+      "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/Credential",
       "isActive" : true,
       "type" : "reference"
     },
@@ -324,7 +325,7 @@
       "text" : "CredentialDataSource"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/CredentialDataSource",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/CredentialDataSource",
   "kind" : "symbol",
   "navigatorTitle" : [
     {
@@ -337,14 +338,14 @@
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/credentialdatasource"
 },
-"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/CredentialDataSourceDelegate": {
+"doc://AuthFoundation/documentation/AuthFoundation/CredentialDataSourceDelegate": {
   "abstract" : [
     {
       "text" : "Protocol that a custom ",
       "type" : "text"
     },
     {
-      "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/CredentialDataSource",
+      "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/CredentialDataSource",
       "isActive" : true,
       "type" : "reference"
     },
@@ -367,7 +368,7 @@
       "text" : "CredentialDataSourceDelegate"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/CredentialDataSourceDelegate",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/CredentialDataSourceDelegate",
   "kind" : "symbol",
   "navigatorTitle" : [
     {
@@ -380,21 +381,21 @@
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/credentialdatasourcedelegate"
 },
-"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/CustomizingNetworkRequests": {
+"doc://AuthFoundation/documentation/AuthFoundation/CustomizingNetworkRequests": {
   "abstract" : [
     {
       "text" : "Manage or monitor network requests sent by the Okta Mobile SDK.",
       "type" : "text"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/CustomizingNetworkRequests",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/CustomizingNetworkRequests",
   "kind" : "article",
   "role" : "article",
   "title" : "Customizing Network Requests",
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/customizingnetworkrequests"
 },
-"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/IDTokenValidator": {
+"doc://AuthFoundation/documentation/AuthFoundation/IDTokenValidator": {
   "abstract" : [
     {
       "text" : "Protocol used to implement OpenID token validation.",
@@ -415,7 +416,7 @@
       "text" : "IDTokenValidator"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/IDTokenValidator",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/IDTokenValidator",
   "kind" : "symbol",
   "navigatorTitle" : [
     {
@@ -428,7 +429,7 @@
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/idtokenvalidator"
 },
-"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/JWKValidator": {
+"doc://AuthFoundation/documentation/AuthFoundation/JWKValidator": {
   "abstract" : [
     {
       "text" : "Protocol used to implement JWK token validation.",
@@ -449,7 +450,7 @@
       "text" : "JWKValidator"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/JWKValidator",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JWKValidator",
   "kind" : "symbol",
   "navigatorTitle" : [
     {
@@ -462,7 +463,7 @@
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/jwkvalidator"
 },
-"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/TimeCoordinator": {
+"doc://AuthFoundation/documentation/AuthFoundation/TimeCoordinator": {
   "abstract" : [
     {
       "text" : "Protocol used to return dates and times coordinated against trusted sources.",
@@ -483,7 +484,7 @@
       "text" : "TimeCoordinator"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/TimeCoordinator",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/TimeCoordinator",
   "kind" : "symbol",
   "navigatorTitle" : [
     {
@@ -496,7 +497,7 @@
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/timecoordinator"
 },
-"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/Token/accessTokenValidator": {
+"doc://AuthFoundation/documentation/AuthFoundation/Token/accessTokenValidator": {
   "abstract" : [
     {
       "text" : "The object used to ensure access tokens can be validated against its associated ID token.",
@@ -534,14 +535,14 @@
       "text" : "TokenHashValidator"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/Token\/accessTokenValidator",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/Token\/accessTokenValidator",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "accessTokenValidator",
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/token\/accesstokenvalidator"
 },
-"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/Token/deviceSecretValidator": {
+"doc://AuthFoundation/documentation/AuthFoundation/Token/deviceSecretValidator": {
   "abstract" : [
     {
       "text" : "The object used to ensure device secrets are validated against its associated ID token.",
@@ -579,14 +580,14 @@
       "text" : "TokenHashValidator"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/Token\/deviceSecretValidator",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/Token\/deviceSecretValidator",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "deviceSecretValidator",
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/token\/devicesecretvalidator"
 },
-"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/TokenHashValidator": {
+"doc://AuthFoundation/documentation/AuthFoundation/TokenHashValidator": {
   "abstract" : [
     {
       "text" : "Protocol used to implement token validation using either the ",
@@ -623,7 +624,7 @@
       "text" : "TokenHashValidator"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/TokenHashValidator",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/TokenHashValidator",
   "kind" : "symbol",
   "navigatorTitle" : [
     {
@@ -636,7 +637,7 @@
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/tokenhashvalidator"
 },
-"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/TokenHashValidator/validate(_:idToken:)": {
+"doc://AuthFoundation/documentation/AuthFoundation/TokenHashValidator/validate(_:idToken:)": {
   "abstract" : [
     {
       "text" : "Validates the given access token, using the ",
@@ -699,7 +700,7 @@
       "text" : "throws"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/TokenHashValidator\/validate(_:idToken:)",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/TokenHashValidator\/validate(_:idToken:)",
   "kind" : "symbol",
   "required" : true,
   "role" : "symbol",
@@ -707,7 +708,7 @@
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/tokenhashvalidator\/validate(_:idtoken:)"
 },
-"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/TokenStorage": {
+"doc://AuthFoundation/documentation/AuthFoundation/TokenStorage": {
   "abstract" : [
     {
       "text" : "Protocol used to customize the way tokens are stored, updated, and removed throughout the lifecycle of an application.",
@@ -728,7 +729,7 @@
       "text" : "TokenStorage"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/TokenStorage",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/TokenStorage",
   "kind" : "symbol",
   "navigatorTitle" : [
     {
@@ -741,14 +742,14 @@
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/tokenstorage"
 },
-"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/TokenStorageDelegate": {
+"doc://AuthFoundation/documentation/AuthFoundation/TokenStorageDelegate": {
   "abstract" : [
     {
       "text" : "Protocol that custom ",
       "type" : "text"
     },
     {
-      "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/TokenStorage",
+      "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/TokenStorage",
       "isActive" : true,
       "type" : "reference"
     },
@@ -771,7 +772,7 @@
       "text" : "TokenStorageDelegate"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/TokenStorageDelegate",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/TokenStorageDelegate",
   "kind" : "symbol",
   "navigatorTitle" : [
     {

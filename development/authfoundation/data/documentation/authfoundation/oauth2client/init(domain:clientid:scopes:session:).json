@@ -8,19 +8,27 @@
   "hierarchy" : {
     "paths" : [
       [
-        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation",
-        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/OAuth2Client"
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/OAuth2Client"
       ]
     ]
   },
   "identifier" : {
     "interfaceLanguage" : "swift",
-    "url" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/OAuth2Client\/init(domain:clientId:scopes:session:)"
+    "url" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/OAuth2Client\/init(domain:clientId:scopes:session:)"
   },
   "kind" : "symbol",
   "metadata" : {
     "externalID" : "s:14AuthFoundation12OAuth2ClientC6domain8clientId6scopes7sessionACSS_S2SAA18URLSessionProtocol_pSgtKcfc",
     "fragments" : [
+      {
+        "kind" : "keyword",
+        "text" : "convenience"
+      },
+      {
+        "kind" : "text",
+        "text" : " "
+      },
       {
         "kind" : "identifier",
         "text" : "init"
@@ -199,7 +207,7 @@
               "text" : ": "
             },
             {
-              "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/URLSessionProtocol",
+              "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/URLSessionProtocol",
               "kind" : "typeIdentifier",
               "preciseIdentifier" : "s:14AuthFoundation18URLSessionProtocolP",
               "text" : "URLSessionProtocol"
@@ -253,7 +261,7 @@
   ],
   "schemaVersion" : {
     "major" : 0,
-    "minor" : 2,
+    "minor" : 3,
     "patch" : 0
   },
   "sections" : [
@@ -273,21 +281,21 @@
   ]
 , 
 "references": {
-"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation": {
+"doc://AuthFoundation/documentation/AuthFoundation": {
   "abstract" : [
     {
       "text" : "Library that provides foundational features used by Okta’s authentication libraries, as well as APIs used to work with tokens and user credentials.",
       "type" : "text"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation",
   "kind" : "symbol",
   "role" : "collection",
   "title" : "AuthFoundation",
   "type" : "topic",
   "url" : "\/documentation\/authfoundation"
 },
-"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/OAuth2Client": {
+"doc://AuthFoundation/documentation/AuthFoundation/OAuth2Client": {
   "abstract" : [
     {
       "text" : "An OAuth2 client, used to interact with a given authorization server.",
@@ -308,7 +316,7 @@
       "text" : "OAuth2Client"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/OAuth2Client",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/OAuth2Client",
   "kind" : "symbol",
   "navigatorTitle" : [
     {
@@ -321,7 +329,7 @@
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/oauth2client"
 },
-"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/OAuth2Client/init(domain:clientId:scopes:session:)": {
+"doc://AuthFoundation/documentation/AuthFoundation/OAuth2Client/init(domain:clientId:scopes:session:)": {
   "abstract" : [
     {
       "text" : "Constructs an OAuth2Client for the given domain.",
@@ -329,6 +337,14 @@
     }
   ],
   "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "convenience"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
     {
       "kind" : "identifier",
       "text" : "init"
@@ -410,14 +426,14 @@
       "text" : "throws"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/OAuth2Client\/init(domain:clientId:scopes:session:)",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/OAuth2Client\/init(domain:clientId:scopes:session:)",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "init(domain:clientId:scopes:session:)",
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/oauth2client\/init(domain:clientid:scopes:session:)"
 },
-"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/URLSessionProtocol": {
+"doc://AuthFoundation/documentation/AuthFoundation/URLSessionProtocol": {
   "abstract" : [
     {
       "text" : "Protocol defining the interface for interacting with a URLSession. This is used to provide mocking for unit tests.",
@@ -438,7 +454,7 @@
       "text" : "URLSessionProtocol"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/URLSessionProtocol",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/URLSessionProtocol",
   "kind" : "symbol",
   "navigatorTitle" : [
     {

@@ -8,14 +8,14 @@
   "hierarchy" : {
     "paths" : [
       [
-        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation",
-        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/Token"
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/Token"
       ]
     ]
   },
   "identifier" : {
     "interfaceLanguage" : "swift",
-    "url" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/Token\/Kind"
+    "url" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/Token\/Kind"
   },
   "kind" : "symbol",
   "metadata" : {
@@ -83,9 +83,9 @@
   "relationshipsSections" : [
     {
       "identifiers" : [
-        "doc:\/\/com.okta.mobile.authfoundation\/SQ",
-        "doc:\/\/com.okta.mobile.authfoundation\/SH",
-        "doc:\/\/com.okta.mobile.authfoundation\/SY"
+        "doc:\/\/AuthFoundation\/SQ",
+        "doc:\/\/AuthFoundation\/SH",
+        "doc:\/\/AuthFoundation\/SY"
       ],
       "kind" : "relationships",
       "title" : "Conforms To",
@@ -94,7 +94,7 @@
   ],
   "schemaVersion" : {
     "major" : 0,
-    "minor" : 2,
+    "minor" : 3,
     "patch" : 0
   },
   "sections" : [
@@ -103,24 +103,24 @@
   "topicSections" : [
     {
       "identifiers" : [
-        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/Token\/Kind\/accessToken",
-        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/Token\/Kind\/deviceSecret",
-        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/Token\/Kind\/idToken",
-        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/Token\/Kind\/refreshToken"
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/Token\/Kind\/accessToken",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/Token\/Kind\/deviceSecret",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/Token\/Kind\/idToken",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/Token\/Kind\/refreshToken"
       ],
       "title" : "Enumeration Cases"
     },
     {
       "identifiers" : [
-        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/Token\/Kind\/init(rawValue:)"
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/Token\/Kind\/init(rawValue:)"
       ],
       "title" : "Initializers"
     },
     {
       "generated" : true,
       "identifiers" : [
-        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/Token\/Kind\/Equatable-Implementations",
-        "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/Token\/Kind\/RawRepresentable-Implementations"
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/Token\/Kind\/Equatable-Implementations",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/Token\/Kind\/RawRepresentable-Implementations"
       ],
       "title" : "Default Implementations"
     }
@@ -139,36 +139,36 @@
   ]
 , 
 "references": {
-"doc://com.okta.mobile.authfoundation/SH": {
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/SH",
+"doc://AuthFoundation/SH": {
+  "identifier" : "doc:\/\/AuthFoundation\/SH",
   "title" : "Swift.Hashable",
   "type" : "unresolvable"
 },
-"doc://com.okta.mobile.authfoundation/SQ": {
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/SQ",
+"doc://AuthFoundation/SQ": {
+  "identifier" : "doc:\/\/AuthFoundation\/SQ",
   "title" : "Swift.Equatable",
   "type" : "unresolvable"
 },
-"doc://com.okta.mobile.authfoundation/SY": {
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/SY",
+"doc://AuthFoundation/SY": {
+  "identifier" : "doc:\/\/AuthFoundation\/SY",
   "title" : "Swift.RawRepresentable",
   "type" : "unresolvable"
 },
-"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation": {
+"doc://AuthFoundation/documentation/AuthFoundation": {
   "abstract" : [
     {
       "text" : "Library that provides foundational features used by Okta’s authentication libraries, as well as APIs used to work with tokens and user credentials.",
       "type" : "text"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation",
   "kind" : "symbol",
   "role" : "collection",
   "title" : "AuthFoundation",
   "type" : "topic",
   "url" : "\/documentation\/authfoundation"
 },
-"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/Token": {
+"doc://AuthFoundation/documentation/AuthFoundation/Token": {
   "abstract" : [
     {
       "text" : "Token information representing a user’s access to a resource server, including access token, refresh token, and other related information.",
@@ -189,7 +189,7 @@
       "text" : "Token"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/Token",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/Token",
   "kind" : "symbol",
   "navigatorTitle" : [
     {
@@ -202,7 +202,7 @@
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/token"
 },
-"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/Token/Kind": {
+"doc://AuthFoundation/documentation/AuthFoundation/Token/Kind": {
   "abstract" : [
     {
       "text" : "The kind of access token an operation should be used with.",
@@ -223,7 +223,7 @@
       "text" : "Kind"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/Token\/Kind",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/Token\/Kind",
   "kind" : "symbol",
   "navigatorTitle" : [
     {
@@ -236,29 +236,29 @@
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/token\/kind"
 },
-"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/Token/Kind/Equatable-Implementations": {
+"doc://AuthFoundation/documentation/AuthFoundation/Token/Kind/Equatable-Implementations": {
   "abstract" : [
 
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/Token\/Kind\/Equatable-Implementations",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/Token\/Kind\/Equatable-Implementations",
   "kind" : "article",
   "role" : "collectionGroup",
   "title" : "Equatable Implementations",
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/token\/kind\/equatable-implementations"
 },
-"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/Token/Kind/RawRepresentable-Implementations": {
+"doc://AuthFoundation/documentation/AuthFoundation/Token/Kind/RawRepresentable-Implementations": {
   "abstract" : [
 
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/Token\/Kind\/RawRepresentable-Implementations",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/Token\/Kind\/RawRepresentable-Implementations",
   "kind" : "article",
   "role" : "collectionGroup",
   "title" : "RawRepresentable Implementations",
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/token\/kind\/rawrepresentable-implementations"
 },
-"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/Token/Kind/accessToken": {
+"doc://AuthFoundation/documentation/AuthFoundation/Token/Kind/accessToken": {
   "abstract" : [
     {
       "text" : "Indicates the access token.",
@@ -279,14 +279,14 @@
       "text" : "accessToken"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/Token\/Kind\/accessToken",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/Token\/Kind\/accessToken",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "Token.Kind.accessToken",
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/token\/kind\/accesstoken"
 },
-"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/Token/Kind/deviceSecret": {
+"doc://AuthFoundation/documentation/AuthFoundation/Token/Kind/deviceSecret": {
   "abstract" : [
     {
       "text" : "Indicates the device secret.",
@@ -307,14 +307,14 @@
       "text" : "deviceSecret"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/Token\/Kind\/deviceSecret",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/Token\/Kind\/deviceSecret",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "Token.Kind.deviceSecret",
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/token\/kind\/devicesecret"
 },
-"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/Token/Kind/idToken": {
+"doc://AuthFoundation/documentation/AuthFoundation/Token/Kind/idToken": {
   "abstract" : [
     {
       "text" : "Indicates the ID token.",
@@ -335,19 +335,16 @@
       "text" : "idToken"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/Token\/Kind\/idToken",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/Token\/Kind\/idToken",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "Token.Kind.idToken",
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/token\/kind\/idtoken"
 },
-"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/Token/Kind/init(rawValue:)": {
+"doc://AuthFoundation/documentation/AuthFoundation/Token/Kind/init(rawValue:)": {
   "abstract" : [
-    {
-      "text" : "Creates a new instance with the specified raw value.",
-      "type" : "text"
-    }
+
   ],
   "fragments" : [
     {
@@ -376,14 +373,14 @@
       "text" : ")"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/Token\/Kind\/init(rawValue:)",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/Token\/Kind\/init(rawValue:)",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "init(rawValue:)",
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/token\/kind\/init(rawvalue:)"
 },
-"doc://com.okta.mobile.authfoundation/documentation/AuthFoundation/Token/Kind/refreshToken": {
+"doc://AuthFoundation/documentation/AuthFoundation/Token/Kind/refreshToken": {
   "abstract" : [
     {
       "text" : "Indicates the refresh token.",
@@ -404,7 +401,7 @@
       "text" : "refreshToken"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.authfoundation\/documentation\/AuthFoundation\/Token\/Kind\/refreshToken",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/Token\/Kind\/refreshToken",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "Token.Kind.refreshToken",
