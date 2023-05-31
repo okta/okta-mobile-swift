@@ -20,7 +20,7 @@ final class CoalescedResult<T> {
     }
     
     func start(_ operation: ((T) -> Void) -> Void) {
-        operation() { result in
+        operation { result in
             self.finish(result)
         }
     }

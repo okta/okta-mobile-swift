@@ -289,4 +289,3 @@ extension APIContentType {
         }
     }
 }
-

@@ -91,7 +91,7 @@ public struct Keychain {
                 throw KeychainError.cannotSave(code: status)
             }
             
-            guard let result = ref as? Dictionary<String, Any> else {
+            guard let result = ref as? [String: Any] else {
                 throw KeychainError.invalidFormat
             }
             

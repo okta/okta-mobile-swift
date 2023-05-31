@@ -62,7 +62,7 @@ class ViewController: UIViewController {
             return
         }
 
-        flow.start() { result in
+        flow.start { result in
             DispatchQueue.main.async {
                 switch result {
                 case .failure(let error):
@@ -133,7 +133,7 @@ class ViewController: UIViewController {
             return
         }
         
-        var image: UIImage? = nil
+        var image: UIImage?
         defer {
             codeImageView.image = image
         }
@@ -166,4 +166,3 @@ class ViewController: UIViewController {
         ])
     }
 }
-

@@ -47,6 +47,8 @@ whitelist_rules:
 disabled_rules:
   - line_length
   - nesting
+  - opening_brace
+  - statement_position
 
 # Override rule to return as warning/error
 closing_brace:

@@ -41,7 +41,7 @@ extension Credential {
     /// Attempt to refresh the token.
     public func refresh() async throws {
         try await withCheckedThrowingContinuation { continuation in
-            refresh() { result in
+            refresh { result in
                 continuation.resume(with: result)
             }
         }
@@ -93,7 +93,7 @@ extension Credential {
     /// - Returns: The user info for this user.
     public func userInfo() async throws -> UserInfo {
         try await withCheckedThrowingContinuation { continuation in
-            userInfo() { result in
+            userInfo { result in
                 continuation.resume(with: result)
             }
         }

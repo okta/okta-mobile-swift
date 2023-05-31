@@ -294,7 +294,7 @@ extension DeviceAuthorizationFlow {
     /// - Returns: The information a user should be presented with to continue authorization on a different device.
     public func start() async throws -> Context {
         try await withCheckedThrowingContinuation { continuation in
-            start() { result in
+            start { result in
                 continuation.resume(with: result)
             }
         }

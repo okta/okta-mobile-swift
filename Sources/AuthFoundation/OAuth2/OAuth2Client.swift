@@ -40,7 +40,7 @@ public final class OAuth2Client {
     public let configuration: Configuration
     
     /// Additional HTTP headers to include in outgoing network requests.
-    public var additionalHttpHeaders: [String: String]? = nil
+    public var additionalHttpHeaders: [String: String]?
     
     /// The OpenID configuration for this org.
     ///
@@ -272,7 +272,7 @@ public final class OAuth2Client {
                                                   configuration: clientSettings)
                 request.send(to: self) { result in
                     switch result {
-                    case .success(_):
+                    case .success:
                         completion(.success(()))
                     case .failure(let error):
                         completion(.failure(.network(error: error)))
@@ -547,7 +547,7 @@ extension OAuth2Client {
     /// - Returns: The OpenID configuration for the org identified by the client's base URL.
     public func openIdConfiguration() async throws -> OpenIdConfiguration {
         try await withCheckedThrowingContinuation { continuation in
-            openIdConfiguration() { result in
+            openIdConfiguration { result in
                 continuation.resume(with: result)
             }
         }
@@ -559,7 +559,7 @@ extension OAuth2Client {
     /// - Returns: The ``JWKS`` configuration for the org identified by the client's base URL.
     public func jwks() async throws -> JWKS {
         try await withCheckedThrowingContinuation { continuation in
-            jwks() { result in
+            jwks { result in
                 continuation.resume(with: result)
             }
         }

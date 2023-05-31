@@ -49,7 +49,7 @@ class ProfileTableViewController: UITableViewController {
             credential?.automaticRefresh = true
             credential?.refreshIfNeeded { result in
                 switch result {
-                case .success():
+                case .success:
                     self.credential?.userInfo { result in
                         guard case let .success(userInfo) = result else { return }
                         DispatchQueue.main.async {
@@ -120,7 +120,7 @@ class ProfileTableViewController: UITableViewController {
                 .init(kind: .rightDetail, id: "userId", title: "User ID", detail: user.subject),
                 .init(kind: .rightDetail, id: "createdAt", title: "Created at", detail: updatedAt),
                 .init(kind: .rightDetail, id: "isDefaultCredential", title: "Is Default", detail: defaultValue),
-                .init(kind: .disclosure, id: "details", title: "Token details"),
+                .init(kind: .disclosure, id: "details", title: "Token details")
             ]
         }
         

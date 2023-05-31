@@ -47,7 +47,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             try? Keychain.Search().delete()
         }
         
-        NotificationCenter.default.addObserver(forName: .defaultCredentialChanged, object: nil, queue: .main) { notification in
+        NotificationCenter.default.addObserver(forName: .defaultCredentialChanged, object: nil, queue: .main) { _ in
             self.setRootViewController()
         }
         
@@ -77,4 +77,3 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
     }
 }
-

@@ -113,7 +113,7 @@ class OIDCSignInViewController: UIViewController {
             return
         }
 
-        oktaOidc?.signOutOfOkta(stateManager, from: self, callback: { error in
+        oktaOidc?.signOutOfOkta(stateManager, from: self, callback: { _ in
             try? stateManager.removeFromSecureStorage()
             self.updateUIState()
         })

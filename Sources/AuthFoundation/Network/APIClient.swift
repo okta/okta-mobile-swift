@@ -277,7 +277,7 @@ extension APIClient {
 extension APIClient {
     private func relatedLinks<T>(from linkHeader: String?) -> [APIResponse<T>.Link: URL] {
         guard let linkHeader = linkHeader,
-              let matches = linkRegex?.matches(in: linkHeader, options: [], range: NSMakeRange(0, linkHeader.count))
+              let matches = linkRegex?.matches(in: linkHeader, options: [], range: NSRange(location: 0, length: linkHeader.count))
         else {
             return [:]
         }
@@ -299,12 +299,12 @@ extension APIClient {
     }
     
     private func validate<T>(data: Data, response: HTTPURLResponse, rateInfo: APIRateLimit?, parsing context: APIParsingContext? = nil) throws -> APIResponse<T> {
-        var requestId: String? = nil
+        var requestId: String?
         if let requestIdHeader = requestIdHeader {
             requestId = response.allHeaderFields[requestIdHeader] as? String
         }
         
-        var date: Date? = nil
+        var date: Date?
         if let dateString = response.allHeaderFields["Date"] as? String {
             date = httpDateFormatter.date(from: dateString)
         }
@@ -324,7 +324,7 @@ extension APIClient {
     }
 }
 
-fileprivate let linkRegex = try? NSRegularExpression(pattern: "<([^>]+)>; rel=\"([^\"]+)\"", options: [])
+private let linkRegex = try? NSRegularExpression(pattern: "<([^>]+)>; rel=\"([^\"]+)\"", options: [])
 
 let httpDateFormatter: DateFormatter = {
     let dateFormatter = DateFormatter()

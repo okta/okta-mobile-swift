@@ -140,7 +140,6 @@ extension ResourceOwnerFlow {
 }
 #endif
 
-
 extension ResourceOwnerFlow: UsesDelegateCollection {
     public typealias Delegate = AuthenticationDelegate
 }

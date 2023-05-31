@@ -100,7 +100,7 @@ final class KeychainTokenStorage: TokenStorage {
                                          synchronizable: accessibility.isSynchronizable,
                                          value: try encoder.encode(metadata))
 
-        var context: KeychainAuthenticationContext? = nil
+        var context: KeychainAuthenticationContext?
         #if canImport(LocalAuthentication) && !os(tvOS)
         context = security.context
         #endif
@@ -143,7 +143,7 @@ final class KeychainTokenStorage: TokenStorage {
                                     generic: nil,
                                     value: data)
         
-        var context: KeychainAuthenticationContext? = nil
+        var context: KeychainAuthenticationContext?
         #if canImport(LocalAuthentication) && !os(tvOS)
         context = security?.context
         #endif
