@@ -26,6 +26,7 @@ extension JWK {
         case encryption = "enc"
     }
     
+    // swiftlint:disable identifier_name
     /// The algorithm this key is intended to be used with.
     public enum Algorithm: String, Codable {
         // JWS Algorithms according to https://www.rfc-editor.org/rfc/rfc7518.html#section-3.1
@@ -62,4 +63,5 @@ extension JWK {
         case pbes2_HS384_A192KW = "PBES2-HS384+A192KW"
         case pbes2_HS512_A256KW = "PBES2-HS512+A256KW"
     }
+    // swiftlint:enable identifier_name
 }

@@ -12,4 +12,6 @@
 
 @_exported import AuthFoundation
 
+// swiftlint:disable identifier_name
 public let Version = SDKVersion(sdk: "okta-directauth-swift", version: "0.1.0")
+// swiftlint:enable identifier_name

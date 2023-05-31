@@ -30,106 +30,9 @@ extension OAuth2ClientDelegate {
     public func oauth(client: OAuth2Client, didRefresh token: Token, replacedWith newToken: Token?) {}
 }
 
+// swiftlint:disable type_body_length
 /// An OAuth2 client, used to interact with a given authorization server.
 public final class OAuth2Client {
-    /// The configuration for an ``OAuth2Client``.
-    ///
-    /// This defines the basic information necessary for interacting with an OAuth2 authorization server.
-    public final class Configuration: Codable, Equatable, Hashable, APIClientConfiguration {
-        /// The base URL for interactions with this OAuth2 server.
-        public let baseURL: URL
-        
-        /// The discovery URL used to retrieve the ``OpenIdConfiguration`` for this client.
-        public let discoveryURL: URL
-        
-        /// The unique client ID representing this ``OAuth2Client``.
-        public let clientId: String
-        
-        /// The list of OAuth2 scopes requested for this client.
-        public let scopes: String
-        
-        /// The type of authentication this client will perform when interacting with the authorization server.
-        public let authentication: ClientAuthentication
-                
-        /// Initializer for constructing an OAuth2Client.
-        /// - Parameters:
-        ///   - baseURL: Base URL.
-        ///   - discoveryURL: Discovery URL, or `nil` to accept the default OpenIDConfiguration endpoint.
-        ///   - clientId: The client ID.
-        ///   - scopes: The list of OAuth2 scopes.
-        ///   - authentication: The client authentication  model to use (Default: `.none`)
-        public init(baseURL: URL,
-                    discoveryURL: URL? = nil,
-                    clientId: String,
-                    scopes: String,
-                    authentication: ClientAuthentication = .none)
-        {
-            var relativeURL = baseURL
-
-            // Ensure the base URL contains a trailing slash in its path, so request paths can be safely appended.
-            if !relativeURL.lastPathComponent.isEmpty {
-                relativeURL.appendPathComponent("")
-            }
-            
-            self.baseURL = baseURL
-            self.discoveryURL = discoveryURL ?? relativeURL.appendingPathComponent(".well-known/openid-configuration")
-            self.clientId = clientId
-            self.scopes = scopes
-            self.authentication = authentication
-        }
-        
-        /// Convenience initializer to create a client using a simple domain name.
-        /// - Parameters:
-        ///   - domain: Domain name for the OAuth2 client.
-        ///   - clientId: The client ID.
-        ///   - scopes: The list of OAuth2 scopes.
-        ///   - authentication: The client authentication  model to use (Default: `.none`)
-        public convenience init(domain: String,
-                                clientId: String,
-                                scopes: String,
-                                authentication: ClientAuthentication = .none) throws
-        {
-            guard let url = URL(string: "https://\(domain)") else {
-                throw OAuth2Error.invalidUrl
-            }
-
-            self.init(baseURL: url, clientId: clientId, scopes: scopes, authentication: authentication)
-        }
-
-        public static func == (lhs: OAuth2Client.Configuration, rhs: OAuth2Client.Configuration) -> Bool {
-            lhs.baseURL == rhs.baseURL &&
-            lhs.clientId == rhs.clientId &&
-            lhs.scopes == rhs.scopes &&
-            lhs.authentication == rhs.authentication
-        }
-        
-        public func hash(into hasher: inout Hasher) {
-            hasher.combine(baseURL)
-            hasher.combine(clientId)
-            hasher.combine(scopes)
-            hasher.combine(authentication)
-        }
-    }
-
-    /// Defines the types of authentication the client may use when interacting with the authorization server.
-    public enum ClientAuthentication: Codable, Equatable, Hashable {
-        /// No client authentication will be made when interacting with the authorization server.
-        case none
-        
-        /// A client secret will be supplied when interacting with the authorization server.
-        case clientSecret(String)
-        
-        /// The additional parameters this authentication type will contribute to outgoing API requests when needed.
-        public var additionalParameters: [String: String]? {
-            switch self {
-            case .none:
-                return nil
-            case .clientSecret(let secret):
-                return ["client_secret": secret]
-            }
-        }
-    }
-
     /// The URLSession used by this client for network requests.
     public let session: URLSessionProtocol
     
@@ -310,7 +213,6 @@ public final class OAuth2Client {
                             NotificationCenter.default.post(name: .tokenRefreshed, object: newToken)
                             action.finish(.success(newToken))
                             
-
                         case .failure(let error):
                             self.delegateCollection.invoke { $0.oauth(client: self, didRefresh: token, replacedWith: nil) }
                             
@@ -634,6 +536,7 @@ public final class OAuth2Client {
     }()
     internal var jwksAction: CoalescedResult<Result<JWKS, OAuth2Error>>?
 }
+// swiftlint:enable type_body_length
 
 #if swift(>=5.5.1)
 @available(iOS 15.0, tvOS 15.0, macOS 12.0, watchOS 8, *)

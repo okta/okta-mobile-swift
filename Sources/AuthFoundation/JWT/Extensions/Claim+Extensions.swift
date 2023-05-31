@@ -12,6 +12,7 @@
 
 import Foundation
 
+// swiftlint:disable function_body_length
 // swiftlint:disable cyclomatic_complexity
 extension Claim: RawRepresentable, Equatable {
     public typealias RawValue = String
@@ -323,3 +324,4 @@ extension Claim: RawRepresentable, Equatable {
     }
 }
 // swiftlint:enable cyclomatic_complexity
+// swiftlint:enable function_body_length

@@ -44,6 +44,10 @@ whitelist_rules:
   - class_delegate_protocol
   - cyclomatic_complexity
 
+disabled_rules:
+  - line_length
+  - nesting
+
 # Override rule to return as warning/error
 closing_brace:
   severity: error

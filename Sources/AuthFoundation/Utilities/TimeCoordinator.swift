@@ -44,7 +44,10 @@ extension Date {
     }
 }
 
+// swiftlint:disable identifier_name
 fileprivate var SharedTimeCoordinator: TimeCoordinator = DefaultTimeCoordinator()
+// swiftlint:enable identifier_name
+
 class DefaultTimeCoordinator: TimeCoordinator, OAuth2ClientDelegate {
     static func resetToDefault() {
         Date.coordinator = DefaultTimeCoordinator()

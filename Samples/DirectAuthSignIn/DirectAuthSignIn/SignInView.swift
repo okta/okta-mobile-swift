@@ -82,7 +82,7 @@ struct SignInView: View {
     }
 }
 
-struct SignInView_Primary_Previews: PreviewProvider {
+struct SignInViewPrimary_Previews: PreviewProvider {
     static var previews: some View {
         SignInView(flow: .init(issuer: URL(string: "https://example.com")!,
                                clientId: "abcd123",
@@ -90,7 +90,7 @@ struct SignInView_Primary_Previews: PreviewProvider {
     }
 }
 
-struct SignInView_Secondary_Previews: PreviewProvider {
+struct SignInViewSecondary_Previews: PreviewProvider {
     static var previews: some View {
         SignInView(flow: .init(issuer: URL(string: "https://example.com")!,
                                clientId: "abcd123",

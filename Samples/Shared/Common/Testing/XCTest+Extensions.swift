@@ -87,7 +87,7 @@ extension XCUIElementQuery: Sequence {
             guard index < self.count else { return nil }
 
             let element = self.element(boundBy: Int(index))
-            index = index + 1
+            index += 1
             return element
         }
     }
