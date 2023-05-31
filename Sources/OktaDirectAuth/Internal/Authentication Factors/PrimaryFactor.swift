@@ -31,15 +31,11 @@ extension DirectAuthenticationFlow.PrimaryFactor: AuthenticationFactor {
                      currentStatus: DirectAuthenticationFlow.Status? = nil,
                      factor: DirectAuthenticationFlow.PrimaryFactor) throws -> StepHandler
     {
-        let clientId = flow.client.configuration.clientId
-        let scope = flow.client.configuration.scopes
-
         switch self {
         case .otp(code: _): fallthrough
         case .password(_):
             let request = TokenRequest(openIdConfiguration: openIdConfiguration,
-                                       clientId: clientId,
-                                       scope: scope,
+                                       clientConfiguration: flow.client.configuration,
                                        loginHint: loginHint,
                                        factor: factor,
                                        grantTypesSupported: flow.supportedGrantTypes)

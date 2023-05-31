@@ -48,13 +48,22 @@ public final class OAuth2Client {
         /// The list of OAuth2 scopes requested for this client.
         public let scopes: String
         
+        /// The type of authentication this client will perform when interacting with the authorization server.
+        public let authentication: ClientAuthentication
+                
         /// Initializer for constructing an OAuth2Client.
         /// - Parameters:
         ///   - baseURL: Base URL.
         ///   - discoveryURL: Discovery URL, or `nil` to accept the default OpenIDConfiguration endpoint.
         ///   - clientId: The client ID.
         ///   - scopes: The list of OAuth2 scopes.
-        public init(baseURL: URL, discoveryURL: URL? = nil, clientId: String, scopes: String) {
+        ///   - authentication: The client authentication  model to use (Default: `.none`)
+        public init(baseURL: URL,
+                    discoveryURL: URL? = nil,
+                    clientId: String,
+                    scopes: String,
+                    authentication: ClientAuthentication = .none)
+        {
             var relativeURL = baseURL
 
             // Ensure the base URL contains a trailing slash in its path, so request paths can be safely appended.
@@ -66,6 +75,7 @@ public final class OAuth2Client {
             self.discoveryURL = discoveryURL ?? relativeURL.appendingPathComponent(".well-known/openid-configuration")
             self.clientId = clientId
             self.scopes = scopes
+            self.authentication = authentication
         }
         
         /// Convenience initializer to create a client using a simple domain name.
@@ -73,27 +83,53 @@ public final class OAuth2Client {
         ///   - domain: Domain name for the OAuth2 client.
         ///   - clientId: The client ID.
         ///   - scopes: The list of OAuth2 scopes.
-        public convenience init(domain: String, clientId: String, scopes: String) throws {
+        ///   - authentication: The client authentication  model to use (Default: `.none`)
+        public convenience init(domain: String,
+                                clientId: String,
+                                scopes: String,
+                                authentication: ClientAuthentication = .none) throws
+        {
             guard let url = URL(string: "https://\(domain)") else {
                 throw OAuth2Error.invalidUrl
             }
 
-            self.init(baseURL: url, clientId: clientId, scopes: scopes)
+            self.init(baseURL: url, clientId: clientId, scopes: scopes, authentication: authentication)
         }
 
         public static func == (lhs: OAuth2Client.Configuration, rhs: OAuth2Client.Configuration) -> Bool {
             lhs.baseURL == rhs.baseURL &&
             lhs.clientId == rhs.clientId &&
-            lhs.scopes == rhs.scopes
+            lhs.scopes == rhs.scopes &&
+            lhs.authentication == rhs.authentication
         }
         
         public func hash(into hasher: inout Hasher) {
             hasher.combine(baseURL)
             hasher.combine(clientId)
             hasher.combine(scopes)
+            hasher.combine(authentication)
         }
     }
-    
+
+    /// Defines the types of authentication the client may use when interacting with the authorization server.
+    public enum ClientAuthentication: Codable, Equatable, Hashable {
+        /// No client authentication will be made when interacting with the authorization server.
+        case none
+        
+        /// A client secret will be supplied when interacting with the authorization server.
+        case clientSecret(String)
+        
+        /// The additional parameters this authentication type will contribute to outgoing API requests when needed.
+        public var additionalParameters: [String: String]? {
+            switch self {
+            case .none:
+                return nil
+            case .clientSecret(let secret):
+                return ["client_secret": secret]
+            }
+        }
+    }
+
     /// The URLSession used by this client for network requests.
     public let session: URLSessionProtocol
     
@@ -116,28 +152,46 @@ public final class OAuth2Client {
     /// Constructs an OAuth2Client for the given domain.
     /// - Parameters:
     ///   - domain: Okta domain to use for the base URL.
+    ///   - clientId: The unique client ID representing this client.
+    ///   - scopes: The list of OAuth2 scopes requested for this client.
+    ///   - authentication: The client authentication  model to use (Default: `.none`)
     ///   - session: Optional URLSession to use for network requests.
-    public convenience init(domain: String, clientId: String, scopes: String, session: URLSessionProtocol? = nil) throws {
+    public convenience init(domain: String,
+                            clientId: String,
+                            scopes: String,
+                            authentication: ClientAuthentication = .none,
+                            session: URLSessionProtocol? = nil) throws
+    {
         self.init(try Configuration(domain: domain,
                                     clientId: clientId,
-                                    scopes: scopes),
+                                    scopes: scopes,
+                                    authentication: authentication),
                   session: session)
     }
     
     /// Constructs an OAuth2Client for the given domain.
     /// - Parameters:
-    ///   - domain: Okta domain to use for the base URL.
+    ///   - baseURL: The base URL for operations against this client.
+    ///   - clientId: The unique client ID representing this client.
+    ///   - scopes: The list of OAuth2 scopes requested for this client.
+    ///   - authentication: The client authentication  model to use (Default: `.none`)
     ///   - session: Optional URLSession to use for network requests.
-    public convenience init(baseURL: URL, clientId: String, scopes: String, session: URLSessionProtocol? = nil) {
+    public convenience init(baseURL: URL,
+                            clientId: String,
+                            scopes: String,
+                            authentication: ClientAuthentication = .none,
+                            session: URLSessionProtocol? = nil)
+    {
         self.init(Configuration(baseURL: baseURL,
                                 clientId: clientId,
-                                scopes: scopes),
+                                scopes: scopes,
+                                authentication: authentication),
                   session: session)
     }
     
     /// Constructs an OAuth2Client for the given base URL.
     /// - Parameters:
-    ///   - baseURL: Base URL representing the Okta domain to use.
+    ///   - configuration: The pre-formed configuration for this client.
     ///   - session: Optional URLSession to use for network requests.
     public init(_ configuration: Configuration, session: URLSessionProtocol? = nil) {
         // Ensure this SDK's static version is included in the user agent.

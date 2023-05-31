@@ -21,12 +21,12 @@ extension OpenIdConfiguration {
 
 struct ChallengeRequest {
     let url: URL
-    let clientId: String
+    let clientConfiguration: OAuth2Client.Configuration
     let mfaToken: String
     let challengeTypesSupported: [GrantType]
     
     init(openIdConfiguration: OpenIdConfiguration,
-         clientId: String,
+         clientConfiguration: OAuth2Client.Configuration,
          mfaToken: String,
          challengeTypesSupported: [GrantType]) throws
     {
@@ -35,7 +35,7 @@ struct ChallengeRequest {
         }
         
         self.url = url
-        self.clientId = clientId
+        self.clientConfiguration = clientConfiguration
         self.mfaToken = mfaToken
         self.challengeTypesSupported = challengeTypesSupported
     }
@@ -74,12 +74,18 @@ extension ChallengeRequest: APIRequest, APIRequestBody {
     var contentType: APIContentType? { .formEncoded }
     var acceptsType: APIContentType? { .json }
     var bodyParameters: [String: Any]? {
-        [
-            "client_id": clientId,
+        var result: [String: Any] = [
+            "client_id": clientConfiguration.clientId,
             "mfa_token": mfaToken,
             "challenge_types_supported": challengeTypesSupported
                 .map(\.rawValue)
                 .joined(separator: " ")
         ]
+        
+        if let parameters = clientConfiguration.authentication.additionalParameters {
+            result.merge(parameters, uniquingKeysWith: { $1 })
+        }
+
+        return result
     }
 }

@@ -20,14 +20,10 @@ extension DirectAuthenticationFlow.SecondaryFactor: AuthenticationFactor {
                      currentStatus: DirectAuthenticationFlow.Status?,
                      factor: DirectAuthenticationFlow.SecondaryFactor) throws -> StepHandler
     {
-        let clientId = flow.client.configuration.clientId
-        let scope = flow.client.configuration.scopes
-
         switch self {
         case .otp(code: _):
             let request = TokenRequest(openIdConfiguration: openIdConfiguration,
-                                       clientId: clientId,
-                                       scope: scope,
+                                       clientConfiguration: flow.client.configuration,
                                        loginHint: loginHint,
                                        factor: factor,
                                        mfaToken: currentStatus?.mfaToken,

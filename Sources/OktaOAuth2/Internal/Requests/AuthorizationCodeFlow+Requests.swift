@@ -16,8 +16,7 @@ import AuthFoundation
 extension AuthorizationCodeFlow {
     struct TokenRequest {
         let openIdConfiguration: OpenIdConfiguration
-        let clientId: String
-        let scope: String
+        let clientConfiguration: OAuth2Client.Configuration
         let redirectUri: String
         let grantType: GrantType
         let grantValue: String
@@ -28,6 +27,7 @@ extension AuthorizationCodeFlow {
 }
 
 extension AuthorizationCodeFlow.TokenRequest: OAuth2TokenRequest {
+    var clientId: String { clientConfiguration.clientId }
     var httpMethod: APIRequestMethod { .post }
     var url: URL { openIdConfiguration.tokenEndpoint }
     var contentType: APIContentType? { .formEncoded }
@@ -39,7 +39,7 @@ extension AuthorizationCodeFlow.TokenRequest: OAuth2APIRequest {}
 extension AuthorizationCodeFlow.TokenRequest: APIRequestBody {
     var bodyParameters: [String: Any]? {
         var result = [
-            "client_id": clientId,
+            "client_id": clientConfiguration.clientId,
             "redirect_uri": redirectUri,
             "grant_type": grantType.rawValue,
             grantType.responseKey: grantValue
@@ -49,6 +49,10 @@ extension AuthorizationCodeFlow.TokenRequest: APIRequestBody {
             result["code_verifier"] = pkce.codeVerifier
         }
         
+        if let additional = clientConfiguration.authentication.additionalParameters {
+            result.merge(additional, uniquingKeysWith: { $1 })
+        }
+
         return result
     }
 }
@@ -57,9 +61,9 @@ extension AuthorizationCodeFlow.TokenRequest: APIParsingContext {
     var codingUserInfo: [CodingUserInfoKey: Any]? {
         [
             .clientSettings: [
-                "client_id": clientId,
+                "client_id": clientConfiguration.clientId,
                 "redirect_uri": redirectUri,
-                "scope": scope
+                "scope": clientConfiguration.scopes
             ]
         ]
     }

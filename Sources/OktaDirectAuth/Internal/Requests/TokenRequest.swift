@@ -15,8 +15,7 @@ import AuthFoundation
 
 struct TokenRequest {
     let openIdConfiguration: OpenIdConfiguration
-    let clientId: String
-    let scope: String
+    let clientConfiguration: OAuth2Client.Configuration
     let loginHint: String?
     let factor: any AuthenticationFactor
     let mfaToken: String?
@@ -24,8 +23,7 @@ struct TokenRequest {
     let grantTypesSupported: [GrantType]?
     
     init(openIdConfiguration: OpenIdConfiguration,
-         clientId: String,
-         scope: String,
+         clientConfiguration: OAuth2Client.Configuration,
          loginHint: String? = nil,
          factor: any AuthenticationFactor,
          mfaToken: String? = nil,
@@ -33,8 +31,7 @@ struct TokenRequest {
          grantTypesSupported: [GrantType]? = nil)
     {
         self.openIdConfiguration = openIdConfiguration
-        self.clientId = clientId
-        self.scope = scope
+        self.clientConfiguration = clientConfiguration
         self.loginHint = loginHint
         self.factor = factor
         self.mfaToken = mfaToken
@@ -44,15 +41,16 @@ struct TokenRequest {
 }
 
 extension TokenRequest: OAuth2TokenRequest, OAuth2APIRequest, APIRequestBody {
+    var clientId: String { clientConfiguration.clientId }
     var httpMethod: APIRequestMethod { .post }
     var url: URL { openIdConfiguration.tokenEndpoint }
     var contentType: APIContentType? { .formEncoded }
     var acceptsType: APIContentType? { .json }
     var bodyParameters: [String: Any]? {
         var result: [String: Any] = [
-            "client_id": clientId,
+            "client_id": clientConfiguration.clientId,
             "grant_type": factor.grantType.rawValue,
-            "scope": scope
+            "scope": clientConfiguration.scopes
         ]
         
         if let mfaToken = mfaToken {
@@ -78,11 +76,13 @@ extension TokenRequest: OAuth2TokenRequest, OAuth2APIRequest, APIRequestBody {
         }
         
         if let parameters = factor.tokenParameters {
-            result.merge(parameters) { _, new in
-                new
-            }
+            result.merge(parameters, uniquingKeysWith: { $1 })
         }
         
+        if let parameters = clientConfiguration.authentication.additionalParameters {
+            result.merge(parameters, uniquingKeysWith: { $1 })
+        }
+
         return result
     }
 }
@@ -91,8 +91,8 @@ extension TokenRequest: APIParsingContext {
     var codingUserInfo: [CodingUserInfoKey: Any]? {
         [
             .clientSettings: [
-                "client_id": clientId,
-                "scope": scope
+                "client_id": clientConfiguration.clientId,
+                "scope": clientConfiguration.scopes
             ]
         ]
     }

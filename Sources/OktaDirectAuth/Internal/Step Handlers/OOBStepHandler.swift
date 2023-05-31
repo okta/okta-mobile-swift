@@ -45,8 +45,7 @@ class OOBStepHandler<Factor: AuthenticationFactor>: StepHandler {
                 
             case .success(let response):
                 let request = TokenRequest(openIdConfiguration: self.openIdConfiguration,
-                                           clientId: self.flow.client.configuration.clientId,
-                                           scope: self.flow.client.configuration.scopes,
+                                           clientConfiguration: self.flow.client.configuration,
                                            factor: self.factor,
                                            mfaToken: self.mfaToken,
                                            oobCode: response.oobCode,
@@ -121,7 +120,7 @@ class OOBStepHandler<Factor: AuthenticationFactor>: StepHandler {
     {
         do {
             let request = try OOBAuthenticateRequest(openIdConfiguration: openIdConfiguration,
-                                                     clientId: flow.client.configuration.clientId,
+                                                     clientConfiguration: flow.client.configuration,
                                                      loginHint: loginHint,
                                                      channelHint: channel)
             request.send(to: flow.client) { result in
@@ -142,7 +141,7 @@ class OOBStepHandler<Factor: AuthenticationFactor>: StepHandler {
     {
         do {
             let request = try ChallengeRequest(openIdConfiguration: openIdConfiguration,
-                                               clientId: flow.client.configuration.clientId,
+                                               clientConfiguration: flow.client.configuration,
                                                mfaToken: mfaToken,
                                                challengeTypesSupported: [factor.grantType])
             request.send(to: flow.client) { result in
