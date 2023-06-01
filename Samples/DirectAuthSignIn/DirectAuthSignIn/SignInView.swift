@@ -82,6 +82,7 @@ struct SignInView: View {
     }
 }
 
+// swiftlint:disable force_unwrapping
 struct SignInViewPrimary_Previews: PreviewProvider {
     static var previews: some View {
         SignInView(flow: .init(issuer: URL(string: "https://example.com")!,
@@ -99,3 +100,4 @@ struct SignInViewSecondary_Previews: PreviewProvider {
                                               mfaToken: "abcd1234")))
     }
 }
+// swiftlint:enable force_unwrapping
