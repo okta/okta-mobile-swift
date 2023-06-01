@@ -1,7 +1,7 @@
 {
   "abstract" : [
     {
-      "text" : "Constructs an OAuth2Client for the given base URL.",
+      "text" : "Constructs an OAuth2Client for the given domain.",
       "type" : "text"
     }
   ],
@@ -15,12 +15,20 @@
   },
   "identifier" : {
     "interfaceLanguage" : "swift",
-    "url" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/OAuth2Client\/init(_:session:)"
+    "url" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/OAuth2Client\/init(baseURL:clientId:scopes:authentication:session:)"
   },
   "kind" : "symbol",
   "metadata" : {
-    "externalID" : "s:14AuthFoundation12OAuth2ClientC_7sessionA2C13ConfigurationC_AA18URLSessionProtocol_pSgtcfc",
+    "externalID" : "s:14AuthFoundation12OAuth2ClientC7baseURL8clientId6scopes14authentication7sessionAC0B00F0V_S2SAC0D14AuthenticationOAA18URLSessionProtocol_pSgtcfc",
     "fragments" : [
+      {
+        "kind" : "keyword",
+        "text" : "convenience"
+      },
+      {
+        "kind" : "text",
+        "text" : " "
+      },
       {
         "kind" : "identifier",
         "text" : "init"
@@ -28,6 +36,65 @@
       {
         "kind" : "text",
         "text" : "("
+      },
+      {
+        "kind" : "externalParam",
+        "text" : "baseURL"
+      },
+      {
+        "kind" : "text",
+        "text" : ": "
+      },
+      {
+        "kind" : "typeIdentifier",
+        "preciseIdentifier" : "s:10Foundation3URLV",
+        "text" : "URL"
+      },
+      {
+        "kind" : "text",
+        "text" : ", "
+      },
+      {
+        "kind" : "externalParam",
+        "text" : "clientId"
+      },
+      {
+        "kind" : "text",
+        "text" : ": "
+      },
+      {
+        "kind" : "typeIdentifier",
+        "preciseIdentifier" : "s:SS",
+        "text" : "String"
+      },
+      {
+        "kind" : "text",
+        "text" : ", "
+      },
+      {
+        "kind" : "externalParam",
+        "text" : "scopes"
+      },
+      {
+        "kind" : "text",
+        "text" : ": "
+      },
+      {
+        "kind" : "typeIdentifier",
+        "preciseIdentifier" : "s:SS",
+        "text" : "String"
+      },
+      {
+        "kind" : "text",
+        "text" : ", "
+      },
+      {
+        "kind" : "externalParam",
+        "text" : "authentication"
+      },
+      {
+        "kind" : "text",
+        "text" : ": "
       },
       {
         "kind" : "typeIdentifier",
@@ -40,8 +107,8 @@
       },
       {
         "kind" : "typeIdentifier",
-        "preciseIdentifier" : "s:14AuthFoundation12OAuth2ClientC13ConfigurationC",
-        "text" : "Configuration"
+        "preciseIdentifier" : "s:14AuthFoundation12OAuth2ClientC0D14AuthenticationO",
+        "text" : "ClientAuthentication"
       },
       {
         "kind" : "text",
@@ -73,7 +140,7 @@
     "role" : "symbol",
     "roleHeading" : "Initializer",
     "symbolKind" : "init",
-    "title" : "init(_:session:)"
+    "title" : "init(baseURL:clientId:scopes:authentication:session:)"
   },
   "primaryContentSections" : [
     {
@@ -88,6 +155,14 @@
           "tokens" : [
             {
               "kind" : "keyword",
+              "text" : "convenience"
+            },
+            {
+              "kind" : "text",
+              "text" : " "
+            },
+            {
+              "kind" : "keyword",
               "text" : "init"
             },
             {
@@ -96,15 +171,58 @@
             },
             {
               "kind" : "externalParam",
-              "text" : "_"
+              "text" : "baseURL"
             },
             {
               "kind" : "text",
-              "text" : " "
+              "text" : ": "
             },
             {
-              "kind" : "internalParam",
-              "text" : "configuration"
+              "kind" : "typeIdentifier",
+              "preciseIdentifier" : "s:10Foundation3URLV",
+              "text" : "URL"
+            },
+            {
+              "kind" : "text",
+              "text" : ", "
+            },
+            {
+              "kind" : "externalParam",
+              "text" : "clientId"
+            },
+            {
+              "kind" : "text",
+              "text" : ": "
+            },
+            {
+              "kind" : "typeIdentifier",
+              "preciseIdentifier" : "s:SS",
+              "text" : "String"
+            },
+            {
+              "kind" : "text",
+              "text" : ", "
+            },
+            {
+              "kind" : "externalParam",
+              "text" : "scopes"
+            },
+            {
+              "kind" : "text",
+              "text" : ": "
+            },
+            {
+              "kind" : "typeIdentifier",
+              "preciseIdentifier" : "s:SS",
+              "text" : "String"
+            },
+            {
+              "kind" : "text",
+              "text" : ", "
+            },
+            {
+              "kind" : "externalParam",
+              "text" : "authentication"
             },
             {
               "kind" : "text",
@@ -121,14 +239,14 @@
               "text" : "."
             },
             {
-              "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/OAuth2Client\/Configuration-swift.class",
+              "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/OAuth2Client\/ClientAuthentication",
               "kind" : "typeIdentifier",
-              "preciseIdentifier" : "s:14AuthFoundation12OAuth2ClientC13ConfigurationC",
-              "text" : "Configuration"
+              "preciseIdentifier" : "s:14AuthFoundation12OAuth2ClientC0D14AuthenticationO",
+              "text" : "ClientAuthentication"
             },
             {
               "kind" : "text",
-              "text" : ", "
+              "text" : " = .none, "
             },
             {
               "kind" : "externalParam",
@@ -161,14 +279,64 @@
             {
               "inlineContent" : [
                 {
-                  "text" : "The pre-formed configuration for this client.",
+                  "text" : "The base URL for operations against this client.",
                   "type" : "text"
                 }
               ],
               "type" : "paragraph"
             }
           ],
-          "name" : "configuration"
+          "name" : "baseURL"
+        },
+        {
+          "content" : [
+            {
+              "inlineContent" : [
+                {
+                  "text" : "The unique client ID representing this client.",
+                  "type" : "text"
+                }
+              ],
+              "type" : "paragraph"
+            }
+          ],
+          "name" : "clientId"
+        },
+        {
+          "content" : [
+            {
+              "inlineContent" : [
+                {
+                  "text" : "The list of OAuth2 scopes requested for this client.",
+                  "type" : "text"
+                }
+              ],
+              "type" : "paragraph"
+            }
+          ],
+          "name" : "scopes"
+        },
+        {
+          "content" : [
+            {
+              "inlineContent" : [
+                {
+                  "text" : "The client authentication  model to use (Default: ",
+                  "type" : "text"
+                },
+                {
+                  "code" : ".none",
+                  "type" : "codeVoice"
+                },
+                {
+                  "text" : ")",
+                  "type" : "text"
+                }
+              ],
+              "type" : "paragraph"
+            }
+          ],
+          "name" : "authentication"
         },
         {
           "content" : [
@@ -198,7 +366,7 @@
   "variants" : [
     {
       "paths" : [
-        "\/documentation\/authfoundation\/oauth2client\/init(_:session:)"
+        "\/documentation\/authfoundation\/oauth2client\/init(baseurl:clientid:scopes:authentication:session:)"
       ],
       "traits" : [
         {
@@ -257,26 +425,17 @@
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/oauth2client"
 },
-"doc://AuthFoundation/documentation/AuthFoundation/OAuth2Client/Configuration-swift.class": {
+"doc://AuthFoundation/documentation/AuthFoundation/OAuth2Client/ClientAuthentication": {
   "abstract" : [
     {
-      "text" : "The configuration for an ",
-      "type" : "text"
-    },
-    {
-      "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/OAuth2Client",
-      "isActive" : true,
-      "type" : "reference"
-    },
-    {
-      "text" : ".",
+      "text" : "Defines the types of authentication the client may use when interacting with the authorization server.",
       "type" : "text"
     }
   ],
   "fragments" : [
     {
       "kind" : "keyword",
-      "text" : "class"
+      "text" : "enum"
     },
     {
       "kind" : "text",
@@ -284,30 +443,38 @@
     },
     {
       "kind" : "identifier",
-      "text" : "Configuration"
+      "text" : "ClientAuthentication"
     }
   ],
-  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/OAuth2Client\/Configuration-swift.class",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/OAuth2Client\/ClientAuthentication",
   "kind" : "symbol",
   "navigatorTitle" : [
     {
       "kind" : "identifier",
-      "text" : "Configuration"
+      "text" : "ClientAuthentication"
     }
   ],
   "role" : "symbol",
-  "title" : "OAuth2Client.Configuration",
+  "title" : "OAuth2Client.ClientAuthentication",
   "type" : "topic",
-  "url" : "\/documentation\/authfoundation\/oauth2client\/configuration-swift.class"
+  "url" : "\/documentation\/authfoundation\/oauth2client\/clientauthentication"
 },
-"doc://AuthFoundation/documentation/AuthFoundation/OAuth2Client/init(_:session:)": {
+"doc://AuthFoundation/documentation/AuthFoundation/OAuth2Client/init(baseURL:clientId:scopes:authentication:session:)": {
   "abstract" : [
     {
-      "text" : "Constructs an OAuth2Client for the given base URL.",
+      "text" : "Constructs an OAuth2Client for the given domain.",
       "type" : "text"
     }
   ],
   "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "convenience"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
     {
       "kind" : "identifier",
       "text" : "init"
@@ -315,6 +482,65 @@
     {
       "kind" : "text",
       "text" : "("
+    },
+    {
+      "kind" : "externalParam",
+      "text" : "baseURL"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:10Foundation3URLV",
+      "text" : "URL"
+    },
+    {
+      "kind" : "text",
+      "text" : ", "
+    },
+    {
+      "kind" : "externalParam",
+      "text" : "clientId"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:SS",
+      "text" : "String"
+    },
+    {
+      "kind" : "text",
+      "text" : ", "
+    },
+    {
+      "kind" : "externalParam",
+      "text" : "scopes"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:SS",
+      "text" : "String"
+    },
+    {
+      "kind" : "text",
+      "text" : ", "
+    },
+    {
+      "kind" : "externalParam",
+      "text" : "authentication"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
     },
     {
       "kind" : "typeIdentifier",
@@ -327,8 +553,8 @@
     },
     {
       "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:14AuthFoundation12OAuth2ClientC13ConfigurationC",
-      "text" : "Configuration"
+      "preciseIdentifier" : "s:14AuthFoundation12OAuth2ClientC0D14AuthenticationO",
+      "text" : "ClientAuthentication"
     },
     {
       "kind" : "text",
@@ -352,12 +578,12 @@
       "text" : "?)"
     }
   ],
-  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/OAuth2Client\/init(_:session:)",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/OAuth2Client\/init(baseURL:clientId:scopes:authentication:session:)",
   "kind" : "symbol",
   "role" : "symbol",
-  "title" : "init(_:session:)",
+  "title" : "init(baseURL:clientId:scopes:authentication:session:)",
   "type" : "topic",
-  "url" : "\/documentation\/authfoundation\/oauth2client\/init(_:session:)"
+  "url" : "\/documentation\/authfoundation\/oauth2client\/init(baseurl:clientid:scopes:authentication:session:)"
 },
 "doc://AuthFoundation/documentation/AuthFoundation/URLSessionProtocol": {
   "abstract" : [

@@ -351,7 +351,18 @@
 },
 "doc://AuthFoundation/documentation/AuthFoundation/OAuth2ServerError/Code-swift.enum/expiredToken": {
   "abstract" : [
-
+    {
+      "text" : "The ",
+      "type" : "text"
+    },
+    {
+      "code" : "device_code",
+      "type" : "codeVoice"
+    },
+    {
+      "text" : " has expired, and the device authorization session has concluded.",
+      "type" : "text"
+    }
   ],
   "fragments" : [
     {

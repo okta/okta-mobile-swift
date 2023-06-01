@@ -5,7 +5,7 @@
       "type" : "text"
     },
     {
-      "code" : "Collection.index(after:)",
+      "code" : "Equatable.!=(_:_:)",
       "type" : "codeVoice"
     },
     {
@@ -17,18 +17,29 @@
     "paths" : [
       [
         "doc:\/\/AuthFoundation\/documentation\/AuthFoundation",
-        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JWKS"
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/OAuth2Client",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/OAuth2Client\/ClientAuthentication",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/OAuth2Client\/ClientAuthentication\/Equatable-Implementations"
       ]
     ]
   },
   "identifier" : {
     "interfaceLanguage" : "swift",
-    "url" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JWKS\/index(after:)"
+    "url" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/OAuth2Client\/ClientAuthentication\/!=(_:_:)"
   },
   "kind" : "symbol",
   "metadata" : {
-    "externalID" : "s:14AuthFoundation4JWKSV5index5afterS2i_tF",
+    "extendedModule" : "Swift",
+    "externalID" : "s:SQsE2neoiySbx_xtFZ::SYNTHESIZED::s:14AuthFoundation12OAuth2ClientC0D14AuthenticationO",
     "fragments" : [
+      {
+        "kind" : "keyword",
+        "text" : "static"
+      },
+      {
+        "kind" : "text",
+        "text" : " "
+      },
       {
         "kind" : "keyword",
         "text" : "func"
@@ -39,33 +50,27 @@
       },
       {
         "kind" : "identifier",
-        "text" : "index"
+        "text" : "!="
+      },
+      {
+        "kind" : "text",
+        "text" : " "
       },
       {
         "kind" : "text",
         "text" : "("
       },
       {
-        "kind" : "externalParam",
-        "text" : "after"
+        "kind" : "typeIdentifier",
+        "text" : "Self"
       },
       {
         "kind" : "text",
-        "text" : ": "
+        "text" : ", "
       },
       {
         "kind" : "typeIdentifier",
-        "preciseIdentifier" : "s:14AuthFoundation4JWKSV",
-        "text" : "JWKS"
-      },
-      {
-        "kind" : "text",
-        "text" : "."
-      },
-      {
-        "kind" : "typeIdentifier",
-        "preciseIdentifier" : "s:14AuthFoundation4JWKSV5Indexa",
-        "text" : "Index"
+        "text" : "Self"
       },
       {
         "kind" : "text",
@@ -73,17 +78,8 @@
       },
       {
         "kind" : "typeIdentifier",
-        "preciseIdentifier" : "s:14AuthFoundation4JWKSV",
-        "text" : "JWKS"
-      },
-      {
-        "kind" : "text",
-        "text" : "."
-      },
-      {
-        "kind" : "typeIdentifier",
-        "preciseIdentifier" : "s:14AuthFoundation4JWKSV5Indexa",
-        "text" : "Index"
+        "preciseIdentifier" : "s:Sb",
+        "text" : "Bool"
       }
     ],
     "modules" : [
@@ -92,9 +88,9 @@
       }
     ],
     "role" : "symbol",
-    "roleHeading" : "Instance Method",
-    "symbolKind" : "method",
-    "title" : "index(after:)"
+    "roleHeading" : "Operator",
+    "symbolKind" : "op",
+    "title" : "!=(_:_:)"
   },
   "primaryContentSections" : [
     {
@@ -109,6 +105,14 @@
           "tokens" : [
             {
               "kind" : "keyword",
+              "text" : "static"
+            },
+            {
+              "kind" : "text",
+              "text" : " "
+            },
+            {
+              "kind" : "keyword",
               "text" : "func"
             },
             {
@@ -117,63 +121,52 @@
             },
             {
               "kind" : "identifier",
-              "text" : "index"
-            },
-            {
-              "kind" : "text",
-              "text" : "("
-            },
-            {
-              "kind" : "externalParam",
-              "text" : "after"
+              "text" : "!="
             },
             {
               "kind" : "text",
               "text" : " "
             },
             {
+              "kind" : "text",
+              "text" : "("
+            },
+            {
               "kind" : "internalParam",
-              "text" : "index"
+              "text" : "lhs"
             },
             {
               "kind" : "text",
               "text" : ": "
             },
             {
-              "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JWKS",
               "kind" : "typeIdentifier",
-              "preciseIdentifier" : "s:14AuthFoundation4JWKSV",
-              "text" : "JWKS"
+              "text" : "Self"
             },
             {
               "kind" : "text",
-              "text" : "."
+              "text" : ", "
             },
             {
-              "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JWKS\/Index",
+              "kind" : "internalParam",
+              "text" : "rhs"
+            },
+            {
+              "kind" : "text",
+              "text" : ": "
+            },
+            {
               "kind" : "typeIdentifier",
-              "preciseIdentifier" : "s:14AuthFoundation4JWKSV5Indexa",
-              "text" : "Index"
+              "text" : "Self"
             },
             {
               "kind" : "text",
               "text" : ") -> "
             },
             {
-              "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JWKS",
               "kind" : "typeIdentifier",
-              "preciseIdentifier" : "s:14AuthFoundation4JWKSV",
-              "text" : "JWKS"
-            },
-            {
-              "kind" : "text",
-              "text" : "."
-            },
-            {
-              "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JWKS\/Index",
-              "kind" : "typeIdentifier",
-              "preciseIdentifier" : "s:14AuthFoundation4JWKSV5Indexa",
-              "text" : "Index"
+              "preciseIdentifier" : "s:Sb",
+              "text" : "Bool"
             }
           ]
         }
@@ -192,7 +185,7 @@
   "variants" : [
     {
       "paths" : [
-        "\/documentation\/authfoundation\/jwks\/index(after:)"
+        "\/documentation\/authfoundation\/oauth2client\/clientauthentication\/!=(_:_:)"
       ],
       "traits" : [
         {
@@ -217,17 +210,17 @@
   "type" : "topic",
   "url" : "\/documentation\/authfoundation"
 },
-"doc://AuthFoundation/documentation/AuthFoundation/JWKS": {
+"doc://AuthFoundation/documentation/AuthFoundation/OAuth2Client": {
   "abstract" : [
     {
-      "text" : "Describes the collection of keys associated with an authorization server.",
+      "text" : "An OAuth2 client, used to interact with a given authorization server.",
       "type" : "text"
     }
   ],
   "fragments" : [
     {
       "kind" : "keyword",
-      "text" : "struct"
+      "text" : "class"
     },
     {
       "kind" : "text",
@@ -235,58 +228,69 @@
     },
     {
       "kind" : "identifier",
-      "text" : "JWKS"
+      "text" : "OAuth2Client"
     }
   ],
-  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JWKS",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/OAuth2Client",
   "kind" : "symbol",
   "navigatorTitle" : [
     {
       "kind" : "identifier",
-      "text" : "JWKS"
+      "text" : "OAuth2Client"
     }
   ],
   "role" : "symbol",
-  "title" : "JWKS",
+  "title" : "OAuth2Client",
   "type" : "topic",
-  "url" : "\/documentation\/authfoundation\/jwks"
+  "url" : "\/documentation\/authfoundation\/oauth2client"
 },
-"doc://AuthFoundation/documentation/AuthFoundation/JWKS/Index": {
+"doc://AuthFoundation/documentation/AuthFoundation/OAuth2Client/ClientAuthentication": {
+  "abstract" : [
+    {
+      "text" : "Defines the types of authentication the client may use when interacting with the authorization server.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "enum"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "ClientAuthentication"
+    }
+  ],
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/OAuth2Client\/ClientAuthentication",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "ClientAuthentication"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "OAuth2Client.ClientAuthentication",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/oauth2client\/clientauthentication"
+},
+"doc://AuthFoundation/documentation/AuthFoundation/OAuth2Client/ClientAuthentication/!=(_:_:)": {
   "abstract" : [
 
   ],
   "fragments" : [
     {
       "kind" : "keyword",
-      "text" : "typealias"
+      "text" : "static"
     },
     {
       "kind" : "text",
       "text" : " "
     },
-    {
-      "kind" : "identifier",
-      "text" : "Index"
-    }
-  ],
-  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JWKS\/Index",
-  "kind" : "symbol",
-  "navigatorTitle" : [
-    {
-      "kind" : "identifier",
-      "text" : "Index"
-    }
-  ],
-  "role" : "symbol",
-  "title" : "JWKS.Index",
-  "type" : "topic",
-  "url" : "\/documentation\/authfoundation\/jwks\/index"
-},
-"doc://AuthFoundation/documentation/AuthFoundation/JWKS/index(after:)": {
-  "abstract" : [
-
-  ],
-  "fragments" : [
     {
       "kind" : "keyword",
       "text" : "func"
@@ -297,33 +301,27 @@
     },
     {
       "kind" : "identifier",
-      "text" : "index"
+      "text" : "!="
+    },
+    {
+      "kind" : "text",
+      "text" : " "
     },
     {
       "kind" : "text",
       "text" : "("
     },
     {
-      "kind" : "externalParam",
-      "text" : "after"
+      "kind" : "typeIdentifier",
+      "text" : "Self"
     },
     {
       "kind" : "text",
-      "text" : ": "
+      "text" : ", "
     },
     {
       "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:14AuthFoundation4JWKSV",
-      "text" : "JWKS"
-    },
-    {
-      "kind" : "text",
-      "text" : "."
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:14AuthFoundation4JWKSV5Indexa",
-      "text" : "Index"
+      "text" : "Self"
     },
     {
       "kind" : "text",
@@ -331,25 +329,27 @@
     },
     {
       "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:14AuthFoundation4JWKSV",
-      "text" : "JWKS"
-    },
-    {
-      "kind" : "text",
-      "text" : "."
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:14AuthFoundation4JWKSV5Indexa",
-      "text" : "Index"
+      "preciseIdentifier" : "s:Sb",
+      "text" : "Bool"
     }
   ],
-  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JWKS\/index(after:)",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/OAuth2Client\/ClientAuthentication\/!=(_:_:)",
   "kind" : "symbol",
   "role" : "symbol",
-  "title" : "index(after:)",
+  "title" : "!=(_:_:)",
   "type" : "topic",
-  "url" : "\/documentation\/authfoundation\/jwks\/index(after:)"
+  "url" : "\/documentation\/authfoundation\/oauth2client\/clientauthentication\/!=(_:_:)"
+},
+"doc://AuthFoundation/documentation/AuthFoundation/OAuth2Client/ClientAuthentication/Equatable-Implementations": {
+  "abstract" : [
+
+  ],
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/OAuth2Client\/ClientAuthentication\/Equatable-Implementations",
+  "kind" : "article",
+  "role" : "collectionGroup",
+  "title" : "Equatable Implementations",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/oauth2client\/clientauthentication\/equatable-implementations"
 }
 }
 }

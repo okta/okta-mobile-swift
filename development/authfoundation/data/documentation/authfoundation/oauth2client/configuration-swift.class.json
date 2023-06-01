@@ -28,6 +28,7 @@
   },
   "kind" : "symbol",
   "metadata" : {
+    "extendedModule" : "AuthFoundation",
     "externalID" : "s:14AuthFoundation12OAuth2ClientC13ConfigurationC",
     "fragments" : [
       {
@@ -147,14 +148,15 @@
     },
     {
       "identifiers" : [
-        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/OAuth2Client\/Configuration-swift.class\/init(baseURL:discoveryURL:clientId:scopes:)",
-        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/OAuth2Client\/Configuration-swift.class\/init(domain:clientId:scopes:)",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/OAuth2Client\/Configuration-swift.class\/init(baseURL:discoveryURL:clientId:scopes:authentication:)",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/OAuth2Client\/Configuration-swift.class\/init(domain:clientId:scopes:authentication:)",
         "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/OAuth2Client\/Configuration-swift.class\/init(from:)"
       ],
       "title" : "Initializers"
     },
     {
       "identifiers" : [
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/OAuth2Client\/Configuration-swift.class\/authentication",
         "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/OAuth2Client\/Configuration-swift.class\/baseURL",
         "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/OAuth2Client\/Configuration-swift.class\/clientId",
         "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/OAuth2Client\/Configuration-swift.class\/discoveryURL",
@@ -425,6 +427,52 @@
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/oauth2client\/configuration-swift.class\/equatable-implementations"
 },
+"doc://AuthFoundation/documentation/AuthFoundation/OAuth2Client/Configuration-swift.class/authentication": {
+  "abstract" : [
+    {
+      "text" : "The type of authentication this client will perform when interacting with the authorization server.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "let"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "authentication"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:14AuthFoundation12OAuth2ClientC",
+      "text" : "OAuth2Client"
+    },
+    {
+      "kind" : "text",
+      "text" : "."
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:14AuthFoundation12OAuth2ClientC0D14AuthenticationO",
+      "text" : "ClientAuthentication"
+    }
+  ],
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/OAuth2Client\/Configuration-swift.class\/authentication",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "authentication",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/oauth2client\/configuration-swift.class\/authentication"
+},
 "doc://AuthFoundation/documentation/AuthFoundation/OAuth2Client/Configuration-swift.class/baseURL": {
   "abstract" : [
     {
@@ -608,7 +656,7 @@
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/oauth2client\/configuration-swift.class\/hash(into:)"
 },
-"doc://AuthFoundation/documentation/AuthFoundation/OAuth2Client/Configuration-swift.class/init(baseURL:discoveryURL:clientId:scopes:)": {
+"doc://AuthFoundation/documentation/AuthFoundation/OAuth2Client/Configuration-swift.class/init(baseURL:discoveryURL:clientId:scopes:authentication:)": {
   "abstract" : [
     {
       "text" : "Initializer for constructing an OAuth2Client.",
@@ -690,17 +738,43 @@
     },
     {
       "kind" : "text",
+      "text" : ", "
+    },
+    {
+      "kind" : "externalParam",
+      "text" : "authentication"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:14AuthFoundation12OAuth2ClientC",
+      "text" : "OAuth2Client"
+    },
+    {
+      "kind" : "text",
+      "text" : "."
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:14AuthFoundation12OAuth2ClientC0D14AuthenticationO",
+      "text" : "ClientAuthentication"
+    },
+    {
+      "kind" : "text",
       "text" : ")"
     }
   ],
-  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/OAuth2Client\/Configuration-swift.class\/init(baseURL:discoveryURL:clientId:scopes:)",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/OAuth2Client\/Configuration-swift.class\/init(baseURL:discoveryURL:clientId:scopes:authentication:)",
   "kind" : "symbol",
   "role" : "symbol",
-  "title" : "init(baseURL:discoveryURL:clientId:scopes:)",
+  "title" : "init(baseURL:discoveryURL:clientId:scopes:authentication:)",
   "type" : "topic",
-  "url" : "\/documentation\/authfoundation\/oauth2client\/configuration-swift.class\/init(baseurl:discoveryurl:clientid:scopes:)"
+  "url" : "\/documentation\/authfoundation\/oauth2client\/configuration-swift.class\/init(baseurl:discoveryurl:clientid:scopes:authentication:)"
 },
-"doc://AuthFoundation/documentation/AuthFoundation/OAuth2Client/Configuration-swift.class/init(domain:clientId:scopes:)": {
+"doc://AuthFoundation/documentation/AuthFoundation/OAuth2Client/Configuration-swift.class/init(domain:clientId:scopes:authentication:)": {
   "abstract" : [
     {
       "text" : "Convenience initializer to create a client using a simple domain name.",
@@ -773,6 +847,32 @@
     },
     {
       "kind" : "text",
+      "text" : ", "
+    },
+    {
+      "kind" : "externalParam",
+      "text" : "authentication"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:14AuthFoundation12OAuth2ClientC",
+      "text" : "OAuth2Client"
+    },
+    {
+      "kind" : "text",
+      "text" : "."
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:14AuthFoundation12OAuth2ClientC0D14AuthenticationO",
+      "text" : "ClientAuthentication"
+    },
+    {
+      "kind" : "text",
       "text" : ") "
     },
     {
@@ -780,12 +880,12 @@
       "text" : "throws"
     }
   ],
-  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/OAuth2Client\/Configuration-swift.class\/init(domain:clientId:scopes:)",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/OAuth2Client\/Configuration-swift.class\/init(domain:clientId:scopes:authentication:)",
   "kind" : "symbol",
   "role" : "symbol",
-  "title" : "init(domain:clientId:scopes:)",
+  "title" : "init(domain:clientId:scopes:authentication:)",
   "type" : "topic",
-  "url" : "\/documentation\/authfoundation\/oauth2client\/configuration-swift.class\/init(domain:clientid:scopes:)"
+  "url" : "\/documentation\/authfoundation\/oauth2client\/configuration-swift.class\/init(domain:clientid:scopes:authentication:)"
 },
 "doc://AuthFoundation/documentation/AuthFoundation/OAuth2Client/Configuration-swift.class/init(from:)": {
   "abstract" : [
