@@ -26,7 +26,7 @@ public enum GrantType: Codable, Hashable {
     case other(_ type: String)
 }
 
-fileprivate let Mapping: [String: GrantType] = [
+private let grantTypeMapping: [String: GrantType] = [
     "authorization_code": .authorizationCode,
     "implicit": .implicit,
     "refresh_token": .refreshToken,
@@ -44,7 +44,7 @@ extension GrantType: RawRepresentable {
     public typealias RawValue = String
     
     public init?(rawValue: String) {
-        if let mapping = Mapping[rawValue] {
+        if let mapping = grantTypeMapping[rawValue] {
             self = mapping
         } else {
             self = .other(rawValue)

@@ -14,7 +14,7 @@ import Foundation
 
 #if os(iOS) || os(macOS) || os(tvOS) || os(watchOS)
 
-fileprivate let accountIdRegex = try? NSRegularExpression(pattern: "0oa[0-9a-zA-Z]{17}")
+private let accountIdRegex = try? NSRegularExpression(pattern: "0oa[0-9a-zA-Z]{17}")
 
 extension SDKVersion.Migration {
     /// Migrator capable of importing credentials from the legacy `OktaOidc` SDK.
@@ -243,7 +243,7 @@ extension SDKVersion.Migration {
                 @objc let idToken: String?
                 @objc let refreshToken: String?
                 @objc let scope: String?
-                @objc let additionalParameters: Dictionary<String, String>?
+                @objc let additionalParameters: [String: String]?
 
                 func encode(with coder: NSCoder) {}
 
@@ -254,7 +254,7 @@ extension SDKVersion.Migration {
                     tokenType = coder.decodeObject(forKey: "token_type") as? String
                     idToken = coder.decodeObject(forKey: "id_token") as? String
                     scope = coder.decodeObject(forKey: "scope") as? String
-                    additionalParameters = coder.decodeObject(forKey: "additionalParameters") as? Dictionary<String, String>
+                    additionalParameters = coder.decodeObject(forKey: "additionalParameters") as? [String: String]
                 }
             }
             

@@ -268,8 +268,7 @@ public class AuthorizationCodeFlow: AuthenticationFlow {
             switch result {
             case .success(let configuration):
                 let request = TokenRequest(openIdConfiguration: configuration,
-                                           clientId: self.client.configuration.clientId,
-                                           scope: self.client.configuration.scopes,
+                                           clientConfiguration: self.client.configuration,
                                            redirectUri: self.redirectUri.absoluteString,
                                            grantType: .authorizationCode,
                                            grantValue: code,

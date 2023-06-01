@@ -52,7 +52,7 @@ extension OAuth2ServerError {
         case authorizationPending
         /// the authorization request is still pending and polling should continue
         case slowDown
-        //The "device_code" has expired, and the device authorization session has concluded.
+        /// The `device_code` has expired, and the device authorization session has concluded.
         case expiredToken
         /// The server denied the request.
         case accessDenied

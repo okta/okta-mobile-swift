@@ -20,14 +20,10 @@ extension DirectAuthenticationFlow.SecondaryFactor: AuthenticationFactor {
                      currentStatus: DirectAuthenticationFlow.Status?,
                      factor: DirectAuthenticationFlow.SecondaryFactor) throws -> StepHandler
     {
-        let clientId = flow.client.configuration.clientId
-        let scope = flow.client.configuration.scopes
-
         switch self {
-        case .otp(code: _):
+        case .otp:
             let request = TokenRequest(openIdConfiguration: openIdConfiguration,
-                                       clientId: clientId,
-                                       scope: scope,
+                                       clientConfiguration: flow.client.configuration,
                                        loginHint: loginHint,
                                        factor: factor,
                                        mfaToken: currentStatus?.mfaToken,
@@ -50,7 +46,7 @@ extension DirectAuthenticationFlow.SecondaryFactor: AuthenticationFactor {
                 "grant_type": grantType.rawValue,
                 "otp": code
             ]
-        case .oob(channel: _):
+        case .oob:
             return nil
         }
 
@@ -58,9 +54,9 @@ extension DirectAuthenticationFlow.SecondaryFactor: AuthenticationFactor {
 
     var grantType: GrantType {
         switch self {
-        case .otp(code: _):
+        case .otp:
             return .otpMFA
-        case .oob(channel: _):
+        case .oob:
             return .oobMFA
         }
     }

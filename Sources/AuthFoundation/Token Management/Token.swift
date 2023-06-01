@@ -193,7 +193,7 @@ public final class Token: Codable, Equatable, Hashable, Expires {
             id = UUID().uuidString
         }
 
-        var idToken: JWT? = nil
+        var idToken: JWT?
         if let idTokenString = try container.decodeIfPresent(String.self, forKey: .idToken) {
             idToken = try JWT(idTokenString)
         }

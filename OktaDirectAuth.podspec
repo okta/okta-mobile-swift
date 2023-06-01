@@ -1,10 +1,9 @@
 Pod::Spec.new do |s|
-    s.name             = "OktaAuthFoundation"
-    s.module_name      = "AuthFoundation"
+    s.name             = "OktaDirectAuth"
     s.version          = "1.4.0"
-    s.summary          = "Okta Authentication Foundation"
+    s.summary          = "Okta Direct Authentication"
     s.description      = <<-DESC
-Provides the foundation and common features used to authenticate users, managing the lifecycle and storage of tokens and credentials, and provide a base for other Okta SDKs to build upon.
+Enables application developers to build native sign in experiences using the Okta Direct Authentication API.
                          DESC
     s.platforms = {
         :ios     => "9.0",
@@ -21,7 +20,9 @@ Provides the foundation and common features used to authenticate users, managing
     s.license       = { :type => "APACHE2", :file => "LICENSE" }
     s.authors       = { "Okta Developers" => "developer@okta.com"}
     s.source        = { :git => "https://github.com/okta/okta-mobile-swift.git", :tag => s.version.to_s }
-    s.source_files  = "Sources/AuthFoundation/**/*.swift"
-    s.resources     = "Sources/AuthFoundation/Resources/*.lproj"
+    s.source_files  = "Sources/OktaDirectAuth/**/*.swift"
+    s.resources     = "Sources/OktaDirectAuth/Resources/*.lproj"
     s.swift_version = "5.5"
+
+    s.dependency "OktaAuthFoundation", "#{s.version.to_s}"
 end

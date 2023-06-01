@@ -28,7 +28,7 @@ extension WebAuthentication.Option {
             return ["prompt": value.rawValue]
         case .custom(key: let key, value: let value):
             return [key: value]
-        case .maxAge(_), .state(_):
+        case .maxAge, .state:
             return [:]
         }
     }
@@ -43,7 +43,7 @@ extension Collection where Element == WebAuthentication.Option {
     var state: String? {
         guard case let .state(state) = filter({
             switch $0 {
-            case .state(_):
+            case .state:
                 return true
             default:
                 return false
@@ -58,7 +58,7 @@ extension Collection where Element == WebAuthentication.Option {
     var maxAge: TimeInterval? {
         guard case let .maxAge(result) = filter({
             switch $0 {
-            case .maxAge(_):
+            case .maxAge:
                 return true
             default:
                 return false

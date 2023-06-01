@@ -46,7 +46,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         guard let scene = (scene as? UIWindowScene) else { return }
         windowScene = scene
         
-        NotificationCenter.default.addObserver(forName: .defaultCredentialChanged, object: nil, queue: .main) { notification in
+        NotificationCenter.default.addObserver(forName: .defaultCredentialChanged, object: nil, queue: .main) { _ in
             self.setRootViewController()
         }
         

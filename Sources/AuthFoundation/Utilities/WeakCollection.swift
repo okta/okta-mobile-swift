@@ -36,7 +36,7 @@ extension Weak: Equatable where Object: Equatable {}
 
 /// Property wrapper representing a collection of weak values.
 @propertyWrapper
-public struct WeakCollection<Collect, Element> where Collect: RangeReplaceableCollection, Collect.Element == Optional<Element>, Element: AnyObject {
+public struct WeakCollection<Collect, Element> where Collect: RangeReplaceableCollection, Collect.Element == Element?, Element: AnyObject {
     private var weakObjects = [Weak<Element>]()
 
     public init(wrappedValue value: Collect) { save(collection: value) }

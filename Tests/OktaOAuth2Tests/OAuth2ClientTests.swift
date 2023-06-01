@@ -23,15 +23,6 @@ final class OAuth2ClientTests: XCTestCase {
         Token.resetToDefault()
     }
     
-    func openIdConfiguration(named: String = "openid-configuration") throws -> (OpenIdConfiguration, Data) {
-        let data = try data(from: .module,
-                           for: named,
-                           in: "MockResponses")
-        let configuration = try OpenIdConfiguration.jsonDecoder.decode(OpenIdConfiguration.self,
-                                                                       from: data)
-        return (configuration, data)
-    }
-
     func testAuthorizationCodeConstructor() throws {
         let flow = AuthorizationCodeFlow(issuer: issuer,
                                          clientId: "theClientId",
@@ -43,9 +34,11 @@ final class OAuth2ClientTests: XCTestCase {
     func testExchange() throws {
         let pkce = PKCE()
         let (openIdConfiguration, openIdData) = try openIdConfiguration()
+        let clientConfiguration = try OAuth2Client.Configuration(domain: "example.com",
+                                                                 clientId: "client_id",
+                                                                 scopes: "openid profile offline_access")
         let request = AuthorizationCodeFlow.TokenRequest(openIdConfiguration: openIdConfiguration,
-                                                         clientId: "client_id",
-                                                         scope: "openid profile offline_access",
+                                                         clientConfiguration: clientConfiguration,
                                                          redirectUri: redirectUri.absoluteString,
                                                          grantType: .authorizationCode,
                                                          grantValue: "abc123",
@@ -90,9 +83,11 @@ final class OAuth2ClientTests: XCTestCase {
     func testExchangeFailed() throws {
         let pkce = PKCE()
         let (openIdConfiguration, openIdData) = try openIdConfiguration(named: "openid-configuration-invalid-issuer")
+        let clientConfiguration = try OAuth2Client.Configuration(domain: "example.com",
+                                                                 clientId: "client_id",
+                                                                 scopes: "openid profile offline_access")
         let request = AuthorizationCodeFlow.TokenRequest(openIdConfiguration: openIdConfiguration,
-                                                         clientId: "client_id",
-                                                         scope: "openid profile offline_access",
+                                                         clientConfiguration: clientConfiguration,
                                                          redirectUri: redirectUri.absoluteString,
                                                          grantType: .authorizationCode,
                                                          grantValue: "abc123",

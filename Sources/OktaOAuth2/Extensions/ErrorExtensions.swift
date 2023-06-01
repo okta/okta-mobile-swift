@@ -52,7 +52,7 @@ extension AuthorizationCodeFlow.RedirectError: LocalizedError {
                                      bundle: .oktaOAuth2,
                                      comment: "Invalid URL")
 
-        case .unexpectedScheme(_):
+        case .unexpectedScheme:
             return NSLocalizedString("unexpected_scheme_description",
                                      tableName: "OktaOAuth2",
                                      bundle: .oktaOAuth2,
@@ -64,7 +64,7 @@ extension AuthorizationCodeFlow.RedirectError: LocalizedError {
                                      bundle: .oktaOAuth2,
                                      comment: "Invalid URL")
         
-        case .invalidState(_):
+        case .invalidState:
             return NSLocalizedString("invalid_state_description",
                                      tableName: "OktaOAuth2",
                                      bundle: .oktaOAuth2,

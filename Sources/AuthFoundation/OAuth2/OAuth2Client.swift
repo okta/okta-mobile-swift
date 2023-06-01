@@ -30,70 +30,9 @@ extension OAuth2ClientDelegate {
     public func oauth(client: OAuth2Client, didRefresh token: Token, replacedWith newToken: Token?) {}
 }
 
+// swiftlint:disable type_body_length
 /// An OAuth2 client, used to interact with a given authorization server.
 public final class OAuth2Client {
-    /// The configuration for an ``OAuth2Client``.
-    ///
-    /// This defines the basic information necessary for interacting with an OAuth2 authorization server.
-    public final class Configuration: Codable, Equatable, Hashable, APIClientConfiguration {
-        /// The base URL for interactions with this OAuth2 server.
-        public let baseURL: URL
-        
-        /// The discovery URL used to retrieve the ``OpenIdConfiguration`` for this client.
-        public let discoveryURL: URL
-        
-        /// The unique client ID representing this ``OAuth2Client``.
-        public let clientId: String
-        
-        /// The list of OAuth2 scopes requested for this client.
-        public let scopes: String
-        
-        /// Initializer for constructing an OAuth2Client.
-        /// - Parameters:
-        ///   - baseURL: Base URL.
-        ///   - discoveryURL: Discovery URL, or `nil` to accept the default OpenIDConfiguration endpoint.
-        ///   - clientId: The client ID.
-        ///   - scopes: The list of OAuth2 scopes.
-        public init(baseURL: URL, discoveryURL: URL? = nil, clientId: String, scopes: String) {
-            var relativeURL = baseURL
-
-            // Ensure the base URL contains a trailing slash in its path, so request paths can be safely appended.
-            if !relativeURL.lastPathComponent.isEmpty {
-                relativeURL.appendPathComponent("")
-            }
-            
-            self.baseURL = baseURL
-            self.discoveryURL = discoveryURL ?? relativeURL.appendingPathComponent(".well-known/openid-configuration")
-            self.clientId = clientId
-            self.scopes = scopes
-        }
-        
-        /// Convenience initializer to create a client using a simple domain name.
-        /// - Parameters:
-        ///   - domain: Domain name for the OAuth2 client.
-        ///   - clientId: The client ID.
-        ///   - scopes: The list of OAuth2 scopes.
-        public convenience init(domain: String, clientId: String, scopes: String) throws {
-            guard let url = URL(string: "https://\(domain)") else {
-                throw OAuth2Error.invalidUrl
-            }
-
-            self.init(baseURL: url, clientId: clientId, scopes: scopes)
-        }
-
-        public static func == (lhs: OAuth2Client.Configuration, rhs: OAuth2Client.Configuration) -> Bool {
-            lhs.baseURL == rhs.baseURL &&
-            lhs.clientId == rhs.clientId &&
-            lhs.scopes == rhs.scopes
-        }
-        
-        public func hash(into hasher: inout Hasher) {
-            hasher.combine(baseURL)
-            hasher.combine(clientId)
-            hasher.combine(scopes)
-        }
-    }
-    
     /// The URLSession used by this client for network requests.
     public let session: URLSessionProtocol
     
@@ -101,7 +40,7 @@ public final class OAuth2Client {
     public let configuration: Configuration
     
     /// Additional HTTP headers to include in outgoing network requests.
-    public var additionalHttpHeaders: [String: String]? = nil
+    public var additionalHttpHeaders: [String: String]?
     
     /// The OpenID configuration for this org.
     ///
@@ -116,28 +55,46 @@ public final class OAuth2Client {
     /// Constructs an OAuth2Client for the given domain.
     /// - Parameters:
     ///   - domain: Okta domain to use for the base URL.
+    ///   - clientId: The unique client ID representing this client.
+    ///   - scopes: The list of OAuth2 scopes requested for this client.
+    ///   - authentication: The client authentication  model to use (Default: `.none`)
     ///   - session: Optional URLSession to use for network requests.
-    public convenience init(domain: String, clientId: String, scopes: String, session: URLSessionProtocol? = nil) throws {
+    public convenience init(domain: String,
+                            clientId: String,
+                            scopes: String,
+                            authentication: ClientAuthentication = .none,
+                            session: URLSessionProtocol? = nil) throws
+    {
         self.init(try Configuration(domain: domain,
                                     clientId: clientId,
-                                    scopes: scopes),
+                                    scopes: scopes,
+                                    authentication: authentication),
                   session: session)
     }
     
     /// Constructs an OAuth2Client for the given domain.
     /// - Parameters:
-    ///   - domain: Okta domain to use for the base URL.
+    ///   - baseURL: The base URL for operations against this client.
+    ///   - clientId: The unique client ID representing this client.
+    ///   - scopes: The list of OAuth2 scopes requested for this client.
+    ///   - authentication: The client authentication  model to use (Default: `.none`)
     ///   - session: Optional URLSession to use for network requests.
-    public convenience init(baseURL: URL, clientId: String, scopes: String, session: URLSessionProtocol? = nil) {
+    public convenience init(baseURL: URL,
+                            clientId: String,
+                            scopes: String,
+                            authentication: ClientAuthentication = .none,
+                            session: URLSessionProtocol? = nil)
+    {
         self.init(Configuration(baseURL: baseURL,
                                 clientId: clientId,
-                                scopes: scopes),
+                                scopes: scopes,
+                                authentication: authentication),
                   session: session)
     }
     
     /// Constructs an OAuth2Client for the given base URL.
     /// - Parameters:
-    ///   - baseURL: Base URL representing the Okta domain to use.
+    ///   - configuration: The pre-formed configuration for this client.
     ///   - session: Optional URLSession to use for network requests.
     public init(_ configuration: Configuration, session: URLSessionProtocol? = nil) {
         // Ensure this SDK's static version is included in the user agent.
@@ -256,7 +213,6 @@ public final class OAuth2Client {
                             NotificationCenter.default.post(name: .tokenRefreshed, object: newToken)
                             action.finish(.success(newToken))
                             
-
                         case .failure(let error):
                             self.delegateCollection.invoke { $0.oauth(client: self, didRefresh: token, replacedWith: nil) }
                             
@@ -316,7 +272,7 @@ public final class OAuth2Client {
                                                   configuration: clientSettings)
                 request.send(to: self) { result in
                     switch result {
-                    case .success(_):
+                    case .success:
                         completion(.success(()))
                     case .failure(let error):
                         completion(.failure(.network(error: error)))
@@ -580,6 +536,7 @@ public final class OAuth2Client {
     }()
     internal var jwksAction: CoalescedResult<Result<JWKS, OAuth2Error>>?
 }
+// swiftlint:enable type_body_length
 
 #if swift(>=5.5.1)
 @available(iOS 15.0, tvOS 15.0, macOS 12.0, watchOS 8, *)
@@ -590,7 +547,7 @@ extension OAuth2Client {
     /// - Returns: The OpenID configuration for the org identified by the client's base URL.
     public func openIdConfiguration() async throws -> OpenIdConfiguration {
         try await withCheckedThrowingContinuation { continuation in
-            openIdConfiguration() { result in
+            openIdConfiguration { result in
                 continuation.resume(with: result)
             }
         }
@@ -602,7 +559,7 @@ extension OAuth2Client {
     /// - Returns: The ``JWKS`` configuration for the org identified by the client's base URL.
     public func jwks() async throws -> JWKS {
         try await withCheckedThrowingContinuation { continuation in
-            jwks() { result in
+            jwks { result in
                 continuation.resume(with: result)
             }
         }

@@ -97,12 +97,12 @@ class SignInViewController: UIViewController {
         let alert = UIAlertController(title: "Sign In with Refresh Token",
                                       message: "Enter the refresh token below",
                                       preferredStyle: .alert)
-        alert.addTextField() { field in
+        alert.addTextField { field in
             field.placeholder = "refresh_token"
             field.autocorrectionType = .no
         }
         alert.addAction(.init(title: "Cancel", style: .cancel))
-        alert.addAction(.init(title: "OK", style: .default) { action in
+        alert.addAction(.init(title: "OK", style: .default) { _ in
             guard let textField = alert.textFields?.first,
                 let string = textField.text,
                 !string.isEmpty

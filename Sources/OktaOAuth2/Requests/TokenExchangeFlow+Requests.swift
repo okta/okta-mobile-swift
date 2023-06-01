@@ -81,7 +81,7 @@ extension TokenExchangeFlow.TokenRequest: OAuth2TokenRequest, OAuth2APIRequest, 
         let tokensDict = tokens.map { token in
             [
                 token.key: token.value,
-                token.keyType: token.urn,
+                token.keyType: token.urn
             ]
         }.flatMap { $0 }
         
@@ -93,4 +93,3 @@ extension TokenExchangeFlow.TokenRequest: OAuth2TokenRequest, OAuth2APIRequest, 
         ].merging(tokensDict) { _, new in new }
     }
 }
-

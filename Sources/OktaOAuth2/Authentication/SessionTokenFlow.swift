@@ -213,7 +213,7 @@ final class SessionTokenFlowExchange: NSObject, SessionTokenFlowURLExchange, URL
     func follow(url: URL, completion: @escaping (Result<URL, OAuth2Error>) -> Void) {
         self.completion = completion
 
-        activeTask = session.dataTask(with: URLRequest(url: url)) { [weak self] data, response, error in
+        activeTask = session.dataTask(with: URLRequest(url: url)) { [weak self] _, _, error in
             if let error = error {
                 self?.finish(with: .error(error))
             } else {

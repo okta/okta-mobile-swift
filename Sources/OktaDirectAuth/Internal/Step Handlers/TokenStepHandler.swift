@@ -29,4 +29,3 @@ struct TokenStepHandler: StepHandler {
         }
     }
 }
-

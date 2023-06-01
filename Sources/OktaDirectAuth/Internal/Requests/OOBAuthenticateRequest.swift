@@ -11,6 +11,7 @@
 //
 
 import Foundation
+import AuthFoundation
 
 extension OpenIdConfiguration {
     var oobAuthenticateEndpoint: URL? {
@@ -28,12 +29,12 @@ struct OOBResponse: Codable {
 
 struct OOBAuthenticateRequest {
     let url: URL
-    let clientId: String
+    let clientConfiguration: OAuth2Client.Configuration
     let loginHint: String
     let channelHint: DirectAuthenticationFlow.OOBChannel
     
     init(openIdConfiguration: OpenIdConfiguration,
-         clientId: String,
+         clientConfiguration: OAuth2Client.Configuration,
          loginHint: String,
          channelHint: DirectAuthenticationFlow.OOBChannel) throws
     {
@@ -42,7 +43,7 @@ struct OOBAuthenticateRequest {
         }
         
         self.url = url
-        self.clientId = clientId
+        self.clientConfiguration = clientConfiguration
         self.loginHint = loginHint
         self.channelHint = channelHint
     }
@@ -59,10 +60,16 @@ extension OOBAuthenticateRequest: APIRequest, APIRequestBody {
     var contentType: APIContentType? { .formEncoded }
     var acceptsType: APIContentType? { .json }
     var bodyParameters: [String: Any]? {
-        [
-            "client_id": clientId,
+        var result: [String: Any] = [
+            "client_id": clientConfiguration.clientId,
             "login_hint": loginHint,
             "channel_hint": channelHint.rawValue
         ]
+        
+        if let parameters = clientConfiguration.authentication.additionalParameters {
+            result.merge(parameters, uniquingKeysWith: { $1 })
+        }
+
+        return result
     }
 }

@@ -35,6 +35,61 @@ final class OAuth2ClientTests: XCTestCase {
         urlSession = nil
         client = nil
     }
+    
+    func testInitializers() throws {
+        var client: OAuth2Client!
+        
+        client = try OAuth2Client(domain: "example.com",
+                                  clientId: "abc123",
+                                  scopes: "openid profile")
+        XCTAssertEqual(client.configuration, .init(baseURL: URL(string: "https://example.com")!,
+                                                   clientId: "abc123",
+                                                   scopes: "openid profile",
+                                                   authentication: .none))
+
+        client = OAuth2Client(baseURL: URL(string: "https://example.com")!,
+                                  clientId: "abc123",
+                                  scopes: "openid profile")
+        XCTAssertEqual(client.configuration, .init(baseURL: URL(string: "https://example.com")!,
+                                                   clientId: "abc123",
+                                                   scopes: "openid profile",
+                                                   authentication: .none))
+
+        client = try OAuth2Client(domain: "example.com",
+                                  clientId: "abc123",
+                                  scopes: "openid profile",
+                                  authentication: .clientSecret("supersecret"))
+        XCTAssertEqual(client.configuration, .init(baseURL: URL(string: "https://example.com")!,
+                                                   clientId: "abc123",
+                                                   scopes: "openid profile",
+                                                   authentication: .clientSecret("supersecret")))
+    }
+    
+    func testConfiguration() throws {
+        XCTAssertNotEqual(try OAuth2Client.Configuration(domain: "example.com",
+                                                         clientId: "abc123",
+                                                         scopes: "openid profile",
+                                                         authentication: .none),
+                          try OAuth2Client.Configuration(domain: "example.com",
+                                                                           clientId: "abc123",
+                                                                           scopes: "openid profile",
+                                                                           authentication: .clientSecret("supersecret")))
+    }
+
+    func testClientAuthentication() throws {
+        XCTAssertNotEqual(OAuth2Client.ClientAuthentication.none,
+                          .clientSecret("supersecret"))
+        XCTAssertEqual(OAuth2Client.ClientAuthentication.none, .none)
+
+        XCTAssertNotEqual(OAuth2Client.ClientAuthentication.clientSecret("supersecret1"),
+                       .clientSecret("supersecret2"))
+        XCTAssertEqual(OAuth2Client.ClientAuthentication.clientSecret("supersecret"),
+                       .clientSecret("supersecret"))
+        
+        XCTAssertNil(OAuth2Client.ClientAuthentication.none.additionalParameters)
+        XCTAssertEqual(OAuth2Client.ClientAuthentication.clientSecret("supersecret").additionalParameters,
+                       ["client_secret": "supersecret"])
+    }
 
     func testOpenIDConfiguration() throws {
         urlSession.expect("https://example.com/.well-known/openid-configuration",

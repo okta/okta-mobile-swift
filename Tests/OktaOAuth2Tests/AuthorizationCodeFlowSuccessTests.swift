@@ -240,4 +240,53 @@ final class AuthorizationCodeFlowSuccessTests: XCTestCase {
 
         XCTAssertEqual(try flow.authorizationCode(from: URL(string: "com.example:/?state=ABC123&code=foo")!), "foo")
     }
+    
+    func testTokenRequestParameters() throws {
+        let (openIdConfiguration, _) = try openIdConfiguration()
+        let pkce = try XCTUnwrap(PKCE())
+        
+        var request: AuthorizationCodeFlow.TokenRequest
+        
+        // No authentication
+        request = .init(openIdConfiguration: openIdConfiguration,
+                        clientConfiguration: try .init(domain: "example.com",
+                                                       clientId: "theClientId",
+                                                       scopes: "openid profile"),
+                        redirectUri: "https://example.com/redirect",
+                        grantType: .authorizationCode,
+                        grantValue: "abcd123",
+                        pkce: pkce,
+                        nonce: "nonce_str",
+                        maxAge: 60)
+        XCTAssertEqual(request.bodyParameters as? [String: String],
+                       [
+                        "client_id": "theClientId",
+                        "redirect_uri": "https://example.com/redirect",
+                        "grant_type": "authorization_code",
+                        "code_verifier": pkce.codeVerifier,
+                        "code": "abcd123"
+                       ])
+
+        // Client Secret authentication
+        request = .init(openIdConfiguration: openIdConfiguration,
+                        clientConfiguration: try .init(domain: "example.com",
+                                                       clientId: "theClientId",
+                                                       scopes: "openid profile",
+                                                       authentication: .clientSecret("supersecret")),
+                        redirectUri: "https://example.com/redirect",
+                        grantType: .authorizationCode,
+                        grantValue: "abcd123",
+                        pkce: pkce,
+                        nonce: "nonce_str",
+                        maxAge: 60)
+        XCTAssertEqual(request.bodyParameters as? [String: String],
+                       [
+                        "client_id": "theClientId",
+                        "client_secret": "supersecret",
+                        "redirect_uri": "https://example.com/redirect",
+                        "grant_type": "authorization_code",
+                        "code_verifier": pkce.codeVerifier,
+                        "code": "abcd123"
+                       ])
+    }
 }

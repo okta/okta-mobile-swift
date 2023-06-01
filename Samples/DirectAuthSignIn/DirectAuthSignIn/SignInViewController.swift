@@ -36,4 +36,3 @@ class SignInViewController: UIHostingController<SignInView> {
         super.init(coder: aDecoder, rootView: SignInView(flow: flow))
     }
 }
-

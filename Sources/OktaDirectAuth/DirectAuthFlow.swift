@@ -251,7 +251,7 @@ public class DirectAuthenticationFlow: AuthenticationFlow {
                     self.stepHandler?.process { result in
                         self.stepHandler = nil
                         if case let .success(status) = result,
-                            case .success(_) = status
+                            case .success = status
                         {
                             self.reset()
                         }

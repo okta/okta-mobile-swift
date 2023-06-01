@@ -116,4 +116,3 @@ final class SingleSignOnViewController: UIViewController {
         indicatorView.isHidden = true
     }
 }
-

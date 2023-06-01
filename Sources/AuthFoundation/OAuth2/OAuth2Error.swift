@@ -111,7 +111,7 @@ extension OAuth2Error: LocalizedError {
                                   comment: "Invalid URL"),
                 errorString)
 
-        case .cannotRevoke(type: _):
+        case .cannotRevoke:
             return NSLocalizedString("cannot_revoke_token",
                                      tableName: "AuthFoundation",
                                      bundle: .authFoundation,

@@ -231,7 +231,7 @@ public final class Credential: Equatable, OAuth2ClientDelegate {
         oauth2.revoke(token, type: type) { result in
             defer { completion?(result) }
             
-            guard case .success(_) = result else { return }
+            guard case .success = result else { return }
             
             // Remove the credential from storage if the access token was revoked
             if shouldRemove {

@@ -16,7 +16,7 @@ import AuthFoundation
 extension DirectAuthenticationFlow.PrimaryFactor {
     var loginHintKey: String {
         switch self {
-        case .password(_):
+        case .password:
             return "username"
         default:
             return "login_hint"
@@ -31,15 +31,11 @@ extension DirectAuthenticationFlow.PrimaryFactor: AuthenticationFactor {
                      currentStatus: DirectAuthenticationFlow.Status? = nil,
                      factor: DirectAuthenticationFlow.PrimaryFactor) throws -> StepHandler
     {
-        let clientId = flow.client.configuration.clientId
-        let scope = flow.client.configuration.scopes
-
         switch self {
-        case .otp(code: _): fallthrough
-        case .password(_):
+        case .otp: fallthrough
+        case .password:
             let request = TokenRequest(openIdConfiguration: openIdConfiguration,
-                                       clientId: clientId,
-                                       scope: scope,
+                                       clientConfiguration: flow.client.configuration,
                                        loginHint: loginHint,
                                        factor: factor,
                                        grantTypesSupported: flow.supportedGrantTypes)
@@ -66,7 +62,7 @@ extension DirectAuthenticationFlow.PrimaryFactor: AuthenticationFactor {
                 "grant_type": grantType.rawValue,
                 "password": password
             ]
-        case .oob(channel: _):
+        case .oob:
             return nil
         }
 
@@ -74,11 +70,11 @@ extension DirectAuthenticationFlow.PrimaryFactor: AuthenticationFactor {
 
     var grantType: GrantType {
         switch self {
-        case .otp(code: _):
+        case .otp:
             return .otp
-        case .password(_):
+        case .password:
             return .password
-        case .oob(channel: _):
+        case .oob:
             return .oob
         }
     }

@@ -10,8 +10,17 @@
 // See the License for the specific language governing permissions and limitations under the License.
 //
 
-@_exported import AuthFoundation
+import Foundation
+import XCTest
+import AuthFoundation
 
-// swiftlint:disable identifier_name
-public let Version = SDKVersion(sdk: "okta-directauth-swift", version: "1.4.0")
-// swiftlint:enable identifier_name
+extension XCTestCase {
+    func openIdConfiguration(named: String = "openid-configuration") throws -> (OpenIdConfiguration, Data) {
+        let data = try data(from: .module,
+                           for: named,
+                           in: "MockResponses")
+        let configuration = try OpenIdConfiguration.jsonDecoder.decode(OpenIdConfiguration.self,
+                                                                       from: data)
+        return (configuration, data)
+    }
+}
