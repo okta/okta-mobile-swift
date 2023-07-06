@@ -35,10 +35,15 @@ final class CredentialCoordinatorImpl: CredentialCoordinator {
     }
         
     private lazy var _default: Credential? = {
-        try? CredentialCoordinatorImpl.defaultCredential(
-            tokenStorage: tokenStorage,
-            credentialDataSource: credentialDataSource,
-            coordinator: self)
+        do {
+            return try CredentialCoordinatorImpl.defaultCredential(
+                tokenStorage: tokenStorage,
+                credentialDataSource: credentialDataSource,
+                coordinator: self)
+        } catch {
+            // Placeholder for when logging is added in a future release
+            return nil
+        }
     }()
     var `default`: Credential? {
         get { _default }

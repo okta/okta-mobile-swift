@@ -77,6 +77,15 @@ extension OAuth2Client {
             self.init(baseURL: url, clientId: clientId, scopes: scopes, authentication: authentication)
         }
         
+        public init(from decoder: Decoder) throws {
+            let container = try decoder.container(keyedBy: CodingKeys.self)
+            self.baseURL = try container.decode(URL.self, forKey: .baseURL)
+            self.discoveryURL = try container.decode(URL.self, forKey: .discoveryURL)
+            self.clientId = try container.decode(String.self, forKey: .clientId)
+            self.scopes = try container.decode(String.self, forKey: .scopes)
+            self.authentication = try container.decodeIfPresent(OAuth2Client.ClientAuthentication.self, forKey: .authentication) ?? .none
+        }
+        
         public static func == (lhs: OAuth2Client.Configuration, rhs: OAuth2Client.Configuration) -> Bool {
             lhs.baseURL == rhs.baseURL &&
             lhs.clientId == rhs.clientId &&
