@@ -108,7 +108,7 @@ public final class Token: Codable, Equatable, Hashable, Expires {
             switch result {
             case .success(let configuration):
                 let request = Token.RefreshRequest(openIdConfiguration: configuration,
-                                                   clientId: client.configuration.clientId,
+                                                   clientConfiguration: client.configuration,
                                                    refreshToken: refreshToken,
                                                    id: Token.RefreshRequest.placeholderId,
                                                    configuration: [
