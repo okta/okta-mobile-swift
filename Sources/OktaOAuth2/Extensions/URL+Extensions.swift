@@ -16,7 +16,7 @@ import AuthFoundation
 extension URL {
     typealias RedirectError = AuthorizationCodeFlow.RedirectError
     
-    func oauth2QueryComponents(redirectUri: URL?, state: String?) throws -> [String: String] {
+    func oauth2QueryComponents(redirectUri: URL?) throws -> [String: String] {
         guard let components = URLComponents(url: self,
                                              resolvingAgainstBaseURL: false)
         else {
@@ -34,12 +34,6 @@ extension URL {
             }
         }) else {
             throw RedirectError.missingQueryArguments
-        }
-        
-        if let state = state {
-            guard query["state"] == state else {
-                throw RedirectError.invalidState(query["state"])
-            }
         }
         
         if let description = query["error_description"]?
@@ -73,10 +67,13 @@ extension URL {
     ///   - state: State token to match against.
     /// - Returns: The authorization code for the given URI.
     public func authorizationCode(redirectUri: URL, state: String) throws -> String {
-        let query = try oauth2QueryComponents(redirectUri: redirectUri,
-                                              state: state)
+        let query = try oauth2QueryComponents(redirectUri: redirectUri)
         if let error = errorFrom(query: query) {
             throw error
+        }
+        
+        guard query["state"] == state else {
+            throw RedirectError.invalidState(query["state"])
         }
         
         guard let code = query["code"] else {
@@ -89,11 +86,9 @@ extension URL {
     /// Convenience function that extracts an OAuth2 server error from a URL
     /// - Parameters:
     ///   - redirectUri: Redirect URI to match against.
-    ///   - state: State token to match against.
     /// - Returns: Server error, if one is present.
-    public func oauth2ServerError(redirectUri: URL? = nil, state: String? = nil) throws -> OAuth2ServerError? {
-        let query = try oauth2QueryComponents(redirectUri: redirectUri,
-                                              state: state)
+    public func oauth2ServerError(redirectUri: URL? = nil) throws -> OAuth2ServerError? {
+        let query = try oauth2QueryComponents(redirectUri: redirectUri)
         return errorFrom(query: query)
     }
 }
