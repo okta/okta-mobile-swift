@@ -7,6 +7,7 @@ final class OAuth2ClientTests: XCTestCase {
     let redirectUri = URL(string: "com.example:/callback")!
     var urlSession: URLSessionMock!
     var client: OAuth2Client!
+    var openIdConfiguration: OpenIdConfiguration!
     let configuration = OAuth2Client.Configuration(baseURL: URL(string: "https://example.com")!,
                                                    clientId: "clientid",
                                                    scopes: "openid")
@@ -28,6 +29,12 @@ final class OAuth2ClientTests: XCTestCase {
                       context: Token.Context(configuration: self.configuration,
                                              clientSettings: [ "client_id": "clientid", "refresh_token": "refresh" ]))
         
+        openIdConfiguration = try OpenIdConfiguration.jsonDecoder.decode(
+            OpenIdConfiguration.self,
+            from: try data(from: .module,
+                           for: "openid-configuration",
+                           in: "MockResponses"))
+
         urlSession.requestDelay = 0.1
     }
     
@@ -199,16 +206,29 @@ final class OAuth2ClientTests: XCTestCase {
     }
 
     func testIntrospectTokenRequest() throws {
-        let openIdConfiguration = try OpenIdConfiguration.jsonDecoder.decode(
-            OpenIdConfiguration.self,
-            from: try data(from: .module,
-                           for: "openid-configuration",
-                           in: "MockResponses"))
         let request = try Token.IntrospectRequest(openIdConfiguration: openIdConfiguration,
+                                                  clientConfiguration: client.configuration,
                                                   token: token,
                                                   type: .accessToken)
         XCTAssertNil(request.authorization)
         XCTAssertEqual((request.bodyParameters?["client_id"] as? String), "clientid")
+        XCTAssertEqual(request.bodyParameters?["token"] as? String, "abcd123")
+        XCTAssertEqual(request.bodyParameters?["token_type_hint"] as? String, "access_token")
+        XCTAssertNil(request.bodyParameters?["client_secret"])
+    }
+    
+    func testIntrospectTokenRequestClientAuthentication() throws {
+        let clientConfiguration = OAuth2Client.Configuration(baseURL: client.configuration.baseURL,
+                                                             clientId: client.configuration.clientId,
+                                                             scopes: client.configuration.scopes,
+                                                             authentication: .clientSecret("supersecret"))
+        let request = try Token.IntrospectRequest(openIdConfiguration: openIdConfiguration,
+                                                  clientConfiguration: clientConfiguration,
+                                                  token: token,
+                                                  type: .accessToken)
+        XCTAssertNil(request.authorization)
+        XCTAssertEqual((request.bodyParameters?["client_id"] as? String), "clientid")
+        XCTAssertEqual((request.bodyParameters?["client_secret"] as? String), "supersecret")
         XCTAssertEqual(request.bodyParameters?["token"] as? String, "abcd123")
         XCTAssertEqual(request.bodyParameters?["token_type_hint"] as? String, "access_token")
     }
@@ -453,6 +473,18 @@ final class OAuth2ClientTests: XCTestCase {
             XCTAssertNil(error)
         }
     }
+    
+    func testRevokeRequestClientAuthentication() throws {
+        let request = Token.RevokeRequest(openIdConfiguration: openIdConfiguration,
+                                          clientAuthentication: .clientSecret("supersecret"),
+                                          token: "the-token",
+                                          hint: .deviceSecret,
+                                          configuration: [:])
+        let parameters = try XCTUnwrap(request.bodyParameters as? [String: String])
+        XCTAssertEqual(parameters["token"], "the-token")
+        XCTAssertEqual(parameters["token_type_hint"], "device_secret")
+        XCTAssertEqual(parameters["client_secret"], "supersecret")
+    }
 
     func testRefresh() throws {
         urlSession.expect("https://example.com/.well-known/openid-configuration",
@@ -481,6 +513,22 @@ final class OAuth2ClientTests: XCTestCase {
         }
         
         XCTAssertEqual(newTokens.count, 4)
+    }
+
+    func testRefreshRequestClientAuthentication() throws {
+        let clientConfiguration = OAuth2Client.Configuration(baseURL: client.configuration.baseURL,
+                                                             clientId: client.configuration.clientId,
+                                                             scopes: client.configuration.scopes,
+                                                             authentication: .clientSecret("supersecret"))
+        let request = Token.RefreshRequest(openIdConfiguration: openIdConfiguration,
+                                           clientConfiguration: clientConfiguration,
+                                           refreshToken: "the-token",
+                                           id: "token-id",
+                                           configuration: [:])
+        let parameters = try XCTUnwrap(request.bodyParameters as? [String: String])
+        XCTAssertEqual(parameters["refresh_token"], "the-token")
+        XCTAssertEqual(parameters["grant_type"], "refresh_token")
+        XCTAssertEqual(parameters["client_secret"], "supersecret")
     }
 
     #if swift(>=5.5.1)

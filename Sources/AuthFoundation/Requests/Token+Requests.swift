@@ -14,6 +14,7 @@ import Foundation
 extension Token {
     struct RevokeRequest {
         let openIdConfiguration: OpenIdConfiguration
+        let clientAuthentication: OAuth2Client.ClientAuthentication
         let token: String
         let hint: Token.Kind?
         let configuration: [String: String]
@@ -21,7 +22,7 @@ extension Token {
 
     struct RefreshRequest {
         let openIdConfiguration: OpenIdConfiguration
-        let clientId: String
+        let clientConfiguration: OAuth2Client.Configuration
         let refreshToken: String
         let id: String
         let configuration: [String: String]
@@ -31,15 +32,18 @@ extension Token {
     
     struct IntrospectRequest {
         let openIdConfiguration: OpenIdConfiguration
+        let clientConfiguration: OAuth2Client.Configuration
         let token: Token
         let type: Token.Kind
         let url: URL
         
         init(openIdConfiguration: OpenIdConfiguration,
+             clientConfiguration: OAuth2Client.Configuration,
              token: Token,
              type: Token.Kind) throws
         {
             self.openIdConfiguration = openIdConfiguration
+            self.clientConfiguration = clientConfiguration
             self.token = token
             self.type = type
             
@@ -76,6 +80,10 @@ extension Token.RevokeRequest: OAuth2APIRequest, APIRequestBody {
             result["token_type_hint"] = hint.rawValue
         }
         
+        if let parameters = clientAuthentication.additionalParameters {
+            result.merge(parameters, uniquingKeysWith: { $1 })
+        }
+
         return result
     }
 }
@@ -88,11 +96,17 @@ extension Token.IntrospectRequest: OAuth2APIRequest, APIRequestBody {
     var acceptsType: APIContentType? { .json }
     var authorization: APIAuthorization? { nil }
     var bodyParameters: [String: Any]? {
-        [
+        var result = [
             "token": (token.token(of: type) ?? "") as String,
             "client_id": token.context.configuration.clientId,
             "token_type_hint": type.rawValue
         ]
+        
+        if let parameters = clientConfiguration.authentication.additionalParameters {
+            result.merge(parameters, uniquingKeysWith: { $1 })
+        }
+
+        return result
     }
 }
 
@@ -103,11 +117,16 @@ extension Token.RefreshRequest: OAuth2APIRequest, APIRequestBody, APIParsingCont
     var url: URL { openIdConfiguration.tokenEndpoint }
     var contentType: APIContentType? { .formEncoded }
     var acceptsType: APIContentType? { .json }
+    var clientId: String { clientConfiguration.clientId }
     var bodyParameters: [String: Any]? {
         var result = configuration
         result["grant_type"] = "refresh_token"
         result["refresh_token"] = refreshToken
-        
+
+        if let parameters = clientConfiguration.authentication.additionalParameters {
+            result.merge(parameters, uniquingKeysWith: { $1 })
+        }
+
         return result
     }
     

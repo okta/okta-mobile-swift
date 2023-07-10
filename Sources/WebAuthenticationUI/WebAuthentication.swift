@@ -31,6 +31,7 @@ public enum WebAuthenticationError: Error {
     case noCompatibleAuthenticationProviders
     case cannotComposeAuthenticationURL
     case authenticationProviderError(_ error: Error)
+    case serverError(_ error: OAuth2ServerError)
     case invalidRedirectScheme(_ scheme: String?)
     case userCancelledLogin
     case missingIdToken

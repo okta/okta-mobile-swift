@@ -87,6 +87,10 @@ final class SafariServicesProvider: NSObject, WebAuthenticationProvider {
                nsError.code == SFAuthenticationError.canceledLogin.rawValue
             {
                 received(error: .userCancelledLogin)
+            } else if let url = url,
+                      let serverError = try? url.oauth2ServerError(redirectUri: loginFlow.redirectUri)
+            {
+                received(error: .serverError(serverError))
             } else {
                 received(error: .authenticationProviderError(error))
             }
@@ -115,6 +119,10 @@ final class SafariServicesProvider: NSObject, WebAuthenticationProvider {
                nsError.code == SFAuthenticationError.canceledLogin.rawValue
             {
                 received(logoutError: .userCancelledLogin)
+            } else if let url = url,
+                      let serverError = try? url.oauth2ServerError(redirectUri: logoutFlow?.logoutRedirectUri)
+            {
+                received(logoutError: .serverError(serverError))
             } else {
                 received(logoutError: .authenticationProviderError(error))
             }
