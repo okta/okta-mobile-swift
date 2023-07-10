@@ -199,7 +199,7 @@ public final class OAuth2Client {
             switch result {
             case .success(let configuration):
                 let request = Token.RefreshRequest(openIdConfiguration: configuration,
-                                                   clientId: self.configuration.clientId,
+                                                   clientConfiguration: self.configuration,
                                                    refreshToken: refreshToken,
                                                    id: token.id,
                                                    configuration: clientSettings)
@@ -267,6 +267,7 @@ public final class OAuth2Client {
             switch result {
             case .success(let configuration):
                 let request = Token.RevokeRequest(openIdConfiguration: configuration,
+                                                  clientAuthentication: self.configuration.authentication,
                                                   token: tokenString,
                                                   hint: tokenType,
                                                   configuration: clientSettings)
@@ -296,6 +297,7 @@ public final class OAuth2Client {
                 let request: Token.IntrospectRequest
                 do {
                     request = try Token.IntrospectRequest(openIdConfiguration: configuration,
+                                                          clientConfiguration: self.configuration,
                                                           token: token,
                                                           type: type)
                 } catch let error as OAuth2Error {
