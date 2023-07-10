@@ -34,6 +34,12 @@ public struct OAuth2ServerError: Decodable, Error, LocalizedError, Equatable {
         self.additionalValues = additionalContainer.decodeUnkeyedContainer(exclude: CodingKeys.self)
     }
 
+    public init(code: String, description: String?, additionalValues: [String: Any]) {
+        self.code = .init(rawValue: code) ?? .other(code: code)
+        self.description = description
+        self.additionalValues = additionalValues
+    }
+    
     public static func == (lhs: OAuth2ServerError, rhs: OAuth2ServerError) -> Bool {
         lhs.code == rhs.code &&
         lhs.description == rhs.description

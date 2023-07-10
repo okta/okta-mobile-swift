@@ -107,10 +107,19 @@ class AuthenticationServicesProviderTests: ProviderTestBase {
         XCTAssertTrue(session.startCalled)
 
         let redirectUrl = URL(string: "com.example:/callback?state=state&error=errorname&error_description=This+Thing+Failed")
-        provider.process(url: redirectUrl, error: nil)
+        let error = NSError(domain: "SomeDomain", code: 1, userInfo: nil)
+        provider.process(url: redirectUrl, error: error)
         XCTAssertNil(delegate.token)
         XCTAssertNotNil(delegate.error)
         XCTAssertNil(provider.authenticationSession)
+        
+        let webAuthError = try XCTUnwrap(delegate.error as? WebAuthenticationError)
+        if case let .serverError(serverError) = webAuthError {
+            XCTAssertEqual(serverError.code, .other(code: "errorname"))
+            XCTAssertEqual(serverError.description, "This Thing Failed")
+        } else {
+            XCTFail("Did not get the appropriate error response type")
+        }
     }
 
     func testUserCancelled() throws {

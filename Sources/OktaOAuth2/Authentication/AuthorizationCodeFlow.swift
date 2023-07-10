@@ -356,44 +356,7 @@ extension AuthorizationCodeFlow {
             throw AuthenticationError.flowNotReady
         }
         
-        guard let components = URLComponents(url: url, resolvingAgainstBaseURL: false) else {
-            throw RedirectError.invalidRedirectUrl
-        }
-        
-        guard components.scheme?.lowercased() == redirectUri.scheme?.lowercased() else {
-            throw RedirectError.unexpectedScheme(components.scheme)
-        }
-        
-        guard let query = components.queryItems?.reduce(into: [String: String](), { partialResult, queryItem in
-            if let value = queryItem.value {
-                partialResult[queryItem.name] = value
-            }
-        }) else {
-            throw RedirectError.missingQueryArguments
-        }
-        
-        guard query["state"] == context.state else {
-            throw RedirectError.invalidState(query["state"])
-        }
-        
-        if let errorCode = query["error"] {
-            let description = query["error_description"]?
-                .removingPercentEncoding?
-                .replacingOccurrences(of: "+", with: " ")
-            let additionalKeys = query.filter { element in
-                element.key != "error" && element.key != "error_description"
-            }
-            
-            throw OAuth2Error.oauth2Error(code: errorCode,
-                                          description: description,
-                                          additionalKeys: additionalKeys)
-        }
-        
-        guard let code = query["code"] else {
-            throw RedirectError.missingAuthorizationCode
-        }
-        
-        return code
+        return try url.authorizationCode(redirectUri: redirectUri, state: context.state)
     }
 }
 

@@ -65,6 +65,9 @@ extension WebAuthenticationError: LocalizedError {
         case .oauth2(error: let error):
             return error.localizedDescription
             
+        case .serverError(let error):
+            return error.errorDescription
+            
         case .generic(error: let error):
             if let error = error as? LocalizedError {
                 return error.localizedDescription

@@ -214,30 +214,6 @@ final class AuthorizationCodeFlowSuccessTests: XCTestCase {
         }
         waitForExpectations(timeout: 1)
         
-        XCTAssertThrowsError(try flow.authorizationCode(from: URL(string: "urn:foo:bar")!)) { error in
-            XCTAssertEqual(error as? RedirectError, .unexpectedScheme("urn"))
-        }
-        
-        XCTAssertThrowsError(try flow.authorizationCode(from: URL(string: "com.example:/")!)) { error in
-            XCTAssertEqual(error as? RedirectError, .missingQueryArguments)
-        }
-        
-        XCTAssertThrowsError(try flow.authorizationCode(from: URL(string: "com.example:/?foo=bar")!)) { error in
-            XCTAssertEqual(error as? RedirectError, .invalidState(nil))
-        }
-        
-        XCTAssertThrowsError(try flow.authorizationCode(from: URL(string: "com.example:/?foo=bar&state=abcd")!)) { error in
-            XCTAssertEqual(error as? RedirectError, .invalidState("abcd"))
-        }
-        
-        XCTAssertThrowsError(try flow.authorizationCode(from: URL(string: "com.example:/?state=ABC123&error=some_error&error_description=some+error+message")!)) { error in
-            XCTAssertEqual(error as? OAuth2Error, .oauth2Error(code: "some_error", description: "some error message"))
-        }
-        
-        XCTAssertThrowsError(try flow.authorizationCode(from: URL(string: "com.example:/?state=ABC123")!)) { error in
-            XCTAssertEqual(error as? RedirectError, .missingAuthorizationCode)
-        }
-
         XCTAssertEqual(try flow.authorizationCode(from: URL(string: "com.example:/?state=ABC123&code=foo")!), "foo")
     }
     
