@@ -125,6 +125,7 @@
     },
     {
       "identifiers" : [
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/OAuth2ServerError\/init(code:description:additionalValues:)",
         "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/OAuth2ServerError\/init(from:)"
       ],
       "title" : "Initializers"
@@ -739,6 +740,86 @@
   "title" : "errorDescription",
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/oauth2servererror\/errordescription-2n95u"
+},
+"doc://AuthFoundation/documentation/AuthFoundation/OAuth2ServerError/init(code:description:additionalValues:)": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "identifier",
+      "text" : "init"
+    },
+    {
+      "kind" : "text",
+      "text" : "("
+    },
+    {
+      "kind" : "externalParam",
+      "text" : "code"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:SS",
+      "text" : "String"
+    },
+    {
+      "kind" : "text",
+      "text" : ", "
+    },
+    {
+      "kind" : "externalParam",
+      "text" : "description"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:SS",
+      "text" : "String"
+    },
+    {
+      "kind" : "text",
+      "text" : "?, "
+    },
+    {
+      "kind" : "externalParam",
+      "text" : "additionalValues"
+    },
+    {
+      "kind" : "text",
+      "text" : ": ["
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:SS",
+      "text" : "String"
+    },
+    {
+      "kind" : "text",
+      "text" : " : "
+    },
+    {
+      "kind" : "keyword",
+      "text" : "Any"
+    },
+    {
+      "kind" : "text",
+      "text" : "])"
+    }
+  ],
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/OAuth2ServerError\/init(code:description:additionalValues:)",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "init(code:description:additionalValues:)",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/oauth2servererror\/init(code:description:additionalvalues:)"
 },
 "doc://AuthFoundation/documentation/AuthFoundation/OAuth2ServerError/init(from:)": {
   "abstract" : [

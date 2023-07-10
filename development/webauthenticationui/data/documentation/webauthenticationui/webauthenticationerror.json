@@ -103,6 +103,7 @@
         "doc:\/\/WebAuthenticationUI\/documentation\/WebAuthenticationUI\/WebAuthenticationError\/missingIdToken",
         "doc:\/\/WebAuthenticationUI\/documentation\/WebAuthenticationUI\/WebAuthenticationError\/noCompatibleAuthenticationProviders",
         "doc:\/\/WebAuthenticationUI\/documentation\/WebAuthenticationUI\/WebAuthenticationError\/oauth2(error:)",
+        "doc:\/\/WebAuthenticationUI\/documentation\/WebAuthenticationUI\/WebAuthenticationError\/serverError(_:)",
         "doc:\/\/WebAuthenticationUI\/documentation\/WebAuthenticationUI\/WebAuthenticationError\/userCancelledLogin"
       ],
       "title" : "Enumeration Cases"
@@ -490,6 +491,44 @@
   "title" : "WebAuthenticationError.oauth2(error:)",
   "type" : "topic",
   "url" : "\/documentation\/webauthenticationui\/webauthenticationerror\/oauth2(error:)"
+},
+"doc://WebAuthenticationUI/documentation/WebAuthenticationUI/WebAuthenticationError/serverError(_:)": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "case"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "serverError"
+    },
+    {
+      "kind" : "text",
+      "text" : "("
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:14AuthFoundation17OAuth2ServerErrorV",
+      "text" : "OAuth2ServerError"
+    },
+    {
+      "kind" : "text",
+      "text" : ")"
+    }
+  ],
+  "identifier" : "doc:\/\/WebAuthenticationUI\/documentation\/WebAuthenticationUI\/WebAuthenticationError\/serverError(_:)",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "WebAuthenticationError.serverError(_:)",
+  "type" : "topic",
+  "url" : "\/documentation\/webauthenticationui\/webauthenticationerror\/servererror(_:)"
 },
 "doc://WebAuthenticationUI/documentation/WebAuthenticationUI/WebAuthenticationError/userCancelledLogin": {
   "abstract" : [
