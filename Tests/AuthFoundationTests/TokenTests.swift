@@ -134,7 +134,7 @@ final class TokenTests: XCTestCase {
     }
     
     #if swift(>=5.5.1)
-    @available(iOS 15.0, tvOS 15.0, macOS 12.0, watchOS 8, *)
+    @available(iOS 13.0, tvOS 15.0, macOS 12.0, watchOS 8, *)
     func testTokenFromRefreshTokenAsync() async throws {
         let client = try mockClient()
         let token = try await Token.from(refreshToken: "the_refresh_token", using: client)

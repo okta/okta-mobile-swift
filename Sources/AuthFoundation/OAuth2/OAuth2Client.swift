@@ -541,7 +541,7 @@ public final class OAuth2Client {
 // swiftlint:enable type_body_length
 
 #if swift(>=5.5.1)
-@available(iOS 15.0, tvOS 15.0, macOS 12.0, watchOS 8, *)
+@available(iOS 13.0, tvOS 15.0, macOS 12.0, watchOS 8, *)
 extension OAuth2Client {
     /// Asynchronously retrieves the org's OpenID configuration.
     ///

@@ -69,7 +69,7 @@ public protocol APIRequest {
     ///   - client: ``APIClient`` the request is being sent to.
     ///   - context: Optional context to use when parsing the response.
     /// - Returns: ``APIResponse`` result of the request.
-    @available(iOS 15.0, tvOS 15.0, macOS 12.0, watchOS 8, *)
+    @available(iOS 13.0, tvOS 15.0, macOS 12.0, watchOS 8, *)
     func send(to client: APIClient, parsing context: APIParsingContext?) async throws -> APIResponse<ResponseType>
     #endif
 }
@@ -243,7 +243,7 @@ extension APIRequest {
     }
     
     #if swift(>=5.5.1)
-    @available(iOS 15.0, tvOS 15.0, macOS 12.0, watchOS 8, *)
+    @available(iOS 13.0, tvOS 15.0, macOS 12.0, watchOS 8, *)
     public func send(to client: APIClient, parsing context: APIParsingContext? = nil) async throws -> APIResponse<ResponseType> {
         try await withCheckedThrowingContinuation { continuation in
             send(to: client, parsing: context) { result in
