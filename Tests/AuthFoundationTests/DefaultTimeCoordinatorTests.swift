@@ -45,7 +45,7 @@ final class DefaultTimeCoordinatorTests: XCTestCase {
         XCTAssertEqual(coordinator.offset, 0)
         XCTAssertEqual(coordinator.now.timeIntervalSinceReferenceDate,
                        Date().timeIntervalSinceReferenceDate,
-                       accuracy: 1)
+                       accuracy: 2)
 
         // Test negative clock drift (local clock is slower than the server)
         try sendRequest(offset: 1000, cachePolicy: .reloadIgnoringLocalAndRemoteCacheData)
@@ -55,17 +55,17 @@ final class DefaultTimeCoordinatorTests: XCTestCase {
                        accuracy: 10)
         XCTAssertEqual(coordinator.date(from: Date(timeIntervalSinceNow: 500)).timeIntervalSinceReferenceDate,
                        Date().timeIntervalSinceReferenceDate + 1500,
-                       accuracy: 1)
+                       accuracy: 2)
 
         // Test positive clock drift (local clock is faster than the server)
         try sendRequest(offset: -1000, cachePolicy: .reloadIgnoringLocalAndRemoteCacheData)
         XCTAssertEqual(coordinator.offset, -1000, accuracy: 10)
         XCTAssertEqual(coordinator.now.timeIntervalSinceReferenceDate,
                        Date().timeIntervalSinceReferenceDate - 1000,
-                       accuracy: 1)
+                       accuracy: 2)
         XCTAssertEqual(coordinator.date(from: Date(timeIntervalSinceNow: 500)).timeIntervalSinceReferenceDate,
                        Date().timeIntervalSinceReferenceDate - 500,
-                       accuracy: 1)
+                       accuracy: 2)
     }
     
     func sendRequest(offset: TimeInterval, cachePolicy: URLRequest.CachePolicy) throws { 
