@@ -131,7 +131,7 @@ public final class OAuth2Client {
                 
                 openIdConfigurationAction = action
                 
-                let request = OpenIdConfigurationRequest(baseURL: baseURL)
+                let request = OpenIdConfigurationRequest(url: configuration.discoveryURL)
                 request.send(to: self) { result in
                     self.configurationQueue.sync(flags: .barrier) {
                         self.openIdConfigurationAction = nil
