@@ -532,7 +532,7 @@ final class OAuth2ClientTests: XCTestCase {
     }
 
     #if swift(>=5.5.1)
-    @available(iOS 13.0, tvOS 15.0, macOS 12.0, watchOS 8, *)
+    @available(iOS 13.0, tvOS 13.0, macOS 10.15, watchOS 6, *)
     func testRefreshAsync() async throws {
         urlSession.expect("https://example.com/.well-known/openid-configuration",
                           data: try data(from: .module, for: "openid-configuration", in: "MockResponses"),
@@ -544,7 +544,7 @@ final class OAuth2ClientTests: XCTestCase {
         XCTAssertNotNil(token)
     }
 
-    @available(iOS 13.0, tvOS 15.0, macOS 12.0, watchOS 8, *)
+    @available(iOS 13.0, tvOS 13.0, macOS 10.15, watchOS 6, *)
     func testRevokeAsync() async throws {
         urlSession.expect("https://example.com/.well-known/openid-configuration",
                           data: try data(from: .module, for: "openid-configuration", in: "MockResponses"),

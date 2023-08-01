@@ -219,7 +219,7 @@ public class SessionLogoutFlow: LogoutFlow {
 }
 
 #if swift(>=5.5.1)
-@available(iOS 13.0, tvOS 15.0, macOS 12.0, watchOS 8, *)
+@available(iOS 13.0, tvOS 13.0, macOS 10.15, watchOS 6, *)
 extension SessionLogoutFlow {
     /// Asynchronously initiates a logout flow, with a required ID Token.
     ///

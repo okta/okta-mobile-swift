@@ -175,7 +175,7 @@ public class SessionTokenFlow: AuthenticationFlow {
 }
 
 #if swift(>=5.5.1)
-@available(iOS 13.0, tvOS 15.0, macOS 12.0, watchOS 8, *)
+@available(iOS 13.0, tvOS 13.0, macOS 10.15, watchOS 6, *)
 extension SessionTokenFlow {
     /// Asynchronously authenticates with the given session token.
     public func start(with sessionToken: String,

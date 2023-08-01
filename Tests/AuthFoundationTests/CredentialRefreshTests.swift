@@ -312,26 +312,26 @@ final class CredentialRefreshTests: XCTestCase, OAuth2ClientDelegate {
     }
 
     #if swift(>=5.5.1)
-    @available(iOS 13.0, tvOS 15.0, macOS 12.0, watchOS 8, *)
+    @available(iOS 13.0, tvOS 13.0, macOS 10.15, watchOS 6, *)
     func testRefreshAsync() async throws {
         let credential = try credential(for: Token.simpleMockToken)
         try await credential.refresh()
     }
 
-    @available(iOS 13.0, tvOS 15.0, macOS 12.0, watchOS 8, *)
+    @available(iOS 13.0, tvOS 13.0, macOS 10.15, watchOS 6, *)
     func testRefreshIfNeededExpiredAsync() async throws {
         let credential = try credential(for: Token.mockToken(issuedOffset: 6000))
         try await credential.refreshIfNeeded(graceInterval: 300)
     }
 
-    @available(iOS 13.0, tvOS 15.0, macOS 12.0, watchOS 8, *)
+    @available(iOS 13.0, tvOS 13.0, macOS 10.15, watchOS 6, *)
     func testRefreshIfNeededWithinGraceIntervalAsync() async throws {
         let credential = try credential(for: Token.mockToken(issuedOffset: 0),
                                            expectAPICalls: .none)
         try await credential.refreshIfNeeded(graceInterval: 300)
     }
 
-    @available(iOS 13.0, tvOS 15.0, macOS 12.0, watchOS 8, *)
+    @available(iOS 13.0, tvOS 13.0, macOS 10.15, watchOS 6, *)
     func testRefreshIfNeededOutsideGraceIntervalAsync() async throws {
             let credential = try credential(for: Token.mockToken(issuedOffset: 3500))
         try await credential.refreshIfNeeded(graceInterval: 300)

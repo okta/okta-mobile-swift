@@ -95,7 +95,7 @@ extension WebAuthentication {
 }
 
 #if swift(>=5.5.1)
-@available(iOS 13.0, tvOS 15.0, macOS 12.0, watchOS 8, *)
+@available(iOS 13.0, tvOS 13.0, macOS 10.15, watchOS 6, *)
 extension WebAuthentication {
     @available(*, deprecated, renamed: "signIn(from:options:)")
     public final func signIn(from window: WindowAnchor?,
