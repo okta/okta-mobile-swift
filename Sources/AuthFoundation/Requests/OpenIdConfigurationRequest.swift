@@ -18,10 +18,6 @@ import FoundationNetworking
 
 struct OpenIdConfigurationRequest {
     let url: URL
-    
-    init(baseURL: URL) {
-        url = baseURL.appendingPathComponent(".well-known/openid-configuration")
-    }
 }
 
 extension OpenIdConfigurationRequest: APIRequest {
