@@ -1,4 +1,4 @@
-whitelist_rules:
+only_rules:
   # Spacing
   - closing_brace
   - closure_spacing
@@ -55,8 +55,6 @@ colon:
   severity: error
 
 leading_whitespace:
-  severity: error
-let_var_whitespace:
   severity: error
 operator_whitespace:
   severity: error
