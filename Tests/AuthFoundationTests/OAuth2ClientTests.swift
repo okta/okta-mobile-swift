@@ -53,6 +53,10 @@ final class OAuth2ClientTests: XCTestCase {
                                                    clientId: "abc123",
                                                    scopes: "openid profile",
                                                    authentication: .none))
+        
+        // Ensure the default session is ephemeral
+        let urlSession = try XCTUnwrap(client.session as? URLSession)
+        XCTAssertEqual(urlSession.configuration.urlCache?.diskCapacity, 0)
 
         client = OAuth2Client(baseURL: URL(string: "https://example.com")!,
                                   clientId: "abc123",

@@ -104,7 +104,7 @@ public final class OAuth2Client {
         _ = Date.coordinator
         
         self.configuration = configuration
-        self.session = session ?? URLSession.shared
+        self.session = session ?? URLSession(configuration: .ephemeral)
         
         NotificationCenter.default.post(name: .oauth2ClientCreated, object: self)
 
