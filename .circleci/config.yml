@@ -5,8 +5,8 @@ orbs:
 
 jobs:
   build:
-    docker:
-      - image: cimg/openjdk:13.0 # Use an appropriate image that contains your build-tools
+    macos:
+      xcode: 14.2.0
     steps:
       - checkout
       - run: |
@@ -17,8 +17,8 @@ jobs:
             - .
 
   snyk-scan:
-    docker:
-      - image: cimg/openjdk:13.0
+    macos:
+      xcode: 14.2.0
     steps:
       - attach_workspace: # Allows for sharing of build-workspace (containing downloaded dependencies) (optional)
           at: ~/project
