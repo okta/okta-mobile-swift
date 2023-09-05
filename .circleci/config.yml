@@ -4,6 +4,18 @@ orbs:
   platform-helpers-general: okta/general-platform-helpers@1.8.13
 
 jobs:
+  build:
+    docker:
+      - image: cimg/openjdk:13.0 # Use an appropriate image that contains your build-tools
+    steps:
+      - checkout
+      - run: |
+          swift build
+      - persist_to_workspace: # Allows for sharing of build-workspace (containing downloaded dependencies) (optional)
+          root: ~/project
+          paths:
+            - .
+
   snyk-scan:
     docker:
       - image: cimg/openjdk:13.0
@@ -11,8 +23,6 @@ jobs:
       - attach_workspace: # Allows for sharing of build-workspace (containing downloaded dependencies) (optional)
           at: ~/project
       - platform-helpers-general/step-load-dependencies
-      - run: |
-          swift build
       - platform-helpers-general/step-run-snyk-monitor:
           scan-all-projects: true
           skip-unresolved: false
