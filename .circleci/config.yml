@@ -28,8 +28,9 @@ jobs:
           skip-unresolved: false
 
 workflows:
-  build-and-test:
+  security-scan:
     jobs:
+      - build
       - platform-helpers-general/job-snyk-prepare:
           name: prepare-snyk
           requires:
