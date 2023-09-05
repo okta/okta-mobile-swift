@@ -30,7 +30,7 @@ jobs:
 workflows:
   security-scan:
     jobs:
-      - build
+      - build:
           filters:
             branches:
               only:
