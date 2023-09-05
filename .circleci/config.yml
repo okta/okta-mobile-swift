@@ -11,7 +11,7 @@ jobs:
       - checkout
       - run: |
           swift build
-      - persist_to_workspace: # Allows for sharing of build-workspace (containing downloaded dependencies) (optional)
+      - persist_to_workspace:
           root: ~/project
           paths:
             - .
@@ -20,7 +20,7 @@ jobs:
     macos:
       xcode: 14.2.0
     steps:
-      - attach_workspace: # Allows for sharing of build-workspace (containing downloaded dependencies) (optional)
+      - attach_workspace:
           at: ~/project
       - platform-helpers-general/step-load-dependencies
       - platform-helpers-general/step-run-snyk-monitor:
@@ -30,6 +30,11 @@ jobs:
 workflows:
   security-scan:
     jobs:
+      - test:
+          filters:
+            branches:
+              only:
+                - master
       - build
       - platform-helpers-general/job-snyk-prepare:
           name: prepare-snyk
