@@ -1,0 +1,45 @@
+version: 2.1
+
+orbs:
+  platform-helpers-general: okta/general-platform-helpers@1.8.13
+
+jobs:
+  build:
+    macos:
+      xcode: 14.2.0
+    steps:
+      - checkout
+      - run: |
+          swift build
+      - persist_to_workspace:
+          root: ~/project
+          paths:
+            - .
+
+  snyk-scan:
+    macos:
+      xcode: 14.2.0
+    steps:
+      - attach_workspace:
+          at: ~/project
+      - platform-helpers-general/step-load-dependencies
+      - platform-helpers-general/step-run-snyk-monitor:
+          scan-all-projects: true
+          skip-unresolved: false
+
+workflows:
+  security-scan:
+    jobs:
+      - build:
+          filters:
+            branches:
+              only:
+                - master
+      - platform-helpers-general/job-snyk-prepare:
+          name: prepare-snyk
+          requires:
+            - build
+      - snyk-scan:
+          name: execute-snyk
+          requires:
+            - prepare-snyk
