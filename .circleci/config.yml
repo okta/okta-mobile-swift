@@ -30,12 +30,11 @@ jobs:
 workflows:
   security-scan:
     jobs:
-      - test:
+      - build
           filters:
             branches:
               only:
                 - master
-      - build
       - platform-helpers-general/job-snyk-prepare:
           name: prepare-snyk
           requires:
