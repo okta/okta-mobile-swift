@@ -30,8 +30,10 @@ jobs:
       - run:
           name: run swift package show dependencies
           command: swift package show-dependencies
-      - general-platform-helpers/step-load-dependencies
+      - general-platform-helpers/step-load-dependencies:
+          run-on-non-main: true
       - general-platform-helpers/step-run-snyk-monitor:
+          run-on-non-main: true
           scan-all-projects: true
           skip-unresolved: false
           os: macos
