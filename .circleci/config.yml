@@ -55,7 +55,11 @@ workflows:
             - semgrep-prepare
   security-scan:
     jobs:
-      - setup
+      - setup:
+          filters:
+            branches:
+              only:
+                - master
       - general-platform-helpers/job-snyk-prepare:
           name: prepare-snyk
           filters:
