@@ -1,45 +1,78 @@
 version: 2.1
 
 orbs:
-  platform-helpers-general: okta/general-platform-helpers@1.8.13
+  general-platform-helpers: okta/general-platform-helpers@1.8
+
+executors:
+  apple-ci-arm-medium:
+    macos:
+      xcode: 14.3.1
+    resource_class: macos.m1.medium.gen1
 
 jobs:
-  build:
-    macos:
-      xcode: 14.2.0
+  setup:
+    executor: apple-ci-arm-medium
     steps:
       - checkout
-      - run: |
-          swift build
       - persist_to_workspace:
           root: ~/project
           paths:
             - .
 
   snyk-scan:
-    macos:
-      xcode: 14.2.0
+    executor: apple-ci-arm-medium
     steps:
       - attach_workspace:
           at: ~/project
-      - platform-helpers-general/step-load-dependencies
-      - platform-helpers-general/step-run-snyk-monitor:
+      - run:
+          name: Install rosetta # Needed for snyk to work on M1 machines.
+          command: softwareupdate --install-rosetta --agree-to-license
+      - run:
+          name: run swift package show dependencies
+          command: swift package show-dependencies
+      - general-platform-helpers/step-load-dependencies
+      - general-platform-helpers/step-run-snyk-monitor:
           scan-all-projects: true
           skip-unresolved: false
+          os: macos
 
 workflows:
-  security-scan:
+  semgrep:
     jobs:
-      - build:
+      - general-platform-helpers/job-semgrep-prepare:
+          name: semgrep-prepare
           filters:
             branches:
               only:
                 - master
-      - platform-helpers-general/job-snyk-prepare:
-          name: prepare-snyk
+      - general-platform-helpers/job-semgrep-scan:
+          name: semgrep-scan
+          filters:
+            branches:
+              only:
+                - master
           requires:
-            - build
+            - semgrep-prepare
+  security-scan:
+    jobs:
+      - setup:
+          filters:
+            branches:
+              only:
+                - master
+      - general-platform-helpers/job-snyk-prepare:
+          name: prepare-snyk
+          filters:
+            branches:
+              only:
+                - master
+          requires:
+            - setup
       - snyk-scan:
           name: execute-snyk
+          filters:
+            branches:
+              only:
+                - master
           requires:
             - prepare-snyk
