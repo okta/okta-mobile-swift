@@ -32,7 +32,6 @@ jobs:
           command: swift package show-dependencies
       - general-platform-helpers/step-load-dependencies
       - general-platform-helpers/step-run-snyk-monitor:
-          run-on-non-main: true
           scan-all-projects: true
           skip-unresolved: false
           os: macos
@@ -42,8 +41,16 @@ workflows:
     jobs:
       - general-platform-helpers/job-semgrep-prepare:
           name: semgrep-prepare
+          filters:
+            branches:
+              only:
+                - master
       - general-platform-helpers/job-semgrep-scan:
           name: semgrep-scan
+          filters:
+            branches:
+              only:
+                - master
           requires:
             - semgrep-prepare
   security-scan:
@@ -51,17 +58,17 @@ workflows:
       - setup
       - general-platform-helpers/job-snyk-prepare:
           name: prepare-snyk
-          #filters:
-          #  branches:
-          #    only:
-          #      - master
+          filters:
+            branches:
+              only:
+                - master
           requires:
             - setup
       - snyk-scan:
           name: execute-snyk
-          #filters:
-          #  branches:
-          #    only:
-          #      - master
+          filters:
+            branches:
+              only:
+                - master
           requires:
             - prepare-snyk
