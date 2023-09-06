@@ -52,17 +52,9 @@ workflows:
       - setup
       - general-prepare-helpers/job-snyk-prepare:
           name: prepare-snyk
-          #filters:
-          #  branches:
-          #    only:
-          #      - master
           requires:
             - setup
       - snyk-scan:
           name: execute-snyk
-          #filters:
-          #  branches:
-          #    only:
-          #      - master
           requires:
             - prepare-snyk
