@@ -44,6 +44,7 @@ This SDK consists of several different libraries, each with detailed documentati
 
 ```mermaid
   graph TD;
+    AuthFoundation-->OktaDirectAuth;
     AuthFoundation-->OktaOAuth2;
     OktaOAuth2-->WebAuthenticationUI;
 ```
