@@ -1,7 +1,7 @@
 Pod::Spec.new do |s|
     s.name             = "OktaWebAuthenticationUI"
     s.module_name      = "WebAuthenticationUI"
-    s.version          = "1.1.2"
+    s.version          = "1.4.3"
     s.summary          = "Okta Web Authentication UI"
     s.description      = <<-DESC
 Authenticate users using web-based OIDC.

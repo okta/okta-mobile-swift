@@ -1,0 +1,36 @@
+name: Setup Build Environment
+inputs:
+  model:
+    description: 'Simulator model name'
+  version:
+    description: 'Simulator operating system version'
+  destination:
+    description: 'Xcode destination to use'
+runs:
+  using: composite
+  steps:
+    - name: Start simulator
+      shell: bash
+      run: |
+        getKey() {
+            echo "${{ inputs.destination }}" | awk -v key="$1" -v RS=',' -F'=' '$1==key{print $2}' | tr -d '\n'
+        }
+
+        if [[ -n "${{ inputs.destination }}" ]]; then
+            model=$(getKey name)
+            version=$(getKey OS)
+        else
+            model="${{ inputs.model }}"
+            version="${{ inputs.version }}"
+        fi
+
+        if [[ -n "$version" ]]; then
+            filterString="$model Simulator ($version)"
+        else
+            filterString="$model Simulator"
+        fi
+
+        echo "Starting $filterString"
+        
+        udid=$(xctrace list devices | grep -m 1 "$filterString" | awk '{print substr($0,length($0)-36,36)}')
+        xcrun simctl boot $udid || true

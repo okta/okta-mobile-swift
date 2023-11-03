@@ -30,7 +30,7 @@ class SafariServicesProviderTests: ProviderTestBase {
     }
     
     func testSuccessfulAuthentication() throws {
-        provider.start(context: .init(state: "state"))
+        provider.start(context: .init(state: "state"), additionalParameters: nil)
         try waitFor(.authenticateUrl)
 
         XCTAssertNotNil(provider.authenticationSession)
@@ -44,7 +44,7 @@ class SafariServicesProviderTests: ProviderTestBase {
     }
 
     func testErrorResponse() throws {
-        provider.start(context: .init(state: "state"))
+        provider.start(context: .init(state: "state"), additionalParameters: nil)
         try waitFor(.authenticateUrl)
 
         XCTAssertNotNil(provider.authenticationSession)
@@ -56,7 +56,7 @@ class SafariServicesProviderTests: ProviderTestBase {
     }
 
     func testUserCancelled() throws {
-        provider.start(context: .init(state: "state"))
+        provider.start(context: .init(state: "state"), additionalParameters: nil)
         try waitFor(.authenticateUrl)
 
         XCTAssertNotNil(provider.authenticationSession)
@@ -68,7 +68,7 @@ class SafariServicesProviderTests: ProviderTestBase {
     }
 
     func testNoResponse() throws {
-        provider.start(context: .init(state: "state"))
+        provider.start(context: .init(state: "state"), additionalParameters: nil)
         try waitFor(.authenticateUrl)
 
         XCTAssertNotNil(provider.authenticationSession)
@@ -79,7 +79,7 @@ class SafariServicesProviderTests: ProviderTestBase {
     }
     
     func testLogout() throws {
-        provider.logout(context: .init(idToken: "idToken", state: "state"))
+        provider.logout(context: .init(idToken: "idToken", state: "state"), additionalParameters: nil)
         try waitFor(.logoutUrl)
 
         XCTAssertNotNil(provider.authenticationSession)

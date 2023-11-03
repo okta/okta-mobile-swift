@@ -132,7 +132,7 @@ extension JWK {
                 kSecAttrKeyType: kSecAttrKeyTypeRSA,
                 kSecAttrKeyClass: kSecAttrKeyTypeRSA,
                 kSecAttrAccessible: kSecAttrAccessibleAfterFirstUnlock,
-                kSecReturnRef: true,
+                kSecReturnRef: true
             ]
             
             var keyRef: AnyObject?

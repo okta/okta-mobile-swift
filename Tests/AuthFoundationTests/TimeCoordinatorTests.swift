@@ -47,7 +47,6 @@ final class TimeCoordinatorTests: XCTestCase {
         XCTAssertNotEqual(date, date.coordinated)
         XCTAssertEqual(date.coordinated.timeIntervalSinceReferenceDate - date.timeIntervalSinceReferenceDate, 300)
         
-        
         XCTAssertGreaterThan(Date.nowCoordinated, Date())
     }
     

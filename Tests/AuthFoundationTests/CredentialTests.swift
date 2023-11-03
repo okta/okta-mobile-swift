@@ -56,9 +56,16 @@ final class CredentialTests: XCTestCase {
                           contentType: "application/json")
         urlSession.expect("https://example.com/oauth2/v1/revoke",
                           data: Data())
+        urlSession.expect("https://example.com/oauth2/v1/revoke",
+                          data: Data())
+        urlSession.expect("https://example.com/oauth2/v1/revoke",
+                          data: Data())
         
+        XCTAssertEqual(coordinator.credentialDataSource.credentialCount, 1)
+        XCTAssertTrue(coordinator.credentialDataSource.hasCredential(for: token))
+
         let expect = expectation(description: "network request")
-        credential.revoke(type: .accessToken) { result in
+        credential.revoke(type: .all) { result in
             switch result {
             case .success(): break
             case .failure(let error):
@@ -74,6 +81,36 @@ final class CredentialTests: XCTestCase {
             request.url?.absoluteString == "https://example.com/oauth2/v1/revoke"
         }))
         XCTAssertEqual(revokeRequest.bodyString, "client_id=foo&token=abcd123&token_type_hint=access_token")
+
+        XCTAssertEqual(coordinator.credentialDataSource.credentialCount, 0)
+        XCTAssertFalse(coordinator.credentialDataSource.hasCredential(for: token))
+    }
+
+    func testRevokeAccessToken() throws {
+        urlSession.expect("https://example.com/oauth2/default/.well-known/openid-configuration",
+                          data: try data(from: .module, for: "openid-configuration", in: "MockResponses"),
+                          contentType: "application/json")
+        urlSession.expect("https://example.com/oauth2/v1/revoke",
+                          data: Data())
+        
+        XCTAssertEqual(coordinator.credentialDataSource.credentialCount, 1)
+        XCTAssertTrue(coordinator.credentialDataSource.hasCredential(for: token))
+
+        let expect = expectation(description: "network request")
+        credential.revoke(type: .accessToken) { result in
+            switch result {
+            case .success(): break
+            case .failure(let error):
+                XCTAssertNil(error)
+            }
+            expect.fulfill()
+        }
+        waitForExpectations(timeout: 1.0) { error in
+            XCTAssertNil(error)
+        }
+
+        XCTAssertEqual(coordinator.credentialDataSource.credentialCount, 1)
+        XCTAssertTrue(coordinator.credentialDataSource.hasCredential(for: token))
     }
 
     func testRevokeFailure() throws {

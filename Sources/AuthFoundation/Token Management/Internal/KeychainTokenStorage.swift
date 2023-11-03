@@ -49,7 +49,7 @@ final class KeychainTokenStorage: TokenStorage {
             return try Keychain
                 .Search(service: KeychainTokenStorage.metadataName)
                 .list()
-                .map { $0.account }
+                .map(\.account)
         } catch {
             return []
         }
@@ -100,7 +100,7 @@ final class KeychainTokenStorage: TokenStorage {
                                          synchronizable: accessibility.isSynchronizable,
                                          value: try encoder.encode(metadata))
 
-        var context: KeychainAuthenticationContext? = nil
+        var context: KeychainAuthenticationContext?
         #if canImport(LocalAuthentication) && !os(tvOS)
         context = security.context
         #endif
@@ -143,7 +143,7 @@ final class KeychainTokenStorage: TokenStorage {
                                     generic: nil,
                                     value: data)
         
-        var context: KeychainAuthenticationContext? = nil
+        var context: KeychainAuthenticationContext?
         #if canImport(LocalAuthentication) && !os(tvOS)
         context = security?.context
         #endif

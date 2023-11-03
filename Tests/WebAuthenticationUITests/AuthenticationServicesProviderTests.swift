@@ -82,7 +82,7 @@ class AuthenticationServicesProviderTests: ProviderTestBase {
     }
     
     func testSuccessfulAuthentication() throws {
-        provider.start(context: .init(state: "state"))
+        provider.start(context: .init(state: "state"), additionalParameters: nil)
         try waitFor(.authenticateUrl)
         
         XCTAssertNotNil(provider.authenticationSession)
@@ -99,7 +99,7 @@ class AuthenticationServicesProviderTests: ProviderTestBase {
     }
 
     func testErrorResponse() throws {
-        provider.start(context: .init(state: "state"))
+        provider.start(context: .init(state: "state"), additionalParameters: nil)
         try waitFor(.authenticateUrl)
 
         XCTAssertNotNil(provider.authenticationSession)
@@ -107,14 +107,23 @@ class AuthenticationServicesProviderTests: ProviderTestBase {
         XCTAssertTrue(session.startCalled)
 
         let redirectUrl = URL(string: "com.example:/callback?state=state&error=errorname&error_description=This+Thing+Failed")
-        provider.process(url: redirectUrl, error: nil)
+        let error = NSError(domain: "SomeDomain", code: 1, userInfo: nil)
+        provider.process(url: redirectUrl, error: error)
         XCTAssertNil(delegate.token)
         XCTAssertNotNil(delegate.error)
         XCTAssertNil(provider.authenticationSession)
+        
+        let webAuthError = try XCTUnwrap(delegate.error as? WebAuthenticationError)
+        if case let .serverError(serverError) = webAuthError {
+            XCTAssertEqual(serverError.code, .other(code: "errorname"))
+            XCTAssertEqual(serverError.description, "This Thing Failed")
+        } else {
+            XCTFail("Did not get the appropriate error response type")
+        }
     }
 
     func testUserCancelled() throws {
-        provider.start(context: .init(state: "state"))
+        provider.start(context: .init(state: "state"), additionalParameters: nil)
         try waitFor(.authenticateUrl)
 
         XCTAssertNotNil(provider.authenticationSession)
@@ -131,7 +140,7 @@ class AuthenticationServicesProviderTests: ProviderTestBase {
     }
 
     func testNoResponse() throws {
-        provider.start(context: .init(state: "state"))
+        provider.start(context: .init(state: "state"), additionalParameters: nil)
         try waitFor(.authenticateUrl)
 
         XCTAssertNotNil(provider.authenticationSession)
@@ -147,7 +156,7 @@ class AuthenticationServicesProviderTests: ProviderTestBase {
     func testLogout() throws {
         MockAuthenticationServicesProviderSession.redirectUri = URL(string: "com.example:/logout?foo=bar")
     
-        provider.logout(context: .init(idToken: "idToken", state: "state"))
+        provider.logout(context: .init(idToken: "idToken", state: "state"), additionalParameters: nil)
         try waitFor(.logoutUrl)
 
         XCTAssertNotNil(provider.authenticationSession)
@@ -161,7 +170,7 @@ class AuthenticationServicesProviderTests: ProviderTestBase {
     func testLogoutError() throws {
         MockAuthenticationServicesProviderSession.redirectError = WebAuthenticationError.userCancelledLogin
 
-        provider.logout(context: .init(idToken: "idToken", state: "state"))
+        provider.logout(context: .init(idToken: "idToken", state: "state"), additionalParameters: nil)
         try waitFor(.logoutUrl)
         
         XCTAssertNotNil(provider.authenticationSession)

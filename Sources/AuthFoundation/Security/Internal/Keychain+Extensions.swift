@@ -63,7 +63,7 @@ extension KeychainGettable {
             }
         }
         
-        guard let result = ref as? Dictionary<String, Any> else {
+        guard let result = ref as? [String: Any] else {
             throw KeychainError.invalidFormat
         }
         
@@ -92,7 +92,7 @@ extension KeychainListable {
             throw KeychainError.cannotList(code: status)
         }
         
-        guard let items = ref as? Array<Dictionary<String, Any>> else {
+        guard let items = ref as? [[String: Any]] else {
             throw KeychainError.invalidFormat
         }
 
@@ -102,7 +102,7 @@ extension KeychainListable {
 
 extension KeychainUpdatable {
     var updateQuery: [String: Any] {
-        query.filter { (key: String, value: Any) in
+        query.filter { (key: String, _: Any) in
             let keyAttr = key as CFString
             switch keyAttr {
             case kSecClass: fallthrough

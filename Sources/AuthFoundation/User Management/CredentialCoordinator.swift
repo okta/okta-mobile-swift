@@ -17,5 +17,6 @@ public protocol CredentialCoordinator: AnyObject {
     var credentialDataSource: CredentialDataSource { get set }
     var tokenStorage: TokenStorage { get set }
     
+    func observe(oauth2 client: OAuth2Client)
     func remove(credential: Credential) throws
 }

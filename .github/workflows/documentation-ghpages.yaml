@@ -6,7 +6,8 @@ on:
       - master
 
 env:
-  DEVELOPER_DIR: /Applications/Xcode_13.3.app/Contents/Developer
+  DEVELOPER_DIR: /Applications/Xcode_14.2.app/Contents/Developer
+  NSUnbufferedIO: YES 
 
 # NOTE: The DocC `generate-documentation` plugin does not handle the 
 #       hostingBasePath well. In particular, it doesn't properly handle
@@ -22,46 +23,26 @@ jobs:
     runs-on: macos-12
     steps:
     - uses: actions/checkout@master
-    - name: Prepare directory
+    - name: Build Documentation
       run: |
-        mkdir -p docs/development
-        mkdir -p .build/symbol-graphs
-    - name: Build Symbol Graphs
-      run: |
-        swift build \
-            --target AuthFoundation \
-            --target OktaOAuth2 \
-            --target WebAuthenticationUI \
-            -Xswiftc -emit-symbol-graph -Xswiftc -emit-symbol-graph -Xswiftc -emit-symbol-graph-dir -Xswiftc .build/symbol-graphs
-    - name: Generate Documentation
-      run: |
-        set +e
+        set +ex
         VERSION=$(git describe --tags 2>/dev/null)
         if [[ $? -ne 0 ]]; then
             VERSION=development
         fi
         set -e
-
         export DOCC_JSON_PRETTYPRINT=YES
-        for TARGET in AuthFoundation OktaOAuth2 WebAuthenticationUI; do
+
+        for TARGET in $(swift package describe --type json | jq ".products[].name" | sed -e 's/"//g'); do
+            echo "Building $TARGET"
             NAME=$(echo "$TARGET" | tr '[:upper:]' '[:lower:]')
-
-            xcrun docc convert \
-                Sources/$TARGET/$TARGET.docc \
-                --enable-inherited-docs \
-                --output-path $TARGET.doccarchive \
-                --fallback-display-name $TARGET \
-                --fallback-bundle-identifier com.okta.mobile.$NAME \
-                --fallback-bundle-version $VERSION \
-                --additional-symbol-graph-dir .build/symbol-graphs
-        done
-
-        mkdir -p docs/$VERSION
-        for TARGET in AuthFoundation OktaOAuth2 WebAuthenticationUI; do
-            NAME=$(echo "$TARGET" | tr '[:upper:]' '[:lower:]')
-
-            $(xcrun --find docc) process-archive transform-for-static-hosting \
-                $TARGET.doccarchive \
+            mkdir -p docs/$VERSION/$NAME
+            swift package \
+                --allow-writing-to-directory docs \
+                generate-documentation \
+                --target $TARGET \
+                --disable-indexing \
+                --transform-for-static-hosting \
                 --hosting-base-path okta-mobile-swift/$VERSION/$NAME \
                 --output-path docs/$VERSION/$NAME
             sed -I -e "s#<head>#<head><meta http-equiv='refresh' content='0;url=./documentation/$NAME/'>#" \

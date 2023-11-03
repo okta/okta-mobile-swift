@@ -84,7 +84,7 @@ public final class Token: Codable, Equatable, Hashable, Expires {
         }
         
         guard let issuer = client.openIdConfiguration?.issuer else {
-            throw JWTError.invalidIssuer
+            throw TokenError.invalidConfiguration
         }
 
         try Token.idTokenValidator.validate(token: idToken,
@@ -98,9 +98,45 @@ public final class Token: Codable, Equatable, Hashable, Expires {
         }
     }
     
+    /// Creates a new Token from a refresh token.
+    /// - Parameters:
+    ///   - refreshToken: Refresh token string.
+    ///   - client: ``OAuth2Client`` instance that corresponds to the client configuration initially used to create the refresh token.
+    ///   - completion: Completion block invoked when a result is returned.
+    public static func from(refreshToken: String, using client: OAuth2Client, completion: @escaping (Result<Token, OAuth2Error>) -> Void) {
+        client.openIdConfiguration { result in
+            switch result {
+            case .success(let configuration):
+                let request = Token.RefreshRequest(openIdConfiguration: configuration,
+                                                   resource: "", 
+                                                   clientSecret: "",
+                                                   clientConfiguration: client.configuration,
+                                                   refreshToken: refreshToken,
+                                                   id: Token.RefreshRequest.placeholderId,
+                                                   configuration: [
+                                                    "client_id": client.configuration.clientId,
+                                                    "scope": client.configuration.scopes
+                                                ])
+                client.exchange(token: request) { result in
+                    switch result {
+                    case .success(let response):
+                        NotificationCenter.default.post(name: .tokenRefreshed, object: response.result)
+                        completion(.success(response.result))
+
+                    case .failure(let error):
+                        completion(.failure(.network(error: error)))
+                    }
+                }
+            case .failure(let error):
+                completion(.failure(error))
+            }
+        }
+    }
+    
     public static func == (lhs: Token, rhs: Token) -> Bool {
         lhs.context == rhs.context &&
         lhs.accessToken == rhs.accessToken &&
+        lhs.refreshToken == rhs.refreshToken &&
         lhs.scope == rhs.scope &&
         lhs.idToken?.rawValue == rhs.idToken?.rawValue &&
         lhs.deviceSecret == rhs.deviceSecret
@@ -160,7 +196,7 @@ public final class Token: Codable, Equatable, Hashable, Expires {
             id = UUID().uuidString
         }
 
-        var idToken: JWT? = nil
+        var idToken: JWT?
         if let idTokenString = try container.decodeIfPresent(String.self, forKey: .idToken) {
             idToken = try JWT(idTokenString)
         }
@@ -177,6 +213,24 @@ public final class Token: Codable, Equatable, Hashable, Expires {
                   context: context)
     }
 }
+
+#if swift(>=5.5.1)
+@available(iOS 13.0, tvOS 13.0, macOS 10.15, watchOS 6, *)
+extension Token {
+    /// Creates a new Token from a refresh token.
+    /// - Parameters:
+    ///   - refreshToken: Refresh token string.
+    ///   - client: ``OAuth2Client`` instance that corresponds to the client configuration initially used to create the refresh token.
+    /// - Returns: Token created using the refresh token.
+    public static func from(refreshToken: String, using client: OAuth2Client) async throws -> Token {
+        try await withCheckedThrowingContinuation { continuation in
+            from(refreshToken: refreshToken, using: client) { result in
+                continuation.resume(with: result)
+            }
+        }
+    }
+}
+#endif
 
 extension Token {
     enum CodingKeys: String, CodingKey, CaseIterable {

@@ -14,10 +14,10 @@ import UIKit
 
 #if os(tvOS)
 import OktaOAuth2
-#elseif canImport(WebAuthenticationUI)
+#elseif canImport(WebAuthenticationUI) && !WEB_AUTH_DISABLED
 import WebAuthenticationUI
 #else
-import OktaOAuth2
+import AuthFoundation
 #endif
 
 class ProfileTableViewController: UITableViewController {
@@ -47,12 +47,18 @@ class ProfileTableViewController: UITableViewController {
         didSet {
             configure(credential?.userInfo)
             credential?.automaticRefresh = true
-            credential?.refreshIfNeeded { _ in
-                self.credential?.userInfo { result in
-                    guard case let .success(userInfo) = result else { return }
-                    DispatchQueue.main.async {
-                        self.configure(userInfo)
+            credential?.refreshIfNeeded { result in
+                switch result {
+                case .success:
+                    self.credential?.userInfo { result in
+                        guard case let .success(userInfo) = result else { return }
+                        DispatchQueue.main.async {
+                            self.configure(userInfo)
+                        }
                     }
+                    
+                case .failure(let error):
+                    self.show(error: error)
                 }
             }
         }
@@ -114,7 +120,7 @@ class ProfileTableViewController: UITableViewController {
                 .init(kind: .rightDetail, id: "userId", title: "User ID", detail: user.subject),
                 .init(kind: .rightDetail, id: "createdAt", title: "Created at", detail: updatedAt),
                 .init(kind: .rightDetail, id: "isDefaultCredential", title: "Is Default", detail: defaultValue),
-                .init(kind: .disclosure, id: "details", title: "Token details"),
+                .init(kind: .disclosure, id: "details", title: "Token details")
             ]
         }
         
@@ -161,10 +167,15 @@ class ProfileTableViewController: UITableViewController {
             }
         }))
         
-        #if !os(tvOS) && canImport(WebAuthenticationUI)
+        #if !os(tvOS) && canImport(WebAuthenticationUI) && !WEB_AUTH_DISABLED
         if let token = Credential.default?.token {
+            var options: [WebAuthentication.Option]?
+            options = []
+            // TODO: Uncomment the following line to force a user to sign in again while signing out.
+            // options = [.prompt(.login)]
+            
             alert.addAction(.init(title: "End a session", style: .destructive) { _ in
-                WebAuthentication.shared?.signOut(token: token) { result in
+                WebAuthentication.shared?.signOut(token: token, options: options) { result in
                     switch result {
                     case .success:
                         try? Keychain.deleteTokens()
@@ -248,7 +259,7 @@ class ProfileTableViewController: UITableViewController {
         switch segue.identifier {
         case "TokenDetail":
             guard let target = segue.destination as? TokenDetailViewController else { break }
-            target.token = Credential.default?.token
+            target.credential = Credential.default
 
         default: break
         }

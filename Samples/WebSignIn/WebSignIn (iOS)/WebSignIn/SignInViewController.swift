@@ -15,9 +15,15 @@ import WebAuthenticationUI
 
 class SignInViewController: UIViewController {
     @IBOutlet weak var signInButton: UIButton!
+    @IBOutlet weak var signInWithRefreshButton: UIButton!
+    @IBOutlet weak var ephemeralSwitch: UISwitch!
     @IBOutlet weak var clientIdLabel: UILabel!
 
     let auth = WebAuthentication.shared
+    let options: [WebAuthentication.Option]? = [
+        // .login(hint: "jane.doe@example.com"),
+        // .prompt(.login)
+    ]
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -27,6 +33,8 @@ class SignInViewController: UIViewController {
         } else {
             clientIdLabel.text = "Not configured"
             signInButton.isEnabled = false
+            signInWithRefreshButton.isEnabled = false
+            ephemeralSwitch.isEnabled = false
         }
     }
     
@@ -51,7 +59,7 @@ class SignInViewController: UIViewController {
 
     @IBAction func signIn(_ sender: Any) {
         let window = viewIfLoaded?.window
-        auth?.signIn(from: window) { result in
+        auth?.signIn(from: window, options: options) { result in
             switch result {
             case .success(let token):
                 do {
@@ -67,6 +75,71 @@ class SignInViewController: UIViewController {
                 self.dismiss(animated: true)
             case .failure(let error):
                 self.show(error: error)
+            }
+        }
+    }
+    
+    @IBAction func signInWithRefreshToken(_ sender: Any) {
+        let pasteboard = UIPasteboard.general
+        if pasteboard.hasStrings,
+           let pasteStrings = pasteboard.strings
+        {
+            for string in pasteStrings {
+                var matchString = string.unicodeScalars
+                matchString.removeAll(where: CharacterSet.alphanumerics.contains)
+                if matchString.isEmpty {
+                    signInWith(refreshToken: string)
+                    return
+                }
+            }
+        }
+        
+        let alert = UIAlertController(title: "Sign In with Refresh Token",
+                                      message: "Enter the refresh token below",
+                                      preferredStyle: .alert)
+        alert.addTextField { field in
+            field.placeholder = "refresh_token"
+            field.autocorrectionType = .no
+        }
+        alert.addAction(.init(title: "Cancel", style: .cancel))
+        alert.addAction(.init(title: "OK", style: .default) { _ in
+            guard let textField = alert.textFields?.first,
+                let string = textField.text,
+                !string.isEmpty
+            else {
+                alert.dismiss(animated: true) {
+                    let alert = UIAlertController(title: "Invalid refresh token",
+                                                  message: nil,
+                                                  preferredStyle: .alert)
+                    alert.addAction(.init(title: "OK", style: .default))
+                    self.present(alert, animated: true)
+                }
+                return
+            }
+            
+            self.signInWith(refreshToken: string)
+        })
+        present(alert, animated: true)
+    }
+    
+    func signInWith(refreshToken: String) {
+        guard let client = auth?.signInFlow.client else { return }
+        
+        Token.from(refreshToken: refreshToken, using: client) { result in
+            DispatchQueue.main.async {
+                switch result {
+                case .success(let token):
+                    do {
+                        try Credential.store(token)
+                        
+                        // This saves the device secret in a place accessible by the SingleSignOn sample application.
+                        try Keychain.saveDeviceSSO(token)
+                    } catch {
+                        self.show(error: error)
+                    }
+                case .failure(let error):
+                    self.show(error: error)
+                }
             }
         }
     }

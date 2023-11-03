@@ -48,7 +48,7 @@ class BrowserSignInUITests: XCTestCase {
 
         profileScreen.wait()
         save(screenshot: "Profile Screen")
-        
+                
         XCTAssertEqual(profileScreen.valueLabel(for: .username).label, username)
         XCTAssertEqual(profileScreen.valueLabel(for: .defaultCredential).label, "Yes")
         

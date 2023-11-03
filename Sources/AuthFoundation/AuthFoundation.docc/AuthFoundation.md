@@ -105,4 +105,3 @@ You can use AuthFoundation when you want to:
 - ``URLSessionDataTaskProtocol``
 - ``Weak``
 - ``WeakCollection``
-- ``TimeSensitive``

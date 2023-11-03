@@ -24,6 +24,7 @@
 "missing_openid_configuration_attribute" = "The OpenID configuration attribute \"%@\" is missing.";
 "multiple_oauth2_errors" = "Multiple errors occurred: %@";
 "cannot_revoke_token_type" = "Cannot revoke token type.";
+"missing_oauth2_response_key" = "Missing the \"%@\" required response key.";
 
 /* JWTError */
 "jwt_invalid_base64_encoding" = "The token is invalid (incorrect Base64 encoding).";
@@ -64,12 +65,14 @@
 "invalid_property_list_description" = "The configuration file named \"%@\" was invalid.";
 "cannot_parse_property_list_description" = "Could not parse the configuration file named \"%@\".";
 "missing_configuration_values_description" = "Web authentication is not configured properly.";
+"invalid_configuration" = "The configuration setting \"%@\" contained an invalid value \"%@\".";
 
 /* TokenError */
 "token_context_missing" = "Context information related to this token is missing.";
 "token_not_found" = "The requested token was not found (ID: \"%@\").";
 "cannot_replace_token" = "Could not replace the token with its updated value.";
 "duplicate_token_added" = "Could not add a new token, since a duplicate was found.";
+"invalid_configuration" = "This token does not match the client configuration.";
 
 /* CredentialError */
 "credential_metadata_consistency" = "Metadata associated with a credential has become inconsistent with its value in storage.";

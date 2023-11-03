@@ -36,7 +36,7 @@ extension Notification.Name {
 }
 
 #if swift(>=5.5.1)
-@available(iOS 15.0, tvOS 15.0, macOS 12.0, watchOS 8, *)
+@available(iOS 13.0, tvOS 13.0, macOS 10.15, watchOS 6, *)
 extension Credential {
     /// Attempt to refresh the token.
     public func refresh(clientSecret: String, resource: String) async throws {
@@ -80,6 +80,7 @@ extension Credential {
     /// * ``Token/RevokeType/accessToken`` – Revokes the access token. If the `offline_access` scope was specified when authenticating, the refresh token may be used to recreate a new access token.
     /// * ``Token/RevokeType/refreshToken`` – If a refresh token is present (e.g. the `offline_access` scope was specified when authenticating), both the access token _and_ refresh token will become invalidated.
     /// * ``Token/RevokeType/deviceSecret`` – If the `device_sso` scope was specified when authenticating, this will invalidate the device secret, which will prevent other clients from creating new tokens using Device SSO.
+    /// * ``Token/RevokeType/all`` - Revokes all applicable tokens associated with this object.
     ///
     /// If a credential is no longer valid, it will automatically be removed from storage. This is to prevent an application from thinking a valid user is signed in while having credentials that are incapable of being used.
     ///
@@ -87,8 +88,8 @@ extension Credential {
     /// 1. Has both an access token and a refresh token, and the ``Token/RevokeType/refreshToken`` type is supplied, or
     /// 1. Does not have a refresh token and the ``Token/RevokeType/accessToken`` type is supplied.
     /// - Parameters:
-    ///   - type: The token type to revoke.
-    public func revoke(type: Token.RevokeType = .accessToken) async throws {
+    ///   - type: The token type to revoke, defaulting to `.all`.
+    public func revoke(type: Token.RevokeType = .all) async throws {
         try await withCheckedThrowingContinuation { continuation in
             revoke(type: type) { result in
                 continuation.resume(with: result)
@@ -102,7 +103,7 @@ extension Credential {
     /// - Returns: The user info for this user.
     public func userInfo() async throws -> UserInfo {
         try await withCheckedThrowingContinuation { continuation in
-            userInfo() { result in
+            userInfo { result in
                 continuation.resume(with: result)
             }
         }

@@ -18,7 +18,7 @@ extension Credential {
             return nil
         }
         
-        refreshIfNeeded()
+        refreshIfNeeded { _ in }
         
         automaticRefreshTimer?.cancel()
         
@@ -31,9 +31,15 @@ extension Credential {
                              repeating: repeating)
         timerSource.setEventHandler { [weak self] in
             guard let self = self else { return }
-            self.refreshIfNeeded()
+            self.refreshIfNeeded { _ in }
         }
         
         return timerSource
+    }
+    
+    func shouldRemove(for type: Token.RevokeType) -> Bool {
+        type == .all ||
+        (type == .refreshToken && token.refreshToken != nil) ||
+        (type == .accessToken && token.refreshToken == nil)
     }
 }

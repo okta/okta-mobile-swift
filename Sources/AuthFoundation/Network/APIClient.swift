@@ -55,7 +55,10 @@ public protocol APIClient {
     func willSend(request: inout URLRequest)
     
     /// Invoked when a request fails.
-    func didSend(request: URLRequest, received error: APIClientError)
+    func didSend(request: URLRequest, received error: APIClientError, requestId: String?, rateLimit: APIRateLimit?)
+
+    /// Invoked when a request receives an HTTP response.
+    func didSend(request: URLRequest, received response: HTTPURLResponse)
     
     /// Invoked when a request returns a successful response.
     func didSend<T>(request: URLRequest, received response: APIResponse<T>)
@@ -73,8 +76,11 @@ public protocol APIClientDelegate: AnyObject {
     func api(client: APIClient, willSend request: inout URLRequest)
     
     /// Invoked when a request fails.
-    func api(client: APIClient, didSend request: URLRequest, received error: APIClientError)
+    func api(client: APIClient, didSend request: URLRequest, received error: APIClientError, requestId: String?, rateLimit: APIRateLimit?)
     
+    /// Invoked when a request returns a successful response.
+    func api(client: APIClient, didSend request: URLRequest, received response: HTTPURLResponse)
+
     /// Invoked when a request returns a successful response.
     func api<T>(client: APIClient, didSend request: URLRequest, received response: APIResponse<T>)
     
@@ -84,7 +90,8 @@ public protocol APIClientDelegate: AnyObject {
 
 extension APIClientDelegate {
     public func api(client: APIClient, willSend request: inout URLRequest) {}
-    public func api(client: APIClient, didSend request: URLRequest, received error: APIClientError) {}
+    public func api(client: APIClient, didSend request: URLRequest, received error: APIClientError, requestId: String?, rateLimit: APIRateLimit?) {}
+    public func api(client: APIClient, didSend request: URLRequest, received response: HTTPURLResponse) {}
     public func api<T>(client: APIClient, didSend request: URLRequest, received response: APIResponse<T>) {}
     public func api(client: APIClient, shouldRetry request: URLRequest) -> APIRetry {
         return .default
@@ -93,7 +100,9 @@ extension APIClientDelegate {
 
 /// List of retry options
 public enum APIRetry {
+    /// Indicates the APIRequest should not be retried.
     case doNotRetry
+    /// The APIRequest should be retried, up to the given maximum number of times.
     case retry(maximumCount: Int)
     
     /// The default retry option.
@@ -114,6 +123,27 @@ public enum APIRetry {
     }
 }
 
+/// Defines the possible results for an API request.
+public enum APIResponseResult {
+    /// Indicates the request was successful.
+    case success
+    /// The server is indicating the request should be retried.
+    case retry
+    /// The server reports the response represents an error.
+    case error
+
+    init(statusCode: Int) {
+        switch statusCode {
+        case 200..<300:
+            self = .success
+        case 429:
+            self = .retry
+        default:
+            self = .error
+        }
+    }
+}
+
 extension APIClient {
     public var additionalHttpHeaders: [String: String]? { nil }
     public var requestIdHeader: String? { "x-okta-request-id" }
@@ -128,6 +158,8 @@ extension APIClient {
     
     public func didSend(request: URLRequest, received error: APIClientError) {}
     
+    public func didSend(request: URLRequest, received response: HTTPURLResponse) {}
+    
     public func didSend<T>(request: URLRequest, received response: APIResponse<T>) {}
     
     public func send<T>(_ request: URLRequest, parsing context: APIParsingContext? = nil, completion: @escaping (Result<APIResponse<T>, APIClientError>) -> Void) {
@@ -136,6 +168,7 @@ extension APIClient {
     
     public func shouldRetry(request: URLRequest, rateLimit: APIRateLimit) -> APIRetry { .default }
     
+    // swiftlint:disable closure_body_length
     private func send<T>(_ request: URLRequest,
                          parsing context: APIParsingContext? = nil,
                          state: APIRetry.State?,
@@ -157,21 +190,30 @@ extension APIClient {
                 return
             }
             
+            var rateInfo: APIRateLimit?
+            var requestId: String?
             do {
                 guard let httpResponse = response as? HTTPURLResponse else {
                     throw APIClientError.invalidResponse
                 }
                 
-                let rateInfo = APIRateLimit(with: httpResponse.allHeaderFields)
-                switch httpResponse.statusCode {
-                case 200..<300:
+                self.didSend(request: request, received: httpResponse)
+                
+                rateInfo = APIRateLimit(with: httpResponse.allHeaderFields)
+                let responseType = context?.resultType(from: httpResponse) ?? APIResponseResult(statusCode: httpResponse.statusCode)
+                if let requestIdHeader = requestIdHeader {
+                    requestId = httpResponse.allHeaderFields[requestIdHeader] as? String
+                }
+
+                switch responseType {
+                case .success:
                     let response: APIResponse<T> = try self.validate(data: data,
                                                                      response: httpResponse,
                                                                      rateInfo: rateInfo,
                                                                      parsing: context)
                     self.didSend(request: request, received: response)
                     completion(.success(response))
-                case 429:
+                case .retry:
                     guard let rateInfo = rateInfo else {
                         fallthrough
                     }
@@ -184,11 +226,6 @@ extension APIClient {
                         if let state = state {
                             retryState = state.nextState()
                         } else {
-                            var requestId: String? = nil
-                            if let requestIdHeader = requestIdHeader {
-                                requestId = httpResponse.allHeaderFields[requestIdHeader] as? String
-                            }
-                            
                             retryState = APIRetry.State(type: retry,
                                                         requestId: requestId,
                                                         originalRequest: request,
@@ -208,7 +245,7 @@ extension APIClient {
                         return
                     }
                     fallthrough
-                default:
+                case .error:
                     if let error = error(from: data) ?? context?.error(from: data) {
                         throw APIClientError.serverError(error)
                     } else {
@@ -216,16 +253,17 @@ extension APIClient {
                     }
                 }
             } catch let error as APIClientError {
-                self.didSend(request: request, received: error)
+                self.didSend(request: request, received: error, requestId: requestId, rateLimit: rateInfo)
                 completion(.failure(error))
             } catch {
                 let apiError = APIClientError.cannotParseResponse(error: error)
-                self.didSend(request: request, received: apiError)
+                self.didSend(request: request, received: apiError, requestId: requestId, rateLimit: rateInfo)
                 completion(.failure(apiError))
             }
         }.resume()
     }
-    
+    // swiftlint:enable closure_body_length
+
     private func addRetryHeadersToRequest(state: APIRetry.State) -> URLRequest {
         var request = state.originalRequest
         if let requestId = state.requestId {
@@ -239,7 +277,7 @@ extension APIClient {
 extension APIClient {
     private func relatedLinks<T>(from linkHeader: String?) -> [APIResponse<T>.Link: URL] {
         guard let linkHeader = linkHeader,
-              let matches = linkRegex?.matches(in: linkHeader, options: [], range: NSMakeRange(0, linkHeader.count))
+              let matches = linkRegex?.matches(in: linkHeader, options: [], range: NSRange(location: 0, length: linkHeader.count))
         else {
             return [:]
         }
@@ -261,12 +299,12 @@ extension APIClient {
     }
     
     private func validate<T>(data: Data, response: HTTPURLResponse, rateInfo: APIRateLimit?, parsing context: APIParsingContext? = nil) throws -> APIResponse<T> {
-        var requestId: String? = nil
+        var requestId: String?
         if let requestIdHeader = requestIdHeader {
             requestId = response.allHeaderFields[requestIdHeader] as? String
         }
         
-        var date: Date? = nil
+        var date: Date?
         if let dateString = response.allHeaderFields["Date"] as? String {
             date = httpDateFormatter.date(from: dateString)
         }
@@ -279,13 +317,14 @@ extension APIClient {
                                               from: jsonData,
                                               userInfo: context?.codingUserInfo),
                            date: date ?? Date(),
+                           statusCode: response.statusCode,
                            links: relatedLinks(from: response.allHeaderFields["Link"] as? String),
                            rateInfo: rateInfo,
                            requestId: requestId)
     }
 }
 
-fileprivate let linkRegex = try? NSRegularExpression(pattern: "<([^>]+)>; rel=\"([^\"]+)\"", options: [])
+private let linkRegex = try? NSRegularExpression(pattern: "<([^>]+)>; rel=\"([^\"]+)\"", options: [])
 
 let httpDateFormatter: DateFormatter = {
     let dateFormatter = DateFormatter()

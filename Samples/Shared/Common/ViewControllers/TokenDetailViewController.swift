@@ -11,10 +11,10 @@
 //
 
 import UIKit
-import OktaOAuth2
+import AuthFoundation
 
 class TokenDetailViewController: UIViewController {
-    var token: Token? {
+    var credential: Credential? {
         didSet {
             DispatchQueue.main.async {
                 self.drawToken()
@@ -30,14 +30,55 @@ class TokenDetailViewController: UIViewController {
         NotificationCenter.default.addObserver(forName: .defaultCredentialChanged,
                                                object: nil,
                                                queue: .main) { (notification) in
-            guard let user = notification.object as? Credential else { return }
-            self.token = user.token
+            guard let credential = notification.object as? Credential else { return }
+            self.credential = credential
         }
-        token = Credential.default?.token
+        credential = Credential.default
+        
+        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Revoke", style: .plain, target: self, action: #selector(revokeAction(_:)))
     }
     
+    @objc
+    func revokeAction(_ sender: Any) {
+        let alert = UIAlertController(title: "Revoke Tokens", message: nil, preferredStyle: .actionSheet)
+    
+        let names: [(String, Token.RevokeType)] = [
+            ("Access Token", .accessToken),
+            ("Refresh Token", .refreshToken),
+            ("Device Secret", .deviceSecret),
+            ("All Tokens", .all)
+        ]
+    
+        for (name, type) in names {
+            alert.addAction(.init(title: name, style: .destructive) { _ in
+                self.revoke(type)
+            })
+        }
+    
+        alert.addAction(.init(title: "Cancel", style: .cancel))
+        present(alert, animated: true)
+    }
+    
+    func revoke(_ kind: Token.RevokeType) {
+        guard let credential = credential else { return }
+        let busyAlert = UIAlertController(title: "Revoking", message: nil, preferredStyle: .alert)
+        present(busyAlert, animated: true)
+    
+        credential.revoke(type: kind) { result in
+            DispatchQueue.main.async {
+                busyAlert.dismiss(animated: true) {
+                    guard case let .failure(error) = result else { return }
+    
+                    let alert = UIAlertController(title: "Error", message: error.localizedDescription, preferredStyle: .alert)
+                    alert.addAction(.init(title: "OK", style: .default))
+                    self.present(alert, animated: true)
+                }
+            }
+        }
+    }
+
     func drawToken() {
-        guard let token = token else {
+        guard let token = credential?.token else {
             textView.text = "No token was found"
             return
         }
@@ -56,15 +97,15 @@ class TokenDetailViewController: UIViewController {
         }
         
         let string = NSMutableAttributedString()
+        addString(to: string, title: "Expires in", value: "\(token.expiresIn) seconds")
+        addString(to: string, title: "Scope", value: token.scope ?? "N/A")
+        addString(to: string, title: "Token type", value: token.tokenType)
+        
         addString(to: string, title: "Access token", value: token.accessToken)
         
         if let refreshToken = token.refreshToken {
             addString(to: string, title: "Refresh token", value: refreshToken)
         }
-        
-        addString(to: string, title: "Expires in", value: "\(token.expiresIn) seconds")
-        addString(to: string, title: "Scope", value: token.scope ?? "N/A")
-        addString(to: string, title: "Token type", value: token.tokenType)
         
         if let idToken = token.idToken {
             addString(to: string, title: "ID token", value: idToken.rawValue)

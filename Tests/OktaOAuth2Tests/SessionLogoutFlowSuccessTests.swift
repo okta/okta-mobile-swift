@@ -121,9 +121,35 @@ final class SessionLogoutFlowSuccessTests: XCTestCase {
         XCTAssertNil(flow.context)
         XCTAssertFalse(flow.inProgress)
     }
+
+    func testPromptWithBlocks() throws {
+        XCTAssertNil(flow.context)
+        XCTAssertFalse(flow.inProgress)
+        
+        let context = SessionLogoutFlow.Context(idToken: logoutIDToken, state: state)
+        let resumeExpection = expectation(description: "Expect success")
+        
+        try flow.start(with: context, additionalParameters: ["prompt": "login"]) { result in
+            switch result {
+            case .success(let url):
+                XCTAssertEqual(url.absoluteString, """
+                               https://example.okta.com/oauth2/v1/logout\
+                               ?id_token_hint=\(self.logoutIDToken)\
+                               &prompt=login\
+                               &state=\(self.state)
+                               """)
+            case .failure:
+                XCTFail()
+            }
+
+            resumeExpection.fulfill()
+        }
+        
+        wait(for: [resumeExpection], timeout: 1)
+    }
     
     #if swift(>=5.5.1)
-    @available(iOS 15.0, tvOS 15.0, macOS 12.0, watchOS 8, *)
+    @available(iOS 13.0, tvOS 13.0, macOS 10.15, watchOS 6, *)
     func testWithAsync() async throws {
         XCTAssertNil(flow.context)
         XCTAssertFalse(flow.inProgress)

@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="21507" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="jLV-67-hBo">
+    <device id="retina6_12" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21505"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Navigation Controller-->
+        <scene sceneID="Yn3-UN-nLF">
+            <objects>
+                <navigationController storyboardIdentifier="SignIn" id="jLV-67-hBo" sceneMemberID="viewController">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="qtc-1q-ZLz">
+                        <rect key="frame" x="0.0" y="59" width="393" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="fuW-pZ-4ZS" kind="relationship" relationship="rootViewController" id="KJU-Pp-DEd"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="1Rk-Ip-bDE" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-793" y="-4"/>
+        </scene>
+        <!--Sign In View Controller-->
+        <scene sceneID="WKj-7V-mNR">
+            <objects>
+                <hostingController id="fuW-pZ-4ZS" customClass="SignInViewController" customModule="DirectAuthSignIn__iOS_" customModuleProvider="target" sceneMemberID="viewController">
+                    <navigationItem key="navigationItem" id="54s-OE-F5v"/>
+                </hostingController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="kBF-eo-KLb" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="98" y="-4"/>
+        </scene>
+    </scenes>
+</document>

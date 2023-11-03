@@ -81,17 +81,17 @@ final class SafariBrowserProvider: NSObject, WebAuthenticationProvider {
         delegate?.authentication(provider: self, received: logoutError)
     }
     
-    func start(context: AuthorizationCodeFlow.Context?) {
-        loginFlow.start(with: context)
+    func start(context: AuthorizationCodeFlow.Context?, additionalParameters: [String: String]?) {
+        loginFlow.start(with: context, additionalParameters: additionalParameters) { _ in }
     }
     
-    func logout(context: SessionLogoutFlow.Context) {
+    func logout(context: SessionLogoutFlow.Context, additionalParameters: [String: String]?) {
         guard let logoutFlow = logoutFlow else {
             return
         }
 
         // LogoutFlow invokes delegate, so an error is propagated from delegate method
-        try? logoutFlow.start(with: context)
+        try? logoutFlow.start(with: context, additionalParameters: additionalParameters) { _ in }
     }
     
     func cancel() {

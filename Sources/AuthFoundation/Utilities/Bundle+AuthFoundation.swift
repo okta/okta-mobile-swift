@@ -13,7 +13,7 @@
 import Foundation
 
 #if !SWIFT_PACKAGE
-fileprivate let sharedLocalizationBundle: Bundle = {
+private let sharedLocalizationBundle: Bundle = {
     Bundle(for: Credential.self)
 }()
 #endif

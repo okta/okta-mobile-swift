@@ -54,7 +54,7 @@ public protocol SessionLogoutFlowDelegate: LogoutFlowDelegate {
 /// // Create the logout URL. Open this in a browser.
 /// let authorizeUrl = try await flow.start()
 /// ```
-public final class SessionLogoutFlow: LogoutFlow {
+public class SessionLogoutFlow: LogoutFlow {
     /// A model representing the context and current state for a logout session.
     public struct Context: Codable, Equatable {
         /// The ID token string used for log-out.
@@ -82,6 +82,9 @@ public final class SessionLogoutFlow: LogoutFlow {
     /// The logout redirect URI.
     public let logoutRedirectUri: URL
     
+    /// Any additional query string parameters you would like to supply to the authorization server.
+    public let additionalParameters: [String: String]?
+
     /// Indicates if this flow is currently in progress.
     public private(set) var inProgress: Bool = false
     
@@ -105,13 +108,15 @@ public final class SessionLogoutFlow: LogoutFlow {
     public convenience init?(issuer: URL,
                              clientId: String,
                              scopes: String,
-                             logoutRedirectUri: URL?)
+                             logoutRedirectUri: URL?,
+                             additionalParameters: [String: String]? = nil)
     {
         guard let logoutRedirectUri = logoutRedirectUri else {
             return nil
         }
 
         self.init(logoutRedirectUri: logoutRedirectUri,
+                  additionalParameters: additionalParameters,
                   client: OAuth2Client(baseURL: issuer,
                                        clientId: clientId,
                                        scopes: scopes))
@@ -122,6 +127,7 @@ public final class SessionLogoutFlow: LogoutFlow {
     ///   - logoutRedirectUri: The logout redirect URI.
     ///   - client: The `OAuth2Client` to use with this flow.
     public init(logoutRedirectUri: URL,
+                additionalParameters: [String: String]? = nil,
                 client: OAuth2Client)
     {
         // Ensure this SDK's static version is included in the user agent.
@@ -129,6 +135,7 @@ public final class SessionLogoutFlow: LogoutFlow {
         
         self.client = client
         self.logoutRedirectUri = logoutRedirectUri
+        self.additionalParameters = additionalParameters
         
         client.add(delegate: self)
     }
@@ -138,9 +145,15 @@ public final class SessionLogoutFlow: LogoutFlow {
     /// This method is used to begin a logout session. It is asynchronous, and will invoke the appropriate delegate methods when a response is received.
     /// - Parameters:
     ///   - idToken: The ID token string.
+    ///   - additionalParameters: Optional parameters to add to the authorization URL query string.
     ///   - completion: Optional completion block for receiving the response. If `nil`, you may rely upon the appropriate delegate API methods.
-    public func start(idToken: String, completion: ((Result<URL, OAuth2Error>) -> Void)? = nil) throws {
-        try start(with: Context(idToken: idToken), completion: completion)
+    public func start(idToken: String,
+                      additionalParameters: [String: String]? = nil,
+                      completion: @escaping (Result<URL, OAuth2Error>) -> Void) throws
+    {
+        try start(with: Context(idToken: idToken),
+                  additionalParameters: additionalParameters,
+                  completion: completion)
     }
 
     /// Initiates an logout flow, with a required ``Context-swift.struct`` object.
@@ -148,10 +161,14 @@ public final class SessionLogoutFlow: LogoutFlow {
     /// This method is used to begin a logout session. It is asynchronous, and will invoke the appropriate delegate methods when a response is received.
     /// - Parameters:
     ///   - context: Represents current state for a logout session.
+    ///   - additionalParameters: Optional parameters to add to the authorization URL query string.
     ///   - completion: Optional completion block for receiving the response. If `nil`, you may rely upon the appropriate delegate API methods.
-    public func start(with context: Context, completion: ((Result<URL, OAuth2Error>) -> Void)? = nil) throws {
+    public func start(with context: Context,
+                      additionalParameters: [String: String]? = nil,
+                      completion: @escaping (Result<URL, OAuth2Error>) -> Void) throws
+    {
         guard !inProgress else {
-            completion?(.failure(.missingClientConfiguration))
+            completion(.failure(.missingClientConfiguration))
             return
         }
         
@@ -163,7 +180,7 @@ public final class SessionLogoutFlow: LogoutFlow {
             switch result {
             case .failure(let error):
                 self.delegateCollection.invoke { $0.logout(flow: self, received: error) }
-                completion?(.failure(error))
+                completion(.failure(error))
             case .success(let configuration):
                 do {
                     guard let endSessionEndpoint = configuration.endSessionEndpoint else {
@@ -171,16 +188,17 @@ public final class SessionLogoutFlow: LogoutFlow {
                     }
                     
                     let url = try self.createLogoutURL(from: endSessionEndpoint,
-                                                       using: context)
+                                                       using: context,
+                                                       additionalParameters: additionalParameters)
                     var context = context
                     context.logoutURL = url
                     self.context = context
                     
-                    completion?(.success(url))
+                    completion(.success(url))
                 } catch {
                     let oauthError = error as? OAuth2Error ?? .error(error)
                     self.delegateCollection.invoke { $0.logout(flow: self, received: oauthError) }
-                    completion?(.failure(oauthError))
+                    completion(.failure(oauthError))
                 }
             }
         }
@@ -201,16 +219,20 @@ public final class SessionLogoutFlow: LogoutFlow {
 }
 
 #if swift(>=5.5.1)
-@available(iOS 15.0, tvOS 15.0, macOS 12.0, watchOS 8, *)
+@available(iOS 13.0, tvOS 13.0, macOS 10.15, watchOS 6, *)
 extension SessionLogoutFlow {
     /// Asynchronously initiates a logout flow, with a required ID Token.
     ///
     /// This method is used to begin a logout session. The method will invoke the appropriate delegate methods when a response is received.
     /// - Parameters:
     ///   - idToken: The ID token string.
+    ///   - additionalParameters: Optional parameters to add to the authorization URL query string.
     /// - Returns: The URL a user should be presented with within a broser, to befing a logout flow.
-    public func start(idToken: String) async throws -> URL {
-        try await start(with: .init(idToken: idToken))
+    public func start(idToken: String,
+                      additionalParameters: [String: String]? = nil) async throws -> URL
+    {
+        try await start(with: .init(idToken: idToken),
+                        additionalParameters: additionalParameters)
     }
     
     /// Initiates an logout flow, with a required ``Context-swift.struct`` object.
@@ -218,11 +240,14 @@ extension SessionLogoutFlow {
     /// This method is used to begin a logout session. The method will invoke the appropriate delegate methods when a response is received.
     /// - Parameters:
     ///   - context: Represents current state for a logout session.
+    ///   - additionalParameters: Optional parameters to add to the authorization URL query string.
     /// - Returns: The URL a user should be presented with within a broser, to befing a logout flow.
-    public func start(with context: Context) async throws -> URL {
+    public func start(with context: Context,
+                      additionalParameters: [String: String]? = nil) async throws -> URL
+    {
         try await withCheckedThrowingContinuation { continuation in
             do {
-                try start(with: context) { result in
+                try start(with: context, additionalParameters: additionalParameters) { result in
                     continuation.resume(with: result)
                 }
             } catch let error as APIClientError {
@@ -243,27 +268,52 @@ extension SessionLogoutFlow: OAuth2ClientDelegate {
 }
 
 private extension SessionLogoutFlow {
-    func logoutUrlComponents(from logoutUrl: URL, using context: SessionLogoutFlow.Context) throws -> URLComponents {
+    func logoutUrlComponents(from logoutUrl: URL,
+                             using context: SessionLogoutFlow.Context,
+                             additionalParameters: [String: String]?) throws -> URLComponents
+    {
         guard var components = URLComponents(url: logoutUrl, resolvingAgainstBaseURL: true)
         else {
             throw OAuth2Error.invalidUrl
         }
         
-        components.percentEncodedQuery = queryParameters(using: context).percentQueryEncoded
+        components.percentEncodedQuery = queryParameters(using: context, additionalParameters: additionalParameters).percentQueryEncoded
 
         return components
     }
     
-    func queryParameters(using context: SessionLogoutFlow.Context) -> [String: String] {
-        [
-            "id_token_hint": context.idToken,
-            "post_logout_redirect_uri": logoutRedirectUri.absoluteString,
-            "state": context.state
-        ].compactMapValues { $0 }
+    func queryParameters(using context: SessionLogoutFlow.Context,
+                         additionalParameters: [String: String]?) -> [String: String] {
+        var result = [String: String]()
+        if let additional = self.additionalParameters {
+            result.merge(additional, uniquingKeysWith: { $1 })
+        }
+
+        if let additional = additionalParameters {
+            result.merge(additional, uniquingKeysWith: { $1 })
+        }
+
+        result["id_token_hint"] = context.idToken
+        result["post_logout_redirect_uri"] = logoutRedirectUri.absoluteString
+        result["state"] = context.state
+        
+        // If requesting a login prompt, the post_logout_redirect_uri should be omitted.
+        if let prompt = additionalParameters?["prompt"]?.lowercased(),
+           ["login", "consent", "login consent", "consent login"].contains(prompt)
+        {
+            result.removeValue(forKey: "post_logout_redirect_uri")
+        }
+        
+        return result
     }
 
-    func createLogoutURL(from url: URL, using context: SessionLogoutFlow.Context) throws -> URL {
-        var components = try logoutUrlComponents(from: url, using: context)
+    func createLogoutURL(from url: URL,
+                         using context: SessionLogoutFlow.Context,
+                         additionalParameters: [String: String]?) throws -> URL
+    {
+        var components = try logoutUrlComponents(from: url,
+                                                 using: context,
+                                                 additionalParameters: additionalParameters)
         delegateCollection.invoke { $0.logout(flow: self, customizeUrl: &components) }
         
         guard let url = components.url else {

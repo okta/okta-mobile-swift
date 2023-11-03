@@ -251,6 +251,9 @@ public protocol HasClaims {
     /// All claims, across both standard ``claims`` and ``customClaims``.
     var allClaims: [String] { get }
     
+    /// Raw paylaod of claims, as a dictionary representation.
+    var payload: [String: Any] { get }
+    
     /// Return the given claim's value.
     subscript<T>(_ claim: Claim) -> T? { get }
 
@@ -277,7 +280,7 @@ public extension HasClaims {
     
     var allClaims: [String] {
         Array([
-            claims.map({ $0.rawValue }),
+            claims.map(\.rawValue),
             customClaims
         ].joined())
     }

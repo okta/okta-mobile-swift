@@ -49,7 +49,7 @@ final class DefaultCredentialDataSource: CredentialDataSource {
     }
     
     func remove(credential: Credential) {
-        let _ = queue.sync(flags: .barrier) {
+        queue.sync(flags: .barrier) {
             guard let index = credentials.firstIndex(of: credential) else { return }
             credentials.remove(at: index)
             delegate?.credential(dataSource: self, removed: credential)

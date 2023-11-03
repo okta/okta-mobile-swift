@@ -44,7 +44,6 @@ final class TokenExchangeFlowDelegateRecorder: AuthenticationDelegate {
 final class TokenExchangeFlowTests: XCTestCase {
     let issuer = URL(string: "https://example.okta.com")!
     let redirectUri = URL(string: "com.example:/callback")!
-    let clientMock = OAuth2ClientMock()
     let urlSession = URLSessionMock()
     var client: OAuth2Client!
     var flow: TokenExchangeFlow!
@@ -126,7 +125,7 @@ final class TokenExchangeFlowTests: XCTestCase {
     }
     
 #if swift(>=5.5.1) && !os(Linux)
-    @available(iOS 15.0, tvOS 15.0, macOS 12.0, watchOS 8, *)
+    @available(iOS 13.0, tvOS 13.0, macOS 10.15, watchOS 6, *)
     func testAsyncAuthenticationSucceeded() async throws {
         XCTAssertFalse(flow.isAuthenticating)
         

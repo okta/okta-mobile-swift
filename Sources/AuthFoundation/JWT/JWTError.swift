@@ -102,7 +102,7 @@ extension JWTError: LocalizedError {
                                      bundle: .authFoundation,
                                      comment: "")
 
-        case .cannotCreateKey(code: _, description: _):
+        case .cannotCreateKey:
             return NSLocalizedString("jwt_cannot_create_key",
                                      tableName: "AuthFoundation",
                                      bundle: .authFoundation,

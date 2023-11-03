@@ -15,7 +15,7 @@ import Foundation
 /// Describes an individual key from an authorization server, which can be used to validate tokens or encrypt content.
 ///
 /// > Warning: At this time, this class only supports RSA Public Keys.
-public struct JWK: Codable, Equatable, Identifiable {
+public struct JWK: Codable, Equatable, Identifiable, Hashable {
     /// The type of this key.
     public let type: KeyType
     
@@ -71,6 +71,10 @@ public struct JWK: Codable, Equatable, Identifiable {
         case keyId = "kid"
         case usage = "use"
         case algorithm = "alg"
+        case rsaModulus = "n"
+        case rsaExponent = "e"
+
+        // Currently unused coding keys.
         case keyOperations = "key_ops"
         case certificateUrl = "x5u"
         case certificateChain = "x5c"
@@ -80,8 +84,6 @@ public struct JWK: Codable, Equatable, Identifiable {
         case eccCurve = "crv"
         case eccXCoordinate = "x"
         case eccYCoordinate = "y"
-        case rsaModulus = "n"
-        case rsaExponent = "e"
         case rsaFirstPrimeFactor = "p"
         case rsaSecondPrimeFactor = "q"
         case rsaFirstFactorCRT = "dp"
@@ -90,6 +92,13 @@ public struct JWK: Codable, Equatable, Identifiable {
         case rsaOtherPRimes = "oth"
         case rsaPrimeFactor = "r"
         case rsaFactorCoefficient = "t"
+        case ephemeralPublicKey = "epk"
+        case agreementPartyUInfo = "apu"
+        case agreementPartyVInfo = "apv"
+        case initializationVector = "iv"
+        case authenticationTag = "tag"
+        case pbes2SaltInput = "p2s"
+        case pbes2Count = "p2c"
     }
     
     static func resetToDefault() {

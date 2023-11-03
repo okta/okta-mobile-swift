@@ -1,0 +1,654 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 56;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		967D0A2D29EA1BE4002A5AD3 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 967D0A2C29EA1BE4002A5AD3 /* AppDelegate.swift */; };
+		967D0A2F29EA1BE4002A5AD3 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 967D0A2E29EA1BE4002A5AD3 /* SceneDelegate.swift */; };
+		967D0A3129EA1BE4002A5AD3 /* SignInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 967D0A3029EA1BE4002A5AD3 /* SignInViewController.swift */; };
+		967D0A3429EA1BE4002A5AD3 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 967D0A3229EA1BE4002A5AD3 /* Main.storyboard */; };
+		967D0A3629EA1BE6002A5AD3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 967D0A3529EA1BE6002A5AD3 /* Assets.xcassets */; };
+		967D0A3929EA1BE6002A5AD3 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 967D0A3729EA1BE6002A5AD3 /* LaunchScreen.storyboard */; };
+		967D0A4E29EA1BE6002A5AD3 /* DirectAuth1FASignInTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 967D0A4D29EA1BE6002A5AD3 /* DirectAuth1FASignInTests.swift */; };
+		967D0A6029EA1C4C002A5AD3 /* AuthFoundation in Frameworks */ = {isa = PBXBuildFile; productRef = 967D0A5F29EA1C4C002A5AD3 /* AuthFoundation */; };
+		967D0A6229EA1C4C002A5AD3 /* OktaDirectAuth in Frameworks */ = {isa = PBXBuildFile; productRef = 967D0A6129EA1C4C002A5AD3 /* OktaDirectAuth */; };
+		967D0A8929EA1CAC002A5AD3 /* XCTest+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 967D0A6529EA1CA8002A5AD3 /* XCTest+Extensions.swift */; };
+		967D0A8B29EA1CAC002A5AD3 /* Screen+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 967D0A6629EA1CA8002A5AD3 /* Screen+Extensions.swift */; };
+		967D0A8D29EA1CAC002A5AD3 /* Screen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 967D0A6729EA1CA8002A5AD3 /* Screen.swift */; };
+		967D0A8F29EA1CAD002A5AD3 /* ProfileScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 967D0A6929EA1CA8002A5AD3 /* ProfileScreen.swift */; };
+		967D0A9229EA1CAD002A5AD3 /* Keychain+Token.swift in Sources */ = {isa = PBXBuildFile; fileRef = 967D0A7829EA1CA8002A5AD3 /* Keychain+Token.swift */; };
+		967D0A9629EA1CAD002A5AD3 /* Profile.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 967D0A8629EA1CAB002A5AD3 /* Profile.storyboard */; };
+		967D0A9829EA1CAD002A5AD3 /* ProfileTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 967D0A7B29EA1CA9002A5AD3 /* ProfileTableViewController.swift */; };
+		967D0A9A29EA1CAD002A5AD3 /* TokenDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 967D0A8529EA1CAB002A5AD3 /* TokenDetailViewController.swift */; };
+		967D0ABF29EDB274002A5AD3 /* SignInView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 967D0ABE29EDB274002A5AD3 /* SignInView.swift */; };
+		967D0AC329EE1E03002A5AD3 /* UnconfiguredView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 967D0AC229EE1E03002A5AD3 /* UnconfiguredView.swift */; };
+		967D0AC529EEFAFC002A5AD3 /* Okta.plist in Resources */ = {isa = PBXBuildFile; fileRef = 967D0AC429EEFAC1002A5AD3 /* Okta.plist */; };
+		967D0AC829EF47EB002A5AD3 /* PrimaryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 967D0AC729EF47EB002A5AD3 /* PrimaryView.swift */; };
+		967D0ACA29EF47F3002A5AD3 /* SecondaryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 967D0AC929EF47F3002A5AD3 /* SecondaryView.swift */; };
+		967D0ACE29F89379002A5AD3 /* SignInScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 967D0ACC29F89231002A5AD3 /* SignInScreen.swift */; };
+		967D0AD129FAE193002A5AD3 /* SwiftOTP in Frameworks */ = {isa = PBXBuildFile; productRef = 967D0AD029FAE193002A5AD3 /* SwiftOTP */; };
+		967D0AD329FAE48E002A5AD3 /* DirectAuth2FASignInTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 967D0AD229FAE48E002A5AD3 /* DirectAuth2FASignInTests.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		967D0A4A29EA1BE6002A5AD3 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 967D0A2129EA1BE4002A5AD3 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 967D0A2829EA1BE4002A5AD3;
+			remoteInfo = DirectAuthSignIn;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		967D0A2929EA1BE4002A5AD3 /* DirectAuthSignIn (iOS).app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "DirectAuthSignIn (iOS).app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		967D0A2C29EA1BE4002A5AD3 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		967D0A2E29EA1BE4002A5AD3 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
+		967D0A3029EA1BE4002A5AD3 /* SignInViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInViewController.swift; sourceTree = "<group>"; };
+		967D0A3329EA1BE4002A5AD3 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		967D0A3529EA1BE6002A5AD3 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		967D0A3829EA1BE6002A5AD3 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		967D0A3A29EA1BE6002A5AD3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		967D0A4929EA1BE6002A5AD3 /* DirectAuthSignInUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = DirectAuthSignInUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		967D0A4D29EA1BE6002A5AD3 /* DirectAuth1FASignInTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DirectAuth1FASignInTests.swift; sourceTree = "<group>"; };
+		967D0A5C29EA1BFE002A5AD3 /* TestConfiguration.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; name = TestConfiguration.xcconfig; path = ../Shared/TestConfiguration.xcconfig; sourceTree = "<group>"; };
+		967D0A5D29EA1BFE002A5AD3 /* SampleCode.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; name = SampleCode.xcconfig; path = ../Shared/SampleCode.xcconfig; sourceTree = "<group>"; };
+		967D0A6529EA1CA8002A5AD3 /* XCTest+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "XCTest+Extensions.swift"; sourceTree = "<group>"; };
+		967D0A6629EA1CA8002A5AD3 /* Screen+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Screen+Extensions.swift"; sourceTree = "<group>"; };
+		967D0A6729EA1CA8002A5AD3 /* Screen.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Screen.swift; sourceTree = "<group>"; };
+		967D0A6929EA1CA8002A5AD3 /* ProfileScreen.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileScreen.swift; sourceTree = "<group>"; };
+		967D0A7829EA1CA8002A5AD3 /* Keychain+Token.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Keychain+Token.swift"; sourceTree = "<group>"; };
+		967D0A7B29EA1CA9002A5AD3 /* ProfileTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileTableViewController.swift; sourceTree = "<group>"; };
+		967D0A8529EA1CAB002A5AD3 /* TokenDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TokenDetailViewController.swift; sourceTree = "<group>"; };
+		967D0A8629EA1CAB002A5AD3 /* Profile.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Profile.storyboard; sourceTree = "<group>"; };
+		967D0ABE29EDB274002A5AD3 /* SignInView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInView.swift; sourceTree = "<group>"; };
+		967D0AC229EE1E03002A5AD3 /* UnconfiguredView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnconfiguredView.swift; sourceTree = "<group>"; };
+		967D0AC429EEFAC1002A5AD3 /* Okta.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = Okta.plist; path = ../../Shared/Okta.plist; sourceTree = "<group>"; };
+		967D0AC729EF47EB002A5AD3 /* PrimaryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrimaryView.swift; sourceTree = "<group>"; };
+		967D0AC929EF47F3002A5AD3 /* SecondaryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecondaryView.swift; sourceTree = "<group>"; };
+		967D0ACC29F89231002A5AD3 /* SignInScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInScreen.swift; sourceTree = "<group>"; };
+		967D0AD229FAE48E002A5AD3 /* DirectAuth2FASignInTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DirectAuth2FASignInTests.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		967D0A2629EA1BE4002A5AD3 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				967D0A6229EA1C4C002A5AD3 /* OktaDirectAuth in Frameworks */,
+				967D0A6029EA1C4C002A5AD3 /* AuthFoundation in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		967D0A4629EA1BE6002A5AD3 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				967D0AD129FAE193002A5AD3 /* SwiftOTP in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		967D0A2029EA1BE4002A5AD3 = {
+			isa = PBXGroup;
+			children = (
+				967D0A2B29EA1BE4002A5AD3 /* DirectAuthSignIn */,
+				967D0A4C29EA1BE6002A5AD3 /* UITests */,
+				967D0A6329EA1CA8002A5AD3 /* Common */,
+				967D0A5D29EA1BFE002A5AD3 /* SampleCode.xcconfig */,
+				967D0A5C29EA1BFE002A5AD3 /* TestConfiguration.xcconfig */,
+				967D0A2A29EA1BE4002A5AD3 /* Products */,
+				967D0A5E29EA1C4C002A5AD3 /* Frameworks */,
+			);
+			sourceTree = "<group>";
+		};
+		967D0A2A29EA1BE4002A5AD3 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				967D0A2929EA1BE4002A5AD3 /* DirectAuthSignIn (iOS).app */,
+				967D0A4929EA1BE6002A5AD3 /* DirectAuthSignInUITests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		967D0A2B29EA1BE4002A5AD3 /* DirectAuthSignIn */ = {
+			isa = PBXGroup;
+			children = (
+				967D0A2C29EA1BE4002A5AD3 /* AppDelegate.swift */,
+				967D0A2E29EA1BE4002A5AD3 /* SceneDelegate.swift */,
+				967D0A3029EA1BE4002A5AD3 /* SignInViewController.swift */,
+				967D0ABE29EDB274002A5AD3 /* SignInView.swift */,
+				967D0AC729EF47EB002A5AD3 /* PrimaryView.swift */,
+				967D0AC929EF47F3002A5AD3 /* SecondaryView.swift */,
+				967D0AC229EE1E03002A5AD3 /* UnconfiguredView.swift */,
+				967D0A3229EA1BE4002A5AD3 /* Main.storyboard */,
+				967D0A3529EA1BE6002A5AD3 /* Assets.xcassets */,
+				967D0A3729EA1BE6002A5AD3 /* LaunchScreen.storyboard */,
+				967D0A3A29EA1BE6002A5AD3 /* Info.plist */,
+				967D0AC429EEFAC1002A5AD3 /* Okta.plist */,
+			);
+			path = DirectAuthSignIn;
+			sourceTree = "<group>";
+		};
+		967D0A4C29EA1BE6002A5AD3 /* UITests */ = {
+			isa = PBXGroup;
+			children = (
+				967D0ACB29F89201002A5AD3 /* Pages */,
+				967D0A4D29EA1BE6002A5AD3 /* DirectAuth1FASignInTests.swift */,
+				967D0AD229FAE48E002A5AD3 /* DirectAuth2FASignInTests.swift */,
+			);
+			path = UITests;
+			sourceTree = "<group>";
+		};
+		967D0A5E29EA1C4C002A5AD3 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		967D0A6329EA1CA8002A5AD3 /* Common */ = {
+			isa = PBXGroup;
+			children = (
+				967D0A6429EA1CA8002A5AD3 /* Testing */,
+				967D0A7729EA1CA8002A5AD3 /* Keychain */,
+				967D0A7929EA1CA9002A5AD3 /* ViewControllers */,
+			);
+			name = Common;
+			path = ../Shared/Common;
+			sourceTree = "<group>";
+		};
+		967D0A6429EA1CA8002A5AD3 /* Testing */ = {
+			isa = PBXGroup;
+			children = (
+				967D0A6529EA1CA8002A5AD3 /* XCTest+Extensions.swift */,
+				967D0A6629EA1CA8002A5AD3 /* Screen+Extensions.swift */,
+				967D0A6729EA1CA8002A5AD3 /* Screen.swift */,
+				967D0A6829EA1CA8002A5AD3 /* Pages */,
+			);
+			path = Testing;
+			sourceTree = "<group>";
+		};
+		967D0A6829EA1CA8002A5AD3 /* Pages */ = {
+			isa = PBXGroup;
+			children = (
+				967D0A6929EA1CA8002A5AD3 /* ProfileScreen.swift */,
+			);
+			path = Pages;
+			sourceTree = "<group>";
+		};
+		967D0A7729EA1CA8002A5AD3 /* Keychain */ = {
+			isa = PBXGroup;
+			children = (
+				967D0A7829EA1CA8002A5AD3 /* Keychain+Token.swift */,
+			);
+			path = Keychain;
+			sourceTree = "<group>";
+		};
+		967D0A7929EA1CA9002A5AD3 /* ViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				967D0A8629EA1CAB002A5AD3 /* Profile.storyboard */,
+				967D0A7B29EA1CA9002A5AD3 /* ProfileTableViewController.swift */,
+				967D0A8529EA1CAB002A5AD3 /* TokenDetailViewController.swift */,
+			);
+			path = ViewControllers;
+			sourceTree = "<group>";
+		};
+		967D0ACB29F89201002A5AD3 /* Pages */ = {
+			isa = PBXGroup;
+			children = (
+				967D0ACC29F89231002A5AD3 /* SignInScreen.swift */,
+			);
+			path = Pages;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		967D0A2829EA1BE4002A5AD3 /* DirectAuthSignIn (iOS) */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 967D0A5329EA1BE6002A5AD3 /* Build configuration list for PBXNativeTarget "DirectAuthSignIn (iOS)" */;
+			buildPhases = (
+				967D0A2529EA1BE4002A5AD3 /* Sources */,
+				967D0A2629EA1BE4002A5AD3 /* Frameworks */,
+				967D0A2729EA1BE4002A5AD3 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "DirectAuthSignIn (iOS)";
+			packageProductDependencies = (
+				967D0A5F29EA1C4C002A5AD3 /* AuthFoundation */,
+				967D0A6129EA1C4C002A5AD3 /* OktaDirectAuth */,
+			);
+			productName = DirectAuthSignIn;
+			productReference = 967D0A2929EA1BE4002A5AD3 /* DirectAuthSignIn (iOS).app */;
+			productType = "com.apple.product-type.application";
+		};
+		967D0A4829EA1BE6002A5AD3 /* DirectAuthSignInUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 967D0A5929EA1BE6002A5AD3 /* Build configuration list for PBXNativeTarget "DirectAuthSignInUITests" */;
+			buildPhases = (
+				967D0A4529EA1BE6002A5AD3 /* Sources */,
+				967D0A4629EA1BE6002A5AD3 /* Frameworks */,
+				967D0A4729EA1BE6002A5AD3 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				967D0A4B29EA1BE6002A5AD3 /* PBXTargetDependency */,
+			);
+			name = DirectAuthSignInUITests;
+			packageProductDependencies = (
+				967D0AD029FAE193002A5AD3 /* SwiftOTP */,
+			);
+			productName = DirectAuthSignInUITests;
+			productReference = 967D0A4929EA1BE6002A5AD3 /* DirectAuthSignInUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		967D0A2129EA1BE4002A5AD3 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = 1;
+				LastSwiftUpdateCheck = 1420;
+				LastUpgradeCheck = 1420;
+				TargetAttributes = {
+					967D0A2829EA1BE4002A5AD3 = {
+						CreatedOnToolsVersion = 14.2;
+					};
+					967D0A4829EA1BE6002A5AD3 = {
+						CreatedOnToolsVersion = 14.2;
+						TestTargetID = 967D0A2829EA1BE4002A5AD3;
+					};
+				};
+			};
+			buildConfigurationList = 967D0A2429EA1BE4002A5AD3 /* Build configuration list for PBXProject "DirectAuthSignIn" */;
+			compatibilityVersion = "Xcode 14.0";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 967D0A2029EA1BE4002A5AD3;
+			packageReferences = (
+				967D0ACF29FAE193002A5AD3 /* XCRemoteSwiftPackageReference "SwiftOTP" */,
+			);
+			productRefGroup = 967D0A2A29EA1BE4002A5AD3 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				967D0A2829EA1BE4002A5AD3 /* DirectAuthSignIn (iOS) */,
+				967D0A4829EA1BE6002A5AD3 /* DirectAuthSignInUITests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		967D0A2729EA1BE4002A5AD3 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				967D0AC529EEFAFC002A5AD3 /* Okta.plist in Resources */,
+				967D0A3929EA1BE6002A5AD3 /* LaunchScreen.storyboard in Resources */,
+				967D0A3629EA1BE6002A5AD3 /* Assets.xcassets in Resources */,
+				967D0A9629EA1CAD002A5AD3 /* Profile.storyboard in Resources */,
+				967D0A3429EA1BE4002A5AD3 /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		967D0A4729EA1BE6002A5AD3 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		967D0A2529EA1BE4002A5AD3 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				967D0A9A29EA1CAD002A5AD3 /* TokenDetailViewController.swift in Sources */,
+				967D0ABF29EDB274002A5AD3 /* SignInView.swift in Sources */,
+				967D0A3129EA1BE4002A5AD3 /* SignInViewController.swift in Sources */,
+				967D0AC829EF47EB002A5AD3 /* PrimaryView.swift in Sources */,
+				967D0A2D29EA1BE4002A5AD3 /* AppDelegate.swift in Sources */,
+				967D0A2F29EA1BE4002A5AD3 /* SceneDelegate.swift in Sources */,
+				967D0AC329EE1E03002A5AD3 /* UnconfiguredView.swift in Sources */,
+				967D0ACA29EF47F3002A5AD3 /* SecondaryView.swift in Sources */,
+				967D0A9829EA1CAD002A5AD3 /* ProfileTableViewController.swift in Sources */,
+				967D0A9229EA1CAD002A5AD3 /* Keychain+Token.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		967D0A4529EA1BE6002A5AD3 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				967D0A8D29EA1CAC002A5AD3 /* Screen.swift in Sources */,
+				967D0A8F29EA1CAD002A5AD3 /* ProfileScreen.swift in Sources */,
+				967D0A4E29EA1BE6002A5AD3 /* DirectAuth1FASignInTests.swift in Sources */,
+				967D0A8B29EA1CAC002A5AD3 /* Screen+Extensions.swift in Sources */,
+				967D0AD329FAE48E002A5AD3 /* DirectAuth2FASignInTests.swift in Sources */,
+				967D0A8929EA1CAC002A5AD3 /* XCTest+Extensions.swift in Sources */,
+				967D0ACE29F89379002A5AD3 /* SignInScreen.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		967D0A4B29EA1BE6002A5AD3 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 967D0A2829EA1BE4002A5AD3 /* DirectAuthSignIn (iOS) */;
+			targetProxy = 967D0A4A29EA1BE6002A5AD3 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		967D0A3229EA1BE4002A5AD3 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				967D0A3329EA1BE4002A5AD3 /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		967D0A3729EA1BE6002A5AD3 /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				967D0A3829EA1BE6002A5AD3 /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		967D0A5129EA1BE6002A5AD3 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 967D0A5D29EA1BFE002A5AD3 /* SampleCode.xcconfig */;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.2;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		967D0A5229EA1BE6002A5AD3 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 967D0A5D29EA1BFE002A5AD3 /* SampleCode.xcconfig */;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.2;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		967D0A5429EA1BE6002A5AD3 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 967D0A5C29EA1BFE002A5AD3 /* TestConfiguration.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = DirectAuthSignIn/Info.plist;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
+				INFOPLIST_KEY_UIMainStoryboardFile = Main;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.example.okta-sample.DeviceAuthSignIn${SAMPLE_CODE_DISAMBIGUATOR}";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		967D0A5529EA1BE6002A5AD3 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 967D0A5C29EA1BFE002A5AD3 /* TestConfiguration.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = DirectAuthSignIn/Info.plist;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
+				INFOPLIST_KEY_UIMainStoryboardFile = Main;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.example.okta-sample.DeviceAuthSignIn${SAMPLE_CODE_DISAMBIGUATOR}";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		967D0A5A29EA1BE6002A5AD3 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 967D0A5C29EA1BFE002A5AD3 /* TestConfiguration.xcconfig */;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.example.okta-sample.DeviceAuthSignInUITests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = "DirectAuthSignIn (iOS)";
+			};
+			name = Debug;
+		};
+		967D0A5B29EA1BE6002A5AD3 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 967D0A5C29EA1BFE002A5AD3 /* TestConfiguration.xcconfig */;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.example.okta-sample.DeviceAuthSignInUITests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = "DirectAuthSignIn (iOS)";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		967D0A2429EA1BE4002A5AD3 /* Build configuration list for PBXProject "DirectAuthSignIn" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				967D0A5129EA1BE6002A5AD3 /* Debug */,
+				967D0A5229EA1BE6002A5AD3 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		967D0A5329EA1BE6002A5AD3 /* Build configuration list for PBXNativeTarget "DirectAuthSignIn (iOS)" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				967D0A5429EA1BE6002A5AD3 /* Debug */,
+				967D0A5529EA1BE6002A5AD3 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		967D0A5929EA1BE6002A5AD3 /* Build configuration list for PBXNativeTarget "DirectAuthSignInUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				967D0A5A29EA1BE6002A5AD3 /* Debug */,
+				967D0A5B29EA1BE6002A5AD3 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		967D0ACF29FAE193002A5AD3 /* XCRemoteSwiftPackageReference "SwiftOTP" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/lachlanbell/SwiftOTP";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 3.0.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		967D0A5F29EA1C4C002A5AD3 /* AuthFoundation */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = AuthFoundation;
+		};
+		967D0A6129EA1C4C002A5AD3 /* OktaDirectAuth */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = OktaDirectAuth;
+		};
+		967D0AD029FAE193002A5AD3 /* SwiftOTP */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 967D0ACF29FAE193002A5AD3 /* XCRemoteSwiftPackageReference "SwiftOTP" */;
+			productName = SwiftOTP;
+		};
+/* End XCSwiftPackageProductDependency section */
+	};
+	rootObject = 967D0A2129EA1BE4002A5AD3 /* Project object */;
+}

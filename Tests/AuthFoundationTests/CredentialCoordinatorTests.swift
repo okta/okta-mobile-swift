@@ -82,11 +82,14 @@ final class UserCoordinatorTests: XCTestCase {
     }
     
     func testNotifications() throws {
+        let oldCredential = coordinator.default
+        
         let recorder = NotificationRecorder(observing: [.defaultCredentialChanged])
         
         let credential = try coordinator.store(token: token, tags: [:], security: [])
         XCTAssertEqual(recorder.notifications.count, 1)
         XCTAssertEqual(recorder.notifications.first?.object as? Credential, credential)
+        XCTAssertNotEqual(oldCredential, credential)
         
         recorder.reset()
         coordinator.default = nil

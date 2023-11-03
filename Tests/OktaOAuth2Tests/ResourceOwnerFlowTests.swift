@@ -40,7 +40,6 @@ class AuthenticationDelegateRecorder: AuthenticationDelegate {
 
 final class ResourceOwnerFlowSuccessTests: XCTestCase {
     let issuer = URL(string: "https://example.com")!
-    let clientMock = OAuth2ClientMock()
     let urlSession = URLSessionMock()
     var client: OAuth2Client!
     var flow: ResourceOwnerFlow!
@@ -119,7 +118,7 @@ final class ResourceOwnerFlowSuccessTests: XCTestCase {
     }
 
     #if swift(>=5.5.1)
-    @available(iOS 15.0, tvOS 15.0, macOS 12.0, watchOS 8, *)
+    @available(iOS 13.0, tvOS 13.0, macOS 10.15, watchOS 6, *)
     func testWithAsync() async throws {
         // Ensure the initial state
         XCTAssertFalse(flow.isAuthenticating)

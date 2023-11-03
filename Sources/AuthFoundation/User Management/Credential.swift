@@ -141,7 +141,6 @@ public final class Credential: Equatable, OAuth2ClientDelegate {
     }
     
     /// The token this credential represents.
-    @TimeSensitive<Token>
     public private(set) var token: Token {
         didSet {
             observeToken(token)
@@ -151,7 +150,6 @@ public final class Credential: Equatable, OAuth2ClientDelegate {
     /// The ``UserInfo`` describing this user.
     ///
     /// This value may be nil if the ``userInfo()`` or ``userInfo(completion:)`` methods haven't yet been called.
-    @TimeSensitive<UserInfo?>
     public private(set) var userInfo: UserInfo?
     
     /// Indicates this credential's token should automatically be refreshed prior to its expiration.
@@ -185,14 +183,14 @@ public final class Credential: Equatable, OAuth2ClientDelegate {
     
     /// Attempt to refresh the token.
     /// - Parameter completion: Completion block invoked when a result is returned.
-    public func refresh(clientSecret: String, resource: String, completion: ((Result<Void, OAuth2Error>) -> Void)? = nil) {
+    public func refresh(clientSecret: String, resource: String, completion: @escaping ((Result<Void, OAuth2Error>) -> Void)) {
         oauth2.refresh(token, clientSecret: clientSecret, resource: resource) { result in
             switch result {
             case .success(let token):
                 self.token = token
-                completion?(.success(()))
+                completion(.success(()))
             case .failure(let error):
-                completion?(.failure(error))
+                completion(.failure(error))
             }
         }
     }
@@ -200,14 +198,14 @@ public final class Credential: Equatable, OAuth2ClientDelegate {
     /// Attempt to refresh the token if it either has expired, or is about to expire.
     /// - Parameter completion: Completion block invoked to indicate the status of the token, if the refresh was successful or if an error occurred.
     public func refreshIfNeeded(graceInterval: TimeInterval = Credential.refreshGraceInterval,
-                                completion: ((Result<Void, OAuth2Error>) -> Void)? = nil)
+                                completion: @escaping (Result<Void, OAuth2Error>) -> Void)
     {
         if let expiresAt = token.expiresAt,
             expiresAt.timeIntervalSinceNow <= graceInterval
         {
             refresh(clientSecret: "", resource: "", completion: completion)
         } else {
-            completion?(.success(()))
+            completion(.success(()))
         }
     }
     
@@ -227,15 +225,13 @@ public final class Credential: Equatable, OAuth2ClientDelegate {
     /// - Parameters:
     ///   - type: The token type to revoke, defaulting to `.all`.
     ///   - completion: Completion block called when the operation completes.
-    public func revoke(type: Token.RevokeType = .all, completion: ((Result<Void, OAuth2Error>) -> Void)? = nil) {
-        let shouldRemove = (type == .all ||
-                            (type == .refreshToken && token.refreshToken != nil) ||
-                            type == .accessToken)
+    public func revoke(type: Token.RevokeType = .all, completion: ((Result<Void, OAuth2Error>) -> Void)?) {
+        let shouldRemove = shouldRemove(for: type)
         
         oauth2.revoke(token, type: type) { result in
             defer { completion?(result) }
             
-            guard case .success(_) = result else { return }
+            guard case .success = result else { return }
             
             // Remove the credential from storage if the access token was revoked
             if shouldRemove {
@@ -254,9 +250,9 @@ public final class Credential: Equatable, OAuth2ClientDelegate {
     
     /// Introspect the token to check it for validity, and read the additional information associated with it.
     /// - Parameter completion: Completion block invoked when a result is returned.
-    public func introspect(_ type: Token.Kind, completion: ((Result<TokenInfo, OAuth2Error>) -> Void)? = nil) {
+    public func introspect(_ type: Token.Kind, completion: @escaping (Result<TokenInfo, OAuth2Error>) -> Void) {
         oauth2.introspect(token: token, type: type) { result in
-            completion?(result)
+            completion(result)
         }
     }
 
@@ -264,9 +260,9 @@ public final class Credential: Equatable, OAuth2ClientDelegate {
     ///
     /// In addition to passing the result to the provided completion block, a successful request will result in the ``Credential/userInfo`` property being set with the new value for later use.
     /// - Parameter completion: Optional completion block to be invoked when a result is returned.
-    public func userInfo(completion: ((Result<UserInfo, OAuth2Error>) -> Void)? = nil) {
+    public func userInfo(completion: @escaping (Result<UserInfo, OAuth2Error>) -> Void) {
         oauth2.userInfo(token: token) { result in
-            defer { completion?(result) }
+            defer { completion(result) }
             
             if case let .success(userInfo) = result {
                 self.userInfo = userInfo
@@ -319,7 +315,7 @@ public final class Credential: Equatable, OAuth2ClientDelegate {
     
     // MARK: OAuth2ClientDelegate
     public func oauth(client: OAuth2Client, didRefresh token: Token, replacedWith newToken: Token?) {
-        guard token == self.token,
+        guard token.id == self.token.id,
               let newToken = newToken
         else {
             return
@@ -329,8 +325,8 @@ public final class Credential: Equatable, OAuth2ClientDelegate {
     }
     
     // MARK: Private properties
-    fileprivate static let coordinator = CredentialCoordinatorImpl()
-    internal weak var coordinator: CredentialCoordinator?
+    static let coordinator = CredentialCoordinatorImpl()
+    weak var coordinator: CredentialCoordinator?
 
     private lazy var _metadata: Token.Metadata = {
         if let metadata = try? coordinator?.tokenStorage.metadata(for: token.id) {

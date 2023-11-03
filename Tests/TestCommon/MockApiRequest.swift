@@ -15,9 +15,14 @@ import Foundation
 
 struct MockApiRequest: APIRequest {
     var url: URL
+    var cachePolicy: URLRequest.CachePolicy
+
     typealias ResponseType = Token
 
-    init(url: URL) {
+    init(url: URL,
+         cachePolicy: URLRequest.CachePolicy = .reloadIgnoringLocalAndRemoteCacheData)
+    {
         self.url = url
+        self.cachePolicy = cachePolicy
     }
 }

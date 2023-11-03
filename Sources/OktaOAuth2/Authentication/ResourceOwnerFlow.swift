@@ -18,7 +18,8 @@ import AuthFoundation
 /// This simple authentication flow permits a suer to authenticate using a simple username and password. As such, the configuration is straightforward.
 ///
 /// > Important: Resource Owner authentication does not support MFA or other more secure authentication models, and is not recommended for production applications.
-public final class ResourceOwnerFlow: AuthenticationFlow {
+@available(*, deprecated, message: "Please use the DirectAuth SDK's DirectAuthenticationFlow class instead")
+public class ResourceOwnerFlow: AuthenticationFlow {
     /// The OAuth2Client this authentication flow will use.
     public let client: OAuth2Client
     
@@ -83,7 +84,7 @@ public final class ResourceOwnerFlow: AuthenticationFlow {
     ///   - username: Username
     ///   - password: Password
     ///   - completion: Completion invoked when a response is received.
-    public func start(username: String, password: String, completion: ((Result<Token, APIClientError>) -> Void)? = nil) {
+    public func start(username: String, password: String, completion: @escaping (Result<Token, OAuth2Error>) -> Void) {
         isAuthenticating = true
 
         client.openIdConfiguration { result in
@@ -100,15 +101,16 @@ public final class ResourceOwnerFlow: AuthenticationFlow {
                     switch result {
                     case .failure(let error):
                         self.delegateCollection.invoke { $0.authentication(flow: self, received: .network(error: error)) }
-                        completion?(.failure(error))
+                        completion(.failure(.network(error: error)))
                     case .success(let response):
                         self.delegateCollection.invoke { $0.authentication(flow: self, received: response.result) }
-                        completion?(.success(response.result))
+                        completion(.success(response.result))
                     }
                 }
 
             case .failure(let error):
                 self.delegateCollection.invoke { $0.authentication(flow: self, received: error) }
+                completion(.failure(error))
             }
         }
     }
@@ -123,7 +125,7 @@ public final class ResourceOwnerFlow: AuthenticationFlow {
 }
 
 #if swift(>=5.5.1)
-@available(iOS 15.0, tvOS 15.0, macOS 12.0, watchOS 8, *)
+@available(iOS 13.0, tvOS 13.0, macOS 10.15, watchOS 6, *)
 extension ResourceOwnerFlow {
     /// Asynchronously authenticates with the Resource Owner flow.
     ///
@@ -137,7 +139,6 @@ extension ResourceOwnerFlow {
     }
 }
 #endif
-
 
 extension ResourceOwnerFlow: UsesDelegateCollection {
     public typealias Delegate = AuthenticationDelegate

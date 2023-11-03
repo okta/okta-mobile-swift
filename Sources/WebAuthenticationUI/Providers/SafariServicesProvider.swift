@@ -43,13 +43,13 @@ final class SafariServicesProvider: NSObject, WebAuthenticationProvider {
         self.logoutFlow?.remove(delegate: self)
     }
     
-    func start(context: AuthorizationCodeFlow.Context?) {
-        loginFlow.start(with: context)
+    func start(context: AuthorizationCodeFlow.Context?, additionalParameters: [String: String]?) {
+        loginFlow.start(with: context, additionalParameters: additionalParameters) { _ in }
     }
     
-    func logout(context: SessionLogoutFlow.Context) {
+    func logout(context: SessionLogoutFlow.Context, additionalParameters: [String: String]?) {
         // LogoutFlow invokes delegate, so an error is propagated from delegate method
-        try? logoutFlow?.start(with: context)
+        try? logoutFlow?.start(with: context, additionalParameters: additionalParameters) { _ in }
     }
     
     func authenticate(using url: URL) {
@@ -87,6 +87,10 @@ final class SafariServicesProvider: NSObject, WebAuthenticationProvider {
                nsError.code == SFAuthenticationError.canceledLogin.rawValue
             {
                 received(error: .userCancelledLogin)
+            } else if let url = url,
+                      let serverError = try? url.oauth2ServerError(redirectUri: loginFlow.redirectUri)
+            {
+                received(error: .serverError(serverError))
             } else {
                 received(error: .authenticationProviderError(error))
             }
@@ -100,7 +104,7 @@ final class SafariServicesProvider: NSObject, WebAuthenticationProvider {
         }
         
         do {
-            try loginFlow.resume(with: url)
+            try loginFlow.resume(with: url) { _ in }
         } catch {
             received(error: .authenticationProviderError(error))
         }
@@ -115,6 +119,10 @@ final class SafariServicesProvider: NSObject, WebAuthenticationProvider {
                nsError.code == SFAuthenticationError.canceledLogin.rawValue
             {
                 received(logoutError: .userCancelledLogin)
+            } else if let url = url,
+                      let serverError = try? url.oauth2ServerError(redirectUri: logoutFlow?.logoutRedirectUri)
+            {
+                received(logoutError: .serverError(serverError))
             } else {
                 received(logoutError: .authenticationProviderError(error))
             }

@@ -16,7 +16,7 @@ import AuthFoundation
 /// An authentication flow class that exchanges a Session Token for access tokens.
 ///
 /// This flow is typically used in conjunction with the [classic Okta native authentication library](https://github.com/okta/okta-auth-swift). For native authentication using the Okta Identity Engine (OIE), please use the [Okta IDX library](https://github.com/okta/okta-idx-swift).
-public final class SessionTokenFlow: AuthenticationFlow {
+public class SessionTokenFlow: AuthenticationFlow {
     /// The OAuth2Client this authentication flow will use.
     public let client: OAuth2Client
     
@@ -103,7 +103,7 @@ public final class SessionTokenFlow: AuthenticationFlow {
     ///   - completion: Completion invoked when a response is received.
     public func start(with sessionToken: String,
                       context: AuthorizationCodeFlow.Context? = nil,
-                      completion: ((Result<Token, OAuth2Error>) -> Void)? = nil)
+                      completion: @escaping (Result<Token, OAuth2Error>) -> Void)
     {
         isAuthenticating = true
 
@@ -117,7 +117,7 @@ public final class SessionTokenFlow: AuthenticationFlow {
             switch result {
             case .failure(let error):
                 self.delegateCollection.invoke { $0.authentication(flow: self, received: error) }
-                completion?(.failure(error))
+                completion(.failure(error))
             case .success(let response):
                 self.complete(using: flow, url: response) { result in
                     self.reset()
@@ -125,10 +125,10 @@ public final class SessionTokenFlow: AuthenticationFlow {
                     switch result {
                     case .failure(let error):
                         self.delegateCollection.invoke { $0.authentication(flow: self, received: error) }
-                        completion?(.failure(error))
+                        completion(.failure(error))
                     case .success(let response):
                         self.delegateCollection.invoke { $0.authentication(flow: self, received: response) }
-                        completion?(.success(response))
+                        completion(.success(response))
                     }
                 }
             }
@@ -175,7 +175,7 @@ public final class SessionTokenFlow: AuthenticationFlow {
 }
 
 #if swift(>=5.5.1)
-@available(iOS 15.0, tvOS 15.0, macOS 12.0, watchOS 8, *)
+@available(iOS 13.0, tvOS 13.0, macOS 10.15, watchOS 6, *)
 extension SessionTokenFlow {
     /// Asynchronously authenticates with the given session token.
     public func start(with sessionToken: String,
@@ -213,7 +213,7 @@ final class SessionTokenFlowExchange: NSObject, SessionTokenFlowURLExchange, URL
     func follow(url: URL, completion: @escaping (Result<URL, OAuth2Error>) -> Void) {
         self.completion = completion
 
-        activeTask = session.dataTask(with: URLRequest(url: url)) { [weak self] data, response, error in
+        activeTask = session.dataTask(with: URLRequest(url: url)) { [weak self] _, _, error in
             if let error = error {
                 self?.finish(with: .error(error))
             } else {

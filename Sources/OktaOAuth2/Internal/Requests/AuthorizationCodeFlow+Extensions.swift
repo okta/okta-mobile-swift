@@ -14,19 +14,33 @@ import Foundation
 import AuthFoundation
 
 extension AuthorizationCodeFlow {
-    func authenticationUrlComponents(from authenticationUrl: URL, using context: AuthorizationCodeFlow.Context) throws -> URLComponents {
+    func authenticationUrlComponents(from authenticationUrl: URL,
+                                     using context: AuthorizationCodeFlow.Context,
+                                     additionalParameters: [String: String]?) throws -> URLComponents
+    {
         guard var components = URLComponents(url: authenticationUrl, resolvingAgainstBaseURL: true)
         else {
             throw OAuth2Error.invalidUrl
         }
         
-        components.percentEncodedQuery = queryParameters(using: context).percentQueryEncoded
+        components.percentEncodedQuery = queryParameters(using: context,
+                                                         additionalParameters: additionalParameters).percentQueryEncoded
 
         return components
     }
     
-    private func queryParameters(using context: AuthorizationCodeFlow.Context) -> [String: String] {
-        var parameters = additionalParameters ?? [:]
+    private func queryParameters(using context: AuthorizationCodeFlow.Context,
+                                 additionalParameters: [String: String]?) -> [String: String]
+    {
+        var parameters = [String: String]()
+        if let additional = self.additionalParameters {
+            parameters.merge(additional, uniquingKeysWith: { $1 })
+        }
+        
+        if let additional = additionalParameters {
+            parameters.merge(additional, uniquingKeysWith: { $1 })
+        }
+        
         parameters["client_id"] = client.configuration.clientId
         parameters["scope"] = client.configuration.scopes
         parameters["redirect_uri"] = redirectUri.absoluteString
@@ -42,8 +56,13 @@ extension AuthorizationCodeFlow {
         return parameters
     }
 
-    func createAuthenticationURL(from authenticationUrl: URL, using context: AuthorizationCodeFlow.Context) throws -> URL {
-        var components = try authenticationUrlComponents(from: authenticationUrl, using: context)
+    func createAuthenticationURL(from authenticationUrl: URL,
+                                 using context: AuthorizationCodeFlow.Context,
+                                 additionalParameters: [String: String]?) throws -> URL
+    {
+        var components = try authenticationUrlComponents(from: authenticationUrl,
+                                                         using: context,
+                                                         additionalParameters: additionalParameters)
         delegateCollection.invoke { $0.authentication(flow: self, customizeUrl: &components) }
 
         guard let url = components.url else {

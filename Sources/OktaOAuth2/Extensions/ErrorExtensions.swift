@@ -12,6 +12,25 @@
 
 import Foundation
 
+extension AuthorizationCodeFlow.RedirectError {
+    public static func == (lhs: Self, rhs: Self) -> Bool {
+        switch (lhs, rhs) {
+        case (.invalidRedirectUrl, .invalidRedirectUrl): return true
+        case (.missingQueryArguments, .missingQueryArguments): return true
+        case (.missingAuthorizationCode, .missingAuthorizationCode): return true
+            
+        case (.unexpectedScheme(let lhsValue), .unexpectedScheme(let rhsValue)):
+            return lhsValue == rhsValue
+            
+        case (.invalidState(let lhsValue), .invalidState(let rhsValue)):
+            return lhsValue == rhsValue
+            
+        default:
+            return false
+        }
+    }
+}
+    
 extension AuthenticationError: LocalizedError {
     public var errorDescription: String? {
         switch self {
@@ -33,7 +52,7 @@ extension AuthorizationCodeFlow.RedirectError: LocalizedError {
                                      bundle: .oktaOAuth2,
                                      comment: "Invalid URL")
 
-        case .unexpectedScheme(_):
+        case .unexpectedScheme:
             return NSLocalizedString("unexpected_scheme_description",
                                      tableName: "OktaOAuth2",
                                      bundle: .oktaOAuth2,
@@ -45,7 +64,7 @@ extension AuthorizationCodeFlow.RedirectError: LocalizedError {
                                      bundle: .oktaOAuth2,
                                      comment: "Invalid URL")
         
-        case .invalidState(_):
+        case .invalidState:
             return NSLocalizedString("invalid_state_description",
                                      tableName: "OktaOAuth2",
                                      bundle: .oktaOAuth2,

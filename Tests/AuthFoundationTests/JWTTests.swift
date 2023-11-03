@@ -46,6 +46,31 @@ final class JWTTests: XCTestCase {
         ])
         
         XCTAssertEqual(token.customClaims, [])
+        XCTAssertEqual(token.payload.reduce(into: [String:String](), { partialResult, item in
+            guard let value = item.value as? String else { return }
+            partialResult[item.key] = value
+        }), [
+            "jti": "AT.J6jlMcZyNy1Vi6rzkLB0lq2c0lHqEJ8pHct4uzilak0.oar9eazyLjAm6mwZG4w4",
+            "aud": "api://default",
+            "uid": "00u2q5p3AAAOXoSc04w5",
+            "cid": "0oa3en4fAAA3ddc204w5",
+            "sub": "arthur.dent@example.com",
+            "iss": "https://example.com/oauth2/default"
+        ])
+        
+        XCTAssertEqual(token.payload.reduce(into: [String:Array<String>](), { partialResult, item in
+            guard let value = item.value as? Array<String> else { return }
+            partialResult[item.key] = value
+        }), [
+            "scp": ["offline_access", "profile", "openid"]
+        ])
+
+        XCTAssertEqual(token.payload.reduce(into: [String:Bool](), { partialResult, item in
+            guard let value = item.value as? Bool else { return }
+            partialResult[item.key] = value
+        }), [
+            "ver": true
+        ])
     }
 
     func testIdToken() throws {

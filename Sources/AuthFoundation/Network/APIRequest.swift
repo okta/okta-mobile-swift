@@ -69,7 +69,7 @@ public protocol APIRequest {
     ///   - client: ``APIClient`` the request is being sent to.
     ///   - context: Optional context to use when parsing the response.
     /// - Returns: ``APIResponse`` result of the request.
-    @available(iOS 15.0, tvOS 15.0, macOS 12.0, watchOS 8, *)
+    @available(iOS 13.0, tvOS 13.0, macOS 10.15, watchOS 6, *)
     func send(to client: APIClient, parsing context: APIParsingContext?) async throws -> APIResponse<ResponseType>
     #endif
 }
@@ -136,6 +136,13 @@ public protocol APIParsingContext {
     /// Optional coding user info to use when parsing ``APIRequest`` responses.
     var codingUserInfo: [CodingUserInfoKey: Any]? { get }
     
+    /// Enables the response from an ``APIRequest`` to be customized.
+    ///
+    /// The default implementation utilizes the response's status code to report the appropriate result.
+    /// - Parameter response: The response returned from the server.
+    /// - Returns: The result that should be inferred from this response.
+    func resultType(from response: HTTPURLResponse) -> APIResponseResult
+    
     /// Generates an error response from an ``APIRequest`` result when an HTTP error occurs.
     /// - Parameter data: Raw data returned from the HTTP response.
     /// - Returns: Optional error option described within the supplied data.
@@ -144,6 +151,9 @@ public protocol APIParsingContext {
 
 extension APIParsingContext {
     public func error(from data: Data) -> Error? { nil }
+    public func resultType(from response: HTTPURLResponse) -> APIResponseResult {
+        APIResponseResult(statusCode: response.statusCode)
+    }
 }
 
 extension APIRequest where Self: APIRequestBody {
@@ -233,7 +243,7 @@ extension APIRequest {
     }
     
     #if swift(>=5.5.1)
-    @available(iOS 15.0, tvOS 15.0, macOS 12.0, watchOS 8, *)
+    @available(iOS 13.0, tvOS 13.0, macOS 10.15, watchOS 6, *)
     public func send(to client: APIClient, parsing context: APIParsingContext? = nil) async throws -> APIResponse<ResponseType> {
         try await withCheckedThrowingContinuation { continuation in
             send(to: client, parsing: context) { result in
@@ -279,4 +289,3 @@ extension APIContentType {
         }
     }
 }
-

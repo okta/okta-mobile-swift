@@ -20,14 +20,10 @@ extension TimeInterval {
     static let veryLong: TimeInterval = 10
 }
 
-extension XCTestCase {
-    func save(screenshot label: String) {
-        let attachment = XCTAttachment(screenshot: XCUIApplication().screenshot())
-        attachment.name = label
-        attachment.lifetime = .deleteOnSuccess
-        add(attachment)
-    }
-    
+protocol TestExtensions {
+    func tapAlertButton(named label: String)
+}
+extension TestExtensions {
     func tapAlertButton(named label: String) {
         // addUIInterruptionMonitor is flaky within CI tests, so triggering the continue
         // action on the alert directly on Springboard is more reliable.
@@ -42,6 +38,16 @@ extension XCTestCase {
             #endif
         }
     }
+}
+
+extension XCTestCase: TestExtensions {
+    func save(screenshot label: String) {
+        let attachment = XCTAttachment(screenshot: XCUIApplication().screenshot())
+        attachment.name = label
+        attachment.lifetime = .deleteOnSuccess
+        add(attachment)
+    }
+    
 }
 
 extension XCUIElement {
@@ -73,3 +79,16 @@ extension XCUIElementQuery {
     }
 }
 
+extension XCUIElementQuery: Sequence {
+    public typealias Iterator = AnyIterator<XCUIElement>
+    public func makeIterator() -> Iterator {
+        var index = UInt(0)
+        return AnyIterator {
+            guard index < self.count else { return nil }
+
+            let element = self.element(boundBy: Int(index))
+            index += 1
+            return element
+        }
+    }
+}

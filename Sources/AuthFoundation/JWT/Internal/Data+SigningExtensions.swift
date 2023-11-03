@@ -16,15 +16,15 @@ private extension Int {
     func encodedOctets() -> [CUnsignedChar] {
         // Short form
         if self < 128 {
-            return [CUnsignedChar(self)];
+            return [CUnsignedChar(self)]
         }
         
         // Long form
-        let i = (self / 256) + 1
+        let index = (self / 256) + 1
         var len = self
-        var result: [CUnsignedChar] = [CUnsignedChar(i + 0x80)]
+        var result: [CUnsignedChar] = [CUnsignedChar(index + 0x80)]
         
-        for _ in 0..<i {
+        for _ in 0..<index {
             result.insert(CUnsignedChar(len & 0xFF), at: 1)
             len = len >> 8
         }

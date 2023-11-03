@@ -30,70 +30,9 @@ extension OAuth2ClientDelegate {
     public func oauth(client: OAuth2Client, didRefresh token: Token, replacedWith newToken: Token?) {}
 }
 
+// swiftlint:disable type_body_length
 /// An OAuth2 client, used to interact with a given authorization server.
 public final class OAuth2Client {
-    /// The configuration for an ``OAuth2Client``.
-    ///
-    /// This defines the basic information necessary for interacting with an OAuth2 authorization server.
-    public final class Configuration: Codable, Equatable, Hashable, APIClientConfiguration {
-        /// The base URL for interactions with this OAuth2 server.
-        public let baseURL: URL
-        
-        /// The discovery URL used to retrieve the ``OpenIdConfiguration`` for this client.
-        public let discoveryURL: URL
-        
-        /// The unique client ID representing this ``OAuth2Client``.
-        public let clientId: String
-        
-        /// The list of OAuth2 scopes requested for this client.
-        public let scopes: String
-        
-        /// Initializer for constructing an OAuth2Client.
-        /// - Parameters:
-        ///   - baseURL: Base URL.
-        ///   - discoveryURL: Discovery URL, or `nil` to accept the default OpenIDConfiguration endpoint.
-        ///   - clientId: The client ID.
-        ///   - scopes: The list of OAuth2 scopes.
-        public init(baseURL: URL, discoveryURL: URL? = nil, clientId: String, scopes: String) {
-            var relativeURL = baseURL
-
-            // Ensure the base URL contains a trailing slash in its path, so request paths can be safely appended.
-            if !relativeURL.lastPathComponent.isEmpty {
-                relativeURL.appendPathComponent("")
-            }
-            
-            self.baseURL = baseURL
-            self.discoveryURL = discoveryURL ?? relativeURL.appendingPathComponent(".well-known/openid-configuration")
-            self.clientId = clientId
-            self.scopes = scopes
-        }
-        
-        /// Convenience initializer to create a client using a simple domain name.
-        /// - Parameters:
-        ///   - domain: Domain name for the OAuth2 client.
-        ///   - clientId: The client ID.
-        ///   - scopes: The list of OAuth2 scopes.
-        public convenience init(domain: String, clientId: String, scopes: String) throws {
-            guard let url = URL(string: "https://\(domain)") else {
-                throw OAuth2Error.invalidUrl
-            }
-
-            self.init(baseURL: url, clientId: clientId, scopes: scopes)
-        }
-
-        public static func == (lhs: OAuth2Client.Configuration, rhs: OAuth2Client.Configuration) -> Bool {
-            lhs.baseURL == rhs.baseURL &&
-            lhs.clientId == rhs.clientId &&
-            lhs.scopes == rhs.scopes
-        }
-        
-        public func hash(into hasher: inout Hasher) {
-            hasher.combine(baseURL)
-            hasher.combine(clientId)
-            hasher.combine(scopes)
-        }
-    }
-    
     /// The URLSession used by this client for network requests.
     public let session: URLSessionProtocol
     
@@ -101,54 +40,76 @@ public final class OAuth2Client {
     public let configuration: Configuration
     
     /// Additional HTTP headers to include in outgoing network requests.
-    public var additionalHttpHeaders: [String: String]? = nil
+    public var additionalHttpHeaders: [String: String]?
     
     /// The OpenID configuration for this org.
     ///
     /// This value will be `nil` until the configuration has been retrieved through the ``openIdConfiguration(completion:)`` or ``openIdConfiguration()`` functions.
-    @TimeSensitive
     public private(set) var openIdConfiguration: OpenIdConfiguration?
 
     /// The ``JWKS`` key set for this org.
     ///
     /// This value will be `nil` until the keys have been retrieved through the ``jwks(completion:)`` or ``jwks()`` functions.
-    @TimeSensitive
     public private(set) var jwks: JWKS?
 
     /// Constructs an OAuth2Client for the given domain.
     /// - Parameters:
     ///   - domain: Okta domain to use for the base URL.
+    ///   - clientId: The unique client ID representing this client.
+    ///   - scopes: The list of OAuth2 scopes requested for this client.
+    ///   - authentication: The client authentication  model to use (Default: `.none`)
     ///   - session: Optional URLSession to use for network requests.
-    public convenience init(domain: String, clientId: String, scopes: String, session: URLSessionProtocol? = nil) throws {
+    public convenience init(domain: String,
+                            clientId: String,
+                            scopes: String,
+                            authentication: ClientAuthentication = .none,
+                            session: URLSessionProtocol? = nil) throws
+    {
         self.init(try Configuration(domain: domain,
                                     clientId: clientId,
-                                    scopes: scopes),
+                                    scopes: scopes,
+                                    authentication: authentication),
                   session: session)
     }
     
     /// Constructs an OAuth2Client for the given domain.
     /// - Parameters:
-    ///   - domain: Okta domain to use for the base URL.
+    ///   - baseURL: The base URL for operations against this client.
+    ///   - clientId: The unique client ID representing this client.
+    ///   - scopes: The list of OAuth2 scopes requested for this client.
+    ///   - authentication: The client authentication  model to use (Default: `.none`)
     ///   - session: Optional URLSession to use for network requests.
-    public convenience init(baseURL: URL, clientId: String, scopes: String, session: URLSessionProtocol? = nil) {
+    public convenience init(baseURL: URL,
+                            clientId: String,
+                            scopes: String,
+                            authentication: ClientAuthentication = .none,
+                            session: URLSessionProtocol? = nil)
+    {
         self.init(Configuration(baseURL: baseURL,
                                 clientId: clientId,
-                                scopes: scopes),
+                                scopes: scopes,
+                                authentication: authentication),
                   session: session)
     }
     
     /// Constructs an OAuth2Client for the given base URL.
     /// - Parameters:
-    ///   - baseURL: Base URL representing the Okta domain to use.
+    ///   - configuration: The pre-formed configuration for this client.
     ///   - session: Optional URLSession to use for network requests.
     public init(_ configuration: Configuration, session: URLSessionProtocol? = nil) {
         // Ensure this SDK's static version is included in the user agent.
         SDKVersion.register(sdk: Version)
         
+        // Ensure the time coordinator is properly initialized
+        _ = Date.coordinator
+        
         self.configuration = configuration
-        self.session = session ?? URLSession.shared
+        self.session = session ?? URLSession(configuration: .ephemeral)
         
         NotificationCenter.default.post(name: .oauth2ClientCreated, object: self)
+
+        // Ensure the Credential Coordinator can monitor this client for token refresh changes.
+        Credential.coordinator.observe(oauth2: self)
     }
     
     /// Retrieves the org's OpenID configuration.
@@ -156,10 +117,10 @@ public final class OAuth2Client {
     /// If this value has recently been retrieved, the cached result is returned.
     /// - Parameter completion: Completion block invoked with the result.
     public func openIdConfiguration(completion: @escaping (Result<OpenIdConfiguration, OAuth2Error>) -> Void) {
-        if let openIdConfiguration = openIdConfiguration {
-            completion(.success(openIdConfiguration))
-        } else {
-            configurationQueue.sync {
+        configurationQueue.sync {
+            if let openIdConfiguration = openIdConfiguration {
+                completion(.success(openIdConfiguration))
+            } else {
                 guard openIdConfigurationAction == nil else {
                     openIdConfigurationAction?.add(completion)
                     return
@@ -170,7 +131,7 @@ public final class OAuth2Client {
                 
                 openIdConfigurationAction = action
                 
-                let request = OpenIdConfigurationRequest(baseURL: baseURL)
+                let request = OpenIdConfigurationRequest(url: configuration.discoveryURL)
                 request.send(to: self) { result in
                     self.configurationQueue.sync(flags: .barrier) {
                         self.openIdConfigurationAction = nil
@@ -202,9 +163,9 @@ public final class OAuth2Client {
     public func refresh(_ token: Token, clientSecret: String, resource: String, completion: @escaping (Result<Token, OAuth2Error>) -> Void) {
         let type = Token.Kind.refreshToken
         guard let clientSettings = token.context.clientSettings,
-              clientSettings[type.rawValue] != nil
+              token.refreshToken != nil
         else {
-            completion(.failure(.missingToken(type: type)))
+            completion(.failure(.missingToken(type: .refreshToken)))
             return
         }
 
@@ -238,13 +199,21 @@ public final class OAuth2Client {
         guard let action = token.refreshAction else { return }
         
         delegateCollection.invoke { $0.oauth(client: self, willRefresh: token) }
+        guard let refreshToken = token.refreshToken else {
+            action.finish(.failure(.missingToken(type: .refreshToken)))
+            token.refreshAction = nil
+            return
+        }
+        
         openIdConfiguration { result in
             switch result {
             case .success(let configuration):
                 let request = Token.RefreshRequest(openIdConfiguration: configuration,
-                                                   token: token,
                                                    resource: resource,
                                                    clientSecret: clientSecret,
+                                                   clientConfiguration: self.configuration,
+                                                   refreshToken: refreshToken,
+                                                   id: token.id,
                                                    configuration: clientSettings)
                 request.send(to: self) { result in
                     self.refreshQueue.sync(flags: .barrier) {
@@ -252,18 +221,18 @@ public final class OAuth2Client {
                         case .success(let response):
                             let newToken = response.result.token(merging: token)
                             
-                            action.finish(.success(newToken))
-                            
                             self.delegateCollection.invoke { $0.oauth(client: self, didRefresh: token, replacedWith: newToken) }
                             NotificationCenter.default.post(name: .tokenRefreshed, object: newToken)
+                            action.finish(.success(newToken))
                             
                         case .failure(let error):
-                            action.finish(.failure(.network(error: error)))
                             self.delegateCollection.invoke { $0.oauth(client: self, didRefresh: token, replacedWith: nil) }
                             
                             NotificationCenter.default.post(name: .tokenRefreshFailed,
                                                             object: token,
                                                             userInfo: ["error": error])
+
+                            action.finish(.failure(.network(error: error)))
                         }
                         
                         token.refreshAction = nil
@@ -310,12 +279,13 @@ public final class OAuth2Client {
             switch result {
             case .success(let configuration):
                 let request = Token.RevokeRequest(openIdConfiguration: configuration,
+                                                  clientAuthentication: self.configuration.authentication,
                                                   token: tokenString,
                                                   hint: tokenType,
                                                   configuration: clientSettings)
                 request.send(to: self) { result in
                     switch result {
-                    case .success(_):
+                    case .success:
                         completion(.success(()))
                     case .failure(let error):
                         completion(.failure(.network(error: error)))
@@ -339,6 +309,7 @@ public final class OAuth2Client {
                 let request: Token.IntrospectRequest
                 do {
                     request = try Token.IntrospectRequest(openIdConfiguration: configuration,
+                                                          clientConfiguration: self.configuration,
                                                           token: token,
                                                           type: type)
                 } catch let error as OAuth2Error {
@@ -579,9 +550,10 @@ public final class OAuth2Client {
     }()
     internal var jwksAction: CoalescedResult<Result<JWKS, OAuth2Error>>?
 }
+// swiftlint:enable type_body_length
 
 #if swift(>=5.5.1)
-@available(iOS 15.0, tvOS 15.0, macOS 12.0, watchOS 8, *)
+@available(iOS 13.0, tvOS 13.0, macOS 10.15, watchOS 6, *)
 extension OAuth2Client {
     /// Asynchronously retrieves the org's OpenID configuration.
     ///
@@ -589,7 +561,7 @@ extension OAuth2Client {
     /// - Returns: The OpenID configuration for the org identified by the client's base URL.
     public func openIdConfiguration() async throws -> OpenIdConfiguration {
         try await withCheckedThrowingContinuation { continuation in
-            openIdConfiguration() { result in
+            openIdConfiguration { result in
                 continuation.resume(with: result)
             }
         }
@@ -601,7 +573,7 @@ extension OAuth2Client {
     /// - Returns: The ``JWKS`` configuration for the org identified by the client's base URL.
     public func jwks() async throws -> JWKS {
         try await withCheckedThrowingContinuation { continuation in
-            jwks() { result in
+            jwks { result in
                 continuation.resume(with: result)
             }
         }
@@ -626,8 +598,8 @@ extension OAuth2Client {
     ///
     /// - Parameters:
     ///   - token: Token object.
-    ///   - type: Type of token to revoke, default: ``Token/RevokeType/accessToken``
-    public func revoke(_ token: Token, type: Token.RevokeType = .accessToken) async throws {
+    ///   - type: Type of token to revoke, default: ``Token/RevokeType/all``
+    public func revoke(_ token: Token, type: Token.RevokeType = .all) async throws {
         try await withCheckedThrowingContinuation { continuation in
             revoke(token, type: type) { result in
                 continuation.resume(with: result)
@@ -678,14 +650,18 @@ extension OAuth2Client: APIClient {
         delegateCollection.invoke { $0.api(client: self, willSend: &request) }
     }
     
-    public func didSend(request: URLRequest, received error: APIClientError) {
-        delegateCollection.invoke { $0.api(client: self, didSend: request, received: error) }
+    public func didSend(request: URLRequest, received error: APIClientError, requestId: String?, rateLimit: APIRateLimit?) {
+        delegateCollection.invoke { $0.api(client: self, didSend: request, received: error, requestId: requestId, rateLimit: rateLimit) }
     }
 
     public func shouldRetry(request: URLRequest) -> APIRetry {
         return delegateCollection.call({ $0.api(client: self, shouldRetry: request) }).first ?? .default
     }
     
+    public func didSend(request: URLRequest, received response: HTTPURLResponse) {
+        delegateCollection.invoke { $0.api(client: self, didSend: request, received: response) }
+    }
+
     public func didSend<T>(request: URLRequest, received response: APIResponse<T>) where T: Decodable {
         delegateCollection.invoke { $0.api(client: self, didSend: request, received: response) }
     }

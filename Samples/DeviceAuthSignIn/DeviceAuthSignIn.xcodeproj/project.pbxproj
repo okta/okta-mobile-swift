@@ -15,6 +15,7 @@
 		9617AD57276914C200D74E7E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9617AD56276914C200D74E7E /* Assets.xcassets */; };
 		9617AD5A276914C200D74E7E /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9617AD58276914C200D74E7E /* LaunchScreen.storyboard */; };
 		9617AD6E276914C200D74E7E /* DeviceSignInTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9617AD6D276914C200D74E7E /* DeviceSignInTests.swift */; };
+		966C2F2D29FAFD3700E85C0D /* Screen+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 966C2F2C29FAFD3700E85C0D /* Screen+Extensions.swift */; };
 		96E98AD0282AD24E00CE251E /* XCTest+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96E98AC5282AD24E00CE251E /* XCTest+Extensions.swift */; };
 		96E98AD2282AD24E00CE251E /* Screen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96E98AC7282AD24E00CE251E /* Screen.swift */; };
 		96E98AD8282AD36E00CE251E /* TokenDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96E98ACD282AD24E00CE251E /* TokenDetailViewController.swift */; };
@@ -70,6 +71,7 @@
 		9617AD59276914C200D74E7E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		9617AD69276914C200D74E7E /* DeviceAuthSignInUITests (tvOS).xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "DeviceAuthSignInUITests (tvOS).xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		9617AD6D276914C200D74E7E /* DeviceSignInTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceSignInTests.swift; sourceTree = "<group>"; };
+		966C2F2C29FAFD3700E85C0D /* Screen+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Screen+Extensions.swift"; sourceTree = "<group>"; };
 		96E98ABF282ACF8900CE251E /* TestConfiguration.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; name = TestConfiguration.xcconfig; path = ../Shared/TestConfiguration.xcconfig; sourceTree = "<group>"; };
 		96E98AC1282AD20B00CE251E /* DeviceCodeScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceCodeScreen.swift; sourceTree = "<group>"; };
 		96E98AC5282AD24E00CE251E /* XCTest+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "XCTest+Extensions.swift"; sourceTree = "<group>"; };
@@ -215,6 +217,7 @@
 		96E98AC4282AD24E00CE251E /* Testing */ = {
 			isa = PBXGroup;
 			children = (
+				966C2F2C29FAFD3700E85C0D /* Screen+Extensions.swift */,
 				96E98B23282C742000CE251E /* Pages */,
 				96E98AC5282AD24E00CE251E /* XCTest+Extensions.swift */,
 				96E98AC7282AD24E00CE251E /* Screen.swift */,
@@ -493,6 +496,7 @@
 			files = (
 				96E98B22282C61C300CE251E /* BrowserSignInScreen.swift in Sources */,
 				96E98B25282C742000CE251E /* ProfileScreen.swift in Sources */,
+				966C2F2D29FAFD3700E85C0D /* Screen+Extensions.swift in Sources */,
 				96E98B20282C5FB700CE251E /* XCTest+Extensions.swift in Sources */,
 				96E98B1E282C5F8900CE251E /* DeviceCodeScreen.swift in Sources */,
 				96E98B13282C3F6600CE251E /* DeviceSignInTests.swift in Sources */,

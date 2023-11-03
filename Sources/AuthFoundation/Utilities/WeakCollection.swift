@@ -36,7 +36,7 @@ extension Weak: Equatable where Object: Equatable {}
 
 /// Property wrapper representing a collection of weak values.
 @propertyWrapper
-public struct WeakCollection<Collect, Element> where Collect: RangeReplaceableCollection, Collect.Element == Optional<Element>, Element: AnyObject {
+public struct WeakCollection<Collect, Element> where Collect: RangeReplaceableCollection, Collect.Element == Element?, Element: AnyObject {
     private var weakObjects = [Weak<Element>]()
 
     public init(wrappedValue value: Collect) { save(collection: value) }
@@ -46,7 +46,7 @@ public struct WeakCollection<Collect, Element> where Collect: RangeReplaceableCo
     }
 
     public var wrappedValue: Collect {
-        get { Collect(weakObjects.compactMap { $0.wrappedValue }) }
+        get { Collect(weakObjects.compactMap(\.wrappedValue)) }
         set (newValues) { save(collection: newValues) }
     }
 }
@@ -59,6 +59,6 @@ extension WeakCollection: Hashable where Collect: Equatable, Element: Hashable {
 
 extension WeakCollection: Equatable where Collect: Equatable, Element: Hashable {
     public static func == (lhs: WeakCollection<Collect, Element>, rhs: WeakCollection<Collect, Element>) -> Bool {
-        lhs.weakObjects == rhs.weakObjects
+        Set(lhs.weakObjects) == Set(rhs.weakObjects)
     }
 }

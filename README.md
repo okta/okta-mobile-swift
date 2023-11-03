@@ -26,7 +26,7 @@ This library uses semantic versioning and follows Okta's [Library Version Policy
 
 | Version | Status                             |
 | ------- | ---------------------------------- |
-| 1.1.2   | ✔️ Stable                             |
+| 1.4.3   | ✔️ Stable                             |
 
 The latest release can always be found on the [releases page][github-releases].
 
@@ -49,6 +49,7 @@ This SDK consists of several different libraries, each with detailed documentati
 ```
 
 - [AuthFoundation][authfoundation-docs] -- Common classes for managing credentials and used as a foundation for other libraries.
+- [OktaDirectAuth][oktadirectauth-docs] -- Direct Authentication capabilities for advanced browserless authentication (EA).
 - [OktaOAuth2][oktaoauth2-docs] -- OAuth2 authentication capabilities for advanced use-cases.
 - [WebAuthenticationUI][webauthenticationui-docs] -- Authenticate users using web-based OIDC flows.
 
@@ -121,6 +122,12 @@ If you are interested in only consuming the OktaOAuth2 library, instead use the 
 
 ```ruby
 pod 'OktaOAuth2'
+```
+
+If you are participating in the Early Access preview of the Okta Direct Authentication API, use the following:
+
+```ruby
+pod 'OktaDirectAuth'
 ```
 
 ## Usage Guide
@@ -219,12 +226,34 @@ let token = try await flow.start(with: [
 
 For simple authentication use-cases, you can use the `ResourceOwnerFlow` class to authenticate with a plain username and password.
 
+> *NOTE:* The ResourceOwnerFlow class has been marked as deprecated, since its functionality is being replaced with the more comprehensive OktaDirectAuth library.
+
 ```swift
 let flow = ResourceOwnerFlow(issuer: URL(string: "https://example.okta.com")!,
                              clientId: "abc123client",
                              scopes: "openid offline_access email profile")
 let token = try await flow.start(username: "jane.doe", password: "secretPassword")
 ```
+
+### Authentication using Direct Authentication (EA)
+
+For simple authentication use-cases, you can use the `ResourceOwnerFlow` class to authenticate with a plain username and password.
+
+> **NOTE:** The Okta Direct Authentication API is currently marked as Early Access (EA) and is not generally available yet.
+
+```swift
+let flow = DirectAuthenticationFlow(issuer: URL(string: "https://example.okta.com")!,
+                                    clientId: "abc123client",
+                                    scopes: "openid offline_access email profile")
+switch try await flow.start("jane.doe@example.com", with: .password("secretPassword")) {
+    case .success(let token):
+        // Store the token
+    case .mfaRequired(_):
+        // Continue authentication
+}
+```
+
+For more information, see the [OktaDirectAuth API documentation][oktadirectauth-docs].
 
 ## Storing and using tokens
 
@@ -418,6 +447,7 @@ We are happy to accept contributions and PRs! Please see the [contribution guide
 [github-issues]: https://github.com/okta/okta-mobile-swift/issues
 [github-releases]: https://github.com/okta/okta-mobile-swift/releases
 [authfoundation-docs]: https://okta.github.io/okta-mobile-swift/development/authfoundation/
+[oktadirectauth-docs]: https://okta.github.io/okta-mobile-swift/development/oktadirectauth/
 [oktaoauth2-docs]: https://okta.github.io/okta-mobile-swift/development/oktaoauth2/
 [webauthenticationui-docs]: https://okta.github.io/okta-mobile-swift/development/webauthenticationui/
 [Rate Limiting at Okta]: https://developer.okta.com/docs/api/getting_started/rate-limits

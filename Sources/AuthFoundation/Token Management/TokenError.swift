@@ -18,6 +18,7 @@ public enum TokenError: Error {
     case tokenNotFound(id: String)
     case cannotReplaceToken
     case duplicateTokenAdded
+    case invalidConfiguration
 }
 
 extension TokenError: LocalizedError {
@@ -45,6 +46,12 @@ extension TokenError: LocalizedError {
             
         case .duplicateTokenAdded:
             return NSLocalizedString("duplicate_token_added",
+                                     tableName: "AuthFoundation",
+                                     bundle: .authFoundation,
+                                     comment: "")
+
+        case .invalidConfiguration:
+            return NSLocalizedString("invalid_configuration",
                                      tableName: "AuthFoundation",
                                      bundle: .authFoundation,
                                      comment: "")

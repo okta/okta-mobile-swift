@@ -44,18 +44,18 @@ class WebAuthenticationProviderMock: WebAuthenticationProvider {
         self.delegate = delegate
     }
     
-    func start(context: AuthorizationCodeFlow.Context?) {
+    func start(context: AuthorizationCodeFlow.Context?, additionalParameters: [String: String]?) {
         state = .started
         
-        loginFlow.start(with: nil) { result in
+        loginFlow.start(with: nil, additionalParameters: additionalParameters) { result in
             
         }
     }
     
-    func logout(context: SessionLogoutFlow.Context) {
+    func logout(context: SessionLogoutFlow.Context, additionalParameters: [String: String]?) {
         state = .started
         
-        try? logoutFlow?.start(idToken: "idToken") { result in
+        try? logoutFlow?.start(idToken: "idToken", additionalParameters: additionalParameters) { result in
             
         }
     }

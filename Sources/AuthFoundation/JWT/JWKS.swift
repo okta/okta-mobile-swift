@@ -37,11 +37,11 @@ public struct JWKS: Codable, Equatable, Collection {
         keys[index]
     }
     
-    public func index(after i: Index) -> Index {
-        keys.index(after: i)
+    public func index(after index: Index) -> Index {
+        keys.index(after: index)
     }
 
     public static func == (lhs: JWKS, rhs: JWKS) -> Bool {
-        lhs.keys == rhs.keys
+        Set(lhs.keys) == Set(rhs.keys)
     }
 }
