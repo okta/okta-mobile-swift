@@ -21,6 +21,7 @@ extension DirectAuthenticationFlowError: Equatable {
     public static func == (lhs: DirectAuthenticationFlowError, rhs: DirectAuthenticationFlowError) -> Bool {
         switch (lhs, rhs) {
         case (.pollingTimeoutExceeded, .pollingTimeoutExceeded): return true
+        case (.bindingCodeMissing, .bindingCodeMissing): return true
         case (.missingArguments(let lhsNames), .missingArguments(let rhsNames)):
             return lhsNames.sorted() == rhsNames.sorted()
         case (.network(error: let lhsError), .network(error: let rhsError)):
