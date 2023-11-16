@@ -261,7 +261,7 @@ final class FactorStepHandlerTests: XCTestCase {
                                              loginHint: "jane.doe@example.com",
                                              factor: factor)
         
-        let wait = expectation(description: "process")
+        let processExpectation = expectation(description: "process")
         handler.process { result in
             guard case .success(let status) = result,
                   case .bindingUpdate(let context) = status else {
@@ -282,9 +282,9 @@ final class FactorStepHandlerTests: XCTestCase {
                 }
             }
             XCTAssertEqual(context.oobResponse.oobCode, "1c266114-a1be-4252-8ad1-04986c5b9ac1")
-            wait.fulfill()
+            processExpectation.fulfill()
         }
-        waitForExpectations(timeout: 5)
+        wait(for: [processExpectation], timeout: 5)
     }
 
     func testPrimaryOOBBindingTransferFail() throws {
@@ -305,7 +305,7 @@ final class FactorStepHandlerTests: XCTestCase {
                                              loginHint: "jane.doe@example.com",
                                              factor: factor)
         
-        let wait = expectation(description: "process")
+        let processExpectation = expectation(description: "process")
         handler.process { result in
             switch result {
             case .success(_):
@@ -313,9 +313,9 @@ final class FactorStepHandlerTests: XCTestCase {
             case .failure(let error):
                 XCTAssertEqual(error, .bindingCodeMissing)
             }
-            wait.fulfill()
+            processExpectation.fulfill()
         }
-        waitForExpectations(timeout: 5)
+        wait(for: [processExpectation], timeout: 5)
     }
     
     func testPrimaryOOBMFARequired() throws {
@@ -411,7 +411,7 @@ final class FactorStepHandlerTests: XCTestCase {
                                                                                mfaToken: "abcd1234")),
                                              factor: factor)
 
-        let wait = expectation(description: "process")
+        let processExpectation = expectation(description: "process")
         handler.process { result in
             guard case .success(let status) = result,
                   case .bindingUpdate(let context) = status else {
@@ -432,9 +432,9 @@ final class FactorStepHandlerTests: XCTestCase {
                 }
             }
             XCTAssertEqual(context.oobResponse.oobCode, "1c266114-a1be-4252-8ad1-04986c5b9ac1")
-            wait.fulfill()
+            processExpectation.fulfill()
         }
-        waitForExpectations(timeout: 5)
+        wait(for: [processExpectation], timeout: 5)
     }
 
     func testSecondaryOOBBindingTransferFail() throws {
@@ -456,7 +456,7 @@ final class FactorStepHandlerTests: XCTestCase {
                                                                                mfaToken: "abcd1234")),
                                              factor: factor)
 
-        let wait = expectation(description: "process")
+        let processExpectation = expectation(description: "process")
         handler.process { result in
             switch result {
             case .success(_):
@@ -464,9 +464,9 @@ final class FactorStepHandlerTests: XCTestCase {
             case .failure(let error):
                 XCTAssertEqual(error.errorDescription, DirectAuthenticationFlowError.bindingCodeMissing.errorDescription)
             }
-            wait.fulfill()
+            processExpectation.fulfill()
         }
-        waitForExpectations(timeout: 5)
+        wait(for: [processExpectation], timeout: 5)
     }
 
     private func assertGettingTokenAfterBindingTransfer(using handler: StepHandler) {
