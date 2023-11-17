@@ -9,6 +9,34 @@ executors:
       xcode: 14.3.1
     resource_class: macos.m1.medium.gen1
 
+commands:
+  ui_test:
+    executor: apple-ci-arm-medium
+    parameters:
+      name:
+        type: string
+      scheme:
+        type: string
+      sdk:
+        type: string
+        default: iphonesimulator
+      destination:
+        type: string
+        default: "platform=iOS Simulator,OS=16.2,name=iPhone 14 Pro Max"
+    steps:
+      - run:
+          name: "Test <<parameters.name>>"
+          command: |
+            set -o pipefail && xcodebuild \
+                -derivedDataPath ../Build/DerivedData \
+                -clonedSourcePackagesDirPath ../Build/ClonedSources \
+                -resultBundlePath ~/TestResults/<<parameters.name>>.xcresult \
+                -workspace OktaMobileSDK.xcworkspace \
+                -scheme "<<parameters.scheme>>" \
+                -sdk <<parameters.sdk>> \
+                -destination "<<parameters.destination>>" \
+                test 2>&1
+
 jobs:
   setup:
     executor: apple-ci-arm-medium
@@ -18,6 +46,77 @@ jobs:
           root: ~/project
           paths:
             - .
+
+  test-websignin-ios:
+    executor: apple-ci-arm-medium
+    steps:
+      - attach_workspace:
+          at: ~/project
+      - ui_test:
+          name: WebSignIn-iOS
+          scheme: "WebSignIn (iOS)"
+      - ui_test:
+          name: SingleSignOn-iOS
+          scheme: "SingleSignOn (iOS)"
+
+  test-directauth-ios:
+    executor: apple-ci-arm-medium
+    steps:
+      - attach_workspace:
+          at: ~/project
+      - ui_test:
+          name: DirectAuthSignIn-iOS
+          scheme: "DirectAuthSignIniOS (iOS)"
+
+  test-deviceauthsignin-ios:
+    executor: apple-ci-arm-medium
+    steps:
+      - attach_workspace:
+          at: ~/project
+      - ui_test:
+          name: DeviceAuthSignIn
+          scheme: "DeviceAuthSignIn (iOS)"
+
+  test-deviceauthsignin-tvos:
+    executor: apple-ci-arm-medium
+    steps:
+      - attach_workspace:
+          at: ~/project
+      - ui_test:
+          name: DeviceAuthSignIn-tvOS
+          scheme: "DeviceAuthSignIn (tvOS)"
+          destination: "platform=tvOS Simulator,OS=16.1,name=Apple TV"
+
+  test-userpasswordsignin-macos:
+    executor: apple-ci-arm-medium
+    steps:
+      - attach_workspace:
+          at: ~/project
+      - ui_test:
+          name: UserPasswordSignIn-macOS
+          scheme: "UserPasswordSignIn (macOS)"
+          sdk: macosx
+
+  test-classicnativeauth-ios:
+    executor: apple-ci-arm-medium
+    steps:
+      - attach_workspace:
+          at: ~/project
+      - ui_test:
+          name: ClassicNativeAuth-iOS
+          scheme: "ClassicNativeAuth (iOS)"
+
+  configure-secrets:
+    executor: apple-ci-arm-medium
+    steps:
+      - platform-helpers-general/job-secrets-obtain:
+          name: "Prepare Secrets"
+          secret-key: "TEST_OKTA_PLIST;TEST_CONFIGURATION"
+      - run:
+          name: "Store configuration files"
+          command: |
+            printenv TEST_OKTA_PLIST > ~/project/Samples/Shared/Okta.plist
+            printenv TEST_CONFIGURATION > ~/project/Samples/Shared/TestConfiguration.xcconfig
 
   snyk-scan:
     executor: apple-ci-arm-medium
@@ -37,6 +136,71 @@ jobs:
           os: macos
 
 workflows:
+  ui-tests:
+    jobs:
+      - setup:
+          filters:
+            branches:
+              only:
+                - master
+
+      - configure-secrets:
+          filters:
+            branches:
+              only:
+                - master
+          requires:
+            - setup
+
+      - test-websignin-ios:
+          filters:
+            branches:
+              only:
+                - master
+          requires:
+            - setup
+            - configure-secrets
+      - test-directauth-ios:
+          filters:
+            branches:
+              only:
+                - master
+          requires:
+            - setup
+            - configure-secrets
+      - test-deviceauthsignin-ios:
+          filters:
+            branches:
+              only:
+                - master
+          requires:
+            - setup
+            - configure-secrets
+      - test-deviceauthsignin-tvos:
+          filters:
+            branches:
+              only:
+                - master
+          requires:
+            - setup
+            - configure-secrets
+      - test-userpasswordsignin-macos:
+          filters:
+            branches:
+              only:
+                - master
+          requires:
+            - setup
+            - configure-secrets
+      - test-classicnativeauth-ios:
+          filters:
+            branches:
+              only:
+                - master
+          requires:
+            - setup
+            - configure-secrets
+
   semgrep:
     jobs:
       - general-platform-helpers/job-semgrep-prepare:
@@ -53,6 +217,7 @@ workflows:
                 - master
           requires:
             - semgrep-prepare
+
   security-scan:
     jobs:
       - setup:
@@ -60,6 +225,7 @@ workflows:
             branches:
               only:
                 - master
+
       - general-platform-helpers/job-snyk-prepare:
           name: prepare-snyk
           filters:
@@ -68,6 +234,7 @@ workflows:
                 - master
           requires:
             - setup
+
       - snyk-scan:
           name: execute-snyk
           filters:
