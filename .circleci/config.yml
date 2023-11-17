@@ -99,6 +99,8 @@ jobs:
   configure-secrets:
     executor: apple-ci-arm-medium
     steps:
+      - attach_workspace:
+          at: ~/project
       - run:
           name: "Store configuration files"
           command: |
@@ -174,3 +176,7 @@ workflows:
           name: execute-snyk
           requires:
             - prepare-snyk
+          filters:
+            branches:
+              only:
+                - master
