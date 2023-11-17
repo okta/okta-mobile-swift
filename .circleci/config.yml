@@ -19,14 +19,14 @@ commands:
         default: iphonesimulator
       destination:
         type: string
-        default: "platform=iOS Simulator,OS=16.2,name=iPhone 14 Pro Max"
+        default: "platform=iOS Simulator,OS=16.4,name=iPhone 14 Pro Max"
     steps:
       - run:
           name: "Test <<parameters.scheme>>"
           command: |
             set -o pipefail && xcodebuild \
-                -derivedDataPath ../Build/DerivedData \
-                -clonedSourcePackagesDirPath ../Build/ClonedSources \
+                -derivedDataPath ~/Build/DerivedData \
+                -clonedSourcePackagesDirPath ~/Build/ClonedSources \
                 -resultBundlePath "~/TestResults/<<parameters.scheme>>.xcresult" \
                 -workspace OktaMobileSDK.xcworkspace \
                 -scheme "<<parameters.scheme>>" \
@@ -77,7 +77,7 @@ jobs:
           at: ~/project
       - ui_test:
           scheme: "DeviceAuthSignIn (tvOS)"
-          destination: "platform=tvOS Simulator,OS=16.1,name=Apple TV"
+          destination: "platform=tvOS Simulator,OS=16.4,name=Apple TV"
 
   test-userpasswordsignin-macos:
     executor: apple-ci-arm-medium
@@ -167,7 +167,11 @@ workflows:
 
   security-scan:
     jobs:
-      - setup
+      - setup:
+          filters:
+            branches:
+              only:
+                - master
       - general-platform-helpers/job-snyk-prepare:
           name: prepare-snyk
           requires:
@@ -176,7 +180,3 @@ workflows:
           name: execute-snyk
           requires:
             - prepare-snyk
-          filters:
-            branches:
-              only:
-                - master
