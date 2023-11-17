@@ -10,7 +10,7 @@ executors:
     resource_class: macos.m1.medium.gen1
 
 commands:
-  ui_test:
+  ui-test:
     parameters:
       scheme:
         type: string
@@ -21,6 +21,7 @@ commands:
         type: string
         default: "platform=iOS Simulator,OS=16.4,name=iPhone 14 Pro Max"
     steps:
+      - configure-secrets
       - run:
           name: "Test <<parameters.scheme>>"
           command: |
@@ -33,6 +34,16 @@ commands:
                 -sdk <<parameters.sdk>> \
                 -destination "<<parameters.destination>>" \
                 test 2>&1
+
+  configure-secrets:
+    executor: apple-ci-arm-medium
+    steps:
+      - run:
+          name: "Store configuration files"
+          command: |
+            printenv TEST_OKTA_PLIST | base64 -d -i - > ~/project/Samples/Shared/Okta.plist
+            printenv TEST_CONFIGURATION | base64 -d -i - > ~/project/Samples/Shared/TestConfiguration.xcconfig
+
 
 jobs:
   setup:
@@ -49,9 +60,9 @@ jobs:
     steps:
       - attach_workspace:
           at: ~/project
-      - ui_test:
+      - ui-test:
           scheme: "WebSignIn (iOS)"
-      - ui_test:
+      - ui-test:
           scheme: "SingleSignOn (iOS)"
 
   test-directauth-ios:
@@ -59,7 +70,7 @@ jobs:
     steps:
       - attach_workspace:
           at: ~/project
-      - ui_test:
+      - ui-test:
           scheme: "DirectAuthSignIniOS (iOS)"
 
   test-deviceauthsignin-ios:
@@ -67,7 +78,7 @@ jobs:
     steps:
       - attach_workspace:
           at: ~/project
-      - ui_test:
+      - ui-test:
           scheme: "DeviceAuthSignIn (iOS)"
 
   test-deviceauthsignin-tvos:
@@ -75,7 +86,7 @@ jobs:
     steps:
       - attach_workspace:
           at: ~/project
-      - ui_test:
+      - ui-test:
           scheme: "DeviceAuthSignIn (tvOS)"
           destination: "platform=tvOS Simulator,OS=16.4,name=Apple TV"
 
@@ -84,7 +95,7 @@ jobs:
     steps:
       - attach_workspace:
           at: ~/project
-      - ui_test:
+      - ui-test:
           scheme: "UserPasswordSignIn (macOS)"
           sdk: macosx
 
@@ -93,19 +104,8 @@ jobs:
     steps:
       - attach_workspace:
           at: ~/project
-      - ui_test:
+      - ui-test:
           scheme: "ClassicNativeAuth (iOS)"
-
-  configure-secrets:
-    executor: apple-ci-arm-medium
-    steps:
-      - attach_workspace:
-          at: ~/project
-      - run:
-          name: "Store configuration files"
-          command: |
-            printenv TEST_OKTA_PLIST | base64 -d -i - > ~/project/Samples/Shared/Okta.plist
-            printenv TEST_CONFIGURATION | base64 -d -i - > ~/project/Samples/Shared/TestConfiguration.xcconfig
 
   snyk-scan:
     executor: apple-ci-arm-medium
@@ -128,33 +128,24 @@ workflows:
   ui-tests:
     jobs:
       - setup
-      - configure-secrets:
-          requires:
-            - setup
       - test-websignin-ios:
           requires:
             - setup
-            - configure-secrets
       - test-directauth-ios:
           requires:
             - setup
-            - configure-secrets
       - test-deviceauthsignin-ios:
           requires:
             - setup
-            - configure-secrets
       - test-deviceauthsignin-tvos:
           requires:
             - setup
-            - configure-secrets
       - test-userpasswordsignin-macos:
           requires:
             - setup
-            - configure-secrets
       - test-classicnativeauth-ios:
           requires:
             - setup
-            - configure-secrets
 
   semgrep:
     jobs:
