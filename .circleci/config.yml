@@ -50,10 +50,8 @@ jobs:
       - attach_workspace:
           at: ~/project
       - ui_test:
-          name: WebSignIn-iOS
           scheme: "WebSignIn (iOS)"
       - ui_test:
-          name: SingleSignOn-iOS
           scheme: "SingleSignOn (iOS)"
 
   test-directauth-ios:
@@ -62,7 +60,6 @@ jobs:
       - attach_workspace:
           at: ~/project
       - ui_test:
-          name: DirectAuthSignIn-iOS
           scheme: "DirectAuthSignIniOS (iOS)"
 
   test-deviceauthsignin-ios:
@@ -71,7 +68,6 @@ jobs:
       - attach_workspace:
           at: ~/project
       - ui_test:
-          name: DeviceAuthSignIn
           scheme: "DeviceAuthSignIn (iOS)"
 
   test-deviceauthsignin-tvos:
@@ -80,7 +76,6 @@ jobs:
       - attach_workspace:
           at: ~/project
       - ui_test:
-          name: DeviceAuthSignIn-tvOS
           scheme: "DeviceAuthSignIn (tvOS)"
           destination: "platform=tvOS Simulator,OS=16.1,name=Apple TV"
 
@@ -90,7 +85,6 @@ jobs:
       - attach_workspace:
           at: ~/project
       - ui_test:
-          name: UserPasswordSignIn-macOS
           scheme: "UserPasswordSignIn (macOS)"
           sdk: macosx
 
@@ -100,7 +94,6 @@ jobs:
       - attach_workspace:
           at: ~/project
       - ui_test:
-          name: ClassicNativeAuth-iOS
           scheme: "ClassicNativeAuth (iOS)"
 
   configure-secrets:
