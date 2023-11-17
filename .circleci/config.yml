@@ -12,8 +12,6 @@ executors:
 commands:
   ui_test:
     parameters:
-      name:
-        type: string
       scheme:
         type: string
       sdk:
@@ -24,12 +22,12 @@ commands:
         default: "platform=iOS Simulator,OS=16.2,name=iPhone 14 Pro Max"
     steps:
       - run:
-          name: "Test <<parameters.name>>"
+          name: "Test <<parameters.scheme>>"
           command: |
             set -o pipefail && xcodebuild \
                 -derivedDataPath ../Build/DerivedData \
                 -clonedSourcePackagesDirPath ../Build/ClonedSources \
-                -resultBundlePath ~/TestResults/<<parameters.name>>.xcresult \
+                -resultBundlePath "~/TestResults/<<parameters.scheme>>.xcresult" \
                 -workspace OktaMobileSDK.xcworkspace \
                 -scheme "<<parameters.scheme>>" \
                 -sdk <<parameters.sdk>> \
