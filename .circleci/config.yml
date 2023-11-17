@@ -106,7 +106,7 @@ jobs:
   configure-secrets:
     executor: apple-ci-arm-medium
     steps:
-      - platform-helpers-general/job-secrets-obtain:
+      - general-platform-helpers/job-secrets-obtain:
           name: "Prepare Secrets"
           secret-key: "TEST_OKTA_PLIST;TEST_CONFIGURATION"
       - run:
