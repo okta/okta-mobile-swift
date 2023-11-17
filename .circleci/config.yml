@@ -125,65 +125,31 @@ jobs:
 workflows:
   ui-tests:
     jobs:
-      - setup:
-          filters:
-            branches:
-              only:
-                - master
-
+      - setup
       - configure-secrets:
-          filters:
-            branches:
-              only:
-                - master
           requires:
             - setup
-
       - test-websignin-ios:
-          filters:
-            branches:
-              only:
-                - master
           requires:
             - setup
             - configure-secrets
       - test-directauth-ios:
-          filters:
-            branches:
-              only:
-                - master
           requires:
             - setup
             - configure-secrets
       - test-deviceauthsignin-ios:
-          filters:
-            branches:
-              only:
-                - master
           requires:
             - setup
             - configure-secrets
       - test-deviceauthsignin-tvos:
-          filters:
-            branches:
-              only:
-                - master
           requires:
             - setup
             - configure-secrets
       - test-userpasswordsignin-macos:
-          filters:
-            branches:
-              only:
-                - master
           requires:
             - setup
             - configure-secrets
       - test-classicnativeauth-ios:
-          filters:
-            branches:
-              only:
-                - master
           requires:
             - setup
             - configure-secrets
@@ -192,41 +158,19 @@ workflows:
     jobs:
       - general-platform-helpers/job-semgrep-prepare:
           name: semgrep-prepare
-          filters:
-            branches:
-              only:
-                - master
       - general-platform-helpers/job-semgrep-scan:
           name: semgrep-scan
-          filters:
-            branches:
-              only:
-                - master
           requires:
             - semgrep-prepare
 
   security-scan:
     jobs:
-      - setup:
-          filters:
-            branches:
-              only:
-                - master
-
+      - setup
       - general-platform-helpers/job-snyk-prepare:
           name: prepare-snyk
-          filters:
-            branches:
-              only:
-                - master
           requires:
             - setup
-
       - snyk-scan:
           name: execute-snyk
-          filters:
-            branches:
-              only:
-                - master
           requires:
             - prepare-snyk
