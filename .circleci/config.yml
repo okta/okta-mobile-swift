@@ -21,7 +21,6 @@ commands:
         type: string
         default: "platform=iOS Simulator,OS=16.4,name=iPhone 14 Pro Max"
     steps:
-      - configure-secrets
       - run:
           name: "Test <<parameters.scheme>>"
           command: |
@@ -35,21 +34,16 @@ commands:
                 -destination "<<parameters.destination>>" \
                 test 2>&1
 
-  configure-secrets:
-    executor: apple-ci-arm-medium
-    steps:
-      - run:
-          name: "Store configuration files"
-          command: |
-            printenv TEST_OKTA_PLIST | base64 -d -i - > ~/project/Samples/Shared/Okta.plist
-            printenv TEST_CONFIGURATION | base64 -d -i - > ~/project/Samples/Shared/TestConfiguration.xcconfig
-
-
 jobs:
   setup:
     executor: apple-ci-arm-medium
     steps:
       - checkout
+      - run:
+          name: "Store configuration files"
+          command: |
+            printenv TEST_OKTA_PLIST | base64 -d -i - > ~/project/Samples/Shared/Okta.plist
+            printenv TEST_CONFIGURATION | base64 -d -i - > ~/project/Samples/Shared/TestConfiguration.xcconfig
       - persist_to_workspace:
           root: ~/project
           paths:
