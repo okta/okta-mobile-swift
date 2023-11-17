@@ -106,14 +106,11 @@ jobs:
   configure-secrets:
     executor: apple-ci-arm-medium
     steps:
-      - general-platform-helpers/job-secrets-obtain:
-          name: "Prepare Secrets"
-          secret-key: "TEST_OKTA_PLIST;TEST_CONFIGURATION"
       - run:
           name: "Store configuration files"
           command: |
-            printenv TEST_OKTA_PLIST > ~/project/Samples/Shared/Okta.plist
-            printenv TEST_CONFIGURATION > ~/project/Samples/Shared/TestConfiguration.xcconfig
+            printenv TEST_OKTA_PLIST | base64 -d -i - > ~/project/Samples/Shared/Okta.plist
+            printenv TEST_CONFIGURATION | base64 -d -i - > ~/project/Samples/Shared/TestConfiguration.xcconfig
 
   snyk-scan:
     executor: apple-ci-arm-medium
