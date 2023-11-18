@@ -23,6 +23,8 @@ commands:
     steps:
       - run:
           name: "Test <<parameters.scheme>>"
+          environment:
+            NSUnbufferedIO: YES
           command: |
             set -o pipefail && xcodebuild \
                 -derivedDataPath ~/Build/DerivedData \
@@ -93,6 +95,7 @@ jobs:
       - ui-test:
           scheme: "UserPasswordSignIn (macOS)"
           sdk: macosx
+          destination: "platform:macOS, name:Any Mac"
 
   test-classicnativeauth-ios:
     executor: apple-ci-arm-medium
