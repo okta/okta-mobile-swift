@@ -19,7 +19,7 @@ commands:
         default: iphonesimulator
       destination:
         type: string
-        default: "platform=iOS Simulator,OS=17.0,name=iPhone 15 Pro Max"
+        default: "platform=iOS Simulator,OS=17.0.1,name=iPhone 15 Pro Max"
     steps:
       - run:
           name: "Test <<parameters.scheme>>"
@@ -82,6 +82,7 @@ jobs:
           at: ~/project
       - ui-test:
           scheme: "DeviceAuthSignIn (tvOS)"
+          sdk: appletvsimulator
           destination: "platform=tvOS Simulator,OS=16.4,name=Apple TV"
 
   test-userpasswordsignin-macos:
