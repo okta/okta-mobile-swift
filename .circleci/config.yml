@@ -6,7 +6,7 @@ orbs:
 executors:
   apple-ci-arm-medium:
     macos:
-      xcode: 14.3.1
+      xcode: 15.0
     resource_class: macos.m1.medium.gen1
 
 commands:
@@ -19,7 +19,7 @@ commands:
         default: iphonesimulator
       destination:
         type: string
-        default: "platform=iOS Simulator,OS=16.4,name=iPhone 14 Pro Max"
+        default: "platform=iOS Simulator,OS=17.0,name=iPhone 15 Pro Max"
     steps:
       - run:
           name: "Test <<parameters.scheme>>"
@@ -65,7 +65,7 @@ jobs:
       - attach_workspace:
           at: ~/project
       - ui-test:
-          scheme: "DirectAuthSignIniOS (iOS)"
+          scheme: "DirectAuthSignIn (iOS)"
 
   test-deviceauthsignin-ios:
     executor: apple-ci-arm-medium

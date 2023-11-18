@@ -49,21 +49,7 @@ extension WebLogin where Self: Screen {
 
         guard app.webViews.firstMatch.waitForExistence(timeout: .long) else { return }
         send(username: username)
-        
-        let nextButton = app.webViews.buttons["Next"]
-        if nextButton.exists {
-            nextButton.tap()
-        }
-        
         send(password: password)
-        
-        if username != nil || password != nil {
-            if verifyButton.exists {
-                verifyButton.tap()
-            } else if signInButton.waitForNonExistence(timeout: .short) {
-                signInButton.tap()
-            }
-        }
 
         _ = app.webViews.firstMatch.waitForNonExistence(timeout: .standard)
     }
@@ -85,7 +71,7 @@ extension WebLogin where Self: Screen {
             
             field.typeText(username)
 
-            dismissKeyboard()
+            tapKeyboardNextOrGo()
         }
     }
     
@@ -115,7 +101,7 @@ extension WebLogin where Self: Screen {
             field.tap()
             field.typeText(password)
             
-            dismissKeyboard()
+            tapKeyboardNextOrGo()
         }
     }
     
