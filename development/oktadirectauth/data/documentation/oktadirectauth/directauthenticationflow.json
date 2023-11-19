@@ -371,6 +371,18 @@
       "title" : "Resetting a flow"
     },
     {
+      "identifiers" : [
+        "doc:\/\/OktaDirectAuth\/documentation\/OktaDirectAuth\/DirectAuthenticationFlow\/BindingUpdateContext"
+      ],
+      "title" : "Structures"
+    },
+    {
+      "identifiers" : [
+        "doc:\/\/OktaDirectAuth\/documentation\/OktaDirectAuth\/DirectAuthenticationFlow\/BindingUpdateType"
+      ],
+      "title" : "Enumerations"
+    },
+    {
       "generated" : true,
       "identifiers" : [
         "doc:\/\/OktaDirectAuth\/documentation\/OktaDirectAuth\/DirectAuthenticationFlow\/APIClientDelegate-Implementations",
@@ -500,6 +512,74 @@
   "title" : "APIClientDelegate Implementations",
   "type" : "topic",
   "url" : "\/documentation\/oktadirectauth\/directauthenticationflow\/apiclientdelegate-implementations"
+},
+"doc://OktaDirectAuth/documentation/OktaDirectAuth/DirectAuthenticationFlow/BindingUpdateContext": {
+  "abstract" : [
+    {
+      "text" : "Holds information about the binding update received when verifying OOB factors",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "struct"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "BindingUpdateContext"
+    }
+  ],
+  "identifier" : "doc:\/\/OktaDirectAuth\/documentation\/OktaDirectAuth\/DirectAuthenticationFlow\/BindingUpdateContext",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "BindingUpdateContext"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "DirectAuthenticationFlow.BindingUpdateContext",
+  "type" : "topic",
+  "url" : "\/documentation\/oktadirectauth\/directauthenticationflow\/bindingupdatecontext"
+},
+"doc://OktaDirectAuth/documentation/OktaDirectAuth/DirectAuthenticationFlow/BindingUpdateType": {
+  "abstract" : [
+    {
+      "text" : "Represents the different types of binding updates that can be received",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "enum"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "BindingUpdateType"
+    }
+  ],
+  "identifier" : "doc:\/\/OktaDirectAuth\/documentation\/OktaDirectAuth\/DirectAuthenticationFlow\/BindingUpdateType",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "BindingUpdateType"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "DirectAuthenticationFlow.BindingUpdateType",
+  "type" : "topic",
+  "url" : "\/documentation\/oktadirectauth\/directauthenticationflow\/bindingupdatetype"
 },
 "doc://OktaDirectAuth/documentation/OktaDirectAuth/DirectAuthenticationFlow/MFAContext": {
   "abstract" : [

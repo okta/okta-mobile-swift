@@ -327,6 +327,11 @@
                     "type" : "groupMarker"
                   },
                   {
+                    "path" : "\/documentation\/oktadirectauth\/directauthenticationflow\/status\/bindingupdate(_:)",
+                    "title" : "case bindingUpdate(DirectAuthenticationFlow.BindingUpdateContext)",
+                    "type" : "case"
+                  },
+                  {
                     "path" : "\/documentation\/oktadirectauth\/directauthenticationflow\/status\/mfarequired(_:)",
                     "title" : "case mfaRequired(DirectAuthenticationFlow.MFAContext)",
                     "type" : "case"
@@ -447,6 +452,46 @@
                 "path" : "\/documentation\/oktadirectauth\/directauthenticationflow\/reset()",
                 "title" : "func reset()",
                 "type" : "method"
+              },
+              {
+                "title" : "Structures",
+                "type" : "groupMarker"
+              },
+              {
+                "children" : [
+                  {
+                    "title" : "Instance Properties",
+                    "type" : "groupMarker"
+                  },
+                  {
+                    "path" : "\/documentation\/oktadirectauth\/directauthenticationflow\/bindingupdatecontext\/update",
+                    "title" : "let update: DirectAuthenticationFlow.BindingUpdateType",
+                    "type" : "property"
+                  }
+                ],
+                "path" : "\/documentation\/oktadirectauth\/directauthenticationflow\/bindingupdatecontext",
+                "title" : "DirectAuthenticationFlow.BindingUpdateContext",
+                "type" : "struct"
+              },
+              {
+                "title" : "Enumerations",
+                "type" : "groupMarker"
+              },
+              {
+                "children" : [
+                  {
+                    "title" : "Enumeration Cases",
+                    "type" : "groupMarker"
+                  },
+                  {
+                    "path" : "\/documentation\/oktadirectauth\/directauthenticationflow\/bindingupdatetype\/transfer(_:)",
+                    "title" : "case transfer(String)",
+                    "type" : "case"
+                  }
+                ],
+                "path" : "\/documentation\/oktadirectauth\/directauthenticationflow\/bindingupdatetype",
+                "title" : "DirectAuthenticationFlow.BindingUpdateType",
+                "type" : "enum"
               },
               {
                 "title" : "Default Implementations",
@@ -573,6 +618,11 @@
               {
                 "title" : "Enumeration Cases",
                 "type" : "groupMarker"
+              },
+              {
+                "path" : "\/documentation\/oktadirectauth\/directauthenticationflowerror\/bindingcodemissing",
+                "title" : "case bindingCodeMissing",
+                "type" : "case"
               },
               {
                 "path" : "\/documentation\/oktadirectauth\/directauthenticationflowerror\/missingarguments(_:)",
