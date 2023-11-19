@@ -17,9 +17,14 @@ extension DirectAuthenticationFlowError: LocalizedError {
         switch self {
         case .pollingTimeoutExceeded:
             return NSLocalizedString("polling_timeout_exceeded",
-                                     tableName: "OktaOAuth2",
+                                     tableName: "OktaDirectAuth",
                                      bundle: .oktaDirectAuth,
                                      comment: "Polling timeout exceeded")
+        case .bindingCodeMissing:
+            return NSLocalizedString("binding_code_missing",
+                                     tableName: "OktaDirectAuth",
+                                     bundle: .oktaDirectAuth,
+                                     comment: "Binding Code is missing")
         case .missingArguments(let arguments):
             return String.localizedStringWithFormat(
                 NSLocalizedString("missing_arguments",

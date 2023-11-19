@@ -25,6 +25,16 @@ struct OOBResponse: Codable {
     let interval: TimeInterval
     let channel: DirectAuthenticationFlow.OOBChannel
     let bindingMethod: BindingMethod
+    let bindingCode: String?
+
+    init(oobCode: String, expiresIn: TimeInterval, interval: TimeInterval, channel: DirectAuthenticationFlow.OOBChannel, bindingMethod: BindingMethod, bindingCode: String? = nil) {
+        self.oobCode = oobCode
+        self.expiresIn = expiresIn
+        self.interval = interval
+        self.channel = channel
+        self.bindingMethod = bindingMethod
+        self.bindingCode = bindingCode
+    }
 }
 
 struct OOBAuthenticateRequest {
@@ -51,6 +61,7 @@ struct OOBAuthenticateRequest {
 
 enum BindingMethod: String, Codable {
     case none
+    case transfer
 }
 
 extension OOBAuthenticateRequest: APIRequest, APIRequestBody {

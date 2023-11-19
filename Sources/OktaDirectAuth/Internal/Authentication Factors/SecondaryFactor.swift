@@ -20,6 +20,10 @@ extension DirectAuthenticationFlow.SecondaryFactor: AuthenticationFactor {
                      currentStatus: DirectAuthenticationFlow.Status?,
                      factor: DirectAuthenticationFlow.SecondaryFactor) throws -> StepHandler
     {
+        var bindingContext: DirectAuthenticationFlow.BindingUpdateContext?
+        if case .bindingUpdate(let context) = currentStatus {
+            bindingContext = context
+        }
         switch self {
         case .otp:
             let request = TokenRequest(openIdConfiguration: openIdConfiguration,
@@ -35,7 +39,8 @@ extension DirectAuthenticationFlow.SecondaryFactor: AuthenticationFactor {
                                       loginHint: loginHint,
                                       mfaToken: currentStatus?.mfaToken,
                                       channel: channel,
-                                      factor: factor)
+                                      factor: factor,
+                                      bindingContext: bindingContext)
         }
     }
     

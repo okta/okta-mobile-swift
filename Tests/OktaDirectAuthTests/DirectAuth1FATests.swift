@@ -57,6 +57,8 @@ final class DirectAuth1FATests: XCTestCase {
             XCTAssertNotNil(token.refreshToken)
         case .mfaRequired(_):
             XCTFail("Not expecting MFA Required")
+        case .bindingUpdate(_):
+            XCTFail("Not expecting binding update")
         }
     }
 
@@ -75,6 +77,8 @@ final class DirectAuth1FATests: XCTestCase {
             XCTAssertNotNil(token.refreshToken)
         case .mfaRequired(_):
             XCTFail("Not expecting MFA Required")
+        case .bindingUpdate(_):
+            XCTFail("Not expecting binding update")
         }
     }
 
@@ -93,6 +97,8 @@ final class DirectAuth1FATests: XCTestCase {
             XCTAssertNotNil(token.refreshToken)
         case .mfaRequired(_):
             XCTFail("Not expecting MFA Required")
+        case .bindingUpdate(_):
+            XCTFail("Not expecting binding update")
         }
     }
 #endif

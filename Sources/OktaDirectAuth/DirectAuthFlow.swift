@@ -26,6 +26,7 @@ public protocol DirectAuthenticationFlowDelegate: AuthenticationDelegate {
 /// Errors that may be generated while authenticating using ``DirectAuthenticationFlow``.
 public enum DirectAuthenticationFlowError: Error {
     case pollingTimeoutExceeded
+    case bindingCodeMissing
     case missingArguments(_ names: [String])
     case network(error: APIClientError)
     case oauth2(error: OAuth2Error)
@@ -111,6 +112,19 @@ public class DirectAuthenticationFlow: AuthenticationFlow {
             self.mfaToken = mfaToken
         }
     }
+
+    /// Represents the different types of binding updates that can be received
+    public enum BindingUpdateType {
+        /// Binding requires transfer of a code from one channel to another
+        case transfer(_ code: String)
+    }
+
+    /// Holds information about the binding update received when verifying OOB factors
+    public struct BindingUpdateContext {
+        /// Holds the type of binding update received from the server
+        public let update: BindingUpdateType
+        let oobResponse: OOBResponse
+    }
     
     /// The current status of the authentication flow.
     ///
@@ -119,6 +133,9 @@ public class DirectAuthenticationFlow: AuthenticationFlow {
         /// Authentication was successful, returning the given token.
         case success(_ token: Token)
         
+        /// Indicates that there is an update about binding authentication channels when verifying OOB factors
+        case bindingUpdate(_ context: BindingUpdateContext)
+
         /// Indicates the user should be challenged with some other secondary factor.
         ///
         /// When this status is returned, the developer should use the ``DirectAuthenticationFlow/resume(_:with:)`` function to supply a secondary factor to verify the user.

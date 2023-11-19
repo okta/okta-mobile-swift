@@ -31,6 +31,10 @@ extension DirectAuthenticationFlow.PrimaryFactor: AuthenticationFactor {
                      currentStatus: DirectAuthenticationFlow.Status? = nil,
                      factor: DirectAuthenticationFlow.PrimaryFactor) throws -> StepHandler
     {
+        var bindingContext: DirectAuthenticationFlow.BindingUpdateContext?
+        if case .bindingUpdate(let context) = currentStatus {
+            bindingContext = context
+        }
         switch self {
         case .otp: fallthrough
         case .password:
@@ -46,7 +50,8 @@ extension DirectAuthenticationFlow.PrimaryFactor: AuthenticationFactor {
                                       loginHint: loginHint,
                                       mfaToken: currentStatus?.mfaToken,
                                       channel: channel,
-                                      factor: factor)
+                                      factor: factor,
+                                      bindingContext: bindingContext)
         }
     }
     
