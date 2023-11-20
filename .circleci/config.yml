@@ -17,6 +17,10 @@ commands:
       sdk:
         type: string
         default: iphonesimulator
+      arch:
+        type: enum
+        default: arm64
+        enum: ["arm64", "x86_64"]
       destination:
         type: string
         default: "platform=iOS Simulator,OS=17.0.1,name=iPhone 15 Pro Max"
@@ -33,6 +37,7 @@ commands:
                 -workspace OktaMobileSDK.xcworkspace \
                 -scheme "<<parameters.scheme>>" \
                 -sdk <<parameters.sdk>> \
+                -arch <<parameters.arch>> \
                 -destination "<<parameters.destination>>" \
                 test 2>&1
 
@@ -96,6 +101,7 @@ jobs:
           scheme: "UserPasswordSignIn (macOS)"
           sdk: macosx
           destination: "platform=macOS,name=Any Mac"
+          arch: "x86_64"
 
   test-classicnativeauth-ios:
     executor: apple-ci-arm-medium
