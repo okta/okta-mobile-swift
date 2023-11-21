@@ -31,6 +31,12 @@ struct UserPasswordSignIn: Command {
     @Option(help: "The scopes to use.")
     var scopes: String = "openid profile"
     
+    @Option(help: "Username to use")
+    var username: String?
+    
+    @Option(help: "Password")
+    var password: String?
+    
     #if swift(>=5.6)
     mutating func run() async throws {
         guard #available(macOS 12, *) else {

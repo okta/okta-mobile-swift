@@ -15,11 +15,16 @@ import OktaOAuth2
 
 enum UserPasswordError: Error {
     case missingUsername
+    case missingPassword
     case invalidDomain
 }
 
 extension UserPasswordSignIn {
     func promptUsername() throws -> String {
+        if let username {
+            return username
+        }
+        
         print("Username: ", terminator: "")
         guard let username = readLine(strippingNewline: true) else {
             throw UserPasswordError.missingUsername
@@ -28,8 +33,15 @@ extension UserPasswordSignIn {
     }
     
     func promptPassword() throws -> String {
-        print("Password: ")
+        if let password {
+            return password
+        }
+        
+        print("Password: ", terminator: "")
         let password = String(cString: getpass(""))
+        if password.isEmpty {
+            throw UserPasswordError.missingPassword
+        }
         return password
     }
     
