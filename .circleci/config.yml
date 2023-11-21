@@ -60,6 +60,8 @@ jobs:
           scheme: "WebSignIn (iOS)"
       - ui-test:
           scheme: "SingleSignOn (iOS)"
+      - store_artifacts:
+          path: "~/TestResults"
 
   test-directauth-ios:
     executor: apple-ci-arm-medium
@@ -68,6 +70,8 @@ jobs:
           at: ~/project
       - ui-test:
           scheme: "DirectAuthSignIn (iOS)"
+      - store_artifacts:
+          path: "~/TestResults"
 
   test-deviceauthsignin-ios:
     executor: apple-ci-arm-medium
@@ -76,6 +80,8 @@ jobs:
           at: ~/project
       - ui-test:
           scheme: "DeviceAuthSignIn (iOS)"
+      - store_artifacts:
+          path: "~/TestResults"
 
   test-deviceauthsignin-tvos:
     executor: apple-ci-arm-medium
@@ -86,6 +92,8 @@ jobs:
           scheme: "DeviceAuthSignIn (tvOS)"
           sdk: appletvsimulator
           destination: "platform=tvOS Simulator,OS=16.4,name=Apple TV"
+      - store_artifacts:
+          path: "~/TestResults"
 
   test-userpasswordsignin-macos:
     executor: apple-ci-arm-medium
@@ -96,6 +104,8 @@ jobs:
           scheme: "UserPasswordSignIn (macOS)"
           sdk: macosx
           destination: "platform=macOS,name=Any Mac"
+      - store_artifacts:
+          path: "~/TestResults"
 
   test-classicnativeauth-ios:
     executor: apple-ci-arm-medium
@@ -104,6 +114,8 @@ jobs:
           at: ~/project
       - ui-test:
           scheme: "ClassicNativeAuth (iOS)"
+      - store_artifacts:
+          path: "~/TestResults"
 
   snyk-scan:
     executor: apple-ci-arm-medium
