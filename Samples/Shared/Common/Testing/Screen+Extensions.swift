@@ -59,14 +59,13 @@ extension WebLogin where Self: Screen {
            app.webViews.textFields.firstMatch.waitForExistence(timeout: .veryLong)
         {
             let field = app.webViews.textFields.element(boundBy: 0)
-            
-            if !isEphemeral,
-               let fieldValue = field.value as? String,
+            field.tap()
+
+            if let fieldValue = field.value as? String,
                !fieldValue.isEmpty
             {
+                usleep(useconds_t(1000)) // Wait for the field to be selected
                 field.tap(withNumberOfTaps: 3, numberOfTouches: 1)
-            } else {
-                field.tap()
             }
             
             field.typeText(username)
