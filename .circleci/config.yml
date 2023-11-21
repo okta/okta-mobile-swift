@@ -19,7 +19,7 @@ commands:
         default: iphonesimulator
       destination:
         type: string
-        default: "platform=iOS Simulator,OS=17.0.1,name=iPhone 15 Pro Max"
+        default: "platform=iOS Simulator,OS=17.2,name=iPhone 15 Pro Max"
     steps:
       - run:
           name: "Test <<parameters.scheme>>"
