@@ -35,6 +35,11 @@ commands:
                 -sdk <<parameters.sdk>> \
                 -destination "<<parameters.destination>>" \
                 test 2>&1
+      - run:
+          name: "Compress test results"
+          command: |
+            zip -r "~/TestResults/<<parameters.scheme>>.zip" "~/TestResults/<<parameters.scheme>>.xcresult" 
+            rm -rf "~/TestResults/<<parameters.scheme>>.xcresult" 
 
 jobs:
   setup:
