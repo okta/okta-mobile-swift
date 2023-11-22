@@ -37,6 +37,7 @@ commands:
                 test 2>&1
       - run:
           name: "Compress test results"
+          when: always
           command: |
             (
               cd ~/TestResults
