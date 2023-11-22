@@ -38,8 +38,11 @@ commands:
       - run:
           name: "Compress test results"
           command: |
-            zip -r "~/TestResults/<<parameters.scheme>>.zip" "~/TestResults/<<parameters.scheme>>.xcresult" 
-            rm -rf "~/TestResults/<<parameters.scheme>>.xcresult" 
+            (
+              cd ~/TestResults
+              zip -r "<<parameters.scheme>>.zip" "<<parameters.scheme>>.xcresult" 
+              rm -rf "<<parameters.scheme>>.xcresult" 
+            )
 
 jobs:
   setup:
