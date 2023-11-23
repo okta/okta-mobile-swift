@@ -81,9 +81,15 @@ class SignInScreen: Screen {
     }
     
     func login(username: String? = nil, factor: Factor, value: String? = nil) {
-        if let username = username {
+        if factorTypeButton.label != factor.rawValue {
+            factorTypeButton.tap()
+            app.buttons[factor.rawValue].tap()
+        }
+
+        if let username = username,
+           app.textFields.firstMatch.waitForExistence(timeout: .standard)
+        {
             let field = app.textFields["username_field"]
-            _ = field.waitForExistence(timeout: .standard)
             field.tap()
             
             if let fieldValue = field.value as? String,
@@ -96,11 +102,6 @@ class SignInScreen: Screen {
             field.typeText(username)
         }
         
-        if factorTypeButton.label != factor.rawValue {
-            factorTypeButton.tap()
-            app.buttons[factor.rawValue].tap()
-        }
-
         if let value = factor.value(from: value) {
             var field = app.textFields[factor.accessibilityIdentifier]
             if !field.exists {
