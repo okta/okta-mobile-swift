@@ -55,9 +55,9 @@ extension WebLogin where Self: Screen {
     }
     
     func send(username: String? = nil) {
-        if let username = username,
-           app.webViews.textFields.firstMatch.waitForExistence(timeout: .veryLong)
-        {
+        guard let username else { return }
+        
+        if app.webViews.textFields.firstMatch.waitForExistence(timeout: .veryLong) {
             let field = app.webViews.textFields.element(boundBy: 0)
             field.tap()
 
@@ -97,13 +97,13 @@ extension WebLogin where Self: Screen {
     }
     
     func send(password: String? = nil) {
+        guard let password else { return }
+        
         if app.webViews.staticTexts["Select from the following options"].waitToBeHittable(timeout: .standard) {
             select(authenticator: "Password")
         }
         
-        if let password = password,
-           app.webViews.secureTextFields.firstMatch.waitForExistence(timeout: 5)
-        {
+        if app.webViews.secureTextFields.firstMatch.waitForExistence(timeout: 5) {
             let field = app.webViews.secureTextFields.element(boundBy: 0)
             field.tap()
             field.typeText(password)

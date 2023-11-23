@@ -39,11 +39,13 @@ commands:
           name: "Compress test results"
           when: always
           command: |
+            if [[ -d "~/TestResults/<<parameters.scheme>>.xcresult" ]]; then
             (
               cd ~/TestResults
               zip -r "<<parameters.scheme>>.zip" "<<parameters.scheme>>.xcresult" 
               rm -rf "<<parameters.scheme>>.xcresult" 
             )
+            fi
 
 jobs:
   setup:
