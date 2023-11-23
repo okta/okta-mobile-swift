@@ -66,6 +66,18 @@ extension XCUIElement {
         
         return false
     }
+    
+    func waitToBeHittable(timeout: TimeInterval) -> Bool {
+        let timeStart = Date().timeIntervalSince1970
+        
+        while Date().timeIntervalSince1970 <= (timeStart + timeout) {
+            if !exists {
+                return true
+            }
+        }
+        
+        return false
+    }
 }
 
 extension XCUIElementQuery {

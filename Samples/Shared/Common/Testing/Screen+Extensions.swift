@@ -88,8 +88,16 @@ extension WebLogin where Self: Screen {
         }
     }
     
+    func wait(for staticText: String, timeout: TimeInterval = .standard) -> Bool {
+        guard app.staticTexts[staticText].waitForExistence(timeout: timeout) else { return false }
+        if !app.staticTexts[staticText].isHittable {
+            return app.staticTexts[staticText].waitToBeHittable(timeout: timeout)
+        }
+        return true
+    }
+    
     func send(password: String? = nil) {
-        if app.webViews.staticTexts["Select from the following options"].waitForExistence(timeout: 1) {
+        if app.webViews.staticTexts["Select from the following options"].waitToBeHittable(timeout: .standard) {
             select(authenticator: "Password")
         }
         
