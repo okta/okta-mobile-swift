@@ -81,15 +81,15 @@ class SignInScreen: Screen {
     }
     
     func login(username: String? = nil, factor: Factor, value: String? = nil) {
-        if let username = username,
-           app.textFields.firstMatch.waitForExistence(timeout: .standard)
-        {
-            let field = app.textFields.element(boundBy: 0)
+        if let username = username {
+            let field = app.textFields["username_field"]
+            _ = field.waitForExistence(timeout: .standard)
             field.tap()
             
             if let fieldValue = field.value as? String,
                !fieldValue.isEmpty
             {
+                usleep(useconds_t(1000)) // Wait for the field to be selected
                 field.tap(withNumberOfTaps: 3, numberOfTouches: 1)
             }
             
