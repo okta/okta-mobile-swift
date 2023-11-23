@@ -29,7 +29,7 @@ commands:
             set -o pipefail && xcodebuild \
                 -derivedDataPath ~/Build/DerivedData \
                 -clonedSourcePackagesDirPath ~/Build/ClonedSources \
-                -resultBundlePath "~/TestResults/<<parameters.scheme>>.xcresult" \
+                -resultBundlePath "~/TestResults/<<parameters.scheme>> #$CIRCLE_BUILD_NUM.xcresult" \
                 -workspace OktaMobileSDK.xcworkspace \
                 -scheme "<<parameters.scheme>>" \
                 -sdk <<parameters.sdk>> \
@@ -39,12 +39,10 @@ commands:
           name: "Compress test results"
           when: always
           command: |
-            if [[ -d "~/TestResults/<<parameters.scheme>>.xcresult" ]]; then
-            (
-              cd ~/TestResults
-              zip -r "<<parameters.scheme>>.zip" "<<parameters.scheme>>.xcresult" 
-              rm -rf "<<parameters.scheme>>.xcresult" 
-            )
+            cd ~/TestResults
+            if [[ -d "<<parameters.scheme>> #$CIRCLE_BUILD_NUM.xcresult" ]]; then
+              zip -r "<<parameters.scheme>> #$CIRCLE_BUILD_NUM.zip" "<<parameters.scheme>> #$CIRCLE_BUILD_NUM.xcresult" 
+              rm -rf "<<parameters.scheme>> #$CIRCLE_BUILD_NUM.xcresult" 
             fi
 
 jobs:
