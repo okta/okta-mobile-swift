@@ -27,9 +27,9 @@ commands:
             NSUnbufferedIO: YES
           command: |
             set -o pipefail && xcodebuild \
-                -derivedDataPath ~/Build/DerivedData \
-                -clonedSourcePackagesDirPath ~/Build/ClonedSources \
-                -resultBundlePath "~/TestResults/<<parameters.scheme>> #$CIRCLE_BUILD_NUM.xcresult" \
+                -derivedDataPath /tmp/Build/DerivedData \
+                -clonedSourcePackagesDirPath /tmp/Build/ClonedSources \
+                -resultBundlePath "/tmp/TestResults/<<parameters.scheme>> #$CIRCLE_BUILD_NUM.xcresult" \
                 -workspace OktaMobileSDK.xcworkspace \
                 -scheme "<<parameters.scheme>>" \
                 -sdk <<parameters.sdk>> \
@@ -43,13 +43,13 @@ commands:
               brew tap a7ex/homebrew-formulae
               brew install xcresultparser
             fi
-            xcresultparser -o junit "~/TestResults/<<parameters.scheme>> #$CIRCLE_BUILD_NUM.xcresult" > "/tmp/junit-results/<<parameters.scheme>>.xml"
-            xcresultparser -o cli "~/TestResults/<<parameters.scheme>> #$CIRCLE_BUILD_NUM.xcresult"
+            xcresultparser -o junit "/tmp/TestResults/<<parameters.scheme>> #$CIRCLE_BUILD_NUM.xcresult" > "/tmp/junit-results/<<parameters.scheme>>.xml"
+            xcresultparser -o cli "/tmp/TestResults/<<parameters.scheme>> #$CIRCLE_BUILD_NUM.xcresult"
       - run:
           name: "Compress test results"
           when: always
           command: |
-            cd ~/TestResults
+            cd /tmp/TestResults
             if [[ -d "<<parameters.scheme>> #$CIRCLE_BUILD_NUM.xcresult" ]]; then
               zip -r "<<parameters.scheme>> #$CIRCLE_BUILD_NUM.zip" "<<parameters.scheme>> #$CIRCLE_BUILD_NUM.xcresult" 
               rm -rf "<<parameters.scheme>> #$CIRCLE_BUILD_NUM.xcresult" 
@@ -82,7 +82,7 @@ jobs:
       - ui-test:
           scheme: "SingleSignOn (iOS)"
       - store_artifacts:
-          path: "~/TestResults"
+          path: "/tmp/TestResults"
 
   test-directauth-ios:
     executor: apple-ci-arm-medium
@@ -92,7 +92,7 @@ jobs:
       - ui-test:
           scheme: "DirectAuthSignIn (iOS)"
       - store_artifacts:
-          path: "~/TestResults"
+          path: "/tmp/TestResults"
 
   test-deviceauthsignin-ios:
     executor: apple-ci-arm-medium
@@ -102,7 +102,7 @@ jobs:
       - ui-test:
           scheme: "DeviceAuthSignIn (iOS)"
       - store_artifacts:
-          path: "~/TestResults"
+          path: "/tmp/TestResults"
 
   test-deviceauthsignin-tvos:
     executor: apple-ci-arm-medium
@@ -114,7 +114,7 @@ jobs:
           sdk: appletvsimulator
           destination: "platform=tvOS Simulator,OS=17.0,name=Apple TV"
       - store_artifacts:
-          path: "~/TestResults"
+          path: "/tmp/TestResults"
 
   test-userpasswordsignin-macos:
     executor: apple-ci-arm-medium
@@ -126,7 +126,7 @@ jobs:
           sdk: macosx
           destination: "platform=macOS,name=Any Mac"
       - store_artifacts:
-          path: "~/TestResults"
+          path: "/tmp/TestResults"
 
   test-classicnativeauth-ios:
     executor: apple-ci-arm-medium
@@ -136,7 +136,7 @@ jobs:
       - ui-test:
           scheme: "ClassicNativeAuth (iOS)"
       - store_artifacts:
-          path: "~/TestResults"
+          path: "/tmp/TestResults"
 
   snyk-scan:
     executor: apple-ci-arm-medium
