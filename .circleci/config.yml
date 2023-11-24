@@ -14,7 +14,7 @@ commands:
   prepare-ios-simulator:
     steps:
       - macos/preboot-simulator:
-          version: "17.0.1"
+          version: "17.0"
           platform: "iOS"
           device: "iPhone 15 Pro Max"
 
