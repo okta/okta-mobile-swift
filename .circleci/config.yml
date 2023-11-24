@@ -2,6 +2,7 @@ version: 2.1
 
 orbs:
   general-platform-helpers: okta/general-platform-helpers@1.8
+  macos: circleci/macos@2
 
 executors:
   apple-ci-arm-medium:
@@ -10,6 +11,20 @@ executors:
     resource_class: macos.m1.medium.gen1
 
 commands:
+  prepare-ios-simulator:
+    steps:
+      - macos/preboot-simulator:
+        version: "17.0.1"
+        platform: "iOS"
+        device: "iPhone 15 Pro Max"
+
+  prepare-tvos-simulator:
+    steps:
+      - macos/preboot-simulator:
+        version: "17.0"
+        platform: "tvOS"
+        device: "Apple TV"
+
   ui-test:
     parameters:
       scheme:
@@ -20,6 +35,8 @@ commands:
       destination:
         type: string
         default: "platform=iOS Simulator,OS=17.0.1,name=iPhone 15 Pro Max"
+    environment:
+      HOMEBREW_NO_AUTO_UPDATE: 1
     steps:
       - run:
           name: "Test <<parameters.scheme>>"
@@ -37,6 +54,7 @@ commands:
                 test 2>&1
       - run:
           name: "Export test results"
+          when: always
           command: |
             mkdir -p /tmp/junit-results
             if ! which -s xcresulttool; then
@@ -75,6 +93,7 @@ jobs:
   test-websignin-ios:
     executor: apple-ci-arm-medium
     steps:
+      - prepare-ios-simulator
       - attach_workspace:
           at: ~/project
       - ui-test:
@@ -87,6 +106,7 @@ jobs:
   test-directauth-ios:
     executor: apple-ci-arm-medium
     steps:
+      - prepare-ios-simulator
       - attach_workspace:
           at: ~/project
       - ui-test:
@@ -97,6 +117,7 @@ jobs:
   test-deviceauthsignin-ios:
     executor: apple-ci-arm-medium
     steps:
+      - prepare-ios-simulator
       - attach_workspace:
           at: ~/project
       - ui-test:
@@ -107,6 +128,7 @@ jobs:
   test-deviceauthsignin-tvos:
     executor: apple-ci-arm-medium
     steps:
+      - prepare-tvos-simulator
       - attach_workspace:
           at: ~/project
       - ui-test:
@@ -131,6 +153,7 @@ jobs:
   test-classicnativeauth-ios:
     executor: apple-ci-arm-medium
     steps:
+      - prepare-ios-simulator
       - attach_workspace:
           at: ~/project
       - ui-test:
