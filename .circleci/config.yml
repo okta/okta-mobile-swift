@@ -35,8 +35,6 @@ commands:
       destination:
         type: string
         default: "platform=iOS Simulator,OS=17.0.1,name=iPhone 15 Pro Max"
-    environment:
-      HOMEBREW_NO_AUTO_UPDATE: 1
     steps:
       - run:
           name: "Test <<parameters.scheme>>"
@@ -92,6 +90,8 @@ jobs:
 
   test-websignin-ios:
     executor: apple-ci-arm-medium
+    environment:
+      HOMEBREW_NO_AUTO_UPDATE: 1
     steps:
       - prepare-ios-simulator
       - attach_workspace:
@@ -116,6 +116,8 @@ jobs:
 
   test-deviceauthsignin-ios:
     executor: apple-ci-arm-medium
+    environment:
+      HOMEBREW_NO_AUTO_UPDATE: 1
     steps:
       - prepare-ios-simulator
       - attach_workspace:
@@ -127,6 +129,8 @@ jobs:
 
   test-deviceauthsignin-tvos:
     executor: apple-ci-arm-medium
+    environment:
+      HOMEBREW_NO_AUTO_UPDATE: 1
     steps:
       - prepare-tvos-simulator
       - attach_workspace:
@@ -140,6 +144,8 @@ jobs:
 
   test-userpasswordsignin-macos:
     executor: apple-ci-arm-medium
+    environment:
+      HOMEBREW_NO_AUTO_UPDATE: 1
     steps:
       - attach_workspace:
           at: ~/project
@@ -152,6 +158,8 @@ jobs:
 
   test-classicnativeauth-ios:
     executor: apple-ci-arm-medium
+    environment:
+      HOMEBREW_NO_AUTO_UPDATE: 1
     steps:
       - prepare-ios-simulator
       - attach_workspace:
