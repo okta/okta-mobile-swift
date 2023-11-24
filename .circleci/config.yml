@@ -93,9 +93,9 @@ jobs:
     environment:
       HOMEBREW_NO_AUTO_UPDATE: 1
     steps:
-      - prepare-ios-simulator
       - attach_workspace:
           at: ~/project
+      - prepare-ios-simulator
       - ui-test:
           scheme: "WebSignIn (iOS)"
       - ui-test:
@@ -106,9 +106,9 @@ jobs:
   test-directauth-ios:
     executor: apple-ci-arm-medium
     steps:
-      - prepare-ios-simulator
       - attach_workspace:
           at: ~/project
+      - prepare-ios-simulator
       - ui-test:
           scheme: "DirectAuthSignIn (iOS)"
       - store_artifacts:
@@ -119,9 +119,9 @@ jobs:
     environment:
       HOMEBREW_NO_AUTO_UPDATE: 1
     steps:
-      - prepare-ios-simulator
       - attach_workspace:
           at: ~/project
+      - prepare-ios-simulator
       - ui-test:
           scheme: "DeviceAuthSignIn (iOS)"
       - store_artifacts:
@@ -132,9 +132,9 @@ jobs:
     environment:
       HOMEBREW_NO_AUTO_UPDATE: 1
     steps:
-      - prepare-tvos-simulator
       - attach_workspace:
           at: ~/project
+      - prepare-tvos-simulator
       - ui-test:
           scheme: "DeviceAuthSignIn (tvOS)"
           sdk: appletvsimulator
@@ -161,9 +161,9 @@ jobs:
     environment:
       HOMEBREW_NO_AUTO_UPDATE: 1
     steps:
-      - prepare-ios-simulator
       - attach_workspace:
           at: ~/project
+      - prepare-ios-simulator
       - ui-test:
           scheme: "ClassicNativeAuth (iOS)"
       - store_artifacts:
