@@ -6,7 +6,7 @@ orbs:
 executors:
   apple-ci-arm-medium:
     macos:
-      xcode: 15.1
+      xcode: 15.0.0
     resource_class: macos.m1.medium.gen1
 
 commands:
@@ -19,7 +19,7 @@ commands:
         default: iphonesimulator
       destination:
         type: string
-        default: "platform=iOS Simulator,OS=17.2,name=iPhone 15 Pro Max"
+        default: "platform=iOS Simulator,OS=17.0,name=iPhone 15 Pro Max"
     steps:
       - run:
           name: "Test <<parameters.scheme>>"
@@ -100,7 +100,7 @@ jobs:
       - ui-test:
           scheme: "DeviceAuthSignIn (tvOS)"
           sdk: appletvsimulator
-          destination: "platform=tvOS Simulator,OS=16.4,name=Apple TV"
+          destination: "platform=tvOS Simulator,OS=17.0,name=Apple TV"
       - store_artifacts:
           path: "~/TestResults"
 
