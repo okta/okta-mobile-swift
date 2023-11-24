@@ -19,7 +19,7 @@ commands:
         default: iphonesimulator
       destination:
         type: string
-        default: "platform=iOS Simulator,OS=17.0,name=iPhone 15 Pro Max"
+        default: "platform=iOS Simulator,OS=17.0.1,name=iPhone 15 Pro Max"
     steps:
       - run:
           name: "Test <<parameters.scheme>>"
@@ -36,6 +36,11 @@ commands:
                 -destination "<<parameters.destination>>" \
                 test 2>&1
       - run:
+          name: "Export test results"
+          command: |
+            xcresultparser -o junit "~/TestResults/<<parameters.scheme>> #$CIRCLE_BUILD_NUM.xcresult" > "/tmp/junit-results/<<parameters.scheme>>.xml"
+            xcresultparser -o cli "~/TestResults/<<parameters.scheme>> #$CIRCLE_BUILD_NUM.xcresult"
+      - run:
           name: "Compress test results"
           when: always
           command: |
@@ -44,6 +49,8 @@ commands:
               zip -r "<<parameters.scheme>> #$CIRCLE_BUILD_NUM.zip" "<<parameters.scheme>> #$CIRCLE_BUILD_NUM.xcresult" 
               rm -rf "<<parameters.scheme>> #$CIRCLE_BUILD_NUM.xcresult" 
             fi
+      - store_test_results:
+          path: "/tmp/junit-results/<<parameters.scheme>>.xml"
 
 jobs:
   setup:
@@ -59,6 +66,16 @@ jobs:
           root: ~/project
           paths:
             - .
+
+  prepare-tests:
+    executor: apple-ci-arm-medium
+    steps:
+      - run:
+          name: "Prepare tools used for testing"
+          command: |
+            brew tap a7ex/homebrew-formulae
+            brew install xcresultparser
+            mkdir -p /tmp/junit-results
 
   test-websignin-ios:
     executor: apple-ci-arm-medium
@@ -147,24 +164,31 @@ workflows:
   ui-tests:
     jobs:
       - setup
+      - prepare-tests
       - test-websignin-ios:
           requires:
             - setup
+            - prepare-tests
       - test-directauth-ios:
           requires:
             - setup
+            - prepare-tests
       - test-deviceauthsignin-ios:
           requires:
             - setup
+            - prepare-tests
       - test-deviceauthsignin-tvos:
           requires:
             - setup
+            - prepare-tests
       - test-userpasswordsignin-macos:
           requires:
             - setup
+            - prepare-tests
       - test-classicnativeauth-ios:
           requires:
             - setup
+            - prepare-tests
 
   semgrep:
     jobs:
