@@ -38,6 +38,11 @@ commands:
       - run:
           name: "Export test results"
           command: |
+            mkdir -p /tmp/junit-results
+            if ! which -s xcresulttool; then
+              brew tap a7ex/homebrew-formulae
+              brew install xcresultparser
+            fi
             xcresultparser -o junit "~/TestResults/<<parameters.scheme>> #$CIRCLE_BUILD_NUM.xcresult" > "/tmp/junit-results/<<parameters.scheme>>.xml"
             xcresultparser -o cli "~/TestResults/<<parameters.scheme>> #$CIRCLE_BUILD_NUM.xcresult"
       - run:
@@ -66,16 +71,6 @@ jobs:
           root: ~/project
           paths:
             - .
-
-  prepare-tests:
-    executor: apple-ci-arm-medium
-    steps:
-      - run:
-          name: "Prepare tools used for testing"
-          command: |
-            brew tap a7ex/homebrew-formulae
-            brew install xcresultparser
-            mkdir -p /tmp/junit-results
 
   test-websignin-ios:
     executor: apple-ci-arm-medium
@@ -164,31 +159,24 @@ workflows:
   ui-tests:
     jobs:
       - setup
-      - prepare-tests
       - test-websignin-ios:
           requires:
             - setup
-            - prepare-tests
       - test-directauth-ios:
           requires:
             - setup
-            - prepare-tests
       - test-deviceauthsignin-ios:
           requires:
             - setup
-            - prepare-tests
       - test-deviceauthsignin-tvos:
           requires:
             - setup
-            - prepare-tests
       - test-userpasswordsignin-macos:
           requires:
             - setup
-            - prepare-tests
       - test-classicnativeauth-ios:
           requires:
             - setup
-            - prepare-tests
 
   semgrep:
     jobs:
