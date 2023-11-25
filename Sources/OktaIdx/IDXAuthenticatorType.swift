@@ -19,7 +19,7 @@ extension Authenticator {
     }
     
     /// The type of authenticator.
-    public enum Kind {
+    public enum Kind: Equatable {
         case unknown
         case app
         case email
@@ -32,7 +32,7 @@ extension Authenticator {
     }
     
     /// The method, or sub-type, of an authenticator.
-    public enum Method {
+    public enum Method: Equatable {
         case unknown
         case sms
         case voice

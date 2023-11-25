@@ -36,7 +36,7 @@ public class Authenticator: Equatable {
     
     /// Set of objects that describe the capabilities this authenticator may have.
     public let capabilities: [AuthenticatorCapability]
-    
+
     public static func == (lhs: Authenticator, rhs: Authenticator) -> Bool {
         lhs.id == rhs.id &&
         lhs.displayName == rhs.displayName &&

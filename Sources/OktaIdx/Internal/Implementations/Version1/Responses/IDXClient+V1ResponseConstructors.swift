@@ -193,9 +193,9 @@ extension Authenticator.Collection {
             .values
             .compactMap({ (mappingArray) in
                 return try Authenticator.makeAuthenticator(flow: flow,
-                                                                     ion: mappingArray.map(\.authenticator),
-                                                                     jsonPaths: mappingArray.map(\.jsonPath),
-                                                                     in: object)
+                                                           ion: mappingArray.map(\.authenticator),
+                                                           jsonPaths: mappingArray.map(\.jsonPath),
+                                                           in: object)
             })
         
         self.init(authenticators: authenticators)
@@ -275,8 +275,8 @@ extension Capability.Pollable {
             return nil
         }
         guard let remediation = Remediation.makeRemediation(flow: flow,
-                                                                      ion: form,
-                                                                      createCapabilities: false)
+                                                            ion: form,
+                                                            createCapabilities: false)
         else {
             return nil
         }
@@ -352,6 +352,29 @@ extension Capability.OTP {
     }
 }
 
+extension Capability.Duo {
+    convenience init?(flow: InteractionCodeFlowAPI, ion authenticators: [IonAuthenticator]) {
+        // Exit early if none of the authenticators have a "duo" method
+        let methods = methodTypes(from: authenticators)
+        guard methods.contains(.duo) else {
+            return nil
+        }
+
+        // Extract the duo authenticator data
+        let duoAuthenticators = authenticators.filter({ $0.type == "app" && $0.key == "duo" })
+        guard let authenticator = duoAuthenticators.first(where: { $0.contextualData != nil }),
+              let contextualData = authenticator.contextualData,
+              let host = contextualData["host"]?.stringValue(),
+              let signedToken = contextualData["signedToken"]?.stringValue(),
+              let script = contextualData["script"]?.stringValue()
+        else {
+            return nil
+        }
+        
+        self.init(host: host, signedToken: signedToken, script: script)
+    }
+}
+
 extension Capability.SocialIDP {
     init?(flow: InteractionCodeFlowAPI, ion object: IonForm) {
         let type = Remediation.RemediationType(string: object.name)
@@ -418,18 +441,19 @@ extension Authenticator {
             Capability.Recoverable(flow: flow, ion: authenticators),
             Capability.PasswordSettings(flow: flow, ion: authenticators),
             Capability.NumberChallenge(flow: flow, ion: authenticators),
-            Capability.OTP(flow: flow, ion: authenticators)
+            Capability.OTP(flow: flow, ion: authenticators),
+            Capability.Duo(flow: flow, ion: authenticators)
         ]
         
         return Authenticator(flow: flow,
-                                       v1JsonPaths: jsonPaths,
-                                       state: state,
-                                       id: first.id,
-                                       displayName: first.displayName,
-                                       type: first.type,
-                                       key: key,
-                                       methods: methods,
-                                       capabilities: capabilities.compactMap { $0 })
+                             v1JsonPaths: jsonPaths,
+                             state: state,
+                             id: first.id,
+                             displayName: first.displayName,
+                             type: first.type,
+                             key: key,
+                             methods: methods,
+                             capabilities: capabilities.compactMap { $0 })
     }
 }
 

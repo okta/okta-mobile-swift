@@ -86,6 +86,11 @@ public class Remediation: Equatable, Hashable {
             return
         }
         
+        // Inform any capabilities associated with this remediation that it will proceed.
+        authenticators.compactMap({ $0.capabilities })
+            .flatMap({ $0 })
+            .forEach({ $0.willProceed(to: self) })
+        
         let request: InteractionCodeFlow.RemediationRequest
         do {
             request = try InteractionCodeFlow.RemediationRequest(remediation: self)

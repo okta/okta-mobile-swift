@@ -13,7 +13,11 @@
 import Foundation
 
 /// A generic protocol used to identify objects that describe a capability.
-public protocol IDXCapability {}
+public protocol IDXCapability {
+    /// Message sent to capabilities when the response it's contained within will proceed through a remediation.
+    /// - Parameter remediation: Remediation being invoked.
+    func willProceed(to remediation: Remediation)
+}
 
 /// Defines type conformance for capabilities that can be used with Authenticators.
 public protocol AuthenticatorCapability: IDXCapability {}
@@ -76,6 +80,9 @@ extension Authenticator: CapabilityCollection {
     
     /// Exposes data assocated with one-time-password authenticator enrollment handling.
     public var otp: Capability.OTP? { capability(Capability.OTP.self) }
+    
+    /// Exposes data assocated with duo authenticator challenge.
+    public var duo: Capability.Duo? { capability(Capability.Duo.self) }
 
     /// Exposes information related to multiple-choice number challenges.
     public var numberChallenge: Capability.NumberChallenge? { capability(Capability.NumberChallenge.self) }
@@ -93,4 +100,7 @@ extension Remediation: CapabilityCollection {
     ///
     /// This value will only be present for social IDP remediation options, and will otherwise be `nil`.
     public var socialIdp: Capability.SocialIDP? { capability(Capability.SocialIDP.self) }
+    
+    /// This value will only be present for Duo MFA,  otherwise will be `nil`.
+    public var duo: Capability.Duo? { capability(Capability.Duo.self) }
 }

@@ -114,4 +114,53 @@ class IDXCapabilityTests: XCTestCase {
         
         XCTAssertEqual(flowMock.recordedCalls.count, 1)
     }
+    
+    func testDuoSignatureData() throws {
+        let issuer = try XCTUnwrap(URL(string: "https://example.com/oauth2/default"))
+        redirectUri = try XCTUnwrap(URL(string: "redirect:/uri"))
+        
+        client = OAuth2Client(baseURL: issuer,
+                              clientId: "clientId",
+                              scopes: "openid profile",
+                              session: urlSession)
+        
+        let context = try InteractionCodeFlow.Context(interactionHandle: "handle", state: "state")
+        
+        flowMock = InteractionCodeFlowMock(context: context, client: client, redirectUri: redirectUri)
+        
+        let signatureField = Remediation.Form.Field(name: "signatureData", visible: false, mutable: true, required: false, secret: false)
+        let duo = Capability.Duo(host: "", signedToken: "", script: "")
+        let credentials = Remediation.Form.Field(name: "credentials",
+                                                 label: "credentials",
+                                                 visible: true,
+                                                 mutable: true,
+                                                 required: false,
+                                                 secret: false,
+                                                 form: .init(fields: [signatureField]))
+        let form = try XCTUnwrap(Remediation.Form(fields: [ credentials ]))
+        remediation = Remediation(flow: flowMock,
+                                  name: "remediation",
+                                  method: "POST",
+                                  href: URL(string: "https://example.com/idp/path")!,
+                                  accepts: "application/ion+json; okta-version=1.0.0",
+                                  form: form,
+                                  refresh: nil,
+                                  relatesTo: nil,
+                                  capabilities: [])
+        let authenticator =  Authenticator(flow: flowMock,
+                                           v1JsonPaths: [], state: .authenticating,
+                                           id: "duo",
+                                           displayName: "",
+                                           type: "app",
+                                           key: "app",
+                                           methods: [["type":"duo"]],
+                                           capabilities: [duo])
+        
+        remediation.authenticators = .init(authenticators: [authenticator])
+        responseData = try data(from: .module,
+                                for: "introspect-response")
+        duo.signatureData = "signature"
+        duo.willProceed(to: remediation)
+        XCTAssertEqual(signatureField.value?.stringValue,"signature")
+    }
 }

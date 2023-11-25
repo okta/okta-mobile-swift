@@ -748,4 +748,45 @@ class IDXClientV1ResponseTests: XCTestCase {
         XCTAssertEqual(firstAuthenticator.profile?["email"], "t***l@mailinator.com")
         XCTAssertEqual(secondAuthenticator.profile?["email"], "e***t@okta.com")
     }
+
+    func testDuoCapability() throws {
+        let host = "api.duosecurity.com"
+        let token = "token"
+        let script = "Duo-Web-v2.6.js"
+
+        let obj = try decode(type: IonObject<IonAuthenticator>.self, """
+        {
+          "type" : "object",
+          "value" : {
+           "contextualData": {
+                  "integrationType": "IFRAME",
+                  "host": "\(host)",
+                  "signedToken": "\(token)",
+                  "script": "\(script)"
+                },
+                "type": "app",
+                "key": "duo",
+                "id": "dsfd21pa9uqQZMcJL5d7",
+                "displayName": "Duo Security",
+                "methods": [
+                  {
+                    "type": "duo"
+                  }
+                ]
+            }
+        }
+        """)
+
+        let publicObj = try XCTUnwrap(Authenticator.makeAuthenticator(flow: flowMock,
+                                                                      ion: [obj.value],
+                                                                      jsonPaths: [],
+                                                                      in: response))
+        XCTAssertEqual(publicObj.type, .app)
+        let otp = try XCTUnwrap(publicObj.duo)
+
+        XCTAssertEqual(otp.host, host)
+        XCTAssertEqual(otp.signedToken, token)
+        XCTAssertNotNil(otp.script, script)
+    }
+
 }

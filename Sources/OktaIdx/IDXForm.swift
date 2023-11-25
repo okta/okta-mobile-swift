@@ -33,14 +33,12 @@ extension Remediation {
         
         /// The array of ordered user-visible fields within this form. Each field may also contain nested forms for collections of related fields.
         public let fields: [Field]
-        
         let allFields: [Field]
 
         init?(fields: [Field]?) {
             guard let fields = fields else { return nil }
             self.allFields = fields
             self.fields = self.allFields.filter { $0.hasVisibleFields }
-            
             super.init()
         }
     }
