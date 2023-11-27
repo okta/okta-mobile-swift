@@ -18,7 +18,7 @@ var package = Package(
     dependencies: [
         .package(name: "AuthFoundation",
                  url: "https://github.com/okta/okta-mobile-swift",
-                 from: "1.4.2")
+                 from: "1.5.0")
     ],
     targets: [
         .target(name: "OktaIdx",

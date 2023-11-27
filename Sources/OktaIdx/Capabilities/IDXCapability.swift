@@ -100,7 +100,4 @@ extension Remediation: CapabilityCollection {
     ///
     /// This value will only be present for social IDP remediation options, and will otherwise be `nil`.
     public var socialIdp: Capability.SocialIDP? { capability(Capability.SocialIDP.self) }
-    
-    /// This value will only be present for Duo MFA,  otherwise will be `nil`.
-    public var duo: Capability.Duo? { capability(Capability.Duo.self) }
 }
