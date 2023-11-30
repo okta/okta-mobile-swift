@@ -37,9 +37,7 @@ commands:
         default: "iOS Simulator"
     steps:
       - run:
-          name: "Build <<parameters.scheme>>"
-          environment:
-            NSUnbufferedIO: YES
+          name: "Define destination"
           command: |
             if [[ "<<parameters.platform>>" == "macOS" ]]; then
                 export DESTINATION="platform=<<parameters.platform>>,name=Any Mac"
@@ -48,6 +46,13 @@ commands:
             else
                 export DESTINATION="platform=<<parameters.platform>>"
             fi
+            echo "export DESTINATION=\"$DESTINATION\"" >> "$BASH_ENV"
+            source "$BASH_ENV"
+      - run:
+          name: "Build <<parameters.scheme>>"
+          environment:
+            NSUnbufferedIO: YES
+          command: |
             set -o pipefail && xcodebuild \
                 -derivedDataPath /tmp/Build/DerivedData \
                 -clonedSourcePackagesDirPath /tmp/Build/ClonedSources \
