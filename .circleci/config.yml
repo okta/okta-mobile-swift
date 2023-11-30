@@ -32,10 +32,25 @@ commands:
       sdk:
         type: string
         default: iphonesimulator
-      destination:
+      platform:
         type: string
-        default: "platform=iOS Simulator,OS=17.0.1,name=iPhone 15 Pro Max"
+        default: "iOS Simulator"
     steps:
+      - run:
+          name: "Build <<parameters.scheme>>"
+          environment:
+            NSUnbufferedIO: YES
+          command: |
+            set -o pipefail && xcodebuild \
+                -derivedDataPath /tmp/Build/DerivedData \
+                -clonedSourcePackagesDirPath /tmp/Build/ClonedSources \
+                -resultBundlePath "/tmp/TestResults/<<parameters.scheme>> #$CIRCLE_BUILD_NUM.xcresult" \
+                -workspace OktaMobileSDK.xcworkspace \
+                -scheme "<<parameters.scheme>>" \
+                -sdk <<parameters.sdk>> \
+                -destination "platform=<<parameters.platform>>,id=$MACOS_ORB_DEVICE_UDID" \
+                build-for-testing 2>&1
+      - macos/wait-until-simulator-booted
       - run:
           name: "Test <<parameters.scheme>>"
           environment:
@@ -48,8 +63,8 @@ commands:
                 -workspace OktaMobileSDK.xcworkspace \
                 -scheme "<<parameters.scheme>>" \
                 -sdk <<parameters.sdk>> \
-                -destination "<<parameters.destination>>" \
-                test 2>&1
+                -destination "platform=<<parameters.platform>>,id=$MACOS_ORB_DEVICE_UDID" \
+                test-without-building 2>&1
       - run:
           name: "Export test results"
           when: always
@@ -60,7 +75,6 @@ commands:
               brew install xcresultparser
             fi
             xcresultparser -o junit "/tmp/TestResults/<<parameters.scheme>> #$CIRCLE_BUILD_NUM.xcresult" > "/tmp/junit-results/<<parameters.scheme>>.xml"
-            xcresultparser -o cli "/tmp/TestResults/<<parameters.scheme>> #$CIRCLE_BUILD_NUM.xcresult"
       - run:
           name: "Compress test results"
           when: always
@@ -138,7 +152,7 @@ jobs:
       - ui-test:
           scheme: "DeviceAuthSignIn (tvOS)"
           sdk: appletvsimulator
-          destination: "platform=tvOS Simulator,OS=17.0,name=Apple TV"
+          platform: "tvOS Simulator"
       - store_artifacts:
           path: "/tmp/TestResults"
 
@@ -152,7 +166,7 @@ jobs:
       - ui-test:
           scheme: "UserPasswordSignIn (macOS)"
           sdk: macosx
-          destination: "platform=macOS,name=Any Mac"
+          platform: "macOS"
       - store_artifacts:
           path: "/tmp/TestResults"
 
