@@ -40,6 +40,7 @@ commands:
           name: "Install test utilities"
           command: |
             if ! which -s xcresulttool; then
+              export HOMEBREW_NO_AUTO_UPDATE=1
               brew tap a7ex/homebrew-formulae
               brew install xcresultparser
             fi
@@ -124,8 +125,6 @@ jobs:
 
   test-websignin-ios:
     executor: apple-ci-arm-medium
-    environment:
-      HOMEBREW_NO_AUTO_UPDATE: 1
     steps:
       - attach_workspace:
           at: ~/project
@@ -150,8 +149,6 @@ jobs:
 
   test-deviceauthsignin-ios:
     executor: apple-ci-arm-medium
-    environment:
-      HOMEBREW_NO_AUTO_UPDATE: 1
     steps:
       - attach_workspace:
           at: ~/project
@@ -163,8 +160,6 @@ jobs:
 
   test-deviceauthsignin-tvos:
     executor: apple-ci-arm-medium
-    environment:
-      HOMEBREW_NO_AUTO_UPDATE: 1
     steps:
       - attach_workspace:
           at: ~/project
@@ -178,8 +173,6 @@ jobs:
 
   test-userpasswordsignin-macos:
     executor: apple-ci-arm-medium
-    environment:
-      HOMEBREW_NO_AUTO_UPDATE: 1
     steps:
       - attach_workspace:
           at: ~/project
@@ -192,8 +185,6 @@ jobs:
 
   test-classicnativeauth-ios:
     executor: apple-ci-arm-medium
-    environment:
-      HOMEBREW_NO_AUTO_UPDATE: 1
     steps:
       - attach_workspace:
           at: ~/project
