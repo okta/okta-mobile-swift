@@ -37,6 +37,13 @@ commands:
         default: "iOS Simulator"
     steps:
       - run:
+          name: "Install test utilities"
+          command: |
+            if ! which -s xcresulttool; then
+              brew tap a7ex/homebrew-formulae
+              brew install xcresultparser
+            fi
+      - run:
           name: "Define destination"
           command: |
             if [[ "<<parameters.platform>>" == "macOS" ]]; then
