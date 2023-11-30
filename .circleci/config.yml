@@ -67,7 +67,7 @@ commands:
               - not:
                   equal: [ macOS, <<parameters.platform>> ]
           steps:
-            - macos/wait-until-simulator-booted:
+            - macos/wait-until-simulator-booted
       - run:
           name: "Test <<parameters.scheme>>"
           environment:
