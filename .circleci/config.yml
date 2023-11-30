@@ -41,14 +41,20 @@ commands:
           environment:
             NSUnbufferedIO: YES
           command: |
+            if [[ "<<parameters.platform>>" == "macOS" ]]; then
+                export DESTINATION="platform=<<parameters.platform>>,name=Any Mac"
+            elif [[ -n $MACOS_ORB_DEVICE_UDID ]]; then
+                export DESTINATION="platform=<<parameters.platform>>,id=$MACOS_ORB_DEVICE_UDID"
+            else
+                export DESTINATION="platform=<<parameters.platform>>"
+            fi
             set -o pipefail && xcodebuild \
                 -derivedDataPath /tmp/Build/DerivedData \
                 -clonedSourcePackagesDirPath /tmp/Build/ClonedSources \
-                -resultBundlePath "/tmp/TestResults/<<parameters.scheme>> #$CIRCLE_BUILD_NUM.xcresult" \
                 -workspace OktaMobileSDK.xcworkspace \
                 -scheme "<<parameters.scheme>>" \
                 -sdk <<parameters.sdk>> \
-                -destination "platform=<<parameters.platform>>,id=$MACOS_ORB_DEVICE_UDID" \
+                -destination "$DESTINATION" \
                 build-for-testing 2>&1
       - macos/wait-until-simulator-booted
       - run:
@@ -63,7 +69,7 @@ commands:
                 -workspace OktaMobileSDK.xcworkspace \
                 -scheme "<<parameters.scheme>>" \
                 -sdk <<parameters.sdk>> \
-                -destination "platform=<<parameters.platform>>,id=$MACOS_ORB_DEVICE_UDID" \
+                -destination "$DESTINATION" \
                 test-without-building 2>&1
       - run:
           name: "Export test results"
