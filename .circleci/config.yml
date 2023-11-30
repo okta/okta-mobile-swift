@@ -7,21 +7,21 @@ orbs:
 executors:
   apple-ci-arm-medium:
     macos:
-      xcode: 15.1.0
+      xcode: 14.3.1
     resource_class: macos.m1.medium.gen1
 
 commands:
   prepare-ios-simulator:
     steps:
       - macos/preboot-simulator:
-          version: "17.2"
+          version: "16.4"
           platform: "iOS"
-          device: "iPhone 15 Pro Max"
+          device: "iPhone 14 Pro Max"
 
   prepare-tvos-simulator:
     steps:
       - macos/preboot-simulator:
-          version: "17.2"
+          version: "16.4"
           platform: "tvOS"
           device: "Apple TV"
 
@@ -87,10 +87,6 @@ commands:
           when: always
           command: |
             mkdir -p /tmp/junit-results
-            if ! which -s xcresulttool; then
-              brew tap a7ex/homebrew-formulae
-              brew install xcresultparser
-            fi
             xcresultparser -o junit "/tmp/TestResults/<<parameters.scheme>> #$CIRCLE_BUILD_NUM.xcresult" > "/tmp/junit-results/<<parameters.scheme>>.xml"
       - run:
           name: "Compress test results"
@@ -114,6 +110,13 @@ jobs:
           command: |
             printenv TEST_OKTA_PLIST | base64 -d -i - > ~/project/Samples/Shared/Okta.plist
             printenv TEST_CONFIGURATION | base64 -d -i - > ~/project/Samples/Shared/TestConfiguration.xcconfig
+      - run:
+          name: "Install test utilities"
+          environment:
+            HOMEBREW_NO_AUTO_UPDATE: 1
+          command: |
+            brew tap a7ex/homebrew-formulae
+            brew install xcresultparser
       - persist_to_workspace:
           root: ~/project
           paths:
