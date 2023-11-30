@@ -61,11 +61,13 @@ commands:
                 -sdk <<parameters.sdk>> \
                 -destination "$DESTINATION" \
                 build-for-testing 2>&1
-      - macos/wait-until-simulator-booted:
-          when:
+      - when:
+          condition:
             and:
               - not:
                   equal: [ macOS, <<parameters.platform>> ]
+          steps:
+            - macos/wait-until-simulator-booted:
       - run:
           name: "Test <<parameters.scheme>>"
           environment:
