@@ -18,9 +18,22 @@ protocol Screen {
     var testCase: XCTestCase { get }
     
     func dismissKeyboard()
+    func tapKeyboardNextOrGo()
 }
 
 extension Screen {
+    func tapKeyboardNextOrGo() {
+        #if os(iOS)
+        if app.keyboards.buttons["Next"].exists {
+            app.keyboards.buttons["Next"].tap()
+        } else if app.keyboards.buttons["Go"].exists {
+            app.keyboards.buttons["Go"].tap()
+        } else {
+            dismissKeyboard()
+        }
+        #endif
+    }
+    
     func dismissKeyboard() {
         #if os(tvOS)
         // TODO: Update this in the future to select the appropriately named button.
