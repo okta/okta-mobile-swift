@@ -15,6 +15,11 @@ import Foundation
 class PollingHandler {
     private(set) var isPolling: Bool = false
     internal private(set) var pollOption: Remediation
+    
+    enum PollResult {
+        case stop
+        case `continue`(using: Remediation?)
+    }
 
     init(pollOption: Remediation) {
         self.pollOption = pollOption
@@ -24,7 +29,7 @@ class PollingHandler {
         isPolling = false
     }
     
-    func start(completion: @escaping (Result<Response, InteractionCodeFlowError>) -> Remediation?) {
+    func start(completion: @escaping (Result<Response, InteractionCodeFlowError>) -> PollResult) {
         guard !isPolling else { return }
         
         isPolling = true
@@ -35,7 +40,7 @@ class PollingHandler {
         isPolling = false
     }
     
-    func nextPoll(completion: @escaping (Result<Response, InteractionCodeFlowError>) -> Remediation?) {
+    func nextPoll(completion: @escaping (Result<Response, InteractionCodeFlowError>) -> PollResult) {
         guard let refreshTime = pollOption.refresh,
               refreshTime > 0
         else {
@@ -61,11 +66,15 @@ class PollingHandler {
                     return
                 }
                 
-                if let nextPollingOption = completion(result) {
-                    self.pollOption = nextPollingOption
-                    self.nextPoll(completion: completion)
-                } else {
+                switch completion(result) {
+                case .stop:
                     self.isPolling = false
+                    
+                case .continue(using: let nextPollingOption):
+                    if let nextPollingOption = nextPollingOption {
+                        self.pollOption = nextPollingOption
+                    }
+                    self.nextPoll(completion: completion)
                 }
             }
         }

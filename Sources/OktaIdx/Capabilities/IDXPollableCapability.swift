@@ -38,12 +38,12 @@ extension Capability {
                        (serverError as NSError).domain == NSURLErrorDomain,
                        (serverError as NSError).code == NSURLErrorNetworkConnectionLost
                     {
-                        return nil
+                        return .continue(using: nil)
                     }
                     
                     completion?(.failure(error))
-                    return nil
-                    
+                    return .stop
+
                 case .success(let response):
                     // If we don't get another email authenticator back, we know the
                     // magic link was clicked, and we can proceed to the completion block.
@@ -52,10 +52,10 @@ extension Capability {
                           currentAuthenticator.type == authenticatorType
                     else {
                         completion?(.success(response))
-                        return nil
+                        return .stop
                     }
                     
-                    return nextPoll.remediation
+                    return .continue(using: nextPoll.remediation)
                 }
             }
             pollHandler = handler

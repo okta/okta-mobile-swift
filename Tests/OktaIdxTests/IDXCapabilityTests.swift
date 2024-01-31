@@ -163,4 +163,44 @@ class IDXCapabilityTests: XCTestCase {
         duo.willProceed(to: remediation)
         XCTAssertEqual(signatureField.value?.stringValue,"signature")
     }
+    
+    func testPollableCapability() throws {
+        responseData = try data(from: .module, for: "06-idx-challenge", in: "MFA-SOP")
+        response = try Response.response(flow: flowMock, data: responseData)
+        remediation = try XCTUnwrap(response.remediations[.challengeAuthenticator])
+
+        let authenticator = try XCTUnwrap(response.authenticators.current)
+        XCTAssertEqual(authenticator.type, .email)
+        
+        let pollable = try XCTUnwrap(authenticator.pollable)
+        
+        let error = NSError(domain: NSURLErrorDomain, code: NSURLErrorNetworkConnectionLost)
+        urlSession.expect("https://example.com/idp/idx/challenge/poll",
+                          data: nil,
+                          statusCode: 400,
+                          error: error)
+        flowMock.expect(function: "send(error:completion:)",
+                        arguments: ["error": InteractionCodeFlowError.apiError(.serverError(error)) as Any])
+
+        let successData = try data(from: .module,
+                                    for: "success-response")
+        let successResponse = try Response.response(flow: flowMock, data: successData)
+        urlSession.expect("https://example.com/idp/idx/challenge/poll", data: successData)
+        flowMock.expect(function: "send(response:completion:)",
+                        arguments: ["response": successResponse as Any])
+
+        let expectation = expectation(description: "First poll")
+        pollable.startPolling { result in
+            defer { expectation.fulfill() }
+            
+            guard case let Result.success(response) = result else {
+                XCTFail("Received a failure when a success was expected")
+                return
+            }
+            XCTAssertTrue(response.isLoginSuccessful)
+        }
+        wait(for: [expectation], timeout: 2)
+        
+        XCTAssertEqual(urlSession.requests.count, 2)
+    }
 }
