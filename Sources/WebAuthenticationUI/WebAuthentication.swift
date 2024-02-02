@@ -298,7 +298,6 @@ public class WebAuthentication {
     ///   - issuer: The URL for the OAuth2 issuer.
     ///   - clientId: The client's ID.
     ///   - scopes: The scopes the client is requesting.
-    ///   - responseType: The response type to expect.
     ///   - redirectUri: The redirect URI for the configured client.
     ///   - logoutRedirectUri: The logout URI for the client, if applicable.
     ///   - additionalParameters: Optional parameters to add to the authorization query string.
