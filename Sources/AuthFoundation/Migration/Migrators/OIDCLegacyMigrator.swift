@@ -95,7 +95,8 @@ extension SDKVersion.Migration {
             let results = items.filter({ searchResult in
                 // swiftlint:disable empty_string
                 guard searchResult.service == "",
-                      regex.matches(in: searchResult.account, range: NSRange(location: 0, length: searchResult.account.count)).count == 1
+                      clientId == searchResult.account ||
+                          regex.matches(in: searchResult.account, range: NSRange(location: 0, length: searchResult.account.count)).count == 1
                 else {
                     return false
                 }
@@ -115,8 +116,9 @@ extension SDKVersion.Migration {
                 .Search(service: "")
                 .list()
                 .filter({ searchResult in
-                    regex.matches(in: searchResult.account,
-                                  range: NSRange(location: 0, length: searchResult.account.count)).count == 1
+                    clientId == searchResult.account ||
+                        regex.matches(in: searchResult.account,
+                                      range: NSRange(location: 0, length: searchResult.account.count)).count == 1
                 }).map({ searchResult in
                     let item = try searchResult.get()
                     return (searchResult, try decode(item.value))
