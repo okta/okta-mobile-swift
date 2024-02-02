@@ -96,8 +96,22 @@ final class OIDCLegacyMigratorTests: XCTestCase {
             ]
         ] as CFArray)
         XCTAssertTrue(migrator.needsMigration)
+
+        // Test that a clientId match counts as a match
+        keychain.expect(noErr, result: [
+            [
+                "svce": "",
+                "acct": "clientId",
+                "class": "genp",
+                "cdat": Date(),
+                "mdat": Date(),
+                "pdmn": "ak",
+                "agrp": "com.okta.sample.app"
+            ]
+        ] as CFArray)
+        XCTAssertTrue(migrator.needsMigration)
     }
-    
+
     func testMigrate() throws {
         let notificationRecorder = NotificationRecorder(observing: [ .credentialMigrated ])
         
