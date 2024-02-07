@@ -77,7 +77,11 @@ extension WebLogin where Self: Screen {
     func select(authenticator: String) {
         let frame = app.webViews.staticTexts[authenticator].frame
         for link in app.webViews.links {
-            guard link.label == "Select" else { continue }
+            guard link.label == "Select" ||
+                    link.label == "Select \(authenticator)."
+            else {
+                continue
+            }
             
             if link.frame.midY > frame.minY,
                link.frame.midY < frame.maxY
@@ -99,7 +103,7 @@ extension WebLogin where Self: Screen {
     func send(password: String? = nil) {
         guard let password else { return }
         
-        if app.webViews.staticTexts["Select from the following options"].waitToBeHittable(timeout: .standard) {
+        if app.webViews.staticTexts["Select Password."].waitToBeHittable(timeout: .standard) {
             select(authenticator: "Password")
         }
         
