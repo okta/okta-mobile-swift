@@ -21,15 +21,22 @@ final class FactorPropertyTests: XCTestCase {
         XCTAssertEqual(PrimaryFactor.password("foo").loginHintKey, "username")
         XCTAssertEqual(PrimaryFactor.otp(code: "123456").loginHintKey, "login_hint")
         XCTAssertEqual(PrimaryFactor.oob(channel: .push).loginHintKey, "login_hint")
+        XCTAssertEqual(PrimaryFactor.webAuthn.loginHintKey, "login_hint")
     }
     
     func testGrantTypes() throws {
         XCTAssertEqual(PrimaryFactor.password("foo").grantType, .password)
         XCTAssertEqual(PrimaryFactor.otp(code: "123456").grantType, .otp)
         XCTAssertEqual(PrimaryFactor.oob(channel: .push).grantType, .oob)
+        XCTAssertEqual(PrimaryFactor.webAuthn.grantType, .webAuthn)
 
         XCTAssertEqual(SecondaryFactor.otp(code: "123456").grantType, .otpMFA)
         XCTAssertEqual(SecondaryFactor.oob(channel: .push).grantType, .oobMFA)
+        XCTAssertEqual(SecondaryFactor.webAuthn.grantType, .webAuthn)
+        XCTAssertEqual(SecondaryFactor.webAuthnAssertion(.init(clientDataJSON: "",
+                                                               authenticatorData: "",
+                                                               signature: "",
+                                                               userHandle: nil)).grantType, .webAuthn)
     }
     
     func testTokenParameters() throws {
@@ -42,11 +49,20 @@ final class FactorPropertyTests: XCTestCase {
             "otp": "123456"
         ])
         XCTAssertNil(PrimaryFactor.oob(channel: .push).tokenParameters)
+        XCTAssertNil(PrimaryFactor.webAuthn.tokenParameters)
 
         XCTAssertEqual(SecondaryFactor.otp(code: "123456").tokenParameters as? [String: String], [
             "grant_type": "http://auth0.com/oauth/grant-type/mfa-otp",
             "otp": "123456"
         ])
         XCTAssertNil(SecondaryFactor.oob(channel: .push).tokenParameters)
+        XCTAssertNil(SecondaryFactor.webAuthn.tokenParameters)
+        XCTAssertEqual(SecondaryFactor.webAuthnAssertion(.init(clientDataJSON: "",
+                                                               authenticatorData: "",
+                                                               signature: "",
+                                                               userHandle: nil)).tokenParameters as? [String: String],
+                       [
+                        "grant_type": "urn:okta:params:oauth:grant-type:webauthn",
+                       ])
     }
 }

@@ -31,10 +31,6 @@ extension DirectAuthenticationFlow.PrimaryFactor: AuthenticationFactor {
                      currentStatus: DirectAuthenticationFlow.Status? = nil,
                      factor: DirectAuthenticationFlow.PrimaryFactor) throws -> StepHandler
     {
-        var bindingContext: DirectAuthenticationFlow.BindingUpdateContext?
-        if case .bindingUpdate(let context) = currentStatus {
-            bindingContext = context
-        }
         switch self {
         case .otp: fallthrough
         case .password:
@@ -45,6 +41,10 @@ extension DirectAuthenticationFlow.PrimaryFactor: AuthenticationFactor {
                                        grantTypesSupported: flow.supportedGrantTypes)
             return TokenStepHandler(flow: flow, request: request)
         case .oob(channel: let channel):
+            var bindingContext: DirectAuthenticationFlow.BindingUpdateContext?
+            if case .bindingUpdate(let context) = currentStatus {
+                bindingContext = context
+            }
             return try OOBStepHandler(flow: flow,
                                       openIdConfiguration: openIdConfiguration,
                                       loginHint: loginHint,
@@ -52,6 +52,14 @@ extension DirectAuthenticationFlow.PrimaryFactor: AuthenticationFactor {
                                       channel: channel,
                                       factor: factor,
                                       bindingContext: bindingContext)
+        case .webAuthn:
+            let request = try WebAuthnChallengeRequest(openIdConfiguration: openIdConfiguration,
+                                                       clientConfiguration: flow.client.configuration,
+                                                       loginHint: loginHint,
+                                                       mfaToken: currentStatus?.mfaToken)
+            return ChallengeStepHandler(flow: flow, request: request) {
+                .webAuthn(request: $0)
+            }
         }
     }
     
@@ -67,7 +75,7 @@ extension DirectAuthenticationFlow.PrimaryFactor: AuthenticationFactor {
                 "grant_type": grantType.rawValue,
                 "password": password
             ]
-        case .oob:
+        case .oob, .webAuthn:
             return nil
         }
 
@@ -81,6 +89,8 @@ extension DirectAuthenticationFlow.PrimaryFactor: AuthenticationFactor {
             return .password
         case .oob:
             return .oob
+        case .webAuthn:
+            return .webAuthn
         }
     }
 }

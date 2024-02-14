@@ -41,6 +41,23 @@ extension DirectAuthenticationFlow.SecondaryFactor: AuthenticationFactor {
                                       channel: channel,
                                       factor: factor,
                                       bindingContext: bindingContext)
+        case .webAuthn:
+            let request = try WebAuthnChallengeRequest(openIdConfiguration: openIdConfiguration,
+                                                       clientConfiguration: flow.client.configuration,
+                                                       loginHint: loginHint,
+                                                       mfaToken: currentStatus?.mfaToken)
+            return ChallengeStepHandler(flow: flow, request: request) {
+                .webAuthn(request: $0)
+            }
+        case .webAuthnAssertion(let response):
+            let request = TokenRequest(openIdConfiguration: openIdConfiguration,
+                                       clientConfiguration: flow.client.configuration,
+                                       loginHint: loginHint,
+                                       factor: factor,
+                                       mfaToken: currentStatus?.mfaToken,
+                                       parameters: response,
+                                       grantTypesSupported: flow.supportedGrantTypes)
+            return TokenStepHandler(flow: flow, request: request)
         }
     }
     
@@ -51,8 +68,12 @@ extension DirectAuthenticationFlow.SecondaryFactor: AuthenticationFactor {
                 "grant_type": grantType.rawValue,
                 "otp": code
             ]
-        case .oob:
+        case .oob, .webAuthn:
             return nil
+        case .webAuthnAssertion(_):
+            return [
+                "grant_type": grantType.rawValue
+            ]
         }
 
     }
@@ -63,6 +84,8 @@ extension DirectAuthenticationFlow.SecondaryFactor: AuthenticationFactor {
             return .otpMFA
         case .oob:
             return .oobMFA
+        case .webAuthn, .webAuthnAssertion(_):
+            return .webAuthn
         }
     }
 }

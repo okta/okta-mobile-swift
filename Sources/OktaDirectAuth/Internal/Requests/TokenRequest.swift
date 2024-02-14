@@ -19,7 +19,7 @@ struct TokenRequest {
     let loginHint: String?
     let factor: any AuthenticationFactor
     let mfaToken: String?
-    let oobCode: String?
+    let parameters: (any HasTokenParameters)?
     let grantTypesSupported: [GrantType]?
     
     init(openIdConfiguration: OpenIdConfiguration,
@@ -27,7 +27,7 @@ struct TokenRequest {
          loginHint: String? = nil,
          factor: any AuthenticationFactor,
          mfaToken: String? = nil,
-         oobCode: String? = nil,
+         parameters: (any HasTokenParameters)? = nil,
          grantTypesSupported: [GrantType]? = nil)
     {
         self.openIdConfiguration = openIdConfiguration
@@ -35,7 +35,7 @@ struct TokenRequest {
         self.loginHint = loginHint
         self.factor = factor
         self.mfaToken = mfaToken
-        self.oobCode = oobCode
+        self.parameters = parameters
         self.grantTypesSupported = grantTypesSupported
     }
 }
@@ -57,8 +57,8 @@ extension TokenRequest: OAuth2TokenRequest, OAuth2APIRequest, APIRequestBody {
             result["mfa_token"] = mfaToken
         }
         
-        if let oobCode = oobCode {
-            result["oob_code"] = oobCode
+        if let tokenParameters = parameters?.tokenParameters {
+            result.merge(tokenParameters, uniquingKeysWith: { $1 })
         }
         
         if let loginHint = loginHint {

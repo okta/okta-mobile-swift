@@ -13,13 +13,16 @@
 import Foundation
 import AuthFoundation
 
-/// Defines the common properties and functions shared between factor types.
-protocol AuthenticationFactor {
-    /// The grant type supported by this factor.
-    var grantType: GrantType { get }
-    
+/// Defines the additional token parameters that can be introduced through input arguments.
+protocol HasTokenParameters {
     /// Parameters to include in the API request.
     var tokenParameters: [String: Any]? { get }
+}
+
+/// Defines the common properties and functions shared between factor types.
+protocol AuthenticationFactor: HasTokenParameters {
+    /// The grant type supported by this factor.
+    var grantType: GrantType { get }
     
     /// Returns a step handler capable of handling this authentication factor.
     /// - Parameters:

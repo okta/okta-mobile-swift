@@ -66,9 +66,13 @@ final class DirectAuth2FATests: XCTestCase {
                 XCTFail("Not expecting MFA Required")
             case .bindingUpdate(_):
                 XCTFail("Not expecting binding update")
+            case .webAuthn(request: _):
+                XCTFail("Not expecting webauthn request")
             }
         case .bindingUpdate(_):
             XCTFail("Not expecting binding update")
+        case .webAuthn(request: _):
+            XCTFail("Not expecting webauthn request")
         }
         XCTAssertFalse(flow.isAuthenticating)
     }

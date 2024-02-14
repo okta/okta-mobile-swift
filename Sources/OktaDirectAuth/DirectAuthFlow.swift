@@ -39,7 +39,7 @@ public enum DirectAuthenticationFlowError: Error {
 /// This enables developers to build native sign-in workflows into their applications, while leveraging MFA to securely authenticate users, without the need to present a browser. Furthermore, this enables passwordless authentication scenarios by giving developers the power to choose which primary and secondary authentication factors to use when challenging a user for their credentials.
 public class DirectAuthenticationFlow: AuthenticationFlow {
     /// Enumeration defining the list of possible primary authentication factors.
-    ///
+    /// 
     /// These values are used by the ``DirectAuthenticationFlow/start(_:with:)`` function.
     public enum PrimaryFactor: Equatable {
         /// Authenticate the user with the given password.
@@ -70,6 +70,15 @@ public class DirectAuthenticationFlow: AuthenticationFlow {
         ///
         /// > Note: While `.oob` accepts a `channel` argument, at this time only the `push` option is available.
         case oob(channel: OOBChannel = .push)
+        
+        /// Authenticate the user using WebAuthn.
+        ///
+        /// This requests that a new WebAuthn challenge is generated and returned to the client, which can subsequently be used to sign the attestation for return back to the server.
+        ///
+        /// ```swift
+        /// let status = try await flow.start("jane.doe@example.com", with: .webAuthn)
+        /// ```
+        case webAuthn
     }
     
     /// Enumeration defining the list of possible secondary authentication factors.
@@ -93,6 +102,20 @@ public class DirectAuthenticationFlow: AuthenticationFlow {
         ///
         /// > Note: While `.oob` accepts a `channel` argument, at this time only the `push` option is available.
         case oob(channel: OOBChannel)
+        
+        /// Authenticate the user using WebAuthn.
+        ///
+        /// This requests that a new WebAuthn challenge is generated and returned to the client, which can subsequently be used to sign the attestation for return back to the server.
+        ///
+        /// ```swift
+        /// let status = try await flow.start("jane.doe@example.com", with: .webAuthn)
+        /// ```
+        case webAuthn
+        
+        /// Respond to a WebAuthn challenge with an authenticator assertion.
+        ///
+        /// This uses a previously supplied WebAuthn challenge (using ``DirectAuthenticationFlow/PrimaryFactor/webAuthn`` or ``webAuthn``) to respond to the server with the signed attestation from the local authenticator.
+        case webAuthnAssertion(_ response: WebAuthn.AuthenticatorAssertionResponse)
     }
     
     /// Channel used when authenticating an out-of-band factor using Okta Verify.
@@ -140,6 +163,9 @@ public class DirectAuthenticationFlow: AuthenticationFlow {
         ///
         /// When this status is returned, the developer should use the ``DirectAuthenticationFlow/resume(_:with:)`` function to supply a secondary factor to verify the user.
         case mfaRequired(_ context: MFAContext)
+        
+        /// Indicates the user is being prompted with a WebAuthn challenge request.
+        case webAuthn(request: WebAuthn.CredentialRequestOptions)
     }
     
     /// The OAuth2Client this authentication flow will use.

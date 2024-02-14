@@ -139,7 +139,7 @@ class OOBStepHandler<Factor: AuthenticationFactor>: StepHandler {
                                    clientConfiguration: self.flow.client.configuration,
                                    factor: self.factor,
                                    mfaToken: self.mfaToken,
-                                   oobCode: response.oobCode,
+                                   parameters: response,
                                    grantTypesSupported: self.flow.supportedGrantTypes)
         self.poll = PollingHandler(client: self.flow.client,
                                    request: request,

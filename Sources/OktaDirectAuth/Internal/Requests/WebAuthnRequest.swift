@@ -1,5 +1,5 @@
 //
-// Copyright (c) 2023-Present, Okta, Inc. and/or its affiliates. All rights reserved.
+// Copyright (c) 2024-Present, Okta, Inc. and/or its affiliates. All rights reserved.
 // The Okta software accompanied by this notice is provided pursuant to the Apache License, Version 2.0 (the "License.")
 //
 // You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0.
@@ -13,44 +13,16 @@
 import Foundation
 import AuthFoundation
 
-extension OpenIdConfiguration {
-    var primaryAuthenticateEndpoint: URL? {
-        tokenEndpoint.url(replacing: "/token", with: "/primary-authenticate")
-    }
-}
-
-struct OOBResponse: Codable, HasTokenParameters {
-    let oobCode: String
-    let expiresIn: TimeInterval
-    let interval: TimeInterval
-    let channel: DirectAuthenticationFlow.OOBChannel
-    let bindingMethod: BindingMethod
-    let bindingCode: String?
-
-    init(oobCode: String, expiresIn: TimeInterval, interval: TimeInterval, channel: DirectAuthenticationFlow.OOBChannel, bindingMethod: BindingMethod, bindingCode: String? = nil) {
-        self.oobCode = oobCode
-        self.expiresIn = expiresIn
-        self.interval = interval
-        self.channel = channel
-        self.bindingMethod = bindingMethod
-        self.bindingCode = bindingCode
-    }
-    
-    var tokenParameters: [String : Any]? {
-        ["oob_code": oobCode]
-    }
-}
-
-struct OOBAuthenticateRequest {
+struct WebAuthnChallengeRequest {
     let url: URL
     let clientConfiguration: OAuth2Client.Configuration
-    let loginHint: String
-    let channelHint: DirectAuthenticationFlow.OOBChannel
-    
+    let loginHint: String?
+    let mfaToken: String?
+
     init(openIdConfiguration: OpenIdConfiguration,
          clientConfiguration: OAuth2Client.Configuration,
-         loginHint: String,
-         channelHint: DirectAuthenticationFlow.OOBChannel) throws
+         loginHint: String? = nil,
+         mfaToken: String? = nil) throws
     {
         guard let url = openIdConfiguration.primaryAuthenticateEndpoint else {
             throw OAuth2Error.cannotComposeUrl
@@ -59,17 +31,12 @@ struct OOBAuthenticateRequest {
         self.url = url
         self.clientConfiguration = clientConfiguration
         self.loginHint = loginHint
-        self.channelHint = channelHint
+        self.mfaToken = mfaToken
     }
 }
 
-enum BindingMethod: String, Codable {
-    case none
-    case transfer
-}
-
-extension OOBAuthenticateRequest: APIRequest, APIRequestBody {
-    typealias ResponseType = OOBResponse
+extension WebAuthnChallengeRequest: APIRequest, APIRequestBody {
+    typealias ResponseType = WebAuthn.CredentialRequestOptions
 
     var httpMethod: APIRequestMethod { .post }
     var contentType: APIContentType? { .formEncoded }
@@ -77,14 +44,37 @@ extension OOBAuthenticateRequest: APIRequest, APIRequestBody {
     var bodyParameters: [String: Any]? {
         var result: [String: Any] = [
             "client_id": clientConfiguration.clientId,
-            "login_hint": loginHint,
-            "channel_hint": channelHint.rawValue
+            "challenge_hint": GrantType.webAuthn.rawValue
         ]
+        
+        if let loginHint = loginHint {
+            result["login_hint"] = loginHint
+        }
+        
+        if let mfaToken = mfaToken {
+            result["mfa_token"] = mfaToken
+        }
         
         if let parameters = clientConfiguration.authentication.additionalParameters {
             result.merge(parameters, uniquingKeysWith: { $1 })
         }
 
+        return result
+    }
+}
+
+extension WebAuthn.AuthenticatorAssertionResponse: HasTokenParameters {
+    var tokenParameters: [String : Any]? {
+        var result = [
+            "clientDataJSON": clientDataJSON,
+            "authenticatorData": authenticatorData,
+            "signature": signature,
+        ]
+        
+        if let userHandle = userHandle {
+            result["userHandle"] = userHandle
+        }
+        
         return result
     }
 }
