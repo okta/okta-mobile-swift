@@ -64,7 +64,7 @@ extension WebAuthnChallengeRequest: APIRequest, APIRequestBody {
 }
 
 extension WebAuthn.AuthenticatorAssertionResponse: HasTokenParameters {
-    var tokenParameters: [String : Any]? {
+    var tokenParameters: [String: Any]? {
         var result = [
             "clientDataJSON": clientDataJSON,
             "authenticatorData": authenticatorData,

@@ -53,8 +53,7 @@ class DefaultTimeCoordinator: TimeCoordinator, OAuth2ClientDelegate {
         Date.coordinator = DefaultTimeCoordinator()
     }
     
-    @ThreadSafe
-    private(set) var offset: TimeInterval
+    @ThreadSafe private(set) var offset: TimeInterval
     
     private var observer: NSObjectProtocol?
 

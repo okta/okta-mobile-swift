@@ -36,7 +36,7 @@ struct OOBResponse: Codable, HasTokenParameters {
         self.bindingCode = bindingCode
     }
     
-    var tokenParameters: [String : Any]? {
+    var tokenParameters: [String: Any]? {
         ["oob_code": oobCode]
     }
 }

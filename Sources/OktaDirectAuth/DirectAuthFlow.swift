@@ -39,7 +39,7 @@ public enum DirectAuthenticationFlowError: Error {
 /// This enables developers to build native sign-in workflows into their applications, while leveraging MFA to securely authenticate users, without the need to present a browser. Furthermore, this enables passwordless authentication scenarios by giving developers the power to choose which primary and secondary authentication factors to use when challenging a user for their credentials.
 public class DirectAuthenticationFlow: AuthenticationFlow {
     /// Enumeration defining the list of possible primary authentication factors.
-    /// 
+    ///
     /// These values are used by the ``DirectAuthenticationFlow/start(_:with:)`` function.
     public enum PrimaryFactor: Equatable {
         /// Authenticate the user with the given password.

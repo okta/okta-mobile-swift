@@ -211,7 +211,8 @@ extension SDKVersion.Migration {
             NotificationCenter.default.post(name: .credentialMigrated, object: credential)
         }
         
-        @objc(_OIDCLegacyStateManager) class StateManager: NSObject, NSCoding {
+        @objc(_OIDCLegacyStateManager)
+        class StateManager: NSObject, NSCoding {
             @objc let authState: AuthState?
             @objc let accessibility: String?
 
@@ -222,7 +223,8 @@ extension SDKVersion.Migration {
                 accessibility = coder.decodeObject(forKey: "accessibility") as? String
             }
 
-            @objc(_OIDCLegacyAuthState) class AuthState: NSObject, NSCoding {
+            @objc(_OIDCLegacyAuthState)
+            class AuthState: NSObject, NSCoding {
                 @objc let refreshToken: String?
                 @objc let scope: String?
                 @objc let lastTokenResponse: TokenResponse?
@@ -238,7 +240,8 @@ extension SDKVersion.Migration {
                 }
             }
             
-            @objc(_OIDCLegacyTokenResponse) class TokenResponse: NSObject, NSCoding {
+            @objc(_OIDCLegacyTokenResponse)
+            class TokenResponse: NSObject, NSCoding {
                 @objc let accessToken: String?
                 @objc let accessTokenExpirationDate: Date?
                 @objc let tokenType: String?
@@ -260,7 +263,8 @@ extension SDKVersion.Migration {
                 }
             }
             
-            @objc(_OIDCLegacyAuthorizationResponse) class AuthorizationResponse: NSObject, NSCoding {
+            @objc(_OIDCLegacyAuthorizationResponse)
+            class AuthorizationResponse: NSObject, NSCoding {
                 @objc let authorizationCode: String?
                 @objc let state: String?
                 
