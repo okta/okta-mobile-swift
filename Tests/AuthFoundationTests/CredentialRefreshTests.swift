@@ -344,26 +344,5 @@ final class CredentialRefreshTests: XCTestCase, OAuth2ClientDelegate {
             try await credential.refreshIfNeeded(graceInterval: 300)
         }
     }
-    
-    func perform(queueCount: Int = 5, iterationCount: Int = 10, _ block: @escaping () async throws -> Void) rethrows {
-        let queues: [DispatchQueue] = (0..<queueCount).map { queueNumber in
-            DispatchQueue(label: "Async queue \(queueNumber)")
-        }
-        
-        let group = DispatchGroup()
-        for queue in queues {
-            for _ in 0..<iterationCount {
-                queue.async {
-                    group.enter()
-                    Task {
-                        try await block()
-                        group.leave()
-                    }
-                }
-            }
-        }
-        
-        _ = group.wait(timeout: .short)
-    }
     #endif
 }

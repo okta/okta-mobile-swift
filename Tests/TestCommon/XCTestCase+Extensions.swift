@@ -75,4 +75,28 @@ public extension XCTestCase {
         let jsonData = data(for: json)
         return try decoder.decode(T.self, from: jsonData)
     }
+    
+    #if swift(>=5.5.1)
+    @available(iOS 13.0, tvOS 13.0, macOS 10.15, watchOS 6, *)
+    func perform(queueCount: Int = 5, iterationCount: Int = 10, _ block: @escaping () async throws -> Void) rethrows {
+        let queues: [DispatchQueue] = (0..<queueCount).map { queueNumber in
+            DispatchQueue(label: "Async queue \(queueNumber)")
+        }
+        
+        let group = DispatchGroup()
+        for queue in queues {
+            for _ in 0..<iterationCount {
+                queue.async {
+                    group.enter()
+                    Task {
+                        try await block()
+                        group.leave()
+                    }
+                }
+            }
+        }
+        
+        _ = group.wait(timeout: .short)
+    }
+    #endif
 }
