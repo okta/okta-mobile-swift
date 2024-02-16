@@ -119,7 +119,9 @@ public final class OAuth2Client {
     public func openIdConfiguration(completion: @escaping (Result<OpenIdConfiguration, OAuth2Error>) -> Void) {
         configurationLock.withLock {
             if let openIdConfiguration = openIdConfiguration {
-                completion(.success(openIdConfiguration))
+                configurationQueue.async {
+                    completion(.success(openIdConfiguration))
+                }
             } else {
                 guard openIdConfigurationAction == nil else {
                     openIdConfigurationAction?.add(completion)
