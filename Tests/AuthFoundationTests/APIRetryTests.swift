@@ -76,9 +76,9 @@ class APIRetryTests: XCTestCase {
     
     func testCustomRetryCount() throws {
         client = MockApiClient(configuration: configuration,
-                                   session: urlSession,
-                                   baseURL: baseUrl,
-                                   shouldRetry: .retry(maximumCount: 5))
+                               session: urlSession,
+                               baseURL: baseUrl,
+                               shouldRetry: .retry(maximumCount: 5))
         try performRetryRequest(count: 6)
         XCTAssertEqual(client.request?.allHTTPHeaderFields?["X-Okta-Retry-Count"], "5")
         XCTAssertEqual(client.request?.allHTTPHeaderFields?["X-Okta-Retry-For"], requestId)
