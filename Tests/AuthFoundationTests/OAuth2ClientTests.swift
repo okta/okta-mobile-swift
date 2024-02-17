@@ -139,8 +139,9 @@ final class OAuth2ClientTests: XCTestCase {
                           data: try data(from: .module, for: "openid-configuration", in: "MockResponses"),
                           contentType: "application/json")
 
+        let client = try XCTUnwrap(self.client)
         try perform {
-            let config = try await self.client.openIdConfiguration()
+            let config = try await client.openIdConfiguration()
             XCTAssertEqual(config.authorizationEndpoint.absoluteString,
                            "https://example.com/oauth2/v1/authorize")
         }
