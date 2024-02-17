@@ -229,12 +229,10 @@ public final class Credential: Equatable, OAuth2ClientDelegate {
         let shouldRemove = shouldRemove(for: type)
         
         oauth2.revoke(token, type: type) { result in
-            defer { completion?(result) }
-            
-            guard case .success = result else { return }
-            
             // Remove the credential from storage if the access token was revoked
-            if shouldRemove {
+            if case .success = result,
+               shouldRemove
+            {
                 do {
                     try self.coordinator?.remove(credential: self)
                 } catch let error as OAuth2Error {
@@ -245,6 +243,8 @@ public final class Credential: Equatable, OAuth2ClientDelegate {
                     return
                 }
             }
+            
+            completion?(result)
         }
     }
     
