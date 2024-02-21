@@ -64,7 +64,7 @@ extension WebAuthnChallengeRequest: APIRequest, APIRequestBody {
 }
 
 extension WebAuthn.AuthenticatorAssertionResponse: HasTokenParameters {
-    var tokenParameters: [String: Any]? {
+    func tokenParameters(currentStatus: DirectAuthenticationFlow.Status?) -> [String: String] {
         var result = [
             "clientDataJSON": clientDataJSON,
             "authenticatorData": authenticatorData,

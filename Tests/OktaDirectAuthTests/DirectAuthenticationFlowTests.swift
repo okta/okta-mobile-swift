@@ -33,12 +33,12 @@ struct TestFactor: AuthenticationFactor {
     let result: (Result<OktaDirectAuth.DirectAuthenticationFlow.Status, OktaDirectAuth.DirectAuthenticationFlowError>)?
     let exception: (any Error)?
     
-    var grantType: AuthFoundation.GrantType {
+    func grantType(currentStatus: DirectAuthenticationFlow.Status?) -> GrantType {
         .implicit
     }
     
-    var tokenParameters: [String : Any]? {
-        nil
+    func tokenParameters(currentStatus: DirectAuthenticationFlow.Status?) -> [String: String] {
+        [:]
     }
     
     func stepHandler(flow: OktaDirectAuth.DirectAuthenticationFlow,

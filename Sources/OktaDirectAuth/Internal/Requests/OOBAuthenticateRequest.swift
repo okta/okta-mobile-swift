@@ -36,7 +36,7 @@ struct OOBResponse: Codable, HasTokenParameters {
         self.bindingCode = bindingCode
     }
     
-    var tokenParameters: [String: Any]? {
+    func tokenParameters(currentStatus: DirectAuthenticationFlow.Status?) -> [String: String] {
         ["oob_code": oobCode]
     }
 }

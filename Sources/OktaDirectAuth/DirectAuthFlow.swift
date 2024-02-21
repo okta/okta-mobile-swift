@@ -149,6 +149,14 @@ public class DirectAuthenticationFlow: AuthenticationFlow {
         let oobResponse: OOBResponse
     }
     
+    /// Holds information about a challenge request when initiating a WebAuthn authentication.
+    public struct WebAuthnContext {
+        /// The credential request returned from the server.
+        public let request: WebAuthn.CredentialRequestOptions
+        
+        let mfaContext: MFAContext?
+    }
+    
     /// The current status of the authentication flow.
     ///
     /// This value is returned from ``DirectAuthenticationFlow/start(_:with:)`` and ``DirectAuthenticationFlow/resume(_:with:)`` to indicate the result of an individual authentication step. This can be used to drive your application's sign-in workflow.
@@ -165,7 +173,7 @@ public class DirectAuthenticationFlow: AuthenticationFlow {
         case mfaRequired(_ context: MFAContext)
         
         /// Indicates the user is being prompted with a WebAuthn challenge request.
-        case webAuthn(request: WebAuthn.CredentialRequestOptions)
+        case webAuthn(_ context: WebAuthnContext)
     }
     
     /// The OAuth2Client this authentication flow will use.

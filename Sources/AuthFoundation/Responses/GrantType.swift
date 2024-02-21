@@ -24,6 +24,7 @@ public enum GrantType: Codable, Hashable {
     case otpMFA
     case oobMFA
     case webAuthn
+    case webAuthnMFA
     case other(_ type: String)
 }
 
@@ -38,8 +39,8 @@ private let grantTypeMapping: [String: GrantType] = [
     "urn:okta:params:oauth:grant-type:oob": .oob,
     "http://auth0.com/oauth/grant-type/mfa-otp": .otpMFA,
     "http://auth0.com/oauth/grant-type/mfa-oob": .oobMFA,
-    "urn:okta:params:oauth:grant-type:webauthn": .webAuthn
-
+    "urn:okta:params:oauth:grant-type:webauthn": .webAuthn,
+    "urn:okta:params:oauth:grant-type:mfa-webauthn": .webAuthnMFA,
 ]
 
 extension GrantType: RawRepresentable {
@@ -79,6 +80,8 @@ extension GrantType: RawRepresentable {
             return "http://auth0.com/oauth/grant-type/mfa-oob"
         case .webAuthn:
             return "urn:okta:params:oauth:grant-type:webauthn"
+        case .webAuthnMFA:
+            return "urn:okta:params:oauth:grant-type:mfa-webauthn"
         }
     }
 }

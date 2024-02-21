@@ -72,3 +72,7 @@ public struct WebAuthn {
         public let userHandle: String?
     }
 }
+
+extension WebAuthn.CredentialRequestOptions: JSONDecodable {
+    public static var jsonDecoder = JSONDecoder()
+}
