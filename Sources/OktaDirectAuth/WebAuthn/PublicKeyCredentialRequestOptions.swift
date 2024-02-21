@@ -20,7 +20,7 @@ extension WebAuthn {
      */
     public struct PublicKeyCredentialRequestOptions: Codable {
         /// This member specifies a challenge that the authenticator signs, along with other data, when producing an authentication assertion. See the § 13.4.3 Cryptographic Challenges security consideration.
-        public let challenge: Data
+        public let challenge: String
         
         /// Specifies the RP ID claimed by the Relying Party. The client MUST verify that the Relying Party's origin matches the scope of this RP ID. The authenticator MUST verify that this RP ID exactly equals the rpId of the credential to be used for the authentication ceremony.
         public internal(set) var rpID: String?
@@ -54,7 +54,7 @@ extension WebAuthn {
             let container = try decoder.container(keyedBy: CodingKeys.self)
             
             allowCredentials = try container.decodeIfPresent([PublicKeyCredentialDescriptor].self, forKey: .allowCredentials)
-            challenge = try container.decode(Data.self, forKey: .challenge)
+            challenge = try container.decode(String.self, forKey: .challenge)
             rpID = try container.decodeIfPresent(String.self, forKey: .rpID)
             hints = try container.decodeIfPresent([PublicKeyCredentialHints].self, forKey: .hints)
             userVerification = try container.decodeIfPresent(UserVerificationRequirement.self, forKey: .userVerification)

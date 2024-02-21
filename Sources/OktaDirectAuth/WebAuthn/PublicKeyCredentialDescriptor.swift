@@ -20,7 +20,7 @@ extension WebAuthn {
      */
     public struct PublicKeyCredentialDescriptor: Codable {
         /// This member contains the credential ID of the public key credential the caller is referring to.
-        public let id: Data
+        public let id: String
         
         /// This member contains the type of the public key credential the caller is referring to.
         public let type: PublicKeyCredentialType
