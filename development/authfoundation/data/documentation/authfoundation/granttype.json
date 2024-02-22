@@ -122,7 +122,9 @@
         "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/GrantType\/otpMFA",
         "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/GrantType\/password",
         "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/GrantType\/refreshToken",
-        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/GrantType\/tokenExchange"
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/GrantType\/tokenExchange",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/GrantType\/webAuthn",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/GrantType\/webAuthnMFA"
       ],
       "title" : "Enumeration Cases"
     },
@@ -630,6 +632,56 @@
   "title" : "GrantType.tokenExchange",
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/granttype\/tokenexchange"
+},
+"doc://AuthFoundation/documentation/AuthFoundation/GrantType/webAuthn": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "case"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "webAuthn"
+    }
+  ],
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/GrantType\/webAuthn",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "GrantType.webAuthn",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/granttype\/webauthn"
+},
+"doc://AuthFoundation/documentation/AuthFoundation/GrantType/webAuthnMFA": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "case"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "webAuthnMFA"
+    }
+  ],
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/GrantType\/webAuthnMFA",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "GrantType.webAuthnMFA",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/granttype\/webauthnmfa"
 },
 "doc://AuthFoundation/documentation/AuthFoundation/OAuth2Client": {
   "abstract" : [

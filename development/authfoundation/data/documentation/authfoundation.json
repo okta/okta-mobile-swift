@@ -235,8 +235,7 @@
     },
     {
       "identifiers" : [
-        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/APIRateLimit",
-        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/ThreadSafe"
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/APIRateLimit"
       ],
       "title" : "Structures"
     },
@@ -249,7 +248,9 @@
     {
       "identifiers" : [
         "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/APIResponseResult",
-        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/APIRetry"
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/APIRetry",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JSONValue",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JSONValueError"
       ],
       "title" : "Enumerations"
     }
@@ -1613,6 +1614,87 @@
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/jsondecodable"
 },
+"doc://AuthFoundation/documentation/AuthFoundation/JSONValue": {
+  "abstract" : [
+    {
+      "text" : "Represent mixed JSON values as instances of ",
+      "type" : "text"
+    },
+    {
+      "code" : "Any",
+      "type" : "codeVoice"
+    },
+    {
+      "text" : ". This is used to expose API response values to Swift native types",
+      "type" : "text"
+    },
+    {
+      "text" : " ",
+      "type" : "text"
+    },
+    {
+      "text" : "where Swift enums are not supported.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "enum"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "JSONValue"
+    }
+  ],
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JSONValue",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "JSONValue"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "JSONValue",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/jsonvalue"
+},
+"doc://AuthFoundation/documentation/AuthFoundation/JSONValueError": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "enum"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "JSONValueError"
+    }
+  ],
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JSONValueError",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "JSONValueError"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "JSONValueError",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/jsonvalueerror"
+},
 "doc://AuthFoundation/documentation/AuthFoundation/JWK": {
   "abstract" : [
     {
@@ -2302,40 +2384,6 @@
   "title" : "SDKVersionMigrator",
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/sdkversionmigrator"
-},
-"doc://AuthFoundation/documentation/AuthFoundation/ThreadSafe": {
-  "abstract" : [
-    {
-      "text" : "Property wrapper that implements thread-safe locking for wrapped property values.",
-      "type" : "text"
-    }
-  ],
-  "fragments" : [
-    {
-      "kind" : "keyword",
-      "text" : "struct"
-    },
-    {
-      "kind" : "text",
-      "text" : " "
-    },
-    {
-      "kind" : "identifier",
-      "text" : "ThreadSafe"
-    }
-  ],
-  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/ThreadSafe",
-  "kind" : "symbol",
-  "navigatorTitle" : [
-    {
-      "kind" : "identifier",
-      "text" : "ThreadSafe"
-    }
-  ],
-  "role" : "symbol",
-  "title" : "ThreadSafe",
-  "type" : "topic",
-  "url" : "\/documentation\/authfoundation\/threadsafe"
 },
 "doc://AuthFoundation/documentation/AuthFoundation/TimeCoordinator": {
   "abstract" : [

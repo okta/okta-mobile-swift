@@ -69,6 +69,11 @@
                     "type" : "case"
                   },
                   {
+                    "path" : "\/documentation\/oktadirectauth\/directauthenticationflow\/primaryfactor\/webauthn",
+                    "title" : "case webAuthn",
+                    "type" : "case"
+                  },
+                  {
                     "title" : "Default Implementations",
                     "type" : "groupMarker"
                   },
@@ -208,6 +213,16 @@
                     "type" : "case"
                   },
                   {
+                    "path" : "\/documentation\/oktadirectauth\/directauthenticationflow\/secondaryfactor\/webauthn",
+                    "title" : "case webAuthn",
+                    "type" : "case"
+                  },
+                  {
+                    "path" : "\/documentation\/oktadirectauth\/directauthenticationflow\/secondaryfactor\/webauthnassertion(_:)",
+                    "title" : "case webAuthnAssertion(WebAuthn.AuthenticatorAssertionResponse)",
+                    "type" : "case"
+                  },
+                  {
                     "title" : "Default Implementations",
                     "type" : "groupMarker"
                   },
@@ -339,6 +354,11 @@
                   {
                     "path" : "\/documentation\/oktadirectauth\/directauthenticationflow\/status\/success(_:)",
                     "title" : "case success(Token)",
+                    "type" : "case"
+                  },
+                  {
+                    "path" : "\/documentation\/oktadirectauth\/directauthenticationflow\/status\/webauthn(_:)",
+                    "title" : "case webAuthn(DirectAuthenticationFlow.WebAuthnContext)",
                     "type" : "case"
                   },
                   {
@@ -474,6 +494,22 @@
                 "type" : "struct"
               },
               {
+                "children" : [
+                  {
+                    "title" : "Instance Properties",
+                    "type" : "groupMarker"
+                  },
+                  {
+                    "path" : "\/documentation\/oktadirectauth\/directauthenticationflow\/webauthncontext\/request",
+                    "title" : "let request: WebAuthn.CredentialRequestOptions",
+                    "type" : "property"
+                  }
+                ],
+                "path" : "\/documentation\/oktadirectauth\/directauthenticationflow\/webauthncontext",
+                "title" : "DirectAuthenticationFlow.WebAuthnContext",
+                "type" : "struct"
+              },
+              {
                 "title" : "Enumerations",
                 "type" : "groupMarker"
               },
@@ -599,6 +635,654 @@
             "path" : "\/documentation\/oktadirectauth\/directauthenticationflowdelegate",
             "title" : "DirectAuthenticationFlowDelegate",
             "type" : "protocol"
+          },
+          {
+            "title" : "Structures",
+            "type" : "groupMarker"
+          },
+          {
+            "children" : [
+              {
+                "title" : "Structures",
+                "type" : "groupMarker"
+              },
+              {
+                "children" : [
+                  {
+                    "title" : "Initializers",
+                    "type" : "groupMarker"
+                  },
+                  {
+                    "path" : "\/documentation\/oktadirectauth\/webauthn\/authenticatorassertionresponse\/init(from:)",
+                    "title" : "init(from: Decoder) throws",
+                    "type" : "init"
+                  },
+                  {
+                    "title" : "Instance Properties",
+                    "type" : "groupMarker"
+                  },
+                  {
+                    "path" : "\/documentation\/oktadirectauth\/webauthn\/authenticatorassertionresponse\/authenticatordata",
+                    "title" : "let authenticatorData: String",
+                    "type" : "property"
+                  },
+                  {
+                    "path" : "\/documentation\/oktadirectauth\/webauthn\/authenticatorassertionresponse\/clientdatajson",
+                    "title" : "let clientDataJSON: String",
+                    "type" : "property"
+                  },
+                  {
+                    "path" : "\/documentation\/oktadirectauth\/webauthn\/authenticatorassertionresponse\/signature",
+                    "title" : "let signature: String",
+                    "type" : "property"
+                  },
+                  {
+                    "path" : "\/documentation\/oktadirectauth\/webauthn\/authenticatorassertionresponse\/userhandle",
+                    "title" : "let userHandle: String?",
+                    "type" : "property"
+                  },
+                  {
+                    "title" : "Default Implementations",
+                    "type" : "groupMarker"
+                  },
+                  {
+                    "children" : [
+                      {
+                        "title" : "Operators",
+                        "type" : "groupMarker"
+                      },
+                      {
+                        "path" : "\/documentation\/oktadirectauth\/webauthn\/authenticatorassertionresponse\/!=(_:_:)",
+                        "title" : "static func != (Self, Self) -> Bool",
+                        "type" : "op"
+                      }
+                    ],
+                    "path" : "\/documentation\/oktadirectauth\/webauthn\/authenticatorassertionresponse\/equatable-implementations",
+                    "title" : "Equatable Implementations",
+                    "type" : "symbol"
+                  }
+                ],
+                "path" : "\/documentation\/oktadirectauth\/webauthn\/authenticatorassertionresponse",
+                "title" : "WebAuthn.AuthenticatorAssertionResponse",
+                "type" : "struct"
+              },
+              {
+                "children" : [
+                  {
+                    "title" : "Structures",
+                    "type" : "groupMarker"
+                  },
+                  {
+                    "children" : [
+                      {
+                        "title" : "Initializers",
+                        "type" : "groupMarker"
+                      },
+                      {
+                        "path" : "\/documentation\/oktadirectauth\/webauthn\/credentialrequestoptions\/authenticatorenrollment\/init(from:)",
+                        "title" : "init(from: Decoder) throws",
+                        "type" : "init"
+                      },
+                      {
+                        "title" : "Instance Properties",
+                        "type" : "groupMarker"
+                      },
+                      {
+                        "path" : "\/documentation\/oktadirectauth\/webauthn\/credentialrequestoptions\/authenticatorenrollment\/credentialid",
+                        "title" : "let credentialId: String",
+                        "type" : "property"
+                      },
+                      {
+                        "path" : "\/documentation\/oktadirectauth\/webauthn\/credentialrequestoptions\/authenticatorenrollment\/displayname",
+                        "title" : "let displayName: String",
+                        "type" : "property"
+                      },
+                      {
+                        "path" : "\/documentation\/oktadirectauth\/webauthn\/credentialrequestoptions\/authenticatorenrollment\/profile",
+                        "title" : "let profile: [String : String]",
+                        "type" : "property"
+                      }
+                    ],
+                    "path" : "\/documentation\/oktadirectauth\/webauthn\/credentialrequestoptions\/authenticatorenrollment",
+                    "title" : "WebAuthn.CredentialRequestOptions.AuthenticatorEnrollment",
+                    "type" : "struct"
+                  },
+                  {
+                    "title" : "Initializers",
+                    "type" : "groupMarker"
+                  },
+                  {
+                    "path" : "\/documentation\/oktadirectauth\/webauthn\/credentialrequestoptions\/init(from:)",
+                    "title" : "init(from: Decoder) throws",
+                    "type" : "init"
+                  },
+                  {
+                    "title" : "Instance Properties",
+                    "type" : "groupMarker"
+                  },
+                  {
+                    "path" : "\/documentation\/oktadirectauth\/webauthn\/credentialrequestoptions\/authenticatorenrollments",
+                    "title" : "let authenticatorEnrollments: [WebAuthn.CredentialRequestOptions.AuthenticatorEnrollment]?",
+                    "type" : "property"
+                  },
+                  {
+                    "path" : "\/documentation\/oktadirectauth\/webauthn\/credentialrequestoptions\/publickey",
+                    "title" : "let publicKey: WebAuthn.PublicKeyCredentialRequestOptions",
+                    "type" : "property"
+                  },
+                  {
+                    "title" : "Default Implementations",
+                    "type" : "groupMarker"
+                  },
+                  {
+                    "children" : [
+                      {
+                        "title" : "Type Properties",
+                        "type" : "groupMarker"
+                      },
+                      {
+                        "path" : "\/documentation\/oktadirectauth\/webauthn\/credentialrequestoptions\/jsondecoder",
+                        "title" : "static var jsonDecoder: JSONDecoder",
+                        "type" : "property"
+                      }
+                    ],
+                    "path" : "\/documentation\/oktadirectauth\/webauthn\/credentialrequestoptions\/jsondecodable-implementations",
+                    "title" : "JSONDecodable Implementations",
+                    "type" : "symbol"
+                  }
+                ],
+                "path" : "\/documentation\/oktadirectauth\/webauthn\/credentialrequestoptions",
+                "title" : "WebAuthn.CredentialRequestOptions",
+                "type" : "struct"
+              },
+              {
+                "children" : [
+                  {
+                    "title" : "Initializers",
+                    "type" : "groupMarker"
+                  },
+                  {
+                    "path" : "\/documentation\/oktadirectauth\/webauthn\/publickeycredentialdescriptor\/init(from:)",
+                    "title" : "init(from: Decoder) throws",
+                    "type" : "init"
+                  },
+                  {
+                    "title" : "Instance Properties",
+                    "type" : "groupMarker"
+                  },
+                  {
+                    "path" : "\/documentation\/oktadirectauth\/webauthn\/publickeycredentialdescriptor\/id",
+                    "title" : "let id: String",
+                    "type" : "property"
+                  },
+                  {
+                    "path" : "\/documentation\/oktadirectauth\/webauthn\/publickeycredentialdescriptor\/transports",
+                    "title" : "let transports: [WebAuthn.AuthenticatorTransport]?",
+                    "type" : "property"
+                  },
+                  {
+                    "path" : "\/documentation\/oktadirectauth\/webauthn\/publickeycredentialdescriptor\/type",
+                    "title" : "let type: WebAuthn.PublicKeyCredentialType",
+                    "type" : "property"
+                  }
+                ],
+                "path" : "\/documentation\/oktadirectauth\/webauthn\/publickeycredentialdescriptor",
+                "title" : "WebAuthn.PublicKeyCredentialDescriptor",
+                "type" : "struct"
+              },
+              {
+                "children" : [
+                  {
+                    "title" : "Initializers",
+                    "type" : "groupMarker"
+                  },
+                  {
+                    "path" : "\/documentation\/oktadirectauth\/webauthn\/publickeycredentialrequestoptions\/init(from:)",
+                    "title" : "init(from: Decoder) throws",
+                    "type" : "init"
+                  },
+                  {
+                    "title" : "Instance Properties",
+                    "type" : "groupMarker"
+                  },
+                  {
+                    "path" : "\/documentation\/oktadirectauth\/webauthn\/publickeycredentialrequestoptions\/allowcredentials",
+                    "title" : "let allowCredentials: [WebAuthn.PublicKeyCredentialDescriptor]?",
+                    "type" : "property"
+                  },
+                  {
+                    "path" : "\/documentation\/oktadirectauth\/webauthn\/publickeycredentialrequestoptions\/challenge",
+                    "title" : "let challenge: String",
+                    "type" : "property"
+                  },
+                  {
+                    "path" : "\/documentation\/oktadirectauth\/webauthn\/publickeycredentialrequestoptions\/extensions",
+                    "title" : "let extensions: [String : Any?]?",
+                    "type" : "property"
+                  },
+                  {
+                    "path" : "\/documentation\/oktadirectauth\/webauthn\/publickeycredentialrequestoptions\/hints",
+                    "title" : "let hints: [WebAuthn.PublicKeyCredentialHints]?",
+                    "type" : "property"
+                  },
+                  {
+                    "path" : "\/documentation\/oktadirectauth\/webauthn\/publickeycredentialrequestoptions\/rpid",
+                    "title" : "var rpID: String?",
+                    "type" : "property"
+                  },
+                  {
+                    "path" : "\/documentation\/oktadirectauth\/webauthn\/publickeycredentialrequestoptions\/timeout",
+                    "title" : "let timeout: TimeInterval?",
+                    "type" : "property"
+                  },
+                  {
+                    "path" : "\/documentation\/oktadirectauth\/webauthn\/publickeycredentialrequestoptions\/userverification",
+                    "title" : "let userVerification: WebAuthn.UserVerificationRequirement?",
+                    "type" : "property"
+                  },
+                  {
+                    "title" : "Instance Methods",
+                    "type" : "groupMarker"
+                  },
+                  {
+                    "path" : "\/documentation\/oktadirectauth\/webauthn\/publickeycredentialrequestoptions\/encode(to:)",
+                    "title" : "func encode(to: Encoder) throws",
+                    "type" : "method"
+                  }
+                ],
+                "path" : "\/documentation\/oktadirectauth\/webauthn\/publickeycredentialrequestoptions",
+                "title" : "WebAuthn.PublicKeyCredentialRequestOptions",
+                "type" : "struct"
+              },
+              {
+                "title" : "Enumerations",
+                "type" : "groupMarker"
+              },
+              {
+                "children" : [
+                  {
+                    "title" : "Enumeration Cases",
+                    "type" : "groupMarker"
+                  },
+                  {
+                    "path" : "\/documentation\/oktadirectauth\/webauthn\/authenticatortransport\/ble",
+                    "title" : "case ble",
+                    "type" : "case"
+                  },
+                  {
+                    "path" : "\/documentation\/oktadirectauth\/webauthn\/authenticatortransport\/hybrid",
+                    "title" : "case hybrid",
+                    "type" : "case"
+                  },
+                  {
+                    "path" : "\/documentation\/oktadirectauth\/webauthn\/authenticatortransport\/nfc",
+                    "title" : "case nfc",
+                    "type" : "case"
+                  },
+                  {
+                    "path" : "\/documentation\/oktadirectauth\/webauthn\/authenticatortransport\/platform",
+                    "title" : "case platform",
+                    "type" : "case"
+                  },
+                  {
+                    "path" : "\/documentation\/oktadirectauth\/webauthn\/authenticatortransport\/smartcard",
+                    "title" : "case smartCard",
+                    "type" : "case"
+                  },
+                  {
+                    "path" : "\/documentation\/oktadirectauth\/webauthn\/authenticatortransport\/usb",
+                    "title" : "case usb",
+                    "type" : "case"
+                  },
+                  {
+                    "title" : "Initializers",
+                    "type" : "groupMarker"
+                  },
+                  {
+                    "path" : "\/documentation\/oktadirectauth\/webauthn\/authenticatortransport\/init(rawvalue:)",
+                    "title" : "init?(rawValue: String)",
+                    "type" : "init"
+                  },
+                  {
+                    "title" : "Default Implementations",
+                    "type" : "groupMarker"
+                  },
+                  {
+                    "children" : [
+                      {
+                        "title" : "Operators",
+                        "type" : "groupMarker"
+                      },
+                      {
+                        "path" : "\/documentation\/oktadirectauth\/webauthn\/authenticatortransport\/!=(_:_:)",
+                        "title" : "static func != (Self, Self) -> Bool",
+                        "type" : "op"
+                      }
+                    ],
+                    "path" : "\/documentation\/oktadirectauth\/webauthn\/authenticatortransport\/equatable-implementations",
+                    "title" : "Equatable Implementations",
+                    "type" : "symbol"
+                  },
+                  {
+                    "children" : [
+                      {
+                        "title" : "Initializers",
+                        "type" : "groupMarker"
+                      },
+                      {
+                        "path" : "\/documentation\/oktadirectauth\/webauthn\/authenticatortransport\/init(from:)",
+                        "title" : "init(from: Decoder) throws",
+                        "type" : "init"
+                      },
+                      {
+                        "title" : "Instance Properties",
+                        "type" : "groupMarker"
+                      },
+                      {
+                        "path" : "\/documentation\/oktadirectauth\/webauthn\/authenticatortransport\/hashvalue",
+                        "title" : "var hashValue: Int",
+                        "type" : "property"
+                      },
+                      {
+                        "title" : "Instance Methods",
+                        "type" : "groupMarker"
+                      },
+                      {
+                        "path" : "\/documentation\/oktadirectauth\/webauthn\/authenticatortransport\/encode(to:)",
+                        "title" : "func encode(to: Encoder) throws",
+                        "type" : "method"
+                      },
+                      {
+                        "path" : "\/documentation\/oktadirectauth\/webauthn\/authenticatortransport\/hash(into:)",
+                        "title" : "func hash(into: inout Hasher)",
+                        "type" : "method"
+                      }
+                    ],
+                    "path" : "\/documentation\/oktadirectauth\/webauthn\/authenticatortransport\/rawrepresentable-implementations",
+                    "title" : "RawRepresentable Implementations",
+                    "type" : "symbol"
+                  }
+                ],
+                "path" : "\/documentation\/oktadirectauth\/webauthn\/authenticatortransport",
+                "title" : "WebAuthn.AuthenticatorTransport",
+                "type" : "enum"
+              },
+              {
+                "children" : [
+                  {
+                    "title" : "Enumeration Cases",
+                    "type" : "groupMarker"
+                  },
+                  {
+                    "path" : "\/documentation\/oktadirectauth\/webauthn\/publickeycredentialhints\/clientdevice",
+                    "title" : "case clientDevice",
+                    "type" : "case"
+                  },
+                  {
+                    "path" : "\/documentation\/oktadirectauth\/webauthn\/publickeycredentialhints\/hybrid",
+                    "title" : "case hybrid",
+                    "type" : "case"
+                  },
+                  {
+                    "path" : "\/documentation\/oktadirectauth\/webauthn\/publickeycredentialhints\/securitykey",
+                    "title" : "case securityKey",
+                    "type" : "case"
+                  },
+                  {
+                    "title" : "Initializers",
+                    "type" : "groupMarker"
+                  },
+                  {
+                    "path" : "\/documentation\/oktadirectauth\/webauthn\/publickeycredentialhints\/init(rawvalue:)",
+                    "title" : "init?(rawValue: String)",
+                    "type" : "init"
+                  },
+                  {
+                    "title" : "Default Implementations",
+                    "type" : "groupMarker"
+                  },
+                  {
+                    "children" : [
+                      {
+                        "title" : "Operators",
+                        "type" : "groupMarker"
+                      },
+                      {
+                        "path" : "\/documentation\/oktadirectauth\/webauthn\/publickeycredentialhints\/!=(_:_:)",
+                        "title" : "static func != (Self, Self) -> Bool",
+                        "type" : "op"
+                      }
+                    ],
+                    "path" : "\/documentation\/oktadirectauth\/webauthn\/publickeycredentialhints\/equatable-implementations",
+                    "title" : "Equatable Implementations",
+                    "type" : "symbol"
+                  },
+                  {
+                    "children" : [
+                      {
+                        "title" : "Initializers",
+                        "type" : "groupMarker"
+                      },
+                      {
+                        "path" : "\/documentation\/oktadirectauth\/webauthn\/publickeycredentialhints\/init(from:)",
+                        "title" : "init(from: Decoder) throws",
+                        "type" : "init"
+                      },
+                      {
+                        "title" : "Instance Properties",
+                        "type" : "groupMarker"
+                      },
+                      {
+                        "path" : "\/documentation\/oktadirectauth\/webauthn\/publickeycredentialhints\/hashvalue",
+                        "title" : "var hashValue: Int",
+                        "type" : "property"
+                      },
+                      {
+                        "title" : "Instance Methods",
+                        "type" : "groupMarker"
+                      },
+                      {
+                        "path" : "\/documentation\/oktadirectauth\/webauthn\/publickeycredentialhints\/encode(to:)",
+                        "title" : "func encode(to: Encoder) throws",
+                        "type" : "method"
+                      },
+                      {
+                        "path" : "\/documentation\/oktadirectauth\/webauthn\/publickeycredentialhints\/hash(into:)",
+                        "title" : "func hash(into: inout Hasher)",
+                        "type" : "method"
+                      }
+                    ],
+                    "path" : "\/documentation\/oktadirectauth\/webauthn\/publickeycredentialhints\/rawrepresentable-implementations",
+                    "title" : "RawRepresentable Implementations",
+                    "type" : "symbol"
+                  }
+                ],
+                "path" : "\/documentation\/oktadirectauth\/webauthn\/publickeycredentialhints",
+                "title" : "WebAuthn.PublicKeyCredentialHints",
+                "type" : "enum"
+              },
+              {
+                "children" : [
+                  {
+                    "title" : "Enumeration Cases",
+                    "type" : "groupMarker"
+                  },
+                  {
+                    "path" : "\/documentation\/oktadirectauth\/webauthn\/publickeycredentialtype\/publickey",
+                    "title" : "case publicKey",
+                    "type" : "case"
+                  },
+                  {
+                    "title" : "Initializers",
+                    "type" : "groupMarker"
+                  },
+                  {
+                    "path" : "\/documentation\/oktadirectauth\/webauthn\/publickeycredentialtype\/init(rawvalue:)",
+                    "title" : "init?(rawValue: String)",
+                    "type" : "init"
+                  },
+                  {
+                    "title" : "Default Implementations",
+                    "type" : "groupMarker"
+                  },
+                  {
+                    "children" : [
+                      {
+                        "title" : "Operators",
+                        "type" : "groupMarker"
+                      },
+                      {
+                        "path" : "\/documentation\/oktadirectauth\/webauthn\/publickeycredentialtype\/!=(_:_:)",
+                        "title" : "static func != (Self, Self) -> Bool",
+                        "type" : "op"
+                      }
+                    ],
+                    "path" : "\/documentation\/oktadirectauth\/webauthn\/publickeycredentialtype\/equatable-implementations",
+                    "title" : "Equatable Implementations",
+                    "type" : "symbol"
+                  },
+                  {
+                    "children" : [
+                      {
+                        "title" : "Initializers",
+                        "type" : "groupMarker"
+                      },
+                      {
+                        "path" : "\/documentation\/oktadirectauth\/webauthn\/publickeycredentialtype\/init(from:)",
+                        "title" : "init(from: Decoder) throws",
+                        "type" : "init"
+                      },
+                      {
+                        "title" : "Instance Properties",
+                        "type" : "groupMarker"
+                      },
+                      {
+                        "path" : "\/documentation\/oktadirectauth\/webauthn\/publickeycredentialtype\/hashvalue",
+                        "title" : "var hashValue: Int",
+                        "type" : "property"
+                      },
+                      {
+                        "title" : "Instance Methods",
+                        "type" : "groupMarker"
+                      },
+                      {
+                        "path" : "\/documentation\/oktadirectauth\/webauthn\/publickeycredentialtype\/encode(to:)",
+                        "title" : "func encode(to: Encoder) throws",
+                        "type" : "method"
+                      },
+                      {
+                        "path" : "\/documentation\/oktadirectauth\/webauthn\/publickeycredentialtype\/hash(into:)",
+                        "title" : "func hash(into: inout Hasher)",
+                        "type" : "method"
+                      }
+                    ],
+                    "path" : "\/documentation\/oktadirectauth\/webauthn\/publickeycredentialtype\/rawrepresentable-implementations",
+                    "title" : "RawRepresentable Implementations",
+                    "type" : "symbol"
+                  }
+                ],
+                "path" : "\/documentation\/oktadirectauth\/webauthn\/publickeycredentialtype",
+                "title" : "WebAuthn.PublicKeyCredentialType",
+                "type" : "enum"
+              },
+              {
+                "children" : [
+                  {
+                    "title" : "Enumeration Cases",
+                    "type" : "groupMarker"
+                  },
+                  {
+                    "path" : "\/documentation\/oktadirectauth\/webauthn\/userverificationrequirement\/discouraged",
+                    "title" : "case discouraged",
+                    "type" : "case"
+                  },
+                  {
+                    "path" : "\/documentation\/oktadirectauth\/webauthn\/userverificationrequirement\/preferred",
+                    "title" : "case preferred",
+                    "type" : "case"
+                  },
+                  {
+                    "path" : "\/documentation\/oktadirectauth\/webauthn\/userverificationrequirement\/required",
+                    "title" : "case required",
+                    "type" : "case"
+                  },
+                  {
+                    "title" : "Initializers",
+                    "type" : "groupMarker"
+                  },
+                  {
+                    "path" : "\/documentation\/oktadirectauth\/webauthn\/userverificationrequirement\/init(rawvalue:)",
+                    "title" : "init?(rawValue: String)",
+                    "type" : "init"
+                  },
+                  {
+                    "title" : "Default Implementations",
+                    "type" : "groupMarker"
+                  },
+                  {
+                    "children" : [
+                      {
+                        "title" : "Operators",
+                        "type" : "groupMarker"
+                      },
+                      {
+                        "path" : "\/documentation\/oktadirectauth\/webauthn\/userverificationrequirement\/!=(_:_:)",
+                        "title" : "static func != (Self, Self) -> Bool",
+                        "type" : "op"
+                      }
+                    ],
+                    "path" : "\/documentation\/oktadirectauth\/webauthn\/userverificationrequirement\/equatable-implementations",
+                    "title" : "Equatable Implementations",
+                    "type" : "symbol"
+                  },
+                  {
+                    "children" : [
+                      {
+                        "title" : "Initializers",
+                        "type" : "groupMarker"
+                      },
+                      {
+                        "path" : "\/documentation\/oktadirectauth\/webauthn\/userverificationrequirement\/init(from:)",
+                        "title" : "init(from: Decoder) throws",
+                        "type" : "init"
+                      },
+                      {
+                        "title" : "Instance Properties",
+                        "type" : "groupMarker"
+                      },
+                      {
+                        "path" : "\/documentation\/oktadirectauth\/webauthn\/userverificationrequirement\/hashvalue",
+                        "title" : "var hashValue: Int",
+                        "type" : "property"
+                      },
+                      {
+                        "title" : "Instance Methods",
+                        "type" : "groupMarker"
+                      },
+                      {
+                        "path" : "\/documentation\/oktadirectauth\/webauthn\/userverificationrequirement\/encode(to:)",
+                        "title" : "func encode(to: Encoder) throws",
+                        "type" : "method"
+                      },
+                      {
+                        "path" : "\/documentation\/oktadirectauth\/webauthn\/userverificationrequirement\/hash(into:)",
+                        "title" : "func hash(into: inout Hasher)",
+                        "type" : "method"
+                      }
+                    ],
+                    "path" : "\/documentation\/oktadirectauth\/webauthn\/userverificationrequirement\/rawrepresentable-implementations",
+                    "title" : "RawRepresentable Implementations",
+                    "type" : "symbol"
+                  }
+                ],
+                "path" : "\/documentation\/oktadirectauth\/webauthn\/userverificationrequirement",
+                "title" : "WebAuthn.UserVerificationRequirement",
+                "type" : "enum"
+              }
+            ],
+            "path" : "\/documentation\/oktadirectauth\/webauthn",
+            "title" : "WebAuthn",
+            "type" : "struct"
           },
           {
             "title" : "Variables",

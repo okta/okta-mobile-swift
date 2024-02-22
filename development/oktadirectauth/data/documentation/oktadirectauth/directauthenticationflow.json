@@ -372,7 +372,8 @@
     },
     {
       "identifiers" : [
-        "doc:\/\/OktaDirectAuth\/documentation\/OktaDirectAuth\/DirectAuthenticationFlow\/BindingUpdateContext"
+        "doc:\/\/OktaDirectAuth\/documentation\/OktaDirectAuth\/DirectAuthenticationFlow\/BindingUpdateContext",
+        "doc:\/\/OktaDirectAuth\/documentation\/OktaDirectAuth\/DirectAuthenticationFlow\/WebAuthnContext"
       ],
       "title" : "Structures"
     },
@@ -772,6 +773,40 @@
   "title" : "UsesDelegateCollection Implementations",
   "type" : "topic",
   "url" : "\/documentation\/oktadirectauth\/directauthenticationflow\/usesdelegatecollection-implementations"
+},
+"doc://OktaDirectAuth/documentation/OktaDirectAuth/DirectAuthenticationFlow/WebAuthnContext": {
+  "abstract" : [
+    {
+      "text" : "Holds information about a challenge request when initiating a WebAuthn authentication.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "struct"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "WebAuthnContext"
+    }
+  ],
+  "identifier" : "doc:\/\/OktaDirectAuth\/documentation\/OktaDirectAuth\/DirectAuthenticationFlow\/WebAuthnContext",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "WebAuthnContext"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "DirectAuthenticationFlow.WebAuthnContext",
+  "type" : "topic",
+  "url" : "\/documentation\/oktadirectauth\/directauthenticationflow\/webauthncontext"
 },
 "doc://OktaDirectAuth/documentation/OktaDirectAuth/DirectAuthenticationFlow/client": {
   "abstract" : [

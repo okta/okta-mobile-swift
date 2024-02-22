@@ -2323,6 +2323,16 @@
                 "type" : "case"
               },
               {
+                "path" : "\/documentation\/authfoundation\/granttype\/webauthn",
+                "title" : "case webAuthn",
+                "type" : "case"
+              },
+              {
+                "path" : "\/documentation\/authfoundation\/granttype\/webauthnmfa",
+                "title" : "case webAuthnMFA",
+                "type" : "case"
+              },
+              {
                 "title" : "Default Implementations",
                 "type" : "groupMarker"
               },
@@ -5512,13 +5522,13 @@
                   {
                     "children" : [
                       {
-                        "path" : "\/documentation\/authfoundation\/apiclient\/didsend(request:received:)-88sth",
-                        "title" : "func didSend<T>(request: URLRequest, received: APIResponse<T>)",
+                        "path" : "\/documentation\/authfoundation\/apiclient\/didsend(request:received:)-1c12k",
+                        "title" : "func didSend(request: URLRequest, received: HTTPURLResponse)",
                         "type" : "method"
                       },
                       {
-                        "path" : "\/documentation\/authfoundation\/apiclient\/didsend(request:received:)-1c12k",
-                        "title" : "func didSend(request: URLRequest, received: HTTPURLResponse)",
+                        "path" : "\/documentation\/authfoundation\/apiclient\/didsend(request:received:)-88sth",
+                        "title" : "func didSend<T>(request: URLRequest, received: APIResponse<T>)",
                         "type" : "method"
                       },
                       {
@@ -5540,13 +5550,13 @@
                   {
                     "children" : [
                       {
-                        "path" : "\/documentation\/authfoundation\/apiclient\/didsend(request:received:)-88sth",
-                        "title" : "func didSend<T>(request: URLRequest, received: APIResponse<T>)",
+                        "path" : "\/documentation\/authfoundation\/apiclient\/didsend(request:received:)-1c12k",
+                        "title" : "func didSend(request: URLRequest, received: HTTPURLResponse)",
                         "type" : "method"
                       },
                       {
-                        "path" : "\/documentation\/authfoundation\/apiclient\/didsend(request:received:)-1c12k",
-                        "title" : "func didSend(request: URLRequest, received: HTTPURLResponse)",
+                        "path" : "\/documentation\/authfoundation\/apiclient\/didsend(request:received:)-88sth",
+                        "title" : "func didSend<T>(request: URLRequest, received: APIResponse<T>)",
                         "type" : "method"
                       },
                       {
@@ -6025,17 +6035,17 @@
                   {
                     "children" : [
                       {
-                        "path" : "\/documentation\/authfoundation\/apirequest\/body()-2spui",
-                        "title" : "func body() throws -> Data?",
-                        "type" : "method"
-                      },
-                      {
                         "path" : "\/documentation\/authfoundation\/apirequest\/body()-8cybb",
                         "title" : "func body() throws -> Data?",
                         "type" : "method"
                       },
                       {
                         "path" : "\/documentation\/authfoundation\/apirequest\/body()-6rb14",
+                        "title" : "func body() throws -> Data?",
+                        "type" : "method"
+                      },
+                      {
+                        "path" : "\/documentation\/authfoundation\/apirequest\/body()-2spui",
                         "title" : "func body() throws -> Data?",
                         "type" : "method"
                       }
@@ -8287,31 +8297,6 @@
             "type" : "struct"
           },
           {
-            "children" : [
-              {
-                "title" : "Initializers",
-                "type" : "groupMarker"
-              },
-              {
-                "path" : "\/documentation\/authfoundation\/threadsafe\/init(wrappedvalue:)",
-                "title" : "init(wrappedValue: T)",
-                "type" : "init"
-              },
-              {
-                "title" : "Instance Properties",
-                "type" : "groupMarker"
-              },
-              {
-                "path" : "\/documentation\/authfoundation\/threadsafe\/wrappedvalue",
-                "title" : "var wrappedValue: T",
-                "type" : "property"
-              }
-            ],
-            "path" : "\/documentation\/authfoundation\/threadsafe",
-            "title" : "ThreadSafe",
-            "type" : "struct"
-          },
-          {
             "title" : "Variables",
             "type" : "groupMarker"
           },
@@ -8398,6 +8383,183 @@
             ],
             "path" : "\/documentation\/authfoundation\/apiretry",
             "title" : "APIRetry",
+            "type" : "enum"
+          },
+          {
+            "children" : [
+              {
+                "title" : "Operators",
+                "type" : "groupMarker"
+              },
+              {
+                "path" : "\/documentation\/authfoundation\/jsonvalue\/==(_:_:)",
+                "title" : "static func == (JSONValue, JSONValue) -> Bool",
+                "type" : "op"
+              },
+              {
+                "title" : "Enumeration Cases",
+                "type" : "groupMarker"
+              },
+              {
+                "path" : "\/documentation\/authfoundation\/jsonvalue\/array(_:)",
+                "title" : "case array([JSONValue])",
+                "type" : "case"
+              },
+              {
+                "path" : "\/documentation\/authfoundation\/jsonvalue\/bool(_:)",
+                "title" : "case bool(Bool)",
+                "type" : "case"
+              },
+              {
+                "path" : "\/documentation\/authfoundation\/jsonvalue\/dictionary(_:)",
+                "title" : "case dictionary([String : JSONValue])",
+                "type" : "case"
+              },
+              {
+                "path" : "\/documentation\/authfoundation\/jsonvalue\/null",
+                "title" : "case null",
+                "type" : "case"
+              },
+              {
+                "path" : "\/documentation\/authfoundation\/jsonvalue\/number(_:)",
+                "title" : "case number(Double)",
+                "type" : "case"
+              },
+              {
+                "path" : "\/documentation\/authfoundation\/jsonvalue\/object(_:)",
+                "title" : "case object(Any)",
+                "type" : "case"
+              },
+              {
+                "path" : "\/documentation\/authfoundation\/jsonvalue\/string(_:)",
+                "title" : "case string(String)",
+                "type" : "case"
+              },
+              {
+                "title" : "Initializers",
+                "type" : "groupMarker"
+              },
+              {
+                "path" : "\/documentation\/authfoundation\/jsonvalue\/init(_:)",
+                "title" : "init(Any?) throws",
+                "type" : "init"
+              },
+              {
+                "title" : "Instance Properties",
+                "type" : "groupMarker"
+              },
+              {
+                "path" : "\/documentation\/authfoundation\/jsonvalue\/anyvalue",
+                "title" : "var anyValue: Any?",
+                "type" : "property"
+              },
+              {
+                "title" : "Default Implementations",
+                "type" : "groupMarker"
+              },
+              {
+                "children" : [
+                  {
+                    "title" : "Instance Properties",
+                    "type" : "groupMarker"
+                  },
+                  {
+                    "path" : "\/documentation\/authfoundation\/jsonvalue\/debugdescription",
+                    "title" : "var debugDescription: String",
+                    "type" : "property"
+                  }
+                ],
+                "path" : "\/documentation\/authfoundation\/jsonvalue\/customdebugstringconvertible-implementations",
+                "title" : "CustomDebugStringConvertible Implementations",
+                "type" : "symbol"
+              },
+              {
+                "children" : [
+                  {
+                    "title" : "Initializers",
+                    "type" : "groupMarker"
+                  },
+                  {
+                    "path" : "\/documentation\/authfoundation\/jsonvalue\/init(from:)",
+                    "title" : "init(from: Decoder) throws",
+                    "type" : "init"
+                  }
+                ],
+                "path" : "\/documentation\/authfoundation\/jsonvalue\/decodable-implementations",
+                "title" : "Decodable Implementations",
+                "type" : "symbol"
+              },
+              {
+                "children" : [
+                  {
+                    "title" : "Instance Methods",
+                    "type" : "groupMarker"
+                  },
+                  {
+                    "path" : "\/documentation\/authfoundation\/jsonvalue\/encode(to:)",
+                    "title" : "func encode(to: Encoder) throws",
+                    "type" : "method"
+                  }
+                ],
+                "path" : "\/documentation\/authfoundation\/jsonvalue\/encodable-implementations",
+                "title" : "Encodable Implementations",
+                "type" : "symbol"
+              },
+              {
+                "children" : [
+                  {
+                    "title" : "Operators",
+                    "type" : "groupMarker"
+                  },
+                  {
+                    "path" : "\/documentation\/authfoundation\/jsonvalue\/!=(_:_:)",
+                    "title" : "static func != (Self, Self) -> Bool",
+                    "type" : "op"
+                  }
+                ],
+                "path" : "\/documentation\/authfoundation\/jsonvalue\/equatable-implementations",
+                "title" : "Equatable Implementations",
+                "type" : "symbol"
+              }
+            ],
+            "path" : "\/documentation\/authfoundation\/jsonvalue",
+            "title" : "JSONValue",
+            "type" : "enum"
+          },
+          {
+            "children" : [
+              {
+                "title" : "Enumeration Cases",
+                "type" : "groupMarker"
+              },
+              {
+                "path" : "\/documentation\/authfoundation\/jsonvalueerror\/cannotdecode(value:)",
+                "title" : "case cannotDecode(value: Any)",
+                "type" : "case"
+              },
+              {
+                "title" : "Default Implementations",
+                "type" : "groupMarker"
+              },
+              {
+                "children" : [
+                  {
+                    "title" : "Instance Properties",
+                    "type" : "groupMarker"
+                  },
+                  {
+                    "path" : "\/documentation\/authfoundation\/jsonvalueerror\/localizeddescription",
+                    "title" : "var localizedDescription: String",
+                    "type" : "property"
+                  }
+                ],
+                "path" : "\/documentation\/authfoundation\/jsonvalueerror\/error-implementations",
+                "title" : "Error Implementations",
+                "type" : "symbol"
+              }
+            ],
+            "path" : "\/documentation\/authfoundation\/jsonvalueerror",
+            "title" : "JSONValueError",
             "type" : "enum"
           }
         ],
