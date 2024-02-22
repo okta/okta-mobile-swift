@@ -12,14 +12,14 @@
 
 import Foundation
 
-extension DirectAuthenticationFlow.Status {
-    var mfaContext: DirectAuthenticationFlow.MFAContext? {
-        if case let .mfaRequired(context) = self {
-            return context
-        } else if case let .webAuthn(context) = self {
-            return context.mfaContext
-        } else {
-            return nil
-        }
+extension WebAuthn {
+    /**
+     This member contains the type of the public key credential the caller is referring to.
+     
+     - Note: [W3C Reccomendation](https://www.w3.org/TR/webauthn/#dom-publickeycredentialdescriptor-type)
+     */
+    public enum PublicKeyCredentialType: String, Codable {
+        /// Descripes a public key credential type.
+        case publicKey = "public-key"
     }
 }

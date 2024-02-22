@@ -35,7 +35,8 @@ class OIDCSignInViewController: UIViewController {
                                                object: nil)
     }
     
-    @objc func dismissProfile() {
+    @objc
+    func dismissProfile() {
         guard presentedViewController != nil else { return }
         
         self.presentedViewController?.dismiss(animated: true, completion: {

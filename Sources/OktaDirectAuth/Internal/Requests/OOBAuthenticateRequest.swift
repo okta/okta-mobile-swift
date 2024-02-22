@@ -14,12 +14,12 @@ import Foundation
 import AuthFoundation
 
 extension OpenIdConfiguration {
-    var oobAuthenticateEndpoint: URL? {
-        tokenEndpoint.url(replacing: "/token", with: "/oob-authenticate")
+    var primaryAuthenticateEndpoint: URL? {
+        tokenEndpoint.url(replacing: "/token", with: "/primary-authenticate")
     }
 }
 
-struct OOBResponse: Codable {
+struct OOBResponse: Codable, HasTokenParameters {
     let oobCode: String
     let expiresIn: TimeInterval
     let interval: TimeInterval
@@ -35,6 +35,10 @@ struct OOBResponse: Codable {
         self.bindingMethod = bindingMethod
         self.bindingCode = bindingCode
     }
+    
+    func tokenParameters(currentStatus: DirectAuthenticationFlow.Status?) -> [String: String] {
+        ["oob_code": oobCode]
+    }
 }
 
 struct OOBAuthenticateRequest {
@@ -48,7 +52,7 @@ struct OOBAuthenticateRequest {
          loginHint: String,
          channelHint: DirectAuthenticationFlow.OOBChannel) throws
     {
-        guard let url = openIdConfiguration.oobAuthenticateEndpoint else {
+        guard let url = openIdConfiguration.primaryAuthenticateEndpoint else {
             throw OAuth2Error.cannotComposeUrl
         }
         

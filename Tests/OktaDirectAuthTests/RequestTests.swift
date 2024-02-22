@@ -32,6 +32,7 @@ final class RequestTests: XCTestCase {
                         clientConfiguration: try .init(domain: "example.com",
                                                        clientId: "theClientId",
                                                        scopes: "openid profile"),
+                        currentStatus: nil,
                         factor: DirectAuthenticationFlow.PrimaryFactor.password("password123"))
         XCTAssertEqual(request.bodyParameters as? [String: String],
                        [
@@ -47,6 +48,7 @@ final class RequestTests: XCTestCase {
                                                        clientId: "theClientId",
                                                        scopes: "openid profile",
                                                        authentication: .clientSecret("supersecret")),
+                        currentStatus: nil,
                         factor: DirectAuthenticationFlow.PrimaryFactor.password("password123"))
         XCTAssertEqual(request.bodyParameters as? [String: String],
                        [

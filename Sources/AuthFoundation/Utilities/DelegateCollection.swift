@@ -26,8 +26,7 @@ extension UsesDelegateCollection {
 }
 
 public final class DelegateCollection<D> {
-    @WeakCollection
-    private var delegates: [AnyObject?]
+    @WeakCollection private var delegates: [AnyObject?]
     
     public init() {
         delegates = []

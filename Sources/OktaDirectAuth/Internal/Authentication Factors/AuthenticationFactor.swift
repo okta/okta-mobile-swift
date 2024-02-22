@@ -13,19 +13,23 @@
 import Foundation
 import AuthFoundation
 
-/// Defines the common properties and functions shared between factor types.
-protocol AuthenticationFactor {
-    /// The grant type supported by this factor.
-    var grantType: GrantType { get }
-    
+/// Defines the additional token parameters that can be introduced through input arguments.
+protocol HasTokenParameters {
     /// Parameters to include in the API request.
-    var tokenParameters: [String: Any]? { get }
-    
+    func tokenParameters(currentStatus: DirectAuthenticationFlow.Status?) -> [String: String]
+}
+
+/// Defines the common properties and functions shared between factor types.
+protocol AuthenticationFactor: HasTokenParameters {
+    /// The grant type supported by this factor.
+    func grantType(currentStatus: DirectAuthenticationFlow.Status?) -> GrantType
+
     /// Returns a step handler capable of handling this authentication factor.
     /// - Parameters:
     ///   - flow: The current flow for this authentication step.
     ///   - openIdConfiguration: OpenID configuration for this org.
     ///   - loginHint: The login hint for this session.
+    ///   - currentStatus: The current status this step is being created from, if applicable.
     ///   - factor: The factor for the step to process.
     /// - Returns: A step handler capable of processing this authentication factor.
     func stepHandler(flow: DirectAuthenticationFlow,

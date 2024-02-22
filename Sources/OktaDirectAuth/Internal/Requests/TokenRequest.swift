@@ -16,26 +16,26 @@ import AuthFoundation
 struct TokenRequest {
     let openIdConfiguration: OpenIdConfiguration
     let clientConfiguration: OAuth2Client.Configuration
+    let currentStatus: DirectAuthenticationFlow.Status?
     let loginHint: String?
     let factor: any AuthenticationFactor
-    let mfaToken: String?
-    let oobCode: String?
+    let parameters: (any HasTokenParameters)?
     let grantTypesSupported: [GrantType]?
     
     init(openIdConfiguration: OpenIdConfiguration,
          clientConfiguration: OAuth2Client.Configuration,
+         currentStatus: DirectAuthenticationFlow.Status?,
          loginHint: String? = nil,
          factor: any AuthenticationFactor,
-         mfaToken: String? = nil,
-         oobCode: String? = nil,
+         parameters: (any HasTokenParameters)? = nil,
          grantTypesSupported: [GrantType]? = nil)
     {
         self.openIdConfiguration = openIdConfiguration
         self.clientConfiguration = clientConfiguration
+        self.currentStatus = currentStatus
         self.loginHint = loginHint
         self.factor = factor
-        self.mfaToken = mfaToken
-        self.oobCode = oobCode
+        self.parameters = parameters
         self.grantTypesSupported = grantTypesSupported
     }
 }
@@ -47,18 +47,12 @@ extension TokenRequest: OAuth2TokenRequest, OAuth2APIRequest, APIRequestBody {
     var contentType: APIContentType? { .formEncoded }
     var acceptsType: APIContentType? { .json }
     var bodyParameters: [String: Any]? {
-        var result: [String: Any] = [
-            "client_id": clientConfiguration.clientId,
-            "grant_type": factor.grantType.rawValue,
-            "scope": clientConfiguration.scopes
-        ]
+        var result = factor.tokenParameters(currentStatus: currentStatus)
+        result["client_id"] = clientConfiguration.clientId
+        result["scope"] = clientConfiguration.scopes
         
-        if let mfaToken = mfaToken {
-            result["mfa_token"] = mfaToken
-        }
-        
-        if let oobCode = oobCode {
-            result["oob_code"] = oobCode
+        if let tokenParameters = parameters?.tokenParameters(currentStatus: currentStatus) {
+            result.merge(tokenParameters, uniquingKeysWith: { $1 })
         }
         
         if let loginHint = loginHint {
@@ -73,10 +67,6 @@ extension TokenRequest: OAuth2TokenRequest, OAuth2APIRequest, APIRequestBody {
         
         if let grantTypesSupported = grantTypesSupported?.map(\.rawValue) {
             result["grant_types_supported"] = grantTypesSupported.joined(separator: " ")
-        }
-        
-        if let parameters = factor.tokenParameters {
-            result.merge(parameters, uniquingKeysWith: { $1 })
         }
         
         if let parameters = clientConfiguration.authentication.additionalParameters {

@@ -160,7 +160,7 @@ final class FactorStepHandlerTests: XCTestCase {
             case .success(let status):
                 switch status {
                 case .success(_): break
-                case .mfaRequired(_), .bindingUpdate(_):
+                case .mfaRequired(_), .bindingUpdate(_), .webAuthn(request: _):
                     XCTFail("Did not receive a success response")
                 }
             case .failure(let error):
@@ -193,7 +193,7 @@ final class FactorStepHandlerTests: XCTestCase {
             switch result {
             case .success(let status):
                 switch status {
-                case .success(_), .bindingUpdate(_):
+                case .success(_), .bindingUpdate(_), .webAuthn(request: _):
                     XCTFail("Did not receive a mfa_required response")
                 case .mfaRequired(let context):
                     XCTAssertEqual(context.mfaToken, "abcd1234")
@@ -215,8 +215,8 @@ final class FactorStepHandlerTests: XCTestCase {
         urlSession.expect("https://example.okta.com/oauth2/v1/keys?client_id=clientId",
                           data: try data(from: .module, for: "keys", in: "MockResponses"),
                           contentType: "application/json")
-        urlSession.expect("https://example.okta.com/oauth2/v1/oob-authenticate",
-                          data: try data(from: .module, for: "oob-authenticate", in: "MockResponses"))
+        urlSession.expect("https://example.okta.com/oauth2/v1/primary-authenticate",
+                          data: try data(from: .module, for: "primary-authenticate", in: "MockResponses"))
         urlSession.expect("https://example.okta.com/oauth2/v1/token",
                           data: try data(from: .module, for: "token", in: "MockResponses"))
         
@@ -232,7 +232,7 @@ final class FactorStepHandlerTests: XCTestCase {
             case .success(let status):
                 switch status {
                 case .success(_): break
-                case .mfaRequired(_), .bindingUpdate(_):
+                case .mfaRequired(_), .bindingUpdate(_), .webAuthn(request: _):
                     XCTFail("Did not receive a success response")
                 }
             case .failure(let error):
@@ -250,8 +250,8 @@ final class FactorStepHandlerTests: XCTestCase {
         urlSession.expect("https://example.okta.com/oauth2/v1/keys?client_id=clientId",
                           data: try data(from: .module, for: "keys", in: "MockResponses"),
                           contentType: "application/json")
-        urlSession.expect("https://example.okta.com/oauth2/v1/oob-authenticate",
-                          data: try data(from: .module, for: "oob-authenticate-binding-transfer", in: "MockResponses"))
+        urlSession.expect("https://example.okta.com/oauth2/v1/primary-authenticate",
+                          data: try data(from: .module, for: "primary-authenticate-binding-transfer", in: "MockResponses"))
         urlSession.expect("https://example.okta.com/oauth2/v1/token",
                           data: try data(from: .module, for: "token", in: "MockResponses"))
 
@@ -294,8 +294,8 @@ final class FactorStepHandlerTests: XCTestCase {
         urlSession.expect("https://example.okta.com/oauth2/v1/keys?client_id=clientId",
                           data: try data(from: .module, for: "keys", in: "MockResponses"),
                           contentType: "application/json")
-        urlSession.expect("https://example.okta.com/oauth2/v1/oob-authenticate",
-                          data: try data(from: .module, for: "oob-authenticate-binding-transfer-missingCode", in: "MockResponses"))
+        urlSession.expect("https://example.okta.com/oauth2/v1/primary-authenticate",
+                          data: try data(from: .module, for: "primary-authenticate-binding-transfer-missingCode", in: "MockResponses"))
         urlSession.expect("https://example.okta.com/oauth2/v1/token",
                           data: try data(from: .module, for: "token", in: "MockResponses"))
 
@@ -325,8 +325,8 @@ final class FactorStepHandlerTests: XCTestCase {
         urlSession.expect("https://example.okta.com/oauth2/v1/keys?client_id=clientId",
                           data: try data(from: .module, for: "keys", in: "MockResponses"),
                           contentType: "application/json")
-        urlSession.expect("https://example.okta.com/oauth2/v1/oob-authenticate",
-                          data: try data(from: .module, for: "oob-authenticate", in: "MockResponses"))
+        urlSession.expect("https://example.okta.com/oauth2/v1/primary-authenticate",
+                          data: try data(from: .module, for: "primary-authenticate", in: "MockResponses"))
         urlSession.expect("https://example.okta.com/oauth2/v1/token",
                           data: try data(from: .module, for: "token-mfa_required", in: "MockResponses"),
                           statusCode: 400)
@@ -342,7 +342,7 @@ final class FactorStepHandlerTests: XCTestCase {
             switch result {
             case .success(let status):
                 switch status {
-                case .success(_), .bindingUpdate(_):
+                case .success(_), .bindingUpdate(_), .webAuthn(request: _):
                     XCTFail("Did not receive a mfa_required response")
                 case .mfaRequired(let context):
                     XCTAssertEqual(context.mfaToken, "abcd1234")
@@ -381,7 +381,7 @@ final class FactorStepHandlerTests: XCTestCase {
             case .success(let status):
                 switch status {
                 case .success(_): break
-                case .mfaRequired(_), .bindingUpdate(_):
+                case .mfaRequired(_), .bindingUpdate(_), .webAuthn(request: _):
                     XCTFail("Did not receive a success response")
                 }
             case .failure(let error):
