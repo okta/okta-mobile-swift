@@ -14,16 +14,37 @@ import Foundation
 
 /// Errors that may occur at the API or network level.
 public enum APIClientError: Error {
+    /// Could not create an invalid URL. This typically means the string passed to `URL` was malformed.
     case invalidUrl
+    
+    /// No response received from the server.
     case missingResponse
+    
+    /// Did not receive an HTTP response.
     case invalidResponse
+    
+    /// An error occurred while parsing the server response.
     case cannotParseResponse(error: Error)
+    
+    /// Cannot send invalid request data to the server.
     case invalidRequestData
+    
+    /// Cannot refresh a token since it is missing refresh information.
     case missingRefreshSettings
+    
+    /// Request does not support the given content type.
     case unsupportedContentType(_ type: APIContentType)
+    
+    /// Received the given HTTP error from the server.
     case serverError(_ error: Error)
+    
+    /// Received the given HTTP response status code.
     case statusCode(_ statusCode: Int)
+    
+    /// Could not validate the received token.
     case validation(error: Error)
+    
+    /// An unknown HTTP error was encountered.
     case unknown
 }
 
