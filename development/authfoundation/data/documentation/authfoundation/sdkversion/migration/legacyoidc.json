@@ -172,6 +172,7 @@
     {
       "identifiers" : [
         "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/SDKVersion\/Migration\/LegacyOIDC\/register()",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/SDKVersion\/Migration\/LegacyOIDC\/register(clientId:)",
         "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/SDKVersion\/Migration\/LegacyOIDC\/register(issuer:clientId:redirectUri:scopes:)",
         "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/SDKVersion\/Migration\/LegacyOIDC\/register(plist:)"
       ],
@@ -432,13 +433,68 @@
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/sdkversion\/migration\/legacyoidc\/register()"
 },
-"doc://AuthFoundation/documentation/AuthFoundation/SDKVersion/Migration/LegacyOIDC/register(issuer:clientId:redirectUri:scopes:)": {
+"doc://AuthFoundation/documentation/AuthFoundation/SDKVersion/Migration/LegacyOIDC/register(clientId:)": {
   "abstract" : [
     {
       "text" : "Registers the legacy OIDC migration using the supplied configuration values.",
       "type" : "text"
     }
   ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "static"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "keyword",
+      "text" : "func"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "register"
+    },
+    {
+      "kind" : "text",
+      "text" : "("
+    },
+    {
+      "kind" : "externalParam",
+      "text" : "clientId"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:SS",
+      "text" : "String"
+    },
+    {
+      "kind" : "text",
+      "text" : "?)"
+    }
+  ],
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/SDKVersion\/Migration\/LegacyOIDC\/register(clientId:)",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "register(clientId:)",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/sdkversion\/migration\/legacyoidc\/register(clientid:)"
+},
+"doc://AuthFoundation/documentation/AuthFoundation/SDKVersion/Migration/LegacyOIDC/register(issuer:clientId:redirectUri:scopes:)": {
+  "abstract" : [
+
+  ],
+  "deprecated" : true,
   "fragments" : [
     {
       "kind" : "keyword",
