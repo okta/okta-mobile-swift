@@ -16,17 +16,40 @@ import Foundation
 
 /// Describes errors that may occur when interacting with the keychain.
 public enum KeychainError: Error {
+    /// There was a failure getting a keychain item.
     case cannotGet(code: OSStatus)
+    
+    /// There was a failure getting a list of keychain items.
     case cannotList(code: OSStatus)
+    
+    /// There was a failure saving a keychain item.
     case cannotSave(code: OSStatus)
+    
+    /// There was a failure deleting a keychain item.
     case cannotDelete(code: OSStatus)
+    
+    /// There was a failure updating a keychain item.
     case cannotUpdate(code: OSStatus)
+    
+    /// The access control settings for this keychain item are invalid.
     case accessControlInvalid(code: OSStatus, description: String?)
+    
+    /// Could not find a keychain item.
     case notFound
+    
+    /// The returned keychain item is in an invalid format.
     case invalidFormat
+    
+    /// The keychain item has an invalid accessibility option set.
     case invalidAccessibilityOption
+    
+    /// The keychain item is missing an account name.
     case missingAccount
+    
+    /// The keychain item is missing its value data.
     case missingValueData
+    
+    /// The keychain item is missing required attributes.
     case missingAttribute
 }
 

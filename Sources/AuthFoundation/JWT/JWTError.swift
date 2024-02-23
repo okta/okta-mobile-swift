@@ -14,23 +14,58 @@ import Foundation
 
 /// Describes errors that may occur with parsing or validating JWT tokens.
 public enum JWTError: Error, Equatable {
+    /// The token is invalid (incorrect Base64 encoding).
     case invalidBase64Encoding
+    
+    /// The token is not structured correctly.
     case badTokenStructure
+    
+    /// The token's issuer is either not well-formed, or does not match.
     case invalidIssuer
+    
+    /// The token's audience does not match.
     case invalidAudience
+    
+    /// The token's subject is missing or is invalid.
     case invalidSubject
+    
+    /// The token's authentication time is missing or is invalid.
     case invalidAuthenticationTime
+    
+    /// Token issuer addresses must use HTTPS.
     case issuerRequiresHTTPS
+    
+    /// The token's signing algorithm is invalid or unsupported.
     case invalidSigningAlgorithm
+    
+    /// The token has expired.
     case expired
+    
+    /// This token was issued at a time that exceeds the allowed grace interval.
     case issuedAtTimeExceedsGraceInterval
+    
+    /// The nonce value does not match the value expected.
     case nonceMismatch
+    
+    /// Cannot create a public key with the information supplied from the server.
     case cannotCreateKey(code: OSStatus, description: String?)
+    
+    /// Invalid key data.
     case invalidKey
+    
+    /// The indicated signing algorithm is unsupported.
     case unsupportedAlgorithm(_ algorithm: JWK.Algorithm)
+    
+    /// Cannot generate hash signature.
     case cannotGenerateHash
+    
+    /// Signature verification is unavailable on this platform, e.g. Linux.
     case signatureVerificationUnavailable
+    
+    /// Token signature is invalid.
     case signatureInvalid
+    
+    /// The given token exceeds the supplied maximum age.
     case exceedsMaxAge
 }
 
