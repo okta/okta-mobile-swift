@@ -19,7 +19,7 @@ final class ExtensionTests: XCTestCase {
     typealias MFAContext = DirectAuthenticationFlow.MFAContext
 
     func testArrayExtensions() throws {
-        XCTAssertEqual([GrantType].directAuth, [.password, .oob, .otp, .oobMFA, .otpMFA])
+        XCTAssertEqual([GrantType].directAuth, [.password, .oob, .otp, .oobMFA, .otpMFA, .webAuthn, .webAuthnMFA])
     }
     
     func testAuthFlowStatus() throws {

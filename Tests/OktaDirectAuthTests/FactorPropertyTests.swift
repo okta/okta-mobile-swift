@@ -59,9 +59,15 @@ final class FactorPropertyTests: XCTestCase {
             "otp": "123456"
         ])
         
+        parameters = SecondaryFactor.oob(channel: .push).tokenParameters(currentStatus: .mfaRequired(.init(supportedChallengeTypes: nil, mfaToken: "abc123")))
+        XCTAssertEqual(parameters, [
+            "mfa_token": "abc123",
+            "grant_type": "http://auth0.com/oauth/grant-type/mfa-oob"
+        ])
+        
         parameters = SecondaryFactor.oob(channel: .push).tokenParameters(currentStatus: nil)
         XCTAssertEqual(parameters, [
-            "grant_type": "http://auth0.com/oauth/grant-type/mfa-oob"
+            "grant_type": "urn:okta:params:oauth:grant-type:oob"
         ])
         
         parameters = SecondaryFactor.webAuthn.tokenParameters(currentStatus: nil)

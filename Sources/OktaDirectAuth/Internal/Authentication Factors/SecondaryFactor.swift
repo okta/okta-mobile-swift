@@ -84,13 +84,19 @@ extension DirectAuthenticationFlow.SecondaryFactor: AuthenticationFactor {
     }
 
     func grantType(currentStatus: DirectAuthenticationFlow.Status?) -> GrantType {
+        let hasMFAToken = (currentStatus?.mfaContext?.mfaToken != nil)
+
         switch self {
         case .otp:
             return .otpMFA
         case .oob:
-            return .oobMFA
+            if hasMFAToken {
+                return .oobMFA
+            } else {
+                return .oob
+            }
         case .webAuthn, .webAuthnAssertion(_):
-            if currentStatus?.mfaContext?.mfaToken != nil {
+            if hasMFAToken {
                 return .webAuthnMFA
             } else {
                 return .webAuthn
