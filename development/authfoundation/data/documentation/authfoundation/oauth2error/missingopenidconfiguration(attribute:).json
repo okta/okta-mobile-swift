@@ -1,4 +1,10 @@
 {
+  "abstract" : [
+    {
+      "text" : "The given OpenID configuration attribute is missing.",
+      "type" : "text"
+    }
+  ],
   "hierarchy" : {
     "paths" : [
       [
@@ -181,7 +187,10 @@
 },
 "doc://AuthFoundation/documentation/AuthFoundation/OAuth2Error/missingOpenIdConfiguration(attribute:)": {
   "abstract" : [
-
+    {
+      "text" : "The given OpenID configuration attribute is missing.",
+      "type" : "text"
+    }
   ],
   "fragments" : [
     {

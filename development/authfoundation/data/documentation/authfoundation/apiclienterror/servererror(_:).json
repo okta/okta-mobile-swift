@@ -1,4 +1,10 @@
 {
+  "abstract" : [
+    {
+      "text" : "Received the given HTTP error from the server.",
+      "type" : "text"
+    }
+  ],
   "hierarchy" : {
     "paths" : [
       [
@@ -173,7 +179,10 @@
 },
 "doc://AuthFoundation/documentation/AuthFoundation/APIClientError/serverError(_:)": {
   "abstract" : [
-
+    {
+      "text" : "Received the given HTTP error from the server.",
+      "type" : "text"
+    }
   ],
   "fragments" : [
     {

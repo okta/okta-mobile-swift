@@ -1,4 +1,10 @@
 {
+  "abstract" : [
+    {
+      "text" : "Could not verify the token’s signature.",
+      "type" : "text"
+    }
+  ],
   "hierarchy" : {
     "paths" : [
       [
@@ -139,7 +145,10 @@
 },
 "doc://AuthFoundation/documentation/AuthFoundation/OAuth2Error/signatureInvalid": {
   "abstract" : [
-
+    {
+      "text" : "Could not verify the token’s signature.",
+      "type" : "text"
+    }
   ],
   "fragments" : [
     {

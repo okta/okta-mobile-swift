@@ -1,4 +1,10 @@
 {
+  "abstract" : [
+    {
+      "text" : "Could not find a keychain item.",
+      "type" : "text"
+    }
+  ],
   "hierarchy" : {
     "paths" : [
       [
@@ -139,7 +145,10 @@
 },
 "doc://AuthFoundation/documentation/AuthFoundation/KeychainError/notFound": {
   "abstract" : [
-
+    {
+      "text" : "Could not find a keychain item.",
+      "type" : "text"
+    }
   ],
   "fragments" : [
     {

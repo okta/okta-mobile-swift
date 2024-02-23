@@ -1,4 +1,10 @@
 {
+  "abstract" : [
+    {
+      "text" : "The indicated signing algorithm is unsupported.",
+      "type" : "text"
+    }
+  ],
   "hierarchy" : {
     "paths" : [
       [
@@ -261,7 +267,10 @@
 },
 "doc://AuthFoundation/documentation/AuthFoundation/JWTError/unsupportedAlgorithm(_:)": {
   "abstract" : [
-
+    {
+      "text" : "The indicated signing algorithm is unsupported.",
+      "type" : "text"
+    }
   ],
   "fragments" : [
     {

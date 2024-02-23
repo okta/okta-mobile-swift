@@ -1,4 +1,10 @@
 {
+  "abstract" : [
+    {
+      "text" : "There was a failure saving a keychain item.",
+      "type" : "text"
+    }
+  ],
   "hierarchy" : {
     "paths" : [
       [
@@ -181,7 +187,10 @@
 },
 "doc://AuthFoundation/documentation/AuthFoundation/KeychainError/cannotSave(code:)": {
   "abstract" : [
-
+    {
+      "text" : "There was a failure saving a keychain item.",
+      "type" : "text"
+    }
   ],
   "fragments" : [
     {

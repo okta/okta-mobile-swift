@@ -1,4 +1,10 @@
 {
+  "abstract" : [
+    {
+      "text" : "An OAuth2 server error was reported, with the given values.",
+      "type" : "text"
+    }
+  ],
   "hierarchy" : {
     "paths" : [
       [
@@ -267,7 +273,10 @@
 },
 "doc://AuthFoundation/documentation/AuthFoundation/OAuth2Error/oauth2Error(code:description:additionalKeys:)": {
   "abstract" : [
-
+    {
+      "text" : "An OAuth2 server error was reported, with the given values.",
+      "type" : "text"
+    }
   ],
   "fragments" : [
     {

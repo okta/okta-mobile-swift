@@ -1,4 +1,10 @@
 {
+  "abstract" : [
+    {
+      "text" : "Could not add a new token, since a duplicate was found.",
+      "type" : "text"
+    }
+  ],
   "hierarchy" : {
     "paths" : [
       [
@@ -139,7 +145,10 @@
 },
 "doc://AuthFoundation/documentation/AuthFoundation/TokenError/duplicateTokenAdded": {
   "abstract" : [
-
+    {
+      "text" : "Could not add a new token, since a duplicate was found.",
+      "type" : "text"
+    }
   ],
   "fragments" : [
     {

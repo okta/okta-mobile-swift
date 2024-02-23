@@ -1,4 +1,10 @@
 {
+  "abstract" : [
+    {
+      "text" : "Missing the given required response key in the OAuth2 redirect.",
+      "type" : "text"
+    }
+  ],
   "hierarchy" : {
     "paths" : [
       [
@@ -173,7 +179,10 @@
 },
 "doc://AuthFoundation/documentation/AuthFoundation/OAuth2Error/missingOAuth2ResponseKey(_:)": {
   "abstract" : [
-
+    {
+      "text" : "Missing the given required response key in the OAuth2 redirect.",
+      "type" : "text"
+    }
   ],
   "fragments" : [
     {

@@ -1,4 +1,10 @@
 {
+  "abstract" : [
+    {
+      "text" : "Signature verification is unavailable on this platform, e.g. Linux.",
+      "type" : "text"
+    }
+  ],
   "hierarchy" : {
     "paths" : [
       [
@@ -139,7 +145,10 @@
 },
 "doc://AuthFoundation/documentation/AuthFoundation/JWTError/signatureVerificationUnavailable": {
   "abstract" : [
-
+    {
+      "text" : "Signature verification is unavailable on this platform, e.g. Linux.",
+      "type" : "text"
+    }
   ],
   "fragments" : [
     {

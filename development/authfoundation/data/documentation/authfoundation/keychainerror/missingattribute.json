@@ -1,4 +1,10 @@
 {
+  "abstract" : [
+    {
+      "text" : "The keychain item is missing required attributes.",
+      "type" : "text"
+    }
+  ],
   "hierarchy" : {
     "paths" : [
       [
@@ -139,7 +145,10 @@
 },
 "doc://AuthFoundation/documentation/AuthFoundation/KeychainError/missingAttribute": {
   "abstract" : [
-
+    {
+      "text" : "The keychain item is missing required attributes.",
+      "type" : "text"
+    }
   ],
   "fragments" : [
     {

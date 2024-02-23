@@ -1,4 +1,10 @@
 {
+  "abstract" : [
+    {
+      "text" : "Request does not support the given content type.",
+      "type" : "text"
+    }
+  ],
   "hierarchy" : {
     "paths" : [
       [
@@ -174,7 +180,10 @@
 },
 "doc://AuthFoundation/documentation/AuthFoundation/APIClientError/unsupportedContentType(_:)": {
   "abstract" : [
-
+    {
+      "text" : "Request does not support the given content type.",
+      "type" : "text"
+    }
   ],
   "fragments" : [
     {

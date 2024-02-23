@@ -249,7 +249,10 @@
 },
 "doc://AuthFoundation/documentation/AuthFoundation/APIClientError/cannotParseResponse(error:)": {
   "abstract" : [
-
+    {
+      "text" : "An error occurred while parsing the server response.",
+      "type" : "text"
+    }
   ],
   "fragments" : [
     {
@@ -295,7 +298,10 @@
 },
 "doc://AuthFoundation/documentation/AuthFoundation/APIClientError/invalidRequestData": {
   "abstract" : [
-
+    {
+      "text" : "Cannot send invalid request data to the server.",
+      "type" : "text"
+    }
   ],
   "fragments" : [
     {
@@ -320,7 +326,10 @@
 },
 "doc://AuthFoundation/documentation/AuthFoundation/APIClientError/invalidResponse": {
   "abstract" : [
-
+    {
+      "text" : "Did not receive an HTTP response.",
+      "type" : "text"
+    }
   ],
   "fragments" : [
     {
@@ -345,7 +354,18 @@
 },
 "doc://AuthFoundation/documentation/AuthFoundation/APIClientError/invalidUrl": {
   "abstract" : [
-
+    {
+      "text" : "Could not create an invalid URL. This typically means the string passed to ",
+      "type" : "text"
+    },
+    {
+      "code" : "URL",
+      "type" : "codeVoice"
+    },
+    {
+      "text" : " was malformed.",
+      "type" : "text"
+    }
   ],
   "fragments" : [
     {
@@ -370,7 +390,10 @@
 },
 "doc://AuthFoundation/documentation/AuthFoundation/APIClientError/missingRefreshSettings": {
   "abstract" : [
-
+    {
+      "text" : "Cannot refresh a token since it is missing refresh information.",
+      "type" : "text"
+    }
   ],
   "fragments" : [
     {
@@ -395,7 +418,10 @@
 },
 "doc://AuthFoundation/documentation/AuthFoundation/APIClientError/missingResponse": {
   "abstract" : [
-
+    {
+      "text" : "No response received from the server.",
+      "type" : "text"
+    }
   ],
   "fragments" : [
     {
@@ -420,7 +446,10 @@
 },
 "doc://AuthFoundation/documentation/AuthFoundation/APIClientError/serverError(_:)": {
   "abstract" : [
-
+    {
+      "text" : "Received the given HTTP error from the server.",
+      "type" : "text"
+    }
   ],
   "fragments" : [
     {
@@ -458,7 +487,10 @@
 },
 "doc://AuthFoundation/documentation/AuthFoundation/APIClientError/statusCode(_:)": {
   "abstract" : [
-
+    {
+      "text" : "Received the given HTTP response status code.",
+      "type" : "text"
+    }
   ],
   "fragments" : [
     {
@@ -496,7 +528,10 @@
 },
 "doc://AuthFoundation/documentation/AuthFoundation/APIClientError/unknown": {
   "abstract" : [
-
+    {
+      "text" : "An unknown HTTP error was encountered.",
+      "type" : "text"
+    }
   ],
   "fragments" : [
     {
@@ -521,7 +556,10 @@
 },
 "doc://AuthFoundation/documentation/AuthFoundation/APIClientError/unsupportedContentType(_:)": {
   "abstract" : [
-
+    {
+      "text" : "Request does not support the given content type.",
+      "type" : "text"
+    }
   ],
   "fragments" : [
     {
@@ -559,7 +597,10 @@
 },
 "doc://AuthFoundation/documentation/AuthFoundation/APIClientError/validation(error:)": {
   "abstract" : [
-
+    {
+      "text" : "Could not validate the received token.",
+      "type" : "text"
+    }
   ],
   "fragments" : [
     {

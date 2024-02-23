@@ -1,4 +1,10 @@
 {
+  "abstract" : [
+    {
+      "text" : "The keychain item is missing an account name.",
+      "type" : "text"
+    }
+  ],
   "hierarchy" : {
     "paths" : [
       [
@@ -139,7 +145,10 @@
 },
 "doc://AuthFoundation/documentation/AuthFoundation/KeychainError/missingAccount": {
   "abstract" : [
-
+    {
+      "text" : "The keychain item is missing an account name.",
+      "type" : "text"
+    }
   ],
   "fragments" : [
     {

@@ -1,4 +1,10 @@
 {
+  "abstract" : [
+    {
+      "text" : "There was a failure getting a list of keychain items.",
+      "type" : "text"
+    }
+  ],
   "hierarchy" : {
     "paths" : [
       [
@@ -181,7 +187,10 @@
 },
 "doc://AuthFoundation/documentation/AuthFoundation/KeychainError/cannotList(code:)": {
   "abstract" : [
-
+    {
+      "text" : "There was a failure getting a list of keychain items.",
+      "type" : "text"
+    }
   ],
   "fragments" : [
     {

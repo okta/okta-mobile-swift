@@ -1,4 +1,10 @@
 {
+  "abstract" : [
+    {
+      "text" : "The token’s signing algorithm is invalid or unsupported.",
+      "type" : "text"
+    }
+  ],
   "hierarchy" : {
     "paths" : [
       [
@@ -139,7 +145,10 @@
 },
 "doc://AuthFoundation/documentation/AuthFoundation/JWTError/invalidSigningAlgorithm": {
   "abstract" : [
-
+    {
+      "text" : "The token’s signing algorithm is invalid or unsupported.",
+      "type" : "text"
+    }
   ],
   "fragments" : [
     {

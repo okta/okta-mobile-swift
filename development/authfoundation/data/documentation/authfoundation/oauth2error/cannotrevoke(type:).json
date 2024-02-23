@@ -1,4 +1,10 @@
 {
+  "abstract" : [
+    {
+      "text" : "Cannot revoke the given token type.",
+      "type" : "text"
+    }
+  ],
   "hierarchy" : {
     "paths" : [
       [
@@ -201,7 +207,10 @@
 },
 "doc://AuthFoundation/documentation/AuthFoundation/OAuth2Error/cannotRevoke(type:)": {
   "abstract" : [
-
+    {
+      "text" : "Cannot revoke the given token type.",
+      "type" : "text"
+    }
   ],
   "fragments" : [
     {

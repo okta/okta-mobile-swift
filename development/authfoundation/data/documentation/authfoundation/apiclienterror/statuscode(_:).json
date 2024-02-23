@@ -1,4 +1,10 @@
 {
+  "abstract" : [
+    {
+      "text" : "Received the given HTTP response status code.",
+      "type" : "text"
+    }
+  ],
   "hierarchy" : {
     "paths" : [
       [
@@ -173,7 +179,10 @@
 },
 "doc://AuthFoundation/documentation/AuthFoundation/APIClientError/statusCode(_:)": {
   "abstract" : [
-
+    {
+      "text" : "Received the given HTTP response status code.",
+      "type" : "text"
+    }
   ],
   "fragments" : [
     {

@@ -1,4 +1,10 @@
 {
+  "abstract" : [
+    {
+      "text" : "The token is not structured correctly.",
+      "type" : "text"
+    }
+  ],
   "hierarchy" : {
     "paths" : [
       [
@@ -139,7 +145,10 @@
 },
 "doc://AuthFoundation/documentation/AuthFoundation/JWTError/badTokenStructure": {
   "abstract" : [
-
+    {
+      "text" : "The token is not structured correctly.",
+      "type" : "text"
+    }
   ],
   "fragments" : [
     {

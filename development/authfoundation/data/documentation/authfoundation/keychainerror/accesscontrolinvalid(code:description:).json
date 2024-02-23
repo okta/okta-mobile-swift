@@ -1,4 +1,10 @@
 {
+  "abstract" : [
+    {
+      "text" : "The access control settings for this keychain item are invalid.",
+      "type" : "text"
+    }
+  ],
   "hierarchy" : {
     "paths" : [
       [
@@ -215,7 +221,10 @@
 },
 "doc://AuthFoundation/documentation/AuthFoundation/KeychainError/accessControlInvalid(code:description:)": {
   "abstract" : [
-
+    {
+      "text" : "The access control settings for this keychain item are invalid.",
+      "type" : "text"
+    }
   ],
   "fragments" : [
     {

@@ -1,4 +1,10 @@
 {
+  "abstract" : [
+    {
+      "text" : "Cannot create a public key with the information supplied from the server.",
+      "type" : "text"
+    }
+  ],
   "hierarchy" : {
     "paths" : [
       [
@@ -215,7 +221,10 @@
 },
 "doc://AuthFoundation/documentation/AuthFoundation/JWTError/cannotCreateKey(code:description:)": {
   "abstract" : [
-
+    {
+      "text" : "Cannot create a public key with the information supplied from the server.",
+      "type" : "text"
+    }
   ],
   "fragments" : [
     {

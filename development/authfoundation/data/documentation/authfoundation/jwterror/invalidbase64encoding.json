@@ -1,4 +1,10 @@
 {
+  "abstract" : [
+    {
+      "text" : "The token is invalid (incorrect Base64 encoding).",
+      "type" : "text"
+    }
+  ],
   "hierarchy" : {
     "paths" : [
       [
@@ -139,7 +145,10 @@
 },
 "doc://AuthFoundation/documentation/AuthFoundation/JWTError/invalidBase64Encoding": {
   "abstract" : [
-
+    {
+      "text" : "The token is invalid (incorrect Base64 encoding).",
+      "type" : "text"
+    }
   ],
   "fragments" : [
     {

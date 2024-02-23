@@ -368,7 +368,10 @@
 },
 "doc://AuthFoundation/documentation/AuthFoundation/KeychainError/accessControlInvalid(code:description:)": {
   "abstract" : [
-
+    {
+      "text" : "The access control settings for this keychain item are invalid.",
+      "type" : "text"
+    }
   ],
   "fragments" : [
     {
@@ -431,7 +434,10 @@
 },
 "doc://AuthFoundation/documentation/AuthFoundation/KeychainError/cannotDelete(code:)": {
   "abstract" : [
-
+    {
+      "text" : "There was a failure deleting a keychain item.",
+      "type" : "text"
+    }
   ],
   "fragments" : [
     {
@@ -477,7 +483,10 @@
 },
 "doc://AuthFoundation/documentation/AuthFoundation/KeychainError/cannotGet(code:)": {
   "abstract" : [
-
+    {
+      "text" : "There was a failure getting a keychain item.",
+      "type" : "text"
+    }
   ],
   "fragments" : [
     {
@@ -523,7 +532,10 @@
 },
 "doc://AuthFoundation/documentation/AuthFoundation/KeychainError/cannotList(code:)": {
   "abstract" : [
-
+    {
+      "text" : "There was a failure getting a list of keychain items.",
+      "type" : "text"
+    }
   ],
   "fragments" : [
     {
@@ -569,7 +581,10 @@
 },
 "doc://AuthFoundation/documentation/AuthFoundation/KeychainError/cannotSave(code:)": {
   "abstract" : [
-
+    {
+      "text" : "There was a failure saving a keychain item.",
+      "type" : "text"
+    }
   ],
   "fragments" : [
     {
@@ -615,7 +630,10 @@
 },
 "doc://AuthFoundation/documentation/AuthFoundation/KeychainError/cannotUpdate(code:)": {
   "abstract" : [
-
+    {
+      "text" : "There was a failure updating a keychain item.",
+      "type" : "text"
+    }
   ],
   "fragments" : [
     {
@@ -661,7 +679,10 @@
 },
 "doc://AuthFoundation/documentation/AuthFoundation/KeychainError/invalidAccessibilityOption": {
   "abstract" : [
-
+    {
+      "text" : "The keychain item has an invalid accessibility option set.",
+      "type" : "text"
+    }
   ],
   "fragments" : [
     {
@@ -686,7 +707,10 @@
 },
 "doc://AuthFoundation/documentation/AuthFoundation/KeychainError/invalidFormat": {
   "abstract" : [
-
+    {
+      "text" : "The returned keychain item is in an invalid format.",
+      "type" : "text"
+    }
   ],
   "fragments" : [
     {
@@ -711,7 +735,10 @@
 },
 "doc://AuthFoundation/documentation/AuthFoundation/KeychainError/missingAccount": {
   "abstract" : [
-
+    {
+      "text" : "The keychain item is missing an account name.",
+      "type" : "text"
+    }
   ],
   "fragments" : [
     {
@@ -736,7 +763,10 @@
 },
 "doc://AuthFoundation/documentation/AuthFoundation/KeychainError/missingAttribute": {
   "abstract" : [
-
+    {
+      "text" : "The keychain item is missing required attributes.",
+      "type" : "text"
+    }
   ],
   "fragments" : [
     {
@@ -761,7 +791,10 @@
 },
 "doc://AuthFoundation/documentation/AuthFoundation/KeychainError/missingValueData": {
   "abstract" : [
-
+    {
+      "text" : "The keychain item is missing its value data.",
+      "type" : "text"
+    }
   ],
   "fragments" : [
     {
@@ -786,7 +819,10 @@
 },
 "doc://AuthFoundation/documentation/AuthFoundation/KeychainError/notFound": {
   "abstract" : [
-
+    {
+      "text" : "Could not find a keychain item.",
+      "type" : "text"
+    }
   ],
   "fragments" : [
     {

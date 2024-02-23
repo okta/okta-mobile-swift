@@ -1,4 +1,10 @@
 {
+  "abstract" : [
+    {
+      "text" : "The token’s issuer is either not well-formed, or does not match.",
+      "type" : "text"
+    }
+  ],
   "hierarchy" : {
     "paths" : [
       [
@@ -139,7 +145,10 @@
 },
 "doc://AuthFoundation/documentation/AuthFoundation/JWTError/invalidIssuer": {
   "abstract" : [
-
+    {
+      "text" : "The token’s issuer is either not well-formed, or does not match.",
+      "type" : "text"
+    }
   ],
   "fragments" : [
     {

@@ -1,4 +1,10 @@
 {
+  "abstract" : [
+    {
+      "text" : "Could not validate the received token.",
+      "type" : "text"
+    }
+  ],
   "hierarchy" : {
     "paths" : [
       [
@@ -181,7 +187,10 @@
 },
 "doc://AuthFoundation/documentation/AuthFoundation/APIClientError/validation(error:)": {
   "abstract" : [
-
+    {
+      "text" : "Could not validate the received token.",
+      "type" : "text"
+    }
   ],
   "fragments" : [
     {

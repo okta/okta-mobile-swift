@@ -1,4 +1,10 @@
 {
+  "abstract" : [
+    {
+      "text" : "An error occurred while parsing the server response.",
+      "type" : "text"
+    }
+  ],
   "hierarchy" : {
     "paths" : [
       [
@@ -181,7 +187,10 @@
 },
 "doc://AuthFoundation/documentation/AuthFoundation/APIClientError/cannotParseResponse(error:)": {
   "abstract" : [
-
+    {
+      "text" : "An error occurred while parsing the server response.",
+      "type" : "text"
+    }
   ],
   "fragments" : [
     {

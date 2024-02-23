@@ -1,4 +1,19 @@
 {
+  "abstract" : [
+    {
+      "text" : "A network error was encountered, encapsulating a ",
+      "type" : "text"
+    },
+    {
+      "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/APIClientError",
+      "isActive" : true,
+      "type" : "reference"
+    },
+    {
+      "text" : " type describing the underlying error.",
+      "type" : "text"
+    }
+  ],
   "hierarchy" : {
     "paths" : [
       [
@@ -216,7 +231,19 @@
 },
 "doc://AuthFoundation/documentation/AuthFoundation/OAuth2Error/network(error:)": {
   "abstract" : [
-
+    {
+      "text" : "A network error was encountered, encapsulating a ",
+      "type" : "text"
+    },
+    {
+      "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/APIClientError",
+      "isActive" : true,
+      "type" : "reference"
+    },
+    {
+      "text" : " type describing the underlying error.",
+      "type" : "text"
+    }
   ],
   "fragments" : [
     {

@@ -1,4 +1,19 @@
 {
+  "abstract" : [
+    {
+      "text" : "Context information related to this token is missing. This information is used to construct a ",
+      "type" : "text"
+    },
+    {
+      "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/OAuth2Client",
+      "isActive" : true,
+      "type" : "reference"
+    },
+    {
+      "text" : " instance that could be used for this token.",
+      "type" : "text"
+    }
+  ],
   "hierarchy" : {
     "paths" : [
       [
@@ -103,6 +118,40 @@
   "type" : "topic",
   "url" : "\/documentation\/authfoundation"
 },
+"doc://AuthFoundation/documentation/AuthFoundation/OAuth2Client": {
+  "abstract" : [
+    {
+      "text" : "An OAuth2 client, used to interact with a given authorization server.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "class"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "OAuth2Client"
+    }
+  ],
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/OAuth2Client",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "OAuth2Client"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "OAuth2Client",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/oauth2client"
+},
 "doc://AuthFoundation/documentation/AuthFoundation/TokenError": {
   "abstract" : [
     {
@@ -139,7 +188,19 @@
 },
 "doc://AuthFoundation/documentation/AuthFoundation/TokenError/contextMissing": {
   "abstract" : [
-
+    {
+      "text" : "Context information related to this token is missing. This information is used to construct a ",
+      "type" : "text"
+    },
+    {
+      "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/OAuth2Client",
+      "isActive" : true,
+      "type" : "reference"
+    },
+    {
+      "text" : " instance that could be used for this token.",
+      "type" : "text"
+    }
   ],
   "fragments" : [
     {

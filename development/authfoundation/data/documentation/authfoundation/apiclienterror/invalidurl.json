@@ -1,4 +1,18 @@
 {
+  "abstract" : [
+    {
+      "text" : "Could not create an invalid URL. This typically means the string passed to ",
+      "type" : "text"
+    },
+    {
+      "code" : "URL",
+      "type" : "codeVoice"
+    },
+    {
+      "text" : " was malformed.",
+      "type" : "text"
+    }
+  ],
   "hierarchy" : {
     "paths" : [
       [
@@ -139,7 +153,18 @@
 },
 "doc://AuthFoundation/documentation/AuthFoundation/APIClientError/invalidUrl": {
   "abstract" : [
-
+    {
+      "text" : "Could not create an invalid URL. This typically means the string passed to ",
+      "type" : "text"
+    },
+    {
+      "code" : "URL",
+      "type" : "codeVoice"
+    },
+    {
+      "text" : " was malformed.",
+      "type" : "text"
+    }
   ],
   "fragments" : [
     {

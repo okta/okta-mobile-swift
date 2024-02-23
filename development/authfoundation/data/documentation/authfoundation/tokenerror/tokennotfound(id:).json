@@ -1,4 +1,10 @@
 {
+  "abstract" : [
+    {
+      "text" : "The token with the requested ID was not found.",
+      "type" : "text"
+    }
+  ],
   "hierarchy" : {
     "paths" : [
       [
@@ -181,7 +187,10 @@
 },
 "doc://AuthFoundation/documentation/AuthFoundation/TokenError/tokenNotFound(id:)": {
   "abstract" : [
-
+    {
+      "text" : "The token with the requested ID was not found.",
+      "type" : "text"
+    }
   ],
   "fragments" : [
     {

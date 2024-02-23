@@ -1,4 +1,10 @@
 {
+  "abstract" : [
+    {
+      "text" : "The given token exceeds the supplied maximum age.",
+      "type" : "text"
+    }
+  ],
   "hierarchy" : {
     "paths" : [
       [
@@ -139,7 +145,10 @@
 },
 "doc://AuthFoundation/documentation/AuthFoundation/JWTError/exceedsMaxAge": {
   "abstract" : [
-
+    {
+      "text" : "The given token exceeds the supplied maximum age.",
+      "type" : "text"
+    }
   ],
   "fragments" : [
     {
