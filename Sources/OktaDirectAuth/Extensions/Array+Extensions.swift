@@ -15,6 +15,6 @@ import Foundation
 extension Array where Element == GrantType {
     /// The list of all grants that the Direct Authentication SDK supports.
     public static var directAuth: [GrantType] {
-        [ .password, .oob, .otp, .oobMFA, .otpMFA ]
+        [ .password, .oob, .otp, .oobMFA, .otpMFA, .webAuthn, .webAuthnMFA ]
     }
 }

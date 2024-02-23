@@ -21,4 +21,23 @@ extension String {
         let charset = CharacterSet(charactersIn: "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789-_").inverted
         return (rangeOfCharacter(from: charset) == nil)
     }
+    
+    func urlFormDecoded() -> [String: String] {
+        var components = URLComponents()
+        components.query = self
+        
+        guard let queryItems = components.queryItems else {
+            return [:]
+        }
+        
+        return queryItems.reduce(into: [String: String](), { partialResult, item in
+            guard let name = item.name.removingPercentEncoding,
+                  let value = item.value?.removingPercentEncoding
+            else {
+                return
+            }
+            
+            partialResult[name] = value
+        })
+    }
 }

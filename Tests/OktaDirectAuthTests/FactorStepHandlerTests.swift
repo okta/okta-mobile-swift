@@ -79,7 +79,7 @@ final class FactorStepHandlerTests: XCTestCase {
                 "grant_type": "password",
                 "username": "jane.doe@example.com",
                 "password": "foo",
-                "grant_types_supported": "password urn:okta:params:oauth:grant-type:oob urn:okta:params:oauth:grant-type:otp http://auth0.com/oauth/grant-type/mfa-oob http://auth0.com/oauth/grant-type/mfa-otp",
+                "grant_types_supported": "password urn:okta:params:oauth:grant-type:oob urn:okta:params:oauth:grant-type:otp http://auth0.com/oauth/grant-type/mfa-oob http://auth0.com/oauth/grant-type/mfa-otp urn:okta:params:oauth:grant-type:webauthn urn:okta:params:oauth:grant-type:mfa-webauthn",
             ])
     }
     
@@ -93,7 +93,7 @@ final class FactorStepHandlerTests: XCTestCase {
                 "grant_type": "urn:okta:params:oauth:grant-type:otp",
                 "login_hint": "jane.doe@example.com",
                 "otp": "123456",
-                "grant_types_supported": "password urn:okta:params:oauth:grant-type:oob urn:okta:params:oauth:grant-type:otp http://auth0.com/oauth/grant-type/mfa-oob http://auth0.com/oauth/grant-type/mfa-otp",
+                "grant_types_supported": "password urn:okta:params:oauth:grant-type:oob urn:okta:params:oauth:grant-type:otp http://auth0.com/oauth/grant-type/mfa-oob http://auth0.com/oauth/grant-type/mfa-otp urn:okta:params:oauth:grant-type:webauthn urn:okta:params:oauth:grant-type:mfa-webauthn",
             ])
     }
     
@@ -106,7 +106,7 @@ final class FactorStepHandlerTests: XCTestCase {
                 "scope": client.configuration.scopes,
                 "grant_type": "http://auth0.com/oauth/grant-type/mfa-otp",
                 "otp": "123456",
-                "grant_types_supported": "password urn:okta:params:oauth:grant-type:oob urn:okta:params:oauth:grant-type:otp http://auth0.com/oauth/grant-type/mfa-oob http://auth0.com/oauth/grant-type/mfa-otp",
+                "grant_types_supported": "password urn:okta:params:oauth:grant-type:oob urn:okta:params:oauth:grant-type:otp http://auth0.com/oauth/grant-type/mfa-oob http://auth0.com/oauth/grant-type/mfa-otp urn:okta:params:oauth:grant-type:webauthn urn:okta:params:oauth:grant-type:mfa-webauthn",
             ])
     }
     
@@ -272,6 +272,7 @@ final class FactorStepHandlerTests: XCTestCase {
             case .transfer(let code):
                 XCTAssertEqual(code, "12")
                 do {
+                    let factor = SecondaryFactor.oob(channel: .push)
                     let resumeHandler = try factor.stepHandler(flow: self.flow,
                                                                openIdConfiguration: self.openIdConfiguration,
                                                                currentStatus: status,
@@ -285,6 +286,14 @@ final class FactorStepHandlerTests: XCTestCase {
             processExpectation.fulfill()
         }
         wait(for: [processExpectation], timeout: 5)
+        
+        let tokenBody = try XCTUnwrap(urlSession.requests.first(where: { request in
+            request.url?.lastPathComponent == "token"
+        }).flatMap({ $0.bodyString }))
+        let tokenParams = tokenBody.urlFormDecoded()
+        
+        XCTAssertEqual(tokenParams["grant_type"],
+                       "urn:okta:params:oauth:grant-type:oob")
     }
 
     func testPrimaryOOBBindingTransferFail() throws {
