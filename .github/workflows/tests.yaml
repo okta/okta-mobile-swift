@@ -40,6 +40,23 @@ jobs:
     - name: Test
       run: swift test --parallel
 
+  Cocoapods:
+    name: CocoaPods Build
+    runs-on: macos-12
+    timeout-minutes: 10
+    needs:
+      - SwiftBuild
+    steps:
+    - uses: actions/checkout@master
+    - name: OktaAuthFoundation.podspec
+      run: pod lib lint --allow-warnings OktaAuthFoundation.podspec
+    - name: OktaOAuth2.podspec
+      run: pod lib lint --allow-warnings OktaOAuth2.podspec
+    - name: OktaDirectAuth.podspec
+      run: pod lib lint --allow-warnings OktaDirectAuth.podspec
+    - name: OktaWebAuthenticationUI.podspec
+      run: pod lib lint --allow-warnings OktaWebAuthenticationUI.podspec
+
   XcodeBuild:
     name: Xcode Unit Tests
     runs-on: macos-12

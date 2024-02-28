@@ -384,11 +384,11 @@ Only the last 4 major platform versions are officially supported, unless there a
 
 | Platform    | Supported | Best-Effort |
 | ----------- | --------- | ----------- |
-| iOS         | 12.0      | 9.0         |
+| iOS         | 12.0      | 10.0        |
 | tvOS        | 12.0      | 10.0        |
 | watchOS     | 8.0       | 7.0         |
 | macCatalyst | 13.0      | 13.0        |
-| macOS       | 12.0      | 10.11       |
+| macOS       | 12.0      | 10.12       |
 
 Once a platform version becomes unsupported, dropping support for it will not be considered a breaking change and will be done in a minor release. For example, iOS 12 will cease to be supported when iOS 16 gets released, and might be dropped in a minor release.
 
