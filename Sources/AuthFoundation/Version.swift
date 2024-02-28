@@ -13,5 +13,5 @@
 import Foundation
 
 // swiftlint:disable identifier_name
-public let Version = SDKVersion(sdk: "okta-authfoundation-swift", version: "1.6.0")
+public let Version = SDKVersion(sdk: "okta-authfoundation-swift", version: "1.6.1")
 // swiftlint:enable identifier_name

@@ -17,7 +17,7 @@ To maximize the number of platforms and OS versions your application can support
 
 Platform | Versions | Authentication Controller |
 ---|---|---
-iOS | 9.0 - 10.x | SFSafariViewController 
+iOS | 10.0 - 10.x | SFSafariViewController 
 iOS | 11.0 | SFAuthenticationSession 
 iOS | 12.0 - Current | ASWebAuthenticationSession 
 macOS | 10.15 - Current | ASWebAuthenticationSession

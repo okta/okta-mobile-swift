@@ -359,7 +359,7 @@ public class WebAuthentication {
                                           delegate: delegate)
         }
         
-        if #available(iOS 9.0, *) {
+        if #available(iOS 10.0, *) {
             return SafariBrowserProvider(loginFlow: loginFlow,
                                          logoutFlow: logoutFlow,
                                          from: window,

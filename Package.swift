@@ -1,4 +1,4 @@
-// swift-tools-version:5.5
+// swift-tools-version:5.6
 // The swift-tools-version declares the minimum version of Swift required to build this package.
 
 import PackageDescription
@@ -7,10 +7,10 @@ var package = Package(
     name: "AuthFoundation",
     defaultLocalization: "en",
     platforms: [
-        .iOS(.v9),
+        .iOS(.v10),
         .tvOS(.v10),
         .watchOS(.v7),
-        .macOS(.v10_11),
+        .macOS(.v10_12),
         .macCatalyst(.v13)
     ],
     products: [
@@ -20,6 +20,7 @@ var package = Package(
         .library(name: "WebAuthenticationUI", targets: ["WebAuthenticationUI"])
     ],
     dependencies: [
+        .package(url: "https://github.com/apple/swift-docc-plugin", from: "1.0.0")
     ],
     targets: [
         .target(name: "AuthFoundation",
@@ -59,7 +60,3 @@ var package = Package(
     ],
     swiftLanguageVersions: [.v5]
 )
-
-#if swift(>=5.6)
-    package.dependencies.append(.package(url: "https://github.com/apple/swift-docc-plugin", from: "1.0.0"))
-#endif
