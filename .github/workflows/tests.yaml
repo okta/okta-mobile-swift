@@ -50,12 +50,13 @@ jobs:
     - uses: actions/checkout@master
     - name: OktaAuthFoundation.podspec
       run: pod lib lint --allow-warnings OktaAuthFoundation.podspec
-    - name: OktaOAuth2.podspec
-      run: pod lib lint --allow-warnings OktaOAuth2.podspec
-    - name: OktaDirectAuth.podspec
-      run: pod lib lint --allow-warnings OktaDirectAuth.podspec
-    - name: OktaWebAuthenticationUI.podspec
-      run: pod lib lint --allow-warnings OktaWebAuthenticationUI.podspec
+    # TODO: Enable dependent podspec linting once unreleased local spec version checking is fixed.
+    #- name: OktaOAuth2.podspec
+    #  run: pod lib lint --allow-warnings OktaOAuth2.podspec
+    #- name: OktaDirectAuth.podspec
+    #  run: pod lib lint --allow-warnings OktaDirectAuth.podspec
+    #- name: OktaWebAuthenticationUI.podspec
+    #  run: pod lib lint --allow-warnings OktaWebAuthenticationUI.podspec
 
   XcodeBuild:
     name: Xcode Unit Tests
