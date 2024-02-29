@@ -77,7 +77,7 @@ class InteractionCodeFlowTests: XCTestCase {
         XCTAssertEqual(delegate.calls.count, 1)
         XCTAssertEqual(delegate.calls.first?.type, .response)
         
-        if InteractionCodeFlow.deviceIdentifier != nil {
+        if flow.deviceIdentifierString != nil {
             let deviceToken = try XCTUnwrap(flow.deviceTokenCookie?.value)
             XCTAssertEqual(urlSession.requests.first?.allHTTPHeaderFields?["Cookie"],
                            "DT=\(deviceToken)")

@@ -13,6 +13,10 @@
 import XCTest
 @testable import OktaIdx
 
+#if SWIFT_PACKAGE
+@testable import TestCommon
+#endif
+
 #if canImport(UIKit)
 import UIKit
 #endif
@@ -34,7 +38,15 @@ final class DeviceIdentifierTests: XCTestCase {
     
     #if canImport(UIKit) && (os(iOS) || os(macOS) || os(tvOS) || canImport(WatchKit))
     func testDeviceIdentifier() throws {
-        let identifier = try XCTUnwrap(InteractionCodeFlow.deviceIdentifier)
+        let urlSession = URLSessionMock()
+        let issuer = try XCTUnwrap(URL(string: "https://example.com/oauth2/default"))
+        let redirectUri = try XCTUnwrap(URL(string: "redirect:/uri"))
+        let client = OAuth2Client(baseURL: issuer,
+                                  clientId: "clientId",
+                                  scopes: "openid profile",
+                                  session: urlSession)
+        let flow = InteractionCodeFlow(redirectUri: redirectUri, client: client)
+        let identifier = try XCTUnwrap(flow.deviceIdentifierString)
         
         // Device Token string _must_ be 32 characters or less.
         XCTAssertLessThanOrEqual(identifier.count, 32)

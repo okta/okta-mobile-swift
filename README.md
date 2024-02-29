@@ -31,7 +31,7 @@ This library uses semantic versioning and follows Okta's [Library Version Policy
 | ------- | ---------------------------------- |
 | 1.0.0   |                                    |
 | 2.0.1   |                                    |
-| 3.1.1   | ✔️ Stable                           |
+| 3.2.0   | ✔️ Stable                           |
 
 The latest release can always be found on the [releases page][github-releases].
 

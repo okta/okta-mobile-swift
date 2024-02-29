@@ -1,4 +1,4 @@
-// swift-tools-version:5.5
+// swift-tools-version:5.6
 // The swift-tools-version declares the minimum version of Swift required to build this package.
 
 import PackageDescription
@@ -7,22 +7,26 @@ var package = Package(
     name: "OktaIdx",
     defaultLocalization: "en",
     platforms: [
-        .iOS(.v9),
-        .tvOS(.v9),
+        .iOS(.v10),
+        .tvOS(.v10),
         .watchOS(.v7),
-        .macOS(.v10_11)
+        .macOS(.v10_12),
+        .macCatalyst(.v13)
     ],
     products: [
         .library(name: "OktaIdx", targets: ["OktaIdx"])
     ],
     dependencies: [
-        .package(name: "AuthFoundation",
-                 url: "https://github.com/okta/okta-mobile-swift",
-                 from: "1.5.0")
+        .package(url: "https://github.com/okta/okta-mobile-swift",
+                 from: "1.6.1"),
+        .package(url: "https://github.com/apple/swift-docc-plugin",
+                 from: "1.0.0")
     ],
     targets: [
         .target(name: "OktaIdx",
-                dependencies: ["AuthFoundation"]),
+                dependencies: [
+                    .product(name: "AuthFoundation", package: "okta-mobile-swift")
+                ]),
         .target(name: "TestCommon",
                 dependencies: ["OktaIdx"],
                 path: "Tests/TestCommon"),
@@ -32,8 +36,3 @@ var package = Package(
     ],
     swiftLanguageVersions: [.v5]
 )
-
-#if swift(>=5.6)
-    package.dependencies.append(.package(url: "https://github.com/apple/swift-docc-plugin", from: "1.0.0"))
-#endif
-

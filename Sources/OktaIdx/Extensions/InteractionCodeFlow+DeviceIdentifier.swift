@@ -68,15 +68,16 @@ extension InteractionCodeFlow {
     
     /// Unique identifier for this device, encoded to limit the character count. This is used within
     /// an outgoing Cookie named `dt` to enable "Remember this device" trust options within OIE.
-    static var deviceIdentifier: String? {
-        guard var identifier = systemDeviceIdentifier ?? keychainDeviceIdentifier
+    var deviceIdentifierString: String? {
+        guard let identifier = deviceIdentifier ?? Self.systemDeviceIdentifier ?? Self.keychainDeviceIdentifier
         else {
             return nil
         }
 
-        let data = Data(bytes: &identifier, count: 16)
+        var bytes = identifier.uuid
+        let data = Data(bytes: &bytes, count: 16)
         let deviceToken = data.base64EncodedString()
-        
+
         return deviceToken
     }
 }
