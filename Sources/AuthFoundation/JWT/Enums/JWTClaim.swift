@@ -1,5 +1,5 @@
 //
-// Copyright (c) 2021-Present, Okta, Inc. and/or its affiliates. All rights reserved.
+// Copyright (c) 2024-Present, Okta, Inc. and/or its affiliates. All rights reserved.
 // The Okta software accompanied by this notice is provided pursuant to the Apache License, Version 2.0 (the "License.")
 //
 // You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0.
@@ -12,8 +12,11 @@
 
 import Foundation
 
+@available(*, deprecated, renamed: "JWTClaim")
+public typealias Claim = JWTClaim
+
 /// List of registered and public claims.
-public enum Claim: Codable {
+public enum JWTClaim: Codable, IsClaim {
     /// Issuer
     case issuer
 
@@ -234,57 +237,7 @@ public enum Claim: Codable {
     case custom(_ name: String)
 }
 
-/// Used by classes that contains OAuth2 claims.
-///
-/// This provides common conveniences for interacting with user or token information within those claims. For example, iterating through ``allClaims-4c54a`` or using keyed subscripting to access specific claims.
-public protocol HasClaims {
-    /// Returns the collection of claims this object contains.
-    ///
-    /// > Note: This will only return the list of official claims defined in the ``Claim`` enum. For custom claims, please see the ``customClaims`` property.
-    var claims: [Claim] { get }
-    
-    /// Returns the collection of custom claims this object contains.
-    ///
-    /// Unlike the ``claims`` property, this returns values as strings.
-    var customClaims: [String] { get }
-    
-    /// All claims, across both standard ``claims`` and ``customClaims``.
-    var allClaims: [String] { get }
-    
-    /// Raw paylaod of claims, as a dictionary representation.
-    var payload: [String: Any] { get }
-    
-    /// Return the given claim's value.
-    subscript<T>(_ claim: Claim) -> T? { get }
-
-    /// Return the given claim's value.
-    subscript<T>(_ claim: String) -> T? { get }
-    
-    /// Return the value of the requested claim, for the given type.
-    func value<T>(_ type: T.Type, for key: String) -> T?
-}
-
-public extension HasClaims {
-    subscript<T>(_ claim: Claim) -> T? {
-        self[claim.rawValue]
-    }
-    
-    subscript<T>(_ claim: String) -> T? {
-        if T.self == Date.self {
-            guard let time = value(Int.self, for: claim) else { return nil }
-            return Date(timeIntervalSince1970: TimeInterval(time)) as? T
-        } else {
-            return value(T.self, for: claim)
-        }
-    }
-    
-    var allClaims: [String] {
-        Array([
-            claims.map(\.rawValue),
-            customClaims
-        ].joined())
-    }
-    
+public extension HasClaims where ClaimType == JWTClaim {
     /// The subject of the resource, if available.
     var subject: String? { self[.subject] }
     
@@ -395,9 +348,9 @@ public extension HasClaims {
     /// The list of authentication methods included in this token.
     ///
     /// ```swift
-    /// if jwt.authenticationMethods?.contains("mfa") {
+    /// if jwt.authenticationMethods?.contains(.multiFactor) {
     ///   // The user authenticated with an MFA factor.
     /// }
     /// ```
-    var authenticationMethods: [String]? { self[.authMethodsReference] }
+    var authenticationMethods: [AuthenticationMethod]? { arrayValue(AuthenticationMethod.self, for: .authMethodsReference) }
 }

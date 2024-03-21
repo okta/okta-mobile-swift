@@ -14,7 +14,7 @@ import Foundation
 
 // swiftlint:disable function_body_length
 // swiftlint:disable cyclomatic_complexity
-extension Claim: RawRepresentable, Equatable {
+extension JWTClaim: RawRepresentable, Equatable {
     public typealias RawValue = String
 
     public init?(rawValue: String) {
