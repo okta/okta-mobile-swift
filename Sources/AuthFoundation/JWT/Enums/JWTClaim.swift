@@ -345,7 +345,7 @@ public extension HasClaims where ClaimType == JWTClaim {
     /// Returns the Authentication Context Class Reference for this token.
     var authenticationClass: String? { self[.authContextClassReference] }
     
-    /// The list of authentication methods included in this token.
+    /// The list of authentication methods included in this token, which defines the list of methods that were used to authenticate the user.
     ///
     /// ```swift
     /// if jwt.authenticationMethods?.contains(.multiFactor) {

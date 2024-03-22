@@ -24,7 +24,7 @@ public enum AuthenticationMethod: String, ClaimConvertable, IsClaim {
     case geolocation = "geo"
     
     /// Proof-of-possession of a hardware-secured key
-    case proofOfPossessionHardware  = "hwk"
+    case proofOfPossessionHardware = "hwk"
     
     /// Iris scan biometric
     case irisScanBiometric = "iris"

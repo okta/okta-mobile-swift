@@ -24,7 +24,7 @@ extension Token {
              clientAuthentication: OAuth2Client.ClientAuthentication,
              token: String,
              hint: Token.Kind?,
-             configuration: [String : String]) throws
+             configuration: [String: String]) throws
         {
             self.openIdConfiguration = openIdConfiguration
             self.clientAuthentication = clientAuthentication

@@ -40,11 +40,6 @@ public struct JWT: RawRepresentable, Codable, HasClaims, Expires {
     /// The array of scopes this token is valid for.
     public var scope: [String]? { self[.scope] ?? self["scp"] }
     
-    /// The array of authentication methods.
-    ///
-    /// The ``Claim/authMethodsReference`` claim (or `amr` in string form) defines the list of methods that were used to authenticate the user.
-    public var authenticationMethods: [AuthenticationMethod]? { arrayValue(AuthenticationMethod.self, for: .authMethodsReference) }
-    
     /// The authentication context class reference.
     ///
     /// The ``Claim/authContextClassReference`` claim (or `acr` in string form) defines a special authentication context reference which indicates additional policy choices requested when authenticating a user.
