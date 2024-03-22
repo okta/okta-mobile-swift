@@ -23,6 +23,8 @@ extension URL: ClaimConvertable {}
 extension Date: ClaimConvertable {}
 extension JWTClaim: ClaimConvertable {}
 extension GrantType: ClaimConvertable {}
+extension NSString: ClaimConvertable {}
+extension NSNumber: ClaimConvertable {}
 
 extension ClaimConvertable where Self == Date {
     public static func claim(_ claim: String,
