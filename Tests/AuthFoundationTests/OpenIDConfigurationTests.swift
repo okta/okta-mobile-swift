@@ -140,7 +140,7 @@ final class OpenIDConfigurationTests: XCTestCase {
         XCTAssertEqual(config.introspectionEndpoint?.absoluteString, "https://example.okta.com/oauth2/v1/introspect")
         XCTAssertEqual(config.jwksUri.absoluteString, "https://example.okta.com/oauth2/v1/keys")
         XCTAssertEqual(config.registrationEndpoint?.absoluteString, "https://example.okta.com/oauth2/v1/clients")
-        XCTAssertEqual(config.revocationEndpoint.absoluteString, "https://example.okta.com/oauth2/v1/revoke")
+        XCTAssertEqual(config.revocationEndpoint?.absoluteString, "https://example.okta.com/oauth2/v1/revoke")
         XCTAssertEqual(config.tokenEndpoint.absoluteString, "https://example.okta.com/oauth2/v1/token")
         XCTAssertEqual(config.userinfoEndpoint?.absoluteString, "https://example.okta.com/oauth2/v1/userinfo")
         
@@ -198,6 +198,36 @@ final class OpenIDConfigurationTests: XCTestCase {
         XCTAssertNil(config.introspectionEndpoint)
         XCTAssertNil(config.registrationEndpoint)
         XCTAssertNil(config.userinfoEndpoint)
-        XCTAssertTrue(config.claimsSupported.contains(.custom("is_private_email")))
+        
+        let claimsSupported = try XCTUnwrap(config.claimsSupported)
+        XCTAssertTrue(claimsSupported.contains(.custom("is_private_email")))
+        XCTAssertEqual(config.claimsSupported, [
+            .audience,
+            .email,
+            .emailVerified,
+            .expirationTime,
+            .issuedAt,
+            .custom("is_private_email"),
+            .issuer,
+            .nonce,
+            .custom("nonce_supported"),
+            .custom("real_user_status"),
+            .subject,
+            .custom("transfer_sub"),
+        ])
+        XCTAssertEqual(config.claimsSupported, [
+            .audience,
+            .email,
+            .emailVerified,
+            .expirationTime,
+            .issuedAt,
+            .isPrivateEmail,
+            .issuer,
+            .nonce,
+            .nonceSupported,
+            .realUserStatus,
+            .subject,
+            .transferSubject,
+        ])
     }
 }

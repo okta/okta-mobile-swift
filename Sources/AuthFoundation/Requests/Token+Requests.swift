@@ -15,9 +15,28 @@ extension Token {
     struct RevokeRequest {
         let openIdConfiguration: OpenIdConfiguration
         let clientAuthentication: OAuth2Client.ClientAuthentication
+        let url: URL
         let token: String
         let hint: Token.Kind?
         let configuration: [String: String]
+        
+        init(openIdConfiguration: OpenIdConfiguration,
+             clientAuthentication: OAuth2Client.ClientAuthentication,
+             token: String,
+             hint: Token.Kind?,
+             configuration: [String: String]) throws
+        {
+            self.openIdConfiguration = openIdConfiguration
+            self.clientAuthentication = clientAuthentication
+            self.token = token
+            self.hint = hint
+            self.configuration = configuration
+
+            guard let url = openIdConfiguration.revocationEndpoint else {
+                throw OAuth2Error.missingOpenIdConfiguration(attribute: "revocation_endpoint")
+            }
+            self.url = url
+        }
     }
 
     struct RefreshRequest {
@@ -69,7 +88,6 @@ extension Token.RevokeRequest: OAuth2APIRequest, APIRequestBody {
     typealias ResponseType = Empty
     
     var httpMethod: APIRequestMethod { .post }
-    var url: URL { openIdConfiguration.revocationEndpoint }
     var contentType: APIContentType? { .formEncoded }
     var acceptsType: APIContentType? { .json }
     var bodyParameters: [String: Any]? {

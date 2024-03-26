@@ -81,6 +81,6 @@ final class JWTTests: XCTestCase {
 
     func testAuthMethods() throws {
         let token = try JWT(idToken)
-        XCTAssertEqual(token.authenticationMethods, ["pwd"])
+        XCTAssertEqual(token.authenticationMethods, [.passwordBased])
     }
 }

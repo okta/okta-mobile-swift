@@ -263,18 +263,26 @@ public final class OAuth2Client {
         openIdConfiguration { result in
             switch result {
             case .success(let configuration):
-                let request = Token.RevokeRequest(openIdConfiguration: configuration,
-                                                  clientAuthentication: self.configuration.authentication,
-                                                  token: tokenString,
-                                                  hint: tokenType,
-                                                  configuration: clientSettings)
-                request.send(to: self) { result in
-                    switch result {
-                    case .success:
-                        completion(.success(()))
-                    case .failure(let error):
-                        completion(.failure(.network(error: error)))
+                do {
+                    let request = try Token.RevokeRequest(openIdConfiguration: configuration,
+                                                          clientAuthentication: self.configuration.authentication,
+                                                          token: tokenString,
+                                                          hint: tokenType,
+                                                          configuration: clientSettings)
+                    request.send(to: self) { result in
+                        switch result {
+                        case .success:
+                            completion(.success(()))
+                        case .failure(let error):
+                            completion(.failure(.network(error: error)))
+                        }
                     }
+                } catch let error as OAuth2Error {
+                    completion(.failure(error))
+                    return
+                } catch {
+                    completion(.failure(.error(error)))
+                    return
                 }
             case .failure(let error):
                 completion(.failure(error))

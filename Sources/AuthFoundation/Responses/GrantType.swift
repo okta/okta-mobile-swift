@@ -12,7 +12,7 @@
 
 import Foundation
 
-public enum GrantType: Codable, Hashable {
+public enum GrantType: Codable, Hashable, IsClaim {
     case authorizationCode
     case implicit
     case refreshToken

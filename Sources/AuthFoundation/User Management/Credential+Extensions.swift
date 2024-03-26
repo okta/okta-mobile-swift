@@ -99,5 +99,16 @@ extension Credential {
             }
         }
     }
+    
+    /// Introspect the token to check it for validity, and read the additional information associated with it.
+    /// - Parameters:
+    ///   - type: Type of token to introspect.
+    public func introspect(_ type: Token.Kind) async throws -> TokenInfo {
+        try await withCheckedThrowingContinuation { continuation in
+            oauth2.introspect(token: token, type: type) { result in
+                continuation.resume(with: result)
+            }
+        }
+    }
 }
 #endif

@@ -14,7 +14,7 @@ import Foundation
 
 // swiftlint:disable function_body_length
 // swiftlint:disable cyclomatic_complexity
-extension Claim: RawRepresentable, Equatable {
+extension JWTClaim: RawRepresentable, Equatable {
     public typealias RawValue = String
 
     public init?(rawValue: String) {
@@ -165,6 +165,14 @@ extension Claim: RawRepresentable, Equatable {
             self = .entitlements
         case "token_introspection":
             self = .tokenIntrospection
+        case "nonce_supported":
+            self = .nonceSupported
+        case "real_user_status":
+            self = .realUserStatus
+        case "is_private_email":
+            self = .isPrivateEmail
+        case "transfer_sub":
+            self = .transferSubject
         default:
             self = .custom(rawValue)
         }
@@ -318,6 +326,14 @@ extension Claim: RawRepresentable, Equatable {
             return "entitlements"
         case .tokenIntrospection:
             return "token_introspection"
+        case .nonceSupported:
+            return "nonce_supported"
+        case .realUserStatus:
+            return "real_user_status"
+        case .isPrivateEmail:
+            return "is_private_email"
+        case .transferSubject:
+            return "transfer_sub"
         case .custom(let name):
             return name
         }

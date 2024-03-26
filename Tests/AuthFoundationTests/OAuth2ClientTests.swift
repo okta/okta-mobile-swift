@@ -495,11 +495,11 @@ final class OAuth2ClientTests: XCTestCase {
     }
     
     func testRevokeRequestClientAuthentication() throws {
-        let request = Token.RevokeRequest(openIdConfiguration: openIdConfiguration,
-                                          clientAuthentication: .clientSecret("supersecret"),
-                                          token: "the-token",
-                                          hint: .deviceSecret,
-                                          configuration: [:])
+        let request = try Token.RevokeRequest(openIdConfiguration: openIdConfiguration,
+                                              clientAuthentication: .clientSecret("supersecret"),
+                                              token: "the-token",
+                                              hint: .deviceSecret,
+                                              configuration: [:])
         let parameters = try XCTUnwrap(request.bodyParameters as? [String: String])
         XCTAssertEqual(parameters["token"], "the-token")
         XCTAssertEqual(parameters["token_type_hint"], "device_secret")
