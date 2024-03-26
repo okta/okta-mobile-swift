@@ -215,5 +215,19 @@ final class OpenIDConfigurationTests: XCTestCase {
             .subject,
             .custom("transfer_sub"),
         ])
+        XCTAssertEqual(config.claimsSupported, [
+            .audience,
+            .email,
+            .emailVerified,
+            .expirationTime,
+            .issuedAt,
+            .isPrivateEmail,
+            .issuer,
+            .nonce,
+            .nonceSupported,
+            .realUserStatus,
+            .subject,
+            .transferSubject,
+        ])
     }
 }

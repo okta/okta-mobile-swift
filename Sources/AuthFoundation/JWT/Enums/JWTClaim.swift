@@ -232,6 +232,18 @@ public enum JWTClaim: Codable, IsClaim {
 
     /// Token introspection response
     case tokenIntrospection
+    
+    /// Indicates whether the transaction is on a nonce-supported platform. If you sent a nonce in the authorization request but do not see the nonce claim in the ID token, check this claim to determine how to proceed. Used predominantly by Sign In With Apple.
+    case nonceSupported
+    
+    /// Indicates the liklihood of whether or not this appears to be a real user. Used predominantly by Sign In With Apple.
+    case realUserStatus
+    
+    /// Indicates if the email address provided is a proxied address. Used predominantly by Sign In With Apple.
+    case isPrivateEmail
+    
+    /// Identifier used when transfering subjects. Used predominantly by Sign In With Apple.
+    case transferSubject
 
     /// Custom claim with the given name
     case custom(_ name: String)

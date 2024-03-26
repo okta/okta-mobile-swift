@@ -42,7 +42,7 @@ public struct JWT: RawRepresentable, Codable, HasClaims, Expires {
     
     /// The authentication context class reference.
     ///
-    /// The ``Claim/authContextClassReference`` claim (or `acr` in string form) defines a special authentication context reference which indicates additional policy choices requested when authenticating a user.
+    /// The ``JWTClaim/authContextClassReference`` claim (or `acr` in string form) defines a special authentication context reference which indicates additional policy choices requested when authenticating a user.
     public var authenticationContext: String? { self[.authContextClassReference] }
     
     /// JWT header information describing the contents of the token.

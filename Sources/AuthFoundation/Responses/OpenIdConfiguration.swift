@@ -14,7 +14,7 @@ import Foundation
 
 /// Describes the configuration of an OpenID server.
 ///
-/// The values exposed from this configuration are typically used during authentication, or when querying a server for its capabilities.
+/// The values exposed from this configuration are typically used during authentication, or when querying a server for its capabilities. This type uses ``HasClaims`` to represent the various provider metadata (represented as ``OpenIdConfiguration/ProviderMetadata``) for returning the full contents of the server's configuration. For more information, please refer to the <doc:WorkingWithClaims> documentation.
 public struct OpenIdConfiguration: Codable, JSONClaimContainer {
     public typealias ClaimType = ProviderMetadata
     
