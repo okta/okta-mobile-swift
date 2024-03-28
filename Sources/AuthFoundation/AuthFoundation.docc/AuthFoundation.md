@@ -30,6 +30,7 @@ You can use AuthFoundation when you want to:
 - ``OAuth2Client``
 - ``OAuth2ClientDelegate``
 - ``OpenIdConfiguration``
+- ``AuthenticationMethod``
 - ``AuthenticationFlow``
 - ``AuthenticationDelegate``
 - ``OAuth2TokenRequest``
@@ -41,14 +42,18 @@ You can use AuthFoundation when you want to:
 - ``JWT``
 - ``JWK``
 - ``JWKS``
-- ``Claim``
+- ``JWTClaim``
 - ``HasClaims``
-- ``ClaimContainer``
+- ``JSONClaimContainer``
+- ``ClaimConvertable``
+- ``IsClaim``
 - ``Expires``
 
 ### Security
 
 - ``Keychain``
+- ``KeychainAuthenticationContext``
+- ``TokenAuthenticationContext``
 
 ### Customizations
 
@@ -62,6 +67,7 @@ You can use AuthFoundation when you want to:
 - ``JWKValidator``
 - ``TokenHashValidator``
 - ``IDTokenValidator``
+- ``IDTokenValidatorContext``
 
 ### Networking
 
@@ -74,6 +80,9 @@ You can use AuthFoundation when you want to:
 - ``APIRequestArgument``
 - ``APIRequestMethod``
 - ``APIResponse``
+- ``APIResponseResult``
+- ``APIRateLimit``
+- ``APIRetry``
 - ``APIAuthorization``
 - ``APIParsingContext``
 - ``OAuth2APIRequest``
@@ -91,11 +100,13 @@ You can use AuthFoundation when you want to:
 - ``JWTError``
 - ``KeychainError``
 - ``AuthenticationError``
+- ``JSONValueError``
 
 ### Migration and versioning
 
 - ``SDKVersion``
 - ``SDKVersionMigrator``
+- ``Version``
 
 ### Internals and mocking
 

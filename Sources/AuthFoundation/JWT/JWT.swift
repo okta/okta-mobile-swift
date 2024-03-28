@@ -14,6 +14,7 @@ import Foundation
 
 /// Represents the contents of a JWT token, providing access to its payload contents.
 public struct JWT: RawRepresentable, Codable, HasClaims, Expires {
+    public typealias ClaimType = JWTClaim
     public typealias RawValue = String
     
     /// The raw string representation of this JWT token.
@@ -39,31 +40,10 @@ public struct JWT: RawRepresentable, Codable, HasClaims, Expires {
     /// The array of scopes this token is valid for.
     public var scope: [String]? { self[.scope] ?? self["scp"] }
     
-    /// The array of authentication methods.
-    ///
-    /// The ``Claim/authMethodsReference`` claim (or `amr` in string form) defines the list of methods that were used to authenticate the user.
-    public var authenticationMethods: [String]? { self[.authMethodsReference] }
-    
     /// The authentication context class reference.
     ///
-    /// The ``Claim/authContextClassReference`` claim (or `acr` in string form) defines a special authentication context reference which indicates additional policy choices requested when authenticating a user.
+    /// The ``JWTClaim/authContextClassReference`` claim (or `acr` in string form) defines a special authentication context reference which indicates additional policy choices requested when authenticating a user.
     public var authenticationContext: String? { self[.authContextClassReference] }
-    
-    /// The list of standard claims contained within this JWT token.
-    public var claims: [Claim] {
-        payload.keys.compactMap { Claim(rawValue: $0) }
-    }
-    
-    /// The list of custom claims contained within this JWT token.
-    public var customClaims: [String] {
-        payload.keys.filter { Claim(rawValue: $0) == nil }
-    }
-    
-    /// Returns a claim value from this JWT token, with the given key and expected return type.
-    /// - Returns: The value for the supplied claim.
-    public func value<T>(_ type: T.Type, for key: String) -> T? {
-        payload[key] as? T
-    }
     
     /// JWT header information describing the contents of the token.
     public struct Header: Decodable {
