@@ -92,7 +92,8 @@
     {
       "generated" : true,
       "identifiers" : [
-        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/SDKVersionMigrator"
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/SDKVersionMigrator",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/Version"
       ],
       "title" : "Migration and versioning"
     }
@@ -659,6 +660,40 @@
   "title" : "SDKVersionMigrator",
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/sdkversionmigrator"
+},
+"doc://AuthFoundation/documentation/AuthFoundation/Version": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "let"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "Version"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:14AuthFoundation10SDKVersionC",
+      "text" : "SDKVersion"
+    }
+  ],
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/Version",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "Version",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/version"
 }
 }
 }

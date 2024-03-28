@@ -1,7 +1,7 @@
 {
   "abstract" : [
     {
-      "text" : "Returns the list of custom claims this instance might contain.",
+      "text" : "The list of custom claims contained within this JWT token.",
       "type" : "text"
     }
   ],
@@ -11,7 +11,7 @@
         "doc:\/\/AuthFoundation\/documentation\/AuthFoundation",
         "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/Token",
         "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/Token\/Metadata",
-        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/Token\/Metadata\/ClaimContainer-Implementations"
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/Token\/Metadata\/HasClaims-Implementations"
       ]
     ]
   },
@@ -22,7 +22,7 @@
   "kind" : "symbol",
   "metadata" : {
     "extendedModule" : "AuthFoundation",
-    "externalID" : "s:14AuthFoundation14ClaimContainerPAAE12customClaimsSaySSGvp::SYNTHESIZED::s:14AuthFoundation5TokenC8MetadataV",
+    "externalID" : "s:14AuthFoundation9HasClaimsPAAE06customD0SaySSGvp::SYNTHESIZED::s:14AuthFoundation5TokenC8MetadataV",
     "fragments" : [
       {
         "kind" : "keyword",
@@ -214,21 +214,21 @@
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/token\/metadata"
 },
-"doc://AuthFoundation/documentation/AuthFoundation/Token/Metadata/ClaimContainer-Implementations": {
+"doc://AuthFoundation/documentation/AuthFoundation/Token/Metadata/HasClaims-Implementations": {
   "abstract" : [
 
   ],
-  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/Token\/Metadata\/ClaimContainer-Implementations",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/Token\/Metadata\/HasClaims-Implementations",
   "kind" : "article",
   "role" : "collectionGroup",
-  "title" : "ClaimContainer Implementations",
+  "title" : "HasClaims Implementations",
   "type" : "topic",
-  "url" : "\/documentation\/authfoundation\/token\/metadata\/claimcontainer-implementations"
+  "url" : "\/documentation\/authfoundation\/token\/metadata\/hasclaims-implementations"
 },
 "doc://AuthFoundation/documentation/AuthFoundation/Token/Metadata/customClaims": {
   "abstract" : [
     {
-      "text" : "Returns the list of custom claims this instance might contain.",
+      "text" : "The list of custom claims contained within this JWT token.",
       "type" : "text"
     }
   ],

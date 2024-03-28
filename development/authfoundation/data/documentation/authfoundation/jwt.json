@@ -259,18 +259,16 @@
               "type" : "text"
             },
             {
-              "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/HasClaims\/claims",
-              "isActive" : true,
-              "type" : "reference"
+              "code" : "HasClaims\/claims",
+              "type" : "codeVoice"
             },
             {
               "text" : " or ",
               "type" : "text"
             },
             {
-              "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/HasClaims\/customClaims",
-              "isActive" : true,
-              "type" : "reference"
+              "code" : "HasClaims\/customClaims",
+              "type" : "codeVoice"
             },
             {
               "text" : " properties can be used to identify which claims are present in the JWT token.",
@@ -351,9 +349,11 @@
       "identifiers" : [
         "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JWK",
         "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JWKS",
-        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/Claim",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JWTClaim",
         "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/HasClaims",
-        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/ClaimContainer",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JSONClaimContainer",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/ClaimConvertable",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/IsClaim",
         "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/Expires"
       ],
       "title" : "JWT and Token Verification"
@@ -377,9 +377,6 @@
       "identifiers" : [
         "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JWT\/audience",
         "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JWT\/authenticationContext",
-        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JWT\/authenticationMethods-8d0og",
-        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JWT\/claims",
-        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JWT\/customClaims",
         "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JWT\/expirationTime",
         "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JWT\/expiresIn",
         "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JWT\/header-swift.property",
@@ -394,13 +391,13 @@
     },
     {
       "identifiers" : [
-        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JWT\/validate(using:)",
-        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JWT\/value(_:for:)"
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JWT\/validate(using:)"
       ],
       "title" : "Instance Methods"
     },
     {
       "identifiers" : [
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JWT\/ClaimType",
         "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JWT\/RawValue-swift.typealias"
       ],
       "title" : "Type Aliases"
@@ -460,15 +457,13 @@
 },
 "doc://AuthFoundation/documentation/AuthFoundation/Claim": {
   "abstract" : [
-    {
-      "text" : "List of registered and public claims.",
-      "type" : "text"
-    }
+
   ],
+  "deprecated" : true,
   "fragments" : [
     {
       "kind" : "keyword",
-      "text" : "enum"
+      "text" : "typealias"
     },
     {
       "kind" : "text",
@@ -492,10 +487,19 @@
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/claim"
 },
-"doc://AuthFoundation/documentation/AuthFoundation/ClaimContainer": {
+"doc://AuthFoundation/documentation/AuthFoundation/ClaimConvertable": {
   "abstract" : [
     {
-      "text" : "Protocol used to define shared behavior when an object can contain claims.",
+      "text" : "Indicates a type can be consumed from a ",
+      "type" : "text"
+    },
+    {
+      "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/HasClaims",
+      "isActive" : true,
+      "type" : "reference"
+    },
+    {
+      "text" : " object and converted to the indicated type.",
       "type" : "text"
     }
   ],
@@ -510,21 +514,21 @@
     },
     {
       "kind" : "identifier",
-      "text" : "ClaimContainer"
+      "text" : "ClaimConvertable"
     }
   ],
-  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/ClaimContainer",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/ClaimConvertable",
   "kind" : "symbol",
   "navigatorTitle" : [
     {
       "kind" : "identifier",
-      "text" : "ClaimContainer"
+      "text" : "ClaimConvertable"
     }
   ],
   "role" : "symbol",
-  "title" : "ClaimContainer",
+  "title" : "ClaimConvertable",
   "type" : "topic",
-  "url" : "\/documentation\/authfoundation\/claimcontainer"
+  "url" : "\/documentation\/authfoundation\/claimconvertable"
 },
 "doc://AuthFoundation/documentation/AuthFoundation/Expires": {
   "abstract" : [
@@ -594,17 +598,14 @@
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/hasclaims"
 },
-"doc://AuthFoundation/documentation/AuthFoundation/HasClaims/claims": {
+"doc://AuthFoundation/documentation/AuthFoundation/HasClaims/ClaimType": {
   "abstract" : [
-    {
-      "text" : "Returns the collection of claims this object contains.",
-      "type" : "text"
-    }
+
   ],
   "fragments" : [
     {
       "kind" : "keyword",
-      "text" : "var"
+      "text" : "associatedtype"
     },
     {
       "kind" : "text",
@@ -612,71 +613,25 @@
     },
     {
       "kind" : "identifier",
-      "text" : "claims"
+      "text" : "ClaimType"
     },
     {
       "kind" : "text",
-      "text" : ": ["
+      "text" : " : "
     },
     {
       "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:14AuthFoundation5ClaimO",
-      "text" : "Claim"
-    },
-    {
-      "kind" : "text",
-      "text" : "]"
+      "preciseIdentifier" : "s:14AuthFoundation7IsClaimP",
+      "text" : "IsClaim"
     }
   ],
-  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/HasClaims\/claims",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/HasClaims\/ClaimType",
   "kind" : "symbol",
   "required" : true,
   "role" : "symbol",
-  "title" : "claims",
+  "title" : "ClaimType",
   "type" : "topic",
-  "url" : "\/documentation\/authfoundation\/hasclaims\/claims"
-},
-"doc://AuthFoundation/documentation/AuthFoundation/HasClaims/customClaims": {
-  "abstract" : [
-    {
-      "text" : "Returns the collection of custom claims this object contains.",
-      "type" : "text"
-    }
-  ],
-  "fragments" : [
-    {
-      "kind" : "keyword",
-      "text" : "var"
-    },
-    {
-      "kind" : "text",
-      "text" : " "
-    },
-    {
-      "kind" : "identifier",
-      "text" : "customClaims"
-    },
-    {
-      "kind" : "text",
-      "text" : ": ["
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:SS",
-      "text" : "String"
-    },
-    {
-      "kind" : "text",
-      "text" : "]"
-    }
-  ],
-  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/HasClaims\/customClaims",
-  "kind" : "symbol",
-  "required" : true,
-  "role" : "symbol",
-  "title" : "customClaims",
-  "type" : "topic",
-  "url" : "\/documentation\/authfoundation\/hasclaims\/customclaims"
+  "url" : "\/documentation\/authfoundation\/hasclaims\/claimtype"
 },
 "doc://AuthFoundation/documentation/AuthFoundation/HasClaims/subject": {
   "abstract" : [
@@ -685,6 +640,38 @@
       "type" : "text"
     }
   ],
+  "conformance" : {
+    "availabilityPrefix" : [
+      {
+        "text" : "Available when",
+        "type" : "text"
+      }
+    ],
+    "conformancePrefix" : [
+      {
+        "text" : "Conforms when",
+        "type" : "text"
+      }
+    ],
+    "constraints" : [
+      {
+        "code" : "ClaimType",
+        "type" : "codeVoice"
+      },
+      {
+        "text" : " is ",
+        "type" : "text"
+      },
+      {
+        "code" : "JWTClaim",
+        "type" : "codeVoice"
+      },
+      {
+        "text" : ".",
+        "type" : "text"
+      }
+    ]
+  },
   "fragments" : [
     {
       "kind" : "keyword",
@@ -718,6 +705,83 @@
   "title" : "subject",
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/hasclaims\/subject"
+},
+"doc://AuthFoundation/documentation/AuthFoundation/IsClaim": {
+  "abstract" : [
+    {
+      "text" : "Indicates a type that can be used as an enum value for the ",
+      "type" : "text"
+    },
+    {
+      "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/HasClaims\/ClaimType",
+      "isActive" : true,
+      "type" : "reference"
+    },
+    {
+      "text" : " associated type.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "protocol"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "IsClaim"
+    }
+  ],
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/IsClaim",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "IsClaim"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "IsClaim",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/isclaim"
+},
+"doc://AuthFoundation/documentation/AuthFoundation/JSONClaimContainer": {
+  "abstract" : [
+    {
+      "text" : "Protocol used to define shared behavior when an object can contain claims.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "protocol"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "JSONClaimContainer"
+    }
+  ],
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JSONClaimContainer",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "JSONClaimContainer"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "JSONClaimContainer",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/jsonclaimcontainer"
 },
 "doc://AuthFoundation/documentation/AuthFoundation/JWK": {
   "abstract" : [
@@ -820,6 +884,37 @@
   "title" : "JWT",
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/jwt"
+},
+"doc://AuthFoundation/documentation/AuthFoundation/JWT/ClaimType": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "typealias"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "ClaimType"
+    }
+  ],
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JWT\/ClaimType",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "ClaimType"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "JWT.ClaimType",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/jwt\/claimtype"
 },
 "doc://AuthFoundation/documentation/AuthFoundation/JWT/Expires-Implementations": {
   "abstract" : [
@@ -1000,129 +1095,6 @@
   "title" : "authenticationContext",
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/jwt\/authenticationcontext"
-},
-"doc://AuthFoundation/documentation/AuthFoundation/JWT/authenticationMethods-8d0og": {
-  "abstract" : [
-    {
-      "text" : "The array of authentication methods.",
-      "type" : "text"
-    }
-  ],
-  "fragments" : [
-    {
-      "kind" : "keyword",
-      "text" : "var"
-    },
-    {
-      "kind" : "text",
-      "text" : " "
-    },
-    {
-      "kind" : "identifier",
-      "text" : "authenticationMethods"
-    },
-    {
-      "kind" : "text",
-      "text" : ": ["
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:SS",
-      "text" : "String"
-    },
-    {
-      "kind" : "text",
-      "text" : "]?"
-    }
-  ],
-  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JWT\/authenticationMethods-8d0og",
-  "kind" : "symbol",
-  "role" : "symbol",
-  "title" : "authenticationMethods",
-  "type" : "topic",
-  "url" : "\/documentation\/authfoundation\/jwt\/authenticationmethods-8d0og"
-},
-"doc://AuthFoundation/documentation/AuthFoundation/JWT/claims": {
-  "abstract" : [
-    {
-      "text" : "The list of standard claims contained within this JWT token.",
-      "type" : "text"
-    }
-  ],
-  "fragments" : [
-    {
-      "kind" : "keyword",
-      "text" : "var"
-    },
-    {
-      "kind" : "text",
-      "text" : " "
-    },
-    {
-      "kind" : "identifier",
-      "text" : "claims"
-    },
-    {
-      "kind" : "text",
-      "text" : ": ["
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:14AuthFoundation5ClaimO",
-      "text" : "Claim"
-    },
-    {
-      "kind" : "text",
-      "text" : "]"
-    }
-  ],
-  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JWT\/claims",
-  "kind" : "symbol",
-  "role" : "symbol",
-  "title" : "claims",
-  "type" : "topic",
-  "url" : "\/documentation\/authfoundation\/jwt\/claims"
-},
-"doc://AuthFoundation/documentation/AuthFoundation/JWT/customClaims": {
-  "abstract" : [
-    {
-      "text" : "The list of custom claims contained within this JWT token.",
-      "type" : "text"
-    }
-  ],
-  "fragments" : [
-    {
-      "kind" : "keyword",
-      "text" : "var"
-    },
-    {
-      "kind" : "text",
-      "text" : " "
-    },
-    {
-      "kind" : "identifier",
-      "text" : "customClaims"
-    },
-    {
-      "kind" : "text",
-      "text" : ": ["
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:SS",
-      "text" : "String"
-    },
-    {
-      "kind" : "text",
-      "text" : "]"
-    }
-  ],
-  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JWT\/customClaims",
-  "kind" : "symbol",
-  "role" : "symbol",
-  "title" : "customClaims",
-  "type" : "topic",
-  "url" : "\/documentation\/authfoundation\/jwt\/customclaims"
 },
 "doc://AuthFoundation/documentation/AuthFoundation/JWT/expirationTime": {
   "abstract" : [
@@ -1653,17 +1625,17 @@
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/jwt\/validate(using:)"
 },
-"doc://AuthFoundation/documentation/AuthFoundation/JWT/value(_:for:)": {
+"doc://AuthFoundation/documentation/AuthFoundation/JWTClaim": {
   "abstract" : [
     {
-      "text" : "Returns a claim value from this JWT token, with the given key and expected return type.",
+      "text" : "List of registered and public claims.",
       "type" : "text"
     }
   ],
   "fragments" : [
     {
       "kind" : "keyword",
-      "text" : "func"
+      "text" : "enum"
     },
     {
       "kind" : "text",
@@ -1671,60 +1643,21 @@
     },
     {
       "kind" : "identifier",
-      "text" : "value"
-    },
-    {
-      "kind" : "text",
-      "text" : "<"
-    },
-    {
-      "kind" : "genericParameter",
-      "text" : "T"
-    },
-    {
-      "kind" : "text",
-      "text" : ">("
-    },
-    {
-      "kind" : "typeIdentifier",
-      "text" : "T"
-    },
-    {
-      "kind" : "text",
-      "text" : ".Type, "
-    },
-    {
-      "kind" : "externalParam",
-      "text" : "for"
-    },
-    {
-      "kind" : "text",
-      "text" : ": "
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:SS",
-      "text" : "String"
-    },
-    {
-      "kind" : "text",
-      "text" : ") -> "
-    },
-    {
-      "kind" : "typeIdentifier",
-      "text" : "T"
-    },
-    {
-      "kind" : "text",
-      "text" : "?"
+      "text" : "JWTClaim"
     }
   ],
-  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JWT\/value(_:for:)",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JWTClaim",
   "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "JWTClaim"
+    }
+  ],
   "role" : "symbol",
-  "title" : "value(_:for:)",
+  "title" : "JWTClaim",
   "type" : "topic",
-  "url" : "\/documentation\/authfoundation\/jwt\/value(_:for:)"
+  "url" : "\/documentation\/authfoundation\/jwtclaim"
 }
 }
 }

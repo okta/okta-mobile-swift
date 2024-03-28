@@ -111,7 +111,8 @@
         "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/TokenError",
         "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JWTError",
         "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/KeychainError",
-        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/AuthenticationError"
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/AuthenticationError",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JSONValueError"
       ],
       "title" : "Error Types"
     }
@@ -299,6 +300,37 @@
   "title" : "CredentialError",
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/credentialerror"
+},
+"doc://AuthFoundation/documentation/AuthFoundation/JSONValueError": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "enum"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "JSONValueError"
+    }
+  ],
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JSONValueError",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "JSONValueError"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "JSONValueError",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/jsonvalueerror"
 },
 "doc://AuthFoundation/documentation/AuthFoundation/JWTError": {
   "abstract" : [

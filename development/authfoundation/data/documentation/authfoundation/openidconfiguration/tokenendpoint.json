@@ -1,4 +1,10 @@
 {
+  "abstract" : [
+    {
+      "text" : "The URL for this OpenID Provider’s token endpoint.",
+      "type" : "text"
+    }
+  ],
   "hierarchy" : {
     "paths" : [
       [
@@ -157,7 +163,10 @@
 },
 "doc://AuthFoundation/documentation/AuthFoundation/OpenIdConfiguration/tokenEndpoint": {
   "abstract" : [
-
+    {
+      "text" : "The URL for this OpenID Provider’s token endpoint.",
+      "type" : "text"
+    }
   ],
   "fragments" : [
     {

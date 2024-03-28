@@ -1,0 +1,1689 @@
+{
+  "abstract" : [
+    {
+      "text" : "Defines the metadata claims available within an ",
+      "type" : "text"
+    },
+    {
+      "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/OpenIdConfiguration",
+      "isActive" : true,
+      "type" : "reference"
+    },
+    {
+      "text" : ".",
+      "type" : "text"
+    }
+  ],
+  "hierarchy" : {
+    "paths" : [
+      [
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/OpenIdConfiguration"
+      ]
+    ]
+  },
+  "identifier" : {
+    "interfaceLanguage" : "swift",
+    "url" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/OpenIdConfiguration\/ProviderMetadata"
+  },
+  "kind" : "symbol",
+  "metadata" : {
+    "extendedModule" : "AuthFoundation",
+    "externalID" : "s:14AuthFoundation19OpenIdConfigurationV16ProviderMetadataO",
+    "fragments" : [
+      {
+        "kind" : "keyword",
+        "text" : "enum"
+      },
+      {
+        "kind" : "text",
+        "text" : " "
+      },
+      {
+        "kind" : "identifier",
+        "text" : "ProviderMetadata"
+      }
+    ],
+    "modules" : [
+      {
+        "name" : "AuthFoundation"
+      }
+    ],
+    "navigatorTitle" : [
+      {
+        "kind" : "identifier",
+        "text" : "ProviderMetadata"
+      }
+    ],
+    "role" : "symbol",
+    "roleHeading" : "Enumeration",
+    "symbolKind" : "enum",
+    "title" : "OpenIdConfiguration.ProviderMetadata"
+  },
+  "primaryContentSections" : [
+    {
+      "declarations" : [
+        {
+          "languages" : [
+            "swift"
+          ],
+          "platforms" : [
+            "macOS"
+          ],
+          "tokens" : [
+            {
+              "kind" : "keyword",
+              "text" : "enum"
+            },
+            {
+              "kind" : "text",
+              "text" : " "
+            },
+            {
+              "kind" : "identifier",
+              "text" : "ProviderMetadata"
+            }
+          ]
+        }
+      ],
+      "kind" : "declarations"
+    }
+  ],
+  "relationshipsSections" : [
+    {
+      "identifiers" : [
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/IsClaim",
+        "doc:\/\/AuthFoundation\/s9CodingKeyP",
+        "doc:\/\/AuthFoundation\/s28CustomDebugStringConvertibleP",
+        "doc:\/\/AuthFoundation\/s23CustomStringConvertibleP",
+        "doc:\/\/AuthFoundation\/Se",
+        "doc:\/\/AuthFoundation\/SE",
+        "doc:\/\/AuthFoundation\/SQ",
+        "doc:\/\/AuthFoundation\/SH",
+        "doc:\/\/AuthFoundation\/SY",
+        "doc:\/\/AuthFoundation\/s8SendableP"
+      ],
+      "kind" : "relationships",
+      "title" : "Conforms To",
+      "type" : "conformsTo"
+    }
+  ],
+  "schemaVersion" : {
+    "major" : 0,
+    "minor" : 3,
+    "patch" : 0
+  },
+  "sections" : [
+
+  ],
+  "topicSections" : [
+    {
+      "identifiers" : [
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/OpenIdConfiguration\/ProviderMetadata\/acrValuesSupported",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/OpenIdConfiguration\/ProviderMetadata\/authorizationEndpoint",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/OpenIdConfiguration\/ProviderMetadata\/backchannelAuthenticationRequestSigningAlgValuesSupported",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/OpenIdConfiguration\/ProviderMetadata\/backchannelTokenDeliveryModesSupported",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/OpenIdConfiguration\/ProviderMetadata\/claimTypesSupported",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/OpenIdConfiguration\/ProviderMetadata\/claimsLocalesSupported",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/OpenIdConfiguration\/ProviderMetadata\/claimsParameterSupported",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/OpenIdConfiguration\/ProviderMetadata\/claimsSupported",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/OpenIdConfiguration\/ProviderMetadata\/codeChallengeMethodsSupported",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/OpenIdConfiguration\/ProviderMetadata\/deviceAuthorizationEndpoint",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/OpenIdConfiguration\/ProviderMetadata\/displayValuesSupported",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/OpenIdConfiguration\/ProviderMetadata\/dpopSigningAlgValuesSupported",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/OpenIdConfiguration\/ProviderMetadata\/endSessionEndpoint",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/OpenIdConfiguration\/ProviderMetadata\/grantTypesSupported",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/OpenIdConfiguration\/ProviderMetadata\/idTokenEncryptionAlgValuesSupported",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/OpenIdConfiguration\/ProviderMetadata\/idTokenEncryptionEncValuesSupported",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/OpenIdConfiguration\/ProviderMetadata\/idTokenSigningAlgValuesSupported",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/OpenIdConfiguration\/ProviderMetadata\/introspectionEndpoint",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/OpenIdConfiguration\/ProviderMetadata\/introspectionEndpointAuthMethodsSupported",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/OpenIdConfiguration\/ProviderMetadata\/issuer",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/OpenIdConfiguration\/ProviderMetadata\/jwksUri",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/OpenIdConfiguration\/ProviderMetadata\/opPolicyUri",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/OpenIdConfiguration\/ProviderMetadata\/opTosUri",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/OpenIdConfiguration\/ProviderMetadata\/registrationEndpoint",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/OpenIdConfiguration\/ProviderMetadata\/requestObjectEncryptionAlgValuesSupported",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/OpenIdConfiguration\/ProviderMetadata\/requestObjectEncryptionEncValuesSupported",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/OpenIdConfiguration\/ProviderMetadata\/requestObjectSigningAlgValuesSupported",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/OpenIdConfiguration\/ProviderMetadata\/requestParameterSupported",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/OpenIdConfiguration\/ProviderMetadata\/requestUriParameterSupported",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/OpenIdConfiguration\/ProviderMetadata\/requireRequestUriRegistration",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/OpenIdConfiguration\/ProviderMetadata\/responseModesSupported",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/OpenIdConfiguration\/ProviderMetadata\/responseTypesSupported",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/OpenIdConfiguration\/ProviderMetadata\/revocationEndpoint",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/OpenIdConfiguration\/ProviderMetadata\/revocationEndpointAuthMethodsSupported",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/OpenIdConfiguration\/ProviderMetadata\/scopesSupported",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/OpenIdConfiguration\/ProviderMetadata\/serviceDocumentation",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/OpenIdConfiguration\/ProviderMetadata\/subjectTypesSupported",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/OpenIdConfiguration\/ProviderMetadata\/tokenEndpoint",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/OpenIdConfiguration\/ProviderMetadata\/tokenEndpointAuthMethodsSupported",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/OpenIdConfiguration\/ProviderMetadata\/tokenEndpointAuthSigningAlgValuesSupported",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/OpenIdConfiguration\/ProviderMetadata\/uiLocalesSupported",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/OpenIdConfiguration\/ProviderMetadata\/userinfoEncryptionAlgValuesSupported",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/OpenIdConfiguration\/ProviderMetadata\/userinfoEncryptionEncValuesSupported",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/OpenIdConfiguration\/ProviderMetadata\/userinfoEndpoint",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/OpenIdConfiguration\/ProviderMetadata\/userinfoSigningAlgValuesSupported"
+      ],
+      "title" : "Enumeration Cases"
+    },
+    {
+      "identifiers" : [
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/OpenIdConfiguration\/ProviderMetadata\/init(intValue:)",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/OpenIdConfiguration\/ProviderMetadata\/init(rawValue:)",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/OpenIdConfiguration\/ProviderMetadata\/init(stringValue:)"
+      ],
+      "title" : "Initializers"
+    },
+    {
+      "generated" : true,
+      "identifiers" : [
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/OpenIdConfiguration\/ProviderMetadata\/CodingKey-Implementations",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/OpenIdConfiguration\/ProviderMetadata\/Equatable-Implementations",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/OpenIdConfiguration\/ProviderMetadata\/RawRepresentable-Implementations"
+      ],
+      "title" : "Default Implementations"
+    }
+  ],
+  "variants" : [
+    {
+      "paths" : [
+        "\/documentation\/authfoundation\/openidconfiguration\/providermetadata"
+      ],
+      "traits" : [
+        {
+          "interfaceLanguage" : "swift"
+        }
+      ]
+    }
+  ]
+, 
+"references": {
+"doc://AuthFoundation/SE": {
+  "identifier" : "doc:\/\/AuthFoundation\/SE",
+  "title" : "Swift.Encodable",
+  "type" : "unresolvable"
+},
+"doc://AuthFoundation/SH": {
+  "identifier" : "doc:\/\/AuthFoundation\/SH",
+  "title" : "Swift.Hashable",
+  "type" : "unresolvable"
+},
+"doc://AuthFoundation/SQ": {
+  "identifier" : "doc:\/\/AuthFoundation\/SQ",
+  "title" : "Swift.Equatable",
+  "type" : "unresolvable"
+},
+"doc://AuthFoundation/SY": {
+  "identifier" : "doc:\/\/AuthFoundation\/SY",
+  "title" : "Swift.RawRepresentable",
+  "type" : "unresolvable"
+},
+"doc://AuthFoundation/Se": {
+  "identifier" : "doc:\/\/AuthFoundation\/Se",
+  "title" : "Swift.Decodable",
+  "type" : "unresolvable"
+},
+"doc://AuthFoundation/documentation/AuthFoundation": {
+  "abstract" : [
+    {
+      "text" : "Library that provides foundational features used by Okta’s authentication libraries, as well as APIs used to work with tokens and user credentials.",
+      "type" : "text"
+    }
+  ],
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation",
+  "kind" : "symbol",
+  "role" : "collection",
+  "title" : "AuthFoundation",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation"
+},
+"doc://AuthFoundation/documentation/AuthFoundation/HasClaims/ClaimType": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "associatedtype"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "ClaimType"
+    },
+    {
+      "kind" : "text",
+      "text" : " : "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:14AuthFoundation7IsClaimP",
+      "text" : "IsClaim"
+    }
+  ],
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/HasClaims\/ClaimType",
+  "kind" : "symbol",
+  "required" : true,
+  "role" : "symbol",
+  "title" : "ClaimType",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/hasclaims\/claimtype"
+},
+"doc://AuthFoundation/documentation/AuthFoundation/IsClaim": {
+  "abstract" : [
+    {
+      "text" : "Indicates a type that can be used as an enum value for the ",
+      "type" : "text"
+    },
+    {
+      "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/HasClaims\/ClaimType",
+      "isActive" : true,
+      "type" : "reference"
+    },
+    {
+      "text" : " associated type.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "protocol"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "IsClaim"
+    }
+  ],
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/IsClaim",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "IsClaim"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "IsClaim",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/isclaim"
+},
+"doc://AuthFoundation/documentation/AuthFoundation/OpenIdConfiguration": {
+  "abstract" : [
+    {
+      "text" : "Describes the configuration of an OpenID server.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "struct"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "OpenIdConfiguration"
+    }
+  ],
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/OpenIdConfiguration",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "OpenIdConfiguration"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "OpenIdConfiguration",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/openidconfiguration"
+},
+"doc://AuthFoundation/documentation/AuthFoundation/OpenIdConfiguration/ProviderMetadata": {
+  "abstract" : [
+    {
+      "text" : "Defines the metadata claims available within an ",
+      "type" : "text"
+    },
+    {
+      "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/OpenIdConfiguration",
+      "isActive" : true,
+      "type" : "reference"
+    },
+    {
+      "text" : ".",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "enum"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "ProviderMetadata"
+    }
+  ],
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/OpenIdConfiguration\/ProviderMetadata",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "ProviderMetadata"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "OpenIdConfiguration.ProviderMetadata",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/openidconfiguration\/providermetadata"
+},
+"doc://AuthFoundation/documentation/AuthFoundation/OpenIdConfiguration/ProviderMetadata/CodingKey-Implementations": {
+  "abstract" : [
+
+  ],
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/OpenIdConfiguration\/ProviderMetadata\/CodingKey-Implementations",
+  "kind" : "article",
+  "role" : "collectionGroup",
+  "title" : "CodingKey Implementations",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/openidconfiguration\/providermetadata\/codingkey-implementations"
+},
+"doc://AuthFoundation/documentation/AuthFoundation/OpenIdConfiguration/ProviderMetadata/Equatable-Implementations": {
+  "abstract" : [
+
+  ],
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/OpenIdConfiguration\/ProviderMetadata\/Equatable-Implementations",
+  "kind" : "article",
+  "role" : "collectionGroup",
+  "title" : "Equatable Implementations",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/openidconfiguration\/providermetadata\/equatable-implementations"
+},
+"doc://AuthFoundation/documentation/AuthFoundation/OpenIdConfiguration/ProviderMetadata/RawRepresentable-Implementations": {
+  "abstract" : [
+
+  ],
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/OpenIdConfiguration\/ProviderMetadata\/RawRepresentable-Implementations",
+  "kind" : "article",
+  "role" : "collectionGroup",
+  "title" : "RawRepresentable Implementations",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/openidconfiguration\/providermetadata\/rawrepresentable-implementations"
+},
+"doc://AuthFoundation/documentation/AuthFoundation/OpenIdConfiguration/ProviderMetadata/acrValuesSupported": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "case"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "acrValuesSupported"
+    }
+  ],
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/OpenIdConfiguration\/ProviderMetadata\/acrValuesSupported",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "OpenIdConfiguration.ProviderMetadata.acrValuesSupported",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/openidconfiguration\/providermetadata\/acrvaluessupported"
+},
+"doc://AuthFoundation/documentation/AuthFoundation/OpenIdConfiguration/ProviderMetadata/authorizationEndpoint": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "case"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "authorizationEndpoint"
+    }
+  ],
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/OpenIdConfiguration\/ProviderMetadata\/authorizationEndpoint",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "OpenIdConfiguration.ProviderMetadata.authorizationEndpoint",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/openidconfiguration\/providermetadata\/authorizationendpoint"
+},
+"doc://AuthFoundation/documentation/AuthFoundation/OpenIdConfiguration/ProviderMetadata/backchannelAuthenticationRequestSigningAlgValuesSupported": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "case"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "backchannelAuthenticationRequestSigningAlgValuesSupported"
+    }
+  ],
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/OpenIdConfiguration\/ProviderMetadata\/backchannelAuthenticationRequestSigningAlgValuesSupported",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "OpenIdConfiguration.ProviderMetadata.backchannelAuthenticationRequestSigningAlgValuesSupported",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/openidconfiguration\/providermetadata\/backchannelauthenticationrequestsigningalgvaluessupported"
+},
+"doc://AuthFoundation/documentation/AuthFoundation/OpenIdConfiguration/ProviderMetadata/backchannelTokenDeliveryModesSupported": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "case"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "backchannelTokenDeliveryModesSupported"
+    }
+  ],
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/OpenIdConfiguration\/ProviderMetadata\/backchannelTokenDeliveryModesSupported",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "OpenIdConfiguration.ProviderMetadata.backchannelTokenDeliveryModesSupported",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/openidconfiguration\/providermetadata\/backchanneltokendeliverymodessupported"
+},
+"doc://AuthFoundation/documentation/AuthFoundation/OpenIdConfiguration/ProviderMetadata/claimTypesSupported": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "case"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "claimTypesSupported"
+    }
+  ],
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/OpenIdConfiguration\/ProviderMetadata\/claimTypesSupported",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "OpenIdConfiguration.ProviderMetadata.claimTypesSupported",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/openidconfiguration\/providermetadata\/claimtypessupported"
+},
+"doc://AuthFoundation/documentation/AuthFoundation/OpenIdConfiguration/ProviderMetadata/claimsLocalesSupported": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "case"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "claimsLocalesSupported"
+    }
+  ],
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/OpenIdConfiguration\/ProviderMetadata\/claimsLocalesSupported",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "OpenIdConfiguration.ProviderMetadata.claimsLocalesSupported",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/openidconfiguration\/providermetadata\/claimslocalessupported"
+},
+"doc://AuthFoundation/documentation/AuthFoundation/OpenIdConfiguration/ProviderMetadata/claimsParameterSupported": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "case"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "claimsParameterSupported"
+    }
+  ],
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/OpenIdConfiguration\/ProviderMetadata\/claimsParameterSupported",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "OpenIdConfiguration.ProviderMetadata.claimsParameterSupported",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/openidconfiguration\/providermetadata\/claimsparametersupported"
+},
+"doc://AuthFoundation/documentation/AuthFoundation/OpenIdConfiguration/ProviderMetadata/claimsSupported": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "case"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "claimsSupported"
+    }
+  ],
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/OpenIdConfiguration\/ProviderMetadata\/claimsSupported",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "OpenIdConfiguration.ProviderMetadata.claimsSupported",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/openidconfiguration\/providermetadata\/claimssupported"
+},
+"doc://AuthFoundation/documentation/AuthFoundation/OpenIdConfiguration/ProviderMetadata/codeChallengeMethodsSupported": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "case"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "codeChallengeMethodsSupported"
+    }
+  ],
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/OpenIdConfiguration\/ProviderMetadata\/codeChallengeMethodsSupported",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "OpenIdConfiguration.ProviderMetadata.codeChallengeMethodsSupported",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/openidconfiguration\/providermetadata\/codechallengemethodssupported"
+},
+"doc://AuthFoundation/documentation/AuthFoundation/OpenIdConfiguration/ProviderMetadata/deviceAuthorizationEndpoint": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "case"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "deviceAuthorizationEndpoint"
+    }
+  ],
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/OpenIdConfiguration\/ProviderMetadata\/deviceAuthorizationEndpoint",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "OpenIdConfiguration.ProviderMetadata.deviceAuthorizationEndpoint",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/openidconfiguration\/providermetadata\/deviceauthorizationendpoint"
+},
+"doc://AuthFoundation/documentation/AuthFoundation/OpenIdConfiguration/ProviderMetadata/displayValuesSupported": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "case"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "displayValuesSupported"
+    }
+  ],
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/OpenIdConfiguration\/ProviderMetadata\/displayValuesSupported",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "OpenIdConfiguration.ProviderMetadata.displayValuesSupported",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/openidconfiguration\/providermetadata\/displayvaluessupported"
+},
+"doc://AuthFoundation/documentation/AuthFoundation/OpenIdConfiguration/ProviderMetadata/dpopSigningAlgValuesSupported": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "case"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "dpopSigningAlgValuesSupported"
+    }
+  ],
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/OpenIdConfiguration\/ProviderMetadata\/dpopSigningAlgValuesSupported",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "OpenIdConfiguration.ProviderMetadata.dpopSigningAlgValuesSupported",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/openidconfiguration\/providermetadata\/dpopsigningalgvaluessupported"
+},
+"doc://AuthFoundation/documentation/AuthFoundation/OpenIdConfiguration/ProviderMetadata/endSessionEndpoint": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "case"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "endSessionEndpoint"
+    }
+  ],
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/OpenIdConfiguration\/ProviderMetadata\/endSessionEndpoint",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "OpenIdConfiguration.ProviderMetadata.endSessionEndpoint",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/openidconfiguration\/providermetadata\/endsessionendpoint"
+},
+"doc://AuthFoundation/documentation/AuthFoundation/OpenIdConfiguration/ProviderMetadata/grantTypesSupported": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "case"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "grantTypesSupported"
+    }
+  ],
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/OpenIdConfiguration\/ProviderMetadata\/grantTypesSupported",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "OpenIdConfiguration.ProviderMetadata.grantTypesSupported",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/openidconfiguration\/providermetadata\/granttypessupported"
+},
+"doc://AuthFoundation/documentation/AuthFoundation/OpenIdConfiguration/ProviderMetadata/idTokenEncryptionAlgValuesSupported": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "case"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "idTokenEncryptionAlgValuesSupported"
+    }
+  ],
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/OpenIdConfiguration\/ProviderMetadata\/idTokenEncryptionAlgValuesSupported",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "OpenIdConfiguration.ProviderMetadata.idTokenEncryptionAlgValuesSupported",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/openidconfiguration\/providermetadata\/idtokenencryptionalgvaluessupported"
+},
+"doc://AuthFoundation/documentation/AuthFoundation/OpenIdConfiguration/ProviderMetadata/idTokenEncryptionEncValuesSupported": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "case"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "idTokenEncryptionEncValuesSupported"
+    }
+  ],
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/OpenIdConfiguration\/ProviderMetadata\/idTokenEncryptionEncValuesSupported",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "OpenIdConfiguration.ProviderMetadata.idTokenEncryptionEncValuesSupported",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/openidconfiguration\/providermetadata\/idtokenencryptionencvaluessupported"
+},
+"doc://AuthFoundation/documentation/AuthFoundation/OpenIdConfiguration/ProviderMetadata/idTokenSigningAlgValuesSupported": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "case"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "idTokenSigningAlgValuesSupported"
+    }
+  ],
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/OpenIdConfiguration\/ProviderMetadata\/idTokenSigningAlgValuesSupported",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "OpenIdConfiguration.ProviderMetadata.idTokenSigningAlgValuesSupported",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/openidconfiguration\/providermetadata\/idtokensigningalgvaluessupported"
+},
+"doc://AuthFoundation/documentation/AuthFoundation/OpenIdConfiguration/ProviderMetadata/init(intValue:)": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "identifier",
+      "text" : "init"
+    },
+    {
+      "kind" : "text",
+      "text" : "?("
+    },
+    {
+      "kind" : "externalParam",
+      "text" : "intValue"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:Si",
+      "text" : "Int"
+    },
+    {
+      "kind" : "text",
+      "text" : ")"
+    }
+  ],
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/OpenIdConfiguration\/ProviderMetadata\/init(intValue:)",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "init(intValue:)",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/openidconfiguration\/providermetadata\/init(intvalue:)"
+},
+"doc://AuthFoundation/documentation/AuthFoundation/OpenIdConfiguration/ProviderMetadata/init(rawValue:)": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "identifier",
+      "text" : "init"
+    },
+    {
+      "kind" : "text",
+      "text" : "?("
+    },
+    {
+      "kind" : "externalParam",
+      "text" : "rawValue"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:SS",
+      "text" : "String"
+    },
+    {
+      "kind" : "text",
+      "text" : ")"
+    }
+  ],
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/OpenIdConfiguration\/ProviderMetadata\/init(rawValue:)",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "init(rawValue:)",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/openidconfiguration\/providermetadata\/init(rawvalue:)"
+},
+"doc://AuthFoundation/documentation/AuthFoundation/OpenIdConfiguration/ProviderMetadata/init(stringValue:)": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "identifier",
+      "text" : "init"
+    },
+    {
+      "kind" : "text",
+      "text" : "?("
+    },
+    {
+      "kind" : "externalParam",
+      "text" : "stringValue"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:SS",
+      "text" : "String"
+    },
+    {
+      "kind" : "text",
+      "text" : ")"
+    }
+  ],
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/OpenIdConfiguration\/ProviderMetadata\/init(stringValue:)",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "init(stringValue:)",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/openidconfiguration\/providermetadata\/init(stringvalue:)"
+},
+"doc://AuthFoundation/documentation/AuthFoundation/OpenIdConfiguration/ProviderMetadata/introspectionEndpoint": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "case"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "introspectionEndpoint"
+    }
+  ],
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/OpenIdConfiguration\/ProviderMetadata\/introspectionEndpoint",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "OpenIdConfiguration.ProviderMetadata.introspectionEndpoint",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/openidconfiguration\/providermetadata\/introspectionendpoint"
+},
+"doc://AuthFoundation/documentation/AuthFoundation/OpenIdConfiguration/ProviderMetadata/introspectionEndpointAuthMethodsSupported": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "case"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "introspectionEndpointAuthMethodsSupported"
+    }
+  ],
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/OpenIdConfiguration\/ProviderMetadata\/introspectionEndpointAuthMethodsSupported",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "OpenIdConfiguration.ProviderMetadata.introspectionEndpointAuthMethodsSupported",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/openidconfiguration\/providermetadata\/introspectionendpointauthmethodssupported"
+},
+"doc://AuthFoundation/documentation/AuthFoundation/OpenIdConfiguration/ProviderMetadata/issuer": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "case"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "issuer"
+    }
+  ],
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/OpenIdConfiguration\/ProviderMetadata\/issuer",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "OpenIdConfiguration.ProviderMetadata.issuer",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/openidconfiguration\/providermetadata\/issuer"
+},
+"doc://AuthFoundation/documentation/AuthFoundation/OpenIdConfiguration/ProviderMetadata/jwksUri": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "case"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "jwksUri"
+    }
+  ],
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/OpenIdConfiguration\/ProviderMetadata\/jwksUri",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "OpenIdConfiguration.ProviderMetadata.jwksUri",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/openidconfiguration\/providermetadata\/jwksuri"
+},
+"doc://AuthFoundation/documentation/AuthFoundation/OpenIdConfiguration/ProviderMetadata/opPolicyUri": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "case"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "opPolicyUri"
+    }
+  ],
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/OpenIdConfiguration\/ProviderMetadata\/opPolicyUri",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "OpenIdConfiguration.ProviderMetadata.opPolicyUri",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/openidconfiguration\/providermetadata\/oppolicyuri"
+},
+"doc://AuthFoundation/documentation/AuthFoundation/OpenIdConfiguration/ProviderMetadata/opTosUri": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "case"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "opTosUri"
+    }
+  ],
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/OpenIdConfiguration\/ProviderMetadata\/opTosUri",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "OpenIdConfiguration.ProviderMetadata.opTosUri",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/openidconfiguration\/providermetadata\/optosuri"
+},
+"doc://AuthFoundation/documentation/AuthFoundation/OpenIdConfiguration/ProviderMetadata/registrationEndpoint": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "case"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "registrationEndpoint"
+    }
+  ],
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/OpenIdConfiguration\/ProviderMetadata\/registrationEndpoint",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "OpenIdConfiguration.ProviderMetadata.registrationEndpoint",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/openidconfiguration\/providermetadata\/registrationendpoint"
+},
+"doc://AuthFoundation/documentation/AuthFoundation/OpenIdConfiguration/ProviderMetadata/requestObjectEncryptionAlgValuesSupported": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "case"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "requestObjectEncryptionAlgValuesSupported"
+    }
+  ],
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/OpenIdConfiguration\/ProviderMetadata\/requestObjectEncryptionAlgValuesSupported",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "OpenIdConfiguration.ProviderMetadata.requestObjectEncryptionAlgValuesSupported",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/openidconfiguration\/providermetadata\/requestobjectencryptionalgvaluessupported"
+},
+"doc://AuthFoundation/documentation/AuthFoundation/OpenIdConfiguration/ProviderMetadata/requestObjectEncryptionEncValuesSupported": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "case"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "requestObjectEncryptionEncValuesSupported"
+    }
+  ],
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/OpenIdConfiguration\/ProviderMetadata\/requestObjectEncryptionEncValuesSupported",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "OpenIdConfiguration.ProviderMetadata.requestObjectEncryptionEncValuesSupported",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/openidconfiguration\/providermetadata\/requestobjectencryptionencvaluessupported"
+},
+"doc://AuthFoundation/documentation/AuthFoundation/OpenIdConfiguration/ProviderMetadata/requestObjectSigningAlgValuesSupported": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "case"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "requestObjectSigningAlgValuesSupported"
+    }
+  ],
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/OpenIdConfiguration\/ProviderMetadata\/requestObjectSigningAlgValuesSupported",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "OpenIdConfiguration.ProviderMetadata.requestObjectSigningAlgValuesSupported",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/openidconfiguration\/providermetadata\/requestobjectsigningalgvaluessupported"
+},
+"doc://AuthFoundation/documentation/AuthFoundation/OpenIdConfiguration/ProviderMetadata/requestParameterSupported": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "case"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "requestParameterSupported"
+    }
+  ],
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/OpenIdConfiguration\/ProviderMetadata\/requestParameterSupported",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "OpenIdConfiguration.ProviderMetadata.requestParameterSupported",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/openidconfiguration\/providermetadata\/requestparametersupported"
+},
+"doc://AuthFoundation/documentation/AuthFoundation/OpenIdConfiguration/ProviderMetadata/requestUriParameterSupported": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "case"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "requestUriParameterSupported"
+    }
+  ],
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/OpenIdConfiguration\/ProviderMetadata\/requestUriParameterSupported",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "OpenIdConfiguration.ProviderMetadata.requestUriParameterSupported",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/openidconfiguration\/providermetadata\/requesturiparametersupported"
+},
+"doc://AuthFoundation/documentation/AuthFoundation/OpenIdConfiguration/ProviderMetadata/requireRequestUriRegistration": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "case"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "requireRequestUriRegistration"
+    }
+  ],
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/OpenIdConfiguration\/ProviderMetadata\/requireRequestUriRegistration",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "OpenIdConfiguration.ProviderMetadata.requireRequestUriRegistration",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/openidconfiguration\/providermetadata\/requirerequesturiregistration"
+},
+"doc://AuthFoundation/documentation/AuthFoundation/OpenIdConfiguration/ProviderMetadata/responseModesSupported": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "case"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "responseModesSupported"
+    }
+  ],
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/OpenIdConfiguration\/ProviderMetadata\/responseModesSupported",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "OpenIdConfiguration.ProviderMetadata.responseModesSupported",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/openidconfiguration\/providermetadata\/responsemodessupported"
+},
+"doc://AuthFoundation/documentation/AuthFoundation/OpenIdConfiguration/ProviderMetadata/responseTypesSupported": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "case"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "responseTypesSupported"
+    }
+  ],
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/OpenIdConfiguration\/ProviderMetadata\/responseTypesSupported",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "OpenIdConfiguration.ProviderMetadata.responseTypesSupported",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/openidconfiguration\/providermetadata\/responsetypessupported"
+},
+"doc://AuthFoundation/documentation/AuthFoundation/OpenIdConfiguration/ProviderMetadata/revocationEndpoint": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "case"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "revocationEndpoint"
+    }
+  ],
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/OpenIdConfiguration\/ProviderMetadata\/revocationEndpoint",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "OpenIdConfiguration.ProviderMetadata.revocationEndpoint",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/openidconfiguration\/providermetadata\/revocationendpoint"
+},
+"doc://AuthFoundation/documentation/AuthFoundation/OpenIdConfiguration/ProviderMetadata/revocationEndpointAuthMethodsSupported": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "case"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "revocationEndpointAuthMethodsSupported"
+    }
+  ],
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/OpenIdConfiguration\/ProviderMetadata\/revocationEndpointAuthMethodsSupported",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "OpenIdConfiguration.ProviderMetadata.revocationEndpointAuthMethodsSupported",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/openidconfiguration\/providermetadata\/revocationendpointauthmethodssupported"
+},
+"doc://AuthFoundation/documentation/AuthFoundation/OpenIdConfiguration/ProviderMetadata/scopesSupported": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "case"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "scopesSupported"
+    }
+  ],
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/OpenIdConfiguration\/ProviderMetadata\/scopesSupported",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "OpenIdConfiguration.ProviderMetadata.scopesSupported",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/openidconfiguration\/providermetadata\/scopessupported"
+},
+"doc://AuthFoundation/documentation/AuthFoundation/OpenIdConfiguration/ProviderMetadata/serviceDocumentation": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "case"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "serviceDocumentation"
+    }
+  ],
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/OpenIdConfiguration\/ProviderMetadata\/serviceDocumentation",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "OpenIdConfiguration.ProviderMetadata.serviceDocumentation",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/openidconfiguration\/providermetadata\/servicedocumentation"
+},
+"doc://AuthFoundation/documentation/AuthFoundation/OpenIdConfiguration/ProviderMetadata/subjectTypesSupported": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "case"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "subjectTypesSupported"
+    }
+  ],
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/OpenIdConfiguration\/ProviderMetadata\/subjectTypesSupported",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "OpenIdConfiguration.ProviderMetadata.subjectTypesSupported",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/openidconfiguration\/providermetadata\/subjecttypessupported"
+},
+"doc://AuthFoundation/documentation/AuthFoundation/OpenIdConfiguration/ProviderMetadata/tokenEndpoint": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "case"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "tokenEndpoint"
+    }
+  ],
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/OpenIdConfiguration\/ProviderMetadata\/tokenEndpoint",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "OpenIdConfiguration.ProviderMetadata.tokenEndpoint",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/openidconfiguration\/providermetadata\/tokenendpoint"
+},
+"doc://AuthFoundation/documentation/AuthFoundation/OpenIdConfiguration/ProviderMetadata/tokenEndpointAuthMethodsSupported": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "case"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "tokenEndpointAuthMethodsSupported"
+    }
+  ],
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/OpenIdConfiguration\/ProviderMetadata\/tokenEndpointAuthMethodsSupported",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "OpenIdConfiguration.ProviderMetadata.tokenEndpointAuthMethodsSupported",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/openidconfiguration\/providermetadata\/tokenendpointauthmethodssupported"
+},
+"doc://AuthFoundation/documentation/AuthFoundation/OpenIdConfiguration/ProviderMetadata/tokenEndpointAuthSigningAlgValuesSupported": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "case"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "tokenEndpointAuthSigningAlgValuesSupported"
+    }
+  ],
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/OpenIdConfiguration\/ProviderMetadata\/tokenEndpointAuthSigningAlgValuesSupported",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "OpenIdConfiguration.ProviderMetadata.tokenEndpointAuthSigningAlgValuesSupported",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/openidconfiguration\/providermetadata\/tokenendpointauthsigningalgvaluessupported"
+},
+"doc://AuthFoundation/documentation/AuthFoundation/OpenIdConfiguration/ProviderMetadata/uiLocalesSupported": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "case"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "uiLocalesSupported"
+    }
+  ],
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/OpenIdConfiguration\/ProviderMetadata\/uiLocalesSupported",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "OpenIdConfiguration.ProviderMetadata.uiLocalesSupported",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/openidconfiguration\/providermetadata\/uilocalessupported"
+},
+"doc://AuthFoundation/documentation/AuthFoundation/OpenIdConfiguration/ProviderMetadata/userinfoEncryptionAlgValuesSupported": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "case"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "userinfoEncryptionAlgValuesSupported"
+    }
+  ],
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/OpenIdConfiguration\/ProviderMetadata\/userinfoEncryptionAlgValuesSupported",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "OpenIdConfiguration.ProviderMetadata.userinfoEncryptionAlgValuesSupported",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/openidconfiguration\/providermetadata\/userinfoencryptionalgvaluessupported"
+},
+"doc://AuthFoundation/documentation/AuthFoundation/OpenIdConfiguration/ProviderMetadata/userinfoEncryptionEncValuesSupported": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "case"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "userinfoEncryptionEncValuesSupported"
+    }
+  ],
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/OpenIdConfiguration\/ProviderMetadata\/userinfoEncryptionEncValuesSupported",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "OpenIdConfiguration.ProviderMetadata.userinfoEncryptionEncValuesSupported",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/openidconfiguration\/providermetadata\/userinfoencryptionencvaluessupported"
+},
+"doc://AuthFoundation/documentation/AuthFoundation/OpenIdConfiguration/ProviderMetadata/userinfoEndpoint": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "case"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "userinfoEndpoint"
+    }
+  ],
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/OpenIdConfiguration\/ProviderMetadata\/userinfoEndpoint",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "OpenIdConfiguration.ProviderMetadata.userinfoEndpoint",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/openidconfiguration\/providermetadata\/userinfoendpoint"
+},
+"doc://AuthFoundation/documentation/AuthFoundation/OpenIdConfiguration/ProviderMetadata/userinfoSigningAlgValuesSupported": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "case"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "userinfoSigningAlgValuesSupported"
+    }
+  ],
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/OpenIdConfiguration\/ProviderMetadata\/userinfoSigningAlgValuesSupported",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "OpenIdConfiguration.ProviderMetadata.userinfoSigningAlgValuesSupported",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/openidconfiguration\/providermetadata\/userinfosigningalgvaluessupported"
+},
+"doc://AuthFoundation/s23CustomStringConvertibleP": {
+  "identifier" : "doc:\/\/AuthFoundation\/s23CustomStringConvertibleP",
+  "title" : "Swift.CustomStringConvertible",
+  "type" : "unresolvable"
+},
+"doc://AuthFoundation/s28CustomDebugStringConvertibleP": {
+  "identifier" : "doc:\/\/AuthFoundation\/s28CustomDebugStringConvertibleP",
+  "title" : "Swift.CustomDebugStringConvertible",
+  "type" : "unresolvable"
+},
+"doc://AuthFoundation/s8SendableP": {
+  "identifier" : "doc:\/\/AuthFoundation\/s8SendableP",
+  "title" : "Swift.Sendable",
+  "type" : "unresolvable"
+},
+"doc://AuthFoundation/s9CodingKeyP": {
+  "identifier" : "doc:\/\/AuthFoundation\/s9CodingKeyP",
+  "title" : "Swift.CodingKey",
+  "type" : "unresolvable"
+}
+}
+}

@@ -111,7 +111,8 @@
         "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/TokenStorage",
         "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JWKValidator",
         "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/TokenHashValidator",
-        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/IDTokenValidator"
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/IDTokenValidator",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/IDTokenValidatorContext"
       ],
       "title" : "Customizations"
     }
@@ -374,6 +375,40 @@
   "title" : "IDTokenValidator",
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/idtokenvalidator"
+},
+"doc://AuthFoundation/documentation/AuthFoundation/IDTokenValidatorContext": {
+  "abstract" : [
+    {
+      "text" : "Protocol used to supply contextual information to a validator.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "protocol"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "IDTokenValidatorContext"
+    }
+  ],
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/IDTokenValidatorContext",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "IDTokenValidatorContext"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "IDTokenValidatorContext",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/idtokenvalidatorcontext"
 },
 "doc://AuthFoundation/documentation/AuthFoundation/JWKValidator": {
   "abstract" : [

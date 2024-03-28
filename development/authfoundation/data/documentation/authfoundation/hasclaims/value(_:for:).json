@@ -1,7 +1,7 @@
 {
   "abstract" : [
     {
-      "text" : "Return the value of the requested claim, for the given type.",
+      "text" : "Returns a claim value from this JWT token, with the given key and expected return type.",
       "type" : "text"
     }
   ],
@@ -19,7 +19,8 @@
   },
   "kind" : "symbol",
   "metadata" : {
-    "externalID" : "s:14AuthFoundation9HasClaimsP5value_3forqd__Sgqd__m_SStlF",
+    "extendedModule" : "AuthFoundation",
+    "externalID" : "s:14AuthFoundation9HasClaimsPAAE5value_3forqd__Sgqd__m_SStAA16ClaimConvertableRd__lF",
     "fragments" : [
       {
         "kind" : "keyword",
@@ -84,7 +85,6 @@
         "name" : "AuthFoundation"
       }
     ],
-    "required" : true,
     "role" : "symbol",
     "roleHeading" : "Instance Method",
     "symbolKind" : "method",
@@ -180,12 +180,54 @@
             },
             {
               "kind" : "text",
-              "text" : "?"
+              "text" : "? "
+            },
+            {
+              "kind" : "keyword",
+              "text" : "where"
+            },
+            {
+              "kind" : "text",
+              "text" : " "
+            },
+            {
+              "kind" : "typeIdentifier",
+              "text" : "T"
+            },
+            {
+              "kind" : "text",
+              "text" : " : "
+            },
+            {
+              "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/ClaimConvertable",
+              "kind" : "typeIdentifier",
+              "preciseIdentifier" : "s:14AuthFoundation16ClaimConvertableP",
+              "text" : "ClaimConvertable"
             }
           ]
         }
       ],
       "kind" : "declarations"
+    },
+    {
+      "content" : [
+        {
+          "anchor" : "return-value",
+          "level" : 2,
+          "text" : "Return Value",
+          "type" : "heading"
+        },
+        {
+          "inlineContent" : [
+            {
+              "text" : "The value for the supplied claim.",
+              "type" : "text"
+            }
+          ],
+          "type" : "paragraph"
+        }
+      ],
+      "kind" : "content"
     }
   ],
   "schemaVersion" : {
@@ -224,6 +266,49 @@
   "type" : "topic",
   "url" : "\/documentation\/authfoundation"
 },
+"doc://AuthFoundation/documentation/AuthFoundation/ClaimConvertable": {
+  "abstract" : [
+    {
+      "text" : "Indicates a type can be consumed from a ",
+      "type" : "text"
+    },
+    {
+      "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/HasClaims",
+      "isActive" : true,
+      "type" : "reference"
+    },
+    {
+      "text" : " object and converted to the indicated type.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "protocol"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "ClaimConvertable"
+    }
+  ],
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/ClaimConvertable",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "ClaimConvertable"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "ClaimConvertable",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/claimconvertable"
+},
 "doc://AuthFoundation/documentation/AuthFoundation/HasClaims": {
   "abstract" : [
     {
@@ -261,7 +346,7 @@
 "doc://AuthFoundation/documentation/AuthFoundation/HasClaims/value(_:for:)": {
   "abstract" : [
     {
-      "text" : "Return the value of the requested claim, for the given type.",
+      "text" : "Returns a claim value from this JWT token, with the given key and expected return type.",
       "type" : "text"
     }
   ],
@@ -326,7 +411,6 @@
   ],
   "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/HasClaims\/value(_:for:)",
   "kind" : "symbol",
-  "required" : true,
   "role" : "symbol",
   "title" : "value(_:for:)",
   "type" : "topic",

@@ -88,7 +88,34 @@
         {
           "inlineContent" : [
             {
-              "text" : "The values exposed from this configuration are typically used during authentication, or when querying a server for its capabilities.",
+              "text" : "The values exposed from this configuration are typically used during authentication, or when querying a server for its capabilities. This type uses ",
+              "type" : "text"
+            },
+            {
+              "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/HasClaims",
+              "isActive" : true,
+              "type" : "reference"
+            },
+            {
+              "text" : " to represent the various provider metadata (represented as ",
+              "type" : "text"
+            },
+            {
+              "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/OpenIdConfiguration\/ProviderMetadata",
+              "isActive" : true,
+              "type" : "reference"
+            },
+            {
+              "text" : ") for returning the full contents of the server’s configuration. For more information, please refer to the ",
+              "type" : "text"
+            },
+            {
+              "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/WorkingWithClaims",
+              "isActive" : true,
+              "type" : "reference"
+            },
+            {
+              "text" : " documentation.",
               "type" : "text"
             }
           ],
@@ -101,6 +128,8 @@
   "relationshipsSections" : [
     {
       "identifiers" : [
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/HasClaims",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JSONClaimContainer",
         "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JSONDecodable",
         "doc:\/\/AuthFoundation\/Se",
         "doc:\/\/AuthFoundation\/SE"
@@ -124,6 +153,7 @@
       "identifiers" : [
         "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/OAuth2Client",
         "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/OAuth2ClientDelegate",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/AuthenticationMethod",
         "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/AuthenticationFlow",
         "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/AuthenticationDelegate",
         "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/OAuth2TokenRequest",
@@ -147,9 +177,11 @@
         "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/OpenIdConfiguration\/deviceAuthorizationEndpoint",
         "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/OpenIdConfiguration\/endSessionEndpoint",
         "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/OpenIdConfiguration\/grantTypesSupported",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/OpenIdConfiguration\/idTokenSigningAlgValuesSupported",
         "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/OpenIdConfiguration\/introspectionEndpoint",
         "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/OpenIdConfiguration\/issuer",
         "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/OpenIdConfiguration\/jwksUri",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/OpenIdConfiguration\/payload",
         "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/OpenIdConfiguration\/registrationEndpoint",
         "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/OpenIdConfiguration\/responseModesSupported",
         "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/OpenIdConfiguration\/responseTypesSupported",
@@ -163,9 +195,29 @@
     },
     {
       "identifiers" : [
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/OpenIdConfiguration\/ClaimType"
+      ],
+      "title" : "Type Aliases"
+    },
+    {
+      "identifiers" : [
         "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/OpenIdConfiguration\/jsonDecoder"
       ],
       "title" : "Type Properties"
+    },
+    {
+      "identifiers" : [
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/OpenIdConfiguration\/ProviderMetadata"
+      ],
+      "title" : "Enumerations"
+    },
+    {
+      "generated" : true,
+      "identifiers" : [
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/OpenIdConfiguration\/HasClaims-Implementations",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/OpenIdConfiguration\/JSONClaimContainer-Implementations"
+      ],
+      "title" : "Default Implementations"
     }
   ],
   "variants" : [
@@ -308,6 +360,49 @@
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/authenticationflow"
 },
+"doc://AuthFoundation/documentation/AuthFoundation/AuthenticationMethod": {
+  "abstract" : [
+    {
+      "text" : "Defines the possible values for Authentication Methods, used within ",
+      "type" : "text"
+    },
+    {
+      "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JWT\/authenticationMethods",
+      "isActive" : true,
+      "type" : "reference"
+    },
+    {
+      "text" : ".",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "enum"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "AuthenticationMethod"
+    }
+  ],
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/AuthenticationMethod",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "AuthenticationMethod"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "AuthenticationMethod",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/authenticationmethod"
+},
 "doc://AuthFoundation/documentation/AuthFoundation/GrantType": {
   "abstract" : [
 
@@ -339,6 +434,74 @@
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/granttype"
 },
+"doc://AuthFoundation/documentation/AuthFoundation/HasClaims": {
+  "abstract" : [
+    {
+      "text" : "Used by classes that contains OAuth2 claims.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "protocol"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "HasClaims"
+    }
+  ],
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/HasClaims",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "HasClaims"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "HasClaims",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/hasclaims"
+},
+"doc://AuthFoundation/documentation/AuthFoundation/JSONClaimContainer": {
+  "abstract" : [
+    {
+      "text" : "Protocol used to define shared behavior when an object can contain claims.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "protocol"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "JSONClaimContainer"
+    }
+  ],
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JSONClaimContainer",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "JSONClaimContainer"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "JSONClaimContainer",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/jsonclaimcontainer"
+},
 "doc://AuthFoundation/documentation/AuthFoundation/JSONDecodable": {
   "abstract" : [
 
@@ -369,6 +532,47 @@
   "title" : "JSONDecodable",
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/jsondecodable"
+},
+"doc://AuthFoundation/documentation/AuthFoundation/JWT/authenticationMethods": {
+  "abstract" : [
+    {
+      "text" : "The list of authentication methods included in this token, which defines the list of methods that were used to authenticate the user.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "var"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "authenticationMethods"
+    },
+    {
+      "kind" : "text",
+      "text" : ": ["
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:14AuthFoundation20AuthenticationMethodO",
+      "text" : "AuthenticationMethod"
+    },
+    {
+      "kind" : "text",
+      "text" : "]?"
+    }
+  ],
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JWT\/authenticationMethods",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "authenticationMethods",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/jwt\/authenticationmethods"
 },
 "doc://AuthFoundation/documentation/AuthFoundation/OAuth2Client": {
   "abstract" : [
@@ -524,9 +728,108 @@
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/openidconfiguration"
 },
-"doc://AuthFoundation/documentation/AuthFoundation/OpenIdConfiguration/authorizationEndpoint": {
+"doc://AuthFoundation/documentation/AuthFoundation/OpenIdConfiguration/ClaimType": {
   "abstract" : [
 
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "typealias"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "ClaimType"
+    }
+  ],
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/OpenIdConfiguration\/ClaimType",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "ClaimType"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "OpenIdConfiguration.ClaimType",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/openidconfiguration\/claimtype"
+},
+"doc://AuthFoundation/documentation/AuthFoundation/OpenIdConfiguration/HasClaims-Implementations": {
+  "abstract" : [
+
+  ],
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/OpenIdConfiguration\/HasClaims-Implementations",
+  "kind" : "article",
+  "role" : "collectionGroup",
+  "title" : "HasClaims Implementations",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/openidconfiguration\/hasclaims-implementations"
+},
+"doc://AuthFoundation/documentation/AuthFoundation/OpenIdConfiguration/JSONClaimContainer-Implementations": {
+  "abstract" : [
+
+  ],
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/OpenIdConfiguration\/JSONClaimContainer-Implementations",
+  "kind" : "article",
+  "role" : "collectionGroup",
+  "title" : "JSONClaimContainer Implementations",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/openidconfiguration\/jsonclaimcontainer-implementations"
+},
+"doc://AuthFoundation/documentation/AuthFoundation/OpenIdConfiguration/ProviderMetadata": {
+  "abstract" : [
+    {
+      "text" : "Defines the metadata claims available within an ",
+      "type" : "text"
+    },
+    {
+      "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/OpenIdConfiguration",
+      "isActive" : true,
+      "type" : "reference"
+    },
+    {
+      "text" : ".",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "enum"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "ProviderMetadata"
+    }
+  ],
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/OpenIdConfiguration\/ProviderMetadata",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "ProviderMetadata"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "OpenIdConfiguration.ProviderMetadata",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/openidconfiguration\/providermetadata"
+},
+"doc://AuthFoundation/documentation/AuthFoundation/OpenIdConfiguration/authorizationEndpoint": {
+  "abstract" : [
+    {
+      "text" : "The URL for this OpenID Provider’s authorization endpoint.",
+      "type" : "text"
+    }
   ],
   "fragments" : [
     {
@@ -565,7 +868,7 @@
   "fragments" : [
     {
       "kind" : "keyword",
-      "text" : "let"
+      "text" : "var"
     },
     {
       "kind" : "text",
@@ -581,12 +884,12 @@
     },
     {
       "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:14AuthFoundation5ClaimO",
-      "text" : "Claim"
+      "preciseIdentifier" : "s:14AuthFoundation8JWTClaimO",
+      "text" : "JWTClaim"
     },
     {
       "kind" : "text",
-      "text" : "]"
+      "text" : "]?"
     }
   ],
   "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/OpenIdConfiguration\/claimsSupported",
@@ -603,7 +906,7 @@
   "fragments" : [
     {
       "kind" : "keyword",
-      "text" : "let"
+      "text" : "var"
     },
     {
       "kind" : "text",
@@ -641,7 +944,7 @@
   "fragments" : [
     {
       "kind" : "keyword",
-      "text" : "let"
+      "text" : "var"
     },
     {
       "kind" : "text",
@@ -679,7 +982,7 @@
   "fragments" : [
     {
       "kind" : "keyword",
-      "text" : "let"
+      "text" : "var"
     },
     {
       "kind" : "text",
@@ -709,6 +1012,56 @@
   "title" : "grantTypesSupported",
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/openidconfiguration\/granttypessupported"
+},
+"doc://AuthFoundation/documentation/AuthFoundation/OpenIdConfiguration/idTokenSigningAlgValuesSupported": {
+  "abstract" : [
+    {
+      "text" : "The list of supported ID token signing algorithms for this OpenID Provider.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "let"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "idTokenSigningAlgValuesSupported"
+    },
+    {
+      "kind" : "text",
+      "text" : ": ["
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:14AuthFoundation3JWKV",
+      "text" : "JWK"
+    },
+    {
+      "kind" : "text",
+      "text" : "."
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:14AuthFoundation3JWKV9AlgorithmO",
+      "text" : "Algorithm"
+    },
+    {
+      "kind" : "text",
+      "text" : "]"
+    }
+  ],
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/OpenIdConfiguration\/idTokenSigningAlgValuesSupported",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "idTokenSigningAlgValuesSupported",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/openidconfiguration\/idtokensigningalgvaluessupported"
 },
 "doc://AuthFoundation/documentation/AuthFoundation/OpenIdConfiguration/init(from:)": {
   "abstract" : [
@@ -759,7 +1112,7 @@
   "fragments" : [
     {
       "kind" : "keyword",
-      "text" : "let"
+      "text" : "var"
     },
     {
       "kind" : "text",
@@ -792,7 +1145,10 @@
 },
 "doc://AuthFoundation/documentation/AuthFoundation/OpenIdConfiguration/issuer": {
   "abstract" : [
-
+    {
+      "text" : "The issuer URL for this OpenID provider.",
+      "type" : "text"
+    }
   ],
   "fragments" : [
     {
@@ -868,7 +1224,10 @@
 },
 "doc://AuthFoundation/documentation/AuthFoundation/OpenIdConfiguration/jwksUri": {
   "abstract" : [
-
+    {
+      "text" : "The URL for this OpenID Provider’s JWKS endpoint.",
+      "type" : "text"
+    }
   ],
   "fragments" : [
     {
@@ -900,6 +1259,55 @@
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/openidconfiguration\/jwksuri"
 },
+"doc://AuthFoundation/documentation/AuthFoundation/OpenIdConfiguration/payload": {
+  "abstract" : [
+    {
+      "text" : "The raw payload of provider metadata claims returned from the OpenID Provider.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "let"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "payload"
+    },
+    {
+      "kind" : "text",
+      "text" : ": ["
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:SS",
+      "text" : "String"
+    },
+    {
+      "kind" : "text",
+      "text" : " : "
+    },
+    {
+      "kind" : "keyword",
+      "text" : "Any"
+    },
+    {
+      "kind" : "text",
+      "text" : "]"
+    }
+  ],
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/OpenIdConfiguration\/payload",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "payload",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/openidconfiguration\/payload"
+},
 "doc://AuthFoundation/documentation/AuthFoundation/OpenIdConfiguration/registrationEndpoint": {
   "abstract" : [
 
@@ -907,7 +1315,7 @@
   "fragments" : [
     {
       "kind" : "keyword",
-      "text" : "let"
+      "text" : "var"
     },
     {
       "kind" : "text",
@@ -945,7 +1353,7 @@
   "fragments" : [
     {
       "kind" : "keyword",
-      "text" : "let"
+      "text" : "var"
     },
     {
       "kind" : "text",
@@ -978,7 +1386,10 @@
 },
 "doc://AuthFoundation/documentation/AuthFoundation/OpenIdConfiguration/responseTypesSupported": {
   "abstract" : [
-
+    {
+      "text" : "The list of supported response types for this OpenID Provider.",
+      "type" : "text"
+    }
   ],
   "fragments" : [
     {
@@ -1021,7 +1432,7 @@
   "fragments" : [
     {
       "kind" : "keyword",
-      "text" : "let"
+      "text" : "var"
     },
     {
       "kind" : "text",
@@ -1039,6 +1450,10 @@
       "kind" : "typeIdentifier",
       "preciseIdentifier" : "s:10Foundation3URLV",
       "text" : "URL"
+    },
+    {
+      "kind" : "text",
+      "text" : "?"
     }
   ],
   "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/OpenIdConfiguration\/revocationEndpoint",
@@ -1055,7 +1470,7 @@
   "fragments" : [
     {
       "kind" : "keyword",
-      "text" : "let"
+      "text" : "var"
     },
     {
       "kind" : "text",
@@ -1088,7 +1503,10 @@
 },
 "doc://AuthFoundation/documentation/AuthFoundation/OpenIdConfiguration/subjectTypesSupported": {
   "abstract" : [
-
+    {
+      "text" : "The list of supported subject types for this OpenID Provider.",
+      "type" : "text"
+    }
   ],
   "fragments" : [
     {
@@ -1126,7 +1544,10 @@
 },
 "doc://AuthFoundation/documentation/AuthFoundation/OpenIdConfiguration/tokenEndpoint": {
   "abstract" : [
-
+    {
+      "text" : "The URL for this OpenID Provider’s token endpoint.",
+      "type" : "text"
+    }
   ],
   "fragments" : [
     {
@@ -1165,7 +1586,7 @@
   "fragments" : [
     {
       "kind" : "keyword",
-      "text" : "let"
+      "text" : "var"
     },
     {
       "kind" : "text",
@@ -1229,6 +1650,20 @@
   "title" : "PKCE",
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/pkce"
+},
+"doc://AuthFoundation/documentation/AuthFoundation/WorkingWithClaims": {
+  "abstract" : [
+    {
+      "text" : "Using Claims on the various types included in OIDC and AuthFoundation.",
+      "type" : "text"
+    }
+  ],
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/WorkingWithClaims",
+  "kind" : "article",
+  "role" : "article",
+  "title" : "Working with Claims",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/workingwithclaims"
 }
 }
 }

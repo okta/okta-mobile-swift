@@ -118,6 +118,9 @@
         "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/APIRequestArgument",
         "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/APIRequestMethod",
         "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/APIResponse",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/APIResponseResult",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/APIRateLimit",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/APIRetry",
         "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/APIAuthorization",
         "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/APIParsingContext",
         "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/OAuth2APIRequest",
@@ -394,6 +397,40 @@
   "title" : "APIParsingContext",
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/apiparsingcontext"
+},
+"doc://AuthFoundation/documentation/AuthFoundation/APIRateLimit": {
+  "abstract" : [
+    {
+      "text" : "Describes information related to the organization’s current rate limit.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "struct"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "APIRateLimit"
+    }
+  ],
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/APIRateLimit",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "APIRateLimit"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "APIRateLimit",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/apiratelimit"
 },
 "doc://AuthFoundation/documentation/AuthFoundation/APIRequest": {
   "abstract" : [
@@ -699,6 +736,74 @@
   "title" : "APIResponse",
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/apiresponse"
+},
+"doc://AuthFoundation/documentation/AuthFoundation/APIResponseResult": {
+  "abstract" : [
+    {
+      "text" : "Defines the possible results for an API request.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "enum"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "APIResponseResult"
+    }
+  ],
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/APIResponseResult",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "APIResponseResult"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "APIResponseResult",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/apiresponseresult"
+},
+"doc://AuthFoundation/documentation/AuthFoundation/APIRetry": {
+  "abstract" : [
+    {
+      "text" : "List of retry options",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "enum"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "APIRetry"
+    }
+  ],
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/APIRetry",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "APIRetry"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "APIRetry",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/apiretry"
 },
 "doc://AuthFoundation/documentation/AuthFoundation/Empty": {
   "abstract" : [

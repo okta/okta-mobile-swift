@@ -1,12 +1,22 @@
 {
   "abstract" : [
     {
-      "text" : "Inherited from ",
+      "text" : "All claims, across both standard ",
       "type" : "text"
     },
     {
-      "code" : "HasClaims.allClaims",
-      "type" : "codeVoice"
+      "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JWT\/claims",
+      "isActive" : true,
+      "type" : "reference"
+    },
+    {
+      "text" : " and ",
+      "type" : "text"
+    },
+    {
+      "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JWT\/customClaims",
+      "isActive" : true,
+      "type" : "reference"
     },
     {
       "text" : ".",
@@ -200,7 +210,28 @@
 },
 "doc://AuthFoundation/documentation/AuthFoundation/JWT/allClaims": {
   "abstract" : [
-
+    {
+      "text" : "All claims, across both standard ",
+      "type" : "text"
+    },
+    {
+      "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JWT\/claims",
+      "isActive" : true,
+      "type" : "reference"
+    },
+    {
+      "text" : " and ",
+      "type" : "text"
+    },
+    {
+      "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JWT\/customClaims",
+      "isActive" : true,
+      "type" : "reference"
+    },
+    {
+      "text" : ".",
+      "type" : "text"
+    }
   ],
   "fragments" : [
     {
@@ -235,6 +266,95 @@
   "title" : "allClaims",
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/jwt\/allclaims"
+},
+"doc://AuthFoundation/documentation/AuthFoundation/JWT/claims": {
+  "abstract" : [
+    {
+      "text" : "The list of standard claims contained within this JWT token.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "var"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "claims"
+    },
+    {
+      "kind" : "text",
+      "text" : ": ["
+    },
+    {
+      "kind" : "typeIdentifier",
+      "text" : "Self"
+    },
+    {
+      "kind" : "text",
+      "text" : "."
+    },
+    {
+      "kind" : "typeIdentifier",
+      "text" : "ClaimType"
+    },
+    {
+      "kind" : "text",
+      "text" : "]"
+    }
+  ],
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JWT\/claims",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "claims",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/jwt\/claims"
+},
+"doc://AuthFoundation/documentation/AuthFoundation/JWT/customClaims": {
+  "abstract" : [
+    {
+      "text" : "The list of custom claims contained within this JWT token.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "var"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "customClaims"
+    },
+    {
+      "kind" : "text",
+      "text" : ": ["
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:SS",
+      "text" : "String"
+    },
+    {
+      "kind" : "text",
+      "text" : "]"
+    }
+  ],
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JWT\/customClaims",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "customClaims",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/jwt\/customclaims"
 }
 }
 }

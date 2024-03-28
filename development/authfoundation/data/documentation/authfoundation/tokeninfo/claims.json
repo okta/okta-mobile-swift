@@ -1,16 +1,7 @@
 {
   "abstract" : [
     {
-      "text" : "Returns the list of all claims contained within this ",
-      "type" : "text"
-    },
-    {
-      "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/UserInfo",
-      "isActive" : true,
-      "type" : "reference"
-    },
-    {
-      "text" : ".",
+      "text" : "The list of standard claims contained within this JWT token.",
       "type" : "text"
     }
   ],
@@ -19,7 +10,7 @@
       [
         "doc:\/\/AuthFoundation\/documentation\/AuthFoundation",
         "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/TokenInfo",
-        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/TokenInfo\/ClaimContainer-Implementations"
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/TokenInfo\/HasClaims-Implementations"
       ]
     ]
   },
@@ -30,7 +21,7 @@
   "kind" : "symbol",
   "metadata" : {
     "extendedModule" : "AuthFoundation",
-    "externalID" : "s:14AuthFoundation14ClaimContainerPAAE6claimsSayAA0C0OGvp::SYNTHESIZED::s:14AuthFoundation9TokenInfoV",
+    "externalID" : "s:14AuthFoundation9HasClaimsPAAE6claimsSay9ClaimTypeQzGvp::SYNTHESIZED::s:14AuthFoundation9TokenInfoV",
     "fragments" : [
       {
         "kind" : "keyword",
@@ -50,8 +41,15 @@
       },
       {
         "kind" : "typeIdentifier",
-        "preciseIdentifier" : "s:14AuthFoundation5ClaimO",
-        "text" : "Claim"
+        "text" : "Self"
+      },
+      {
+        "kind" : "text",
+        "text" : "."
+      },
+      {
+        "kind" : "typeIdentifier",
+        "text" : "ClaimType"
       },
       {
         "kind" : "text",
@@ -96,10 +94,16 @@
               "text" : ": ["
             },
             {
-              "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/Claim",
               "kind" : "typeIdentifier",
-              "preciseIdentifier" : "s:14AuthFoundation5ClaimO",
-              "text" : "Claim"
+              "text" : "Self"
+            },
+            {
+              "kind" : "text",
+              "text" : "."
+            },
+            {
+              "kind" : "typeIdentifier",
+              "text" : "ClaimType"
             },
             {
               "kind" : "text",
@@ -155,40 +159,6 @@
   "type" : "topic",
   "url" : "\/documentation\/authfoundation"
 },
-"doc://AuthFoundation/documentation/AuthFoundation/Claim": {
-  "abstract" : [
-    {
-      "text" : "List of registered and public claims.",
-      "type" : "text"
-    }
-  ],
-  "fragments" : [
-    {
-      "kind" : "keyword",
-      "text" : "enum"
-    },
-    {
-      "kind" : "text",
-      "text" : " "
-    },
-    {
-      "kind" : "identifier",
-      "text" : "Claim"
-    }
-  ],
-  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/Claim",
-  "kind" : "symbol",
-  "navigatorTitle" : [
-    {
-      "kind" : "identifier",
-      "text" : "Claim"
-    }
-  ],
-  "role" : "symbol",
-  "title" : "Claim",
-  "type" : "topic",
-  "url" : "\/documentation\/authfoundation\/claim"
-},
 "doc://AuthFoundation/documentation/AuthFoundation/TokenInfo": {
   "abstract" : [
     {
@@ -223,30 +193,21 @@
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/tokeninfo"
 },
-"doc://AuthFoundation/documentation/AuthFoundation/TokenInfo/ClaimContainer-Implementations": {
+"doc://AuthFoundation/documentation/AuthFoundation/TokenInfo/HasClaims-Implementations": {
   "abstract" : [
 
   ],
-  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/TokenInfo\/ClaimContainer-Implementations",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/TokenInfo\/HasClaims-Implementations",
   "kind" : "article",
   "role" : "collectionGroup",
-  "title" : "ClaimContainer Implementations",
+  "title" : "HasClaims Implementations",
   "type" : "topic",
-  "url" : "\/documentation\/authfoundation\/tokeninfo\/claimcontainer-implementations"
+  "url" : "\/documentation\/authfoundation\/tokeninfo\/hasclaims-implementations"
 },
 "doc://AuthFoundation/documentation/AuthFoundation/TokenInfo/claims": {
   "abstract" : [
     {
-      "text" : "Returns the list of all claims contained within this ",
-      "type" : "text"
-    },
-    {
-      "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/UserInfo",
-      "isActive" : true,
-      "type" : "reference"
-    },
-    {
-      "text" : ".",
+      "text" : "The list of standard claims contained within this JWT token.",
       "type" : "text"
     }
   ],
@@ -269,8 +230,15 @@
     },
     {
       "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:14AuthFoundation5ClaimO",
-      "text" : "Claim"
+      "text" : "Self"
+    },
+    {
+      "kind" : "text",
+      "text" : "."
+    },
+    {
+      "kind" : "typeIdentifier",
+      "text" : "ClaimType"
     },
     {
       "kind" : "text",
@@ -283,40 +251,6 @@
   "title" : "claims",
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/tokeninfo\/claims"
-},
-"doc://AuthFoundation/documentation/AuthFoundation/UserInfo": {
-  "abstract" : [
-    {
-      "text" : "User profile information.",
-      "type" : "text"
-    }
-  ],
-  "fragments" : [
-    {
-      "kind" : "keyword",
-      "text" : "struct"
-    },
-    {
-      "kind" : "text",
-      "text" : " "
-    },
-    {
-      "kind" : "identifier",
-      "text" : "UserInfo"
-    }
-  ],
-  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/UserInfo",
-  "kind" : "symbol",
-  "navigatorTitle" : [
-    {
-      "kind" : "identifier",
-      "text" : "UserInfo"
-    }
-  ],
-  "role" : "symbol",
-  "title" : "UserInfo",
-  "type" : "topic",
-  "url" : "\/documentation\/authfoundation\/userinfo"
 }
 }
 }

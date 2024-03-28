@@ -1,4 +1,10 @@
 {
+  "abstract" : [
+    {
+      "text" : "The issuer URL for this OpenID provider.",
+      "type" : "text"
+    }
+  ],
   "hierarchy" : {
     "paths" : [
       [
@@ -157,7 +163,10 @@
 },
 "doc://AuthFoundation/documentation/AuthFoundation/OpenIdConfiguration/issuer": {
   "abstract" : [
-
+    {
+      "text" : "The issuer URL for this OpenID provider.",
+      "type" : "text"
+    }
   ],
   "fragments" : [
     {

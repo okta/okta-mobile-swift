@@ -121,7 +121,7 @@
               "type" : "text"
             },
             {
-              "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/Claim\/authContextClassReference",
+              "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JWTClaim\/authContextClassReference",
               "isActive" : true,
               "type" : "reference"
             },
@@ -179,34 +179,6 @@
   "title" : "AuthFoundation",
   "type" : "topic",
   "url" : "\/documentation\/authfoundation"
-},
-"doc://AuthFoundation/documentation/AuthFoundation/Claim/authContextClassReference": {
-  "abstract" : [
-    {
-      "text" : "Authentication Context Class Reference",
-      "type" : "text"
-    }
-  ],
-  "fragments" : [
-    {
-      "kind" : "keyword",
-      "text" : "case"
-    },
-    {
-      "kind" : "text",
-      "text" : " "
-    },
-    {
-      "kind" : "identifier",
-      "text" : "authContextClassReference"
-    }
-  ],
-  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/Claim\/authContextClassReference",
-  "kind" : "symbol",
-  "role" : "symbol",
-  "title" : "Claim.authContextClassReference",
-  "type" : "topic",
-  "url" : "\/documentation\/authfoundation\/claim\/authcontextclassreference"
 },
 "doc://AuthFoundation/documentation/AuthFoundation/JWT": {
   "abstract" : [
@@ -282,6 +254,34 @@
   "title" : "authenticationContext",
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/jwt\/authenticationcontext"
+},
+"doc://AuthFoundation/documentation/AuthFoundation/JWTClaim/authContextClassReference": {
+  "abstract" : [
+    {
+      "text" : "Authentication Context Class Reference",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "case"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "authContextClassReference"
+    }
+  ],
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JWTClaim\/authContextClassReference",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "JWTClaim.authContextClassReference",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/jwtclaim\/authcontextclassreference"
 }
 }
 }

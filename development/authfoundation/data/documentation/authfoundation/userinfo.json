@@ -119,9 +119,8 @@
               "type" : "text"
             },
             {
-              "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/ClaimContainer",
-              "isActive" : true,
-              "type" : "reference"
+              "code" : "ClaimContainer",
+              "type" : "codeVoice"
             },
             {
               "text" : ".",
@@ -137,8 +136,8 @@
   "relationshipsSections" : [
     {
       "identifiers" : [
-        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/ClaimContainer",
         "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/HasClaims",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JSONClaimContainer",
         "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JSONDecodable",
         "doc:\/\/AuthFoundation\/Se",
         "doc:\/\/AuthFoundation\/SE"
@@ -181,10 +180,16 @@
       "title" : "Instance Properties"
     },
     {
+      "identifiers" : [
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/UserInfo\/ClaimType"
+      ],
+      "title" : "Type Aliases"
+    },
+    {
       "generated" : true,
       "identifiers" : [
-        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/UserInfo\/ClaimContainer-Implementations",
         "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/UserInfo\/HasClaims-Implementations",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/UserInfo\/JSONClaimContainer-Implementations",
         "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/UserInfo\/JSONDecodable-Implementations"
       ],
       "title" : "Default Implementations"
@@ -228,40 +233,6 @@
   "type" : "topic",
   "url" : "\/documentation\/authfoundation"
 },
-"doc://AuthFoundation/documentation/AuthFoundation/ClaimContainer": {
-  "abstract" : [
-    {
-      "text" : "Protocol used to define shared behavior when an object can contain claims.",
-      "type" : "text"
-    }
-  ],
-  "fragments" : [
-    {
-      "kind" : "keyword",
-      "text" : "protocol"
-    },
-    {
-      "kind" : "text",
-      "text" : " "
-    },
-    {
-      "kind" : "identifier",
-      "text" : "ClaimContainer"
-    }
-  ],
-  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/ClaimContainer",
-  "kind" : "symbol",
-  "navigatorTitle" : [
-    {
-      "kind" : "identifier",
-      "text" : "ClaimContainer"
-    }
-  ],
-  "role" : "symbol",
-  "title" : "ClaimContainer",
-  "type" : "topic",
-  "url" : "\/documentation\/authfoundation\/claimcontainer"
-},
 "doc://AuthFoundation/documentation/AuthFoundation/HasClaims": {
   "abstract" : [
     {
@@ -295,6 +266,40 @@
   "title" : "HasClaims",
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/hasclaims"
+},
+"doc://AuthFoundation/documentation/AuthFoundation/JSONClaimContainer": {
+  "abstract" : [
+    {
+      "text" : "Protocol used to define shared behavior when an object can contain claims.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "protocol"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "JSONClaimContainer"
+    }
+  ],
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JSONClaimContainer",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "JSONClaimContainer"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "JSONClaimContainer",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/jsonclaimcontainer"
 },
 "doc://AuthFoundation/documentation/AuthFoundation/JSONDecodable": {
   "abstract" : [
@@ -463,16 +468,36 @@
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/userinfo"
 },
-"doc://AuthFoundation/documentation/AuthFoundation/UserInfo/ClaimContainer-Implementations": {
+"doc://AuthFoundation/documentation/AuthFoundation/UserInfo/ClaimType": {
   "abstract" : [
 
   ],
-  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/UserInfo\/ClaimContainer-Implementations",
-  "kind" : "article",
-  "role" : "collectionGroup",
-  "title" : "ClaimContainer Implementations",
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "typealias"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "ClaimType"
+    }
+  ],
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/UserInfo\/ClaimType",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "ClaimType"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "UserInfo.ClaimType",
   "type" : "topic",
-  "url" : "\/documentation\/authfoundation\/userinfo\/claimcontainer-implementations"
+  "url" : "\/documentation\/authfoundation\/userinfo\/claimtype"
 },
 "doc://AuthFoundation/documentation/AuthFoundation/UserInfo/HasClaims-Implementations": {
   "abstract" : [
@@ -484,6 +509,17 @@
   "title" : "HasClaims Implementations",
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/userinfo\/hasclaims-implementations"
+},
+"doc://AuthFoundation/documentation/AuthFoundation/UserInfo/JSONClaimContainer-Implementations": {
+  "abstract" : [
+
+  ],
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/UserInfo\/JSONClaimContainer-Implementations",
+  "kind" : "article",
+  "role" : "collectionGroup",
+  "title" : "JSONClaimContainer Implementations",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/userinfo\/jsonclaimcontainer-implementations"
 },
 "doc://AuthFoundation/documentation/AuthFoundation/UserInfo/JSONDecodable-Implementations": {
   "abstract" : [

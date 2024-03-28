@@ -93,6 +93,16 @@
   "sections" : [
 
   ],
+  "seeAlsoSections" : [
+    {
+      "generated" : true,
+      "identifiers" : [
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/SDKVersion",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/SDKVersionMigrator"
+      ],
+      "title" : "Migration and versioning"
+    }
+  ],
   "variants" : [
     {
       "paths" : [
@@ -151,6 +161,40 @@
   "title" : "SDKVersion",
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/sdkversion"
+},
+"doc://AuthFoundation/documentation/AuthFoundation/SDKVersionMigrator": {
+  "abstract" : [
+    {
+      "text" : "Protocol describing a version migrator.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "protocol"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "SDKVersionMigrator"
+    }
+  ],
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/SDKVersionMigrator",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "SDKVersionMigrator"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "SDKVersionMigrator",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/sdkversionmigrator"
 },
 "doc://AuthFoundation/documentation/AuthFoundation/Version": {
   "abstract" : [

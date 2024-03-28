@@ -13,11 +13,12 @@
   },
   "kind" : "symbol",
   "metadata" : {
-    "externalID" : "s:14AuthFoundation19OpenIdConfigurationV18revocationEndpoint0B03URLVvp",
+    "extendedModule" : "AuthFoundation",
+    "externalID" : "s:14AuthFoundation19OpenIdConfigurationV18revocationEndpoint0B03URLVSgvp",
     "fragments" : [
       {
         "kind" : "keyword",
-        "text" : "let"
+        "text" : "var"
       },
       {
         "kind" : "text",
@@ -35,6 +36,10 @@
         "kind" : "typeIdentifier",
         "preciseIdentifier" : "s:10Foundation3URLV",
         "text" : "URL"
+      },
+      {
+        "kind" : "text",
+        "text" : "?"
       }
     ],
     "modules" : [
@@ -60,7 +65,7 @@
           "tokens" : [
             {
               "kind" : "keyword",
-              "text" : "let"
+              "text" : "var"
             },
             {
               "kind" : "text",
@@ -78,6 +83,18 @@
               "kind" : "typeIdentifier",
               "preciseIdentifier" : "s:10Foundation3URLV",
               "text" : "URL"
+            },
+            {
+              "kind" : "text",
+              "text" : "? { "
+            },
+            {
+              "kind" : "keyword",
+              "text" : "get"
+            },
+            {
+              "kind" : "text",
+              "text" : " }"
             }
           ]
         }
@@ -162,7 +179,7 @@
   "fragments" : [
     {
       "kind" : "keyword",
-      "text" : "let"
+      "text" : "var"
     },
     {
       "kind" : "text",
@@ -180,6 +197,10 @@
       "kind" : "typeIdentifier",
       "preciseIdentifier" : "s:10Foundation3URLV",
       "text" : "URL"
+    },
+    {
+      "kind" : "text",
+      "text" : "?"
     }
   ],
   "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/OpenIdConfiguration\/revocationEndpoint",

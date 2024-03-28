@@ -192,6 +192,11 @@
                 "type" : "groupMarker"
               },
               {
+                "path" : "\/documentation\/authfoundation\/credential\/introspect(_:)",
+                "title" : "func introspect(Token.Kind) async throws -> TokenInfo",
+                "type" : "method"
+              },
+              {
                 "path" : "\/documentation\/authfoundation\/credential\/oauth(client:didrefresh:replacedwith:)",
                 "title" : "func oauth(client: OAuth2Client, didRefresh: Token, replacedWith: Token?)",
                 "type" : "method"
@@ -399,38 +404,17 @@
                     "type" : "property"
                   },
                   {
-                    "title" : "Default Implementations",
+                    "title" : "Type Aliases",
                     "type" : "groupMarker"
                   },
                   {
-                    "children" : [
-                      {
-                        "title" : "Instance Properties",
-                        "type" : "groupMarker"
-                      },
-                      {
-                        "path" : "\/documentation\/authfoundation\/token\/metadata\/claims",
-                        "title" : "var claims: [Claim]",
-                        "type" : "property"
-                      },
-                      {
-                        "path" : "\/documentation\/authfoundation\/token\/metadata\/customclaims",
-                        "title" : "var customClaims: [String]",
-                        "type" : "property"
-                      },
-                      {
-                        "title" : "Instance Methods",
-                        "type" : "groupMarker"
-                      },
-                      {
-                        "path" : "\/documentation\/authfoundation\/token\/metadata\/value(_:for:)",
-                        "title" : "func value<T>(T.Type, for: String) -> T?",
-                        "type" : "method"
-                      }
-                    ],
-                    "path" : "\/documentation\/authfoundation\/token\/metadata\/claimcontainer-implementations",
-                    "title" : "ClaimContainer Implementations",
-                    "type" : "symbol"
+                    "path" : "\/documentation\/authfoundation\/token\/metadata\/claimtype",
+                    "title" : "Token.Metadata.ClaimType",
+                    "type" : "typealias"
+                  },
+                  {
+                    "title" : "Default Implementations",
+                    "type" : "groupMarker"
                   },
                   {
                     "children" : [
@@ -492,12 +476,22 @@
                       },
                       {
                         "path" : "\/documentation\/authfoundation\/token\/metadata\/authenticationmethods",
-                        "title" : "var authenticationMethods: [String]?",
+                        "title" : "var authenticationMethods: [AuthenticationMethod]?",
                         "type" : "property"
                       },
                       {
                         "path" : "\/documentation\/authfoundation\/token\/metadata\/birthdate",
                         "title" : "var birthdate: String?",
+                        "type" : "property"
+                      },
+                      {
+                        "path" : "\/documentation\/authfoundation\/token\/metadata\/claims",
+                        "title" : "var claims: [Self.ClaimType]",
+                        "type" : "property"
+                      },
+                      {
+                        "path" : "\/documentation\/authfoundation\/token\/metadata\/customclaims",
+                        "title" : "var customClaims: [String]",
                         "type" : "property"
                       },
                       {
@@ -606,17 +600,46 @@
                         "type" : "property"
                       },
                       {
+                        "title" : "Instance Methods",
+                        "type" : "groupMarker"
+                      },
+                      {
+                        "path" : "\/documentation\/authfoundation\/token\/metadata\/arrayvalue(_:for:)-57pje",
+                        "title" : "func arrayValue<T>(T.Type, for: Self.ClaimType) -> [T]?",
+                        "type" : "method"
+                      },
+                      {
+                        "path" : "\/documentation\/authfoundation\/token\/metadata\/arrayvalue(_:for:)-6f41l",
+                        "title" : "func arrayValue<T>(T.Type, for: String) -> [T]?",
+                        "type" : "method"
+                      },
+                      {
+                        "path" : "\/documentation\/authfoundation\/token\/metadata\/value(_:for:)",
+                        "title" : "func value<T>(T.Type, for: String) -> T?",
+                        "type" : "method"
+                      },
+                      {
                         "title" : "Subscripts",
                         "type" : "groupMarker"
                       },
                       {
-                        "path" : "\/documentation\/authfoundation\/token\/metadata\/subscript(_:)-1k55j",
-                        "title" : "subscript<T>(Claim) -> T?",
+                        "path" : "\/documentation\/authfoundation\/token\/metadata\/subscript(_:)-3573v",
+                        "title" : "subscript<T>(String) -> T?",
                         "type" : "subscript"
                       },
                       {
-                        "path" : "\/documentation\/authfoundation\/token\/metadata\/subscript(_:)-3573v",
+                        "path" : "\/documentation\/authfoundation\/token\/metadata\/subscript(_:)-5j8kr",
                         "title" : "subscript<T>(String) -> T?",
+                        "type" : "subscript"
+                      },
+                      {
+                        "path" : "\/documentation\/authfoundation\/token\/metadata\/subscript(_:)-7gdjc",
+                        "title" : "subscript<T>(Self.ClaimType) -> T?",
+                        "type" : "subscript"
+                      },
+                      {
+                        "path" : "\/documentation\/authfoundation\/token\/metadata\/subscript(_:)-8orb5",
+                        "title" : "subscript<T>(String) -> [String : T?]?",
                         "type" : "subscript"
                       }
                     ],
@@ -1007,43 +1030,17 @@
                 "type" : "property"
               },
               {
-                "title" : "Default Implementations",
+                "title" : "Type Aliases",
                 "type" : "groupMarker"
               },
               {
-                "children" : [
-                  {
-                    "title" : "Instance Properties",
-                    "type" : "groupMarker"
-                  },
-                  {
-                    "path" : "\/documentation\/authfoundation\/userinfo\/claims",
-                    "title" : "var claims: [Claim]",
-                    "type" : "property"
-                  },
-                  {
-                    "path" : "\/documentation\/authfoundation\/userinfo\/customclaims",
-                    "title" : "var customClaims: [String]",
-                    "type" : "property"
-                  },
-                  {
-                    "title" : "Instance Methods",
-                    "type" : "groupMarker"
-                  },
-                  {
-                    "path" : "\/documentation\/authfoundation\/userinfo\/encode(to:)",
-                    "title" : "func encode(to: Encoder) throws",
-                    "type" : "method"
-                  },
-                  {
-                    "path" : "\/documentation\/authfoundation\/userinfo\/value(_:for:)",
-                    "title" : "func value<T>(T.Type, for: String) -> T?",
-                    "type" : "method"
-                  }
-                ],
-                "path" : "\/documentation\/authfoundation\/userinfo\/claimcontainer-implementations",
-                "title" : "ClaimContainer Implementations",
-                "type" : "symbol"
+                "path" : "\/documentation\/authfoundation\/userinfo\/claimtype",
+                "title" : "UserInfo.ClaimType",
+                "type" : "typealias"
+              },
+              {
+                "title" : "Default Implementations",
+                "type" : "groupMarker"
               },
               {
                 "children" : [
@@ -1073,12 +1070,22 @@
                   },
                   {
                     "path" : "\/documentation\/authfoundation\/userinfo\/authenticationmethods",
-                    "title" : "var authenticationMethods: [String]?",
+                    "title" : "var authenticationMethods: [AuthenticationMethod]?",
                     "type" : "property"
                   },
                   {
                     "path" : "\/documentation\/authfoundation\/userinfo\/birthdate",
                     "title" : "var birthdate: String?",
+                    "type" : "property"
+                  },
+                  {
+                    "path" : "\/documentation\/authfoundation\/userinfo\/claims",
+                    "title" : "var claims: [Self.ClaimType]",
+                    "type" : "property"
+                  },
+                  {
+                    "path" : "\/documentation\/authfoundation\/userinfo\/customclaims",
+                    "title" : "var customClaims: [String]",
                     "type" : "property"
                   },
                   {
@@ -1187,22 +1194,67 @@
                     "type" : "property"
                   },
                   {
+                    "title" : "Instance Methods",
+                    "type" : "groupMarker"
+                  },
+                  {
+                    "path" : "\/documentation\/authfoundation\/userinfo\/arrayvalue(_:for:)-4r3mz",
+                    "title" : "func arrayValue<T>(T.Type, for: Self.ClaimType) -> [T]?",
+                    "type" : "method"
+                  },
+                  {
+                    "path" : "\/documentation\/authfoundation\/userinfo\/arrayvalue(_:for:)-8mgsf",
+                    "title" : "func arrayValue<T>(T.Type, for: String) -> [T]?",
+                    "type" : "method"
+                  },
+                  {
+                    "path" : "\/documentation\/authfoundation\/userinfo\/value(_:for:)",
+                    "title" : "func value<T>(T.Type, for: String) -> T?",
+                    "type" : "method"
+                  },
+                  {
                     "title" : "Subscripts",
                     "type" : "groupMarker"
                   },
                   {
-                    "path" : "\/documentation\/authfoundation\/userinfo\/subscript(_:)-35gb6",
-                    "title" : "subscript<T>(Claim) -> T?",
+                    "path" : "\/documentation\/authfoundation\/userinfo\/subscript(_:)-1nwao",
+                    "title" : "subscript<T>(String) -> T?",
+                    "type" : "subscript"
+                  },
+                  {
+                    "path" : "\/documentation\/authfoundation\/userinfo\/subscript(_:)-2vhco",
+                    "title" : "subscript<T>(String) -> [String : T?]?",
                     "type" : "subscript"
                   },
                   {
                     "path" : "\/documentation\/authfoundation\/userinfo\/subscript(_:)-3i6lx",
                     "title" : "subscript<T>(String) -> T?",
                     "type" : "subscript"
+                  },
+                  {
+                    "path" : "\/documentation\/authfoundation\/userinfo\/subscript(_:)-jlfx",
+                    "title" : "subscript<T>(Self.ClaimType) -> T?",
+                    "type" : "subscript"
                   }
                 ],
                 "path" : "\/documentation\/authfoundation\/userinfo\/hasclaims-implementations",
                 "title" : "HasClaims Implementations",
+                "type" : "symbol"
+              },
+              {
+                "children" : [
+                  {
+                    "title" : "Instance Methods",
+                    "type" : "groupMarker"
+                  },
+                  {
+                    "path" : "\/documentation\/authfoundation\/userinfo\/encode(to:)",
+                    "title" : "func encode(to: Encoder) throws",
+                    "type" : "method"
+                  }
+                ],
+                "path" : "\/documentation\/authfoundation\/userinfo\/jsonclaimcontainer-implementations",
+                "title" : "JSONClaimContainer Implementations",
                 "type" : "symbol"
               },
               {
@@ -1262,43 +1314,17 @@
                 "type" : "property"
               },
               {
-                "title" : "Default Implementations",
+                "title" : "Type Aliases",
                 "type" : "groupMarker"
               },
               {
-                "children" : [
-                  {
-                    "title" : "Instance Properties",
-                    "type" : "groupMarker"
-                  },
-                  {
-                    "path" : "\/documentation\/authfoundation\/tokeninfo\/claims",
-                    "title" : "var claims: [Claim]",
-                    "type" : "property"
-                  },
-                  {
-                    "path" : "\/documentation\/authfoundation\/tokeninfo\/customclaims",
-                    "title" : "var customClaims: [String]",
-                    "type" : "property"
-                  },
-                  {
-                    "title" : "Instance Methods",
-                    "type" : "groupMarker"
-                  },
-                  {
-                    "path" : "\/documentation\/authfoundation\/tokeninfo\/encode(to:)",
-                    "title" : "func encode(to: Encoder) throws",
-                    "type" : "method"
-                  },
-                  {
-                    "path" : "\/documentation\/authfoundation\/tokeninfo\/value(_:for:)",
-                    "title" : "func value<T>(T.Type, for: String) -> T?",
-                    "type" : "method"
-                  }
-                ],
-                "path" : "\/documentation\/authfoundation\/tokeninfo\/claimcontainer-implementations",
-                "title" : "ClaimContainer Implementations",
-                "type" : "symbol"
+                "path" : "\/documentation\/authfoundation\/tokeninfo\/claimtype",
+                "title" : "TokenInfo.ClaimType",
+                "type" : "typealias"
+              },
+              {
+                "title" : "Default Implementations",
+                "type" : "groupMarker"
               },
               {
                 "children" : [
@@ -1328,12 +1354,22 @@
                   },
                   {
                     "path" : "\/documentation\/authfoundation\/tokeninfo\/authenticationmethods",
-                    "title" : "var authenticationMethods: [String]?",
+                    "title" : "var authenticationMethods: [AuthenticationMethod]?",
                     "type" : "property"
                   },
                   {
                     "path" : "\/documentation\/authfoundation\/tokeninfo\/birthdate",
                     "title" : "var birthdate: String?",
+                    "type" : "property"
+                  },
+                  {
+                    "path" : "\/documentation\/authfoundation\/tokeninfo\/claims",
+                    "title" : "var claims: [Self.ClaimType]",
+                    "type" : "property"
+                  },
+                  {
+                    "path" : "\/documentation\/authfoundation\/tokeninfo\/customclaims",
+                    "title" : "var customClaims: [String]",
                     "type" : "property"
                   },
                   {
@@ -1442,6 +1478,25 @@
                     "type" : "property"
                   },
                   {
+                    "title" : "Instance Methods",
+                    "type" : "groupMarker"
+                  },
+                  {
+                    "path" : "\/documentation\/authfoundation\/tokeninfo\/arrayvalue(_:for:)-6zyk1",
+                    "title" : "func arrayValue<T>(T.Type, for: String) -> [T]?",
+                    "type" : "method"
+                  },
+                  {
+                    "path" : "\/documentation\/authfoundation\/tokeninfo\/arrayvalue(_:for:)-8949w",
+                    "title" : "func arrayValue<T>(T.Type, for: Self.ClaimType) -> [T]?",
+                    "type" : "method"
+                  },
+                  {
+                    "path" : "\/documentation\/authfoundation\/tokeninfo\/value(_:for:)",
+                    "title" : "func value<T>(T.Type, for: String) -> T?",
+                    "type" : "method"
+                  },
+                  {
                     "title" : "Subscripts",
                     "type" : "groupMarker"
                   },
@@ -1451,13 +1506,39 @@
                     "type" : "subscript"
                   },
                   {
-                    "path" : "\/documentation\/authfoundation\/tokeninfo\/subscript(_:)-4tgeh",
-                    "title" : "subscript<T>(Claim) -> T?",
+                    "path" : "\/documentation\/authfoundation\/tokeninfo\/subscript(_:)-4xi3",
+                    "title" : "subscript<T>(String) -> [String : T?]?",
+                    "type" : "subscript"
+                  },
+                  {
+                    "path" : "\/documentation\/authfoundation\/tokeninfo\/subscript(_:)-7jc86",
+                    "title" : "subscript<T>(String) -> T?",
+                    "type" : "subscript"
+                  },
+                  {
+                    "path" : "\/documentation\/authfoundation\/tokeninfo\/subscript(_:)-9fyil",
+                    "title" : "subscript<T>(Self.ClaimType) -> T?",
                     "type" : "subscript"
                   }
                 ],
                 "path" : "\/documentation\/authfoundation\/tokeninfo\/hasclaims-implementations",
                 "title" : "HasClaims Implementations",
+                "type" : "symbol"
+              },
+              {
+                "children" : [
+                  {
+                    "title" : "Instance Methods",
+                    "type" : "groupMarker"
+                  },
+                  {
+                    "path" : "\/documentation\/authfoundation\/tokeninfo\/encode(to:)",
+                    "title" : "func encode(to: Encoder) throws",
+                    "type" : "method"
+                  }
+                ],
+                "path" : "\/documentation\/authfoundation\/tokeninfo\/jsonclaimcontainer-implementations",
+                "title" : "JSONClaimContainer Implementations",
                 "type" : "symbol"
               },
               {
@@ -2102,27 +2183,32 @@
               },
               {
                 "path" : "\/documentation\/authfoundation\/openidconfiguration\/claimssupported",
-                "title" : "let claimsSupported: [Claim]",
+                "title" : "var claimsSupported: [JWTClaim]?",
                 "type" : "property"
               },
               {
                 "path" : "\/documentation\/authfoundation\/openidconfiguration\/deviceauthorizationendpoint",
-                "title" : "let deviceAuthorizationEndpoint: URL?",
+                "title" : "var deviceAuthorizationEndpoint: URL?",
                 "type" : "property"
               },
               {
                 "path" : "\/documentation\/authfoundation\/openidconfiguration\/endsessionendpoint",
-                "title" : "let endSessionEndpoint: URL?",
+                "title" : "var endSessionEndpoint: URL?",
                 "type" : "property"
               },
               {
                 "path" : "\/documentation\/authfoundation\/openidconfiguration\/granttypessupported",
-                "title" : "let grantTypesSupported: [GrantType]?",
+                "title" : "var grantTypesSupported: [GrantType]?",
+                "type" : "property"
+              },
+              {
+                "path" : "\/documentation\/authfoundation\/openidconfiguration\/idtokensigningalgvaluessupported",
+                "title" : "let idTokenSigningAlgValuesSupported: [JWK.Algorithm]",
                 "type" : "property"
               },
               {
                 "path" : "\/documentation\/authfoundation\/openidconfiguration\/introspectionendpoint",
-                "title" : "let introspectionEndpoint: URL?",
+                "title" : "var introspectionEndpoint: URL?",
                 "type" : "property"
               },
               {
@@ -2136,13 +2222,18 @@
                 "type" : "property"
               },
               {
+                "path" : "\/documentation\/authfoundation\/openidconfiguration\/payload",
+                "title" : "let payload: [String : Any]",
+                "type" : "property"
+              },
+              {
                 "path" : "\/documentation\/authfoundation\/openidconfiguration\/registrationendpoint",
-                "title" : "let registrationEndpoint: URL?",
+                "title" : "var registrationEndpoint: URL?",
                 "type" : "property"
               },
               {
                 "path" : "\/documentation\/authfoundation\/openidconfiguration\/responsemodessupported",
-                "title" : "let responseModesSupported: [String]?",
+                "title" : "var responseModesSupported: [String]?",
                 "type" : "property"
               },
               {
@@ -2152,12 +2243,12 @@
               },
               {
                 "path" : "\/documentation\/authfoundation\/openidconfiguration\/revocationendpoint",
-                "title" : "let revocationEndpoint: URL",
+                "title" : "var revocationEndpoint: URL?",
                 "type" : "property"
               },
               {
                 "path" : "\/documentation\/authfoundation\/openidconfiguration\/scopessupported",
-                "title" : "let scopesSupported: [String]?",
+                "title" : "var scopesSupported: [String]?",
                 "type" : "property"
               },
               {
@@ -2172,8 +2263,17 @@
               },
               {
                 "path" : "\/documentation\/authfoundation\/openidconfiguration\/userinfoendpoint",
-                "title" : "let userinfoEndpoint: URL?",
+                "title" : "var userinfoEndpoint: URL?",
                 "type" : "property"
+              },
+              {
+                "title" : "Type Aliases",
+                "type" : "groupMarker"
+              },
+              {
+                "path" : "\/documentation\/authfoundation\/openidconfiguration\/claimtype",
+                "title" : "OpenIdConfiguration.ClaimType",
+                "type" : "typealias"
               },
               {
                 "title" : "Type Properties",
@@ -2183,11 +2283,630 @@
                 "path" : "\/documentation\/authfoundation\/openidconfiguration\/jsondecoder",
                 "title" : "static let jsonDecoder: JSONDecoder",
                 "type" : "property"
+              },
+              {
+                "title" : "Enumerations",
+                "type" : "groupMarker"
+              },
+              {
+                "children" : [
+                  {
+                    "title" : "Enumeration Cases",
+                    "type" : "groupMarker"
+                  },
+                  {
+                    "path" : "\/documentation\/authfoundation\/openidconfiguration\/providermetadata\/acrvaluessupported",
+                    "title" : "case acrValuesSupported",
+                    "type" : "case"
+                  },
+                  {
+                    "path" : "\/documentation\/authfoundation\/openidconfiguration\/providermetadata\/authorizationendpoint",
+                    "title" : "case authorizationEndpoint",
+                    "type" : "case"
+                  },
+                  {
+                    "path" : "\/documentation\/authfoundation\/openidconfiguration\/providermetadata\/backchannelauthenticationrequestsigningalgvaluessupported",
+                    "title" : "case backchannelAuthenticationRequestSigningAlgValuesSupported",
+                    "type" : "case"
+                  },
+                  {
+                    "path" : "\/documentation\/authfoundation\/openidconfiguration\/providermetadata\/backchanneltokendeliverymodessupported",
+                    "title" : "case backchannelTokenDeliveryModesSupported",
+                    "type" : "case"
+                  },
+                  {
+                    "path" : "\/documentation\/authfoundation\/openidconfiguration\/providermetadata\/claimtypessupported",
+                    "title" : "case claimTypesSupported",
+                    "type" : "case"
+                  },
+                  {
+                    "path" : "\/documentation\/authfoundation\/openidconfiguration\/providermetadata\/claimslocalessupported",
+                    "title" : "case claimsLocalesSupported",
+                    "type" : "case"
+                  },
+                  {
+                    "path" : "\/documentation\/authfoundation\/openidconfiguration\/providermetadata\/claimsparametersupported",
+                    "title" : "case claimsParameterSupported",
+                    "type" : "case"
+                  },
+                  {
+                    "path" : "\/documentation\/authfoundation\/openidconfiguration\/providermetadata\/claimssupported",
+                    "title" : "case claimsSupported",
+                    "type" : "case"
+                  },
+                  {
+                    "path" : "\/documentation\/authfoundation\/openidconfiguration\/providermetadata\/codechallengemethodssupported",
+                    "title" : "case codeChallengeMethodsSupported",
+                    "type" : "case"
+                  },
+                  {
+                    "path" : "\/documentation\/authfoundation\/openidconfiguration\/providermetadata\/deviceauthorizationendpoint",
+                    "title" : "case deviceAuthorizationEndpoint",
+                    "type" : "case"
+                  },
+                  {
+                    "path" : "\/documentation\/authfoundation\/openidconfiguration\/providermetadata\/displayvaluessupported",
+                    "title" : "case displayValuesSupported",
+                    "type" : "case"
+                  },
+                  {
+                    "path" : "\/documentation\/authfoundation\/openidconfiguration\/providermetadata\/dpopsigningalgvaluessupported",
+                    "title" : "case dpopSigningAlgValuesSupported",
+                    "type" : "case"
+                  },
+                  {
+                    "path" : "\/documentation\/authfoundation\/openidconfiguration\/providermetadata\/endsessionendpoint",
+                    "title" : "case endSessionEndpoint",
+                    "type" : "case"
+                  },
+                  {
+                    "path" : "\/documentation\/authfoundation\/openidconfiguration\/providermetadata\/granttypessupported",
+                    "title" : "case grantTypesSupported",
+                    "type" : "case"
+                  },
+                  {
+                    "path" : "\/documentation\/authfoundation\/openidconfiguration\/providermetadata\/idtokenencryptionalgvaluessupported",
+                    "title" : "case idTokenEncryptionAlgValuesSupported",
+                    "type" : "case"
+                  },
+                  {
+                    "path" : "\/documentation\/authfoundation\/openidconfiguration\/providermetadata\/idtokenencryptionencvaluessupported",
+                    "title" : "case idTokenEncryptionEncValuesSupported",
+                    "type" : "case"
+                  },
+                  {
+                    "path" : "\/documentation\/authfoundation\/openidconfiguration\/providermetadata\/idtokensigningalgvaluessupported",
+                    "title" : "case idTokenSigningAlgValuesSupported",
+                    "type" : "case"
+                  },
+                  {
+                    "path" : "\/documentation\/authfoundation\/openidconfiguration\/providermetadata\/introspectionendpoint",
+                    "title" : "case introspectionEndpoint",
+                    "type" : "case"
+                  },
+                  {
+                    "path" : "\/documentation\/authfoundation\/openidconfiguration\/providermetadata\/introspectionendpointauthmethodssupported",
+                    "title" : "case introspectionEndpointAuthMethodsSupported",
+                    "type" : "case"
+                  },
+                  {
+                    "path" : "\/documentation\/authfoundation\/openidconfiguration\/providermetadata\/issuer",
+                    "title" : "case issuer",
+                    "type" : "case"
+                  },
+                  {
+                    "path" : "\/documentation\/authfoundation\/openidconfiguration\/providermetadata\/jwksuri",
+                    "title" : "case jwksUri",
+                    "type" : "case"
+                  },
+                  {
+                    "path" : "\/documentation\/authfoundation\/openidconfiguration\/providermetadata\/oppolicyuri",
+                    "title" : "case opPolicyUri",
+                    "type" : "case"
+                  },
+                  {
+                    "path" : "\/documentation\/authfoundation\/openidconfiguration\/providermetadata\/optosuri",
+                    "title" : "case opTosUri",
+                    "type" : "case"
+                  },
+                  {
+                    "path" : "\/documentation\/authfoundation\/openidconfiguration\/providermetadata\/registrationendpoint",
+                    "title" : "case registrationEndpoint",
+                    "type" : "case"
+                  },
+                  {
+                    "path" : "\/documentation\/authfoundation\/openidconfiguration\/providermetadata\/requestobjectencryptionalgvaluessupported",
+                    "title" : "case requestObjectEncryptionAlgValuesSupported",
+                    "type" : "case"
+                  },
+                  {
+                    "path" : "\/documentation\/authfoundation\/openidconfiguration\/providermetadata\/requestobjectencryptionencvaluessupported",
+                    "title" : "case requestObjectEncryptionEncValuesSupported",
+                    "type" : "case"
+                  },
+                  {
+                    "path" : "\/documentation\/authfoundation\/openidconfiguration\/providermetadata\/requestobjectsigningalgvaluessupported",
+                    "title" : "case requestObjectSigningAlgValuesSupported",
+                    "type" : "case"
+                  },
+                  {
+                    "path" : "\/documentation\/authfoundation\/openidconfiguration\/providermetadata\/requestparametersupported",
+                    "title" : "case requestParameterSupported",
+                    "type" : "case"
+                  },
+                  {
+                    "path" : "\/documentation\/authfoundation\/openidconfiguration\/providermetadata\/requesturiparametersupported",
+                    "title" : "case requestUriParameterSupported",
+                    "type" : "case"
+                  },
+                  {
+                    "path" : "\/documentation\/authfoundation\/openidconfiguration\/providermetadata\/requirerequesturiregistration",
+                    "title" : "case requireRequestUriRegistration",
+                    "type" : "case"
+                  },
+                  {
+                    "path" : "\/documentation\/authfoundation\/openidconfiguration\/providermetadata\/responsemodessupported",
+                    "title" : "case responseModesSupported",
+                    "type" : "case"
+                  },
+                  {
+                    "path" : "\/documentation\/authfoundation\/openidconfiguration\/providermetadata\/responsetypessupported",
+                    "title" : "case responseTypesSupported",
+                    "type" : "case"
+                  },
+                  {
+                    "path" : "\/documentation\/authfoundation\/openidconfiguration\/providermetadata\/revocationendpoint",
+                    "title" : "case revocationEndpoint",
+                    "type" : "case"
+                  },
+                  {
+                    "path" : "\/documentation\/authfoundation\/openidconfiguration\/providermetadata\/revocationendpointauthmethodssupported",
+                    "title" : "case revocationEndpointAuthMethodsSupported",
+                    "type" : "case"
+                  },
+                  {
+                    "path" : "\/documentation\/authfoundation\/openidconfiguration\/providermetadata\/scopessupported",
+                    "title" : "case scopesSupported",
+                    "type" : "case"
+                  },
+                  {
+                    "path" : "\/documentation\/authfoundation\/openidconfiguration\/providermetadata\/servicedocumentation",
+                    "title" : "case serviceDocumentation",
+                    "type" : "case"
+                  },
+                  {
+                    "path" : "\/documentation\/authfoundation\/openidconfiguration\/providermetadata\/subjecttypessupported",
+                    "title" : "case subjectTypesSupported",
+                    "type" : "case"
+                  },
+                  {
+                    "path" : "\/documentation\/authfoundation\/openidconfiguration\/providermetadata\/tokenendpoint",
+                    "title" : "case tokenEndpoint",
+                    "type" : "case"
+                  },
+                  {
+                    "path" : "\/documentation\/authfoundation\/openidconfiguration\/providermetadata\/tokenendpointauthmethodssupported",
+                    "title" : "case tokenEndpointAuthMethodsSupported",
+                    "type" : "case"
+                  },
+                  {
+                    "path" : "\/documentation\/authfoundation\/openidconfiguration\/providermetadata\/tokenendpointauthsigningalgvaluessupported",
+                    "title" : "case tokenEndpointAuthSigningAlgValuesSupported",
+                    "type" : "case"
+                  },
+                  {
+                    "path" : "\/documentation\/authfoundation\/openidconfiguration\/providermetadata\/uilocalessupported",
+                    "title" : "case uiLocalesSupported",
+                    "type" : "case"
+                  },
+                  {
+                    "path" : "\/documentation\/authfoundation\/openidconfiguration\/providermetadata\/userinfoencryptionalgvaluessupported",
+                    "title" : "case userinfoEncryptionAlgValuesSupported",
+                    "type" : "case"
+                  },
+                  {
+                    "path" : "\/documentation\/authfoundation\/openidconfiguration\/providermetadata\/userinfoencryptionencvaluessupported",
+                    "title" : "case userinfoEncryptionEncValuesSupported",
+                    "type" : "case"
+                  },
+                  {
+                    "path" : "\/documentation\/authfoundation\/openidconfiguration\/providermetadata\/userinfoendpoint",
+                    "title" : "case userinfoEndpoint",
+                    "type" : "case"
+                  },
+                  {
+                    "path" : "\/documentation\/authfoundation\/openidconfiguration\/providermetadata\/userinfosigningalgvaluessupported",
+                    "title" : "case userinfoSigningAlgValuesSupported",
+                    "type" : "case"
+                  },
+                  {
+                    "title" : "Initializers",
+                    "type" : "groupMarker"
+                  },
+                  {
+                    "path" : "\/documentation\/authfoundation\/openidconfiguration\/providermetadata\/init(intvalue:)",
+                    "title" : "init?(intValue: Int)",
+                    "type" : "init"
+                  },
+                  {
+                    "path" : "\/documentation\/authfoundation\/openidconfiguration\/providermetadata\/init(rawvalue:)",
+                    "title" : "init?(rawValue: String)",
+                    "type" : "init"
+                  },
+                  {
+                    "path" : "\/documentation\/authfoundation\/openidconfiguration\/providermetadata\/init(stringvalue:)",
+                    "title" : "init?(stringValue: String)",
+                    "type" : "init"
+                  },
+                  {
+                    "title" : "Default Implementations",
+                    "type" : "groupMarker"
+                  },
+                  {
+                    "children" : [
+                      {
+                        "title" : "Instance Properties",
+                        "type" : "groupMarker"
+                      },
+                      {
+                        "path" : "\/documentation\/authfoundation\/openidconfiguration\/providermetadata\/debugdescription",
+                        "title" : "var debugDescription: String",
+                        "type" : "property"
+                      },
+                      {
+                        "path" : "\/documentation\/authfoundation\/openidconfiguration\/providermetadata\/description",
+                        "title" : "var description: String",
+                        "type" : "property"
+                      }
+                    ],
+                    "path" : "\/documentation\/authfoundation\/openidconfiguration\/providermetadata\/codingkey-implementations",
+                    "title" : "CodingKey Implementations",
+                    "type" : "symbol"
+                  },
+                  {
+                    "children" : [
+                      {
+                        "title" : "Operators",
+                        "type" : "groupMarker"
+                      },
+                      {
+                        "path" : "\/documentation\/authfoundation\/openidconfiguration\/providermetadata\/!=(_:_:)",
+                        "title" : "static func != (Self, Self) -> Bool",
+                        "type" : "op"
+                      }
+                    ],
+                    "path" : "\/documentation\/authfoundation\/openidconfiguration\/providermetadata\/equatable-implementations",
+                    "title" : "Equatable Implementations",
+                    "type" : "symbol"
+                  },
+                  {
+                    "children" : [
+                      {
+                        "title" : "Initializers",
+                        "type" : "groupMarker"
+                      },
+                      {
+                        "path" : "\/documentation\/authfoundation\/openidconfiguration\/providermetadata\/init(from:)",
+                        "title" : "init(from: Decoder) throws",
+                        "type" : "init"
+                      },
+                      {
+                        "title" : "Instance Properties",
+                        "type" : "groupMarker"
+                      },
+                      {
+                        "path" : "\/documentation\/authfoundation\/openidconfiguration\/providermetadata\/hashvalue",
+                        "title" : "var hashValue: Int",
+                        "type" : "property"
+                      },
+                      {
+                        "title" : "Instance Methods",
+                        "type" : "groupMarker"
+                      },
+                      {
+                        "path" : "\/documentation\/authfoundation\/openidconfiguration\/providermetadata\/encode(to:)",
+                        "title" : "func encode(to: Encoder) throws",
+                        "type" : "method"
+                      },
+                      {
+                        "path" : "\/documentation\/authfoundation\/openidconfiguration\/providermetadata\/hash(into:)",
+                        "title" : "func hash(into: inout Hasher)",
+                        "type" : "method"
+                      }
+                    ],
+                    "path" : "\/documentation\/authfoundation\/openidconfiguration\/providermetadata\/rawrepresentable-implementations",
+                    "title" : "RawRepresentable Implementations",
+                    "type" : "symbol"
+                  }
+                ],
+                "path" : "\/documentation\/authfoundation\/openidconfiguration\/providermetadata",
+                "title" : "OpenIdConfiguration.ProviderMetadata",
+                "type" : "enum"
+              },
+              {
+                "title" : "Default Implementations",
+                "type" : "groupMarker"
+              },
+              {
+                "children" : [
+                  {
+                    "title" : "Instance Properties",
+                    "type" : "groupMarker"
+                  },
+                  {
+                    "path" : "\/documentation\/authfoundation\/openidconfiguration\/allclaims",
+                    "title" : "var allClaims: [String]",
+                    "type" : "property"
+                  },
+                  {
+                    "path" : "\/documentation\/authfoundation\/openidconfiguration\/claims",
+                    "title" : "var claims: [Self.ClaimType]",
+                    "type" : "property"
+                  },
+                  {
+                    "path" : "\/documentation\/authfoundation\/openidconfiguration\/customclaims",
+                    "title" : "var customClaims: [String]",
+                    "type" : "property"
+                  },
+                  {
+                    "title" : "Instance Methods",
+                    "type" : "groupMarker"
+                  },
+                  {
+                    "path" : "\/documentation\/authfoundation\/openidconfiguration\/arrayvalue(_:for:)-2tq7q",
+                    "title" : "func arrayValue<T>(T.Type, for: String) -> [T]?",
+                    "type" : "method"
+                  },
+                  {
+                    "path" : "\/documentation\/authfoundation\/openidconfiguration\/arrayvalue(_:for:)-9ha7z",
+                    "title" : "func arrayValue<T>(T.Type, for: Self.ClaimType) -> [T]?",
+                    "type" : "method"
+                  },
+                  {
+                    "path" : "\/documentation\/authfoundation\/openidconfiguration\/value(_:for:)",
+                    "title" : "func value<T>(T.Type, for: String) -> T?",
+                    "type" : "method"
+                  },
+                  {
+                    "title" : "Subscripts",
+                    "type" : "groupMarker"
+                  },
+                  {
+                    "path" : "\/documentation\/authfoundation\/openidconfiguration\/subscript(_:)-1cird",
+                    "title" : "subscript<T>(String) -> T?",
+                    "type" : "subscript"
+                  },
+                  {
+                    "path" : "\/documentation\/authfoundation\/openidconfiguration\/subscript(_:)-1nvti",
+                    "title" : "subscript<T>(String) -> T?",
+                    "type" : "subscript"
+                  },
+                  {
+                    "path" : "\/documentation\/authfoundation\/openidconfiguration\/subscript(_:)-4pmkm",
+                    "title" : "subscript<T>(Self.ClaimType) -> T?",
+                    "type" : "subscript"
+                  },
+                  {
+                    "path" : "\/documentation\/authfoundation\/openidconfiguration\/subscript(_:)-76yex",
+                    "title" : "subscript<T>(String) -> [String : T?]?",
+                    "type" : "subscript"
+                  }
+                ],
+                "path" : "\/documentation\/authfoundation\/openidconfiguration\/hasclaims-implementations",
+                "title" : "HasClaims Implementations",
+                "type" : "symbol"
+              },
+              {
+                "children" : [
+                  {
+                    "title" : "Instance Methods",
+                    "type" : "groupMarker"
+                  },
+                  {
+                    "path" : "\/documentation\/authfoundation\/openidconfiguration\/encode(to:)",
+                    "title" : "func encode(to: Encoder) throws",
+                    "type" : "method"
+                  }
+                ],
+                "path" : "\/documentation\/authfoundation\/openidconfiguration\/jsonclaimcontainer-implementations",
+                "title" : "JSONClaimContainer Implementations",
+                "type" : "symbol"
               }
             ],
             "path" : "\/documentation\/authfoundation\/openidconfiguration",
             "title" : "OpenIdConfiguration",
             "type" : "struct"
+          },
+          {
+            "children" : [
+              {
+                "title" : "Enumeration Cases",
+                "type" : "groupMarker"
+              },
+              {
+                "path" : "\/documentation\/authfoundation\/authenticationmethod\/facialrecognition",
+                "title" : "case facialRecognition",
+                "type" : "case"
+              },
+              {
+                "path" : "\/documentation\/authfoundation\/authenticationmethod\/fingerprintbiometric",
+                "title" : "case fingerprintBiometric",
+                "type" : "case"
+              },
+              {
+                "path" : "\/documentation\/authfoundation\/authenticationmethod\/geolocation",
+                "title" : "case geolocation",
+                "type" : "case"
+              },
+              {
+                "path" : "\/documentation\/authfoundation\/authenticationmethod\/irisscanbiometric",
+                "title" : "case irisScanBiometric",
+                "type" : "case"
+              },
+              {
+                "path" : "\/documentation\/authfoundation\/authenticationmethod\/knowledgebased",
+                "title" : "case knowledgeBased",
+                "type" : "case"
+              },
+              {
+                "path" : "\/documentation\/authfoundation\/authenticationmethod\/multiplechannel",
+                "title" : "case multipleChannel",
+                "type" : "case"
+              },
+              {
+                "path" : "\/documentation\/authfoundation\/authenticationmethod\/multiplefactor",
+                "title" : "case multipleFactor",
+                "type" : "case"
+              },
+              {
+                "path" : "\/documentation\/authfoundation\/authenticationmethod\/onetimepassword",
+                "title" : "case oneTimePassword",
+                "type" : "case"
+              },
+              {
+                "path" : "\/documentation\/authfoundation\/authenticationmethod\/passwordbased",
+                "title" : "case passwordBased",
+                "type" : "case"
+              },
+              {
+                "path" : "\/documentation\/authfoundation\/authenticationmethod\/pin",
+                "title" : "case pin",
+                "type" : "case"
+              },
+              {
+                "path" : "\/documentation\/authfoundation\/authenticationmethod\/proofofpossession",
+                "title" : "case proofOfPossession",
+                "type" : "case"
+              },
+              {
+                "path" : "\/documentation\/authfoundation\/authenticationmethod\/proofofpossessionhardware",
+                "title" : "case proofOfPossessionHardware",
+                "type" : "case"
+              },
+              {
+                "path" : "\/documentation\/authfoundation\/authenticationmethod\/proofofpossessionsoftware",
+                "title" : "case proofOfPossessionSoftware",
+                "type" : "case"
+              },
+              {
+                "path" : "\/documentation\/authfoundation\/authenticationmethod\/retinascanbiometric",
+                "title" : "case retinaScanBiometric",
+                "type" : "case"
+              },
+              {
+                "path" : "\/documentation\/authfoundation\/authenticationmethod\/riskbased",
+                "title" : "case riskBased",
+                "type" : "case"
+              },
+              {
+                "path" : "\/documentation\/authfoundation\/authenticationmethod\/smartcard",
+                "title" : "case smartCard",
+                "type" : "case"
+              },
+              {
+                "path" : "\/documentation\/authfoundation\/authenticationmethod\/smsconfirmation",
+                "title" : "case smsConfirmation",
+                "type" : "case"
+              },
+              {
+                "path" : "\/documentation\/authfoundation\/authenticationmethod\/telephoneconfirmation",
+                "title" : "case telephoneConfirmation",
+                "type" : "case"
+              },
+              {
+                "path" : "\/documentation\/authfoundation\/authenticationmethod\/userpresence",
+                "title" : "case userPresence",
+                "type" : "case"
+              },
+              {
+                "path" : "\/documentation\/authfoundation\/authenticationmethod\/voicebiometric",
+                "title" : "case voiceBiometric",
+                "type" : "case"
+              },
+              {
+                "path" : "\/documentation\/authfoundation\/authenticationmethod\/windowsintegrated",
+                "title" : "case windowsIntegrated",
+                "type" : "case"
+              },
+              {
+                "title" : "Initializers",
+                "type" : "groupMarker"
+              },
+              {
+                "path" : "\/documentation\/authfoundation\/authenticationmethod\/init(rawvalue:)",
+                "title" : "init?(rawValue: String)",
+                "type" : "init"
+              },
+              {
+                "title" : "Default Implementations",
+                "type" : "groupMarker"
+              },
+              {
+                "children" : [
+                  {
+                    "title" : "Type Methods",
+                    "type" : "groupMarker"
+                  },
+                  {
+                    "path" : "\/documentation\/authfoundation\/authenticationmethod\/claim(_:in:from:)-408fy",
+                    "title" : "static func claim(String, in: HasClaims, from: Any?) -> Self?",
+                    "type" : "method"
+                  },
+                  {
+                    "path" : "\/documentation\/authfoundation\/authenticationmethod\/claim(_:in:from:)-65pep",
+                    "title" : "static func claim(String, in: HasClaims, from: Any?) -> Self?",
+                    "type" : "method"
+                  }
+                ],
+                "path" : "\/documentation\/authfoundation\/authenticationmethod\/claimconvertable-implementations",
+                "title" : "ClaimConvertable Implementations",
+                "type" : "symbol"
+              },
+              {
+                "children" : [
+                  {
+                    "title" : "Operators",
+                    "type" : "groupMarker"
+                  },
+                  {
+                    "path" : "\/documentation\/authfoundation\/authenticationmethod\/!=(_:_:)",
+                    "title" : "static func != (Self, Self) -> Bool",
+                    "type" : "op"
+                  }
+                ],
+                "path" : "\/documentation\/authfoundation\/authenticationmethod\/equatable-implementations",
+                "title" : "Equatable Implementations",
+                "type" : "symbol"
+              },
+              {
+                "children" : [
+                  {
+                    "title" : "Instance Properties",
+                    "type" : "groupMarker"
+                  },
+                  {
+                    "path" : "\/documentation\/authfoundation\/authenticationmethod\/hashvalue",
+                    "title" : "var hashValue: Int",
+                    "type" : "property"
+                  },
+                  {
+                    "title" : "Instance Methods",
+                    "type" : "groupMarker"
+                  },
+                  {
+                    "path" : "\/documentation\/authfoundation\/authenticationmethod\/hash(into:)",
+                    "title" : "func hash(into: inout Hasher)",
+                    "type" : "method"
+                  }
+                ],
+                "path" : "\/documentation\/authfoundation\/authenticationmethod\/rawrepresentable-implementations",
+                "title" : "RawRepresentable Implementations",
+                "type" : "symbol"
+              }
+            ],
+            "path" : "\/documentation\/authfoundation\/authenticationmethod",
+            "title" : "AuthenticationMethod",
+            "type" : "enum"
           },
           {
             "children" : [
@@ -2335,6 +3054,27 @@
               {
                 "title" : "Default Implementations",
                 "type" : "groupMarker"
+              },
+              {
+                "children" : [
+                  {
+                    "title" : "Type Methods",
+                    "type" : "groupMarker"
+                  },
+                  {
+                    "path" : "\/documentation\/authfoundation\/granttype\/claim(_:in:from:)-4essl",
+                    "title" : "static func claim(String, in: HasClaims, from: Any?) -> Self?",
+                    "type" : "method"
+                  },
+                  {
+                    "path" : "\/documentation\/authfoundation\/granttype\/claim(_:in:from:)-9msue",
+                    "title" : "static func claim(String, in: HasClaims, from: Any?) -> Self?",
+                    "type" : "method"
+                  }
+                ],
+                "path" : "\/documentation\/authfoundation\/granttype\/claimconvertable-implementations",
+                "title" : "ClaimConvertable Implementations",
+                "type" : "symbol"
               },
               {
                 "children" : [
@@ -2637,21 +3377,6 @@
                 "type" : "property"
               },
               {
-                "path" : "\/documentation\/authfoundation\/jwt\/authenticationmethods-8d0og",
-                "title" : "var authenticationMethods: [String]?",
-                "type" : "property"
-              },
-              {
-                "path" : "\/documentation\/authfoundation\/jwt\/claims",
-                "title" : "var claims: [Claim]",
-                "type" : "property"
-              },
-              {
-                "path" : "\/documentation\/authfoundation\/jwt\/customclaims",
-                "title" : "var customClaims: [String]",
-                "type" : "property"
-              },
-              {
                 "path" : "\/documentation\/authfoundation\/jwt\/expirationtime",
                 "title" : "var expirationTime: Date?",
                 "type" : "property"
@@ -2706,13 +3431,13 @@
                 "type" : "method"
               },
               {
-                "path" : "\/documentation\/authfoundation\/jwt\/value(_:for:)",
-                "title" : "func value<T>(T.Type, for: String) -> T?",
-                "type" : "method"
-              },
-              {
                 "title" : "Type Aliases",
                 "type" : "groupMarker"
+              },
+              {
+                "path" : "\/documentation\/authfoundation\/jwt\/claimtype",
+                "title" : "JWT.ClaimType",
+                "type" : "typealias"
               },
               {
                 "path" : "\/documentation\/authfoundation\/jwt\/rawvalue-swift.typealias",
@@ -2776,13 +3501,23 @@
                     "type" : "property"
                   },
                   {
-                    "path" : "\/documentation\/authfoundation\/jwt\/authenticationmethods-1cr91",
-                    "title" : "var authenticationMethods: [String]?",
+                    "path" : "\/documentation\/authfoundation\/jwt\/authenticationmethods",
+                    "title" : "var authenticationMethods: [AuthenticationMethod]?",
                     "type" : "property"
                   },
                   {
                     "path" : "\/documentation\/authfoundation\/jwt\/birthdate",
                     "title" : "var birthdate: String?",
+                    "type" : "property"
+                  },
+                  {
+                    "path" : "\/documentation\/authfoundation\/jwt\/claims",
+                    "title" : "var claims: [Self.ClaimType]",
+                    "type" : "property"
+                  },
+                  {
+                    "path" : "\/documentation\/authfoundation\/jwt\/customclaims",
+                    "title" : "var customClaims: [String]",
                     "type" : "property"
                   },
                   {
@@ -2891,12 +3626,41 @@
                     "type" : "property"
                   },
                   {
+                    "title" : "Instance Methods",
+                    "type" : "groupMarker"
+                  },
+                  {
+                    "path" : "\/documentation\/authfoundation\/jwt\/arrayvalue(_:for:)-331qc",
+                    "title" : "func arrayValue<T>(T.Type, for: String) -> [T]?",
+                    "type" : "method"
+                  },
+                  {
+                    "path" : "\/documentation\/authfoundation\/jwt\/arrayvalue(_:for:)-3j5m",
+                    "title" : "func arrayValue<T>(T.Type, for: Self.ClaimType) -> [T]?",
+                    "type" : "method"
+                  },
+                  {
+                    "path" : "\/documentation\/authfoundation\/jwt\/value(_:for:)",
+                    "title" : "func value<T>(T.Type, for: String) -> T?",
+                    "type" : "method"
+                  },
+                  {
                     "title" : "Subscripts",
                     "type" : "groupMarker"
                   },
                   {
-                    "path" : "\/documentation\/authfoundation\/jwt\/subscript(_:)-7rgy1",
-                    "title" : "subscript<T>(Claim) -> T?",
+                    "path" : "\/documentation\/authfoundation\/jwt\/subscript(_:)-1yjz2",
+                    "title" : "subscript<T>(String) -> [String : T?]?",
+                    "type" : "subscript"
+                  },
+                  {
+                    "path" : "\/documentation\/authfoundation\/jwt\/subscript(_:)-3zfn",
+                    "title" : "subscript<T>(String) -> T?",
+                    "type" : "subscript"
+                  },
+                  {
+                    "path" : "\/documentation\/authfoundation\/jwt\/subscript(_:)-4wd5l",
+                    "title" : "subscript<T>(Self.ClaimType) -> T?",
                     "type" : "subscript"
                   },
                   {
@@ -3941,372 +4705,392 @@
                 "type" : "groupMarker"
               },
               {
-                "path" : "\/documentation\/authfoundation\/claim\/accesstokenhash",
+                "path" : "\/documentation\/authfoundation\/jwtclaim\/accesstokenhash",
                 "title" : "case accessTokenHash",
                 "type" : "case"
               },
               {
-                "path" : "\/documentation\/authfoundation\/claim\/aceprofile",
+                "path" : "\/documentation\/authfoundation\/jwtclaim\/aceprofile",
                 "title" : "case aceProfile",
                 "type" : "case"
               },
               {
-                "path" : "\/documentation\/authfoundation\/claim\/actor",
+                "path" : "\/documentation\/authfoundation\/jwtclaim\/actor",
                 "title" : "case actor",
                 "type" : "case"
               },
               {
-                "path" : "\/documentation\/authfoundation\/claim\/address",
+                "path" : "\/documentation\/authfoundation\/jwtclaim\/address",
                 "title" : "case address",
                 "type" : "case"
               },
               {
-                "path" : "\/documentation\/authfoundation\/claim\/attestationlevel",
+                "path" : "\/documentation\/authfoundation\/jwtclaim\/attestationlevel",
                 "title" : "case attestationLevel",
                 "type" : "case"
               },
               {
-                "path" : "\/documentation\/authfoundation\/claim\/audience",
+                "path" : "\/documentation\/authfoundation\/jwtclaim\/audience",
                 "title" : "case audience",
                 "type" : "case"
               },
               {
-                "path" : "\/documentation\/authfoundation\/claim\/authcontextclassreference",
+                "path" : "\/documentation\/authfoundation\/jwtclaim\/authcontextclassreference",
                 "title" : "case authContextClassReference",
                 "type" : "case"
               },
               {
-                "path" : "\/documentation\/authfoundation\/claim\/authmethodsreference",
+                "path" : "\/documentation\/authfoundation\/jwtclaim\/authmethodsreference",
                 "title" : "case authMethodsReference",
                 "type" : "case"
               },
               {
-                "path" : "\/documentation\/authfoundation\/claim\/authtime",
+                "path" : "\/documentation\/authfoundation\/jwtclaim\/authtime",
                 "title" : "case authTime",
                 "type" : "case"
               },
               {
-                "path" : "\/documentation\/authfoundation\/claim\/authorizedactor",
+                "path" : "\/documentation\/authfoundation\/jwtclaim\/authorizedactor",
                 "title" : "case authorizedActor",
                 "type" : "case"
               },
               {
-                "path" : "\/documentation\/authfoundation\/claim\/authorizedparty",
+                "path" : "\/documentation\/authfoundation\/jwtclaim\/authorizedparty",
                 "title" : "case authorizedParty",
                 "type" : "case"
               },
               {
-                "path" : "\/documentation\/authfoundation\/claim\/birthdate",
+                "path" : "\/documentation\/authfoundation\/jwtclaim\/birthdate",
                 "title" : "case birthdate",
                 "type" : "case"
               },
               {
-                "path" : "\/documentation\/authfoundation\/claim\/clientid",
+                "path" : "\/documentation\/authfoundation\/jwtclaim\/clientid",
                 "title" : "case clientId",
                 "type" : "case"
               },
               {
-                "path" : "\/documentation\/authfoundation\/claim\/clientnonce",
+                "path" : "\/documentation\/authfoundation\/jwtclaim\/clientnonce",
                 "title" : "case clientNonce",
                 "type" : "case"
               },
               {
-                "path" : "\/documentation\/authfoundation\/claim\/codehash",
+                "path" : "\/documentation\/authfoundation\/jwtclaim\/codehash",
                 "title" : "case codeHash",
                 "type" : "case"
               },
               {
-                "path" : "\/documentation\/authfoundation\/claim\/confirmation",
+                "path" : "\/documentation\/authfoundation\/jwtclaim\/confirmation",
                 "title" : "case confirmation",
                 "type" : "case"
               },
               {
-                "path" : "\/documentation\/authfoundation\/claim\/custom(_:)",
+                "path" : "\/documentation\/authfoundation\/jwtclaim\/custom(_:)",
                 "title" : "case custom(String)",
                 "type" : "case"
               },
               {
-                "path" : "\/documentation\/authfoundation\/claim\/destinationidentity",
+                "path" : "\/documentation\/authfoundation\/jwtclaim\/destinationidentity",
                 "title" : "case destinationIdentity",
                 "type" : "case"
               },
               {
-                "path" : "\/documentation\/authfoundation\/claim\/divertedtarget",
+                "path" : "\/documentation\/authfoundation\/jwtclaim\/divertedtarget",
                 "title" : "case divertedTarget",
                 "type" : "case"
               },
               {
-                "path" : "\/documentation\/authfoundation\/claim\/email",
+                "path" : "\/documentation\/authfoundation\/jwtclaim\/email",
                 "title" : "case email",
                 "type" : "case"
               },
               {
-                "path" : "\/documentation\/authfoundation\/claim\/emailverified",
+                "path" : "\/documentation\/authfoundation\/jwtclaim\/emailverified",
                 "title" : "case emailVerified",
                 "type" : "case"
               },
               {
-                "path" : "\/documentation\/authfoundation\/claim\/entitlements",
+                "path" : "\/documentation\/authfoundation\/jwtclaim\/entitlements",
                 "title" : "case entitlements",
                 "type" : "case"
               },
               {
-                "path" : "\/documentation\/authfoundation\/claim\/events",
+                "path" : "\/documentation\/authfoundation\/jwtclaim\/events",
                 "title" : "case events",
                 "type" : "case"
               },
               {
-                "path" : "\/documentation\/authfoundation\/claim\/expirationtime",
+                "path" : "\/documentation\/authfoundation\/jwtclaim\/expirationtime",
                 "title" : "case expirationTime",
                 "type" : "case"
               },
               {
-                "path" : "\/documentation\/authfoundation\/claim\/expiresin",
+                "path" : "\/documentation\/authfoundation\/jwtclaim\/expiresin",
                 "title" : "case expiresIn",
                 "type" : "case"
               },
               {
-                "path" : "\/documentation\/authfoundation\/claim\/familyname",
+                "path" : "\/documentation\/authfoundation\/jwtclaim\/familyname",
                 "title" : "case familyName",
                 "type" : "case"
               },
               {
-                "path" : "\/documentation\/authfoundation\/claim\/gender",
+                "path" : "\/documentation\/authfoundation\/jwtclaim\/gender",
                 "title" : "case gender",
                 "type" : "case"
               },
               {
-                "path" : "\/documentation\/authfoundation\/claim\/givenname",
+                "path" : "\/documentation\/authfoundation\/jwtclaim\/givenname",
                 "title" : "case givenName",
                 "type" : "case"
               },
               {
-                "path" : "\/documentation\/authfoundation\/claim\/groups",
+                "path" : "\/documentation\/authfoundation\/jwtclaim\/groups",
                 "title" : "case groups",
                 "type" : "case"
               },
               {
-                "path" : "\/documentation\/authfoundation\/claim\/identityprovider",
+                "path" : "\/documentation\/authfoundation\/jwtclaim\/identityprovider",
                 "title" : "case identityProvider",
                 "type" : "case"
               },
               {
-                "path" : "\/documentation\/authfoundation\/claim\/issuedat",
+                "path" : "\/documentation\/authfoundation\/jwtclaim\/isprivateemail",
+                "title" : "case isPrivateEmail",
+                "type" : "case"
+              },
+              {
+                "path" : "\/documentation\/authfoundation\/jwtclaim\/issuedat",
                 "title" : "case issuedAt",
                 "type" : "case"
               },
               {
-                "path" : "\/documentation\/authfoundation\/claim\/issuer",
+                "path" : "\/documentation\/authfoundation\/jwtclaim\/issuer",
                 "title" : "case issuer",
                 "type" : "case"
               },
               {
-                "path" : "\/documentation\/authfoundation\/claim\/jcarddata",
+                "path" : "\/documentation\/authfoundation\/jwtclaim\/jcarddata",
                 "title" : "case jcardData",
                 "type" : "case"
               },
               {
-                "path" : "\/documentation\/authfoundation\/claim\/jwtid",
+                "path" : "\/documentation\/authfoundation\/jwtclaim\/jwtid",
                 "title" : "case jwtId",
                 "type" : "case"
               },
               {
-                "path" : "\/documentation\/authfoundation\/claim\/locale",
+                "path" : "\/documentation\/authfoundation\/jwtclaim\/locale",
                 "title" : "case locale",
                 "type" : "case"
               },
               {
-                "path" : "\/documentation\/authfoundation\/claim\/maxapirequestcount",
+                "path" : "\/documentation\/authfoundation\/jwtclaim\/maxapirequestcount",
                 "title" : "case maxAPIRequestCount",
                 "type" : "case"
               },
               {
-                "path" : "\/documentation\/authfoundation\/claim\/mediakeyfingerprint",
+                "path" : "\/documentation\/authfoundation\/jwtclaim\/mediakeyfingerprint",
                 "title" : "case mediaKeyFingerprint",
                 "type" : "case"
               },
               {
-                "path" : "\/documentation\/authfoundation\/claim\/middlename",
+                "path" : "\/documentation\/authfoundation\/jwtclaim\/middlename",
                 "title" : "case middleName",
                 "type" : "case"
               },
               {
-                "path" : "\/documentation\/authfoundation\/claim\/name",
+                "path" : "\/documentation\/authfoundation\/jwtclaim\/name",
                 "title" : "case name",
                 "type" : "case"
               },
               {
-                "path" : "\/documentation\/authfoundation\/claim\/nickname",
+                "path" : "\/documentation\/authfoundation\/jwtclaim\/nickname",
                 "title" : "case nickname",
                 "type" : "case"
               },
               {
-                "path" : "\/documentation\/authfoundation\/claim\/nonce",
+                "path" : "\/documentation\/authfoundation\/jwtclaim\/nonce",
                 "title" : "case nonce",
                 "type" : "case"
               },
               {
-                "path" : "\/documentation\/authfoundation\/claim\/notbefore",
+                "path" : "\/documentation\/authfoundation\/jwtclaim\/noncesupported",
+                "title" : "case nonceSupported",
+                "type" : "case"
+              },
+              {
+                "path" : "\/documentation\/authfoundation\/jwtclaim\/notbefore",
                 "title" : "case notBefore",
                 "type" : "case"
               },
               {
-                "path" : "\/documentation\/authfoundation\/claim\/originalpassport",
+                "path" : "\/documentation\/authfoundation\/jwtclaim\/originalpassport",
                 "title" : "case originalPassport",
                 "type" : "case"
               },
               {
-                "path" : "\/documentation\/authfoundation\/claim\/originatingid",
+                "path" : "\/documentation\/authfoundation\/jwtclaim\/originatingid",
                 "title" : "case originatingId",
                 "type" : "case"
               },
               {
-                "path" : "\/documentation\/authfoundation\/claim\/originatingidentity",
+                "path" : "\/documentation\/authfoundation\/jwtclaim\/originatingidentity",
                 "title" : "case originatingIdentity",
                 "type" : "case"
               },
               {
-                "path" : "\/documentation\/authfoundation\/claim\/phonenumber",
+                "path" : "\/documentation\/authfoundation\/jwtclaim\/phonenumber",
                 "title" : "case phoneNumber",
                 "type" : "case"
               },
               {
-                "path" : "\/documentation\/authfoundation\/claim\/phonenumberverified",
+                "path" : "\/documentation\/authfoundation\/jwtclaim\/phonenumberverified",
                 "title" : "case phoneNumberVerified",
                 "type" : "case"
               },
               {
-                "path" : "\/documentation\/authfoundation\/claim\/picture",
+                "path" : "\/documentation\/authfoundation\/jwtclaim\/picture",
                 "title" : "case picture",
                 "type" : "case"
               },
               {
-                "path" : "\/documentation\/authfoundation\/claim\/preferredusername",
+                "path" : "\/documentation\/authfoundation\/jwtclaim\/preferredusername",
                 "title" : "case preferredUsername",
                 "type" : "case"
               },
               {
-                "path" : "\/documentation\/authfoundation\/claim\/profile",
+                "path" : "\/documentation\/authfoundation\/jwtclaim\/profile",
                 "title" : "case profile",
                 "type" : "case"
               },
               {
-                "path" : "\/documentation\/authfoundation\/claim\/resourcepriorityheader",
+                "path" : "\/documentation\/authfoundation\/jwtclaim\/realuserstatus",
+                "title" : "case realUserStatus",
+                "type" : "case"
+              },
+              {
+                "path" : "\/documentation\/authfoundation\/jwtclaim\/resourcepriorityheader",
                 "title" : "case resourcePriorityHeader",
                 "type" : "case"
               },
               {
-                "path" : "\/documentation\/authfoundation\/claim\/roles",
+                "path" : "\/documentation\/authfoundation\/jwtclaim\/roles",
                 "title" : "case roles",
                 "type" : "case"
               },
               {
-                "path" : "\/documentation\/authfoundation\/claim\/scope",
+                "path" : "\/documentation\/authfoundation\/jwtclaim\/scope",
                 "title" : "case scope",
                 "type" : "case"
               },
               {
-                "path" : "\/documentation\/authfoundation\/claim\/sessionid",
+                "path" : "\/documentation\/authfoundation\/jwtclaim\/sessionid",
                 "title" : "case sessionId",
                 "type" : "case"
               },
               {
-                "path" : "\/documentation\/authfoundation\/claim\/sipcseqnum",
+                "path" : "\/documentation\/authfoundation\/jwtclaim\/sipcseqnum",
                 "title" : "case sipCSeqNum",
                 "type" : "case"
               },
               {
-                "path" : "\/documentation\/authfoundation\/claim\/sipcallid",
+                "path" : "\/documentation\/authfoundation\/jwtclaim\/sipcallid",
                 "title" : "case sipCallId",
                 "type" : "case"
               },
               {
-                "path" : "\/documentation\/authfoundation\/claim\/sipdate",
+                "path" : "\/documentation\/authfoundation\/jwtclaim\/sipdate",
                 "title" : "case sipDate",
                 "type" : "case"
               },
               {
-                "path" : "\/documentation\/authfoundation\/claim\/sipfromtag",
+                "path" : "\/documentation\/authfoundation\/jwtclaim\/sipfromtag",
                 "title" : "case sipFromTag",
                 "type" : "case"
               },
               {
-                "path" : "\/documentation\/authfoundation\/claim\/sippriorityheader",
+                "path" : "\/documentation\/authfoundation\/jwtclaim\/sippriorityheader",
                 "title" : "case sipPriorityHeader",
                 "type" : "case"
               },
               {
-                "path" : "\/documentation\/authfoundation\/claim\/sipviabranch",
+                "path" : "\/documentation\/authfoundation\/jwtclaim\/sipviabranch",
                 "title" : "case sipViaBranch",
                 "type" : "case"
               },
               {
-                "path" : "\/documentation\/authfoundation\/claim\/subject",
+                "path" : "\/documentation\/authfoundation\/jwtclaim\/subject",
                 "title" : "case subject",
                 "type" : "case"
               },
               {
-                "path" : "\/documentation\/authfoundation\/claim\/subjectpublickey",
+                "path" : "\/documentation\/authfoundation\/jwtclaim\/subjectpublickey",
                 "title" : "case subjectPublicKey",
                 "type" : "case"
               },
               {
-                "path" : "\/documentation\/authfoundation\/claim\/timeofevent",
+                "path" : "\/documentation\/authfoundation\/jwtclaim\/timeofevent",
                 "title" : "case timeOfEvent",
                 "type" : "case"
               },
               {
-                "path" : "\/documentation\/authfoundation\/claim\/tokenintrospection",
+                "path" : "\/documentation\/authfoundation\/jwtclaim\/tokenintrospection",
                 "title" : "case tokenIntrospection",
                 "type" : "case"
               },
               {
-                "path" : "\/documentation\/authfoundation\/claim\/transactionid",
+                "path" : "\/documentation\/authfoundation\/jwtclaim\/transactionid",
                 "title" : "case transactionId",
                 "type" : "case"
               },
               {
-                "path" : "\/documentation\/authfoundation\/claim\/updatedat",
+                "path" : "\/documentation\/authfoundation\/jwtclaim\/transfersubject",
+                "title" : "case transferSubject",
+                "type" : "case"
+              },
+              {
+                "path" : "\/documentation\/authfoundation\/jwtclaim\/updatedat",
                 "title" : "case updatedAt",
                 "type" : "case"
               },
               {
-                "path" : "\/documentation\/authfoundation\/claim\/userid",
+                "path" : "\/documentation\/authfoundation\/jwtclaim\/userid",
                 "title" : "case userId",
                 "type" : "case"
               },
               {
-                "path" : "\/documentation\/authfoundation\/claim\/vectoroftrust",
+                "path" : "\/documentation\/authfoundation\/jwtclaim\/vectoroftrust",
                 "title" : "case vectorOfTrust",
                 "type" : "case"
               },
               {
-                "path" : "\/documentation\/authfoundation\/claim\/vectoroftrustmark",
+                "path" : "\/documentation\/authfoundation\/jwtclaim\/vectoroftrustmark",
                 "title" : "case vectorOfTrustMark",
                 "type" : "case"
               },
               {
-                "path" : "\/documentation\/authfoundation\/claim\/verifiablecredential",
+                "path" : "\/documentation\/authfoundation\/jwtclaim\/verifiablecredential",
                 "title" : "case verifiableCredential",
                 "type" : "case"
               },
               {
-                "path" : "\/documentation\/authfoundation\/claim\/verifiablepresentation",
+                "path" : "\/documentation\/authfoundation\/jwtclaim\/verifiablepresentation",
                 "title" : "case verifiablePresentation",
                 "type" : "case"
               },
               {
-                "path" : "\/documentation\/authfoundation\/claim\/version",
+                "path" : "\/documentation\/authfoundation\/jwtclaim\/version",
                 "title" : "case version",
                 "type" : "case"
               },
               {
-                "path" : "\/documentation\/authfoundation\/claim\/website",
+                "path" : "\/documentation\/authfoundation\/jwtclaim\/website",
                 "title" : "case website",
                 "type" : "case"
               },
               {
-                "path" : "\/documentation\/authfoundation\/claim\/zoneinfo",
+                "path" : "\/documentation\/authfoundation\/jwtclaim\/zoneinfo",
                 "title" : "case zoneinfo",
                 "type" : "case"
               },
@@ -4317,16 +5101,37 @@
               {
                 "children" : [
                   {
+                    "title" : "Type Methods",
+                    "type" : "groupMarker"
+                  },
+                  {
+                    "path" : "\/documentation\/authfoundation\/jwtclaim\/claim(_:in:from:)-1rzp4",
+                    "title" : "static func claim(String, in: HasClaims, from: Any?) -> Self?",
+                    "type" : "method"
+                  },
+                  {
+                    "path" : "\/documentation\/authfoundation\/jwtclaim\/claim(_:in:from:)-8vbq1",
+                    "title" : "static func claim(String, in: HasClaims, from: Any?) -> Self?",
+                    "type" : "method"
+                  }
+                ],
+                "path" : "\/documentation\/authfoundation\/jwtclaim\/claimconvertable-implementations",
+                "title" : "ClaimConvertable Implementations",
+                "type" : "symbol"
+              },
+              {
+                "children" : [
+                  {
                     "title" : "Operators",
                     "type" : "groupMarker"
                   },
                   {
-                    "path" : "\/documentation\/authfoundation\/claim\/!=(_:_:)",
+                    "path" : "\/documentation\/authfoundation\/jwtclaim\/!=(_:_:)",
                     "title" : "static func != (Self, Self) -> Bool",
                     "type" : "op"
                   }
                 ],
-                "path" : "\/documentation\/authfoundation\/claim\/equatable-implementations",
+                "path" : "\/documentation\/authfoundation\/jwtclaim\/equatable-implementations",
                 "title" : "Equatable Implementations",
                 "type" : "symbol"
               },
@@ -4337,12 +5142,12 @@
                     "type" : "groupMarker"
                   },
                   {
-                    "path" : "\/documentation\/authfoundation\/claim\/init(from:)",
+                    "path" : "\/documentation\/authfoundation\/jwtclaim\/init(from:)",
                     "title" : "init(from: Decoder) throws",
                     "type" : "init"
                   },
                   {
-                    "path" : "\/documentation\/authfoundation\/claim\/init(rawvalue:)",
+                    "path" : "\/documentation\/authfoundation\/jwtclaim\/init(rawvalue:)",
                     "title" : "init?(rawValue: String)",
                     "type" : "init"
                   },
@@ -4351,7 +5156,7 @@
                     "type" : "groupMarker"
                   },
                   {
-                    "path" : "\/documentation\/authfoundation\/claim\/rawvalue-swift.property",
+                    "path" : "\/documentation\/authfoundation\/jwtclaim\/rawvalue-swift.property",
                     "title" : "var rawValue: String",
                     "type" : "property"
                   },
@@ -4360,7 +5165,7 @@
                     "type" : "groupMarker"
                   },
                   {
-                    "path" : "\/documentation\/authfoundation\/claim\/encode(to:)",
+                    "path" : "\/documentation\/authfoundation\/jwtclaim\/encode(to:)",
                     "title" : "func encode(to: Encoder) throws",
                     "type" : "method"
                   },
@@ -4369,22 +5174,31 @@
                     "type" : "groupMarker"
                   },
                   {
-                    "path" : "\/documentation\/authfoundation\/claim\/rawvalue-swift.typealias",
-                    "title" : "Claim.RawValue",
+                    "path" : "\/documentation\/authfoundation\/jwtclaim\/rawvalue-swift.typealias",
+                    "title" : "JWTClaim.RawValue",
                     "type" : "typealias"
                   }
                 ],
-                "path" : "\/documentation\/authfoundation\/claim\/rawrepresentable-implementations",
+                "path" : "\/documentation\/authfoundation\/jwtclaim\/rawrepresentable-implementations",
                 "title" : "RawRepresentable Implementations",
                 "type" : "symbol"
               }
             ],
-            "path" : "\/documentation\/authfoundation\/claim",
-            "title" : "Claim",
+            "path" : "\/documentation\/authfoundation\/jwtclaim",
+            "title" : "JWTClaim",
             "type" : "enum"
           },
           {
             "children" : [
+              {
+                "title" : "Associated Types",
+                "type" : "groupMarker"
+              },
+              {
+                "path" : "\/documentation\/authfoundation\/hasclaims\/claimtype",
+                "title" : "ClaimType",
+                "type" : "associatedtype"
+              },
               {
                 "title" : "Instance Properties",
                 "type" : "groupMarker"
@@ -4395,20 +5209,7 @@
                 "type" : "property"
               },
               {
-                "children" : [
-                  {
-                    "children" : [
-                      {
-                        "path" : "\/documentation\/authfoundation\/hasclaims\/allclaims-5at8v",
-                        "title" : "var allClaims: [String]",
-                        "type" : "property"
-                      }
-                    ],
-                    "title" : "HasClaims Implementations",
-                    "type" : "groupMarker"
-                  }
-                ],
-                "path" : "\/documentation\/authfoundation\/hasclaims\/allclaims-4c54a",
+                "path" : "\/documentation\/authfoundation\/hasclaims\/allclaims",
                 "title" : "var allClaims: [String]",
                 "type" : "property"
               },
@@ -4424,7 +5225,7 @@
               },
               {
                 "path" : "\/documentation\/authfoundation\/hasclaims\/authenticationmethods",
-                "title" : "var authenticationMethods: [String]?",
+                "title" : "var authenticationMethods: [AuthenticationMethod]?",
                 "type" : "property"
               },
               {
@@ -4433,12 +5234,38 @@
                 "type" : "property"
               },
               {
-                "path" : "\/documentation\/authfoundation\/hasclaims\/claims",
-                "title" : "var claims: [Claim]",
+                "children" : [
+                  {
+                    "children" : [
+                      {
+                        "path" : "\/documentation\/authfoundation\/hasclaims\/claims-78of3",
+                        "title" : "var claims: [Self.ClaimType]",
+                        "type" : "property"
+                      }
+                    ],
+                    "title" : "HasClaims Implementations",
+                    "type" : "groupMarker"
+                  }
+                ],
+                "path" : "\/documentation\/authfoundation\/hasclaims\/claims-15zsq",
+                "title" : "var claims: [Self.ClaimType]",
                 "type" : "property"
               },
               {
-                "path" : "\/documentation\/authfoundation\/hasclaims\/customclaims",
+                "children" : [
+                  {
+                    "children" : [
+                      {
+                        "path" : "\/documentation\/authfoundation\/hasclaims\/customclaims-60er",
+                        "title" : "var customClaims: [String]",
+                        "type" : "property"
+                      }
+                    ],
+                    "title" : "HasClaims Implementations",
+                    "type" : "groupMarker"
+                  }
+                ],
+                "path" : "\/documentation\/authfoundation\/hasclaims\/customclaims-47hcx",
                 "title" : "var customClaims: [String]",
                 "type" : "property"
               },
@@ -4557,6 +5384,16 @@
                 "type" : "groupMarker"
               },
               {
+                "path" : "\/documentation\/authfoundation\/hasclaims\/arrayvalue(_:for:)-3gekx",
+                "title" : "func arrayValue<T>(T.Type, for: Self.ClaimType) -> [T]?",
+                "type" : "method"
+              },
+              {
+                "path" : "\/documentation\/authfoundation\/hasclaims\/arrayvalue(_:for:)-4uhxn",
+                "title" : "func arrayValue<T>(T.Type, for: String) -> [T]?",
+                "type" : "method"
+              },
+              {
                 "path" : "\/documentation\/authfoundation\/hasclaims\/value(_:for:)",
                 "title" : "func value<T>(T.Type, for: String) -> T?",
                 "type" : "method"
@@ -4566,48 +5403,22 @@
                 "type" : "groupMarker"
               },
               {
-                "children" : [
-                  {
-                    "children" : [
-                      {
-                        "path" : "\/documentation\/authfoundation\/hasclaims\/subscript(_:)-5oltt",
-                        "title" : "subscript<T>(Claim) -> T?",
-                        "type" : "subscript"
-                      },
-                      {
-                        "path" : "\/documentation\/authfoundation\/hasclaims\/subscript(_:)-36se2",
-                        "title" : "subscript<T>(String) -> T?",
-                        "type" : "subscript"
-                      }
-                    ],
-                    "title" : "HasClaims Implementations",
-                    "type" : "groupMarker"
-                  }
-                ],
-                "path" : "\/documentation\/authfoundation\/hasclaims\/subscript(_:)-3hvf1",
-                "title" : "subscript<T>(Claim) -> T?",
+                "path" : "\/documentation\/authfoundation\/hasclaims\/subscript(_:)-36se2",
+                "title" : "subscript<T>(String) -> T?",
                 "type" : "subscript"
               },
               {
-                "children" : [
-                  {
-                    "children" : [
-                      {
-                        "path" : "\/documentation\/authfoundation\/hasclaims\/subscript(_:)-5oltt",
-                        "title" : "subscript<T>(Claim) -> T?",
-                        "type" : "subscript"
-                      },
-                      {
-                        "path" : "\/documentation\/authfoundation\/hasclaims\/subscript(_:)-36se2",
-                        "title" : "subscript<T>(String) -> T?",
-                        "type" : "subscript"
-                      }
-                    ],
-                    "title" : "HasClaims Implementations",
-                    "type" : "groupMarker"
-                  }
-                ],
-                "path" : "\/documentation\/authfoundation\/hasclaims\/subscript(_:)-4t0dl",
+                "path" : "\/documentation\/authfoundation\/hasclaims\/subscript(_:)-4jr6h",
+                "title" : "subscript<T>(Self.ClaimType) -> T?",
+                "type" : "subscript"
+              },
+              {
+                "path" : "\/documentation\/authfoundation\/hasclaims\/subscript(_:)-57c7t",
+                "title" : "subscript<T>(String) -> [String : T?]?",
+                "type" : "subscript"
+              },
+              {
+                "path" : "\/documentation\/authfoundation\/hasclaims\/subscript(_:)-7r05",
                 "title" : "subscript<T>(String) -> T?",
                 "type" : "subscript"
               }
@@ -4619,41 +5430,86 @@
           {
             "children" : [
               {
-                "title" : "Instance Properties",
-                "type" : "groupMarker"
-              },
-              {
-                "path" : "\/documentation\/authfoundation\/claimcontainer\/claims",
-                "title" : "var claims: [Claim]",
-                "type" : "property"
-              },
-              {
-                "path" : "\/documentation\/authfoundation\/claimcontainer\/customclaims",
-                "title" : "var customClaims: [String]",
-                "type" : "property"
-              },
-              {
-                "path" : "\/documentation\/authfoundation\/claimcontainer\/payload",
-                "title" : "var payload: [String : Any]",
-                "type" : "property"
-              },
-              {
                 "title" : "Instance Methods",
                 "type" : "groupMarker"
               },
               {
-                "path" : "\/documentation\/authfoundation\/claimcontainer\/encode(to:)",
+                "path" : "\/documentation\/authfoundation\/jsonclaimcontainer\/encode(to:)",
                 "title" : "func encode(to: Encoder) throws",
-                "type" : "method"
-              },
-              {
-                "path" : "\/documentation\/authfoundation\/claimcontainer\/value(_:for:)",
-                "title" : "func value<T>(T.Type, for: String) -> T?",
                 "type" : "method"
               }
             ],
-            "path" : "\/documentation\/authfoundation\/claimcontainer",
-            "title" : "ClaimContainer",
+            "path" : "\/documentation\/authfoundation\/jsonclaimcontainer",
+            "title" : "JSONClaimContainer",
+            "type" : "protocol"
+          },
+          {
+            "children" : [
+              {
+                "title" : "Type Methods",
+                "type" : "groupMarker"
+              },
+              {
+                "children" : [
+                  {
+                    "children" : [
+                      {
+                        "path" : "\/documentation\/authfoundation\/claimconvertable\/claim(_:in:from:)-7z25",
+                        "title" : "static func claim(String, in: HasClaims, from: Any?) -> Self?",
+                        "type" : "method"
+                      },
+                      {
+                        "path" : "\/documentation\/authfoundation\/claimconvertable\/claim(_:in:from:)-8nglg",
+                        "title" : "static func claim(String, in: HasClaims, from: Any?) -> Self?",
+                        "type" : "method"
+                      },
+                      {
+                        "path" : "\/documentation\/authfoundation\/claimconvertable\/claim(_:in:from:)-5xez",
+                        "title" : "static func claim(String, in: HasClaims, from: Any?) -> Self?",
+                        "type" : "method"
+                      },
+                      {
+                        "path" : "\/documentation\/authfoundation\/claimconvertable\/claim(_:in:from:)-6kydw",
+                        "title" : "static func claim(String, in: HasClaims, from: Any?) -> Self?",
+                        "type" : "method"
+                      }
+                    ],
+                    "title" : "ClaimConvertable Implementations",
+                    "type" : "groupMarker"
+                  }
+                ],
+                "path" : "\/documentation\/authfoundation\/claimconvertable\/claim(_:in:from:)-3980t",
+                "title" : "static func claim(String, in: HasClaims, from: Any?) -> Self?",
+                "type" : "method"
+              }
+            ],
+            "path" : "\/documentation\/authfoundation\/claimconvertable",
+            "title" : "ClaimConvertable",
+            "type" : "protocol"
+          },
+          {
+            "children" : [
+              {
+                "title" : "Initializers",
+                "type" : "groupMarker"
+              },
+              {
+                "path" : "\/documentation\/authfoundation\/isclaim\/init(rawvalue:)",
+                "title" : "init?(rawValue: String)",
+                "type" : "init"
+              },
+              {
+                "title" : "Instance Properties",
+                "type" : "groupMarker"
+              },
+              {
+                "path" : "\/documentation\/authfoundation\/isclaim\/rawvalue",
+                "title" : "var rawValue: String",
+                "type" : "property"
+              }
+            ],
+            "path" : "\/documentation\/authfoundation\/isclaim",
+            "title" : "IsClaim",
             "type" : "protocol"
           },
           {
@@ -5134,6 +5990,16 @@
             "type" : "struct"
           },
           {
+            "path" : "\/documentation\/authfoundation\/keychainauthenticationcontext",
+            "title" : "KeychainAuthenticationContext",
+            "type" : "protocol"
+          },
+          {
+            "path" : "\/documentation\/authfoundation\/tokenauthenticationcontext",
+            "title" : "TokenAuthenticationContext",
+            "type" : "protocol"
+          },
+          {
             "title" : "Customizations",
             "type" : "groupMarker"
           },
@@ -5435,6 +6301,27 @@
             "type" : "protocol"
           },
           {
+            "children" : [
+              {
+                "title" : "Instance Properties",
+                "type" : "groupMarker"
+              },
+              {
+                "path" : "\/documentation\/authfoundation\/idtokenvalidatorcontext\/maxage",
+                "title" : "var maxAge: TimeInterval?",
+                "type" : "property"
+              },
+              {
+                "path" : "\/documentation\/authfoundation\/idtokenvalidatorcontext\/nonce",
+                "title" : "var nonce: String?",
+                "type" : "property"
+              }
+            ],
+            "path" : "\/documentation\/authfoundation\/idtokenvalidatorcontext",
+            "title" : "IDTokenValidatorContext",
+            "type" : "protocol"
+          },
+          {
             "title" : "Networking",
             "type" : "groupMarker"
           },
@@ -5522,6 +6409,11 @@
                   {
                     "children" : [
                       {
+                        "path" : "\/documentation\/authfoundation\/apiclient\/didsend(request:received:)-88sth",
+                        "title" : "func didSend<T>(request: URLRequest, received: APIResponse<T>)",
+                        "type" : "method"
+                      },
+                      {
                         "path" : "\/documentation\/authfoundation\/apiclient\/didsend(request:received:)-1c12k",
                         "title" : "func didSend(request: URLRequest, received: HTTPURLResponse)",
                         "type" : "method"
@@ -5529,11 +6421,6 @@
                       {
                         "path" : "\/documentation\/authfoundation\/apiclient\/didsend(request:received:)-7fkxl",
                         "title" : "func didSend(request: URLRequest, received: APIClientError)",
-                        "type" : "method"
-                      },
-                      {
-                        "path" : "\/documentation\/authfoundation\/apiclient\/didsend(request:received:)-88sth",
-                        "title" : "func didSend<T>(request: URLRequest, received: APIResponse<T>)",
                         "type" : "method"
                       }
                     ],
@@ -5555,13 +6442,13 @@
                         "type" : "method"
                       },
                       {
-                        "path" : "\/documentation\/authfoundation\/apiclient\/didsend(request:received:)-7fkxl",
-                        "title" : "func didSend(request: URLRequest, received: APIClientError)",
+                        "path" : "\/documentation\/authfoundation\/apiclient\/didsend(request:received:)-88sth",
+                        "title" : "func didSend<T>(request: URLRequest, received: APIResponse<T>)",
                         "type" : "method"
                       },
                       {
-                        "path" : "\/documentation\/authfoundation\/apiclient\/didsend(request:received:)-88sth",
-                        "title" : "func didSend<T>(request: URLRequest, received: APIResponse<T>)",
+                        "path" : "\/documentation\/authfoundation\/apiclient\/didsend(request:received:)-7fkxl",
+                        "title" : "func didSend(request: URLRequest, received: APIClientError)",
                         "type" : "method"
                       }
                     ],
@@ -5689,13 +6576,13 @@
                   {
                     "children" : [
                       {
-                        "path" : "\/documentation\/authfoundation\/apiclientdelegate\/api(client:didsend:received:)-4mcbm",
-                        "title" : "func api(client: APIClient, didSend: URLRequest, received: HTTPURLResponse)",
+                        "path" : "\/documentation\/authfoundation\/apiclientdelegate\/api(client:didsend:received:)-7vw3y",
+                        "title" : "func api<T>(client: APIClient, didSend: URLRequest, received: APIResponse<T>)",
                         "type" : "method"
                       },
                       {
-                        "path" : "\/documentation\/authfoundation\/apiclientdelegate\/api(client:didsend:received:)-7vw3y",
-                        "title" : "func api<T>(client: APIClient, didSend: URLRequest, received: APIResponse<T>)",
+                        "path" : "\/documentation\/authfoundation\/apiclientdelegate\/api(client:didsend:received:)-4mcbm",
+                        "title" : "func api(client: APIClient, didSend: URLRequest, received: HTTPURLResponse)",
                         "type" : "method"
                       }
                     ],
@@ -6035,17 +6922,17 @@
                   {
                     "children" : [
                       {
-                        "path" : "\/documentation\/authfoundation\/apirequest\/body()-6rb14",
-                        "title" : "func body() throws -> Data?",
-                        "type" : "method"
-                      },
-                      {
                         "path" : "\/documentation\/authfoundation\/apirequest\/body()-8cybb",
                         "title" : "func body() throws -> Data?",
                         "type" : "method"
                       },
                       {
                         "path" : "\/documentation\/authfoundation\/apirequest\/body()-2spui",
+                        "title" : "func body() throws -> Data?",
+                        "type" : "method"
+                      },
+                      {
+                        "path" : "\/documentation\/authfoundation\/apirequest\/body()-6rb14",
                         "title" : "func body() throws -> Data?",
                         "type" : "method"
                       }
@@ -6400,6 +7287,122 @@
             "path" : "\/documentation\/authfoundation\/apiresponse",
             "title" : "APIResponse",
             "type" : "struct"
+          },
+          {
+            "children" : [
+              {
+                "title" : "Enumeration Cases",
+                "type" : "groupMarker"
+              },
+              {
+                "path" : "\/documentation\/authfoundation\/apiresponseresult\/error",
+                "title" : "case error",
+                "type" : "case"
+              },
+              {
+                "path" : "\/documentation\/authfoundation\/apiresponseresult\/retry",
+                "title" : "case retry",
+                "type" : "case"
+              },
+              {
+                "path" : "\/documentation\/authfoundation\/apiresponseresult\/success",
+                "title" : "case success",
+                "type" : "case"
+              },
+              {
+                "title" : "Default Implementations",
+                "type" : "groupMarker"
+              },
+              {
+                "children" : [
+                  {
+                    "title" : "Operators",
+                    "type" : "groupMarker"
+                  },
+                  {
+                    "path" : "\/documentation\/authfoundation\/apiresponseresult\/!=(_:_:)",
+                    "title" : "static func != (Self, Self) -> Bool",
+                    "type" : "op"
+                  }
+                ],
+                "path" : "\/documentation\/authfoundation\/apiresponseresult\/equatable-implementations",
+                "title" : "Equatable Implementations",
+                "type" : "symbol"
+              }
+            ],
+            "path" : "\/documentation\/authfoundation\/apiresponseresult",
+            "title" : "APIResponseResult",
+            "type" : "enum"
+          },
+          {
+            "children" : [
+              {
+                "title" : "Initializers",
+                "type" : "groupMarker"
+              },
+              {
+                "path" : "\/documentation\/authfoundation\/apiratelimit\/init(from:)",
+                "title" : "init(from: Decoder) throws",
+                "type" : "init"
+              },
+              {
+                "title" : "Instance Properties",
+                "type" : "groupMarker"
+              },
+              {
+                "path" : "\/documentation\/authfoundation\/apiratelimit\/delay",
+                "title" : "let delay: TimeInterval?",
+                "type" : "property"
+              },
+              {
+                "path" : "\/documentation\/authfoundation\/apiratelimit\/limit",
+                "title" : "let limit: Int",
+                "type" : "property"
+              },
+              {
+                "path" : "\/documentation\/authfoundation\/apiratelimit\/remaining",
+                "title" : "let remaining: Int",
+                "type" : "property"
+              },
+              {
+                "path" : "\/documentation\/authfoundation\/apiratelimit\/reset",
+                "title" : "let reset: TimeInterval",
+                "type" : "property"
+              }
+            ],
+            "path" : "\/documentation\/authfoundation\/apiratelimit",
+            "title" : "APIRateLimit",
+            "type" : "struct"
+          },
+          {
+            "children" : [
+              {
+                "title" : "Enumeration Cases",
+                "type" : "groupMarker"
+              },
+              {
+                "path" : "\/documentation\/authfoundation\/apiretry\/donotretry",
+                "title" : "case doNotRetry",
+                "type" : "case"
+              },
+              {
+                "path" : "\/documentation\/authfoundation\/apiretry\/retry(maximumcount:)",
+                "title" : "case retry(maximumCount: Int)",
+                "type" : "case"
+              },
+              {
+                "title" : "Type Properties",
+                "type" : "groupMarker"
+              },
+              {
+                "path" : "\/documentation\/authfoundation\/apiretry\/default",
+                "title" : "static let `default`: APIRetry",
+                "type" : "property"
+              }
+            ],
+            "path" : "\/documentation\/authfoundation\/apiretry",
+            "title" : "APIRetry",
+            "type" : "enum"
           },
           {
             "children" : [
@@ -7776,6 +8779,42 @@
             "type" : "enum"
           },
           {
+            "children" : [
+              {
+                "title" : "Enumeration Cases",
+                "type" : "groupMarker"
+              },
+              {
+                "path" : "\/documentation\/authfoundation\/jsonvalueerror\/cannotdecode(value:)",
+                "title" : "case cannotDecode(value: Any)",
+                "type" : "case"
+              },
+              {
+                "title" : "Default Implementations",
+                "type" : "groupMarker"
+              },
+              {
+                "children" : [
+                  {
+                    "title" : "Instance Properties",
+                    "type" : "groupMarker"
+                  },
+                  {
+                    "path" : "\/documentation\/authfoundation\/jsonvalueerror\/localizeddescription",
+                    "title" : "var localizedDescription: String",
+                    "type" : "property"
+                  }
+                ],
+                "path" : "\/documentation\/authfoundation\/jsonvalueerror\/error-implementations",
+                "title" : "Error Implementations",
+                "type" : "symbol"
+              }
+            ],
+            "path" : "\/documentation\/authfoundation\/jsonvalueerror",
+            "title" : "JSONValueError",
+            "type" : "enum"
+          },
+          {
             "title" : "Migration and versioning",
             "type" : "groupMarker"
           },
@@ -7935,6 +8974,11 @@
             "path" : "\/documentation\/authfoundation\/sdkversionmigrator",
             "title" : "SDKVersionMigrator",
             "type" : "protocol"
+          },
+          {
+            "path" : "\/documentation\/authfoundation\/version",
+            "title" : "let Version: SDKVersion",
+            "type" : "var"
           },
           {
             "title" : "Internals and mocking",
@@ -8223,172 +9267,26 @@
             "type" : "struct"
           },
           {
-            "title" : "Protocols",
+            "title" : "Articles",
             "type" : "groupMarker"
           },
           {
-            "children" : [
-              {
-                "title" : "Instance Properties",
-                "type" : "groupMarker"
-              },
-              {
-                "path" : "\/documentation\/authfoundation\/idtokenvalidatorcontext\/maxage",
-                "title" : "var maxAge: TimeInterval?",
-                "type" : "property"
-              },
-              {
-                "path" : "\/documentation\/authfoundation\/idtokenvalidatorcontext\/nonce",
-                "title" : "var nonce: String?",
-                "type" : "property"
-              }
-            ],
-            "path" : "\/documentation\/authfoundation\/idtokenvalidatorcontext",
-            "title" : "IDTokenValidatorContext",
-            "type" : "protocol"
+            "path" : "\/documentation\/authfoundation\/workingwithclaims",
+            "title" : "Working with Claims",
+            "type" : "article"
           },
           {
-            "path" : "\/documentation\/authfoundation\/keychainauthenticationcontext",
-            "title" : "KeychainAuthenticationContext",
-            "type" : "protocol"
-          },
-          {
-            "path" : "\/documentation\/authfoundation\/tokenauthenticationcontext",
-            "title" : "TokenAuthenticationContext",
-            "type" : "protocol"
-          },
-          {
-            "title" : "Structures",
+            "title" : "Type Aliases",
             "type" : "groupMarker"
           },
           {
-            "children" : [
-              {
-                "title" : "Initializers",
-                "type" : "groupMarker"
-              },
-              {
-                "path" : "\/documentation\/authfoundation\/apiratelimit\/init(from:)",
-                "title" : "init(from: Decoder) throws",
-                "type" : "init"
-              },
-              {
-                "title" : "Instance Properties",
-                "type" : "groupMarker"
-              },
-              {
-                "path" : "\/documentation\/authfoundation\/apiratelimit\/delay",
-                "title" : "let delay: TimeInterval?",
-                "type" : "property"
-              },
-              {
-                "path" : "\/documentation\/authfoundation\/apiratelimit\/limit",
-                "title" : "let limit: Int",
-                "type" : "property"
-              },
-              {
-                "path" : "\/documentation\/authfoundation\/apiratelimit\/remaining",
-                "title" : "let remaining: Int",
-                "type" : "property"
-              },
-              {
-                "path" : "\/documentation\/authfoundation\/apiratelimit\/reset",
-                "title" : "let reset: TimeInterval",
-                "type" : "property"
-              }
-            ],
-            "path" : "\/documentation\/authfoundation\/apiratelimit",
-            "title" : "APIRateLimit",
-            "type" : "struct"
-          },
-          {
-            "title" : "Variables",
-            "type" : "groupMarker"
-          },
-          {
-            "path" : "\/documentation\/authfoundation\/version",
-            "title" : "let Version: SDKVersion",
-            "type" : "var"
+            "path" : "\/documentation\/authfoundation\/claim",
+            "title" : "Claim",
+            "type" : "typealias"
           },
           {
             "title" : "Enumerations",
             "type" : "groupMarker"
-          },
-          {
-            "children" : [
-              {
-                "title" : "Enumeration Cases",
-                "type" : "groupMarker"
-              },
-              {
-                "path" : "\/documentation\/authfoundation\/apiresponseresult\/error",
-                "title" : "case error",
-                "type" : "case"
-              },
-              {
-                "path" : "\/documentation\/authfoundation\/apiresponseresult\/retry",
-                "title" : "case retry",
-                "type" : "case"
-              },
-              {
-                "path" : "\/documentation\/authfoundation\/apiresponseresult\/success",
-                "title" : "case success",
-                "type" : "case"
-              },
-              {
-                "title" : "Default Implementations",
-                "type" : "groupMarker"
-              },
-              {
-                "children" : [
-                  {
-                    "title" : "Operators",
-                    "type" : "groupMarker"
-                  },
-                  {
-                    "path" : "\/documentation\/authfoundation\/apiresponseresult\/!=(_:_:)",
-                    "title" : "static func != (Self, Self) -> Bool",
-                    "type" : "op"
-                  }
-                ],
-                "path" : "\/documentation\/authfoundation\/apiresponseresult\/equatable-implementations",
-                "title" : "Equatable Implementations",
-                "type" : "symbol"
-              }
-            ],
-            "path" : "\/documentation\/authfoundation\/apiresponseresult",
-            "title" : "APIResponseResult",
-            "type" : "enum"
-          },
-          {
-            "children" : [
-              {
-                "title" : "Enumeration Cases",
-                "type" : "groupMarker"
-              },
-              {
-                "path" : "\/documentation\/authfoundation\/apiretry\/donotretry",
-                "title" : "case doNotRetry",
-                "type" : "case"
-              },
-              {
-                "path" : "\/documentation\/authfoundation\/apiretry\/retry(maximumcount:)",
-                "title" : "case retry(maximumCount: Int)",
-                "type" : "case"
-              },
-              {
-                "title" : "Type Properties",
-                "type" : "groupMarker"
-              },
-              {
-                "path" : "\/documentation\/authfoundation\/apiretry\/default",
-                "title" : "static let `default`: APIRetry",
-                "type" : "property"
-              }
-            ],
-            "path" : "\/documentation\/authfoundation\/apiretry",
-            "title" : "APIRetry",
-            "type" : "enum"
           },
           {
             "children" : [
@@ -8529,42 +9427,6 @@
             ],
             "path" : "\/documentation\/authfoundation\/jsonvalue",
             "title" : "JSONValue",
-            "type" : "enum"
-          },
-          {
-            "children" : [
-              {
-                "title" : "Enumeration Cases",
-                "type" : "groupMarker"
-              },
-              {
-                "path" : "\/documentation\/authfoundation\/jsonvalueerror\/cannotdecode(value:)",
-                "title" : "case cannotDecode(value: Any)",
-                "type" : "case"
-              },
-              {
-                "title" : "Default Implementations",
-                "type" : "groupMarker"
-              },
-              {
-                "children" : [
-                  {
-                    "title" : "Instance Properties",
-                    "type" : "groupMarker"
-                  },
-                  {
-                    "path" : "\/documentation\/authfoundation\/jsonvalueerror\/localizeddescription",
-                    "title" : "var localizedDescription: String",
-                    "type" : "property"
-                  }
-                ],
-                "path" : "\/documentation\/authfoundation\/jsonvalueerror\/error-implementations",
-                "title" : "Error Implementations",
-                "type" : "symbol"
-              }
-            ],
-            "path" : "\/documentation\/authfoundation\/jsonvalueerror",
-            "title" : "JSONValueError",
             "type" : "enum"
           }
         ],

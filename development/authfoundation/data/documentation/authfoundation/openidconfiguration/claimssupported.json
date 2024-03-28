@@ -13,11 +13,12 @@
   },
   "kind" : "symbol",
   "metadata" : {
-    "externalID" : "s:14AuthFoundation19OpenIdConfigurationV15claimsSupportedSayAA5ClaimOGvp",
+    "extendedModule" : "AuthFoundation",
+    "externalID" : "s:14AuthFoundation19OpenIdConfigurationV15claimsSupportedSayAA8JWTClaimOGSgvp",
     "fragments" : [
       {
         "kind" : "keyword",
-        "text" : "let"
+        "text" : "var"
       },
       {
         "kind" : "text",
@@ -33,12 +34,12 @@
       },
       {
         "kind" : "typeIdentifier",
-        "preciseIdentifier" : "s:14AuthFoundation5ClaimO",
-        "text" : "Claim"
+        "preciseIdentifier" : "s:14AuthFoundation8JWTClaimO",
+        "text" : "JWTClaim"
       },
       {
         "kind" : "text",
-        "text" : "]"
+        "text" : "]?"
       }
     ],
     "modules" : [
@@ -64,7 +65,7 @@
           "tokens" : [
             {
               "kind" : "keyword",
-              "text" : "let"
+              "text" : "var"
             },
             {
               "kind" : "text",
@@ -79,14 +80,22 @@
               "text" : ": ["
             },
             {
-              "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/Claim",
+              "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JWTClaim",
               "kind" : "typeIdentifier",
-              "preciseIdentifier" : "s:14AuthFoundation5ClaimO",
-              "text" : "Claim"
+              "preciseIdentifier" : "s:14AuthFoundation8JWTClaimO",
+              "text" : "JWTClaim"
             },
             {
               "kind" : "text",
-              "text" : "]"
+              "text" : "]? { "
+            },
+            {
+              "kind" : "keyword",
+              "text" : "get"
+            },
+            {
+              "kind" : "text",
+              "text" : " }"
             }
           ]
         }
@@ -130,7 +139,7 @@
   "type" : "topic",
   "url" : "\/documentation\/authfoundation"
 },
-"doc://AuthFoundation/documentation/AuthFoundation/Claim": {
+"doc://AuthFoundation/documentation/AuthFoundation/JWTClaim": {
   "abstract" : [
     {
       "text" : "List of registered and public claims.",
@@ -148,21 +157,21 @@
     },
     {
       "kind" : "identifier",
-      "text" : "Claim"
+      "text" : "JWTClaim"
     }
   ],
-  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/Claim",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JWTClaim",
   "kind" : "symbol",
   "navigatorTitle" : [
     {
       "kind" : "identifier",
-      "text" : "Claim"
+      "text" : "JWTClaim"
     }
   ],
   "role" : "symbol",
-  "title" : "Claim",
+  "title" : "JWTClaim",
   "type" : "topic",
-  "url" : "\/documentation\/authfoundation\/claim"
+  "url" : "\/documentation\/authfoundation\/jwtclaim"
 },
 "doc://AuthFoundation/documentation/AuthFoundation/OpenIdConfiguration": {
   "abstract" : [
@@ -205,7 +214,7 @@
   "fragments" : [
     {
       "kind" : "keyword",
-      "text" : "let"
+      "text" : "var"
     },
     {
       "kind" : "text",
@@ -221,12 +230,12 @@
     },
     {
       "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:14AuthFoundation5ClaimO",
-      "text" : "Claim"
+      "preciseIdentifier" : "s:14AuthFoundation8JWTClaimO",
+      "text" : "JWTClaim"
     },
     {
       "kind" : "text",
-      "text" : "]"
+      "text" : "]?"
     }
   ],
   "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/OpenIdConfiguration\/claimsSupported",

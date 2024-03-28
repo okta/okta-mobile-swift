@@ -1,7 +1,7 @@
 {
   "abstract" : [
     {
-      "text" : "Returns the list of custom claims this instance might contain.",
+      "text" : "The list of custom claims contained within this JWT token.",
       "type" : "text"
     }
   ],
@@ -10,7 +10,7 @@
       [
         "doc:\/\/AuthFoundation\/documentation\/AuthFoundation",
         "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/TokenInfo",
-        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/TokenInfo\/ClaimContainer-Implementations"
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/TokenInfo\/HasClaims-Implementations"
       ]
     ]
   },
@@ -21,7 +21,7 @@
   "kind" : "symbol",
   "metadata" : {
     "extendedModule" : "AuthFoundation",
-    "externalID" : "s:14AuthFoundation14ClaimContainerPAAE12customClaimsSaySSGvp::SYNTHESIZED::s:14AuthFoundation9TokenInfoV",
+    "externalID" : "s:14AuthFoundation9HasClaimsPAAE06customD0SaySSGvp::SYNTHESIZED::s:14AuthFoundation9TokenInfoV",
     "fragments" : [
       {
         "kind" : "keyword",
@@ -179,21 +179,21 @@
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/tokeninfo"
 },
-"doc://AuthFoundation/documentation/AuthFoundation/TokenInfo/ClaimContainer-Implementations": {
+"doc://AuthFoundation/documentation/AuthFoundation/TokenInfo/HasClaims-Implementations": {
   "abstract" : [
 
   ],
-  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/TokenInfo\/ClaimContainer-Implementations",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/TokenInfo\/HasClaims-Implementations",
   "kind" : "article",
   "role" : "collectionGroup",
-  "title" : "ClaimContainer Implementations",
+  "title" : "HasClaims Implementations",
   "type" : "topic",
-  "url" : "\/documentation\/authfoundation\/tokeninfo\/claimcontainer-implementations"
+  "url" : "\/documentation\/authfoundation\/tokeninfo\/hasclaims-implementations"
 },
 "doc://AuthFoundation/documentation/AuthFoundation/TokenInfo/customClaims": {
   "abstract" : [
     {
-      "text" : "Returns the list of custom claims this instance might contain.",
+      "text" : "The list of custom claims contained within this JWT token.",
       "type" : "text"
     }
   ],

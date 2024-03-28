@@ -1,4 +1,10 @@
 {
+  "abstract" : [
+    {
+      "text" : "The list of supported subject types for this OpenID Provider.",
+      "type" : "text"
+    }
+  ],
   "hierarchy" : {
     "paths" : [
       [
@@ -165,7 +171,10 @@
 },
 "doc://AuthFoundation/documentation/AuthFoundation/OpenIdConfiguration/subjectTypesSupported": {
   "abstract" : [
-
+    {
+      "text" : "The list of supported subject types for this OpenID Provider.",
+      "type" : "text"
+    }
   ],
   "fragments" : [
     {
