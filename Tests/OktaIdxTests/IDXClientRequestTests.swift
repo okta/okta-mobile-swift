@@ -62,6 +62,28 @@ class IDXClientRequestTests: XCTestCase {
         XCTAssertEqual(data["recovery_token"], "RecoveryToken")
     }
 
+    func testInteractRequestWithOrgAuthServer() throws {
+        let pkce = try XCTUnwrap(PKCE())
+        let issuer = try XCTUnwrap(URL(string: "https://example.com"))
+        client = OAuth2Client(baseURL: issuer,
+                              clientId: "clientId",
+                              scopes: "openid profile",
+                              session: urlSession)
+
+        let request = InteractionCodeFlow.InteractRequest(baseURL: issuer,
+                                                          clientId: "clientId",
+                                                          scope: "all",
+                                                          redirectUri: redirectUri,
+                                                          options: [.state: "state", .recoveryToken: "RecoveryToken"],
+                                                          pkce: pkce)
+
+        let urlRequest = try request.request(for: client)
+        XCTAssertEqual(urlRequest.httpMethod, "POST")
+        
+        let url = urlRequest.url?.absoluteString
+        XCTAssertEqual(url, "https://example.com/oauth2/v1/interact")
+    }
+
     func testIntrospectRequest() throws {
         let request = try InteractionCodeFlow.IntrospectRequest(baseURL: issuer,
                                                                 interactionHandle: "handle")

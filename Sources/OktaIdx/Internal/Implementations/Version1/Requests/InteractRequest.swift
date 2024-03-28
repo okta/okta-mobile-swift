@@ -29,7 +29,11 @@ extension InteractionCodeFlow {
              options: [InteractionCodeFlow.Option: Any]?,
              pkce: PKCE)
         {
-            url = baseURL.appendingPathComponent("v1/interact")
+            if baseURL.path.hasPrefix("/oauth2") {
+                url = baseURL.appendingPathComponent("v1/interact")
+            } else {
+                url = baseURL.appendingPathComponent("oauth2/v1/interact")
+            }
             self.clientId = clientId
             self.scope = scope
             self.redirectUri = redirectUri
