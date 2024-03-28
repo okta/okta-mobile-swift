@@ -109,6 +109,51 @@ class IDXClientRequestTests: XCTestCase {
         XCTAssertEqual(data["stateHandle"] as? String, "ahc52KautBHCANs3ScZjLfRcxFjP_N5mqOTYouqHFP")
     }
     
+    func testRemediationRequestResponseResult() throws {
+        let context = try InteractionCodeFlow.Context(interactionHandle: "handle", state: "state")
+        let flowMock = InteractionCodeFlowMock(context: context, client: client, redirectUri: redirectUri)
+        let response = try XCTUnwrap(Response.response(
+            flow: flowMock,
+            data: data(from: .module,
+                       for: "identify-single-form-response")))
+        
+        let remediation = try XCTUnwrap(response.remediations[.identify])
+        let request = try InteractionCodeFlow.RemediationRequest(remediation: remediation)
+        
+        let url = request.url
+        let challengeUrl = try XCTUnwrap(URL(string: "/idp/idx/challenge/answer", relativeTo: request.url))
+        
+        XCTAssertEqual(request.resultType(from: try XCTUnwrap(HTTPURLResponse(url: remediation.href,
+                                                                              statusCode: 200,
+                                                                              httpVersion: "http/1.1",
+                                                                              headerFields: nil))),
+                       .success)
+
+        XCTAssertEqual(request.resultType(from: try XCTUnwrap(HTTPURLResponse(url: remediation.href,
+                                                                              statusCode: 401,
+                                                                              httpVersion: "http/1.1",
+                                                                              headerFields: nil))),
+                       .success)
+
+        XCTAssertEqual(request.resultType(from: try XCTUnwrap(HTTPURLResponse(url: remediation.href,
+                                                                              statusCode: 429,
+                                                                              httpVersion: "http/1.1",
+                                                                              headerFields: nil))),
+                       .retry)
+
+        XCTAssertEqual(request.resultType(from: try XCTUnwrap(HTTPURLResponse(url: challengeUrl,
+                                                                              statusCode: 429,
+                                                                              httpVersion: "http/1.1",
+                                                                              headerFields: nil))),
+                       .success)
+        
+        XCTAssertEqual(request.resultType(from: try XCTUnwrap(HTTPURLResponse(url: remediation.href,
+                                                                              statusCode: 500,
+                                                                              httpVersion: "http/1.1",
+                                                                              headerFields: nil))),
+                       .error)
+    }
+    
     func testRedirectURLTokenRequest() throws {
         let openIdConfiguration = try OpenIdConfiguration.jsonDecoder.decode(
             OpenIdConfiguration.self,

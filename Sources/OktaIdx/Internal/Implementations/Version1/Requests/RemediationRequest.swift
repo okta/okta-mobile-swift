@@ -46,6 +46,14 @@ extension InteractionCodeFlow.RemediationRequest: APIParsingContext {
     func resultType(from response: HTTPURLResponse) -> APIResponseResult {
         switch response.statusCode {
         case 429:
+            // Ignore rate-limit responses for particular endpoints that
+            // misrepresent legitimate responses as rate-limit errors.
+            if let path = response.url?.path,
+               path.hasSuffix("/idp/idx/challenge/answer")
+            {
+                return .success
+            }
+            
             return .retry
         case 200..<500:
             // IDX returns error codes that contain valid ION responses, meaning
