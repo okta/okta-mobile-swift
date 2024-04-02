@@ -24,5 +24,5 @@ Integrate your native app with Okta using the Okta Identity Engine library.
   spec.source_files = 'Sources/OktaIdx/**/*.swift'
   spec.swift_version = "5.6"
 
-  spec.dependency "OktaAuthFoundation", "~> 1.6.1"
+  spec.dependency "OktaAuthFoundation", "~> 1.7.0"
 end
