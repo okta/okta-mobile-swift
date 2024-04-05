@@ -26,7 +26,8 @@ var package = Package(
         .target(name: "OktaIdx",
                 dependencies: [
                     .product(name: "AuthFoundation", package: "okta-mobile-swift")
-                ]),
+                ],
+                resources: [.process("Resources")]),
         .target(name: "TestCommon",
                 dependencies: ["OktaIdx"],
                 path: "Tests/TestCommon"),

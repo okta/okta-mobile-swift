@@ -12,4 +12,4 @@
 
 import Foundation
 
-public let Version = SDKVersion(sdk: "okta-idx-swift", version: "3.2.1")
+public let Version = SDKVersion(sdk: "okta-idx-swift", version: "3.2.2")
