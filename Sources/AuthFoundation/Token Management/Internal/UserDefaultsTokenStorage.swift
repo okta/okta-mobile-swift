@@ -12,6 +12,7 @@
 
 import Foundation
 
+#if os(iOS) || os(macOS) || os(tvOS) || os(watchOS)
 #if canImport(LocalAuthentication) && !os(tvOS)
 import LocalAuthentication
 #else
@@ -160,3 +161,4 @@ final class UserDefaultsTokenStorage: TokenStorage {
         userDefaults.synchronize()
     }
 }
+#endif

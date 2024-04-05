@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
     s.name             = "OktaDirectAuth"
-    s.version          = "1.7.0"
+    s.version          = "1.7.1"
     s.summary          = "Okta Direct Authentication"
     s.description      = <<-DESC
 Enables application developers to build native sign in experiences using the Okta Direct Authentication API.
@@ -21,7 +21,7 @@ Enables application developers to build native sign in experiences using the Okt
     s.authors       = { "Okta Developers" => "developer@okta.com"}
     s.source        = { :git => "https://github.com/okta/okta-mobile-swift.git", :tag => s.version.to_s }
     s.source_files  = "Sources/OktaDirectAuth/**/*.swift"
-    s.resources     = "Sources/OktaDirectAuth/Resources/*.lproj"
+    s.resources     = "Sources/OktaDirectAuth/Resources/**/*"
     s.swift_version = "5.6"
 
     s.dependency "OktaAuthFoundation", "#{s.version.to_s}"
