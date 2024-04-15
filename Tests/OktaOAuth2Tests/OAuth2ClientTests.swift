@@ -82,6 +82,7 @@ final class OAuth2ClientTests: XCTestCase {
     
     func testExchangeFailed() throws {
         let pkce = PKCE()
+        Token.idTokenValidator = MockIDTokenValidator(error: .invalidIssuer)
         let (openIdConfiguration, openIdData) = try openIdConfiguration(named: "openid-configuration-invalid-issuer")
         let clientConfiguration = try OAuth2Client.Configuration(domain: "example.com",
                                                                  clientId: "client_id",
@@ -114,8 +115,8 @@ final class OAuth2ClientTests: XCTestCase {
                 return
             }
             XCTAssertEqual(invalidIssuer as? JWTError, JWTError.invalidIssuer)
+            expect.fulfill()
         }
-        expect.fulfill()
 
         waitForExpectations(timeout: 1.0) { error in
             XCTAssertNil(error)

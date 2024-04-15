@@ -42,6 +42,7 @@ extension SignInView {
                 VStack(alignment: .leading, spacing: 4) {
                     Text("Username:")
                     TextField("jane.doe@example.com", text: $username)
+                        .id("username_field")
                         .accessibilityIdentifier("username_field")
                         .keyboardType(.emailAddress)
                         .autocorrectionDisabled(true)
@@ -67,6 +68,7 @@ extension SignInView {
                     switch selectedFactor {
                     case .password:
                         SecureField("Password", text: $password)
+                            .id("password_button")
                             .textContentType(.password)
                             .accessibilityIdentifier("password_button")
                             .padding(10)
@@ -76,6 +78,7 @@ extension SignInView {
                             }
                     case .otp:
                         TextField("123456", text: $oneTimeCode)
+                            .id("one_time_code_button")
                             .textContentType(.oneTimeCode)
                             .accessibilityIdentifier("one_time_code_button")
                             .padding(10)

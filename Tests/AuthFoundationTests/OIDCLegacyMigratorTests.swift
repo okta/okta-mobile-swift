@@ -41,28 +41,18 @@ final class OIDCLegacyMigratorTests: XCTestCase {
     }
 
     func testRegister() throws {
-        LegacyOIDC.register(issuer: issuer,
-                            clientId: "clientId",
-                            redirectUri: redirectUri,
-                            scopes: "openid profile")
+        LegacyOIDC.register(clientId: "clientId")
         
         let migrator = try XCTUnwrap(SDKVersion.Migration.registeredMigrators.first(where: {
             $0 is LegacyOIDC
         }) as? LegacyOIDC)
         
-        XCTAssertEqual(migrator.issuer, issuer)
         XCTAssertEqual(migrator.clientId, "clientId")
-        XCTAssertEqual(migrator.redirectUri, redirectUri)
-        XCTAssertEqual(migrator.scopes, "openid profile")
-        
         XCTAssertNil(migrator.migrationItems)
     }
     
     func testNeedsMigration() throws {
-        let migrator = LegacyOIDC(issuer: issuer,
-                                  clientId: "clientId",
-                                  redirectUri: redirectUri,
-                                  scopes: "openid profile")
+        let migrator = LegacyOIDC(clientId: "clientId")
         
         // Test no credentials to migrate
         keychain.expect(noErr, result: [] as CFArray)
@@ -96,15 +86,26 @@ final class OIDCLegacyMigratorTests: XCTestCase {
             ]
         ] as CFArray)
         XCTAssertTrue(migrator.needsMigration)
+
+        // Test that a clientId match counts as a match
+        keychain.expect(noErr, result: [
+            [
+                "svce": "",
+                "acct": "clientId",
+                "class": "genp",
+                "cdat": Date(),
+                "mdat": Date(),
+                "pdmn": "ak",
+                "agrp": "com.okta.sample.app"
+            ]
+        ] as CFArray)
+        XCTAssertTrue(migrator.needsMigration)
     }
-    
+
     func testMigrate() throws {
         let notificationRecorder = NotificationRecorder(observing: [ .credentialMigrated ])
         
-        let migrator = LegacyOIDC(issuer: issuer,
-                                  clientId: "clientId",
-                                  redirectUri: redirectUri,
-                                  scopes: "openid profile")
+        let migrator = LegacyOIDC(clientId: "clientId")
         
         // Note: This mock file was generated manually using the okta-oidc-ios package, archived, and base64-encoded.
         let base64Data = try data(from: .module, for: "MockLegacyOIDCKeychainItem.data", in: "MockResponses")
@@ -143,6 +144,10 @@ final class OIDCLegacyMigratorTests: XCTestCase {
         
         let credential = try XCTUnwrap(notificationRecorder.notifications.first?.object as? Credential)
         XCTAssertEqual(credential.id, "0oathisistheaccount0")
+        XCTAssertEqual(credential.token.refreshToken, "therefreshtoken")
+        XCTAssertEqual(credential.token.context.clientSettings?["redirect_uri"], "com.example:/callback")
+        XCTAssertEqual(credential.token.context.configuration.baseURL.absoluteString, "https://example.com")
+        XCTAssertNotEqual(credential.token.context.configuration.clientId, "0oathisistheaccount0")
     }
 }
 #endif

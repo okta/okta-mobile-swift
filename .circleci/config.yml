@@ -2,6 +2,7 @@ version: 2.1
 
 orbs:
   general-platform-helpers: okta/general-platform-helpers@1.8
+  macos: circleci/macos@2
 
 executors:
   apple-ci-arm-medium:
@@ -9,24 +10,196 @@ executors:
       xcode: 14.3.1
     resource_class: macos.m1.medium.gen1
 
+commands:
+  prepare-ios-simulator:
+    steps:
+      - macos/preboot-simulator:
+          version: "16.4"
+          platform: "iOS"
+          device: "iPhone 14 Pro Max"
+
+  prepare-tvos-simulator:
+    steps:
+      - macos/preboot-simulator:
+          version: "16.4"
+          platform: "tvOS"
+          device: "Apple TV"
+
+  ui-test:
+    parameters:
+      scheme:
+        type: string
+      sdk:
+        type: string
+        default: iphonesimulator
+      platform:
+        type: string
+        default: "iOS Simulator"
+    steps:
+      - run:
+          name: "Install test utilities"
+          command: |
+            if ! which -s xcresulttool; then
+              export HOMEBREW_NO_AUTO_UPDATE=1
+              brew tap a7ex/homebrew-formulae
+              brew install xcresultparser
+            fi
+      - run:
+          name: "Define destination"
+          command: |
+            if [[ "<<parameters.platform>>" == "macOS" ]]; then
+                export DESTINATION="platform=<<parameters.platform>>,name=Any Mac"
+            elif [[ -n $MACOS_ORB_DEVICE_UDID ]]; then
+                export DESTINATION="platform=<<parameters.platform>>,id=$MACOS_ORB_DEVICE_UDID"
+            else
+                export DESTINATION="platform=<<parameters.platform>>"
+            fi
+            echo "export DESTINATION=\"$DESTINATION\"" >> "$BASH_ENV"
+            source "$BASH_ENV"
+      - run:
+          name: "Build <<parameters.scheme>>"
+          environment:
+            NSUnbufferedIO: YES
+          command: |
+            set -o pipefail && xcodebuild \
+                -derivedDataPath /tmp/Build/DerivedData \
+                -clonedSourcePackagesDirPath /tmp/Build/ClonedSources \
+                -workspace OktaMobileSDK.xcworkspace \
+                -scheme "<<parameters.scheme>>" \
+                -sdk <<parameters.sdk>> \
+                -destination "$DESTINATION" \
+                build-for-testing 2>&1
+      - when:
+          condition:
+            and:
+              - not:
+                  equal: [ macOS, <<parameters.platform>> ]
+          steps:
+            - macos/wait-until-simulator-booted
+      - run:
+          name: "Test <<parameters.scheme>>"
+          environment:
+            NSUnbufferedIO: YES
+          command: |
+            set -o pipefail && xcodebuild \
+                -derivedDataPath /tmp/Build/DerivedData \
+                -clonedSourcePackagesDirPath /tmp/Build/ClonedSources \
+                -resultBundlePath "/tmp/TestResults/<<parameters.scheme>> #$CIRCLE_BUILD_NUM.xcresult" \
+                -workspace OktaMobileSDK.xcworkspace \
+                -scheme "<<parameters.scheme>>" \
+                -sdk <<parameters.sdk>> \
+                -destination "$DESTINATION" \
+                test-without-building 2>&1
+      - run:
+          name: "Export test results"
+          when: always
+          command: |
+            mkdir -p /tmp/junit-results
+            xcresultparser -o junit "/tmp/TestResults/<<parameters.scheme>> #$CIRCLE_BUILD_NUM.xcresult" > "/tmp/junit-results/<<parameters.scheme>>.xml"
+      - run:
+          name: "Compress test results"
+          when: always
+          command: |
+            cd /tmp/TestResults
+            if [[ -d "<<parameters.scheme>> #$CIRCLE_BUILD_NUM.xcresult" ]]; then
+              zip -r "<<parameters.scheme>> #$CIRCLE_BUILD_NUM.zip" "<<parameters.scheme>> #$CIRCLE_BUILD_NUM.xcresult" 
+              rm -rf "<<parameters.scheme>> #$CIRCLE_BUILD_NUM.xcresult" 
+            fi
+      - store_test_results:
+          path: "/tmp/junit-results/<<parameters.scheme>>.xml"
+
 jobs:
   setup:
     executor: apple-ci-arm-medium
     steps:
       - checkout
+      - run:
+          name: "Store configuration files"
+          command: |
+            printenv TEST_OKTA_PLIST | base64 -d -i - > ~/project/Samples/Shared/Okta.plist
+            printenv TEST_CONFIGURATION | base64 -d -i - > ~/project/Samples/Shared/TestConfiguration.xcconfig
       - persist_to_workspace:
           root: ~/project
           paths:
             - .
+
+  test-websignin-ios:
+    executor: apple-ci-arm-medium
+    steps:
+      - attach_workspace:
+          at: ~/project
+      - prepare-ios-simulator
+      - ui-test:
+          scheme: "WebSignIn (iOS)"
+      - ui-test:
+          scheme: "SingleSignOn (iOS)"
+      - store_artifacts:
+          path: "/tmp/TestResults"
+
+  test-directauth-ios:
+    executor: apple-ci-arm-medium
+    steps:
+      - attach_workspace:
+          at: ~/project
+      - prepare-ios-simulator
+      - ui-test:
+          scheme: "DirectAuthSignIn (iOS)"
+      - store_artifacts:
+          path: "/tmp/TestResults"
+
+  test-deviceauthsignin-ios:
+    executor: apple-ci-arm-medium
+    steps:
+      - attach_workspace:
+          at: ~/project
+      - prepare-ios-simulator
+      - ui-test:
+          scheme: "DeviceAuthSignIn (iOS)"
+      - store_artifacts:
+          path: "/tmp/TestResults"
+
+  test-deviceauthsignin-tvos:
+    executor: apple-ci-arm-medium
+    steps:
+      - attach_workspace:
+          at: ~/project
+      - prepare-tvos-simulator
+      - ui-test:
+          scheme: "DeviceAuthSignIn (tvOS)"
+          sdk: appletvsimulator
+          platform: "tvOS Simulator"
+      - store_artifacts:
+          path: "/tmp/TestResults"
+
+  test-userpasswordsignin-macos:
+    executor: apple-ci-arm-medium
+    steps:
+      - attach_workspace:
+          at: ~/project
+      - ui-test:
+          scheme: "UserPasswordSignIn (macOS)"
+          sdk: macosx
+          platform: "macOS"
+      - store_artifacts:
+          path: "/tmp/TestResults"
+
+  test-classicnativeauth-ios:
+    executor: apple-ci-arm-medium
+    steps:
+      - attach_workspace:
+          at: ~/project
+      - prepare-ios-simulator
+      - ui-test:
+          scheme: "ClassicNativeAuth (iOS)"
+      - store_artifacts:
+          path: "/tmp/TestResults"
 
   snyk-scan:
     executor: apple-ci-arm-medium
     steps:
       - attach_workspace:
           at: ~/project
-      - run:
-          name: Install rosetta # Needed for snyk to work on M1 machines.
-          command: softwareupdate --install-rosetta --agree-to-license
+      - macos/install-rosetta
       - run:
           name: run swift package show dependencies
           command: swift package show-dependencies
@@ -37,22 +210,37 @@ jobs:
           os: macos
 
 workflows:
+  ui-tests:
+    jobs:
+      - setup
+      - test-websignin-ios:
+          requires:
+            - setup
+      - test-directauth-ios:
+          requires:
+            - setup
+      - test-deviceauthsignin-ios:
+          requires:
+            - setup
+      - test-deviceauthsignin-tvos:
+          requires:
+            - setup
+      - test-userpasswordsignin-macos:
+          requires:
+            - setup
+      - test-classicnativeauth-ios:
+          requires:
+            - setup
+
   semgrep:
     jobs:
       - general-platform-helpers/job-semgrep-prepare:
           name: semgrep-prepare
-          filters:
-            branches:
-              only:
-                - master
       - general-platform-helpers/job-semgrep-scan:
           name: semgrep-scan
-          filters:
-            branches:
-              only:
-                - master
           requires:
             - semgrep-prepare
+
   security-scan:
     jobs:
       - setup:
@@ -62,17 +250,9 @@ workflows:
                 - master
       - general-platform-helpers/job-snyk-prepare:
           name: prepare-snyk
-          filters:
-            branches:
-              only:
-                - master
           requires:
             - setup
       - snyk-scan:
           name: execute-snyk
-          filters:
-            branches:
-              only:
-                - master
           requires:
             - prepare-snyk

@@ -16,80 +16,56 @@ import AuthFoundation
 class OOBStepHandler<Factor: AuthenticationFactor>: StepHandler {
     let flow: DirectAuthenticationFlow
     let openIdConfiguration: OpenIdConfiguration
+    let currentStatus: DirectAuthenticationFlow.Status?
     let loginHint: String?
-    let mfaToken: String?
     let channel: DirectAuthenticationFlow.OOBChannel
     let factor: Factor
+    private let bindingContext: DirectAuthenticationFlow.BindingUpdateContext?
     private var poll: PollingHandler<TokenRequest>?
     
     init(flow: DirectAuthenticationFlow,
          openIdConfiguration: OpenIdConfiguration,
+         currentStatus: DirectAuthenticationFlow.Status?,
          loginHint: String?,
-         mfaToken: String?,
          channel: DirectAuthenticationFlow.OOBChannel,
-         factor: Factor) throws
+         factor: Factor,
+         bindingContext: DirectAuthenticationFlow.BindingUpdateContext? = nil) throws
     {
         self.flow = flow
         self.openIdConfiguration = openIdConfiguration
+        self.currentStatus = currentStatus
         self.loginHint = loginHint
-        self.mfaToken = mfaToken
         self.channel = channel
         self.factor = factor
+        self.bindingContext = bindingContext
     }
     
     func process(completion: @escaping (Result<DirectAuthenticationFlow.Status, DirectAuthenticationFlowError>) -> Void) {
-        requestOOBCode { result in
-            switch result {
-            case .failure(let error):
-                self.flow.process(error, completion: completion)
-                
-            case .success(let response):
-                let request = TokenRequest(openIdConfiguration: self.openIdConfiguration,
-                                           clientConfiguration: self.flow.client.configuration,
-                                           factor: self.factor,
-                                           mfaToken: self.mfaToken,
-                                           oobCode: response.oobCode,
-                                           grantTypesSupported: self.flow.supportedGrantTypes)
-                self.poll = PollingHandler(client: self.flow.client,
-                                           request: request,
-                                           expiresIn: response.expiresIn,
-                                           interval: response.interval) { pollHandler, result in
-                    switch result {
-                    case .success(let response):
-                        return .success(response.result)
-                    case .failure(let error):
-                        guard case let .serverError(serverError) = error,
-                           let oauthError = serverError as? OAuth2ServerError
-                        else {
-                            return .failure(error)
-                        }
-
-                        switch oauthError.code {
-                        case .slowDown:
-                            pollHandler.interval += 5
-                            fallthrough
-                        case .authorizationPending: fallthrough
-                        case .directAuthAuthorizationPending:
-                            return .continuePolling
-                        default:
-                            return .failure(error)
-                        }
-                    }
+        if let bindingContext {
+            self.requestToken(using: bindingContext.oobResponse, completion: completion)
+        } else {
+            requestOOBCode { [weak self] result in
+                guard let self else {
+                    return
                 }
-                
-                self.poll?.start { result in
-                    switch result {
-                    case .success(let token):
-                        completion(.success(.success(token)))
-                    case .failure(let error):
-                        switch error {
-                        case .apiClientError(let error):
-                            self.flow.process(error, completion: completion)
-                        case .timeout:
-                            completion(.failure(.pollingTimeoutExceeded))
+                switch result {
+                case .failure(let error):
+                    self.flow.process(error, completion: completion)
+                case .success(let response):
+                    switch response.bindingMethod {
+                    case .none:
+                        self.requestToken(using: response, completion: completion)
+                    case .transfer:
+                        guard let bindingCode = response.bindingCode,
+                              bindingCode.isEmpty == false
+                        else {
+                            completion(.failure(.bindingCodeMissing))
+                            return
                         }
+                        
+                        completion(.success(.bindingUpdate(.init(update: .transfer(bindingCode),
+                                                                 oobResponse: response))))
                     }
-                    self.poll = nil
                 }
             }
         }
@@ -105,8 +81,8 @@ class OOBStepHandler<Factor: AuthenticationFactor>: StepHandler {
         }
         
         // Request where OOB is used as the secondary factor
-        else if let mfaToken = mfaToken {
-            requestOOBCode(mfaToken: mfaToken, completion: completion)
+        else if case let .mfaRequired(context) = currentStatus {
+            requestOOBCode(mfaToken: context.mfaToken, completion: completion)
         }
         
         // Cannot create a request
@@ -140,10 +116,11 @@ class OOBStepHandler<Factor: AuthenticationFactor>: StepHandler {
                                 completion: @escaping (Result<OOBResponse, APIClientError>) -> Void)
     {
         do {
+            let grantType = factor.grantType(currentStatus: currentStatus)
             let request = try ChallengeRequest(openIdConfiguration: openIdConfiguration,
                                                clientConfiguration: flow.client.configuration,
                                                mfaToken: mfaToken,
-                                               challengeTypesSupported: [factor.grantType])
+                                               challengeTypesSupported: [grantType])
             request.send(to: flow.client) { result in
                 switch result {
                 case .failure(let error):
@@ -158,6 +135,56 @@ class OOBStepHandler<Factor: AuthenticationFactor>: StepHandler {
             }
         } catch {
             completion(.failure(.validation(error: error)))
+        }
+    }
+
+    private func requestToken(using response: OOBResponse, completion: @escaping (Result<DirectAuthenticationFlow.Status, DirectAuthenticationFlowError>) -> Void) {
+        let request = TokenRequest(openIdConfiguration: openIdConfiguration,
+                                   clientConfiguration: flow.client.configuration,
+                                   currentStatus: currentStatus,
+                                   factor: factor,
+                                   parameters: response,
+                                   grantTypesSupported: flow.supportedGrantTypes)
+        self.poll = PollingHandler(client: flow.client,
+                                   request: request,
+                                   expiresIn: response.expiresIn,
+                                   interval: response.interval) { pollHandler, result in
+            switch result {
+            case .success(let response):
+                return .success(response.result)
+            case .failure(let error):
+                guard case let .serverError(serverError) = error,
+                   let oauthError = serverError as? OAuth2ServerError
+                else {
+                    return .failure(error)
+                }
+
+                switch oauthError.code {
+                case .slowDown:
+                    pollHandler.interval += 5
+                    fallthrough
+                case .authorizationPending: fallthrough
+                case .directAuthAuthorizationPending:
+                    return .continuePolling
+                default:
+                    return .failure(error)
+                }
+            }
+        }
+        
+        self.poll?.start { result in
+            switch result {
+            case .success(let token):
+                completion(.success(.success(token)))
+            case .failure(let error):
+                switch error {
+                case .apiClientError(let apiClientError):
+                    self.flow.process(apiClientError, completion: completion)
+                case .timeout:
+                    completion(.failure(.pollingTimeoutExceeded))
+                }
+            }
+            self.poll = nil
         }
     }
 }

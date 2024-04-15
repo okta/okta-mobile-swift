@@ -117,9 +117,11 @@ public final class OAuth2Client {
     /// If this value has recently been retrieved, the cached result is returned.
     /// - Parameter completion: Completion block invoked with the result.
     public func openIdConfiguration(completion: @escaping (Result<OpenIdConfiguration, OAuth2Error>) -> Void) {
-        configurationQueue.sync {
+        configurationLock.withLock {
             if let openIdConfiguration = openIdConfiguration {
-                completion(.success(openIdConfiguration))
+                configurationQueue.async {
+                    completion(.success(openIdConfiguration))
+                }
             } else {
                 guard openIdConfigurationAction == nil else {
                     openIdConfigurationAction?.add(completion)
@@ -161,23 +163,13 @@ public final class OAuth2Client {
     ///   - token: Token to refresh.
     ///   - completion: Completion bock invoked with the result.
     public func refresh(_ token: Token, clientSecret: String, resource: String, completion: @escaping (Result<Token, OAuth2Error>) -> Void) {
-        let type = Token.Kind.refreshToken
-        guard let clientSettings = token.context.clientSettings,
-              token.refreshToken != nil
-        else {
-            completion(.failure(.missingToken(type: .refreshToken)))
-            return
-        }
-
-        guard
-            !clientSecret.isEmpty,
-            !resource.isEmpty
-        else {
-            completion(.failure(.missingClientConfiguration))
-            return
-        }
-        
-        refreshQueue.sync {
+        refreshLock.withLock {
+            guard let clientSettings = token.context.clientSettings,
+                  token.refreshToken != nil
+            else {
+                completion(.failure(.missingToken(type: .refreshToken)))
+                return
+            }
             guard token.refreshAction == nil else {
                 token.refreshAction?.add(completion)
                 return
@@ -278,18 +270,26 @@ public final class OAuth2Client {
         openIdConfiguration { result in
             switch result {
             case .success(let configuration):
-                let request = Token.RevokeRequest(openIdConfiguration: configuration,
-                                                  clientAuthentication: self.configuration.authentication,
-                                                  token: tokenString,
-                                                  hint: tokenType,
-                                                  configuration: clientSettings)
-                request.send(to: self) { result in
-                    switch result {
-                    case .success:
-                        completion(.success(()))
-                    case .failure(let error):
-                        completion(.failure(.network(error: error)))
+                do {
+                    let request = try Token.RevokeRequest(openIdConfiguration: configuration,
+                                                          clientAuthentication: self.configuration.authentication,
+                                                          token: tokenString,
+                                                          hint: tokenType,
+                                                          configuration: clientSettings)
+                    request.send(to: self) { result in
+                        switch result {
+                        case .success:
+                            completion(.success(()))
+                        case .failure(let error):
+                            completion(.failure(.network(error: error)))
+                        }
                     }
+                } catch let error as OAuth2Error {
+                    completion(.failure(error))
+                    return
+                } catch {
+                    completion(.failure(.error(error)))
+                    return
                 }
             case .failure(let error):
                 completion(.failure(error))
@@ -536,6 +536,9 @@ public final class OAuth2Client {
     // MARK: Private properties / methods
     private let delegates = DelegateCollection<OAuth2ClientDelegate>()
 
+    private let refreshLock = UnfairLock()
+    private let configurationLock = UnfairLock()
+    
     private lazy var configurationQueue: DispatchQueue = {
         DispatchQueue(label: "com.okta.configurationQueue.\(baseURL.host ?? "unknown")",
                       qos: .userInitiated,

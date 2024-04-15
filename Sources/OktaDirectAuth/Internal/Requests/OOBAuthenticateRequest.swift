@@ -14,17 +14,31 @@ import Foundation
 import AuthFoundation
 
 extension OpenIdConfiguration {
-    var oobAuthenticateEndpoint: URL? {
-        tokenEndpoint.url(replacing: "/token", with: "/oob-authenticate")
+    var primaryAuthenticateEndpoint: URL? {
+        tokenEndpoint.url(replacing: "/token", with: "/primary-authenticate")
     }
 }
 
-struct OOBResponse: Codable {
+struct OOBResponse: Codable, HasTokenParameters {
     let oobCode: String
     let expiresIn: TimeInterval
     let interval: TimeInterval
     let channel: DirectAuthenticationFlow.OOBChannel
     let bindingMethod: BindingMethod
+    let bindingCode: String?
+
+    init(oobCode: String, expiresIn: TimeInterval, interval: TimeInterval, channel: DirectAuthenticationFlow.OOBChannel, bindingMethod: BindingMethod, bindingCode: String? = nil) {
+        self.oobCode = oobCode
+        self.expiresIn = expiresIn
+        self.interval = interval
+        self.channel = channel
+        self.bindingMethod = bindingMethod
+        self.bindingCode = bindingCode
+    }
+    
+    func tokenParameters(currentStatus: DirectAuthenticationFlow.Status?) -> [String: String] {
+        ["oob_code": oobCode]
+    }
 }
 
 struct OOBAuthenticateRequest {
@@ -38,7 +52,7 @@ struct OOBAuthenticateRequest {
          loginHint: String,
          channelHint: DirectAuthenticationFlow.OOBChannel) throws
     {
-        guard let url = openIdConfiguration.oobAuthenticateEndpoint else {
+        guard let url = openIdConfiguration.primaryAuthenticateEndpoint else {
             throw OAuth2Error.cannotComposeUrl
         }
         
@@ -51,6 +65,7 @@ struct OOBAuthenticateRequest {
 
 enum BindingMethod: String, Codable {
     case none
+    case transfer
 }
 
 extension OOBAuthenticateRequest: APIRequest, APIRequestBody {

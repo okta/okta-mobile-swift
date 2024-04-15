@@ -14,18 +14,43 @@ import Foundation
 
 /// Errors that may occur when interacting with OAuth2 endpoints.
 public enum OAuth2Error: Error {
+    /// Could not create an invalid URL. This typically means the string passed to `URL` was malformed.
     case invalidUrl
+    
+    /// Cannot compose a URL to authenticate with.
     case cannotComposeUrl
+    
+    /// An OAuth2 server error was reported, with the given values.
     case oauth2Error(code: String, description: String?, additionalKeys: [String: String]? = nil)
+    
+    /// A network error was encountered, encapsulating a ``APIClientError`` type describing the underlying error.
     case network(error: APIClientError)
+    
+    /// The given token type is missing.
     case missingToken(type: Token.Kind)
+    
+    /// Cannot perform an operation since the token is missing its client configuration.
     case missingClientConfiguration
+    
+    /// Could not verify the token's signature.
     case signatureInvalid
+    
+    /// Missing location header for token redirect.
     case missingLocationHeader
+    
+    /// Missing the given required response key in the OAuth2 redirect.
     case missingOAuth2ResponseKey(_ name: String)
+    
+    /// The given OpenID configuration attribute is missing.
     case missingOpenIdConfiguration(attribute: String)
+    
+    /// The given nested error was thrown.
     case error(_ error: Error)
+    
+    /// Cannot revoke the given token type.
     case cannotRevoke(type: Token.RevokeType)
+    
+    /// Multiple nested ``OAuth2Error`` errors were reported.
     case multiple(errors: [OAuth2Error])
 }
 

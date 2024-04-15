@@ -132,6 +132,22 @@ final class OAuth2ClientTests: XCTestCase {
                        "https://example.com/oauth2/v1/authorize")
     }
     
+    #if swift(>=5.5.1)
+    @available(iOS 13.0, tvOS 13.0, macOS 10.15, watchOS 6, *)
+    func testOpenIDConfigurationAsync() async throws {
+        urlSession.expect("https://example.com/.well-known/openid-configuration",
+                          data: try data(from: .module, for: "openid-configuration", in: "MockResponses"),
+                          contentType: "application/json")
+
+        let client = try XCTUnwrap(self.client)
+        try perform {
+            let config = try await client.openIdConfiguration()
+            XCTAssertEqual(config.authorizationEndpoint.absoluteString,
+                           "https://example.com/oauth2/v1/authorize")
+        }
+    }
+    #endif
+    
     func testJWKS() throws {
         urlSession.expect("https://example.com/.well-known/openid-configuration",
                           data: try data(from: .module, for: "openid-configuration", in: "MockResponses"),
@@ -479,11 +495,11 @@ final class OAuth2ClientTests: XCTestCase {
     }
     
     func testRevokeRequestClientAuthentication() throws {
-        let request = Token.RevokeRequest(openIdConfiguration: openIdConfiguration,
-                                          clientAuthentication: .clientSecret("supersecret"),
-                                          token: "the-token",
-                                          hint: .deviceSecret,
-                                          configuration: [:])
+        let request = try Token.RevokeRequest(openIdConfiguration: openIdConfiguration,
+                                              clientAuthentication: .clientSecret("supersecret"),
+                                              token: "the-token",
+                                              hint: .deviceSecret,
+                                              configuration: [:])
         let parameters = try XCTUnwrap(request.bodyParameters as? [String: String])
         XCTAssertEqual(parameters["token"], "the-token")
         XCTAssertEqual(parameters["token_type_hint"], "device_secret")

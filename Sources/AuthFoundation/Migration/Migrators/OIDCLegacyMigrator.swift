@@ -41,88 +41,77 @@ extension SDKVersion.Migration {
         public static func register(plist fileURL: URL) throws {
             try register(try OAuth2Client.PropertyListConfiguration(plist: fileURL))
         }
-        
-        /// Registers the legacy OIDC migration using the supplied configuration values.
-        /// - Parameters:
-        ///   - issuer: Issuer URL for your client.
-        ///   - clientId: Client ID for your application.
-        ///   - redirectUri: The Redirect URI for your client.
-        ///   - scopes: The scopes configured for your client.
+
+        @available(*, deprecated, renamed: "register(clientId:)")
         public static func register(issuer: URL,
                                     clientId: String,
                                     redirectUri: URL,
                                     scopes: String)
         {
-            SDKVersion.register(migrator: LegacyOIDC(issuer: issuer,
-                                                     clientId: clientId,
-                                                     redirectUri: redirectUri,
-                                                     scopes: scopes))
+            register(clientId: clientId)
+        }
+        
+        /// Registers the legacy OIDC migration using the supplied configuration values.
+        /// - Parameters:
+        ///   - clientId: Client ID for your application.
+        public static func register(clientId: String? = nil) {
+            SDKVersion.register(migrator: LegacyOIDC(clientId: clientId))
         }
         
         private static func register(_ config: OAuth2Client.PropertyListConfiguration) throws {
-            guard let redirectUri = config.redirectUri else {
-                throw OAuth2Client.PropertyListConfigurationError.missingConfigurationValues
-            }
-            
-            self.register(issuer: config.issuer,
-                          clientId: config.clientId,
-                          redirectUri: redirectUri,
-                          scopes: config.scopes)
+            self.register(clientId: config.clientId)
         }
         
-        let issuer: URL
-        let clientId: String
-        let redirectUri: URL
-        let scopes: String
-        private(set) var migrationItems: [Keychain.Search.Result]?
-        
-        init(issuer: URL, clientId: String, redirectUri: URL, scopes: String) {
-            self.issuer = issuer
-            self.clientId = clientId
-            self.redirectUri = redirectUri
-            self.scopes = scopes
-        }
-        
-        public var needsMigration: Bool {
+        let clientId: String?
+        var migrationItems: [Keychain.Search.Result]? {
             guard let regex = accountIdRegex,
                   let items = try? Keychain
                 .Search(service: "")
                 .list()
             else {
-                return false
+                return nil
             }
             
-            let results = items.filter({ searchResult in
-                // swiftlint:disable empty_string
-                guard searchResult.service == "",
-                      regex.matches(in: searchResult.account, range: NSRange(location: 0, length: searchResult.account.count)).count == 1
+            return items.filter({ searchResult in
+                guard let service = searchResult.service,
+                      service.isEmpty
                 else {
                     return false
                 }
-                // swiftlint:enable empty_string
-                return true
-            })
                 
-            return !results.isEmpty
+                if let clientId = clientId,
+                   searchResult.account == clientId
+                {
+                    return true
+                }
+                
+                if regex.matches(in: searchResult.account,
+                                 range: NSRange(location: 0,
+                                                length: searchResult.account.count)).count == 1
+                {
+                    return true
+                }
+                
+                return false
+            })
+        }
+        
+        init(clientId: String?) {
+            self.clientId = clientId
+        }
+        
+        public var needsMigration: Bool {
+            guard let migrationItems = migrationItems else { return false }
+            return !migrationItems.isEmpty
         }
         
         public func migrate() throws {
-            guard let regex = accountIdRegex else {
-                return
-            }
-
-            try Keychain
-                .Search(service: "")
-                .list()
-                .filter({ searchResult in
-                    regex.matches(in: searchResult.account,
-                                  range: NSRange(location: 0, length: searchResult.account.count)).count == 1
-                }).map({ searchResult in
-                    let item = try searchResult.get()
-                    return (searchResult, try decode(item.value))
-                }).forEach({ (item: Keychain.Search.Result, oldModel: StateManager?) in
-                    try importToken(item, from: oldModel)
-                })
+            try migrationItems?.map({ searchResult in
+                let item = try searchResult.get()
+                return (searchResult, try decode(item.value))
+            }).forEach({ (item: Keychain.Search.Result, oldModel: StateManager?) in
+                try importToken(item, from: oldModel)
+            })
         }
 
         private func decode(_ data: Data) throws -> StateManager? {
@@ -141,7 +130,11 @@ extension SDKVersion.Migration {
             archiver.setClass(StateManager.TokenResponse.self, forClassName: "OIDTokenResponse")
             archiver.setClass(StateManager.AuthorizationResponse.self, forClassName: "OKTAuthorizationResponse")
             archiver.setClass(StateManager.AuthorizationResponse.self, forClassName: "OIDAuthorizationResponse")
-            
+            archiver.setClass(StateManager.AuthorizationRequest.self, forClassName: "OKTAuthorizationRequest")
+            archiver.setClass(StateManager.AuthorizationRequest.self, forClassName: "OIDAuthorizationRequest")
+            archiver.setClass(StateManager.ServiceConfiguration.self, forClassName: "OKTServiceConfiguration")
+            archiver.setClass(StateManager.ServiceConfiguration.self, forClassName: "OIDServiceConfiguration")
+
             defer { archiver.finishDecoding() }
 
             return try archiver.decodeTopLevelObject(of: StateManager.self,
@@ -149,11 +142,17 @@ extension SDKVersion.Migration {
         }
         
         private func importToken(_ item: Keychain.Search.Result, from model: StateManager?) throws {
-            guard let tokenResponse = model?.authState?.lastTokenResponse,
+            guard let authState = model?.authState,
+                  let tokenResponse = authState.lastTokenResponse,
                   let tokenType = tokenResponse.tokenType,
                   let expiresIn = tokenResponse.accessTokenExpirationDate?.timeIntervalSinceNow,
                   let accessToken = tokenResponse.accessToken,
-                  let scope = tokenResponse.scope
+                  let scope = tokenResponse.scope,
+                  let authorizationRequest = authState.lastAuthorizationResponse?.request,
+                  let clientId = authorizationRequest.clientID,
+                  let redirectURL = authorizationRequest.redirectURL,
+                  let serviceConfig = authorizationRequest.configuration,
+                  let issuer = serviceConfig.issuer
             else {
                 return
             }
@@ -167,12 +166,16 @@ extension SDKVersion.Migration {
 
             let configuration = OAuth2Client.Configuration(baseURL: issuer,
                                                            clientId: clientId,
-                                                           scopes: scopes)
-            let clientSettings: [String: String] = [
+                                                           scopes: scope)
+            var clientSettings: [String: String] = [
                 "client_id": clientId,
-                "redirect_uri": redirectUri.absoluteString,
+                "redirect_uri": redirectURL.absoluteString,
                 "scope": scope
             ]
+            
+            if let additionalParameters = tokenResponse.additionalParameters {
+                clientSettings.merge(additionalParameters, uniquingKeysWith: { $1 })
+            }
             
             let issueDate = idToken?.issuedAt ?? Date()
 
@@ -189,7 +192,11 @@ extension SDKVersion.Migration {
                                                      clientSettings: clientSettings))
             
             var security = Credential.Security.standard
-            if let accessibility = item.accessibility {
+            if let accessibility = model?.accessibility,
+               let accessibilityValue = Keychain.Accessibility(rawValue: accessibility)
+            {
+                security.insert(.accessibility(accessibilityValue), at: 0)
+            } else if let accessibility = item.accessibility {
                 security.insert(.accessibility(accessibility), at: 0)
             }
             
@@ -209,7 +216,8 @@ extension SDKVersion.Migration {
             NotificationCenter.default.post(name: .credentialMigrated, object: credential)
         }
         
-        @objc(_OIDCLegacyStateManager) class StateManager: NSObject, NSCoding {
+        @objc(_OIDCLegacyStateManager)
+        class StateManager: NSObject, NSCoding {
             @objc let authState: AuthState?
             @objc let accessibility: String?
 
@@ -220,7 +228,8 @@ extension SDKVersion.Migration {
                 accessibility = coder.decodeObject(forKey: "accessibility") as? String
             }
 
-            @objc(_OIDCLegacyAuthState) class AuthState: NSObject, NSCoding {
+            @objc(_OIDCLegacyAuthState)
+            class AuthState: NSObject, NSCoding {
                 @objc let refreshToken: String?
                 @objc let scope: String?
                 @objc let lastTokenResponse: TokenResponse?
@@ -236,7 +245,8 @@ extension SDKVersion.Migration {
                 }
             }
             
-            @objc(_OIDCLegacyTokenResponse) class TokenResponse: NSObject, NSCoding {
+            @objc(_OIDCLegacyTokenResponse)
+            class TokenResponse: NSObject, NSCoding {
                 @objc let accessToken: String?
                 @objc let accessTokenExpirationDate: Date?
                 @objc let tokenType: String?
@@ -258,15 +268,40 @@ extension SDKVersion.Migration {
                 }
             }
             
-            @objc(_OIDCLegacyAuthorizationResponse) class AuthorizationResponse: NSObject, NSCoding {
-                @objc let authorizationCode: String?
-                @objc let state: String?
+            @objc(_OIDCLegacyAuthorizationResponse)
+            class AuthorizationResponse: NSObject, NSCoding {
+                @objc let request: AuthorizationRequest?
                 
                 func encode(with coder: NSCoder) {}
 
                 required init?(coder: NSCoder) {
-                    state = coder.decodeObject(forKey: "state") as? String
-                    authorizationCode = coder.decodeObject(forKey: "authorizationCode") as? String
+                    request = coder.decodeObject(forKey: "request") as? AuthorizationRequest
+                }
+            }
+
+            @objc(_OIDCLegacyAuthorizationRequest)
+            class AuthorizationRequest: NSObject, NSCoding {
+                @objc let clientID: String?
+                @objc let redirectURL: URL?
+                @objc let configuration: ServiceConfiguration?
+
+                func encode(with coder: NSCoder) {}
+
+                required init?(coder: NSCoder) {
+                    clientID = coder.decodeObject(forKey: "client_id") as? String
+                    redirectURL = coder.decodeObject(forKey: "redirect_uri") as? URL
+                    configuration = coder.decodeObject(forKey: "configuration") as? ServiceConfiguration
+                }
+            }
+
+            @objc(_OIDCLegacyServiceConfiguration)
+            class ServiceConfiguration: NSObject, NSCoding {
+                @objc let issuer: URL?
+
+                func encode(with coder: NSCoder) {}
+
+                required init?(coder: NSCoder) {
+                    issuer = coder.decodeObject(forKey: "issuer") as? URL
                 }
             }
         }

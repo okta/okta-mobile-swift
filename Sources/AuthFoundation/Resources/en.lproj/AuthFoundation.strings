@@ -6,7 +6,6 @@
 "cannot_parse_response_description" = "Cannot parse server response: %@";
 "invalid_request_data_description" = "Cannot send invalid request data to the server.";
 "missing_refresh_settings_description" = "Cannot refresh a token since it is missing refresh information.";
-"missing_client_configuration_description" = "Cannot revoke a token since it is missing its client configuration.";
 "unsupported_content_type_description" = "Request does not support %@ content.";
 "server_error_description" = "Received an error from the server: %@";
 "status_code_description" = "Received HTTP %d response code.";
@@ -14,6 +13,7 @@
 "validation_error" = "Could not validate the received token.";
 
 /* OAuth2Error */
+"missing_client_configuration_description" = "Cannot perform an operation since the token is missing its client configuration.";
 "cannot_compose_url_description" = "Cannot compose a URL to authenticate with.";
 "oauth2_error_description" = "Authentication error: %@ (code %d).";
 "oauth2_error_code_description" = "Authentication error code %@.";
@@ -44,7 +44,7 @@
 "jwt_signature_verification_unavailable" = "Signature verification is unavailable on this platform.";
 "jwt_unsupported_algorithm" = "Signing algorithm \"%@\" is unsupported.";
 "jwt_cannot_generate_hash" = "Cannot generate hash signature.";
-"jwt_exceeds_max_age" = "Cannot generate hash signature.";
+"jwt_exceeds_max_age" = "The token exceeds the supplied maximum age.";
 
 /* KeychainError */
 "keychain_cannot_get" = "There was a failure getting a keychain item (%d).";

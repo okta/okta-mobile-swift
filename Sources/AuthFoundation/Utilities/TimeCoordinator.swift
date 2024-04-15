@@ -53,13 +53,17 @@ class DefaultTimeCoordinator: TimeCoordinator, OAuth2ClientDelegate {
         Date.coordinator = DefaultTimeCoordinator()
     }
     
-    @ThreadSafe
-    private(set) var offset: TimeInterval
+    private let lock = UnfairLock()
+    private var _offset: TimeInterval
+    private(set) var offset: TimeInterval {
+        get { lock.withLock { _offset } }
+        set { lock.withLock { _offset = newValue } }
+    }
     
     private var observer: NSObjectProtocol?
 
     init() {
-        self.offset = 0
+        self._offset = 0
         self.observer = NotificationCenter.default.addObserver(forName: .oauth2ClientCreated,
                                                                object: nil,
                                                                queue: nil,

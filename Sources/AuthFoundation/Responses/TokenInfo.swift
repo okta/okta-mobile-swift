@@ -17,7 +17,9 @@ import Foundation
 /// This provides a convenience mechanism for accessing information related to a token. It supports the ``HasClaims`` protocol, to simplify common operations against introspected information, and to provide consistency with the ``JWT`` class.
 ///
 /// For more information about the members to use, please refer to ``ClaimContainer``.
-public struct TokenInfo: Codable, HasClaims, ClaimContainer {
+public struct TokenInfo: Codable, JSONClaimContainer {
+    public typealias ClaimType = JWTClaim
+    
     public let payload: [String: Any]
     
     public init(_ info: [String: Any]) {

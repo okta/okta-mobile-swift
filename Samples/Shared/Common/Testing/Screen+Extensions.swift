@@ -49,50 +49,39 @@ extension WebLogin where Self: Screen {
 
         guard app.webViews.firstMatch.waitForExistence(timeout: .long) else { return }
         send(username: username)
-        
-        let nextButton = app.webViews.buttons["Next"]
-        if nextButton.exists {
-            nextButton.tap()
-        }
-        
         send(password: password)
-        
-        if username != nil || password != nil {
-            if verifyButton.exists {
-                verifyButton.tap()
-            } else if signInButton.waitForNonExistence(timeout: .short) {
-                signInButton.tap()
-            }
-        }
 
         _ = app.webViews.firstMatch.waitForNonExistence(timeout: .standard)
     }
     
     func send(username: String? = nil) {
-        if let username = username,
-           app.webViews.textFields.firstMatch.waitForExistence(timeout: .veryLong)
-        {
+        guard let username else { return }
+        
+        if app.webViews.textFields.firstMatch.waitForExistence(timeout: .veryLong) {
             let field = app.webViews.textFields.element(boundBy: 0)
-            
-            if !isEphemeral,
-               let fieldValue = field.value as? String,
+            field.tap()
+
+            if let fieldValue = field.value as? String,
                !fieldValue.isEmpty
             {
+                usleep(useconds_t(1000)) // Wait for the field to be selected
                 field.tap(withNumberOfTaps: 3, numberOfTouches: 1)
-            } else {
-                field.tap()
             }
             
             field.typeText(username)
 
-            dismissKeyboard()
+            tapKeyboardNextOrGo()
         }
     }
     
     func select(authenticator: String) {
         let frame = app.webViews.staticTexts[authenticator].frame
         for link in app.webViews.links {
-            guard link.label == "Select" else { continue }
+            guard link.label == "Select" ||
+                    link.label == "Select \(authenticator)."
+            else {
+                continue
+            }
             
             if link.frame.midY > frame.minY,
                link.frame.midY < frame.maxY
@@ -103,19 +92,27 @@ extension WebLogin where Self: Screen {
         }
     }
     
+    func wait(for staticText: String, timeout: TimeInterval = .standard) -> Bool {
+        guard app.staticTexts[staticText].waitForExistence(timeout: timeout) else { return false }
+        if !app.staticTexts[staticText].isHittable {
+            return app.staticTexts[staticText].waitToBeHittable(timeout: timeout)
+        }
+        return true
+    }
+    
     func send(password: String? = nil) {
-        if app.webViews.staticTexts["Select from the following options"].waitForExistence(timeout: 1) {
+        guard let password else { return }
+        
+        if app.webViews.staticTexts["Select Password."].waitToBeHittable(timeout: .standard) {
             select(authenticator: "Password")
         }
         
-        if let password = password,
-           app.webViews.secureTextFields.firstMatch.waitForExistence(timeout: 5)
-        {
+        if app.webViews.secureTextFields.firstMatch.waitForExistence(timeout: 5) {
             let field = app.webViews.secureTextFields.element(boundBy: 0)
             field.tap()
             field.typeText(password)
             
-            dismissKeyboard()
+            tapKeyboardNextOrGo()
         }
     }
     

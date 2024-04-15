@@ -14,11 +14,7 @@ import Foundation
 import ArgumentParser
 import OktaOAuth2
 
-#if swift(>=5.6)
 typealias Command = AsyncParsableCommand
-#else
-typealias Command = ParsableCommand
-#endif
 
 @main
 struct UserPasswordSignIn: Command {
@@ -31,7 +27,12 @@ struct UserPasswordSignIn: Command {
     @Option(help: "The scopes to use.")
     var scopes: String = "openid profile"
     
-    #if swift(>=5.6)
+    @Option(help: "Username to use")
+    var username: String?
+    
+    @Option(help: "Password")
+    var password: String?
+    
     mutating func run() async throws {
         guard #available(macOS 12, *) else {
             print("'user-password-sign-in' isn't supported on this platform.")
@@ -43,28 +44,4 @@ struct UserPasswordSignIn: Command {
                                          password: try promptPassword())
         printUserInfo(using: token)
     }
-    #else
-    mutating func run() throws {
-        guard #available(macOS 12, *) else {
-            print("'user-password-sign-in' isn't supported on this platform.")
-            return
-        }
- 
-        let flow = try createFlow()
-        
-        let group = DispatchGroup()
-        group.enter()
-        flow.start(username: try promptUsername(),
-                   password: try promptPassword()) { result in
-            defer { group.leave() }
-            switch result {
-            case .success(let token):
-                printUserInfo(using: token)
-            case .failure(let error):
-                print(error)
-            }
-        }
-        _ = group.wait(timeout: .now() + 30)
-    }
-    #endif
 }

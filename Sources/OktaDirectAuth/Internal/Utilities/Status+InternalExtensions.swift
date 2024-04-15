@@ -13,9 +13,11 @@
 import Foundation
 
 extension DirectAuthenticationFlow.Status {
-    var mfaToken: String? {
+    var mfaContext: DirectAuthenticationFlow.MFAContext? {
         if case let .mfaRequired(context) = self {
-            return context.mfaToken
+            return context
+        } else if case let .webAuthn(context) = self {
+            return context.mfaContext
         } else {
             return nil
         }

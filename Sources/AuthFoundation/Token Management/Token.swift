@@ -45,6 +45,8 @@ public final class Token: Codable, Equatable, Hashable, Expires {
     public let refreshToken: String?
     
     /// The ID token, if requested.
+    ///
+    /// For more information on working with an ID token, see the <doc:WorkingWithClaims> documentation.
     public let idToken: JWT?
     
     /// Defines the context this token was issued from.

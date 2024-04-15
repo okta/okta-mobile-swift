@@ -26,6 +26,7 @@ public protocol DirectAuthenticationFlowDelegate: AuthenticationDelegate {
 /// Errors that may be generated while authenticating using ``DirectAuthenticationFlow``.
 public enum DirectAuthenticationFlowError: Error {
     case pollingTimeoutExceeded
+    case bindingCodeMissing
     case missingArguments(_ names: [String])
     case network(error: APIClientError)
     case oauth2(error: OAuth2Error)
@@ -69,6 +70,15 @@ public class DirectAuthenticationFlow: AuthenticationFlow {
         ///
         /// > Note: While `.oob` accepts a `channel` argument, at this time only the `push` option is available.
         case oob(channel: OOBChannel = .push)
+        
+        /// Authenticate the user using WebAuthn.
+        ///
+        /// This requests that a new WebAuthn challenge is generated and returned to the client, which can subsequently be used to sign the attestation for return back to the server.
+        ///
+        /// ```swift
+        /// let status = try await flow.start("jane.doe@example.com", with: .webAuthn)
+        /// ```
+        case webAuthn
     }
     
     /// Enumeration defining the list of possible secondary authentication factors.
@@ -92,6 +102,20 @@ public class DirectAuthenticationFlow: AuthenticationFlow {
         ///
         /// > Note: While `.oob` accepts a `channel` argument, at this time only the `push` option is available.
         case oob(channel: OOBChannel)
+        
+        /// Authenticate the user using WebAuthn.
+        ///
+        /// This requests that a new WebAuthn challenge is generated and returned to the client, which can subsequently be used to sign the attestation for return back to the server.
+        ///
+        /// ```swift
+        /// let status = try await flow.start("jane.doe@example.com", with: .webAuthn)
+        /// ```
+        case webAuthn
+        
+        /// Respond to a WebAuthn challenge with an authenticator assertion.
+        ///
+        /// This uses a previously supplied WebAuthn challenge (using ``DirectAuthenticationFlow/PrimaryFactor/webAuthn`` or ``webAuthn``) to respond to the server with the signed attestation from the local authenticator.
+        case webAuthnAssertion(_ response: WebAuthn.AuthenticatorAssertionResponse)
     }
     
     /// Channel used when authenticating an out-of-band factor using Okta Verify.
@@ -111,6 +135,27 @@ public class DirectAuthenticationFlow: AuthenticationFlow {
             self.mfaToken = mfaToken
         }
     }
+
+    /// Represents the different types of binding updates that can be received
+    public enum BindingUpdateType {
+        /// Binding requires transfer of a code from one channel to another
+        case transfer(_ code: String)
+    }
+
+    /// Holds information about the binding update received when verifying OOB factors
+    public struct BindingUpdateContext {
+        /// Holds the type of binding update received from the server
+        public let update: BindingUpdateType
+        let oobResponse: OOBResponse
+    }
+    
+    /// Holds information about a challenge request when initiating a WebAuthn authentication.
+    public struct WebAuthnContext {
+        /// The credential request returned from the server.
+        public let request: WebAuthn.CredentialRequestOptions
+        
+        let mfaContext: MFAContext?
+    }
     
     /// The current status of the authentication flow.
     ///
@@ -119,10 +164,16 @@ public class DirectAuthenticationFlow: AuthenticationFlow {
         /// Authentication was successful, returning the given token.
         case success(_ token: Token)
         
+        /// Indicates that there is an update about binding authentication channels when verifying OOB factors
+        case bindingUpdate(_ context: BindingUpdateContext)
+
         /// Indicates the user should be challenged with some other secondary factor.
         ///
         /// When this status is returned, the developer should use the ``DirectAuthenticationFlow/resume(_:with:)`` function to supply a secondary factor to verify the user.
         case mfaRequired(_ context: MFAContext)
+        
+        /// Indicates the user is being prompted with a WebAuthn challenge request.
+        case webAuthn(_ context: WebAuthnContext)
     }
     
     /// The OAuth2Client this authentication flow will use.

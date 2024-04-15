@@ -52,11 +52,10 @@ class SignInTests: XCTestCase {
         let command = Command(commandPath, arguments: [
             "--issuer", "https://\(domain)/oauth2/default",
             "--client-id", clientId,
-            "--scopes", scopes
+            "--scopes", scopes,
+            "--username", username,
+            "--password", password,
         ])
-        
-        command.expect("Username:", response: username)
-        command.expect("Password:", response: password)
         
         try command.run()
         

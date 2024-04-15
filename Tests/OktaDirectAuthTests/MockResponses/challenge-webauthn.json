@@ -1,0 +1,25 @@
+{
+    "challengeType": "urn:okta:params:oauth:grant-type:webauthn",
+    "publicKey": {
+        "challenge": "<challenge>",
+        "userVerification": "preferred",
+        "extensions": {
+            "appid": "https://example.okta.com"
+        },
+        "allowCredentials": [
+            {
+                "id": "<credentialId>",
+                "type": "public-key"
+            }
+        ]
+    },
+    "authenticatorEnrollments": [
+        {
+            "credentialId": "<credential_id>",
+            "displayName": "<name>",
+            "profile": {
+                "aaguid": "<aaguid>"
+            }
+        }
+    ]
+}

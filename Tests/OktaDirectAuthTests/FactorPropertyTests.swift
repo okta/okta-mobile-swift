@@ -21,32 +21,84 @@ final class FactorPropertyTests: XCTestCase {
         XCTAssertEqual(PrimaryFactor.password("foo").loginHintKey, "username")
         XCTAssertEqual(PrimaryFactor.otp(code: "123456").loginHintKey, "login_hint")
         XCTAssertEqual(PrimaryFactor.oob(channel: .push).loginHintKey, "login_hint")
+        XCTAssertEqual(PrimaryFactor.webAuthn.loginHintKey, "login_hint")
     }
     
-    func testGrantTypes() throws {
-        XCTAssertEqual(PrimaryFactor.password("foo").grantType, .password)
-        XCTAssertEqual(PrimaryFactor.otp(code: "123456").grantType, .otp)
-        XCTAssertEqual(PrimaryFactor.oob(channel: .push).grantType, .oob)
-
-        XCTAssertEqual(SecondaryFactor.otp(code: "123456").grantType, .otpMFA)
-        XCTAssertEqual(SecondaryFactor.oob(channel: .push).grantType, .oobMFA)
-    }
-    
-    func testTokenParameters() throws {
-        XCTAssertEqual(PrimaryFactor.password("foo").tokenParameters as? [String: String], [
+    func testPrimaryTokenParameters() throws {
+        var parameters: [String: String] = [:]
+        
+        parameters = PrimaryFactor.password("foo").tokenParameters(currentStatus: nil)
+        XCTAssertEqual(parameters, [
             "grant_type": "password",
             "password": "foo"
         ])
-        XCTAssertEqual(PrimaryFactor.otp(code: "123456").tokenParameters as? [String: String], [
+        
+        parameters = PrimaryFactor.otp(code: "123456").tokenParameters(currentStatus: nil)
+        XCTAssertEqual(parameters, [
             "grant_type": "urn:okta:params:oauth:grant-type:otp",
             "otp": "123456"
         ])
-        XCTAssertNil(PrimaryFactor.oob(channel: .push).tokenParameters)
+        
+        parameters = PrimaryFactor.oob(channel: .push).tokenParameters(currentStatus: nil)
+        XCTAssertEqual(parameters, [
+            "grant_type": "urn:okta:params:oauth:grant-type:oob"
+        ])
 
-        XCTAssertEqual(SecondaryFactor.otp(code: "123456").tokenParameters as? [String: String], [
+        parameters = PrimaryFactor.webAuthn.tokenParameters(currentStatus: nil)
+        XCTAssertEqual(parameters, [
+            "grant_type": "urn:okta:params:oauth:grant-type:webauthn"
+        ])
+    }
+    
+    func testSecondaryTokenParameters() throws {
+        var parameters: [String: String] = [:]
+
+        parameters = SecondaryFactor.otp(code: "123456").tokenParameters(currentStatus: nil)
+        XCTAssertEqual(parameters, [
             "grant_type": "http://auth0.com/oauth/grant-type/mfa-otp",
             "otp": "123456"
         ])
-        XCTAssertNil(SecondaryFactor.oob(channel: .push).tokenParameters)
+        
+        parameters = SecondaryFactor.oob(channel: .push).tokenParameters(currentStatus: .mfaRequired(.init(supportedChallengeTypes: nil, mfaToken: "abc123")))
+        XCTAssertEqual(parameters, [
+            "mfa_token": "abc123",
+            "grant_type": "http://auth0.com/oauth/grant-type/mfa-oob"
+        ])
+        
+        parameters = SecondaryFactor.oob(channel: .push).tokenParameters(currentStatus: nil)
+        XCTAssertEqual(parameters, [
+            "grant_type": "urn:okta:params:oauth:grant-type:oob"
+        ])
+        
+        parameters = SecondaryFactor.webAuthn.tokenParameters(currentStatus: nil)
+        XCTAssertEqual(parameters, [
+            "grant_type": "urn:okta:params:oauth:grant-type:webauthn",
+        ])
+        
+        parameters = SecondaryFactor.webAuthn.tokenParameters(currentStatus: .mfaRequired(.init(supportedChallengeTypes: nil, mfaToken: "abc123")))
+        XCTAssertEqual(parameters, [
+            "grant_type": "urn:okta:params:oauth:grant-type:mfa-webauthn",
+            "mfa_token": "abc123",
+        ])
+        
+        parameters = SecondaryFactor.webAuthnAssertion(.init(clientDataJSON: "",
+                                                             authenticatorData: "",
+                                                             signature: "",
+                                                             userHandle: nil)).tokenParameters(currentStatus: nil)
+        XCTAssertEqual(parameters, [
+            "grant_type": "urn:okta:params:oauth:grant-type:webauthn",
+        ])
+
+        let context = DirectAuthenticationFlow.WebAuthnContext(
+            request: try mock(from: .module, for: "challenge-webauthn", in: "MockResponses"),
+            mfaContext: .init(supportedChallengeTypes: nil, mfaToken: "abc123"))
+        parameters = SecondaryFactor.webAuthnAssertion(.init(clientDataJSON: "",
+                                                             authenticatorData: "",
+                                                             signature: "",
+                                                             userHandle: nil)).tokenParameters(currentStatus: .webAuthn(context))
+        XCTAssertEqual(parameters, [
+            "grant_type": "urn:okta:params:oauth:grant-type:mfa-webauthn",
+            "mfa_token": "abc123",
+        ])
     }
 }
