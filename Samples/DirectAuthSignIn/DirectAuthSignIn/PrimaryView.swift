@@ -12,6 +12,7 @@
 
 import SwiftUI
 import OktaDirectAuth
+import AuthenticationServices
 
 extension SignInView {
     struct PrimaryView: View {
@@ -34,6 +35,8 @@ extension SignInView {
                 return .otp(code: oneTimeCode)
             case .oob:
                 return .oob(channel: .push)
+            case .webauthn:
+                return .webAuthn
             }
         }
         
@@ -87,6 +90,7 @@ extension SignInView {
                                     .stroke(.secondary, lineWidth: 1)
                             }
                     case .oob: EmptyView()
+                    case .webauthn: EmptyView()
                     }
                 }
                 
@@ -96,6 +100,24 @@ extension SignInView {
                             status = try await flow.start(username, with: factor)
                             if case let .success(token) = status {
                                 Credential.default = try Credential.store(token)
+                            }
+                            if case let .webAuthn(context) = status {
+                                let request = context.request
+                                let publicKeyCredentialProvider = ASAuthorizationPlatformPublicKeyCredentialProvider(relyingPartyIdentifier: "https://passkeyshack.clouditude.com")
+                                let challenge = request.publicKey.challenge.data(using: .utf8)!
+                                let assertionRequest = publicKeyCredentialProvider.createCredentialAssertionRequest(challenge: challenge)
+                                let authController = ASAuthorizationController(authorizationRequests: [ assertionRequest ] )
+                                let response = try await withCheckedThrowingContinuation { continuation in
+                                    let authCallback = AppleAuthCallback(checkedContinuation: continuation)
+                                    authController.delegate = authCallback
+                                    authController.performRequests()
+                                }
+                                let challengeStatus = status!
+                                status = try await flow.resume(challengeStatus, with: .webAuthnAssertion(response))
+
+                                if case let .success(token) = status {
+                                    Credential.default = try Credential.store(token)
+                                }
                             }
                         } catch {
                             self.error = error
@@ -108,5 +130,44 @@ extension SignInView {
                 .buttonStyle(.borderedProminent)
             }.padding()
         }
+    }
+}
+
+class AppleAuthCallback: NSObject, ASAuthorizationControllerDelegate {
+    public let continuation: CheckedContinuation<WebAuthn.AuthenticatorAssertionResponse, Error>
+    
+    init(checkedContinuation: CheckedContinuation<WebAuthn.AuthenticatorAssertionResponse, Error>) {
+        continuation = checkedContinuation
+    }
+    
+    func authorizationController(controller: ASAuthorizationController, didCompleteWithAuthorization authorization: ASAuthorization) {
+        switch authorization.credential {
+        case let credentialAssertion as ASAuthorizationPlatformPublicKeyCredentialAssertion:
+            guard let signature = credentialAssertion.signature else {
+                print("Missing signature")
+                continuation.resume(throwing: NSError())
+                return
+            }
+            guard let authenticatorData = credentialAssertion.rawAuthenticatorData else {
+                print("Missing authenticatorData")
+                continuation.resume(throwing: NSError())
+                return
+            }
+            let clientDataJSON = credentialAssertion.rawClientDataJSON
+            let credentialId = credentialAssertion.credentialID
+            let webAuthnAssertion = WebAuthn.AuthenticatorAssertionResponse(
+                clientDataJSON: String(decoding: clientDataJSON, as: UTF8.self),
+                authenticatorData: String(decoding: authenticatorData, as: UTF8.self),
+                signature: String(decoding: signature, as: UTF8.self),
+                userHandle: nil
+            )
+            continuation.resume(returning: webAuthnAssertion)
+        default:
+            continuation.resume(throwing: NSError())
+        }
+    }
+
+    func authorizationController(controller: ASAuthorizationController, didCompleteWithError error: Error) {
+        continuation.resume(throwing: error)
     }
 }

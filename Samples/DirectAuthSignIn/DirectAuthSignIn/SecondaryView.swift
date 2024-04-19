@@ -29,6 +29,8 @@ extension SignInView {
                 return .oob(channel: .push)
             case .password:
                 return nil
+            case .webauthn:
+                return nil
             }
         }
         

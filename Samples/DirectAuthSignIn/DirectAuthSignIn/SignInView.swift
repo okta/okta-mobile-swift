@@ -21,17 +21,18 @@ struct SignInView: View {
     @State var hasError: Bool = false
 
     enum Factor {
-        case password, otp, oob
+        case password, otp, oob, webauthn
         
         var title: String {
             switch self {
             case .password: return "Password"
             case .otp: return "One-Time Code"
             case .oob: return "Push Notification"
+            case .webauthn: return "Webauthn"
             }
         }
         
-        static let primaryFactors: [Factor] = [.password, .otp, .oob]
+        static let primaryFactors: [Factor] = [.password, .otp, .oob, .webauthn]
         static let secondaryFactors: [Factor] = [.otp, .oob]
     }
     

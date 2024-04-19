@@ -70,6 +70,13 @@ public struct WebAuthn {
         
         /// The optional user handle to supply to the server, typically if the resident key is enabled.
         public let userHandle: String?
+
+        public init(clientDataJSON: String, authenticatorData: String, signature: String, userHandle: String?) {
+            self.clientDataJSON = clientDataJSON
+            self.authenticatorData = authenticatorData
+            self.signature = signature
+            self.userHandle = userHandle
+        }
     }
 }
 
