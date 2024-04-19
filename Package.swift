@@ -17,7 +17,8 @@ var package = Package(
         .library(name: "AuthFoundation", targets: ["AuthFoundation"]),
         .library(name: "OktaOAuth2", targets: ["OktaOAuth2"]),
         .library(name: "OktaDirectAuth", targets: ["OktaDirectAuth"]),
-        .library(name: "WebAuthenticationUI", targets: ["WebAuthenticationUI"])
+        .library(name: "WebAuthenticationUI", targets: ["WebAuthenticationUI"]),
+        .library(name: "MyAccount", targets: ["AuthFoundation"])
     ],
     dependencies: [
         .package(url: "https://github.com/apple/swift-docc-plugin", from: "1.0.0")
@@ -34,6 +35,12 @@ var package = Package(
         .target(name: "OktaDirectAuth",
                 dependencies: [
                     .target(name: "AuthFoundation")
+                ],
+                resources: [.process("Resources")]),
+        .target(name: "OktaMyAccount",
+                dependencies: [
+                    .target(name: "AuthFoundation"),
+                    .target(name: "OktaDirectAuth")
                 ],
                 resources: [.process("Resources")]),
         .target(name: "WebAuthenticationUI",
@@ -53,6 +60,9 @@ var package = Package(
                     resources: [ .copy("MockResponses") ]),
         .testTarget(name: "OktaDirectAuthTests",
                     dependencies: ["OktaDirectAuth", "TestCommon"],
+                    resources: [ .copy("MockResponses") ]),
+        .testTarget(name: "OktaMyAccountTests",
+                    dependencies: ["OktaMyAccount", "TestCommon"],
                     resources: [ .copy("MockResponses") ]),
         .testTarget(name: "WebAuthenticationUITests",
                     dependencies: ["WebAuthenticationUI", "TestCommon"],

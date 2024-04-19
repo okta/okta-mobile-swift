@@ -152,7 +152,7 @@ public class DirectAuthenticationFlow: AuthenticationFlow {
     /// Holds information about a challenge request when initiating a WebAuthn authentication.
     public struct WebAuthnContext {
         /// The credential request returned from the server.
-        public let request: WebAuthn.CredentialRequestOptions
+        public let request: WebAuthn.CredentialRequestResponse
         
         let mfaContext: MFAContext?
     }

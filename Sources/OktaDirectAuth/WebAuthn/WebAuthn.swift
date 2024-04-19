@@ -33,7 +33,7 @@ import Foundation
 /// ```
 public struct WebAuthn {
     /// Represents the credential challenge returned from the server when a WebAuthn authentication is initiated.
-    public struct CredentialRequestOptions: Codable {
+    public struct CredentialRequestResponse: Codable {
         /// The public key request options supplied to the client from the server.
         public let publicKey: WebAuthn.PublicKeyCredentialRequestOptions
         
@@ -55,6 +55,14 @@ public struct WebAuthn {
         }
     }
     
+    public struct CredentialCreationResponse: Codable, JSONDecodable {
+        public static let jsonDecoder = JSONDecoder()
+        
+        public let options: WebAuthn.PublicKeyCredentialCreationOptions
+        public let challengeId: String?
+        public let expiresAt: Date?
+    }
+
     /// Defines the set of data expected from the client in response to an authenticator challenge.
     ///
     /// This value should be supplied to the ``DirectAuthenticationFlow/SecondaryFactor/webAuthnAssertion`` type.
@@ -73,6 +81,6 @@ public struct WebAuthn {
     }
 }
 
-extension WebAuthn.CredentialRequestOptions: JSONDecodable {
+extension WebAuthn.CredentialRequestResponse: JSONDecodable {
     public static var jsonDecoder = JSONDecoder()
 }

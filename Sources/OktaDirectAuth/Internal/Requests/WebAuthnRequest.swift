@@ -36,7 +36,7 @@ struct WebAuthnChallengeRequest {
 }
 
 extension WebAuthnChallengeRequest: APIRequest, APIRequestBody {
-    typealias ResponseType = WebAuthn.CredentialRequestOptions
+    typealias ResponseType = WebAuthn.CredentialRequestResponse
 
     var httpMethod: APIRequestMethod { .post }
     var contentType: APIContentType? { .formEncoded }
