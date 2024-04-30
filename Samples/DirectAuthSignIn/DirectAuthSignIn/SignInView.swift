@@ -39,6 +39,7 @@ struct SignInView: View {
         static let continuationFactors: [Factor] = [.code]
     }
     
+    // swiftlint:disable force_unwrapping
     var body: some View {
         VStack {
             VStack(alignment: .leading, spacing: 15) {
@@ -92,6 +93,7 @@ struct SignInView: View {
         }
         .navigationTitle("Direct Authentication")
     }
+    // swiftlint:enable force_unwrapping
 }
 
 // swiftlint:disable force_unwrapping

@@ -199,7 +199,7 @@ public class DirectAuthenticationFlow: AuthenticationFlow {
     }
 
     /// The current status of the authentication flow.
-    /// 
+    ///
     /// This value is returned from ``DirectAuthenticationFlow/start(_:with:)`` and ``DirectAuthenticationFlow/resume(_:with:)`` to indicate the result of an individual authentication step. This can be used to drive your application's sign-in workflow.
     public enum Status: Equatable {
         /// Authentication was successful, returning the given token.
