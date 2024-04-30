@@ -28,10 +28,10 @@ final class ExtensionTests: XCTestCase {
         let mfaContext = DirectAuthenticationFlow.MFAContext(supportedChallengeTypes: [.oob], mfaToken: "abc123")
         XCTAssertEqual(Status.mfaRequired(mfaContext).mfaContext?.mfaToken, "abc123")
         
-        let webAuthnContext = DirectAuthenticationFlow.WebAuthnContext(
+        let webAuthnContext = DirectAuthenticationFlow.ContinuationType.WebAuthnContext(
             request: try mock(from: .module, for: "challenge-webauthn", in: "MockResponses"),
             mfaContext: mfaContext)
-        XCTAssertEqual(Status.webAuthn(webAuthnContext).mfaContext?.mfaToken, "abc123")
+        XCTAssertEqual(Status.continuation(.webAuthn(webAuthnContext)).mfaContext?.mfaToken, "abc123")
     }
     
     func testStatusEquality() throws {

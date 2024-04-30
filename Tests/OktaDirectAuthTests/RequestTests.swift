@@ -69,11 +69,13 @@ final class RequestTests: XCTestCase {
                                                            clientId: "theClientId",
                                                            scopes: "openid profile"),
                             loginHint: "user@example.com",
-                            channelHint: .push)
+                            channelHint: .push,
+                            challengeHint: .oob)
         XCTAssertEqual(request.bodyParameters as? [String: String],
                        [
                         "client_id": "theClientId",
                         "channel_hint": "push",
+                        "challenge_hint": "urn:okta:params:oauth:grant-type:oob",
                         "login_hint": "user@example.com"
                        ])
 
@@ -84,12 +86,14 @@ final class RequestTests: XCTestCase {
                                                            scopes: "openid profile",
                                                            authentication: .clientSecret("supersecret")),
                             loginHint: "user@example.com",
-                            channelHint: .push)
+                            channelHint: .push,
+                            challengeHint: .oob)
         XCTAssertEqual(request.bodyParameters as? [String: String],
                        [
                         "client_id": "theClientId",
                         "client_secret": "supersecret",
                         "channel_hint": "push",
+                        "challenge_hint": "urn:okta:params:oauth:grant-type:oob",
                         "login_hint": "user@example.com"
                        ])
     }

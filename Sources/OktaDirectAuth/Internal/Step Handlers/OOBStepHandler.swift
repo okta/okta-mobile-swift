@@ -20,7 +20,6 @@ class OOBStepHandler<Factor: AuthenticationFactor>: StepHandler {
     let loginHint: String?
     let channel: DirectAuthenticationFlow.OOBChannel
     let factor: Factor
-    private let bindingContext: DirectAuthenticationFlow.BindingUpdateContext?
     private var poll: PollingHandler<TokenRequest>?
     
     init(flow: DirectAuthenticationFlow,
@@ -28,8 +27,7 @@ class OOBStepHandler<Factor: AuthenticationFactor>: StepHandler {
          currentStatus: DirectAuthenticationFlow.Status?,
          loginHint: String?,
          channel: DirectAuthenticationFlow.OOBChannel,
-         factor: Factor,
-         bindingContext: DirectAuthenticationFlow.BindingUpdateContext? = nil) throws
+         factor: Factor) throws
     {
         self.flow = flow
         self.openIdConfiguration = openIdConfiguration
@@ -37,11 +35,10 @@ class OOBStepHandler<Factor: AuthenticationFactor>: StepHandler {
         self.loginHint = loginHint
         self.channel = channel
         self.factor = factor
-        self.bindingContext = bindingContext
     }
     
     func process(completion: @escaping (Result<DirectAuthenticationFlow.Status, DirectAuthenticationFlowError>) -> Void) {
-        if let bindingContext {
+        if let bindingContext = currentStatus?.continuationType?.bindingContext {
             self.requestToken(using: bindingContext.oobResponse, completion: completion)
         } else {
             requestOOBCode { [weak self] result in
@@ -52,9 +49,14 @@ class OOBStepHandler<Factor: AuthenticationFactor>: StepHandler {
                 case .failure(let error):
                     self.flow.process(error, completion: completion)
                 case .success(let response):
+                    let mfaContext = currentStatus?.mfaContext
+                    
                     switch response.bindingMethod {
                     case .none:
                         self.requestToken(using: response, completion: completion)
+                    case .prompt:
+                        completion(.success(.continuation(.prompt(.init(oobResponse: response,
+                                                                        mfaContext: mfaContext)))))
                     case .transfer:
                         guard let bindingCode = response.bindingCode,
                               bindingCode.isEmpty == false
@@ -63,8 +65,9 @@ class OOBStepHandler<Factor: AuthenticationFactor>: StepHandler {
                             return
                         }
                         
-                        completion(.success(.bindingUpdate(.init(update: .transfer(bindingCode),
-                                                                 oobResponse: response))))
+                        completion(.success(.continuation(.transfer(.init(oobResponse: response,
+                                                                          mfaContext: mfaContext),
+                                                                    code: bindingCode))))
                     }
                 }
             }
@@ -98,7 +101,8 @@ class OOBStepHandler<Factor: AuthenticationFactor>: StepHandler {
             let request = try OOBAuthenticateRequest(openIdConfiguration: openIdConfiguration,
                                                      clientConfiguration: flow.client.configuration,
                                                      loginHint: loginHint,
-                                                     channelHint: channel)
+                                                     channelHint: channel,
+                                                     challengeHint: factor.grantType(currentStatus: currentStatus))
             request.send(to: flow.client) { result in
                 switch result {
                 case .failure(let error):
@@ -139,6 +143,11 @@ class OOBStepHandler<Factor: AuthenticationFactor>: StepHandler {
     }
 
     private func requestToken(using response: OOBResponse, completion: @escaping (Result<DirectAuthenticationFlow.Status, DirectAuthenticationFlowError>) -> Void) {
+        guard let interval = response.interval else {
+            completion(.failure(.missingArguments(["interval"])))
+            return
+        }
+        
         let request = TokenRequest(openIdConfiguration: openIdConfiguration,
                                    clientConfiguration: flow.client.configuration,
                                    currentStatus: currentStatus,
@@ -148,7 +157,7 @@ class OOBStepHandler<Factor: AuthenticationFactor>: StepHandler {
         self.poll = PollingHandler(client: flow.client,
                                    request: request,
                                    expiresIn: response.expiresIn,
-                                   interval: response.interval) { pollHandler, result in
+                                   interval: interval) { pollHandler, result in
             switch result {
             case .success(let response):
                 return .success(response.result)

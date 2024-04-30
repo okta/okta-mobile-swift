@@ -12,12 +12,45 @@
 
 import Foundation
 
+extension DirectAuthenticationFlow.ContinuationType {
+    var mfaContext: DirectAuthenticationFlow.MFAContext? {
+        if case let .webAuthn(context) = self {
+            return context.mfaContext
+        } else if case let .transfer(context, code: _) = self {
+            return context.mfaContext
+        } else if case let .prompt(context) = self {
+            return context.mfaContext
+        } else {
+            return nil
+        }
+    }
+    
+    var bindingContext: DirectAuthenticationFlow.ContinuationType.BindingContext? {
+        switch self {
+        case .transfer(let context, _):
+            return context
+        case .prompt(let context):
+            return context
+        default:
+            return nil
+        }
+    }
+}
+
 extension DirectAuthenticationFlow.Status {
+    var continuationType: DirectAuthenticationFlow.ContinuationType? {
+        if case let .continuation(type) = self {
+            return type
+        }
+        
+        return nil
+    }
+    
     var mfaContext: DirectAuthenticationFlow.MFAContext? {
         if case let .mfaRequired(context) = self {
             return context
-        } else if case let .webAuthn(context) = self {
-            return context.mfaContext
+        } else if let mfaContext = continuationType?.mfaContext {
+            return mfaContext
         } else {
             return nil
         }

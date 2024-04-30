@@ -41,6 +41,11 @@ extension DirectAuthenticationFlowError: LocalizedError {
             return error.localizedDescription
         case .other(error: let error):
             return error.localizedDescription
+        case .invalidContinuationContext:
+            return NSLocalizedString("invalid_continuation_context",
+                                     tableName: "OktaDirectAuth",
+                                     bundle: .oktaDirectAuth,
+                                     comment: "Invalid continuation context")
         }
     }
 }

@@ -21,18 +21,22 @@ struct SignInView: View {
     @State var hasError: Bool = false
 
     enum Factor {
-        case password, otp, oob
+        case password, otp, oob, sms, voice, code
         
         var title: String {
             switch self {
             case .password: return "Password"
             case .otp: return "One-Time Code"
             case .oob: return "Push Notification"
+            case .sms: return "Phone: SMS"
+            case .voice: return "Phone: Voice"
+            case .code: return "Verification Code"
             }
         }
         
-        static let primaryFactors: [Factor] = [.password, .otp, .oob]
-        static let secondaryFactors: [Factor] = [.otp, .oob]
+        static let primaryFactors: [Factor] = [.password, .otp, .oob, .sms, .voice]
+        static let secondaryFactors: [Factor] = [.otp, .oob, .sms, .voice]
+        static let continuationFactors: [Factor] = [.code]
     }
     
     var body: some View {
@@ -42,16 +46,24 @@ struct SignInView: View {
                     .font(.title)
                 
                 if let flow = flow {
-                    if let status = status {
-                        SecondaryView(flow: flow,
-                                      status: status,
-                                      error: $error,
-                                      hasError: $hasError)
-                    } else {
+                    switch status {
+                    case nil:
                         PrimaryView(flow: flow,
                                     status: $status,
                                     error: $error,
                                     hasError: $hasError)
+                    case .mfaRequired(_):
+                        SecondaryView(flow: flow,
+                                      status: status!,
+                                      error: $error,
+                                      hasError: $hasError)
+                    case .continuation(_):
+                        ContinuationView(flow: flow,
+                                         status: status!,
+                                         error: $error,
+                                         hasError: $hasError)
+                    case .success(_):
+                        ProgressView()
                     }
                 } else {
                     UnconfiguredView()
