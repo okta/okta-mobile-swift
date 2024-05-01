@@ -71,7 +71,7 @@
       },
       {
         "kind" : "text",
-        "text" : ": "
+        "text" : ": (any "
       },
       {
         "kind" : "typeIdentifier",
@@ -80,7 +80,7 @@
       },
       {
         "kind" : "text",
-        "text" : "?) "
+        "text" : ")?) "
       },
       {
         "kind" : "keyword",
@@ -165,7 +165,7 @@
             },
             {
               "kind" : "text",
-              "text" : ": "
+              "text" : ": (any "
             },
             {
               "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/KeychainAuthenticationContext",
@@ -175,7 +175,7 @@
             },
             {
               "kind" : "text",
-              "text" : "? = nil) "
+              "text" : ")? = nil) "
             },
             {
               "kind" : "keyword",
@@ -205,35 +205,6 @@
         }
       ],
       "kind" : "declarations"
-    },
-    {
-      "content" : [
-        {
-          "anchor" : "return-value",
-          "level" : 2,
-          "text" : "Return Value",
-          "type" : "heading"
-        },
-        {
-          "inlineContent" : [
-            {
-              "text" : "",
-              "type" : "text"
-            },
-            {
-              "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/Keychain\/Item",
-              "isActive" : true,
-              "type" : "reference"
-            },
-            {
-              "text" : " represented by this search result.",
-              "type" : "text"
-            }
-          ],
-          "type" : "paragraph"
-        }
-      ],
-      "kind" : "content"
     },
     {
       "kind" : "parameters",
@@ -275,6 +246,35 @@
           "name" : "authenticationContext"
         }
       ]
+    },
+    {
+      "content" : [
+        {
+          "anchor" : "return-value",
+          "level" : 2,
+          "text" : "Return Value",
+          "type" : "heading"
+        },
+        {
+          "inlineContent" : [
+            {
+              "text" : "",
+              "type" : "text"
+            },
+            {
+              "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/Keychain\/Item",
+              "isActive" : true,
+              "type" : "reference"
+            },
+            {
+              "text" : " represented by this search result.",
+              "type" : "text"
+            }
+          ],
+          "type" : "paragraph"
+        }
+      ],
+      "kind" : "content"
     }
   ],
   "schemaVersion" : {
@@ -505,7 +505,7 @@
     },
     {
       "kind" : "text",
-      "text" : ": "
+      "text" : ": (any "
     },
     {
       "kind" : "typeIdentifier",
@@ -514,7 +514,7 @@
     },
     {
       "kind" : "text",
-      "text" : "?) "
+      "text" : ")?) "
     },
     {
       "kind" : "keyword",

@@ -1,4 +1,10 @@
 {
+  "abstract" : [
+    {
+      "text" : "An authentication factor expects a “binding code” but it isn’t present.",
+      "type" : "text"
+    }
+  ],
   "hierarchy" : {
     "paths" : [
       [
@@ -65,6 +71,35 @@
         }
       ],
       "kind" : "declarations"
+    },
+    {
+      "content" : [
+        {
+          "anchor" : "discussion",
+          "level" : 2,
+          "text" : "Discussion",
+          "type" : "heading"
+        },
+        {
+          "inlineContent" : [
+            {
+              "text" : "For more information, please see the ",
+              "type" : "text"
+            },
+            {
+              "identifier" : "https:\/\/developer.okta.com\/docs\/guides\/configure-direct-auth-grants\/dmfaoobov\/main\/",
+              "isActive" : true,
+              "type" : "reference"
+            },
+            {
+              "text" : ".",
+              "type" : "text"
+            }
+          ],
+          "type" : "paragraph"
+        }
+      ],
+      "kind" : "content"
     }
   ],
   "schemaVersion" : {
@@ -182,7 +217,10 @@
 },
 "doc://OktaDirectAuth/documentation/OktaDirectAuth/DirectAuthenticationFlowError/bindingCodeMissing": {
   "abstract" : [
-
+    {
+      "text" : "An authentication factor expects a “binding code” but it isn’t present.",
+      "type" : "text"
+    }
   ],
   "fragments" : [
     {
@@ -204,6 +242,18 @@
   "title" : "DirectAuthenticationFlowError.bindingCodeMissing",
   "type" : "topic",
   "url" : "\/documentation\/oktadirectauth\/directauthenticationflowerror\/bindingcodemissing"
+},
+"https://developer.okta.com/docs/guides/configure-direct-auth-grants/dmfaoobov/main/": {
+  "identifier" : "https:\/\/developer.okta.com\/docs\/guides\/configure-direct-auth-grants\/dmfaoobov\/main\/",
+  "title" : "related documentation",
+  "titleInlineContent" : [
+    {
+      "text" : "related documentation",
+      "type" : "text"
+    }
+  ],
+  "type" : "link",
+  "url" : "https:\/\/developer.okta.com\/docs\/guides\/configure-direct-auth-grants\/dmfaoobov\/main\/"
 }
 }
 }

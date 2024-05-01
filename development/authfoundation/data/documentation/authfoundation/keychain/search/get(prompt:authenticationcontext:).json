@@ -61,7 +61,7 @@
       },
       {
         "kind" : "text",
-        "text" : ": "
+        "text" : ": (any "
       },
       {
         "kind" : "typeIdentifier",
@@ -70,7 +70,7 @@
       },
       {
         "kind" : "text",
-        "text" : "?) "
+        "text" : ")?) "
       },
       {
         "kind" : "keyword",
@@ -155,7 +155,7 @@
             },
             {
               "kind" : "text",
-              "text" : ": "
+              "text" : ": (any "
             },
             {
               "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/KeychainAuthenticationContext",
@@ -165,7 +165,7 @@
             },
             {
               "kind" : "text",
-              "text" : "? = nil) "
+              "text" : ")? = nil) "
             },
             {
               "kind" : "keyword",
@@ -195,26 +195,6 @@
         }
       ],
       "kind" : "declarations"
-    },
-    {
-      "content" : [
-        {
-          "anchor" : "return-value",
-          "level" : 2,
-          "text" : "Return Value",
-          "type" : "heading"
-        },
-        {
-          "inlineContent" : [
-            {
-              "text" : "The keychain item defined by this search query.",
-              "type" : "text"
-            }
-          ],
-          "type" : "paragraph"
-        }
-      ],
-      "kind" : "content"
     },
     {
       "kind" : "parameters",
@@ -256,6 +236,26 @@
           "name" : "authenticationContext"
         }
       ]
+    },
+    {
+      "content" : [
+        {
+          "anchor" : "return-value",
+          "level" : 2,
+          "text" : "Return Value",
+          "type" : "heading"
+        },
+        {
+          "inlineContent" : [
+            {
+              "text" : "The keychain item defined by this search query.",
+              "type" : "text"
+            }
+          ],
+          "type" : "paragraph"
+        }
+      ],
+      "kind" : "content"
     },
     {
       "content" : [
@@ -463,7 +463,7 @@
     },
     {
       "kind" : "text",
-      "text" : ": "
+      "text" : ": (any "
     },
     {
       "kind" : "typeIdentifier",
@@ -472,7 +472,7 @@
     },
     {
       "kind" : "text",
-      "text" : "?) "
+      "text" : ")?) "
     },
     {
       "kind" : "keyword",

@@ -44,7 +44,7 @@
       },
       {
         "kind" : "text",
-        "text" : ": "
+        "text" : ": (any "
       },
       {
         "kind" : "typeIdentifier",
@@ -53,7 +53,7 @@
       },
       {
         "kind" : "text",
-        "text" : "?) "
+        "text" : ")?) "
       },
       {
         "kind" : "keyword",
@@ -129,7 +129,7 @@
             },
             {
               "kind" : "text",
-              "text" : ": "
+              "text" : ": (any "
             },
             {
               "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/KeychainAuthenticationContext",
@@ -139,7 +139,7 @@
             },
             {
               "kind" : "text",
-              "text" : "? = nil) "
+              "text" : ")? = nil) "
             },
             {
               "kind" : "keyword",
@@ -171,6 +171,33 @@
       "kind" : "declarations"
     },
     {
+      "kind" : "parameters",
+      "parameters" : [
+        {
+          "content" : [
+            {
+              "inlineContent" : [
+                {
+                  "text" : "Optional ",
+                  "type" : "text"
+                },
+                {
+                  "code" : "LAContext",
+                  "type" : "codeVoice"
+                },
+                {
+                  "text" : " to use when saving the credential, for platforms that support it.",
+                  "type" : "text"
+                }
+              ],
+              "type" : "paragraph"
+            }
+          ],
+          "name" : "authenticationContext"
+        }
+      ]
+    },
+    {
       "content" : [
         {
           "anchor" : "return-value",
@@ -198,33 +225,6 @@
         }
       ],
       "kind" : "content"
-    },
-    {
-      "kind" : "parameters",
-      "parameters" : [
-        {
-          "content" : [
-            {
-              "inlineContent" : [
-                {
-                  "text" : "Optional ",
-                  "type" : "text"
-                },
-                {
-                  "code" : "LAContext",
-                  "type" : "codeVoice"
-                },
-                {
-                  "text" : " to use when saving the credential, for platforms that support it.",
-                  "type" : "text"
-                }
-              ],
-              "type" : "paragraph"
-            }
-          ],
-          "name" : "authenticationContext"
-        }
-      ]
     }
   ],
   "schemaVersion" : {
@@ -361,7 +361,7 @@
     },
     {
       "kind" : "text",
-      "text" : ": "
+      "text" : ": (any "
     },
     {
       "kind" : "typeIdentifier",
@@ -370,7 +370,7 @@
     },
     {
       "kind" : "text",
-      "text" : "?) "
+      "text" : ")?) "
     },
     {
       "kind" : "keyword",

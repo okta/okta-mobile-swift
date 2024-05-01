@@ -60,7 +60,7 @@
       },
       {
         "kind" : "text",
-        "text" : ": "
+        "text" : ": any "
       },
       {
         "kind" : "typeIdentifier",
@@ -77,7 +77,7 @@
       },
       {
         "kind" : "text",
-        "text" : ": "
+        "text" : ": (any "
       },
       {
         "kind" : "typeIdentifier",
@@ -86,7 +86,7 @@
       },
       {
         "kind" : "text",
-        "text" : "?) "
+        "text" : ")?) "
       },
       {
         "kind" : "keyword",
@@ -123,6 +123,7 @@
       },
       {
         "kind" : "typeIdentifier",
+        "preciseIdentifier" : "s:14AuthFoundation10APIRequestP12ResponseTypeQa",
         "text" : "ResponseType"
       },
       {
@@ -212,7 +213,7 @@
             },
             {
               "kind" : "text",
-              "text" : ": "
+              "text" : ": any "
             },
             {
               "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/APIClient",
@@ -238,7 +239,7 @@
             },
             {
               "kind" : "text",
-              "text" : ": "
+              "text" : ": (any "
             },
             {
               "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/APIParsingContext",
@@ -248,7 +249,7 @@
             },
             {
               "kind" : "text",
-              "text" : "?) "
+              "text" : ")?) "
             },
             {
               "kind" : "keyword",
@@ -285,7 +286,9 @@
               "text" : "."
             },
             {
+              "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/APIRequest\/ResponseType",
               "kind" : "typeIdentifier",
+              "preciseIdentifier" : "s:14AuthFoundation10APIRequestP12ResponseTypeQa",
               "text" : "ResponseType"
             },
             {
@@ -296,35 +299,6 @@
         }
       ],
       "kind" : "declarations"
-    },
-    {
-      "content" : [
-        {
-          "anchor" : "return-value",
-          "level" : 2,
-          "text" : "Return Value",
-          "type" : "heading"
-        },
-        {
-          "inlineContent" : [
-            {
-              "text" : "",
-              "type" : "text"
-            },
-            {
-              "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/APIResponse",
-              "isActive" : true,
-              "type" : "reference"
-            },
-            {
-              "text" : " result of the request.",
-              "type" : "text"
-            }
-          ],
-          "type" : "paragraph"
-        }
-      ],
-      "kind" : "content"
     },
     {
       "kind" : "parameters",
@@ -367,6 +341,35 @@
           "name" : "context"
         }
       ]
+    },
+    {
+      "content" : [
+        {
+          "anchor" : "return-value",
+          "level" : 2,
+          "text" : "Return Value",
+          "type" : "heading"
+        },
+        {
+          "inlineContent" : [
+            {
+              "text" : "",
+              "type" : "text"
+            },
+            {
+              "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/APIResponse",
+              "isActive" : true,
+              "type" : "reference"
+            },
+            {
+              "text" : " result of the request.",
+              "type" : "text"
+            }
+          ],
+          "type" : "paragraph"
+        }
+      ],
+      "kind" : "content"
     }
   ],
   "schemaVersion" : {
@@ -516,6 +519,41 @@
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/apirequest"
 },
+"doc://AuthFoundation/documentation/AuthFoundation/APIRequest/ResponseType": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "associatedtype"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "ResponseType"
+    },
+    {
+      "kind" : "text",
+      "text" : " : "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:Se",
+      "text" : "Decodable"
+    }
+  ],
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/APIRequest\/ResponseType",
+  "kind" : "symbol",
+  "required" : true,
+  "role" : "symbol",
+  "title" : "ResponseType",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/apirequest\/responsetype"
+},
 "doc://AuthFoundation/documentation/AuthFoundation/APIRequest/send(to:parsing:)-1f4t7": {
   "abstract" : [
 
@@ -543,7 +581,7 @@
     },
     {
       "kind" : "text",
-      "text" : ": "
+      "text" : ": any "
     },
     {
       "kind" : "typeIdentifier",
@@ -560,7 +598,7 @@
     },
     {
       "kind" : "text",
-      "text" : ": "
+      "text" : ": (any "
     },
     {
       "kind" : "typeIdentifier",
@@ -569,7 +607,7 @@
     },
     {
       "kind" : "text",
-      "text" : "?) "
+      "text" : ")?) "
     },
     {
       "kind" : "keyword",
@@ -606,6 +644,7 @@
     },
     {
       "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:14AuthFoundation10APIRequestP12ResponseTypeQa",
       "text" : "ResponseType"
     },
     {
@@ -660,7 +699,7 @@
     },
     {
       "kind" : "text",
-      "text" : ": "
+      "text" : ": any "
     },
     {
       "kind" : "typeIdentifier",
@@ -677,7 +716,7 @@
     },
     {
       "kind" : "text",
-      "text" : ": "
+      "text" : ": (any "
     },
     {
       "kind" : "typeIdentifier",
@@ -686,7 +725,7 @@
     },
     {
       "kind" : "text",
-      "text" : "?) "
+      "text" : ")?) "
     },
     {
       "kind" : "keyword",
@@ -723,6 +762,7 @@
     },
     {
       "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:14AuthFoundation10APIRequestP12ResponseTypeQa",
       "text" : "ResponseType"
     },
     {

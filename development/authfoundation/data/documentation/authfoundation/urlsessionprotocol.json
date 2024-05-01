@@ -78,6 +78,16 @@
       "kind" : "declarations"
     }
   ],
+  "relationshipsSections" : [
+    {
+      "identifiers" : [
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/Foundation\/URLSession"
+      ],
+      "kind" : "relationships",
+      "title" : "Conforming Types",
+      "type" : "conformingTypes"
+    }
+  ],
   "schemaVersion" : {
     "major" : 0,
     "minor" : 3,
@@ -177,6 +187,38 @@
   "title" : "DelegateCollection",
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/delegatecollection"
+},
+"doc://AuthFoundation/documentation/AuthFoundation/Foundation/URLSession": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "extension"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "preciseIdentifier" : "c:objc(cs)NSURLSession",
+      "text" : "URLSession"
+    }
+  ],
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/Foundation\/URLSession",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "URLSession"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "URLSession",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/foundation\/urlsession"
 },
 "doc://AuthFoundation/documentation/AuthFoundation/URLSessionDataTaskProtocol": {
   "abstract" : [
@@ -366,7 +408,7 @@
     },
     {
       "kind" : "text",
-      "text" : "?, "
+      "text" : "?, (any "
     },
     {
       "kind" : "typeIdentifier",
@@ -375,7 +417,7 @@
     },
     {
       "kind" : "text",
-      "text" : "?) -> "
+      "text" : ")?) -> "
     },
     {
       "kind" : "typeIdentifier",
@@ -384,7 +426,7 @@
     },
     {
       "kind" : "text",
-      "text" : ") -> "
+      "text" : ") -> any "
     },
     {
       "kind" : "typeIdentifier",

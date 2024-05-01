@@ -69,7 +69,7 @@
       },
       {
         "kind" : "text",
-        "text" : ") -> "
+        "text" : ") -> (any "
       },
       {
         "kind" : "typeIdentifier",
@@ -78,7 +78,7 @@
       },
       {
         "kind" : "text",
-        "text" : "?"
+        "text" : ")?"
       }
     ],
     "modules" : [
@@ -142,7 +142,7 @@
             },
             {
               "kind" : "text",
-              "text" : ") -> "
+              "text" : ") -> (any "
             },
             {
               "kind" : "typeIdentifier",
@@ -151,12 +151,31 @@
             },
             {
               "kind" : "text",
-              "text" : "?"
+              "text" : ")?"
             }
           ]
         }
       ],
       "kind" : "declarations"
+    },
+    {
+      "kind" : "parameters",
+      "parameters" : [
+        {
+          "content" : [
+            {
+              "inlineContent" : [
+                {
+                  "text" : "Raw data returned from the HTTP response.",
+                  "type" : "text"
+                }
+              ],
+              "type" : "paragraph"
+            }
+          ],
+          "name" : "data"
+        }
+      ]
     },
     {
       "content" : [
@@ -177,25 +196,6 @@
         }
       ],
       "kind" : "content"
-    },
-    {
-      "kind" : "parameters",
-      "parameters" : [
-        {
-          "content" : [
-            {
-              "inlineContent" : [
-                {
-                  "text" : "Raw data returned from the HTTP response.",
-                  "type" : "text"
-                }
-              ],
-              "type" : "paragraph"
-            }
-          ],
-          "name" : "data"
-        }
-      ]
     }
   ],
   "schemaVersion" : {
@@ -313,7 +313,7 @@
     },
     {
       "kind" : "text",
-      "text" : ") -> "
+      "text" : ") -> (any "
     },
     {
       "kind" : "typeIdentifier",
@@ -322,7 +322,7 @@
     },
     {
       "kind" : "text",
-      "text" : "?"
+      "text" : ")?"
     }
   ],
   "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/APIParsingContext\/error(from:)-422es",
@@ -381,7 +381,7 @@
     },
     {
       "kind" : "text",
-      "text" : ") -> "
+      "text" : ") -> (any "
     },
     {
       "kind" : "typeIdentifier",
@@ -390,7 +390,7 @@
     },
     {
       "kind" : "text",
-      "text" : "?"
+      "text" : ")?"
     }
   ],
   "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/APIParsingContext\/error(from:)-5p5cl",

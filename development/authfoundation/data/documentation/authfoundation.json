@@ -254,6 +254,13 @@
         "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JSONValue"
       ],
       "title" : "Enumerations"
+    },
+    {
+      "identifiers" : [
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/Foundation",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/Swift"
+      ],
+      "title" : "Extended Modules"
     }
   ],
   "variants" : [
@@ -646,7 +653,7 @@
     },
     {
       "kind" : "text",
-      "text" : " : "
+      "text" : " : (any "
     },
     {
       "kind" : "typeIdentifier",
@@ -655,7 +662,7 @@
     },
     {
       "kind" : "text",
-      "text" : "?]?"
+      "text" : ")?]?"
     }
   ],
   "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/APIRequest\/headers-8ieky",
@@ -694,7 +701,7 @@
     },
     {
       "kind" : "text",
-      "text" : " : "
+      "text" : " : (any "
     },
     {
       "kind" : "typeIdentifier",
@@ -703,7 +710,7 @@
     },
     {
       "kind" : "text",
-      "text" : "?]?"
+      "text" : ")?]?"
     }
   ],
   "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/APIRequest\/query-730ld",
@@ -1500,6 +1507,17 @@
   "title" : "Expires",
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/expires"
+},
+"doc://AuthFoundation/documentation/AuthFoundation/Foundation": {
+  "abstract" : [
+
+  ],
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/Foundation",
+  "kind" : "symbol",
+  "role" : "collection",
+  "title" : "Foundation",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/foundation"
 },
 "doc://AuthFoundation/documentation/AuthFoundation/GrantType": {
   "abstract" : [
@@ -2622,6 +2640,17 @@
   "title" : "SDKVersionMigrator",
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/sdkversionmigrator"
+},
+"doc://AuthFoundation/documentation/AuthFoundation/Swift": {
+  "abstract" : [
+
+  ],
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/Swift",
+  "kind" : "symbol",
+  "role" : "collection",
+  "title" : "Swift",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/swift"
 },
 "doc://AuthFoundation/documentation/AuthFoundation/TimeCoordinator": {
   "abstract" : [

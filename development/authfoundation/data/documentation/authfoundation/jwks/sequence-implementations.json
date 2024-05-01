@@ -19,6 +19,7 @@
       }
     ],
     "role" : "collectionGroup",
+    "roleHeading" : "API Collection",
     "title" : "Sequence Implementations"
   },
   "schemaVersion" : {
@@ -34,8 +35,7 @@
       "generated" : true,
       "identifiers" : [
         "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JWKS\/lazy",
-        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JWKS\/publisher",
-        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JWKS\/underestimatedCount-1bgzu"
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JWKS\/publisher"
       ],
       "title" : "Instance Properties"
     },
@@ -50,7 +50,8 @@
         "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JWKS\/elementsEqual(_:)",
         "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JWKS\/elementsEqual(_:by:)",
         "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JWKS\/enumerated()",
-        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JWKS\/filter(_:)",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JWKS\/filter(_:)-6fuaj",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JWKS\/filter(_:)-r6z0",
         "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JWKS\/first(where:)",
         "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JWKS\/flatMap(_:)-4liif",
         "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JWKS\/flatMap(_:)-6nmde",
@@ -168,6 +169,7 @@
     },
     {
       "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:ST7ElementQa",
       "text" : "Element"
     },
     {
@@ -251,6 +253,7 @@
     },
     {
       "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:ST7ElementQa",
       "text" : "Element"
     },
     {
@@ -336,6 +339,7 @@
     },
     {
       "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:10Foundation14SortComparatorP8ComparedQa",
       "text" : "Compared"
     },
     {
@@ -352,6 +356,7 @@
     },
     {
       "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:10Foundation14SortComparatorP8ComparedQa",
       "text" : "Compared"
     },
     {
@@ -434,6 +439,7 @@
     },
     {
       "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:ST7ElementQa",
       "text" : "Element"
     },
     {
@@ -492,6 +498,7 @@
     },
     {
       "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:ST7ElementQa",
       "text" : "Element"
     },
     {
@@ -673,6 +680,7 @@
     },
     {
       "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:ST7ElementQa",
       "text" : "Element"
     },
     {
@@ -689,6 +697,7 @@
     },
     {
       "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:ST7ElementQa",
       "text" : "Element"
     },
     {
@@ -779,7 +788,87 @@
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/jwks\/enumerated()"
 },
-"doc://AuthFoundation/documentation/AuthFoundation/JWKS/filter(_:)": {
+"doc://AuthFoundation/documentation/AuthFoundation/JWKS/filter(_:)-6fuaj": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "func"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "filter"
+    },
+    {
+      "kind" : "text",
+      "text" : "("
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:10Foundation9PredicateV",
+      "text" : "Predicate"
+    },
+    {
+      "kind" : "text",
+      "text" : "<"
+    },
+    {
+      "kind" : "typeIdentifier",
+      "text" : "Self"
+    },
+    {
+      "kind" : "text",
+      "text" : "."
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:ST7ElementQa",
+      "text" : "Element"
+    },
+    {
+      "kind" : "text",
+      "text" : ">) "
+    },
+    {
+      "kind" : "keyword",
+      "text" : "throws"
+    },
+    {
+      "kind" : "text",
+      "text" : " -> ["
+    },
+    {
+      "kind" : "typeIdentifier",
+      "text" : "Self"
+    },
+    {
+      "kind" : "text",
+      "text" : "."
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:ST7ElementQa",
+      "text" : "Element"
+    },
+    {
+      "kind" : "text",
+      "text" : "]"
+    }
+  ],
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JWKS\/filter(_:)-6fuaj",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "filter(_:)",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/jwks\/filter(_:)-6fuaj"
+},
+"doc://AuthFoundation/documentation/AuthFoundation/JWKS/filter(_:)-r6z0": {
   "abstract" : [
 
   ],
@@ -810,6 +899,7 @@
     },
     {
       "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:ST7ElementQa",
       "text" : "Element"
     },
     {
@@ -851,6 +941,7 @@
     },
     {
       "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:ST7ElementQa",
       "text" : "Element"
     },
     {
@@ -858,12 +949,12 @@
       "text" : "]"
     }
   ],
-  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JWKS\/filter(_:)",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JWKS\/filter(_:)-r6z0",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "filter(_:)",
   "type" : "topic",
-  "url" : "\/documentation\/authfoundation\/jwks\/filter(_:)"
+  "url" : "\/documentation\/authfoundation\/jwks\/filter(_:)-r6z0"
 },
 "doc://AuthFoundation/documentation/AuthFoundation/JWKS/first(where:)": {
   "abstract" : [
@@ -904,6 +995,7 @@
     },
     {
       "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:ST7ElementQa",
       "text" : "Element"
     },
     {
@@ -945,6 +1037,7 @@
     },
     {
       "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:ST7ElementQa",
       "text" : "Element"
     },
     {
@@ -998,6 +1091,7 @@
     },
     {
       "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:ST7ElementQa",
       "text" : "Element"
     },
     {
@@ -1038,6 +1132,7 @@
     },
     {
       "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:ST7ElementQa",
       "text" : "Element"
     },
     {
@@ -1092,6 +1187,7 @@
     },
     {
       "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:ST7ElementQa",
       "text" : "Element"
     },
     {
@@ -1169,6 +1265,7 @@
     },
     {
       "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:ST7ElementQa",
       "text" : "Element"
     },
     {
@@ -1251,6 +1348,7 @@
     },
     {
       "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:10Foundation11FormatStyleP0B6OutputQa",
       "text" : "FormatOutput"
     }
   ],
@@ -1362,6 +1460,7 @@
     },
     {
       "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:ST7ElementQa",
       "text" : "Element"
     },
     {
@@ -1378,6 +1477,7 @@
     },
     {
       "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:ST7ElementQa",
       "text" : "Element"
     },
     {
@@ -1461,6 +1561,7 @@
     },
     {
       "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:ST7ElementQa",
       "text" : "Element"
     },
     {
@@ -1546,6 +1647,7 @@
     },
     {
       "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:ST7ElementQa",
       "text" : "Element"
     },
     {
@@ -1562,6 +1664,7 @@
     },
     {
       "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:ST7ElementQa",
       "text" : "Element"
     },
     {
@@ -1603,6 +1706,7 @@
     },
     {
       "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:ST7ElementQa",
       "text" : "Element"
     },
     {
@@ -1656,6 +1760,7 @@
     },
     {
       "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:ST7ElementQa",
       "text" : "Element"
     },
     {
@@ -1672,6 +1777,7 @@
     },
     {
       "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:ST7ElementQa",
       "text" : "Element"
     },
     {
@@ -1713,6 +1819,7 @@
     },
     {
       "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:ST7ElementQa",
       "text" : "Element"
     },
     {
@@ -1846,6 +1953,7 @@
     },
     {
       "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:ST7ElementQa",
       "text" : "Element"
     },
     {
@@ -1959,6 +2067,7 @@
     },
     {
       "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:ST7ElementQa",
       "text" : "Element"
     },
     {
@@ -2024,6 +2133,7 @@
     },
     {
       "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:ST7ElementQa",
       "text" : "Element"
     },
     {
@@ -2069,6 +2179,7 @@
     },
     {
       "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:ST7ElementQa",
       "text" : "Element"
     },
     {
@@ -2146,6 +2257,7 @@
     },
     {
       "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:ST7ElementQa",
       "text" : "Element"
     },
     {
@@ -2199,6 +2311,7 @@
     },
     {
       "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:ST7ElementQa",
       "text" : "Element"
     },
     {
@@ -2215,6 +2328,7 @@
     },
     {
       "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:ST7ElementQa",
       "text" : "Element"
     },
     {
@@ -2256,6 +2370,7 @@
     },
     {
       "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:ST7ElementQa",
       "text" : "Element"
     },
     {
@@ -2333,6 +2448,7 @@
     },
     {
       "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:ST7ElementQa",
       "text" : "Element"
     },
     {
@@ -2402,6 +2518,7 @@
     },
     {
       "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:ST7ElementQa",
       "text" : "Element"
     },
     {
@@ -2569,6 +2686,7 @@
     },
     {
       "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:ST7ElementQa",
       "text" : "Element"
     },
     {
@@ -2585,6 +2703,7 @@
     },
     {
       "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:ST7ElementQa",
       "text" : "Element"
     },
     {
@@ -2628,40 +2747,6 @@
   "title" : "starts(with:by:)",
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/jwks\/starts(with:by:)"
-},
-"doc://AuthFoundation/documentation/AuthFoundation/JWKS/underestimatedCount-1bgzu": {
-  "abstract" : [
-
-  ],
-  "fragments" : [
-    {
-      "kind" : "keyword",
-      "text" : "var"
-    },
-    {
-      "kind" : "text",
-      "text" : " "
-    },
-    {
-      "kind" : "identifier",
-      "text" : "underestimatedCount"
-    },
-    {
-      "kind" : "text",
-      "text" : ": "
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:Si",
-      "text" : "Int"
-    }
-  ],
-  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JWKS\/underestimatedCount-1bgzu",
-  "kind" : "symbol",
-  "role" : "symbol",
-  "title" : "underestimatedCount",
-  "type" : "topic",
-  "url" : "\/documentation\/authfoundation\/jwks\/underestimatedcount-1bgzu"
 },
 "doc://AuthFoundation/documentation/AuthFoundation/JWKS/withContiguousStorageIfAvailable(_:)": {
   "abstract" : [
@@ -2711,6 +2796,7 @@
     },
     {
       "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:ST7ElementQa",
       "text" : "Element"
     },
     {

@@ -1,4 +1,10 @@
 {
+  "abstract" : [
+    {
+      "text" : "Some authenticators require specific arguments to be supplied, but are missing in this case.",
+      "type" : "text"
+    }
+  ],
   "hierarchy" : {
     "paths" : [
       [
@@ -216,7 +222,10 @@
 },
 "doc://OktaDirectAuth/documentation/OktaDirectAuth/DirectAuthenticationFlowError/missingArguments(_:)": {
   "abstract" : [
-
+    {
+      "text" : "Some authenticators require specific arguments to be supplied, but are missing in this case.",
+      "type" : "text"
+    }
   ],
   "fragments" : [
     {

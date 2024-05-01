@@ -102,9 +102,8 @@
               "type" : "text"
             },
             {
-              "identifier" : "doc:\/\/OktaDirectAuth\/documentation\/OktaDirectAuth\/DirectAuthenticationFlow\/resume(_:with:)",
-              "isActive" : true,
-              "type" : "reference"
+              "code" : "DirectAuthenticationFlow\/resume(_:with:)",
+              "type" : "codeVoice"
             },
             {
               "text" : " to indicate the result of an individual authentication step. This can be used to drive your application’s sign-in workflow.",
@@ -147,10 +146,9 @@
   "topicSections" : [
     {
       "identifiers" : [
-        "doc:\/\/OktaDirectAuth\/documentation\/OktaDirectAuth\/DirectAuthenticationFlow\/Status\/bindingUpdate(_:)",
+        "doc:\/\/OktaDirectAuth\/documentation\/OktaDirectAuth\/DirectAuthenticationFlow\/Status\/continuation(_:)",
         "doc:\/\/OktaDirectAuth\/documentation\/OktaDirectAuth\/DirectAuthenticationFlow\/Status\/mfaRequired(_:)",
-        "doc:\/\/OktaDirectAuth\/documentation\/OktaDirectAuth\/DirectAuthenticationFlow\/Status\/success(_:)",
-        "doc:\/\/OktaDirectAuth\/documentation\/OktaDirectAuth\/DirectAuthenticationFlow\/Status\/webAuthn(_:)"
+        "doc:\/\/OktaDirectAuth\/documentation\/OktaDirectAuth\/DirectAuthenticationFlow\/Status\/success(_:)"
       ],
       "title" : "Enumeration Cases"
     },
@@ -308,10 +306,10 @@
   "type" : "topic",
   "url" : "\/documentation\/oktadirectauth\/directauthenticationflow\/status\/equatable-implementations"
 },
-"doc://OktaDirectAuth/documentation/OktaDirectAuth/DirectAuthenticationFlow/Status/bindingUpdate(_:)": {
+"doc://OktaDirectAuth/documentation/OktaDirectAuth/DirectAuthenticationFlow/Status/continuation(_:)": {
   "abstract" : [
     {
-      "text" : "Indicates that there is an update about binding authentication channels when verifying OOB factors",
+      "text" : "Indicates that the current authentication factor requires some sort of continuation.",
       "type" : "text"
     }
   ],
@@ -326,7 +324,7 @@
     },
     {
       "kind" : "identifier",
-      "text" : "bindingUpdate"
+      "text" : "continuation"
     },
     {
       "kind" : "text",
@@ -343,20 +341,20 @@
     },
     {
       "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:14OktaDirectAuth0B18AuthenticationFlowC20BindingUpdateContextV",
-      "text" : "BindingUpdateContext"
+      "preciseIdentifier" : "s:14OktaDirectAuth0B18AuthenticationFlowC16ContinuationTypeO",
+      "text" : "ContinuationType"
     },
     {
       "kind" : "text",
       "text" : ")"
     }
   ],
-  "identifier" : "doc:\/\/OktaDirectAuth\/documentation\/OktaDirectAuth\/DirectAuthenticationFlow\/Status\/bindingUpdate(_:)",
+  "identifier" : "doc:\/\/OktaDirectAuth\/documentation\/OktaDirectAuth\/DirectAuthenticationFlow\/Status\/continuation(_:)",
   "kind" : "symbol",
   "role" : "symbol",
-  "title" : "DirectAuthenticationFlow.Status.bindingUpdate(_:)",
+  "title" : "DirectAuthenticationFlow.Status.continuation(_:)",
   "type" : "topic",
-  "url" : "\/documentation\/oktadirectauth\/directauthenticationflow\/status\/bindingupdate(_:)"
+  "url" : "\/documentation\/oktadirectauth\/directauthenticationflow\/status\/continuation(_:)"
 },
 "doc://OktaDirectAuth/documentation/OktaDirectAuth/DirectAuthenticationFlow/Status/mfaRequired(_:)": {
   "abstract" : [
@@ -448,162 +446,6 @@
   "title" : "DirectAuthenticationFlow.Status.success(_:)",
   "type" : "topic",
   "url" : "\/documentation\/oktadirectauth\/directauthenticationflow\/status\/success(_:)"
-},
-"doc://OktaDirectAuth/documentation/OktaDirectAuth/DirectAuthenticationFlow/Status/webAuthn(_:)": {
-  "abstract" : [
-    {
-      "text" : "Indicates the user is being prompted with a WebAuthn challenge request.",
-      "type" : "text"
-    }
-  ],
-  "fragments" : [
-    {
-      "kind" : "keyword",
-      "text" : "case"
-    },
-    {
-      "kind" : "text",
-      "text" : " "
-    },
-    {
-      "kind" : "identifier",
-      "text" : "webAuthn"
-    },
-    {
-      "kind" : "text",
-      "text" : "("
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:14OktaDirectAuth0B18AuthenticationFlowC",
-      "text" : "DirectAuthenticationFlow"
-    },
-    {
-      "kind" : "text",
-      "text" : "."
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:14OktaDirectAuth0B18AuthenticationFlowC15WebAuthnContextV",
-      "text" : "WebAuthnContext"
-    },
-    {
-      "kind" : "text",
-      "text" : ")"
-    }
-  ],
-  "identifier" : "doc:\/\/OktaDirectAuth\/documentation\/OktaDirectAuth\/DirectAuthenticationFlow\/Status\/webAuthn(_:)",
-  "kind" : "symbol",
-  "role" : "symbol",
-  "title" : "DirectAuthenticationFlow.Status.webAuthn(_:)",
-  "type" : "topic",
-  "url" : "\/documentation\/oktadirectauth\/directauthenticationflow\/status\/webauthn(_:)"
-},
-"doc://OktaDirectAuth/documentation/OktaDirectAuth/DirectAuthenticationFlow/resume(_:with:)": {
-  "abstract" : [
-    {
-      "text" : "Resumes authentication when an additional (secondary) factor is required to verify the user.",
-      "type" : "text"
-    }
-  ],
-  "fragments" : [
-    {
-      "kind" : "keyword",
-      "text" : "func"
-    },
-    {
-      "kind" : "text",
-      "text" : " "
-    },
-    {
-      "kind" : "identifier",
-      "text" : "resume"
-    },
-    {
-      "kind" : "text",
-      "text" : "("
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:14OktaDirectAuth0B18AuthenticationFlowC",
-      "text" : "DirectAuthenticationFlow"
-    },
-    {
-      "kind" : "text",
-      "text" : "."
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:14OktaDirectAuth0B18AuthenticationFlowC6StatusO",
-      "text" : "Status"
-    },
-    {
-      "kind" : "text",
-      "text" : ", "
-    },
-    {
-      "kind" : "externalParam",
-      "text" : "with"
-    },
-    {
-      "kind" : "text",
-      "text" : ": "
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:14OktaDirectAuth0B18AuthenticationFlowC",
-      "text" : "DirectAuthenticationFlow"
-    },
-    {
-      "kind" : "text",
-      "text" : "."
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:14OktaDirectAuth0B18AuthenticationFlowC15SecondaryFactorO",
-      "text" : "SecondaryFactor"
-    },
-    {
-      "kind" : "text",
-      "text" : ") "
-    },
-    {
-      "kind" : "keyword",
-      "text" : "async"
-    },
-    {
-      "kind" : "text",
-      "text" : " "
-    },
-    {
-      "kind" : "keyword",
-      "text" : "throws"
-    },
-    {
-      "kind" : "text",
-      "text" : " -> "
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:14OktaDirectAuth0B18AuthenticationFlowC",
-      "text" : "DirectAuthenticationFlow"
-    },
-    {
-      "kind" : "text",
-      "text" : "."
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:14OktaDirectAuth0B18AuthenticationFlowC6StatusO",
-      "text" : "Status"
-    }
-  ],
-  "identifier" : "doc:\/\/OktaDirectAuth\/documentation\/OktaDirectAuth\/DirectAuthenticationFlow\/resume(_:with:)",
-  "kind" : "symbol",
-  "role" : "symbol",
-  "title" : "resume(_:with:)",
-  "type" : "topic",
-  "url" : "\/documentation\/oktadirectauth\/directauthenticationflow\/resume(_:with:)"
 },
 "doc://OktaDirectAuth/documentation/OktaDirectAuth/DirectAuthenticationFlow/start(_:with:)": {
   "abstract" : [

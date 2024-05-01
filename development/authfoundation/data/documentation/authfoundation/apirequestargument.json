@@ -338,6 +338,31 @@
       "kind" : "content"
     }
   ],
+  "relationshipsSections" : [
+    {
+      "identifiers" : [
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/Swift\/Bool",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/Swift\/Double",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/Swift\/Float",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/Swift\/Int",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/Swift\/Int16",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/Swift\/Int32",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/Swift\/Int64",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/Swift\/Int8",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/Foundation\/NSNumber",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/Foundation\/NSString",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/Swift\/String",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/Swift\/UInt",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/Swift\/UInt16",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/Swift\/UInt32",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/Swift\/UInt64",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/Swift\/UInt8"
+      ],
+      "kind" : "relationships",
+      "title" : "Conforming Types",
+      "type" : "conformingTypes"
+    }
+  ],
   "schemaVersion" : {
     "major" : 0,
     "minor" : 3,
@@ -734,7 +759,7 @@
     },
     {
       "kind" : "text",
-      "text" : " : "
+      "text" : " : (any "
     },
     {
       "kind" : "typeIdentifier",
@@ -743,7 +768,7 @@
     },
     {
       "kind" : "text",
-      "text" : "?]?"
+      "text" : ")?]?"
     }
   ],
   "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/APIRequest\/headers-8ieky",
@@ -782,7 +807,7 @@
     },
     {
       "kind" : "text",
-      "text" : " : "
+      "text" : " : (any "
     },
     {
       "kind" : "typeIdentifier",
@@ -791,7 +816,7 @@
     },
     {
       "kind" : "text",
-      "text" : "?]?"
+      "text" : ")?]?"
     }
   ],
   "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/APIRequest\/query-730ld",
@@ -1122,6 +1147,70 @@
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/empty"
 },
+"doc://AuthFoundation/documentation/AuthFoundation/Foundation/NSNumber": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "extension"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "preciseIdentifier" : "c:objc(cs)NSNumber",
+      "text" : "NSNumber"
+    }
+  ],
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/Foundation\/NSNumber",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "NSNumber"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "NSNumber",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/foundation\/nsnumber"
+},
+"doc://AuthFoundation/documentation/AuthFoundation/Foundation/NSString": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "extension"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "preciseIdentifier" : "c:objc(cs)NSString",
+      "text" : "NSString"
+    }
+  ],
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/Foundation\/NSString",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "NSString"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "NSString",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/foundation\/nsstring"
+},
 "doc://AuthFoundation/documentation/AuthFoundation/JSONDecodable": {
   "abstract" : [
 
@@ -1238,6 +1327,454 @@
   "title" : "OpenIdConfiguration",
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/openidconfiguration"
+},
+"doc://AuthFoundation/documentation/AuthFoundation/Swift/Bool": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "extension"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "preciseIdentifier" : "s:Sb",
+      "text" : "Bool"
+    }
+  ],
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/Swift\/Bool",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "Bool"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "Bool",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/swift\/bool"
+},
+"doc://AuthFoundation/documentation/AuthFoundation/Swift/Double": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "extension"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "preciseIdentifier" : "s:Sd",
+      "text" : "Double"
+    }
+  ],
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/Swift\/Double",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "Double"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "Double",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/swift\/double"
+},
+"doc://AuthFoundation/documentation/AuthFoundation/Swift/Float": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "extension"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "preciseIdentifier" : "s:Sf",
+      "text" : "Float"
+    }
+  ],
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/Swift\/Float",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "Float"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "Float",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/swift\/float"
+},
+"doc://AuthFoundation/documentation/AuthFoundation/Swift/Int": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "extension"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "preciseIdentifier" : "s:Si",
+      "text" : "Int"
+    }
+  ],
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/Swift\/Int",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "Int"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "Int",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/swift\/int"
+},
+"doc://AuthFoundation/documentation/AuthFoundation/Swift/Int16": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "extension"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "preciseIdentifier" : "s:s5Int16V",
+      "text" : "Int16"
+    }
+  ],
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/Swift\/Int16",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "Int16"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "Int16",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/swift\/int16"
+},
+"doc://AuthFoundation/documentation/AuthFoundation/Swift/Int32": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "extension"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "preciseIdentifier" : "s:s5Int32V",
+      "text" : "Int32"
+    }
+  ],
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/Swift\/Int32",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "Int32"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "Int32",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/swift\/int32"
+},
+"doc://AuthFoundation/documentation/AuthFoundation/Swift/Int64": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "extension"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "preciseIdentifier" : "s:s5Int64V",
+      "text" : "Int64"
+    }
+  ],
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/Swift\/Int64",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "Int64"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "Int64",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/swift\/int64"
+},
+"doc://AuthFoundation/documentation/AuthFoundation/Swift/Int8": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "extension"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "preciseIdentifier" : "s:s4Int8V",
+      "text" : "Int8"
+    }
+  ],
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/Swift\/Int8",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "Int8"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "Int8",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/swift\/int8"
+},
+"doc://AuthFoundation/documentation/AuthFoundation/Swift/String": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "extension"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "preciseIdentifier" : "s:SS",
+      "text" : "String"
+    }
+  ],
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/Swift\/String",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "String"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "String",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/swift\/string"
+},
+"doc://AuthFoundation/documentation/AuthFoundation/Swift/UInt": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "extension"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "preciseIdentifier" : "s:Su",
+      "text" : "UInt"
+    }
+  ],
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/Swift\/UInt",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "UInt"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "UInt",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/swift\/uint"
+},
+"doc://AuthFoundation/documentation/AuthFoundation/Swift/UInt16": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "extension"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "preciseIdentifier" : "s:s6UInt16V",
+      "text" : "UInt16"
+    }
+  ],
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/Swift\/UInt16",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "UInt16"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "UInt16",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/swift\/uint16"
+},
+"doc://AuthFoundation/documentation/AuthFoundation/Swift/UInt32": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "extension"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "preciseIdentifier" : "s:s6UInt32V",
+      "text" : "UInt32"
+    }
+  ],
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/Swift\/UInt32",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "UInt32"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "UInt32",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/swift\/uint32"
+},
+"doc://AuthFoundation/documentation/AuthFoundation/Swift/UInt64": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "extension"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "preciseIdentifier" : "s:s6UInt64V",
+      "text" : "UInt64"
+    }
+  ],
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/Swift\/UInt64",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "UInt64"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "UInt64",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/swift\/uint64"
+},
+"doc://AuthFoundation/documentation/AuthFoundation/Swift/UInt8": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "extension"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "preciseIdentifier" : "s:s5UInt8V",
+      "text" : "UInt8"
+    }
+  ],
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/Swift\/UInt8",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "UInt8"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "UInt8",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/swift\/uint8"
 }
 }
 }

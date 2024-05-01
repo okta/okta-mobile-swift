@@ -494,7 +494,7 @@
     },
     {
       "identifiers" : [
-        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/OAuth2Client\/additionalHttpHeaders-7l5g8",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/OAuth2Client\/additionalHttpHeaders",
         "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/OAuth2Client\/configuration-swift.property",
         "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/OAuth2Client\/jwks",
         "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/OAuth2Client\/openIdConfiguration",
@@ -966,7 +966,7 @@
     },
     {
       "kind" : "text",
-      "text" : ") -> "
+      "text" : ") -> any "
     },
     {
       "kind" : "typeIdentifier",
@@ -1294,7 +1294,7 @@
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/oauth2client\/usesdelegatecollection-implementations"
 },
-"doc://AuthFoundation/documentation/AuthFoundation/OAuth2Client/additionalHttpHeaders-7l5g8": {
+"doc://AuthFoundation/documentation/AuthFoundation/OAuth2Client/additionalHttpHeaders": {
   "abstract" : [
     {
       "text" : "Additional HTTP headers to include in outgoing network requests.",
@@ -1337,12 +1337,12 @@
       "text" : "]?"
     }
   ],
-  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/OAuth2Client\/additionalHttpHeaders-7l5g8",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/OAuth2Client\/additionalHttpHeaders",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "additionalHttpHeaders",
   "type" : "topic",
-  "url" : "\/documentation\/authfoundation\/oauth2client\/additionalhttpheaders-7l5g8"
+  "url" : "\/documentation\/authfoundation\/oauth2client\/additionalhttpheaders"
 },
 "doc://AuthFoundation/documentation/AuthFoundation/OAuth2Client/configuration-swift.property": {
   "abstract" : [
@@ -1539,7 +1539,7 @@
     },
     {
       "kind" : "text",
-      "text" : ": "
+      "text" : ": (any "
     },
     {
       "kind" : "typeIdentifier",
@@ -1548,7 +1548,7 @@
     },
     {
       "kind" : "text",
-      "text" : "?)"
+      "text" : ")?)"
     }
   ],
   "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/OAuth2Client\/init(_:session:)",
@@ -1665,7 +1665,7 @@
     },
     {
       "kind" : "text",
-      "text" : ": "
+      "text" : ": (any "
     },
     {
       "kind" : "typeIdentifier",
@@ -1674,7 +1674,7 @@
     },
     {
       "kind" : "text",
-      "text" : "?)"
+      "text" : ")?)"
     }
   ],
   "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/OAuth2Client\/init(baseURL:clientId:scopes:authentication:session:)",
@@ -1791,7 +1791,7 @@
     },
     {
       "kind" : "text",
-      "text" : ": "
+      "text" : ": (any "
     },
     {
       "kind" : "typeIdentifier",
@@ -1800,7 +1800,7 @@
     },
     {
       "kind" : "text",
-      "text" : "?) "
+      "text" : ")?) "
     },
     {
       "kind" : "keyword",
@@ -2677,7 +2677,7 @@
     },
     {
       "kind" : "text",
-      "text" : ": "
+      "text" : ": any "
     },
     {
       "kind" : "typeIdentifier",

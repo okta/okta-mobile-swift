@@ -63,7 +63,7 @@
               },
               {
                 "path" : "\/documentation\/oktaoauth2\/authorizationcodeflow\/delegatecollection",
-                "title" : "let delegateCollection: DelegateCollection<AuthorizationCodeFlowDelegate>",
+                "title" : "let delegateCollection: DelegateCollection<any AuthorizationCodeFlowDelegate>",
                 "type" : "property"
               },
               {
@@ -188,12 +188,7 @@
                         "type" : "groupMarker"
                       },
                       {
-                        "path" : "\/documentation\/oktaoauth2\/authorizationcodeflow\/redirecterror\/errordescription-1d2qw",
-                        "title" : "var errorDescription: String?",
-                        "type" : "property"
-                      },
-                      {
-                        "path" : "\/documentation\/oktaoauth2\/authorizationcodeflow\/redirecterror\/errordescription-8fgw1",
+                        "path" : "\/documentation\/oktaoauth2\/authorizationcodeflow\/redirecterror\/errordescription",
                         "title" : "var errorDescription: String?",
                         "type" : "property"
                       },
@@ -234,22 +229,22 @@
                   },
                   {
                     "path" : "\/documentation\/oktaoauth2\/authorizationcodeflow\/api(client:didsend:received:)",
-                    "title" : "func api(client: APIClient, didSend: URLRequest, received: HTTPURLResponse)",
+                    "title" : "func api(client: any APIClient, didSend: URLRequest, received: HTTPURLResponse)",
                     "type" : "method"
                   },
                   {
                     "path" : "\/documentation\/oktaoauth2\/authorizationcodeflow\/api(client:didsend:received:requestid:ratelimit:)",
-                    "title" : "func api(client: APIClient, didSend: URLRequest, received: APIClientError, requestId: String?, rateLimit: APIRateLimit?)",
+                    "title" : "func api(client: any APIClient, didSend: URLRequest, received: APIClientError, requestId: String?, rateLimit: APIRateLimit?)",
                     "type" : "method"
                   },
                   {
                     "path" : "\/documentation\/oktaoauth2\/authorizationcodeflow\/api(client:shouldretry:)",
-                    "title" : "func api(client: APIClient, shouldRetry: URLRequest) -> APIRetry",
+                    "title" : "func api(client: any APIClient, shouldRetry: URLRequest) -> APIRetry",
                     "type" : "method"
                   },
                   {
                     "path" : "\/documentation\/oktaoauth2\/authorizationcodeflow\/api(client:willsend:)",
-                    "title" : "func api(client: APIClient, willSend: inout URLRequest)",
+                    "title" : "func api(client: any APIClient, willSend: inout URLRequest)",
                     "type" : "method"
                   }
                 ],
@@ -472,7 +467,7 @@
               },
               {
                 "path" : "\/documentation\/oktaoauth2\/sessionlogoutflow\/delegatecollection",
-                "title" : "let delegateCollection: DelegateCollection<SessionLogoutFlowDelegate>",
+                "title" : "let delegateCollection: DelegateCollection<any SessionLogoutFlowDelegate>",
                 "type" : "property"
               },
               {
@@ -531,22 +526,22 @@
                   },
                   {
                     "path" : "\/documentation\/oktaoauth2\/sessionlogoutflow\/api(client:didsend:received:)",
-                    "title" : "func api(client: APIClient, didSend: URLRequest, received: HTTPURLResponse)",
+                    "title" : "func api(client: any APIClient, didSend: URLRequest, received: HTTPURLResponse)",
                     "type" : "method"
                   },
                   {
                     "path" : "\/documentation\/oktaoauth2\/sessionlogoutflow\/api(client:didsend:received:requestid:ratelimit:)",
-                    "title" : "func api(client: APIClient, didSend: URLRequest, received: APIClientError, requestId: String?, rateLimit: APIRateLimit?)",
+                    "title" : "func api(client: any APIClient, didSend: URLRequest, received: APIClientError, requestId: String?, rateLimit: APIRateLimit?)",
                     "type" : "method"
                   },
                   {
                     "path" : "\/documentation\/oktaoauth2\/sessionlogoutflow\/api(client:shouldretry:)",
-                    "title" : "func api(client: APIClient, shouldRetry: URLRequest) -> APIRetry",
+                    "title" : "func api(client: any APIClient, shouldRetry: URLRequest) -> APIRetry",
                     "type" : "method"
                   },
                   {
                     "path" : "\/documentation\/oktaoauth2\/sessionlogoutflow\/api(client:willsend:)",
-                    "title" : "func api(client: APIClient, willSend: inout URLRequest)",
+                    "title" : "func api(client: any APIClient, willSend: inout URLRequest)",
                     "type" : "method"
                   }
                 ],
@@ -618,7 +613,7 @@
               },
               {
                 "path" : "\/documentation\/oktaoauth2\/sessionlogoutflow\/context-swift.struct\/init(from:)",
-                "title" : "init(from: Decoder) throws",
+                "title" : "init(from: any Decoder) throws",
                 "type" : "init"
               },
               {
@@ -768,7 +763,7 @@
               },
               {
                 "path" : "\/documentation\/oktaoauth2\/deviceauthorizationflow\/delegatecollection",
-                "title" : "let delegateCollection: DelegateCollection<DeviceAuthorizationFlowDelegate>",
+                "title" : "let delegateCollection: DelegateCollection<any DeviceAuthorizationFlowDelegate>",
                 "type" : "property"
               },
               {
@@ -817,22 +812,22 @@
                   },
                   {
                     "path" : "\/documentation\/oktaoauth2\/deviceauthorizationflow\/api(client:didsend:received:)",
-                    "title" : "func api(client: APIClient, didSend: URLRequest, received: HTTPURLResponse)",
+                    "title" : "func api(client: any APIClient, didSend: URLRequest, received: HTTPURLResponse)",
                     "type" : "method"
                   },
                   {
                     "path" : "\/documentation\/oktaoauth2\/deviceauthorizationflow\/api(client:didsend:received:requestid:ratelimit:)",
-                    "title" : "func api(client: APIClient, didSend: URLRequest, received: APIClientError, requestId: String?, rateLimit: APIRateLimit?)",
+                    "title" : "func api(client: any APIClient, didSend: URLRequest, received: APIClientError, requestId: String?, rateLimit: APIRateLimit?)",
                     "type" : "method"
                   },
                   {
                     "path" : "\/documentation\/oktaoauth2\/deviceauthorizationflow\/api(client:shouldretry:)",
-                    "title" : "func api(client: APIClient, shouldRetry: URLRequest) -> APIRetry",
+                    "title" : "func api(client: any APIClient, shouldRetry: URLRequest) -> APIRetry",
                     "type" : "method"
                   },
                   {
                     "path" : "\/documentation\/oktaoauth2\/deviceauthorizationflow\/api(client:willsend:)",
-                    "title" : "func api(client: APIClient, willSend: inout URLRequest)",
+                    "title" : "func api(client: any APIClient, willSend: inout URLRequest)",
                     "type" : "method"
                   }
                 ],
@@ -930,7 +925,7 @@
               },
               {
                 "path" : "\/documentation\/oktaoauth2\/deviceauthorizationflow\/context-swift.struct\/init(from:)",
-                "title" : "init(from: Decoder) throws",
+                "title" : "init(from: any Decoder) throws",
                 "type" : "init"
               },
               {
@@ -1059,7 +1054,7 @@
               },
               {
                 "path" : "\/documentation\/oktaoauth2\/tokenexchangeflow\/delegatecollection",
-                "title" : "let delegateCollection: DelegateCollection<AuthenticationDelegate>",
+                "title" : "let delegateCollection: DelegateCollection<any AuthenticationDelegate>",
                 "type" : "property"
               },
               {
@@ -1212,22 +1207,22 @@
                   },
                   {
                     "path" : "\/documentation\/oktaoauth2\/tokenexchangeflow\/api(client:didsend:received:)",
-                    "title" : "func api(client: APIClient, didSend: URLRequest, received: HTTPURLResponse)",
+                    "title" : "func api(client: any APIClient, didSend: URLRequest, received: HTTPURLResponse)",
                     "type" : "method"
                   },
                   {
                     "path" : "\/documentation\/oktaoauth2\/tokenexchangeflow\/api(client:didsend:received:requestid:ratelimit:)",
-                    "title" : "func api(client: APIClient, didSend: URLRequest, received: APIClientError, requestId: String?, rateLimit: APIRateLimit?)",
+                    "title" : "func api(client: any APIClient, didSend: URLRequest, received: APIClientError, requestId: String?, rateLimit: APIRateLimit?)",
                     "type" : "method"
                   },
                   {
                     "path" : "\/documentation\/oktaoauth2\/tokenexchangeflow\/api(client:shouldretry:)",
-                    "title" : "func api(client: APIClient, shouldRetry: URLRequest) -> APIRetry",
+                    "title" : "func api(client: any APIClient, shouldRetry: URLRequest) -> APIRetry",
                     "type" : "method"
                   },
                   {
                     "path" : "\/documentation\/oktaoauth2\/tokenexchangeflow\/api(client:willsend:)",
-                    "title" : "func api(client: APIClient, willSend: inout URLRequest)",
+                    "title" : "func api(client: any APIClient, willSend: inout URLRequest)",
                     "type" : "method"
                   }
                 ],
@@ -1344,7 +1339,7 @@
               },
               {
                 "path" : "\/documentation\/oktaoauth2\/resourceownerflow\/delegatecollection",
-                "title" : "let delegateCollection: DelegateCollection<AuthenticationDelegate>",
+                "title" : "let delegateCollection: DelegateCollection<any AuthenticationDelegate>",
                 "type" : "property"
               },
               {
@@ -1383,22 +1378,22 @@
                   },
                   {
                     "path" : "\/documentation\/oktaoauth2\/resourceownerflow\/api(client:didsend:received:)",
-                    "title" : "func api(client: APIClient, didSend: URLRequest, received: HTTPURLResponse)",
+                    "title" : "func api(client: any APIClient, didSend: URLRequest, received: HTTPURLResponse)",
                     "type" : "method"
                   },
                   {
                     "path" : "\/documentation\/oktaoauth2\/resourceownerflow\/api(client:didsend:received:requestid:ratelimit:)",
-                    "title" : "func api(client: APIClient, didSend: URLRequest, received: APIClientError, requestId: String?, rateLimit: APIRateLimit?)",
+                    "title" : "func api(client: any APIClient, didSend: URLRequest, received: APIClientError, requestId: String?, rateLimit: APIRateLimit?)",
                     "type" : "method"
                   },
                   {
                     "path" : "\/documentation\/oktaoauth2\/resourceownerflow\/api(client:shouldretry:)",
-                    "title" : "func api(client: APIClient, shouldRetry: URLRequest) -> APIRetry",
+                    "title" : "func api(client: any APIClient, shouldRetry: URLRequest) -> APIRetry",
                     "type" : "method"
                   },
                   {
                     "path" : "\/documentation\/oktaoauth2\/resourceownerflow\/api(client:willsend:)",
-                    "title" : "func api(client: APIClient, willSend: inout URLRequest)",
+                    "title" : "func api(client: any APIClient, willSend: inout URLRequest)",
                     "type" : "method"
                   }
                 ],
@@ -1508,7 +1503,7 @@
               },
               {
                 "path" : "\/documentation\/oktaoauth2\/sessiontokenflow\/delegatecollection",
-                "title" : "let delegateCollection: DelegateCollection<SessionTokenFlow.Delegate>",
+                "title" : "let delegateCollection: DelegateCollection<any SessionTokenFlow.Delegate>",
                 "type" : "property"
               },
               {
@@ -1552,22 +1547,22 @@
                   },
                   {
                     "path" : "\/documentation\/oktaoauth2\/sessiontokenflow\/api(client:didsend:received:)",
-                    "title" : "func api(client: APIClient, didSend: URLRequest, received: HTTPURLResponse)",
+                    "title" : "func api(client: any APIClient, didSend: URLRequest, received: HTTPURLResponse)",
                     "type" : "method"
                   },
                   {
                     "path" : "\/documentation\/oktaoauth2\/sessiontokenflow\/api(client:didsend:received:requestid:ratelimit:)",
-                    "title" : "func api(client: APIClient, didSend: URLRequest, received: APIClientError, requestId: String?, rateLimit: APIRateLimit?)",
+                    "title" : "func api(client: any APIClient, didSend: URLRequest, received: APIClientError, requestId: String?, rateLimit: APIRateLimit?)",
                     "type" : "method"
                   },
                   {
                     "path" : "\/documentation\/oktaoauth2\/sessiontokenflow\/api(client:shouldretry:)",
-                    "title" : "func api(client: APIClient, shouldRetry: URLRequest) -> APIRetry",
+                    "title" : "func api(client: any APIClient, shouldRetry: URLRequest) -> APIRetry",
                     "type" : "method"
                   },
                   {
                     "path" : "\/documentation\/oktaoauth2\/sessiontokenflow\/api(client:willsend:)",
-                    "title" : "func api(client: APIClient, willSend: inout URLRequest)",
+                    "title" : "func api(client: any APIClient, willSend: inout URLRequest)",
                     "type" : "method"
                   }
                 ],
@@ -1689,6 +1684,176 @@
             "path" : "\/documentation\/oktaoauth2\/version",
             "title" : "let Version: SDKVersion",
             "type" : "var"
+          },
+          {
+            "title" : "Extended Modules",
+            "type" : "groupMarker"
+          },
+          {
+            "children" : [
+              {
+                "title" : "Extended Classes",
+                "type" : "groupMarker"
+              },
+              {
+                "children" : [
+                  {
+                    "title" : "Instance Methods",
+                    "type" : "groupMarker"
+                  },
+                  {
+                    "path" : "\/documentation\/oktaoauth2\/authfoundation\/oauth2client\/authorizationcodeflow(redirecturi:additionalparameters:)",
+                    "title" : "func authorizationCodeFlow(redirectUri: URL, additionalParameters: [String : String]?) -> AuthorizationCodeFlow",
+                    "type" : "method"
+                  },
+                  {
+                    "path" : "\/documentation\/oktaoauth2\/authfoundation\/oauth2client\/deviceauthorizationflow()",
+                    "title" : "func deviceAuthorizationFlow() -> DeviceAuthorizationFlow",
+                    "type" : "method"
+                  },
+                  {
+                    "path" : "\/documentation\/oktaoauth2\/authfoundation\/oauth2client\/resourceownerflow()",
+                    "title" : "func resourceOwnerFlow() -> ResourceOwnerFlow",
+                    "type" : "method"
+                  },
+                  {
+                    "path" : "\/documentation\/oktaoauth2\/authfoundation\/oauth2client\/sessionlogoutflow(logoutredirecturi:)",
+                    "title" : "func sessionLogoutFlow(logoutRedirectUri: URL) -> SessionLogoutFlow",
+                    "type" : "method"
+                  },
+                  {
+                    "path" : "\/documentation\/oktaoauth2\/authfoundation\/oauth2client\/sessiontokenflow(redirecturi:additionalparameters:)",
+                    "title" : "func sessionTokenFlow(redirectUri: URL, additionalParameters: [String : String]?) -> SessionTokenFlow",
+                    "type" : "method"
+                  },
+                  {
+                    "path" : "\/documentation\/oktaoauth2\/authfoundation\/oauth2client\/tokenexchangeflow(audience:)",
+                    "title" : "func tokenExchangeFlow(audience: TokenExchangeFlow.Audience) -> TokenExchangeFlow",
+                    "type" : "method"
+                  }
+                ],
+                "path" : "\/documentation\/oktaoauth2\/authfoundation\/oauth2client",
+                "title" : "OAuth2Client",
+                "type" : "extension"
+              },
+              {
+                "title" : "Extended Protocols",
+                "type" : "groupMarker"
+              },
+              {
+                "children" : [
+                  {
+                    "title" : "Default Implementations",
+                    "type" : "groupMarker"
+                  },
+                  {
+                    "children" : [
+                      {
+                        "title" : "Instance Methods",
+                        "type" : "groupMarker"
+                      },
+                      {
+                        "path" : "\/documentation\/oktaoauth2\/authfoundation\/authenticationdelegate\/authenticationfinished(flow:)",
+                        "title" : "func authenticationFinished<Flow>(flow: Flow)",
+                        "type" : "method"
+                      },
+                      {
+                        "path" : "\/documentation\/oktaoauth2\/authfoundation\/authenticationdelegate\/authenticationstarted(flow:)",
+                        "title" : "func authenticationStarted<Flow>(flow: Flow)",
+                        "type" : "method"
+                      }
+                    ],
+                    "path" : "\/documentation\/oktaoauth2\/authfoundation\/authenticationdelegate\/authenticationdelegate-implementations",
+                    "title" : "AuthenticationDelegate Implementations",
+                    "type" : "symbol"
+                  }
+                ],
+                "path" : "\/documentation\/oktaoauth2\/authfoundation\/authenticationdelegate",
+                "title" : "AuthenticationDelegate",
+                "type" : "extension"
+              },
+              {
+                "title" : "Extended Enumerations",
+                "type" : "groupMarker"
+              },
+              {
+                "children" : [
+                  {
+                    "title" : "Default Implementations",
+                    "type" : "groupMarker"
+                  },
+                  {
+                    "children" : [
+                      {
+                        "title" : "Instance Properties",
+                        "type" : "groupMarker"
+                      },
+                      {
+                        "path" : "\/documentation\/oktaoauth2\/authfoundation\/authenticationerror\/errordescription",
+                        "title" : "var errorDescription: String?",
+                        "type" : "property"
+                      },
+                      {
+                        "path" : "\/documentation\/oktaoauth2\/authfoundation\/authenticationerror\/failurereason",
+                        "title" : "var failureReason: String?",
+                        "type" : "property"
+                      },
+                      {
+                        "path" : "\/documentation\/oktaoauth2\/authfoundation\/authenticationerror\/helpanchor",
+                        "title" : "var helpAnchor: String?",
+                        "type" : "property"
+                      },
+                      {
+                        "path" : "\/documentation\/oktaoauth2\/authfoundation\/authenticationerror\/recoverysuggestion",
+                        "title" : "var recoverySuggestion: String?",
+                        "type" : "property"
+                      }
+                    ],
+                    "path" : "\/documentation\/oktaoauth2\/authfoundation\/authenticationerror\/localizederror-implementations",
+                    "title" : "LocalizedError Implementations",
+                    "type" : "symbol"
+                  }
+                ],
+                "path" : "\/documentation\/oktaoauth2\/authfoundation\/authenticationerror",
+                "title" : "AuthenticationError",
+                "type" : "extension"
+              }
+            ],
+            "path" : "\/documentation\/oktaoauth2\/authfoundation",
+            "title" : "AuthFoundation",
+            "type" : "extension"
+          },
+          {
+            "children" : [
+              {
+                "title" : "Extended Structures",
+                "type" : "groupMarker"
+              },
+              {
+                "children" : [
+                  {
+                    "title" : "Instance Methods",
+                    "type" : "groupMarker"
+                  },
+                  {
+                    "path" : "\/documentation\/oktaoauth2\/foundation\/url\/authorizationcode(redirecturi:state:)",
+                    "title" : "func authorizationCode(redirectUri: URL, state: String) throws -> String",
+                    "type" : "method"
+                  },
+                  {
+                    "path" : "\/documentation\/oktaoauth2\/foundation\/url\/oauth2servererror(redirecturi:)",
+                    "title" : "func oauth2ServerError(redirectUri: URL?) throws -> OAuth2ServerError?",
+                    "type" : "method"
+                  }
+                ],
+                "path" : "\/documentation\/oktaoauth2\/foundation\/url",
+                "title" : "URL",
+                "type" : "extension"
+              }
+            ],
+            "path" : "\/documentation\/oktaoauth2\/foundation",
+            "title" : "Foundation",
+            "type" : "extension"
           }
         ],
         "path" : "\/documentation\/oktaoauth2",
@@ -1700,6 +1865,6 @@
   "schemaVersion" : {
     "major" : 0,
     "minor" : 1,
-    "patch" : 0
+    "patch" : 1
   }
 }

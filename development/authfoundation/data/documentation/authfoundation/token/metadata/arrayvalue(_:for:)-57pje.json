@@ -74,6 +74,7 @@
       },
       {
         "kind" : "typeIdentifier",
+        "preciseIdentifier" : "s:14AuthFoundation9HasClaimsP9ClaimTypeQa",
         "text" : "ClaimType"
       },
       {
@@ -183,7 +184,9 @@
               "text" : "."
             },
             {
+              "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/HasClaims\/ClaimType",
               "kind" : "typeIdentifier",
+              "preciseIdentifier" : "s:14AuthFoundation9HasClaimsP9ClaimTypeQa",
               "text" : "ClaimType"
             },
             {
@@ -359,6 +362,41 @@
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/hasclaims"
 },
+"doc://AuthFoundation/documentation/AuthFoundation/HasClaims/ClaimType": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "associatedtype"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "ClaimType"
+    },
+    {
+      "kind" : "text",
+      "text" : " : "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:14AuthFoundation7IsClaimP",
+      "text" : "IsClaim"
+    }
+  ],
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/HasClaims\/ClaimType",
+  "kind" : "symbol",
+  "required" : true,
+  "role" : "symbol",
+  "title" : "ClaimType",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/hasclaims\/claimtype"
+},
 "doc://AuthFoundation/documentation/AuthFoundation/Token": {
   "abstract" : [
     {
@@ -496,6 +534,7 @@
     },
     {
       "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:14AuthFoundation9HasClaimsP9ClaimTypeQa",
       "text" : "ClaimType"
     },
     {

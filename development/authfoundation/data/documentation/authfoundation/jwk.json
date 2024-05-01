@@ -153,7 +153,7 @@
     {
       "identifiers" : [
         "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JWK\/algorithm-swift.property",
-        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JWK\/id-5ooz1",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JWK\/id",
         "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JWK\/rsaExponent",
         "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JWK\/rsaModulus",
         "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JWK\/type",
@@ -185,8 +185,7 @@
     {
       "generated" : true,
       "identifiers" : [
-        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JWK\/Equatable-Implementations",
-        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JWK\/Identifiable-Implementations"
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JWK\/Equatable-Implementations"
       ],
       "title" : "Default Implementations"
     }
@@ -541,17 +540,6 @@
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/jwk\/equatable-implementations"
 },
-"doc://AuthFoundation/documentation/AuthFoundation/JWK/Identifiable-Implementations": {
-  "abstract" : [
-
-  ],
-  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JWK\/Identifiable-Implementations",
-  "kind" : "article",
-  "role" : "collectionGroup",
-  "title" : "Identifiable Implementations",
-  "type" : "topic",
-  "url" : "\/documentation\/authfoundation\/jwk\/identifiable-implementations"
-},
 "doc://AuthFoundation/documentation/AuthFoundation/JWK/KeyType": {
   "abstract" : [
     {
@@ -697,7 +685,7 @@
     },
     {
       "kind" : "text",
-      "text" : ": "
+      "text" : ": any "
     },
     {
       "kind" : "typeIdentifier",
@@ -720,7 +708,7 @@
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/jwk\/encode(to:)"
 },
-"doc://AuthFoundation/documentation/AuthFoundation/JWK/id-5ooz1": {
+"doc://AuthFoundation/documentation/AuthFoundation/JWK/id": {
   "abstract" : [
     {
       "text" : "The key’s ID.",
@@ -754,12 +742,12 @@
       "text" : "?"
     }
   ],
-  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JWK\/id-5ooz1",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JWK\/id",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "id",
   "type" : "topic",
-  "url" : "\/documentation\/authfoundation\/jwk\/id-5ooz1"
+  "url" : "\/documentation\/authfoundation\/jwk\/id"
 },
 "doc://AuthFoundation/documentation/AuthFoundation/JWK/init(from:)": {
   "abstract" : [
@@ -780,7 +768,7 @@
     },
     {
       "kind" : "text",
-      "text" : ": "
+      "text" : ": any "
     },
     {
       "kind" : "typeIdentifier",
@@ -1007,7 +995,7 @@
     },
     {
       "kind" : "text",
-      "text" : ": "
+      "text" : ": any "
     },
     {
       "kind" : "typeIdentifier",

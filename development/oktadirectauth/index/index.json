@@ -110,6 +110,16 @@
                     "type" : "case"
                   },
                   {
+                    "path" : "\/documentation\/oktadirectauth\/directauthenticationflow\/oobchannel\/sms",
+                    "title" : "case sms",
+                    "type" : "case"
+                  },
+                  {
+                    "path" : "\/documentation\/oktadirectauth\/directauthenticationflow\/oobchannel\/voice",
+                    "title" : "case voice",
+                    "type" : "case"
+                  },
+                  {
                     "title" : "Initializers",
                     "type" : "groupMarker"
                   },
@@ -146,7 +156,7 @@
                       },
                       {
                         "path" : "\/documentation\/oktadirectauth\/directauthenticationflow\/oobchannel\/init(from:)",
-                        "title" : "init(from: Decoder) throws",
+                        "title" : "init(from: any Decoder) throws",
                         "type" : "init"
                       },
                       {
@@ -164,7 +174,7 @@
                       },
                       {
                         "path" : "\/documentation\/oktadirectauth\/directauthenticationflow\/oobchannel\/encode(to:)",
-                        "title" : "func encode(to: Encoder) throws",
+                        "title" : "func encode(to: any Encoder) throws",
                         "type" : "method"
                       },
                       {
@@ -187,16 +197,6 @@
                 "type" : "groupMarker"
               },
               {
-                "path" : "\/documentation\/oktadirectauth\/directauthenticationflow\/resume(_:with:)",
-                "title" : "func resume(DirectAuthenticationFlow.Status, with: DirectAuthenticationFlow.SecondaryFactor) async throws -> DirectAuthenticationFlow.Status",
-                "type" : "method"
-              },
-              {
-                "path" : "\/documentation\/oktadirectauth\/directauthenticationflow\/resume(_:with:completion:)",
-                "title" : "func resume(DirectAuthenticationFlow.Status, with: DirectAuthenticationFlow.SecondaryFactor, completion: (Result<DirectAuthenticationFlow.Status, DirectAuthenticationFlowError>) -> Void)",
-                "type" : "method"
-              },
-              {
                 "children" : [
                   {
                     "title" : "Enumeration Cases",
@@ -215,11 +215,6 @@
                   {
                     "path" : "\/documentation\/oktadirectauth\/directauthenticationflow\/secondaryfactor\/webauthn",
                     "title" : "case webAuthn",
-                    "type" : "case"
-                  },
-                  {
-                    "path" : "\/documentation\/oktadirectauth\/directauthenticationflow\/secondaryfactor\/webauthnassertion(_:)",
-                    "title" : "case webAuthnAssertion(WebAuthn.AuthenticatorAssertionResponse)",
                     "type" : "case"
                   },
                   {
@@ -259,6 +254,16 @@
                     "type" : "case"
                   },
                   {
+                    "path" : "\/documentation\/oktadirectauth\/directauthenticationflow\/oobchannel\/sms",
+                    "title" : "case sms",
+                    "type" : "case"
+                  },
+                  {
+                    "path" : "\/documentation\/oktadirectauth\/directauthenticationflow\/oobchannel\/voice",
+                    "title" : "case voice",
+                    "type" : "case"
+                  },
+                  {
                     "title" : "Initializers",
                     "type" : "groupMarker"
                   },
@@ -295,7 +300,7 @@
                       },
                       {
                         "path" : "\/documentation\/oktadirectauth\/directauthenticationflow\/oobchannel\/init(from:)",
-                        "title" : "init(from: Decoder) throws",
+                        "title" : "init(from: any Decoder) throws",
                         "type" : "init"
                       },
                       {
@@ -313,7 +318,7 @@
                       },
                       {
                         "path" : "\/documentation\/oktadirectauth\/directauthenticationflow\/oobchannel\/encode(to:)",
-                        "title" : "func encode(to: Encoder) throws",
+                        "title" : "func encode(to: any Encoder) throws",
                         "type" : "method"
                       },
                       {
@@ -342,8 +347,8 @@
                     "type" : "groupMarker"
                   },
                   {
-                    "path" : "\/documentation\/oktadirectauth\/directauthenticationflow\/status\/bindingupdate(_:)",
-                    "title" : "case bindingUpdate(DirectAuthenticationFlow.BindingUpdateContext)",
+                    "path" : "\/documentation\/oktadirectauth\/directauthenticationflow\/status\/continuation(_:)",
+                    "title" : "case continuation(DirectAuthenticationFlow.ContinuationType)",
                     "type" : "case"
                   },
                   {
@@ -354,11 +359,6 @@
                   {
                     "path" : "\/documentation\/oktadirectauth\/directauthenticationflow\/status\/success(_:)",
                     "title" : "case success(Token)",
-                    "type" : "case"
-                  },
-                  {
-                    "path" : "\/documentation\/oktadirectauth\/directauthenticationflow\/status\/webauthn(_:)",
-                    "title" : "case webAuthn(DirectAuthenticationFlow.WebAuthnContext)",
                     "type" : "case"
                   },
                   {
@@ -456,7 +456,7 @@
               },
               {
                 "path" : "\/documentation\/oktadirectauth\/directauthenticationflow\/delegatecollection",
-                "title" : "let delegateCollection: DelegateCollection<DirectAuthenticationFlowDelegate>",
+                "title" : "let delegateCollection: DelegateCollection<any DirectAuthenticationFlowDelegate>",
                 "type" : "property"
               },
               {
@@ -474,40 +474,28 @@
                 "type" : "method"
               },
               {
-                "title" : "Structures",
+                "title" : "Instance Methods",
                 "type" : "groupMarker"
               },
               {
-                "children" : [
-                  {
-                    "title" : "Instance Properties",
-                    "type" : "groupMarker"
-                  },
-                  {
-                    "path" : "\/documentation\/oktadirectauth\/directauthenticationflow\/bindingupdatecontext\/update",
-                    "title" : "let update: DirectAuthenticationFlow.BindingUpdateType",
-                    "type" : "property"
-                  }
-                ],
-                "path" : "\/documentation\/oktadirectauth\/directauthenticationflow\/bindingupdatecontext",
-                "title" : "DirectAuthenticationFlow.BindingUpdateContext",
-                "type" : "struct"
+                "path" : "\/documentation\/oktadirectauth\/directauthenticationflow\/resume(_:with:)-5nv5h",
+                "title" : "func resume(DirectAuthenticationFlow.Status, with: DirectAuthenticationFlow.SecondaryFactor) async throws -> DirectAuthenticationFlow.Status",
+                "type" : "method"
               },
               {
-                "children" : [
-                  {
-                    "title" : "Instance Properties",
-                    "type" : "groupMarker"
-                  },
-                  {
-                    "path" : "\/documentation\/oktadirectauth\/directauthenticationflow\/webauthncontext\/request",
-                    "title" : "let request: WebAuthn.CredentialRequestOptions",
-                    "type" : "property"
-                  }
-                ],
-                "path" : "\/documentation\/oktadirectauth\/directauthenticationflow\/webauthncontext",
-                "title" : "DirectAuthenticationFlow.WebAuthnContext",
-                "type" : "struct"
+                "path" : "\/documentation\/oktadirectauth\/directauthenticationflow\/resume(_:with:)-9i2pz",
+                "title" : "func resume(DirectAuthenticationFlow.Status, with: DirectAuthenticationFlow.ContinuationFactor) async throws -> DirectAuthenticationFlow.Status",
+                "type" : "method"
+              },
+              {
+                "path" : "\/documentation\/oktadirectauth\/directauthenticationflow\/resume(_:with:completion:)-5nj0x",
+                "title" : "func resume(DirectAuthenticationFlow.Status, with: DirectAuthenticationFlow.ContinuationFactor, completion: (Result<DirectAuthenticationFlow.Status, DirectAuthenticationFlowError>) -> Void)",
+                "type" : "method"
+              },
+              {
+                "path" : "\/documentation\/oktadirectauth\/directauthenticationflow\/resume(_:with:completion:)-7fbah",
+                "title" : "func resume(DirectAuthenticationFlow.Status, with: DirectAuthenticationFlow.SecondaryFactor, completion: (Result<DirectAuthenticationFlow.Status, DirectAuthenticationFlowError>) -> Void)",
+                "type" : "method"
               },
               {
                 "title" : "Enumerations",
@@ -520,13 +508,94 @@
                     "type" : "groupMarker"
                   },
                   {
-                    "path" : "\/documentation\/oktadirectauth\/directauthenticationflow\/bindingupdatetype\/transfer(_:)",
-                    "title" : "case transfer(String)",
+                    "path" : "\/documentation\/oktadirectauth\/directauthenticationflow\/continuationfactor\/prompt(code:)",
+                    "title" : "case prompt(code: String)",
+                    "type" : "case"
+                  },
+                  {
+                    "path" : "\/documentation\/oktadirectauth\/directauthenticationflow\/continuationfactor\/transfer",
+                    "title" : "case transfer",
+                    "type" : "case"
+                  },
+                  {
+                    "path" : "\/documentation\/oktadirectauth\/directauthenticationflow\/continuationfactor\/webauthn(response:)",
+                    "title" : "case webAuthn(response: WebAuthn.AuthenticatorAssertionResponse)",
+                    "type" : "case"
+                  },
+                  {
+                    "title" : "Default Implementations",
+                    "type" : "groupMarker"
+                  },
+                  {
+                    "children" : [
+                      {
+                        "title" : "Operators",
+                        "type" : "groupMarker"
+                      },
+                      {
+                        "path" : "\/documentation\/oktadirectauth\/directauthenticationflow\/continuationfactor\/!=(_:_:)",
+                        "title" : "static func != (Self, Self) -> Bool",
+                        "type" : "op"
+                      }
+                    ],
+                    "path" : "\/documentation\/oktadirectauth\/directauthenticationflow\/continuationfactor\/equatable-implementations",
+                    "title" : "Equatable Implementations",
+                    "type" : "symbol"
+                  }
+                ],
+                "path" : "\/documentation\/oktadirectauth\/directauthenticationflow\/continuationfactor",
+                "title" : "DirectAuthenticationFlow.ContinuationFactor",
+                "type" : "enum"
+              },
+              {
+                "children" : [
+                  {
+                    "title" : "Structures",
+                    "type" : "groupMarker"
+                  },
+                  {
+                    "path" : "\/documentation\/oktadirectauth\/directauthenticationflow\/continuationtype\/bindingcontext",
+                    "title" : "DirectAuthenticationFlow.ContinuationType.BindingContext",
+                    "type" : "struct"
+                  },
+                  {
+                    "children" : [
+                      {
+                        "title" : "Instance Properties",
+                        "type" : "groupMarker"
+                      },
+                      {
+                        "path" : "\/documentation\/oktadirectauth\/directauthenticationflow\/continuationtype\/webauthncontext\/request",
+                        "title" : "let request: WebAuthn.CredentialRequestOptions",
+                        "type" : "property"
+                      }
+                    ],
+                    "path" : "\/documentation\/oktadirectauth\/directauthenticationflow\/continuationtype\/webauthncontext",
+                    "title" : "DirectAuthenticationFlow.ContinuationType.WebAuthnContext",
+                    "type" : "struct"
+                  },
+                  {
+                    "title" : "Enumeration Cases",
+                    "type" : "groupMarker"
+                  },
+                  {
+                    "path" : "\/documentation\/oktadirectauth\/directauthenticationflow\/continuationtype\/prompt(_:)",
+                    "title" : "case prompt(DirectAuthenticationFlow.ContinuationType.BindingContext)",
+                    "type" : "case"
+                  },
+                  {
+                    "path" : "\/documentation\/oktadirectauth\/directauthenticationflow\/continuationtype\/transfer(_:code:)",
+                    "title" : "case transfer(DirectAuthenticationFlow.ContinuationType.BindingContext, code: String)",
+                    "type" : "case"
+                  },
+                  {
+                    "path" : "\/documentation\/oktadirectauth\/directauthenticationflow\/continuationtype\/webauthn(_:)",
+                    "title" : "case webAuthn(DirectAuthenticationFlow.ContinuationType.WebAuthnContext)",
                     "type" : "case"
                   }
                 ],
-                "path" : "\/documentation\/oktadirectauth\/directauthenticationflow\/bindingupdatetype",
-                "title" : "DirectAuthenticationFlow.BindingUpdateType",
+                "path" : "\/documentation\/oktadirectauth\/directauthenticationflow\/continuationtype",
+                "title" : "DirectAuthenticationFlow.ContinuationType",
                 "type" : "enum"
               },
               {
@@ -541,22 +610,22 @@
                   },
                   {
                     "path" : "\/documentation\/oktadirectauth\/directauthenticationflow\/api(client:didsend:received:)",
-                    "title" : "func api(client: APIClient, didSend: URLRequest, received: HTTPURLResponse)",
+                    "title" : "func api(client: any APIClient, didSend: URLRequest, received: HTTPURLResponse)",
                     "type" : "method"
                   },
                   {
                     "path" : "\/documentation\/oktadirectauth\/directauthenticationflow\/api(client:didsend:received:requestid:ratelimit:)",
-                    "title" : "func api(client: APIClient, didSend: URLRequest, received: APIClientError, requestId: String?, rateLimit: APIRateLimit?)",
+                    "title" : "func api(client: any APIClient, didSend: URLRequest, received: APIClientError, requestId: String?, rateLimit: APIRateLimit?)",
                     "type" : "method"
                   },
                   {
                     "path" : "\/documentation\/oktadirectauth\/directauthenticationflow\/api(client:shouldretry:)",
-                    "title" : "func api(client: APIClient, shouldRetry: URLRequest) -> APIRetry",
+                    "title" : "func api(client: any APIClient, shouldRetry: URLRequest) -> APIRetry",
                     "type" : "method"
                   },
                   {
                     "path" : "\/documentation\/oktadirectauth\/directauthenticationflow\/api(client:willsend:)",
-                    "title" : "func api(client: APIClient, willSend: inout URLRequest)",
+                    "title" : "func api(client: any APIClient, willSend: inout URLRequest)",
                     "type" : "method"
                   }
                 ],
@@ -654,7 +723,7 @@
                   },
                   {
                     "path" : "\/documentation\/oktadirectauth\/webauthn\/authenticatorassertionresponse\/init(from:)",
-                    "title" : "init(from: Decoder) throws",
+                    "title" : "init(from: any Decoder) throws",
                     "type" : "init"
                   },
                   {
@@ -720,7 +789,7 @@
                       },
                       {
                         "path" : "\/documentation\/oktadirectauth\/webauthn\/credentialrequestoptions\/authenticatorenrollment\/init(from:)",
-                        "title" : "init(from: Decoder) throws",
+                        "title" : "init(from: any Decoder) throws",
                         "type" : "init"
                       },
                       {
@@ -753,7 +822,7 @@
                   },
                   {
                     "path" : "\/documentation\/oktadirectauth\/webauthn\/credentialrequestoptions\/init(from:)",
-                    "title" : "init(from: Decoder) throws",
+                    "title" : "init(from: any Decoder) throws",
                     "type" : "init"
                   },
                   {
@@ -803,7 +872,7 @@
                   },
                   {
                     "path" : "\/documentation\/oktadirectauth\/webauthn\/publickeycredentialdescriptor\/init(from:)",
-                    "title" : "init(from: Decoder) throws",
+                    "title" : "init(from: any Decoder) throws",
                     "type" : "init"
                   },
                   {
@@ -838,7 +907,7 @@
                   },
                   {
                     "path" : "\/documentation\/oktadirectauth\/webauthn\/publickeycredentialrequestoptions\/init(from:)",
-                    "title" : "init(from: Decoder) throws",
+                    "title" : "init(from: any Decoder) throws",
                     "type" : "init"
                   },
                   {
@@ -886,7 +955,7 @@
                   },
                   {
                     "path" : "\/documentation\/oktadirectauth\/webauthn\/publickeycredentialrequestoptions\/encode(to:)",
-                    "title" : "func encode(to: Encoder) throws",
+                    "title" : "func encode(to: any Encoder) throws",
                     "type" : "method"
                   }
                 ],
@@ -971,7 +1040,7 @@
                       },
                       {
                         "path" : "\/documentation\/oktadirectauth\/webauthn\/authenticatortransport\/init(from:)",
-                        "title" : "init(from: Decoder) throws",
+                        "title" : "init(from: any Decoder) throws",
                         "type" : "init"
                       },
                       {
@@ -989,7 +1058,7 @@
                       },
                       {
                         "path" : "\/documentation\/oktadirectauth\/webauthn\/authenticatortransport\/encode(to:)",
-                        "title" : "func encode(to: Encoder) throws",
+                        "title" : "func encode(to: any Encoder) throws",
                         "type" : "method"
                       },
                       {
@@ -1065,7 +1134,7 @@
                       },
                       {
                         "path" : "\/documentation\/oktadirectauth\/webauthn\/publickeycredentialhints\/init(from:)",
-                        "title" : "init(from: Decoder) throws",
+                        "title" : "init(from: any Decoder) throws",
                         "type" : "init"
                       },
                       {
@@ -1083,7 +1152,7 @@
                       },
                       {
                         "path" : "\/documentation\/oktadirectauth\/webauthn\/publickeycredentialhints\/encode(to:)",
-                        "title" : "func encode(to: Encoder) throws",
+                        "title" : "func encode(to: any Encoder) throws",
                         "type" : "method"
                       },
                       {
@@ -1149,7 +1218,7 @@
                       },
                       {
                         "path" : "\/documentation\/oktadirectauth\/webauthn\/publickeycredentialtype\/init(from:)",
-                        "title" : "init(from: Decoder) throws",
+                        "title" : "init(from: any Decoder) throws",
                         "type" : "init"
                       },
                       {
@@ -1167,7 +1236,7 @@
                       },
                       {
                         "path" : "\/documentation\/oktadirectauth\/webauthn\/publickeycredentialtype\/encode(to:)",
-                        "title" : "func encode(to: Encoder) throws",
+                        "title" : "func encode(to: any Encoder) throws",
                         "type" : "method"
                       },
                       {
@@ -1243,7 +1312,7 @@
                       },
                       {
                         "path" : "\/documentation\/oktadirectauth\/webauthn\/userverificationrequirement\/init(from:)",
-                        "title" : "init(from: Decoder) throws",
+                        "title" : "init(from: any Decoder) throws",
                         "type" : "init"
                       },
                       {
@@ -1261,7 +1330,7 @@
                       },
                       {
                         "path" : "\/documentation\/oktadirectauth\/webauthn\/userverificationrequirement\/encode(to:)",
-                        "title" : "func encode(to: Encoder) throws",
+                        "title" : "func encode(to: any Encoder) throws",
                         "type" : "method"
                       },
                       {
@@ -1309,6 +1378,11 @@
                 "type" : "case"
               },
               {
+                "path" : "\/documentation\/oktadirectauth\/directauthenticationflowerror\/invalidcontinuationcontext",
+                "title" : "case invalidContinuationContext",
+                "type" : "case"
+              },
+              {
                 "path" : "\/documentation\/oktadirectauth\/directauthenticationflowerror\/missingarguments(_:)",
                 "title" : "case missingArguments([String])",
                 "type" : "case"
@@ -1325,7 +1399,7 @@
               },
               {
                 "path" : "\/documentation\/oktadirectauth\/directauthenticationflowerror\/other(error:)",
-                "title" : "case other(error: Error)",
+                "title" : "case other(error: any Error)",
                 "type" : "case"
               },
               {
@@ -1386,12 +1460,7 @@
                     "type" : "groupMarker"
                   },
                   {
-                    "path" : "\/documentation\/oktadirectauth\/directauthenticationflowerror\/errordescription-39i33",
-                    "title" : "var errorDescription: String?",
-                    "type" : "property"
-                  },
-                  {
-                    "path" : "\/documentation\/oktadirectauth\/directauthenticationflowerror\/errordescription-4mlbs",
+                    "path" : "\/documentation\/oktadirectauth\/directauthenticationflowerror\/errordescription",
                     "title" : "var errorDescription: String?",
                     "type" : "property"
                   },
@@ -1419,6 +1488,64 @@
             "path" : "\/documentation\/oktadirectauth\/directauthenticationflowerror",
             "title" : "DirectAuthenticationFlowError",
             "type" : "enum"
+          },
+          {
+            "title" : "Extended Modules",
+            "type" : "groupMarker"
+          },
+          {
+            "children" : [
+              {
+                "title" : "Extended Classes",
+                "type" : "groupMarker"
+              },
+              {
+                "children" : [
+                  {
+                    "title" : "Instance Methods",
+                    "type" : "groupMarker"
+                  },
+                  {
+                    "path" : "\/documentation\/oktadirectauth\/authfoundation\/oauth2client\/directauthenticationflow(supportedgrants:)",
+                    "title" : "func directAuthenticationFlow(supportedGrants: [GrantType]) -> DirectAuthenticationFlow",
+                    "type" : "method"
+                  }
+                ],
+                "path" : "\/documentation\/oktadirectauth\/authfoundation\/oauth2client",
+                "title" : "OAuth2Client",
+                "type" : "extension"
+              }
+            ],
+            "path" : "\/documentation\/oktadirectauth\/authfoundation",
+            "title" : "AuthFoundation",
+            "type" : "extension"
+          },
+          {
+            "children" : [
+              {
+                "title" : "Extended Structures",
+                "type" : "groupMarker"
+              },
+              {
+                "children" : [
+                  {
+                    "title" : "Type Properties",
+                    "type" : "groupMarker"
+                  },
+                  {
+                    "path" : "\/documentation\/oktadirectauth\/swift\/array\/directauth",
+                    "title" : "static var directAuth: [GrantType]",
+                    "type" : "property"
+                  }
+                ],
+                "path" : "\/documentation\/oktadirectauth\/swift\/array",
+                "title" : "Array",
+                "type" : "extension"
+              }
+            ],
+            "path" : "\/documentation\/oktadirectauth\/swift",
+            "title" : "Swift",
+            "type" : "extension"
           }
         ],
         "path" : "\/documentation\/oktadirectauth",
@@ -1430,6 +1557,6 @@
   "schemaVersion" : {
     "major" : 0,
     "minor" : 1,
-    "patch" : 0
+    "patch" : 1
   }
 }

@@ -1,4 +1,10 @@
 {
+  "abstract" : [
+    {
+      "text" : "Some other unknown error has been returned.",
+      "type" : "text"
+    }
+  ],
   "hierarchy" : {
     "paths" : [
       [
@@ -37,7 +43,7 @@
       },
       {
         "kind" : "text",
-        "text" : ": "
+        "text" : ": any "
       },
       {
         "kind" : "typeIdentifier",
@@ -92,7 +98,7 @@
             },
             {
               "kind" : "text",
-              "text" : ": "
+              "text" : ": any "
             },
             {
               "kind" : "typeIdentifier",
@@ -224,7 +230,10 @@
 },
 "doc://OktaDirectAuth/documentation/OktaDirectAuth/DirectAuthenticationFlowError/other(error:)": {
   "abstract" : [
-
+    {
+      "text" : "Some other unknown error has been returned.",
+      "type" : "text"
+    }
   ],
   "fragments" : [
     {
@@ -249,7 +258,7 @@
     },
     {
       "kind" : "text",
-      "text" : ": "
+      "text" : ": any "
     },
     {
       "kind" : "typeIdentifier",

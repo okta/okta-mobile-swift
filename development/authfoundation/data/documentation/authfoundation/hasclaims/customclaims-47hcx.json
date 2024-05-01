@@ -130,8 +130,9 @@
               "type" : "text"
             },
             {
-              "code" : "claims",
-              "type" : "codeVoice"
+              "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/HasClaims\/claims-15zsq",
+              "isActive" : true,
+              "type" : "reference"
             },
             {
               "text" : " property, this returns values as strings.",
@@ -213,6 +214,57 @@
   "title" : "HasClaims",
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/hasclaims"
+},
+"doc://AuthFoundation/documentation/AuthFoundation/HasClaims/claims-15zsq": {
+  "abstract" : [
+    {
+      "text" : "Returns the collection of claims this object contains.",
+      "type" : "text"
+    }
+  ],
+  "defaultImplementations" : 1,
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "var"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "claims"
+    },
+    {
+      "kind" : "text",
+      "text" : ": ["
+    },
+    {
+      "kind" : "typeIdentifier",
+      "text" : "Self"
+    },
+    {
+      "kind" : "text",
+      "text" : "."
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:14AuthFoundation9HasClaimsP9ClaimTypeQa",
+      "text" : "ClaimType"
+    },
+    {
+      "kind" : "text",
+      "text" : "]"
+    }
+  ],
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/HasClaims\/claims-15zsq",
+  "kind" : "symbol",
+  "required" : true,
+  "role" : "symbol",
+  "title" : "claims",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/hasclaims\/claims-15zsq"
 },
 "doc://AuthFoundation/documentation/AuthFoundation/HasClaims/customClaims-47hcx": {
   "abstract" : [

@@ -104,7 +104,10 @@
     ],
     "modules" : [
       {
-        "name" : "OktaDirectAuth"
+        "name" : "OktaDirectAuth",
+        "relatedModules" : [
+          "Swift"
+        ]
       }
     ],
     "role" : "symbol",

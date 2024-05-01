@@ -101,7 +101,10 @@
     ],
     "modules" : [
       {
-        "name" : "OktaOAuth2"
+        "name" : "OktaOAuth2",
+        "relatedModules" : [
+          "AuthFoundation"
+        ]
       }
     ],
     "role" : "symbol",

@@ -112,6 +112,7 @@
     {
       "identifiers" : [
         "doc:\/\/OktaDirectAuth\/documentation\/OktaDirectAuth\/DirectAuthenticationFlowError\/bindingCodeMissing",
+        "doc:\/\/OktaDirectAuth\/documentation\/OktaDirectAuth\/DirectAuthenticationFlowError\/invalidContinuationContext",
         "doc:\/\/OktaDirectAuth\/documentation\/OktaDirectAuth\/DirectAuthenticationFlowError\/missingArguments(_:)",
         "doc:\/\/OktaDirectAuth\/documentation\/OktaDirectAuth\/DirectAuthenticationFlowError\/network(error:)",
         "doc:\/\/OktaDirectAuth\/documentation\/OktaDirectAuth\/DirectAuthenticationFlowError\/oauth2(error:)",
@@ -281,7 +282,10 @@
 },
 "doc://OktaDirectAuth/documentation/OktaDirectAuth/DirectAuthenticationFlowError/bindingCodeMissing": {
   "abstract" : [
-
+    {
+      "text" : "An authentication factor expects a “binding code” but it isn’t present.",
+      "type" : "text"
+    }
   ],
   "fragments" : [
     {
@@ -304,9 +308,40 @@
   "type" : "topic",
   "url" : "\/documentation\/oktadirectauth\/directauthenticationflowerror\/bindingcodemissing"
 },
+"doc://OktaDirectAuth/documentation/OktaDirectAuth/DirectAuthenticationFlowError/invalidContinuationContext": {
+  "abstract" : [
+    {
+      "text" : "The context supplied with the authenticator continuation request is invalid.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "case"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "invalidContinuationContext"
+    }
+  ],
+  "identifier" : "doc:\/\/OktaDirectAuth\/documentation\/OktaDirectAuth\/DirectAuthenticationFlowError\/invalidContinuationContext",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "DirectAuthenticationFlowError.invalidContinuationContext",
+  "type" : "topic",
+  "url" : "\/documentation\/oktadirectauth\/directauthenticationflowerror\/invalidcontinuationcontext"
+},
 "doc://OktaDirectAuth/documentation/OktaDirectAuth/DirectAuthenticationFlowError/missingArguments(_:)": {
   "abstract" : [
-
+    {
+      "text" : "Some authenticators require specific arguments to be supplied, but are missing in this case.",
+      "type" : "text"
+    }
   ],
   "fragments" : [
     {
@@ -344,7 +379,10 @@
 },
 "doc://OktaDirectAuth/documentation/OktaDirectAuth/DirectAuthenticationFlowError/network(error:)": {
   "abstract" : [
-
+    {
+      "text" : "An underlying network error has occurred.",
+      "type" : "text"
+    }
   ],
   "fragments" : [
     {
@@ -390,7 +428,10 @@
 },
 "doc://OktaDirectAuth/documentation/OktaDirectAuth/DirectAuthenticationFlowError/oauth2(error:)": {
   "abstract" : [
-
+    {
+      "text" : "An OAuth2 error has been returned.",
+      "type" : "text"
+    }
   ],
   "fragments" : [
     {
@@ -436,7 +477,10 @@
 },
 "doc://OktaDirectAuth/documentation/OktaDirectAuth/DirectAuthenticationFlowError/other(error:)": {
   "abstract" : [
-
+    {
+      "text" : "Some other unknown error has been returned.",
+      "type" : "text"
+    }
   ],
   "fragments" : [
     {
@@ -461,7 +505,7 @@
     },
     {
       "kind" : "text",
-      "text" : ": "
+      "text" : ": any "
     },
     {
       "kind" : "typeIdentifier",
@@ -482,7 +526,10 @@
 },
 "doc://OktaDirectAuth/documentation/OktaDirectAuth/DirectAuthenticationFlowError/pollingTimeoutExceeded": {
   "abstract" : [
-
+    {
+      "text" : "When polling for a background authenticator, this error may be thrown if polling for an out-of-band verification takes too long.",
+      "type" : "text"
+    }
   ],
   "fragments" : [
     {
@@ -507,7 +554,10 @@
 },
 "doc://OktaDirectAuth/documentation/OktaDirectAuth/DirectAuthenticationFlowError/server(error:)": {
   "abstract" : [
-
+    {
+      "text" : "An OAuth2 server error has been returned.",
+      "type" : "text"
+    }
   ],
   "fragments" : [
     {

@@ -1,4 +1,10 @@
 {
+  "abstract" : [
+    {
+      "text" : "An underlying network error has occurred.",
+      "type" : "text"
+    }
+  ],
   "hierarchy" : {
     "paths" : [
       [
@@ -224,7 +230,10 @@
 },
 "doc://OktaDirectAuth/documentation/OktaDirectAuth/DirectAuthenticationFlowError/network(error:)": {
   "abstract" : [
-
+    {
+      "text" : "An underlying network error has occurred.",
+      "type" : "text"
+    }
   ],
   "fragments" : [
     {

@@ -92,7 +92,7 @@
         },
         {
           "code" : [
-            "let status = try await flow.start(\"jane.doe@example.com\", with: .webAuthn)"
+            "let status = try await flow.resume(status, with: .webAuthn)"
           ],
           "syntax" : "swift",
           "type" : "codeListing"

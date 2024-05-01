@@ -125,7 +125,10 @@
     ],
     "modules" : [
       {
-        "name" : "OktaOAuth2"
+        "name" : "OktaOAuth2",
+        "relatedModules" : [
+          "Swift"
+        ]
       }
     ],
     "role" : "symbol",

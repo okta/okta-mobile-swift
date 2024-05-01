@@ -99,7 +99,10 @@
     ],
     "modules" : [
       {
-        "name" : "AuthFoundation"
+        "name" : "AuthFoundation",
+        "relatedModules" : [
+          "Swift"
+        ]
       }
     ],
     "role" : "symbol",

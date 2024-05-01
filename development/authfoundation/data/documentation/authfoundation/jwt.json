@@ -259,16 +259,18 @@
               "type" : "text"
             },
             {
-              "code" : "HasClaims\/claims",
-              "type" : "codeVoice"
+              "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/HasClaims\/claims-15zsq",
+              "isActive" : true,
+              "type" : "reference"
             },
             {
               "text" : " or ",
               "type" : "text"
             },
             {
-              "code" : "HasClaims\/customClaims",
-              "type" : "codeVoice"
+              "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/HasClaims\/customClaims-47hcx",
+              "isActive" : true,
+              "type" : "reference"
             },
             {
               "text" : " properties can be used to identify which claims are present in the JWT token.",
@@ -632,6 +634,100 @@
   "title" : "ClaimType",
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/hasclaims\/claimtype"
+},
+"doc://AuthFoundation/documentation/AuthFoundation/HasClaims/claims-15zsq": {
+  "abstract" : [
+    {
+      "text" : "Returns the collection of claims this object contains.",
+      "type" : "text"
+    }
+  ],
+  "defaultImplementations" : 1,
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "var"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "claims"
+    },
+    {
+      "kind" : "text",
+      "text" : ": ["
+    },
+    {
+      "kind" : "typeIdentifier",
+      "text" : "Self"
+    },
+    {
+      "kind" : "text",
+      "text" : "."
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:14AuthFoundation9HasClaimsP9ClaimTypeQa",
+      "text" : "ClaimType"
+    },
+    {
+      "kind" : "text",
+      "text" : "]"
+    }
+  ],
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/HasClaims\/claims-15zsq",
+  "kind" : "symbol",
+  "required" : true,
+  "role" : "symbol",
+  "title" : "claims",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/hasclaims\/claims-15zsq"
+},
+"doc://AuthFoundation/documentation/AuthFoundation/HasClaims/customClaims-47hcx": {
+  "abstract" : [
+    {
+      "text" : "Returns the collection of custom claims this object contains.",
+      "type" : "text"
+    }
+  ],
+  "defaultImplementations" : 1,
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "var"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "customClaims"
+    },
+    {
+      "kind" : "text",
+      "text" : ": ["
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:SS",
+      "text" : "String"
+    },
+    {
+      "kind" : "text",
+      "text" : "]"
+    }
+  ],
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/HasClaims\/customClaims-47hcx",
+  "kind" : "symbol",
+  "required" : true,
+  "role" : "symbol",
+  "title" : "customClaims",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/hasclaims\/customclaims-47hcx"
 },
 "doc://AuthFoundation/documentation/AuthFoundation/HasClaims/subject": {
   "abstract" : [

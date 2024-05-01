@@ -84,7 +84,10 @@
     ],
     "modules" : [
       {
-        "name" : "OktaDirectAuth"
+        "name" : "OktaDirectAuth",
+        "relatedModules" : [
+          "AuthFoundation"
+        ]
       }
     ],
     "role" : "symbol",

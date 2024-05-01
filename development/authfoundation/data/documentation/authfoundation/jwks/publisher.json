@@ -85,7 +85,10 @@
     ],
     "modules" : [
       {
-        "name" : "AuthFoundation"
+        "name" : "AuthFoundation",
+        "relatedModules" : [
+          "Swift"
+        ]
       }
     ],
     "platforms" : [

@@ -72,6 +72,16 @@
       "kind" : "declarations"
     }
   ],
+  "relationshipsSections" : [
+    {
+      "identifiers" : [
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/LocalAuthentication\/LAContext"
+      ],
+      "kind" : "relationships",
+      "title" : "Conforming Types",
+      "type" : "conformingTypes"
+    }
+  ],
   "schemaVersion" : {
     "major" : 0,
     "minor" : 3,
@@ -182,6 +192,11 @@
   "title" : "KeychainAuthenticationContext",
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/keychainauthenticationcontext"
+},
+"doc://AuthFoundation/documentation/AuthFoundation/LocalAuthentication/LAContext": {
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/LocalAuthentication\/LAContext",
+  "title" : "LAContext",
+  "type" : "unresolvable"
 },
 "doc://AuthFoundation/documentation/AuthFoundation/TokenAuthenticationContext": {
   "abstract" : [

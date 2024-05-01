@@ -125,7 +125,10 @@
     ],
     "modules" : [
       {
-        "name" : "WebAuthenticationUI"
+        "name" : "WebAuthenticationUI",
+        "relatedModules" : [
+          "Swift"
+        ]
       }
     ],
     "role" : "symbol",

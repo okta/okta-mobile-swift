@@ -1,4 +1,10 @@
 {
+  "abstract" : [
+    {
+      "text" : "An OAuth2 server error has been returned.",
+      "type" : "text"
+    }
+  ],
   "hierarchy" : {
     "paths" : [
       [
@@ -224,7 +230,10 @@
 },
 "doc://OktaDirectAuth/documentation/OktaDirectAuth/DirectAuthenticationFlowError/server(error:)": {
   "abstract" : [
-
+    {
+      "text" : "An OAuth2 server error has been returned.",
+      "type" : "text"
+    }
   ],
   "fragments" : [
     {

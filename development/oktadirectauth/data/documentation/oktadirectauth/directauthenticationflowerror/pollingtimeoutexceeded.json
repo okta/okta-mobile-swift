@@ -1,4 +1,10 @@
 {
+  "abstract" : [
+    {
+      "text" : "When polling for a background authenticator, this error may be thrown if polling for an out-of-band verification takes too long.",
+      "type" : "text"
+    }
+  ],
   "hierarchy" : {
     "paths" : [
       [
@@ -182,7 +188,10 @@
 },
 "doc://OktaDirectAuth/documentation/OktaDirectAuth/DirectAuthenticationFlowError/pollingTimeoutExceeded": {
   "abstract" : [
-
+    {
+      "text" : "When polling for a background authenticator, this error may be thrown if polling for an out-of-band verification takes too long.",
+      "type" : "text"
+    }
   ],
   "fragments" : [
     {

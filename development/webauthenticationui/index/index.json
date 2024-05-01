@@ -95,6 +95,15 @@
                 "type" : "article"
               },
               {
+                "title" : "Sign In Using App Link",
+                "type" : "groupMarker"
+              },
+              {
+                "path" : "\/documentation\/webauthenticationui\/webauthentication\/resume(with:)",
+                "title" : "func resume(with: URL) throws",
+                "type" : "method"
+              },
+              {
                 "title" : "Customizing OAuth2 Flows",
                 "type" : "groupMarker"
               },
@@ -129,11 +138,6 @@
               {
                 "path" : "\/documentation\/webauthenticationui\/webauthentication\/cancel()",
                 "title" : "func cancel()",
-                "type" : "method"
-              },
-              {
-                "path" : "\/documentation\/webauthenticationui\/webauthentication\/resume(with:)",
-                "title" : "func resume(with: URL) throws",
                 "type" : "method"
               },
               {
@@ -389,7 +393,7 @@
               },
               {
                 "path" : "\/documentation\/webauthenticationui\/webauthenticationerror\/authenticationprovidererror(_:)",
-                "title" : "case authenticationProviderError(Error)",
+                "title" : "case authenticationProviderError(any Error)",
                 "type" : "case"
               },
               {
@@ -399,7 +403,7 @@
               },
               {
                 "path" : "\/documentation\/webauthenticationui\/webauthenticationerror\/generic(error:)",
-                "title" : "case generic(error: Error)",
+                "title" : "case generic(error: any Error)",
                 "type" : "case"
               },
               {
@@ -464,12 +468,7 @@
                     "type" : "groupMarker"
                   },
                   {
-                    "path" : "\/documentation\/webauthenticationui\/webauthenticationerror\/errordescription-3wen2",
-                    "title" : "var errorDescription: String?",
-                    "type" : "property"
-                  },
-                  {
-                    "path" : "\/documentation\/webauthenticationui\/webauthenticationerror\/errordescription-91dkn",
+                    "path" : "\/documentation\/webauthenticationui\/webauthenticationerror\/errordescription",
                     "title" : "var errorDescription: String?",
                     "type" : "property"
                   },
@@ -508,6 +507,6 @@
   "schemaVersion" : {
     "major" : 0,
     "minor" : 1,
-    "patch" : 0
+    "patch" : 1
   }
 }
