@@ -21,15 +21,15 @@ on:
       - 'Tests/**/*.swift'
 
 env:
-  DEVELOPER_DIR: /Applications/Xcode_14.2.app/Contents/Developer
+  DEVELOPER_DIR: /Applications/Xcode_15.3.app/Contents/Developer
   NSUnbufferedIO: YES 
-  iOS_DESTINATION: "platform=iOS Simulator,OS=16.2,name=iPhone 14 Pro Max"
-  tvOS_DESTINATION: "platform=tvOS Simulator,OS=16.1,name=Apple TV"
+  iOS_DESTINATION: "platform=iOS Simulator,OS=17.4,name=iPhone 15 Pro Max"
+  tvOS_DESTINATION: "platform=tvOS Simulator,OS=17.4,name=Apple TV"
 
 jobs:
   SwiftBuild:
     name: Swift Unit Tests
-    runs-on: macos-12
+    runs-on: macos-latest-large
     timeout-minutes: 10
     steps:
     - name: Get swift version
@@ -42,7 +42,7 @@ jobs:
 
   Cocoapods:
     name: CocoaPods Build
-    runs-on: macos-12
+    runs-on: macos-latest-large
     timeout-minutes: 10
     needs:
       - SwiftBuild
@@ -60,7 +60,7 @@ jobs:
 
   XcodeBuild:
     name: Xcode Unit Tests
-    runs-on: macos-12
+    runs-on: macos-latest-large
     timeout-minutes: 25
     steps:
     - uses: actions/checkout@master

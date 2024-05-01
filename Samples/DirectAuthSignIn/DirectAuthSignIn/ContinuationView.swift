@@ -1,5 +1,5 @@
 //
-// Copyright (c) 2023-Present, Okta, Inc. and/or its affiliates. All rights reserved.
+// Copyright (c) 2024-Present, Okta, Inc. and/or its affiliates. All rights reserved.
 // The Okta software accompanied by this notice is provided pursuant to the Apache License, Version 2.0 (the "License.")
 //
 // You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0.
@@ -14,25 +14,17 @@ import SwiftUI
 import OktaDirectAuth
 
 extension SignInView {
-    struct SecondaryView: View {
+    struct ContinuationView: View {
         let flow: DirectAuthenticationFlow
         
         @State var status: DirectAuthenticationFlow.Status
-        @State var selectedFactor: SignInView.Factor = .otp
-        @State var oneTimeCode: String = ""
+        @State var selectedFactor: SignInView.Factor = .code
+        @State var verificationCode: String = ""
         
-        var factor: DirectAuthenticationFlow.SecondaryFactor? {
+        var factor: DirectAuthenticationFlow.ContinuationFactor? {
             switch selectedFactor {
-            case .otp:
-                return .otp(code: oneTimeCode)
-            case .oob:
-                return .oob(channel: .push)
-            case .password:
-                return nil
-            case .sms:
-                return .oob(channel: .sms)
-            case .voice:
-                return .oob(channel: .voice)
+            case .code:
+                return .prompt(code: verificationCode)
             default:
                 return nil
             }
@@ -43,12 +35,12 @@ extension SignInView {
         
         var body: some View {
             VStack {
-                Text("Please authenticate using an additional factor.")
+                Text("Please continue authenticating.")
                     .padding(25)
                 
                 VStack(alignment: .leading, spacing: 1) {
                     Picker(selection: $selectedFactor, label: EmptyView()) {
-                        ForEach(SignInView.Factor.secondaryFactors, id: \.self) {
+                        ForEach(SignInView.Factor.continuationFactors, id: \.self) {
                             Text($0.title)
                         }
                     }.pickerStyle(.menu)
@@ -56,10 +48,10 @@ extension SignInView {
                         .padding(.horizontal, -10)
                         .padding(.vertical, -4)
                     
-                    if selectedFactor == .otp {
-                        TextField("123456", text: $oneTimeCode)
+                    if selectedFactor == .code {
+                        TextField("123456", text: $verificationCode)
                             .textContentType(.oneTimeCode)
-                            .accessibilityIdentifier("one_time_code_button")
+                            .accessibilityIdentifier("verification_code_button")
                             .padding(10)
                             .overlay {
                                 RoundedRectangle(cornerRadius: 6)

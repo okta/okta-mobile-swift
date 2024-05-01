@@ -22,12 +22,12 @@ extension OpenIdConfiguration {
 struct OOBResponse: Codable, HasTokenParameters {
     let oobCode: String
     let expiresIn: TimeInterval
-    let interval: TimeInterval
+    let interval: TimeInterval?
     let channel: DirectAuthenticationFlow.OOBChannel
     let bindingMethod: BindingMethod
     let bindingCode: String?
 
-    init(oobCode: String, expiresIn: TimeInterval, interval: TimeInterval, channel: DirectAuthenticationFlow.OOBChannel, bindingMethod: BindingMethod, bindingCode: String? = nil) {
+    init(oobCode: String, expiresIn: TimeInterval, interval: TimeInterval?, channel: DirectAuthenticationFlow.OOBChannel, bindingMethod: BindingMethod, bindingCode: String? = nil) {
         self.oobCode = oobCode
         self.expiresIn = expiresIn
         self.interval = interval
@@ -46,11 +46,13 @@ struct OOBAuthenticateRequest {
     let clientConfiguration: OAuth2Client.Configuration
     let loginHint: String
     let channelHint: DirectAuthenticationFlow.OOBChannel
+    let challengeHint: GrantType
     
     init(openIdConfiguration: OpenIdConfiguration,
          clientConfiguration: OAuth2Client.Configuration,
          loginHint: String,
-         channelHint: DirectAuthenticationFlow.OOBChannel) throws
+         channelHint: DirectAuthenticationFlow.OOBChannel,
+         challengeHint: GrantType) throws
     {
         guard let url = openIdConfiguration.primaryAuthenticateEndpoint else {
             throw OAuth2Error.cannotComposeUrl
@@ -60,12 +62,14 @@ struct OOBAuthenticateRequest {
         self.clientConfiguration = clientConfiguration
         self.loginHint = loginHint
         self.channelHint = channelHint
+        self.challengeHint = challengeHint
     }
 }
 
 enum BindingMethod: String, Codable {
     case none
     case transfer
+    case prompt
 }
 
 extension OOBAuthenticateRequest: APIRequest, APIRequestBody {
@@ -78,7 +82,8 @@ extension OOBAuthenticateRequest: APIRequest, APIRequestBody {
         var result: [String: Any] = [
             "client_id": clientConfiguration.clientId,
             "login_hint": loginHint,
-            "channel_hint": channelHint.rawValue
+            "channel_hint": channelHint.rawValue,
+            "challenge_hint": challengeHint.rawValue,
         ]
         
         if let parameters = clientConfiguration.authentication.additionalParameters {

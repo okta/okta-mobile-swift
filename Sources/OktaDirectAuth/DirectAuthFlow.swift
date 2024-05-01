@@ -25,12 +25,30 @@ public protocol DirectAuthenticationFlowDelegate: AuthenticationDelegate {
 
 /// Errors that may be generated while authenticating using ``DirectAuthenticationFlow``.
 public enum DirectAuthenticationFlowError: Error {
+    /// When polling for a background authenticator, this error may be thrown if polling for an out-of-band verification takes too long.
     case pollingTimeoutExceeded
+    
+    /// An authentication factor expects a "binding code" but it isn't present.
+    ///
+    /// For more information, please see the [related documentation](https://developer.okta.com/docs/guides/configure-direct-auth-grants/dmfaoobov/main/).
     case bindingCodeMissing
+    
+    /// The context supplied with the authenticator continuation request is invalid.
+    case invalidContinuationContext
+    
+    /// Some authenticators require specific arguments to be supplied, but are missing in this case.
     case missingArguments(_ names: [String])
+    
+    /// An underlying network error has occurred.
     case network(error: APIClientError)
+    
+    /// An OAuth2 error has been returned.
     case oauth2(error: OAuth2Error)
+    
+    /// An OAuth2 server error has been returned.
     case server(error: OAuth2ServerError)
+    
+    /// Some other unknown error has been returned.
     case other(error: Error)
 }
 
@@ -108,23 +126,67 @@ public class DirectAuthenticationFlow: AuthenticationFlow {
         /// This requests that a new WebAuthn challenge is generated and returned to the client, which can subsequently be used to sign the attestation for return back to the server.
         ///
         /// ```swift
-        /// let status = try await flow.start("jane.doe@example.com", with: .webAuthn)
+        /// let status = try await flow.resume(status, with: .webAuthn)
         /// ```
         case webAuthn
+    }
+    
+    /// Enumeration defining the list of possible authenticator "Continuation" factors, which are used.
+    ///
+    /// Some authenticators cannot complete authentication in a single step, and requires either user intervention or an additional challenge response from the client. These circumstances are represented by the ``DirectAuthenticationFlow/Status/continuation(_:)`` status. In this case, the appropriate Continuation Factor response type can be supplied to the ``DirectAuthenticationFlow/resume(_:with:)-9i2pz`` function.
+    public enum ContinuationFactor: Equatable {
+        /// Continues an OOB authentication by transfering the binding to another authenticator, and waiting for its response.
+        ///
+        /// For example, if an Okta Verify number challenge needs to be presented to the user (also referred to as a "Binding Transfer"), the OOB authentication can be continued.
+        ///
+        /// ```
+        /// if case let .continuation(type) = status,
+        ///    case let .transfer(_, code: code) = type
+        /// {
+        ///     // Present the code to the user
+        ///     status = try await flow.resume(status, with: .transfer)
+        /// }
+        /// ```
+        case transfer
+        
+        /// Respond to an OOB authentication where a code is supplied to a second channel, which will be supplied here.
+        ///
+        /// This is used when some code needs to be supplied by the user in response to an out-of-band authentication, for example when authenticating using an SMS phone factor.
+        ///
+        /// ```
+        /// var status = try await flow.start("jane.doe@example.com", with: .oob(channel: .sms)
+        /// if case let .continuation(type) = status,
+        ///    case let .prompt(_) = type
+        /// {
+        ///    // Prompt the user to input the code
+        ///    let verificationCode = await getCodeFromUser()
+        ///
+        ///    let newStatus = try await flow.resume(status, with: .prompt(verificationCode))
+        /// }
+        /// ```
+        case prompt(code: String)
         
         /// Respond to a WebAuthn challenge with an authenticator assertion.
         ///
-        /// This uses a previously supplied WebAuthn challenge (using ``DirectAuthenticationFlow/PrimaryFactor/webAuthn`` or ``webAuthn``) to respond to the server with the signed attestation from the local authenticator.
-        case webAuthnAssertion(_ response: WebAuthn.AuthenticatorAssertionResponse)
+        /// This uses a previously supplied WebAuthn challenge (using ``DirectAuthenticationFlow/PrimaryFactor/webAuthn`` or ``DirectAuthenticationFlow/SecondaryFactor/webAuthn``) to respond to the server with the signed attestation from the local authenticator.
+        case webAuthn(response: WebAuthn.AuthenticatorAssertionResponse)
     }
     
     /// Channel used when authenticating an out-of-band factor using Okta Verify.
     public enum OOBChannel: String, Codable {
         /// Utilize Okta Verify Push notifications to authenticate the user.
         case push
+        
+        /// Receive a phone verification code via SMS.
+        case sms
+        
+        /// Receive a phone verification code via a voice call.
+        case voice
     }
     
     /// Context information used to define a request from the server to perform a multifactor authentication.
+    ///
+    /// This is largely used internally to ensure the secondary factor is linked to the user's current authentication session, but can be used to see the list of challenge types that are supported.
     public struct MFAContext: Equatable {
         /// The list of possible grant types that the user can be challenged with.
         public let supportedChallengeTypes: [GrantType]?
@@ -136,27 +198,6 @@ public class DirectAuthenticationFlow: AuthenticationFlow {
         }
     }
 
-    /// Represents the different types of binding updates that can be received
-    public enum BindingUpdateType {
-        /// Binding requires transfer of a code from one channel to another
-        case transfer(_ code: String)
-    }
-
-    /// Holds information about the binding update received when verifying OOB factors
-    public struct BindingUpdateContext {
-        /// Holds the type of binding update received from the server
-        public let update: BindingUpdateType
-        let oobResponse: OOBResponse
-    }
-    
-    /// Holds information about a challenge request when initiating a WebAuthn authentication.
-    public struct WebAuthnContext {
-        /// The credential request returned from the server.
-        public let request: WebAuthn.CredentialRequestOptions
-        
-        let mfaContext: MFAContext?
-    }
-    
     /// The current status of the authentication flow.
     ///
     /// This value is returned from ``DirectAuthenticationFlow/start(_:with:)`` and ``DirectAuthenticationFlow/resume(_:with:)`` to indicate the result of an individual authentication step. This can be used to drive your application's sign-in workflow.
@@ -164,16 +205,43 @@ public class DirectAuthenticationFlow: AuthenticationFlow {
         /// Authentication was successful, returning the given token.
         case success(_ token: Token)
         
-        /// Indicates that there is an update about binding authentication channels when verifying OOB factors
-        case bindingUpdate(_ context: BindingUpdateContext)
+        /// Indicates that the current authentication factor requires some sort of continuation.
+        ///
+        /// When this status is returned, the developer should inspect the type of continuation that is occurring, and should use the ``DirectAuthenticationFlow/resume(_:with:)-9i2pz function to resume authenticating this factor.
+        case continuation(_ type: ContinuationType)
 
         /// Indicates the user should be challenged with some other secondary factor.
         ///
         /// When this status is returned, the developer should use the ``DirectAuthenticationFlow/resume(_:with:)`` function to supply a secondary factor to verify the user.
         case mfaRequired(_ context: MFAContext)
-        
+    }
+    
+    /// The type of authentication continuation that is requested.
+    ///
+    /// Some authenticators follow a challenge and response pattern, whereby the client either needs to prompt the user for some out-of-band information, or the client needs to respond directly to a challenge sent from the server. When these situations occur, this enum can be used to determine which action should be taken by the client.
+    public enum ContinuationType {
         /// Indicates the user is being prompted with a WebAuthn challenge request.
         case webAuthn(_ context: WebAuthnContext)
+        
+        /// Indicates that there is an update about binding authentication channels when verifying OOB factors.
+        case transfer(_ context: BindingContext, code: String)
+        
+        /// Indicates that the authenticator will prompt the user for a code, will occur through a secondary channel, such as SMS phone verification.
+        case prompt(_ context: BindingContext)
+
+        /// Holds information about a challenge request when initiating a WebAuthn authentication.
+        public struct WebAuthnContext {
+            /// The credential request returned from the server.
+            public let request: WebAuthn.CredentialRequestOptions
+            
+            let mfaContext: MFAContext?
+        }
+        
+        /// Holds information about the binding update received when verifying OOB factors
+        public struct BindingContext {
+            let oobResponse: OOBResponse
+            let mfaContext: MFAContext?
+        }
     }
     
     /// The OAuth2Client this authentication flow will use.
@@ -282,6 +350,20 @@ public class DirectAuthenticationFlow: AuthenticationFlow {
     {
         runStep(currentStatus: status, with: factor, completion: completion)
     }
+
+    /// Continues authentication of a current factor (either primary or secondary) when an additional step is required.
+    ///
+    /// This function should be used when ``Status/continuation(_:)`` is received.
+    /// - Parameters:
+    ///   - status: The previous status returned from the server.
+    ///   - factor: The continuation factor to use when authenticating the user.
+    ///   - completion: Completion block called when the operation completes.
+    public func resume(_ status: DirectAuthenticationFlow.Status,
+                       with factor: ContinuationFactor,
+                       completion: @escaping (Result<Status, DirectAuthenticationFlowError>) -> Void)
+    {
+        runStep(currentStatus: status, with: factor, completion: completion)
+    }
     
     func runStep<Factor: AuthenticationFactor>(loginHint: String? = nil,
                                                currentStatus: Status? = nil,
@@ -351,6 +433,21 @@ extension DirectAuthenticationFlow {
     ///   - factor: The secondary factor to use when authenticating the user.
     /// - Returns: Status returned when the operation completes.
     public func resume(_ status: DirectAuthenticationFlow.Status, with factor: SecondaryFactor) async throws -> DirectAuthenticationFlow.Status {
+        try await withCheckedThrowingContinuation { continuation in
+            resume(status, with: factor) { result in
+                continuation.resume(with: result)
+            }
+        }
+    }
+
+    /// Continues authentication of a current factor (either primary or secondary) when an additional step is required.
+    ///
+    /// This function should be used when ``Status/continuation(_:)`` is received.
+    /// - Parameters:
+    ///   - status: The previous status returned from the server.
+    ///   - factor: The continuation factor to use when authenticating the user.
+    /// - Returns: Status returned when the operation completes.
+    public func resume(_ status: DirectAuthenticationFlow.Status, with factor: ContinuationFactor) async throws -> DirectAuthenticationFlow.Status {
         try await withCheckedThrowingContinuation { continuation in
             resume(status, with: factor) { result in
                 continuation.resume(with: result)

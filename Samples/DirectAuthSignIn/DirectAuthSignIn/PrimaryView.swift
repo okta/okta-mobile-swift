@@ -26,7 +26,7 @@ extension SignInView {
         @State var oneTimeCode: String = ""
         @State var selectedFactor: SignInView.Factor = .password
         
-        var factor: DirectAuthenticationFlow.PrimaryFactor {
+        var factor: DirectAuthenticationFlow.PrimaryFactor? {
             switch selectedFactor {
             case .password:
                 return .password(password)
@@ -34,6 +34,12 @@ extension SignInView {
                 return .otp(code: oneTimeCode)
             case .oob:
                 return .oob(channel: .push)
+            case .sms:
+                return .oob(channel: .sms)
+            case .voice:
+                return .oob(channel: .voice)
+            default:
+                return nil
             }
         }
         
@@ -86,26 +92,28 @@ extension SignInView {
                                 RoundedRectangle(cornerRadius: 6)
                                     .stroke(.secondary, lineWidth: 1)
                             }
-                    case .oob: EmptyView()
+                    case .oob, .sms, .voice, .code: EmptyView()
                     }
                 }
                 
-                Button("Sign In") {
-                    Task {
-                        do {
-                            status = try await flow.start(username, with: factor)
-                            if case let .success(token) = status {
-                                Credential.default = try Credential.store(token)
+                if let factor = factor {
+                    Button("Sign In") {
+                        Task {
+                            do {
+                                status = try await flow.start(username, with: factor)
+                                if case let .success(token) = status {
+                                    Credential.default = try Credential.store(token)
+                                }
+                            } catch {
+                                self.error = error
+                                self.hasError = true
                             }
-                        } catch {
-                            self.error = error
-                            self.hasError = true
                         }
                     }
+                    .accessibilityIdentifier("signin_button")
+                    .font(.headline)
+                    .buttonStyle(.borderedProminent)
                 }
-                .accessibilityIdentifier("signin_button")
-                .font(.headline)
-                .buttonStyle(.borderedProminent)
             }.padding()
         }
     }

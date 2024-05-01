@@ -18,12 +18,14 @@ import Foundation
 ///
 /// ```swift
 /// let challengeStatus = try await flow.start("user@example.com", with: .webAuthn)
-/// guard case let .webAuthn(let request) = challengeStatus else { return }
+/// guard case let .continuation(let type) = challengeStatus,
+///       case let .webAuthn(let context) = type
+/// else { return }
 ///
 /// // Supply challenge request values to your authenticator
 /// let responseStatus = try await flow.resume(
 ///     challengeStatus,
-///     with: .webAuthnAssertion(.init(
+///     with: .webAuthn(.init(
 ///         clientDataJSON: authJson,
 ///         authenticatorData: authData,
 ///         signature: authSignature,

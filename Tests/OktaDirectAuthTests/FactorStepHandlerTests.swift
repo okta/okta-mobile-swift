@@ -160,7 +160,7 @@ final class FactorStepHandlerTests: XCTestCase {
             case .success(let status):
                 switch status {
                 case .success(_): break
-                case .mfaRequired(_), .bindingUpdate(_), .webAuthn(request: _):
+                case .mfaRequired(_), .continuation(_):
                     XCTFail("Did not receive a success response")
                 }
             case .failure(let error):
@@ -193,7 +193,7 @@ final class FactorStepHandlerTests: XCTestCase {
             switch result {
             case .success(let status):
                 switch status {
-                case .success(_), .bindingUpdate(_), .webAuthn(request: _):
+                case .success(_), .continuation(_):
                     XCTFail("Did not receive a mfa_required response")
                 case .mfaRequired(let context):
                     XCTAssertEqual(context.mfaToken, "abcd1234")
@@ -232,7 +232,7 @@ final class FactorStepHandlerTests: XCTestCase {
             case .success(let status):
                 switch status {
                 case .success(_): break
-                case .mfaRequired(_), .bindingUpdate(_), .webAuthn(request: _):
+                case .mfaRequired(_), .continuation(_):
                     XCTFail("Did not receive a success response")
                 }
             case .failure(let error):
@@ -263,13 +263,14 @@ final class FactorStepHandlerTests: XCTestCase {
         
         let processExpectation = expectation(description: "process")
         handler.process { result in
-            guard case .success(let status) = result,
-                  case .bindingUpdate(let context) = status else {
+            guard case let .success(status) = result,
+                  case let .continuation(continuation) = status
+            else {
                 XCTFail("Did not receive binding update in result: \(result)")
                 return
             }
-            switch context.update {
-            case .transfer(let code):
+            switch continuation {
+            case .transfer(_, code: let code):
                 XCTAssertEqual(code, "12")
                 do {
                     let factor = SecondaryFactor.oob(channel: .push)
@@ -281,8 +282,13 @@ final class FactorStepHandlerTests: XCTestCase {
                 } catch {
                     XCTFail("Did not expect error creating step handler: \(error)")
                 }
+            case .prompt(_):
+                XCTFail("Did not expect a prompt continuation")
+            case .webAuthn(_):
+                XCTFail("Did not expect a webauthn continuation")
             }
-            XCTAssertEqual(context.oobResponse.oobCode, "1c266114-a1be-4252-8ad1-04986c5b9ac1")
+            XCTAssertEqual(continuation.bindingContext?.oobResponse.oobCode,
+                           "1c266114-a1be-4252-8ad1-04986c5b9ac1")
             processExpectation.fulfill()
         }
         wait(for: [processExpectation], timeout: 5)
@@ -351,7 +357,7 @@ final class FactorStepHandlerTests: XCTestCase {
             switch result {
             case .success(let status):
                 switch status {
-                case .success(_), .bindingUpdate(_), .webAuthn(request: _):
+                case .success(_), .continuation(_):
                     XCTFail("Did not receive a mfa_required response")
                 case .mfaRequired(let context):
                     XCTAssertEqual(context.mfaToken, "abcd1234")
@@ -390,7 +396,7 @@ final class FactorStepHandlerTests: XCTestCase {
             case .success(let status):
                 switch status {
                 case .success(_): break
-                case .mfaRequired(_), .bindingUpdate(_), .webAuthn(request: _):
+                case .mfaRequired(_), .continuation(_):
                     XCTFail("Did not receive a success response")
                 }
             case .failure(let error):
@@ -423,12 +429,13 @@ final class FactorStepHandlerTests: XCTestCase {
         let processExpectation = expectation(description: "process")
         handler.process { result in
             guard case .success(let status) = result,
-                  case .bindingUpdate(let context) = status else {
+                  case let .continuation(continuation) = status
+            else {
                 XCTFail("Did not receive binding update in result: \(result)")
                 return
             }
-            switch context.update {
-            case .transfer(let code):
+            switch continuation {
+            case .transfer(_, let code):
                 XCTAssertEqual(code, "12")
                 do {
                     let resumeHandler = try factor.stepHandler(flow: self.flow,
@@ -439,8 +446,12 @@ final class FactorStepHandlerTests: XCTestCase {
                 } catch {
                     XCTFail("Did not expect error creating step handler: \(error)")
                 }
+            case .prompt(_):
+                XCTFail("Did not expect a prompt continuation")
+            case .webAuthn(_):
+                XCTFail("Did not expect a webauthn continuation")
             }
-            XCTAssertEqual(context.oobResponse.oobCode, "1c266114-a1be-4252-8ad1-04986c5b9ac1")
+            XCTAssertEqual(continuation.bindingContext?.oobResponse.oobCode, "1c266114-a1be-4252-8ad1-04986c5b9ac1")
             processExpectation.fulfill()
         }
         wait(for: [processExpectation], timeout: 5)
