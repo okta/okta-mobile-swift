@@ -62,6 +62,8 @@ extension JWK {
         case pbes2_HS256_A128KW = "PBES2-HS256+A128KW"
         case pbes2_HS384_A192KW = "PBES2-HS384+A192KW"
         case pbes2_HS512_A256KW = "PBES2-HS512+A256KW"
+
+        case EdDSA = "EdDSA"
     }
     // swiftlint:enable identifier_name
 }
