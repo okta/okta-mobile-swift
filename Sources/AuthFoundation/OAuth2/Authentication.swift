@@ -36,6 +36,9 @@ public protocol AuthenticationFlow: AnyObject, UsesDelegateCollection {
     
     /// Resets the authentication session.
     func reset()
+    
+    /// The collection of delegates this flow notifies for key authentication events.
+    var delegateCollection: DelegateCollection<Delegate> { get }
 }
 
 /// Errors that may be generated during the process of authenticating with a variety of authentication flows.

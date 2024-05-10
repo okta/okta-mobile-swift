@@ -435,9 +435,9 @@ public final class OAuth2Client {
             group.notify(queue: DispatchQueue.global()) {
                 // Perform idToken/accessToken validation
                 self.validateToken(request: request,
-                                    keySet: keySet,
-                                    oauthTokenResponse: result,
-                                    completion: completion)
+                                   keySet: keySet,
+                                   oauthTokenResponse: result,
+                                   completion: completion)
             }
         }
     }

@@ -200,11 +200,27 @@ public final class Token: Codable, Equatable, Hashable, Expires {
             idToken = try JWT(idTokenString)
         }
         
+        // There are some conditions where a missing or null access_token is acceptable.
+        // Detect this condition, and assign an empty string where necessary.
+        var accessToken: String
+        do {
+            accessToken = try container.decode(String.self, forKey: .accessToken)
+        } catch {
+            if let request = decoder.userInfo[.request] as? (any OAuth2TokenRequest),
+               let acrValues = request.acrValues,
+               acrValues.contains("urn:okta:app:mfa:attestation")
+            {
+                accessToken = ""
+            } else {
+                throw error
+            }
+        }
+        
         self.init(id: id,
                   issuedAt: try container.decodeIfPresent(Date.self, forKey: .issuedAt) ?? Date.nowCoordinated,
                   tokenType: try container.decode(String.self, forKey: .tokenType),
                   expiresIn: try container.decode(TimeInterval.self, forKey: .expiresIn),
-                  accessToken: try container.decode(String.self, forKey: .accessToken),
+                  accessToken: accessToken,
                   scope: try container.decodeIfPresent(String.self, forKey: .scope),
                   refreshToken: try container.decodeIfPresent(String.self, forKey: .refreshToken),
                   idToken: idToken,
@@ -251,5 +267,6 @@ extension CodingUserInfoKey {
     public static let tokenId = CodingUserInfoKey(rawValue: "tokenId")!
     public static let apiClientConfiguration = CodingUserInfoKey(rawValue: "apiClientConfiguration")!
     public static let clientSettings = CodingUserInfoKey(rawValue: "clientSettings")!
+    public static let request = CodingUserInfoKey(rawValue: "request")!
     // swiftlint:enable force_unwrapping
 }

@@ -334,6 +334,7 @@ public class DirectAuthenticationFlow: AuthenticationFlow {
                       with factor: PrimaryFactor,
                       completion: @escaping (Result<Status, DirectAuthenticationFlowError>) -> Void)
     {
+        reset()
         runStep(loginHint: loginHint, with: factor, completion: completion)
     }
     

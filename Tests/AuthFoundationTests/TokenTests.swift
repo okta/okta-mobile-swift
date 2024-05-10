@@ -14,6 +14,12 @@ import XCTest
 @testable import AuthFoundation
 @testable import TestCommon
 
+fileprivate struct MockTokenRequest: OAuth2TokenRequest {
+    let clientId: String
+    let url: URL
+    var bodyParameters: [String: Any]?
+}
+
 final class TokenTests: XCTestCase {
     let configuration = OAuth2Client.Configuration(baseURL: URL(string: "https://example.com")!,
                                                    clientId: "clientid",
@@ -95,6 +101,41 @@ final class TokenTests: XCTestCase {
         let data = try JSONEncoder().encode(token)
         let decodedToken = try JSONDecoder().decode(Token.self, from: data)
         XCTAssertEqual(token, decodedToken)
+    }
+
+    func testMFAAttestationToken() throws {
+        let request = MockTokenRequest(clientId: configuration.clientId,
+                                       url: configuration.baseURL,
+                                       bodyParameters: [
+                                        "acr_values": "urn:okta:app:mfa:attestation"
+                                       ])
+        
+        let decoder = defaultJSONDecoder
+        decoder.userInfo = [
+            .apiClientConfiguration: configuration,
+            .request: request,
+        ]
+        
+        let token = try decoder.decode(Token.self,
+                                       from: try data(from: .module,
+                                                      for: "token-mfa_attestation",
+                                                      in: "MockResponses"))
+        XCTAssertTrue(token.accessToken.isEmpty)
+    }
+    
+
+    func testMFAAttestationTokenFailed() throws {
+        let request = MockTokenRequest(clientId: configuration.clientId,
+                                       url: configuration.baseURL)
+        let decoder = defaultJSONDecoder
+        decoder.userInfo = [
+            .apiClientConfiguration: configuration,
+        ]
+        
+        XCTAssertThrowsError(try decoder.decode(Token.self,
+                                                from: try data(from: .module,
+                                                               for: "token-mfa_attestation",
+                                                               in: "MockResponses")))
     }
     
     func testTokenEquality() throws {
