@@ -1,4 +1,10 @@
 {
+  "abstract" : [
+    {
+      "text" : "Performs the given block against each delegate within the collection.",
+      "type" : "text"
+    }
+  ],
   "hierarchy" : {
     "paths" : [
       [
@@ -124,6 +130,25 @@
         }
       ],
       "kind" : "declarations"
+    },
+    {
+      "kind" : "parameters",
+      "parameters" : [
+        {
+          "content" : [
+            {
+              "inlineContent" : [
+                {
+                  "text" : "Block to invoke for each delegate instance.",
+                  "type" : "text"
+                }
+              ],
+              "type" : "paragraph"
+            }
+          ],
+          "name" : "block"
+        }
+      ]
     }
   ],
   "schemaVersion" : {
@@ -195,7 +220,10 @@
 },
 "doc://AuthFoundation/documentation/AuthFoundation/DelegateCollection/invoke(_:)": {
   "abstract" : [
-
+    {
+      "text" : "Performs the given block against each delegate within the collection.",
+      "type" : "text"
+    }
   ],
   "fragments" : [
     {

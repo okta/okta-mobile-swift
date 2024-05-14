@@ -93,6 +93,16 @@
             },
             {
               "kind" : "text",
+              "text" : ", "
+            },
+            {
+              "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/APIRequestBody",
+              "kind" : "typeIdentifier",
+              "preciseIdentifier" : "s:14AuthFoundation14APIRequestBodyP",
+              "text" : "APIRequestBody"
+            },
+            {
+              "kind" : "text",
               "text" : " "
             },
             {
@@ -131,12 +141,33 @@
         }
       ],
       "kind" : "declarations"
+    },
+    {
+      "content" : [
+        {
+          "anchor" : "overview",
+          "level" : 2,
+          "text" : "Overview",
+          "type" : "heading"
+        },
+        {
+          "inlineContent" : [
+            {
+              "text" : "Many different OAuth2 authentication flows can issue tokens, but the types of arguments and their particular workflow can differ. This protocol abstracts the necessary interface for requests that are capable of returning tokens, while allowing the specific arguments and validation steps to be implemented for each unique type of flow.",
+              "type" : "text"
+            }
+          ],
+          "type" : "paragraph"
+        }
+      ],
+      "kind" : "content"
     }
   ],
   "relationshipsSections" : [
     {
       "identifiers" : [
-        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/APIRequest"
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/APIRequest",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/APIRequestBody"
       ],
       "kind" : "relationships",
       "title" : "Inherits From",
@@ -170,6 +201,7 @@
   "topicSections" : [
     {
       "identifiers" : [
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/OAuth2TokenRequest\/acrValues",
         "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/OAuth2TokenRequest\/clientId"
       ],
       "title" : "Instance Properties"
@@ -271,6 +303,49 @@
   "title" : "ResponseType",
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/apirequest\/responsetype"
+},
+"doc://AuthFoundation/documentation/AuthFoundation/APIRequestBody": {
+  "abstract" : [
+    {
+      "text" : "Defines key\/value pairs for an ",
+      "type" : "text"
+    },
+    {
+      "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/APIRequest",
+      "isActive" : true,
+      "type" : "reference"
+    },
+    {
+      "text" : " body.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "protocol"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "APIRequestBody"
+    }
+  ],
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/APIRequestBody",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "APIRequestBody"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "APIRequestBody",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/apirequestbody"
 },
 "doc://AuthFoundation/documentation/AuthFoundation/AuthenticationDelegate": {
   "abstract" : [
@@ -575,9 +650,61 @@
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/oauth2tokenrequest"
 },
+"doc://AuthFoundation/documentation/AuthFoundation/OAuth2TokenRequest/acrValues": {
+  "abstract" : [
+    {
+      "text" : "Convenience function that exposes an array of ACR Values requested by this OAuth2 token request, if applicable.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "var"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "acrValues"
+    },
+    {
+      "kind" : "text",
+      "text" : ": ["
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:SS",
+      "text" : "String"
+    },
+    {
+      "kind" : "text",
+      "text" : "]?"
+    }
+  ],
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/OAuth2TokenRequest\/acrValues",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "acrValues",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/oauth2tokenrequest\/acrvalues"
+},
 "doc://AuthFoundation/documentation/AuthFoundation/OAuth2TokenRequest/clientId": {
   "abstract" : [
-
+    {
+      "text" : "The application’s OAuth2 ",
+      "type" : "text"
+    },
+    {
+      "code" : "client_id",
+      "type" : "codeVoice"
+    },
+    {
+      "text" : " value for this token request.",
+      "type" : "text"
+    }
   ],
   "fragments" : [
     {

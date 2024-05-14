@@ -1,4 +1,18 @@
 {
+  "abstract" : [
+    {
+      "text" : "Inherited from ",
+      "type" : "text"
+    },
+    {
+      "code" : "UsesDelegateCollection.add(delegate:)",
+      "type" : "codeVoice"
+    },
+    {
+      "text" : ".",
+      "type" : "text"
+    }
+  ],
   "hierarchy" : {
     "paths" : [
       [
@@ -166,7 +180,10 @@
 },
 "doc://AuthFoundation/documentation/AuthFoundation/UsesDelegateCollection": {
   "abstract" : [
-
+    {
+      "text" : "Indicates the class contains a collection of delegates, and the necessary convenience functions to add and remove delegates from the collection.",
+      "type" : "text"
+    }
   ],
   "fragments" : [
     {
@@ -223,7 +240,10 @@
 },
 "doc://AuthFoundation/documentation/AuthFoundation/UsesDelegateCollection/add(delegate:)-2wa9w": {
   "abstract" : [
-
+    {
+      "text" : "Adds the given argument as a delegate.",
+      "type" : "text"
+    }
   ],
   "defaultImplementations" : 1,
   "fragments" : [

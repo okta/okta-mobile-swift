@@ -3,22 +3,31 @@
     "paths" : [
       [
         "doc:\/\/AuthFoundation\/documentation\/AuthFoundation",
-        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/Swift"
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/Swift",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/Swift\/CodingUserInfoKey"
       ]
     ]
   },
   "identifier" : {
     "interfaceLanguage" : "swift",
-    "url" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/Swift\/CodingUserInfoKey"
+    "url" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/Swift\/CodingUserInfoKey\/request"
   },
   "kind" : "symbol",
   "metadata" : {
     "extendedModule" : "Swift",
-    "externalID" : "s:e:s:s17CodingUserInfoKeyV14AuthFoundationE7tokenIdABvpZ",
+    "externalID" : "s:s17CodingUserInfoKeyV14AuthFoundationE7requestABvpZ",
     "fragments" : [
       {
         "kind" : "keyword",
-        "text" : "extension"
+        "text" : "static"
+      },
+      {
+        "kind" : "text",
+        "text" : " "
+      },
+      {
+        "kind" : "keyword",
+        "text" : "let"
       },
       {
         "kind" : "text",
@@ -26,6 +35,14 @@
       },
       {
         "kind" : "identifier",
+        "text" : "request"
+      },
+      {
+        "kind" : "text",
+        "text" : ": "
+      },
+      {
+        "kind" : "typeIdentifier",
         "preciseIdentifier" : "s:s17CodingUserInfoKeyV",
         "text" : "CodingUserInfoKey"
       }
@@ -38,16 +55,10 @@
         ]
       }
     ],
-    "navigatorTitle" : [
-      {
-        "kind" : "identifier",
-        "text" : "CodingUserInfoKey"
-      }
-    ],
     "role" : "symbol",
-    "roleHeading" : "Extended Structure",
-    "symbolKind" : "extension",
-    "title" : "CodingUserInfoKey"
+    "roleHeading" : "Type Property",
+    "symbolKind" : "property",
+    "title" : "request"
   },
   "primaryContentSections" : [
     {
@@ -62,11 +73,27 @@
           "tokens" : [
             {
               "kind" : "keyword",
-              "text" : "extension"
+              "text" : "static"
             },
             {
               "kind" : "text",
               "text" : " "
+            },
+            {
+              "kind" : "keyword",
+              "text" : "let"
+            },
+            {
+              "kind" : "text",
+              "text" : " "
+            },
+            {
+              "kind" : "identifier",
+              "text" : "request"
+            },
+            {
+              "kind" : "text",
+              "text" : ": "
             },
             {
               "kind" : "typeIdentifier",
@@ -87,21 +114,10 @@
   "sections" : [
 
   ],
-  "topicSections" : [
-    {
-      "identifiers" : [
-        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/Swift\/CodingUserInfoKey\/apiClientConfiguration",
-        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/Swift\/CodingUserInfoKey\/clientSettings",
-        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/Swift\/CodingUserInfoKey\/request",
-        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/Swift\/CodingUserInfoKey\/tokenId"
-      ],
-      "title" : "Type Properties"
-    }
-  ],
   "variants" : [
     {
       "paths" : [
-        "\/documentation\/authfoundation\/swift\/codinguserinfokey"
+        "\/documentation\/authfoundation\/swift\/codinguserinfokey\/request"
       ],
       "traits" : [
         {
@@ -169,90 +185,6 @@
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/swift\/codinguserinfokey"
 },
-"doc://AuthFoundation/documentation/AuthFoundation/Swift/CodingUserInfoKey/apiClientConfiguration": {
-  "abstract" : [
-
-  ],
-  "fragments" : [
-    {
-      "kind" : "keyword",
-      "text" : "static"
-    },
-    {
-      "kind" : "text",
-      "text" : " "
-    },
-    {
-      "kind" : "keyword",
-      "text" : "let"
-    },
-    {
-      "kind" : "text",
-      "text" : " "
-    },
-    {
-      "kind" : "identifier",
-      "text" : "apiClientConfiguration"
-    },
-    {
-      "kind" : "text",
-      "text" : ": "
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:s17CodingUserInfoKeyV",
-      "text" : "CodingUserInfoKey"
-    }
-  ],
-  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/Swift\/CodingUserInfoKey\/apiClientConfiguration",
-  "kind" : "symbol",
-  "role" : "symbol",
-  "title" : "apiClientConfiguration",
-  "type" : "topic",
-  "url" : "\/documentation\/authfoundation\/swift\/codinguserinfokey\/apiclientconfiguration"
-},
-"doc://AuthFoundation/documentation/AuthFoundation/Swift/CodingUserInfoKey/clientSettings": {
-  "abstract" : [
-
-  ],
-  "fragments" : [
-    {
-      "kind" : "keyword",
-      "text" : "static"
-    },
-    {
-      "kind" : "text",
-      "text" : " "
-    },
-    {
-      "kind" : "keyword",
-      "text" : "let"
-    },
-    {
-      "kind" : "text",
-      "text" : " "
-    },
-    {
-      "kind" : "identifier",
-      "text" : "clientSettings"
-    },
-    {
-      "kind" : "text",
-      "text" : ": "
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:s17CodingUserInfoKeyV",
-      "text" : "CodingUserInfoKey"
-    }
-  ],
-  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/Swift\/CodingUserInfoKey\/clientSettings",
-  "kind" : "symbol",
-  "role" : "symbol",
-  "title" : "clientSettings",
-  "type" : "topic",
-  "url" : "\/documentation\/authfoundation\/swift\/codinguserinfokey\/clientsettings"
-},
 "doc://AuthFoundation/documentation/AuthFoundation/Swift/CodingUserInfoKey/request": {
   "abstract" : [
 
@@ -294,48 +226,6 @@
   "title" : "request",
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/swift\/codinguserinfokey\/request"
-},
-"doc://AuthFoundation/documentation/AuthFoundation/Swift/CodingUserInfoKey/tokenId": {
-  "abstract" : [
-
-  ],
-  "fragments" : [
-    {
-      "kind" : "keyword",
-      "text" : "static"
-    },
-    {
-      "kind" : "text",
-      "text" : " "
-    },
-    {
-      "kind" : "keyword",
-      "text" : "let"
-    },
-    {
-      "kind" : "text",
-      "text" : " "
-    },
-    {
-      "kind" : "identifier",
-      "text" : "tokenId"
-    },
-    {
-      "kind" : "text",
-      "text" : ": "
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:s17CodingUserInfoKeyV",
-      "text" : "CodingUserInfoKey"
-    }
-  ],
-  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/Swift\/CodingUserInfoKey\/tokenId",
-  "kind" : "symbol",
-  "role" : "symbol",
-  "title" : "tokenId",
-  "type" : "topic",
-  "url" : "\/documentation\/authfoundation\/swift\/codinguserinfokey\/tokenid"
 }
 }
 }

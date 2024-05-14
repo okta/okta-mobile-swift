@@ -145,6 +145,7 @@
   "topicSections" : [
     {
       "identifiers" : [
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/AuthenticationFlow\/delegateCollection",
         "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/AuthenticationFlow\/isAuthenticating"
       ],
       "title" : "Instance Properties"
@@ -285,6 +286,65 @@
   "title" : "AuthenticationFlow",
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/authenticationflow"
+},
+"doc://AuthFoundation/documentation/AuthFoundation/AuthenticationFlow/delegateCollection": {
+  "abstract" : [
+    {
+      "text" : "The collection of delegates this flow notifies for key authentication events.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "var"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "delegateCollection"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:14AuthFoundation18DelegateCollectionC",
+      "text" : "DelegateCollection"
+    },
+    {
+      "kind" : "text",
+      "text" : "<"
+    },
+    {
+      "kind" : "typeIdentifier",
+      "text" : "Self"
+    },
+    {
+      "kind" : "text",
+      "text" : "."
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:14AuthFoundation22UsesDelegateCollectionP0D0Qa",
+      "text" : "Delegate"
+    },
+    {
+      "kind" : "text",
+      "text" : ">"
+    }
+  ],
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/AuthenticationFlow\/delegateCollection",
+  "kind" : "symbol",
+  "required" : true,
+  "role" : "symbol",
+  "title" : "delegateCollection",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/authenticationflow\/delegatecollection"
 },
 "doc://AuthFoundation/documentation/AuthFoundation/AuthenticationFlow/isAuthenticating": {
   "abstract" : [
@@ -662,7 +722,10 @@
 },
 "doc://AuthFoundation/documentation/AuthFoundation/UsesDelegateCollection": {
   "abstract" : [
-
+    {
+      "text" : "Indicates the class contains a collection of delegates, and the necessary convenience functions to add and remove delegates from the collection.",
+      "type" : "text"
+    }
   ],
   "fragments" : [
     {

@@ -1,4 +1,10 @@
 {
+  "abstract" : [
+    {
+      "text" : "Removes the given argument from the collection of delegates.",
+      "type" : "text"
+    }
+  ],
   "hierarchy" : {
     "paths" : [
       [
@@ -106,6 +112,25 @@
         }
       ],
       "kind" : "declarations"
+    },
+    {
+      "kind" : "parameters",
+      "parameters" : [
+        {
+          "content" : [
+            {
+              "inlineContent" : [
+                {
+                  "text" : "Delegate to remove from the collection.",
+                  "type" : "text"
+                }
+              ],
+              "type" : "paragraph"
+            }
+          ],
+          "name" : "delegate"
+        }
+      ]
     }
   ],
   "schemaVersion" : {
@@ -177,7 +202,10 @@
 },
 "doc://AuthFoundation/documentation/AuthFoundation/DelegateCollection/remove(_:)": {
   "abstract" : [
-
+    {
+      "text" : "Removes the given argument from the collection of delegates.",
+      "type" : "text"
+    }
   ],
   "fragments" : [
     {

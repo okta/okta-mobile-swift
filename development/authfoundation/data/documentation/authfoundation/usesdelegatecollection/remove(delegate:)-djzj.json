@@ -1,4 +1,10 @@
 {
+  "abstract" : [
+    {
+      "text" : "Removes the given argument from the collection of delegates.",
+      "type" : "text"
+    }
+  ],
   "defaultImplementationsSections" : [
     {
       "identifiers" : [
@@ -133,6 +139,25 @@
         }
       ],
       "kind" : "declarations"
+    },
+    {
+      "kind" : "parameters",
+      "parameters" : [
+        {
+          "content" : [
+            {
+              "inlineContent" : [
+                {
+                  "text" : "Delegate to remove from the collection.",
+                  "type" : "text"
+                }
+              ],
+              "type" : "paragraph"
+            }
+          ],
+          "name" : "delegate"
+        }
+      ]
     }
   ],
   "schemaVersion" : {
@@ -173,7 +198,10 @@
 },
 "doc://AuthFoundation/documentation/AuthFoundation/UsesDelegateCollection": {
   "abstract" : [
-
+    {
+      "text" : "Indicates the class contains a collection of delegates, and the necessary convenience functions to add and remove delegates from the collection.",
+      "type" : "text"
+    }
   ],
   "fragments" : [
     {
@@ -284,7 +312,10 @@
 },
 "doc://AuthFoundation/documentation/AuthFoundation/UsesDelegateCollection/remove(delegate:)-djzj": {
   "abstract" : [
-
+    {
+      "text" : "Removes the given argument from the collection of delegates.",
+      "type" : "text"
+    }
   ],
   "defaultImplementations" : 1,
   "fragments" : [

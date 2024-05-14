@@ -191,7 +191,10 @@
 },
 "doc://AuthFoundation/documentation/AuthFoundation/DelegateCollection/add(_:)": {
   "abstract" : [
-
+    {
+      "text" : "Adds the given argument as a delegate.",
+      "type" : "text"
+    }
   ],
   "fragments" : [
     {
@@ -228,7 +231,10 @@
 },
 "doc://AuthFoundation/documentation/AuthFoundation/DelegateCollection/call(_:)": {
   "abstract" : [
-
+    {
+      "text" : "Performs the given block for each delegate within the collection, coalescing the results into the returned array.",
+      "type" : "text"
+    }
   ],
   "fragments" : [
     {
@@ -310,7 +316,10 @@
 },
 "doc://AuthFoundation/documentation/AuthFoundation/DelegateCollection/invoke(_:)": {
   "abstract" : [
-
+    {
+      "text" : "Performs the given block against each delegate within the collection.",
+      "type" : "text"
+    }
   ],
   "fragments" : [
     {
@@ -356,7 +365,10 @@
 },
 "doc://AuthFoundation/documentation/AuthFoundation/DelegateCollection/remove(_:)": {
   "abstract" : [
-
+    {
+      "text" : "Removes the given argument from the collection of delegates.",
+      "type" : "text"
+    }
   ],
   "fragments" : [
     {
@@ -461,7 +473,10 @@
 },
 "doc://AuthFoundation/documentation/AuthFoundation/UsesDelegateCollection": {
   "abstract" : [
-
+    {
+      "text" : "Indicates the class contains a collection of delegates, and the necessary convenience functions to add and remove delegates from the collection.",
+      "type" : "text"
+    }
   ],
   "fragments" : [
     {

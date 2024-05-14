@@ -1,4 +1,10 @@
 {
+  "abstract" : [
+    {
+      "text" : "Performs the given block for each delegate within the collection, coalescing the results into the returned array.",
+      "type" : "text"
+    }
+  ],
   "hierarchy" : {
     "paths" : [
       [
@@ -154,6 +160,45 @@
         }
       ],
       "kind" : "declarations"
+    },
+    {
+      "kind" : "parameters",
+      "parameters" : [
+        {
+          "content" : [
+            {
+              "inlineContent" : [
+                {
+                  "text" : "Block to invoke for each delegate in the collection.",
+                  "type" : "text"
+                }
+              ],
+              "type" : "paragraph"
+            }
+          ],
+          "name" : "block"
+        }
+      ]
+    },
+    {
+      "content" : [
+        {
+          "anchor" : "return-value",
+          "level" : 2,
+          "text" : "Return Value",
+          "type" : "heading"
+        },
+        {
+          "inlineContent" : [
+            {
+              "text" : "Resulting array of returned values from the delegates in the collection.",
+              "type" : "text"
+            }
+          ],
+          "type" : "paragraph"
+        }
+      ],
+      "kind" : "content"
     }
   ],
   "schemaVersion" : {
@@ -225,7 +270,10 @@
 },
 "doc://AuthFoundation/documentation/AuthFoundation/DelegateCollection/call(_:)": {
   "abstract" : [
-
+    {
+      "text" : "Performs the given block for each delegate within the collection, coalescing the results into the returned array.",
+      "type" : "text"
+    }
   ],
   "fragments" : [
     {

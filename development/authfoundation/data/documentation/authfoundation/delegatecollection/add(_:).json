@@ -1,4 +1,10 @@
 {
+  "abstract" : [
+    {
+      "text" : "Adds the given argument as a delegate.",
+      "type" : "text"
+    }
+  ],
   "hierarchy" : {
     "paths" : [
       [
@@ -106,6 +112,25 @@
         }
       ],
       "kind" : "declarations"
+    },
+    {
+      "kind" : "parameters",
+      "parameters" : [
+        {
+          "content" : [
+            {
+              "inlineContent" : [
+                {
+                  "text" : "Delegate to add to the collection.",
+                  "type" : "text"
+                }
+              ],
+              "type" : "paragraph"
+            }
+          ],
+          "name" : "delegate"
+        }
+      ]
     }
   ],
   "schemaVersion" : {
@@ -177,7 +202,10 @@
 },
 "doc://AuthFoundation/documentation/AuthFoundation/DelegateCollection/add(_:)": {
   "abstract" : [
-
+    {
+      "text" : "Adds the given argument as a delegate.",
+      "type" : "text"
+    }
   ],
   "fragments" : [
     {

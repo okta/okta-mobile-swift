@@ -1,4 +1,10 @@
 {
+  "abstract" : [
+    {
+      "text" : "The collection of delegates this flow notifies for key authentication events.",
+      "type" : "text"
+    }
+  ],
   "hierarchy" : {
     "paths" : [
       [
@@ -207,7 +213,10 @@
 },
 "doc://AuthFoundation/documentation/AuthFoundation/UsesDelegateCollection": {
   "abstract" : [
-
+    {
+      "text" : "Indicates the class contains a collection of delegates, and the necessary convenience functions to add and remove delegates from the collection.",
+      "type" : "text"
+    }
   ],
   "fragments" : [
     {
@@ -264,7 +273,10 @@
 },
 "doc://AuthFoundation/documentation/AuthFoundation/UsesDelegateCollection/delegateCollection": {
   "abstract" : [
-
+    {
+      "text" : "The collection of delegates this flow notifies for key authentication events.",
+      "type" : "text"
+    }
   ],
   "fragments" : [
     {
