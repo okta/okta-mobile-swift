@@ -12,6 +12,7 @@
 
 import Foundation
 
+// swiftlint:disable cyclomatic_complexity
 extension JWK.Algorithm: RawRepresentable, Equatable, Hashable {
     public init?(rawValue: RawValue) {
         switch rawValue {
@@ -86,3 +87,4 @@ extension JWK.Algorithm: RawRepresentable, Equatable, Hashable {
         }
     }
 }
+// swiftlint:enable cyclomatic_complexity
