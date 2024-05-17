@@ -14,6 +14,8 @@ import Foundation
 
 // swiftlint:disable cyclomatic_complexity
 extension JWK.Algorithm: RawRepresentable, Equatable, Hashable {
+    public typealias RawValue = String
+    
     public init?(rawValue: RawValue) {
         switch rawValue {
         case "HS256": self = .hs256
