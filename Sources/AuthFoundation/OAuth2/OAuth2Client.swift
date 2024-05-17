@@ -200,8 +200,13 @@ public final class OAuth2Client {
                                                    refreshToken: refreshToken,
                                                    id: token.id,
                                                    configuration: clientSettings)
+                let backgroundTask = BackgroundTask(named: "Refresh Token \(token.id)")
                 request.send(to: self) { result in
                     self.refreshQueue.sync(flags: .barrier) {
+                        defer {
+                            backgroundTask.finish()
+                        }
+                        
                         switch result {
                         case .success(let response):
                             let newToken = response.result.token(merging: token)
