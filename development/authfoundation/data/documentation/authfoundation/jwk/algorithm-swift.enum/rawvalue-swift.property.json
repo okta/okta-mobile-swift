@@ -5,7 +5,7 @@
       "type" : "text"
     },
     {
-      "code" : "RawRepresentable.init(rawValue:)",
+      "code" : "RawRepresentable.rawValue",
       "type" : "codeVoice"
     },
     {
@@ -25,23 +25,23 @@
   },
   "identifier" : {
     "interfaceLanguage" : "swift",
-    "url" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JWK\/Algorithm-swift.enum\/init(rawValue:)"
+    "url" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JWK\/Algorithm-swift.enum\/rawValue-swift.property"
   },
   "kind" : "symbol",
   "metadata" : {
     "extendedModule" : "AuthFoundation",
-    "externalID" : "s:14AuthFoundation3JWKV9AlgorithmO8rawValueAESgSS_tcfc",
+    "externalID" : "s:14AuthFoundation3JWKV9AlgorithmO8rawValueSSvp",
     "fragments" : [
       {
-        "kind" : "identifier",
-        "text" : "init"
+        "kind" : "keyword",
+        "text" : "var"
       },
       {
         "kind" : "text",
-        "text" : "?("
+        "text" : " "
       },
       {
-        "kind" : "externalParam",
+        "kind" : "identifier",
         "text" : "rawValue"
       },
       {
@@ -50,30 +50,8 @@
       },
       {
         "kind" : "typeIdentifier",
-        "preciseIdentifier" : "s:14AuthFoundation3JWKV",
-        "text" : "JWK"
-      },
-      {
-        "kind" : "text",
-        "text" : "."
-      },
-      {
-        "kind" : "typeIdentifier",
-        "preciseIdentifier" : "s:14AuthFoundation3JWKV9AlgorithmO",
-        "text" : "Algorithm"
-      },
-      {
-        "kind" : "text",
-        "text" : "."
-      },
-      {
-        "kind" : "typeIdentifier",
-        "preciseIdentifier" : "s:14AuthFoundation3JWKV9AlgorithmO8RawValuea",
-        "text" : "RawValue"
-      },
-      {
-        "kind" : "text",
-        "text" : ")"
+        "preciseIdentifier" : "s:SS",
+        "text" : "String"
       }
     ],
     "modules" : [
@@ -82,9 +60,9 @@
       }
     ],
     "role" : "symbol",
-    "roleHeading" : "Initializer",
-    "symbolKind" : "init",
-    "title" : "init(rawValue:)"
+    "roleHeading" : "Instance Property",
+    "symbolKind" : "property",
+    "title" : "rawValue"
   },
   "primaryContentSections" : [
     {
@@ -99,14 +77,14 @@
           "tokens" : [
             {
               "kind" : "keyword",
-              "text" : "init"
+              "text" : "var"
             },
             {
               "kind" : "text",
-              "text" : "?("
+              "text" : " "
             },
             {
-              "kind" : "externalParam",
+              "kind" : "identifier",
               "text" : "rawValue"
             },
             {
@@ -114,34 +92,21 @@
               "text" : ": "
             },
             {
-              "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JWK",
               "kind" : "typeIdentifier",
-              "preciseIdentifier" : "s:14AuthFoundation3JWKV",
-              "text" : "JWK"
+              "preciseIdentifier" : "s:SS",
+              "text" : "String"
             },
             {
               "kind" : "text",
-              "text" : "."
+              "text" : " { "
             },
             {
-              "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JWK\/Algorithm-swift.enum",
-              "kind" : "typeIdentifier",
-              "preciseIdentifier" : "s:14AuthFoundation3JWKV9AlgorithmO",
-              "text" : "Algorithm"
-            },
-            {
-              "kind" : "text",
-              "text" : "."
-            },
-            {
-              "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JWK\/Algorithm-swift.enum\/RawValue-swift.typealias",
-              "kind" : "typeIdentifier",
-              "preciseIdentifier" : "s:14AuthFoundation3JWKV9AlgorithmO8RawValuea",
-              "text" : "RawValue"
+              "kind" : "keyword",
+              "text" : "get"
             },
             {
               "kind" : "text",
-              "text" : ")"
+              "text" : " }"
             }
           ]
         }
@@ -160,7 +125,7 @@
   "variants" : [
     {
       "paths" : [
-        "\/documentation\/authfoundation\/jwk\/algorithm-swift.enum\/init(rawvalue:)"
+        "\/documentation\/authfoundation\/jwk\/algorithm-swift.enum\/rawvalue-swift.property"
       ],
       "traits" : [
         {
@@ -264,14 +229,14 @@
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/jwk\/algorithm-swift.enum\/rawrepresentable-implementations"
 },
-"doc://AuthFoundation/documentation/AuthFoundation/JWK/Algorithm-swift.enum/RawValue-swift.typealias": {
+"doc://AuthFoundation/documentation/AuthFoundation/JWK/Algorithm-swift.enum/rawValue-swift.property": {
   "abstract" : [
 
   ],
   "fragments" : [
     {
       "kind" : "keyword",
-      "text" : "typealias"
+      "text" : "var"
     },
     {
       "kind" : "text",
@@ -279,37 +244,6 @@
     },
     {
       "kind" : "identifier",
-      "text" : "RawValue"
-    }
-  ],
-  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JWK\/Algorithm-swift.enum\/RawValue-swift.typealias",
-  "kind" : "symbol",
-  "navigatorTitle" : [
-    {
-      "kind" : "identifier",
-      "text" : "RawValue"
-    }
-  ],
-  "role" : "symbol",
-  "title" : "JWK.Algorithm.RawValue",
-  "type" : "topic",
-  "url" : "\/documentation\/authfoundation\/jwk\/algorithm-swift.enum\/rawvalue-swift.typealias"
-},
-"doc://AuthFoundation/documentation/AuthFoundation/JWK/Algorithm-swift.enum/init(rawValue:)": {
-  "abstract" : [
-
-  ],
-  "fragments" : [
-    {
-      "kind" : "identifier",
-      "text" : "init"
-    },
-    {
-      "kind" : "text",
-      "text" : "?("
-    },
-    {
-      "kind" : "externalParam",
       "text" : "rawValue"
     },
     {
@@ -318,38 +252,16 @@
     },
     {
       "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:14AuthFoundation3JWKV",
-      "text" : "JWK"
-    },
-    {
-      "kind" : "text",
-      "text" : "."
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:14AuthFoundation3JWKV9AlgorithmO",
-      "text" : "Algorithm"
-    },
-    {
-      "kind" : "text",
-      "text" : "."
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:14AuthFoundation3JWKV9AlgorithmO8RawValuea",
-      "text" : "RawValue"
-    },
-    {
-      "kind" : "text",
-      "text" : ")"
+      "preciseIdentifier" : "s:SS",
+      "text" : "String"
     }
   ],
-  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JWK\/Algorithm-swift.enum\/init(rawValue:)",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JWK\/Algorithm-swift.enum\/rawValue-swift.property",
   "kind" : "symbol",
   "role" : "symbol",
-  "title" : "init(rawValue:)",
+  "title" : "rawValue",
   "type" : "topic",
-  "url" : "\/documentation\/authfoundation\/jwk\/algorithm-swift.enum\/init(rawvalue:)"
+  "url" : "\/documentation\/authfoundation\/jwk\/algorithm-swift.enum\/rawvalue-swift.property"
 }
 }
 }

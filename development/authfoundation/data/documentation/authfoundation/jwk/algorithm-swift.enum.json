@@ -116,6 +116,7 @@
         "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JWK\/Algorithm-swift.enum\/ecdhES_a128KW",
         "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JWK\/Algorithm-swift.enum\/ecdhES_a192KW",
         "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JWK\/Algorithm-swift.enum\/ecdhES_a256KW",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JWK\/Algorithm-swift.enum\/edDSA",
         "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JWK\/Algorithm-swift.enum\/es256",
         "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JWK\/Algorithm-swift.enum\/es384",
         "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JWK\/Algorithm-swift.enum\/es512",
@@ -123,6 +124,7 @@
         "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JWK\/Algorithm-swift.enum\/hs384",
         "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JWK\/Algorithm-swift.enum\/hs512",
         "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JWK\/Algorithm-swift.enum\/none",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JWK\/Algorithm-swift.enum\/other(algorithm:)",
         "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JWK\/Algorithm-swift.enum\/pbes2_HS256_A128KW",
         "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JWK\/Algorithm-swift.enum\/pbes2_HS384_A192KW",
         "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JWK\/Algorithm-swift.enum\/pbes2_HS512_A256KW",
@@ -137,12 +139,6 @@
         "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JWK\/Algorithm-swift.enum\/rsaOAEP256"
       ],
       "title" : "Enumeration Cases"
-    },
-    {
-      "identifiers" : [
-        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JWK\/Algorithm-swift.enum\/init(rawValue:)"
-      ],
-      "title" : "Initializers"
     },
     {
       "generated" : true,
@@ -571,6 +567,31 @@
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/jwk\/algorithm-swift.enum\/ecdhes_a256kw"
 },
+"doc://AuthFoundation/documentation/AuthFoundation/JWK/Algorithm-swift.enum/edDSA": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "case"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "edDSA"
+    }
+  ],
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JWK\/Algorithm-swift.enum\/edDSA",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "JWK.Algorithm.edDSA",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/jwk\/algorithm-swift.enum\/eddsa"
+},
 "doc://AuthFoundation/documentation/AuthFoundation/JWK/Algorithm-swift.enum/es256": {
   "abstract" : [
 
@@ -721,44 +742,6 @@
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/jwk\/algorithm-swift.enum\/hs512"
 },
-"doc://AuthFoundation/documentation/AuthFoundation/JWK/Algorithm-swift.enum/init(rawValue:)": {
-  "abstract" : [
-
-  ],
-  "fragments" : [
-    {
-      "kind" : "identifier",
-      "text" : "init"
-    },
-    {
-      "kind" : "text",
-      "text" : "?("
-    },
-    {
-      "kind" : "externalParam",
-      "text" : "rawValue"
-    },
-    {
-      "kind" : "text",
-      "text" : ": "
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:SS",
-      "text" : "String"
-    },
-    {
-      "kind" : "text",
-      "text" : ")"
-    }
-  ],
-  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JWK\/Algorithm-swift.enum\/init(rawValue:)",
-  "kind" : "symbol",
-  "role" : "symbol",
-  "title" : "init(rawValue:)",
-  "type" : "topic",
-  "url" : "\/documentation\/authfoundation\/jwk\/algorithm-swift.enum\/init(rawvalue:)"
-},
 "doc://AuthFoundation/documentation/AuthFoundation/JWK/Algorithm-swift.enum/none": {
   "abstract" : [
 
@@ -783,6 +766,52 @@
   "title" : "JWK.Algorithm.none",
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/jwk\/algorithm-swift.enum\/none"
+},
+"doc://AuthFoundation/documentation/AuthFoundation/JWK/Algorithm-swift.enum/other(algorithm:)": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "case"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "other"
+    },
+    {
+      "kind" : "text",
+      "text" : "("
+    },
+    {
+      "kind" : "externalParam",
+      "text" : "algorithm"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:SS",
+      "text" : "String"
+    },
+    {
+      "kind" : "text",
+      "text" : ")"
+    }
+  ],
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JWK\/Algorithm-swift.enum\/other(algorithm:)",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "JWK.Algorithm.other(algorithm:)",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/jwk\/algorithm-swift.enum\/other(algorithm:)"
 },
 "doc://AuthFoundation/documentation/AuthFoundation/JWK/Algorithm-swift.enum/pbes2_HS256_A128KW": {
   "abstract" : [
