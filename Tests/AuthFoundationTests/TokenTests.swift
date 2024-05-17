@@ -125,8 +125,6 @@ final class TokenTests: XCTestCase {
     
 
     func testMFAAttestationTokenFailed() throws {
-        let request = MockTokenRequest(clientId: configuration.clientId,
-                                       url: configuration.baseURL)
         let decoder = defaultJSONDecoder
         decoder.userInfo = [
             .apiClientConfiguration: configuration,

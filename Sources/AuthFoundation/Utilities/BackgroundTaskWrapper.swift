@@ -12,19 +12,14 @@
 
 import Foundation
 
-#if canImport(UIKit)
+#if os(iOS) || os(tvOS) || targetEnvironment(macCatalyst)
 import UIKit
-#endif
 
 final class BackgroundTask {
-    #if canImport(UIKit)
     let task: UIBackgroundTaskIdentifier
-    #endif
     
     init(named name: String? = nil) {
-        #if canImport(UIKit)
         task = UIApplication.shared.beginBackgroundTask(withName: name)
-        #endif
     }
     
     deinit {
@@ -32,8 +27,13 @@ final class BackgroundTask {
     }
     
     func finish() {
-        #if canImport(UIKit)
         UIApplication.shared.endBackgroundTask(task)
-        #endif
     }
 }
+#else
+final class BackgroundTask {
+    init(named name: String? = nil) {}
+    
+    func finish() {}
+}
+#endif
