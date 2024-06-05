@@ -35,7 +35,7 @@ public protocol HasClaims {
     /// Unlike the ``claims`` property, this returns values as strings.
     var customClaims: [String] { get }
     
-    /// Raw paylaod of claims, as a dictionary representation.
+    /// Raw payload of claims, as a dictionary representation.
     var payload: [String: Any] { get }
 }
 

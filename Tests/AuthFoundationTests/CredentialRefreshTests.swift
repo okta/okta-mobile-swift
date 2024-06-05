@@ -44,7 +44,7 @@ final class CredentialRefreshTests: XCTestCase, OAuth2ClientDelegate {
         case none
         case error
         case openIdOnly
-        case refresh(count: Int)
+        case refresh(count: Int, rotate: Bool = false)
     }
 
     func credential(for token: Token, expectAPICalls: APICalls = .refresh(count: 1), expiresIn: TimeInterval = 3600) throws -> Credential {
@@ -61,11 +61,11 @@ final class CredentialRefreshTests: XCTestCase, OAuth2ClientDelegate {
                               data: try data(from: .module, for: "openid-configuration", in: "MockResponses"),
                               contentType: "application/json")
 
-        case .refresh(let count):
+        case .refresh(let count, let rotate):
             urlSession.expect("https://example.com/.well-known/openid-configuration",
                               data: try data(from: .module, for: "openid-configuration", in: "MockResponses"),
                               contentType: "application/json")
-            for _ in 1 ... count {
+            for index in 1 ... count {
                 urlSession.expect("https://example.com/oauth2/v1/token",
                                   data: data(for: """
                 {
@@ -73,7 +73,7 @@ final class CredentialRefreshTests: XCTestCase, OAuth2ClientDelegate {
                    "expires_in": \(expiresIn),
                    "access_token": "\(String.mockAccessToken)",
                    "scope": "openid profile offline_access",
-                   "refresh_token": "therefreshtoken",
+                   "refresh_token": "therefreshtoken\(rotate ? "-\(index)" : "")",
                    "id_token": "\(String.mockIdToken)"
                  }
                 """))
@@ -309,6 +309,39 @@ final class CredentialRefreshTests: XCTestCase, OAuth2ClientDelegate {
         
         XCTAssertEqual(request.value(forHTTPHeaderField: "Authorization"),
                        "Bearer \(credential.token.accessToken)")
+    }
+    
+    func testRotatingRefreshTokens() throws {
+        let credential = try credential(for: Token.mockToken(expiresIn: 1),
+                                        expectAPICalls: .refresh(count: 3, rotate: true),
+                                        expiresIn: 1)
+
+        // Initial refresh token
+        XCTAssertEqual(credential.token.refreshToken, "abc123")
+
+        // First refresh
+        var refreshExpectation = expectation(description: "First refresh")
+        credential.refresh { _ in
+            refreshExpectation.fulfill()
+        }
+        wait(for: [refreshExpectation], timeout: .standard)
+        XCTAssertEqual(credential.token.refreshToken, "therefreshtoken-1")
+        
+        // Second refresh
+        refreshExpectation = expectation(description: "Second refresh")
+        credential.refresh { _ in
+            refreshExpectation.fulfill()
+        }
+        wait(for: [refreshExpectation], timeout: .standard)
+        XCTAssertEqual(credential.token.refreshToken, "therefreshtoken-2")
+
+        // Third refresh
+        refreshExpectation = expectation(description: "Third refresh")
+        credential.refresh { _ in
+            refreshExpectation.fulfill()
+        }
+        wait(for: [refreshExpectation], timeout: .standard)
+        XCTAssertEqual(credential.token.refreshToken, "therefreshtoken-3")
     }
 
     #if swift(>=5.5.1)
