@@ -43,6 +43,9 @@ public final class Token: Codable, Equatable, Hashable, Expires {
     
     /// The refresh token, if requested.
     public let refreshToken: String?
+  
+    /// The expiration duration for refresh token.
+    public let refreshExpiresIn: TimeInterval?
     
     /// The ID token, if requested.
     ///
@@ -157,6 +160,7 @@ public final class Token: Codable, Equatable, Hashable, Expires {
                   accessToken: String,
                   scope: String?,
                   refreshToken: String?,
+                  refreshExpiresIn: TimeInterval?,
                   idToken: JWT?,
                   deviceSecret: String?,
                   context: Context)
@@ -168,6 +172,7 @@ public final class Token: Codable, Equatable, Hashable, Expires {
         self.accessToken = accessToken
         self.scope = scope
         self.refreshToken = refreshToken
+        self.refreshExpiresIn = refreshExpiresIn
         self.idToken = idToken
         self.deviceSecret = deviceSecret
         self.context = context
@@ -223,6 +228,7 @@ public final class Token: Codable, Equatable, Hashable, Expires {
                   accessToken: accessToken,
                   scope: try container.decodeIfPresent(String.self, forKey: .scope),
                   refreshToken: try container.decodeIfPresent(String.self, forKey: .refreshToken),
+                  refreshExpiresIn: try container.decodeIfPresent(TimeInterval.self, forKey: .refreshExpiresIn),
                   idToken: idToken,
                   deviceSecret: try container.decodeIfPresent(String.self, forKey: .deviceSecret),
                   context: context)
@@ -256,6 +262,7 @@ extension Token {
         case accessToken
         case scope
         case refreshToken
+        case refreshExpiresIn
         case idToken
         case deviceSecret
         case context

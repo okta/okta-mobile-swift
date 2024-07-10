@@ -186,6 +186,7 @@ extension SDKVersion.Migration {
                               accessToken: accessToken,
                               scope: scope,
                               refreshToken: tokenResponse.refreshToken,
+                              refreshExpiresIn: tokenResponse.refreshTokenExpirationDate?.timeIntervalSinceNow,
                               idToken: idToken,
                               deviceSecret: nil,
                               context: Token.Context(configuration: configuration,
@@ -252,6 +253,7 @@ extension SDKVersion.Migration {
                 @objc let tokenType: String?
                 @objc let idToken: String?
                 @objc let refreshToken: String?
+                @objc let refreshTokenExpirationDate: Date?
                 @objc let scope: String?
                 @objc let additionalParameters: [String: String]?
 
@@ -261,6 +263,7 @@ extension SDKVersion.Migration {
                     accessToken = coder.decodeObject(forKey: "access_token") as? String
                     accessTokenExpirationDate = coder.decodeObject(forKey: "expires_in") as? Date
                     refreshToken = coder.decodeObject(forKey: "refresh_token") as? String
+                    refreshTokenExpirationDate = coder.decodeObject(forKey: "refresh_expires_in") as? Date
                     tokenType = coder.decodeObject(forKey: "token_type") as? String
                     idToken = coder.decodeObject(forKey: "id_token") as? String
                     scope = coder.decodeObject(forKey: "scope") as? String

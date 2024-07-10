@@ -32,6 +32,7 @@ extension Token {
                      accessToken: accessToken,
                      scope: scope,
                      refreshToken: refreshToken ?? token.refreshToken,
+                     refreshExpiresIn: refreshExpiresIn ?? token.refreshExpiresIn,
                      idToken: idToken,
                      deviceSecret: deviceSecret ?? token.deviceSecret,
                      context: context)
