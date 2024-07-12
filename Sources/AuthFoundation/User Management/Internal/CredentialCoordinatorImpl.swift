@@ -80,12 +80,10 @@ final class CredentialCoordinatorImpl: CredentialCoordinator {
               prompt: String? = nil,
               authenticationContext: TokenAuthenticationContext? = nil) throws -> [Credential]
     {
-        try allIDs
-            .map(tokenStorage.metadata(for:))
+         allIDs
+            .compactMap { try? tokenStorage.metadata(for: $0) } 
             .filter(expression)
-            .compactMap({ metadata in
-                try? self.with(id: metadata.id, prompt: prompt, authenticationContext: authenticationContext)
-            })
+            .compactMap { try? self.with(id: $0.id, prompt: prompt, authenticationContext: authenticationContext) }
     }
     
     func remove(credential: Credential) throws {
