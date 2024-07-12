@@ -84,7 +84,7 @@ final class CredentialCoordinatorImpl: CredentialCoordinator {
             .map(tokenStorage.metadata(for:))
             .filter(expression)
             .compactMap({ metadata in
-                try self.with(id: metadata.id, prompt: prompt, authenticationContext: authenticationContext)
+                try? self.with(id: metadata.id, prompt: prompt, authenticationContext: authenticationContext)
             })
     }
     
