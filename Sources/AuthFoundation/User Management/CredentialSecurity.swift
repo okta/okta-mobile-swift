@@ -46,6 +46,9 @@ extension Credential {
         ///
         /// If you wish to change the default security threshold for Keychain items, you can assign a new value here. Additionally, if a ``context(_:)`` value is assigned to the ``standard`` property, that context will be used when fetching credentials unless otherwise specified.
         public static var standard: [Security] = [.accessibility(.afterFirstUnlockThisDeviceOnly)]
+        
+        /// Determines whether or not the ``Credential/default`` setting is synchronized across a user's devices using iCloud Keychain.
+        public static var isDefaultSynchronizable: Bool = false
         #else
         public static var standard: [Security] = []
         #endif

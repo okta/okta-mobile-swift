@@ -26,7 +26,7 @@ public final class Token: Codable, Equatable, Hashable, Expires {
     /// The unique identifier for this token.
     public internal(set) var id: String
     
-    // The date this token was issued at.
+    /// The date this token was issued at.
     public let issuedAt: Date?
     
     /// The string type of the token (e.g. `Bearer`).

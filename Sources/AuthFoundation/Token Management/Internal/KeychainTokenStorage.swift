@@ -46,10 +46,16 @@ final class KeychainTokenStorage: TokenStorage {
     
     var allIDs: [String] {
         do {
-            return try Keychain
+            let itemIDs = try Keychain
+                .Search(service: KeychainTokenStorage.serviceName)
+                .list()
+                .sorted(by: { $0.creationDate < $1.creationDate })
+                .map(\.account)
+            let metadataIDs = try Keychain
                 .Search(service: KeychainTokenStorage.metadataName)
                 .list()
                 .map(\.account)
+            return itemIDs.filter { metadataIDs.contains($0) }
         } catch {
             return []
         }
@@ -78,7 +84,7 @@ final class KeychainTokenStorage: TokenStorage {
             .isEmpty
         
         let data = try encoder.encode(token)
-        let accessibility = security.accessibility ?? .afterFirstUnlock
+        let accessibility = security.accessibility ?? .afterFirstUnlockThisDeviceOnly
         let accessGroup = security.accessGroup
         let accessControl = try security.createAccessControl(accessibility: accessibility)
         
@@ -90,12 +96,18 @@ final class KeychainTokenStorage: TokenStorage {
                                  synchronizable: accessibility.isSynchronizable,
                                  label: nil,
                                  description: nil,
-                                 generic: nil,
                                  value: data)
+        
+        let metadataAccessibility: Keychain.Accessibility
+        if (accessibility.isSynchronizable) {
+            metadataAccessibility = .afterFirstUnlock
+        } else {
+            metadataAccessibility = .afterFirstUnlockThisDeviceOnly
+        }
         
         let metadataItem = Keychain.Item(account: id,
                                          service: KeychainTokenStorage.metadataName,
-                                         accessibility: .afterFirstUnlock,
+                                         accessibility: metadataAccessibility,
                                          accessGroup: accessGroup,
                                          synchronizable: accessibility.isSynchronizable,
                                          value: try encoder.encode(metadata))
@@ -140,7 +152,6 @@ final class KeychainTokenStorage: TokenStorage {
                                     synchronizable: accessibility.isSynchronizable,
                                     label: nil,
                                     description: nil,
-                                    generic: nil,
                                     value: data)
         
         var context: KeychainAuthenticationContext?
@@ -217,9 +228,16 @@ final class KeychainTokenStorage: TokenStorage {
     
     private func saveDefault() throws {
         if let tokenIdData = defaultTokenID?.data(using: .utf8) {
+            let accessibility: Keychain.Accessibility
+            if Credential.Security.isDefaultSynchronizable {
+                accessibility = .afterFirstUnlock
+            } else {
+                accessibility = .afterFirstUnlockThisDeviceOnly
+            }
+
             try Keychain
                 .Item(account: KeychainTokenStorage.defaultTokenName,
-                      accessibility: .afterFirstUnlock,
+                      accessibility: accessibility,
                       value: tokenIdData)
                 .save()
         } else {
