@@ -99,7 +99,7 @@ final class KeychainTokenStorage: TokenStorage {
                                  value: data)
         
         let metadataAccessibility: Keychain.Accessibility
-        if (accessibility.isSynchronizable) {
+        if accessibility.isSynchronizable {
             metadataAccessibility = .afterFirstUnlock
         } else {
             metadataAccessibility = .afterFirstUnlockThisDeviceOnly
