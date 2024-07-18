@@ -1,15 +1,7 @@
 {
   "abstract" : [
     {
-      "text" : "Inherited from ",
-      "type" : "text"
-    },
-    {
-      "code" : "Expires.issuedAt",
-      "type" : "codeVoice"
-    },
-    {
-      "text" : ".",
+      "text" : "The date this token was issued at.",
       "type" : "text"
     }
   ],
@@ -179,7 +171,10 @@
 },
 "doc://AuthFoundation/documentation/AuthFoundation/Token/issuedAt": {
   "abstract" : [
-
+    {
+      "text" : "The date this token was issued at.",
+      "type" : "text"
+    }
   ],
   "fragments" : [
     {
