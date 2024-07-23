@@ -66,7 +66,7 @@ final class FactorStepHandlerTests: XCTestCase {
         }
         
         XCTAssertEqual(request.grantTypesSupported, flow.supportedGrantTypes)
-        XCTAssertEqual(request.bodyParameters as? [String: String], bodyParams)
+        XCTAssertEqual(request.bodyParameters?.stringComponents, bodyParams)
     }
     
     func testPrimaryPasswordStepHandler() throws {

@@ -34,7 +34,7 @@ final class RequestTests: XCTestCase {
                                                        scopes: "openid profile"),
                         currentStatus: nil,
                         factor: DirectAuthenticationFlow.PrimaryFactor.password("password123"))
-        XCTAssertEqual(request.bodyParameters as? [String: String],
+        XCTAssertEqual(request.bodyParameters?.stringComponents,
                        [
                         "client_id": "theClientId",
                         "scope": "openid profile",
@@ -50,7 +50,7 @@ final class RequestTests: XCTestCase {
                                                        authentication: .clientSecret("supersecret")),
                         currentStatus: nil,
                         factor: DirectAuthenticationFlow.PrimaryFactor.password("password123"))
-        XCTAssertEqual(request.bodyParameters as? [String: String],
+        XCTAssertEqual(request.bodyParameters?.stringComponents,
                        [
                         "client_id": "theClientId",
                         "client_secret": "supersecret",
@@ -71,7 +71,7 @@ final class RequestTests: XCTestCase {
                             loginHint: "user@example.com",
                             channelHint: .push,
                             challengeHint: .oob)
-        XCTAssertEqual(request.bodyParameters as? [String: String],
+        XCTAssertEqual(request.bodyParameters?.stringComponents,
                        [
                         "client_id": "theClientId",
                         "channel_hint": "push",
@@ -88,7 +88,7 @@ final class RequestTests: XCTestCase {
                             loginHint: "user@example.com",
                             channelHint: .push,
                             challengeHint: .oob)
-        XCTAssertEqual(request.bodyParameters as? [String: String],
+        XCTAssertEqual(request.bodyParameters?.stringComponents,
                        [
                         "client_id": "theClientId",
                         "client_secret": "supersecret",
@@ -108,7 +108,7 @@ final class RequestTests: XCTestCase {
                                                            scopes: "openid profile"),
                             mfaToken: "abcd123",
                             challengeTypesSupported: [.password, .oob])
-        XCTAssertEqual(request.bodyParameters as? [String: String],
+        XCTAssertEqual(request.bodyParameters?.stringComponents,
                        [
                         "client_id": "theClientId",
                         "mfa_token": "abcd123",
@@ -123,7 +123,7 @@ final class RequestTests: XCTestCase {
                                                            authentication: .clientSecret("supersecret")),
                             mfaToken: "abcd123",
                             challengeTypesSupported: [.password, .oob])
-        XCTAssertEqual(request.bodyParameters as? [String: String],
+        XCTAssertEqual(request.bodyParameters?.stringComponents,
                        [
                         "client_id": "theClientId",
                         "client_secret": "supersecret",

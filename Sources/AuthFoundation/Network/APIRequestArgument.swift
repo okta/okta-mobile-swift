@@ -36,6 +36,18 @@ public protocol APIRequestArgument {
     var stringValue: String { get }
 }
 
+extension Dictionary<String, APIRequestArgument> {
+    public var stringComponents: [String: String] {
+        mapValues { $0.stringValue }
+    }
+}
+
+extension APIRequestArgument where Self: RawRepresentable, Self.RawValue.Type == String.Type {
+    public var stringValue: String {
+        rawValue
+    }
+}
+
 extension String: APIRequestArgument {
     public var stringValue: String { self }
 }
@@ -97,3 +109,9 @@ extension NSString: APIRequestArgument {
 }
 
 extension NSNumber: APIRequestArgument {}
+
+extension JWT: APIRequestArgument {}
+
+extension GrantType: APIRequestArgument {}
+
+extension Token.Kind: APIRequestArgument {}

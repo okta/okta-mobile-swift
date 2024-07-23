@@ -234,7 +234,7 @@ final class AuthorizationCodeFlowSuccessTests: XCTestCase {
                         pkce: pkce,
                         nonce: "nonce_str",
                         maxAge: 60)
-        XCTAssertEqual(request.bodyParameters as? [String: String],
+        XCTAssertEqual(request.bodyParameters?.stringComponents,
                        [
                         "client_id": "theClientId",
                         "redirect_uri": "https://example.com/redirect",
@@ -255,7 +255,7 @@ final class AuthorizationCodeFlowSuccessTests: XCTestCase {
                         pkce: pkce,
                         nonce: "nonce_str",
                         maxAge: 60)
-        XCTAssertEqual(request.bodyParameters as? [String: String],
+        XCTAssertEqual(request.bodyParameters?.stringComponents,
                        [
                         "client_id": "theClientId",
                         "client_secret": "supersecret",

@@ -18,13 +18,13 @@ extension Token {
         let url: URL
         let token: String
         let hint: Token.Kind?
-        let configuration: [String: String]
+        let configuration: [String: APIRequestArgument]
         
         init(openIdConfiguration: OpenIdConfiguration,
              clientAuthentication: OAuth2Client.ClientAuthentication,
              token: String,
              hint: Token.Kind?,
-             configuration: [String: String]) throws
+             configuration: [String: APIRequestArgument]) throws
         {
             self.openIdConfiguration = openIdConfiguration
             self.clientAuthentication = clientAuthentication
@@ -44,7 +44,7 @@ extension Token {
         let clientConfiguration: OAuth2Client.Configuration
         let refreshToken: String
         let id: String
-        let configuration: [String: String]
+        let configuration: [String: APIRequestArgument]
         
         static let placeholderId = "temporary_id"
     }
@@ -90,12 +90,12 @@ extension Token.RevokeRequest: OAuth2APIRequest, APIRequestBody {
     var httpMethod: APIRequestMethod { .post }
     var contentType: APIContentType? { .formEncoded }
     var acceptsType: APIContentType? { .json }
-    var bodyParameters: [String: Any]? {
+    var bodyParameters: [String: APIRequestArgument]? {
         var result = configuration
         result["token"] = token
         
         if let hint = hint {
-            result["token_type_hint"] = hint.rawValue
+            result["token_type_hint"] = hint
         }
         
         if let parameters = clientAuthentication.additionalParameters {
@@ -113,11 +113,11 @@ extension Token.IntrospectRequest: OAuth2APIRequest, APIRequestBody {
     var contentType: APIContentType? { .formEncoded }
     var acceptsType: APIContentType? { .json }
     var authorization: APIAuthorization? { nil }
-    var bodyParameters: [String: Any]? {
-        var result = [
-            "token": (token.token(of: type) ?? "") as String,
+    var bodyParameters: [String: APIRequestArgument]? {
+        var result: [String: APIRequestArgument] = [
+            "token": token.token(of: type) ?? "",
             "client_id": token.context.configuration.clientId,
-            "token_type_hint": type.rawValue
+            "token_type_hint": type
         ]
         
         if let parameters = clientConfiguration.authentication.additionalParameters {
@@ -136,8 +136,8 @@ extension Token.RefreshRequest: OAuth2APIRequest, APIRequestBody, APIParsingCont
     var contentType: APIContentType? { .formEncoded }
     var acceptsType: APIContentType? { .json }
     var clientId: String { clientConfiguration.clientId }
-    var bodyParameters: [String: Any]? {
-        var result = configuration
+    var bodyParameters: [String: APIRequestArgument]? {
+        var result: [String: APIRequestArgument] = configuration
         result["grant_type"] = "refresh_token"
         result["refresh_token"] = refreshToken
 

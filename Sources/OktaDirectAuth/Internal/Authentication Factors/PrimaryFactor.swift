@@ -75,9 +75,9 @@ extension DirectAuthenticationFlow.PrimaryFactor: AuthenticationFactor {
 }
 
 extension DirectAuthenticationFlow.PrimaryFactor: HasTokenParameters {
-    func tokenParameters(currentStatus: DirectAuthenticationFlow.Status?) -> [String: String] {
-        var result: [String: String] = [
-            "grant_type": grantType(currentStatus: currentStatus).rawValue,
+    func tokenParameters(currentStatus: DirectAuthenticationFlow.Status?) -> [String: APIRequestArgument] {
+        var result: [String: APIRequestArgument] = [
+            "grant_type": grantType(currentStatus: currentStatus),
         ]
         
         switch self {

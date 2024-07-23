@@ -18,15 +18,21 @@ import Foundation
 public protocol OAuth2TokenRequest: APIRequest, APIRequestBody where ResponseType == Token {
     /// The application's OAuth2 `client_id` value for this token request.
     var clientId: String { get }
+    
+    /// The client's Open ID Configuration object defining the settings and endpoints used to interact with this Authorization Server.
+    var openIdConfiguration: OpenIdConfiguration { get }
 }
 
 extension OAuth2TokenRequest {
-    private var bodyParameterStrings: [String: String]? {
-        bodyParameters?.compactMapValues({ $0 as? String })
-    }
-    
     /// Convenience function that exposes an array of ACR Values requested by this OAuth2 token request, if applicable.
     public var acrValues: [String]? {
-        bodyParameterStrings?["acr_values"]?.components(separatedBy: .whitespaces)
+        bodyParameters?
+            .stringComponents["acr_values"]?
+            .components(separatedBy: .whitespaces)
     }
+    
+    public var url: URL { openIdConfiguration.tokenEndpoint }
+    public var httpMethod: APIRequestMethod { .post }
+    public var contentType: APIContentType? { .formEncoded }
+    public var acceptsType: APIContentType? { .json }
 }

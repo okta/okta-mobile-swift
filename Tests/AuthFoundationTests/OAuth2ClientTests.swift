@@ -98,7 +98,7 @@ final class OAuth2ClientTests: XCTestCase {
                        .clientSecret("supersecret"))
         
         XCTAssertNil(OAuth2Client.ClientAuthentication.none.additionalParameters)
-        XCTAssertEqual(OAuth2Client.ClientAuthentication.clientSecret("supersecret").additionalParameters,
+        XCTAssertEqual(OAuth2Client.ClientAuthentication.clientSecret("supersecret").additionalParameters?.stringComponents,
                        ["client_secret": "supersecret"])
     }
 
@@ -233,7 +233,7 @@ final class OAuth2ClientTests: XCTestCase {
         XCTAssertNil(request.authorization)
         XCTAssertEqual((request.bodyParameters?["client_id"] as? String), "clientid")
         XCTAssertEqual(request.bodyParameters?["token"] as? String, "abcd123")
-        XCTAssertEqual(request.bodyParameters?["token_type_hint"] as? String, "access_token")
+        XCTAssertEqual(request.bodyParameters?["token_type_hint"]?.stringValue, "access_token")
         XCTAssertNil(request.bodyParameters?["client_secret"])
     }
     
@@ -250,7 +250,7 @@ final class OAuth2ClientTests: XCTestCase {
         XCTAssertEqual((request.bodyParameters?["client_id"] as? String), "clientid")
         XCTAssertEqual((request.bodyParameters?["client_secret"] as? String), "supersecret")
         XCTAssertEqual(request.bodyParameters?["token"] as? String, "abcd123")
-        XCTAssertEqual(request.bodyParameters?["token_type_hint"] as? String, "access_token")
+        XCTAssertEqual(request.bodyParameters?["token_type_hint"]?.stringValue, "access_token")
     }
     
     func testIntrospectActiveAccessToken() throws {
@@ -500,7 +500,7 @@ final class OAuth2ClientTests: XCTestCase {
                                               token: "the-token",
                                               hint: .deviceSecret,
                                               configuration: [:])
-        let parameters = try XCTUnwrap(request.bodyParameters as? [String: String])
+        let parameters = try XCTUnwrap(request.bodyParameters?.stringComponents)
         XCTAssertEqual(parameters["token"], "the-token")
         XCTAssertEqual(parameters["token_type_hint"], "device_secret")
         XCTAssertEqual(parameters["client_secret"], "supersecret")

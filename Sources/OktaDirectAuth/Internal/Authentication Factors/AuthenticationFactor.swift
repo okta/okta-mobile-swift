@@ -16,7 +16,7 @@ import AuthFoundation
 /// Defines the additional token parameters that can be introduced through input arguments.
 protocol HasTokenParameters {
     /// Parameters to include in the API request.
-    func tokenParameters(currentStatus: DirectAuthenticationFlow.Status?) -> [String: String]
+    func tokenParameters(currentStatus: DirectAuthenticationFlow.Status?) -> [String: APIRequestArgument]
 }
 
 /// Defines the common properties and functions shared between factor types.

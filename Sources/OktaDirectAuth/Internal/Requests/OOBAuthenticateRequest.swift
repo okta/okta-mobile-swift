@@ -36,7 +36,7 @@ struct OOBResponse: Codable, HasTokenParameters {
         self.bindingCode = bindingCode
     }
     
-    func tokenParameters(currentStatus: DirectAuthenticationFlow.Status?) -> [String: String] {
+    func tokenParameters(currentStatus: DirectAuthenticationFlow.Status?) -> [String: APIRequestArgument] {
         ["oob_code": oobCode]
     }
 }
@@ -78,12 +78,12 @@ extension OOBAuthenticateRequest: APIRequest, APIRequestBody {
     var httpMethod: APIRequestMethod { .post }
     var contentType: APIContentType? { .formEncoded }
     var acceptsType: APIContentType? { .json }
-    var bodyParameters: [String: Any]? {
-        var result: [String: Any] = [
+    var bodyParameters: [String: APIRequestArgument]? {
+        var result: [String: APIRequestArgument] = [
             "client_id": clientConfiguration.clientId,
             "login_hint": loginHint,
-            "channel_hint": channelHint.rawValue,
-            "challenge_hint": challengeHint.rawValue,
+            "channel_hint": channelHint,
+            "challenge_hint": challengeHint,
         ]
         
         if let parameters = clientConfiguration.authentication.additionalParameters {

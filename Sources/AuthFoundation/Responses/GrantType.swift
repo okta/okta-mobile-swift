@@ -12,6 +12,7 @@
 
 import Foundation
 
+/// An enumeration used to define a grant type, which defines the methods an application can use to gain access tokens from an authorization server.
 public enum GrantType: Codable, Hashable, IsClaim {
     case authorizationCode
     case implicit
