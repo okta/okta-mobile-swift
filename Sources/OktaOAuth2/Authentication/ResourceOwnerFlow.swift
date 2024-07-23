@@ -17,8 +17,7 @@ import AuthFoundation
 ///
 /// This simple authentication flow permits a suer to authenticate using a simple username and password. As such, the configuration is straightforward.
 ///
-/// > Important: Resource Owner authentication does not support MFA or other more secure authentication models, and is not recommended for production applications.
-@available(*, deprecated, message: "Please use the DirectAuth SDK's DirectAuthenticationFlow class instead")
+/// > Important: Resource Owner authentication does not support MFA or other more secure authentication models, and is not recommended for production applications. Please use the DirectAuth SDK's DirectAuthenticationFlow class instead.
 public class ResourceOwnerFlow: AuthenticationFlow {
     /// The OAuth2Client this authentication flow will use.
     public let client: OAuth2Client
