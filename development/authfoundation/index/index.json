@@ -1876,7 +1876,7 @@
                   },
                   {
                     "path" : "\/documentation\/authfoundation\/oauth2client\/clientauthentication\/additionalparameters",
-                    "title" : "var additionalParameters: [String : String]?",
+                    "title" : "var additionalParameters: [String : any APIRequestArgument]?",
                     "type" : "property"
                   },
                   {
@@ -2978,6 +2978,11 @@
               {
                 "path" : "\/documentation\/authfoundation\/oauth2tokenrequest\/clientid",
                 "title" : "var clientId: String",
+                "type" : "property"
+              },
+              {
+                "path" : "\/documentation\/authfoundation\/oauth2tokenrequest\/openidconfiguration",
+                "title" : "var openIdConfiguration: OpenIdConfiguration",
                 "type" : "property"
               }
             ],
@@ -5463,7 +5468,12 @@
                   {
                     "children" : [
                       {
-                        "path" : "\/documentation\/authfoundation\/claimconvertable\/claim(_:in:from:)-5xez",
+                        "path" : "\/documentation\/authfoundation\/claimconvertable\/claim(_:in:from:)-6kydw",
+                        "title" : "static func claim(String, in: any HasClaims, from: Any?) -> Self?",
+                        "type" : "method"
+                      },
+                      {
+                        "path" : "\/documentation\/authfoundation\/claimconvertable\/claim(_:in:from:)-8nglg",
                         "title" : "static func claim(String, in: any HasClaims, from: Any?) -> Self?",
                         "type" : "method"
                       },
@@ -5473,12 +5483,7 @@
                         "type" : "method"
                       },
                       {
-                        "path" : "\/documentation\/authfoundation\/claimconvertable\/claim(_:in:from:)-6kydw",
-                        "title" : "static func claim(String, in: any HasClaims, from: Any?) -> Self?",
-                        "type" : "method"
-                      },
-                      {
-                        "path" : "\/documentation\/authfoundation\/claimconvertable\/claim(_:in:from:)-8nglg",
+                        "path" : "\/documentation\/authfoundation\/claimconvertable\/claim(_:in:from:)-5xez",
                         "title" : "static func claim(String, in: any HasClaims, from: Any?) -> Self?",
                         "type" : "method"
                       }
@@ -6423,13 +6428,13 @@
                         "type" : "method"
                       },
                       {
-                        "path" : "\/documentation\/authfoundation\/apiclient\/didsend(request:received:)-7fkxl",
-                        "title" : "func didSend(request: URLRequest, received: APIClientError)",
+                        "path" : "\/documentation\/authfoundation\/apiclient\/didsend(request:received:)-88sth",
+                        "title" : "func didSend<T>(request: URLRequest, received: APIResponse<T>)",
                         "type" : "method"
                       },
                       {
-                        "path" : "\/documentation\/authfoundation\/apiclient\/didsend(request:received:)-88sth",
-                        "title" : "func didSend<T>(request: URLRequest, received: APIResponse<T>)",
+                        "path" : "\/documentation\/authfoundation\/apiclient\/didsend(request:received:)-7fkxl",
+                        "title" : "func didSend(request: URLRequest, received: APIClientError)",
                         "type" : "method"
                       }
                     ],
@@ -6451,13 +6456,13 @@
                         "type" : "method"
                       },
                       {
-                        "path" : "\/documentation\/authfoundation\/apiclient\/didsend(request:received:)-88sth",
-                        "title" : "func didSend<T>(request: URLRequest, received: APIResponse<T>)",
+                        "path" : "\/documentation\/authfoundation\/apiclient\/didsend(request:received:)-1c12k",
+                        "title" : "func didSend(request: URLRequest, received: HTTPURLResponse)",
                         "type" : "method"
                       },
                       {
-                        "path" : "\/documentation\/authfoundation\/apiclient\/didsend(request:received:)-1c12k",
-                        "title" : "func didSend(request: URLRequest, received: HTTPURLResponse)",
+                        "path" : "\/documentation\/authfoundation\/apiclient\/didsend(request:received:)-88sth",
+                        "title" : "func didSend<T>(request: URLRequest, received: APIResponse<T>)",
                         "type" : "method"
                       }
                     ],
@@ -6562,13 +6567,13 @@
                   {
                     "children" : [
                       {
-                        "path" : "\/documentation\/authfoundation\/apiclientdelegate\/api(client:didsend:received:)-4mcbm",
-                        "title" : "func api(client: any APIClient, didSend: URLRequest, received: HTTPURLResponse)",
+                        "path" : "\/documentation\/authfoundation\/apiclientdelegate\/api(client:didsend:received:)-7vw3y",
+                        "title" : "func api<T>(client: any APIClient, didSend: URLRequest, received: APIResponse<T>)",
                         "type" : "method"
                       },
                       {
-                        "path" : "\/documentation\/authfoundation\/apiclientdelegate\/api(client:didsend:received:)-7vw3y",
-                        "title" : "func api<T>(client: any APIClient, didSend: URLRequest, received: APIResponse<T>)",
+                        "path" : "\/documentation\/authfoundation\/apiclientdelegate\/api(client:didsend:received:)-4mcbm",
+                        "title" : "func api(client: any APIClient, didSend: URLRequest, received: HTTPURLResponse)",
                         "type" : "method"
                       }
                     ],
@@ -6781,6 +6786,11 @@
                         "path" : "\/documentation\/authfoundation\/apirequest\/acceptstype-3d3te",
                         "title" : "var acceptsType: APIContentType?",
                         "type" : "property"
+                      },
+                      {
+                        "path" : "\/documentation\/authfoundation\/apirequest\/acceptstype-44rkc",
+                        "title" : "var acceptsType: APIContentType?",
+                        "type" : "property"
                       }
                     ],
                     "title" : "APIRequest Implementations",
@@ -6835,6 +6845,11 @@
                         "path" : "\/documentation\/authfoundation\/apirequest\/contenttype-96qjt",
                         "title" : "var contentType: APIContentType?",
                         "type" : "property"
+                      },
+                      {
+                        "path" : "\/documentation\/authfoundation\/apirequest\/contenttype-824pc",
+                        "title" : "var contentType: APIContentType?",
+                        "type" : "property"
                       }
                     ],
                     "title" : "APIRequest Implementations",
@@ -6869,6 +6884,11 @@
                     "children" : [
                       {
                         "path" : "\/documentation\/authfoundation\/apirequest\/httpmethod-2jjvk",
+                        "title" : "var httpMethod: APIRequestMethod",
+                        "type" : "property"
+                      },
+                      {
+                        "path" : "\/documentation\/authfoundation\/apirequest\/httpmethod-26lqm",
                         "title" : "var httpMethod: APIRequestMethod",
                         "type" : "property"
                       }
@@ -6918,7 +6938,20 @@
                 "type" : "property"
               },
               {
-                "path" : "\/documentation\/authfoundation\/apirequest\/url",
+                "children" : [
+                  {
+                    "children" : [
+                      {
+                        "path" : "\/documentation\/authfoundation\/apirequest\/url-5kekh",
+                        "title" : "var url: URL",
+                        "type" : "property"
+                      }
+                    ],
+                    "title" : "APIRequest Implementations",
+                    "type" : "groupMarker"
+                  }
+                ],
+                "path" : "\/documentation\/authfoundation\/apirequest\/url-3elcu",
                 "title" : "var url: URL",
                 "type" : "property"
               },
@@ -6931,12 +6964,12 @@
                   {
                     "children" : [
                       {
-                        "path" : "\/documentation\/authfoundation\/apirequest\/body()-2spui",
+                        "path" : "\/documentation\/authfoundation\/apirequest\/body()-6rb14",
                         "title" : "func body() throws -> Data?",
                         "type" : "method"
                       },
                       {
-                        "path" : "\/documentation\/authfoundation\/apirequest\/body()-6rb14",
+                        "path" : "\/documentation\/authfoundation\/apirequest\/body()-2spui",
                         "title" : "func body() throws -> Data?",
                         "type" : "method"
                       },
@@ -7021,7 +7054,7 @@
               },
               {
                 "path" : "\/documentation\/authfoundation\/apirequestbody\/bodyparameters",
-                "title" : "var bodyParameters: [String : Any]?",
+                "title" : "var bodyParameters: [String : any APIRequestArgument]?",
                 "type" : "property"
               }
             ],
@@ -7036,7 +7069,20 @@
                 "type" : "groupMarker"
               },
               {
-                "path" : "\/documentation\/authfoundation\/apirequestargument\/stringvalue",
+                "children" : [
+                  {
+                    "children" : [
+                      {
+                        "path" : "\/documentation\/authfoundation\/apirequestargument\/stringvalue-1y1j",
+                        "title" : "var stringValue: String",
+                        "type" : "property"
+                      }
+                    ],
+                    "title" : "APIRequestArgument Implementations",
+                    "type" : "groupMarker"
+                  }
+                ],
+                "path" : "\/documentation\/authfoundation\/apirequestargument\/stringvalue-67t7e",
                 "title" : "var stringValue: String",
                 "type" : "property"
               }
@@ -9831,6 +9877,11 @@
                   {
                     "path" : "\/documentation\/authfoundation\/swift\/dictionary\/percentqueryencoded-8mpef",
                     "title" : "var percentQueryEncoded: String",
+                    "type" : "property"
+                  },
+                  {
+                    "path" : "\/documentation\/authfoundation\/swift\/dictionary\/stringcomponents",
+                    "title" : "var stringComponents: [String : String]",
                     "type" : "property"
                   },
                   {

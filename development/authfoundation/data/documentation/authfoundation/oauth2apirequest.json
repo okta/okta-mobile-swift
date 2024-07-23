@@ -579,13 +579,14 @@
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/apirequest\/query-730ld"
 },
-"doc://AuthFoundation/documentation/AuthFoundation/APIRequest/url": {
+"doc://AuthFoundation/documentation/AuthFoundation/APIRequest/url-3elcu": {
   "abstract" : [
     {
       "text" : "The URL to perform the API request against.",
       "type" : "text"
     }
   ],
+  "defaultImplementations" : 1,
   "fragments" : [
     {
       "kind" : "keyword",
@@ -609,13 +610,13 @@
       "text" : "URL"
     }
   ],
-  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/APIRequest\/url",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/APIRequest\/url-3elcu",
   "kind" : "symbol",
   "required" : true,
   "role" : "symbol",
   "title" : "url",
   "type" : "topic",
-  "url" : "\/documentation\/authfoundation\/apirequest\/url"
+  "url" : "\/documentation\/authfoundation\/apirequest\/url-3elcu"
 },
 "doc://AuthFoundation/documentation/AuthFoundation/APIRequestArgument": {
   "abstract" : [
@@ -999,7 +1000,7 @@
       "type" : "text"
     },
     {
-      "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/APIRequest\/url",
+      "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/APIRequest\/url-3elcu",
       "isActive" : true,
       "type" : "reference"
     },

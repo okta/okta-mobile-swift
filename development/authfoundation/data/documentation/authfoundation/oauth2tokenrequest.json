@@ -202,7 +202,8 @@
     {
       "identifiers" : [
         "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/OAuth2TokenRequest\/acrValues",
-        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/OAuth2TokenRequest\/clientId"
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/OAuth2TokenRequest\/clientId",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/OAuth2TokenRequest\/openIdConfiguration"
       ],
       "title" : "Instance Properties"
     }
@@ -460,7 +461,10 @@
 },
 "doc://AuthFoundation/documentation/AuthFoundation/GrantType": {
   "abstract" : [
-
+    {
+      "text" : "An enumeration used to define a grant type, which defines the methods an application can use to gain access tokens from an authorization server.",
+      "type" : "text"
+    }
   ],
   "fragments" : [
     {
@@ -736,6 +740,44 @@
   "title" : "clientId",
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/oauth2tokenrequest\/clientid"
+},
+"doc://AuthFoundation/documentation/AuthFoundation/OAuth2TokenRequest/openIdConfiguration": {
+  "abstract" : [
+    {
+      "text" : "The client’s Open ID Configuration object defining the settings and endpoints used to interact with this Authorization Server.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "var"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "openIdConfiguration"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:14AuthFoundation19OpenIdConfigurationV",
+      "text" : "OpenIdConfiguration"
+    }
+  ],
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/OAuth2TokenRequest\/openIdConfiguration",
+  "kind" : "symbol",
+  "required" : true,
+  "role" : "symbol",
+  "title" : "openIdConfiguration",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/oauth2tokenrequest\/openidconfiguration"
 },
 "doc://AuthFoundation/documentation/AuthFoundation/OpenIdConfiguration": {
   "abstract" : [

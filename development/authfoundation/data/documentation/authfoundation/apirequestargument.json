@@ -344,14 +344,17 @@
         "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/Swift\/Bool",
         "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/Swift\/Double",
         "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/Swift\/Float",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/GrantType",
         "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/Swift\/Int",
         "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/Swift\/Int16",
         "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/Swift\/Int32",
         "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/Swift\/Int64",
         "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/Swift\/Int8",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JWT",
         "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/Foundation\/NSNumber",
         "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/Foundation\/NSString",
         "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/Swift\/String",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/Token\/Kind",
         "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/Swift\/UInt",
         "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/Swift\/UInt16",
         "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/Swift\/UInt32",
@@ -398,7 +401,7 @@
   "topicSections" : [
     {
       "identifiers" : [
-        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/APIRequestArgument\/stringValue"
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/APIRequestArgument\/stringValue-67t7e"
       ],
       "title" : "Instance Properties"
     }
@@ -887,13 +890,14 @@
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/apirequestargument"
 },
-"doc://AuthFoundation/documentation/AuthFoundation/APIRequestArgument/stringValue": {
+"doc://AuthFoundation/documentation/AuthFoundation/APIRequestArgument/stringValue-67t7e": {
   "abstract" : [
     {
       "text" : "The string representation of this request argument.",
       "type" : "text"
     }
   ],
+  "defaultImplementations" : 1,
   "fragments" : [
     {
       "kind" : "keyword",
@@ -917,13 +921,13 @@
       "text" : "String"
     }
   ],
-  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/APIRequestArgument\/stringValue",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/APIRequestArgument\/stringValue-67t7e",
   "kind" : "symbol",
   "required" : true,
   "role" : "symbol",
   "title" : "stringValue",
   "type" : "topic",
-  "url" : "\/documentation\/authfoundation\/apirequestargument\/stringvalue"
+  "url" : "\/documentation\/authfoundation\/apirequestargument\/stringvalue-67t7e"
 },
 "doc://AuthFoundation/documentation/AuthFoundation/APIRequestBody": {
   "abstract" : [
@@ -1211,6 +1215,40 @@
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/foundation\/nsstring"
 },
+"doc://AuthFoundation/documentation/AuthFoundation/GrantType": {
+  "abstract" : [
+    {
+      "text" : "An enumeration used to define a grant type, which defines the methods an application can use to gain access tokens from an authorization server.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "enum"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "GrantType"
+    }
+  ],
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/GrantType",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "GrantType"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "GrantType",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/granttype"
+},
 "doc://AuthFoundation/documentation/AuthFoundation/JSONDecodable": {
   "abstract" : [
 
@@ -1241,6 +1279,40 @@
   "title" : "JSONDecodable",
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/jsondecodable"
+},
+"doc://AuthFoundation/documentation/AuthFoundation/JWT": {
+  "abstract" : [
+    {
+      "text" : "Represents the contents of a JWT token, providing access to its payload contents.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "struct"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "JWT"
+    }
+  ],
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JWT",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "JWT"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "JWT",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/jwt"
 },
 "doc://AuthFoundation/documentation/AuthFoundation/OAuth2APIRequest": {
   "abstract" : [
@@ -1775,6 +1847,40 @@
   "title" : "UInt8",
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/swift\/uint8"
+},
+"doc://AuthFoundation/documentation/AuthFoundation/Token/Kind": {
+  "abstract" : [
+    {
+      "text" : "The kind of access token an operation should be used with.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "enum"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "Kind"
+    }
+  ],
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/Token\/Kind",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "Kind"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "Token.Kind",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/token\/kind"
 }
 }
 }

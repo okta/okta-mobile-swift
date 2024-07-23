@@ -1,4 +1,10 @@
 {
+  "abstract" : [
+    {
+      "text" : "Utility class that allows SDK components to register their name and version for use in HTTP User-Agent values.",
+      "type" : "text"
+    }
+  ],
   "hierarchy" : {
     "paths" : [
       [
@@ -78,6 +84,36 @@
         }
       ],
       "kind" : "declarations"
+    },
+    {
+      "content" : [
+        {
+          "anchor" : "overview",
+          "level" : 2,
+          "text" : "Overview",
+          "type" : "heading"
+        },
+        {
+          "inlineContent" : [
+            {
+              "text" : "The Okta Client SDK consists of multiple libraries, each of which may or may not be used within the same application, or at the same time. To allow version information to be sustainably managed, this class can be used to centralize the registration of these SDK versions to report just the components used within an application.",
+              "type" : "text"
+            }
+          ],
+          "type" : "paragraph"
+        }
+      ],
+      "kind" : "content"
+    }
+  ],
+  "relationshipsSections" : [
+    {
+      "identifiers" : [
+        "doc:\/\/AuthFoundation\/s8SendableP"
+      ],
+      "kind" : "relationships",
+      "title" : "Conforms To",
+      "type" : "conformsTo"
     }
   ],
   "schemaVersion" : {
@@ -165,7 +201,10 @@
 },
 "doc://AuthFoundation/documentation/AuthFoundation/SDKVersion": {
   "abstract" : [
-
+    {
+      "text" : "Utility class that allows SDK components to register their name and version for use in HTTP User-Agent values.",
+      "type" : "text"
+    }
   ],
   "fragments" : [
     {
@@ -230,7 +269,10 @@
 },
 "doc://AuthFoundation/documentation/AuthFoundation/SDKVersion/displayName": {
   "abstract" : [
-
+    {
+      "text" : "The formatted display name for this individual library’s information.",
+      "type" : "text"
+    }
   ],
   "fragments" : [
     {
@@ -408,7 +450,10 @@
 },
 "doc://AuthFoundation/documentation/AuthFoundation/SDKVersion/name": {
   "abstract" : [
-
+    {
+      "text" : "The name of this library component.",
+      "type" : "text"
+    }
   ],
   "fragments" : [
     {
@@ -499,7 +544,19 @@
 },
 "doc://AuthFoundation/documentation/AuthFoundation/SDKVersion/register(sdk:)": {
   "abstract" : [
-
+    {
+      "text" : "Register a new SDK library component to be added to the ",
+      "type" : "text"
+    },
+    {
+      "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/SDKVersion\/userAgent",
+      "isActive" : true,
+      "type" : "reference"
+    },
+    {
+      "text" : " value.",
+      "type" : "text"
+    }
   ],
   "fragments" : [
     {
@@ -553,7 +610,10 @@
 },
 "doc://AuthFoundation/documentation/AuthFoundation/SDKVersion/userAgent": {
   "abstract" : [
-
+    {
+      "text" : "The calculated user agent string that will be included in outgoing network requests.",
+      "type" : "text"
+    }
   ],
   "fragments" : [
     {
@@ -595,7 +655,10 @@
 },
 "doc://AuthFoundation/documentation/AuthFoundation/SDKVersion/version": {
   "abstract" : [
-
+    {
+      "text" : "The version number string of this library component.",
+      "type" : "text"
+    }
   ],
   "fragments" : [
     {
@@ -694,6 +757,11 @@
   "title" : "Version",
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/version"
+},
+"doc://AuthFoundation/s8SendableP": {
+  "identifier" : "doc:\/\/AuthFoundation\/s8SendableP",
+  "title" : "Swift.Sendable",
+  "type" : "unresolvable"
 }
 }
 }

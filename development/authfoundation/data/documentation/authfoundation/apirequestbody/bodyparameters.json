@@ -28,7 +28,7 @@
   },
   "kind" : "symbol",
   "metadata" : {
-    "externalID" : "s:14AuthFoundation14APIRequestBodyP14bodyParametersSDySSypGSgvp",
+    "externalID" : "s:14AuthFoundation14APIRequestBodyP14bodyParametersSDySSAA0C8Argument_pGSgvp",
     "fragments" : [
       {
         "kind" : "keyword",
@@ -53,11 +53,12 @@
       },
       {
         "kind" : "text",
-        "text" : " : "
+        "text" : " : any "
       },
       {
-        "kind" : "keyword",
-        "text" : "Any"
+        "kind" : "typeIdentifier",
+        "preciseIdentifier" : "s:14AuthFoundation18APIRequestArgumentP",
+        "text" : "APIRequestArgument"
       },
       {
         "kind" : "text",
@@ -109,11 +110,13 @@
             },
             {
               "kind" : "text",
-              "text" : " : "
+              "text" : " : any "
             },
             {
-              "kind" : "keyword",
-              "text" : "Any"
+              "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/APIRequestArgument",
+              "kind" : "typeIdentifier",
+              "preciseIdentifier" : "s:14AuthFoundation18APIRequestArgumentP",
+              "text" : "APIRequestArgument"
             },
             {
               "kind" : "text",
@@ -203,6 +206,166 @@
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/apirequest"
 },
+"doc://AuthFoundation/documentation/AuthFoundation/APIRequest/headers-8ieky": {
+  "abstract" : [
+    {
+      "text" : "Optional HTTP headers to supply.",
+      "type" : "text"
+    }
+  ],
+  "defaultImplementations" : 1,
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "var"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "headers"
+    },
+    {
+      "kind" : "text",
+      "text" : ": ["
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:SS",
+      "text" : "String"
+    },
+    {
+      "kind" : "text",
+      "text" : " : (any "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:14AuthFoundation18APIRequestArgumentP",
+      "text" : "APIRequestArgument"
+    },
+    {
+      "kind" : "text",
+      "text" : ")?]?"
+    }
+  ],
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/APIRequest\/headers-8ieky",
+  "kind" : "symbol",
+  "required" : true,
+  "role" : "symbol",
+  "title" : "headers",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/apirequest\/headers-8ieky"
+},
+"doc://AuthFoundation/documentation/AuthFoundation/APIRequest/query-730ld": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "var"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "query"
+    },
+    {
+      "kind" : "text",
+      "text" : ": ["
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:SS",
+      "text" : "String"
+    },
+    {
+      "kind" : "text",
+      "text" : " : (any "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:14AuthFoundation18APIRequestArgumentP",
+      "text" : "APIRequestArgument"
+    },
+    {
+      "kind" : "text",
+      "text" : ")?]?"
+    }
+  ],
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/APIRequest\/query-730ld",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "query",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/apirequest\/query-730ld"
+},
+"doc://AuthFoundation/documentation/AuthFoundation/APIRequestArgument": {
+  "abstract" : [
+    {
+      "text" : "Defines an argument to an ",
+      "type" : "text"
+    },
+    {
+      "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/APIRequest",
+      "isActive" : true,
+      "type" : "reference"
+    },
+    {
+      "text" : ". Used within ",
+      "type" : "text"
+    },
+    {
+      "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/APIRequest\/headers-8ieky",
+      "isActive" : true,
+      "type" : "reference"
+    },
+    {
+      "text" : " and ",
+      "type" : "text"
+    },
+    {
+      "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/APIRequest\/query-730ld",
+      "isActive" : true,
+      "type" : "reference"
+    },
+    {
+      "text" : ".",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "protocol"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "APIRequestArgument"
+    }
+  ],
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/APIRequestArgument",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "APIRequestArgument"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "APIRequestArgument",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/apirequestargument"
+},
 "doc://AuthFoundation/documentation/AuthFoundation/APIRequestBody": {
   "abstract" : [
     {
@@ -286,11 +449,12 @@
     },
     {
       "kind" : "text",
-      "text" : " : "
+      "text" : " : any "
     },
     {
-      "kind" : "keyword",
-      "text" : "Any"
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:14AuthFoundation18APIRequestArgumentP",
+      "text" : "APIRequestArgument"
     },
     {
       "kind" : "text",

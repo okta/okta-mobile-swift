@@ -14,7 +14,7 @@
   "kind" : "symbol",
   "metadata" : {
     "extendedModule" : "Swift",
-    "externalID" : "s:e:s:SD14AuthFoundationSSRszAA18APIRequestArgument_pSgRs_rlE19percentQueryEncodedSSvp",
+    "externalID" : "s:e:s:SD14AuthFoundationSSRszAA18APIRequestArgument_pRs_rlE16stringComponentsSDyS2SGvp",
     "fragments" : [
       {
         "kind" : "keyword",
@@ -101,7 +101,8 @@
     {
       "identifiers" : [
         "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/Swift\/Dictionary\/percentQueryEncoded-3vo17",
-        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/Swift\/Dictionary\/percentQueryEncoded-8mpef"
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/Swift\/Dictionary\/percentQueryEncoded-8mpef",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/Swift\/Dictionary\/stringComponents"
       ],
       "title" : "Instance Properties"
     },
@@ -483,6 +484,101 @@
   "title" : "percentQueryEncoded",
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/swift\/dictionary\/percentqueryencoded-8mpef"
+},
+"doc://AuthFoundation/documentation/AuthFoundation/Swift/Dictionary/stringComponents": {
+  "abstract" : [
+
+  ],
+  "conformance" : {
+    "availabilityPrefix" : [
+      {
+        "text" : "Available when",
+        "type" : "text"
+      }
+    ],
+    "conformancePrefix" : [
+      {
+        "text" : "Conforms when",
+        "type" : "text"
+      }
+    ],
+    "constraints" : [
+      {
+        "code" : "Key",
+        "type" : "codeVoice"
+      },
+      {
+        "text" : " is ",
+        "type" : "text"
+      },
+      {
+        "code" : "String",
+        "type" : "codeVoice"
+      },
+      {
+        "text" : " and ",
+        "type" : "text"
+      },
+      {
+        "code" : "Value",
+        "type" : "codeVoice"
+      },
+      {
+        "text" : " is ",
+        "type" : "text"
+      },
+      {
+        "code" : "any APIRequestArgument",
+        "type" : "codeVoice"
+      },
+      {
+        "text" : ".",
+        "type" : "text"
+      }
+    ]
+  },
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "var"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "stringComponents"
+    },
+    {
+      "kind" : "text",
+      "text" : ": ["
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:SS",
+      "text" : "String"
+    },
+    {
+      "kind" : "text",
+      "text" : " : "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:SS",
+      "text" : "String"
+    },
+    {
+      "kind" : "text",
+      "text" : "]"
+    }
+  ],
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/Swift\/Dictionary\/stringComponents",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "stringComponents",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/swift\/dictionary\/stringcomponents"
 }
 }
 }

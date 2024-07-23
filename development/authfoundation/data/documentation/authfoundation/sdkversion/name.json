@@ -1,4 +1,10 @@
 {
+  "abstract" : [
+    {
+      "text" : "The name of this library component.",
+      "type" : "text"
+    }
+  ],
   "hierarchy" : {
     "paths" : [
       [
@@ -123,7 +129,10 @@
 },
 "doc://AuthFoundation/documentation/AuthFoundation/SDKVersion": {
   "abstract" : [
-
+    {
+      "text" : "Utility class that allows SDK components to register their name and version for use in HTTP User-Agent values.",
+      "type" : "text"
+    }
   ],
   "fragments" : [
     {
@@ -154,7 +163,10 @@
 },
 "doc://AuthFoundation/documentation/AuthFoundation/SDKVersion/name": {
   "abstract" : [
-
+    {
+      "text" : "The name of this library component.",
+      "type" : "text"
+    }
   ],
   "fragments" : [
     {

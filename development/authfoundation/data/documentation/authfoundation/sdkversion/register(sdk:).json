@@ -1,4 +1,19 @@
 {
+  "abstract" : [
+    {
+      "text" : "Register a new SDK library component to be added to the ",
+      "type" : "text"
+    },
+    {
+      "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/SDKVersion\/userAgent",
+      "isActive" : true,
+      "type" : "reference"
+    },
+    {
+      "text" : " value.",
+      "type" : "text"
+    }
+  ],
   "hierarchy" : {
     "paths" : [
       [
@@ -124,6 +139,61 @@
         }
       ],
       "kind" : "declarations"
+    },
+    {
+      "kind" : "parameters",
+      "parameters" : [
+        {
+          "content" : [
+            {
+              "inlineContent" : [
+                {
+                  "text" : "SDK version to add.",
+                  "type" : "text"
+                }
+              ],
+              "type" : "paragraph"
+            }
+          ],
+          "name" : "sdk"
+        }
+      ]
+    },
+    {
+      "content" : [
+        {
+          "anchor" : "discussion",
+          "level" : 2,
+          "text" : "Discussion",
+          "type" : "heading"
+        },
+        {
+          "content" : [
+            {
+              "inlineContent" : [
+                {
+                  "text" : "SDK ",
+                  "type" : "text"
+                },
+                {
+                  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/SDKVersion\/name",
+                  "isActive" : true,
+                  "type" : "reference"
+                },
+                {
+                  "text" : " values must be unique. If a duplicate SDK  version is already added, only the first registered SDK value will be applied.",
+                  "type" : "text"
+                }
+              ],
+              "type" : "paragraph"
+            }
+          ],
+          "name" : "Note",
+          "style" : "note",
+          "type" : "aside"
+        }
+      ],
+      "kind" : "content"
     }
   ],
   "schemaVersion" : {
@@ -164,7 +234,10 @@
 },
 "doc://AuthFoundation/documentation/AuthFoundation/SDKVersion": {
   "abstract" : [
-
+    {
+      "text" : "Utility class that allows SDK components to register their name and version for use in HTTP User-Agent values.",
+      "type" : "text"
+    }
   ],
   "fragments" : [
     {
@@ -193,9 +266,58 @@
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/sdkversion"
 },
+"doc://AuthFoundation/documentation/AuthFoundation/SDKVersion/name": {
+  "abstract" : [
+    {
+      "text" : "The name of this library component.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "let"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "name"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:SS",
+      "text" : "String"
+    }
+  ],
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/SDKVersion\/name",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "name",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/sdkversion\/name"
+},
 "doc://AuthFoundation/documentation/AuthFoundation/SDKVersion/register(sdk:)": {
   "abstract" : [
-
+    {
+      "text" : "Register a new SDK library component to be added to the ",
+      "type" : "text"
+    },
+    {
+      "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/SDKVersion\/userAgent",
+      "isActive" : true,
+      "type" : "reference"
+    },
+    {
+      "text" : " value.",
+      "type" : "text"
+    }
   ],
   "fragments" : [
     {
@@ -246,6 +368,51 @@
   "title" : "register(sdk:)",
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/sdkversion\/register(sdk:)"
+},
+"doc://AuthFoundation/documentation/AuthFoundation/SDKVersion/userAgent": {
+  "abstract" : [
+    {
+      "text" : "The calculated user agent string that will be included in outgoing network requests.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "static"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "keyword",
+      "text" : "var"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "userAgent"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:SS",
+      "text" : "String"
+    }
+  ],
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/SDKVersion\/userAgent",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "userAgent",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/sdkversion\/useragent"
 }
 }
 }

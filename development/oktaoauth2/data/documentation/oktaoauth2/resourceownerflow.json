@@ -5,17 +5,6 @@
       "type" : "text"
     }
   ],
-  "deprecationSummary" : [
-    {
-      "inlineContent" : [
-        {
-          "text" : "Please use the DirectAuth SDK's DirectAuthenticationFlow class instead",
-          "type" : "text"
-        }
-      ],
-      "type" : "paragraph"
-    }
-  ],
   "hierarchy" : {
     "paths" : [
       [
@@ -54,9 +43,6 @@
         "kind" : "identifier",
         "text" : "ResourceOwnerFlow"
       }
-    ],
-    "platforms" : [
-
     ],
     "role" : "symbol",
     "roleHeading" : "Class",
@@ -113,7 +99,7 @@
             {
               "inlineContent" : [
                 {
-                  "text" : "Resource Owner authentication does not support MFA or other more secure authentication models, and is not recommended for production applications.",
+                  "text" : "Resource Owner authentication does not support MFA or other more secure authentication models, and is not recommended for production applications. Please use the DirectAuth SDK’s DirectAuthenticationFlow class instead.",
                   "type" : "text"
                 }
               ],
@@ -333,7 +319,6 @@
       "type" : "text"
     }
   ],
-  "deprecated" : true,
   "fragments" : [
     {
       "kind" : "keyword",
@@ -401,7 +386,6 @@
       "type" : "text"
     }
   ],
-  "deprecated" : true,
   "fragments" : [
     {
       "kind" : "keyword",
@@ -436,7 +420,6 @@
   "abstract" : [
 
   ],
-  "deprecated" : true,
   "fragments" : [
     {
       "kind" : "keyword",
@@ -495,7 +478,6 @@
       "type" : "text"
     }
   ],
-  "deprecated" : true,
   "fragments" : [
     {
       "kind" : "keyword",
@@ -529,7 +511,6 @@
   "abstract" : [
 
   ],
-  "deprecated" : true,
   "fragments" : [
     {
       "kind" : "identifier",
@@ -571,7 +552,6 @@
       "type" : "text"
     }
   ],
-  "deprecated" : true,
   "fragments" : [
     {
       "kind" : "keyword",
@@ -655,7 +635,6 @@
       "type" : "text"
     }
   ],
-  "deprecated" : true,
   "fragments" : [
     {
       "kind" : "keyword",
@@ -718,7 +697,6 @@
       "type" : "reference"
     }
   ],
-  "deprecated" : true,
   "fragments" : [
     {
       "kind" : "keyword",
@@ -756,7 +734,6 @@
       "type" : "text"
     }
   ],
-  "deprecated" : true,
   "fragments" : [
     {
       "kind" : "keyword",
@@ -876,7 +853,6 @@
       "type" : "text"
     }
   ],
-  "deprecated" : true,
   "fragments" : [
     {
       "kind" : "keyword",
