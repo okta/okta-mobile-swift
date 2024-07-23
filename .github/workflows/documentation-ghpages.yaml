@@ -4,6 +4,8 @@ on:
   push:
     branches:
       - master
+    tags:
+      - '*'
 
 env:
   DEVELOPER_DIR: /Applications/Xcode_15.3.app/Contents/Developer
@@ -26,8 +28,8 @@ jobs:
     - name: Build Documentation
       run: |
         set +ex
-        VERSION=$(git describe --tags 2>/dev/null)
-        if [[ $? -ne 0 ]]; then
+        VERSION=${{ github.ref_name }}
+        if [[ "$VERSION" = "master" ]]; then
             VERSION=development
         fi
         set -e
