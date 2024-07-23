@@ -15,12 +15,14 @@ import XCTest
 @testable import TestCommon
 
 fileprivate struct MockTokenRequest: OAuth2TokenRequest {
+    let openIdConfiguration: AuthFoundation.OpenIdConfiguration
     let clientId: String
     let url: URL
-    var bodyParameters: [String: Any]?
+    var bodyParameters: [String: APIRequestArgument]?
 }
 
 final class TokenTests: XCTestCase {
+    var openIdConfiguration: OpenIdConfiguration!
     let configuration = OAuth2Client.Configuration(baseURL: URL(string: "https://example.com")!,
                                                    clientId: "clientid",
                                                    scopes: "openid")
@@ -29,6 +31,12 @@ final class TokenTests: XCTestCase {
         JWK.validator = MockJWKValidator()
         Token.idTokenValidator = MockIDTokenValidator()
         Token.accessTokenValidator = MockTokenHashValidator()
+        
+        openIdConfiguration = try OpenIdConfiguration.jsonDecoder.decode(
+            OpenIdConfiguration.self,
+            from: try data(from: .module,
+                           for: "openid-configuration",
+                           in: "MockResponses"))
     }
     
     override func tearDownWithError() throws {
@@ -104,7 +112,8 @@ final class TokenTests: XCTestCase {
     }
 
     func testMFAAttestationToken() throws {
-        let request = MockTokenRequest(clientId: configuration.clientId,
+        let request = MockTokenRequest(openIdConfiguration: openIdConfiguration,
+                                       clientId: configuration.clientId,
                                        url: configuration.baseURL,
                                        bodyParameters: [
                                         "acr_values": "urn:okta:app:mfa:attestation"

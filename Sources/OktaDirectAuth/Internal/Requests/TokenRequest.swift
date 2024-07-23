@@ -42,11 +42,7 @@ struct TokenRequest {
 
 extension TokenRequest: OAuth2TokenRequest, OAuth2APIRequest, APIRequestBody {
     var clientId: String { clientConfiguration.clientId }
-    var httpMethod: APIRequestMethod { .post }
-    var url: URL { openIdConfiguration.tokenEndpoint }
-    var contentType: APIContentType? { .formEncoded }
-    var acceptsType: APIContentType? { .json }
-    var bodyParameters: [String: Any]? {
+    var bodyParameters: [String: APIRequestArgument]? {
         var result = factor.tokenParameters(currentStatus: currentStatus)
         result["client_id"] = clientConfiguration.clientId
         result["scope"] = clientConfiguration.scopes

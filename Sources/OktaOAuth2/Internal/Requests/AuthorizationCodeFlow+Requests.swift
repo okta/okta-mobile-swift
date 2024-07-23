@@ -28,20 +28,16 @@ extension AuthorizationCodeFlow {
 
 extension AuthorizationCodeFlow.TokenRequest: OAuth2TokenRequest {
     var clientId: String { clientConfiguration.clientId }
-    var httpMethod: APIRequestMethod { .post }
-    var url: URL { openIdConfiguration.tokenEndpoint }
-    var contentType: APIContentType? { .formEncoded }
-    var acceptsType: APIContentType? { .json }
 }
 
 extension AuthorizationCodeFlow.TokenRequest: OAuth2APIRequest {}
 
 extension AuthorizationCodeFlow.TokenRequest: APIRequestBody {
-    var bodyParameters: [String: Any]? {
-        var result = [
+    var bodyParameters: [String: APIRequestArgument]? {
+        var result: [String: APIRequestArgument] = [
             "client_id": clientConfiguration.clientId,
             "redirect_uri": redirectUri,
-            "grant_type": grantType.rawValue,
+            "grant_type": grantType,
             grantType.responseKey: grantValue
         ]
         

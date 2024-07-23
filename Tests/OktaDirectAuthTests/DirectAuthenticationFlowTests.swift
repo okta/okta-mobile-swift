@@ -37,7 +37,7 @@ struct TestFactor: AuthenticationFactor {
         .implicit
     }
     
-    func tokenParameters(currentStatus: DirectAuthenticationFlow.Status?) -> [String: String] {
+    func tokenParameters(currentStatus: DirectAuthenticationFlow.Status?) -> [String: APIRequestArgument] {
         [:]
     }
     

@@ -128,7 +128,7 @@ public protocol APIAuthorization {
 /// Defines key/value pairs for an ``APIRequest`` body.
 public protocol APIRequestBody {
     /// Key/value pairs to use when generating an ``APIRequest`` body.
-    var bodyParameters: [String: Any]? { get }
+    var bodyParameters: [String: APIRequestArgument]? { get }
 }
 
 /// Provides contextual information when parsing and decoding ``APIRequest`` responses, or errors.
@@ -158,7 +158,7 @@ extension APIParsingContext {
 
 extension APIRequest where Self: APIRequestBody {
     public func body() throws -> Data? {
-        try contentType?.encodedData(with: bodyParameters)
+        try contentType?.encodedData(with: bodyParameters?.stringComponents)
     }
 }
 

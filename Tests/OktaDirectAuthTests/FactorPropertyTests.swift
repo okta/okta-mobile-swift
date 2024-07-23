@@ -26,65 +26,65 @@ final class FactorPropertyTests: XCTestCase {
     }
     
     func testPrimaryTokenParameters() throws {
-        var parameters: [String: String] = [:]
+        var parameters: [String: APIRequestArgument] = [:]
         
         parameters = PrimaryFactor.password("foo").tokenParameters(currentStatus: nil)
-        XCTAssertEqual(parameters, [
+        XCTAssertEqual(parameters.stringComponents, [
             "grant_type": "password",
             "password": "foo"
         ])
         
         parameters = PrimaryFactor.otp(code: "123456").tokenParameters(currentStatus: nil)
-        XCTAssertEqual(parameters, [
+        XCTAssertEqual(parameters.stringComponents, [
             "grant_type": "urn:okta:params:oauth:grant-type:otp",
             "otp": "123456"
         ])
         
         parameters = PrimaryFactor.oob(channel: .push).tokenParameters(currentStatus: nil)
-        XCTAssertEqual(parameters, [
+        XCTAssertEqual(parameters.stringComponents, [
             "grant_type": "urn:okta:params:oauth:grant-type:oob"
         ])
 
         parameters = PrimaryFactor.webAuthn.tokenParameters(currentStatus: nil)
-        XCTAssertEqual(parameters, [
+        XCTAssertEqual(parameters.stringComponents, [
             "grant_type": "urn:okta:params:oauth:grant-type:webauthn"
         ])
     }
     
     func testSecondaryTokenParameters() throws {
-        var parameters: [String: String] = [:]
+        var parameters: [String: APIRequestArgument] = [:]
 
         parameters = SecondaryFactor.otp(code: "123456").tokenParameters(currentStatus: nil)
-        XCTAssertEqual(parameters, [
+        XCTAssertEqual(parameters.stringComponents, [
             "grant_type": "http://auth0.com/oauth/grant-type/mfa-otp",
             "otp": "123456"
         ])
         
         parameters = SecondaryFactor.oob(channel: .push).tokenParameters(currentStatus: .mfaRequired(.init(supportedChallengeTypes: nil, mfaToken: "abc123")))
-        XCTAssertEqual(parameters, [
+        XCTAssertEqual(parameters.stringComponents, [
             "mfa_token": "abc123",
             "grant_type": "http://auth0.com/oauth/grant-type/mfa-oob"
         ])
         
         parameters = SecondaryFactor.oob(channel: .push).tokenParameters(currentStatus: nil)
-        XCTAssertEqual(parameters, [
+        XCTAssertEqual(parameters.stringComponents, [
             "grant_type": "urn:okta:params:oauth:grant-type:oob"
         ])
         
         parameters = SecondaryFactor.webAuthn.tokenParameters(currentStatus: nil)
-        XCTAssertEqual(parameters, [
+        XCTAssertEqual(parameters.stringComponents, [
             "grant_type": "urn:okta:params:oauth:grant-type:webauthn",
         ])
         
         parameters = SecondaryFactor.webAuthn.tokenParameters(currentStatus: .mfaRequired(.init(supportedChallengeTypes: nil, mfaToken: "abc123")))
-        XCTAssertEqual(parameters, [
+        XCTAssertEqual(parameters.stringComponents, [
             "grant_type": "urn:okta:params:oauth:grant-type:mfa-webauthn",
             "mfa_token": "abc123",
         ])
     }
     
     func testContinuationTokenParameters() throws {
-        var parameters: [String: String] = [:]
+        var parameters: [String: APIRequestArgument] = [:]
         
         parameters = ContinuationFactor.prompt(code: "123456")
             .tokenParameters(currentStatus: .continuation(
@@ -95,7 +95,7 @@ final class FactorPropertyTests: XCTestCase {
                                                  bindingMethod: .prompt,
                                                  bindingCode: "abcd123"),
                               mfaContext: nil))))
-        XCTAssertEqual(parameters, [
+        XCTAssertEqual(parameters.stringComponents, [
             "grant_type": "urn:okta:params:oauth:grant-type:oob",
             "oob_code": "oob_abcd123",
             "binding_code": "123456",
@@ -105,7 +105,7 @@ final class FactorPropertyTests: XCTestCase {
                                                                  authenticatorData: "",
                                                                  signature: "",
                                                                  userHandle: nil)).tokenParameters(currentStatus: nil)
-        XCTAssertEqual(parameters, [
+        XCTAssertEqual(parameters.stringComponents, [
             "grant_type": "urn:okta:params:oauth:grant-type:webauthn",
         ])
 
@@ -117,7 +117,7 @@ final class FactorPropertyTests: XCTestCase {
                                                                  signature: "",
                                                                  userHandle: nil)).tokenParameters(currentStatus: .continuation(.webAuthn(context)))
                                                                     
-        XCTAssertEqual(parameters, [
+        XCTAssertEqual(parameters.stringComponents, [
             "grant_type": "urn:okta:params:oauth:grant-type:mfa-webauthn",
             "mfa_token": "abc123",
         ])

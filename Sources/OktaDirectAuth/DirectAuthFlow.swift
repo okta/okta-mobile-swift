@@ -173,7 +173,7 @@ public class DirectAuthenticationFlow: AuthenticationFlow {
     }
     
     /// Channel used when authenticating an out-of-band factor using Okta Verify.
-    public enum OOBChannel: String, Codable {
+    public enum OOBChannel: String, Codable, APIRequestArgument {
         /// Utilize Okta Verify Push notifications to authenticate the user.
         case push
         

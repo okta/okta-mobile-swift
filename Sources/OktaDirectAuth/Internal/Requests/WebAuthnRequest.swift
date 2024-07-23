@@ -41,10 +41,10 @@ extension WebAuthnChallengeRequest: APIRequest, APIRequestBody {
     var httpMethod: APIRequestMethod { .post }
     var contentType: APIContentType? { .formEncoded }
     var acceptsType: APIContentType? { .json }
-    var bodyParameters: [String: Any]? {
-        var result: [String: Any] = [
+    var bodyParameters: [String: APIRequestArgument]? {
+        var result: [String: APIRequestArgument] = [
             "client_id": clientConfiguration.clientId,
-            "challenge_hint": GrantType.webAuthn.rawValue
+            "challenge_hint": GrantType.webAuthn
         ]
         
         if let loginHint = loginHint {
@@ -64,7 +64,7 @@ extension WebAuthnChallengeRequest: APIRequest, APIRequestBody {
 }
 
 extension WebAuthn.AuthenticatorAssertionResponse: HasTokenParameters {
-    func tokenParameters(currentStatus: DirectAuthenticationFlow.Status?) -> [String: String] {
+    func tokenParameters(currentStatus: DirectAuthenticationFlow.Status?) -> [String: APIRequestArgument] {
         var result = [
             "clientDataJSON": clientDataJSON,
             "authenticatorData": authenticatorData,

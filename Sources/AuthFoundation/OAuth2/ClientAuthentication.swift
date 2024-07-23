@@ -22,7 +22,7 @@ extension OAuth2Client {
         case clientSecret(String)
         
         /// The additional parameters this authentication type will contribute to outgoing API requests when needed.
-        public var additionalParameters: [String: String]? {
+        public var additionalParameters: [String: APIRequestArgument]? {
             switch self {
             case .none:
                 return nil

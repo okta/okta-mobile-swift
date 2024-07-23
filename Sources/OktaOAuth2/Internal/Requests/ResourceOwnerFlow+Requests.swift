@@ -24,15 +24,11 @@ extension ResourceOwnerFlow {
 }
 
 extension ResourceOwnerFlow.TokenRequest: OAuth2TokenRequest, OAuth2APIRequest, APIRequestBody, APIParsingContext {
-    var httpMethod: APIRequestMethod { .post }
-    var url: URL { openIdConfiguration.tokenEndpoint }
-    var contentType: APIContentType? { .formEncoded }
-    var acceptsType: APIContentType? { .json }
-    var bodyParameters: [String: Any]? {
+    var bodyParameters: [String: APIRequestArgument]? {
         [
             "client_id": clientId,
             "scope": scope,
-            "grant_type": "password",
+            "grant_type": GrantType.password,
             "username": username,
             "password": password
         ]

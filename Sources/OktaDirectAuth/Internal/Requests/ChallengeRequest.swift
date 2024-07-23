@@ -75,8 +75,8 @@ extension ChallengeRequest: APIRequest, APIRequestBody {
     var httpMethod: APIRequestMethod { .post }
     var contentType: APIContentType? { .formEncoded }
     var acceptsType: APIContentType? { .json }
-    var bodyParameters: [String: Any]? {
-        var result: [String: Any] = [
+    var bodyParameters: [String: APIRequestArgument]? {
+        var result: [String: APIRequestArgument] = [
             "client_id": clientConfiguration.clientId,
             "mfa_token": mfaToken,
             "challenge_types_supported": challengeTypesSupported
