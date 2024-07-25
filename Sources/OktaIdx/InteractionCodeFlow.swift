@@ -174,6 +174,8 @@ public final class InteractionCodeFlow: AuthenticationFlow {
             return
         }
         
+        preStartReset()
+        
         self.isAuthenticating = true
         self.options = options
 
@@ -336,12 +338,6 @@ public final class InteractionCodeFlow: AuthenticationFlow {
         context = nil
         isAuthenticating = false
         options = nil
-
-        // Remove any previous `idx` cookies so it won't leak into other sessions.
-        let storage = client.session.configuration.httpCookieStorage ?? HTTPCookieStorage.shared
-        storage.cookies(for: client.baseURL)?
-            .filter({ $0.name == "idx" })
-            .forEach({ storage.deleteCookie($0) })
     }
 
     // MARK: Private properties / methods
@@ -363,6 +359,14 @@ public final class InteractionCodeFlow: AuthenticationFlow {
     }()
     
     public let delegateCollection = DelegateCollection<InteractionCodeFlowDelegate>()
+    
+    private func preStartReset() {
+        // Remove any previous `idx` cookies so it won't leak into other sessions.
+        let storage = client.session.configuration.httpCookieStorage ?? HTTPCookieStorage.shared
+        storage.cookies(for: client.baseURL)?
+            .filter({ $0.name == "idx" })
+            .forEach({ storage.deleteCookie($0) })
+    }
 }
 
 #if swift(>=5.5.1) && !os(Linux)

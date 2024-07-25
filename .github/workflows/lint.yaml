@@ -8,8 +8,6 @@ on:
       - 'Sources/**/*.swift'
     branches: 
       - master
-      - dev-*
-      - release-*
   push:
     paths:
       - '.github/workflows/lint.yml'
@@ -17,12 +15,10 @@ on:
       - 'Sources/**/*.swift'
     branches:
       - master
-      - dev-*
-      - release-*
 
 jobs:
   SwiftLint:
-    runs-on: macos-latest
+    runs-on: macos-latest-large
     steps:
       - uses: actions/checkout@v1
       - name: Lint code using SwiftLint

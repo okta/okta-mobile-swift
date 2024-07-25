@@ -18,7 +18,7 @@ var package = Package(
     ],
     dependencies: [
         .package(url: "https://github.com/okta/okta-mobile-swift",
-                 from: "1.7.0"),
+                 from: "1.8.1"),
         .package(url: "https://github.com/apple/swift-docc-plugin",
                  from: "1.0.0")
     ],

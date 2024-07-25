@@ -148,6 +148,47 @@ class InteractionCodeFlowTests: XCTestCase {
         XCTAssertEqual(delegate.calls.first?.type, .error)
     }
 
+    func testStartCookieReset() throws {
+        XCTAssertNotNil(flow)
+        XCTAssertEqual(flow.redirectUri, redirectUri)
+        XCTAssertFalse(flow.isAuthenticating)
+        XCTAssertNil(flow.context)
+        
+        let idxCookie = try XCTUnwrap(HTTPCookie(properties: [
+            HTTPCookiePropertyKey.name: "idx",
+            HTTPCookiePropertyKey.domain: "example.com",
+            HTTPCookiePropertyKey.path: "/",
+            HTTPCookiePropertyKey.secure: "TRUE",
+            HTTPCookiePropertyKey.value: "TheCookieValue",
+            HTTPCookiePropertyKey.expires: Date(timeIntervalSinceNow: 300),
+        ]))
+
+        let cookieStorage = HTTPCookieStorage.shared
+        cookieStorage.setCookie(idxCookie)
+
+        let configuration = URLSessionConfiguration.default
+        configuration.httpCookieStorage = cookieStorage
+        
+        urlSession.configuration = configuration
+        
+        urlSession.expect("https://example.com/oauth2/default/v1/interact",
+                          data: try data(from: .module,
+                                         for: "interact-response"))
+        urlSession.expect("https://example.com/idp/idx/introspect",
+                          data: try data(from: .module,
+                                         for: "introspect-response"))
+        
+        XCTAssertEqual(cookieStorage.cookies(for: flow.client.baseURL), [idxCookie])
+
+        let wait = expectation(description: "start")
+        flow.start { _ in
+            wait.fulfill()
+        }
+        waitForExpectations(timeout: 1.0)
+        
+        XCTAssertEqual(cookieStorage.cookies(for: flow.client.baseURL), [])
+    }
+    
     func testRedirectResultWithoutContext() throws {
         let redirectUrl = try XCTUnwrap(URL(string: """
                 redirect:///uri?\

@@ -1,6 +1,6 @@
 Pod::Spec.new do |spec|
   spec.name             = 'OktaIdx'
-  spec.version          = '3.2.2'
+  spec.version          = '3.2.3'
   spec.summary          = 'SDK to easily integrate the Okta Identity Engine'
   spec.description      = <<-DESC
 Integrate your native app with Okta using the Okta Identity Engine library.
@@ -25,5 +25,5 @@ Integrate your native app with Okta using the Okta Identity Engine library.
   spec.resource_bundles = { 'OktaIdx' => 'Sources/OktaIdx/Resources/**/*' }
   spec.swift_version = "5.6"
 
-  spec.dependency "OktaAuthFoundation", "~> 1.7.0"
+  spec.dependency "OktaAuthFoundation", "~> 1.8.1"
 end
