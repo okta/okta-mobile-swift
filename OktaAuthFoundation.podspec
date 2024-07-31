@@ -1,7 +1,7 @@
 Pod::Spec.new do |s|
     s.name             = "OktaAuthFoundation"
     s.module_name      = "AuthFoundation"
-    s.version          = "1.8.1"
+    s.version          = "1.8.2"
     s.summary          = "Okta Authentication Foundation"
     s.description      = <<-DESC
 Provides the foundation and common features used to authenticate users, managing the lifecycle and storage of tokens and credentials, and provide a base for other Okta SDKs to build upon.
@@ -22,6 +22,6 @@ Provides the foundation and common features used to authenticate users, managing
     s.authors       = { "Okta Developers" => "developer@okta.com"}
     s.source        = { :git => "https://github.com/okta/okta-mobile-swift.git", :tag => s.version.to_s }
     s.source_files  = "Sources/AuthFoundation/**/*.swift"
-    s.resources     = "Sources/AuthFoundation/Resources/**/*"
+    s.resource_bundles = { "AuthFoundation" => "Sources/AuthFoundation/Resources/**/*" }
     s.swift_version = "5.6"
 end
