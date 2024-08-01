@@ -84,8 +84,27 @@ public class Response: NSObject {
             return
         }
         
+        flow.client.openIdConfiguration { result in
+            switch result {
+            case .success(let configuration):
+                self.exchangeCode(remediation: remediation,
+                                  context: context,
+                                  openIdConfiguration: configuration,
+                                  completion: completion)
+            case .failure(let error):
+                self.flow.send(error: .internalError(error), completion: completion)
+            }
+        }
+    }
+    
+    private func exchangeCode(remediation: Remediation,
+                              context: InteractionCodeFlow.Context,
+                              openIdConfiguration: OpenIdConfiguration,
+                              completion: InteractionCodeFlow.TokenResult? = nil)
+    {
         do {
             let tokenRequest = try InteractionCodeFlow.SuccessResponseTokenRequest(
+                openIdConfiguration: openIdConfiguration,
                 successResponse: remediation,
                 clientId: flow.client.configuration.clientId,
                 scope: flow.client.configuration.scopes,

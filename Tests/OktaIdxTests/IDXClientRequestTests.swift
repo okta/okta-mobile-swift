@@ -142,7 +142,6 @@ class IDXClientRequestTests: XCTestCase {
         let remediation = try XCTUnwrap(response.remediations[.identify])
         let request = try InteractionCodeFlow.RemediationRequest(remediation: remediation)
         
-        let url = request.url
         let challengeUrl = try XCTUnwrap(URL(string: "/idp/idx/challenge/answer", relativeTo: request.url))
         
         XCTAssertEqual(request.resultType(from: try XCTUnwrap(HTTPURLResponse(url: remediation.href,
@@ -246,7 +245,13 @@ class IDXClientRequestTests: XCTestCase {
             """))
         let remediation = try XCTUnwrap(Remediation(flow: flowMock, ion: ion))
         
-        let request = try InteractionCodeFlow.SuccessResponseTokenRequest(successResponse: remediation,
+        let openIdConfiguration = try OpenIdConfiguration.jsonDecoder.decode(
+            OpenIdConfiguration.self,
+            from: try data(from: .module,
+                           for: "openid-configuration"))
+
+        let request = try InteractionCodeFlow.SuccessResponseTokenRequest(openIdConfiguration: openIdConfiguration,
+                                                                          successResponse: remediation,
                                                                           clientId: "clientId",
                                                                           scope: "all",
                                                                           redirectUri: "redirect:/uri",

@@ -22,7 +22,7 @@ extension InteractionCodeFlow {
     }
 }
 
-extension InteractionCodeFlow.RemediationRequest: APIRequest, APIRequestBody, ReceivesIDXResponse, ReturnsIDXError {
+extension InteractionCodeFlow.RemediationRequest: APIRequest, ReceivesIDXResponse, ReturnsIDXError {
     typealias ResponseType = IonResponse
     
     init(remediation option: Remediation) throws {
@@ -40,6 +40,13 @@ extension InteractionCodeFlow.RemediationRequest: APIRequest, APIRequestBody, Re
     }
     
     var acceptsType: APIContentType? { .ionJson }
+    
+    func body() throws -> Data? {
+        guard let bodyParameters = bodyParameters else {
+            return nil
+        }
+        return try JSONSerialization.data(withJSONObject: bodyParameters)
+    }
 }
 
 extension InteractionCodeFlow.RemediationRequest: APIParsingContext {

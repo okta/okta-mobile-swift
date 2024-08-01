@@ -45,7 +45,7 @@ extension InteractionCodeFlow.IntrospectRequest: APIRequest, APIRequestBody, Rec
     var httpMethod: APIRequestMethod { .post }
     var contentType: APIContentType? { .json }
     var acceptsType: APIContentType? { .ionJson }
-    var bodyParameters: [String: Any]? {
+    var bodyParameters: [String: APIRequestArgument]? {
         [
             "interactionHandle": interactionHandle
         ]

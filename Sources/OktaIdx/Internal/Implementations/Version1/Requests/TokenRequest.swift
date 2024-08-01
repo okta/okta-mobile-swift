@@ -15,14 +15,16 @@ import AuthFoundation
 
 extension InteractionCodeFlow {
     struct SuccessResponseTokenRequest {
+        let openIdConfiguration: OpenIdConfiguration
         let httpMethod: APIRequestMethod
         let url: URL
         let contentType: APIContentType?
-        let bodyParameters: [String: Any]?
+        let bodyParameters: [String: APIRequestArgument]?
         let clientId: String
         let scope: String
         let redirectUri: String
-        init(successResponse option: Remediation,
+        init(openIdConfiguration: OpenIdConfiguration,
+             successResponse option: Remediation,
              clientId: String,
              scope: String,
              redirectUri: String,
@@ -34,7 +36,7 @@ extension InteractionCodeFlow {
                 throw InteractionCodeFlowError.cannotCreateRequest
             }
             
-            let parameters: [String: Any] = try option.form.allFields.reduce(into: [:]) { partialResult, field in
+            let parameters: [String: APIRequestArgument] = try option.form.allFields.reduce(into: [:]) { partialResult, field in
                 guard let name = field.name else { return }
                 switch name {
                 case "code_verifier":
@@ -52,6 +54,7 @@ extension InteractionCodeFlow {
                 }
             }
 
+            self.openIdConfiguration = openIdConfiguration
             self.httpMethod = method
             self.url = option.href
             self.clientId = clientId
@@ -92,7 +95,7 @@ extension InteractionCodeFlow.RedirectURLTokenRequest: OAuth2TokenRequest, APIRe
     var url: URL { openIdConfiguration.tokenEndpoint }
     var contentType: APIContentType? { .formEncoded }
     var acceptsType: APIContentType? { .json }
-    var bodyParameters: [String: Any]? {
+    var bodyParameters: [String: APIRequestArgument]? {
         [
             "client_id": clientId,
             "grant_type": "interaction_code",

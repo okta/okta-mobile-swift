@@ -54,8 +54,8 @@ extension InteractionCodeFlow.InteractRequest: APIRequest, APIRequestBody {
     var contentType: APIContentType? { .formEncoded }
     var acceptsType: APIContentType? { .json }
     
-    var bodyParameters: [String: Any]? {
-        var result: [String: Any] = [
+    var bodyParameters: [String: APIRequestArgument]? {
+        var result: [String: APIRequestArgument] = [
             "client_id": clientId,
             "scope": scope,
             "redirect_uri": redirectUri.absoluteString,
