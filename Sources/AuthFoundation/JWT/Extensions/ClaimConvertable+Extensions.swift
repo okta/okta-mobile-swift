@@ -12,25 +12,42 @@
 
 import Foundation
 
+@_documentation(visibility: private)
 extension String: ClaimConvertable {}
+
+@_documentation(visibility: private)
 extension Bool: ClaimConvertable {}
+
+@_documentation(visibility: private)
 extension Int: ClaimConvertable {}
+
+@_documentation(visibility: private)
 extension Double: ClaimConvertable {}
+
+@_documentation(visibility: private)
 extension Float: ClaimConvertable {}
-extension Array<String>: ClaimConvertable {}
-extension Dictionary<String, String>: ClaimConvertable {}
+
+@_documentation(visibility: private)
 extension URL: ClaimConvertable {}
+
+@_documentation(visibility: private)
 extension Date: ClaimConvertable {}
+
+@_documentation(visibility: private)
 extension JWTClaim: ClaimConvertable {}
+
+@_documentation(visibility: private)
 extension GrantType: ClaimConvertable {}
+
+@_documentation(visibility: private)
 extension NSString: ClaimConvertable {}
+
+@_documentation(visibility: private)
 extension NSNumber: ClaimConvertable {}
 
+@_documentation(visibility: private)
 extension ClaimConvertable where Self == Date {
-    public static func claim(_ claim: String,
-                             in type: any HasClaims,
-                             from value: Any?) -> Self?
-    {
+    public static func convert(from value: Any?) -> Self? {
         if let time = value as? Int {
             return Date(timeIntervalSince1970: TimeInterval(time))
         }
@@ -43,22 +60,25 @@ extension ClaimConvertable where Self == Date {
     }
 }
 
+@_documentation(visibility: private)
 extension ClaimConvertable where Self == URL {
-    public static func claim(_ claim: String,
-                             in type: any HasClaims,
-                             from value: Any?) -> Self?
-    {
+    public static func convert(from value: Any?) -> Self? {
         guard let string = value as? String else { return nil }
         return URL(string: string)
     }
 }
 
-extension ClaimConvertable where Self: IsClaim {
-    public static func claim(_ claim: String,
-                             in type: any HasClaims,
-                             from value: Any?) -> Self?
-    {
-        guard let value = value as? String else { return nil }
-        return .init(rawValue: value)
+@_documentation(visibility: private)
+extension ClaimConvertable where Self: RawRepresentable {
+    public static func convert(from value: Any?) -> Self? {
+        if let value = value as? Self {
+            return value
+        }
+        
+        if let value = value as? Self.RawValue {
+            return Self(rawValue: value)
+        }
+
+        return nil
     }
 }

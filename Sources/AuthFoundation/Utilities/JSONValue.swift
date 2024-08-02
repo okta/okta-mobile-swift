@@ -12,37 +12,139 @@
 
 import Foundation
 
-public enum JSONValueError: Error {
-    case cannotDecode(value: Any)
+public enum JSONError: Error {
+    case cannotDecode(value: Any?)
+    case invalidContentEncoding
 }
 
-/// Represent mixed JSON values as instances of `Any`. This is used to expose API response values to Swift native types
-/// where Swift enums are not supported.
-public enum JSONValue: Equatable {
+@_documentation(visibility: private)
+@available(*, deprecated, renamed: "JSON")
+public typealias JSONValue = JSON
+
+/// Efficiently represents ``JSON`` values, and exchanges between its String or Data representations.
+///
+/// JSON data may be imported from multiple sources, be it Data, a String, or an alread-parsed JSON object. Transforming data between these states, and dealing with error conditions every time, can be cumbersome. AnyJSON is a convenience wrapper class that allows underlying JSON to be lazily mapped between types as needed.
+public class AnyJSON {
+    private enum Value {
+        case json(JSON)
+        case string(String)
+        case data(Data)
+    }
+    
+    private let value: Value
+    
+    /// The string encoding of the JSON data.
+    public lazy var stringValue: String = {
+        if case let .string(string) = value {
+            return string
+        }
+        return String(data: dataValue, encoding: .utf8) ?? ""
+    }()
+    
+    /// The data encoding of the JSON value.
+    public lazy var dataValue: Data = {
+        switch value {
+        case .json(let json):
+            guard let anyValue = json.anyValue else {
+                return Data()
+            }
+            return (try? JSONSerialization.data(withJSONObject: anyValue)) ?? Data()
+        case .string(let string):
+            return string.data(using: .utf8) ?? Data()
+        case .data(let data):
+            return data
+        }
+    }()
+    
+    /// The ``JSON`` representation of the JSON data.
+    public lazy var jsonValue: JSON = {
+        switch value {
+        case .json(let json):
+            return json
+        case .string(let string):
+            return (try? JSON(string)) ?? JSON.null
+        case .data(let data):
+            return (try? JSON(data)) ?? JSON.null
+        }
+    }()
+    
+    /// Initializes the JSON data based on a string value.
+    /// - Parameter string: JSON string.
+    public init(_ string: String) {
+        value = .string(string)
+    }
+    
+    
+    /// Initializes the JSON data based on a data value.
+    /// - Parameter data: JSON data.
+    public init(_ data: Data) {
+        value = .data(data)
+    }
+    
+    /// Initializes the JSON data based on a ``JSON`` value.
+    /// - Parameter json: The ``JSON`` value.
+    public init(_ json: JSON) {
+        value = .json(json)
+    }
+}
+
+/// Represent mixed JSON values as instances of `Any`. This is used to expose API response values to Swift native types where Swift enums are not supported.
+public enum JSON: Equatable {
+    /// String JSON key value.
     case string(String)
-    case number(Double)
+
+    /// Number JSON key value.
+    case number(NSNumber)
+    
+    /// Boolean JSON key value.
     case bool(Bool)
-    case dictionary([String: JSONValue])
-    case array([JSONValue])
-    case object(Any)
+    
+    /// Object JSON key value, containing its own nested key/value pairs.
+    case object([String: JSON])
+    
+    /// Array JSON key value, containing its own nested JSON values.
+    case array([JSON])
+    
+    /// Null JSON key value.
     case null
     
+    /// Initializes a JSON object from a variety of supported types.
+    /// - Parameter value: Value to represent as a JSON stru ture.
     public init(_ value: Any?) throws {
+        guard let value = value 
+        else {
+            self = .null
+            return
+        }
+        
         if let value = value as? String {
             self = .string(value)
         } else if let value = value as? NSNumber {
-            self = .number(value.doubleValue)
+            self = .number(value)
         } else if let value = value as? Bool {
             self = .bool(value)
         } else if let value = value as? [String: Any] {
-            self = .dictionary(try value.mapValues({ try JSONValue($0) }))
+            self = .object(try value.mapValues({ try JSON($0) }))
         } else if let value = value as? [Any] {
-            self = .array(try value.map({ try JSONValue($0) }))
-        } else if value == nil {
-            self = .null
+            self = .array(try value.map({ try JSON($0) }))
         } else {
-            throw JSONValueError.cannotDecode(value: value as Any)
+            throw JSONError.cannotDecode(value: value as Any)
         }
+    }
+    
+    /// Initializes a JSON object from its string representation.
+    /// - Parameter value: The String value for a JSON object.
+    public init(_ value: String) throws {
+        guard let data = value.data(using: .utf8) else {
+            throw JSONError.invalidContentEncoding
+        }
+        try self.init(data)
+    }
+    
+    /// Initializes a JSON object from its data representation.
+    /// - Parameter value: The data value for a JSON object.
+    public init(_ value: Data) throws {
+        try self.init(JSONSerialization.jsonObject(with: value))
     }
     
     /// Returns the value as an instance of `Any`.
@@ -54,20 +156,34 @@ public enum JSONValue: Equatable {
             return value
         case let .bool(value):
             return value
-        case let .dictionary(value):
+        case let .object(value):
             return value.reduce(into: [String: Any?]()) {
                 $0[$1.key] = $1.value.anyValue
             }
         case let .array(value):
             return value.map { $0.anyValue }
-        case let .object(value):
-            return value
         case .null:
             return nil
         }
     }
     
-    public static func == (lhs: JSONValue, rhs: JSONValue) -> Bool {
+    public subscript(index: Int) -> Any? {
+        guard case let .array(array) = self else {
+            return nil
+        }
+
+        return array[index]
+    }
+    
+    public subscript(key: String) -> Any? {
+        guard case let .object(dictionary) = self else {
+            return nil
+        }
+
+        return dictionary[key]
+    }
+    
+    public static func == (lhs: JSON, rhs: JSON) -> Bool {
         switch (lhs, rhs) {
         case (.string(let lhsValue), .string(let rhsValue)):
             return lhsValue == rhsValue
@@ -75,18 +191,10 @@ public enum JSONValue: Equatable {
             return lhsValue == rhsValue
         case (.bool(let lhsValue), .bool(let rhsValue)):
             return lhsValue == rhsValue
-        case (.dictionary(let lhsValue), .dictionary(let rhsValue)):
+        case (.object(let lhsValue), .object(let rhsValue)):
             return lhsValue == rhsValue
         case (.array(let lhsValue), .array(let rhsValue)):
             return lhsValue == rhsValue
-        case (.object(let lhsValue), .object(let rhsValue)):
-            if let lhsValue = lhsValue as? AnyHashable,
-               let rhsValue = rhsValue as? AnyHashable
-            {
-                return lhsValue == rhsValue
-            } else {
-                return false
-            }
         case (.null, .null):
             return true
         default:
@@ -95,18 +203,20 @@ public enum JSONValue: Equatable {
     }
 }
 
-extension JSONValue: Codable {
+extension JSON: Codable {
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
         if let value = try? container.decode(String.self) {
             self = .string(value)
+        } else if let value = try? container.decode(Int.self) {
+            self = .number(value as NSNumber)
         } else if let value = try? container.decode(Double.self) {
-            self = .number(value)
+            self = .number(value as NSNumber)
         } else if let value = try? container.decode(Bool.self) {
             self = .bool(value)
-        } else if let value = try? container.decode([String: JSONValue].self) {
-            self = .dictionary(value)
-        } else if let value = try? container.decode([JSONValue].self) {
+        } else if let value = try? container.decode([String: JSON].self) {
+            self = .object(value)
+        } else if let value = try? container.decode([JSON].self) {
             self = .array(value)
         } else if container.decodeNil() {
             self = .null
@@ -122,27 +232,36 @@ extension JSONValue: Codable {
         case let .string(value):
             try container.encode(value)
         case let .number(value):
-            try container.encode(value)
+            if value.isFloatingPoint {
+                try container.encode(value.doubleValue)
+            } else {
+                try container.encode(value.intValue)
+            }
         case let .bool(value):
             try container.encode(value)
-        case let .dictionary(value):
+        case let .object(value):
             try container.encode(value)
         case let .array(value):
             try container.encode(value)
-        case let .object(value):
-            if let value = value as? Codable {
-                try container.encode(value)
-            } else {
-                throw EncodingError.invalidValue(value, .init(codingPath: encoder.codingPath,
-                                                              debugDescription: "Value is not encodable at \(encoder.codingPath)"))
-            }
         case .null:
             try container.encodeNil()
         }
     }
 }
 
-extension JSONValue: CustomDebugStringConvertible {
+fileprivate extension NSNumber {
+    var isFloatingPoint: Bool {
+        let type = CFNumberGetType(self as CFNumber)
+        switch type {
+        case .floatType, .float32Type, .float64Type, .cgFloatType, .doubleType:
+            return true
+        default:
+            return false
+        }
+    }
+}
+
+extension JSON: CustomDebugStringConvertible {
     public var debugDescription: String {
         switch self {
         case .string(let str):
@@ -153,12 +272,6 @@ extension JSONValue: CustomDebugStringConvertible {
             return bool ? "true" : "false"
         case .null:
             return "null"
-        case .object(let obj):
-            if let obj = obj as? CustomDebugStringConvertible {
-                return obj.debugDescription
-            } else {
-                return "Custom object \(String(describing: obj))"
-            }
         default:
             let encoder = JSONEncoder()
             encoder.outputFormatting = [.prettyPrinted]

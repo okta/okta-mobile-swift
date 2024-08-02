@@ -19,20 +19,22 @@ public struct OpenIdConfiguration: Codable, JSONClaimContainer {
     public typealias ClaimType = ProviderMetadata
     
     /// The raw payload of provider metadata claims returned from the OpenID Provider.
-    public let payload: [String: Any]
-    
-    public init(from decoder: Decoder) throws {
-        let required = try decoder.container(keyedBy: RequiredCodingKeys.self)
-        issuer = try required.decode(URL.self, forKey: .issuer)
-        authorizationEndpoint = try required.decode(URL.self, forKey: .authorizationEndpoint)
-        tokenEndpoint = try required.decode(URL.self, forKey: .tokenEndpoint)
-        jwksUri = try required.decode(URL.self, forKey: .jwksUri)
-        responseTypesSupported = try required.decode([String].self, forKey: .responseTypesSupported)
-        subjectTypesSupported = try required.decode([String].self, forKey: .subjectTypesSupported)
-        idTokenSigningAlgValuesSupported = try required.decode([JWK.Algorithm].self, forKey: .idTokenSigningAlgValuesSupported)
+    public var payload: [String: Any] { jsonPayload.jsonValue.anyValue as? [String: Any] ?? [:] }
 
-        let container = try decoder.container(keyedBy: JSONCodingKeys.self)
-        payload = try container.decode([String: Any].self)
+    let jsonPayload: AnyJSON
+    public init(from decoder: Decoder) throws {
+        let container = try decoder.singleValueContainer()
+        let json = try container.decode(JSON.self)
+        jsonPayload = .init(json)
+        
+        let payload = json.anyValue as? [String: Any] ?? [:]
+        issuer = try ProviderMetadata.value(.issuer, in: payload)
+        authorizationEndpoint = try ProviderMetadata.value(.authorizationEndpoint, in: payload)
+        tokenEndpoint = try ProviderMetadata.value(.tokenEndpoint, in: payload)
+        jwksUri = try ProviderMetadata.value(.jwksUri, in: payload)
+        responseTypesSupported = try ProviderMetadata.value(.responseTypesSupported, in: payload)
+        subjectTypesSupported = try ProviderMetadata.value(.subjectTypesSupported, in: payload)
+        idTokenSigningAlgValuesSupported = try ProviderMetadata.value(.idTokenSigningAlgValuesSupported, in: payload)
     }
     
     /// The issuer URL for this OpenID provider.
@@ -56,12 +58,6 @@ public struct OpenIdConfiguration: Codable, JSONClaimContainer {
     /// The list of supported ID token signing algorithms for this OpenID Provider.
     public let idTokenSigningAlgValuesSupported: [JWK.Algorithm]
 
-    public static let jsonDecoder: JSONDecoder = {
-        let result = JSONDecoder()
-        result.keyDecodingStrategy = .convertFromSnakeCase
-        return result
-    }()
-    
     enum RequiredCodingKeys: String, CodingKey, CaseIterable {
         case issuer
         case authorizationEndpoint
@@ -82,6 +78,6 @@ extension OpenIdConfiguration {
     public var userinfoEndpoint: URL? { self[.userinfoEndpoint] }
     public var scopesSupported: [String]? { self[.scopesSupported] }
     public var responseModesSupported: [String]? { self[.responseModesSupported] }
-    public var claimsSupported: [JWTClaim]? { arrayValue(JWTClaim.self, for: .claimsSupported) }
-    public var grantTypesSupported: [GrantType]? { arrayValue(GrantType.self, for: .grantTypesSupported) }
+    public var claimsSupported: [JWTClaim]? { self[.claimsSupported] }
+    public var grantTypesSupported: [GrantType]? { self[.grantTypesSupported] }
 }

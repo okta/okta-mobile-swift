@@ -90,17 +90,17 @@ final class TokenTests: XCTestCase {
     }
     
     func testToken() throws {
-        let token = Token(id: "TokenId",
-                          issuedAt: Date(),
-                          tokenType: "Bearer",
-                          expiresIn: 3600,
-                          accessToken: "the_access_token",
-                          scope: "openid profile offline_access",
-                          refreshToken: "the_refresh_token",
-                          idToken: nil,
-                          deviceSecret: "the_device_secret",
-                          context: Token.Context(configuration: configuration,
-                                                 clientSettings: []))
+        let token = try! Token(id: "TokenId",
+                               issuedAt: Date(),
+                               tokenType: "Bearer",
+                               expiresIn: 3600,
+                               accessToken: "the_access_token",
+                               scope: "openid profile offline_access",
+                               refreshToken: "the_refresh_token",
+                               idToken: nil,
+                               deviceSecret: "the_device_secret",
+                               context: Token.Context(configuration: configuration,
+                                                      clientSettings: []))
         
         XCTAssertEqual(token.token(of: .accessToken), token.accessToken)
         XCTAssertEqual(token.token(of: .refreshToken), token.refreshToken)
@@ -141,7 +141,7 @@ final class TokenTests: XCTestCase {
         
         XCTAssertThrowsError(try decoder.decode(Token.self,
                                                 from: try data(from: .module,
-                                                               for: "token-mfa_attestation",
+                                                               for: "token-no_access_token",
                                                                in: "MockResponses")))
     }
     
@@ -179,6 +179,31 @@ final class TokenTests: XCTestCase {
         
         XCTAssertEqual(token.token(of: .accessToken), String.mockAccessToken)
         XCTAssertNotEqual(token.id, Token.RefreshRequest.placeholderId)
+    }
+    
+    func testTokenClaims() throws {
+        var token: Token!
+        
+        token = try! Token(id: "TokenId",
+                           issuedAt: Date(),
+                           tokenType: "Bearer",
+                           expiresIn: 3600,
+                           accessToken: "the_access_token",
+                           scope: "openid profile offline_access",
+                           refreshToken: "the_refresh_token",
+                           idToken: nil,
+                           deviceSecret: "the_device_secret",
+                           context: Token.Context(configuration: configuration,
+                                                  clientSettings: []))
+        XCTAssertEqual(token.allClaims.sorted(), [
+            "expires_in",
+            "token_type",
+            "access_token",
+            "scope",
+            "refresh_token",
+            "device_secret",
+        ].sorted())
+        XCTAssertEqual(token[.accessToken], "the_access_token")
     }
     
     #if swift(>=5.5.1)
