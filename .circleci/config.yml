@@ -1,7 +1,7 @@
 version: 2.1
 
 orbs:
-  general-platform-helpers: okta/general-platform-helpers@1.8
+  general-platform-helpers: okta/general-platform-helpers@1.9
 
 executors:
   apple-ci-arm-medium:
@@ -39,20 +39,14 @@ jobs:
 workflows:
   semgrep:
     jobs:
-      - general-platform-helpers/job-semgrep-prepare:
-          name: semgrep-prepare
-          filters:
-            branches:
-              only:
-                - master
       - general-platform-helpers/job-semgrep-scan:
           name: semgrep-scan
           filters:
             branches:
               only:
                 - master
-          requires:
-            - semgrep-prepare
+          context:
+            - static-analysis
   security-scan:
     jobs:
       - setup:
@@ -60,19 +54,13 @@ workflows:
             branches:
               only:
                 - master
-      - general-platform-helpers/job-snyk-prepare:
-          name: prepare-snyk
-          filters:
-            branches:
-              only:
-                - master
-          requires:
-            - setup
       - snyk-scan:
           name: execute-snyk
           filters:
             branches:
               only:
                 - master
+          context:
+            - static-analysis
           requires:
-            - prepare-snyk
+            - setup
