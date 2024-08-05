@@ -29,26 +29,9 @@ extension Token {
                               clientSettings: decoder.userInfo[.clientSettings])
         }
         
-        // Attempt to decode V2 token data
-        if let container = try? decoder.container(keyedBy: CodingKeysV2.self),
-           container.allKeys.contains(.id)
-        {
-            context = try container.decode(Context.self, forKey: .context)
-
-            if container.contains(.id) {
-                id = try container.decode(String.self, forKey: .id)
-            }
-            
-            if container.contains(.issuedAt) {
-                issuedAt = try container.decode(Date.self, forKey: .issuedAt)
-            }
-            
-            json = .init(try container.decode(String.self, forKey: .rawValue))
-        }
-        
         // Attempt to decode V1 token data
-        else if let container = try? decoder.container(keyedBy: CodingKeysV1.self),
-                container.allKeys.contains(.id)
+        if let container = try? decoder.container(keyedBy: CodingKeysV1.self),
+           [.id, .accessToken].allSatisfy(container.allKeys.contains)
         {
             if container.contains(.context) {
                 context = try container.decode(Context.self, forKey: .context)
@@ -87,6 +70,23 @@ extension Token {
             json = .init(try JSON(payload.reduce(into: [String: Any]()) { result, item in
                 result[item.key.rawValue] = item.value
             }))
+        }
+
+        // Attempt to decode V2 token data
+        else if let container = try? decoder.container(keyedBy: CodingKeysV2.self),
+           container.allKeys.contains(.id)
+        {
+            context = try container.decode(Context.self, forKey: .context)
+
+            if container.contains(.id) {
+                id = try container.decode(String.self, forKey: .id)
+            }
+            
+            if container.contains(.issuedAt) {
+                issuedAt = try container.decode(Date.self, forKey: .issuedAt)
+            }
+            
+            json = .init(try container.decode(String.self, forKey: .rawValue))
         }
         
         // Attempt to decode JSON data
