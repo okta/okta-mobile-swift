@@ -1,7 +1,7 @@
 version: 2.1
 
 orbs:
-  general-platform-helpers: okta/general-platform-helpers@1.8
+  general-platform-helpers: okta/general-platform-helpers@1.9
   macos: circleci/macos@2
 
 executors:
@@ -234,12 +234,10 @@ workflows:
 
   semgrep:
     jobs:
-      - general-platform-helpers/job-semgrep-prepare:
-          name: semgrep-prepare
       - general-platform-helpers/job-semgrep-scan:
           name: semgrep-scan
-          requires:
-            - semgrep-prepare
+          context:
+            - static-analysis
 
   security-scan:
     jobs:
@@ -248,11 +246,9 @@ workflows:
             branches:
               only:
                 - master
-      - general-platform-helpers/job-snyk-prepare:
-          name: prepare-snyk
-          requires:
-            - setup
       - snyk-scan:
           name: execute-snyk
+          context:
+            - static-analysis
           requires:
-            - prepare-snyk
+            - setup
