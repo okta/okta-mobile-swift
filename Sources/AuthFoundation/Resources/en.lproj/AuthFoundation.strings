@@ -74,6 +74,9 @@
 "duplicate_token_added" = "Could not add a new token, since a duplicate was found.";
 "invalid_configuration" = "This token does not match the client configuration.";
 
+/* ClaimError */
+"missing_required_value" = "The token response is missing a required value for key \"%@\".";
+
 /* CredentialError */
 "credential_metadata_consistency" = "Metadata associated with a credential has become inconsistent with its value in storage.";
 "credential_incorrect_configuration" = "The credential's token does not match the client configuration supplied.";

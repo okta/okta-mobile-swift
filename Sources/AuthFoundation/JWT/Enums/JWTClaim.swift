@@ -355,7 +355,10 @@ public extension HasClaims where ClaimType == JWTClaim {
     }
     
     /// Returns the Authentication Context Class Reference for this token.
-    var authenticationClass: String? { self[.authContextClassReference] }
+    var authenticationClassReference: [String]? {
+        let value: String? = value(for: .authContextClassReference)
+        return value?.components(separatedBy: .whitespaces)
+    }
     
     /// The list of authentication methods included in this token, which defines the list of methods that were used to authenticate the user.
     ///
@@ -364,5 +367,7 @@ public extension HasClaims where ClaimType == JWTClaim {
     ///   // The user authenticated with an MFA factor.
     /// }
     /// ```
-    var authenticationMethods: [AuthenticationMethod]? { arrayValue(AuthenticationMethod.self, for: .authMethodsReference) }
+    var authenticationMethods: [AuthenticationMethod]? {
+        value(for: .authMethodsReference)
+    }
 }

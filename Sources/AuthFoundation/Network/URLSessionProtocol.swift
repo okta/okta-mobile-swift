@@ -29,6 +29,7 @@ public protocol URLSessionDataTaskProtocol {
 }
 
 extension URLSession: URLSessionProtocol {
+    @_documentation(visibility: internal)
     public func dataTaskWithRequest(_ request: URLRequest, completionHandler: @escaping (Data?, URLResponse?, Error?) -> Void) -> URLSessionDataTaskProtocol {
         dataTask(with: request, completionHandler: completionHandler)
     }

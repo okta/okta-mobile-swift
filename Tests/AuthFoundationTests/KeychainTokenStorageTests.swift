@@ -35,7 +35,7 @@ final class KeychainTokenStorageTests: XCTestCase {
         "v_Data": Data()
     ] as CFDictionary
     
-    let token = Token(id: "TokenId",
+    let token = try! Token(id: "TokenId",
                       issuedAt: Date(),
                       tokenType: "Bearer",
                       expiresIn: 300,

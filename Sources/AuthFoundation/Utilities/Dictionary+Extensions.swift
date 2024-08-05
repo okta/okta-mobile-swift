@@ -13,6 +13,7 @@
 import Foundation
 
 extension Dictionary where Key == String, Value == String {
+    @_documentation(visibility: internal)
     public var percentQueryEncoded: String {
         var cs = CharacterSet.urlQueryAllowed
         cs.remove("+")
@@ -30,6 +31,7 @@ extension Dictionary where Key == String, Value == String {
 }
 
 extension Dictionary where Key == String, Value == (any APIRequestArgument)? {
+    @_documentation(visibility: internal)
     public var percentQueryEncoded: String {
         compactMapValues { $0?.stringValue }.percentQueryEncoded
     }

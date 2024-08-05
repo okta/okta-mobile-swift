@@ -39,12 +39,16 @@ You can use AuthFoundation when you want to:
 
 ### JWT and Token Verification
 
+- <doc:WorkingWithClaims>
 - ``JWT``
 - ``JWK``
 - ``JWKS``
 - ``JWTClaim``
 - ``HasClaims``
+- ``Claim``
 - ``JSONClaimContainer``
+- ``JSON``
+- ``AnyJSON``
 - ``ClaimConvertable``
 - ``IsClaim``
 - ``Expires``
@@ -71,48 +75,48 @@ You can use AuthFoundation when you want to:
 
 ### Networking
 
-- ``APIClient``
-- ``APIClientDelegate``
-- ``APIClientConfiguration``
-- ``APIContentType``
-- ``APIRequest``
-- ``APIRequestBody``
-- ``APIRequestArgument``
-- ``APIRequestMethod``
-- ``APIResponse``
-- ``APIResponseResult``
-- ``APIRateLimit``
-- ``APIRetry``
 - ``APIAuthorization``
+- ``APIClientConfiguration``
+- ``APIClientDelegate``
+- ``APIClient``
+- ``APIContentType``
 - ``APIParsingContext``
-- ``OAuth2APIRequest``
-- ``JSONDecodable``
+- ``APIRateLimit``
+- ``APIRequestArgument``
+- ``APIRequestBody``
+- ``APIRequestMethod``
+- ``APIRequest``
+- ``APIResponseResult``
+- ``APIResponse``
+- ``APIRetry``
 - ``Empty``
+- ``JSONDecodable``
+- ``OAuth2APIRequest``
 
 ### Error Types
 
 - ``APIClientError``
+- ``AuthenticationError``
+- ``ClaimError``
+- ``CredentialError``
+- ``JSONError``
+- ``JWTError``
+- ``KeychainError``
 - ``OAuth2Error``
 - ``OAuth2ServerError``
 - ``OktaAPIError``
-- ``CredentialError``
 - ``TokenError``
-- ``JWTError``
-- ``KeychainError``
-- ``AuthenticationError``
-- ``JSONValueError``
 
 ### Migration and versioning
 
 - ``SDKVersion``
 - ``SDKVersionMigrator``
-- ``Version``
 
 ### Internals and mocking
 
 - ``DelegateCollection``
-- ``UsesDelegateCollection``
-- ``URLSessionProtocol``
 - ``URLSessionDataTaskProtocol``
-- ``Weak``
+- ``URLSessionProtocol``
+- ``UsesDelegateCollection``
 - ``WeakCollection``
+- ``Weak``

@@ -63,17 +63,17 @@ final class DefaultCredentialDataSourceTests: XCTestCase {
     func testCredentials() throws {
         XCTAssertEqual(dataSource.credentialCount, 0)
         
-        let token = Token(id: "TokenId",
-                          issuedAt: Date(),
-                          tokenType: "Bearer",
-                          expiresIn: 300,
-                          accessToken: "abcd123",
-                          scope: "openid",
-                          refreshToken: nil,
-                          idToken: nil,
-                          deviceSecret: nil,
-                          context: Token.Context(configuration: configuration,
-                                                 clientSettings: nil))
+        let token = try! Token(id: "TokenId",
+                               issuedAt: Date(),
+                               tokenType: "Bearer",
+                               expiresIn: 300,
+                               accessToken: "abcd123",
+                               scope: "openid",
+                               refreshToken: nil,
+                               idToken: nil,
+                               deviceSecret: nil,
+                               context: Token.Context(configuration: configuration,
+                                                      clientSettings: nil))
         
         XCTAssertFalse(dataSource.hasCredential(for: token))
         

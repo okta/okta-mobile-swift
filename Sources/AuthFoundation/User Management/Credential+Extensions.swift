@@ -16,6 +16,9 @@ import Foundation
 import FoundationNetworking
 #endif
 
+/// Custom notifications sent from the SDK for key events.
+///
+/// When important events occur within the SDK, your application may need to update its state when the default credential changes. Therefore you can observe the `defaultCredentialChanged` notification.
 extension Notification.Name {
     /// Notification broadcast when the ``Credential/default`` value changes.
     public static let defaultCredentialChanged = Notification.Name("com.okta.defaultCredentialChanged")

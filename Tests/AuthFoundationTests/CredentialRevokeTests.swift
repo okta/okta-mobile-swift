@@ -19,19 +19,19 @@ final class CredentialTests: XCTestCase {
     var credential: Credential!
     var urlSession: URLSessionMock!
 
-    let token = Token(id: "TokenId",
-                      issuedAt: Date(),
-                      tokenType: "Bearer",
-                      expiresIn: 300,
-                      accessToken: "abcd123",
-                      scope: "openid",
-                      refreshToken: "refresh123",
-                      idToken: nil,
-                      deviceSecret: "device123",
-                      context: Token.Context(configuration: .init(baseURL: URL(string: "https://example.com/oauth2/default")!,
-                                                                  clientId: "clientid",
-                                                                  scopes: "openid"),
-                                             clientSettings: [ "client_id": "foo" ]))
+    let token = try! Token(id: "TokenId",
+                           issuedAt: Date(),
+                           tokenType: "Bearer",
+                           expiresIn: 300,
+                           accessToken: "abcd123",
+                           scope: "openid",
+                           refreshToken: "refresh123",
+                           idToken: nil,
+                           deviceSecret: "device123",
+                           context: Token.Context(configuration: .init(baseURL: URL(string: "https://example.com/oauth2/default")!,
+                                                                       clientId: "clientid",
+                                                                       scopes: "openid"),
+                                                  clientSettings: [ "client_id": "foo" ]))
 
     override func setUpWithError() throws {
         coordinator = MockCredentialCoordinator()

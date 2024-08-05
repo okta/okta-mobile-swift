@@ -15,6 +15,7 @@ A variety of types contain claims, which are identified by types that conform to
 Some of these types include:
 
 * ``JWT``
+* ``Token``
 * ``UserInfo``
 * ``TokenInfo``
 * ``OpenIdConfiguration``
@@ -49,6 +50,30 @@ if let identifier = token.idToken?[.subject] {
 ```
 
 When working with claims, the type of enum is defined by the conforming type, which can help give you an insight into the possible options available to you. 
+
+### Value conversion functions
+
+Many types that conform to ``ClaimConvertable`` can transform values from a claims payload to a convenient type, but using keyed subscripting will always return an optional value. If you want to ensure that the claim you're retrieving exists, and is of the proper type, you can use the `value` functions available within the ``HasClaims`` protocol.
+
+These functions include both throwing and optional variations, and are used from within the subscript convenience functions.
+
+For example:
+
+```
+if let registrationUrl: URL = try openIdConfiguration.value(for: .registrationEndpoint) {
+    // Use the value
+}
+```
+
+This works for dictionaries and array values as well.
+
+```
+let scopes: [String] = try openIdConfiguration.value(for: .scopesSupported)
+
+
+// Or
+let profile: [String: String] = try idToken.value(for: "custom_claim")
+```
 
 ### Convenience properties
 

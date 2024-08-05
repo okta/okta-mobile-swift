@@ -209,12 +209,21 @@ public final class OAuth2Client {
                         
                         switch result {
                         case .success(let response):
-                            let newToken = response.result.token(merging: token)
-                            
-                            self.delegateCollection.invoke { $0.oauth(client: self, didRefresh: token, replacedWith: newToken) }
-                            NotificationCenter.default.post(name: .tokenRefreshed, object: newToken)
-                            action.finish(.success(newToken))
-                            
+                            do {
+                                let newToken = try response.result.token(merging: token)
+                                
+                                self.delegateCollection.invoke { $0.oauth(client: self, didRefresh: token, replacedWith: newToken) }
+                                NotificationCenter.default.post(name: .tokenRefreshed, object: newToken)
+                                action.finish(.success(newToken))
+                            } catch {
+                                self.delegateCollection.invoke { $0.oauth(client: self, didRefresh: token, replacedWith: nil) }
+                                
+                                NotificationCenter.default.post(name: .tokenRefreshFailed,
+                                                                object: token,
+                                                                userInfo: ["error": error])
+
+                                action.finish(.failure(.error(error)))
+                            }
                         case .failure(let error):
                             self.delegateCollection.invoke { $0.oauth(client: self, didRefresh: token, replacedWith: nil) }
                             

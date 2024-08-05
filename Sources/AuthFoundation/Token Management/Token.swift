@@ -13,7 +13,9 @@
 import Foundation
 
 /// Token information representing a user's access to a resource server, including access token, refresh token, and other related information.
-public final class Token: Codable, Equatable, Hashable, Expires {
+public final class Token: Codable, Equatable, Hashable, JSONClaimContainer, Expires {
+    public typealias ClaimType = TokenClaim
+
     /// The object used to ensure ID tokens are valid.
     public static var idTokenValidator: IDTokenValidator = DefaultIDTokenValidator()
     
@@ -22,6 +24,11 @@ public final class Token: Codable, Equatable, Hashable, Expires {
     
     /// The object used to ensure device secrets are validated against its associated ID token.
     public static var deviceSecretValidator: TokenHashValidator = DefaultTokenHashValidator(hashKey: .deviceSecret)
+    
+    /// Coordinates important operations during token exchange.
+    ///
+    /// > Note: This property and interface is currently marked as internal, but may be exposed publicly in the future.
+    static var exchangeCoordinator: TokenExchangeCoordinator = DefaultTokenExchangeCoordinator()
     
     /// The unique identifier for this token.
     public internal(set) var id: String
@@ -39,10 +46,10 @@ public final class Token: Codable, Equatable, Hashable, Expires {
     public let accessToken: String
     
     /// The scopes requested when this token was generated.
-    public let scope: String?
+    public var scope: String? { self[.scope] }
     
     /// The refresh token, if requested.
-    public let refreshToken: String?
+    public var refreshToken: String? { self[.refreshToken] }
     
     /// The ID token, if requested.
     ///
@@ -53,13 +60,20 @@ public final class Token: Codable, Equatable, Hashable, Expires {
     public let context: Context
     
     /// The Device secret, if requested in scope.
-    public let deviceSecret: String?
+    public var deviceSecret: String? { self[.deviceSecret] }
+    
+    /// The type of token issued to the client when using Token Exchange Flow.
+    public var issuedTokenType: String? { self[.issuedTokenType] }
+    
+    /// The claim payload container for this token
+    public var payload: [String: Any] { jsonPayload.jsonValue.anyValue as? [String: Any] ?? [:] }
     
     /// Indicates whether or not the token is being refreshed.
     public var isRefreshing: Bool {
         refreshAction != nil
     }
     
+    let jsonPayload: AnyJSON
     internal var refreshAction: CoalescedResult<Result<Token, OAuth2Error>>?
 
     /// Return the relevant token string for the given type.
@@ -133,6 +147,9 @@ public final class Token: Codable, Equatable, Hashable, Expires {
         }
     }
     
+    @_documentation(visibility: private)
+    public static let jsonDecoder = JSONDecoder()
+    
     public static func == (lhs: Token, rhs: Token) -> Bool {
         lhs.context == rhs.context &&
         lhs.accessToken == rhs.accessToken &&
@@ -150,82 +167,51 @@ public final class Token: Codable, Equatable, Hashable, Expires {
         hasher.combine(deviceSecret)
     }
 
-    required init(id: String,
-                  issuedAt: Date,
-                  tokenType: String,
-                  expiresIn: TimeInterval,
-                  accessToken: String,
-                  scope: String?,
-                  refreshToken: String?,
-                  idToken: JWT?,
-                  deviceSecret: String?,
-                  context: Context)
+    init(id: String,
+         issuedAt: Date,
+         context: Context,
+         json: AnyJSON) throws
     {
         self.id = id
         self.issuedAt = issuedAt
-        self.tokenType = tokenType
-        self.expiresIn = expiresIn
-        self.accessToken = accessToken
-        self.scope = scope
-        self.refreshToken = refreshToken
-        self.idToken = idToken
-        self.deviceSecret = deviceSecret
         self.context = context
+        self.jsonPayload = json
+        
+        let payload = json.jsonValue.anyValue as? [String: Any] ?? [:]
+        if let value = payload[TokenClaim.idToken.rawValue] as? String {
+            idToken = try JWT(value)
+        } else {
+            idToken = nil
+        }
+        
+        // Ensure an access token is provided.
+        if let value: String = TokenClaim.optionalValue(.accessToken, in: payload) {
+            accessToken = value
+        }
+        
+        // When the custom MFA attestation ACR value is used, allow for
+        // an empty / unspecified access token.
+        else if let acrValues = idToken?.authenticationClassReference,
+                acrValues.contains("urn:okta:app:mfa:attestation")
+        {
+            accessToken = ""
+        }
+        
+        // Throw an error when no access token is available.
+        else {
+            throw ClaimError.missingRequiredValue(key: TokenClaim.accessToken.rawValue)
+        }
+
+        tokenType = try TokenClaim.value(.tokenType, in: payload)
+        expiresIn = try TokenClaim.value(.expiresIn, in: payload)
     }
     
-    public required convenience init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: CodingKeys.self)
-        
-        let context: Context
-        if container.contains(.context) {
-            context = try container.decode(Context.self, forKey: .context)
-        } else if let configuration = decoder.userInfo[.apiClientConfiguration] as? OAuth2Client.Configuration {
-            context = Context(configuration: configuration,
-                              clientSettings: decoder.userInfo[.clientSettings])
-        } else {
-            throw TokenError.contextMissing
-        }
-
-        let id: String
-        if let userInfoId = decoder.userInfo[.tokenId] as? String {
-            id = userInfoId
-        } else if container.contains(.id) {
-            id = try container.decode(String.self, forKey: .id)
-        } else {
-            id = UUID().uuidString
-        }
-
-        var idToken: JWT?
-        if let idTokenString = try container.decodeIfPresent(String.self, forKey: .idToken) {
-            idToken = try JWT(idTokenString)
-        }
-        
-        // There are some conditions where a missing or null access_token is acceptable.
-        // Detect this condition, and assign an empty string where necessary.
-        var accessToken: String
-        do {
-            accessToken = try container.decode(String.self, forKey: .accessToken)
-        } catch {
-            if let request = decoder.userInfo[.request] as? (any OAuth2TokenRequest),
-               let acrValues = request.acrValues,
-               acrValues.contains("urn:okta:app:mfa:attestation")
-            {
-                accessToken = ""
-            } else {
-                throw error
-            }
-        }
-        
-        self.init(id: id,
-                  issuedAt: try container.decodeIfPresent(Date.self, forKey: .issuedAt) ?? Date.nowCoordinated,
-                  tokenType: try container.decode(String.self, forKey: .tokenType),
-                  expiresIn: try container.decode(TimeInterval.self, forKey: .expiresIn),
-                  accessToken: accessToken,
-                  scope: try container.decodeIfPresent(String.self, forKey: .scope),
-                  refreshToken: try container.decodeIfPresent(String.self, forKey: .refreshToken),
-                  idToken: idToken,
-                  deviceSecret: try container.decodeIfPresent(String.self, forKey: .deviceSecret),
-                  context: context)
+    public func encode(to encoder: any Encoder) throws {
+        var container = encoder.container(keyedBy: CodingKeysV2.self)
+        try container.encode(id, forKey: .id)
+        try container.encodeIfPresent(issuedAt, forKey: .issuedAt)
+        try container.encode(context, forKey: .context)
+        try container.encode(jsonPayload.stringValue, forKey: .rawValue)
     }
 }
 
@@ -248,7 +234,7 @@ extension Token {
 #endif
 
 extension Token {
-    enum CodingKeys: String, CodingKey, CaseIterable {
+    enum CodingKeysV1: String, CodingKey, CaseIterable {
         case id
         case issuedAt
         case tokenType
@@ -260,8 +246,16 @@ extension Token {
         case deviceSecret
         case context
     }
+
+    enum CodingKeysV2: String, CodingKey, CaseIterable {
+        case id
+        case issuedAt
+        case context
+        case rawValue
+    }
 }
 
+@_documentation(visibility: private)
 extension CodingUserInfoKey {
     // swiftlint:disable force_unwrapping
     public static let tokenId = CodingUserInfoKey(rawValue: "tokenId")!
@@ -269,4 +263,24 @@ extension CodingUserInfoKey {
     public static let clientSettings = CodingUserInfoKey(rawValue: "clientSettings")!
     public static let request = CodingUserInfoKey(rawValue: "request")!
     // swiftlint:enable force_unwrapping
+}
+
+extension Token {
+    public enum TokenClaim: String, IsClaim, CaseIterable {
+        // Core OAuth 2.0 (RFC 6749)
+        case accessToken = "access_token"
+        case tokenType = "token_type"
+        case expiresIn = "expires_in"
+        case refreshToken = "refresh_token"
+        case scope
+        
+        // OpenID Connect (OIDC)
+        case idToken = "id_token"
+        
+        // OAuth 2.0 Token Exchange (RFC 8693)
+        case issuedTokenType = "issued_token_type"
+
+        // OpenID Connect Native SSO for Mobile Apps 1.0
+        case deviceSecret = "device_secret"
+    }
 }
