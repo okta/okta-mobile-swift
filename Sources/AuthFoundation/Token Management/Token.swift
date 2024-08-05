@@ -187,7 +187,7 @@ public final class Token: Codable, Equatable, Hashable, JSONClaimContainer, Expi
         // Ensure an access token is provided.
         if let value: String = TokenClaim.optionalValue(.accessToken, in: payload) {
             accessToken = value
-        } 
+        }
         
         // When the custom MFA attestation ACR value is used, allow for
         // an empty / unspecified access token.
