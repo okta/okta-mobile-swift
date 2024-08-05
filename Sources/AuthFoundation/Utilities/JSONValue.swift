@@ -111,7 +111,7 @@ public enum JSON: Equatable {
     /// Initializes a JSON object from a variety of supported types.
     /// - Parameter value: Value to represent as a JSON stru ture.
     public init(_ value: Any?) throws {
-        guard let value = value 
+        guard let value = value
         else {
             self = .null
             return
