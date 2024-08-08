@@ -365,6 +365,11 @@ extension AuthorizationCodeFlow: OAuth2ClientDelegate {
 }
 
 extension OAuth2Client {
+    /// Creates a new Authorization Code flow configured to use this OAuth2Client.
+    /// - Parameters:
+    ///   - redirectUri: Redirect URI
+    ///   - additionalParameters: Additional parameters to pass to the flow
+    /// - Returns: Initialized authorization flow.
     public func authorizationCodeFlow(
         redirectUri: URL,
         additionalParameters: [String: String]? = nil) -> AuthorizationCodeFlow

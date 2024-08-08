@@ -1,5 +1,5 @@
 //
-// Copyright (c) 2021-Present, Okta, Inc. and/or its affiliates. All rights reserved.
+// Copyright (c) 2024-Present, Okta, Inc. and/or its affiliates. All rights reserved.
 // The Okta software accompanied by this notice is provided pursuant to the Apache License, Version 2.0 (the "License.")
 //
 // You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0.
@@ -15,8 +15,8 @@ import XCTest
 @testable import AuthFoundation
 @testable import OktaOAuth2
 
-final class TokenExchangeFlowDelegateRecorder: AuthenticationDelegate {
-    typealias Flow = TokenExchangeFlow
+final class JWTAuthorizationFlowDelegateRecorder: AuthenticationDelegate {
+    typealias Flow = JWTAuthorizationFlow
     
     var token: Token?
     var error: OAuth2Error?
@@ -41,19 +41,19 @@ final class TokenExchangeFlowDelegateRecorder: AuthenticationDelegate {
     }
 }
 
-final class TokenExchangeFlowTests: XCTestCase {
+
+final class JWTAuthorizationFlowTests: XCTestCase {
     let issuer = URL(string: "https://example.okta.com")!
     let redirectUri = URL(string: "com.example:/callback")!
     let urlSession = URLSessionMock()
     var client: OAuth2Client!
-    var flow: TokenExchangeFlow!
-    
-    private let tokens: [TokenExchangeFlow.TokenType] = [.actor(type: .deviceSecret, value: "secret"), .subject(type: .idToken, value: "id_token")]
+    var flow: JWTAuthorizationFlow!
+    var jwt: JWT!
     
     override func setUpWithError() throws {
         client = OAuth2Client(baseURL: issuer,
                               clientId: "clientId",
-                              scopes: "profile openid device_sso",
+                              scopes: "profile openid",
                               session: urlSession)
         JWK.validator = MockJWKValidator()
         Token.idTokenValidator = MockIDTokenValidator()
@@ -69,7 +69,9 @@ final class TokenExchangeFlowTests: XCTestCase {
                           data: try data(from: .module, for: "token", in: "MockResponses"),
                           contentType: "application/json")
         
-        flow = client.tokenExchangeFlow(audience: .default)
+        flow = client.jwtAuthorizationFlow()
+        
+        jwt = try JWT(JWT.mockIDToken)
     }
     
     override func tearDownWithError() throws {
@@ -78,15 +80,14 @@ final class TokenExchangeFlowTests: XCTestCase {
     }
 
     func testWithDelegate() throws {
-        let delegate = TokenExchangeFlowDelegateRecorder()
+        let delegate = JWTAuthorizationFlowDelegateRecorder()
         flow.add(delegate: delegate)
         
         XCTAssertFalse(flow.isAuthenticating)
         XCTAssertFalse(delegate.started)
         
-        // Exchange code
-        let expect = expectation(description: "Expected `resume` succeeded")
-        flow.start(with: tokens) { result in
+        let expect = expectation(description: "Expected `start` succeeded")
+        flow.start(with: jwt) { result in
             expect.fulfill()
         }
         
@@ -105,19 +106,19 @@ final class TokenExchangeFlowTests: XCTestCase {
         }))
 
         XCTAssertEqual(request.url?.absoluteString, "https://example.okta.com/oauth2/v1/token")
-        XCTAssertEqual(request.bodyString, "actor_token=secret&actor_token_type=urn:x-oath:params:oauth:token-type:device-secret&audience=api:%2F%2Fdefault&client_id=clientId&grant_type=urn:ietf:params:oauth:grant-type:token-exchange&scope=profile+openid+device_sso&subject_token=id_token&subject_token_type=urn:ietf:params:oauth:token-type:id_token")
+        XCTAssertEqual(request.bodyString, "assertion=\(JWT.mockIDToken)&client_id=clientId&grant_type=urn:ietf:params:oauth:grant-type:jwt-bearer&scope=profile+openid")
     }
     
     func testAuthenticationSucceeded() throws {
-        let authorizeExpectation = expectation(description: "Expected `resume` succeeded")
+        let authorizeExpectation = expectation(description: "Expected `start` succeeded")
         
         XCTAssertFalse(flow.isAuthenticating)
         
-        let expect = expectation(description: "resume")
-        flow.start(with: tokens) { result in
+        let expect = expectation(description: "start")
+        flow.start(with: jwt) { result in
             switch result {
             case .success:
-                XCTAssertTrue(self.flow.isAuthenticating)
+                XCTAssertFalse(self.flow.isAuthenticating)
                 
                 authorizeExpectation.fulfill()
             case .failure(let error):
@@ -139,7 +140,7 @@ final class TokenExchangeFlowTests: XCTestCase {
         }))
 
         XCTAssertEqual(request.url?.absoluteString, "https://example.okta.com/oauth2/v1/token")
-        XCTAssertEqual(request.bodyString, "actor_token=secret&actor_token_type=urn:x-oath:params:oauth:token-type:device-secret&audience=api:%2F%2Fdefault&client_id=clientId&grant_type=urn:ietf:params:oauth:grant-type:token-exchange&scope=profile+openid+device_sso&subject_token=id_token&subject_token_type=urn:ietf:params:oauth:token-type:id_token")
+        XCTAssertEqual(request.bodyString, "assertion=\(JWT.mockIDToken)&client_id=clientId&grant_type=urn:ietf:params:oauth:grant-type:jwt-bearer&scope=profile+openid")
     }
     
 #if swift(>=5.5.1) && !os(Linux)
@@ -147,7 +148,7 @@ final class TokenExchangeFlowTests: XCTestCase {
     func testAsyncAuthenticationSucceeded() async throws {
         XCTAssertFalse(flow.isAuthenticating)
         
-        let _ = try await flow.start(with: tokens)
+        let _ = try await flow.start(with: jwt)
         
         XCTAssertFalse(flow.isAuthenticating)
         
@@ -158,7 +159,7 @@ final class TokenExchangeFlowTests: XCTestCase {
         }))
 
         XCTAssertEqual(request.url?.absoluteString, "https://example.okta.com/oauth2/v1/token")
-        XCTAssertEqual(request.bodyString, "actor_token=secret&actor_token_type=urn:x-oath:params:oauth:token-type:device-secret&audience=api:%2F%2Fdefault&client_id=clientId&grant_type=urn:ietf:params:oauth:grant-type:token-exchange&scope=profile+openid+device_sso&subject_token=id_token&subject_token_type=urn:ietf:params:oauth:token-type:id_token")
+        XCTAssertEqual(request.bodyString, "assertion=\(JWT.mockIDToken)&client_id=clientId&grant_type=urn:ietf:params:oauth:grant-type:jwt-bearer&scope=profile+openid")
     }
 #endif
 }

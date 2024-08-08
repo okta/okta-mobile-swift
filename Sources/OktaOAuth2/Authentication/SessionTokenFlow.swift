@@ -264,6 +264,11 @@ extension SessionTokenFlow: OAuth2ClientDelegate {
 }
 
 extension OAuth2Client {
+    /// Creates a new Session Token flow configured to use this OAuth2Client.
+    /// - Parameters:
+    ///   - redirectUri: Redirect URI
+    ///   - additionalParameters: Additional parameters to pass to the flow
+    /// - Returns: Initialized authorization flow.
     public func sessionTokenFlow(redirectUri: URL,
                                  additionalParameters: [String: String]? = nil) -> SessionTokenFlow
     {
