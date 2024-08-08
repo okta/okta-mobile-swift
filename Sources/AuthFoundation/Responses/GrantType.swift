@@ -20,6 +20,7 @@ public enum GrantType: Codable, Hashable, IsClaim {
     case password
     case deviceCode
     case tokenExchange
+    case jwtBearer
     case otp
     case oob
     case otpMFA
@@ -35,6 +36,7 @@ private let grantTypeMapping: [String: GrantType] = [
     "refresh_token": .refreshToken,
     "password": .password,
     "urn:ietf:params:oauth:grant-type:token-exchange": .tokenExchange,
+    "urn:ietf:params:oauth:grant-type:jwt-bearer": .jwtBearer,
     "urn:ietf:params:oauth:grant-type:device_code": .deviceCode,
     "urn:okta:params:oauth:grant-type:otp": .otp,
     "urn:okta:params:oauth:grant-type:oob": .oob,
@@ -69,6 +71,8 @@ extension GrantType: RawRepresentable {
             return "password"
         case .tokenExchange:
             return "urn:ietf:params:oauth:grant-type:token-exchange"
+        case .jwtBearer:
+            return "urn:ietf:params:oauth:grant-type:jwt-bearer"
         case .deviceCode:
             return "urn:ietf:params:oauth:grant-type:device_code"
         case .otp:
