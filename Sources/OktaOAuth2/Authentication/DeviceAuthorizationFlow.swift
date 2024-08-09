@@ -370,6 +370,8 @@ extension DeviceAuthorizationFlow: OAuth2ClientDelegate {
 }
 
 extension OAuth2Client {
+    /// Creates a new Device Authorization flow configured to use this OAuth2Client.
+    /// - Returns: Initialized authorization flow.
     public func deviceAuthorizationFlow() -> DeviceAuthorizationFlow {
         DeviceAuthorizationFlow(client: self)
     }

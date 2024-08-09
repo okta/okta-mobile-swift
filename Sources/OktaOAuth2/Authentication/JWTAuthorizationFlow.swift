@@ -1,5 +1,5 @@
 //
-// Copyright (c) 2021-Present, Okta, Inc. and/or its affiliates. All rights reserved.
+// Copyright (c) 2024-Present, Okta, Inc. and/or its affiliates. All rights reserved.
 // The Okta software accompanied by this notice is provided pursuant to the Apache License, Version 2.0 (the "License.")
 //
 // You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0.
@@ -13,17 +13,13 @@
 import Foundation
 import AuthFoundation
 
-/// An authentication flow class that implements the Resource Owner Flow exchange.
-///
-/// This simple authentication flow permits a suer to authenticate using a simple username and password. As such, the configuration is straightforward.
-///
-/// > Important: Resource Owner authentication does not support MFA or other more secure authentication models, and is not recommended for production applications. Please use the DirectAuth SDK's DirectAuthenticationFlow class instead.
-public class ResourceOwnerFlow: AuthenticationFlow {
+/// An authentication flow class that implements the JWT Authorization Bearer Flow, for authenticating users using JWTs signed by a trusted key.
+public class JWTAuthorizationFlow: AuthenticationFlow {
     /// The OAuth2Client this authentication flow will use.
     public let client: OAuth2Client
     
     /// Indicates whether or not this flow is currently in the process of authenticating a user.
-    /// ``ResourceOwnerFlow/init(issuer:clientId:scopes:)``
+    /// ``JWTAuthorizationFlow/init(issuer:clientId:scopes:)``
     public private(set) var isAuthenticating: Bool = false {
         didSet {
             guard oldValue != isAuthenticating else {
@@ -52,6 +48,8 @@ public class ResourceOwnerFlow: AuthenticationFlow {
                                        scopes: scopes))
     }
     
+    /// Initializer to construct an authentication flow from an OAuth2Client.
+    /// - Parameter client: `OAuth2Client` instance to authenticate with.
     public init(client: OAuth2Client) {
         // Ensure this SDK's static version is included in the user agent.
         SDKVersion.register(sdk: Version)
@@ -78,12 +76,11 @@ public class ResourceOwnerFlow: AuthenticationFlow {
                   scopes: config.scopes)
     }
     
-    /// Authenticates using the supplied username and password.
+    /// Authenticates using the supplied JWT bearer assertion.
     /// - Parameters:
-    ///   - username: Username
-    ///   - password: Password
+    ///   - assertion: JWT Assertion
     ///   - completion: Completion invoked when a response is received.
-    public func start(username: String, password: String, completion: @escaping (Result<Token, OAuth2Error>) -> Void) {
+    public func start(with assertion: JWT, completion: @escaping (Result<Token, OAuth2Error>) -> Void) {
         isAuthenticating = true
 
         client.openIdConfiguration { result in
@@ -92,8 +89,7 @@ public class ResourceOwnerFlow: AuthenticationFlow {
                 let request = TokenRequest(openIdConfiguration: configuration,
                                            clientId: self.client.configuration.clientId,
                                            scope: self.client.configuration.scopes,
-                                           username: username,
-                                           password: password)
+                                           assertion: assertion)
                 self.client.exchange(token: request) { result in
                     self.reset()
                     
@@ -125,13 +121,14 @@ public class ResourceOwnerFlow: AuthenticationFlow {
 
 #if swift(>=5.5.1)
 @available(iOS 13.0, tvOS 13.0, macOS 10.15, watchOS 6, *)
-extension ResourceOwnerFlow {
-    /// Asynchronously authenticates with the Resource Owner flow.
+extension JWTAuthorizationFlow {
+    /// Asynchronously authenticates with a JWT bearer assertion.
     ///
-    /// - Returns: The information a user should be presented with to continue authorization on a different device.
-    public func start(username: String, password: String) async throws -> Token {
+    /// - Parameter jwt: JWT Assertion
+    /// - Returns: The token resulting from signing in.
+    public func start(with assertion: JWT) async throws -> Token {
         try await withCheckedThrowingContinuation { continuation in
-            start(username: username, password: password) { result in
+            start(with: assertion) { result in
                 continuation.resume(with: result)
             }
         }
@@ -139,18 +136,16 @@ extension ResourceOwnerFlow {
 }
 #endif
 
-extension ResourceOwnerFlow: UsesDelegateCollection {
+extension JWTAuthorizationFlow: UsesDelegateCollection {
     public typealias Delegate = AuthenticationDelegate
 }
 
-extension ResourceOwnerFlow: OAuth2ClientDelegate {
-    
-}
+extension JWTAuthorizationFlow: OAuth2ClientDelegate {}
 
 extension OAuth2Client {
-    /// Creates a new Resource Owner flow configured to use this OAuth2Client.
+    /// Creates a new JWT Authorization flow configured to use this OAuth2Client.
     /// - Returns: Initialized authorization flow.
-    public func resourceOwnerFlow() -> ResourceOwnerFlow {
-        ResourceOwnerFlow(client: self)
+    public func jwtAuthorizationFlow() -> JWTAuthorizationFlow {
+        JWTAuthorizationFlow(client: self)
     }
 }
