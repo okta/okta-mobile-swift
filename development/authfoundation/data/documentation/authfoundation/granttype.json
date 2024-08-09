@@ -125,6 +125,7 @@
         "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/GrantType\/authorizationCode",
         "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/GrantType\/deviceCode",
         "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/GrantType\/implicit",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/GrantType\/jwtBearer",
         "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/GrantType\/oob",
         "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/GrantType\/oobMFA",
         "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/GrantType\/other(_:)",
@@ -690,6 +691,31 @@
   "title" : "GrantType.implicit",
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/granttype\/implicit"
+},
+"doc://AuthFoundation/documentation/AuthFoundation/GrantType/jwtBearer": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "case"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "jwtBearer"
+    }
+  ],
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/GrantType\/jwtBearer",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "GrantType.jwtBearer",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/granttype\/jwtbearer"
 },
 "doc://AuthFoundation/documentation/AuthFoundation/GrantType/oob": {
   "abstract" : [

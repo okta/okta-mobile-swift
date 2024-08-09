@@ -1627,6 +1627,165 @@
             "type" : "class"
           },
           {
+            "title" : "Classes",
+            "type" : "groupMarker"
+          },
+          {
+            "children" : [
+              {
+                "title" : "Initializers",
+                "type" : "groupMarker"
+              },
+              {
+                "path" : "\/documentation\/oktaoauth2\/jwtauthorizationflow\/init()",
+                "title" : "convenience init() throws",
+                "type" : "init"
+              },
+              {
+                "path" : "\/documentation\/oktaoauth2\/jwtauthorizationflow\/init(client:)",
+                "title" : "init(client: OAuth2Client)",
+                "type" : "init"
+              },
+              {
+                "path" : "\/documentation\/oktaoauth2\/jwtauthorizationflow\/init(issuer:clientid:scopes:)",
+                "title" : "convenience init(issuer: URL, clientId: String, scopes: String)",
+                "type" : "init"
+              },
+              {
+                "path" : "\/documentation\/oktaoauth2\/jwtauthorizationflow\/init(plist:)",
+                "title" : "convenience init(plist: URL) throws",
+                "type" : "init"
+              },
+              {
+                "title" : "Instance Properties",
+                "type" : "groupMarker"
+              },
+              {
+                "path" : "\/documentation\/oktaoauth2\/jwtauthorizationflow\/client",
+                "title" : "let client: OAuth2Client",
+                "type" : "property"
+              },
+              {
+                "path" : "\/documentation\/oktaoauth2\/jwtauthorizationflow\/delegatecollection",
+                "title" : "let delegateCollection: DelegateCollection<any AuthenticationDelegate>",
+                "type" : "property"
+              },
+              {
+                "path" : "\/documentation\/oktaoauth2\/jwtauthorizationflow\/isauthenticating",
+                "title" : "var isAuthenticating: Bool",
+                "type" : "property"
+              },
+              {
+                "title" : "Instance Methods",
+                "type" : "groupMarker"
+              },
+              {
+                "path" : "\/documentation\/oktaoauth2\/jwtauthorizationflow\/reset()",
+                "title" : "func reset()",
+                "type" : "method"
+              },
+              {
+                "path" : "\/documentation\/oktaoauth2\/jwtauthorizationflow\/start(with:)",
+                "title" : "func start(with: JWT) async throws -> Token",
+                "type" : "method"
+              },
+              {
+                "path" : "\/documentation\/oktaoauth2\/jwtauthorizationflow\/start(with:completion:)",
+                "title" : "func start(with: JWT, completion: (Result<Token, OAuth2Error>) -> Void)",
+                "type" : "method"
+              },
+              {
+                "title" : "Default Implementations",
+                "type" : "groupMarker"
+              },
+              {
+                "children" : [
+                  {
+                    "title" : "Instance Methods",
+                    "type" : "groupMarker"
+                  },
+                  {
+                    "path" : "\/documentation\/oktaoauth2\/jwtauthorizationflow\/api(client:didsend:received:)",
+                    "title" : "func api(client: any APIClient, didSend: URLRequest, received: HTTPURLResponse)",
+                    "type" : "method"
+                  },
+                  {
+                    "path" : "\/documentation\/oktaoauth2\/jwtauthorizationflow\/api(client:didsend:received:requestid:ratelimit:)",
+                    "title" : "func api(client: any APIClient, didSend: URLRequest, received: APIClientError, requestId: String?, rateLimit: APIRateLimit?)",
+                    "type" : "method"
+                  },
+                  {
+                    "path" : "\/documentation\/oktaoauth2\/jwtauthorizationflow\/api(client:shouldretry:)",
+                    "title" : "func api(client: any APIClient, shouldRetry: URLRequest) -> APIRetry",
+                    "type" : "method"
+                  },
+                  {
+                    "path" : "\/documentation\/oktaoauth2\/jwtauthorizationflow\/api(client:willsend:)",
+                    "title" : "func api(client: any APIClient, willSend: inout URLRequest)",
+                    "type" : "method"
+                  }
+                ],
+                "path" : "\/documentation\/oktaoauth2\/jwtauthorizationflow\/apiclientdelegate-implementations",
+                "title" : "APIClientDelegate Implementations",
+                "type" : "symbol"
+              },
+              {
+                "children" : [
+                  {
+                    "title" : "Instance Methods",
+                    "type" : "groupMarker"
+                  },
+                  {
+                    "path" : "\/documentation\/oktaoauth2\/jwtauthorizationflow\/oauth(client:didrefresh:replacedwith:)",
+                    "title" : "func oauth(client: OAuth2Client, didRefresh: Token, replacedWith: Token?)",
+                    "type" : "method"
+                  },
+                  {
+                    "path" : "\/documentation\/oktaoauth2\/jwtauthorizationflow\/oauth(client:willrefresh:)",
+                    "title" : "func oauth(client: OAuth2Client, willRefresh: Token)",
+                    "type" : "method"
+                  }
+                ],
+                "path" : "\/documentation\/oktaoauth2\/jwtauthorizationflow\/oauth2clientdelegate-implementations",
+                "title" : "OAuth2ClientDelegate Implementations",
+                "type" : "symbol"
+              },
+              {
+                "children" : [
+                  {
+                    "title" : "Instance Methods",
+                    "type" : "groupMarker"
+                  },
+                  {
+                    "path" : "\/documentation\/oktaoauth2\/jwtauthorizationflow\/add(delegate:)",
+                    "title" : "func add(delegate: Self.Delegate)",
+                    "type" : "method"
+                  },
+                  {
+                    "path" : "\/documentation\/oktaoauth2\/jwtauthorizationflow\/remove(delegate:)",
+                    "title" : "func remove(delegate: Self.Delegate)",
+                    "type" : "method"
+                  },
+                  {
+                    "title" : "Type Aliases",
+                    "type" : "groupMarker"
+                  },
+                  {
+                    "path" : "\/documentation\/oktaoauth2\/jwtauthorizationflow\/delegate",
+                    "title" : "JWTAuthorizationFlow.Delegate",
+                    "type" : "typealias"
+                  }
+                ],
+                "path" : "\/documentation\/oktaoauth2\/jwtauthorizationflow\/usesdelegatecollection-implementations",
+                "title" : "UsesDelegateCollection Implementations",
+                "type" : "symbol"
+              }
+            ],
+            "path" : "\/documentation\/oktaoauth2\/jwtauthorizationflow",
+            "title" : "JWTAuthorizationFlow",
+            "type" : "class"
+          },
+          {
             "title" : "Protocols",
             "type" : "groupMarker"
           },
@@ -1709,6 +1868,11 @@
                   {
                     "path" : "\/documentation\/oktaoauth2\/authfoundation\/oauth2client\/deviceauthorizationflow()",
                     "title" : "func deviceAuthorizationFlow() -> DeviceAuthorizationFlow",
+                    "type" : "method"
+                  },
+                  {
+                    "path" : "\/documentation\/oktaoauth2\/authfoundation\/oauth2client\/jwtauthorizationflow()",
+                    "title" : "func jwtAuthorizationFlow() -> JWTAuthorizationFlow",
                     "type" : "method"
                   },
                   {

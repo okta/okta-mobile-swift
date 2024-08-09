@@ -199,6 +199,12 @@
     },
     {
       "identifiers" : [
+        "doc:\/\/OktaOAuth2\/documentation\/OktaOAuth2\/JWTAuthorizationFlow"
+      ],
+      "title" : "Classes"
+    },
+    {
+      "identifiers" : [
         "doc:\/\/OktaOAuth2\/documentation\/OktaOAuth2\/LogoutFlow",
         "doc:\/\/OktaOAuth2\/documentation\/OktaOAuth2\/LogoutFlowDelegate"
       ],
@@ -503,6 +509,40 @@
   "title" : "Introduction to Authentication Flows",
   "type" : "topic",
   "url" : "\/documentation\/oktaoauth2\/introductiontoauthenticationflows"
+},
+"doc://OktaOAuth2/documentation/OktaOAuth2/JWTAuthorizationFlow": {
+  "abstract" : [
+    {
+      "text" : "An authentication flow class that implements the JWT Authorization Bearer Flow, for authenticating users using JWTs signed by a trusted key.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "class"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "JWTAuthorizationFlow"
+    }
+  ],
+  "identifier" : "doc:\/\/OktaOAuth2\/documentation\/OktaOAuth2\/JWTAuthorizationFlow",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "JWTAuthorizationFlow"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "JWTAuthorizationFlow",
+  "type" : "topic",
+  "url" : "\/documentation\/oktaoauth2\/jwtauthorizationflow"
 },
 "doc://OktaOAuth2/documentation/OktaOAuth2/LogoutFlow": {
   "abstract" : [
