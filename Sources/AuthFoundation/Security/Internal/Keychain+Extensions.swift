@@ -10,7 +10,7 @@
 // See the License for the specific language governing permissions and limitations under the License.
 //
 
-#if os(iOS) || os(macOS) || os(tvOS) || os(watchOS)
+#if os(iOS) || os(macOS) || os(tvOS) || os(watchOS) || os(visionOS)
 
 import Foundation
 
@@ -251,6 +251,9 @@ extension Keychain.Search.Result: KeychainGettable, KeychainUpdatable, KeychainD
     }
 }
 
+fileprivate let _kSecAttrAccessibleAlways = "dk" as CFString
+fileprivate let _kSecAttrAccessibleAlwaysThisDeviceOnly = "dku" as CFString
+
 extension Keychain.Accessibility: RawRepresentable {
     public typealias RawValue = String
     
@@ -267,9 +270,9 @@ extension Keychain.Accessibility: RawRepresentable {
             self = .afterFirstUnlock
         case kSecAttrAccessibleAfterFirstUnlockThisDeviceOnly:
             self = .afterFirstUnlockThisDeviceOnly
-        case kSecAttrAccessibleAlways:
+        case _kSecAttrAccessibleAlways:
             self = .always
-        case kSecAttrAccessibleAlwaysThisDeviceOnly:
+        case _kSecAttrAccessibleAlwaysThisDeviceOnly:
             self = .alwaysThisDeviceOnly
         default:
             return nil
@@ -289,9 +292,9 @@ extension Keychain.Accessibility: RawRepresentable {
         case .afterFirstUnlockThisDeviceOnly:
             return kSecAttrAccessibleAfterFirstUnlockThisDeviceOnly as String
         case .always:
-            return kSecAttrAccessibleAlways as String
+            return _kSecAttrAccessibleAlways as String
         case .alwaysThisDeviceOnly:
-            return kSecAttrAccessibleAlwaysThisDeviceOnly as String
+            return _kSecAttrAccessibleAlwaysThisDeviceOnly as String
         }
     }
 }

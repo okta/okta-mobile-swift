@@ -215,7 +215,6 @@ public final class Token: Codable, Equatable, Hashable, JSONClaimContainer, Expi
     }
 }
 
-#if swift(>=5.5.1)
 @available(iOS 13.0, tvOS 13.0, macOS 10.15, watchOS 6, *)
 extension Token {
     /// Creates a new Token from a refresh token.
@@ -231,7 +230,6 @@ extension Token {
         }
     }
 }
-#endif
 
 extension Token {
     enum CodingKeysV1: String, CodingKey, CaseIterable {

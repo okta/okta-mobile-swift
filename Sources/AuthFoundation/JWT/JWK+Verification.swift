@@ -44,7 +44,7 @@ extension JWK {
                                          nil)
         }
         
-        #if os(iOS) || os(tvOS) || os(watchOS)
+        #if os(iOS) || os(tvOS) || os(watchOS) || os(visionOS)
         if #available(iOS 2.0, macCatalyst 13.0, tvOS 9.0, watchOS 2.0, *) {
             guard let padding = algorithm.secPadding,
                   let digest = algorithm.digest(data: data)

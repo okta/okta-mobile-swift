@@ -174,7 +174,6 @@ final class AuthorizationCodeFlowSuccessTests: XCTestCase {
         XCTAssertNotNil(token)
     }
 
-    #if swift(>=5.5.1)
     @available(iOS 13.0, tvOS 13.0, macOS 10.15, watchOS 6, *)
     func testWithAsync() async throws {
         // Ensure the initial state
@@ -199,7 +198,6 @@ final class AuthorizationCodeFlowSuccessTests: XCTestCase {
         XCTAssertFalse(flow.isAuthenticating)
         XCTAssertNotNil(token)
     }
-    #endif
     
     func testAuthorizationCodeFromURL() throws {
         typealias RedirectError = AuthorizationCodeFlow.RedirectError

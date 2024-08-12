@@ -283,7 +283,6 @@ public class DeviceAuthorizationFlow: AuthenticationFlow {
     }
 }
 
-#if swift(>=5.5.1)
 @available(iOS 13.0, tvOS 13.0, macOS 10.15, watchOS 6, *)
 extension DeviceAuthorizationFlow {
     /// Asynchronously initiates a device authentication flow.
@@ -314,7 +313,6 @@ extension DeviceAuthorizationFlow {
         }
     }
 }
-#endif
 
 extension DeviceAuthorizationFlow: UsesDelegateCollection {
     public typealias Delegate = DeviceAuthorizationFlowDelegate

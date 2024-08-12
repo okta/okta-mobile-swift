@@ -132,7 +132,6 @@ final class OAuth2ClientTests: XCTestCase {
                        "https://example.com/oauth2/v1/authorize")
     }
     
-    #if swift(>=5.5.1)
     @available(iOS 13.0, tvOS 13.0, macOS 10.15, watchOS 6, *)
     func testOpenIDConfigurationAsync() async throws {
         urlSession.expect("https://example.com/.well-known/openid-configuration",
@@ -146,7 +145,6 @@ final class OAuth2ClientTests: XCTestCase {
                            "https://example.com/oauth2/v1/authorize")
         }
     }
-    #endif
     
     func testJWKS() throws {
         urlSession.expect("https://example.com/.well-known/openid-configuration",
@@ -551,7 +549,6 @@ final class OAuth2ClientTests: XCTestCase {
         XCTAssertEqual(parameters["client_secret"], "supersecret")
     }
 
-    #if swift(>=5.5.1)
     @available(iOS 13.0, tvOS 13.0, macOS 10.15, watchOS 6, *)
     func testRefreshAsync() async throws {
         urlSession.expect("https://example.com/.well-known/openid-configuration",
@@ -574,5 +571,4 @@ final class OAuth2ClientTests: XCTestCase {
 
         try await client.revoke(token, type: .accessToken)
     }
-    #endif
 }

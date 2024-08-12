@@ -41,7 +41,6 @@ final class DirectAuth1FATests: XCTestCase {
         Token.resetToDefault()
     }
     
-#if swift(>=5.5.1)
     @available(iOS 13.0, tvOS 13.0, macOS 10.15, watchOS 6, *)
     func testUserAndPassword() async throws {
         // Ensure the initial state
@@ -101,5 +100,4 @@ final class DirectAuth1FATests: XCTestCase {
             XCTFail("Not expecting continuation status")
         }
     }
-#endif
 }

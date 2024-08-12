@@ -384,13 +384,14 @@ Only the last 4 major platform versions are officially supported, unless there a
 
 | Platform    | Supported | Best-Effort |
 | ----------- | --------- | ----------- |
-| iOS         | 12.0      | 10.0        |
-| tvOS        | 12.0      | 10.0        |
-| watchOS     | 8.0       | 7.0         |
+| iOS         | 13.0      | 12.0        |
+| tvOS        | 13.0      | 12.0        |
+| watchOS     | 7.0       | 7.0         |
+| visionOS    | 1.0       | 1.0         |
 | macCatalyst | 13.0      | 13.0        |
-| macOS       | 12.0      | 10.12       |
+| macOS       | 12.0      | 10.13       |
 
-Once a platform version becomes unsupported, dropping support for it will not be considered a breaking change and will be done in a minor release. For example, iOS 12 will cease to be supported when iOS 16 gets released, and might be dropped in a minor release.
+Once a platform version becomes unsupported, dropping support for it will not be considered a breaking change and will be done in a minor release. For example, iOS 13 will cease to be supported when iOS 18 gets released, and might be dropped in a minor release.
 
 In the case of macOS, the yearly named releases are considered a major platform version for this Policy, regardless of the actual version numbers.
 
@@ -431,7 +432,7 @@ Alternatively, if you wish to run tests within Linux, you can utilize Docker fro
 
 ```bash
 docker run --rm --privileged --interactive --tty \
-    --volume "$(pwd):/src" --workdir "/src" swift:5.6.1 \
+    --volume "$(pwd):/src" --workdir "/src" swift:latest \
     swift test
 ```
 

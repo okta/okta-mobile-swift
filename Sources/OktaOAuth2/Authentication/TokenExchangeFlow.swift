@@ -155,7 +155,6 @@ extension TokenExchangeFlow: OAuth2ClientDelegate {
     
 }
 
-#if swift(>=5.5.1)
 @available(iOS 13.0, tvOS 13.0, macOS 10.15, watchOS 6, *)
 extension TokenExchangeFlow {
     /// Asynchronously initiates a token exchange flow.
@@ -169,7 +168,6 @@ extension TokenExchangeFlow {
         }
     }
 }
-#endif
 
 extension OAuth2Client {
     /// Creates a new Token Exchange flow configured to use this OAuth2Client, using the supplied arguments.

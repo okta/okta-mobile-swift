@@ -36,6 +36,8 @@ private let systemName: String = {
         return "watchOS"
     #elseif os(tvOS)
         return "tvOS"
+    #elseif os(visionOS)
+        return "visionOS"
     #elseif os(macOS)
         return "macOS"
     #elseif os(Linux)
@@ -44,7 +46,7 @@ private let systemName: String = {
 }()
 
 private let systemVersion: String = {
-    #if os(iOS) || os(tvOS)
+    #if os(iOS) || os(tvOS) || os(visionOS)
         return UIDevice.current.systemVersion
     #elseif os(watchOS)
         return WKInterfaceDevice.current().systemVersion

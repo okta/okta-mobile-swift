@@ -94,7 +94,6 @@ extension WebAuthentication {
     }
 }
 
-#if swift(>=5.5.1)
 @available(iOS 13.0, tvOS 13.0, macOS 10.15, watchOS 6, *)
 extension WebAuthentication {
     @available(*, deprecated, renamed: "signIn(from:options:)")
@@ -128,4 +127,3 @@ extension WebAuthentication {
         try await signOut(from: window, token: token, options: options(from: additionalParameters))
     }
 }
-#endif

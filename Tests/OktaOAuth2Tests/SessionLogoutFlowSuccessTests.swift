@@ -148,7 +148,6 @@ final class SessionLogoutFlowSuccessTests: XCTestCase {
         wait(for: [resumeExpection], timeout: 1)
     }
     
-    #if swift(>=5.5.1)
     @available(iOS 13.0, tvOS 13.0, macOS 10.15, watchOS 6, *)
     func testWithAsync() async throws {
         XCTAssertNil(flow.context)
@@ -166,5 +165,4 @@ final class SessionLogoutFlowSuccessTests: XCTestCase {
                             &state=\(state)
                             """)
     }
-    #endif
 }

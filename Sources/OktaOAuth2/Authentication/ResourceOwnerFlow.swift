@@ -123,7 +123,6 @@ public class ResourceOwnerFlow: AuthenticationFlow {
     public let delegateCollection = DelegateCollection<AuthenticationDelegate>()
 }
 
-#if swift(>=5.5.1)
 @available(iOS 13.0, tvOS 13.0, macOS 10.15, watchOS 6, *)
 extension ResourceOwnerFlow {
     /// Asynchronously authenticates with the Resource Owner flow.
@@ -137,7 +136,6 @@ extension ResourceOwnerFlow {
         }
     }
 }
-#endif
 
 extension ResourceOwnerFlow: UsesDelegateCollection {
     public typealias Delegate = AuthenticationDelegate
