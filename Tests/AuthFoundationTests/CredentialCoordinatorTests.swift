@@ -24,19 +24,19 @@ final class UserCoordinatorTests: XCTestCase {
     var storage: UserDefaultsTokenStorage!
     var coordinator: CredentialCoordinatorImpl!
     
-    let token = Token(id: "TokenId",
-                      issuedAt: Date(),
-                      tokenType: "Bearer",
-                      expiresIn: 300,
-                      accessToken: "abcd123",
-                      scope: "openid",
-                      refreshToken: nil,
-                      idToken: nil,
-                      deviceSecret: nil,
-                      context: Token.Context(configuration: .init(baseURL: URL(string: "https://example.com")!,
-                                                                  clientId: "clientid",
-                                                                  scopes: "openid"),
-                                             clientSettings: nil))
+    let token = try! Token(id: "TokenId",
+                           issuedAt: Date(),
+                           tokenType: "Bearer",
+                           expiresIn: 300,
+                           accessToken: "abcd123",
+                           scope: "openid",
+                           refreshToken: nil,
+                           idToken: nil,
+                           deviceSecret: nil,
+                           context: Token.Context(configuration: .init(baseURL: URL(string: "https://example.com")!,
+                                                                       clientId: "clientid",
+                                                                       scopes: "openid"),
+                                                  clientSettings: nil))
 
     override func setUpWithError() throws {
         userDefaults = UserDefaults(suiteName: name)

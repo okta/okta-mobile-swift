@@ -179,17 +179,17 @@ extension SDKVersion.Migration {
             
             let issueDate = idToken?.issuedAt ?? Date()
 
-            let token = Token(id: item.account,
-                              issuedAt: issueDate,
-                              tokenType: tokenType,
-                              expiresIn: expiresIn,
-                              accessToken: accessToken,
-                              scope: scope,
-                              refreshToken: tokenResponse.refreshToken,
-                              idToken: idToken,
-                              deviceSecret: nil,
-                              context: Token.Context(configuration: configuration,
-                                                     clientSettings: clientSettings))
+            let token = try Token(id: item.account,
+                                  issuedAt: issueDate,
+                                  tokenType: tokenType,
+                                  expiresIn: expiresIn,
+                                  accessToken: accessToken,
+                                  scope: scope,
+                                  refreshToken: tokenResponse.refreshToken,
+                                  idToken: idToken,
+                                  deviceSecret: nil,
+                                  context: Token.Context(configuration: configuration,
+                                                         clientSettings: clientSettings))
             
             var security = Credential.Security.standard
             if let accessibility = model?.accessibility,

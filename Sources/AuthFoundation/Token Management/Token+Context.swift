@@ -38,5 +38,17 @@ extension Token {
                 self.clientSettings = nil
             }
         }
+        
+        public init(from decoder: any Decoder) throws {
+            if let container = try? decoder.container(keyedBy: Token.Context.CodingKeys.self) {
+                self.init(configuration: try container.decode(OAuth2Client.Configuration.self, forKey: .configuration),
+                          clientSettings: try container.decodeIfPresent([String: String].self, forKey: .clientSettings))
+            } else if let configuration = decoder.userInfo[.apiClientConfiguration] as? OAuth2Client.Configuration {
+                self.init(configuration: configuration,
+                          clientSettings: decoder.userInfo[.clientSettings])
+            } else {
+                throw TokenError.contextMissing
+            }
+        }
     }
 }

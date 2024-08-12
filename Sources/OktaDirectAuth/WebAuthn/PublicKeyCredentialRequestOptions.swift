@@ -65,7 +65,7 @@ extension WebAuthn {
                 timeout = nil
             }
 
-            if let jsonValues = try container.decodeIfPresent([String: JSONValue].self, forKey: .extensions) {
+            if let jsonValues = try container.decodeIfPresent([String: JSON].self, forKey: .extensions) {
                 extensions = jsonValues.mapValues({ $0.anyValue })
             } else {
                 extensions = nil
@@ -84,7 +84,7 @@ extension WebAuthn {
             }
             
             if let extensions = extensions {
-                try container.encode(try extensions.mapValues({ try JSONValue($0) }), forKey: .extensions)
+                try container.encode(try extensions.mapValues({ try JSON($0) }), forKey: .extensions)
             }
         }
     }

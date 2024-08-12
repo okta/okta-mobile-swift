@@ -12,17 +12,22 @@
 
 import Foundation
 
-/// Indicates a type can be consumed from a ``HasClaims`` object and converted to the indicated type.
-public protocol ClaimConvertable {
-    /// Converts the given `Any` value to an instance of the conforming type's class, otherwise return `nil` if this cannot be done.
-    /// - Parameter value: The value to convert.
-    /// - Returns: The converted value, or `nil`.
-    static func convert(from value: Any?) -> Self?
+public enum ClaimError: Error {
+    /// The token response is missing a required value.
+    case missingRequiredValue(key: String)
 }
 
-extension ClaimConvertable {
-    @_documentation(visibility: private)
-    public static func convert(from value: Any?) -> Self? {
-        value as? Self
+extension ClaimError: LocalizedError {
+    public var errorDescription: String? {
+        switch self {
+        case .missingRequiredValue(key: let key):
+            return String.localizedStringWithFormat(
+                NSLocalizedString("missing_required_value",
+                                  tableName: "AuthFoundation",
+                                  bundle: .authFoundation,
+                                  comment: ""),
+                key)
+
+        }
     }
 }

@@ -18,52 +18,52 @@ extension OpenIdConfiguration {
         // Provider claims exposed by the OpenID Provider Metadata specification
         // https://openid.net/specs/openid-connect-discovery-1_0.html#ProviderMetadata
         case issuer
-        case authorizationEndpoint
-        case tokenEndpoint
-        case userinfoEndpoint
-        case jwksUri
-        case registrationEndpoint
-        case scopesSupported
-        case responseTypesSupported
-        case responseModesSupported
-        case grantTypesSupported
-        case acrValuesSupported
-        case subjectTypesSupported
-        case idTokenSigningAlgValuesSupported
-        case idTokenEncryptionAlgValuesSupported
-        case idTokenEncryptionEncValuesSupported
-        case userinfoSigningAlgValuesSupported
-        case userinfoEncryptionAlgValuesSupported
-        case userinfoEncryptionEncValuesSupported
-        case requestObjectSigningAlgValuesSupported
-        case requestObjectEncryptionAlgValuesSupported
-        case requestObjectEncryptionEncValuesSupported
-        case tokenEndpointAuthMethodsSupported
-        case tokenEndpointAuthSigningAlgValuesSupported
-        case displayValuesSupported
-        case claimTypesSupported
-        case claimsSupported
-        case serviceDocumentation
-        case claimsLocalesSupported
-        case uiLocalesSupported
-        case claimsParameterSupported
-        case requestParameterSupported
-        case requestUriParameterSupported
-        case requireRequestUriRegistration
-        case opPolicyUri
-        case opTosUri
-        
+        case authorizationEndpoint                      = "authorization_endpoint"
+        case tokenEndpoint                              = "token_endpoint"
+        case userinfoEndpoint                           = "userinfo_endpoint"
+        case jwksUri                                    = "jwks_uri"
+        case registrationEndpoint                       = "registration_endpoint"
+        case scopesSupported                            = "scopes_supported"
+        case responseTypesSupported                     = "response_types_supported"
+        case responseModesSupported                     = "response_modes_supported"
+        case grantTypesSupported                        = "grant_types_supported"
+        case acrValuesSupported                         = "acr_values_supported"
+        case subjectTypesSupported                      = "subject_types_supported"
+        case idTokenSigningAlgValuesSupported           = "id_token_signing_alg_values_supported"
+        case idTokenEncryptionAlgValuesSupported        = "id_token_encryption_alg_values_supported"
+        case idTokenEncryptionEncValuesSupported        = "id_token_encryption_enc_values_supported"
+        case userinfoSigningAlgValuesSupported          = "userinfo_signing_alg_values_supported"
+        case userinfoEncryptionAlgValuesSupported       = "userinfo_encryption_alg_values_supported"
+        case userinfoEncryptionEncValuesSupported       = "userinfo_encryption_enc_values_supported"
+        case requestObjectSigningAlgValuesSupported     = "request_object_signing_alg_values_supported"
+        case requestObjectEncryptionAlgValuesSupported  = "request_object_encryption_alg_values_supported"
+        case requestObjectEncryptionEncValuesSupported  = "request_object_encryption_enc_values_supported"
+        case tokenEndpointAuthMethodsSupported          = "token_endpoint_auth_methods_supported"
+        case tokenEndpointAuthSigningAlgValuesSupported = "token_endpoint_auth_signing_alg_values_supported"
+        case displayValuesSupported                     = "display_values_supported"
+        case claimTypesSupported                        = "claim_types_supported"
+        case claimsSupported                            = "claims_supported"
+        case serviceDocumentation                       = "service_documentation"
+        case claimsLocalesSupported                     = "claims_locales_supported"
+        case uiLocalesSupported                         = "ui_locales_supported"
+        case claimsParameterSupported                   = "claims_parameter_supported"
+        case requestParameterSupported                  = "request_parameter_supported"
+        case requestUriParameterSupported               = "request_uri_parameter_supported"
+        case requireRequestUriRegistration              = "require_request_uri_registration"
+        case opPolicyUri                                = "op_policy_uri"
+        case opTosUri                                   = "op_tos_uri"
+
         // Okta-defined additions
         // https://developer.okta.com/docs/reference/api/oidc/#response-properties-11
-        case endSessionEndpoint
-        case introspectionEndpoint
-        case deviceAuthorizationEndpoint
-        case codeChallengeMethodsSupported
-        case introspectionEndpointAuthMethodsSupported
-        case revocationEndpoint
-        case revocationEndpointAuthMethodsSupported
-        case backchannelTokenDeliveryModesSupported
-        case backchannelAuthenticationRequestSigningAlgValuesSupported
-        case dpopSigningAlgValuesSupported
-    }
+        case endSessionEndpoint                                        = "end_session_endpoint"
+        case introspectionEndpoint                                     = "introspection_endpoint"
+        case deviceAuthorizationEndpoint                               = "device_authorization_endpoint"
+        case codeChallengeMethodsSupported                             = "code_challenge_methods_supported"
+        case introspectionEndpointAuthMethodsSupported                 = "introspection_endpoint_auth_methods_supported"
+        case revocationEndpoint                                        = "revocation_endpoint"
+        case revocationEndpointAuthMethodsSupported                    = "revocation_endpoint_auth_methods_supported"
+        case backchannelTokenDeliveryModesSupported                    = "backchannel_token_delivery_modes_supported"
+        case backchannelAuthenticationRequestSigningAlgValuesSupported = "backchannel_authentication_request_signing_alg_values_supported"
+        case dpopSigningAlgValuesSupported                             = "dpop_signing_alg_values_supported"
+   }
 }
