@@ -1,7 +1,7 @@
 {
   "abstract" : [
     {
-      "text" : "The list of custom claims contained within this JWT token.",
+      "text" : "Returns the collection of custom claims this object contains.",
       "type" : "text"
     }
   ],
@@ -107,6 +107,35 @@
         }
       ],
       "kind" : "declarations"
+    },
+    {
+      "content" : [
+        {
+          "anchor" : "discussion",
+          "level" : 2,
+          "text" : "Discussion",
+          "type" : "heading"
+        },
+        {
+          "inlineContent" : [
+            {
+              "text" : "Unlike the ",
+              "type" : "text"
+            },
+            {
+              "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/UserInfo\/claims",
+              "isActive" : true,
+              "type" : "reference"
+            },
+            {
+              "text" : " property, this returns values as strings.",
+              "type" : "text"
+            }
+          ],
+          "type" : "paragraph"
+        }
+      ],
+      "kind" : "content"
     }
   ],
   "schemaVersion" : {
@@ -190,10 +219,59 @@
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/userinfo\/hasclaims-implementations"
 },
+"doc://AuthFoundation/documentation/AuthFoundation/UserInfo/claims": {
+  "abstract" : [
+    {
+      "text" : "Returns the collection of claims this object contains.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "var"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "claims"
+    },
+    {
+      "kind" : "text",
+      "text" : ": ["
+    },
+    {
+      "kind" : "typeIdentifier",
+      "text" : "Self"
+    },
+    {
+      "kind" : "text",
+      "text" : "."
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:14AuthFoundation9HasClaimsP9ClaimTypeQa",
+      "text" : "ClaimType"
+    },
+    {
+      "kind" : "text",
+      "text" : "]"
+    }
+  ],
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/UserInfo\/claims",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "claims",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/userinfo\/claims"
+},
 "doc://AuthFoundation/documentation/AuthFoundation/UserInfo/customClaims": {
   "abstract" : [
     {
-      "text" : "The list of custom claims contained within this JWT token.",
+      "text" : "Returns the collection of custom claims this object contains.",
       "type" : "text"
     }
   ],

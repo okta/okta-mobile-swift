@@ -1,7 +1,7 @@
 {
   "abstract" : [
     {
-      "text" : "The list of standard claims contained within this JWT token.",
+      "text" : "Returns the collection of claims this object contains.",
       "type" : "text"
     }
   ],
@@ -124,6 +124,51 @@
         }
       ],
       "kind" : "declarations"
+    },
+    {
+      "content" : [
+        {
+          "anchor" : "discussion",
+          "level" : 2,
+          "text" : "Discussion",
+          "type" : "heading"
+        },
+        {
+          "content" : [
+            {
+              "inlineContent" : [
+                {
+                  "text" : "This will only return the list of official claims defined in the ",
+                  "type" : "text"
+                },
+                {
+                  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/Claim",
+                  "isActive" : true,
+                  "type" : "reference"
+                },
+                {
+                  "text" : " enum. For custom claims, please see the ",
+                  "type" : "text"
+                },
+                {
+                  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/OpenIdConfiguration\/customClaims",
+                  "isActive" : true,
+                  "type" : "reference"
+                },
+                {
+                  "text" : " property.",
+                  "type" : "text"
+                }
+              ],
+              "type" : "paragraph"
+            }
+          ],
+          "name" : "Note",
+          "style" : "note",
+          "type" : "aside"
+        }
+      ],
+      "kind" : "content"
     }
   ],
   "schemaVersion" : {
@@ -161,6 +206,38 @@
   "title" : "AuthFoundation",
   "type" : "topic",
   "url" : "\/documentation\/authfoundation"
+},
+"doc://AuthFoundation/documentation/AuthFoundation/Claim": {
+  "abstract" : [
+
+  ],
+  "deprecated" : true,
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "typealias"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "Claim"
+    }
+  ],
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/Claim",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "Claim"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "Claim",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/claim"
 },
 "doc://AuthFoundation/documentation/AuthFoundation/HasClaims/ClaimType": {
   "abstract" : [
@@ -245,7 +322,7 @@
 "doc://AuthFoundation/documentation/AuthFoundation/OpenIdConfiguration/claims": {
   "abstract" : [
     {
-      "text" : "The list of standard claims contained within this JWT token.",
+      "text" : "Returns the collection of claims this object contains.",
       "type" : "text"
     }
   ],
@@ -290,6 +367,47 @@
   "title" : "claims",
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/openidconfiguration\/claims"
+},
+"doc://AuthFoundation/documentation/AuthFoundation/OpenIdConfiguration/customClaims": {
+  "abstract" : [
+    {
+      "text" : "Returns the collection of custom claims this object contains.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "var"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "customClaims"
+    },
+    {
+      "kind" : "text",
+      "text" : ": ["
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:SS",
+      "text" : "String"
+    },
+    {
+      "kind" : "text",
+      "text" : "]"
+    }
+  ],
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/OpenIdConfiguration\/customClaims",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "customClaims",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/openidconfiguration\/customclaims"
 }
 }
 }

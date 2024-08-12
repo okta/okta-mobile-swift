@@ -37,7 +37,7 @@
         "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/UserInfo\/address",
         "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/UserInfo\/allClaims",
         "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/UserInfo\/authTime",
-        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/UserInfo\/authenticationClass",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/UserInfo\/authenticationClassReference",
         "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/UserInfo\/authenticationMethods",
         "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/UserInfo\/birthdate",
         "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/UserInfo\/claims",
@@ -69,9 +69,18 @@
     {
       "generated" : true,
       "identifiers" : [
-        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/UserInfo\/arrayValue(_:for:)-4r3mz",
-        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/UserInfo\/arrayValue(_:for:)-8mgsf",
-        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/UserInfo\/value(_:for:)"
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/UserInfo\/value(for:)-15tje",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/UserInfo\/value(for:)-17vqz",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/UserInfo\/value(for:)-1fbtb",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/UserInfo\/value(for:)-1o2fn",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/UserInfo\/value(for:)-2wch3",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/UserInfo\/value(for:)-3g9d8",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/UserInfo\/value(for:)-45n4p",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/UserInfo\/value(for:)-53x4v",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/UserInfo\/value(for:)-5m8bp",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/UserInfo\/value(for:)-5w32z",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/UserInfo\/value(for:)-6scqu",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/UserInfo\/value(for:)-756rw"
       ],
       "title" : "Instance Methods"
     },
@@ -79,8 +88,10 @@
       "generated" : true,
       "identifiers" : [
         "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/UserInfo\/subscript(_:)-1nwao",
-        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/UserInfo\/subscript(_:)-2vhco",
-        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/UserInfo\/subscript(_:)-3i6lx",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/UserInfo\/subscript(_:)-3kg30",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/UserInfo\/subscript(_:)-5kktc",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/UserInfo\/subscript(_:)-6mjxv",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/UserInfo\/subscript(_:)-867k1",
         "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/UserInfo\/subscript(_:)-jlfx"
       ],
       "title" : "Subscripts"
@@ -332,160 +343,6 @@
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/userinfo\/allclaims"
 },
-"doc://AuthFoundation/documentation/AuthFoundation/UserInfo/arrayValue(_:for:)-4r3mz": {
-  "abstract" : [
-    {
-      "text" : "Returns an array of claims from this JWT token, with the given key and expected array element type.",
-      "type" : "text"
-    }
-  ],
-  "fragments" : [
-    {
-      "kind" : "keyword",
-      "text" : "func"
-    },
-    {
-      "kind" : "text",
-      "text" : " "
-    },
-    {
-      "kind" : "identifier",
-      "text" : "arrayValue"
-    },
-    {
-      "kind" : "text",
-      "text" : "<"
-    },
-    {
-      "kind" : "genericParameter",
-      "text" : "T"
-    },
-    {
-      "kind" : "text",
-      "text" : ">("
-    },
-    {
-      "kind" : "typeIdentifier",
-      "text" : "T"
-    },
-    {
-      "kind" : "text",
-      "text" : ".Type, "
-    },
-    {
-      "kind" : "externalParam",
-      "text" : "for"
-    },
-    {
-      "kind" : "text",
-      "text" : ": "
-    },
-    {
-      "kind" : "typeIdentifier",
-      "text" : "Self"
-    },
-    {
-      "kind" : "text",
-      "text" : "."
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:14AuthFoundation9HasClaimsP9ClaimTypeQa",
-      "text" : "ClaimType"
-    },
-    {
-      "kind" : "text",
-      "text" : ") -> ["
-    },
-    {
-      "kind" : "typeIdentifier",
-      "text" : "T"
-    },
-    {
-      "kind" : "text",
-      "text" : "]?"
-    }
-  ],
-  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/UserInfo\/arrayValue(_:for:)-4r3mz",
-  "kind" : "symbol",
-  "role" : "symbol",
-  "title" : "arrayValue(_:for:)",
-  "type" : "topic",
-  "url" : "\/documentation\/authfoundation\/userinfo\/arrayvalue(_:for:)-4r3mz"
-},
-"doc://AuthFoundation/documentation/AuthFoundation/UserInfo/arrayValue(_:for:)-8mgsf": {
-  "abstract" : [
-    {
-      "text" : "Returns an array of claims from this JWT token, with the given key and expected array element type.",
-      "type" : "text"
-    }
-  ],
-  "fragments" : [
-    {
-      "kind" : "keyword",
-      "text" : "func"
-    },
-    {
-      "kind" : "text",
-      "text" : " "
-    },
-    {
-      "kind" : "identifier",
-      "text" : "arrayValue"
-    },
-    {
-      "kind" : "text",
-      "text" : "<"
-    },
-    {
-      "kind" : "genericParameter",
-      "text" : "T"
-    },
-    {
-      "kind" : "text",
-      "text" : ">("
-    },
-    {
-      "kind" : "typeIdentifier",
-      "text" : "T"
-    },
-    {
-      "kind" : "text",
-      "text" : ".Type, "
-    },
-    {
-      "kind" : "externalParam",
-      "text" : "for"
-    },
-    {
-      "kind" : "text",
-      "text" : ": "
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:SS",
-      "text" : "String"
-    },
-    {
-      "kind" : "text",
-      "text" : ") -> ["
-    },
-    {
-      "kind" : "typeIdentifier",
-      "text" : "T"
-    },
-    {
-      "kind" : "text",
-      "text" : "]?"
-    }
-  ],
-  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/UserInfo\/arrayValue(_:for:)-8mgsf",
-  "kind" : "symbol",
-  "role" : "symbol",
-  "title" : "arrayValue(_:for:)",
-  "type" : "topic",
-  "url" : "\/documentation\/authfoundation\/userinfo\/arrayvalue(_:for:)-8mgsf"
-},
 "doc://AuthFoundation/documentation/AuthFoundation/UserInfo/authTime": {
   "abstract" : [
     {
@@ -559,7 +416,7 @@
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/userinfo\/authtime"
 },
-"doc://AuthFoundation/documentation/AuthFoundation/UserInfo/authenticationClass": {
+"doc://AuthFoundation/documentation/AuthFoundation/UserInfo/authenticationClassReference": {
   "abstract" : [
     {
       "text" : "Returns the Authentication Context Class Reference for this token.",
@@ -609,11 +466,11 @@
     },
     {
       "kind" : "identifier",
-      "text" : "authenticationClass"
+      "text" : "authenticationClassReference"
     },
     {
       "kind" : "text",
-      "text" : ": "
+      "text" : ": ["
     },
     {
       "kind" : "typeIdentifier",
@@ -622,15 +479,15 @@
     },
     {
       "kind" : "text",
-      "text" : "?"
+      "text" : "]?"
     }
   ],
-  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/UserInfo\/authenticationClass",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/UserInfo\/authenticationClassReference",
   "kind" : "symbol",
   "role" : "symbol",
-  "title" : "authenticationClass",
+  "title" : "authenticationClassReference",
   "type" : "topic",
-  "url" : "\/documentation\/authfoundation\/userinfo\/authenticationclass"
+  "url" : "\/documentation\/authfoundation\/userinfo\/authenticationclassreference"
 },
 "doc://AuthFoundation/documentation/AuthFoundation/UserInfo/authenticationMethods": {
   "abstract" : [
@@ -781,7 +638,7 @@
 "doc://AuthFoundation/documentation/AuthFoundation/UserInfo/claims": {
   "abstract" : [
     {
-      "text" : "The list of standard claims contained within this JWT token.",
+      "text" : "Returns the collection of claims this object contains.",
       "type" : "text"
     }
   ],
@@ -830,7 +687,7 @@
 "doc://AuthFoundation/documentation/AuthFoundation/UserInfo/customClaims": {
   "abstract" : [
     {
-      "text" : "The list of custom claims contained within this JWT token.",
+      "text" : "Returns the collection of custom claims this object contains.",
       "type" : "text"
     }
   ],
@@ -2090,10 +1947,10 @@
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/userinfo\/subscript(_:)-1nwao"
 },
-"doc://AuthFoundation/documentation/AuthFoundation/UserInfo/subscript(_:)-2vhco": {
+"doc://AuthFoundation/documentation/AuthFoundation/UserInfo/subscript(_:)-3kg30": {
   "abstract" : [
     {
-      "text" : "Return the given claim’s Dictionary of ",
+      "text" : "Return the given claim’s value, defined with the given enum value, as the expectred ",
       "type" : "text"
     },
     {
@@ -2102,7 +1959,140 @@
       "type" : "reference"
     },
     {
-      "text" : "values.",
+      "text" : "value type.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "subscript"
+    },
+    {
+      "kind" : "text",
+      "text" : "<"
+    },
+    {
+      "kind" : "genericParameter",
+      "text" : "T"
+    },
+    {
+      "kind" : "text",
+      "text" : ">("
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:SS",
+      "text" : "String"
+    },
+    {
+      "kind" : "text",
+      "text" : ") -> ["
+    },
+    {
+      "kind" : "typeIdentifier",
+      "text" : "T"
+    },
+    {
+      "kind" : "text",
+      "text" : "]?"
+    }
+  ],
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/UserInfo\/subscript(_:)-3kg30",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "subscript(_:)",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/userinfo\/subscript(_:)-3kg30"
+},
+"doc://AuthFoundation/documentation/AuthFoundation/UserInfo/subscript(_:)-5kktc": {
+  "abstract" : [
+    {
+      "text" : "Return the given claim’s value, defined with the given enum value, as the expectred ",
+      "type" : "text"
+    },
+    {
+      "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/ClaimConvertable",
+      "isActive" : true,
+      "type" : "reference"
+    },
+    {
+      "text" : "value type.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "subscript"
+    },
+    {
+      "kind" : "text",
+      "text" : "<"
+    },
+    {
+      "kind" : "genericParameter",
+      "text" : "T"
+    },
+    {
+      "kind" : "text",
+      "text" : ">("
+    },
+    {
+      "kind" : "typeIdentifier",
+      "text" : "Self"
+    },
+    {
+      "kind" : "text",
+      "text" : "."
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:14AuthFoundation9HasClaimsP9ClaimTypeQa",
+      "text" : "ClaimType"
+    },
+    {
+      "kind" : "text",
+      "text" : ") -> ["
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:SS",
+      "text" : "String"
+    },
+    {
+      "kind" : "text",
+      "text" : " : "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "text" : "T"
+    },
+    {
+      "kind" : "text",
+      "text" : "]?"
+    }
+  ],
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/UserInfo\/subscript(_:)-5kktc",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "subscript(_:)",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/userinfo\/subscript(_:)-5kktc"
+},
+"doc://AuthFoundation/documentation/AuthFoundation/UserInfo/subscript(_:)-6mjxv": {
+  "abstract" : [
+    {
+      "text" : "Return the given claim’s value, defined with the given enum value, as the expectred ",
+      "type" : "text"
+    },
+    {
+      "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/ClaimConvertable",
+      "isActive" : true,
+      "type" : "reference"
+    },
+    {
+      "text" : "value type.",
       "type" : "text"
     }
   ],
@@ -2147,20 +2137,20 @@
     },
     {
       "kind" : "text",
-      "text" : "?]?"
+      "text" : "]?"
     }
   ],
-  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/UserInfo\/subscript(_:)-2vhco",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/UserInfo\/subscript(_:)-6mjxv",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "subscript(_:)",
   "type" : "topic",
-  "url" : "\/documentation\/authfoundation\/userinfo\/subscript(_:)-2vhco"
+  "url" : "\/documentation\/authfoundation\/userinfo\/subscript(_:)-6mjxv"
 },
-"doc://AuthFoundation/documentation/AuthFoundation/UserInfo/subscript(_:)-3i6lx": {
+"doc://AuthFoundation/documentation/AuthFoundation/UserInfo/subscript(_:)-867k1": {
   "abstract" : [
     {
-      "text" : "Return the given claim’s value as the expectred ",
+      "text" : "Return the given claim’s value, defined with the given enum value, as the expectred ",
       "type" : "text"
     },
     {
@@ -2192,12 +2182,20 @@
     },
     {
       "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:SS",
-      "text" : "String"
+      "text" : "Self"
     },
     {
       "kind" : "text",
-      "text" : ") -> "
+      "text" : "."
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:14AuthFoundation9HasClaimsP9ClaimTypeQa",
+      "text" : "ClaimType"
+    },
+    {
+      "kind" : "text",
+      "text" : ") -> ["
     },
     {
       "kind" : "typeIdentifier",
@@ -2205,15 +2203,15 @@
     },
     {
       "kind" : "text",
-      "text" : "?"
+      "text" : "]?"
     }
   ],
-  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/UserInfo\/subscript(_:)-3i6lx",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/UserInfo\/subscript(_:)-867k1",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "subscript(_:)",
   "type" : "topic",
-  "url" : "\/documentation\/authfoundation\/userinfo\/subscript(_:)-3i6lx"
+  "url" : "\/documentation\/authfoundation\/userinfo\/subscript(_:)-867k1"
 },
 "doc://AuthFoundation/documentation/AuthFoundation/UserInfo/subscript(_:)-jlfx": {
   "abstract" : [
@@ -2500,10 +2498,19 @@
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/userinfo\/userlocale"
 },
-"doc://AuthFoundation/documentation/AuthFoundation/UserInfo/value(_:for:)": {
+"doc://AuthFoundation/documentation/AuthFoundation/UserInfo/value(for:)-15tje": {
   "abstract" : [
     {
-      "text" : "Returns a claim value from this JWT token, with the given key and expected return type.",
+      "text" : "Returns the optional value for the given key as an array of values converted using a",
+      "type" : "text"
+    },
+    {
+      "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/ClaimConvertable",
+      "isActive" : true,
+      "type" : "reference"
+    },
+    {
+      "text" : " type.",
       "type" : "text"
     }
   ],
@@ -2533,12 +2540,95 @@
       "text" : ">("
     },
     {
+      "kind" : "externalParam",
+      "text" : "for"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "text" : "Self"
+    },
+    {
+      "kind" : "text",
+      "text" : "."
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:14AuthFoundation9HasClaimsP9ClaimTypeQa",
+      "text" : "ClaimType"
+    },
+    {
+      "kind" : "text",
+      "text" : ") -> ["
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:SS",
+      "text" : "String"
+    },
+    {
+      "kind" : "text",
+      "text" : " : "
+    },
+    {
       "kind" : "typeIdentifier",
       "text" : "T"
     },
     {
       "kind" : "text",
-      "text" : ".Type, "
+      "text" : "]?"
+    }
+  ],
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/UserInfo\/value(for:)-15tje",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "value(for:)",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/userinfo\/value(for:)-15tje"
+},
+"doc://AuthFoundation/documentation/AuthFoundation/UserInfo/value(for:)-17vqz": {
+  "abstract" : [
+    {
+      "text" : "Retrieve the optional value using a payload key, converting to the requested ",
+      "type" : "text"
+    },
+    {
+      "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/ClaimConvertable",
+      "isActive" : true,
+      "type" : "reference"
+    },
+    {
+      "text" : " type.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "func"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "value"
+    },
+    {
+      "kind" : "text",
+      "text" : "<"
+    },
+    {
+      "kind" : "genericParameter",
+      "text" : "T"
+    },
+    {
+      "kind" : "text",
+      "text" : ">("
     },
     {
       "kind" : "externalParam",
@@ -2566,12 +2656,859 @@
       "text" : "?"
     }
   ],
-  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/UserInfo\/value(_:for:)",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/UserInfo\/value(for:)-17vqz",
   "kind" : "symbol",
   "role" : "symbol",
-  "title" : "value(_:for:)",
+  "title" : "value(for:)",
   "type" : "topic",
-  "url" : "\/documentation\/authfoundation\/userinfo\/value(_:for:)"
+  "url" : "\/documentation\/authfoundation\/userinfo\/value(for:)-17vqz"
+},
+"doc://AuthFoundation/documentation/AuthFoundation/UserInfo/value(for:)-1fbtb": {
+  "abstract" : [
+    {
+      "text" : "Returns the optional value for the given key as an array of values converted using a",
+      "type" : "text"
+    },
+    {
+      "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/ClaimConvertable",
+      "isActive" : true,
+      "type" : "reference"
+    },
+    {
+      "text" : " type.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "func"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "value"
+    },
+    {
+      "kind" : "text",
+      "text" : "<"
+    },
+    {
+      "kind" : "genericParameter",
+      "text" : "T"
+    },
+    {
+      "kind" : "text",
+      "text" : ">("
+    },
+    {
+      "kind" : "externalParam",
+      "text" : "for"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:SS",
+      "text" : "String"
+    },
+    {
+      "kind" : "text",
+      "text" : ") -> ["
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:SS",
+      "text" : "String"
+    },
+    {
+      "kind" : "text",
+      "text" : " : "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "text" : "T"
+    },
+    {
+      "kind" : "text",
+      "text" : "]?"
+    }
+  ],
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/UserInfo\/value(for:)-1fbtb",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "value(for:)",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/userinfo\/value(for:)-1fbtb"
+},
+"doc://AuthFoundation/documentation/AuthFoundation/UserInfo/value(for:)-1o2fn": {
+  "abstract" : [
+    {
+      "text" : "Returns the value for the given key as an array of values converted using a",
+      "type" : "text"
+    },
+    {
+      "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/ClaimConvertable",
+      "isActive" : true,
+      "type" : "reference"
+    },
+    {
+      "text" : " type.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "func"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "value"
+    },
+    {
+      "kind" : "text",
+      "text" : "<"
+    },
+    {
+      "kind" : "genericParameter",
+      "text" : "T"
+    },
+    {
+      "kind" : "text",
+      "text" : ">("
+    },
+    {
+      "kind" : "externalParam",
+      "text" : "for"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "text" : "Self"
+    },
+    {
+      "kind" : "text",
+      "text" : "."
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:14AuthFoundation9HasClaimsP9ClaimTypeQa",
+      "text" : "ClaimType"
+    },
+    {
+      "kind" : "text",
+      "text" : ") "
+    },
+    {
+      "kind" : "keyword",
+      "text" : "throws"
+    },
+    {
+      "kind" : "text",
+      "text" : " -> ["
+    },
+    {
+      "kind" : "typeIdentifier",
+      "text" : "T"
+    },
+    {
+      "kind" : "text",
+      "text" : "]"
+    }
+  ],
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/UserInfo\/value(for:)-1o2fn",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "value(for:)",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/userinfo\/value(for:)-1o2fn"
+},
+"doc://AuthFoundation/documentation/AuthFoundation/UserInfo/value(for:)-2wch3": {
+  "abstract" : [
+    {
+      "text" : "Returns the optional value for the given key as an array of values converted using a",
+      "type" : "text"
+    },
+    {
+      "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/ClaimConvertable",
+      "isActive" : true,
+      "type" : "reference"
+    },
+    {
+      "text" : " type.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "func"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "value"
+    },
+    {
+      "kind" : "text",
+      "text" : "<"
+    },
+    {
+      "kind" : "genericParameter",
+      "text" : "T"
+    },
+    {
+      "kind" : "text",
+      "text" : ">("
+    },
+    {
+      "kind" : "externalParam",
+      "text" : "for"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "text" : "Self"
+    },
+    {
+      "kind" : "text",
+      "text" : "."
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:14AuthFoundation9HasClaimsP9ClaimTypeQa",
+      "text" : "ClaimType"
+    },
+    {
+      "kind" : "text",
+      "text" : ") -> ["
+    },
+    {
+      "kind" : "typeIdentifier",
+      "text" : "T"
+    },
+    {
+      "kind" : "text",
+      "text" : "]?"
+    }
+  ],
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/UserInfo\/value(for:)-2wch3",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "value(for:)",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/userinfo\/value(for:)-2wch3"
+},
+"doc://AuthFoundation/documentation/AuthFoundation/UserInfo/value(for:)-3g9d8": {
+  "abstract" : [
+    {
+      "text" : "Retrieve the value using a claim enum, converting to the requested ",
+      "type" : "text"
+    },
+    {
+      "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/ClaimConvertable",
+      "isActive" : true,
+      "type" : "reference"
+    },
+    {
+      "text" : " type.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "func"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "value"
+    },
+    {
+      "kind" : "text",
+      "text" : "<"
+    },
+    {
+      "kind" : "genericParameter",
+      "text" : "T"
+    },
+    {
+      "kind" : "text",
+      "text" : ">("
+    },
+    {
+      "kind" : "externalParam",
+      "text" : "for"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "text" : "Self"
+    },
+    {
+      "kind" : "text",
+      "text" : "."
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:14AuthFoundation9HasClaimsP9ClaimTypeQa",
+      "text" : "ClaimType"
+    },
+    {
+      "kind" : "text",
+      "text" : ") "
+    },
+    {
+      "kind" : "keyword",
+      "text" : "throws"
+    },
+    {
+      "kind" : "text",
+      "text" : " -> "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "text" : "T"
+    }
+  ],
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/UserInfo\/value(for:)-3g9d8",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "value(for:)",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/userinfo\/value(for:)-3g9d8"
+},
+"doc://AuthFoundation/documentation/AuthFoundation/UserInfo/value(for:)-45n4p": {
+  "abstract" : [
+    {
+      "text" : "Returns the value for the given key as an array of values converted using a",
+      "type" : "text"
+    },
+    {
+      "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/ClaimConvertable",
+      "isActive" : true,
+      "type" : "reference"
+    },
+    {
+      "text" : " type.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "func"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "value"
+    },
+    {
+      "kind" : "text",
+      "text" : "<"
+    },
+    {
+      "kind" : "genericParameter",
+      "text" : "T"
+    },
+    {
+      "kind" : "text",
+      "text" : ">("
+    },
+    {
+      "kind" : "externalParam",
+      "text" : "for"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "text" : "Self"
+    },
+    {
+      "kind" : "text",
+      "text" : "."
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:14AuthFoundation9HasClaimsP9ClaimTypeQa",
+      "text" : "ClaimType"
+    },
+    {
+      "kind" : "text",
+      "text" : ") "
+    },
+    {
+      "kind" : "keyword",
+      "text" : "throws"
+    },
+    {
+      "kind" : "text",
+      "text" : " -> ["
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:SS",
+      "text" : "String"
+    },
+    {
+      "kind" : "text",
+      "text" : " : "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "text" : "T"
+    },
+    {
+      "kind" : "text",
+      "text" : "]"
+    }
+  ],
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/UserInfo\/value(for:)-45n4p",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "value(for:)",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/userinfo\/value(for:)-45n4p"
+},
+"doc://AuthFoundation/documentation/AuthFoundation/UserInfo/value(for:)-53x4v": {
+  "abstract" : [
+    {
+      "text" : "Returns the optional value for the given key as an array of values converted using a",
+      "type" : "text"
+    },
+    {
+      "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/ClaimConvertable",
+      "isActive" : true,
+      "type" : "reference"
+    },
+    {
+      "text" : " type.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "func"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "value"
+    },
+    {
+      "kind" : "text",
+      "text" : "<"
+    },
+    {
+      "kind" : "genericParameter",
+      "text" : "T"
+    },
+    {
+      "kind" : "text",
+      "text" : ">("
+    },
+    {
+      "kind" : "externalParam",
+      "text" : "for"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:SS",
+      "text" : "String"
+    },
+    {
+      "kind" : "text",
+      "text" : ") -> ["
+    },
+    {
+      "kind" : "typeIdentifier",
+      "text" : "T"
+    },
+    {
+      "kind" : "text",
+      "text" : "]?"
+    }
+  ],
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/UserInfo\/value(for:)-53x4v",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "value(for:)",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/userinfo\/value(for:)-53x4v"
+},
+"doc://AuthFoundation/documentation/AuthFoundation/UserInfo/value(for:)-5m8bp": {
+  "abstract" : [
+    {
+      "text" : "Returns the value for the given key as an array of values converted using a",
+      "type" : "text"
+    },
+    {
+      "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/ClaimConvertable",
+      "isActive" : true,
+      "type" : "reference"
+    },
+    {
+      "text" : " type.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "func"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "value"
+    },
+    {
+      "kind" : "text",
+      "text" : "<"
+    },
+    {
+      "kind" : "genericParameter",
+      "text" : "T"
+    },
+    {
+      "kind" : "text",
+      "text" : ">("
+    },
+    {
+      "kind" : "externalParam",
+      "text" : "for"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:SS",
+      "text" : "String"
+    },
+    {
+      "kind" : "text",
+      "text" : ") "
+    },
+    {
+      "kind" : "keyword",
+      "text" : "throws"
+    },
+    {
+      "kind" : "text",
+      "text" : " -> ["
+    },
+    {
+      "kind" : "typeIdentifier",
+      "text" : "T"
+    },
+    {
+      "kind" : "text",
+      "text" : "]"
+    }
+  ],
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/UserInfo\/value(for:)-5m8bp",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "value(for:)",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/userinfo\/value(for:)-5m8bp"
+},
+"doc://AuthFoundation/documentation/AuthFoundation/UserInfo/value(for:)-5w32z": {
+  "abstract" : [
+    {
+      "text" : "Retrieve the value using a payload key, converting to the requested ",
+      "type" : "text"
+    },
+    {
+      "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/ClaimConvertable",
+      "isActive" : true,
+      "type" : "reference"
+    },
+    {
+      "text" : " type.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "func"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "value"
+    },
+    {
+      "kind" : "text",
+      "text" : "<"
+    },
+    {
+      "kind" : "genericParameter",
+      "text" : "T"
+    },
+    {
+      "kind" : "text",
+      "text" : ">("
+    },
+    {
+      "kind" : "externalParam",
+      "text" : "for"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:SS",
+      "text" : "String"
+    },
+    {
+      "kind" : "text",
+      "text" : ") "
+    },
+    {
+      "kind" : "keyword",
+      "text" : "throws"
+    },
+    {
+      "kind" : "text",
+      "text" : " -> "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "text" : "T"
+    }
+  ],
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/UserInfo\/value(for:)-5w32z",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "value(for:)",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/userinfo\/value(for:)-5w32z"
+},
+"doc://AuthFoundation/documentation/AuthFoundation/UserInfo/value(for:)-6scqu": {
+  "abstract" : [
+    {
+      "text" : "Retrieve the optional value using a claim enum, converting to the requested ",
+      "type" : "text"
+    },
+    {
+      "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/ClaimConvertable",
+      "isActive" : true,
+      "type" : "reference"
+    },
+    {
+      "text" : " type.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "func"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "value"
+    },
+    {
+      "kind" : "text",
+      "text" : "<"
+    },
+    {
+      "kind" : "genericParameter",
+      "text" : "T"
+    },
+    {
+      "kind" : "text",
+      "text" : ">("
+    },
+    {
+      "kind" : "externalParam",
+      "text" : "for"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "text" : "Self"
+    },
+    {
+      "kind" : "text",
+      "text" : "."
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:14AuthFoundation9HasClaimsP9ClaimTypeQa",
+      "text" : "ClaimType"
+    },
+    {
+      "kind" : "text",
+      "text" : ") -> "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "text" : "T"
+    },
+    {
+      "kind" : "text",
+      "text" : "?"
+    }
+  ],
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/UserInfo\/value(for:)-6scqu",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "value(for:)",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/userinfo\/value(for:)-6scqu"
+},
+"doc://AuthFoundation/documentation/AuthFoundation/UserInfo/value(for:)-756rw": {
+  "abstract" : [
+    {
+      "text" : "Returns the value for the given key as an array of values converted using a",
+      "type" : "text"
+    },
+    {
+      "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/ClaimConvertable",
+      "isActive" : true,
+      "type" : "reference"
+    },
+    {
+      "text" : " type.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "func"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "value"
+    },
+    {
+      "kind" : "text",
+      "text" : "<"
+    },
+    {
+      "kind" : "genericParameter",
+      "text" : "T"
+    },
+    {
+      "kind" : "text",
+      "text" : ">("
+    },
+    {
+      "kind" : "externalParam",
+      "text" : "for"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:SS",
+      "text" : "String"
+    },
+    {
+      "kind" : "text",
+      "text" : ") "
+    },
+    {
+      "kind" : "keyword",
+      "text" : "throws"
+    },
+    {
+      "kind" : "text",
+      "text" : " -> ["
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:SS",
+      "text" : "String"
+    },
+    {
+      "kind" : "text",
+      "text" : " : "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "text" : "T"
+    },
+    {
+      "kind" : "text",
+      "text" : "]"
+    }
+  ],
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/UserInfo\/value(for:)-756rw",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "value(for:)",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/userinfo\/value(for:)-756rw"
 },
 "doc://AuthFoundation/documentation/AuthFoundation/UserInfo/website": {
   "abstract" : [

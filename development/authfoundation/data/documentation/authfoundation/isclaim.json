@@ -80,6 +80,49 @@
             {
               "kind" : "identifier",
               "text" : "IsClaim"
+            },
+            {
+              "kind" : "text",
+              "text" : " : "
+            },
+            {
+              "kind" : "typeIdentifier",
+              "preciseIdentifier" : "s:SY",
+              "text" : "RawRepresentable"
+            },
+            {
+              "kind" : "text",
+              "text" : " "
+            },
+            {
+              "kind" : "keyword",
+              "text" : "where"
+            },
+            {
+              "kind" : "text",
+              "text" : " "
+            },
+            {
+              "kind" : "typeIdentifier",
+              "text" : "Self"
+            },
+            {
+              "kind" : "text",
+              "text" : "."
+            },
+            {
+              "kind" : "typeIdentifier",
+              "preciseIdentifier" : "s:SY8RawValueQa",
+              "text" : "RawValue"
+            },
+            {
+              "kind" : "text",
+              "text" : " == "
+            },
+            {
+              "kind" : "typeIdentifier",
+              "preciseIdentifier" : "s:SS",
+              "text" : "String"
             }
           ]
         }
@@ -90,10 +133,19 @@
   "relationshipsSections" : [
     {
       "identifiers" : [
+        "doc:\/\/AuthFoundation\/SY"
+      ],
+      "kind" : "relationships",
+      "title" : "Inherits From",
+      "type" : "inheritsFrom"
+    },
+    {
+      "identifiers" : [
         "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/AuthenticationMethod",
         "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/GrantType",
         "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JWTClaim",
-        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/OpenIdConfiguration\/ProviderMetadata"
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/OpenIdConfiguration\/ProviderMetadata",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/Token\/TokenClaim"
       ],
       "kind" : "relationships",
       "title" : "Conforming Types",
@@ -112,30 +164,20 @@
     {
       "generated" : true,
       "identifiers" : [
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/WorkingWithClaims",
         "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JWT",
         "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JWK",
         "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JWKS",
         "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JWTClaim",
         "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/HasClaims",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/Claim",
         "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JSONClaimContainer",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JSON",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/AnyJSON",
         "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/ClaimConvertable",
         "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/Expires"
       ],
       "title" : "JWT and Token Verification"
-    }
-  ],
-  "topicSections" : [
-    {
-      "identifiers" : [
-        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/IsClaim\/init(rawValue:)"
-      ],
-      "title" : "Initializers"
-    },
-    {
-      "identifiers" : [
-        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/IsClaim\/rawValue"
-      ],
-      "title" : "Instance Properties"
     }
   ],
   "variants" : [
@@ -152,6 +194,11 @@
   ]
 , 
 "references": {
+"doc://AuthFoundation/SY": {
+  "identifier" : "doc:\/\/AuthFoundation\/SY",
+  "title" : "Swift.RawRepresentable",
+  "type" : "unresolvable"
+},
 "doc://AuthFoundation/documentation/AuthFoundation": {
   "abstract" : [
     {
@@ -165,6 +212,49 @@
   "title" : "AuthFoundation",
   "type" : "topic",
   "url" : "\/documentation\/authfoundation"
+},
+"doc://AuthFoundation/documentation/AuthFoundation/AnyJSON": {
+  "abstract" : [
+    {
+      "text" : "Efficiently represents ",
+      "type" : "text"
+    },
+    {
+      "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JSON",
+      "isActive" : true,
+      "type" : "reference"
+    },
+    {
+      "text" : " values, and exchanges between its String or Data representations.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "class"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "AnyJSON"
+    }
+  ],
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/AnyJSON",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "AnyJSON"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "AnyJSON",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/anyjson"
 },
 "doc://AuthFoundation/documentation/AuthFoundation/AuthenticationMethod": {
   "abstract" : [
@@ -208,6 +298,38 @@
   "title" : "AuthenticationMethod",
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/authenticationmethod"
+},
+"doc://AuthFoundation/documentation/AuthFoundation/Claim": {
+  "abstract" : [
+
+  ],
+  "deprecated" : true,
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "typealias"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "Claim"
+    }
+  ],
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/Claim",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "Claim"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "Claim",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/claim"
 },
 "doc://AuthFoundation/documentation/AuthFoundation/ClaimConvertable": {
   "abstract" : [
@@ -432,53 +554,25 @@
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/isclaim"
 },
-"doc://AuthFoundation/documentation/AuthFoundation/IsClaim/init(rawValue:)": {
+"doc://AuthFoundation/documentation/AuthFoundation/JSON": {
   "abstract" : [
-
-  ],
-  "fragments" : [
     {
-      "kind" : "identifier",
-      "text" : "init"
+      "text" : "Represent mixed JSON values as instances of ",
+      "type" : "text"
     },
     {
-      "kind" : "text",
-      "text" : "?("
+      "code" : "Any",
+      "type" : "codeVoice"
     },
     {
-      "kind" : "externalParam",
-      "text" : "rawValue"
-    },
-    {
-      "kind" : "text",
-      "text" : ": "
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:SS",
-      "text" : "String"
-    },
-    {
-      "kind" : "text",
-      "text" : ")"
+      "text" : ". This is used to expose API response values to Swift native types where Swift enums are not supported.",
+      "type" : "text"
     }
-  ],
-  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/IsClaim\/init(rawValue:)",
-  "kind" : "symbol",
-  "required" : true,
-  "role" : "symbol",
-  "title" : "init(rawValue:)",
-  "type" : "topic",
-  "url" : "\/documentation\/authfoundation\/isclaim\/init(rawvalue:)"
-},
-"doc://AuthFoundation/documentation/AuthFoundation/IsClaim/rawValue": {
-  "abstract" : [
-
   ],
   "fragments" : [
     {
       "kind" : "keyword",
-      "text" : "var"
+      "text" : "enum"
     },
     {
       "kind" : "text",
@@ -486,25 +580,21 @@
     },
     {
       "kind" : "identifier",
-      "text" : "rawValue"
-    },
-    {
-      "kind" : "text",
-      "text" : ": "
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:SS",
-      "text" : "String"
+      "text" : "JSON"
     }
   ],
-  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/IsClaim\/rawValue",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JSON",
   "kind" : "symbol",
-  "required" : true,
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "JSON"
+    }
+  ],
   "role" : "symbol",
-  "title" : "rawValue",
+  "title" : "JSON",
   "type" : "topic",
-  "url" : "\/documentation\/authfoundation\/isclaim\/rawvalue"
+  "url" : "\/documentation\/authfoundation\/json"
 },
 "doc://AuthFoundation/documentation/AuthFoundation/JSONClaimContainer": {
   "abstract" : [
@@ -793,6 +883,51 @@
   "title" : "OpenIdConfiguration.ProviderMetadata",
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/openidconfiguration\/providermetadata"
+},
+"doc://AuthFoundation/documentation/AuthFoundation/Token/TokenClaim": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "enum"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "TokenClaim"
+    }
+  ],
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/Token\/TokenClaim",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "TokenClaim"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "Token.TokenClaim",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/token\/tokenclaim"
+},
+"doc://AuthFoundation/documentation/AuthFoundation/WorkingWithClaims": {
+  "abstract" : [
+    {
+      "text" : "Using Claims on the various types included in OIDC and AuthFoundation.",
+      "type" : "text"
+    }
+  ],
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/WorkingWithClaims",
+  "kind" : "article",
+  "role" : "article",
+  "title" : "Working with Claims",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/workingwithclaims"
 }
 }
 }

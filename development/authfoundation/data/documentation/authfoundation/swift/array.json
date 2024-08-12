@@ -79,16 +79,6 @@
       "kind" : "declarations"
     }
   ],
-  "relationshipsSections" : [
-    {
-      "identifiers" : [
-        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/ClaimConvertable"
-      ],
-      "kind" : "relationships",
-      "title" : "Conforms To",
-      "type" : "conformsTo"
-    }
-  ],
   "schemaVersion" : {
     "major" : 0,
     "minor" : 3,
@@ -109,13 +99,6 @@
         "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/Swift\/Array\/random(count:)"
       ],
       "title" : "Type Methods"
-    },
-    {
-      "generated" : true,
-      "identifiers" : [
-        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/Swift\/Array\/ClaimConvertable-Implementations"
-      ],
-      "title" : "Default Implementations"
     }
   ],
   "variants" : [
@@ -145,115 +128,6 @@
   "title" : "AuthFoundation",
   "type" : "topic",
   "url" : "\/documentation\/authfoundation"
-},
-"doc://AuthFoundation/documentation/AuthFoundation/ClaimConvertable": {
-  "abstract" : [
-    {
-      "text" : "Indicates a type can be consumed from a ",
-      "type" : "text"
-    },
-    {
-      "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/HasClaims",
-      "isActive" : true,
-      "type" : "reference"
-    },
-    {
-      "text" : " object and converted to the indicated type.",
-      "type" : "text"
-    }
-  ],
-  "conformance" : {
-    "availabilityPrefix" : [
-      {
-        "text" : "Available when",
-        "type" : "text"
-      }
-    ],
-    "conformancePrefix" : [
-      {
-        "text" : "Conforms when",
-        "type" : "text"
-      }
-    ],
-    "constraints" : [
-      {
-        "code" : "Element",
-        "type" : "codeVoice"
-      },
-      {
-        "text" : " is ",
-        "type" : "text"
-      },
-      {
-        "code" : "String",
-        "type" : "codeVoice"
-      },
-      {
-        "text" : ".",
-        "type" : "text"
-      }
-    ]
-  },
-  "fragments" : [
-    {
-      "kind" : "keyword",
-      "text" : "protocol"
-    },
-    {
-      "kind" : "text",
-      "text" : " "
-    },
-    {
-      "kind" : "identifier",
-      "text" : "ClaimConvertable"
-    }
-  ],
-  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/ClaimConvertable",
-  "kind" : "symbol",
-  "navigatorTitle" : [
-    {
-      "kind" : "identifier",
-      "text" : "ClaimConvertable"
-    }
-  ],
-  "role" : "symbol",
-  "title" : "ClaimConvertable",
-  "type" : "topic",
-  "url" : "\/documentation\/authfoundation\/claimconvertable"
-},
-"doc://AuthFoundation/documentation/AuthFoundation/HasClaims": {
-  "abstract" : [
-    {
-      "text" : "Used by classes that contains OAuth2 claims.",
-      "type" : "text"
-    }
-  ],
-  "fragments" : [
-    {
-      "kind" : "keyword",
-      "text" : "protocol"
-    },
-    {
-      "kind" : "text",
-      "text" : " "
-    },
-    {
-      "kind" : "identifier",
-      "text" : "HasClaims"
-    }
-  ],
-  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/HasClaims",
-  "kind" : "symbol",
-  "navigatorTitle" : [
-    {
-      "kind" : "identifier",
-      "text" : "HasClaims"
-    }
-  ],
-  "role" : "symbol",
-  "title" : "HasClaims",
-  "type" : "topic",
-  "url" : "\/documentation\/authfoundation\/hasclaims"
 },
 "doc://AuthFoundation/documentation/AuthFoundation/Swift": {
   "abstract" : [
@@ -297,17 +171,6 @@
   "title" : "Array",
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/swift\/array"
-},
-"doc://AuthFoundation/documentation/AuthFoundation/Swift/Array/ClaimConvertable-Implementations": {
-  "abstract" : [
-
-  ],
-  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/Swift\/Array\/ClaimConvertable-Implementations",
-  "kind" : "article",
-  "role" : "collectionGroup",
-  "title" : "ClaimConvertable Implementations",
-  "type" : "topic",
-  "url" : "\/documentation\/authfoundation\/swift\/array\/claimconvertable-implementations"
 },
 "doc://AuthFoundation/documentation/AuthFoundation/Swift/Array/base64URLEncodedString": {
   "abstract" : [

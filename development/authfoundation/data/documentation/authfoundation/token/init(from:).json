@@ -17,7 +17,8 @@
     "paths" : [
       [
         "doc:\/\/AuthFoundation\/documentation\/AuthFoundation",
-        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/Token"
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/Token",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/Token\/Decodable-Implementations"
       ]
     ]
   },
@@ -27,6 +28,7 @@
   },
   "kind" : "symbol",
   "metadata" : {
+    "extendedModule" : "AuthFoundation",
     "externalID" : "s:14AuthFoundation5TokenC4fromACs7Decoder_p_tKcfc",
     "fragments" : [
       {
@@ -88,14 +90,6 @@
             "macOS"
           ],
           "tokens" : [
-            {
-              "kind" : "keyword",
-              "text" : "required"
-            },
-            {
-              "kind" : "text",
-              "text" : " "
-            },
             {
               "kind" : "keyword",
               "text" : "convenience"
@@ -216,6 +210,17 @@
   "title" : "Token",
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/token"
+},
+"doc://AuthFoundation/documentation/AuthFoundation/Token/Decodable-Implementations": {
+  "abstract" : [
+
+  ],
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/Token\/Decodable-Implementations",
+  "kind" : "article",
+  "role" : "collectionGroup",
+  "title" : "Decodable Implementations",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/token\/decodable-implementations"
 },
 "doc://AuthFoundation/documentation/AuthFoundation/Token/init(from:)": {
   "abstract" : [

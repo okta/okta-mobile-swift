@@ -19,7 +19,8 @@
   },
   "kind" : "symbol",
   "metadata" : {
-    "externalID" : "s:14AuthFoundation9HasClaimsP06customD0SaySSGvp",
+    "extendedModule" : "AuthFoundation",
+    "externalID" : "s:14AuthFoundation9HasClaimsPAAE06customD0SaySSGvp",
     "fragments" : [
       {
         "kind" : "keyword",
@@ -52,7 +53,6 @@
         "name" : "AuthFoundation"
       }
     ],
-    "required" : true,
     "role" : "symbol",
     "roleHeading" : "Instance Property",
     "symbolKind" : "property",
@@ -233,8 +233,16 @@
     },
     {
       "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:14AuthFoundation5ClaimO",
-      "text" : "Claim"
+      "text" : "Self"
+    },
+    {
+      "kind" : "text",
+      "text" : "."
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:14AuthFoundation9HasClaimsP9ClaimTypeQa",
+      "text" : "ClaimType"
     },
     {
       "kind" : "text",
@@ -243,7 +251,6 @@
   ],
   "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/HasClaims\/claims",
   "kind" : "symbol",
-  "required" : true,
   "role" : "symbol",
   "title" : "claims",
   "type" : "topic",
@@ -285,7 +292,6 @@
   ],
   "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/HasClaims\/customClaims",
   "kind" : "symbol",
-  "required" : true,
   "role" : "symbol",
   "title" : "customClaims",
   "type" : "topic",

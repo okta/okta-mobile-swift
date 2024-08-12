@@ -90,20 +90,10 @@
   "relationshipsSections" : [
     {
       "identifiers" : [
-        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/Swift\/Array",
         "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/AuthenticationMethod",
-        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/Swift\/Bool",
-        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/Foundation\/Date",
-        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/Swift\/Dictionary",
-        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/Swift\/Double",
-        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/Swift\/Float",
         "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/GrantType",
-        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/Swift\/Int",
-        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JWTClaim",
-        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/Foundation\/NSNumber",
-        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/Foundation\/NSString",
-        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/Swift\/String",
-        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/Foundation\/URL"
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JWK\/Algorithm-swift.enum",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JWTClaim"
       ],
       "kind" : "relationships",
       "title" : "Conforming Types",
@@ -122,12 +112,16 @@
     {
       "generated" : true,
       "identifiers" : [
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/WorkingWithClaims",
         "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JWT",
         "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JWK",
         "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JWKS",
         "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JWTClaim",
         "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/HasClaims",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/Claim",
         "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JSONClaimContainer",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JSON",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/AnyJSON",
         "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/IsClaim",
         "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/Expires"
       ],
@@ -137,7 +131,7 @@
   "topicSections" : [
     {
       "identifiers" : [
-        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/ClaimConvertable\/claim(_:in:from:)-3980t"
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/ClaimConvertable\/convert(from:)"
       ],
       "title" : "Type Methods"
     }
@@ -169,6 +163,49 @@
   "title" : "AuthFoundation",
   "type" : "topic",
   "url" : "\/documentation\/authfoundation"
+},
+"doc://AuthFoundation/documentation/AuthFoundation/AnyJSON": {
+  "abstract" : [
+    {
+      "text" : "Efficiently represents ",
+      "type" : "text"
+    },
+    {
+      "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JSON",
+      "isActive" : true,
+      "type" : "reference"
+    },
+    {
+      "text" : " values, and exchanges between its String or Data representations.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "class"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "AnyJSON"
+    }
+  ],
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/AnyJSON",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "AnyJSON"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "AnyJSON",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/anyjson"
 },
 "doc://AuthFoundation/documentation/AuthFoundation/AuthenticationMethod": {
   "abstract" : [
@@ -213,6 +250,38 @@
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/authenticationmethod"
 },
+"doc://AuthFoundation/documentation/AuthFoundation/Claim": {
+  "abstract" : [
+
+  ],
+  "deprecated" : true,
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "typealias"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "Claim"
+    }
+  ],
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/Claim",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "Claim"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "Claim",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/claim"
+},
 "doc://AuthFoundation/documentation/AuthFoundation/ClaimConvertable": {
   "abstract" : [
     {
@@ -256,11 +325,29 @@
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/claimconvertable"
 },
-"doc://AuthFoundation/documentation/AuthFoundation/ClaimConvertable/claim(_:in:from:)-3980t": {
+"doc://AuthFoundation/documentation/AuthFoundation/ClaimConvertable/convert(from:)": {
   "abstract" : [
-
+    {
+      "text" : "Converts the given ",
+      "type" : "text"
+    },
+    {
+      "code" : "Any",
+      "type" : "codeVoice"
+    },
+    {
+      "text" : " value to an instance of the conforming type’s class, otherwise return ",
+      "type" : "text"
+    },
+    {
+      "code" : "nil",
+      "type" : "codeVoice"
+    },
+    {
+      "text" : " if this cannot be done.",
+      "type" : "text"
+    }
   ],
-  "defaultImplementations" : 4,
   "fragments" : [
     {
       "kind" : "keyword",
@@ -280,37 +367,11 @@
     },
     {
       "kind" : "identifier",
-      "text" : "claim"
+      "text" : "convert"
     },
     {
       "kind" : "text",
       "text" : "("
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:SS",
-      "text" : "String"
-    },
-    {
-      "kind" : "text",
-      "text" : ", "
-    },
-    {
-      "kind" : "externalParam",
-      "text" : "in"
-    },
-    {
-      "kind" : "text",
-      "text" : ": any "
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:14AuthFoundation9HasClaimsP",
-      "text" : "HasClaims"
-    },
-    {
-      "kind" : "text",
-      "text" : ", "
     },
     {
       "kind" : "externalParam",
@@ -337,13 +398,13 @@
       "text" : "?"
     }
   ],
-  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/ClaimConvertable\/claim(_:in:from:)-3980t",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/ClaimConvertable\/convert(from:)",
   "kind" : "symbol",
   "required" : true,
   "role" : "symbol",
-  "title" : "claim(_:in:from:)",
+  "title" : "convert(from:)",
   "type" : "topic",
-  "url" : "\/documentation\/authfoundation\/claimconvertable\/claim(_:in:from:)-3980t"
+  "url" : "\/documentation\/authfoundation\/claimconvertable\/convert(from:)"
 },
 "doc://AuthFoundation/documentation/AuthFoundation/Expires": {
   "abstract" : [
@@ -378,134 +439,6 @@
   "title" : "Expires",
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/expires"
-},
-"doc://AuthFoundation/documentation/AuthFoundation/Foundation/Date": {
-  "abstract" : [
-
-  ],
-  "fragments" : [
-    {
-      "kind" : "keyword",
-      "text" : "extension"
-    },
-    {
-      "kind" : "text",
-      "text" : " "
-    },
-    {
-      "kind" : "identifier",
-      "preciseIdentifier" : "s:10Foundation4DateV",
-      "text" : "Date"
-    }
-  ],
-  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/Foundation\/Date",
-  "kind" : "symbol",
-  "navigatorTitle" : [
-    {
-      "kind" : "identifier",
-      "text" : "Date"
-    }
-  ],
-  "role" : "symbol",
-  "title" : "Date",
-  "type" : "topic",
-  "url" : "\/documentation\/authfoundation\/foundation\/date"
-},
-"doc://AuthFoundation/documentation/AuthFoundation/Foundation/NSNumber": {
-  "abstract" : [
-
-  ],
-  "fragments" : [
-    {
-      "kind" : "keyword",
-      "text" : "extension"
-    },
-    {
-      "kind" : "text",
-      "text" : " "
-    },
-    {
-      "kind" : "identifier",
-      "preciseIdentifier" : "c:objc(cs)NSNumber",
-      "text" : "NSNumber"
-    }
-  ],
-  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/Foundation\/NSNumber",
-  "kind" : "symbol",
-  "navigatorTitle" : [
-    {
-      "kind" : "identifier",
-      "text" : "NSNumber"
-    }
-  ],
-  "role" : "symbol",
-  "title" : "NSNumber",
-  "type" : "topic",
-  "url" : "\/documentation\/authfoundation\/foundation\/nsnumber"
-},
-"doc://AuthFoundation/documentation/AuthFoundation/Foundation/NSString": {
-  "abstract" : [
-
-  ],
-  "fragments" : [
-    {
-      "kind" : "keyword",
-      "text" : "extension"
-    },
-    {
-      "kind" : "text",
-      "text" : " "
-    },
-    {
-      "kind" : "identifier",
-      "preciseIdentifier" : "c:objc(cs)NSString",
-      "text" : "NSString"
-    }
-  ],
-  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/Foundation\/NSString",
-  "kind" : "symbol",
-  "navigatorTitle" : [
-    {
-      "kind" : "identifier",
-      "text" : "NSString"
-    }
-  ],
-  "role" : "symbol",
-  "title" : "NSString",
-  "type" : "topic",
-  "url" : "\/documentation\/authfoundation\/foundation\/nsstring"
-},
-"doc://AuthFoundation/documentation/AuthFoundation/Foundation/URL": {
-  "abstract" : [
-
-  ],
-  "fragments" : [
-    {
-      "kind" : "keyword",
-      "text" : "extension"
-    },
-    {
-      "kind" : "text",
-      "text" : " "
-    },
-    {
-      "kind" : "identifier",
-      "preciseIdentifier" : "s:10Foundation3URLV",
-      "text" : "URL"
-    }
-  ],
-  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/Foundation\/URL",
-  "kind" : "symbol",
-  "navigatorTitle" : [
-    {
-      "kind" : "identifier",
-      "text" : "URL"
-    }
-  ],
-  "role" : "symbol",
-  "title" : "URL",
-  "type" : "topic",
-  "url" : "\/documentation\/authfoundation\/foundation\/url"
 },
 "doc://AuthFoundation/documentation/AuthFoundation/GrantType": {
   "abstract" : [
@@ -653,6 +586,48 @@
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/isclaim"
 },
+"doc://AuthFoundation/documentation/AuthFoundation/JSON": {
+  "abstract" : [
+    {
+      "text" : "Represent mixed JSON values as instances of ",
+      "type" : "text"
+    },
+    {
+      "code" : "Any",
+      "type" : "codeVoice"
+    },
+    {
+      "text" : ". This is used to expose API response values to Swift native types where Swift enums are not supported.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "enum"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "JSON"
+    }
+  ],
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JSON",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "JSON"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "JSON",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/json"
+},
 "doc://AuthFoundation/documentation/AuthFoundation/JSONClaimContainer": {
   "abstract" : [
     {
@@ -720,6 +695,40 @@
   "title" : "JWK",
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/jwk"
+},
+"doc://AuthFoundation/documentation/AuthFoundation/JWK/Algorithm-swift.enum": {
+  "abstract" : [
+    {
+      "text" : "The algorithm this key is intended to be used with.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "enum"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "Algorithm"
+    }
+  ],
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JWK\/Algorithm-swift.enum",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "Algorithm"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "JWK.Algorithm",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/jwk\/algorithm-swift.enum"
 },
 "doc://AuthFoundation/documentation/AuthFoundation/JWKS": {
   "abstract" : [
@@ -864,309 +873,19 @@
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/jwtclaim"
 },
-"doc://AuthFoundation/documentation/AuthFoundation/Swift/Array": {
+"doc://AuthFoundation/documentation/AuthFoundation/WorkingWithClaims": {
   "abstract" : [
-
-  ],
-  "conformance" : {
-    "availabilityPrefix" : [
-      {
-        "text" : "Available when",
-        "type" : "text"
-      }
-    ],
-    "conformancePrefix" : [
-      {
-        "text" : "Conforms when",
-        "type" : "text"
-      }
-    ],
-    "constraints" : [
-      {
-        "code" : "Element",
-        "type" : "codeVoice"
-      },
-      {
-        "text" : " is ",
-        "type" : "text"
-      },
-      {
-        "code" : "String",
-        "type" : "codeVoice"
-      },
-      {
-        "text" : ".",
-        "type" : "text"
-      }
-    ]
-  },
-  "fragments" : [
     {
-      "kind" : "keyword",
-      "text" : "extension"
-    },
-    {
-      "kind" : "text",
-      "text" : " "
-    },
-    {
-      "kind" : "identifier",
-      "preciseIdentifier" : "s:Sa",
-      "text" : "Array"
+      "text" : "Using Claims on the various types included in OIDC and AuthFoundation.",
+      "type" : "text"
     }
   ],
-  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/Swift\/Array",
-  "kind" : "symbol",
-  "navigatorTitle" : [
-    {
-      "kind" : "identifier",
-      "text" : "Array"
-    }
-  ],
-  "role" : "symbol",
-  "title" : "Array",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/WorkingWithClaims",
+  "kind" : "article",
+  "role" : "article",
+  "title" : "Working with Claims",
   "type" : "topic",
-  "url" : "\/documentation\/authfoundation\/swift\/array"
-},
-"doc://AuthFoundation/documentation/AuthFoundation/Swift/Bool": {
-  "abstract" : [
-
-  ],
-  "fragments" : [
-    {
-      "kind" : "keyword",
-      "text" : "extension"
-    },
-    {
-      "kind" : "text",
-      "text" : " "
-    },
-    {
-      "kind" : "identifier",
-      "preciseIdentifier" : "s:Sb",
-      "text" : "Bool"
-    }
-  ],
-  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/Swift\/Bool",
-  "kind" : "symbol",
-  "navigatorTitle" : [
-    {
-      "kind" : "identifier",
-      "text" : "Bool"
-    }
-  ],
-  "role" : "symbol",
-  "title" : "Bool",
-  "type" : "topic",
-  "url" : "\/documentation\/authfoundation\/swift\/bool"
-},
-"doc://AuthFoundation/documentation/AuthFoundation/Swift/Dictionary": {
-  "abstract" : [
-
-  ],
-  "conformance" : {
-    "availabilityPrefix" : [
-      {
-        "text" : "Available when",
-        "type" : "text"
-      }
-    ],
-    "conformancePrefix" : [
-      {
-        "text" : "Conforms when",
-        "type" : "text"
-      }
-    ],
-    "constraints" : [
-      {
-        "code" : "Key",
-        "type" : "codeVoice"
-      },
-      {
-        "text" : " is ",
-        "type" : "text"
-      },
-      {
-        "code" : "String",
-        "type" : "codeVoice"
-      },
-      {
-        "text" : " and ",
-        "type" : "text"
-      },
-      {
-        "code" : "Value",
-        "type" : "codeVoice"
-      },
-      {
-        "text" : " is ",
-        "type" : "text"
-      },
-      {
-        "code" : "String",
-        "type" : "codeVoice"
-      },
-      {
-        "text" : ".",
-        "type" : "text"
-      }
-    ]
-  },
-  "fragments" : [
-    {
-      "kind" : "keyword",
-      "text" : "extension"
-    },
-    {
-      "kind" : "text",
-      "text" : " "
-    },
-    {
-      "kind" : "identifier",
-      "preciseIdentifier" : "s:SD",
-      "text" : "Dictionary"
-    }
-  ],
-  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/Swift\/Dictionary",
-  "kind" : "symbol",
-  "navigatorTitle" : [
-    {
-      "kind" : "identifier",
-      "text" : "Dictionary"
-    }
-  ],
-  "role" : "symbol",
-  "title" : "Dictionary",
-  "type" : "topic",
-  "url" : "\/documentation\/authfoundation\/swift\/dictionary"
-},
-"doc://AuthFoundation/documentation/AuthFoundation/Swift/Double": {
-  "abstract" : [
-
-  ],
-  "fragments" : [
-    {
-      "kind" : "keyword",
-      "text" : "extension"
-    },
-    {
-      "kind" : "text",
-      "text" : " "
-    },
-    {
-      "kind" : "identifier",
-      "preciseIdentifier" : "s:Sd",
-      "text" : "Double"
-    }
-  ],
-  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/Swift\/Double",
-  "kind" : "symbol",
-  "navigatorTitle" : [
-    {
-      "kind" : "identifier",
-      "text" : "Double"
-    }
-  ],
-  "role" : "symbol",
-  "title" : "Double",
-  "type" : "topic",
-  "url" : "\/documentation\/authfoundation\/swift\/double"
-},
-"doc://AuthFoundation/documentation/AuthFoundation/Swift/Float": {
-  "abstract" : [
-
-  ],
-  "fragments" : [
-    {
-      "kind" : "keyword",
-      "text" : "extension"
-    },
-    {
-      "kind" : "text",
-      "text" : " "
-    },
-    {
-      "kind" : "identifier",
-      "preciseIdentifier" : "s:Sf",
-      "text" : "Float"
-    }
-  ],
-  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/Swift\/Float",
-  "kind" : "symbol",
-  "navigatorTitle" : [
-    {
-      "kind" : "identifier",
-      "text" : "Float"
-    }
-  ],
-  "role" : "symbol",
-  "title" : "Float",
-  "type" : "topic",
-  "url" : "\/documentation\/authfoundation\/swift\/float"
-},
-"doc://AuthFoundation/documentation/AuthFoundation/Swift/Int": {
-  "abstract" : [
-
-  ],
-  "fragments" : [
-    {
-      "kind" : "keyword",
-      "text" : "extension"
-    },
-    {
-      "kind" : "text",
-      "text" : " "
-    },
-    {
-      "kind" : "identifier",
-      "preciseIdentifier" : "s:Si",
-      "text" : "Int"
-    }
-  ],
-  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/Swift\/Int",
-  "kind" : "symbol",
-  "navigatorTitle" : [
-    {
-      "kind" : "identifier",
-      "text" : "Int"
-    }
-  ],
-  "role" : "symbol",
-  "title" : "Int",
-  "type" : "topic",
-  "url" : "\/documentation\/authfoundation\/swift\/int"
-},
-"doc://AuthFoundation/documentation/AuthFoundation/Swift/String": {
-  "abstract" : [
-
-  ],
-  "fragments" : [
-    {
-      "kind" : "keyword",
-      "text" : "extension"
-    },
-    {
-      "kind" : "text",
-      "text" : " "
-    },
-    {
-      "kind" : "identifier",
-      "preciseIdentifier" : "s:SS",
-      "text" : "String"
-    }
-  ],
-  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/Swift\/String",
-  "kind" : "symbol",
-  "navigatorTitle" : [
-    {
-      "kind" : "identifier",
-      "text" : "String"
-    }
-  ],
-  "role" : "symbol",
-  "title" : "String",
-  "type" : "topic",
-  "url" : "\/documentation\/authfoundation\/swift\/string"
+  "url" : "\/documentation\/authfoundation\/workingwithclaims"
 }
 }
 }

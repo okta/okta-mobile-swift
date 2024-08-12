@@ -84,6 +84,7 @@
     {
       "identifiers" : [
         "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/OpenIdConfiguration",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/Token",
         "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/Token\/Metadata",
         "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/TokenInfo",
         "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/UserInfo"
@@ -105,22 +106,22 @@
     {
       "generated" : true,
       "identifiers" : [
-        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/APIClient",
-        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/APIClientDelegate",
-        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/APIClientConfiguration",
-        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/APIContentType",
-        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/APIRequest",
-        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/APIRequestBody",
-        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/APIRequestArgument",
-        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/APIRequestMethod",
-        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/APIResponse",
-        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/APIResponseResult",
-        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/APIRateLimit",
-        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/APIRetry",
         "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/APIAuthorization",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/APIClientConfiguration",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/APIClientDelegate",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/APIClient",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/APIContentType",
         "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/APIParsingContext",
-        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/OAuth2APIRequest",
-        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/Empty"
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/APIRateLimit",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/APIRequestArgument",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/APIRequestBody",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/APIRequestMethod",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/APIRequest",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/APIResponseResult",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/APIResponse",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/APIRetry",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/Empty",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/OAuth2APIRequest"
       ],
       "title" : "Networking"
     }
@@ -1032,6 +1033,40 @@
   "title" : "OpenIdConfiguration",
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/openidconfiguration"
+},
+"doc://AuthFoundation/documentation/AuthFoundation/Token": {
+  "abstract" : [
+    {
+      "text" : "Token information representing a user’s access to a resource server, including access token, refresh token, and other related information.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "class"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "Token"
+    }
+  ],
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/Token",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "Token"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "Token",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/token"
 },
 "doc://AuthFoundation/documentation/AuthFoundation/Token/Metadata": {
   "abstract" : [

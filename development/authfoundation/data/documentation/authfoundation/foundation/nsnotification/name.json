@@ -1,4 +1,10 @@
 {
+  "abstract" : [
+    {
+      "text" : "Custom notifications sent from the SDK for key events.",
+      "type" : "text"
+    }
+  ],
   "hierarchy" : {
     "paths" : [
       [
@@ -96,6 +102,34 @@
         }
       ],
       "kind" : "declarations"
+    },
+    {
+      "content" : [
+        {
+          "anchor" : "overview",
+          "level" : 2,
+          "text" : "Overview",
+          "type" : "heading"
+        },
+        {
+          "inlineContent" : [
+            {
+              "text" : "When important events occur within the SDK, your application may need to update its state when the default credential changes. Therefore you can observe the ",
+              "type" : "text"
+            },
+            {
+              "code" : "defaultCredentialChanged",
+              "type" : "codeVoice"
+            },
+            {
+              "text" : " notification.",
+              "type" : "text"
+            }
+          ],
+          "type" : "paragraph"
+        }
+      ],
+      "kind" : "content"
     }
   ],
   "schemaVersion" : {
@@ -262,7 +296,10 @@
 },
 "doc://AuthFoundation/documentation/AuthFoundation/Foundation/NSNotification/Name": {
   "abstract" : [
-
+    {
+      "text" : "Custom notifications sent from the SDK for key events.",
+      "type" : "text"
+    }
   ],
   "fragments" : [
     {

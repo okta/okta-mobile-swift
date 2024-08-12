@@ -270,7 +270,7 @@
 "doc://AuthFoundation/documentation/AuthFoundation/TokenInfo/claims": {
   "abstract" : [
     {
-      "text" : "The list of standard claims contained within this JWT token.",
+      "text" : "Returns the collection of claims this object contains.",
       "type" : "text"
     }
   ],
@@ -319,7 +319,7 @@
 "doc://AuthFoundation/documentation/AuthFoundation/TokenInfo/customClaims": {
   "abstract" : [
     {
-      "text" : "The list of custom claims contained within this JWT token.",
+      "text" : "Returns the collection of custom claims this object contains.",
       "type" : "text"
     }
   ],

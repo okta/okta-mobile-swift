@@ -119,8 +119,9 @@
               "type" : "text"
             },
             {
-              "code" : "ClaimContainer",
-              "type" : "codeVoice"
+              "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JSONClaimContainer",
+              "isActive" : true,
+              "type" : "reference"
             },
             {
               "text" : ".",
@@ -191,7 +192,6 @@
       "generated" : true,
       "identifiers" : [
         "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/TokenInfo\/HasClaims-Implementations",
-        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/TokenInfo\/JSONClaimContainer-Implementations",
         "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/TokenInfo\/JSONDecodable-Implementations"
       ],
       "title" : "Default Implementations"
@@ -477,17 +477,6 @@
   "title" : "HasClaims Implementations",
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/tokeninfo\/hasclaims-implementations"
-},
-"doc://AuthFoundation/documentation/AuthFoundation/TokenInfo/JSONClaimContainer-Implementations": {
-  "abstract" : [
-
-  ],
-  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/TokenInfo\/JSONClaimContainer-Implementations",
-  "kind" : "article",
-  "role" : "collectionGroup",
-  "title" : "JSONClaimContainer Implementations",
-  "type" : "topic",
-  "url" : "\/documentation\/authfoundation\/tokeninfo\/jsonclaimcontainer-implementations"
 },
 "doc://AuthFoundation/documentation/AuthFoundation/TokenInfo/JSONDecodable-Implementations": {
   "abstract" : [

@@ -144,12 +144,16 @@
     },
     {
       "identifiers" : [
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/WorkingWithClaims",
         "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JWT",
         "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JWK",
         "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JWKS",
         "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JWTClaim",
         "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/HasClaims",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/Claim",
         "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JSONClaimContainer",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JSON",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/AnyJSON",
         "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/ClaimConvertable",
         "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/IsClaim",
         "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/Expires"
@@ -182,78 +186,59 @@
     },
     {
       "identifiers" : [
-        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/APIClient",
-        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/APIClientDelegate",
-        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/APIClientConfiguration",
-        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/APIContentType",
-        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/APIRequest",
-        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/APIRequestBody",
-        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/APIRequestArgument",
-        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/APIRequestMethod",
-        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/APIResponse",
-        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/APIResponseResult",
-        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/APIRateLimit",
-        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/APIRetry",
         "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/APIAuthorization",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/APIClientConfiguration",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/APIClientDelegate",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/APIClient",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/APIContentType",
         "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/APIParsingContext",
-        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/OAuth2APIRequest",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/APIRateLimit",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/APIRequestArgument",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/APIRequestBody",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/APIRequestMethod",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/APIRequest",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/APIResponseResult",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/APIResponse",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/APIRetry",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/Empty",
         "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JSONDecodable",
-        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/Empty"
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/OAuth2APIRequest"
       ],
       "title" : "Networking"
     },
     {
       "identifiers" : [
         "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/APIClientError",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/AuthenticationError",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/ClaimError",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/CredentialError",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JSONError",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JWTError",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/KeychainError",
         "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/OAuth2Error",
         "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/OAuth2ServerError",
         "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/OktaAPIError",
-        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/CredentialError",
-        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/TokenError",
-        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JWTError",
-        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/KeychainError",
-        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/AuthenticationError",
-        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JSONValueError"
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/TokenError"
       ],
       "title" : "Error Types"
     },
     {
       "identifiers" : [
         "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/SDKVersion",
-        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/SDKVersionMigrator",
-        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/Version"
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/SDKVersionMigrator"
       ],
       "title" : "Migration and versioning"
     },
     {
       "identifiers" : [
         "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/DelegateCollection",
-        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/UsesDelegateCollection",
-        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/URLSessionProtocol",
         "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/URLSessionDataTaskProtocol",
-        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/Weak",
-        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/WeakCollection"
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/URLSessionProtocol",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/UsesDelegateCollection",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/WeakCollection",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/Weak"
       ],
       "title" : "Internals and mocking"
-    },
-    {
-      "generated" : true,
-      "identifiers" : [
-        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/WorkingWithClaims"
-      ],
-      "title" : "Articles"
-    },
-    {
-      "identifiers" : [
-        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/Claim"
-      ],
-      "title" : "Type Aliases"
-    },
-    {
-      "identifiers" : [
-        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JSONValue"
-      ],
-      "title" : "Enumerations"
     },
     {
       "identifiers" : [
@@ -960,6 +945,49 @@
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/apiretry"
 },
+"doc://AuthFoundation/documentation/AuthFoundation/AnyJSON": {
+  "abstract" : [
+    {
+      "text" : "Efficiently represents ",
+      "type" : "text"
+    },
+    {
+      "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JSON",
+      "isActive" : true,
+      "type" : "reference"
+    },
+    {
+      "text" : " values, and exchanges between its String or Data representations.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "class"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "AnyJSON"
+    }
+  ],
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/AnyJSON",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "AnyJSON"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "AnyJSON",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/anyjson"
+},
 "doc://AuthFoundation/documentation/AuthFoundation/AuthenticationDelegate": {
   "abstract" : [
     {
@@ -1179,6 +1207,37 @@
   "title" : "ClaimConvertable",
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/claimconvertable"
+},
+"doc://AuthFoundation/documentation/AuthFoundation/ClaimError": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "enum"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "ClaimError"
+    }
+  ],
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/ClaimError",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "ClaimError"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "ClaimError",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/claimerror"
 },
 "doc://AuthFoundation/documentation/AuthFoundation/Credential": {
   "abstract" : [
@@ -1733,6 +1792,48 @@
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/isclaim"
 },
+"doc://AuthFoundation/documentation/AuthFoundation/JSON": {
+  "abstract" : [
+    {
+      "text" : "Represent mixed JSON values as instances of ",
+      "type" : "text"
+    },
+    {
+      "code" : "Any",
+      "type" : "codeVoice"
+    },
+    {
+      "text" : ". This is used to expose API response values to Swift native types where Swift enums are not supported.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "enum"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "JSON"
+    }
+  ],
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JSON",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "JSON"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "JSON",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/json"
+},
 "doc://AuthFoundation/documentation/AuthFoundation/JSONClaimContainer": {
   "abstract" : [
     {
@@ -1798,57 +1899,7 @@
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/jsondecodable"
 },
-"doc://AuthFoundation/documentation/AuthFoundation/JSONValue": {
-  "abstract" : [
-    {
-      "text" : "Represent mixed JSON values as instances of ",
-      "type" : "text"
-    },
-    {
-      "code" : "Any",
-      "type" : "codeVoice"
-    },
-    {
-      "text" : ". This is used to expose API response values to Swift native types",
-      "type" : "text"
-    },
-    {
-      "text" : " ",
-      "type" : "text"
-    },
-    {
-      "text" : "where Swift enums are not supported.",
-      "type" : "text"
-    }
-  ],
-  "fragments" : [
-    {
-      "kind" : "keyword",
-      "text" : "enum"
-    },
-    {
-      "kind" : "text",
-      "text" : " "
-    },
-    {
-      "kind" : "identifier",
-      "text" : "JSONValue"
-    }
-  ],
-  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JSONValue",
-  "kind" : "symbol",
-  "navigatorTitle" : [
-    {
-      "kind" : "identifier",
-      "text" : "JSONValue"
-    }
-  ],
-  "role" : "symbol",
-  "title" : "JSONValue",
-  "type" : "topic",
-  "url" : "\/documentation\/authfoundation\/jsonvalue"
-},
-"doc://AuthFoundation/documentation/AuthFoundation/JSONValueError": {
+"doc://AuthFoundation/documentation/AuthFoundation/JSONError": {
   "abstract" : [
 
   ],
@@ -1863,21 +1914,21 @@
     },
     {
       "kind" : "identifier",
-      "text" : "JSONValueError"
+      "text" : "JSONError"
     }
   ],
-  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JSONValueError",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JSONError",
   "kind" : "symbol",
   "navigatorTitle" : [
     {
       "kind" : "identifier",
-      "text" : "JSONValueError"
+      "text" : "JSONError"
     }
   ],
   "role" : "symbol",
-  "title" : "JSONValueError",
+  "title" : "JSONError",
   "type" : "topic",
-  "url" : "\/documentation\/authfoundation\/jsonvalueerror"
+  "url" : "\/documentation\/authfoundation\/jsonerror"
 },
 "doc://AuthFoundation/documentation/AuthFoundation/JWK": {
   "abstract" : [
@@ -3087,40 +3138,6 @@
   "title" : "UsesDelegateCollection",
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/usesdelegatecollection"
-},
-"doc://AuthFoundation/documentation/AuthFoundation/Version": {
-  "abstract" : [
-
-  ],
-  "fragments" : [
-    {
-      "kind" : "keyword",
-      "text" : "let"
-    },
-    {
-      "kind" : "text",
-      "text" : " "
-    },
-    {
-      "kind" : "identifier",
-      "text" : "Version"
-    },
-    {
-      "kind" : "text",
-      "text" : ": "
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:14AuthFoundation10SDKVersionC",
-      "text" : "SDKVersion"
-    }
-  ],
-  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/Version",
-  "kind" : "symbol",
-  "role" : "symbol",
-  "title" : "Version",
-  "type" : "topic",
-  "url" : "\/documentation\/authfoundation\/version"
 },
 "doc://AuthFoundation/documentation/AuthFoundation/Weak": {
   "abstract" : [

@@ -5,7 +5,7 @@
       "type" : "text"
     },
     {
-      "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/HasClaims\/claims-15zsq",
+      "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/HasClaims\/claims",
       "isActive" : true,
       "type" : "reference"
     },
@@ -14,7 +14,7 @@
       "type" : "text"
     },
     {
-      "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/HasClaims\/customClaims-47hcx",
+      "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/HasClaims\/customClaims",
       "isActive" : true,
       "type" : "reference"
     },
@@ -203,7 +203,7 @@
       "type" : "text"
     },
     {
-      "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/HasClaims\/claims-15zsq",
+      "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/HasClaims\/claims",
       "isActive" : true,
       "type" : "reference"
     },
@@ -212,7 +212,7 @@
       "type" : "text"
     },
     {
-      "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/HasClaims\/customClaims-47hcx",
+      "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/HasClaims\/customClaims",
       "isActive" : true,
       "type" : "reference"
     },
@@ -255,14 +255,13 @@
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/hasclaims\/allclaims"
 },
-"doc://AuthFoundation/documentation/AuthFoundation/HasClaims/claims-15zsq": {
+"doc://AuthFoundation/documentation/AuthFoundation/HasClaims/claims": {
   "abstract" : [
     {
       "text" : "Returns the collection of claims this object contains.",
       "type" : "text"
     }
   ],
-  "defaultImplementations" : 1,
   "fragments" : [
     {
       "kind" : "keyword",
@@ -298,22 +297,20 @@
       "text" : "]"
     }
   ],
-  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/HasClaims\/claims-15zsq",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/HasClaims\/claims",
   "kind" : "symbol",
-  "required" : true,
   "role" : "symbol",
   "title" : "claims",
   "type" : "topic",
-  "url" : "\/documentation\/authfoundation\/hasclaims\/claims-15zsq"
+  "url" : "\/documentation\/authfoundation\/hasclaims\/claims"
 },
-"doc://AuthFoundation/documentation/AuthFoundation/HasClaims/customClaims-47hcx": {
+"doc://AuthFoundation/documentation/AuthFoundation/HasClaims/customClaims": {
   "abstract" : [
     {
       "text" : "Returns the collection of custom claims this object contains.",
       "type" : "text"
     }
   ],
-  "defaultImplementations" : 1,
   "fragments" : [
     {
       "kind" : "keyword",
@@ -341,13 +338,12 @@
       "text" : "]"
     }
   ],
-  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/HasClaims\/customClaims-47hcx",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/HasClaims\/customClaims",
   "kind" : "symbol",
-  "required" : true,
   "role" : "symbol",
   "title" : "customClaims",
   "type" : "topic",
-  "url" : "\/documentation\/authfoundation\/hasclaims\/customclaims-47hcx"
+  "url" : "\/documentation\/authfoundation\/hasclaims\/customclaims"
 }
 }
 }

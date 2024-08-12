@@ -201,12 +201,6 @@
     },
     {
       "identifiers" : [
-        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/OpenIdConfiguration\/jsonDecoder"
-      ],
-      "title" : "Type Properties"
-    },
-    {
-      "identifiers" : [
         "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/OpenIdConfiguration\/ProviderMetadata"
       ],
       "title" : "Enumerations"
@@ -214,8 +208,7 @@
     {
       "generated" : true,
       "identifiers" : [
-        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/OpenIdConfiguration\/HasClaims-Implementations",
-        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/OpenIdConfiguration\/JSONClaimContainer-Implementations"
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/OpenIdConfiguration\/HasClaims-Implementations"
       ],
       "title" : "Default Implementations"
     }
@@ -773,17 +766,6 @@
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/openidconfiguration\/hasclaims-implementations"
 },
-"doc://AuthFoundation/documentation/AuthFoundation/OpenIdConfiguration/JSONClaimContainer-Implementations": {
-  "abstract" : [
-
-  ],
-  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/OpenIdConfiguration\/JSONClaimContainer-Implementations",
-  "kind" : "article",
-  "role" : "collectionGroup",
-  "title" : "JSONClaimContainer Implementations",
-  "type" : "topic",
-  "url" : "\/documentation\/authfoundation\/openidconfiguration\/jsonclaimcontainer-implementations"
-},
 "doc://AuthFoundation/documentation/AuthFoundation/OpenIdConfiguration/ProviderMetadata": {
   "abstract" : [
     {
@@ -1183,48 +1165,6 @@
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/openidconfiguration\/issuer"
 },
-"doc://AuthFoundation/documentation/AuthFoundation/OpenIdConfiguration/jsonDecoder": {
-  "abstract" : [
-
-  ],
-  "fragments" : [
-    {
-      "kind" : "keyword",
-      "text" : "static"
-    },
-    {
-      "kind" : "text",
-      "text" : " "
-    },
-    {
-      "kind" : "keyword",
-      "text" : "let"
-    },
-    {
-      "kind" : "text",
-      "text" : " "
-    },
-    {
-      "kind" : "identifier",
-      "text" : "jsonDecoder"
-    },
-    {
-      "kind" : "text",
-      "text" : ": "
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:10Foundation11JSONDecoderC",
-      "text" : "JSONDecoder"
-    }
-  ],
-  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/OpenIdConfiguration\/jsonDecoder",
-  "kind" : "symbol",
-  "role" : "symbol",
-  "title" : "jsonDecoder",
-  "type" : "topic",
-  "url" : "\/documentation\/authfoundation\/openidconfiguration\/jsondecoder"
-},
 "doc://AuthFoundation/documentation/AuthFoundation/OpenIdConfiguration/jwksUri": {
   "abstract" : [
     {
@@ -1272,7 +1212,7 @@
   "fragments" : [
     {
       "kind" : "keyword",
-      "text" : "let"
+      "text" : "var"
     },
     {
       "kind" : "text",
