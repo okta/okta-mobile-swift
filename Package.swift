@@ -11,7 +11,7 @@ var package = Package(
         .tvOS(.v12),
         .watchOS(.v7),
         .visionOS(.v1),
-        .macOS(.v10_13),
+        .macOS(.v10_15),
         .macCatalyst(.v13)
     ],
     products: [

@@ -13,6 +13,7 @@
 import Foundation
 
 // TODO: Remove on the next major release.
+#if canImport(UIKit) || canImport(AppKit)
 extension WebAuthentication {
     @available(*, deprecated, renamed: "signIn(from:options:completion:)")
     public final func signIn(from window: WindowAnchor?,
@@ -127,3 +128,4 @@ extension WebAuthentication {
         try await signOut(from: window, token: token, options: options(from: additionalParameters))
     }
 }
+#endif

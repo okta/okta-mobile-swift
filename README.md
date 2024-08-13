@@ -389,7 +389,7 @@ Only the last 4 major platform versions are officially supported, unless there a
 | watchOS     | 7.0       | 7.0         |
 | visionOS    | 1.0       | 1.0         |
 | macCatalyst | 13.0      | 13.0        |
-| macOS       | 12.0      | 10.13       |
+| macOS       | 12.0      | 10.15       |
 
 Once a platform version becomes unsupported, dropping support for it will not be considered a breaking change and will be done in a minor release. For example, iOS 13 will cease to be supported when iOS 18 gets released, and might be dropped in a minor release.
 

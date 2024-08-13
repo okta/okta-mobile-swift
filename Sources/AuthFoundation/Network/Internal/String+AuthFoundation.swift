@@ -77,7 +77,7 @@ public final class SDKVersion: Sendable {
     /// The calculated user agent string that will be included in outgoing network requests.
     public private(set) static var userAgent: String = ""
 
-    private static let lock = UnfairLock()
+    private static let lock = Lock()
     fileprivate static var sdkVersions: [SDKVersion] = []
     
     /// Register a new SDK library component to be added to the ``userAgent`` value.

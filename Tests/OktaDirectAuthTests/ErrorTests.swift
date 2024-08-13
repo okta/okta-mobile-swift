@@ -50,17 +50,9 @@ final class ErrorTests: XCTestCase {
         XCTAssertEqual(DirectAuthenticationFlowError(OAuth2Error.network(error: .invalidRequestData)),
                        .network(error: .invalidRequestData))
 
-        // Ensure a generic error embedded in OAuth2Error becomes the appropriate error type
-        XCTAssertEqual(DirectAuthenticationFlowError(OAuth2Error.error(KeychainError.invalidFormat)),
-                       .other(error: KeychainError.invalidFormat))
-
         // Ensure a APIClientError becomes the appropriate type
         XCTAssertEqual(DirectAuthenticationFlowError(APIClientError.invalidRequestData),
                        .network(error: .invalidRequestData))
-
-        // Ensure a generic error in APIClientError becomes the appropriate type
-        XCTAssertEqual(DirectAuthenticationFlowError(APIClientError.serverError(KeychainError.invalidFormat)),
-                       .other(error: KeychainError.invalidFormat))
 
         // Ensure an OAUth2ServerError becomes a .server(error:)
         let serverError = try defaultJSONDecoder.decode(OAuth2ServerError.self, from: """
@@ -71,5 +63,15 @@ final class ErrorTests: XCTestCase {
             """.data(using: .utf8)!)
         XCTAssertEqual(DirectAuthenticationFlowError(APIClientError.serverError(serverError)),
                        .server(error: serverError))
+
+        #if os(iOS) || os(macOS) || os(tvOS) || os(watchOS) || os(visionOS)
+        // Ensure a generic error embedded in OAuth2Error becomes the appropriate error type
+        XCTAssertEqual(DirectAuthenticationFlowError(OAuth2Error.error(KeychainError.invalidFormat)),
+                       .other(error: KeychainError.invalidFormat))
+
+        // Ensure a generic error in APIClientError becomes the appropriate type
+        XCTAssertEqual(DirectAuthenticationFlowError(APIClientError.serverError(KeychainError.invalidFormat)),
+                       .other(error: KeychainError.invalidFormat))
+        #endif
     }
 }

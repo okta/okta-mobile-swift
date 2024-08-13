@@ -251,13 +251,13 @@ extension JSON: Codable {
 
 fileprivate extension NSNumber {
     var isFloatingPoint: Bool {
-        let type = CFNumberGetType(self as CFNumber)
-        switch type {
-        case .floatType, .float32Type, .float64Type, .cgFloatType, .doubleType:
+        if strcmp(objCType, "f") == 0 ||
+            strcmp(objCType, "d") == 0
+        {
             return true
-        default:
-            return false
         }
+        
+        return false
     }
 }
 

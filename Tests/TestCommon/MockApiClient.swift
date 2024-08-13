@@ -13,6 +13,10 @@
 import Foundation
 @testable import AuthFoundation
 
+#if os(Linux)
+import FoundationNetworking
+#endif
+
 class MockApiClient: APIClient {
     var baseURL: URL
     var session: URLSessionProtocol

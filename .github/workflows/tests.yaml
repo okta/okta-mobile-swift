@@ -29,7 +29,10 @@ env:
 jobs:
   SwiftBuild:
     name: Swift Unit Tests
-    runs-on: macos-latest-large
+    strategy:
+      matrix:
+        os: [macos-latest-large, ubuntu-latest]
+    runs-on: ${{ matrix.os }}
     timeout-minutes: 10
     steps:
     - name: Get swift version

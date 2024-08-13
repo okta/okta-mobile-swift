@@ -85,8 +85,8 @@ public extension XCTestCase {
         let group = DispatchGroup()
         for queue in queues {
             for _ in 0..<iterationCount {
+                group.enter()
                 queue.async {
-                    group.enter()
                     Task {
                         try await block()
                         group.leave()

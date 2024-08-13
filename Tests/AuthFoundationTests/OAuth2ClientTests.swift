@@ -2,6 +2,10 @@ import XCTest
 @testable import TestCommon
 @testable import AuthFoundation
 
+#if os(Linux)
+import FoundationNetworking
+#endif
+
 final class OAuth2ClientTests: XCTestCase {
     let issuer = URL(string: "https://example.com")!
     let redirectUri = URL(string: "com.example:/callback")!

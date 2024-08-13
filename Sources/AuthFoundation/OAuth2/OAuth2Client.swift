@@ -543,14 +543,14 @@ public final class OAuth2Client {
     // MARK: Private properties / methods
     private let delegates = DelegateCollection<OAuth2ClientDelegate>()
 
-    private let refreshLock = UnfairLock()
+    private let refreshLock = Lock()
     private(set) lazy var refreshQueue: DispatchQueue = {
         DispatchQueue(label: "com.okta.refreshQueue.\(baseURL.host ?? "unknown")",
                       qos: .userInitiated,
                       attributes: .concurrent)
     }()
 
-    private let configurationLock = UnfairLock()
+    private let configurationLock = Lock()
     private lazy var configurationQueue: DispatchQueue = {
         DispatchQueue(label: "com.okta.configurationQueue.\(baseURL.host ?? "unknown")",
                       qos: .userInitiated,

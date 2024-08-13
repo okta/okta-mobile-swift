@@ -357,7 +357,7 @@ public final class Credential: Equatable, OAuth2ClientDelegate {
         }
 
         tokenObserver = NotificationCenter.default.addObserver(forName: .tokenRefreshFailed,
-                                                               object: token,
+                                                               object: nil,
                                                                queue: nil) { [weak self] notification in
             guard let self = self,
                   token == self.token

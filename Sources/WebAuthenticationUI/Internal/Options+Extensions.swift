@@ -13,6 +13,7 @@
 import Foundation
 import OktaOAuth2
 
+#if canImport(UIKit) || canImport(AppKit)
 extension WebAuthentication.Option {
     var queryItems: [String: String] {
         switch self {
@@ -81,3 +82,4 @@ extension Collection where Element == WebAuthentication.Option {
         return .init(state: state, maxAge: maxAge)
     }
 }
+#endif
