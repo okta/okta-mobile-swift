@@ -86,6 +86,8 @@ jobs:
           echo "SKIP_WEBAUTHENTICATIONUI=false" >> "$GITHUB_ENV"
         fi
     - uses: actions/checkout@master
+    - name: Check environment variables
+      run: env
     - name: Build AuthFoundation
       run: |
         set -o pipefail
@@ -130,7 +132,7 @@ jobs:
           -scheme OktaOAuth2 \
           -destination "$DESTINATION" 2>&1
     - name: Build WebAuthenticationUI
-      if: env.SKIP_WEBAUTHENTICATIONUI == 'true'
+      if: env.SKIP_WEBAUTHENTICATIONUI != 'false'
       run: |
         set -o pipefail && xcodebuild build \
           -derivedDataPath ../Build/DerivedData \
@@ -138,7 +140,7 @@ jobs:
           -scheme WebAuthenticationUI \
           -destination "$DESTINATION" 2>&1
     - name: Test WebAuthenticationUI
-      if: env.SKIP_WEBAUTHENTICATIONUI == 'true'
+      if: env.SKIP_WEBAUTHENTICATIONUI != 'false'
       run: |
         set -o pipefail && xcodebuild test \
           -derivedDataPath ../Build/DerivedData \
