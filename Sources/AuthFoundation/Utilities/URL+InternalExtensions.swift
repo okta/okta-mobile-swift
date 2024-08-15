@@ -13,10 +13,11 @@
 import Foundation
 
 extension URL {
-    @inlinable
     // Workaround to address a known bug with URL.appendingPathComponent on Linux.
     // https://github.com/apple/swift-corelibs-foundation/issues/4849
+    @inlinable
     func appendingComponent(_ component: String) -> URL {
+        // swiftlint:disable force_unwrapping
         #if os(Linux)
         var components = URLComponents(url: self, resolvingAgainstBaseURL: true)!
         if !components.path.hasSuffix("/") {
@@ -29,5 +30,6 @@ extension URL {
         result.appendPathComponent(component)
         return result
         #endif
+        // swiftlint:enable force_unwrapping
     }
 }
