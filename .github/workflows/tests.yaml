@@ -49,6 +49,8 @@ jobs:
     name: CocoaPods Build
     runs-on: macos-latest-xlarge # Running on xlarge to use arm64 chipset
     timeout-minutes: 10
+    needs:
+      - SwiftBuild
     steps:
     - uses: actions/checkout@master
     - name: OktaAuthFoundation.podspec
@@ -61,9 +63,10 @@ jobs:
     #- name: OktaWebAuthenticationUI.podspec
     #  run: pod lib lint --allow-warnings OktaWebAuthenticationUI.podspec
 
-  XcodeBuildMatrix:
-    name: Setup Xcode Unit Tests
-    runs-on: ubuntu-latest
+  XcodeBuild:
+    name: Xcode Unit Tests
+    runs-on: macos-latest-xlarge
+    needs: XcodeBuildMatrix
     strategy:
       matrix:
         destination:
@@ -72,30 +75,17 @@ jobs:
         - "platform=visionOS Simulator,OS=1.2,name=Apple Vision Pro"
         - "platform=watchOS Simulator,OS=10.5,name=Apple Watch Series 7 (45mm)"
         - "platform=macOS,name=My Mac"
-    outputs:
-      skipWebAuthenticationUI: ${{ steps.variables.outputs.skipWebAuthenticationUI }}
-      destination: ${{ matrix.destination }}
-    steps:
-    - name: Set test variables
-      id: variables
-      run: |
-        if [ ${{ contains(matrix.destination, 'tvOS') || contains(matrix.destination, 'watchOS') }} ]; then
-          echo "skipWebAuthenticationUI=true" >> "$GITHUB_OUTPUT"
-          echo "WebAuthenticationUI is unsupported on this platform"
-        else
-          echo "skipWebAuthenticationUI=false" >> "$GITHUB_OUTPUT"
-        fi
-      shell: bash
-
-  XcodeBuild:
-    name: Xcode Unit Tests
-    runs-on: macos-latest-xlarge
-    needs: XcodeBuildMatrix
-    env:
-      DESTINATION: ${{needs.XcodeBuildMatrix.outputs.destination}}
-      SKIP_WEBAUTHENTICATIONUI: ${{needs.XcodeBuildMatrix.outputs.skipWebAuthenticationUI}}
     timeout-minutes: 25
     steps:
+    - name: Set test variables
+      run: |
+        echo "DESTINATION=${{matrix.destination}}" >> "$GITHUB_ENV"
+        if [ ${{ contains(matrix.destination, 'tvOS') || contains(matrix.destination, 'watchOS') }} ]; then
+          echo "SKIP_WEBAUTHENTICATIONUI=true" >> "$GITHUB_ENV"
+          echo "WebAuthenticationUI is unsupported on this platform"
+        else
+          echo "SKIP_WEBAUTHENTICATIONUI=false" >> "$GITHUB_ENV"
+        fi
     - uses: actions/checkout@master
     - name: Build AuthFoundation
       run: |
