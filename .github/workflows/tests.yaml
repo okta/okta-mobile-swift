@@ -72,7 +72,7 @@ jobs:
           - "platform=iOS Simulator,OS=16.4,name=iPhone 14 Pro Max"
           - "platform=iOS Simulator,OS=17.5,name=iPhone 15 Pro Max"
           - "platform=tvOS Simulator,OS=17.5,name=Apple TV"
-          - "platform:macOS,name=My Mac"
+          - "platform=macOS,name=My Mac"
     timeout-minutes: 25
     steps:
     - uses: actions/checkout@master
