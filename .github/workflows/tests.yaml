@@ -49,8 +49,6 @@ jobs:
     name: CocoaPods Build
     runs-on: macos-latest-xlarge # Running on xlarge to use arm64 chipset
     timeout-minutes: 10
-    needs:
-      - SwiftBuild
     steps:
     - uses: actions/checkout@master
     - name: OktaAuthFoundation.podspec
