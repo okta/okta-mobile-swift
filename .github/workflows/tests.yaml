@@ -94,8 +94,8 @@ jobs:
     runs-on: macos-latest-xlarge
     needs: XcodeBuildMatrix
     - env:
-        DESTINATION: ${{needs.XcodeBuildMatrix.outputs.destination}}
-        SKIP_WEBAUTHENTICATIONUI: ${{needs.XcodeBuildMatrix.outputs.skipWebAuthenticationUI}}
+      DESTINATION: ${{needs.XcodeBuildMatrix.outputs.destination}}
+      SKIP_WEBAUTHENTICATIONUI: ${{needs.XcodeBuildMatrix.outputs.skipWebAuthenticationUI}}
     timeout-minutes: 25
     steps:
     - uses: actions/checkout@master
