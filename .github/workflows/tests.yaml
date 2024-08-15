@@ -63,9 +63,9 @@ jobs:
     #- name: OktaWebAuthenticationUI.podspec
     #  run: pod lib lint --allow-warnings OktaWebAuthenticationUI.podspec
 
-  XcodeBuild:
-    name: Xcode Unit Tests
-    runs-on: macos-latest-xlarge
+  XcodeBuildMatrix:
+    name: Setup Xcode Unit Tests
+    runs-on: ubuntu-latest
     strategy:
       matrix:
         destination:
@@ -74,16 +74,30 @@ jobs:
         - "platform=visionOS Simulator,OS=1.2,name=Apple Vision Pro"
         - "platform=watchOS Simulator,OS=10.5,name=Apple Watch Series 7 (45mm)"
         - "platform=macOS,name=My Mac"
-    timeout-minutes: 25
     steps:
+    - outputs:
+        skipWebAuthenticationUI: ${{ steps.variables.outputs.skipWebAuthenticationUI }}
+        destination: ${{ matrix.destination }}
     - name: Set test variables
-      id: set-variable
+      id: variables
       run: |
         if [ ${{ contains(matrix.destination, 'tvOS') || contains(matrix.destination, 'watchOS') }} ]; then
+          echo "skipWebAuthenticationUI=true" >> "$GITHUB_OUTPUT"
           echo "WebAuthenticationUI is unsupported on this platform"
-          echo "{WebAuthenticationUIUnsupported}=true" >> $GITHUB_ENV
+        else
+          echo "skipWebAuthenticationUI=false" >> "$GITHUB_OUTPUT"
         fi
       shell: bash
+
+  XcodeBuild:
+    name: Xcode Unit Tests
+    runs-on: macos-latest-xlarge
+    needs: XcodeBuildMatrix
+    - env:
+        DESTINATION: ${{needs.XcodeBuildMatrix.outputs.destination}}
+        SKIP_WEBAUTHENTICATIONUI: ${{needs.XcodeBuildMatrix.outputs.skipWebAuthenticationUI}}
+    timeout-minutes: 25
+    steps:
     - uses: actions/checkout@master
     - name: Build AuthFoundation
       run: |
@@ -92,55 +106,55 @@ jobs:
           -derivedDataPath ../Build/DerivedData \
           -clonedSourcePackagesDirPath ../Build/ClonedSources \
           -scheme AuthFoundation \
-          -destination "${{ matrix.destination }}" 2>&1
+          -destination "$DESTINATION" 2>&1
     - name: Test AuthFoundation
       run: |
         set -o pipefail && xcodebuild test \
           -derivedDataPath ../Build/DerivedData \
           -clonedSourcePackagesDirPath ../Build/ClonedSources \
           -scheme AuthFoundation \
-          -destination "${{ matrix.destination }}" 2>&1
+          -destination "$DESTINATION" 2>&1
     - name: Build OktaDirectAuth
       run: |
         set -o pipefail && xcodebuild build \
           -derivedDataPath ../Build/DerivedData \
           -clonedSourcePackagesDirPath ../Build/ClonedSources \
           -scheme OktaDirectAuth \
-          -destination "${{ matrix.destination }}" 2>&1
+          -destination "$DESTINATION" 2>&1
     - name: Test OktaDirectAuth
       run: |
         set -o pipefail && xcodebuild test \
           -derivedDataPath ../Build/DerivedData \
           -clonedSourcePackagesDirPath ../Build/ClonedSources \
           -scheme OktaDirectAuth \
-          -destination "${{ matrix.destination }}" 2>&1
+          -destination "$DESTINATION" 2>&1
     - name: Build OktaOAuth2
       run: |
         set -o pipefail && xcodebuild build \
           -derivedDataPath ../Build/DerivedData \
           -clonedSourcePackagesDirPath ../Build/ClonedSources \
           -scheme OktaOAuth2 \
-          -destination "${{ matrix.destination }}" 2>&1
+          -destination "$DESTINATION" 2>&1
     - name: Test OktaOAuth2
       run: |
         set -o pipefail && xcodebuild test \
           -derivedDataPath ../Build/DerivedData \
           -clonedSourcePackagesDirPath ../Build/ClonedSources \
           -scheme OktaOAuth2 \
-          -destination "${{ matrix.destination }}" 2>&1
+          -destination "$DESTINATION" 2>&1
     - name: Build WebAuthenticationUI
-      if: env.WebAuthenticationUIUnsupported != 'true'
+      if: env.SKIP_WEBAUTHENTICATIONUI == 'true'
       run: |
         set -o pipefail && xcodebuild build \
           -derivedDataPath ../Build/DerivedData \
           -clonedSourcePackagesDirPath ../Build/ClonedSources \
           -scheme WebAuthenticationUI \
-          -destination "${{ matrix.destination }}" 2>&1
+          -destination "$DESTINATION" 2>&1
     - name: Test WebAuthenticationUI
-      if: env.WebAuthenticationUIUnsupported != 'true'
+      if: env.SKIP_WEBAUTHENTICATIONUI == 'true'
       run: |
         set -o pipefail && xcodebuild test \
           -derivedDataPath ../Build/DerivedData \
           -clonedSourcePackagesDirPath ../Build/ClonedSources \
           -scheme WebAuthenticationUI \
-          -destination "${{ matrix.destination }}" 2>&1
+          -destination "$DESTINATION" 2>&1
