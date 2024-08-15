@@ -74,10 +74,10 @@ jobs:
         - "platform=visionOS Simulator,OS=1.2,name=Apple Vision Pro"
         - "platform=watchOS Simulator,OS=10.5,name=Apple Watch Series 7 (45mm)"
         - "platform=macOS,name=My Mac"
+    outputs:
+      skipWebAuthenticationUI: ${{ steps.variables.outputs.skipWebAuthenticationUI }}
+      destination: ${{ matrix.destination }}
     steps:
-    - outputs:
-        skipWebAuthenticationUI: ${{ steps.variables.outputs.skipWebAuthenticationUI }}
-        destination: ${{ matrix.destination }}
     - name: Set test variables
       id: variables
       run: |
@@ -93,7 +93,7 @@ jobs:
     name: Xcode Unit Tests
     runs-on: macos-latest-xlarge
     needs: XcodeBuildMatrix
-    - env:
+    env:
       DESTINATION: ${{needs.XcodeBuildMatrix.outputs.destination}}
       SKIP_WEBAUTHENTICATIONUI: ${{needs.XcodeBuildMatrix.outputs.skipWebAuthenticationUI}}
     timeout-minutes: 25
