@@ -32,9 +32,13 @@ jobs:
     strategy:
       matrix:
         os: [macos-latest-large, ubuntu-latest]
+        swift_version: ["5.9", "5.10"]
     runs-on: ${{ matrix.os }}
     timeout-minutes: 10
     steps:
+    - uses: swift-actions/setup-swift@v2
+      with:
+        swift-version: ${{ matrix.swift_version }}
     - name: Get swift version
       run: swift --version
     - uses: actions/checkout@master
