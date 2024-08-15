@@ -77,13 +77,13 @@ jobs:
     timeout-minutes: 25
     steps:
     - name: Set test variables
-        id: set-variable
-        run: |
-          if [ ${{ contains(matrix.destination, 'tvOS') || contains(matrix.destination, 'watchOS') }} ]; then
-            echo "WebAuthenticationUI is unsupported on this platform"
-            echo "{WebAuthenticationUIUnsupported}=true" >> $GITHUB_ENV
-          fi
-        shell: bash
+      id: set-variable
+      run: |
+        if [ ${{ contains(matrix.destination, 'tvOS') || contains(matrix.destination, 'watchOS') }} ]; then
+          echo "WebAuthenticationUI is unsupported on this platform"
+          echo "{WebAuthenticationUIUnsupported}=true" >> $GITHUB_ENV
+        fi
+      shell: bash
     - uses: actions/checkout@master
     - name: Build AuthFoundation
       run: |
