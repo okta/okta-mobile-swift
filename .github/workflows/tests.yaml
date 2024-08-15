@@ -23,8 +23,6 @@ on:
 env:
   DEVELOPER_DIR: /Applications/Xcode_15.4.app/Contents/Developer
   NSUnbufferedIO: YES 
-  iOS_DESTINATION: "platform=iOS Simulator,OS=17.5,name=iPhone 15 Pro Max"
-  tvOS_DESTINATION: "platform=tvOS Simulator,OS=17.5,name=Apple TV"
 
 jobs:
   SwiftBuild:
@@ -68,6 +66,13 @@ jobs:
   XcodeBuild:
     name: Xcode Unit Tests
     runs-on: macos-latest-large
+    strategy:
+      matrix:
+        destination:
+          - "platform=iOS Simulator,OS=16.4,name=iPhone 14 Pro Max"
+          - "platform=iOS Simulator,OS=17.5,name=iPhone 15 Pro Max"
+          - "platform=tvOS Simulator,OS=17.5,name=Apple TV"
+          - "platform:macOS,name=My Mac"
     timeout-minutes: 25
     steps:
     - uses: actions/checkout@master
@@ -78,61 +83,53 @@ jobs:
           -derivedDataPath ../Build/DerivedData \
           -clonedSourcePackagesDirPath ../Build/ClonedSources \
           -scheme AuthFoundation \
-          -sdk iphonesimulator \
-          -destination "$iOS_DESTINATION" 2>&1
-    - name: Build OktaDirectAuth
-      run: |
-        set -o pipefail && xcodebuild build \
-          -derivedDataPath ../Build/DerivedData \
-          -clonedSourcePackagesDirPath ../Build/ClonedSources \
-          -scheme OktaDirectAuth \
-          -sdk iphonesimulator \
-          -destination "$iOS_DESTINATION" 2>&1
-    - name: Build OktaOAuth2
-      run: |
-        set -o pipefail && xcodebuild build \
-          -derivedDataPath ../Build/DerivedData \
-          -clonedSourcePackagesDirPath ../Build/ClonedSources \
-          -scheme OktaOAuth2 \
-          -sdk iphonesimulator \
-          -destination "$iOS_DESTINATION" 2>&1
-    - name: Build WebAuthenticationUI
-      run: |
-        set -o pipefail && xcodebuild build \
-          -derivedDataPath ../Build/DerivedData \
-          -clonedSourcePackagesDirPath ../Build/ClonedSources \
-          -scheme WebAuthenticationUI \
-          -sdk iphonesimulator \
-          -destination "$iOS_DESTINATION" 2>&1
+          -destination "${{ matrix.destination }}" 2>&1
     - name: Test AuthFoundation
       run: |
         set -o pipefail && xcodebuild test \
           -derivedDataPath ../Build/DerivedData \
           -clonedSourcePackagesDirPath ../Build/ClonedSources \
           -scheme AuthFoundation \
-          -sdk iphonesimulator \
-          -destination "$iOS_DESTINATION" 2>&1
+          -destination "${{ matrix.destination }}" 2>&1
+    - name: Build OktaDirectAuth
+      run: |
+        set -o pipefail && xcodebuild build \
+          -derivedDataPath ../Build/DerivedData \
+          -clonedSourcePackagesDirPath ../Build/ClonedSources \
+          -scheme OktaDirectAuth \
+          -destination "${{ matrix.destination }}" 2>&1
     - name: Test OktaDirectAuth
       run: |
         set -o pipefail && xcodebuild test \
           -derivedDataPath ../Build/DerivedData \
           -clonedSourcePackagesDirPath ../Build/ClonedSources \
           -scheme OktaDirectAuth \
-          -sdk iphonesimulator \
-          -destination "$iOS_DESTINATION" 2>&1
+          -destination "${{ matrix.destination }}" 2>&1
+    - name: Build OktaOAuth2
+      run: |
+        set -o pipefail && xcodebuild build \
+          -derivedDataPath ../Build/DerivedData \
+          -clonedSourcePackagesDirPath ../Build/ClonedSources \
+          -scheme OktaOAuth2 \
+          -destination "${{ matrix.destination }}" 2>&1
     - name: Test OktaOAuth2
       run: |
         set -o pipefail && xcodebuild test \
           -derivedDataPath ../Build/DerivedData \
           -clonedSourcePackagesDirPath ../Build/ClonedSources \
           -scheme OktaOAuth2 \
-          -sdk iphonesimulator \
-          -destination "$iOS_DESTINATION" 2>&1
+          -destination "${{ matrix.destination }}" 2>&1
+    - name: Build WebAuthenticationUI
+      run: |
+        set -o pipefail && xcodebuild build \
+          -derivedDataPath ../Build/DerivedData \
+          -clonedSourcePackagesDirPath ../Build/ClonedSources \
+          -scheme WebAuthenticationUI \
+          -destination "${{ matrix.destination }}" 2>&1
     - name: Test WebAuthenticationUI
       run: |
         set -o pipefail && xcodebuild test \
           -derivedDataPath ../Build/DerivedData \
           -clonedSourcePackagesDirPath ../Build/ClonedSources \
           -scheme WebAuthenticationUI \
-          -sdk iphonesimulator \
-          -destination "$iOS_DESTINATION" 2>&1
+          -destination "${{ matrix.destination }}" 2>&1
