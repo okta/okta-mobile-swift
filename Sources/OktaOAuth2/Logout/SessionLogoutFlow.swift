@@ -218,7 +218,6 @@ public class SessionLogoutFlow: LogoutFlow {
     public let delegateCollection = DelegateCollection<SessionLogoutFlowDelegate>()
 }
 
-#if swift(>=5.5.1)
 @available(iOS 13.0, tvOS 13.0, macOS 10.15, watchOS 6, *)
 extension SessionLogoutFlow {
     /// Asynchronously initiates a logout flow, with a required ID Token.
@@ -258,7 +257,6 @@ extension SessionLogoutFlow {
         }
     }
 }
-#endif
 
 extension SessionLogoutFlow: UsesDelegateCollection {
     public typealias Delegate = SessionLogoutFlowDelegate

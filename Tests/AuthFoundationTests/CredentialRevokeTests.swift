@@ -220,7 +220,6 @@ final class CredentialTests: XCTestCase {
         XCTAssertTrue(coordinator.credentialDataSource.hasCredential(for: token))
     }
 
-    #if swift(>=5.5.1)
     @available(iOS 13.0, tvOS 13.0, macOS 10.15, watchOS 6, *)
     func testRevokeFailureAsync() async throws {
         urlSession.expect("https://example.com/oauth2/default/.well-known/openid-configuration",
@@ -275,5 +274,4 @@ final class CredentialTests: XCTestCase {
             XCTFail()
         }
     }
-    #endif
 }

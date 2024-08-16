@@ -304,7 +304,6 @@ public class AuthorizationCodeFlow: AuthenticationFlow {
     public let delegateCollection = DelegateCollection<AuthorizationCodeFlowDelegate>()
 }
 
-#if swift(>=5.5.1)
 @available(iOS 13.0, tvOS 13.0, macOS 10.15, watchOS 6, *)
 extension AuthorizationCodeFlow {
     /// Asynchronously initiates an authentication flow, with an optional ``Context-swift.struct``, using Swift Concurrency.
@@ -344,7 +343,6 @@ extension AuthorizationCodeFlow {
         }
     }
 }
-#endif
 
 extension AuthorizationCodeFlow: UsesDelegateCollection {
     public typealias Delegate = AuthorizationCodeFlowDelegate

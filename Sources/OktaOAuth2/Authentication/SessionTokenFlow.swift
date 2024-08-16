@@ -13,6 +13,10 @@
 import Foundation
 import AuthFoundation
 
+#if os(Linux)
+import FoundationNetworking
+#endif
+
 /// An authentication flow class that exchanges a Session Token for access tokens.
 ///
 /// This flow is typically used in conjunction with the [classic Okta native authentication library](https://github.com/okta/okta-auth-swift). For native authentication using the Okta Identity Engine (OIE), please use the [Okta IDX library](https://github.com/okta/okta-idx-swift).
@@ -174,7 +178,6 @@ public class SessionTokenFlow: AuthenticationFlow {
     }
 }
 
-#if swift(>=5.5.1)
 @available(iOS 13.0, tvOS 13.0, macOS 10.15, watchOS 6, *)
 extension SessionTokenFlow {
     /// Asynchronously authenticates with the given session token.
@@ -188,7 +191,6 @@ extension SessionTokenFlow {
         }
     }
 }
-#endif
 
 protocol SessionTokenFlowURLExchange {
     init(scheme: String)

@@ -142,7 +142,7 @@ final class TokenExchangeFlowTests: XCTestCase {
         XCTAssertEqual(request.bodyString, "actor_token=secret&actor_token_type=urn:x-oath:params:oauth:token-type:device-secret&audience=api:%2F%2Fdefault&client_id=clientId&grant_type=urn:ietf:params:oauth:grant-type:token-exchange&scope=profile+openid+device_sso&subject_token=id_token&subject_token_type=urn:ietf:params:oauth:token-type:id_token")
     }
     
-#if swift(>=5.5.1) && !os(Linux)
+#if !os(Linux)
     @available(iOS 13.0, tvOS 13.0, macOS 10.15, watchOS 6, *)
     func testAsyncAuthenticationSucceeded() async throws {
         XCTAssertFalse(flow.isAuthenticating)

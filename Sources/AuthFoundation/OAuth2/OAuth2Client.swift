@@ -543,14 +543,14 @@ public final class OAuth2Client {
     // MARK: Private properties / methods
     private let delegates = DelegateCollection<OAuth2ClientDelegate>()
 
-    private let refreshLock = UnfairLock()
+    private let refreshLock = Lock()
     private(set) lazy var refreshQueue: DispatchQueue = {
         DispatchQueue(label: "com.okta.refreshQueue.\(baseURL.host ?? "unknown")",
                       qos: .userInitiated,
                       attributes: .concurrent)
     }()
 
-    private let configurationLock = UnfairLock()
+    private let configurationLock = Lock()
     private lazy var configurationQueue: DispatchQueue = {
         DispatchQueue(label: "com.okta.configurationQueue.\(baseURL.host ?? "unknown")",
                       qos: .userInitiated,
@@ -567,7 +567,6 @@ public final class OAuth2Client {
 }
 // swiftlint:enable type_body_length
 
-#if swift(>=5.5.1)
 @available(iOS 13.0, tvOS 13.0, macOS 10.15, watchOS 6, *)
 extension OAuth2Client {
     /// Asynchronously retrieves the org's OpenID configuration.
@@ -622,7 +621,6 @@ extension OAuth2Client {
         }
     }
 }
-#endif
 
 extension OAuth2Client: APIClient {
     /// Exposes the base URL this authorization server is represented by.

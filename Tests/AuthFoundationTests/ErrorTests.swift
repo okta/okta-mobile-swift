@@ -93,7 +93,7 @@ final class ErrorTests: XCTestCase {
                        "Nested Error")
     }
     
-    #if os(iOS) || os(macOS) || os(tvOS) || os(watchOS)
+    #if os(iOS) || os(macOS) || os(tvOS) || os(watchOS) || os(visionOS)
     func testKeychainError() {
         XCTAssertNotEqual(KeychainError.cannotGet(code: noErr).errorDescription,
                           "keychain_cannot_get")

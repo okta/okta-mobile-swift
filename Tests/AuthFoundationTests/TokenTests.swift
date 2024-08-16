@@ -245,7 +245,6 @@ final class TokenTests: XCTestCase {
         XCTAssertEqual(token[.accessToken], "the_access_token")
     }
     
-    #if swift(>=5.5.1)
     @available(iOS 13.0, tvOS 13.0, macOS 10.15, watchOS 6, *)
     func testTokenFromRefreshTokenAsync() async throws {
         let client = try mockClient()
@@ -253,7 +252,6 @@ final class TokenTests: XCTestCase {
         XCTAssertEqual(token.token(of: .accessToken), String.mockAccessToken)
         XCTAssertNotEqual(token.id, Token.RefreshRequest.placeholderId)
     }
-    #endif
     
     func mockClient() throws -> OAuth2Client {
         let urlSession = URLSessionMock()

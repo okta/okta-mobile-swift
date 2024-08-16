@@ -14,6 +14,10 @@ import XCTest
 @testable import AuthFoundation
 @testable import TestCommon
 
+#if os(Linux)
+import FoundationNetworking
+#endif
+
 final class DefaultTimeCoordinatorTests: XCTestCase {
     var coordinator: DefaultTimeCoordinator!
     var client: MockApiClient!

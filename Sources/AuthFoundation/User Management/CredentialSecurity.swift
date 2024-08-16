@@ -23,7 +23,7 @@ extension Credential {
     ///
     /// On Apple platforms, this controls the Keychain security settings for the underlying token's keychain item.
     public enum Security {
-        #if os(iOS) || os(macOS) || os(tvOS) || os(watchOS)
+        #if os(iOS) || os(macOS) || os(tvOS) || os(watchOS) || os(visionOS)
 
         /// Defines the accessibility level for a credential.
         case accessibility(_ option: Keychain.Accessibility)

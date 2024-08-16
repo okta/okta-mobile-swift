@@ -410,7 +410,6 @@ public class DirectAuthenticationFlow: AuthenticationFlow {
     public let delegateCollection = DelegateCollection<DirectAuthenticationFlowDelegate>()
 }
 
-#if swift(>=5.5.1)
 @available(iOS 13.0, tvOS 13.0, macOS 10.15, watchOS 6, *)
 extension DirectAuthenticationFlow {
     /// Start user authentication, with the given username login hint and primary factor.
@@ -456,7 +455,6 @@ extension DirectAuthenticationFlow {
         }
     }
 }
-#endif
 
 extension DirectAuthenticationFlow: UsesDelegateCollection {
     public typealias Delegate = DirectAuthenticationFlowDelegate

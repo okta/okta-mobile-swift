@@ -236,6 +236,7 @@ workflows:
     jobs:
       - general-platform-helpers/job-semgrep-scan:
           name: semgrep-scan
+          resource-class: medium
           context:
             - static-analysis
 

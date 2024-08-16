@@ -12,7 +12,7 @@
 
 import Foundation
 
-#if os(iOS) || os(tvOS) || targetEnvironment(macCatalyst)
+#if os(iOS) || os(tvOS) || os(visionOS) || targetEnvironment(macCatalyst)
 import UIKit
 
 final class BackgroundTask {

@@ -139,7 +139,6 @@ final class DeviceAuthorizationFlowSuccessTests: XCTestCase {
         XCTAssertNotNil(token)
     }
 
-    #if swift(>=5.5.1)
     @available(iOS 13.0, tvOS 13.0, macOS 10.15, watchOS 6, *)
     func testWithAsync() async throws {
         // Ensure the initial state
@@ -161,7 +160,6 @@ final class DeviceAuthorizationFlowSuccessTests: XCTestCase {
         XCTAssertFalse(flow.isAuthenticating)
         XCTAssertNotNil(token)
     }
-    #endif
     
     func testContextResponse() throws {
         let data = data(for: """

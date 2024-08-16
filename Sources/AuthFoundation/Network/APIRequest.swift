@@ -63,7 +63,6 @@ public protocol APIRequest {
     ///   - completion: Completion block invoked with the result.
     func send(to client: APIClient, parsing context: APIParsingContext?, completion: @escaping(Result<APIResponse<ResponseType>, APIClientError>) -> Void)
 
-    #if swift(>=5.5.1)
     /// Asynchronously sends the request to the given ``APIClient``.
     /// - Parameters:
     ///   - client: ``APIClient`` the request is being sent to.
@@ -71,7 +70,6 @@ public protocol APIRequest {
     /// - Returns: ``APIResponse`` result of the request.
     @available(iOS 13.0, tvOS 13.0, macOS 10.15, watchOS 6, *)
     func send(to client: APIClient, parsing context: APIParsingContext?) async throws -> APIResponse<ResponseType>
-    #endif
 }
 
 /// API HTTP request method.
@@ -242,7 +240,6 @@ extension APIRequest {
         }
     }
     
-    #if swift(>=5.5.1)
     @available(iOS 13.0, tvOS 13.0, macOS 10.15, watchOS 6, *)
     public func send(to client: APIClient, parsing context: APIParsingContext? = nil) async throws -> APIResponse<ResponseType> {
         try await withCheckedThrowingContinuation { continuation in
@@ -251,7 +248,6 @@ extension APIRequest {
             }
         }
     }
-    #endif
 }
 
 extension APIContentType {

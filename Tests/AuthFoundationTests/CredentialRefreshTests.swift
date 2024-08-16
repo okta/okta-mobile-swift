@@ -344,7 +344,6 @@ final class CredentialRefreshTests: XCTestCase, OAuth2ClientDelegate {
         XCTAssertEqual(credential.token.refreshToken, "therefreshtoken-3")
     }
 
-    #if swift(>=5.5.1)
     @available(iOS 13.0, tvOS 13.0, macOS 10.15, watchOS 6, *)
     func testRefreshAsync() async throws {
         let credential = try credential(for: Token.simpleMockToken)
@@ -377,5 +376,4 @@ final class CredentialRefreshTests: XCTestCase, OAuth2ClientDelegate {
             try await credential.refreshIfNeeded(graceInterval: 300)
         }
     }
-    #endif
 }

@@ -119,7 +119,6 @@ public class JWTAuthorizationFlow: AuthenticationFlow {
     public let delegateCollection = DelegateCollection<AuthenticationDelegate>()
 }
 
-#if swift(>=5.5.1)
 @available(iOS 13.0, tvOS 13.0, macOS 10.15, watchOS 6, *)
 extension JWTAuthorizationFlow {
     /// Asynchronously authenticates with a JWT bearer assertion.
@@ -134,7 +133,6 @@ extension JWTAuthorizationFlow {
         }
     }
 }
-#endif
 
 extension JWTAuthorizationFlow: UsesDelegateCollection {
     public typealias Delegate = AuthenticationDelegate

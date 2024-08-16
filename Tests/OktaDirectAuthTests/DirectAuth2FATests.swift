@@ -41,7 +41,6 @@ final class DirectAuth2FATests: XCTestCase {
         Token.resetToDefault()
     }
     
-#if swift(>=5.5.1)
     @available(iOS 13.0, tvOS 13.0, macOS 10.15, watchOS 6, *)
     func testUserPasswordAndOOB() async throws {
         // Ensure the initial state
@@ -72,5 +71,4 @@ final class DirectAuth2FATests: XCTestCase {
         }
         XCTAssertFalse(flow.isAuthenticating)
     }
-#endif
 }

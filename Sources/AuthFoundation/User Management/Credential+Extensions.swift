@@ -38,7 +38,6 @@ extension Notification.Name {
     public static let credentialRefreshFailed = Notification.Name("com.okta.credential.refresh.failed")
 }
 
-#if swift(>=5.5.1)
 @available(iOS 13.0, tvOS 13.0, macOS 10.15, watchOS 6, *)
 extension Credential {
     /// Attempt to refresh the token.
@@ -114,4 +113,3 @@ extension Credential {
         }
     }
 }
-#endif
