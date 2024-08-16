@@ -17,17 +17,17 @@ final class OAuth2ClientTests: XCTestCase {
         urlSession = URLSessionMock()
         client = OAuth2Client(configuration, session: urlSession)
         
-        token = Token(id: "TokenId",
-                      issuedAt: Date(),
-                      tokenType: "Bearer",
-                      expiresIn: 300,
-                      accessToken: "abcd123",
-                      scope: "openid",
-                      refreshToken: "refresh",
-                      idToken: nil,
-                      deviceSecret: nil,
-                      context: Token.Context(configuration: self.configuration,
-                                             clientSettings: [ "client_id": "clientid", "refresh_token": "refresh" ]))
+        token = try! Token(id: "TokenId",
+                           issuedAt: Date(),
+                           tokenType: "Bearer",
+                           expiresIn: 300,
+                           accessToken: "abcd123",
+                           scope: "openid",
+                           refreshToken: "refresh",
+                           idToken: nil,
+                           deviceSecret: nil,
+                           context: Token.Context(configuration: self.configuration,
+                                                  clientSettings: [ "client_id": "clientid", "refresh_token": "refresh" ]))
         
         openIdConfiguration = try OpenIdConfiguration.jsonDecoder.decode(
             OpenIdConfiguration.self,
@@ -440,17 +440,17 @@ final class OAuth2ClientTests: XCTestCase {
     }
     
     func testIntrospectFailed() throws {
-        let token = Token(id: "TokenId",
-                          issuedAt: Date(),
-                          tokenType: "Bearer",
-                          expiresIn: 300,
-                          accessToken: "abcd123",
-                          scope: "openid",
-                          refreshToken: nil,
-                          idToken: nil,
-                          deviceSecret: nil,
-                          context: Token.Context(configuration: self.configuration,
-                                                 clientSettings: []))
+        let token = try! Token(id: "TokenId",
+                               issuedAt: Date(),
+                               tokenType: "Bearer",
+                               expiresIn: 300,
+                               accessToken: "abcd123",
+                               scope: "openid",
+                               refreshToken: nil,
+                               idToken: nil,
+                               deviceSecret: nil,
+                               context: Token.Context(configuration: self.configuration,
+                                                      clientSettings: []))
         urlSession.expect("https://example.com/.well-known/openid-configuration",
                           data: try data(from: .module, for: "openid-configuration", in: "MockResponses"),
                           contentType: "application/json")

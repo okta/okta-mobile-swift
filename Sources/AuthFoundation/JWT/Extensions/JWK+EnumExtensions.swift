@@ -13,7 +13,7 @@
 import Foundation
 
 // swiftlint:disable cyclomatic_complexity
-extension JWK.Algorithm: RawRepresentable, Equatable, Hashable {
+extension JWK.Algorithm: RawRepresentable, Equatable, Hashable, ClaimConvertable {
     public typealias RawValue = String
     
     public init?(rawValue: RawValue) {

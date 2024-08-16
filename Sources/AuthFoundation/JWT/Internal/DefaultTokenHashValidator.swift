@@ -30,7 +30,7 @@ struct DefaultTokenHashValidator: TokenHashValidator {
     }
     #else
     func validate(_ string: String, idToken: JWT) throws {
-        guard let hashKey = idToken.value(String.self, for: hashKey.rawValue)
+        guard let hashKey: String = idToken.value(for: hashKey.rawValue)
         else {
             return
         }

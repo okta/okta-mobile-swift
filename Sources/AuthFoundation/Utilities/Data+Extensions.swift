@@ -26,6 +26,7 @@ internal extension Int {
 }
 #endif
 
+@_documentation(visibility: internal)
 extension Data {
     /// Produces a SHA256 hash of the supplied data.
     /// - Returns: SHA256 representation of the data.
@@ -47,6 +48,7 @@ extension Data {
 
     /// Encodes the data as a URL-safe Base64 string.
     /// - Returns: Base64 URL-encoded string.
+    @_documentation(visibility: internal)
     public var base64URLEncodedString: String {
         return base64EncodedString()
             .replacingOccurrences(of: "+", with: "-")

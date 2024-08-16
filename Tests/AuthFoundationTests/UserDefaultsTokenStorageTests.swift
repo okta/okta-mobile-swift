@@ -19,33 +19,33 @@ final class UserDefaultTokenStorageTests: XCTestCase {
     var userDefaults: UserDefaults!
     var storage: UserDefaultsTokenStorage!
     
-    let token = Token(id: "TokenId",
-                      issuedAt: Date(),
-                      tokenType: "Bearer",
-                      expiresIn: 300,
-                      accessToken: "abcd123",
-                      scope: "openid",
-                      refreshToken: nil,
-                      idToken: nil,
-                      deviceSecret: nil,
-                      context: Token.Context(configuration: .init(baseURL: URL(string: "https://example.com")!,
-                                                                  clientId: "clientid",
-                                                                  scopes: "openid"),
-                                             clientSettings: nil))
-
-    let newToken = Token(id: "TokenId2",
-                         issuedAt: Date(),
-                         tokenType: "Bearer",
-                         expiresIn: 300,
-                         accessToken: "zxy987",
-                         scope: "openid",
-                         refreshToken: nil,
-                         idToken: nil,
-                         deviceSecret: nil,
-                         context: Token.Context(configuration: .init(baseURL: URL(string: "https://example.com")!,
-                                                                     clientId: "clientid",
-                                                                     scopes: "openid"),
-                                                clientSettings: nil))
+    let token = try! Token(id: "TokenId",
+                           issuedAt: Date(),
+                           tokenType: "Bearer",
+                           expiresIn: 300,
+                           accessToken: "abcd123",
+                           scope: "openid",
+                           refreshToken: nil,
+                           idToken: nil,
+                           deviceSecret: nil,
+                           context: Token.Context(configuration: .init(baseURL: URL(string: "https://example.com")!,
+                                                                       clientId: "clientid",
+                                                                       scopes: "openid"),
+                                                  clientSettings: nil))
+    
+    let newToken = try! Token(id: "TokenId2",
+                              issuedAt: Date(),
+                              tokenType: "Bearer",
+                              expiresIn: 300,
+                              accessToken: "zxy987",
+                              scope: "openid",
+                              refreshToken: nil,
+                              idToken: nil,
+                              deviceSecret: nil,
+                              context: Token.Context(configuration: .init(baseURL: URL(string: "https://example.com")!,
+                                                                          clientId: "clientid",
+                                                                          scopes: "openid"),
+                                                     clientSettings: nil))
 
     override func setUpWithError() throws {
         userDefaults = UserDefaults(suiteName: name)
