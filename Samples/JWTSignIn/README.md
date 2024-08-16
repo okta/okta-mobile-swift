@@ -1,28 +1,35 @@
-# UserPasswordSignIn
+# JWTSignIn
 
 ## Abstract
 
-Add sign-in with a username and password to a macOS app.
+Sign in with a signed JWT through the JWT Bearer Authorization flow.
 
 ## Overview
 
-The command-line interface (CLI) app in the sample requires five pieces of information:
+The command-line interface (CLI) app in the sample requires four pieces of information:
 
 - The issuer URL for your Okta org authorization server. This is usually the domain of your registered Okta org followed by `/oauth2/default`, such as `https://example.okta.com/oauth2/default`.
 - The client ID from the Okta Org Application Integration from the Okta Admin console, such as `0uxa9VpZDRCeFh3Nkk2V`.
 - The permissions, or OAuth scopes that are requested by the application, such as `openid` or `profile`.
-- The username.
-- The password.
+- The JWT assertion, either supplied as a command-line argument, or loaded from a file.
 
-You provide the first three items as command-line arguments. For example:
+The JWT assertion can be supplied through a command-line argument:
 
 ```zsh
-$ UserPasswordSignIn --client-id 0uxa9VpZDRCeFh3Nkk2V \
+$ JWTSignIn --client-id 0uxa9VpZDRCeFh3Nkk2V \
     --issuer https://example.okta.com/oauth2/default \
-    --scopes "openid profile"
+    --scopes "openid profile" \
+    --assertion <the_jwt>
 ```
 
-The app prompts for the username and then the password.
+Alternatively a file can be specified in a file (use a filename of `-` to read the JWT assertion from STDIN).
+
+```zsh
+$ JWTSignIn --client-id 0uxa9VpZDRCeFh3Nkk2V \
+    --issuer https://example.okta.com/oauth2/default \
+    --scopes "openid profile" \
+    --file ./assertion.json
+```
 
 ## Running the App
 
@@ -31,5 +38,5 @@ You can run the app from the command line, or by using the Build and Run command
 To find the full path for the executable of the app:
 
 1. Build the app in Xcode.
-2. In the Project Navigator window, select `UserPasswordSignIn` in the Products folder.
+2. In the Project Navigator window, select `JWTSignIn` in the Products folder.
 3. The full path is shown in the File Inspector.
