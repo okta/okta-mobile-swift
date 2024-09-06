@@ -19,7 +19,8 @@ extension ProvidesOAuth2Parameters {
 
 extension Dictionary<String, APIRequestArgument> {
     @_documentation(visibility: private)
-    @inlinable public mutating func merge(_ oauth2Parameters: ProvidesOAuth2Parameters?) {
+    @inlinable
+    public mutating func merge(_ oauth2Parameters: ProvidesOAuth2Parameters?) {
         guard let oauth2Parameters = oauth2Parameters,
               let additionalParameters = oauth2Parameters.additionalParameters
         else {
@@ -30,7 +31,8 @@ extension Dictionary<String, APIRequestArgument> {
     }
 
     @_documentation(visibility: private)
-    @inlinable public func merging(_ oauth2Parameters: ProvidesOAuth2Parameters?) -> [Key: Value] {
+    @inlinable
+    public func merging(_ oauth2Parameters: ProvidesOAuth2Parameters?) -> [Key: Value] {
         var result = self
         result.merge(oauth2Parameters)
         return result
