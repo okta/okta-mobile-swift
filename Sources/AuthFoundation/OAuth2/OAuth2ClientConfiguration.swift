@@ -24,7 +24,7 @@ extension OAuth2Client {
     /// Utility struct used internally to process `Okta.plist` and other similar client configuration files.
     ///
     /// > Important: This struct is intended for internal use, and may be subject to change.
-    public struct PropertyListConfiguration {
+    public struct PropertyListConfiguration: ProvidesOAuth2Parameters {
         /// The client issuer URL, defined in the "issuer" key.
         public let issuer: URL
         
@@ -41,7 +41,7 @@ extension OAuth2Client {
         public let logoutRedirectUri: URL?
         
         /// Additional parameters defined by the developer within the property list.
-        public let additionalParameters: [String: String]?
+        public let additionalParameters: [String: APIRequestArgument]?
         
         /// Default initializer that reads the `Okta.plist` file from the application's main bundle.
         public init() throws {

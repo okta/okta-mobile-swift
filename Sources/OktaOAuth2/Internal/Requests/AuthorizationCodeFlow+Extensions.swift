@@ -16,7 +16,7 @@ import AuthFoundation
 extension AuthorizationCodeFlow {
     func authenticationUrlComponents(from authenticationUrl: URL,
                                      using context: AuthorizationCodeFlow.Context,
-                                     additionalParameters: [String: String]?) throws -> URLComponents
+                                     additionalParameters: [String: APIRequestArgument]?) throws -> URLComponents
     {
         guard var components = URLComponents(url: authenticationUrl, resolvingAgainstBaseURL: true)
         else {
@@ -30,16 +30,10 @@ extension AuthorizationCodeFlow {
     }
     
     private func queryParameters(using context: AuthorizationCodeFlow.Context,
-                                 additionalParameters: [String: String]?) -> [String: String]
+                                 additionalParameters: [String: APIRequestArgument]?) -> [String: String]
     {
-        var parameters = [String: String]()
-        if let additional = self.additionalParameters {
-            parameters.merge(additional, uniquingKeysWith: { $1 })
-        }
-        
-        if let additional = additionalParameters {
-            parameters.merge(additional, uniquingKeysWith: { $1 })
-        }
+        var parameters = self.additionalParameters ?? [:]
+        parameters.merge(additionalParameters)
         
         parameters["client_id"] = client.configuration.clientId
         parameters["scope"] = client.configuration.scopes
@@ -53,7 +47,7 @@ extension AuthorizationCodeFlow {
             parameters["code_challenge_method"] = pkce.method.rawValue
         }
         
-        return parameters
+        return parameters.mapValues(\.stringValue)
     }
 
     func createAuthenticationURL(from authenticationUrl: URL,

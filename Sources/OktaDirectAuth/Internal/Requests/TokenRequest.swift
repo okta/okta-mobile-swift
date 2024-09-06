@@ -19,6 +19,7 @@ struct TokenRequest {
     let currentStatus: DirectAuthenticationFlow.Status?
     let loginHint: String?
     let factor: any AuthenticationFactor
+    let intent: DirectAuthenticationFlow.Intent
     let parameters: (any HasTokenParameters)?
     let grantTypesSupported: [GrantType]?
     
@@ -27,6 +28,7 @@ struct TokenRequest {
          currentStatus: DirectAuthenticationFlow.Status?,
          loginHint: String? = nil,
          factor: any AuthenticationFactor,
+         intent: DirectAuthenticationFlow.Intent,
          parameters: (any HasTokenParameters)? = nil,
          grantTypesSupported: [GrantType]? = nil)
     {
@@ -35,6 +37,7 @@ struct TokenRequest {
         self.currentStatus = currentStatus
         self.loginHint = loginHint
         self.factor = factor
+        self.intent = intent
         self.parameters = parameters
         self.grantTypesSupported = grantTypesSupported
     }
@@ -47,9 +50,7 @@ extension TokenRequest: OAuth2TokenRequest, OAuth2APIRequest, APIRequestBody {
         result["client_id"] = clientConfiguration.clientId
         result["scope"] = clientConfiguration.scopes
         
-        if let tokenParameters = parameters?.tokenParameters(currentStatus: currentStatus) {
-            result.merge(tokenParameters, uniquingKeysWith: { $1 })
-        }
+        result.merge(parameters?.tokenParameters(currentStatus: currentStatus))
         
         if let loginHint = loginHint {
             let key: String
@@ -65,9 +66,8 @@ extension TokenRequest: OAuth2TokenRequest, OAuth2APIRequest, APIRequestBody {
             result["grant_types_supported"] = grantTypesSupported.joined(separator: " ")
         }
         
-        if let parameters = clientConfiguration.authentication.additionalParameters {
-            result.merge(parameters, uniquingKeysWith: { $1 })
-        }
+        result.merge(clientConfiguration.authentication)
+        result.merge(intent)
 
         return result
     }

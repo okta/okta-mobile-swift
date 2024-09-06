@@ -39,6 +39,7 @@ extension DirectAuthenticationFlow.PrimaryFactor: AuthenticationFactor {
                                        currentStatus: currentStatus,
                                        loginHint: loginHint,
                                        factor: factor,
+                                       intent: flow.intent,
                                        grantTypesSupported: flow.supportedGrantTypes)
             return TokenStepHandler(flow: flow, request: request)
         case .oob(channel: let channel):
