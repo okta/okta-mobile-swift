@@ -33,8 +33,8 @@ class WebAuthenticationInitializerTests: XCTestCase {
         XCTAssertEqual(auth.signInFlow.client.configuration.clientId, "client_id")
         XCTAssertEqual(auth.signInFlow.client.configuration.scopes, "openid profile")
         XCTAssertTrue(auth.signInFlow.client === auth.signOutFlow?.client)
-        XCTAssertEqual(auth.signInFlow.additionalParameters, ["foo": "bar"])
-        XCTAssertEqual(auth.signOutFlow?.additionalParameters, ["foo": "bar"])
+        XCTAssertEqual(auth.signInFlow.additionalParameters?.stringComponents, ["foo": "bar"])
+        XCTAssertEqual(auth.signOutFlow?.additionalParameters?.stringComponents, ["foo": "bar"])
     }
 }
 
