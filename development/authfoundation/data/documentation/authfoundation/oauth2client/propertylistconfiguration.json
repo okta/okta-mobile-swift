@@ -115,6 +115,16 @@
       "kind" : "content"
     }
   ],
+  "relationshipsSections" : [
+    {
+      "identifiers" : [
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/ProvidesOAuth2Parameters"
+      ],
+      "kind" : "relationships",
+      "title" : "Conforms To",
+      "type" : "conformsTo"
+    }
+  ],
   "schemaVersion" : {
     "major" : 0,
     "minor" : 3,
@@ -278,12 +288,12 @@
     },
     {
       "kind" : "text",
-      "text" : " : "
+      "text" : " : any "
     },
     {
       "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:SS",
-      "text" : "String"
+      "preciseIdentifier" : "s:14AuthFoundation18APIRequestArgumentP",
+      "text" : "APIRequestArgument"
     },
     {
       "kind" : "text",
@@ -570,6 +580,40 @@
   "title" : "scopes",
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/oauth2client\/propertylistconfiguration\/scopes"
+},
+"doc://AuthFoundation/documentation/AuthFoundation/ProvidesOAuth2Parameters": {
+  "abstract" : [
+    {
+      "text" : "Used by types that are capable of providing parameters to OAuth2 API requests.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "protocol"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "ProvidesOAuth2Parameters"
+    }
+  ],
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/ProvidesOAuth2Parameters",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "ProvidesOAuth2Parameters"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "ProvidesOAuth2Parameters",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/providesoauth2parameters"
 }
 }
 }

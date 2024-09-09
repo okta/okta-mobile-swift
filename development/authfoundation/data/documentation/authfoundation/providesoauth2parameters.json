@@ -1,0 +1,343 @@
+{
+  "abstract" : [
+    {
+      "text" : "Used by types that are capable of providing parameters to OAuth2 API requests.",
+      "type" : "text"
+    }
+  ],
+  "hierarchy" : {
+    "paths" : [
+      [
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation"
+      ]
+    ]
+  },
+  "identifier" : {
+    "interfaceLanguage" : "swift",
+    "url" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/ProvidesOAuth2Parameters"
+  },
+  "kind" : "symbol",
+  "metadata" : {
+    "externalID" : "s:14AuthFoundation24ProvidesOAuth2ParametersP",
+    "fragments" : [
+      {
+        "kind" : "keyword",
+        "text" : "protocol"
+      },
+      {
+        "kind" : "text",
+        "text" : " "
+      },
+      {
+        "kind" : "identifier",
+        "text" : "ProvidesOAuth2Parameters"
+      }
+    ],
+    "modules" : [
+      {
+        "name" : "AuthFoundation"
+      }
+    ],
+    "navigatorTitle" : [
+      {
+        "kind" : "identifier",
+        "text" : "ProvidesOAuth2Parameters"
+      }
+    ],
+    "role" : "symbol",
+    "roleHeading" : "Protocol",
+    "symbolKind" : "protocol",
+    "title" : "ProvidesOAuth2Parameters"
+  },
+  "primaryContentSections" : [
+    {
+      "declarations" : [
+        {
+          "languages" : [
+            "swift"
+          ],
+          "platforms" : [
+            "macOS"
+          ],
+          "tokens" : [
+            {
+              "kind" : "keyword",
+              "text" : "protocol"
+            },
+            {
+              "kind" : "text",
+              "text" : " "
+            },
+            {
+              "kind" : "identifier",
+              "text" : "ProvidesOAuth2Parameters"
+            }
+          ]
+        }
+      ],
+      "kind" : "declarations"
+    }
+  ],
+  "relationshipsSections" : [
+    {
+      "identifiers" : [
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/Swift\/Dictionary",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/OAuth2Client\/ClientAuthentication",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/OAuth2Client\/PropertyListConfiguration"
+      ],
+      "kind" : "relationships",
+      "title" : "Conforming Types",
+      "type" : "conformingTypes"
+    }
+  ],
+  "schemaVersion" : {
+    "major" : 0,
+    "minor" : 3,
+    "patch" : 0
+  },
+  "sections" : [
+
+  ],
+  "topicSections" : [
+    {
+      "identifiers" : [
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/ProvidesOAuth2Parameters\/additionalParameters",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/ProvidesOAuth2Parameters\/shouldOverride"
+      ],
+      "title" : "Instance Properties"
+    }
+  ],
+  "variants" : [
+    {
+      "paths" : [
+        "\/documentation\/authfoundation\/providesoauth2parameters"
+      ],
+      "traits" : [
+        {
+          "interfaceLanguage" : "swift"
+        }
+      ]
+    }
+  ]
+, 
+"references": {
+"doc://AuthFoundation/documentation/AuthFoundation": {
+  "abstract" : [
+    {
+      "text" : "Library that provides foundational features used by Okta’s authentication libraries, as well as APIs used to work with tokens and user credentials.",
+      "type" : "text"
+    }
+  ],
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation",
+  "kind" : "symbol",
+  "role" : "collection",
+  "title" : "AuthFoundation",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation"
+},
+"doc://AuthFoundation/documentation/AuthFoundation/OAuth2Client/ClientAuthentication": {
+  "abstract" : [
+    {
+      "text" : "Defines the types of authentication the client may use when interacting with the authorization server.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "enum"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "ClientAuthentication"
+    }
+  ],
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/OAuth2Client\/ClientAuthentication",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "ClientAuthentication"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "OAuth2Client.ClientAuthentication",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/oauth2client\/clientauthentication"
+},
+"doc://AuthFoundation/documentation/AuthFoundation/OAuth2Client/PropertyListConfiguration": {
+  "abstract" : [
+    {
+      "text" : "Utility struct used internally to process ",
+      "type" : "text"
+    },
+    {
+      "code" : "Okta.plist",
+      "type" : "codeVoice"
+    },
+    {
+      "text" : " and other similar client configuration files.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "struct"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "PropertyListConfiguration"
+    }
+  ],
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/OAuth2Client\/PropertyListConfiguration",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "PropertyListConfiguration"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "OAuth2Client.PropertyListConfiguration",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/oauth2client\/propertylistconfiguration"
+},
+"doc://AuthFoundation/documentation/AuthFoundation/ProvidesOAuth2Parameters": {
+  "abstract" : [
+    {
+      "text" : "Used by types that are capable of providing parameters to OAuth2 API requests.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "protocol"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "ProvidesOAuth2Parameters"
+    }
+  ],
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/ProvidesOAuth2Parameters",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "ProvidesOAuth2Parameters"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "ProvidesOAuth2Parameters",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/providesoauth2parameters"
+},
+"doc://AuthFoundation/documentation/AuthFoundation/ProvidesOAuth2Parameters/additionalParameters": {
+  "abstract" : [
+    {
+      "text" : "The additional parameters this authentication type will contribute to outgoing API requests when needed.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "var"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "additionalParameters"
+    },
+    {
+      "kind" : "text",
+      "text" : ": ["
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:SS",
+      "text" : "String"
+    },
+    {
+      "kind" : "text",
+      "text" : " : any "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:14AuthFoundation18APIRequestArgumentP",
+      "text" : "APIRequestArgument"
+    },
+    {
+      "kind" : "text",
+      "text" : "]?"
+    }
+  ],
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/ProvidesOAuth2Parameters\/additionalParameters",
+  "kind" : "symbol",
+  "required" : true,
+  "role" : "symbol",
+  "title" : "additionalParameters",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/providesoauth2parameters\/additionalparameters"
+},
+"doc://AuthFoundation/documentation/AuthFoundation/ProvidesOAuth2Parameters/shouldOverride": {
+  "abstract" : [
+    {
+      "text" : "Indicates if the parameters included in the result should override those previously declared.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "var"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "shouldOverride"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:Sb",
+      "text" : "Bool"
+    }
+  ],
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/ProvidesOAuth2Parameters\/shouldOverride",
+  "kind" : "symbol",
+  "required" : true,
+  "role" : "symbol",
+  "title" : "shouldOverride",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/providesoauth2parameters\/shouldoverride"
+},
+"doc://AuthFoundation/documentation/AuthFoundation/Swift/Dictionary": {
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/Swift\/Dictionary",
+  "title" : "Dictionary",
+  "type" : "unresolvable"
+}
+}
+}

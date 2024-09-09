@@ -206,9 +206,8 @@
               "type" : "text"
             },
             {
-              "identifier" : "doc:\/\/OktaDirectAuth\/documentation\/OktaDirectAuth\/DirectAuthenticationFlow\/start(_:with:)",
-              "isActive" : true,
-              "type" : "reference"
+              "code" : "DirectAuthenticationFlow\/start(_:with:)",
+              "type" : "codeVoice"
             },
             {
               "text" : " or ",
@@ -332,103 +331,6 @@
   "title" : "DirectAuthenticationFlow.Status",
   "type" : "topic",
   "url" : "\/documentation\/oktadirectauth\/directauthenticationflow\/status"
-},
-"doc://OktaDirectAuth/documentation/OktaDirectAuth/DirectAuthenticationFlow/start(_:with:)": {
-  "abstract" : [
-    {
-      "text" : "Start user authentication, with the given username login hint and primary factor.",
-      "type" : "text"
-    }
-  ],
-  "fragments" : [
-    {
-      "kind" : "keyword",
-      "text" : "func"
-    },
-    {
-      "kind" : "text",
-      "text" : " "
-    },
-    {
-      "kind" : "identifier",
-      "text" : "start"
-    },
-    {
-      "kind" : "text",
-      "text" : "("
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:SS",
-      "text" : "String"
-    },
-    {
-      "kind" : "text",
-      "text" : ", "
-    },
-    {
-      "kind" : "externalParam",
-      "text" : "with"
-    },
-    {
-      "kind" : "text",
-      "text" : ": "
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:14OktaDirectAuth0B18AuthenticationFlowC",
-      "text" : "DirectAuthenticationFlow"
-    },
-    {
-      "kind" : "text",
-      "text" : "."
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:14OktaDirectAuth0B18AuthenticationFlowC13PrimaryFactorO",
-      "text" : "PrimaryFactor"
-    },
-    {
-      "kind" : "text",
-      "text" : ") "
-    },
-    {
-      "kind" : "keyword",
-      "text" : "async"
-    },
-    {
-      "kind" : "text",
-      "text" : " "
-    },
-    {
-      "kind" : "keyword",
-      "text" : "throws"
-    },
-    {
-      "kind" : "text",
-      "text" : " -> "
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:14OktaDirectAuth0B18AuthenticationFlowC",
-      "text" : "DirectAuthenticationFlow"
-    },
-    {
-      "kind" : "text",
-      "text" : "."
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:14OktaDirectAuth0B18AuthenticationFlowC6StatusO",
-      "text" : "Status"
-    }
-  ],
-  "identifier" : "doc:\/\/OktaDirectAuth\/documentation\/OktaDirectAuth\/DirectAuthenticationFlow\/start(_:with:)",
-  "kind" : "symbol",
-  "role" : "symbol",
-  "title" : "start(_:with:)",
-  "type" : "topic",
-  "url" : "\/documentation\/oktadirectauth\/directauthenticationflow\/start(_:with:)"
 },
 "doc://OktaDirectAuth/documentation/OktaDirectAuth/DirectAuthenticationFlowDelegate": {
   "abstract" : [

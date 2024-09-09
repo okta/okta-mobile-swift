@@ -159,6 +159,7 @@
       "identifiers" : [
         "doc:\/\/OktaOAuth2\/14AuthFoundation17APIClientDelegateP",
         "doc:\/\/OktaOAuth2\/14AuthFoundation20OAuth2ClientDelegateP",
+        "doc:\/\/OktaOAuth2\/14AuthFoundation24ProvidesOAuth2ParametersP",
         "doc:\/\/OktaOAuth2\/14AuthFoundation22UsesDelegateCollectionP",
         "doc:\/\/OktaOAuth2\/documentation\/OktaOAuth2\/LogoutFlow"
       ],
@@ -255,6 +256,11 @@
 "doc://OktaOAuth2/14AuthFoundation22UsesDelegateCollectionP": {
   "identifier" : "doc:\/\/OktaOAuth2\/14AuthFoundation22UsesDelegateCollectionP",
   "title" : "AuthFoundation.UsesDelegateCollection",
+  "type" : "unresolvable"
+},
+"doc://OktaOAuth2/14AuthFoundation24ProvidesOAuth2ParametersP": {
+  "identifier" : "doc:\/\/OktaOAuth2\/14AuthFoundation24ProvidesOAuth2ParametersP",
+  "title" : "AuthFoundation.ProvidesOAuth2Parameters",
   "type" : "unresolvable"
 },
 "doc://OktaOAuth2/documentation/OktaOAuth2": {
@@ -548,12 +554,12 @@
     },
     {
       "kind" : "text",
-      "text" : " : "
+      "text" : " : any "
     },
     {
       "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:SS",
-      "text" : "String"
+      "preciseIdentifier" : "s:14AuthFoundation18APIRequestArgumentP",
+      "text" : "APIRequestArgument"
     },
     {
       "kind" : "text",
@@ -944,12 +950,12 @@
     },
     {
       "kind" : "text",
-      "text" : " : "
+      "text" : " : any "
     },
     {
       "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:SS",
-      "text" : "String"
+      "preciseIdentifier" : "s:14AuthFoundation18APIRequestArgumentP",
+      "text" : "APIRequestArgument"
     },
     {
       "kind" : "text",

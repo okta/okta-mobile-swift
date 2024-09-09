@@ -193,18 +193,16 @@
                       "type" : "text"
                     },
                     {
-                      "identifier" : "doc:\/\/OktaDirectAuth\/documentation\/OktaDirectAuth\/DirectAuthenticationFlow\/start(_:with:)",
-                      "isActive" : true,
-                      "type" : "reference"
+                      "code" : "start(_:with:)",
+                      "type" : "codeVoice"
                     },
                     {
                       "text" : " (or ",
                       "type" : "text"
                     },
                     {
-                      "identifier" : "doc:\/\/OktaDirectAuth\/documentation\/OktaDirectAuth\/DirectAuthenticationFlow\/start(_:with:completion:)",
-                      "isActive" : true,
-                      "type" : "reference"
+                      "code" : "start(_:with:completion:)",
+                      "type" : "codeVoice"
                     },
                     {
                       "text" : " when using blocks)",
@@ -325,8 +323,6 @@
     },
     {
       "identifiers" : [
-        "doc:\/\/OktaDirectAuth\/documentation\/OktaDirectAuth\/DirectAuthenticationFlow\/start(_:with:)",
-        "doc:\/\/OktaDirectAuth\/documentation\/OktaDirectAuth\/DirectAuthenticationFlow\/start(_:with:completion:)",
         "doc:\/\/OktaDirectAuth\/documentation\/OktaDirectAuth\/DirectAuthenticationFlow\/PrimaryFactor",
         "doc:\/\/OktaDirectAuth\/documentation\/OktaDirectAuth\/DirectAuthenticationFlow\/OOBChannel"
       ],
@@ -368,17 +364,26 @@
     },
     {
       "identifiers" : [
+        "doc:\/\/OktaDirectAuth\/documentation\/OktaDirectAuth\/DirectAuthenticationFlow\/intent-swift.property"
+      ],
+      "title" : "Instance Properties"
+    },
+    {
+      "identifiers" : [
         "doc:\/\/OktaDirectAuth\/documentation\/OktaDirectAuth\/DirectAuthenticationFlow\/resume(_:with:)-5nv5h",
         "doc:\/\/OktaDirectAuth\/documentation\/OktaDirectAuth\/DirectAuthenticationFlow\/resume(_:with:)-9i2pz",
         "doc:\/\/OktaDirectAuth\/documentation\/OktaDirectAuth\/DirectAuthenticationFlow\/resume(_:with:completion:)-5nj0x",
-        "doc:\/\/OktaDirectAuth\/documentation\/OktaDirectAuth\/DirectAuthenticationFlow\/resume(_:with:completion:)-7fbah"
+        "doc:\/\/OktaDirectAuth\/documentation\/OktaDirectAuth\/DirectAuthenticationFlow\/resume(_:with:completion:)-7fbah",
+        "doc:\/\/OktaDirectAuth\/documentation\/OktaDirectAuth\/DirectAuthenticationFlow\/start(_:with:intent:)",
+        "doc:\/\/OktaDirectAuth\/documentation\/OktaDirectAuth\/DirectAuthenticationFlow\/start(_:with:intent:completion:)"
       ],
       "title" : "Instance Methods"
     },
     {
       "identifiers" : [
         "doc:\/\/OktaDirectAuth\/documentation\/OktaDirectAuth\/DirectAuthenticationFlow\/ContinuationFactor",
-        "doc:\/\/OktaDirectAuth\/documentation\/OktaDirectAuth\/DirectAuthenticationFlow\/ContinuationType"
+        "doc:\/\/OktaDirectAuth\/documentation\/OktaDirectAuth\/DirectAuthenticationFlow\/ContinuationType",
+        "doc:\/\/OktaDirectAuth\/documentation\/OktaDirectAuth\/DirectAuthenticationFlow\/Intent-swift.enum"
       ],
       "title" : "Enumerations"
     },
@@ -580,6 +585,40 @@
   "title" : "DirectAuthenticationFlow.ContinuationType",
   "type" : "topic",
   "url" : "\/documentation\/oktadirectauth\/directauthenticationflow\/continuationtype"
+},
+"doc://OktaDirectAuth/documentation/OktaDirectAuth/DirectAuthenticationFlow/Intent-swift.enum": {
+  "abstract" : [
+    {
+      "text" : "Indicates the intent for the user authentication operation.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "enum"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "Intent"
+    }
+  ],
+  "identifier" : "doc:\/\/OktaDirectAuth\/documentation\/OktaDirectAuth\/DirectAuthenticationFlow\/Intent-swift.enum",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "Intent"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "DirectAuthenticationFlow.Intent",
+  "type" : "topic",
+  "url" : "\/documentation\/oktadirectauth\/directauthenticationflow\/intent-swift.enum"
 },
 "doc://OktaDirectAuth/documentation/OktaDirectAuth/DirectAuthenticationFlow/MFAContext": {
   "abstract" : [
@@ -1111,6 +1150,52 @@
   "title" : "init(supportedGrants:client:)",
   "type" : "topic",
   "url" : "\/documentation\/oktadirectauth\/directauthenticationflow\/init(supportedgrants:client:)"
+},
+"doc://OktaDirectAuth/documentation/OktaDirectAuth/DirectAuthenticationFlow/intent-swift.property": {
+  "abstract" : [
+    {
+      "text" : "The intent of the current flow.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "var"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "intent"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:14OktaDirectAuth0B18AuthenticationFlowC",
+      "text" : "DirectAuthenticationFlow"
+    },
+    {
+      "kind" : "text",
+      "text" : "."
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:14OktaDirectAuth0B18AuthenticationFlowC6IntentO",
+      "text" : "Intent"
+    }
+  ],
+  "identifier" : "doc:\/\/OktaDirectAuth\/documentation\/OktaDirectAuth\/DirectAuthenticationFlow\/intent-swift.property",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "intent",
+  "type" : "topic",
+  "url" : "\/documentation\/oktadirectauth\/directauthenticationflow\/intent-swift.property"
 },
 "doc://OktaDirectAuth/documentation/OktaDirectAuth/DirectAuthenticationFlow/isAuthenticating": {
   "abstract" : [
@@ -1651,7 +1736,7 @@
   "type" : "topic",
   "url" : "\/documentation\/oktadirectauth\/directauthenticationflow\/resume(_:with:completion:)-7fbah"
 },
-"doc://OktaDirectAuth/documentation/OktaDirectAuth/DirectAuthenticationFlow/start(_:with:)": {
+"doc://OktaDirectAuth/documentation/OktaDirectAuth/DirectAuthenticationFlow/start(_:with:intent:)": {
   "abstract" : [
     {
       "text" : "Start user authentication, with the given username login hint and primary factor.",
@@ -1705,6 +1790,32 @@
       "kind" : "typeIdentifier",
       "preciseIdentifier" : "s:14OktaDirectAuth0B18AuthenticationFlowC13PrimaryFactorO",
       "text" : "PrimaryFactor"
+    },
+    {
+      "kind" : "text",
+      "text" : ", "
+    },
+    {
+      "kind" : "externalParam",
+      "text" : "intent"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:14OktaDirectAuth0B18AuthenticationFlowC",
+      "text" : "DirectAuthenticationFlow"
+    },
+    {
+      "kind" : "text",
+      "text" : "."
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:14OktaDirectAuth0B18AuthenticationFlowC6IntentO",
+      "text" : "Intent"
     },
     {
       "kind" : "text",
@@ -1741,14 +1852,14 @@
       "text" : "Status"
     }
   ],
-  "identifier" : "doc:\/\/OktaDirectAuth\/documentation\/OktaDirectAuth\/DirectAuthenticationFlow\/start(_:with:)",
+  "identifier" : "doc:\/\/OktaDirectAuth\/documentation\/OktaDirectAuth\/DirectAuthenticationFlow\/start(_:with:intent:)",
   "kind" : "symbol",
   "role" : "symbol",
-  "title" : "start(_:with:)",
+  "title" : "start(_:with:intent:)",
   "type" : "topic",
-  "url" : "\/documentation\/oktadirectauth\/directauthenticationflow\/start(_:with:)"
+  "url" : "\/documentation\/oktadirectauth\/directauthenticationflow\/start(_:with:intent:)"
 },
-"doc://OktaDirectAuth/documentation/OktaDirectAuth/DirectAuthenticationFlow/start(_:with:completion:)": {
+"doc://OktaDirectAuth/documentation/OktaDirectAuth/DirectAuthenticationFlow/start(_:with:intent:completion:)": {
   "abstract" : [
     {
       "text" : "Start user authentication, with the given username login hint and primary factor.",
@@ -1802,6 +1913,32 @@
       "kind" : "typeIdentifier",
       "preciseIdentifier" : "s:14OktaDirectAuth0B18AuthenticationFlowC13PrimaryFactorO",
       "text" : "PrimaryFactor"
+    },
+    {
+      "kind" : "text",
+      "text" : ", "
+    },
+    {
+      "kind" : "externalParam",
+      "text" : "intent"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:14OktaDirectAuth0B18AuthenticationFlowC",
+      "text" : "DirectAuthenticationFlow"
+    },
+    {
+      "kind" : "text",
+      "text" : "."
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:14OktaDirectAuth0B18AuthenticationFlowC6IntentO",
+      "text" : "Intent"
     },
     {
       "kind" : "text",
@@ -1861,12 +1998,12 @@
       "text" : ")"
     }
   ],
-  "identifier" : "doc:\/\/OktaDirectAuth\/documentation\/OktaDirectAuth\/DirectAuthenticationFlow\/start(_:with:completion:)",
+  "identifier" : "doc:\/\/OktaDirectAuth\/documentation\/OktaDirectAuth\/DirectAuthenticationFlow\/start(_:with:intent:completion:)",
   "kind" : "symbol",
   "role" : "symbol",
-  "title" : "start(_:with:completion:)",
+  "title" : "start(_:with:intent:completion:)",
   "type" : "topic",
-  "url" : "\/documentation\/oktadirectauth\/directauthenticationflow\/start(_:with:completion:)"
+  "url" : "\/documentation\/oktadirectauth\/directauthenticationflow\/start(_:with:intent:completion:)"
 },
 "doc://OktaDirectAuth/documentation/OktaDirectAuth/DirectAuthenticationFlow/supportedGrantTypes": {
   "abstract" : [

@@ -242,6 +242,12 @@
     },
     {
       "identifiers" : [
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/ProvidesOAuth2Parameters"
+      ],
+      "title" : "Protocols"
+    },
+    {
+      "identifiers" : [
         "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/Foundation",
         "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/Swift"
       ],
@@ -2629,6 +2635,40 @@
   "title" : "PKCE",
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/pkce"
+},
+"doc://AuthFoundation/documentation/AuthFoundation/ProvidesOAuth2Parameters": {
+  "abstract" : [
+    {
+      "text" : "Used by types that are capable of providing parameters to OAuth2 API requests.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "protocol"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "ProvidesOAuth2Parameters"
+    }
+  ],
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/ProvidesOAuth2Parameters",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "ProvidesOAuth2Parameters"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "ProvidesOAuth2Parameters",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/providesoauth2parameters"
 },
 "doc://AuthFoundation/documentation/AuthFoundation/SDKVersion": {
   "abstract" : [

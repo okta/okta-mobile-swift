@@ -83,6 +83,7 @@
   "relationshipsSections" : [
     {
       "identifiers" : [
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/ProvidesOAuth2Parameters",
         "doc:\/\/AuthFoundation\/Se",
         "doc:\/\/AuthFoundation\/SE",
         "doc:\/\/AuthFoundation\/SQ",
@@ -114,12 +115,6 @@
         "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/OAuth2Client\/ClientAuthentication\/init(from:)"
       ],
       "title" : "Initializers"
-    },
-    {
-      "identifiers" : [
-        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/OAuth2Client\/ClientAuthentication\/additionalParameters"
-      ],
-      "title" : "Instance Properties"
     },
     {
       "generated" : true,
@@ -256,56 +251,6 @@
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/oauth2client\/clientauthentication\/equatable-implementations"
 },
-"doc://AuthFoundation/documentation/AuthFoundation/OAuth2Client/ClientAuthentication/additionalParameters": {
-  "abstract" : [
-    {
-      "text" : "The additional parameters this authentication type will contribute to outgoing API requests when needed.",
-      "type" : "text"
-    }
-  ],
-  "fragments" : [
-    {
-      "kind" : "keyword",
-      "text" : "var"
-    },
-    {
-      "kind" : "text",
-      "text" : " "
-    },
-    {
-      "kind" : "identifier",
-      "text" : "additionalParameters"
-    },
-    {
-      "kind" : "text",
-      "text" : ": ["
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:SS",
-      "text" : "String"
-    },
-    {
-      "kind" : "text",
-      "text" : " : any "
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:14AuthFoundation18APIRequestArgumentP",
-      "text" : "APIRequestArgument"
-    },
-    {
-      "kind" : "text",
-      "text" : "]?"
-    }
-  ],
-  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/OAuth2Client\/ClientAuthentication\/additionalParameters",
-  "kind" : "symbol",
-  "role" : "symbol",
-  "title" : "additionalParameters",
-  "type" : "topic",
-  "url" : "\/documentation\/authfoundation\/oauth2client\/clientauthentication\/additionalparameters"
-},
 "doc://AuthFoundation/documentation/AuthFoundation/OAuth2Client/ClientAuthentication/clientSecret(_:)": {
   "abstract" : [
     {
@@ -416,6 +361,40 @@
   "title" : "OAuth2Client.ClientAuthentication.none",
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/oauth2client\/clientauthentication\/none"
+},
+"doc://AuthFoundation/documentation/AuthFoundation/ProvidesOAuth2Parameters": {
+  "abstract" : [
+    {
+      "text" : "Used by types that are capable of providing parameters to OAuth2 API requests.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "protocol"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "ProvidesOAuth2Parameters"
+    }
+  ],
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/ProvidesOAuth2Parameters",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "ProvidesOAuth2Parameters"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "ProvidesOAuth2Parameters",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/providesoauth2parameters"
 }
 }
 }

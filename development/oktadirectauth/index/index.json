@@ -38,16 +38,6 @@
                 "type" : "groupMarker"
               },
               {
-                "path" : "\/documentation\/oktadirectauth\/directauthenticationflow\/start(_:with:)",
-                "title" : "func start(String, with: DirectAuthenticationFlow.PrimaryFactor) async throws -> DirectAuthenticationFlow.Status",
-                "type" : "method"
-              },
-              {
-                "path" : "\/documentation\/oktadirectauth\/directauthenticationflow\/start(_:with:completion:)",
-                "title" : "func start(String, with: DirectAuthenticationFlow.PrimaryFactor, completion: (Result<DirectAuthenticationFlow.Status, DirectAuthenticationFlowError>) -> Void)",
-                "type" : "method"
-              },
-              {
                 "children" : [
                   {
                     "title" : "Enumeration Cases",
@@ -474,6 +464,15 @@
                 "type" : "method"
               },
               {
+                "title" : "Instance Properties",
+                "type" : "groupMarker"
+              },
+              {
+                "path" : "\/documentation\/oktadirectauth\/directauthenticationflow\/intent-swift.property",
+                "title" : "var intent: DirectAuthenticationFlow.Intent",
+                "type" : "property"
+              },
+              {
                 "title" : "Instance Methods",
                 "type" : "groupMarker"
               },
@@ -495,6 +494,16 @@
               {
                 "path" : "\/documentation\/oktadirectauth\/directauthenticationflow\/resume(_:with:completion:)-7fbah",
                 "title" : "func resume(DirectAuthenticationFlow.Status, with: DirectAuthenticationFlow.SecondaryFactor, completion: (Result<DirectAuthenticationFlow.Status, DirectAuthenticationFlowError>) -> Void)",
+                "type" : "method"
+              },
+              {
+                "path" : "\/documentation\/oktadirectauth\/directauthenticationflow\/start(_:with:intent:)",
+                "title" : "func start(String, with: DirectAuthenticationFlow.PrimaryFactor, intent: DirectAuthenticationFlow.Intent) async throws -> DirectAuthenticationFlow.Status",
+                "type" : "method"
+              },
+              {
+                "path" : "\/documentation\/oktadirectauth\/directauthenticationflow\/start(_:with:intent:completion:)",
+                "title" : "func start(String, with: DirectAuthenticationFlow.PrimaryFactor, intent: DirectAuthenticationFlow.Intent, completion: (Result<DirectAuthenticationFlow.Status, DirectAuthenticationFlowError>) -> Void)",
                 "type" : "method"
               },
               {
@@ -596,6 +605,95 @@
                 ],
                 "path" : "\/documentation\/oktadirectauth\/directauthenticationflow\/continuationtype",
                 "title" : "DirectAuthenticationFlow.ContinuationType",
+                "type" : "enum"
+              },
+              {
+                "children" : [
+                  {
+                    "title" : "Enumeration Cases",
+                    "type" : "groupMarker"
+                  },
+                  {
+                    "path" : "\/documentation\/oktadirectauth\/directauthenticationflow\/intent-swift.enum\/recovery",
+                    "title" : "case recovery",
+                    "type" : "case"
+                  },
+                  {
+                    "path" : "\/documentation\/oktadirectauth\/directauthenticationflow\/intent-swift.enum\/signin",
+                    "title" : "case signIn",
+                    "type" : "case"
+                  },
+                  {
+                    "title" : "Initializers",
+                    "type" : "groupMarker"
+                  },
+                  {
+                    "path" : "\/documentation\/oktadirectauth\/directauthenticationflow\/intent-swift.enum\/init(rawvalue:)",
+                    "title" : "init?(rawValue: String)",
+                    "type" : "init"
+                  },
+                  {
+                    "title" : "Default Implementations",
+                    "type" : "groupMarker"
+                  },
+                  {
+                    "children" : [
+                      {
+                        "title" : "Operators",
+                        "type" : "groupMarker"
+                      },
+                      {
+                        "path" : "\/documentation\/oktadirectauth\/directauthenticationflow\/intent-swift.enum\/!=(_:_:)",
+                        "title" : "static func != (Self, Self) -> Bool",
+                        "type" : "op"
+                      }
+                    ],
+                    "path" : "\/documentation\/oktadirectauth\/directauthenticationflow\/intent-swift.enum\/equatable-implementations",
+                    "title" : "Equatable Implementations",
+                    "type" : "symbol"
+                  },
+                  {
+                    "children" : [
+                      {
+                        "title" : "Initializers",
+                        "type" : "groupMarker"
+                      },
+                      {
+                        "path" : "\/documentation\/oktadirectauth\/directauthenticationflow\/intent-swift.enum\/init(from:)",
+                        "title" : "init(from: any Decoder) throws",
+                        "type" : "init"
+                      },
+                      {
+                        "title" : "Instance Properties",
+                        "type" : "groupMarker"
+                      },
+                      {
+                        "path" : "\/documentation\/oktadirectauth\/directauthenticationflow\/intent-swift.enum\/hashvalue",
+                        "title" : "var hashValue: Int",
+                        "type" : "property"
+                      },
+                      {
+                        "title" : "Instance Methods",
+                        "type" : "groupMarker"
+                      },
+                      {
+                        "path" : "\/documentation\/oktadirectauth\/directauthenticationflow\/intent-swift.enum\/encode(to:)",
+                        "title" : "func encode(to: any Encoder) throws",
+                        "type" : "method"
+                      },
+                      {
+                        "path" : "\/documentation\/oktadirectauth\/directauthenticationflow\/intent-swift.enum\/hash(into:)",
+                        "title" : "func hash(into: inout Hasher)",
+                        "type" : "method"
+                      }
+                    ],
+                    "path" : "\/documentation\/oktadirectauth\/directauthenticationflow\/intent-swift.enum\/rawrepresentable-implementations",
+                    "title" : "RawRepresentable Implementations",
+                    "type" : "symbol"
+                  }
+                ],
+                "path" : "\/documentation\/oktadirectauth\/directauthenticationflow\/intent-swift.enum",
+                "title" : "DirectAuthenticationFlow.Intent",
                 "type" : "enum"
               },
               {
