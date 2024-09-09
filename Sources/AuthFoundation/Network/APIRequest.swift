@@ -61,7 +61,8 @@ public protocol APIRequest {
     ///   - client: ``APIClient`` the request is being sent to.
     ///   - context: Optional context to use when parsing the response.
     ///   - completion: Completion block invoked with the result.
-    func send(to client: APIClient, parsing context: APIParsingContext?, completion: @escaping(Result<APIResponse<ResponseType>, APIClientError>) -> Void)
+    @discardableResult
+    func send(to client: APIClient, parsing context: APIParsingContext?, completion: @escaping(Result<APIResponse<ResponseType>, APIClientError>) -> Void) -> APIClientCancellable
 
     /// Asynchronously sends the request to the given ``APIClient``.
     /// - Parameters:
@@ -229,23 +230,34 @@ extension APIRequest {
         return request
     }
     
-    public func send(to client: APIClient, parsing context: APIParsingContext? = nil, completion: @escaping(Result<APIResponse<ResponseType>, APIClientError>) -> Void) {
+    @discardableResult
+    public func send(to client: APIClient, 
+                     parsing context: APIParsingContext? = nil,
+                     completion: @escaping(Result<APIResponse<ResponseType>, APIClientError>) -> Void) -> APIClientCancellable
+    {
+        let cancellation = APICancellation()
         do {
             let urlRequest = try request(for: client)
             client.send(urlRequest,
                         parsing: context ?? self as? APIParsingContext,
-                        completion: completion)
+                        completion: completion).add(to: cancellation)
         } catch {
             completion(.failure(.serverError(error)))
         }
+        return cancellation
     }
     
     @available(iOS 13.0, tvOS 13.0, macOS 10.15, watchOS 6, *)
     public func send(to client: APIClient, parsing context: APIParsingContext? = nil) async throws -> APIResponse<ResponseType> {
-        try await withCheckedThrowingContinuation { continuation in
-            send(to: client, parsing: context) { result in
-                continuation.resume(with: result)
+        let cancellation = APICancellation()
+        return try await withTaskCancellationHandler {
+            try await withCheckedThrowingContinuation { continuation in
+                send(to: client, parsing: context) { result in
+                    continuation.resume(with: result)
+                }.add(to: cancellation)
             }
+        } onCancel: {
+            cancellation.cancel()
         }
     }
 }

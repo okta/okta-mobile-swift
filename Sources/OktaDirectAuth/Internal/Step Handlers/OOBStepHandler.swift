@@ -17,6 +17,7 @@ class OOBStepHandler<Factor: AuthenticationFactor>: StepHandler {
     let flow: DirectAuthenticationFlow
     let openIdConfiguration: OpenIdConfiguration
     let currentStatus: DirectAuthenticationFlow.Status?
+    let cancellation: APICancellation
     let loginHint: String?
     let channel: DirectAuthenticationFlow.OOBChannel
     let factor: Factor
@@ -25,6 +26,7 @@ class OOBStepHandler<Factor: AuthenticationFactor>: StepHandler {
     init(flow: DirectAuthenticationFlow,
          openIdConfiguration: OpenIdConfiguration,
          currentStatus: DirectAuthenticationFlow.Status?,
+         cancellation: APICancellation,
          loginHint: String?,
          channel: DirectAuthenticationFlow.OOBChannel,
          factor: Factor) throws
@@ -32,6 +34,7 @@ class OOBStepHandler<Factor: AuthenticationFactor>: StepHandler {
         self.flow = flow
         self.openIdConfiguration = openIdConfiguration
         self.currentStatus = currentStatus
+        self.cancellation = cancellation
         self.loginHint = loginHint
         self.channel = channel
         self.factor = factor
@@ -110,7 +113,7 @@ class OOBStepHandler<Factor: AuthenticationFactor>: StepHandler {
                 case .success(let response):
                     completion(.success(response.result))
                 }
-            }
+            }.add(to: cancellation)
         } catch {
             completion(.failure(.validation(error: error)))
         }
@@ -136,7 +139,7 @@ class OOBStepHandler<Factor: AuthenticationFactor>: StepHandler {
                         completion(.failure(.invalidResponse))
                     }
                 }
-            }
+            }.add(to: cancellation)
         } catch {
             completion(.failure(.validation(error: error)))
         }
@@ -182,7 +185,7 @@ class OOBStepHandler<Factor: AuthenticationFactor>: StepHandler {
             }
         }
         
-        self.poll?.start { result in
+        poll.start { result in
             switch result {
             case .success(let token):
                 completion(.success(.success(token)))
@@ -196,5 +199,8 @@ class OOBStepHandler<Factor: AuthenticationFactor>: StepHandler {
             }
             self.poll = nil
         }
+        
+        cancellation.add(poll)
+        self.poll = poll
     }
 }

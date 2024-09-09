@@ -345,14 +345,21 @@ public class DirectAuthenticationFlow: AuthenticationFlow {
     ///   - factor: The primary factor to use when authenticating the user.
     ///   - intent: The intent behind this authentication (default: `signIn`)
     ///   - completion: Completion block called when the operation completes.
+    @discardableResult
     public func start(_ loginHint: String,
                       with factor: PrimaryFactor,
                       intent: Intent = .signIn,
-                      completion: @escaping (Result<Status, DirectAuthenticationFlowError>) -> Void)
+                      completion: @escaping (Result<Status, DirectAuthenticationFlowError>) -> Void) -> APIClientCancellable
     {
         reset()
         self.intent = intent
-        runStep(loginHint: loginHint, with: factor, completion: completion)
+
+        let cancellation = APICancellation()
+        runStep(loginHint: loginHint,
+                with: factor,
+                cancellation: cancellation,
+                completion: completion)
+        return cancellation
     }
     
     /// Resumes authentication when an additional (secondary) factor is required to verify the user.
@@ -362,11 +369,17 @@ public class DirectAuthenticationFlow: AuthenticationFlow {
     ///   - status: The previous status returned from the server.
     ///   - factor: The secondary factor to use when authenticating the user.
     ///   - completion: Completion block called when the operation completes.
+    @discardableResult
     public func resume(_ status: DirectAuthenticationFlow.Status,
                        with factor: SecondaryFactor,
-                       completion: @escaping (Result<Status, DirectAuthenticationFlowError>) -> Void)
+                       completion: @escaping (Result<Status, DirectAuthenticationFlowError>) -> Void) -> APIClientCancellable
     {
-        runStep(currentStatus: status, with: factor, completion: completion)
+        let cancellation = APICancellation()
+        runStep(currentStatus: status,
+                with: factor,
+                cancellation: cancellation,
+                completion: completion)
+        return cancellation
     }
 
     /// Continues authentication of a current factor (either primary or secondary) when an additional step is required.
@@ -376,16 +389,23 @@ public class DirectAuthenticationFlow: AuthenticationFlow {
     ///   - status: The previous status returned from the server.
     ///   - factor: The continuation factor to use when authenticating the user.
     ///   - completion: Completion block called when the operation completes.
+    @discardableResult
     public func resume(_ status: DirectAuthenticationFlow.Status,
                        with factor: ContinuationFactor,
-                       completion: @escaping (Result<Status, DirectAuthenticationFlowError>) -> Void)
+                       completion: @escaping (Result<Status, DirectAuthenticationFlowError>) -> Void) -> APIClientCancellable
     {
-        runStep(currentStatus: status, with: factor, completion: completion)
+        let cancellation = APICancellation()
+        runStep(currentStatus: status,
+                with: factor,
+                cancellation: cancellation,
+                completion: completion)
+        return cancellation
     }
     
     func runStep<Factor: AuthenticationFactor>(loginHint: String? = nil,
                                                currentStatus: Status? = nil,
                                                with factor: Factor,
+                                               cancellation: APICancellation,
                                                completion: @escaping (Result<DirectAuthenticationFlow.Status, DirectAuthenticationFlowError>) -> Void)
     {
         isAuthenticating = true
@@ -396,6 +416,7 @@ public class DirectAuthenticationFlow: AuthenticationFlow {
                 do {
                     self.stepHandler = try factor.stepHandler(flow: self,
                                                               openIdConfiguration: configuration,
+                                                              cancellation: cancellation,
                                                               loginHint: loginHint,
                                                               currentStatus: currentStatus,
                                                               factor: factor)
@@ -440,10 +461,15 @@ extension DirectAuthenticationFlow {
                       with factor: PrimaryFactor,
                       intent: DirectAuthenticationFlow.Intent = .signIn) async throws -> DirectAuthenticationFlow.Status
     {
-        try await withCheckedThrowingContinuation { continuation in
-            start(loginHint, with: factor, intent: intent) { result in
-                continuation.resume(with: result)
+        let cancellation = APICancellation()
+        return try await withTaskCancellationHandler {
+            return try await withCheckedThrowingContinuation { continuation in
+                start(loginHint, with: factor, intent: intent) { result in
+                    continuation.resume(with: result)
+                }.add(to: cancellation)
             }
+        } onCancel: {
+            cancellation.cancel()
         }
     }
     
@@ -455,10 +481,15 @@ extension DirectAuthenticationFlow {
     ///   - factor: The secondary factor to use when authenticating the user.
     /// - Returns: Status returned when the operation completes.
     public func resume(_ status: DirectAuthenticationFlow.Status, with factor: SecondaryFactor) async throws -> DirectAuthenticationFlow.Status {
-        try await withCheckedThrowingContinuation { continuation in
-            resume(status, with: factor) { result in
-                continuation.resume(with: result)
+        let cancellation = APICancellation()
+        return try await withTaskCancellationHandler {
+            try await withCheckedThrowingContinuation { continuation in
+                resume(status, with: factor) { result in
+                    continuation.resume(with: result)
+                }.add(to: cancellation)
             }
+        } onCancel: {
+            cancellation.cancel()
         }
     }
 
@@ -470,10 +501,15 @@ extension DirectAuthenticationFlow {
     ///   - factor: The continuation factor to use when authenticating the user.
     /// - Returns: Status returned when the operation completes.
     public func resume(_ status: DirectAuthenticationFlow.Status, with factor: ContinuationFactor) async throws -> DirectAuthenticationFlow.Status {
-        try await withCheckedThrowingContinuation { continuation in
-            resume(status, with: factor) { result in
-                continuation.resume(with: result)
+        let cancellation = APICancellation()
+        return try await withTaskCancellationHandler {
+            return try await withCheckedThrowingContinuation { continuation in
+                resume(status, with: factor) { result in
+                    continuation.resume(with: result)
+                }
             }
+        } onCancel: {
+            cancellation.cancel()
         }
     }
 }

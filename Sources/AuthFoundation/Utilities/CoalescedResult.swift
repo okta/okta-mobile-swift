@@ -14,6 +14,11 @@ import Foundation
 
 final class CoalescedResult<T> {
     private var completionHandlers: [(T) -> Void] = []
+    let cancellation: APIClientCancellable
+    
+    init(cancellation: APIClientCancellable = APICancellation()) {
+        self.cancellation = cancellation
+    }
     
     func add(_ completion: @escaping (T) -> Void) {
         completionHandlers.append(completion)

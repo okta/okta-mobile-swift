@@ -16,6 +16,7 @@ import AuthFoundation
 extension DirectAuthenticationFlow.SecondaryFactor: AuthenticationFactor {
     func stepHandler(flow: DirectAuthenticationFlow,
                      openIdConfiguration: AuthFoundation.OpenIdConfiguration,
+                     cancellation: APICancellation,
                      loginHint: String? = nil,
                      currentStatus: DirectAuthenticationFlow.Status?,
                      factor: Self) throws -> StepHandler
@@ -29,11 +30,17 @@ extension DirectAuthenticationFlow.SecondaryFactor: AuthenticationFactor {
                                        factor: factor,
                                        intent: flow.intent,
                                        grantTypesSupported: flow.supportedGrantTypes)
-            return TokenStepHandler(flow: flow, request: request)
+            return TokenStepHandler(flow: flow, cancellation: cancellation, request: request)
         case .oob(channel: let channel):
+            var bindingContext: DirectAuthenticationFlow.BindingUpdateContext?
+            if case .bindingUpdate(let context) = currentStatus {
+                bindingContext = context
+            }
+
             return try OOBStepHandler(flow: flow,
                                       openIdConfiguration: openIdConfiguration,
                                       currentStatus: currentStatus,
+                                      cancellation: cancellation,
                                       loginHint: loginHint,
                                       channel: channel,
                                       factor: factor)

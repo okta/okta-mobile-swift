@@ -15,6 +15,7 @@ import AuthFoundation
 
 struct TokenStepHandler: StepHandler {
     let flow: DirectAuthenticationFlow
+    let cancellation: APICancellation
     let request: any OAuth2TokenRequest
     
     func process(completion: @escaping (Result<DirectAuthenticationFlow.Status, DirectAuthenticationFlowError>) -> Void) {

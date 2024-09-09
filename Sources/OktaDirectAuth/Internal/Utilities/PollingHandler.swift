@@ -13,7 +13,7 @@
 import Foundation
 import AuthFoundation
 
-class PollingHandler<RequestType: OAuth2TokenRequest> {
+class PollingHandler<RequestType: OAuth2TokenRequest>: APIClientCancellable {
     private(set) var isPolling: Bool = false
     let expirationDate: Date
     var interval: TimeInterval
@@ -21,6 +21,7 @@ class PollingHandler<RequestType: OAuth2TokenRequest> {
     
     private let client: OAuth2Client
     private let statusCheck: (PollingHandler, Result<APIResponse<RequestType.ResponseType>, APIClientError>) -> Status
+    private var cancellable: APIClientCancellable?
 
     enum Status {
         case continuePolling
@@ -47,7 +48,12 @@ class PollingHandler<RequestType: OAuth2TokenRequest> {
     }
     
     deinit {
-        isPolling = false
+        stopPolling()
+    }
+    
+    func cancel() {
+        guard isPolling else { return }
+        stopPolling()
     }
     
     func start(completion: @escaping (Result<RequestType.ResponseType, PollingError>) -> Void) {
@@ -59,6 +65,11 @@ class PollingHandler<RequestType: OAuth2TokenRequest> {
     
     func stopPolling() {
         isPolling = false
+        
+        if let cancellable = cancellable {
+            cancellable.cancel()
+            self.cancellable = nil
+        }
     }
     
     func nextPoll(completion: @escaping (Result<RequestType.ResponseType, PollingError>) -> Void) {
@@ -77,7 +88,7 @@ class PollingHandler<RequestType: OAuth2TokenRequest> {
                 return
             }
             
-            self.client.exchange(token: self.request) { [weak self] result in
+            self.cancellable = self.client.exchange(token: self.request) { [weak self] result in
                 guard let self = self else { return }
                 
                 if self.isPolling == false {

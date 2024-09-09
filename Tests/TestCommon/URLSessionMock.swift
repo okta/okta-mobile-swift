@@ -124,6 +124,7 @@ class URLSessionDataTaskMock: URLSessionDataTaskProtocol {
     let data: Data?
     let response: HTTPURLResponse?
     let error: Error?
+    private(set) var isCancelled: Bool = false
     
     init(session: URLSessionMock,
          data: Data?,
@@ -149,6 +150,10 @@ class URLSessionDataTaskMock: URLSessionDataTaskProtocol {
         DispatchQueue.global().asyncAfter(deadline: .now() + delay) {
             self.completionHandler(self.data, self.response, self.error)
         }
+    }
+    
+    func cancel() {
+        isCancelled = true
     }
 }
 

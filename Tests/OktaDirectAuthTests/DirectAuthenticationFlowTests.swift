@@ -18,6 +18,7 @@ import XCTest
 struct TestStepHandler: StepHandler {
     let flow: OktaDirectAuth.DirectAuthenticationFlow
     let openIdConfiguration: AuthFoundation.OpenIdConfiguration
+    let cancellation: APICancellation
     let loginHint: String?
     let currentStatus: OktaDirectAuth.DirectAuthenticationFlow.Status?
     let factor: TestFactor
@@ -43,6 +44,7 @@ struct TestFactor: AuthenticationFactor {
     
     func stepHandler(flow: OktaDirectAuth.DirectAuthenticationFlow,
                      openIdConfiguration: AuthFoundation.OpenIdConfiguration,
+                     cancellation: APICancellation,
                      loginHint: String?,
                      currentStatus: OktaDirectAuth.DirectAuthenticationFlow.Status?,
                      factor: TestFactor) throws -> OktaDirectAuth.StepHandler
@@ -53,6 +55,7 @@ struct TestFactor: AuthenticationFactor {
         
         return TestStepHandler(flow: flow,
                                openIdConfiguration: openIdConfiguration,
+                               cancellation: cancellation,
                                loginHint: loginHint,
                                currentStatus: currentStatus,
                                factor: factor,
@@ -95,7 +98,8 @@ final class DirectAuthenticationFlowTests: XCTestCase {
         let wait = expectation(description: "run step")
         let token = Token.mockToken()
         let factor = TestFactor(result: .success(.success(token)), exception: nil)
-        flow.runStep(with: factor) { result in
+        let cancellation = APICancellation()
+        flow.runStep(with: factor, cancellation: cancellation) { result in
             XCTAssertEqual(result, .success(.success(token)))
             wait.fulfill()
         }
@@ -109,7 +113,8 @@ final class DirectAuthenticationFlowTests: XCTestCase {
 
         let wait = expectation(description: "run step")
         let factor = TestFactor(result: .failure(.pollingTimeoutExceeded), exception: nil)
-        flow.runStep(with: factor) { result in
+        let cancellation = APICancellation()
+        flow.runStep(with: factor, cancellation: cancellation) { result in
             XCTAssertEqual(result, .failure(.pollingTimeoutExceeded))
             wait.fulfill()
         }
@@ -123,7 +128,8 @@ final class DirectAuthenticationFlowTests: XCTestCase {
 
         let wait = expectation(description: "run step")
         let factor = TestFactor(result: nil, exception: APIClientError.invalidRequestData)
-        flow.runStep(with: factor) { result in
+        let cancellation = APICancellation()
+        flow.runStep(with: factor, cancellation: cancellation) { result in
             XCTAssertEqual(result, .failure(.network(error: .invalidRequestData)))
             wait.fulfill()
         }

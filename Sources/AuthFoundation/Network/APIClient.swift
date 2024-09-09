@@ -64,10 +64,19 @@ public protocol APIClient {
     func didSend<T>(request: URLRequest, received response: APIResponse<T>)
     
     /// Send the given URLRequest.
-    func send<T: Decodable>(_ request: URLRequest, parsing context: APIParsingContext?, completion: @escaping (Result<APIResponse<T>, APIClientError>) -> Void)
+    @discardableResult
+    func send<T: Decodable>(_ request: URLRequest, parsing context: APIParsingContext?, completion: @escaping (Result<APIResponse<T>, APIClientError>) -> Void) -> APIClientCancellable
     
     /// Provides the ``APIRetry`` configurations from the delegate in response to a retry request.
     func shouldRetry(request: URLRequest, rateLimit: APIRateLimit) -> APIRetry
+}
+
+/// Represents an APIClient operation that can be cancelled.
+///
+/// A cancellable object may be returned from APIs, such as ``APIClient/send(_:parsing:completion:)-3cgp9``, which can be used to cancel the resulting operations at a later date.
+public protocol APIClientCancellable: AnyObject {
+    /// Cancels the operations assciated with this cancellation handler.
+    func cancel()
 }
 
 /// Protocol that delegates of APIClient instances can conform to.
@@ -162,8 +171,18 @@ extension APIClient {
     
     public func didSend<T>(request: URLRequest, received response: APIResponse<T>) {}
     
-    public func send<T>(_ request: URLRequest, parsing context: APIParsingContext? = nil, completion: @escaping (Result<APIResponse<T>, APIClientError>) -> Void) {
-        send(request, parsing: context, state: nil, completion: completion)
+    @discardableResult
+    public func send<T>(_ request: URLRequest,
+                        parsing context: APIParsingContext? = nil,
+                        completion: @escaping (Result<APIResponse<T>, APIClientError>) -> Void) -> APIClientCancellable
+    {
+        let cancellation = APICancellation()
+        send(request,
+             parsing: context,
+             state: nil,
+             cancellation: cancellation,
+             completion: completion)
+        return cancellation
     }
     
     public func shouldRetry(request: URLRequest, rateLimit: APIRateLimit) -> APIRetry { .default }
@@ -172,10 +191,12 @@ extension APIClient {
     private func send<T>(_ request: URLRequest,
                          parsing context: APIParsingContext? = nil,
                          state: APIRetry.State?,
+                         cancellation: APICancellation,
                          completion: @escaping (Result<APIResponse<T>, APIClientError>) -> Void) {
         var urlRequest = request
         willSend(request: &urlRequest)
-        session.dataTaskWithRequest(urlRequest) { data, response, httpError in
+        
+        let task = session.dataTaskWithRequest(urlRequest) { data, response, httpError in
             guard let data = data,
                   let response = response
             else {
@@ -240,7 +261,11 @@ extension APIClient {
                         let urlRequest = addRetryHeadersToRequest(state: retryState)
                         
                         DispatchQueue.global().asyncAfter(deadline: .now() + delay) {
-                            self.send(urlRequest, parsing: context, state: retryState, completion: completion)
+                            self.send(urlRequest,
+                                      parsing: context,
+                                      state: retryState,
+                                      cancellation: cancellation,
+                                      completion: completion)
                         }
                         return
                     }
@@ -260,7 +285,10 @@ extension APIClient {
                 self.didSend(request: request, received: apiError, requestId: requestId, rateLimit: rateInfo)
                 completion(.failure(apiError))
             }
-        }.resume()
+        }
+        
+        task.resume()
+        task.add(to: cancellation)
     }
     // swiftlint:enable closure_body_length
 

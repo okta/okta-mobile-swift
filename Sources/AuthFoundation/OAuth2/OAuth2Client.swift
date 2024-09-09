@@ -116,18 +116,17 @@ public final class OAuth2Client {
     ///
     /// If this value has recently been retrieved, the cached result is returned.
     /// - Parameter completion: Completion block invoked with the result.
-    public func openIdConfiguration(completion: @escaping (Result<OpenIdConfiguration, OAuth2Error>) -> Void) {
+    @discardableResult
+    public func openIdConfiguration(completion: @escaping (Result<OpenIdConfiguration, OAuth2Error>) -> Void) -> APIClientCancellable {
         configurationLock.withLock {
-            if let openIdConfiguration = openIdConfiguration {
-                configurationQueue.async {
-                    completion(.success(openIdConfiguration))
-                }
+            if let openIdConfiguration = self.openIdConfiguration {
+                completion(.success(openIdConfiguration))
+                return APICancellation.none
+            } else if let openIdConfigurationAction = openIdConfigurationAction {
+                openIdConfigurationAction.add(completion)
+                return openIdConfigurationAction.cancellation
             } else {
-                guard openIdConfigurationAction == nil else {
-                    openIdConfigurationAction?.add(completion)
-                    return
-                }
-                
+                let cancellation = APICancellation()
                 let action: CoalescedResult<Result<OpenIdConfiguration, OAuth2Error>> = CoalescedResult()
                 action.add(completion)
                 
@@ -151,7 +150,8 @@ public final class OAuth2Client {
                             }
                         }
                     }
-                }
+                }.add(to: cancellation)
+                return cancellation
             }
         }
     }
@@ -162,13 +162,14 @@ public final class OAuth2Client {
     /// - Parameters:
     ///   - token: Token to refresh.
     ///   - completion: Completion bock invoked with the result.
-    public func refresh(_ token: Token, completion: @escaping (Result<Token, OAuth2Error>) -> Void) {
+    @discardableResult
+    public func refresh(_ token: Token, completion: @escaping (Result<Token, OAuth2Error>) -> Void) -> APIClientCancellable {
         refreshLock.withLock {
             guard let clientSettings = token.context.clientSettings,
                   token.refreshToken != nil
             else {
                 completion(.failure(.missingToken(type: .refreshToken)))
-                return
+                return APICancellation.none
             }
             
             guard token.refreshAction == nil else {
@@ -176,13 +177,15 @@ public final class OAuth2Client {
                 return
             }
             
+            let cancellation = APICancellation()
             token.refreshAction = CoalescedResult()
             token.refreshAction?.add(completion)
-            performRefresh(token: token, clientSettings: clientSettings)
+            performRefresh(token: token, cancellation: cancellation, clientSettings: clientSettings)
+            return cancellation
         }
     }
     
-    private func performRefresh(token: Token, clientSettings: [String: String]) {
+    private func performRefresh(token: Token, cancellation: APICancellation, clientSettings: [String: String]) {
         guard let action = token.refreshAction else { return }
         
         delegateCollection.invoke { $0.oauth(client: self, willRefresh: token) }
@@ -236,13 +239,13 @@ public final class OAuth2Client {
                         
                         token.refreshAction = nil
                     }
-                }
+                }.add(to: cancellation)
             case .failure(let error):
                 action.finish(.failure(error))
                 self.delegateCollection.invoke { $0.oauth(client: self, didRefresh: token, replacedWith: nil) }
                 token.refreshAction = nil
             }
-        }
+        }.add(to: cancellation)
     }
     
     /// Attempts to revoke the given token.
@@ -253,27 +256,28 @@ public final class OAuth2Client {
     ///   - token: Token object.
     ///   - type: Type of token to revoke.
     ///   - completion: Completion block to invoke once complete.
-    public func revoke(_ token: Token, type: Token.RevokeType, completion: @escaping (Result<Void, OAuth2Error>) -> Void) {
+    @discardableResult
+    public func revoke(_ token: Token, type: Token.RevokeType, completion: @escaping (Result<Void, OAuth2Error>) -> Void) -> APIClientCancellable {
         guard type != .all else {
-            revokeAll(token, completion: completion)
-            return
+            return revokeAll(token, completion: completion)
         }
         
         guard let tokenType = type.tokenType else {
             completion(.failure(.cannotRevoke(type: type)))
-            return
+            return APICancellation.none
         }
         
         guard let tokenString = token.token(of: tokenType) else {
             completion(.failure(.missingToken(type: tokenType)))
-            return
+            return APICancellation.none
         }
         
         guard let clientSettings = token.context.clientSettings else {
             completion(.failure(.missingClientConfiguration))
-            return
+            return APICancellation.none
         }
         
+        let cancellation = APICancellation()
         openIdConfiguration { result in
             switch result {
             case .success(let configuration):
@@ -290,7 +294,7 @@ public final class OAuth2Client {
                         case .failure(let error):
                             completion(.failure(.network(error: error)))
                         }
-                    }
+                    }.add(to: cancellation)
                 } catch let error as OAuth2Error {
                     completion(.failure(error))
                     return
@@ -301,7 +305,8 @@ public final class OAuth2Client {
             case .failure(let error):
                 completion(.failure(error))
             }
-        }
+        }.add(to: cancellation)
+        return cancellation
     }
     
     /// Introspects the given token information.
@@ -309,7 +314,9 @@ public final class OAuth2Client {
     ///   - token: Token to introspect
     ///   - type: The type of value to introspect.
     ///   - completion: Completion block to invoke once complete.
-    public func introspect(token: Token, type: Token.Kind, completion: @escaping (Result<TokenInfo, OAuth2Error>) -> Void) {
+    @discardableResult
+    public func introspect(token: Token, type: Token.Kind, completion: @escaping (Result<TokenInfo, OAuth2Error>) -> Void) -> APIClientCancellable {
+        let cancellation = APICancellation()
         openIdConfiguration { result in
             switch result {
             case .success(let configuration):
@@ -334,18 +341,21 @@ public final class OAuth2Client {
                     case .failure(let error):
                         completion(.failure(.network(error: error)))
                     }
-                }
+                }.add(to: cancellation)
             case .failure(let error):
                 completion(.failure(error))
             }
-        }
+        }.add(to: cancellation)
+        return cancellation
     }
     
     /// Fetches the ``UserInfo`` associated with the given token.
     /// - Parameters:
     ///   - token: Token to retrieve user information for.
     ///   - completion: Completion block invoked with the result.
-    public func userInfo(token: Token, completion: @escaping (Result<UserInfo, OAuth2Error>) -> Void) {
+    @discardableResult
+    public func userInfo(token: Token, completion: @escaping (Result<UserInfo, OAuth2Error>) -> Void) -> APIClientCancellable {
+        let cancellation = APICancellation()
         openIdConfiguration { result in
             switch result {
             case .success(let configuration):
@@ -368,68 +378,77 @@ public final class OAuth2Client {
                     case .failure(let error):
                         completion(.failure(.network(error: error)))
                     }
-                }
+                }.add(to: cancellation)
             case .failure(let error):
                 completion(.failure(error))
             }
-        }
+        }.add(to: cancellation)
+        return cancellation
     }
     
     /// Retrieves the org's ``JWKS`` key configuration.
     ///
     /// If this value has recently been retrieved, the cached result is returned.
     /// - Parameter completion: Completion block invoked with the result.
-    public func jwks(completion: @escaping (Result<JWKS, OAuth2Error>) -> Void) {
+    @discardableResult
+    public func jwks(completion: @escaping (Result<JWKS, OAuth2Error>) -> Void) -> APIClientCancellable {
         if let jwks = jwks {
             completion(.success(jwks))
-        } else {
-            jwksQueue.sync {
-                guard jwksAction == nil else {
-                    jwksAction?.add(completion)
-                    return
-                }
-                
-                let action: CoalescedResult<Result<JWKS, OAuth2Error>> = CoalescedResult()
-                action.add(completion)
-                
-                jwksAction = action
-                openIdConfiguration { result in
-                    switch result {
-                    case .success(let configuration):
-                        let request = KeysRequest(openIdConfiguration: configuration,
-                                                  clientId: self.configuration.clientId)
-                        request.send(to: self) { result in
-                            self.jwksQueue.sync(flags: .barrier) {
-                                self.jwksAction = nil
+            return APICancellation.none
+        }
+        
+        return jwksQueue.sync {
+            if let jwksAction = jwksAction {
+                jwksAction.add(completion)
+                return jwksAction.cancellation
+            }
+            
+            let action: CoalescedResult<Result<JWKS, OAuth2Error>> = CoalescedResult()
+            action.add(completion)
+            
+            jwksAction = action
 
-                                switch result {
-                                case .success(let response):
-                                    self.jwks = response.result
-                                    self.jwksQueue.async {
-                                        action.finish(.success(response.result))
-                                    }
-                                case .failure(let error):
-                                    self.jwksQueue.async {
-                                        action.finish(.failure(.network(error: error)))
-                                    }
+            let cancellation = APICancellation()
+            openIdConfiguration { result in
+                switch result {
+                case .success(let configuration):
+                    let request = KeysRequest(openIdConfiguration: configuration,
+                                              clientId: self.configuration.clientId)
+                    request.send(to: self) { result in
+                        self.jwksQueue.sync(flags: .barrier) {
+                            self.jwksAction = nil
+                            
+                            switch result {
+                            case .success(let response):
+                                self.jwks = response.result
+                                self.jwksQueue.async {
+                                    action.finish(.success(response.result))
+                                }
+                            case .failure(let error):
+                                self.jwksQueue.async {
+                                    action.finish(.failure(.network(error: error)))
                                 }
                             }
                         }
-                    case .failure(let error):
-                        self.jwksAction = nil
-                        self.jwksQueue.async {
-                            action.finish(.failure(error))
-                        }
+                    }.add(to: cancellation)
+                case .failure(let error):
+                    self.jwksAction = nil
+                    self.jwksQueue.async {
+                        action.finish(.failure(error))
                     }
                 }
-            }
+            }.add(to: cancellation)
+            return cancellation
         }
     }
     
     /// Attempts to exchange, and verify, a token from the supplied request.
     ///
     /// This also ensures the ``JWKS`` keyset is retrieved in parallel (if it hasn't already been cached), and verifies the ID and Access tokens to ensure validity.
-    public func exchange<T: OAuth2TokenRequest>(token request: T, completion: @escaping (Result<APIResponse<Token>, APIClientError>) -> Void) {
+    @discardableResult
+    public func exchange<T: OAuth2TokenRequest>(token request: T, completion: @escaping (Result<APIResponse<Token>, APIClientError>) -> Void) -> APIClientCancellable {
+        let cancellation = APICancellation()
+        
         // Fetch the JWKS keys in parallel if necessary
         let group = DispatchGroup()
         var keySet = jwks
@@ -440,7 +459,7 @@ public final class OAuth2Client {
                 if case let .success(response) = result {
                     keySet = response
                 }
-            }
+            }.add(to: cancellation)
         }
         
         // Exchange the token
@@ -451,14 +470,18 @@ public final class OAuth2Client {
                 self.validateToken(request: request,
                                    keySet: keySet,
                                    oauthTokenResponse: result,
+                                   cancellation: cancellation,
                                    completion: completion)
             }
-        }
+        }.add(to: cancellation)
+        
+        return cancellation
     }
     
-    private func revokeAll(_ token: Token, completion: @escaping (Result<Void, OAuth2Error>) -> Void) {
+    private func revokeAll(_ token: Token, completion: @escaping (Result<Void, OAuth2Error>) -> Void) -> APICancellation {
         let types: [Token.RevokeType] = [.accessToken, .refreshToken, .deviceSecret]
         
+        let cancellation = APICancellation()
         var errors = [OAuth2Error]()
         let group = DispatchGroup()
         for type in types {
@@ -474,7 +497,7 @@ public final class OAuth2Client {
                     errors.append(error)
                 }
                 group.leave()
-            }
+            }.add(to: cancellation)
         }
         
         group.notify(queue: DispatchQueue.global()) {
@@ -491,11 +514,13 @@ public final class OAuth2Client {
                 completion(.failure(.multiple(errors: errors)))
             }
         }
+        return cancellation
     }
 
     private func validateToken<T: OAuth2TokenRequest>(request: T,
                                                       keySet: JWKS?,
                                                       oauthTokenResponse: Result<APIResponse<Token>, APIClientError>,
+                                                      cancellation: APICancellation,
                                                       completion: @escaping (Result<APIResponse<Token>, APIClientError>) -> Void)
     {
         guard case let .success(response) = oauthTokenResponse else {
@@ -504,7 +529,7 @@ public final class OAuth2Client {
         }
         
         // Retrieves the org's OpenID configuration
-        self.openIdConfiguration { result in
+        openIdConfiguration { result in
             switch result {
             case .failure(let error):
                 completion(.failure(.serverError(error)))
@@ -537,7 +562,7 @@ public final class OAuth2Client {
                 }
                 completion(oauthTokenResponse)
             }
-        }
+        }.add(to: cancellation)
     }
 
     // MARK: Private properties / methods
@@ -574,10 +599,15 @@ extension OAuth2Client {
     /// If this value has recently been retrieved, the cached result is returned.
     /// - Returns: The OpenID configuration for the org identified by the client's base URL.
     public func openIdConfiguration() async throws -> OpenIdConfiguration {
-        try await withCheckedThrowingContinuation { continuation in
-            openIdConfiguration { result in
-                continuation.resume(with: result)
+        let cancellation = APICancellation()
+        return try await withTaskCancellationHandler {
+            try await withCheckedThrowingContinuation { continuation in
+                openIdConfiguration { result in
+                    continuation.resume(with: result)
+                }.add(to: cancellation)
             }
+        } onCancel: {
+            cancellation.cancel()
         }
     }
     
@@ -586,10 +616,15 @@ extension OAuth2Client {
     /// If this value has recently been retrieved, the cached result is returned.
     /// - Returns: The ``JWKS`` configuration for the org identified by the client's base URL.
     public func jwks() async throws -> JWKS {
-        try await withCheckedThrowingContinuation { continuation in
-            jwks { result in
-                continuation.resume(with: result)
+        let cancellation = APICancellation()
+        return try await withTaskCancellationHandler {
+            try await withCheckedThrowingContinuation { continuation in
+                jwks { result in
+                    continuation.resume(with: result)
+                }.add(to: cancellation)
             }
+        } onCancel: {
+            cancellation.cancel()
         }
     }
     
@@ -599,10 +634,15 @@ extension OAuth2Client {
     /// - Parameters:
     ///   - token: Token to refresh.
     public func refresh(_ token: Token) async throws -> Token {
-        try await withCheckedThrowingContinuation { continuation in
-            refresh(token) { result in
-                continuation.resume(with: result)
+        let cancellation = APICancellation()
+        return try await withTaskCancellationHandler {
+            try await withCheckedThrowingContinuation { continuation in
+                refresh(token) { result in
+                    continuation.resume(with: result)
+                }.add(to: cancellation)
             }
+        } onCancel: {
+            cancellation.cancel()
         }
     }
     
@@ -614,10 +654,15 @@ extension OAuth2Client {
     ///   - token: Token object.
     ///   - type: Type of token to revoke, default: ``Token/RevokeType/all``
     public func revoke(_ token: Token, type: Token.RevokeType = .all) async throws {
-        try await withCheckedThrowingContinuation { continuation in
-            revoke(token, type: type) { result in
-                continuation.resume(with: result)
+        let cancellation = APICancellation()
+        return try await withTaskCancellationHandler {
+            try await withCheckedThrowingContinuation { continuation in
+                revoke(token, type: type) { result in
+                    continuation.resume(with: result)
+                }.add(to: cancellation)
             }
+        } onCancel: {
+            cancellation.cancel()
         }
     }
 }

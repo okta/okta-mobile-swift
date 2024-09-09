@@ -24,6 +24,7 @@ final class FactorStepHandlerTests: XCTestCase {
     var client: OAuth2Client!
     var openIdConfiguration: OpenIdConfiguration!
     var flow: DirectAuthenticationFlow!
+    var cancellation: APICancellation!
     
     override func setUpWithError() throws {
         client = OAuth2Client(baseURL: issuer,
@@ -34,6 +35,7 @@ final class FactorStepHandlerTests: XCTestCase {
                                        for: "openid-configuration",
                                        in: "MockResponses")
         flow = client.directAuthenticationFlow()
+        cancellation = APICancellation()
         
         JWK.validator = MockJWKValidator()
         Token.idTokenValidator = MockIDTokenValidator()
@@ -52,6 +54,7 @@ final class FactorStepHandlerTests: XCTestCase {
     {
         let handler = try factor.stepHandler(flow: flow,
                                              openIdConfiguration: openIdConfiguration,
+                                             cancellation: cancellation,
                                              loginHint: loginHint,
                                              currentStatus: nil,
                                              factor: factor)
@@ -116,6 +119,7 @@ final class FactorStepHandlerTests: XCTestCase {
     {
         let handler = try factor.stepHandler(flow: flow,
                                              openIdConfiguration: openIdConfiguration,
+                                             cancellation: cancellation,
                                              loginHint: loginHint,
                                              currentStatus: nil,
                                              factor: factor)
@@ -151,6 +155,7 @@ final class FactorStepHandlerTests: XCTestCase {
         let factor = PrimaryFactor.password("SuperSecret")
         let handler = try factor.stepHandler(flow: flow,
                                              openIdConfiguration: openIdConfiguration,
+                                             cancellation: cancellation,
                                              loginHint: "jane.doe@example.com",
                                              factor: factor)
         
@@ -185,6 +190,7 @@ final class FactorStepHandlerTests: XCTestCase {
         let factor = PrimaryFactor.password("SuperSecret")
         let handler = try factor.stepHandler(flow: flow,
                                              openIdConfiguration: openIdConfiguration,
+                                             cancellation: cancellation,
                                              loginHint: "jane.doe@example.com",
                                              factor: factor)
         
@@ -223,6 +229,7 @@ final class FactorStepHandlerTests: XCTestCase {
         let factor = PrimaryFactor.oob(channel: .push)
         let handler = try factor.stepHandler(flow: flow,
                                              openIdConfiguration: openIdConfiguration,
+                                             cancellation: cancellation,
                                              loginHint: "jane.doe@example.com",
                                              factor: factor)
         
@@ -258,6 +265,7 @@ final class FactorStepHandlerTests: XCTestCase {
         let factor = PrimaryFactor.oob(channel: .push)
         let handler = try factor.stepHandler(flow: flow,
                                              openIdConfiguration: openIdConfiguration,
+                                             cancellation: cancellation,
                                              loginHint: "jane.doe@example.com",
                                              factor: factor)
         
@@ -276,6 +284,7 @@ final class FactorStepHandlerTests: XCTestCase {
                     let factor = SecondaryFactor.oob(channel: .push)
                     let resumeHandler = try factor.stepHandler(flow: self.flow,
                                                                openIdConfiguration: self.openIdConfiguration,
+                                                               cancellation: self.cancellation,
                                                                currentStatus: status,
                                                                factor: factor)
                     self.assertGettingTokenAfterBindingTransfer(using: resumeHandler)
@@ -317,6 +326,7 @@ final class FactorStepHandlerTests: XCTestCase {
         let factor = PrimaryFactor.oob(channel: .push)
         let handler = try factor.stepHandler(flow: flow,
                                              openIdConfiguration: openIdConfiguration,
+                                             cancellation: cancellation,
                                              loginHint: "jane.doe@example.com",
                                              factor: factor)
         
@@ -349,6 +359,7 @@ final class FactorStepHandlerTests: XCTestCase {
         let factor = PrimaryFactor.oob(channel: .push)
         let handler = try factor.stepHandler(flow: flow,
                                              openIdConfiguration: openIdConfiguration,
+                                             cancellation: cancellation,
                                              loginHint: "jane.doe@example.com",
                                              factor: factor)
         
@@ -386,6 +397,7 @@ final class FactorStepHandlerTests: XCTestCase {
         let factor = SecondaryFactor.oob(channel: .push)
         let handler = try factor.stepHandler(flow: flow,
                                              openIdConfiguration: openIdConfiguration,
+                                             cancellation: cancellation,
                                              currentStatus: .mfaRequired(.init(supportedChallengeTypes: nil,
                                                                                mfaToken: "abcd1234")),
                                              factor: factor)
@@ -422,6 +434,7 @@ final class FactorStepHandlerTests: XCTestCase {
         let factor = SecondaryFactor.oob(channel: .push)
         let handler = try factor.stepHandler(flow: flow,
                                              openIdConfiguration: openIdConfiguration,
+                                             cancellation: cancellation,
                                              currentStatus: .mfaRequired(.init(supportedChallengeTypes: nil,
                                                                                mfaToken: "abcd1234")),
                                              factor: factor)
@@ -440,6 +453,7 @@ final class FactorStepHandlerTests: XCTestCase {
                 do {
                     let resumeHandler = try factor.stepHandler(flow: self.flow,
                                                                openIdConfiguration: self.openIdConfiguration,
+                                                               cancellation: self.cancellation,
                                                                currentStatus: status,
                                                                factor: factor)
                     self.assertGettingTokenAfterBindingTransfer(using: resumeHandler)
@@ -472,6 +486,7 @@ final class FactorStepHandlerTests: XCTestCase {
         let factor = SecondaryFactor.oob(channel: .push)
         let handler = try factor.stepHandler(flow: flow,
                                              openIdConfiguration: openIdConfiguration,
+                                             cancellation: cancellation,
                                              currentStatus: .mfaRequired(.init(supportedChallengeTypes: nil,
                                                                                mfaToken: "abcd1234")),
                                              factor: factor)

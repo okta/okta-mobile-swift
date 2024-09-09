@@ -24,7 +24,7 @@ public protocol URLSessionProtocol {
 }
 
 /// Protocol defining the interface for interacting with a URLSession. This is used to provide mocking for unit tests.
-public protocol URLSessionDataTaskProtocol {
+public protocol URLSessionDataTaskProtocol: AnyObject, APIClientCancellable {
     func resume()
 }
 
