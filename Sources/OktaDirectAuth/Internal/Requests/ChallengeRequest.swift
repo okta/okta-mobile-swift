@@ -84,9 +84,7 @@ extension ChallengeRequest: APIRequest, APIRequestBody {
                 .joined(separator: " ")
         ]
         
-        if let parameters = clientConfiguration.authentication.additionalParameters {
-            result.merge(parameters, uniquingKeysWith: { $1 })
-        }
+        result.merge(clientConfiguration.authentication)
 
         return result
     }

@@ -65,7 +65,7 @@ public protocol AuthorizationCodeFlowDelegate: AuthenticationDelegate {
 /// let redirectUri: URL
 /// let token = try await flow.resume(with: redirectUri)
 /// ```
-public class AuthorizationCodeFlow: AuthenticationFlow {
+public class AuthorizationCodeFlow: AuthenticationFlow, ProvidesOAuth2Parameters {
     /// A model representing the context and current state for an authorization session.
     public struct Context: Equatable {
         /// The `PKCE` credentials to use in the authorization request.
@@ -122,7 +122,7 @@ public class AuthorizationCodeFlow: AuthenticationFlow {
     public let redirectUri: URL
     
     /// Any additional query string parameters you would like to supply to the authorization server.
-    public let additionalParameters: [String: String]?
+    public let additionalParameters: [String: APIRequestArgument]?
 
     /// Indicates whether or not this flow is currently in the process of authenticating a user.
     public private(set) var isAuthenticating: Bool = false {
@@ -161,7 +161,7 @@ public class AuthorizationCodeFlow: AuthenticationFlow {
                             clientId: String,
                             scopes: String,
                             redirectUri: URL,
-                            additionalParameters: [String: String]? = nil)
+                            additionalParameters: [String: APIRequestArgument]? = nil)
     {
         self.init(redirectUri: redirectUri,
                   additionalParameters: additionalParameters,
@@ -176,7 +176,7 @@ public class AuthorizationCodeFlow: AuthenticationFlow {
     ///   - additionalParameters: Optional additional query string parameters you would like to supply to the authorization server.
     ///   - client: The `OAuth2Client` to use with this flow.
     public init(redirectUri: URL,
-                additionalParameters: [String: String]? = nil,
+                additionalParameters: [String: APIRequestArgument]? = nil,
                 client: OAuth2Client)
     {
         // Ensure this SDK's static version is included in the user agent.

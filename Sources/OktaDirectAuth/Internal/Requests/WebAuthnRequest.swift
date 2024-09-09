@@ -55,9 +55,7 @@ extension WebAuthnChallengeRequest: APIRequest, APIRequestBody {
             result["mfa_token"] = mfaToken
         }
         
-        if let parameters = clientConfiguration.authentication.additionalParameters {
-            result.merge(parameters, uniquingKeysWith: { $1 })
-        }
+        result.merge(clientConfiguration.authentication)
 
         return result
     }

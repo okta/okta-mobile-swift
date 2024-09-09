@@ -306,7 +306,7 @@ public class WebAuthentication {
                             scopes: String,
                             redirectUri: URL,
                             logoutRedirectUri: URL? = nil,
-                            additionalParameters: [String: String]? = nil)
+                            additionalParameters: [String: APIRequestArgument]? = nil)
     {
         let client = OAuth2Client(baseURL: issuer,
                                   clientId: clientId,

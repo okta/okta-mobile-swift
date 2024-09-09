@@ -14,14 +14,14 @@ import Foundation
 
 extension OAuth2Client {
     /// Defines the types of authentication the client may use when interacting with the authorization server.
-    public enum ClientAuthentication: Codable, Equatable, Hashable {
+    public enum ClientAuthentication: Codable, Equatable, Hashable, ProvidesOAuth2Parameters {
         /// No client authentication will be made when interacting with the authorization server.
         case none
         
         /// A client secret will be supplied when interacting with the authorization server.
         case clientSecret(String)
         
-        /// The additional parameters this authentication type will contribute to outgoing API requests when needed.
+        @_documentation(visibility: private)
         public var additionalParameters: [String: APIRequestArgument]? {
             switch self {
             case .none:

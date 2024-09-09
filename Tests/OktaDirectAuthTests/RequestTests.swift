@@ -27,13 +27,14 @@ final class RequestTests: XCTestCase {
     func testTokenRequestParameters() throws {
         var request: TokenRequest
         
-        // No authentication
+        // No authentication, sign-in intent
         request = .init(openIdConfiguration: openIdConfiguration,
                         clientConfiguration: try .init(domain: "example.com",
                                                        clientId: "theClientId",
                                                        scopes: "openid profile"),
                         currentStatus: nil,
-                        factor: DirectAuthenticationFlow.PrimaryFactor.password("password123"))
+                        factor: DirectAuthenticationFlow.PrimaryFactor.password("password123"),
+                        intent: .signIn)
         XCTAssertEqual(request.bodyParameters?.stringComponents,
                        [
                         "client_id": "theClientId",
@@ -42,14 +43,15 @@ final class RequestTests: XCTestCase {
                         "password": "password123"
                        ])
 
-        // Client Secret authentication
+        // Client Secret authentication, sign-in intent
         request = .init(openIdConfiguration: openIdConfiguration,
                         clientConfiguration: try .init(domain: "example.com",
                                                        clientId: "theClientId",
                                                        scopes: "openid profile",
                                                        authentication: .clientSecret("supersecret")),
                         currentStatus: nil,
-                        factor: DirectAuthenticationFlow.PrimaryFactor.password("password123"))
+                        factor: DirectAuthenticationFlow.PrimaryFactor.password("password123"),
+                        intent: .signIn)
         XCTAssertEqual(request.bodyParameters?.stringComponents,
                        [
                         "client_id": "theClientId",
@@ -57,6 +59,23 @@ final class RequestTests: XCTestCase {
                         "scope": "openid profile",
                         "grant_type": "password",
                         "password": "password123"
+                       ])
+        
+        // No authentication, recovery intent
+        request = .init(openIdConfiguration: openIdConfiguration,
+                        clientConfiguration: try .init(domain: "example.com",
+                                                       clientId: "theClientId",
+                                                       scopes: "openid profile"),
+                        currentStatus: nil,
+                        factor: DirectAuthenticationFlow.PrimaryFactor.otp(code: "123456"),
+                        intent: .recovery)
+        XCTAssertEqual(request.bodyParameters?.stringComponents,
+                       [
+                        "client_id": "theClientId",
+                        "scope": "okta.myAccount.password.manage",
+                        "grant_type": "urn:okta:params:oauth:grant-type:otp",
+                        "intent": "recovery",
+                        "otp": "123456"
                        ])
     }
 
