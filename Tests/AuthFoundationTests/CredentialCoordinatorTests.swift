@@ -73,7 +73,18 @@ final class UserCoordinatorTests: XCTestCase {
         XCTAssertEqual(try coordinator.with(id: token.id, prompt: nil, authenticationContext: nil), credential)
     }
     
+    func testDirectAssignmentToCredentialDefault() throws {
+        XCTAssertNil(coordinator.default)
+        let token = Token.simpleMockToken
+        coordinator.default = try coordinator.store(token: token, tags: [:], security: Credential.Security.standard)
+        XCTAssertNotNil(coordinator.default)
+        XCTAssertEqual(coordinator.default?.id, token.id)
+    }
+    
     func testImplicitCredentialForToken() throws {
+        XCTAssertTrue(storage.allIDs.isEmpty)
+        XCTAssertNil(coordinator.default)
+        
         let credential = try coordinator.store(token: token, tags: [:], security: [])
         
         XCTAssertEqual(storage.allIDs, [token.id])
@@ -81,7 +92,7 @@ final class UserCoordinatorTests: XCTestCase {
         XCTAssertEqual(coordinator.default, credential)
     }
     
-    func testNotifications() throws {
+    func testCredentialChangedNotification() throws {
         let oldCredential = coordinator.default
         
         let recorder = NotificationRecorder(observing: [.defaultCredentialChanged])

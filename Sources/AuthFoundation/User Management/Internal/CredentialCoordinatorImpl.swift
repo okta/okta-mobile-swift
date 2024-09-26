@@ -27,10 +27,15 @@ final class CredentialCoordinatorImpl: CredentialCoordinator {
         didSet {
             tokenStorage.delegate = self
             
-            _default = try? CredentialCoordinatorImpl.defaultCredential(
-                tokenStorage: tokenStorage,
-                credentialDataSource: credentialDataSource,
-                coordinator: self)
+            do {
+                _default = try CredentialCoordinatorImpl.defaultCredential(
+                    tokenStorage: tokenStorage,
+                    credentialDataSource: credentialDataSource,
+                    coordinator: self)
+            } catch {
+                NSLog("Unexpected error when initializing the initial default credential during TokenStorage assignment: %@", error.localizedDescription)
+                NotificationCenter.default.post(name: .credentialDefaultError, object: error)
+            }
         }
     }
         
@@ -41,19 +46,27 @@ final class CredentialCoordinatorImpl: CredentialCoordinator {
                 credentialDataSource: credentialDataSource,
                 coordinator: self)
         } catch {
-            // Placeholder for when logging is added in a future release
+            NSLog("Unexpected error when initializing the initial value for the default credential: %@", error.localizedDescription)
+            NotificationCenter.default.post(name: .credentialDefaultError, object: error)
             return nil
         }
     }()
     var `default`: Credential? {
         get { _default }
         set {
-            if let token = newValue?.token {
-                try? tokenStorage.add(token: token,
-                                      metadata: Token.Metadata(id: token.id),
-                                      security: Credential.Security.standard)
+            do {
+                if let token = newValue?.token,
+                   !tokenStorage.allIDs.contains(token.id)
+                {
+                    try tokenStorage.add(token: token,
+                                         metadata: Token.Metadata(id: token.id),
+                                         security: Credential.Security.standard)
+                }
+                try tokenStorage.setDefaultTokenID(newValue?.id)
+            } catch {
+                NSLog("Unexpected error while assigning a default credential: %@", error.localizedDescription)
+                NotificationCenter.default.post(name: .credentialDefaultError, object: error)
             }
-            try? tokenStorage.setDefaultTokenID(newValue?.id)
         }
     }
     

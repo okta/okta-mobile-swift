@@ -36,6 +36,9 @@ extension Notification.Name {
 
     /// Notification broadcast when a credential fails to refresh.
     public static let credentialRefreshFailed = Notification.Name("com.okta.credential.refresh.failed")
+    
+    /// Notification broadcast when an internal error occurs with the default credential static member.
+    public static let credentialDefaultError = Notification.Name("com.okta.credential.default.error")
 }
 
 @available(iOS 13.0, tvOS 13.0, macOS 10.15, watchOS 6, *)
