@@ -21,7 +21,6 @@ on:
       - 'Tests/**/*.swift'
 
 env:
-  DEVELOPER_DIR: /Applications/Xcode_16.app/Contents/Developer
   NSUnbufferedIO: YES 
 
 jobs:
@@ -51,6 +50,8 @@ jobs:
     timeout-minutes: 10
     needs:
       - SwiftBuild
+    env:
+      DEVELOPER_DIR: /Applications/Xcode_16.app/Contents/Developer
     steps:
     - uses: actions/checkout@master
     - name: OktaAuthFoundation.podspec
@@ -77,6 +78,8 @@ jobs:
         - "platform=watchOS Simulator,OS=10.5,name=Apple Watch Series 7 (45mm)"
         - "platform=macOS,name=My Mac"
     timeout-minutes: 25
+    env:
+      DEVELOPER_DIR: /Applications/Xcode_16.app/Contents/Developer
     steps:
     - name: Set test variables
       run: |
