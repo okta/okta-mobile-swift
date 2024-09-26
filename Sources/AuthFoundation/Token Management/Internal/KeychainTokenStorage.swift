@@ -26,15 +26,21 @@ final class KeychainTokenStorage: TokenStorage {
     weak var delegate: TokenStorageDelegate?
     
     private(set) lazy var defaultTokenID: String? = {
-        guard let defaultResult = try? Keychain
+        do {
+            let defaultResult = try Keychain
                 .Search(account: KeychainTokenStorage.defaultTokenName)
-                .get(),
-              let id = String(data: defaultResult.value, encoding: .utf8)
-        else {
+                .get()
+            guard let id = String(data: defaultResult.value, encoding: .utf8)
+            else {
+                return nil
+            }
+            
+            return id
+        } catch {
+            NSLog("Unexpected error while loading the default token ID from the keychain: %@", error.localizedDescription)
+            NotificationCenter.default.post(name: .credentialDefaultError, object: error)
             return nil
         }
-        
-        return id
     }()
 
     func setDefaultTokenID(_ id: String?) throws {
