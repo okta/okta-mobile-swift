@@ -40,10 +40,10 @@ var package = Package(
         .macCatalyst(.v13)
     ],
     products: [
-//        .library(name: "AuthFoundation", targets: ["AuthFoundation"]),
-//        .library(name: "OktaOAuth2", targets: ["OktaOAuth2"]),
-//        .library(name: "OktaDirectAuth", targets: ["OktaDirectAuth"]),
-//        .library(name: "WebAuthenticationUI", targets: ["WebAuthenticationUI"])
+        .library(name: "AuthFoundation", targets: ["AuthFoundation"]),
+        .library(name: "OktaOAuth2", targets: ["OktaOAuth2"]),
+        .library(name: "OktaDirectAuth", targets: ["OktaDirectAuth"]),
+        .library(name: "WebAuthenticationUI", targets: ["WebAuthenticationUI"])
     ],
     dependencies: [
         .package(url: "https://github.com/apple/swift-docc-plugin", from: "1.0.0"),
