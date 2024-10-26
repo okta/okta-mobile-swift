@@ -11,7 +11,7 @@
 //
 
 import Foundation
-import AuthFoundation
+import OktaUtilities
 
 #if canImport(UIKit) || canImport(AppKit)
 // swiftlint:disable identifier_name

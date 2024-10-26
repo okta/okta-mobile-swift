@@ -12,36 +12,60 @@
 
 import Foundation
 import XCTest
-@testable import AuthFoundation
 
 enum TestError: Error {
     case noBundleResourceFound
 }
 
-public extension XCTestCase {
-    func mock<T: Decodable & JSONDecodable>(from bundle: Bundle,
-                 for filename: String,
-                 in folder: String? = nil) throws -> T
-    {
-        let data = try data(from: bundle, for: filename, in: folder)
-        let string = try XCTUnwrap(String(data: data, encoding: .utf8))
-        return try decode(type: T.self, string)
+public extension Bundle {
+    func nestedBundles(suffixes: [String] = ["bundle", "xctest"]) -> [Bundle] {
+        var result: [Bundle] = [self]
+        
+        guard let resourcePath = resourcePath,
+              let enumerator = FileManager.default.enumerator(atPath: resourcePath)
+        else {
+            return result
+        }
+        
+        for case let path as String in enumerator {
+            guard suffixes.contains(where: { path.range(of: ".\($0)")?.isEmpty == false }),
+                  let bundle = Bundle(path: "\(resourcePath)/\(path)"),
+                  bundle.infoDictionary?["CFBundlePackageType"] as? String == "BNDL",
+                  !result.contains(where: { $0.bundleIdentifier == bundle.bundleIdentifier })
+            else {
+                continue
+            }
+            
+            result.append(contentsOf: bundle.nestedBundles(suffixes: suffixes))
+        }
+        
+        return result
     }
-    
+}
+
+public extension XCTestCase {
     func data(for json: String) -> Data {
         return json.data(using: .utf8)!
     }
     
-    func data(from bundle: Bundle, for filename: String, in folder: String? = nil) throws -> Data {
+    func data(forClass testClass: XCTestCase.Type? = nil, filename: String, matching bundleName: String? = nil) throws -> Data {
+        let testClass = testClass ?? Self.self
+        return try data(from: Bundle(for: testClass), filename: filename, matching: bundleName)
+    }
+    
+    func data(from bundle: Bundle, filename: String, matching bundleName: String? = nil) throws -> Data {
         let file = (filename as NSString).deletingPathExtension
         var fileExtension = (filename as NSString).pathExtension
         if fileExtension == "" {
             fileExtension = "json"
         }
         
-        guard let url = bundle.url(forResource: file,
-                                   withExtension: fileExtension,
-                                   subdirectory: folder)
+        var bundles = bundle.nestedBundles()
+        if let bundleName = bundleName {
+            bundles = bundles.filter({ $0.bundleIdentifier?.range(of: bundleName)?.isEmpty == false })
+        }
+        
+        guard let url = bundles.compactMap({ $0.url(forResource: file, withExtension: fileExtension) }).first
         else {
             throw TestError.noBundleResourceFound
         }
@@ -52,24 +76,6 @@ public extension XCTestCase {
     func data(for file: URL) throws -> Data {
         return try Data(contentsOf: file)
     }
-    
-    func decode<T>(type: T.Type, _ file: URL) throws -> T where T : Decodable & JSONDecodable {
-        let json = String(data: try data(for: file), encoding: .utf8)
-        return try decode(type: type, json!)
-    }
-
-    func decode<T>(type: T.Type, _ file: URL, _ test: ((T) throws -> Void)) throws where T : Decodable & JSONDecodable {
-        let json = String(data: try data(for: file), encoding: .utf8)
-        try test(try decode(type: type, json!))
-    }
-
-    func decode<T>(type: T.Type, _ json: String) throws -> T where T : Decodable & JSONDecodable {
-        try decode(type: type, decoder: T.jsonDecoder, json)
-    }
-
-    func decode<T>(type: T.Type, _ json: String, _ test: ((T) throws -> Void)) throws where T : Decodable & JSONDecodable {
-        try test(try decode(type: type, json))
-    }
 
     func decode<T>(type: T.Type, decoder: JSONDecoder, _ json: String) throws -> T where T : Decodable {
         let jsonData = data(for: json)
@@ -77,7 +83,7 @@ public extension XCTestCase {
     }
     
     @available(iOS 13.0, tvOS 13.0, macOS 10.15, watchOS 6, *)
-    func perform(queueCount: Int = 5, iterationCount: Int = 10, _ block: @escaping () async throws -> Void) rethrows {
+    func perform(queueCount: Int = 5, iterationCount: Int = 10, _ block: @Sendable @escaping () async throws -> Void) rethrows {
         let queues: [DispatchQueue] = (0..<queueCount).map { queueNumber in
             DispatchQueue(label: "Async queue \(queueNumber)")
         }
@@ -96,5 +102,14 @@ public extension XCTestCase {
         }
         
         _ = group.wait(timeout: .short)
+    }
+    
+    @MainActor
+    func wait(for interval: TimeInterval) {
+        let waitExpectation = expectation(description: "Wait for \(interval)s")
+        DispatchQueue.main.asyncAfter(deadline: .now() + interval) {
+            waitExpectation.fulfill()
+        }
+        waitForExpectations(timeout: interval * 1.5)
     }
 }

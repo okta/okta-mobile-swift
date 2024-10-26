@@ -11,11 +11,12 @@
 //
 
 import Foundation
+import APIClient
 
 /// Used by types that are capable of providing parameters to OAuth2 API requests.
 public protocol ProvidesOAuth2Parameters {
     /// The additional parameters this authentication type will contribute to outgoing API requests when needed.
-    var additionalParameters: [String: APIRequestArgument]? { get }
+    var additionalParameters: [String: any APIRequestArgument]? { get }
 
     /// Indicates if the parameters included in the result should override those previously declared.
     var shouldOverride: Bool { get }

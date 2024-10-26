@@ -13,11 +13,12 @@
 import XCTest
 @testable import TestCommon
 @testable import AuthFoundation
+@testable import AuthFoundationTestCommon
 
-class CredentialDataSourceDelegateRecorder: CredentialDataSourceDelegate {
-    private(set) var created: [Credential] = []
-    private(set) var removed: [Credential] = []
-    private(set) var callCount = 0
+final class CredentialDataSourceDelegateRecorder: CredentialDataSourceDelegate {
+    nonisolated(unsafe) private(set) var created: [Credential] = []
+    nonisolated(unsafe) private(set) var removed: [Credential] = []
+    nonisolated(unsafe) private(set) var callCount = 0
 
     func credential(dataSource: CredentialDataSource, created credential: Credential) {
         created.append(credential)

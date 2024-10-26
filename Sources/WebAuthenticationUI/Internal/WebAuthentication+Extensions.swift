@@ -12,11 +12,45 @@
 
 import Foundation
 import AuthFoundation
+import OktaConcurrency
+import OktaClientMacros
 import OktaOAuth2
 
 #if canImport(UIKit) || canImport(AppKit)
 
+protocol AuthorizationServicesProviderFactory {
+    @MainActor
+    func createWebAuthenticationProvider(loginFlow: AuthorizationCodeFlow,
+                                         logoutFlow: SessionLogoutFlow?,
+                                         from window: WebAuthentication.WindowAnchor?,
+                                         delegate: any WebAuthenticationProviderDelegate) -> (any WebAuthenticationProvider)?
+}
+
+struct DefaultAuthorizationServicesProviderFactory: AuthorizationServicesProviderFactory {
+    @MainActor
+    func createWebAuthenticationProvider(loginFlow: AuthorizationCodeFlow,
+                                         logoutFlow: SessionLogoutFlow?,
+                                         from window: WebAuthentication.WindowAnchor?,
+                                         delegate: any WebAuthenticationProviderDelegate) -> (any WebAuthenticationProvider)?
+    {
+        AuthenticationServicesProvider(loginFlow: loginFlow,
+                                       logoutFlow: logoutFlow,
+                                       from: window,
+                                       delegate: delegate)
+    }
+}
+
+fileprivate let sharedLock = Lock()
+nonisolated(unsafe) var _authorizationServicesProviderFactory: any AuthorizationServicesProviderFactory = DefaultAuthorizationServicesProviderFactory()
+
 extension WebAuthentication {
+    static func resetToDefault() {
+        authorizationServicesProviderFactory = DefaultAuthorizationServicesProviderFactory()
+    }
+    
+    @Synchronized(variable: _authorizationServicesProviderFactory, lock: sharedLock)
+    static var authorizationServicesProviderFactory: any AuthorizationServicesProviderFactory
+    
     private func complete(with result: Result<Token, WebAuthenticationError>) {
         provider = nil
         signInFlow.reset()
@@ -49,13 +83,13 @@ extension WebAuthentication {
 }
 
 extension WebAuthentication: WebAuthenticationProviderDelegate {
-    func logout(provider: WebAuthenticationProvider, finished: Bool) {
+    func logout(provider: any WebAuthenticationProvider, finished: Bool) {
         if finished {
             completeLogout(with: .success(()))
         }
     }
     
-    func logout(provider: WebAuthenticationProvider, received error: Error) {
+    func logout(provider: any WebAuthenticationProvider, received error: any Error) {
         let webError: WebAuthenticationError
         if let error = error as? WebAuthenticationError {
             webError = error
@@ -68,11 +102,11 @@ extension WebAuthentication: WebAuthenticationProviderDelegate {
         completeLogout(with: .failure(webError))
     }
     
-    func authentication(provider: WebAuthenticationProvider, received result: Token) {
+    func authentication(provider: any WebAuthenticationProvider, received result: Token) {
         complete(with: .success(result))
     }
     
-    func authentication(provider: WebAuthenticationProvider, received error: Error) {
+    func authentication(provider: any WebAuthenticationProvider, received error: any Error) {
         let webError: WebAuthenticationError
         if let error = error as? WebAuthenticationError {
             webError = error
@@ -85,7 +119,7 @@ extension WebAuthentication: WebAuthenticationProviderDelegate {
         complete(with: .failure(webError))
     }
     
-    func authenticationShouldUseEphemeralSession(provider: WebAuthenticationProvider) -> Bool {
+    func authenticationShouldUseEphemeralSession(provider: any WebAuthenticationProvider) -> Bool {
         ephemeralSession
     }
 }

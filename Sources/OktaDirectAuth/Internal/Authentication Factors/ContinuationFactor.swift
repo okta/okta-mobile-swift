@@ -12,13 +12,14 @@
 
 import Foundation
 import AuthFoundation
+import APIClient
 
 extension DirectAuthenticationFlow.ContinuationFactor: AuthenticationFactor {
     func stepHandler(flow: DirectAuthenticationFlow,
-                     openIdConfiguration: AuthFoundation.OpenIdConfiguration,
+                     openIdConfiguration: OpenIdConfiguration,
                      loginHint: String? = nil,
                      currentStatus: DirectAuthenticationFlow.Status?,
-                     factor: Self) throws -> StepHandler
+                     factor: Self) throws -> any StepHandler
     {
         let bindingContext = currentStatus?.continuationType?.bindingContext
         
@@ -85,8 +86,8 @@ extension DirectAuthenticationFlow.ContinuationFactor: AuthenticationFactor {
 }
 
 extension DirectAuthenticationFlow.ContinuationFactor: HasTokenParameters {
-    func tokenParameters(currentStatus: DirectAuthenticationFlow.Status?) -> [String: APIRequestArgument] {
-        var result: [String: APIRequestArgument] = [
+    func tokenParameters(currentStatus: DirectAuthenticationFlow.Status?) -> [String: any APIRequestArgument] {
+        var result: [String: any APIRequestArgument] = [
             "grant_type": grantType(currentStatus: currentStatus),
         ]
         

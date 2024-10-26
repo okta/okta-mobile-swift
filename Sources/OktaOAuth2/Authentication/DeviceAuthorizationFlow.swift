@@ -12,6 +12,10 @@
 
 import Foundation
 import AuthFoundation
+import OktaUtilities
+import OktaConcurrency
+import OktaClientMacros
+import APIClient
 
 /// The delegate of ``DeviceAuthorizationFlow`` may adopt some, or all, of the methods described here. These allow a developer to customize or interact with the authentication flow during authentication.
 ///
@@ -63,9 +67,12 @@ public protocol DeviceAuthorizationFlowDelegate: AuthenticationDelegate {
 /// // the code.
 /// let token = try await flow.resume(with: context)
 /// ```
-public class DeviceAuthorizationFlow: AuthenticationFlow {
+@HasLock
+public final class DeviceAuthorizationFlow: Sendable, AuthenticationFlow, UsesDelegateCollection {
+    public typealias Delegate = DeviceAuthorizationFlowDelegate
+
     /// A model representing the context and current state for an authorization session.
-    public struct Context: Decodable, Equatable, Expires {
+    public struct Context: Decodable, Sendable, Equatable, Expires {
         let deviceCode: String
         var interval: TimeInterval
         
@@ -94,7 +101,7 @@ public class DeviceAuthorizationFlow: AuthenticationFlow {
             case interval
         }
         
-        public init(from decoder: Decoder) throws {
+        public init(from decoder: any Decoder) throws {
             let container = try decoder.container(keyedBy: CodingKeys.self)
             issuedAt = try container.decodeIfPresent(Date.self, forKey: .issuedAt) ?? Date()
             deviceCode = try container.decode(String.self, forKey: .deviceCode)
@@ -110,13 +117,14 @@ public class DeviceAuthorizationFlow: AuthenticationFlow {
     public let client: OAuth2Client
     
     /// Indicates whether or not this flow is currently in the process of authenticating a user.
-    public private(set) var isAuthenticating: Bool = false {
+    @Synchronized(value: false)
+    public private(set) var isAuthenticating: Bool {
         didSet {
-            guard oldValue != isAuthenticating else {
+            guard oldValue != _isAuthenticating else {
                 return
             }
             
-            if isAuthenticating {
+            if _isAuthenticating {
                 delegateCollection.invoke { $0.authenticationStarted(flow: self) }
             } else {
                 delegateCollection.invoke { $0.authenticationFinished(flow: self) }
@@ -125,16 +133,20 @@ public class DeviceAuthorizationFlow: AuthenticationFlow {
     }
     
     /// The context that stores the state for the current authentication session.
+    @Synchronized
     public private(set) var context: Context? {
         didSet {
-            guard let context = context else {
+            guard let localContext = _context else {
                 return
             }
 
-            delegateCollection.invoke { $0.authentication(flow: self, received: context) }
+            delegateCollection.invoke { $0.authentication(flow: self, received: localContext) }
         }
     }
     
+    /// The collection of delegates conforming to ``DeviceAuthorizationFlowDelegate``.
+    public let delegateCollection = DelegateCollection<any Delegate>()
+
     /// Convenience initializer to construct an authentication flow from variables.
     /// - Parameters:
     ///   - issuer: The issuer URL.
@@ -186,7 +198,7 @@ public class DeviceAuthorizationFlow: AuthenticationFlow {
     /// The ``resume(with:completion:)`` method also uses this context, to poll the server to determine when the user approves the authorization request.
     /// - Parameters:
     ///   - completion: Completion block for receiving the context.
-    public func start(completion: @escaping (Result<Context, OAuth2Error>) -> Void) {
+    public func start(completion: @Sendable @escaping (Result<Context, OAuth2Error>) -> Void) {
         isAuthenticating = true
 
         client.openIdConfiguration { result in
@@ -226,26 +238,31 @@ public class DeviceAuthorizationFlow: AuthenticationFlow {
     /// - Parameters:
     ///   - context: Device authorization context object.
     ///   - completion: Completion block for receiving the token.
-    public func resume(with context: Context, completion: @escaping (Result<Token, OAuth2Error>) -> Void) {
-        self.completion = completion
+    public func resume(with context: Context, completion: @Sendable @escaping (Result<Token, OAuth2Error>) -> Void) {
+        pollCompletion = completion
         scheduleTimer()
     }
     
     /// Resets the flow for later reuse.
     public func reset() {
-        timer?.cancel()
-        timer = nil
+        withLock {
+            _timer?.cancel()
+            _timer = nil
+        }
+
+        pollCompletion = nil
         context = nil
-        completion = nil
         isAuthenticating = false
     }
 
     // MARK: Private properties / methods
-    static var slowDownInterval: TimeInterval = 5
+    nonisolated(unsafe) static var slowDownInterval: TimeInterval = 5
     
-    var timer: DispatchSourceTimer?
-    var completion: ((Result<Token, OAuth2Error>) -> Void)?
-    public let delegateCollection = DelegateCollection<DeviceAuthorizationFlowDelegate>()
+    @Synchronized
+    var timer: (any DispatchSourceTimer)?
+
+    @Synchronized
+    var pollCompletion: (@Sendable (Result<Token, OAuth2Error>) -> Void)?
     
     func scheduleTimer(offsetBy interval: TimeInterval? = nil) {
         guard var context = context else {
@@ -257,8 +274,7 @@ public class DeviceAuthorizationFlow: AuthenticationFlow {
             self.context = context
         }
         
-        let completion = self.completion
-        
+        let completion = self.pollCompletion
         let timerSource = DispatchSource.makeTimerSource()
         timerSource.schedule(deadline: .now() + context.interval, repeating: context.interval)
         timerSource.setEventHandler {
@@ -276,10 +292,12 @@ public class DeviceAuthorizationFlow: AuthenticationFlow {
                 }
             }
         }
-
-        timer?.cancel()
-        timer = timerSource
-        timerSource.resume()
+        
+        withLock {
+            _timer?.cancel()
+            _timer = timerSource
+            timerSource.resume()
+        }
     }
 }
 
@@ -314,12 +332,8 @@ extension DeviceAuthorizationFlow {
     }
 }
 
-extension DeviceAuthorizationFlow: UsesDelegateCollection {
-    public typealias Delegate = DeviceAuthorizationFlowDelegate
-}
-
 extension DeviceAuthorizationFlow {
-    func getToken(using context: Context, completion: @escaping(Result<Token?, APIClientError>) -> Void) {
+    func getToken(using context: Context, completion: @Sendable @escaping(Result<Token?, APIClientError>) -> Void) {
         client.openIdConfiguration { result in
             switch result {
             case .success(let configuration):

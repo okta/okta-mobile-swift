@@ -13,6 +13,9 @@
 import XCTest
 @testable import AuthFoundation
 @testable import OktaDirectAuth
+import AuthFoundation
+import Keychain
+import APIClient
 
 final class ErrorTests: XCTestCase {
     func testOAuth2ErrorInitializers() throws {
@@ -55,7 +58,7 @@ final class ErrorTests: XCTestCase {
                        .network(error: .invalidRequestData))
 
         // Ensure an OAUth2ServerError becomes a .server(error:)
-        let serverError = try defaultJSONDecoder.decode(OAuth2ServerError.self, from: """
+        let serverError = try JSONDecoder.apiClientDecoder.decode(OAuth2ServerError.self, from: """
             {
                 "error": "access_denied",
                 "errorDescription": "You do not have access"

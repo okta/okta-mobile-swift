@@ -11,6 +11,7 @@
 //
 
 import Foundation
+import OktaUtilities
 
 // swiftlint:disable identifier_name
 @_documentation(visibility: private)

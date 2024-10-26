@@ -11,6 +11,7 @@
 //
 
 import Foundation
+import JWT
 
 #if canImport(CommonCrypto)
 import CommonCrypto
@@ -25,7 +26,7 @@ struct DefaultIDTokenValidator: IDTokenValidator {
     }
     
     // swiftlint:disable cyclomatic_complexity
-    func validate(token: JWT, issuer: URL, clientId: String, context: IDTokenValidatorContext?) throws {
+    func validate(token: JWT, issuer: URL, clientId: String, context: (any IDTokenValidatorContext)?) throws {
         for check in checks {
             switch check {
             case .issuer:

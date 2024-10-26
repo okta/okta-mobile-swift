@@ -58,9 +58,8 @@ class MockAuthenticationServicesProviderSession: AuthenticationServicesProviderS
     }
 }
 
-@available(iOS 13.0, *)
-class TestAuthenticationServicesProvider: AuthenticationServicesProvider {
-    override func createSession(url: URL, callbackURLScheme: String?, completionHandler: @escaping ASWebAuthenticationSession.CompletionHandler) -> AuthenticationServicesProviderSession {
+struct TestAuthenticationSessionFactory: ASWebAuthenticationSessionFactory {
+    func createSession(url: URL, callbackURLScheme: String?, completionHandler: @escaping ASWebAuthenticationSession.CompletionHandler) -> AuthenticationServicesProviderSession {
         MockAuthenticationServicesProviderSession(url: url, callbackURLScheme: callbackURLScheme, completionHandler: completionHandler)
     }
 }
@@ -72,11 +71,12 @@ class AuthenticationServicesProviderTests: ProviderTestBase {
     override func setUpWithError() throws {
         try super.setUpWithError()
         
-        provider = TestAuthenticationServicesProvider(loginFlow: loginFlow, logoutFlow: logoutFlow, from: nil, delegate: delegate)
+        AuthenticationServicesProvider.authenticationSessionFactory = TestAuthenticationSessionFactory()
+        provider = AuthenticationServicesProvider(loginFlow: loginFlow, logoutFlow: logoutFlow, from: nil, delegate: delegate)
     }
     
     override func tearDownWithError() throws {
-        provider.authenticationSession?.cancel()
+        AuthenticationServicesProvider.resetToDefault()
         MockAuthenticationServicesProviderSession.redirectUri = nil
         MockAuthenticationServicesProviderSession.redirectError = nil
     }

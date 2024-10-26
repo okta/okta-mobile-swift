@@ -11,13 +11,14 @@
 //
 
 import Foundation
+import APIClient
 
 #if os(Linux)
 import FoundationNetworking
 #endif
 
 extension CredentialDataSource {
-    public func urlSession(for token: Token) -> URLSessionProtocol {
+    public func urlSession(for token: Token) -> any URLSessionProtocol {
         URLSession(configuration: .ephemeral)
     }
 }

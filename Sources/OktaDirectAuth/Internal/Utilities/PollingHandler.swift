@@ -12,23 +12,31 @@
 
 import Foundation
 import AuthFoundation
+import OktaConcurrency
+import OktaClientMacros
+import APIClient
 
-class PollingHandler<RequestType: OAuth2TokenRequest> {
-    private(set) var isPolling: Bool = false
-    let expirationDate: Date
-    var interval: TimeInterval
-    let request: RequestType
+@HasLock
+final class PollingHandler<RequestType: OAuth2TokenRequest>: Sendable {
+    @Synchronized
+    private(set) var isPolling: Bool
     
-    private let client: OAuth2Client
-    private let statusCheck: (PollingHandler, Result<APIResponse<RequestType.ResponseType>, APIClientError>) -> Status
+    @Synchronized
+    var interval: TimeInterval
+    
+    let expirationDate: Date
+    let request: RequestType
 
-    enum Status {
+    private let client: OAuth2Client
+    private let statusCheck: @Sendable (PollingHandler, Result<APIResponse<RequestType.ResponseType>, APIClientError>) -> Status
+
+    enum Status: Sendable {
         case continuePolling
         case success(RequestType.ResponseType)
         case failure(APIClientError)
     }
     
-    enum PollingError: Error {
+    enum PollingError: Error, Sendable {
         case apiClientError(APIClientError)
         case timeout
     }
@@ -37,20 +45,21 @@ class PollingHandler<RequestType: OAuth2TokenRequest> {
          request: RequestType,
          expiresIn: TimeInterval,
          interval: TimeInterval,
-         statusCheck: @escaping (PollingHandler, Result<APIResponse<RequestType.ResponseType>, APIClientError>) -> Status)
+         statusCheck: @Sendable @escaping (PollingHandler, Result<APIResponse<RequestType.ResponseType>, APIClientError>) -> Status)
     {
         self.client = client
         self.request = request
         self.expirationDate = Date(timeIntervalSinceNow: expiresIn)
-        self.interval = interval
         self.statusCheck = statusCheck
+        _interval = interval
+        _isPolling = false
     }
     
     deinit {
         isPolling = false
     }
     
-    func start(completion: @escaping (Result<RequestType.ResponseType, PollingError>) -> Void) {
+    func start(completion: @Sendable @escaping (Result<RequestType.ResponseType, PollingError>) -> Void) {
         guard !isPolling else { return }
         
         isPolling = true
@@ -61,7 +70,7 @@ class PollingHandler<RequestType: OAuth2TokenRequest> {
         isPolling = false
     }
     
-    func nextPoll(completion: @escaping (Result<RequestType.ResponseType, PollingError>) -> Void) {
+    func nextPoll(completion: @Sendable @escaping (Result<RequestType.ResponseType, PollingError>) -> Void) {
         guard expirationDate.timeIntervalSinceNow >= 0 else {
             completion(.failure(.timeout))
             return

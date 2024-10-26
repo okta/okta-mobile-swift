@@ -11,6 +11,7 @@
 //
 
 import Foundation
+import JWT
 
 /// Protocol used to implement OpenID token validation.
 ///
@@ -24,7 +25,7 @@ public protocol IDTokenValidator {
     var issuedAtGraceInterval: TimeInterval { get set }
     
     /// Validates the claims in the given token, using the supplied issuer and client ID values.
-    func validate(token: JWT, issuer: URL, clientId: String, context: IDTokenValidatorContext?) throws
+    func validate(token: JWT, issuer: URL, clientId: String, context: (any IDTokenValidatorContext)?) throws
 }
 
 /// Protocol used to supply contextual information to a validator.

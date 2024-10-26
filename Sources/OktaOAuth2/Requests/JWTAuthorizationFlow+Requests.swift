@@ -12,6 +12,8 @@
 
 import Foundation
 import AuthFoundation
+import APIClient
+import JWT
 
 extension JWTAuthorizationFlow {
     struct TokenRequest {
@@ -23,7 +25,7 @@ extension JWTAuthorizationFlow {
 }
 
 extension JWTAuthorizationFlow.TokenRequest: OAuth2TokenRequest, OAuth2APIRequest, APIRequestBody, APIParsingContext {
-    var bodyParameters: [String: APIRequestArgument]? {
+    var bodyParameters: [String: any APIRequestArgument]? {
         [
             "client_id": clientId,
             "scope": scope,
@@ -32,7 +34,7 @@ extension JWTAuthorizationFlow.TokenRequest: OAuth2TokenRequest, OAuth2APIReques
         ]
     }
     
-    var codingUserInfo: [CodingUserInfoKey: Any]? {
+    var codingUserInfo: [CodingUserInfoKey: any Sendable]? {
         [
             .clientSettings: [
                 "client_id": clientId,

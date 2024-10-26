@@ -12,6 +12,10 @@
 
 import Foundation
 import AuthFoundation
+import OktaUtilities
+import OktaConcurrency
+import OktaClientMacros
+import APIClient
 
 /// The delegate of a ``AuthorizationCodeFlow`` may adopt some, or all, of the methods described here. These allow a developer to customize or interact with the authentication flow during authentication.
 ///
@@ -65,9 +69,12 @@ public protocol AuthorizationCodeFlowDelegate: AuthenticationDelegate {
 /// let redirectUri: URL
 /// let token = try await flow.resume(with: redirectUri)
 /// ```
-public class AuthorizationCodeFlow: AuthenticationFlow, ProvidesOAuth2Parameters {
+@HasLock
+public final class AuthorizationCodeFlow: Sendable, AuthenticationFlow, ProvidesOAuth2Parameters, UsesDelegateCollection {
+    public typealias Delegate = AuthorizationCodeFlowDelegate
+    
     /// A model representing the context and current state for an authorization session.
-    public struct Context: Equatable {
+    public struct Context: Sendable, Equatable {
         /// The `PKCE` credentials to use in the authorization request.
         ///
         /// This value may be `nil` on platforms that do not support PKCE.
@@ -122,16 +129,17 @@ public class AuthorizationCodeFlow: AuthenticationFlow, ProvidesOAuth2Parameters
     public let redirectUri: URL
     
     /// Any additional query string parameters you would like to supply to the authorization server.
-    public let additionalParameters: [String: APIRequestArgument]?
+    public let additionalParameters: [String: any APIRequestArgument]?
 
     /// Indicates whether or not this flow is currently in the process of authenticating a user.
-    public private(set) var isAuthenticating: Bool = false {
+    @Synchronized(value: false)
+    public private(set) var isAuthenticating: Bool {
         didSet {
-            guard oldValue != isAuthenticating else {
+            guard oldValue != _isAuthenticating else {
                 return
             }
             
-            if isAuthenticating {
+            if _isAuthenticating {
                 delegateCollection.invoke { $0.authenticationStarted(flow: self) }
             } else {
                 delegateCollection.invoke { $0.authenticationFinished(flow: self) }
@@ -140,9 +148,10 @@ public class AuthorizationCodeFlow: AuthenticationFlow, ProvidesOAuth2Parameters
     }
     
     /// The context that stores the state for the current authentication session.
+    @Synchronized
     public private(set) var context: Context? {
         didSet {
-            guard let url = context?.authenticationURL else {
+            guard let url = _context?.authenticationURL else {
                 return
             }
 
@@ -150,6 +159,9 @@ public class AuthorizationCodeFlow: AuthenticationFlow, ProvidesOAuth2Parameters
         }
     }
     
+    /// The collection of delegates conforming to ``AuthorizationCodeFlowDelegate``.
+    public let delegateCollection = DelegateCollection<any Delegate>()
+
     /// Convenience initializer to construct an authentication flow from variables.
     /// - Parameters:
     ///   - issuer: The issuer URL.
@@ -161,7 +173,7 @@ public class AuthorizationCodeFlow: AuthenticationFlow, ProvidesOAuth2Parameters
                             clientId: String,
                             scopes: String,
                             redirectUri: URL,
-                            additionalParameters: [String: APIRequestArgument]? = nil)
+                            additionalParameters: [String: any APIRequestArgument]? = nil)
     {
         self.init(redirectUri: redirectUri,
                   additionalParameters: additionalParameters,
@@ -176,7 +188,7 @@ public class AuthorizationCodeFlow: AuthenticationFlow, ProvidesOAuth2Parameters
     ///   - additionalParameters: Optional additional query string parameters you would like to supply to the authorization server.
     ///   - client: The `OAuth2Client` to use with this flow.
     public init(redirectUri: URL,
-                additionalParameters: [String: APIRequestArgument]? = nil,
+                additionalParameters: [String: any APIRequestArgument]? = nil,
                 client: OAuth2Client)
     {
         // Ensure this SDK's static version is included in the user agent.
@@ -221,9 +233,8 @@ public class AuthorizationCodeFlow: AuthenticationFlow, ProvidesOAuth2Parameters
     ///   - completion: Completion block for receiving the response.
     public func start(with context: Context? = nil,
                       additionalParameters: [String: String]? = nil,
-                      completion: @escaping (Result<URL, OAuth2Error>) -> Void)
+                      completion: @Sendable @escaping (Result<URL, OAuth2Error>) -> Void)
     {
-        var context = context ?? Context()
         isAuthenticating = true
 
         client.openIdConfiguration { result in
@@ -235,6 +246,7 @@ public class AuthorizationCodeFlow: AuthenticationFlow, ProvidesOAuth2Parameters
                 completion(.failure(error))
             case .success(let configuration):
                 do {
+                    var context = context ?? Context()
                     let url = try self.createAuthenticationURL(from: configuration.authorizationEndpoint,
                                                                using: context,
                                                                additionalParameters: additionalParameters)
@@ -261,7 +273,7 @@ public class AuthorizationCodeFlow: AuthenticationFlow, ProvidesOAuth2Parameters
     /// - Parameters:
     ///   - url: Authorization redirect URI
     ///   - completion: Completion block to retrieve the returned result.
-    public func resume(with url: URL, completion: @escaping (Result<Token, OAuth2Error>) -> Void) throws {
+    public func resume(with url: URL, completion: @Sendable @escaping (Result<Token, OAuth2Error>) -> Void) throws {
         let code = try authorizationCode(from: url)
         
         client.openIdConfiguration { result in
@@ -299,9 +311,6 @@ public class AuthorizationCodeFlow: AuthenticationFlow, ProvidesOAuth2Parameters
         context = nil
         isAuthenticating = false
     }
-
-    // MARK: Private properties / methods
-    public let delegateCollection = DelegateCollection<AuthorizationCodeFlowDelegate>()
 }
 
 @available(iOS 13.0, tvOS 13.0, macOS 10.15, watchOS 6, *)
@@ -342,10 +351,6 @@ extension AuthorizationCodeFlow {
             }
         }
     }
-}
-
-extension AuthorizationCodeFlow: UsesDelegateCollection {
-    public typealias Delegate = AuthorizationCodeFlowDelegate
 }
 
 extension AuthorizationCodeFlow {

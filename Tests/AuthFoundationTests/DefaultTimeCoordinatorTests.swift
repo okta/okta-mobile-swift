@@ -11,8 +11,11 @@
 //
 
 import XCTest
+@testable import OktaUtilities
 @testable import AuthFoundation
 @testable import TestCommon
+@testable import APIClient
+@testable import APIClientTestCommon
 
 #if os(Linux)
 import FoundationNetworking
@@ -74,7 +77,7 @@ final class DefaultTimeCoordinatorTests: XCTestCase {
     
     func sendRequest(offset: TimeInterval, cachePolicy: URLRequest.CachePolicy) throws { 
         let newDate = Date(timeIntervalSinceNow: offset)
-        let newDateString = httpDateFormatter.string(from: newDate)
+        let newDateString = DateFormatter.httpDateFormatter.string(from: newDate)
         
         let url = try XCTUnwrap(URL(string: "https://example.com/oauth2/v1/token"))
         let request = URLRequest(url: url, cachePolicy: cachePolicy)

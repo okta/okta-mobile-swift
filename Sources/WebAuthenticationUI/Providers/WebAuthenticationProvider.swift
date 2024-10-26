@@ -15,25 +15,25 @@ import OktaOAuth2
 
 #if canImport(UIKit) || canImport(AppKit)
 
-protocol WebAuthenticationProvider {
+protocol WebAuthenticationProvider: Sendable {
     var loginFlow: AuthorizationCodeFlow { get }
     var logoutFlow: SessionLogoutFlow? { get }
-    var delegate: WebAuthenticationProviderDelegate? { get }
+    var delegate: (any WebAuthenticationProviderDelegate)? { get }
 
     func start(context: AuthorizationCodeFlow.Context?, additionalParameters: [String: String]?)
     func logout(context: SessionLogoutFlow.Context, additionalParameters: [String: String]?)
     func cancel()
 }
 
-protocol WebAuthenticationProviderDelegate: AnyObject {
-    func authentication(provider: WebAuthenticationProvider, received token: Token)
-    func authentication(provider: WebAuthenticationProvider, received error: Error)
+protocol WebAuthenticationProviderDelegate: AnyObject, Sendable {
+    func authentication(provider: any WebAuthenticationProvider, received token: Token)
+    func authentication(provider: any WebAuthenticationProvider, received error: any Error)
     
-    func logout(provider: WebAuthenticationProvider, finished: Bool)
-    func logout(provider: WebAuthenticationProvider, received error: Error)
+    func logout(provider: any WebAuthenticationProvider, finished: Bool)
+    func logout(provider: any WebAuthenticationProvider, received error: any Error)
     
     @available(iOS 13.0, macOS 10.15, macCatalyst 13.0, *)
-    func authenticationShouldUseEphemeralSession(provider: WebAuthenticationProvider) -> Bool
+    func authenticationShouldUseEphemeralSession(provider: any WebAuthenticationProvider) -> Bool
 }
 
 #endif

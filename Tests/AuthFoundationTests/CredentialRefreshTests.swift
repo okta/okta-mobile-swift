@@ -12,7 +12,9 @@
 
 import XCTest
 @testable import TestCommon
+@testable import APIClientTestCommon
 @testable import AuthFoundation
+@testable import AuthFoundationTestCommon
 
 #if os(Linux)
 import FoundationNetworking
@@ -58,12 +60,12 @@ final class CredentialRefreshTests: XCTestCase, OAuth2ClientDelegate {
         case .none: break
         case .openIdOnly:
             urlSession.expect("https://example.com/.well-known/openid-configuration",
-                              data: try data(from: .module, for: "openid-configuration", in: "MockResponses"),
+                              data: try data(filename: "openid-configuration"),
                               contentType: "application/json")
 
         case .refresh(let count, let rotate):
             urlSession.expect("https://example.com/.well-known/openid-configuration",
-                              data: try data(from: .module, for: "openid-configuration", in: "MockResponses"),
+                              data: try data(filename: "openid-configuration"),
                               contentType: "application/json")
             for index in 1 ... count {
                 urlSession.expect("https://example.com/oauth2/v1/token",
@@ -81,7 +83,7 @@ final class CredentialRefreshTests: XCTestCase, OAuth2ClientDelegate {
             
         case .error:
             urlSession.expect("https://example.com/.well-known/openid-configuration",
-                              data: try data(from: .module, for: "openid-configuration", in: "MockResponses"),
+                              data: try data(filename: "openid-configuration"),
                               contentType: "application/json")
             urlSession.expect("https://example.com/oauth2/v1/token",
                               data: nil,
@@ -104,7 +106,7 @@ final class CredentialRefreshTests: XCTestCase, OAuth2ClientDelegate {
     }
     
     func testRefresh() throws {
-        let credential = try credential(for: Token.simpleMockToken)
+        let credential = try credential(for: .mockToken(id: #function))
 
         let expect = expectation(description: "refresh")
         credential.refresh { result in
@@ -128,7 +130,7 @@ final class CredentialRefreshTests: XCTestCase, OAuth2ClientDelegate {
     }
 
     func testRefreshFailed() throws {
-        let credential = try credential(for: Token.simpleMockToken, expectAPICalls: .error)
+        let credential = try credential(for: .mockToken(id: #function), expectAPICalls: .error)
 
         let expect = expectation(description: "refresh")
         credential.refresh { result in
@@ -148,12 +150,23 @@ final class CredentialRefreshTests: XCTestCase, OAuth2ClientDelegate {
         // Need to wait for the async notification dispatch
         usleep(useconds_t(2000))
         
-        XCTAssertEqual(notification.notifications.count, 2)
-        let tokenNotification = try XCTUnwrap(notification.notifications(for: .tokenRefreshFailed).first)
+        // Filter out notifications from other concurrent unit tests
+        let notifications = notification.notifications.filter { notification in
+            if let object = notification.object as? Credential {
+                return object.token.id == #function
+            } else if let object = notification.object as? Token {
+                return object.id == #function
+            } else {
+                return false
+            }
+        }
+        
+        XCTAssertEqual(notifications.count, 2)
+        let tokenNotification = try XCTUnwrap(notifications.first(where: { $0.name == .tokenRefreshFailed }))
         XCTAssertEqual(tokenNotification.object as? Token, credential.token)
         XCTAssertNotNil(tokenNotification.userInfo?["error"])
         
-        let credentialNotification = try XCTUnwrap(notification.notifications(for: .credentialRefreshFailed).first)
+        let credentialNotification = try XCTUnwrap(notifications.first(where: { $0.name == .credentialRefreshFailed }))
         XCTAssertEqual(credentialNotification.object as? Credential, credential)
         XCTAssertNotNil(credentialNotification.userInfo?["error"])
     }
@@ -302,7 +315,7 @@ final class CredentialRefreshTests: XCTestCase, OAuth2ClientDelegate {
     }
     
     func testAuthorizedURLSession() throws {
-        let credential = try credential(for: Token.simpleMockToken)
+        let credential = try credential(for: .mockToken(id: #function))
         
         var request = URLRequest(url: URL(string: "https://example.com/my/api")!)
         credential.authorize(request: &request)
@@ -320,33 +333,33 @@ final class CredentialRefreshTests: XCTestCase, OAuth2ClientDelegate {
         XCTAssertEqual(credential.token.refreshToken, "abc123")
 
         // First refresh
-        var refreshExpectation = expectation(description: "First refresh")
+        let refreshExpectation1 = expectation(description: "First refresh")
         credential.refresh { _ in
-            refreshExpectation.fulfill()
+            refreshExpectation1.fulfill()
         }
-        wait(for: [refreshExpectation], timeout: .standard)
+        wait(for: [refreshExpectation1], timeout: .standard)
         XCTAssertEqual(credential.token.refreshToken, "therefreshtoken-1")
         
         // Second refresh
-        refreshExpectation = expectation(description: "Second refresh")
+        let refreshExpectation2 = expectation(description: "Second refresh")
         credential.refresh { _ in
-            refreshExpectation.fulfill()
+            refreshExpectation2.fulfill()
         }
-        wait(for: [refreshExpectation], timeout: .standard)
+        wait(for: [refreshExpectation2], timeout: .standard)
         XCTAssertEqual(credential.token.refreshToken, "therefreshtoken-2")
 
         // Third refresh
-        refreshExpectation = expectation(description: "Third refresh")
+        let refreshExpectation3 = expectation(description: "Third refresh")
         credential.refresh { _ in
-            refreshExpectation.fulfill()
+            refreshExpectation3.fulfill()
         }
-        wait(for: [refreshExpectation], timeout: .standard)
+        wait(for: [refreshExpectation3], timeout: .standard)
         XCTAssertEqual(credential.token.refreshToken, "therefreshtoken-3")
     }
 
     @available(iOS 13.0, tvOS 13.0, macOS 10.15, watchOS 6, *)
     func testRefreshAsync() async throws {
-        let credential = try credential(for: Token.simpleMockToken)
+        let credential = try credential(for: .mockToken(id: #function))
         try perform {
             try await credential.refresh()
         }

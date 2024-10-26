@@ -11,9 +11,10 @@
 //
 
 import Foundation
+import APIClient
 
 extension OAuth2Error {
-    init(_ error: Error) {
+    init(_ error: any Error) {
         if let error = error as? OAuth2Error {
             self = error
         } else if let error = error as? APIClientError {

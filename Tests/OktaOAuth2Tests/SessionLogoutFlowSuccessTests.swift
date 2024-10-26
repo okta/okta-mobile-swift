@@ -14,6 +14,9 @@ import XCTest
 @testable import TestCommon
 @testable import AuthFoundation
 @testable import OktaOAuth2
+@testable import APIClientTestCommon
+@testable import AuthFoundationTestCommon
+@testable import JWT
 
 class SessionLogoutFlowDelegateRecorder: SessionLogoutFlowDelegate {
     var error: OAuth2Error?
@@ -47,7 +50,7 @@ final class SessionLogoutFlowSuccessTests: XCTestCase {
         client = OAuth2Client(baseURL: issuer, clientId: "clientId", scopes: "openid", session: urlSession)
         
         urlSession.expect("https://example.com/.well-known/openid-configuration",
-                          data: try data(from: .module, for: "openid-configuration", in: "MockResponses"),
+                          data: try data(filename: "openid-configuration", matching: "OktaOAuth2Tests"),
                           contentType: "application/json")
         
         flow = SessionLogoutFlow(logoutRedirectUri: logoutRedirectUri, client: client)

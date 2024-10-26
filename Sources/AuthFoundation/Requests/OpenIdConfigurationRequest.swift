@@ -11,6 +11,7 @@
 //
 
 import Foundation
+import APIClient
 
 #if os(Linux)
 import FoundationNetworking

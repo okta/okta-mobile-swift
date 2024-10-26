@@ -11,6 +11,7 @@
 //
 
 import Foundation
+import OktaConcurrency
 
 /// A common delegate protocol that all authentication flows should support.
 public protocol AuthenticationDelegate: AnyObject {

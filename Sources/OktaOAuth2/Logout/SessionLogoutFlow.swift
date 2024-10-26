@@ -12,6 +12,10 @@
 
 import Foundation
 import AuthFoundation
+import OktaUtilities
+import OktaConcurrency
+import OktaClientMacros
+import APIClient
 
 /// The delegate of a ``SessionLogoutFlow`` may adopt some, or all, of the methods described here. These allow a developer to customize or interact with the logout flow during logout session.
 ///
@@ -54,9 +58,10 @@ public protocol SessionLogoutFlowDelegate: LogoutFlowDelegate {
 /// // Create the logout URL. Open this in a browser.
 /// let authorizeUrl = try await flow.start()
 /// ```
-public class SessionLogoutFlow: LogoutFlow, ProvidesOAuth2Parameters {
+@HasLock
+public final class SessionLogoutFlow: Sendable, LogoutFlow, ProvidesOAuth2Parameters {
     /// A model representing the context and current state for a logout session.
-    public struct Context: Codable, Equatable {
+    public struct Context: Codable, Sendable, Equatable {
         /// The ID token string used for log-out.
         public let idToken: String
         
@@ -83,15 +88,17 @@ public class SessionLogoutFlow: LogoutFlow, ProvidesOAuth2Parameters {
     public let logoutRedirectUri: URL
     
     /// Any additional query string parameters you would like to supply to the authorization server.
-    public let additionalParameters: [String: APIRequestArgument]?
+    public let additionalParameters: [String: any APIRequestArgument]?
 
     /// Indicates if this flow is currently in progress.
-    public private(set) var inProgress: Bool = false
+    @Synchronized(value: false)
+    public private(set) var inProgress: Bool
     
     /// The context that stores the ID token and state for the current log-out session.
+    @Synchronized
     public private(set) var context: Context? {
         didSet {
-            guard let url = context?.logoutURL else {
+            guard let url = _context?.logoutURL else {
                 return
             }
 
@@ -99,6 +106,9 @@ public class SessionLogoutFlow: LogoutFlow, ProvidesOAuth2Parameters {
         }
     }
     
+    /// The collection of delegates conforming to ``SessionLogoutFlowDelegate``.
+    public let delegateCollection = DelegateCollection<any SessionLogoutFlowDelegate>()
+
     /// Convenience initializer to construct a logout flow.
     /// - Parameters:
     ///   - issuer: The issuer URL.
@@ -127,7 +137,7 @@ public class SessionLogoutFlow: LogoutFlow, ProvidesOAuth2Parameters {
     ///   - logoutRedirectUri: The logout redirect URI.
     ///   - client: The `OAuth2Client` to use with this flow.
     public init(logoutRedirectUri: URL,
-                additionalParameters: [String: APIRequestArgument]? = nil,
+                additionalParameters: [String: any APIRequestArgument]? = nil,
                 client: OAuth2Client)
     {
         // Ensure this SDK's static version is included in the user agent.
@@ -149,7 +159,7 @@ public class SessionLogoutFlow: LogoutFlow, ProvidesOAuth2Parameters {
     ///   - completion: Optional completion block for receiving the response. If `nil`, you may rely upon the appropriate delegate API methods.
     public func start(idToken: String,
                       additionalParameters: [String: String]? = nil,
-                      completion: @escaping (Result<URL, OAuth2Error>) -> Void) throws
+                      completion: @Sendable @escaping (Result<URL, OAuth2Error>) -> Void) throws
     {
         try start(with: Context(idToken: idToken),
                   additionalParameters: additionalParameters,
@@ -165,7 +175,7 @@ public class SessionLogoutFlow: LogoutFlow, ProvidesOAuth2Parameters {
     ///   - completion: Optional completion block for receiving the response. If `nil`, you may rely upon the appropriate delegate API methods.
     public func start(with context: Context,
                       additionalParameters: [String: String]? = nil,
-                      completion: @escaping (Result<URL, OAuth2Error>) -> Void) throws
+                      completion: @Sendable @escaping (Result<URL, OAuth2Error>) -> Void) throws
     {
         guard !inProgress else {
             completion(.failure(.missingClientConfiguration))
@@ -214,8 +224,6 @@ public class SessionLogoutFlow: LogoutFlow, ProvidesOAuth2Parameters {
         inProgress = false
         context = nil
     }
-
-    public let delegateCollection = DelegateCollection<SessionLogoutFlowDelegate>()
 }
 
 @available(iOS 13.0, tvOS 13.0, macOS 10.15, watchOS 6, *)
@@ -281,7 +289,7 @@ private extension SessionLogoutFlow {
     }
     
     func queryParameters(using context: SessionLogoutFlow.Context,
-                         additionalParameters: [String: APIRequestArgument]?) -> [String: String]
+                         additionalParameters: [String: any APIRequestArgument]?) -> [String: String]
     {
         var result = self.additionalParameters ?? [:]
         result.merge(additionalParameters)

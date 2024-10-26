@@ -14,6 +14,9 @@ import XCTest
 @testable import TestCommon
 @testable import AuthFoundation
 @testable import OktaOAuth2
+@testable import APIClientTestCommon
+@testable import AuthFoundationTestCommon
+@testable import JWT
 
 class MockSessionTokenFlowURLExchange: SessionTokenFlowURLExchange {
     let scheme: String
@@ -28,7 +31,7 @@ class MockSessionTokenFlowURLExchange: SessionTokenFlowURLExchange {
         self.scheme = scheme
     }
 
-    func follow(url: URL, completion: @escaping (Result<URL, OAuth2Error>) -> Void) {
+    func follow(url: URL, completion: @Sendable @escaping (Result<URL, OAuth2Error>) -> Void) {
         if let resultUrl = type(of: self).resultUrl {
             completion(.success(resultUrl))
         } else if let error = type(of: self).error {
@@ -55,13 +58,13 @@ final class SessionTokenFlowSuccessTests: XCTestCase {
         SessionTokenFlow.urlExchangeClass = MockSessionTokenFlowURLExchange.self
 
         urlSession.expect("https://example.com/.well-known/openid-configuration",
-                          data: try data(from: .module, for: "openid-configuration", in: "MockResponses"),
+                          data: try data(filename: "openid-configuration", matching: "OktaOAuth2Tests"),
                           contentType: "application/json")
         urlSession.expect("https://example.okta.com/oauth2/v1/keys?client_id=clientId",
-                          data: try data(from: .module, for: "keys", in: "MockResponses"),
+                          data: try data(filename: "keys", matching: "OktaOAuth2Tests"),
                           contentType: "application/json")
         urlSession.expect("https://example.okta.com/oauth2/v1/token",
-                          data: try data(from: .module, for: "token", in: "MockResponses"),
+                          data: try data(filename: "token", matching: "OktaOAuth2Tests"),
                           contentType: "application/json")
         
         flow = client.sessionTokenFlow(redirectUri: redirectUri,
@@ -108,7 +111,7 @@ final class SessionTokenFlowSuccessTests: XCTestCase {
 
         // Authenticate
         let wait = expectation(description: "resume")
-        var token: Token?
+        nonisolated(unsafe) var token: Token?
         flow.start(with: "theSessionToken", context: .init(state: "state")) { result in
             switch result {
             case .success(let resultToken):

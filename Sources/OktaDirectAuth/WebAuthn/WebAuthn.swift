@@ -11,6 +11,7 @@
 //
 
 import Foundation
+import APIClient
 
 /// Exposes the types and classes used to authenticate using WebAuthn.
 ///
@@ -35,7 +36,7 @@ import Foundation
 /// ```
 public struct WebAuthn {
     /// Represents the credential challenge returned from the server when a WebAuthn authentication is initiated.
-    public struct CredentialRequestOptions: Codable {
+    public struct CredentialRequestOptions: Sendable, Codable {
         /// The public key request options supplied to the client from the server.
         public let publicKey: WebAuthn.PublicKeyCredentialRequestOptions
         
@@ -43,7 +44,7 @@ public struct WebAuthn {
         public let authenticatorEnrollments: [AuthenticatorEnrollment]?
 
         /// Defines additional authenticator enrollment information supplied by the server.
-        public struct AuthenticatorEnrollment: Codable {
+        public struct AuthenticatorEnrollment: Sendable, Codable {
             /// The ID supplied from the server representing this credential.
             ///
             /// **Note:** This should be identical to the ``WebAuthn/PublicKeyCredentialRequestOptions/rpID`` value.
@@ -60,7 +61,7 @@ public struct WebAuthn {
     /// Defines the set of data expected from the client in response to an authenticator challenge.
     ///
     /// This value should be supplied to the ``DirectAuthenticationFlow/SecondaryFactor/webAuthnAssertion`` type.
-    public struct AuthenticatorAssertionResponse: Codable, Equatable {
+    public struct AuthenticatorAssertionResponse: Sendable, Codable, Equatable {
         /// The client data JSON response, represented as a string.
         public let clientDataJSON: String
         
@@ -76,5 +77,5 @@ public struct WebAuthn {
 }
 
 extension WebAuthn.CredentialRequestOptions: JSONDecodable {
-    public static var jsonDecoder = JSONDecoder()
+    public static let jsonDecoder = JSONDecoder()
 }

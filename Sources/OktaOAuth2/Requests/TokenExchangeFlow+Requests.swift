@@ -12,12 +12,13 @@
 
 import AuthFoundation
 import Foundation
+import APIClient
 
 extension TokenExchangeFlow {
     /// Types specify token's identity.
-    public enum TokenType {
+    public enum TokenType: Sendable {
         /// Describes specific token used by ``TokenExchangeFlow/TokenType``.
-        public enum Kind: String {
+        public enum Kind: String, Sendable {
             case idToken = "id_token"
             case accessToken = "access_token"
             case deviceSecret = "device-secret"
@@ -26,6 +27,7 @@ extension TokenExchangeFlow {
         
         /// A security token that represents the identity of the acting party.
         case actor(type: Kind, value: String)
+        
         /// A security token that represents the identity of the party on behalf of whom the request is being made.
         case subject(type: Kind, value: String)
         
@@ -77,7 +79,7 @@ extension TokenExchangeFlow.TokenRequest: OAuth2TokenRequest, OAuth2APIRequest, 
     var url: URL { openIdConfiguration.tokenEndpoint }
     var contentType: APIContentType? { .formEncoded }
     var acceptsType: APIContentType? { .json }
-    var bodyParameters: [String: APIRequestArgument]? {
+    var bodyParameters: [String: any APIRequestArgument]? {
         let tokensDict = tokens.map { token in
             [
                 token.key: token.value,

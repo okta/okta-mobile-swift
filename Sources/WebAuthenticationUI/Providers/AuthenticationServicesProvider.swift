@@ -12,6 +12,7 @@
 
 import AuthFoundation
 import OktaOAuth2
+import OktaClientMacros
 
 #if canImport(AuthenticationServices)
 import AuthenticationServices
@@ -20,7 +21,7 @@ protocol AuthenticationServicesProviderSession {
     init(url URL: URL, callbackURLScheme: String?, completionHandler: @escaping ASWebAuthenticationSession.CompletionHandler)
 
     @available(iOS 13.0, macOS 10.15, *)
-    var presentationContextProvider: ASWebAuthenticationPresentationContextProviding? { get set }
+    var presentationContextProvider: (any ASWebAuthenticationPresentationContextProviding)? { get set }
 
     @available(iOS 13.0, macOS 10.15, *)
     var prefersEphemeralWebBrowserSession: Bool { get set }
@@ -35,23 +36,41 @@ protocol AuthenticationServicesProviderSession {
 
 extension ASWebAuthenticationSession: AuthenticationServicesProviderSession {}
 
-class AuthenticationServicesProvider: NSObject, WebAuthenticationProvider {
+protocol ASWebAuthenticationSessionFactory {
+    @MainActor
+    func createSession(url: URL,
+                       callbackURLScheme: String?,
+                       completionHandler: @escaping ASWebAuthenticationSession.CompletionHandler) -> any AuthenticationServicesProviderSession
+}
+
+@HasLock
+final class AuthenticationServicesProvider: NSObject, Sendable, WebAuthenticationProvider {
+    static func resetToDefault() {
+        authenticationSessionFactory = DefaultASWebAuthenticationSessionFactory()
+    }
+    
+    nonisolated(unsafe) static var authenticationSessionFactory: any ASWebAuthenticationSessionFactory = DefaultASWebAuthenticationSessionFactory()
+
     let loginFlow: AuthorizationCodeFlow
     let logoutFlow: SessionLogoutFlow?
-    private(set) weak var delegate: WebAuthenticationProviderDelegate?
-    private(set) var authenticationSession: AuthenticationServicesProviderSession?
+    
+    @Synchronized
+    private(set) weak var delegate: (any WebAuthenticationProviderDelegate)?
+
+    @Synchronized
+    private(set) var authenticationSession: (any AuthenticationServicesProviderSession)?
 
     private let anchor: ASPresentationAnchor?
     
     init(loginFlow: AuthorizationCodeFlow,
          logoutFlow: SessionLogoutFlow?,
          from window: WebAuthentication.WindowAnchor?,
-         delegate: WebAuthenticationProviderDelegate)
+         delegate: any WebAuthenticationProviderDelegate)
     {
         self.loginFlow = loginFlow
         self.logoutFlow = logoutFlow
         self.anchor = window
-        self.delegate = delegate
+        _delegate = delegate
         
         super.init()
         
@@ -65,40 +84,42 @@ class AuthenticationServicesProvider: NSObject, WebAuthenticationProvider {
     }
 
     func start(context: AuthorizationCodeFlow.Context?, additionalParameters: [String: String]?) {
-        loginFlow.start(with: context, additionalParameters: additionalParameters) { _ in }
+        self.loginFlow.start(with: context, additionalParameters: additionalParameters) { _ in }
     }
     
-    func createSession(url: URL, callbackURLScheme: String?, completionHandler: @escaping ASWebAuthenticationSession.CompletionHandler) -> AuthenticationServicesProviderSession {
-        ASWebAuthenticationSession(url: url,
-            callbackURLScheme: callbackURLScheme,
-            completionHandler: completionHandler)
+    @MainActor
+    func createSession(url: URL, callbackURLScheme: String?, completionHandler: @escaping ASWebAuthenticationSession.CompletionHandler) -> any AuthenticationServicesProviderSession {
+        Self.authenticationSessionFactory.createSession(url: url,
+                                                        callbackURLScheme: callbackURLScheme,
+                                                        completionHandler: completionHandler)
     }
     
     func authenticate(using url: URL) {
         guard let delegate = delegate else { return }
         
-        authenticationSession = createSession(
-            url: url,
-            callbackURLScheme: loginFlow.redirectUri.scheme,
-            completionHandler: { url, error in
-                self.process(url: url, error: error)
-            })
-        
-        if #available(iOS 13.0, macCatalyst 13.0, *) {
-            authenticationSession?.prefersEphemeralWebBrowserSession = delegate.authenticationShouldUseEphemeralSession(provider: self)
-            authenticationSession?.presentationContextProvider = self
-        }
-
         DispatchQueue.main.async {
+            var session = self.createSession(
+                url: url,
+                callbackURLScheme: self.loginFlow.redirectUri.scheme,
+                completionHandler: { url, error in
+                    self.process(url: url, error: error)
+                })
+            
+            if #available(iOS 13.0, macCatalyst 13.0, *) {
+                session.prefersEphemeralWebBrowserSession = delegate.authenticationShouldUseEphemeralSession(provider: self)
+                session.presentationContextProvider = self
+            }
+            
+            self.authenticationSession = session
             _ = self.authenticationSession?.start()
         }
     }
     
     func logout(context: SessionLogoutFlow.Context, additionalParameters: [String: String]?) {
-        guard let logoutFlow = logoutFlow else {
+        guard let logoutFlow = self.logoutFlow else {
             return
         }
-
+        
         // LogoutFlow invokes delegate, so an error is propagated from delegate method
         try? logoutFlow.start(with: context, additionalParameters: additionalParameters) { _ in }
     }
@@ -108,20 +129,21 @@ class AuthenticationServicesProvider: NSObject, WebAuthenticationProvider {
             return
         }
 
-        authenticationSession = createSession(url: url,
-                                              callbackURLScheme: logoutFlow.logoutRedirectUri.scheme,
-                                              completionHandler: { url, error in
-            self.processLogout(url: url, error: error)
-        })
-        
-        if #available(iOS 13.0, *) {
-            if let delegate = delegate {
-                authenticationSession?.prefersEphemeralWebBrowserSession = delegate.authenticationShouldUseEphemeralSession(provider: self)
-            }
-            authenticationSession?.presentationContextProvider = self
-        }
-
         DispatchQueue.main.async {
+            var session = self.createSession(url: url,
+                                             callbackURLScheme: logoutFlow.logoutRedirectUri.scheme,
+                                             completionHandler: { url, error in
+                self.processLogout(url: url, error: error)
+            })
+            
+            if #available(iOS 13.0, *) {
+                if let delegate = self.delegate {
+                    session.prefersEphemeralWebBrowserSession = delegate.authenticationShouldUseEphemeralSession(provider: self)
+                }
+                session.presentationContextProvider = self
+            }
+
+            self.authenticationSession = session
             _ = self.authenticationSession?.start()
         }
     }
@@ -149,7 +171,7 @@ class AuthenticationServicesProvider: NSObject, WebAuthenticationProvider {
         delegate.logout(provider: self, received: logoutError)
     }
     
-    func process(url: URL?, error: Error?) {
+    func process(url: URL?, error: (any Error)?) {
         defer { authenticationSession = nil }
         
         if let error = error {
@@ -180,7 +202,7 @@ class AuthenticationServicesProvider: NSObject, WebAuthenticationProvider {
         }
     }
     
-    func processLogout(url: URL?, error: Error?) {
+    func processLogout(url: URL?, error: (any Error)?) {
         defer { authenticationSession = nil }
 
         guard let delegate = delegate else { return }
@@ -212,25 +234,35 @@ class AuthenticationServicesProvider: NSObject, WebAuthenticationProvider {
 
 extension AuthenticationServicesProvider: AuthenticationDelegate, AuthorizationCodeFlowDelegate {
     func authentication<Flow>(flow: Flow, shouldAuthenticateUsing url: URL) where Flow: AuthorizationCodeFlow {
-        authenticate(using: url)
+        DispatchQueue.main.async {
+            self.authenticate(using: url)
+        }
     }
     
     func authentication<AuthorizationCodeFlow>(flow: AuthorizationCodeFlow, received token: Token) {
-        received(token: token)
+        DispatchQueue.main.async {
+            self.received(token: token)
+        }
     }
     
     func authentication<AuthorizationCodeFlow>(flow: AuthorizationCodeFlow, received error: OAuth2Error) {
-        received(error: .oauth2(error: error))
+        DispatchQueue.main.async {
+            self.received(error: .oauth2(error: error))
+        }
     }
 }
 
 extension AuthenticationServicesProvider: SessionLogoutFlowDelegate {
     func logout<Flow>(flow: Flow, shouldLogoutUsing url: URL) where Flow: SessionLogoutFlow {
-        logout(using: url)
+        DispatchQueue.main.async {
+            self.logout(using: url)
+        }
     }
     
     func logout<SessionLogoutFlow>(flow: SessionLogoutFlow, received error: OAuth2Error) {
-        received(logoutError: .oauth2(error: error))
+        DispatchQueue.main.async {
+            self.received(logoutError: .oauth2(error: error))
+        }
     }
 }
     
@@ -248,3 +280,13 @@ extension AuthenticationServicesProvider: ASWebAuthenticationPresentationContext
     }
 }
 #endif
+
+struct DefaultASWebAuthenticationSessionFactory: ASWebAuthenticationSessionFactory {
+    @MainActor
+    func createSession(url: URL, callbackURLScheme: String?, completionHandler: @escaping ASWebAuthenticationSession.CompletionHandler) -> any AuthenticationServicesProviderSession
+    {
+        ASWebAuthenticationSession(url: url,
+                                   callbackURLScheme: callbackURLScheme,
+                                   completionHandler: completionHandler)
+    }
+}

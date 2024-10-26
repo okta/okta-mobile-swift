@@ -10,11 +10,11 @@
 // See the License for the specific language governing permissions and limitations under the License.
 //
 
-import Foundation
+@preconcurrency import Foundation
 
-public final class NotificationRecorder {
-    private(set) public var notifications: [Notification] = []
-    private var observers = [NSObjectProtocol]()
+public final class NotificationRecorder: Sendable {
+    nonisolated(unsafe) private(set) public var notifications: [Notification] = []
+    nonisolated(unsafe) private var observers = [any NSObjectProtocol]()
     
     public init(observing: [Notification.Name]? = nil) {
         observing?.forEach {

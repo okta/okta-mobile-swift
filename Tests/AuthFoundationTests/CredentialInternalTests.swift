@@ -12,6 +12,7 @@
 
 import XCTest
 @testable import TestCommon
+@testable import AuthFoundationTestCommon
 @testable import AuthFoundation
 
 final class CredentialInternalTests: XCTestCase {

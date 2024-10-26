@@ -11,9 +11,10 @@
 //
 
 import Foundation
+import JWT
 
 extension Token {
-    public convenience init(from decoder: Decoder) throws {
+    public convenience init(from decoder: any Decoder) throws {
         var id: String = UUID().uuidString
         var issuedAt: Date = Date.nowCoordinated
         var context: Context?
@@ -45,7 +46,7 @@ extension Token {
                 issuedAt = try container.decode(Date.self, forKey: .issuedAt)
             }
 
-            var payload: [TokenClaim: Any] = [
+            var payload: [TokenClaim: any Sendable] = [
                 .accessToken: try container.decode(String.self, forKey: .accessToken),
                 .tokenType: try container.decode(String.self, forKey: .tokenType),
                 .expiresIn: try container.decode(TimeInterval.self, forKey: .expiresIn),
@@ -67,7 +68,7 @@ extension Token {
                 payload[.deviceSecret] = deviceSecret
             }
 
-            json = .init(try JSON(payload.reduce(into: [String: Any]()) { result, item in
+            json = .init(try JSON(payload.reduce(into: [String: any Sendable]()) { result, item in
                 result[item.key.rawValue] = item.value
             }))
         }
@@ -116,7 +117,7 @@ extension Token {
                      deviceSecret: String?,
                      context: Context) throws
     {
-        var payload: [TokenClaim: Any] = [
+        var payload: [TokenClaim: any Sendable] = [
             .accessToken: accessToken,
             .tokenType: tokenType,
             .expiresIn: expiresIn,
@@ -138,7 +139,7 @@ extension Token {
             payload[.deviceSecret] = deviceSecret
         }
         
-        let json = try JSON(payload.reduce(into: [String: Any]()) { result, item in
+        let json = try JSON(payload.reduce(into: [String: any Sendable]()) { result, item in
             result[item.key.rawValue] = item.value
         })
 

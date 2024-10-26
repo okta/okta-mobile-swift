@@ -14,6 +14,9 @@ import XCTest
 @testable import TestCommon
 @testable import AuthFoundation
 @testable import OktaDirectAuth
+@testable import AuthFoundationTestCommon
+@testable import APIClientTestCommon
+@testable import JWT
 
 final class DirectAuth2FATests: XCTestCase {
     let issuer = URL(string: "https://example.com/oauth2/default")!

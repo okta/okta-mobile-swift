@@ -56,44 +56,34 @@ final class UserCoordinatorTests: XCTestCase {
         coordinator = nil
     }
     
-    func testDefaultCredentialViaToken() throws {
-        try storage.add(token: token, metadata: nil, security: [])
+    func testDefaultCredentialViaTokenStorage() throws {
+        try storage.add(token: token, security: [])
 
         XCTAssertEqual(storage.allIDs.count, 1)
+        XCTAssertNil(coordinator.default)
         
-        let credential = try XCTUnwrap(coordinator.default)
+        let credential = try XCTUnwrap(try coordinator.with(id: token.id, prompt: nil, authenticationContext: nil))
+        coordinator.default = credential
+        
         XCTAssertEqual(credential.token, token)
+        XCTAssertEqual(storage.defaultTokenID, token.id)
+        
+        XCTAssertEqual(storage.allIDs.count, 1)
         
         coordinator.default = nil
+        
         XCTAssertNil(coordinator.default)
         XCTAssertNil(storage.defaultTokenID)
         XCTAssertEqual(storage.allIDs.count, 1)
         
         XCTAssertEqual(coordinator.allIDs, [token.id])
-        XCTAssertEqual(try coordinator.with(id: token.id, prompt: nil, authenticationContext: nil), credential)
     }
     
     func testImplicitCredentialForToken() throws {
-        let credential = try coordinator.store(token: token, tags: [:], security: [])
+        let credential = try coordinator.store(token: token, security: [])
         
         XCTAssertEqual(storage.allIDs, [token.id])
         XCTAssertEqual(storage.defaultTokenID, token.id)
         XCTAssertEqual(coordinator.default, credential)
-    }
-    
-    func testNotifications() throws {
-        let oldCredential = coordinator.default
-        
-        let recorder = NotificationRecorder(observing: [.defaultCredentialChanged])
-        
-        let credential = try coordinator.store(token: token, tags: [:], security: [])
-        XCTAssertEqual(recorder.notifications.count, 1)
-        XCTAssertEqual(recorder.notifications.first?.object as? Credential, credential)
-        XCTAssertNotEqual(oldCredential, credential)
-        
-        recorder.reset()
-        coordinator.default = nil
-        XCTAssertEqual(recorder.notifications.count, 1)
-        XCTAssertNil(recorder.notifications.first?.object)
     }
 }

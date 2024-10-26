@@ -14,6 +14,9 @@ import XCTest
 @testable import TestCommon
 @testable import AuthFoundation
 @testable import OktaOAuth2
+@testable import APIClientTestCommon
+@testable import AuthFoundationTestCommon
+@testable import JWT
 
 class AuthorizationCodeFlowDelegateRecorder: AuthorizationCodeFlowDelegate {
     var token: Token?
@@ -64,13 +67,13 @@ final class AuthorizationCodeFlowSuccessTests: XCTestCase {
         Token.accessTokenValidator = MockTokenHashValidator()
         
         urlSession.expect("https://example.com/oauth2/default/.well-known/openid-configuration",
-                          data: try data(from: .module, for: "openid-configuration", in: "MockResponses"),
+                          data: try data(filename: "openid-configuration", matching: "OktaOAuth2Tests"),
                           contentType: "application/json")
         urlSession.expect("https://example.okta.com/oauth2/v1/token",
-                          data: try data(from: .module, for: "token", in: "MockResponses"),
+                          data: try data(filename: "token", matching: "OktaOAuth2Tests"),
                           contentType: "application/json")
         urlSession.expect("https://example.okta.com/oauth2/v1/keys?client_id=clientId",
-                          data: try data(from: .module, for: "keys", in: "MockResponses"),
+                          data: try data(filename: "keys", matching: "OktaOAuth2Tests"),
                           contentType: "application/json")
 
         flow = client.authorizationCodeFlow(redirectUri: redirectUri,
@@ -93,9 +96,9 @@ final class AuthorizationCodeFlowSuccessTests: XCTestCase {
         
         // Begin
         let context = AuthorizationCodeFlow.Context(state: "ABC123", maxAge: nil, nonce: "nonce_string", pkce: nil)
-        var expect = expectation(description: "network request")
+        let expect_1 = expectation(description: "network request")
         flow.start(with: context, additionalParameters: ["foo": "bar"]) { _ in
-            expect.fulfill()
+            expect_1.fulfill()
         }
         waitForExpectations(timeout: 1.0) { error in
             XCTAssertNil(error)
@@ -110,9 +113,9 @@ final class AuthorizationCodeFlowSuccessTests: XCTestCase {
         XCTAssertEqual(flow.context?.authenticationURL, delegate.url)
         
         // Exchange code
-        expect = expectation(description: "network request")
+        let expect_2 = expectation(description: "network request")
         try flow.resume(with: URL(string: "com.example:/callback?code=ABCEasyAs123&state=ABC123")!) { _ in
-            expect.fulfill()
+            expect_2.fulfill()
         }
         waitForExpectations(timeout: 1.0) { error in
             XCTAssertNil(error)
@@ -131,8 +134,8 @@ final class AuthorizationCodeFlowSuccessTests: XCTestCase {
 
         // Begin
         let context = AuthorizationCodeFlow.Context(state: "ABC123", maxAge: nil, nonce: "nonce_string", pkce: nil)
-        var wait = expectation(description: "resume")
-        var url: URL?
+        let wait_1 = expectation(description: "resume")
+        nonisolated(unsafe) var url: URL?
         flow.start(with: context, additionalParameters: ["foo": "bar"]) { result in
             switch result {
             case .success(let redirectUrl):
@@ -140,7 +143,7 @@ final class AuthorizationCodeFlowSuccessTests: XCTestCase {
             case .failure(let error):
                 XCTAssertNil(error)
             }
-            wait.fulfill()
+            wait_1.fulfill()
         }
         waitForExpectations(timeout: 1) { error in
             XCTAssertNil(error)
@@ -154,8 +157,8 @@ final class AuthorizationCodeFlowSuccessTests: XCTestCase {
                        "https://example.okta.com/oauth2/v1/authorize?additional=param&client_id=clientId&foo=bar&nonce=nonce_string&redirect_uri=com.example:/callback&response_type=code&scope=openid%20profile&state=ABC123")
 
         // Exchange code
-        var token: Token?
-        wait = expectation(description: "resume")
+        nonisolated(unsafe) var token: Token?
+        let wait_2 = expectation(description: "resume")
         try flow.resume(with: URL(string: "com.example:/callback?code=ABCEasyAs123&state=ABC123")!) { result in
             switch result {
             case .success(let resultToken):
@@ -163,7 +166,7 @@ final class AuthorizationCodeFlowSuccessTests: XCTestCase {
             case .failure(let error):
                 XCTAssertNil(error)
             }
-            wait.fulfill()
+            wait_2.fulfill()
         }
         waitForExpectations(timeout: 1) { error in
             XCTAssertNil(error)

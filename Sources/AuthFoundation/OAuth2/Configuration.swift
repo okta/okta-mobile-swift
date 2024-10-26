@@ -11,12 +11,13 @@
 //
 
 import Foundation
+import APIClient
 
 extension OAuth2Client {
     /// The configuration for an ``OAuth2Client``.
     ///
     /// This defines the basic information necessary for interacting with an OAuth2 authorization server.
-    public final class Configuration: Codable, Equatable, Hashable, APIClientConfiguration {
+    public final class Configuration: Codable, Equatable, Hashable, Sendable, APIClientConfiguration {
         /// The base URL for interactions with this OAuth2 server.
         public let baseURL: URL
         
@@ -77,7 +78,7 @@ extension OAuth2Client {
             self.init(baseURL: url, clientId: clientId, scopes: scopes, authentication: authentication)
         }
         
-        public init(from decoder: Decoder) throws {
+        public init(from decoder: any Decoder) throws {
             let container = try decoder.container(keyedBy: CodingKeys.self)
             self.baseURL = try container.decode(URL.self, forKey: .baseURL)
             self.discoveryURL = try container.decode(URL.self, forKey: .discoveryURL)

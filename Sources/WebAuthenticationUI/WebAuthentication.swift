@@ -14,6 +14,10 @@
 
 import Foundation
 import OktaOAuth2
+import OktaUtilities
+import OktaConcurrency
+import OktaClientMacros
+import APIClient
 
 #if canImport(UIKit) || canImport(AppKit)
 
@@ -30,13 +34,13 @@ import FoundationNetworking
 public enum WebAuthenticationError: Error {
     case noCompatibleAuthenticationProviders
     case cannotComposeAuthenticationURL
-    case authenticationProviderError(_ error: Error)
+    case authenticationProviderError(_ error: any Error)
     case serverError(_ error: OAuth2ServerError)
     case invalidRedirectScheme(_ scheme: String?)
     case userCancelledLogin
     case missingIdToken
     case oauth2(error: OAuth2Error)
-    case generic(error: Error)
+    case generic(error: any Error)
     case genericError(message: String)
 }
 
@@ -53,7 +57,8 @@ public enum WebAuthenticationError: Error {
 /// To customize the authentication flow, please read more about the underlying OAuth2 client within the OktaOAuth2 library, and how that relates to the ``signInFlow`` or ``signOutFlow`` properties.
 ///
 ///  > Important: If your application targets iOS 9.x-10.x, you should add the redirect URI for your client configuration to your app's supported URL schemes.  This is because users on devices older than iOS 11 will be prompted to sign in using `SFSafariViewController`, which does not allow your application to detect the final token redirect.
-public class WebAuthentication {
+@HasLock
+public final class WebAuthentication: Sendable {
     #if os(macOS)
     public typealias WindowAnchor = NSWindow
     #else
@@ -61,7 +66,7 @@ public class WebAuthentication {
     #endif
     
     /// Describes available options for customizing the sign on process.
-    public enum Option {
+    public enum Option: Sendable {
         /// The username to pre-populate if prompting for authentication.
         case login(hint: String)
         
@@ -93,7 +98,7 @@ public class WebAuthentication {
         /// Defines how a user will be prompted to sign in.
         ///
         /// This is used with the ``WebAuthentication/Option/prompt(_:)`` enumeration. For more information, see the [API documentation for this parameter](https://developer.okta.com/docs/reference/api/oidc/#parameter-details).
-        public enum Prompt: String {
+        public enum Prompt: String, Sendable {
             /// If an Okta session already exists, the user is silently authenticated. Otherwise, the user is prompted to authenticate.
             case none
             
@@ -118,14 +123,18 @@ public class WebAuthentication {
     /// For more information on how to configure your client, see <doc:ConfiguringYourClient> for more details.
     public private(set) static var shared: WebAuthentication? {
         set {
-            _shared = newValue
+            sharedLock.withLock {
+                _shared = newValue
+            }
         }
         get {
-            guard let result = _shared else {
-                _shared = try? WebAuthentication()
-                return _shared
+            sharedLock.withLock {
+                guard let result = _shared else {
+                    _shared = try? WebAuthentication()
+                    return _shared
+                }
+                return result
             }
-            return result
         }
     }
     
@@ -135,18 +144,9 @@ public class WebAuthentication {
     /// The underlying OAuth2 flow that implements the session logout behaviour.
     public let signOutFlow: SessionLogoutFlow?
     
-    /// Context information about the current authorization code flow.
-    ///
-    /// This represents the state and other challenge data necessary to resume the authentication flow.
-    ///
-    /// > Warning: This is deprecated, and will be removed in a future release.
-    @available(*, deprecated, renamed: "signInFlow.context")
-    public var context: AuthorizationCodeFlow.Context? {
-        signInFlow.context
-    }
-    
     /// Indicates whether or not the developer prefers an ephemeral browser session, or if the user's browser state should be shared with the system browser.
-    public var ephemeralSession: Bool = false
+    @Synchronized(value: false)
+    public var ephemeralSession: Bool
     
     /// Starts sign-in using the configured client.
     /// - Parameters:
@@ -155,21 +155,23 @@ public class WebAuthentication {
     ///   - completion: Completion block that will be invoked when authentication finishes.
     public final func signIn(from window: WindowAnchor?,
                              options: [Option]? = nil,
-                             completion: @escaping (Result<Token, WebAuthenticationError>) -> Void)
+                             completion: @Sendable @escaping (Result<Token, WebAuthenticationError>) -> Void)
     {
         if provider != nil {
             cancel()
         }
         
-        let provider = createWebAuthenticationProvider(loginFlow: signInFlow,
-                                                       logoutFlow: signOutFlow,
-                                                       from: window,
-                                                       delegate: self)
-        self.completionBlock = completion
-        self.provider = provider
-
-        provider?.start(context: options?.context,
-                        additionalParameters: options?.additionalParameters)
+        DispatchQueue.main.async {
+            self.completionBlock = completion
+            self.provider = Self.authorizationServicesProviderFactory.createWebAuthenticationProvider(
+                loginFlow: self.signInFlow,
+                logoutFlow: self.signOutFlow,
+                from: window,
+                delegate: self)
+            
+            self.provider?.start(context: options?.context,
+                                 additionalParameters: options?.additionalParameters)
+        }
     }
     
     /// Starts log-out using the credential.
@@ -181,7 +183,7 @@ public class WebAuthentication {
     public final func signOut(from window: WindowAnchor? = nil,
                               credential: Credential? = .default,
                               options: [Option]? = nil,
-                              completion: @escaping (Result<Void, WebAuthenticationError>) -> Void)
+                              completion: @Sendable @escaping (Result<Void, WebAuthenticationError>) -> Void)
     {
         guard let token = credential?.token else {
             completion(.failure(.missingIdToken))
@@ -200,7 +202,7 @@ public class WebAuthentication {
     public final func signOut(from window: WindowAnchor? = nil,
                               token: Token,
                               options: [Option]? = nil,
-                              completion: @escaping (Result<Void, WebAuthenticationError>) -> Void)
+                              completion: @Sendable @escaping (Result<Void, WebAuthenticationError>) -> Void)
     {
         guard let idToken = token.idToken else {
             completion(.failure(.missingIdToken))
@@ -219,26 +221,25 @@ public class WebAuthentication {
     public final func signOut(from window: WindowAnchor? = nil,
                               token: String,
                               options: [Option]? = nil,
-                              completion: @escaping (Result<Void, WebAuthenticationError>) -> Void)
+                              completion: @Sendable @escaping (Result<Void, WebAuthenticationError>) -> Void)
     {
-        var provider = provider
-        
         if provider != nil {
             cancel()
         }
         
-        provider = createWebAuthenticationProvider(loginFlow: signInFlow,
-                                                   logoutFlow: signOutFlow,
-                                                   from: window,
-                                                   delegate: self)
-        
-        self.logoutCompletionBlock = completion
-        self.provider = provider
-        
-        let context = SessionLogoutFlow.Context(idToken: token,
-                                                state: options?.state)
-        provider?.logout(context: context,
-                         additionalParameters: options?.additionalParameters)
+        DispatchQueue.main.async {
+            self.logoutCompletionBlock = completion
+            self.provider = Self.authorizationServicesProviderFactory.createWebAuthenticationProvider(
+                loginFlow: self.signInFlow,
+                logoutFlow: self.signOutFlow,
+                from: window,
+                delegate: self)
+            
+            let context = SessionLogoutFlow.Context(idToken: token,
+                                                    state: options?.state)
+            self.provider?.logout(context: context,
+                                  additionalParameters: options?.additionalParameters)
+        }
     }
     
     /// Cancels the authentication session.
@@ -276,7 +277,9 @@ public class WebAuthentication {
         }
         
         try signInFlow.resume(with: url) { _ in
-            self.provider = nil
+            DispatchQueue.main.async {
+                self.provider = nil
+            }
         }
         
         self.provider?.cancel()
@@ -306,7 +309,7 @@ public class WebAuthentication {
                             scopes: String,
                             redirectUri: URL,
                             logoutRedirectUri: URL? = nil,
-                            additionalParameters: [String: APIRequestArgument]? = nil)
+                            additionalParameters: [String: any APIRequestArgument]? = nil)
     {
         let client = OAuth2Client(baseURL: issuer,
                                   clientId: clientId,
@@ -340,17 +343,6 @@ public class WebAuthentication {
                   additionalParameters: config.additionalParameters)
     }
     
-    func createWebAuthenticationProvider(loginFlow: AuthorizationCodeFlow,
-                                         logoutFlow: SessionLogoutFlow?,
-                                         from window: WebAuthentication.WindowAnchor?,
-                                         delegate: WebAuthenticationProviderDelegate) -> WebAuthenticationProvider?
-    {
-        AuthenticationServicesProvider(loginFlow: loginFlow,
-                                       logoutFlow: logoutFlow,
-                                       from: window,
-                                       delegate: delegate)
-    }
-    
     /// Initializes a web authentication session using the supplied AuthorizationCodeFlow and optional context.
     /// - Parameters:
     ///   - flow: Authorization code flow instance for this client.
@@ -376,11 +368,14 @@ public class WebAuthentication {
         WebAuthentication.shared = self
     }
     
-    // MARK: Internal members
-    private static var _shared: WebAuthentication?
-    var provider: WebAuthenticationProvider?
-    var completionBlock: ((Result<Token, WebAuthenticationError>) -> Void)?
-    var logoutCompletionBlock: ((Result<Void, WebAuthenticationError>) -> Void)?
+    @Synchronized
+    var provider: (any WebAuthenticationProvider)?
+
+    @Synchronized
+    var completionBlock: (@Sendable (Result<Token, WebAuthenticationError>) -> Void)?
+
+    @Synchronized
+    var logoutCompletionBlock: (@Sendable (Result<Void, WebAuthenticationError>) -> Void)?
 }
 
 @available(iOS 13.0, tvOS 13.0, macOS 10.15, watchOS 6, *)
@@ -440,3 +435,6 @@ extension WebAuthentication {
     }
 }
 #endif
+
+fileprivate let sharedLock = Lock()
+nonisolated(unsafe) fileprivate var _shared: WebAuthentication?

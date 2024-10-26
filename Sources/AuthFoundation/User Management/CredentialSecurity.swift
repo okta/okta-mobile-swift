@@ -16,6 +16,10 @@ import Foundation
 import LocalAuthentication
 #endif
 
+#if canImport(Keychain)
+import Keychain
+#endif
+
 extension Credential {
     /// Defines the security options that are applicable to individual credentials.
     ///
@@ -41,14 +45,6 @@ extension Credential {
         /// Defines a custom LocalAuthentication context for interactions with this credential, for systems that support it.
         case context(_ obj: LAContext)
         #endif
-        
-        /// The standard set of security settings to use when creating or getting credentials.
-        ///
-        /// If you wish to change the default security threshold for Keychain items, you can assign a new value here. Additionally, if a ``context(_:)`` value is assigned to the ``standard`` property, that context will be used when fetching credentials unless otherwise specified.
-        public static var standard: [Security] = [.accessibility(.afterFirstUnlockThisDeviceOnly)]
-        
-        /// Determines whether or not the ``Credential/default`` setting is synchronized across a user's devices using iCloud Keychain.
-        public static var isDefaultSynchronizable: Bool = false
         #else
         public static var standard: [Security] = []
         #endif

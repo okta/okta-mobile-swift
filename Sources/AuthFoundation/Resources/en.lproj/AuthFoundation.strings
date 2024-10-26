@@ -22,8 +22,9 @@
 "signature_invalid_description" = "Could not verify the token's signature.";
 "missing_location_header_description" = "Missing location header for token redirect.";
 "missing_openid_configuration_attribute" = "The OpenID configuration attribute \"%@\" is missing.";
-"multiple_oauth2_errors" = "Multiple errors occurred: %@";
-"cannot_revoke_token_type" = "Cannot revoke token type.";
+"revoke_error" = "Could not revoke %@:\n%@";
+"multiple_revoke_errors" = "Multiple tokens could not be revoked: %@";
+"missing_revokable_token_type" = "The token doesn't contain a revokable %@ token.";
 "missing_oauth2_response_key" = "Missing the \"%@\" required response key.";
 
 /* JWTError */
@@ -45,20 +46,6 @@
 "jwt_unsupported_algorithm" = "Signing algorithm \"%@\" is unsupported.";
 "jwt_cannot_generate_hash" = "Cannot generate hash signature.";
 "jwt_exceeds_max_age" = "The token exceeds the supplied maximum age.";
-
-/* KeychainError */
-"keychain_cannot_get" = "There was a failure getting a keychain item (%d).";
-"keychain_cannot_list" = "There was a failure getting a list of keychain items (%d).";
-"keychain_cannot_save" = "There was a failure saving a keychain item (%d).";
-"keychain_cannot_update" = "There was a failure updating a keychain item (%d).";
-"keychain_cannot_delete" = "There was a failure deleting a keychain item (%d).";
-"keychain_not_found" = "Could not find a keychain item.";
-"keychain_invalid_format" = "The returned keychain item is in an invalid format.";
-"keychain_invalid_accessibility_option" = "The keychain item has an invalid accessibility option set.";
-"keychain_missing_account" = "The keychain item is missing an account name.";
-"keychain_missing_value_data" = "The keychain item is missing its value data.";
-"keychain_missing_attribute" = "The keychain item is missing required attributes.";
-"keychain_access_control_invalid" = "The access control settings for this keychain item are invalid: %@ (code %d).";
 
 /* OAuth2Client.PropertyListConfigurationError */
 "default_property_list_not_found_description" = "The default Okta.plist configuration file was not found.";

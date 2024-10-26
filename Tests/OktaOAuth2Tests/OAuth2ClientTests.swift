@@ -2,6 +2,9 @@ import XCTest
 @testable import TestCommon
 @testable import AuthFoundation
 @testable import OktaOAuth2
+@testable import APIClientTestCommon
+@testable import AuthFoundationTestCommon
+@testable import JWT
 
 final class OAuth2ClientTests: XCTestCase {
     let issuer = URL(string: "https://example.com/oauth2/default")!
@@ -50,13 +53,13 @@ final class OAuth2ClientTests: XCTestCase {
                           data: openIdData,
                           contentType: "application/json")
         urlSession.expect("https://example.okta.com/oauth2/v1/keys?client_id=theClientId",
-                          data: try data(from: .module, for: "keys", in: "MockResponses"),
+                          data: try data(filename: "keys", matching: "OktaOAuth2Tests"),
                           contentType: "application/json")
         urlSession.expect("https://example.okta.com/oauth2/v1/token",
-                          data: try data(from: .module, for: "token", in: "MockResponses"),
+                          data: try data(filename: "token", matching: "OktaOAuth2Tests"),
                           contentType: "application/json")
         
-        var token: Token?
+        nonisolated(unsafe) var token: Token?
         let expect = expectation(description: "network request")
         client.exchange(token: request) { result in
             guard case let .success(apiResponse) = result else {
@@ -100,10 +103,10 @@ final class OAuth2ClientTests: XCTestCase {
                           data: openIdData,
                           contentType: "application/json")
         urlSession.expect("https://example.okta.com/oauth2/v1/keys?client_id=theClientId",
-                          data: try data(from: .module, for: "keys", in: "MockResponses"),
+                          data: try data(filename: "keys"),
                           contentType: "application/json")
         urlSession.expect("https://example.okta.com/oauth2/v1/token",
-                          data: try data(from: .module, for: "token", in: "MockResponses"),
+                          data: try data(filename: "token"),
                           contentType: "application/json")
 
         let expect = expectation(description: "network request")

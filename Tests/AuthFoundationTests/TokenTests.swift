@@ -11,14 +11,18 @@
 //
 
 import XCTest
+import APIClient
+@testable import JWT
 @testable import AuthFoundation
 @testable import TestCommon
+@testable import APIClientTestCommon
+@testable import AuthFoundationTestCommon
 
 fileprivate struct MockTokenRequest: OAuth2TokenRequest {
-    let openIdConfiguration: AuthFoundation.OpenIdConfiguration
+    let openIdConfiguration: OpenIdConfiguration
     let clientId: String
     let url: URL
-    var bodyParameters: [String: APIRequestArgument]?
+    var bodyParameters: [String: any APIRequestArgument]?
 }
 
 final class TokenTests: XCTestCase {
@@ -34,9 +38,7 @@ final class TokenTests: XCTestCase {
         
         openIdConfiguration = try OpenIdConfiguration.jsonDecoder.decode(
             OpenIdConfiguration.self,
-            from: try data(from: .module,
-                           for: "openid-configuration",
-                           in: "MockResponses"))
+            from: try data(filename: "openid-configuration"))
     }
     
     override func tearDownWithError() throws {
@@ -82,7 +84,7 @@ final class TokenTests: XCTestCase {
          }
         """)
         
-        let decoder = defaultJSONDecoder
+        let decoder = JSONDecoder.apiClientDecoder
         decoder.userInfo = [.apiClientConfiguration: configuration]
         
         let token = try decoder.decode(Token.self, from: data)
@@ -119,30 +121,26 @@ final class TokenTests: XCTestCase {
                                         "acr_values": "urn:okta:app:mfa:attestation"
                                        ])
         
-        let decoder = defaultJSONDecoder
+        let decoder = JSONDecoder.apiClientDecoder
         decoder.userInfo = [
             .apiClientConfiguration: configuration,
             .request: request,
         ]
         
         let token = try decoder.decode(Token.self,
-                                       from: try data(from: .module,
-                                                      for: "token-mfa_attestation",
-                                                      in: "MockResponses"))
+                                       from: try data(filename: "token-mfa_attestation"))
         XCTAssertTrue(token.accessToken.isEmpty)
     }
     
 
     func testMFAAttestationTokenFailed() throws {
-        let decoder = defaultJSONDecoder
+        let decoder = JSONDecoder.apiClientDecoder
         decoder.userInfo = [
             .apiClientConfiguration: configuration,
         ]
         
         XCTAssertThrowsError(try decoder.decode(Token.self,
-                                                from: try data(from: .module,
-                                                               for: "token-no_access_token",
-                                                               in: "MockResponses")))
+                                                from: try data(filename: "token-no_access_token")))
     }
     
     func testTokenEquality() throws {
@@ -162,7 +160,7 @@ final class TokenTests: XCTestCase {
     func testTokenFromRefreshToken() throws {
         let client = try mockClient()
         
-        var tokenResult: Token?
+        nonisolated(unsafe) var tokenResult: Token?
         let wait = expectation(description: "Token exchange")
         Token.from(refreshToken: "the_refresh_token", using: client) { result in
             switch result {
@@ -256,10 +254,10 @@ final class TokenTests: XCTestCase {
     func mockClient() throws -> OAuth2Client {
         let urlSession = URLSessionMock()
         urlSession.expect("https://example.com/.well-known/openid-configuration",
-                          data: try data(from: .module, for: "openid-configuration", in: "MockResponses"),
+                          data: try data(filename: "openid-configuration"),
                           contentType: "application/json")
         urlSession.expect("https://example.com/oauth2/v1/keys?client_id=clientId",
-                          data: try data(from: .module, for: "keys", in: "MockResponses"),
+                          data: try data(filename: "keys"),
                           contentType: "application/json")
         urlSession.expect("https://example.com/oauth2/v1/token",
                           data: data(for: """

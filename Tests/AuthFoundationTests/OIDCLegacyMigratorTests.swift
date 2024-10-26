@@ -11,8 +11,12 @@
 //
 
 import XCTest
+@testable import OktaUtilities
 @testable import TestCommon
 @testable import AuthFoundation
+@testable import AuthFoundationTestCommon
+@testable import Keychain
+@testable import KeychainTestCommon
 
 #if os(iOS) || os(macOS) || os(tvOS) || os(watchOS) || os(visionOS)
 final class OIDCLegacyMigratorTests: XCTestCase {
@@ -36,8 +40,7 @@ final class OIDCLegacyMigratorTests: XCTestCase {
 
         SDKVersion.Migration.resetMigrators()
         
-        Credential.tokenStorage = CredentialCoordinatorImpl.defaultTokenStorage()
-        Credential.credentialDataSource = CredentialCoordinatorImpl.defaultCredentialDataSource()
+        Credential.resetToDefault()
     }
 
     func testRegister() throws {
@@ -108,7 +111,7 @@ final class OIDCLegacyMigratorTests: XCTestCase {
         let migrator = LegacyOIDC(clientId: "clientId")
         
         // Note: This mock file was generated manually using the okta-oidc-ios package, archived, and base64-encoded.
-        let base64Data = try data(from: .module, for: "MockLegacyOIDCKeychainItem.data", in: "MockResponses")
+        let base64Data = try data(filename: "MockLegacyOIDCKeychainItem.data")
         let base64String = try XCTUnwrap(String(data: base64Data, encoding: .utf8))
             .trimmingCharacters(in: .newlines)
         let oidcData = try XCTUnwrap(Data(base64Encoded: base64String))

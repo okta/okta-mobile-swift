@@ -12,25 +12,32 @@
 
 import Foundation
 import AuthFoundation
+import OktaUtilities
+import OktaConcurrency
+import OktaClientMacros
 
 /// An authentication flow class that implements the Resource Owner Flow exchange.
 ///
 /// This simple authentication flow permits a suer to authenticate using a simple username and password. As such, the configuration is straightforward.
 ///
 /// > Important: Resource Owner authentication does not support MFA or other more secure authentication models, and is not recommended for production applications. Please use the DirectAuth SDK's DirectAuthenticationFlow class instead.
-public class ResourceOwnerFlow: AuthenticationFlow {
+@HasLock
+public final class ResourceOwnerFlow: Sendable, AuthenticationFlow, UsesDelegateCollection {
+    public typealias Delegate = AuthenticationDelegate
+
     /// The OAuth2Client this authentication flow will use.
     public let client: OAuth2Client
     
     /// Indicates whether or not this flow is currently in the process of authenticating a user.
     /// ``ResourceOwnerFlow/init(issuer:clientId:scopes:)``
-    public private(set) var isAuthenticating: Bool = false {
+    @Synchronized(value: false)
+    public private(set) var isAuthenticating: Bool {
         didSet {
-            guard oldValue != isAuthenticating else {
+            guard oldValue != _isAuthenticating else {
                 return
             }
             
-            if isAuthenticating {
+            if _isAuthenticating {
                 delegateCollection.invoke { $0.authenticationStarted(flow: self) }
             } else {
                 delegateCollection.invoke { $0.authenticationFinished(flow: self) }
@@ -38,6 +45,9 @@ public class ResourceOwnerFlow: AuthenticationFlow {
         }
     }
     
+    /// The collection of delegates conforming to ``AuthenticationDelegate``.
+    public let delegateCollection = DelegateCollection<any Delegate>()
+
     /// Convenience initializer to construct an authentication flow from variables.
     /// - Parameters:
     ///   - issuer: The issuer URL.
@@ -83,7 +93,7 @@ public class ResourceOwnerFlow: AuthenticationFlow {
     ///   - username: Username
     ///   - password: Password
     ///   - completion: Completion invoked when a response is received.
-    public func start(username: String, password: String, completion: @escaping (Result<Token, OAuth2Error>) -> Void) {
+    public func start(username: String, password: String, completion: @Sendable @escaping (Result<Token, OAuth2Error>) -> Void) {
         isAuthenticating = true
 
         client.openIdConfiguration { result in
@@ -118,9 +128,6 @@ public class ResourceOwnerFlow: AuthenticationFlow {
     public func reset() {
         isAuthenticating = false
     }
-
-    // MARK: Private properties / methods
-    public let delegateCollection = DelegateCollection<AuthenticationDelegate>()
 }
 
 @available(iOS 13.0, tvOS 13.0, macOS 10.15, watchOS 6, *)
@@ -135,10 +142,6 @@ extension ResourceOwnerFlow {
             }
         }
     }
-}
-
-extension ResourceOwnerFlow: UsesDelegateCollection {
-    public typealias Delegate = AuthenticationDelegate
 }
 
 extension ResourceOwnerFlow: OAuth2ClientDelegate {

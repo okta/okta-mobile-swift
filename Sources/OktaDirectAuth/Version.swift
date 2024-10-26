@@ -11,6 +11,7 @@
 //
 
 @_exported import AuthFoundation
+import OktaUtilities
 
 // swiftlint:disable identifier_name
 @_documentation(visibility: private)

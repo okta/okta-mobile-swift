@@ -11,9 +11,10 @@
 //
 
 import Foundation
+import APIClient
 
 extension DirectAuthenticationFlowError {
-    init(_ error: Error) {
+    init(_ error: any Error) {
         if let error = error as? DirectAuthenticationFlowError {
             self = error
         } else if let error = error as? OAuth2Error {

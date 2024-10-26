@@ -1,0 +1,12 @@
+/* APIClientError */
+"invalid_url_description" = "Could not create an invalid URL.";
+"missing_response_description" = "No response received from the server.";
+"invalid_response_description" = "Did not receive an HTTP response.";
+"cannot_parse_response_description" = "Cannot parse server response: %@";
+"invalid_request_data_description" = "Cannot send invalid request data to the server.";
+"missing_refresh_settings_description" = "Cannot refresh a token since it is missing refresh information.";
+"unsupported_content_type_description" = "Request does not support %@ content.";
+"server_error_description" = "Received an error from the server: %@";
+"status_code_description" = "Received HTTP %d response code.";
+"unknown_description" = "An unknown error was encountered.";
+"validation_error" = "Could not validate the received token.";

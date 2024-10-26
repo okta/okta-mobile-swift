@@ -14,6 +14,9 @@ import XCTest
 @testable import TestCommon
 @testable import AuthFoundation
 @testable import OktaOAuth2
+@testable import APIClientTestCommon
+@testable import AuthFoundationTestCommon
+@testable import JWT
 
 final class DeviceAuthorizationFlowSuccessTests: XCTestCase {
     let issuer = URL(string: "https://example.com")!
@@ -31,16 +34,16 @@ final class DeviceAuthorizationFlowSuccessTests: XCTestCase {
         Token.accessTokenValidator = MockTokenHashValidator()
 
         urlSession.expect("https://example.com/.well-known/openid-configuration",
-                          data: try data(from: .module, for: "openid-configuration", in: "MockResponses"),
+                          data: try data(filename: "openid-configuration", matching: "OktaOAuth2Tests"),
                           contentType: "application/json")
         urlSession.expect("https://example.okta.com/oauth2/v1/device/authorize",
-                          data: try data(from: .module, for: "device-authorize", in: "MockResponses"),
+                          data: try data(filename: "device-authorize"),
                           contentType: "application/json")
         urlSession.expect("https://example.okta.com/oauth2/v1/token",
-                          data: try data(from: .module, for: "token", in: "MockResponses"),
+                          data: try data(filename: "token", matching: "OktaOAuth2Tests"),
                           contentType: "application/json")
         urlSession.expect("https://example.okta.com/oauth2/v1/keys?client_id=clientId",
-                          data: try data(from: .module, for: "keys", in: "MockResponses"),
+                          data: try data(filename: "keys", matching: "OktaOAuth2Tests"),
                           contentType: "application/json")
         flow = client.deviceAuthorizationFlow()
     }
@@ -60,9 +63,9 @@ final class DeviceAuthorizationFlowSuccessTests: XCTestCase {
         XCTAssertFalse(delegate.started)
         
         // Begin
-        var expect = expectation(description: "resume")
+        let expect_1 = expectation(description: "resume")
         flow.start() { _ in
-            expect.fulfill()
+            expect_1.fulfill()
         }
         waitForExpectations(timeout: 1) { error in
             XCTAssertNil(error)
@@ -77,9 +80,9 @@ final class DeviceAuthorizationFlowSuccessTests: XCTestCase {
         let context = try XCTUnwrap(delegate.context)
 
         // Exchange code
-        expect = expectation(description: "Wait for timer")
+        let expect_2 = expectation(description: "Wait for timer")
         flow.resume(with: context) { _ in
-            expect.fulfill()
+            expect_2.fulfill()
         }
         waitForExpectations(timeout: 5) { error in
             XCTAssertNil(error)
@@ -96,8 +99,8 @@ final class DeviceAuthorizationFlowSuccessTests: XCTestCase {
         XCTAssertFalse(flow.isAuthenticating)
 
         // Begin
-        var wait = expectation(description: "resume")
-        var context: DeviceAuthorizationFlow.Context?
+        let wait_1 = expectation(description: "resume")
+        nonisolated(unsafe) var context: DeviceAuthorizationFlow.Context?
         flow.start { result in
             switch result {
             case .success(let response):
@@ -105,7 +108,7 @@ final class DeviceAuthorizationFlowSuccessTests: XCTestCase {
             case .failure(let error):
                 XCTAssertNil(error)
             }
-            wait.fulfill()
+            wait_1.fulfill()
         }
         waitForExpectations(timeout: 1) { error in
             XCTAssertNil(error)
@@ -119,8 +122,8 @@ final class DeviceAuthorizationFlowSuccessTests: XCTestCase {
         XCTAssertEqual(flow.context?.verificationUri.absoluteString, "https://example.okta.com/activate")
 
         // Exchange code
-        var token: Token?
-        wait = expectation(description: "resume")
+        nonisolated(unsafe) var token: Token?
+        let wait_2 = expectation(description: "resume")
         flow.resume(with: context!) { result in
             switch result {
             case .success(let resultToken):
@@ -128,7 +131,7 @@ final class DeviceAuthorizationFlowSuccessTests: XCTestCase {
             case .failure(let error):
                 XCTAssertNil(error)
             }
-            wait.fulfill()
+            wait_2.fulfill()
         }
         waitForExpectations(timeout: 2) { error in
             XCTAssertNil(error)
@@ -170,7 +173,7 @@ final class DeviceAuthorizationFlowSuccessTests: XCTestCase {
                 "expires_in": 600
             }
         """)
-        let context = try defaultJSONDecoder.decode(DeviceAuthorizationFlow.Context.self, from: data)
+        let context = try JSONDecoder.apiClientDecoder.decode(DeviceAuthorizationFlow.Context.self, from: data)
 
         XCTAssertEqual(context.deviceCode, "1a521d9f-0922-4e6d-8db9-8b654297435a")
         XCTAssertEqual(context.userCode, "GDLMZQCT")

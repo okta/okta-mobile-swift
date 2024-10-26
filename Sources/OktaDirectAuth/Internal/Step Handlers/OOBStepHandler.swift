@@ -12,14 +12,20 @@
 
 import Foundation
 import AuthFoundation
+import OktaConcurrency
+import OktaClientMacros
+import APIClient
 
-class OOBStepHandler<Factor: AuthenticationFactor>: StepHandler {
+@HasLock
+final class OOBStepHandler<Factor: AuthenticationFactor>: StepHandler, Sendable {
     let flow: DirectAuthenticationFlow
     let openIdConfiguration: OpenIdConfiguration
     let currentStatus: DirectAuthenticationFlow.Status?
     let loginHint: String?
     let channel: DirectAuthenticationFlow.OOBChannel
     let factor: Factor
+    
+    @Synchronized
     private var poll: PollingHandler<TokenRequest>?
     
     init(flow: DirectAuthenticationFlow,
@@ -37,7 +43,7 @@ class OOBStepHandler<Factor: AuthenticationFactor>: StepHandler {
         self.factor = factor
     }
     
-    func process(completion: @escaping (Result<DirectAuthenticationFlow.Status, DirectAuthenticationFlowError>) -> Void) {
+    func process(completion: @Sendable @escaping (Result<DirectAuthenticationFlow.Status, DirectAuthenticationFlowError>) -> Void) {
         if let bindingContext = currentStatus?.continuationType?.bindingContext {
             self.requestToken(using: bindingContext.oobResponse, completion: completion)
         } else {
@@ -77,7 +83,7 @@ class OOBStepHandler<Factor: AuthenticationFactor>: StepHandler {
     // OOB authentication requests differ whether it's used as a primary factor, or a secondary factor.
     // To simplify the code below, we separate this request logic into separate functions to work
     // around differences in the response data.
-    private func requestOOBCode(completion: @escaping (Result<OOBResponse, APIClientError>) -> Void) {
+    private func requestOOBCode(completion: @Sendable @escaping (Result<OOBResponse, APIClientError>) -> Void) {
         // Request where OOB is used as the primary factor
         if let loginHint = loginHint {
             requestOOBCode(loginHint: loginHint, completion: completion)
@@ -95,7 +101,7 @@ class OOBStepHandler<Factor: AuthenticationFactor>: StepHandler {
     }
     
     private func requestOOBCode(loginHint: String,
-                                completion: @escaping (Result<OOBResponse, APIClientError>) -> Void)
+                                completion: @Sendable @escaping (Result<OOBResponse, APIClientError>) -> Void)
     {
         do {
             let request = try OOBAuthenticateRequest(openIdConfiguration: openIdConfiguration,
@@ -117,7 +123,7 @@ class OOBStepHandler<Factor: AuthenticationFactor>: StepHandler {
     }
     
     private func requestOOBCode(mfaToken: String,
-                                completion: @escaping (Result<OOBResponse, APIClientError>) -> Void)
+                                completion: @Sendable @escaping (Result<OOBResponse, APIClientError>) -> Void)
     {
         do {
             let grantType = factor.grantType(currentStatus: currentStatus)
@@ -142,7 +148,7 @@ class OOBStepHandler<Factor: AuthenticationFactor>: StepHandler {
         }
     }
 
-    private func requestToken(using response: OOBResponse, completion: @escaping (Result<DirectAuthenticationFlow.Status, DirectAuthenticationFlowError>) -> Void) {
+    private func requestToken(using response: OOBResponse, completion: @Sendable @escaping (Result<DirectAuthenticationFlow.Status, DirectAuthenticationFlowError>) -> Void) {
         guard let interval = response.interval else {
             completion(.failure(.missingArguments(["interval"])))
             return

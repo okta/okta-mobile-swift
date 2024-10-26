@@ -38,6 +38,12 @@ extension Notification.Name {
     public static let credentialRefreshFailed = Notification.Name("com.okta.credential.refresh.failed")
 }
 
+extension Credential: Equatable {
+    public static func == (lhs: Credential, rhs: Credential) -> Bool {
+        lhs.token == rhs.token
+    }
+}
+
 @available(iOS 13.0, tvOS 13.0, macOS 10.15, watchOS 6, *)
 extension Credential {
     /// Attempt to refresh the token.

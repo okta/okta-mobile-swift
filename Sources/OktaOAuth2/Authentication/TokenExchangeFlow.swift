@@ -12,11 +12,18 @@
 
 import AuthFoundation
 import Foundation
+import OktaUtilities
+import OktaConcurrency
+import OktaClientMacros
+import APIClient
 
 /// An authentication flow class that implements the Token Exchange Flow.
-public class TokenExchangeFlow: AuthenticationFlow {
+@HasLock
+public final class TokenExchangeFlow: Sendable, AuthenticationFlow, UsesDelegateCollection {
+    public typealias Delegate = AuthenticationDelegate
+
     /// Identifies the audience of the authorization server.
-    public enum Audience {
+    public enum Audience: Sendable {
         case `default`
         case custom(String)
         
@@ -37,13 +44,14 @@ public class TokenExchangeFlow: AuthenticationFlow {
     public let audience: Audience
 
     /// Indicates whether or not this flow is currently in the process of authenticating a user.
-    public private(set) var isAuthenticating: Bool = false {
+    @Synchronized(value: false)
+    public private(set) var isAuthenticating: Bool {
         didSet {
-            guard oldValue != isAuthenticating else {
+            guard oldValue != _isAuthenticating else {
                 return
             }
             
-            if isAuthenticating {
+            if _isAuthenticating {
                 delegateCollection.invoke { $0.authenticationStarted(flow: self) }
             } else {
                 delegateCollection.invoke { $0.authenticationFinished(flow: self) }
@@ -51,9 +59,9 @@ public class TokenExchangeFlow: AuthenticationFlow {
         }
     }
 
-    /// Collection of the `AuthenticationDelegate` objects.
-    public let delegateCollection = DelegateCollection<AuthenticationDelegate>()
-    
+    /// The collection of delegates conforming to ``AuthenticationDelegate``.
+    public let delegateCollection = DelegateCollection<any Delegate>()
+
     /// Convenience initializer to construct a flow from variables.
     /// - Parameters:
     ///   - issuer: The issuer URL.
@@ -107,7 +115,7 @@ public class TokenExchangeFlow: AuthenticationFlow {
     /// - Parameters:
     ///   - tokens: Tokens to exchange.
     ///   - completion: Completion block for receiving the response.
-    public func start(with tokens: [TokenType], completion: @escaping (Result<Token, OAuth2Error>) -> Void) {
+    public func start(with tokens: [TokenType], completion: @Sendable @escaping (Result<Token, OAuth2Error>) -> Void) {
         guard !tokens.isEmpty else {
             delegateCollection.invoke { $0.authentication(flow: self, received: OAuth2Error.cannotComposeUrl) }
             completion(.failure(OAuth2Error.cannotComposeUrl))

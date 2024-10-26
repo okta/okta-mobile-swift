@@ -11,6 +11,7 @@
 //
 
 import Foundation
+import Keychain
 
 #if canImport(LocalAuthentication)
 import LocalAuthentication

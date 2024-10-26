@@ -18,7 +18,7 @@ extension WebAuthentication {
     @available(*, deprecated, renamed: "signIn(from:options:completion:)")
     public final func signIn(from window: WindowAnchor?,
                              additionalParameters: [String: String]?,
-                             completion: @escaping (Result<Token, WebAuthenticationError>) -> Void)
+                             completion: @Sendable @escaping (Result<Token, WebAuthenticationError>) -> Void)
     {
         signIn(from: window, options: options(from: additionalParameters), completion: completion)
     }
@@ -27,7 +27,7 @@ extension WebAuthentication {
     public final func signOut(from window: WindowAnchor? = nil,
                               credential: Credential? = .default,
                               additionalParameters: [String: String]?,
-                              completion: @escaping (Result<Void, WebAuthenticationError>) -> Void)
+                              completion: @Sendable @escaping (Result<Void, WebAuthenticationError>) -> Void)
     {
         signOut(from: window, credential: credential, options: options(from: additionalParameters), completion: completion)
     }
@@ -36,7 +36,7 @@ extension WebAuthentication {
     public final func signOut(from window: WindowAnchor? = nil,
                               token: Token,
                               additionalParameters: [String: String]?,
-                              completion: @escaping (Result<Void, WebAuthenticationError>) -> Void)
+                              completion: @Sendable @escaping (Result<Void, WebAuthenticationError>) -> Void)
     {
         signOut(from: window, token: token, options: options(from: additionalParameters), completion: completion)
     }
@@ -45,7 +45,7 @@ extension WebAuthentication {
     public final func signOut(from window: WindowAnchor? = nil,
                               token: String,
                               additionalParameters: [String: String]?,
-                              completion: @escaping (Result<Void, WebAuthenticationError>) -> Void)
+                              completion: @Sendable @escaping (Result<Void, WebAuthenticationError>) -> Void)
     {
         signOut(from: window, token: token, options: options(from: additionalParameters), completion: completion)
     }

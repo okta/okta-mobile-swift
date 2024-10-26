@@ -16,9 +16,7 @@ import AuthFoundation
 
 extension XCTestCase {
     func openIdConfiguration(named: String = "openid-configuration") throws -> (OpenIdConfiguration, Data) {
-        let data = try data(from: .module,
-                           for: named,
-                           in: "MockResponses")
+        let data = try data(filename: named, matching: "OktaOAuth2Tests")
         let configuration = try OpenIdConfiguration.jsonDecoder.decode(OpenIdConfiguration.self,
                                                                        from: data)
         return (configuration, data)

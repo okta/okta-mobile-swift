@@ -12,6 +12,7 @@
 
 import Foundation
 import AuthFoundation
+import APIClient
 
 extension DirectAuthenticationFlow.PrimaryFactor {
     var loginHintKey: String {
@@ -29,7 +30,7 @@ extension DirectAuthenticationFlow.PrimaryFactor: AuthenticationFactor {
                      openIdConfiguration: OpenIdConfiguration,
                      loginHint: String? = nil,
                      currentStatus: DirectAuthenticationFlow.Status? = nil,
-                     factor: Self) throws -> StepHandler
+                     factor: Self) throws -> any StepHandler
     {
         switch self {
         case .otp: fallthrough
@@ -76,8 +77,8 @@ extension DirectAuthenticationFlow.PrimaryFactor: AuthenticationFactor {
 }
 
 extension DirectAuthenticationFlow.PrimaryFactor: HasTokenParameters {
-    func tokenParameters(currentStatus: DirectAuthenticationFlow.Status?) -> [String: APIRequestArgument] {
-        var result: [String: APIRequestArgument] = [
+    func tokenParameters(currentStatus: DirectAuthenticationFlow.Status?) -> [String: any APIRequestArgument] {
+        var result: [String: any APIRequestArgument] = [
             "grant_type": grantType(currentStatus: currentStatus),
         ]
         

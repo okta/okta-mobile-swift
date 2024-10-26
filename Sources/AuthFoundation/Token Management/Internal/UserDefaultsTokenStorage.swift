@@ -11,6 +11,7 @@
 //
 
 import Foundation
+import OktaClientMacros
 
 #if canImport(LocalAuthentication) && !os(tvOS)
 import LocalAuthentication
@@ -24,43 +25,52 @@ private struct UserDefaultsKeys {
     static let allTokensKey = "com.okta.authfoundation.allTokens"
 }
 
+@HasLock
 final class UserDefaultsTokenStorage: TokenStorage {
-    private let userDefaults: UserDefaults
+    nonisolated(unsafe) private let userDefaults: UserDefaults
     
-    weak var delegate: TokenStorageDelegate?
+    @Synchronized
+    weak var delegate: (any TokenStorageDelegate)?
     
     init(userDefaults: UserDefaults = .standard) {
         self.userDefaults = userDefaults
-    }
-    
-    private(set) lazy var defaultTokenID: String? = {
-        if let defaultAccessKey = userDefaults.string(forKey: UserDefaultsKeys.defaultTokenKey) {
-            return defaultAccessKey
-        }
-        return nil
-    }()
-    
-    private lazy var allTokens: [String: Token] = {
+        
+        // Load all tokens
         if let data = userDefaults.data(forKey: UserDefaultsKeys.allTokensKey),
            let result = try? JSONDecoder().decode([String: Token].self, from: data)
         {
-            return result
+            self.allTokens = result
+        } else {
+            self.allTokens = [:]
         }
-        return [:]
-    }()
-    
-    private lazy var metadata: [String: Token.Metadata] = {
+        
+        // Load metadata
         if let data = userDefaults.data(forKey: UserDefaultsKeys.metadataKey),
            let result = try? JSONDecoder().decode([String: Token.Metadata].self, from: data)
         {
-            return result
+            self.metadata = result
+        } else {
+            self.metadata = [:]
         }
-        return [:]
-    }()
+    }
     
-    func setDefaultTokenID(_ id: String?) throws {
-        guard defaultTokenID != id else { return }
-        defaultTokenID = id
+    // Default token ID handling
+    nonisolated(unsafe) var _defaultTokenID: String?
+    private func _getDefaultTokenID() -> String? {
+        guard _defaultTokenID == nil else {
+            return _defaultTokenID
+        }
+        
+        if let defaultAccessKey = userDefaults.string(forKey: UserDefaultsKeys.defaultTokenKey) {
+            _defaultTokenID = defaultAccessKey
+        }
+
+        return _defaultTokenID
+    }
+    
+    func _setDefaultTokenID(_ id: String?) {
+        guard _defaultTokenID != id else { return }
+        _defaultTokenID = id
         
         if let id = id {
             userDefaults.set(id, forKey: UserDefaultsKeys.defaultTokenKey)
@@ -68,86 +78,111 @@ final class UserDefaultsTokenStorage: TokenStorage {
             userDefaults.removeObject(forKey: UserDefaultsKeys.defaultTokenKey)
         }
         userDefaults.synchronize()
-        delegate?.token(storage: self, defaultChanged: id)
     }
+
+    var defaultTokenID: String? {
+        get {
+            withLock {
+                _getDefaultTokenID()
+            }
+        }
+    }
+
+    func setDefaultTokenID(_ id: String?) throws {
+        withLock {
+            _setDefaultTokenID(id)
+        }
+    }
+
+    nonisolated(unsafe) private var allTokens: [String: Token]
+    nonisolated(unsafe) private var metadata: [String: Token.Metadata]
     
     var allIDs: [String] {
-        Array(allTokens.keys)
-    }
-    
-    func get(token id: String, prompt: String? = nil, authenticationContext: TokenAuthenticationContext? = nil) throws -> Token {
-        guard let token = allTokens[id] else {
-            throw TokenError.tokenNotFound(id: id)
-        }
-        
-        return token
-    }
-    
-    func add(token: Token, metadata: Token.Metadata?, security: [Credential.Security]) throws {
-        let metadata = metadata ?? Token.Metadata(token: token, tags: [:])
-        guard token.id == metadata.id else {
-            throw CredentialError.metadataConsistency
-        }
-        
-        let id = token.id
-        
-        guard !allTokens.keys.contains(id) else {
-            throw TokenError.duplicateTokenAdded
-        }
-
-        var changedDefault = false
-        if allTokens.isEmpty {
-            changedDefault = true
-        }
-        
-        allTokens[id] = token
-        self.metadata[id] = metadata
-        
-        try save()
-        delegate?.token(storage: self, added: id, token: token)
-        
-        if changedDefault {
-            try setDefaultTokenID(id)
+        withLock {
+            Array(allTokens.keys)
         }
     }
     
-    func replace(token id: String, with token: Token, security: [Credential.Security]?) throws {
-        guard allTokens[id] != nil else {
-            throw TokenError.cannotReplaceToken
-        }
-        allTokens[id] = token
+    func get(token id: String, prompt: String? = nil, authenticationContext: (any TokenAuthenticationContext)? = nil) throws -> Token {
+        try withLock {
+            guard let token = allTokens[id] else {
+                throw TokenError.tokenNotFound(id: id)
+            }
             
-        try save()
-        delegate?.token(storage: self, replaced: id, with: token)
+            return token
+        }
+    }
+    
+    func add(token: Token, security: [Credential.Security]) throws {
+        try withLock {
+            let metadata = Token.Metadata(token: token)
+            guard token.id == metadata.id else {
+                throw CredentialError.metadataConsistency
+            }
+            
+            let id = token.id
+            
+            guard !allTokens.keys.contains(id) else {
+                throw TokenError.duplicateTokenAdded
+            }
+            
+            allTokens[id] = token
+            self.metadata[id] = metadata
+            
+            try save()
+            
+            if let delegate = _delegate {
+                DispatchQueue.global().async {
+                    delegate.token(storage: self, added: id, token: token)
+                }
+            }
+        }
+    }
+    
+    func update(token: Token, security: [Credential.Security]?) throws {
+        try withLock {
+            guard allTokens[token.id] != nil else {
+                throw TokenError.cannotReplaceToken
+            }
+            allTokens[token.id] = token
+            metadata[token.id] = Token.Metadata(token: token)
+            
+            try save()
+            
+            if let delegate = _delegate {
+                DispatchQueue.global().async {
+                    delegate.token(storage: self, replaced: token.id, with: token)
+                }
+            }
+        }
     }
     
     func remove(id: String) throws {
-        guard allTokens[id] != nil else {
-            return
+        try withLock {
+            guard allTokens[id] != nil else {
+                return
+            }
+            
+            allTokens.removeValue(forKey: id)
+            
+            try save()
+            
+            if let delegate = _delegate {
+                DispatchQueue.global().async {
+                    delegate.token(storage: self, removed: id)
+                }
+            }
+            
+            if _getDefaultTokenID() == id {
+                _setDefaultTokenID(nil)
+            }
         }
-        
-        allTokens.removeValue(forKey: id)
-        
-        try save()
-        delegate?.token(storage: self, removed: id)
-
-        if defaultTokenID == id {
-            try setDefaultTokenID(nil)
-        }
-    }
-    
-    func setMetadata(_ metadata: Token.Metadata) throws {
-        guard allIDs.contains(metadata.id) else {
-            throw TokenError.tokenNotFound(id: metadata.id)
-        }
-        
-        self.metadata[metadata.id] = metadata
-        
-        try save()
     }
     
     func metadata(for id: String) throws -> Token.Metadata {
-        metadata[id] ?? Token.Metadata(id: id)
+        withLock {
+            metadata[id] ?? Token.Metadata(id: id, configuration: nil)
+        }
     }
 
     private func save() throws {
@@ -157,6 +192,5 @@ final class UserDefaultsTokenStorage: TokenStorage {
                          forKey: UserDefaultsKeys.allTokensKey)
         userDefaults.set(try JSONEncoder().encode(metadata),
                          forKey: UserDefaultsKeys.metadataKey)
-        userDefaults.synchronize()
     }
 }

@@ -12,21 +12,29 @@
 
 import Foundation
 import AuthFoundation
+import OktaUtilities
+import OktaConcurrency
+import OktaClientMacros
+import JWT
 
 /// An authentication flow class that implements the JWT Authorization Bearer Flow, for authenticating users using JWTs signed by a trusted key.
-public class JWTAuthorizationFlow: AuthenticationFlow {
+@HasLock
+public final class JWTAuthorizationFlow: Sendable, AuthenticationFlow, UsesDelegateCollection {
+    public typealias Delegate = AuthenticationDelegate
+    
     /// The OAuth2Client this authentication flow will use.
     public let client: OAuth2Client
     
     /// Indicates whether or not this flow is currently in the process of authenticating a user.
     /// ``JWTAuthorizationFlow/init(issuer:clientId:scopes:)``
-    public private(set) var isAuthenticating: Bool = false {
+    @Synchronized(value: false)
+    public private(set) var isAuthenticating: Bool {
         didSet {
-            guard oldValue != isAuthenticating else {
+            guard oldValue != _isAuthenticating else {
                 return
             }
             
-            if isAuthenticating {
+            if _isAuthenticating {
                 delegateCollection.invoke { $0.authenticationStarted(flow: self) }
             } else {
                 delegateCollection.invoke { $0.authenticationFinished(flow: self) }
@@ -34,6 +42,9 @@ public class JWTAuthorizationFlow: AuthenticationFlow {
         }
     }
     
+    /// The collection of delegates conforming to ``AuthenticationDelegate``.
+    public let delegateCollection = DelegateCollection<any Delegate>()
+
     /// Convenience initializer to construct an authentication flow from variables.
     /// - Parameters:
     ///   - issuer: The issuer URL.
@@ -80,7 +91,7 @@ public class JWTAuthorizationFlow: AuthenticationFlow {
     /// - Parameters:
     ///   - assertion: JWT Assertion
     ///   - completion: Completion invoked when a response is received.
-    public func start(with assertion: JWT, completion: @escaping (Result<Token, OAuth2Error>) -> Void) {
+    public func start(with assertion: JWT, completion: @Sendable @escaping (Result<Token, OAuth2Error>) -> Void) {
         isAuthenticating = true
 
         client.openIdConfiguration { result in
@@ -114,9 +125,6 @@ public class JWTAuthorizationFlow: AuthenticationFlow {
     public func reset() {
         isAuthenticating = false
     }
-
-    // MARK: Private properties / methods
-    public let delegateCollection = DelegateCollection<AuthenticationDelegate>()
 }
 
 @available(iOS 13.0, tvOS 13.0, macOS 10.15, watchOS 6, *)
@@ -132,10 +140,6 @@ extension JWTAuthorizationFlow {
             }
         }
     }
-}
-
-extension JWTAuthorizationFlow: UsesDelegateCollection {
-    public typealias Delegate = AuthenticationDelegate
 }
 
 extension JWTAuthorizationFlow: OAuth2ClientDelegate {}

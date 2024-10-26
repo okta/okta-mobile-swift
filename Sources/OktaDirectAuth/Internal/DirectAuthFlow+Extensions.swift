@@ -11,10 +11,11 @@
 //
 
 import Foundation
+import APIClient
 
 extension DirectAuthenticationFlow {
     func process(_ error: APIClientError,
-                 completion: @escaping (Result<DirectAuthenticationFlow.Status, DirectAuthenticationFlowError>) -> Void)
+                 completion: @Sendable @escaping (Result<DirectAuthenticationFlow.Status, DirectAuthenticationFlowError>) -> Void)
     {
         guard case let .serverError(serverError) = error,
            let oauthError = serverError as? OAuth2ServerError

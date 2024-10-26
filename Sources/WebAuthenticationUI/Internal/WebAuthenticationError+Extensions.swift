@@ -30,7 +30,7 @@ extension WebAuthenticationError: LocalizedError {
                                      comment: "")
             
         case .authenticationProviderError(let error):
-            if let error = error as? LocalizedError {
+            if let error = error as? (any LocalizedError) {
                 return error.localizedDescription
             }
             
@@ -69,7 +69,7 @@ extension WebAuthenticationError: LocalizedError {
             return error.errorDescription
             
         case .generic(error: let error):
-            if let error = error as? LocalizedError {
+            if let error = error as? (any LocalizedError) {
                 return error.localizedDescription
             }
             let errorString = String(describing: error)
