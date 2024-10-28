@@ -103,9 +103,9 @@ fileprivate class DelegateCollectionNode<Delegate>: Equatable {
     }
 }
 
-extension RangeReplaceableCollection where Iterator.Element : Equatable {
+extension RangeReplaceableCollection where Iterator.Element: Equatable {
     @discardableResult
-    fileprivate mutating func remove(_ element : Iterator.Element) -> Iterator.Element? {
+    fileprivate mutating func remove(_ element: Iterator.Element) -> Iterator.Element? {
         guard let index = self.firstIndex(of: element) else {
             return nil
         }

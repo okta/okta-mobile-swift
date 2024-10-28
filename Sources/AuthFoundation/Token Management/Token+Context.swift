@@ -24,7 +24,7 @@ extension Token {
         /// The developer-assigned tags assigned to this token.
         ///
         /// This property can be used to associate application-specific information about the usage for this token. It can be used to identify which token should be associated with certain parts of your application.
-        internal(set) public var tags: [String: String]
+        public internal(set) var tags: [String: String]
 
         /// Settings required to be supplied to the authorization server when refreshing this token.
         let clientSettings: [String: String]?
