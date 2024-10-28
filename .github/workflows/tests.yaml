@@ -88,7 +88,7 @@ jobs:
           os: macos-latest-xlarge
         - destination: "platform=visionOS Simulator,OS=2.0,name=Apple Vision Pro"
           xcode_version: "16.0"
-          os: macos-latest-xlarge
+          os: macos-15-xlarge
         - destination: "platform=watchOS Simulator,OS=10.5,name=Apple Watch Series 7 (45mm)"
           xcode_version: "16.0"
           os: macos-latest-large
