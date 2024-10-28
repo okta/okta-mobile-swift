@@ -21,7 +21,7 @@ on:
       - 'Tests/**/*.swift'
 
 env:
-  DEVELOPER_DIR: /Applications/Xcode_15.4.app/Contents/Developer
+  DEVELOPER_DIR: /Applications/Xcode_16.0.app/Contents/Developer
   NSUnbufferedIO: YES 
 
 jobs:
@@ -30,7 +30,7 @@ jobs:
     strategy:
       matrix:
         os: [macos-latest-large, ubuntu-latest]
-        swift_version: ["5.9", "5.10"]
+        swift_version: ["5.10", "6.0"]
     runs-on: ${{ matrix.os }}
     timeout-minutes: 10
     steps:
