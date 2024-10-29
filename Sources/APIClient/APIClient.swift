@@ -13,7 +13,7 @@
 import Foundation
 
 #if os(Linux)
-import FoundationNetworking
+@_exported import FoundationNetworking
 #endif
 
 import OktaUtilities

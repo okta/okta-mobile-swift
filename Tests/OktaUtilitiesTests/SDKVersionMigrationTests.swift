@@ -17,7 +17,7 @@ enum TestMigratorError: Error {
     case generic
 }
 
-class TestMigrator: AnyObject, SDKVersionMigrator, @unchecked Sendable {
+class TestMigrator: SDKVersionMigrator, @unchecked Sendable {
     var error: Error?
     private(set) var migrationCalled: Bool = false
 

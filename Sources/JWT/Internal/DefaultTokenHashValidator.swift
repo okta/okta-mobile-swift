@@ -53,7 +53,7 @@ public struct DefaultTokenHashValidator: TokenHashValidator {
     }
     
     #if !canImport(CommonCrypto)
-    func validate(_ string: String, idToken: JWT) throws {
+    public func validate(_ string: String, idToken: JWT) throws {
         throw JWTError.signatureVerificationUnavailable
     }
     #else

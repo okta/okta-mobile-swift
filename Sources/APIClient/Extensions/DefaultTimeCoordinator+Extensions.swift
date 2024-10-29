@@ -13,6 +13,10 @@
 import Foundation
 import OktaUtilities
 
+#if os(Linux)
+import FoundationNetworking
+#endif
+
 extension DefaultTimeCoordinator: APIClientDelegate {
     public func api(client: any APIClient, didSend request: URLRequest, received response: HTTPURLResponse) {
         guard request.cachePolicy == .reloadIgnoringLocalAndRemoteCacheData,

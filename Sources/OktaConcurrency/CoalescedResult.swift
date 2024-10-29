@@ -10,7 +10,7 @@
 // See the License for the specific language governing permissions and limitations under the License.
 //
 
-import Foundation
+@preconcurrency import Foundation
 
 public final class CoalescedResult<T: Sendable>: Sendable {
     private let lock = Lock()

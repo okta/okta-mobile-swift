@@ -45,8 +45,6 @@ extension Credential {
         /// Defines a custom LocalAuthentication context for interactions with this credential, for systems that support it.
         case context(_ obj: LAContext)
         #endif
-        #else
-        public static var standard: [Security] = []
         #endif
     }
 }

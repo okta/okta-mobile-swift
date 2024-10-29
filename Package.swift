@@ -43,7 +43,6 @@ var package = Package(
         .library(name: "AuthFoundation", targets: ["AuthFoundation"]),
         .library(name: "OktaOAuth2", targets: ["OktaOAuth2"]),
         .library(name: "OktaDirectAuth", targets: ["OktaDirectAuth"]),
-        .library(name: "WebAuthenticationUI", targets: ["WebAuthenticationUI"])
     ],
     dependencies: [
         .package(url: "https://github.com/apple/swift-docc-plugin", from: "1.0.0"),
@@ -234,25 +233,6 @@ var package = Package(
                         .target(name: "AuthFoundationTestCommon"),
                     ],
                     resources: [ .process("MockResponses") ]),
-
-        // WebAuthenticationUI
-        .target(name: "WebAuthenticationUI",
-                dependencies: [
-                    .target(name: "OktaOAuth2")
-                ],
-                exclude: exclude(),
-                resources: include(.process("Resources"))),
-        .testTarget(name: "WebAuthenticationUITests",
-                    dependencies: [
-                    .target(name: "WebAuthenticationUI"),
-                    .target(name: "OktaOAuth2"),
-                    .target(name: "AuthFoundation"),
-                    .target(name: "TestCommon"),
-                    .target(name: "KeychainTestCommon"),
-                    .target(name: "APIClientTestCommon"),
-                    .target(name: "AuthFoundationTestCommon"),
-                ],
-                resources: [ .process("MockResponses") ]),
     ],
     swiftLanguageVersions: [.v5]
 )
@@ -266,4 +246,28 @@ for target in package.targets where target.type != .system && target.type != .te
         .enableUpcomingFeature("InferSendableFromCaptures"),
     ])
 }
+#endif
+
+#if canImport(Darwin)
+// WebAuthenticationUI
+package.products.append(.library(name: "WebAuthenticationUI", targets: ["WebAuthenticationUI"]))
+package.targets.append(contentsOf: [
+    .target(name: "WebAuthenticationUI",
+            dependencies: [
+                .target(name: "OktaOAuth2")
+            ],
+            exclude: exclude(),
+            resources: include(.process("Resources"))),
+    .testTarget(name: "WebAuthenticationUITests",
+                dependencies: [
+                    .target(name: "WebAuthenticationUI"),
+                    .target(name: "OktaOAuth2"),
+                    .target(name: "AuthFoundation"),
+                    .target(name: "TestCommon"),
+                    .target(name: "KeychainTestCommon"),
+                    .target(name: "APIClientTestCommon"),
+                    .target(name: "AuthFoundationTestCommon"),
+                ],
+                resources: [ .process("MockResponses") ]),
+])
 #endif
