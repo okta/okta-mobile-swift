@@ -14,7 +14,7 @@ import Foundation
 import OktaConcurrency
 import OktaClientMacros
 
-#if os(iOS) || os(macOS) || os(tvOS) || os(watchOS) || os(visionOS)
+#if canImport(Darwin)
 
 #if canImport(LocalAuthentication) && !os(tvOS)
 import LocalAuthentication

@@ -18,7 +18,7 @@ import OktaClientMacros
 fileprivate let staticLock = Lock()
 nonisolated(unsafe) fileprivate var _isDefaultSynchronizable: Bool = false
 
-#if os(iOS) || os(macOS) || os(tvOS) || os(watchOS) || os(visionOS)
+#if canImport(Darwin)
 nonisolated(unsafe) fileprivate var _standard: [Credential.Security] = [.accessibility(.afterFirstUnlockThisDeviceOnly)]
 #else
 nonisolated(unsafe) fileprivate var _standard: [Credential.Security] = []

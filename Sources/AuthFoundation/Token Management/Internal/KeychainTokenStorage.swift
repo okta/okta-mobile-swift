@@ -10,7 +10,7 @@
 // See the License for the specific language governing permissions and limitations under the License.
 //
 
-#if os(iOS) || os(macOS) || os(tvOS) || os(watchOS) || os(visionOS)
+#if canImport(Darwin)
 
 import Foundation
 import Keychain
@@ -56,6 +56,10 @@ final class KeychainTokenStorage: TokenStorage {
         _defaultTokenID = id
         
         try saveDefault()
+        
+        DispatchQueue.global().async {
+            self.delegate?.token(storage: self, defaultChanged: id)
+        }
     }
 
     var defaultTokenID: String? {

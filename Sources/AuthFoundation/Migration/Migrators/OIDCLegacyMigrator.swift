@@ -15,7 +15,7 @@ import OktaUtilities
 import Keychain
 import JWT
 
-#if os(iOS) || os(macOS) || os(tvOS) || os(watchOS) || os(visionOS)
+#if canImport(Darwin)
 
 private let accountIdRegex = try? NSRegularExpression(pattern: "0oa[0-9a-zA-Z]{17}")
 

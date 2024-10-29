@@ -277,7 +277,7 @@ public extension HasClaims where ClaimType == JWTClaim {
     /// The person's preferred username.
     var preferredUsername: String? { self[.preferredUsername] }
 
-#if os(iOS) || os(macOS) || os(tvOS) || os(watchOS) || os(visionOS)
+#if canImport(Darwin)
     /// The person's name components, pre-assigned to a PersonNameComponents object.
     ///
     /// This property can be used as a convenience to generate a string representation of the user's name, based on the user's current locale.

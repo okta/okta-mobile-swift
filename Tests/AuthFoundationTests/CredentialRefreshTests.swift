@@ -310,7 +310,7 @@ final class CredentialRefreshTests: XCTestCase, OAuth2ClientDelegate {
         // Stopping should prevent subsequent refreshes
         credential.automaticRefresh = false
         
-        sleep(1)
+        sleep(for: .short)
         XCTAssertEqual(urlSession.requests.count, 0)
     }
     

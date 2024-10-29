@@ -19,7 +19,7 @@ import FoundationNetworking
 @testable import TestCommon
 @testable import AuthFoundation
 
-final class UserCoordinatorTests: XCTestCase {
+final class CredentialCoordinatorTests: XCTestCase {
     var userDefaults: UserDefaults!
     var storage: UserDefaultsTokenStorage!
     var coordinator: CredentialCoordinatorImpl!
@@ -80,10 +80,31 @@ final class UserCoordinatorTests: XCTestCase {
     }
     
     func testImplicitCredentialForToken() throws {
+        XCTAssertNil(storage.defaultTokenID)
+        XCTAssertNil(coordinator.default)
+        
         let credential = try coordinator.store(token: token, security: [])
         
         XCTAssertEqual(storage.allIDs, [token.id])
         XCTAssertEqual(storage.defaultTokenID, token.id)
         XCTAssertEqual(coordinator.default, credential)
+        
+        XCTAssertNoThrow(try credential.remove())
+        XCTAssertNil(storage.defaultTokenID)
+        XCTAssertNil(coordinator.default)
+    }
+
+    func testRespondToStorageDelegate() throws {
+        coordinator.default = try coordinator.store(token: token, security: [])
+        
+        XCTAssertEqual(storage.allIDs, [token.id])
+        XCTAssertEqual(storage.defaultTokenID, token.id)
+        XCTAssertEqual(coordinator.default?.id, token.id)
+        
+        XCTAssertNoThrow(try storage.remove(id: token.id))
+        XCTAssertNil(storage.defaultTokenID)
+        
+        sleep(for: .standard)
+        XCTAssertNil(coordinator.default)
     }
 }

@@ -63,6 +63,7 @@ var package = Package(
                         .target(name: "OktaClientMacros"),
                         .product(name: "SwiftSyntaxMacros", package: "swift-syntax"),
                         .product(name: "SwiftSyntaxMacrosTestSupport", package: "swift-syntax"),
+                        .product(name: "SwiftSyntaxMacrosGenericTestSupport", package: "swift-syntax"),
                     ]),
         .target(name: "OktaClientMacros",
                 dependencies: [
@@ -72,9 +73,7 @@ var package = Package(
                 path: "Sources/OktaClientMacros/Interface"),
 
         // Concurrency & locking
-        .target(name: "OktaConcurrency",
-                exclude: exclude(),
-                resources: include()),
+        .target(name: "OktaConcurrency"),
         .testTarget(name: "OktaConcurrencyTests",
                     dependencies: [
                         .target(name: "OktaConcurrency"),
@@ -90,9 +89,7 @@ var package = Package(
                 dependencies: [
                     .target(name: "OktaConcurrency"),
                     .target(name: "OktaClientMacros")
-                ],
-                exclude: exclude(),
-                resources: include()),
+                ]),
         .target(name: "KeychainTestCommon",
                 dependencies: [
                     .target(name: "Keychain")
@@ -110,9 +107,7 @@ var package = Package(
                 dependencies: [
                     .target(name: "OktaConcurrency"),
                     .target(name: "OktaClientMacros")
-                ],
-                exclude: exclude(),
-                resources: include()),
+                ]),
         .testTarget(name: "OktaUtilitiesTests",
                     dependencies: [
                         .target(name: "OktaUtilities"),
@@ -129,9 +124,7 @@ var package = Package(
         .target(name: "APIClient",
                 dependencies: [
                     .target(name: "OktaUtilities"),
-                ],
-                exclude: exclude(),
-                resources: include()),
+                ]),
         .testTarget(name: "APIClientTests",
                     dependencies: [
                         .target(name: "APIClient"),
@@ -155,8 +148,7 @@ var package = Package(
                     .target(name: "OktaConcurrency"),
                     .target(name: "APIClient")
                 ],
-                exclude: exclude(),
-                resources: include(.process("Resources"))),
+                resources: [ .process("Resources") ]),
         .testTarget(name: "JWTTests",
                     dependencies: [
                         .target(name: "OktaConcurrency"),
@@ -239,7 +231,9 @@ var package = Package(
 
 #if compiler(>=6)
 for target in package.targets where target.type != .system && target.type != .test {
-    target.swiftSettings = target.swiftSettings ?? []
+    target.swiftSettings = target.swiftSettings ?? [
+        .enableExperimentalFeature("StrictConcurrency=complete")
+    ]
     target.swiftSettings?.append(contentsOf: [
         .enableExperimentalFeature("StrictConcurrency"),
         .enableUpcomingFeature("ExistentialAny"),

@@ -53,7 +53,7 @@ class WebAuthenticationUITests: XCTestCase {
         let webAuth = WebAuthentication(loginFlow: loginFlow, logoutFlow: logoutFlow)
         
         webAuth.signIn(from: nil, options: [.state("qwe")]) { _ in }
-        wait(for: .short)
+        sleep(for: .short)
 
         let webAuthProvider = try XCTUnwrap(webAuth.provider as? WebAuthenticationProviderMock)
 
@@ -65,7 +65,7 @@ class WebAuthenticationUITests: XCTestCase {
         let webAuth = WebAuthentication(loginFlow: loginFlow, logoutFlow: logoutFlow)
 
         webAuth.signOut(from: nil, token: "idToken", options: [.state("qwe")]) { _ in }
-        wait(for: .short)
+        sleep(for: .short)
 
         let provider = try XCTUnwrap(webAuth.provider as? WebAuthenticationProviderMock)
         XCTAssertNil(webAuth.completionBlock)
@@ -78,7 +78,7 @@ class WebAuthenticationUITests: XCTestCase {
         XCTAssertNil(webAuth.provider)
         
         webAuth.signIn(from: nil, options: [.state("qwe")]) { _ in }
-        wait(for: .short)
+        sleep(for: .short)
 
         let webAuthProvider = try XCTUnwrap(webAuth.provider as? WebAuthenticationProviderMock)
 

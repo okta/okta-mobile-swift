@@ -18,7 +18,7 @@ import XCTest
 @testable import Keychain
 @testable import KeychainTestCommon
 
-#if os(iOS) || os(macOS) || os(tvOS) || os(watchOS) || os(visionOS)
+#if canImport(Darwin)
 final class OIDCLegacyMigratorTests: XCTestCase {
     typealias LegacyOIDC = SDKVersion.Migration.LegacyOIDC
     

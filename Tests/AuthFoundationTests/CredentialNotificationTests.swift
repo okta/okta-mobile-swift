@@ -57,25 +57,22 @@ final class CredentialNotificationTests: XCTestCase {
     }
         
     func testNotifications() throws {
-        let wait = expectation(description: "Main actor")
+        let oldCredential = coordinator.default
         
-        Task { @MainActor in
-            let oldCredential = coordinator.default
-            
-            let recorder = NotificationRecorder(observing: [.defaultCredentialChanged])
-            
-            let credential = try coordinator.store(token: token, security: [])
-            self.wait(for: .standard)
-            XCTAssertEqual(recorder.notifications.count, 1)
-            XCTAssertEqual(recorder.notifications.first?.object as? Credential, credential)
-            XCTAssertNotEqual(oldCredential, credential)
-            
-            recorder.reset()
-            coordinator.default = nil
-            self.wait(for: .standard)
-            XCTAssertEqual(recorder.notifications.count, 1)
-            XCTAssertNil(recorder.notifications.first?.object)
-        }
-        waitForExpectations(timeout: .long)
+        let recorder = NotificationRecorder(observing: [.defaultCredentialChanged])
+        
+        let credential = try coordinator.store(token: token, security: [])
+        sleep(for: .short)
+        
+        XCTAssertEqual(recorder.notifications.count, 1)
+        XCTAssertEqual(recorder.notifications.first?.object as? Credential, credential)
+        XCTAssertNotEqual(oldCredential, credential)
+        
+        recorder.reset()
+        coordinator.default = nil
+        sleep(for: .short)
+
+        XCTAssertEqual(recorder.notifications.count, 1)
+        XCTAssertNil(recorder.notifications.first?.object)
     }
 }

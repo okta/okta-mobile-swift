@@ -78,6 +78,10 @@ final class UserDefaultsTokenStorage: TokenStorage {
             userDefaults.removeObject(forKey: UserDefaultsKeys.defaultTokenKey)
         }
         userDefaults.synchronize()
+        
+        DispatchQueue.global().async {
+            self.delegate?.token(storage: self, defaultChanged: id)
+        }
     }
 
     var defaultTokenID: String? {

@@ -67,6 +67,9 @@ public protocol TokenStorage: Sendable {
 
 /// Protocol that custom ``TokenStorage`` instances are required to communicate changes to.
 public protocol TokenStorageDelegate: AnyObject, Sendable {
+    /// Sent when the default token has been changed.
+    func token(storage: any TokenStorage, defaultChanged id: String?)
+
     /// Sent when a new token has been added.
     ///
     /// > Important: This message should only be sent when a token is actually new. If the token is semantically identical to another one already in storage, the ``token(storage:replaced:with:)`` message should be sent instead.

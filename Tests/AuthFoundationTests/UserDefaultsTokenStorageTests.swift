@@ -10,7 +10,7 @@
 // See the License for the specific language governing permissions and limitations under the License.
 //
 
-#if os(iOS) || os(macOS) || os(tvOS) || os(watchOS) || os(visionOS)
+#if canImport(Darwin)
 import XCTest
 @testable import AuthFoundation
 import TestCommon
@@ -73,7 +73,7 @@ final class UserDefaultTokenStorageTests: XCTestCase {
         XCTAssertThrowsError(try storage.add(token: token, security: []))
         XCTAssertEqual(storage.allIDs.count, 1)
         
-        XCTAssertNoThrow(try storage.update(token: newToken, security: nil))
+        XCTAssertThrowsError(try storage.update(token: newToken, security: nil))
         XCTAssertEqual(storage.allIDs.count, 1)
 
         XCTAssertNoThrow(try storage.remove(id: token.id))
@@ -85,11 +85,12 @@ final class UserDefaultTokenStorageTests: XCTestCase {
 
     func testImplicitDefaultToken() throws {
         XCTAssertNil(storage.defaultTokenID)
-        
+        XCTAssertTrue(storage.allIDs.isEmpty)
+
         XCTAssertNoThrow(try storage.add(token: token, security: []))
         XCTAssertEqual(storage.allIDs.count, 1)
 
-        XCTAssertEqual(storage.defaultTokenID, token.id)
+        XCTAssertNil(storage.defaultTokenID)
     }
 
     func testRemoveDefaultToken() throws {

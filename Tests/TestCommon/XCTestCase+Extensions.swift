@@ -104,12 +104,11 @@ public extension XCTestCase {
         _ = group.wait(timeout: .short)
     }
     
-    @MainActor
-    func wait(for interval: TimeInterval) {
-        let waitExpectation = expectation(description: "Wait for \(interval)s")
-        DispatchQueue.main.asyncAfter(deadline: .now() + interval) {
-            waitExpectation.fulfill()
+    func sleep(for duration: TimeInterval) {
+        let sleepExpectation = expectation(description: "Sleep for \(duration) seconds")
+        DispatchQueue.main.asyncAfter(deadline: .now() + duration) {
+            sleepExpectation.fulfill()
         }
-        waitForExpectations(timeout: interval * 1.5)
+        wait(for: [sleepExpectation])
     }
 }

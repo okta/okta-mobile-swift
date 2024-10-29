@@ -15,7 +15,7 @@ import XCTest
 
 final class KeychainErrorTests: XCTestCase {
     func testKeychainError() {
-        #if os(iOS) || os(macOS) || os(tvOS) || os(watchOS) || os(visionOS)
+        #if canImport(Darwin)
         XCTAssertNotEqual(KeychainError.cannotGet(code: noErr).errorDescription,
                           "keychain_cannot_get")
         XCTAssertNotEqual(KeychainError.cannotList(code: noErr).errorDescription,

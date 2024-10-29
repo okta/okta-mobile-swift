@@ -111,7 +111,7 @@ final class CredentialCoordinatorImpl: Sendable, CredentialCoordinator {
     }
     
     static func defaultTokenStorage() -> any TokenStorage {
-        #if os(iOS) || os(macOS) || os(tvOS) || os(watchOS) || os(visionOS)
+        #if canImport(Darwin)
         KeychainTokenStorage()
         #else
         UserDefaultsTokenStorage()
@@ -216,23 +216,17 @@ extension CredentialCoordinatorImpl: OAuth2ClientDelegate {
 }
 
 extension CredentialCoordinatorImpl: TokenStorageDelegate {
-//    func token(storage: any TokenStorage, defaultTokenChanged token: Token?) {
-//        withLock {
-//            // Ensure the default matches what the Token Storage says,
-//            // and that the new token is indeed different from the local default.
-//            guard _tokenStorage.defaultTokenID == token?.id,
-//                  _default?.id != token?.id
-//            else {
-//                return
-//            }
-//            
-//            if let token = token {
-//                _default = _credentialDataSource.credential(for: token, coordinator: self)
-//            } else {
-//                _default = nil
-//            }
-//        }
-//    }
+    func token(storage: any TokenStorage, defaultChanged id: String?) {
+        // Almost all default ID changes will be triggered from the Credential Coordinator.
+        // In the rare event that the underlying value is changed from some other means,
+        // this operation will ensure the statei of this class will remain consistent.
+        withLock {
+            // Ensure the new token is indeed different from the local default.
+            if _default?.id != id {
+                _default = nil
+            }
+        }
+    }
     
     func token(storage: any TokenStorage, added id: String, token: Token) {
     }
@@ -243,7 +237,6 @@ extension CredentialCoordinatorImpl: TokenStorageDelegate {
     func token(storage: any TokenStorage, replaced id: String, with newToken: Token) {
         // Doing nothing with this, for now...
     }
-    
 }
 
 extension CredentialCoordinatorImpl: CredentialDataSourceDelegate {
