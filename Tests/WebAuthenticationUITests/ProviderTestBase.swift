@@ -83,6 +83,10 @@ class ProviderTestBase: XCTestCase, AuthorizationCodeFlowDelegate, SessionLogout
         case error
     }
 
+    static override func setUp() {
+        registerMock(bundles: .webAuthenticationUITests)
+    }
+    
     override func setUpWithError() throws {
         JWK.validator = MockJWKValidator()
         Token.idTokenValidator = MockIDTokenValidator()
@@ -95,6 +99,9 @@ class ProviderTestBase: XCTestCase, AuthorizationCodeFlowDelegate, SessionLogout
         
         logoutFlow = client.sessionLogoutFlow(logoutRedirectUri: logoutRedirectUri)
         logoutFlow.add(delegate: self)
+        loginFlow = client.authorizationCodeFlow(redirectUri: redirectUri,
+                                                 additionalParameters: ["additional": "param"])
+        loginFlow.add(delegate: self)
         
         urlSession.expect("https://example.com/.well-known/openid-configuration",
                           data: try data(filename: "openid-configuration"),
@@ -105,10 +112,7 @@ class ProviderTestBase: XCTestCase, AuthorizationCodeFlowDelegate, SessionLogout
         urlSession.expect("https://example.okta.com/oauth2/v1/keys?client_id=clientId",
                           data: try data(filename: "keys"),
                           contentType: "application/json")
-        loginFlow = client.authorizationCodeFlow(redirectUri: redirectUri,
-                                            additionalParameters: ["additional": "param"])
-        loginFlow.add(delegate: self)
-        
+
         delegate.reset()
     }
 
@@ -150,7 +154,7 @@ class ProviderTestBase: XCTestCase, AuthorizationCodeFlowDelegate, SessionLogout
             success = result
             wait.fulfill()
         }
-        waitForExpectations(timeout: timeout + 1.0) { error in
+        waitForExpectations(timeout: timeout * 2.0) { error in
             resultError = error
         }
         

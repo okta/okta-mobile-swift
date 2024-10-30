@@ -68,10 +68,6 @@ struct TestAuthenticationSessionFactory: ASWebAuthenticationSessionFactory {
 class AuthenticationServicesProviderTests: ProviderTestBase {
     var provider: AuthenticationServicesProvider!
     
-    static override func setUp() {
-        registerMock(bundles: .webAuthenticationUITests)
-    }
-    
     override func setUpWithError() throws {
         try super.setUpWithError()
         
