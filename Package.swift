@@ -140,7 +140,8 @@ var package = Package(
         .target(name: "APIClientTestCommon",
                 dependencies: [
                     .target(name: "APIClient"),
-                    .target(name: "JWT")
+                    .target(name: "JWT"),
+                    .target(name: "TestCommon"),
                 ],
                 path: "Tests/APIClientTestCommon",
                 resources: [.process("MockResponses")]),
