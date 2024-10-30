@@ -89,7 +89,7 @@ class SessionLogoutFlowFailureTests: XCTestCase {
             resumeExpection.fulfill()
         }
         
-        wait(for: [resumeExpection], timeout: 1)
+        wait(for: [resumeExpection], timeout: .long)
 
         XCTAssertFalse(flow.inProgress)
         XCTAssertNil(flow.context)

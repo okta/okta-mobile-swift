@@ -64,73 +64,75 @@ struct TestFactor: AuthenticationFactor {
     }
 }
 
-// TODO: Update
-//final class DirectAuthenticationFlowTests: XCTestCase {
-//    let issuer = URL(string: "https://example.okta.com")!
-//    let urlSession = URLSessionMock()
-//    var client: OAuth2Client!
-//    var openIdConfiguration: OpenIdConfiguration!
-//    var flow: DirectAuthenticationFlow!
-//    
-//    override func setUpWithError() throws {
-//        client = OAuth2Client(baseURL: issuer,
-//                              clientId: "clientId",
-//                              scopes: "openid profile",
-//                              session: urlSession)
-//        openIdConfiguration = try mock(filename: "openid-configuration",
-//                                       matching: "OktaDirectAuthTests")
-//        flow = client.directAuthenticationFlow()
-//        
-//        JWK.validator = MockJWKValidator()
-//        Token.idTokenValidator = MockIDTokenValidator()
-//        Token.accessTokenValidator = MockTokenHashValidator()
-//    }
-//    
-//    override func tearDownWithError() throws {
-//        JWK.resetToDefault()
-//        Token.resetToDefault()
-//    }
-//    
-//    func testDirectAuthSuccess() throws {
-//        urlSession.expect("https://example.okta.com/.well-known/openid-configuration",
-//                          data: try data(filename: "openid-configuration"),
-//                          contentType: "application/json")
-//        
-//        let wait = expectation(description: "run step")
-//        let token = Token.mockToken()
-//        let factor = TestFactor(result: .success(.success(token)), exception: nil)
-//        flow.runStep(with: factor) { result in
-//            XCTAssertEqual(result, .success(.success(token)))
-//            wait.fulfill()
-//        }
-//        waitForExpectations(timeout: 1)
-//    }
-//    
-//    func testDirectAuthFailure() throws {
-//        urlSession.expect("https://example.okta.com/.well-known/openid-configuration",
-//                          data: try data(filename: "openid-configuration"),
-//                          contentType: "application/json")
-//
-//        let wait = expectation(description: "run step")
-//        let factor = TestFactor(result: .failure(.pollingTimeoutExceeded), exception: nil)
-//        flow.runStep(with: factor) { result in
-//            XCTAssertEqual(result, .failure(.pollingTimeoutExceeded))
-//            wait.fulfill()
-//        }
-//        waitForExpectations(timeout: 1)
-//    }
-//
-//    func testDirectAuthException() throws {
-//        urlSession.expect("https://example.okta.com/.well-known/openid-configuration",
-//                          data: try data(filename: "openid-configuration"),
-//                          contentType: "application/json")
-//
-//        let wait = expectation(description: "run step")
-//        let factor = TestFactor(result: nil, exception: APIClientError.invalidRequestData)
-//        flow.runStep(with: factor) { result in
-//            XCTAssertEqual(result, .failure(.network(error: .invalidRequestData)))
-//            wait.fulfill()
-//        }
-//        waitForExpectations(timeout: 1)
-//    }
-//}
+final class DirectAuthenticationFlowTests: XCTestCase {
+    let issuer = URL(string: "https://example.okta.com")!
+    let urlSession = URLSessionMock()
+    var client: OAuth2Client!
+    var openIdConfiguration: OpenIdConfiguration!
+    var flow: DirectAuthenticationFlow!
+    
+    static override func setUp() {
+        registerMock(bundles: .oktaDirectAuthTests)
+    }
+    
+    override func setUpWithError() throws {
+        client = OAuth2Client(baseURL: issuer,
+                              clientId: "clientId",
+                              scopes: "openid profile",
+                              session: urlSession)
+        openIdConfiguration = try mock(filename: "openid-configuration")
+        flow = client.directAuthenticationFlow()
+        
+        JWK.validator = MockJWKValidator()
+        Token.idTokenValidator = MockIDTokenValidator()
+        Token.accessTokenValidator = MockTokenHashValidator()
+    }
+    
+    override func tearDownWithError() throws {
+        JWK.resetToDefault()
+        Token.resetToDefault()
+    }
+    
+    func testDirectAuthSuccess() throws {
+        urlSession.expect("https://example.okta.com/.well-known/openid-configuration",
+                          data: try data(filename: "openid-configuration"),
+                          contentType: "application/json")
+        
+        let wait = expectation(description: "run step")
+        let token = Token.mockToken()
+        let factor = TestFactor(result: .success(.success(token)), exception: nil)
+        flow.runStep(with: factor) { result in
+            XCTAssertEqual(result, .success(.success(token)))
+            wait.fulfill()
+        }
+        waitForExpectations(timeout: 1)
+    }
+    
+    func testDirectAuthFailure() throws {
+        urlSession.expect("https://example.okta.com/.well-known/openid-configuration",
+                          data: try data(filename: "openid-configuration"),
+                          contentType: "application/json")
+
+        let wait = expectation(description: "run step")
+        let factor = TestFactor(result: .failure(.pollingTimeoutExceeded), exception: nil)
+        flow.runStep(with: factor) { result in
+            XCTAssertEqual(result, .failure(.pollingTimeoutExceeded))
+            wait.fulfill()
+        }
+        waitForExpectations(timeout: 1)
+    }
+
+    func testDirectAuthException() throws {
+        urlSession.expect("https://example.okta.com/.well-known/openid-configuration",
+                          data: try data(filename: "openid-configuration"),
+                          contentType: "application/json")
+
+        let wait = expectation(description: "run step")
+        let factor = TestFactor(result: nil, exception: APIClientError.invalidRequestData)
+        flow.runStep(with: factor) { result in
+            XCTAssertEqual(result, .failure(.network(error: .invalidRequestData)))
+            wait.fulfill()
+        }
+        waitForExpectations(timeout: 1)
+    }
+}

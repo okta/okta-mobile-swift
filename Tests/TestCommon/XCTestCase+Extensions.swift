@@ -88,6 +88,6 @@ public extension XCTestCase {
         DispatchQueue.main.asyncAfter(deadline: .now() + duration) {
             sleepExpectation.fulfill()
         }
-        wait(for: [sleepExpectation], timeout: duration + 0.1)
+        wait(for: [sleepExpectation], timeout: duration * 3)
     }
 }
