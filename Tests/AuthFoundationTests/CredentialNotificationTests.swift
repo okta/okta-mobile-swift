@@ -23,6 +23,7 @@ final class CredentialNotificationTests: XCTestCase {
     var userDefaults: UserDefaults!
     var storage: UserDefaultsTokenStorage!
     var coordinator: CredentialCoordinatorImpl!
+    var notificationCenter: NotificationCenter!
     
     let token = try! Token(id: "TokenId",
                            issuedAt: Date(),
@@ -42,8 +43,9 @@ final class CredentialNotificationTests: XCTestCase {
         userDefaults = UserDefaults(suiteName: name)
         userDefaults.removePersistentDomain(forName: name)
 
+        notificationCenter = NotificationCenter()
         storage = UserDefaultsTokenStorage(userDefaults: userDefaults)
-        coordinator = CredentialCoordinatorImpl(tokenStorage: storage)
+        coordinator = CredentialCoordinatorImpl(tokenStorage: storage, notificationCenter: notificationCenter)
         
         XCTAssertEqual(storage.allIDs.count, 0)
     }
@@ -59,7 +61,8 @@ final class CredentialNotificationTests: XCTestCase {
     func testNotifications() throws {
         let oldCredential = coordinator.default
         
-        let recorder = NotificationRecorder(observing: [.defaultCredentialChanged])
+        let recorder = NotificationRecorder(notificationCenter: notificationCenter,
+                                            observing: [.defaultCredentialChanged])
         
         let credential = try coordinator.store(token: token, security: [])
         sleep(for: .short)

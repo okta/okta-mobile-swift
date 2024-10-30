@@ -15,23 +15,25 @@
 public final class NotificationRecorder: Sendable {
     nonisolated(unsafe) private(set) public var notifications: [Notification] = []
     nonisolated(unsafe) private var observers = [any NSObjectProtocol]()
+    let notificationCenter: NotificationCenter
     
-    public init(observing: [Notification.Name]? = nil) {
+    public init(notificationCenter: NotificationCenter = .default,
+                observing: [Notification.Name]? = nil)
+    {
+        self.notificationCenter = notificationCenter
         observing?.forEach {
             observe($0)
         }
     }
     
     deinit {
-        let center = NotificationCenter.default
         observers.forEach { observer in
-            center.removeObserver(observer)
+            notificationCenter.removeObserver(observer)
         }
     }
     
     public func observe(_ name: Notification.Name, object: AnyObject? = nil) {
-        let center = NotificationCenter.default
-        observers.append(center.addObserver(forName: name, object: object, queue: nil, using: { [weak self] notification in
+        observers.append(notificationCenter.addObserver(forName: name, object: object, queue: nil, using: { [weak self] notification in
             self?.received(notification)
         }))
     }

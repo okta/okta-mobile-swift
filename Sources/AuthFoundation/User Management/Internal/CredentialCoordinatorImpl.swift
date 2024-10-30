@@ -122,9 +122,13 @@ final class CredentialCoordinatorImpl: Sendable, CredentialCoordinator {
         DefaultCredentialDataSource()
     }
     
+    let notificationCenter: NotificationCenter
+    
     init(tokenStorage: any TokenStorage = defaultTokenStorage(),
-         credentialDataSource: any CredentialDataSource = defaultCredentialDataSource())
+         credentialDataSource: any CredentialDataSource = defaultCredentialDataSource(),
+         notificationCenter: NotificationCenter = .default)
     {
+        self.notificationCenter = notificationCenter
         _credentialDataSource = credentialDataSource
         _tokenStorage = tokenStorage
 
@@ -182,8 +186,8 @@ final class CredentialCoordinatorImpl: Sendable, CredentialCoordinator {
             _default = credential
             
             DispatchQueue.main.async {
-                NotificationCenter.default.post(name: .defaultCredentialChanged,
-                                                object: credential)
+                self.notificationCenter.post(name: .defaultCredentialChanged,
+                                             object: credential)
             }
         } catch {
             // Placeholder for when logging is added in a future release
@@ -243,13 +247,13 @@ extension CredentialCoordinatorImpl: CredentialDataSourceDelegate {
     func credential(dataSource: any CredentialDataSource, created credential: Credential) {
         credential.coordinator = self
         
-        NotificationCenter.default.post(name: .credentialCreated, object: credential)
+        self.notificationCenter.post(name: .credentialCreated, object: credential)
     }
     
     func credential(dataSource: any CredentialDataSource, removed credential: Credential) {
         credential.coordinator = nil
 
-        NotificationCenter.default.post(name: .credentialRemoved, object: credential)
+        self.notificationCenter.post(name: .credentialRemoved, object: credential)
     }
     
     func credential(dataSource: any CredentialDataSource, updated credential: Credential) {

@@ -176,8 +176,8 @@ final class OAuth2ClientTests: XCTestCase {
         let queue = DispatchQueue(label: "results")
         nonisolated(unsafe) var jwksResults = [JWKS]()
 
-        for _ in 1...4 {
-            let expect = expectation(description: "network request")
+        for index in 1...4 {
+            let expect = expectation(description: "network request \(index)")
             client.jwks { result in
                 switch result {
                 case .success(let jwks):
@@ -191,7 +191,7 @@ final class OAuth2ClientTests: XCTestCase {
             }
         }
         
-        waitForExpectations(timeout: 1.0) { error in
+        waitForExpectations(timeout: .long) { error in
             XCTAssertNil(error)
         }
         
