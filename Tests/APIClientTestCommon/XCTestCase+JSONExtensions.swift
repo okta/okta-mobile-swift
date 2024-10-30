@@ -11,8 +11,9 @@
 //
 
 import Foundation
-import XCTest
+import TestCommon
 import APIClient
+import XCTest
 
 public extension XCTestCase {
     func mock<T: Decodable & JSONDecodable>(filename: String) throws -> T {

@@ -14,6 +14,7 @@ import XCTest
 @testable import TestCommon
 @testable import AuthFoundation
 @testable import OktaDirectAuth
+@testable import APIClientTestCommon
 
 final class RequestTests: XCTestCase {
     var openIdConfiguration: OpenIdConfiguration!

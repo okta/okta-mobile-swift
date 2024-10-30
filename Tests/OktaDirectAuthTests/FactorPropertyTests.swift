@@ -13,12 +13,17 @@
 import XCTest
 @testable import OktaDirectAuth
 import APIClient
+@testable import APIClientTestCommon
 
 final class FactorPropertyTests: XCTestCase {
     typealias PrimaryFactor = DirectAuthenticationFlow.PrimaryFactor
     typealias SecondaryFactor = DirectAuthenticationFlow.SecondaryFactor
     typealias ContinuationFactor = DirectAuthenticationFlow.ContinuationFactor
 
+    static override func setUp() {
+        registerMock(bundles: .oktaDirectAuthTests)
+    }
+    
     func testLoginHint() throws {
         XCTAssertEqual(PrimaryFactor.password("foo").loginHintKey, "username")
         XCTAssertEqual(PrimaryFactor.otp(code: "123456").loginHintKey, "login_hint")
@@ -110,17 +115,17 @@ final class FactorPropertyTests: XCTestCase {
             "grant_type": "urn:okta:params:oauth:grant-type:webauthn",
         ])
 
-//        let context = DirectAuthenticationFlow.ContinuationType.WebAuthnContext(
-//            request: try mock(filename: "challenge-webauthn"),
-//            mfaContext: .init(supportedChallengeTypes: nil, mfaToken: "abc123"))
-//        parameters = ContinuationFactor.webAuthn(response: .init(clientDataJSON: "",
-//                                                                 authenticatorData: "",
-//                                                                 signature: "",
-//                                                                 userHandle: nil)).tokenParameters(currentStatus: .continuation(.webAuthn(context)))
-//                                                                    
-//        XCTAssertEqual(parameters.stringComponents, [
-//            "grant_type": "urn:okta:params:oauth:grant-type:mfa-webauthn",
-//            "mfa_token": "abc123",
-//        ])
+        let context = DirectAuthenticationFlow.ContinuationType.WebAuthnContext(
+            request: try mock(filename: "challenge-webauthn"),
+            mfaContext: .init(supportedChallengeTypes: nil, mfaToken: "abc123"))
+        parameters = ContinuationFactor.webAuthn(response: .init(clientDataJSON: "",
+                                                                 authenticatorData: "",
+                                                                 signature: "",
+                                                                 userHandle: nil)).tokenParameters(currentStatus: .continuation(.webAuthn(context)))
+                                                                    
+        XCTAssertEqual(parameters.stringComponents, [
+            "grant_type": "urn:okta:params:oauth:grant-type:mfa-webauthn",
+            "mfa_token": "abc123",
+        ])
     }
 }
