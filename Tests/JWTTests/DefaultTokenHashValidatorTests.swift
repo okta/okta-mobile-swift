@@ -25,6 +25,10 @@ final class DefaultTokenHashValidatorTests: XCTestCase {
     
     let validAccessToken = "VGhpc0lzQVJlYWxseUdyZWF0QWNjZXNzVG9rZW4sIERvbid0WW91VGhpbms_"
     
+    static override func setUp() {
+        registerMock(bundles: .jwtTests)
+    }
+    
     override func setUpWithError() throws {
         validator = DefaultTokenHashValidator(hashKey: .accessToken)
     }

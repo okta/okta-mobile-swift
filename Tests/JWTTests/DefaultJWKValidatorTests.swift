@@ -33,6 +33,10 @@ final class DefaultJWKValidatorTests: XCTestCase {
         """
     var validator: DefaultJWKValidator!
 
+    static override func setUp() {
+        registerMock(bundles: .jwtTests)
+    }
+    
     override func setUpWithError() throws {
         validator = DefaultJWKValidator()
     }

@@ -17,6 +17,10 @@ import TestCommon
 @testable import JWT
 
 final class JWKTests: XCTestCase {
+    static override func setUp() {
+        registerMock(bundles: .jwtTests)
+    }
+    
     func testKeySets() throws {
         let keyData = try data(filename: "keys")
         let jwks = try JSONDecoder().decode(JWKS.self, from: keyData)

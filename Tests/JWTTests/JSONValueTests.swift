@@ -18,6 +18,10 @@ class JSONTests: XCTestCase {
     let decoder = JSONDecoder()
     let encoder = JSONEncoder()
     
+    static override func setUp() {
+        registerMock(bundles: .jwtTests)
+    }
+    
     func testString() throws {
         let value = JSON.string("Test String")
         XCTAssertNotNil(value)

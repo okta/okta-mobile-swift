@@ -57,6 +57,10 @@ final class AuthorizationCodeFlowSuccessTests: XCTestCase {
     var client: OAuth2Client!
     var flow: AuthorizationCodeFlow!
 
+    static override func setUp() {
+        registerMock(bundles: .oktaOAuth2Tests)
+    }
+    
     override func setUpWithError() throws {
         client = OAuth2Client(baseURL: issuer,
                               clientId: "clientId",
@@ -67,13 +71,13 @@ final class AuthorizationCodeFlowSuccessTests: XCTestCase {
         Token.accessTokenValidator = MockTokenHashValidator()
         
         urlSession.expect("https://example.com/oauth2/default/.well-known/openid-configuration",
-                          data: try data(filename: "openid-configuration", matching: "OktaOAuth2Tests"),
+                          data: try data(filename: "openid-configuration"),
                           contentType: "application/json")
         urlSession.expect("https://example.okta.com/oauth2/v1/token",
-                          data: try data(filename: "token", matching: "OktaOAuth2Tests"),
+                          data: try data(filename: "token"),
                           contentType: "application/json")
         urlSession.expect("https://example.okta.com/oauth2/v1/keys?client_id=clientId",
-                          data: try data(filename: "keys", matching: "OktaOAuth2Tests"),
+                          data: try data(filename: "keys"),
                           contentType: "application/json")
 
         flow = client.authorizationCodeFlow(redirectUri: redirectUri,

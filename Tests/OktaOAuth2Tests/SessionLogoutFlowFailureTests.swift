@@ -28,6 +28,10 @@ class SessionLogoutFlowFailureTests: XCTestCase {
     let logoutIDToken = "logoutIDToken"
     let state = "state"
     
+    static override func setUp() {
+        registerMock(bundles: .oktaOAuth2Tests)
+    }
+    
     override func setUpWithError() throws {
         client = OAuth2Client(baseURL: issuer, clientId: "clientId", scopes: "openid", session: urlSession)
         

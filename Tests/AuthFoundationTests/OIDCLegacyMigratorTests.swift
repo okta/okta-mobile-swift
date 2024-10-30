@@ -26,6 +26,10 @@ final class OIDCLegacyMigratorTests: XCTestCase {
     let issuer = URL(string: "https://example.com")!
     let redirectUri = URL(string: "my-app:/")!
 
+    static override func setUp() {
+        registerMock(bundles: .authFoundationTests)
+    }
+    
     override func setUp() {
         keychain = MockKeychain()
         Keychain.implementation = keychain

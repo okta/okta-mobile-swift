@@ -24,6 +24,10 @@ final class DirectAuth2FATests: XCTestCase {
     var client: OAuth2Client!
     var flow: DirectAuthenticationFlow!
 
+    static override func setUp() {
+        registerMock(bundles: .oktaDirectAuthTests)
+    }
+    
     override func setUpWithError() throws {
         urlSession = URLSessionMock()
         client = OAuth2Client(baseURL: issuer,

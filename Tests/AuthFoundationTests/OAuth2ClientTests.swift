@@ -20,7 +20,11 @@ final class OAuth2ClientTests: XCTestCase {
                                                    clientId: "clientid",
                                                    scopes: "openid")
     var token: Token!
-
+    
+    static override func setUp() {
+        registerMock(bundles: .authFoundationTests)
+    }
+    
     override func setUpWithError() throws {
         Credential.tokenStorage = MockTokenStorage()
         Credential.credentialDataSource = MockCredentialDataSource()

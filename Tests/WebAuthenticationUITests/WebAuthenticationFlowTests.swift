@@ -30,6 +30,10 @@ class WebAuthenticationUITests: XCTestCase {
     private var logoutFlow: SessionLogoutFlow!
     private var client: OAuth2Client!
     
+    static override func setUp() {
+        registerMock(bundles: .webAuthenticationUITests)
+    }
+    
     override func setUpWithError() throws {
         client = OAuth2Client(baseURL: issuer,
                               clientId: "clientId",

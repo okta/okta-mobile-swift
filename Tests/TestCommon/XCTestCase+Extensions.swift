@@ -17,55 +17,34 @@ enum TestError: Error {
     case noBundleResourceFound
 }
 
-public extension Bundle {
-    func nestedBundles(suffixes: [String] = ["bundle", "xctest"]) -> [Bundle] {
-        var result: [Bundle] = [self]
-        
-        guard let resourcePath = resourcePath,
-              let enumerator = FileManager.default.enumerator(atPath: resourcePath)
-        else {
-            return result
-        }
-        
-        for case let path as String in enumerator {
-            guard suffixes.contains(where: { path.range(of: ".\($0)")?.isEmpty == false }),
-                  let bundle = Bundle(path: "\(resourcePath)/\(path)"),
-                  bundle.infoDictionary?["CFBundlePackageType"] as? String == "BNDL",
-                  !result.contains(where: { $0.bundleIdentifier == bundle.bundleIdentifier })
-            else {
-                continue
-            }
-            
-            result.append(contentsOf: bundle.nestedBundles(suffixes: suffixes))
-        }
-        
-        return result
-    }
-}
-
+nonisolated(unsafe) fileprivate var testBundles: [Bundle] = []
 public extension XCTestCase {
+    static func registerMock(bundles: Bundle...) {
+        testBundles = bundles
+    }
+
+    var mockBundles: [Bundle] {
+        var bundles: [Bundle] = testBundles
+        bundles.insert(Bundle(for: Self.self), at: 0)
+        return bundles
+    }
+
     func data(for json: String) -> Data {
         return json.data(using: .utf8)!
     }
     
-    func data(forClass testClass: XCTestCase.Type? = nil, filename: String, matching bundleName: String? = nil) throws -> Data {
-        let testClass = testClass ?? Self.self
-        return try data(from: Bundle(for: testClass), filename: filename, matching: bundleName)
+    func data(filename: String) throws -> Data {
+        return try data(from: mockBundles, filename: filename)
     }
     
-    func data(from bundle: Bundle, filename: String, matching bundleName: String? = nil) throws -> Data {
+    func data(from bundles: [Bundle], filename: String) throws -> Data {
         let file = (filename as NSString).deletingPathExtension
         var fileExtension = (filename as NSString).pathExtension
         if fileExtension == "" {
             fileExtension = "json"
         }
         
-        var bundles = bundle.nestedBundles()
-        if let bundleName = bundleName {
-            bundles = bundles.filter({ $0.bundleIdentifier?.range(of: bundleName)?.isEmpty == false })
-        }
-        
-        guard let url = bundles.compactMap({ $0.url(forResource: file, withExtension: fileExtension) }).first
+        guard let url = testBundles.compactMap({ $0.url(forResource: file, withExtension: fileExtension) }).first
         else {
             throw TestError.noBundleResourceFound
         }

@@ -93,6 +93,10 @@ final class CredentialRefreshTests: XCTestCase, OAuth2ClientDelegate {
         return credential
     }
     
+    static override func setUp() {
+        registerMock(bundles: .authFoundationTests)
+    }
+    
     override func setUpWithError() throws {
         delegate = CredentialRefreshDelegate()
         coordinator = MockCredentialCoordinator()

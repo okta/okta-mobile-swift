@@ -12,6 +12,10 @@ final class OAuth2ClientTests: XCTestCase {
     var urlSession: URLSessionMock!
     var client: OAuth2Client!
     
+    static override func setUp() {
+        registerMock(bundles: .oktaOAuth2Tests)
+    }
+    
     override func setUpWithError() throws {
         urlSession = URLSessionMock()
         client = OAuth2Client(baseURL: issuer, clientId: "theClientId", scopes: "openid profile offline_access", session: urlSession)
@@ -53,10 +57,10 @@ final class OAuth2ClientTests: XCTestCase {
                           data: openIdData,
                           contentType: "application/json")
         urlSession.expect("https://example.okta.com/oauth2/v1/keys?client_id=theClientId",
-                          data: try data(filename: "keys", matching: "OktaOAuth2Tests"),
+                          data: try data(filename: "keys"),
                           contentType: "application/json")
         urlSession.expect("https://example.okta.com/oauth2/v1/token",
-                          data: try data(filename: "token", matching: "OktaOAuth2Tests"),
+                          data: try data(filename: "token"),
                           contentType: "application/json")
         
         nonisolated(unsafe) var token: Token?

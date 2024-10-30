@@ -31,6 +31,10 @@ final class TokenTests: XCTestCase {
                                                    clientId: "clientid",
                                                    scopes: "openid")
     
+    static override func setUp() {
+        registerMock(bundles: .authFoundationTests)
+    }
+    
     override func setUpWithError() throws {
         JWK.validator = MockJWKValidator()
         Token.idTokenValidator = MockIDTokenValidator()

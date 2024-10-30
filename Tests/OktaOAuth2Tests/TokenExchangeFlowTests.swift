@@ -53,6 +53,10 @@ final class TokenExchangeFlowTests: XCTestCase {
     
     private let tokens: [TokenExchangeFlow.TokenType] = [.actor(type: .deviceSecret, value: "secret"), .subject(type: .idToken, value: "id_token")]
     
+    static override func setUp() {
+        registerMock(bundles: .oktaOAuth2Tests)
+    }
+    
     override func setUpWithError() throws {
         client = OAuth2Client(baseURL: issuer,
                               clientId: "clientId",
@@ -63,13 +67,13 @@ final class TokenExchangeFlowTests: XCTestCase {
         Token.accessTokenValidator = MockTokenHashValidator()
 
         urlSession.expect("https://example.okta.com/.well-known/openid-configuration",
-                          data: try data(filename: "openid-configuration", matching: "OktaOAuth2Tests"),
+                          data: try data(filename: "openid-configuration"),
                           contentType: "application/json")
         urlSession.expect("https://example.okta.com/oauth2/v1/keys?client_id=clientId",
-                          data: try data(filename: "keys", matching: "OktaOAuth2Tests"),
+                          data: try data(filename: "keys"),
                           contentType: "application/json")
         urlSession.expect("https://example.okta.com/oauth2/v1/token",
-                          data: try data(filename: "token", matching: "OktaOAuth2Tests"),
+                          data: try data(filename: "token"),
                           contentType: "application/json")
         
         flow = client.tokenExchangeFlow(audience: .default)

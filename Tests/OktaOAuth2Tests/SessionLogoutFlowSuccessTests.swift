@@ -46,11 +46,15 @@ final class SessionLogoutFlowSuccessTests: XCTestCase {
     let logoutIDToken = "logoutIDToken"
     let state = "state"
     
+    static override func setUp() {
+        registerMock(bundles: .oktaOAuth2Tests)
+    }
+    
     override func setUpWithError() throws {
         client = OAuth2Client(baseURL: issuer, clientId: "clientId", scopes: "openid", session: urlSession)
         
         urlSession.expect("https://example.com/.well-known/openid-configuration",
-                          data: try data(filename: "openid-configuration", matching: "OktaOAuth2Tests"),
+                          data: try data(filename: "openid-configuration"),
                           contentType: "application/json")
         
         flow = SessionLogoutFlow(logoutRedirectUri: logoutRedirectUri, client: client)

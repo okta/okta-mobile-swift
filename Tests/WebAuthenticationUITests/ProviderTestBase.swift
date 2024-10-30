@@ -97,16 +97,13 @@ class ProviderTestBase: XCTestCase, AuthorizationCodeFlowDelegate, SessionLogout
         logoutFlow.add(delegate: self)
         
         urlSession.expect("https://example.com/.well-known/openid-configuration",
-                          data: try data(filename: "openid-configuration",
-                                         matching: "WebAuthenticationUITests"),
+                          data: try data(filename: "openid-configuration"),
                           contentType: "application/json")
         urlSession.expect("https://example.okta.com/oauth2/v1/token",
-                          data: try data(filename: "token",
-                                         matching: "WebAuthenticationUITests"),
+                          data: try data(filename: "token"),
                           contentType: "application/json")
         urlSession.expect("https://example.okta.com/oauth2/v1/keys?client_id=clientId",
-                          data: try data(filename: "keys",
-                                         matching: "WebAuthenticationUITests"),
+                          data: try data(filename: "keys"),
                           contentType: "application/json")
         loginFlow = client.authorizationCodeFlow(redirectUri: redirectUri,
                                             additionalParameters: ["additional": "param"])

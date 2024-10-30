@@ -35,6 +35,10 @@ final class CredentialTests: XCTestCase {
                                                                        scopes: "openid"),
                                                   clientSettings: [ "client_id": "foo" ]))
 
+    static override func setUp() {
+        registerMock(bundles: .authFoundationTests)
+    }
+    
     override func setUpWithError() throws {
         coordinator = MockCredentialCoordinator()
         credential = coordinator.credentialDataSource.credential(for: token, coordinator: coordinator)
