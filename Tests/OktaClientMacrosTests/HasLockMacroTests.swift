@@ -16,9 +16,13 @@ import SwiftSyntaxMacros
 import SwiftSyntaxMacrosTestSupport
 import XCTest
 
+#if canImport(OktaClientMacros)
+import OktaClientMacros
+#endif
+
 final class HasLockMacroTests: XCTestCase {
     func testDefaultMacro() throws {
-        #if canImport(_OktaClientMacros)
+        #if canImport(OktaClientMacros)
         assertMacroExpansion(
         """
         @HasLock
@@ -48,7 +52,7 @@ final class HasLockMacroTests: XCTestCase {
     }
 
     func testCustomNameMacro() throws {
-        #if canImport(_OktaClientMacros)
+        #if canImport(OktaClientMacros)
         assertMacroExpansion(
         """
         @HasLock(named: "myLock")

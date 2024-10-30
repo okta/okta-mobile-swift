@@ -14,7 +14,7 @@ import Foundation
 import AuthFoundation
 import OktaUtilities
 import OktaConcurrency
-import OktaClientMacros
+import OktaConcurrency
 import APIClient
 
 /// The delegate of a ``SessionLogoutFlow`` may adopt some, or all, of the methods described here. These allow a developer to customize or interact with the logout flow during logout session.

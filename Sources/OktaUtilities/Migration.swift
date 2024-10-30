@@ -11,6 +11,7 @@
 //
 
 import Foundation
+import OktaConcurrency
 
 extension SDKVersion {
     /// Determines whether or not some user data needs to be migrated.
@@ -22,11 +23,13 @@ extension SDKVersion {
     
     /// Migrates user data, if necessary.
     public static func migrateIfNeeded() throws {
-        guard isMigrationNeeded else {
-            return
+        try sharedLock.withLock {
+            guard isMigrationNeeded else {
+                return
+            }
+            
+            try Migration.shared.migrate()
         }
-        
-        try Migration.shared.migrate()
     }
     
     /// Registers an SDK version migrator for use within a migration process.
@@ -34,7 +37,9 @@ extension SDKVersion {
     /// Version migrators are utilized to migrate user data on an as-needed basis.
     /// - Parameter migrator: Migrator to register.
     public static func register(migrator: any SDKVersionMigrator) {
-        Migration.registeredMigrators.append(migrator)
+        sharedLock.withLock {
+            Migration.registeredMigrators.append(migrator)
+        }
     }
     
     /// Namespace used for a variety of version migration agents.
@@ -44,7 +49,9 @@ extension SDKVersion {
         nonisolated(unsafe) fileprivate(set) static var registeredMigrators: [any SDKVersionMigrator] = defaultMigrators()
 
         static func resetMigrators() {
-            registeredMigrators = defaultMigrators()
+            sharedLock.withLock {
+                registeredMigrators = defaultMigrators()
+            }
         }
         
         static func defaultMigrators() -> [any SDKVersionMigrator] {

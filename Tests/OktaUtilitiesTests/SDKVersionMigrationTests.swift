@@ -18,7 +18,7 @@ enum TestMigratorError: Error {
 }
 
 class TestMigrator: SDKVersionMigrator, @unchecked Sendable {
-    var error: Error?
+    var error: (any Error)?
     private(set) var migrationCalled: Bool = false
 
     func reset() {

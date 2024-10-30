@@ -11,29 +11,27 @@ let includePrivacyManifest = false
 #endif
 
 func exclude(_ resources: [String] = []) -> [String] {
-    guard !includePrivacyManifest else {
-        return resources
+    var resources = resources
+    if !includePrivacyManifest {
+        resources.append("PrivacyInfo.xcprivacy")
     }
-
-    return resources + ["PrivacyInfo.xcprivacy"]
+    return resources
 }
 
 func include(_ resources: PackageDescription.Resource...) -> [PackageDescription.Resource]? {
-    guard !includePrivacyManifest else {
-        return Array(resources)
+    var resources = resources
+    if includePrivacyManifest {
+        resources.append(.copy("PrivacyInfo.xcprivacy"))
     }
-
-    var result = Array(resources)
-    result.append(.copy("PrivacyInfo.xcprivacy"))
-    return result
+    return resources
 }
 
 var package = Package(
     name: "OktaClient",
     defaultLocalization: "en",
     platforms: [
-        .iOS(.v12),
-        .tvOS(.v12),
+        .iOS(.v13),
+        .tvOS(.v13),
         .watchOS(.v7),
         .visionOS(.v1),
         .macOS(.v10_15),
@@ -45,39 +43,34 @@ var package = Package(
         .library(name: "OktaDirectAuth", targets: ["OktaDirectAuth"]),
     ],
     dependencies: [
-        .package(url: "https://github.com/apple/swift-docc-plugin", from: "1.0.0"),
         .package(url: "https://github.com/swiftlang/swift-syntax", "509.0.0"..<"601.0.0-prerelease")
     ],
     targets: [
+        // Concurrency & locking
+        .target(name: "OktaConcurrency",
+                dependencies: [
+                    "OktaClientMacros"
+                ]),
+        .testTarget(name: "OktaConcurrencyTests",
+                    dependencies: [
+                        .target(name: "OktaConcurrency"),
+                        .target(name: "TestCommon")
+                    ]),
+        
         // Macros
-        .macro(name: "_OktaClientMacros",
+        .macro(name: "OktaClientMacros",
                dependencies: [
                 .product(name: "SwiftCompilerPlugin", package: "swift-syntax"),
                 .product(name: "SwiftSyntax", package: "swift-syntax"),
                 .product(name: "SwiftSyntaxMacros", package: "swift-syntax"),
                 .product(name: "SwiftDiagnostics", package: "swift-syntax"),
-               ],
-               path: "Sources/OktaClientMacros/Implementation"),
+               ]),
         .testTarget(name: "OktaClientMacrosTests",
                     dependencies: [
-                        .target(name: "OktaClientMacros"),
+                        "OktaClientMacros",
                         .product(name: "SwiftSyntaxMacros", package: "swift-syntax"),
                         .product(name: "SwiftSyntaxMacrosTestSupport", package: "swift-syntax"),
                         .product(name: "SwiftSyntaxMacrosGenericTestSupport", package: "swift-syntax"),
-                    ]),
-        .target(name: "OktaClientMacros",
-                dependencies: [
-                    "_OktaClientMacros",
-                    .target(name: "OktaConcurrency"),
-                ],
-                path: "Sources/OktaClientMacros/Interface"),
-
-        // Concurrency & locking
-        .target(name: "OktaConcurrency"),
-        .testTarget(name: "OktaConcurrencyTests",
-                    dependencies: [
-                        .target(name: "OktaConcurrency"),
-                        .target(name: "TestCommon")
                     ]),
 
         // Common test utilities
@@ -87,8 +80,7 @@ var package = Package(
         // Keychain
         .target(name: "Keychain",
                 dependencies: [
-                    .target(name: "OktaConcurrency"),
-                    .target(name: "OktaClientMacros")
+                    .target(name: "OktaConcurrency")
                 ]),
         .target(name: "KeychainTestCommon",
                 dependencies: [
@@ -105,14 +97,12 @@ var package = Package(
         // Common types
         .target(name: "OktaUtilities",
                 dependencies: [
-                    .target(name: "OktaConcurrency"),
-                    .target(name: "OktaClientMacros")
+                    .target(name: "OktaConcurrency")
                 ]),
         .testTarget(name: "OktaUtilitiesTests",
                     dependencies: [
                         .target(name: "OktaUtilities"),
                         .target(name: "OktaConcurrency"),
-                        .target(name: "OktaClientMacros"),
                         .target(name: "TestCommon")
                     ]),
         
@@ -162,7 +152,6 @@ var package = Package(
         // AuthFoundation
         .target(name: "AuthFoundation",
                 dependencies: [
-                    "_OktaClientMacros",
                     .target(name: "OktaUtilities"),
                     .target(name: "OktaConcurrency"),
                     .target(name: "Keychain"),
@@ -229,19 +218,6 @@ var package = Package(
     swiftLanguageVersions: [.v5]
 )
 
-#if compiler(>=6)
-for target in package.targets where target.type != .system && target.type != .test {
-    target.swiftSettings = target.swiftSettings ?? [
-        .enableExperimentalFeature("StrictConcurrency=complete")
-    ]
-    target.swiftSettings?.append(contentsOf: [
-        .enableExperimentalFeature("StrictConcurrency"),
-        .enableUpcomingFeature("ExistentialAny"),
-        .enableUpcomingFeature("InferSendableFromCaptures"),
-    ])
-}
-#endif
-
 #if canImport(Darwin)
 // WebAuthenticationUI
 package.products.append(.library(name: "WebAuthenticationUI", targets: ["WebAuthenticationUI"]))
@@ -264,4 +240,24 @@ package.targets.append(contentsOf: [
                 ],
                 resources: [ .process("MockResponses") ]),
 ])
+#endif
+
+for target in package.targets {
+    target.swiftSettings = target.swiftSettings ?? []
+    target.swiftSettings?.append(contentsOf: [
+        .enableUpcomingFeature("ExistentialAny")
+    ])
+    
+    if target.type != .system && target.type != .test {
+        target.swiftSettings?.append(contentsOf: [
+            .enableExperimentalFeature("StrictConcurrency=complete"),
+            .enableUpcomingFeature("InferSendableFromCaptures"),
+        ])
+    }
+}
+
+#if !os(Windows)
+package.dependencies.append(
+    .package(url: "https://github.com/apple/swift-docc-plugin", from: "1.0.0")
+)
 #endif

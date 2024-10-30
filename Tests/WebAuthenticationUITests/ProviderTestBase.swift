@@ -23,28 +23,28 @@ import XCTest
 
 final class WebAuthenticationProviderDelegateRecorder: WebAuthenticationProviderDelegate {
     nonisolated(unsafe) private(set) var token: Token?
-    nonisolated(unsafe) private(set) var error: Error?
+    nonisolated(unsafe) private(set) var error: (any Error)?
     nonisolated(unsafe) var shouldUseEphemeralSession: Bool = true
     nonisolated(unsafe) private(set) var logoutFinished = false
-    nonisolated(unsafe) private(set) var logoutError: Error?
+    nonisolated(unsafe) private(set) var logoutError: (any Error)?
     
-    func authentication(provider: WebAuthenticationProvider, received token: Token) {
+    func authentication(provider: any WebAuthenticationProvider, received token: Token) {
         self.token = token
     }
     
-    func authentication(provider: WebAuthenticationProvider, received error: Error) {
+    func authentication(provider: any WebAuthenticationProvider, received error: any Error) {
         self.error = error
     }
     
-    func authenticationShouldUseEphemeralSession(provider: WebAuthenticationProvider) -> Bool {
+    func authenticationShouldUseEphemeralSession(provider: any WebAuthenticationProvider) -> Bool {
         shouldUseEphemeralSession
     }
     
-    func logout(provider: WebAuthenticationProvider, finished: Bool) {
+    func logout(provider: any WebAuthenticationProvider, finished: Bool) {
         self.logoutFinished = finished
     }
     
-    func logout(provider: WebAuthenticationProvider, received error: Error) {
+    func logout(provider: any WebAuthenticationProvider, received error: any Error) {
         self.logoutError = error
     }
     
@@ -74,7 +74,7 @@ class ProviderTestBase: XCTestCase, AuthorizationCodeFlowDelegate, SessionLogout
     var authenticationURL: URL?
     var logoutURL: URL?
     var token: Token?
-    var error: Error?
+    var error: (any Error)?
     
     enum WaitType {
         case authenticateUrl
@@ -146,7 +146,7 @@ class ProviderTestBase: XCTestCase, AuthorizationCodeFlowDelegate, SessionLogout
     }
 
     func waitFor(_ type: WaitType, timeout: TimeInterval = 5.0, pollInterval: TimeInterval = 0.1) throws {
-        var resultError: Error?
+        var resultError: (any Error)?
         nonisolated(unsafe) var success: Bool?
         let wait = expectation(description: "Receive authentication URL")
         waitFor(type, timeout: timeout, pollInterval: pollInterval) { result in

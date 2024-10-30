@@ -13,7 +13,7 @@
 import Foundation
 import AuthFoundation
 import OktaConcurrency
-import OktaClientMacros
+import OktaConcurrency
 import APIClient
 
 @HasLock

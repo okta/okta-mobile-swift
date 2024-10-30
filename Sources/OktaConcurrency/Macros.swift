@@ -11,14 +11,13 @@
 //
 
 import Foundation
-@_exported import OktaConcurrency
 
 @attached(accessor)
 @attached(peer, names: prefixed(_))
-public macro Synchronized(value: Any? = nil, lock: Lock? = nil) = #externalMacro(module: "_OktaClientMacros", type: "SynchronizedMacro")
+public macro Synchronized(value: Any? = nil, lock: Lock? = nil) = #externalMacro(module: "OktaClientMacros", type: "SynchronizedMacro")
 
 @attached(accessor)
-public macro Synchronized<T>(variable: T, lock: Lock) = #externalMacro(module: "_OktaClientMacros", type: "SynchronizedMacro")
+public macro Synchronized<T>(variable: T, lock: Lock) = #externalMacro(module: "OktaClientMacros", type: "SynchronizedMacro")
 
 @attached(member, names: arbitrary)
-public macro HasLock(named: String = "lock") = #externalMacro(module: "_OktaClientMacros", type: "HasLockMacro")
+public macro HasLock(named: String = "lock") = #externalMacro(module: "OktaClientMacros", type: "HasLockMacro")

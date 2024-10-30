@@ -14,7 +14,7 @@
 
 import Foundation
 import Keychain
-import OktaClientMacros
+import OktaConcurrency
 
 #if canImport(LocalAuthentication)
 import LocalAuthentication

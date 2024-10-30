@@ -14,7 +14,7 @@ import Foundation
 import AuthFoundation
 import OktaUtilities
 import OktaConcurrency
-import OktaClientMacros
+import OktaConcurrency
 import APIClient
 
 #if os(Linux)

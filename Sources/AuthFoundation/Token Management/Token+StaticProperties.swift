@@ -12,7 +12,7 @@
 
 import Foundation
 import OktaConcurrency
-import OktaClientMacros
+import OktaConcurrency
 import JWT
 
 fileprivate let staticLock = Lock()

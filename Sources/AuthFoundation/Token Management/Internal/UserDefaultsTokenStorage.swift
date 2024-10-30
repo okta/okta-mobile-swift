@@ -11,7 +11,7 @@
 //
 
 import Foundation
-import OktaClientMacros
+import OktaConcurrency
 
 #if canImport(LocalAuthentication) && !os(tvOS)
 import LocalAuthentication

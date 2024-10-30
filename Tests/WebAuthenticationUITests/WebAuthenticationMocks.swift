@@ -21,7 +21,7 @@ struct MockAuthorizationServicesProviderFactory: AuthorizationServicesProviderFa
     func createWebAuthenticationProvider(loginFlow: AuthorizationCodeFlow,
                                          logoutFlow: SessionLogoutFlow?,
                                          from window: WebAuthentication.WindowAnchor?,
-                                         delegate: WebAuthenticationProviderDelegate) -> WebAuthenticationProvider? {
+                                         delegate: any WebAuthenticationProviderDelegate) -> (any WebAuthenticationProvider)? {
         return WebAuthenticationProviderMock(loginFlow: loginFlow, logoutFlow: logoutFlow, delegate: delegate)
     }
 }
@@ -29,7 +29,7 @@ struct MockAuthorizationServicesProviderFactory: AuthorizationServicesProviderFa
 final class WebAuthenticationProviderMock: WebAuthenticationProvider {
     nonisolated(unsafe) var loginFlow: AuthorizationCodeFlow
     nonisolated(unsafe) var logoutFlow: SessionLogoutFlow?
-    nonisolated(unsafe) var delegate: WebAuthenticationProviderDelegate?
+    nonisolated(unsafe) var delegate: (any WebAuthenticationProviderDelegate)?
     
     enum State {
         case initialized, started, cancelled, logout
@@ -37,7 +37,7 @@ final class WebAuthenticationProviderMock: WebAuthenticationProvider {
     
     nonisolated(unsafe) var state: State = .initialized
     
-    init(loginFlow: AuthorizationCodeFlow, logoutFlow: SessionLogoutFlow?, delegate: WebAuthenticationProviderDelegate) {
+    init(loginFlow: AuthorizationCodeFlow, logoutFlow: SessionLogoutFlow?, delegate: any WebAuthenticationProviderDelegate) {
         self.loginFlow = loginFlow
         self.logoutFlow = logoutFlow
         self.delegate = delegate

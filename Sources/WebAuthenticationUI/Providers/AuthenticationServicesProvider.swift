@@ -12,7 +12,7 @@
 
 import AuthFoundation
 import OktaOAuth2
-import OktaClientMacros
+import OktaConcurrency
 
 #if canImport(AuthenticationServices)
 import AuthenticationServices

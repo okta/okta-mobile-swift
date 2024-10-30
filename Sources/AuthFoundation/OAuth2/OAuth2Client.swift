@@ -15,7 +15,7 @@ import JWT
 import APIClient
 import OktaUtilities
 import OktaConcurrency
-import OktaClientMacros
+import OktaConcurrency
 
 #if os(Linux)
 import FoundationNetworking

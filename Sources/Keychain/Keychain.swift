@@ -12,7 +12,7 @@
 
 import Foundation
 import OktaConcurrency
-import OktaClientMacros
+import OktaConcurrency
 
 #if canImport(Darwin)
 

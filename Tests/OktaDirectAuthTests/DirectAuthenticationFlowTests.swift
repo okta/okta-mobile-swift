@@ -49,7 +49,7 @@ struct TestFactor: AuthenticationFactor {
                      openIdConfiguration: OpenIdConfiguration,
                      loginHint: String?,
                      currentStatus: OktaDirectAuth.DirectAuthenticationFlow.Status?,
-                     factor: TestFactor) throws -> OktaDirectAuth.StepHandler
+                     factor: TestFactor) throws -> any OktaDirectAuth.StepHandler
     {
         if let exception = exception {
             throw exception

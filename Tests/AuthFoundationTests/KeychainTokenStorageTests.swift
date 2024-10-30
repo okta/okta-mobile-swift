@@ -418,7 +418,6 @@ final class KeychainTokenStorageTests: XCTestCase {
 
     func testReplaceTokenSecurity() throws {
         let encoder = JSONEncoder()
-        let decoder = JSONDecoder()
         
         let oldToken = try Token(id: token.id,
                                  issuedAt: token.issuedAt!.addingTimeInterval(-500),

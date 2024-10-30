@@ -11,7 +11,7 @@
 //
 
 import Foundation
-import OktaClientMacros
+import OktaConcurrency
 
 #if os(Linux)
 import FoundationNetworking

@@ -14,7 +14,7 @@ import Foundation
 import AuthFoundation
 import OktaUtilities
 import OktaConcurrency
-import OktaClientMacros
+import OktaConcurrency
 
 /// An authentication flow class that implements the Resource Owner Flow exchange.
 ///

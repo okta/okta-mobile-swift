@@ -22,7 +22,7 @@ class APIRetryDelegateRecorder: APIClientDelegate {
     var response: APIRetry?
     private(set) var requests: [URLRequest] = []
 
-    func api(client: APIClient, shouldRetry request: URLRequest) -> APIRetry {
+    func api(client: any APIClient, shouldRetry request: URLRequest) -> APIRetry {
         requests.append(request)
         return response ?? .default
     }

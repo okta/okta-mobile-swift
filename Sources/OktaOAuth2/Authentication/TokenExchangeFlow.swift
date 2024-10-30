@@ -14,7 +14,7 @@ import AuthFoundation
 import Foundation
 import OktaUtilities
 import OktaConcurrency
-import OktaClientMacros
+import OktaConcurrency
 import APIClient
 
 /// An authentication flow class that implements the Token Exchange Flow.

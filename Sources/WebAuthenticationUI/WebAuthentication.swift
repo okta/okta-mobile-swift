@@ -16,7 +16,7 @@ import Foundation
 import OktaOAuth2
 import OktaUtilities
 import OktaConcurrency
-import OktaClientMacros
+import OktaConcurrency
 import APIClient
 
 #if canImport(UIKit) || canImport(AppKit)

@@ -13,7 +13,7 @@
 import Foundation
 
 import OktaConcurrency
-import OktaClientMacros
+import OktaConcurrency
 
 fileprivate let staticLock = Lock()
 nonisolated(unsafe) fileprivate var _isDefaultSynchronizable: Bool = false

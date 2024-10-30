@@ -13,10 +13,11 @@
 import Foundation
 import SwiftSyntaxMacros
 
-#if canImport(_OktaClientMacros)
-@testable import _OktaClientMacros
+#if canImport(OktaClientMacros)
+import OktaClientMacros
+@testable import OktaClientMacros
 
-let testMacros: [String: Macro.Type] = [
+let testMacros: [String: any Macro.Type] = [
     "Synchronized": SynchronizedMacro.self,
     "HasLock": HasLockMacro.self,
 ]

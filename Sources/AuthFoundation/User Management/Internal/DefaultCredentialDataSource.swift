@@ -11,7 +11,7 @@
 //
 
 import Foundation
-import OktaClientMacros
+import OktaConcurrency
 
 @HasLock
 final class DefaultCredentialDataSource: CredentialDataSource {

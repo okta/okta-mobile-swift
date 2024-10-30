@@ -42,28 +42,28 @@ public final class SDKVersion: Sendable {
     /// The calculated user agent string that will be included in outgoing network requests.
     public static var userAgent: String {
         get {
-            lock.withLock {
+            sharedLock.withLock {
                 _userAgent
             }
         }
     }
 
-    private static let lock = Lock()
+    static let sharedLock = Lock()
     nonisolated(unsafe) private static var _userAgent = ""
-    nonisolated(unsafe) fileprivate static var sdkVersions: [SDKVersion] = []
+    nonisolated(unsafe) fileprivate static var _sdkVersions: [SDKVersion] = []
     
     /// Register a new SDK library component to be added to the ``userAgent`` value.
     /// > Note: SDK ``name`` values must be unique. If a duplicate SDK  version is already added, only the first registered SDK value will be applied.
     /// - Parameter sdk: SDK version to add.
     public static func register(sdk: SDKVersion) {
-        lock.withLock {
-            guard sdkVersions.filter({ $0.name == sdk.name }).isEmpty else {
+        sharedLock.withLock {
+            guard _sdkVersions.filter({ $0.name == sdk.name }).isEmpty else {
                 return
             }
             
-            sdkVersions.append(sdk)
+            _sdkVersions.append(sdk)
             
-            let sdkVersions = SDKVersion.sdkVersions
+            let sdkVersions = _sdkVersions
                 .sorted(by: { $0.name < $1.name })
                 .map(\.displayName)
                 .joined(separator: " ")

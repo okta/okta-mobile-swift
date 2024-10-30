@@ -16,9 +16,13 @@ import SwiftSyntaxMacros
 import SwiftSyntaxMacrosTestSupport
 import XCTest
 
+#if canImport(OktaClientMacros)
+import OktaClientMacros
+#endif
+
 final class SynchronizedMacroTests: XCTestCase {
     func testSimpleSynchronized() throws {
-        #if canImport(_OktaClientMacros)
+        #if canImport(OktaClientMacros)
         assertMacroExpansion(
         """
         class TestClass {
@@ -53,7 +57,7 @@ final class SynchronizedMacroTests: XCTestCase {
     }
 
     func testDictionarySynchronized() throws {
-        #if canImport(_OktaClientMacros)
+        #if canImport(OktaClientMacros)
         assertMacroExpansion(
         """
         public final class TestClass {
@@ -88,7 +92,7 @@ final class SynchronizedMacroTests: XCTestCase {
     }
 
     func testDefaultValueSynchronized() throws {
-        #if canImport(_OktaClientMacros)
+        #if canImport(OktaClientMacros)
         assertMacroExpansion(
         """
         class TestClass {

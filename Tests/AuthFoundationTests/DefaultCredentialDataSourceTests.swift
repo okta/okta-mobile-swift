@@ -20,12 +20,12 @@ final class CredentialDataSourceDelegateRecorder: CredentialDataSourceDelegate {
     nonisolated(unsafe) private(set) var removed: [Credential] = []
     nonisolated(unsafe) private(set) var callCount = 0
 
-    func credential(dataSource: CredentialDataSource, created credential: Credential) {
+    func credential(dataSource: any CredentialDataSource, created credential: Credential) {
         created.append(credential)
         callCount += 1
     }
     
-    func credential(dataSource: CredentialDataSource, removed credential: Credential) {
+    func credential(dataSource: any CredentialDataSource, removed credential: Credential) {
         removed.append(credential)
         callCount += 1
     }
