@@ -97,7 +97,7 @@ final class TokenExchangeFlowTests: XCTestCase {
             expect.fulfill()
         }
         
-        waitForExpectations(timeout: 5) { error in
+        waitForExpectations(timeout: .long) { error in
             XCTAssertNil(error)
         }
         
@@ -133,7 +133,7 @@ final class TokenExchangeFlowTests: XCTestCase {
             
             expect.fulfill()
         }
-        waitForExpectations(timeout: 1) { error in
+        waitForExpectations(timeout: .long) { error in
             XCTAssertNil(error)
         }
 

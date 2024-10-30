@@ -17,16 +17,20 @@ import Foundation
 import FoundationNetworking
 #endif
 
-//struct MockApiRequest: APIRequest {
-//    var url: URL
-//    var cachePolicy: URLRequest.CachePolicy
-//
-//    typealias ResponseType = Token
-//
-//    init(url: URL,
-//         cachePolicy: URLRequest.CachePolicy = .reloadIgnoringLocalAndRemoteCacheData)
-//    {
-//        self.url = url
-//        self.cachePolicy = cachePolicy
-//    }
-//}
+struct SampleResponse: Decodable, Sendable {
+    let message: String
+}
+
+struct MockApiRequest<ResponseType: Decodable & Sendable>: APIRequest {
+    typealias ResponseType = ResponseType
+    
+    var url: URL
+    var cachePolicy: URLRequest.CachePolicy
+
+    init(url: URL,
+         cachePolicy: URLRequest.CachePolicy = .reloadIgnoringLocalAndRemoteCacheData)
+    {
+        self.url = url
+        self.cachePolicy = cachePolicy
+    }
+}

@@ -97,7 +97,7 @@ final class SessionTokenFlowSuccessTests: XCTestCase {
         flow.start(with: "theSessionToken", context: .init(state: "state")) { _ in
             expect.fulfill()
         }
-        waitForExpectations(timeout: 1) { error in
+        waitForExpectations(timeout: .long) { error in
             XCTAssertNil(error)
         }
 
@@ -125,7 +125,7 @@ final class SessionTokenFlowSuccessTests: XCTestCase {
             }
             wait.fulfill()
         }
-        waitForExpectations(timeout: 1) { error in
+        waitForExpectations(timeout: .long) { error in
             XCTAssertNil(error)
         }
         

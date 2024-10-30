@@ -104,7 +104,7 @@ final class AuthorizationCodeFlowSuccessTests: XCTestCase {
         flow.start(with: context, additionalParameters: ["foo": "bar"]) { _ in
             expect_1.fulfill()
         }
-        waitForExpectations(timeout: 1.0) { error in
+        waitForExpectations(timeout: .long) { error in
             XCTAssertNil(error)
         }
 
@@ -121,7 +121,7 @@ final class AuthorizationCodeFlowSuccessTests: XCTestCase {
         try flow.resume(with: URL(string: "com.example:/callback?code=ABCEasyAs123&state=ABC123")!) { _ in
             expect_2.fulfill()
         }
-        waitForExpectations(timeout: 1.0) { error in
+        waitForExpectations(timeout: .long) { error in
             XCTAssertNil(error)
         }
 
@@ -149,7 +149,7 @@ final class AuthorizationCodeFlowSuccessTests: XCTestCase {
             }
             wait_1.fulfill()
         }
-        waitForExpectations(timeout: 1) { error in
+        waitForExpectations(timeout: .long) { error in
             XCTAssertNil(error)
         }
         
@@ -172,7 +172,7 @@ final class AuthorizationCodeFlowSuccessTests: XCTestCase {
             }
             wait_2.fulfill()
         }
-        waitForExpectations(timeout: 1) { error in
+        waitForExpectations(timeout: .long) { error in
             XCTAssertNil(error)
         }
 
@@ -217,7 +217,7 @@ final class AuthorizationCodeFlowSuccessTests: XCTestCase {
         flow.start(with: .init(state: "ABC123")) { _ in
             wait.fulfill()
         }
-        waitForExpectations(timeout: 1)
+        waitForExpectations(timeout: .long)
         
         XCTAssertEqual(try flow.authorizationCode(from: URL(string: "com.example:/?state=ABC123&code=foo")!), "foo")
     }

@@ -71,7 +71,7 @@ final class DeviceAuthorizationFlowSuccessTests: XCTestCase {
         flow.start() { _ in
             expect_1.fulfill()
         }
-        waitForExpectations(timeout: 1) { error in
+        waitForExpectations(timeout: .long) { error in
             XCTAssertNil(error)
         }
 
@@ -88,7 +88,7 @@ final class DeviceAuthorizationFlowSuccessTests: XCTestCase {
         flow.resume(with: context) { _ in
             expect_2.fulfill()
         }
-        waitForExpectations(timeout: 5) { error in
+        waitForExpectations(timeout: .long) { error in
             XCTAssertNil(error)
         }
         XCTAssertNil(flow.context)
@@ -114,7 +114,7 @@ final class DeviceAuthorizationFlowSuccessTests: XCTestCase {
             }
             wait_1.fulfill()
         }
-        waitForExpectations(timeout: 1) { error in
+        waitForExpectations(timeout: .long) { error in
             XCTAssertNil(error)
         }
         
@@ -137,7 +137,7 @@ final class DeviceAuthorizationFlowSuccessTests: XCTestCase {
             }
             wait_2.fulfill()
         }
-        waitForExpectations(timeout: 2) { error in
+        waitForExpectations(timeout: .long) { error in
             XCTAssertNil(error)
         }
 

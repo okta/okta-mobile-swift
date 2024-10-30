@@ -79,7 +79,7 @@ final class SessionLogoutFlowSuccessTests: XCTestCase {
             resumeExpection.fulfill()
         }
         
-        wait(for: [resumeExpection], timeout: 1)
+        wait(for: [resumeExpection], timeout: .long)
 
         XCTAssertEqual(delegate.url?.absoluteString, """
                             https://example.okta.com/oauth2/v1/logout\
@@ -123,7 +123,7 @@ final class SessionLogoutFlowSuccessTests: XCTestCase {
             resumeExpection.fulfill()
         }
         
-        wait(for: [resumeExpection], timeout: 1)
+        wait(for: [resumeExpection], timeout: .long)
 
         XCTAssertNil(flow.context)
         XCTAssertFalse(flow.inProgress)
@@ -152,7 +152,7 @@ final class SessionLogoutFlowSuccessTests: XCTestCase {
             resumeExpection.fulfill()
         }
         
-        wait(for: [resumeExpection], timeout: 1)
+        wait(for: [resumeExpection], timeout: .long)
     }
     
     @available(iOS 13.0, tvOS 13.0, macOS 10.15, watchOS 6, *)

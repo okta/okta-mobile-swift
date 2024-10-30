@@ -90,7 +90,7 @@ final class ResourceOwnerFlowSuccessTests: XCTestCase {
         flow.start(username: "username", password: "password") { _ in
             expect.fulfill()
         }
-        waitForExpectations(timeout: 1) { error in
+        waitForExpectations(timeout: .long) { error in
             XCTAssertNil(error)
         }
 
@@ -116,7 +116,7 @@ final class ResourceOwnerFlowSuccessTests: XCTestCase {
             }
             wait.fulfill()
         }
-        waitForExpectations(timeout: 1) { error in
+        waitForExpectations(timeout: .long) { error in
             XCTAssertNil(error)
         }
         

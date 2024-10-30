@@ -29,55 +29,59 @@ struct MockApiParsingContext: APIParsingContext {
     }
 }
 
-//class APIClientTests: XCTestCase {
-//    var client: MockApiClient!
-//    let baseUrl = URL(string: "https://example.okta.com/oauth2/v1/token")!
-//    var configuration: MockAPIClientConfiguration!
-//    let urlSession = URLSessionMock()
-//    let requestId = UUID().uuidString
-//    
-//    override func setUpWithError() throws {
-//        configuration = MockAPIClientConfiguration(baseURL: baseUrl,
-//                                                   clientId: "clientid",
-//                                                   scopes: "openid")
-//        client = MockApiClient(configuration: configuration,
-//                               session: urlSession,
-//                               baseURL: baseUrl)
-//    }
-//
-//    @MainActor
-//    func testOverrideRequestResult() throws {
-//        client = MockApiClient(configuration: configuration,
-//                               session: urlSession,
-//                               baseURL: baseUrl,
-//                               shouldRetry: .doNotRetry)
-//
-//        urlSession.expect("https://example.okta.com/oauth2/v1/token",
-//                          data: try data(filename: "token",
-//                                         matching: "APIClientTestCommon"),
-//                          statusCode: 400,
-//                          contentType: "application/json",
-//                          headerFields: ["x-rate-limit-limit": "0",
-//                                         "x-rate-limit-remaining": "0",
-//                                         "x-rate-limit-reset": "1609459200",
-//                                         "Date": "Fri, 09 Sep 2022 02:22:14 GMT",
-//                                         "x-okta-request-id": requestId])
-//        
-//        let apiRequest = MockApiRequest(url: baseUrl)
-//        let context = MockApiParsingContext(result: .success)
-//
-//        let expect = expectation(description: "network request")
-//        apiRequest.send(to: client, parsing: context, completion: { result in
-//            switch result {
-//            case .success(let response):
-//                XCTAssertEqual(response.statusCode, 400)
-//            case .failure(_):
-//                XCTFail("Did not expect the request to fail")
-//            }
-//            expect.fulfill()
-//        })
-//        waitForExpectations(timeout: 9.0) { error in
-//            XCTAssertNil(error)
-//        }
-//    }
-//}
+class APIClientTests: XCTestCase {
+    var client: MockApiClient!
+    let baseUrl = URL(string: "https://example.okta.com/oauth2/v1/token")!
+    var configuration: MockAPIClientConfiguration!
+    let urlSession = URLSessionMock()
+    let requestId = UUID().uuidString
+    
+    static override func setUp() {
+        registerMock(bundles: .apiClientTestCommon)
+    }
+    
+    override func setUpWithError() throws {
+        configuration = MockAPIClientConfiguration(baseURL: baseUrl,
+                                                   clientId: "clientid",
+                                                   scopes: "openid")
+        client = MockApiClient(configuration: configuration,
+                               session: urlSession,
+                               baseURL: baseUrl)
+    }
+
+    func testOverrideRequestResult() throws {
+        client = MockApiClient(configuration: configuration,
+                               session: urlSession,
+                               baseURL: baseUrl,
+                               shouldRetry: .doNotRetry)
+
+        urlSession.expect("https://example.okta.com/oauth2/v1/token",
+                          data: data(for: """
+                              { "message": "Hello world!" }
+                              """),
+                          statusCode: 400,
+                          contentType: "application/json",
+                          headerFields: ["x-rate-limit-limit": "0",
+                                         "x-rate-limit-remaining": "0",
+                                         "x-rate-limit-reset": "1609459200",
+                                         "Date": "Fri, 09 Sep 2022 02:22:14 GMT",
+                                         "x-okta-request-id": requestId])
+        
+        let apiRequest: MockApiRequest<SampleResponse> = MockApiRequest(url: baseUrl)
+        let context = MockApiParsingContext(result: .success)
+
+        let expect = expectation(description: "network request")
+        apiRequest.send(to: client, parsing: context, completion: { result in
+            switch result {
+            case .success(let response):
+                XCTAssertEqual(response.statusCode, 400)
+            case .failure(_):
+                XCTFail("Did not expect the request to fail")
+            }
+            expect.fulfill()
+        })
+        waitForExpectations(timeout: 9.0) { error in
+            XCTAssertNil(error)
+        }
+    }
+}

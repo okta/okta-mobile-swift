@@ -120,10 +120,6 @@ var package = Package(
                         .target(name: "TestCommon")
                     ]),
         
-//        .target(name: "AuthFoundationTestCommon",
-//                dependencies: ["AuthFoundation"],
-//                path: "Tests/AuthFoundationTestCommon"),
-
         // Abstract API Client
         .target(name: "APIClient",
                 dependencies: [

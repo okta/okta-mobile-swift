@@ -105,7 +105,7 @@ final class DeviceAuthorizationFlowErrorTests: XCTestCase {
             }
             wait_1.fulfill()
         }
-        waitForExpectations(timeout: 1) { error in
+        waitForExpectations(timeout: .long) { error in
             XCTAssertNil(error)
         }
         
@@ -129,7 +129,7 @@ final class DeviceAuthorizationFlowErrorTests: XCTestCase {
             }
             wait_2.fulfill()
         }
-        waitForExpectations(timeout: 5) { error in
+        waitForExpectations(timeout: .long) { error in
             XCTAssertNil(error)
         }
 
