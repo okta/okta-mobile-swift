@@ -38,9 +38,23 @@ var package = Package(
         .macCatalyst(.v13)
     ],
     products: [
-        .library(name: "AuthFoundation", targets: ["AuthFoundation"]),
-        .library(name: "OktaOAuth2", targets: ["OktaOAuth2"]),
-        .library(name: "OktaDirectAuth", targets: ["OktaDirectAuth"]),
+        .library(name: "AuthFoundation",
+                 targets: [
+                    "AuthFoundation",
+                    "OktaConcurrency",
+                    "Keychain",
+                    "OktaUtilities",
+                    "APIClient",
+                    "JWT",
+                 ]),
+        .library(name: "OktaOAuth2",
+                 targets: [
+                    "OktaOAuth2",
+                 ]),
+        .library(name: "OktaDirectAuth",
+                 targets: [
+                    "OktaDirectAuth",
+                 ]),
     ],
     dependencies: [
         .package(url: "https://github.com/swiftlang/swift-syntax", "509.0.0"..<"601.0.0-prerelease")

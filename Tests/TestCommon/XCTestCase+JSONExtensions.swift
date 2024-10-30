@@ -12,13 +12,7 @@
 
 import Foundation
 import XCTest
-
-#if canImport(JWT)
-@testable import JWT
-
-#if canImport(APIClient)
 import APIClient
-#endif
 
 public extension XCTestCase {
     func mock<T: Decodable & JSONDecodable>(filename: String) throws -> T {
@@ -45,4 +39,3 @@ public extension XCTestCase {
         try test(try decode(type: type, json))
     }
 }
-#endif
