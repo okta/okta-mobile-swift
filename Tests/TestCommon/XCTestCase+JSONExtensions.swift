@@ -21,11 +21,8 @@ import APIClient
 #endif
 
 public extension XCTestCase {
-    func mock<T: Decodable & JSONDecodable>(forClass testClass: XCTestCase.Type? = nil,
-                                            filename: String,
-                                            matching bundleName: String? = nil) throws -> T
-    {
-        let data = try data(forClass: testClass, filename: filename, matching: bundleName)
+    func mock<T: Decodable & JSONDecodable>(filename: String) throws -> T {
+        let data = try data(filename: filename)
         let string = try XCTUnwrap(String(data: data, encoding: .utf8))
         return try decode(type: T.self, string)
     }
