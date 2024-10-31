@@ -1,17 +1,4 @@
 
-/* APIClientError */
-"invalid_url_description" = "Could not create an invalid URL.";
-"missing_response_description" = "No response received from the server.";
-"invalid_response_description" = "Did not receive an HTTP response.";
-"cannot_parse_response_description" = "Cannot parse server response: %@";
-"invalid_request_data_description" = "Cannot send invalid request data to the server.";
-"missing_refresh_settings_description" = "Cannot refresh a token since it is missing refresh information.";
-"unsupported_content_type_description" = "Request does not support %@ content.";
-"server_error_description" = "Received an error from the server: %@";
-"status_code_description" = "Received HTTP %d response code.";
-"unknown_description" = "An unknown error was encountered.";
-"validation_error" = "Could not validate the received token.";
-
 /* OAuth2Error */
 "missing_client_configuration_description" = "Cannot perform an operation since the token is missing its client configuration.";
 "cannot_compose_url_description" = "Cannot compose a URL to authenticate with.";
@@ -27,26 +14,6 @@
 "missing_revokable_token_type" = "The token doesn't contain a revokable %@ token.";
 "missing_oauth2_response_key" = "Missing the \"%@\" required response key.";
 
-/* JWTError */
-"jwt_invalid_base64_encoding" = "The token is invalid (incorrect Base64 encoding).";
-"jwt_bad_token_structure" = "The token is not structured correctly.";
-"jwt_invalid_issuer" = "The token's issuer is either not well-formed, or does not match.";
-"jwt_invalid_audience" = "The token's audience does not match.";
-"jwt_invalid_subject" = "The token's subject is missing or is invalid.";
-"jwt_invalid_authentication_time" = "The token's authentication time is missing or is invalid.";
-"jwt_issuer_requires_https" = "Token issuer addresses must use HTTPS.";
-"jwt_invalid_signing_algorithm" = "The token's signing algorithm is invalid or unsupported.";
-"jwt_token_expired" = "The token has expired.";
-"jwt_issuedAt_time_exceeds_grace_interval" = "This token was issued at a time that exceeds the allowed grace jwt_interval.";
-"jwt_nonce_mismatch" = "The nonce value does not match the value expected.";
-"jwt_cannot_create_key" = "Cannot create a public key.";
-"jwt_invalid_key" = "Invalid key data.";
-"jwt_signature_invalid" = "Token signature is invalid.";
-"jwt_signature_verification_unavailable" = "Signature verification is unavailable on this platform.";
-"jwt_unsupported_algorithm" = "Signing algorithm \"%@\" is unsupported.";
-"jwt_cannot_generate_hash" = "Cannot generate hash signature.";
-"jwt_exceeds_max_age" = "The token exceeds the supplied maximum age.";
-
 /* OAuth2Client.PropertyListConfigurationError */
 "default_property_list_not_found_description" = "The default Okta.plist configuration file was not found.";
 "invalid_property_list_description" = "The configuration file named \"%@\" was invalid.";
@@ -60,9 +27,6 @@
 "cannot_replace_token" = "Could not replace the token with its updated value.";
 "duplicate_token_added" = "Could not add a new token, since a duplicate was found.";
 "invalid_configuration" = "This token does not match the client configuration.";
-
-/* ClaimError */
-"missing_required_value" = "The token response is missing a required value for key \"%@\".";
 
 /* CredentialError */
 "credential_metadata_consistency" = "Metadata associated with a credential has become inconsistent with its value in storage.";
