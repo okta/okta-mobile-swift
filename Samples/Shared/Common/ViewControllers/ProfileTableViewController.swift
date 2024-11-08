@@ -11,6 +11,7 @@
 //
 
 import UIKit
+import Keychain
 
 #if os(tvOS)
 import OktaOAuth2
@@ -46,18 +47,16 @@ class ProfileTableViewController: UITableViewController {
     var credential: Credential? {
         didSet {
             configure(credential?.userInfo)
-            credential?.automaticRefresh = true
-            credential?.refreshIfNeeded { result in
-                switch result {
-                case .success:
-                    self.credential?.userInfo { result in
-                        guard case let .success(userInfo) = result else { return }
-                        DispatchQueue.main.async {
-                            self.configure(userInfo)
-                        }
-                    }
-                    
-                case .failure(let error):
+            guard let credential = credential else {
+                return
+            }
+            
+            credential.automaticRefresh = true
+            Task { @MainActor in
+                do {
+                    try await credential.refreshIfNeeded()
+                    self.configure(try await credential.userInfo())
+                } catch {
                     self.show(error: error)
                 }
             }
@@ -175,20 +174,20 @@ class ProfileTableViewController: UITableViewController {
             // options = [.prompt(.login)]
             
             alert.addAction(.init(title: "End a session", style: .destructive) { _ in
-                WebAuthentication.shared?.signOut(token: token, options: options) { result in
-                    switch result {
-                    case .success:
+                Task { @MainActor in
+                    do {
+                        try await WebAuthentication.shared?.signOut(from: self.viewIfLoaded?.window,
+                                                                    token: token,
+                                                                    options: options)
                         try? Keychain.deleteTokens()
                         try? self.credential?.remove()
                         self.credential = nil
-                    case .failure(let error):
-                        DispatchQueue.main.async {
-                            let alert = UIAlertController(title: "Sign out failed",
-                                                          message: error.localizedDescription,
-                                                          preferredStyle: .alert)
-                            alert.addAction(UIAlertAction(title: "OK", style: .default))
-                            self.present(alert, animated: true)
-                        }
+                    } catch {
+                        let alert = UIAlertController(title: "Sign out failed",
+                                                      message: error.localizedDescription,
+                                                      preferredStyle: .alert)
+                        alert.addAction(UIAlertAction(title: "OK", style: .default))
+                        self.present(alert, animated: true)
                     }
                 }
             })

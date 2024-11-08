@@ -360,7 +360,7 @@ This collection of SDKs intend to replace the following SDKs:
 * [okta-ios-jwt](https://github.com/okta/okta-ios-jwt)
 * [okta-storage-swift](https://github.com/okta/okta-storage-swift)
 
-If your application currently uses OktaOidc, facilities are in place to migrate your existing users to the new SDK. For more information, see the `SDKVersion.Migration` class for details.
+If your application currently uses OktaOidc, facilities are in place to migrate your existing users to the new SDK. For more information, see the `Migration` class for details.
 
 ## Running the Samples
 

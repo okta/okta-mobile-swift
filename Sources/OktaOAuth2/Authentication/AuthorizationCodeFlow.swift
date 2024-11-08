@@ -192,8 +192,8 @@ public final class AuthorizationCodeFlow: Sendable, AuthenticationFlow, Provides
                 client: OAuth2Client)
     {
         // Ensure this SDK's static version is included in the user agent.
-        SDKVersion.register(sdk: Version)
-        
+        UserAgent.register(target: SDKVersion)
+
         self.client = client
         self.redirectUri = redirectUri
         self.additionalParameters = additionalParameters

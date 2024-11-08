@@ -39,7 +39,7 @@ class TestMigrator: SDKVersionMigrator, @unchecked Sendable {
 
 final class SDKVersionMigrationTests: XCTestCase {
     override func tearDownWithError() throws {
-        SDKVersion.Migration.resetMigrators()
+        Migration.shared.resetMigrators()
     }
     
     func testMigratorRegistration() throws {
@@ -49,7 +49,7 @@ final class SDKVersionMigrationTests: XCTestCase {
         migratorA.needsMigration = false
         migratorB.needsMigration = false
         
-        let migration = SDKVersion.Migration(migrators: [migratorA, migratorB])
+        let migration = Migration(migrators: [migratorA, migratorB])
 
         // Ensure migration is not called when not needed
         XCTAssertFalse(migration.needsMigration)
@@ -81,13 +81,13 @@ final class SDKVersionMigrationTests: XCTestCase {
     }
     
     func testRegisteredMigrators() throws {
-        XCTAssertTrue(SDKVersion.Migration.registeredMigrators.isEmpty)
+        XCTAssertTrue(Migration.shared.migrators.isEmpty)
         
 //        let migratorA = TestMigrator()
-//        SDKVersion.register(migrator: migratorA)
-//        XCTAssertTrue(SDKVersion.Migration.registeredMigrators.contains(where: { $0 === migratorA }))
+//        Migration.register(migrator: migratorA)
+//        XCTAssertTrue(Migration.registeredMigrators.contains(where: { $0 === migratorA }))
 //        
-//        let migration = SDKVersion.Migration()
+//        let migration = Migration()
 //        XCTAssertTrue(migration.migrators.contains(where: { $0 === migratorA }))
     }
 }

@@ -15,5 +15,5 @@ import OktaUtilities
 
 // swiftlint:disable identifier_name
 @_documentation(visibility: private)
-public let Version = SDKVersion(sdk: "okta-directauth-swift", version: "1.8.2")
+public let SDKVersion = TargetInformation(name: "okta-directauth-swift", version: "1.8.2")
 // swiftlint:enable identifier_name

@@ -149,7 +149,7 @@ public enum APIResponseResult {
 extension APIClient {
     public var additionalHttpHeaders: [String: String]? { nil }
     public var requestIdHeader: String? { "x-okta-request-id" }
-    public var userAgent: String { SDKVersion.userAgent }
+    public var userAgent: String { UserAgent.shared.description }
     
     public func error(from data: Data) -> (any Error)? {
         let jsonDecoder = JSONDecoder.apiClientDecoder

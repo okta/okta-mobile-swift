@@ -101,7 +101,7 @@ public final class TokenExchangeFlow: Sendable, AuthenticationFlow, UsesDelegate
     ///   - client: The `OAuth2Client` to use with this flow.
     public init(audience: Audience = .default, client: OAuth2Client) {
         // Ensure this SDK's static version is included in the user agent.
-        SDKVersion.register(sdk: Version)
+        UserAgent.register(target: SDKVersion)
         
         self.client = client
         self.audience = audience

@@ -167,8 +167,8 @@ public final class DeviceAuthorizationFlow: Sendable, AuthenticationFlow, UsesDe
     ///   - client: The `OAuth2Client` to use with this flow.
     public init(client: OAuth2Client) {
         // Ensure this SDK's static version is included in the user agent.
-        SDKVersion.register(sdk: Version)
-        
+        UserAgent.register(target: SDKVersion)
+
         self.client = client
         
         client.add(delegate: self)

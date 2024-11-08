@@ -49,7 +49,7 @@ final class NeverBackgroundTaskHandler: BackgroundTaskHandler {
 #if os(iOS) || os(tvOS) || os(visionOS) || targetEnvironment(macCatalyst)
 import UIKit
 
-class UIApplicationBackgroundTaskHandler: BackgroundTaskHandler {
+final class UIApplicationBackgroundTaskHandler: BackgroundTaskHandler {
     private let identifier: UIBackgroundTaskIdentifier
     private let application: UIApplication
 

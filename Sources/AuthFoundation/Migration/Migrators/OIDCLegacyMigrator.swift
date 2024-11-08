@@ -19,7 +19,7 @@ import JWT
 
 private let accountIdRegex = try? NSRegularExpression(pattern: "0oa[0-9a-zA-Z]{17}")
 
-extension SDKVersion.Migration {
+extension Migration {
     /// Migrator capable of importing credentials from the legacy `OktaOidc` SDK.
     ///
     /// If your application previously used the `OktaOidc` SDK, you can use this to register your client configuration to enable credentials already stored within your user's devices to be migrated to the new AuthFoundation SDK.
@@ -27,8 +27,8 @@ extension SDKVersion.Migration {
     /// ```swift
     /// func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
     ///     // Import the default `Okta.plist` configuration for migration
-    ///     try? SDKVersion.Migration.LegacyOIDC.register()
-    ///     try? SDKVersion.migrateIfNeeded()
+    ///     try? Migration.LegacyOIDC.register()
+    ///     try? Migration.migrateIfNeeded()
     ///
     ///     return true
     /// }
@@ -58,7 +58,7 @@ extension SDKVersion.Migration {
         /// - Parameters:
         ///   - clientId: Client ID for your application.
         public static func register(clientId: String? = nil) {
-            SDKVersion.register(migrator: LegacyOIDC(clientId: clientId))
+            Migration.register(migrator: LegacyOIDC(clientId: clientId))
         }
         
         private static func register(_ config: OAuth2Client.PropertyListConfiguration) throws {

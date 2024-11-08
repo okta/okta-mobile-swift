@@ -13,23 +13,24 @@
 import Foundation
 import OktaConcurrency
 
-extension SDKVersion {
+struct SDKVersion {
+    @available(*, deprecated, renamed: "Migration", message: "Migration moved to a top-level namespace")
+    public struct Migration {}
+}
+
+/// Namespace used for a variety of version migration agents.
+@HasLock
+public final class Migration: Sendable {
     /// Determines whether or not some user data needs to be migrated.
     ///
     /// This may be if a user has upgraded to a newer version of the SDK.
     public static var isMigrationNeeded: Bool {
-        Migration.shared.needsMigration
+        shared.needsMigration
     }
     
     /// Migrates user data, if necessary.
     public static func migrateIfNeeded() throws {
-        try sharedLock.withLock {
-            guard isMigrationNeeded else {
-                return
-            }
-            
-            try Migration.shared.migrate()
-        }
+        try shared.migrate()
     }
     
     /// Registers an SDK version migrator for use within a migration process.
@@ -37,43 +38,49 @@ extension SDKVersion {
     /// Version migrators are utilized to migrate user data on an as-needed basis.
     /// - Parameter migrator: Migrator to register.
     public static func register(migrator: any SDKVersionMigrator) {
-        sharedLock.withLock {
-            Migration.registeredMigrators.append(migrator)
+        shared.register(migrator: migrator)
+    }
+    
+    static let shared = Migration()
+
+    func resetMigrators() {
+        withLock {
+            _migrators = Self.defaultMigrators()
         }
     }
     
-    /// Namespace used for a variety of version migration agents.
-    public final class Migration: Sendable {
-        static let shared = Migration()
-        
-        nonisolated(unsafe) fileprivate(set) static var registeredMigrators: [any SDKVersionMigrator] = defaultMigrators()
+    static func defaultMigrators() -> [any SDKVersionMigrator] {
+        []
+    }
+    
+    @Synchronized
+    var migrators: [any SDKVersionMigrator]
+    
+    init(migrators: [any SDKVersionMigrator]) {
+        _migrators = migrators
+    }
+    
+    convenience init() {
+        self.init(migrators: Self.defaultMigrators())
+    }
+    
+    func register(migrator: any SDKVersionMigrator) {
+        withLock {
+            migrators.append(migrator)
+        }
+    }
 
-        static func resetMigrators() {
-            sharedLock.withLock {
-                registeredMigrators = defaultMigrators()
-            }
+    var needsMigration: Bool {
+        withLock {
+            !_migrators
+                .filter(\.needsMigration)
+                .isEmpty
         }
-        
-        static func defaultMigrators() -> [any SDKVersionMigrator] {
-            []
-        }
-        
-        let migrators: [any SDKVersionMigrator]
-        
-        init(migrators: [any SDKVersionMigrator]) {
-            self.migrators = migrators
-        }
-        
-        convenience init() {
-            self.init(migrators: Migration.registeredMigrators)
-        }
-        
-        var needsMigration: Bool {
-            !migrators.filter(\.needsMigration).isEmpty
-        }
-        
-        func migrate() throws {
-            try migrators
+    }
+    
+    func migrate() throws {
+        try withLock {
+            try _migrators
                 .filter(\.needsMigration)
                 .forEach { migrator in
                     try migrator.migrate()

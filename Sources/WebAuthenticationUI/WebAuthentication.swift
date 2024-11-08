@@ -16,7 +16,6 @@ import Foundation
 import OktaOAuth2
 import OktaUtilities
 import OktaConcurrency
-import OktaConcurrency
 import APIClient
 
 #if canImport(UIKit) || canImport(AppKit)
@@ -256,6 +255,7 @@ public final class WebAuthentication: Sendable {
     /// This is a convenience method that can simplify apps that use a UISceneDelegate. Scene-based applications receive URLs when the `UIWindowSceneDelegate.scene(_:openURLContexts:)` method is called; the set of contexts can be supplied to this method, which will filter out only those URLs that match the URL scheme defined in the client configuration. If no matching URLs are found, the call is ignored.
     /// - Parameter URLContexts: Set of `UIOpenURLContext` objects from which to attempt to resume authentication.
     @available(iOS 13.0, *)
+    @MainActor
     public final func resume(with URLContexts: Set<UIOpenURLContext>) throws {
         try URLContexts
             .filter { $0.url.scheme?.lowercased() == signInFlow.redirectUri.scheme?.lowercased() }
@@ -270,6 +270,7 @@ public final class WebAuthentication: Sendable {
     ///
     /// If the URI does not match the configured URI scheme, this method will thrown an error.
     /// - Parameter url: URL from which to attempt to resume authentication.
+    @MainActor
     public final func resume(with url: URL) throws {
         guard url.scheme?.lowercased() == signInFlow.redirectUri.scheme?.lowercased()
         else {
@@ -360,12 +361,13 @@ public final class WebAuthentication: Sendable {
     ///   - context: Optional context to initialize authentication with.
     public init(loginFlow: AuthorizationCodeFlow, logoutFlow: SessionLogoutFlow?) {
         // Ensure this SDK's static version is included in the user agent.
-        SDKVersion.register(sdk: Version)
+        
+        UserAgent.register(target: SDKVersion)
         
         self.signInFlow = loginFlow
         self.signOutFlow = logoutFlow
 
-        WebAuthentication.shared = self
+//        WebAuthentication.shared = self
     }
     
     @Synchronized

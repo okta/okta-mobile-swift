@@ -16,6 +16,6 @@ import OktaUtilities
 #if canImport(UIKit) || canImport(AppKit)
 // swiftlint:disable identifier_name
 @_documentation(visibility: private)
-public let Version = SDKVersion(sdk: "okta-webauthenticationui-swift", version: "1.8.2")
+public let SDKVersion = TargetInformation(name: "okta-webauthenticationui-swift", version: "1.8.2")
 // swiftlint:enable identifier_name
 #endif
