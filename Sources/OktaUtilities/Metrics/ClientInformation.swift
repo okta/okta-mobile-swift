@@ -12,20 +12,27 @@
 
 import Foundation
 
-/// Defines the information for a library target.
-public struct TargetInformation: CustomStringConvertible, Equatable, Hashable, Codable, Sendable {
-    /// The name of the target.
+/// Defines the information for a client application.
+public struct ClientInformation: CustomStringConvertible, Equatable, Hashable, Codable, Sendable {
+    /// The name of the application.
     public let name: String
     
-    /// The target's version number.
+    /// The app version number.
     public let version: Version?
     
+    /// The app identifier, if applicable.
+    public let identifier: String?
+    
     public var description: String {
-        name.with(suffix: version)
+        name.with(suffix: version, identifier)
     }
     
-    public init(_ name: String, version: Version? = nil) {
+    public init(_ name: String,
+                identifier: String? = nil,
+                version: Version? = nil)
+    {
         self.name = name
+        self.identifier = identifier
         self.version = version
     }
 }

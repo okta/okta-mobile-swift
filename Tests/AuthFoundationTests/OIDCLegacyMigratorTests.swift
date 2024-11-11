@@ -20,7 +20,7 @@ import XCTest
 
 #if canImport(Darwin)
 final class OIDCLegacyMigratorTests: XCTestCase {
-    typealias LegacyOIDC = SDKVersion.Migration.LegacyOIDC
+    typealias LegacyOIDC = Migration.LegacyOIDC
     
     var keychain: MockKeychain!
     let issuer = URL(string: "https://example.com")!
@@ -42,7 +42,7 @@ final class OIDCLegacyMigratorTests: XCTestCase {
         Keychain.implementation = KeychainImpl()
         keychain = nil
 
-        SDKVersion.Migration.resetMigrators()
+        Migration.shared.resetMigrators()
         
         Credential.resetToDefault()
     }
@@ -50,7 +50,7 @@ final class OIDCLegacyMigratorTests: XCTestCase {
     func testRegister() throws {
         LegacyOIDC.register(clientId: "clientId")
         
-        let migrator = try XCTUnwrap(SDKVersion.Migration.registeredMigrators.first(where: {
+        let migrator = try XCTUnwrap(Migration.shared.migrators.first(where: {
             $0 is LegacyOIDC
         }) as? LegacyOIDC)
         

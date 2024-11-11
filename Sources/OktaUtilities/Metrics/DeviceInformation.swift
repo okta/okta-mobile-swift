@@ -33,20 +33,39 @@ public struct DeviceInformation: CustomStringConvertible, Equatable, Codable, Se
     public static let current = DeviceInformation()
     
     public var description: String {
-        var result = "Device(OS \(platform)/\(version)"
-        if let kernelName = kernelName {
-            result.append("; kernel \(kernelName)")
+        [languageString, kernelString]
+            .compactMap({ $0 })
+            .joined(separator: " ")
+    }
+    
+    private var kernelString: String? {
+        let result = "Kernel".with(suffix: kernelName,
+                                   architecture)
+        guard result != "Kernel" else {
+            return nil
         }
-        if let architecture = architecture {
-            result.append("; arch \(architecture)")
-        }
-        if let deviceModel = deviceModel {
-            result.append("; model \(deviceModel)")
-        }
-        result.append(")")
         return result
     }
     
+    private var languageString: String {
+        "Language".with(suffix: "Swift",
+                        platform.with(suffix: version),
+                        deviceModel)
+    }
+    
+    init(architecture: String? = Self.cpuArchitecture,
+         kernelName: String? = Self.kernelName,
+         deviceModel: String? = Self.deviceModel,
+         platform: SystemPlatform = .current,
+         version: Version = .operatingSystem)
+    {
+        self.architecture = architecture
+        self.kernelName = kernelName
+        self.deviceModel = deviceModel
+        self.platform = platform
+        self.version = version
+    }
+
     private static var kernelName: String? {
         var system: utsname = utsname()
         guard uname(&system) == 0 else {
@@ -58,19 +77,6 @@ public struct DeviceInformation: CustomStringConvertible, Equatable, Codable, Se
         }
         
         return sysname
-    }
-
-    fileprivate init(architecture: String? = Self.cpuArchitecture,
-                 kernelName: String? = Self.kernelName,
-                 deviceModel: String? = Self.deviceModel,
-                 platform: SystemPlatform = .current,
-                 version: Version = .operatingSystem)
-    {
-        self.architecture = architecture
-        self.kernelName = kernelName
-        self.deviceModel = deviceModel
-        self.platform = platform
-        self.version = version
     }
 
 #if canImport(Darwin)

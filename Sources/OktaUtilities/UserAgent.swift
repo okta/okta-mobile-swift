@@ -26,9 +26,9 @@ import WatchKit
 /// The Okta Client SDK consists of multiple libraries, each of which may or may not be used within the same application, or at the same time. To allow version information to be sustainably managed, this class can be used to centralize the registration of these SDK versions to report just the components used within an application.
 @HasLock
 public final class UserAgent: CustomStringConvertible, Sendable {
-    /// Information about the running application.
+    /// Information about the running client application.
     @Synchronized
-    public var application: TargetInformation? {
+    public var client: ClientInformation? {
         didSet {
             _description = generateUserAgent()
         }
@@ -52,7 +52,7 @@ public final class UserAgent: CustomStringConvertible, Sendable {
     
     init(device: DeviceInformation) {
         self.device = device
-        _application = nil
+        _client = nil
         _libraries = []
         _description = ""
         _description = generateUserAgent()
@@ -70,19 +70,16 @@ public final class UserAgent: CustomStringConvertible, Sendable {
     }
     
     private func generateUserAgent() -> String {
-        var components: [String] = [
-            device.description
+        var components: [(any CustomStringConvertible)?] = [
+            device,
+            _client,
         ]
         
-        if let app = _application {
-            components.append("Client \(app)")
-        }
+        components.append(contentsOf: _libraries.sorted(by: { $0.name < $1.name }))
         
-        components.append(contentsOf: _libraries
-            .sorted(by: { $0.name < $1.name })
-            .map(\.description))
-        
-        return components.joined(separator: " ")
+        return components
+            .compactMap({ $0?.description })
+            .joined(separator: " ")
     }
     
     func register(target: TargetInformation) {
@@ -95,85 +92,3 @@ public final class UserAgent: CustomStringConvertible, Sendable {
         }
     }
 }
-
-
-
-
-//private func deviceModel() -> String {
-//#if canImport(Darwin)
-//    var size: Int = 0
-//    sysctlbyname("hw.model", nil, &size, nil, 0)
-//    var machine = [CChar](repeating: 0, count: size)
-//    sysctlbyname("hw.model", &machine, &size, nil, 0)
-//    let machineName = String(cString: &machine)
-//    print("HW model: \(machineName)")
-//#else
-//    var system = utsname()
-//    uname(&system)
-//    let sysname = withUnsafePointer(to: &system.sysname.0) { ptr in
-//        return String(cString: ptr)
-//    }
-//
-//    let model = withUnsafePointer(to: &system.machine.0) { ptr in
-//        return String(cString: ptr)
-//    }
-//
-//    let nodename = withUnsafePointer(to: &system.nodename.0) { ptr in
-//        return String(cString: ptr)
-//    }
-//
-//    let release = withUnsafePointer(to: &system.release.0) { ptr in
-//        return String(cString: ptr)
-//    }
-//
-//    let sysname = withUnsafePointer(to: &system.sysname.0) { ptr in
-//        return String(cString: ptr)
-//    }
-//
-//    let version = withUnsafePointer(to: &system.version.0) { ptr in
-//        return String(cString: ptr)
-//    }
-//    
-//    print("model: \(model)")
-//    print("nodename: \(nodename)")
-//    print("release: \(release)")
-//    print("sysname: \(sysname)")
-//    print("version: \(version)")
-//    
-//    var size: Int = 0
-//    sysctlbyname("hw.model", nil, &size, nil, 0)
-//    var machine = [CChar](repeating: 0, count: size)
-//    sysctlbyname("hw.model", &machine, &size, nil, 0)
-//    let machineName = String(cString: &machine)
-//    print("HW model: \(machineName)")
-//    
-//    return model
-//    #endif
-//}
-//
-//private let systemName: String = {
-//    #if os(iOS)
-//        return "iOS"
-//    #elseif os(watchOS)
-//        return "watchOS"
-//    #elseif os(tvOS)
-//        return "tvOS"
-//    #elseif os(visionOS)
-//        return "visionOS"
-//    #elseif os(macOS)
-//        return "macOS"
-//    #elseif os(Linux)
-//        return "linux"
-//    #endif
-//}()
-//
-//private let systemVersion: String = {
-//    #if os(iOS) || os(tvOS) || os(visionOS)
-//        return UIDevice.current.systemVersion
-//    #elseif os(watchOS)
-//        return WKInterfaceDevice.current().systemVersion
-//    #else
-//        let osVersion = ProcessInfo.processInfo.operatingSystemVersion
-//        return "\(osVersion.majorVersion).\(osVersion.minorVersion).\(osVersion.patchVersion)"
-//    #endif
-//}()

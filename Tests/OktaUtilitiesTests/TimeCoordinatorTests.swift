@@ -48,6 +48,7 @@ final class TimeCoordinatorTests: XCTestCase {
         XCTAssertEqual(date.coordinated.timeIntervalSinceReferenceDate - date.timeIntervalSinceReferenceDate, 300)
         
         XCTAssertGreaterThan(Date.nowCoordinated, Date())
+        
     }
     
     func testDefaultTimeCoordinator() {

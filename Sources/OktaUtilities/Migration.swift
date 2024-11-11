@@ -66,7 +66,7 @@ public final class Migration: Sendable {
     
     func register(migrator: any SDKVersionMigrator) {
         withLock {
-            migrators.append(migrator)
+            _migrators.append(migrator)
         }
     }
 

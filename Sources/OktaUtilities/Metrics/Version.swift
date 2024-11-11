@@ -22,7 +22,7 @@ public struct Version: RawRepresentable, CustomStringConvertible, ExpressibleByS
         /// String value component (e.g. "1.0.0-alpha")
         case string(_ value: String)
         
-        fileprivate init(_ rawValue: String) {
+        init(_ rawValue: String) {
             if let intValue = Int(rawValue) {
                 self = .numeric(intValue)
             } else {
@@ -30,7 +30,7 @@ public struct Version: RawRepresentable, CustomStringConvertible, ExpressibleByS
             }
         }
 
-        fileprivate init(_ rawValue: Int) {
+        init(_ rawValue: Int) {
             precondition(rawValue >= 0, "Negative versioning is invalid.")
             self = .numeric(rawValue)
         }
@@ -84,6 +84,34 @@ public struct Version: RawRepresentable, CustomStringConvertible, ExpressibleByS
             }
             return lhsVersion < rhsVersion
         }
+        return true
+    }
+    
+    @_documentation(visibility: private)
+    public static func == (lhs: Version, rhs: Version) -> Bool {
+        if lhs.components == rhs.components {
+            return true
+        }
+        
+        for index in 0..<max(lhs.components.count, rhs.components.count) {
+            let lhsComponent: Component? = lhs.version(at: index)
+            let rhsComponent: Component? = rhs.version(at: index)
+            
+            guard lhsComponent != rhsComponent else {
+                continue
+            }
+            
+            switch (lhsComponent, rhsComponent) {
+            case (.numeric(let value), nil),
+                (nil, .numeric(let value)):
+                guard value == 0 else {
+                    return false
+                }
+            default:
+                return false
+            }
+        }
+        
         return true
     }
     

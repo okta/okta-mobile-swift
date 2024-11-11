@@ -1,5 +1,5 @@
 //
-// Copyright (c) 2023-Present, Okta, Inc. and/or its affiliates. All rights reserved.
+// Copyright (c) 2024-Present, Okta, Inc. and/or its affiliates. All rights reserved.
 // The Okta software accompanied by this notice is provided pursuant to the Apache License, Version 2.0 (the "License.")
 //
 // You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0.
@@ -10,10 +10,12 @@
 // See the License for the specific language governing permissions and limitations under the License.
 //
 
-@_exported import AuthFoundation
-import OktaUtilities
+import XCTest
+@testable import OktaUtilities
 
-// swiftlint:disable identifier_name
-@_documentation(visibility: private)
-public let SDKVersion = TargetInformation("okta-directauth-swift", version: "1.8.2")
-// swiftlint:enable identifier_name
+final class TargetVersionTests: XCTestCase {
+    func testDescription() async throws {
+        XCTAssertEqual(TargetInformation("MyThing").description, "MyThing")
+        XCTAssertEqual(TargetInformation("MyThing", version: "1.2.3").description, "MyThing/1.2.3")
+    }
+}
