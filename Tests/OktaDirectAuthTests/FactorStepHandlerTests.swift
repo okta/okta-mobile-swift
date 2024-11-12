@@ -173,7 +173,7 @@ final class FactorStepHandlerTests: XCTestCase {
             }
             wait.fulfill()
         }
-        waitForExpectations(timeout: 1)
+        waitForExpectations(timeout: .short)
     }
     
     func testPrimaryTokenMFARequired() throws {
@@ -209,7 +209,7 @@ final class FactorStepHandlerTests: XCTestCase {
             }
             wait.fulfill()
         }
-        waitForExpectations(timeout: 1)
+        waitForExpectations(timeout: .short)
     }
     
     // MARK: OOB Process Flow

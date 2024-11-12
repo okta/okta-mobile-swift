@@ -141,7 +141,7 @@ final class OAuth2ClientTests: XCTestCase {
             }
         }
         
-        waitForExpectations(timeout: 1.0) { error in
+        waitForExpectations(timeout: .standard) { error in
             XCTAssertNil(error)
         }
         
@@ -238,7 +238,7 @@ final class OAuth2ClientTests: XCTestCase {
             expect.fulfill()
         }
         
-        waitForExpectations(timeout: 1.0) { error in
+        waitForExpectations(timeout: .short) { error in
             XCTAssertNil(error)
         }
         
@@ -304,7 +304,7 @@ final class OAuth2ClientTests: XCTestCase {
             expect.fulfill()
         }
         
-        waitForExpectations(timeout: 1.0) { error in
+        waitForExpectations(timeout: .short) { error in
             XCTAssertNil(error)
         }
         
@@ -335,7 +335,7 @@ final class OAuth2ClientTests: XCTestCase {
             expect.fulfill()
         }
         
-        waitForExpectations(timeout: 1.0) { error in
+        waitForExpectations(timeout: .short) { error in
             XCTAssertNil(error)
         }
         
@@ -373,7 +373,7 @@ final class OAuth2ClientTests: XCTestCase {
             expect.fulfill()
         }
         
-        waitForExpectations(timeout: 1.0) { error in
+        waitForExpectations(timeout: .short) { error in
             XCTAssertNil(error)
         }
         
@@ -412,7 +412,7 @@ final class OAuth2ClientTests: XCTestCase {
             expect.fulfill()
         }
         
-        waitForExpectations(timeout: 1.0) { error in
+        waitForExpectations(timeout: .short) { error in
             XCTAssertNil(error)
         }
         
@@ -451,7 +451,7 @@ final class OAuth2ClientTests: XCTestCase {
             expect.fulfill()
         }
         
-        waitForExpectations(timeout: 1.0) { error in
+        waitForExpectations(timeout: .short) { error in
             XCTAssertNil(error)
         }
         
@@ -488,7 +488,7 @@ final class OAuth2ClientTests: XCTestCase {
             expect.fulfill()
         }
         
-        waitForExpectations(timeout: 1.0) { error in
+        waitForExpectations(timeout: .short) { error in
             XCTAssertNil(error)
         }
     }
@@ -509,7 +509,7 @@ final class OAuth2ClientTests: XCTestCase {
             }
             expect.fulfill()
         }
-        waitForExpectations(timeout: 1.0) { error in
+        waitForExpectations(timeout: .short) { error in
             XCTAssertNil(error)
         }
     }
@@ -548,7 +548,7 @@ final class OAuth2ClientTests: XCTestCase {
             }
         }
 
-        waitForExpectations(timeout: 1.0) { error in
+        waitForExpectations(timeout: .standard) { error in
             XCTAssertNil(error)
         }
         

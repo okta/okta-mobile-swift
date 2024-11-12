@@ -299,7 +299,7 @@ final class CredentialRefreshTests: XCTestCase, OAuth2ClientDelegate {
         delegate.refreshExpectation = refreshExpectation
         credential.automaticRefresh = true
         
-        wait(for: [refreshExpectation], timeout: 1.0)
+        wait(for: [refreshExpectation], timeout: .standard)
         XCTAssertEqual(urlSession.requests.count, 2)
         
         // Should automatically refresh after a delay

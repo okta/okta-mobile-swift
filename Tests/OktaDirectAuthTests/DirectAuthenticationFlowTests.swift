@@ -105,7 +105,7 @@ final class DirectAuthenticationFlowTests: XCTestCase {
             XCTAssertEqual(result, .success(.success(token)))
             wait.fulfill()
         }
-        waitForExpectations(timeout: 1)
+        waitForExpectations(timeout: .short)
     }
     
     func testDirectAuthFailure() throws {
@@ -119,7 +119,7 @@ final class DirectAuthenticationFlowTests: XCTestCase {
             XCTAssertEqual(result, .failure(.pollingTimeoutExceeded))
             wait.fulfill()
         }
-        waitForExpectations(timeout: 1)
+        waitForExpectations(timeout: .short)
     }
 
     func testDirectAuthException() throws {
@@ -133,6 +133,6 @@ final class DirectAuthenticationFlowTests: XCTestCase {
             XCTAssertEqual(result, .failure(.network(error: .invalidRequestData)))
             wait.fulfill()
         }
-        waitForExpectations(timeout: 1)
+        waitForExpectations(timeout: .short)
     }
 }
