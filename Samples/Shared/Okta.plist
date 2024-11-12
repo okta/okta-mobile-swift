@@ -3,14 +3,14 @@
 <plist version="1.0">
 <dict>
 	<key>issuer</key>
-	<string>https://{orgDomain}/oauth2/default</string>
+	<string>https://okta-mobile-sdk.trexcloud.com/oauth2/default</string>
 	<key>clientId</key>
-	<string>{clientId}</string>
+	<string>0oa4ejcfkdSMUTYFN0g7</string>
 	<key>scopes</key>
 	<string>openid profile offline_access device_sso</string>
 	<key>redirectUri</key>
-	<string>{appScheme}:/callback</string>
+	<string>com.example:/callback</string>
 	<key>logoutRedirectUri</key>
-	<string>{appScheme}:/</string>
+	<string>com.example:/</string>
 </dict>
 </plist>

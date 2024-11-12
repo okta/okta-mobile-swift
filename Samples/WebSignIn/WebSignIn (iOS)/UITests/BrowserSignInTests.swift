@@ -45,7 +45,7 @@ class BrowserSignInUITests: XCTestCase {
         signInScreen.isVisible()
         signInScreen.setEphemeral(true)
         signInScreen.login(username: username, password: password)
-
+        
         profileScreen.wait()
         save(screenshot: "Profile Screen")
                 

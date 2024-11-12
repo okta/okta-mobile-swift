@@ -253,6 +253,24 @@ package.targets.append(contentsOf: [
 ])
 #endif
 
+
+//// CocoaPods specific product changes
+//if Context.environment["BUILD_COCOAPODS_MACRO"] != nil,
+//   let macroTarget = package.targets.first(where: { $0.name == "OktaClientMacros" })
+//{
+//    package.targets = [
+//        .executableTarget(name: "OktaClientMacros",
+//                          dependencies: macroTarget.dependencies)
+//    ]
+//    
+//    package.products = [
+//        .executable(name: "OktaClientMacros",
+//                    targets: [
+//                        "OktaClientMacros"
+//                    ])
+//    ]
+//}
+
 for target in package.targets {
     target.swiftSettings = target.swiftSettings ?? []
     target.swiftSettings?.append(contentsOf: [

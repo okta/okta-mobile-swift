@@ -24,9 +24,9 @@ protocol Screen {
 extension Screen {
     func tapKeyboardNextOrGo() {
         #if os(iOS)
-        if app.keyboards.buttons["Next"].exists {
+        if app.keyboards.buttons["Next"].isHittable {
             app.keyboards.buttons["Next"].tap()
-        } else if app.keyboards.buttons["Go"].exists {
+        } else if app.keyboards.buttons["Go"].isHittable {
             app.keyboards.buttons["Go"].tap()
         } else {
             dismissKeyboard()
@@ -39,15 +39,22 @@ extension Screen {
         // TODO: Update this in the future to select the appropriately named button.
         XCUIRemote.shared.press(.select)
         #else
-        let doneButton = app.toolbars.matching(identifier: "Toolbar").buttons["Done"]
+        let doneButton = XCUIApplication().toolbars.matching(identifier: "Toolbar").buttons["Done"]
+        if doneButton.isHittable {
+            doneButton.tap()
+        } else
+//        XCUIApplication().toolbars.matching(identifier: "Toolbar").buttons["Done"].tap()
+
         if app.keyboards.element(boundBy: 0).exists {
-            if UIDevice.current.userInterfaceIdiom == .pad {
+            if UIDevice.current.userInterfaceIdiom == .pad,
+               app.keyboards.buttons["Hide keyboard"].isHittable
+            {
                 app.keyboards.buttons["Hide keyboard"].tap()
-            } else {
+            } else if app.toolbars.buttons["Done"].isHittable {
                 app.toolbars.buttons["Done"].tap()
             }
-        } else if doneButton.exists {
-            doneButton.tap()
+//        } else if doneButton.exists {
+//            doneButton.tap()
         }
         #endif
     }
