@@ -14,6 +14,9 @@ import XCTest
 @testable import TestCommon
 @testable import AuthFoundation
 @testable import OktaOAuth2
+@testable import APIClientTestCommon
+@testable import AuthFoundationTestCommon
+@testable import JWT
 
 class AuthenticationDelegateRecorder: AuthenticationDelegate {
     var token: Token?
@@ -44,6 +47,10 @@ final class ResourceOwnerFlowSuccessTests: XCTestCase {
     var client: OAuth2Client!
     var flow: ResourceOwnerFlow!
 
+    static override func setUp() {
+        registerMock(bundles: .oktaOAuth2Tests)
+    }
+    
     override func setUpWithError() throws {
         client = OAuth2Client(baseURL: issuer,
                               clientId: "clientId",
@@ -54,13 +61,13 @@ final class ResourceOwnerFlowSuccessTests: XCTestCase {
         Token.accessTokenValidator = MockTokenHashValidator()
 
         urlSession.expect("https://example.com/.well-known/openid-configuration",
-                          data: try data(from: .module, for: "openid-configuration", in: "MockResponses"),
+                          data: try data(filename: "openid-configuration"),
                           contentType: "application/json")
         urlSession.expect("https://example.okta.com/oauth2/v1/keys?client_id=clientId",
-                          data: try data(from: .module, for: "keys", in: "MockResponses"),
+                          data: try data(filename: "keys"),
                           contentType: "application/json")
         urlSession.expect("https://example.okta.com/oauth2/v1/token",
-                          data: try data(from: .module, for: "token", in: "MockResponses"),
+                          data: try data(filename: "token"),
                           contentType: "application/json")
         flow = client.resourceOwnerFlow()
     }
@@ -83,7 +90,7 @@ final class ResourceOwnerFlowSuccessTests: XCTestCase {
         flow.start(username: "username", password: "password") { _ in
             expect.fulfill()
         }
-        waitForExpectations(timeout: 1) { error in
+        waitForExpectations(timeout: .long) { error in
             XCTAssertNil(error)
         }
 
@@ -99,7 +106,7 @@ final class ResourceOwnerFlowSuccessTests: XCTestCase {
 
         // Authenticate
         let wait = expectation(description: "resume")
-        var token: Token?
+        nonisolated(unsafe) var token: Token?
         flow.start(username: "username", password: "password") { result in
             switch result {
             case .success(let resultToken):
@@ -109,7 +116,7 @@ final class ResourceOwnerFlowSuccessTests: XCTestCase {
             }
             wait.fulfill()
         }
-        waitForExpectations(timeout: 1) { error in
+        waitForExpectations(timeout: .long) { error in
             XCTAssertNil(error)
         }
         

@@ -11,6 +11,8 @@
 //
 
 import Foundation
+import APIClient
+
 extension Token {
     struct RevokeRequest {
         let openIdConfiguration: OpenIdConfiguration
@@ -18,13 +20,13 @@ extension Token {
         let url: URL
         let token: String
         let hint: Token.Kind?
-        let configuration: [String: APIRequestArgument]
+        let configuration: [String: any APIRequestArgument]
         
         init(openIdConfiguration: OpenIdConfiguration,
              clientAuthentication: OAuth2Client.ClientAuthentication,
              token: String,
              hint: Token.Kind?,
-             configuration: [String: APIRequestArgument]) throws
+             configuration: [String: any APIRequestArgument]) throws
         {
             self.openIdConfiguration = openIdConfiguration
             self.clientAuthentication = clientAuthentication
@@ -44,7 +46,7 @@ extension Token {
         let clientConfiguration: OAuth2Client.Configuration
         let refreshToken: String
         let id: String
-        let configuration: [String: APIRequestArgument]
+        let configuration: [String: any APIRequestArgument]
         
         static let placeholderId = "temporary_id"
     }
@@ -90,7 +92,7 @@ extension Token.RevokeRequest: OAuth2APIRequest, APIRequestBody {
     var httpMethod: APIRequestMethod { .post }
     var contentType: APIContentType? { .formEncoded }
     var acceptsType: APIContentType? { .json }
-    var bodyParameters: [String: APIRequestArgument]? {
+    var bodyParameters: [String: any APIRequestArgument]? {
         var result = configuration
         result["token"] = token
         
@@ -104,15 +106,15 @@ extension Token.RevokeRequest: OAuth2APIRequest, APIRequestBody {
     }
 }
 
-extension Token.IntrospectRequest: OAuth2APIRequest, APIRequestBody {
+extension Token.IntrospectRequest: Sendable, OAuth2APIRequest, APIRequestBody {
     typealias ResponseType = TokenInfo
 
     var httpMethod: APIRequestMethod { .post }
     var contentType: APIContentType? { .formEncoded }
     var acceptsType: APIContentType? { .json }
-    var authorization: APIAuthorization? { nil }
-    var bodyParameters: [String: APIRequestArgument]? {
-        var result: [String: APIRequestArgument] = [
+    var authorization: (any APIAuthorization)? { nil }
+    var bodyParameters: [String: any APIRequestArgument]? {
+        var result: [String: any APIRequestArgument] = [
             "token": token.token(of: type) ?? "",
             "client_id": token.context.configuration.clientId,
             "token_type_hint": type
@@ -124,7 +126,7 @@ extension Token.IntrospectRequest: OAuth2APIRequest, APIRequestBody {
     }
 }
 
-extension Token.RefreshRequest: OAuth2APIRequest, APIRequestBody, APIParsingContext, OAuth2TokenRequest {
+extension Token.RefreshRequest: Sendable, OAuth2APIRequest, APIRequestBody, APIParsingContext, OAuth2TokenRequest {
     typealias ResponseType = Token
 
     var httpMethod: APIRequestMethod { .post }
@@ -132,8 +134,8 @@ extension Token.RefreshRequest: OAuth2APIRequest, APIRequestBody, APIParsingCont
     var contentType: APIContentType? { .formEncoded }
     var acceptsType: APIContentType? { .json }
     var clientId: String { clientConfiguration.clientId }
-    var bodyParameters: [String: APIRequestArgument]? {
-        var result: [String: APIRequestArgument] = configuration
+    var bodyParameters: [String: any APIRequestArgument]? {
+        var result: [String: any APIRequestArgument] = configuration
         result["grant_type"] = "refresh_token"
         result["refresh_token"] = refreshToken
 
@@ -142,13 +144,13 @@ extension Token.RefreshRequest: OAuth2APIRequest, APIRequestBody, APIParsingCont
         return result
     }
     
-    var codingUserInfo: [CodingUserInfoKey: Any]? {
-        guard let settings = configuration.reduce(into: [:], { partialResult, item in
+    var codingUserInfo: [CodingUserInfoKey: any Sendable]? {
+        guard let settings = configuration.reduce(into: [CodingUserInfoKey: any Sendable](), { partialResult, item in
             guard let key = CodingUserInfoKey(rawValue: item.key) else { return }
             partialResult?[key] = item.value
         }) else { return nil }
         
-        var result: [CodingUserInfoKey: Any] = [
+        var result: [CodingUserInfoKey: any Sendable] = [
             .clientSettings: settings
         ]
         

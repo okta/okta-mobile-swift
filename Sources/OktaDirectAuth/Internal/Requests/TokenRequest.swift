@@ -12,15 +12,16 @@
 
 import Foundation
 import AuthFoundation
+import APIClient
 
-struct TokenRequest {
+struct TokenRequest: Sendable {
     let openIdConfiguration: OpenIdConfiguration
     let clientConfiguration: OAuth2Client.Configuration
     let currentStatus: DirectAuthenticationFlow.Status?
     let loginHint: String?
-    let factor: any AuthenticationFactor
+    let factor: (any AuthenticationFactor & Sendable)
     let intent: DirectAuthenticationFlow.Intent
-    let parameters: (any HasTokenParameters)?
+    let parameters: (any HasTokenParameters & Sendable)?
     let grantTypesSupported: [GrantType]?
     
     init(openIdConfiguration: OpenIdConfiguration,
@@ -45,7 +46,7 @@ struct TokenRequest {
 
 extension TokenRequest: OAuth2TokenRequest, OAuth2APIRequest, APIRequestBody {
     var clientId: String { clientConfiguration.clientId }
-    var bodyParameters: [String: APIRequestArgument]? {
+    var bodyParameters: [String: any APIRequestArgument]? {
         var result = factor.tokenParameters(currentStatus: currentStatus)
         result["client_id"] = clientConfiguration.clientId
         result["scope"] = clientConfiguration.scopes
@@ -74,7 +75,7 @@ extension TokenRequest: OAuth2TokenRequest, OAuth2APIRequest, APIRequestBody {
 }
 
 extension TokenRequest: APIParsingContext {
-    var codingUserInfo: [CodingUserInfoKey: Any]? {
+    var codingUserInfo: [CodingUserInfoKey: any Sendable]? {
         [
             .clientSettings: [
                 "client_id": clientConfiguration.clientId,

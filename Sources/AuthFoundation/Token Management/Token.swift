@@ -11,27 +11,16 @@
 //
 
 import Foundation
+import OktaUtilities
+import OktaConcurrency
+import JWT
 
 /// Token information representing a user's access to a resource server, including access token, refresh token, and other related information.
-public final class Token: Codable, Equatable, Hashable, JSONClaimContainer, Expires {
+public final class Token: Codable, Equatable, Hashable, Sendable, JSONClaimContainer, Expires {
     public typealias ClaimType = TokenClaim
-
-    /// The object used to ensure ID tokens are valid.
-    public static var idTokenValidator: IDTokenValidator = DefaultIDTokenValidator()
-    
-    /// The object used to ensure access tokens can be validated against its associated ID token.
-    public static var accessTokenValidator: TokenHashValidator = DefaultTokenHashValidator(hashKey: .accessToken)
-    
-    /// The object used to ensure device secrets are validated against its associated ID token.
-    public static var deviceSecretValidator: TokenHashValidator = DefaultTokenHashValidator(hashKey: .deviceSecret)
-    
-    /// Coordinates important operations during token exchange.
-    ///
-    /// > Note: This property and interface is currently marked as internal, but may be exposed publicly in the future.
-    static var exchangeCoordinator: TokenExchangeCoordinator = DefaultTokenExchangeCoordinator()
     
     /// The unique identifier for this token.
-    public internal(set) var id: String
+    public let id: String
     
     /// The date this token was issued at.
     public let issuedAt: Date?
@@ -66,15 +55,15 @@ public final class Token: Codable, Equatable, Hashable, JSONClaimContainer, Expi
     public var issuedTokenType: String? { self[.issuedTokenType] }
     
     /// The claim payload container for this token
-    public var payload: [String: Any] { jsonPayload.jsonValue.anyValue as? [String: Any] ?? [:] }
+    public var payload: [String: any Sendable] { jsonPayload.jsonValue.anyValue as? [String: any Sendable] ?? [:] }
     
     /// Indicates whether or not the token is being refreshed.
     public var isRefreshing: Bool {
-        refreshAction != nil
+        refreshAction.isActive
     }
     
     let jsonPayload: AnyJSON
-    internal var refreshAction: CoalescedResult<Result<Token, OAuth2Error>>?
+    internal let refreshAction = CoalescedResult<Result<Token, OAuth2Error>>()
 
     /// Return the relevant token string for the given type.
     /// - Parameter kind: Type of token string to return
@@ -94,7 +83,7 @@ public final class Token: Codable, Equatable, Hashable, JSONClaimContainer, Expi
     
     /// Validates the claims within this JWT token, to ensure it matches the given ``OAuth2Client``.
     /// - Parameter client: Client to validate the token's claims against.
-    public func validate(using client: OAuth2Client, with context: IDTokenValidatorContext?) throws {
+    public func validate(using client: OAuth2Client, with context: (any IDTokenValidatorContext)?) throws {
         guard let idToken = idToken else {
             return
         }
@@ -119,7 +108,7 @@ public final class Token: Codable, Equatable, Hashable, JSONClaimContainer, Expi
     ///   - refreshToken: Refresh token string.
     ///   - client: ``OAuth2Client`` instance that corresponds to the client configuration initially used to create the refresh token.
     ///   - completion: Completion block invoked when a result is returned.
-    public static func from(refreshToken: String, using client: OAuth2Client, completion: @escaping (Result<Token, OAuth2Error>) -> Void) {
+    public static func from(refreshToken: String, using client: OAuth2Client, completion: @Sendable @escaping (Result<Token, OAuth2Error>) -> Void) {
         client.openIdConfiguration { result in
             switch result {
             case .success(let configuration):
@@ -177,7 +166,7 @@ public final class Token: Codable, Equatable, Hashable, JSONClaimContainer, Expi
         self.context = context
         self.jsonPayload = json
         
-        let payload = json.jsonValue.anyValue as? [String: Any] ?? [:]
+        let payload = json.jsonValue.anyValue as? [String: any Sendable] ?? [:]
         if let value = payload[TokenClaim.idToken.rawValue] as? String {
             idToken = try JWT(value)
         } else {
@@ -204,6 +193,23 @@ public final class Token: Codable, Equatable, Hashable, JSONClaimContainer, Expi
 
         tokenType = try TokenClaim.value(.tokenType, in: payload)
         expiresIn = try TokenClaim.value(.expiresIn, in: payload)
+    }
+    
+    func with(tags: [String: String]?) throws -> Token {
+        guard let tags = tags else {
+            return self
+        }
+        
+        var result = self
+        
+        var newContext = context
+        newContext.tags = tags
+        
+        result = try Token(id: id,
+                           issuedAt: issuedAt ?? Date(),
+                           context: newContext,
+                           json: jsonPayload)
+        return result
     }
     
     public func encode(to encoder: any Encoder) throws {
@@ -257,7 +263,6 @@ extension Token {
 extension CodingUserInfoKey {
     // swiftlint:disable force_unwrapping
     public static let tokenId = CodingUserInfoKey(rawValue: "tokenId")!
-    public static let apiClientConfiguration = CodingUserInfoKey(rawValue: "apiClientConfiguration")!
     public static let clientSettings = CodingUserInfoKey(rawValue: "clientSettings")!
     public static let request = CodingUserInfoKey(rawValue: "request")!
     // swiftlint:enable force_unwrapping

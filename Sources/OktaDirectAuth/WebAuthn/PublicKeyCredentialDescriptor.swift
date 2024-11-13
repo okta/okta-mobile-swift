@@ -18,7 +18,7 @@ extension WebAuthn {
      
      - Note: [W3C Reccomendation](https://www.w3.org/TR/webauthn/#dictionary-credential-descriptor)
      */
-    public struct PublicKeyCredentialDescriptor: Codable {
+    public struct PublicKeyCredentialDescriptor: Sendable, Codable {
         /// This member contains the credential ID of the public key credential the caller is referring to.
         public let id: String
         

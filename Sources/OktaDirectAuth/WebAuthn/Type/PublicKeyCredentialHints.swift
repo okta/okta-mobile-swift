@@ -18,7 +18,7 @@ extension WebAuthn {
 
      - Note: [W3C Reccomendation](https://w3c.github.io/webauthn/#enumdef-publickeycredentialhints)
      */
-    public enum PublicKeyCredentialHints: String, Codable {
+    public enum PublicKeyCredentialHints: String, Sendable, Codable {
         /// Indicates that the Relying Party believes that users will satisfy this request with a physical security key.
         case securityKey = "security-key"
         

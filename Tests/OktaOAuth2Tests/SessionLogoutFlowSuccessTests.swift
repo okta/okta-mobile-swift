@@ -14,6 +14,9 @@ import XCTest
 @testable import TestCommon
 @testable import AuthFoundation
 @testable import OktaOAuth2
+@testable import APIClientTestCommon
+@testable import AuthFoundationTestCommon
+@testable import JWT
 
 class SessionLogoutFlowDelegateRecorder: SessionLogoutFlowDelegate {
     var error: OAuth2Error?
@@ -43,11 +46,15 @@ final class SessionLogoutFlowSuccessTests: XCTestCase {
     let logoutIDToken = "logoutIDToken"
     let state = "state"
     
+    static override func setUp() {
+        registerMock(bundles: .oktaOAuth2Tests)
+    }
+    
     override func setUpWithError() throws {
         client = OAuth2Client(baseURL: issuer, clientId: "clientId", scopes: "openid", session: urlSession)
         
         urlSession.expect("https://example.com/.well-known/openid-configuration",
-                          data: try data(from: .module, for: "openid-configuration", in: "MockResponses"),
+                          data: try data(filename: "openid-configuration"),
                           contentType: "application/json")
         
         flow = SessionLogoutFlow(logoutRedirectUri: logoutRedirectUri, client: client)
@@ -72,7 +79,7 @@ final class SessionLogoutFlowSuccessTests: XCTestCase {
             resumeExpection.fulfill()
         }
         
-        wait(for: [resumeExpection], timeout: 1)
+        wait(for: [resumeExpection], timeout: .long)
 
         XCTAssertEqual(delegate.url?.absoluteString, """
                             https://example.okta.com/oauth2/v1/logout\
@@ -116,7 +123,7 @@ final class SessionLogoutFlowSuccessTests: XCTestCase {
             resumeExpection.fulfill()
         }
         
-        wait(for: [resumeExpection], timeout: 1)
+        wait(for: [resumeExpection], timeout: .long)
 
         XCTAssertNil(flow.context)
         XCTAssertFalse(flow.inProgress)
@@ -145,7 +152,7 @@ final class SessionLogoutFlowSuccessTests: XCTestCase {
             resumeExpection.fulfill()
         }
         
-        wait(for: [resumeExpection], timeout: 1)
+        wait(for: [resumeExpection], timeout: .long)
     }
     
     @available(iOS 13.0, tvOS 13.0, macOS 10.15, watchOS 6, *)

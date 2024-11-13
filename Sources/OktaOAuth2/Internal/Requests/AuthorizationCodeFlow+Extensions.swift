@@ -12,11 +12,12 @@
 
 import Foundation
 import AuthFoundation
+import APIClient
 
 extension AuthorizationCodeFlow {
     func authenticationUrlComponents(from authenticationUrl: URL,
                                      using context: AuthorizationCodeFlow.Context,
-                                     additionalParameters: [String: APIRequestArgument]?) throws -> URLComponents
+                                     additionalParameters: [String: any APIRequestArgument]?) throws -> URLComponents
     {
         guard var components = URLComponents(url: authenticationUrl, resolvingAgainstBaseURL: true)
         else {
@@ -30,7 +31,7 @@ extension AuthorizationCodeFlow {
     }
     
     private func queryParameters(using context: AuthorizationCodeFlow.Context,
-                                 additionalParameters: [String: APIRequestArgument]?) -> [String: String]
+                                 additionalParameters: [String: any APIRequestArgument]?) -> [String: String]
     {
         var parameters = self.additionalParameters ?? [:]
         parameters.merge(additionalParameters)

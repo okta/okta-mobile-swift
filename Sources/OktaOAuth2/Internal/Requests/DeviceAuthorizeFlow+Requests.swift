@@ -12,6 +12,7 @@
 
 import Foundation
 import AuthFoundation
+import APIClient
 
 extension DeviceAuthorizationFlow {
     struct TokenRequest {
@@ -33,7 +34,7 @@ extension DeviceAuthorizationFlow.AuthorizeRequest: APIRequest, APIRequestBody {
     var httpMethod: APIRequestMethod { .post }
     var contentType: APIContentType? { .formEncoded }
     var acceptsType: APIContentType? { .json }
-    var bodyParameters: [String: APIRequestArgument]? {
+    var bodyParameters: [String: any APIRequestArgument]? {
         [
             "client_id": clientId,
             "scope": scope
@@ -42,7 +43,7 @@ extension DeviceAuthorizationFlow.AuthorizeRequest: APIRequest, APIRequestBody {
 }
 
 extension DeviceAuthorizationFlow.TokenRequest: OAuth2TokenRequest, OAuth2APIRequest, APIRequestBody, APIParsingContext {
-    var bodyParameters: [String: APIRequestArgument]? {
+    var bodyParameters: [String: any APIRequestArgument]? {
         [
             "client_id": clientId,
             "device_code": deviceCode,
@@ -50,7 +51,7 @@ extension DeviceAuthorizationFlow.TokenRequest: OAuth2TokenRequest, OAuth2APIReq
         ]
     }
     
-    var codingUserInfo: [CodingUserInfoKey: Any]? {
+    var codingUserInfo: [CodingUserInfoKey: any Sendable]? {
         [
             .clientSettings: [
                 "client_id": clientId

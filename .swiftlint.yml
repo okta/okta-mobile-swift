@@ -84,6 +84,9 @@ closure_parameter_position:
 
 attributes:
   severity: error
+  always_on_line_above:
+    - "@Synchronized"
+    - "@HasLock"
 collection_alignment:
   severity: error
 control_statement:

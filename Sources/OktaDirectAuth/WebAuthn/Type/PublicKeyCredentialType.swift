@@ -18,7 +18,7 @@ extension WebAuthn {
      
      - Note: [W3C Reccomendation](https://www.w3.org/TR/webauthn/#dom-publickeycredentialdescriptor-type)
      */
-    public enum PublicKeyCredentialType: String, Codable {
+    public enum PublicKeyCredentialType: String, Sendable, Codable {
         /// Descripes a public key credential type.
         case publicKey = "public-key"
     }

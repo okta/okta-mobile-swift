@@ -12,22 +12,23 @@
 
 import Foundation
 import AuthFoundation
+import APIClient
 
-class ChallengeStepHandler<Request: APIRequest>: StepHandler {
+final class ChallengeStepHandler<Request: APIRequest>: StepHandler, Sendable {
     let flow: DirectAuthenticationFlow
     let request: Request
-    private let statusBlock: (_ response: Request.ResponseType) throws -> DirectAuthenticationFlow.Status
+    private let statusBlock: @Sendable (_ response: Request.ResponseType) throws -> DirectAuthenticationFlow.Status
 
     init(flow: DirectAuthenticationFlow,
          request: Request,
-         statusBlock: @escaping (_ response: Request.ResponseType) throws -> DirectAuthenticationFlow.Status)
+         statusBlock: @Sendable @escaping (_ response: Request.ResponseType) throws -> DirectAuthenticationFlow.Status)
     {
         self.flow = flow
         self.request = request
         self.statusBlock = statusBlock
     }
     
-    func process(completion: @escaping (Result<DirectAuthenticationFlow.Status, DirectAuthenticationFlowError>) -> Void) {
+    func process(completion: @Sendable @escaping (Result<DirectAuthenticationFlow.Status, DirectAuthenticationFlowError>) -> Void) {
         request.send(to: flow.client) { result in
             switch result {
             case .failure(let error):

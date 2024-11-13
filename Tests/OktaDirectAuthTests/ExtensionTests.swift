@@ -13,11 +13,17 @@
 import XCTest
 @testable import TestCommon
 @testable import OktaDirectAuth
+@testable import AuthFoundationTestCommon
+@testable import APIClientTestCommon
 
 final class ExtensionTests: XCTestCase {
     typealias Status = DirectAuthenticationFlow.Status
     typealias MFAContext = DirectAuthenticationFlow.MFAContext
 
+    static override func setUp() {
+        registerMock(bundles: .oktaDirectAuthTests)
+    }
+    
     func testArrayExtensions() throws {
         XCTAssertEqual([GrantType].directAuth, [.password, .oob, .otp, .oobMFA, .otpMFA, .webAuthn, .webAuthnMFA])
     }
@@ -29,7 +35,7 @@ final class ExtensionTests: XCTestCase {
         XCTAssertEqual(Status.mfaRequired(mfaContext).mfaContext?.mfaToken, "abc123")
         
         let webAuthnContext = DirectAuthenticationFlow.ContinuationType.WebAuthnContext(
-            request: try mock(from: .module, for: "challenge-webauthn", in: "MockResponses"),
+            request: try mock(filename: "challenge-webauthn"),
             mfaContext: mfaContext)
         XCTAssertEqual(Status.continuation(.webAuthn(webAuthnContext)).mfaContext?.mfaToken, "abc123")
     }

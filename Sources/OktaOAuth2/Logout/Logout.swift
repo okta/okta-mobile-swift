@@ -11,6 +11,7 @@
 //
 
 import Foundation
+import OktaConcurrency
 
 /// A common delegate protocol that all logout flows should support.
 public protocol LogoutFlowDelegate: AnyObject {

@@ -1,63 +1,289 @@
-// swift-tools-version:5.9
-// The swift-tools-version declares the minimum version of Swift required to build this package.
+// swift-tools-version: 6.0
 
+import Foundation
 import PackageDescription
+import CompilerPluginSupport
+
+#if canImport(Darwin)
+let includePrivacyManifest = true
+#else
+let includePrivacyManifest = false
+#endif
+
+func exclude(_ resources: [String] = []) -> [String] {
+    var resources = resources
+    if !includePrivacyManifest {
+        resources.append("PrivacyInfo.xcprivacy")
+    }
+    return resources
+}
+
+func include(_ resources: PackageDescription.Resource...) -> [PackageDescription.Resource]? {
+    var resources = resources
+    if includePrivacyManifest {
+        resources.append(.copy("PrivacyInfo.xcprivacy"))
+    }
+    return resources
+}
 
 var package = Package(
-    name: "AuthFoundation",
+    name: "OktaClient",
     defaultLocalization: "en",
     platforms: [
-        .iOS(.v12),
-        .tvOS(.v12),
+        .iOS(.v13),
+        .tvOS(.v13),
         .watchOS(.v7),
         .visionOS(.v1),
         .macOS(.v10_15),
         .macCatalyst(.v13)
     ],
     products: [
-        .library(name: "AuthFoundation", targets: ["AuthFoundation"]),
-        .library(name: "OktaOAuth2", targets: ["OktaOAuth2"]),
-        .library(name: "OktaDirectAuth", targets: ["OktaDirectAuth"]),
-        .library(name: "WebAuthenticationUI", targets: ["WebAuthenticationUI"])
+        .library(name: "AuthFoundation",
+                 targets: [
+                    "AuthFoundation",
+                    "OktaConcurrency",
+                    "Keychain",
+                    "OktaUtilities",
+                    "APIClient",
+                    "JWT",
+                 ]),
+        .library(name: "OktaOAuth2",
+                 targets: [
+                    "OktaOAuth2",
+                 ]),
+        .library(name: "OktaDirectAuth",
+                 targets: [
+                    "OktaDirectAuth",
+                 ]),
     ],
     dependencies: [
-        .package(url: "https://github.com/apple/swift-docc-plugin", from: "1.0.0")
+        .package(url: "https://github.com/swiftlang/swift-syntax", "600.0.0"..<"601.0.0-prerelease"),
     ],
     targets: [
+        // Concurrency & locking
+        .target(name: "OktaConcurrency",
+                dependencies: [
+                    "OktaClientMacros"
+                ]),
+        .testTarget(name: "OktaConcurrencyTests",
+                    dependencies: [
+                        .target(name: "OktaConcurrency"),
+                        .target(name: "TestCommon")
+                    ]),
+        
+        // Macros
+        .macro(name: "OktaClientMacros",
+               dependencies: [
+                .product(name: "SwiftCompilerPlugin", package: "swift-syntax"),
+                .product(name: "SwiftSyntax", package: "swift-syntax"),
+                .product(name: "SwiftSyntaxMacros", package: "swift-syntax"),
+                .product(name: "SwiftDiagnostics", package: "swift-syntax"),
+               ]),
+        .testTarget(name: "OktaClientMacrosTests",
+                    dependencies: [
+                        "OktaClientMacros",
+                        .product(name: "SwiftSyntaxMacros", package: "swift-syntax"),
+                        .product(name: "SwiftSyntaxMacrosTestSupport", package: "swift-syntax"),
+                    ]),
+
+        // Common test utilities
+        .target(name: "TestCommon",
+                path: "Tests/TestCommon"),
+
+        // Keychain
+        .target(name: "Keychain",
+                dependencies: [
+                    .target(name: "OktaConcurrency")
+                ]),
+        .target(name: "KeychainTestCommon",
+                dependencies: [
+                    .target(name: "Keychain")
+                ],
+                path: "Tests/KeychainTestCommon"),
+        .testTarget(name: "KeychainTests",
+                    dependencies: [
+                        .target(name: "Keychain"),
+                        .target(name: "KeychainTestCommon"),
+                        .target(name: "TestCommon")
+                    ]),
+
+        // Common types
+        .target(name: "OktaUtilities",
+                dependencies: [
+                    .target(name: "OktaConcurrency")
+                ]),
+        .testTarget(name: "OktaUtilitiesTests",
+                    dependencies: [
+                        .target(name: "OktaUtilities"),
+                        .target(name: "OktaConcurrency"),
+                        .target(name: "TestCommon")
+                    ]),
+        
+        // Abstract API Client
+        .target(name: "APIClient",
+                dependencies: [
+                    .target(name: "OktaUtilities"),
+                ]),
+        .testTarget(name: "APIClientTests",
+                    dependencies: [
+                        .target(name: "APIClient"),
+                        .target(name: "JWT"),
+                        .target(name: "OktaConcurrency"),
+                        .target(name: "APIClientTestCommon"),
+                        .target(name: "TestCommon")
+                    ]),
+        .target(name: "APIClientTestCommon",
+                dependencies: [
+                    .target(name: "APIClient"),
+                    .target(name: "JWT"),
+                    .target(name: "TestCommon"),
+                ],
+                path: "Tests/APIClientTestCommon",
+                resources: [.process("MockResponses")]),
+
+        // JSON & JWT
+        .target(name: "JWT",
+                dependencies: [
+                    .target(name: "OktaUtilities"),
+                    .target(name: "OktaConcurrency"),
+                    .target(name: "APIClient")
+                ],
+                resources: [ .process("Resources") ]),
+        .testTarget(name: "JWTTests",
+                    dependencies: [
+                        .target(name: "OktaConcurrency"),
+                        .target(name: "OktaUtilities"),
+                        .target(name: "JWT"),
+                        .target(name: "TestCommon"),
+                        .target(name: "APIClientTestCommon")
+                    ],
+                    resources: [ .process("MockResponses") ]),
+
+        // AuthFoundation
         .target(name: "AuthFoundation",
-                dependencies: [],
-                resources: [.process("Resources")]),
+                dependencies: [
+                    .target(name: "OktaUtilities"),
+                    .target(name: "OktaConcurrency"),
+                    .target(name: "Keychain"),
+                    .target(name: "APIClient"),
+                    .target(name: "JWT"),
+                ],
+                exclude: exclude(),
+                resources: include(.process("Resources"))),
+        .target(name: "AuthFoundationTestCommon",
+                dependencies: [
+                    .target(name: "AuthFoundation"),
+                    .target(name: "APIClientTestCommon")
+                ],
+                path: "Tests/AuthFoundationTestCommon"),
+        .testTarget(name: "AuthFoundationTests",
+                    dependencies: [
+                        .target(name: "JWT"),
+                        .target(name: "AuthFoundation"),
+                        .target(name: "TestCommon"),
+                        .target(name: "KeychainTestCommon"),
+                        .target(name: "APIClientTestCommon"),
+                        .target(name: "AuthFoundationTestCommon"),
+                    ],
+                    resources: [ .process("MockResponses") ]),
+
+        // OktaOAuth2
         .target(name: "OktaOAuth2",
                 dependencies: [
                     .target(name: "AuthFoundation")
                 ],
-                resources: [.process("Resources")]),
+                exclude: exclude(),
+                resources: include(.process("Resources"))),
+        .testTarget(name: "OktaOAuth2Tests",
+                    dependencies: [
+                        .target(name: "OktaOAuth2"),
+                        .target(name: "AuthFoundation"),
+                        .target(name: "TestCommon"),
+                        .target(name: "KeychainTestCommon"),
+                        .target(name: "APIClientTestCommon"),
+                        .target(name: "AuthFoundationTestCommon"),
+                    ],
+                    resources: [ .process("MockResponses") ]),
+
+        // OktaDirectAuth
         .target(name: "OktaDirectAuth",
                 dependencies: [
                     .target(name: "AuthFoundation")
                 ],
-                resources: [.process("Resources")]),
-        .target(name: "WebAuthenticationUI",
-                dependencies: [
-                    .target(name: "OktaOAuth2")
-                ],
-                resources: [.process("Resources")]),
-    ] + [
-        .target(name: "TestCommon",
-                dependencies: ["AuthFoundation"],
-                path: "Tests/TestCommon"),
-        .testTarget(name: "AuthFoundationTests",
-                    dependencies: ["AuthFoundation", "TestCommon"],
-                    resources: [ .copy("MockResponses") ]),
-        .testTarget(name: "OktaOAuth2Tests",
-                    dependencies: ["OktaOAuth2", "TestCommon"],
-                    resources: [ .copy("MockResponses") ]),
+                exclude: exclude(),
+                resources: include(.process("Resources"))),
         .testTarget(name: "OktaDirectAuthTests",
-                    dependencies: ["OktaDirectAuth", "TestCommon"],
-                    resources: [ .copy("MockResponses") ]),
-        .testTarget(name: "WebAuthenticationUITests",
-                    dependencies: ["WebAuthenticationUI", "TestCommon"],
-                    resources: [ .copy("MockResponses") ])
+                    dependencies: [
+                        .target(name: "APIClient"),
+                        .target(name: "JWT"),
+                        .target(name: "OktaDirectAuth"),
+                        .target(name: "AuthFoundation"),
+                        .target(name: "TestCommon"),
+                        .target(name: "KeychainTestCommon"),
+                        .target(name: "APIClientTestCommon"),
+                        .target(name: "AuthFoundationTestCommon"),
+                    ],
+                    resources: [ .process("MockResponses") ]),
     ],
-    swiftLanguageVersions: [.v5]
+    swiftLanguageModes: [.v6, .v5]
 )
+
+#if canImport(Darwin)
+// WebAuthenticationUI
+package.products.append(.library(name: "WebAuthenticationUI", targets: ["WebAuthenticationUI"]))
+package.targets.append(contentsOf: [
+    .target(name: "WebAuthenticationUI",
+            dependencies: [
+                .target(name: "OktaOAuth2")
+            ],
+            exclude: exclude(),
+            resources: include(.process("Resources"))),
+    .testTarget(name: "WebAuthenticationUITests",
+                dependencies: [
+                    .target(name: "WebAuthenticationUI"),
+                    .target(name: "OktaOAuth2"),
+                    .target(name: "AuthFoundation"),
+                    .target(name: "TestCommon"),
+                    .target(name: "KeychainTestCommon"),
+                    .target(name: "APIClientTestCommon"),
+                    .target(name: "AuthFoundationTestCommon"),
+                ],
+                resources: [ .process("MockResponses") ]),
+])
+#endif
+
+
+//// CocoaPods specific product changes
+//if Context.environment["BUILD_COCOAPODS_MACRO"] != nil,
+//   let macroTarget = package.targets.first(where: { $0.name == "OktaClientMacros" })
+//{
+//    package.targets = [
+//        .executableTarget(name: "OktaClientMacros",
+//                          dependencies: macroTarget.dependencies)
+//    ]
+//    
+//    package.products = [
+//        .executable(name: "OktaClientMacros",
+//                    targets: [
+//                        "OktaClientMacros"
+//                    ])
+//    ]
+//}
+
+for target in package.targets {
+    target.swiftSettings = target.swiftSettings ?? []
+    target.swiftSettings?.append(
+        .enableUpcomingFeature("ExistentialAny")
+    )
+    
+    if target.type != .system && target.type != .test {
+        target.swiftSettings?.append(.enableExperimentalFeature("StrictConcurrency=complete"))
+        target.swiftSettings?.append(.enableUpcomingFeature("InferSendableFromCaptures"))
+    }
+}
+
+#if !os(Windows)
+package.dependencies.append(
+    .package(url: "https://github.com/apple/swift-docc-plugin", from: "1.0.0")
+)
+#endif

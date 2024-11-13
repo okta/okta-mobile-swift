@@ -12,12 +12,18 @@
 
 import XCTest
 @testable import OktaDirectAuth
+import APIClient
+@testable import APIClientTestCommon
 
 final class FactorPropertyTests: XCTestCase {
     typealias PrimaryFactor = DirectAuthenticationFlow.PrimaryFactor
     typealias SecondaryFactor = DirectAuthenticationFlow.SecondaryFactor
     typealias ContinuationFactor = DirectAuthenticationFlow.ContinuationFactor
 
+    static override func setUp() {
+        registerMock(bundles: .oktaDirectAuthTests)
+    }
+    
     func testLoginHint() throws {
         XCTAssertEqual(PrimaryFactor.password("foo").loginHintKey, "username")
         XCTAssertEqual(PrimaryFactor.otp(code: "123456").loginHintKey, "login_hint")
@@ -26,7 +32,7 @@ final class FactorPropertyTests: XCTestCase {
     }
     
     func testPrimaryTokenParameters() throws {
-        var parameters: [String: APIRequestArgument] = [:]
+        var parameters: [String: any APIRequestArgument] = [:]
         
         parameters = PrimaryFactor.password("foo").tokenParameters(currentStatus: nil)
         XCTAssertEqual(parameters.stringComponents, [
@@ -52,7 +58,7 @@ final class FactorPropertyTests: XCTestCase {
     }
     
     func testSecondaryTokenParameters() throws {
-        var parameters: [String: APIRequestArgument] = [:]
+        var parameters: [String: any APIRequestArgument] = [:]
 
         parameters = SecondaryFactor.otp(code: "123456").tokenParameters(currentStatus: nil)
         XCTAssertEqual(parameters.stringComponents, [
@@ -84,7 +90,7 @@ final class FactorPropertyTests: XCTestCase {
     }
     
     func testContinuationTokenParameters() throws {
-        var parameters: [String: APIRequestArgument] = [:]
+        var parameters: [String: any APIRequestArgument] = [:]
         
         parameters = ContinuationFactor.prompt(code: "123456")
             .tokenParameters(currentStatus: .continuation(
@@ -110,7 +116,7 @@ final class FactorPropertyTests: XCTestCase {
         ])
 
         let context = DirectAuthenticationFlow.ContinuationType.WebAuthnContext(
-            request: try mock(from: .module, for: "challenge-webauthn", in: "MockResponses"),
+            request: try mock(filename: "challenge-webauthn"),
             mfaContext: .init(supportedChallengeTypes: nil, mfaToken: "abc123"))
         parameters = ContinuationFactor.webAuthn(response: .init(clientDataJSON: "",
                                                                  authenticatorData: "",

@@ -11,6 +11,7 @@
 //
 
 import Foundation
+import APIClient
 
 /// Errors that may occur when interacting with OAuth2 endpoints.
 public enum OAuth2Error: Error {
@@ -45,13 +46,13 @@ public enum OAuth2Error: Error {
     case missingOpenIdConfiguration(attribute: String)
     
     /// The given nested error was thrown.
-    case error(_ error: Error)
+    case error(_ error: any Error)
     
     /// Cannot revoke the given token type.
-    case cannotRevoke(type: Token.RevokeType)
+    case missingRevokableToken(type: Token.RevokeType)
     
-    /// Multiple nested ``OAuth2Error`` errors were reported.
-    case multiple(errors: [OAuth2Error])
+    /// One or more tokens reported errors while revoking.
+    case revoke(errors: [Token.RevokeType: OAuth2Error])
 }
 
 extension OAuth2Error: LocalizedError {
@@ -124,7 +125,7 @@ extension OAuth2Error: LocalizedError {
                 name)
 
         case .error(let error):
-            if let error = error as? LocalizedError {
+            if let error = error as? (any LocalizedError) {
                 return error.localizedDescription
             }
             let errorString = String(describing: error)
@@ -136,23 +137,41 @@ extension OAuth2Error: LocalizedError {
                                   comment: "Invalid URL"),
                 errorString)
 
-        case .cannotRevoke:
-            return NSLocalizedString("cannot_revoke_token",
-                                     tableName: "AuthFoundation",
-                                     bundle: .authFoundation,
-                                     comment: "")
-
-        case .multiple(errors: let errors):
-            let errorString = errors
-                .map(\.localizedDescription)
-                .joined(separator: ", ")
-            
+        case .missingRevokableToken(type: let type):
             return String.localizedStringWithFormat(
-                NSLocalizedString("multiple_oauth2_errors",
+                NSLocalizedString("missing_revokable_token_type",
                                   tableName: "AuthFoundation",
                                   bundle: .authFoundation,
                                   comment: ""),
-                errorString)
+                type.tokenType?.rawValue ?? "unsupported"
+            )
+
+        case .revoke(errors: let errors):
+            if errors.count == 1,
+               let (revokeType, error) = errors.first
+            {
+                return String.localizedStringWithFormat(
+                    NSLocalizedString("revoke_error",
+                                      tableName: "AuthFoundation",
+                                      bundle: .authFoundation,
+                                      comment: ""),
+                    revokeType.tokenType?.rawValue ?? "unsupported",
+                    error.localizedDescription
+                )
+            } else {
+                let errorString = errors
+                    .map({ (key: Token.RevokeType, value: OAuth2Error) in
+                        "\t[\(key.tokenType?.rawValue ?? "unsuppoerted")]: \(value.localizedDescription)"
+                    })
+                    .joined(separator: "\n")
+
+                return String.localizedStringWithFormat(
+                    NSLocalizedString("multiple_revoke_errors",
+                                      tableName: "AuthFoundation",
+                                      bundle: .authFoundation,
+                                      comment: ""),
+                    errorString)
+            }
             
         case .missingOAuth2ResponseKey(let key):
             return String.localizedStringWithFormat(
@@ -161,7 +180,6 @@ extension OAuth2Error: LocalizedError {
                                   bundle: .authFoundation,
                                   comment: ""),
                 key)
-
         }
     }
 }
@@ -195,10 +213,10 @@ extension OAuth2Error: Equatable {
         case (.error(let lhsError), .error(let rhsError)):
             return compare(lhs: lhsError as NSError, rhs: rhsError as NSError)
 
-        case (.cannotRevoke(type: let lhsType), .cannotRevoke(type: let rhsType)):
+        case (.missingRevokableToken(type: let lhsType), .missingRevokableToken(type: let rhsType)):
             return lhsType == rhsType
             
-        case (.multiple(errors: let lhsErrors), .multiple(errors: let rhsErrors)):
+        case (.revoke(errors: let lhsErrors), .revoke(errors: let rhsErrors)):
             return lhsErrors == rhsErrors
             
         default:

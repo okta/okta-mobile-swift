@@ -14,6 +14,9 @@ import XCTest
 @testable import TestCommon
 @testable import AuthFoundation
 @testable import OktaOAuth2
+@testable import APIClientTestCommon
+@testable import AuthFoundationTestCommon
+@testable import JWT
 
 final class JWTAuthorizationFlowDelegateRecorder: AuthenticationDelegate {
     typealias Flow = JWTAuthorizationFlow
@@ -50,6 +53,10 @@ final class JWTAuthorizationFlowTests: XCTestCase {
     var flow: JWTAuthorizationFlow!
     var jwt: JWT!
     
+    static override func setUp() {
+        registerMock(bundles: .oktaOAuth2Tests)
+    }
+    
     override func setUpWithError() throws {
         client = OAuth2Client(baseURL: issuer,
                               clientId: "clientId",
@@ -60,13 +67,13 @@ final class JWTAuthorizationFlowTests: XCTestCase {
         Token.accessTokenValidator = MockTokenHashValidator()
 
         urlSession.expect("https://example.okta.com/.well-known/openid-configuration",
-                          data: try data(from: .module, for: "openid-configuration", in: "MockResponses"),
+                          data: try data(filename: "openid-configuration"),
                           contentType: "application/json")
         urlSession.expect("https://example.okta.com/oauth2/v1/keys?client_id=clientId",
-                          data: try data(from: .module, for: "keys", in: "MockResponses"),
+                          data: try data(filename: "keys"),
                           contentType: "application/json")
         urlSession.expect("https://example.okta.com/oauth2/v1/token",
-                          data: try data(from: .module, for: "token", in: "MockResponses"),
+                          data: try data(filename: "token"),
                           contentType: "application/json")
         
         flow = client.jwtAuthorizationFlow()
@@ -91,7 +98,7 @@ final class JWTAuthorizationFlowTests: XCTestCase {
             expect.fulfill()
         }
         
-        waitForExpectations(timeout: 5) { error in
+        waitForExpectations(timeout: .long) { error in
             XCTAssertNil(error)
         }
         
@@ -127,7 +134,7 @@ final class JWTAuthorizationFlowTests: XCTestCase {
             
             expect.fulfill()
         }
-        waitForExpectations(timeout: 1) { error in
+        waitForExpectations(timeout: .long) { error in
             XCTAssertNil(error)
         }
 

@@ -12,6 +12,7 @@
 
 import Foundation
 import AuthFoundation
+import APIClient
 
 extension OpenIdConfiguration {
     var primaryAuthenticateEndpoint: URL? {
@@ -36,7 +37,7 @@ struct OOBResponse: Codable, HasTokenParameters {
         self.bindingCode = bindingCode
     }
     
-    func tokenParameters(currentStatus: DirectAuthenticationFlow.Status?) -> [String: APIRequestArgument] {
+    func tokenParameters(currentStatus: DirectAuthenticationFlow.Status?) -> [String: any APIRequestArgument] {
         ["oob_code": oobCode]
     }
 }
@@ -78,8 +79,8 @@ extension OOBAuthenticateRequest: APIRequest, APIRequestBody {
     var httpMethod: APIRequestMethod { .post }
     var contentType: APIContentType? { .formEncoded }
     var acceptsType: APIContentType? { .json }
-    var bodyParameters: [String: APIRequestArgument]? {
-        var result: [String: APIRequestArgument] = [
+    var bodyParameters: [String: any APIRequestArgument]? {
+        var result: [String: any APIRequestArgument] = [
             "client_id": clientConfiguration.clientId,
             "login_hint": loginHint,
             "channel_hint": channelHint,

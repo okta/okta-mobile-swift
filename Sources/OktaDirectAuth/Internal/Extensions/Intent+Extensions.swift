@@ -11,6 +11,7 @@
 //
 
 import Foundation
+import APIClient
 
 extension DirectAuthenticationFlow.Intent: ProvidesOAuth2Parameters {
     @_documentation(visibility: private)
@@ -19,7 +20,7 @@ extension DirectAuthenticationFlow.Intent: ProvidesOAuth2Parameters {
     }
     
     @_documentation(visibility: private)
-    public var additionalParameters: [String: any AuthFoundation.APIRequestArgument]? {
+    public var additionalParameters: [String: any APIRequestArgument]? {
         switch self {
         case .signIn:
             return nil

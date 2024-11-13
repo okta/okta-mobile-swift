@@ -60,8 +60,12 @@ import Foundation
  */
 
 import XCTest
+import JWT
+
 @testable import AuthFoundation
-import TestCommon
+@testable import OktaUtilities
+@testable import TestCommon
+@testable import APIClientTestCommon
 
 struct MockTokenContext: IDTokenValidatorContext {
     let nonce: String?

@@ -12,36 +12,39 @@
 
 import Foundation
 import XCTest
-@testable import AuthFoundation
 
 enum TestError: Error {
     case noBundleResourceFound
 }
 
+nonisolated(unsafe) fileprivate var testBundles: [Bundle] = []
 public extension XCTestCase {
-    func mock<T: Decodable & JSONDecodable>(from bundle: Bundle,
-                 for filename: String,
-                 in folder: String? = nil) throws -> T
-    {
-        let data = try data(from: bundle, for: filename, in: folder)
-        let string = try XCTUnwrap(String(data: data, encoding: .utf8))
-        return try decode(type: T.self, string)
+    static func registerMock(bundles: Bundle...) {
+        testBundles = bundles
     }
-    
+
+    var mockBundles: [Bundle] {
+        var bundles: [Bundle] = testBundles
+        bundles.insert(Bundle(for: Self.self), at: 0)
+        return bundles
+    }
+
     func data(for json: String) -> Data {
         return json.data(using: .utf8)!
     }
     
-    func data(from bundle: Bundle, for filename: String, in folder: String? = nil) throws -> Data {
+    func data(filename: String) throws -> Data {
+        return try data(from: mockBundles, filename: filename)
+    }
+    
+    func data(from bundles: [Bundle], filename: String) throws -> Data {
         let file = (filename as NSString).deletingPathExtension
         var fileExtension = (filename as NSString).pathExtension
         if fileExtension == "" {
             fileExtension = "json"
         }
         
-        guard let url = bundle.url(forResource: file,
-                                   withExtension: fileExtension,
-                                   subdirectory: folder)
+        guard let url = testBundles.compactMap({ $0.url(forResource: file, withExtension: fileExtension) }).first
         else {
             throw TestError.noBundleResourceFound
         }
@@ -52,24 +55,6 @@ public extension XCTestCase {
     func data(for file: URL) throws -> Data {
         return try Data(contentsOf: file)
     }
-    
-    func decode<T>(type: T.Type, _ file: URL) throws -> T where T : Decodable & JSONDecodable {
-        let json = String(data: try data(for: file), encoding: .utf8)
-        return try decode(type: type, json!)
-    }
-
-    func decode<T>(type: T.Type, _ file: URL, _ test: ((T) throws -> Void)) throws where T : Decodable & JSONDecodable {
-        let json = String(data: try data(for: file), encoding: .utf8)
-        try test(try decode(type: type, json!))
-    }
-
-    func decode<T>(type: T.Type, _ json: String) throws -> T where T : Decodable & JSONDecodable {
-        try decode(type: type, decoder: T.jsonDecoder, json)
-    }
-
-    func decode<T>(type: T.Type, _ json: String, _ test: ((T) throws -> Void)) throws where T : Decodable & JSONDecodable {
-        try test(try decode(type: type, json))
-    }
 
     func decode<T>(type: T.Type, decoder: JSONDecoder, _ json: String) throws -> T where T : Decodable {
         let jsonData = data(for: json)
@@ -77,7 +62,7 @@ public extension XCTestCase {
     }
     
     @available(iOS 13.0, tvOS 13.0, macOS 10.15, watchOS 6, *)
-    func perform(queueCount: Int = 5, iterationCount: Int = 10, _ block: @escaping () async throws -> Void) rethrows {
+    func perform(queueCount: Int = 5, iterationCount: Int = 10, _ block: @Sendable @escaping () async throws -> Void) rethrows {
         let queues: [DispatchQueue] = (0..<queueCount).map { queueNumber in
             DispatchQueue(label: "Async queue \(queueNumber)")
         }
@@ -96,5 +81,13 @@ public extension XCTestCase {
         }
         
         _ = group.wait(timeout: .short)
+    }
+    
+    func sleep(for duration: TimeInterval) {
+        let sleepExpectation = expectation(description: "Sleep for \(duration) seconds")
+        DispatchQueue.main.asyncAfter(deadline: .now() + duration) {
+            sleepExpectation.fulfill()
+        }
+        wait(for: [sleepExpectation], timeout: duration * 3)
     }
 }

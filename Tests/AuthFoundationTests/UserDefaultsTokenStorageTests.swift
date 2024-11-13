@@ -10,7 +10,7 @@
 // See the License for the specific language governing permissions and limitations under the License.
 //
 
-#if os(iOS) || os(macOS) || os(tvOS) || os(watchOS) || os(visionOS)
+#if canImport(Darwin)
 import XCTest
 @testable import AuthFoundation
 import TestCommon
@@ -62,19 +62,18 @@ final class UserDefaultTokenStorageTests: XCTestCase {
         storage = nil
     }
     
-    func testDefaultToken() throws {
-        try storage.add(token: token, metadata: nil, security: [])
+    func testAddToken() throws {
+        try storage.add(token: token, security: [])
         XCTAssertEqual(storage.allIDs.count, 1)
-        XCTAssertEqual(storage.defaultTokenID, token.id)
         
         try storage.setDefaultTokenID(nil)
         XCTAssertNil(storage.defaultTokenID)
         XCTAssertEqual(storage.allIDs.count, 1)
    
-        XCTAssertThrowsError(try storage.add(token: token, metadata: nil, security: []))
+        XCTAssertThrowsError(try storage.add(token: token, security: []))
         XCTAssertEqual(storage.allIDs.count, 1)
         
-        XCTAssertNoThrow(try storage.replace(token: token.id, with: newToken, security: nil))
+        XCTAssertThrowsError(try storage.update(token: newToken, security: nil))
         XCTAssertEqual(storage.allIDs.count, 1)
 
         XCTAssertNoThrow(try storage.remove(id: token.id))
@@ -86,15 +85,16 @@ final class UserDefaultTokenStorageTests: XCTestCase {
 
     func testImplicitDefaultToken() throws {
         XCTAssertNil(storage.defaultTokenID)
-        
-        XCTAssertNoThrow(try storage.add(token: token, metadata: nil, security: []))
+        XCTAssertTrue(storage.allIDs.isEmpty)
+
+        XCTAssertNoThrow(try storage.add(token: token, security: []))
         XCTAssertEqual(storage.allIDs.count, 1)
 
-        XCTAssertEqual(storage.defaultTokenID, token.id)
+        XCTAssertNil(storage.defaultTokenID)
     }
 
     func testRemoveDefaultToken() throws {
-        try storage.add(token: token, metadata: nil, security: [])
+        try storage.add(token: token, security: [])
         try storage.setDefaultTokenID(token.id)
         XCTAssertEqual(storage.allIDs.count, 1)
 

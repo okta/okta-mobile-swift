@@ -29,7 +29,7 @@ class MockAuthenticationServicesProviderSession: AuthenticationServicesProviderS
     var cancelCalled = false
     
     static var redirectUri: URL?
-    static var redirectError: Error?
+    static var redirectError: (any Error)?
     
     required init(url: URL, callbackURLScheme: String?, completionHandler: @escaping ASWebAuthenticationSession.CompletionHandler) {
         self.url = url
@@ -37,7 +37,7 @@ class MockAuthenticationServicesProviderSession: AuthenticationServicesProviderS
         self.completionHandler = completionHandler
     }
     
-    var presentationContextProvider: ASWebAuthenticationPresentationContextProviding?
+    var presentationContextProvider: (any ASWebAuthenticationPresentationContextProviding)?
     
     var prefersEphemeralWebBrowserSession = false
     
@@ -58,9 +58,8 @@ class MockAuthenticationServicesProviderSession: AuthenticationServicesProviderS
     }
 }
 
-@available(iOS 13.0, *)
-class TestAuthenticationServicesProvider: AuthenticationServicesProvider {
-    override func createSession(url: URL, callbackURLScheme: String?, completionHandler: @escaping ASWebAuthenticationSession.CompletionHandler) -> AuthenticationServicesProviderSession {
+struct TestAuthenticationSessionFactory: ASWebAuthenticationSessionFactory {
+    func createSession(url: URL, callbackURLScheme: String?, completionHandler: @escaping ASWebAuthenticationSession.CompletionHandler) -> any AuthenticationServicesProviderSession {
         MockAuthenticationServicesProviderSession(url: url, callbackURLScheme: callbackURLScheme, completionHandler: completionHandler)
     }
 }
@@ -72,11 +71,12 @@ class AuthenticationServicesProviderTests: ProviderTestBase {
     override func setUpWithError() throws {
         try super.setUpWithError()
         
-        provider = TestAuthenticationServicesProvider(loginFlow: loginFlow, logoutFlow: logoutFlow, from: nil, delegate: delegate)
+        AuthenticationServicesProvider.authenticationSessionFactory = TestAuthenticationSessionFactory()
+        provider = AuthenticationServicesProvider(loginFlow: loginFlow, logoutFlow: logoutFlow, from: nil, delegate: delegate)
     }
     
     override func tearDownWithError() throws {
-        provider.authenticationSession?.cancel()
+        AuthenticationServicesProvider.resetToDefault()
         MockAuthenticationServicesProviderSession.redirectUri = nil
         MockAuthenticationServicesProviderSession.redirectError = nil
     }

@@ -11,6 +11,7 @@
 //
 
 import Foundation
+import JWT
 
 extension OpenIdConfiguration {
     /// Defines the metadata claims available within an ``OpenIdConfiguration``.

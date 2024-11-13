@@ -12,6 +12,7 @@
 
 import Foundation
 import AuthFoundation
+import APIClient
 
 extension OpenIdConfiguration {
     var challengeEndpoint: URL? {
@@ -75,8 +76,8 @@ extension ChallengeRequest: APIRequest, APIRequestBody {
     var httpMethod: APIRequestMethod { .post }
     var contentType: APIContentType? { .formEncoded }
     var acceptsType: APIContentType? { .json }
-    var bodyParameters: [String: APIRequestArgument]? {
-        var result: [String: APIRequestArgument] = [
+    var bodyParameters: [String: any APIRequestArgument]? {
+        var result: [String: any APIRequestArgument] = [
             "client_id": clientConfiguration.clientId,
             "mfa_token": mfaToken,
             "challenge_types_supported": challengeTypesSupported

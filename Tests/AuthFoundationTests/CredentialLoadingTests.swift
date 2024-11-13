@@ -14,6 +14,7 @@ import XCTest
 
 @testable import TestCommon
 @testable import AuthFoundation
+@testable import AuthFoundationTestCommon
 
 final class CredentialLoadingTests: XCTestCase {
     var userDefaults: UserDefaults!
@@ -40,20 +41,15 @@ final class CredentialLoadingTests: XCTestCase {
     }
     
     func testFetchingTokens() throws {
-        let tokenA = Token.mockToken(id: "TokenA")
-        let tokenB = Token.mockToken(id: "TokenB")
-        let tokenC = Token.mockToken(id: "TokenC")
-        let tokenD = Token.mockToken(id: "TokenD")
+        let tokenA = Token.mockToken(id: "TokenA", tags: ["animal": "cat"])
+        let tokenB = Token.mockToken(id: "TokenB", tags: ["animal": "dog"])
+        let tokenC = Token.mockToken(id: "TokenC", tags: ["animal": "pig"])
+        let tokenD = Token.mockToken(id: "TokenD", tags: ["animal": "emu"])
 
-        try storage.add(token: tokenA, metadata: nil, security: [])
-        try storage.add(token: tokenB, metadata: nil, security: [])
-        try storage.add(token: tokenC, metadata: nil, security: [])
-        try storage.add(token: tokenD, metadata: nil, security: [])
-
-        try storage.setMetadata(Token.Metadata(token: tokenA, tags: ["animal": "cat"]))
-        try storage.setMetadata(Token.Metadata(token: tokenB, tags: ["animal": "dog"]))
-        try storage.setMetadata(Token.Metadata(token: tokenC, tags: ["animal": "pig"]))
-        try storage.setMetadata(Token.Metadata(token: tokenD, tags: ["animal": "emu"]))
+        try storage.add(token: tokenA, security: [])
+        try storage.add(token: tokenB, security: [])
+        try storage.add(token: tokenC, security: [])
+        try storage.add(token: tokenD, security: [])
         
         XCTAssertEqual(try coordinator.with(id: "TokenA", prompt: nil, authenticationContext: nil)?.token, tokenA)
         XCTAssertEqual(try coordinator.find(where: { meta in

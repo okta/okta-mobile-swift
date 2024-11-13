@@ -12,6 +12,7 @@
 
 import UIKit
 import WebAuthenticationUI
+import Keychain
 
 class SignInViewController: UIViewController {
     @IBOutlet weak var signInButton: UIButton!
@@ -58,24 +59,21 @@ class SignInViewController: UIViewController {
     }
 
     @IBAction func signIn(_ sender: Any) {
-        let window = viewIfLoaded?.window
-        auth?.signIn(from: window, options: options) { result in
-            switch result {
-            case .success(let token):
-                do {
-                    try Credential.store(token)
-                    
-                    // This saves the device secret in a place accessible by the SingleSignOn sample application.
-                    try Keychain.saveDeviceSSO(token)
-                } catch {
-                    self.show(error: error)
-                    return
-                }
-                                        
-                self.dismiss(animated: true)
-            case .failure(let error):
+        guard let auth = self.auth else {
+            return
+        }
+        
+        Task { @MainActor in
+            do {
+                let token = try await auth.signIn(from: self.viewIfLoaded?.window, options: options)
+                try Credential.store(token)
+                
+                // This saves the device secret in a place accessible by the SingleSignOn sample application.
+                try Keychain.saveDeviceSSO(token)
+            } catch {
                 self.show(error: error)
             }
+            self.dismiss(animated: true)
         }
     }
     

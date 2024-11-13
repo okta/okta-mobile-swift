@@ -12,15 +12,16 @@
 
 import Foundation
 import AuthFoundation
+import APIClient
 
 /// Defines the additional token parameters that can be introduced through input arguments.
-protocol HasTokenParameters {
+protocol HasTokenParameters: Sendable {
     /// Parameters to include in the API request.
-    func tokenParameters(currentStatus: DirectAuthenticationFlow.Status?) -> [String: APIRequestArgument]
+    func tokenParameters(currentStatus: DirectAuthenticationFlow.Status?) -> [String: any APIRequestArgument]
 }
 
 /// Defines the common properties and functions shared between factor types.
-protocol AuthenticationFactor: HasTokenParameters {
+protocol AuthenticationFactor: Sendable, HasTokenParameters {
     /// The grant type supported by this factor.
     func grantType(currentStatus: DirectAuthenticationFlow.Status?) -> GrantType
 

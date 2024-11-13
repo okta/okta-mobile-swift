@@ -11,6 +11,7 @@
 //
 
 import Foundation
+import JWT
 
 extension Token {
     /// When refreshing a token, not all values are always returned, especially the refresh token or device secret.

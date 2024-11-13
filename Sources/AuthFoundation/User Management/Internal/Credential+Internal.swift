@@ -13,28 +13,9 @@
 import Foundation
 
 extension Credential {
-    func createAutomaticRefreshTimer() -> DispatchSourceTimer? {
-        guard let expiresAt = token.expiresAt else {
-            return nil
-        }
-        
-        refreshIfNeeded { _ in }
-        
-        automaticRefreshTimer?.cancel()
-        
-        let graceInterval = Credential.refreshGraceInterval
-        let timeOffset = max(0.0, expiresAt.timeIntervalSinceNow - Date.nowCoordinated.timeIntervalSinceNow - graceInterval)
-        let repeating = token.expiresIn - graceInterval
-        
-        let timerSource = DispatchSource.makeTimerSource(flags: [], queue: oauth2.refreshQueue)
-        timerSource.schedule(deadline: .now() + timeOffset,
-                             repeating: repeating)
-        timerSource.setEventHandler { [weak self] in
-            guard let self = self else { return }
-            self.refreshIfNeeded { _ in }
-        }
-        
-        return timerSource
+    static func resetToDefault() {
+        tokenStorage = CredentialCoordinatorImpl.defaultTokenStorage()
+        credentialDataSource = CredentialCoordinatorImpl.defaultCredentialDataSource()
     }
     
     func shouldRemove(for type: Token.RevokeType) -> Bool {

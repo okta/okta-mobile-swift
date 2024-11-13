@@ -11,26 +11,27 @@
 //
 
 import Foundation
+import JWT
 
 /// User profile information.
 ///
 /// This provides a convenience mechanism for accessing information related to a user. It supports the ``HasClaims`` protocol, to simplify common operations against user information, and to provide consistency with the ``JWT`` class.
 ///
 /// For more information about the members to use, please refer to ``JSONClaimContainer``.
-public struct UserInfo: Codable, JSONClaimContainer {
+public struct UserInfo: Sendable, Codable, JSONClaimContainer {
     public typealias ClaimType = JWTClaim
 
-    public let payload: [String: Any]
+    public let payload: [String: any Sendable]
     
-    public init(_ info: [String: Any]) {
+    public init(_ info: [String: any Sendable]) {
         self.payload = info
     }
     
-    public init(from decoder: Decoder) throws {
+    public init(from decoder: any Decoder) throws {
         self.init(try Self.decodePayload(from: decoder))
     }
 }
 
 extension UserInfo {
-    public static var jsonDecoder = JSONDecoder()
+    public static let jsonDecoder = JSONDecoder()
 }

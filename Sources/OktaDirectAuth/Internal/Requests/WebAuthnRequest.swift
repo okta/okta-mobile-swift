@@ -12,6 +12,7 @@
 
 import Foundation
 import AuthFoundation
+import APIClient
 
 struct WebAuthnChallengeRequest {
     let url: URL
@@ -41,8 +42,8 @@ extension WebAuthnChallengeRequest: APIRequest, APIRequestBody {
     var httpMethod: APIRequestMethod { .post }
     var contentType: APIContentType? { .formEncoded }
     var acceptsType: APIContentType? { .json }
-    var bodyParameters: [String: APIRequestArgument]? {
-        var result: [String: APIRequestArgument] = [
+    var bodyParameters: [String: any APIRequestArgument]? {
+        var result: [String: any APIRequestArgument] = [
             "client_id": clientConfiguration.clientId,
             "challenge_hint": GrantType.webAuthn
         ]
@@ -62,7 +63,7 @@ extension WebAuthnChallengeRequest: APIRequest, APIRequestBody {
 }
 
 extension WebAuthn.AuthenticatorAssertionResponse: HasTokenParameters {
-    func tokenParameters(currentStatus: DirectAuthenticationFlow.Status?) -> [String: APIRequestArgument] {
+    func tokenParameters(currentStatus: DirectAuthenticationFlow.Status?) -> [String: any APIRequestArgument] {
         var result = [
             "clientDataJSON": clientDataJSON,
             "authenticatorData": authenticatorData,

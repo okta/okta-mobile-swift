@@ -30,7 +30,7 @@ extension OAuth2Client.PropertyListConfigurationError: LocalizedError {
                 url.lastPathComponent)
 
         case .cannotParsePropertyList(let error):
-            if let error = error as? LocalizedError {
+            if let error = error as? (any LocalizedError) {
                 return error.localizedDescription
             }
             

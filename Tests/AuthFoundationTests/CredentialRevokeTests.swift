@@ -12,7 +12,9 @@
 
 import XCTest
 @testable import TestCommon
+@testable import APIClientTestCommon
 @testable import AuthFoundation
+@testable import AuthFoundationTestCommon
 
 final class CredentialTests: XCTestCase {
     var coordinator: MockCredentialCoordinator!
@@ -33,6 +35,10 @@ final class CredentialTests: XCTestCase {
                                                                        scopes: "openid"),
                                                   clientSettings: [ "client_id": "foo" ]))
 
+    static override func setUp() {
+        registerMock(bundles: .authFoundationTests)
+    }
+    
     override func setUpWithError() throws {
         coordinator = MockCredentialCoordinator()
         credential = coordinator.credentialDataSource.credential(for: token, coordinator: coordinator)
@@ -52,7 +58,7 @@ final class CredentialTests: XCTestCase {
     
     func testRevoke() throws {
         urlSession.expect("https://example.com/oauth2/default/.well-known/openid-configuration",
-                          data: try data(from: .module, for: "openid-configuration", in: "MockResponses"),
+                          data: try data(filename: "openid-configuration"),
                           contentType: "application/json")
         urlSession.expect("https://example.com/oauth2/v1/revoke",
                           data: Data())
@@ -73,14 +79,36 @@ final class CredentialTests: XCTestCase {
             }
             expect.fulfill()
         }
-        waitForExpectations(timeout: 1.0) { error in
+        waitForExpectations(timeout: .short) { error in
             XCTAssertNil(error)
         }
         
-        let revokeRequest = try XCTUnwrap(urlSession.requests.first(where: { request in
-            request.url?.absoluteString == "https://example.com/oauth2/v1/revoke"
-        }))
-        XCTAssertEqual(revokeRequest.bodyString, "client_id=foo&token=abcd123&token_type_hint=access_token")
+        let revokeRequestBodies: [Token.Kind: String] = urlSession
+            .requests
+            .compactMap({ request in
+                guard request.url?.absoluteString == "https://example.com/oauth2/v1/revoke"
+                else {
+                    return nil
+                }
+                return request.bodyString
+            })
+            .reduce(into: [:]) { (partialResult, body: String) in
+                guard let revokeValue = body.urlFormDecoded()["token_type_hint"],
+                      let revokeType = Token.Kind(rawValue: revokeValue)
+                else {
+                    return
+                }
+                
+                partialResult[revokeType] = body
+            }
+        
+        XCTAssertEqual(revokeRequestBodies.count, 3)
+        XCTAssertEqual(revokeRequestBodies[.accessToken],
+                       "client_id=foo&token=abcd123&token_type_hint=access_token")
+        XCTAssertEqual(revokeRequestBodies[.refreshToken],
+                       "client_id=foo&token=refresh123&token_type_hint=refresh_token")
+        XCTAssertEqual(revokeRequestBodies[.deviceSecret],
+                       "client_id=foo&token=device123&token_type_hint=device_secret")
 
         XCTAssertEqual(coordinator.credentialDataSource.credentialCount, 0)
         XCTAssertFalse(coordinator.credentialDataSource.hasCredential(for: token))
@@ -88,7 +116,7 @@ final class CredentialTests: XCTestCase {
 
     func testRevokeAccessToken() throws {
         urlSession.expect("https://example.com/oauth2/default/.well-known/openid-configuration",
-                          data: try data(from: .module, for: "openid-configuration", in: "MockResponses"),
+                          data: try data(filename: "openid-configuration"),
                           contentType: "application/json")
         urlSession.expect("https://example.com/oauth2/v1/revoke",
                           data: Data())
@@ -105,7 +133,7 @@ final class CredentialTests: XCTestCase {
             }
             expect.fulfill()
         }
-        waitForExpectations(timeout: 1.0) { error in
+        waitForExpectations(timeout: .short) { error in
             XCTAssertNil(error)
         }
 
@@ -115,7 +143,7 @@ final class CredentialTests: XCTestCase {
 
     func testRevokeFailure() throws {
         urlSession.expect("https://example.com/oauth2/default/.well-known/openid-configuration",
-                          data: try data(from: .module, for: "openid-configuration", in: "MockResponses"),
+                          data: try data(filename: "openid-configuration"),
                           contentType: "application/json")
         urlSession.expect("https://example.com/oauth2/v1/revoke",
                           data: data(for: """
@@ -143,14 +171,14 @@ final class CredentialTests: XCTestCase {
             }
             expect.fulfill()
         }
-        waitForExpectations(timeout: 1.0) { error in
+        waitForExpectations(timeout: .short) { error in
             XCTAssertNil(error)
         }
     }
 
     func testRevokeAll() throws {
         urlSession.expect("https://example.com/oauth2/default/.well-known/openid-configuration",
-                          data: try data(from: .module, for: "openid-configuration", in: "MockResponses"),
+                          data: try data(filename: "openid-configuration"),
                           contentType: "application/json")
         urlSession.expect("https://example.com/oauth2/v1/revoke",
                           data: Data())
@@ -168,7 +196,7 @@ final class CredentialTests: XCTestCase {
             }
             expect.fulfill()
         }
-        waitForExpectations(timeout: 1.0) { error in
+        waitForExpectations(timeout: .short) { error in
             XCTAssertNil(error)
         }
         
@@ -192,7 +220,7 @@ final class CredentialTests: XCTestCase {
     
     func testFailureAfterRevokeAccessToken() throws {
         urlSession.expect("https://example.com/oauth2/default/.well-known/openid-configuration",
-                          data: try data(from: .module, for: "openid-configuration", in: "MockResponses"),
+                          data: try data(filename: "openid-configuration"),
                           contentType: "application/json")
         urlSession.expect("https://example.com/oauth2/v1/revoke",
                           data: Data())
@@ -212,7 +240,7 @@ final class CredentialTests: XCTestCase {
             }
             expect.fulfill()
         }
-        waitForExpectations(timeout: 1.0) { error in
+        waitForExpectations(timeout: .short) { error in
             XCTAssertNil(error)
         }
 
@@ -223,7 +251,7 @@ final class CredentialTests: XCTestCase {
     @available(iOS 13.0, tvOS 13.0, macOS 10.15, watchOS 6, *)
     func testRevokeFailureAsync() async throws {
         urlSession.expect("https://example.com/oauth2/default/.well-known/openid-configuration",
-                          data: try data(from: .module, for: "openid-configuration", in: "MockResponses"),
+                          data: try data(filename: "openid-configuration"),
                           contentType: "application/json")
         urlSession.expect("https://example.com/oauth2/v1/revoke",
                           data: data(for: """
@@ -251,7 +279,7 @@ final class CredentialTests: XCTestCase {
     @available(iOS 13.0, tvOS 13.0, macOS 10.15, watchOS 6, *)
     func testFailureAfterRevokeAccessTokenAsync() async throws {
         urlSession.expect("https://example.com/oauth2/default/.well-known/openid-configuration",
-                          data: try data(from: .module, for: "openid-configuration", in: "MockResponses"),
+                          data: try data(filename: "openid-configuration"),
                           contentType: "application/json")
         urlSession.expect("https://example.com/oauth2/v1/revoke",
                           data: Data())

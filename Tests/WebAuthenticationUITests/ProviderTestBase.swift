@@ -17,31 +17,34 @@ import XCTest
 @testable import TestCommon
 @testable import OktaOAuth2
 @testable import WebAuthenticationUI
+@testable import AuthFoundationTestCommon
+@testable import APIClientTestCommon
+@testable import JWT
 
-class WebAuthenticationProviderDelegateRecorder: WebAuthenticationProviderDelegate {
-    private(set) var token: Token?
-    private(set) var error: Error?
-    var shouldUseEphemeralSession: Bool = true
-    private(set) var logoutFinished = false
-    private(set) var logoutError: Error?
+final class WebAuthenticationProviderDelegateRecorder: WebAuthenticationProviderDelegate {
+    nonisolated(unsafe) private(set) var token: Token?
+    nonisolated(unsafe) private(set) var error: (any Error)?
+    nonisolated(unsafe) var shouldUseEphemeralSession: Bool = true
+    nonisolated(unsafe) private(set) var logoutFinished = false
+    nonisolated(unsafe) private(set) var logoutError: (any Error)?
     
-    func authentication(provider: WebAuthenticationProvider, received token: Token) {
+    func authentication(provider: any WebAuthenticationProvider, received token: Token) {
         self.token = token
     }
     
-    func authentication(provider: WebAuthenticationProvider, received error: Error) {
+    func authentication(provider: any WebAuthenticationProvider, received error: any Error) {
         self.error = error
     }
     
-    func authenticationShouldUseEphemeralSession(provider: WebAuthenticationProvider) -> Bool {
+    func authenticationShouldUseEphemeralSession(provider: any WebAuthenticationProvider) -> Bool {
         shouldUseEphemeralSession
     }
     
-    func logout(provider: WebAuthenticationProvider, finished: Bool) {
+    func logout(provider: any WebAuthenticationProvider, finished: Bool) {
         self.logoutFinished = finished
     }
     
-    func logout(provider: WebAuthenticationProvider, received error: Error) {
+    func logout(provider: any WebAuthenticationProvider, received error: any Error) {
         self.logoutError = error
     }
     
@@ -71,7 +74,7 @@ class ProviderTestBase: XCTestCase, AuthorizationCodeFlowDelegate, SessionLogout
     var authenticationURL: URL?
     var logoutURL: URL?
     var token: Token?
-    var error: Error?
+    var error: (any Error)?
     
     enum WaitType {
         case authenticateUrl
@@ -80,6 +83,10 @@ class ProviderTestBase: XCTestCase, AuthorizationCodeFlowDelegate, SessionLogout
         case error
     }
 
+    static override func setUp() {
+        registerMock(bundles: .webAuthenticationUITests)
+    }
+    
     override func setUpWithError() throws {
         JWK.validator = MockJWKValidator()
         Token.idTokenValidator = MockIDTokenValidator()
@@ -92,20 +99,20 @@ class ProviderTestBase: XCTestCase, AuthorizationCodeFlowDelegate, SessionLogout
         
         logoutFlow = client.sessionLogoutFlow(logoutRedirectUri: logoutRedirectUri)
         logoutFlow.add(delegate: self)
-        
-        urlSession.expect("https://example.com/.well-known/openid-configuration",
-                          data: try data(from: .module, for: "openid-configuration", in: "MockResponses"),
-                          contentType: "application/json")
-        urlSession.expect("https://example.okta.com/oauth2/v1/token",
-                          data: try data(from: .module, for: "token", in: "MockResponses"),
-                          contentType: "application/json")
-        urlSession.expect("https://example.okta.com/oauth2/v1/keys?client_id=clientId",
-                          data: try data(from: .module, for: "keys", in: "MockResponses"),
-                          contentType: "application/json")
         loginFlow = client.authorizationCodeFlow(redirectUri: redirectUri,
-                                            additionalParameters: ["additional": "param"])
+                                                 additionalParameters: ["additional": "param"])
         loginFlow.add(delegate: self)
         
+        urlSession.expect("https://example.com/.well-known/openid-configuration",
+                          data: try data(filename: "openid-configuration"),
+                          contentType: "application/json")
+        urlSession.expect("https://example.okta.com/oauth2/v1/token",
+                          data: try data(filename: "token"),
+                          contentType: "application/json")
+        urlSession.expect("https://example.okta.com/oauth2/v1/keys?client_id=clientId",
+                          data: try data(filename: "keys"),
+                          contentType: "application/json")
+
         delegate.reset()
     }
 
@@ -140,14 +147,14 @@ class ProviderTestBase: XCTestCase, AuthorizationCodeFlowDelegate, SessionLogout
     }
 
     func waitFor(_ type: WaitType, timeout: TimeInterval = 5.0, pollInterval: TimeInterval = 0.1) throws {
-        var resultError: Error?
-        var success: Bool?
+        var resultError: (any Error)?
+        nonisolated(unsafe) var success: Bool?
         let wait = expectation(description: "Receive authentication URL")
         waitFor(type, timeout: timeout, pollInterval: pollInterval) { result in
             success = result
             wait.fulfill()
         }
-        waitForExpectations(timeout: timeout + 1.0) { error in
+        waitForExpectations(timeout: timeout * 2.0) { error in
             resultError = error
         }
         
@@ -158,7 +165,7 @@ class ProviderTestBase: XCTestCase, AuthorizationCodeFlowDelegate, SessionLogout
         }
     }
     
-    fileprivate func waitFor(_ type: WaitType, timeout: TimeInterval, pollInterval: TimeInterval, completion: @escaping(Bool) -> Void) {
+    fileprivate func waitFor(_ type: WaitType, timeout: TimeInterval, pollInterval: TimeInterval, completion: @Sendable @escaping(Bool) -> Void) {
         DispatchQueue.global().asyncAfter(deadline: .now() + pollInterval) {
             var object: AnyObject?
             switch type {

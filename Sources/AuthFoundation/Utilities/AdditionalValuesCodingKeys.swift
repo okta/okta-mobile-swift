@@ -25,8 +25,8 @@ struct AdditionalValuesCodingKeys: CodingKey {
 }
 
 extension KeyedDecodingContainer where Key == AdditionalValuesCodingKeys {
-    func decodeUnkeyedContainer<T: CodingKey>(exclude keyedBy: T.Type) -> [String: Any] {
-        var data = [String: Any]()
+    func decodeUnkeyedContainer<T: CodingKey>(exclude keyedBy: T.Type) -> [String: any Sendable] {
+        var data = [String: any Sendable]()
     
         for key in allKeys {
             if keyedBy.init(stringValue: key.stringValue) == nil {

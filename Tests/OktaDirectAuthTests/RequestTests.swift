@@ -14,14 +14,17 @@ import XCTest
 @testable import TestCommon
 @testable import AuthFoundation
 @testable import OktaDirectAuth
+@testable import APIClientTestCommon
 
 final class RequestTests: XCTestCase {
     var openIdConfiguration: OpenIdConfiguration!
     
+    static override func setUp() {
+        registerMock(bundles: .oktaDirectAuthTests)
+    }
+    
     override func setUpWithError() throws {
-        openIdConfiguration = try mock(from: .module,
-                                       for: "openid-configuration",
-                                       in: "MockResponses")
+        openIdConfiguration = try mock(filename: "openid-configuration")
     }
 
     func testTokenRequestParameters() throws {

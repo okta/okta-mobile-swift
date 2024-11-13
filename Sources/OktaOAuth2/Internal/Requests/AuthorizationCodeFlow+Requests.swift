@@ -12,6 +12,7 @@
 
 import Foundation
 import AuthFoundation
+import APIClient
 
 extension AuthorizationCodeFlow {
     struct TokenRequest {
@@ -33,8 +34,8 @@ extension AuthorizationCodeFlow.TokenRequest: OAuth2TokenRequest {
 extension AuthorizationCodeFlow.TokenRequest: OAuth2APIRequest {}
 
 extension AuthorizationCodeFlow.TokenRequest: APIRequestBody {
-    var bodyParameters: [String: APIRequestArgument]? {
-        var result: [String: APIRequestArgument] = [
+    var bodyParameters: [String: any APIRequestArgument]? {
+        var result: [String: any APIRequestArgument] = [
             "client_id": clientConfiguration.clientId,
             "redirect_uri": redirectUri,
             "grant_type": grantType,
@@ -54,7 +55,7 @@ extension AuthorizationCodeFlow.TokenRequest: APIRequestBody {
 }
 
 extension AuthorizationCodeFlow.TokenRequest: APIParsingContext {
-    var codingUserInfo: [CodingUserInfoKey: Any]? {
+    var codingUserInfo: [CodingUserInfoKey: any Sendable]? {
         [
             .clientSettings: [
                 "client_id": clientConfiguration.clientId,

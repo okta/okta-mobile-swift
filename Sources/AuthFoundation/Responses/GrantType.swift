@@ -11,9 +11,11 @@
 //
 
 import Foundation
+import APIClient
+import JWT
 
 /// An enumeration used to define a grant type, which defines the methods an application can use to gain access tokens from an authorization server.
-public enum GrantType: Codable, Hashable, IsClaim {
+public enum GrantType: Codable, Hashable, IsClaim, APIRequestArgument {
     case authorizationCode
     case implicit
     case refreshToken

@@ -11,6 +11,7 @@
 //
 
 import Foundation
+import APIClient
 
 /// Protocol that represents a type of ``APIRequest`` that can be used to exchange a token.
 ///

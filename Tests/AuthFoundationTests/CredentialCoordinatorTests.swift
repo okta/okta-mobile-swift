@@ -19,7 +19,7 @@ import FoundationNetworking
 @testable import TestCommon
 @testable import AuthFoundation
 
-final class UserCoordinatorTests: XCTestCase {
+final class CredentialCoordinatorTests: XCTestCase {
     var userDefaults: UserDefaults!
     var storage: UserDefaultsTokenStorage!
     var coordinator: CredentialCoordinatorImpl!
@@ -56,44 +56,55 @@ final class UserCoordinatorTests: XCTestCase {
         coordinator = nil
     }
     
-    func testDefaultCredentialViaToken() throws {
-        try storage.add(token: token, metadata: nil, security: [])
+    func testDefaultCredentialViaTokenStorage() throws {
+        try storage.add(token: token, security: [])
 
         XCTAssertEqual(storage.allIDs.count, 1)
+        XCTAssertNil(coordinator.default)
         
-        let credential = try XCTUnwrap(coordinator.default)
+        let credential = try XCTUnwrap(try coordinator.with(id: token.id, prompt: nil, authenticationContext: nil))
+        coordinator.default = credential
+        
         XCTAssertEqual(credential.token, token)
+        XCTAssertEqual(storage.defaultTokenID, token.id)
+        
+        XCTAssertEqual(storage.allIDs.count, 1)
         
         coordinator.default = nil
+        
         XCTAssertNil(coordinator.default)
         XCTAssertNil(storage.defaultTokenID)
         XCTAssertEqual(storage.allIDs.count, 1)
         
         XCTAssertEqual(coordinator.allIDs, [token.id])
-        XCTAssertEqual(try coordinator.with(id: token.id, prompt: nil, authenticationContext: nil), credential)
     }
     
     func testImplicitCredentialForToken() throws {
-        let credential = try coordinator.store(token: token, tags: [:], security: [])
+        XCTAssertNil(storage.defaultTokenID)
+        XCTAssertNil(coordinator.default)
+        
+        let credential = try coordinator.store(token: token, security: [])
         
         XCTAssertEqual(storage.allIDs, [token.id])
         XCTAssertEqual(storage.defaultTokenID, token.id)
         XCTAssertEqual(coordinator.default, credential)
+        
+        XCTAssertNoThrow(try credential.remove())
+        XCTAssertNil(storage.defaultTokenID)
+        XCTAssertNil(coordinator.default)
     }
-    
-    func testNotifications() throws {
-        let oldCredential = coordinator.default
+
+    func testRespondToStorageDelegate() throws {
+        coordinator.default = try coordinator.store(token: token, security: [])
         
-        let recorder = NotificationRecorder(observing: [.defaultCredentialChanged])
+        XCTAssertEqual(storage.allIDs, [token.id])
+        XCTAssertEqual(storage.defaultTokenID, token.id)
+        XCTAssertEqual(coordinator.default?.id, token.id)
         
-        let credential = try coordinator.store(token: token, tags: [:], security: [])
-        XCTAssertEqual(recorder.notifications.count, 1)
-        XCTAssertEqual(recorder.notifications.first?.object as? Credential, credential)
-        XCTAssertNotEqual(oldCredential, credential)
+        XCTAssertNoThrow(try storage.remove(id: token.id))
+        XCTAssertNil(storage.defaultTokenID)
         
-        recorder.reset()
-        coordinator.default = nil
-        XCTAssertEqual(recorder.notifications.count, 1)
-        XCTAssertNil(recorder.notifications.first?.object)
+        sleep(for: .standard)
+        XCTAssertNil(coordinator.default)
     }
 }

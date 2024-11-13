@@ -13,7 +13,7 @@
 import Foundation
 
 class DefaultTokenExchangeCoordinator: TokenExchangeCoordinator {
-    func merge(_ token: Token, payload: [String: Any], with newPayload: [String: Any]) throws -> [String: Any] {
+    func merge(_ token: Token, payload: [String: any Sendable], with newPayload: [String: any Sendable]) throws -> [String: any Sendable] {
         payload.merging(newPayload) { _, new in new }
     }
 }

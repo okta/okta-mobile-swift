@@ -14,6 +14,9 @@ import XCTest
 @testable import TestCommon
 @testable import AuthFoundation
 @testable import OktaOAuth2
+@testable import APIClientTestCommon
+@testable import AuthFoundationTestCommon
+@testable import JWT
 
 class SessionLogoutFlowFailureTests: XCTestCase {
     let issuer = URL(string: "https://example.com")!
@@ -24,6 +27,10 @@ class SessionLogoutFlowFailureTests: XCTestCase {
     var flow: SessionLogoutFlow!
     let logoutIDToken = "logoutIDToken"
     let state = "state"
+    
+    static override func setUp() {
+        registerMock(bundles: .oktaOAuth2Tests)
+    }
     
     override func setUpWithError() throws {
         client = OAuth2Client(baseURL: issuer, clientId: "clientId", scopes: "openid", session: urlSession)
@@ -52,7 +59,7 @@ class SessionLogoutFlowFailureTests: XCTestCase {
             resumeExpection.fulfill()
         }
         
-        wait(for: [resumeExpection], timeout: 1)
+        wait(for: [resumeExpection], timeout: .long)
         
         XCTAssertFalse(flow.inProgress)
         XCTAssertNil(flow.context)
@@ -82,7 +89,7 @@ class SessionLogoutFlowFailureTests: XCTestCase {
             resumeExpection.fulfill()
         }
         
-        wait(for: [resumeExpection], timeout: 1)
+        wait(for: [resumeExpection], timeout: .long)
 
         XCTAssertFalse(flow.inProgress)
         XCTAssertNil(flow.context)

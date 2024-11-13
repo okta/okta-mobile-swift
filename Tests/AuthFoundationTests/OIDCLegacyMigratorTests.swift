@@ -11,17 +11,25 @@
 //
 
 import XCTest
+@testable import OktaUtilities
 @testable import TestCommon
 @testable import AuthFoundation
+@testable import AuthFoundationTestCommon
+@testable import Keychain
+@testable import KeychainTestCommon
 
-#if os(iOS) || os(macOS) || os(tvOS) || os(watchOS) || os(visionOS)
+#if canImport(Darwin)
 final class OIDCLegacyMigratorTests: XCTestCase {
-    typealias LegacyOIDC = SDKVersion.Migration.LegacyOIDC
+    typealias LegacyOIDC = Migration.LegacyOIDC
     
     var keychain: MockKeychain!
     let issuer = URL(string: "https://example.com")!
     let redirectUri = URL(string: "my-app:/")!
 
+    static override func setUp() {
+        registerMock(bundles: .authFoundationTests)
+    }
+    
     override func setUp() {
         keychain = MockKeychain()
         Keychain.implementation = keychain
@@ -34,16 +42,15 @@ final class OIDCLegacyMigratorTests: XCTestCase {
         Keychain.implementation = KeychainImpl()
         keychain = nil
 
-        SDKVersion.Migration.resetMigrators()
+        Migration.shared.resetMigrators()
         
-        Credential.tokenStorage = CredentialCoordinatorImpl.defaultTokenStorage()
-        Credential.credentialDataSource = CredentialCoordinatorImpl.defaultCredentialDataSource()
+        Credential.resetToDefault()
     }
 
     func testRegister() throws {
         LegacyOIDC.register(clientId: "clientId")
         
-        let migrator = try XCTUnwrap(SDKVersion.Migration.registeredMigrators.first(where: {
+        let migrator = try XCTUnwrap(Migration.shared.migrators.first(where: {
             $0 is LegacyOIDC
         }) as? LegacyOIDC)
         
@@ -108,7 +115,7 @@ final class OIDCLegacyMigratorTests: XCTestCase {
         let migrator = LegacyOIDC(clientId: "clientId")
         
         // Note: This mock file was generated manually using the okta-oidc-ios package, archived, and base64-encoded.
-        let base64Data = try data(from: .module, for: "MockLegacyOIDCKeychainItem.data", in: "MockResponses")
+        let base64Data = try data(filename: "MockLegacyOIDCKeychainItem.data")
         let base64String = try XCTUnwrap(String(data: base64Data, encoding: .utf8))
             .trimmingCharacters(in: .newlines)
         let oidcData = try XCTUnwrap(Data(base64Encoded: base64String))

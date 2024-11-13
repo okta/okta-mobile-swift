@@ -11,10 +11,11 @@
 //
 
 import Foundation
+import APIClient
 
 extension DirectAuthenticationFlow {
     func send(success response: APIResponse<Token>,
-              completion: @escaping (Result<Status, DirectAuthenticationFlowError>) -> Void)
+              completion: @Sendable @escaping (Result<Status, DirectAuthenticationFlowError>) -> Void)
     {
         reset()
         delegateCollection.invoke { $0.authentication(flow: self, received: response.result) }
@@ -22,14 +23,14 @@ extension DirectAuthenticationFlow {
     }
 
     func send(state: Status,
-              completion: @escaping (Result<Status, DirectAuthenticationFlowError>) -> Void)
+              completion: @Sendable @escaping (Result<Status, DirectAuthenticationFlowError>) -> Void)
     {
         delegateCollection.invoke { $0.authentication(flow: self, received: state) }
         completion(.success(state))
     }
 
-    func send(error: Error,
-              completion: @escaping (Result<Status, DirectAuthenticationFlowError>) -> Void)
+    func send(error: any Error,
+              completion: @Sendable @escaping (Result<Status, DirectAuthenticationFlowError>) -> Void)
     {
         reset()
         

@@ -11,6 +11,7 @@
 //
 
 import Foundation
+import JWT
 
 extension WebAuthn {
     /**
@@ -18,7 +19,7 @@ extension WebAuthn {
      
      - Note: [W3C Reccomendation](https://www.w3.org/TR/webauthn/#dictionary-assertion-options)
      */
-    public struct PublicKeyCredentialRequestOptions: Codable {
+    public struct PublicKeyCredentialRequestOptions: Sendable, Codable {
         /// This member specifies a challenge that the authenticator signs, along with other data, when producing an authentication assertion. See the § 13.4.3 Cryptographic Challenges security consideration.
         public let challenge: String
         
@@ -38,7 +39,7 @@ extension WebAuthn {
         public let hints: [PublicKeyCredentialHints]?
 
         /// The Relying Party MAY use this to provide client extension inputs requesting additional processing by the client and authenticator.
-        public let extensions: [String: Any?]?
+        public let extensions: [String: (any Sendable)?]?
 
         enum CodingKeys: String, CodingKey {
             case allowCredentials
@@ -50,7 +51,7 @@ extension WebAuthn {
             case userVerification
         }
         
-        public init(from decoder: Decoder) throws {
+        public init(from decoder: any Decoder) throws {
             let container = try decoder.container(keyedBy: CodingKeys.self)
             
             allowCredentials = try container.decodeIfPresent([PublicKeyCredentialDescriptor].self, forKey: .allowCredentials)
@@ -72,7 +73,7 @@ extension WebAuthn {
             }
         }
         
-        public func encode(to encoder: Encoder) throws {
+        public func encode(to encoder: any Encoder) throws {
             var container = encoder.container(keyedBy: CodingKeys.self)
             try container.encode(challenge, forKey: .challenge)
             try container.encodeIfPresent(allowCredentials, forKey: .allowCredentials)

@@ -12,6 +12,7 @@
 
 import UIKit
 import AuthFoundation
+import Keychain
 
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {

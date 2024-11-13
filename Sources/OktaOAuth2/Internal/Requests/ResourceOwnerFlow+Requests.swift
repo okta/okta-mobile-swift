@@ -12,6 +12,7 @@
 
 import Foundation
 import AuthFoundation
+import APIClient
 
 extension ResourceOwnerFlow {
     struct TokenRequest {
@@ -24,7 +25,7 @@ extension ResourceOwnerFlow {
 }
 
 extension ResourceOwnerFlow.TokenRequest: OAuth2TokenRequest, OAuth2APIRequest, APIRequestBody, APIParsingContext {
-    var bodyParameters: [String: APIRequestArgument]? {
+    var bodyParameters: [String: any APIRequestArgument]? {
         [
             "client_id": clientId,
             "scope": scope,
@@ -34,7 +35,7 @@ extension ResourceOwnerFlow.TokenRequest: OAuth2TokenRequest, OAuth2APIRequest, 
         ]
     }
     
-    var codingUserInfo: [CodingUserInfoKey: Any]? {
+    var codingUserInfo: [CodingUserInfoKey: any Sendable]? {
         [
             .clientSettings: [
                 "client_id": clientId,

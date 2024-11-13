@@ -17,28 +17,27 @@ import XCTest
 @testable import OktaOAuth2
 @testable import WebAuthenticationUI
 
-class WebAuthenticationMock: WebAuthentication {
-    override func createWebAuthenticationProvider(loginFlow: AuthorizationCodeFlow,
-                                                  logoutFlow: SessionLogoutFlow?,
-                                                  from window: WebAuthentication.WindowAnchor?,
-                                                  delegate: WebAuthenticationProviderDelegate) -> WebAuthenticationProvider? {
+struct MockAuthorizationServicesProviderFactory: AuthorizationServicesProviderFactory {
+    func createWebAuthenticationProvider(loginFlow: AuthorizationCodeFlow,
+                                         logoutFlow: SessionLogoutFlow?,
+                                         from window: WebAuthentication.WindowAnchor?,
+                                         delegate: any WebAuthenticationProviderDelegate) -> (any WebAuthenticationProvider)? {
         return WebAuthenticationProviderMock(loginFlow: loginFlow, logoutFlow: logoutFlow, delegate: delegate)
     }
 }
 
-
-class WebAuthenticationProviderMock: WebAuthenticationProvider {
-    var loginFlow: AuthorizationCodeFlow
-    var logoutFlow: SessionLogoutFlow?
-    var delegate: WebAuthenticationProviderDelegate?
+final class WebAuthenticationProviderMock: WebAuthenticationProvider {
+    nonisolated(unsafe) var loginFlow: AuthorizationCodeFlow
+    nonisolated(unsafe) var logoutFlow: SessionLogoutFlow?
+    nonisolated(unsafe) var delegate: (any WebAuthenticationProviderDelegate)?
     
     enum State {
         case initialized, started, cancelled, logout
     }
     
-    var state: State = .initialized
+    nonisolated(unsafe) var state: State = .initialized
     
-    init(loginFlow: AuthorizationCodeFlow, logoutFlow: SessionLogoutFlow?, delegate: WebAuthenticationProviderDelegate) {
+    init(loginFlow: AuthorizationCodeFlow, logoutFlow: SessionLogoutFlow?, delegate: any WebAuthenticationProviderDelegate) {
         self.loginFlow = loginFlow
         self.logoutFlow = logoutFlow
         self.delegate = delegate

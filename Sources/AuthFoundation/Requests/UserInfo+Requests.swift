@@ -11,6 +11,7 @@
 //
 
 import Foundation
+import APIClient
 
 extension UserInfo {
     struct Request {
@@ -32,10 +33,10 @@ extension UserInfo {
     }
 }
 
-extension UserInfo.Request: APIRequest, OAuth2APIRequest {
+extension UserInfo.Request: Sendable, APIRequest, OAuth2APIRequest {
     typealias ResponseType = UserInfo
     
     var httpMethod: APIRequestMethod { .get }
     var acceptsType: APIContentType? { .json }
-    var authorization: APIAuthorization? { token }
+    var authorization: (any APIAuthorization)? { token }
 }

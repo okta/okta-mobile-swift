@@ -14,6 +14,9 @@ import XCTest
 @testable import TestCommon
 @testable import AuthFoundation
 @testable import OktaDirectAuth
+@testable import AuthFoundationTestCommon
+@testable import APIClientTestCommon
+@testable import JWT
 
 final class FactorStepHandlerTests: XCTestCase {
     typealias PrimaryFactor = DirectAuthenticationFlow.PrimaryFactor
@@ -25,14 +28,16 @@ final class FactorStepHandlerTests: XCTestCase {
     var openIdConfiguration: OpenIdConfiguration!
     var flow: DirectAuthenticationFlow!
     
+    static override func setUp() {
+        registerMock(bundles: .oktaDirectAuthTests)
+    }
+    
     override func setUpWithError() throws {
         client = OAuth2Client(baseURL: issuer,
                               clientId: "clientId",
                               scopes: "openid profile",
                               session: urlSession)
-        openIdConfiguration = try mock(from: .module,
-                                       for: "openid-configuration",
-                                       in: "MockResponses")
+        openIdConfiguration = try mock(filename: "openid-configuration")
         flow = client.directAuthenticationFlow()
         
         JWK.validator = MockJWKValidator()
@@ -140,13 +145,13 @@ final class FactorStepHandlerTests: XCTestCase {
     // MARK: - Token Process Flow
     func testPrimaryTokenSuccess() throws {
         urlSession.expect("https://example.okta.com/.well-known/openid-configuration",
-                          data: try data(from: .module, for: "openid-configuration", in: "MockResponses"),
+                          data: try data(filename: "openid-configuration"),
                           contentType: "application/json")
         urlSession.expect("https://example.okta.com/oauth2/v1/keys?client_id=clientId",
-                          data: try data(from: .module, for: "keys", in: "MockResponses"),
+                          data: try data(filename: "keys"),
                           contentType: "application/json")
         urlSession.expect("https://example.okta.com/oauth2/v1/token",
-                          data: try data(from: .module, for: "token", in: "MockResponses"))
+                          data: try data(filename: "token"))
         
         let factor = PrimaryFactor.password("SuperSecret")
         let handler = try factor.stepHandler(flow: flow,
@@ -168,18 +173,18 @@ final class FactorStepHandlerTests: XCTestCase {
             }
             wait.fulfill()
         }
-        waitForExpectations(timeout: 1)
+        waitForExpectations(timeout: .short)
     }
     
     func testPrimaryTokenMFARequired() throws {
         urlSession.expect("https://example.okta.com/.well-known/openid-configuration",
-                          data: try data(from: .module, for: "openid-configuration", in: "MockResponses"),
+                          data: try data(filename: "openid-configuration"),
                           contentType: "application/json")
         urlSession.expect("https://example.okta.com/oauth2/v1/keys?client_id=clientId",
-                          data: try data(from: .module, for: "keys", in: "MockResponses"),
+                          data: try data(filename: "keys"),
                           contentType: "application/json")
         urlSession.expect("https://example.okta.com/oauth2/v1/token",
-                          data: try data(from: .module, for: "token-mfa_required", in: "MockResponses"),
+                          data: try data(filename: "token-mfa_required"),
                           statusCode: 400)
         
         let factor = PrimaryFactor.password("SuperSecret")
@@ -204,21 +209,21 @@ final class FactorStepHandlerTests: XCTestCase {
             }
             wait.fulfill()
         }
-        waitForExpectations(timeout: 1)
+        waitForExpectations(timeout: .short)
     }
     
     // MARK: OOB Process Flow
     func testPrimaryOOBSuccess() throws {
         urlSession.expect("https://example.okta.com/.well-known/openid-configuration",
-                          data: try data(from: .module, for: "openid-configuration", in: "MockResponses"),
+                          data: try data(filename: "openid-configuration"),
                           contentType: "application/json")
         urlSession.expect("https://example.okta.com/oauth2/v1/keys?client_id=clientId",
-                          data: try data(from: .module, for: "keys", in: "MockResponses"),
+                          data: try data(filename: "keys"),
                           contentType: "application/json")
         urlSession.expect("https://example.okta.com/oauth2/v1/primary-authenticate",
-                          data: try data(from: .module, for: "primary-authenticate", in: "MockResponses"))
+                          data: try data(filename: "primary-authenticate"))
         urlSession.expect("https://example.okta.com/oauth2/v1/token",
-                          data: try data(from: .module, for: "token", in: "MockResponses"))
+                          data: try data(filename: "token"))
         
         let factor = PrimaryFactor.oob(channel: .push)
         let handler = try factor.stepHandler(flow: flow,
@@ -245,15 +250,15 @@ final class FactorStepHandlerTests: XCTestCase {
 
     func testPrimaryOOBBindingTransferSuccess() throws {
         urlSession.expect("https://example.okta.com/.well-known/openid-configuration",
-                          data: try data(from: .module, for: "openid-configuration", in: "MockResponses"),
+                          data: try data(filename: "openid-configuration"),
                           contentType: "application/json")
         urlSession.expect("https://example.okta.com/oauth2/v1/keys?client_id=clientId",
-                          data: try data(from: .module, for: "keys", in: "MockResponses"),
+                          data: try data(filename: "keys"),
                           contentType: "application/json")
         urlSession.expect("https://example.okta.com/oauth2/v1/primary-authenticate",
-                          data: try data(from: .module, for: "primary-authenticate-binding-transfer", in: "MockResponses"))
+                          data: try data(filename: "primary-authenticate-binding-transfer"))
         urlSession.expect("https://example.okta.com/oauth2/v1/token",
-                          data: try data(from: .module, for: "token", in: "MockResponses"))
+                          data: try data(filename: "token"))
 
         let factor = PrimaryFactor.oob(channel: .push)
         let handler = try factor.stepHandler(flow: flow,
@@ -304,15 +309,15 @@ final class FactorStepHandlerTests: XCTestCase {
 
     func testPrimaryOOBBindingTransferFail() throws {
         urlSession.expect("https://example.okta.com/.well-known/openid-configuration",
-                          data: try data(from: .module, for: "openid-configuration", in: "MockResponses"),
+                          data: try data(filename: "openid-configuration"),
                           contentType: "application/json")
         urlSession.expect("https://example.okta.com/oauth2/v1/keys?client_id=clientId",
-                          data: try data(from: .module, for: "keys", in: "MockResponses"),
+                          data: try data(filename: "keys"),
                           contentType: "application/json")
         urlSession.expect("https://example.okta.com/oauth2/v1/primary-authenticate",
-                          data: try data(from: .module, for: "primary-authenticate-binding-transfer-missingCode", in: "MockResponses"))
+                          data: try data(filename: "primary-authenticate-binding-transfer-missingCode"))
         urlSession.expect("https://example.okta.com/oauth2/v1/token",
-                          data: try data(from: .module, for: "token", in: "MockResponses"))
+                          data: try data(filename: "token"))
 
         let factor = PrimaryFactor.oob(channel: .push)
         let handler = try factor.stepHandler(flow: flow,
@@ -335,15 +340,15 @@ final class FactorStepHandlerTests: XCTestCase {
     
     func testPrimaryOOBMFARequired() throws {
         urlSession.expect("https://example.okta.com/.well-known/openid-configuration",
-                          data: try data(from: .module, for: "openid-configuration", in: "MockResponses"),
+                          data: try data(filename: "openid-configuration"),
                           contentType: "application/json")
         urlSession.expect("https://example.okta.com/oauth2/v1/keys?client_id=clientId",
-                          data: try data(from: .module, for: "keys", in: "MockResponses"),
+                          data: try data(filename: "keys"),
                           contentType: "application/json")
         urlSession.expect("https://example.okta.com/oauth2/v1/primary-authenticate",
-                          data: try data(from: .module, for: "primary-authenticate", in: "MockResponses"))
+                          data: try data(filename: "primary-authenticate"))
         urlSession.expect("https://example.okta.com/oauth2/v1/token",
-                          data: try data(from: .module, for: "token-mfa_required", in: "MockResponses"),
+                          data: try data(filename: "token-mfa_required"),
                           statusCode: 400)
         
         let factor = PrimaryFactor.oob(channel: .push)
@@ -373,15 +378,15 @@ final class FactorStepHandlerTests: XCTestCase {
     
     func testSecondaryOOBSuccess() throws {
         urlSession.expect("https://example.okta.com/.well-known/openid-configuration",
-                          data: try data(from: .module, for: "openid-configuration", in: "MockResponses"),
+                          data: try data(filename: "openid-configuration"),
                           contentType: "application/json")
         urlSession.expect("https://example.okta.com/oauth2/v1/keys?client_id=clientId",
-                          data: try data(from: .module, for: "keys", in: "MockResponses"),
+                          data: try data(filename: "keys"),
                           contentType: "application/json")
         urlSession.expect("https://example.okta.com/oauth2/v1/challenge",
-                          data: try data(from: .module, for: "challenge-oob", in: "MockResponses"))
+                          data: try data(filename: "challenge-oob"))
         urlSession.expect("https://example.okta.com/oauth2/v1/token",
-                          data: try data(from: .module, for: "token", in: "MockResponses"))
+                          data: try data(filename: "token"))
 
         let factor = SecondaryFactor.oob(channel: .push)
         let handler = try factor.stepHandler(flow: flow,
@@ -409,15 +414,15 @@ final class FactorStepHandlerTests: XCTestCase {
 
     func testSecondaryOOBBindingTransferSuccess() throws {
         urlSession.expect("https://example.okta.com/.well-known/openid-configuration",
-                          data: try data(from: .module, for: "openid-configuration", in: "MockResponses"),
+                          data: try data(filename: "openid-configuration"),
                           contentType: "application/json")
         urlSession.expect("https://example.okta.com/oauth2/v1/keys?client_id=clientId",
-                          data: try data(from: .module, for: "keys", in: "MockResponses"),
+                          data: try data(filename: "keys"),
                           contentType: "application/json")
         urlSession.expect("https://example.okta.com/oauth2/v1/challenge",
-                          data: try data(from: .module, for: "challenge-oob-binding-transfer", in: "MockResponses"))
+                          data: try data(filename: "challenge-oob-binding-transfer"))
         urlSession.expect("https://example.okta.com/oauth2/v1/token",
-                          data: try data(from: .module, for: "token", in: "MockResponses"))
+                          data: try data(filename: "token"))
 
         let factor = SecondaryFactor.oob(channel: .push)
         let handler = try factor.stepHandler(flow: flow,
@@ -459,15 +464,15 @@ final class FactorStepHandlerTests: XCTestCase {
 
     func testSecondaryOOBBindingTransferFail() throws {
         urlSession.expect("https://example.okta.com/.well-known/openid-configuration",
-                          data: try data(from: .module, for: "openid-configuration", in: "MockResponses"),
+                          data: try data(filename: "openid-configuration"),
                           contentType: "application/json")
         urlSession.expect("https://example.okta.com/oauth2/v1/keys?client_id=clientId",
-                          data: try data(from: .module, for: "keys", in: "MockResponses"),
+                          data: try data(filename: "keys"),
                           contentType: "application/json")
         urlSession.expect("https://example.okta.com/oauth2/v1/challenge",
-                          data: try data(from: .module, for: "challenge-oob-binding-transfer-missingCode", in: "MockResponses"))
+                          data: try data(filename: "challenge-oob-binding-transfer-missingCode"))
         urlSession.expect("https://example.okta.com/oauth2/v1/token",
-                          data: try data(from: .module, for: "token", in: "MockResponses"))
+                          data: try data(filename: "token"))
 
         let factor = SecondaryFactor.oob(channel: .push)
         let handler = try factor.stepHandler(flow: flow,
@@ -489,7 +494,7 @@ final class FactorStepHandlerTests: XCTestCase {
         wait(for: [processExpectation], timeout: 5)
     }
 
-    private func assertGettingTokenAfterBindingTransfer(using handler: StepHandler) {
+    private func assertGettingTokenAfterBindingTransfer(using handler: any StepHandler) {
         let tokenExpectation = expectation(description: "get token")
         handler.process { result in
             guard case .success(let status) = result,
