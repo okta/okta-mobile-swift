@@ -19,6 +19,14 @@ import OktaConcurrency
 import FoundationNetworking
 #endif
 
+final class Foo: Sendable {
+    nonisolated(unsafe) var enabled: Bool
+    
+    init(enabled: Bool) {
+        self.enabled = enabled
+    }
+}
+
 @HasLock
 final class CredentialCoordinatorImpl: Sendable, CredentialCoordinator {
     @Synchronized

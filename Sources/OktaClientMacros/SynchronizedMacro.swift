@@ -14,6 +14,7 @@ import SwiftSyntax
 import SwiftSyntaxBuilder
 import SwiftSyntaxMacros
 import SwiftDiagnostics
+import SwiftSyntaxMacroExpansion
 
 struct SynchronizedMacro: PeerMacro, AccessorMacro {
     static func expansion(of node: SwiftSyntax.AttributeSyntax,
@@ -102,7 +103,11 @@ struct SynchronizedMacro: PeerMacro, AccessorMacro {
                     return false
                 }
                 
+                #if swift(<6)
+                return node.baseName.text == name
+                #else
                 return node.baseName.identifier?.name == name
+                #endif
             })
             
             if let newPropertyIdentifier = newPropertyIdentifier,

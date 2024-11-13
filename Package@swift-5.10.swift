@@ -1,4 +1,4 @@
-// swift-tools-version: 6.0
+// swift-tools-version: 5.10
 
 import Foundation
 import PackageDescription
@@ -57,7 +57,7 @@ var package = Package(
                  ]),
     ],
     dependencies: [
-        .package(url: "https://github.com/swiftlang/swift-syntax", "600.0.0"..<"601.0.0-prerelease"),
+        .package(url: "https://github.com/swiftlang/swift-syntax", "510.0.3"..<"601.0.0-prerelease"),
     ],
     targets: [
         // Concurrency & locking
@@ -225,59 +225,42 @@ var package = Package(
                     ],
                     resources: [ .process("MockResponses") ]),
     ],
-    swiftLanguageModes: [.v6, .v5]
+    swiftLanguageVersions: [
+        .v5
+    ]
 )
 
-#if canImport(Darwin)
-// WebAuthenticationUI
-package.products.append(.library(name: "WebAuthenticationUI", targets: ["WebAuthenticationUI"]))
-package.targets.append(contentsOf: [
-    .target(name: "WebAuthenticationUI",
-            dependencies: [
-                .target(name: "OktaOAuth2")
-            ],
-            exclude: exclude(),
-            resources: include(.process("Resources"))),
-    .testTarget(name: "WebAuthenticationUITests",
-                dependencies: [
-                    .target(name: "WebAuthenticationUI"),
-                    .target(name: "OktaOAuth2"),
-                    .target(name: "AuthFoundation"),
-                    .target(name: "TestCommon"),
-                    .target(name: "KeychainTestCommon"),
-                    .target(name: "APIClientTestCommon"),
-                    .target(name: "AuthFoundationTestCommon"),
-                ],
-                resources: [ .process("MockResponses") ]),
-])
-#endif
-
-
-//// CocoaPods specific product changes
-//if Context.environment["BUILD_COCOAPODS_MACRO"] != nil,
-//   let macroTarget = package.targets.first(where: { $0.name == "OktaClientMacros" })
-//{
-//    package.targets = [
-//        .executableTarget(name: "OktaClientMacros",
-//                          dependencies: macroTarget.dependencies)
-//    ]
-//    
-//    package.products = [
-//        .executable(name: "OktaClientMacros",
-//                    targets: [
-//                        "OktaClientMacros"
-//                    ])
-//    ]
-//}
+//#if canImport(Darwin)
+//// WebAuthenticationUI
+//package.products.append(.library(name: "WebAuthenticationUI", targets: ["WebAuthenticationUI"]))
+//package.targets.append(contentsOf: [
+//    .target(name: "WebAuthenticationUI",
+//            dependencies: [
+//                .target(name: "OktaOAuth2")
+//            ],
+//            exclude: exclude(),
+//            resources: include(.process("Resources"))),
+//    .testTarget(name: "WebAuthenticationUITests",
+//                dependencies: [
+//                    .target(name: "WebAuthenticationUI"),
+//                    .target(name: "OktaOAuth2"),
+//                    .target(name: "AuthFoundation"),
+//                    .target(name: "TestCommon"),
+//                    .target(name: "KeychainTestCommon"),
+//                    .target(name: "APIClientTestCommon"),
+//                    .target(name: "AuthFoundationTestCommon"),
+//                ],
+//                resources: [ .process("MockResponses") ]),
+//])
+//#endif
 
 for target in package.targets {
     target.swiftSettings = target.swiftSettings ?? []
-    target.swiftSettings?.append(
+    target.swiftSettings?.append(contentsOf: [
         .enableUpcomingFeature("ExistentialAny")
-    )
+    ])
     
     if target.type != .system && target.type != .test {
-        target.swiftSettings?.append(.enableExperimentalFeature("StrictConcurrency=complete"))
         target.swiftSettings?.append(.enableUpcomingFeature("InferSendableFromCaptures"))
     }
 }

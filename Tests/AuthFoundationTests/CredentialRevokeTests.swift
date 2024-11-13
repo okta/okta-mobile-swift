@@ -133,7 +133,7 @@ final class CredentialTests: XCTestCase {
             }
             expect.fulfill()
         }
-        waitForExpectations(timeout: .short.0) { error in
+        waitForExpectations(timeout: .short) { error in
             XCTAssertNil(error)
         }
 
@@ -171,7 +171,7 @@ final class CredentialTests: XCTestCase {
             }
             expect.fulfill()
         }
-        waitForExpectations(timeout: .short.0) { error in
+        waitForExpectations(timeout: .short) { error in
             XCTAssertNil(error)
         }
     }
@@ -196,7 +196,7 @@ final class CredentialTests: XCTestCase {
             }
             expect.fulfill()
         }
-        waitForExpectations(timeout: .short.0) { error in
+        waitForExpectations(timeout: .short) { error in
             XCTAssertNil(error)
         }
         
@@ -240,7 +240,7 @@ final class CredentialTests: XCTestCase {
             }
             expect.fulfill()
         }
-        waitForExpectations(timeout: .short.0) { error in
+        waitForExpectations(timeout: .short) { error in
             XCTAssertNil(error)
         }
 

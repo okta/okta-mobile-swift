@@ -48,6 +48,7 @@ public final class OAuth2Client: UsesDelegateCollection {
     @Synchronized
     public var configuration: Configuration
     
+    
     /// Additional HTTP headers to include in outgoing network requests.
     @Synchronized
     public var additionalHttpHeaders: [String: String]?

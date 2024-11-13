@@ -62,7 +62,11 @@ extension AttributeSyntax {
         }
         
         if let expression = expression.as(DeclReferenceExprSyntax.self) {
+            #if swift(<6)
+            return expression.baseName.text
+            #else
             return expression.baseName.identifier?.name
+            #endif
         }
         
         return nil
