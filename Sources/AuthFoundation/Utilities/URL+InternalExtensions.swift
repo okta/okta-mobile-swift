@@ -17,19 +17,19 @@ extension URL {
     // https://github.com/apple/swift-corelibs-foundation/issues/4849
     @inlinable
     func appendingComponent(_ component: String) -> URL {
-        // swiftlint:disable force_unwrapping
         #if os(Linux)
+        // swiftlint:disable force_unwrapping
         var components = URLComponents(url: self, resolvingAgainstBaseURL: true)!
         if !components.path.hasSuffix("/") {
             components.path.append("/")
         }
         components.path.append(component)
         return components.url!
+        // swiftlint:enable force_unwrapping
         #else
         var result = self
         result.appendPathComponent(component)
         return result
         #endif
-        // swiftlint:enable force_unwrapping
     }
 }

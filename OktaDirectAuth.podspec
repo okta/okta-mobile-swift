@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
     s.name             = "OktaDirectAuth"
-    s.version          = "1.8.3"
+    s.version          = "1.9.0"
     s.summary          = "Okta Direct Authentication"
     s.description      = <<-DESC
 Enables application developers to build native sign in experiences using the Okta Direct Authentication API.
