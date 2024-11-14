@@ -2,6 +2,10 @@ import XCTest
 @testable import TestCommon
 @testable import AuthFoundation
 
+#if os(Linux)
+import FoundationNetworking
+#endif
+
 final class OAuth2ClientTests: XCTestCase {
     let issuer = URL(string: "https://example.com")!
     let redirectUri = URL(string: "com.example:/callback")!
@@ -17,17 +21,17 @@ final class OAuth2ClientTests: XCTestCase {
         urlSession = URLSessionMock()
         client = OAuth2Client(configuration, session: urlSession)
         
-        token = Token(id: "TokenId",
-                      issuedAt: Date(),
-                      tokenType: "Bearer",
-                      expiresIn: 300,
-                      accessToken: "abcd123",
-                      scope: "openid",
-                      refreshToken: "refresh",
-                      idToken: nil,
-                      deviceSecret: nil,
-                      context: Token.Context(configuration: self.configuration,
-                                             clientSettings: [ "client_id": "clientid", "refresh_token": "refresh" ]))
+        token = try! Token(id: "TokenId",
+                           issuedAt: Date(),
+                           tokenType: "Bearer",
+                           expiresIn: 300,
+                           accessToken: "abcd123",
+                           scope: "openid",
+                           refreshToken: "refresh",
+                           idToken: nil,
+                           deviceSecret: nil,
+                           context: Token.Context(configuration: self.configuration,
+                                                  clientSettings: [ "client_id": "clientid", "refresh_token": "refresh" ]))
         
         openIdConfiguration = try OpenIdConfiguration.jsonDecoder.decode(
             OpenIdConfiguration.self,
@@ -132,7 +136,6 @@ final class OAuth2ClientTests: XCTestCase {
                        "https://example.com/oauth2/v1/authorize")
     }
     
-    #if swift(>=5.5.1)
     @available(iOS 13.0, tvOS 13.0, macOS 10.15, watchOS 6, *)
     func testOpenIDConfigurationAsync() async throws {
         urlSession.expect("https://example.com/.well-known/openid-configuration",
@@ -146,7 +149,6 @@ final class OAuth2ClientTests: XCTestCase {
                            "https://example.com/oauth2/v1/authorize")
         }
     }
-    #endif
     
     func testJWKS() throws {
         urlSession.expect("https://example.com/.well-known/openid-configuration",
@@ -440,17 +442,17 @@ final class OAuth2ClientTests: XCTestCase {
     }
     
     func testIntrospectFailed() throws {
-        let token = Token(id: "TokenId",
-                          issuedAt: Date(),
-                          tokenType: "Bearer",
-                          expiresIn: 300,
-                          accessToken: "abcd123",
-                          scope: "openid",
-                          refreshToken: nil,
-                          idToken: nil,
-                          deviceSecret: nil,
-                          context: Token.Context(configuration: self.configuration,
-                                                 clientSettings: []))
+        let token = try! Token(id: "TokenId",
+                               issuedAt: Date(),
+                               tokenType: "Bearer",
+                               expiresIn: 300,
+                               accessToken: "abcd123",
+                               scope: "openid",
+                               refreshToken: nil,
+                               idToken: nil,
+                               deviceSecret: nil,
+                               context: Token.Context(configuration: self.configuration,
+                                                      clientSettings: []))
         urlSession.expect("https://example.com/.well-known/openid-configuration",
                           data: try data(from: .module, for: "openid-configuration", in: "MockResponses"),
                           contentType: "application/json")
@@ -551,7 +553,6 @@ final class OAuth2ClientTests: XCTestCase {
         XCTAssertEqual(parameters["client_secret"], "supersecret")
     }
 
-    #if swift(>=5.5.1)
     @available(iOS 13.0, tvOS 13.0, macOS 10.15, watchOS 6, *)
     func testRefreshAsync() async throws {
         urlSession.expect("https://example.com/.well-known/openid-configuration",
@@ -574,5 +575,4 @@ final class OAuth2ClientTests: XCTestCase {
 
         try await client.revoke(token, type: .accessToken)
     }
-    #endif
 }

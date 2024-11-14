@@ -249,7 +249,7 @@ public class WebAuthentication {
         provider = nil
     }
     
-    #if os(iOS)
+    #if os(iOS) || os(visionOS)
     /// Attempts to resume sign in when the app is launched from a redirect URI.
     ///
     /// This is a convenience method that can simplify apps that use a UISceneDelegate. Scene-based applications receive URLs when the `UIWindowSceneDelegate.scene(_:openURLContexts:)` method is called; the set of contexts can be supplied to this method, which will filter out only those URLs that match the URL scheme defined in the client configuration. If no matching URLs are found, the call is ignored.
@@ -306,7 +306,7 @@ public class WebAuthentication {
                             scopes: String,
                             redirectUri: URL,
                             logoutRedirectUri: URL? = nil,
-                            additionalParameters: [String: String]? = nil)
+                            additionalParameters: [String: APIRequestArgument]? = nil)
     {
         let client = OAuth2Client(baseURL: issuer,
                                   clientId: clientId,
@@ -345,30 +345,10 @@ public class WebAuthentication {
                                          from window: WebAuthentication.WindowAnchor?,
                                          delegate: WebAuthenticationProviderDelegate) -> WebAuthenticationProvider?
     {
-        if #available(iOS 12.0, macOS 10.15, macCatalyst 13.0, *) {
-            return AuthenticationServicesProvider(loginFlow: loginFlow,
-                                                  logoutFlow: logoutFlow,
-                                                  from: window,
-                                                  delegate: delegate)
-        }
-        
-        #if os(iOS)
-        if #available(iOS 11.0, *) {
-            return SafariServicesProvider(loginFlow: loginFlow,
-                                          logoutFlow: logoutFlow,
-                                          delegate: delegate)
-        }
-        
-        if #available(iOS 10.0, *) {
-            return SafariBrowserProvider(loginFlow: loginFlow,
-                                         logoutFlow: logoutFlow,
-                                         from: window,
-                                         delegate: delegate)
-        }
-        
-        #endif
-        
-        return nil
+        AuthenticationServicesProvider(loginFlow: loginFlow,
+                                       logoutFlow: logoutFlow,
+                                       from: window,
+                                       delegate: delegate)
     }
     
     /// Initializes a web authentication session using the supplied AuthorizationCodeFlow and optional context.
@@ -403,7 +383,6 @@ public class WebAuthentication {
     var logoutCompletionBlock: ((Result<Void, WebAuthenticationError>) -> Void)?
 }
 
-#if swift(>=5.5.1)
 @available(iOS 13.0, tvOS 13.0, macOS 10.15, watchOS 6, *)
 extension WebAuthentication {
     /// Asynchronously initiates authentication from the given window.
@@ -460,5 +439,4 @@ extension WebAuthentication {
         }
     }
 }
-#endif
 #endif

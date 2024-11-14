@@ -97,9 +97,18 @@ final class TokenExchangeFlowTests: XCTestCase {
         XCTAssertFalse(flow.isAuthenticating)
         XCTAssertNotNil(delegate.token)
         XCTAssertTrue(delegate.finished)
+        
+        XCTAssertEqual(urlSession.requests.count, 3)
+        
+        let request = try XCTUnwrap(urlSession.requests.first(where: { request in
+            request.url?.lastPathComponent == "token"
+        }))
+
+        XCTAssertEqual(request.url?.absoluteString, "https://example.okta.com/oauth2/v1/token")
+        XCTAssertEqual(request.bodyString, "actor_token=secret&actor_token_type=urn:x-oath:params:oauth:token-type:device-secret&audience=api:%2F%2Fdefault&client_id=clientId&grant_type=urn:ietf:params:oauth:grant-type:token-exchange&scope=profile+openid+device_sso&subject_token=id_token&subject_token_type=urn:ietf:params:oauth:token-type:id_token")
     }
     
-    func testAuthenticationSucceeded() {
+    func testAuthenticationSucceeded() throws {
         let authorizeExpectation = expectation(description: "Expected `resume` succeeded")
         
         XCTAssertFalse(flow.isAuthenticating)
@@ -122,9 +131,18 @@ final class TokenExchangeFlowTests: XCTestCase {
         }
 
         XCTAssertFalse(flow.isAuthenticating)
+        
+        XCTAssertEqual(urlSession.requests.count, 3)
+        
+        let request = try XCTUnwrap(urlSession.requests.first(where: { request in
+            request.url?.lastPathComponent == "token"
+        }))
+
+        XCTAssertEqual(request.url?.absoluteString, "https://example.okta.com/oauth2/v1/token")
+        XCTAssertEqual(request.bodyString, "actor_token=secret&actor_token_type=urn:x-oath:params:oauth:token-type:device-secret&audience=api:%2F%2Fdefault&client_id=clientId&grant_type=urn:ietf:params:oauth:grant-type:token-exchange&scope=profile+openid+device_sso&subject_token=id_token&subject_token_type=urn:ietf:params:oauth:token-type:id_token")
     }
     
-#if swift(>=5.5.1) && !os(Linux)
+#if !os(Linux)
     @available(iOS 13.0, tvOS 13.0, macOS 10.15, watchOS 6, *)
     func testAsyncAuthenticationSucceeded() async throws {
         XCTAssertFalse(flow.isAuthenticating)
@@ -132,6 +150,15 @@ final class TokenExchangeFlowTests: XCTestCase {
         let _ = try await flow.start(with: tokens)
         
         XCTAssertFalse(flow.isAuthenticating)
+        
+        XCTAssertEqual(urlSession.requests.count, 3)
+        
+        let request = try XCTUnwrap(urlSession.requests.first(where: { request in
+            request.url?.lastPathComponent == "token"
+        }))
+
+        XCTAssertEqual(request.url?.absoluteString, "https://example.okta.com/oauth2/v1/token")
+        XCTAssertEqual(request.bodyString, "actor_token=secret&actor_token_type=urn:x-oath:params:oauth:token-type:device-secret&audience=api:%2F%2Fdefault&client_id=clientId&grant_type=urn:ietf:params:oauth:grant-type:token-exchange&scope=profile+openid+device_sso&subject_token=id_token&subject_token_type=urn:ietf:params:oauth:token-type:id_token")
     }
 #endif
 }

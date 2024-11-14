@@ -16,7 +16,6 @@ import OktaOAuth2
 #if canImport(AuthenticationServices)
 import AuthenticationServices
 
-@available(iOS 12.0, macOS 10.15, macCatalyst 13.0, *)
 protocol AuthenticationServicesProviderSession {
     init(url URL: URL, callbackURLScheme: String?, completionHandler: @escaping ASWebAuthenticationSession.CompletionHandler)
 
@@ -34,10 +33,8 @@ protocol AuthenticationServicesProviderSession {
     func cancel()
 }
 
-@available(iOS 12.0, macOS 10.15, macCatalyst 13.0, *)
 extension ASWebAuthenticationSession: AuthenticationServicesProviderSession {}
 
-@available(iOS 12.0, macOS 10.15, macCatalyst 13.0, *)
 class AuthenticationServicesProvider: NSObject, WebAuthenticationProvider {
     let loginFlow: AuthorizationCodeFlow
     let logoutFlow: SessionLogoutFlow?
@@ -213,7 +210,6 @@ class AuthenticationServicesProvider: NSObject, WebAuthenticationProvider {
     }
 }
 
-@available(iOS 12.0, macOS 10.15, *)
 extension AuthenticationServicesProvider: AuthenticationDelegate, AuthorizationCodeFlowDelegate {
     func authentication<Flow>(flow: Flow, shouldAuthenticateUsing url: URL) where Flow: AuthorizationCodeFlow {
         authenticate(using: url)
@@ -228,7 +224,6 @@ extension AuthenticationServicesProvider: AuthenticationDelegate, AuthorizationC
     }
 }
 
-@available(iOS 12.0, macOS 10.15, *)
 extension AuthenticationServicesProvider: SessionLogoutFlowDelegate {
     func logout<Flow>(flow: Flow, shouldLogoutUsing url: URL) where Flow: SessionLogoutFlow {
         logout(using: url)
@@ -239,7 +234,6 @@ extension AuthenticationServicesProvider: SessionLogoutFlowDelegate {
     }
 }
     
-@available(iOS 12.0, macOS 10.15, macCatalyst 13.0, *)
 extension AuthenticationServicesProvider: ASWebAuthenticationPresentationContextProviding {
     func presentationAnchor(for session: ASWebAuthenticationSession) -> ASPresentationAnchor {
         if let anchor = anchor {

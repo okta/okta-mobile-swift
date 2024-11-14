@@ -12,7 +12,7 @@
 
 import Foundation
 
-#if os(iOS) || os(macOS) || os(tvOS) || os(watchOS)
+#if os(iOS) || os(macOS) || os(tvOS) || os(watchOS) || os(visionOS)
 
 #if canImport(LocalAuthentication) && !os(tvOS)
 import LocalAuthentication
@@ -201,15 +201,14 @@ public struct Keychain {
         case afterFirstUnlockThisDeviceOnly
 
         /// Requires the device to have a passcode set, and disallows iCloud keychain sharing.
-        @available(iOS 8.0, *)
         case whenPasswordSetThisDeviceOnly
 
         /// Allows the keychain item to always be accessible.
-        @available(iOS, introduced: 4.0, deprecated: 12.0, message: "Use an accessibility level that provides some user protection, such as kSecAttrAccessibleAfterFirstUnlock")
+        @available(*, message: "Use an accessibility level that provides some user protection, such as .afterFirstUnlock")
         case always
 
         /// Allows the keychain item to always be accessible, and disallows iCloud keychain sharing.
-        @available(iOS, introduced: 4.0, deprecated: 12.0, message: "Use an accessibility level that provides some user protection, such as kSecAttrAccessibleAfterFirstUnlock")
+        @available(*, message: "Use an accessibility level that provides some user protection, such as .afterFirstUnlock")
         case alwaysThisDeviceOnly
         
         var isSynchronizable: Bool {

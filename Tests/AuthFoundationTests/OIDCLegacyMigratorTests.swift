@@ -14,7 +14,7 @@ import XCTest
 @testable import TestCommon
 @testable import AuthFoundation
 
-#if os(iOS) || os(macOS) || os(tvOS) || os(watchOS)
+#if os(iOS) || os(macOS) || os(tvOS) || os(watchOS) || os(visionOS)
 final class OIDCLegacyMigratorTests: XCTestCase {
     typealias LegacyOIDC = SDKVersion.Migration.LegacyOIDC
     

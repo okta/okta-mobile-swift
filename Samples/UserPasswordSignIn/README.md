@@ -8,8 +8,8 @@ Add sign-in with a username and password to a macOS app.
 
 The command-line interface (CLI) app in the sample requires five pieces of information:
 
-- The issuer URL for your Okta org authorization server. This is usually the domain of your registered Okta org followed by `/oauth2/default`, such as `https://dev-1234567.okta.com/oauth2/default`.
-- The client ID from the Okta Org Application Integration from the Okta Admin console, such as `0ux3rutxocxFX9xyz3t9`.
+- The issuer URL for your Okta org authorization server. This is usually the domain of your registered Okta org followed by `/oauth2/default`, such as `https://example.okta.com/oauth2/default`.
+- The client ID from the Okta Org Application Integration from the Okta Admin console, such as `0uxa9VpZDRCeFh3Nkk2V`.
 - The permissions, or OAuth scopes that are requested by the application, such as `openid` or `profile`.
 - The username.
 - The password.
@@ -17,7 +17,9 @@ The command-line interface (CLI) app in the sample requires five pieces of infor
 You provide the first three items as command-line arguments. For example:
 
 ```zsh
-$ UserPasswordSignIn --client-id 0ux3rutxocxFX9xyz3t9 --issuer https://dev-1234567.okta.com/oauth2/default --scopes "openid profile"
+$ UserPasswordSignIn --client-id 0uxa9VpZDRCeFh3Nkk2V \
+    --issuer https://example.okta.com/oauth2/default \
+    --scopes "openid profile"
 ```
 
 The app prompts for the username and then the password.

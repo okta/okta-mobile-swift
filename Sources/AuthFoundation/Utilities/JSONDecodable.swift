@@ -15,3 +15,8 @@ import Foundation
 public protocol JSONDecodable {
     static var jsonDecoder: JSONDecoder { get }
 }
+
+extension JSONDecodable {
+    @_documentation(visibility: internal)
+    public static var jsonDecoder: JSONDecoder { JSONDecoder() }
+}

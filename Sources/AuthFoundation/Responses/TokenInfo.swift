@@ -27,8 +27,7 @@ public struct TokenInfo: Codable, JSONClaimContainer {
     }
     
     public init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: JSONCodingKeys.self)
-        self.init(try container.decode([String: Any].self))
+        self.init(try Self.decodePayload(from: decoder))
     }
     
     /// Indicates if this token is active.

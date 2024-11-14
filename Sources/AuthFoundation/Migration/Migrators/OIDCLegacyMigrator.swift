@@ -12,7 +12,7 @@
 
 import Foundation
 
-#if os(iOS) || os(macOS) || os(tvOS) || os(watchOS)
+#if os(iOS) || os(macOS) || os(tvOS) || os(watchOS) || os(visionOS)
 
 private let accountIdRegex = try? NSRegularExpression(pattern: "0oa[0-9a-zA-Z]{17}")
 
@@ -179,17 +179,17 @@ extension SDKVersion.Migration {
             
             let issueDate = idToken?.issuedAt ?? Date()
 
-            let token = Token(id: item.account,
-                              issuedAt: issueDate,
-                              tokenType: tokenType,
-                              expiresIn: expiresIn,
-                              accessToken: accessToken,
-                              scope: scope,
-                              refreshToken: tokenResponse.refreshToken,
-                              idToken: idToken,
-                              deviceSecret: nil,
-                              context: Token.Context(configuration: configuration,
-                                                     clientSettings: clientSettings))
+            let token = try Token(id: item.account,
+                                  issuedAt: issueDate,
+                                  tokenType: tokenType,
+                                  expiresIn: expiresIn,
+                                  accessToken: accessToken,
+                                  scope: scope,
+                                  refreshToken: tokenResponse.refreshToken,
+                                  idToken: idToken,
+                                  deviceSecret: nil,
+                                  context: Token.Context(configuration: configuration,
+                                                         clientSettings: clientSettings))
             
             var security = Credential.Security.standard
             if let accessibility = model?.accessibility,

@@ -152,6 +152,7 @@ class OOBStepHandler<Factor: AuthenticationFactor>: StepHandler {
                                    clientConfiguration: flow.client.configuration,
                                    currentStatus: currentStatus,
                                    factor: factor,
+                                   intent: flow.intent,
                                    parameters: response,
                                    grantTypesSupported: flow.supportedGrantTypes)
         self.poll = PollingHandler(client: flow.client,

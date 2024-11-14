@@ -98,9 +98,7 @@ extension Token.RevokeRequest: OAuth2APIRequest, APIRequestBody {
             result["token_type_hint"] = hint
         }
         
-        if let parameters = clientAuthentication.additionalParameters {
-            result.merge(parameters, uniquingKeysWith: { $1 })
-        }
+        result.merge(clientAuthentication)
 
         return result
     }
@@ -120,9 +118,7 @@ extension Token.IntrospectRequest: OAuth2APIRequest, APIRequestBody {
             "token_type_hint": type
         ]
         
-        if let parameters = clientConfiguration.authentication.additionalParameters {
-            result.merge(parameters, uniquingKeysWith: { $1 })
-        }
+        result.merge(clientConfiguration.authentication)
 
         return result
     }
@@ -141,9 +137,7 @@ extension Token.RefreshRequest: OAuth2APIRequest, APIRequestBody, APIParsingCont
         result["grant_type"] = "refresh_token"
         result["refresh_token"] = refreshToken
 
-        if let parameters = clientConfiguration.authentication.additionalParameters {
-            result.merge(parameters, uniquingKeysWith: { $1 })
-        }
+        result.merge(clientConfiguration.authentication)
 
         return result
     }

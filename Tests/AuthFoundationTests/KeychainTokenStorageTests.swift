@@ -10,7 +10,7 @@
 // See the License for the specific language governing permissions and limitations under the License.
 //
 
-#if os(iOS) || os(macOS) || os(tvOS) || os(watchOS)
+#if os(iOS) || os(macOS) || os(tvOS) || os(watchOS) || os(visionOS)
 
 import XCTest
 @testable import AuthFoundation
@@ -35,7 +35,7 @@ final class KeychainTokenStorageTests: XCTestCase {
         "v_Data": Data()
     ] as CFDictionary
     
-    let token = Token(id: "TokenId",
+    let token = try! Token(id: "TokenId",
                       issuedAt: Date(),
                       tokenType: "Bearer",
                       expiresIn: 300,

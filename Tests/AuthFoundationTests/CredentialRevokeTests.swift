@@ -19,19 +19,19 @@ final class CredentialTests: XCTestCase {
     var credential: Credential!
     var urlSession: URLSessionMock!
 
-    let token = Token(id: "TokenId",
-                      issuedAt: Date(),
-                      tokenType: "Bearer",
-                      expiresIn: 300,
-                      accessToken: "abcd123",
-                      scope: "openid",
-                      refreshToken: "refresh123",
-                      idToken: nil,
-                      deviceSecret: "device123",
-                      context: Token.Context(configuration: .init(baseURL: URL(string: "https://example.com/oauth2/default")!,
-                                                                  clientId: "clientid",
-                                                                  scopes: "openid"),
-                                             clientSettings: [ "client_id": "foo" ]))
+    let token = try! Token(id: "TokenId",
+                           issuedAt: Date(),
+                           tokenType: "Bearer",
+                           expiresIn: 300,
+                           accessToken: "abcd123",
+                           scope: "openid",
+                           refreshToken: "refresh123",
+                           idToken: nil,
+                           deviceSecret: "device123",
+                           context: Token.Context(configuration: .init(baseURL: URL(string: "https://example.com/oauth2/default")!,
+                                                                       clientId: "clientid",
+                                                                       scopes: "openid"),
+                                                  clientSettings: [ "client_id": "foo" ]))
 
     override func setUpWithError() throws {
         coordinator = MockCredentialCoordinator()
@@ -220,7 +220,6 @@ final class CredentialTests: XCTestCase {
         XCTAssertTrue(coordinator.credentialDataSource.hasCredential(for: token))
     }
 
-    #if swift(>=5.5.1)
     @available(iOS 13.0, tvOS 13.0, macOS 10.15, watchOS 6, *)
     func testRevokeFailureAsync() async throws {
         urlSession.expect("https://example.com/oauth2/default/.well-known/openid-configuration",
@@ -275,5 +274,4 @@ final class CredentialTests: XCTestCase {
             XCTFail()
         }
     }
-    #endif
 }

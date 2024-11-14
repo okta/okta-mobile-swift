@@ -49,11 +49,11 @@ extension OAuth2Client {
             
             // Ensure the base URL contains a trailing slash in its path, so request paths can be safely appended.
             if !relativeURL.lastPathComponent.isEmpty {
-                relativeURL.appendPathComponent("")
+                relativeURL = relativeURL.appendingComponent("")
             }
             
             self.baseURL = baseURL
-            self.discoveryURL = discoveryURL ?? relativeURL.appendingPathComponent(".well-known/openid-configuration")
+            self.discoveryURL = discoveryURL ?? relativeURL.appendingComponent(".well-known/openid-configuration")
             self.clientId = clientId
             self.scopes = scopes
             self.authentication = authentication

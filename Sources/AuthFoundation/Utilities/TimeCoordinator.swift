@@ -12,6 +12,10 @@
 
 import Foundation
 
+#if os(Linux)
+import FoundationNetworking
+#endif
+
 /// Protocol used to return dates and times coordinated against trusted sources.
 ///
 /// This can be used to customize the behavior of how dates and times are calculated, when used on devices that may have skewed or incorrect clocks.
@@ -53,7 +57,7 @@ class DefaultTimeCoordinator: TimeCoordinator, OAuth2ClientDelegate {
         Date.coordinator = DefaultTimeCoordinator()
     }
     
-    private let lock = UnfairLock()
+    private let lock = Lock()
     private var _offset: TimeInterval
     private(set) var offset: TimeInterval {
         get { lock.withLock { _offset } }

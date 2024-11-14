@@ -13,6 +13,8 @@
 import Foundation
 import AuthFoundation
 
-// swiftlint:disable identifier_name
+#if canImport(UIKit) || canImport(AppKit)
+@_documentation(visibility: private)
 public let Version = SDKVersion(sdk: "okta-webauthenticationui-swift", version: "1.8.3")
 // swiftlint:enable identifier_name
+#endif

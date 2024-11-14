@@ -96,7 +96,6 @@ class URLSessionMock: URLSessionProtocol {
                                       completionHandler: completionHandler)
     }
     
-    #if swift(>=5.5.1)
     @available(iOS 13.0, tvOS 13.0, macOS 10.15, watchOS 6, *)
     func data(for request: URLRequest, delegate: URLSessionTaskDelegate?) async throws -> (Data, URLResponse) {
         requests.append(request)
@@ -116,7 +115,6 @@ class URLSessionMock: URLSessionProtocol {
             throw APIClientError.unknown
         }
     }
-    #endif
 }
 
 class URLSessionDataTaskMock: URLSessionDataTaskProtocol {

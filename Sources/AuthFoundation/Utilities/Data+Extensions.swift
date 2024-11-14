@@ -26,11 +26,12 @@ internal extension Int {
 }
 #endif
 
+@_documentation(visibility: internal)
 extension Data {
     /// Produces a SHA256 hash of the supplied data.
     /// - Returns: SHA256 representation of the data.
     public func sha256() -> Data? {
-        #if os(iOS) || os(tvOS) || os(watchOS) || os(macOS)
+        #if os(iOS) || os(tvOS) || os(watchOS) || os(visionOS) || os(macOS)
         if #available(iOS 13.0, macCatalyst 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *) {
             return Data(SHA256.hash(data: self))
         } else {
@@ -47,6 +48,7 @@ extension Data {
 
     /// Encodes the data as a URL-safe Base64 string.
     /// - Returns: Base64 URL-encoded string.
+    @_documentation(visibility: internal)
     public var base64URLEncodedString: String {
         return base64EncodedString()
             .replacingOccurrences(of: "+", with: "-")

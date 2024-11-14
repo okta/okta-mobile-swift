@@ -13,12 +13,12 @@
 import XCTest
 @testable import AuthFoundation
 
-class JSONValueTests: XCTestCase {
+class JSONTests: XCTestCase {
     let decoder = JSONDecoder()
     let encoder = JSONEncoder()
     
     func testString() throws {
-        let value = JSONValue.string("Test String")
+        let value = JSON.string("Test String")
         XCTAssertNotNil(value)
         XCTAssertEqual(value.debugDescription, "\"Test String\"")
         
@@ -30,14 +30,14 @@ class JSONValueTests: XCTestCase {
         
         let encoded = try encoder.encode(value)
         XCTAssertNotNil(encoded)
-        let decoded = try decoder.decode(JSONValue.self, from: encoded)
+        let decoded = try decoder.decode(JSON.self, from: encoded)
         XCTAssertEqual(decoded, value)
     }
     
-    func testNumber() throws {
-        let value = JSONValue.number(1)
+    func testInt() throws {
+        let value = JSON.number(1)
         XCTAssertNotNil(value)
-        XCTAssertEqual(value.debugDescription, "1.0")
+        XCTAssertEqual(value.debugDescription, "1")
         
         if let numberValue = value.anyValue as? NSNumber {
             XCTAssertEqual(numberValue, NSNumber(integerLiteral: 1))
@@ -47,15 +47,32 @@ class JSONValueTests: XCTestCase {
         
         let encoded = try encoder.encode(value)
         XCTAssertNotNil(encoded)
-        let decoded = try decoder.decode(JSONValue.self, from: encoded)
+        let decoded = try decoder.decode(JSON.self, from: encoded)
+        XCTAssertEqual(decoded, value)
+    }
+    
+    func testDouble() throws {
+        let value = JSON.number(1.5)
+        XCTAssertNotNil(value)
+        XCTAssertEqual(value.debugDescription, "1.5")
+        
+        if let numberValue = value.anyValue as? NSNumber {
+            XCTAssertEqual(numberValue, NSNumber(floatLiteral: 1.5))
+        } else {
+            XCTFail("Object not a number")
+        }
+        
+        let encoded = try encoder.encode(value)
+        XCTAssertNotNil(encoded)
+        let decoded = try decoder.decode(JSON.self, from: encoded)
         XCTAssertEqual(decoded, value)
     }
     
     func testBool() throws {
-        let value = JSONValue.bool(true)
+        let value = JSON.bool(true)
         XCTAssertNotNil(value)
         XCTAssertEqual(value.debugDescription, "true")
-        XCTAssertEqual(JSONValue.bool(false).debugDescription, "false")
+        XCTAssertEqual(JSON.bool(false).debugDescription, "false")
 
         if let boolValue = value.anyValue as? NSNumber {
             XCTAssertEqual(boolValue, NSNumber(booleanLiteral: true))
@@ -65,12 +82,12 @@ class JSONValueTests: XCTestCase {
         
         let encoded = try encoder.encode(value)
         XCTAssertNotNil(encoded)
-        let decoded = try decoder.decode(JSONValue.self, from: encoded)
+        let decoded = try decoder.decode(JSON.self, from: encoded)
         XCTAssertEqual(decoded, value)
     }
     
     func testNull() throws {
-        let value = JSONValue.null
+        let value = JSON.null
         XCTAssertNotNil(value)
         XCTAssertEqual(value.debugDescription, "null")
         
@@ -78,12 +95,12 @@ class JSONValueTests: XCTestCase {
         
         let encoded = try encoder.encode(value)
         XCTAssertNotNil(encoded)
-        let decoded = try decoder.decode(JSONValue.self, from: encoded)
+        let decoded = try decoder.decode(JSON.self, from: encoded)
         XCTAssertEqual(decoded, value)
     }
     
     func testArray() throws {
-        let value = JSONValue.array([JSONValue.string("foo"), JSONValue.string("bar")])
+        let value = JSON.array([JSON.string("foo"), JSON.string("bar")])
         XCTAssertNotNil(value)
         XCTAssertEqual(value.debugDescription, """
             [
@@ -100,15 +117,15 @@ class JSONValueTests: XCTestCase {
         
         let encoded = try encoder.encode(value)
         XCTAssertNotNil(encoded)
-        let decoded = try decoder.decode(JSONValue.self, from: encoded)
+        let decoded = try decoder.decode(JSON.self, from: encoded)
         XCTAssertEqual(decoded, value)
     }
     
     func testDictionary() throws {
-        let value = JSONValue.dictionary(
-            ["foo": JSONValue.dictionary(
-                ["bar": JSONValue.array(
-                    [JSONValue.string("woof")])
+        let value = JSON.object(
+            ["foo": JSON.object(
+                ["bar": JSON.array(
+                    [JSON.string("woof")])
                 ])
             ])
         XCTAssertNotNil(value)
@@ -129,25 +146,23 @@ class JSONValueTests: XCTestCase {
         
         let encoded = try encoder.encode(value)
         XCTAssertNotNil(encoded)
-        let decoded = try decoder.decode(JSONValue.self, from: encoded)
+        let decoded = try decoder.decode(JSON.self, from: encoded)
         XCTAssertEqual(decoded, value)
+        
+        let asDictionary = try XCTUnwrap(value.anyValue as? [String: Any])
+        let foo = try XCTUnwrap(asDictionary["foo"] as? [String: Any])
+        let bar = try XCTUnwrap(foo["bar"] as? [String])
+        XCTAssertEqual(bar.first, "woof")
     }
     
-    func testObject() throws {
-        let object = URL(string: "https://example.com")!
-        let value = JSONValue.object(object)
-        XCTAssertNotNil(value)
-        XCTAssertEqual(value.debugDescription, "https://example.com")
-
-        if let urlValue = value.anyValue as? URL {
-            XCTAssertEqual(urlValue, URL(string: "https://example.com"))
-        } else {
-            XCTFail("Object not a URL")
-        }
+    func testConversions() throws {
+        let json = try decoder.decode(JSON.self,
+                                        from: try data(from: .module,
+                                                       for: "openid-configuration",
+                                                       in: "MockResponses"))
+        let object = try XCTUnwrap(json.anyValue as? [String: Any])
+        let array = try XCTUnwrap(object["claims_supported"] as? [String])
         
-        XCTAssertEqual(value, JSONValue.object(URL(string: "https://example.com")!))
-        let encoded = try encoder.encode(value)
-        let decoded = try decoder.decode(JSONValue.self, from: encoded)
-        XCTAssertEqual(decoded.anyValue as? String, "https://example.com")
+        XCTAssertEqual(array.count, 31)
     }
 }

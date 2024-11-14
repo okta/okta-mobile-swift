@@ -13,11 +13,7 @@
 import Foundation
 
 /// Indicates a type that can be used as an enum value for the ``HasClaims/ClaimType`` associated type.
-public protocol IsClaim {
-    var rawValue: String { get }
-    
-    init?(rawValue: String)
-}
+public protocol IsClaim: RawRepresentable<String> {}
 
 /// Used by classes that contains OAuth2 claims.
 ///
@@ -25,83 +21,27 @@ public protocol IsClaim {
 public protocol HasClaims {
     associatedtype ClaimType: IsClaim
     
-    /// Returns the collection of claims this object contains.
-    ///
-    /// > Note: This will only return the list of official claims defined in the ``Claim`` enum. For custom claims, please see the ``customClaims`` property.
-    var claims: [ClaimType] { get }
-    
-    /// Returns the collection of custom claims this object contains.
-    ///
-    /// Unlike the ``claims`` property, this returns values as strings.
-    var customClaims: [String] { get }
-    
     /// Raw payload of claims, as a dictionary representation.
+    ///
+    /// Types conforming to this protocol must return the raw payload of claim values. The convenience functions used for loading and converting claims are made available through extensions to this protocol.
     var payload: [String: Any] { get }
 }
 
 public extension HasClaims {
-    /// The list of standard claims contained within this JWT token.
+    /// Returns the collection of claims this object contains.
+    ///
+    /// > Note: This will only return the list of official claims defined in the ``Claim`` enum. For custom claims, please see the ``customClaims`` property.
     var claims: [ClaimType] {
         payload.keys.compactMap { ClaimType(rawValue: $0) }
     }
     
-    /// The list of custom claims contained within this JWT token.
+    /// Returns the collection of custom claims this object contains.
+    ///
+    /// Unlike the ``claims`` property, this returns values as strings.
     var customClaims: [String] {
         payload.keys.filter { ClaimType(rawValue: $0) == nil }
     }
 
-    /// Returns a claim value from this JWT token, with the given key and expected return type.
-    /// - Returns: The value for the supplied claim.
-    func value<T: ClaimConvertable>(_ type: T.Type, for key: String) -> T? {
-        T.claim(key, in: self, from: payload[key])
-    }
-
-    /// Returns an array of claims from this JWT token, with the given key and expected array element type.
-    /// - Returns: The value for the supplied claim.
-    func arrayValue<T: ClaimConvertable>(_ type: T.Type, for key: String) -> [T]? {
-        guard let array = payload[key] as? [ClaimConvertable]
-        else {
-            return nil
-        }
-        
-        return array.compactMap { element in
-            T.claim(key, in: self, from: element)
-        }
-    }
-
-    /// Returns an array of claims from this JWT token, with the given key and expected array element type.
-    /// - Returns: The value for the supplied claim.
-    func arrayValue<T: ClaimConvertable>(_ type: T.Type, for claim: ClaimType) -> [T]? {
-        arrayValue(type, for: claim.rawValue)
-    }
-
-    /// Return the given claim's Dictionary of ``ClaimConvertable``values.
-    subscript<T: ClaimConvertable>(_ claim: String) -> [String: T?]? {
-        guard let dict = payload[claim] as? [String: ClaimConvertable]
-        else {
-            return nil
-        }
-        
-        return dict.mapValues { value in
-            T.claim(claim, in: self, from: value)
-        }
-    }
-
-    /// Return the given claim's value, defined with the given enum value, as the expectred ``ClaimConvertable``value type.
-    subscript<T: ClaimConvertable>(_ claim: ClaimType) -> T? {
-        self[claim.rawValue]
-    }
-    
-    /// Return the given claim's value, defined with the given enum value, as the expectred ``ClaimConvertable``value type.
-    subscript<T: ClaimConvertable>(_ claim: String) -> T? {
-        T.claim(claim, in: self, from: payload[claim])
-    }
-    
-    /// Return the given claim's value as the expectred ``ClaimConvertable``value type.
-    subscript<T>(_ claim: String) -> T? {
-        payload[claim] as? T
-    }
-    
     /// All claims, across both standard ``claims`` and ``customClaims``.
     var allClaims: [String] {
         Array([

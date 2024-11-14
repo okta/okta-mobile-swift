@@ -16,7 +16,6 @@ import Foundation
 import CommonCrypto
 
 extension JWK.Algorithm {
-    @available(iOS 10.0, macCatalyst 13.0, tvOS 10.0, watchOS 3.0, macOS 10.12, *)
     var secKeyAlgorithm: SecKeyAlgorithm? {
         switch self {
         case .rs256:

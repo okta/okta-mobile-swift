@@ -13,10 +13,14 @@
 import Foundation
 import AuthFoundation
 
+#if os(Linux)
+import FoundationNetworking
+#endif
+
 /// An authentication flow class that exchanges a Session Token for access tokens.
 ///
 /// This flow is typically used in conjunction with the [classic Okta native authentication library](https://github.com/okta/okta-auth-swift). For native authentication using the Okta Identity Engine (OIE), please use the [Okta IDX library](https://github.com/okta/okta-idx-swift).
-public class SessionTokenFlow: AuthenticationFlow {
+public class SessionTokenFlow: AuthenticationFlow, ProvidesOAuth2Parameters {
     /// The OAuth2Client this authentication flow will use.
     public let client: OAuth2Client
     
@@ -24,7 +28,7 @@ public class SessionTokenFlow: AuthenticationFlow {
     public let redirectUri: URL
     
     /// Any additional query string parameters you would like to supply to the authorization server.
-    public let additionalParameters: [String: String]?
+    public let additionalParameters: [String: APIRequestArgument]?
     
     /// Indicates whether or not this flow is currently in the process of authenticating a user.
     public private(set) var isAuthenticating: Bool = false {
@@ -50,7 +54,7 @@ public class SessionTokenFlow: AuthenticationFlow {
                             clientId: String,
                             scopes: String,
                             redirectUri: URL,
-                            additionalParameters: [String: String]? = nil)
+                            additionalParameters: [String: APIRequestArgument]? = nil)
     {
         self.init(redirectUri: redirectUri,
                   additionalParameters: additionalParameters,
@@ -60,7 +64,7 @@ public class SessionTokenFlow: AuthenticationFlow {
     }
     
     public init(redirectUri: URL,
-                additionalParameters: [String: String]? = nil,
+                additionalParameters: [String: APIRequestArgument]? = nil,
                 client: OAuth2Client)
     {
         // Ensure this SDK's static version is included in the user agent.
@@ -174,7 +178,6 @@ public class SessionTokenFlow: AuthenticationFlow {
     }
 }
 
-#if swift(>=5.5.1)
 @available(iOS 13.0, tvOS 13.0, macOS 10.15, watchOS 6, *)
 extension SessionTokenFlow {
     /// Asynchronously authenticates with the given session token.
@@ -188,7 +191,6 @@ extension SessionTokenFlow {
         }
     }
 }
-#endif
 
 protocol SessionTokenFlowURLExchange {
     init(scheme: String)
@@ -264,6 +266,11 @@ extension SessionTokenFlow: OAuth2ClientDelegate {
 }
 
 extension OAuth2Client {
+    /// Creates a new Session Token flow configured to use this OAuth2Client.
+    /// - Parameters:
+    ///   - redirectUri: Redirect URI
+    ///   - additionalParameters: Additional parameters to pass to the flow
+    /// - Returns: Initialized authorization flow.
     public func sessionTokenFlow(redirectUri: URL,
                                  additionalParameters: [String: String]? = nil) -> SessionTokenFlow
     {

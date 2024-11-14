@@ -244,11 +244,25 @@ public class DirectAuthenticationFlow: AuthenticationFlow {
         }
     }
     
+    /// Indicates the intent for the user authentication operation.
+    /// 
+    /// This value is used to toggle behavior to distinguish between sign-in authentication, password recovery / reset operations, etc.
+    public enum Intent: String, Codable {
+        /// The user intends to sign in.
+        case signIn
+        
+        /// The user intends to recover / reset their password, or some other authentication factor.
+        case recovery
+    }
+    
     /// The OAuth2Client this authentication flow will use.
     public let client: OAuth2Client
     
     /// The list of grant types the application supports.
     public let supportedGrantTypes: [GrantType]
+    
+    /// The intent of the current flow.
+    public private(set) var intent: Intent = .signIn
     
     /// Indicates whether or not this flow is currently in the process of authenticating a user.
     public private(set) var isAuthenticating: Bool = false {
@@ -311,7 +325,7 @@ public class DirectAuthenticationFlow: AuthenticationFlow {
     
     private convenience init(_ config: OAuth2Client.PropertyListConfiguration) throws {
         let supportedGrantTypes: [GrantType]
-        if let supportedGrants = config.additionalParameters?["supportedGrants"] {
+        if let supportedGrants = config.additionalParameters?["supportedGrants"] as? String {
             supportedGrantTypes = try .from(string: supportedGrants)
         } else {
             supportedGrantTypes = .directAuth
@@ -329,12 +343,15 @@ public class DirectAuthenticationFlow: AuthenticationFlow {
     /// - Parameters:
     ///   - loginHint: The login hint, or username, to authenticate.
     ///   - factor: The primary factor to use when authenticating the user.
+    ///   - intent: The intent behind this authentication (default: `signIn`)
     ///   - completion: Completion block called when the operation completes.
     public func start(_ loginHint: String,
                       with factor: PrimaryFactor,
+                      intent: Intent = .signIn,
                       completion: @escaping (Result<Status, DirectAuthenticationFlowError>) -> Void)
     {
         reset()
+        self.intent = intent
         runStep(loginHint: loginHint, with: factor, completion: completion)
     }
     
@@ -404,23 +421,27 @@ public class DirectAuthenticationFlow: AuthenticationFlow {
     /// Resets the authentication session.
     public func reset() {
         isAuthenticating = false
+        intent = .signIn
     }
 
     // MARK: Private properties / methods
     public let delegateCollection = DelegateCollection<DirectAuthenticationFlowDelegate>()
 }
 
-#if swift(>=5.5.1)
 @available(iOS 13.0, tvOS 13.0, macOS 10.15, watchOS 6, *)
 extension DirectAuthenticationFlow {
     /// Start user authentication, with the given username login hint and primary factor.
     /// - Parameters:
     ///   - loginHint: The login hint, or username, to authenticate.
     ///   - factor: The primary factor to use when authenticating the user.
+    ///   - intent: The intent behind this authentication (default: `signIn`)
     /// - Returns: Status returned when the operation completes.
-    public func start(_ loginHint: String, with factor: PrimaryFactor) async throws -> DirectAuthenticationFlow.Status {
+    public func start(_ loginHint: String,
+                      with factor: PrimaryFactor,
+                      intent: DirectAuthenticationFlow.Intent = .signIn) async throws -> DirectAuthenticationFlow.Status
+    {
         try await withCheckedThrowingContinuation { continuation in
-            start(loginHint, with: factor) { result in
+            start(loginHint, with: factor, intent: intent) { result in
                 continuation.resume(with: result)
             }
         }
@@ -456,7 +477,6 @@ extension DirectAuthenticationFlow {
         }
     }
 }
-#endif
 
 extension DirectAuthenticationFlow: UsesDelegateCollection {
     public typealias Delegate = DirectAuthenticationFlowDelegate

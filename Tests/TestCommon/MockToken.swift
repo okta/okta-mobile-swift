@@ -35,17 +35,17 @@ extension Token {
     {
         let clientSettings = [ "client_id": mockConfiguration.clientId ]
         
-        return Token(id: id,
-              issuedAt: Date(timeIntervalSinceNow: -issuedOffset),
-              tokenType: "Bearer",
-              expiresIn: expiresIn,
-              accessToken: JWT.mockAccessToken,
-              scope: "openid",
-              refreshToken: refreshToken,
-              idToken: try? JWT(JWT.mockIDToken),
-              deviceSecret: deviceSecret,
-              context: .init(configuration: mockConfiguration,
-                             clientSettings: clientSettings))
+        return try! Token(id: id,
+                          issuedAt: Date(timeIntervalSinceNow: -issuedOffset),
+                          tokenType: "Bearer",
+                          expiresIn: expiresIn,
+                          accessToken: JWT.mockAccessToken,
+                          scope: "openid",
+                          refreshToken: refreshToken,
+                          idToken: try? JWT(JWT.mockIDToken),
+                          deviceSecret: deviceSecret,
+                          context: .init(configuration: mockConfiguration,
+                                         clientSettings: clientSettings))
     }
     
     static func token(with options: [MockOptions] = []) -> Token {
@@ -68,19 +68,19 @@ extension Token {
             idToken = try! JWT(JWT.mockIDToken)
         }
         
-        return Token(id: "TokenId",
-                     issuedAt: Date(),
-                     tokenType: "Bearer",
-                     expiresIn: 300,
-                     accessToken: JWT.mockAccessToken,
-                     scope: scopes,
-                     refreshToken: refreshToken,
-                     idToken: idToken,
-                     deviceSecret: deviceSecret,
-                     context: Token.Context(configuration: .init(baseURL: URL(string: "https://example.com/oauth2/default")!,
-                                                                 clientId: "clientid",
-                                                                 scopes: scopes),
-                                            clientSettings: [ "client_id": "clientid" ]))
+        return try! Token(id: "TokenId",
+                          issuedAt: Date(),
+                          tokenType: "Bearer",
+                          expiresIn: 300,
+                          accessToken: JWT.mockAccessToken,
+                          scope: scopes,
+                          refreshToken: refreshToken,
+                          idToken: idToken,
+                          deviceSecret: deviceSecret,
+                          context: Token.Context(configuration: .init(baseURL: URL(string: "https://example.com/oauth2/default")!,
+                                                                      clientId: "clientid",
+                                                                      scopes: scopes),
+                                                 clientSettings: [ "client_id": "clientid" ]))
     }
 
 }

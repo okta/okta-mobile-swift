@@ -46,6 +46,7 @@ extension DirectAuthenticationFlow.ContinuationFactor: AuthenticationFactor {
                                        clientConfiguration: flow.client.configuration,
                                        currentStatus: currentStatus,
                                        factor: factor,
+                                       intent: flow.intent,
                                        parameters: bindingContext.oobResponse,
                                        grantTypesSupported: flow.supportedGrantTypes)
             return TokenStepHandler(flow: flow, request: request)
@@ -56,6 +57,7 @@ extension DirectAuthenticationFlow.ContinuationFactor: AuthenticationFactor {
                                        currentStatus: currentStatus,
                                        loginHint: loginHint,
                                        factor: factor,
+                                       intent: flow.intent,
                                        parameters: response,
                                        grantTypesSupported: flow.supportedGrantTypes)
             return TokenStepHandler(flow: flow, request: request)
