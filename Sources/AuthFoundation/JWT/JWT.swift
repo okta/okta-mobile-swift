@@ -72,7 +72,7 @@ public struct JWT: RawRepresentable, Codable, HasClaims, Expires {
     }
     
     /// Verifies the JWT token using the given ``JWK`` key.
-    /// - Parameter key: JWK key to use to verify this token.
+    /// - Parameter keySet: JWK key to use to verify this token.
     /// - Returns: Returns whether or not signing passes for this token/key combination.
     /// - Throws: ``JWTError``
     public func validate(using keySet: JWKS) throws -> Bool {

@@ -21,7 +21,7 @@ public protocol IsClaim {
 
 /// Used by classes that contains OAuth2 claims.
 ///
-/// This provides common conveniences for interacting with user or token information within those claims. For example, iterating through ``allClaims-4c54a`` or using keyed subscripting to access specific claims.
+/// This provides common conveniences for interacting with user or token information within those claims. For example, iterating through ``allClaims`` or using keyed subscripting to access specific claims.
 public protocol HasClaims {
     associatedtype ClaimType: IsClaim
     

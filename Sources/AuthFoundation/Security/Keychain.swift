@@ -115,13 +115,15 @@ public struct Keychain {
         /// - Parameters:
         ///   - account: The account ID or key to use for this item.
         ///   - service: The service to group similar items together.
+        ///   - server: The server to group similar items together.
         ///   - accessibility: Defines when the item may be retrieved, based on device state.
         ///   - accessGroup: The access group to store this item within.
+        ///   - accessControl: Optional keychain security access control reference.
         ///   - synchronizable: Indicates if this keychain item may be synchronized to iCloud Keychain.
         ///   - label: The human-readable label to summarize this item.
         ///   - description: The human-readable description to add notes related to this item.
         ///   - generic: Generic data associated with this item, which may always be read and is not restricted by the ``accessibility`` option.
-        ///   - valueData: The secret value for this item.
+        ///   - value: The secret value for this item.
         public init(account: String,
                     service: String? = nil,
                     server: String? = nil,
@@ -246,6 +248,7 @@ public struct Keychain {
         /// - Parameters:
         ///   - account: The account to search for, or `nil` to return all accounts.
         ///   - service: The service to search for, or `nil` to return all services.
+        ///   - server: The server to search for, or `nil` to return all servers.
         ///   - accessGroup: The access group to search within, or `nil` to return all access groups.
         public init(account: String? = nil, service: String? = nil, server: String? = nil, accessGroup: String? = nil) {
             self.account = account

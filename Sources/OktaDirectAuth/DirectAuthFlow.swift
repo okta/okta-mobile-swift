@@ -19,7 +19,7 @@ import AuthFoundation
 public protocol DirectAuthenticationFlowDelegate: AuthenticationDelegate {
     /// Sent when an authentication session receives a new status response.
     ///
-    /// This function is invoked when a new status is returned either from ``DirectAuthenticationFlow/start(_:with:)`` or ``DirectAuthenticationFlow/resume(_:with:)`` (or their block-based counterparts).
+    /// This function is invoked when a new status is returned either from ``DirectAuthenticationFlow/start(_:with:)``, ``DirectAuthenticationFlow/resume(_:with:)-5nv5h``, or ``DirectAuthenticationFlow/resume(_:with:)-9i2pz`` (or their block-based counterparts).
     func authentication<Flow>(flow: Flow, received status: DirectAuthenticationFlow.Status)
 }
 
@@ -101,7 +101,7 @@ public class DirectAuthenticationFlow: AuthenticationFlow {
     
     /// Enumeration defining the list of possible secondary authentication factors.
     ///
-    /// These values are used by ``DirectAuthenticationFlow/resume(_:with:)``.
+    /// These values are used by ``DirectAuthenticationFlow/resume(_:with:)-5nv5h``.
     public enum SecondaryFactor: Equatable {
         /// Authenticate the user with the given OTP code.
         ///
@@ -200,7 +200,7 @@ public class DirectAuthenticationFlow: AuthenticationFlow {
 
     /// The current status of the authentication flow.
     ///
-    /// This value is returned from ``DirectAuthenticationFlow/start(_:with:)`` and ``DirectAuthenticationFlow/resume(_:with:)`` to indicate the result of an individual authentication step. This can be used to drive your application's sign-in workflow.
+    /// This value is returned from ``DirectAuthenticationFlow/start(_:with:)`` and `resume(_:with:)` (both ``DirectAuthenticationFlow/resume(_:with:)-5nv5h`` and ``DirectAuthenticationFlow/resume(_:with:)-9i2pz``) to indicate the result of an individual authentication step. This can be used to drive your application's sign-in workflow.
     public enum Status: Equatable {
         /// Authentication was successful, returning the given token.
         case success(_ token: Token)
@@ -212,7 +212,7 @@ public class DirectAuthenticationFlow: AuthenticationFlow {
 
         /// Indicates the user should be challenged with some other secondary factor.
         ///
-        /// When this status is returned, the developer should use the ``DirectAuthenticationFlow/resume(_:with:)`` function to supply a secondary factor to verify the user.
+        /// When this status is returned, the developer should use the ``DirectAuthenticationFlow/resume(_:with:)-5nv5h`` function to supply a secondary factor to verify the user.
         case mfaRequired(_ context: MFAContext)
     }
     
@@ -270,7 +270,7 @@ public class DirectAuthenticationFlow: AuthenticationFlow {
     ///   - issuer: The issuer URL.
     ///   - clientId: The client ID
     ///   - scopes: The scopes to request
-    ///   - supportedGrants: The list of grants this application supports. Defaults to the full list of values supported by this SDK.
+    ///   - grantTypes: The list of grants this application supports. Defaults to the full list of values supported by this SDK.
     public convenience init(issuer: URL,
                             clientId: String,
                             scopes: String,
@@ -284,7 +284,7 @@ public class DirectAuthenticationFlow: AuthenticationFlow {
     
     /// Initializer to construct an authentication flow from a pre-defined configuration and client.
     /// - Parameters:
-    ///   - configuration: The configuration to use for this authentication flow.
+    ///   - grantTypes: The list of grants this application supports. Defaults to the full list of values supported by this SDK.
     ///   - client: The `OAuth2Client` to use with this flow.
     public init(supportedGrants grantTypes: [GrantType] = .directAuth,
                 client: OAuth2Client)
