@@ -1,9 +1,5 @@
 # ``AuthFoundation/OAuth2Client``
 
-@Metadata {
-    @DocumentationExtension(mergeBehavior: append)
-}
-
 This class serves two purposes:
 1. Expose high-level actions a client can perform against an OAuth2 service.
 2. Connect authentication flows to the OAuth2 servers they intend to authenticate against.

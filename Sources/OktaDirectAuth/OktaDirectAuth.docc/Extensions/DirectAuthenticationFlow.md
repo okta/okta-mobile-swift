@@ -1,9 +1,5 @@
 # ``OktaDirectAuth/DirectAuthenticationFlow``
 
-@Metadata {
-    @DocumentationExtension(mergeBehavior: append)
-}
-
 ## Usage
 
 You can create an instance of ``DirectAuthenticationFlow`` with your client settings, or you can use one of several convenience initializers to simplify the process.
@@ -39,7 +35,7 @@ case .mfaRequired(_):
 
 Authentication factors are separated into two groups:
 * ``PrimaryFactor`` -- Used for initial authentication when calling ``start(_:with:)`` (or ``start(_:with:completion:)`` when using blocks)
-* ``SecondaryFactor`` -- Used for supplying additional MFA factors, with the ``resume(_:with:)`` function (or ``resume(_:with:completion:)`` when using blocks)
+* ``SecondaryFactor`` -- Used for supplying additional MFA factors, with the ``resume(_:with:)-5nv5h`` or ``resume(_:with:)-9i2pz`` functions (or ``resume(_:with:completion:)-7fbah`` / ``resume(_:with:completion:)-5nj0x`` when using blocks)
 
 Each of the fuctions using these factors returns an instance of ``Status``, which indicates whether or not authentication is successful, or if multiple factors are required.
 
@@ -63,8 +59,10 @@ Each of the fuctions using these factors returns an instance of ``Status``, whic
 
 ### Continuing sign in with MFA
 
-- ``DirectAuthenticationFlow/resume(_:with:)``
-- ``DirectAuthenticationFlow/resume(_:with:completion:)``
+- ``DirectAuthenticationFlow/resume(_:with:)-5nv5h``
+- ``DirectAuthenticationFlow/resume(_:with:)-9i2pz``
+- ``DirectAuthenticationFlow/resume(_:with:completion:)-7fbah``
+- ``DirectAuthenticationFlow/resume(_:with:completion:)-5nj0x``
 - ``DirectAuthenticationFlow/SecondaryFactor``
 - ``DirectAuthenticationFlow/OOBChannel``
 
