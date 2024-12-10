@@ -154,7 +154,7 @@ class OOBStepHandler<Factor: AuthenticationFactor>: StepHandler {
                                    factor: factor,
                                    intent: flow.intent,
                                    parameters: response,
-                                   grantTypesSupported: flow.supportedGrantTypes)
+                                   authenticationFlowConfiguration: flow.configuration)
         self.poll = PollingHandler(client: flow.client,
                                    request: request,
                                    expiresIn: response.expiresIn,

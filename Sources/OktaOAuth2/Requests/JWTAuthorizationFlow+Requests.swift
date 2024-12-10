@@ -19,6 +19,7 @@ extension JWTAuthorizationFlow {
         let clientId: String
         let scope: String
         let assertion: JWT
+        let authenticationFlowConfiguration: (any AuthFoundation.AuthenticationFlowConfiguration)?
     }
 }
 
@@ -29,7 +30,7 @@ extension JWTAuthorizationFlow.TokenRequest: OAuth2TokenRequest, OAuth2APIReques
             "scope": scope,
             "grant_type": GrantType.jwtBearer,
             "assertion": assertion,
-        ]
+        ].merging(authenticationFlowConfiguration)
     }
     
     var codingUserInfo: [CodingUserInfoKey: Any]? {

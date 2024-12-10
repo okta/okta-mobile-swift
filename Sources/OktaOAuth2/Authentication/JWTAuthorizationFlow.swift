@@ -89,7 +89,8 @@ public class JWTAuthorizationFlow: AuthenticationFlow {
                 let request = TokenRequest(openIdConfiguration: configuration,
                                            clientId: self.client.configuration.clientId,
                                            scope: self.client.configuration.scopes,
-                                           assertion: assertion)
+                                           assertion: assertion,
+                                           authenticationFlowConfiguration: nil)
                 self.client.exchange(token: request) { result in
                     self.reset()
                     

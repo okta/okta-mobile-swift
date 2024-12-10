@@ -274,7 +274,8 @@ public class AuthorizationCodeFlow: AuthenticationFlow, ProvidesOAuth2Parameters
                                            grantValue: code,
                                            pkce: self.context?.pkce,
                                            nonce: self.context?.nonce,
-                                           maxAge: self.context?.maxAge)
+                                           maxAge: self.context?.maxAge,
+                                           authenticationFlowConfiguration: nil)
                 self.client.exchange(token: request) { result in
                     self.reset()
                     

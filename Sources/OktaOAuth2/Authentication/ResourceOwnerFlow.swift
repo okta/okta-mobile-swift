@@ -93,7 +93,8 @@ public class ResourceOwnerFlow: AuthenticationFlow {
                                            clientId: self.client.configuration.clientId,
                                            scope: self.client.configuration.scopes,
                                            username: username,
-                                           password: password)
+                                           password: password,
+                                           authenticationFlowConfiguration: nil)
                 self.client.exchange(token: request) { result in
                     self.reset()
                     

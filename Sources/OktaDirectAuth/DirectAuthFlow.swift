@@ -172,6 +172,32 @@ public class DirectAuthenticationFlow: AuthenticationFlow {
         case webAuthn(response: WebAuthn.AuthenticatorAssertionResponse)
     }
     
+    /// Configuration which can be used to customize the authentication flow, as needed.
+    public struct Configuration: AuthenticationFlowConfiguration {
+        /// The "nonce" value to send with this authorization request.
+        public var nonce: String?
+        
+        /// The maximum age an ID token can be when authenticating.
+        public var maxAge: TimeInterval?
+        
+        /// The ACR values, if any, which should be requested by the client.
+        public var acrValues: [String]?
+
+        /// The list of grant types the application supports.
+        public var grantTypesSupported: [GrantType] = .directAuth
+        
+        public init(nonce: String? = nil,
+                    maxAge: TimeInterval? = nil,
+                    acrValues: [String]? = nil,
+                    grantTypesSupported: [GrantType] = .directAuth)
+        {
+            self.nonce = nonce
+            self.maxAge = maxAge
+            self.acrValues = acrValues
+            self.grantTypesSupported = grantTypesSupported
+        }
+    }
+    
     /// Channel used when authenticating an out-of-band factor using Okta Verify.
     public enum OOBChannel: String, Codable, APIRequestArgument {
         /// Utilize Okta Verify Push notifications to authenticate the user.
@@ -197,7 +223,7 @@ public class DirectAuthenticationFlow: AuthenticationFlow {
             self.mfaToken = mfaToken
         }
     }
-
+    
     /// The current status of the authentication flow.
     ///
     /// This value is returned from ``DirectAuthenticationFlow/start(_:with:)`` and ``DirectAuthenticationFlow/resume(_:with:)`` to indicate the result of an individual authentication step. This can be used to drive your application's sign-in workflow.
@@ -209,7 +235,7 @@ public class DirectAuthenticationFlow: AuthenticationFlow {
         ///
         /// When this status is returned, the developer should inspect the type of continuation that is occurring, and should use the ``DirectAuthenticationFlow/resume(_:with:)-9i2pz function to resume authenticating this factor.
         case continuation(_ type: ContinuationType)
-
+        
         /// Indicates the user should be challenged with some other secondary factor.
         ///
         /// When this status is returned, the developer should use the ``DirectAuthenticationFlow/resume(_:with:)`` function to supply a secondary factor to verify the user.
@@ -228,7 +254,7 @@ public class DirectAuthenticationFlow: AuthenticationFlow {
         
         /// Indicates that the authenticator will prompt the user for a code, will occur through a secondary channel, such as SMS phone verification.
         case prompt(_ context: BindingContext)
-
+        
         /// Holds information about a challenge request when initiating a WebAuthn authentication.
         public struct WebAuthnContext {
             /// The credential request returned from the server.
@@ -245,7 +271,7 @@ public class DirectAuthenticationFlow: AuthenticationFlow {
     }
     
     /// Indicates the intent for the user authentication operation.
-    /// 
+    ///
     /// This value is used to toggle behavior to distinguish between sign-in authentication, password recovery / reset operations, etc.
     public enum Intent: String, Codable {
         /// The user intends to sign in.
@@ -258,8 +284,8 @@ public class DirectAuthenticationFlow: AuthenticationFlow {
     /// The OAuth2Client this authentication flow will use.
     public let client: OAuth2Client
     
-    /// The list of grant types the application supports.
-    public let supportedGrantTypes: [GrantType]
+    /// The configuration settings that can be used to customize this authentication flow.
+    public let configuration: Configuration
     
     /// The intent of the current flow.
     public private(set) var intent: Intent = .signIn
@@ -284,13 +310,13 @@ public class DirectAuthenticationFlow: AuthenticationFlow {
     ///   - issuer: The issuer URL.
     ///   - clientId: The client ID
     ///   - scopes: The scopes to request
-    ///   - supportedGrants: The list of grants this application supports. Defaults to the full list of values supported by this SDK.
+    ///   - configuration: The configuration settings used to customize this authentication flow.
     public convenience init(issuer: URL,
                             clientId: String,
                             scopes: String,
-                            supportedGrants grantTypes: [GrantType] = .directAuth)
+                            configuration: Configuration = .init())
     {
-        self.init(supportedGrants: grantTypes,
+        self.init(configuration: configuration,
                   client: .init(baseURL: issuer,
                                 clientId: clientId,
                                 scopes: scopes))
@@ -298,16 +324,16 @@ public class DirectAuthenticationFlow: AuthenticationFlow {
     
     /// Initializer to construct an authentication flow from a pre-defined configuration and client.
     /// - Parameters:
-    ///   - configuration: The configuration to use for this authentication flow.
+    ///   - configuration: The configuration settings used to customize this authentication flow.
     ///   - client: The `OAuth2Client` to use with this flow.
-    public init(supportedGrants grantTypes: [GrantType] = .directAuth,
+    public init(configuration: Configuration = .init(),
                 client: OAuth2Client)
     {
         // Ensure this SDK's static version is included in the user agent.
         SDKVersion.register(sdk: Version)
         
         self.client = client
-        self.supportedGrantTypes = grantTypes
+        self.configuration = configuration
         
         client.add(delegate: self)
     }
@@ -331,10 +357,20 @@ public class DirectAuthenticationFlow: AuthenticationFlow {
             supportedGrantTypes = .directAuth
         }
         
+        let supportedAcrValues: [String]?
+        if let acrValues = config.additionalParameters?["acrValues"] as? String {
+            supportedAcrValues = acrValues.components(separatedBy: " ")
+        } else if let acrValues = config.additionalParameters?["acrValues"] as? [String] {
+            supportedAcrValues = acrValues
+        } else {
+            supportedAcrValues = nil
+        }
+        
         self.init(issuer: config.issuer,
                   clientId: config.clientId,
                   scopes: config.scopes,
-                  supportedGrants: supportedGrantTypes)
+                  configuration: .init(acrValues: supportedAcrValues,
+                                       grantTypesSupported: supportedGrantTypes))
     }
     
     var stepHandler: (any StepHandler)?
@@ -492,7 +528,7 @@ extension OAuth2Client {
     /// - Returns: Initialized authentication flow.
     public func directAuthenticationFlow(supportedGrants grantTypes: [GrantType] = .directAuth) -> DirectAuthenticationFlow
     {
-        DirectAuthenticationFlow(supportedGrants: grantTypes,
+        DirectAuthenticationFlow(configuration: .init(grantTypesSupported: grantTypes),
                                  client: self)
     }
 }

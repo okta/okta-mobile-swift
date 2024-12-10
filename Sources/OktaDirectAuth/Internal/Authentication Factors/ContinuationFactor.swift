@@ -48,7 +48,7 @@ extension DirectAuthenticationFlow.ContinuationFactor: AuthenticationFactor {
                                        factor: factor,
                                        intent: flow.intent,
                                        parameters: bindingContext.oobResponse,
-                                       grantTypesSupported: flow.supportedGrantTypes)
+                                       authenticationFlowConfiguration: flow.configuration)
             return TokenStepHandler(flow: flow, request: request)
 
         case .webAuthn(response: let response):
@@ -59,7 +59,7 @@ extension DirectAuthenticationFlow.ContinuationFactor: AuthenticationFactor {
                                        factor: factor,
                                        intent: flow.intent,
                                        parameters: response,
-                                       grantTypesSupported: flow.supportedGrantTypes)
+                                       authenticationFlowConfiguration: flow.configuration)
             return TokenStepHandler(flow: flow, request: request)
         }
     }

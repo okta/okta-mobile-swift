@@ -65,7 +65,7 @@ final class FactorStepHandlerTests: XCTestCase {
             XCTAssertNil(request.loginHint)
         }
         
-        XCTAssertEqual(request.grantTypesSupported, flow.supportedGrantTypes)
+        XCTAssertEqual(request.authenticationFlowConfiguration as? DirectAuthenticationFlow.Configuration, flow.configuration)
         XCTAssertEqual(request.bodyParameters?.stringComponents, bodyParams)
     }
     

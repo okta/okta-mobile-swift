@@ -41,6 +41,38 @@ public protocol AuthenticationFlow: AnyObject, UsesDelegateCollection {
     var delegateCollection: DelegateCollection<Delegate> { get }
 }
 
+/// Optional configuration settings that can be used to customize an authentication flow.
+public protocol AuthenticationFlowConfiguration: Equatable, ProvidesOAuth2Parameters {
+    /// The "nonce" value to send with this authorization request.
+    var nonce: String? { get }
+    
+    /// The maximum age an ID token can be when authenticating.
+    var maxAge: TimeInterval? { get }
+
+    /// The ACR values, if any, which should be requested by the client.
+    var acrValues: [String]? { get }
+}
+
+extension AuthenticationFlowConfiguration {
+    public var additionalParameters: [String: any APIRequestArgument]? {
+        var result = [String: any APIRequestArgument]()
+        
+        if let nonce = nonce {
+            result["nonce"] = nonce
+        }
+        
+        if let maxAge = maxAge {
+            result["max_age"] = Int(maxAge).stringValue
+        }
+
+        if let acrValues = acrValues {
+            result["acr_values"] = acrValues.joined(separator: " ")
+        }
+        
+        return result
+    }
+
+}
 /// Errors that may be generated during the process of authenticating with a variety of authentication flows.
 public enum AuthenticationError: Error {
     case flowNotReady

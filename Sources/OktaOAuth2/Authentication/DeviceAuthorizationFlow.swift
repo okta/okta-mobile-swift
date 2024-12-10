@@ -325,7 +325,8 @@ extension DeviceAuthorizationFlow {
             case .success(let configuration):
                 let request = TokenRequest(openIdConfiguration: configuration,
                                            clientId: self.client.configuration.clientId,
-                                           deviceCode: context.deviceCode)
+                                           deviceCode: context.deviceCode,
+                                           authenticationFlowConfiguration: nil)
                 self.client.exchange(token: request) { result in
                     switch result {
                     case .failure(let error):

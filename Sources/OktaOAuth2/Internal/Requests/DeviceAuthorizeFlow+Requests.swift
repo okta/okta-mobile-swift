@@ -18,6 +18,7 @@ extension DeviceAuthorizationFlow {
         let openIdConfiguration: OpenIdConfiguration
         let clientId: String
         let deviceCode: String
+        let authenticationFlowConfiguration: (any AuthFoundation.AuthenticationFlowConfiguration)?
     }
     
     struct AuthorizeRequest {
@@ -47,7 +48,7 @@ extension DeviceAuthorizationFlow.TokenRequest: OAuth2TokenRequest, OAuth2APIReq
             "client_id": clientId,
             "device_code": deviceCode,
             "grant_type": GrantType.deviceCode,
-        ]
+        ].merging(authenticationFlowConfiguration)
     }
     
     var codingUserInfo: [CodingUserInfoKey: Any]? {

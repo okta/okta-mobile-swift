@@ -23,6 +23,7 @@ extension AuthorizationCodeFlow {
         let pkce: PKCE?
         let nonce: String?
         let maxAge: TimeInterval?
+        let authenticationFlowConfiguration: (any AuthFoundation.AuthenticationFlowConfiguration)?
     }
 }
 
@@ -48,6 +49,8 @@ extension AuthorizationCodeFlow.TokenRequest: APIRequestBody {
         if let additional = clientConfiguration.authentication.additionalParameters {
             result.merge(additional, uniquingKeysWith: { $1 })
         }
+        
+        result.merge(authenticationFlowConfiguration)
 
         return result
     }

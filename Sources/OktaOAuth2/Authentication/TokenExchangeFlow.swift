@@ -124,7 +124,8 @@ public class TokenExchangeFlow: AuthenticationFlow {
                                            clientId: self.client.configuration.clientId,
                                            tokens: tokens,
                                            scope: self.client.configuration.scopes,
-                                           audience: self.audience.value)
+                                           audience: self.audience.value,
+                                           authenticationFlowConfiguration: nil)
                 self.client.exchange(token: request) { result in
                     switch result {
                     case .failure(let error):

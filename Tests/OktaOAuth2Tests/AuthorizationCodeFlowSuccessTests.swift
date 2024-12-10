@@ -231,7 +231,8 @@ final class AuthorizationCodeFlowSuccessTests: XCTestCase {
                         grantValue: "abcd123",
                         pkce: pkce,
                         nonce: "nonce_str",
-                        maxAge: 60)
+                        maxAge: 60,
+                        authenticationFlowConfiguration: nil)
         XCTAssertEqual(request.bodyParameters?.stringComponents,
                        [
                         "client_id": "theClientId",
@@ -252,7 +253,8 @@ final class AuthorizationCodeFlowSuccessTests: XCTestCase {
                         grantValue: "abcd123",
                         pkce: pkce,
                         nonce: "nonce_str",
-                        maxAge: 60)
+                        maxAge: 60,
+                        authenticationFlowConfiguration: nil)
         XCTAssertEqual(request.bodyParameters?.stringComponents,
                        [
                         "client_id": "theClientId",

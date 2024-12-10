@@ -21,6 +21,9 @@ public protocol OAuth2TokenRequest: APIRequest, APIRequestBody where ResponseTyp
     
     /// The client's Open ID Configuration object defining the settings and endpoints used to interact with this Authorization Server.
     var openIdConfiguration: OpenIdConfiguration { get }
+    
+    /// The flow's configuration settings used to customize the token request.
+    var authenticationFlowConfiguration: (any AuthenticationFlowConfiguration)? { get }
 }
 
 extension OAuth2TokenRequest {

@@ -69,6 +69,7 @@ extension TokenExchangeFlow {
         let scope: String
         let audience: String
         let grantType = GrantType.tokenExchange
+        let authenticationFlowConfiguration: (any AuthFoundation.AuthenticationFlowConfiguration)?
     }
 }
 
@@ -78,18 +79,20 @@ extension TokenExchangeFlow.TokenRequest: OAuth2TokenRequest, OAuth2APIRequest, 
     var contentType: APIContentType? { .formEncoded }
     var acceptsType: APIContentType? { .json }
     var bodyParameters: [String: APIRequestArgument]? {
-        let tokensDict = tokens.map { token in
-            [
-                token.key: token.value,
-                token.keyType: token.urn
-            ]
-        }.flatMap { $0 }
-        
-        return [
+        var result: [String: APIRequestArgument] = [
             "client_id": clientId,
             "grant_type": grantType.rawValue,
             "scope": scope,
             "audience": audience
-        ].merging(tokensDict) { _, new in new }
+        ]
+        
+        result.merge(authenticationFlowConfiguration)
+        
+        for token in tokens {
+            result[token.key] = token.value
+            result[token.keyType] = token.urn
+        }
+        
+        return result
     }
 }

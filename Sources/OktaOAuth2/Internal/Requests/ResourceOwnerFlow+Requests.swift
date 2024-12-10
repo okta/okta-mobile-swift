@@ -20,6 +20,7 @@ extension ResourceOwnerFlow {
         let scope: String
         let username: String
         let password: String
+        let authenticationFlowConfiguration: (any AuthFoundation.AuthenticationFlowConfiguration)?
     }
 }
 
@@ -31,7 +32,7 @@ extension ResourceOwnerFlow.TokenRequest: OAuth2TokenRequest, OAuth2APIRequest, 
             "grant_type": GrantType.password,
             "username": username,
             "password": password
-        ]
+        ].merging(authenticationFlowConfiguration)
     }
     
     var codingUserInfo: [CodingUserInfoKey: Any]? {

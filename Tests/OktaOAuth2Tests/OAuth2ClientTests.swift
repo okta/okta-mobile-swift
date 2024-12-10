@@ -44,7 +44,8 @@ final class OAuth2ClientTests: XCTestCase {
                                                          grantValue: "abc123",
                                                          pkce: pkce,
                                                          nonce: nil,
-                                                         maxAge: nil)
+                                                         maxAge: nil,
+                                                         authenticationFlowConfiguration: nil)
 
         urlSession.expect("https://example.com/oauth2/default/.well-known/openid-configuration",
                           data: openIdData,
@@ -94,7 +95,8 @@ final class OAuth2ClientTests: XCTestCase {
                                                          grantValue: "abc123",
                                                          pkce: pkce,
                                                          nonce: nil,
-                                                         maxAge: nil)
+                                                         maxAge: nil,
+                                                         authenticationFlowConfiguration: nil)
 
         urlSession.expect("https://example.com/oauth2/default/.well-known/openid-configuration",
                           data: openIdData,

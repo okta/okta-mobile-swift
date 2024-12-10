@@ -34,13 +34,33 @@ final class RequestTests: XCTestCase {
                                                        scopes: "openid profile"),
                         currentStatus: nil,
                         factor: DirectAuthenticationFlow.PrimaryFactor.password("password123"),
-                        intent: .signIn)
+                        intent: .signIn,
+                        authenticationFlowConfiguration: nil)
         XCTAssertEqual(request.bodyParameters?.stringComponents,
                        [
                         "client_id": "theClientId",
                         "scope": "openid profile",
                         "grant_type": "password",
                         "password": "password123"
+                       ])
+
+        // No authentication, ACR Values
+        request = .init(openIdConfiguration: openIdConfiguration,
+                        clientConfiguration: try .init(domain: "example.com",
+                                                       clientId: "theClientId",
+                                                       scopes: "openid profile"),
+                        currentStatus: nil,
+                        factor: DirectAuthenticationFlow.PrimaryFactor.password("password123"),
+                        intent: .signIn,
+                        authenticationFlowConfiguration: DirectAuthenticationFlow.Configuration(acrValues: ["urn:foo:bar", "urn:baz:boo"]))
+        XCTAssertEqual(request.bodyParameters?.stringComponents,
+                       [
+                        "client_id": "theClientId",
+                        "scope": "openid profile",
+                        "grant_type": "password",
+                        "password": "password123",
+                        "acr_values": "urn:foo:bar urn:baz:boo",
+                        "grant_types_supported": "password urn:okta:params:oauth:grant-type:oob urn:okta:params:oauth:grant-type:otp http://auth0.com/oauth/grant-type/mfa-oob http://auth0.com/oauth/grant-type/mfa-otp urn:okta:params:oauth:grant-type:webauthn urn:okta:params:oauth:grant-type:mfa-webauthn",
                        ])
 
         // Client Secret authentication, sign-in intent
@@ -51,7 +71,8 @@ final class RequestTests: XCTestCase {
                                                        authentication: .clientSecret("supersecret")),
                         currentStatus: nil,
                         factor: DirectAuthenticationFlow.PrimaryFactor.password("password123"),
-                        intent: .signIn)
+                        intent: .signIn,
+                        authenticationFlowConfiguration: nil)
         XCTAssertEqual(request.bodyParameters?.stringComponents,
                        [
                         "client_id": "theClientId",
@@ -68,7 +89,8 @@ final class RequestTests: XCTestCase {
                                                        scopes: "openid profile"),
                         currentStatus: nil,
                         factor: DirectAuthenticationFlow.PrimaryFactor.otp(code: "123456"),
-                        intent: .recovery)
+                        intent: .recovery,
+                        authenticationFlowConfiguration: nil)
         XCTAssertEqual(request.bodyParameters?.stringComponents,
                        [
                         "client_id": "theClientId",

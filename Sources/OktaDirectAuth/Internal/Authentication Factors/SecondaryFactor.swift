@@ -28,7 +28,7 @@ extension DirectAuthenticationFlow.SecondaryFactor: AuthenticationFactor {
                                        loginHint: loginHint,
                                        factor: factor,
                                        intent: flow.intent,
-                                       grantTypesSupported: flow.supportedGrantTypes)
+                                       authenticationFlowConfiguration: flow.configuration)
             return TokenStepHandler(flow: flow, request: request)
         case .oob(channel: let channel):
             return try OOBStepHandler(flow: flow,

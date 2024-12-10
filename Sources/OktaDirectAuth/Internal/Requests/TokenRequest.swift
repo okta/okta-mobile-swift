@@ -21,7 +21,7 @@ struct TokenRequest {
     let factor: any AuthenticationFactor
     let intent: DirectAuthenticationFlow.Intent
     let parameters: (any HasTokenParameters)?
-    let grantTypesSupported: [GrantType]?
+    let authenticationFlowConfiguration: (any AuthenticationFlowConfiguration)?
     
     init(openIdConfiguration: OpenIdConfiguration,
          clientConfiguration: OAuth2Client.Configuration,
@@ -30,7 +30,7 @@ struct TokenRequest {
          factor: any AuthenticationFactor,
          intent: DirectAuthenticationFlow.Intent,
          parameters: (any HasTokenParameters)? = nil,
-         grantTypesSupported: [GrantType]? = nil)
+         authenticationFlowConfiguration: (any AuthenticationFlowConfiguration)? = nil)
     {
         self.openIdConfiguration = openIdConfiguration
         self.clientConfiguration = clientConfiguration
@@ -39,7 +39,7 @@ struct TokenRequest {
         self.factor = factor
         self.intent = intent
         self.parameters = parameters
-        self.grantTypesSupported = grantTypesSupported
+        self.authenticationFlowConfiguration = authenticationFlowConfiguration
     }
 }
 
@@ -51,6 +51,7 @@ extension TokenRequest: OAuth2TokenRequest, OAuth2APIRequest, APIRequestBody {
         result["scope"] = clientConfiguration.scopes
         
         result.merge(parameters?.tokenParameters(currentStatus: currentStatus))
+        result.merge(authenticationFlowConfiguration)
         
         if let loginHint = loginHint {
             let key: String
@@ -60,10 +61,6 @@ extension TokenRequest: OAuth2TokenRequest, OAuth2APIRequest, APIRequestBody {
                 key = "login_hint"
             }
             result[key] = loginHint
-        }
-        
-        if let grantTypesSupported = grantTypesSupported?.map(\.rawValue) {
-            result["grant_types_supported"] = grantTypesSupported.joined(separator: " ")
         }
         
         result.merge(clientConfiguration.authentication)

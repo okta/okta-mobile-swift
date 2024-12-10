@@ -125,6 +125,10 @@ extension Token.IntrospectRequest: OAuth2APIRequest, APIRequestBody {
 }
 
 extension Token.RefreshRequest: OAuth2APIRequest, APIRequestBody, APIParsingContext, OAuth2TokenRequest {
+    var authenticationFlowConfiguration: (any AuthenticationFlowConfiguration)? {
+        nil
+    }
+    
     typealias ResponseType = Token
 
     var httpMethod: APIRequestMethod { .post }

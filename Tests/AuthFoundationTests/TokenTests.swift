@@ -15,6 +15,7 @@ import XCTest
 @testable import TestCommon
 
 fileprivate struct MockTokenRequest: OAuth2TokenRequest {
+    let authenticationFlowConfiguration: (any AuthFoundation.AuthenticationFlowConfiguration)? = nil
     let openIdConfiguration: AuthFoundation.OpenIdConfiguration
     let clientId: String
     let url: URL
