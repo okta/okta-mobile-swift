@@ -24,11 +24,11 @@ extension DirectAuthenticationFlow.SecondaryFactor: AuthenticationFactor {
         case .otp:
             let request = TokenRequest(openIdConfiguration: openIdConfiguration,
                                        clientConfiguration: flow.client.configuration,
+                                       authenticationFlowConfiguration: flow.configuration,
                                        currentStatus: currentStatus,
                                        loginHint: loginHint,
                                        factor: factor,
-                                       intent: flow.intent,
-                                       authenticationFlowConfiguration: flow.configuration)
+                                       intent: flow.intent)
             return TokenStepHandler(flow: flow, request: request)
         case .oob(channel: let channel):
             return try OOBStepHandler(flow: flow,
@@ -41,6 +41,7 @@ extension DirectAuthenticationFlow.SecondaryFactor: AuthenticationFactor {
             let mfaContext = currentStatus?.mfaContext
             let request = try WebAuthnChallengeRequest(openIdConfiguration: openIdConfiguration,
                                                        clientConfiguration: flow.client.configuration,
+                                                       authenticationFlowConfiguration: flow.configuration,
                                                        loginHint: loginHint,
                                                        mfaToken: mfaContext?.mfaToken)
             return ChallengeStepHandler(flow: flow, request: request) {

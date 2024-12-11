@@ -32,10 +32,10 @@ final class RequestTests: XCTestCase {
                         clientConfiguration: try .init(domain: "example.com",
                                                        clientId: "theClientId",
                                                        scopes: "openid profile"),
+                        authenticationFlowConfiguration: nil,
                         currentStatus: nil,
                         factor: DirectAuthenticationFlow.PrimaryFactor.password("password123"),
-                        intent: .signIn,
-                        authenticationFlowConfiguration: nil)
+                        intent: .signIn)
         XCTAssertEqual(request.bodyParameters?.stringComponents,
                        [
                         "client_id": "theClientId",
@@ -49,10 +49,10 @@ final class RequestTests: XCTestCase {
                         clientConfiguration: try .init(domain: "example.com",
                                                        clientId: "theClientId",
                                                        scopes: "openid profile"),
+                        authenticationFlowConfiguration: DirectAuthenticationFlow.Configuration(acrValues: ["urn:foo:bar", "urn:baz:boo"]),
                         currentStatus: nil,
                         factor: DirectAuthenticationFlow.PrimaryFactor.password("password123"),
-                        intent: .signIn,
-                        authenticationFlowConfiguration: DirectAuthenticationFlow.Configuration(acrValues: ["urn:foo:bar", "urn:baz:boo"]))
+                        intent: .signIn)
         XCTAssertEqual(request.bodyParameters?.stringComponents,
                        [
                         "client_id": "theClientId",
@@ -69,10 +69,10 @@ final class RequestTests: XCTestCase {
                                                        clientId: "theClientId",
                                                        scopes: "openid profile",
                                                        authentication: .clientSecret("supersecret")),
+                        authenticationFlowConfiguration: nil,
                         currentStatus: nil,
                         factor: DirectAuthenticationFlow.PrimaryFactor.password("password123"),
-                        intent: .signIn,
-                        authenticationFlowConfiguration: nil)
+                        intent: .signIn)
         XCTAssertEqual(request.bodyParameters?.stringComponents,
                        [
                         "client_id": "theClientId",
@@ -87,10 +87,10 @@ final class RequestTests: XCTestCase {
                         clientConfiguration: try .init(domain: "example.com",
                                                        clientId: "theClientId",
                                                        scopes: "openid profile"),
+                        authenticationFlowConfiguration: nil,
                         currentStatus: nil,
                         factor: DirectAuthenticationFlow.PrimaryFactor.otp(code: "123456"),
-                        intent: .recovery,
-                        authenticationFlowConfiguration: nil)
+                        intent: .recovery)
         XCTAssertEqual(request.bodyParameters?.stringComponents,
                        [
                         "client_id": "theClientId",
@@ -109,6 +109,7 @@ final class RequestTests: XCTestCase {
                             clientConfiguration: try .init(domain: "example.com",
                                                            clientId: "theClientId",
                                                            scopes: "openid profile"),
+                            authenticationFlowConfiguration: nil,
                             loginHint: "user@example.com",
                             channelHint: .push,
                             challengeHint: .oob)
@@ -126,6 +127,7 @@ final class RequestTests: XCTestCase {
                                                            clientId: "theClientId",
                                                            scopes: "openid profile",
                                                            authentication: .clientSecret("supersecret")),
+                            authenticationFlowConfiguration: nil,
                             loginHint: "user@example.com",
                             channelHint: .push,
                             challengeHint: .oob)
@@ -147,6 +149,7 @@ final class RequestTests: XCTestCase {
                             clientConfiguration: try .init(domain: "example.com",
                                                            clientId: "theClientId",
                                                            scopes: "openid profile"),
+                            authenticationFlowConfiguration: nil,
                             mfaToken: "abcd123",
                             challengeTypesSupported: [.password, .oob])
         XCTAssertEqual(request.bodyParameters?.stringComponents,
@@ -162,6 +165,7 @@ final class RequestTests: XCTestCase {
                                                            clientId: "theClientId",
                                                            scopes: "openid profile",
                                                            authentication: .clientSecret("supersecret")),
+                            authenticationFlowConfiguration: nil,
                             mfaToken: "abcd123",
                             challengeTypesSupported: [.password, .oob])
         XCTAssertEqual(request.bodyParameters?.stringComponents,

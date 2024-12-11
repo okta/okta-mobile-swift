@@ -100,6 +100,7 @@ class OOBStepHandler<Factor: AuthenticationFactor>: StepHandler {
         do {
             let request = try OOBAuthenticateRequest(openIdConfiguration: openIdConfiguration,
                                                      clientConfiguration: flow.client.configuration,
+                                                     authenticationFlowConfiguration: flow.configuration,
                                                      loginHint: loginHint,
                                                      channelHint: channel,
                                                      challengeHint: factor.grantType(currentStatus: currentStatus))
@@ -123,6 +124,7 @@ class OOBStepHandler<Factor: AuthenticationFactor>: StepHandler {
             let grantType = factor.grantType(currentStatus: currentStatus)
             let request = try ChallengeRequest(openIdConfiguration: openIdConfiguration,
                                                clientConfiguration: flow.client.configuration,
+                                               authenticationFlowConfiguration: flow.configuration,
                                                mfaToken: mfaToken,
                                                challengeTypesSupported: [grantType])
             request.send(to: flow.client) { result in
@@ -150,11 +152,11 @@ class OOBStepHandler<Factor: AuthenticationFactor>: StepHandler {
         
         let request = TokenRequest(openIdConfiguration: openIdConfiguration,
                                    clientConfiguration: flow.client.configuration,
+                                   authenticationFlowConfiguration: flow.configuration,
                                    currentStatus: currentStatus,
                                    factor: factor,
                                    intent: flow.intent,
-                                   parameters: response,
-                                   authenticationFlowConfiguration: flow.configuration)
+                                   parameters: response)
         self.poll = PollingHandler(client: flow.client,
                                    request: request,
                                    expiresIn: response.expiresIn,

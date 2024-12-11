@@ -44,22 +44,22 @@ extension DirectAuthenticationFlow.ContinuationFactor: AuthenticationFactor {
 
             let request = TokenRequest(openIdConfiguration: openIdConfiguration,
                                        clientConfiguration: flow.client.configuration,
+                                       authenticationFlowConfiguration: flow.configuration,
                                        currentStatus: currentStatus,
                                        factor: factor,
                                        intent: flow.intent,
-                                       parameters: bindingContext.oobResponse,
-                                       authenticationFlowConfiguration: flow.configuration)
+                                       parameters: bindingContext.oobResponse)
             return TokenStepHandler(flow: flow, request: request)
 
         case .webAuthn(response: let response):
             let request = TokenRequest(openIdConfiguration: openIdConfiguration,
                                        clientConfiguration: flow.client.configuration,
+                                       authenticationFlowConfiguration: flow.configuration,
                                        currentStatus: currentStatus,
                                        loginHint: loginHint,
                                        factor: factor,
                                        intent: flow.intent,
-                                       parameters: response,
-                                       authenticationFlowConfiguration: flow.configuration)
+                                       parameters: response)
             return TokenStepHandler(flow: flow, request: request)
         }
     }
