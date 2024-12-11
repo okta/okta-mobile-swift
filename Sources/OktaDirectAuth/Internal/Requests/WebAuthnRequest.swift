@@ -16,11 +16,13 @@ import AuthFoundation
 struct WebAuthnChallengeRequest {
     let url: URL
     let clientConfiguration: OAuth2Client.Configuration
+    let authenticationFlowConfiguration: (any AuthenticationFlowConfiguration)?
     let loginHint: String?
     let mfaToken: String?
 
     init(openIdConfiguration: OpenIdConfiguration,
          clientConfiguration: OAuth2Client.Configuration,
+         authenticationFlowConfiguration: (any AuthenticationFlowConfiguration)?,
          loginHint: String? = nil,
          mfaToken: String? = nil) throws
     {
@@ -30,6 +32,7 @@ struct WebAuthnChallengeRequest {
         
         self.url = url
         self.clientConfiguration = clientConfiguration
+        self.authenticationFlowConfiguration = authenticationFlowConfiguration
         self.loginHint = loginHint
         self.mfaToken = mfaToken
     }
@@ -56,6 +59,7 @@ extension WebAuthnChallengeRequest: APIRequest, APIRequestBody {
         }
         
         result.merge(clientConfiguration.authentication)
+        result.merge(authenticationFlowConfiguration)
 
         return result
     }

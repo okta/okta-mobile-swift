@@ -22,11 +22,13 @@ extension OpenIdConfiguration {
 struct ChallengeRequest {
     let url: URL
     let clientConfiguration: OAuth2Client.Configuration
+    let authenticationFlowConfiguration: (any AuthenticationFlowConfiguration)?
     let mfaToken: String
     let challengeTypesSupported: [GrantType]
     
     init(openIdConfiguration: OpenIdConfiguration,
          clientConfiguration: OAuth2Client.Configuration,
+         authenticationFlowConfiguration: (any AuthenticationFlowConfiguration)?,
          mfaToken: String,
          challengeTypesSupported: [GrantType]) throws
     {
@@ -36,6 +38,7 @@ struct ChallengeRequest {
         
         self.url = url
         self.clientConfiguration = clientConfiguration
+        self.authenticationFlowConfiguration = authenticationFlowConfiguration
         self.mfaToken = mfaToken
         self.challengeTypesSupported = challengeTypesSupported
     }
@@ -85,6 +88,7 @@ extension ChallengeRequest: APIRequest, APIRequestBody {
         ]
         
         result.merge(clientConfiguration.authentication)
+        result.merge(authenticationFlowConfiguration)
 
         return result
     }

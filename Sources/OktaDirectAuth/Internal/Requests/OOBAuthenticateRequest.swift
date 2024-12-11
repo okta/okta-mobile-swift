@@ -44,12 +44,14 @@ struct OOBResponse: Codable, HasTokenParameters {
 struct OOBAuthenticateRequest {
     let url: URL
     let clientConfiguration: OAuth2Client.Configuration
+    let authenticationFlowConfiguration: (any AuthenticationFlowConfiguration)?
     let loginHint: String
     let channelHint: DirectAuthenticationFlow.OOBChannel
     let challengeHint: GrantType
     
     init(openIdConfiguration: OpenIdConfiguration,
          clientConfiguration: OAuth2Client.Configuration,
+         authenticationFlowConfiguration: (any AuthenticationFlowConfiguration)?,
          loginHint: String,
          channelHint: DirectAuthenticationFlow.OOBChannel,
          challengeHint: GrantType) throws
@@ -60,6 +62,7 @@ struct OOBAuthenticateRequest {
         
         self.url = url
         self.clientConfiguration = clientConfiguration
+        self.authenticationFlowConfiguration = authenticationFlowConfiguration
         self.loginHint = loginHint
         self.channelHint = channelHint
         self.challengeHint = challengeHint
@@ -87,6 +90,7 @@ extension OOBAuthenticateRequest: APIRequest, APIRequestBody {
         ]
         
         result.merge(clientConfiguration.authentication)
+        result.merge(authenticationFlowConfiguration)
 
         return result
     }

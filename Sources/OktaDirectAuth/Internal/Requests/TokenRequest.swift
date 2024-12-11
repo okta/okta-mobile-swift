@@ -16,30 +16,30 @@ import AuthFoundation
 struct TokenRequest {
     let openIdConfiguration: OpenIdConfiguration
     let clientConfiguration: OAuth2Client.Configuration
+    let authenticationFlowConfiguration: (any AuthenticationFlowConfiguration)?
     let currentStatus: DirectAuthenticationFlow.Status?
     let loginHint: String?
     let factor: any AuthenticationFactor
     let intent: DirectAuthenticationFlow.Intent
     let parameters: (any HasTokenParameters)?
-    let authenticationFlowConfiguration: (any AuthenticationFlowConfiguration)?
     
     init(openIdConfiguration: OpenIdConfiguration,
          clientConfiguration: OAuth2Client.Configuration,
+         authenticationFlowConfiguration: (any AuthenticationFlowConfiguration)?,
          currentStatus: DirectAuthenticationFlow.Status?,
          loginHint: String? = nil,
          factor: any AuthenticationFactor,
          intent: DirectAuthenticationFlow.Intent,
-         parameters: (any HasTokenParameters)? = nil,
-         authenticationFlowConfiguration: (any AuthenticationFlowConfiguration)? = nil)
+         parameters: (any HasTokenParameters)? = nil)
     {
         self.openIdConfiguration = openIdConfiguration
         self.clientConfiguration = clientConfiguration
+        self.authenticationFlowConfiguration = authenticationFlowConfiguration
         self.currentStatus = currentStatus
         self.loginHint = loginHint
         self.factor = factor
         self.intent = intent
         self.parameters = parameters
-        self.authenticationFlowConfiguration = authenticationFlowConfiguration
     }
 }
 
