@@ -77,7 +77,7 @@ public class DebugAPIRequestObserver: OAuth2ClientDelegate {
     
     public func api<T>(client: any APIClient,
                        didSend request: URLRequest,
-                       received response: APIResponse<T>) where T : Decodable
+                       received response: APIResponse<T>) where T: Decodable
     {
         var result = ""
         dump(response.result, to: &result)
