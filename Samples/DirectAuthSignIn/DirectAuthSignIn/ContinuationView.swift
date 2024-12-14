@@ -11,7 +11,7 @@
 //
 
 import SwiftUI
-import OktaDirectAuth
+@testable import OktaDirectAuth
 
 extension SignInView {
     struct ContinuationView: View {
@@ -30,40 +30,41 @@ extension SignInView {
             }
         }
         
+        var continuationType: DirectAuthenticationFlow.ContinuationType? {
+            guard case let .continuation(continuationType) = status else {
+                return nil
+            }
+            
+            return continuationType
+        }
+        
         @Binding var error: Error?
         @Binding var hasError: Bool
         
         var body: some View {
-            VStack {
-                Text("Please continue authenticating.")
-                    .padding(25)
-                
-                VStack(alignment: .leading, spacing: 1) {
-                    Picker(selection: $selectedFactor, label: EmptyView()) {
-                        ForEach(SignInView.Factor.continuationFactors, id: \.self) {
-                            Text($0.title)
-                        }
-                    }.pickerStyle(.menu)
-                        .accessibilityIdentifier("factor_type_button")
-                        .padding(.horizontal, -10)
-                        .padding(.vertical, -4)
-                    
-                    if selectedFactor == .code {
-                        TextField("123456", text: $verificationCode)
-                            .textContentType(.oneTimeCode)
-                            .accessibilityIdentifier("verification_code_button")
-                            .padding(10)
-                            .overlay {
-                                RoundedRectangle(cornerRadius: 6)
-                                    .stroke(.secondary, lineWidth: 1)
-                            }
+            switch continuationType {
+            case .webAuthn(_):
+                Text("Ignoring WebAuthn type")
+                    .padding()
+            case .transfer(_, let code):
+                VStack(alignment: .center, spacing: 8) {
+                    Text("Use the verification code")
+                        .font(.headline)
+                        .multilineTextAlignment(.center)
+                    if #available(iOS 16.0, *) {
+                        Text(code)
+                            .font(.system(.largeTitle, design: .monospaced, weight: .black))
+                            .multilineTextAlignment(.center)
+                    } else {
+                        Text(code)
+                            .font(.largeTitle)
+                            .multilineTextAlignment(.center)
                     }
-                    
-                    if let factor = factor {
-                        Button("Continue") {
+                    ProgressView()
+                        .onAppear {
                             Task {
                                 do {
-                                    status = try await flow.resume(status, with: factor)
+                                    status = try await flow.resume(status, with: .transfer)
                                     if case let .success(token) = status {
                                         Credential.default = try Credential.store(token)
                                     }
@@ -73,12 +74,71 @@ extension SignInView {
                                 }
                             }
                         }
-                        .accessibilityIdentifier("signin_button")
+                }
+            case .prompt(_):
+                VStack(alignment: .leading, spacing: 8) {
+                    Text("Verification code:")
                         .font(.headline)
-                        .buttonStyle(.borderedProminent)
+                        .multilineTextAlignment(.center)
+                    TextField("123456", text: $verificationCode)
+                        .textContentType(.oneTimeCode)
+                        .accessibilityIdentifier("verification_code_button")
+                        .padding(10)
+                        .overlay {
+                            RoundedRectangle(cornerRadius: 6)
+                                .stroke(.secondary, lineWidth: 1)
+                        }
+                    
+                    Button("Continue") {
+                        Task {
+                            do {
+                                status = try await flow.resume(status, with: .prompt(code: verificationCode))
+                                if case let .success(token) = status {
+                                    Credential.default = try Credential.store(token)
+                                }
+                            } catch {
+                                self.error = error
+                                self.hasError = true
+                            }
+                        }
                     }
+                    .accessibilityIdentifier("signin_button")
+                    .font(.headline)
+                    .buttonStyle(.borderedProminent)
                 }.padding()
+            case nil:
+                Text("Invalid status type")
+                    .padding()
             }
         }
     }
+}
+
+extension DirectAuthenticationFlow.ContinuationType {
+    static let previewTransfer: Self = .transfer(
+        .init(oobResponse: .init(oobCode: "OOBCODE", expiresIn: 600, interval: 10, channel: .push, bindingMethod: .transfer), mfaContext: nil),
+        code: "73")
+    static let previewPrompt: Self = .prompt(.init(oobResponse: .init(oobCode: "OOBCODE", expiresIn: 600, interval: 10, channel: .push, bindingMethod: .transfer), mfaContext: nil))
+}
+
+#Preview {
+    struct Preview: View {
+        var flow = DirectAuthenticationFlow(
+            issuer: URL(string: "https://example.com/")!,
+            clientId: "clientid",
+            scopes: "scopes")
+        @State var error: Error?
+        @State var hasError: Bool = false
+        @State var continuationType: DirectAuthenticationFlow.ContinuationType = .previewPrompt
+        
+        var body: some View {
+            SignInView.ContinuationView(
+                flow: flow,
+                status: .continuation(continuationType),
+                error: $error,
+                hasError: $hasError)
+        }
+    }
+
+    return Preview()
 }
