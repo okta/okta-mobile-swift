@@ -91,7 +91,7 @@ extension XCUIElementQuery {
     }
 }
 
-extension XCUIElementQuery: @retroactive Sequence {
+extension XCUIElementQuery: Sequence {
     public typealias Iterator = AnyIterator<XCUIElement>
     public func makeIterator() -> Iterator {
         var index = UInt(0)
