@@ -12,7 +12,7 @@
 
 import XCTest
 
-@testable import OktaOAuth2
+@testable import AuthFoundation
 
 final class PKCETests: XCTestCase {
     func testPKCE() throws {

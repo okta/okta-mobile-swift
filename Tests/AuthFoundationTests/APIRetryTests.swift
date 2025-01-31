@@ -48,7 +48,7 @@ class APIRetryTests: XCTestCase {
         client = MockApiClient(configuration: configuration,
                                session: urlSession,
                                baseURL: issuerURL)
-        apiRequest = MockApiRequest(url: issuerURL.appending(path: "/oauth2/v1/token"))
+        apiRequest = MockApiRequest(url: URL(string: "\(issuerURL.absoluteString)/oauth2/v1/token")!)
     }
 
     func testShouldNotRetry() throws {

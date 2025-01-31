@@ -310,11 +310,7 @@ public class DirectAuthenticationFlow: AuthenticationFlow {
     public let supportedGrantTypes: [GrantType]
 
     /// The context that stores the state for the current authentication session.
-    public internal(set) var context: Context? {
-        didSet {
-            print("Reset context")
-        }
-    }
+    public internal(set) var context: Context?
 
     /// Any additional query string parameters you would like to supply to the authorization server for all requests from this flow.
     public let additionalParameters: [String: APIRequestArgument]?

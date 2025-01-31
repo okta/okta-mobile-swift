@@ -199,15 +199,15 @@ public class WebAuthentication {
         provider = nil
     }
     
-    #if os(iOS) || os(visionOS)
+    #if os(iOS) || os(visionOS) || os(tvOS)
     /// Attempts to resume sign in when the app is launched from a redirect URI.
     ///
     /// This is a convenience method that can simplify apps that use a UISceneDelegate. Scene-based applications receive URLs when the `UIWindowSceneDelegate.scene(_:openURLContexts:)` method is called; the set of contexts can be supplied to this method, which will filter out only those URLs that match the URL scheme defined in the client configuration. If no matching URLs are found, the call is ignored.
     /// - Parameter URLContexts: Set of `UIOpenURLContext` objects from which to attempt to resume authentication.
-    @available(iOS 13.0, *)
+    @available(iOS 13.0, tvOS 13.0, macCatalyst 13.1, visionOS 1.0, *)
     public final func resume(with URLContexts: Set<UIOpenURLContext>) throws {
         try URLContexts
-            .filter { $0.url.scheme?.lowercased() == signInFlow.redirectUri.scheme?.lowercased() }
+            .filter { $0.url.scheme?.lowercased() == signInFlow.client.configuration.redirectUri?.scheme?.lowercased() }
             .map(\.url)
             .forEach(resume(with:))
     }

@@ -10,16 +10,16 @@
 // See the License for the specific language governing permissions and limitations under the License.
 //
 
-import Foundation
-import OSLog
-
 // **Note:** It would be preferable to use `Logger` for this, but this would mean setting the minimum OS version to iOS 14.
 //
 // Since this is a debug feature, It isn't worthwhile to update the minimum supported OS version for just this.
 //
 // If the minimum supported version of this SDK is to increase in the future, this class should be updated to use the modern Logger struct.
 
-#if DEBUG
+#if DEBUG && canImport(OSLog)
+import Foundation
+import OSLog
+
 /// Convenience class used for debugging SDK network operations.
 ///
 /// Developers can use this to assist in debugging interactions with the Client SDK, and any network operations that are performed on behalf of the user via this SDK.
