@@ -30,18 +30,11 @@ extension String {
     }
     
     @_documentation(visibility: internal)
-    public var camelCase: String {
-        let words = self.split(separator: "_")
-        return words.enumerated().map { offset, element in
-            offset == 0 ? element.lowercased() : element.capitalized
-        }.reduce("", +)
-    }
-    
-    @_documentation(visibility: internal)
     public var snakeCase: String {
-        let words = self.split(whereSeparator: { $0.isUppercase })
-        return words.enumerated().map { offset, element in
-            offset == 0 ? element.lowercased() : "_\(element.lowercased())"
-        }.reduce("", +)
+        // swiftlint:disable:next force_try
+        let regex = try! NSRegularExpression(pattern: "([a-z])([A-Z])")
+        let range = NSRange(location: 0, length: self.count)
+        let snakeCased = regex.stringByReplacingMatches(in: self, options: [], range: range, withTemplate: "$1_$2")
+        return snakeCased.lowercased()
     }
 }

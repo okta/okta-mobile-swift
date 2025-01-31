@@ -531,7 +531,7 @@ public final class OAuth2Client {
                 completion(.failure(.serverError(error)))
             case .success:
                 do {
-                    try response.result.validate(using: self, with: request as? IDTokenValidatorContext)
+                    try response.result.validate(using: self, with: request.tokenValidatorContext)
                 } catch {
                     completion(.failure(.validation(error: error)))
                     return

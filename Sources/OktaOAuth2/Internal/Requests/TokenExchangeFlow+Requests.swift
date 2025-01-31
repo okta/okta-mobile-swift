@@ -79,6 +79,7 @@ extension TokenExchangeFlow.TokenRequest: OAuth2TokenRequest, OAuth2APIRequest, 
     var contentType: APIContentType? { .formEncoded }
     var acceptsType: APIContentType? { .json }
     var category: OAuth2APIRequestCategory { .token }
+    var tokenValidatorContext: any IDTokenValidatorContext { NullIDTokenValidatorContext }
     var bodyParameters: [String: APIRequestArgument]? {
         var result = additionalParameters ?? [:]
         result.merge(clientConfiguration.parameters(for: category))

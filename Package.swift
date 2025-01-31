@@ -48,7 +48,10 @@ var package = Package(
                 path: "Tests/TestCommon"),
         .testTarget(name: "AuthFoundationTests",
                     dependencies: ["AuthFoundation", "TestCommon"],
-                    resources: [ .copy("MockResponses") ]),
+                    resources: [
+                        .copy("MockResponses"),
+                        .copy("ConfigResources"),
+                    ]),
         .testTarget(name: "OktaOAuth2Tests",
                     dependencies: ["OktaOAuth2", "TestCommon"],
                     resources: [ .copy("MockResponses") ]),

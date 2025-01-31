@@ -96,7 +96,7 @@ public final class Token: Codable, Equatable, Hashable, JSONClaimContainer, Expi
     /// - Parameters:
     ///   - client: Client to validate the token's claims against.
     ///   - context: Optional ``IDTokenValidatorContext`` to use when validating the token.
-    public func validate(using client: OAuth2Client, with context: IDTokenValidatorContext?) throws {
+    public func validate(using client: OAuth2Client, with context: IDTokenValidatorContext) throws {
         guard let idToken = idToken else {
             return
         }

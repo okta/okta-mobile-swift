@@ -27,6 +27,7 @@ extension JWTAuthorizationFlow {
 
 extension JWTAuthorizationFlow.TokenRequest: OAuth2TokenRequest, OAuth2APIRequest, APIRequestBody, APIParsingContext {
     var category: OAuth2APIRequestCategory { .token }
+    var tokenValidatorContext: any IDTokenValidatorContext { NullIDTokenValidatorContext }
     var bodyParameters: [String: APIRequestArgument]? {
         var result = additionalParameters ?? [:]
         result.merge(clientConfiguration.parameters(for: category))

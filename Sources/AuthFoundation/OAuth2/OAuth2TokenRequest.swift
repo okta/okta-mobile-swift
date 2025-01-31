@@ -18,6 +18,9 @@ import Foundation
 public protocol OAuth2TokenRequest: APIParsingContext, OAuth2APIRequest, APIRequestBody where ResponseType == Token {
     /// The configuration for the OAuth2 client this token is being requested from.
     var clientConfiguration: OAuth2Client.Configuration { get }
+    
+    /// The originating request context to use when validating the ID token.
+    var tokenValidatorContext: any IDTokenValidatorContext { get }
 }
 
 extension OAuth2TokenRequest {

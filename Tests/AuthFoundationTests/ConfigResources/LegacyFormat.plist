@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>issuer</key>
+	<string>https://myapp.example.com/oauth2/default</string>
+	<key>clientId</key>
+	<string>0oaasdf1234</string>
+	<key>scopes</key>
+	<string>openid profile offline_access</string>
+	<key>redirectUri</key>
+	<string>com.example:/callback</string>
+	<key>logoutRedirectUri</key>
+	<string>com.example:/</string>
+	<key>custom</key>
+	<string>value</string>
+</dict>
+</plist>

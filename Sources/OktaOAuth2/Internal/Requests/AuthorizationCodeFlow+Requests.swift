@@ -47,6 +47,7 @@ extension AuthorizationCodeFlow {
 
 extension AuthorizationCodeFlow.TokenRequest {
     var category: AuthFoundation.OAuth2APIRequestCategory { .token }
+    var tokenValidatorContext: any IDTokenValidatorContext { context }
     var bodyParameters: [String: APIRequestArgument]? {
         var result = additionalParameters ?? [:]
         result.merge(clientConfiguration.parameters(for: category))
