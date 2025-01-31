@@ -296,7 +296,6 @@ extension AuthorizationCodeFlow {
     }
 }
 
-
 extension AuthorizationCodeFlow: UsesDelegateCollection {
     public typealias Delegate = AuthorizationCodeFlowDelegate
 }

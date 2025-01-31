@@ -188,17 +188,13 @@ public class DirectAuthenticationFlow: AuthenticationFlow {
         
         /// The current status returned from this authentication flow.
         public internal(set) var currentStatus: Status?
-
-        public init(maxAge: TimeInterval? = nil,
-                    acrValues: [String]? = nil,
+        
+        /// Designated initializer to create a context to customize the ``DirectAuthenticationFlow``.
+        /// - Parameters:
+        ///   - acrValues: Optional `acr_values` to supply.
+        ///   - intent: The intent for this sign-in. Defaults to ``DirectAuthenticationFlow/Intent/signIn``.
+        public init(acrValues: [String]? = nil,
                     intent: Intent = .signIn)
-        {
-            self.init(acrValues: acrValues,
-                      intent: intent)
-        }
-
-        init(acrValues: [String]?,
-             intent: Intent)
         {
             self.acrValues = acrValues
             self.intent = intent
@@ -240,7 +236,7 @@ public class DirectAuthenticationFlow: AuthenticationFlow {
         public let supportedChallengeTypes: [GrantType]?
         let mfaToken: String
         
-        public init(supportedChallengeTypes: [GrantType]?, mfaToken: String) {
+        init(supportedChallengeTypes: [GrantType]?, mfaToken: String) {
             self.supportedChallengeTypes = supportedChallengeTypes
             self.mfaToken = mfaToken
         }
@@ -286,6 +282,8 @@ public class DirectAuthenticationFlow: AuthenticationFlow {
         }
         
         /// Holds information about the binding update received when verifying OOB factors
+        ///
+        /// > Note: This object is used to internally track state associated with the continuation, and is not actionable by a developer.
         public struct BindingContext: Equatable {
             let oobResponse: OOBResponse
             let mfaContext: MFAContext?

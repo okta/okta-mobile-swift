@@ -59,7 +59,7 @@ public struct WebAuthn {
     
     /// Defines the set of data expected from the client in response to an authenticator challenge.
     ///
-    /// This value should be supplied to the ``DirectAuthenticationFlow/SecondaryFactor/webAuthnAssertion`` type.
+    /// This value should be supplied to the ``DirectAuthenticationFlow/ContinuationFactor/webAuthn(response:)`` type.
     public struct AuthenticatorAssertionResponse: Codable, Equatable {
         /// The client data JSON response, represented as a string.
         public let clientDataJSON: String
@@ -72,6 +72,14 @@ public struct WebAuthn {
         
         /// The optional user handle to supply to the server, typically if the resident key is enabled.
         public let userHandle: String?
+        
+        /// Initializer to create the response from an authenticator assertion, to send to the Authorization Server.
+        public init(clientDataJSON: String, authenticatorData: String, signature: String, userHandle: String? = nil) {
+            self.clientDataJSON = clientDataJSON
+            self.authenticatorData = authenticatorData
+            self.signature = signature
+            self.userHandle = userHandle
+        }
     }
 }
 

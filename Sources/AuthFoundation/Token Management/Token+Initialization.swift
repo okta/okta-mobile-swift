@@ -18,7 +18,6 @@ extension Token {
         var id: String = decoder.userInfo[.tokenId] as? String ?? UUID().uuidString
         var issuedAt: Date = Date.nowCoordinated
         var context: Context? = decoder.userInfo[.tokenContext] as? Token.Context
-
         var json: AnyJSON
         
         // Initialize defaults supplied from the decoder's userInfo dictionary
@@ -30,7 +29,6 @@ extension Token {
             context = Context(configuration: configuration,
                               clientSettings: decoder.userInfo[.clientSettings])
         }
-        
         
         // Attempt to decode V1 token data
         if let container = try? decoder.container(keyedBy: CodingKeysV1.self),

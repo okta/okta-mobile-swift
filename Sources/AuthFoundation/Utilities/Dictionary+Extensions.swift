@@ -14,7 +14,7 @@ import Foundation
 
 extension Dictionary where Key == String, Value == String {
     @_documentation(visibility: internal)
-    public var percentQueryEncoded: String {
+    @inlinable public var percentQueryEncoded: String {
         var cs = CharacterSet.urlQueryAllowed
         cs.remove("+")
 
@@ -79,24 +79,11 @@ extension Dictionary where Key: Hashable {
         
         return nil
     }
-    
-//    @_documentation(visibility: internal)
-//    @inlinable
-//    public func values(_ key: Key, using keyPath: KeyPath<Key, Key>) -> [Value] {
-//        keys.filter { $0 == key || $0 == key[keyPath: keyPath] }
-//            .compactMap { self[$0] }
-//    }
-//    
-//    @_documentation(visibility: internal)
-//    @inlinable
-//    public func first(_ key: Key, using keyPath: KeyPath<Key, Key>) -> Value? {
-//        values(key, using: keyPath).first
-//    }
 }
 
 extension Dictionary where Key == String, Value == (any APIRequestArgument)? {
     @_documentation(visibility: internal)
-    public var percentQueryEncoded: String {
+    @inlinable public var percentQueryEncoded: String {
         compactMapValues { $0?.stringValue }.percentQueryEncoded
     }
 }

@@ -67,10 +67,7 @@ extension Token {
                 
                 clientSettings = clientSettings?.filter { (key, _) in
                     !["redirect_uri", "client_id", "scope"].contains(key)
-                }
-                if clientSettings?.isEmpty ?? true {
-                    clientSettings = nil
-                }
+                }.nilIfEmpty
             }
 
             self.init(configuration: configuration,
