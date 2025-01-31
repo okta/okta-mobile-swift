@@ -24,7 +24,7 @@ Enables application developers to authenticate users utilizing a variety of OAut
     s.source        = { :git => "https://github.com/okta/okta-mobile-swift.git", :tag => s.version.to_s }
     s.source_files  = "Sources/OktaOAuth2/**/*.swift"
     s.resource_bundles = { "OktaOAuth2" => "Sources/OktaOAuth2/Resources/**/*" }
-    s.swift_version = "5.9"
+    s.swift_version = "5.10"
 
     s.dependency "OktaAuthFoundation", "#{s.version.to_s}"
 end

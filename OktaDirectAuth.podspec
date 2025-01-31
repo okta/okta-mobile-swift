@@ -24,7 +24,7 @@ Enables application developers to build native sign in experiences using the Okt
     s.source        = { :git => "https://github.com/okta/okta-mobile-swift.git", :tag => s.version.to_s }
     s.source_files  = "Sources/OktaDirectAuth/**/*.swift"
     s.resource_bundles = { "OktaDirectAuth" => "Sources/OktaDirectAuth/Resources/**/*" }
-    s.swift_version = "5.9"
+    s.swift_version = "5.10"
 
     s.dependency "OktaAuthFoundation", "#{s.version.to_s}"
 end

@@ -21,7 +21,7 @@ Authenticate users using web-based OIDC.
     s.source        = { :git => "https://github.com/okta/okta-mobile-swift.git", :tag => s.version.to_s }
     s.source_files  = "Sources/WebAuthenticationUI/**/*.swift"
     s.resource_bundles = { "WebAuthenticationUI" => "Sources/WebAuthenticationUI/Resources/**/*" }
-    s.swift_version = "5.9"
+    s.swift_version = "5.10"
 
     s.dependency "OktaAuthFoundation", "#{s.version.to_s}"
     s.dependency "OktaOAuth2", "#{s.version.to_s}"

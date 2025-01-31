@@ -30,7 +30,7 @@ jobs:
     strategy:
       matrix:
         os: [macos-latest-large, ubuntu-latest]
-        swift_version: ["5.9", "5.10"]
+        swift_version: ["5.10"]
     runs-on: ${{ matrix.os }}
     timeout-minutes: 10
     steps:
