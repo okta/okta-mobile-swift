@@ -25,7 +25,7 @@ struct JWTSignin: AsyncParsableCommand {
     var clientId: String
     
     @Option(name: [.long, .short], help: "The scopes to use.")
-    var scopes: String = "openid profile"
+    var scope: String = "openid profile"
     
     @Option(
         name: [.long, .short],
@@ -59,9 +59,9 @@ struct JWTSignin: AsyncParsableCommand {
             throw ValidationError("Invalid assertion supplied")
         }
         
-        let flow = JWTAuthorizationFlow(issuer: issuer,
+        let flow = JWTAuthorizationFlow(issuerURL: issuer,
                                         clientId: clientId,
-                                        scopes: scopes)
+                                        scope: scope)
         let token = try await flow.start(with: assertion)
         printUserInfo(using: token)
     }

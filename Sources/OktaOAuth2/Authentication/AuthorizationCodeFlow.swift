@@ -52,9 +52,9 @@ public protocol AuthorizationCodeFlowDelegate: AuthenticationDelegate {
 ///
 /// ```swift
 /// let flow = AuthorizationCodeFlow(
-///     issuer: URL(string: "https://example.okta.com")!,
+///     issuerURL: URL(string: "https://example.okta.com")!,
 ///     clientId: "abc123client",
-///     scopes: "openid offline_access email profile",
+///     scope: "openid offline_access email profile",
 ///     redirectUri: URL(string: "com.example.app:/callback"))
 ///
 /// // Create the authorization URL. Open this in a browser.

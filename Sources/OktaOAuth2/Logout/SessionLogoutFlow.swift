@@ -48,7 +48,9 @@ public protocol SessionLogoutFlowDelegate: LogoutFlowDelegate {
 /// As an example, we'll use Swift Concurrency, since these asynchronous methods can be used inline easily, though ``SessionLogoutFlow`` can just as easily be used with completion blocks or through the use of the ``SessionLogoutFlowDelegate``.
 ///
 /// ```swift
-/// let logoutFlow = SessionLogoutFlow(issuer: issuer,
+/// let logoutFlow = SessionLogoutFlow(issuerURL: issuer,
+///                                    clientId: "myclientid",
+///                                    scope: "openid profile",
 ///                                    logoutRedirectUri: URL(string: "com.example.app:/logout")!)
 ///
 /// // Create the logout URL. Open this in a browser.
@@ -81,6 +83,7 @@ public class SessionLogoutFlow: LogoutFlow {
     ///   - clientId: The client ID.
     ///   - scope: The client's scopes.
     ///   - logoutRedirectUri: The logout redirect URI.
+    ///   - additionalParameters: Optional additional parameters you would like to supply to the authorization server
     public convenience init(issuerURL: URL,
                             clientId: String,
                             scope: String,
@@ -97,7 +100,7 @@ public class SessionLogoutFlow: LogoutFlow {
     /// Initializer to construct a logout flow from a pre-defined client.
     /// - Parameters:
     ///   - client: The `OAuth2Client` to use with this flow.
-    ///   - additionalParameters: Optional additional query string parameters you would like to supply to the authorization server.
+    ///   - additionalParameters: Optional additional parameters you would like to supply to the authorization server
     public required init(client: OAuth2Client,
                          additionalParameters: [String: any APIRequestArgument]? = nil)
     {
@@ -114,8 +117,7 @@ public class SessionLogoutFlow: LogoutFlow {
     ///
     /// This method is used to begin a logout session. It is asynchronous, and will invoke the appropriate delegate methods when a response is received.
     /// - Parameters:
-    ///   - idToken: The ID token string.
-    ///   - context: Represents current state for a logout session.
+    ///   - context: The context, providing information to help in signing out the user.
     ///   - completion: Optional completion block for receiving the response. If `nil`, you may rely upon the appropriate delegate API methods.
     public func start(with context: Context = .init(),
                       completion: @escaping (Result<URL, OAuth2Error>) -> Void)
@@ -174,7 +176,7 @@ extension SessionLogoutFlow {
     ///
     /// This method is used to begin a logout session. The method will invoke the appropriate delegate methods when a response is received.
     /// - Parameters:
-    ///   - context: Represents current state for a logout session.
+    ///   - context: The context, providing information to help in signing out the user.
     ///   - additionalParameters: Optional parameters to add to the authorization URL query string.
     /// - Returns: The URL a user should be presented with within a broser, to befing a logout flow.
     public func start(with context: Context = .init()) async throws -> URL
@@ -244,7 +246,7 @@ private extension SessionLogoutFlow {
 
 extension OAuth2Client {
     /// Creates a new session logout flow for this redirect URI.
-    /// - Parameter logoutRedirectUri: Logout redirect URI to use
+    /// - Parameter additionalParameters: Optional additional parameters you would like to supply to the authorization server
     /// - Returns: ``SessionLogoutFlow`` to log out of this client.
     public func sessionLogoutFlow(additionalParameters: [String: APIRequestArgument]? = nil) -> SessionLogoutFlow
     {

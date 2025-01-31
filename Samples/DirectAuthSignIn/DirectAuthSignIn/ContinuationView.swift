@@ -64,7 +64,7 @@ extension SignInView {
                         .onAppear {
                             Task {
                                 do {
-                                    status = try await flow.resume(status, with: .transfer)
+                                    status = try await flow.resume(with: .transfer)
                                     if case let .success(token) = status {
                                         Credential.default = try Credential.store(token)
                                     }
@@ -92,7 +92,7 @@ extension SignInView {
                     Button("Continue") {
                         Task {
                             do {
-                                status = try await flow.resume(status, with: .prompt(code: verificationCode))
+                                status = try await flow.resume(with: .prompt(code: verificationCode))
                                 if case let .success(token) = status {
                                     Credential.default = try Credential.store(token)
                                 }
@@ -124,9 +124,10 @@ extension DirectAuthenticationFlow.ContinuationType {
 #Preview {
     struct Preview: View {
         var flow = DirectAuthenticationFlow(
-            issuer: URL(string: "https://example.com/")!,
+            // swiftlint:disable:next force_unwrapping
+            issuerURL: URL(string: "https://example.com/")!,
             clientId: "clientid",
-            scopes: "scopes")
+            scope: "scopes")
         @State var error: Error?
         @State var hasError: Bool = false
         @State var continuationType: DirectAuthenticationFlow.ContinuationType = .previewPrompt

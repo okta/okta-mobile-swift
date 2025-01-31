@@ -14,9 +14,9 @@ As an example, we'll use Swift Concurrency, since these asynchronous methods can
 
 ```swift
 let flow = TokenExchangeFlow(
-    issuer: URL(string: "https://example.okta.com")!,
+    issuerURL: URL(string: "https://example.okta.com")!,
     clientId: "abc123client",
-    scopes: "openid offline_access email profile",
+    scope: "openid offline_access email profile",
     audience: .default)
 
 let tokens: [TokenType] = [

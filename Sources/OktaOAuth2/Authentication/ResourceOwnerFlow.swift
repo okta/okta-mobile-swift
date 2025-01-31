@@ -31,7 +31,6 @@ public class ResourceOwnerFlow: AuthenticationFlow {
     public let additionalParameters: [String: APIRequestArgument]?
 
     /// Indicates whether or not this flow is currently in the process of authenticating a user.
-    /// ``ResourceOwnerFlow/init(issuer:clientId:scopes:)``
     public private(set) var isAuthenticating: Bool = false {
         didSet {
             guard oldValue != isAuthenticating else {
@@ -51,7 +50,7 @@ public class ResourceOwnerFlow: AuthenticationFlow {
     ///   - issuerURL: The issuer URL.
     ///   - clientId: The client ID
     ///   - scope: The scopes to request
-    ///   - additionalParameters: Optional query parameters to supply tot he authorization server for all requests from this flow.
+    ///   - additionalParameters: Optional parameters to supply tot he authorization server for all requests from this flow.
     public convenience init(issuerURL: URL,
                             clientId: String,
                             scope: String,
@@ -83,6 +82,7 @@ public class ResourceOwnerFlow: AuthenticationFlow {
     /// - Parameters:
     ///   - username: Username
     ///   - password: Password
+    ///   - context: Context object used to customize the flow.
     ///   - completion: Completion invoked when a response is received.
     public func start(username: String,
                       password: String,
@@ -137,8 +137,11 @@ public class ResourceOwnerFlow: AuthenticationFlow {
 @available(iOS 13.0, tvOS 13.0, macOS 10.15, watchOS 6, *)
 extension ResourceOwnerFlow {
     /// Asynchronously authenticates with the Resource Owner flow.
-    ///
-    /// - Returns: The information a user should be presented with to continue authorization on a different device.
+    /// 
+    /// - Parameters:
+    ///   - username: Username
+    ///   - password: Password
+    /// - Returns: The token once the responce is received.
     public func start(username: String, password: String) async throws -> Token {
         try await withCheckedThrowingContinuation { continuation in
             start(username: username, password: password) { result in
@@ -159,6 +162,7 @@ extension ResourceOwnerFlow: OAuth2ClientDelegate {
 extension OAuth2Client {
     /// Creates a new Resource Owner flow configured to use this OAuth2Client.
     /// - Returns: Initialized authorization flow.
+    /// - Parameter additionalParameters: Optional parameters to supply tot he authorization server for all requests from this flow.
     public func resourceOwnerFlow(additionalParameters: [String: String]? = nil) -> ResourceOwnerFlow {
         ResourceOwnerFlow(client: self, additionalParameters: additionalParameters)
     }

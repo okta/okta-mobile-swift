@@ -74,11 +74,9 @@ final class DeviceAuthorizationFlowSuccessTests: XCTestCase {
         XCTAssertEqual(delegate.verification?.verificationUri.absoluteString, "https://example.okta.com/activate")
         XCTAssertTrue(delegate.started)
         
-        let context = try XCTUnwrap(delegate.verification)
-
         // Exchange code
         expect = expectation(description: "Wait for timer")
-        flow.resume(with: context) { _ in
+        flow.resume() { _ in
             expect.fulfill()
         }
         waitForExpectations(timeout: 5) { error in
@@ -121,7 +119,7 @@ final class DeviceAuthorizationFlowSuccessTests: XCTestCase {
         // Exchange code
         var token: Token?
         wait = expectation(description: "resume")
-        flow.resume(with: verification!) { result in
+        flow.resume { result in
             switch result {
             case .success(let resultToken):
                 token = resultToken
@@ -154,7 +152,7 @@ final class DeviceAuthorizationFlowSuccessTests: XCTestCase {
         XCTAssertEqual(flow.context?.verification?.verificationUri.absoluteString, "https://example.okta.com/activate")
 
         // Exchange code
-        let token = try await flow.resume(with: verification)
+        let token = try await flow.resume()
 
         XCTAssertNil(flow.context)
         XCTAssertFalse(flow.isAuthenticating)

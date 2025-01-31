@@ -32,9 +32,9 @@ func signInWithWebUsingCustomConfiguration() async throws {
         throw SampleError.invalidUrl
     }
     
-    let auth = WebAuthentication(issuer: issuerUrl,
+    let auth = WebAuthentication(issuerURL: issuerUrl,
                                  clientId: clientId,
-                                 scopes: "openid profile email offline_access device_sso",
+                                 scope: "openid profile email offline_access device_sso",
                                  redirectUri: redirectUrl)
     
     // Sign in using the above configuration
@@ -51,9 +51,9 @@ func signInUsingAuthorizationCode() async throws {
         throw SampleError.invalidUrl
     }
     
-    let flow = AuthorizationCodeFlow(issuer: issuerUrl,
+    let flow = AuthorizationCodeFlow(issuerURL: issuerUrl,
                                      clientId: clientId,
-                                     scopes: "openid profile email offline_access",
+                                     scope: "openid profile email offline_access",
                                      redirectUri: redirectUrl)
 
     // Initiate the auth flow, and get the URL to present to the user
@@ -74,9 +74,9 @@ func signInUsingResourceOwner(username: String, password: String) async throws {
         throw SampleError.invalidUrl
     }
     
-    let flow = ResourceOwnerFlow(issuer: issuerUrl,
+    let flow = ResourceOwnerFlow(issuerURL: issuerUrl,
                                  clientId: clientId,
-                                 scopes: "openid profile email offline_access")
+                                 scope: "openid profile email offline_access")
     
     // Sign in using a username & password
     let token = try await flow.start(username: username, password: password)
@@ -91,9 +91,9 @@ func signInUsingDeviceSSO(deviceToken: String, idToken: String) async throws {
     }
     
     // Create the flow
-    let flow = TokenExchangeFlow(issuer: issuerUrl,
+    let flow = TokenExchangeFlow(issuerURL: issuerUrl,
                                  clientId: clientId,
-                                 scopes: "openid profile offline_access",
+                                 scope: "openid profile offline_access",
                                  audience: .default)
     
     // Exchange the ID and Device tokens for access tokens.

@@ -113,7 +113,7 @@ final class DeviceAuthorizationFlowErrorTests: XCTestCase {
         // Exchange code
         var token: Token?
         wait = expectation(description: "resume")
-        flow.resume(with: verification!) { result in
+        flow.resume { result in
             switch result {
             case .success(let resultToken):
                 token = resultToken

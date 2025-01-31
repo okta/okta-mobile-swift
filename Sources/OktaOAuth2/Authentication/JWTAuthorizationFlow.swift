@@ -27,7 +27,7 @@ public class JWTAuthorizationFlow: AuthenticationFlow {
     public let additionalParameters: [String: APIRequestArgument]?
 
     /// Indicates whether or not this flow is currently in the process of authenticating a user.
-    /// ``JWTAuthorizationFlow/init(issuer:clientId:scopes:)``
+    /// ``JWTAuthorizationFlow/init(issuerURL:clientId:scope:additionalParameters:)``
     public private(set) var isAuthenticating: Bool = false {
         didSet {
             guard oldValue != isAuthenticating else {
@@ -44,9 +44,10 @@ public class JWTAuthorizationFlow: AuthenticationFlow {
     
     /// Convenience initializer to construct an authentication flow from variables.
     /// - Parameters:
-    ///   - issuer: The issuer URL.
+    ///   - issuerURL: The issuer URL.
     ///   - clientId: The client ID
     ///   - scope: The scopes to request
+    ///   - additionalParameters: Additional parameters to add to all requests made by this flow.
     public convenience init(issuerURL: URL,
                             clientId: String,
                             scope: String,
@@ -59,7 +60,9 @@ public class JWTAuthorizationFlow: AuthenticationFlow {
     }
     
     /// Initializer to construct an authentication flow from an OAuth2Client.
-    /// - Parameter client: `OAuth2Client` instance to authenticate with.
+    /// - Parameters:
+    ///   - client: OAuth2Client to use.
+    ///   - additionalParameters: Additional parameters to add to all requests made by this flow.
     public required init(client: OAuth2Client,
                          additionalParameters: [String: any APIRequestArgument]? = nil)
     {
@@ -75,6 +78,7 @@ public class JWTAuthorizationFlow: AuthenticationFlow {
     /// Authenticates using the supplied JWT bearer assertion.
     /// - Parameters:
     ///   - assertion: JWT Assertion
+    ///   - context: Context used to customize the flow.
     ///   - completion: Completion invoked when a response is received.
     public func start(with assertion: JWT,
                       context: Context = .init(),
@@ -127,8 +131,10 @@ public class JWTAuthorizationFlow: AuthenticationFlow {
 @available(iOS 13.0, tvOS 13.0, macOS 10.15, watchOS 6, *)
 extension JWTAuthorizationFlow {
     /// Asynchronously authenticates with a JWT bearer assertion.
-    ///
-    /// - Parameter jwt: JWT Assertion
+    /// 
+    /// - Parameters:
+    ///   - assertion: JWT Assertion
+    ///   - context: Context used to customize the flow.
     /// - Returns: The token resulting from signing in.
     public func start(with assertion: JWT, context: Context = .init()) async throws -> Token {
         try await withCheckedThrowingContinuation { continuation in
@@ -147,6 +153,7 @@ extension JWTAuthorizationFlow: OAuth2ClientDelegate {}
 
 extension OAuth2Client {
     /// Creates a new JWT Authorization flow configured to use this OAuth2Client.
+    /// - Parameter additionalParameters: Additional parameters to supply to requests from this flow.
     /// - Returns: Initialized authorization flow.
     public func jwtAuthorizationFlow(additionalParameters: [String: String]? = nil) -> JWTAuthorizationFlow {
         JWTAuthorizationFlow(client: self, additionalParameters: additionalParameters)
