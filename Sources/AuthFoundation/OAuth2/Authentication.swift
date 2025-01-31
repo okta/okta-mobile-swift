@@ -130,15 +130,9 @@ public struct StandardAuthenticationContext: AuthenticationContext {
     public init(acrValues: [String]? = nil,
                 additionalParameters: [String: any APIRequestArgument]? = nil)
     {
-        self.acrValues = acrValues
-        self.additionalParameters = additionalParameters
-    }
-    
-    /// Designated initializer.
-    /// - Parameter additionalParameters: Custom request parameters to be added to requests made for this sign-in.
-    public init(_ additionalParameters: [String: any APIRequestArgument]?) {
-        self.init(acrValues: additionalParameters?.spaceSeparatedValues(for: "acr_values"),
-                  additionalParameters: additionalParameters?.omitting("acr_values"))
+        let coalescedAcrValues = (acrValues ?? []) + (additionalParameters?.spaceSeparatedValues(for: "acr_values") ?? [])
+        self.acrValues = (acrValues != nil) ? coalescedAcrValues : coalescedAcrValues.nilIfEmpty
+        self.additionalParameters = additionalParameters?.omitting("acr_values").nilIfEmpty
     }
     
     @_documentation(visibility: internal)

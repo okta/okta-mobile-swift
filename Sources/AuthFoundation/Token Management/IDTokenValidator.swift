@@ -38,10 +38,6 @@ public protocol IDTokenValidatorContext {
     var maxAge: TimeInterval? { get }
 }
 
-extension IDTokenValidatorContext {
-    public static var `none`: any IDTokenValidatorContext { NullIDTokenValidatorContext }
-}
-
 public let NullIDTokenValidatorContext: any IDTokenValidatorContext = _NullIDTokenValidatorContext()
 struct _NullIDTokenValidatorContext: IDTokenValidatorContext {
     var nonce: String? { nil }

@@ -259,7 +259,6 @@ extension CodingUserInfoKey {
     public static let apiClientConfiguration = CodingUserInfoKey(rawValue: "apiClientConfiguration")!
     public static let tokenContext = CodingUserInfoKey(rawValue: "tokenContext")!
     public static let clientSettings = CodingUserInfoKey(rawValue: "clientSettings")!
-    public static let request = CodingUserInfoKey(rawValue: "request")!
     // swiftlint:enable force_unwrapping
 }
 

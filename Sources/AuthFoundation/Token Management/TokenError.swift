@@ -34,33 +34,33 @@ extension TokenError: LocalizedError {
     public var errorDescription: String? {
         switch self {
         case .contextMissing:
-            return NSLocalizedString("token_context_missing",
+            return NSLocalizedString("token_error.context_missing",
                                      tableName: "AuthFoundation",
                                      bundle: .authFoundation,
                                      comment: "")
             
         case .tokenNotFound(id: let id):
             return String.localizedStringWithFormat(
-                NSLocalizedString("token_not_found",
+                NSLocalizedString("token_error.not_found",
                                   tableName: "AuthFoundation",
                                   bundle: .authFoundation,
                                   comment: ""),
                 id)
             
         case .cannotReplaceToken:
-            return NSLocalizedString("cannot_replace_token",
+            return NSLocalizedString("token_error.cannot_replace",
                                      tableName: "AuthFoundation",
                                      bundle: .authFoundation,
                                      comment: "")
             
         case .duplicateTokenAdded:
-            return NSLocalizedString("duplicate_token_added",
+            return NSLocalizedString("token_error.duplicate_added",
                                      tableName: "AuthFoundation",
                                      bundle: .authFoundation,
                                      comment: "")
 
         case .invalidConfiguration:
-            return NSLocalizedString("invalid_configuration",
+            return NSLocalizedString("token_error.invalid_configuration",
                                      tableName: "AuthFoundation",
                                      bundle: .authFoundation,
                                      comment: "")

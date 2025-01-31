@@ -74,9 +74,50 @@ class AuthorizationCodeFlowContextTests: XCTestCase {
         XCTAssertEqual(context.additionalParameters?["name"] as? String, "value")
         XCTAssertEqual(Array(try XCTUnwrap(context.additionalParameters?.keys)), ["name"])
         
+        // Verify authorization parameters
+        var expectedParams = [
+            "state": "baz",
+            "response_type": "code",
+            "nonce": "some_nonce",
+            "max_age": "50",
+            "acr_values": "urn:ietf:params:acr:nist:1 urn:ietf:params:acr:nist:2",
+            "login_hint": "user@example.com",
+            "id_token_hint": "abcdef123456",
+            "display": "mobile",
+            "prompt": "none",
+            "name": "value",
+        ]
+        if let pkce = context.pkce {
+            expectedParams["code_challenge"] = pkce.codeChallenge.stringValue
+            expectedParams["code_challenge_method"] = pkce.method.rawValue
+        }
+        XCTAssertEqual(context.parameters(for: .authorization)?.mapValues(\.stringValue) as? [String: String], expectedParams)
+        
+        // Verify token parameters
+        expectedParams = [
+            "name": "value"
+        ]
+        if let pkce = context.pkce {
+            expectedParams["code_verifier"] = pkce.codeVerifier
+        }
+        XCTAssertEqual(context.parameters(for: .token)?.mapValues(\.stringValue) as? [String: String], expectedParams)
+        
+        // Verifty all other parameter categories
+        for category in OAuth2APIRequestCategory.allCases.omitting(.authorization, .token) {
+            XCTAssertEqual(context.parameters(for: category)?.mapValues(\.stringValue) as? [String: String], [
+                "name": "value"
+            ])
+        }
+
         context = Context(additionalParameters: ["prompt": "somethingInvalid"])
         XCTAssertNil(context.prompt)
         XCTAssertEqual(context.additionalParameters?["prompt"] as? String, "somethingInvalid")
+
+        context.authenticationURL = URL(string: "https://example.com")
+        XCTAssertNotNil(context.authenticationURL)
+
+        context.loginHint = "user@example.com"
+        XCTAssertNil(context.authenticationURL)
     }
 }
 

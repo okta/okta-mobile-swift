@@ -159,6 +159,62 @@ final class ErrorTests: XCTestCase {
         XCTAssertNotEqual(JWTError.unsupportedAlgorithm(.es384).errorDescription,
                           "jwt_unsupported_algorithm")
     }
+    
+    func testClaimError() {
+        XCTAssertNotEqual(ClaimError.missingRequiredValue(key: "meow").errorDescription,
+                          "claim.missing_required_value")
+        XCTAssertTrue(ClaimError.missingRequiredValue(key: "meow").errorDescription?.localizedStandardContains("meow") ?? false)
+    }
+    
+    func testCredentialError() {
+        XCTAssertNotEqual(CredentialError.missingCoordinator.errorDescription,
+                          "credential.missing_coordinator")
+        XCTAssertNotEqual(CredentialError.incorrectClientConfiguration.errorDescription,
+                          "credential.incorrect_configuration")
+        XCTAssertNotEqual(CredentialError.metadataConsistency.errorDescription,
+                          "credential.metadata_consistency")
+    }
+
+    func testPropertyListConfigurationError() {
+        typealias PlistError = OAuth2Client.PropertyListConfigurationError
+        XCTAssertNotEqual(PlistError.defaultPropertyListNotFound.errorDescription,
+                          "plist_configuration.default_not_found")
+        XCTAssertNotEqual(PlistError.invalidPropertyList(url: URL(string: "urn://foo/bar")!).errorDescription,
+                          "plist_configuration.invalid_property_list")
+        XCTAssertNotEqual(PlistError.cannotParsePropertyList(nil).errorDescription,
+                          "plist_configuration.cannot_parse_message")
+        XCTAssertNotEqual(PlistError.missingConfigurationValues.errorDescription,
+                          "plist_configuration.missing_configuration_values")
+        XCTAssertNotEqual(PlistError.invalidConfiguration(name: "foo", value: "value").errorDescription,
+                          "plist_configuration.invalid_configuration")
+
+        XCTAssertTrue(PlistError.invalidPropertyList(url: URL(string: "urn://foo/bar")!)
+            .errorDescription?
+            .localizedStandardContains("bar") ?? false)
+        XCTAssertTrue(PlistError.cannotParsePropertyList(TestLocalizedError.nestedError)
+            .errorDescription?
+            .localizedStandardContains("Nested Error") ?? false)
+        XCTAssertTrue(PlistError.invalidConfiguration(name: "foo", value: "bar")
+            .errorDescription?
+            .localizedStandardContains("foo") ?? false)
+        XCTAssertTrue(PlistError.invalidConfiguration(name: "foo", value: "bar")
+            .errorDescription?
+            .localizedStandardContains("bar") ?? false)
+    }
+    
+    func testTokenError() {
+        XCTAssertNotEqual(TokenError.contextMissing.errorDescription,
+                          "token_error.context_missing")
+        XCTAssertNotEqual(TokenError.tokenNotFound(id: "foo").errorDescription,
+                          "token_error.not_found")
+        XCTAssertNotEqual(TokenError.cannotReplaceToken.errorDescription,
+                          "token_error.cannot_replace")
+        XCTAssertNotEqual(TokenError.duplicateTokenAdded.errorDescription,
+                          "token_error.duplicate_added")
+        XCTAssertNotEqual(TokenError.invalidConfiguration.errorDescription,
+                          "token_error.invalid_configuration")
+
+    }
 
     func testOktaAPIError() throws {
         let json = """

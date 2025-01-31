@@ -62,23 +62,24 @@
 "keychain_access_control_invalid" = "The access control settings for this keychain item are invalid: %@ (code %d).";
 
 /* OAuth2Client.PropertyListConfigurationError */
-"default_property_list_not_found_description" = "The default Okta.plist configuration file was not found.";
-"invalid_property_list_description" = "The configuration file named \"%@\" was invalid.";
-"cannot_parse_property_list_description" = "Could not parse the configuration file named \"%@\".";
-"missing_configuration_values_description" = "Web authentication is not configured properly.";
-"invalid_configuration" = "The configuration setting \"%@\" contained an invalid value \"%@\".";
+"plist_configuration.default_not_found" = "The default Okta.plist configuration file was not found.";
+"plist_configuration.invalid_property_list" = "The configuration file named \"%@\" was invalid.";
+"plist_configuration.cannot_parse_generic_error" = "No error details were supplied";
+"plist_configuration.cannot_parse_message" = "Could not parse the configuration file: %@.";
+"plist_configuration.missing_configuration_values" = "Web authentication is not configured properly.";
+"plist_configuration.invalid_configuration" = "The configuration setting \"%@\" contained an invalid value \"%@\".";
 
 /* TokenError */
-"token_context_missing" = "Context information related to this token is missing.";
-"token_not_found" = "The requested token was not found (ID: \"%@\").";
-"cannot_replace_token" = "Could not replace the token with its updated value.";
-"duplicate_token_added" = "Could not add a new token, since a duplicate was found.";
-"invalid_configuration" = "This token does not match the client configuration.";
+"token_error.context_missing" = "Context information related to this token is missing.";
+"token_error.not_found" = "The requested token was not found (ID: \"%@\").";
+"token_error.cannot_replace" = "Could not replace the token with its updated value.";
+"token_error.duplicate_added" = "Could not add a new token, since a duplicate was found.";
+"token_error.invalid_configuration" = "This token does not match the client configuration.";
 
 /* ClaimError */
-"missing_required_value" = "The token response is missing a required value for key \"%@\".";
+"claim.missing_required_value" = "The token response is missing a required value for key \"%@\".";
 
 /* CredentialError */
-"credential_metadata_consistency" = "Metadata associated with a credential has become inconsistent with its value in storage.";
-"credential_incorrect_configuration" = "The credential's token does not match the client configuration supplied.";
-"credential_missing_coordinator" = "The storage coordinator for this credential is missing. This credential may have already been removed.";
+"credential.metadata_consistency" = "Metadata associated with a credential has become inconsistent with its value in storage.";
+"credential.incorrect_configuration" = "The credential's token does not match the client configuration supplied.";
+"credential.missing_coordinator" = "The storage coordinator for this credential is missing. This credential may have already been removed.";

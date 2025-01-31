@@ -14,12 +14,15 @@ import XCTest
 @testable import AuthFoundation
 @testable import TestCommon
 
-fileprivate struct MockTokenRequest: OAuth2TokenRequest {
+fileprivate struct MockTokenRequest: OAuth2TokenRequest, IDTokenValidatorContext {
+    var nonce: String?
+    var maxAge: TimeInterval?
     let context: (any AuthenticationContext)? = nil
     let openIdConfiguration: OpenIdConfiguration
     let clientConfiguration: OAuth2Client.Configuration
     let url: URL
     let category = OAuth2APIRequestCategory.token
+    var tokenValidatorContext: any IDTokenValidatorContext { self }
     var bodyParameters: [String: APIRequestArgument]?
 }
 
@@ -117,18 +120,20 @@ final class TokenTests: XCTestCase {
         XCTAssertEqual(token, decodedToken)
     }
 
-    func testMFAAttestationToken() throws {
-        let request = MockTokenRequest(openIdConfiguration: openIdConfiguration,
-                                       clientConfiguration: configuration,
-                                       url: configuration.baseURL,
-                                       bodyParameters: [
-                                        "acr_values": "urn:okta:app:mfa:attestation"
-                                       ])
+    func testTokenNilContext() throws {
+        let decoder = defaultJSONDecoder
+        decoder.userInfo = [:]
         
+        XCTAssertThrowsError(try decoder.decode(Token.self,
+                                                from: try data(from: .module,
+                                                               for: "token",
+                                                               in: "MockResponses")))
+    }
+    
+    func testMFAAttestationToken() throws {
         let decoder = defaultJSONDecoder
         decoder.userInfo = [
             .apiClientConfiguration: configuration,
-            .request: request,
             .clientSettings: [
                 "acr_values": "urn:okta:app:mfa:attestation"
             ]
