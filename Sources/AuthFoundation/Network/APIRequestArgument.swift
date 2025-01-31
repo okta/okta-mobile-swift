@@ -135,4 +135,17 @@ extension JWT: APIRequestArgument {}
 extension GrantType: APIRequestArgument {}
 
 @_documentation(visibility: private)
+extension [GrantType]: APIRequestArgument {
+    public var stringValue: String {
+        map(\.rawValue)
+            .joined(separator: " ")
+    }
+}
+
+@_documentation(visibility: private)
 extension Token.Kind: APIRequestArgument {}
+
+@_documentation(visibility: private)
+extension URL: APIRequestArgument {
+    public var stringValue: String { absoluteString }
+}

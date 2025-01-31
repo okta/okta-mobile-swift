@@ -24,15 +24,17 @@ extension OAuth2Client {
     /// Utility struct used internally to process `Okta.plist` and other similar client configuration files.
     ///
     /// > Important: This struct is intended for internal use, and may be subject to change.
-    public struct PropertyListConfiguration: ProvidesOAuth2Parameters {
+    public struct PropertyListConfiguration {
+        private static let ignoreAdditionalKeys: Set<String> = ["issuer", "issuer_url", "client_id", "scope", "scopes", "redirect_uri", "logout_redirect_uri"]
+        
         /// The client issuer URL, defined in the "issuer" key.
-        public let issuer: URL
+        public let issuerURL: URL
         
         /// The client ID, defined in the "clientId" key.
         public let clientId: String
         
         /// The client scopes, defined in the "scopes" key.
-        public let scopes: String
+        public let scope: String
         
         /// The client's redirect URI, if one is applicable, defined in the "redirectUri" key.
         public let redirectUri: URL?
@@ -69,57 +71,59 @@ extension OAuth2Client {
                 throw PropertyListConfigurationError.cannotParsePropertyList(error)
             }
             
-            guard let dict = plistContent as? [String: String] else {
+            guard let rawDict = plistContent as? [String: String] else {
                 throw PropertyListConfigurationError.cannotParsePropertyList(nil)
             }
             
-            guard let clientId = dict["clientId"],
+            let dict = rawDict.map(by: \.snakeCase)
+            guard let clientId = dict["client_id"],
                   !clientId.isEmpty,
-                  let issuer = dict["issuer"],
+                  let issuer = dict.value("issuer", or: "issuer_url"),
                   let issuerUrl = URL(string: issuer),
-                  let scopes = dict["scopes"],
-                  !scopes.isEmpty
+                  let scope = dict.value("scope", or: "scopes"),
+                  !scope.isEmpty
             else {
                 throw PropertyListConfigurationError.missingConfigurationValues
             }
             
             let redirectUri: URL?
-            if let redirectUriString = dict["redirectUri"] {
+            if let redirectUriString = dict["redirect_uri"] {
                 redirectUri = URL(string: redirectUriString)
             } else {
                 redirectUri = nil
             }
             
             let logoutRedirectUri: URL?
-            if let logoutRedirectUriString = dict["logoutRedirectUri"] {
+            if let logoutRedirectUriString = dict["logout_redirect_uri"] {
                 logoutRedirectUri = URL(string: logoutRedirectUriString)
             } else {
                 logoutRedirectUri = nil
             }
             
             // Filter only additional parameters
-            let additionalParameters = dict.filter {
-                !["clientId", "issuer", "scopes", "redirectUri", "logoutRedirectUri"].contains($0.key)
+            let additionalParameters = rawDict.filter { (key, _) in
+                !Self.ignoreAdditionalKeys.contains(key) &&
+                !Self.ignoreAdditionalKeys.contains(key.snakeCase)
             }
 
-            self.init(issuer: issuerUrl,
+            self.init(issuerURL: issuerUrl,
                       clientId: clientId,
-                      scopes: scopes,
+                      scope: scope,
                       redirectUri: redirectUri,
                       logoutRedirectUri: logoutRedirectUri,
                       additionalParameters: additionalParameters.isEmpty ? nil : additionalParameters)
         }
         
-        init(issuer: URL,
+        init(issuerURL: URL,
              clientId: String,
-             scopes: String,
+             scope: String,
              redirectUri: URL? = nil,
              logoutRedirectUri: URL? = nil,
              additionalParameters: [String: String]? = nil)
         {
-            self.issuer = issuer
+            self.issuerURL = issuerURL
             self.clientId = clientId
-            self.scopes = scopes
+            self.scope = scope
             self.redirectUri = redirectUri
             self.logoutRedirectUri = logoutRedirectUri
             self.additionalParameters = additionalParameters

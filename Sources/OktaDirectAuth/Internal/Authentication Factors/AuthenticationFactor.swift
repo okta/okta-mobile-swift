@@ -29,12 +29,10 @@ protocol AuthenticationFactor: HasTokenParameters {
     ///   - flow: The current flow for this authentication step.
     ///   - openIdConfiguration: OpenID configuration for this org.
     ///   - loginHint: The login hint for this session.
-    ///   - currentStatus: The current status this step is being created from, if applicable.
     ///   - factor: The factor for the step to process.
     /// - Returns: A step handler capable of processing this authentication factor.
     func stepHandler(flow: DirectAuthenticationFlow,
                      openIdConfiguration: OpenIdConfiguration,
                      loginHint: String?,
-                     currentStatus: DirectAuthenticationFlow.Status?,
                      factor: Self) throws -> any StepHandler
 }

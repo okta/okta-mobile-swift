@@ -26,11 +26,13 @@ public struct UserInfo: Codable, JSONClaimContainer {
         self.payload = info
     }
     
+    @_documentation(visibility: internal)
     public init(from decoder: Decoder) throws {
         self.init(try Self.decodePayload(from: decoder))
     }
 }
 
 extension UserInfo {
+    @_documentation(visibility: internal)
     public static var jsonDecoder = JSONDecoder()
 }

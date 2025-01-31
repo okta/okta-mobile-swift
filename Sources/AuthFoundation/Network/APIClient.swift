@@ -16,7 +16,7 @@ import Foundation
 import FoundationNetworking
 #endif
 
-public protocol APIClientConfiguration: AnyObject {
+public protocol APIClientConfiguration {
     var baseURL: URL { get }
 }
 
@@ -45,7 +45,7 @@ public protocol APIClient {
     ///
     /// The userInfo property may be included, which can include contextual information that can help decoders formulate objects.
     /// - Returns: Decoded object.
-    func decode<T: Decodable>(_ type: T.Type, from data: Data, userInfo: [CodingUserInfoKey: Any]?) throws -> T
+    func decode<T: Decodable>(_ type: T.Type, from data: Data, parsing context: APIParsingContext?) throws -> T
     
     /// Parses HTTP response body data when a request fails.
     /// - Returns: Error instance, if any, described within the data.
@@ -102,6 +102,7 @@ extension APIClientDelegate {
 public enum APIRetry {
     /// Indicates the APIRequest should not be retried.
     case doNotRetry
+    
     /// The APIRequest should be retried, up to the given maximum number of times.
     case retry(maximumCount: Int)
     
@@ -315,7 +316,7 @@ extension APIClient {
         
         return APIResponse(result: try decode(T.self,
                                               from: jsonData,
-                                              userInfo: context?.codingUserInfo),
+                                              parsing: context),
                            date: date ?? Date(),
                            statusCode: response.statusCode,
                            links: relatedLinks(from: response.allHeaderFields["Link"] as? String),

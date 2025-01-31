@@ -13,22 +13,18 @@
 import Foundation
 import AuthFoundation
 
-extension OpenIdConfiguration {
-    var challengeEndpoint: URL? {
-        tokenEndpoint.url(replacing: "/token", with: "/challenge")
-    }
-}
-
-struct ChallengeRequest {
+struct ChallengeRequest: AuthenticationFlowRequest {
+    typealias Flow = DirectAuthenticationFlow
+    
     let url: URL
     let clientConfiguration: OAuth2Client.Configuration
-    let authenticationFlowConfiguration: (any AuthenticationFlowConfiguration)?
+    let context: Flow.Context
     let mfaToken: String
     let challengeTypesSupported: [GrantType]
     
     init(openIdConfiguration: OpenIdConfiguration,
          clientConfiguration: OAuth2Client.Configuration,
-         authenticationFlowConfiguration: (any AuthenticationFlowConfiguration)?,
+         context: DirectAuthenticationFlow.Context,
          mfaToken: String,
          challengeTypesSupported: [GrantType]) throws
     {
@@ -38,7 +34,7 @@ struct ChallengeRequest {
         
         self.url = url
         self.clientConfiguration = clientConfiguration
-        self.authenticationFlowConfiguration = authenticationFlowConfiguration
+        self.context = context
         self.mfaToken = mfaToken
         self.challengeTypesSupported = challengeTypesSupported
     }
@@ -78,17 +74,18 @@ extension ChallengeRequest: APIRequest, APIRequestBody {
     var httpMethod: APIRequestMethod { .post }
     var contentType: APIContentType? { .formEncoded }
     var acceptsType: APIContentType? { .json }
+    var category: AuthFoundation.OAuth2APIRequestCategory { .other }
     var bodyParameters: [String: APIRequestArgument]? {
-        var result: [String: APIRequestArgument] = [
-            "client_id": clientConfiguration.clientId,
+        var result = clientConfiguration.parameters(for: category) ?? [:]
+        result.merge(context.parameters(for: category))
+        result.merge([
             "mfa_token": mfaToken,
             "challenge_types_supported": challengeTypesSupported
-                .map(\.rawValue)
-                .joined(separator: " ")
-        ]
+        ])
         
-        result.merge(clientConfiguration.authentication)
-        result.merge(authenticationFlowConfiguration)
+        if result["client_id"] == nil {
+            result["client_id"] = clientConfiguration.clientId
+        }
 
         return result
     }

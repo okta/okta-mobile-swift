@@ -23,4 +23,25 @@ extension String {
 
         return result
     }
+    
+    @_documentation(visibility: internal)
+    public static func nonce(length: UInt = 16) -> String {
+        [UInt8].random(count: Int(length)).base64URLEncodedString
+    }
+    
+    @_documentation(visibility: internal)
+    public var camelCase: String {
+        let words = self.split(separator: "_")
+        return words.enumerated().map { offset, element in
+            offset == 0 ? element.lowercased() : element.capitalized
+        }.reduce("", +)
+    }
+    
+    @_documentation(visibility: internal)
+    public var snakeCase: String {
+        let words = self.split(whereSeparator: { $0.isUppercase })
+        return words.enumerated().map { offset, element in
+            offset == 0 ? element.lowercased() : "_\(element.lowercased())"
+        }.reduce("", +)
+    }
 }

@@ -1,9 +1,5 @@
 # ``OktaDirectAuth/DirectAuthenticationFlow``
 
-@Metadata {
-    @DocumentationExtension(mergeBehavior: append)
-}
-
 ## Usage
 
 You can create an instance of ``DirectAuthenticationFlow`` with your client settings, or you can use one of several convenience initializers to simplify the process.

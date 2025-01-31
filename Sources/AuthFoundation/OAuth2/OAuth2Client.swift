@@ -54,42 +54,63 @@ public final class OAuth2Client {
 
     /// Constructs an OAuth2Client for the given domain.
     /// - Parameters:
-    ///   - domain: Okta domain to use for the base URL.
+    ///   - domain: Okta domain to use when composing the issuer URL.
     ///   - clientId: The unique client ID representing this client.
-    ///   - scopes: The list of OAuth2 scopes requested for this client.
-    ///   - authentication: The client authentication  model to use (Default: `.none`)
+    ///   - scope: The list of OAuth2 scopes requested for this client.
+    ///   - redirectUri: Optional `redirect_uri` value for this client.
+    ///   - logoutRedirectUri: Optional `logout_redirect_uri` value for this client.
+    ///   - authentication: The client authentication  model to use (Default: ``OAuth2Client/ClientAuthentication/none``)
     ///   - session: Optional URLSession to use for network requests.
     public convenience init(domain: String,
                             clientId: String,
-                            scopes: String,
+                            scope: String,
+                            redirectUri: String? = nil,
+                            logoutRedirectUri: String? = nil,
                             authentication: ClientAuthentication = .none,
                             session: URLSessionProtocol? = nil) throws
     {
         self.init(try Configuration(domain: domain,
                                     clientId: clientId,
-                                    scopes: scopes,
+                                    scope: scope,
+                                    redirectUri: redirectUri,
+                                    logoutRedirectUri: logoutRedirectUri,
                                     authentication: authentication),
                   session: session)
     }
     
     /// Constructs an OAuth2Client for the given domain.
     /// - Parameters:
-    ///   - baseURL: The base URL for operations against this client.
+    ///   - issuerURL: The issuer URL for operations against this client.
     ///   - clientId: The unique client ID representing this client.
-    ///   - scopes: The list of OAuth2 scopes requested for this client.
+    ///   - scope: The list of OAuth2 scopes requested for this client.
+    ///   - redirectUri: Optional `redirect_uri` value for this client.
+    ///   - logoutRedirectUri: Optional `logout_redirect_uri` value for this client.
     ///   - authentication: The client authentication  model to use (Default: `.none`)
     ///   - session: Optional URLSession to use for network requests.
-    public convenience init(baseURL: URL,
+    public convenience init(issuerURL: URL,
                             clientId: String,
-                            scopes: String,
+                            scope: String,
+                            redirectUri: URL? = nil,
+                            logoutRedirectUri: URL? = nil,
                             authentication: ClientAuthentication = .none,
                             session: URLSessionProtocol? = nil)
     {
-        self.init(Configuration(baseURL: baseURL,
+        self.init(Configuration(issuerURL: issuerURL,
                                 clientId: clientId,
-                                scopes: scopes,
+                                scope: scope,
+                                redirectUri: redirectUri,
+                                logoutRedirectUri: logoutRedirectUri,
                                 authentication: authentication),
                   session: session)
+    }
+    
+    @_documentation(visibility: internal)
+    public convenience init(_ config: OAuth2Client.PropertyListConfiguration) {
+        self.init(issuerURL: config.issuerURL,
+                  clientId: config.clientId,
+                  scope: config.scope,
+                  redirectUri: config.redirectUri,
+                  logoutRedirectUri: config.logoutRedirectUri)
     }
     
     /// Constructs an OAuth2Client for the given base URL.
@@ -198,8 +219,8 @@ public final class OAuth2Client {
                 let request = Token.RefreshRequest(openIdConfiguration: configuration,
                                                    clientConfiguration: self.configuration,
                                                    refreshToken: refreshToken,
-                                                   id: token.id,
-                                                   configuration: clientSettings)
+                                                   scope: nil,
+                                                   id: token.id)
                 let backgroundTask = BackgroundTask(named: "Refresh Token \(token.id)")
                 request.send(to: self) { result in
                     self.refreshQueue.sync(flags: .barrier) {
@@ -641,10 +662,22 @@ extension OAuth2Client: APIClient {
         return nil
     }
 
-    public func decode<T>(_ type: T.Type, from data: Data, userInfo: [CodingUserInfoKey: Any]? = nil) throws -> T where T: Decodable {
-        var info: [CodingUserInfoKey: Any] = userInfo ?? [:]
-        if info[.apiClientConfiguration] == nil {
-            info[.apiClientConfiguration] = configuration
+    @_documentation(visibility: private)
+    public func decode<T>(_ type: T.Type, from data: Data, parsing context: APIParsingContext? = nil) throws -> T where T: Decodable {
+        var info: [CodingUserInfoKey: Any] = context?.codingUserInfo ?? [:]
+        
+        if let tokenRequest = context as? any OAuth2TokenRequest,
+           info[.tokenContext] == nil
+        {
+            var clientSettings = info[.clientSettings] as? [String: String] ?? [:]
+            if let tokenRequest = tokenRequest as? any AuthenticationFlowRequest,
+               let persistValues = tokenRequest.context.persistValues
+            {
+                clientSettings.merge(persistValues) { (_, new) in new }
+            }
+
+            info[.tokenContext] = Token.Context(configuration: configuration,
+                                                clientSettings: clientSettings)
         }
         
         let jsonDecoder: JSONDecoder
@@ -659,22 +692,27 @@ extension OAuth2Client: APIClient {
         return try jsonDecoder.decode(type, from: data)
     }
     
+    @_documentation(visibility: private)
     public func willSend(request: inout URLRequest) {
         delegateCollection.invoke { $0.api(client: self, willSend: &request) }
     }
     
+    @_documentation(visibility: private)
     public func didSend(request: URLRequest, received error: APIClientError, requestId: String?, rateLimit: APIRateLimit?) {
         delegateCollection.invoke { $0.api(client: self, didSend: request, received: error, requestId: requestId, rateLimit: rateLimit) }
     }
 
+    @_documentation(visibility: private)
     public func shouldRetry(request: URLRequest) -> APIRetry {
         return delegateCollection.call({ $0.api(client: self, shouldRetry: request) }).first ?? .default
     }
     
+    @_documentation(visibility: private)
     public func didSend(request: URLRequest, received response: HTTPURLResponse) {
         delegateCollection.invoke { $0.api(client: self, didSend: request, received: response) }
     }
 
+    @_documentation(visibility: private)
     public func didSend<T>(request: URLRequest, received response: APIResponse<T>) where T: Decodable {
         delegateCollection.invoke { $0.api(client: self, didSend: request, received: response) }
     }

@@ -30,6 +30,70 @@ extension Dictionary where Key == String, Value == String {
     }
 }
 
+extension Collection {
+    @_documentation(visibility: internal)
+    @inlinable public var nilIfEmpty: Self? {
+        isEmpty ? nil : self
+    }
+}
+
+extension Sequence where Element: Equatable {
+    @_documentation(visibility: internal)
+    @inlinable
+    public func omitting(_ values: Element...) -> [Element] {
+        filter { !values.contains($0) }
+    }
+}
+
+extension Dictionary {
+    @_documentation(visibility: internal)
+    @inlinable
+    public func omitting(_ keys: Key...) -> Self {
+        filter { !keys.contains($0.key) }
+    }
+}
+
+extension Dictionary where Key: Hashable {
+    @_documentation(visibility: internal)
+    @inlinable
+    public func map(by keyPath: KeyPath<Key, Key>) -> Self {
+        var result: Self = [:]
+        
+        for (key, value) in self {
+            result[key[keyPath: keyPath]] = value
+        }
+        
+        return result
+    }
+    
+    @_documentation(visibility: internal)
+    @inlinable
+    public func value(_ key: Key, or alternatives: Key...) -> Value? {
+        if let value = self[key] {
+            return value
+        }
+        
+        if let first = alternatives.first(where: self.keys.contains) {
+            return self[first]
+        }
+        
+        return nil
+    }
+    
+//    @_documentation(visibility: internal)
+//    @inlinable
+//    public func values(_ key: Key, using keyPath: KeyPath<Key, Key>) -> [Value] {
+//        keys.filter { $0 == key || $0 == key[keyPath: keyPath] }
+//            .compactMap { self[$0] }
+//    }
+//    
+//    @_documentation(visibility: internal)
+//    @inlinable
+//    public func first(_ key: Key, using keyPath: KeyPath<Key, Key>) -> Value? {
+//        values(key, using: keyPath).first
+//    }
+}
+
 extension Dictionary where Key == String, Value == (any APIRequestArgument)? {
     @_documentation(visibility: internal)
     public var percentQueryEncoded: String {

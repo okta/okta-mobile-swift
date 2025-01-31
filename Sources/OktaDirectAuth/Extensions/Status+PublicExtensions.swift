@@ -15,10 +15,12 @@ import Foundation
 extension DirectAuthenticationFlow.Status {
     public static func == (lhs: DirectAuthenticationFlow.Status, rhs: DirectAuthenticationFlow.Status) -> Bool {
         switch (lhs, rhs) {
-        case (.success(let lhsToken), .success(let rhsToken)):
-            return lhsToken == rhsToken
-        case (.mfaRequired(let lhsContext), .mfaRequired(let rhsContext)):
-            return lhsContext == rhsContext
+        case (.success(let lhs), .success(let rhs)):
+            return lhs == rhs
+        case (.mfaRequired(let lhs), .mfaRequired(let rhs)):
+            return lhs == rhs
+        case (.continuation(let lhs), .continuation(let rhs)):
+            return lhs == rhs
         default:
             return false
         }

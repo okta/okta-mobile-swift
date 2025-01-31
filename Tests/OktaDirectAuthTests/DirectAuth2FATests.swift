@@ -23,9 +23,9 @@ final class DirectAuth2FATests: XCTestCase {
 
     override func setUpWithError() throws {
         urlSession = URLSessionMock()
-        client = OAuth2Client(baseURL: issuer,
+        client = OAuth2Client(issuerURL: issuer,
                               clientId: "theClientId",
-                              scopes: "openid profile offline_access",
+                              scope: "openid profile offline_access",
                               session: urlSession)
         flow = client.directAuthenticationFlow()
 
@@ -56,7 +56,7 @@ final class DirectAuth2FATests: XCTestCase {
             XCTFail("Not expecting a successful token response")
         case .mfaRequired(let context):
             XCTAssertFalse(context.mfaToken.isEmpty)
-            let newState = try await flow.resume(state, with: .oob(channel: .push))
+            let newState = try await flow.resume(with: .oob(channel: .push))
             switch newState {
             case .success(_):
                 // Success!

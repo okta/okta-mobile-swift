@@ -45,9 +45,9 @@ final class ResourceOwnerFlowSuccessTests: XCTestCase {
     var flow: ResourceOwnerFlow!
 
     override func setUpWithError() throws {
-        client = OAuth2Client(baseURL: issuer,
+        client = OAuth2Client(issuerURL: issuer,
                               clientId: "clientId",
-                              scopes: "openid profile",
+                              scope: "openid profile",
                               session: urlSession)
         JWK.validator = MockJWKValidator()
         Token.idTokenValidator = MockIDTokenValidator()

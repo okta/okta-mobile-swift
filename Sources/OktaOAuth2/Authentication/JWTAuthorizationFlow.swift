@@ -15,9 +15,17 @@ import AuthFoundation
 
 /// An authentication flow class that implements the JWT Authorization Bearer Flow, for authenticating users using JWTs signed by a trusted key.
 public class JWTAuthorizationFlow: AuthenticationFlow {
+    public typealias Context = StandardAuthenticationContext
+    
     /// The OAuth2Client this authentication flow will use.
     public let client: OAuth2Client
     
+    /// The context that stores the state for the current authentication session.
+    public private(set) var context: Context?
+
+    /// Any additional query string parameters you would like to supply to the authorization server for all requests from this flow.
+    public let additionalParameters: [String: APIRequestArgument]?
+
     /// Indicates whether or not this flow is currently in the process of authenticating a user.
     /// ``JWTAuthorizationFlow/init(issuer:clientId:scopes:)``
     public private(set) var isAuthenticating: Bool = false {
@@ -38,59 +46,54 @@ public class JWTAuthorizationFlow: AuthenticationFlow {
     /// - Parameters:
     ///   - issuer: The issuer URL.
     ///   - clientId: The client ID
-    ///   - scopes: The scopes to request
-    public convenience init(issuer: URL,
+    ///   - scope: The scopes to request
+    public convenience init(issuerURL: URL,
                             clientId: String,
-                            scopes: String)
+                            scope: String,
+                            additionalParameters: [String: any APIRequestArgument]? = nil)
     {
-        self.init(client: OAuth2Client(baseURL: issuer,
+        self.init(client: OAuth2Client(issuerURL: issuerURL,
                                        clientId: clientId,
-                                       scopes: scopes))
+                                       scope: scope),
+                  additionalParameters: additionalParameters)
     }
     
     /// Initializer to construct an authentication flow from an OAuth2Client.
     /// - Parameter client: `OAuth2Client` instance to authenticate with.
-    public init(client: OAuth2Client) {
+    public required init(client: OAuth2Client,
+                         additionalParameters: [String: any APIRequestArgument]? = nil)
+    {
         // Ensure this SDK's static version is included in the user agent.
         SDKVersion.register(sdk: Version)
         
         self.client = client
+        self.additionalParameters = additionalParameters
         
         client.add(delegate: self)
-    }
-    
-    /// Initializer that uses the configuration defined within the application's `Okta.plist` file.
-    public convenience init() throws {
-        self.init(try OAuth2Client.PropertyListConfiguration())
-    }
-    
-    /// Initializer that uses the configuration defined within the given file URL.
-    /// - Parameter fileURL: File URL to a `plist` containing client configuration.
-    public convenience init(plist fileURL: URL) throws {
-        self.init(try OAuth2Client.PropertyListConfiguration(plist: fileURL))
-    }
-    
-    private convenience init(_ config: OAuth2Client.PropertyListConfiguration) {
-        self.init(issuer: config.issuer,
-                  clientId: config.clientId,
-                  scopes: config.scopes)
     }
     
     /// Authenticates using the supplied JWT bearer assertion.
     /// - Parameters:
     ///   - assertion: JWT Assertion
     ///   - completion: Completion invoked when a response is received.
-    public func start(with assertion: JWT, completion: @escaping (Result<Token, OAuth2Error>) -> Void) {
+    public func start(with assertion: JWT,
+                      context: Context = .init(),
+                      completion: @escaping (Result<Token, OAuth2Error>) -> Void)
+    {
         isAuthenticating = true
+        self.context = context
+
+        let clientConfiguration = client.configuration
+        let additionalParameters = additionalParameters
 
         client.openIdConfiguration { result in
             switch result {
-            case .success(let configuration):
-                let request = TokenRequest(openIdConfiguration: configuration,
-                                           clientId: self.client.configuration.clientId,
-                                           scope: self.client.configuration.scopes,
-                                           assertion: assertion,
-                                           authenticationFlowConfiguration: nil)
+            case .success(let openIdConfiguration):
+                let request = TokenRequest(openIdConfiguration: openIdConfiguration,
+                                           clientConfiguration: clientConfiguration,
+                                           additionalParameters: additionalParameters,
+                                           context: context,
+                                           assertion: assertion)
                 self.client.exchange(token: request) { result in
                     self.reset()
                     
@@ -114,6 +117,7 @@ public class JWTAuthorizationFlow: AuthenticationFlow {
     /// Resets the flow for later reuse.
     public func reset() {
         isAuthenticating = false
+        context = nil
     }
 
     // MARK: Private properties / methods
@@ -126,9 +130,9 @@ extension JWTAuthorizationFlow {
     ///
     /// - Parameter jwt: JWT Assertion
     /// - Returns: The token resulting from signing in.
-    public func start(with assertion: JWT) async throws -> Token {
+    public func start(with assertion: JWT, context: Context = .init()) async throws -> Token {
         try await withCheckedThrowingContinuation { continuation in
-            start(with: assertion) { result in
+            start(with: assertion, context: context) { result in
                 continuation.resume(with: result)
             }
         }
@@ -144,7 +148,7 @@ extension JWTAuthorizationFlow: OAuth2ClientDelegate {}
 extension OAuth2Client {
     /// Creates a new JWT Authorization flow configured to use this OAuth2Client.
     /// - Returns: Initialized authorization flow.
-    public func jwtAuthorizationFlow() -> JWTAuthorizationFlow {
-        JWTAuthorizationFlow(client: self)
+    public func jwtAuthorizationFlow(additionalParameters: [String: String]? = nil) -> JWTAuthorizationFlow {
+        JWTAuthorizationFlow(client: self, additionalParameters: additionalParameters)
     }
 }

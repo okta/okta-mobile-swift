@@ -45,9 +45,10 @@ final class SessionTokenFlowSuccessTests: XCTestCase {
     var flow: SessionTokenFlow!
 
     override func setUpWithError() throws {
-        client = OAuth2Client(baseURL: issuer,
+        client = OAuth2Client(issuerURL: issuer,
                               clientId: "clientId",
-                              scopes: "openid profile",
+                              scope: "openid profile",
+                              redirectUri: redirectUri,
                               session: urlSession)
         JWK.validator = MockJWKValidator()
         Token.idTokenValidator = MockIDTokenValidator()
@@ -64,8 +65,7 @@ final class SessionTokenFlowSuccessTests: XCTestCase {
                           data: try data(from: .module, for: "token", in: "MockResponses"),
                           contentType: "application/json")
         
-        flow = client.sessionTokenFlow(redirectUri: redirectUri,
-                                       additionalParameters: ["additional": "param"])
+        flow = try client.sessionTokenFlow(additionalParameters: ["additional": "param"])
     }
     
     override func tearDownWithError() throws {

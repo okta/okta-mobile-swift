@@ -38,4 +38,5 @@ extension UserInfo.Request: APIRequest, OAuth2APIRequest {
     var httpMethod: APIRequestMethod { .get }
     var acceptsType: APIContentType? { .json }
     var authorization: APIAuthorization? { token }
+    var category: OAuth2APIRequestCategory { .resource }
 }

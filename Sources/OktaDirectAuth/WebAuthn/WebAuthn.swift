@@ -35,7 +35,7 @@ import Foundation
 /// ```
 public struct WebAuthn {
     /// Represents the credential challenge returned from the server when a WebAuthn authentication is initiated.
-    public struct CredentialRequestOptions: Codable {
+    public struct CredentialRequestOptions: Codable, Equatable {
         /// The public key request options supplied to the client from the server.
         public let publicKey: WebAuthn.PublicKeyCredentialRequestOptions
         
@@ -43,7 +43,7 @@ public struct WebAuthn {
         public let authenticatorEnrollments: [AuthenticatorEnrollment]?
 
         /// Defines additional authenticator enrollment information supplied by the server.
-        public struct AuthenticatorEnrollment: Codable {
+        public struct AuthenticatorEnrollment: Codable, Equatable {
             /// The ID supplied from the server representing this credential.
             ///
             /// **Note:** This should be identical to the ``WebAuthn/PublicKeyCredentialRequestOptions/rpID`` value.

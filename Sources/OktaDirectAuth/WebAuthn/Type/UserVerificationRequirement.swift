@@ -18,7 +18,7 @@ extension WebAuthn {
      
      - Note: [W3C Reccomendation](https://www.w3.org/TR/webauthn/#enum-userVerificationRequirement)
      */
-    public enum UserVerificationRequirement: String, Codable {
+    public enum UserVerificationRequirement: String, Codable, Equatable {
         /// This value indicates that the Relying Party requires user verification for the operation and will fail the operation if the response does not have the UV flag set.
         case required
         

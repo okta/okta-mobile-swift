@@ -14,20 +14,17 @@ import Foundation
 
 extension DirectAuthenticationFlow.Intent: ProvidesOAuth2Parameters {
     @_documentation(visibility: private)
-    public var overrideParameters: Bool {
-        true
-    }
-    
-    @_documentation(visibility: private)
-    public var additionalParameters: [String: any AuthFoundation.APIRequestArgument]? {
-        switch self {
-        case .signIn:
-            return nil
-        case .recovery:
+    public func parameters(for category: OAuth2APIRequestCategory) -> [String: any APIRequestArgument]? {
+        guard case .recovery = self else { return nil }
+        
+        switch category {
+        case .authorization, .token:
             return [
                 "scope": "okta.myAccount.password.manage",
                 "intent": "recovery",
             ]
+        case .configuration, .resource, .other:
+            return nil
         }
     }
 }

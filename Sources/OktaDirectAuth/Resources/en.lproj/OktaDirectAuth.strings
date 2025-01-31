@@ -1,4 +1,6 @@
 /* DirectAuthenticationFlowError */
+"flow_not_started" = "An operation was attempted to be performed on a flow that was not yet started.";
+"inconsistent_context_state" = "The sign in flow has gotten into an inconsistent state, possibly due to concurrent authentication operations being performed.";
 "polling_timeout_exceeded" = "Authentication timed out while polling the server.";
 "missing_arguments" = "Could not authenticate since some expected arguments were missing. [%@]";
 "binding_code_missing" = "Did not receive a binding code from server";

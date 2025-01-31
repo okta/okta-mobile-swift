@@ -1,9 +1,5 @@
 # ``AuthFoundation/APIClient``
 
-@Metadata {
-    @DocumentationExtension(mergeBehavior: append)
-}
-
 ## Subclassing Notes
 
 Many features of the APIClient protocol have default implementations that should serve most purposes, but there are some methods that either must be implemented in concrete instances of APIClient, or may need to be customized for special behavior.

@@ -28,9 +28,9 @@ final class CredentialTests: XCTestCase {
                            refreshToken: "refresh123",
                            idToken: nil,
                            deviceSecret: "device123",
-                           context: Token.Context(configuration: .init(baseURL: URL(string: "https://example.com/oauth2/default")!,
+                           context: Token.Context(configuration: .init(issuerURL: URL(string: "https://example.com/oauth2/default")!,
                                                                        clientId: "clientid",
-                                                                       scopes: "openid"),
+                                                                       scope: "openid"),
                                                   clientSettings: [ "client_id": "foo" ]))
 
     override func setUpWithError() throws {

@@ -14,9 +14,6 @@ import Foundation
 
 /// Describes a response from an Okta request, which includes the supplied result, and other associated response metadata.
 public struct APIResponse<T: Decodable>: Decodable {
-    @available(*, deprecated, renamed: "APIRateLimit")
-    public typealias RateLimit = APIRateLimit
-    
     /// Links between response resources.
     public enum Link: String, Codable {
         case current = "self", next, previous

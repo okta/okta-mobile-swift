@@ -16,7 +16,7 @@ import AuthFoundation
 class OOBStepHandler<Factor: AuthenticationFactor>: StepHandler {
     let flow: DirectAuthenticationFlow
     let openIdConfiguration: OpenIdConfiguration
-    let currentStatus: DirectAuthenticationFlow.Status?
+    let context: DirectAuthenticationFlow.Context
     let loginHint: String?
     let channel: DirectAuthenticationFlow.OOBChannel
     let factor: Factor
@@ -24,21 +24,21 @@ class OOBStepHandler<Factor: AuthenticationFactor>: StepHandler {
     
     init(flow: DirectAuthenticationFlow,
          openIdConfiguration: OpenIdConfiguration,
-         currentStatus: DirectAuthenticationFlow.Status?,
+         context: DirectAuthenticationFlow.Context,
          loginHint: String?,
          channel: DirectAuthenticationFlow.OOBChannel,
          factor: Factor) throws
     {
         self.flow = flow
         self.openIdConfiguration = openIdConfiguration
-        self.currentStatus = currentStatus
+        self.context = context
         self.loginHint = loginHint
         self.channel = channel
         self.factor = factor
     }
     
     func process(completion: @escaping (Result<DirectAuthenticationFlow.Status, DirectAuthenticationFlowError>) -> Void) {
-        if let bindingContext = currentStatus?.continuationType?.bindingContext {
+        if let bindingContext = context.currentStatus?.continuationType?.bindingContext {
             self.requestToken(using: bindingContext.oobResponse, completion: completion)
         } else {
             requestOOBCode { [weak self] result in
@@ -49,7 +49,7 @@ class OOBStepHandler<Factor: AuthenticationFactor>: StepHandler {
                 case .failure(let error):
                     self.flow.process(error, completion: completion)
                 case .success(let response):
-                    let mfaContext = currentStatus?.mfaContext
+                    let mfaContext = context.currentStatus?.mfaContext
                     
                     switch response.bindingMethod {
                     case .none:
@@ -84,7 +84,7 @@ class OOBStepHandler<Factor: AuthenticationFactor>: StepHandler {
         }
         
         // Request where OOB is used as the secondary factor
-        else if case let .mfaRequired(context) = currentStatus {
+        else if case let .mfaRequired(context) = context.currentStatus {
             requestOOBCode(mfaToken: context.mfaToken, completion: completion)
         }
         
@@ -100,10 +100,10 @@ class OOBStepHandler<Factor: AuthenticationFactor>: StepHandler {
         do {
             let request = try OOBAuthenticateRequest(openIdConfiguration: openIdConfiguration,
                                                      clientConfiguration: flow.client.configuration,
-                                                     authenticationFlowConfiguration: flow.configuration,
+                                                     context: context,
                                                      loginHint: loginHint,
                                                      channelHint: channel,
-                                                     challengeHint: factor.grantType(currentStatus: currentStatus))
+                                                     challengeHint: factor.grantType(currentStatus: context.currentStatus))
             request.send(to: flow.client) { result in
                 switch result {
                 case .failure(let error):
@@ -121,10 +121,10 @@ class OOBStepHandler<Factor: AuthenticationFactor>: StepHandler {
                                 completion: @escaping (Result<OOBResponse, APIClientError>) -> Void)
     {
         do {
-            let grantType = factor.grantType(currentStatus: currentStatus)
+            let grantType = factor.grantType(currentStatus: context.currentStatus)
             let request = try ChallengeRequest(openIdConfiguration: openIdConfiguration,
                                                clientConfiguration: flow.client.configuration,
-                                               authenticationFlowConfiguration: flow.configuration,
+                                               context: context,
                                                mfaToken: mfaToken,
                                                challengeTypesSupported: [grantType])
             request.send(to: flow.client) { result in
@@ -152,11 +152,10 @@ class OOBStepHandler<Factor: AuthenticationFactor>: StepHandler {
         
         let request = TokenRequest(openIdConfiguration: openIdConfiguration,
                                    clientConfiguration: flow.client.configuration,
-                                   authenticationFlowConfiguration: flow.configuration,
-                                   currentStatus: currentStatus,
+                                   context: context,
                                    factor: factor,
-                                   intent: flow.intent,
-                                   parameters: response)
+                                   parameters: response,
+                                   grantTypesSupported: flow.supportedGrantTypes)
         self.poll = PollingHandler(client: flow.client,
                                    request: request,
                                    expiresIn: response.expiresIn,

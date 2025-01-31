@@ -29,3 +29,9 @@ extension Array where Element == UInt8 {
         Data(self).base64URLEncodedString
     }
 }
+
+extension FixedWidthInteger {
+    static func random() -> Self {
+        return Self.random(in: .min ... .max)
+    }
+}

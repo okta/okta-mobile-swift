@@ -22,9 +22,9 @@ final class DeviceAuthorizationFlowSuccessTests: XCTestCase {
     var flow: DeviceAuthorizationFlow!
 
     override func setUpWithError() throws {
-        client = OAuth2Client(baseURL: issuer,
+        client = OAuth2Client(issuerURL: issuer,
                               clientId: "clientId",
-                              scopes: "openid profile",
+                              scope: "openid profile",
                               session: urlSession)
         JWK.validator = MockJWKValidator()
         Token.idTokenValidator = MockIDTokenValidator()
@@ -68,13 +68,13 @@ final class DeviceAuthorizationFlowSuccessTests: XCTestCase {
             XCTAssertNil(error)
         }
 
-        XCTAssertNotNil(delegate.context)
-        XCTAssertEqual(flow.context, delegate.context)
+        XCTAssertNotNil(delegate.verification)
+        XCTAssertEqual(flow.context?.verification, delegate.verification)
         XCTAssertTrue(flow.isAuthenticating)
-        XCTAssertEqual(delegate.context?.verificationUri.absoluteString, "https://example.okta.com/activate")
+        XCTAssertEqual(delegate.verification?.verificationUri.absoluteString, "https://example.okta.com/activate")
         XCTAssertTrue(delegate.started)
         
-        let context = try XCTUnwrap(delegate.context)
+        let context = try XCTUnwrap(delegate.verification)
 
         // Exchange code
         expect = expectation(description: "Wait for timer")
@@ -97,11 +97,11 @@ final class DeviceAuthorizationFlowSuccessTests: XCTestCase {
 
         // Begin
         var wait = expectation(description: "resume")
-        var context: DeviceAuthorizationFlow.Context?
+        var verification: DeviceAuthorizationFlow.Verification?
         flow.start { result in
             switch result {
             case .success(let response):
-                context = response
+                verification = response
             case .failure(let error):
                 XCTAssertNil(error)
             }
@@ -111,17 +111,17 @@ final class DeviceAuthorizationFlowSuccessTests: XCTestCase {
             XCTAssertNil(error)
         }
         
-        context = try XCTUnwrap(context)
-        XCTAssertEqual(flow.context?.deviceCode, context?.deviceCode)
+        verification = try XCTUnwrap(verification)
+        XCTAssertEqual(flow.context?.verification?.deviceCode, verification?.deviceCode)
         XCTAssertTrue(flow.isAuthenticating)
-        XCTAssertNotNil(flow.context?.verificationUri)
-        XCTAssertEqual(context, flow.context)
-        XCTAssertEqual(flow.context?.verificationUri.absoluteString, "https://example.okta.com/activate")
+        XCTAssertNotNil(flow.context?.verification?.verificationUri)
+        XCTAssertEqual(verification, flow.context?.verification)
+        XCTAssertEqual(flow.context?.verification?.verificationUri.absoluteString, "https://example.okta.com/activate")
 
         // Exchange code
         var token: Token?
         wait = expectation(description: "resume")
-        flow.resume(with: context!) { result in
+        flow.resume(with: verification!) { result in
             switch result {
             case .success(let resultToken):
                 token = resultToken
@@ -146,15 +146,15 @@ final class DeviceAuthorizationFlowSuccessTests: XCTestCase {
         XCTAssertFalse(flow.isAuthenticating)
 
         // Begin
-        let context = try await flow.start()
+        let verification = try await flow.start()
 
-        XCTAssertEqual(flow.context, context)
+        XCTAssertEqual(flow.context?.verification, verification)
         XCTAssertTrue(flow.isAuthenticating)
-        XCTAssertEqual(context, flow.context)
-        XCTAssertEqual(flow.context?.verificationUri.absoluteString, "https://example.okta.com/activate")
+        XCTAssertEqual(verification, flow.context?.verification)
+        XCTAssertEqual(flow.context?.verification?.verificationUri.absoluteString, "https://example.okta.com/activate")
 
         // Exchange code
-        let token = try await flow.resume(with: context)
+        let token = try await flow.resume(with: verification)
 
         XCTAssertNil(flow.context)
         XCTAssertFalse(flow.isAuthenticating)
@@ -170,7 +170,7 @@ final class DeviceAuthorizationFlowSuccessTests: XCTestCase {
                 "expires_in": 600
             }
         """)
-        let context = try defaultJSONDecoder.decode(DeviceAuthorizationFlow.Context.self, from: data)
+        let context = try defaultJSONDecoder.decode(DeviceAuthorizationFlow.Verification.self, from: data)
 
         XCTAssertEqual(context.deviceCode, "1a521d9f-0922-4e6d-8db9-8b654297435a")
         XCTAssertEqual(context.userCode, "GDLMZQCT")

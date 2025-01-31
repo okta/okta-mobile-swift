@@ -14,58 +14,50 @@ import Foundation
 import AuthFoundation
 
 extension AuthorizationCodeFlow {
-    struct TokenRequest {
+    struct TokenRequest: OAuth2TokenRequest, AuthenticationFlowRequest {
+        typealias ResponseType = Token
+        typealias Flow = AuthorizationCodeFlow
+
         let openIdConfiguration: OpenIdConfiguration
         let clientConfiguration: OAuth2Client.Configuration
-        let redirectUri: String
-        let grantType: GrantType
-        let grantValue: String
-        let pkce: PKCE?
-        let nonce: String?
-        let maxAge: TimeInterval?
-        let authenticationFlowConfiguration: (any AuthFoundation.AuthenticationFlowConfiguration)?
+        let additionalParameters: [String: any APIRequestArgument]?
+        let context: Flow.Context
+        let redirectUri: URL
+        let authorizationCode: String
+        
+        init(openIdConfiguration: OpenIdConfiguration,
+             clientConfiguration: OAuth2Client.Configuration,
+             additionalParameters: [String: any APIRequestArgument]?,
+             context: Context,
+             authorizationCode: String) throws
+        {
+            guard let redirectUri = clientConfiguration.redirectUri else {
+                throw OAuth2Error.missingRedirectUri
+            }
+            
+            self.openIdConfiguration = openIdConfiguration
+            self.clientConfiguration = clientConfiguration
+            self.additionalParameters = additionalParameters
+            self.context = context
+            self.authorizationCode = authorizationCode
+            self.redirectUri = redirectUri
+        }
     }
 }
 
-extension AuthorizationCodeFlow.TokenRequest: OAuth2TokenRequest {
-    var clientId: String { clientConfiguration.clientId }
-}
-
-extension AuthorizationCodeFlow.TokenRequest: OAuth2APIRequest {}
-
-extension AuthorizationCodeFlow.TokenRequest: APIRequestBody {
+extension AuthorizationCodeFlow.TokenRequest {
+    var category: AuthFoundation.OAuth2APIRequestCategory { .token }
     var bodyParameters: [String: APIRequestArgument]? {
-        var result: [String: APIRequestArgument] = [
-            "client_id": clientConfiguration.clientId,
-            "redirect_uri": redirectUri,
-            "grant_type": grantType,
-            grantType.responseKey: grantValue
-        ]
-        
-        if let pkce = pkce {
-            result["code_verifier"] = pkce.codeVerifier
-        }
-        
-        if let additional = clientConfiguration.authentication.additionalParameters {
-            result.merge(additional, uniquingKeysWith: { $1 })
-        }
-        
-        result.merge(authenticationFlowConfiguration)
+        var result = additionalParameters ?? [:]
+        result.merge(clientConfiguration.parameters(for: category))
+        result.merge(context.parameters(for: category))
+        result.merge([
+            "grant_type": GrantType.authorizationCode,
+            GrantType.authorizationCode.responseKey: authorizationCode,
+        ])
 
         return result
     }
 }
 
-extension AuthorizationCodeFlow.TokenRequest: APIParsingContext {
-    var codingUserInfo: [CodingUserInfoKey: Any]? {
-        [
-            .clientSettings: [
-                "client_id": clientConfiguration.clientId,
-                "redirect_uri": redirectUri,
-                "scope": clientConfiguration.scopes
-            ]
-        ]
-    }
-}
-
-extension AuthorizationCodeFlow.TokenRequest: IDTokenValidatorContext {}
+extension AuthorizationCodeFlow.TokenRequest: APIParsingContext {}

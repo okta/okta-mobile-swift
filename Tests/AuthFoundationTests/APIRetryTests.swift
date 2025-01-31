@@ -35,27 +35,27 @@ class APIRetryDelegateRecorder: APIClientDelegate {
 
 class APIRetryTests: XCTestCase {
     var client: MockApiClient!
-    let baseUrl = URL(string: "https://example.okta.com/oauth2/v1/token")!
+    let issuerURL = URL(string: "https://example.okta.com")!
     var configuration: OAuth2Client.Configuration!
     let urlSession = URLSessionMock()
     var apiRequest: MockApiRequest!
     let requestId = UUID().uuidString
     
     override func setUpWithError() throws {
-        configuration = OAuth2Client.Configuration(baseURL: baseUrl,
+        configuration = OAuth2Client.Configuration(issuerURL: issuerURL,
                                                    clientId: "clientid",
-                                                   scopes: "openid")
+                                                   scope: "openid")
         client = MockApiClient(configuration: configuration,
                                session: urlSession,
-                               baseURL: baseUrl)
-        apiRequest = MockApiRequest(url: baseUrl)
+                               baseURL: issuerURL)
+        apiRequest = MockApiRequest(url: issuerURL.appending(path: "/oauth2/v1/token"))
     }
 
     func testShouldNotRetry() throws {
         client = MockApiClient(configuration: configuration,
-                                   session: urlSession,
-                                   baseURL: baseUrl,
-                                   shouldRetry: .doNotRetry)
+                               session: urlSession,
+                               baseURL: issuerURL,
+                               shouldRetry: .doNotRetry)
         try performRetryRequest(count: 1)
         XCTAssertNil(client.request?.allHTTPHeaderFields?["X-Okta-Retry-Count"])
     }
@@ -81,7 +81,7 @@ class APIRetryTests: XCTestCase {
     func testCustomRetryCount() throws {
         client = MockApiClient(configuration: configuration,
                                session: urlSession,
-                               baseURL: baseUrl,
+                               baseURL: issuerURL,
                                shouldRetry: .retry(maximumCount: 5))
         try performRetryRequest(count: 6)
         XCTAssertEqual(client.request?.allHTTPHeaderFields?["X-Okta-Retry-Count"], "5")

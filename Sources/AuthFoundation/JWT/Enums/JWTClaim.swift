@@ -12,9 +12,6 @@
 
 import Foundation
 
-@available(*, deprecated, renamed: "JWTClaim")
-public typealias Claim = JWTClaim
-
 /// List of registered and public claims.
 public enum JWTClaim: Codable, IsClaim {
     /// Issuer

@@ -16,11 +16,11 @@ import Foundation
 /// An authentication flow class that implements the Token Exchange Flow.
 public class TokenExchangeFlow: AuthenticationFlow {
     /// Identifies the audience of the authorization server.
-    public enum Audience {
+    public enum Audience: APIRequestArgument {
         case `default`
         case custom(String)
         
-        var value: String {
+        public var stringValue: String {
             switch self {
             case .default:
                 return "api://default"
@@ -28,13 +28,24 @@ public class TokenExchangeFlow: AuthenticationFlow {
                 return aud
             }
         }
+        
+        init (_ value: String?) {
+            if let value = value {
+                self = .custom(value)
+            } else {
+                self = .default
+            }
+        }
     }
     
     /// The OAuth2 client this authentication flow will use.
     public let client: OAuth2Client
     
-    /// Server audience.
-    public let audience: Audience
+    /// The context that stores the state for the current authentication session.
+    public private(set) var context: Context?
+
+    /// Any additional query string parameters you would like to supply to the authorization server for all requests from this flow.
+    public let additionalParameters: [String: APIRequestArgument]?
 
     /// Indicates whether or not this flow is currently in the process of authenticating a user.
     public private(set) var isAuthenticating: Bool = false {
@@ -56,58 +67,48 @@ public class TokenExchangeFlow: AuthenticationFlow {
     
     /// Convenience initializer to construct a flow from variables.
     /// - Parameters:
-    ///   - issuer: The issuer URL.
+    ///   - issuerURL: The issuer URL.
     ///   - clientId: The client ID.
-    ///   - scopes: The scopes to request.
+    ///   - scope: The scopes to request.
     ///   - audience: The audience of the authorization server.
-    public convenience init(issuer: URL,
+    ///   - additionalParameters: Optional query parameters to supply tot he authorization server for all requests from this flow.
+    public convenience init(issuerURL: URL,
                             clientId: String,
-                            scopes: String,
-                            audience: Audience = .default) {
-        self.init(audience: audience,
-                  client: OAuth2Client(baseURL: issuer,
+                            scope: String,
+                            additionalParameters: [String: APIRequestArgument]? = nil)
+    {
+        self.init(client: OAuth2Client(issuerURL: issuerURL,
                                        clientId: clientId,
-                                       scopes: scopes))
+                                       scope: scope),
+                  additionalParameters: additionalParameters)
     }
-    
-    /// Initializer that uses the configuration defined within the application's `Okta.plist` file.
-    public convenience init() throws {
-        self.init(try OAuth2Client.PropertyListConfiguration())
-    }
-    
-    /// Initializer that uses the configuration defined within the given file URL.
-    /// - Parameter fileURL: File URL to a `plist` containing client configuration.
-    public convenience init(plist fileURL: URL) throws {
-        self.init(try OAuth2Client.PropertyListConfiguration(plist: fileURL))
-    }
-    
-    private convenience init(_ config: OAuth2Client.PropertyListConfiguration) {
-        self.init(issuer: config.issuer,
-                  clientId: config.clientId,
-                  scopes: config.scopes)
-    }
-    
+
     /// Initializer to construct a flow from a default audience and client.
     /// - Parameters:
     ///   - audience: The audience of the authorization server.
     ///   - client: The `OAuth2Client` to use with this flow.
-    public init(audience: Audience = .default, client: OAuth2Client) {
+    public required init(client: OAuth2Client,
+                         additionalParameters: [String: APIRequestArgument]? = nil)
+    {
         // Ensure this SDK's static version is included in the user agent.
         SDKVersion.register(sdk: Version)
         
         self.client = client
-        self.audience = audience
+        self.additionalParameters = additionalParameters
         
         client.add(delegate: self)
     }
-
+    
     /// Initiates a token exchange flow.
     ///
     /// This method is used to begin a token exchange.  This method is asynchronous, and will invoke the appropriate delegate methods when a response is received.
     /// - Parameters:
     ///   - tokens: Tokens to exchange.
     ///   - completion: Completion block for receiving the response.
-    public func start(with tokens: [TokenType], completion: @escaping (Result<Token, OAuth2Error>) -> Void) {
+    public func start(with tokens: [TokenType],
+                      context: Context = .init(),
+                      completion: @escaping (Result<Token, OAuth2Error>) -> Void)
+    {
         guard !tokens.isEmpty else {
             delegateCollection.invoke { $0.authentication(flow: self, received: OAuth2Error.cannotComposeUrl) }
             completion(.failure(OAuth2Error.cannotComposeUrl))
@@ -116,16 +117,18 @@ public class TokenExchangeFlow: AuthenticationFlow {
         }
         
         isAuthenticating = true
+        self.context = context
+        let clientConfiguration = client.configuration
+        let additionalParameters = additionalParameters
         
         client.openIdConfiguration { result in
             switch result {
-            case .success(let configuration):
-                let request = TokenRequest(openIdConfiguration: configuration,
-                                           clientId: self.client.configuration.clientId,
-                                           tokens: tokens,
-                                           scope: self.client.configuration.scopes,
-                                           audience: self.audience.value,
-                                           authenticationFlowConfiguration: nil)
+            case .success(let openIdConfiguration):
+                let request = TokenRequest(openIdConfiguration: openIdConfiguration,
+                                           clientConfiguration: clientConfiguration,
+                                           additionalParameters: additionalParameters,
+                                           context: context,
+                                           tokens: tokens)
                 self.client.exchange(token: request) { result in
                     switch result {
                     case .failure(let error):
@@ -149,6 +152,7 @@ public class TokenExchangeFlow: AuthenticationFlow {
 
     public func reset() {
         isAuthenticating = false
+        context = nil
     }
 }
 
@@ -161,9 +165,11 @@ extension TokenExchangeFlow {
     /// Asynchronously initiates a token exchange flow.
     /// - Parameter tokens: Tokens to exchange. If empty, the method throws an error.
     /// - Returns: The the token created as a result of exchanging the tokens.
-    public func start(with tokens: [TokenType]) async throws -> Token {
+    public func start(with tokens: [TokenType],
+                      context: Context = .init()) async throws -> Token
+    {
         try await withCheckedThrowingContinuation { continuation in
-            start(with: tokens) { result in
+            start(with: tokens, context: context) { result in
                 continuation.resume(with: result)
             }
         }
@@ -174,7 +180,9 @@ extension OAuth2Client {
     /// Creates a new Token Exchange flow configured to use this OAuth2Client, using the supplied arguments.
     /// - Parameter audience: Audience to configure the flow to use
     /// - Returns: Initialized authorization flow.
-    public func tokenExchangeFlow(audience: TokenExchangeFlow.Audience = .default) -> TokenExchangeFlow {
-        TokenExchangeFlow(audience: audience, client: self)
+    public func tokenExchangeFlow(additionalParameters: [String: String]? = nil) -> TokenExchangeFlow
+    {
+        TokenExchangeFlow(client: self,
+                          additionalParameters: additionalParameters)
     }
 }

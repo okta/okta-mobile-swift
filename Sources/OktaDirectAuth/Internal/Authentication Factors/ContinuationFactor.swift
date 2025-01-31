@@ -17,10 +17,13 @@ extension DirectAuthenticationFlow.ContinuationFactor: AuthenticationFactor {
     func stepHandler(flow: DirectAuthenticationFlow,
                      openIdConfiguration: AuthFoundation.OpenIdConfiguration,
                      loginHint: String? = nil,
-                     currentStatus: DirectAuthenticationFlow.Status?,
                      factor: Self) throws -> StepHandler
     {
-        let bindingContext = currentStatus?.continuationType?.bindingContext
+        guard let context = flow.context else {
+            throw DirectAuthenticationFlowError.inconsistentContextState
+        }
+        
+        let bindingContext = context.currentStatus?.continuationType?.bindingContext
         
         switch self {
         case .transfer:
@@ -31,7 +34,7 @@ extension DirectAuthenticationFlow.ContinuationFactor: AuthenticationFactor {
             
             return try OOBStepHandler(flow: flow,
                                       openIdConfiguration: openIdConfiguration,
-                                      currentStatus: currentStatus,
+                                      context: context,
                                       loginHint: loginHint,
                                       channel: bindingContext.oobResponse.channel,
                                       factor: factor)
@@ -44,22 +47,20 @@ extension DirectAuthenticationFlow.ContinuationFactor: AuthenticationFactor {
 
             let request = TokenRequest(openIdConfiguration: openIdConfiguration,
                                        clientConfiguration: flow.client.configuration,
-                                       authenticationFlowConfiguration: flow.configuration,
-                                       currentStatus: currentStatus,
+                                       context: context,
                                        factor: factor,
-                                       intent: flow.intent,
-                                       parameters: bindingContext.oobResponse)
+                                       parameters: bindingContext.oobResponse,
+                                       grantTypesSupported: flow.supportedGrantTypes)
             return TokenStepHandler(flow: flow, request: request)
 
         case .webAuthn(response: let response):
             let request = TokenRequest(openIdConfiguration: openIdConfiguration,
                                        clientConfiguration: flow.client.configuration,
-                                       authenticationFlowConfiguration: flow.configuration,
-                                       currentStatus: currentStatus,
+                                       context: context,
                                        loginHint: loginHint,
                                        factor: factor,
-                                       intent: flow.intent,
-                                       parameters: response)
+                                       parameters: response,
+                                       grantTypesSupported: flow.supportedGrantTypes)
             return TokenStepHandler(flow: flow, request: request)
         }
     }

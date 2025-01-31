@@ -19,8 +19,34 @@ import OSLog
 //
 // If the minimum supported version of this SDK is to increase in the future, this class should be updated to use the modern Logger struct.
 
+#if DEBUG
 /// Convenience class used for debugging SDK network operations.
-public class DebugAPIRequestObserver: OAuth2ClientDelegate {
+///
+/// Developers can use this to assist in debugging interactions with the Client SDK, and any network operations that are performed on behalf of the user via this SDK.
+///
+/// > Important: This is only available in `DEBUG` builds, and should not be used within production applications.
+///
+/// To use this debug tool, you can either add the shared observer as a delegate to the ``OAuth2Client`` instance you would like to observe:
+///
+/// ```swift
+/// let flow = try AuthorizationCodeFlow()
+/// flow.client.add(delegate: DebugAPIRequestObserver.shared)
+/// ```
+///
+/// Or alternatively you can use the ``observeAllOAuth2Clients`` convenience property to automatically bind to ``OAuth2Client`` instances as they are initialized.
+///
+/// ```swift
+/// func application(
+///     _ application: UIApplication,
+///     didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool
+/// {
+///     // Application setup
+///     #if DEBUG
+///     DebugAPIRequestObserver.shared.observeAllOAuth2Clients = true
+///     #endif
+/// }
+/// ```
+public final class DebugAPIRequestObserver: OAuth2ClientDelegate {
     /// Shared convenience instance to use.
     public static var shared: DebugAPIRequestObserver = {
         DebugAPIRequestObserver()
@@ -28,7 +54,30 @@ public class DebugAPIRequestObserver: OAuth2ClientDelegate {
     
     /// Indicates if HTTP request and response headers should be logged.
     public var showHeaders = false
+    
+    /// Convenience flag that automatically binds newly-created ``OAuth2Client`` instances to the debug observer.
+    public var observeAllOAuth2Clients: Bool = false {
+        didSet {
+            if observeAllOAuth2Clients {
+                oauth2Observer = NotificationCenter.default.addObserver(
+                    forName: .oauth2ClientCreated,
+                    object: nil,
+                    queue: nil,
+                    using: { [weak self] notification in
+                        guard let self = self,
+                              let client = notification.object as? OAuth2Client
+                        else {
+                            return
+                        }
+                        client.add(delegate: self)
+                    })
+            } else {
+                oauth2Observer = nil
+            }
+        }
+    }
 
+    @_documentation(visibility: private)
     public func api(client: any APIClient, willSend request: inout URLRequest) {
         var headers = "<omitted>"
         if showHeaders {
@@ -52,6 +101,7 @@ public class DebugAPIRequestObserver: OAuth2ClientDelegate {
         }
     }
     
+    @_documentation(visibility: private)
     public func api(client: any APIClient, didSend request: URLRequest, received response: HTTPURLResponse) {
         var headers = "<omitted>"
         if showHeaders {
@@ -64,6 +114,7 @@ public class DebugAPIRequestObserver: OAuth2ClientDelegate {
                headers)
     }
     
+    @_documentation(visibility: private)
     public func api(client: any APIClient,
                     didSend request: URLRequest,
                     received error: APIClientError,
@@ -75,6 +126,7 @@ public class DebugAPIRequestObserver: OAuth2ClientDelegate {
         os_log(.debug, log: Self.log, "Error:\n%{public}s", result)
     }
     
+    @_documentation(visibility: private)
     public func api<T>(client: any APIClient,
                        didSend request: URLRequest,
                        received response: APIResponse<T>) where T: Decodable
@@ -86,11 +138,19 @@ public class DebugAPIRequestObserver: OAuth2ClientDelegate {
     }
     
     private static var log = OSLog(subsystem: "com.okta.client.network", category: "Debugging")
+    private var oauth2Observer: NSObjectProtocol? {
+        didSet {
+            if let oldValue = oldValue,
+               oauth2Observer == nil
+            {
+                NotificationCenter.default.removeObserver(oldValue)
+            }
+        }
+    }
     private func requestId(from headers: [AnyHashable: Any]?, using name: String?) -> String {
         headers?.first(where: { (key, _) in
             (key as? String)?.lowercased() == name?.lowercased()
         })?.value as? String ?? "<unknown>"
     }
 }
-
-
+#endif

@@ -26,13 +26,18 @@ class SessionLogoutFlowFailureTests: XCTestCase {
     let state = "state"
     
     override func setUpWithError() throws {
-        client = OAuth2Client(baseURL: issuer, clientId: "clientId", scopes: "openid", session: urlSession)
+        client = OAuth2Client(issuerURL: issuer,
+                              clientId: "clientId",
+                              scope: "openid",
+                              redirectUri: redirectUri,
+                              logoutRedirectUri: logoutRedirectUri,
+                              session: urlSession)
         
         urlSession.expect("https://example.com/.well-known/openid-configuration",
                           data: nil,
                           error: OAuth2Error.cannotComposeUrl)
         
-        flow = SessionLogoutFlow(logoutRedirectUri: logoutRedirectUri, client: client)
+        flow = client.sessionLogoutFlow()
     }
 
     func testDelegate() throws {
@@ -47,7 +52,7 @@ class SessionLogoutFlowFailureTests: XCTestCase {
         let context = SessionLogoutFlow.Context(idToken: logoutIDToken, state: state)
         let resumeExpection = expectation(description: "Expect success")
         
-        try flow.start(with: context) { result in
+        flow.start(with: context) { result in
             XCTAssertTrue(self.flow.inProgress)
             resumeExpection.fulfill()
         }
@@ -70,7 +75,7 @@ class SessionLogoutFlowFailureTests: XCTestCase {
         let context = SessionLogoutFlow.Context(idToken: logoutIDToken, state: state)
         let resumeExpection = expectation(description: "Expect success")
         
-        try flow.start(with: context) { result in
+        flow.start(with: context) { result in
             switch result {
             case .success:
                 XCTFail()

@@ -41,9 +41,9 @@ final class DefaultCredentialDataSourceTests: XCTestCase {
     var dataSource: DefaultCredentialDataSource!
     var delegate: CredentialDataSourceDelegateRecorder!
 
-    let configuration = OAuth2Client.Configuration(baseURL: URL(string: "https://example.com")!,
+    let configuration = OAuth2Client.Configuration(issuerURL: URL(string: "https://example.com")!,
                                                    clientId: "clientid",
-                                                   scopes: "openid")
+                                                   scope: "openid")
     
 
     override func setUpWithError() throws {

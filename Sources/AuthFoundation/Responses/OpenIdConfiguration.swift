@@ -22,6 +22,8 @@ public struct OpenIdConfiguration: Codable, JSONClaimContainer {
     public var payload: [String: Any] { jsonPayload.jsonValue.anyValue as? [String: Any] ?? [:] }
 
     let jsonPayload: AnyJSON
+
+    @_documentation(visibility: internal)
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
         let json = try container.decode(JSON.self)

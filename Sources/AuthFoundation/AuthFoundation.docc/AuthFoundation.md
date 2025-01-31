@@ -96,7 +96,6 @@ You can use AuthFoundation when you want to:
 ### Error Types
 
 - ``APIClientError``
-- ``AuthenticationError``
 - ``ClaimError``
 - ``CredentialError``
 - ``JSONError``

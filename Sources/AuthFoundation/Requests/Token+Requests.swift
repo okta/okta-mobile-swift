@@ -43,8 +43,8 @@ extension Token {
         let openIdConfiguration: OpenIdConfiguration
         let clientConfiguration: OAuth2Client.Configuration
         let refreshToken: String
+        let scope: String?
         let id: String
-        let configuration: [String: APIRequestArgument]
         
         static let placeholderId = "temporary_id"
     }
@@ -80,8 +80,39 @@ extension Token: APIAuthorization {
 
 /// Sub-protocol of ``APIRequest`` used to define requests that are performed using links supplied via an organization's ``OpenIdConfiguration``.
 public protocol OAuth2APIRequest: APIRequest {
-    /// The ``OpenIdConfiguration`` used to formulate this request's ``APIRequest/url``.
+    /// The client's Open ID Configuration object defining the settings and endpoints used to interact with this Authorization Server.
     var openIdConfiguration: OpenIdConfiguration { get }
+
+    /// The category for the request being made, which can be used to determine which arguments are included.
+    var category: OAuth2APIRequestCategory { get }
+}
+
+/// Protocol used by requests that are initiated by a class conforming to ``AuthenticationFlow``.
+///
+/// Some authentication flows consist of multiple requests, and as a result critical context information that is important for response parsing and object persistence may not be available on the final request. This object enables the context from the flow to be made available to the API request and response parsing lifecycle.
+public protocol AuthenticationFlowRequest {
+    associatedtype Flow: AuthenticationFlow
+    
+    /// The authentication flow's ``AuthenticationContext`` instance that created this request.
+    var context: Flow.Context { get }
+}
+
+/// Categorizes the types of requests made to an authorization server.
+public enum OAuth2APIRequestCategory: CaseIterable {
+    /// Requests used for discovery of an authorization server's configuration
+    case configuration
+    
+    /// Initiates an authorization workflow.
+    case authorization
+    
+    /// Requests a token from an authorization server.
+    case token
+    
+    /// Perform a resource server request using an access token.
+    case resource
+    
+    /// Other uncategorized requests.
+    case other
 }
 
 extension Token.RevokeRequest: OAuth2APIRequest, APIRequestBody {
@@ -90,6 +121,7 @@ extension Token.RevokeRequest: OAuth2APIRequest, APIRequestBody {
     var httpMethod: APIRequestMethod { .post }
     var contentType: APIContentType? { .formEncoded }
     var acceptsType: APIContentType? { .json }
+    var category: OAuth2APIRequestCategory { .other }
     var bodyParameters: [String: APIRequestArgument]? {
         var result = configuration
         result["token"] = token
@@ -98,7 +130,7 @@ extension Token.RevokeRequest: OAuth2APIRequest, APIRequestBody {
             result["token_type_hint"] = hint
         }
         
-        result.merge(clientAuthentication)
+        result.merge(clientAuthentication.parameters(for: category))
 
         return result
     }
@@ -111,6 +143,7 @@ extension Token.IntrospectRequest: OAuth2APIRequest, APIRequestBody {
     var contentType: APIContentType? { .formEncoded }
     var acceptsType: APIContentType? { .json }
     var authorization: APIAuthorization? { nil }
+    var category: OAuth2APIRequestCategory { .other }
     var bodyParameters: [String: APIRequestArgument]? {
         var result: [String: APIRequestArgument] = [
             "token": token.token(of: type) ?? "",
@@ -118,48 +151,41 @@ extension Token.IntrospectRequest: OAuth2APIRequest, APIRequestBody {
             "token_type_hint": type
         ]
         
-        result.merge(clientConfiguration.authentication)
+        result.merge(clientConfiguration.parameters(for: category))
 
         return result
     }
 }
 
 extension Token.RefreshRequest: OAuth2APIRequest, APIRequestBody, APIParsingContext, OAuth2TokenRequest {
-    var authenticationFlowConfiguration: (any AuthenticationFlowConfiguration)? {
-        nil
-    }
-    
     typealias ResponseType = Token
 
     var httpMethod: APIRequestMethod { .post }
     var url: URL { openIdConfiguration.tokenEndpoint }
     var contentType: APIContentType? { .formEncoded }
     var acceptsType: APIContentType? { .json }
-    var clientId: String { clientConfiguration.clientId }
+    var category: OAuth2APIRequestCategory { .token }
     var bodyParameters: [String: APIRequestArgument]? {
-        var result: [String: APIRequestArgument] = configuration
-        result["grant_type"] = "refresh_token"
-        result["refresh_token"] = refreshToken
+        var result: [String: any APIRequestArgument] = [
+            "grant_type": "refresh_token",
+            "refresh_token": refreshToken,
+        ]
+        result.merge(clientConfiguration.parameters(for: category))
 
-        result.merge(clientConfiguration.authentication)
+        if let scope = scope {
+            result["scope"] = scope
+        } else {
+            result.removeValue(forKey: "scope")
+        }
 
         return result
     }
     
     var codingUserInfo: [CodingUserInfoKey: Any]? {
-        guard let settings = configuration.reduce(into: [:], { partialResult, item in
-            guard let key = CodingUserInfoKey(rawValue: item.key) else { return }
-            partialResult?[key] = item.value
-        }) else { return nil }
-        
-        var result: [CodingUserInfoKey: Any] = [
-            .clientSettings: settings
-        ]
-        
         if id != Self.placeholderId {
-            result[.tokenId] = id
+            return [.tokenId: id]
         }
         
-        return result
+        return nil
     }
 }

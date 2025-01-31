@@ -1,5 +1,5 @@
 //
-// Copyright (c) 2023-Present, Okta, Inc. and/or its affiliates. All rights reserved.
+// Copyright (c) 2025-Present, Okta, Inc. and/or its affiliates. All rights reserved.
 // The Okta software accompanied by this notice is provided pursuant to the Apache License, Version 2.0 (the "License.")
 //
 // You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0.
@@ -10,25 +10,27 @@
 // See the License for the specific language governing permissions and limitations under the License.
 //
 
-import Foundation
-
 extension OAuth2Error {
-    init(_ error: Error) {
+    @_documentation(visibility: internal)
+    public init(_ error: Error) {
         if let error = error as? OAuth2Error {
             self = error
         } else if let error = error as? APIClientError {
-            self = .network(error: error)
-        } else if let error = error as? DirectAuthenticationFlowError {
-            switch error {
-            case .network(error: let error):
-                self = OAuth2Error(error)
-            case .oauth2(error: let error):
-                self = error
-            default:
-                self = .error(error)
-            }
+            self.init(error)
+        } else if let error = error as? OAuth2ServerError {
+            self = .server(error: error)
         } else {
             self = .error(error)
+        }
+    }
+    
+    @_documentation(visibility: internal)
+    public init(_ error: APIClientError) {
+        switch error {
+        case .serverError(let error):
+            self.init(error)
+        default:
+            self = .network(error: error)
         }
     }
 }

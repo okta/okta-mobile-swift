@@ -51,9 +51,9 @@ final class TokenExchangeFlowTests: XCTestCase {
     private let tokens: [TokenExchangeFlow.TokenType] = [.actor(type: .deviceSecret, value: "secret"), .subject(type: .idToken, value: "id_token")]
     
     override func setUpWithError() throws {
-        client = OAuth2Client(baseURL: issuer,
+        client = OAuth2Client(issuerURL: issuer,
                               clientId: "clientId",
-                              scopes: "profile openid device_sso",
+                              scope: "profile openid device_sso",
                               session: urlSession)
         JWK.validator = MockJWKValidator()
         Token.idTokenValidator = MockIDTokenValidator()
@@ -69,7 +69,7 @@ final class TokenExchangeFlowTests: XCTestCase {
                           data: try data(from: .module, for: "token", in: "MockResponses"),
                           contentType: "application/json")
         
-        flow = client.tokenExchangeFlow(audience: .default)
+        flow = client.tokenExchangeFlow()
     }
     
     override func tearDownWithError() throws {

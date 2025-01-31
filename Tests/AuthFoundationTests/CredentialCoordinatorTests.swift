@@ -33,9 +33,9 @@ final class UserCoordinatorTests: XCTestCase {
                            refreshToken: nil,
                            idToken: nil,
                            deviceSecret: nil,
-                           context: Token.Context(configuration: .init(baseURL: URL(string: "https://example.com")!,
+                           context: Token.Context(configuration: .init(issuerURL: URL(string: "https://example.com")!,
                                                                        clientId: "clientid",
-                                                                       scopes: "openid"),
+                                                                       scope: "openid"),
                                                   clientSettings: nil))
 
     override func setUpWithError() throws {

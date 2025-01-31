@@ -14,8 +14,9 @@
 
 /* OAuth2Error */
 "missing_client_configuration_description" = "Cannot perform an operation since the token is missing its client configuration.";
+"missing_client_redirect_uri" = "An operation was performed which requires a `redirect_uri`, but none was supplied to the client configuration.";
 "cannot_compose_url_description" = "Cannot compose a URL to authenticate with.";
-"oauth2_error_description" = "Authentication error: %@ (code %d).";
+"oauth2_error_description" = "Authentication error: %@ (%@).";
 "oauth2_error_code_description" = "Authentication error code %@.";
 "missing_token_description" = "Missing %@ token.";
 "error_description" = "Error: %@";

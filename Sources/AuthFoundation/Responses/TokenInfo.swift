@@ -22,10 +22,12 @@ public struct TokenInfo: Codable, JSONClaimContainer {
     
     public let payload: [String: Any]
     
+    @_documentation(visibility: internal)
     public init(_ info: [String: Any]) {
         self.payload = info
     }
     
+    @_documentation(visibility: internal)
     public init(from decoder: Decoder) throws {
         self.init(try Self.decodePayload(from: decoder))
     }
@@ -38,5 +40,6 @@ public struct TokenInfo: Codable, JSONClaimContainer {
 }
 
 extension TokenInfo: JSONDecodable {
+    @_documentation(visibility: internal)
     public static var jsonDecoder = JSONDecoder()
 }

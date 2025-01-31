@@ -31,18 +31,6 @@ extension AuthorizationCodeFlow.RedirectError {
     }
 }
     
-extension AuthenticationError: LocalizedError {
-    public var errorDescription: String? {
-        switch self {
-        case .flowNotReady:
-            return NSLocalizedString("flow_not_ready_description",
-                                     tableName: "OktaOAuth2",
-                                     bundle: .oktaOAuth2,
-                                     comment: "Invalid URL")
-        }
-    }
-}
-
 extension AuthorizationCodeFlow.RedirectError: LocalizedError {
     public var errorDescription: String? {
         switch self {

@@ -12,32 +12,36 @@
 
 - ``init()``
 - ``init(plist:)``
-- ``init(issuer:clientId:scopes:redirectUri:logoutRedirectUri:additionalParameters:)``
-- ``init(loginFlow:logoutFlow:context:)``
+- ``init(issuerURL:clientId:scope:redirectUri:logoutRedirectUri:additionalParameters:)``
+- ``init(loginFlow:logoutFlow:)``
 
 ### Sign In
 
-- ``signIn(from:options:)``
-- ``signIn(from:options:completion:)``
+- ``signIn(from:context:)``
+- ``signIn(from:context:completion:)``
 
 ### Sign Out Using Credential
 
 - <doc:HowToSignOut>
-- ``signOut(from:credential:options:)``
-- ``signOut(from:credential:options:completion:)``
+- ``signOut(from:credential:context:)``
+- ``signOut(from:credential:context:completion:)``
 
 ### Sign Out Using Token
 
 - <doc:HowToSignOut>
-- ``signOut(from:token:options:)-4x9ic``
-- ``signOut(from:token:options:)-33i36``
-- ``signOut(from:token:options:completion:)-3q66k``
-- ``signOut(from:token:options:completion:)-2jka2``
+- ``signOut(from:token:context:)``
+- ``signOut(from:token:context:completion:)``
+
+### Sign Out Using Custom Settings
+
+- <doc:HowToSignOut>
+- ``signOut(from:context:)``
+- ``signOut(from:context:completion:)``
 
 ### Sign In Using App Link
 
+- ``resume(with:)``
 - ``resume(with:)-9xiuc``
-- ``resume(with:)-5hhn1``
 
 ### Customizing OAuth2 Flows
 
@@ -45,14 +49,10 @@
 - ``signOutFlow``
 - ``context``
 
-@Metadata {
-    @DocumentationExtension(mergeBehavior: append)
-}
-
 ## Usage
 
 Signing in and -out is intended to be simple using this class, with several options for configuring your client (see <doc:ConfiguringYourClient> for more information). Once your client is configured, it is available through a shared singleton property ``shared``, or can be directly accessed if you create an instance directly.
 
-The ``signIn(from:options:)`` function (or ``signIn(from:options:completion:)`` for applications not using Swift Concurrency) presents a browser from the window supplied to the `from` argument, which the user can use to enter their account information.  After the sign in completes, the result is returned allowing your application to continue.
+The ``signIn(from:context:)`` function (or ``signIn(from:context:completion:)`` for applications not using Swift Concurrency) presents a browser from the window supplied to the `from` argument, which the user can use to enter their account information.  After the sign in completes, the result is returned allowing your application to continue.
 
-When signing a user out, the ``signOut(from:credential:options:)`` function similarly presents a browser to the user, in order to clear cookies and other browser state that is associated with the user's session.
+When signing a user out, the ``signOut(from:context:)`` function similarly presents a browser to the user, in order to clear cookies and other browser state that is associated with the user's session.

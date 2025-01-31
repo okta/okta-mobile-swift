@@ -35,6 +35,19 @@ extension DirectAuthenticationFlow.ContinuationType {
             return nil
         }
     }
+    
+    public static func == (lhs: DirectAuthenticationFlow.ContinuationType, rhs: DirectAuthenticationFlow.ContinuationType) -> Bool {
+        switch (lhs, rhs) {
+        case (.webAuthn(let lhs), .webAuthn(let rhs)):
+            return lhs == rhs
+        case (.transfer(let lhs_context, let lhs_code), .transfer(let rhs_context, let rhs_code)):
+            return lhs_context == rhs_context && lhs_code == rhs_code
+        case (.prompt(let lhs), .prompt(let rhs)):
+            return lhs == rhs
+        default:
+            return false
+        }
+    }
 }
 
 extension DirectAuthenticationFlow.Status {

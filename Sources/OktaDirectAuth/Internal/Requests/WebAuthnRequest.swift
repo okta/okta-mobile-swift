@@ -13,16 +13,18 @@
 import Foundation
 import AuthFoundation
 
-struct WebAuthnChallengeRequest {
+struct WebAuthnChallengeRequest: AuthenticationFlowRequest {
+    typealias Flow = DirectAuthenticationFlow
+    
     let url: URL
     let clientConfiguration: OAuth2Client.Configuration
-    let authenticationFlowConfiguration: (any AuthenticationFlowConfiguration)?
+    let context: Flow.Context
     let loginHint: String?
     let mfaToken: String?
 
     init(openIdConfiguration: OpenIdConfiguration,
          clientConfiguration: OAuth2Client.Configuration,
-         authenticationFlowConfiguration: (any AuthenticationFlowConfiguration)?,
+         context: DirectAuthenticationFlow.Context,
          loginHint: String? = nil,
          mfaToken: String? = nil) throws
     {
@@ -32,7 +34,7 @@ struct WebAuthnChallengeRequest {
         
         self.url = url
         self.clientConfiguration = clientConfiguration
-        self.authenticationFlowConfiguration = authenticationFlowConfiguration
+        self.context = context
         self.loginHint = loginHint
         self.mfaToken = mfaToken
     }
@@ -44,11 +46,18 @@ extension WebAuthnChallengeRequest: APIRequest, APIRequestBody {
     var httpMethod: APIRequestMethod { .post }
     var contentType: APIContentType? { .formEncoded }
     var acceptsType: APIContentType? { .json }
+    var category: AuthFoundation.OAuth2APIRequestCategory { .other }
     var bodyParameters: [String: APIRequestArgument]? {
-        var result: [String: APIRequestArgument] = [
-            "client_id": clientConfiguration.clientId,
+        var result = clientConfiguration.parameters(for: category) ?? [:]
+        
+        // Only supply context parameters (e.g. intent, max_age, nonce, etc) on the initial request
+        if mfaToken == nil {
+            result.merge(context.parameters(for: category))
+        }
+        
+        result.merge([
             "challenge_hint": GrantType.webAuthn
-        ]
+        ])
         
         if let loginHint = loginHint {
             result["login_hint"] = loginHint
@@ -58,8 +67,9 @@ extension WebAuthnChallengeRequest: APIRequest, APIRequestBody {
             result["mfa_token"] = mfaToken
         }
         
-        result.merge(clientConfiguration.authentication)
-        result.merge(authenticationFlowConfiguration)
+        if result["client_id"] == nil {
+            result["client_id"] = clientConfiguration.clientId
+        }
 
         return result
     }

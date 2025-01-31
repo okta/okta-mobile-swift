@@ -16,9 +16,10 @@ extension DirectAuthenticationFlow {
     func send(success response: APIResponse<Token>,
               completion: @escaping (Result<Status, DirectAuthenticationFlowError>) -> Void)
     {
-        reset()
         delegateCollection.invoke { $0.authentication(flow: self, received: response.result) }
         completion(.success(.success(response.result)))
+
+        reset()
     }
 
     func send(state: Status,
@@ -31,11 +32,11 @@ extension DirectAuthenticationFlow {
     func send(error: Error,
               completion: @escaping (Result<Status, DirectAuthenticationFlowError>) -> Void)
     {
-        reset()
-        
         let oauth2Error = OAuth2Error(error)
         delegateCollection.invoke { $0.authentication(flow: self, received: oauth2Error) }
 
         completion(.failure(DirectAuthenticationFlowError(error)))
+
+        reset()
     }
 }

@@ -22,9 +22,9 @@ final class DeviceAuthorizationFlowErrorTests: XCTestCase {
     var flow: DeviceAuthorizationFlow!
 
     override func setUpWithError() throws {
-        client = OAuth2Client(baseURL: issuer,
+        client = OAuth2Client(issuerURL: issuer,
                               clientId: "clientId",
-                              scopes: "openid profile",
+                              scope: "openid profile",
                               session: urlSession)
         JWK.validator = MockJWKValidator()
         Token.idTokenValidator = MockIDTokenValidator()
@@ -88,11 +88,11 @@ final class DeviceAuthorizationFlowErrorTests: XCTestCase {
 
         // Begin
         var wait = expectation(description: "resume")
-        var context: DeviceAuthorizationFlow.Context?
+        var verification: DeviceAuthorizationFlow.Verification?
         flow.start { result in
             switch result {
             case .success(let response):
-                context = response
+                verification = response
             case .failure(let error):
                 XCTAssertNil(error)
             }
@@ -102,18 +102,18 @@ final class DeviceAuthorizationFlowErrorTests: XCTestCase {
             XCTAssertNil(error)
         }
         
-        context = try XCTUnwrap(context)
-        XCTAssertEqual(flow.context?.deviceCode, context?.deviceCode)
+        verification = try XCTUnwrap(verification)
+        XCTAssertEqual(flow.context?.verification?.deviceCode, verification?.deviceCode)
         XCTAssertTrue(flow.isAuthenticating)
-        XCTAssertNotNil(flow.context?.verificationUri)
-        XCTAssertEqual(context, flow.context)
-        XCTAssertEqual(flow.context?.verificationUri.absoluteString, "https://example.okta.com/activate")
-        XCTAssertEqual(flow.context?.interval, 1)
+        XCTAssertNotNil(flow.context?.verification?.verificationUri)
+        XCTAssertEqual(verification, flow.context?.verification)
+        XCTAssertEqual(flow.context?.verification?.verificationUri.absoluteString, "https://example.okta.com/activate")
+        XCTAssertEqual(flow.context?.verification?.interval, 1)
 
         // Exchange code
         var token: Token?
         wait = expectation(description: "resume")
-        flow.resume(with: context!) { result in
+        flow.resume(with: verification!) { result in
             switch result {
             case .success(let resultToken):
                 token = resultToken

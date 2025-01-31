@@ -66,7 +66,7 @@ public extension HasClaims {
     }
     
     /// Returns the value for the given key as an array of values converted using a``ClaimConvertable`` type.
-    /// - Parameter key: String payload key name.
+    /// - Parameter claim: The claim type to retrieve.
     /// - Returns: Value converted to an array of the requested type.
     func value<T: ClaimConvertable>(for claim: ClaimType) throws -> [T] {
         try value(for: claim.rawValue)
@@ -81,7 +81,7 @@ public extension HasClaims {
     }
 
     /// Returns the optional value for the given key as an array of values converted using a``ClaimConvertable`` type.
-    /// - Parameter key: String payload key name.
+    /// - Parameter claim: The claim type to retrieve.
     /// - Returns: Optional value converted to an array of the requested type.
     func value<T: ClaimConvertable>(for claim: ClaimType) -> [T]? {
         value(for: claim.rawValue)
@@ -103,7 +103,7 @@ public extension HasClaims {
     }
     
     /// Returns the value for the given key as an array of values converted using a``ClaimConvertable`` type.
-    /// - Parameter key: String payload key name.
+    /// - Parameter claim: The claim type to retrieve.
     /// - Returns: Value converted to an array of the requested type.
     func value<T: ClaimConvertable>(for claim: ClaimType) throws -> [String: T] {
         try value(for: claim.rawValue)
@@ -118,7 +118,7 @@ public extension HasClaims {
     }
 
     /// Returns the optional value for the given key as an array of values converted using a``ClaimConvertable`` type.
-    /// - Parameter key: String payload key name.
+    /// - Parameter claim: Payload claim to retrieve.
     /// - Returns: Optional value converted to an array of the requested type.
     func value<T: ClaimConvertable>(for claim: ClaimType) -> [String: T]? {
         value(for: claim.rawValue)

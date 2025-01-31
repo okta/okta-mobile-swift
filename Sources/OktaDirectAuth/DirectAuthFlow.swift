@@ -36,6 +36,12 @@ public enum DirectAuthenticationFlowError: Error {
     /// The context supplied with the authenticator continuation request is invalid.
     case invalidContinuationContext
     
+    /// An operation was attempted to be performed on a flow that was not yet started.
+    case flowNotStarted
+    
+    /// The flow has gotten into an inconsistent state, possibly due to concurrent authentication operations being performed.
+    case inconsistentContextState
+    
     /// Some authenticators require specific arguments to be supplied, but are missing in this case.
     case missingArguments(_ names: [String])
     
@@ -133,7 +139,7 @@ public class DirectAuthenticationFlow: AuthenticationFlow {
     
     /// Enumeration defining the list of possible authenticator "Continuation" factors, which are used.
     ///
-    /// Some authenticators cannot complete authentication in a single step, and requires either user intervention or an additional challenge response from the client. These circumstances are represented by the ``DirectAuthenticationFlow/Status/continuation(_:)`` status. In this case, the appropriate Continuation Factor response type can be supplied to the ``DirectAuthenticationFlow/resume(_:with:)-9i2pz`` function.
+    /// Some authenticators cannot complete authentication in a single step, and requires either user intervention or an additional challenge response from the client. These circumstances are represented by the ``DirectAuthenticationFlow/Status/continuation(_:)`` status. In this case, the appropriate Continuation Factor response type can be supplied to the ``DirectAuthenticationFlow/resume(with:)-9gu1l`` function.
     public enum ContinuationFactor: Equatable {
         /// Continues an OOB authentication by transfering the binding to another authenticator, and waiting for its response.
         ///
@@ -173,33 +179,49 @@ public class DirectAuthenticationFlow: AuthenticationFlow {
     }
     
     /// Configuration which can be used to customize the authentication flow, as needed.
-    public struct Configuration: AuthenticationFlowConfiguration {
-        /// The "nonce" value to send with this authorization request.
-        public var nonce: String?
-        
-        /// The maximum age an ID token can be when authenticating.
-        public var maxAge: TimeInterval?
-        
+    public struct Context: AuthenticationContext, Equatable {
         /// The ACR values, if any, which should be requested by the client.
         public var acrValues: [String]?
 
-        /// The list of grant types the application supports.
-        public var grantTypesSupported: [GrantType] = .directAuth
+        /// The intent of the current flow.
+        public var intent: Intent = .signIn
         
-        public init(nonce: String? = nil,
-                    maxAge: TimeInterval? = nil,
+        /// The current status returned from this authentication flow.
+        public internal(set) var currentStatus: Status?
+
+        public init(maxAge: TimeInterval? = nil,
                     acrValues: [String]? = nil,
-                    grantTypesSupported: [GrantType] = .directAuth)
+                    intent: Intent = .signIn)
         {
-            self.nonce = nonce
-            self.maxAge = maxAge
+            self.init(acrValues: acrValues,
+                      intent: intent)
+        }
+
+        init(acrValues: [String]?,
+             intent: Intent)
+        {
             self.acrValues = acrValues
-            self.grantTypesSupported = grantTypesSupported
+            self.intent = intent
+        }
+
+        @_documentation(visibility: internal)
+        public func parameters(for category: OAuth2APIRequestCategory) -> [String: any APIRequestArgument]? {
+            var result: [String: any APIRequestArgument] = [:]
+            
+            if let acrValues = acrValues {
+                result["acr_values"] = acrValues.joined(separator: " ")
+            }
+            
+            if category == .token {
+                result.merge(intent.parameters(for: category))
+            }
+            
+            return result.nilIfEmpty
         }
     }
     
     /// Channel used when authenticating an out-of-band factor using Okta Verify.
-    public enum OOBChannel: String, Codable, APIRequestArgument {
+    public enum OOBChannel: String, Codable, Equatable, APIRequestArgument {
         /// Utilize Okta Verify Push notifications to authenticate the user.
         case push
         
@@ -226,26 +248,26 @@ public class DirectAuthenticationFlow: AuthenticationFlow {
     
     /// The current status of the authentication flow.
     ///
-    /// This value is returned from ``DirectAuthenticationFlow/start(_:with:)`` and ``DirectAuthenticationFlow/resume(_:with:)`` to indicate the result of an individual authentication step. This can be used to drive your application's sign-in workflow.
+    /// This value is returned from ``DirectAuthenticationFlow/start(_:with:)`` and ``DirectAuthenticationFlow/resume(with:)`` to indicate the result of an individual authentication step. This can be used to drive your application's sign-in workflow.
     public enum Status: Equatable {
         /// Authentication was successful, returning the given token.
         case success(_ token: Token)
         
         /// Indicates that the current authentication factor requires some sort of continuation.
         ///
-        /// When this status is returned, the developer should inspect the type of continuation that is occurring, and should use the ``DirectAuthenticationFlow/resume(_:with:)-9i2pz function to resume authenticating this factor.
+        /// When this status is returned, the developer should inspect the type of continuation that is occurring, and should use the ``DirectAuthenticationFlow/resume(with:)-9gu1l`` function to resume authenticating this factor.
         case continuation(_ type: ContinuationType)
         
         /// Indicates the user should be challenged with some other secondary factor.
         ///
-        /// When this status is returned, the developer should use the ``DirectAuthenticationFlow/resume(_:with:)`` function to supply a secondary factor to verify the user.
+        /// When this status is returned, the developer should use the ``DirectAuthenticationFlow/resume(with:)`` function to supply a secondary factor to verify the user.
         case mfaRequired(_ context: MFAContext)
     }
     
     /// The type of authentication continuation that is requested.
     ///
     /// Some authenticators follow a challenge and response pattern, whereby the client either needs to prompt the user for some out-of-band information, or the client needs to respond directly to a challenge sent from the server. When these situations occur, this enum can be used to determine which action should be taken by the client.
-    public enum ContinuationType {
+    public enum ContinuationType: Equatable {
         /// Indicates the user is being prompted with a WebAuthn challenge request.
         case webAuthn(_ context: WebAuthnContext)
         
@@ -256,7 +278,7 @@ public class DirectAuthenticationFlow: AuthenticationFlow {
         case prompt(_ context: BindingContext)
         
         /// Holds information about a challenge request when initiating a WebAuthn authentication.
-        public struct WebAuthnContext {
+        public struct WebAuthnContext: Equatable {
             /// The credential request returned from the server.
             public let request: WebAuthn.CredentialRequestOptions
             
@@ -264,7 +286,7 @@ public class DirectAuthenticationFlow: AuthenticationFlow {
         }
         
         /// Holds information about the binding update received when verifying OOB factors
-        public struct BindingContext {
+        public struct BindingContext: Equatable {
             let oobResponse: OOBResponse
             let mfaContext: MFAContext?
         }
@@ -273,7 +295,7 @@ public class DirectAuthenticationFlow: AuthenticationFlow {
     /// Indicates the intent for the user authentication operation.
     ///
     /// This value is used to toggle behavior to distinguish between sign-in authentication, password recovery / reset operations, etc.
-    public enum Intent: String, Codable {
+    public enum Intent: String, Codable, Equatable {
         /// The user intends to sign in.
         case signIn
         
@@ -284,12 +306,19 @@ public class DirectAuthenticationFlow: AuthenticationFlow {
     /// The OAuth2Client this authentication flow will use.
     public let client: OAuth2Client
     
-    /// The configuration settings that can be used to customize this authentication flow.
-    public let configuration: Configuration
-    
-    /// The intent of the current flow.
-    public private(set) var intent: Intent = .signIn
-    
+    /// The list of grant types the application supports.
+    public let supportedGrantTypes: [GrantType]
+
+    /// The context that stores the state for the current authentication session.
+    public internal(set) var context: Context? {
+        didSet {
+            print("Reset context")
+        }
+    }
+
+    /// Any additional query string parameters you would like to supply to the authorization server for all requests from this flow.
+    public let additionalParameters: [String: APIRequestArgument]?
+
     /// Indicates whether or not this flow is currently in the process of authenticating a user.
     public private(set) var isAuthenticating: Bool = false {
         didSet {
@@ -307,87 +336,67 @@ public class DirectAuthenticationFlow: AuthenticationFlow {
     
     /// Convenience initializer to construct an authentication flow from variables.
     /// - Parameters:
-    ///   - issuer: The issuer URL.
+    ///   - issuerURL: The issuer URL.
     ///   - clientId: The client ID
-    ///   - scopes: The scopes to request
-    ///   - configuration: The configuration settings used to customize this authentication flow.
-    public convenience init(issuer: URL,
+    ///   - scope: The scopes to request
+    ///   - grantTypes: The supported list of grant types the application has been configured to use
+    ///   - additionalParameters: Custom request parameters to be added to requests made for this sign-in.
+    public convenience init(issuerURL: URL,
                             clientId: String,
-                            scopes: String,
-                            configuration: Configuration = .init())
+                            scope: String,
+                            supportedGrants grantTypes: [GrantType] = .directAuth,
+                            additionalParameters: [String: any APIRequestArgument]? = nil)
     {
-        self.init(configuration: configuration,
-                  client: .init(baseURL: issuer,
+        self.init(client: .init(issuerURL: issuerURL,
                                 clientId: clientId,
-                                scopes: scopes))
+                                scope: scope),
+                  supportedGrants: grantTypes,
+                  additionalParameters: additionalParameters)
     }
     
     /// Initializer to construct an authentication flow from a pre-defined configuration and client.
     /// - Parameters:
-    ///   - configuration: The configuration settings used to customize this authentication flow.
     ///   - client: The `OAuth2Client` to use with this flow.
-    public init(configuration: Configuration = .init(),
-                client: OAuth2Client)
+    ///   - grantTypes: The supported list of grant types the application has been configured to use
+    ///   - additionalParameters: Custom request parameters to be added to requests made for this sign-in.
+    public init(client: OAuth2Client,
+                supportedGrants grantTypes: [GrantType] = .directAuth,
+                additionalParameters: [String: any APIRequestArgument]? = nil)
     {
         // Ensure this SDK's static version is included in the user agent.
         SDKVersion.register(sdk: Version)
         
         self.client = client
-        self.configuration = configuration
+        self.supportedGrantTypes = grantTypes
+        self.additionalParameters = additionalParameters
         
         client.add(delegate: self)
     }
     
-    /// Initializer that uses the configuration defined within the application's `Okta.plist` file.
-    public convenience init() throws {
-        try self.init(try .init())
-    }
-    
-    /// Initializer that uses the configuration defined within the given file URL.
-    /// - Parameter fileURL: File URL to a `plist` containing client configuration.
-    public convenience init(plist fileURL: URL) throws {
-        try self.init(try .init(plist: fileURL))
-    }
-    
-    private convenience init(_ config: OAuth2Client.PropertyListConfiguration) throws {
-        let supportedGrantTypes: [GrantType]
-        if let supportedGrants = config.additionalParameters?["supportedGrants"] as? String {
-            supportedGrantTypes = try .from(string: supportedGrants)
-        } else {
-            supportedGrantTypes = .directAuth
-        }
+    public required init(client: OAuth2Client, additionalParameters: [String: any APIRequestArgument]?) throws {
+        // Ensure this SDK's static version is included in the user agent.
+        SDKVersion.register(sdk: Version)
         
-        let supportedAcrValues: [String]?
-        if let acrValues = config.additionalParameters?["acrValues"] as? String {
-            supportedAcrValues = acrValues.components(separatedBy: " ")
-        } else if let acrValues = config.additionalParameters?["acrValues"] as? [String] {
-            supportedAcrValues = acrValues
-        } else {
-            supportedAcrValues = nil
-        }
+        self.client = client
+        self.supportedGrantTypes = .directAuth
+        self.additionalParameters = additionalParameters
         
-        self.init(issuer: config.issuer,
-                  clientId: config.clientId,
-                  scopes: config.scopes,
-                  configuration: .init(acrValues: supportedAcrValues,
-                                       grantTypesSupported: supportedGrantTypes))
+        client.add(delegate: self)
     }
-    
-    var stepHandler: (any StepHandler)?
-    
+
     /// Start user authentication, with the given username login hint and primary factor.
     /// - Parameters:
     ///   - loginHint: The login hint, or username, to authenticate.
     ///   - factor: The primary factor to use when authenticating the user.
-    ///   - intent: The intent behind this authentication (default: `signIn`)
+    ///   - context: Context information used to customize the sign-in flow.
     ///   - completion: Completion block called when the operation completes.
     public func start(_ loginHint: String,
                       with factor: PrimaryFactor,
-                      intent: Intent = .signIn,
+                      context: Context = .init(),
                       completion: @escaping (Result<Status, DirectAuthenticationFlowError>) -> Void)
     {
         reset()
-        self.intent = intent
+        self.context = context
         runStep(loginHint: loginHint, with: factor, completion: completion)
     }
     
@@ -395,32 +404,39 @@ public class DirectAuthenticationFlow: AuthenticationFlow {
     ///
     /// This function should be used when ``Status/mfaRequired(_:)`` is received.
     /// - Parameters:
-    ///   - status: The previous status returned from the server.
     ///   - factor: The secondary factor to use when authenticating the user.
     ///   - completion: Completion block called when the operation completes.
-    public func resume(_ status: DirectAuthenticationFlow.Status,
-                       with factor: SecondaryFactor,
+    public func resume(with factor: SecondaryFactor,
                        completion: @escaping (Result<Status, DirectAuthenticationFlowError>) -> Void)
     {
-        runStep(currentStatus: status, with: factor, completion: completion)
+        guard isAuthenticating,
+              context != nil
+        else {
+            completion(.failure(.flowNotStarted))
+            return
+        }
+        
+        runStep(with: factor, completion: completion)
     }
 
     /// Continues authentication of a current factor (either primary or secondary) when an additional step is required.
     ///
     /// This function should be used when ``Status/continuation(_:)`` is received.
     /// - Parameters:
-    ///   - status: The previous status returned from the server.
     ///   - factor: The continuation factor to use when authenticating the user.
     ///   - completion: Completion block called when the operation completes.
-    public func resume(_ status: DirectAuthenticationFlow.Status,
-                       with factor: ContinuationFactor,
+    public func resume(with factor: ContinuationFactor,
                        completion: @escaping (Result<Status, DirectAuthenticationFlowError>) -> Void)
     {
-        runStep(currentStatus: status, with: factor, completion: completion)
+        guard context != nil else {
+            completion(.failure(.flowNotStarted))
+            return
+        }
+        
+        runStep(with: factor, completion: completion)
     }
     
     func runStep<Factor: AuthenticationFactor>(loginHint: String? = nil,
-                                               currentStatus: Status? = nil,
                                                with factor: Factor,
                                                completion: @escaping (Result<DirectAuthenticationFlow.Status, DirectAuthenticationFlowError>) -> Void)
     {
@@ -429,35 +445,52 @@ public class DirectAuthenticationFlow: AuthenticationFlow {
         client.openIdConfiguration { result in
             switch result {
             case .success(let configuration):
+                let stepHandler: any StepHandler
                 do {
-                    self.stepHandler = try factor.stepHandler(flow: self,
-                                                              openIdConfiguration: configuration,
-                                                              loginHint: loginHint,
-                                                              currentStatus: currentStatus,
-                                                              factor: factor)
-                    self.stepHandler?.process { result in
-                        self.stepHandler = nil
-                        if case let .success(status) = result,
-                            case .success = status
-                        {
-                            self.reset()
-                        }
-                        completion(result)
-                    }
+                    stepHandler = try factor.stepHandler(flow: self,
+                                                         openIdConfiguration: configuration,
+                                                         loginHint: loginHint,
+                                                         factor: factor)
                 } catch {
                     self.send(error: error, completion: completion)
+                    return
                 }
-                
+
+                self.process(stepHandler, completion: completion)
+
             case .failure(let error):
                 self.send(error: error, completion: completion)
             }
         }
     }
     
+    func process(_ stepHandler: any StepHandler, completion: @escaping (Result<DirectAuthenticationFlow.Status, DirectAuthenticationFlowError>) -> Void) {
+        guard let oldContext = context else {
+            completion(.failure(.inconsistentContextState))
+            return
+        }
+        
+        stepHandler.process { result in
+            guard self.context == oldContext else {
+                self.send(error: DirectAuthenticationFlowError.inconsistentContextState,
+                          completion: completion)
+                return
+            }
+            
+            if case let .success(newStatus) = result {
+                var newContext = oldContext
+                newContext.currentStatus = newStatus
+                self.context = newContext
+            }
+            
+            completion(result)
+        }
+    }
+    
     /// Resets the authentication session.
     public func reset() {
         isAuthenticating = false
-        intent = .signIn
+        context = nil
     }
 
     // MARK: Private properties / methods
@@ -470,14 +503,14 @@ extension DirectAuthenticationFlow {
     /// - Parameters:
     ///   - loginHint: The login hint, or username, to authenticate.
     ///   - factor: The primary factor to use when authenticating the user.
-    ///   - intent: The intent behind this authentication (default: `signIn`)
+    ///   - context: Context information used to customize the sign-in flow.
     /// - Returns: Status returned when the operation completes.
     public func start(_ loginHint: String,
                       with factor: PrimaryFactor,
-                      intent: DirectAuthenticationFlow.Intent = .signIn) async throws -> DirectAuthenticationFlow.Status
+                      context: Context = .init()) async throws -> DirectAuthenticationFlow.Status
     {
         try await withCheckedThrowingContinuation { continuation in
-            start(loginHint, with: factor, intent: intent) { result in
+            start(loginHint, with: factor, context: context) { result in
                 continuation.resume(with: result)
             }
         }
@@ -487,12 +520,11 @@ extension DirectAuthenticationFlow {
     ///
     /// This function should be used when ``Status/mfaRequired(_:)`` is received.
     /// - Parameters:
-    ///   - status: The previous status returned from the server.
     ///   - factor: The secondary factor to use when authenticating the user.
     /// - Returns: Status returned when the operation completes.
-    public func resume(_ status: DirectAuthenticationFlow.Status, with factor: SecondaryFactor) async throws -> DirectAuthenticationFlow.Status {
+    public func resume(with factor: SecondaryFactor) async throws -> DirectAuthenticationFlow.Status {
         try await withCheckedThrowingContinuation { continuation in
-            resume(status, with: factor) { result in
+            resume(with: factor) { result in
                 continuation.resume(with: result)
             }
         }
@@ -502,12 +534,11 @@ extension DirectAuthenticationFlow {
     ///
     /// This function should be used when ``Status/continuation(_:)`` is received.
     /// - Parameters:
-    ///   - status: The previous status returned from the server.
     ///   - factor: The continuation factor to use when authenticating the user.
     /// - Returns: Status returned when the operation completes.
-    public func resume(_ status: DirectAuthenticationFlow.Status, with factor: ContinuationFactor) async throws -> DirectAuthenticationFlow.Status {
+    public func resume(with factor: ContinuationFactor) async throws -> DirectAuthenticationFlow.Status {
         try await withCheckedThrowingContinuation { continuation in
-            resume(status, with: factor) { result in
+            resume(with: factor) { result in
                 continuation.resume(with: result)
             }
         }
@@ -524,11 +555,15 @@ extension DirectAuthenticationFlow: OAuth2ClientDelegate {
 
 extension OAuth2Client {
     /// Creates a new flow to authenticate users, with the given grants the application supports.
-    /// - Parameter grantTypes: The list of grants this application supports. Defaults to the full list of values supported by this SDK.
+    /// - Parameters:
+    ///   - grantTypes: The supported list of grant types the application has been configured to use
+    ///   - additionalParameters: Custom request parameters to be added to requests made for this sign-in.
     /// - Returns: Initialized authentication flow.
-    public func directAuthenticationFlow(supportedGrants grantTypes: [GrantType] = .directAuth) -> DirectAuthenticationFlow
+    public func directAuthenticationFlow(supportedGrants grantTypes: [GrantType] = .directAuth,
+                                         additionalParameters: [String: String]? = nil) -> DirectAuthenticationFlow
     {
-        DirectAuthenticationFlow(configuration: .init(grantTypesSupported: grantTypes),
-                                 client: self)
+        DirectAuthenticationFlow(client: self,
+                                 supportedGrants: grantTypes,
+                                 additionalParameters: additionalParameters)
     }
 }

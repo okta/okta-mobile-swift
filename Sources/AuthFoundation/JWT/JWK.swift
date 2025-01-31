@@ -39,6 +39,7 @@ public struct JWK: Codable, Equatable, Identifiable, Hashable {
     /// A default implementation of ``JWKValidator`` is provided and will be used if this value is not changed.
     public static var validator: JWKValidator = DefaultJWKValidator()
 
+    @_documentation(visibility: internal)
     public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         type = try container.decode(KeyType.self, forKey: .keyType)
@@ -56,6 +57,7 @@ public struct JWK: Codable, Equatable, Identifiable, Hashable {
         }
     }
 
+    @_documentation(visibility: internal)
     public func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
         try container.encode(type, forKey: .keyType)

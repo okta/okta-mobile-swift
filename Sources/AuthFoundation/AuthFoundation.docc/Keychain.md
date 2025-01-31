@@ -1,9 +1,5 @@
 # ``AuthFoundation/Keychain``
 
-@Metadata {
-    @DocumentationExtension(mergeBehavior: append)
-}
-
 ## Creating Keychain Items
 
 The ``Keychain/Item`` struct represents individual items in the keychain. It can be used to create new items, and is returned as a result when getting an existing item.

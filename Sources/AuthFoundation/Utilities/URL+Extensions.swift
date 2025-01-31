@@ -11,28 +11,31 @@
 //
 
 import Foundation
-import AuthFoundation
 
-extension DirectAuthenticationFlow.Configuration {
-    public var additionalParameters: [String: any APIRequestArgument]? {
-        var result = [String: any APIRequestArgument]()
-        
-        result["grant_types_supported"] = grantTypesSupported
-            .map(\.rawValue)
-            .joined(separator: " ")
-        
-        if let nonce = nonce {
-            result["nonce"] = nonce
-        }
-        
-        if let maxAge = maxAge {
-            result["max_age"] = Int(maxAge).stringValue
+extension URL {
+    @_documentation(visibility: internal)
+    @inlinable
+    public init?(string value: String?) throws {
+        guard let value = value else {
+            return nil
         }
 
-        if let acrValues = acrValues {
-            result["acr_values"] = acrValues.joined(separator: " ")
+        guard let result = URL(string: value) else {
+            throw OAuth2Error.invalidUrl
         }
         
-        return result
+        self = result
+    }
+
+    @_documentation(visibility: internal)
+    @inlinable
+    public init(requiredString value: String?) throws {
+        guard let value = value,
+              let result = URL(string: value)
+        else {
+            throw OAuth2Error.invalidUrl
+        }
+        
+        self = result
     }
 }

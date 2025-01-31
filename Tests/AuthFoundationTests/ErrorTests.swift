@@ -77,8 +77,8 @@ final class ErrorTests: XCTestCase {
         XCTAssertEqual(OAuth2Error.network(error: APIClientError.serverError(TestLocalizedError.nestedError)).errorDescription,
                           "Nested Error")
 
-        XCTAssertTrue(OAuth2Error.oauth2Error(code: "123", description: "AuthError").errorDescription?.contains("AuthError") ?? false)
-        XCTAssertNotEqual(OAuth2Error.oauth2Error(code: "123", description: nil).errorDescription,
+        XCTAssertTrue(OAuth2Error.server(error: .init(code: "123", description: "AuthError")).errorDescription?.contains("AuthError") ?? false)
+        XCTAssertNotEqual(OAuth2Error.server(error: .init(code: "123", description: nil)).errorDescription,
                           "oauth2_error_code_description")
 
         XCTAssertNotEqual(OAuth2Error.missingToken(type: .accessToken).errorDescription,
@@ -188,7 +188,7 @@ final class ErrorTests: XCTestCase {
         let error = try defaultJSONDecoder.decode(OAuth2ServerError.self, from: json)
         XCTAssertEqual(error.code, .invalidRequest)
         XCTAssertEqual(error.description, "Description")
-        XCTAssertEqual(error.errorDescription, "Description")
+        XCTAssertEqual(error.errorDescription, "Authentication error: Description (invalid_request).")
     }
     
     func testOAuth2ServerErrorCodes() {

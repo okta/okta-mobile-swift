@@ -128,7 +128,7 @@ public final class Credential: Equatable, OAuth2ClientDelegate {
     /// Updates the metadata associated with this credential.
     ///
     /// This is used internally by the ``tags`` setter, except the use of this function allows you to catch errors.
-    /// - Parameter metadata: Metadata to set.
+    /// - Parameter tags: Metadata tags and values to set.
     public func setTags(_ tags: [String: String]) throws {
         guard let coordinator = coordinator else {
             throw CredentialError.missingCoordinator
@@ -196,7 +196,9 @@ public final class Credential: Equatable, OAuth2ClientDelegate {
     }
     
     /// Attempt to refresh the token if it either has expired, or is about to expire.
-    /// - Parameter completion: Completion block invoked to indicate the status of the token, if the refresh was successful or if an error occurred.
+    /// - Parameters:
+    ///   - graceInterval: The grace interval before a token is due to expire before it should be refreshed.
+    ///   - completion: Completion block invoked to indicate the status of the token, if the refresh was successful or if an error occurred.
     public func refreshIfNeeded(graceInterval: TimeInterval = Credential.refreshGraceInterval,
                                 completion: @escaping (Result<Void, OAuth2Error>) -> Void)
     {
@@ -249,7 +251,9 @@ public final class Credential: Equatable, OAuth2ClientDelegate {
     }
     
     /// Introspect the token to check it for validity, and read the additional information associated with it.
-    /// - Parameter completion: Completion block invoked when a result is returned.
+    /// - Parameters:
+    ///   - type: The token type to introspect.
+    ///   - completion: Completion block invoked when a result is returned.
     public func introspect(_ type: Token.Kind, completion: @escaping (Result<TokenInfo, OAuth2Error>) -> Void) {
         oauth2.introspect(token: token, type: type) { result in
             completion(result)
