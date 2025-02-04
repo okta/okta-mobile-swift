@@ -49,7 +49,11 @@ extension Dictionary {
     @_documentation(visibility: internal)
     @inlinable
     public func omitting(_ keys: Key...) -> Self {
-        filter { !keys.contains($0.key) }
+        var result = self
+        for key in keys {
+            result.removeValue(forKey: key)
+        }
+        return result
     }
 }
 

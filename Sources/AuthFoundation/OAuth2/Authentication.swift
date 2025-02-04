@@ -76,16 +76,16 @@ extension AuthenticationFlow {
     
     /// Initializer that uses the configuration defined within the application's `Okta.plist` file.
     public init() throws {
-        try self.init(try .init())
+        try self.init(plistConfiguration: try .init())
     }
     
     /// Initializer that uses the configuration defined within the given file URL.
     /// - Parameter fileURL: File URL to a `plist` containing client configuration.
     public init(plist fileURL: URL) throws {
-        try self.init(try .init(plist: fileURL))
+        try self.init(plistConfiguration: try .init(plist: fileURL))
     }
     
-    private init(_ config: OAuth2Client.PropertyListConfiguration) throws {
+    private init(plistConfiguration config: OAuth2Client.PropertyListConfiguration) throws {
         try self.init(client: .init(config),
                       additionalParameters: config.additionalParameters)
     }

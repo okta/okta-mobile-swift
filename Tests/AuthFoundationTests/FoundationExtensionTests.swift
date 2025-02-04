@@ -18,5 +18,6 @@ import XCTest
 final class FoundationExtensionTests: XCTestCase {
     func testStringSnakeCase() throws {
         XCTAssertEqual("theValue".snakeCase, "the_value")
+        XCTAssertEqual("isHTTPResponse".snakeCase, "is_httpresponse")
     }
 }

@@ -56,9 +56,7 @@ extension DeviceAuthorizationFlow.TokenRequest: OAuth2TokenRequest, OAuth2APIReq
         var result = additionalParameters ?? [:]
         result.merge(clientConfiguration.parameters(for: category))
         result.merge(context.parameters(for: category))
-        result.merge([
-            "device_code": deviceCode
-        ])
+        result["device_code"] = deviceCode
         return result
     }
 }

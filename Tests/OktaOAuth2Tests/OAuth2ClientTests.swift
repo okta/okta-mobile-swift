@@ -140,7 +140,7 @@ final class OAuth2ClientTests: XCTestCase {
             XCTAssertNil(error)
         }
 
-        XCTAssertEqual(try XCTUnwrap(urlSession.formDecodedBody(matching: "/v1/token")), [
+        XCTAssertEqual(urlSession.formDecodedBody(matching: "/v1/token"), [
             "grant_type": "authorization_code",
             "code_verifier": pkce.codeVerifier,
             "code": "abc123",

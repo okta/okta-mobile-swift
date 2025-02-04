@@ -15,7 +15,7 @@ import SafariServices
 
 extension ViewController {
     @IBAction func openBrowser(_ sender: Any) {
-        guard let url = flow?.context?.verificationUriComplete else { return }
+        guard let url = flow?.context?.verification?.verificationUriComplete else { return }
         let browser = SFSafariViewController(url: url)
         present(browser, animated: true)
     }
