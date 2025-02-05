@@ -60,17 +60,25 @@ extension WebLogin where Self: Screen {
         if app.webViews.textFields.firstMatch.waitForExistence(timeout: .veryLong) {
             let field = app.webViews.textFields.element(boundBy: 0)
             field.tap()
+            _ = app.keyboards.firstMatch.waitForExistence(timeout: .standard)
 
-            if let fieldValue = field.value as? String,
-               !fieldValue.isEmpty
-            {
-                usleep(useconds_t(1000)) // Wait for the field to be selected
-                field.tap(withNumberOfTaps: 3, numberOfTouches: 1)
+            let fieldValue = field.value as? String ?? ""
+            if fieldValue != username {
+                if !fieldValue.isEmpty {
+                    usleep(useconds_t(1000)) // Wait for the field to be selected
+                    field.tap(withNumberOfTaps: 3, numberOfTouches: 1)
+                    field.typeKey(.delete, modifierFlags: [])
+                    usleep(useconds_t(500))
+                }
+                
+                field.typeText(username)
             }
             
-            field.typeText(username)
-
-            tapKeyboardNextOrGo()
+            if app.webViews.buttons["Next"].isHittable {
+                app.webViews.buttons["Next"].tap()
+            } else {
+                tapKeyboardNextOrGo()
+            }
         }
     }
     
@@ -110,9 +118,23 @@ extension WebLogin where Self: Screen {
         if app.webViews.secureTextFields.firstMatch.waitForExistence(timeout: 5) {
             let field = app.webViews.secureTextFields.element(boundBy: 0)
             field.tap()
+            _ = app.keyboards.firstMatch.waitForExistence(timeout: .standard)
+            
+            // Dismiss the password save reminder keyboard view in iOS 18+
+            if app.otherElements["SFAutoFillInputView"].buttons["Not Now"].exists {
+                app.otherElements["SFAutoFillInputView"].buttons["Not Now"].tap()
+                usleep(useconds_t(500)) // Wait for the keyboard animation, since XCTest won't
+                field.tap()
+                _ = app.keyboards.firstMatch.waitForExistence(timeout: .standard)
+            }
+
             field.typeText(password)
             
-            tapKeyboardNextOrGo()
+            if app.webViews.buttons["Verify"].isHittable {
+                app.webViews.buttons["Verify"].tap()
+            } else {
+                tapKeyboardNextOrGo()
+            }
         }
     }
     

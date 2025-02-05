@@ -14,20 +14,20 @@ import Foundation
 extension Token {
     struct RevokeRequest {
         let openIdConfiguration: OpenIdConfiguration
-        let clientAuthentication: OAuth2Client.ClientAuthentication
+        let clientConfiguration: OAuth2Client.Configuration
         let url: URL
         let token: String
         let hint: Token.Kind?
         let configuration: [String: APIRequestArgument]
         
         init(openIdConfiguration: OpenIdConfiguration,
-             clientAuthentication: OAuth2Client.ClientAuthentication,
+             clientConfiguration: OAuth2Client.Configuration,
              token: String,
              hint: Token.Kind?,
              configuration: [String: APIRequestArgument]) throws
         {
             self.openIdConfiguration = openIdConfiguration
-            self.clientAuthentication = clientAuthentication
+            self.clientConfiguration = clientConfiguration
             self.token = token
             self.hint = hint
             self.configuration = configuration
@@ -125,12 +125,13 @@ extension Token.RevokeRequest: OAuth2APIRequest, APIRequestBody {
     var bodyParameters: [String: APIRequestArgument]? {
         var result = configuration
         result["token"] = token
+        result["client_id"] = clientConfiguration.clientId
         
         if let hint = hint {
             result["token_type_hint"] = hint
         }
         
-        result.merge(clientAuthentication.parameters(for: category))
+        result.merge(clientConfiguration.authentication.parameters(for: category))
 
         return result
     }

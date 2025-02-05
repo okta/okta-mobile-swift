@@ -11,7 +11,7 @@
 //
 
 import SwiftUI
-import OktaDirectAuth
+@testable import OktaDirectAuth
 
 struct SignInView: View {
     let flow: DirectAuthenticationFlow?

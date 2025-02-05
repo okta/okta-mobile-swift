@@ -300,7 +300,7 @@ public final class OAuth2Client {
             case .success(let configuration):
                 do {
                     let request = try Token.RevokeRequest(openIdConfiguration: configuration,
-                                                          clientAuthentication: self.configuration.authentication,
+                                                          clientConfiguration: self.configuration,
                                                           token: tokenString,
                                                           hint: tokenType,
                                                           configuration: clientSettings)
