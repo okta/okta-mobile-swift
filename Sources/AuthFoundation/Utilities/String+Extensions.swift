@@ -44,8 +44,7 @@ extension String {
     }
     
     @_documentation(visibility: internal)
-    @inlinable
-    public var snakeCase: String {
+    @inlinable public var snakeCase: String {
         convertedTo(style: .snakeCase)
     }
 }
