@@ -67,7 +67,7 @@ extension WebLogin where Self: Screen {
                 if !fieldValue.isEmpty {
                     usleep(useconds_t(1000)) // Wait for the field to be selected
                     field.tap(withNumberOfTaps: 3, numberOfTouches: 1)
-                    field.typeKey(XCUIKeyboardKey.delete, modifierFlags: [])
+                    field.typeText("")
                     usleep(useconds_t(500))
                 }
                 
