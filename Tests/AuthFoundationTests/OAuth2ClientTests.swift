@@ -503,8 +503,10 @@ final class OAuth2ClientTests: XCTestCase {
     }
     
     func testRevokeRequestClientAuthentication() throws {
+        var config = configuration
+        config.authentication = .clientSecret("supersecret")
         let request = try Token.RevokeRequest(openIdConfiguration: openIdConfiguration,
-                                              clientAuthentication: .clientSecret("supersecret"),
+                                              clientConfiguration: config,
                                               token: "the-token",
                                               hint: .deviceSecret,
                                               configuration: [:])

@@ -17,7 +17,17 @@ import XCTest
 
 final class FoundationExtensionTests: XCTestCase {
     func testStringSnakeCase() throws {
+        XCTAssertEqual("clientId".snakeCase, "client_id")
         XCTAssertEqual("theValue".snakeCase, "the_value")
-        XCTAssertEqual("isHTTPResponse".snakeCase, "is_httpresponse")
+        XCTAssertEqual("Awesome".snakeCase, "awesome")
+        XCTAssertEqual("version1Response".snakeCase, "version_1_response")
+        XCTAssertEqual("Version1Response".snakeCase, "version_1_response")
+        XCTAssertEqual("this_is_snake_case".snakeCase, "this_is_snake_case")
+        XCTAssertEqual("__prefixedWithUnderscores".snakeCase, "__prefixed_with_underscores")
+        XCTAssertEqual("isHTTPResponse".snakeCase, "is_http_response")
+        XCTAssertEqual("is400HTTPResponse".snakeCase, "is_400_http_response")
+        XCTAssertEqual("isHTTP400Response".snakeCase, "is_http_400_response")
+        XCTAssertEqual("URLSession".snakeCase, "url_session")
+        XCTAssertEqual("HTTP".snakeCase, "http")
     }
 }
