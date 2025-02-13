@@ -47,6 +47,18 @@ extension String {
     @inlinable public var snakeCase: String {
         convertedTo(style: .snakeCase)
     }
+
+    @_documentation(visibility: internal)
+    @inlinable public var whitespaceSeparated: [String] {
+        components(separatedBy: .whitespaces)
+    }
+}
+
+extension Array where Element == String {
+    @_documentation(visibility: internal)
+    @inlinable public var whitespaceSeparated: [String] {
+        self
+    }
 }
 
 @usableFromInline

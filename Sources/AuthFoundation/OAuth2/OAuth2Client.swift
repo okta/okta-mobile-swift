@@ -54,32 +54,6 @@ public final class OAuth2Client {
 
     /// Constructs an OAuth2Client for the given domain.
     /// - Parameters:
-    ///   - domain: Okta domain to use when composing the issuer URL.
-    ///   - clientId: The unique client ID representing this client.
-    ///   - scope: The list of OAuth2 scopes requested for this client.
-    ///   - redirectUri: Optional `redirect_uri` value for this client.
-    ///   - logoutRedirectUri: Optional `logout_redirect_uri` value for this client.
-    ///   - authentication: The client authentication  model to use (Default: ``OAuth2Client/ClientAuthentication/none``)
-    ///   - session: Optional URLSession to use for network requests.
-    public convenience init(domain: String,
-                            clientId: String,
-                            scope: String,
-                            redirectUri: String? = nil,
-                            logoutRedirectUri: String? = nil,
-                            authentication: ClientAuthentication = .none,
-                            session: URLSessionProtocol? = nil) throws
-    {
-        self.init(try Configuration(domain: domain,
-                                    clientId: clientId,
-                                    scope: scope,
-                                    redirectUri: redirectUri,
-                                    logoutRedirectUri: logoutRedirectUri,
-                                    authentication: authentication),
-                  session: session)
-    }
-    
-    /// Constructs an OAuth2Client for the given domain.
-    /// - Parameters:
     ///   - issuerURL: The issuer URL for operations against this client.
     ///   - clientId: The unique client ID representing this client.
     ///   - scope: The list of OAuth2 scopes requested for this client.
@@ -87,9 +61,10 @@ public final class OAuth2Client {
     ///   - logoutRedirectUri: Optional `logout_redirect_uri` value for this client.
     ///   - authentication: The client authentication  model to use (Default: `.none`)
     ///   - session: Optional URLSession to use for network requests.
+    @inlinable
     public convenience init(issuerURL: URL,
                             clientId: String,
-                            scope: String,
+                            scope: ClaimCollection<[String]>,
                             redirectUri: URL? = nil,
                             logoutRedirectUri: URL? = nil,
                             authentication: ClientAuthentication = .none,
@@ -102,15 +77,6 @@ public final class OAuth2Client {
                                 logoutRedirectUri: logoutRedirectUri,
                                 authentication: authentication),
                   session: session)
-    }
-    
-    @_documentation(visibility: internal)
-    public convenience init(_ config: OAuth2Client.PropertyListConfiguration) {
-        self.init(issuerURL: config.issuerURL,
-                  clientId: config.clientId,
-                  scope: config.scope,
-                  redirectUri: config.redirectUri,
-                  logoutRedirectUri: config.logoutRedirectUri)
     }
     
     /// Constructs an OAuth2Client for the given base URL.

@@ -42,6 +42,7 @@ struct OOBResponse: Codable, Equatable, HasTokenParameters {
         && abs((lhs.interval ?? 0) - (rhs.interval ?? 0)) < tolerance
         && lhs.channel == rhs.channel
         && lhs.bindingMethod == rhs.bindingMethod
+        && lhs.bindingCode == rhs.bindingCode
     }
 }
 

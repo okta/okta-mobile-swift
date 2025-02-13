@@ -23,7 +23,7 @@ final class PropertyListConfigurationTests: XCTestCase {
         let config = try PropertyListConfiguration(plist: url)
         XCTAssertEqual(config.issuerURL.absoluteString, "https://myapp.example.com/oauth2/default")
         XCTAssertEqual(config.clientId, "0oaasdf1234")
-        XCTAssertEqual(config.scope, "openid profile offline_access")
+        XCTAssertEqual(config.scope, ["openid", "profile", "offline_access"])
         XCTAssertEqual(config.redirectUri?.absoluteString, "com.example:/callback")
         XCTAssertEqual(config.logoutRedirectUri?.absoluteString, "com.example:/")
         XCTAssertEqual(config.additionalParameters?.mapValues(\.stringValue), [
@@ -36,7 +36,7 @@ final class PropertyListConfigurationTests: XCTestCase {
         let config = try PropertyListConfiguration(plist: url)
         XCTAssertEqual(config.issuerURL.absoluteString, "https://myapp.example.com/oauth2/default")
         XCTAssertEqual(config.clientId, "0oaasdf1234")
-        XCTAssertEqual(config.scope, "openid profile offline_access")
+        XCTAssertEqual(config.scope, ["openid", "profile", "offline_access"])
         XCTAssertEqual(config.redirectUri?.absoluteString, "com.example:/callback")
         XCTAssertEqual(config.logoutRedirectUri?.absoluteString, "com.example:/")
         XCTAssertEqual(config.additionalParameters?.mapValues(\.stringValue), [

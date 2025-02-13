@@ -46,7 +46,7 @@ public final class Token: Codable, Equatable, Hashable, JSONClaimContainer, Expi
     public let accessToken: String
     
     /// The scopes requested when this token was generated.
-    public var scope: String? { self[.scope] }
+    public var scope: [String]? { self[.scope] }
     
     /// The refresh token, if requested.
     public var refreshToken: String? { self[.refreshToken] }
@@ -190,7 +190,7 @@ public final class Token: Codable, Equatable, Hashable, JSONClaimContainer, Expi
         
         // When the custom MFA attestation ACR value is used, allow for
         // an empty / unspecified access token.
-        else if let acrValues = context.clientSettings?["acr_values"]?.components(separatedBy: .whitespaces),
+        else if let acrValues = context.clientSettings?["acr_values"]?.whitespaceSeparated,
                 acrValues.contains("urn:okta:app:mfa:attestation")
         {
             accessToken = ""

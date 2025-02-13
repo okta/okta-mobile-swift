@@ -59,11 +59,11 @@ final class AuthenticationContextTests: XCTestCase {
             }
         }
         
-        context = .init(acrValues: nil, additionalParameters: ["acr_values": "foo"])
+        context = .init(additionalParameters: ["acr_values": "foo"])
         XCTAssertEqual(context.acrValues, ["foo"])
         XCTAssertNil(context.additionalParameters)
 
-        context = .init(acrValues: nil, additionalParameters: nil)
+        context = .init()
         XCTAssertNil(context.acrValues)
         XCTAssertNil(context.additionalParameters)
     }

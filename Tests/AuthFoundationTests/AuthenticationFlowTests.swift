@@ -91,7 +91,7 @@ final class AuthenticationFlowTests: XCTestCase {
     
     func testValidatorContextHandling() throws {
         let flow = try TestFlow(client: client, additionalParameters: nil)
-        flow.context = .init(nonce: "abcd123", maxAge: 60)
+        flow.context = .init(acrValues: [], nonce: "abcd123", maxAge: 60)
         
         XCTAssertEqual(flow.nonce, "abcd123")
         XCTAssertEqual(flow.maxAge, 60.0)

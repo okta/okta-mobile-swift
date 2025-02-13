@@ -19,6 +19,7 @@ extension DeviceAuthorizationFlow {
         public internal(set) var verification: Verification?
         
         /// The ACR values, if any, which should be requested by the client.
+        @ClaimCollection
         public var acrValues: [String]?
 
         /// Any additional query string parameters you would like to supply to the authorization server.
@@ -28,11 +29,19 @@ extension DeviceAuthorizationFlow {
         /// - Parameters:
         ///   - state: State string to use, or `nil` to accept an automatically generated default.
         ///   - maxAge: The maximum age an ID token can be when authenticating.
-        public init(acrValues: [String]? = nil,
+        public init(acrValues: ClaimCollection<[String]?> = nil,
                     additionalParameters: [String: any APIRequestArgument]? = nil)
         {
-            self.acrValues = acrValues
-            self.additionalParameters = additionalParameters
+            self._acrValues = acrValues
+            self.additionalParameters = additionalParameters?.omitting("acr_values")
+
+            if let additionalAcrValues = additionalParameters?.spaceSeparatedValues(for: "acr_values") {
+                if self.acrValues.isNil {
+                    self.acrValues = additionalAcrValues
+                } else {
+                    self.acrValues?.append(contentsOf: additionalAcrValues)
+                }
+            }
         }
 
         @_documentation(visibility: internal)
@@ -41,10 +50,10 @@ extension DeviceAuthorizationFlow {
 
             switch category {
             case .authorization:
-                if let acrValues = acrValues {
-                    result["acr_values"] = acrValues.joined(separator: " ")
+                if let values = $acrValues.rawValue {
+                    result["acr_values"] = values
                 }
-                
+
             case .token:
                 result["grant_type"] = GrantType.deviceCode
                 

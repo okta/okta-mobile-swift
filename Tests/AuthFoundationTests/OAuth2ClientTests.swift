@@ -50,9 +50,9 @@ final class OAuth2ClientTests: XCTestCase {
     func testInitializers() throws {
         var client: OAuth2Client!
         
-        client = try OAuth2Client(domain: "example.com",
-                                  clientId: "abc123",
-                                  scope: "openid profile")
+        client = try OAuth2Client(.init(domain: "example.com",
+                                        clientId: "abc123",
+                                        scope: "openid profile"))
         XCTAssertEqual(client.configuration, .init(issuerURL: URL(string: "https://example.com")!,
                                                    clientId: "abc123",
                                                    scope: "openid profile",
@@ -69,11 +69,11 @@ final class OAuth2ClientTests: XCTestCase {
                                                    clientId: "abc123",
                                                    scope: "openid profile",
                                                    authentication: .none))
-
-        client = try OAuth2Client(domain: "example.com",
-                                  clientId: "abc123",
-                                  scope: "openid profile",
-                                  authentication: .clientSecret("supersecret"))
+        
+        client = try OAuth2Client(.init(domain: "example.com",
+                                        clientId: "abc123",
+                                        scope: "openid profile",
+                                        authentication: .clientSecret("supersecret")))
         XCTAssertEqual(client.configuration, .init(issuerURL: URL(string: "https://example.com")!,
                                                    clientId: "abc123",
                                                    scope: "openid profile",

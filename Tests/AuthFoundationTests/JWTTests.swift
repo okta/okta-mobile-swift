@@ -25,7 +25,7 @@ final class JWTTests: XCTestCase {
         XCTAssertEqual(token[.userId], "00u2q5p3AAAOXoSc04w5")
         XCTAssertEqual(token[.clientId], "0oa3en4fAAA3ddc204w5")
         XCTAssertEqual(token.issuer, "https://example.com/oauth2/default")
-        XCTAssertNil(token.audience)
+        XCTAssertEqual(token.audience, "api://default")
         XCTAssertEqual(token.expirationTime?.timeIntervalSinceReferenceDate, 664228962.0)
         XCTAssertEqual(token.issuedAt?.timeIntervalSinceReferenceDate, 664225362.0)
         XCTAssertNil(token.notBefore)

@@ -50,8 +50,7 @@ final class FactorStepHandlerTests: XCTestCase {
                                    loginHint: String?,
                                    bodyParams: [String: String]) throws
     {
-        let context = DirectAuthenticationFlow.Context(acrValues: nil,
-                                                       intent: .signIn)
+        let context = DirectAuthenticationFlow.Context()
         flow.context = context
         let handler = try factor.stepHandler(flow: flow,
                                              openIdConfiguration: openIdConfiguration,
@@ -77,7 +76,7 @@ final class FactorStepHandlerTests: XCTestCase {
             loginHint: "jane.doe@example.com",
             bodyParams: [
                 "client_id": client.configuration.clientId,
-                "scope": client.configuration.scope,
+                "scope": client.configuration.$scope.rawValue,
                 "grant_type": "password",
                 "username": "jane.doe@example.com",
                 "password": "foo",
@@ -91,7 +90,7 @@ final class FactorStepHandlerTests: XCTestCase {
             loginHint: "jane.doe@example.com",
             bodyParams: [
                 "client_id": client.configuration.clientId,
-                "scope": client.configuration.scope,
+                "scope": client.configuration.$scope.rawValue,
                 "grant_type": "urn:okta:params:oauth:grant-type:otp",
                 "login_hint": "jane.doe@example.com",
                 "otp": "123456",
@@ -105,7 +104,7 @@ final class FactorStepHandlerTests: XCTestCase {
             loginHint: nil,
             bodyParams: [
                 "client_id": client.configuration.clientId,
-                "scope": client.configuration.scope,
+                "scope": client.configuration.$scope.rawValue,
                 "grant_type": "http://auth0.com/oauth/grant-type/mfa-otp",
                 "otp": "123456",
                 "grant_types_supported": "password urn:okta:params:oauth:grant-type:oob urn:okta:params:oauth:grant-type:otp http://auth0.com/oauth/grant-type/mfa-oob http://auth0.com/oauth/grant-type/mfa-otp urn:okta:params:oauth:grant-type:webauthn urn:okta:params:oauth:grant-type:mfa-webauthn",
@@ -116,8 +115,7 @@ final class FactorStepHandlerTests: XCTestCase {
     func assertOOBStepHandler<T: AuthenticationFactor>(factor: T,
                                                        loginHint: String?) throws
     {
-        flow.context = .init(acrValues: nil,
-                             intent: .signIn)
+        flow.context = .init()
         let handler = try factor.stepHandler(flow: flow,
                                              openIdConfiguration: openIdConfiguration,
                                              loginHint: loginHint,
@@ -152,8 +150,7 @@ final class FactorStepHandlerTests: XCTestCase {
                           data: try data(from: .module, for: "token", in: "MockResponses"))
         
         let factor = PrimaryFactor.password("SuperSecret")
-        flow.context = .init(acrValues: nil,
-                             intent: .signIn)
+        flow.context = .init()
         let handler = try factor.stepHandler(flow: flow,
                                              openIdConfiguration: openIdConfiguration,
                                              loginHint: "jane.doe@example.com",
@@ -188,8 +185,7 @@ final class FactorStepHandlerTests: XCTestCase {
                           statusCode: 400)
         
         let factor = PrimaryFactor.password("SuperSecret")
-        flow.context = .init(acrValues: nil,
-                             intent: .signIn)
+        flow.context = .init()
         let handler = try factor.stepHandler(flow: flow,
                                              openIdConfiguration: openIdConfiguration,
                                              loginHint: "jane.doe@example.com",
@@ -228,8 +224,7 @@ final class FactorStepHandlerTests: XCTestCase {
                           data: try data(from: .module, for: "token", in: "MockResponses"))
         
         let factor = PrimaryFactor.oob(channel: .push)
-        flow.context = .init(acrValues: nil,
-                             intent: .signIn)
+        flow.context = .init()
         let handler = try factor.stepHandler(flow: flow,
                                              openIdConfiguration: openIdConfiguration,
                                              loginHint: "jane.doe@example.com",
@@ -265,8 +260,7 @@ final class FactorStepHandlerTests: XCTestCase {
                           data: try data(from: .module, for: "token", in: "MockResponses"))
 
         let factor = PrimaryFactor.oob(channel: .push)
-        flow.context = .init(acrValues: nil,
-                             intent: .signIn)
+        flow.context = .init()
         let handler = try factor.stepHandler(flow: flow,
                                              openIdConfiguration: openIdConfiguration,
                                              loginHint: "jane.doe@example.com",
@@ -325,8 +319,7 @@ final class FactorStepHandlerTests: XCTestCase {
                           data: try data(from: .module, for: "token", in: "MockResponses"))
 
         let factor = PrimaryFactor.oob(channel: .push)
-        flow.context = .init(acrValues: nil,
-                             intent: .signIn)
+        flow.context = .init()
         let handler = try factor.stepHandler(flow: flow,
                                              openIdConfiguration: openIdConfiguration,
                                              loginHint: "jane.doe@example.com",
@@ -359,8 +352,7 @@ final class FactorStepHandlerTests: XCTestCase {
                           statusCode: 400)
         
         let factor = PrimaryFactor.oob(channel: .push)
-        flow.context = .init(acrValues: nil,
-                             intent: .signIn)
+        flow.context = .init()
         let handler = try factor.stepHandler(flow: flow,
                                              openIdConfiguration: openIdConfiguration,
                                              loginHint: "jane.doe@example.com",
@@ -398,8 +390,7 @@ final class FactorStepHandlerTests: XCTestCase {
                           data: try data(from: .module, for: "token", in: "MockResponses"))
 
         let factor = SecondaryFactor.oob(channel: .push)
-        var context = DirectAuthenticationFlow.Context(acrValues: nil,
-                                                       intent: .signIn)
+        var context = DirectAuthenticationFlow.Context()
         context.currentStatus = .mfaRequired(.init(supportedChallengeTypes: nil,
                                                    mfaToken: "abcd1234"))
         flow.context = context
@@ -438,8 +429,7 @@ final class FactorStepHandlerTests: XCTestCase {
                           data: try data(from: .module, for: "token", in: "MockResponses"))
 
         let factor = SecondaryFactor.oob(channel: .push)
-        var context = DirectAuthenticationFlow.Context(acrValues: nil,
-                                                       intent: .signIn)
+        var context = DirectAuthenticationFlow.Context()
         context.currentStatus = .mfaRequired(.init(supportedChallengeTypes: nil,
                                                    mfaToken: "abcd1234"))
         flow.context = context
@@ -491,8 +481,7 @@ final class FactorStepHandlerTests: XCTestCase {
                           data: try data(from: .module, for: "token", in: "MockResponses"))
 
         let factor = SecondaryFactor.oob(channel: .push)
-        var context = DirectAuthenticationFlow.Context(acrValues: nil,
-                                                       intent: .signIn)
+        var context = DirectAuthenticationFlow.Context()
         context.currentStatus = .mfaRequired(.init(supportedChallengeTypes: nil,
                                                    mfaToken: "abcd1234"))
         flow.context = context

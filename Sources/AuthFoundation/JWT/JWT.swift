@@ -27,7 +27,7 @@ public struct JWT: RawRepresentable, Codable, HasClaims, Expires {
     public var issuer: String? { self[.issuer] }
     
     /// The intended audience for this token.
-    public var audience: [String]? { self[.audience] }
+    public var audience: String? { self[.audience] }
     
     /// The date this token was issued.
     public var issuedAt: Date? { self[.issuedAt] }

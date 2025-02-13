@@ -135,9 +135,9 @@ extension JWT: APIRequestArgument {}
 extension GrantType: APIRequestArgument {}
 
 @_documentation(visibility: private)
-extension [GrantType]: APIRequestArgument {
+extension Array: APIRequestArgument where Element: APIRequestArgument {
     public var stringValue: String {
-        map(\.rawValue)
+        map(\.stringValue)
             .joined(separator: " ")
     }
 }

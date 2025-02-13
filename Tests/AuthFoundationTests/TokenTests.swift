@@ -207,16 +207,16 @@ final class TokenTests: XCTestCase {
         XCTAssertEqual(token.id, "1834AF8D-BC97-4CCE-876F-300314784D5B")
         XCTAssertEqual(token.accessToken, JWT.mockAccessToken)
         XCTAssertEqual(token.idToken?.rawValue, JWT.mockIDToken)
-        XCTAssertEqual(token.scope, "profile offline_access openid")
+        XCTAssertEqual(token.scope, ["profile", "offline_access", "openid"])
         XCTAssertEqual(token.expiresIn, 3600)
         XCTAssertEqual(token.refreshToken, "refresh-kl2QWaYgyHaLkCdc6exjsowP9KUTW1ilAWC")
         XCTAssertEqual(token.deviceSecret, "device_lh4nMHgcUWLJIVgkcbQwnnSI2F8JMwNshLoa")
         XCTAssertEqual(token.issuedAt?.timeIntervalSinceReferenceDate, 744576826.0011461)
-        XCTAssertEqual(token.context.configuration.scope, "openid profile offline_access")
+        XCTAssertEqual(token.context.configuration.scope, ["openid", "profile", "offline_access"])
         XCTAssertEqual(token.context.configuration.redirectUri?.absoluteString, "com.example:/callback")
         XCTAssertEqual(token.context, .init(configuration: .init(issuerURL: try XCTUnwrap(URL(string: "https://example.com/oauth2/default")),
                                                                  clientId: "0oatheclientid",
-                                                                 scope: "openid profile offline_access",
+                                                                 scope: ["openid", "profile", "offline_access"],
                                                                  redirectUri: URL(string: "com.example:/callback"),
                                                                  authentication: .none),
                                             clientSettings: nil))

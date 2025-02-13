@@ -123,7 +123,8 @@ final class SessionLogoutFlowSuccessTests: XCTestCase {
         
         wait(for: [resumeExpection], timeout: 1)
 
-        XCTAssertNil(flow.context)
+        let newContext = try XCTUnwrap(flow.context)
+        XCTAssertNotEqual(newContext.logoutURL, context.logoutURL)
         XCTAssertFalse(flow.inProgress)
     }
 
@@ -165,7 +166,8 @@ final class SessionLogoutFlowSuccessTests: XCTestCase {
         
         let logoutUrl = try await flow.start(with: context)
         
-        XCTAssertNotEqual(flow.context, context)
+        let newContext = try XCTUnwrap(flow.context)
+        XCTAssertNotEqual(newContext.logoutURL, context.logoutURL)
         XCTAssertEqual(logoutUrl.absoluteString, """
                             https://example.okta.com/oauth2/v1/logout\
                             ?client_id=clientId\

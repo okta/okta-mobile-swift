@@ -19,6 +19,6 @@ extension JWTAuthorizationFlow {
                             clientId: String,
                             scopes: String)
     {
-        self.init(issuerURL: issuer, clientId: clientId, scope: scopes)
+        self.init(issuerURL: issuer, clientId: clientId, scope: .init(rawValue: scopes))
     }
 }

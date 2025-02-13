@@ -82,7 +82,7 @@ final class DeviceAuthorizationFlowSuccessTests: XCTestCase {
         waitForExpectations(timeout: 5) { error in
             XCTAssertNil(error)
         }
-        XCTAssertNil(flow.context)
+        XCTAssertNotNil(flow.context)
         XCTAssertFalse(flow.isAuthenticating)
         XCTAssertNotNil(delegate.token)
         XCTAssertTrue(delegate.finished)
@@ -132,7 +132,7 @@ final class DeviceAuthorizationFlowSuccessTests: XCTestCase {
             XCTAssertNil(error)
         }
 
-        XCTAssertNil(flow.context)
+        XCTAssertNotNil(flow.context)
         XCTAssertFalse(flow.isAuthenticating)
         XCTAssertNotNil(token)
     }
@@ -154,7 +154,7 @@ final class DeviceAuthorizationFlowSuccessTests: XCTestCase {
         // Exchange code
         let token = try await flow.resume()
 
-        XCTAssertNil(flow.context)
+        XCTAssertNotNil(flow.context)
         XCTAssertFalse(flow.isAuthenticating)
         XCTAssertNotNil(token)
     }

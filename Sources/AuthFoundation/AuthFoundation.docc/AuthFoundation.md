@@ -32,7 +32,9 @@ You can use AuthFoundation when you want to:
 - ``OpenIdConfiguration``
 - ``AuthenticationMethod``
 - ``AuthenticationFlow``
+- ``AuthenticationContext``
 - ``AuthenticationDelegate``
+- ``StandardAuthenticationContext``
 - ``OAuth2TokenRequest``
 - ``GrantType``
 - ``PKCE``
@@ -45,7 +47,7 @@ You can use AuthFoundation when you want to:
 - ``JWKS``
 - ``JWTClaim``
 - ``HasClaims``
-- ``Claim``
+- ``ClaimCollection``
 - ``JSONClaimContainer``
 - ``JSON``
 - ``AnyJSON``
@@ -92,6 +94,9 @@ You can use AuthFoundation when you want to:
 - ``Empty``
 - ``JSONDecodable``
 - ``OAuth2APIRequest``
+- ``OAuth2APIRequestCategory``
+- ``AuthenticationFlowRequest``
+- ``ProvidesOAuth2Parameters``
 
 ### Error Types
 

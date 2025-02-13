@@ -126,7 +126,7 @@ final class DeviceAuthorizationFlowErrorTests: XCTestCase {
             XCTAssertNil(error)
         }
 
-        XCTAssertNil(flow.context)
+        XCTAssertNotNil(flow.context)
         XCTAssertFalse(flow.isAuthenticating)
         XCTAssertNotNil(token)
     }

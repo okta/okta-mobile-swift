@@ -123,7 +123,7 @@ final class AuthorizationCodeFlowSuccessTests: XCTestCase {
             XCTAssertNil(error)
         }
 
-        XCTAssertNil(flow.context)
+        XCTAssertNotNil(flow.context)
         XCTAssertFalse(flow.isAuthenticating)
         XCTAssertNotNil(delegate.token)
         XCTAssertTrue(delegate.finished)
@@ -179,7 +179,7 @@ final class AuthorizationCodeFlowSuccessTests: XCTestCase {
             XCTAssertNil(error)
         }
 
-        XCTAssertNil(flow.context)
+        XCTAssertNotNil(flow.context)
         XCTAssertFalse(flow.isAuthenticating)
         XCTAssertNotNil(token)
         
@@ -223,7 +223,7 @@ final class AuthorizationCodeFlowSuccessTests: XCTestCase {
         // Exchange code
         let token = try await flow.resume(with: URL(string: "com.example:/callback?code=ABCEasyAs123&state=ABC123")!)
         
-        XCTAssertNil(flow.context)
+        XCTAssertNotNil(flow.context)
         XCTAssertFalse(flow.isAuthenticating)
         XCTAssertNotNil(token)
     }

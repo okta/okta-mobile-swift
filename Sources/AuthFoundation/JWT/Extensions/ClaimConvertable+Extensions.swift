@@ -28,12 +28,6 @@ extension Double: ClaimConvertable {}
 extension Float: ClaimConvertable {}
 
 @_documentation(visibility: private)
-extension URL: ClaimConvertable {}
-
-@_documentation(visibility: private)
-extension Date: ClaimConvertable {}
-
-@_documentation(visibility: private)
 extension JWTClaim: ClaimConvertable {}
 
 @_documentation(visibility: private)
@@ -46,25 +40,31 @@ extension NSString: ClaimConvertable {}
 extension NSNumber: ClaimConvertable {}
 
 @_documentation(visibility: private)
-extension ClaimConvertable where Self == Date {
+extension URL: ClaimConvertable {
+    public static func convert(from value: Any?) -> Self? {
+        guard let string = value as? String else { return nil }
+        return URL(string: string)
+    }
+}
+
+@_documentation(visibility: private)
+extension Date: ClaimConvertable {
     public static func convert(from value: Any?) -> Self? {
         if let time = value as? Int {
             return Date(timeIntervalSince1970: TimeInterval(time))
         }
         
         if let time = value as? String {
-            return ISO8601DateFormatter().date(from: time)
+            if let date = ISO8601DateFormatter().date(from: time) {
+                return date
+            }
+            
+            if let date = httpDateFormatter.date(from: time) {
+                return date
+            }
         }
         
         return nil
-    }
-}
-
-@_documentation(visibility: private)
-extension ClaimConvertable where Self == URL {
-    public static func convert(from value: Any?) -> Self? {
-        guard let string = value as? String else { return nil }
-        return URL(string: string)
     }
 }
 
