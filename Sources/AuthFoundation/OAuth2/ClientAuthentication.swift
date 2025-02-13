@@ -22,12 +22,18 @@ extension OAuth2Client {
         case clientSecret(String)
         
         @_documentation(visibility: private)
-        public var additionalParameters: [String: APIRequestArgument]? {
-            switch self {
-            case .none:
+        public func parameters(for category: OAuth2APIRequestCategory) -> [String: any APIRequestArgument]? {
+            switch category {
+            case .authorization, .token, .resource, .other:
+                switch self {
+                case .none:
+                    return nil
+                case .clientSecret(let secret):
+                    return ["client_secret": secret]
+                }
+
+            case .configuration:
                 return nil
-            case .clientSecret(let secret):
-                return ["client_secret": secret]
             }
         }
     }

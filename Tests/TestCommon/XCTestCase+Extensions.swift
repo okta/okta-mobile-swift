@@ -32,7 +32,7 @@ public extension XCTestCase {
         return json.data(using: .utf8)!
     }
     
-    func data(from bundle: Bundle, for filename: String, in folder: String? = nil) throws -> Data {
+    func fileUrl(from bundle: Bundle, for filename: String, in folder: String? = nil) throws -> URL {
         let file = (filename as NSString).deletingPathExtension
         var fileExtension = (filename as NSString).pathExtension
         if fileExtension == "" {
@@ -46,6 +46,11 @@ public extension XCTestCase {
             throw TestError.noBundleResourceFound
         }
         
+        return url
+    }
+    
+    func data(from bundle: Bundle, for filename: String, in folder: String? = nil) throws -> Data {
+        let url = try fileUrl(from: bundle, for: filename, in: folder)
         return try data(for: url)
     }
     

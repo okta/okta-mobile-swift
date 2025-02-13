@@ -12,36 +12,53 @@
 
 import Foundation
 
-extension ProvidesOAuth2Parameters {
-    @_documentation(visibility: private)
-    public var shouldOverride: Bool { true }
-}
-
 extension Dictionary<String, APIRequestArgument> {
-    @_documentation(visibility: private)
+    @_documentation(visibility: internal)
     @inlinable
-    public mutating func merge(_ oauth2Parameters: ProvidesOAuth2Parameters?) {
-        guard let oauth2Parameters = oauth2Parameters,
-              let additionalParameters = oauth2Parameters.additionalParameters
+    public mutating func merge(_ additionalParameters: Self?) {
+        guard let additionalParameters = additionalParameters
         else {
             return
         }
         
-        merge(additionalParameters) { oauth2Parameters.shouldOverride ? $1 : $0 }
+        merge(additionalParameters) { $1 }
     }
-
-    @_documentation(visibility: private)
+    
+    @_documentation(visibility: internal)
+    @inlinable public var maxAge: TimeInterval? {
+        if let value = self["max_age"] as? String {
+            return TimeInterval(value)
+        }
+        
+        if let value = self["max_age"] as? Double {
+            return TimeInterval(value)
+        }
+        
+        return nil
+    }
+    
+    @_documentation(visibility: internal)
     @inlinable
-    public func merging(_ oauth2Parameters: ProvidesOAuth2Parameters?) -> [Key: Value] {
-        var result = self
-        result.merge(oauth2Parameters)
-        return result
+    public func spaceSeparatedValues(for key: String) -> [String]? {
+        if let value = self[key] as? [String] {
+            return value
+        }
+        
+        if let value = self[key] as? String {
+            return value.components(separatedBy: .whitespaces)
+        }
+        
+        return nil
     }
-}
 
-extension Dictionary<String, APIRequestArgument>: ProvidesOAuth2Parameters {
-    @_documentation(visibility: private)
-    public var additionalParameters: [String: any APIRequestArgument]? {
-        self
+    @_documentation(visibility: internal)
+    @inlinable
+    public mutating func removeSpaceSeparatedValues(forKey key: String) -> [String]? {
+        if let value = spaceSeparatedValues(for: key) {
+            removeValue(forKey: key)
+            return value
+        }
+        
+        return nil
     }
 }

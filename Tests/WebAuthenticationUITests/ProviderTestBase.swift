@@ -85,12 +85,14 @@ class ProviderTestBase: XCTestCase, AuthorizationCodeFlowDelegate, SessionLogout
         Token.idTokenValidator = MockIDTokenValidator()
         Token.accessTokenValidator = MockTokenHashValidator()
 
-        client = OAuth2Client(baseURL: issuer,
+        client = OAuth2Client(issuerURL: issuer,
                               clientId: "clientId",
-                              scopes: "openid profile",
+                              scope: "openid profile",
+                              redirectUri: redirectUri,
+                              logoutRedirectUri: logoutRedirectUri,
                               session: urlSession)
         
-        logoutFlow = client.sessionLogoutFlow(logoutRedirectUri: logoutRedirectUri)
+        logoutFlow = client.sessionLogoutFlow()
         logoutFlow.add(delegate: self)
         
         urlSession.expect("https://example.com/.well-known/openid-configuration",
@@ -102,8 +104,7 @@ class ProviderTestBase: XCTestCase, AuthorizationCodeFlowDelegate, SessionLogout
         urlSession.expect("https://example.okta.com/oauth2/v1/keys?client_id=clientId",
                           data: try data(from: .module, for: "keys", in: "MockResponses"),
                           contentType: "application/json")
-        loginFlow = client.authorizationCodeFlow(redirectUri: redirectUri,
-                                            additionalParameters: ["additional": "param"])
+        loginFlow = try client.authorizationCodeFlow(additionalParameters: ["additional": "param"])
         loginFlow.add(delegate: self)
         
         delegate.reset()

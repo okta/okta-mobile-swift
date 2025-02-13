@@ -24,14 +24,14 @@ class WebAuthenticationInitializerTests: XCTestCase {
     private let logoutRedirectUri = URL(string: "com.example:/logout")!
     
     func testInitializer() throws {
-        let auth = WebAuthentication(issuer: issuer,
-                                     clientId: "client_id",
-                                     scopes: "openid profile",
-                                     redirectUri: redirectUri,
-                                     logoutRedirectUri: logoutRedirectUri,
-                                     additionalParameters: ["foo": "bar"])
+        let auth = try WebAuthentication(issuerURL: issuer,
+                                         clientId: "client_id",
+                                         scope: "openid profile",
+                                         redirectUri: redirectUri,
+                                         logoutRedirectUri: logoutRedirectUri,
+                                         additionalParameters: ["foo": "bar"])
         XCTAssertEqual(auth.signInFlow.client.configuration.clientId, "client_id")
-        XCTAssertEqual(auth.signInFlow.client.configuration.scopes, "openid profile")
+        XCTAssertEqual(auth.signInFlow.client.configuration.scope, "openid profile")
         XCTAssertTrue(auth.signInFlow.client === auth.signOutFlow?.client)
         XCTAssertEqual(auth.signInFlow.additionalParameters?.stringComponents, ["foo": "bar"])
         XCTAssertEqual(auth.signOutFlow?.additionalParameters?.stringComponents, ["foo": "bar"])

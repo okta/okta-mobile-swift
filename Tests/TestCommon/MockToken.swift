@@ -21,9 +21,9 @@ extension Token {
     }
 
     static let mockConfiguration = OAuth2Client.Configuration(
-        baseURL: URL(string: "https://example.com")!,
+        issuerURL: URL(string: "https://example.com")!,
         clientId: "0oa3en4fIMQ3ddc204w5",
-        scopes: "offline_access profile openid")
+        scope: "offline_access profile openid")
 
     static let simpleMockToken = mockToken()
     
@@ -49,18 +49,18 @@ extension Token {
     }
     
     static func token(with options: [MockOptions] = []) -> Token {
-        var scopes = "openid"
+        var scope = "openid"
         
         var refreshToken: String? = nil
         if options.contains(.refreshToken) {
             refreshToken = "refresh123"
-            scopes += " offline_access"
+            scope += " offline_access"
         }
         
         var deviceSecret: String? = nil
         if options.contains(.deviceSecret) {
             deviceSecret = "device123"
-            scopes += " device_sso"
+            scope += " device_sso"
         }
         
         var idToken: JWT? = nil
@@ -73,14 +73,14 @@ extension Token {
                           tokenType: "Bearer",
                           expiresIn: 300,
                           accessToken: JWT.mockAccessToken,
-                          scope: scopes,
+                          scope: scope,
                           refreshToken: refreshToken,
                           idToken: idToken,
                           deviceSecret: deviceSecret,
-                          context: Token.Context(configuration: .init(baseURL: URL(string: "https://example.com/oauth2/default")!,
+                          context: Token.Context(configuration: .init(issuerURL: URL(string: "https://example.com/oauth2/default")!,
                                                                       clientId: "clientid",
-                                                                      scopes: scopes),
-                                                 clientSettings: [ "client_id": "clientid" ]))
+                                                                      scope: scope),
+                                                 clientSettings: nil))
     }
 
 }

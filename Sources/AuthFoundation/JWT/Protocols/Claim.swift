@@ -30,7 +30,7 @@ public protocol HasClaims {
 public extension HasClaims {
     /// Returns the collection of claims this object contains.
     ///
-    /// > Note: This will only return the list of official claims defined in the ``Claim`` enum. For custom claims, please see the ``customClaims`` property.
+    /// > Note: This will only return the list of official claims defined in the ``ClaimType`` enum corresponding to this claim container. For custom claims, please see the ``customClaims`` property.
     var claims: [ClaimType] {
         payload.keys.compactMap { ClaimType(rawValue: $0) }
     }

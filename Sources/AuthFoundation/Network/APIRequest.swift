@@ -148,7 +148,22 @@ public protocol APIParsingContext {
 }
 
 extension APIParsingContext {
+    @_documentation(visibility: private)
+    public var codingUserInfo: [CodingUserInfoKey: Any]? {
+        if let flowRequest = self as? any AuthenticationFlowRequest,
+           let persistValues = flowRequest.context.persistValues,
+           !persistValues.isEmpty
+        {
+            return [ .clientSettings: persistValues ]
+        }
+        
+        return nil
+    }
+
+    @_documentation(visibility: private)
     public func error(from data: Data) -> Error? { nil }
+
+    @_documentation(visibility: private)
     public func resultType(from response: HTTPURLResponse) -> APIResponseResult {
         APIResponseResult(statusCode: response.statusCode)
     }

@@ -71,7 +71,7 @@ extension SignInView {
                         Button("Continue") {
                             Task {
                                 do {
-                                    status = try await flow.resume(status, with: factor)
+                                    status = try await flow.resume(with: factor)
                                     if case let .success(token) = status {
                                         Credential.default = try Credential.store(token)
                                     }

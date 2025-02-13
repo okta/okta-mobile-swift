@@ -22,7 +22,7 @@ extension ClaimError: LocalizedError {
         switch self {
         case .missingRequiredValue(key: let key):
             return String.localizedStringWithFormat(
-                NSLocalizedString("missing_required_value",
+                NSLocalizedString("claim.missing_required_value",
                                   tableName: "AuthFoundation",
                                   bundle: .authFoundation,
                                   comment: ""),

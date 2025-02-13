@@ -19,7 +19,7 @@ struct TestStepHandler: StepHandler {
     let flow: OktaDirectAuth.DirectAuthenticationFlow
     let openIdConfiguration: AuthFoundation.OpenIdConfiguration
     let loginHint: String?
-    let currentStatus: OktaDirectAuth.DirectAuthenticationFlow.Status?
+    let context: OktaDirectAuth.DirectAuthenticationFlow.Context
     let factor: TestFactor
     let result: (Result<OktaDirectAuth.DirectAuthenticationFlow.Status, OktaDirectAuth.DirectAuthenticationFlowError>)?
     
@@ -44,7 +44,6 @@ struct TestFactor: AuthenticationFactor {
     func stepHandler(flow: OktaDirectAuth.DirectAuthenticationFlow,
                      openIdConfiguration: AuthFoundation.OpenIdConfiguration,
                      loginHint: String?,
-                     currentStatus: OktaDirectAuth.DirectAuthenticationFlow.Status?,
                      factor: TestFactor) throws -> OktaDirectAuth.StepHandler
     {
         if let exception = exception {
@@ -54,7 +53,7 @@ struct TestFactor: AuthenticationFactor {
         return TestStepHandler(flow: flow,
                                openIdConfiguration: openIdConfiguration,
                                loginHint: loginHint,
-                               currentStatus: currentStatus,
+                               context: flow.context!,
                                factor: factor,
                                result: result)
     }
@@ -68,9 +67,9 @@ final class DirectAuthenticationFlowTests: XCTestCase {
     var flow: DirectAuthenticationFlow!
     
     override func setUpWithError() throws {
-        client = OAuth2Client(baseURL: issuer,
+        client = OAuth2Client(issuerURL: issuer,
                               clientId: "clientId",
-                              scopes: "openid profile",
+                              scope: "openid profile",
                               session: urlSession)
         openIdConfiguration = try mock(from: .module,
                                        for: "openid-configuration",
@@ -95,6 +94,9 @@ final class DirectAuthenticationFlowTests: XCTestCase {
         let wait = expectation(description: "run step")
         let token = Token.mockToken()
         let factor = TestFactor(result: .success(.success(token)), exception: nil)
+        flow.context = .init(acrValues: nil,
+                             intent: .signIn)
+
         flow.runStep(with: factor) { result in
             XCTAssertEqual(result, .success(.success(token)))
             wait.fulfill()
@@ -109,6 +111,8 @@ final class DirectAuthenticationFlowTests: XCTestCase {
 
         let wait = expectation(description: "run step")
         let factor = TestFactor(result: .failure(.pollingTimeoutExceeded), exception: nil)
+        flow.context = .init(acrValues: nil,
+                             intent: .signIn)
         flow.runStep(with: factor) { result in
             XCTAssertEqual(result, .failure(.pollingTimeoutExceeded))
             wait.fulfill()
@@ -123,6 +127,8 @@ final class DirectAuthenticationFlowTests: XCTestCase {
 
         let wait = expectation(description: "run step")
         let factor = TestFactor(result: nil, exception: APIClientError.invalidRequestData)
+        flow.context = .init(acrValues: nil,
+                             intent: .signIn)
         flow.runStep(with: factor) { result in
             XCTAssertEqual(result, .failure(.network(error: .invalidRequestData)))
             wait.fulfill()

@@ -28,9 +28,9 @@ A simple authenticator, such as ``ResourceOwnerFlow``, is a single-step flow whi
 
 ```swift
 let flow = ResourceOwnerFlow(
-    issuer: URL(string: "https://example.okta.com")!,
+    issuerURL: URL(string: "https://example.okta.com")!,
     clientId: "abc123client",
-    scopes: "openid offline_access email profile")
+    scope: "openid offline_access email profile")
 
 let token = try await flow.start(
     username: "smeagol",
@@ -43,9 +43,9 @@ More complicated authenticators require some context or state to be provided to 
 
 ```swift
 let flow = DeviceAuthorizationFlow(
-    issuer: URL(string: "https://example.okta.com")!,
+    issuerURL: URL(string: "https://example.okta.com")!,
     clientId: "abc123client",
-    scopes: "openid offline_access email profile")
+    scope: "openid offline_access email profile")
 
 // Retrieve the context for this session.
 let context = try await flow.start()
@@ -54,7 +54,7 @@ let context = try await flow.start()
 // Once that is done, use the following code to
 // poll the server to retrieve a token when they
 // authorize the code.
-let token = try await flow.resume(with: context)
+let token = try await flow.resume()
 ```
 
 ### Multi-Step Flows

@@ -13,11 +13,17 @@
 import Foundation
 
 extension AuthenticationDelegate {
+    @_documentation(visibility: internal)
     public func authenticationStarted<Flow>(flow: Flow) {}
+
+    @_documentation(visibility: internal)
     public func authenticationFinished<Flow>(flow: Flow) {}
 }
 
 extension AuthorizationCodeFlowDelegate {
+    @_documentation(visibility: internal)
     public func authentication<Flow: AuthorizationCodeFlow>(flow: Flow, customizeUrl urlComponents: inout URLComponents) {}
+
+    @_documentation(visibility: internal)
     public func authentication<Flow: AuthorizationCodeFlow>(flow: Flow, shouldAuthenticateUsing url: URL) {}
 }

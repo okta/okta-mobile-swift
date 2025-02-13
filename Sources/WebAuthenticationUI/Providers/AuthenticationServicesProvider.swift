@@ -38,6 +38,8 @@ extension ASWebAuthenticationSession: AuthenticationServicesProviderSession {}
 class AuthenticationServicesProvider: NSObject, WebAuthenticationProvider {
     let loginFlow: AuthorizationCodeFlow
     let logoutFlow: SessionLogoutFlow?
+    private let loginRedirectURI: URL
+    private let logoutRedirectURI: URL?
     private(set) weak var delegate: WebAuthenticationProviderDelegate?
     private(set) var authenticationSession: AuthenticationServicesProviderSession?
 
@@ -46,12 +48,23 @@ class AuthenticationServicesProvider: NSObject, WebAuthenticationProvider {
     init(loginFlow: AuthorizationCodeFlow,
          logoutFlow: SessionLogoutFlow?,
          from window: WebAuthentication.WindowAnchor?,
-         delegate: WebAuthenticationProviderDelegate)
+         delegate: WebAuthenticationProviderDelegate) throws
     {
         self.loginFlow = loginFlow
         self.logoutFlow = logoutFlow
         self.anchor = window
         self.delegate = delegate
+        
+        guard let loginRedirectURI = loginFlow.client.configuration.redirectUri else {
+            throw OAuth2Error.missingRedirectUri
+        }
+        self.loginRedirectURI = loginRedirectURI
+
+        if let logoutFlow = logoutFlow {
+            self.logoutRedirectURI = logoutFlow.client.configuration.logoutRedirectUri
+        } else {
+            self.logoutRedirectURI = nil
+        }
         
         super.init()
         
@@ -64,8 +77,8 @@ class AuthenticationServicesProvider: NSObject, WebAuthenticationProvider {
         self.logoutFlow?.remove(delegate: self)
     }
 
-    func start(context: AuthorizationCodeFlow.Context?, additionalParameters: [String: String]?) {
-        loginFlow.start(with: context, additionalParameters: additionalParameters) { _ in }
+    func start(context: AuthorizationCodeFlow.Context) {
+        loginFlow.start(with: context) { _ in }
     }
     
     func createSession(url: URL, callbackURLScheme: String?, completionHandler: @escaping ASWebAuthenticationSession.CompletionHandler) -> AuthenticationServicesProviderSession {
@@ -79,7 +92,7 @@ class AuthenticationServicesProvider: NSObject, WebAuthenticationProvider {
         
         authenticationSession = createSession(
             url: url,
-            callbackURLScheme: loginFlow.redirectUri.scheme,
+            callbackURLScheme: loginRedirectURI.scheme,
             completionHandler: { url, error in
                 self.process(url: url, error: error)
             })
@@ -94,22 +107,22 @@ class AuthenticationServicesProvider: NSObject, WebAuthenticationProvider {
         }
     }
     
-    func logout(context: SessionLogoutFlow.Context, additionalParameters: [String: String]?) {
+    func logout(context: SessionLogoutFlow.Context) {
         guard let logoutFlow = logoutFlow else {
             return
         }
 
         // LogoutFlow invokes delegate, so an error is propagated from delegate method
-        try? logoutFlow.start(with: context, additionalParameters: additionalParameters) { _ in }
+        logoutFlow.start(with: context) { _ in }
     }
     
     func logout(using url: URL) {
-        guard let logoutFlow = logoutFlow else {
+        guard let logoutRedirectURI = logoutRedirectURI else {
             return
         }
 
         authenticationSession = createSession(url: url,
-                                              callbackURLScheme: logoutFlow.logoutRedirectUri.scheme,
+                                              callbackURLScheme: logoutRedirectURI.scheme,
                                               completionHandler: { url, error in
             self.processLogout(url: url, error: error)
         })
@@ -159,7 +172,7 @@ class AuthenticationServicesProvider: NSObject, WebAuthenticationProvider {
             {
                 received(error: .userCancelledLogin)
             } else if let url = url,
-                      let serverError = try? url.oauth2ServerError(redirectUri: loginFlow.redirectUri)
+                      let serverError = try? url.oauth2ServerError(redirectUri: loginRedirectURI)
             {
                 received(error: .serverError(serverError))
             } else {
@@ -192,7 +205,7 @@ class AuthenticationServicesProvider: NSObject, WebAuthenticationProvider {
             {
                 received(logoutError: .userCancelledLogin)
             } else if let url = url,
-                      let serverError = try? url.oauth2ServerError(redirectUri: logoutFlow?.logoutRedirectUri)
+                      let serverError = try? url.oauth2ServerError(redirectUri: logoutRedirectURI)
             {
                 received(logoutError: .serverError(serverError))
             } else {

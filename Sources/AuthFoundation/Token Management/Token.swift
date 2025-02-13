@@ -93,8 +93,10 @@ public final class Token: Codable, Equatable, Hashable, JSONClaimContainer, Expi
     }
     
     /// Validates the claims within this JWT token, to ensure it matches the given ``OAuth2Client``.
-    /// - Parameter client: Client to validate the token's claims against.
-    public func validate(using client: OAuth2Client, with context: IDTokenValidatorContext?) throws {
+    /// - Parameters:
+    ///   - client: Client to validate the token's claims against.
+    ///   - context: Optional ``IDTokenValidatorContext`` to use when validating the token.
+    public func validate(using client: OAuth2Client, with context: IDTokenValidatorContext) throws {
         guard let idToken = idToken else {
             return
         }
@@ -126,11 +128,8 @@ public final class Token: Codable, Equatable, Hashable, JSONClaimContainer, Expi
                 let request = Token.RefreshRequest(openIdConfiguration: configuration,
                                                    clientConfiguration: client.configuration,
                                                    refreshToken: refreshToken,
-                                                   id: Token.RefreshRequest.placeholderId,
-                                                   configuration: [
-                                                    "client_id": client.configuration.clientId,
-                                                    "scope": client.configuration.scopes
-                                                ])
+                                                   scope: nil,
+                                                   id: Token.RefreshRequest.placeholderId)
                 client.exchange(token: request) { result in
                     switch result {
                     case .success(let response):
@@ -191,7 +190,7 @@ public final class Token: Codable, Equatable, Hashable, JSONClaimContainer, Expi
         
         // When the custom MFA attestation ACR value is used, allow for
         // an empty / unspecified access token.
-        else if let acrValues = idToken?.authenticationClassReference,
+        else if let acrValues = context.clientSettings?["acr_values"]?.components(separatedBy: .whitespaces),
                 acrValues.contains("urn:okta:app:mfa:attestation")
         {
             accessToken = ""
@@ -258,8 +257,8 @@ extension CodingUserInfoKey {
     // swiftlint:disable force_unwrapping
     public static let tokenId = CodingUserInfoKey(rawValue: "tokenId")!
     public static let apiClientConfiguration = CodingUserInfoKey(rawValue: "apiClientConfiguration")!
+    public static let tokenContext = CodingUserInfoKey(rawValue: "tokenContext")!
     public static let clientSettings = CodingUserInfoKey(rawValue: "clientSettings")!
-    public static let request = CodingUserInfoKey(rawValue: "request")!
     // swiftlint:enable force_unwrapping
 }
 

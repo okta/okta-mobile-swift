@@ -14,9 +14,10 @@ import Foundation
 
 extension Token {
     public convenience init(from decoder: Decoder) throws {
-        var id: String = UUID().uuidString
+        // Initialize defaults supplied from the decoder's userInfo dictionary
+        var id: String = decoder.userInfo[.tokenId] as? String ?? UUID().uuidString
         var issuedAt: Date = Date.nowCoordinated
-        var context: Context?
+        var context: Context? = decoder.userInfo[.tokenContext] as? Token.Context
         var json: AnyJSON
         
         // Initialize defaults supplied from the decoder's userInfo dictionary

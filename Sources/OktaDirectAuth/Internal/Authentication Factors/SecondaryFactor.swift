@@ -17,30 +17,33 @@ extension DirectAuthenticationFlow.SecondaryFactor: AuthenticationFactor {
     func stepHandler(flow: DirectAuthenticationFlow,
                      openIdConfiguration: AuthFoundation.OpenIdConfiguration,
                      loginHint: String? = nil,
-                     currentStatus: DirectAuthenticationFlow.Status?,
                      factor: Self) throws -> StepHandler
     {
+        guard let context = flow.context else {
+            throw DirectAuthenticationFlowError.inconsistentContextState
+        }
+        
         switch self {
         case .otp:
             let request = TokenRequest(openIdConfiguration: openIdConfiguration,
                                        clientConfiguration: flow.client.configuration,
-                                       currentStatus: currentStatus,
+                                       context: context,
                                        loginHint: loginHint,
                                        factor: factor,
-                                       intent: flow.intent,
                                        grantTypesSupported: flow.supportedGrantTypes)
             return TokenStepHandler(flow: flow, request: request)
         case .oob(channel: let channel):
             return try OOBStepHandler(flow: flow,
                                       openIdConfiguration: openIdConfiguration,
-                                      currentStatus: currentStatus,
+                                      context: context,
                                       loginHint: loginHint,
                                       channel: channel,
                                       factor: factor)
         case .webAuthn:
-            let mfaContext = currentStatus?.mfaContext
+            let mfaContext = context.currentStatus?.mfaContext
             let request = try WebAuthnChallengeRequest(openIdConfiguration: openIdConfiguration,
                                                        clientConfiguration: flow.client.configuration,
+                                                       context: context,
                                                        loginHint: loginHint,
                                                        mfaToken: mfaContext?.mfaToken)
             return ChallengeStepHandler(flow: flow, request: request) {

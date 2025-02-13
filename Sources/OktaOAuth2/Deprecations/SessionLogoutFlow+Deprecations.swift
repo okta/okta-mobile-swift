@@ -1,5 +1,5 @@
 //
-// Copyright (c) 2021-Present, Okta, Inc. and/or its affiliates. All rights reserved.
+// Copyright (c) 2024-Present, Okta, Inc. and/or its affiliates. All rights reserved.
 // The Okta software accompanied by this notice is provided pursuant to the Apache License, Version 2.0 (the "License.")
 //
 // You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0.
@@ -12,16 +12,12 @@
 
 import Foundation
 
-internal extension String {
-    /// Generates a PKCE code challenge string.
-    /// - Returns: PKCE code challenge string, or `nil` if an error occurs.
-    func pkceCodeChallenge() -> String? {
-        data(using: .ascii)?.sha256()?.base64URLEncodedString
-    }
-}
-
-extension FixedWidthInteger {
-    static func random() -> Self {
-        return Self.random(in: .min ... .max)
+extension SessionLogoutFlow {
+    @_documentation(visibility: private)
+    @available(*, deprecated, renamed: "init(client:additionalParameters:)")
+    public convenience init(logoutRedirectUri: URL,
+                            additionalParameters: [String: APIRequestArgument]? = nil,
+                            client: OAuth2Client) {
+        fatalError()
     }
 }

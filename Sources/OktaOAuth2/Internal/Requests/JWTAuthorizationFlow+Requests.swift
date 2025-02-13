@@ -14,30 +14,29 @@ import Foundation
 import AuthFoundation
 
 extension JWTAuthorizationFlow {
-    struct TokenRequest {
+    struct TokenRequest: AuthenticationFlowRequest {
+        typealias Flow = JWTAuthorizationFlow
+        
         let openIdConfiguration: OpenIdConfiguration
-        let clientId: String
-        let scope: String
+        let clientConfiguration: OAuth2Client.Configuration
+        let additionalParameters: [String: any APIRequestArgument]?
+        let context: Flow.Context
         let assertion: JWT
     }
 }
 
 extension JWTAuthorizationFlow.TokenRequest: OAuth2TokenRequest, OAuth2APIRequest, APIRequestBody, APIParsingContext {
+    var category: OAuth2APIRequestCategory { .token }
+    var tokenValidatorContext: any IDTokenValidatorContext { NullIDTokenValidatorContext }
     var bodyParameters: [String: APIRequestArgument]? {
-        [
-            "client_id": clientId,
-            "scope": scope,
-            "grant_type": GrantType.jwtBearer,
+        var result = additionalParameters ?? [:]
+        result.merge(clientConfiguration.parameters(for: category))
+        result.merge(context.parameters(for: category))
+        result.merge([
             "assertion": assertion,
-        ]
-    }
-    
-    var codingUserInfo: [CodingUserInfoKey: Any]? {
-        [
-            .clientSettings: [
-                "client_id": clientId,
-                "scope": scope,
-            ]
-        ]
+            "grant_type": GrantType.jwtBearer,
+        ])
+        return result
+
     }
 }

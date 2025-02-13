@@ -58,6 +58,7 @@ public struct JWT: RawRepresentable, Codable, HasClaims, Expires {
             case algorithm = "alg"
         }
 
+        @_documentation(visibility: internal)
         public init(from decoder: Decoder) throws {
             let container = try decoder.container(keyedBy: CodingKeys.self)
             keyId = try container.decode(String.self, forKey: .keyId)
@@ -72,7 +73,7 @@ public struct JWT: RawRepresentable, Codable, HasClaims, Expires {
     }
     
     /// Verifies the JWT token using the given ``JWK`` key.
-    /// - Parameter key: JWK key to use to verify this token.
+    /// - Parameter keySet: JWK keyset which should be used to verify this token.
     /// - Returns: Returns whether or not signing passes for this token/key combination.
     /// - Throws: ``JWTError``
     public func validate(using keySet: JWKS) throws -> Bool {

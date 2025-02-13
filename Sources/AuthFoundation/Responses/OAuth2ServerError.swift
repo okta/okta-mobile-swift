@@ -23,8 +23,27 @@ public struct OAuth2ServerError: Decodable, Error, LocalizedError, Equatable {
     /// Contains any additional values the server error reported alongside the code and description.
     public var additionalValues: [String: Any]
     
-    public var errorDescription: String? { description }
+    public var errorDescription: String? {
+        if let description = description {
+            return String.localizedStringWithFormat(
+                NSLocalizedString("oauth2_error_description",
+                                  tableName: "AuthFoundation",
+                                  bundle: .authFoundation,
+                                  comment: "OAuth2 server error description"),
+                description,
+                code.rawValue
+            )
+        }
 
+        return String.localizedStringWithFormat(
+            NSLocalizedString("oauth2_error_code_description",
+                              tableName: "AuthFoundation",
+                              bundle: .authFoundation,
+                              comment: "OAuth2 server error code"),
+            code.rawValue)
+    }
+
+    @_documentation(visibility: internal)
     public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         code = try container.decode(Code.self, forKey: .code)
@@ -34,12 +53,14 @@ public struct OAuth2ServerError: Decodable, Error, LocalizedError, Equatable {
         self.additionalValues = additionalContainer.decodeUnkeyedContainer(exclude: CodingKeys.self)
     }
 
-    public init(code: String, description: String?, additionalValues: [String: Any]) {
+    @_documentation(visibility: internal)
+    public init(code: String, description: String?, additionalValues: [String: Any] = [:]) {
         self.code = .init(rawValue: code) ?? .other(code: code)
         self.description = description
         self.additionalValues = additionalValues
     }
     
+    @_documentation(visibility: internal)
     public static func == (lhs: OAuth2ServerError, rhs: OAuth2ServerError) -> Bool {
         lhs.code == rhs.code &&
         lhs.description == rhs.description
@@ -56,7 +77,7 @@ extension OAuth2ServerError {
     public enum Code: Decodable {
         /// The authorization request is still pending as the end user hasn't yet completed the user-interaction step
         case authorizationPending
-        /// the authorization request is still pending and polling should continue
+        /// The authorization request is still pending and polling should continue
         case slowDown
         /// The `device_code` has expired, and the device authorization session has concluded.
         case expiredToken

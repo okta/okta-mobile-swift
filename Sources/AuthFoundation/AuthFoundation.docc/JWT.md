@@ -8,8 +8,8 @@ These objects conform to both the ``HasClaims`` and ``Expires`` protocols, to pr
 
 Reading information, or "Claims", from a JWT token can be done in three different ways:
 
-1. Accessing values using convenience properties
-2. Using keyed subscripting of common claims using the ``Claim`` enum
+1. Accessing values using convenience properties.
+2. Using keyed subscripting of common claims using the ``ClaimType`` enum corresponding to the claim container.
 3. Using keyed subscripting of custom claims using the claim's string name.
 
 Some common properties, such as ``HasClaims/subject`` or ``issuer``, are defined as properties on the JWT object, to simplify access to these values. Additionally, some claims that return dates or time intervals have conveniences such as ``issuedAt``, ``expirationTime``, ``expiresIn``, or ``scope``, that returns their values in the expected type.

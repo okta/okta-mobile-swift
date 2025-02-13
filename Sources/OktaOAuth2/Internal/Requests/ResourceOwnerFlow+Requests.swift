@@ -14,32 +14,30 @@ import Foundation
 import AuthFoundation
 
 extension ResourceOwnerFlow {
-    struct TokenRequest {
+    struct TokenRequest: AuthenticationFlowRequest {
+        typealias Flow = ResourceOwnerFlow
+        
         let openIdConfiguration: OpenIdConfiguration
-        let clientId: String
-        let scope: String
+        let clientConfiguration: OAuth2Client.Configuration
+        let additionalParameters: [String: APIRequestArgument]?
+        let context: Flow.Context
         let username: String
         let password: String
     }
 }
 
 extension ResourceOwnerFlow.TokenRequest: OAuth2TokenRequest, OAuth2APIRequest, APIRequestBody, APIParsingContext {
+    var category: AuthFoundation.OAuth2APIRequestCategory { .token }
+    var tokenValidatorContext: any IDTokenValidatorContext { NullIDTokenValidatorContext }
     var bodyParameters: [String: APIRequestArgument]? {
-        [
-            "client_id": clientId,
-            "scope": scope,
+        var result = additionalParameters ?? [:]
+        result.merge(clientConfiguration.parameters(for: category))
+        result.merge(context.parameters(for: category))
+        result.merge([
             "grant_type": GrantType.password,
             "username": username,
-            "password": password
-        ]
-    }
-    
-    var codingUserInfo: [CodingUserInfoKey: Any]? {
-        [
-            .clientSettings: [
-                "client_id": clientId,
-                "scope": scope
-            ]
-        ]
+            "password": password,
+        ])
+        return result
     }
 }

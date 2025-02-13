@@ -14,18 +14,23 @@ import XCTest
 @testable import AuthFoundation
 @testable import TestCommon
 
-fileprivate struct MockTokenRequest: OAuth2TokenRequest {
-    let openIdConfiguration: AuthFoundation.OpenIdConfiguration
-    let clientId: String
+fileprivate struct MockTokenRequest: OAuth2TokenRequest, IDTokenValidatorContext {
+    var nonce: String?
+    var maxAge: TimeInterval?
+    let context: (any AuthenticationContext)? = nil
+    let openIdConfiguration: OpenIdConfiguration
+    let clientConfiguration: OAuth2Client.Configuration
     let url: URL
+    let category = OAuth2APIRequestCategory.token
+    var tokenValidatorContext: any IDTokenValidatorContext { self }
     var bodyParameters: [String: APIRequestArgument]?
 }
 
 final class TokenTests: XCTestCase {
     var openIdConfiguration: OpenIdConfiguration!
-    let configuration = OAuth2Client.Configuration(baseURL: URL(string: "https://example.com")!,
+    let configuration = OAuth2Client.Configuration(issuerURL: URL(string: "https://example.com")!,
                                                    clientId: "clientid",
-                                                   scopes: "openid")
+                                                   scope: "openid")
     
     override func setUpWithError() throws {
         JWK.validator = MockJWKValidator()
@@ -65,7 +70,9 @@ final class TokenTests: XCTestCase {
 
     func testTokenContextCodingUserInfoKeySettings() throws {
         let context = Token.Context(configuration: configuration,
-                                    clientSettings: [CodingUserInfoKey.apiClientConfiguration: "bar"])
+                                    clientSettings: [
+                                        CodingUserInfoKey.apiClientConfiguration: "bar",
+                                    ])
         XCTAssertEqual(context.clientSettings, ["apiClientConfiguration": "bar"])
         
         let data = try JSONEncoder().encode(context)
@@ -83,7 +90,9 @@ final class TokenTests: XCTestCase {
         """)
         
         let decoder = defaultJSONDecoder
-        decoder.userInfo = [.apiClientConfiguration: configuration]
+        decoder.userInfo = [
+            .apiClientConfiguration: configuration,
+        ]
         
         let token = try decoder.decode(Token.self, from: data)
         XCTAssertNil(token.scope)
@@ -100,7 +109,7 @@ final class TokenTests: XCTestCase {
                                idToken: nil,
                                deviceSecret: "the_device_secret",
                                context: Token.Context(configuration: configuration,
-                                                      clientSettings: []))
+                                                      clientSettings: [:]))
         
         XCTAssertEqual(token.token(of: .accessToken), token.accessToken)
         XCTAssertEqual(token.token(of: .refreshToken), token.refreshToken)
@@ -111,18 +120,23 @@ final class TokenTests: XCTestCase {
         XCTAssertEqual(token, decodedToken)
     }
 
-    func testMFAAttestationToken() throws {
-        let request = MockTokenRequest(openIdConfiguration: openIdConfiguration,
-                                       clientId: configuration.clientId,
-                                       url: configuration.baseURL,
-                                       bodyParameters: [
-                                        "acr_values": "urn:okta:app:mfa:attestation"
-                                       ])
+    func testTokenNilContext() throws {
+        let decoder = defaultJSONDecoder
+        decoder.userInfo = [:]
         
+        XCTAssertThrowsError(try decoder.decode(Token.self,
+                                                from: try data(from: .module,
+                                                               for: "token",
+                                                               in: "MockResponses")))
+    }
+    
+    func testMFAAttestationToken() throws {
         let decoder = defaultJSONDecoder
         decoder.userInfo = [
             .apiClientConfiguration: configuration,
-            .request: request,
+            .clientSettings: [
+                "acr_values": "urn:okta:app:mfa:attestation"
+            ]
         ]
         
         let token = try decoder.decode(Token.self,
@@ -132,7 +146,6 @@ final class TokenTests: XCTestCase {
         XCTAssertTrue(token.accessToken.isEmpty)
     }
     
-
     func testMFAAttestationTokenFailed() throws {
         let decoder = defaultJSONDecoder
         decoder.userInfo = [
@@ -199,16 +212,14 @@ final class TokenTests: XCTestCase {
         XCTAssertEqual(token.refreshToken, "refresh-kl2QWaYgyHaLkCdc6exjsowP9KUTW1ilAWC")
         XCTAssertEqual(token.deviceSecret, "device_lh4nMHgcUWLJIVgkcbQwnnSI2F8JMwNshLoa")
         XCTAssertEqual(token.issuedAt?.timeIntervalSinceReferenceDate, 744576826.0011461)
-        XCTAssertEqual(token.context.configuration.scopes, "openid profile offline_access")
-        XCTAssertEqual(token.context, .init(configuration: .init(baseURL: try XCTUnwrap(URL(string: "https://example.com/oauth2/default")),
+        XCTAssertEqual(token.context.configuration.scope, "openid profile offline_access")
+        XCTAssertEqual(token.context.configuration.redirectUri?.absoluteString, "com.example:/callback")
+        XCTAssertEqual(token.context, .init(configuration: .init(issuerURL: try XCTUnwrap(URL(string: "https://example.com/oauth2/default")),
                                                                  clientId: "0oatheclientid",
-                                                                 scopes: "openid profile offline_access",
+                                                                 scope: "openid profile offline_access",
+                                                                 redirectUri: URL(string: "com.example:/callback"),
                                                                  authentication: .none),
-                                            clientSettings: [
-                                                "client_id": "0oatheclientid",
-                                                "scope": "openid profile offline_access",
-                                                "redirect_uri":"com.example:/callback",
-                                            ]))
+                                            clientSettings: nil))
         XCTAssertEqual(token.jsonPayload.jsonValue, try JSON([
             "scope": "profile offline_access openid",
             "access_token": JWT.mockAccessToken,
@@ -233,7 +244,7 @@ final class TokenTests: XCTestCase {
                            idToken: nil,
                            deviceSecret: "the_device_secret",
                            context: Token.Context(configuration: configuration,
-                                                  clientSettings: []))
+                                                  clientSettings: [:]))
         XCTAssertEqual(token.allClaims.sorted(), [
             "expires_in",
             "token_type",
@@ -273,9 +284,9 @@ final class TokenTests: XCTestCase {
              }
             """))
         
-        return OAuth2Client(baseURL: URL(string: "https://example.com/")!,
+        return OAuth2Client(issuerURL: URL(string: "https://example.com/")!,
                             clientId: "clientId",
-                            scopes: "openid profile offline_access",
+                            scope: "openid profile offline_access",
                             session: urlSession)
     }
 }

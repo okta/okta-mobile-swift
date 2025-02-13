@@ -14,7 +14,7 @@ import XCTest
 @testable import AuthFoundation
 @testable import OktaDirectAuth
 
-final class ErrorTests: XCTestCase {
+final class DirectAuthErrorTests: XCTestCase {
     func testOAuth2ErrorInitializers() throws {
         // OAuth2 error is passed through
         XCTAssertEqual(OAuth2Error(OAuth2Error.cannotComposeUrl),

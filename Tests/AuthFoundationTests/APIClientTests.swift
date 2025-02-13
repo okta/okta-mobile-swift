@@ -36,9 +36,9 @@ class APIClientTests: XCTestCase {
     let requestId = UUID().uuidString
     
     override func setUpWithError() throws {
-        configuration = OAuth2Client.Configuration(baseURL: baseUrl,
+        configuration = OAuth2Client.Configuration(issuerURL: baseUrl,
                                                    clientId: "clientid",
-                                                   scopes: "openid")
+                                                   scope: "openid")
         client = MockApiClient(configuration: configuration,
                                session: urlSession,
                                baseURL: baseUrl)

@@ -50,9 +50,9 @@ extension UserPasswordSignIn {
             throw UserPasswordError.invalidDomain
         }
         
-        let flow = ResourceOwnerFlow(issuer: issuerUrl,
+        let flow = ResourceOwnerFlow(issuerURL: issuerUrl,
                                      clientId: clientId,
-                                     scopes: scopes)
+                                     scope: scope)
         return flow
     }
 }

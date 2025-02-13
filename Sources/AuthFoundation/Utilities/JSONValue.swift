@@ -17,10 +17,6 @@ public enum JSONError: Error {
     case invalidContentEncoding
 }
 
-@_documentation(visibility: private)
-@available(*, deprecated, renamed: "JSON")
-public typealias JSONValue = JSON
-
 /// Efficiently represents ``JSON`` values, and exchanges between its String or Data representations.
 ///
 /// JSON data may be imported from multiple sources, be it Data, a String, or an alread-parsed JSON object. Transforming data between these states, and dealing with error conditions every time, can be cumbersome. AnyJSON is a convenience wrapper class that allows underlying JSON to be lazily mapped between types as needed.
@@ -183,6 +179,7 @@ public enum JSON: Equatable {
         return dictionary[key]
     }
     
+    @_documentation(visibility: internal)
     public static func == (lhs: JSON, rhs: JSON) -> Bool {
         switch (lhs, rhs) {
         case (.string(let lhsValue), .string(let rhsValue)):
@@ -204,6 +201,7 @@ public enum JSON: Equatable {
 }
 
 extension JSON: Codable {
+    @_documentation(visibility: internal)
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
         if let value = try? container.decode(String.self) {
@@ -226,6 +224,7 @@ extension JSON: Codable {
         }
     }
     
+    @_documentation(visibility: internal)
     public func encode(to encoder: Encoder) throws {
         var container = encoder.singleValueContainer()
         switch self {

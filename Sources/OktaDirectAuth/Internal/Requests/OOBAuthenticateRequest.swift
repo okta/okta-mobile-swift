@@ -13,13 +13,7 @@
 import Foundation
 import AuthFoundation
 
-extension OpenIdConfiguration {
-    var primaryAuthenticateEndpoint: URL? {
-        tokenEndpoint.url(replacing: "/token", with: "/primary-authenticate")
-    }
-}
-
-struct OOBResponse: Codable, HasTokenParameters {
+struct OOBResponse: Codable, Equatable, HasTokenParameters {
     let oobCode: String
     let expiresIn: TimeInterval
     let interval: TimeInterval?
@@ -39,17 +33,31 @@ struct OOBResponse: Codable, HasTokenParameters {
     func tokenParameters(currentStatus: DirectAuthenticationFlow.Status?) -> [String: APIRequestArgument] {
         ["oob_code": oobCode]
     }
+    
+    static func == (lhs: OOBResponse, rhs: OOBResponse) -> Bool {
+        let tolerance: TimeInterval = 0.000001
+        
+        return lhs.oobCode == rhs.oobCode
+        && abs(lhs.expiresIn - rhs.expiresIn) < tolerance
+        && abs((lhs.interval ?? 0) - (rhs.interval ?? 0)) < tolerance
+        && lhs.channel == rhs.channel
+        && lhs.bindingMethod == rhs.bindingMethod
+    }
 }
 
-struct OOBAuthenticateRequest {
+struct OOBAuthenticateRequest: AuthenticationFlowRequest {
+    typealias Flow = DirectAuthenticationFlow
+    
     let url: URL
     let clientConfiguration: OAuth2Client.Configuration
+    let context: Flow.Context
     let loginHint: String
     let channelHint: DirectAuthenticationFlow.OOBChannel
     let challengeHint: GrantType
     
     init(openIdConfiguration: OpenIdConfiguration,
          clientConfiguration: OAuth2Client.Configuration,
+         context: DirectAuthenticationFlow.Context,
          loginHint: String,
          channelHint: DirectAuthenticationFlow.OOBChannel,
          challengeHint: GrantType) throws
@@ -60,13 +68,14 @@ struct OOBAuthenticateRequest {
         
         self.url = url
         self.clientConfiguration = clientConfiguration
+        self.context = context
         self.loginHint = loginHint
         self.channelHint = channelHint
         self.challengeHint = challengeHint
     }
 }
 
-enum BindingMethod: String, Codable {
+enum BindingMethod: String, Codable, Equatable {
     case none
     case transfer
     case prompt
@@ -78,16 +87,21 @@ extension OOBAuthenticateRequest: APIRequest, APIRequestBody {
     var httpMethod: APIRequestMethod { .post }
     var contentType: APIContentType? { .formEncoded }
     var acceptsType: APIContentType? { .json }
+    var category: AuthFoundation.OAuth2APIRequestCategory { .other }
+
     var bodyParameters: [String: APIRequestArgument]? {
-        var result: [String: APIRequestArgument] = [
-            "client_id": clientConfiguration.clientId,
+        var result = clientConfiguration.parameters(for: category) ?? [:]
+        result.merge(context.parameters(for: category))
+        result.merge([
             "login_hint": loginHint,
             "channel_hint": channelHint,
             "challenge_hint": challengeHint,
-        ]
+        ])
         
-        result.merge(clientConfiguration.authentication)
-
+        if result["client_id"] == nil {
+            result["client_id"] = clientConfiguration.clientId
+        }
+        
         return result
     }
 }

@@ -62,34 +62,34 @@ extension TokenExchangeFlow {
 }
 
 extension TokenExchangeFlow {
-    struct TokenRequest {
+    struct TokenRequest: AuthenticationFlowRequest {
+        typealias Flow = TokenExchangeFlow
+        
         let openIdConfiguration: OpenIdConfiguration
-        let clientId: String
+        let clientConfiguration: OAuth2Client.Configuration
+        let additionalParameters: [String: APIRequestArgument]?
+        let context: Flow.Context
         let tokens: [TokenType]
-        let scope: String
-        let audience: String
-        let grantType = GrantType.tokenExchange
     }
 }
 
-extension TokenExchangeFlow.TokenRequest: OAuth2TokenRequest, OAuth2APIRequest, APIRequestBody {
+extension TokenExchangeFlow.TokenRequest: OAuth2TokenRequest, OAuth2APIRequest, APIRequestBody, APIParsingContext {
     var httpMethod: APIRequestMethod { .post }
     var url: URL { openIdConfiguration.tokenEndpoint }
     var contentType: APIContentType? { .formEncoded }
     var acceptsType: APIContentType? { .json }
+    var category: OAuth2APIRequestCategory { .token }
+    var tokenValidatorContext: any IDTokenValidatorContext { NullIDTokenValidatorContext }
     var bodyParameters: [String: APIRequestArgument]? {
-        let tokensDict = tokens.map { token in
-            [
-                token.key: token.value,
-                token.keyType: token.urn
-            ]
-        }.flatMap { $0 }
-        
-        return [
-            "client_id": clientId,
-            "grant_type": grantType.rawValue,
-            "scope": scope,
-            "audience": audience
-        ].merging(tokensDict) { _, new in new }
+        var result = additionalParameters ?? [:]
+        result.merge(clientConfiguration.parameters(for: category))
+        result.merge(context.parameters(for: category))
+
+        for token in tokens {
+            result[token.key] = token.value
+            result[token.keyType] = token.urn
+        }
+
+        return result
     }
 }

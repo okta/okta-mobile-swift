@@ -52,9 +52,9 @@ public protocol AuthorizationCodeFlowDelegate: AuthenticationDelegate {
 ///
 /// ```swift
 /// let flow = AuthorizationCodeFlow(
-///     issuer: URL(string: "https://example.okta.com")!,
+///     issuerURL: URL(string: "https://example.okta.com")!,
 ///     clientId: "abc123client",
-///     scopes: "openid offline_access email profile",
+///     scope: "openid offline_access email profile",
 ///     redirectUri: URL(string: "com.example.app:/callback"))
 ///
 /// // Create the authorization URL. Open this in a browser.
@@ -65,44 +65,7 @@ public protocol AuthorizationCodeFlowDelegate: AuthenticationDelegate {
 /// let redirectUri: URL
 /// let token = try await flow.resume(with: redirectUri)
 /// ```
-public class AuthorizationCodeFlow: AuthenticationFlow, ProvidesOAuth2Parameters {
-    /// A model representing the context and current state for an authorization session.
-    public struct Context: Equatable {
-        /// The `PKCE` credentials to use in the authorization request.
-        ///
-        /// This value may be `nil` on platforms that do not support PKCE.
-        public let pkce: PKCE?
-        
-        /// The state string to use when creating an authentication URL.
-        public let state: String
-        
-        /// The "nonce" value to send with this authorization request.
-        public let nonce: String
-        
-        /// The maximum age an ID token can be when authenticating.
-        public let maxAge: TimeInterval?
-        
-        /// The current authentication URL, or `nil` if one has not yet been generated.
-        public internal(set) var authenticationURL: URL?
-        
-        /// Initializer for creating a context with a custom state string.
-        /// - Parameters:
-        ///   - state: State string to use, or `nil` to accept an automatically generated default.
-        ///   - maxAge: The maximum age an ID token can be when authenticating.
-        public init(state: String? = nil, maxAge: TimeInterval? = nil) {
-            self.init(state: state ?? UUID().uuidString,
-                      maxAge: maxAge,
-                      nonce: [UInt8].random(count: 16).base64URLEncodedString,
-                      pkce: PKCE())
-        }
-        
-        init(state: String, maxAge: TimeInterval?, nonce: String, pkce: PKCE?) {
-            self.state = state
-            self.maxAge = maxAge
-            self.nonce = nonce
-            self.pkce = pkce
-        }
-    }
+public class AuthorizationCodeFlow: AuthenticationFlow {
     
     /// Errors reported during processing and handling of redirect URLs.
     ///
@@ -118,10 +81,7 @@ public class AuthorizationCodeFlow: AuthenticationFlow, ProvidesOAuth2Parameters
     /// The OAuth2Client this authentication flow will use.
     public let client: OAuth2Client
     
-    /// The redirect URI defined for your client.
-    public let redirectUri: URL
-    
-    /// Any additional query string parameters you would like to supply to the authorization server.
+    /// Any additional query string parameters you would like to supply to the authorization server for all requests from this flow.
     public let additionalParameters: [String: APIRequestArgument]?
 
     /// Indicates whether or not this flow is currently in the process of authenticating a user.
@@ -140,114 +100,90 @@ public class AuthorizationCodeFlow: AuthenticationFlow, ProvidesOAuth2Parameters
     }
     
     /// The context that stores the state for the current authentication session.
-    public private(set) var context: Context? {
-        didSet {
-            guard let url = context?.authenticationURL else {
-                return
-            }
+    public private(set) var context: Context?
 
-            delegateCollection.invoke { $0.authentication(flow: self, shouldAuthenticateUsing: url) }
-        }
-    }
-    
     /// Convenience initializer to construct an authentication flow from variables.
     /// - Parameters:
-    ///   - issuer: The issuer URL.
+    ///   - issuerURL: The issuer URL.
     ///   - clientId: The client ID.
-    ///   - scopes: The scopes to request.
+    ///   - scope: The scopes to request.
     ///   - redirectUri: The redirect URI for the client.
     ///   - additionalParameters: Optional additional query string parameters you would like to supply to the authorization server.
-    public convenience init(issuer: URL,
-                            clientId: String,
-                            scopes: String,
-                            redirectUri: URL,
-                            additionalParameters: [String: APIRequestArgument]? = nil)
+    public init(issuerURL: URL,
+                clientId: String,
+                scope: String,
+                redirectUri: URL,
+                additionalParameters: [String: any APIRequestArgument]? = nil)
     {
-        self.init(redirectUri: redirectUri,
-                  additionalParameters: additionalParameters,
-                  client: .init(baseURL: issuer,
-                                clientId: clientId,
-                                scopes: scopes))
+        self.client = .init(issuerURL: issuerURL,
+                            clientId: clientId,
+                            scope: scope,
+                            redirectUri: redirectUri)
+        self.additionalParameters = additionalParameters
+        
+        client.add(delegate: self)
+
+        // Ensure this SDK's static version is included in the user agent.
+        SDKVersion.register(sdk: Version)
     }
-    
+
     /// Initializer to construct an authentication flow from a pre-defined configuration and client.
     /// - Parameters:
-    ///   - redirectUri: The redirect URI for the client.
-    ///   - additionalParameters: Optional additional query string parameters you would like to supply to the authorization server.
     ///   - client: The `OAuth2Client` to use with this flow.
-    public init(redirectUri: URL,
-                additionalParameters: [String: APIRequestArgument]? = nil,
-                client: OAuth2Client)
+    ///   - additionalParameters: Optional additional query string parameters you would like to supply to the authorization server.
+    public required init(client: OAuth2Client,
+                         additionalParameters: [String: any APIRequestArgument]? = nil) throws
     {
+        guard client.configuration.redirectUri != nil else {
+            throw OAuth2Error.missingRedirectUri
+        }
+        
         // Ensure this SDK's static version is included in the user agent.
         SDKVersion.register(sdk: Version)
         
         self.client = client
-        self.redirectUri = redirectUri
         self.additionalParameters = additionalParameters
         
         client.add(delegate: self)
-    }
-    
-    /// Initializer that uses the configuration defined within the application's `Okta.plist` file.
-    public convenience init() throws {
-        try self.init(try .init())
-    }
-    
-    /// Initializer that uses the configuration defined within the given file URL.
-    /// - Parameter fileURL: File URL to a `plist` containing client configuration.
-    public convenience init(plist fileURL: URL) throws {
-        try self.init(try .init(plist: fileURL))
-    }
-    
-    private convenience init(_ config: OAuth2Client.PropertyListConfiguration) throws {
-        guard let redirectUri = config.redirectUri else {
-            throw OAuth2Client.PropertyListConfigurationError.missingConfigurationValues
-        }
-
-        self.init(issuer: config.issuer,
-                  clientId: config.clientId,
-                  scopes: config.scopes,
-                  redirectUri: redirectUri,
-                  additionalParameters: config.additionalParameters)
     }
     
     /// Initiates an authentication flow, with an optional ``Context-swift.struct``.
     ///
     /// This method is used to begin an authentication session. It is asynchronous, and will invoke the appropriate delegate methods when a response is received.
     /// - Parameters:
-    ///   - context: Optional context to provide when customizing the state parameter.
-    ///   - additionalParameters: Optional additional query string parameters you would like to supply to the authorization server.
+    ///   - options: Options to customize the authentication flow.
     ///   - completion: Completion block for receiving the response.
-    public func start(with context: Context? = nil,
-                      additionalParameters: [String: String]? = nil,
+    public func start(with context: Context = .init(),
                       completion: @escaping (Result<URL, OAuth2Error>) -> Void)
     {
-        var context = context ?? Context()
+        self.context = context
         isAuthenticating = true
 
         client.openIdConfiguration { result in
             switch result {
             case .failure(let error):
-                self.reset()
-                
                 self.delegateCollection.invoke { $0.authentication(flow: self, received: error) }
                 completion(.failure(error))
+                self.reset()
+                
             case .success(let configuration):
                 do {
+                    var context = context // Capture the local context value defined above
                     let url = try self.createAuthenticationURL(from: configuration.authorizationEndpoint,
-                                                               using: context,
-                                                               additionalParameters: additionalParameters)
+                                                               using: context)
                     context.authenticationURL = url
                     self.context = context
                     
+                    self.delegateCollection.invoke { delegate in
+                        delegate.authentication(flow: self, shouldAuthenticateUsing: url)
+                    }
+
                     completion(.success(url))
                 } catch {
-                    self.reset()
-                    
                     let oauthError = error as? OAuth2Error ?? .error(error)
                     self.delegateCollection.invoke { $0.authentication(flow: self, received: oauthError) }
                     completion(.failure(oauthError))
+                    self.reset()
                 }
             }
         }
@@ -262,19 +198,35 @@ public class AuthorizationCodeFlow: AuthenticationFlow, ProvidesOAuth2Parameters
     ///   - url: Authorization redirect URI
     ///   - completion: Completion block to retrieve the returned result.
     public func resume(with url: URL, completion: @escaping (Result<Token, OAuth2Error>) -> Void) throws {
-        let code = try authorizationCode(from: url)
+        guard let redirectUri = client.configuration.redirectUri else {
+            throw OAuth2Error.missingRedirectUri
+        }
         
+        guard let context = self.context else {
+            throw OAuth2Error.missingClientConfiguration
+        }
+        
+        let code = try url.authorizationCode(redirectUri: redirectUri, state: context.state)
+        let clientConfiguration = client.configuration
+        let additionalParameters = additionalParameters
+
         client.openIdConfiguration { result in
             switch result {
-            case .success(let configuration):
-                let request = TokenRequest(openIdConfiguration: configuration,
-                                           clientConfiguration: self.client.configuration,
-                                           redirectUri: self.redirectUri.absoluteString,
-                                           grantType: .authorizationCode,
-                                           grantValue: code,
-                                           pkce: self.context?.pkce,
-                                           nonce: self.context?.nonce,
-                                           maxAge: self.context?.maxAge)
+            case .success(let openIdConfiguration):
+                let request: TokenRequest
+                do {
+                    request = try TokenRequest(openIdConfiguration: openIdConfiguration,
+                                               clientConfiguration: clientConfiguration,
+                                               additionalParameters: additionalParameters,
+                                               context: context,
+                                               authorizationCode: code)
+                } catch {
+                    let error = OAuth2Error(error)
+                    self.delegateCollection.invoke { $0.authentication(flow: self, received: error) }
+                    completion(.failure(error))
+                    return
+                }
+                
                 self.client.exchange(token: request) { result in
                     self.reset()
                     
@@ -296,8 +248,8 @@ public class AuthorizationCodeFlow: AuthenticationFlow, ProvidesOAuth2Parameters
     }
     
     public func reset() {
-        context = nil
         isAuthenticating = false
+        context = nil
     }
 
     // MARK: Private properties / methods
@@ -311,11 +263,11 @@ extension AuthorizationCodeFlow {
     /// This method is used to begin an authentication session.
     /// - Parameters:
     ///   - context: Optional context to provide when customizing the state parameter.
-    ///   - additionalParameters: Optional additional query string parameters you would like to supply to the authorization server.
+    ///   - options: Options to customize this authentication flow.
     /// - Returns: The URL a user should be presented with within a browser, to continue authorization.
-    public func start(with context: Context? = nil, additionalParameters: [String: String]? = nil) async throws -> URL {
+    public func start(with context: Context = .init()) async throws -> URL {
         try await withCheckedThrowingContinuation { continuation in
-            start(with: context, additionalParameters: additionalParameters) { result in
+            start(with: context) { result in
                 continuation.resume(with: result)
             }
         }
@@ -348,16 +300,6 @@ extension AuthorizationCodeFlow: UsesDelegateCollection {
     public typealias Delegate = AuthorizationCodeFlowDelegate
 }
 
-extension AuthorizationCodeFlow {
-    func authorizationCode(from url: URL) throws -> String {
-        guard let context = context else {
-            throw AuthenticationError.flowNotReady
-        }
-        
-        return try url.authorizationCode(redirectUri: redirectUri, state: context.state)
-    }
-}
-
 extension AuthorizationCodeFlow: OAuth2ClientDelegate {
     
 }
@@ -365,15 +307,11 @@ extension AuthorizationCodeFlow: OAuth2ClientDelegate {
 extension OAuth2Client {
     /// Creates a new Authorization Code flow configured to use this OAuth2Client.
     /// - Parameters:
-    ///   - redirectUri: Redirect URI
     ///   - additionalParameters: Additional parameters to pass to the flow
     /// - Returns: Initialized authorization flow.
-    public func authorizationCodeFlow(
-        redirectUri: URL,
-        additionalParameters: [String: String]? = nil) -> AuthorizationCodeFlow
+    public func authorizationCodeFlow(additionalParameters: [String: String]? = nil) throws -> AuthorizationCodeFlow
     {
-        AuthorizationCodeFlow(redirectUri: redirectUri,
-                              additionalParameters: additionalParameters,
-                              client: self)
+        try AuthorizationCodeFlow(client: self,
+                                  additionalParameters: additionalParameters)
     }
 }

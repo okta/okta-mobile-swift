@@ -23,3 +23,8 @@ extension GrantType {
         }
     }
 }
+
+extension AuthorizationCodeFlow.Prompt: APIRequestArgument {
+    @_documentation(visibility: internal)
+    public var stringValue: String { rawValue }
+}

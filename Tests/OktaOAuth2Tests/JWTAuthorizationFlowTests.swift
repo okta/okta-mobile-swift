@@ -51,9 +51,9 @@ final class JWTAuthorizationFlowTests: XCTestCase {
     var jwt: JWT!
     
     override func setUpWithError() throws {
-        client = OAuth2Client(baseURL: issuer,
+        client = OAuth2Client(issuerURL: issuer,
                               clientId: "clientId",
-                              scopes: "profile openid",
+                              scope: "profile openid",
                               session: urlSession)
         JWK.validator = MockJWKValidator()
         Token.idTokenValidator = MockIDTokenValidator()
@@ -106,7 +106,12 @@ final class JWTAuthorizationFlowTests: XCTestCase {
         }))
 
         XCTAssertEqual(request.url?.absoluteString, "https://example.okta.com/oauth2/v1/token")
-        XCTAssertEqual(request.bodyString, "assertion=\(JWT.mockIDToken)&client_id=clientId&grant_type=urn:ietf:params:oauth:grant-type:jwt-bearer&scope=profile+openid")
+        XCTAssertEqual(request.httpBody?.urlFormEncoded, [
+            "assertion": JWT.mockIDToken,
+            "client_id": "clientId",
+            "grant_type": "urn:ietf:params:oauth:grant-type:jwt-bearer",
+            "scope": "profile+openid",
+        ])
     }
     
     func testAuthenticationSucceeded() throws {

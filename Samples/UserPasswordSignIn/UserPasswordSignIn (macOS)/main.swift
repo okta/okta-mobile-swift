@@ -25,7 +25,7 @@ struct UserPasswordSignIn: Command {
     var clientId: String
     
     @Option(help: "The scopes to use.")
-    var scopes: String = "openid profile"
+    var scope: String = "openid profile"
     
     @Option(help: "Username to use")
     var username: String?

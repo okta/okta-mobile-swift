@@ -28,9 +28,7 @@ extension Token {
             
             if let settings = clientSettings as? [String: String]? {
                 self.clientSettings = settings
-            }
-            
-            else if let settings = clientSettings as? [CodingUserInfoKey: String] {
+            } else if let settings = clientSettings as? [CodingUserInfoKey: String] {
                 self.clientSettings = settings.reduce(into: [String: String]()) { (partialResult, tuple: (key: CodingUserInfoKey, value: String)) in
                     partialResult[tuple.key.rawValue] = tuple.value
                 }
@@ -40,15 +38,40 @@ extension Token {
         }
         
         public init(from decoder: any Decoder) throws {
+            var configuration: OAuth2Client.Configuration
+            var clientSettings: [String: String]?
+            
+            // If the context is being decoded from previously-encoded data
             if let container = try? decoder.container(keyedBy: Token.Context.CodingKeys.self) {
-                self.init(configuration: try container.decode(OAuth2Client.Configuration.self, forKey: .configuration),
-                          clientSettings: try container.decodeIfPresent([String: String].self, forKey: .clientSettings))
-            } else if let configuration = decoder.userInfo[.apiClientConfiguration] as? OAuth2Client.Configuration {
-                self.init(configuration: configuration,
-                          clientSettings: decoder.userInfo[.clientSettings])
-            } else {
+                configuration = try container.decode(OAuth2Client.Configuration.self, forKey: .configuration)
+                clientSettings = try container.decodeIfPresent([String: String].self, forKey: .clientSettings)
+            }
+            
+            // No other decoding strategies supported
+            else {
                 throw TokenError.contextMissing
             }
+            
+            // Migrate from v1 or v2 token storage, where the `redirect_uri` was not
+            // supplied in the OAuth2.Configuration
+            if let redirectUriString = clientSettings?["redirect_uri"],
+               let redirectUri = URL(string: redirectUriString),
+               configuration.redirectUri != redirectUri
+            {
+                configuration = .init(issuerURL: configuration.issuerURL,
+                                      discoveryURL: configuration.discoveryURL,
+                                      clientId: configuration.clientId,
+                                      scope: configuration.scope,
+                                      redirectUri: redirectUri,
+                                      authentication: configuration.authentication)
+                
+                clientSettings = clientSettings?.filter { (key, _) in
+                    !["redirect_uri", "client_id", "scope"].contains(key)
+                }.nilIfEmpty
+            }
+
+            self.init(configuration: configuration,
+                      clientSettings: clientSettings)
         }
     }
 }

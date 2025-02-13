@@ -35,8 +35,8 @@ class MockApiClient: APIClient {
         self.shouldRetry = shouldRetry
     }
     
-    func decode<T>(_ type: T.Type, from data: Data, userInfo: [CodingUserInfoKey : Any]?) throws -> T where T : Decodable {
-        var info: [CodingUserInfoKey: Any] = userInfo ?? [:]
+    func decode<T>(_ type: T.Type, from data: Data, parsing context: (any APIParsingContext)?) throws -> T where T : Decodable {
+        var info: [CodingUserInfoKey: Any] = context?.codingUserInfo ?? [:]
         if info[.apiClientConfiguration] == nil {
             info[.apiClientConfiguration] = configuration
         }

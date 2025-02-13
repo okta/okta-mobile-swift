@@ -25,5 +25,5 @@ Provides the foundation and common features used to authenticate users, managing
     s.source        = { :git => "https://github.com/okta/okta-mobile-swift.git", :tag => s.version.to_s }
     s.source_files  = "Sources/AuthFoundation/**/*.swift"
     s.resource_bundles = { "AuthFoundation" => "Sources/AuthFoundation/Resources/**/*" }
-    s.swift_version = "5.9"
+    s.swift_version = "5.10"
 end

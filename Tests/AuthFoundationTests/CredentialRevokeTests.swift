@@ -28,10 +28,10 @@ final class CredentialTests: XCTestCase {
                            refreshToken: "refresh123",
                            idToken: nil,
                            deviceSecret: "device123",
-                           context: Token.Context(configuration: .init(baseURL: URL(string: "https://example.com/oauth2/default")!,
+                           context: Token.Context(configuration: .init(issuerURL: URL(string: "https://example.com/oauth2/default")!,
                                                                        clientId: "clientid",
-                                                                       scopes: "openid"),
-                                                  clientSettings: [ "client_id": "foo" ]))
+                                                                       scope: "openid"),
+                                                  clientSettings: ["client_id": "clientid"]))
 
     override func setUpWithError() throws {
         coordinator = MockCredentialCoordinator()
@@ -80,7 +80,7 @@ final class CredentialTests: XCTestCase {
         let revokeRequest = try XCTUnwrap(urlSession.requests.first(where: { request in
             request.url?.absoluteString == "https://example.com/oauth2/v1/revoke"
         }))
-        XCTAssertEqual(revokeRequest.bodyString, "client_id=foo&token=abcd123&token_type_hint=access_token")
+        XCTAssertEqual(revokeRequest.bodyString, "client_id=clientid&token=abcd123&token_type_hint=access_token")
 
         XCTAssertEqual(coordinator.credentialDataSource.credentialCount, 0)
         XCTAssertFalse(coordinator.credentialDataSource.hasCredential(for: token))
@@ -183,11 +183,11 @@ final class CredentialTests: XCTestCase {
         }))
 
         XCTAssertEqual(accessTokenRequest.bodyString,
-                       "client_id=foo&token=abcd123&token_type_hint=access_token")
+                       "client_id=clientid&token=abcd123&token_type_hint=access_token")
         XCTAssertEqual(refreshTokenRequest.bodyString,
-                       "client_id=foo&token=refresh123&token_type_hint=refresh_token")
+                       "client_id=clientid&token=refresh123&token_type_hint=refresh_token")
         XCTAssertEqual(deviceSecretRequest.bodyString,
-                       "client_id=foo&token=device123&token_type_hint=device_secret")
+                       "client_id=clientid&token=device123&token_type_hint=device_secret")
     }
     
     func testFailureAfterRevokeAccessToken() throws {

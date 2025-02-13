@@ -1,4 +1,4 @@
-// swift-tools-version:5.9
+// swift-tools-version:5.10
 // The swift-tools-version declares the minimum version of Swift required to build this package.
 
 import PackageDescription
@@ -48,7 +48,10 @@ var package = Package(
                 path: "Tests/TestCommon"),
         .testTarget(name: "AuthFoundationTests",
                     dependencies: ["AuthFoundation", "TestCommon"],
-                    resources: [ .copy("MockResponses") ]),
+                    resources: [
+                        .copy("MockResponses"),
+                        .copy("ConfigResources"),
+                    ]),
         .testTarget(name: "OktaOAuth2Tests",
                     dependencies: ["OktaOAuth2", "TestCommon"],
                     resources: [ .copy("MockResponses") ]),

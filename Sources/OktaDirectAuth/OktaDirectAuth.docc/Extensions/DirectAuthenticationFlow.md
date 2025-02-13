@@ -1,18 +1,14 @@
 # ``OktaDirectAuth/DirectAuthenticationFlow``
 
-@Metadata {
-    @DocumentationExtension(mergeBehavior: append)
-}
-
 ## Usage
 
 You can create an instance of ``DirectAuthenticationFlow`` with your client settings, or you can use one of several convenience initializers to simplify the process.
 
 ```swift
 let flow = DirectAuthenticationFlow(
-    issuer: URL(string: "https://example.okta.com")!,
+    issuerURL: URL(string: "https://example.okta.com")!,
     clientId: "abc123client",
-    scopes: "openid offline_access email profile")
+    scope: "openid offline_access email profile")
 
 // Start authentication with a user's chosen factor.
 let status = try await flow.start("jane.doe@example.com",
@@ -23,7 +19,7 @@ case .success(let token):
     try Credential.store(token)
 case .mfaRequired(_):
     // MFA required, so challenge the user.
-    switch try await flow.resume(status, with: .otp(code: 123456)) {
+    switch try await flow.resume(with: .otp(code: 123456)) {
     case .success(let token):
         // Sign in successful with 2FA, so store the token.
         try Credential.store(token)

@@ -14,47 +14,49 @@ import Foundation
 import AuthFoundation
 
 extension DeviceAuthorizationFlow {
-    struct TokenRequest {
+    struct TokenRequest: AuthenticationFlowRequest {
+        typealias Flow = DeviceAuthorizationFlow
+        
         let openIdConfiguration: OpenIdConfiguration
-        let clientId: String
+        let clientConfiguration: OAuth2Client.Configuration
+        let additionalParameters: [String: any APIRequestArgument]?
+        let context: Flow.Context
         let deviceCode: String
     }
     
-    struct AuthorizeRequest {
+    struct AuthorizeRequest: AuthenticationFlowRequest {
+        typealias Flow = DeviceAuthorizationFlow
+        
         let url: URL
-        let clientId: String
-        let scope: String
+        let clientConfiguration: OAuth2Client.Configuration
+        let additionalParameters: [String: any APIRequestArgument]?
+        let context: Flow.Context
     }
 }
 
 extension DeviceAuthorizationFlow.AuthorizeRequest: APIRequest, APIRequestBody {
-    typealias ResponseType = DeviceAuthorizationFlow.Context
+    typealias ResponseType = DeviceAuthorizationFlow.Verification
     
     var httpMethod: APIRequestMethod { .post }
     var contentType: APIContentType? { .formEncoded }
     var acceptsType: APIContentType? { .json }
+    var category: OAuth2APIRequestCategory { .authorization }
     var bodyParameters: [String: APIRequestArgument]? {
-        [
-            "client_id": clientId,
-            "scope": scope
-        ]
+        var result = additionalParameters ?? [:]
+        result.merge(clientConfiguration.parameters(for: category))
+        result.merge(context.parameters(for: category))
+        return result
     }
 }
 
 extension DeviceAuthorizationFlow.TokenRequest: OAuth2TokenRequest, OAuth2APIRequest, APIRequestBody, APIParsingContext {
+    var category: OAuth2APIRequestCategory { .token }
+    var tokenValidatorContext: any IDTokenValidatorContext { NullIDTokenValidatorContext }
     var bodyParameters: [String: APIRequestArgument]? {
-        [
-            "client_id": clientId,
-            "device_code": deviceCode,
-            "grant_type": GrantType.deviceCode,
-        ]
-    }
-    
-    var codingUserInfo: [CodingUserInfoKey: Any]? {
-        [
-            .clientSettings: [
-                "client_id": clientId
-            ]
-        ]
+        var result = additionalParameters ?? [:]
+        result.merge(clientConfiguration.parameters(for: category))
+        result.merge(context.parameters(for: category))
+        result["device_code"] = deviceCode
+        return result
     }
 }

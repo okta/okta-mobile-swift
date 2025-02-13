@@ -42,15 +42,6 @@ extension SDKVersion.Migration {
             try register(try OAuth2Client.PropertyListConfiguration(plist: fileURL))
         }
 
-        @available(*, deprecated, renamed: "register(clientId:)")
-        public static func register(issuer: URL,
-                                    clientId: String,
-                                    redirectUri: URL,
-                                    scopes: String)
-        {
-            register(clientId: clientId)
-        }
-        
         /// Registers the legacy OIDC migration using the supplied configuration values.
         /// - Parameters:
         ///   - clientId: Client ID for your application.
@@ -164,9 +155,10 @@ extension SDKVersion.Migration {
                 idToken = nil
             }
 
-            let configuration = OAuth2Client.Configuration(baseURL: issuer,
+            let configuration = OAuth2Client.Configuration(issuerURL: issuer,
                                                            clientId: clientId,
-                                                           scopes: scope)
+                                                           scope: scope,
+                                                           redirectUri: redirectURL)
             var clientSettings: [String: String] = [
                 "client_id": clientId,
                 "redirect_uri": redirectURL.absoluteString,

@@ -20,16 +20,18 @@ import FoundationNetworking
 /// An authentication flow class that exchanges a Session Token for access tokens.
 ///
 /// This flow is typically used in conjunction with the [classic Okta native authentication library](https://github.com/okta/okta-auth-swift). For native authentication using the Okta Identity Engine (OIE), please use the [Okta IDX library](https://github.com/okta/okta-idx-swift).
-public class SessionTokenFlow: AuthenticationFlow, ProvidesOAuth2Parameters {
+public class SessionTokenFlow: AuthenticationFlow {
+    public typealias Context = AuthorizationCodeFlow.Context
+    
     /// The OAuth2Client this authentication flow will use.
     public let client: OAuth2Client
     
-    /// The redirect URI defined for your client.
-    public let redirectUri: URL
-    
-    /// Any additional query string parameters you would like to supply to the authorization server.
+    /// The context that stores the state for the current authentication session.
+    public private(set) var context: Context?
+
+    /// Any additional query string parameters you would like to supply to the authorization server for all requests from this flow.
     public let additionalParameters: [String: APIRequestArgument]?
-    
+
     /// Indicates whether or not this flow is currently in the process of authenticating a user.
     public private(set) var isAuthenticating: Bool = false {
         didSet {
@@ -47,57 +49,41 @@ public class SessionTokenFlow: AuthenticationFlow, ProvidesOAuth2Parameters {
     
     /// Convenience initializer to construct an authentication flow from variables.
     /// - Parameters:
-    ///   - issuer: The issuer URL.
+    ///   - issuerURL: The issuer URL.
     ///   - clientId: The client ID
-    ///   - scopes: The scopes to request
-    public convenience init(issuer: URL,
+    ///   - scope: The scopes to request
+    ///   - additionalParameters: Optional query parameters to supply tot he authorization server for all requests from this flow.
+    public convenience init(issuerURL: URL,
                             clientId: String,
-                            scopes: String,
+                            scope: String,
                             redirectUri: URL,
-                            additionalParameters: [String: APIRequestArgument]? = nil)
+                            additionalParameters: [String: APIRequestArgument]? = nil) throws
     {
-        self.init(redirectUri: redirectUri,
-                  additionalParameters: additionalParameters,
-                  client: .init(baseURL: issuer,
-                                clientId: clientId,
-                                scopes: scopes))
+        try self.init(client: OAuth2Client(issuerURL: issuerURL,
+                                           clientId: clientId,
+                                           scope: scope,
+                                           redirectUri: redirectUri),
+                      additionalParameters: additionalParameters)
     }
-    
-    public init(redirectUri: URL,
-                additionalParameters: [String: APIRequestArgument]? = nil,
-                client: OAuth2Client)
+
+    /// Initializer that uses the predefined OAuth2Client
+    /// - Parameters:
+    ///   - client: ``OAuth2Client`` client instance to authenticate with.
+    ///   - additionalParameters: Optional query parameters to supply tot he authorization server for all requests from this flow.
+    public required init(client: OAuth2Client,
+                         additionalParameters: [String: APIRequestArgument]? = nil) throws
     {
+        guard client.configuration.redirectUri != nil else {
+            throw OAuth2Error.missingRedirectUri
+        }
+        
         // Ensure this SDK's static version is included in the user agent.
         SDKVersion.register(sdk: Version)
         
         self.client = client
-        self.redirectUri = redirectUri
         self.additionalParameters = additionalParameters
         
         client.add(delegate: self)
-    }
-    
-    /// Initializer that uses the configuration defined within the application's `Okta.plist` file.
-    public convenience init() throws {
-        try self.init(try .init())
-    }
-    
-    /// Initializer that uses the configuration defined within the given file URL.
-    /// - Parameter fileURL: File URL to a `plist` containing client configuration.
-    public convenience init(plist fileURL: URL) throws {
-        try self.init(try .init(plist: fileURL))
-    }
-    
-    private convenience init(_ config: OAuth2Client.PropertyListConfiguration) throws {
-        guard let redirectUri = config.redirectUri else {
-            throw OAuth2Client.PropertyListConfigurationError.missingConfigurationValues
-        }
-
-        self.init(issuer: config.issuer,
-                  clientId: config.clientId,
-                  scopes: config.scopes,
-                  redirectUri: redirectUri,
-                  additionalParameters: config.additionalParameters)
     }
     
     /// Authenticates using the supplied session token.
@@ -106,17 +92,24 @@ public class SessionTokenFlow: AuthenticationFlow, ProvidesOAuth2Parameters {
     ///   - context: Optional context to provide when customizing the state parameter.
     ///   - completion: Completion invoked when a response is received.
     public func start(with sessionToken: String,
-                      context: AuthorizationCodeFlow.Context? = nil,
+                      context: Context = .init(),
                       completion: @escaping (Result<Token, OAuth2Error>) -> Void)
     {
         isAuthenticating = true
 
+        self.context = context
+
         var parameters = additionalParameters ?? [:]
         parameters["sessionToken"] = sessionToken
         
-        let flow = AuthorizationCodeFlow(redirectUri: redirectUri,
-                                         additionalParameters: parameters,
-                                         client: client)
+        let flow: AuthorizationCodeFlow
+        do {
+            flow = try AuthorizationCodeFlow(client: client, additionalParameters: parameters)
+        } catch {
+            completion(.failure(OAuth2Error(error)))
+            return
+        }
+        
         flow.start(with: context) { result in
             switch result {
             case .failure(let error):
@@ -142,6 +135,7 @@ public class SessionTokenFlow: AuthenticationFlow, ProvidesOAuth2Parameters {
     /// Resets the flow for later reuse.
     public func reset() {
         isAuthenticating = false
+        context = nil
     }
 
     // MARK: Private properties / methods
@@ -153,7 +147,7 @@ public class SessionTokenFlow: AuthenticationFlow, ProvidesOAuth2Parameters {
     }
     
     private func complete(using flow: AuthorizationCodeFlow, url: URL, completion: @escaping (Result<Token, OAuth2Error>) -> Void) {
-        guard let scheme = redirectUri.scheme else {
+        guard let scheme = client.configuration.redirectUri?.scheme else {
             completion(.failure(.invalidUrl))
             return
         }
@@ -182,7 +176,7 @@ public class SessionTokenFlow: AuthenticationFlow, ProvidesOAuth2Parameters {
 extension SessionTokenFlow {
     /// Asynchronously authenticates with the given session token.
     public func start(with sessionToken: String,
-                      context: AuthorizationCodeFlow.Context? = nil) async throws -> Token
+                      context: Context = .init()) async throws -> Token
     {
         try await withCheckedThrowingContinuation { continuation in
             start(with: sessionToken, context: context) { result in
@@ -271,11 +265,9 @@ extension OAuth2Client {
     ///   - redirectUri: Redirect URI
     ///   - additionalParameters: Additional parameters to pass to the flow
     /// - Returns: Initialized authorization flow.
-    public func sessionTokenFlow(redirectUri: URL,
-                                 additionalParameters: [String: String]? = nil) -> SessionTokenFlow
+    public func sessionTokenFlow(additionalParameters: [String: String]? = nil) throws -> SessionTokenFlow
     {
-        SessionTokenFlow(redirectUri: redirectUri,
-                         additionalParameters: additionalParameters,
-                         client: self)
+        try SessionTokenFlow(client: self,
+                             additionalParameters: additionalParameters)
     }
 }

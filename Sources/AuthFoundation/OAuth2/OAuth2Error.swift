@@ -20,9 +20,9 @@ public enum OAuth2Error: Error {
     /// Cannot compose a URL to authenticate with.
     case cannotComposeUrl
     
-    /// An OAuth2 server error was reported, with the given values.
-    case oauth2Error(code: String, description: String?, additionalKeys: [String: String]? = nil)
-    
+    /// An OAuth2 server error has been returned.
+    case server(error: OAuth2ServerError)
+
     /// A network error was encountered, encapsulating a ``APIClientError`` type describing the underlying error.
     case network(error: APIClientError)
     
@@ -31,6 +31,9 @@ public enum OAuth2Error: Error {
     
     /// Cannot perform an operation since the token is missing its client configuration.
     case missingClientConfiguration
+    
+    /// An operation was performed which requires a `redirect_uri`, but none was supplied to the client configuration.
+    case missingRedirectUri
     
     /// Could not verify the token's signature.
     case signatureInvalid
@@ -63,51 +66,43 @@ extension OAuth2Error: LocalizedError {
                                      bundle: .authFoundation,
                                      comment: "Invalid URL")
 
+        case .missingRedirectUri:
+            return NSLocalizedString("missing_client_redirect_uri",
+                                     tableName: "AuthFoundation",
+                                     bundle: .authFoundation,
+                                     comment: "Missing redirect URI")
+
         case .cannotComposeUrl:
             return NSLocalizedString("cannot_compose_url_description",
                                      tableName: "AuthFoundation",
                                      bundle: .authFoundation,
-                                     comment: "Invalid URL")
+                                     comment: "Cannot compose URL")
 
-        case .oauth2Error(let code, let description, _):
-            if let description = description {
-                return String.localizedStringWithFormat(
-                    NSLocalizedString("oauth2_error_description",
-                                      tableName: "AuthFoundation",
-                                      bundle: .authFoundation,
-                                      comment: "Invalid URL"),
-                    description, code)
-            }
-            
-            return String.localizedStringWithFormat(
-                NSLocalizedString("oauth2_error_code_description",
-                                  tableName: "AuthFoundation",
-                                  bundle: .authFoundation,
-                                  comment: "Invalid URL"),
-                code)
+        case .server(error: let error):
+            return error.errorDescription
 
-        case .network(let error):
-            return error.localizedDescription
+        case .network(error: let error):
+            return error.errorDescription
 
         case .missingToken(let type):
             return String.localizedStringWithFormat(
                 NSLocalizedString("missing_token_description",
                                   tableName: "AuthFoundation",
                                   bundle: .authFoundation,
-                                  comment: "Invalid URL"),
+                                  comment: "Missing token"),
                 type.rawValue)
 
         case .missingClientConfiguration:
             return NSLocalizedString("missing_client_configuration_description",
                                      tableName: "AuthFoundation",
                                      bundle: .authFoundation,
-                                     comment: "Invalid URL")
+                                     comment: "Missing client configuration")
 
         case .signatureInvalid:
             return NSLocalizedString("signature_invalid",
                                      tableName: "AuthFoundation",
                                      bundle: .authFoundation,
-                                     comment: "Invalid URL")
+                                     comment: "Signature is invalid")
 
         case .missingLocationHeader:
             return NSLocalizedString("missing_location_header",
@@ -120,7 +115,7 @@ extension OAuth2Error: LocalizedError {
                 NSLocalizedString("missing_openid_configuration_attribute",
                                   tableName: "AuthFoundation",
                                   bundle: .authFoundation,
-                                  comment: "Invalid URL"),
+                                  comment: "Missing OpenID configuration attribute"),
                 name)
 
         case .error(let error):
@@ -133,14 +128,14 @@ extension OAuth2Error: LocalizedError {
                 NSLocalizedString("error_description",
                                   tableName: "AuthFoundation",
                                   bundle: .authFoundation,
-                                  comment: "Invalid URL"),
+                                  comment: "Localized error description"),
                 errorString)
 
         case .cannotRevoke:
             return NSLocalizedString("cannot_revoke_token",
                                      tableName: "AuthFoundation",
                                      bundle: .authFoundation,
-                                     comment: "")
+                                     comment: "Cannot revoke token")
 
         case .multiple(errors: let errors):
             let errorString = errors
@@ -151,7 +146,7 @@ extension OAuth2Error: LocalizedError {
                 NSLocalizedString("multiple_oauth2_errors",
                                   tableName: "AuthFoundation",
                                   bundle: .authFoundation,
-                                  comment: ""),
+                                  comment: "Multiple OAuth2 errors"),
                 errorString)
             
         case .missingOAuth2ResponseKey(let key):
@@ -159,7 +154,7 @@ extension OAuth2Error: LocalizedError {
                 NSLocalizedString("missing_oauth2_response_key",
                                   tableName: "AuthFoundation",
                                   bundle: .authFoundation,
-                                  comment: ""),
+                                  comment: "Missing OAuth2 response key"),
                 key)
 
         }
@@ -175,14 +170,14 @@ extension OAuth2Error: Equatable {
     public static func == (lhs: OAuth2Error, rhs: OAuth2Error) -> Bool {
         switch (lhs, rhs) {
         case (.invalidUrl, .invalidUrl): return true
+        case (.missingRedirectUri, .missingRedirectUri): return true
         case (.cannotComposeUrl, .cannotComposeUrl): return true
         case (.signatureInvalid, .signatureInvalid): return true
         case (.missingLocationHeader, .missingLocationHeader): return true
         case (.missingClientConfiguration, .missingClientConfiguration): return true
+        case (.server(error: let lhsError), .server(error: let rhsError)):
+            return lhsError == rhsError
 
-        case (.oauth2Error(code: let lhsCode, description: let lhsDescription, additionalKeys: _), .oauth2Error(code: let rhsCode, description: let rhsDescription, additionalKeys: _)):
-            return (lhsCode == rhsCode && lhsDescription == rhsDescription)
-            
         case (.network(error: let lhsError), .network(error: let rhsError)):
             return lhsError == rhsError
             

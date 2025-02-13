@@ -11,7 +11,7 @@ final class OAuth2ClientTests: XCTestCase {
     
     override func setUpWithError() throws {
         urlSession = URLSessionMock()
-        client = OAuth2Client(baseURL: issuer, clientId: "theClientId", scopes: "openid profile offline_access", session: urlSession)
+        client = OAuth2Client(issuerURL: issuer, clientId: "theClientId", scope: "openid profile offline_access", session: urlSession)
         
         JWK.validator = MockJWKValidator()
         Token.idTokenValidator = MockIDTokenValidator()
@@ -24,27 +24,32 @@ final class OAuth2ClientTests: XCTestCase {
     }
     
     func testAuthorizationCodeConstructor() throws {
-        let flow = AuthorizationCodeFlow(issuer: issuer,
+        let flow = AuthorizationCodeFlow(issuerURL: issuer,
                                          clientId: "theClientId",
-                                         scopes: "openid profile offline_access",
+                                         scope: "openid profile offline_access",
                                          redirectUri: redirectUri)
         XCTAssertNotNil(flow)
     }
     
     func testExchange() throws {
-        let pkce = PKCE()
+        let pkce = try XCTUnwrap(PKCE())
         let (openIdConfiguration, openIdData) = try openIdConfiguration()
         let clientConfiguration = try OAuth2Client.Configuration(domain: "example.com",
-                                                                 clientId: "client_id",
-                                                                 scopes: "openid profile offline_access")
-        let request = AuthorizationCodeFlow.TokenRequest(openIdConfiguration: openIdConfiguration,
-                                                         clientConfiguration: clientConfiguration,
-                                                         redirectUri: redirectUri.absoluteString,
-                                                         grantType: .authorizationCode,
-                                                         grantValue: "abc123",
-                                                         pkce: pkce,
-                                                         nonce: nil,
-                                                         maxAge: nil)
+                                                                 clientId: "theClientId",
+                                                                 scope: "openid profile offline_access",
+                                                                 redirectUri: redirectUri.absoluteString)
+        let context = AuthorizationCodeFlow.Context(pkce: pkce,
+                                                    nonce: .nonce(),
+                                                    maxAge: nil,
+                                                    acrValues: nil,
+                                                    state: "state",
+                                                    additionalParameters: nil)
+        let request = try AuthorizationCodeFlow.TokenRequest(
+            openIdConfiguration: openIdConfiguration,
+            clientConfiguration: clientConfiguration,
+            additionalParameters: nil,
+            context: context,
+            authorizationCode: "abc123")
 
         urlSession.expect("https://example.com/oauth2/default/.well-known/openid-configuration",
                           data: openIdData,
@@ -70,6 +75,14 @@ final class OAuth2ClientTests: XCTestCase {
         waitForExpectations(timeout: 1.0) { error in
             XCTAssertNil(error)
         }
+        XCTAssertEqual(try XCTUnwrap(urlSession.formDecodedBody(matching: "/v1/token")), [
+            "grant_type": "authorization_code",
+            "code_verifier": pkce.codeVerifier,
+            "code": "abc123",
+            "scope": "openid+profile+offline_access",
+            "redirect_uri": "com.example:/callback",
+            "client_id": "theClientId"
+        ])
         
         XCTAssertNotNil(token)
         XCTAssertEqual(token?.tokenType, "Bearer")
@@ -81,20 +94,25 @@ final class OAuth2ClientTests: XCTestCase {
     }
     
     func testExchangeFailed() throws {
-        let pkce = PKCE()
+        let pkce = try XCTUnwrap(PKCE())
         Token.idTokenValidator = MockIDTokenValidator(error: .invalidIssuer)
         let (openIdConfiguration, openIdData) = try openIdConfiguration(named: "openid-configuration-invalid-issuer")
         let clientConfiguration = try OAuth2Client.Configuration(domain: "example.com",
-                                                                 clientId: "client_id",
-                                                                 scopes: "openid profile offline_access")
-        let request = AuthorizationCodeFlow.TokenRequest(openIdConfiguration: openIdConfiguration,
-                                                         clientConfiguration: clientConfiguration,
-                                                         redirectUri: redirectUri.absoluteString,
-                                                         grantType: .authorizationCode,
-                                                         grantValue: "abc123",
-                                                         pkce: pkce,
-                                                         nonce: nil,
-                                                         maxAge: nil)
+                                                                 clientId: "theClientId",
+                                                                 scope: "openid profile offline_access",
+                                                                 redirectUri: redirectUri.absoluteString)
+        let context = AuthorizationCodeFlow.Context(pkce: pkce,
+                                                    nonce: .nonce(),
+                                                    maxAge: nil,
+                                                    acrValues: nil,
+                                                    state: "state",
+                                                    additionalParameters: nil)
+        let request = try AuthorizationCodeFlow.TokenRequest(
+            openIdConfiguration: openIdConfiguration,
+            clientConfiguration: clientConfiguration,
+            additionalParameters: nil,
+            context: context,
+            authorizationCode: "abc123")
 
         urlSession.expect("https://example.com/oauth2/default/.well-known/openid-configuration",
                           data: openIdData,
@@ -121,5 +139,14 @@ final class OAuth2ClientTests: XCTestCase {
         waitForExpectations(timeout: 1.0) { error in
             XCTAssertNil(error)
         }
+
+        XCTAssertEqual(urlSession.formDecodedBody(matching: "/v1/token"), [
+            "grant_type": "authorization_code",
+            "code_verifier": pkce.codeVerifier,
+            "code": "abc123",
+            "scope": "openid+profile+offline_access",
+            "redirect_uri": "com.example:/callback",
+            "client_id": "theClientId"
+        ])
     }
 }

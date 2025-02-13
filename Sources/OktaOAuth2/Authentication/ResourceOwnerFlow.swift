@@ -19,11 +19,18 @@ import AuthFoundation
 ///
 /// > Important: Resource Owner authentication does not support MFA or other more secure authentication models, and is not recommended for production applications. Please use the DirectAuth SDK's DirectAuthenticationFlow class instead.
 public class ResourceOwnerFlow: AuthenticationFlow {
+    public typealias Context = StandardAuthenticationContext
+    
     /// The OAuth2Client this authentication flow will use.
     public let client: OAuth2Client
     
+    /// The context that stores the state for the current authentication session.
+    public private(set) var context: Context?
+
+    /// Any additional query string parameters you would like to supply to the authorization server for all requests from this flow.
+    public let additionalParameters: [String: APIRequestArgument]?
+
     /// Indicates whether or not this flow is currently in the process of authenticating a user.
-    /// ``ResourceOwnerFlow/init(issuer:clientId:scopes:)``
     public private(set) var isAuthenticating: Bool = false {
         didSet {
             guard oldValue != isAuthenticating else {
@@ -40,58 +47,61 @@ public class ResourceOwnerFlow: AuthenticationFlow {
     
     /// Convenience initializer to construct an authentication flow from variables.
     /// - Parameters:
-    ///   - issuer: The issuer URL.
+    ///   - issuerURL: The issuer URL.
     ///   - clientId: The client ID
-    ///   - scopes: The scopes to request
-    public convenience init(issuer: URL,
+    ///   - scope: The scopes to request
+    ///   - additionalParameters: Optional parameters to supply tot he authorization server for all requests from this flow.
+    public convenience init(issuerURL: URL,
                             clientId: String,
-                            scopes: String)
+                            scope: String,
+                            additionalParameters: [String: APIRequestArgument]? = nil)
     {
-        self.init(client: OAuth2Client(baseURL: issuer,
+        self.init(client: OAuth2Client(issuerURL: issuerURL,
                                        clientId: clientId,
-                                       scopes: scopes))
+                                       scope: scope),
+                  additionalParameters: additionalParameters)
     }
     
-    public init(client: OAuth2Client) {
+    /// Initializer that uses the predefined OAuth2Client
+    /// - Parameters:
+    ///   - client: ``OAuth2Client`` client instance to authenticate with.
+    ///   - additionalParameters: Optional query parameters to supply tot he authorization server for all requests from this flow.
+    public required init(client: OAuth2Client,
+                         additionalParameters: [String: APIRequestArgument]? = nil)
+    {
         // Ensure this SDK's static version is included in the user agent.
         SDKVersion.register(sdk: Version)
         
         self.client = client
+        self.additionalParameters = additionalParameters
         
         client.add(delegate: self)
-    }
-    
-    /// Initializer that uses the configuration defined within the application's `Okta.plist` file.
-    public convenience init() throws {
-        self.init(try OAuth2Client.PropertyListConfiguration())
-    }
-    
-    /// Initializer that uses the configuration defined within the given file URL.
-    /// - Parameter fileURL: File URL to a `plist` containing client configuration.
-    public convenience init(plist fileURL: URL) throws {
-        self.init(try OAuth2Client.PropertyListConfiguration(plist: fileURL))
-    }
-    
-    private convenience init(_ config: OAuth2Client.PropertyListConfiguration) {
-        self.init(issuer: config.issuer,
-                  clientId: config.clientId,
-                  scopes: config.scopes)
     }
     
     /// Authenticates using the supplied username and password.
     /// - Parameters:
     ///   - username: Username
     ///   - password: Password
+    ///   - context: Context object used to customize the flow.
     ///   - completion: Completion invoked when a response is received.
-    public func start(username: String, password: String, completion: @escaping (Result<Token, OAuth2Error>) -> Void) {
+    public func start(username: String,
+                      password: String,
+                      context: Context = .init(),
+                      completion: @escaping (Result<Token, OAuth2Error>) -> Void)
+    {
         isAuthenticating = true
+        self.context = context
+
+        let clientConfiguration = client.configuration
+        let additionalParameters = additionalParameters
 
         client.openIdConfiguration { result in
             switch result {
-            case .success(let configuration):
-                let request = TokenRequest(openIdConfiguration: configuration,
-                                           clientId: self.client.configuration.clientId,
-                                           scope: self.client.configuration.scopes,
+            case .success(let openIdConfiguration):
+                let request = TokenRequest(openIdConfiguration: openIdConfiguration,
+                                           clientConfiguration: clientConfiguration,
+                                           additionalParameters: additionalParameters,
+                                           context: context,
                                            username: username,
                                            password: password)
                 self.client.exchange(token: request) { result in
@@ -117,6 +127,7 @@ public class ResourceOwnerFlow: AuthenticationFlow {
     /// Resets the flow for later reuse.
     public func reset() {
         isAuthenticating = false
+        context = nil
     }
 
     // MARK: Private properties / methods
@@ -126,8 +137,11 @@ public class ResourceOwnerFlow: AuthenticationFlow {
 @available(iOS 13.0, tvOS 13.0, macOS 10.15, watchOS 6, *)
 extension ResourceOwnerFlow {
     /// Asynchronously authenticates with the Resource Owner flow.
-    ///
-    /// - Returns: The information a user should be presented with to continue authorization on a different device.
+    /// 
+    /// - Parameters:
+    ///   - username: Username
+    ///   - password: Password
+    /// - Returns: The token once the responce is received.
     public func start(username: String, password: String) async throws -> Token {
         try await withCheckedThrowingContinuation { continuation in
             start(username: username, password: password) { result in
@@ -148,7 +162,8 @@ extension ResourceOwnerFlow: OAuth2ClientDelegate {
 extension OAuth2Client {
     /// Creates a new Resource Owner flow configured to use this OAuth2Client.
     /// - Returns: Initialized authorization flow.
-    public func resourceOwnerFlow() -> ResourceOwnerFlow {
-        ResourceOwnerFlow(client: self)
+    /// - Parameter additionalParameters: Optional parameters to supply tot he authorization server for all requests from this flow.
+    public func resourceOwnerFlow(additionalParameters: [String: String]? = nil) -> ResourceOwnerFlow {
+        ResourceOwnerFlow(client: self, additionalParameters: additionalParameters)
     }
 }

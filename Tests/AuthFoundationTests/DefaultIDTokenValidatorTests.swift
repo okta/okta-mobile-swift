@@ -90,6 +90,11 @@ final class DefaultIDTokenValidatorTests: XCTestCase {
         mockTime = nil
     }
     
+    func testNullValidatorContext() throws {
+        XCTAssertNil(NullIDTokenValidatorContext.nonce)
+        XCTAssertNil(NullIDTokenValidatorContext.maxAge)
+    }
+    
     func testValidIDToken() throws {
         let jwt = try JWT(validToken)
         XCTAssertNoThrow(try validator.validate(token: jwt, issuer: issuer, clientId: clientId, context: nil))

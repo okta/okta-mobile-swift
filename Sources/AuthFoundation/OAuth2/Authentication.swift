@@ -30,18 +30,121 @@ public protocol AuthenticationDelegate: AnyObject {
 /// A protocol defining a type of authentication flow.
 ///
 /// OAuth2 supports a variety of authentication flows, each with its own capabilities, configuration, and limitations. To normalize these differences, the AuthenticationFlow protocol is used to represent the common capabilities provided by all flows.
-public protocol AuthenticationFlow: AnyObject, UsesDelegateCollection {
+public protocol AuthenticationFlow: AnyObject, UsesDelegateCollection, IDTokenValidatorContext {
+    associatedtype Context: AuthenticationContext
+    
+    /// The object that stores the context and state for the current authentication session.
+    var context: Context? { get }
+
     /// Indicates if this flow is currently authenticating.
     var isAuthenticating: Bool { get }
     
+    /// Optional request parameters to be added to requests made from this flow.
+    var additionalParameters: [String: APIRequestArgument]? { get }
+
     /// Resets the authentication session.
     func reset()
     
     /// The collection of delegates this flow notifies for key authentication events.
     var delegateCollection: DelegateCollection<Delegate> { get }
+    
+    /// Required minimal initializer shared by all authentication flows.
+    init(client: OAuth2Client,
+         additionalParameters: [String: any APIRequestArgument]?) throws
 }
 
-/// Errors that may be generated during the process of authenticating with a variety of authentication flows.
-public enum AuthenticationError: Error {
-    case flowNotReady
+extension AuthenticationFlow {
+    @_documentation(visibility: private)
+    public var nonce: String? {
+        guard let validatorContext = context as? IDTokenValidatorContext
+        else {
+            return nil
+        }
+
+        return validatorContext.nonce
+    }
+
+    @_documentation(visibility: private)
+    public var maxAge: TimeInterval? {
+        guard let validatorContext = context as? IDTokenValidatorContext
+        else {
+            return nil
+        }
+
+        return validatorContext.maxAge
+    }
+    
+    /// Initializer that uses the configuration defined within the application's `Okta.plist` file.
+    public init() throws {
+        try self.init(plistConfiguration: try .init())
+    }
+    
+    /// Initializer that uses the configuration defined within the given file URL.
+    /// - Parameter fileURL: File URL to a `plist` containing client configuration.
+    public init(plist fileURL: URL) throws {
+        try self.init(plistConfiguration: try .init(plist: fileURL))
+    }
+    
+    private init(plistConfiguration config: OAuth2Client.PropertyListConfiguration) throws {
+        try self.init(client: .init(config),
+                      additionalParameters: config.additionalParameters)
+    }
+}
+
+/// Common protocol that all ``AuthenticationFlow`` ``AuthenticationFlow/Context`` type aliases must conform to.
+///
+/// While instances of a particular ``AuthenticationFlow`` is configured for a particular OAuth2 client, the context supplied to the flow's `start` function represents the specific settings to customize an individual sign-in using that flow.
+public protocol AuthenticationContext: ProvidesOAuth2Parameters {
+    /// The ACR values, if any, which should be requested by the client.
+    var acrValues: [String]? { get }
+    
+    /// The values from this context that should be persisted into the ``Token/Context-swift.struct`` when the resulting token is created.
+    ///
+    /// This is used to keep some data critical to the future lifecycle of the token associated with the object in storage, which may not be included in the final token response payload.
+    var persistValues: [String: String]? { get }
+}
+
+extension AuthenticationContext {
+    @_documentation(visibility: internal)
+    public var persistValues: [String: String]? {
+        if let acrValues = acrValues {
+            return ["acr_values": acrValues.joined(separator: " ")]
+        }
+        
+        return nil
+    }
+}
+
+/// Common ``AuthenticationContext`` implementation for common or generic implementations of ``AuthenticationFlow``.
+public struct StandardAuthenticationContext: AuthenticationContext {
+    /// The ACR values, if any, which should be requested by the client.
+    public var acrValues: [String]?
+
+    /// Custom request parameters to be added to requests made for this particular sign-in attempt.
+    public var additionalParameters: [String: any APIRequestArgument]?
+    
+    /// Designated initializer.
+    /// - Parameters:
+    ///   - acrValues: Authentication Context Reference values to include with this sign-in.
+    ///   - additionalParameters: Custom request parameters to be added to requests made for this sign-in.
+    public init(acrValues: [String]? = nil,
+                additionalParameters: [String: any APIRequestArgument]? = nil)
+    {
+        let coalescedAcrValues = (acrValues ?? []) + (additionalParameters?.spaceSeparatedValues(for: "acr_values") ?? [])
+        self.acrValues = (acrValues != nil) ? coalescedAcrValues : coalescedAcrValues.nilIfEmpty
+        self.additionalParameters = additionalParameters?.omitting("acr_values").nilIfEmpty
+    }
+    
+    @_documentation(visibility: internal)
+    public func parameters(for category: OAuth2APIRequestCategory) -> [String: any APIRequestArgument]? {
+        var result = additionalParameters ?? [:]
+        
+        if category == .authorization,
+           let acrValues = acrValues
+        {
+            result["acr_values"] = acrValues.joined(separator: " ")
+        }
+
+        return result.nilIfEmpty
+    }
 }

@@ -14,9 +14,8 @@ import Foundation
 
 /// Used by types that are capable of providing parameters to OAuth2 API requests.
 public protocol ProvidesOAuth2Parameters {
-    /// The additional parameters this authentication type will contribute to outgoing API requests when needed.
-    var additionalParameters: [String: APIRequestArgument]? { get }
-
-    /// Indicates if the parameters included in the result should override those previously declared.
-    var shouldOverride: Bool { get }
+    /// The OAuth2 parameters this authentication type will contribute to outgoing API requests when needed.
+    /// - Parameter category: Category describing the type of request the parameters should be applicable to.
+    /// - Returns: Parameters to include in requests for the given request category.
+    func parameters(for category: OAuth2APIRequestCategory) -> [String: any APIRequestArgument]?
 }

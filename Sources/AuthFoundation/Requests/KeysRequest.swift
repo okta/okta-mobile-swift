@@ -26,6 +26,7 @@ extension OAuth2Client {
 extension OAuth2Client.KeysRequest: OAuth2APIRequest {
     typealias ResponseType = JWKS
     
+    var category: OAuth2APIRequestCategory { .configuration }
     var httpMethod: APIRequestMethod { .get }
     var url: URL { openIdConfiguration.jwksUri }
     var acceptsType: APIContentType? { .json }

@@ -26,12 +26,15 @@ public struct PKCE: Codable, Equatable {
     public let method: Method
     
     /// Enumeration describing the possible challenge encoding methods.
-    public enum Method: String, Codable {
+    public enum Method: String, Codable, APIRequestArgument {
         /// SHA256-encoding method
         case sha256 = "S256"
         
         /// Plain encoding, for clients where SHA256-encoding is unavailable.
         case plain
+        
+        @_documentation(visibility: internal)
+        public var stringValue: String { rawValue }
     }
     
     public init?() {

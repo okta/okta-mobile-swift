@@ -23,9 +23,9 @@ final class DirectAuth1FATests: XCTestCase {
 
     override func setUpWithError() throws {
         urlSession = URLSessionMock()
-        client = OAuth2Client(baseURL: issuer,
+        client = OAuth2Client(issuerURL: issuer,
                               clientId: "theClientId",
-                              scopes: "openid profile offline_access",
+                              scope: "openid profile offline_access",
                               session: urlSession)
         flow = client.directAuthenticationFlow()
 

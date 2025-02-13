@@ -29,8 +29,10 @@ public struct OktaAPIError: Decodable, Error, LocalizedError, Equatable {
     /// Further information about what caused this error.
     public let causes: [String]
     
+    @_documentation(visibility: internal)
     public var errorDescription: String? { summary }
     
+    @_documentation(visibility: internal)
     public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         code = try container.decode(String.self, forKey: .code)

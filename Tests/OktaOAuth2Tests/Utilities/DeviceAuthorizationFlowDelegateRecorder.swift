@@ -14,7 +14,7 @@ import Foundation
 import OktaOAuth2
 
 class DeviceAuthorizationFlowDelegateRecorder: DeviceAuthorizationFlowDelegate {
-    var context: DeviceAuthorizationFlow.Context?
+    var verification: DeviceAuthorizationFlow.Verification?
     var token: Token?
     var error: OAuth2Error?
     var url: URL?
@@ -29,8 +29,8 @@ class DeviceAuthorizationFlowDelegateRecorder: DeviceAuthorizationFlowDelegate {
         finished = true
     }
 
-    func authentication<Flow>(flow: Flow, received context: DeviceAuthorizationFlow.Context) {
-        self.context = context
+    func authentication<Flow>(flow: Flow, received verification: DeviceAuthorizationFlow.Verification) {
+        self.verification = verification
     }
     
     func authentication<Flow>(flow: Flow, received token: Token) {

@@ -28,23 +28,24 @@ class WebAuthenticationUITests: XCTestCase {
     private var client: OAuth2Client!
     
     override func setUpWithError() throws {
-        client = OAuth2Client(baseURL: issuer,
+        client = OAuth2Client(issuerURL: issuer,
                               clientId: "clientId",
-                              scopes: "openid profile",
+                              scope: "openid profile",
+                              redirectUri: redirectUri,
+                              logoutRedirectUri: logoutRedirectUri,
                               session: urlSession)
         
         urlSession.expect("https://example.com/.well-known/openid-configuration",
                           data: try data(from: .module, for: "openid-configuration", in: "MockResponses"),
                           contentType: "application/json")
-        loginFlow = client.authorizationCodeFlow(redirectUri: redirectUri,
-                                            additionalParameters: ["additional": "param"])
-        logoutFlow = SessionLogoutFlow(logoutRedirectUri: logoutRedirectUri, client: client)
+        loginFlow = try client.authorizationCodeFlow(additionalParameters: ["additional": "param"])
+        logoutFlow = SessionLogoutFlow(client: client)
     }
     
     func testStart() throws {
         let webAuth = WebAuthenticationMock(loginFlow: loginFlow, logoutFlow: logoutFlow)
         
-        webAuth.signIn(from: nil, options: [.state("qwe")]) { result in }
+        webAuth.signIn(from: nil, context: .init(state: "qwe")) { result in }
         
         let webAuthProvider = try XCTUnwrap(webAuth.provider as? WebAuthenticationProviderMock)
 
@@ -55,7 +56,7 @@ class WebAuthenticationUITests: XCTestCase {
     func testLogout() throws {
         let webAuth = WebAuthenticationMock(loginFlow: loginFlow, logoutFlow: logoutFlow)
         
-        webAuth.signOut(from: nil, token: "idToken", options: [.state("qwe")]) { result in }
+        webAuth.signOut(from: nil, context: .init(idToken: "idToken", state: "qwe")) { result in }
         
         let provider = try XCTUnwrap(webAuth.provider as? WebAuthenticationProviderMock)
         XCTAssertNil(webAuth.completionBlock)
@@ -68,7 +69,7 @@ class WebAuthenticationUITests: XCTestCase {
         
         XCTAssertNil(webAuth.provider)
         
-        webAuth.signIn(from: nil, options: [.state("qwe")]) { result in }
+        webAuth.signIn(from: nil, context: .init(state: "qwe")) { result in }
 
         let webAuthProvider = try XCTUnwrap(webAuth.provider as? WebAuthenticationProviderMock)
 

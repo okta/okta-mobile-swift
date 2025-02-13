@@ -11,7 +11,7 @@
 //
 
 import SwiftUI
-import OktaDirectAuth
+@testable import OktaDirectAuth
 
 struct SignInView: View {
     let flow: DirectAuthenticationFlow?
@@ -99,17 +99,17 @@ struct SignInView: View {
 // swiftlint:disable force_unwrapping
 struct SignInViewPrimary_Previews: PreviewProvider {
     static var previews: some View {
-        SignInView(flow: .init(issuer: URL(string: "https://example.com")!,
+        SignInView(flow: .init(issuerURL: URL(string: "https://example.com")!,
                                clientId: "abcd123",
-                               scopes: "openid profile"))
+                               scope: "openid profile"))
     }
 }
 
 struct SignInViewSecondary_Previews: PreviewProvider {
     static var previews: some View {
-        SignInView(flow: .init(issuer: URL(string: "https://example.com")!,
+        SignInView(flow: .init(issuerURL: URL(string: "https://example.com")!,
                                clientId: "abcd123",
-                               scopes: "openid profile"),
+                               scope: "openid profile"),
                    status: .mfaRequired(.init(supportedChallengeTypes: [],
                                               mfaToken: "abcd1234")))
     }

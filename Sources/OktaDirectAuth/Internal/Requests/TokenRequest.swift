@@ -13,45 +13,44 @@
 import Foundation
 import AuthFoundation
 
-struct TokenRequest {
+struct TokenRequest: AuthenticationFlowRequest {
+    typealias Flow = DirectAuthenticationFlow
+    
     let openIdConfiguration: OpenIdConfiguration
     let clientConfiguration: OAuth2Client.Configuration
-    let currentStatus: DirectAuthenticationFlow.Status?
+    let context: Flow.Context
     let loginHint: String?
     let factor: any AuthenticationFactor
-    let intent: DirectAuthenticationFlow.Intent
     let parameters: (any HasTokenParameters)?
     let grantTypesSupported: [GrantType]?
-    
+
     init(openIdConfiguration: OpenIdConfiguration,
          clientConfiguration: OAuth2Client.Configuration,
-         currentStatus: DirectAuthenticationFlow.Status?,
+         context: DirectAuthenticationFlow.Context,
          loginHint: String? = nil,
          factor: any AuthenticationFactor,
-         intent: DirectAuthenticationFlow.Intent,
          parameters: (any HasTokenParameters)? = nil,
          grantTypesSupported: [GrantType]? = nil)
     {
         self.openIdConfiguration = openIdConfiguration
         self.clientConfiguration = clientConfiguration
-        self.currentStatus = currentStatus
+        self.context = context
         self.loginHint = loginHint
         self.factor = factor
-        self.intent = intent
         self.parameters = parameters
         self.grantTypesSupported = grantTypesSupported
     }
 }
 
 extension TokenRequest: OAuth2TokenRequest, OAuth2APIRequest, APIRequestBody {
-    var clientId: String { clientConfiguration.clientId }
+    var category: OAuth2APIRequestCategory { .token }
+    var tokenValidatorContext: any IDTokenValidatorContext { NullIDTokenValidatorContext }
     var bodyParameters: [String: APIRequestArgument]? {
-        var result = factor.tokenParameters(currentStatus: currentStatus)
-        result["client_id"] = clientConfiguration.clientId
-        result["scope"] = clientConfiguration.scopes
-        
-        result.merge(parameters?.tokenParameters(currentStatus: currentStatus))
-        
+        var result = clientConfiguration.parameters(for: category) ?? [:]
+        result.merge(context.parameters(for: category))
+        result.merge(factor.tokenParameters(currentStatus: context.currentStatus))
+        result.merge(parameters?.tokenParameters(currentStatus: context.currentStatus))
+
         if let loginHint = loginHint {
             let key: String
             if let factor = factor as? DirectAuthenticationFlow.PrimaryFactor {
@@ -66,20 +65,10 @@ extension TokenRequest: OAuth2TokenRequest, OAuth2APIRequest, APIRequestBody {
             result["grant_types_supported"] = grantTypesSupported.joined(separator: " ")
         }
         
-        result.merge(clientConfiguration.authentication)
-        result.merge(intent)
+        if result["client_id"] == nil {
+            result["client_id"] = clientConfiguration.clientId
+        }
 
         return result
-    }
-}
-
-extension TokenRequest: APIParsingContext {
-    var codingUserInfo: [CodingUserInfoKey: Any]? {
-        [
-            .clientSettings: [
-                "client_id": clientConfiguration.clientId,
-                "scope": clientConfiguration.scopes
-            ]
-        ]
     }
 }

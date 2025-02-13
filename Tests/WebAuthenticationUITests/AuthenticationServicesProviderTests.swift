@@ -72,7 +72,10 @@ class AuthenticationServicesProviderTests: ProviderTestBase {
     override func setUpWithError() throws {
         try super.setUpWithError()
         
-        provider = TestAuthenticationServicesProvider(loginFlow: loginFlow, logoutFlow: logoutFlow, from: nil, delegate: delegate)
+        provider = try TestAuthenticationServicesProvider(loginFlow: loginFlow,
+                                                          logoutFlow: logoutFlow,
+                                                          from: nil,
+                                                          delegate: delegate)
     }
     
     override func tearDownWithError() throws {
@@ -82,7 +85,7 @@ class AuthenticationServicesProviderTests: ProviderTestBase {
     }
     
     func testSuccessfulAuthentication() throws {
-        provider.start(context: .init(state: "state"), additionalParameters: nil)
+        provider.start(context: .init(state: "state"))
         try waitFor(.authenticateUrl)
         
         XCTAssertNotNil(provider.authenticationSession)
@@ -99,7 +102,7 @@ class AuthenticationServicesProviderTests: ProviderTestBase {
     }
 
     func testErrorResponse() throws {
-        provider.start(context: .init(state: "state"), additionalParameters: nil)
+        provider.start(context: .init(state: "state"))
         try waitFor(.authenticateUrl)
 
         XCTAssertNotNil(provider.authenticationSession)
@@ -123,7 +126,7 @@ class AuthenticationServicesProviderTests: ProviderTestBase {
     }
 
     func testUserCancelled() throws {
-        provider.start(context: .init(state: "state"), additionalParameters: nil)
+        provider.start(context: .init(state: "state"))
         try waitFor(.authenticateUrl)
 
         XCTAssertNotNil(provider.authenticationSession)
@@ -140,7 +143,7 @@ class AuthenticationServicesProviderTests: ProviderTestBase {
     }
 
     func testNoResponse() throws {
-        provider.start(context: .init(state: "state"), additionalParameters: nil)
+        provider.start(context: .init(state: "state"))
         try waitFor(.authenticateUrl)
 
         XCTAssertNotNil(provider.authenticationSession)
@@ -156,7 +159,7 @@ class AuthenticationServicesProviderTests: ProviderTestBase {
     func testLogout() throws {
         MockAuthenticationServicesProviderSession.redirectUri = URL(string: "com.example:/logout?foo=bar")
     
-        provider.logout(context: .init(idToken: "idToken", state: "state"), additionalParameters: nil)
+        provider.logout(context: .init(idToken: "idToken", state: "state"))
         try waitFor(.logoutUrl)
 
         XCTAssertNotNil(provider.authenticationSession)
@@ -170,7 +173,7 @@ class AuthenticationServicesProviderTests: ProviderTestBase {
     func testLogoutError() throws {
         MockAuthenticationServicesProviderSession.redirectError = WebAuthenticationError.userCancelledLogin
 
-        provider.logout(context: .init(idToken: "idToken", state: "state"), additionalParameters: nil)
+        provider.logout(context: .init(idToken: "idToken", state: "state"))
         try waitFor(.logoutUrl)
         
         XCTAssertNotNil(provider.authenticationSession)

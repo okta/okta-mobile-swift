@@ -60,54 +60,6 @@ public class WebAuthentication {
     public typealias WindowAnchor = UIWindow
     #endif
     
-    /// Describes available options for customizing the sign on process.
-    public enum Option {
-        /// The username to pre-populate if prompting for authentication.
-        case login(hint: String)
-        
-        /// Value passed to the Social IdP when performing social login.
-        case display(String)
-        
-        /// Allowable elapsed time since the user was last authenticated.
-        case maxAge(TimeInterval)
-        
-        /// Specify a custom state to use when authorizing.
-        ///
-        /// If this value is not specified, one will be automatically generated.
-        case state(String)
-
-        /// Identity Provider to use if there's no Okta session.
-        case idp(url: URL)
-
-        /// Identity Provider to use if there's no Okta session.
-        case idpScope(String)
-        
-        /// Control how the user is prompted when authentication starts.
-        ///
-        /// > Note: The default behavior is ``Prompt/none``.
-        case prompt(Prompt)
-        
-        /// Supply a custom key/value pair to the authorization server.
-        case custom(key: String, value: String)
-        
-        /// Defines how a user will be prompted to sign in.
-        ///
-        /// This is used with the ``WebAuthentication/Option/prompt(_:)`` enumeration. For more information, see the [API documentation for this parameter](https://developer.okta.com/docs/reference/api/oidc/#parameter-details).
-        public enum Prompt: String {
-            /// If an Okta session already exists, the user is silently authenticated. Otherwise, the user is prompted to authenticate.
-            case none
-            
-            /// Display the Okta consent dialog, even if the user has already given consent.
-            case consent
-            
-            /// Always prompt the user for authentication.
-            case login
-            
-            /// The user is always prompted for authentication, and the user consent dialog appears.
-            case loginAndConsent = "login consent"
-        }
-    }
-    
     /// Active / default shared instance of the ``WebAuthentication`` session.
     ///
     /// This convenience property can be used in one of two ways:
@@ -135,90 +87,81 @@ public class WebAuthentication {
     /// The underlying OAuth2 flow that implements the session logout behaviour.
     public let signOutFlow: SessionLogoutFlow?
     
-    /// Context information about the current authorization code flow.
-    ///
-    /// This represents the state and other challenge data necessary to resume the authentication flow.
-    ///
-    /// > Warning: This is deprecated, and will be removed in a future release.
-    @available(*, deprecated, renamed: "signInFlow.context")
-    public var context: AuthorizationCodeFlow.Context? {
-        signInFlow.context
-    }
-    
     /// Indicates whether or not the developer prefers an ephemeral browser session, or if the user's browser state should be shared with the system browser.
     public var ephemeralSession: Bool = false
     
     /// Starts sign-in using the configured client.
     /// - Parameters:
     ///   - window: Window from which the sign in process will be started.
-    ///   - options: Options to add to the authorization URL.
+    ///   - context: Context options used when composing the authorization URL.
     ///   - completion: Completion block that will be invoked when authentication finishes.
     public final func signIn(from window: WindowAnchor?,
-                             options: [Option]? = nil,
+                             context: AuthorizationCodeFlow.Context = .init(),
                              completion: @escaping (Result<Token, WebAuthenticationError>) -> Void)
     {
         if provider != nil {
             cancel()
         }
         
-        let provider = createWebAuthenticationProvider(loginFlow: signInFlow,
-                                                       logoutFlow: signOutFlow,
-                                                       from: window,
-                                                       delegate: self)
+        let provider: WebAuthenticationProvider?
+        do {
+            provider = try createWebAuthenticationProvider(loginFlow: signInFlow,
+                                                           logoutFlow: signOutFlow,
+                                                           from: window,
+                                                           delegate: self)
+        } catch {
+            completion(.failure(.init(error)))
+            return
+        }
+        
+        guard let provider = provider else {
+            completion(.failure(.noCompatibleAuthenticationProviders))
+            return
+        }
+
         self.completionBlock = completion
         self.provider = provider
 
-        provider?.start(context: options?.context,
-                        additionalParameters: options?.additionalParameters)
+        provider.start(context: context)
     }
     
     /// Starts log-out using the credential.
     /// - Parameters:
     ///   - window: Window from which the sign in process will be started.
     ///   - credential: Stored credentials that will retrieve the ID token.
-    ///   - options: Options to add to the authorization URL.
+    ///   - context: Context options used when composing the signout URL.
     ///   - completion: Completion block that will be invoked when log-out finishes.
     public final func signOut(from window: WindowAnchor? = nil,
                               credential: Credential? = .default,
-                              options: [Option]? = nil,
+                              context: SessionLogoutFlow.Context = .init(),
                               completion: @escaping (Result<Void, WebAuthenticationError>) -> Void)
     {
-        guard let token = credential?.token else {
-            completion(.failure(.missingIdToken))
-            return
-        }
-        
-        signOut(from: window, token: token, options: options, completion: completion)
+        signOut(from: window, token: credential?.token, context: context, completion: completion)
     }
     
     /// Starts log-out using the `Token` object.
     /// - Parameters:
     ///   - window: Window from which the sign in process will be started.
     ///   - token: Token object that will retrieve the ID token.
-    ///   - options: Options to add to the authorization URL.
+    ///   - context: Context options used when composing the signout URL.
     ///   - completion: Completion block that will be invoked when sign-out finishes.
     public final func signOut(from window: WindowAnchor? = nil,
-                              token: Token,
-                              options: [Option]? = nil,
+                              token: Token?,
+                              context: SessionLogoutFlow.Context = .init(),
                               completion: @escaping (Result<Void, WebAuthenticationError>) -> Void)
     {
-        guard let idToken = token.idToken else {
-            completion(.failure(.missingIdToken))
-            return
-        }
-        
-        signOut(from: window, token: idToken.rawValue, options: options, completion: completion)
+        var context = context
+        context.idToken = token?.idToken?.rawValue
+        signOut(from: window, context: context, completion: completion)
     }
 
     /// Starts log-out using the ID token.
     /// - Parameters:
     ///   - window: Window from which the sign in process will be started.
-    ///   - token: The ID token string used for log-out.
-    ///   - options: Options to add to the authorization URL.
+    ///   - context: Context options used when composing the signout URL.
     ///   - completion: Completion block that will be invoked when sign-out finishes.
     public final func signOut(from window: WindowAnchor? = nil,
-                              token: String,
-                              options: [Option]? = nil,
+                              context: SessionLogoutFlow.Context = .init(),
                               completion: @escaping (Result<Void, WebAuthenticationError>) -> Void)
     {
         var provider = provider
@@ -227,18 +170,25 @@ public class WebAuthentication {
             cancel()
         }
         
-        provider = createWebAuthenticationProvider(loginFlow: signInFlow,
-                                                   logoutFlow: signOutFlow,
-                                                   from: window,
-                                                   delegate: self)
+        do {
+            provider = try createWebAuthenticationProvider(loginFlow: signInFlow,
+                                                           logoutFlow: signOutFlow,
+                                                           from: window,
+                                                           delegate: self)
+        } catch {
+            completion(.failure(.init(error)))
+            return
+        }
+        
+        guard let provider = provider else {
+            completion(.failure(.noCompatibleAuthenticationProviders))
+            return
+        }
         
         self.logoutCompletionBlock = completion
         self.provider = provider
         
-        let context = SessionLogoutFlow.Context(idToken: token,
-                                                state: options?.state)
-        provider?.logout(context: context,
-                         additionalParameters: options?.additionalParameters)
+        provider.logout(context: context)
     }
     
     /// Cancels the authentication session.
@@ -249,15 +199,15 @@ public class WebAuthentication {
         provider = nil
     }
     
-    #if os(iOS) || os(visionOS)
+    #if os(iOS) || os(visionOS) || os(tvOS)
     /// Attempts to resume sign in when the app is launched from a redirect URI.
     ///
     /// This is a convenience method that can simplify apps that use a UISceneDelegate. Scene-based applications receive URLs when the `UIWindowSceneDelegate.scene(_:openURLContexts:)` method is called; the set of contexts can be supplied to this method, which will filter out only those URLs that match the URL scheme defined in the client configuration. If no matching URLs are found, the call is ignored.
     /// - Parameter URLContexts: Set of `UIOpenURLContext` objects from which to attempt to resume authentication.
-    @available(iOS 13.0, *)
+    @available(iOS 13.0, tvOS 13.0, macCatalyst 13.1, visionOS 1.0, *)
     public final func resume(with URLContexts: Set<UIOpenURLContext>) throws {
         try URLContexts
-            .filter { $0.url.scheme?.lowercased() == signInFlow.redirectUri.scheme?.lowercased() }
+            .filter { $0.url.scheme?.lowercased() == signInFlow.client.configuration.redirectUri?.scheme?.lowercased() }
             .map(\.url)
             .forEach(resume(with:))
     }
@@ -270,7 +220,7 @@ public class WebAuthentication {
     /// If the URI does not match the configured URI scheme, this method will thrown an error.
     /// - Parameter url: URL from which to attempt to resume authentication.
     public final func resume(with url: URL) throws {
-        guard url.scheme?.lowercased() == signInFlow.redirectUri.scheme?.lowercased()
+        guard url.scheme?.lowercased() == signInFlow.client.configuration.redirectUri?.scheme?.lowercased()
         else {
             throw WebAuthenticationError.invalidRedirectScheme(url.scheme)
         }
@@ -295,77 +245,62 @@ public class WebAuthentication {
     
     /// Initializes a web authentication session using the supplied client credentials.
     /// - Parameters:
-    ///   - issuer: The URL for the OAuth2 issuer.
+    ///   - issuerURL: The URL for the OAuth2 issuer.
     ///   - clientId: The client's ID.
-    ///   - scopes: The scopes the client is requesting.
+    ///   - scope: The scopes the client is requesting.
     ///   - redirectUri: The redirect URI for the configured client.
     ///   - logoutRedirectUri: The logout URI for the client, if applicable.
     ///   - additionalParameters: Optional parameters to add to the authorization query string.
-    public convenience init(issuer: URL,
+    public convenience init(issuerURL: URL,
                             clientId: String,
-                            scopes: String,
+                            scope: String,
                             redirectUri: URL,
                             logoutRedirectUri: URL? = nil,
-                            additionalParameters: [String: APIRequestArgument]? = nil)
+                            additionalParameters: [String: APIRequestArgument]? = nil) throws
     {
-        let client = OAuth2Client(baseURL: issuer,
+        let client = OAuth2Client(issuerURL: issuerURL,
                                   clientId: clientId,
-                                  scopes: scopes)
-        
+                                  scope: scope,
+                                  redirectUri: redirectUri,
+                                  logoutRedirectUri: logoutRedirectUri)
+        try self.init(client: client, additionalParameters: additionalParameters)
+    }
+    
+    convenience init(_ config: OAuth2Client.PropertyListConfiguration) throws {
+        try self.init(client: OAuth2Client(config),
+                      additionalParameters: config.additionalParameters)
+    }
+    
+    convenience init(client: OAuth2Client, additionalParameters: [String: APIRequestArgument]?) throws {
+        let loginFlow = try AuthorizationCodeFlow(client: client,
+                                                  additionalParameters: additionalParameters)
         let logoutFlow: SessionLogoutFlow?
-        if let logoutRedirectUri = logoutRedirectUri {
-            logoutFlow = SessionLogoutFlow(logoutRedirectUri: logoutRedirectUri,
-                                           additionalParameters: additionalParameters,
-                                           client: client)
+        if client.configuration.logoutRedirectUri != nil {
+            logoutFlow = SessionLogoutFlow(client: client,
+                                           additionalParameters: additionalParameters)
         } else {
             logoutFlow = nil
         }
         
-        self.init(loginFlow: AuthorizationCodeFlow(redirectUri: redirectUri,
-                                                   additionalParameters: additionalParameters,
-                                                   client: client),
-                  logoutFlow: logoutFlow)
+        self.init(loginFlow: loginFlow, logoutFlow: logoutFlow)
+
     }
-    
-    convenience init(_ config: OAuth2Client.PropertyListConfiguration) throws {
-        guard let redirectUri = config.redirectUri else {
-            throw OAuth2Client.PropertyListConfigurationError.missingConfigurationValues
-        }
-        
-        self.init(issuer: config.issuer,
-                  clientId: config.clientId,
-                  scopes: config.scopes,
-                  redirectUri: redirectUri,
-                  logoutRedirectUri: config.logoutRedirectUri,
-                  additionalParameters: config.additionalParameters)
-    }
-    
+
     func createWebAuthenticationProvider(loginFlow: AuthorizationCodeFlow,
                                          logoutFlow: SessionLogoutFlow?,
                                          from window: WebAuthentication.WindowAnchor?,
-                                         delegate: WebAuthenticationProviderDelegate) -> WebAuthenticationProvider?
+                                         delegate: WebAuthenticationProviderDelegate) throws -> WebAuthenticationProvider?
     {
-        AuthenticationServicesProvider(loginFlow: loginFlow,
-                                       logoutFlow: logoutFlow,
-                                       from: window,
-                                       delegate: delegate)
+        try AuthenticationServicesProvider(loginFlow: loginFlow,
+                                           logoutFlow: logoutFlow,
+                                           from: window,
+                                           delegate: delegate)
     }
     
     /// Initializes a web authentication session using the supplied AuthorizationCodeFlow and optional context.
     /// - Parameters:
-    ///   - flow: Authorization code flow instance for this client.
-    ///   - context: Optional context to initialize authentication with.
-    ///
-    /// > Warning: This is deprecated, and will be removed in a future release.
-    @available(*, deprecated, renamed: "init(loginFlow:logoutFlow:)")
-    public convenience init(loginFlow: AuthorizationCodeFlow, logoutFlow: SessionLogoutFlow?, context: AuthorizationCodeFlow.Context?) {
-        self.init(loginFlow: loginFlow, logoutFlow: logoutFlow)
-    }
-    
-    /// Initializes a web authentication session using the supplied AuthorizationCodeFlow and optional context.
-    /// - Parameters:
-    ///   - flow: Authorization code flow instance for this client.
-    ///   - context: Optional context to initialize authentication with.
+    ///   - loginFlow: Authorization code flow instance for signing in to this client.
+    ///   - logoutFlow: Session sign out flow to use when signing out from this client.
     public init(loginFlow: AuthorizationCodeFlow, logoutFlow: SessionLogoutFlow?) {
         // Ensure this SDK's static version is included in the user agent.
         SDKVersion.register(sdk: Version)
@@ -388,13 +323,13 @@ extension WebAuthentication {
     /// Asynchronously initiates authentication from the given window.
     /// - Parameters:
     ///   - window: The window from which the authentication browser should be shown.
-    ///   - options: Options to add to the authorization URL.
+    ///   - context: Context options used when composing the authorization URL.
     /// - Returns: The token representing the signed-in user.
     public final func signIn(from window: WindowAnchor?,
-                             options: [Option]? = nil) async throws -> Token
+                             context: AuthorizationCodeFlow.Context = .init()) async throws -> Token
     {
         try await withCheckedThrowingContinuation { continuation in
-            self.signIn(from: window, options: options) { continuation.resume(with: $0) }
+            self.signIn(from: window, context: context) { continuation.resume(with: $0) }
         }
     }
     
@@ -402,13 +337,13 @@ extension WebAuthentication {
     /// - Parameters:
     ///   - window: Window from which the sign in process will be started.
     ///   - credential: Stored credentials that will retrieve the ID token.
-    ///   - options: Options to add to the authorization URL.
+    ///   - context: Context options used when composing the signout URL.
     public final func signOut(from window: WindowAnchor?,
                               credential: Credential? = .default,
-                              options: [Option]? = nil) async throws
+                              context: SessionLogoutFlow.Context = .init()) async throws
     {
         try await withCheckedThrowingContinuation { continuation in
-            self.signOut(from: window, credential: credential, options: options) { continuation.resume(with: $0) }
+            self.signOut(from: window, credential: credential, context: context) { continuation.resume(with: $0) }
         }
     }
     
@@ -416,26 +351,24 @@ extension WebAuthentication {
     /// - Parameters:
     ///   - window: Window from which the sign in process will be started.
     ///   - token: Token object that will retrieve the ID token.
-    ///   - options: Options to add to the authorization URL.
+    ///   - context: Context options used when composing the signout URL.
     public final func signOut(from window: WindowAnchor?,
                               token: Token,
-                              options: [Option]? = nil) async throws
+                              context: SessionLogoutFlow.Context = .init()) async throws
     {
         try await withCheckedThrowingContinuation { continuation in
-            self.signOut(from: window, token: token, options: options) { continuation.resume(with: $0) }
+            self.signOut(from: window, token: token, context: context) { continuation.resume(with: $0) }
         }
     }
     
     /// Asynchronous convenience method that initiates log-out using the ID Token, throwing the error if fails.
     /// - Parameters:
     ///   - window: Window from which the sign in process will be started.
-    ///   - idToken: The ID token used for log-out.
-    ///   - options: Options to add to the authorization URL.
+    ///   - context: Context options used when composing the signout URL.
     public final func signOut(from window: WindowAnchor?,
-                              token: String,
-                              options: [Option]? = nil) async throws {
+                              context: SessionLogoutFlow.Context = .init()) async throws {
         try await withCheckedThrowingContinuation { continuation in
-            self.signOut(from: window, token: token, options: options) { continuation.resume(with: $0) }
+            self.signOut(from: window, context: context) { continuation.resume(with: $0) }
         }
     }
 }

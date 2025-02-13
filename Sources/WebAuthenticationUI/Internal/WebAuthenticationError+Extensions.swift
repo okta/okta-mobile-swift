@@ -15,6 +15,16 @@ import Foundation
 #if canImport(UIKit) || canImport(AppKit)
 
 extension WebAuthenticationError: LocalizedError {
+    init(_ error: Error) {
+        if let error = error as? OAuth2Error {
+            self = .oauth2(error: error)
+        } else if let error = error as? OAuth2ServerError {
+            self = .serverError(error)
+        } else {
+            self = .generic(error: error)
+        }
+    }
+    
     public var errorDescription: String? {
         switch self {
         case .noCompatibleAuthenticationProviders:

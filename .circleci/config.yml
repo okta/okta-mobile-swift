@@ -1,6 +1,7 @@
 version: 2.1
 
 orbs:
+  platform-helpers: okta/platform-helpers@1
   general-platform-helpers: okta/general-platform-helpers@1.9
   macos: circleci/macos@2
 
@@ -203,7 +204,6 @@ jobs:
       - run:
           name: run swift package show dependencies
           command: swift package show-dependencies
-      - general-platform-helpers/step-load-dependencies
       - general-platform-helpers/step-run-snyk-monitor:
           scan-all-projects: true
           skip-unresolved: false
@@ -234,9 +234,8 @@ workflows:
 
   semgrep:
     jobs:
-      - general-platform-helpers/job-semgrep-scan:
+      - platform-helpers/job-semgrep-scan:
           name: semgrep-scan
-          resource-class: medium
           context:
             - static-analysis
 

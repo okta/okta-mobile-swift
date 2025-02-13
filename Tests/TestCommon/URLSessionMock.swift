@@ -44,6 +44,14 @@ class URLSessionMock: URLSessionProtocol {
         }
     }
     
+    func request(matching string: String) -> URLRequest? {
+        requests.first(where: { $0.url?.absoluteString.localizedCaseInsensitiveContains(string) ?? false })
+    }
+    
+    func formDecodedBody(matching string: String) -> [String: String?]? {
+        request(matching: string)?.httpBody?.urlFormEncoded
+    }
+    
     func expect(_ url: String,
                 data: Data?,
                 statusCode: Int = 200,

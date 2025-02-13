@@ -36,14 +36,14 @@ final class SingleSignOnViewController: UIViewController {
     
     private lazy var flow: TokenExchangeFlow? = {
         guard !domain.isEmpty,
-              let issuerUrl = URL(string: "https://\(domain)") else {
+              let issuerUrl = URL(string: "https://\(domain)")
+        else {
             return nil
         }
         
-        return TokenExchangeFlow(issuer: issuerUrl,
+        return TokenExchangeFlow(issuerURL: issuerUrl,
                                  clientId: clientId,
-                                 scopes: "openid profile offline_access",
-                                 audience: .default)
+                                 scope: "openid profile offline_access")
     }()
     
     override func viewDidLoad() {
