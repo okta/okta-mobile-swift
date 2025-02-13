@@ -126,7 +126,7 @@ public class SessionLogoutFlow: LogoutFlow {
         inProgress = true
         
         client.openIdConfiguration { result in
-            defer { self.reset() }
+            defer { self.finished() }
 
             switch result {
             case .failure(let error):
@@ -162,8 +162,12 @@ public class SessionLogoutFlow: LogoutFlow {
     
     /// Resets a current session logout flow.
     public func reset() {
-        inProgress = false
+        finished()
         context = nil
+    }
+    
+    func finished() {
+        inProgress = false
     }
 
     public let delegateCollection = DelegateCollection<SessionLogoutFlowDelegate>()

@@ -484,10 +484,14 @@ public class DirectAuthenticationFlow: AuthenticationFlow {
     
     /// Resets the authentication session.
     public func reset() {
-        isAuthenticating = false
+        finished()
         context = nil
     }
 
+    func finished() {
+        isAuthenticating = false
+    }
+    
     // MARK: Private properties / methods
     public let delegateCollection = DelegateCollection<DirectAuthenticationFlowDelegate>()
 }

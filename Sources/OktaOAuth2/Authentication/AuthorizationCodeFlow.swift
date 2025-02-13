@@ -197,7 +197,7 @@ public class AuthorizationCodeFlow: AuthenticationFlow {
             case .failure(let error):
                 self.delegateCollection.invoke { $0.authentication(flow: self, received: error) }
                 completion(.failure(error))
-                self.reset()
+                self.finished()
                 
             case .success(let configuration):
                 do {
@@ -216,7 +216,7 @@ public class AuthorizationCodeFlow: AuthenticationFlow {
                     let oauthError = error as? OAuth2Error ?? .error(error)
                     self.delegateCollection.invoke { $0.authentication(flow: self, received: oauthError) }
                     completion(.failure(oauthError))
-                    self.reset()
+                    self.finished()
                 }
             }
         }
@@ -258,12 +258,12 @@ public class AuthorizationCodeFlow: AuthenticationFlow {
                     self.delegateCollection.invoke { $0.authentication(flow: self, received: error) }
                     completion(.failure(error))
 
-                    self.reset()
+                    self.finished()
                     return
                 }
                 
                 self.client.exchange(token: request) { result in
-                    defer { self.reset() }
+                    defer { self.finished() }
                     
                     switch result {
                     case .success(let response):
@@ -278,14 +278,18 @@ public class AuthorizationCodeFlow: AuthenticationFlow {
             case .failure(let error):
                 self.delegateCollection.invoke { $0.authentication(flow: self, received: error) }
                 completion(.failure(error))
-                self.reset()
+                self.finished()
             }
         }
     }
     
     public func reset() {
-        isAuthenticating = false
+        finished()
         context = nil
+    }
+    
+    func finished() {
+        isAuthenticating = false
     }
 
     // MARK: Private properties / methods

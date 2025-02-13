@@ -60,8 +60,8 @@ class SessionLogoutFlowFailureTests: XCTestCase {
         wait(for: [resumeExpection], timeout: 1)
         
         XCTAssertFalse(flow.inProgress)
-        XCTAssertNil(flow.context)
-        XCTAssertNotEqual(flow.context, context)
+        XCTAssertNotNil(flow.context)
+        XCTAssertEqual(flow.context, context)
         XCTAssertNil(flow.context?.logoutURL)
         
         XCTAssertNil(delegate.url)
@@ -90,8 +90,8 @@ class SessionLogoutFlowFailureTests: XCTestCase {
         wait(for: [resumeExpection], timeout: 1)
 
         XCTAssertFalse(flow.inProgress)
-        XCTAssertNil(flow.context)
-        XCTAssertNotEqual(flow.context, context)
+        XCTAssertNotNil(flow.context)
+        XCTAssertEqual(flow.context, context)
         XCTAssertNil(flow.context?.logoutURL)
     }
 }

@@ -19,7 +19,7 @@ extension DirectAuthenticationFlow {
         delegateCollection.invoke { $0.authentication(flow: self, received: response.result) }
         completion(.success(.success(response.result)))
 
-        reset()
+        finished()
     }
 
     func send(state: Status,
@@ -37,6 +37,6 @@ extension DirectAuthenticationFlow {
 
         completion(.failure(DirectAuthenticationFlowError(error)))
 
-        reset()
+        finished()
     }
 }

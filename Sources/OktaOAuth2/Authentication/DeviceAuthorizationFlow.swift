@@ -206,11 +206,15 @@ public class DeviceAuthorizationFlow: AuthenticationFlow {
     
     /// Resets the flow for later reuse.
     public func reset() {
+        finished()
+        context = nil
+    }
+    
+    func finished() {
         timer?.cancel()
         timer = nil
         completion = nil
         isAuthenticating = false
-        context = nil
     }
 
     // MARK: Private properties / methods
@@ -242,12 +246,12 @@ public class DeviceAuthorizationFlow: AuthenticationFlow {
                 switch result {
                 case .failure(let error):
                     completion?(.failure(.network(error: error)))
-                    self.reset()
+                    self.finished()
 
                 case .success(let token):
                     if let token = token {
                         completion?(.success(token))
-                        self.reset()
+                        self.finished()
                     }
                 }
             }

@@ -156,7 +156,7 @@ public class SessionTokenFlow: AuthenticationFlow {
                         self.delegateCollection.invoke { $0.authentication(flow: self, received: response) }
                         completion(.success(response))
                     }
-                    self.reset()
+                    self.finished()
                 }
             }
         }
@@ -164,8 +164,12 @@ public class SessionTokenFlow: AuthenticationFlow {
     
     /// Resets the flow for later reuse.
     public func reset() {
-        isAuthenticating = false
+        finished()
         context = nil
+    }
+    
+    func finished() {
+        isAuthenticating = false
     }
 
     // MARK: Private properties / methods

@@ -166,20 +166,24 @@ public class TokenExchangeFlow: AuthenticationFlow {
                         completion(.success(response.result))
                     }
                     
-                    self.reset()
+                    self.finished()
                 }
                 
             case .failure(let error):
                 self.delegateCollection.invoke { $0.authentication(flow: self, received: error) }
                 completion(.failure(error))
-                self.reset()
+                self.finished()
             }
         }
     }
 
     public func reset() {
-        isAuthenticating = false
+        finished()
         context = nil
+    }
+    
+    func finished() {
+        isAuthenticating = false
     }
 }
 
