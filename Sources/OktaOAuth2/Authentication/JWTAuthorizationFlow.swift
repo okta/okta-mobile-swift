@@ -148,8 +148,8 @@ public class JWTAuthorizationFlow: AuthenticationFlow {
     
     /// Resets the flow for later reuse.
     public func reset() {
-        context = nil
         isAuthenticating = false
+        context = nil
     }
 
     // MARK: Private properties / methods
