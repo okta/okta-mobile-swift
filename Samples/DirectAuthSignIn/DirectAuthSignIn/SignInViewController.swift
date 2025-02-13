@@ -25,7 +25,7 @@ class SignInViewController: UIHostingController<SignInView> {
         {
             configuration.scope.remove(at: index)
             
-            flow = DirectAuthenticationFlow(client: OAuth2Client(configuration))
+            flow = try? DirectAuthenticationFlow(client: OAuth2Client(configuration))
         } else {
             flow = try? DirectAuthenticationFlow()
         }

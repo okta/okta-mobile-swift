@@ -98,7 +98,7 @@ class TokenDetailViewController: UIViewController {
         
         let string = NSMutableAttributedString()
         addString(to: string, title: "Expires in", value: "\(token.expiresIn) seconds")
-        addString(to: string, title: "Scope", value: token.$scope.rawValue ?? "N/A")
+        addString(to: string, title: "Scope", value: token.scope?.joined(separator: " ") ?? "N/A")
         addString(to: string, title: "Token type", value: token.tokenType)
         
         addString(to: string, title: "Access token", value: token.accessToken)
