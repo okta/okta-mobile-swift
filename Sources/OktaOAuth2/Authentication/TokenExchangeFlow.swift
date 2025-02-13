@@ -74,6 +74,32 @@ public class TokenExchangeFlow: AuthenticationFlow {
     ///   - additionalParameters: Optional query parameters to supply tot he authorization server for all requests from this flow.
     public convenience init(issuerURL: URL,
                             clientId: String,
+                            scope: ClaimCollection<[String]>,
+                            additionalParameters: [String: APIRequestArgument]? = nil)
+    {
+        self.init(client: OAuth2Client(issuerURL: issuerURL,
+                                       clientId: clientId,
+                                       scope: scope),
+                  additionalParameters: additionalParameters)
+    }
+
+    @_documentation(visibility: private)
+    @inlinable
+    public convenience init(issuerURL: URL,
+                            clientId: String,
+                            scope: [String],
+                            additionalParameters: [String: APIRequestArgument]? = nil)
+    {
+        self.init(client: OAuth2Client(issuerURL: issuerURL,
+                                       clientId: clientId,
+                                       scope: scope),
+                  additionalParameters: additionalParameters)
+    }
+
+    @_documentation(visibility: private)
+    @inlinable
+    public convenience init(issuerURL: URL,
+                            clientId: String,
                             scope: String,
                             additionalParameters: [String: APIRequestArgument]? = nil)
     {

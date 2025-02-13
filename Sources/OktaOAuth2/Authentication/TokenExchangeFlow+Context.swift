@@ -19,6 +19,7 @@ extension TokenExchangeFlow {
         public var audience: Audience
 
         /// The ACR values, if any, which should be requested by the client.
+        @ClaimCollection
         public var acrValues: [String]?
 
         /// Any additional query string parameters you would like to supply to the authorization server.
@@ -29,12 +30,20 @@ extension TokenExchangeFlow {
         ///   - state: State string to use, or `nil` to accept an automatically generated default.
         ///   - maxAge: The maximum age an ID token can be when authenticating.
         public init(audience: Audience = .default,
-                    acrValues: [String]? = nil,
+                    acrValues: ClaimCollection<[String]?> = nil,
                     additionalParameters: [String: any APIRequestArgument]? = nil)
         {
             self.audience = audience
-            self.acrValues = acrValues
-            self.additionalParameters = additionalParameters
+            self._acrValues = acrValues
+            self.additionalParameters = additionalParameters?.omitting("acr_values")
+
+            if let additionalAcrValues = additionalParameters?.spaceSeparatedValues(for: "acr_values") {
+                if self.acrValues.isNil {
+                    self.acrValues = additionalAcrValues
+                } else {
+                    self.acrValues?.append(contentsOf: additionalAcrValues)
+                }
+            }
         }
 
         @_documentation(visibility: internal)
@@ -43,10 +52,10 @@ extension TokenExchangeFlow {
 
             switch category {
             case .authorization, .token:
-                if let acrValues = acrValues {
-                    result["acr_values"] = acrValues.joined(separator: " ")
+                if let values = $acrValues.rawValue {
+                    result["acr_values"] = values
                 }
-                
+
                 result["audience"] = audience
                 result["grant_type"] = GrantType.tokenExchange
                 

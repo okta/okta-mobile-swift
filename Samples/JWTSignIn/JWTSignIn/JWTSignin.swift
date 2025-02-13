@@ -25,7 +25,7 @@ struct JWTSignin: AsyncParsableCommand {
     var clientId: String
     
     @Option(name: [.long, .short], help: "The scopes to use.")
-    var scope: String = "openid profile"
+    var scope: [String] = ["openid", "profile"]
     
     @Option(
         name: [.long, .short],

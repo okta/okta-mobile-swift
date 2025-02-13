@@ -53,6 +53,37 @@ public class SessionTokenFlow: AuthenticationFlow {
     ///   - clientId: The client ID
     ///   - scope: The scopes to request
     ///   - additionalParameters: Optional query parameters to supply tot he authorization server for all requests from this flow.
+    @inlinable
+    public convenience init(issuerURL: URL,
+                            clientId: String,
+                            scope: ClaimCollection<[String]>,
+                            redirectUri: URL,
+                            additionalParameters: [String: APIRequestArgument]? = nil) throws
+    {
+        try self.init(client: OAuth2Client(issuerURL: issuerURL,
+                                           clientId: clientId,
+                                           scope: scope,
+                                           redirectUri: redirectUri),
+                      additionalParameters: additionalParameters)
+    }
+
+    @_documentation(visibility: private)
+    @inlinable
+    public convenience init(issuerURL: URL,
+                            clientId: String,
+                            scope: [String],
+                            redirectUri: URL,
+                            additionalParameters: [String: APIRequestArgument]? = nil) throws
+    {
+        try self.init(client: OAuth2Client(issuerURL: issuerURL,
+                                           clientId: clientId,
+                                           scope: scope,
+                                           redirectUri: redirectUri),
+                      additionalParameters: additionalParameters)
+    }
+
+    @_documentation(visibility: private)
+    @inlinable
     public convenience init(issuerURL: URL,
                             clientId: String,
                             scope: String,
@@ -117,8 +148,6 @@ public class SessionTokenFlow: AuthenticationFlow {
                 completion(.failure(error))
             case .success(let response):
                 self.complete(using: flow, url: response) { result in
-                    self.reset()
-                    
                     switch result {
                     case .failure(let error):
                         self.delegateCollection.invoke { $0.authentication(flow: self, received: error) }
@@ -127,6 +156,7 @@ public class SessionTokenFlow: AuthenticationFlow {
                         self.delegateCollection.invoke { $0.authentication(flow: self, received: response) }
                         completion(.success(response))
                     }
+                    self.reset()
                 }
             }
         }

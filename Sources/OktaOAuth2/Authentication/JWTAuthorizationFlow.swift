@@ -48,14 +48,41 @@ public class JWTAuthorizationFlow: AuthenticationFlow {
     ///   - clientId: The client ID
     ///   - scope: The scopes to request
     ///   - additionalParameters: Additional parameters to add to all requests made by this flow.
+    @inlinable
     public convenience init(issuerURL: URL,
                             clientId: String,
-                            scope: String,
+                            scope: ClaimCollection<[String]>,
                             additionalParameters: [String: any APIRequestArgument]? = nil)
     {
         self.init(client: OAuth2Client(issuerURL: issuerURL,
                                        clientId: clientId,
                                        scope: scope),
+                  additionalParameters: additionalParameters)
+    }
+
+    @_documentation(visibility: private)
+    @inlinable
+    public convenience init(issuerURL: URL,
+                            clientId: String,
+                            scope: [String],
+                            additionalParameters: [String: any APIRequestArgument]? = nil)
+    {
+        self.init(issuerURL: issuerURL,
+                  clientId: clientId,
+                  scope: .init(wrappedValue: scope),
+                  additionalParameters: additionalParameters)
+    }
+    
+    @_documentation(visibility: private)
+    @inlinable
+    public convenience init(issuerURL: URL,
+                            clientId: String,
+                            scope: String,
+                            additionalParameters: [String: any APIRequestArgument]? = nil)
+    {
+        self.init(issuerURL: issuerURL,
+                  clientId: clientId,
+                  scope: .init(rawValue: scope),
                   additionalParameters: additionalParameters)
     }
     
@@ -99,8 +126,6 @@ public class JWTAuthorizationFlow: AuthenticationFlow {
                                            context: context,
                                            assertion: assertion)
                 self.client.exchange(token: request) { result in
-                    self.reset()
-                    
                     switch result {
                     case .failure(let error):
                         self.delegateCollection.invoke { $0.authentication(flow: self, received: .network(error: error)) }
@@ -109,19 +134,22 @@ public class JWTAuthorizationFlow: AuthenticationFlow {
                         self.delegateCollection.invoke { $0.authentication(flow: self, received: response.result) }
                         completion(.success(response.result))
                     }
+                    
+                    self.reset()
                 }
 
             case .failure(let error):
                 self.delegateCollection.invoke { $0.authentication(flow: self, received: error) }
                 completion(.failure(error))
+                self.reset()
             }
         }
     }
     
     /// Resets the flow for later reuse.
     public func reset() {
-        isAuthenticating = false
         context = nil
+        isAuthenticating = false
     }
 
     // MARK: Private properties / methods

@@ -94,14 +94,41 @@ public class DeviceAuthorizationFlow: AuthenticationFlow {
     ///   - clientId: The client ID
     ///   - scope: The scopes to request
     ///   - additionalParameters: Optional additional query string parameters you would like to supply to the authorization server.
+    @inlinable
+    public convenience init(issuerURL: URL,
+                            clientId: String,
+                            scope: ClaimCollection<[String]>,
+                            additionalParameters: [String: any APIRequestArgument]? = nil)
+    {
+        self.init(client: .init(issuerURL: issuerURL,
+                                clientId: clientId,
+                                scope: scope),
+                  additionalParameters: additionalParameters)
+    }
+    
+    @inlinable
+    @_documentation(visibility: private)
+    public convenience init(issuerURL: URL,
+                            clientId: String,
+                            scope: [String],
+                            additionalParameters: [String: any APIRequestArgument]? = nil)
+    {
+        self.init(client: OAuth2Client(OAuth2Client.Configuration(issuerURL: issuerURL,
+                                                                  clientId: clientId,
+                                                                  scope: scope)),
+                  additionalParameters: additionalParameters)
+    }
+    
+    @inlinable
+    @_documentation(visibility: private)
     public convenience init(issuerURL: URL,
                             clientId: String,
                             scope: String,
                             additionalParameters: [String: any APIRequestArgument]? = nil)
     {
-        self.init(client: OAuth2Client(issuerURL: issuerURL,
-                                       clientId: clientId,
-                                       scope: scope),
+        self.init(client: OAuth2Client(OAuth2Client.Configuration(issuerURL: issuerURL,
+                                                                  clientId: clientId,
+                                                                  scope: scope)),
                   additionalParameters: additionalParameters)
     }
 
@@ -214,13 +241,13 @@ public class DeviceAuthorizationFlow: AuthenticationFlow {
             self.getToken(deviceCode: verification.deviceCode, context: context) { result in
                 switch result {
                 case .failure(let error):
-                    self.reset()
                     completion?(.failure(.network(error: error)))
-                    
+                    self.reset()
+
                 case .success(let token):
                     if let token = token {
-                        self.reset()
                         completion?(.success(token))
+                        self.reset()
                     }
                 }
             }

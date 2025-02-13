@@ -27,7 +27,8 @@ extension OAuth2Client {
         public var clientId: String
         
         /// The list of OAuth2 scopes requested for this client.
-        public var scope: String
+        @ClaimCollection
+        public var scope: [String]
         
         /// The Redirect URI, if this client configuration requires it.
         public var redirectUri: URL?
@@ -50,50 +51,20 @@ extension OAuth2Client {
         public init(issuerURL: URL,
                     discoveryURL: URL? = nil,
                     clientId: String,
-                    scope: String,
+                    scope: ClaimCollection<[String]>,
                     redirectUri: URL? = nil,
                     logoutRedirectUri: URL? = nil,
                     authentication: ClientAuthentication = .none)
         {
-            var relativeURL = issuerURL
-            
-            // Ensure the base URL contains a trailing slash in its path, so request paths can be safely appended.
-            if !relativeURL.lastPathComponent.isEmpty {
-                relativeURL = relativeURL.appendingComponent("")
-            }
-            
             self.issuerURL = issuerURL
-            self.discoveryURL = discoveryURL ?? relativeURL.appendingComponent(".well-known/openid-configuration")
+            self.discoveryURL = discoveryURL ?? issuerURL.appendingDiscoveryURL
             self.clientId = clientId
-            self.scope = scope
+            self._scope = scope
             self.redirectUri = redirectUri
             self.logoutRedirectUri = logoutRedirectUri
             self.authentication = authentication
         }
         
-        /// Convenience initializer to create a client using a simple domain name.
-        /// - Parameters:
-        ///   - domain: Domain name for the OAuth2 client.
-        ///   - clientId: The client ID.
-        ///   - scope: The list of OAuth2 scopes.
-        ///   - redirectUri: Optional `redirect_uri` value for this client.
-        ///   - logoutRedirectUri: Optional `logout_redirect_uri` value for this client.
-        ///   - authentication: The client authentication  model to use (Default: ``OAuth2Client/ClientAuthentication/none``)
-        public init(domain: String,
-                    clientId: String,
-                    scope: String,
-                    redirectUri: String? = nil,
-                    logoutRedirectUri: String? = nil,
-                    authentication: ClientAuthentication = .none) throws
-        {
-            self.init(issuerURL: try URL(requiredString: "https://\(domain)"),
-                      clientId: clientId,
-                      scope: scope,
-                      redirectUri: try URL(string: redirectUri),
-                      logoutRedirectUri: try URL(string: logoutRedirectUri),
-                      authentication: authentication)
-        }
-
         @_documentation(visibility: private)
         public func parameters(for category: OAuth2APIRequestCategory) -> [String: any APIRequestArgument]? {
             var result = authentication.parameters(for: category) ?? [:]
@@ -137,18 +108,20 @@ extension OAuth2Client.Configuration {
         if let container = try? decoder.container(keyedBy: CodingKeysV1.self),
            container.allKeys.contains(.baseURL)
         {
+            let scope = try container.decode(String.self, forKey: .scopes)
             self.init(issuerURL: try container.decode(URL.self, forKey: .baseURL),
                       discoveryURL: try container.decodeIfPresent(URL.self, forKey: .discoveryURL),
                       clientId: try container.decode(String.self, forKey: .clientId),
-                      scope: try container.decode(String.self, forKey: .scopes),
+                      scope: scope.whitespaceSeparated,
                       authentication: try container.decodeIfPresent(OAuth2Client.ClientAuthentication.self, forKey: .authentication) ?? .none)
         }
 
         else if let container = try? decoder.container(keyedBy: CodingKeysV2.self) {
+            let scope = try container.decode(String.self, forKey: .scope)
             self.init(issuerURL: try container.decode(URL.self, forKey: .issuerURL),
                       discoveryURL: try container.decodeIfPresent(URL.self, forKey: .discoveryURL),
                       clientId: try container.decode(String.self, forKey: .clientId),
-                      scope: try container.decode(String.self, forKey: .scope),
+                      scope: scope.whitespaceSeparated,
                       redirectUri: try container.decodeIfPresent(URL.self, forKey: .redirectUri),
                       logoutRedirectUri: try container.decodeIfPresent(URL.self, forKey: .logoutRedirectUri),
                       authentication: try container.decodeIfPresent(OAuth2Client.ClientAuthentication.self, forKey: .authentication) ?? .none)
@@ -167,7 +140,7 @@ extension OAuth2Client.Configuration {
         try container.encode(issuerURL, forKey: .issuerURL)
         try container.encode(discoveryURL, forKey: .discoveryURL)
         try container.encode(clientId, forKey: .clientId)
-        try container.encode(scope, forKey: .scope)
+        try container.encode($scope.rawValue, forKey: .scope)
         try container.encodeIfPresent(redirectUri, forKey: .redirectUri)
         try container.encodeIfPresent(logoutRedirectUri, forKey: .logoutRedirectUri)
         try container.encode(authentication, forKey: .authentication)

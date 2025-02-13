@@ -109,35 +109,68 @@ public class AuthorizationCodeFlow: AuthenticationFlow {
     ///   - scope: The scopes to request.
     ///   - redirectUri: The redirect URI for the client.
     ///   - additionalParameters: Optional additional query string parameters you would like to supply to the authorization server.
-    public init(issuerURL: URL,
-                clientId: String,
-                scope: String,
-                redirectUri: URL,
-                additionalParameters: [String: any APIRequestArgument]? = nil)
+    @inlinable
+    public convenience init(issuerURL: URL,
+                            clientId: String,
+                            scope: ClaimCollection<[String]>,
+                            redirectUri: URL,
+                            additionalParameters: [String: any APIRequestArgument]? = nil)
     {
-        self.client = .init(issuerURL: issuerURL,
-                            clientId: clientId,
-                            scope: scope,
-                            redirectUri: redirectUri)
-        self.additionalParameters = additionalParameters
-        
-        client.add(delegate: self)
+        self.init(verifiedClient: .init(issuerURL: issuerURL,
+                                        clientId: clientId,
+                                        scope: scope,
+                                        redirectUri: redirectUri),
+                  additionalParameters: additionalParameters)
+    }
+    
+    @inlinable
+    @_documentation(visibility: private)
+    public convenience init(issuerURL: URL,
+                            clientId: String,
+                            scope: [String],
+                            redirectUri: URL,
+                            additionalParameters: [String: any APIRequestArgument]? = nil)
+    {
+        self.init(verifiedClient: .init(issuerURL: issuerURL,
+                                        clientId: clientId,
+                                        scope: .init(wrappedValue: scope),
+                                        redirectUri: redirectUri),
+                  additionalParameters: additionalParameters)
+    }
 
-        // Ensure this SDK's static version is included in the user agent.
-        SDKVersion.register(sdk: Version)
+    @inlinable
+    @_documentation(visibility: private)
+    public convenience init(issuerURL: URL,
+                            clientId: String,
+                            scope: String,
+                            redirectUri: URL,
+                            additionalParameters: [String: any APIRequestArgument]? = nil)
+    {
+        self.init(verifiedClient: .init(issuerURL: issuerURL,
+                                        clientId: clientId,
+                                        scope: .init(wrappedValue: scope),
+                                        redirectUri: redirectUri),
+                  additionalParameters: additionalParameters)
     }
 
     /// Initializer to construct an authentication flow from a pre-defined configuration and client.
     /// - Parameters:
     ///   - client: The `OAuth2Client` to use with this flow.
     ///   - additionalParameters: Optional additional query string parameters you would like to supply to the authorization server.
-    public required init(client: OAuth2Client,
-                         additionalParameters: [String: any APIRequestArgument]? = nil) throws
+    public required convenience init(client: OAuth2Client,
+                                     additionalParameters: [String: any APIRequestArgument]? = nil) throws
     {
         guard client.configuration.redirectUri != nil else {
             throw OAuth2Error.missingRedirectUri
         }
-        
+     
+        self.init(verifiedClient: client, additionalParameters: additionalParameters)
+    }
+
+    @usableFromInline
+    init(verifiedClient client: OAuth2Client,
+         additionalParameters: [String: any APIRequestArgument]? = nil)
+    {
         // Ensure this SDK's static version is included in the user agent.
         SDKVersion.register(sdk: Version)
         
@@ -146,12 +179,12 @@ public class AuthorizationCodeFlow: AuthenticationFlow {
         
         client.add(delegate: self)
     }
-    
+
     /// Initiates an authentication flow, with an optional ``Context-swift.struct``.
     ///
     /// This method is used to begin an authentication session. It is asynchronous, and will invoke the appropriate delegate methods when a response is received.
     /// - Parameters:
-    ///   - options: Options to customize the authentication flow.
+    ///   - context: Optional context to provide when customizing the state parameter.
     ///   - completion: Completion block for receiving the response.
     public func start(with context: Context = .init(),
                       completion: @escaping (Result<URL, OAuth2Error>) -> Void)
@@ -224,11 +257,13 @@ public class AuthorizationCodeFlow: AuthenticationFlow {
                     let error = OAuth2Error(error)
                     self.delegateCollection.invoke { $0.authentication(flow: self, received: error) }
                     completion(.failure(error))
+
+                    self.reset()
                     return
                 }
                 
                 self.client.exchange(token: request) { result in
-                    self.reset()
+                    defer { self.reset() }
                     
                     switch result {
                     case .success(let response):
@@ -243,6 +278,7 @@ public class AuthorizationCodeFlow: AuthenticationFlow {
             case .failure(let error):
                 self.delegateCollection.invoke { $0.authentication(flow: self, received: error) }
                 completion(.failure(error))
+                self.reset()
             }
         }
     }
@@ -263,7 +299,6 @@ extension AuthorizationCodeFlow {
     /// This method is used to begin an authentication session.
     /// - Parameters:
     ///   - context: Optional context to provide when customizing the state parameter.
-    ///   - options: Options to customize this authentication flow.
     /// - Returns: The URL a user should be presented with within a browser, to continue authorization.
     public func start(with context: Context = .init()) async throws -> URL {
         try await withCheckedThrowingContinuation { continuation in

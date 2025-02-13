@@ -25,25 +25,28 @@ extension OAuth2Client {
     ///
     /// > Important: This struct is intended for internal use, and may be subject to change.
     public struct PropertyListConfiguration {
-        private static let ignoreAdditionalKeys: Set<String> = ["issuer", "issuer_url", "client_id", "scope", "scopes", "redirect_uri", "logout_redirect_uri"]
+        private static let ignoreAdditionalKeys: Set<String> = ["issuer", "issuer_url", "client_id", "scope", "scopes", "redirect_uri", "logout_redirect_uri", "client_secret"]
         
         /// The client issuer URL, defined in the "issuer" key.
-        public let issuerURL: URL
+        public var issuerURL: URL
         
         /// The client ID, defined in the "clientId" key.
-        public let clientId: String
+        public var clientId: String
         
         /// The client scopes, defined in the "scopes" key.
-        public let scope: String
+        public var scope: [String]
         
         /// The client's redirect URI, if one is applicable, defined in the "redirectUri" key.
-        public let redirectUri: URL?
+        public var redirectUri: URL?
         
         /// The client's logout redirect URI, if one is applicable, defined in the "logoutRedirectUri" key.
-        public let logoutRedirectUri: URL?
+        public var logoutRedirectUri: URL?
+        
+        /// The form of client authentication desired from the configuration.
+        public var authentication: OAuth2Client.ClientAuthentication
         
         /// Additional parameters defined by the developer within the property list.
-        public let additionalParameters: [String: APIRequestArgument]?
+        public var additionalParameters: [String: APIRequestArgument]?
         
         /// Default initializer that reads the `Okta.plist` file from the application's main bundle.
         public init() throws {
@@ -80,7 +83,7 @@ extension OAuth2Client {
                   !clientId.isEmpty,
                   let issuer = dict.value("issuer", or: "issuer_url"),
                   let issuerUrl = URL(string: issuer),
-                  let scope = dict.value("scope", or: "scopes"),
+                  let scope = dict.value("scope", or: "scopes")?.components(separatedBy: .whitespaces),
                   !scope.isEmpty
             else {
                 throw PropertyListConfigurationError.missingConfigurationValues
@@ -100,6 +103,13 @@ extension OAuth2Client {
                 logoutRedirectUri = nil
             }
             
+            let authentication: OAuth2Client.ClientAuthentication
+            if let clientSecret = dict.value("client_secret", or: "clientSecret") {
+                authentication = .clientSecret(clientSecret)
+            } else {
+                authentication = .none
+            }
+            
             // Filter only additional parameters
             let additionalParameters = rawDict.filter { (key, _) in
                 !Self.ignoreAdditionalKeys.contains(key) &&
@@ -111,14 +121,16 @@ extension OAuth2Client {
                       scope: scope,
                       redirectUri: redirectUri,
                       logoutRedirectUri: logoutRedirectUri,
+                      authentication: authentication,
                       additionalParameters: additionalParameters.isEmpty ? nil : additionalParameters)
         }
         
         init(issuerURL: URL,
              clientId: String,
-             scope: String,
+             scope: [String],
              redirectUri: URL? = nil,
              logoutRedirectUri: URL? = nil,
+             authentication: OAuth2Client.ClientAuthentication = .none,
              additionalParameters: [String: String]? = nil)
         {
             self.issuerURL = issuerURL
@@ -126,6 +138,7 @@ extension OAuth2Client {
             self.scope = scope
             self.redirectUri = redirectUri
             self.logoutRedirectUri = logoutRedirectUri
+            self.authentication = authentication
             self.additionalParameters = additionalParameters
         }
     }

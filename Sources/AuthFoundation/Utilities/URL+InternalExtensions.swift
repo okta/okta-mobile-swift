@@ -32,4 +32,16 @@ extension URL {
         #endif
         // swiftlint:enable force_unwrapping
     }
+    
+    @inlinable
+    var appendingDiscoveryURL: URL {
+        var relativeURL = self
+        
+        // Ensure the base URL contains a trailing slash in its path, so request paths can be safely appended.
+        if !relativeURL.lastPathComponent.isEmpty {
+            relativeURL = relativeURL.appendingComponent("")
+        }
+        
+        return relativeURL.appendingComponent(".well-known/openid-configuration")
+    }
 }

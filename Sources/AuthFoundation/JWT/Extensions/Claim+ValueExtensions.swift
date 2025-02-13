@@ -54,9 +54,18 @@ public extension HasClaims {
 /// Extension which introduces array-value conversion functions for ``ClaimConvertable`` types.
 public extension HasClaims {
     /// Returns the value for the given key as an array of values converted using a``ClaimConvertable`` type.
+    ///
+    /// > Note: If the underlying payload value is a String, and the result type is expected to be a String array `[String]`, this function will automatically split the value by whitespaces.
     /// - Parameter key: String payload key name.
     /// - Returns: Value converted to an array of the requested type.
     func value<T: ClaimConvertable>(for key: String) throws -> [T] {
+        if T.self == String.self,
+           let value = payload[key] as? String,
+           let result = value.components(separatedBy: .whitespaces) as? [T]
+        {
+            return result
+        }
+
         guard let array = payload[key] as? [ClaimConvertable]
         else {
             throw ClaimError.missingRequiredValue(key: key)
@@ -66,6 +75,8 @@ public extension HasClaims {
     }
     
     /// Returns the value for the given key as an array of values converted using a``ClaimConvertable`` type.
+    ///
+    /// > Note: If the underlying payload value is a String, and the result type is expected to be a String array `[String]`, this function will automatically split the value by whitespaces.
     /// - Parameter claim: The claim type to retrieve.
     /// - Returns: Value converted to an array of the requested type.
     func value<T: ClaimConvertable>(for claim: ClaimType) throws -> [T] {
@@ -73,14 +84,24 @@ public extension HasClaims {
     }
     
     /// Returns the optional value for the given key as an array of values converted using a``ClaimConvertable`` type.
+    ///
+    /// > Note: If the underlying payload value is a String, and the result type is expected to be a String array `[String]`, this function will automatically split the value by whitespaces.
     /// - Parameter key: String payload key name.
     /// - Returns: Optional value converted to an array of the requested type.
     func value<T: ClaimConvertable>(for key: String) -> [T]? {
+        if T.self == String.self,
+           let value = payload[key] as? String
+        {
+            return value.components(separatedBy: .whitespaces) as? [T]
+        }
+        
         let array = payload[key] as? [ClaimConvertable]
         return array?.compactMap { T.convert(from: $0) }
     }
 
     /// Returns the optional value for the given key as an array of values converted using a``ClaimConvertable`` type.
+    ///
+    /// > Note: If the underlying payload value is a String, and the result type is expected to be a String array `[String]`, this function will automatically split the value by whitespaces.
     /// - Parameter claim: The claim type to retrieve.
     /// - Returns: Optional value converted to an array of the requested type.
     func value<T: ClaimConvertable>(for claim: ClaimType) -> [T]? {
@@ -141,11 +162,15 @@ public extension HasClaims {
 /// Extension which introduces array-value subscript conversion functions for ``ClaimConvertable`` types.
 public extension HasClaims {
     /// Return the given claim's value, defined with the given enum value, as the expectred ``ClaimConvertable``value type.
+    ///
+    /// > Note: If the underlying payload value is a String, and the result type is expected to be a String array `[String]`, this function will automatically split the value by whitespaces.
     subscript<T: ClaimConvertable>(_ claim: ClaimType) -> [T]? {
         value(for: claim)
     }
     
     /// Return the given claim's value, defined with the given enum value, as the expectred ``ClaimConvertable``value type.
+    ///
+    /// > Note: If the underlying payload value is a String, and the result type is expected to be a String array `[String]`, this function will automatically split the value by whitespaces.
     subscript<T: ClaimConvertable>(_ key: String) -> [T]? {
         value(for: key)
     }

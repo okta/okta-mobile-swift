@@ -86,7 +86,7 @@ public class SessionLogoutFlow: LogoutFlow {
     ///   - additionalParameters: Optional additional parameters you would like to supply to the authorization server
     public convenience init(issuerURL: URL,
                             clientId: String,
-                            scope: String,
+                            scope: ClaimCollection<[String]>,
                             logoutRedirectUri: URL? = nil,
                             additionalParameters: [String: String]? = nil)
     {
@@ -126,11 +126,12 @@ public class SessionLogoutFlow: LogoutFlow {
         inProgress = true
         
         client.openIdConfiguration { result in
+            defer { self.reset() }
+
             switch result {
             case .failure(let error):
                 self.delegateCollection.invoke { $0.logout(flow: self, received: error) }
                 completion(.failure(error))
-                self.reset()
 
             case .success(let configuration):
                 do {
@@ -145,12 +146,10 @@ public class SessionLogoutFlow: LogoutFlow {
                     self.context = context
                     
                     completion(.success(url))
-                    self.reset()
                 } catch {
                     let oauthError = error as? OAuth2Error ?? .error(error)
                     self.delegateCollection.invoke { $0.logout(flow: self, received: oauthError) }
                     completion(.failure(oauthError))
-                    self.reset()
                 }
             }
         }
