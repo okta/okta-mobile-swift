@@ -81,9 +81,17 @@
   "relationshipsSections" : [
     {
       "identifiers" : [
-        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/Swift\/Dictionary",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/AuthenticationContext"
+      ],
+      "kind" : "relationships",
+      "title" : "Inherited By",
+      "type" : "inheritedBy"
+    },
+    {
+      "identifiers" : [
         "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/OAuth2Client\/ClientAuthentication",
-        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/OAuth2Client\/PropertyListConfiguration"
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/OAuth2Client\/Configuration-swift.struct",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/StandardAuthenticationContext"
       ],
       "kind" : "relationships",
       "title" : "Conforming Types",
@@ -101,10 +109,9 @@
   "topicSections" : [
     {
       "identifiers" : [
-        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/ProvidesOAuth2Parameters\/additionalParameters",
-        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/ProvidesOAuth2Parameters\/shouldOverride"
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/ProvidesOAuth2Parameters\/parameters(for:)"
       ],
-      "title" : "Instance Properties"
+      "title" : "Instance Methods"
     }
   ],
   "variants" : [
@@ -134,6 +141,161 @@
   "title" : "AuthFoundation",
   "type" : "topic",
   "url" : "\/documentation\/authfoundation"
+},
+"doc://AuthFoundation/documentation/AuthFoundation/AuthenticationContext": {
+  "abstract" : [
+    {
+      "text" : "Common protocol that all ",
+      "type" : "text"
+    },
+    {
+      "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/AuthenticationFlow",
+      "isActive" : true,
+      "type" : "reference"
+    },
+    {
+      "text" : " ",
+      "type" : "text"
+    },
+    {
+      "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/AuthenticationFlow\/Context-swift.associatedtype",
+      "isActive" : true,
+      "type" : "reference"
+    },
+    {
+      "text" : " type aliases must conform to.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "protocol"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "AuthenticationContext"
+    }
+  ],
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/AuthenticationContext",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "AuthenticationContext"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "AuthenticationContext",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/authenticationcontext"
+},
+"doc://AuthFoundation/documentation/AuthFoundation/AuthenticationFlow": {
+  "abstract" : [
+    {
+      "text" : "A protocol defining a type of authentication flow.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "protocol"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "AuthenticationFlow"
+    }
+  ],
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/AuthenticationFlow",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "AuthenticationFlow"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "AuthenticationFlow",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/authenticationflow"
+},
+"doc://AuthFoundation/documentation/AuthFoundation/AuthenticationFlow/Context-swift.associatedtype": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "associatedtype"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "Context"
+    },
+    {
+      "kind" : "text",
+      "text" : " : "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:14AuthFoundation21AuthenticationContextP",
+      "text" : "AuthenticationContext"
+    }
+  ],
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/AuthenticationFlow\/Context-swift.associatedtype",
+  "kind" : "symbol",
+  "required" : true,
+  "role" : "symbol",
+  "title" : "Context",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/authenticationflow\/context-swift.associatedtype"
+},
+"doc://AuthFoundation/documentation/AuthFoundation/OAuth2Client": {
+  "abstract" : [
+    {
+      "text" : "An OAuth2 client, used to interact with a given authorization server.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "class"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "OAuth2Client"
+    }
+  ],
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/OAuth2Client",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "OAuth2Client"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "OAuth2Client",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/oauth2client"
 },
 "doc://AuthFoundation/documentation/AuthFoundation/OAuth2Client/ClientAuthentication": {
   "abstract" : [
@@ -169,18 +331,19 @@
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/oauth2client\/clientauthentication"
 },
-"doc://AuthFoundation/documentation/AuthFoundation/OAuth2Client/PropertyListConfiguration": {
+"doc://AuthFoundation/documentation/AuthFoundation/OAuth2Client/Configuration-swift.struct": {
   "abstract" : [
     {
-      "text" : "Utility struct used internally to process ",
+      "text" : "The configuration for an ",
       "type" : "text"
     },
     {
-      "code" : "Okta.plist",
-      "type" : "codeVoice"
+      "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/OAuth2Client",
+      "isActive" : true,
+      "type" : "reference"
     },
     {
-      "text" : " and other similar client configuration files.",
+      "text" : ".",
       "type" : "text"
     }
   ],
@@ -195,21 +358,21 @@
     },
     {
       "kind" : "identifier",
-      "text" : "PropertyListConfiguration"
+      "text" : "Configuration"
     }
   ],
-  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/OAuth2Client\/PropertyListConfiguration",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/OAuth2Client\/Configuration-swift.struct",
   "kind" : "symbol",
   "navigatorTitle" : [
     {
       "kind" : "identifier",
-      "text" : "PropertyListConfiguration"
+      "text" : "Configuration"
     }
   ],
   "role" : "symbol",
-  "title" : "OAuth2Client.PropertyListConfiguration",
+  "title" : "OAuth2Client.Configuration",
   "type" : "topic",
-  "url" : "\/documentation\/authfoundation\/oauth2client\/propertylistconfiguration"
+  "url" : "\/documentation\/authfoundation\/oauth2client\/configuration-swift.struct"
 },
 "doc://AuthFoundation/documentation/AuthFoundation/ProvidesOAuth2Parameters": {
   "abstract" : [
@@ -245,17 +408,17 @@
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/providesoauth2parameters"
 },
-"doc://AuthFoundation/documentation/AuthFoundation/ProvidesOAuth2Parameters/additionalParameters": {
+"doc://AuthFoundation/documentation/AuthFoundation/ProvidesOAuth2Parameters/parameters(for:)": {
   "abstract" : [
     {
-      "text" : "The additional parameters this authentication type will contribute to outgoing API requests when needed.",
+      "text" : "The OAuth2 parameters this authentication type will contribute to outgoing API requests when needed.",
       "type" : "text"
     }
   ],
   "fragments" : [
     {
       "kind" : "keyword",
-      "text" : "var"
+      "text" : "func"
     },
     {
       "kind" : "text",
@@ -263,11 +426,28 @@
     },
     {
       "kind" : "identifier",
-      "text" : "additionalParameters"
+      "text" : "parameters"
     },
     {
       "kind" : "text",
-      "text" : ": ["
+      "text" : "("
+    },
+    {
+      "kind" : "externalParam",
+      "text" : "for"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:14AuthFoundation24OAuth2APIRequestCategoryO",
+      "text" : "OAuth2APIRequestCategory"
+    },
+    {
+      "kind" : "text",
+      "text" : ") -> ["
     },
     {
       "kind" : "typeIdentifier",
@@ -288,25 +468,43 @@
       "text" : "]?"
     }
   ],
-  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/ProvidesOAuth2Parameters\/additionalParameters",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/ProvidesOAuth2Parameters\/parameters(for:)",
   "kind" : "symbol",
   "required" : true,
   "role" : "symbol",
-  "title" : "additionalParameters",
+  "title" : "parameters(for:)",
   "type" : "topic",
-  "url" : "\/documentation\/authfoundation\/providesoauth2parameters\/additionalparameters"
+  "url" : "\/documentation\/authfoundation\/providesoauth2parameters\/parameters(for:)"
 },
-"doc://AuthFoundation/documentation/AuthFoundation/ProvidesOAuth2Parameters/shouldOverride": {
+"doc://AuthFoundation/documentation/AuthFoundation/StandardAuthenticationContext": {
   "abstract" : [
     {
-      "text" : "Indicates if the parameters included in the result should override those previously declared.",
+      "text" : "Common ",
+      "type" : "text"
+    },
+    {
+      "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/AuthenticationContext",
+      "isActive" : true,
+      "type" : "reference"
+    },
+    {
+      "text" : " implementation for common or generic implementations of ",
+      "type" : "text"
+    },
+    {
+      "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/AuthenticationFlow",
+      "isActive" : true,
+      "type" : "reference"
+    },
+    {
+      "text" : ".",
       "type" : "text"
     }
   ],
   "fragments" : [
     {
       "kind" : "keyword",
-      "text" : "var"
+      "text" : "struct"
     },
     {
       "kind" : "text",
@@ -314,30 +512,21 @@
     },
     {
       "kind" : "identifier",
-      "text" : "shouldOverride"
-    },
-    {
-      "kind" : "text",
-      "text" : ": "
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:Sb",
-      "text" : "Bool"
+      "text" : "StandardAuthenticationContext"
     }
   ],
-  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/ProvidesOAuth2Parameters\/shouldOverride",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/StandardAuthenticationContext",
   "kind" : "symbol",
-  "required" : true,
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "StandardAuthenticationContext"
+    }
+  ],
   "role" : "symbol",
-  "title" : "shouldOverride",
+  "title" : "StandardAuthenticationContext",
   "type" : "topic",
-  "url" : "\/documentation\/authfoundation\/providesoauth2parameters\/shouldoverride"
-},
-"doc://AuthFoundation/documentation/AuthFoundation/Swift/Dictionary": {
-  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/Swift\/Dictionary",
-  "title" : "Dictionary",
-  "type" : "unresolvable"
+  "url" : "\/documentation\/authfoundation\/standardauthenticationcontext"
 }
 }
 }

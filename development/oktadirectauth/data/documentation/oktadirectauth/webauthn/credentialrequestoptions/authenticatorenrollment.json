@@ -84,7 +84,8 @@
     {
       "identifiers" : [
         "doc:\/\/OktaDirectAuth\/Se",
-        "doc:\/\/OktaDirectAuth\/SE"
+        "doc:\/\/OktaDirectAuth\/SE",
+        "doc:\/\/OktaDirectAuth\/SQ"
       ],
       "kind" : "relationships",
       "title" : "Conforms To",
@@ -113,6 +114,13 @@
         "doc:\/\/OktaDirectAuth\/documentation\/OktaDirectAuth\/WebAuthn\/CredentialRequestOptions\/AuthenticatorEnrollment\/profile"
       ],
       "title" : "Instance Properties"
+    },
+    {
+      "generated" : true,
+      "identifiers" : [
+        "doc:\/\/OktaDirectAuth\/documentation\/OktaDirectAuth\/WebAuthn\/CredentialRequestOptions\/AuthenticatorEnrollment\/Equatable-Implementations"
+      ],
+      "title" : "Default Implementations"
     }
   ],
   "variants" : [
@@ -132,6 +140,11 @@
 "doc://OktaDirectAuth/SE": {
   "identifier" : "doc:\/\/OktaDirectAuth\/SE",
   "title" : "Swift.Encodable",
+  "type" : "unresolvable"
+},
+"doc://OktaDirectAuth/SQ": {
+  "identifier" : "doc:\/\/OktaDirectAuth\/SQ",
+  "title" : "Swift.Equatable",
   "type" : "unresolvable"
 },
 "doc://OktaDirectAuth/Se": {
@@ -254,6 +267,17 @@
   "title" : "WebAuthn.CredentialRequestOptions.AuthenticatorEnrollment",
   "type" : "topic",
   "url" : "\/documentation\/oktadirectauth\/webauthn\/credentialrequestoptions\/authenticatorenrollment"
+},
+"doc://OktaDirectAuth/documentation/OktaDirectAuth/WebAuthn/CredentialRequestOptions/AuthenticatorEnrollment/Equatable-Implementations": {
+  "abstract" : [
+
+  ],
+  "identifier" : "doc:\/\/OktaDirectAuth\/documentation\/OktaDirectAuth\/WebAuthn\/CredentialRequestOptions\/AuthenticatorEnrollment\/Equatable-Implementations",
+  "kind" : "article",
+  "role" : "collectionGroup",
+  "title" : "Equatable Implementations",
+  "type" : "topic",
+  "url" : "\/documentation\/oktadirectauth\/webauthn\/credentialrequestoptions\/authenticatorenrollment\/equatable-implementations"
 },
 "doc://OktaDirectAuth/documentation/OktaDirectAuth/WebAuthn/CredentialRequestOptions/AuthenticatorEnrollment/credentialId": {
   "abstract" : [

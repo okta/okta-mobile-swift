@@ -78,6 +78,43 @@
         }
       ],
       "kind" : "declarations"
+    },
+    {
+      "content" : [
+        {
+          "anchor" : "overview",
+          "level" : 2,
+          "text" : "Overview",
+          "type" : "heading"
+        },
+        {
+          "content" : [
+            {
+              "inlineContent" : [
+                {
+                  "text" : "This object is used to internally track state associated with the continuation, and is not actionable by a developer.",
+                  "type" : "text"
+                }
+              ],
+              "type" : "paragraph"
+            }
+          ],
+          "name" : "Note",
+          "style" : "note",
+          "type" : "aside"
+        }
+      ],
+      "kind" : "content"
+    }
+  ],
+  "relationshipsSections" : [
+    {
+      "identifiers" : [
+        "doc:\/\/OktaDirectAuth\/SQ"
+      ],
+      "kind" : "relationships",
+      "title" : "Conforms To",
+      "type" : "conformsTo"
     }
   ],
   "schemaVersion" : {
@@ -87,6 +124,15 @@
   },
   "sections" : [
 
+  ],
+  "topicSections" : [
+    {
+      "generated" : true,
+      "identifiers" : [
+        "doc:\/\/OktaDirectAuth\/documentation\/OktaDirectAuth\/DirectAuthenticationFlow\/ContinuationType\/BindingContext\/Equatable-Implementations"
+      ],
+      "title" : "Default Implementations"
+    }
   ],
   "variants" : [
     {
@@ -102,6 +148,11 @@
   ]
 , 
 "references": {
+"doc://OktaDirectAuth/SQ": {
+  "identifier" : "doc:\/\/OktaDirectAuth\/SQ",
+  "title" : "Swift.Equatable",
+  "type" : "unresolvable"
+},
 "doc://OktaDirectAuth/documentation/OktaDirectAuth": {
   "abstract" : [
     {
@@ -217,6 +268,17 @@
   "title" : "DirectAuthenticationFlow.ContinuationType.BindingContext",
   "type" : "topic",
   "url" : "\/documentation\/oktadirectauth\/directauthenticationflow\/continuationtype\/bindingcontext"
+},
+"doc://OktaDirectAuth/documentation/OktaDirectAuth/DirectAuthenticationFlow/ContinuationType/BindingContext/Equatable-Implementations": {
+  "abstract" : [
+
+  ],
+  "identifier" : "doc:\/\/OktaDirectAuth\/documentation\/OktaDirectAuth\/DirectAuthenticationFlow\/ContinuationType\/BindingContext\/Equatable-Implementations",
+  "kind" : "article",
+  "role" : "collectionGroup",
+  "title" : "Equatable Implementations",
+  "type" : "topic",
+  "url" : "\/documentation\/oktadirectauth\/directauthenticationflow\/continuationtype\/bindingcontext\/equatable-implementations"
 }
 }
 }

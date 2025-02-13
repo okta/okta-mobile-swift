@@ -1,0 +1,349 @@
+{
+  "abstract" : [
+    {
+      "text" : "Categorizes the types of requests made to an authorization server.",
+      "type" : "text"
+    }
+  ],
+  "hierarchy" : {
+    "paths" : [
+      [
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation"
+      ]
+    ]
+  },
+  "identifier" : {
+    "interfaceLanguage" : "swift",
+    "url" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/OAuth2APIRequestCategory"
+  },
+  "kind" : "symbol",
+  "metadata" : {
+    "externalID" : "s:14AuthFoundation24OAuth2APIRequestCategoryO",
+    "fragments" : [
+      {
+        "kind" : "keyword",
+        "text" : "enum"
+      },
+      {
+        "kind" : "text",
+        "text" : " "
+      },
+      {
+        "kind" : "identifier",
+        "text" : "OAuth2APIRequestCategory"
+      }
+    ],
+    "modules" : [
+      {
+        "name" : "AuthFoundation"
+      }
+    ],
+    "navigatorTitle" : [
+      {
+        "kind" : "identifier",
+        "text" : "OAuth2APIRequestCategory"
+      }
+    ],
+    "role" : "symbol",
+    "roleHeading" : "Enumeration",
+    "symbolKind" : "enum",
+    "title" : "OAuth2APIRequestCategory"
+  },
+  "primaryContentSections" : [
+    {
+      "declarations" : [
+        {
+          "languages" : [
+            "swift"
+          ],
+          "platforms" : [
+            "macOS"
+          ],
+          "tokens" : [
+            {
+              "kind" : "keyword",
+              "text" : "enum"
+            },
+            {
+              "kind" : "text",
+              "text" : " "
+            },
+            {
+              "kind" : "identifier",
+              "text" : "OAuth2APIRequestCategory"
+            }
+          ]
+        }
+      ],
+      "kind" : "declarations"
+    }
+  ],
+  "relationshipsSections" : [
+    {
+      "identifiers" : [
+        "doc:\/\/AuthFoundation\/s12CaseIterableP",
+        "doc:\/\/AuthFoundation\/SQ",
+        "doc:\/\/AuthFoundation\/SH"
+      ],
+      "kind" : "relationships",
+      "title" : "Conforms To",
+      "type" : "conformsTo"
+    }
+  ],
+  "schemaVersion" : {
+    "major" : 0,
+    "minor" : 3,
+    "patch" : 0
+  },
+  "sections" : [
+
+  ],
+  "topicSections" : [
+    {
+      "identifiers" : [
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/OAuth2APIRequestCategory\/authorization",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/OAuth2APIRequestCategory\/configuration",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/OAuth2APIRequestCategory\/other",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/OAuth2APIRequestCategory\/resource",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/OAuth2APIRequestCategory\/token"
+      ],
+      "title" : "Enumeration Cases"
+    },
+    {
+      "generated" : true,
+      "identifiers" : [
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/OAuth2APIRequestCategory\/Equatable-Implementations"
+      ],
+      "title" : "Default Implementations"
+    }
+  ],
+  "variants" : [
+    {
+      "paths" : [
+        "\/documentation\/authfoundation\/oauth2apirequestcategory"
+      ],
+      "traits" : [
+        {
+          "interfaceLanguage" : "swift"
+        }
+      ]
+    }
+  ]
+, 
+"references": {
+"doc://AuthFoundation/SH": {
+  "identifier" : "doc:\/\/AuthFoundation\/SH",
+  "title" : "Swift.Hashable",
+  "type" : "unresolvable"
+},
+"doc://AuthFoundation/SQ": {
+  "identifier" : "doc:\/\/AuthFoundation\/SQ",
+  "title" : "Swift.Equatable",
+  "type" : "unresolvable"
+},
+"doc://AuthFoundation/documentation/AuthFoundation": {
+  "abstract" : [
+    {
+      "text" : "Library that provides foundational features used by Okta’s authentication libraries, as well as APIs used to work with tokens and user credentials.",
+      "type" : "text"
+    }
+  ],
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation",
+  "kind" : "symbol",
+  "role" : "collection",
+  "title" : "AuthFoundation",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation"
+},
+"doc://AuthFoundation/documentation/AuthFoundation/OAuth2APIRequestCategory": {
+  "abstract" : [
+    {
+      "text" : "Categorizes the types of requests made to an authorization server.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "enum"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "OAuth2APIRequestCategory"
+    }
+  ],
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/OAuth2APIRequestCategory",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "OAuth2APIRequestCategory"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "OAuth2APIRequestCategory",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/oauth2apirequestcategory"
+},
+"doc://AuthFoundation/documentation/AuthFoundation/OAuth2APIRequestCategory/Equatable-Implementations": {
+  "abstract" : [
+
+  ],
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/OAuth2APIRequestCategory\/Equatable-Implementations",
+  "kind" : "article",
+  "role" : "collectionGroup",
+  "title" : "Equatable Implementations",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/oauth2apirequestcategory\/equatable-implementations"
+},
+"doc://AuthFoundation/documentation/AuthFoundation/OAuth2APIRequestCategory/authorization": {
+  "abstract" : [
+    {
+      "text" : "Initiates an authorization workflow.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "case"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "authorization"
+    }
+  ],
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/OAuth2APIRequestCategory\/authorization",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "OAuth2APIRequestCategory.authorization",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/oauth2apirequestcategory\/authorization"
+},
+"doc://AuthFoundation/documentation/AuthFoundation/OAuth2APIRequestCategory/configuration": {
+  "abstract" : [
+    {
+      "text" : "Requests used for discovery of an authorization server’s configuration",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "case"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "configuration"
+    }
+  ],
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/OAuth2APIRequestCategory\/configuration",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "OAuth2APIRequestCategory.configuration",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/oauth2apirequestcategory\/configuration"
+},
+"doc://AuthFoundation/documentation/AuthFoundation/OAuth2APIRequestCategory/other": {
+  "abstract" : [
+    {
+      "text" : "Other uncategorized requests.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "case"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "other"
+    }
+  ],
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/OAuth2APIRequestCategory\/other",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "OAuth2APIRequestCategory.other",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/oauth2apirequestcategory\/other"
+},
+"doc://AuthFoundation/documentation/AuthFoundation/OAuth2APIRequestCategory/resource": {
+  "abstract" : [
+    {
+      "text" : "Perform a resource server request using an access token.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "case"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "resource"
+    }
+  ],
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/OAuth2APIRequestCategory\/resource",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "OAuth2APIRequestCategory.resource",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/oauth2apirequestcategory\/resource"
+},
+"doc://AuthFoundation/documentation/AuthFoundation/OAuth2APIRequestCategory/token": {
+  "abstract" : [
+    {
+      "text" : "Requests a token from an authorization server.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "case"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "token"
+    }
+  ],
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/OAuth2APIRequestCategory\/token",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "OAuth2APIRequestCategory.token",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/oauth2apirequestcategory\/token"
+},
+"doc://AuthFoundation/s12CaseIterableP": {
+  "identifier" : "doc:\/\/AuthFoundation\/s12CaseIterableP",
+  "title" : "Swift.CaseIterable",
+  "type" : "unresolvable"
+}
+}
+}

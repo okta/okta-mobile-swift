@@ -1,7 +1,15 @@
 {
   "abstract" : [
     {
-      "text" : "Initializer that uses the configuration defined within the given file URL.",
+      "text" : "Inherited from ",
+      "type" : "text"
+    },
+    {
+      "code" : "AuthenticationFlow.init(plist:)",
+      "type" : "codeVoice"
+    },
+    {
+      "text" : ".",
       "type" : "text"
     }
   ],
@@ -10,6 +18,11 @@
       [
         "doc:\/\/OktaDirectAuth\/documentation\/OktaDirectAuth",
         "doc:\/\/OktaDirectAuth\/documentation\/OktaDirectAuth\/DirectAuthenticationFlow"
+      ],
+      [
+        "doc:\/\/OktaDirectAuth\/documentation\/OktaDirectAuth",
+        "doc:\/\/OktaDirectAuth\/documentation\/OktaDirectAuth\/DirectAuthenticationFlow",
+        "doc:\/\/OktaDirectAuth\/documentation\/OktaDirectAuth\/DirectAuthenticationFlow\/AuthenticationFlow-Implementations"
       ]
     ]
   },
@@ -19,16 +32,9 @@
   },
   "kind" : "symbol",
   "metadata" : {
-    "externalID" : "s:14OktaDirectAuth0B18AuthenticationFlowC5plistAC10Foundation3URLV_tKcfc",
+    "extendedModule" : "AuthFoundation",
+    "externalID" : "s:14AuthFoundation18AuthenticationFlowPAAE5plistx0B03URLV_tKcfc::SYNTHESIZED::s:14OktaDirectAuth0B18AuthenticationFlowC",
     "fragments" : [
-      {
-        "kind" : "keyword",
-        "text" : "convenience"
-      },
-      {
-        "kind" : "text",
-        "text" : " "
-      },
       {
         "kind" : "identifier",
         "text" : "init"
@@ -61,7 +67,10 @@
     ],
     "modules" : [
       {
-        "name" : "OktaDirectAuth"
+        "name" : "OktaDirectAuth",
+        "relatedModules" : [
+          "AuthFoundation"
+        ]
       }
     ],
     "role" : "symbol",
@@ -80,14 +89,6 @@
             "macOS"
           ],
           "tokens" : [
-            {
-              "kind" : "keyword",
-              "text" : "convenience"
-            },
-            {
-              "kind" : "text",
-              "text" : " "
-            },
             {
               "kind" : "keyword",
               "text" : "init"
@@ -129,33 +130,6 @@
         }
       ],
       "kind" : "declarations"
-    },
-    {
-      "kind" : "parameters",
-      "parameters" : [
-        {
-          "content" : [
-            {
-              "inlineContent" : [
-                {
-                  "text" : "File URL to a ",
-                  "type" : "text"
-                },
-                {
-                  "code" : "plist",
-                  "type" : "codeVoice"
-                },
-                {
-                  "text" : " containing client configuration.",
-                  "type" : "text"
-                }
-              ],
-              "type" : "paragraph"
-            }
-          ],
-          "name" : "fileURL"
-        }
-      ]
     }
   ],
   "schemaVersion" : {
@@ -170,9 +144,7 @@
     {
       "generated" : true,
       "identifiers" : [
-        "doc:\/\/OktaDirectAuth\/documentation\/OktaDirectAuth\/DirectAuthenticationFlow\/init()",
-        "doc:\/\/OktaDirectAuth\/documentation\/OktaDirectAuth\/DirectAuthenticationFlow\/init(issuer:clientId:scopes:supportedGrants:)",
-        "doc:\/\/OktaDirectAuth\/documentation\/OktaDirectAuth\/DirectAuthenticationFlow\/init(supportedGrants:client:)"
+        "doc:\/\/OktaDirectAuth\/documentation\/OktaDirectAuth\/DirectAuthenticationFlow\/init()"
       ],
       "title" : "Creating a flow"
     }
@@ -239,30 +211,22 @@
   "type" : "topic",
   "url" : "\/documentation\/oktadirectauth\/directauthenticationflow"
 },
+"doc://OktaDirectAuth/documentation/OktaDirectAuth/DirectAuthenticationFlow/AuthenticationFlow-Implementations": {
+  "abstract" : [
+
+  ],
+  "identifier" : "doc:\/\/OktaDirectAuth\/documentation\/OktaDirectAuth\/DirectAuthenticationFlow\/AuthenticationFlow-Implementations",
+  "kind" : "article",
+  "role" : "collectionGroup",
+  "title" : "AuthenticationFlow Implementations",
+  "type" : "topic",
+  "url" : "\/documentation\/oktadirectauth\/directauthenticationflow\/authenticationflow-implementations"
+},
 "doc://OktaDirectAuth/documentation/OktaDirectAuth/DirectAuthenticationFlow/init()": {
   "abstract" : [
-    {
-      "text" : "Initializer that uses the configuration defined within the application’s ",
-      "type" : "text"
-    },
-    {
-      "code" : "Okta.plist",
-      "type" : "codeVoice"
-    },
-    {
-      "text" : " file.",
-      "type" : "text"
-    }
+
   ],
   "fragments" : [
-    {
-      "kind" : "keyword",
-      "text" : "convenience"
-    },
-    {
-      "kind" : "text",
-      "text" : " "
-    },
     {
       "kind" : "identifier",
       "text" : "init"
@@ -283,122 +247,11 @@
   "type" : "topic",
   "url" : "\/documentation\/oktadirectauth\/directauthenticationflow\/init()"
 },
-"doc://OktaDirectAuth/documentation/OktaDirectAuth/DirectAuthenticationFlow/init(issuer:clientId:scopes:supportedGrants:)": {
-  "abstract" : [
-    {
-      "text" : "Convenience initializer to construct an authentication flow from variables.",
-      "type" : "text"
-    }
-  ],
-  "fragments" : [
-    {
-      "kind" : "keyword",
-      "text" : "convenience"
-    },
-    {
-      "kind" : "text",
-      "text" : " "
-    },
-    {
-      "kind" : "identifier",
-      "text" : "init"
-    },
-    {
-      "kind" : "text",
-      "text" : "("
-    },
-    {
-      "kind" : "externalParam",
-      "text" : "issuer"
-    },
-    {
-      "kind" : "text",
-      "text" : ": "
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:10Foundation3URLV",
-      "text" : "URL"
-    },
-    {
-      "kind" : "text",
-      "text" : ", "
-    },
-    {
-      "kind" : "externalParam",
-      "text" : "clientId"
-    },
-    {
-      "kind" : "text",
-      "text" : ": "
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:SS",
-      "text" : "String"
-    },
-    {
-      "kind" : "text",
-      "text" : ", "
-    },
-    {
-      "kind" : "externalParam",
-      "text" : "scopes"
-    },
-    {
-      "kind" : "text",
-      "text" : ": "
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:SS",
-      "text" : "String"
-    },
-    {
-      "kind" : "text",
-      "text" : ", "
-    },
-    {
-      "kind" : "externalParam",
-      "text" : "supportedGrants"
-    },
-    {
-      "kind" : "text",
-      "text" : ": ["
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:14AuthFoundation9GrantTypeO",
-      "text" : "GrantType"
-    },
-    {
-      "kind" : "text",
-      "text" : "])"
-    }
-  ],
-  "identifier" : "doc:\/\/OktaDirectAuth\/documentation\/OktaDirectAuth\/DirectAuthenticationFlow\/init(issuer:clientId:scopes:supportedGrants:)",
-  "kind" : "symbol",
-  "role" : "symbol",
-  "title" : "init(issuer:clientId:scopes:supportedGrants:)",
-  "type" : "topic",
-  "url" : "\/documentation\/oktadirectauth\/directauthenticationflow\/init(issuer:clientid:scopes:supportedgrants:)"
-},
 "doc://OktaDirectAuth/documentation/OktaDirectAuth/DirectAuthenticationFlow/init(plist:)": {
   "abstract" : [
-    {
-      "text" : "Initializer that uses the configuration defined within the given file URL.",
-      "type" : "text"
-    }
+
   ],
   "fragments" : [
-    {
-      "kind" : "keyword",
-      "text" : "convenience"
-    },
-    {
-      "kind" : "text",
-      "text" : " "
-    },
     {
       "kind" : "identifier",
       "text" : "init"
@@ -435,64 +288,6 @@
   "title" : "init(plist:)",
   "type" : "topic",
   "url" : "\/documentation\/oktadirectauth\/directauthenticationflow\/init(plist:)"
-},
-"doc://OktaDirectAuth/documentation/OktaDirectAuth/DirectAuthenticationFlow/init(supportedGrants:client:)": {
-  "abstract" : [
-    {
-      "text" : "Initializer to construct an authentication flow from a pre-defined configuration and client.",
-      "type" : "text"
-    }
-  ],
-  "fragments" : [
-    {
-      "kind" : "identifier",
-      "text" : "init"
-    },
-    {
-      "kind" : "text",
-      "text" : "("
-    },
-    {
-      "kind" : "externalParam",
-      "text" : "supportedGrants"
-    },
-    {
-      "kind" : "text",
-      "text" : ": ["
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:14AuthFoundation9GrantTypeO",
-      "text" : "GrantType"
-    },
-    {
-      "kind" : "text",
-      "text" : "], "
-    },
-    {
-      "kind" : "externalParam",
-      "text" : "client"
-    },
-    {
-      "kind" : "text",
-      "text" : ": "
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:14AuthFoundation12OAuth2ClientC",
-      "text" : "OAuth2Client"
-    },
-    {
-      "kind" : "text",
-      "text" : ")"
-    }
-  ],
-  "identifier" : "doc:\/\/OktaDirectAuth\/documentation\/OktaDirectAuth\/DirectAuthenticationFlow\/init(supportedGrants:client:)",
-  "kind" : "symbol",
-  "role" : "symbol",
-  "title" : "init(supportedGrants:client:)",
-  "type" : "topic",
-  "url" : "\/documentation\/oktadirectauth\/directauthenticationflow\/init(supportedgrants:client:)"
 }
 }
 }

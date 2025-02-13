@@ -136,7 +136,6 @@
         "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JWKS",
         "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JWTClaim",
         "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/HasClaims",
-        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/Claim",
         "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JSONClaimContainer",
         "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JSON",
         "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/AnyJSON",
@@ -150,12 +149,6 @@
   "topicSections" : [
     {
       "identifiers" : [
-        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JWK\/init(from:)"
-      ],
-      "title" : "Initializers"
-    },
-    {
-      "identifiers" : [
         "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JWK\/algorithm-swift.property",
         "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JWK\/id",
         "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JWK\/rsaExponent",
@@ -167,7 +160,6 @@
     },
     {
       "identifiers" : [
-        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JWK\/encode(to:)",
         "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JWK\/verify(token:)"
       ],
       "title" : "Instance Methods"
@@ -284,38 +276,6 @@
   "title" : "AnyJSON",
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/anyjson"
-},
-"doc://AuthFoundation/documentation/AuthFoundation/Claim": {
-  "abstract" : [
-
-  ],
-  "deprecated" : true,
-  "fragments" : [
-    {
-      "kind" : "keyword",
-      "text" : "typealias"
-    },
-    {
-      "kind" : "text",
-      "text" : " "
-    },
-    {
-      "kind" : "identifier",
-      "text" : "Claim"
-    }
-  ],
-  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/Claim",
-  "kind" : "symbol",
-  "navigatorTitle" : [
-    {
-      "kind" : "identifier",
-      "text" : "Claim"
-    }
-  ],
-  "role" : "symbol",
-  "title" : "Claim",
-  "type" : "topic",
-  "url" : "\/documentation\/authfoundation\/claim"
 },
 "doc://AuthFoundation/documentation/AuthFoundation/ClaimConvertable": {
   "abstract" : [
@@ -779,56 +739,6 @@
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/jwk\/algorithm-swift.property"
 },
-"doc://AuthFoundation/documentation/AuthFoundation/JWK/encode(to:)": {
-  "abstract" : [
-
-  ],
-  "fragments" : [
-    {
-      "kind" : "keyword",
-      "text" : "func"
-    },
-    {
-      "kind" : "text",
-      "text" : " "
-    },
-    {
-      "kind" : "identifier",
-      "text" : "encode"
-    },
-    {
-      "kind" : "text",
-      "text" : "("
-    },
-    {
-      "kind" : "externalParam",
-      "text" : "to"
-    },
-    {
-      "kind" : "text",
-      "text" : ": any "
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:s7EncoderP",
-      "text" : "Encoder"
-    },
-    {
-      "kind" : "text",
-      "text" : ") "
-    },
-    {
-      "kind" : "keyword",
-      "text" : "throws"
-    }
-  ],
-  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JWK\/encode(to:)",
-  "kind" : "symbol",
-  "role" : "symbol",
-  "title" : "encode(to:)",
-  "type" : "topic",
-  "url" : "\/documentation\/authfoundation\/jwk\/encode(to:)"
-},
 "doc://AuthFoundation/documentation/AuthFoundation/JWK/id": {
   "abstract" : [
     {
@@ -869,48 +779,6 @@
   "title" : "id",
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/jwk\/id"
-},
-"doc://AuthFoundation/documentation/AuthFoundation/JWK/init(from:)": {
-  "abstract" : [
-
-  ],
-  "fragments" : [
-    {
-      "kind" : "identifier",
-      "text" : "init"
-    },
-    {
-      "kind" : "text",
-      "text" : "("
-    },
-    {
-      "kind" : "externalParam",
-      "text" : "from"
-    },
-    {
-      "kind" : "text",
-      "text" : ": any "
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:s7DecoderP",
-      "text" : "Decoder"
-    },
-    {
-      "kind" : "text",
-      "text" : ") "
-    },
-    {
-      "kind" : "keyword",
-      "text" : "throws"
-    }
-  ],
-  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JWK\/init(from:)",
-  "kind" : "symbol",
-  "role" : "symbol",
-  "title" : "init(from:)",
-  "type" : "topic",
-  "url" : "\/documentation\/authfoundation\/jwk\/init(from:)"
 },
 "doc://AuthFoundation/documentation/AuthFoundation/JWK/rsaExponent": {
   "abstract" : [

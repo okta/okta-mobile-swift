@@ -108,7 +108,8 @@
     },
     {
       "identifiers" : [
-        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/Credential"
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/Credential",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/DebugAPIRequestObserver"
       ],
       "kind" : "relationships",
       "title" : "Conforming Types",
@@ -388,6 +389,40 @@
   "title" : "Credential",
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/credential"
+},
+"doc://AuthFoundation/documentation/AuthFoundation/DebugAPIRequestObserver": {
+  "abstract" : [
+    {
+      "text" : "Convenience class used for debugging SDK network operations.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "class"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "DebugAPIRequestObserver"
+    }
+  ],
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/DebugAPIRequestObserver",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "DebugAPIRequestObserver"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "DebugAPIRequestObserver",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/debugapirequestobserver"
 },
 "doc://AuthFoundation/documentation/AuthFoundation/GrantType": {
   "abstract" : [

@@ -105,7 +105,6 @@
       "generated" : true,
       "identifiers" : [
         "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/APIClientError",
-        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/AuthenticationError",
         "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/ClaimError",
         "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/CredentialError",
         "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JSONError",
@@ -121,15 +120,8 @@
   "topicSections" : [
     {
       "identifiers" : [
-        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/OktaAPIError\/init(from:)"
-      ],
-      "title" : "Initializers"
-    },
-    {
-      "identifiers" : [
         "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/OktaAPIError\/causes",
         "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/OktaAPIError\/code",
-        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/OktaAPIError\/errorDescription",
         "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/OktaAPIError\/id",
         "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/OktaAPIError\/link",
         "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/OktaAPIError\/summary"
@@ -222,40 +214,6 @@
   "title" : "APIClientError",
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/apiclienterror"
-},
-"doc://AuthFoundation/documentation/AuthFoundation/AuthenticationError": {
-  "abstract" : [
-    {
-      "text" : "Errors that may be generated during the process of authenticating with a variety of authentication flows.",
-      "type" : "text"
-    }
-  ],
-  "fragments" : [
-    {
-      "kind" : "keyword",
-      "text" : "enum"
-    },
-    {
-      "kind" : "text",
-      "text" : " "
-    },
-    {
-      "kind" : "identifier",
-      "text" : "AuthenticationError"
-    }
-  ],
-  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/AuthenticationError",
-  "kind" : "symbol",
-  "navigatorTitle" : [
-    {
-      "kind" : "identifier",
-      "text" : "AuthenticationError"
-    }
-  ],
-  "role" : "symbol",
-  "title" : "AuthenticationError",
-  "type" : "topic",
-  "url" : "\/documentation\/authfoundation\/authenticationerror"
 },
 "doc://AuthFoundation/documentation/AuthFoundation/ClaimError": {
   "abstract" : [
@@ -634,44 +592,6 @@
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/oktaapierror\/code"
 },
-"doc://AuthFoundation/documentation/AuthFoundation/OktaAPIError/errorDescription": {
-  "abstract" : [
-
-  ],
-  "fragments" : [
-    {
-      "kind" : "keyword",
-      "text" : "var"
-    },
-    {
-      "kind" : "text",
-      "text" : " "
-    },
-    {
-      "kind" : "identifier",
-      "text" : "errorDescription"
-    },
-    {
-      "kind" : "text",
-      "text" : ": "
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:SS",
-      "text" : "String"
-    },
-    {
-      "kind" : "text",
-      "text" : "?"
-    }
-  ],
-  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/OktaAPIError\/errorDescription",
-  "kind" : "symbol",
-  "role" : "symbol",
-  "title" : "errorDescription",
-  "type" : "topic",
-  "url" : "\/documentation\/authfoundation\/oktaapierror\/errordescription"
-},
 "doc://AuthFoundation/documentation/AuthFoundation/OktaAPIError/id": {
   "abstract" : [
     {
@@ -708,48 +628,6 @@
   "title" : "id",
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/oktaapierror\/id"
-},
-"doc://AuthFoundation/documentation/AuthFoundation/OktaAPIError/init(from:)": {
-  "abstract" : [
-
-  ],
-  "fragments" : [
-    {
-      "kind" : "identifier",
-      "text" : "init"
-    },
-    {
-      "kind" : "text",
-      "text" : "("
-    },
-    {
-      "kind" : "externalParam",
-      "text" : "from"
-    },
-    {
-      "kind" : "text",
-      "text" : ": any "
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:s7DecoderP",
-      "text" : "Decoder"
-    },
-    {
-      "kind" : "text",
-      "text" : ") "
-    },
-    {
-      "kind" : "keyword",
-      "text" : "throws"
-    }
-  ],
-  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/OktaAPIError\/init(from:)",
-  "kind" : "symbol",
-  "role" : "symbol",
-  "title" : "init(from:)",
-  "type" : "topic",
-  "url" : "\/documentation\/authfoundation\/oktaapierror\/init(from:)"
 },
 "doc://AuthFoundation/documentation/AuthFoundation/OktaAPIError/link": {
   "abstract" : [

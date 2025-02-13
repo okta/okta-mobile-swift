@@ -87,6 +87,16 @@
       "kind" : "declarations"
     }
   ],
+  "relationshipsSections" : [
+    {
+      "identifiers" : [
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/OAuth2TokenRequest"
+      ],
+      "kind" : "relationships",
+      "title" : "Inherited By",
+      "type" : "inheritedBy"
+    }
+  ],
   "schemaVersion" : {
     "major" : 0,
     "minor" : 3,
@@ -128,8 +138,8 @@
     },
     {
       "identifiers" : [
-        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/APIParsingContext\/error(from:)-5p5cl",
-        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/APIParsingContext\/resultType(from:)-4ldi5"
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/APIParsingContext\/error(from:)",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/APIParsingContext\/resultType(from:)"
       ],
       "title" : "Instance Methods"
     }
@@ -449,7 +459,7 @@
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/apiparsingcontext\/codinguserinfo"
 },
-"doc://AuthFoundation/documentation/AuthFoundation/APIParsingContext/error(from:)-5p5cl": {
+"doc://AuthFoundation/documentation/AuthFoundation/APIParsingContext/error(from:)": {
   "abstract" : [
     {
       "text" : "Generates an error response from an ",
@@ -465,7 +475,6 @@
       "type" : "text"
     }
   ],
-  "defaultImplementations" : 1,
   "fragments" : [
     {
       "kind" : "keyword",
@@ -510,15 +519,15 @@
       "text" : ")?"
     }
   ],
-  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/APIParsingContext\/error(from:)-5p5cl",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/APIParsingContext\/error(from:)",
   "kind" : "symbol",
   "required" : true,
   "role" : "symbol",
   "title" : "error(from:)",
   "type" : "topic",
-  "url" : "\/documentation\/authfoundation\/apiparsingcontext\/error(from:)-5p5cl"
+  "url" : "\/documentation\/authfoundation\/apiparsingcontext\/error(from:)"
 },
-"doc://AuthFoundation/documentation/AuthFoundation/APIParsingContext/resultType(from:)-4ldi5": {
+"doc://AuthFoundation/documentation/AuthFoundation/APIParsingContext/resultType(from:)": {
   "abstract" : [
     {
       "text" : "Enables the response from an ",
@@ -534,7 +543,6 @@
       "type" : "text"
     }
   ],
-  "defaultImplementations" : 1,
   "fragments" : [
     {
       "kind" : "keyword",
@@ -575,13 +583,13 @@
       "text" : "APIResponseResult"
     }
   ],
-  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/APIParsingContext\/resultType(from:)-4ldi5",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/APIParsingContext\/resultType(from:)",
   "kind" : "symbol",
   "required" : true,
   "role" : "symbol",
   "title" : "resultType(from:)",
   "type" : "topic",
-  "url" : "\/documentation\/authfoundation\/apiparsingcontext\/resulttype(from:)-4ldi5"
+  "url" : "\/documentation\/authfoundation\/apiparsingcontext\/resulttype(from:)"
 },
 "doc://AuthFoundation/documentation/AuthFoundation/APIRateLimit": {
   "abstract" : [
@@ -1115,6 +1123,49 @@
   "title" : "OAuth2APIRequest",
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/oauth2apirequest"
+},
+"doc://AuthFoundation/documentation/AuthFoundation/OAuth2TokenRequest": {
+  "abstract" : [
+    {
+      "text" : "Protocol that represents a type of ",
+      "type" : "text"
+    },
+    {
+      "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/APIRequest",
+      "isActive" : true,
+      "type" : "reference"
+    },
+    {
+      "text" : " that can be used to exchange a token.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "protocol"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "OAuth2TokenRequest"
+    }
+  ],
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/OAuth2TokenRequest",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "OAuth2TokenRequest"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "OAuth2TokenRequest",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/oauth2tokenrequest"
 },
 "doc://AuthFoundation/documentation/AuthFoundation/OpenIdConfiguration": {
   "abstract" : [

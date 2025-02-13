@@ -114,6 +114,14 @@
       "kind" : "relationships",
       "title" : "Inherits From",
       "type" : "inheritsFrom"
+    },
+    {
+      "identifiers" : [
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/OAuth2TokenRequest"
+      ],
+      "kind" : "relationships",
+      "title" : "Inherited By",
+      "type" : "inheritedBy"
     }
   ],
   "schemaVersion" : {
@@ -151,6 +159,7 @@
   "topicSections" : [
     {
       "identifiers" : [
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/OAuth2APIRequest\/category",
         "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/OAuth2APIRequest\/openIdConfiguration"
       ],
       "title" : "Instance Properties"
@@ -579,45 +588,6 @@
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/apirequest\/query-730ld"
 },
-"doc://AuthFoundation/documentation/AuthFoundation/APIRequest/url-3elcu": {
-  "abstract" : [
-    {
-      "text" : "The URL to perform the API request against.",
-      "type" : "text"
-    }
-  ],
-  "defaultImplementations" : 1,
-  "fragments" : [
-    {
-      "kind" : "keyword",
-      "text" : "var"
-    },
-    {
-      "kind" : "text",
-      "text" : " "
-    },
-    {
-      "kind" : "identifier",
-      "text" : "url"
-    },
-    {
-      "kind" : "text",
-      "text" : ": "
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:10Foundation3URLV",
-      "text" : "URL"
-    }
-  ],
-  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/APIRequest\/url-3elcu",
-  "kind" : "symbol",
-  "required" : true,
-  "role" : "symbol",
-  "title" : "url",
-  "type" : "topic",
-  "url" : "\/documentation\/authfoundation\/apirequest\/url-3elcu"
-},
 "doc://AuthFoundation/documentation/AuthFoundation/APIRequestArgument": {
   "abstract" : [
     {
@@ -984,28 +954,48 @@
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/oauth2apirequest"
 },
+"doc://AuthFoundation/documentation/AuthFoundation/OAuth2APIRequest/category": {
+  "abstract" : [
+    {
+      "text" : "The category for the request being made, which can be used to determine which arguments are included.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "var"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "category"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:14AuthFoundation24OAuth2APIRequestCategoryO",
+      "text" : "OAuth2APIRequestCategory"
+    }
+  ],
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/OAuth2APIRequest\/category",
+  "kind" : "symbol",
+  "required" : true,
+  "role" : "symbol",
+  "title" : "category",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/oauth2apirequest\/category"
+},
 "doc://AuthFoundation/documentation/AuthFoundation/OAuth2APIRequest/openIdConfiguration": {
   "abstract" : [
     {
-      "text" : "The ",
-      "type" : "text"
-    },
-    {
-      "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/OpenIdConfiguration",
-      "isActive" : true,
-      "type" : "reference"
-    },
-    {
-      "text" : " used to formulate this request’s ",
-      "type" : "text"
-    },
-    {
-      "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/APIRequest\/url-3elcu",
-      "isActive" : true,
-      "type" : "reference"
-    },
-    {
-      "text" : ".",
+      "text" : "The client’s Open ID Configuration object defining the settings and endpoints used to interact with this Authorization Server.",
       "type" : "text"
     }
   ],
@@ -1039,6 +1029,49 @@
   "title" : "openIdConfiguration",
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/oauth2apirequest\/openidconfiguration"
+},
+"doc://AuthFoundation/documentation/AuthFoundation/OAuth2TokenRequest": {
+  "abstract" : [
+    {
+      "text" : "Protocol that represents a type of ",
+      "type" : "text"
+    },
+    {
+      "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/APIRequest",
+      "isActive" : true,
+      "type" : "reference"
+    },
+    {
+      "text" : " that can be used to exchange a token.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "protocol"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "OAuth2TokenRequest"
+    }
+  ],
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/OAuth2TokenRequest",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "OAuth2TokenRequest"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "OAuth2TokenRequest",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/oauth2tokenrequest"
 },
 "doc://AuthFoundation/documentation/AuthFoundation/OpenIdConfiguration": {
   "abstract" : [

@@ -18,6 +18,7 @@
   },
   "kind" : "symbol",
   "metadata" : {
+    "extendedModule" : "OktaOAuth2",
     "externalID" : "s:10OktaOAuth217SessionLogoutFlowC7ContextV",
     "fragments" : [
       {
@@ -81,8 +82,6 @@
   "relationshipsSections" : [
     {
       "identifiers" : [
-        "doc:\/\/OktaOAuth2\/Se",
-        "doc:\/\/OktaOAuth2\/SE",
         "doc:\/\/OktaOAuth2\/SQ"
       ],
       "kind" : "relationships",
@@ -114,14 +113,16 @@
   "topicSections" : [
     {
       "identifiers" : [
-        "doc:\/\/OktaOAuth2\/documentation\/OktaOAuth2\/SessionLogoutFlow\/Context-swift.struct\/init(from:)",
-        "doc:\/\/OktaOAuth2\/documentation\/OktaOAuth2\/SessionLogoutFlow\/Context-swift.struct\/init(idToken:state:)"
+        "doc:\/\/OktaOAuth2\/documentation\/OktaOAuth2\/SessionLogoutFlow\/Context-swift.struct\/init(idToken:logoutHint:state:additionalParameters:)",
+        "doc:\/\/OktaOAuth2\/documentation\/OktaOAuth2\/SessionLogoutFlow\/Context-swift.struct\/init(token:logoutHint:state:additionalParameters:)"
       ],
       "title" : "Initializers"
     },
     {
       "identifiers" : [
+        "doc:\/\/OktaOAuth2\/documentation\/OktaOAuth2\/SessionLogoutFlow\/Context-swift.struct\/additionalParameters",
         "doc:\/\/OktaOAuth2\/documentation\/OktaOAuth2\/SessionLogoutFlow\/Context-swift.struct\/idToken",
+        "doc:\/\/OktaOAuth2\/documentation\/OktaOAuth2\/SessionLogoutFlow\/Context-swift.struct\/logoutHint",
         "doc:\/\/OktaOAuth2\/documentation\/OktaOAuth2\/SessionLogoutFlow\/Context-swift.struct\/logoutURL",
         "doc:\/\/OktaOAuth2\/documentation\/OktaOAuth2\/SessionLogoutFlow\/Context-swift.struct\/state"
       ],
@@ -149,19 +150,9 @@
   ]
 , 
 "references": {
-"doc://OktaOAuth2/SE": {
-  "identifier" : "doc:\/\/OktaOAuth2\/SE",
-  "title" : "Swift.Encodable",
-  "type" : "unresolvable"
-},
 "doc://OktaOAuth2/SQ": {
   "identifier" : "doc:\/\/OktaOAuth2\/SQ",
   "title" : "Swift.Equatable",
-  "type" : "unresolvable"
-},
-"doc://OktaOAuth2/Se": {
-  "identifier" : "doc:\/\/OktaOAuth2\/Se",
-  "title" : "Swift.Decodable",
   "type" : "unresolvable"
 },
 "doc://OktaOAuth2/documentation/OktaOAuth2": {
@@ -245,6 +236,47 @@
   "title" : "AuthorizationCodeFlow.Context",
   "type" : "topic",
   "url" : "\/documentation\/oktaoauth2\/authorizationcodeflow\/context-swift.struct"
+},
+"doc://OktaOAuth2/documentation/OktaOAuth2/AuthorizationCodeFlow/Context-swift.struct/loginHint": {
+  "abstract" : [
+    {
+      "text" : "The username to pre-populate if prompting for authentication.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "var"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "loginHint"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:SS",
+      "text" : "String"
+    },
+    {
+      "kind" : "text",
+      "text" : "?"
+    }
+  ],
+  "identifier" : "doc:\/\/OktaOAuth2\/documentation\/OktaOAuth2\/AuthorizationCodeFlow\/Context-swift.struct\/loginHint",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "loginHint",
+  "type" : "topic",
+  "url" : "\/documentation\/oktaoauth2\/authorizationcodeflow\/context-swift.struct\/loginhint"
 },
 "doc://OktaOAuth2/documentation/OktaOAuth2/AuthorizationCodeFlowDelegate": {
   "abstract" : [
@@ -368,17 +400,67 @@
   "type" : "topic",
   "url" : "\/documentation\/oktaoauth2\/sessionlogoutflow\/context-swift.struct\/equatable-implementations"
 },
-"doc://OktaOAuth2/documentation/OktaOAuth2/SessionLogoutFlow/Context-swift.struct/idToken": {
+"doc://OktaOAuth2/documentation/OktaOAuth2/SessionLogoutFlow/Context-swift.struct/additionalParameters": {
   "abstract" : [
     {
-      "text" : "The ID token string used for log-out.",
+      "text" : "Any additional query string parameters you would like to supply to the authorization server.",
       "type" : "text"
     }
   ],
   "fragments" : [
     {
       "kind" : "keyword",
-      "text" : "let"
+      "text" : "var"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "additionalParameters"
+    },
+    {
+      "kind" : "text",
+      "text" : ": ["
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:SS",
+      "text" : "String"
+    },
+    {
+      "kind" : "text",
+      "text" : " : any "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:14AuthFoundation18APIRequestArgumentP",
+      "text" : "APIRequestArgument"
+    },
+    {
+      "kind" : "text",
+      "text" : "]?"
+    }
+  ],
+  "identifier" : "doc:\/\/OktaOAuth2\/documentation\/OktaOAuth2\/SessionLogoutFlow\/Context-swift.struct\/additionalParameters",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "additionalParameters",
+  "type" : "topic",
+  "url" : "\/documentation\/oktaoauth2\/sessionlogoutflow\/context-swift.struct\/additionalparameters"
+},
+"doc://OktaOAuth2/documentation/OktaOAuth2/SessionLogoutFlow/Context-swift.struct/idToken": {
+  "abstract" : [
+    {
+      "text" : "The ID token hint to use when signing out.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "var"
     },
     {
       "kind" : "text",
@@ -396,6 +478,10 @@
       "kind" : "typeIdentifier",
       "preciseIdentifier" : "s:SS",
       "text" : "String"
+    },
+    {
+      "kind" : "text",
+      "text" : "?"
     }
   ],
   "identifier" : "doc:\/\/OktaOAuth2\/documentation\/OktaOAuth2\/SessionLogoutFlow\/Context-swift.struct\/idToken",
@@ -405,49 +491,7 @@
   "type" : "topic",
   "url" : "\/documentation\/oktaoauth2\/sessionlogoutflow\/context-swift.struct\/idtoken"
 },
-"doc://OktaOAuth2/documentation/OktaOAuth2/SessionLogoutFlow/Context-swift.struct/init(from:)": {
-  "abstract" : [
-
-  ],
-  "fragments" : [
-    {
-      "kind" : "identifier",
-      "text" : "init"
-    },
-    {
-      "kind" : "text",
-      "text" : "("
-    },
-    {
-      "kind" : "externalParam",
-      "text" : "from"
-    },
-    {
-      "kind" : "text",
-      "text" : ": any "
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:s7DecoderP",
-      "text" : "Decoder"
-    },
-    {
-      "kind" : "text",
-      "text" : ") "
-    },
-    {
-      "kind" : "keyword",
-      "text" : "throws"
-    }
-  ],
-  "identifier" : "doc:\/\/OktaOAuth2\/documentation\/OktaOAuth2\/SessionLogoutFlow\/Context-swift.struct\/init(from:)",
-  "kind" : "symbol",
-  "role" : "symbol",
-  "title" : "init(from:)",
-  "type" : "topic",
-  "url" : "\/documentation\/oktaoauth2\/sessionlogoutflow\/context-swift.struct\/init(from:)"
-},
-"doc://OktaOAuth2/documentation/OktaOAuth2/SessionLogoutFlow/Context-swift.struct/init(idToken:state:)": {
+"doc://OktaOAuth2/documentation/OktaOAuth2/SessionLogoutFlow/Context-swift.struct/init(idToken:logoutHint:state:additionalParameters:)": {
   "abstract" : [
     {
       "text" : "Initializer for creating a context.",
@@ -478,7 +522,24 @@
     },
     {
       "kind" : "text",
-      "text" : ", "
+      "text" : "?, "
+    },
+    {
+      "kind" : "externalParam",
+      "text" : "logoutHint"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:SS",
+      "text" : "String"
+    },
+    {
+      "kind" : "text",
+      "text" : "?, "
     },
     {
       "kind" : "externalParam",
@@ -495,15 +556,192 @@
     },
     {
       "kind" : "text",
-      "text" : "?)"
+      "text" : "?, "
+    },
+    {
+      "kind" : "externalParam",
+      "text" : "additionalParameters"
+    },
+    {
+      "kind" : "text",
+      "text" : ": ["
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:SS",
+      "text" : "String"
+    },
+    {
+      "kind" : "text",
+      "text" : " : any "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:14AuthFoundation18APIRequestArgumentP",
+      "text" : "APIRequestArgument"
+    },
+    {
+      "kind" : "text",
+      "text" : "]?)"
     }
   ],
-  "identifier" : "doc:\/\/OktaOAuth2\/documentation\/OktaOAuth2\/SessionLogoutFlow\/Context-swift.struct\/init(idToken:state:)",
+  "identifier" : "doc:\/\/OktaOAuth2\/documentation\/OktaOAuth2\/SessionLogoutFlow\/Context-swift.struct\/init(idToken:logoutHint:state:additionalParameters:)",
   "kind" : "symbol",
   "role" : "symbol",
-  "title" : "init(idToken:state:)",
+  "title" : "init(idToken:logoutHint:state:additionalParameters:)",
   "type" : "topic",
-  "url" : "\/documentation\/oktaoauth2\/sessionlogoutflow\/context-swift.struct\/init(idtoken:state:)"
+  "url" : "\/documentation\/oktaoauth2\/sessionlogoutflow\/context-swift.struct\/init(idtoken:logouthint:state:additionalparameters:)"
+},
+"doc://OktaOAuth2/documentation/OktaOAuth2/SessionLogoutFlow/Context-swift.struct/init(token:logoutHint:state:additionalParameters:)": {
+  "abstract" : [
+    {
+      "text" : "Initializer for creating a context.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "identifier",
+      "text" : "init"
+    },
+    {
+      "kind" : "text",
+      "text" : "("
+    },
+    {
+      "kind" : "externalParam",
+      "text" : "token"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:14AuthFoundation5TokenC",
+      "text" : "Token"
+    },
+    {
+      "kind" : "text",
+      "text" : ", "
+    },
+    {
+      "kind" : "externalParam",
+      "text" : "logoutHint"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:SS",
+      "text" : "String"
+    },
+    {
+      "kind" : "text",
+      "text" : "?, "
+    },
+    {
+      "kind" : "externalParam",
+      "text" : "state"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:SS",
+      "text" : "String"
+    },
+    {
+      "kind" : "text",
+      "text" : "?, "
+    },
+    {
+      "kind" : "externalParam",
+      "text" : "additionalParameters"
+    },
+    {
+      "kind" : "text",
+      "text" : ": ["
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:SS",
+      "text" : "String"
+    },
+    {
+      "kind" : "text",
+      "text" : " : any "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:14AuthFoundation18APIRequestArgumentP",
+      "text" : "APIRequestArgument"
+    },
+    {
+      "kind" : "text",
+      "text" : "]?)"
+    }
+  ],
+  "identifier" : "doc:\/\/OktaOAuth2\/documentation\/OktaOAuth2\/SessionLogoutFlow\/Context-swift.struct\/init(token:logoutHint:state:additionalParameters:)",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "init(token:logoutHint:state:additionalParameters:)",
+  "type" : "topic",
+  "url" : "\/documentation\/oktaoauth2\/sessionlogoutflow\/context-swift.struct\/init(token:logouthint:state:additionalparameters:)"
+},
+"doc://OktaOAuth2/documentation/OktaOAuth2/SessionLogoutFlow/Context-swift.struct/logoutHint": {
+  "abstract" : [
+    {
+      "text" : "A hint about the identifier used to log out (analogous to the ",
+      "type" : "text"
+    },
+    {
+      "identifier" : "doc:\/\/OktaOAuth2\/documentation\/OktaOAuth2\/AuthorizationCodeFlow\/Context-swift.struct\/loginHint",
+      "isActive" : true,
+      "type" : "reference"
+    },
+    {
+      "text" : " parameter).",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "var"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "logoutHint"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:SS",
+      "text" : "String"
+    },
+    {
+      "kind" : "text",
+      "text" : "?"
+    }
+  ],
+  "identifier" : "doc:\/\/OktaOAuth2\/documentation\/OktaOAuth2\/SessionLogoutFlow\/Context-swift.struct\/logoutHint",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "logoutHint",
+  "type" : "topic",
+  "url" : "\/documentation\/oktaoauth2\/sessionlogoutflow\/context-swift.struct\/logouthint"
 },
 "doc://OktaOAuth2/documentation/OktaOAuth2/SessionLogoutFlow/Context-swift.struct/logoutURL": {
   "abstract" : [

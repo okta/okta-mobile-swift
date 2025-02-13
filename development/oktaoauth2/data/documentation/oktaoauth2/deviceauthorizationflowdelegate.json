@@ -263,91 +263,6 @@
   "type" : "topic",
   "url" : "\/documentation\/oktaoauth2\/deviceauthorizationflow\/context-swift.struct"
 },
-"doc://OktaOAuth2/documentation/OktaOAuth2/DeviceAuthorizationFlow/start(completion:)": {
-  "abstract" : [
-    {
-      "text" : "Initiates a device authentication flow.",
-      "type" : "text"
-    }
-  ],
-  "fragments" : [
-    {
-      "kind" : "keyword",
-      "text" : "func"
-    },
-    {
-      "kind" : "text",
-      "text" : " "
-    },
-    {
-      "kind" : "identifier",
-      "text" : "start"
-    },
-    {
-      "kind" : "text",
-      "text" : "("
-    },
-    {
-      "kind" : "externalParam",
-      "text" : "completion"
-    },
-    {
-      "kind" : "text",
-      "text" : ": ("
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:s6ResultO",
-      "text" : "Result"
-    },
-    {
-      "kind" : "text",
-      "text" : "<"
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:10OktaOAuth223DeviceAuthorizationFlowC",
-      "text" : "DeviceAuthorizationFlow"
-    },
-    {
-      "kind" : "text",
-      "text" : "."
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:10OktaOAuth223DeviceAuthorizationFlowC7ContextV",
-      "text" : "Context"
-    },
-    {
-      "kind" : "text",
-      "text" : ", "
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:14AuthFoundation11OAuth2ErrorO",
-      "text" : "OAuth2Error"
-    },
-    {
-      "kind" : "text",
-      "text" : ">) -> "
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:s4Voida",
-      "text" : "Void"
-    },
-    {
-      "kind" : "text",
-      "text" : ")"
-    }
-  ],
-  "identifier" : "doc:\/\/OktaOAuth2\/documentation\/OktaOAuth2\/DeviceAuthorizationFlow\/start(completion:)",
-  "kind" : "symbol",
-  "role" : "symbol",
-  "title" : "start(completion:)",
-  "type" : "topic",
-  "url" : "\/documentation\/oktaoauth2\/deviceauthorizationflow\/start(completion:)"
-},
 "doc://OktaOAuth2/documentation/OktaOAuth2/DeviceAuthorizationFlowDelegate": {
   "abstract" : [
     {
@@ -407,9 +322,8 @@
       "type" : "text"
     },
     {
-      "identifier" : "doc:\/\/OktaOAuth2\/documentation\/OktaOAuth2\/DeviceAuthorizationFlow\/start(completion:)",
-      "isActive" : true,
-      "type" : "reference"
+      "code" : "DeviceAuthorizationFlow\/start(completion:)",
+      "type" : "codeVoice"
     },
     {
       "text" : " method.",
@@ -476,8 +390,8 @@
     },
     {
       "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:10OktaOAuth223DeviceAuthorizationFlowC7ContextV",
-      "text" : "Context"
+      "preciseIdentifier" : "s:10OktaOAuth223DeviceAuthorizationFlowC12VerificationV",
+      "text" : "Verification"
     },
     {
       "kind" : "text",

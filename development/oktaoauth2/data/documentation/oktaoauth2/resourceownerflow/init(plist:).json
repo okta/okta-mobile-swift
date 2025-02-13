@@ -1,7 +1,15 @@
 {
   "abstract" : [
     {
-      "text" : "Initializer that uses the configuration defined within the given file URL.",
+      "text" : "Inherited from ",
+      "type" : "text"
+    },
+    {
+      "code" : "AuthenticationFlow.init(plist:)",
+      "type" : "codeVoice"
+    },
+    {
+      "text" : ".",
       "type" : "text"
     }
   ],
@@ -9,7 +17,8 @@
     "paths" : [
       [
         "doc:\/\/OktaOAuth2\/documentation\/OktaOAuth2",
-        "doc:\/\/OktaOAuth2\/documentation\/OktaOAuth2\/ResourceOwnerFlow"
+        "doc:\/\/OktaOAuth2\/documentation\/OktaOAuth2\/ResourceOwnerFlow",
+        "doc:\/\/OktaOAuth2\/documentation\/OktaOAuth2\/ResourceOwnerFlow\/AuthenticationFlow-Implementations"
       ]
     ]
   },
@@ -19,16 +28,9 @@
   },
   "kind" : "symbol",
   "metadata" : {
-    "externalID" : "s:10OktaOAuth217ResourceOwnerFlowC5plistAC10Foundation3URLV_tKcfc",
+    "extendedModule" : "AuthFoundation",
+    "externalID" : "s:14AuthFoundation18AuthenticationFlowPAAE5plistx0B03URLV_tKcfc::SYNTHESIZED::s:10OktaOAuth217ResourceOwnerFlowC",
     "fragments" : [
-      {
-        "kind" : "keyword",
-        "text" : "convenience"
-      },
-      {
-        "kind" : "text",
-        "text" : " "
-      },
       {
         "kind" : "identifier",
         "text" : "init"
@@ -61,7 +63,10 @@
     ],
     "modules" : [
       {
-        "name" : "OktaOAuth2"
+        "name" : "OktaOAuth2",
+        "relatedModules" : [
+          "AuthFoundation"
+        ]
       }
     ],
     "role" : "symbol",
@@ -80,14 +85,6 @@
             "macOS"
           ],
           "tokens" : [
-            {
-              "kind" : "keyword",
-              "text" : "convenience"
-            },
-            {
-              "kind" : "text",
-              "text" : " "
-            },
             {
               "kind" : "keyword",
               "text" : "init"
@@ -129,33 +126,6 @@
         }
       ],
       "kind" : "declarations"
-    },
-    {
-      "kind" : "parameters",
-      "parameters" : [
-        {
-          "content" : [
-            {
-              "inlineContent" : [
-                {
-                  "text" : "File URL to a ",
-                  "type" : "text"
-                },
-                {
-                  "code" : "plist",
-                  "type" : "codeVoice"
-                },
-                {
-                  "text" : " containing client configuration.",
-                  "type" : "text"
-                }
-              ],
-              "type" : "paragraph"
-            }
-          ],
-          "name" : "fileURL"
-        }
-      ]
     }
   ],
   "schemaVersion" : {
@@ -228,22 +198,22 @@
   "type" : "topic",
   "url" : "\/documentation\/oktaoauth2\/resourceownerflow"
 },
+"doc://OktaOAuth2/documentation/OktaOAuth2/ResourceOwnerFlow/AuthenticationFlow-Implementations": {
+  "abstract" : [
+
+  ],
+  "identifier" : "doc:\/\/OktaOAuth2\/documentation\/OktaOAuth2\/ResourceOwnerFlow\/AuthenticationFlow-Implementations",
+  "kind" : "article",
+  "role" : "collectionGroup",
+  "title" : "AuthenticationFlow Implementations",
+  "type" : "topic",
+  "url" : "\/documentation\/oktaoauth2\/resourceownerflow\/authenticationflow-implementations"
+},
 "doc://OktaOAuth2/documentation/OktaOAuth2/ResourceOwnerFlow/init(plist:)": {
   "abstract" : [
-    {
-      "text" : "Initializer that uses the configuration defined within the given file URL.",
-      "type" : "text"
-    }
+
   ],
   "fragments" : [
-    {
-      "kind" : "keyword",
-      "text" : "convenience"
-    },
-    {
-      "kind" : "text",
-      "text" : " "
-    },
     {
       "kind" : "identifier",
       "text" : "init"

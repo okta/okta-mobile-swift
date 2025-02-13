@@ -158,8 +158,8 @@
   "topicSections" : [
     {
       "identifiers" : [
-        "doc:\/\/OktaOAuth2\/documentation\/OktaOAuth2\/AuthorizationCodeFlowDelegate\/authentication(flow:customizeUrl:)-3hges",
-        "doc:\/\/OktaOAuth2\/documentation\/OktaOAuth2\/AuthorizationCodeFlowDelegate\/authentication(flow:shouldAuthenticateUsing:)-9ux29",
+        "doc:\/\/OktaOAuth2\/documentation\/OktaOAuth2\/AuthorizationCodeFlowDelegate\/authentication(flow:customizeUrl:)",
+        "doc:\/\/OktaOAuth2\/documentation\/OktaOAuth2\/AuthorizationCodeFlowDelegate\/authentication(flow:shouldAuthenticateUsing:)",
         "doc:\/\/OktaOAuth2\/documentation\/OktaOAuth2\/AuthorizationCodeFlowDelegate\/authenticationFinished(flow:)",
         "doc:\/\/OktaOAuth2\/documentation\/OktaOAuth2\/AuthorizationCodeFlowDelegate\/authenticationStarted(flow:)"
       ],
@@ -310,14 +310,13 @@
   "type" : "topic",
   "url" : "\/documentation\/oktaoauth2\/authorizationcodeflowdelegate"
 },
-"doc://OktaOAuth2/documentation/OktaOAuth2/AuthorizationCodeFlowDelegate/authentication(flow:customizeUrl:)-3hges": {
+"doc://OktaOAuth2/documentation/OktaOAuth2/AuthorizationCodeFlowDelegate/authentication(flow:customizeUrl:)": {
   "abstract" : [
     {
       "text" : "Provides the opportunity to customize the authorization URL.",
       "type" : "text"
     }
   ],
-  "defaultImplementations" : 1,
   "fragments" : [
     {
       "kind" : "keyword",
@@ -385,22 +384,21 @@
       "text" : ")"
     }
   ],
-  "identifier" : "doc:\/\/OktaOAuth2\/documentation\/OktaOAuth2\/AuthorizationCodeFlowDelegate\/authentication(flow:customizeUrl:)-3hges",
+  "identifier" : "doc:\/\/OktaOAuth2\/documentation\/OktaOAuth2\/AuthorizationCodeFlowDelegate\/authentication(flow:customizeUrl:)",
   "kind" : "symbol",
   "required" : true,
   "role" : "symbol",
   "title" : "authentication(flow:customizeUrl:)",
   "type" : "topic",
-  "url" : "\/documentation\/oktaoauth2\/authorizationcodeflowdelegate\/authentication(flow:customizeurl:)-3hges"
+  "url" : "\/documentation\/oktaoauth2\/authorizationcodeflowdelegate\/authentication(flow:customizeurl:)"
 },
-"doc://OktaOAuth2/documentation/OktaOAuth2/AuthorizationCodeFlowDelegate/authentication(flow:shouldAuthenticateUsing:)-9ux29": {
+"doc://OktaOAuth2/documentation/OktaOAuth2/AuthorizationCodeFlowDelegate/authentication(flow:shouldAuthenticateUsing:)": {
   "abstract" : [
     {
       "text" : "Called when the authorization URL has been created, indicating the URL should be presented to the user.",
       "type" : "text"
     }
   ],
-  "defaultImplementations" : 1,
   "fragments" : [
     {
       "kind" : "keyword",
@@ -460,13 +458,13 @@
       "text" : ")"
     }
   ],
-  "identifier" : "doc:\/\/OktaOAuth2\/documentation\/OktaOAuth2\/AuthorizationCodeFlowDelegate\/authentication(flow:shouldAuthenticateUsing:)-9ux29",
+  "identifier" : "doc:\/\/OktaOAuth2\/documentation\/OktaOAuth2\/AuthorizationCodeFlowDelegate\/authentication(flow:shouldAuthenticateUsing:)",
   "kind" : "symbol",
   "required" : true,
   "role" : "symbol",
   "title" : "authentication(flow:shouldAuthenticateUsing:)",
   "type" : "topic",
-  "url" : "\/documentation\/oktaoauth2\/authorizationcodeflowdelegate\/authentication(flow:shouldauthenticateusing:)-9ux29"
+  "url" : "\/documentation\/oktaoauth2\/authorizationcodeflowdelegate\/authentication(flow:shouldauthenticateusing:)"
 },
 "doc://OktaOAuth2/documentation/OktaOAuth2/AuthorizationCodeFlowDelegate/authenticationFinished(flow:)": {
   "abstract" : [

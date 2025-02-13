@@ -175,9 +175,9 @@
         {
           "code" : [
             "let flow = TokenExchangeFlow(",
-            "    issuer: URL(string: \"https:\/\/example.okta.com\")!,",
+            "    issuerURL: URL(string: \"https:\/\/example.okta.com\")!,",
             "    clientId: \"abc123client\",",
-            "    scopes: \"openid offline_access email profile\",",
+            "    scope: \"openid offline_access email profile\",",
             "    audience: .default)",
             "",
             "let tokens: [TokenType] = [",
@@ -198,6 +198,7 @@
       "identifiers" : [
         "doc:\/\/OktaOAuth2\/14AuthFoundation17APIClientDelegateP",
         "doc:\/\/OktaOAuth2\/14AuthFoundation18AuthenticationFlowP",
+        "doc:\/\/OktaOAuth2\/14AuthFoundation23IDTokenValidatorContextP",
         "doc:\/\/OktaOAuth2\/14AuthFoundation20OAuth2ClientDelegateP",
         "doc:\/\/OktaOAuth2\/14AuthFoundation22UsesDelegateCollectionP"
       ],
@@ -218,7 +219,7 @@
     {
       "generated" : true,
       "identifiers" : [
-        "doc:\/\/OktaOAuth2\/documentation\/OktaOAuth2\/TokenExchangeFlow\/Audience-swift.enum"
+        "doc:\/\/OktaOAuth2\/documentation\/OktaOAuth2\/TokenExchangeFlow\/Audience"
       ],
       "title" : "Token Exchange Flow"
     }
@@ -226,17 +227,16 @@
   "topicSections" : [
     {
       "identifiers" : [
-        "doc:\/\/OktaOAuth2\/documentation\/OktaOAuth2\/TokenExchangeFlow\/init()",
-        "doc:\/\/OktaOAuth2\/documentation\/OktaOAuth2\/TokenExchangeFlow\/init(audience:client:)",
-        "doc:\/\/OktaOAuth2\/documentation\/OktaOAuth2\/TokenExchangeFlow\/init(issuer:clientId:scopes:audience:)",
-        "doc:\/\/OktaOAuth2\/documentation\/OktaOAuth2\/TokenExchangeFlow\/init(plist:)"
+        "doc:\/\/OktaOAuth2\/documentation\/OktaOAuth2\/TokenExchangeFlow\/init(client:additionalParameters:)",
+        "doc:\/\/OktaOAuth2\/documentation\/OktaOAuth2\/TokenExchangeFlow\/init(issuerURL:clientId:scope:additionalParameters:)"
       ],
       "title" : "Initializers"
     },
     {
       "identifiers" : [
-        "doc:\/\/OktaOAuth2\/documentation\/OktaOAuth2\/TokenExchangeFlow\/audience-swift.property",
+        "doc:\/\/OktaOAuth2\/documentation\/OktaOAuth2\/TokenExchangeFlow\/additionalParameters",
         "doc:\/\/OktaOAuth2\/documentation\/OktaOAuth2\/TokenExchangeFlow\/client",
+        "doc:\/\/OktaOAuth2\/documentation\/OktaOAuth2\/TokenExchangeFlow\/context-swift.property",
         "doc:\/\/OktaOAuth2\/documentation\/OktaOAuth2\/TokenExchangeFlow\/delegateCollection",
         "doc:\/\/OktaOAuth2\/documentation\/OktaOAuth2\/TokenExchangeFlow\/isAuthenticating"
       ],
@@ -245,8 +245,8 @@
     {
       "identifiers" : [
         "doc:\/\/OktaOAuth2\/documentation\/OktaOAuth2\/TokenExchangeFlow\/reset()",
-        "doc:\/\/OktaOAuth2\/documentation\/OktaOAuth2\/TokenExchangeFlow\/start(with:)",
-        "doc:\/\/OktaOAuth2\/documentation\/OktaOAuth2\/TokenExchangeFlow\/start(with:completion:)"
+        "doc:\/\/OktaOAuth2\/documentation\/OktaOAuth2\/TokenExchangeFlow\/start(with:context:)",
+        "doc:\/\/OktaOAuth2\/documentation\/OktaOAuth2\/TokenExchangeFlow\/start(with:context:completion:)"
       ],
       "title" : "Instance Methods"
     },
@@ -260,6 +260,7 @@
       "generated" : true,
       "identifiers" : [
         "doc:\/\/OktaOAuth2\/documentation\/OktaOAuth2\/TokenExchangeFlow\/APIClientDelegate-Implementations",
+        "doc:\/\/OktaOAuth2\/documentation\/OktaOAuth2\/TokenExchangeFlow\/AuthenticationFlow-Implementations",
         "doc:\/\/OktaOAuth2\/documentation\/OktaOAuth2\/TokenExchangeFlow\/OAuth2ClientDelegate-Implementations",
         "doc:\/\/OktaOAuth2\/documentation\/OktaOAuth2\/TokenExchangeFlow\/UsesDelegateCollection-Implementations"
       ],
@@ -298,6 +299,11 @@
 "doc://OktaOAuth2/14AuthFoundation22UsesDelegateCollectionP": {
   "identifier" : "doc:\/\/OktaOAuth2\/14AuthFoundation22UsesDelegateCollectionP",
   "title" : "AuthFoundation.UsesDelegateCollection",
+  "type" : "unresolvable"
+},
+"doc://OktaOAuth2/14AuthFoundation23IDTokenValidatorContextP": {
+  "identifier" : "doc:\/\/OktaOAuth2\/14AuthFoundation23IDTokenValidatorContextP",
+  "title" : "AuthFoundation.IDTokenValidatorContext",
   "type" : "unresolvable"
 },
 "doc://OktaOAuth2/documentation/OktaOAuth2": {
@@ -359,7 +365,7 @@
   "type" : "topic",
   "url" : "\/documentation\/oktaoauth2\/tokenexchangeflow\/apiclientdelegate-implementations"
 },
-"doc://OktaOAuth2/documentation/OktaOAuth2/TokenExchangeFlow/Audience-swift.enum": {
+"doc://OktaOAuth2/documentation/OktaOAuth2/TokenExchangeFlow/Audience": {
   "abstract" : [
     {
       "text" : "Identifies the audience of the authorization server.",
@@ -380,7 +386,7 @@
       "text" : "Audience"
     }
   ],
-  "identifier" : "doc:\/\/OktaOAuth2\/documentation\/OktaOAuth2\/TokenExchangeFlow\/Audience-swift.enum",
+  "identifier" : "doc:\/\/OktaOAuth2\/documentation\/OktaOAuth2\/TokenExchangeFlow\/Audience",
   "kind" : "symbol",
   "navigatorTitle" : [
     {
@@ -391,7 +397,18 @@
   "role" : "symbol",
   "title" : "TokenExchangeFlow.Audience",
   "type" : "topic",
-  "url" : "\/documentation\/oktaoauth2\/tokenexchangeflow\/audience-swift.enum"
+  "url" : "\/documentation\/oktaoauth2\/tokenexchangeflow\/audience"
+},
+"doc://OktaOAuth2/documentation/OktaOAuth2/TokenExchangeFlow/AuthenticationFlow-Implementations": {
+  "abstract" : [
+
+  ],
+  "identifier" : "doc:\/\/OktaOAuth2\/documentation\/OktaOAuth2\/TokenExchangeFlow\/AuthenticationFlow-Implementations",
+  "kind" : "article",
+  "role" : "collectionGroup",
+  "title" : "AuthenticationFlow Implementations",
+  "type" : "topic",
+  "url" : "\/documentation\/oktaoauth2\/tokenexchangeflow\/authenticationflow-implementations"
 },
 "doc://OktaOAuth2/documentation/OktaOAuth2/TokenExchangeFlow/OAuth2ClientDelegate-Implementations": {
   "abstract" : [
@@ -449,10 +466,10 @@
   "type" : "topic",
   "url" : "\/documentation\/oktaoauth2\/tokenexchangeflow\/usesdelegatecollection-implementations"
 },
-"doc://OktaOAuth2/documentation/OktaOAuth2/TokenExchangeFlow/audience-swift.property": {
+"doc://OktaOAuth2/documentation/OktaOAuth2/TokenExchangeFlow/additionalParameters": {
   "abstract" : [
     {
-      "text" : "Server audience.",
+      "text" : "Any additional query string parameters you would like to supply to the authorization server for all requests from this flow.",
       "type" : "text"
     }
   ],
@@ -467,33 +484,37 @@
     },
     {
       "kind" : "identifier",
-      "text" : "audience"
+      "text" : "additionalParameters"
     },
     {
       "kind" : "text",
-      "text" : ": "
+      "text" : ": ["
     },
     {
       "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:10OktaOAuth217TokenExchangeFlowC",
-      "text" : "TokenExchangeFlow"
+      "preciseIdentifier" : "s:SS",
+      "text" : "String"
     },
     {
       "kind" : "text",
-      "text" : "."
+      "text" : " : any "
     },
     {
       "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:10OktaOAuth217TokenExchangeFlowC8AudienceO",
-      "text" : "Audience"
+      "preciseIdentifier" : "s:14AuthFoundation18APIRequestArgumentP",
+      "text" : "APIRequestArgument"
+    },
+    {
+      "kind" : "text",
+      "text" : "]?"
     }
   ],
-  "identifier" : "doc:\/\/OktaOAuth2\/documentation\/OktaOAuth2\/TokenExchangeFlow\/audience-swift.property",
+  "identifier" : "doc:\/\/OktaOAuth2\/documentation\/OktaOAuth2\/TokenExchangeFlow\/additionalParameters",
   "kind" : "symbol",
   "role" : "symbol",
-  "title" : "audience",
+  "title" : "additionalParameters",
   "type" : "topic",
-  "url" : "\/documentation\/oktaoauth2\/tokenexchangeflow\/audience-swift.property"
+  "url" : "\/documentation\/oktaoauth2\/tokenexchangeflow\/additionalparameters"
 },
 "doc://OktaOAuth2/documentation/OktaOAuth2/TokenExchangeFlow/client": {
   "abstract" : [
@@ -531,6 +552,56 @@
   "title" : "client",
   "type" : "topic",
   "url" : "\/documentation\/oktaoauth2\/tokenexchangeflow\/client"
+},
+"doc://OktaOAuth2/documentation/OktaOAuth2/TokenExchangeFlow/context-swift.property": {
+  "abstract" : [
+    {
+      "text" : "The context that stores the state for the current authentication session.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "var"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "context"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:10OktaOAuth217TokenExchangeFlowC",
+      "text" : "TokenExchangeFlow"
+    },
+    {
+      "kind" : "text",
+      "text" : "."
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:10OktaOAuth217TokenExchangeFlowC7ContextV",
+      "text" : "Context"
+    },
+    {
+      "kind" : "text",
+      "text" : "?"
+    }
+  ],
+  "identifier" : "doc:\/\/OktaOAuth2\/documentation\/OktaOAuth2\/TokenExchangeFlow\/context-swift.property",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "context",
+  "type" : "topic",
+  "url" : "\/documentation\/oktaoauth2\/tokenexchangeflow\/context-swift.property"
 },
 "doc://OktaOAuth2/documentation/OktaOAuth2/TokenExchangeFlow/delegateCollection": {
   "abstract" : [
@@ -590,51 +661,7 @@
   "type" : "topic",
   "url" : "\/documentation\/oktaoauth2\/tokenexchangeflow\/delegatecollection"
 },
-"doc://OktaOAuth2/documentation/OktaOAuth2/TokenExchangeFlow/init()": {
-  "abstract" : [
-    {
-      "text" : "Initializer that uses the configuration defined within the application’s ",
-      "type" : "text"
-    },
-    {
-      "code" : "Okta.plist",
-      "type" : "codeVoice"
-    },
-    {
-      "text" : " file.",
-      "type" : "text"
-    }
-  ],
-  "fragments" : [
-    {
-      "kind" : "keyword",
-      "text" : "convenience"
-    },
-    {
-      "kind" : "text",
-      "text" : " "
-    },
-    {
-      "kind" : "identifier",
-      "text" : "init"
-    },
-    {
-      "kind" : "text",
-      "text" : "() "
-    },
-    {
-      "kind" : "keyword",
-      "text" : "throws"
-    }
-  ],
-  "identifier" : "doc:\/\/OktaOAuth2\/documentation\/OktaOAuth2\/TokenExchangeFlow\/init()",
-  "kind" : "symbol",
-  "role" : "symbol",
-  "title" : "init()",
-  "type" : "topic",
-  "url" : "\/documentation\/oktaoauth2\/tokenexchangeflow\/init()"
-},
-"doc://OktaOAuth2/documentation/OktaOAuth2/TokenExchangeFlow/init(audience:client:)": {
+"doc://OktaOAuth2/documentation/OktaOAuth2/TokenExchangeFlow/init(client:additionalParameters:)": {
   "abstract" : [
     {
       "text" : "Initializer to construct a flow from a default audience and client.",
@@ -652,32 +679,6 @@
     },
     {
       "kind" : "externalParam",
-      "text" : "audience"
-    },
-    {
-      "kind" : "text",
-      "text" : ": "
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:10OktaOAuth217TokenExchangeFlowC",
-      "text" : "TokenExchangeFlow"
-    },
-    {
-      "kind" : "text",
-      "text" : "."
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:10OktaOAuth217TokenExchangeFlowC8AudienceO",
-      "text" : "Audience"
-    },
-    {
-      "kind" : "text",
-      "text" : ", "
-    },
-    {
-      "kind" : "externalParam",
       "text" : "client"
     },
     {
@@ -691,17 +692,43 @@
     },
     {
       "kind" : "text",
-      "text" : ")"
+      "text" : ", "
+    },
+    {
+      "kind" : "externalParam",
+      "text" : "additionalParameters"
+    },
+    {
+      "kind" : "text",
+      "text" : ": ["
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:SS",
+      "text" : "String"
+    },
+    {
+      "kind" : "text",
+      "text" : " : any "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:14AuthFoundation18APIRequestArgumentP",
+      "text" : "APIRequestArgument"
+    },
+    {
+      "kind" : "text",
+      "text" : "]?)"
     }
   ],
-  "identifier" : "doc:\/\/OktaOAuth2\/documentation\/OktaOAuth2\/TokenExchangeFlow\/init(audience:client:)",
+  "identifier" : "doc:\/\/OktaOAuth2\/documentation\/OktaOAuth2\/TokenExchangeFlow\/init(client:additionalParameters:)",
   "kind" : "symbol",
   "role" : "symbol",
-  "title" : "init(audience:client:)",
+  "title" : "init(client:additionalParameters:)",
   "type" : "topic",
-  "url" : "\/documentation\/oktaoauth2\/tokenexchangeflow\/init(audience:client:)"
+  "url" : "\/documentation\/oktaoauth2\/tokenexchangeflow\/init(client:additionalparameters:)"
 },
-"doc://OktaOAuth2/documentation/OktaOAuth2/TokenExchangeFlow/init(issuer:clientId:scopes:audience:)": {
+"doc://OktaOAuth2/documentation/OktaOAuth2/TokenExchangeFlow/init(issuerURL:clientId:scope:additionalParameters:)": {
   "abstract" : [
     {
       "text" : "Convenience initializer to construct a flow from variables.",
@@ -727,7 +754,7 @@
     },
     {
       "kind" : "externalParam",
-      "text" : "issuer"
+      "text" : "issuerURL"
     },
     {
       "kind" : "text",
@@ -761,7 +788,7 @@
     },
     {
       "kind" : "externalParam",
-      "text" : "scopes"
+      "text" : "scope"
     },
     {
       "kind" : "text",
@@ -778,90 +805,37 @@
     },
     {
       "kind" : "externalParam",
-      "text" : "audience"
+      "text" : "additionalParameters"
     },
     {
       "kind" : "text",
-      "text" : ": "
+      "text" : ": ["
     },
     {
       "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:10OktaOAuth217TokenExchangeFlowC",
-      "text" : "TokenExchangeFlow"
+      "preciseIdentifier" : "s:SS",
+      "text" : "String"
     },
     {
       "kind" : "text",
-      "text" : "."
+      "text" : " : any "
     },
     {
       "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:10OktaOAuth217TokenExchangeFlowC8AudienceO",
-      "text" : "Audience"
+      "preciseIdentifier" : "s:14AuthFoundation18APIRequestArgumentP",
+      "text" : "APIRequestArgument"
     },
     {
       "kind" : "text",
-      "text" : ")"
+      "text" : "]?)"
     }
   ],
-  "identifier" : "doc:\/\/OktaOAuth2\/documentation\/OktaOAuth2\/TokenExchangeFlow\/init(issuer:clientId:scopes:audience:)",
+  "identifier" : "doc:\/\/OktaOAuth2\/documentation\/OktaOAuth2\/TokenExchangeFlow\/init(issuerURL:clientId:scope:additionalParameters:)",
   "kind" : "symbol",
   "role" : "symbol",
-  "title" : "init(issuer:clientId:scopes:audience:)",
+  "title" : "init(issuerURL:clientId:scope:additionalParameters:)",
   "type" : "topic",
-  "url" : "\/documentation\/oktaoauth2\/tokenexchangeflow\/init(issuer:clientid:scopes:audience:)"
-},
-"doc://OktaOAuth2/documentation/OktaOAuth2/TokenExchangeFlow/init(plist:)": {
-  "abstract" : [
-    {
-      "text" : "Initializer that uses the configuration defined within the given file URL.",
-      "type" : "text"
-    }
-  ],
-  "fragments" : [
-    {
-      "kind" : "keyword",
-      "text" : "convenience"
-    },
-    {
-      "kind" : "text",
-      "text" : " "
-    },
-    {
-      "kind" : "identifier",
-      "text" : "init"
-    },
-    {
-      "kind" : "text",
-      "text" : "("
-    },
-    {
-      "kind" : "externalParam",
-      "text" : "plist"
-    },
-    {
-      "kind" : "text",
-      "text" : ": "
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:10Foundation3URLV",
-      "text" : "URL"
-    },
-    {
-      "kind" : "text",
-      "text" : ") "
-    },
-    {
-      "kind" : "keyword",
-      "text" : "throws"
-    }
-  ],
-  "identifier" : "doc:\/\/OktaOAuth2\/documentation\/OktaOAuth2\/TokenExchangeFlow\/init(plist:)",
-  "kind" : "symbol",
-  "role" : "symbol",
-  "title" : "init(plist:)",
-  "type" : "topic",
-  "url" : "\/documentation\/oktaoauth2\/tokenexchangeflow\/init(plist:)"
+  "url" : "\/documentation\/oktaoauth2\/tokenexchangeflow\/init(issuerurl:clientid:scope:additionalparameters:)"
 },
 "doc://OktaOAuth2/documentation/OktaOAuth2/TokenExchangeFlow/isAuthenticating": {
   "abstract" : [
@@ -929,7 +903,7 @@
   "type" : "topic",
   "url" : "\/documentation\/oktaoauth2\/tokenexchangeflow\/reset()"
 },
-"doc://OktaOAuth2/documentation/OktaOAuth2/TokenExchangeFlow/start(with:)": {
+"doc://OktaOAuth2/documentation/OktaOAuth2/TokenExchangeFlow/start(with:context:)": {
   "abstract" : [
     {
       "text" : "Asynchronously initiates a token exchange flow.",
@@ -977,7 +951,33 @@
     },
     {
       "kind" : "text",
-      "text" : "]) "
+      "text" : "], "
+    },
+    {
+      "kind" : "externalParam",
+      "text" : "context"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:10OktaOAuth217TokenExchangeFlowC",
+      "text" : "TokenExchangeFlow"
+    },
+    {
+      "kind" : "text",
+      "text" : "."
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:10OktaOAuth217TokenExchangeFlowC7ContextV",
+      "text" : "Context"
+    },
+    {
+      "kind" : "text",
+      "text" : ") "
     },
     {
       "kind" : "keyword",
@@ -1001,14 +1001,14 @@
       "text" : "Token"
     }
   ],
-  "identifier" : "doc:\/\/OktaOAuth2\/documentation\/OktaOAuth2\/TokenExchangeFlow\/start(with:)",
+  "identifier" : "doc:\/\/OktaOAuth2\/documentation\/OktaOAuth2\/TokenExchangeFlow\/start(with:context:)",
   "kind" : "symbol",
   "role" : "symbol",
-  "title" : "start(with:)",
+  "title" : "start(with:context:)",
   "type" : "topic",
-  "url" : "\/documentation\/oktaoauth2\/tokenexchangeflow\/start(with:)"
+  "url" : "\/documentation\/oktaoauth2\/tokenexchangeflow\/start(with:context:)"
 },
-"doc://OktaOAuth2/documentation/OktaOAuth2/TokenExchangeFlow/start(with:completion:)": {
+"doc://OktaOAuth2/documentation/OktaOAuth2/TokenExchangeFlow/start(with:context:completion:)": {
   "abstract" : [
     {
       "text" : "Initiates a token exchange flow.",
@@ -1060,6 +1060,32 @@
     },
     {
       "kind" : "externalParam",
+      "text" : "context"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:10OktaOAuth217TokenExchangeFlowC",
+      "text" : "TokenExchangeFlow"
+    },
+    {
+      "kind" : "text",
+      "text" : "."
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:10OktaOAuth217TokenExchangeFlowC7ContextV",
+      "text" : "Context"
+    },
+    {
+      "kind" : "text",
+      "text" : ", "
+    },
+    {
+      "kind" : "externalParam",
       "text" : "completion"
     },
     {
@@ -1103,12 +1129,12 @@
       "text" : ")"
     }
   ],
-  "identifier" : "doc:\/\/OktaOAuth2\/documentation\/OktaOAuth2\/TokenExchangeFlow\/start(with:completion:)",
+  "identifier" : "doc:\/\/OktaOAuth2\/documentation\/OktaOAuth2\/TokenExchangeFlow\/start(with:context:completion:)",
   "kind" : "symbol",
   "role" : "symbol",
-  "title" : "start(with:completion:)",
+  "title" : "start(with:context:completion:)",
   "type" : "topic",
-  "url" : "\/documentation\/oktaoauth2\/tokenexchangeflow\/start(with:completion:)"
+  "url" : "\/documentation\/oktaoauth2\/tokenexchangeflow\/start(with:context:completion:)"
 },
 "https://developer.okta.com/docs/guides/configure-native-sso/main/#native-sso-flow": {
   "identifier" : "https:\/\/developer.okta.com\/docs\/guides\/configure-native-sso\/main\/#native-sso-flow",

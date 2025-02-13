@@ -86,10 +86,10 @@
               "text" : " : "
             },
             {
-              "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/APIRequest",
+              "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/APIParsingContext",
               "kind" : "typeIdentifier",
-              "preciseIdentifier" : "s:14AuthFoundation10APIRequestP",
-              "text" : "APIRequest"
+              "preciseIdentifier" : "s:14AuthFoundation17APIParsingContextP",
+              "text" : "APIParsingContext"
             },
             {
               "kind" : "text",
@@ -100,6 +100,16 @@
               "kind" : "typeIdentifier",
               "preciseIdentifier" : "s:14AuthFoundation14APIRequestBodyP",
               "text" : "APIRequestBody"
+            },
+            {
+              "kind" : "text",
+              "text" : ", "
+            },
+            {
+              "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/OAuth2APIRequest",
+              "kind" : "typeIdentifier",
+              "preciseIdentifier" : "s:14AuthFoundation16OAuth2APIRequestP",
+              "text" : "OAuth2APIRequest"
             },
             {
               "kind" : "text",
@@ -166,8 +176,10 @@
   "relationshipsSections" : [
     {
       "identifiers" : [
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/APIParsingContext",
         "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/APIRequest",
-        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/APIRequestBody"
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/APIRequestBody",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/OAuth2APIRequest"
       ],
       "kind" : "relationships",
       "title" : "Inherits From",
@@ -201,11 +213,17 @@
   "topicSections" : [
     {
       "identifiers" : [
-        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/OAuth2TokenRequest\/acrValues",
-        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/OAuth2TokenRequest\/clientId",
-        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/OAuth2TokenRequest\/openIdConfiguration"
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/OAuth2TokenRequest\/clientConfiguration",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/OAuth2TokenRequest\/tokenValidatorContext"
       ],
       "title" : "Instance Properties"
+    },
+    {
+      "generated" : true,
+      "identifiers" : [
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/OAuth2TokenRequest\/APIRequest-Implementations"
+      ],
+      "title" : "Default Implementations"
     }
   ],
   "variants" : [
@@ -235,6 +253,49 @@
   "title" : "AuthFoundation",
   "type" : "topic",
   "url" : "\/documentation\/authfoundation"
+},
+"doc://AuthFoundation/documentation/AuthFoundation/APIParsingContext": {
+  "abstract" : [
+    {
+      "text" : "Provides contextual information when parsing and decoding ",
+      "type" : "text"
+    },
+    {
+      "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/APIRequest",
+      "isActive" : true,
+      "type" : "reference"
+    },
+    {
+      "text" : " responses, or errors.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "protocol"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "APIParsingContext"
+    }
+  ],
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/APIParsingContext",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "APIParsingContext"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "APIParsingContext",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/apiparsingcontext"
 },
 "doc://AuthFoundation/documentation/AuthFoundation/APIRequest": {
   "abstract" : [
@@ -534,6 +595,58 @@
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/jwt\/authenticationmethods"
 },
+"doc://AuthFoundation/documentation/AuthFoundation/OAuth2APIRequest": {
+  "abstract" : [
+    {
+      "text" : "Sub-protocol of ",
+      "type" : "text"
+    },
+    {
+      "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/APIRequest",
+      "isActive" : true,
+      "type" : "reference"
+    },
+    {
+      "text" : " used to define requests that are performed using links supplied via an organization’s ",
+      "type" : "text"
+    },
+    {
+      "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/OpenIdConfiguration",
+      "isActive" : true,
+      "type" : "reference"
+    },
+    {
+      "text" : ".",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "protocol"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "OAuth2APIRequest"
+    }
+  ],
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/OAuth2APIRequest",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "OAuth2APIRequest"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "OAuth2APIRequest",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/oauth2apirequest"
+},
 "doc://AuthFoundation/documentation/AuthFoundation/OAuth2Client": {
   "abstract" : [
     {
@@ -654,59 +767,21 @@
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/oauth2tokenrequest"
 },
-"doc://AuthFoundation/documentation/AuthFoundation/OAuth2TokenRequest/acrValues": {
+"doc://AuthFoundation/documentation/AuthFoundation/OAuth2TokenRequest/APIRequest-Implementations": {
   "abstract" : [
-    {
-      "text" : "Convenience function that exposes an array of ACR Values requested by this OAuth2 token request, if applicable.",
-      "type" : "text"
-    }
+
   ],
-  "fragments" : [
-    {
-      "kind" : "keyword",
-      "text" : "var"
-    },
-    {
-      "kind" : "text",
-      "text" : " "
-    },
-    {
-      "kind" : "identifier",
-      "text" : "acrValues"
-    },
-    {
-      "kind" : "text",
-      "text" : ": ["
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:SS",
-      "text" : "String"
-    },
-    {
-      "kind" : "text",
-      "text" : "]?"
-    }
-  ],
-  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/OAuth2TokenRequest\/acrValues",
-  "kind" : "symbol",
-  "role" : "symbol",
-  "title" : "acrValues",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/OAuth2TokenRequest\/APIRequest-Implementations",
+  "kind" : "article",
+  "role" : "collectionGroup",
+  "title" : "APIRequest Implementations",
   "type" : "topic",
-  "url" : "\/documentation\/authfoundation\/oauth2tokenrequest\/acrvalues"
+  "url" : "\/documentation\/authfoundation\/oauth2tokenrequest\/apirequest-implementations"
 },
-"doc://AuthFoundation/documentation/AuthFoundation/OAuth2TokenRequest/clientId": {
+"doc://AuthFoundation/documentation/AuthFoundation/OAuth2TokenRequest/clientConfiguration": {
   "abstract" : [
     {
-      "text" : "The application’s OAuth2 ",
-      "type" : "text"
-    },
-    {
-      "code" : "client_id",
-      "type" : "codeVoice"
-    },
-    {
-      "text" : " value for this token request.",
+      "text" : "The configuration for the OAuth2 client this token is being requested from.",
       "type" : "text"
     }
   ],
@@ -721,7 +796,7 @@
     },
     {
       "kind" : "identifier",
-      "text" : "clientId"
+      "text" : "clientConfiguration"
     },
     {
       "kind" : "text",
@@ -729,22 +804,31 @@
     },
     {
       "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:SS",
-      "text" : "String"
+      "preciseIdentifier" : "s:14AuthFoundation12OAuth2ClientC",
+      "text" : "OAuth2Client"
+    },
+    {
+      "kind" : "text",
+      "text" : "."
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:14AuthFoundation12OAuth2ClientC13ConfigurationV",
+      "text" : "Configuration"
     }
   ],
-  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/OAuth2TokenRequest\/clientId",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/OAuth2TokenRequest\/clientConfiguration",
   "kind" : "symbol",
   "required" : true,
   "role" : "symbol",
-  "title" : "clientId",
+  "title" : "clientConfiguration",
   "type" : "topic",
-  "url" : "\/documentation\/authfoundation\/oauth2tokenrequest\/clientid"
+  "url" : "\/documentation\/authfoundation\/oauth2tokenrequest\/clientconfiguration"
 },
-"doc://AuthFoundation/documentation/AuthFoundation/OAuth2TokenRequest/openIdConfiguration": {
+"doc://AuthFoundation/documentation/AuthFoundation/OAuth2TokenRequest/tokenValidatorContext": {
   "abstract" : [
     {
-      "text" : "The client’s Open ID Configuration object defining the settings and endpoints used to interact with this Authorization Server.",
+      "text" : "The originating request context to use when validating the ID token.",
       "type" : "text"
     }
   ],
@@ -759,25 +843,25 @@
     },
     {
       "kind" : "identifier",
-      "text" : "openIdConfiguration"
+      "text" : "tokenValidatorContext"
     },
     {
       "kind" : "text",
-      "text" : ": "
+      "text" : ": any "
     },
     {
       "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:14AuthFoundation19OpenIdConfigurationV",
-      "text" : "OpenIdConfiguration"
+      "preciseIdentifier" : "s:14AuthFoundation23IDTokenValidatorContextP",
+      "text" : "IDTokenValidatorContext"
     }
   ],
-  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/OAuth2TokenRequest\/openIdConfiguration",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/OAuth2TokenRequest\/tokenValidatorContext",
   "kind" : "symbol",
   "required" : true,
   "role" : "symbol",
-  "title" : "openIdConfiguration",
+  "title" : "tokenValidatorContext",
   "type" : "topic",
-  "url" : "\/documentation\/authfoundation\/oauth2tokenrequest\/openidconfiguration"
+  "url" : "\/documentation\/authfoundation\/oauth2tokenrequest\/tokenvalidatorcontext"
 },
 "doc://AuthFoundation/documentation/AuthFoundation/OpenIdConfiguration": {
   "abstract" : [

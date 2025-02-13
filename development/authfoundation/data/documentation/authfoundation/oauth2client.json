@@ -474,12 +474,7 @@
   "topicSections" : [
     {
       "identifiers" : [
-        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/OAuth2Client\/Configuration-swift.class"
-      ],
-      "title" : "Classes"
-    },
-    {
-      "identifiers" : [
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/OAuth2Client\/Configuration-swift.struct",
         "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/OAuth2Client\/PropertyListConfiguration"
       ],
       "title" : "Structures"
@@ -487,8 +482,8 @@
     {
       "identifiers" : [
         "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/OAuth2Client\/init(_:session:)",
-        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/OAuth2Client\/init(baseURL:clientId:scopes:authentication:session:)",
-        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/OAuth2Client\/init(domain:clientId:scopes:authentication:session:)"
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/OAuth2Client\/init(domain:clientId:scope:redirectUri:logoutRedirectUri:authentication:session:)",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/OAuth2Client\/init(issuerURL:clientId:scope:redirectUri:logoutRedirectUri:authentication:session:)"
       ],
       "title" : "Initializers"
     },
@@ -514,7 +509,6 @@
         "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/OAuth2Client\/refresh(_:completion:)",
         "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/OAuth2Client\/revoke(_:type:)",
         "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/OAuth2Client\/revoke(_:type:completion:)",
-        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/OAuth2Client\/shouldRetry(request:)",
         "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/OAuth2Client\/userInfo(token:completion:)"
       ],
       "title" : "Instance Methods"
@@ -1170,7 +1164,7 @@
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/oauth2client\/clientauthentication"
 },
-"doc://AuthFoundation/documentation/AuthFoundation/OAuth2Client/Configuration-swift.class": {
+"doc://AuthFoundation/documentation/AuthFoundation/OAuth2Client/Configuration-swift.struct": {
   "abstract" : [
     {
       "text" : "The configuration for an ",
@@ -1189,7 +1183,7 @@
   "fragments" : [
     {
       "kind" : "keyword",
-      "text" : "class"
+      "text" : "struct"
     },
     {
       "kind" : "text",
@@ -1200,7 +1194,7 @@
       "text" : "Configuration"
     }
   ],
-  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/OAuth2Client\/Configuration-swift.class",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/OAuth2Client\/Configuration-swift.struct",
   "kind" : "symbol",
   "navigatorTitle" : [
     {
@@ -1211,7 +1205,7 @@
   "role" : "symbol",
   "title" : "OAuth2Client.Configuration",
   "type" : "topic",
-  "url" : "\/documentation\/authfoundation\/oauth2client\/configuration-swift.class"
+  "url" : "\/documentation\/authfoundation\/oauth2client\/configuration-swift.struct"
 },
 "doc://AuthFoundation/documentation/AuthFoundation/OAuth2Client/PropertyListConfiguration": {
   "abstract" : [
@@ -1382,7 +1376,7 @@
     },
     {
       "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:14AuthFoundation12OAuth2ClientC13ConfigurationC",
+      "preciseIdentifier" : "s:14AuthFoundation12OAuth2ClientC13ConfigurationV",
       "text" : "Configuration"
     }
   ],
@@ -1529,7 +1523,7 @@
     },
     {
       "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:14AuthFoundation12OAuth2ClientC13ConfigurationC",
+      "preciseIdentifier" : "s:14AuthFoundation12OAuth2ClientC13ConfigurationV",
       "text" : "Configuration"
     },
     {
@@ -1561,133 +1555,7 @@
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/oauth2client\/init(_:session:)"
 },
-"doc://AuthFoundation/documentation/AuthFoundation/OAuth2Client/init(baseURL:clientId:scopes:authentication:session:)": {
-  "abstract" : [
-    {
-      "text" : "Constructs an OAuth2Client for the given domain.",
-      "type" : "text"
-    }
-  ],
-  "fragments" : [
-    {
-      "kind" : "keyword",
-      "text" : "convenience"
-    },
-    {
-      "kind" : "text",
-      "text" : " "
-    },
-    {
-      "kind" : "identifier",
-      "text" : "init"
-    },
-    {
-      "kind" : "text",
-      "text" : "("
-    },
-    {
-      "kind" : "externalParam",
-      "text" : "baseURL"
-    },
-    {
-      "kind" : "text",
-      "text" : ": "
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:10Foundation3URLV",
-      "text" : "URL"
-    },
-    {
-      "kind" : "text",
-      "text" : ", "
-    },
-    {
-      "kind" : "externalParam",
-      "text" : "clientId"
-    },
-    {
-      "kind" : "text",
-      "text" : ": "
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:SS",
-      "text" : "String"
-    },
-    {
-      "kind" : "text",
-      "text" : ", "
-    },
-    {
-      "kind" : "externalParam",
-      "text" : "scopes"
-    },
-    {
-      "kind" : "text",
-      "text" : ": "
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:SS",
-      "text" : "String"
-    },
-    {
-      "kind" : "text",
-      "text" : ", "
-    },
-    {
-      "kind" : "externalParam",
-      "text" : "authentication"
-    },
-    {
-      "kind" : "text",
-      "text" : ": "
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:14AuthFoundation12OAuth2ClientC",
-      "text" : "OAuth2Client"
-    },
-    {
-      "kind" : "text",
-      "text" : "."
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:14AuthFoundation12OAuth2ClientC0D14AuthenticationO",
-      "text" : "ClientAuthentication"
-    },
-    {
-      "kind" : "text",
-      "text" : ", "
-    },
-    {
-      "kind" : "externalParam",
-      "text" : "session"
-    },
-    {
-      "kind" : "text",
-      "text" : ": (any "
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:14AuthFoundation18URLSessionProtocolP",
-      "text" : "URLSessionProtocol"
-    },
-    {
-      "kind" : "text",
-      "text" : ")?)"
-    }
-  ],
-  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/OAuth2Client\/init(baseURL:clientId:scopes:authentication:session:)",
-  "kind" : "symbol",
-  "role" : "symbol",
-  "title" : "init(baseURL:clientId:scopes:authentication:session:)",
-  "type" : "topic",
-  "url" : "\/documentation\/authfoundation\/oauth2client\/init(baseurl:clientid:scopes:authentication:session:)"
-},
-"doc://AuthFoundation/documentation/AuthFoundation/OAuth2Client/init(domain:clientId:scopes:authentication:session:)": {
+"doc://AuthFoundation/documentation/AuthFoundation/OAuth2Client/init(domain:clientId:scope:redirectUri:logoutRedirectUri:authentication:session:)": {
   "abstract" : [
     {
       "text" : "Constructs an OAuth2Client for the given domain.",
@@ -1747,7 +1615,7 @@
     },
     {
       "kind" : "externalParam",
-      "text" : "scopes"
+      "text" : "scope"
     },
     {
       "kind" : "text",
@@ -1761,6 +1629,40 @@
     {
       "kind" : "text",
       "text" : ", "
+    },
+    {
+      "kind" : "externalParam",
+      "text" : "redirectUri"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:SS",
+      "text" : "String"
+    },
+    {
+      "kind" : "text",
+      "text" : "?, "
+    },
+    {
+      "kind" : "externalParam",
+      "text" : "logoutRedirectUri"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:SS",
+      "text" : "String"
+    },
+    {
+      "kind" : "text",
+      "text" : "?, "
     },
     {
       "kind" : "externalParam",
@@ -1810,12 +1712,172 @@
       "text" : "throws"
     }
   ],
-  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/OAuth2Client\/init(domain:clientId:scopes:authentication:session:)",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/OAuth2Client\/init(domain:clientId:scope:redirectUri:logoutRedirectUri:authentication:session:)",
   "kind" : "symbol",
   "role" : "symbol",
-  "title" : "init(domain:clientId:scopes:authentication:session:)",
+  "title" : "init(domain:clientId:scope:redirectUri:logoutRedirectUri:authentication:session:)",
   "type" : "topic",
-  "url" : "\/documentation\/authfoundation\/oauth2client\/init(domain:clientid:scopes:authentication:session:)"
+  "url" : "\/documentation\/authfoundation\/oauth2client\/init(domain:clientid:scope:redirecturi:logoutredirecturi:authentication:session:)"
+},
+"doc://AuthFoundation/documentation/AuthFoundation/OAuth2Client/init(issuerURL:clientId:scope:redirectUri:logoutRedirectUri:authentication:session:)": {
+  "abstract" : [
+    {
+      "text" : "Constructs an OAuth2Client for the given domain.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "convenience"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "init"
+    },
+    {
+      "kind" : "text",
+      "text" : "("
+    },
+    {
+      "kind" : "externalParam",
+      "text" : "issuerURL"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:10Foundation3URLV",
+      "text" : "URL"
+    },
+    {
+      "kind" : "text",
+      "text" : ", "
+    },
+    {
+      "kind" : "externalParam",
+      "text" : "clientId"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:SS",
+      "text" : "String"
+    },
+    {
+      "kind" : "text",
+      "text" : ", "
+    },
+    {
+      "kind" : "externalParam",
+      "text" : "scope"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:SS",
+      "text" : "String"
+    },
+    {
+      "kind" : "text",
+      "text" : ", "
+    },
+    {
+      "kind" : "externalParam",
+      "text" : "redirectUri"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:10Foundation3URLV",
+      "text" : "URL"
+    },
+    {
+      "kind" : "text",
+      "text" : "?, "
+    },
+    {
+      "kind" : "externalParam",
+      "text" : "logoutRedirectUri"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:10Foundation3URLV",
+      "text" : "URL"
+    },
+    {
+      "kind" : "text",
+      "text" : "?, "
+    },
+    {
+      "kind" : "externalParam",
+      "text" : "authentication"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:14AuthFoundation12OAuth2ClientC",
+      "text" : "OAuth2Client"
+    },
+    {
+      "kind" : "text",
+      "text" : "."
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:14AuthFoundation12OAuth2ClientC0D14AuthenticationO",
+      "text" : "ClientAuthentication"
+    },
+    {
+      "kind" : "text",
+      "text" : ", "
+    },
+    {
+      "kind" : "externalParam",
+      "text" : "session"
+    },
+    {
+      "kind" : "text",
+      "text" : ": (any "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:14AuthFoundation18URLSessionProtocolP",
+      "text" : "URLSessionProtocol"
+    },
+    {
+      "kind" : "text",
+      "text" : ")?)"
+    }
+  ],
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/OAuth2Client\/init(issuerURL:clientId:scope:redirectUri:logoutRedirectUri:authentication:session:)",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "init(issuerURL:clientId:scope:redirectUri:logoutRedirectUri:authentication:session:)",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/oauth2client\/init(issuerurl:clientid:scope:redirecturi:logoutredirecturi:authentication:session:)"
 },
 "doc://AuthFoundation/documentation/AuthFoundation/OAuth2Client/introspect(token:type:completion:)": {
   "abstract" : [
@@ -2694,57 +2756,6 @@
   "title" : "session",
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/oauth2client\/session"
-},
-"doc://AuthFoundation/documentation/AuthFoundation/OAuth2Client/shouldRetry(request:)": {
-  "abstract" : [
-
-  ],
-  "fragments" : [
-    {
-      "kind" : "keyword",
-      "text" : "func"
-    },
-    {
-      "kind" : "text",
-      "text" : " "
-    },
-    {
-      "kind" : "identifier",
-      "text" : "shouldRetry"
-    },
-    {
-      "kind" : "text",
-      "text" : "("
-    },
-    {
-      "kind" : "externalParam",
-      "text" : "request"
-    },
-    {
-      "kind" : "text",
-      "text" : ": "
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:10Foundation10URLRequestV",
-      "text" : "URLRequest"
-    },
-    {
-      "kind" : "text",
-      "text" : ") -> "
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:14AuthFoundation8APIRetryO",
-      "text" : "APIRetry"
-    }
-  ],
-  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/OAuth2Client\/shouldRetry(request:)",
-  "kind" : "symbol",
-  "role" : "symbol",
-  "title" : "shouldRetry(request:)",
-  "type" : "topic",
-  "url" : "\/documentation\/authfoundation\/oauth2client\/shouldretry(request:)"
 },
 "doc://AuthFoundation/documentation/AuthFoundation/OAuth2Client/userInfo(token:completion:)": {
   "abstract" : [

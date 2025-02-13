@@ -274,18 +274,16 @@
               "type" : "text"
             },
             {
-              "identifier" : "doc:\/\/OktaOAuth2\/documentation\/OktaOAuth2\/AuthorizationCodeFlow\/start(with:additionalParameters:completion:)",
-              "isActive" : true,
-              "type" : "reference"
+              "code" : "start(with:additionalParameters:completion:)",
+              "type" : "codeVoice"
             },
             {
               "text" : " method within a browser, the browser will redirect to a URL that matches the scheme provided in the client configuration’s ",
               "type" : "text"
             },
             {
-              "identifier" : "doc:\/\/OktaOAuth2\/documentation\/OktaOAuth2\/AuthorizationCodeFlow\/redirectUri",
-              "isActive" : true,
-              "type" : "reference"
+              "code" : "redirectUri",
+              "type" : "codeVoice"
             },
             {
               "text" : ". This URI will contain either an error response from the authorization server, or an authorization code which can be used to exchange a token.",
@@ -376,77 +374,6 @@
   "title" : "AuthorizationCodeFlow",
   "type" : "topic",
   "url" : "\/documentation\/oktaoauth2\/authorizationcodeflow"
-},
-"doc://OktaOAuth2/documentation/OktaOAuth2/AuthorizationCodeFlow/Context-swift.struct": {
-  "abstract" : [
-    {
-      "text" : "A model representing the context and current state for an authorization session.",
-      "type" : "text"
-    }
-  ],
-  "fragments" : [
-    {
-      "kind" : "keyword",
-      "text" : "struct"
-    },
-    {
-      "kind" : "text",
-      "text" : " "
-    },
-    {
-      "kind" : "identifier",
-      "text" : "Context"
-    }
-  ],
-  "identifier" : "doc:\/\/OktaOAuth2\/documentation\/OktaOAuth2\/AuthorizationCodeFlow\/Context-swift.struct",
-  "kind" : "symbol",
-  "navigatorTitle" : [
-    {
-      "kind" : "identifier",
-      "text" : "Context"
-    }
-  ],
-  "role" : "symbol",
-  "title" : "AuthorizationCodeFlow.Context",
-  "type" : "topic",
-  "url" : "\/documentation\/oktaoauth2\/authorizationcodeflow\/context-swift.struct"
-},
-"doc://OktaOAuth2/documentation/OktaOAuth2/AuthorizationCodeFlow/redirectUri": {
-  "abstract" : [
-    {
-      "text" : "The redirect URI defined for your client.",
-      "type" : "text"
-    }
-  ],
-  "fragments" : [
-    {
-      "kind" : "keyword",
-      "text" : "let"
-    },
-    {
-      "kind" : "text",
-      "text" : " "
-    },
-    {
-      "kind" : "identifier",
-      "text" : "redirectUri"
-    },
-    {
-      "kind" : "text",
-      "text" : ": "
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:10Foundation3URLV",
-      "text" : "URL"
-    }
-  ],
-  "identifier" : "doc:\/\/OktaOAuth2\/documentation\/OktaOAuth2\/AuthorizationCodeFlow\/redirectUri",
-  "kind" : "symbol",
-  "role" : "symbol",
-  "title" : "redirectUri",
-  "type" : "topic",
-  "url" : "\/documentation\/oktaoauth2\/authorizationcodeflow\/redirecturi"
 },
 "doc://OktaOAuth2/documentation/OktaOAuth2/AuthorizationCodeFlow/resume(with:completion:)": {
   "abstract" : [
@@ -544,143 +471,6 @@
   "title" : "resume(with:completion:)",
   "type" : "topic",
   "url" : "\/documentation\/oktaoauth2\/authorizationcodeflow\/resume(with:completion:)"
-},
-"doc://OktaOAuth2/documentation/OktaOAuth2/AuthorizationCodeFlow/start(with:additionalParameters:completion:)": {
-  "abstract" : [
-    {
-      "text" : "Initiates an authentication flow, with an optional ",
-      "type" : "text"
-    },
-    {
-      "identifier" : "doc:\/\/OktaOAuth2\/documentation\/OktaOAuth2\/AuthorizationCodeFlow\/Context-swift.struct",
-      "isActive" : true,
-      "type" : "reference"
-    },
-    {
-      "text" : ".",
-      "type" : "text"
-    }
-  ],
-  "fragments" : [
-    {
-      "kind" : "keyword",
-      "text" : "func"
-    },
-    {
-      "kind" : "text",
-      "text" : " "
-    },
-    {
-      "kind" : "identifier",
-      "text" : "start"
-    },
-    {
-      "kind" : "text",
-      "text" : "("
-    },
-    {
-      "kind" : "externalParam",
-      "text" : "with"
-    },
-    {
-      "kind" : "text",
-      "text" : ": "
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:10OktaOAuth221AuthorizationCodeFlowC",
-      "text" : "AuthorizationCodeFlow"
-    },
-    {
-      "kind" : "text",
-      "text" : "."
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:10OktaOAuth221AuthorizationCodeFlowC7ContextV",
-      "text" : "Context"
-    },
-    {
-      "kind" : "text",
-      "text" : "?, "
-    },
-    {
-      "kind" : "externalParam",
-      "text" : "additionalParameters"
-    },
-    {
-      "kind" : "text",
-      "text" : ": ["
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:SS",
-      "text" : "String"
-    },
-    {
-      "kind" : "text",
-      "text" : " : "
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:SS",
-      "text" : "String"
-    },
-    {
-      "kind" : "text",
-      "text" : "]?, "
-    },
-    {
-      "kind" : "externalParam",
-      "text" : "completion"
-    },
-    {
-      "kind" : "text",
-      "text" : ": ("
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:s6ResultO",
-      "text" : "Result"
-    },
-    {
-      "kind" : "text",
-      "text" : "<"
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:10Foundation3URLV",
-      "text" : "URL"
-    },
-    {
-      "kind" : "text",
-      "text" : ", "
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:14AuthFoundation11OAuth2ErrorO",
-      "text" : "OAuth2Error"
-    },
-    {
-      "kind" : "text",
-      "text" : ">) -> "
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:s4Voida",
-      "text" : "Void"
-    },
-    {
-      "kind" : "text",
-      "text" : ")"
-    }
-  ],
-  "identifier" : "doc:\/\/OktaOAuth2\/documentation\/OktaOAuth2\/AuthorizationCodeFlow\/start(with:additionalParameters:completion:)",
-  "kind" : "symbol",
-  "role" : "symbol",
-  "title" : "start(with:additionalParameters:completion:)",
-  "type" : "topic",
-  "url" : "\/documentation\/oktaoauth2\/authorizationcodeflow\/start(with:additionalparameters:completion:)"
 }
 }
 }

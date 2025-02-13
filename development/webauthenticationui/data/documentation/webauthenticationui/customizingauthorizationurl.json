@@ -83,27 +83,24 @@
               "type" : "text"
             },
             {
-              "identifier" : "doc:\/\/WebAuthenticationUI\/documentation\/WebAuthenticationUI\/WebAuthentication\/signIn(from:options:)",
-              "isActive" : true,
-              "type" : "reference"
+              "code" : "WebAuthentication\/signIn(from:options:)",
+              "type" : "codeVoice"
             },
             {
               "text" : " or ",
               "type" : "text"
             },
             {
-              "identifier" : "doc:\/\/WebAuthenticationUI\/documentation\/WebAuthenticationUI\/WebAuthentication\/signOut(from:credential:options:)",
-              "isActive" : true,
-              "type" : "reference"
+              "code" : "WebAuthentication\/signOut(from:credential:options:)",
+              "type" : "codeVoice"
             },
             {
               "text" : " functions. These options are defined in the ",
               "type" : "text"
             },
             {
-              "identifier" : "doc:\/\/WebAuthenticationUI\/documentation\/WebAuthenticationUI\/WebAuthentication\/Option",
-              "isActive" : true,
-              "type" : "reference"
+              "code" : "WebAuthentication\/Option",
+              "type" : "codeVoice"
             },
             {
               "text" : " enumeration, and gives you control over the behavior of the sign-in experience within the browser.",
@@ -140,9 +137,8 @@
               "type" : "text"
             },
             {
-              "identifier" : "doc:\/\/WebAuthenticationUI\/documentation\/WebAuthenticationUI\/WebAuthentication\/init(issuer:clientId:scopes:redirectUri:logoutRedirectUri:additionalParameters:)",
-              "isActive" : true,
-              "type" : "reference"
+              "code" : "WebAuthentication\/init(issuer:clientId:scopes:redirectUri:logoutRedirectUri:additionalParameters:)",
+              "type" : "codeVoice"
             },
             {
               "text" : " initializer or through the ",
@@ -166,18 +162,16 @@
               "type" : "text"
             },
             {
-              "identifier" : "doc:\/\/WebAuthenticationUI\/documentation\/WebAuthenticationUI\/WebAuthentication\/signIn(from:options:)",
-              "isActive" : true,
-              "type" : "reference"
+              "code" : "WebAuthentication\/signIn(from:options:)",
+              "type" : "codeVoice"
             },
             {
               "text" : " or ",
               "type" : "text"
             },
             {
-              "identifier" : "doc:\/\/WebAuthenticationUI\/documentation\/WebAuthenticationUI\/WebAuthentication\/signOut(from:credential:options:)",
-              "isActive" : true,
-              "type" : "reference"
+              "code" : "WebAuthentication\/signOut(from:credential:options:)",
+              "type" : "codeVoice"
             },
             {
               "text" : " functions.",
@@ -393,288 +387,6 @@
   "type" : "topic",
   "url" : "\/documentation\/webauthenticationui\/webauthentication"
 },
-"doc://WebAuthenticationUI/documentation/WebAuthenticationUI/WebAuthentication/Option": {
-  "abstract" : [
-    {
-      "text" : "Describes available options for customizing the sign on process.",
-      "type" : "text"
-    }
-  ],
-  "fragments" : [
-    {
-      "kind" : "keyword",
-      "text" : "enum"
-    },
-    {
-      "kind" : "text",
-      "text" : " "
-    },
-    {
-      "kind" : "identifier",
-      "text" : "Option"
-    }
-  ],
-  "identifier" : "doc:\/\/WebAuthenticationUI\/documentation\/WebAuthenticationUI\/WebAuthentication\/Option",
-  "kind" : "symbol",
-  "navigatorTitle" : [
-    {
-      "kind" : "identifier",
-      "text" : "Option"
-    }
-  ],
-  "role" : "symbol",
-  "title" : "WebAuthentication.Option",
-  "type" : "topic",
-  "url" : "\/documentation\/webauthenticationui\/webauthentication\/option"
-},
-"doc://WebAuthenticationUI/documentation/WebAuthenticationUI/WebAuthentication/init(issuer:clientId:scopes:redirectUri:logoutRedirectUri:additionalParameters:)": {
-  "abstract" : [
-    {
-      "text" : "Initializes a web authentication session using the supplied client credentials.",
-      "type" : "text"
-    }
-  ],
-  "fragments" : [
-    {
-      "kind" : "keyword",
-      "text" : "convenience"
-    },
-    {
-      "kind" : "text",
-      "text" : " "
-    },
-    {
-      "kind" : "identifier",
-      "text" : "init"
-    },
-    {
-      "kind" : "text",
-      "text" : "("
-    },
-    {
-      "kind" : "externalParam",
-      "text" : "issuer"
-    },
-    {
-      "kind" : "text",
-      "text" : ": "
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:10Foundation3URLV",
-      "text" : "URL"
-    },
-    {
-      "kind" : "text",
-      "text" : ", "
-    },
-    {
-      "kind" : "externalParam",
-      "text" : "clientId"
-    },
-    {
-      "kind" : "text",
-      "text" : ": "
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:SS",
-      "text" : "String"
-    },
-    {
-      "kind" : "text",
-      "text" : ", "
-    },
-    {
-      "kind" : "externalParam",
-      "text" : "scopes"
-    },
-    {
-      "kind" : "text",
-      "text" : ": "
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:SS",
-      "text" : "String"
-    },
-    {
-      "kind" : "text",
-      "text" : ", "
-    },
-    {
-      "kind" : "externalParam",
-      "text" : "redirectUri"
-    },
-    {
-      "kind" : "text",
-      "text" : ": "
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:10Foundation3URLV",
-      "text" : "URL"
-    },
-    {
-      "kind" : "text",
-      "text" : ", "
-    },
-    {
-      "kind" : "externalParam",
-      "text" : "logoutRedirectUri"
-    },
-    {
-      "kind" : "text",
-      "text" : ": "
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:10Foundation3URLV",
-      "text" : "URL"
-    },
-    {
-      "kind" : "text",
-      "text" : "?, "
-    },
-    {
-      "kind" : "externalParam",
-      "text" : "additionalParameters"
-    },
-    {
-      "kind" : "text",
-      "text" : ": ["
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:SS",
-      "text" : "String"
-    },
-    {
-      "kind" : "text",
-      "text" : " : any "
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:14AuthFoundation18APIRequestArgumentP",
-      "text" : "APIRequestArgument"
-    },
-    {
-      "kind" : "text",
-      "text" : "]?)"
-    }
-  ],
-  "identifier" : "doc:\/\/WebAuthenticationUI\/documentation\/WebAuthenticationUI\/WebAuthentication\/init(issuer:clientId:scopes:redirectUri:logoutRedirectUri:additionalParameters:)",
-  "kind" : "symbol",
-  "role" : "symbol",
-  "title" : "init(issuer:clientId:scopes:redirectUri:logoutRedirectUri:additionalParameters:)",
-  "type" : "topic",
-  "url" : "\/documentation\/webauthenticationui\/webauthentication\/init(issuer:clientid:scopes:redirecturi:logoutredirecturi:additionalparameters:)"
-},
-"doc://WebAuthenticationUI/documentation/WebAuthenticationUI/WebAuthentication/signIn(from:options:)": {
-  "abstract" : [
-    {
-      "text" : "Asynchronously initiates authentication from the given window.",
-      "type" : "text"
-    }
-  ],
-  "fragments" : [
-    {
-      "kind" : "keyword",
-      "text" : "func"
-    },
-    {
-      "kind" : "text",
-      "text" : " "
-    },
-    {
-      "kind" : "identifier",
-      "text" : "signIn"
-    },
-    {
-      "kind" : "text",
-      "text" : "("
-    },
-    {
-      "kind" : "externalParam",
-      "text" : "from"
-    },
-    {
-      "kind" : "text",
-      "text" : ": "
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:19WebAuthenticationUI0aB0C",
-      "text" : "WebAuthentication"
-    },
-    {
-      "kind" : "text",
-      "text" : "."
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:19WebAuthenticationUI0aB0C12WindowAnchora",
-      "text" : "WindowAnchor"
-    },
-    {
-      "kind" : "text",
-      "text" : "?, "
-    },
-    {
-      "kind" : "externalParam",
-      "text" : "options"
-    },
-    {
-      "kind" : "text",
-      "text" : ": ["
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:19WebAuthenticationUI0aB0C",
-      "text" : "WebAuthentication"
-    },
-    {
-      "kind" : "text",
-      "text" : "."
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:19WebAuthenticationUI0aB0C6OptionO",
-      "text" : "Option"
-    },
-    {
-      "kind" : "text",
-      "text" : "]?) "
-    },
-    {
-      "kind" : "keyword",
-      "text" : "async"
-    },
-    {
-      "kind" : "text",
-      "text" : " "
-    },
-    {
-      "kind" : "keyword",
-      "text" : "throws"
-    },
-    {
-      "kind" : "text",
-      "text" : " -> "
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:14AuthFoundation5TokenC",
-      "text" : "Token"
-    }
-  ],
-  "identifier" : "doc:\/\/WebAuthenticationUI\/documentation\/WebAuthenticationUI\/WebAuthentication\/signIn(from:options:)",
-  "kind" : "symbol",
-  "role" : "symbol",
-  "title" : "signIn(from:options:)",
-  "type" : "topic",
-  "url" : "\/documentation\/webauthenticationui\/webauthentication\/signin(from:options:)"
-},
 "doc://WebAuthenticationUI/documentation/WebAuthenticationUI/WebAuthentication/signInFlow": {
   "abstract" : [
     {
@@ -711,119 +423,6 @@
   "title" : "signInFlow",
   "type" : "topic",
   "url" : "\/documentation\/webauthenticationui\/webauthentication\/signinflow"
-},
-"doc://WebAuthenticationUI/documentation/WebAuthenticationUI/WebAuthentication/signOut(from:credential:options:)": {
-  "abstract" : [
-    {
-      "text" : "Asynchronous convenience method that initiates log-out using the credential object, throwing the error if fails.",
-      "type" : "text"
-    }
-  ],
-  "fragments" : [
-    {
-      "kind" : "keyword",
-      "text" : "func"
-    },
-    {
-      "kind" : "text",
-      "text" : " "
-    },
-    {
-      "kind" : "identifier",
-      "text" : "signOut"
-    },
-    {
-      "kind" : "text",
-      "text" : "("
-    },
-    {
-      "kind" : "externalParam",
-      "text" : "from"
-    },
-    {
-      "kind" : "text",
-      "text" : ": "
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:19WebAuthenticationUI0aB0C",
-      "text" : "WebAuthentication"
-    },
-    {
-      "kind" : "text",
-      "text" : "."
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:19WebAuthenticationUI0aB0C12WindowAnchora",
-      "text" : "WindowAnchor"
-    },
-    {
-      "kind" : "text",
-      "text" : "?, "
-    },
-    {
-      "kind" : "externalParam",
-      "text" : "credential"
-    },
-    {
-      "kind" : "text",
-      "text" : ": "
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:14AuthFoundation10CredentialC",
-      "text" : "Credential"
-    },
-    {
-      "kind" : "text",
-      "text" : "?, "
-    },
-    {
-      "kind" : "externalParam",
-      "text" : "options"
-    },
-    {
-      "kind" : "text",
-      "text" : ": ["
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:19WebAuthenticationUI0aB0C",
-      "text" : "WebAuthentication"
-    },
-    {
-      "kind" : "text",
-      "text" : "."
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:19WebAuthenticationUI0aB0C6OptionO",
-      "text" : "Option"
-    },
-    {
-      "kind" : "text",
-      "text" : "]?) "
-    },
-    {
-      "kind" : "keyword",
-      "text" : "async"
-    },
-    {
-      "kind" : "text",
-      "text" : " "
-    },
-    {
-      "kind" : "keyword",
-      "text" : "throws"
-    }
-  ],
-  "identifier" : "doc:\/\/WebAuthenticationUI\/documentation\/WebAuthenticationUI\/WebAuthentication\/signOut(from:credential:options:)",
-  "kind" : "symbol",
-  "role" : "symbol",
-  "title" : "signOut(from:credential:options:)",
-  "type" : "topic",
-  "url" : "\/documentation\/webauthenticationui\/webauthentication\/signout(from:credential:options:)"
 }
 }
 }

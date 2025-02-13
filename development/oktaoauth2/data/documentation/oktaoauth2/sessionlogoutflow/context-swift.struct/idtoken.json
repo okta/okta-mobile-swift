@@ -1,7 +1,7 @@
 {
   "abstract" : [
     {
-      "text" : "The ID token string used for log-out.",
+      "text" : "The ID token hint to use when signing out.",
       "type" : "text"
     }
   ],
@@ -19,11 +19,11 @@
   },
   "kind" : "symbol",
   "metadata" : {
-    "externalID" : "s:10OktaOAuth217SessionLogoutFlowC7ContextV7idTokenSSvp",
+    "externalID" : "s:10OktaOAuth217SessionLogoutFlowC7ContextV7idTokenSSSgvp",
     "fragments" : [
       {
         "kind" : "keyword",
-        "text" : "let"
+        "text" : "var"
       },
       {
         "kind" : "text",
@@ -41,6 +41,10 @@
         "kind" : "typeIdentifier",
         "preciseIdentifier" : "s:SS",
         "text" : "String"
+      },
+      {
+        "kind" : "text",
+        "text" : "?"
       }
     ],
     "modules" : [
@@ -66,7 +70,7 @@
           "tokens" : [
             {
               "kind" : "keyword",
-              "text" : "let"
+              "text" : "var"
             },
             {
               "kind" : "text",
@@ -84,6 +88,26 @@
               "kind" : "typeIdentifier",
               "preciseIdentifier" : "s:SS",
               "text" : "String"
+            },
+            {
+              "kind" : "text",
+              "text" : "? { "
+            },
+            {
+              "kind" : "keyword",
+              "text" : "get"
+            },
+            {
+              "kind" : "text",
+              "text" : " "
+            },
+            {
+              "kind" : "keyword",
+              "text" : "set"
+            },
+            {
+              "kind" : "text",
+              "text" : " }"
             }
           ]
         }
@@ -164,14 +188,14 @@
 "doc://OktaOAuth2/documentation/OktaOAuth2/SessionLogoutFlow/Context-swift.struct/idToken": {
   "abstract" : [
     {
-      "text" : "The ID token string used for log-out.",
+      "text" : "The ID token hint to use when signing out.",
       "type" : "text"
     }
   ],
   "fragments" : [
     {
       "kind" : "keyword",
-      "text" : "let"
+      "text" : "var"
     },
     {
       "kind" : "text",
@@ -189,6 +213,10 @@
       "kind" : "typeIdentifier",
       "preciseIdentifier" : "s:SS",
       "text" : "String"
+    },
+    {
+      "kind" : "text",
+      "text" : "?"
     }
   ],
   "identifier" : "doc:\/\/OktaOAuth2\/documentation\/OktaOAuth2\/SessionLogoutFlow\/Context-swift.struct\/idToken",

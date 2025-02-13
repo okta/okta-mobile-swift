@@ -253,6 +253,28 @@
             {
               "inlineContent" : [
                 {
+                  "text" : "The server name to search for, or ",
+                  "type" : "text"
+                },
+                {
+                  "code" : "nil",
+                  "type" : "codeVoice"
+                },
+                {
+                  "text" : " to return all servers.",
+                  "type" : "text"
+                }
+              ],
+              "type" : "paragraph"
+            }
+          ],
+          "name" : "server"
+        },
+        {
+          "content" : [
+            {
+              "inlineContent" : [
+                {
                   "text" : "The access group to search within, or ",
                   "type" : "text"
                 },

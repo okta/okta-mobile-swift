@@ -117,7 +117,6 @@
         "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JWKS",
         "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JWTClaim",
         "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/HasClaims",
-        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/Claim",
         "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JSONClaimContainer",
         "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/AnyJSON",
         "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/ClaimConvertable",
@@ -128,12 +127,6 @@
     }
   ],
   "topicSections" : [
-    {
-      "identifiers" : [
-        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JSON\/==(_:_:)"
-      ],
-      "title" : "Operators"
-    },
     {
       "identifiers" : [
         "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JSON\/array(_:)",
@@ -170,8 +163,6 @@
       "generated" : true,
       "identifiers" : [
         "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JSON\/CustomDebugStringConvertible-Implementations",
-        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JSON\/Decodable-Implementations",
-        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JSON\/Encodable-Implementations",
         "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JSON\/Equatable-Implementations"
       ],
       "title" : "Default Implementations"
@@ -262,38 +253,6 @@
   "title" : "AnyJSON",
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/anyjson"
-},
-"doc://AuthFoundation/documentation/AuthFoundation/Claim": {
-  "abstract" : [
-
-  ],
-  "deprecated" : true,
-  "fragments" : [
-    {
-      "kind" : "keyword",
-      "text" : "typealias"
-    },
-    {
-      "kind" : "text",
-      "text" : " "
-    },
-    {
-      "kind" : "identifier",
-      "text" : "Claim"
-    }
-  ],
-  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/Claim",
-  "kind" : "symbol",
-  "navigatorTitle" : [
-    {
-      "kind" : "identifier",
-      "text" : "Claim"
-    }
-  ],
-  "role" : "symbol",
-  "title" : "Claim",
-  "type" : "topic",
-  "url" : "\/documentation\/authfoundation\/claim"
 },
 "doc://AuthFoundation/documentation/AuthFoundation/ClaimConvertable": {
   "abstract" : [
@@ -526,70 +485,6 @@
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/json"
 },
-"doc://AuthFoundation/documentation/AuthFoundation/JSON/==(_:_:)": {
-  "abstract" : [
-
-  ],
-  "fragments" : [
-    {
-      "kind" : "keyword",
-      "text" : "static"
-    },
-    {
-      "kind" : "text",
-      "text" : " "
-    },
-    {
-      "kind" : "keyword",
-      "text" : "func"
-    },
-    {
-      "kind" : "text",
-      "text" : " "
-    },
-    {
-      "kind" : "identifier",
-      "text" : "=="
-    },
-    {
-      "kind" : "text",
-      "text" : " "
-    },
-    {
-      "kind" : "text",
-      "text" : "("
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:14AuthFoundation4JSONO",
-      "text" : "JSON"
-    },
-    {
-      "kind" : "text",
-      "text" : ", "
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:14AuthFoundation4JSONO",
-      "text" : "JSON"
-    },
-    {
-      "kind" : "text",
-      "text" : ") -> "
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:Sb",
-      "text" : "Bool"
-    }
-  ],
-  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JSON\/==(_:_:)",
-  "kind" : "symbol",
-  "role" : "symbol",
-  "title" : "==(_:_:)",
-  "type" : "topic",
-  "url" : "\/documentation\/authfoundation\/json\/==(_:_:)"
-},
 "doc://AuthFoundation/documentation/AuthFoundation/JSON/CustomDebugStringConvertible-Implementations": {
   "abstract" : [
 
@@ -600,28 +495,6 @@
   "title" : "CustomDebugStringConvertible Implementations",
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/json\/customdebugstringconvertible-implementations"
-},
-"doc://AuthFoundation/documentation/AuthFoundation/JSON/Decodable-Implementations": {
-  "abstract" : [
-
-  ],
-  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JSON\/Decodable-Implementations",
-  "kind" : "article",
-  "role" : "collectionGroup",
-  "title" : "Decodable Implementations",
-  "type" : "topic",
-  "url" : "\/documentation\/authfoundation\/json\/decodable-implementations"
-},
-"doc://AuthFoundation/documentation/AuthFoundation/JSON/Encodable-Implementations": {
-  "abstract" : [
-
-  ],
-  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JSON\/Encodable-Implementations",
-  "kind" : "article",
-  "role" : "collectionGroup",
-  "title" : "Encodable Implementations",
-  "type" : "topic",
-  "url" : "\/documentation\/authfoundation\/json\/encodable-implementations"
 },
 "doc://AuthFoundation/documentation/AuthFoundation/JSON/Equatable-Implementations": {
   "abstract" : [

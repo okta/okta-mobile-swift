@@ -104,7 +104,6 @@
       "generated" : true,
       "identifiers" : [
         "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/APIClientError",
-        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/AuthenticationError",
         "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/ClaimError",
         "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/CredentialError",
         "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JSONError",
@@ -128,10 +127,11 @@
         "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/OAuth2Error\/missingLocationHeader",
         "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/OAuth2Error\/missingOAuth2ResponseKey(_:)",
         "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/OAuth2Error\/missingOpenIdConfiguration(attribute:)",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/OAuth2Error\/missingRedirectUri",
         "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/OAuth2Error\/missingToken(type:)",
         "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/OAuth2Error\/multiple(errors:)",
         "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/OAuth2Error\/network(error:)",
-        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/OAuth2Error\/oauth2Error(code:description:additionalKeys:)",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/OAuth2Error\/server(error:)",
         "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/OAuth2Error\/signatureInvalid"
       ],
       "title" : "Enumeration Cases"
@@ -217,40 +217,6 @@
   "title" : "APIClientError",
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/apiclienterror"
-},
-"doc://AuthFoundation/documentation/AuthFoundation/AuthenticationError": {
-  "abstract" : [
-    {
-      "text" : "Errors that may be generated during the process of authenticating with a variety of authentication flows.",
-      "type" : "text"
-    }
-  ],
-  "fragments" : [
-    {
-      "kind" : "keyword",
-      "text" : "enum"
-    },
-    {
-      "kind" : "text",
-      "text" : " "
-    },
-    {
-      "kind" : "identifier",
-      "text" : "AuthenticationError"
-    }
-  ],
-  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/AuthenticationError",
-  "kind" : "symbol",
-  "navigatorTitle" : [
-    {
-      "kind" : "identifier",
-      "text" : "AuthenticationError"
-    }
-  ],
-  "role" : "symbol",
-  "title" : "AuthenticationError",
-  "type" : "topic",
-  "url" : "\/documentation\/authfoundation\/authenticationerror"
 },
 "doc://AuthFoundation/documentation/AuthFoundation/ClaimError": {
   "abstract" : [
@@ -792,6 +758,42 @@
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/oauth2error\/missingopenidconfiguration(attribute:)"
 },
+"doc://AuthFoundation/documentation/AuthFoundation/OAuth2Error/missingRedirectUri": {
+  "abstract" : [
+    {
+      "text" : "An operation was performed which requires a ",
+      "type" : "text"
+    },
+    {
+      "code" : "redirect_uri",
+      "type" : "codeVoice"
+    },
+    {
+      "text" : ", but none was supplied to the client configuration.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "case"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "missingRedirectUri"
+    }
+  ],
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/OAuth2Error\/missingRedirectUri",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "OAuth2Error.missingRedirectUri",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/oauth2error\/missingredirecturi"
+},
 "doc://AuthFoundation/documentation/AuthFoundation/OAuth2Error/missingToken(type:)": {
   "abstract" : [
     {
@@ -966,10 +968,10 @@
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/oauth2error\/network(error:)"
 },
-"doc://AuthFoundation/documentation/AuthFoundation/OAuth2Error/oauth2Error(code:description:additionalKeys:)": {
+"doc://AuthFoundation/documentation/AuthFoundation/OAuth2Error/server(error:)": {
   "abstract" : [
     {
-      "text" : "An OAuth2 server error was reported, with the given values.",
+      "text" : "An OAuth2 server error has been returned.",
       "type" : "text"
     }
   ],
@@ -984,7 +986,7 @@
     },
     {
       "kind" : "identifier",
-      "text" : "oauth2Error"
+      "text" : "server"
     },
     {
       "kind" : "text",
@@ -992,7 +994,7 @@
     },
     {
       "kind" : "externalParam",
-      "text" : "code"
+      "text" : "error"
     },
     {
       "kind" : "text",
@@ -1000,63 +1002,20 @@
     },
     {
       "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:SS",
-      "text" : "String"
+      "preciseIdentifier" : "s:14AuthFoundation17OAuth2ServerErrorV",
+      "text" : "OAuth2ServerError"
     },
     {
       "kind" : "text",
-      "text" : ", "
-    },
-    {
-      "kind" : "externalParam",
-      "text" : "description"
-    },
-    {
-      "kind" : "text",
-      "text" : ": "
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:SS",
-      "text" : "String"
-    },
-    {
-      "kind" : "text",
-      "text" : "?, "
-    },
-    {
-      "kind" : "externalParam",
-      "text" : "additionalKeys"
-    },
-    {
-      "kind" : "text",
-      "text" : ": ["
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:SS",
-      "text" : "String"
-    },
-    {
-      "kind" : "text",
-      "text" : " : "
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:SS",
-      "text" : "String"
-    },
-    {
-      "kind" : "text",
-      "text" : "]?)"
+      "text" : ")"
     }
   ],
-  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/OAuth2Error\/oauth2Error(code:description:additionalKeys:)",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/OAuth2Error\/server(error:)",
   "kind" : "symbol",
   "role" : "symbol",
-  "title" : "OAuth2Error.oauth2Error(code:description:additionalKeys:)",
+  "title" : "OAuth2Error.server(error:)",
   "type" : "topic",
-  "url" : "\/documentation\/authfoundation\/oauth2error\/oauth2error(code:description:additionalkeys:)"
+  "url" : "\/documentation\/authfoundation\/oauth2error\/server(error:)"
 },
 "doc://AuthFoundation/documentation/AuthFoundation/OAuth2Error/signatureInvalid": {
   "abstract" : [

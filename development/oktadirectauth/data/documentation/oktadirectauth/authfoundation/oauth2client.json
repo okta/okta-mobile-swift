@@ -14,7 +14,7 @@
   "kind" : "symbol",
   "metadata" : {
     "extendedModule" : "AuthFoundation",
-    "externalID" : "s:e:s:14AuthFoundation12OAuth2ClientC010OktaDirectA0E24directAuthenticationFlow15supportedGrantsAD0fhI0CSayAA9GrantTypeOG_tF",
+    "externalID" : "s:e:s:14AuthFoundation12OAuth2ClientC010OktaDirectA0E24directAuthenticationFlow15supportedGrants20additionalParametersAD0fhI0CSayAA9GrantTypeOG_SDyS2SGSgtF",
     "fragments" : [
       {
         "kind" : "keyword",
@@ -90,7 +90,7 @@
   "topicSections" : [
     {
       "identifiers" : [
-        "doc:\/\/OktaDirectAuth\/documentation\/OktaDirectAuth\/AuthFoundation\/OAuth2Client\/directAuthenticationFlow(supportedGrants:)"
+        "doc:\/\/OktaDirectAuth\/documentation\/OktaDirectAuth\/AuthFoundation\/OAuth2Client\/directAuthenticationFlow(supportedGrants:additionalParameters:)"
       ],
       "title" : "Instance Methods"
     }
@@ -166,7 +166,7 @@
   "type" : "topic",
   "url" : "\/documentation\/oktadirectauth\/authfoundation\/oauth2client"
 },
-"doc://OktaDirectAuth/documentation/OktaDirectAuth/AuthFoundation/OAuth2Client/directAuthenticationFlow(supportedGrants:)": {
+"doc://OktaDirectAuth/documentation/OktaDirectAuth/AuthFoundation/OAuth2Client/directAuthenticationFlow(supportedGrants:additionalParameters:)": {
   "abstract" : [
     {
       "text" : "Creates a new flow to authenticate users, with the given grants the application supports.",
@@ -205,7 +205,33 @@
     },
     {
       "kind" : "text",
-      "text" : "]) -> "
+      "text" : "], "
+    },
+    {
+      "kind" : "externalParam",
+      "text" : "additionalParameters"
+    },
+    {
+      "kind" : "text",
+      "text" : ": ["
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:SS",
+      "text" : "String"
+    },
+    {
+      "kind" : "text",
+      "text" : " : "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:SS",
+      "text" : "String"
+    },
+    {
+      "kind" : "text",
+      "text" : "]?) -> "
     },
     {
       "kind" : "typeIdentifier",
@@ -213,12 +239,12 @@
       "text" : "DirectAuthenticationFlow"
     }
   ],
-  "identifier" : "doc:\/\/OktaDirectAuth\/documentation\/OktaDirectAuth\/AuthFoundation\/OAuth2Client\/directAuthenticationFlow(supportedGrants:)",
+  "identifier" : "doc:\/\/OktaDirectAuth\/documentation\/OktaDirectAuth\/AuthFoundation\/OAuth2Client\/directAuthenticationFlow(supportedGrants:additionalParameters:)",
   "kind" : "symbol",
   "role" : "symbol",
-  "title" : "directAuthenticationFlow(supportedGrants:)",
+  "title" : "directAuthenticationFlow(supportedGrants:additionalParameters:)",
   "type" : "topic",
-  "url" : "\/documentation\/oktadirectauth\/authfoundation\/oauth2client\/directauthenticationflow(supportedgrants:)"
+  "url" : "\/documentation\/oktadirectauth\/authfoundation\/oauth2client\/directauthenticationflow(supportedgrants:additionalparameters:)"
 }
 }
 }

@@ -20,7 +20,7 @@
   "kind" : "symbol",
   "metadata" : {
     "extendedModule" : "OktaOAuth2",
-    "externalID" : "s:10OktaOAuth216SessionTokenFlowC5start4with7context14AuthFoundation0D0CSS_AA017AuthorizationCodeE0C7ContextVSgtYaKF",
+    "externalID" : "s:10OktaOAuth216SessionTokenFlowC5start4with7context14AuthFoundation0D0CSS_AA017AuthorizationCodeE0C7ContextVtYaKF",
     "fragments" : [
       {
         "kind" : "keyword",
@@ -65,8 +65,8 @@
       },
       {
         "kind" : "typeIdentifier",
-        "preciseIdentifier" : "s:10OktaOAuth221AuthorizationCodeFlowC",
-        "text" : "AuthorizationCodeFlow"
+        "preciseIdentifier" : "s:10OktaOAuth216SessionTokenFlowC",
+        "text" : "SessionTokenFlow"
       },
       {
         "kind" : "text",
@@ -74,12 +74,12 @@
       },
       {
         "kind" : "typeIdentifier",
-        "preciseIdentifier" : "s:10OktaOAuth221AuthorizationCodeFlowC7ContextV",
+        "preciseIdentifier" : "s:10OktaOAuth216SessionTokenFlowC7Contexta",
         "text" : "Context"
       },
       {
         "kind" : "text",
-        "text" : "?) "
+        "text" : ") "
       },
       {
         "kind" : "keyword",
@@ -204,24 +204,24 @@
               "text" : ": "
             },
             {
-              "identifier" : "doc:\/\/OktaOAuth2\/documentation\/OktaOAuth2\/AuthorizationCodeFlow",
+              "identifier" : "doc:\/\/OktaOAuth2\/documentation\/OktaOAuth2\/SessionTokenFlow",
               "kind" : "typeIdentifier",
-              "preciseIdentifier" : "s:10OktaOAuth221AuthorizationCodeFlowC",
-              "text" : "AuthorizationCodeFlow"
+              "preciseIdentifier" : "s:10OktaOAuth216SessionTokenFlowC",
+              "text" : "SessionTokenFlow"
             },
             {
               "kind" : "text",
               "text" : "."
             },
             {
-              "identifier" : "doc:\/\/OktaOAuth2\/documentation\/OktaOAuth2\/AuthorizationCodeFlow\/Context-swift.struct",
+              "identifier" : "doc:\/\/OktaOAuth2\/documentation\/OktaOAuth2\/SessionTokenFlow\/Context-swift.typealias",
               "kind" : "typeIdentifier",
-              "preciseIdentifier" : "s:10OktaOAuth221AuthorizationCodeFlowC7ContextV",
+              "preciseIdentifier" : "s:10OktaOAuth216SessionTokenFlowC7Contexta",
               "text" : "Context"
             },
             {
               "kind" : "text",
-              "text" : "? = nil) "
+              "text" : " = .init()) "
             },
             {
               "kind" : "keyword",
@@ -286,74 +286,6 @@
   "type" : "topic",
   "url" : "\/documentation\/oktaoauth2"
 },
-"doc://OktaOAuth2/documentation/OktaOAuth2/AuthorizationCodeFlow": {
-  "abstract" : [
-    {
-      "text" : "An authentication flow class that implements the Authorization Code Flow exchange.",
-      "type" : "text"
-    }
-  ],
-  "fragments" : [
-    {
-      "kind" : "keyword",
-      "text" : "class"
-    },
-    {
-      "kind" : "text",
-      "text" : " "
-    },
-    {
-      "kind" : "identifier",
-      "text" : "AuthorizationCodeFlow"
-    }
-  ],
-  "identifier" : "doc:\/\/OktaOAuth2\/documentation\/OktaOAuth2\/AuthorizationCodeFlow",
-  "kind" : "symbol",
-  "navigatorTitle" : [
-    {
-      "kind" : "identifier",
-      "text" : "AuthorizationCodeFlow"
-    }
-  ],
-  "role" : "symbol",
-  "title" : "AuthorizationCodeFlow",
-  "type" : "topic",
-  "url" : "\/documentation\/oktaoauth2\/authorizationcodeflow"
-},
-"doc://OktaOAuth2/documentation/OktaOAuth2/AuthorizationCodeFlow/Context-swift.struct": {
-  "abstract" : [
-    {
-      "text" : "A model representing the context and current state for an authorization session.",
-      "type" : "text"
-    }
-  ],
-  "fragments" : [
-    {
-      "kind" : "keyword",
-      "text" : "struct"
-    },
-    {
-      "kind" : "text",
-      "text" : " "
-    },
-    {
-      "kind" : "identifier",
-      "text" : "Context"
-    }
-  ],
-  "identifier" : "doc:\/\/OktaOAuth2\/documentation\/OktaOAuth2\/AuthorizationCodeFlow\/Context-swift.struct",
-  "kind" : "symbol",
-  "navigatorTitle" : [
-    {
-      "kind" : "identifier",
-      "text" : "Context"
-    }
-  ],
-  "role" : "symbol",
-  "title" : "AuthorizationCodeFlow.Context",
-  "type" : "topic",
-  "url" : "\/documentation\/oktaoauth2\/authorizationcodeflow\/context-swift.struct"
-},
 "doc://OktaOAuth2/documentation/OktaOAuth2/SessionTokenFlow": {
   "abstract" : [
     {
@@ -387,6 +319,37 @@
   "title" : "SessionTokenFlow",
   "type" : "topic",
   "url" : "\/documentation\/oktaoauth2\/sessiontokenflow"
+},
+"doc://OktaOAuth2/documentation/OktaOAuth2/SessionTokenFlow/Context-swift.typealias": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "typealias"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "Context"
+    }
+  ],
+  "identifier" : "doc:\/\/OktaOAuth2\/documentation\/OktaOAuth2\/SessionTokenFlow\/Context-swift.typealias",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "Context"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "SessionTokenFlow.Context",
+  "type" : "topic",
+  "url" : "\/documentation\/oktaoauth2\/sessiontokenflow\/context-swift.typealias"
 },
 "doc://OktaOAuth2/documentation/OktaOAuth2/SessionTokenFlow/start(with:context:)": {
   "abstract" : [
@@ -439,8 +402,8 @@
     },
     {
       "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:10OktaOAuth221AuthorizationCodeFlowC",
-      "text" : "AuthorizationCodeFlow"
+      "preciseIdentifier" : "s:10OktaOAuth216SessionTokenFlowC",
+      "text" : "SessionTokenFlow"
     },
     {
       "kind" : "text",
@@ -448,12 +411,12 @@
     },
     {
       "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:10OktaOAuth221AuthorizationCodeFlowC7ContextV",
+      "preciseIdentifier" : "s:10OktaOAuth216SessionTokenFlowC7Contexta",
       "text" : "Context"
     },
     {
       "kind" : "text",
-      "text" : "?) "
+      "text" : ") "
     },
     {
       "kind" : "keyword",

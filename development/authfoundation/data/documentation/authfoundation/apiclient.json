@@ -283,7 +283,7 @@
     },
     {
       "identifiers" : [
-        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/APIClient\/decode(_:from:userInfo:)",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/APIClient\/decode(_:from:parsing:)",
         "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/APIClient\/didSend(request:received:)-42ak",
         "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/APIClient\/didSend(request:received:)-5li2y",
         "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/APIClient\/didSend(request:received:requestId:rateLimit:)",
@@ -490,7 +490,7 @@
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/apiclient\/baseurl"
 },
-"doc://AuthFoundation/documentation/AuthFoundation/APIClient/decode(_:from:userInfo:)": {
+"doc://AuthFoundation/documentation/AuthFoundation/APIClient/decode(_:from:parsing:)": {
   "abstract" : [
     {
       "text" : "Decodes HTTP response data into an expected type.",
@@ -549,28 +549,20 @@
     },
     {
       "kind" : "externalParam",
-      "text" : "userInfo"
+      "text" : "parsing"
     },
     {
       "kind" : "text",
-      "text" : ": ["
+      "text" : ": (any "
     },
     {
       "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:s17CodingUserInfoKeyV",
-      "text" : "CodingUserInfoKey"
+      "preciseIdentifier" : "s:14AuthFoundation17APIParsingContextP",
+      "text" : "APIParsingContext"
     },
     {
       "kind" : "text",
-      "text" : " : "
-    },
-    {
-      "kind" : "keyword",
-      "text" : "Any"
-    },
-    {
-      "kind" : "text",
-      "text" : "]?) "
+      "text" : ")?) "
     },
     {
       "kind" : "keyword",
@@ -585,13 +577,13 @@
       "text" : "T"
     }
   ],
-  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/APIClient\/decode(_:from:userInfo:)",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/APIClient\/decode(_:from:parsing:)",
   "kind" : "symbol",
   "required" : true,
   "role" : "symbol",
-  "title" : "decode(_:from:userInfo:)",
+  "title" : "decode(_:from:parsing:)",
   "type" : "topic",
-  "url" : "\/documentation\/authfoundation\/apiclient\/decode(_:from:userinfo:)"
+  "url" : "\/documentation\/authfoundation\/apiclient\/decode(_:from:parsing:)"
 },
 "doc://AuthFoundation/documentation/AuthFoundation/APIClient/didSend(request:received:)-42ak": {
   "abstract" : [

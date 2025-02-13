@@ -141,7 +141,9 @@
         },
         {
           "code" : [
-            "let logoutFlow = SessionLogoutFlow(issuer: issuer,",
+            "let logoutFlow = SessionLogoutFlow(issuerURL: issuer,",
+            "                                   clientId: \"myclientid\",",
+            "                                   scope: \"openid profile\",",
             "                                   logoutRedirectUri: URL(string: \"com.example.app:\/logout\")!)",
             "",
             "\/\/ Create the logout URL. Open this in a browser.",
@@ -159,7 +161,6 @@
       "identifiers" : [
         "doc:\/\/OktaOAuth2\/14AuthFoundation17APIClientDelegateP",
         "doc:\/\/OktaOAuth2\/14AuthFoundation20OAuth2ClientDelegateP",
-        "doc:\/\/OktaOAuth2\/14AuthFoundation24ProvidesOAuth2ParametersP",
         "doc:\/\/OktaOAuth2\/14AuthFoundation22UsesDelegateCollectionP",
         "doc:\/\/OktaOAuth2\/documentation\/OktaOAuth2\/LogoutFlow"
       ],
@@ -192,8 +193,8 @@
   "topicSections" : [
     {
       "identifiers" : [
-        "doc:\/\/OktaOAuth2\/documentation\/OktaOAuth2\/SessionLogoutFlow\/init(issuer:clientId:scopes:logoutRedirectUri:additionalParameters:)",
-        "doc:\/\/OktaOAuth2\/documentation\/OktaOAuth2\/SessionLogoutFlow\/init(logoutRedirectUri:additionalParameters:client:)"
+        "doc:\/\/OktaOAuth2\/documentation\/OktaOAuth2\/SessionLogoutFlow\/init(client:additionalParameters:)",
+        "doc:\/\/OktaOAuth2\/documentation\/OktaOAuth2\/SessionLogoutFlow\/init(issuerURL:clientId:scope:logoutRedirectUri:additionalParameters:)"
       ],
       "title" : "Initializers"
     },
@@ -203,8 +204,7 @@
         "doc:\/\/OktaOAuth2\/documentation\/OktaOAuth2\/SessionLogoutFlow\/client",
         "doc:\/\/OktaOAuth2\/documentation\/OktaOAuth2\/SessionLogoutFlow\/context-swift.property",
         "doc:\/\/OktaOAuth2\/documentation\/OktaOAuth2\/SessionLogoutFlow\/delegateCollection",
-        "doc:\/\/OktaOAuth2\/documentation\/OktaOAuth2\/SessionLogoutFlow\/inProgress",
-        "doc:\/\/OktaOAuth2\/documentation\/OktaOAuth2\/SessionLogoutFlow\/logoutRedirectUri"
+        "doc:\/\/OktaOAuth2\/documentation\/OktaOAuth2\/SessionLogoutFlow\/inProgress"
       ],
       "title" : "Instance Properties"
     },
@@ -212,10 +212,8 @@
       "identifiers" : [
         "doc:\/\/OktaOAuth2\/documentation\/OktaOAuth2\/SessionLogoutFlow\/cancel()",
         "doc:\/\/OktaOAuth2\/documentation\/OktaOAuth2\/SessionLogoutFlow\/reset()",
-        "doc:\/\/OktaOAuth2\/documentation\/OktaOAuth2\/SessionLogoutFlow\/start(idToken:additionalParameters:)",
-        "doc:\/\/OktaOAuth2\/documentation\/OktaOAuth2\/SessionLogoutFlow\/start(idToken:additionalParameters:completion:)",
-        "doc:\/\/OktaOAuth2\/documentation\/OktaOAuth2\/SessionLogoutFlow\/start(with:additionalParameters:)",
-        "doc:\/\/OktaOAuth2\/documentation\/OktaOAuth2\/SessionLogoutFlow\/start(with:additionalParameters:completion:)"
+        "doc:\/\/OktaOAuth2\/documentation\/OktaOAuth2\/SessionLogoutFlow\/start(with:)",
+        "doc:\/\/OktaOAuth2\/documentation\/OktaOAuth2\/SessionLogoutFlow\/start(with:completion:)"
       ],
       "title" : "Instance Methods"
     },
@@ -256,11 +254,6 @@
 "doc://OktaOAuth2/14AuthFoundation22UsesDelegateCollectionP": {
   "identifier" : "doc:\/\/OktaOAuth2\/14AuthFoundation22UsesDelegateCollectionP",
   "title" : "AuthFoundation.UsesDelegateCollection",
-  "type" : "unresolvable"
-},
-"doc://OktaOAuth2/14AuthFoundation24ProvidesOAuth2ParametersP": {
-  "identifier" : "doc:\/\/OktaOAuth2\/14AuthFoundation24ProvidesOAuth2ParametersP",
-  "title" : "AuthFoundation.ProvidesOAuth2Parameters",
   "type" : "unresolvable"
 },
 "doc://OktaOAuth2/documentation/OktaOAuth2": {
@@ -776,7 +769,74 @@
   "type" : "topic",
   "url" : "\/documentation\/oktaoauth2\/sessionlogoutflow\/inprogress"
 },
-"doc://OktaOAuth2/documentation/OktaOAuth2/SessionLogoutFlow/init(issuer:clientId:scopes:logoutRedirectUri:additionalParameters:)": {
+"doc://OktaOAuth2/documentation/OktaOAuth2/SessionLogoutFlow/init(client:additionalParameters:)": {
+  "abstract" : [
+    {
+      "text" : "Initializer to construct a logout flow from a pre-defined client.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "identifier",
+      "text" : "init"
+    },
+    {
+      "kind" : "text",
+      "text" : "("
+    },
+    {
+      "kind" : "externalParam",
+      "text" : "client"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:14AuthFoundation12OAuth2ClientC",
+      "text" : "OAuth2Client"
+    },
+    {
+      "kind" : "text",
+      "text" : ", "
+    },
+    {
+      "kind" : "externalParam",
+      "text" : "additionalParameters"
+    },
+    {
+      "kind" : "text",
+      "text" : ": ["
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:SS",
+      "text" : "String"
+    },
+    {
+      "kind" : "text",
+      "text" : " : any "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:14AuthFoundation18APIRequestArgumentP",
+      "text" : "APIRequestArgument"
+    },
+    {
+      "kind" : "text",
+      "text" : "]?)"
+    }
+  ],
+  "identifier" : "doc:\/\/OktaOAuth2\/documentation\/OktaOAuth2\/SessionLogoutFlow\/init(client:additionalParameters:)",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "init(client:additionalParameters:)",
+  "type" : "topic",
+  "url" : "\/documentation\/oktaoauth2\/sessionlogoutflow\/init(client:additionalparameters:)"
+},
+"doc://OktaOAuth2/documentation/OktaOAuth2/SessionLogoutFlow/init(issuerURL:clientId:scope:logoutRedirectUri:additionalParameters:)": {
   "abstract" : [
     {
       "text" : "Convenience initializer to construct a logout flow.",
@@ -798,11 +858,11 @@
     },
     {
       "kind" : "text",
-      "text" : "?("
+      "text" : "("
     },
     {
       "kind" : "externalParam",
-      "text" : "issuer"
+      "text" : "issuerURL"
     },
     {
       "kind" : "text",
@@ -836,7 +896,7 @@
     },
     {
       "kind" : "externalParam",
-      "text" : "scopes"
+      "text" : "scope"
     },
     {
       "kind" : "text",
@@ -895,133 +955,12 @@
       "text" : "]?)"
     }
   ],
-  "identifier" : "doc:\/\/OktaOAuth2\/documentation\/OktaOAuth2\/SessionLogoutFlow\/init(issuer:clientId:scopes:logoutRedirectUri:additionalParameters:)",
+  "identifier" : "doc:\/\/OktaOAuth2\/documentation\/OktaOAuth2\/SessionLogoutFlow\/init(issuerURL:clientId:scope:logoutRedirectUri:additionalParameters:)",
   "kind" : "symbol",
   "role" : "symbol",
-  "title" : "init(issuer:clientId:scopes:logoutRedirectUri:additionalParameters:)",
+  "title" : "init(issuerURL:clientId:scope:logoutRedirectUri:additionalParameters:)",
   "type" : "topic",
-  "url" : "\/documentation\/oktaoauth2\/sessionlogoutflow\/init(issuer:clientid:scopes:logoutredirecturi:additionalparameters:)"
-},
-"doc://OktaOAuth2/documentation/OktaOAuth2/SessionLogoutFlow/init(logoutRedirectUri:additionalParameters:client:)": {
-  "abstract" : [
-    {
-      "text" : "Initializer to construct a logout flow from a pre-defined client.",
-      "type" : "text"
-    }
-  ],
-  "fragments" : [
-    {
-      "kind" : "identifier",
-      "text" : "init"
-    },
-    {
-      "kind" : "text",
-      "text" : "("
-    },
-    {
-      "kind" : "externalParam",
-      "text" : "logoutRedirectUri"
-    },
-    {
-      "kind" : "text",
-      "text" : ": "
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:10Foundation3URLV",
-      "text" : "URL"
-    },
-    {
-      "kind" : "text",
-      "text" : ", "
-    },
-    {
-      "kind" : "externalParam",
-      "text" : "additionalParameters"
-    },
-    {
-      "kind" : "text",
-      "text" : ": ["
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:SS",
-      "text" : "String"
-    },
-    {
-      "kind" : "text",
-      "text" : " : any "
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:14AuthFoundation18APIRequestArgumentP",
-      "text" : "APIRequestArgument"
-    },
-    {
-      "kind" : "text",
-      "text" : "]?, "
-    },
-    {
-      "kind" : "externalParam",
-      "text" : "client"
-    },
-    {
-      "kind" : "text",
-      "text" : ": "
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:14AuthFoundation12OAuth2ClientC",
-      "text" : "OAuth2Client"
-    },
-    {
-      "kind" : "text",
-      "text" : ")"
-    }
-  ],
-  "identifier" : "doc:\/\/OktaOAuth2\/documentation\/OktaOAuth2\/SessionLogoutFlow\/init(logoutRedirectUri:additionalParameters:client:)",
-  "kind" : "symbol",
-  "role" : "symbol",
-  "title" : "init(logoutRedirectUri:additionalParameters:client:)",
-  "type" : "topic",
-  "url" : "\/documentation\/oktaoauth2\/sessionlogoutflow\/init(logoutredirecturi:additionalparameters:client:)"
-},
-"doc://OktaOAuth2/documentation/OktaOAuth2/SessionLogoutFlow/logoutRedirectUri": {
-  "abstract" : [
-    {
-      "text" : "The logout redirect URI.",
-      "type" : "text"
-    }
-  ],
-  "fragments" : [
-    {
-      "kind" : "keyword",
-      "text" : "let"
-    },
-    {
-      "kind" : "text",
-      "text" : " "
-    },
-    {
-      "kind" : "identifier",
-      "text" : "logoutRedirectUri"
-    },
-    {
-      "kind" : "text",
-      "text" : ": "
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:10Foundation3URLV",
-      "text" : "URL"
-    }
-  ],
-  "identifier" : "doc:\/\/OktaOAuth2\/documentation\/OktaOAuth2\/SessionLogoutFlow\/logoutRedirectUri",
-  "kind" : "symbol",
-  "role" : "symbol",
-  "title" : "logoutRedirectUri",
-  "type" : "topic",
-  "url" : "\/documentation\/oktaoauth2\/sessionlogoutflow\/logoutredirecturi"
+  "url" : "\/documentation\/oktaoauth2\/sessionlogoutflow\/init(issuerurl:clientid:scope:logoutredirecturi:additionalparameters:)"
 },
 "doc://OktaOAuth2/documentation/OktaOAuth2/SessionLogoutFlow/reset()": {
   "abstract" : [
@@ -1055,10 +994,19 @@
   "type" : "topic",
   "url" : "\/documentation\/oktaoauth2\/sessionlogoutflow\/reset()"
 },
-"doc://OktaOAuth2/documentation/OktaOAuth2/SessionLogoutFlow/start(idToken:additionalParameters:)": {
+"doc://OktaOAuth2/documentation/OktaOAuth2/SessionLogoutFlow/start(with:)": {
   "abstract" : [
     {
-      "text" : "Asynchronously initiates a logout flow, with a required ID Token.",
+      "text" : "Initiates an logout flow, with a required ",
+      "type" : "text"
+    },
+    {
+      "identifier" : "doc:\/\/OktaOAuth2\/documentation\/OktaOAuth2\/SessionLogoutFlow\/Context-swift.struct",
+      "isActive" : true,
+      "type" : "reference"
+    },
+    {
+      "text" : " object.",
       "type" : "text"
     }
   ],
@@ -1081,7 +1029,7 @@
     },
     {
       "kind" : "externalParam",
-      "text" : "idToken"
+      "text" : "with"
     },
     {
       "kind" : "text",
@@ -1089,38 +1037,21 @@
     },
     {
       "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:SS",
-      "text" : "String"
+      "preciseIdentifier" : "s:10OktaOAuth217SessionLogoutFlowC",
+      "text" : "SessionLogoutFlow"
     },
     {
       "kind" : "text",
-      "text" : ", "
-    },
-    {
-      "kind" : "externalParam",
-      "text" : "additionalParameters"
-    },
-    {
-      "kind" : "text",
-      "text" : ": ["
+      "text" : "."
     },
     {
       "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:SS",
-      "text" : "String"
+      "preciseIdentifier" : "s:10OktaOAuth217SessionLogoutFlowC7ContextV",
+      "text" : "Context"
     },
     {
       "kind" : "text",
-      "text" : " : "
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:SS",
-      "text" : "String"
-    },
-    {
-      "kind" : "text",
-      "text" : "]?) "
+      "text" : ") "
     },
     {
       "kind" : "keyword",
@@ -1144,14 +1075,14 @@
       "text" : "URL"
     }
   ],
-  "identifier" : "doc:\/\/OktaOAuth2\/documentation\/OktaOAuth2\/SessionLogoutFlow\/start(idToken:additionalParameters:)",
+  "identifier" : "doc:\/\/OktaOAuth2\/documentation\/OktaOAuth2\/SessionLogoutFlow\/start(with:)",
   "kind" : "symbol",
   "role" : "symbol",
-  "title" : "start(idToken:additionalParameters:)",
+  "title" : "start(with:)",
   "type" : "topic",
-  "url" : "\/documentation\/oktaoauth2\/sessionlogoutflow\/start(idtoken:additionalparameters:)"
+  "url" : "\/documentation\/oktaoauth2\/sessionlogoutflow\/start(with:)"
 },
-"doc://OktaOAuth2/documentation/OktaOAuth2/SessionLogoutFlow/start(idToken:additionalParameters:completion:)": {
+"doc://OktaOAuth2/documentation/OktaOAuth2/SessionLogoutFlow/start(with:completion:)": {
   "abstract" : [
     {
       "text" : "Initiates a logout flow, with a required ID Token.",
@@ -1177,7 +1108,7 @@
     },
     {
       "kind" : "externalParam",
-      "text" : "idToken"
+      "text" : "with"
     },
     {
       "kind" : "text",
@@ -1185,38 +1116,21 @@
     },
     {
       "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:SS",
-      "text" : "String"
+      "preciseIdentifier" : "s:10OktaOAuth217SessionLogoutFlowC",
+      "text" : "SessionLogoutFlow"
+    },
+    {
+      "kind" : "text",
+      "text" : "."
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:10OktaOAuth217SessionLogoutFlowC7ContextV",
+      "text" : "Context"
     },
     {
       "kind" : "text",
       "text" : ", "
-    },
-    {
-      "kind" : "externalParam",
-      "text" : "additionalParameters"
-    },
-    {
-      "kind" : "text",
-      "text" : ": ["
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:SS",
-      "text" : "String"
-    },
-    {
-      "kind" : "text",
-      "text" : " : "
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:SS",
-      "text" : "String"
-    },
-    {
-      "kind" : "text",
-      "text" : "]?, "
     },
     {
       "kind" : "externalParam",
@@ -1260,274 +1174,15 @@
     },
     {
       "kind" : "text",
-      "text" : ") "
-    },
-    {
-      "kind" : "keyword",
-      "text" : "throws"
+      "text" : ")"
     }
   ],
-  "identifier" : "doc:\/\/OktaOAuth2\/documentation\/OktaOAuth2\/SessionLogoutFlow\/start(idToken:additionalParameters:completion:)",
+  "identifier" : "doc:\/\/OktaOAuth2\/documentation\/OktaOAuth2\/SessionLogoutFlow\/start(with:completion:)",
   "kind" : "symbol",
   "role" : "symbol",
-  "title" : "start(idToken:additionalParameters:completion:)",
+  "title" : "start(with:completion:)",
   "type" : "topic",
-  "url" : "\/documentation\/oktaoauth2\/sessionlogoutflow\/start(idtoken:additionalparameters:completion:)"
-},
-"doc://OktaOAuth2/documentation/OktaOAuth2/SessionLogoutFlow/start(with:additionalParameters:)": {
-  "abstract" : [
-    {
-      "text" : "Initiates an logout flow, with a required ",
-      "type" : "text"
-    },
-    {
-      "identifier" : "doc:\/\/OktaOAuth2\/documentation\/OktaOAuth2\/SessionLogoutFlow\/Context-swift.struct",
-      "isActive" : true,
-      "type" : "reference"
-    },
-    {
-      "text" : " object.",
-      "type" : "text"
-    }
-  ],
-  "fragments" : [
-    {
-      "kind" : "keyword",
-      "text" : "func"
-    },
-    {
-      "kind" : "text",
-      "text" : " "
-    },
-    {
-      "kind" : "identifier",
-      "text" : "start"
-    },
-    {
-      "kind" : "text",
-      "text" : "("
-    },
-    {
-      "kind" : "externalParam",
-      "text" : "with"
-    },
-    {
-      "kind" : "text",
-      "text" : ": "
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:10OktaOAuth217SessionLogoutFlowC",
-      "text" : "SessionLogoutFlow"
-    },
-    {
-      "kind" : "text",
-      "text" : "."
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:10OktaOAuth217SessionLogoutFlowC7ContextV",
-      "text" : "Context"
-    },
-    {
-      "kind" : "text",
-      "text" : ", "
-    },
-    {
-      "kind" : "externalParam",
-      "text" : "additionalParameters"
-    },
-    {
-      "kind" : "text",
-      "text" : ": ["
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:SS",
-      "text" : "String"
-    },
-    {
-      "kind" : "text",
-      "text" : " : "
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:SS",
-      "text" : "String"
-    },
-    {
-      "kind" : "text",
-      "text" : "]?) "
-    },
-    {
-      "kind" : "keyword",
-      "text" : "async"
-    },
-    {
-      "kind" : "text",
-      "text" : " "
-    },
-    {
-      "kind" : "keyword",
-      "text" : "throws"
-    },
-    {
-      "kind" : "text",
-      "text" : " -> "
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:10Foundation3URLV",
-      "text" : "URL"
-    }
-  ],
-  "identifier" : "doc:\/\/OktaOAuth2\/documentation\/OktaOAuth2\/SessionLogoutFlow\/start(with:additionalParameters:)",
-  "kind" : "symbol",
-  "role" : "symbol",
-  "title" : "start(with:additionalParameters:)",
-  "type" : "topic",
-  "url" : "\/documentation\/oktaoauth2\/sessionlogoutflow\/start(with:additionalparameters:)"
-},
-"doc://OktaOAuth2/documentation/OktaOAuth2/SessionLogoutFlow/start(with:additionalParameters:completion:)": {
-  "abstract" : [
-    {
-      "text" : "Initiates an logout flow, with a required ",
-      "type" : "text"
-    },
-    {
-      "identifier" : "doc:\/\/OktaOAuth2\/documentation\/OktaOAuth2\/SessionLogoutFlow\/Context-swift.struct",
-      "isActive" : true,
-      "type" : "reference"
-    },
-    {
-      "text" : " object.",
-      "type" : "text"
-    }
-  ],
-  "fragments" : [
-    {
-      "kind" : "keyword",
-      "text" : "func"
-    },
-    {
-      "kind" : "text",
-      "text" : " "
-    },
-    {
-      "kind" : "identifier",
-      "text" : "start"
-    },
-    {
-      "kind" : "text",
-      "text" : "("
-    },
-    {
-      "kind" : "externalParam",
-      "text" : "with"
-    },
-    {
-      "kind" : "text",
-      "text" : ": "
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:10OktaOAuth217SessionLogoutFlowC",
-      "text" : "SessionLogoutFlow"
-    },
-    {
-      "kind" : "text",
-      "text" : "."
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:10OktaOAuth217SessionLogoutFlowC7ContextV",
-      "text" : "Context"
-    },
-    {
-      "kind" : "text",
-      "text" : ", "
-    },
-    {
-      "kind" : "externalParam",
-      "text" : "additionalParameters"
-    },
-    {
-      "kind" : "text",
-      "text" : ": ["
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:SS",
-      "text" : "String"
-    },
-    {
-      "kind" : "text",
-      "text" : " : "
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:SS",
-      "text" : "String"
-    },
-    {
-      "kind" : "text",
-      "text" : "]?, "
-    },
-    {
-      "kind" : "externalParam",
-      "text" : "completion"
-    },
-    {
-      "kind" : "text",
-      "text" : ": ("
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:s6ResultO",
-      "text" : "Result"
-    },
-    {
-      "kind" : "text",
-      "text" : "<"
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:10Foundation3URLV",
-      "text" : "URL"
-    },
-    {
-      "kind" : "text",
-      "text" : ", "
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:14AuthFoundation11OAuth2ErrorO",
-      "text" : "OAuth2Error"
-    },
-    {
-      "kind" : "text",
-      "text" : ">) -> "
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:s4Voida",
-      "text" : "Void"
-    },
-    {
-      "kind" : "text",
-      "text" : ") "
-    },
-    {
-      "kind" : "keyword",
-      "text" : "throws"
-    }
-  ],
-  "identifier" : "doc:\/\/OktaOAuth2\/documentation\/OktaOAuth2\/SessionLogoutFlow\/start(with:additionalParameters:completion:)",
-  "kind" : "symbol",
-  "role" : "symbol",
-  "title" : "start(with:additionalParameters:completion:)",
-  "type" : "topic",
-  "url" : "\/documentation\/oktaoauth2\/sessionlogoutflow\/start(with:additionalparameters:completion:)"
+  "url" : "\/documentation\/oktaoauth2\/sessionlogoutflow\/start(with:completion:)"
 },
 "doc://OktaOAuth2/documentation/OktaOAuth2/SessionLogoutFlowDelegate": {
   "abstract" : [

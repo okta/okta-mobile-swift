@@ -93,8 +93,9 @@
               "type" : "text"
             },
             {
-              "code" : "DirectAuthenticationFlow\/SecondaryFactor\/webAuthnAssertion",
-              "type" : "codeVoice"
+              "identifier" : "doc:\/\/OktaDirectAuth\/documentation\/OktaDirectAuth\/DirectAuthenticationFlow\/ContinuationFactor\/webAuthn(response:)",
+              "isActive" : true,
+              "type" : "reference"
             },
             {
               "text" : " type.",
@@ -130,6 +131,7 @@
   "topicSections" : [
     {
       "identifiers" : [
+        "doc:\/\/OktaDirectAuth\/documentation\/OktaDirectAuth\/WebAuthn\/AuthenticatorAssertionResponse\/init(clientDataJSON:authenticatorData:signature:userHandle:)",
         "doc:\/\/OktaDirectAuth\/documentation\/OktaDirectAuth\/WebAuthn\/AuthenticatorAssertionResponse\/init(from:)"
       ],
       "title" : "Initializers"
@@ -193,6 +195,64 @@
   "title" : "OktaDirectAuth",
   "type" : "topic",
   "url" : "\/documentation\/oktadirectauth"
+},
+"doc://OktaDirectAuth/documentation/OktaDirectAuth/DirectAuthenticationFlow/ContinuationFactor/webAuthn(response:)": {
+  "abstract" : [
+    {
+      "text" : "Respond to a WebAuthn challenge with an authenticator assertion.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "case"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "webAuthn"
+    },
+    {
+      "kind" : "text",
+      "text" : "("
+    },
+    {
+      "kind" : "externalParam",
+      "text" : "response"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:14OktaDirectAuth8WebAuthnV",
+      "text" : "WebAuthn"
+    },
+    {
+      "kind" : "text",
+      "text" : "."
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:14OktaDirectAuth8WebAuthnV30AuthenticatorAssertionResponseV",
+      "text" : "AuthenticatorAssertionResponse"
+    },
+    {
+      "kind" : "text",
+      "text" : ")"
+    }
+  ],
+  "identifier" : "doc:\/\/OktaDirectAuth\/documentation\/OktaDirectAuth\/DirectAuthenticationFlow\/ContinuationFactor\/webAuthn(response:)",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "DirectAuthenticationFlow.ContinuationFactor.webAuthn(response:)",
+  "type" : "topic",
+  "url" : "\/documentation\/oktadirectauth\/directauthenticationflow\/continuationfactor\/webauthn(response:)"
 },
 "doc://OktaDirectAuth/documentation/OktaDirectAuth/WebAuthn": {
   "abstract" : [
@@ -346,6 +406,98 @@
   "title" : "clientDataJSON",
   "type" : "topic",
   "url" : "\/documentation\/oktadirectauth\/webauthn\/authenticatorassertionresponse\/clientdatajson"
+},
+"doc://OktaDirectAuth/documentation/OktaDirectAuth/WebAuthn/AuthenticatorAssertionResponse/init(clientDataJSON:authenticatorData:signature:userHandle:)": {
+  "abstract" : [
+    {
+      "text" : "Initializer to create the response from an authenticator assertion, to send to the Authorization Server.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "identifier",
+      "text" : "init"
+    },
+    {
+      "kind" : "text",
+      "text" : "("
+    },
+    {
+      "kind" : "externalParam",
+      "text" : "clientDataJSON"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:SS",
+      "text" : "String"
+    },
+    {
+      "kind" : "text",
+      "text" : ", "
+    },
+    {
+      "kind" : "externalParam",
+      "text" : "authenticatorData"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:SS",
+      "text" : "String"
+    },
+    {
+      "kind" : "text",
+      "text" : ", "
+    },
+    {
+      "kind" : "externalParam",
+      "text" : "signature"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:SS",
+      "text" : "String"
+    },
+    {
+      "kind" : "text",
+      "text" : ", "
+    },
+    {
+      "kind" : "externalParam",
+      "text" : "userHandle"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:SS",
+      "text" : "String"
+    },
+    {
+      "kind" : "text",
+      "text" : "?)"
+    }
+  ],
+  "identifier" : "doc:\/\/OktaDirectAuth\/documentation\/OktaDirectAuth\/WebAuthn\/AuthenticatorAssertionResponse\/init(clientDataJSON:authenticatorData:signature:userHandle:)",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "init(clientDataJSON:authenticatorData:signature:userHandle:)",
+  "type" : "topic",
+  "url" : "\/documentation\/oktadirectauth\/webauthn\/authenticatorassertionresponse\/init(clientdatajson:authenticatordata:signature:userhandle:)"
 },
 "doc://OktaDirectAuth/documentation/OktaDirectAuth/WebAuthn/AuthenticatorAssertionResponse/init(from:)": {
   "abstract" : [

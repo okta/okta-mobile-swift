@@ -103,8 +103,7 @@
     {
       "generated" : true,
       "identifiers" : [
-        "doc:\/\/WebAuthenticationUI\/documentation\/WebAuthenticationUI\/WebAuthentication\/signOutFlow",
-        "doc:\/\/WebAuthenticationUI\/documentation\/WebAuthenticationUI\/WebAuthentication\/context"
+        "doc:\/\/WebAuthenticationUI\/documentation\/WebAuthenticationUI\/WebAuthentication\/signOutFlow"
       ],
       "title" : "Customizing OAuth2 Flows"
     }
@@ -170,57 +169,6 @@
   "title" : "WebAuthentication",
   "type" : "topic",
   "url" : "\/documentation\/webauthenticationui\/webauthentication"
-},
-"doc://WebAuthenticationUI/documentation/WebAuthenticationUI/WebAuthentication/context": {
-  "abstract" : [
-    {
-      "text" : "Context information about the current authorization code flow.",
-      "type" : "text"
-    }
-  ],
-  "deprecated" : true,
-  "fragments" : [
-    {
-      "kind" : "keyword",
-      "text" : "var"
-    },
-    {
-      "kind" : "text",
-      "text" : " "
-    },
-    {
-      "kind" : "identifier",
-      "text" : "context"
-    },
-    {
-      "kind" : "text",
-      "text" : ": "
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:10OktaOAuth221AuthorizationCodeFlowC",
-      "text" : "AuthorizationCodeFlow"
-    },
-    {
-      "kind" : "text",
-      "text" : "."
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:10OktaOAuth221AuthorizationCodeFlowC7ContextV",
-      "text" : "Context"
-    },
-    {
-      "kind" : "text",
-      "text" : "?"
-    }
-  ],
-  "identifier" : "doc:\/\/WebAuthenticationUI\/documentation\/WebAuthenticationUI\/WebAuthentication\/context",
-  "kind" : "symbol",
-  "role" : "symbol",
-  "title" : "context",
-  "type" : "topic",
-  "url" : "\/documentation\/webauthenticationui\/webauthentication\/context"
 },
 "doc://WebAuthenticationUI/documentation/WebAuthenticationUI/WebAuthentication/signInFlow": {
   "abstract" : [

@@ -143,7 +143,7 @@
                 {
                   "inlineContent" : [
                     {
-                      "text" : "Accessing values using convenience properties",
+                      "text" : "Accessing values using convenience properties.",
                       "type" : "text"
                     }
                   ],
@@ -160,12 +160,12 @@
                       "type" : "text"
                     },
                     {
-                      "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/Claim",
+                      "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JWT\/ClaimType",
                       "isActive" : true,
                       "type" : "reference"
                     },
                     {
-                      "text" : " enum",
+                      "text" : " enum corresponding to the claim container.",
                       "type" : "text"
                     }
                   ],
@@ -355,7 +355,6 @@
         "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JWKS",
         "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JWTClaim",
         "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/HasClaims",
-        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/Claim",
         "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JSONClaimContainer",
         "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JSON",
         "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/AnyJSON",
@@ -698,38 +697,6 @@
   "title" : "AnyJSON",
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/anyjson"
-},
-"doc://AuthFoundation/documentation/AuthFoundation/Claim": {
-  "abstract" : [
-
-  ],
-  "deprecated" : true,
-  "fragments" : [
-    {
-      "kind" : "keyword",
-      "text" : "typealias"
-    },
-    {
-      "kind" : "text",
-      "text" : " "
-    },
-    {
-      "kind" : "identifier",
-      "text" : "Claim"
-    }
-  ],
-  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/Claim",
-  "kind" : "symbol",
-  "navigatorTitle" : [
-    {
-      "kind" : "identifier",
-      "text" : "Claim"
-    }
-  ],
-  "role" : "symbol",
-  "title" : "Claim",
-  "type" : "topic",
-  "url" : "\/documentation\/authfoundation\/claim"
 },
 "doc://AuthFoundation/documentation/AuthFoundation/ClaimConvertable": {
   "abstract" : [

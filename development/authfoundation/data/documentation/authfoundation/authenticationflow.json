@@ -77,6 +77,16 @@
               "text" : " : AnyObject, "
             },
             {
+              "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/IDTokenValidatorContext",
+              "kind" : "typeIdentifier",
+              "preciseIdentifier" : "s:14AuthFoundation23IDTokenValidatorContextP",
+              "text" : "IDTokenValidatorContext"
+            },
+            {
+              "kind" : "text",
+              "text" : ", "
+            },
+            {
               "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/UsesDelegateCollection",
               "kind" : "typeIdentifier",
               "preciseIdentifier" : "s:14AuthFoundation22UsesDelegateCollectionP",
@@ -111,6 +121,7 @@
   "relationshipsSections" : [
     {
       "identifiers" : [
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/IDTokenValidatorContext",
         "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/UsesDelegateCollection"
       ],
       "kind" : "relationships",
@@ -145,6 +156,22 @@
   "topicSections" : [
     {
       "identifiers" : [
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/AuthenticationFlow\/Context-swift.associatedtype"
+      ],
+      "title" : "Associated Types"
+    },
+    {
+      "identifiers" : [
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/AuthenticationFlow\/init()",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/AuthenticationFlow\/init(client:additionalParameters:)",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/AuthenticationFlow\/init(plist:)"
+      ],
+      "title" : "Initializers"
+    },
+    {
+      "identifiers" : [
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/AuthenticationFlow\/additionalParameters",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/AuthenticationFlow\/context-swift.property",
         "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/AuthenticationFlow\/delegateCollection",
         "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/AuthenticationFlow\/isAuthenticating"
       ],
@@ -287,6 +314,142 @@
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/authenticationflow"
 },
+"doc://AuthFoundation/documentation/AuthFoundation/AuthenticationFlow/Context-swift.associatedtype": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "associatedtype"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "Context"
+    },
+    {
+      "kind" : "text",
+      "text" : " : "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:14AuthFoundation21AuthenticationContextP",
+      "text" : "AuthenticationContext"
+    }
+  ],
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/AuthenticationFlow\/Context-swift.associatedtype",
+  "kind" : "symbol",
+  "required" : true,
+  "role" : "symbol",
+  "title" : "Context",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/authenticationflow\/context-swift.associatedtype"
+},
+"doc://AuthFoundation/documentation/AuthFoundation/AuthenticationFlow/additionalParameters": {
+  "abstract" : [
+    {
+      "text" : "Optional request parameters to be added to requests made from this flow.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "var"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "additionalParameters"
+    },
+    {
+      "kind" : "text",
+      "text" : ": ["
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:SS",
+      "text" : "String"
+    },
+    {
+      "kind" : "text",
+      "text" : " : any "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:14AuthFoundation18APIRequestArgumentP",
+      "text" : "APIRequestArgument"
+    },
+    {
+      "kind" : "text",
+      "text" : "]?"
+    }
+  ],
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/AuthenticationFlow\/additionalParameters",
+  "kind" : "symbol",
+  "required" : true,
+  "role" : "symbol",
+  "title" : "additionalParameters",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/authenticationflow\/additionalparameters"
+},
+"doc://AuthFoundation/documentation/AuthFoundation/AuthenticationFlow/context-swift.property": {
+  "abstract" : [
+    {
+      "text" : "The object that stores the context and state for the current authentication session.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "var"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "context"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "text" : "Self"
+    },
+    {
+      "kind" : "text",
+      "text" : "."
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:14AuthFoundation18AuthenticationFlowP7ContextQa",
+      "text" : "Context"
+    },
+    {
+      "kind" : "text",
+      "text" : "?"
+    }
+  ],
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/AuthenticationFlow\/context-swift.property",
+  "kind" : "symbol",
+  "required" : true,
+  "role" : "symbol",
+  "title" : "context",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/authenticationflow\/context-swift.property"
+},
 "doc://AuthFoundation/documentation/AuthFoundation/AuthenticationFlow/delegateCollection": {
   "abstract" : [
     {
@@ -345,6 +508,159 @@
   "title" : "delegateCollection",
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/authenticationflow\/delegatecollection"
+},
+"doc://AuthFoundation/documentation/AuthFoundation/AuthenticationFlow/init()": {
+  "abstract" : [
+    {
+      "text" : "Initializer that uses the configuration defined within the application’s ",
+      "type" : "text"
+    },
+    {
+      "code" : "Okta.plist",
+      "type" : "codeVoice"
+    },
+    {
+      "text" : " file.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "identifier",
+      "text" : "init"
+    },
+    {
+      "kind" : "text",
+      "text" : "() "
+    },
+    {
+      "kind" : "keyword",
+      "text" : "throws"
+    }
+  ],
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/AuthenticationFlow\/init()",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "init()",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/authenticationflow\/init()"
+},
+"doc://AuthFoundation/documentation/AuthFoundation/AuthenticationFlow/init(client:additionalParameters:)": {
+  "abstract" : [
+    {
+      "text" : "Required minimal initializer shared by all authentication flows.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "identifier",
+      "text" : "init"
+    },
+    {
+      "kind" : "text",
+      "text" : "("
+    },
+    {
+      "kind" : "externalParam",
+      "text" : "client"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:14AuthFoundation12OAuth2ClientC",
+      "text" : "OAuth2Client"
+    },
+    {
+      "kind" : "text",
+      "text" : ", "
+    },
+    {
+      "kind" : "externalParam",
+      "text" : "additionalParameters"
+    },
+    {
+      "kind" : "text",
+      "text" : ": ["
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:SS",
+      "text" : "String"
+    },
+    {
+      "kind" : "text",
+      "text" : " : any "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:14AuthFoundation18APIRequestArgumentP",
+      "text" : "APIRequestArgument"
+    },
+    {
+      "kind" : "text",
+      "text" : "]?) "
+    },
+    {
+      "kind" : "keyword",
+      "text" : "throws"
+    }
+  ],
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/AuthenticationFlow\/init(client:additionalParameters:)",
+  "kind" : "symbol",
+  "required" : true,
+  "role" : "symbol",
+  "title" : "init(client:additionalParameters:)",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/authenticationflow\/init(client:additionalparameters:)"
+},
+"doc://AuthFoundation/documentation/AuthFoundation/AuthenticationFlow/init(plist:)": {
+  "abstract" : [
+    {
+      "text" : "Initializer that uses the configuration defined within the given file URL.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "identifier",
+      "text" : "init"
+    },
+    {
+      "kind" : "text",
+      "text" : "("
+    },
+    {
+      "kind" : "externalParam",
+      "text" : "plist"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:10Foundation3URLV",
+      "text" : "URL"
+    },
+    {
+      "kind" : "text",
+      "text" : ") "
+    },
+    {
+      "kind" : "keyword",
+      "text" : "throws"
+    }
+  ],
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/AuthenticationFlow\/init(plist:)",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "init(plist:)",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/authenticationflow\/init(plist:)"
 },
 "doc://AuthFoundation/documentation/AuthFoundation/AuthenticationFlow/isAuthenticating": {
   "abstract" : [
@@ -493,6 +809,40 @@
   "title" : "GrantType",
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/granttype"
+},
+"doc://AuthFoundation/documentation/AuthFoundation/IDTokenValidatorContext": {
+  "abstract" : [
+    {
+      "text" : "Protocol used to supply contextual information to a validator.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "protocol"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "IDTokenValidatorContext"
+    }
+  ],
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/IDTokenValidatorContext",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "IDTokenValidatorContext"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "IDTokenValidatorContext",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/idtokenvalidatorcontext"
 },
 "doc://AuthFoundation/documentation/AuthFoundation/JWT/authenticationMethods": {
   "abstract" : [

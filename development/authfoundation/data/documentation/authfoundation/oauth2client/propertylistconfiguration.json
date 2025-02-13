@@ -115,16 +115,6 @@
       "kind" : "content"
     }
   ],
-  "relationshipsSections" : [
-    {
-      "identifiers" : [
-        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/ProvidesOAuth2Parameters"
-      ],
-      "kind" : "relationships",
-      "title" : "Conforms To",
-      "type" : "conformsTo"
-    }
-  ],
   "schemaVersion" : {
     "major" : 0,
     "minor" : 3,
@@ -145,10 +135,10 @@
       "identifiers" : [
         "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/OAuth2Client\/PropertyListConfiguration\/additionalParameters",
         "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/OAuth2Client\/PropertyListConfiguration\/clientId",
-        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/OAuth2Client\/PropertyListConfiguration\/issuer",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/OAuth2Client\/PropertyListConfiguration\/issuerURL",
         "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/OAuth2Client\/PropertyListConfiguration\/logoutRedirectUri",
         "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/OAuth2Client\/PropertyListConfiguration\/redirectUri",
-        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/OAuth2Client\/PropertyListConfiguration\/scopes"
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/OAuth2Client\/PropertyListConfiguration\/scope"
       ],
       "title" : "Instance Properties"
     }
@@ -425,7 +415,7 @@
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/oauth2client\/propertylistconfiguration\/init(plist:)"
 },
-"doc://AuthFoundation/documentation/AuthFoundation/OAuth2Client/PropertyListConfiguration/issuer": {
+"doc://AuthFoundation/documentation/AuthFoundation/OAuth2Client/PropertyListConfiguration/issuerURL": {
   "abstract" : [
     {
       "text" : "The client issuer URL, defined in the “issuer” key.",
@@ -443,7 +433,7 @@
     },
     {
       "kind" : "identifier",
-      "text" : "issuer"
+      "text" : "issuerURL"
     },
     {
       "kind" : "text",
@@ -455,12 +445,12 @@
       "text" : "URL"
     }
   ],
-  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/OAuth2Client\/PropertyListConfiguration\/issuer",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/OAuth2Client\/PropertyListConfiguration\/issuerURL",
   "kind" : "symbol",
   "role" : "symbol",
-  "title" : "issuer",
+  "title" : "issuerURL",
   "type" : "topic",
-  "url" : "\/documentation\/authfoundation\/oauth2client\/propertylistconfiguration\/issuer"
+  "url" : "\/documentation\/authfoundation\/oauth2client\/propertylistconfiguration\/issuerurl"
 },
 "doc://AuthFoundation/documentation/AuthFoundation/OAuth2Client/PropertyListConfiguration/logoutRedirectUri": {
   "abstract" : [
@@ -544,7 +534,7 @@
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/oauth2client\/propertylistconfiguration\/redirecturi"
 },
-"doc://AuthFoundation/documentation/AuthFoundation/OAuth2Client/PropertyListConfiguration/scopes": {
+"doc://AuthFoundation/documentation/AuthFoundation/OAuth2Client/PropertyListConfiguration/scope": {
   "abstract" : [
     {
       "text" : "The client scopes, defined in the “scopes” key.",
@@ -562,7 +552,7 @@
     },
     {
       "kind" : "identifier",
-      "text" : "scopes"
+      "text" : "scope"
     },
     {
       "kind" : "text",
@@ -574,46 +564,12 @@
       "text" : "String"
     }
   ],
-  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/OAuth2Client\/PropertyListConfiguration\/scopes",
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/OAuth2Client\/PropertyListConfiguration\/scope",
   "kind" : "symbol",
   "role" : "symbol",
-  "title" : "scopes",
+  "title" : "scope",
   "type" : "topic",
-  "url" : "\/documentation\/authfoundation\/oauth2client\/propertylistconfiguration\/scopes"
-},
-"doc://AuthFoundation/documentation/AuthFoundation/ProvidesOAuth2Parameters": {
-  "abstract" : [
-    {
-      "text" : "Used by types that are capable of providing parameters to OAuth2 API requests.",
-      "type" : "text"
-    }
-  ],
-  "fragments" : [
-    {
-      "kind" : "keyword",
-      "text" : "protocol"
-    },
-    {
-      "kind" : "text",
-      "text" : " "
-    },
-    {
-      "kind" : "identifier",
-      "text" : "ProvidesOAuth2Parameters"
-    }
-  ],
-  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/ProvidesOAuth2Parameters",
-  "kind" : "symbol",
-  "navigatorTitle" : [
-    {
-      "kind" : "identifier",
-      "text" : "ProvidesOAuth2Parameters"
-    }
-  ],
-  "role" : "symbol",
-  "title" : "ProvidesOAuth2Parameters",
-  "type" : "topic",
-  "url" : "\/documentation\/authfoundation\/providesoauth2parameters"
+  "url" : "\/documentation\/authfoundation\/oauth2client\/propertylistconfiguration\/scope"
 }
 }
 }

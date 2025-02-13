@@ -169,13 +169,6 @@
   "topicSections" : [
     {
       "identifiers" : [
-        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/TokenInfo\/init(_:)",
-        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/TokenInfo\/init(from:)"
-      ],
-      "title" : "Initializers"
-    },
-    {
-      "identifiers" : [
         "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/TokenInfo\/active",
         "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/TokenInfo\/payload",
         "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/TokenInfo\/username"
@@ -191,8 +184,7 @@
     {
       "generated" : true,
       "identifiers" : [
-        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/TokenInfo\/HasClaims-Implementations",
-        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/TokenInfo\/JSONDecodable-Implementations"
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/TokenInfo\/HasClaims-Implementations"
       ],
       "title" : "Default Implementations"
     }
@@ -478,17 +470,6 @@
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/tokeninfo\/hasclaims-implementations"
 },
-"doc://AuthFoundation/documentation/AuthFoundation/TokenInfo/JSONDecodable-Implementations": {
-  "abstract" : [
-
-  ],
-  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/TokenInfo\/JSONDecodable-Implementations",
-  "kind" : "article",
-  "role" : "collectionGroup",
-  "title" : "JSONDecodable Implementations",
-  "type" : "topic",
-  "url" : "\/documentation\/authfoundation\/tokeninfo\/jsondecodable-implementations"
-},
 "doc://AuthFoundation/documentation/AuthFoundation/TokenInfo/active": {
   "abstract" : [
     {
@@ -529,86 +510,6 @@
   "title" : "active",
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/tokeninfo\/active"
-},
-"doc://AuthFoundation/documentation/AuthFoundation/TokenInfo/init(_:)": {
-  "abstract" : [
-
-  ],
-  "fragments" : [
-    {
-      "kind" : "identifier",
-      "text" : "init"
-    },
-    {
-      "kind" : "text",
-      "text" : "(["
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:SS",
-      "text" : "String"
-    },
-    {
-      "kind" : "text",
-      "text" : " : "
-    },
-    {
-      "kind" : "keyword",
-      "text" : "Any"
-    },
-    {
-      "kind" : "text",
-      "text" : "])"
-    }
-  ],
-  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/TokenInfo\/init(_:)",
-  "kind" : "symbol",
-  "role" : "symbol",
-  "title" : "init(_:)",
-  "type" : "topic",
-  "url" : "\/documentation\/authfoundation\/tokeninfo\/init(_:)"
-},
-"doc://AuthFoundation/documentation/AuthFoundation/TokenInfo/init(from:)": {
-  "abstract" : [
-
-  ],
-  "fragments" : [
-    {
-      "kind" : "identifier",
-      "text" : "init"
-    },
-    {
-      "kind" : "text",
-      "text" : "("
-    },
-    {
-      "kind" : "externalParam",
-      "text" : "from"
-    },
-    {
-      "kind" : "text",
-      "text" : ": any "
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:s7DecoderP",
-      "text" : "Decoder"
-    },
-    {
-      "kind" : "text",
-      "text" : ") "
-    },
-    {
-      "kind" : "keyword",
-      "text" : "throws"
-    }
-  ],
-  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/TokenInfo\/init(from:)",
-  "kind" : "symbol",
-  "role" : "symbol",
-  "title" : "init(from:)",
-  "type" : "topic",
-  "url" : "\/documentation\/authfoundation\/tokeninfo\/init(from:)"
 },
 "doc://AuthFoundation/documentation/AuthFoundation/TokenInfo/payload": {
   "abstract" : [

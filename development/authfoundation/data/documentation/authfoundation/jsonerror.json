@@ -96,7 +96,6 @@
       "generated" : true,
       "identifiers" : [
         "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/APIClientError",
-        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/AuthenticationError",
         "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/ClaimError",
         "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/CredentialError",
         "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JWTError",
@@ -186,40 +185,6 @@
   "title" : "APIClientError",
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/apiclienterror"
-},
-"doc://AuthFoundation/documentation/AuthFoundation/AuthenticationError": {
-  "abstract" : [
-    {
-      "text" : "Errors that may be generated during the process of authenticating with a variety of authentication flows.",
-      "type" : "text"
-    }
-  ],
-  "fragments" : [
-    {
-      "kind" : "keyword",
-      "text" : "enum"
-    },
-    {
-      "kind" : "text",
-      "text" : " "
-    },
-    {
-      "kind" : "identifier",
-      "text" : "AuthenticationError"
-    }
-  ],
-  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/AuthenticationError",
-  "kind" : "symbol",
-  "navigatorTitle" : [
-    {
-      "kind" : "identifier",
-      "text" : "AuthenticationError"
-    }
-  ],
-  "role" : "symbol",
-  "title" : "AuthenticationError",
-  "type" : "topic",
-  "url" : "\/documentation\/authfoundation\/authenticationerror"
 },
 "doc://AuthFoundation/documentation/AuthFoundation/ClaimError": {
   "abstract" : [

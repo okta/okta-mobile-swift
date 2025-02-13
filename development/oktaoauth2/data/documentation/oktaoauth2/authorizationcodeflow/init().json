@@ -1,15 +1,15 @@
 {
   "abstract" : [
     {
-      "text" : "Initializer that uses the configuration defined within the application’s ",
+      "text" : "Inherited from ",
       "type" : "text"
     },
     {
-      "code" : "Okta.plist",
+      "code" : "AuthenticationFlow.init()",
       "type" : "codeVoice"
     },
     {
-      "text" : " file.",
+      "text" : ".",
       "type" : "text"
     }
   ],
@@ -17,7 +17,8 @@
     "paths" : [
       [
         "doc:\/\/OktaOAuth2\/documentation\/OktaOAuth2",
-        "doc:\/\/OktaOAuth2\/documentation\/OktaOAuth2\/AuthorizationCodeFlow"
+        "doc:\/\/OktaOAuth2\/documentation\/OktaOAuth2\/AuthorizationCodeFlow",
+        "doc:\/\/OktaOAuth2\/documentation\/OktaOAuth2\/AuthorizationCodeFlow\/AuthenticationFlow-Implementations"
       ]
     ]
   },
@@ -27,16 +28,9 @@
   },
   "kind" : "symbol",
   "metadata" : {
-    "externalID" : "s:10OktaOAuth221AuthorizationCodeFlowCACyKcfc",
+    "extendedModule" : "AuthFoundation",
+    "externalID" : "s:14AuthFoundation18AuthenticationFlowPAAExyKcfc::SYNTHESIZED::s:10OktaOAuth221AuthorizationCodeFlowC",
     "fragments" : [
-      {
-        "kind" : "keyword",
-        "text" : "convenience"
-      },
-      {
-        "kind" : "text",
-        "text" : " "
-      },
       {
         "kind" : "identifier",
         "text" : "init"
@@ -52,7 +46,10 @@
     ],
     "modules" : [
       {
-        "name" : "OktaOAuth2"
+        "name" : "OktaOAuth2",
+        "relatedModules" : [
+          "AuthFoundation"
+        ]
       }
     ],
     "role" : "symbol",
@@ -71,14 +68,6 @@
             "macOS"
           ],
           "tokens" : [
-            {
-              "kind" : "keyword",
-              "text" : "convenience"
-            },
-            {
-              "kind" : "text",
-              "text" : " "
-            },
             {
               "kind" : "keyword",
               "text" : "init"
@@ -167,30 +156,22 @@
   "type" : "topic",
   "url" : "\/documentation\/oktaoauth2\/authorizationcodeflow"
 },
+"doc://OktaOAuth2/documentation/OktaOAuth2/AuthorizationCodeFlow/AuthenticationFlow-Implementations": {
+  "abstract" : [
+
+  ],
+  "identifier" : "doc:\/\/OktaOAuth2\/documentation\/OktaOAuth2\/AuthorizationCodeFlow\/AuthenticationFlow-Implementations",
+  "kind" : "article",
+  "role" : "collectionGroup",
+  "title" : "AuthenticationFlow Implementations",
+  "type" : "topic",
+  "url" : "\/documentation\/oktaoauth2\/authorizationcodeflow\/authenticationflow-implementations"
+},
 "doc://OktaOAuth2/documentation/OktaOAuth2/AuthorizationCodeFlow/init()": {
   "abstract" : [
-    {
-      "text" : "Initializer that uses the configuration defined within the application’s ",
-      "type" : "text"
-    },
-    {
-      "code" : "Okta.plist",
-      "type" : "codeVoice"
-    },
-    {
-      "text" : " file.",
-      "type" : "text"
-    }
+
   ],
   "fragments" : [
-    {
-      "kind" : "keyword",
-      "text" : "convenience"
-    },
-    {
-      "kind" : "text",
-      "text" : " "
-    },
     {
       "kind" : "identifier",
       "text" : "init"

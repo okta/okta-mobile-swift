@@ -424,38 +424,6 @@
                   {
                     "children" : [
                       {
-                        "title" : "Initializers",
-                        "type" : "groupMarker"
-                      },
-                      {
-                        "path" : "\/documentation\/authfoundation\/token\/metadata\/init(from:)",
-                        "title" : "init(from: any Decoder) throws",
-                        "type" : "init"
-                      }
-                    ],
-                    "path" : "\/documentation\/authfoundation\/token\/metadata\/decodable-implementations",
-                    "title" : "Decodable Implementations",
-                    "type" : "symbol"
-                  },
-                  {
-                    "children" : [
-                      {
-                        "title" : "Instance Methods",
-                        "type" : "groupMarker"
-                      },
-                      {
-                        "path" : "\/documentation\/authfoundation\/token\/metadata\/encode(to:)",
-                        "title" : "func encode(to: any Encoder) throws",
-                        "type" : "method"
-                      }
-                    ],
-                    "path" : "\/documentation\/authfoundation\/token\/metadata\/encodable-implementations",
-                    "title" : "Encodable Implementations",
-                    "type" : "symbol"
-                  },
-                  {
-                    "children" : [
-                      {
                         "title" : "Instance Properties",
                         "type" : "groupMarker"
                       },
@@ -706,22 +674,6 @@
                     "path" : "\/documentation\/authfoundation\/token\/metadata\/hasclaims-implementations",
                     "title" : "HasClaims Implementations",
                     "type" : "symbol"
-                  },
-                  {
-                    "children" : [
-                      {
-                        "title" : "Type Properties",
-                        "type" : "groupMarker"
-                      },
-                      {
-                        "path" : "\/documentation\/authfoundation\/token\/metadata\/jsondecoder",
-                        "title" : "static var jsonDecoder: JSONDecoder",
-                        "type" : "property"
-                      }
-                    ],
-                    "path" : "\/documentation\/authfoundation\/token\/metadata\/jsondecodable-implementations",
-                    "title" : "JSONDecodable Implementations",
-                    "type" : "symbol"
                   }
                 ],
                 "path" : "\/documentation\/authfoundation\/token\/metadata",
@@ -827,7 +779,7 @@
               },
               {
                 "path" : "\/documentation\/authfoundation\/token\/validate(using:with:)",
-                "title" : "func validate(using: OAuth2Client, with: (any IDTokenValidatorContext)?) throws",
+                "title" : "func validate(using: OAuth2Client, with: any IDTokenValidatorContext) throws",
                 "type" : "method"
               },
               {
@@ -1336,11 +1288,6 @@
                 "type" : "init"
               },
               {
-                "path" : "\/documentation\/authfoundation\/userinfo\/init(from:)",
-                "title" : "init(from: any Decoder) throws",
-                "type" : "init"
-              },
-              {
                 "title" : "Instance Properties",
                 "type" : "groupMarker"
               },
@@ -1615,22 +1562,6 @@
                 "path" : "\/documentation\/authfoundation\/userinfo\/hasclaims-implementations",
                 "title" : "HasClaims Implementations",
                 "type" : "symbol"
-              },
-              {
-                "children" : [
-                  {
-                    "title" : "Type Properties",
-                    "type" : "groupMarker"
-                  },
-                  {
-                    "path" : "\/documentation\/authfoundation\/userinfo\/jsondecoder",
-                    "title" : "static var jsonDecoder: JSONDecoder",
-                    "type" : "property"
-                  }
-                ],
-                "path" : "\/documentation\/authfoundation\/userinfo\/jsondecodable-implementations",
-                "title" : "JSONDecodable Implementations",
-                "type" : "symbol"
               }
             ],
             "path" : "\/documentation\/authfoundation\/userinfo",
@@ -1639,20 +1570,6 @@
           },
           {
             "children" : [
-              {
-                "title" : "Initializers",
-                "type" : "groupMarker"
-              },
-              {
-                "path" : "\/documentation\/authfoundation\/tokeninfo\/init(_:)",
-                "title" : "init([String : Any])",
-                "type" : "init"
-              },
-              {
-                "path" : "\/documentation\/authfoundation\/tokeninfo\/init(from:)",
-                "title" : "init(from: any Decoder) throws",
-                "type" : "init"
-              },
               {
                 "title" : "Instance Properties",
                 "type" : "groupMarker"
@@ -1938,22 +1855,6 @@
                 "path" : "\/documentation\/authfoundation\/tokeninfo\/hasclaims-implementations",
                 "title" : "HasClaims Implementations",
                 "type" : "symbol"
-              },
-              {
-                "children" : [
-                  {
-                    "title" : "Type Properties",
-                    "type" : "groupMarker"
-                  },
-                  {
-                    "path" : "\/documentation\/authfoundation\/tokeninfo\/jsondecoder",
-                    "title" : "static var jsonDecoder: JSONDecoder",
-                    "type" : "property"
-                  }
-                ],
-                "path" : "\/documentation\/authfoundation\/tokeninfo\/jsondecodable-implementations",
-                "title" : "JSONDecodable Implementations",
-                "type" : "symbol"
               }
             ],
             "path" : "\/documentation\/authfoundation\/tokeninfo",
@@ -1967,37 +1868,23 @@
           {
             "children" : [
               {
-                "title" : "Classes",
+                "title" : "Structures",
                 "type" : "groupMarker"
               },
               {
                 "children" : [
                   {
-                    "title" : "Operators",
-                    "type" : "groupMarker"
-                  },
-                  {
-                    "path" : "\/documentation\/authfoundation\/oauth2client\/configuration-swift.class\/==(_:_:)",
-                    "title" : "static func == (OAuth2Client.Configuration, OAuth2Client.Configuration) -> Bool",
-                    "type" : "op"
-                  },
-                  {
                     "title" : "Initializers",
                     "type" : "groupMarker"
                   },
                   {
-                    "path" : "\/documentation\/authfoundation\/oauth2client\/configuration-swift.class\/init(baseurl:discoveryurl:clientid:scopes:authentication:)",
-                    "title" : "init(baseURL: URL, discoveryURL: URL?, clientId: String, scopes: String, authentication: OAuth2Client.ClientAuthentication)",
+                    "path" : "\/documentation\/authfoundation\/oauth2client\/configuration-swift.struct\/init(domain:clientid:scope:redirecturi:logoutredirecturi:authentication:)",
+                    "title" : "init(domain: String, clientId: String, scope: String, redirectUri: String?, logoutRedirectUri: String?, authentication: OAuth2Client.ClientAuthentication) throws",
                     "type" : "init"
                   },
                   {
-                    "path" : "\/documentation\/authfoundation\/oauth2client\/configuration-swift.class\/init(domain:clientid:scopes:authentication:)",
-                    "title" : "convenience init(domain: String, clientId: String, scopes: String, authentication: OAuth2Client.ClientAuthentication) throws",
-                    "type" : "init"
-                  },
-                  {
-                    "path" : "\/documentation\/authfoundation\/oauth2client\/configuration-swift.class\/init(from:)",
-                    "title" : "init(from: any Decoder) throws",
+                    "path" : "\/documentation\/authfoundation\/oauth2client\/configuration-swift.struct\/init(issuerurl:discoveryurl:clientid:scope:redirecturi:logoutredirecturi:authentication:)",
+                    "title" : "init(issuerURL: URL, discoveryURL: URL?, clientId: String, scope: String, redirectUri: URL?, logoutRedirectUri: URL?, authentication: OAuth2Client.ClientAuthentication)",
                     "type" : "init"
                   },
                   {
@@ -2005,38 +1892,39 @@
                     "type" : "groupMarker"
                   },
                   {
-                    "path" : "\/documentation\/authfoundation\/oauth2client\/configuration-swift.class\/authentication",
-                    "title" : "let authentication: OAuth2Client.ClientAuthentication",
+                    "path" : "\/documentation\/authfoundation\/oauth2client\/configuration-swift.struct\/authentication",
+                    "title" : "var authentication: OAuth2Client.ClientAuthentication",
                     "type" : "property"
                   },
                   {
-                    "path" : "\/documentation\/authfoundation\/oauth2client\/configuration-swift.class\/baseurl",
-                    "title" : "let baseURL: URL",
+                    "path" : "\/documentation\/authfoundation\/oauth2client\/configuration-swift.struct\/clientid",
+                    "title" : "var clientId: String",
                     "type" : "property"
                   },
                   {
-                    "path" : "\/documentation\/authfoundation\/oauth2client\/configuration-swift.class\/clientid",
-                    "title" : "let clientId: String",
+                    "path" : "\/documentation\/authfoundation\/oauth2client\/configuration-swift.struct\/discoveryurl",
+                    "title" : "var discoveryURL: URL",
                     "type" : "property"
                   },
                   {
-                    "path" : "\/documentation\/authfoundation\/oauth2client\/configuration-swift.class\/discoveryurl",
-                    "title" : "let discoveryURL: URL",
+                    "path" : "\/documentation\/authfoundation\/oauth2client\/configuration-swift.struct\/issuerurl",
+                    "title" : "var issuerURL: URL",
                     "type" : "property"
                   },
                   {
-                    "path" : "\/documentation\/authfoundation\/oauth2client\/configuration-swift.class\/scopes",
-                    "title" : "let scopes: String",
+                    "path" : "\/documentation\/authfoundation\/oauth2client\/configuration-swift.struct\/logoutredirecturi",
+                    "title" : "var logoutRedirectUri: URL?",
                     "type" : "property"
                   },
                   {
-                    "title" : "Instance Methods",
-                    "type" : "groupMarker"
+                    "path" : "\/documentation\/authfoundation\/oauth2client\/configuration-swift.struct\/redirecturi",
+                    "title" : "var redirectUri: URL?",
+                    "type" : "property"
                   },
                   {
-                    "path" : "\/documentation\/authfoundation\/oauth2client\/configuration-swift.class\/hash(into:)",
-                    "title" : "func hash(into: inout Hasher)",
-                    "type" : "method"
+                    "path" : "\/documentation\/authfoundation\/oauth2client\/configuration-swift.struct\/scope",
+                    "title" : "var scope: String",
+                    "type" : "property"
                   },
                   {
                     "title" : "Default Implementations",
@@ -2049,23 +1937,19 @@
                         "type" : "groupMarker"
                       },
                       {
-                        "path" : "\/documentation\/authfoundation\/oauth2client\/configuration-swift.class\/!=(_:_:)",
+                        "path" : "\/documentation\/authfoundation\/oauth2client\/configuration-swift.struct\/!=(_:_:)",
                         "title" : "static func != (Self, Self) -> Bool",
                         "type" : "op"
                       }
                     ],
-                    "path" : "\/documentation\/authfoundation\/oauth2client\/configuration-swift.class\/equatable-implementations",
+                    "path" : "\/documentation\/authfoundation\/oauth2client\/configuration-swift.struct\/equatable-implementations",
                     "title" : "Equatable Implementations",
                     "type" : "symbol"
                   }
                 ],
-                "path" : "\/documentation\/authfoundation\/oauth2client\/configuration-swift.class",
+                "path" : "\/documentation\/authfoundation\/oauth2client\/configuration-swift.struct",
                 "title" : "OAuth2Client.Configuration",
-                "type" : "class"
-              },
-              {
-                "title" : "Structures",
-                "type" : "groupMarker"
+                "type" : "struct"
               },
               {
                 "children" : [
@@ -2098,8 +1982,8 @@
                     "type" : "property"
                   },
                   {
-                    "path" : "\/documentation\/authfoundation\/oauth2client\/propertylistconfiguration\/issuer",
-                    "title" : "let issuer: URL",
+                    "path" : "\/documentation\/authfoundation\/oauth2client\/propertylistconfiguration\/issuerurl",
+                    "title" : "let issuerURL: URL",
                     "type" : "property"
                   },
                   {
@@ -2113,8 +1997,8 @@
                     "type" : "property"
                   },
                   {
-                    "path" : "\/documentation\/authfoundation\/oauth2client\/propertylistconfiguration\/scopes",
-                    "title" : "let scopes: String",
+                    "path" : "\/documentation\/authfoundation\/oauth2client\/propertylistconfiguration\/scope",
+                    "title" : "let scope: String",
                     "type" : "property"
                   }
                 ],
@@ -2132,13 +2016,13 @@
                 "type" : "init"
               },
               {
-                "path" : "\/documentation\/authfoundation\/oauth2client\/init(baseurl:clientid:scopes:authentication:session:)",
-                "title" : "convenience init(baseURL: URL, clientId: String, scopes: String, authentication: OAuth2Client.ClientAuthentication, session: (any URLSessionProtocol)?)",
+                "path" : "\/documentation\/authfoundation\/oauth2client\/init(domain:clientid:scope:redirecturi:logoutredirecturi:authentication:session:)",
+                "title" : "convenience init(domain: String, clientId: String, scope: String, redirectUri: String?, logoutRedirectUri: String?, authentication: OAuth2Client.ClientAuthentication, session: (any URLSessionProtocol)?) throws",
                 "type" : "init"
               },
               {
-                "path" : "\/documentation\/authfoundation\/oauth2client\/init(domain:clientid:scopes:authentication:session:)",
-                "title" : "convenience init(domain: String, clientId: String, scopes: String, authentication: OAuth2Client.ClientAuthentication, session: (any URLSessionProtocol)?) throws",
+                "path" : "\/documentation\/authfoundation\/oauth2client\/init(issuerurl:clientid:scope:redirecturi:logoutredirecturi:authentication:session:)",
+                "title" : "convenience init(issuerURL: URL, clientId: String, scope: String, redirectUri: URL?, logoutRedirectUri: URL?, authentication: OAuth2Client.ClientAuthentication, session: (any URLSessionProtocol)?)",
                 "type" : "init"
               },
               {
@@ -2222,11 +2106,6 @@
               {
                 "path" : "\/documentation\/authfoundation\/oauth2client\/revoke(_:type:completion:)",
                 "title" : "func revoke(Token, type: Token.RevokeType, completion: (Result<Void, OAuth2Error>) -> Void)",
-                "type" : "method"
-              },
-              {
-                "path" : "\/documentation\/authfoundation\/oauth2client\/shouldretry(request:)",
-                "title" : "func shouldRetry(request: URLRequest) -> APIRetry",
                 "type" : "method"
               },
               {
@@ -2405,26 +2284,6 @@
                     "type" : "groupMarker"
                   },
                   {
-                    "path" : "\/documentation\/authfoundation\/oauth2client\/decode(_:from:userinfo:)",
-                    "title" : "func decode<T>(T.Type, from: Data, userInfo: [CodingUserInfoKey : Any]?) throws -> T",
-                    "type" : "method"
-                  },
-                  {
-                    "path" : "\/documentation\/authfoundation\/oauth2client\/didsend(request:received:)-2abw8",
-                    "title" : "func didSend<T>(request: URLRequest, received: APIResponse<T>)",
-                    "type" : "method"
-                  },
-                  {
-                    "path" : "\/documentation\/authfoundation\/oauth2client\/didsend(request:received:)-8no60",
-                    "title" : "func didSend(request: URLRequest, received: HTTPURLResponse)",
-                    "type" : "method"
-                  },
-                  {
-                    "path" : "\/documentation\/authfoundation\/oauth2client\/didsend(request:received:requestid:ratelimit:)",
-                    "title" : "func didSend(request: URLRequest, received: APIClientError, requestId: String?, rateLimit: APIRateLimit?)",
-                    "type" : "method"
-                  },
-                  {
                     "path" : "\/documentation\/authfoundation\/oauth2client\/error(from:)",
                     "title" : "func error(from: Data) -> (any Error)?",
                     "type" : "method"
@@ -2437,11 +2296,6 @@
                   {
                     "path" : "\/documentation\/authfoundation\/oauth2client\/shouldretry(request:ratelimit:)",
                     "title" : "func shouldRetry(request: URLRequest, rateLimit: APIRateLimit) -> APIRetry",
-                    "type" : "method"
-                  },
-                  {
-                    "path" : "\/documentation\/authfoundation\/oauth2client\/willsend(request:)",
-                    "title" : "func willSend(request: inout URLRequest)",
                     "type" : "method"
                   }
                 ],
@@ -2542,15 +2396,6 @@
           },
           {
             "children" : [
-              {
-                "title" : "Initializers",
-                "type" : "groupMarker"
-              },
-              {
-                "path" : "\/documentation\/authfoundation\/openidconfiguration\/init(from:)",
-                "title" : "init(from: any Decoder) throws",
-                "type" : "init"
-              },
               {
                 "title" : "Instance Properties",
                 "type" : "groupMarker"
@@ -3299,8 +3144,46 @@
           {
             "children" : [
               {
+                "title" : "Associated Types",
+                "type" : "groupMarker"
+              },
+              {
+                "path" : "\/documentation\/authfoundation\/authenticationflow\/context-swift.associatedtype",
+                "title" : "Context",
+                "type" : "associatedtype"
+              },
+              {
+                "title" : "Initializers",
+                "type" : "groupMarker"
+              },
+              {
+                "path" : "\/documentation\/authfoundation\/authenticationflow\/init()",
+                "title" : "init() throws",
+                "type" : "init"
+              },
+              {
+                "path" : "\/documentation\/authfoundation\/authenticationflow\/init(client:additionalparameters:)",
+                "title" : "init(client: OAuth2Client, additionalParameters: [String : any APIRequestArgument]?) throws",
+                "type" : "init"
+              },
+              {
+                "path" : "\/documentation\/authfoundation\/authenticationflow\/init(plist:)",
+                "title" : "init(plist: URL) throws",
+                "type" : "init"
+              },
+              {
                 "title" : "Instance Properties",
                 "type" : "groupMarker"
+              },
+              {
+                "path" : "\/documentation\/authfoundation\/authenticationflow\/additionalparameters",
+                "title" : "var additionalParameters: [String : any APIRequestArgument]?",
+                "type" : "property"
+              },
+              {
+                "path" : "\/documentation\/authfoundation\/authenticationflow\/context-swift.property",
+                "title" : "var context: Self.Context?",
+                "type" : "property"
               },
               {
                 "path" : "\/documentation\/authfoundation\/authenticationflow\/delegatecollection",
@@ -3364,19 +3247,49 @@
                 "type" : "groupMarker"
               },
               {
-                "path" : "\/documentation\/authfoundation\/oauth2tokenrequest\/acrvalues",
-                "title" : "var acrValues: [String]?",
+                "path" : "\/documentation\/authfoundation\/oauth2tokenrequest\/clientconfiguration",
+                "title" : "var clientConfiguration: OAuth2Client.Configuration",
                 "type" : "property"
               },
               {
-                "path" : "\/documentation\/authfoundation\/oauth2tokenrequest\/clientid",
-                "title" : "var clientId: String",
+                "path" : "\/documentation\/authfoundation\/oauth2tokenrequest\/tokenvalidatorcontext",
+                "title" : "var tokenValidatorContext: any IDTokenValidatorContext",
                 "type" : "property"
               },
               {
-                "path" : "\/documentation\/authfoundation\/oauth2tokenrequest\/openidconfiguration",
-                "title" : "var openIdConfiguration: OpenIdConfiguration",
-                "type" : "property"
+                "title" : "Default Implementations",
+                "type" : "groupMarker"
+              },
+              {
+                "children" : [
+                  {
+                    "title" : "Instance Properties",
+                    "type" : "groupMarker"
+                  },
+                  {
+                    "path" : "\/documentation\/authfoundation\/oauth2tokenrequest\/acceptstype",
+                    "title" : "var acceptsType: APIContentType?",
+                    "type" : "property"
+                  },
+                  {
+                    "path" : "\/documentation\/authfoundation\/oauth2tokenrequest\/contenttype",
+                    "title" : "var contentType: APIContentType?",
+                    "type" : "property"
+                  },
+                  {
+                    "path" : "\/documentation\/authfoundation\/oauth2tokenrequest\/httpmethod",
+                    "title" : "var httpMethod: APIRequestMethod",
+                    "type" : "property"
+                  },
+                  {
+                    "path" : "\/documentation\/authfoundation\/oauth2tokenrequest\/url",
+                    "title" : "var url: URL",
+                    "type" : "property"
+                  }
+                ],
+                "path" : "\/documentation\/authfoundation\/oauth2tokenrequest\/apirequest-implementations",
+                "title" : "APIRequest Implementations",
+                "type" : "symbol"
               }
             ],
             "path" : "\/documentation\/authfoundation\/oauth2tokenrequest",
@@ -3712,15 +3625,6 @@
               },
               {
                 "children" : [
-                  {
-                    "title" : "Initializers",
-                    "type" : "groupMarker"
-                  },
-                  {
-                    "path" : "\/documentation\/authfoundation\/jwt\/header-swift.struct\/init(from:)",
-                    "title" : "init(from: any Decoder) throws",
-                    "type" : "init"
-                  },
                   {
                     "title" : "Instance Properties",
                     "type" : "groupMarker"
@@ -4153,15 +4057,6 @@
           {
             "children" : [
               {
-                "title" : "Initializers",
-                "type" : "groupMarker"
-              },
-              {
-                "path" : "\/documentation\/authfoundation\/jwk\/init(from:)",
-                "title" : "init(from: any Decoder) throws",
-                "type" : "init"
-              },
-              {
                 "title" : "Instance Properties",
                 "type" : "groupMarker"
               },
@@ -4198,11 +4093,6 @@
               {
                 "title" : "Instance Methods",
                 "type" : "groupMarker"
-              },
-              {
-                "path" : "\/documentation\/authfoundation\/jwk\/encode(to:)",
-                "title" : "func encode(to: any Encoder) throws",
-                "type" : "method"
               },
               {
                 "path" : "\/documentation\/authfoundation\/jwk\/verify(token:)",
@@ -5887,26 +5777,12 @@
             "type" : "protocol"
           },
           {
-            "path" : "\/documentation\/authfoundation\/claim",
-            "title" : "Claim",
-            "type" : "typealias"
-          },
-          {
             "path" : "\/documentation\/authfoundation\/jsonclaimcontainer",
             "title" : "JSONClaimContainer",
             "type" : "protocol"
           },
           {
             "children" : [
-              {
-                "title" : "Operators",
-                "type" : "groupMarker"
-              },
-              {
-                "path" : "\/documentation\/authfoundation\/json\/==(_:_:)",
-                "title" : "static func == (JSON, JSON) -> Bool",
-                "type" : "op"
-              },
               {
                 "title" : "Enumeration Cases",
                 "type" : "groupMarker"
@@ -6001,38 +5877,6 @@
                 ],
                 "path" : "\/documentation\/authfoundation\/json\/customdebugstringconvertible-implementations",
                 "title" : "CustomDebugStringConvertible Implementations",
-                "type" : "symbol"
-              },
-              {
-                "children" : [
-                  {
-                    "title" : "Initializers",
-                    "type" : "groupMarker"
-                  },
-                  {
-                    "path" : "\/documentation\/authfoundation\/json\/init(from:)",
-                    "title" : "init(from: any Decoder) throws",
-                    "type" : "init"
-                  }
-                ],
-                "path" : "\/documentation\/authfoundation\/json\/decodable-implementations",
-                "title" : "Decodable Implementations",
-                "type" : "symbol"
-              },
-              {
-                "children" : [
-                  {
-                    "title" : "Instance Methods",
-                    "type" : "groupMarker"
-                  },
-                  {
-                    "path" : "\/documentation\/authfoundation\/json\/encode(to:)",
-                    "title" : "func encode(to: any Encoder) throws",
-                    "type" : "method"
-                  }
-                ],
-                "path" : "\/documentation\/authfoundation\/json\/encodable-implementations",
-                "title" : "Encodable Implementations",
                 "type" : "symbol"
               },
               {
@@ -6976,13 +6820,13 @@
                   {
                     "children" : [
                       {
-                        "path" : "\/documentation\/authfoundation\/apiclientdelegate\/api(client:didsend:received:)-4mcbm",
-                        "title" : "func api(client: any APIClient, didSend: URLRequest, received: HTTPURLResponse)",
+                        "path" : "\/documentation\/authfoundation\/apiclientdelegate\/api(client:didsend:received:)-7vw3y",
+                        "title" : "func api<T>(client: any APIClient, didSend: URLRequest, received: APIResponse<T>)",
                         "type" : "method"
                       },
                       {
-                        "path" : "\/documentation\/authfoundation\/apiclientdelegate\/api(client:didsend:received:)-7vw3y",
-                        "title" : "func api<T>(client: any APIClient, didSend: URLRequest, received: APIResponse<T>)",
+                        "path" : "\/documentation\/authfoundation\/apiclientdelegate\/api(client:didsend:received:)-4mcbm",
+                        "title" : "func api(client: any APIClient, didSend: URLRequest, received: HTTPURLResponse)",
                         "type" : "method"
                       }
                     ],
@@ -7151,14 +6995,19 @@
                 "type" : "groupMarker"
               },
               {
-                "path" : "\/documentation\/authfoundation\/apiclient\/decode(_:from:userinfo:)",
-                "title" : "func decode<T>(T.Type, from: Data, userInfo: [CodingUserInfoKey : Any]?) throws -> T",
+                "path" : "\/documentation\/authfoundation\/apiclient\/decode(_:from:parsing:)",
+                "title" : "func decode<T>(T.Type, from: Data, parsing: (any APIParsingContext)?) throws -> T",
                 "type" : "method"
               },
               {
                 "children" : [
                   {
                     "children" : [
+                      {
+                        "path" : "\/documentation\/authfoundation\/apiclient\/didsend(request:received:)-7fkxl",
+                        "title" : "func didSend(request: URLRequest, received: APIClientError)",
+                        "type" : "method"
+                      },
                       {
                         "path" : "\/documentation\/authfoundation\/apiclient\/didsend(request:received:)-88sth",
                         "title" : "func didSend<T>(request: URLRequest, received: APIResponse<T>)",
@@ -7167,11 +7016,6 @@
                       {
                         "path" : "\/documentation\/authfoundation\/apiclient\/didsend(request:received:)-1c12k",
                         "title" : "func didSend(request: URLRequest, received: HTTPURLResponse)",
-                        "type" : "method"
-                      },
-                      {
-                        "path" : "\/documentation\/authfoundation\/apiclient\/didsend(request:received:)-7fkxl",
-                        "title" : "func didSend(request: URLRequest, received: APIClientError)",
                         "type" : "method"
                       }
                     ],
@@ -7188,8 +7032,8 @@
                   {
                     "children" : [
                       {
-                        "path" : "\/documentation\/authfoundation\/apiclient\/didsend(request:received:)-1c12k",
-                        "title" : "func didSend(request: URLRequest, received: HTTPURLResponse)",
+                        "path" : "\/documentation\/authfoundation\/apiclient\/didsend(request:received:)-7fkxl",
+                        "title" : "func didSend(request: URLRequest, received: APIClientError)",
                         "type" : "method"
                       },
                       {
@@ -7198,8 +7042,8 @@
                         "type" : "method"
                       },
                       {
-                        "path" : "\/documentation\/authfoundation\/apiclient\/didsend(request:received:)-7fkxl",
-                        "title" : "func didSend(request: URLRequest, received: APIClientError)",
+                        "path" : "\/documentation\/authfoundation\/apiclient\/didsend(request:received:)-1c12k",
+                        "title" : "func didSend(request: URLRequest, received: HTTPURLResponse)",
                         "type" : "method"
                       }
                     ],
@@ -7389,38 +7233,12 @@
                 "type" : "groupMarker"
               },
               {
-                "children" : [
-                  {
-                    "children" : [
-                      {
-                        "path" : "\/documentation\/authfoundation\/apiparsingcontext\/error(from:)-422es",
-                        "title" : "func error(from: Data) -> (any Error)?",
-                        "type" : "method"
-                      }
-                    ],
-                    "title" : "APIParsingContext Implementations",
-                    "type" : "groupMarker"
-                  }
-                ],
-                "path" : "\/documentation\/authfoundation\/apiparsingcontext\/error(from:)-5p5cl",
+                "path" : "\/documentation\/authfoundation\/apiparsingcontext\/error(from:)",
                 "title" : "func error(from: Data) -> (any Error)?",
                 "type" : "method"
               },
               {
-                "children" : [
-                  {
-                    "children" : [
-                      {
-                        "path" : "\/documentation\/authfoundation\/apiparsingcontext\/resulttype(from:)-8sqh9",
-                        "title" : "func resultType(from: HTTPURLResponse) -> APIResponseResult",
-                        "type" : "method"
-                      }
-                    ],
-                    "title" : "APIParsingContext Implementations",
-                    "type" : "groupMarker"
-                  }
-                ],
-                "path" : "\/documentation\/authfoundation\/apiparsingcontext\/resulttype(from:)-4ldi5",
+                "path" : "\/documentation\/authfoundation\/apiparsingcontext\/resulttype(from:)",
                 "title" : "func resultType(from: HTTPURLResponse) -> APIResponseResult",
                 "type" : "method"
               }
@@ -7616,11 +7434,6 @@
                   {
                     "children" : [
                       {
-                        "path" : "\/documentation\/authfoundation\/apirequest\/acceptstype-44rkc",
-                        "title" : "var acceptsType: APIContentType?",
-                        "type" : "property"
-                      },
-                      {
                         "path" : "\/documentation\/authfoundation\/apirequest\/acceptstype-3d3te",
                         "title" : "var acceptsType: APIContentType?",
                         "type" : "property"
@@ -7678,11 +7491,6 @@
                         "path" : "\/documentation\/authfoundation\/apirequest\/contenttype-96qjt",
                         "title" : "var contentType: APIContentType?",
                         "type" : "property"
-                      },
-                      {
-                        "path" : "\/documentation\/authfoundation\/apirequest\/contenttype-824pc",
-                        "title" : "var contentType: APIContentType?",
-                        "type" : "property"
                       }
                     ],
                     "title" : "APIRequest Implementations",
@@ -7717,11 +7525,6 @@
                     "children" : [
                       {
                         "path" : "\/documentation\/authfoundation\/apirequest\/httpmethod-2jjvk",
-                        "title" : "var httpMethod: APIRequestMethod",
-                        "type" : "property"
-                      },
-                      {
-                        "path" : "\/documentation\/authfoundation\/apirequest\/httpmethod-26lqm",
                         "title" : "var httpMethod: APIRequestMethod",
                         "type" : "property"
                       }
@@ -7771,20 +7574,7 @@
                 "type" : "property"
               },
               {
-                "children" : [
-                  {
-                    "children" : [
-                      {
-                        "path" : "\/documentation\/authfoundation\/apirequest\/url-5kekh",
-                        "title" : "var url: URL",
-                        "type" : "property"
-                      }
-                    ],
-                    "title" : "APIRequest Implementations",
-                    "type" : "groupMarker"
-                  }
-                ],
-                "path" : "\/documentation\/authfoundation\/apirequest\/url-3elcu",
+                "path" : "\/documentation\/authfoundation\/apirequest\/url",
                 "title" : "var url: URL",
                 "type" : "property"
               },
@@ -7797,17 +7587,17 @@
                   {
                     "children" : [
                       {
-                        "path" : "\/documentation\/authfoundation\/apirequest\/body()-6rb14",
-                        "title" : "func body() throws -> Data?",
-                        "type" : "method"
-                      },
-                      {
                         "path" : "\/documentation\/authfoundation\/apirequest\/body()-8cybb",
                         "title" : "func body() throws -> Data?",
                         "type" : "method"
                       },
                       {
                         "path" : "\/documentation\/authfoundation\/apirequest\/body()-2spui",
+                        "title" : "func body() throws -> Data?",
+                        "type" : "method"
+                      },
+                      {
+                        "path" : "\/documentation\/authfoundation\/apirequest\/body()-6rb14",
                         "title" : "func body() throws -> Data?",
                         "type" : "method"
                       }
@@ -7969,15 +7759,6 @@
                 "path" : "\/documentation\/authfoundation\/apiresponse\/statuscode",
                 "title" : "let statusCode: Int",
                 "type" : "property"
-              },
-              {
-                "title" : "Type Aliases",
-                "type" : "groupMarker"
-              },
-              {
-                "path" : "\/documentation\/authfoundation\/apiresponse\/ratelimit",
-                "title" : "APIResponse.RateLimit",
-                "type" : "typealias"
               },
               {
                 "title" : "Enumerations",
@@ -8151,6 +7932,11 @@
                 "type" : "groupMarker"
               },
               {
+                "path" : "\/documentation\/authfoundation\/oauth2apirequest\/category",
+                "title" : "var category: OAuth2APIRequestCategory",
+                "type" : "property"
+              },
+              {
                 "path" : "\/documentation\/authfoundation\/oauth2apirequest\/openidconfiguration",
                 "title" : "var openIdConfiguration: OpenIdConfiguration",
                 "type" : "property"
@@ -8300,58 +8086,6 @@
             ],
             "path" : "\/documentation\/authfoundation\/apiclienterror",
             "title" : "APIClientError",
-            "type" : "enum"
-          },
-          {
-            "children" : [
-              {
-                "title" : "Enumeration Cases",
-                "type" : "groupMarker"
-              },
-              {
-                "path" : "\/documentation\/authfoundation\/authenticationerror\/flownotready",
-                "title" : "case flowNotReady",
-                "type" : "case"
-              },
-              {
-                "title" : "Default Implementations",
-                "type" : "groupMarker"
-              },
-              {
-                "children" : [
-                  {
-                    "title" : "Operators",
-                    "type" : "groupMarker"
-                  },
-                  {
-                    "path" : "\/documentation\/authfoundation\/authenticationerror\/!=(_:_:)",
-                    "title" : "static func != (Self, Self) -> Bool",
-                    "type" : "op"
-                  }
-                ],
-                "path" : "\/documentation\/authfoundation\/authenticationerror\/equatable-implementations",
-                "title" : "Equatable Implementations",
-                "type" : "symbol"
-              },
-              {
-                "children" : [
-                  {
-                    "title" : "Instance Properties",
-                    "type" : "groupMarker"
-                  },
-                  {
-                    "path" : "\/documentation\/authfoundation\/authenticationerror\/localizeddescription",
-                    "title" : "var localizedDescription: String",
-                    "type" : "property"
-                  }
-                ],
-                "path" : "\/documentation\/authfoundation\/authenticationerror\/error-implementations",
-                "title" : "Error Implementations",
-                "type" : "symbol"
-              }
-            ],
-            "path" : "\/documentation\/authfoundation\/authenticationerror",
-            "title" : "AuthenticationError",
             "type" : "enum"
           },
           {
@@ -8892,6 +8626,11 @@
                 "type" : "case"
               },
               {
+                "path" : "\/documentation\/authfoundation\/oauth2error\/missingredirecturi",
+                "title" : "case missingRedirectUri",
+                "type" : "case"
+              },
+              {
                 "path" : "\/documentation\/authfoundation\/oauth2error\/missingtoken(type:)",
                 "title" : "case missingToken(type: Token.Kind)",
                 "type" : "case"
@@ -8907,8 +8646,8 @@
                 "type" : "case"
               },
               {
-                "path" : "\/documentation\/authfoundation\/oauth2error\/oauth2error(code:description:additionalkeys:)",
-                "title" : "case oauth2Error(code: String, description: String?, additionalKeys: [String : String]?)",
+                "path" : "\/documentation\/authfoundation\/oauth2error\/server(error:)",
+                "title" : "case server(error: OAuth2ServerError)",
                 "type" : "case"
               },
               {
@@ -8995,29 +8734,6 @@
           },
           {
             "children" : [
-              {
-                "title" : "Operators",
-                "type" : "groupMarker"
-              },
-              {
-                "path" : "\/documentation\/authfoundation\/oauth2servererror\/==(_:_:)",
-                "title" : "static func == (OAuth2ServerError, OAuth2ServerError) -> Bool",
-                "type" : "op"
-              },
-              {
-                "title" : "Initializers",
-                "type" : "groupMarker"
-              },
-              {
-                "path" : "\/documentation\/authfoundation\/oauth2servererror\/init(code:description:additionalvalues:)",
-                "title" : "init(code: String, description: String?, additionalValues: [String : Any])",
-                "type" : "init"
-              },
-              {
-                "path" : "\/documentation\/authfoundation\/oauth2servererror\/init(from:)",
-                "title" : "init(from: any Decoder) throws",
-                "type" : "init"
-              },
               {
                 "title" : "Instance Properties",
                 "type" : "groupMarker"
@@ -9286,15 +9002,6 @@
           {
             "children" : [
               {
-                "title" : "Initializers",
-                "type" : "groupMarker"
-              },
-              {
-                "path" : "\/documentation\/authfoundation\/oktaapierror\/init(from:)",
-                "title" : "init(from: any Decoder) throws",
-                "type" : "init"
-              },
-              {
                 "title" : "Instance Properties",
                 "type" : "groupMarker"
               },
@@ -9306,11 +9013,6 @@
               {
                 "path" : "\/documentation\/authfoundation\/oktaapierror\/code",
                 "title" : "let code: String",
-                "type" : "property"
-              },
-              {
-                "path" : "\/documentation\/authfoundation\/oktaapierror\/errordescription",
-                "title" : "var errorDescription: String?",
                 "type" : "property"
               },
               {
@@ -9530,11 +9232,6 @@
                       {
                         "path" : "\/documentation\/authfoundation\/sdkversion\/migration\/legacyoidc\/register(clientid:)",
                         "title" : "static func register(clientId: String?)",
-                        "type" : "method"
-                      },
-                      {
-                        "path" : "\/documentation\/authfoundation\/sdkversion\/migration\/legacyoidc\/register(issuer:clientid:redirecturi:scopes:)",
-                        "title" : "static func register(issuer: URL, clientId: String, redirectUri: URL, scopes: String)",
                         "type" : "method"
                       },
                       {
@@ -9930,6 +9627,81 @@
             "type" : "struct"
           },
           {
+            "title" : "Classes",
+            "type" : "groupMarker"
+          },
+          {
+            "children" : [
+              {
+                "title" : "Instance Properties",
+                "type" : "groupMarker"
+              },
+              {
+                "path" : "\/documentation\/authfoundation\/debugapirequestobserver\/observealloauth2clients",
+                "title" : "var observeAllOAuth2Clients: Bool",
+                "type" : "property"
+              },
+              {
+                "path" : "\/documentation\/authfoundation\/debugapirequestobserver\/showheaders",
+                "title" : "var showHeaders: Bool",
+                "type" : "property"
+              },
+              {
+                "title" : "Type Properties",
+                "type" : "groupMarker"
+              },
+              {
+                "path" : "\/documentation\/authfoundation\/debugapirequestobserver\/shared",
+                "title" : "static var shared: DebugAPIRequestObserver",
+                "type" : "property"
+              },
+              {
+                "title" : "Default Implementations",
+                "type" : "groupMarker"
+              },
+              {
+                "children" : [
+                  {
+                    "title" : "Instance Methods",
+                    "type" : "groupMarker"
+                  },
+                  {
+                    "path" : "\/documentation\/authfoundation\/debugapirequestobserver\/api(client:shouldretry:)",
+                    "title" : "func api(client: any APIClient, shouldRetry: URLRequest) -> APIRetry",
+                    "type" : "method"
+                  }
+                ],
+                "path" : "\/documentation\/authfoundation\/debugapirequestobserver\/apiclientdelegate-implementations",
+                "title" : "APIClientDelegate Implementations",
+                "type" : "symbol"
+              },
+              {
+                "children" : [
+                  {
+                    "title" : "Instance Methods",
+                    "type" : "groupMarker"
+                  },
+                  {
+                    "path" : "\/documentation\/authfoundation\/debugapirequestobserver\/oauth(client:didrefresh:replacedwith:)",
+                    "title" : "func oauth(client: OAuth2Client, didRefresh: Token, replacedWith: Token?)",
+                    "type" : "method"
+                  },
+                  {
+                    "path" : "\/documentation\/authfoundation\/debugapirequestobserver\/oauth(client:willrefresh:)",
+                    "title" : "func oauth(client: OAuth2Client, willRefresh: Token)",
+                    "type" : "method"
+                  }
+                ],
+                "path" : "\/documentation\/authfoundation\/debugapirequestobserver\/oauth2clientdelegate-implementations",
+                "title" : "OAuth2ClientDelegate Implementations",
+                "type" : "symbol"
+              }
+            ],
+            "path" : "\/documentation\/authfoundation\/debugapirequestobserver",
+            "title" : "DebugAPIRequestObserver",
+            "type" : "class"
+          },
+          {
             "title" : "Protocols",
             "type" : "groupMarker"
           },
@@ -9940,19 +9712,163 @@
                 "type" : "groupMarker"
               },
               {
-                "path" : "\/documentation\/authfoundation\/providesoauth2parameters\/additionalparameters",
-                "title" : "var additionalParameters: [String : any APIRequestArgument]?",
+                "path" : "\/documentation\/authfoundation\/authenticationcontext\/acrvalues",
+                "title" : "var acrValues: [String]?",
                 "type" : "property"
               },
               {
-                "path" : "\/documentation\/authfoundation\/providesoauth2parameters\/shouldoverride",
-                "title" : "var shouldOverride: Bool",
+                "path" : "\/documentation\/authfoundation\/authenticationcontext\/persistvalues",
+                "title" : "var persistValues: [String : String]?",
                 "type" : "property"
+              }
+            ],
+            "path" : "\/documentation\/authfoundation\/authenticationcontext",
+            "title" : "AuthenticationContext",
+            "type" : "protocol"
+          },
+          {
+            "children" : [
+              {
+                "title" : "Associated Types",
+                "type" : "groupMarker"
+              },
+              {
+                "path" : "\/documentation\/authfoundation\/authenticationflowrequest\/flow",
+                "title" : "Flow",
+                "type" : "associatedtype"
+              },
+              {
+                "title" : "Instance Properties",
+                "type" : "groupMarker"
+              },
+              {
+                "path" : "\/documentation\/authfoundation\/authenticationflowrequest\/context",
+                "title" : "var context: Self.Flow.Context",
+                "type" : "property"
+              }
+            ],
+            "path" : "\/documentation\/authfoundation\/authenticationflowrequest",
+            "title" : "AuthenticationFlowRequest",
+            "type" : "protocol"
+          },
+          {
+            "children" : [
+              {
+                "title" : "Instance Methods",
+                "type" : "groupMarker"
+              },
+              {
+                "path" : "\/documentation\/authfoundation\/providesoauth2parameters\/parameters(for:)",
+                "title" : "func parameters(for: OAuth2APIRequestCategory) -> [String : any APIRequestArgument]?",
+                "type" : "method"
               }
             ],
             "path" : "\/documentation\/authfoundation\/providesoauth2parameters",
             "title" : "ProvidesOAuth2Parameters",
             "type" : "protocol"
+          },
+          {
+            "title" : "Structures",
+            "type" : "groupMarker"
+          },
+          {
+            "children" : [
+              {
+                "title" : "Initializers",
+                "type" : "groupMarker"
+              },
+              {
+                "path" : "\/documentation\/authfoundation\/standardauthenticationcontext\/init(acrvalues:additionalparameters:)",
+                "title" : "init(acrValues: [String]?, additionalParameters: [String : any APIRequestArgument]?)",
+                "type" : "init"
+              },
+              {
+                "title" : "Instance Properties",
+                "type" : "groupMarker"
+              },
+              {
+                "path" : "\/documentation\/authfoundation\/standardauthenticationcontext\/acrvalues",
+                "title" : "var acrValues: [String]?",
+                "type" : "property"
+              },
+              {
+                "path" : "\/documentation\/authfoundation\/standardauthenticationcontext\/additionalparameters",
+                "title" : "var additionalParameters: [String : any APIRequestArgument]?",
+                "type" : "property"
+              }
+            ],
+            "path" : "\/documentation\/authfoundation\/standardauthenticationcontext",
+            "title" : "StandardAuthenticationContext",
+            "type" : "struct"
+          },
+          {
+            "title" : "Variables",
+            "type" : "groupMarker"
+          },
+          {
+            "path" : "\/documentation\/authfoundation\/nullidtokenvalidatorcontext",
+            "title" : "let NullIDTokenValidatorContext: any IDTokenValidatorContext",
+            "type" : "var"
+          },
+          {
+            "title" : "Enumerations",
+            "type" : "groupMarker"
+          },
+          {
+            "children" : [
+              {
+                "title" : "Enumeration Cases",
+                "type" : "groupMarker"
+              },
+              {
+                "path" : "\/documentation\/authfoundation\/oauth2apirequestcategory\/authorization",
+                "title" : "case authorization",
+                "type" : "case"
+              },
+              {
+                "path" : "\/documentation\/authfoundation\/oauth2apirequestcategory\/configuration",
+                "title" : "case configuration",
+                "type" : "case"
+              },
+              {
+                "path" : "\/documentation\/authfoundation\/oauth2apirequestcategory\/other",
+                "title" : "case other",
+                "type" : "case"
+              },
+              {
+                "path" : "\/documentation\/authfoundation\/oauth2apirequestcategory\/resource",
+                "title" : "case resource",
+                "type" : "case"
+              },
+              {
+                "path" : "\/documentation\/authfoundation\/oauth2apirequestcategory\/token",
+                "title" : "case token",
+                "type" : "case"
+              },
+              {
+                "title" : "Default Implementations",
+                "type" : "groupMarker"
+              },
+              {
+                "children" : [
+                  {
+                    "title" : "Operators",
+                    "type" : "groupMarker"
+                  },
+                  {
+                    "path" : "\/documentation\/authfoundation\/oauth2apirequestcategory\/!=(_:_:)",
+                    "title" : "static func != (Self, Self) -> Bool",
+                    "type" : "op"
+                  }
+                ],
+                "path" : "\/documentation\/authfoundation\/oauth2apirequestcategory\/equatable-implementations",
+                "title" : "Equatable Implementations",
+                "type" : "symbol"
+              }
+            ],
+            "path" : "\/documentation\/authfoundation\/oauth2apirequestcategory",
+            "title" : "OAuth2APIRequestCategory",
+            "type" : "enum"
           },
           {
             "title" : "Extended Modules",

@@ -5,7 +5,7 @@
       "type" : "text"
     },
     {
-      "identifier" : "doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/OktaOAuth2\/AuthorizationCodeFlow\/Context-swift.struct",
+      "identifier" : "doc:\/\/OktaOAuth2\/documentation\/OktaOAuth2\/AuthorizationCodeFlow\/Context-swift.struct",
       "isActive" : true,
       "type" : "reference"
     },
@@ -17,19 +17,19 @@
   "hierarchy" : {
     "paths" : [
       [
-        "doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/OktaOAuth2",
-        "doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/OktaOAuth2\/AuthorizationCodeFlow"
+        "doc:\/\/OktaOAuth2\/documentation\/OktaOAuth2",
+        "doc:\/\/OktaOAuth2\/documentation\/OktaOAuth2\/AuthorizationCodeFlow"
       ]
     ]
   },
   "identifier" : {
     "interfaceLanguage" : "swift",
-    "url" : "doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/OktaOAuth2\/AuthorizationCodeFlow\/start(with:)"
+    "url" : "doc:\/\/OktaOAuth2\/documentation\/OktaOAuth2\/AuthorizationCodeFlow\/start(with:)"
   },
   "kind" : "symbol",
   "metadata" : {
     "extendedModule" : "OktaOAuth2",
-    "externalID" : "s:10OktaOAuth221AuthorizationCodeFlowC5start4with10Foundation3URLVAC7ContextVSg_tYaKF",
+    "externalID" : "s:10OktaOAuth221AuthorizationCodeFlowC5start4with10Foundation3URLVAC7ContextV_tYaKF",
     "fragments" : [
       {
         "kind" : "keyword",
@@ -57,12 +57,21 @@
       },
       {
         "kind" : "typeIdentifier",
+        "preciseIdentifier" : "s:10OktaOAuth221AuthorizationCodeFlowC",
+        "text" : "AuthorizationCodeFlow"
+      },
+      {
+        "kind" : "text",
+        "text" : "."
+      },
+      {
+        "kind" : "typeIdentifier",
         "preciseIdentifier" : "s:10OktaOAuth221AuthorizationCodeFlowC7ContextV",
         "text" : "Context"
       },
       {
         "kind" : "text",
-        "text" : "?) "
+        "text" : ") "
       },
       {
         "kind" : "keyword",
@@ -95,28 +104,28 @@
       {
         "beta" : false,
         "deprecated" : false,
-        "introducedAt" : "15.0",
+        "introducedAt" : "13.0",
         "name" : "iOS",
         "unavailable" : false
       },
       {
         "beta" : false,
         "deprecated" : false,
-        "introducedAt" : "12.0",
+        "introducedAt" : "10.15",
         "name" : "macOS",
         "unavailable" : false
       },
       {
         "beta" : false,
         "deprecated" : false,
-        "introducedAt" : "15.0",
+        "introducedAt" : "13.0",
         "name" : "tvOS",
         "unavailable" : false
       },
       {
         "beta" : false,
         "deprecated" : false,
-        "introducedAt" : "8.0",
+        "introducedAt" : "6.0",
         "name" : "watchOS",
         "unavailable" : false
       }
@@ -170,14 +179,24 @@
               "text" : ": "
             },
             {
-              "identifier" : "doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/OktaOAuth2\/AuthorizationCodeFlow\/Context-swift.struct",
+              "identifier" : "doc:\/\/OktaOAuth2\/documentation\/OktaOAuth2\/AuthorizationCodeFlow",
+              "kind" : "typeIdentifier",
+              "preciseIdentifier" : "s:10OktaOAuth221AuthorizationCodeFlowC",
+              "text" : "AuthorizationCodeFlow"
+            },
+            {
+              "kind" : "text",
+              "text" : "."
+            },
+            {
+              "identifier" : "doc:\/\/OktaOAuth2\/documentation\/OktaOAuth2\/AuthorizationCodeFlow\/Context-swift.struct",
               "kind" : "typeIdentifier",
               "preciseIdentifier" : "s:10OktaOAuth221AuthorizationCodeFlowC7ContextV",
               "text" : "Context"
             },
             {
               "kind" : "text",
-              "text" : "? = nil) "
+              "text" : " = .init()) "
             },
             {
               "kind" : "keyword",
@@ -206,6 +225,39 @@
       "kind" : "declarations"
     },
     {
+      "kind" : "parameters",
+      "parameters" : [
+        {
+          "content" : [
+            {
+              "inlineContent" : [
+                {
+                  "text" : "Optional context to provide when customizing the state parameter.",
+                  "type" : "text"
+                }
+              ],
+              "type" : "paragraph"
+            }
+          ],
+          "name" : "context"
+        },
+        {
+          "content" : [
+            {
+              "inlineContent" : [
+                {
+                  "text" : "Options to customize this authentication flow.",
+                  "type" : "text"
+                }
+              ],
+              "type" : "paragraph"
+            }
+          ],
+          "name" : "options"
+        }
+      ]
+    },
+    {
       "content" : [
         {
           "anchor" : "return-value",
@@ -224,25 +276,6 @@
         }
       ],
       "kind" : "content"
-    },
-    {
-      "kind" : "parameters",
-      "parameters" : [
-        {
-          "content" : [
-            {
-              "inlineContent" : [
-                {
-                  "text" : "Optional context to provide when customizing the state parameter.",
-                  "type" : "text"
-                }
-              ],
-              "type" : "paragraph"
-            }
-          ],
-          "name" : "context"
-        }
-      ]
     },
     {
       "content" : [
@@ -267,7 +300,7 @@
   ],
   "schemaVersion" : {
     "major" : 0,
-    "minor" : 2,
+    "minor" : 3,
     "patch" : 0
   },
   "sections" : [
@@ -287,21 +320,21 @@
   ]
 , 
 "references": {
-"doc://com.okta.mobile.oktaoauth2/documentation/OktaOAuth2": {
+"doc://OktaOAuth2/documentation/OktaOAuth2": {
   "abstract" : [
     {
       "text" : "Interact with Okta’s OAuth2 APIs to authenticate users, and interact with user resources.",
       "type" : "text"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/OktaOAuth2",
+  "identifier" : "doc:\/\/OktaOAuth2\/documentation\/OktaOAuth2",
   "kind" : "symbol",
   "role" : "collection",
   "title" : "OktaOAuth2",
   "type" : "topic",
   "url" : "\/documentation\/oktaoauth2"
 },
-"doc://com.okta.mobile.oktaoauth2/documentation/OktaOAuth2/AuthorizationCodeFlow": {
+"doc://OktaOAuth2/documentation/OktaOAuth2/AuthorizationCodeFlow": {
   "abstract" : [
     {
       "text" : "An authentication flow class that implements the Authorization Code Flow exchange.",
@@ -322,7 +355,7 @@
       "text" : "AuthorizationCodeFlow"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/OktaOAuth2\/AuthorizationCodeFlow",
+  "identifier" : "doc:\/\/OktaOAuth2\/documentation\/OktaOAuth2\/AuthorizationCodeFlow",
   "kind" : "symbol",
   "navigatorTitle" : [
     {
@@ -335,7 +368,7 @@
   "type" : "topic",
   "url" : "\/documentation\/oktaoauth2\/authorizationcodeflow"
 },
-"doc://com.okta.mobile.oktaoauth2/documentation/OktaOAuth2/AuthorizationCodeFlow/Context-swift.struct": {
+"doc://OktaOAuth2/documentation/OktaOAuth2/AuthorizationCodeFlow/Context-swift.struct": {
   "abstract" : [
     {
       "text" : "A model representing the context and current state for an authorization session.",
@@ -356,7 +389,7 @@
       "text" : "Context"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/OktaOAuth2\/AuthorizationCodeFlow\/Context-swift.struct",
+  "identifier" : "doc:\/\/OktaOAuth2\/documentation\/OktaOAuth2\/AuthorizationCodeFlow\/Context-swift.struct",
   "kind" : "symbol",
   "navigatorTitle" : [
     {
@@ -369,14 +402,14 @@
   "type" : "topic",
   "url" : "\/documentation\/oktaoauth2\/authorizationcodeflow\/context-swift.struct"
 },
-"doc://com.okta.mobile.oktaoauth2/documentation/OktaOAuth2/AuthorizationCodeFlow/start(with:)": {
+"doc://OktaOAuth2/documentation/OktaOAuth2/AuthorizationCodeFlow/start(with:)": {
   "abstract" : [
     {
       "text" : "Asynchronously initiates an authentication flow, with an optional ",
       "type" : "text"
     },
     {
-      "identifier" : "doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/OktaOAuth2\/AuthorizationCodeFlow\/Context-swift.struct",
+      "identifier" : "doc:\/\/OktaOAuth2\/documentation\/OktaOAuth2\/AuthorizationCodeFlow\/Context-swift.struct",
       "isActive" : true,
       "type" : "reference"
     },
@@ -412,12 +445,21 @@
     },
     {
       "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:10OktaOAuth221AuthorizationCodeFlowC",
+      "text" : "AuthorizationCodeFlow"
+    },
+    {
+      "kind" : "text",
+      "text" : "."
+    },
+    {
+      "kind" : "typeIdentifier",
       "preciseIdentifier" : "s:10OktaOAuth221AuthorizationCodeFlowC7ContextV",
       "text" : "Context"
     },
     {
       "kind" : "text",
-      "text" : "?) "
+      "text" : ") "
     },
     {
       "kind" : "keyword",
@@ -441,7 +483,7 @@
       "text" : "URL"
     }
   ],
-  "identifier" : "doc:\/\/com.okta.mobile.oktaoauth2\/documentation\/OktaOAuth2\/AuthorizationCodeFlow\/start(with:)",
+  "identifier" : "doc:\/\/OktaOAuth2\/documentation\/OktaOAuth2\/AuthorizationCodeFlow\/start(with:)",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "start(with:)",

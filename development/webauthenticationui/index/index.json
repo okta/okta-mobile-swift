@@ -43,13 +43,13 @@
                 "type" : "init"
               },
               {
-                "path" : "\/documentation\/webauthenticationui\/webauthentication\/init(issuer:clientid:scopes:redirecturi:logoutredirecturi:additionalparameters:)",
-                "title" : "convenience init(issuer: URL, clientId: String, scopes: String, redirectUri: URL, logoutRedirectUri: URL?, additionalParameters: [String : any APIRequestArgument]?)",
+                "path" : "\/documentation\/webauthenticationui\/webauthentication\/init(issuerurl:clientid:scope:redirecturi:logoutredirecturi:additionalparameters:)",
+                "title" : "convenience init(issuerURL: URL, clientId: String, scope: String, redirectUri: URL, logoutRedirectUri: URL?, additionalParameters: [String : any APIRequestArgument]?) throws",
                 "type" : "init"
               },
               {
-                "path" : "\/documentation\/webauthenticationui\/webauthentication\/init(loginflow:logoutflow:context:)",
-                "title" : "convenience init(loginFlow: AuthorizationCodeFlow, logoutFlow: SessionLogoutFlow?, context: AuthorizationCodeFlow.Context?)",
+                "path" : "\/documentation\/webauthenticationui\/webauthentication\/init(loginflow:logoutflow:)",
+                "title" : "init(loginFlow: AuthorizationCodeFlow, logoutFlow: SessionLogoutFlow?)",
                 "type" : "init"
               },
               {
@@ -57,13 +57,13 @@
                 "type" : "groupMarker"
               },
               {
-                "path" : "\/documentation\/webauthenticationui\/webauthentication\/signin(from:options:)",
-                "title" : "func signIn(from: WebAuthentication.WindowAnchor?, options: [WebAuthentication.Option]?) async throws -> Token",
+                "path" : "\/documentation\/webauthenticationui\/webauthentication\/signin(from:context:)",
+                "title" : "func signIn(from: WebAuthentication.WindowAnchor?, context: AuthorizationCodeFlow.Context) async throws -> Token",
                 "type" : "method"
               },
               {
-                "path" : "\/documentation\/webauthenticationui\/webauthentication\/signin(from:options:completion:)",
-                "title" : "func signIn(from: WebAuthentication.WindowAnchor?, options: [WebAuthentication.Option]?, completion: (Result<Token, WebAuthenticationError>) -> Void)",
+                "path" : "\/documentation\/webauthenticationui\/webauthentication\/signin(from:context:completion:)",
+                "title" : "func signIn(from: WebAuthentication.WindowAnchor?, context: AuthorizationCodeFlow.Context, completion: (Result<Token, WebAuthenticationError>) -> Void)",
                 "type" : "method"
               },
               {
@@ -76,13 +76,13 @@
                 "type" : "article"
               },
               {
-                "path" : "\/documentation\/webauthenticationui\/webauthentication\/signout(from:credential:options:)",
-                "title" : "func signOut(from: WebAuthentication.WindowAnchor?, credential: Credential?, options: [WebAuthentication.Option]?) async throws",
+                "path" : "\/documentation\/webauthenticationui\/webauthentication\/signout(from:credential:context:)",
+                "title" : "func signOut(from: WebAuthentication.WindowAnchor?, credential: Credential?, context: SessionLogoutFlow.Context) async throws",
                 "type" : "method"
               },
               {
-                "path" : "\/documentation\/webauthenticationui\/webauthentication\/signout(from:credential:options:completion:)",
-                "title" : "func signOut(from: WebAuthentication.WindowAnchor?, credential: Credential?, options: [WebAuthentication.Option]?, completion: (Result<Void, WebAuthenticationError>) -> Void)",
+                "path" : "\/documentation\/webauthenticationui\/webauthentication\/signout(from:credential:context:completion:)",
+                "title" : "func signOut(from: WebAuthentication.WindowAnchor?, credential: Credential?, context: SessionLogoutFlow.Context, completion: (Result<Void, WebAuthenticationError>) -> Void)",
                 "type" : "method"
               },
               {
@@ -95,8 +95,42 @@
                 "type" : "article"
               },
               {
+                "path" : "\/documentation\/webauthenticationui\/webauthentication\/signout(from:token:context:)",
+                "title" : "func signOut(from: WebAuthentication.WindowAnchor?, token: Token, context: SessionLogoutFlow.Context) async throws",
+                "type" : "method"
+              },
+              {
+                "path" : "\/documentation\/webauthenticationui\/webauthentication\/signout(from:token:context:completion:)",
+                "title" : "func signOut(from: WebAuthentication.WindowAnchor?, token: Token?, context: SessionLogoutFlow.Context, completion: (Result<Void, WebAuthenticationError>) -> Void)",
+                "type" : "method"
+              },
+              {
+                "title" : "Sign Out Using Custom Settings",
+                "type" : "groupMarker"
+              },
+              {
+                "path" : "\/documentation\/webauthenticationui\/howtosignout",
+                "title" : "How To Sign Out",
+                "type" : "article"
+              },
+              {
+                "path" : "\/documentation\/webauthenticationui\/webauthentication\/signout(from:context:)",
+                "title" : "func signOut(from: WebAuthentication.WindowAnchor?, context: SessionLogoutFlow.Context) async throws",
+                "type" : "method"
+              },
+              {
+                "path" : "\/documentation\/webauthenticationui\/webauthentication\/signout(from:context:completion:)",
+                "title" : "func signOut(from: WebAuthentication.WindowAnchor?, context: SessionLogoutFlow.Context, completion: (Result<Void, WebAuthenticationError>) -> Void)",
+                "type" : "method"
+              },
+              {
                 "title" : "Sign In Using App Link",
                 "type" : "groupMarker"
+              },
+              {
+                "path" : "\/documentation\/webauthenticationui\/webauthentication\/resume(with:)",
+                "title" : "func resume(with: URL) throws",
+                "type" : "method"
               },
               {
                 "path" : "\/documentation\/webauthenticationui\/webauthentication\/resume(with:)",
@@ -118,86 +152,12 @@
                 "type" : "property"
               },
               {
-                "path" : "\/documentation\/webauthenticationui\/webauthentication\/context",
-                "title" : "var context: AuthorizationCodeFlow.Context?",
-                "type" : "property"
-              },
-              {
-                "title" : "Initializers",
-                "type" : "groupMarker"
-              },
-              {
-                "path" : "\/documentation\/webauthenticationui\/webauthentication\/init(loginflow:logoutflow:)",
-                "title" : "init(loginFlow: AuthorizationCodeFlow, logoutFlow: SessionLogoutFlow?)",
-                "type" : "init"
-              },
-              {
                 "title" : "Instance Methods",
                 "type" : "groupMarker"
               },
               {
                 "path" : "\/documentation\/webauthenticationui\/webauthentication\/cancel()",
                 "title" : "func cancel()",
-                "type" : "method"
-              },
-              {
-                "path" : "\/documentation\/webauthenticationui\/webauthentication\/signin(from:additionalparameters:)",
-                "title" : "func signIn(from: WebAuthentication.WindowAnchor?, additionalParameters: [String : String]?) async throws -> Token",
-                "type" : "method"
-              },
-              {
-                "path" : "\/documentation\/webauthenticationui\/webauthentication\/signin(from:additionalparameters:completion:)",
-                "title" : "func signIn(from: WebAuthentication.WindowAnchor?, additionalParameters: [String : String]?, completion: (Result<Token, WebAuthenticationError>) -> Void)",
-                "type" : "method"
-              },
-              {
-                "path" : "\/documentation\/webauthenticationui\/webauthentication\/signout(from:credential:additionalparameters:)",
-                "title" : "func signOut(from: WebAuthentication.WindowAnchor?, credential: Credential?, additionalParameters: [String : String]?) async throws",
-                "type" : "method"
-              },
-              {
-                "path" : "\/documentation\/webauthenticationui\/webauthentication\/signout(from:credential:additionalparameters:completion:)",
-                "title" : "func signOut(from: WebAuthentication.WindowAnchor?, credential: Credential?, additionalParameters: [String : String]?, completion: (Result<Void, WebAuthenticationError>) -> Void)",
-                "type" : "method"
-              },
-              {
-                "path" : "\/documentation\/webauthenticationui\/webauthentication\/signout(from:token:additionalparameters:)-1kne9",
-                "title" : "func signOut(from: WebAuthentication.WindowAnchor?, token: Token, additionalParameters: [String : String]?) async throws",
-                "type" : "method"
-              },
-              {
-                "path" : "\/documentation\/webauthenticationui\/webauthentication\/signout(from:token:additionalparameters:)-4j4gk",
-                "title" : "func signOut(from: WebAuthentication.WindowAnchor?, token: String, additionalParameters: [String : String]?) async throws",
-                "type" : "method"
-              },
-              {
-                "path" : "\/documentation\/webauthenticationui\/webauthentication\/signout(from:token:additionalparameters:completion:)-8845h",
-                "title" : "func signOut(from: WebAuthentication.WindowAnchor?, token: Token, additionalParameters: [String : String]?, completion: (Result<Void, WebAuthenticationError>) -> Void)",
-                "type" : "method"
-              },
-              {
-                "path" : "\/documentation\/webauthenticationui\/webauthentication\/signout(from:token:additionalparameters:completion:)-9u3wg",
-                "title" : "func signOut(from: WebAuthentication.WindowAnchor?, token: String, additionalParameters: [String : String]?, completion: (Result<Void, WebAuthenticationError>) -> Void)",
-                "type" : "method"
-              },
-              {
-                "path" : "\/documentation\/webauthenticationui\/webauthentication\/signout(from:token:options:)-8qfwp",
-                "title" : "func signOut(from: WebAuthentication.WindowAnchor?, token: String, options: [WebAuthentication.Option]?) async throws",
-                "type" : "method"
-              },
-              {
-                "path" : "\/documentation\/webauthenticationui\/webauthentication\/signout(from:token:options:)-9ss9m",
-                "title" : "func signOut(from: WebAuthentication.WindowAnchor?, token: Token, options: [WebAuthentication.Option]?) async throws",
-                "type" : "method"
-              },
-              {
-                "path" : "\/documentation\/webauthenticationui\/webauthentication\/signout(from:token:options:completion:)-1zp96",
-                "title" : "func signOut(from: WebAuthentication.WindowAnchor?, token: Token, options: [WebAuthentication.Option]?, completion: (Result<Void, WebAuthenticationError>) -> Void)",
-                "type" : "method"
-              },
-              {
-                "path" : "\/documentation\/webauthenticationui\/webauthentication\/signout(from:token:options:completion:)-8kp2p",
-                "title" : "func signOut(from: WebAuthentication.WindowAnchor?, token: String, options: [WebAuthentication.Option]?, completion: (Result<Void, WebAuthenticationError>) -> Void)",
                 "type" : "method"
               },
               {
@@ -208,150 +168,6 @@
                 "path" : "\/documentation\/webauthenticationui\/webauthentication\/windowanchor",
                 "title" : "WebAuthentication.WindowAnchor",
                 "type" : "typealias"
-              },
-              {
-                "title" : "Enumerations",
-                "type" : "groupMarker"
-              },
-              {
-                "children" : [
-                  {
-                    "title" : "Enumeration Cases",
-                    "type" : "groupMarker"
-                  },
-                  {
-                    "path" : "\/documentation\/webauthenticationui\/webauthentication\/option\/custom(key:value:)",
-                    "title" : "case custom(key: String, value: String)",
-                    "type" : "case"
-                  },
-                  {
-                    "path" : "\/documentation\/webauthenticationui\/webauthentication\/option\/display(_:)",
-                    "title" : "case display(String)",
-                    "type" : "case"
-                  },
-                  {
-                    "path" : "\/documentation\/webauthenticationui\/webauthentication\/option\/idp(url:)",
-                    "title" : "case idp(url: URL)",
-                    "type" : "case"
-                  },
-                  {
-                    "path" : "\/documentation\/webauthenticationui\/webauthentication\/option\/idpscope(_:)",
-                    "title" : "case idpScope(String)",
-                    "type" : "case"
-                  },
-                  {
-                    "path" : "\/documentation\/webauthenticationui\/webauthentication\/option\/login(hint:)",
-                    "title" : "case login(hint: String)",
-                    "type" : "case"
-                  },
-                  {
-                    "path" : "\/documentation\/webauthenticationui\/webauthentication\/option\/maxage(_:)",
-                    "title" : "case maxAge(TimeInterval)",
-                    "type" : "case"
-                  },
-                  {
-                    "path" : "\/documentation\/webauthenticationui\/webauthentication\/option\/prompt(_:)",
-                    "title" : "case prompt(WebAuthentication.Option.Prompt)",
-                    "type" : "case"
-                  },
-                  {
-                    "path" : "\/documentation\/webauthenticationui\/webauthentication\/option\/state(_:)",
-                    "title" : "case state(String)",
-                    "type" : "case"
-                  },
-                  {
-                    "title" : "Enumerations",
-                    "type" : "groupMarker"
-                  },
-                  {
-                    "children" : [
-                      {
-                        "title" : "Enumeration Cases",
-                        "type" : "groupMarker"
-                      },
-                      {
-                        "path" : "\/documentation\/webauthenticationui\/webauthentication\/option\/prompt\/consent",
-                        "title" : "case consent",
-                        "type" : "case"
-                      },
-                      {
-                        "path" : "\/documentation\/webauthenticationui\/webauthentication\/option\/prompt\/login",
-                        "title" : "case login",
-                        "type" : "case"
-                      },
-                      {
-                        "path" : "\/documentation\/webauthenticationui\/webauthentication\/option\/prompt\/loginandconsent",
-                        "title" : "case loginAndConsent",
-                        "type" : "case"
-                      },
-                      {
-                        "path" : "\/documentation\/webauthenticationui\/webauthentication\/option\/prompt\/none",
-                        "title" : "case none",
-                        "type" : "case"
-                      },
-                      {
-                        "title" : "Initializers",
-                        "type" : "groupMarker"
-                      },
-                      {
-                        "path" : "\/documentation\/webauthenticationui\/webauthentication\/option\/prompt\/init(rawvalue:)",
-                        "title" : "init?(rawValue: String)",
-                        "type" : "init"
-                      },
-                      {
-                        "title" : "Default Implementations",
-                        "type" : "groupMarker"
-                      },
-                      {
-                        "children" : [
-                          {
-                            "title" : "Operators",
-                            "type" : "groupMarker"
-                          },
-                          {
-                            "path" : "\/documentation\/webauthenticationui\/webauthentication\/option\/prompt\/!=(_:_:)",
-                            "title" : "static func != (Self, Self) -> Bool",
-                            "type" : "op"
-                          }
-                        ],
-                        "path" : "\/documentation\/webauthenticationui\/webauthentication\/option\/prompt\/equatable-implementations",
-                        "title" : "Equatable Implementations",
-                        "type" : "symbol"
-                      },
-                      {
-                        "children" : [
-                          {
-                            "title" : "Instance Properties",
-                            "type" : "groupMarker"
-                          },
-                          {
-                            "path" : "\/documentation\/webauthenticationui\/webauthentication\/option\/prompt\/hashvalue",
-                            "title" : "var hashValue: Int",
-                            "type" : "property"
-                          },
-                          {
-                            "title" : "Instance Methods",
-                            "type" : "groupMarker"
-                          },
-                          {
-                            "path" : "\/documentation\/webauthenticationui\/webauthentication\/option\/prompt\/hash(into:)",
-                            "title" : "func hash(into: inout Hasher)",
-                            "type" : "method"
-                          }
-                        ],
-                        "path" : "\/documentation\/webauthenticationui\/webauthentication\/option\/prompt\/rawrepresentable-implementations",
-                        "title" : "RawRepresentable Implementations",
-                        "type" : "symbol"
-                      }
-                    ],
-                    "path" : "\/documentation\/webauthenticationui\/webauthentication\/option\/prompt",
-                    "title" : "WebAuthentication.Option.Prompt",
-                    "type" : "enum"
-                  }
-                ],
-                "path" : "\/documentation\/webauthenticationui\/webauthentication\/option",
-                "title" : "WebAuthentication.Option",
-                "type" : "enum"
               }
             ],
             "path" : "\/documentation\/webauthenticationui\/webauthentication",

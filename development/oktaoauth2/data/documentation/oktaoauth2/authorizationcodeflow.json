@@ -150,9 +150,9 @@
         {
           "code" : [
             "let flow = AuthorizationCodeFlow(",
-            "    issuer: URL(string: \"https:\/\/example.okta.com\")!,",
+            "    issuerURL: URL(string: \"https:\/\/example.okta.com\")!,",
             "    clientId: \"abc123client\",",
-            "    scopes: \"openid offline_access email profile\",",
+            "    scope: \"openid offline_access email profile\",",
             "    redirectUri: URL(string: \"com.example.app:\/callback\"))",
             "",
             "\/\/ Create the authorization URL. Open this in a browser.",
@@ -175,8 +175,8 @@
       "identifiers" : [
         "doc:\/\/OktaOAuth2\/14AuthFoundation17APIClientDelegateP",
         "doc:\/\/OktaOAuth2\/14AuthFoundation18AuthenticationFlowP",
+        "doc:\/\/OktaOAuth2\/14AuthFoundation23IDTokenValidatorContextP",
         "doc:\/\/OktaOAuth2\/14AuthFoundation20OAuth2ClientDelegateP",
-        "doc:\/\/OktaOAuth2\/14AuthFoundation24ProvidesOAuth2ParametersP",
         "doc:\/\/OktaOAuth2\/14AuthFoundation22UsesDelegateCollectionP"
       ],
       "kind" : "relationships",
@@ -208,10 +208,8 @@
   "topicSections" : [
     {
       "identifiers" : [
-        "doc:\/\/OktaOAuth2\/documentation\/OktaOAuth2\/AuthorizationCodeFlow\/init()",
-        "doc:\/\/OktaOAuth2\/documentation\/OktaOAuth2\/AuthorizationCodeFlow\/init(issuer:clientId:scopes:redirectUri:additionalParameters:)",
-        "doc:\/\/OktaOAuth2\/documentation\/OktaOAuth2\/AuthorizationCodeFlow\/init(plist:)",
-        "doc:\/\/OktaOAuth2\/documentation\/OktaOAuth2\/AuthorizationCodeFlow\/init(redirectUri:additionalParameters:client:)"
+        "doc:\/\/OktaOAuth2\/documentation\/OktaOAuth2\/AuthorizationCodeFlow\/init(client:additionalParameters:)",
+        "doc:\/\/OktaOAuth2\/documentation\/OktaOAuth2\/AuthorizationCodeFlow\/init(issuerURL:clientId:scope:redirectUri:additionalParameters:)"
       ],
       "title" : "Initializers"
     },
@@ -221,8 +219,7 @@
         "doc:\/\/OktaOAuth2\/documentation\/OktaOAuth2\/AuthorizationCodeFlow\/client",
         "doc:\/\/OktaOAuth2\/documentation\/OktaOAuth2\/AuthorizationCodeFlow\/context-swift.property",
         "doc:\/\/OktaOAuth2\/documentation\/OktaOAuth2\/AuthorizationCodeFlow\/delegateCollection",
-        "doc:\/\/OktaOAuth2\/documentation\/OktaOAuth2\/AuthorizationCodeFlow\/isAuthenticating",
-        "doc:\/\/OktaOAuth2\/documentation\/OktaOAuth2\/AuthorizationCodeFlow\/redirectUri"
+        "doc:\/\/OktaOAuth2\/documentation\/OktaOAuth2\/AuthorizationCodeFlow\/isAuthenticating"
       ],
       "title" : "Instance Properties"
     },
@@ -231,13 +228,14 @@
         "doc:\/\/OktaOAuth2\/documentation\/OktaOAuth2\/AuthorizationCodeFlow\/reset()",
         "doc:\/\/OktaOAuth2\/documentation\/OktaOAuth2\/AuthorizationCodeFlow\/resume(with:)",
         "doc:\/\/OktaOAuth2\/documentation\/OktaOAuth2\/AuthorizationCodeFlow\/resume(with:completion:)",
-        "doc:\/\/OktaOAuth2\/documentation\/OktaOAuth2\/AuthorizationCodeFlow\/start(with:additionalParameters:)",
-        "doc:\/\/OktaOAuth2\/documentation\/OktaOAuth2\/AuthorizationCodeFlow\/start(with:additionalParameters:completion:)"
+        "doc:\/\/OktaOAuth2\/documentation\/OktaOAuth2\/AuthorizationCodeFlow\/start(with:)",
+        "doc:\/\/OktaOAuth2\/documentation\/OktaOAuth2\/AuthorizationCodeFlow\/start(with:completion:)"
       ],
       "title" : "Instance Methods"
     },
     {
       "identifiers" : [
+        "doc:\/\/OktaOAuth2\/documentation\/OktaOAuth2\/AuthorizationCodeFlow\/Prompt",
         "doc:\/\/OktaOAuth2\/documentation\/OktaOAuth2\/AuthorizationCodeFlow\/RedirectError"
       ],
       "title" : "Enumerations"
@@ -246,6 +244,7 @@
       "generated" : true,
       "identifiers" : [
         "doc:\/\/OktaOAuth2\/documentation\/OktaOAuth2\/AuthorizationCodeFlow\/APIClientDelegate-Implementations",
+        "doc:\/\/OktaOAuth2\/documentation\/OktaOAuth2\/AuthorizationCodeFlow\/AuthenticationFlow-Implementations",
         "doc:\/\/OktaOAuth2\/documentation\/OktaOAuth2\/AuthorizationCodeFlow\/OAuth2ClientDelegate-Implementations",
         "doc:\/\/OktaOAuth2\/documentation\/OktaOAuth2\/AuthorizationCodeFlow\/UsesDelegateCollection-Implementations"
       ],
@@ -286,9 +285,9 @@
   "title" : "AuthFoundation.UsesDelegateCollection",
   "type" : "unresolvable"
 },
-"doc://OktaOAuth2/14AuthFoundation24ProvidesOAuth2ParametersP": {
-  "identifier" : "doc:\/\/OktaOAuth2\/14AuthFoundation24ProvidesOAuth2ParametersP",
-  "title" : "AuthFoundation.ProvidesOAuth2Parameters",
+"doc://OktaOAuth2/14AuthFoundation23IDTokenValidatorContextP": {
+  "identifier" : "doc:\/\/OktaOAuth2\/14AuthFoundation23IDTokenValidatorContextP",
+  "title" : "AuthFoundation.IDTokenValidatorContext",
   "type" : "unresolvable"
 },
 "doc://OktaOAuth2/documentation/OktaOAuth2": {
@@ -350,6 +349,17 @@
   "type" : "topic",
   "url" : "\/documentation\/oktaoauth2\/authorizationcodeflow\/apiclientdelegate-implementations"
 },
+"doc://OktaOAuth2/documentation/OktaOAuth2/AuthorizationCodeFlow/AuthenticationFlow-Implementations": {
+  "abstract" : [
+
+  ],
+  "identifier" : "doc:\/\/OktaOAuth2\/documentation\/OktaOAuth2\/AuthorizationCodeFlow\/AuthenticationFlow-Implementations",
+  "kind" : "article",
+  "role" : "collectionGroup",
+  "title" : "AuthenticationFlow Implementations",
+  "type" : "topic",
+  "url" : "\/documentation\/oktaoauth2\/authorizationcodeflow\/authenticationflow-implementations"
+},
 "doc://OktaOAuth2/documentation/OktaOAuth2/AuthorizationCodeFlow/Context-swift.struct": {
   "abstract" : [
     {
@@ -394,6 +404,40 @@
   "title" : "OAuth2ClientDelegate Implementations",
   "type" : "topic",
   "url" : "\/documentation\/oktaoauth2\/authorizationcodeflow\/oauth2clientdelegate-implementations"
+},
+"doc://OktaOAuth2/documentation/OktaOAuth2/AuthorizationCodeFlow/Prompt": {
+  "abstract" : [
+    {
+      "text" : "Defines how a user will be prompted to sign in.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "enum"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "Prompt"
+    }
+  ],
+  "identifier" : "doc:\/\/OktaOAuth2\/documentation\/OktaOAuth2\/AuthorizationCodeFlow\/Prompt",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "Prompt"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "AuthorizationCodeFlow.Prompt",
+  "type" : "topic",
+  "url" : "\/documentation\/oktaoauth2\/authorizationcodeflow\/prompt"
 },
 "doc://OktaOAuth2/documentation/OktaOAuth2/AuthorizationCodeFlow/RedirectError": {
   "abstract" : [
@@ -443,7 +487,7 @@
 "doc://OktaOAuth2/documentation/OktaOAuth2/AuthorizationCodeFlow/additionalParameters": {
   "abstract" : [
     {
-      "text" : "Any additional query string parameters you would like to supply to the authorization server.",
+      "text" : "Any additional query string parameters you would like to supply to the authorization server for all requests from this flow.",
       "type" : "text"
     }
   ],
@@ -624,66 +668,14 @@
   "type" : "topic",
   "url" : "\/documentation\/oktaoauth2\/authorizationcodeflow\/delegatecollection"
 },
-"doc://OktaOAuth2/documentation/OktaOAuth2/AuthorizationCodeFlow/init()": {
+"doc://OktaOAuth2/documentation/OktaOAuth2/AuthorizationCodeFlow/init(client:additionalParameters:)": {
   "abstract" : [
     {
-      "text" : "Initializer that uses the configuration defined within the application’s ",
-      "type" : "text"
-    },
-    {
-      "code" : "Okta.plist",
-      "type" : "codeVoice"
-    },
-    {
-      "text" : " file.",
+      "text" : "Initializer to construct an authentication flow from a pre-defined configuration and client.",
       "type" : "text"
     }
   ],
   "fragments" : [
-    {
-      "kind" : "keyword",
-      "text" : "convenience"
-    },
-    {
-      "kind" : "text",
-      "text" : " "
-    },
-    {
-      "kind" : "identifier",
-      "text" : "init"
-    },
-    {
-      "kind" : "text",
-      "text" : "() "
-    },
-    {
-      "kind" : "keyword",
-      "text" : "throws"
-    }
-  ],
-  "identifier" : "doc:\/\/OktaOAuth2\/documentation\/OktaOAuth2\/AuthorizationCodeFlow\/init()",
-  "kind" : "symbol",
-  "role" : "symbol",
-  "title" : "init()",
-  "type" : "topic",
-  "url" : "\/documentation\/oktaoauth2\/authorizationcodeflow\/init()"
-},
-"doc://OktaOAuth2/documentation/OktaOAuth2/AuthorizationCodeFlow/init(issuer:clientId:scopes:redirectUri:additionalParameters:)": {
-  "abstract" : [
-    {
-      "text" : "Convenience initializer to construct an authentication flow from variables.",
-      "type" : "text"
-    }
-  ],
-  "fragments" : [
-    {
-      "kind" : "keyword",
-      "text" : "convenience"
-    },
-    {
-      "kind" : "text",
-      "text" : " "
-    },
     {
       "kind" : "identifier",
       "text" : "init"
@@ -694,7 +686,78 @@
     },
     {
       "kind" : "externalParam",
-      "text" : "issuer"
+      "text" : "client"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:14AuthFoundation12OAuth2ClientC",
+      "text" : "OAuth2Client"
+    },
+    {
+      "kind" : "text",
+      "text" : ", "
+    },
+    {
+      "kind" : "externalParam",
+      "text" : "additionalParameters"
+    },
+    {
+      "kind" : "text",
+      "text" : ": ["
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:SS",
+      "text" : "String"
+    },
+    {
+      "kind" : "text",
+      "text" : " : any "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:14AuthFoundation18APIRequestArgumentP",
+      "text" : "APIRequestArgument"
+    },
+    {
+      "kind" : "text",
+      "text" : "]?) "
+    },
+    {
+      "kind" : "keyword",
+      "text" : "throws"
+    }
+  ],
+  "identifier" : "doc:\/\/OktaOAuth2\/documentation\/OktaOAuth2\/AuthorizationCodeFlow\/init(client:additionalParameters:)",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "init(client:additionalParameters:)",
+  "type" : "topic",
+  "url" : "\/documentation\/oktaoauth2\/authorizationcodeflow\/init(client:additionalparameters:)"
+},
+"doc://OktaOAuth2/documentation/OktaOAuth2/AuthorizationCodeFlow/init(issuerURL:clientId:scope:redirectUri:additionalParameters:)": {
+  "abstract" : [
+    {
+      "text" : "Convenience initializer to construct an authentication flow from variables.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "identifier",
+      "text" : "init"
+    },
+    {
+      "kind" : "text",
+      "text" : "("
+    },
+    {
+      "kind" : "externalParam",
+      "text" : "issuerURL"
     },
     {
       "kind" : "text",
@@ -728,7 +791,7 @@
     },
     {
       "kind" : "externalParam",
-      "text" : "scopes"
+      "text" : "scope"
     },
     {
       "kind" : "text",
@@ -787,149 +850,12 @@
       "text" : "]?)"
     }
   ],
-  "identifier" : "doc:\/\/OktaOAuth2\/documentation\/OktaOAuth2\/AuthorizationCodeFlow\/init(issuer:clientId:scopes:redirectUri:additionalParameters:)",
+  "identifier" : "doc:\/\/OktaOAuth2\/documentation\/OktaOAuth2\/AuthorizationCodeFlow\/init(issuerURL:clientId:scope:redirectUri:additionalParameters:)",
   "kind" : "symbol",
   "role" : "symbol",
-  "title" : "init(issuer:clientId:scopes:redirectUri:additionalParameters:)",
+  "title" : "init(issuerURL:clientId:scope:redirectUri:additionalParameters:)",
   "type" : "topic",
-  "url" : "\/documentation\/oktaoauth2\/authorizationcodeflow\/init(issuer:clientid:scopes:redirecturi:additionalparameters:)"
-},
-"doc://OktaOAuth2/documentation/OktaOAuth2/AuthorizationCodeFlow/init(plist:)": {
-  "abstract" : [
-    {
-      "text" : "Initializer that uses the configuration defined within the given file URL.",
-      "type" : "text"
-    }
-  ],
-  "fragments" : [
-    {
-      "kind" : "keyword",
-      "text" : "convenience"
-    },
-    {
-      "kind" : "text",
-      "text" : " "
-    },
-    {
-      "kind" : "identifier",
-      "text" : "init"
-    },
-    {
-      "kind" : "text",
-      "text" : "("
-    },
-    {
-      "kind" : "externalParam",
-      "text" : "plist"
-    },
-    {
-      "kind" : "text",
-      "text" : ": "
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:10Foundation3URLV",
-      "text" : "URL"
-    },
-    {
-      "kind" : "text",
-      "text" : ") "
-    },
-    {
-      "kind" : "keyword",
-      "text" : "throws"
-    }
-  ],
-  "identifier" : "doc:\/\/OktaOAuth2\/documentation\/OktaOAuth2\/AuthorizationCodeFlow\/init(plist:)",
-  "kind" : "symbol",
-  "role" : "symbol",
-  "title" : "init(plist:)",
-  "type" : "topic",
-  "url" : "\/documentation\/oktaoauth2\/authorizationcodeflow\/init(plist:)"
-},
-"doc://OktaOAuth2/documentation/OktaOAuth2/AuthorizationCodeFlow/init(redirectUri:additionalParameters:client:)": {
-  "abstract" : [
-    {
-      "text" : "Initializer to construct an authentication flow from a pre-defined configuration and client.",
-      "type" : "text"
-    }
-  ],
-  "fragments" : [
-    {
-      "kind" : "identifier",
-      "text" : "init"
-    },
-    {
-      "kind" : "text",
-      "text" : "("
-    },
-    {
-      "kind" : "externalParam",
-      "text" : "redirectUri"
-    },
-    {
-      "kind" : "text",
-      "text" : ": "
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:10Foundation3URLV",
-      "text" : "URL"
-    },
-    {
-      "kind" : "text",
-      "text" : ", "
-    },
-    {
-      "kind" : "externalParam",
-      "text" : "additionalParameters"
-    },
-    {
-      "kind" : "text",
-      "text" : ": ["
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:SS",
-      "text" : "String"
-    },
-    {
-      "kind" : "text",
-      "text" : " : any "
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:14AuthFoundation18APIRequestArgumentP",
-      "text" : "APIRequestArgument"
-    },
-    {
-      "kind" : "text",
-      "text" : "]?, "
-    },
-    {
-      "kind" : "externalParam",
-      "text" : "client"
-    },
-    {
-      "kind" : "text",
-      "text" : ": "
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:14AuthFoundation12OAuth2ClientC",
-      "text" : "OAuth2Client"
-    },
-    {
-      "kind" : "text",
-      "text" : ")"
-    }
-  ],
-  "identifier" : "doc:\/\/OktaOAuth2\/documentation\/OktaOAuth2\/AuthorizationCodeFlow\/init(redirectUri:additionalParameters:client:)",
-  "kind" : "symbol",
-  "role" : "symbol",
-  "title" : "init(redirectUri:additionalParameters:client:)",
-  "type" : "topic",
-  "url" : "\/documentation\/oktaoauth2\/authorizationcodeflow\/init(redirecturi:additionalparameters:client:)"
+  "url" : "\/documentation\/oktaoauth2\/authorizationcodeflow\/init(issuerurl:clientid:scope:redirecturi:additionalparameters:)"
 },
 "doc://OktaOAuth2/documentation/OktaOAuth2/AuthorizationCodeFlow/isAuthenticating": {
   "abstract" : [
@@ -967,43 +893,6 @@
   "title" : "isAuthenticating",
   "type" : "topic",
   "url" : "\/documentation\/oktaoauth2\/authorizationcodeflow\/isauthenticating"
-},
-"doc://OktaOAuth2/documentation/OktaOAuth2/AuthorizationCodeFlow/redirectUri": {
-  "abstract" : [
-    {
-      "text" : "The redirect URI defined for your client.",
-      "type" : "text"
-    }
-  ],
-  "fragments" : [
-    {
-      "kind" : "keyword",
-      "text" : "let"
-    },
-    {
-      "kind" : "text",
-      "text" : " "
-    },
-    {
-      "kind" : "identifier",
-      "text" : "redirectUri"
-    },
-    {
-      "kind" : "text",
-      "text" : ": "
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:10Foundation3URLV",
-      "text" : "URL"
-    }
-  ],
-  "identifier" : "doc:\/\/OktaOAuth2\/documentation\/OktaOAuth2\/AuthorizationCodeFlow\/redirectUri",
-  "kind" : "symbol",
-  "role" : "symbol",
-  "title" : "redirectUri",
-  "type" : "topic",
-  "url" : "\/documentation\/oktaoauth2\/authorizationcodeflow\/redirecturi"
 },
 "doc://OktaOAuth2/documentation/OktaOAuth2/AuthorizationCodeFlow/reset()": {
   "abstract" : [
@@ -1201,7 +1090,7 @@
   "type" : "topic",
   "url" : "\/documentation\/oktaoauth2\/authorizationcodeflow\/resume(with:completion:)"
 },
-"doc://OktaOAuth2/documentation/OktaOAuth2/AuthorizationCodeFlow/start(with:additionalParameters:)": {
+"doc://OktaOAuth2/documentation/OktaOAuth2/AuthorizationCodeFlow/start(with:)": {
   "abstract" : [
     {
       "text" : "Asynchronously initiates an authentication flow, with an optional ",
@@ -1258,33 +1147,7 @@
     },
     {
       "kind" : "text",
-      "text" : "?, "
-    },
-    {
-      "kind" : "externalParam",
-      "text" : "additionalParameters"
-    },
-    {
-      "kind" : "text",
-      "text" : ": ["
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:SS",
-      "text" : "String"
-    },
-    {
-      "kind" : "text",
-      "text" : " : "
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:SS",
-      "text" : "String"
-    },
-    {
-      "kind" : "text",
-      "text" : "]?) "
+      "text" : ") "
     },
     {
       "kind" : "keyword",
@@ -1308,14 +1171,14 @@
       "text" : "URL"
     }
   ],
-  "identifier" : "doc:\/\/OktaOAuth2\/documentation\/OktaOAuth2\/AuthorizationCodeFlow\/start(with:additionalParameters:)",
+  "identifier" : "doc:\/\/OktaOAuth2\/documentation\/OktaOAuth2\/AuthorizationCodeFlow\/start(with:)",
   "kind" : "symbol",
   "role" : "symbol",
-  "title" : "start(with:additionalParameters:)",
+  "title" : "start(with:)",
   "type" : "topic",
-  "url" : "\/documentation\/oktaoauth2\/authorizationcodeflow\/start(with:additionalparameters:)"
+  "url" : "\/documentation\/oktaoauth2\/authorizationcodeflow\/start(with:)"
 },
-"doc://OktaOAuth2/documentation/OktaOAuth2/AuthorizationCodeFlow/start(with:additionalParameters:completion:)": {
+"doc://OktaOAuth2/documentation/OktaOAuth2/AuthorizationCodeFlow/start(with:completion:)": {
   "abstract" : [
     {
       "text" : "Initiates an authentication flow, with an optional ",
@@ -1372,33 +1235,7 @@
     },
     {
       "kind" : "text",
-      "text" : "?, "
-    },
-    {
-      "kind" : "externalParam",
-      "text" : "additionalParameters"
-    },
-    {
-      "kind" : "text",
-      "text" : ": ["
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:SS",
-      "text" : "String"
-    },
-    {
-      "kind" : "text",
-      "text" : " : "
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:SS",
-      "text" : "String"
-    },
-    {
-      "kind" : "text",
-      "text" : "]?, "
+      "text" : ", "
     },
     {
       "kind" : "externalParam",
@@ -1445,12 +1282,12 @@
       "text" : ")"
     }
   ],
-  "identifier" : "doc:\/\/OktaOAuth2\/documentation\/OktaOAuth2\/AuthorizationCodeFlow\/start(with:additionalParameters:completion:)",
+  "identifier" : "doc:\/\/OktaOAuth2\/documentation\/OktaOAuth2\/AuthorizationCodeFlow\/start(with:completion:)",
   "kind" : "symbol",
   "role" : "symbol",
-  "title" : "start(with:additionalParameters:completion:)",
+  "title" : "start(with:completion:)",
   "type" : "topic",
-  "url" : "\/documentation\/oktaoauth2\/authorizationcodeflow\/start(with:additionalparameters:completion:)"
+  "url" : "\/documentation\/oktaoauth2\/authorizationcodeflow\/start(with:completion:)"
 },
 "doc://OktaOAuth2/documentation/OktaOAuth2/AuthorizationCodeFlowDelegate": {
   "abstract" : [

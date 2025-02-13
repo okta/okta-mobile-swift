@@ -1,25 +1,7 @@
 {
   "abstract" : [
     {
-      "text" : "The ",
-      "type" : "text"
-    },
-    {
-      "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/OpenIdConfiguration",
-      "isActive" : true,
-      "type" : "reference"
-    },
-    {
-      "text" : " used to formulate this request’s ",
-      "type" : "text"
-    },
-    {
-      "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/APIRequest\/url-3elcu",
-      "isActive" : true,
-      "type" : "reference"
-    },
-    {
-      "text" : ".",
+      "text" : "The client’s Open ID Configuration object defining the settings and endpoints used to interact with this Authorization Server.",
       "type" : "text"
     }
   ],
@@ -193,45 +175,6 @@
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/apirequest"
 },
-"doc://AuthFoundation/documentation/AuthFoundation/APIRequest/url-3elcu": {
-  "abstract" : [
-    {
-      "text" : "The URL to perform the API request against.",
-      "type" : "text"
-    }
-  ],
-  "defaultImplementations" : 1,
-  "fragments" : [
-    {
-      "kind" : "keyword",
-      "text" : "var"
-    },
-    {
-      "kind" : "text",
-      "text" : " "
-    },
-    {
-      "kind" : "identifier",
-      "text" : "url"
-    },
-    {
-      "kind" : "text",
-      "text" : ": "
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:10Foundation3URLV",
-      "text" : "URL"
-    }
-  ],
-  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/APIRequest\/url-3elcu",
-  "kind" : "symbol",
-  "required" : true,
-  "role" : "symbol",
-  "title" : "url",
-  "type" : "topic",
-  "url" : "\/documentation\/authfoundation\/apirequest\/url-3elcu"
-},
 "doc://AuthFoundation/documentation/AuthFoundation/OAuth2APIRequest": {
   "abstract" : [
     {
@@ -287,25 +230,7 @@
 "doc://AuthFoundation/documentation/AuthFoundation/OAuth2APIRequest/openIdConfiguration": {
   "abstract" : [
     {
-      "text" : "The ",
-      "type" : "text"
-    },
-    {
-      "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/OpenIdConfiguration",
-      "isActive" : true,
-      "type" : "reference"
-    },
-    {
-      "text" : " used to formulate this request’s ",
-      "type" : "text"
-    },
-    {
-      "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/APIRequest\/url-3elcu",
-      "isActive" : true,
-      "type" : "reference"
-    },
-    {
-      "text" : ".",
+      "text" : "The client’s Open ID Configuration object defining the settings and endpoints used to interact with this Authorization Server.",
       "type" : "text"
     }
   ],

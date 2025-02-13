@@ -105,7 +105,6 @@
       "generated" : true,
       "identifiers" : [
         "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/APIClientError",
-        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/AuthenticationError",
         "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/ClaimError",
         "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/CredentialError",
         "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JSONError",
@@ -119,19 +118,6 @@
     }
   ],
   "topicSections" : [
-    {
-      "identifiers" : [
-        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/OAuth2ServerError\/==(_:_:)"
-      ],
-      "title" : "Operators"
-    },
-    {
-      "identifiers" : [
-        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/OAuth2ServerError\/init(code:description:additionalValues:)",
-        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/OAuth2ServerError\/init(from:)"
-      ],
-      "title" : "Initializers"
-    },
     {
       "identifiers" : [
         "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/OAuth2ServerError\/additionalValues",
@@ -233,40 +219,6 @@
   "title" : "APIClientError",
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/apiclienterror"
-},
-"doc://AuthFoundation/documentation/AuthFoundation/AuthenticationError": {
-  "abstract" : [
-    {
-      "text" : "Errors that may be generated during the process of authenticating with a variety of authentication flows.",
-      "type" : "text"
-    }
-  ],
-  "fragments" : [
-    {
-      "kind" : "keyword",
-      "text" : "enum"
-    },
-    {
-      "kind" : "text",
-      "text" : " "
-    },
-    {
-      "kind" : "identifier",
-      "text" : "AuthenticationError"
-    }
-  ],
-  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/AuthenticationError",
-  "kind" : "symbol",
-  "navigatorTitle" : [
-    {
-      "kind" : "identifier",
-      "text" : "AuthenticationError"
-    }
-  ],
-  "role" : "symbol",
-  "title" : "AuthenticationError",
-  "type" : "topic",
-  "url" : "\/documentation\/authfoundation\/authenticationerror"
 },
 "doc://AuthFoundation/documentation/AuthFoundation/ClaimError": {
   "abstract" : [
@@ -499,70 +451,6 @@
   "title" : "OAuth2ServerError",
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/oauth2servererror"
-},
-"doc://AuthFoundation/documentation/AuthFoundation/OAuth2ServerError/==(_:_:)": {
-  "abstract" : [
-
-  ],
-  "fragments" : [
-    {
-      "kind" : "keyword",
-      "text" : "static"
-    },
-    {
-      "kind" : "text",
-      "text" : " "
-    },
-    {
-      "kind" : "keyword",
-      "text" : "func"
-    },
-    {
-      "kind" : "text",
-      "text" : " "
-    },
-    {
-      "kind" : "identifier",
-      "text" : "=="
-    },
-    {
-      "kind" : "text",
-      "text" : " "
-    },
-    {
-      "kind" : "text",
-      "text" : "("
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:14AuthFoundation17OAuth2ServerErrorV",
-      "text" : "OAuth2ServerError"
-    },
-    {
-      "kind" : "text",
-      "text" : ", "
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:14AuthFoundation17OAuth2ServerErrorV",
-      "text" : "OAuth2ServerError"
-    },
-    {
-      "kind" : "text",
-      "text" : ") -> "
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:Sb",
-      "text" : "Bool"
-    }
-  ],
-  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/OAuth2ServerError\/==(_:_:)",
-  "kind" : "symbol",
-  "role" : "symbol",
-  "title" : "==(_:_:)",
-  "type" : "topic",
-  "url" : "\/documentation\/authfoundation\/oauth2servererror\/==(_:_:)"
 },
 "doc://AuthFoundation/documentation/AuthFoundation/OAuth2ServerError/Code-swift.enum": {
   "abstract" : [
@@ -804,128 +692,6 @@
   "title" : "errorDescription",
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/oauth2servererror\/errordescription"
-},
-"doc://AuthFoundation/documentation/AuthFoundation/OAuth2ServerError/init(code:description:additionalValues:)": {
-  "abstract" : [
-
-  ],
-  "fragments" : [
-    {
-      "kind" : "identifier",
-      "text" : "init"
-    },
-    {
-      "kind" : "text",
-      "text" : "("
-    },
-    {
-      "kind" : "externalParam",
-      "text" : "code"
-    },
-    {
-      "kind" : "text",
-      "text" : ": "
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:SS",
-      "text" : "String"
-    },
-    {
-      "kind" : "text",
-      "text" : ", "
-    },
-    {
-      "kind" : "externalParam",
-      "text" : "description"
-    },
-    {
-      "kind" : "text",
-      "text" : ": "
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:SS",
-      "text" : "String"
-    },
-    {
-      "kind" : "text",
-      "text" : "?, "
-    },
-    {
-      "kind" : "externalParam",
-      "text" : "additionalValues"
-    },
-    {
-      "kind" : "text",
-      "text" : ": ["
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:SS",
-      "text" : "String"
-    },
-    {
-      "kind" : "text",
-      "text" : " : "
-    },
-    {
-      "kind" : "keyword",
-      "text" : "Any"
-    },
-    {
-      "kind" : "text",
-      "text" : "])"
-    }
-  ],
-  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/OAuth2ServerError\/init(code:description:additionalValues:)",
-  "kind" : "symbol",
-  "role" : "symbol",
-  "title" : "init(code:description:additionalValues:)",
-  "type" : "topic",
-  "url" : "\/documentation\/authfoundation\/oauth2servererror\/init(code:description:additionalvalues:)"
-},
-"doc://AuthFoundation/documentation/AuthFoundation/OAuth2ServerError/init(from:)": {
-  "abstract" : [
-
-  ],
-  "fragments" : [
-    {
-      "kind" : "identifier",
-      "text" : "init"
-    },
-    {
-      "kind" : "text",
-      "text" : "("
-    },
-    {
-      "kind" : "externalParam",
-      "text" : "from"
-    },
-    {
-      "kind" : "text",
-      "text" : ": any "
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:s7DecoderP",
-      "text" : "Decoder"
-    },
-    {
-      "kind" : "text",
-      "text" : ") "
-    },
-    {
-      "kind" : "keyword",
-      "text" : "throws"
-    }
-  ],
-  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/OAuth2ServerError\/init(from:)",
-  "kind" : "symbol",
-  "role" : "symbol",
-  "title" : "init(from:)",
-  "type" : "topic",
-  "url" : "\/documentation\/authfoundation\/oauth2servererror\/init(from:)"
 },
 "doc://AuthFoundation/documentation/AuthFoundation/OktaAPIError": {
   "abstract" : [

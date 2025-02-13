@@ -14,7 +14,7 @@
   "kind" : "symbol",
   "metadata" : {
     "extendedModule" : "AuthFoundation",
-    "externalID" : "s:e:s:14AuthFoundation12OAuth2ClientC04OktaC0E16sessionTokenFlow11redirectUri20additionalParametersAD07SessiongH0C0B03URLV_SDyS2SGSgtF",
+    "externalID" : "s:e:s:14AuthFoundation12OAuth2ClientC04OktaC0E16sessionTokenFlow11redirectUri20additionalParametersAD07SessiongH0C0B03URLV_SDyS2SGSgtKF",
     "fragments" : [
       {
         "kind" : "keyword",
@@ -90,13 +90,13 @@
   "topicSections" : [
     {
       "identifiers" : [
-        "doc:\/\/OktaOAuth2\/documentation\/OktaOAuth2\/AuthFoundation\/OAuth2Client\/authorizationCodeFlow(redirectUri:additionalParameters:)",
-        "doc:\/\/OktaOAuth2\/documentation\/OktaOAuth2\/AuthFoundation\/OAuth2Client\/deviceAuthorizationFlow()",
-        "doc:\/\/OktaOAuth2\/documentation\/OktaOAuth2\/AuthFoundation\/OAuth2Client\/jwtAuthorizationFlow()",
-        "doc:\/\/OktaOAuth2\/documentation\/OktaOAuth2\/AuthFoundation\/OAuth2Client\/resourceOwnerFlow()",
-        "doc:\/\/OktaOAuth2\/documentation\/OktaOAuth2\/AuthFoundation\/OAuth2Client\/sessionLogoutFlow(logoutRedirectUri:)",
-        "doc:\/\/OktaOAuth2\/documentation\/OktaOAuth2\/AuthFoundation\/OAuth2Client\/sessionTokenFlow(redirectUri:additionalParameters:)",
-        "doc:\/\/OktaOAuth2\/documentation\/OktaOAuth2\/AuthFoundation\/OAuth2Client\/tokenExchangeFlow(audience:)"
+        "doc:\/\/OktaOAuth2\/documentation\/OktaOAuth2\/AuthFoundation\/OAuth2Client\/authorizationCodeFlow(additionalParameters:)",
+        "doc:\/\/OktaOAuth2\/documentation\/OktaOAuth2\/AuthFoundation\/OAuth2Client\/deviceAuthorizationFlow(additionalParameters:)",
+        "doc:\/\/OktaOAuth2\/documentation\/OktaOAuth2\/AuthFoundation\/OAuth2Client\/jwtAuthorizationFlow(additionalParameters:)",
+        "doc:\/\/OktaOAuth2\/documentation\/OktaOAuth2\/AuthFoundation\/OAuth2Client\/resourceOwnerFlow(additionalParameters:)",
+        "doc:\/\/OktaOAuth2\/documentation\/OktaOAuth2\/AuthFoundation\/OAuth2Client\/sessionLogoutFlow(additionalParameters:)",
+        "doc:\/\/OktaOAuth2\/documentation\/OktaOAuth2\/AuthFoundation\/OAuth2Client\/sessionTokenFlow(additionalParameters:)",
+        "doc:\/\/OktaOAuth2\/documentation\/OktaOAuth2\/AuthFoundation\/OAuth2Client\/tokenExchangeFlow(additionalParameters:)"
       ],
       "title" : "Instance Methods"
     }
@@ -172,7 +172,7 @@
   "type" : "topic",
   "url" : "\/documentation\/oktaoauth2\/authfoundation\/oauth2client"
 },
-"doc://OktaOAuth2/documentation/OktaOAuth2/AuthFoundation/OAuth2Client/authorizationCodeFlow(redirectUri:additionalParameters:)": {
+"doc://OktaOAuth2/documentation/OktaOAuth2/AuthFoundation/OAuth2Client/authorizationCodeFlow(additionalParameters:)": {
   "abstract" : [
     {
       "text" : "Creates a new Authorization Code flow configured to use this OAuth2Client.",
@@ -198,20 +198,74 @@
     },
     {
       "kind" : "externalParam",
-      "text" : "redirectUri"
+      "text" : "additionalParameters"
     },
     {
       "kind" : "text",
-      "text" : ": "
+      "text" : ": ["
     },
     {
       "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:10Foundation3URLV",
-      "text" : "URL"
+      "preciseIdentifier" : "s:SS",
+      "text" : "String"
     },
     {
       "kind" : "text",
-      "text" : ", "
+      "text" : " : "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:SS",
+      "text" : "String"
+    },
+    {
+      "kind" : "text",
+      "text" : "]?) "
+    },
+    {
+      "kind" : "keyword",
+      "text" : "throws"
+    },
+    {
+      "kind" : "text",
+      "text" : " -> "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:10OktaOAuth221AuthorizationCodeFlowC",
+      "text" : "AuthorizationCodeFlow"
+    }
+  ],
+  "identifier" : "doc:\/\/OktaOAuth2\/documentation\/OktaOAuth2\/AuthFoundation\/OAuth2Client\/authorizationCodeFlow(additionalParameters:)",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "authorizationCodeFlow(additionalParameters:)",
+  "type" : "topic",
+  "url" : "\/documentation\/oktaoauth2\/authfoundation\/oauth2client\/authorizationcodeflow(additionalparameters:)"
+},
+"doc://OktaOAuth2/documentation/OktaOAuth2/AuthFoundation/OAuth2Client/deviceAuthorizationFlow(additionalParameters:)": {
+  "abstract" : [
+    {
+      "text" : "Creates a new Device Authorization flow configured to use this OAuth2Client.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "func"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "deviceAuthorizationFlow"
+    },
+    {
+      "kind" : "text",
+      "text" : "("
     },
     {
       "kind" : "externalParam",
@@ -241,55 +295,18 @@
     },
     {
       "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:10OktaOAuth221AuthorizationCodeFlowC",
-      "text" : "AuthorizationCodeFlow"
-    }
-  ],
-  "identifier" : "doc:\/\/OktaOAuth2\/documentation\/OktaOAuth2\/AuthFoundation\/OAuth2Client\/authorizationCodeFlow(redirectUri:additionalParameters:)",
-  "kind" : "symbol",
-  "role" : "symbol",
-  "title" : "authorizationCodeFlow(redirectUri:additionalParameters:)",
-  "type" : "topic",
-  "url" : "\/documentation\/oktaoauth2\/authfoundation\/oauth2client\/authorizationcodeflow(redirecturi:additionalparameters:)"
-},
-"doc://OktaOAuth2/documentation/OktaOAuth2/AuthFoundation/OAuth2Client/deviceAuthorizationFlow()": {
-  "abstract" : [
-    {
-      "text" : "Creates a new Device Authorization flow configured to use this OAuth2Client.",
-      "type" : "text"
-    }
-  ],
-  "fragments" : [
-    {
-      "kind" : "keyword",
-      "text" : "func"
-    },
-    {
-      "kind" : "text",
-      "text" : " "
-    },
-    {
-      "kind" : "identifier",
-      "text" : "deviceAuthorizationFlow"
-    },
-    {
-      "kind" : "text",
-      "text" : "() -> "
-    },
-    {
-      "kind" : "typeIdentifier",
       "preciseIdentifier" : "s:10OktaOAuth223DeviceAuthorizationFlowC",
       "text" : "DeviceAuthorizationFlow"
     }
   ],
-  "identifier" : "doc:\/\/OktaOAuth2\/documentation\/OktaOAuth2\/AuthFoundation\/OAuth2Client\/deviceAuthorizationFlow()",
+  "identifier" : "doc:\/\/OktaOAuth2\/documentation\/OktaOAuth2\/AuthFoundation\/OAuth2Client\/deviceAuthorizationFlow(additionalParameters:)",
   "kind" : "symbol",
   "role" : "symbol",
-  "title" : "deviceAuthorizationFlow()",
+  "title" : "deviceAuthorizationFlow(additionalParameters:)",
   "type" : "topic",
-  "url" : "\/documentation\/oktaoauth2\/authfoundation\/oauth2client\/deviceauthorizationflow()"
+  "url" : "\/documentation\/oktaoauth2\/authfoundation\/oauth2client\/deviceauthorizationflow(additionalparameters:)"
 },
-"doc://OktaOAuth2/documentation/OktaOAuth2/AuthFoundation/OAuth2Client/jwtAuthorizationFlow()": {
+"doc://OktaOAuth2/documentation/OktaOAuth2/AuthFoundation/OAuth2Client/jwtAuthorizationFlow(additionalParameters:)": {
   "abstract" : [
     {
       "text" : "Creates a new JWT Authorization flow configured to use this OAuth2Client.",
@@ -311,7 +328,33 @@
     },
     {
       "kind" : "text",
-      "text" : "() -> "
+      "text" : "("
+    },
+    {
+      "kind" : "externalParam",
+      "text" : "additionalParameters"
+    },
+    {
+      "kind" : "text",
+      "text" : ": ["
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:SS",
+      "text" : "String"
+    },
+    {
+      "kind" : "text",
+      "text" : " : "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:SS",
+      "text" : "String"
+    },
+    {
+      "kind" : "text",
+      "text" : "]?) -> "
     },
     {
       "kind" : "typeIdentifier",
@@ -319,14 +362,14 @@
       "text" : "JWTAuthorizationFlow"
     }
   ],
-  "identifier" : "doc:\/\/OktaOAuth2\/documentation\/OktaOAuth2\/AuthFoundation\/OAuth2Client\/jwtAuthorizationFlow()",
+  "identifier" : "doc:\/\/OktaOAuth2\/documentation\/OktaOAuth2\/AuthFoundation\/OAuth2Client\/jwtAuthorizationFlow(additionalParameters:)",
   "kind" : "symbol",
   "role" : "symbol",
-  "title" : "jwtAuthorizationFlow()",
+  "title" : "jwtAuthorizationFlow(additionalParameters:)",
   "type" : "topic",
-  "url" : "\/documentation\/oktaoauth2\/authfoundation\/oauth2client\/jwtauthorizationflow()"
+  "url" : "\/documentation\/oktaoauth2\/authfoundation\/oauth2client\/jwtauthorizationflow(additionalparameters:)"
 },
-"doc://OktaOAuth2/documentation/OktaOAuth2/AuthFoundation/OAuth2Client/resourceOwnerFlow()": {
+"doc://OktaOAuth2/documentation/OktaOAuth2/AuthFoundation/OAuth2Client/resourceOwnerFlow(additionalParameters:)": {
   "abstract" : [
     {
       "text" : "Creates a new Resource Owner flow configured to use this OAuth2Client.",
@@ -348,7 +391,33 @@
     },
     {
       "kind" : "text",
-      "text" : "() -> "
+      "text" : "("
+    },
+    {
+      "kind" : "externalParam",
+      "text" : "additionalParameters"
+    },
+    {
+      "kind" : "text",
+      "text" : ": ["
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:SS",
+      "text" : "String"
+    },
+    {
+      "kind" : "text",
+      "text" : " : "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:SS",
+      "text" : "String"
+    },
+    {
+      "kind" : "text",
+      "text" : "]?) -> "
     },
     {
       "kind" : "typeIdentifier",
@@ -356,14 +425,14 @@
       "text" : "ResourceOwnerFlow"
     }
   ],
-  "identifier" : "doc:\/\/OktaOAuth2\/documentation\/OktaOAuth2\/AuthFoundation\/OAuth2Client\/resourceOwnerFlow()",
+  "identifier" : "doc:\/\/OktaOAuth2\/documentation\/OktaOAuth2\/AuthFoundation\/OAuth2Client\/resourceOwnerFlow(additionalParameters:)",
   "kind" : "symbol",
   "role" : "symbol",
-  "title" : "resourceOwnerFlow()",
+  "title" : "resourceOwnerFlow(additionalParameters:)",
   "type" : "topic",
-  "url" : "\/documentation\/oktaoauth2\/authfoundation\/oauth2client\/resourceownerflow()"
+  "url" : "\/documentation\/oktaoauth2\/authfoundation\/oauth2client\/resourceownerflow(additionalparameters:)"
 },
-"doc://OktaOAuth2/documentation/OktaOAuth2/AuthFoundation/OAuth2Client/sessionLogoutFlow(logoutRedirectUri:)": {
+"doc://OktaOAuth2/documentation/OktaOAuth2/AuthFoundation/OAuth2Client/sessionLogoutFlow(additionalParameters:)": {
   "abstract" : [
     {
       "text" : "Creates a new session logout flow for this redirect URI.",
@@ -389,20 +458,29 @@
     },
     {
       "kind" : "externalParam",
-      "text" : "logoutRedirectUri"
+      "text" : "additionalParameters"
     },
     {
       "kind" : "text",
-      "text" : ": "
+      "text" : ": ["
     },
     {
       "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:10Foundation3URLV",
-      "text" : "URL"
+      "preciseIdentifier" : "s:SS",
+      "text" : "String"
     },
     {
       "kind" : "text",
-      "text" : ") -> "
+      "text" : " : any "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:14AuthFoundation18APIRequestArgumentP",
+      "text" : "APIRequestArgument"
+    },
+    {
+      "kind" : "text",
+      "text" : "]?) -> "
     },
     {
       "kind" : "typeIdentifier",
@@ -410,14 +488,14 @@
       "text" : "SessionLogoutFlow"
     }
   ],
-  "identifier" : "doc:\/\/OktaOAuth2\/documentation\/OktaOAuth2\/AuthFoundation\/OAuth2Client\/sessionLogoutFlow(logoutRedirectUri:)",
+  "identifier" : "doc:\/\/OktaOAuth2\/documentation\/OktaOAuth2\/AuthFoundation\/OAuth2Client\/sessionLogoutFlow(additionalParameters:)",
   "kind" : "symbol",
   "role" : "symbol",
-  "title" : "sessionLogoutFlow(logoutRedirectUri:)",
+  "title" : "sessionLogoutFlow(additionalParameters:)",
   "type" : "topic",
-  "url" : "\/documentation\/oktaoauth2\/authfoundation\/oauth2client\/sessionlogoutflow(logoutredirecturi:)"
+  "url" : "\/documentation\/oktaoauth2\/authfoundation\/oauth2client\/sessionlogoutflow(additionalparameters:)"
 },
-"doc://OktaOAuth2/documentation/OktaOAuth2/AuthFoundation/OAuth2Client/sessionTokenFlow(redirectUri:additionalParameters:)": {
+"doc://OktaOAuth2/documentation/OktaOAuth2/AuthFoundation/OAuth2Client/sessionTokenFlow(additionalParameters:)": {
   "abstract" : [
     {
       "text" : "Creates a new Session Token flow configured to use this OAuth2Client.",
@@ -443,20 +521,74 @@
     },
     {
       "kind" : "externalParam",
-      "text" : "redirectUri"
+      "text" : "additionalParameters"
     },
     {
       "kind" : "text",
-      "text" : ": "
+      "text" : ": ["
     },
     {
       "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:10Foundation3URLV",
-      "text" : "URL"
+      "preciseIdentifier" : "s:SS",
+      "text" : "String"
     },
     {
       "kind" : "text",
-      "text" : ", "
+      "text" : " : "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:SS",
+      "text" : "String"
+    },
+    {
+      "kind" : "text",
+      "text" : "]?) "
+    },
+    {
+      "kind" : "keyword",
+      "text" : "throws"
+    },
+    {
+      "kind" : "text",
+      "text" : " -> "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:10OktaOAuth216SessionTokenFlowC",
+      "text" : "SessionTokenFlow"
+    }
+  ],
+  "identifier" : "doc:\/\/OktaOAuth2\/documentation\/OktaOAuth2\/AuthFoundation\/OAuth2Client\/sessionTokenFlow(additionalParameters:)",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "sessionTokenFlow(additionalParameters:)",
+  "type" : "topic",
+  "url" : "\/documentation\/oktaoauth2\/authfoundation\/oauth2client\/sessiontokenflow(additionalparameters:)"
+},
+"doc://OktaOAuth2/documentation/OktaOAuth2/AuthFoundation/OAuth2Client/tokenExchangeFlow(additionalParameters:)": {
+  "abstract" : [
+    {
+      "text" : "Creates a new Token Exchange flow configured to use this OAuth2Client, using the supplied arguments.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "func"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "tokenExchangeFlow"
+    },
+    {
+      "kind" : "text",
+      "text" : "("
     },
     {
       "kind" : "externalParam",
@@ -486,79 +618,16 @@
     },
     {
       "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:10OktaOAuth216SessionTokenFlowC",
-      "text" : "SessionTokenFlow"
-    }
-  ],
-  "identifier" : "doc:\/\/OktaOAuth2\/documentation\/OktaOAuth2\/AuthFoundation\/OAuth2Client\/sessionTokenFlow(redirectUri:additionalParameters:)",
-  "kind" : "symbol",
-  "role" : "symbol",
-  "title" : "sessionTokenFlow(redirectUri:additionalParameters:)",
-  "type" : "topic",
-  "url" : "\/documentation\/oktaoauth2\/authfoundation\/oauth2client\/sessiontokenflow(redirecturi:additionalparameters:)"
-},
-"doc://OktaOAuth2/documentation/OktaOAuth2/AuthFoundation/OAuth2Client/tokenExchangeFlow(audience:)": {
-  "abstract" : [
-    {
-      "text" : "Creates a new Token Exchange flow configured to use this OAuth2Client, using the supplied arguments.",
-      "type" : "text"
-    }
-  ],
-  "fragments" : [
-    {
-      "kind" : "keyword",
-      "text" : "func"
-    },
-    {
-      "kind" : "text",
-      "text" : " "
-    },
-    {
-      "kind" : "identifier",
-      "text" : "tokenExchangeFlow"
-    },
-    {
-      "kind" : "text",
-      "text" : "("
-    },
-    {
-      "kind" : "externalParam",
-      "text" : "audience"
-    },
-    {
-      "kind" : "text",
-      "text" : ": "
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:10OktaOAuth217TokenExchangeFlowC",
-      "text" : "TokenExchangeFlow"
-    },
-    {
-      "kind" : "text",
-      "text" : "."
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:10OktaOAuth217TokenExchangeFlowC8AudienceO",
-      "text" : "Audience"
-    },
-    {
-      "kind" : "text",
-      "text" : ") -> "
-    },
-    {
-      "kind" : "typeIdentifier",
       "preciseIdentifier" : "s:10OktaOAuth217TokenExchangeFlowC",
       "text" : "TokenExchangeFlow"
     }
   ],
-  "identifier" : "doc:\/\/OktaOAuth2\/documentation\/OktaOAuth2\/AuthFoundation\/OAuth2Client\/tokenExchangeFlow(audience:)",
+  "identifier" : "doc:\/\/OktaOAuth2\/documentation\/OktaOAuth2\/AuthFoundation\/OAuth2Client\/tokenExchangeFlow(additionalParameters:)",
   "kind" : "symbol",
   "role" : "symbol",
-  "title" : "tokenExchangeFlow(audience:)",
+  "title" : "tokenExchangeFlow(additionalParameters:)",
   "type" : "topic",
-  "url" : "\/documentation\/oktaoauth2\/authfoundation\/oauth2client\/tokenexchangeflow(audience:)"
+  "url" : "\/documentation\/oktaoauth2\/authfoundation\/oauth2client\/tokenexchangeflow(additionalparameters:)"
 }
 }
 }

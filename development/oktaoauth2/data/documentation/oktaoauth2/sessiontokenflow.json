@@ -198,8 +198,8 @@
       "identifiers" : [
         "doc:\/\/OktaOAuth2\/14AuthFoundation17APIClientDelegateP",
         "doc:\/\/OktaOAuth2\/14AuthFoundation18AuthenticationFlowP",
+        "doc:\/\/OktaOAuth2\/14AuthFoundation23IDTokenValidatorContextP",
         "doc:\/\/OktaOAuth2\/14AuthFoundation20OAuth2ClientDelegateP",
-        "doc:\/\/OktaOAuth2\/14AuthFoundation24ProvidesOAuth2ParametersP",
         "doc:\/\/OktaOAuth2\/14AuthFoundation22UsesDelegateCollectionP"
       ],
       "kind" : "relationships",
@@ -218,10 +218,8 @@
   "topicSections" : [
     {
       "identifiers" : [
-        "doc:\/\/OktaOAuth2\/documentation\/OktaOAuth2\/SessionTokenFlow\/init()",
-        "doc:\/\/OktaOAuth2\/documentation\/OktaOAuth2\/SessionTokenFlow\/init(issuer:clientId:scopes:redirectUri:additionalParameters:)",
-        "doc:\/\/OktaOAuth2\/documentation\/OktaOAuth2\/SessionTokenFlow\/init(plist:)",
-        "doc:\/\/OktaOAuth2\/documentation\/OktaOAuth2\/SessionTokenFlow\/init(redirectUri:additionalParameters:client:)"
+        "doc:\/\/OktaOAuth2\/documentation\/OktaOAuth2\/SessionTokenFlow\/init(client:additionalParameters:)",
+        "doc:\/\/OktaOAuth2\/documentation\/OktaOAuth2\/SessionTokenFlow\/init(issuerURL:clientId:scope:redirectUri:additionalParameters:)"
       ],
       "title" : "Initializers"
     },
@@ -229,9 +227,9 @@
       "identifiers" : [
         "doc:\/\/OktaOAuth2\/documentation\/OktaOAuth2\/SessionTokenFlow\/additionalParameters",
         "doc:\/\/OktaOAuth2\/documentation\/OktaOAuth2\/SessionTokenFlow\/client",
+        "doc:\/\/OktaOAuth2\/documentation\/OktaOAuth2\/SessionTokenFlow\/context-swift.property",
         "doc:\/\/OktaOAuth2\/documentation\/OktaOAuth2\/SessionTokenFlow\/delegateCollection",
-        "doc:\/\/OktaOAuth2\/documentation\/OktaOAuth2\/SessionTokenFlow\/isAuthenticating",
-        "doc:\/\/OktaOAuth2\/documentation\/OktaOAuth2\/SessionTokenFlow\/redirectUri"
+        "doc:\/\/OktaOAuth2\/documentation\/OktaOAuth2\/SessionTokenFlow\/isAuthenticating"
       ],
       "title" : "Instance Properties"
     },
@@ -244,9 +242,16 @@
       "title" : "Instance Methods"
     },
     {
+      "identifiers" : [
+        "doc:\/\/OktaOAuth2\/documentation\/OktaOAuth2\/SessionTokenFlow\/Context-swift.typealias"
+      ],
+      "title" : "Type Aliases"
+    },
+    {
       "generated" : true,
       "identifiers" : [
         "doc:\/\/OktaOAuth2\/documentation\/OktaOAuth2\/SessionTokenFlow\/APIClientDelegate-Implementations",
+        "doc:\/\/OktaOAuth2\/documentation\/OktaOAuth2\/SessionTokenFlow\/AuthenticationFlow-Implementations",
         "doc:\/\/OktaOAuth2\/documentation\/OktaOAuth2\/SessionTokenFlow\/OAuth2ClientDelegate-Implementations",
         "doc:\/\/OktaOAuth2\/documentation\/OktaOAuth2\/SessionTokenFlow\/UsesDelegateCollection-Implementations"
       ],
@@ -287,9 +292,9 @@
   "title" : "AuthFoundation.UsesDelegateCollection",
   "type" : "unresolvable"
 },
-"doc://OktaOAuth2/14AuthFoundation24ProvidesOAuth2ParametersP": {
-  "identifier" : "doc:\/\/OktaOAuth2\/14AuthFoundation24ProvidesOAuth2ParametersP",
-  "title" : "AuthFoundation.ProvidesOAuth2Parameters",
+"doc://OktaOAuth2/14AuthFoundation23IDTokenValidatorContextP": {
+  "identifier" : "doc:\/\/OktaOAuth2\/14AuthFoundation23IDTokenValidatorContextP",
+  "title" : "AuthFoundation.IDTokenValidatorContext",
   "type" : "unresolvable"
 },
 "doc://OktaOAuth2/documentation/OktaOAuth2": {
@@ -351,6 +356,48 @@
   "type" : "topic",
   "url" : "\/documentation\/oktaoauth2\/sessiontokenflow\/apiclientdelegate-implementations"
 },
+"doc://OktaOAuth2/documentation/OktaOAuth2/SessionTokenFlow/AuthenticationFlow-Implementations": {
+  "abstract" : [
+
+  ],
+  "identifier" : "doc:\/\/OktaOAuth2\/documentation\/OktaOAuth2\/SessionTokenFlow\/AuthenticationFlow-Implementations",
+  "kind" : "article",
+  "role" : "collectionGroup",
+  "title" : "AuthenticationFlow Implementations",
+  "type" : "topic",
+  "url" : "\/documentation\/oktaoauth2\/sessiontokenflow\/authenticationflow-implementations"
+},
+"doc://OktaOAuth2/documentation/OktaOAuth2/SessionTokenFlow/Context-swift.typealias": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "typealias"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "Context"
+    }
+  ],
+  "identifier" : "doc:\/\/OktaOAuth2\/documentation\/OktaOAuth2\/SessionTokenFlow\/Context-swift.typealias",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "Context"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "SessionTokenFlow.Context",
+  "type" : "topic",
+  "url" : "\/documentation\/oktaoauth2\/sessiontokenflow\/context-swift.typealias"
+},
 "doc://OktaOAuth2/documentation/OktaOAuth2/SessionTokenFlow/OAuth2ClientDelegate-Implementations": {
   "abstract" : [
 
@@ -376,7 +423,7 @@
 "doc://OktaOAuth2/documentation/OktaOAuth2/SessionTokenFlow/additionalParameters": {
   "abstract" : [
     {
-      "text" : "Any additional query string parameters you would like to supply to the authorization server.",
+      "text" : "Any additional query string parameters you would like to supply to the authorization server for all requests from this flow.",
       "type" : "text"
     }
   ],
@@ -460,6 +507,56 @@
   "type" : "topic",
   "url" : "\/documentation\/oktaoauth2\/sessiontokenflow\/client"
 },
+"doc://OktaOAuth2/documentation/OktaOAuth2/SessionTokenFlow/context-swift.property": {
+  "abstract" : [
+    {
+      "text" : "The context that stores the state for the current authentication session.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "var"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "context"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:10OktaOAuth216SessionTokenFlowC",
+      "text" : "SessionTokenFlow"
+    },
+    {
+      "kind" : "text",
+      "text" : "."
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:10OktaOAuth216SessionTokenFlowC7Contexta",
+      "text" : "Context"
+    },
+    {
+      "kind" : "text",
+      "text" : "?"
+    }
+  ],
+  "identifier" : "doc:\/\/OktaOAuth2\/documentation\/OktaOAuth2\/SessionTokenFlow\/context-swift.property",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "context",
+  "type" : "topic",
+  "url" : "\/documentation\/oktaoauth2\/sessiontokenflow\/context-swift.property"
+},
 "doc://OktaOAuth2/documentation/OktaOAuth2/SessionTokenFlow/delegateCollection": {
   "abstract" : [
 
@@ -516,51 +613,78 @@
   "type" : "topic",
   "url" : "\/documentation\/oktaoauth2\/sessiontokenflow\/delegatecollection"
 },
-"doc://OktaOAuth2/documentation/OktaOAuth2/SessionTokenFlow/init()": {
+"doc://OktaOAuth2/documentation/OktaOAuth2/SessionTokenFlow/init(client:additionalParameters:)": {
   "abstract" : [
     {
-      "text" : "Initializer that uses the configuration defined within the application’s ",
-      "type" : "text"
-    },
-    {
-      "code" : "Okta.plist",
-      "type" : "codeVoice"
-    },
-    {
-      "text" : " file.",
+      "text" : "Initializer that uses the predefined OAuth2Client",
       "type" : "text"
     }
   ],
   "fragments" : [
-    {
-      "kind" : "keyword",
-      "text" : "convenience"
-    },
-    {
-      "kind" : "text",
-      "text" : " "
-    },
     {
       "kind" : "identifier",
       "text" : "init"
     },
     {
       "kind" : "text",
-      "text" : "() "
+      "text" : "("
+    },
+    {
+      "kind" : "externalParam",
+      "text" : "client"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:14AuthFoundation12OAuth2ClientC",
+      "text" : "OAuth2Client"
+    },
+    {
+      "kind" : "text",
+      "text" : ", "
+    },
+    {
+      "kind" : "externalParam",
+      "text" : "additionalParameters"
+    },
+    {
+      "kind" : "text",
+      "text" : ": ["
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:SS",
+      "text" : "String"
+    },
+    {
+      "kind" : "text",
+      "text" : " : any "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:14AuthFoundation18APIRequestArgumentP",
+      "text" : "APIRequestArgument"
+    },
+    {
+      "kind" : "text",
+      "text" : "]?) "
     },
     {
       "kind" : "keyword",
       "text" : "throws"
     }
   ],
-  "identifier" : "doc:\/\/OktaOAuth2\/documentation\/OktaOAuth2\/SessionTokenFlow\/init()",
+  "identifier" : "doc:\/\/OktaOAuth2\/documentation\/OktaOAuth2\/SessionTokenFlow\/init(client:additionalParameters:)",
   "kind" : "symbol",
   "role" : "symbol",
-  "title" : "init()",
+  "title" : "init(client:additionalParameters:)",
   "type" : "topic",
-  "url" : "\/documentation\/oktaoauth2\/sessiontokenflow\/init()"
+  "url" : "\/documentation\/oktaoauth2\/sessiontokenflow\/init(client:additionalparameters:)"
 },
-"doc://OktaOAuth2/documentation/OktaOAuth2/SessionTokenFlow/init(issuer:clientId:scopes:redirectUri:additionalParameters:)": {
+"doc://OktaOAuth2/documentation/OktaOAuth2/SessionTokenFlow/init(issuerURL:clientId:scope:redirectUri:additionalParameters:)": {
   "abstract" : [
     {
       "text" : "Convenience initializer to construct an authentication flow from variables.",
@@ -586,7 +710,7 @@
     },
     {
       "kind" : "externalParam",
-      "text" : "issuer"
+      "text" : "issuerURL"
     },
     {
       "kind" : "text",
@@ -620,7 +744,7 @@
     },
     {
       "kind" : "externalParam",
-      "text" : "scopes"
+      "text" : "scope"
     },
     {
       "kind" : "text",
@@ -676,149 +800,19 @@
     },
     {
       "kind" : "text",
-      "text" : "]?)"
-    }
-  ],
-  "identifier" : "doc:\/\/OktaOAuth2\/documentation\/OktaOAuth2\/SessionTokenFlow\/init(issuer:clientId:scopes:redirectUri:additionalParameters:)",
-  "kind" : "symbol",
-  "role" : "symbol",
-  "title" : "init(issuer:clientId:scopes:redirectUri:additionalParameters:)",
-  "type" : "topic",
-  "url" : "\/documentation\/oktaoauth2\/sessiontokenflow\/init(issuer:clientid:scopes:redirecturi:additionalparameters:)"
-},
-"doc://OktaOAuth2/documentation/OktaOAuth2/SessionTokenFlow/init(plist:)": {
-  "abstract" : [
-    {
-      "text" : "Initializer that uses the configuration defined within the given file URL.",
-      "type" : "text"
-    }
-  ],
-  "fragments" : [
-    {
-      "kind" : "keyword",
-      "text" : "convenience"
-    },
-    {
-      "kind" : "text",
-      "text" : " "
-    },
-    {
-      "kind" : "identifier",
-      "text" : "init"
-    },
-    {
-      "kind" : "text",
-      "text" : "("
-    },
-    {
-      "kind" : "externalParam",
-      "text" : "plist"
-    },
-    {
-      "kind" : "text",
-      "text" : ": "
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:10Foundation3URLV",
-      "text" : "URL"
-    },
-    {
-      "kind" : "text",
-      "text" : ") "
+      "text" : "]?) "
     },
     {
       "kind" : "keyword",
       "text" : "throws"
     }
   ],
-  "identifier" : "doc:\/\/OktaOAuth2\/documentation\/OktaOAuth2\/SessionTokenFlow\/init(plist:)",
+  "identifier" : "doc:\/\/OktaOAuth2\/documentation\/OktaOAuth2\/SessionTokenFlow\/init(issuerURL:clientId:scope:redirectUri:additionalParameters:)",
   "kind" : "symbol",
   "role" : "symbol",
-  "title" : "init(plist:)",
+  "title" : "init(issuerURL:clientId:scope:redirectUri:additionalParameters:)",
   "type" : "topic",
-  "url" : "\/documentation\/oktaoauth2\/sessiontokenflow\/init(plist:)"
-},
-"doc://OktaOAuth2/documentation/OktaOAuth2/SessionTokenFlow/init(redirectUri:additionalParameters:client:)": {
-  "abstract" : [
-
-  ],
-  "fragments" : [
-    {
-      "kind" : "identifier",
-      "text" : "init"
-    },
-    {
-      "kind" : "text",
-      "text" : "("
-    },
-    {
-      "kind" : "externalParam",
-      "text" : "redirectUri"
-    },
-    {
-      "kind" : "text",
-      "text" : ": "
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:10Foundation3URLV",
-      "text" : "URL"
-    },
-    {
-      "kind" : "text",
-      "text" : ", "
-    },
-    {
-      "kind" : "externalParam",
-      "text" : "additionalParameters"
-    },
-    {
-      "kind" : "text",
-      "text" : ": ["
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:SS",
-      "text" : "String"
-    },
-    {
-      "kind" : "text",
-      "text" : " : any "
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:14AuthFoundation18APIRequestArgumentP",
-      "text" : "APIRequestArgument"
-    },
-    {
-      "kind" : "text",
-      "text" : "]?, "
-    },
-    {
-      "kind" : "externalParam",
-      "text" : "client"
-    },
-    {
-      "kind" : "text",
-      "text" : ": "
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:14AuthFoundation12OAuth2ClientC",
-      "text" : "OAuth2Client"
-    },
-    {
-      "kind" : "text",
-      "text" : ")"
-    }
-  ],
-  "identifier" : "doc:\/\/OktaOAuth2\/documentation\/OktaOAuth2\/SessionTokenFlow\/init(redirectUri:additionalParameters:client:)",
-  "kind" : "symbol",
-  "role" : "symbol",
-  "title" : "init(redirectUri:additionalParameters:client:)",
-  "type" : "topic",
-  "url" : "\/documentation\/oktaoauth2\/sessiontokenflow\/init(redirecturi:additionalparameters:client:)"
+  "url" : "\/documentation\/oktaoauth2\/sessiontokenflow\/init(issuerurl:clientid:scope:redirecturi:additionalparameters:)"
 },
 "doc://OktaOAuth2/documentation/OktaOAuth2/SessionTokenFlow/isAuthenticating": {
   "abstract" : [
@@ -856,43 +850,6 @@
   "title" : "isAuthenticating",
   "type" : "topic",
   "url" : "\/documentation\/oktaoauth2\/sessiontokenflow\/isauthenticating"
-},
-"doc://OktaOAuth2/documentation/OktaOAuth2/SessionTokenFlow/redirectUri": {
-  "abstract" : [
-    {
-      "text" : "The redirect URI defined for your client.",
-      "type" : "text"
-    }
-  ],
-  "fragments" : [
-    {
-      "kind" : "keyword",
-      "text" : "let"
-    },
-    {
-      "kind" : "text",
-      "text" : " "
-    },
-    {
-      "kind" : "identifier",
-      "text" : "redirectUri"
-    },
-    {
-      "kind" : "text",
-      "text" : ": "
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:10Foundation3URLV",
-      "text" : "URL"
-    }
-  ],
-  "identifier" : "doc:\/\/OktaOAuth2\/documentation\/OktaOAuth2\/SessionTokenFlow\/redirectUri",
-  "kind" : "symbol",
-  "role" : "symbol",
-  "title" : "redirectUri",
-  "type" : "topic",
-  "url" : "\/documentation\/oktaoauth2\/sessiontokenflow\/redirecturi"
 },
 "doc://OktaOAuth2/documentation/OktaOAuth2/SessionTokenFlow/reset()": {
   "abstract" : [
@@ -977,8 +934,8 @@
     },
     {
       "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:10OktaOAuth221AuthorizationCodeFlowC",
-      "text" : "AuthorizationCodeFlow"
+      "preciseIdentifier" : "s:10OktaOAuth216SessionTokenFlowC",
+      "text" : "SessionTokenFlow"
     },
     {
       "kind" : "text",
@@ -986,12 +943,12 @@
     },
     {
       "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:10OktaOAuth221AuthorizationCodeFlowC7ContextV",
+      "preciseIdentifier" : "s:10OktaOAuth216SessionTokenFlowC7Contexta",
       "text" : "Context"
     },
     {
       "kind" : "text",
-      "text" : "?) "
+      "text" : ") "
     },
     {
       "kind" : "keyword",
@@ -1073,8 +1030,8 @@
     },
     {
       "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:10OktaOAuth221AuthorizationCodeFlowC",
-      "text" : "AuthorizationCodeFlow"
+      "preciseIdentifier" : "s:10OktaOAuth216SessionTokenFlowC",
+      "text" : "SessionTokenFlow"
     },
     {
       "kind" : "text",
@@ -1082,12 +1039,12 @@
     },
     {
       "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:10OktaOAuth221AuthorizationCodeFlowC7ContextV",
+      "preciseIdentifier" : "s:10OktaOAuth216SessionTokenFlowC7Contexta",
       "text" : "Context"
     },
     {
       "kind" : "text",
-      "text" : "?, "
+      "text" : ", "
     },
     {
       "kind" : "externalParam",

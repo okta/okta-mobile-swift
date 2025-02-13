@@ -141,12 +141,12 @@
                   "type" : "text"
                 },
                 {
-                  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/Claim",
+                  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/HasClaims\/ClaimType",
                   "isActive" : true,
                   "type" : "reference"
                 },
                 {
-                  "text" : " enum. For custom claims, please see the ",
+                  "text" : " enum corresponding to this claim container. For custom claims, please see the ",
                   "type" : "text"
                 },
                 {
@@ -205,38 +205,6 @@
   "title" : "AuthFoundation",
   "type" : "topic",
   "url" : "\/documentation\/authfoundation"
-},
-"doc://AuthFoundation/documentation/AuthFoundation/Claim": {
-  "abstract" : [
-
-  ],
-  "deprecated" : true,
-  "fragments" : [
-    {
-      "kind" : "keyword",
-      "text" : "typealias"
-    },
-    {
-      "kind" : "text",
-      "text" : " "
-    },
-    {
-      "kind" : "identifier",
-      "text" : "Claim"
-    }
-  ],
-  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/Claim",
-  "kind" : "symbol",
-  "navigatorTitle" : [
-    {
-      "kind" : "identifier",
-      "text" : "Claim"
-    }
-  ],
-  "role" : "symbol",
-  "title" : "Claim",
-  "type" : "topic",
-  "url" : "\/documentation\/authfoundation\/claim"
 },
 "doc://AuthFoundation/documentation/AuthFoundation/HasClaims": {
   "abstract" : [

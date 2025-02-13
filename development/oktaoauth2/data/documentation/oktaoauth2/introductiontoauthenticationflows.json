@@ -179,9 +179,9 @@
         {
           "code" : [
             "let flow = ResourceOwnerFlow(",
-            "    issuer: URL(string: \"https:\/\/example.okta.com\")!,",
+            "    issuerURL: URL(string: \"https:\/\/example.okta.com\")!,",
             "    clientId: \"abc123client\",",
-            "    scopes: \"openid offline_access email profile\")",
+            "    scope: \"openid offline_access email profile\")",
             "",
             "let token = try await flow.start(",
             "    username: \"smeagol\",",
@@ -238,9 +238,8 @@
               "type" : "text"
             },
             {
-              "identifier" : "doc:\/\/OktaOAuth2\/documentation\/OktaOAuth2\/DeviceAuthorizationFlow\/start()",
-              "isActive" : true,
-              "type" : "reference"
+              "code" : "DeviceAuthorizationFlow\/start()",
+              "type" : "codeVoice"
             },
             {
               "text" : " function.",
@@ -252,9 +251,9 @@
         {
           "code" : [
             "let flow = DeviceAuthorizationFlow(",
-            "    issuer: URL(string: \"https:\/\/example.okta.com\")!,",
+            "    issuerURL: URL(string: \"https:\/\/example.okta.com\")!,",
             "    clientId: \"abc123client\",",
-            "    scopes: \"openid offline_access email profile\")",
+            "    scope: \"openid offline_access email profile\")",
             "",
             "\/\/ Retrieve the context for this session.",
             "let context = try await flow.start()",
@@ -263,7 +262,7 @@
             "\/\/ Once that is done, use the following code to",
             "\/\/ poll the server to retrieve a token when they",
             "\/\/ authorize the code.",
-            "let token = try await flow.resume(with: context)"
+            "let token = try await flow.resume()"
           ],
           "syntax" : "swift",
           "type" : "codeListing"
@@ -326,7 +325,7 @@
               "type" : "text"
             },
             {
-              "identifier" : "doc:\/\/OktaOAuth2\/documentation\/OktaOAuth2\/AuthorizationCodeFlowDelegate\/authentication(flow:shouldAuthenticateUsing:)-9ux29",
+              "identifier" : "doc:\/\/OktaOAuth2\/documentation\/OktaOAuth2\/AuthorizationCodeFlowDelegate\/authentication(flow:shouldAuthenticateUsing:)",
               "isActive" : true,
               "type" : "reference"
             },
@@ -335,9 +334,8 @@
               "type" : "text"
             },
             {
-              "identifier" : "doc:\/\/OktaOAuth2\/documentation\/OktaOAuth2\/AuthorizationCodeFlowDelegate\/authentication(flow:customizeUrl:)-9f4xy",
-              "isActive" : true,
-              "type" : "reference"
+              "code" : "AuthorizationCodeFlowDelegate\/authentication(flow:customizeUrl:)-9f4xy",
+              "type" : "codeVoice"
             },
             {
               "text" : " functions for more details.",
@@ -564,92 +562,13 @@
   "type" : "topic",
   "url" : "\/documentation\/oktaoauth2\/authorizationcodeflowdelegate"
 },
-"doc://OktaOAuth2/documentation/OktaOAuth2/AuthorizationCodeFlowDelegate/authentication(flow:customizeUrl:)-9f4xy": {
-  "abstract" : [
-
-  ],
-  "fragments" : [
-    {
-      "kind" : "keyword",
-      "text" : "func"
-    },
-    {
-      "kind" : "text",
-      "text" : " "
-    },
-    {
-      "kind" : "identifier",
-      "text" : "authentication"
-    },
-    {
-      "kind" : "text",
-      "text" : "<"
-    },
-    {
-      "kind" : "genericParameter",
-      "text" : "Flow"
-    },
-    {
-      "kind" : "text",
-      "text" : ">("
-    },
-    {
-      "kind" : "externalParam",
-      "text" : "flow"
-    },
-    {
-      "kind" : "text",
-      "text" : ": "
-    },
-    {
-      "kind" : "typeIdentifier",
-      "text" : "Flow"
-    },
-    {
-      "kind" : "text",
-      "text" : ", "
-    },
-    {
-      "kind" : "externalParam",
-      "text" : "customizeUrl"
-    },
-    {
-      "kind" : "text",
-      "text" : ": "
-    },
-    {
-      "kind" : "keyword",
-      "text" : "inout"
-    },
-    {
-      "kind" : "text",
-      "text" : " "
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:10Foundation13URLComponentsV",
-      "text" : "URLComponents"
-    },
-    {
-      "kind" : "text",
-      "text" : ")"
-    }
-  ],
-  "identifier" : "doc:\/\/OktaOAuth2\/documentation\/OktaOAuth2\/AuthorizationCodeFlowDelegate\/authentication(flow:customizeUrl:)-9f4xy",
-  "kind" : "symbol",
-  "role" : "symbol",
-  "title" : "authentication(flow:customizeUrl:)",
-  "type" : "topic",
-  "url" : "\/documentation\/oktaoauth2\/authorizationcodeflowdelegate\/authentication(flow:customizeurl:)-9f4xy"
-},
-"doc://OktaOAuth2/documentation/OktaOAuth2/AuthorizationCodeFlowDelegate/authentication(flow:shouldAuthenticateUsing:)-9ux29": {
+"doc://OktaOAuth2/documentation/OktaOAuth2/AuthorizationCodeFlowDelegate/authentication(flow:shouldAuthenticateUsing:)": {
   "abstract" : [
     {
       "text" : "Called when the authorization URL has been created, indicating the URL should be presented to the user.",
       "type" : "text"
     }
   ],
-  "defaultImplementations" : 1,
   "fragments" : [
     {
       "kind" : "keyword",
@@ -709,13 +628,13 @@
       "text" : ")"
     }
   ],
-  "identifier" : "doc:\/\/OktaOAuth2\/documentation\/OktaOAuth2\/AuthorizationCodeFlowDelegate\/authentication(flow:shouldAuthenticateUsing:)-9ux29",
+  "identifier" : "doc:\/\/OktaOAuth2\/documentation\/OktaOAuth2\/AuthorizationCodeFlowDelegate\/authentication(flow:shouldAuthenticateUsing:)",
   "kind" : "symbol",
   "required" : true,
   "role" : "symbol",
   "title" : "authentication(flow:shouldAuthenticateUsing:)",
   "type" : "topic",
-  "url" : "\/documentation\/oktaoauth2\/authorizationcodeflowdelegate\/authentication(flow:shouldauthenticateusing:)-9ux29"
+  "url" : "\/documentation\/oktaoauth2\/authorizationcodeflowdelegate\/authentication(flow:shouldauthenticateusing:)"
 },
 "doc://OktaOAuth2/documentation/OktaOAuth2/DeviceAuthorizationFlow": {
   "abstract" : [
@@ -750,68 +669,6 @@
   "title" : "DeviceAuthorizationFlow",
   "type" : "topic",
   "url" : "\/documentation\/oktaoauth2\/deviceauthorizationflow"
-},
-"doc://OktaOAuth2/documentation/OktaOAuth2/DeviceAuthorizationFlow/start()": {
-  "abstract" : [
-    {
-      "text" : "Asynchronously initiates a device authentication flow.",
-      "type" : "text"
-    }
-  ],
-  "fragments" : [
-    {
-      "kind" : "keyword",
-      "text" : "func"
-    },
-    {
-      "kind" : "text",
-      "text" : " "
-    },
-    {
-      "kind" : "identifier",
-      "text" : "start"
-    },
-    {
-      "kind" : "text",
-      "text" : "() "
-    },
-    {
-      "kind" : "keyword",
-      "text" : "async"
-    },
-    {
-      "kind" : "text",
-      "text" : " "
-    },
-    {
-      "kind" : "keyword",
-      "text" : "throws"
-    },
-    {
-      "kind" : "text",
-      "text" : " -> "
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:10OktaOAuth223DeviceAuthorizationFlowC",
-      "text" : "DeviceAuthorizationFlow"
-    },
-    {
-      "kind" : "text",
-      "text" : "."
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:10OktaOAuth223DeviceAuthorizationFlowC7ContextV",
-      "text" : "Context"
-    }
-  ],
-  "identifier" : "doc:\/\/OktaOAuth2\/documentation\/OktaOAuth2\/DeviceAuthorizationFlow\/start()",
-  "kind" : "symbol",
-  "role" : "symbol",
-  "title" : "start()",
-  "type" : "topic",
-  "url" : "\/documentation\/oktaoauth2\/deviceauthorizationflow\/start()"
 },
 "doc://OktaOAuth2/documentation/OktaOAuth2/ResourceOwnerFlow": {
   "abstract" : [

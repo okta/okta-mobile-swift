@@ -9,6 +9,11 @@
     "paths" : [
       [
         "doc:\/\/OktaOAuth2\/documentation\/OktaOAuth2"
+      ],
+      [
+        "doc:\/\/OktaOAuth2\/documentation\/OktaOAuth2",
+        "doc:\/\/OktaOAuth2\/documentation\/OktaOAuth2\/DeviceAuthorizationFlow",
+        "doc:\/\/OktaOAuth2\/documentation\/OktaOAuth2\/DeviceAuthorizationFlow\/AuthenticationFlow-Implementations"
       ]
     ]
   },
@@ -18,6 +23,7 @@
   },
   "kind" : "symbol",
   "metadata" : {
+    "extendedModule" : "OktaOAuth2",
     "externalID" : "s:10OktaOAuth223DeviceAuthorizationFlowC7ContextV",
     "fragments" : [
       {
@@ -81,9 +87,8 @@
   "relationshipsSections" : [
     {
       "identifiers" : [
-        "doc:\/\/OktaOAuth2\/14AuthFoundation7ExpiresP",
-        "doc:\/\/OktaOAuth2\/Se",
-        "doc:\/\/OktaOAuth2\/SQ"
+        "doc:\/\/OktaOAuth2\/14AuthFoundation21AuthenticationContextP",
+        "doc:\/\/OktaOAuth2\/14AuthFoundation24ProvidesOAuth2ParametersP"
       ],
       "kind" : "relationships",
       "title" : "Conforms To",
@@ -111,27 +116,17 @@
   "topicSections" : [
     {
       "identifiers" : [
-        "doc:\/\/OktaOAuth2\/documentation\/OktaOAuth2\/DeviceAuthorizationFlow\/Context-swift.struct\/init(from:)"
+        "doc:\/\/OktaOAuth2\/documentation\/OktaOAuth2\/DeviceAuthorizationFlow\/Context-swift.struct\/init(acrValues:additionalParameters:)"
       ],
       "title" : "Initializers"
     },
     {
       "identifiers" : [
-        "doc:\/\/OktaOAuth2\/documentation\/OktaOAuth2\/DeviceAuthorizationFlow\/Context-swift.struct\/expiresIn",
-        "doc:\/\/OktaOAuth2\/documentation\/OktaOAuth2\/DeviceAuthorizationFlow\/Context-swift.struct\/issuedAt",
-        "doc:\/\/OktaOAuth2\/documentation\/OktaOAuth2\/DeviceAuthorizationFlow\/Context-swift.struct\/userCode",
-        "doc:\/\/OktaOAuth2\/documentation\/OktaOAuth2\/DeviceAuthorizationFlow\/Context-swift.struct\/verificationUri",
-        "doc:\/\/OktaOAuth2\/documentation\/OktaOAuth2\/DeviceAuthorizationFlow\/Context-swift.struct\/verificationUriComplete"
+        "doc:\/\/OktaOAuth2\/documentation\/OktaOAuth2\/DeviceAuthorizationFlow\/Context-swift.struct\/acrValues",
+        "doc:\/\/OktaOAuth2\/documentation\/OktaOAuth2\/DeviceAuthorizationFlow\/Context-swift.struct\/additionalParameters",
+        "doc:\/\/OktaOAuth2\/documentation\/OktaOAuth2\/DeviceAuthorizationFlow\/Context-swift.struct\/verification"
       ],
       "title" : "Instance Properties"
-    },
-    {
-      "generated" : true,
-      "identifiers" : [
-        "doc:\/\/OktaOAuth2\/documentation\/OktaOAuth2\/DeviceAuthorizationFlow\/Context-swift.struct\/Equatable-Implementations",
-        "doc:\/\/OktaOAuth2\/documentation\/OktaOAuth2\/DeviceAuthorizationFlow\/Context-swift.struct\/Expires-Implementations"
-      ],
-      "title" : "Default Implementations"
     }
   ],
   "variants" : [
@@ -148,19 +143,14 @@
   ]
 , 
 "references": {
-"doc://OktaOAuth2/14AuthFoundation7ExpiresP": {
-  "identifier" : "doc:\/\/OktaOAuth2\/14AuthFoundation7ExpiresP",
-  "title" : "AuthFoundation.Expires",
+"doc://OktaOAuth2/14AuthFoundation21AuthenticationContextP": {
+  "identifier" : "doc:\/\/OktaOAuth2\/14AuthFoundation21AuthenticationContextP",
+  "title" : "AuthFoundation.AuthenticationContext",
   "type" : "unresolvable"
 },
-"doc://OktaOAuth2/SQ": {
-  "identifier" : "doc:\/\/OktaOAuth2\/SQ",
-  "title" : "Swift.Equatable",
-  "type" : "unresolvable"
-},
-"doc://OktaOAuth2/Se": {
-  "identifier" : "doc:\/\/OktaOAuth2\/Se",
-  "title" : "Swift.Decodable",
+"doc://OktaOAuth2/14AuthFoundation24ProvidesOAuth2ParametersP": {
+  "identifier" : "doc:\/\/OktaOAuth2\/14AuthFoundation24ProvidesOAuth2ParametersP",
+  "title" : "AuthFoundation.ProvidesOAuth2Parameters",
   "type" : "unresolvable"
 },
 "doc://OktaOAuth2/documentation/OktaOAuth2": {
@@ -211,6 +201,17 @@
   "type" : "topic",
   "url" : "\/documentation\/oktaoauth2\/deviceauthorizationflow"
 },
+"doc://OktaOAuth2/documentation/OktaOAuth2/DeviceAuthorizationFlow/AuthenticationFlow-Implementations": {
+  "abstract" : [
+
+  ],
+  "identifier" : "doc:\/\/OktaOAuth2\/documentation\/OktaOAuth2\/DeviceAuthorizationFlow\/AuthenticationFlow-Implementations",
+  "kind" : "article",
+  "role" : "collectionGroup",
+  "title" : "AuthenticationFlow Implementations",
+  "type" : "topic",
+  "url" : "\/documentation\/oktaoauth2\/deviceauthorizationflow\/authenticationflow-implementations"
+},
 "doc://OktaOAuth2/documentation/OktaOAuth2/DeviceAuthorizationFlow/Context-swift.struct": {
   "abstract" : [
     {
@@ -245,39 +246,17 @@
   "type" : "topic",
   "url" : "\/documentation\/oktaoauth2\/deviceauthorizationflow\/context-swift.struct"
 },
-"doc://OktaOAuth2/documentation/OktaOAuth2/DeviceAuthorizationFlow/Context-swift.struct/Equatable-Implementations": {
-  "abstract" : [
-
-  ],
-  "identifier" : "doc:\/\/OktaOAuth2\/documentation\/OktaOAuth2\/DeviceAuthorizationFlow\/Context-swift.struct\/Equatable-Implementations",
-  "kind" : "article",
-  "role" : "collectionGroup",
-  "title" : "Equatable Implementations",
-  "type" : "topic",
-  "url" : "\/documentation\/oktaoauth2\/deviceauthorizationflow\/context-swift.struct\/equatable-implementations"
-},
-"doc://OktaOAuth2/documentation/OktaOAuth2/DeviceAuthorizationFlow/Context-swift.struct/Expires-Implementations": {
-  "abstract" : [
-
-  ],
-  "identifier" : "doc:\/\/OktaOAuth2\/documentation\/OktaOAuth2\/DeviceAuthorizationFlow\/Context-swift.struct\/Expires-Implementations",
-  "kind" : "article",
-  "role" : "collectionGroup",
-  "title" : "Expires Implementations",
-  "type" : "topic",
-  "url" : "\/documentation\/oktaoauth2\/deviceauthorizationflow\/context-swift.struct\/expires-implementations"
-},
-"doc://OktaOAuth2/documentation/OktaOAuth2/DeviceAuthorizationFlow/Context-swift.struct/expiresIn": {
+"doc://OktaOAuth2/documentation/OktaOAuth2/DeviceAuthorizationFlow/Context-swift.struct/acrValues": {
   "abstract" : [
     {
-      "text" : "The time interval after which the authorization context will expire.",
+      "text" : "The ACR values, if any, which should be requested by the client.",
       "type" : "text"
     }
   ],
   "fragments" : [
     {
       "kind" : "keyword",
-      "text" : "let"
+      "text" : "var"
     },
     {
       "kind" : "text",
@@ -285,28 +264,85 @@
     },
     {
       "kind" : "identifier",
-      "text" : "expiresIn"
+      "text" : "acrValues"
     },
     {
       "kind" : "text",
-      "text" : ": "
+      "text" : ": ["
     },
     {
       "kind" : "typeIdentifier",
-      "preciseIdentifier" : "c:@T@NSTimeInterval",
-      "text" : "TimeInterval"
+      "preciseIdentifier" : "s:SS",
+      "text" : "String"
+    },
+    {
+      "kind" : "text",
+      "text" : "]?"
     }
   ],
-  "identifier" : "doc:\/\/OktaOAuth2\/documentation\/OktaOAuth2\/DeviceAuthorizationFlow\/Context-swift.struct\/expiresIn",
+  "identifier" : "doc:\/\/OktaOAuth2\/documentation\/OktaOAuth2\/DeviceAuthorizationFlow\/Context-swift.struct\/acrValues",
   "kind" : "symbol",
   "role" : "symbol",
-  "title" : "expiresIn",
+  "title" : "acrValues",
   "type" : "topic",
-  "url" : "\/documentation\/oktaoauth2\/deviceauthorizationflow\/context-swift.struct\/expiresin"
+  "url" : "\/documentation\/oktaoauth2\/deviceauthorizationflow\/context-swift.struct\/acrvalues"
 },
-"doc://OktaOAuth2/documentation/OktaOAuth2/DeviceAuthorizationFlow/Context-swift.struct/init(from:)": {
+"doc://OktaOAuth2/documentation/OktaOAuth2/DeviceAuthorizationFlow/Context-swift.struct/additionalParameters": {
   "abstract" : [
-
+    {
+      "text" : "Any additional query string parameters you would like to supply to the authorization server.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "var"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "additionalParameters"
+    },
+    {
+      "kind" : "text",
+      "text" : ": ["
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:SS",
+      "text" : "String"
+    },
+    {
+      "kind" : "text",
+      "text" : " : any "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:14AuthFoundation18APIRequestArgumentP",
+      "text" : "APIRequestArgument"
+    },
+    {
+      "kind" : "text",
+      "text" : "]?"
+    }
+  ],
+  "identifier" : "doc:\/\/OktaOAuth2\/documentation\/OktaOAuth2\/DeviceAuthorizationFlow\/Context-swift.struct\/additionalParameters",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "additionalParameters",
+  "type" : "topic",
+  "url" : "\/documentation\/oktaoauth2\/deviceauthorizationflow\/context-swift.struct\/additionalparameters"
+},
+"doc://OktaOAuth2/documentation/OktaOAuth2/DeviceAuthorizationFlow/Context-swift.struct/init(acrValues:additionalParameters:)": {
+  "abstract" : [
+    {
+      "text" : "Initializer for creating a context with a custom state string.",
+      "type" : "text"
+    }
   ],
   "fragments" : [
     {
@@ -319,122 +355,66 @@
     },
     {
       "kind" : "externalParam",
-      "text" : "from"
+      "text" : "acrValues"
     },
     {
       "kind" : "text",
-      "text" : ": any "
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:s7DecoderP",
-      "text" : "Decoder"
-    },
-    {
-      "kind" : "text",
-      "text" : ") "
-    },
-    {
-      "kind" : "keyword",
-      "text" : "throws"
-    }
-  ],
-  "identifier" : "doc:\/\/OktaOAuth2\/documentation\/OktaOAuth2\/DeviceAuthorizationFlow\/Context-swift.struct\/init(from:)",
-  "kind" : "symbol",
-  "role" : "symbol",
-  "title" : "init(from:)",
-  "type" : "topic",
-  "url" : "\/documentation\/oktaoauth2\/deviceauthorizationflow\/context-swift.struct\/init(from:)"
-},
-"doc://OktaOAuth2/documentation/OktaOAuth2/DeviceAuthorizationFlow/Context-swift.struct/issuedAt": {
-  "abstract" : [
-    {
-      "text" : "The date this context was created.",
-      "type" : "text"
-    }
-  ],
-  "fragments" : [
-    {
-      "kind" : "keyword",
-      "text" : "let"
-    },
-    {
-      "kind" : "text",
-      "text" : " "
-    },
-    {
-      "kind" : "identifier",
-      "text" : "issuedAt"
-    },
-    {
-      "kind" : "text",
-      "text" : ": "
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:10Foundation4DateV",
-      "text" : "Date"
-    },
-    {
-      "kind" : "text",
-      "text" : "?"
-    }
-  ],
-  "identifier" : "doc:\/\/OktaOAuth2\/documentation\/OktaOAuth2\/DeviceAuthorizationFlow\/Context-swift.struct\/issuedAt",
-  "kind" : "symbol",
-  "role" : "symbol",
-  "title" : "issuedAt",
-  "type" : "topic",
-  "url" : "\/documentation\/oktaoauth2\/deviceauthorizationflow\/context-swift.struct\/issuedat"
-},
-"doc://OktaOAuth2/documentation/OktaOAuth2/DeviceAuthorizationFlow/Context-swift.struct/userCode": {
-  "abstract" : [
-    {
-      "text" : "The code that should be displayed to the user.",
-      "type" : "text"
-    }
-  ],
-  "fragments" : [
-    {
-      "kind" : "keyword",
-      "text" : "let"
-    },
-    {
-      "kind" : "text",
-      "text" : " "
-    },
-    {
-      "kind" : "identifier",
-      "text" : "userCode"
-    },
-    {
-      "kind" : "text",
-      "text" : ": "
+      "text" : ": ["
     },
     {
       "kind" : "typeIdentifier",
       "preciseIdentifier" : "s:SS",
       "text" : "String"
+    },
+    {
+      "kind" : "text",
+      "text" : "]?, "
+    },
+    {
+      "kind" : "externalParam",
+      "text" : "additionalParameters"
+    },
+    {
+      "kind" : "text",
+      "text" : ": ["
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:SS",
+      "text" : "String"
+    },
+    {
+      "kind" : "text",
+      "text" : " : any "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:14AuthFoundation18APIRequestArgumentP",
+      "text" : "APIRequestArgument"
+    },
+    {
+      "kind" : "text",
+      "text" : "]?)"
     }
   ],
-  "identifier" : "doc:\/\/OktaOAuth2\/documentation\/OktaOAuth2\/DeviceAuthorizationFlow\/Context-swift.struct\/userCode",
+  "identifier" : "doc:\/\/OktaOAuth2\/documentation\/OktaOAuth2\/DeviceAuthorizationFlow\/Context-swift.struct\/init(acrValues:additionalParameters:)",
   "kind" : "symbol",
   "role" : "symbol",
-  "title" : "userCode",
+  "title" : "init(acrValues:additionalParameters:)",
   "type" : "topic",
-  "url" : "\/documentation\/oktaoauth2\/deviceauthorizationflow\/context-swift.struct\/usercode"
+  "url" : "\/documentation\/oktaoauth2\/deviceauthorizationflow\/context-swift.struct\/init(acrvalues:additionalparameters:)"
 },
-"doc://OktaOAuth2/documentation/OktaOAuth2/DeviceAuthorizationFlow/Context-swift.struct/verificationUri": {
+"doc://OktaOAuth2/documentation/OktaOAuth2/DeviceAuthorizationFlow/Context-swift.struct/verification": {
   "abstract" : [
     {
-      "text" : "The URI the user should be prompted to open in order to authorize the application.",
+      "text" : "Verification information used to",
       "type" : "text"
     }
   ],
   "fragments" : [
     {
       "kind" : "keyword",
-      "text" : "let"
+      "text" : "var"
     },
     {
       "kind" : "text",
@@ -442,7 +422,7 @@
     },
     {
       "kind" : "identifier",
-      "text" : "verificationUri"
+      "text" : "verification"
     },
     {
       "kind" : "text",
@@ -450,75 +430,29 @@
     },
     {
       "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:10Foundation3URLV",
-      "text" : "URL"
-    }
-  ],
-  "identifier" : "doc:\/\/OktaOAuth2\/documentation\/OktaOAuth2\/DeviceAuthorizationFlow\/Context-swift.struct\/verificationUri",
-  "kind" : "symbol",
-  "role" : "symbol",
-  "title" : "verificationUri",
-  "type" : "topic",
-  "url" : "\/documentation\/oktaoauth2\/deviceauthorizationflow\/context-swift.struct\/verificationuri"
-},
-"doc://OktaOAuth2/documentation/OktaOAuth2/DeviceAuthorizationFlow/Context-swift.struct/verificationUriComplete": {
-  "abstract" : [
-    {
-      "text" : "A convenience URI that combines the ",
-      "type" : "text"
-    },
-    {
-      "identifier" : "doc:\/\/OktaOAuth2\/documentation\/OktaOAuth2\/DeviceAuthorizationFlow\/Context-swift.struct\/verificationUri",
-      "isActive" : true,
-      "type" : "reference"
-    },
-    {
-      "text" : " and the ",
-      "type" : "text"
-    },
-    {
-      "identifier" : "doc:\/\/OktaOAuth2\/documentation\/OktaOAuth2\/DeviceAuthorizationFlow\/Context-swift.struct\/userCode",
-      "isActive" : true,
-      "type" : "reference"
-    },
-    {
-      "text" : ", to make a clickable link.",
-      "type" : "text"
-    }
-  ],
-  "fragments" : [
-    {
-      "kind" : "keyword",
-      "text" : "let"
+      "preciseIdentifier" : "s:10OktaOAuth223DeviceAuthorizationFlowC",
+      "text" : "DeviceAuthorizationFlow"
     },
     {
       "kind" : "text",
-      "text" : " "
-    },
-    {
-      "kind" : "identifier",
-      "text" : "verificationUriComplete"
-    },
-    {
-      "kind" : "text",
-      "text" : ": "
+      "text" : "."
     },
     {
       "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:10Foundation3URLV",
-      "text" : "URL"
+      "preciseIdentifier" : "s:10OktaOAuth223DeviceAuthorizationFlowC12VerificationV",
+      "text" : "Verification"
     },
     {
       "kind" : "text",
       "text" : "?"
     }
   ],
-  "identifier" : "doc:\/\/OktaOAuth2\/documentation\/OktaOAuth2\/DeviceAuthorizationFlow\/Context-swift.struct\/verificationUriComplete",
+  "identifier" : "doc:\/\/OktaOAuth2\/documentation\/OktaOAuth2\/DeviceAuthorizationFlow\/Context-swift.struct\/verification",
   "kind" : "symbol",
   "role" : "symbol",
-  "title" : "verificationUriComplete",
+  "title" : "verification",
   "type" : "topic",
-  "url" : "\/documentation\/oktaoauth2\/deviceauthorizationflow\/context-swift.struct\/verificationuricomplete"
+  "url" : "\/documentation\/oktaoauth2\/deviceauthorizationflow\/context-swift.struct\/verification"
 },
 "doc://OktaOAuth2/documentation/OktaOAuth2/DeviceAuthorizationFlowDelegate": {
   "abstract" : [

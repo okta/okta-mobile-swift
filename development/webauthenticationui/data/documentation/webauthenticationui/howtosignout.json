@@ -273,8 +273,8 @@
     {
       "generated" : true,
       "identifiers" : [
-        "doc:\/\/WebAuthenticationUI\/documentation\/WebAuthenticationUI\/WebAuthentication\/signOut(from:credential:options:)",
-        "doc:\/\/WebAuthenticationUI\/documentation\/WebAuthenticationUI\/WebAuthentication\/signOut(from:credential:options:completion:)"
+        "doc:\/\/WebAuthenticationUI\/documentation\/WebAuthenticationUI\/WebAuthentication\/signOut(from:credential:context:)",
+        "doc:\/\/WebAuthenticationUI\/documentation\/WebAuthenticationUI\/WebAuthentication\/signOut(from:credential:context:completion:)"
       ],
       "title" : "Sign Out Using Credential"
     }
@@ -392,7 +392,7 @@
   "type" : "topic",
   "url" : "\/documentation\/webauthenticationui\/webauthentication\/ephemeralsession"
 },
-"doc://WebAuthenticationUI/documentation/WebAuthenticationUI/WebAuthentication/signOut(from:credential:options:)": {
+"doc://WebAuthenticationUI/documentation/WebAuthenticationUI/WebAuthentication/signOut(from:credential:context:)": {
   "abstract" : [
     {
       "text" : "Asynchronous convenience method that initiates log-out using the credential object, throwing the error if fails.",
@@ -461,16 +461,16 @@
     },
     {
       "kind" : "externalParam",
-      "text" : "options"
+      "text" : "context"
     },
     {
       "kind" : "text",
-      "text" : ": ["
+      "text" : ": "
     },
     {
       "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:19WebAuthenticationUI0aB0C",
-      "text" : "WebAuthentication"
+      "preciseIdentifier" : "s:10OktaOAuth217SessionLogoutFlowC",
+      "text" : "SessionLogoutFlow"
     },
     {
       "kind" : "text",
@@ -478,12 +478,12 @@
     },
     {
       "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:19WebAuthenticationUI0aB0C6OptionO",
-      "text" : "Option"
+      "preciseIdentifier" : "s:10OktaOAuth217SessionLogoutFlowC7ContextV",
+      "text" : "Context"
     },
     {
       "kind" : "text",
-      "text" : "]?) "
+      "text" : ") "
     },
     {
       "kind" : "keyword",
@@ -498,14 +498,14 @@
       "text" : "throws"
     }
   ],
-  "identifier" : "doc:\/\/WebAuthenticationUI\/documentation\/WebAuthenticationUI\/WebAuthentication\/signOut(from:credential:options:)",
+  "identifier" : "doc:\/\/WebAuthenticationUI\/documentation\/WebAuthenticationUI\/WebAuthentication\/signOut(from:credential:context:)",
   "kind" : "symbol",
   "role" : "symbol",
-  "title" : "signOut(from:credential:options:)",
+  "title" : "signOut(from:credential:context:)",
   "type" : "topic",
-  "url" : "\/documentation\/webauthenticationui\/webauthentication\/signout(from:credential:options:)"
+  "url" : "\/documentation\/webauthenticationui\/webauthentication\/signout(from:credential:context:)"
 },
-"doc://WebAuthenticationUI/documentation/WebAuthenticationUI/WebAuthentication/signOut(from:credential:options:completion:)": {
+"doc://WebAuthenticationUI/documentation/WebAuthenticationUI/WebAuthentication/signOut(from:credential:context:completion:)": {
   "abstract" : [
     {
       "text" : "Starts log-out using the credential.",
@@ -574,16 +574,16 @@
     },
     {
       "kind" : "externalParam",
-      "text" : "options"
+      "text" : "context"
     },
     {
       "kind" : "text",
-      "text" : ": ["
+      "text" : ": "
     },
     {
       "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:19WebAuthenticationUI0aB0C",
-      "text" : "WebAuthentication"
+      "preciseIdentifier" : "s:10OktaOAuth217SessionLogoutFlowC",
+      "text" : "SessionLogoutFlow"
     },
     {
       "kind" : "text",
@@ -591,12 +591,12 @@
     },
     {
       "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:19WebAuthenticationUI0aB0C6OptionO",
-      "text" : "Option"
+      "preciseIdentifier" : "s:10OktaOAuth217SessionLogoutFlowC7ContextV",
+      "text" : "Context"
     },
     {
       "kind" : "text",
-      "text" : "]?, "
+      "text" : ", "
     },
     {
       "kind" : "externalParam",
@@ -643,12 +643,12 @@
       "text" : ")"
     }
   ],
-  "identifier" : "doc:\/\/WebAuthenticationUI\/documentation\/WebAuthenticationUI\/WebAuthentication\/signOut(from:credential:options:completion:)",
+  "identifier" : "doc:\/\/WebAuthenticationUI\/documentation\/WebAuthenticationUI\/WebAuthentication\/signOut(from:credential:context:completion:)",
   "kind" : "symbol",
   "role" : "symbol",
-  "title" : "signOut(from:credential:options:completion:)",
+  "title" : "signOut(from:credential:context:completion:)",
   "type" : "topic",
-  "url" : "\/documentation\/webauthenticationui\/webauthentication\/signout(from:credential:options:completion:)"
+  "url" : "\/documentation\/webauthenticationui\/webauthentication\/signout(from:credential:context:completion:)"
 }
 }
 }

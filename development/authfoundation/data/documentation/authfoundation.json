@@ -150,7 +150,6 @@
         "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JWKS",
         "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JWTClaim",
         "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/HasClaims",
-        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/Claim",
         "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JSONClaimContainer",
         "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JSON",
         "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/AnyJSON",
@@ -209,7 +208,6 @@
     {
       "identifiers" : [
         "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/APIClientError",
-        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/AuthenticationError",
         "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/ClaimError",
         "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/CredentialError",
         "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/JSONError",
@@ -242,9 +240,35 @@
     },
     {
       "identifiers" : [
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/DebugAPIRequestObserver"
+      ],
+      "title" : "Classes"
+    },
+    {
+      "identifiers" : [
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/AuthenticationContext",
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/AuthenticationFlowRequest",
         "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/ProvidesOAuth2Parameters"
       ],
       "title" : "Protocols"
+    },
+    {
+      "identifiers" : [
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/StandardAuthenticationContext"
+      ],
+      "title" : "Structures"
+    },
+    {
+      "identifiers" : [
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/NullIDTokenValidatorContext"
+      ],
+      "title" : "Variables"
+    },
+    {
+      "identifiers" : [
+        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/OAuth2APIRequestCategory"
+      ],
+      "title" : "Enumerations"
     },
     {
       "identifiers" : [
@@ -994,6 +1018,58 @@
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/anyjson"
 },
+"doc://AuthFoundation/documentation/AuthFoundation/AuthenticationContext": {
+  "abstract" : [
+    {
+      "text" : "Common protocol that all ",
+      "type" : "text"
+    },
+    {
+      "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/AuthenticationFlow",
+      "isActive" : true,
+      "type" : "reference"
+    },
+    {
+      "text" : " ",
+      "type" : "text"
+    },
+    {
+      "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/AuthenticationFlow\/Context-swift.associatedtype",
+      "isActive" : true,
+      "type" : "reference"
+    },
+    {
+      "text" : " type aliases must conform to.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "protocol"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "AuthenticationContext"
+    }
+  ],
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/AuthenticationContext",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "AuthenticationContext"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "AuthenticationContext",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/authenticationcontext"
+},
 "doc://AuthFoundation/documentation/AuthFoundation/AuthenticationDelegate": {
   "abstract" : [
     {
@@ -1028,40 +1104,6 @@
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/authenticationdelegate"
 },
-"doc://AuthFoundation/documentation/AuthFoundation/AuthenticationError": {
-  "abstract" : [
-    {
-      "text" : "Errors that may be generated during the process of authenticating with a variety of authentication flows.",
-      "type" : "text"
-    }
-  ],
-  "fragments" : [
-    {
-      "kind" : "keyword",
-      "text" : "enum"
-    },
-    {
-      "kind" : "text",
-      "text" : " "
-    },
-    {
-      "kind" : "identifier",
-      "text" : "AuthenticationError"
-    }
-  ],
-  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/AuthenticationError",
-  "kind" : "symbol",
-  "navigatorTitle" : [
-    {
-      "kind" : "identifier",
-      "text" : "AuthenticationError"
-    }
-  ],
-  "role" : "symbol",
-  "title" : "AuthenticationError",
-  "type" : "topic",
-  "url" : "\/documentation\/authfoundation\/authenticationerror"
-},
 "doc://AuthFoundation/documentation/AuthFoundation/AuthenticationFlow": {
   "abstract" : [
     {
@@ -1095,6 +1137,84 @@
   "title" : "AuthenticationFlow",
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/authenticationflow"
+},
+"doc://AuthFoundation/documentation/AuthFoundation/AuthenticationFlow/Context-swift.associatedtype": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "associatedtype"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "Context"
+    },
+    {
+      "kind" : "text",
+      "text" : " : "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:14AuthFoundation21AuthenticationContextP",
+      "text" : "AuthenticationContext"
+    }
+  ],
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/AuthenticationFlow\/Context-swift.associatedtype",
+  "kind" : "symbol",
+  "required" : true,
+  "role" : "symbol",
+  "title" : "Context",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/authenticationflow\/context-swift.associatedtype"
+},
+"doc://AuthFoundation/documentation/AuthFoundation/AuthenticationFlowRequest": {
+  "abstract" : [
+    {
+      "text" : "Protocol used by requests that are initiated by a class conforming to ",
+      "type" : "text"
+    },
+    {
+      "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/AuthenticationFlow",
+      "isActive" : true,
+      "type" : "reference"
+    },
+    {
+      "text" : ".",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "protocol"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "AuthenticationFlowRequest"
+    }
+  ],
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/AuthenticationFlowRequest",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "AuthenticationFlowRequest"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "AuthenticationFlowRequest",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/authenticationflowrequest"
 },
 "doc://AuthFoundation/documentation/AuthFoundation/AuthenticationMethod": {
   "abstract" : [
@@ -1138,38 +1258,6 @@
   "title" : "AuthenticationMethod",
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/authenticationmethod"
-},
-"doc://AuthFoundation/documentation/AuthFoundation/Claim": {
-  "abstract" : [
-
-  ],
-  "deprecated" : true,
-  "fragments" : [
-    {
-      "kind" : "keyword",
-      "text" : "typealias"
-    },
-    {
-      "kind" : "text",
-      "text" : " "
-    },
-    {
-      "kind" : "identifier",
-      "text" : "Claim"
-    }
-  ],
-  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/Claim",
-  "kind" : "symbol",
-  "navigatorTitle" : [
-    {
-      "kind" : "identifier",
-      "text" : "Claim"
-    }
-  ],
-  "role" : "symbol",
-  "title" : "Claim",
-  "type" : "topic",
-  "url" : "\/documentation\/authfoundation\/claim"
 },
 "doc://AuthFoundation/documentation/AuthFoundation/ClaimConvertable": {
   "abstract" : [
@@ -1464,6 +1552,40 @@
   "title" : "Customizing Network Requests",
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/customizingnetworkrequests"
+},
+"doc://AuthFoundation/documentation/AuthFoundation/DebugAPIRequestObserver": {
+  "abstract" : [
+    {
+      "text" : "Convenience class used for debugging SDK network operations.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "class"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "DebugAPIRequestObserver"
+    }
+  ],
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/DebugAPIRequestObserver",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "DebugAPIRequestObserver"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "DebugAPIRequestObserver",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/debugapirequestobserver"
 },
 "doc://AuthFoundation/documentation/AuthFoundation/DelegateCollection": {
   "abstract" : [
@@ -2294,6 +2416,40 @@
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/managingusercredentials"
 },
+"doc://AuthFoundation/documentation/AuthFoundation/NullIDTokenValidatorContext": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "let"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "NullIDTokenValidatorContext"
+    },
+    {
+      "kind" : "text",
+      "text" : ": any "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:14AuthFoundation23IDTokenValidatorContextP",
+      "text" : "IDTokenValidatorContext"
+    }
+  ],
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/NullIDTokenValidatorContext",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "NullIDTokenValidatorContext",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/nullidtokenvalidatorcontext"
+},
 "doc://AuthFoundation/documentation/AuthFoundation/OAuth2APIRequest": {
   "abstract" : [
     {
@@ -2345,6 +2501,40 @@
   "title" : "OAuth2APIRequest",
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/oauth2apirequest"
+},
+"doc://AuthFoundation/documentation/AuthFoundation/OAuth2APIRequestCategory": {
+  "abstract" : [
+    {
+      "text" : "Categorizes the types of requests made to an authorization server.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "enum"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "OAuth2APIRequestCategory"
+    }
+  ],
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/OAuth2APIRequestCategory",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "OAuth2APIRequestCategory"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "OAuth2APIRequestCategory",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/oauth2apirequestcategory"
 },
 "doc://AuthFoundation/documentation/AuthFoundation/OAuth2Client": {
   "abstract" : [
@@ -2737,6 +2927,58 @@
   "title" : "SDKVersionMigrator",
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/sdkversionmigrator"
+},
+"doc://AuthFoundation/documentation/AuthFoundation/StandardAuthenticationContext": {
+  "abstract" : [
+    {
+      "text" : "Common ",
+      "type" : "text"
+    },
+    {
+      "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/AuthenticationContext",
+      "isActive" : true,
+      "type" : "reference"
+    },
+    {
+      "text" : " implementation for common or generic implementations of ",
+      "type" : "text"
+    },
+    {
+      "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/AuthenticationFlow",
+      "isActive" : true,
+      "type" : "reference"
+    },
+    {
+      "text" : ".",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "struct"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "StandardAuthenticationContext"
+    }
+  ],
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/StandardAuthenticationContext",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "StandardAuthenticationContext"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "StandardAuthenticationContext",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/standardauthenticationcontext"
 },
 "doc://AuthFoundation/documentation/AuthFoundation/Swift": {
   "abstract" : [

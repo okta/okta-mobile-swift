@@ -232,9 +232,8 @@
               "type" : "text"
             },
             {
-              "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/APIResponse\/RateLimit",
-              "isActive" : true,
-              "type" : "reference"
+              "code" : "APIResponse\/APIRateLimit",
+              "type" : "codeVoice"
             },
             {
               "text" : ", associated links (e.g. next, previous, and current pagination results), and information about the request ID (which can be used for debugging purposes).",
@@ -519,38 +518,6 @@
   "title" : "api(client:willSend:)",
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/apiclientdelegate\/api(client:willsend:)-9cnzq"
-},
-"doc://AuthFoundation/documentation/AuthFoundation/APIResponse/RateLimit": {
-  "abstract" : [
-
-  ],
-  "deprecated" : true,
-  "fragments" : [
-    {
-      "kind" : "keyword",
-      "text" : "typealias"
-    },
-    {
-      "kind" : "text",
-      "text" : " "
-    },
-    {
-      "kind" : "identifier",
-      "text" : "RateLimit"
-    }
-  ],
-  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/APIResponse\/RateLimit",
-  "kind" : "symbol",
-  "navigatorTitle" : [
-    {
-      "kind" : "identifier",
-      "text" : "RateLimit"
-    }
-  ],
-  "role" : "symbol",
-  "title" : "APIResponse.RateLimit",
-  "type" : "topic",
-  "url" : "\/documentation\/authfoundation\/apiresponse\/ratelimit"
 },
 "doc://AuthFoundation/documentation/AuthFoundation/Credential": {
   "abstract" : [

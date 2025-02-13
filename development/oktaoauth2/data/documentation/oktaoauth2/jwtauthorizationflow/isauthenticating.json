@@ -9,7 +9,7 @@
       "type" : "text"
     },
     {
-      "identifier" : "doc:\/\/OktaOAuth2\/documentation\/OktaOAuth2\/JWTAuthorizationFlow\/init(issuer:clientId:scopes:)",
+      "identifier" : "doc:\/\/OktaOAuth2\/documentation\/OktaOAuth2\/JWTAuthorizationFlow\/init(issuerURL:clientId:scope:additionalParameters:)",
       "isActive" : true,
       "type" : "reference"
     }
@@ -190,7 +190,7 @@
   "type" : "topic",
   "url" : "\/documentation\/oktaoauth2\/jwtauthorizationflow"
 },
-"doc://OktaOAuth2/documentation/OktaOAuth2/JWTAuthorizationFlow/init(issuer:clientId:scopes:)": {
+"doc://OktaOAuth2/documentation/OktaOAuth2/JWTAuthorizationFlow/init(issuerURL:clientId:scope:additionalParameters:)": {
   "abstract" : [
     {
       "text" : "Convenience initializer to construct an authentication flow from variables.",
@@ -216,7 +216,7 @@
     },
     {
       "kind" : "externalParam",
-      "text" : "issuer"
+      "text" : "issuerURL"
     },
     {
       "kind" : "text",
@@ -250,7 +250,7 @@
     },
     {
       "kind" : "externalParam",
-      "text" : "scopes"
+      "text" : "scope"
     },
     {
       "kind" : "text",
@@ -263,15 +263,41 @@
     },
     {
       "kind" : "text",
-      "text" : ")"
+      "text" : ", "
+    },
+    {
+      "kind" : "externalParam",
+      "text" : "additionalParameters"
+    },
+    {
+      "kind" : "text",
+      "text" : ": ["
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:SS",
+      "text" : "String"
+    },
+    {
+      "kind" : "text",
+      "text" : " : any "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:14AuthFoundation18APIRequestArgumentP",
+      "text" : "APIRequestArgument"
+    },
+    {
+      "kind" : "text",
+      "text" : "]?)"
     }
   ],
-  "identifier" : "doc:\/\/OktaOAuth2\/documentation\/OktaOAuth2\/JWTAuthorizationFlow\/init(issuer:clientId:scopes:)",
+  "identifier" : "doc:\/\/OktaOAuth2\/documentation\/OktaOAuth2\/JWTAuthorizationFlow\/init(issuerURL:clientId:scope:additionalParameters:)",
   "kind" : "symbol",
   "role" : "symbol",
-  "title" : "init(issuer:clientId:scopes:)",
+  "title" : "init(issuerURL:clientId:scope:additionalParameters:)",
   "type" : "topic",
-  "url" : "\/documentation\/oktaoauth2\/jwtauthorizationflow\/init(issuer:clientid:scopes:)"
+  "url" : "\/documentation\/oktaoauth2\/jwtauthorizationflow\/init(issuerurl:clientid:scope:additionalparameters:)"
 },
 "doc://OktaOAuth2/documentation/OktaOAuth2/JWTAuthorizationFlow/isAuthenticating": {
   "abstract" : [
@@ -284,7 +310,7 @@
       "type" : "text"
     },
     {
-      "identifier" : "doc:\/\/OktaOAuth2\/documentation\/OktaOAuth2\/JWTAuthorizationFlow\/init(issuer:clientId:scopes:)",
+      "identifier" : "doc:\/\/OktaOAuth2\/documentation\/OktaOAuth2\/JWTAuthorizationFlow\/init(issuerURL:clientId:scope:additionalParameters:)",
       "isActive" : true,
       "type" : "reference"
     }

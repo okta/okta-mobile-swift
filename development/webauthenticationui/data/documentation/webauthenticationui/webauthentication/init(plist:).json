@@ -171,8 +171,8 @@
       "generated" : true,
       "identifiers" : [
         "doc:\/\/WebAuthenticationUI\/documentation\/WebAuthenticationUI\/WebAuthentication\/init()",
-        "doc:\/\/WebAuthenticationUI\/documentation\/WebAuthenticationUI\/WebAuthentication\/init(issuer:clientId:scopes:redirectUri:logoutRedirectUri:additionalParameters:)",
-        "doc:\/\/WebAuthenticationUI\/documentation\/WebAuthenticationUI\/WebAuthentication\/init(loginFlow:logoutFlow:context:)"
+        "doc:\/\/WebAuthenticationUI\/documentation\/WebAuthenticationUI\/WebAuthentication\/init(issuerURL:clientId:scope:redirectUri:logoutRedirectUri:additionalParameters:)",
+        "doc:\/\/WebAuthenticationUI\/documentation\/WebAuthenticationUI\/WebAuthentication\/init(loginFlow:logoutFlow:)"
       ],
       "title" : "Initializers"
     }
@@ -283,7 +283,7 @@
   "type" : "topic",
   "url" : "\/documentation\/webauthenticationui\/webauthentication\/init()"
 },
-"doc://WebAuthenticationUI/documentation/WebAuthenticationUI/WebAuthentication/init(issuer:clientId:scopes:redirectUri:logoutRedirectUri:additionalParameters:)": {
+"doc://WebAuthenticationUI/documentation/WebAuthenticationUI/WebAuthentication/init(issuerURL:clientId:scope:redirectUri:logoutRedirectUri:additionalParameters:)": {
   "abstract" : [
     {
       "text" : "Initializes a web authentication session using the supplied client credentials.",
@@ -309,7 +309,7 @@
     },
     {
       "kind" : "externalParam",
-      "text" : "issuer"
+      "text" : "issuerURL"
     },
     {
       "kind" : "text",
@@ -343,7 +343,7 @@
     },
     {
       "kind" : "externalParam",
-      "text" : "scopes"
+      "text" : "scope"
     },
     {
       "kind" : "text",
@@ -416,33 +416,28 @@
     },
     {
       "kind" : "text",
-      "text" : "]?)"
+      "text" : "]?) "
+    },
+    {
+      "kind" : "keyword",
+      "text" : "throws"
     }
   ],
-  "identifier" : "doc:\/\/WebAuthenticationUI\/documentation\/WebAuthenticationUI\/WebAuthentication\/init(issuer:clientId:scopes:redirectUri:logoutRedirectUri:additionalParameters:)",
+  "identifier" : "doc:\/\/WebAuthenticationUI\/documentation\/WebAuthenticationUI\/WebAuthentication\/init(issuerURL:clientId:scope:redirectUri:logoutRedirectUri:additionalParameters:)",
   "kind" : "symbol",
   "role" : "symbol",
-  "title" : "init(issuer:clientId:scopes:redirectUri:logoutRedirectUri:additionalParameters:)",
+  "title" : "init(issuerURL:clientId:scope:redirectUri:logoutRedirectUri:additionalParameters:)",
   "type" : "topic",
-  "url" : "\/documentation\/webauthenticationui\/webauthentication\/init(issuer:clientid:scopes:redirecturi:logoutredirecturi:additionalparameters:)"
+  "url" : "\/documentation\/webauthenticationui\/webauthentication\/init(issuerurl:clientid:scope:redirecturi:logoutredirecturi:additionalparameters:)"
 },
-"doc://WebAuthenticationUI/documentation/WebAuthenticationUI/WebAuthentication/init(loginFlow:logoutFlow:context:)": {
+"doc://WebAuthenticationUI/documentation/WebAuthenticationUI/WebAuthentication/init(loginFlow:logoutFlow:)": {
   "abstract" : [
     {
       "text" : "Initializes a web authentication session using the supplied AuthorizationCodeFlow and optional context.",
       "type" : "text"
     }
   ],
-  "deprecated" : true,
   "fragments" : [
-    {
-      "kind" : "keyword",
-      "text" : "convenience"
-    },
-    {
-      "kind" : "text",
-      "text" : " "
-    },
     {
       "kind" : "identifier",
       "text" : "init"
@@ -483,41 +478,15 @@
     },
     {
       "kind" : "text",
-      "text" : "?, "
-    },
-    {
-      "kind" : "externalParam",
-      "text" : "context"
-    },
-    {
-      "kind" : "text",
-      "text" : ": "
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:10OktaOAuth221AuthorizationCodeFlowC",
-      "text" : "AuthorizationCodeFlow"
-    },
-    {
-      "kind" : "text",
-      "text" : "."
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:10OktaOAuth221AuthorizationCodeFlowC7ContextV",
-      "text" : "Context"
-    },
-    {
-      "kind" : "text",
       "text" : "?)"
     }
   ],
-  "identifier" : "doc:\/\/WebAuthenticationUI\/documentation\/WebAuthenticationUI\/WebAuthentication\/init(loginFlow:logoutFlow:context:)",
+  "identifier" : "doc:\/\/WebAuthenticationUI\/documentation\/WebAuthenticationUI\/WebAuthentication\/init(loginFlow:logoutFlow:)",
   "kind" : "symbol",
   "role" : "symbol",
-  "title" : "init(loginFlow:logoutFlow:context:)",
+  "title" : "init(loginFlow:logoutFlow:)",
   "type" : "topic",
-  "url" : "\/documentation\/webauthenticationui\/webauthentication\/init(loginflow:logoutflow:context:)"
+  "url" : "\/documentation\/webauthenticationui\/webauthentication\/init(loginflow:logoutflow:)"
 },
 "doc://WebAuthenticationUI/documentation/WebAuthenticationUI/WebAuthentication/init(plist:)": {
   "abstract" : [
