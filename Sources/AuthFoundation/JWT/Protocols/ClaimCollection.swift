@@ -144,6 +144,7 @@ extension ClaimCollection: RawRepresentable {
     ///
     /// It is recommended that this property be used when representing this list of claims when sending the value to a server.
     public var rawValue: RawValue {
+        // swiftlint:disable force_cast
         if wrappedValue.isNil {
             return (nil as String?) as! RawValue
         }
@@ -152,6 +153,7 @@ extension ClaimCollection: RawRepresentable {
             .array
             .compactMap { $0.stringValue }
             .joined(separator: " ") as! RawValue
+        // swiftlint:enable force_cast
     }
     
     /// Initializer accepting a whitespace-separated string representation of the value.
@@ -180,6 +182,7 @@ extension ClaimCollection where Container.RawValue == String {
 extension ClaimCollection {
     public init(rawValue: Container.RawValue) {
         if Container.self is ExpressibleByNilLiteral {
+            // swiftlint:disable:next force_unwrapping
             self.wrappedValue = Optional<Container>.none!
         } else {
             self.wrappedValue = Container(container: [])
