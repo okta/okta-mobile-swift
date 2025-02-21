@@ -71,22 +71,7 @@ public class SessionTokenFlow: AuthenticationFlow {
     @inlinable
     public convenience init(issuerURL: URL,
                             clientId: String,
-                            scope: [String],
-                            redirectUri: URL,
-                            additionalParameters: [String: APIRequestArgument]? = nil) throws
-    {
-        try self.init(client: OAuth2Client(issuerURL: issuerURL,
-                                           clientId: clientId,
-                                           scope: scope,
-                                           redirectUri: redirectUri),
-                      additionalParameters: additionalParameters)
-    }
-
-    @_documentation(visibility: private)
-    @inlinable
-    public convenience init(issuerURL: URL,
-                            clientId: String,
-                            scope: String,
+                            scope: some WhitespaceSeparated,
                             redirectUri: URL,
                             additionalParameters: [String: APIRequestArgument]? = nil) throws
     {

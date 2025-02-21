@@ -61,7 +61,7 @@ public extension HasClaims {
     func value<T: ClaimConvertable>(for key: String) throws -> [T] {
         if T.self == String.self,
            let value = payload[key] as? String,
-           let result = value.components(separatedBy: .whitespaces) as? [T]
+           let result = value.whitespaceSeparated as? [T]
         {
             return result
         }
@@ -92,7 +92,7 @@ public extension HasClaims {
         if T.self == String.self,
            let value = payload[key] as? String
         {
-            return value.components(separatedBy: .whitespaces) as? [T]
+            return value.whitespaceSeparated as? [T]
         }
         
         let array = payload[key] as? [ClaimConvertable]

@@ -82,6 +82,28 @@ extension Optional: ClaimCollectionContainer where Wrapped: ClaimCollectionConta
     }
 }
 
+/// Represents a type which can contain a whitespace-separated array of string values.
+///
+/// This is used in a variety of function arguments to simplify the processing of `String` and `[String]` values.
+@_documentation(visibility: internal)
+public protocol WhitespaceSeparated {
+    var whitespaceSeparated: [String] { get }
+}
+
+@_documentation(visibility: internal)
+extension String: WhitespaceSeparated {
+    @inlinable public var whitespaceSeparated: [String] {
+        components(separatedBy: .whitespaces)
+    }
+}
+
+@_documentation(visibility: internal)
+extension Array: WhitespaceSeparated where Element == String {
+    @inlinable public var whitespaceSeparated: [String] {
+        self
+    }
+}
+
 /// Indicates a special type of claim whose value is interchangable between a whitespace-separated value, or an array of values.
 ///
 /// This is used to simplify interactions with Claim values whose raw representation is the claim's string value, separated by whitespace. This enables the conversion between the string representation, as sent to/received from the server, and the array of claims which it represents.

@@ -83,7 +83,7 @@ extension OAuth2Client {
                   !clientId.isEmpty,
                   let issuer = dict.value("issuer", or: "issuer_url"),
                   let issuerUrl = URL(string: issuer),
-                  let scope = dict.value("scope", or: "scopes")?.components(separatedBy: .whitespaces),
+                  let scope = dict.value("scope", or: "scopes")?.whitespaceSeparated,
                   !scope.isEmpty
             else {
                 throw PropertyListConfigurationError.missingConfigurationValues

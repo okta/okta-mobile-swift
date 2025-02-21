@@ -100,9 +100,9 @@ public class DeviceAuthorizationFlow: AuthenticationFlow {
                             scope: ClaimCollection<[String]>,
                             additionalParameters: [String: any APIRequestArgument]? = nil)
     {
-        self.init(client: .init(issuerURL: issuerURL,
-                                clientId: clientId,
-                                scope: scope),
+        self.init(client: OAuth2Client(issuerURL: issuerURL,
+                                       clientId: clientId,
+                                       scope: scope),
                   additionalParameters: additionalParameters)
     }
     
@@ -110,28 +110,15 @@ public class DeviceAuthorizationFlow: AuthenticationFlow {
     @_documentation(visibility: private)
     public convenience init(issuerURL: URL,
                             clientId: String,
-                            scope: [String],
+                            scope: some WhitespaceSeparated,
                             additionalParameters: [String: any APIRequestArgument]? = nil)
     {
-        self.init(client: OAuth2Client(OAuth2Client.Configuration(issuerURL: issuerURL,
-                                                                  clientId: clientId,
-                                                                  scope: scope)),
+        self.init(client: OAuth2Client(issuerURL: issuerURL,
+                                       clientId: clientId,
+                                       scope: scope),
                   additionalParameters: additionalParameters)
     }
     
-    @inlinable
-    @_documentation(visibility: private)
-    public convenience init(issuerURL: URL,
-                            clientId: String,
-                            scope: String,
-                            additionalParameters: [String: any APIRequestArgument]? = nil)
-    {
-        self.init(client: OAuth2Client(OAuth2Client.Configuration(issuerURL: issuerURL,
-                                                                  clientId: clientId,
-                                                                  scope: scope)),
-                  additionalParameters: additionalParameters)
-    }
-
     /// Initializer to construct an authentication flow from a pre-defined configuration and client.
     /// - Parameters:
     ///   - client: The `OAuth2Client` to use with this flow.

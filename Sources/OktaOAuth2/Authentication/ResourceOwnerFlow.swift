@@ -67,7 +67,7 @@ public class ResourceOwnerFlow: AuthenticationFlow {
     @inlinable
     public convenience init(issuerURL: URL,
                             clientId: String,
-                            scope: [String],
+                            scope: some WhitespaceSeparated,
                             additionalParameters: [String: APIRequestArgument]? = nil)
     {
         self.init(client: OAuth2Client(issuerURL: issuerURL,
@@ -76,19 +76,6 @@ public class ResourceOwnerFlow: AuthenticationFlow {
                   additionalParameters: additionalParameters)
     }
 
-    @_documentation(visibility: private)
-    @inlinable
-    public convenience init(issuerURL: URL,
-                            clientId: String,
-                            scope: String,
-                            additionalParameters: [String: APIRequestArgument]? = nil)
-    {
-        self.init(client: OAuth2Client(issuerURL: issuerURL,
-                                       clientId: clientId,
-                                       scope: scope),
-                  additionalParameters: additionalParameters)
-    }
-    
     /// Initializer that uses the predefined OAuth2Client
     /// - Parameters:
     ///   - client: ``OAuth2Client`` client instance to authenticate with.

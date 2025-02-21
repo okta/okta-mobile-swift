@@ -20,7 +20,7 @@ extension OAuth2Client.Configuration {
     public init(issuerURL: URL,
                 discoveryURL: URL? = nil,
                 clientId: String,
-                scope: [String],
+                scope: some WhitespaceSeparated,
                 redirectUri: URL? = nil,
                 logoutRedirectUri: URL? = nil,
                 authentication: OAuth2Client.ClientAuthentication = .none)
@@ -28,26 +28,7 @@ extension OAuth2Client.Configuration {
         self.init(issuerURL: issuerURL,
                   discoveryURL: discoveryURL,
                   clientId: clientId,
-                  scope: .init(wrappedValue: scope),
-                  redirectUri: redirectUri,
-                  logoutRedirectUri: logoutRedirectUri,
-                  authentication: authentication)
-    }
-    
-    @_documentation(visibility: private)
-    @inlinable
-    public init(issuerURL: URL,
-                discoveryURL: URL? = nil,
-                clientId: String,
-                scope: String,
-                redirectUri: URL? = nil,
-                logoutRedirectUri: URL? = nil,
-                authentication: OAuth2Client.ClientAuthentication = .none)
-    {
-        self.init(issuerURL: issuerURL,
-                  discoveryURL: discoveryURL,
-                  clientId: clientId,
-                  scope: .init(rawValue: scope),
+                  scope: .init(wrappedValue: scope.whitespaceSeparated),
                   redirectUri: redirectUri,
                   logoutRedirectUri: logoutRedirectUri,
                   authentication: authentication)
@@ -58,7 +39,7 @@ extension OAuth2Client.Configuration {
     public init(domain: String,
                 discoveryURL: URL? = nil,
                 clientId: String,
-                scope: [String],
+                scope: some WhitespaceSeparated,
                 redirectUri: String? = nil,
                 logoutRedirectUri: String? = nil,
                 authentication: OAuth2Client.ClientAuthentication = .none) throws
@@ -66,26 +47,7 @@ extension OAuth2Client.Configuration {
         self.init(issuerURL: try URL(requiredString: "https://\(domain)"),
                   discoveryURL: discoveryURL,
                   clientId: clientId,
-                  scope: .init(wrappedValue: scope),
-                  redirectUri: try URL(string: redirectUri),
-                  logoutRedirectUri: try URL(string: logoutRedirectUri),
-                  authentication: authentication)
-    }
-
-    @_documentation(visibility: private)
-    @inlinable
-    public init(domain: String,
-                discoveryURL: URL? = nil,
-                clientId: String,
-                scope: String,
-                redirectUri: String? = nil,
-                logoutRedirectUri: String? = nil,
-                authentication: OAuth2Client.ClientAuthentication = .none) throws
-    {
-        self.init(issuerURL: try URL(requiredString: "https://\(domain)"),
-                  discoveryURL: discoveryURL,
-                  clientId: clientId,
-                  scope: .init(rawValue: scope),
+                  scope: .init(wrappedValue: scope.whitespaceSeparated),
                   redirectUri: try URL(string: redirectUri),
                   logoutRedirectUri: try URL(string: logoutRedirectUri),
                   authentication: authentication)

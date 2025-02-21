@@ -342,9 +342,24 @@ public class DirectAuthenticationFlow: AuthenticationFlow {
                             supportedGrants grantTypes: [GrantType] = .directAuth,
                             additionalParameters: [String: any APIRequestArgument]? = nil)
     {
-        self.init(client: .init(issuerURL: issuerURL,
-                                clientId: clientId,
-                                scope: scope),
+        self.init(client: OAuth2Client(issuerURL: issuerURL,
+                                       clientId: clientId,
+                                       scope: scope),
+                  supportedGrants: grantTypes,
+                  additionalParameters: additionalParameters)
+    }
+
+    @_documentation(visibility: private)
+    @inlinable
+    public convenience init(issuerURL: URL,
+                            clientId: String,
+                            scope: some WhitespaceSeparated,
+                            supportedGrants grantTypes: [GrantType] = .directAuth,
+                            additionalParameters: [String: any APIRequestArgument]? = nil)
+    {
+        self.init(client: OAuth2Client(issuerURL: issuerURL,
+                                       clientId: clientId,
+                                       scope: scope),
                   supportedGrants: grantTypes,
                   additionalParameters: additionalParameters)
     }

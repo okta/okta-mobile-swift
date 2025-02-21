@@ -87,20 +87,7 @@ public class TokenExchangeFlow: AuthenticationFlow {
     @inlinable
     public convenience init(issuerURL: URL,
                             clientId: String,
-                            scope: [String],
-                            additionalParameters: [String: APIRequestArgument]? = nil)
-    {
-        self.init(client: OAuth2Client(issuerURL: issuerURL,
-                                       clientId: clientId,
-                                       scope: scope),
-                  additionalParameters: additionalParameters)
-    }
-
-    @_documentation(visibility: private)
-    @inlinable
-    public convenience init(issuerURL: URL,
-                            clientId: String,
-                            scope: String,
+                            scope: some WhitespaceSeparated,
                             additionalParameters: [String: APIRequestArgument]? = nil)
     {
         self.init(client: OAuth2Client(issuerURL: issuerURL,

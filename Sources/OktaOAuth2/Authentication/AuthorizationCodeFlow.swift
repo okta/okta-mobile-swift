@@ -116,10 +116,10 @@ public class AuthorizationCodeFlow: AuthenticationFlow {
                             redirectUri: URL,
                             additionalParameters: [String: any APIRequestArgument]? = nil)
     {
-        self.init(verifiedClient: .init(issuerURL: issuerURL,
-                                        clientId: clientId,
-                                        scope: scope,
-                                        redirectUri: redirectUri),
+        self.init(verifiedClient: OAuth2Client(issuerURL: issuerURL,
+                                               clientId: clientId,
+                                               scope: scope,
+                                               redirectUri: redirectUri),
                   additionalParameters: additionalParameters)
     }
     
@@ -127,29 +127,14 @@ public class AuthorizationCodeFlow: AuthenticationFlow {
     @_documentation(visibility: private)
     public convenience init(issuerURL: URL,
                             clientId: String,
-                            scope: [String],
+                            scope: some WhitespaceSeparated,
                             redirectUri: URL,
                             additionalParameters: [String: any APIRequestArgument]? = nil)
     {
-        self.init(verifiedClient: .init(issuerURL: issuerURL,
-                                        clientId: clientId,
-                                        scope: .init(wrappedValue: scope),
-                                        redirectUri: redirectUri),
-                  additionalParameters: additionalParameters)
-    }
-
-    @inlinable
-    @_documentation(visibility: private)
-    public convenience init(issuerURL: URL,
-                            clientId: String,
-                            scope: String,
-                            redirectUri: URL,
-                            additionalParameters: [String: any APIRequestArgument]? = nil)
-    {
-        self.init(verifiedClient: .init(issuerURL: issuerURL,
-                                        clientId: clientId,
-                                        scope: .init(wrappedValue: scope),
-                                        redirectUri: redirectUri),
+        self.init(verifiedClient: OAuth2Client(issuerURL: issuerURL,
+                                               clientId: clientId,
+                                               scope: .init(wrappedValue: scope.whitespaceSeparated),
+                                               redirectUri: redirectUri),
                   additionalParameters: additionalParameters)
     }
 

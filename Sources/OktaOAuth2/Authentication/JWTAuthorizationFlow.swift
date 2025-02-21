@@ -54,9 +54,9 @@ public class JWTAuthorizationFlow: AuthenticationFlow {
                             scope: ClaimCollection<[String]>,
                             additionalParameters: [String: any APIRequestArgument]? = nil)
     {
-        self.init(client: OAuth2Client(issuerURL: issuerURL,
-                                       clientId: clientId,
-                                       scope: scope),
+        self.init(client: .init(issuerURL: issuerURL,
+                                clientId: clientId,
+                                scope: scope),
                   additionalParameters: additionalParameters)
     }
 
@@ -64,25 +64,12 @@ public class JWTAuthorizationFlow: AuthenticationFlow {
     @inlinable
     public convenience init(issuerURL: URL,
                             clientId: String,
-                            scope: [String],
+                            scope: some WhitespaceSeparated,
                             additionalParameters: [String: any APIRequestArgument]? = nil)
     {
-        self.init(issuerURL: issuerURL,
-                  clientId: clientId,
-                  scope: .init(wrappedValue: scope),
-                  additionalParameters: additionalParameters)
-    }
-    
-    @_documentation(visibility: private)
-    @inlinable
-    public convenience init(issuerURL: URL,
-                            clientId: String,
-                            scope: String,
-                            additionalParameters: [String: any APIRequestArgument]? = nil)
-    {
-        self.init(issuerURL: issuerURL,
-                  clientId: clientId,
-                  scope: .init(rawValue: scope),
+        self.init(client: .init(issuerURL: issuerURL,
+                                clientId: clientId,
+                                scope: scope),
                   additionalParameters: additionalParameters)
     }
     
