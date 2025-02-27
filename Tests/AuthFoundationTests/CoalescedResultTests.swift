@@ -13,6 +13,19 @@
 import XCTest
 @testable import AuthFoundation
 
+fileprivate actor CoalescedResultCounter {
+    var indexes = [Int]()
+    var invokedCount = 0
+    
+    func add(_ index: Int) {
+        indexes.append(index)
+    }
+    
+    func invoke() {
+        invokedCount += 1
+    }
+}
+
 final class CoalescedResultTests: XCTestCase {
     struct Item: Equatable {
         static func == (lhs: CoalescedResultTests.Item, rhs: CoalescedResultTests.Item) -> Bool {
@@ -23,28 +36,30 @@ final class CoalescedResultTests: XCTestCase {
         let index: Int
     }
     
-    func testMultipleResults() throws {
+    func testMultipleResults() async throws {
         let coalesce = CoalescedResult<String>()
+        let counter = CoalescedResultCounter()
         
-        var results = [Item]()
-        
-        for index in 1...5 {
-            coalesce.add { result in
-                results.append(Item(result: result, index: index))
+        try await withThrowingTaskGroup(of: String.self) { group in
+            for index in 1...5 {
+                group.addTask {
+                    let result = try await coalesce.perform {
+                        await counter.invoke()
+                        return "Success!"
+                    }
+                    await counter.add(index)
+                    return result
+                }
+            }
+            
+            for try await result in group {
+                XCTAssertEqual(result, "Success!")
             }
         }
         
-        coalesce.start { completion in
-            completion("Success!")
-        }
-        
-        XCTAssertEqual(results.count, 5)
-        XCTAssertEqual(results, [
-            Item(result: "Success!", index: 1),
-            Item(result: "Success!", index: 2),
-            Item(result: "Success!", index: 3),
-            Item(result: "Success!", index: 4),
-            Item(result: "Success!", index: 5)
-        ])
+        let indexes = await counter.indexes
+        let invokedCount = await counter.invokedCount
+        XCTAssertEqual(indexes.sorted(), [1, 2, 3, 4, 5])
+        XCTAssertEqual(invokedCount, 1)
     }
 }

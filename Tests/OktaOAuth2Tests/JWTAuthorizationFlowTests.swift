@@ -148,8 +148,6 @@ final class JWTAuthorizationFlowTests: XCTestCase {
         XCTAssertEqual(request.bodyString, "assertion=\(JWT.mockIDToken)&client_id=clientId&grant_type=urn:ietf:params:oauth:grant-type:jwt-bearer&scope=profile+openid")
     }
     
-#if !os(Linux)
-    @available(iOS 13.0, tvOS 13.0, macOS 10.15, watchOS 6, *)
     func testAsyncAuthenticationSucceeded() async throws {
         XCTAssertFalse(flow.isAuthenticating)
         
@@ -166,5 +164,4 @@ final class JWTAuthorizationFlowTests: XCTestCase {
         XCTAssertEqual(request.url?.absoluteString, "https://example.okta.com/oauth2/v1/token")
         XCTAssertEqual(request.bodyString, "assertion=\(JWT.mockIDToken)&client_id=clientId&grant_type=urn:ietf:params:oauth:grant-type:jwt-bearer&scope=profile+openid")
     }
-#endif
 }

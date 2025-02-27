@@ -17,21 +17,11 @@ import FoundationNetworking
 #endif
 
 /// Protocol defining the interface for interacting with a URLSession. This is used to provide mocking for unit tests.
+@_documentation(visibility: internal)
 public protocol URLSessionProtocol {
-    typealias DataTaskResult = (Data?, HTTPURLResponse?, Error?) -> Void
-    func dataTaskWithRequest(_ request: URLRequest, completionHandler: @escaping (Data?, URLResponse?, Error?) -> Void) -> URLSessionDataTaskProtocol
+    func data(for request: URLRequest) async throws -> (Data, URLResponse)
     var configuration: URLSessionConfiguration { get }
 }
 
-/// Protocol defining the interface for interacting with a URLSession. This is used to provide mocking for unit tests.
-public protocol URLSessionDataTaskProtocol {
-    func resume()
-}
-
-extension URLSession: URLSessionProtocol {
-    @_documentation(visibility: internal)
-    public func dataTaskWithRequest(_ request: URLRequest, completionHandler: @escaping (Data?, URLResponse?, Error?) -> Void) -> URLSessionDataTaskProtocol {
-        dataTask(with: request, completionHandler: completionHandler)
-    }
-}
-extension URLSessionDataTask: URLSessionDataTaskProtocol {}
+@_documentation(visibility: internal)
+extension URLSession: URLSessionProtocol {}

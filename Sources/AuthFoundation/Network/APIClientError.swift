@@ -48,6 +48,17 @@ public enum APIClientError: Error {
     case unknown
 }
 
+extension APIClientError {
+    @_documentation(visibility: internal)
+    public init(_ error: Error) {
+        if let error = error as? APIClientError {
+            self = error
+        } else {
+            self = .serverError(error)
+        }
+    }
+}
+
 extension APIClientError: LocalizedError {
     public var errorDescription: String? {
         switch self {

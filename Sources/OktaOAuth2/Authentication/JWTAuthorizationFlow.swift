@@ -93,43 +93,27 @@ public class JWTAuthorizationFlow: AuthenticationFlow {
     /// - Parameters:
     ///   - assertion: JWT Assertion
     ///   - context: Context used to customize the flow.
-    ///   - completion: Completion invoked when a response is received.
-    public func start(with assertion: JWT,
-                      context: Context = .init(),
-                      completion: @escaping (Result<Token, OAuth2Error>) -> Void)
+    /// - Returns: The token resulting from signing in.
+    public func start(with assertion: JWT, context: Context = .init()) async throws -> Token
     {
         isAuthenticating = true
         self.context = context
-
-        let clientConfiguration = client.configuration
-        let additionalParameters = additionalParameters
-
-        client.openIdConfiguration { result in
-            switch result {
-            case .success(let openIdConfiguration):
-                let request = TokenRequest(openIdConfiguration: openIdConfiguration,
-                                           clientConfiguration: clientConfiguration,
-                                           additionalParameters: additionalParameters,
-                                           context: context,
-                                           assertion: assertion)
-                self.client.exchange(token: request) { result in
-                    switch result {
-                    case .failure(let error):
-                        self.delegateCollection.invoke { $0.authentication(flow: self, received: .network(error: error)) }
-                        completion(.failure(.network(error: error)))
-                    case .success(let response):
-                        self.delegateCollection.invoke { $0.authentication(flow: self, received: response.result) }
-                        completion(.success(response.result))
-                    }
-                    
-                    self.finished()
-                }
-
-            case .failure(let error):
-                self.delegateCollection.invoke { $0.authentication(flow: self, received: error) }
-                completion(.failure(error))
-                self.finished()
-            }
+        
+        do {
+            let request = TokenRequest(openIdConfiguration: try await client.openIdConfiguration(),
+                                       clientConfiguration: client.configuration,
+                                       additionalParameters: additionalParameters,
+                                       context: context,
+                                       assertion: assertion)
+            let response = try await client.exchange(token: request)
+            
+            delegateCollection.invoke { $0.authentication(flow: self, received: response.result) }
+            finished()
+            return response.result
+        } catch {
+            delegateCollection.invoke { $0.authentication(flow: self, received: OAuth2Error(error)) }
+            finished()
+            throw error
         }
     }
     
@@ -147,18 +131,21 @@ public class JWTAuthorizationFlow: AuthenticationFlow {
     public let delegateCollection = DelegateCollection<AuthenticationDelegate>()
 }
 
-@available(iOS 13.0, tvOS 13.0, macOS 10.15, watchOS 6, *)
 extension JWTAuthorizationFlow {
-    /// Asynchronously authenticates with a JWT bearer assertion.
-    /// 
+    /// Authenticates using the supplied JWT bearer assertion.
     /// - Parameters:
     ///   - assertion: JWT Assertion
     ///   - context: Context used to customize the flow.
-    /// - Returns: The token resulting from signing in.
-    public func start(with assertion: JWT, context: Context = .init()) async throws -> Token {
-        try await withCheckedThrowingContinuation { continuation in
-            start(with: assertion, context: context) { result in
-                continuation.resume(with: result)
+    ///   - completion: Completion invoked when a response is received.
+    public func start(with assertion: JWT,
+                      context: Context = .init(),
+                      completion: @escaping (Result<Token, OAuth2Error>) -> Void)
+    {
+        Task {
+            do {
+                completion(.success(try await start(with: assertion, context: context)))
+            } catch {
+                completion(.failure(OAuth2Error(error)))
             }
         }
     }
