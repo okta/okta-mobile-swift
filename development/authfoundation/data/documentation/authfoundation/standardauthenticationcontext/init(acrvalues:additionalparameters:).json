@@ -19,7 +19,7 @@
   },
   "kind" : "symbol",
   "metadata" : {
-    "externalID" : "s:14AuthFoundation29StandardAuthenticationContextV9acrValues20additionalParametersACSaySSGSg_SDySSAA18APIRequestArgument_pGSgtcfc",
+    "externalID" : "s:14AuthFoundation29StandardAuthenticationContextV9acrValues20additionalParametersAcA15ClaimCollectionVySaySSGSgG_SDySSAA18APIRequestArgument_pGSgtcfc",
     "fragments" : [
       {
         "kind" : "identifier",
@@ -35,7 +35,16 @@
       },
       {
         "kind" : "text",
-        "text" : ": ["
+        "text" : ": "
+      },
+      {
+        "kind" : "typeIdentifier",
+        "preciseIdentifier" : "s:14AuthFoundation15ClaimCollectionV",
+        "text" : "ClaimCollection"
+      },
+      {
+        "kind" : "text",
+        "text" : "<["
       },
       {
         "kind" : "typeIdentifier",
@@ -44,7 +53,7 @@
       },
       {
         "kind" : "text",
-        "text" : "]?, "
+        "text" : "]?>, "
       },
       {
         "kind" : "externalParam",
@@ -108,7 +117,17 @@
             },
             {
               "kind" : "text",
-              "text" : ": ["
+              "text" : ": "
+            },
+            {
+              "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/ClaimCollection",
+              "kind" : "typeIdentifier",
+              "preciseIdentifier" : "s:14AuthFoundation15ClaimCollectionV",
+              "text" : "ClaimCollection"
+            },
+            {
+              "kind" : "text",
+              "text" : "<["
             },
             {
               "kind" : "typeIdentifier",
@@ -117,7 +136,7 @@
             },
             {
               "kind" : "text",
-              "text" : "]? = nil, "
+              "text" : "]?> = nil, "
             },
             {
               "kind" : "externalParam",
@@ -501,6 +520,40 @@
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/authenticationflow"
 },
+"doc://AuthFoundation/documentation/AuthFoundation/ClaimCollection": {
+  "abstract" : [
+    {
+      "text" : "Indicates a special type of claim whose value is interchangable between a whitespace-separated value, or an array of values.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "struct"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "ClaimCollection"
+    }
+  ],
+  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/ClaimCollection",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "ClaimCollection"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "ClaimCollection",
+  "type" : "topic",
+  "url" : "\/documentation\/authfoundation\/claimcollection"
+},
 "doc://AuthFoundation/documentation/AuthFoundation/StandardAuthenticationContext": {
   "abstract" : [
     {
@@ -575,7 +628,16 @@
     },
     {
       "kind" : "text",
-      "text" : ": ["
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:14AuthFoundation15ClaimCollectionV",
+      "text" : "ClaimCollection"
+    },
+    {
+      "kind" : "text",
+      "text" : "<["
     },
     {
       "kind" : "typeIdentifier",
@@ -584,7 +646,7 @@
     },
     {
       "kind" : "text",
-      "text" : "]?, "
+      "text" : "]?>, "
     },
     {
       "kind" : "externalParam",

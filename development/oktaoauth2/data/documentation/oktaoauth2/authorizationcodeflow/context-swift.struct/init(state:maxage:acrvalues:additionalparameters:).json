@@ -25,7 +25,7 @@
   },
   "kind" : "symbol",
   "metadata" : {
-    "externalID" : "s:10OktaOAuth221AuthorizationCodeFlowC7ContextV5state6maxAge9acrValues20additionalParametersAESSSg_SdSgSaySSGSgSDySS14AuthFoundation18APIRequestArgument_pGSgtcfc",
+    "externalID" : "s:10OktaOAuth221AuthorizationCodeFlowC7ContextV5state6maxAge9acrValues20additionalParametersAESSSg_SdSg14AuthFoundation15ClaimCollectionVySaySSGSgGSDySSAL18APIRequestArgument_pGSgtcfc",
     "fragments" : [
       {
         "kind" : "identifier",
@@ -75,7 +75,16 @@
       },
       {
         "kind" : "text",
-        "text" : ": ["
+        "text" : ": "
+      },
+      {
+        "kind" : "typeIdentifier",
+        "preciseIdentifier" : "s:14AuthFoundation15ClaimCollectionV",
+        "text" : "ClaimCollection"
+      },
+      {
+        "kind" : "text",
+        "text" : "<["
       },
       {
         "kind" : "typeIdentifier",
@@ -84,7 +93,7 @@
       },
       {
         "kind" : "text",
-        "text" : "]?, "
+        "text" : "]?>, "
       },
       {
         "kind" : "externalParam",
@@ -182,7 +191,16 @@
             },
             {
               "kind" : "text",
-              "text" : ": ["
+              "text" : ": "
+            },
+            {
+              "kind" : "typeIdentifier",
+              "preciseIdentifier" : "s:14AuthFoundation15ClaimCollectionV",
+              "text" : "ClaimCollection"
+            },
+            {
+              "kind" : "text",
+              "text" : "<["
             },
             {
               "kind" : "typeIdentifier",
@@ -191,7 +209,7 @@
             },
             {
               "kind" : "text",
-              "text" : "]? = nil, "
+              "text" : "]?> = nil, "
             },
             {
               "kind" : "externalParam",
@@ -437,7 +455,16 @@
     },
     {
       "kind" : "text",
-      "text" : ": ["
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:14AuthFoundation15ClaimCollectionV",
+      "text" : "ClaimCollection"
+    },
+    {
+      "kind" : "text",
+      "text" : "<["
     },
     {
       "kind" : "typeIdentifier",
@@ -446,7 +473,7 @@
     },
     {
       "kind" : "text",
-      "text" : "]?, "
+      "text" : "]?>, "
     },
     {
       "kind" : "externalParam",

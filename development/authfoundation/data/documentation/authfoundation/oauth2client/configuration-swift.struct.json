@@ -135,7 +135,6 @@
   "topicSections" : [
     {
       "identifiers" : [
-        "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/OAuth2Client\/Configuration-swift.struct\/init(domain:clientId:scope:redirectUri:logoutRedirectUri:authentication:)",
         "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/OAuth2Client\/Configuration-swift.struct\/init(issuerURL:discoveryURL:clientId:scope:redirectUri:logoutRedirectUri:authentication:)"
       ],
       "title" : "Initializers"
@@ -465,145 +464,6 @@
   "type" : "topic",
   "url" : "\/documentation\/authfoundation\/oauth2client\/configuration-swift.struct\/discoveryurl"
 },
-"doc://AuthFoundation/documentation/AuthFoundation/OAuth2Client/Configuration-swift.struct/init(domain:clientId:scope:redirectUri:logoutRedirectUri:authentication:)": {
-  "abstract" : [
-    {
-      "text" : "Convenience initializer to create a client using a simple domain name.",
-      "type" : "text"
-    }
-  ],
-  "fragments" : [
-    {
-      "kind" : "identifier",
-      "text" : "init"
-    },
-    {
-      "kind" : "text",
-      "text" : "("
-    },
-    {
-      "kind" : "externalParam",
-      "text" : "domain"
-    },
-    {
-      "kind" : "text",
-      "text" : ": "
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:SS",
-      "text" : "String"
-    },
-    {
-      "kind" : "text",
-      "text" : ", "
-    },
-    {
-      "kind" : "externalParam",
-      "text" : "clientId"
-    },
-    {
-      "kind" : "text",
-      "text" : ": "
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:SS",
-      "text" : "String"
-    },
-    {
-      "kind" : "text",
-      "text" : ", "
-    },
-    {
-      "kind" : "externalParam",
-      "text" : "scope"
-    },
-    {
-      "kind" : "text",
-      "text" : ": "
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:SS",
-      "text" : "String"
-    },
-    {
-      "kind" : "text",
-      "text" : ", "
-    },
-    {
-      "kind" : "externalParam",
-      "text" : "redirectUri"
-    },
-    {
-      "kind" : "text",
-      "text" : ": "
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:SS",
-      "text" : "String"
-    },
-    {
-      "kind" : "text",
-      "text" : "?, "
-    },
-    {
-      "kind" : "externalParam",
-      "text" : "logoutRedirectUri"
-    },
-    {
-      "kind" : "text",
-      "text" : ": "
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:SS",
-      "text" : "String"
-    },
-    {
-      "kind" : "text",
-      "text" : "?, "
-    },
-    {
-      "kind" : "externalParam",
-      "text" : "authentication"
-    },
-    {
-      "kind" : "text",
-      "text" : ": "
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:14AuthFoundation12OAuth2ClientC",
-      "text" : "OAuth2Client"
-    },
-    {
-      "kind" : "text",
-      "text" : "."
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:14AuthFoundation12OAuth2ClientC0D14AuthenticationO",
-      "text" : "ClientAuthentication"
-    },
-    {
-      "kind" : "text",
-      "text" : ") "
-    },
-    {
-      "kind" : "keyword",
-      "text" : "throws"
-    }
-  ],
-  "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/OAuth2Client\/Configuration-swift.struct\/init(domain:clientId:scope:redirectUri:logoutRedirectUri:authentication:)",
-  "kind" : "symbol",
-  "role" : "symbol",
-  "title" : "init(domain:clientId:scope:redirectUri:logoutRedirectUri:authentication:)",
-  "type" : "topic",
-  "url" : "\/documentation\/authfoundation\/oauth2client\/configuration-swift.struct\/init(domain:clientid:scope:redirecturi:logoutredirecturi:authentication:)"
-},
 "doc://AuthFoundation/documentation/AuthFoundation/OAuth2Client/Configuration-swift.struct/init(issuerURL:discoveryURL:clientId:scope:redirectUri:logoutRedirectUri:authentication:)": {
   "abstract" : [
     {
@@ -681,12 +541,21 @@
     },
     {
       "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:14AuthFoundation15ClaimCollectionV",
+      "text" : "ClaimCollection"
+    },
+    {
+      "kind" : "text",
+      "text" : "<["
+    },
+    {
+      "kind" : "typeIdentifier",
       "preciseIdentifier" : "s:SS",
       "text" : "String"
     },
     {
       "kind" : "text",
-      "text" : ", "
+      "text" : "]>, "
     },
     {
       "kind" : "externalParam",
@@ -897,12 +766,16 @@
     },
     {
       "kind" : "text",
-      "text" : ": "
+      "text" : ": ["
     },
     {
       "kind" : "typeIdentifier",
       "preciseIdentifier" : "s:SS",
       "text" : "String"
+    },
+    {
+      "kind" : "text",
+      "text" : "]"
     }
   ],
   "identifier" : "doc:\/\/AuthFoundation\/documentation\/AuthFoundation\/OAuth2Client\/Configuration-swift.struct\/scope",

@@ -182,6 +182,41 @@
         }
       ],
       "kind" : "declarations"
+    },
+    {
+      "content" : [
+        {
+          "anchor" : "overview",
+          "level" : 2,
+          "text" : "Overview",
+          "type" : "heading"
+        },
+        {
+          "content" : [
+            {
+              "inlineContent" : [
+                {
+                  "text" : "If the underlying payload value is a String, and the result type is expected to be a String array ",
+                  "type" : "text"
+                },
+                {
+                  "code" : "[String]",
+                  "type" : "codeVoice"
+                },
+                {
+                  "text" : ", this function will automatically split the value by whitespaces.",
+                  "type" : "text"
+                }
+              ],
+              "type" : "paragraph"
+            }
+          ],
+          "name" : "Note",
+          "style" : "note",
+          "type" : "aside"
+        }
+      ],
+      "kind" : "content"
     }
   ],
   "schemaVersion" : {

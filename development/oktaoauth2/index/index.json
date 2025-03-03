@@ -24,12 +24,12 @@
               },
               {
                 "path" : "\/documentation\/oktaoauth2\/authorizationcodeflow\/init(client:additionalparameters:)",
-                "title" : "init(client: OAuth2Client, additionalParameters: [String : any APIRequestArgument]?) throws",
+                "title" : "convenience init(client: OAuth2Client, additionalParameters: [String : any APIRequestArgument]?) throws",
                 "type" : "init"
               },
               {
                 "path" : "\/documentation\/oktaoauth2\/authorizationcodeflow\/init(issuerurl:clientid:scope:redirecturi:additionalparameters:)",
-                "title" : "init(issuerURL: URL, clientId: String, scope: String, redirectUri: URL, additionalParameters: [String : any APIRequestArgument]?)",
+                "title" : "convenience init(issuerURL: URL, clientId: String, scope: ClaimCollection<[String]>, redirectUri: URL, additionalParameters: [String : any APIRequestArgument]?)",
                 "type" : "init"
               },
               {
@@ -327,7 +327,7 @@
                       },
                       {
                         "path" : "\/documentation\/oktaoauth2\/authorizationcodeflow\/context-swift.struct\/init(state:maxage:acrvalues:additionalparameters:)",
-                        "title" : "init(state: String?, maxAge: TimeInterval?, acrValues: [String]?, additionalParameters: [String : any APIRequestArgument]?)",
+                        "title" : "init(state: String?, maxAge: TimeInterval?, acrValues: ClaimCollection<[String]?>, additionalParameters: [String : any APIRequestArgument]?)",
                         "type" : "init"
                       },
                       {
@@ -518,7 +518,7 @@
               },
               {
                 "path" : "\/documentation\/oktaoauth2\/authorizationcodeflow\/context-swift.struct\/init(state:maxage:acrvalues:additionalparameters:)",
-                "title" : "init(state: String?, maxAge: TimeInterval?, acrValues: [String]?, additionalParameters: [String : any APIRequestArgument]?)",
+                "title" : "init(state: String?, maxAge: TimeInterval?, acrValues: ClaimCollection<[String]?>, additionalParameters: [String : any APIRequestArgument]?)",
                 "type" : "init"
               },
               {
@@ -608,7 +608,7 @@
               },
               {
                 "path" : "\/documentation\/oktaoauth2\/sessionlogoutflow\/init(issuerurl:clientid:scope:logoutredirecturi:additionalparameters:)",
-                "title" : "convenience init(issuerURL: URL, clientId: String, scope: String, logoutRedirectUri: URL?, additionalParameters: [String : String]?)",
+                "title" : "convenience init(issuerURL: URL, clientId: String, scope: ClaimCollection<[String]>, logoutRedirectUri: URL?, additionalParameters: [String : String]?)",
                 "type" : "init"
               },
               {
@@ -980,7 +980,7 @@
               },
               {
                 "path" : "\/documentation\/oktaoauth2\/deviceauthorizationflow\/init(issuerurl:clientid:scope:additionalparameters:)",
-                "title" : "convenience init(issuerURL: URL, clientId: String, scope: String, additionalParameters: [String : any APIRequestArgument]?)",
+                "title" : "convenience init(issuerURL: URL, clientId: String, scope: ClaimCollection<[String]>, additionalParameters: [String : any APIRequestArgument]?)",
                 "type" : "init"
               },
               {
@@ -1090,7 +1090,7 @@
                       },
                       {
                         "path" : "\/documentation\/oktaoauth2\/deviceauthorizationflow\/context-swift.struct\/init(acrvalues:additionalparameters:)",
-                        "title" : "init(acrValues: [String]?, additionalParameters: [String : any APIRequestArgument]?)",
+                        "title" : "init(acrValues: ClaimCollection<[String]?>, additionalParameters: [String : any APIRequestArgument]?)",
                         "type" : "init"
                       },
                       {
@@ -1226,7 +1226,7 @@
               },
               {
                 "path" : "\/documentation\/oktaoauth2\/deviceauthorizationflow\/context-swift.struct\/init(acrvalues:additionalparameters:)",
-                "title" : "init(acrValues: [String]?, additionalParameters: [String : any APIRequestArgument]?)",
+                "title" : "init(acrValues: ClaimCollection<[String]?>, additionalParameters: [String : any APIRequestArgument]?)",
                 "type" : "init"
               },
               {
@@ -1270,7 +1270,7 @@
               },
               {
                 "path" : "\/documentation\/oktaoauth2\/tokenexchangeflow\/init(issuerurl:clientid:scope:additionalparameters:)",
-                "title" : "convenience init(issuerURL: URL, clientId: String, scope: String, additionalParameters: [String : any APIRequestArgument]?)",
+                "title" : "convenience init(issuerURL: URL, clientId: String, scope: ClaimCollection<[String]>, additionalParameters: [String : any APIRequestArgument]?)",
                 "type" : "init"
               },
               {
@@ -1484,7 +1484,7 @@
                       },
                       {
                         "path" : "\/documentation\/oktaoauth2\/tokenexchangeflow\/context-swift.struct\/init(audience:acrvalues:additionalparameters:)",
-                        "title" : "init(audience: TokenExchangeFlow.Audience, acrValues: [String]?, additionalParameters: [String : any APIRequestArgument]?)",
+                        "title" : "init(audience: TokenExchangeFlow.Audience, acrValues: ClaimCollection<[String]?>, additionalParameters: [String : any APIRequestArgument]?)",
                         "type" : "init"
                       },
                       {
@@ -1624,7 +1624,7 @@
               },
               {
                 "path" : "\/documentation\/oktaoauth2\/resourceownerflow\/init(issuerurl:clientid:scope:additionalparameters:)",
-                "title" : "convenience init(issuerURL: URL, clientId: String, scope: String, additionalParameters: [String : any APIRequestArgument]?)",
+                "title" : "convenience init(issuerURL: URL, clientId: String, scope: ClaimCollection<[String]>, additionalParameters: [String : any APIRequestArgument]?)",
                 "type" : "init"
               },
               {
@@ -1813,7 +1813,7 @@
               },
               {
                 "path" : "\/documentation\/oktaoauth2\/sessiontokenflow\/init(issuerurl:clientid:scope:redirecturi:additionalparameters:)",
-                "title" : "convenience init(issuerURL: URL, clientId: String, scope: String, redirectUri: URL, additionalParameters: [String : any APIRequestArgument]?) throws",
+                "title" : "convenience init(issuerURL: URL, clientId: String, scope: ClaimCollection<[String]>, redirectUri: URL, additionalParameters: [String : any APIRequestArgument]?) throws",
                 "type" : "init"
               },
               {
@@ -2002,7 +2002,7 @@
               },
               {
                 "path" : "\/documentation\/oktaoauth2\/jwtauthorizationflow\/init(issuerurl:clientid:scope:additionalparameters:)",
-                "title" : "convenience init(issuerURL: URL, clientId: String, scope: String, additionalParameters: [String : any APIRequestArgument]?)",
+                "title" : "convenience init(issuerURL: URL, clientId: String, scope: ClaimCollection<[String]>, additionalParameters: [String : any APIRequestArgument]?)",
                 "type" : "init"
               },
               {
