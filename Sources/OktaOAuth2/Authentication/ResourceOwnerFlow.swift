@@ -51,9 +51,10 @@ public class ResourceOwnerFlow: AuthenticationFlow {
     ///   - clientId: The client ID
     ///   - scope: The scopes to request
     ///   - additionalParameters: Optional parameters to supply tot he authorization server for all requests from this flow.
+    @inlinable
     public convenience init(issuerURL: URL,
                             clientId: String,
-                            scope: String,
+                            scope: ClaimCollection<[String]>,
                             additionalParameters: [String: APIRequestArgument]? = nil)
     {
         self.init(client: OAuth2Client(issuerURL: issuerURL,
@@ -61,7 +62,20 @@ public class ResourceOwnerFlow: AuthenticationFlow {
                                        scope: scope),
                   additionalParameters: additionalParameters)
     }
-    
+
+    @_documentation(visibility: private)
+    @inlinable
+    public convenience init(issuerURL: URL,
+                            clientId: String,
+                            scope: some WhitespaceSeparated,
+                            additionalParameters: [String: APIRequestArgument]? = nil)
+    {
+        self.init(client: OAuth2Client(issuerURL: issuerURL,
+                                       clientId: clientId,
+                                       scope: scope),
+                  additionalParameters: additionalParameters)
+    }
+
     /// Initializer that uses the predefined OAuth2Client
     /// - Parameters:
     ///   - client: ``OAuth2Client`` client instance to authenticate with.
@@ -105,8 +119,6 @@ public class ResourceOwnerFlow: AuthenticationFlow {
                                            username: username,
                                            password: password)
                 self.client.exchange(token: request) { result in
-                    self.reset()
-                    
                     switch result {
                     case .failure(let error):
                         self.delegateCollection.invoke { $0.authentication(flow: self, received: .network(error: error)) }
@@ -115,19 +127,26 @@ public class ResourceOwnerFlow: AuthenticationFlow {
                         self.delegateCollection.invoke { $0.authentication(flow: self, received: response.result) }
                         completion(.success(response.result))
                     }
+
+                    self.finished()
                 }
 
             case .failure(let error):
                 self.delegateCollection.invoke { $0.authentication(flow: self, received: error) }
                 completion(.failure(error))
+                self.finished()
             }
         }
     }
     
     /// Resets the flow for later reuse.
     public func reset() {
-        isAuthenticating = false
+        finished()
         context = nil
+    }
+    
+    func finished() {
+        isAuthenticating = false
     }
 
     // MARK: Private properties / methods

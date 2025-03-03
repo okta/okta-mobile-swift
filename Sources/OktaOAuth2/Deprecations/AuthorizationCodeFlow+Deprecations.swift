@@ -27,8 +27,8 @@ extension AuthorizationCodeFlow {
     @_documentation(visibility: private)
     @available(*, deprecated, renamed: "init(client:additionalParameters:)")
     public convenience init(redirectUri: URL,
-                additionalParameters: [String: APIRequestArgument]?,
-                client: OAuth2Client)
+                            additionalParameters: [String: APIRequestArgument]?,
+                            client: OAuth2Client)
     {
         fatalError()
     }
@@ -41,7 +41,10 @@ extension AuthorizationCodeFlow {
     {
         fatalError()
     }
+}
 
+@available(iOS 13.0, tvOS 13.0, macOS 10.15, watchOS 6, *)
+extension AuthorizationCodeFlow {
     @_documentation(visibility: private)
     @available(*, deprecated, renamed: "start(with:)")
     public func start(with context: Context?, additionalParameters: [String: String]?) async throws -> URL

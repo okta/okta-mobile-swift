@@ -31,6 +31,7 @@ extension AuthorizationCodeFlow {
         }
         
         /// The ACR values, if any, which should be requested by the client.
+        @ClaimCollection
         public var acrValues: [String]? {
             didSet {
                 authenticationURL = nil
@@ -103,7 +104,7 @@ extension AuthorizationCodeFlow {
         ///   - maxAge: The maximum age an ID token can be when authenticating.
         public init(state: String? = nil,
                     maxAge: TimeInterval? = nil,
-                    acrValues: [String]? = nil,
+                    acrValues: ClaimCollection<[String]?> = nil,
                     additionalParameters: [String: any APIRequestArgument]? = nil)
         {
             let nonce = additionalParameters?["nonce"] as? String ?? .nonce()
@@ -112,15 +113,15 @@ extension AuthorizationCodeFlow {
             self.init(pkce: PKCE(),
                       nonce: nonce,
                       maxAge: maxAge,
-                      acrValues: additionalParameters?.spaceSeparatedValues(for: "acr_values"),
+                      acrValues: acrValues,
                       state: state,
-                      additionalParameters: additionalParameters?.omitting("nonce", "max_age", "acr_values", "state"))
+                      additionalParameters: additionalParameters?.omitting("nonce", "max_age", "state"))
         }
 
         init(pkce: PKCE?,
              nonce: String,
              maxAge: TimeInterval?,
-             acrValues: [String]?,
+             acrValues: ClaimCollection<[String]?> = nil,
              state: String,
              additionalParameters: [String: any APIRequestArgument]?)
         {
@@ -128,7 +129,7 @@ extension AuthorizationCodeFlow {
             self.nonce = nonce
             self.state = state
             self.maxAge = maxAge
-            self.acrValues = acrValues
+            self._acrValues = acrValues
             
             var remainingParameters = additionalParameters
             self.idTokenHint = remainingParameters?.removeValue(forKey: "id_token_hint") as? String
@@ -137,6 +138,14 @@ extension AuthorizationCodeFlow {
             self.uiLocales = remainingParameters?.removeSpaceSeparatedValues(forKey: "ui_locales")
             self.claimsLocales = remainingParameters?.removeSpaceSeparatedValues(forKey: "claims_locales")
 
+            if let additionalAcrValues = remainingParameters?.removeSpaceSeparatedValues(forKey: "acr_values") {
+                if self.acrValues.isNil {
+                    self.acrValues = additionalAcrValues
+                } else {
+                    self.acrValues?.append(contentsOf: additionalAcrValues)
+                }
+            }
+            
             if let stringValue = remainingParameters?["prompt"] as? String,
                let prompt = Prompt(rawValue: stringValue)
             {
@@ -164,8 +173,8 @@ extension AuthorizationCodeFlow {
                     result["max_age"] = Int(maxAge).stringValue
                 }
 
-                if let acrValues = acrValues {
-                    result["acr_values"] = acrValues.joined(separator: " ")
+                if let values = $acrValues.rawValue {
+                    result["acr_values"] = values
                 }
 
                 if let pkce = pkce {

@@ -21,11 +21,11 @@ extension OAuth2Client {
                             authentication: ClientAuthentication = .none,
                             session: URLSessionProtocol? = nil) throws
     {
-        try self.init(domain: domain,
-                      clientId: clientId,
-                      scope: scopes,
-                      authentication: authentication,
-                      session: session)
+        self.init(try Configuration(domain: domain,
+                                    clientId: clientId,
+                                    scope: scopes,
+                                    authentication: authentication),
+                  session: session)
     }
     
     @_documentation(visibility: private)
@@ -36,10 +36,10 @@ extension OAuth2Client {
                             authentication: ClientAuthentication = .none,
                             session: URLSessionProtocol? = nil)
     {
-        self.init(issuerURL: baseURL,
-                  clientId: clientId,
-                  scope: scopes,
-                  authentication: authentication,
+        self.init(Configuration(issuerURL: baseURL,
+                                clientId: clientId,
+                                scope: scopes,
+                                authentication: authentication),
                   session: session)
     }
 }

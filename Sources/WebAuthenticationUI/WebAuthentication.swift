@@ -253,7 +253,23 @@ public class WebAuthentication {
     ///   - additionalParameters: Optional parameters to add to the authorization query string.
     public convenience init(issuerURL: URL,
                             clientId: String,
-                            scope: String,
+                            scope: ClaimCollection<[String]>,
+                            redirectUri: URL,
+                            logoutRedirectUri: URL? = nil,
+                            additionalParameters: [String: APIRequestArgument]? = nil) throws
+    {
+        let client = OAuth2Client(issuerURL: issuerURL,
+                                  clientId: clientId,
+                                  scope: scope,
+                                  redirectUri: redirectUri,
+                                  logoutRedirectUri: logoutRedirectUri)
+        try self.init(client: client, additionalParameters: additionalParameters)
+    }
+    
+    @_documentation(visibility: private)
+    public convenience init(issuerURL: URL,
+                            clientId: String,
+                            scope: some WhitespaceSeparated,
                             redirectUri: URL,
                             logoutRedirectUri: URL? = nil,
                             additionalParameters: [String: APIRequestArgument]? = nil) throws

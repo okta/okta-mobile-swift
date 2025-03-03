@@ -94,8 +94,7 @@ final class DirectAuthenticationFlowTests: XCTestCase {
         let wait = expectation(description: "run step")
         let token = Token.mockToken()
         let factor = TestFactor(result: .success(.success(token)), exception: nil)
-        flow.context = .init(acrValues: nil,
-                             intent: .signIn)
+        flow.context = .init()
 
         flow.runStep(with: factor) { result in
             XCTAssertEqual(result, .success(.success(token)))
@@ -111,8 +110,7 @@ final class DirectAuthenticationFlowTests: XCTestCase {
 
         let wait = expectation(description: "run step")
         let factor = TestFactor(result: .failure(.pollingTimeoutExceeded), exception: nil)
-        flow.context = .init(acrValues: nil,
-                             intent: .signIn)
+        flow.context = .init()
         flow.runStep(with: factor) { result in
             XCTAssertEqual(result, .failure(.pollingTimeoutExceeded))
             wait.fulfill()
@@ -127,8 +125,7 @@ final class DirectAuthenticationFlowTests: XCTestCase {
 
         let wait = expectation(description: "run step")
         let factor = TestFactor(result: nil, exception: APIClientError.invalidRequestData)
-        flow.context = .init(acrValues: nil,
-                             intent: .signIn)
+        flow.context = .init()
         flow.runStep(with: factor) { result in
             XCTAssertEqual(result, .failure(.network(error: .invalidRequestData)))
             wait.fulfill()

@@ -76,6 +76,7 @@ extension SessionLogoutFlow {
             && lhs.idToken == rhs.idToken
             && lhs.logoutHint == rhs.logoutHint
             && lhs.additionalParameters?.mapValues(\.stringValue) == rhs.additionalParameters?.mapValues(\.stringValue)
+            && lhs.logoutURL == rhs.logoutURL
         }
     }
 }

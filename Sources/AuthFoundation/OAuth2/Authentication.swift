@@ -107,7 +107,9 @@ public protocol AuthenticationContext: ProvidesOAuth2Parameters {
 extension AuthenticationContext {
     @_documentation(visibility: internal)
     public var persistValues: [String: String]? {
-        if let acrValues = acrValues {
+        if let acrValues = acrValues,
+           !acrValues.isEmpty
+        {
             return ["acr_values": acrValues.joined(separator: " ")]
         }
         
@@ -118,6 +120,7 @@ extension AuthenticationContext {
 /// Common ``AuthenticationContext`` implementation for common or generic implementations of ``AuthenticationFlow``.
 public struct StandardAuthenticationContext: AuthenticationContext {
     /// The ACR values, if any, which should be requested by the client.
+    @ClaimCollection
     public var acrValues: [String]?
 
     /// Custom request parameters to be added to requests made for this particular sign-in attempt.
@@ -127,12 +130,19 @@ public struct StandardAuthenticationContext: AuthenticationContext {
     /// - Parameters:
     ///   - acrValues: Authentication Context Reference values to include with this sign-in.
     ///   - additionalParameters: Custom request parameters to be added to requests made for this sign-in.
-    public init(acrValues: [String]? = nil,
+    public init(acrValues: ClaimCollection<[String]?> = nil,
                 additionalParameters: [String: any APIRequestArgument]? = nil)
     {
-        let coalescedAcrValues = (acrValues ?? []) + (additionalParameters?.spaceSeparatedValues(for: "acr_values") ?? [])
-        self.acrValues = (acrValues != nil) ? coalescedAcrValues : coalescedAcrValues.nilIfEmpty
+        self._acrValues = acrValues
         self.additionalParameters = additionalParameters?.omitting("acr_values").nilIfEmpty
+        
+        if let additionalAcrValues = additionalParameters?.spaceSeparatedValues(for: "acr_values") {
+            if self.acrValues.isNil {
+                self.acrValues = additionalAcrValues
+            } else {
+                self.acrValues?.append(contentsOf: additionalAcrValues)
+            }
+        }
     }
     
     @_documentation(visibility: internal)
@@ -140,9 +150,9 @@ public struct StandardAuthenticationContext: AuthenticationContext {
         var result = additionalParameters ?? [:]
         
         if category == .authorization,
-           let acrValues = acrValues
+           let values = $acrValues.rawValue
         {
-            result["acr_values"] = acrValues.joined(separator: " ")
+            result["acr_values"] = values
         }
 
         return result.nilIfEmpty

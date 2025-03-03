@@ -45,7 +45,7 @@ extension Dictionary<String, APIRequestArgument> {
         }
         
         if let value = self[key] as? String {
-            return value.components(separatedBy: .whitespaces)
+            return value.whitespaceSeparated
         }
         
         return nil

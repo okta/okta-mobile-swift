@@ -181,6 +181,7 @@ public class DirectAuthenticationFlow: AuthenticationFlow {
     /// Configuration which can be used to customize the authentication flow, as needed.
     public struct Context: AuthenticationContext, Equatable {
         /// The ACR values, if any, which should be requested by the client.
+        @ClaimCollection
         public var acrValues: [String]?
 
         /// The intent of the current flow.
@@ -193,10 +194,10 @@ public class DirectAuthenticationFlow: AuthenticationFlow {
         /// - Parameters:
         ///   - acrValues: Optional `acr_values` to supply.
         ///   - intent: The intent for this sign-in. Defaults to ``DirectAuthenticationFlow/Intent/signIn``.
-        public init(acrValues: [String]? = nil,
+        public init(acrValues: ClaimCollection<[String]?> = nil,
                     intent: Intent = .signIn)
         {
-            self.acrValues = acrValues
+            self._acrValues = acrValues
             self.intent = intent
         }
 
@@ -204,8 +205,8 @@ public class DirectAuthenticationFlow: AuthenticationFlow {
         public func parameters(for category: OAuth2APIRequestCategory) -> [String: any APIRequestArgument]? {
             var result: [String: any APIRequestArgument] = [:]
             
-            if let acrValues = acrValues {
-                result["acr_values"] = acrValues.joined(separator: " ")
+            if let values = $acrValues.rawValue {
+                result["acr_values"] = values
             }
             
             if category == .token {
@@ -337,13 +338,28 @@ public class DirectAuthenticationFlow: AuthenticationFlow {
     ///   - additionalParameters: Custom request parameters to be added to requests made for this sign-in.
     public convenience init(issuerURL: URL,
                             clientId: String,
-                            scope: String,
+                            scope: ClaimCollection<[String]>,
                             supportedGrants grantTypes: [GrantType] = .directAuth,
                             additionalParameters: [String: any APIRequestArgument]? = nil)
     {
-        self.init(client: .init(issuerURL: issuerURL,
-                                clientId: clientId,
-                                scope: scope),
+        self.init(client: OAuth2Client(issuerURL: issuerURL,
+                                       clientId: clientId,
+                                       scope: scope),
+                  supportedGrants: grantTypes,
+                  additionalParameters: additionalParameters)
+    }
+
+    @_documentation(visibility: private)
+    @inlinable
+    public convenience init(issuerURL: URL,
+                            clientId: String,
+                            scope: some WhitespaceSeparated,
+                            supportedGrants grantTypes: [GrantType] = .directAuth,
+                            additionalParameters: [String: any APIRequestArgument]? = nil)
+    {
+        self.init(client: OAuth2Client(issuerURL: issuerURL,
+                                       clientId: clientId,
+                                       scope: scope),
                   supportedGrants: grantTypes,
                   additionalParameters: additionalParameters)
     }
@@ -483,10 +499,14 @@ public class DirectAuthenticationFlow: AuthenticationFlow {
     
     /// Resets the authentication session.
     public func reset() {
-        isAuthenticating = false
+        finished()
         context = nil
     }
 
+    func finished() {
+        isAuthenticating = false
+    }
+    
     // MARK: Private properties / methods
     public let delegateCollection = DelegateCollection<DirectAuthenticationFlowDelegate>()
 }

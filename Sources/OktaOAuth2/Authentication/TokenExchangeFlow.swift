@@ -74,7 +74,20 @@ public class TokenExchangeFlow: AuthenticationFlow {
     ///   - additionalParameters: Optional query parameters to supply tot he authorization server for all requests from this flow.
     public convenience init(issuerURL: URL,
                             clientId: String,
-                            scope: String,
+                            scope: ClaimCollection<[String]>,
+                            additionalParameters: [String: APIRequestArgument]? = nil)
+    {
+        self.init(client: OAuth2Client(issuerURL: issuerURL,
+                                       clientId: clientId,
+                                       scope: scope),
+                  additionalParameters: additionalParameters)
+    }
+
+    @_documentation(visibility: private)
+    @inlinable
+    public convenience init(issuerURL: URL,
+                            clientId: String,
+                            scope: some WhitespaceSeparated,
                             additionalParameters: [String: APIRequestArgument]? = nil)
     {
         self.init(client: OAuth2Client(issuerURL: issuerURL,
@@ -140,19 +153,24 @@ public class TokenExchangeFlow: AuthenticationFlow {
                         completion(.success(response.result))
                     }
                     
-                    self.isAuthenticating = false
+                    self.finished()
                 }
                 
             case .failure(let error):
                 self.delegateCollection.invoke { $0.authentication(flow: self, received: error) }
                 completion(.failure(error))
+                self.finished()
             }
         }
     }
 
     public func reset() {
-        isAuthenticating = false
+        finished()
         context = nil
+    }
+    
+    func finished() {
+        isAuthenticating = false
     }
 }
 

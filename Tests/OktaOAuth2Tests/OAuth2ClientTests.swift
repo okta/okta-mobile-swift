@@ -90,7 +90,7 @@ final class OAuth2ClientTests: XCTestCase {
         XCTAssertEqual(token?.accessToken, JWT.mockAccessToken)
         XCTAssertEqual(token?.refreshToken, "therefreshtoken")
         XCTAssertNotNil(token?.idToken)
-        XCTAssertEqual(token?.scope, "openid profile offline_access")
+        XCTAssertEqual(token?.scope, ["openid", "profile", "offline_access"])
     }
     
     func testExchangeFailed() throws {
