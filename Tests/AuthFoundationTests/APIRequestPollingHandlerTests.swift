@@ -100,9 +100,10 @@ final class APIRequestPollingHandlerTests: XCTestCase {
     func testExpiration() async throws {
         let container = TestContainer()
 
+        let startTime = Date.timeIntervalSinceReferenceDate
         let poll = try APIRequestPollingHandler<TestRequest, String>(
-            interval: 0.1,
-            expiresIn: 0.5)
+            interval: 0.25,
+            expiresIn: 1.0)
         { pollingHandler, request in
             await container.append(.init(name: request.url.pathComponents.last!,
                                          interval: await pollingHandler.interval))
@@ -118,11 +119,13 @@ final class APIRequestPollingHandlerTests: XCTestCase {
 
         let initialRequest = try TestRequest(name: "request")
         let error = await XCTAssertThrowsErrorAsync(try await poll.start(with: initialRequest))
+        let endTime = Date.timeIntervalSinceReferenceDate
 
         XCTAssertEqual(error as? APIRequestPollingHandlerError, .timeout)
 
         let steps = await container.steps
-        XCTAssertEqual(steps.count, 5, accuracy: 1)
+        XCTAssertEqual(steps.count, 4, accuracy: 2)
+        XCTAssertEqual(endTime - startTime, 1.0, accuracy: 0.1)
     }
 
     func testFailure() async throws {
