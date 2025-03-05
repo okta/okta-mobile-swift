@@ -12,6 +12,7 @@
 
 import Foundation
 
+@_documentation(visibility: internal)
 public enum APIRequestPollingHandlerError: Error {
     case invalidInterval
     case alreadyStarted
@@ -19,10 +20,13 @@ public enum APIRequestPollingHandlerError: Error {
     case timeout
 }
 
+/// Utility actor class used to represent a pollable request.
+@_documentation(visibility: internal)
 public actor APIRequestPollingHandler<RequestType, ResultType> {
     public typealias OperationBlock = (_ pollingHandler: APIRequestPollingHandler<RequestType, ResultType>,
                                        _ request: RequestType) async throws -> Status
-
+    
+    /// Status of an individual poll request.
     public enum Status {
         case `continue`
         case continueWith(request: RequestType? = nil, interval: TimeInterval? = nil)
@@ -61,7 +65,12 @@ public actor APIRequestPollingHandler<RequestType, ResultType> {
     deinit {
         isActive = false
     }
-
+    
+    /// Starts a polling operation, beginning with the given request.
+    /// - Parameters:
+    ///   - request: Request definition to perform
+    ///   - delay: Optional delay before the request should begin.
+    /// - Returns: The expected successful response result.
     public func start(with request: RequestType, delay: TimeInterval? = nil) async throws -> ResultType {
         guard !isActive else {
             throw APIRequestPollingHandlerError.alreadyStarted
