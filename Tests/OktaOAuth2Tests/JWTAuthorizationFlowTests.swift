@@ -123,8 +123,6 @@ final class JWTAuthorizationFlowTests: XCTestCase {
         flow.start(with: jwt) { result in
             switch result {
             case .success:
-                XCTAssertTrue(self.flow.isAuthenticating)
-                
                 authorizeExpectation.fulfill()
             case .failure(let error):
                 XCTFail(error.localizedDescription)

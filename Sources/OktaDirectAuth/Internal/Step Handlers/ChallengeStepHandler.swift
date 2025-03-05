@@ -27,19 +27,7 @@ class ChallengeStepHandler<Request: APIRequest>: StepHandler {
         self.statusBlock = statusBlock
     }
     
-    func process(completion: @escaping (Result<DirectAuthenticationFlow.Status, DirectAuthenticationFlowError>) -> Void) {
-        request.send(to: flow.client) { result in
-            switch result {
-            case .failure(let error):
-                self.flow.process(error, completion: completion)
-            case .success(let response):
-                do {
-                    let status = try self.statusBlock(response.result)
-                    completion(.success(status))
-                } catch {
-                    completion(.failure(.init(error)))
-                }
-            }
-        }
+    func process() async throws -> DirectAuthenticationFlow.Status {
+        try statusBlock(try await request.send(to: flow.client).result)
     }
 }

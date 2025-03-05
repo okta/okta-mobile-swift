@@ -51,7 +51,7 @@ final class OAuth2ClientConfigurationTests: XCTestCase {
         ])
 
         // Test with a string value scope
-        var scopeString = "openid profile"
+        let scopeString = "openid profile"
         configuration = .init(issuerURL: URL(string: "https://example.com")!,
                               clientId: "abcd123",
                               scope: scopeString,
@@ -59,7 +59,7 @@ final class OAuth2ClientConfigurationTests: XCTestCase {
         XCTAssertEqual(configuration.scope, ["openid", "profile"])
 
         // Test with an array value scope
-        var scopeArray = ["openid", "email"]
+        let scopeArray = ["openid", "email"]
         configuration = .init(issuerURL: URL(string: "https://example.com")!,
                               clientId: "abcd123",
                               scope: scopeArray,

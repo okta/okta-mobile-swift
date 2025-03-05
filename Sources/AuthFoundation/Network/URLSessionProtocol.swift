@@ -24,4 +24,25 @@ public protocol URLSessionProtocol {
 }
 
 @_documentation(visibility: internal)
-extension URLSession: URLSessionProtocol {}
+extension URLSession: URLSessionProtocol {
+#if os(Linux)
+    public func data(for request: URLRequest) async throws -> (Data, URLResponse) {
+        return try await withCheckedThrowingContinuation { continuation in
+            let task = self.dataTask(with: request) { data, response, error in
+                if let error = error {
+                    continuation.resume(throwing: error)
+                    return
+                }
+
+                guard let data, let response else {
+                    continuation.resume(throwing: URLError(.badServerResponse))
+                    return
+                }
+                
+                continuation.resume(returning: (data, response))
+            }
+            task.resume()
+        }
+    }
+#endif
+}

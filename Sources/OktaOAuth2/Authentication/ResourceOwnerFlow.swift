@@ -103,22 +103,20 @@ public class ResourceOwnerFlow: AuthenticationFlow {
         isAuthenticating = true
         self.context = context
 
-        do {
+        return try await withExpression {
             let request = TokenRequest(openIdConfiguration: try await client.openIdConfiguration(),
                                        clientConfiguration: client.configuration,
                                        additionalParameters: additionalParameters,
                                        context: context,
                                        username: username,
                                        password: password)
-            let response = try await client.exchange(token: request)
-            
-            delegateCollection.invoke { $0.authentication(flow: self, received: response.result) }
-            finished()
-            return response.result
-        } catch {
+            return try await client.exchange(token: request).result
+        } success: { result in
+            delegateCollection.invoke { $0.authentication(flow: self, received: result) }
+        } failure: { error in
             delegateCollection.invoke { $0.authentication(flow: self, received: OAuth2Error(error)) }
+        } finally: {
             finished()
-            throw error
         }
     }
     

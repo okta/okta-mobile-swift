@@ -234,7 +234,7 @@ extension APIClient {
 
                 case .error:
                     if let error = error(from: data) ?? context?.error(from: data) {
-                        throw APIClientError.serverError(error)
+                        throw APIClientError.httpError(error)
                     } else {
                         throw APIClientError.statusCode(httpResponse.statusCode)
                     }

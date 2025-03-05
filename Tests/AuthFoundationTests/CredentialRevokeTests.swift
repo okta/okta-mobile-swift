@@ -245,7 +245,7 @@ final class CredentialTests: XCTestCase {
         do {
             try await credential.revoke(type: .accessToken)
         } catch let error as APIClientError {
-            guard case let .serverError(serverError) = error,
+            guard case let .httpError(serverError) = error,
                   let oauth2Error = serverError as? OAuth2ServerError
             else {
                 XCTFail()

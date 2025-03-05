@@ -110,24 +110,22 @@ public class SessionTokenFlow: AuthenticationFlow {
     public func start(with sessionToken: String,
                       context: Context = .init()) async throws -> Token
     {
-        defer { finished() }
         isAuthenticating = true
         self.context = context
 
         var parameters = additionalParameters ?? [:]
         parameters["sessionToken"] = sessionToken
         
-        do {
+        return try await withExpression {
             let flow = try AuthorizationCodeFlow(client: client, additionalParameters: parameters)
             let url = try await flow.start(with: context)
-            let token = try await complete(using: flow, url: url)
-            delegateCollection.invoke { $0.authentication(flow: self, received: token) }
-            finished()
-            return token
-        } catch {
+            return try await complete(using: flow, url: url)
+        } success: { result in
+            delegateCollection.invoke { $0.authentication(flow: self, received: result) }
+        } failure: { error in
             delegateCollection.invoke { $0.authentication(flow: self, received: OAuth2Error(error)) }
+        } finally: {
             finished()
-            throw error
         }
     }
     
@@ -190,7 +188,7 @@ final class SessionTokenFlowExchange: NSObject, SessionTokenFlowURLExchange, URL
 
     private let lock = Lock()
     private var continuation: (CheckedContinuation<URL, any Error>)?
-    private lazy var session: URLSession = {
+    private lazy var session: URLSessionProtocol = {
         URLSession(configuration: .ephemeral,
                    delegate: self,
                    delegateQueue: nil)
@@ -207,7 +205,8 @@ final class SessionTokenFlowExchange: NSObject, SessionTokenFlowURLExchange, URL
                 
                 Task {
                     do {
-                        let (_, _) = try await session.data(from: url)
+                        let request = URLRequest(url: url)
+                        let (_, _) = try await session.data(for: request)
                         self.finish(with: OAuth2Error.invalidUrl)
                     } catch {
                         self.finish(with: error)

@@ -118,7 +118,7 @@ public class TokenExchangeFlow: AuthenticationFlow {
     public func start(with tokens: [TokenType],
                       context: Context = .init()) async throws -> Token
     {
-        do {
+        try await withExpression {
             guard !tokens.isEmpty else {
                 delegateCollection.invoke { $0.authentication(flow: self, received: OAuth2Error.cannotComposeUrl) }
                 finished()
@@ -133,15 +133,13 @@ public class TokenExchangeFlow: AuthenticationFlow {
                                        additionalParameters: additionalParameters,
                                        context: context,
                                        tokens: tokens)
-            let response = try await client.exchange(token: request)
-            
-            delegateCollection.invoke { $0.authentication(flow: self, received: response.result) }
-            finished()
-            return response.result
-        } catch {
+            return try await client.exchange(token: request).result
+        } success: { result in
+            delegateCollection.invoke { $0.authentication(flow: self, received: result) }
+        } failure: { error in
             delegateCollection.invoke { $0.authentication(flow: self, received: OAuth2Error(error)) }
+        } finally: {
             finished()
-            throw error
         }
     }
 

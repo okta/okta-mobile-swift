@@ -141,14 +141,13 @@ public class DeviceAuthorizationFlow: AuthenticationFlow {
     /// The ``resume(with:completion:)`` method also uses this context, to poll the server to determine when the user approves the authorization request.
     /// - Parameters:
     ///   - context: Optional context object used to customize this flow.
-    public func start(with context: Context = .init()) async throws -> DeviceAuthorizationFlow.Verification {
+    public func start(with context: Context = .init()) async throws -> Verification {
         isAuthenticating = true
         self.context = context
         
-        do {
+        return try await withExpression {
             guard let url = try await client.openIdConfiguration().deviceAuthorizationEndpoint
             else {
-                delegateCollection.invoke { $0.authentication(flow: self, received: .invalidUrl) }
                 throw OAuth2Error.invalidUrl
             }
             
@@ -156,15 +155,14 @@ public class DeviceAuthorizationFlow: AuthenticationFlow {
                                            clientConfiguration: client.configuration,
                                            additionalParameters: additionalParameters,
                                            context: context)
-            let response = try await request.send(to: client)
-            self.context?.verification = response.result
-            
-            delegateCollection.invoke { $0.authentication(flow: self, received: response.result) }
-            return response.result
-        } catch {
+            let response = try await request.send(to: client).result
+            self.context?.verification = response
+            return response
+        } success: { result in
+            delegateCollection.invoke { $0.authentication(flow: self, received: result) }
+        } failure: { error in
             delegateCollection.invoke { $0.authentication(flow: self, received: OAuth2Error(error)) }
             finished()
-            throw error
         }
     }
     
@@ -173,18 +171,38 @@ public class DeviceAuthorizationFlow: AuthenticationFlow {
     /// Once an authentication session has begun, using ``start(completion:)``, the user should be presented with the user code and verification URI. This method is used to poll the server, to determine when a user completes authorizing this device. At that point, the result is exchanged for a token.
     /// - Returns: The Token created as a result of exchanging an authorization code.
     public func resume() async throws -> Token {
-        do {
-            let token = try await withCheckedThrowingContinuation { continuation in
-                self.timerContinuation = continuation
-                self.scheduleTimer()
+        let client = client
+
+        return try await withExpression {
+            guard let context = context,
+                  let verification = context.verification
+            else {
+                throw OAuth2Error.missingClientConfiguration
             }
-            delegateCollection.invoke { $0.authentication(flow: self, received: token) }
-            finished()
-            return token
-        } catch {
+
+            let request = TokenRequest(openIdConfiguration: try await client.openIdConfiguration(),
+                                       clientConfiguration: client.configuration,
+                                       additionalParameters: additionalParameters,
+                                       context: context,
+                                       deviceCode: verification.deviceCode)
+            
+            let taskHandle = Task {
+                let poll = try APIRequestPollingHandler<TokenRequest, Token>(interval: verification.interval,
+                                                                             expiresIn: verification.expiresIn,
+                                                                             slowDownInterval: Self.slowDownInterval) { (_, request) in
+                    .success(try await client.exchange(token: request).result)
+                }
+                return try await poll.start(with: request)
+            }
+            self.taskHandle = taskHandle
+            
+            return try await taskHandle.value
+        } success: { result in
+            delegateCollection.invoke { $0.authentication(flow: self, received: result) }
+        } failure: { error in
             delegateCollection.invoke { $0.authentication(flow: self, received: OAuth2Error(error)) }
+        } finally: {
             finished()
-            throw error
         }
     }
     
@@ -195,52 +213,18 @@ public class DeviceAuthorizationFlow: AuthenticationFlow {
     }
     
     func finished() {
-        timer?.cancel()
-        timer = nil
-        timerContinuation = nil
+        taskHandle?.cancel()
         isAuthenticating = false
     }
 
     // MARK: Private properties / methods
     static var slowDownInterval: TimeInterval = 5
-    
-    var timer: DispatchSourceTimer?
-    var timerContinuation: (CheckedContinuation<Token, Error>)?
-    public let delegateCollection = DelegateCollection<DeviceAuthorizationFlowDelegate>()
-    
-    func scheduleTimer(offsetBy interval: TimeInterval? = nil) {
-        guard var context = self.context,
-              var verification = context.verification,
-              let continuation = self.timerContinuation
-        else {
-            return
-        }
-        
-        if let interval = interval {
-            verification.interval += interval
-            context.verification = verification
-            self.context = context
-        }
-        
-        
-        let timerSource = DispatchSource.makeTimerSource()
-        timerSource.schedule(deadline: .now() + verification.interval, repeating: verification.interval)
-        timerSource.setEventHandler(qos: .userInitiated) {
-            Task {
-                do {
-                    if let token = try await self.getToken(deviceCode: verification.deviceCode, context: context) {
-                        continuation.resume(returning: token)
-                    }
-                } catch {
-                    continuation.resume(throwing: error)
-                }
-            }
-        }
-
-        timer?.cancel()
-        timer = timerSource
-        timerSource.resume()
+    static func resetToDefault() {
+        slowDownInterval = 5.0
     }
+
+    private var taskHandle: Task<Token, Error>?
+    public let delegateCollection = DelegateCollection<DeviceAuthorizationFlowDelegate>()
 }
 
 extension DeviceAuthorizationFlow {
@@ -280,45 +264,6 @@ extension DeviceAuthorizationFlow {
 
 extension DeviceAuthorizationFlow: UsesDelegateCollection {
     public typealias Delegate = DeviceAuthorizationFlowDelegate
-}
-
-extension DeviceAuthorizationFlow {
-    func getToken(deviceCode: String, context: Context) async throws -> Token? {
-        let errorResult: (_ error: any Error) -> Void = { error in
-            self.delegateCollection.invoke { $0.authentication(flow: self, received: .network(error: APIClientError(error))) }
-        }
-        
-        let request = TokenRequest(openIdConfiguration: try await client.openIdConfiguration(),
-                                   clientConfiguration: client.configuration,
-                                   additionalParameters: additionalParameters,
-                                   context: context,
-                                   deviceCode: deviceCode)
-        do {
-            return try await client.exchange(token: request).result
-        } catch let error as APIClientError {
-            guard case let .serverError(serverError) = error,
-                  let oauthError = serverError as? OAuth2ServerError
-            else {
-                errorResult(error)
-                throw error
-            }
-            
-            switch oauthError.code {
-            case .authorizationPending:
-                // Keep polling, since we haven't received a token yet.
-                return nil
-                
-            case .slowDown:
-                // Increase the polling interval for all subsequent requests, according to the specification.
-                scheduleTimer(offsetBy: DeviceAuthorizationFlow.slowDownInterval)
-                return nil
-                
-            default:
-                errorResult(error)
-                throw error
-            }
-        }
-    }
 }
 
 extension DeviceAuthorizationFlow: OAuth2ClientDelegate {

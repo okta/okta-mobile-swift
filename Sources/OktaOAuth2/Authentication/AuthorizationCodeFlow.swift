@@ -175,7 +175,7 @@ public class AuthorizationCodeFlow: AuthenticationFlow {
         self.context = context
         isAuthenticating = true
 
-        do {
+        return try await withExpression {
             var context = context
             let url = try self.createAuthenticationURL(from: try await client.openIdConfiguration().authorizationEndpoint,
                                                        using: context)
@@ -187,10 +187,11 @@ public class AuthorizationCodeFlow: AuthenticationFlow {
             }
 
             return url
-        } catch {
+        } success: { result in
+            delegateCollection.invoke { $0.authentication(flow: self, shouldAuthenticateUsing: result) }
+        } failure: { error in
             delegateCollection.invoke { $0.authentication(flow: self, received: OAuth2Error(error)) }
             finished()
-            throw error
         }
     }
     
@@ -203,7 +204,7 @@ public class AuthorizationCodeFlow: AuthenticationFlow {
     ///   - url: Authorization redirect URI.
     /// - Returns: The Token created as a result of exchanging an authorization code.
     public func resume(with url: URL) async throws -> Token {
-        do {
+        return try await withExpression {
             guard let redirectUri = client.configuration.redirectUri else {
                 throw OAuth2Error.missingRedirectUri
             }
@@ -221,18 +222,23 @@ public class AuthorizationCodeFlow: AuthenticationFlow {
             let response = try await client.exchange(token: request)
             
             delegateCollection.invoke { $0.authentication(flow: self, received: response.result) }
-            finished()
             return response.result
-        } catch {
+        } success: { result in
+            delegateCollection.invoke { $0.authentication(flow: self, received: result) }
+        } failure: { error in
             delegateCollection.invoke { $0.authentication(flow: self, received: OAuth2Error(error)) }
+        } finally: {
             finished()
-            throw error
         }
     }
     
     public func reset() {
-        isAuthenticating = false
+        finished()
         context = nil
+    }
+
+    func finished() {
+        isAuthenticating = false
     }
 
     // MARK: Private properties / methods

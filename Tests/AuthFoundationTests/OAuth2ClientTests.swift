@@ -30,6 +30,9 @@ final class OAuth2ClientTests: XCTestCase {
     var token: Token!
 
     override func setUpWithError() throws {
+        Credential.tokenStorage = MockTokenStorage()
+        Credential.credentialDataSource = MockCredentialDataSource()
+
         urlSession = URLSessionMock()
         client = OAuth2Client(configuration, session: urlSession)
         
@@ -44,6 +47,7 @@ final class OAuth2ClientTests: XCTestCase {
                            deviceSecret: nil,
                            context: Token.Context(configuration: self.configuration,
                                                   clientSettings: [ "client_id": "clientid", "refresh_token": "refresh" ]))
+        try Credential.store(token)
         
         openIdConfiguration = try OpenIdConfiguration.jsonDecoder.decode(
             OpenIdConfiguration.self,
@@ -55,6 +59,7 @@ final class OAuth2ClientTests: XCTestCase {
     }
     
     override func tearDownWithError() throws {
+        Credential.resetToDefault()
         urlSession = nil
         client = nil
     }
