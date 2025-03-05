@@ -107,12 +107,9 @@ public final class OAuth2Client {
     ///
     /// If this value has recently been retrieved, the cached result is returned.
     public func openIdConfiguration() async throws -> OpenIdConfiguration {
-        let discoveryURL = configuration.discoveryURL
-        let client = self
-
-        return try await openIdConfigurationAction.perform {
-            try await OpenIdConfigurationRequest(url: discoveryURL)
-                .send(to: client)
+        try await openIdConfigurationAction.perform {
+            try await OpenIdConfigurationRequest(url: configuration.discoveryURL)
+                .send(to: self)
                 .result
         }
     }
@@ -124,25 +121,21 @@ public final class OAuth2Client {
     ///   - token: Token to refresh.
     ///   - scope: Optional array of scopes to request.
     public func refresh(_ token: Token, scope: [String]? = nil) async throws -> Token {
-        let delegateCollection = self.delegateCollection
-        let clientConfiguration = self.configuration
-        let client = self
-
-        return try await token.refreshAction.perform(reset: true) {
+        try await token.refreshAction.perform(reset: true) {
             guard let refreshToken = token.refreshToken else {
                 throw OAuth2Error.missingToken(type: .refreshToken)
             }
             
-            let request = Token.RefreshRequest(openIdConfiguration: try await client.openIdConfiguration(),
-                                               clientConfiguration: clientConfiguration,
+            let request = Token.RefreshRequest(openIdConfiguration: try await openIdConfiguration(),
+                                               clientConfiguration: configuration,
                                                refreshToken: refreshToken,
                                                scope: scope?.joined(separator: " "),
                                                id: token.id)
-            async let response = try request.send(to: client)
+            async let response = try request.send(to: self)
 
             return try await response.result.token(merging: token)
         } willBegin: {
-            delegateCollection.invoke { $0.oauth(client: client, willRefresh: token) }
+            delegateCollection.invoke { $0.oauth(client: self, willRefresh: token) }
         } didEnd: { result in
             let newToken: Token?
             switch result {
@@ -243,14 +236,10 @@ public final class OAuth2Client {
     /// If this value has recently been retrieved, the cached result is returned.
     /// - Parameter completion: Completion block invoked with the result.
     public func jwks() async throws -> JWKS {
-        let openIdConfiguration = try await openIdConfiguration()
-        let clientId = configuration.clientId
-        let client = self
-
-        return try await jwksAction.perform {
-            try await KeysRequest(openIdConfiguration: openIdConfiguration,
-                                  clientId: clientId)
-            .send(to: client)
+        try await jwksAction.perform {
+            try await KeysRequest(openIdConfiguration: try await openIdConfiguration(),
+                                  clientId: configuration.clientId)
+            .send(to: self)
             .result
         }
     }

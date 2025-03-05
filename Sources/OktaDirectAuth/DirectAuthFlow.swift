@@ -183,7 +183,7 @@ public class DirectAuthenticationFlow: AuthenticationFlow {
         /// The ACR values, if any, which should be requested by the client.
         @ClaimCollection
         public var acrValues: [String]?
-        
+
         /// The intent of the current flow.
         public var intent: Intent = .signIn
         
@@ -200,7 +200,7 @@ public class DirectAuthenticationFlow: AuthenticationFlow {
             self._acrValues = acrValues
             self.intent = intent
         }
-        
+
         @_documentation(visibility: internal)
         public func parameters(for category: OAuth2APIRequestCategory) -> [String: any APIRequestArgument]? {
             var result: [String: any APIRequestArgument] = [:]
@@ -307,13 +307,13 @@ public class DirectAuthenticationFlow: AuthenticationFlow {
     
     /// The list of grant types the application supports.
     public let supportedGrantTypes: [GrantType]
-    
+
     /// The context that stores the state for the current authentication session.
     public internal(set) var context: Context?
-    
+
     /// Any additional query string parameters you would like to supply to the authorization server for all requests from this flow.
     public let additionalParameters: [String: APIRequestArgument]?
-    
+
     /// Indicates whether or not this flow is currently in the process of authenticating a user.
     public private(set) var isAuthenticating: Bool = false {
         didSet {
@@ -430,7 +430,7 @@ public class DirectAuthenticationFlow: AuthenticationFlow {
             else {
                 throw DirectAuthenticationFlowError.flowNotStarted
             }
-            
+
             return try await runStep(with: factor)
         } success: { result in
             delegateCollection.invoke { $0.authentication(flow: self, received: result) }
@@ -442,7 +442,7 @@ public class DirectAuthenticationFlow: AuthenticationFlow {
             delegateCollection.invoke { $0.authentication(flow: self, received: OAuth2Error(error)) }
         }
     }
-    
+
     /// Continues authentication of a current factor (either primary or secondary) when an additional step is required.
     ///
     /// This function should be used when ``Status/continuation(_:)`` is received.

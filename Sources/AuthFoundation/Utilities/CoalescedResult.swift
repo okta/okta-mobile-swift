@@ -69,7 +69,11 @@ public actor CoalescedResult<T: Sendable>: Sendable {
     ///   - willBegin: Optional closure to invoke before beginning the operation.
     ///   - didEnd: Optional closure to invoke with the result after the operation completes.
     /// - Returns: The value of type `T`.
-    public func perform(reset: Bool = false, operation: @Sendable @escaping () async throws -> T, willBegin: (() -> Void)? = nil, didEnd: ((Result<T, Error>) -> Void)? = nil) async throws -> T {
+    public func perform(reset: Bool = false,
+                        operation: () async throws -> T,
+                        willBegin: () -> Void = {},
+                        didEnd: (Result<T, Error>) -> Void = { _ in }) async throws -> T
+    {
         if reset {
             _value = nil
         }
@@ -81,7 +85,7 @@ public actor CoalescedResult<T: Sendable>: Sendable {
 
             _isActive = true
             task = BackgroundTask(named: taskName)
-            willBegin?()
+            willBegin()
 
             do {
                 let result = try await operation()
@@ -99,7 +103,7 @@ public actor CoalescedResult<T: Sendable>: Sendable {
         }
     }
 
-    private func complete(with result: Result<T, any Error>, didEnd: ((Result<T, Error>) -> Void)? = nil) {
+    private func complete(with result: Result<T, any Error>, didEnd: (Result<T, Error>) -> Void) {
         _isActive = false
 
         continuations.forEach { $0.resume(with: result) }
@@ -108,6 +112,6 @@ public actor CoalescedResult<T: Sendable>: Sendable {
         task?.finish()
         task = nil
 
-        didEnd?(result)
+        didEnd(result)
     }
 }
