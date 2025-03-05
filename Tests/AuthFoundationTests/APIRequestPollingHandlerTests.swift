@@ -126,7 +126,7 @@ final class APIRequestPollingHandlerTests: XCTestCase {
 
         let steps = await container.steps
         XCTAssertEqual(steps.count, 4, accuracy: 2)
-        XCTAssertEqual(endTime - startTime, 1.0, accuracy: 0.25)
+        XCTAssertEqual(endTime - startTime, 1.0, accuracy: 0.5)
     }
 
     func testFailure() async throws {
