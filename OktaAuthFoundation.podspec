@@ -7,17 +7,17 @@ Pod::Spec.new do |s|
 Provides the foundation and common features used to authenticate users, managing the lifecycle and storage of tokens and credentials, and provide a base for other Okta SDKs to build upon.
                          DESC
     s.platforms = {
-        :ios      => "12.0",
-        :tvos     => "12.0",
+        :ios      => "13.0",
+        :tvos     => "13.0",
         :visionos => "1.0",
         :watchos  => "7.0",
-        :osx      => "10.13"
+        :osx      => "10.15"
     }
-    s.ios.deployment_target      = "12.0"
-    s.tvos.deployment_target     = "12.0"
+    s.ios.deployment_target      = "13.0"
+    s.tvos.deployment_target     = "13.0"
     s.visionos.deployment_target = "1.0"
     s.watchos.deployment_target  = "7.0"
-    s.osx.deployment_target      = "10.13"
+    s.osx.deployment_target      = "10.15"
 
     s.homepage      = "https://github.com/okta/okta-mobile-swift"
     s.license       = { :type => "APACHE2", :file => "LICENSE" }
