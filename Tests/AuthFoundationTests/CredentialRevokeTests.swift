@@ -14,6 +14,10 @@ import XCTest
 @testable import TestCommon
 @testable import AuthFoundation
 
+#if os(Linux)
+import FoundationNetworking
+#endif
+
 final class CredentialTests: XCTestCase {
     var coordinator: MockCredentialCoordinator!
     var credential: Credential!

@@ -49,7 +49,7 @@ final class CredentialRefreshTests: XCTestCase, OAuth2ClientDelegate {
 
     func credential(for token: Token, expectAPICalls: APICalls = .refresh(count: 1), expiresIn: TimeInterval = 3600) throws -> Credential {
         let credential = coordinator.credentialDataSource.credential(for: token, coordinator: coordinator)
-        try coordinator.tokenStorage.add(token: token, metadata: nil, security: [.accessibility(.always)])
+        try coordinator.tokenStorage.add(token: token, metadata: nil, security: Credential.Security.standard)
         credential.oauth2.add(delegate: delegate)
         
         let urlSession = credential.oauth2.session as! URLSessionMock
