@@ -17,7 +17,7 @@ import OktaOAuth2
 import AuthenticationServices
 
 @available(iOS 12.0, macCatalyst 13.0, macOS 10.15, watchOS 6.2, tvOS 16.0, *)
-protocol AuthenticationServicesProviderSession {
+protocol AuthenticationServicesProviderSession: NSObjectProtocol {
     init(url URL: URL, callbackURLScheme: String?, completionHandler: @escaping ASWebAuthenticationSession.CompletionHandler)
 
     @available(iOS 13.0, macOS 10.15, *)
@@ -56,7 +56,7 @@ class AuthenticationServicesProvider: NSObject, WebAuthenticationProvider {
     
     func open(authorizeUrl: URL, redirectUri: URL) async throws -> URL {
         return try await withCheckedThrowingContinuation { continuation in
-            var session = Self.authenticationSessionClass.init(
+            let session = Self.authenticationSessionClass.init(
                 url: authorizeUrl,
                 callbackURLScheme: redirectUri.scheme,
                 completionHandler: { url, error in

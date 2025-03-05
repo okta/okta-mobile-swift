@@ -19,8 +19,7 @@ import XCTest
 @testable import WebAuthenticationUI
 import AuthenticationServices
 
-@available(iOS 13.0, *)
-class MockAuthenticationServicesProviderSession: AuthenticationServicesProviderSession {
+class MockAuthenticationServicesProviderSession: NSObject, AuthenticationServicesProviderSession {
     let url: URL
     let callbackURLScheme: String?
     let completionHandler: ASWebAuthenticationSession.CompletionHandler
