@@ -17,23 +17,65 @@ import FoundationNetworking
 #endif
 
 final class CredentialCoordinatorImpl: CredentialCoordinator {
+    private let lock = Lock()
+    private var _credentialDataSource: CredentialDataSource?
     var credentialDataSource: CredentialDataSource {
-        didSet {
-            credentialDataSource.delegate = self
+        get {
+            lock.withLock {
+                if let credentialDataSource = _credentialDataSource {
+                    return credentialDataSource
+                }
+
+                let result = Self.defaultCredentialDataSource()
+                _credentialDataSource = result
+                _credentialDataSource?.delegate = self
+                return result
+            }
+        }
+        set {
+            lock.withLock {
+                _credentialDataSource = newValue
+                _credentialDataSource?.delegate = self
+            }
         }
     }
-    
+
+    private var _tokenStorage: TokenStorage?
     var tokenStorage: TokenStorage {
-        didSet {
-            tokenStorage.delegate = self
-            
-            _default = try? CredentialCoordinatorImpl.defaultCredential(
-                tokenStorage: tokenStorage,
-                credentialDataSource: credentialDataSource,
-                coordinator: self)
+        get {
+            lock.withLock {
+                if let tokenStorage = _tokenStorage {
+                    return tokenStorage
+                }
+
+                let result = Self.defaultTokenStorage()
+                _tokenStorage = result
+                _tokenStorage?.delegate = self
+                return result
+            }
+        }
+        set {
+            lock.withLock {
+                _tokenStorage = newValue
+                _tokenStorage?.delegate = self
+                _default = _fetchDefaultCredential()
+            }
         }
     }
-        
+
+    private func _fetchDefaultCredential() -> Credential? {
+        guard let tokenStorage = _tokenStorage,
+              let credentialDataSource = _credentialDataSource
+        else {
+            return nil
+        }
+
+        return try? CredentialCoordinatorImpl.defaultCredential(
+            tokenStorage: tokenStorage,
+            credentialDataSource: credentialDataSource,
+            coordinator: self)
+    }
+
     private lazy var _default: Credential? = {
         do {
             return try CredentialCoordinatorImpl.defaultCredential(
@@ -122,17 +164,14 @@ final class CredentialCoordinatorImpl: CredentialCoordinator {
         }
         return nil
     }
-    
-    init(tokenStorage: TokenStorage = defaultTokenStorage(),
-         credentialDataSource: CredentialDataSource = defaultCredentialDataSource())
-    {
-        self.credentialDataSource = credentialDataSource
-        self.tokenStorage = tokenStorage
 
-        self.credentialDataSource.delegate = self
-        self.tokenStorage.delegate = self
+    func resetToDefault() {
+        lock.withLock {
+            _tokenStorage = nil
+            _credentialDataSource = nil
+        }
     }
-    
+
     func observe(oauth2 client: OAuth2Client) {
         client.add(delegate: self)
     }

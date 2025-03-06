@@ -304,8 +304,7 @@ public final class Credential: Equatable, OAuth2ClientDelegate {
     weak var coordinator: CredentialCoordinator?
 
     static func resetToDefault() {
-        Credential.tokenStorage = CredentialCoordinatorImpl.defaultTokenStorage()
-        Credential.credentialDataSource = CredentialCoordinatorImpl.defaultCredentialDataSource()
+        coordinator.resetToDefault()
     }
 
     let userInfoAction = CoalescedResult<UserInfo>(taskName: "UserInfo")

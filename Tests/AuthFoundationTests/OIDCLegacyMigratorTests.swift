@@ -36,7 +36,7 @@ final class OIDCLegacyMigratorTests: XCTestCase {
 
         SDKVersion.Migration.resetMigrators()
         
-        Credential.resetToDefault()
+        Credential.coordinator.resetToDefault()
     }
 
     func testRegister() throws {

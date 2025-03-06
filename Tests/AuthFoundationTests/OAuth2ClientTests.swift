@@ -59,7 +59,7 @@ final class OAuth2ClientTests: XCTestCase {
     }
     
     override func tearDownWithError() throws {
-        Credential.resetToDefault()
+        Credential.coordinator.resetToDefault()
         urlSession = nil
         client = nil
     }

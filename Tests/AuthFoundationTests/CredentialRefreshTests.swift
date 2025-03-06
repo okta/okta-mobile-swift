@@ -37,7 +37,6 @@ class CredentialRefreshDelegate: OAuth2ClientDelegate {
 
 final class CredentialRefreshTests: XCTestCase, OAuth2ClientDelegate {
     var delegate: CredentialRefreshDelegate!
-    var coordinator: MockCredentialCoordinator!
     var notification: NotificationRecorder!
 
     enum APICalls {
@@ -48,8 +47,7 @@ final class CredentialRefreshTests: XCTestCase, OAuth2ClientDelegate {
     }
 
     func credential(for token: Token, expectAPICalls: APICalls = .refresh(count: 1), expiresIn: TimeInterval = 3600) throws -> Credential {
-        let credential = coordinator.credentialDataSource.credential(for: token, coordinator: coordinator)
-        try coordinator.tokenStorage.add(token: token, metadata: nil, security: Credential.Security.standard)
+        let credential = try Credential.store(token)
         credential.oauth2.add(delegate: delegate)
         
         let urlSession = credential.oauth2.session as! URLSessionMock
@@ -93,14 +91,15 @@ final class CredentialRefreshTests: XCTestCase, OAuth2ClientDelegate {
     }
     
     override func setUpWithError() throws {
+        Credential.tokenStorage = MockTokenStorage()
+        Credential.credentialDataSource = MockCredentialDataSource()
         delegate = CredentialRefreshDelegate()
-        coordinator = MockCredentialCoordinator()
         notification = NotificationRecorder(observing: [.credentialRefreshFailed, .tokenRefreshFailed])
     }
     
     override func tearDownWithError() throws {
+        Credential.coordinator.resetToDefault()
         delegate = nil
-        coordinator = nil
         notification = nil
     }
     
