@@ -112,55 +112,34 @@ public class TokenExchangeFlow: AuthenticationFlow {
         client.add(delegate: self)
     }
     
-    /// Initiates a token exchange flow.
-    ///
-    /// This method is used to begin a token exchange.  This method is asynchronous, and will invoke the appropriate delegate methods when a response is received.
-    /// - Parameters:
-    ///   - tokens: Tokens to exchange.
-    ///   - completion: Completion block for receiving the response.
+    /// Asynchronously initiates a token exchange flow.
+    /// - Parameter tokens: Tokens to exchange. If empty, the method throws an error.
+    /// - Returns: The the token created as a result of exchanging the tokens.
     public func start(with tokens: [TokenType],
-                      context: Context = .init(),
-                      completion: @escaping (Result<Token, OAuth2Error>) -> Void)
+                      context: Context = .init()) async throws -> Token
     {
-        guard !tokens.isEmpty else {
-            delegateCollection.invoke { $0.authentication(flow: self, received: OAuth2Error.cannotComposeUrl) }
-            completion(.failure(OAuth2Error.cannotComposeUrl))
-            
-            return
-        }
-        
-        isAuthenticating = true
-        self.context = context
-        let clientConfiguration = client.configuration
-        let additionalParameters = additionalParameters
-        
-        client.openIdConfiguration { result in
-            switch result {
-            case .success(let openIdConfiguration):
-                let request = TokenRequest(openIdConfiguration: openIdConfiguration,
-                                           clientConfiguration: clientConfiguration,
-                                           additionalParameters: additionalParameters,
-                                           context: context,
-                                           tokens: tokens)
-                self.client.exchange(token: request) { result in
-                    switch result {
-                    case .failure(let error):
-                        let oauthError = OAuth2Error.error(error)
-                        self.delegateCollection.invoke { $0.authentication(flow: self, received: oauthError) }
-                        completion(.failure(oauthError))
-                    case .success(let response):
-                        self.delegateCollection.invoke { $0.authentication(flow: self, received: response.result) }
-                        completion(.success(response.result))
-                    }
-                    
-                    self.finished()
-                }
-                
-            case .failure(let error):
-                self.delegateCollection.invoke { $0.authentication(flow: self, received: error) }
-                completion(.failure(error))
-                self.finished()
+        try await withExpression {
+            guard !tokens.isEmpty else {
+                delegateCollection.invoke { $0.authentication(flow: self, received: OAuth2Error.cannotComposeUrl) }
+                finished()
+                throw OAuth2Error.cannotComposeUrl
             }
+            
+            isAuthenticating = true
+            self.context = context
+            
+            let request = TokenRequest(openIdConfiguration: try await client.openIdConfiguration(),
+                                       clientConfiguration: client.configuration,
+                                       additionalParameters: additionalParameters,
+                                       context: context,
+                                       tokens: tokens)
+            return try await client.exchange(token: request).result
+        } success: { result in
+            delegateCollection.invoke { $0.authentication(flow: self, received: result) }
+        } failure: { error in
+            delegateCollection.invoke { $0.authentication(flow: self, received: OAuth2Error(error)) }
+        } finally: {
+            finished()
         }
     }
 
@@ -178,17 +157,22 @@ extension TokenExchangeFlow: OAuth2ClientDelegate {
     
 }
 
-@available(iOS 13.0, tvOS 13.0, macOS 10.15, watchOS 6, *)
 extension TokenExchangeFlow {
-    /// Asynchronously initiates a token exchange flow.
-    /// - Parameter tokens: Tokens to exchange. If empty, the method throws an error.
-    /// - Returns: The the token created as a result of exchanging the tokens.
+    /// Initiates a token exchange flow.
+    ///
+    /// This method is used to begin a token exchange.  This method is asynchronous, and will invoke the appropriate delegate methods when a response is received.
+    /// - Parameters:
+    ///   - tokens: Tokens to exchange.
+    ///   - completion: Completion block for receiving the response.
     public func start(with tokens: [TokenType],
-                      context: Context = .init()) async throws -> Token
+                      context: Context = .init(),
+                      completion: @escaping (Result<Token, OAuth2Error>) -> Void)
     {
-        try await withCheckedThrowingContinuation { continuation in
-            start(with: tokens, context: context) { result in
-                continuation.resume(with: result)
+        Task {
+            do {
+                completion(.success(try await start(with: tokens, context: context)))
+            } catch {
+                completion(.failure(OAuth2Error(error)))
             }
         }
     }

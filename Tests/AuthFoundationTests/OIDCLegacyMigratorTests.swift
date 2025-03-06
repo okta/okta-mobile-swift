@@ -36,8 +36,7 @@ final class OIDCLegacyMigratorTests: XCTestCase {
 
         SDKVersion.Migration.resetMigrators()
         
-        Credential.tokenStorage = CredentialCoordinatorImpl.defaultTokenStorage()
-        Credential.credentialDataSource = CredentialCoordinatorImpl.defaultCredentialDataSource()
+        Credential.coordinator.resetToDefault()
     }
 
     func testRegister() throws {

@@ -117,7 +117,6 @@ final class ResourceOwnerFlowSuccessTests: XCTestCase {
         XCTAssertNotNil(token)
     }
 
-    @available(iOS 13.0, tvOS 13.0, macOS 10.15, watchOS 6, *)
     func testWithAsync() async throws {
         // Ensure the initial state
         XCTAssertFalse(flow.isAuthenticating)

@@ -31,7 +31,7 @@ final class OAuth2ClientTests: XCTestCase {
         XCTAssertNotNil(flow)
     }
     
-    func testExchange() throws {
+    func testExchange() async throws {
         let pkce = try XCTUnwrap(PKCE())
         let (openIdConfiguration, openIdData) = try openIdConfiguration()
         let clientConfiguration = try OAuth2Client.Configuration(domain: "example.com",
@@ -61,20 +61,7 @@ final class OAuth2ClientTests: XCTestCase {
                           data: try data(from: .module, for: "token", in: "MockResponses"),
                           contentType: "application/json")
         
-        var token: Token?
-        let expect = expectation(description: "network request")
-        client.exchange(token: request) { result in
-            guard case let .success(apiResponse) = result else {
-                XCTFail()
-                return
-            }
-            
-            token = apiResponse.result
-            expect.fulfill()
-        }
-        waitForExpectations(timeout: 1.0) { error in
-            XCTAssertNil(error)
-        }
+        let token = try await client.exchange(token: request).result
         XCTAssertEqual(try XCTUnwrap(urlSession.formDecodedBody(matching: "/v1/token")), [
             "grant_type": "authorization_code",
             "code_verifier": pkce.codeVerifier,
@@ -85,15 +72,15 @@ final class OAuth2ClientTests: XCTestCase {
         ])
         
         XCTAssertNotNil(token)
-        XCTAssertEqual(token?.tokenType, "Bearer")
-        XCTAssertEqual(token?.expiresIn, 3600)
-        XCTAssertEqual(token?.accessToken, JWT.mockAccessToken)
-        XCTAssertEqual(token?.refreshToken, "therefreshtoken")
-        XCTAssertNotNil(token?.idToken)
-        XCTAssertEqual(token?.scope, ["openid", "profile", "offline_access"])
+        XCTAssertEqual(token.tokenType, "Bearer")
+        XCTAssertEqual(token.expiresIn, 3600)
+        XCTAssertEqual(token.accessToken, JWT.mockAccessToken)
+        XCTAssertEqual(token.refreshToken, "therefreshtoken")
+        XCTAssertNotNil(token.idToken)
+        XCTAssertEqual(token.scope, ["openid", "profile", "offline_access"])
     }
     
-    func testExchangeFailed() throws {
+    func testExchangeFailed() async throws {
         let pkce = try XCTUnwrap(PKCE())
         Token.idTokenValidator = MockIDTokenValidator(error: .invalidIssuer)
         let (openIdConfiguration, openIdData) = try openIdConfiguration(named: "openid-configuration-invalid-issuer")
@@ -124,21 +111,9 @@ final class OAuth2ClientTests: XCTestCase {
                           data: try data(from: .module, for: "token", in: "MockResponses"),
                           contentType: "application/json")
 
-        let expect = expectation(description: "network request")
-        client.exchange(token: request) { result in
-            guard case let .failure(error) = result,
-                  case let .validation(error: invalidIssuer) = error
-            else {
-                XCTFail("Did not receive an expected validation failure. \(result)")
-                return
-            }
-            XCTAssertEqual(invalidIssuer as? JWTError, JWTError.invalidIssuer)
-            expect.fulfill()
-        }
-
-        waitForExpectations(timeout: 1.0) { error in
-            XCTAssertNil(error)
-        }
+        let error = await XCTAssertThrowsErrorAsync(try await client.exchange(token: request))
+        let jwtError = try XCTUnwrap(error as? JWTError)
+        XCTAssertEqual(jwtError, .invalidIssuer)
 
         XCTAssertEqual(urlSession.formDecodedBody(matching: "/v1/token"), [
             "grant_type": "authorization_code",

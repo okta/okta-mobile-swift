@@ -18,6 +18,26 @@ enum TestError: Error {
     case noBundleResourceFound
 }
 
+public extension XCTest {
+    @discardableResult
+    func XCTAssertThrowsErrorAsync<T: Sendable>(
+        _ expression: @autoclosure () async throws -> T,
+        _ message: @autoclosure () -> String = "",
+        file: StaticString = #filePath,
+        line: UInt = #line,
+        _ errorHandler: (_ error: Error) -> Void = { _ in }
+    ) async -> (any Error)? {
+        do {
+            _ = try await expression()
+            XCTFail(message(), file: file, line: line)
+        } catch {
+            errorHandler(error)
+            return error
+        }
+        return nil
+    }
+}
+
 public extension XCTestCase {
     func mock<T: Decodable & JSONDecodable>(from bundle: Bundle,
                  for filename: String,
@@ -81,7 +101,6 @@ public extension XCTestCase {
         return try decoder.decode(T.self, from: jsonData)
     }
     
-    @available(iOS 13.0, tvOS 13.0, macOS 10.15, watchOS 6, *)
     func perform(queueCount: Int = 5, iterationCount: Int = 10, _ block: @escaping () async throws -> Void) rethrows {
         let queues: [DispatchQueue] = (0..<queueCount).map { queueNumber in
             DispatchQueue(label: "Async queue \(queueNumber)")

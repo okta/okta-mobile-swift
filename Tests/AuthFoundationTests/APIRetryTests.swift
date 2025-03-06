@@ -49,64 +49,94 @@ class APIRetryTests: XCTestCase {
                                session: urlSession,
                                baseURL: issuerURL)
         apiRequest = MockApiRequest(url: URL(string: "\(issuerURL.absoluteString)/oauth2/v1/token")!)
+        
+        _APIClientRetryDelayTimeIntervalToNanoseconds = 1_000
     }
 
-    func testShouldNotRetry() throws {
+    override func tearDownWithError() throws {
+        _APIClientRetryDelayTimeIntervalToNanoseconds = 1_000_000_000
+    }
+    
+    func testShouldNotRetry() async throws {
         client = MockApiClient(configuration: configuration,
                                session: urlSession,
                                baseURL: issuerURL,
                                shouldRetry: .doNotRetry)
-        try performRetryRequest(count: 1)
+        try await performRetryRequest(count: 1)
         XCTAssertNil(client.request?.allHTTPHeaderFields?["X-Okta-Retry-Count"])
     }
     
-    func testDefaultRetryCount() throws {
-        try performRetryRequest(count: 4)
-        XCTAssertEqual(client.request?.allHTTPHeaderFields?["X-Okta-Retry-Count"], "3")
-        XCTAssertEqual(client.request?.allHTTPHeaderFields?["X-Okta-Retry-For"], requestId)
+    func testDefaultRetryCount() async throws {
+        try await performRetryRequest(count: 4)
+        
+        XCTAssertEqual(urlSession.requests.count, 4)
+        XCTAssertNil(urlSession.requests[0].allHTTPHeaderFields?["X-Okta-Retry-Count"])
+        XCTAssertNil(urlSession.requests[0].allHTTPHeaderFields?["X-Okta-Retry-For"])
+        for index in 1..<4 {
+            XCTAssertEqual(urlSession.requests[index].allHTTPHeaderFields?["X-Okta-Retry-Count"], "\(index)")
+            XCTAssertEqual(urlSession.requests[index].allHTTPHeaderFields?["X-Okta-Retry-For"], requestId)
+        }
     }
 
-    func testApiRetryReturnsSuccessStatusCode() throws {
-        try performRetryRequest(count: 1, isSuccess: true)
-        XCTAssertEqual(client.request?.allHTTPHeaderFields?["X-Okta-Retry-Count"], "1")
-        XCTAssertEqual(client.request?.allHTTPHeaderFields?["X-Okta-Retry-For"], requestId)
+    func testApiRetryReturnsSuccessStatusCode() async throws {
+        try await performRetryRequest(count: 1, isSuccess: true)
+        XCTAssertEqual(urlSession.requests.count, 2)
+        XCTAssertNil(urlSession.requests[0].allHTTPHeaderFields?["X-Okta-Retry-Count"])
+        XCTAssertNil(urlSession.requests[0].allHTTPHeaderFields?["X-Okta-Retry-For"])
+        XCTAssertEqual(urlSession.requests[1].allHTTPHeaderFields?["X-Okta-Retry-Count"], "1")
+        XCTAssertEqual(urlSession.requests[1].allHTTPHeaderFields?["X-Okta-Retry-For"], requestId)
     }
     
-    func testApiRetryUsingMaximumRetryAttempt() throws {
-        try performRetryRequest(count: 3, isSuccess: true)
-        XCTAssertEqual(client.request?.allHTTPHeaderFields?["X-Okta-Retry-Count"], "3")
-        XCTAssertEqual(client.request?.allHTTPHeaderFields?["X-Okta-Retry-For"], requestId)
+    func testApiRetryUsingMaximumRetryAttempt() async throws {
+        try await performRetryRequest(count: 3, isSuccess: true)
+        XCTAssertEqual(urlSession.requests.count, 4)
+        XCTAssertNil(urlSession.requests[0].allHTTPHeaderFields?["X-Okta-Retry-Count"])
+        XCTAssertNil(urlSession.requests[0].allHTTPHeaderFields?["X-Okta-Retry-For"])
+        for index in 1..<4 {
+            XCTAssertEqual(urlSession.requests[index].allHTTPHeaderFields?["X-Okta-Retry-Count"], "\(index)")
+            XCTAssertEqual(urlSession.requests[index].allHTTPHeaderFields?["X-Okta-Retry-For"], requestId)
+        }
     }
     
-    func testCustomRetryCount() throws {
+    func testCustomRetryCount() async throws {
         client = MockApiClient(configuration: configuration,
                                session: urlSession,
                                baseURL: issuerURL,
                                shouldRetry: .retry(maximumCount: 5))
-        try performRetryRequest(count: 6)
-        XCTAssertEqual(client.request?.allHTTPHeaderFields?["X-Okta-Retry-Count"], "5")
-        XCTAssertEqual(client.request?.allHTTPHeaderFields?["X-Okta-Retry-For"], requestId)
+        try await performRetryRequest(count: 6)
+        XCTAssertEqual(urlSession.requests.count, 6)
+        XCTAssertNil(urlSession.requests[0].allHTTPHeaderFields?["X-Okta-Retry-Count"])
+        XCTAssertNil(urlSession.requests[0].allHTTPHeaderFields?["X-Okta-Retry-For"])
+        for index in 1..<6 {
+            XCTAssertEqual(urlSession.requests[index].allHTTPHeaderFields?["X-Okta-Retry-Count"], "\(index)")
+            XCTAssertEqual(urlSession.requests[index].allHTTPHeaderFields?["X-Okta-Retry-For"], requestId)
+        }
     }
     
-    func testRetryDelegateDoNotRetry() throws {
+    func testRetryDelegateDoNotRetry() async throws {
         let delegate = APIRetryDelegateRecorder()
         delegate.response = .doNotRetry
         client.delegate = delegate
         
-        try performRetryRequest(count: 1, isSuccess: false)
+        try await performRetryRequest(count: 1, isSuccess: false)
         XCTAssertEqual(delegate.requests.count, 1)
         XCTAssertNil(client.request?.allHTTPHeaderFields?["X-Okta-Retry-Count"])
     }
     
-    func testRetryDelegateRetry() throws {
+    func testRetryDelegateRetry() async throws {
         let delegate = APIRetryDelegateRecorder()
         delegate.response = .retry(maximumCount: 5)
         client.delegate = delegate
         
-        try performRetryRequest(count: 5, isSuccess: true)
+        try await performRetryRequest(count: 5, isSuccess: true)
         XCTAssertEqual(delegate.requests.count, 1)
-        XCTAssertEqual(client.request?.allHTTPHeaderFields?["X-Okta-Retry-Count"], "5")
-        XCTAssertEqual(client.request?.allHTTPHeaderFields?["X-Okta-Retry-For"], requestId)
+        XCTAssertEqual(urlSession.requests.count, 6)
+        XCTAssertNil(urlSession.requests[0].allHTTPHeaderFields?["X-Okta-Retry-Count"])
+        XCTAssertNil(urlSession.requests[0].allHTTPHeaderFields?["X-Okta-Retry-For"])
+        for index in 1..<5 {
+            XCTAssertEqual(urlSession.requests[index].allHTTPHeaderFields?["X-Okta-Retry-Count"], "\(index)")
+            XCTAssertEqual(urlSession.requests[index].allHTTPHeaderFields?["X-Okta-Retry-For"], requestId)
+        }
     }
     
     func testApiRateLimit() throws {
@@ -119,7 +149,7 @@ class APIRetryTests: XCTestCase {
         XCTAssertEqual(rateLimit?.delay, 59.0)
     }
     
-    func testMissingResetHeader() throws {
+    func testMissingResetHeader() async throws {
         urlSession.expect("https://example.okta.com/oauth2/v1/token",
                           data: try data(from: .module, for: "token", in: "MockResponses"),
                           statusCode: 429,
@@ -128,22 +158,12 @@ class APIRetryTests: XCTestCase {
                                          "x-rate-limit-remaining": "0",
                                          "x-okta-request-id": requestId])
         
-        let expect = expectation(description: "network request")
-        apiRequest.send(to: client, completion: { result in
-            guard case .failure(let error) = result else {
-                XCTFail()
-                return
-            }
+        await XCTAssertThrowsErrorAsync(try await apiRequest.send(to: client)) { error in
             XCTAssertEqual(error.localizedDescription, APIClientError.statusCode(429).localizedDescription)
-            expect.fulfill()
-        })
-        
-        waitForExpectations(timeout: 1.0) { error in
-            XCTAssertNil(error)
         }
     }
     
-    func performRetryRequest(count: Int, isSuccess: Bool = false) throws {
+    func performRetryRequest(count: Int, isSuccess: Bool = false) async throws {
         let date = "Fri, 09 Sep 2022 02:22:14 GMT"
         for _ in 0..<count {
             urlSession.expect("https://example.okta.com/oauth2/v1/token",
@@ -165,19 +185,15 @@ class APIRetryTests: XCTestCase {
                                              "x-okta-request-id": requestId])
         }
         
-        let expect = expectation(description: "network request")
-        apiRequest.send(to: client, completion: { result in
-            switch result {
-            case .success(let response):
-                XCTAssertNotNil(response)
-                XCTAssertEqual(response.requestId, self.requestId)
-            case .failure(let error):
-                XCTAssertEqual(error.errorDescription, APIClientError.statusCode(429).errorDescription)
+        if isSuccess {
+            let response = try await apiRequest.send(to: client)
+            XCTAssertNotNil(response)
+            XCTAssertEqual(response.requestId, self.requestId)
+        } else {
+            await XCTAssertThrowsErrorAsync(try await apiRequest.send(to: client)) { error in
+                let error = error as? APIClientError
+                XCTAssertEqual(error?.errorDescription, APIClientError.statusCode(429).errorDescription)
             }
-            expect.fulfill()
-        })
-        waitForExpectations(timeout: 9.0) { error in
-            XCTAssertNil(error)
         }
     }
 }

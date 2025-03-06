@@ -37,7 +37,6 @@ class CredentialRefreshDelegate: OAuth2ClientDelegate {
 
 final class CredentialRefreshTests: XCTestCase, OAuth2ClientDelegate {
     var delegate: CredentialRefreshDelegate!
-    var coordinator: MockCredentialCoordinator!
     var notification: NotificationRecorder!
 
     enum APICalls {
@@ -48,7 +47,7 @@ final class CredentialRefreshTests: XCTestCase, OAuth2ClientDelegate {
     }
 
     func credential(for token: Token, expectAPICalls: APICalls = .refresh(count: 1), expiresIn: TimeInterval = 3600) throws -> Credential {
-        let credential = coordinator.credentialDataSource.credential(for: token, coordinator: coordinator)
+        let credential = try Credential.store(token)
         credential.oauth2.add(delegate: delegate)
         
         let urlSession = credential.oauth2.session as! URLSessionMock
@@ -92,14 +91,15 @@ final class CredentialRefreshTests: XCTestCase, OAuth2ClientDelegate {
     }
     
     override func setUpWithError() throws {
+        Credential.tokenStorage = MockTokenStorage()
+        Credential.credentialDataSource = MockCredentialDataSource()
         delegate = CredentialRefreshDelegate()
-        coordinator = MockCredentialCoordinator()
         notification = NotificationRecorder(observing: [.credentialRefreshFailed, .tokenRefreshFailed])
     }
     
     override func tearDownWithError() throws {
+        Credential.coordinator.resetToDefault()
         delegate = nil
-        coordinator = nil
         notification = nil
     }
     
@@ -116,8 +116,6 @@ final class CredentialRefreshTests: XCTestCase, OAuth2ClientDelegate {
             }
             expect.fulfill()
         }
-        
-        XCTAssertTrue(credential.token.isRefreshing)
 
         waitForExpectations(timeout: 3.0) { error in
             XCTAssertNil(error)
@@ -213,8 +211,6 @@ final class CredentialRefreshTests: XCTestCase, OAuth2ClientDelegate {
             expect.fulfill()
         }
         
-        XCTAssertTrue(credential.token.isRefreshing)
-
         waitForExpectations(timeout: 3.0) { error in
             XCTAssertNil(error)
         }
@@ -259,8 +255,6 @@ final class CredentialRefreshTests: XCTestCase, OAuth2ClientDelegate {
             }
             expect.fulfill()
         }
-        
-        XCTAssertTrue(credential.token.isRefreshing)
         
         waitForExpectations(timeout: 3.0) { error in
             XCTAssertNil(error)
@@ -344,7 +338,6 @@ final class CredentialRefreshTests: XCTestCase, OAuth2ClientDelegate {
         XCTAssertEqual(credential.token.refreshToken, "therefreshtoken-3")
     }
 
-    @available(iOS 13.0, tvOS 13.0, macOS 10.15, watchOS 6, *)
     func testRefreshAsync() async throws {
         let credential = try credential(for: Token.simpleMockToken)
         try perform {
@@ -352,7 +345,6 @@ final class CredentialRefreshTests: XCTestCase, OAuth2ClientDelegate {
         }
     }
 
-    @available(iOS 13.0, tvOS 13.0, macOS 10.15, watchOS 6, *)
     func testRefreshIfNeededExpiredAsync() async throws {
         let credential = try credential(for: Token.mockToken(issuedOffset: 6000))
         try perform {
@@ -360,7 +352,6 @@ final class CredentialRefreshTests: XCTestCase, OAuth2ClientDelegate {
         }
     }
 
-    @available(iOS 13.0, tvOS 13.0, macOS 10.15, watchOS 6, *)
     func testRefreshIfNeededWithinGraceIntervalAsync() async throws {
         let credential = try credential(for: Token.mockToken(issuedOffset: 0),
                                            expectAPICalls: .none)
@@ -369,7 +360,6 @@ final class CredentialRefreshTests: XCTestCase, OAuth2ClientDelegate {
         }
     }
 
-    @available(iOS 13.0, tvOS 13.0, macOS 10.15, watchOS 6, *)
     func testRefreshIfNeededOutsideGraceIntervalAsync() async throws {
         let credential = try credential(for: Token.mockToken(issuedOffset: 3500))
         try perform {

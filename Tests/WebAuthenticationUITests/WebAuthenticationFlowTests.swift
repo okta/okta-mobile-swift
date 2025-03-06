@@ -13,69 +13,119 @@
 #if canImport(UIKit) || canImport(AppKit)
 
 import XCTest
+import AuthenticationServices
 @testable import AuthFoundation
 @testable import TestCommon
 @testable import OktaOAuth2
 @testable import WebAuthenticationUI
 
-class WebAuthenticationUITests: XCTestCase {
-    private let issuer = URL(string: "https://example.com")!
+class WebAuthenticationFlowTests: XCTestCase {
+    private let issuer = URL(string: "https://example.okta.com")!
     private let redirectUri = URL(string: "com.example:/callback")!
     private let logoutRedirectUri = URL(string: "com.example:/logout")!
     private let urlSession = URLSessionMock()
-    private var loginFlow: AuthorizationCodeFlow!
-    private var logoutFlow: SessionLogoutFlow!
     private var client: OAuth2Client!
     
     override func setUpWithError() throws {
+        WebAuthentication.providerFactory = WebAuthenticationProviderFactoryMock.self
+        JWK.validator = MockJWKValidator()
+        Token.idTokenValidator = MockIDTokenValidator()
+        Token.accessTokenValidator = MockTokenHashValidator()
+
         client = OAuth2Client(issuerURL: issuer,
                               clientId: "clientId",
                               scope: "openid profile",
                               redirectUri: redirectUri,
                               logoutRedirectUri: logoutRedirectUri,
                               session: urlSession)
-        
-        urlSession.expect("https://example.com/.well-known/openid-configuration",
+        urlSession.expect("https://example.okta.com/.well-known/openid-configuration",
                           data: try data(from: .module, for: "openid-configuration", in: "MockResponses"),
                           contentType: "application/json")
-        loginFlow = try client.authorizationCodeFlow(additionalParameters: ["additional": "param"])
-        logoutFlow = SessionLogoutFlow(client: client)
+        urlSession.expect("https://example.okta.com/oauth2/v1/keys?client_id=clientId",
+                          data: try data(from: .module, for: "keys", in: "MockResponses"),
+                          contentType: "application/json")
+        urlSession.expect("https://example.okta.com/oauth2/v1/token",
+                          data: try data(from: .module, for: "token", in: "MockResponses"),
+                          contentType: "application/json")
     }
     
-    func testStart() throws {
-        let webAuth = WebAuthenticationMock(loginFlow: loginFlow, logoutFlow: logoutFlow)
-        
-        webAuth.signIn(from: nil, context: .init(state: "qwe")) { result in }
-        
-        let webAuthProvider = try XCTUnwrap(webAuth.provider as? WebAuthenticationProviderMock)
-
-        XCTAssertNotNil(webAuth.completionBlock)
-        XCTAssertTrue(webAuthProvider.state == .started)
+    override func tearDownWithError() throws {
+        WebAuthentication.resetToDefault()
+        JWK.resetToDefault()
+        Token.resetToDefault()
     }
     
-    func testLogout() throws {
-        let webAuth = WebAuthenticationMock(loginFlow: loginFlow, logoutFlow: logoutFlow)
+    func testStart() async throws {
+        let webAuth = try WebAuthentication(client: client,
+                                            additionalParameters: ["testName": name])
+
+        try WebAuthenticationProviderFactoryMock.register(
+            result: .success(URL(string: "com.example:/callback?state=qwe&code=the_auth_code")!),
+            for: webAuth)
+
+        let token = try await webAuth.signIn(from: nil, context: .init(state: "qwe"))
+        XCTAssertEqual(token.refreshToken, "therefreshtoken")
+
+        let provider = try XCTUnwrap(WebAuthenticationProviderFactoryMock.provider(for: webAuth))
+        guard case let .opened(authorizeUrl: authorizeUrl, redirectUri: redirectUri) = provider.state
+        else {
+            XCTFail()
+            return
+        }
         
-        webAuth.signOut(from: nil, context: .init(idToken: "idToken", state: "qwe")) { result in }
-        
-        let provider = try XCTUnwrap(webAuth.provider as? WebAuthenticationProviderMock)
-        XCTAssertNil(webAuth.completionBlock)
-        XCTAssertNotNil(webAuth.logoutCompletionBlock)
-        XCTAssertNotNil(provider.state == .started)
+        let authorizeQueryItems = authorizeUrl.query?.urlFormDecoded()
+        XCTAssertEqual(authorizeQueryItems?["client_id"], "clientId")
+        XCTAssertEqual(authorizeQueryItems?["redirect_uri"], "com.example:/callback")
+        XCTAssertEqual(authorizeQueryItems?["response_type"], "code")
+        XCTAssertEqual(authorizeQueryItems?["state"], "qwe")
+        XCTAssertEqual(redirectUri.absoluteString, "com.example:/callback")
     }
     
-    func testCancel() throws {
-        let webAuth = WebAuthenticationMock(loginFlow: loginFlow, logoutFlow: logoutFlow)
-        
-        XCTAssertNil(webAuth.provider)
-        
-        webAuth.signIn(from: nil, context: .init(state: "qwe")) { result in }
+    func testLogout() async throws {
+        let webAuth = try WebAuthentication(client: client,
+                                            additionalParameters: ["testName": name])
 
-        let webAuthProvider = try XCTUnwrap(webAuth.provider as? WebAuthenticationProviderMock)
+        try WebAuthenticationProviderFactoryMock.register(
+            result: .success(URL(string: "com.example:/logout?state=qwe")!),
+            for: webAuth)
 
-        webAuth.cancel()
+        let result = try await webAuth.signOut(from: nil, context: .init(idToken: "idToken", state: "qwe"))
+        XCTAssertEqual(result.absoluteString, "com.example:/logout?state=qwe")
+
+        let provider = try XCTUnwrap(WebAuthenticationProviderFactoryMock.provider(for: webAuth))
+        guard case let .opened(authorizeUrl: authorizeUrl, redirectUri: redirectUri) = provider.state
+        else {
+            XCTFail()
+            return
+        }
         
-        XCTAssertTrue(webAuthProvider.state == .cancelled)
+        let authorizeQueryItems = authorizeUrl.query?.urlFormDecoded()
+        XCTAssertEqual(authorizeQueryItems?["client_id"], "clientId")
+        XCTAssertEqual(authorizeQueryItems?["post_logout_redirect_uri"], "com.example:/logout")
+        XCTAssertEqual(authorizeQueryItems?["id_token_hint"], "idToken")
+        XCTAssertEqual(authorizeQueryItems?["state"], "qwe")
+        XCTAssertEqual(redirectUri.absoluteString, "com.example:/logout")
+    }
+    
+    func testCancel() async throws {
+        let webAuth = try WebAuthentication(client: client,
+                                            additionalParameters: ["testName": name])
+
+        try WebAuthenticationProviderFactoryMock.register(
+            result: .failure(NSError(domain: ASWebAuthenticationSessionErrorDomain,
+                                     code: ASWebAuthenticationSessionError.canceledLogin.rawValue,
+                                     userInfo: nil)),
+            for: webAuth)
+
+        let error = try await XCTAssertThrowsErrorAsync(await webAuth.signIn(from: nil, context: .init(state: "qwe")))
+        XCTAssertEqual(error as? WebAuthenticationError, .userCancelledLogin)
+
+        let provider = try XCTUnwrap(WebAuthenticationProviderFactoryMock.provider(for: webAuth))
+        guard case .cancelled = provider.state
+        else {
+            XCTFail()
+            return
+        }
     }
 }
 

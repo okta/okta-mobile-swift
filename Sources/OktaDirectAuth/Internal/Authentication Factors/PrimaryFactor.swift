@@ -27,8 +27,7 @@ extension DirectAuthenticationFlow.PrimaryFactor {
 extension DirectAuthenticationFlow.PrimaryFactor: AuthenticationFactor {
     func stepHandler(flow: DirectAuthenticationFlow,
                      openIdConfiguration: OpenIdConfiguration,
-                     loginHint: String? = nil,
-                     factor: Self) throws -> StepHandler
+                     loginHint: String? = nil) throws -> StepHandler
     {
         guard let context = flow.context else {
             throw DirectAuthenticationFlowError.inconsistentContextState
@@ -41,7 +40,7 @@ extension DirectAuthenticationFlow.PrimaryFactor: AuthenticationFactor {
                                        clientConfiguration: flow.client.configuration,
                                        context: context,
                                        loginHint: loginHint,
-                                       factor: factor,
+                                       factor: self,
                                        grantTypesSupported: flow.supportedGrantTypes)
             return TokenStepHandler(flow: flow, request: request)
         case .oob(channel: let channel):
@@ -50,7 +49,7 @@ extension DirectAuthenticationFlow.PrimaryFactor: AuthenticationFactor {
                                       context: context,
                                       loginHint: loginHint,
                                       channel: channel,
-                                      factor: factor)
+                                      factor: self)
         case .webAuthn:
             let mfaContext = context.currentStatus?.mfaContext
             let request = try WebAuthnChallengeRequest(openIdConfiguration: openIdConfiguration,
