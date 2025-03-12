@@ -59,11 +59,11 @@ extension WebLogin where Self: Screen {
         
         if app.webViews.textFields.firstMatch.waitForExistence(timeout: .veryLong) {
             let field = app.webViews.textFields.element(boundBy: 0)
-            field.tap()
-            _ = app.keyboards.firstMatch.waitForExistence(timeout: .standard)
-
             let fieldValue = field.value as? String ?? ""
             if fieldValue != username {
+                field.tap()
+                _ = app.keyboards.firstMatch.waitForExistence(timeout: .standard)
+                
                 if !fieldValue.isEmpty {
                     usleep(useconds_t(1000)) // Wait for the field to be selected
                     field.tap(withNumberOfTaps: 3, numberOfTouches: 1)
@@ -74,14 +74,10 @@ extension WebLogin where Self: Screen {
                 field.typeText(username)
             }
             
-            if app.webViews.buttons["Next"].isHittable {
-                app.webViews.buttons["Next"].tap()
-            } else {
-                tapKeyboardNextOrGo()
-            }
+            tapKeyboardNextOrGo()
         }
     }
-    
+
     func select(authenticator: String) {
         let frame = app.webViews.staticTexts[authenticator].frame
         for link in app.webViews.links {
@@ -129,12 +125,8 @@ extension WebLogin where Self: Screen {
             }
 
             field.typeText(password)
-            
-            if app.webViews.buttons["Verify"].isHittable {
-                app.webViews.buttons["Verify"].tap()
-            } else {
-                tapKeyboardNextOrGo()
-            }
+
+            tapKeyboardNextOrGo()
         }
     }
     

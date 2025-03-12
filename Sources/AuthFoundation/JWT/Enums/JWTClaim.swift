@@ -13,7 +13,7 @@
 import Foundation
 
 /// List of registered and public claims.
-public enum JWTClaim: Codable, IsClaim {
+public enum JWTClaim: Sendable, Codable, IsClaim {
     /// Issuer
     case issuer
 

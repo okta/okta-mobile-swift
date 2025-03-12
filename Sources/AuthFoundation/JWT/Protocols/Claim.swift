@@ -24,7 +24,7 @@ public protocol HasClaims {
     /// Raw payload of claims, as a dictionary representation.
     ///
     /// Types conforming to this protocol must return the raw payload of claim values. The convenience functions used for loading and converting claims are made available through extensions to this protocol.
-    var payload: [String: Any] { get }
+    var payload: [String: any Sendable] { get }
 }
 
 public extension HasClaims {

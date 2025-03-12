@@ -14,7 +14,7 @@
 
 import Foundation
 
-protocol KeychainProtocol {
+protocol KeychainProtocol: Sendable {
     @discardableResult
     func deleteItem(_ query: CFDictionary) -> OSStatus
     

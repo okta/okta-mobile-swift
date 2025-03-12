@@ -70,7 +70,7 @@ final class ResourceOwnerFlowSuccessTests: XCTestCase {
         Token.resetToDefault()
     }
 
-    func testWithDelegate() throws {
+    func testWithDelegate() async throws {
         let delegate = AuthenticationDelegateRecorder()
         flow.add(delegate: delegate)
 
@@ -79,27 +79,23 @@ final class ResourceOwnerFlowSuccessTests: XCTestCase {
         XCTAssertFalse(delegate.started)
         
         // Authenticate
-        let expect = expectation(description: "resume")
-        flow.start(username: "username", password: "password") { _ in
-            expect.fulfill()
-        }
-        waitForExpectations(timeout: 1) { error in
-            XCTAssertNil(error)
-        }
+        let token = try await flow.start(username: "username", password: "password")
+        await MainActor.yield()
 
         XCTAssertTrue(delegate.started)
         XCTAssertFalse(flow.isAuthenticating)
         XCTAssertNotNil(delegate.token)
+        XCTAssertEqual(token, delegate.token)
         XCTAssertTrue(delegate.finished)
     }
 
-    func testWithBlocks() throws {
+    func testWithBlocks() async throws {
         // Ensure the initial state
         XCTAssertFalse(flow.isAuthenticating)
 
         // Authenticate
         let wait = expectation(description: "resume")
-        var token: Token?
+        nonisolated(unsafe) var token: Token?
         flow.start(username: "username", password: "password") { result in
             switch result {
             case .success(let resultToken):
@@ -109,10 +105,8 @@ final class ResourceOwnerFlowSuccessTests: XCTestCase {
             }
             wait.fulfill()
         }
-        waitForExpectations(timeout: 1) { error in
-            XCTAssertNil(error)
-        }
-        
+        await fulfillment(of: [wait], timeout: 1)
+
         XCTAssertFalse(flow.isAuthenticating)
         XCTAssertNotNil(token)
     }

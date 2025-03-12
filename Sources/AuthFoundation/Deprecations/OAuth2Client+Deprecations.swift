@@ -19,7 +19,7 @@ extension OAuth2Client {
                             clientId: String,
                             scopes: String,
                             authentication: ClientAuthentication = .none,
-                            session: URLSessionProtocol? = nil) throws
+                            session: (any URLSessionProtocol)? = nil) throws
     {
         self.init(try Configuration(domain: domain,
                                     clientId: clientId,
@@ -34,7 +34,7 @@ extension OAuth2Client {
                             clientId: String,
                             scopes: String,
                             authentication: ClientAuthentication = .none,
-                            session: URLSessionProtocol? = nil)
+                            session: (any URLSessionProtocol)? = nil)
     {
         self.init(Configuration(issuerURL: baseURL,
                                 clientId: clientId,

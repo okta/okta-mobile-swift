@@ -19,6 +19,7 @@ struct SignInView: View {
     @State var status: DirectAuthenticationFlow.Status?
     @State var error: (any Error)?
     @State var hasError: Bool = false
+    @State var clientId: String?
 
     enum Factor {
         case password, otp, oob, sms, voice, code
@@ -74,11 +75,12 @@ struct SignInView: View {
             Spacer()
             HStack {
                 Text("Client ID:")
-                if let clientId = flow?.client.configuration.clientId {
-                    Text(clientId)
-                        .accessibilityIdentifier("client_id_label")
-                } else {
-                    Text("Not configured")
+                Text(clientId ?? "Not configured")
+                    .accessibilityIdentifier("client_id_label")
+            }
+            .onAppear {
+                Task {
+                    clientId = await flow?.client.configuration.clientId
                 }
             }
         }

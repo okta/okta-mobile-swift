@@ -13,9 +13,9 @@
 import Foundation
 @testable import AuthFoundation
 
-class MockTokenStorage: TokenStorage {
-    var error: Error?
-    var prompt: String?
+class MockTokenStorage: @unchecked Sendable, TokenStorage {
+    @LockedValue var error: (any Error)?
+    @LockedValue var prompt: String?
 
     var defaultTokenID: String? {
         didSet {
@@ -90,7 +90,7 @@ class MockTokenStorage: TokenStorage {
         metadata.removeValue(forKey: id)
     }
     
-    func get(token id: String, prompt: String?, authenticationContext: TokenAuthenticationContext? = nil) throws -> Token {
+    func get(token id: String, prompt: String?, authenticationContext: (any TokenAuthenticationContext)? = nil) throws -> Token {
         if let error = error {
             throw error
         }
@@ -102,5 +102,5 @@ class MockTokenStorage: TokenStorage {
         return item.0
     }
 
-    var delegate: TokenStorageDelegate?
+    var delegate: (any TokenStorageDelegate)?
 }

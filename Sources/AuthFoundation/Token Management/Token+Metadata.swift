@@ -16,7 +16,7 @@ extension Token {
     /// Describes the metadata associated with a token.
     ///
     /// This is used when storing tags and claims associated with tokens, as well as through the ``Credential/find(where:prompt:authenticationContext:)`` method.
-    public struct Metadata: JSONClaimContainer {
+    public struct Metadata: Sendable, JSONClaimContainer {
         public typealias ClaimType = JWTClaim
 
         /// The unique ID for the token.
@@ -26,14 +26,14 @@ extension Token {
         public let tags: [String: String]
         
         /// The raw contents of the claim payload for this token.
-        public let payload: [String: Any]
-        
+        public let payload: [String: any Sendable]
+
         private let payloadData: Data?
         init(token: Token, tags: [String: String]) {
             self.id = token.id
             self.tags = tags
             
-            var payload = [String: Any]()
+            var payload = [String: any Sendable]()
             var payloadData: Data?
             
             if let idToken = token.idToken {
@@ -44,7 +44,7 @@ extension Token {
             }
             
             if let payloadData = payloadData,
-               let payloadInfo = try? JSONSerialization.jsonObject(with: payloadData) as? [String: Any]
+               let payloadInfo = try? JSONSerialization.jsonObject(with: payloadData) as? [String: any Sendable]
             {
                 payload = payloadInfo
             }
@@ -64,12 +64,12 @@ extension Token {
 
 extension Token.Metadata {
     @_documentation(visibility: internal)
-    public static var jsonDecoder = JSONDecoder()
+    public static let jsonDecoder = JSONDecoder()
 }
 
 extension Token.Metadata: Codable {
     @_documentation(visibility: internal)
-    public init(from decoder: Decoder) throws {
+    public init(from decoder: any Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         
         self.payloadData = try container.decodeIfPresent(Data.self, forKey: .payload)
@@ -77,7 +77,7 @@ extension Token.Metadata: Codable {
         self.tags = try container.decode([String: String].self, forKey: .tags)
         
         if let data = self.payloadData,
-           let payload = try JSONSerialization.jsonObject(with: data) as? [String: Any]
+           let payload = try JSONSerialization.jsonObject(with: data) as? [String: any Sendable]
         {
             self.payload = payload
         } else {
@@ -86,7 +86,7 @@ extension Token.Metadata: Codable {
     }
     
     @_documentation(visibility: internal)
-    public func encode(to encoder: Encoder) throws {
+    public func encode(to encoder: any Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
         try container.encode(id, forKey: .id)
         try container.encode(tags, forKey: .tags)

@@ -45,7 +45,7 @@ final class DirectAuth2FATests: XCTestCase {
     func testUserPasswordAndOOB() async throws {
         // Ensure the initial state
         XCTAssertFalse(flow.isAuthenticating)
-        
+
         // Begin
         let state = try await flow.start("jane.doe@example.com",
                                          with: .password("SuperSecret"))

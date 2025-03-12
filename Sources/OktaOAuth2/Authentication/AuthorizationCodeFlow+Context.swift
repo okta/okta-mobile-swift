@@ -14,7 +14,7 @@ import Foundation
 
 extension AuthorizationCodeFlow {
     /// A model representing the context and current state for an authorization session.
-    public struct Context: AuthenticationContext, IDTokenValidatorContext {
+    public struct Context: Sendable, AuthenticationContext, IDTokenValidatorContext {
         /// The `PKCE` credentials to use in the authorization request.
         ///
         /// This value may be `nil` on platforms that do not support PKCE.
@@ -213,7 +213,7 @@ extension AuthorizationCodeFlow {
     /// Defines how a user will be prompted to sign in.
     ///
     /// This is used with the ``WebAuthentication/Option/prompt(_:)`` enumeration. For more information, see the [API documentation for this parameter](https://developer.okta.com/docs/reference/api/oidc/#parameter-details).
-    public enum Prompt: String {
+    public enum Prompt: String, Sendable {
         /// If an Okta session already exists, the user is silently authenticated. Otherwise, the user is prompted to authenticate.
         case none
         

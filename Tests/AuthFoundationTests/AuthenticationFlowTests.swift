@@ -18,7 +18,7 @@ import XCTest
 import FoundationNetworking
 #endif
 
-class TestFlow: AuthenticationFlow {
+actor TestFlow: AuthenticationFlow {
     typealias Delegate = AuthenticationDelegate
     
     struct Context: AuthenticationContext, IDTokenValidatorContext {
@@ -35,10 +35,10 @@ class TestFlow: AuthenticationFlow {
 
     let client: OAuth2Client
     let additionalParameters: [String: any APIRequestArgument]?
-    let delegateCollection = DelegateCollection<any Delegate>()
-    
-    required init(client: OAuth2Client,
-                  additionalParameters: [String: any APIRequestArgument]?) throws
+    nonisolated let delegateCollection = DelegateCollection<any Delegate>()
+
+    init(client: OAuth2Client,
+         additionalParameters: [String: any APIRequestArgument]?) throws
     {
         self.client = client
         self.additionalParameters = additionalParameters
@@ -50,6 +50,10 @@ class TestFlow: AuthenticationFlow {
     func reset() {
         isAuthenticating = false
         context = nil
+    }
+
+    func setContext(_ context: Context?) async {
+        self.context = context
     }
 }
 
@@ -89,9 +93,9 @@ final class AuthenticationFlowTests: XCTestCase {
         XCTAssertEqual(flow.client.configuration.clientId, "0oaasdf1234")
     }
     
-    func testValidatorContextHandling() throws {
+    func testValidatorContextHandling() async throws {
         let flow = try TestFlow(client: client, additionalParameters: nil)
-        flow.context = .init(acrValues: [], nonce: "abcd123", maxAge: 60)
+        await flow.setContext(.init(acrValues: [], nonce: "abcd123", maxAge: 60))
         
         XCTAssertEqual(flow.nonce, "abcd123")
         XCTAssertEqual(flow.maxAge, 60.0)

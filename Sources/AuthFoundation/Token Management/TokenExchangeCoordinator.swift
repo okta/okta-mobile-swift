@@ -12,7 +12,7 @@
 
 import Foundation
 
-protocol TokenExchangeCoordinator {
+protocol TokenExchangeCoordinator: Sendable {
     /// When refreshing a token, not all values are always returned, especially the refresh token or device secret.
     ///
     /// This function is used to merge these values from an existing token instance to preserve them during a refresh.
@@ -21,5 +21,5 @@ protocol TokenExchangeCoordinator {
     ///   - payload: The current token payload.
     ///   - newPayload: The new token payload to be merged.
     /// - Returns: The payload for the token by merging the old values with the new ones.
-    func merge(_ token: Token, payload: [String: Any], with newPayload: [String: Any]) throws -> [String: Any]
+    func merge(_ token: Token, payload: [String: any Sendable], with newPayload: [String: any Sendable]) throws -> [String: any Sendable]
 }

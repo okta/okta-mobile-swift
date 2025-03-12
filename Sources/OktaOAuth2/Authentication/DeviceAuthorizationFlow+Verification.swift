@@ -16,7 +16,7 @@ extension DeviceAuthorizationFlow {
     /// Represents the user verification response of the ``DeviceAuthorizationFlow`` authentication flow.
     ///
     /// The values contained within this verification object should be used to present the user with the code and URL to visit to authorize their device.
-    public struct Verification: Decodable, Equatable, Expires {
+    public struct Verification: Sendable, Decodable, Equatable, Expires {
         let deviceCode: String
         var interval: TimeInterval
         
@@ -46,7 +46,7 @@ extension DeviceAuthorizationFlow {
         }
         
         @_documentation(visibility: internal)
-        public init(from decoder: Decoder) throws {
+        public init(from decoder: any Decoder) throws {
             let container = try decoder.container(keyedBy: CodingKeys.self)
             issuedAt = try container.decodeIfPresent(Date.self, forKey: .issuedAt) ?? Date()
             deviceCode = try container.decode(String.self, forKey: .deviceCode)

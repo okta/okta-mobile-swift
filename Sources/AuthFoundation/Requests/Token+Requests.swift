@@ -18,13 +18,13 @@ extension Token {
         let url: URL
         let token: String
         let hint: Token.Kind?
-        let configuration: [String: APIRequestArgument]
+        let configuration: [String: any APIRequestArgument]
         
         init(openIdConfiguration: OpenIdConfiguration,
              clientConfiguration: OAuth2Client.Configuration,
              token: String,
              hint: Token.Kind?,
-             configuration: [String: APIRequestArgument]) throws
+             configuration: [String: any APIRequestArgument]) throws
         {
             self.openIdConfiguration = openIdConfiguration
             self.clientConfiguration = clientConfiguration
@@ -98,7 +98,7 @@ public protocol AuthenticationFlowRequest {
 }
 
 /// Categorizes the types of requests made to an authorization server.
-public enum OAuth2APIRequestCategory: CaseIterable {
+public enum OAuth2APIRequestCategory: Sendable, CaseIterable {
     /// Requests used for discovery of an authorization server's configuration
     case configuration
     
@@ -122,7 +122,7 @@ extension Token.RevokeRequest: OAuth2APIRequest, APIRequestBody {
     var contentType: APIContentType? { .formEncoded }
     var acceptsType: APIContentType? { .json }
     var category: OAuth2APIRequestCategory { .other }
-    var bodyParameters: [String: APIRequestArgument]? {
+    var bodyParameters: [String: any APIRequestArgument]? {
         var result = configuration
         result["token"] = token
         result["client_id"] = clientConfiguration.clientId
@@ -143,10 +143,10 @@ extension Token.IntrospectRequest: OAuth2APIRequest, APIRequestBody {
     var httpMethod: APIRequestMethod { .post }
     var contentType: APIContentType? { .formEncoded }
     var acceptsType: APIContentType? { .json }
-    var authorization: APIAuthorization? { nil }
+    var authorization: (any APIAuthorization)? { nil }
     var category: OAuth2APIRequestCategory { .other }
-    var bodyParameters: [String: APIRequestArgument]? {
-        var result: [String: APIRequestArgument] = [
+    var bodyParameters: [String: any APIRequestArgument]? {
+        var result: [String: any APIRequestArgument] = [
             "token": token.token(of: type) ?? "",
             "client_id": token.context.configuration.clientId,
             "token_type_hint": type
@@ -167,7 +167,7 @@ extension Token.RefreshRequest: OAuth2APIRequest, APIRequestBody, APIParsingCont
     var acceptsType: APIContentType? { .json }
     var category: OAuth2APIRequestCategory { .token }
     var tokenValidatorContext: any IDTokenValidatorContext { NullIDTokenValidatorContext }
-    var bodyParameters: [String: APIRequestArgument]? {
+    var bodyParameters: [String: any APIRequestArgument]? {
         var result: [String: any APIRequestArgument] = [
             "grant_type": "refresh_token",
             "refresh_token": refreshToken,

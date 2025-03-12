@@ -22,16 +22,16 @@ public enum APIRequestPollingHandlerError: Error {
 
 /// Utility actor class used to represent a pollable request.
 @_documentation(visibility: internal)
-public actor APIRequestPollingHandler<RequestType, ResultType> {
+public actor APIRequestPollingHandler<RequestType: Sendable, ResultType: Sendable> {
     public typealias OperationBlock = (_ pollingHandler: APIRequestPollingHandler<RequestType, ResultType>,
                                        _ request: RequestType) async throws -> Status
     
     /// Status of an individual poll request.
-    public enum Status {
+    public enum Status: Sendable {
         case `continue`
         case continueWith(request: RequestType? = nil, interval: TimeInterval? = nil)
         case success(ResultType)
-        case failure(Error)
+        case failure(any Error)
     }
 
     public private(set) var isActive: Bool = false
@@ -82,7 +82,7 @@ public actor APIRequestPollingHandler<RequestType, ResultType> {
         var delay = delay ?? 0.0
         pollLoop: while isActive {
             if delay > 0 {
-                try await Task.sleep(nanoseconds: UInt64(delay * _APIClientRetryDelayTimeIntervalToNanoseconds))
+                try await Task.sleep(nanoseconds: UInt64(delay * _APIClientRetryDelayTimeIntervalToNanoseconds.wrappedValue))
             } else {
                 delay = interval
             }

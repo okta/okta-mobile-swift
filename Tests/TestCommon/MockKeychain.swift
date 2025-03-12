@@ -15,7 +15,7 @@
 import Foundation
 @testable import AuthFoundation
 
-class MockKeychain: KeychainProtocol {
+final class MockKeychain: @unchecked Sendable, KeychainProtocol {
     private var results = [CFTypeRef?]()
     private var statuses = [OSStatus]()
     private(set) var operations = [Operation]()

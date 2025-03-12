@@ -24,8 +24,8 @@ public enum APIClientError: Error {
     case invalidResponse
     
     /// An error occurred while parsing the server response.
-    case cannotParseResponse(error: Error)
-    
+    case cannotParseResponse(error: any Error)
+
     /// Cannot send invalid request data to the server.
     case invalidRequestData
     
@@ -36,21 +36,21 @@ public enum APIClientError: Error {
     case unsupportedContentType(_ type: APIContentType)
     
     /// Received the given HTTP error from the server.
-    case httpError(_ error: Error)
-    
+    case httpError(_ error: any Error)
+
     /// Received the given HTTP response status code.
     case statusCode(_ statusCode: Int)
     
     /// Could not validate the received token.
-    case validation(error: Error)
-    
+    case validation(error: any Error)
+
     /// An unknown HTTP error was encountered.
     case unknown
 }
 
 extension APIClientError {
     @_documentation(visibility: internal)
-    public init(_ error: Error) {
+    public init(_ error: any Error) {
         if let error = error as? APIClientError {
             self = error
         } else {
@@ -82,7 +82,7 @@ extension APIClientError: LocalizedError {
             
         case .cannotParseResponse(error: let error):
             let errorString: String
-            if let error = error as? LocalizedError {
+            if let error = error as? any LocalizedError {
                 errorString = error.localizedDescription
             } else {
                 errorString = String(describing: error)
@@ -116,7 +116,7 @@ extension APIClientError: LocalizedError {
                 type.rawValue)
             
         case .httpError(let error):
-            if let error = error as? LocalizedError {
+            if let error = error as? any LocalizedError {
                 return error.localizedDescription
             }
             let errorString = String(describing: error)
@@ -137,7 +137,7 @@ extension APIClientError: LocalizedError {
                 code)
 
         case .validation(error: let error):
-            if let error = error as? LocalizedError {
+            if let error = error as? any LocalizedError {
                 return error.localizedDescription
             }
 

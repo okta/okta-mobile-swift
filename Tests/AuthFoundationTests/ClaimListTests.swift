@@ -22,6 +22,10 @@ struct TestStringArrayClaimProperty {
 struct TestEnumArrayClaimProperty {
     enum Role: String, Equatable, ClaimConvertable, APIRequestArgument {
         case admin, superuser, user, guest
+
+        static func convert(value: TestEnumArrayClaimProperty.Role?) -> Any? {
+            value?.rawValue
+        }
     }
     
     @ClaimCollection

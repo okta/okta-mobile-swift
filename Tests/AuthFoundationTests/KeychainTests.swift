@@ -22,11 +22,11 @@ final class KeychainTests: XCTestCase {
     
     override func setUp() {
         mock = MockKeychain()
-        Keychain.implementation = mock
+        Keychain.implementation.wrappedValue = mock
     }
     
     override func tearDownWithError() throws {
-        Keychain.implementation = KeychainImpl()
+        Keychain.resetToDefault()
         mock = nil
     }
 

@@ -24,13 +24,13 @@ public protocol IDTokenValidator {
     var issuedAtGraceInterval: TimeInterval { get set }
     
     /// Validates the claims in the given token, using the supplied issuer and client ID values.
-    func validate(token: JWT, issuer: URL, clientId: String, context: IDTokenValidatorContext?) throws
+    func validate(token: JWT, issuer: URL, clientId: String, context: (any IDTokenValidatorContext)?) throws
 }
 
 /// Protocol used to supply contextual information to a validator.
 ///
 /// The ``IDTokenValidator`` can use this information to enable or disable certain verification checks.
-public protocol IDTokenValidatorContext {
+public protocol IDTokenValidatorContext: Sendable {
     /// The `nonce` value used when beginning the authentication process.
     var nonce: String? { get }
     

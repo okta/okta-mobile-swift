@@ -49,26 +49,27 @@ final class KeychainTokenStorageTests: XCTestCase {
                                                                   scope: "openid"),
                                              clientSettings: nil))
 
-    override func setUpWithError() throws {
+    override func setUp() async throws {
         mock = MockKeychain()
-        Keychain.implementation = mock
+        Keychain.implementation.wrappedValue = mock
+        storage = await KeychainTokenStorage()
 
-        storage = KeychainTokenStorage()
         XCTAssertEqual(mock.operations.count, 0)
     }
     
     override func tearDownWithError() throws {
-        Keychain.implementation = KeychainImpl()
-        
+        Keychain.resetToDefault()
+
         mock = nil
         storage = nil
     }
 
-    func testEmptyAllIDs() throws {
+    func testEmptyAllIDs() async throws {
         mock.expect(errSecSuccess, result: [] as CFArray)
         mock.expect(errSecSuccess, result: [] as CFArray)
 
-        XCTAssertEqual(storage.allIDs, [])
+        let tokens = await storage.allIDs
+        XCTAssertEqual(tokens, [])
         XCTAssertEqual(mock.operations.count, 2)
 
         // - Listing the token items
@@ -84,7 +85,7 @@ final class KeychainTokenStorageTests: XCTestCase {
         XCTAssertEqual(mock.operations[1].query["m_Limit"] as? String, "m_LimitAll")
     }
 
-    func testAllIDs() throws {
+    func testAllIDs() async throws {
         func listItem(id: String, service: String) -> CFDictionary {
             [
                 "tomb": 0,
@@ -109,13 +110,13 @@ final class KeychainTokenStorageTests: XCTestCase {
             listItem(id: "1", service: KeychainTokenStorage.serviceName)
         ] as CFArray)
 
-        let allIds = storage.allIDs
+        let allIds = await storage.allIDs
         XCTAssertEqual(mock.operations.count, 2)
         XCTAssertEqual(allIds.count, 1)
         XCTAssertEqual(allIds.first, "SomeAccount1")
     }
 
-    func testDefaultToken() throws {
+    func testDefaultToken() async throws {
         mock.expect(errSecSuccess, result: [] as CFArray)
         mock.expect(errSecSuccess, result: [] as CFArray)
         mock.expect(noErr)
@@ -131,7 +132,7 @@ final class KeychainTokenStorageTests: XCTestCase {
         mock.expect(noErr, result: dummyGetResult)
         
         Credential.Security.isDefaultSynchronizable = true
-        try storage.add(token: token, metadata: nil, security: [.accessibility(.unlocked)])
+        try await storage.add(token: token, metadata: nil, security: [.accessibility(.unlocked)])
         XCTAssertEqual(mock.operations.count, 9)
         
         // Adding the new token
@@ -186,39 +187,45 @@ final class KeychainTokenStorageTests: XCTestCase {
         XCTAssertEqual(mock.operations[8].query["v_Data"] as? Data, token.id.data(using: .utf8))
         XCTAssertEqual(mock.operations[8].query["pdmn"] as? String, Keychain.Accessibility.afterFirstUnlock.rawValue)
 
-        XCTAssertEqual(storage.defaultTokenID, token.id)
-        
+        var defaultTokenID = await storage.defaultTokenID
+        XCTAssertEqual(defaultTokenID, token.id)
+
         var tokenResult = tokenQuery as! [String:Any?]
         tokenResult["mdat"] = Date()
         tokenResult["cdat"] = Date()
         mock.reset()
         mock.expect(noErr, result: NSArray(arrayLiteral: tokenResult as CFDictionary) as CFArray)
         mock.expect(noErr, result: NSArray(arrayLiteral: tokenResult as CFDictionary) as CFArray)
-        XCTAssertEqual(storage.allIDs.count, 1)
+        var tokenCount = await storage.allIDs.count
+        XCTAssertEqual(tokenCount, 1)
 
         mock.reset()
         mock.expect(noErr)
 
-        try storage.setDefaultTokenID(nil)
-        XCTAssertNil(storage.defaultTokenID)
+        try await storage.setDefaultTokenID(nil)
+        defaultTokenID = await storage.defaultTokenID
+        XCTAssertNil(defaultTokenID)
 
         mock.reset()
         mock.expect(noErr, result: NSArray(arrayLiteral: tokenResult as CFDictionary) as CFArray)
         mock.expect(noErr, result: NSArray(arrayLiteral: tokenResult as CFDictionary) as CFArray)
-        XCTAssertEqual(storage.allIDs.count, 1)
+        tokenCount = await storage.allIDs.count
+        XCTAssertEqual(tokenCount, 1)
 
         mock.expect(noErr, result: NSArray(arrayLiteral: tokenResult as CFDictionary) as CFArray)
         mock.expect(noErr, result: NSArray(arrayLiteral: tokenResult as CFDictionary) as CFArray)
-        XCTAssertThrowsError(try storage.add(token: token, metadata: nil, security: []))
+        try await XCTAssertThrowsErrorAsync(await storage.add(token: token, metadata: nil, security: []))
 
         mock.expect(noErr, result: NSArray(arrayLiteral: tokenResult as CFDictionary) as CFArray)
         mock.expect(noErr, result: NSArray(arrayLiteral: tokenResult as CFDictionary) as CFArray)
-        XCTAssertEqual(storage.allIDs.count, 1)
+        tokenCount = await storage.allIDs.count
+        XCTAssertEqual(tokenCount, 1)
     }
 
-    func testImplicitDefaultToken() throws {
+    func testImplicitDefaultToken() async throws {
         mock.expect(errSecSuccess, result: [] as CFArray)
-        XCTAssertNil(storage.defaultTokenID)
+        var defaultTokenID = await storage.defaultTokenID
+        XCTAssertNil(defaultTokenID)
 
         mock.reset()
         mock.expect(errSecSuccess, result: [] as CFArray)
@@ -230,7 +237,7 @@ final class KeychainTokenStorageTests: XCTestCase {
         mock.expect(noErr)
         mock.expect(noErr, result: dummyGetResult)
 
-        XCTAssertNoThrow(try storage.add(token: token, metadata: nil, security: []))
+        await XCTAssertNoThrowAsync(try await storage.add(token: token, metadata: nil, security: []))
 
         let tokenQuery = mock.operations[3].query
         var tokenResult = tokenQuery as! [String:Any?]
@@ -239,12 +246,14 @@ final class KeychainTokenStorageTests: XCTestCase {
 
         mock.expect(noErr, result: NSArray(arrayLiteral: tokenResult as CFDictionary) as CFArray)
         mock.expect(noErr, result: NSArray(arrayLiteral: tokenResult as CFDictionary) as CFArray)
-        XCTAssertEqual(storage.allIDs.count, 1)
 
-        XCTAssertEqual(storage.defaultTokenID, token.id)
+        defaultTokenID = await storage.defaultTokenID
+        let tokenCount = await storage.allIDs.count
+        XCTAssertEqual(tokenCount, 1)
+        XCTAssertEqual(defaultTokenID, token.id)
     }
 
-    func testRemoveDefaultToken() throws {
+    func testRemoveDefaultToken() async throws {
         mock.expect(errSecSuccess, result: [] as CFArray)
         mock.expect(errSecSuccess, result: [] as CFArray)
         mock.expect(noErr)
@@ -255,7 +264,7 @@ final class KeychainTokenStorageTests: XCTestCase {
         mock.expect(noErr)
         mock.expect(noErr, result: dummyGetResult)
 
-        try storage.add(token: token, metadata: nil, security: [])
+        try await storage.add(token: token, metadata: nil, security: [])
 
         let tokenQuery = mock.operations[3].query
         var tokenResult = tokenQuery as! [String:Any?]
@@ -267,12 +276,15 @@ final class KeychainTokenStorageTests: XCTestCase {
         defaultResult["mdat"] = Date()
         defaultResult["cdat"] = Date()
 
-        XCTAssertEqual(storage.defaultTokenID, token.id)
+        var defaultTokenID = await storage.defaultTokenID
+        XCTAssertEqual(defaultTokenID, token.id)
 
         mock.expect(noErr, result: NSArray(arrayLiteral: tokenResult as CFDictionary) as CFArray)
         mock.expect(noErr, result: NSArray(arrayLiteral: tokenResult as CFDictionary) as CFArray)
-        XCTAssertEqual(storage.allIDs.count, 1)
-        
+
+        var tokenCount = await storage.allIDs.count
+        XCTAssertEqual(tokenCount, 1)
+
         mock.reset()
 
         mock.expect(noErr, result: tokenResult as CFDictionary)
@@ -283,17 +295,19 @@ final class KeychainTokenStorageTests: XCTestCase {
         mock.expect(noErr, result: tokenResult as CFDictionary)
         mock.expect(noErr)
 
-        XCTAssertNoThrow(try storage.remove(id: token.id))
-        XCTAssertEqual(storage.allIDs.count, 0)
-        XCTAssertNil(storage.defaultTokenID)
+        await XCTAssertNoThrowAsync(try await storage.remove(id: token.id))
+        defaultTokenID = await storage.defaultTokenID
+        tokenCount = await storage.allIDs.count
+        XCTAssertEqual(tokenCount, 0)
+        XCTAssertNil(defaultTokenID)
     }
     
-    func testSetMetadata() throws {
+    func testSetMetadata() async throws {
         mock.expect(errSecSuccess, result: [dummyGetResult] as CFArray)
         mock.expect(noErr)
         
         let metadata = Token.Metadata(token: token, tags: ["foo": "bar"])
-        try storage.setMetadata(metadata)
+        try await storage.setMetadata(metadata)
 
         let updateOperation = try XCTUnwrap(mock.operations[1])
         XCTAssertEqual(updateOperation.action, .update)
@@ -304,16 +318,16 @@ final class KeychainTokenStorageTests: XCTestCase {
         XCTAssertEqual(metadata.tags, compareMetadata.tags)
     }
 
-    func testReplaceTokenSecurity() throws {
+    func testReplaceTokenSecurity() async throws {
         mock.expect(errSecSuccess, result: [dummyGetResult] as CFArray)
         mock.expect(noErr)
         
-        try storage.replace(token: token.id,
-                            with: token,
-                            security: [
-                                .accessibility(.whenPasswordSetThisDeviceOnly),
-                                .accessGroup("otherGroup")
-                            ])
+        try await storage.replace(token: token.id,
+                                  with: token,
+                                  security: [
+                                    .accessibility(.whenPasswordSetThisDeviceOnly),
+                                    .accessGroup("otherGroup")
+                                  ])
 
         let updateOperation = try XCTUnwrap(mock.operations[1])
         XCTAssertEqual(updateOperation.action, .update)
@@ -321,7 +335,7 @@ final class KeychainTokenStorageTests: XCTestCase {
         XCTAssertEqual(updateOperation.attributes?["agrp"] as? String, "otherGroup")
     }
     
-    func testAddTokenWithSecurity() throws {
+    func testAddTokenWithSecurity() async throws {
         // - Find duplicate items
         mock.expect(errSecSuccess, result: [] as CFArray)
 
@@ -342,12 +356,12 @@ final class KeychainTokenStorageTests: XCTestCase {
         mock.expect(noErr, result: dummyGetResult)
         
         Credential.Security.isDefaultSynchronizable = false
-        try storage.add(token: token,
-                        metadata: Token.Metadata(token: token,
-                                                 tags: ["tag": "value"]),
-                        security: [.accessibility(.unlockedThisDeviceOnly),
-                                   .accessGroup("com.example.myapp")])
-        
+        try await storage.add(token: token,
+                              metadata: Token.Metadata(token: token,
+                                                       tags: ["tag": "value"]),
+                              security: [.accessibility(.unlockedThisDeviceOnly),
+                                         .accessGroup("com.example.myapp")])
+
         XCTAssertEqual(mock.operations.count, 9)
 
         // - Preemptively deleting the newly-added token
@@ -378,7 +392,8 @@ final class KeychainTokenStorageTests: XCTestCase {
         XCTAssertEqual(mock.operations[8].query["v_Data"] as? Data, token.id.data(using: .utf8))
         XCTAssertEqual(mock.operations[5].query["pdmn"] as? String, Keychain.Accessibility.afterFirstUnlockThisDeviceOnly.rawValue)
 
-        XCTAssertEqual(storage.defaultTokenID, token.id)
+        let defaultTokenID = await storage.defaultTokenID
+        XCTAssertEqual(defaultTokenID, token.id)
     }
 }
 

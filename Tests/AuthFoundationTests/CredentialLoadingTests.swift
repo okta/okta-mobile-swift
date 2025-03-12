@@ -20,27 +20,32 @@ final class CredentialLoadingTests: XCTestCase {
     var storage: UserDefaultsTokenStorage!
     var coordinator: CredentialCoordinatorImpl!
     
-    override func setUpWithError() throws {
+    override func setUp() async throws {
         userDefaults = UserDefaults(suiteName: name)
         userDefaults.removePersistentDomain(forName: name)
 
-        let storage = UserDefaultsTokenStorage(userDefaults: userDefaults)
-        coordinator = CredentialCoordinatorImpl()
-        coordinator.tokenStorage = storage
+        let storage = await UserDefaultsTokenStorage(userDefaults: userDefaults)
+        let mockCoordinator = CredentialCoordinatorImpl()
+        await CredentialActor.run {
+            mockCoordinator.tokenStorage = storage
+        }
 
-        XCTAssertEqual(storage.allIDs.count, 0)
+        coordinator = mockCoordinator
         self.storage = storage
-    }
-    
-    override func tearDownWithError() throws {
-        userDefaults.removePersistentDomain(forName: name)
 
+        let tokenCount = await storage.allIDs.count
+        XCTAssertEqual(tokenCount, 0)
+    }
+
+    override func tearDown() async throws {
+        userDefaults.removePersistentDomain(forName: name)
         userDefaults = nil
         storage = nil
         coordinator = nil
     }
-    
-    func testFetchingTokens() throws {
+
+    @CredentialActor
+    func testFetchingTokens() async throws {
         let tokenA = Token.mockToken(id: "TokenA")
         let tokenB = Token.mockToken(id: "TokenB")
         let tokenC = Token.mockToken(id: "TokenC")

@@ -13,7 +13,7 @@
 import Foundation
 
 /// Describes information related to the organization's current rate limit.
-public struct APIRateLimit: Decodable {
+public struct APIRateLimit: Sendable, Decodable {
     /// The current limit.
     public let limit: Int
     

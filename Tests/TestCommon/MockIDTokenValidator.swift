@@ -18,7 +18,7 @@ struct MockIDTokenValidator: IDTokenValidator {
 
     var error: JWTError?
     
-    func validate(token: JWT, issuer: URL, clientId: String, context: IDTokenValidatorContext?) throws {
+    func validate(token: JWT, issuer: URL, clientId: String, context: (any IDTokenValidatorContext)?) throws {
         if let error = error {
             throw error
         }

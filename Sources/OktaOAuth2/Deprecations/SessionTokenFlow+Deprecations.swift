@@ -10,27 +10,32 @@
 // See the License for the specific language governing permissions and limitations under the License.
 //
 
+#if canImport(UIKit) || canImport(AppKit)
 import Foundation
 
-extension ResourceOwnerFlow {
+extension SessionTokenFlow {
     @_documentation(visibility: private)
     @available(*, deprecated, renamed: "init(issuerURL:clientId:scope:redirectUri:additionalParameters:)")
-    public convenience init(issuer: URL,
-                            clientId: String,
-                            scopes: String,
-                            redirectUri: URL,
-                            additionalParameters: [String: APIRequestArgument]? = nil)
+    public init(issuer: URL,
+                clientId: String,
+                scopes: String,
+                redirectUri: URL,
+                additionalParameters: [String: any APIRequestArgument]? = nil) throws
     {
-        fatalError()
+        try self.init(issuerURL: issuer, clientId: clientId, scope: scopes, redirectUri: redirectUri, additionalParameters: additionalParameters)
     }
-    
+
     @_documentation(visibility: private)
     @available(*, deprecated, renamed: "init(client:additionalParameters:)")
-    public convenience init(redirectUri: URL,
-                            additionalParameters: [String: APIRequestArgument]? = nil,
-                            client: OAuth2Client)
+    public init(redirectUri: URL,
+                additionalParameters: [String: any APIRequestArgument]? = nil,
+                client: OAuth2Client) throws
     {
-        fatalError()
+        var configuration = client.configuration
+        configuration.redirectUri = redirectUri
+
+        try self.init(client: OAuth2Client(configuration, session: client.session),
+                      additionalParameters: additionalParameters)
     }
 }
 
@@ -40,6 +45,10 @@ extension OAuth2Client {
     public func sessionTokenFlow(redirectUri: URL,
                                  additionalParameters: [String: String]? = nil) throws -> SessionTokenFlow
     {
-        fatalError()
+        var configuration = configuration
+        configuration.redirectUri = redirectUri
+        return try SessionTokenFlow(client: OAuth2Client(configuration, session: session),
+                                    additionalParameters: additionalParameters)
     }
 }
+#endif
