@@ -13,7 +13,7 @@
 import Foundation
 
 extension Token {
-    public convenience init(from decoder: Decoder) throws {
+    public init(from decoder: Decoder) throws {
         // Initialize defaults supplied from the decoder's userInfo dictionary
         var id: String = decoder.userInfo[.tokenId] as? String ?? UUID().uuidString
         var issuedAt: Date = Date.nowCoordinated
@@ -106,18 +106,18 @@ extension Token {
                       json: json)
     }
     
-    convenience init(id: String,
-                     issuedAt: Date,
-                     tokenType: String,
-                     expiresIn: TimeInterval,
-                     accessToken: String,
-                     scope: String?,
-                     refreshToken: String?,
-                     idToken: JWT?,
-                     deviceSecret: String?,
-                     context: Context) throws
+    init(id: String,
+         issuedAt: Date,
+         tokenType: String,
+         expiresIn: TimeInterval,
+         accessToken: String,
+         scope: String?,
+         refreshToken: String?,
+         idToken: JWT?,
+         deviceSecret: String?,
+         context: Context) throws
     {
-        var payload: [TokenClaim: Any] = [
+        var payload: [TokenClaim: any Sendable] = [
             .accessToken: accessToken,
             .tokenType: tokenType,
             .expiresIn: expiresIn,
@@ -139,7 +139,7 @@ extension Token {
             payload[.deviceSecret] = deviceSecret
         }
         
-        let json = try JSON(payload.reduce(into: [String: Any]()) { result, item in
+        let json = try JSON(payload.reduce(into: [String: any Sendable]()) { result, item in
             result[item.key.rawValue] = item.value
         })
 

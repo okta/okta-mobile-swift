@@ -16,7 +16,7 @@ extension OAuth2Client {
     /// The configuration for an ``OAuth2Client``.
     ///
     /// This defines the basic information necessary for interacting with an OAuth2 authorization server.
-    public struct Configuration: Codable, Equatable, Hashable, ProvidesOAuth2Parameters {
+    public struct Configuration: Sendable, Codable, Equatable, Hashable, ProvidesOAuth2Parameters {
         /// The base URL for interactions with this OAuth2 server.
         public var issuerURL: URL
         

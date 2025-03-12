@@ -20,10 +20,10 @@ import Foundation
 public struct TokenInfo: Codable, JSONClaimContainer {
     public typealias ClaimType = JWTClaim
     
-    public let payload: [String: Any]
-    
+    public let payload: [String: any Sendable]
+
     @_documentation(visibility: internal)
-    public init(_ info: [String: Any]) {
+    public init(_ info: [String: any Sendable]) {
         self.payload = info
     }
     

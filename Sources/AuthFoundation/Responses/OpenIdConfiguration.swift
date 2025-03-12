@@ -15,11 +15,11 @@ import Foundation
 /// Describes the configuration of an OpenID server.
 ///
 /// The values exposed from this configuration are typically used during authentication, or when querying a server for its capabilities. This type uses ``HasClaims`` to represent the various provider metadata (represented as ``OpenIdConfiguration/ProviderMetadata``) for returning the full contents of the server's configuration. For more information, please refer to the <doc:WorkingWithClaims> documentation.
-public struct OpenIdConfiguration: Codable, JSONClaimContainer {
+public struct OpenIdConfiguration: Sendable, Codable, JSONClaimContainer {
     public typealias ClaimType = ProviderMetadata
     
     /// The raw payload of provider metadata claims returned from the OpenID Provider.
-    public var payload: [String: Any] { jsonPayload.jsonValue.anyValue as? [String: Any] ?? [:] }
+    public var payload: [String: any Sendable] { jsonPayload.jsonValue.anyValue as? [String: any Sendable] ?? [:] }
 
     let jsonPayload: AnyJSON
 
@@ -29,7 +29,7 @@ public struct OpenIdConfiguration: Codable, JSONClaimContainer {
         let json = try container.decode(JSON.self)
         jsonPayload = .init(json)
         
-        let payload = json.anyValue as? [String: Any] ?? [:]
+        let payload = json.anyValue as? [String: any Sendable] ?? [:]
         issuer = try ProviderMetadata.value(.issuer, in: payload)
         authorizationEndpoint = try ProviderMetadata.value(.authorizationEndpoint, in: payload)
         tokenEndpoint = try ProviderMetadata.value(.tokenEndpoint, in: payload)

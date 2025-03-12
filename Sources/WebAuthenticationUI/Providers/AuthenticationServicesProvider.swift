@@ -39,7 +39,7 @@ extension ASWebAuthenticationSession: AuthenticationServicesProviderSession {}
 protocol WebAuthenticationProviderFactory {
     static func createWebAuthenticationProvider(for webAuth: WebAuthentication,
                                                 from window: WebAuthentication.WindowAnchor?,
-                                                usesEphemeralSession: Bool) throws -> (any WebAuthenticationProvider)?
+                                                usesEphemeralSession: Bool) async throws -> (any WebAuthenticationProvider)?
 }
 
 class AuthenticationServicesProvider: NSObject, WebAuthenticationProvider {

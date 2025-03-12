@@ -18,7 +18,7 @@ extension WebAuthn {
      
      - Note: [W3C Reccomendation](https://www.w3.org/TR/webauthn/#dom-publickeycredentialdescriptor-type)
      */
-    public enum AuthenticatorTransport: String, Codable, Equatable {
+    public enum AuthenticatorTransport: String, Sendable, Codable, Equatable {
         /// Indicates the respective authenticator can be contacted over Bluetooth Smart (Bluetooth Low Energy / BLE).
         case ble
         

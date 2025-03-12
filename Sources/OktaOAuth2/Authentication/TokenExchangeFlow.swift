@@ -14,9 +14,9 @@ import AuthFoundation
 import Foundation
 
 /// An authentication flow class that implements the Token Exchange Flow.
-public class TokenExchangeFlow: AuthenticationFlow {
+public actor TokenExchangeFlow: AuthenticationFlow {
     /// Identifies the audience of the authorization server.
-    public enum Audience: APIRequestArgument {
+    public enum Audience: Sendable, APIRequestArgument {
         case `default`
         case custom(String)
         
@@ -63,8 +63,8 @@ public class TokenExchangeFlow: AuthenticationFlow {
     }
 
     /// Collection of the `AuthenticationDelegate` objects.
-    public let delegateCollection = DelegateCollection<AuthenticationDelegate>()
-    
+    nonisolated public let delegateCollection = DelegateCollection<AuthenticationDelegate>()
+
     /// Convenience initializer to construct a flow from variables.
     /// - Parameters:
     ///   - issuerURL: The issuer URL.
@@ -72,10 +72,10 @@ public class TokenExchangeFlow: AuthenticationFlow {
     ///   - scope: The scopes to request.
     ///   - audience: The audience of the authorization server.
     ///   - additionalParameters: Optional query parameters to supply tot he authorization server for all requests from this flow.
-    public convenience init(issuerURL: URL,
-                            clientId: String,
-                            scope: ClaimCollection<[String]>,
-                            additionalParameters: [String: APIRequestArgument]? = nil)
+    public init(issuerURL: URL,
+                clientId: String,
+                scope: ClaimCollection<[String]>,
+                additionalParameters: [String: APIRequestArgument]? = nil)
     {
         self.init(client: OAuth2Client(issuerURL: issuerURL,
                                        clientId: clientId,
@@ -85,10 +85,10 @@ public class TokenExchangeFlow: AuthenticationFlow {
 
     @_documentation(visibility: private)
     @inlinable
-    public convenience init(issuerURL: URL,
-                            clientId: String,
-                            scope: some WhitespaceSeparated,
-                            additionalParameters: [String: APIRequestArgument]? = nil)
+    public init(issuerURL: URL,
+                clientId: String,
+                scope: some WhitespaceSeparated,
+                additionalParameters: [String: APIRequestArgument]? = nil)
     {
         self.init(client: OAuth2Client(issuerURL: issuerURL,
                                        clientId: clientId,
@@ -100,8 +100,8 @@ public class TokenExchangeFlow: AuthenticationFlow {
     /// - Parameters:
     ///   - audience: The audience of the authorization server.
     ///   - client: The `OAuth2Client` to use with this flow.
-    public required init(client: OAuth2Client,
-                         additionalParameters: [String: APIRequestArgument]? = nil)
+    public init(client: OAuth2Client,
+                additionalParameters: [String: APIRequestArgument]? = nil)
     {
         // Ensure this SDK's static version is included in the user agent.
         SDKVersion.register(sdk: Version)
@@ -164,9 +164,9 @@ extension TokenExchangeFlow {
     /// - Parameters:
     ///   - tokens: Tokens to exchange.
     ///   - completion: Completion block for receiving the response.
-    public func start(with tokens: [TokenType],
-                      context: Context = .init(),
-                      completion: @escaping (Result<Token, OAuth2Error>) -> Void)
+    nonisolated public func start(with tokens: [TokenType],
+                                  context: Context = .init(),
+                                  completion: @escaping @Sendable (Result<Token, OAuth2Error>) -> Void)
     {
         Task {
             do {

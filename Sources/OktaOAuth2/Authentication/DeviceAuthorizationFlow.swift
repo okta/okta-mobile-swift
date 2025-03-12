@@ -63,7 +63,7 @@ public protocol DeviceAuthorizationFlowDelegate: AuthenticationDelegate {
 /// // the code.
 /// let token = try await flow.resume(with: context)
 /// ```
-public class DeviceAuthorizationFlow: AuthenticationFlow {
+public actor DeviceAuthorizationFlow: AuthenticationFlow {
     /// The OAuth2Client this authentication flow will use.
     public let client: OAuth2Client
     
@@ -95,36 +95,36 @@ public class DeviceAuthorizationFlow: AuthenticationFlow {
     ///   - scope: The scopes to request
     ///   - additionalParameters: Optional additional query string parameters you would like to supply to the authorization server.
     @inlinable
-    public convenience init(issuerURL: URL,
-                            clientId: String,
-                            scope: ClaimCollection<[String]>,
-                            additionalParameters: [String: any APIRequestArgument]? = nil)
+    public init(issuerURL: URL,
+                clientId: String,
+                scope: ClaimCollection<[String]>,
+                additionalParameters: [String: any APIRequestArgument]? = nil)
     {
         self.init(client: OAuth2Client(issuerURL: issuerURL,
                                        clientId: clientId,
                                        scope: scope),
                   additionalParameters: additionalParameters)
     }
-    
+
     @inlinable
     @_documentation(visibility: private)
-    public convenience init(issuerURL: URL,
-                            clientId: String,
-                            scope: some WhitespaceSeparated,
-                            additionalParameters: [String: any APIRequestArgument]? = nil)
+    public init(issuerURL: URL,
+                clientId: String,
+                scope: some WhitespaceSeparated,
+                additionalParameters: [String: any APIRequestArgument]? = nil)
     {
         self.init(client: OAuth2Client(issuerURL: issuerURL,
                                        clientId: clientId,
                                        scope: scope),
                   additionalParameters: additionalParameters)
     }
-    
+
     /// Initializer to construct an authentication flow from a pre-defined configuration and client.
     /// - Parameters:
     ///   - client: The `OAuth2Client` to use with this flow.
     ///   - additionalParameters: Optional additional query string parameters you would like to supply to the authorization server.
-    public required init(client: OAuth2Client,
-                         additionalParameters: [String: any APIRequestArgument]? = nil) {
+    public init(client: OAuth2Client,
+                additionalParameters: [String: any APIRequestArgument]? = nil) {
         // Ensure this SDK's static version is included in the user agent.
         SDKVersion.register(sdk: Version)
         
@@ -174,7 +174,7 @@ public class DeviceAuthorizationFlow: AuthenticationFlow {
         let client = client
 
         return try await withExpression {
-            guard let context = context,
+            guard let context = await context,
                   let verification = context.verification
             else {
                 throw OAuth2Error.missingClientConfiguration
@@ -224,7 +224,7 @@ public class DeviceAuthorizationFlow: AuthenticationFlow {
     }
 
     private var taskHandle: Task<Token, Error>?
-    public let delegateCollection = DelegateCollection<DeviceAuthorizationFlowDelegate>()
+    nonisolated public let delegateCollection = DelegateCollection<DeviceAuthorizationFlowDelegate>()
 }
 
 extension DeviceAuthorizationFlow {
@@ -236,7 +236,7 @@ extension DeviceAuthorizationFlow {
     /// - Parameter context: Optional context object used to customize this flow
     ///   - completion: Completion block for receiving the context.
     /// - Returns: The information a user should be presented with to continue authorization on a different device.
-    public func start(context: Context = .init(), completion: @escaping (Result<Verification, OAuth2Error>) -> Void) {
+    nonisolated public func start(context: Context = .init(), completion: @escaping @Sendable (Result<Verification, OAuth2Error>) -> Void) {
         Task {
             do {
                 completion(.success(try await start(with: context)))
@@ -251,7 +251,7 @@ extension DeviceAuthorizationFlow {
     /// Once an authentication session has begun, using ``start()``, the user should be presented with the user code and verification URI. This method is used to poll the server, to determine when a user completes authorizing this device. At that point, the result is exchanged for a token.
     /// - Parameters:
     ///   - completion: Completion block for receiving the token.
-    public func resume(completion: @escaping (Result<Token, OAuth2Error>) -> Void) {
+    nonisolated public func resume(completion: @escaping @Sendable (Result<Token, OAuth2Error>) -> Void) {
         Task {
             do {
                 completion(.success(try await resume()))

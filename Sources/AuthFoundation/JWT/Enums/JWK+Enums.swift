@@ -14,21 +14,21 @@ import Foundation
 
 extension JWK {
     /// The type of JWK key.
-    public enum KeyType: String, Codable {
+    public enum KeyType: String, Sendable, Codable {
         case ellipticCurve = "EC"
         case rsa = "RSA"
         case octetSequence = "oct"
     }
     
     /// The intended usage for this key (e.g. signing or encryption).
-    public enum Usage: String, Codable {
+    public enum Usage: String, Sendable, Codable {
         case signature = "sig"
         case encryption = "enc"
     }
     
     // swiftlint:disable identifier_name
     /// The algorithm this key is intended to be used with.
-    public enum Algorithm: Codable {
+    public enum Algorithm: Sendable, Codable {
         // JWS Algorithms according to https://www.rfc-editor.org/rfc/rfc7518.html#section-3.1
         case hs256
         case hs384

@@ -52,26 +52,26 @@ extension Date {
 private var SharedTimeCoordinator: TimeCoordinator = DefaultTimeCoordinator()
 // swiftlint:enable identifier_name
 
-class DefaultTimeCoordinator: TimeCoordinator, OAuth2ClientDelegate {
+final class DefaultTimeCoordinator: TimeCoordinator, OAuth2ClientDelegate {
     static func resetToDefault() {
         Date.coordinator = DefaultTimeCoordinator()
     }
     
     private let lock = Lock()
-    private var _offset: TimeInterval
+    nonisolated(unsafe) private var _offset: TimeInterval
     private(set) var offset: TimeInterval {
         get { lock.withLock { _offset } }
         set { lock.withLock { _offset = newValue } }
     }
     
-    private var observer: NSObjectProtocol?
+    nonisolated(unsafe) private var observer: NSObjectProtocol?
 
     init() {
         self._offset = 0
-        self.observer = NotificationCenter.default.addObserver(forName: .oauth2ClientCreated,
-                                                               object: nil,
-                                                               queue: nil,
-                                                               using: { [weak self] notification in
+        self.observer = TaskData.notificationCenter.addObserver(forName: .oauth2ClientCreated,
+                                                                object: nil,
+                                                                queue: nil,
+                                                                using: { [weak self] notification in
             guard let self = self,
                   let client = notification.object as? OAuth2Client
             else {
@@ -84,7 +84,7 @@ class DefaultTimeCoordinator: TimeCoordinator, OAuth2ClientDelegate {
     
     deinit {
         if let observer = observer {
-            NotificationCenter.default.removeObserver(observer)
+            TaskData.notificationCenter.removeObserver(observer)
         }
     }
     

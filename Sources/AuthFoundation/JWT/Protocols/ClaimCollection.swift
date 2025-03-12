@@ -14,7 +14,7 @@ import Foundation
 
 /// Defines a type of collection which can be
 @_documentation(visibility: internal)
-public protocol ClaimCollectionContainer {
+public protocol ClaimCollectionContainer: Sendable {
     associatedtype Element: ClaimConvertable & APIRequestArgument
     associatedtype RawValue
     
@@ -115,7 +115,7 @@ extension Array: WhitespaceSeparated where Element == String {
 /// print(config.$scope.rawValue)
 /// ```
 @propertyWrapper
-public struct ClaimCollection<Container: ClaimCollectionContainer> {
+public struct ClaimCollection<Container: ClaimCollectionContainer>: Sendable {
     /// The array representation of the claims in this list.
     public var wrappedValue: Container
     

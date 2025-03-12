@@ -65,7 +65,7 @@ public protocol AuthorizationCodeFlowDelegate: AuthenticationDelegate {
 /// let redirectUri: URL
 /// let token = try await flow.resume(with: redirectUri)
 /// ```
-public class AuthorizationCodeFlow: AuthenticationFlow {
+public actor AuthorizationCodeFlow: AuthenticationFlow {
     
     /// Errors reported during processing and handling of redirect URLs.
     ///
@@ -110,11 +110,11 @@ public class AuthorizationCodeFlow: AuthenticationFlow {
     ///   - redirectUri: The redirect URI for the client.
     ///   - additionalParameters: Optional additional query string parameters you would like to supply to the authorization server.
     @inlinable
-    public convenience init(issuerURL: URL,
-                            clientId: String,
-                            scope: ClaimCollection<[String]>,
-                            redirectUri: URL,
-                            additionalParameters: [String: any APIRequestArgument]? = nil)
+    public init(issuerURL: URL,
+                clientId: String,
+                scope: ClaimCollection<[String]>,
+                redirectUri: URL,
+                additionalParameters: [String: any APIRequestArgument]? = nil)
     {
         self.init(verifiedClient: OAuth2Client(issuerURL: issuerURL,
                                                clientId: clientId,
@@ -125,11 +125,11 @@ public class AuthorizationCodeFlow: AuthenticationFlow {
     
     @inlinable
     @_documentation(visibility: private)
-    public convenience init(issuerURL: URL,
-                            clientId: String,
-                            scope: some WhitespaceSeparated,
-                            redirectUri: URL,
-                            additionalParameters: [String: any APIRequestArgument]? = nil)
+    public init(issuerURL: URL,
+                clientId: String,
+                scope: some WhitespaceSeparated,
+                redirectUri: URL,
+                additionalParameters: [String: any APIRequestArgument]? = nil)
     {
         self.init(verifiedClient: OAuth2Client(issuerURL: issuerURL,
                                                clientId: clientId,
@@ -142,8 +142,8 @@ public class AuthorizationCodeFlow: AuthenticationFlow {
     /// - Parameters:
     ///   - client: The `OAuth2Client` to use with this flow.
     ///   - additionalParameters: Optional additional query string parameters you would like to supply to the authorization server.
-    public required convenience init(client: OAuth2Client,
-                                     additionalParameters: [String: any APIRequestArgument]? = nil) throws
+    public init(client: OAuth2Client,
+                additionalParameters: [String: any APIRequestArgument]? = nil) throws
     {
         guard client.configuration.redirectUri != nil else {
             throw OAuth2Error.missingRedirectUri
@@ -242,7 +242,7 @@ public class AuthorizationCodeFlow: AuthenticationFlow {
     }
 
     // MARK: Private properties / methods
-    public let delegateCollection = DelegateCollection<AuthorizationCodeFlowDelegate>()
+    nonisolated public let delegateCollection = DelegateCollection<AuthorizationCodeFlowDelegate>()
 }
 
 extension AuthorizationCodeFlow {
@@ -252,8 +252,8 @@ extension AuthorizationCodeFlow {
     /// - Parameters:
     ///   - context: Options to customize the authentication flow.
     ///   - completion: Completion block for receiving the response.
-    public func start(with context: Context = .init(),
-                      completion: @escaping (Result<URL, OAuth2Error>) -> Void)
+    nonisolated public func start(with context: Context = .init(),
+                                  completion: @escaping @Sendable (Result<URL, OAuth2Error>) -> Void)
     {
         Task {
             do {
@@ -263,7 +263,7 @@ extension AuthorizationCodeFlow {
             }
         }
     }
-    
+
     /// Continues an authentication flow using the given authentication redirect URI.
     ///
     /// Once the user completes authorization, using the URL provided by the ``start(with:additionalParameters:completion:)`` method within a browser, the browser will redirect to a URL that matches the scheme provided in the client configuration's ``redirectUri``. This URI will contain either an error response from the authorization server, or an authorization code which can be used to exchange a token.
@@ -272,7 +272,7 @@ extension AuthorizationCodeFlow {
     /// - Parameters:
     ///   - url: Authorization redirect URI
     ///   - completion: Completion block to retrieve the returned result.
-    public func resume(with url: URL, completion: @escaping (Result<Token, OAuth2Error>) -> Void) throws {
+    nonisolated public func resume(with url: URL, completion: @escaping @Sendable (Result<Token, OAuth2Error>) -> Void) throws {
         Task {
             do {
                 completion(.success(try await resume(with: url)))

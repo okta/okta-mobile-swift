@@ -15,11 +15,11 @@ import Foundation
 extension TokenExchangeFlow {
     @_documentation(visibility: private)
     @available(*, deprecated, renamed: "init(issuerURL:clientId:scope:additionalParameters:)")
-    public convenience init(issuer: URL,
-                            clientId: String,
-                            scopes: String,
-                            audience: Audience = .default)
+    public init(issuer: URL,
+                clientId: String,
+                scopes: String,
+                audience: Audience = .default)
     {
-        fatalError()
+        self.init(issuerURL: issuer, clientId: clientId, scope: scopes)
     }
 }

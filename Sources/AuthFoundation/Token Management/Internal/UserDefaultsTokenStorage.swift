@@ -24,6 +24,7 @@ private struct UserDefaultsKeys {
     static let allTokensKey = "com.okta.authfoundation.allTokens"
 }
 
+@CredentialActor
 final class UserDefaultsTokenStorage: TokenStorage {
     private let userDefaults: UserDefaults
     

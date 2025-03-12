@@ -61,11 +61,11 @@ public enum DirectAuthenticationFlowError: Error {
 /// An authentication flow that implements the Okta Direct Authentication API.
 ///
 /// This enables developers to build native sign-in workflows into their applications, while leveraging MFA to securely authenticate users, without the need to present a browser. Furthermore, this enables passwordless authentication scenarios by giving developers the power to choose which primary and secondary authentication factors to use when challenging a user for their credentials.
-public class DirectAuthenticationFlow: AuthenticationFlow {
+public actor DirectAuthenticationFlow: AuthenticationFlow {
     /// Enumeration defining the list of possible primary authentication factors.
     ///
     /// These values are used by the ``DirectAuthenticationFlow/start(_:with:)`` function.
-    public enum PrimaryFactor: Equatable {
+    public enum PrimaryFactor: Sendable, Equatable {
         /// Authenticate the user with the given password.
         ///
         /// This is used when supplying a password as a primary factor. For example:
@@ -108,7 +108,7 @@ public class DirectAuthenticationFlow: AuthenticationFlow {
     /// Enumeration defining the list of possible secondary authentication factors.
     ///
     /// These values are used by ``DirectAuthenticationFlow/resume(_:with:)``.
-    public enum SecondaryFactor: Equatable {
+    public enum SecondaryFactor: Sendable, Equatable {
         /// Authenticate the user with the given OTP code.
         ///
         /// This usually represents app authenticators such as Google Authenticator, and can be supplied along with a user identifier. For example:
@@ -140,7 +140,7 @@ public class DirectAuthenticationFlow: AuthenticationFlow {
     /// Enumeration defining the list of possible authenticator "Continuation" factors, which are used.
     ///
     /// Some authenticators cannot complete authentication in a single step, and requires either user intervention or an additional challenge response from the client. These circumstances are represented by the ``DirectAuthenticationFlow/Status/continuation(_:)`` status. In this case, the appropriate Continuation Factor response type can be supplied to the ``DirectAuthenticationFlow/resume(with:)-9gu1l`` function.
-    public enum ContinuationFactor: Equatable {
+    public enum ContinuationFactor: Sendable, Equatable {
         /// Continues an OOB authentication by transfering the binding to another authenticator, and waiting for its response.
         ///
         /// For example, if an Okta Verify number challenge needs to be presented to the user (also referred to as a "Binding Transfer"), the OOB authentication can be continued.
@@ -179,7 +179,7 @@ public class DirectAuthenticationFlow: AuthenticationFlow {
     }
     
     /// Configuration which can be used to customize the authentication flow, as needed.
-    public struct Context: AuthenticationContext, Equatable {
+    public struct Context: AuthenticationContext, Sendable, Equatable {
         /// The ACR values, if any, which should be requested by the client.
         @ClaimCollection
         public var acrValues: [String]?
@@ -218,7 +218,7 @@ public class DirectAuthenticationFlow: AuthenticationFlow {
     }
     
     /// Channel used when authenticating an out-of-band factor using Okta Verify.
-    public enum OOBChannel: String, Codable, Equatable, APIRequestArgument {
+    public enum OOBChannel: String, Sendable, Codable, Equatable, APIRequestArgument {
         /// Utilize Okta Verify Push notifications to authenticate the user.
         case push
         
@@ -232,7 +232,7 @@ public class DirectAuthenticationFlow: AuthenticationFlow {
     /// Context information used to define a request from the server to perform a multifactor authentication.
     ///
     /// This is largely used internally to ensure the secondary factor is linked to the user's current authentication session, but can be used to see the list of challenge types that are supported.
-    public struct MFAContext: Equatable {
+    public struct MFAContext: Sendable, Equatable {
         /// The list of possible grant types that the user can be challenged with.
         public let supportedChallengeTypes: [GrantType]?
         let mfaToken: String
@@ -246,7 +246,7 @@ public class DirectAuthenticationFlow: AuthenticationFlow {
     /// The current status of the authentication flow.
     ///
     /// This value is returned from ``DirectAuthenticationFlow/start(_:with:)`` and ``DirectAuthenticationFlow/resume(with:)`` to indicate the result of an individual authentication step. This can be used to drive your application's sign-in workflow.
-    public enum Status: Equatable {
+    public enum Status: Sendable, Equatable {
         /// Authentication was successful, returning the given token.
         case success(_ token: Token)
         
@@ -264,7 +264,7 @@ public class DirectAuthenticationFlow: AuthenticationFlow {
     /// The type of authentication continuation that is requested.
     ///
     /// Some authenticators follow a challenge and response pattern, whereby the client either needs to prompt the user for some out-of-band information, or the client needs to respond directly to a challenge sent from the server. When these situations occur, this enum can be used to determine which action should be taken by the client.
-    public enum ContinuationType: Equatable {
+    public enum ContinuationType: Sendable, Equatable {
         /// Indicates the user is being prompted with a WebAuthn challenge request.
         case webAuthn(_ context: WebAuthnContext)
         
@@ -275,7 +275,7 @@ public class DirectAuthenticationFlow: AuthenticationFlow {
         case prompt(_ context: BindingContext)
         
         /// Holds information about a challenge request when initiating a WebAuthn authentication.
-        public struct WebAuthnContext: Equatable {
+        public struct WebAuthnContext: Sendable, Equatable {
             /// The credential request returned from the server.
             public let request: WebAuthn.CredentialRequestOptions
             
@@ -285,7 +285,7 @@ public class DirectAuthenticationFlow: AuthenticationFlow {
         /// Holds information about the binding update received when verifying OOB factors
         ///
         /// > Note: This object is used to internally track state associated with the continuation, and is not actionable by a developer.
-        public struct BindingContext: Equatable {
+        public struct BindingContext: Sendable, Equatable {
             let oobResponse: OOBResponse
             let mfaContext: MFAContext?
         }
@@ -294,7 +294,7 @@ public class DirectAuthenticationFlow: AuthenticationFlow {
     /// Indicates the intent for the user authentication operation.
     ///
     /// This value is used to toggle behavior to distinguish between sign-in authentication, password recovery / reset operations, etc.
-    public enum Intent: String, Codable, Equatable {
+    public enum Intent: String, Sendable, Codable, Equatable {
         /// The user intends to sign in.
         case signIn
         
@@ -336,11 +336,11 @@ public class DirectAuthenticationFlow: AuthenticationFlow {
     ///   - scope: The scopes to request
     ///   - grantTypes: The supported list of grant types the application has been configured to use
     ///   - additionalParameters: Custom request parameters to be added to requests made for this sign-in.
-    public convenience init(issuerURL: URL,
-                            clientId: String,
-                            scope: ClaimCollection<[String]>,
-                            supportedGrants grantTypes: [GrantType] = .directAuth,
-                            additionalParameters: [String: any APIRequestArgument]? = nil)
+    public init(issuerURL: URL,
+                clientId: String,
+                scope: ClaimCollection<[String]>,
+                supportedGrants grantTypes: [GrantType] = .directAuth,
+                additionalParameters: [String: any APIRequestArgument]? = nil)
     {
         self.init(client: OAuth2Client(issuerURL: issuerURL,
                                        clientId: clientId,
@@ -351,11 +351,11 @@ public class DirectAuthenticationFlow: AuthenticationFlow {
 
     @_documentation(visibility: private)
     @inlinable
-    public convenience init(issuerURL: URL,
-                            clientId: String,
-                            scope: some WhitespaceSeparated,
-                            supportedGrants grantTypes: [GrantType] = .directAuth,
-                            additionalParameters: [String: any APIRequestArgument]? = nil)
+    public init(issuerURL: URL,
+                clientId: String,
+                scope: some WhitespaceSeparated,
+                supportedGrants grantTypes: [GrantType] = .directAuth,
+                additionalParameters: [String: any APIRequestArgument]? = nil)
     {
         self.init(client: OAuth2Client(issuerURL: issuerURL,
                                        clientId: clientId,
@@ -363,7 +363,7 @@ public class DirectAuthenticationFlow: AuthenticationFlow {
                   supportedGrants: grantTypes,
                   additionalParameters: additionalParameters)
     }
-    
+
     /// Initializer to construct an authentication flow from a pre-defined configuration and client.
     /// - Parameters:
     ///   - client: The `OAuth2Client` to use with this flow.
@@ -383,7 +383,7 @@ public class DirectAuthenticationFlow: AuthenticationFlow {
         client.add(delegate: self)
     }
     
-    public required init(client: OAuth2Client, additionalParameters: [String: any APIRequestArgument]?) throws {
+    public init(client: OAuth2Client, additionalParameters: [String: any APIRequestArgument]?) throws {
         // Ensure this SDK's static version is included in the user agent.
         SDKVersion.register(sdk: Version)
         
@@ -472,9 +472,10 @@ public class DirectAuthenticationFlow: AuthenticationFlow {
     {
         isAuthenticating = true
         
-        let stepHandler = try factor.stepHandler(flow: self,
-                                                 openIdConfiguration: try await client.openIdConfiguration(),
-                                                 loginHint: loginHint)
+        let stepHandler = try await factor.stepHandler(
+            flow: self,
+            openIdConfiguration: try await client.openIdConfiguration(),
+            loginHint: loginHint)
 
         return try await process(stepHandler: stepHandler)
     }
@@ -517,7 +518,7 @@ public class DirectAuthenticationFlow: AuthenticationFlow {
     }
     
     // MARK: Private properties / methods
-    public let delegateCollection = DelegateCollection<DirectAuthenticationFlowDelegate>()
+    nonisolated public let delegateCollection = DelegateCollection<DirectAuthenticationFlowDelegate>()
 }
 
 @available(iOS 13.0, tvOS 13.0, macOS 10.15, watchOS 6, *)

@@ -53,26 +53,46 @@ public final class DebugAPIRequestObserver: OAuth2ClientDelegate {
     }()
     
     /// Indicates if HTTP request and response headers should be logged.
-    public var showHeaders = false
-    
+    public var showHeaders: Bool {
+        get {
+            lock.withLock {
+                _showHeaders
+            }
+        }
+        set {
+            lock.withLock {
+                _showHeaders = newValue
+            }
+        }
+    }
+
     /// Convenience flag that automatically binds newly-created ``OAuth2Client`` instances to the debug observer.
-    public var observeAllOAuth2Clients: Bool = false {
-        didSet {
-            if observeAllOAuth2Clients {
-                oauth2Observer = NotificationCenter.default.addObserver(
-                    forName: .oauth2ClientCreated,
-                    object: nil,
-                    queue: nil,
-                    using: { [weak self] notification in
-                        guard let self = self,
-                              let client = notification.object as? OAuth2Client
-                        else {
-                            return
-                        }
-                        client.add(delegate: self)
-                    })
-            } else {
-                oauth2Observer = nil
+    nonisolated(unsafe) public var observeAllOAuth2Clients: Bool {
+        get {
+            lock.withLock {
+                _observeAllOAuth2Clients
+            }
+        }
+        set {
+            lock.withLock {
+                _observeAllOAuth2Clients = newValue
+
+                if _observeAllOAuth2Clients {
+                    oauth2Observer = TaskData.notificationCenter.addObserver(
+                        forName: .oauth2ClientCreated,
+                        object: nil,
+                        queue: nil,
+                        using: { [weak self] notification in
+                            guard let self = self,
+                                  let client = notification.object as? OAuth2Client
+                            else {
+                                return
+                            }
+                            client.add(delegate: self)
+                        })
+                } else {
+                    oauth2Observer = nil
+                }
             }
         }
     }
@@ -136,14 +156,17 @@ public final class DebugAPIRequestObserver: OAuth2ClientDelegate {
         
         os_log(.debug, log: Self.log, "Response:\n\n%s", result)
     }
-    
+
     private static var log = OSLog(subsystem: "com.okta.client.network", category: "Debugging")
-    private var oauth2Observer: NSObjectProtocol? {
+    private let lock = Lock()
+    nonisolated(unsafe) private var _showHeaders = false
+    nonisolated(unsafe) private var _observeAllOAuth2Clients = false
+    nonisolated(unsafe) private var oauth2Observer: NSObjectProtocol? {
         didSet {
             if let oldValue = oldValue,
                oauth2Observer == nil
             {
-                NotificationCenter.default.removeObserver(oldValue)
+                TaskData.notificationCenter.removeObserver(oldValue)
             }
         }
     }

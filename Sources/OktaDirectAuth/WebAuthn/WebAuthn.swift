@@ -35,7 +35,7 @@ import Foundation
 /// ```
 public struct WebAuthn {
     /// Represents the credential challenge returned from the server when a WebAuthn authentication is initiated.
-    public struct CredentialRequestOptions: Codable, Equatable {
+    public struct CredentialRequestOptions: Sendable, Codable, Equatable {
         /// The public key request options supplied to the client from the server.
         public let publicKey: WebAuthn.PublicKeyCredentialRequestOptions
         
@@ -43,7 +43,7 @@ public struct WebAuthn {
         public let authenticatorEnrollments: [AuthenticatorEnrollment]?
 
         /// Defines additional authenticator enrollment information supplied by the server.
-        public struct AuthenticatorEnrollment: Codable, Equatable {
+        public struct AuthenticatorEnrollment: Sendable, Codable, Equatable {
             /// The ID supplied from the server representing this credential.
             ///
             /// **Note:** This should be identical to the ``WebAuthn/PublicKeyCredentialRequestOptions/rpID`` value.
@@ -60,7 +60,7 @@ public struct WebAuthn {
     /// Defines the set of data expected from the client in response to an authenticator challenge.
     ///
     /// This value should be supplied to the ``DirectAuthenticationFlow/ContinuationFactor/webAuthn(response:)`` type.
-    public struct AuthenticatorAssertionResponse: Codable, Equatable {
+    public struct AuthenticatorAssertionResponse: Sendable, Codable, Equatable {
         /// The client data JSON response, represented as a string.
         public let clientDataJSON: String
         

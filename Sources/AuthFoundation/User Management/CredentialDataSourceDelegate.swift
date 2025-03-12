@@ -13,6 +13,7 @@
 import Foundation
 
 /// Protocol that a custom ``CredentialDataSource`` instances are required to communicate changes to.
+@CredentialActor
 public protocol CredentialDataSourceDelegate: AnyObject {
     /// Sent when a new credential is created.
     ///

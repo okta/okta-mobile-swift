@@ -14,7 +14,7 @@ import Foundation
 import AuthFoundation
 
 /// An authentication flow class that implements the JWT Authorization Bearer Flow, for authenticating users using JWTs signed by a trusted key.
-public class JWTAuthorizationFlow: AuthenticationFlow {
+public actor JWTAuthorizationFlow: AuthenticationFlow {
     public typealias Context = StandardAuthenticationContext
     
     /// The OAuth2Client this authentication flow will use.
@@ -49,10 +49,10 @@ public class JWTAuthorizationFlow: AuthenticationFlow {
     ///   - scope: The scopes to request
     ///   - additionalParameters: Additional parameters to add to all requests made by this flow.
     @inlinable
-    public convenience init(issuerURL: URL,
-                            clientId: String,
-                            scope: ClaimCollection<[String]>,
-                            additionalParameters: [String: any APIRequestArgument]? = nil)
+    public init(issuerURL: URL,
+                clientId: String,
+                scope: ClaimCollection<[String]>,
+                additionalParameters: [String: any APIRequestArgument]? = nil)
     {
         self.init(client: .init(issuerURL: issuerURL,
                                 clientId: clientId,
@@ -62,10 +62,10 @@ public class JWTAuthorizationFlow: AuthenticationFlow {
 
     @_documentation(visibility: private)
     @inlinable
-    public convenience init(issuerURL: URL,
-                            clientId: String,
-                            scope: some WhitespaceSeparated,
-                            additionalParameters: [String: any APIRequestArgument]? = nil)
+    public init(issuerURL: URL,
+                clientId: String,
+                scope: some WhitespaceSeparated,
+                additionalParameters: [String: any APIRequestArgument]? = nil)
     {
         self.init(client: .init(issuerURL: issuerURL,
                                 clientId: clientId,
@@ -77,8 +77,8 @@ public class JWTAuthorizationFlow: AuthenticationFlow {
     /// - Parameters:
     ///   - client: OAuth2Client to use.
     ///   - additionalParameters: Additional parameters to add to all requests made by this flow.
-    public required init(client: OAuth2Client,
-                         additionalParameters: [String: any APIRequestArgument]? = nil)
+    public init(client: OAuth2Client,
+                additionalParameters: [String: any APIRequestArgument]? = nil)
     {
         // Ensure this SDK's static version is included in the user agent.
         SDKVersion.register(sdk: Version)
@@ -126,7 +126,7 @@ public class JWTAuthorizationFlow: AuthenticationFlow {
     }
 
     // MARK: Private properties / methods
-    public let delegateCollection = DelegateCollection<AuthenticationDelegate>()
+    nonisolated public let delegateCollection = DelegateCollection<AuthenticationDelegate>()
 }
 
 extension JWTAuthorizationFlow {
@@ -135,9 +135,9 @@ extension JWTAuthorizationFlow {
     ///   - assertion: JWT Assertion
     ///   - context: Context used to customize the flow.
     ///   - completion: Completion invoked when a response is received.
-    public func start(with assertion: JWT,
-                      context: Context = .init(),
-                      completion: @escaping (Result<Token, OAuth2Error>) -> Void)
+    nonisolated public func start(with assertion: JWT,
+                                  context: Context = .init(),
+                                  completion: @escaping @Sendable (Result<Token, OAuth2Error>) -> Void)
     {
         Task {
             do {

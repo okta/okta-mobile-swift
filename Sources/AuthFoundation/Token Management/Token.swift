@@ -13,7 +13,7 @@
 import Foundation
 
 /// Token information representing a user's access to a resource server, including access token, refresh token, and other related information.
-public final class Token: Codable, Equatable, Hashable, JSONClaimContainer, Expires {
+public struct Token: Sendable, Codable, Equatable, Hashable, JSONClaimContainer, Expires {
     public typealias ClaimType = TokenClaim
 
     /// The object used to ensure ID tokens are valid.
@@ -31,8 +31,8 @@ public final class Token: Codable, Equatable, Hashable, JSONClaimContainer, Expi
     static var exchangeCoordinator: TokenExchangeCoordinator = DefaultTokenExchangeCoordinator()
     
     /// The unique identifier for this token.
-    public internal(set) var id: String
-    
+    public let id: String
+
     /// The date this token was issued at.
     public let issuedAt: Date?
     
@@ -66,8 +66,8 @@ public final class Token: Codable, Equatable, Hashable, JSONClaimContainer, Expi
     public var issuedTokenType: String? { self[.issuedTokenType] }
     
     /// The claim payload container for this token
-    public var payload: [String: Any] { jsonPayload.jsonValue.anyValue as? [String: Any] ?? [:] }
-    
+    public var payload: [String: any Sendable] { jsonPayload.jsonValue.anyValue as? [String: any Sendable] ?? [:] }
+
     /// Indicates whether or not the token is being refreshed.
     public var isRefreshing: Bool {
         refreshAction.isActive
@@ -128,7 +128,7 @@ public final class Token: Codable, Equatable, Hashable, JSONClaimContainer, Expi
                                            scope: scope?.joined(separator: " "),
                                            id: Token.RefreshRequest.placeholderId)
         let response = try await client.exchange(token: request)
-        NotificationCenter.default.post(name: .tokenRefreshed, object: response.result)
+        TaskData.notificationCenter.post(name: .tokenRefreshed, object: response.result)
         return response.result
     }
     
@@ -163,7 +163,7 @@ public final class Token: Codable, Equatable, Hashable, JSONClaimContainer, Expi
         self.jsonPayload = json
         self.refreshAction = .init(taskName: "Refresh Token \(id)")
         
-        let payload = json.jsonValue.anyValue as? [String: Any] ?? [:]
+        let payload = json.jsonValue.anyValue as? [String: any Sendable] ?? [:]
         if let value = payload[TokenClaim.idToken.rawValue] as? String {
             idToken = try JWT(value)
         } else {

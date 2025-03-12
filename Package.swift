@@ -64,3 +64,10 @@ var package = Package(
     ],
     swiftLanguageVersions: [.v5]
 )
+
+for target in package.targets {
+    target.swiftSettings = target.swiftSettings ?? []
+    target.swiftSettings?.append(
+        .enableUpcomingFeature("ForwardTrailingClosures")
+    )
+}

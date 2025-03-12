@@ -205,7 +205,7 @@ extension SDKVersion.Migration {
                                                   security: security)
             try item.delete()
             
-            NotificationCenter.default.post(name: .credentialMigrated, object: credential)
+            TaskData.notificationCenter.post(name: .credentialMigrated, object: credential)
         }
         
         @objc(_OIDCLegacyStateManager)

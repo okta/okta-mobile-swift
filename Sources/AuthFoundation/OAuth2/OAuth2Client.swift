@@ -32,7 +32,7 @@ extension OAuth2ClientDelegate {
 
 // swiftlint:disable type_body_length
 /// An OAuth2 client, used to interact with a given authorization server.
-public final class OAuth2Client {
+public final class OAuth2Client: Sendable {
     /// The URLSession used by this client for network requests.
     public let session: URLSessionProtocol
     
@@ -40,8 +40,19 @@ public final class OAuth2Client {
     public let configuration: Configuration
     
     /// Additional HTTP headers to include in outgoing network requests.
-    public var additionalHttpHeaders: [String: String]?
-    
+    nonisolated(unsafe) public var additionalHttpHeaders: [String: String]? {
+        get {
+            lock.withLock {
+                _additionalHttpHeaders
+            }
+        }
+        set {
+            lock.withLock {
+                _additionalHttpHeaders = newValue
+            }
+        }
+    }
+
     /// The OpenID configuration for this org.
     ///
     /// This value will be `nil` until the configuration has been retrieved through the ``openIdConfiguration(completion:)`` or ``openIdConfiguration()`` functions.
@@ -96,8 +107,11 @@ public final class OAuth2Client {
         
         self.configuration = configuration
         self.session = session ?? URLSession(configuration: .ephemeral)
-        
-        NotificationCenter.default.post(name: .oauth2ClientCreated, object: self)
+        self.refreshQueue = DispatchQueue(label: "com.okta.refreshQueue.\(configuration.issuerURL.host ?? "unknown")",
+                                          qos: .userInitiated,
+                                          attributes: .concurrent)
+
+        TaskData.notificationCenter.post(name: .oauth2ClientCreated, object: self)
 
         // Ensure the Credential Coordinator can monitor this client for token refresh changes.
         Credential.coordinator.observe(oauth2: self)
@@ -140,12 +154,12 @@ public final class OAuth2Client {
             let newToken: Token?
             switch result {
             case .success(let token):
-                NotificationCenter.default.post(name: .tokenRefreshed, object: token)
+                TaskData.notificationCenter.post(name: .tokenRefreshed, object: token)
                 newToken = token
             case .failure(let error):
-                NotificationCenter.default.post(name: .tokenRefreshFailed,
-                                                object: token,
-                                                userInfo: ["error": error])
+                TaskData.notificationCenter.post(name: .tokenRefreshFailed,
+                                                 object: token,
+                                                 userInfo: ["error": error])
                 newToken = nil
             }
 
@@ -263,12 +277,11 @@ public final class OAuth2Client {
     }
 
     // MARK: Private properties / methods
-    private let delegates = DelegateCollection<OAuth2ClientDelegate>()
-    private(set) lazy var refreshQueue: DispatchQueue = {
-        DispatchQueue(label: "com.okta.refreshQueue.\(baseURL.host ?? "unknown")",
-                      qos: .userInitiated,
-                      attributes: .concurrent)
-    }()
+    private let lock = Lock()
+    nonisolated(unsafe) private var _additionalHttpHeaders: [String: String]?
+
+    nonisolated private let delegates = DelegateCollection<OAuth2ClientDelegate>()
+    let refreshQueue: DispatchQueue
 
     let openIdConfigurationAction = CoalescedResult<OpenIdConfiguration>(taskName: "OpenIdConfiguration")
     let jwksAction = CoalescedResult<JWKS>(taskName: "OpenIdConfiguration")

@@ -25,6 +25,7 @@ public protocol TokenAuthenticationContext {}
 /// A default implementation is provided, but for advanced use-cases, you may implement this protocol yourself and assign an instance to the ``Credential/tokenStorage`` property.
 ///
 /// > Warning: When implementing a custom token storage class, it's vitally important that you do not directly invoke any of these methods yourself. These methods are intended to be called on-demand by the other AuthFoundation classes, and the behavior is undefined if these methods are called directly by the developer.
+@CredentialActor
 public protocol TokenStorage {
     /// Mandatory delegate property that is used to communicate changes to the token store to the rest of the user management system.
     var delegate: TokenStorageDelegate? { get set }
@@ -47,7 +48,7 @@ public protocol TokenStorage {
     ///
     /// > Note: This method should invoke the ``TokenStorageDelegate/token(storage:added:token:)`` delegate method.
     func add(token: Token, metadata: Token.Metadata?, security: [Credential.Security]) throws
-    
+
     /// Associates the given metadata with the token identified by the given ID.
     func setMetadata(_ metadata: Token.Metadata) throws
     
@@ -73,6 +74,7 @@ public protocol TokenStorage {
 }
 
 /// Protocol that custom ``TokenStorage`` instances are required to communicate changes to.
+@CredentialActor
 public protocol TokenStorageDelegate: AnyObject {
     /// Sent when the default token has been changed.
     func token(storage: TokenStorage, defaultChanged id: String?)

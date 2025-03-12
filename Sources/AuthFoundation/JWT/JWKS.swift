@@ -15,7 +15,7 @@ import Foundation
 /// Describes the collection of keys associated with an authorization server.
 ///
 /// These can be used to verify tokens and other signed or encrypted content using the keys published by the server.
-public struct JWKS: Codable, Equatable, Collection {
+public struct JWKS: Sendable, Codable, Equatable, Collection {
     public typealias Index = Int
     public typealias Element = JWK
 

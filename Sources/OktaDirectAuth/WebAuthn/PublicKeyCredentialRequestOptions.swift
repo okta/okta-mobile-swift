@@ -19,7 +19,7 @@ extension WebAuthn {
      
      - Note: [W3C Reccomendation](https://www.w3.org/TR/webauthn/#dictionary-assertion-options)
      */
-    public struct PublicKeyCredentialRequestOptions: Codable, Equatable {
+    public struct PublicKeyCredentialRequestOptions: Sendable, Codable, Equatable {
         /// This member specifies a challenge that the authenticator signs, along with other data, when producing an authentication assertion. See the § 13.4.3 Cryptographic Challenges security consideration.
         public let challenge: String
         

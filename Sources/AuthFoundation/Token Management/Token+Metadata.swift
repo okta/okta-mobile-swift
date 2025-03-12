@@ -16,7 +16,7 @@ extension Token {
     /// Describes the metadata associated with a token.
     ///
     /// This is used when storing tags and claims associated with tokens, as well as through the ``Credential/find(where:prompt:authenticationContext:)`` method.
-    public struct Metadata: JSONClaimContainer {
+    public struct Metadata: Sendable, JSONClaimContainer {
         public typealias ClaimType = JWTClaim
 
         /// The unique ID for the token.
@@ -26,8 +26,8 @@ extension Token {
         public let tags: [String: String]
         
         /// The raw contents of the claim payload for this token.
-        public let payload: [String: Any]
-        
+        public let payload: [String: any Sendable]
+
         private let payloadData: Data?
         init(token: Token, tags: [String: String]) {
             self.id = token.id

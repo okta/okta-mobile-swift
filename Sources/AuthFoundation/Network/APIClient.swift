@@ -16,14 +16,14 @@ import Foundation
 import FoundationNetworking
 #endif
 
-public protocol APIClientConfiguration {
+public protocol APIClientConfiguration: Sendable {
     var baseURL: URL { get }
 }
 
 /// Protocol defining the interfaces and capabilities that API clients can conform to.
 ///
 /// This provides a common pattern for network operations to be performed, and to centralize boilerplate handling of URL requests, provide customization extensions, and normalize response processing and argument handling.
-public protocol APIClient {
+public protocol APIClient: Sendable {
     /// The base URL requests are performed against.
     ///
     /// This is used when request types may define their path as relative, and can inherit the URL they should be sent to through the client.
@@ -71,7 +71,7 @@ public protocol APIClient {
 }
 
 /// Protocol that delegates of APIClient instances can conform to.
-public protocol APIClientDelegate: AnyObject {
+public protocol APIClientDelegate: AnyObject, Sendable {
     /// Invoked immediately prior to a URLRequest being converted to a DataTask.
     func api(client: APIClient, willSend request: inout URLRequest)
     
@@ -99,7 +99,7 @@ extension APIClientDelegate {
 }
 
 /// List of retry options
-public enum APIRetry {
+public enum APIRetry: Sendable {
     /// Indicates the APIRequest should not be retried.
     case doNotRetry
     
@@ -109,7 +109,7 @@ public enum APIRetry {
     /// The default retry option.
     public static let `default` = APIRetry.retry(maximumCount: 3)
     
-    struct State {
+    struct State: Sendable {
         let type: APIRetry
         let requestId: String?
         let originalRequest: URLRequest
@@ -125,7 +125,7 @@ public enum APIRetry {
 }
 
 /// Defines the possible results for an API request.
-public enum APIResponseResult {
+public enum APIResponseResult: Sendable {
     /// Indicates the request was successful.
     case success
     /// The server is indicating the request should be retried.

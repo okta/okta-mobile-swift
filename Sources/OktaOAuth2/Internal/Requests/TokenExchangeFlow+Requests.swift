@@ -15,9 +15,9 @@ import Foundation
 
 extension TokenExchangeFlow {
     /// Types specify token's identity.
-    public enum TokenType {
+    public enum TokenType: Sendable {
         /// Describes specific token used by ``TokenExchangeFlow/TokenType``.
-        public enum Kind: String {
+        public enum Kind: String, Sendable {
             case idToken = "id_token"
             case accessToken = "access_token"
             case deviceSecret = "device-secret"

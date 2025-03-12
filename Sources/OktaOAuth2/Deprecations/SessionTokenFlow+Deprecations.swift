@@ -15,22 +15,26 @@ import Foundation
 extension ResourceOwnerFlow {
     @_documentation(visibility: private)
     @available(*, deprecated, renamed: "init(issuerURL:clientId:scope:redirectUri:additionalParameters:)")
-    public convenience init(issuer: URL,
-                            clientId: String,
-                            scopes: String,
-                            redirectUri: URL,
-                            additionalParameters: [String: APIRequestArgument]? = nil)
+    public init(issuer: URL,
+                clientId: String,
+                scopes: String,
+                redirectUri: URL,
+                additionalParameters: [String: APIRequestArgument]? = nil)
     {
-        fatalError()
+        self.init(issuerURL: issuer, clientId: clientId, scope: scopes, additionalParameters: additionalParameters)
     }
-    
+
     @_documentation(visibility: private)
     @available(*, deprecated, renamed: "init(client:additionalParameters:)")
-    public convenience init(redirectUri: URL,
-                            additionalParameters: [String: APIRequestArgument]? = nil,
-                            client: OAuth2Client)
+    public init(redirectUri: URL,
+                additionalParameters: [String: APIRequestArgument]? = nil,
+                client: OAuth2Client)
     {
-        fatalError()
+        var configuration = client.configuration
+        configuration.redirectUri = redirectUri
+
+        self.init(client: OAuth2Client(configuration, session: client.session),
+                  additionalParameters: additionalParameters)
     }
 }
 
@@ -40,6 +44,9 @@ extension OAuth2Client {
     public func sessionTokenFlow(redirectUri: URL,
                                  additionalParameters: [String: String]? = nil) throws -> SessionTokenFlow
     {
-        fatalError()
+        var configuration = configuration
+        configuration.redirectUri = redirectUri
+        return try SessionTokenFlow(client: OAuth2Client(configuration, session: session),
+                                    additionalParameters: additionalParameters)
     }
 }

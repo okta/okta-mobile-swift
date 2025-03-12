@@ -19,7 +19,7 @@ extension IsClaim {
     }
 
     static func optionalValue<T: ClaimConvertable>(_ claim: Self, in payload: [String: Any]) -> [T]? {
-        let value = payload[claim.rawValue] as? [ClaimConvertable]
+        let value = payload[claim.rawValue] as? [any ClaimConvertable]
         return value?.compactMap { T.convert(from: $0) }
     }
 
@@ -31,7 +31,7 @@ extension IsClaim {
     }
 
     static func value<T: ClaimConvertable>(_ claim: Self, in payload: [String: Any]) throws -> [T] {
-        guard let value = payload[claim.rawValue] as? [ClaimConvertable] else {
+        guard let value = payload[claim.rawValue] as? [any ClaimConvertable] else {
             throw ClaimError.missingRequiredValue(key: claim.rawValue)
         }
         return try value.compactMap { value in

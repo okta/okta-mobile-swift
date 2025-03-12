@@ -18,10 +18,11 @@ import Foundation
 import LocalAuthentication
 #endif
 
+@CredentialActor
 final class KeychainTokenStorage: TokenStorage {
-    static let serviceName = "com.okta.authfoundation.keychain.storage"
-    static let metadataName = "com.okta.authfoundation.keychain.metadata"
-    static let defaultTokenName = "com.okta.authfoundation.keychain.default"
+    nonisolated static let serviceName = "com.okta.authfoundation.keychain.storage"
+    nonisolated static let metadataName = "com.okta.authfoundation.keychain.metadata"
+    nonisolated static let defaultTokenName = "com.okta.authfoundation.keychain.default"
 
     weak var delegate: TokenStorageDelegate?
     
@@ -136,8 +137,11 @@ final class KeychainTokenStorage: TokenStorage {
         else {
             throw TokenError.cannotReplaceToken
         }
-        
-        token.id = id
+
+        let token = try Token(id: id,
+                              issuedAt: token.issuedAt ?? .nowCoordinated,
+                              context: token.context,
+                              json: token.jsonPayload)
         
         let data = try encoder.encode(token)
         let accessibility = security?.accessibility ?? oldResult.accessibility ?? .afterFirstUnlock

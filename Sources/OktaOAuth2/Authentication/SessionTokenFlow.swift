@@ -20,7 +20,7 @@ import FoundationNetworking
 /// An authentication flow class that exchanges a Session Token for access tokens.
 ///
 /// This flow is typically used in conjunction with the [classic Okta native authentication library](https://github.com/okta/okta-auth-swift). For native authentication using the Okta Identity Engine (OIE), please use the [Okta IDX library](https://github.com/okta/okta-idx-swift).
-public class SessionTokenFlow: AuthenticationFlow {
+public actor SessionTokenFlow: AuthenticationFlow {
     public typealias Context = AuthorizationCodeFlow.Context
     
     /// The OAuth2Client this authentication flow will use.
@@ -54,11 +54,11 @@ public class SessionTokenFlow: AuthenticationFlow {
     ///   - scope: The scopes to request
     ///   - additionalParameters: Optional query parameters to supply tot he authorization server for all requests from this flow.
     @inlinable
-    public convenience init(issuerURL: URL,
-                            clientId: String,
-                            scope: ClaimCollection<[String]>,
-                            redirectUri: URL,
-                            additionalParameters: [String: APIRequestArgument]? = nil) throws
+    public init(issuerURL: URL,
+                clientId: String,
+                scope: ClaimCollection<[String]>,
+                redirectUri: URL,
+                additionalParameters: [String: APIRequestArgument]? = nil) throws
     {
         try self.init(client: OAuth2Client(issuerURL: issuerURL,
                                            clientId: clientId,
@@ -69,11 +69,11 @@ public class SessionTokenFlow: AuthenticationFlow {
 
     @_documentation(visibility: private)
     @inlinable
-    public convenience init(issuerURL: URL,
-                            clientId: String,
-                            scope: some WhitespaceSeparated,
-                            redirectUri: URL,
-                            additionalParameters: [String: APIRequestArgument]? = nil) throws
+    public init(issuerURL: URL,
+                clientId: String,
+                scope: some WhitespaceSeparated,
+                redirectUri: URL,
+                additionalParameters: [String: APIRequestArgument]? = nil) throws
     {
         try self.init(client: OAuth2Client(issuerURL: issuerURL,
                                            clientId: clientId,
@@ -86,8 +86,8 @@ public class SessionTokenFlow: AuthenticationFlow {
     /// - Parameters:
     ///   - client: ``OAuth2Client`` client instance to authenticate with.
     ///   - additionalParameters: Optional query parameters to supply tot he authorization server for all requests from this flow.
-    public required init(client: OAuth2Client,
-                         additionalParameters: [String: APIRequestArgument]? = nil) throws
+    public init(client: OAuth2Client,
+                additionalParameters: [String: APIRequestArgument]? = nil) throws
     {
         guard client.configuration.redirectUri != nil else {
             throw OAuth2Error.missingRedirectUri
@@ -140,7 +140,7 @@ public class SessionTokenFlow: AuthenticationFlow {
     }
 
     // MARK: Private properties / methods
-    public let delegateCollection = DelegateCollection<Delegate>()
+    nonisolated public let delegateCollection = DelegateCollection<Delegate>()
     static var urlExchangeClass: SessionTokenFlowURLExchange.Type = SessionTokenFlowExchange.self
     
     static func reset() {
@@ -164,9 +164,9 @@ extension SessionTokenFlow {
     ///   - sessionToken: Session token to exchange.
     ///   - context: Optional context to provide when customizing the state parameter.
     ///   - completion: Completion invoked when a response is received.
-    public func start(with sessionToken: String,
-                      context: Context = .init(),
-                      completion: @escaping (Result<Token, OAuth2Error>) -> Void)
+    nonisolated public func start(with sessionToken: String,
+                                  context: Context = .init(),
+                                  completion: @escaping @Sendable (Result<Token, OAuth2Error>) -> Void)
     {
         Task {
             do {

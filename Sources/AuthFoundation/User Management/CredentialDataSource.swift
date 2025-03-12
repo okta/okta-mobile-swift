@@ -19,6 +19,7 @@ import FoundationNetworking
 /// Protocol that enables a developer to interact with, and override, the default behavior for the lifecycle of ``Credential`` instances.
 ///
 /// A default implementation is provided, but for advanced use-cases, you may implement this protocol yourself and assign an instance to the ``Credential/credentialDataSource`` property.
+@CredentialActor
 public protocol CredentialDataSource {
     /// Mandatory delegate property that is used to communicate when credentials within this data source are created or changed.
     var delegate: CredentialDataSourceDelegate? { get set }

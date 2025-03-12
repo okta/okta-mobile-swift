@@ -82,3 +82,5 @@ extension ClaimConvertable where Self: RawRepresentable {
         return nil
     }
 }
+
+extension ClaimConvertable where Self: APIRequestArgument {}

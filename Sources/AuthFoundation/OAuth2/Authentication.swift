@@ -30,7 +30,7 @@ public protocol AuthenticationDelegate: AnyObject {
 /// A protocol defining a type of authentication flow.
 ///
 /// OAuth2 supports a variety of authentication flows, each with its own capabilities, configuration, and limitations. To normalize these differences, the AuthenticationFlow protocol is used to represent the common capabilities provided by all flows.
-public protocol AuthenticationFlow: AnyObject, UsesDelegateCollection, IDTokenValidatorContext {
+public protocol AuthenticationFlow: Actor, UsesDelegateCollection, IDTokenValidatorContext {
     associatedtype Context: AuthenticationContext
     
     /// The object that stores the context and state for the current authentication session.
@@ -46,7 +46,7 @@ public protocol AuthenticationFlow: AnyObject, UsesDelegateCollection, IDTokenVa
     func reset()
     
     /// The collection of delegates this flow notifies for key authentication events.
-    var delegateCollection: DelegateCollection<Delegate> { get }
+    nonisolated var delegateCollection: DelegateCollection<Delegate> { get }
     
     /// Required minimal initializer shared by all authentication flows.
     init(client: OAuth2Client,
@@ -55,8 +55,8 @@ public protocol AuthenticationFlow: AnyObject, UsesDelegateCollection, IDTokenVa
 
 extension AuthenticationFlow {
     @_documentation(visibility: private)
-    public var nonce: String? {
-        guard let validatorContext = context as? IDTokenValidatorContext
+    nonisolated public var nonce: String? {
+        guard let validatorContext = withAsyncGroup({ await self.context }) as? IDTokenValidatorContext
         else {
             return nil
         }
@@ -65,8 +65,8 @@ extension AuthenticationFlow {
     }
 
     @_documentation(visibility: private)
-    public var maxAge: TimeInterval? {
-        guard let validatorContext = context as? IDTokenValidatorContext
+    nonisolated public var maxAge: TimeInterval? {
+        guard let validatorContext = withAsyncGroup({ await self.context }) as? IDTokenValidatorContext
         else {
             return nil
         }
@@ -118,7 +118,7 @@ extension AuthenticationContext {
 }
 
 /// Common ``AuthenticationContext`` implementation for common or generic implementations of ``AuthenticationFlow``.
-public struct StandardAuthenticationContext: AuthenticationContext {
+public struct StandardAuthenticationContext: Sendable, AuthenticationContext {
     /// The ACR values, if any, which should be requested by the client.
     @ClaimCollection
     public var acrValues: [String]?

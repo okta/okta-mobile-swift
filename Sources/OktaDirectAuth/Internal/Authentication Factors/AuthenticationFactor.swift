@@ -33,5 +33,5 @@ protocol AuthenticationFactor: HasTokenParameters {
     /// - Returns: A step handler capable of processing this authentication factor.
     func stepHandler(flow: DirectAuthenticationFlow,
                      openIdConfiguration: OpenIdConfiguration,
-                     loginHint: String?) throws -> any StepHandler
+                     loginHint: String?) async throws -> any StepHandler
 }

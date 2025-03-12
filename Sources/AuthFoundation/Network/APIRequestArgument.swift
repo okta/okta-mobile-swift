@@ -31,7 +31,7 @@ import Foundation
 /// - Float
 /// - NSString
 /// - NSNumber
-public protocol APIRequestArgument {
+public protocol APIRequestArgument: Sendable {
     /// The string representation of this request argument.
     var stringValue: String { get }
 }

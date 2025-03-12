@@ -15,7 +15,7 @@ import Foundation
 /// Describes an individual key from an authorization server, which can be used to validate tokens or encrypt content.
 ///
 /// > Warning: At this time, this class only supports RSA Public Keys.
-public struct JWK: Codable, Equatable, Identifiable, Hashable {
+public struct JWK: Sendable, Codable, Equatable, Identifiable, Hashable {
     /// The type of this key.
     public let type: KeyType
     
