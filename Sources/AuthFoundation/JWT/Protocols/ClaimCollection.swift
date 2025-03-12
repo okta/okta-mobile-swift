@@ -203,7 +203,7 @@ extension ClaimCollection where Container.RawValue == String {
 
 extension ClaimCollection {
     public init(rawValue: Container.RawValue) {
-        if Container.self is ExpressibleByNilLiteral {
+        if Container.self is (any ExpressibleByNilLiteral) {
             // swiftlint:disable:next force_unwrapping
             self.wrappedValue = Optional<Container>.none!
         } else {

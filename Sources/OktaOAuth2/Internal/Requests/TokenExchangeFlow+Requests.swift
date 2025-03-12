@@ -67,7 +67,7 @@ extension TokenExchangeFlow {
         
         let openIdConfiguration: OpenIdConfiguration
         let clientConfiguration: OAuth2Client.Configuration
-        let additionalParameters: [String: APIRequestArgument]?
+        let additionalParameters: [String: any APIRequestArgument]?
         let context: Flow.Context
         let tokens: [TokenType]
     }
@@ -80,7 +80,7 @@ extension TokenExchangeFlow.TokenRequest: OAuth2TokenRequest, OAuth2APIRequest, 
     var acceptsType: APIContentType? { .json }
     var category: OAuth2APIRequestCategory { .token }
     var tokenValidatorContext: any IDTokenValidatorContext { NullIDTokenValidatorContext }
-    var bodyParameters: [String: APIRequestArgument]? {
+    var bodyParameters: [String: any APIRequestArgument]? {
         var result = additionalParameters ?? [:]
         result.merge(clientConfiguration.parameters(for: category))
         result.merge(context.parameters(for: category))

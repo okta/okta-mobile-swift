@@ -41,7 +41,7 @@ extension DeviceAuthorizationFlow.AuthorizeRequest: APIRequest, APIRequestBody {
     var contentType: APIContentType? { .formEncoded }
     var acceptsType: APIContentType? { .json }
     var category: OAuth2APIRequestCategory { .authorization }
-    var bodyParameters: [String: APIRequestArgument]? {
+    var bodyParameters: [String: any APIRequestArgument]? {
         var result = additionalParameters ?? [:]
         result.merge(clientConfiguration.parameters(for: category))
         result.merge(context.parameters(for: category))
@@ -52,7 +52,7 @@ extension DeviceAuthorizationFlow.AuthorizeRequest: APIRequest, APIRequestBody {
 extension DeviceAuthorizationFlow.TokenRequest: OAuth2TokenRequest, OAuth2APIRequest, APIRequestBody, APIParsingContext {
     var category: OAuth2APIRequestCategory { .token }
     var tokenValidatorContext: any IDTokenValidatorContext { NullIDTokenValidatorContext }
-    var bodyParameters: [String: APIRequestArgument]? {
+    var bodyParameters: [String: any APIRequestArgument]? {
         var result = additionalParameters ?? [:]
         result.merge(clientConfiguration.parameters(for: category))
         result.merge(context.parameters(for: category))

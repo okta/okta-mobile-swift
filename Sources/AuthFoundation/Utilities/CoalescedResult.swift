@@ -19,7 +19,7 @@ import Foundation
 public actor CoalescedResult<T: Sendable>: Sendable {
     private let taskName: String?
     private var task: BackgroundTask?
-    private var continuations: [CheckedContinuation<T, Error>] = []
+    private var continuations: [CheckedContinuation<T, any Error>] = []
     private var _value: T?
     private var _isActive: Bool = false  {
         didSet {
@@ -70,9 +70,9 @@ public actor CoalescedResult<T: Sendable>: Sendable {
     ///   - didEnd: Optional closure to invoke with the result after the operation completes.
     /// - Returns: The value of type `T`.
     public func perform(reset: Bool = false,
-                        operation: () async throws -> T,
-                        willBegin: () -> Void = {},
-                        didEnd: (Result<T, Error>) -> Void = { _ in }) async throws -> T
+                        operation: @Sendable () async throws -> T,
+                        willBegin: @Sendable () -> Void = {},
+                        didEnd: @Sendable (Result<T, any Error>) -> Void = { _ in }) async throws -> T
     {
         if reset {
             _value = nil
@@ -103,7 +103,7 @@ public actor CoalescedResult<T: Sendable>: Sendable {
         }
     }
 
-    private func complete(with result: Result<T, any Error>, didEnd: (Result<T, Error>) -> Void) {
+    private func complete(with result: Result<T, any Error>, didEnd: (Result<T, any Error>) -> Void) {
         _isActive = false
 
         continuations.forEach { $0.resume(with: result) }

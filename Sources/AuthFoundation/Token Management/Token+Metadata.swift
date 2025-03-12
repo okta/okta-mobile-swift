@@ -33,7 +33,7 @@ extension Token {
             self.id = token.id
             self.tags = tags
             
-            var payload = [String: Any]()
+            var payload = [String: any Sendable]()
             var payloadData: Data?
             
             if let idToken = token.idToken {
@@ -44,7 +44,7 @@ extension Token {
             }
             
             if let payloadData = payloadData,
-               let payloadInfo = try? JSONSerialization.jsonObject(with: payloadData) as? [String: Any]
+               let payloadInfo = try? JSONSerialization.jsonObject(with: payloadData) as? [String: any Sendable]
             {
                 payload = payloadInfo
             }
@@ -64,12 +64,12 @@ extension Token {
 
 extension Token.Metadata {
     @_documentation(visibility: internal)
-    public static var jsonDecoder = JSONDecoder()
+    public static let jsonDecoder = JSONDecoder()
 }
 
 extension Token.Metadata: Codable {
     @_documentation(visibility: internal)
-    public init(from decoder: Decoder) throws {
+    public init(from decoder: any Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         
         self.payloadData = try container.decodeIfPresent(Data.self, forKey: .payload)
@@ -77,7 +77,7 @@ extension Token.Metadata: Codable {
         self.tags = try container.decode([String: String].self, forKey: .tags)
         
         if let data = self.payloadData,
-           let payload = try JSONSerialization.jsonObject(with: data) as? [String: Any]
+           let payload = try JSONSerialization.jsonObject(with: data) as? [String: any Sendable]
         {
             self.payload = payload
         } else {
@@ -86,7 +86,7 @@ extension Token.Metadata: Codable {
     }
     
     @_documentation(visibility: internal)
-    public func encode(to encoder: Encoder) throws {
+    public func encode(to encoder: any Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
         try container.encode(id, forKey: .id)
         try container.encode(tags, forKey: .tags)

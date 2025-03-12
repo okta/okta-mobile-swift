@@ -18,7 +18,7 @@ enum TestMigratorError: Error {
 }
 
 class TestMigrator: SDKVersionMigrator {
-    var error: Error?
+    var error: (any Error)?
     private(set) var migrationCalled: Bool = false
 
     func reset() {
@@ -37,9 +37,13 @@ class TestMigrator: SDKVersionMigrator {
     }
 }
 
-final class SDKVersionMigrationTests: XCTestCase {
+final class MigrationTests: XCTestCase {
+    override func setUpWithError() throws {
+        Migration.shared.resetMigrators()
+    }
+    
     override func tearDownWithError() throws {
-        SDKVersion.Migration.resetMigrators()
+        Migration.shared.resetMigrators()
     }
     
     func testMigratorRegistration() throws {
@@ -49,11 +53,11 @@ final class SDKVersionMigrationTests: XCTestCase {
         migratorA.needsMigration = false
         migratorB.needsMigration = false
         
-        let migration = SDKVersion.Migration(migrators: [migratorA, migratorB])
+        let migration = Migration(migrators: [migratorA, migratorB])
 
         // Ensure migration is not called when not needed
-        XCTAssertFalse(migration.needsMigration)
-        XCTAssertNoThrow(try migration.migrate())
+        XCTAssertFalse(migration.isMigrationNeeded)
+        XCTAssertNoThrow(try migration.migrateIfNeeded())
         XCTAssertFalse(migratorA.migrationCalled)
         XCTAssertFalse(migratorB.migrationCalled)
         migratorA.reset()
@@ -61,8 +65,8 @@ final class SDKVersionMigrationTests: XCTestCase {
         
         // Ensure only necessary migrators are called
         migratorA.needsMigration = true
-        XCTAssertTrue(migration.needsMigration)
-        XCTAssertNoThrow(try migration.migrate())
+        XCTAssertTrue(migration.isMigrationNeeded)
+        XCTAssertNoThrow(try migration.migrateIfNeeded())
         XCTAssertTrue(migratorA.migrationCalled)
         XCTAssertFalse(migratorB.migrationCalled)
         migratorA.reset()
@@ -72,8 +76,8 @@ final class SDKVersionMigrationTests: XCTestCase {
         migratorA.needsMigration = true
         migratorA.error = TestMigratorError.generic
         migratorB.needsMigration = true
-        XCTAssertTrue(migration.needsMigration)
-        XCTAssertThrowsError(try migration.migrate())
+        XCTAssertTrue(migration.isMigrationNeeded)
+        XCTAssertThrowsError(try migration.migrateIfNeeded())
         XCTAssertTrue(migratorA.migrationCalled)
         XCTAssertFalse(migratorB.migrationCalled)
         migratorA.reset()
@@ -81,13 +85,22 @@ final class SDKVersionMigrationTests: XCTestCase {
     }
     
     func testRegisteredMigrators() throws {
-        XCTAssertTrue(SDKVersion.Migration.registeredMigrators.isEmpty)
-        
+        XCTAssertTrue(Migration.shared.registeredMigrators.isEmpty)
+
+        // Test adding a migrator
         let migratorA = TestMigrator()
-        SDKVersion.register(migrator: migratorA)
-        XCTAssertTrue(SDKVersion.Migration.registeredMigrators.contains(where: { $0 === migratorA }))
-        
-        let migration = SDKVersion.Migration()
-        XCTAssertTrue(migration.migrators.contains(where: { $0 === migratorA }))
+        Migration.register(migrator: migratorA)
+        XCTAssertTrue(Migration.shared.registeredMigrators.contains(where: { $0 === migratorA }))
+        XCTAssertEqual(Migration.shared.registeredMigrators.count, 1)
+
+        // Ensure duplicate migrators aren't added
+        Migration.register(migrator: migratorA)
+        XCTAssertTrue(Migration.shared.registeredMigrators.contains(where: { $0 === migratorA }))
+        XCTAssertEqual(Migration.shared.registeredMigrators.count, 1)
+
+        // Allow multiple migrators of the same type
+        let migratorB = TestMigrator()
+        Migration.register(migrator: migratorB)
+        XCTAssertEqual(Migration.shared.registeredMigrators.count, 2)
     }
 }

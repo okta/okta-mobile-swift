@@ -15,16 +15,10 @@
 import Foundation
 import OktaOAuth2
 
-#if canImport(UIKit) || canImport(AppKit)
-
 #if canImport(UIKit)
 import UIKit
 #elseif canImport(AppKit)
 import AppKit
-#endif
-
-#if os(Linux)
-import FoundationNetworking
 #endif
 
 public enum WebAuthenticationError: Error {
@@ -32,14 +26,14 @@ public enum WebAuthenticationError: Error {
     case noSignOutFlowProvided
     case cannotStartBrowserSession
     case cannotComposeAuthenticationURL
-    case authenticationProvider(error: Error)
+    case authenticationProvider(error: any Error)
     case noAuthenticatorProviderResonse
     case serverError(_ error: OAuth2ServerError)
     case invalidRedirectScheme(_ scheme: String?)
     case userCancelledLogin
     case missingIdToken
     case oauth2(error: OAuth2Error)
-    case generic(error: Error)
+    case generic(error: any Error)
     case genericError(message: String)
 }
 
@@ -198,7 +192,7 @@ public final class WebAuthentication {
     
     /// Cancels the authentication session.
     public final func cancel() {
-        withAsyncGroup {
+        withIsolationSync {
             await self.signInFlow.reset()
             await self.signOutFlow?.reset()
         }
@@ -230,7 +224,7 @@ public final class WebAuthentication {
                             scope: ClaimCollection<[String]>,
                             redirectUri: URL,
                             logoutRedirectUri: URL? = nil,
-                            additionalParameters: [String: APIRequestArgument]? = nil) throws
+                            additionalParameters: [String: any APIRequestArgument]? = nil) throws
     {
         let client = OAuth2Client(issuerURL: issuerURL,
                                   clientId: clientId,
@@ -246,7 +240,7 @@ public final class WebAuthentication {
                             scope: some WhitespaceSeparated,
                             redirectUri: URL,
                             logoutRedirectUri: URL? = nil,
-                            additionalParameters: [String: APIRequestArgument]? = nil) throws
+                            additionalParameters: [String: any APIRequestArgument]? = nil) throws
     {
         let client = OAuth2Client(issuerURL: issuerURL,
                                   clientId: clientId,
@@ -261,7 +255,7 @@ public final class WebAuthentication {
                       additionalParameters: config.additionalParameters)
     }
     
-    convenience init(client: OAuth2Client, additionalParameters: [String: APIRequestArgument]?) throws {
+    convenience init(client: OAuth2Client, additionalParameters: [String: any APIRequestArgument]?) throws {
         let loginFlow = try AuthorizationCodeFlow(client: client,
                                                   additionalParameters: additionalParameters)
         let logoutFlow: SessionLogoutFlow?
@@ -299,14 +293,14 @@ public final class WebAuthentication {
         providerFactory = WebAuthentication.self
     }
     
-    var provider: WebAuthenticationProvider?
+    var provider: (any WebAuthenticationProvider)?
 }
 
 extension WebAuthentication: WebAuthenticationProviderFactory {
     nonisolated static func createWebAuthenticationProvider(
         for webAuth: WebAuthentication,
         from window: WebAuthentication.WindowAnchor?,
-        usesEphemeralSession: Bool = false) throws -> WebAuthenticationProvider?
+        usesEphemeralSession: Bool = false) throws -> (any WebAuthenticationProvider)?
     {
         try AuthenticationServicesProvider(from: window, usesEphemeralSession: usesEphemeralSession)
     }
@@ -388,4 +382,3 @@ extension WebAuthentication {
         }
     }
 }
-#endif

@@ -19,7 +19,7 @@ extension AuthorizationCodeFlow {
                 clientId: String,
                 scopes: String,
                 redirectUri: URL,
-                additionalParameters: [String: APIRequestArgument]? = nil)
+                additionalParameters: [String: any APIRequestArgument]? = nil)
     {
         self.init(issuerURL: issuer, clientId: clientId, scope: scopes, redirectUri: redirectUri)
     }
@@ -27,7 +27,7 @@ extension AuthorizationCodeFlow {
     @_documentation(visibility: private)
     @available(*, deprecated, renamed: "init(client:additionalParameters:)")
     public init(redirectUri: URL,
-                additionalParameters: [String: APIRequestArgument]?,
+                additionalParameters: [String: any APIRequestArgument]?,
                 client: OAuth2Client) throws
     {
         var configuration = client.configuration

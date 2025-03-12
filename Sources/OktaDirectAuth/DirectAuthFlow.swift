@@ -55,7 +55,7 @@ public enum DirectAuthenticationFlowError: Error {
     case server(error: OAuth2ServerError)
     
     /// Some other unknown error has been returned.
-    case other(error: Error)
+    case other(error: any Error)
 }
 
 /// An authentication flow that implements the Okta Direct Authentication API.
@@ -309,26 +309,18 @@ public actor DirectAuthenticationFlow: AuthenticationFlow {
     public let supportedGrantTypes: [GrantType]
 
     /// The context that stores the state for the current authentication session.
-    public internal(set) var context: Context?
+    nonisolated public var context: Context? {
+        withIsolationSync { await self._context }
+    }
 
     /// Any additional query string parameters you would like to supply to the authorization server for all requests from this flow.
-    public let additionalParameters: [String: APIRequestArgument]?
+    public let additionalParameters: [String: any APIRequestArgument]?
 
     /// Indicates whether or not this flow is currently in the process of authenticating a user.
-    public private(set) var isAuthenticating: Bool = false {
-        didSet {
-            guard oldValue != isAuthenticating else {
-                return
-            }
-            
-            if isAuthenticating {
-                delegateCollection.invoke { $0.authenticationStarted(flow: self) }
-            } else {
-                delegateCollection.invoke { $0.authenticationFinished(flow: self) }
-            }
-        }
+    nonisolated public var isAuthenticating: Bool {
+        withIsolationSync { await self._isAuthenticating } ?? false
     }
-    
+
     /// Convenience initializer to construct an authentication flow from variables.
     /// - Parameters:
     ///   - issuerURL: The issuer URL.
@@ -404,15 +396,19 @@ public actor DirectAuthenticationFlow: AuthenticationFlow {
                       with factor: PrimaryFactor,
                       context: Context = .init()) async throws -> DirectAuthenticationFlow.Status
     {
-        reset()
-        self.context = context
+        _isAuthenticating = true
+        _context = context
 
         return try await withExpression {
             try await runStep(loginHint: loginHint, with: factor)
         } success: { result in
-            delegateCollection.invoke { $0.authentication(flow: self, received: result) }
+            Task { @MainActor in
+                delegateCollection.invoke { $0.authentication(flow: self, received: result) }
+            }
         } failure: { error in
-            delegateCollection.invoke { $0.authentication(flow: self, received: OAuth2Error(error)) }
+            Task { @MainActor in
+                delegateCollection.invoke { $0.authentication(flow: self, received: OAuth2Error(error)) }
+            }
             finished()
         }
     }
@@ -426,20 +422,24 @@ public actor DirectAuthenticationFlow: AuthenticationFlow {
     public func resume(with factor: SecondaryFactor) async throws -> DirectAuthenticationFlow.Status {
         return try await withExpression {
             guard isAuthenticating,
-                  context != nil
+                  _context != nil
             else {
                 throw DirectAuthenticationFlowError.flowNotStarted
             }
 
             return try await runStep(with: factor)
         } success: { result in
-            delegateCollection.invoke { $0.authentication(flow: self, received: result) }
+            Task { @MainActor in
+                delegateCollection.invoke { $0.authentication(flow: self, received: result) }
+            }
 
             if case .success(_) = result {
                 finished()
             }
         } failure: { error in
-            delegateCollection.invoke { $0.authentication(flow: self, received: OAuth2Error(error)) }
+            Task { @MainActor in
+                delegateCollection.invoke { $0.authentication(flow: self, received: OAuth2Error(error)) }
+            }
         }
     }
 
@@ -451,27 +451,29 @@ public actor DirectAuthenticationFlow: AuthenticationFlow {
     /// - Returns: Status returned when the operation completes.
     public func resume(with factor: ContinuationFactor) async throws -> DirectAuthenticationFlow.Status {
         return try await withExpression {
-            guard context != nil else {
+            guard _context != nil else {
                 throw DirectAuthenticationFlowError.flowNotStarted
             }
             
             return try await runStep(with: factor)
         } success: { result in
-            delegateCollection.invoke { $0.authentication(flow: self, received: result) }
+            Task { @MainActor in
+                delegateCollection.invoke { $0.authentication(flow: self, received: result) }
+            }
 
             if case .success(_) = result {
                 finished()
             }
         } failure: { error in
-            delegateCollection.invoke { $0.authentication(flow: self, received: OAuth2Error(error)) }
+            Task { @MainActor in
+                delegateCollection.invoke { $0.authentication(flow: self, received: OAuth2Error(error)) }
+            }
         }
     }
     
     func runStep<Factor: AuthenticationFactor>(loginHint: String? = nil,
                                                with factor: Factor) async throws -> DirectAuthenticationFlow.Status
     {
-        isAuthenticating = true
-        
         let stepHandler = try await factor.stepHandler(
             flow: self,
             openIdConfiguration: try await client.openIdConfiguration(),
@@ -481,7 +483,7 @@ public actor DirectAuthenticationFlow: AuthenticationFlow {
     }
 
     func process(stepHandler: any StepHandler) async throws -> Status {
-        guard let oldContext = context else {
+        guard let oldContext = _context else {
             throw DirectAuthenticationFlowError.inconsistentContextState
         }
 
@@ -496,13 +498,13 @@ public actor DirectAuthenticationFlow: AuthenticationFlow {
             }
         }
 
-        guard context == oldContext else {
+        guard _context == oldContext else {
             throw DirectAuthenticationFlowError.inconsistentContextState
         }
 
         var newContext = oldContext
         newContext.currentStatus = status
-        context = newContext
+        _context = newContext
 
         return status
     }
@@ -510,16 +512,44 @@ public actor DirectAuthenticationFlow: AuthenticationFlow {
     /// Resets the authentication session.
     public func reset() {
         finished()
-        context = nil
+        _context = nil
     }
 
     func finished() {
-        isAuthenticating = false
+        _isAuthenticating = false
     }
     
     // MARK: Private properties / methods
-    nonisolated public let delegateCollection = DelegateCollection<DirectAuthenticationFlowDelegate>()
+    nonisolated public let delegateCollection = DelegateCollection<any DirectAuthenticationFlowDelegate>()
+
+    private var _isAuthenticating: Bool = false {
+        didSet {
+            guard _isAuthenticating != oldValue else {
+                return
+            }
+
+            let flowStarted = _isAuthenticating
+            Task { @MainActor in
+                if flowStarted {
+                    delegateCollection.invoke { $0.authenticationStarted(flow: self) }
+                } else {
+                    delegateCollection.invoke { $0.authenticationFinished(flow: self) }
+                }
+            }
+        }
+    }
+
+    private(set) var _context: Context?
 }
+
+#if canImport(XCTest)
+// Only used for testing
+extension DirectAuthenticationFlow {
+    func setContext(_ context: Context?) async {
+        _context = context
+    }
+}
+#endif
 
 @available(iOS 13.0, tvOS 13.0, macOS 10.15, watchOS 6, *)
 extension DirectAuthenticationFlow {
@@ -532,7 +562,7 @@ extension DirectAuthenticationFlow {
     public func start(_ loginHint: String,
                       with factor: PrimaryFactor,
                       context: Context = .init(),
-                      completion: @escaping (Result<Status, DirectAuthenticationFlowError>) -> Void)
+                      completion: @Sendable @escaping (Result<Status, DirectAuthenticationFlowError>) -> Void)
     {
         Task {
             do {
@@ -550,7 +580,7 @@ extension DirectAuthenticationFlow {
     ///   - factor: The secondary factor to use when authenticating the user.
     ///   - completion: Completion block called when the operation completes.
     public func resume(with factor: SecondaryFactor,
-                       completion: @escaping (Result<Status, DirectAuthenticationFlowError>) -> Void)
+                       completion: @Sendable @escaping (Result<Status, DirectAuthenticationFlowError>) -> Void)
     {
         Task {
             do {
@@ -568,7 +598,7 @@ extension DirectAuthenticationFlow {
     ///   - factor: The continuation factor to use when authenticating the user.
     ///   - completion: Completion block called when the operation completes.
     public func resume(with factor: ContinuationFactor,
-                       completion: @escaping (Result<Status, DirectAuthenticationFlowError>) -> Void)
+                       completion: @Sendable @escaping (Result<Status, DirectAuthenticationFlowError>) -> Void)
     {
         Task {
             do {

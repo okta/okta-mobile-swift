@@ -15,10 +15,10 @@ import Foundation
 #if canImport(LocalAuthentication) && !os(tvOS)
 import LocalAuthentication
 
-extension LAContext: TokenAuthenticationContext {}
+extension LAContext: @unchecked @retroactive Sendable, TokenAuthenticationContext {}
 #endif
 
-public protocol TokenAuthenticationContext {}
+public protocol TokenAuthenticationContext: Sendable {}
 
 /// Protocol used to customize the way tokens are stored, updated, and removed throughout the lifecycle of an application.
 ///
@@ -26,9 +26,9 @@ public protocol TokenAuthenticationContext {}
 ///
 /// > Warning: When implementing a custom token storage class, it's vitally important that you do not directly invoke any of these methods yourself. These methods are intended to be called on-demand by the other AuthFoundation classes, and the behavior is undefined if these methods are called directly by the developer.
 @CredentialActor
-public protocol TokenStorage {
+public protocol TokenStorage: Sendable {
     /// Mandatory delegate property that is used to communicate changes to the token store to the rest of the user management system.
-    var delegate: TokenStorageDelegate? { get set }
+    var delegate: (any TokenStorageDelegate)? { get set }
     
     /// Accessor for defining which token shall be the default.
     ///
@@ -70,27 +70,27 @@ public protocol TokenStorage {
     
     /// Returns a token for the given ID.
     /// - Returns: Token that matches the given ID.
-    func get(token id: String, prompt: String?, authenticationContext: TokenAuthenticationContext?) throws -> Token
+    func get(token id: String, prompt: String?, authenticationContext: (any TokenAuthenticationContext)?) throws -> Token
 }
 
 /// Protocol that custom ``TokenStorage`` instances are required to communicate changes to.
 @CredentialActor
 public protocol TokenStorageDelegate: AnyObject {
     /// Sent when the default token has been changed.
-    func token(storage: TokenStorage, defaultChanged id: String?)
+    func token(storage: any TokenStorage, defaultChanged id: String?)
     
     /// Sent when a new token has been added.
     ///
     /// > Important: This message should only be sent when a token is actually new. If the token is semantically identical to another one already in storage, the ``token(storage:replaced:with:)`` message should be sent instead.
-    func token(storage: TokenStorage, added id: String, token: Token)
+    func token(storage: any TokenStorage, added id: String, token: Token)
     
     /// Sent when a token has been removed from storage.
-    func token(storage: TokenStorage, removed id: String)
+    func token(storage: any TokenStorage, removed id: String)
     
     /// Sent when a token has been updated within storage.
     ///
     /// There are circumstances when a token that already exists within storage needs to be replaced or updated. For example, when a token is refreshed, even though the new token differs, it represents the same resources and capabilities as the previous token.
     ///
     /// As a result, this message is used to convey that a token has been updated, but not removed or newly added.
-    func token(storage: TokenStorage, replaced id: String, with newToken: Token)
+    func token(storage: any TokenStorage, replaced id: String, with newToken: Token)
 }

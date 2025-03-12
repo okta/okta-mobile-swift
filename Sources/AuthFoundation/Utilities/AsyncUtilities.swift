@@ -41,6 +41,14 @@ final public actor CredentialActor {
 }
 
 /// Convenience function that wraps an expression so that results, or thrown errors, can be propagated to the appropriate underlying delegate functions as necessary.
+///
+/// The implementation uses several Swift features to indicate to the compiler how to address actor isolation and handling of references to `self`. These mechanisms are used throughout the Swift Foundation Library, and while being subtle, are important to communicate task ownership.
+///
+/// For more information, see the following resources:
+/// * https://developer.apple.com/forums/thread/761150
+/// * https://github.com/swiftlang/swift/blob/main/docs/ReferenceGuides/UnderscoredAttributes.md#_inheritactorcontext
+/// * https://github.com/swiftlang/swift-evolution/blob/main/proposals/0431-isolated-any-functions.md
+/// 
 /// - Parameters:
 ///   - expression: Expression to invoke which should be wrapped by the delegate collection
 ///   - success: Closure invoked when the expression is successful
@@ -48,23 +56,30 @@ final public actor CredentialActor {
 /// - Returns: The result when the expression is successful
 @inlinable
 @_documentation(visibility: private)
-public func withExpression<T>(_ expression: () async throws -> T,
-                              success: (T) -> Void = { _ in },
-                              failure: (any Error) throws -> Void = { _ in },
-                              finally: () -> Void = {}) async rethrows -> T
+public func withExpression<T: Sendable>(
+    @_inheritActorContext @_implicitSelfCapture _ expression: @isolated(any) @Sendable () async throws -> T,
+    @_inheritActorContext @_implicitSelfCapture success: @isolated(any) @Sendable (T) -> Void = { _ in },
+    @_inheritActorContext @_implicitSelfCapture failure: @isolated(any) @Sendable (any Error) throws -> Void = { _ in },
+    @_inheritActorContext @_implicitSelfCapture finally: @isolated(any) @Sendable () -> Void = {}) async rethrows -> T
 {
-    defer { finally() }
     do {
         let result = try await expression()
-        success(result)
+        await success(result)
+        await finally()
         return result
     } catch {
-        try failure(error)
+        do {
+            try await failure(error)
+        } catch {
+            await finally()
+            throw error
+        }
+        await finally()
         throw error
     }
 }
 
-/// Executes a throwing asynchronous task within a synchronous context.
+/// Executes an isolated asynchronous throwing task within a synchronous context.
 ///
 /// This utilizes a dispatch group to perform an async operation while ensuring the value can be returned synchronously.
 /// - Parameters:
@@ -74,10 +89,10 @@ public func withExpression<T>(_ expression: () async throws -> T,
 /// - Returns: Return value from the block.
 @inlinable
 @_documentation(visibility: private)
-public func withAsyncThrowingGroup<T: Sendable>(priority: TaskPriority? = nil, _ block: @escaping () async throws -> T) throws -> T {
+public func withIsolationSyncThrowing<T: Sendable>(priority: TaskPriority? = nil, @_inheritActorContext _ block: @Sendable @escaping () async throws -> T) throws -> T {
     let group = DispatchGroup()
     nonisolated(unsafe) var result: Result<T, any Error>?
-    
+
     group.enter()
     Task(priority: priority) {
         defer { group.leave() }
@@ -100,7 +115,7 @@ public func withAsyncThrowingGroup<T: Sendable>(priority: TaskPriority? = nil, _
     }
 }
 
-/// Executes an asynchronous task within a synchronous context.
+/// Executes an isolated asynchronous task within a synchronous context.
 ///
 /// This utilizes a dispatch group to perform an async operation while ensuring the value can be returned synchronously.
 ///
@@ -111,7 +126,9 @@ public func withAsyncThrowingGroup<T: Sendable>(priority: TaskPriority? = nil, _
 /// - Returns: Return value from the block.
 @inlinable
 @_documentation(visibility: private)
-public func withAsyncGroup<T: Sendable>(priority: TaskPriority? = nil, _ block: @escaping () async -> T?) -> T? {
+public func withIsolationSync<T: Sendable>(priority: TaskPriority? = nil,
+                                           @_inheritActorContext _ block: @Sendable @escaping () async -> T?) -> T?
+{
     let group = DispatchGroup()
     nonisolated(unsafe) var result: T?
     

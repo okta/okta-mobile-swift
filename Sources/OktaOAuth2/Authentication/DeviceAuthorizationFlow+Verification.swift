@@ -46,7 +46,7 @@ extension DeviceAuthorizationFlow {
         }
         
         @_documentation(visibility: internal)
-        public init(from decoder: Decoder) throws {
+        public init(from decoder: any Decoder) throws {
             let container = try decoder.container(keyedBy: CodingKeys.self)
             issuedAt = try container.decodeIfPresent(Date.self, forKey: .issuedAt) ?? Date()
             deviceCode = try container.decode(String.self, forKey: .deviceCode)

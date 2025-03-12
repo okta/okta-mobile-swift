@@ -84,5 +84,5 @@ public struct WebAuthn {
 }
 
 extension WebAuthn.CredentialRequestOptions: JSONDecodable {
-    public static var jsonDecoder = JSONDecoder()
+    public static let jsonDecoder = JSONDecoder()
 }

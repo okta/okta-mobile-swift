@@ -26,7 +26,7 @@ final class FactorPropertyTests: XCTestCase {
     }
     
     func testPrimaryTokenParameters() throws {
-        var parameters: [String: APIRequestArgument] = [:]
+        var parameters: [String: any APIRequestArgument] = [:]
         
         parameters = PrimaryFactor.password("foo").tokenParameters(currentStatus: nil)
         XCTAssertEqual(parameters.stringComponents, [
@@ -52,7 +52,7 @@ final class FactorPropertyTests: XCTestCase {
     }
     
     func testSecondaryTokenParameters() throws {
-        var parameters: [String: APIRequestArgument] = [:]
+        var parameters: [String: any APIRequestArgument] = [:]
 
         parameters = SecondaryFactor.otp(code: "123456").tokenParameters(currentStatus: nil)
         XCTAssertEqual(parameters.stringComponents, [
@@ -84,7 +84,7 @@ final class FactorPropertyTests: XCTestCase {
     }
     
     func testContinuationTokenParameters() throws {
-        var parameters: [String: APIRequestArgument] = [:]
+        var parameters: [String: any APIRequestArgument] = [:]
         
         parameters = ContinuationFactor.prompt(code: "123456")
             .tokenParameters(currentStatus: .continuation(

@@ -45,7 +45,7 @@ final class DirectAuth1FATests: XCTestCase {
     func testUserAndPassword() async throws {
         // Ensure the initial state
         XCTAssertFalse(flow.isAuthenticating)
-        
+
         // Begin
         let state = try await flow.start("jane.doe@example.com",
                                          with: .password("SuperSecret"))
@@ -65,11 +65,11 @@ final class DirectAuth1FATests: XCTestCase {
     func testUserAndOTP() async throws {
         // Ensure the initial state
         XCTAssertFalse(flow.isAuthenticating)
-        
+
         // Begin
         let state = try await flow.start("jane.doe@example.com",
                                          with: .otp(code: "123456"))
-        
+
         XCTAssertFalse(flow.isAuthenticating)
         switch state {
         case .success(let token):
@@ -85,7 +85,7 @@ final class DirectAuth1FATests: XCTestCase {
     func testUserAndOOBPush() async throws {
         // Ensure the initial state
         XCTAssertFalse(flow.isAuthenticating)
-        
+
         // Begin
         let state = try await flow.start("jane.doe@example.com",
                                          with: .oob(channel: .push))

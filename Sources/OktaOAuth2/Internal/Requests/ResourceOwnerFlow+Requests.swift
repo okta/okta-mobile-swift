@@ -19,7 +19,7 @@ extension ResourceOwnerFlow {
         
         let openIdConfiguration: OpenIdConfiguration
         let clientConfiguration: OAuth2Client.Configuration
-        let additionalParameters: [String: APIRequestArgument]?
+        let additionalParameters: [String: any APIRequestArgument]?
         let context: Flow.Context
         let username: String
         let password: String
@@ -29,7 +29,7 @@ extension ResourceOwnerFlow {
 extension ResourceOwnerFlow.TokenRequest: OAuth2TokenRequest, OAuth2APIRequest, APIRequestBody, APIParsingContext {
     var category: AuthFoundation.OAuth2APIRequestCategory { .token }
     var tokenValidatorContext: any IDTokenValidatorContext { NullIDTokenValidatorContext }
-    var bodyParameters: [String: APIRequestArgument]? {
+    var bodyParameters: [String: any APIRequestArgument]? {
         var result = additionalParameters ?? [:]
         result.merge(clientConfiguration.parameters(for: category))
         result.merge(context.parameters(for: category))

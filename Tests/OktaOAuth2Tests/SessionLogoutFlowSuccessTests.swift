@@ -58,7 +58,7 @@ final class SessionLogoutFlowSuccessTests: XCTestCase {
         flow = SessionLogoutFlow(client: client)
     }
     
-    func testWithDelegate() throws {
+    func testWithDelegate() async throws {
         let delegate = SessionLogoutFlowDelegateRecorder()
         flow.add(delegate: delegate)
         
@@ -68,17 +68,10 @@ final class SessionLogoutFlowSuccessTests: XCTestCase {
         XCTAssertNil(delegate.error)
         
         let context = SessionLogoutFlow.Context(idToken: logoutIDToken, state: state)
-        let resumeExpection = expectation(description: "Expect success")
-        
-        flow.start(with: context) { result in
-            XCTAssertTrue(self.flow.inProgress)
-            XCTAssertEqual(self.flow.context?.state, context.state)
-            resumeExpection.fulfill()
-        }
-        
-        wait(for: [resumeExpection], timeout: 1)
+        let url = try await flow.start(with: context)
+        await MainActor.yield()
 
-        XCTAssertEqual(delegate.url?.absoluteString, """
+        XCTAssertEqual(url.absoluteString, """
                             https://example.okta.com/oauth2/v1/logout\
                             ?client_id=clientId\
                             &id_token_hint=\(logoutIDToken)\
@@ -86,87 +79,81 @@ final class SessionLogoutFlowSuccessTests: XCTestCase {
                             &state=\(state)\
                             #\(delegate.fragment)
                             """)
+        XCTAssertEqual(delegate.url, url)
         XCTAssertNil(delegate.error)
         
         XCTAssertFalse(flow.inProgress)
     }
-    
-    func testWithBlocks() throws {
+
+    func testWithBlocks() async throws {
         XCTAssertNil(flow.context)
         XCTAssertFalse(flow.inProgress)
-        
+
+        let expectedLogoutIDToken = logoutIDToken
+        let expectedLogoutRedirectUri = logoutRedirectUri
+        let expectedState = state
         let context = SessionLogoutFlow.Context(idToken: logoutIDToken, state: state)
         let resumeExpection = expectation(description: "Expect success")
-        
+
+        let flow = flow!
         flow.start(with: context) { result in
-            switch result {
-            case .success(let url):
-                XCTAssertEqual(url, self.flow.context?.logoutURL)
-            case .failure:
-                XCTFail()
-            }
-            
-            XCTAssertTrue(self.flow.inProgress)
-            
-            let newContext = self.flow.context
-            XCTAssertEqual(newContext?.state, context.state)
-            XCTAssertNotNil(newContext?.logoutURL)
-            XCTAssertEqual(newContext?.logoutURL?.absoluteString, """
+            Task {
+                switch result {
+                case .success(let url):
+                    let logoutURL = flow.context?.logoutURL
+                    XCTAssertEqual(url, logoutURL)
+                case .failure:
+                    XCTFail()
+                }
+
+                XCTAssertEqual(flow.context?.state, context.state)
+                XCTAssertNotNil(flow.context?.logoutURL)
+                XCTAssertEqual(flow.context?.logoutURL?.absoluteString, """
                                 https://example.okta.com/oauth2/v1/logout\
                                 ?client_id=clientId\
-                                &id_token_hint=\(self.logoutIDToken)\
-                                &post_logout_redirect_uri=\(self.logoutRedirectUri.absoluteString)\
-                                &state=\(self.state)
+                                &id_token_hint=\(expectedLogoutIDToken)\
+                                &post_logout_redirect_uri=\(expectedLogoutRedirectUri.absoluteString)\
+                                &state=\(expectedState)
                                 """)
-            resumeExpection.fulfill()
+                resumeExpection.fulfill()
+            }
         }
-        
-        wait(for: [resumeExpection], timeout: 1)
+        await fulfillment(of: [resumeExpection], timeout: 1)
 
         let newContext = try XCTUnwrap(flow.context)
         XCTAssertNotEqual(newContext.logoutURL, context.logoutURL)
         XCTAssertFalse(flow.inProgress)
     }
 
-    func testPromptWithBlocks() throws {
+    func testPromptAsync() async throws {
         XCTAssertNil(flow.context)
         XCTAssertFalse(flow.inProgress)
-        
+
         let context = SessionLogoutFlow.Context(idToken: logoutIDToken,
                                                 state: state,
                                                 additionalParameters: ["prompt": "login"])
-        let resumeExpection = expectation(description: "Expect success")
-        
-        flow.start(with: context) { result in
-            switch result {
-            case .success(let url):
-                XCTAssertEqual(url.absoluteString, """
+        let url = try await flow.start(with: context)
+        XCTAssertEqual(url.absoluteString, """
                                https://example.okta.com/oauth2/v1/logout\
                                ?client_id=clientId\
                                &id_token_hint=\(self.logoutIDToken)\
                                &prompt=login\
                                &state=\(self.state)
                                """)
-            case .failure:
-                XCTFail()
-            }
-
-            resumeExpection.fulfill()
-        }
-        
-        wait(for: [resumeExpection], timeout: 1)
     }
     
     func testWithAsync() async throws {
         XCTAssertNil(flow.context)
         XCTAssertFalse(flow.inProgress)
-        
+
         let context = SessionLogoutFlow.Context(idToken: logoutIDToken, state: state)
         
         let logoutUrl = try await flow.start(with: context)
-        
-        let newContext = try XCTUnwrap(flow.context)
-        XCTAssertNotEqual(newContext.logoutURL, context.logoutURL)
+        XCTAssertEqual(logoutUrl, self.flow.context?.logoutURL)
+
+        XCTAssertNotEqual(flow.context?.logoutURL, context.logoutURL)
+        XCTAssertFalse(flow.inProgress)
+        XCTAssertNotEqual(flow.context?.logoutURL, context.logoutURL)
         XCTAssertEqual(logoutUrl.absoluteString, """
                             https://example.okta.com/oauth2/v1/logout\
                             ?client_id=clientId\

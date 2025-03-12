@@ -48,7 +48,7 @@ public enum OAuth2Error: Error {
     case missingOpenIdConfiguration(attribute: String)
     
     /// The given nested error was thrown.
-    case error(_ error: Error)
+    case error(_ error: any Error)
     
     /// Cannot revoke the given token type.
     case cannotRevoke(type: Token.RevokeType)
@@ -119,7 +119,7 @@ extension OAuth2Error: LocalizedError {
                 name)
 
         case .error(let error):
-            if let error = error as? LocalizedError {
+            if let error = error as? any LocalizedError {
                 return error.localizedDescription
             }
             let errorString = String(describing: error)

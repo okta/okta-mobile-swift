@@ -27,9 +27,9 @@ extension DirectAuthenticationFlow.PrimaryFactor {
 extension DirectAuthenticationFlow.PrimaryFactor: AuthenticationFactor {
     func stepHandler(flow: DirectAuthenticationFlow,
                      openIdConfiguration: OpenIdConfiguration,
-                     loginHint: String? = nil) async throws -> StepHandler
+                     loginHint: String? = nil) async throws -> any StepHandler
     {
-        guard let context = await flow.context else {
+        guard let context = await flow._context else {
             throw DirectAuthenticationFlowError.inconsistentContextState
         }
         
@@ -78,8 +78,8 @@ extension DirectAuthenticationFlow.PrimaryFactor: AuthenticationFactor {
 }
 
 extension DirectAuthenticationFlow.PrimaryFactor: HasTokenParameters {
-    func tokenParameters(currentStatus: DirectAuthenticationFlow.Status?) -> [String: APIRequestArgument] {
-        var result: [String: APIRequestArgument] = [
+    func tokenParameters(currentStatus: DirectAuthenticationFlow.Status?) -> [String: any APIRequestArgument] {
+        var result: [String: any APIRequestArgument] = [
             "grant_type": grantType(currentStatus: currentStatus),
         ]
         

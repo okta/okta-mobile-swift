@@ -31,7 +31,7 @@ public actor APIRequestPollingHandler<RequestType: Sendable, ResultType: Sendabl
         case `continue`
         case continueWith(request: RequestType? = nil, interval: TimeInterval? = nil)
         case success(ResultType)
-        case failure(Error)
+        case failure(any Error)
     }
 
     public private(set) var isActive: Bool = false
@@ -82,7 +82,7 @@ public actor APIRequestPollingHandler<RequestType: Sendable, ResultType: Sendabl
         var delay = delay ?? 0.0
         pollLoop: while isActive {
             if delay > 0 {
-                try await Task.sleep(nanoseconds: UInt64(delay * _APIClientRetryDelayTimeIntervalToNanoseconds))
+                try await Task.sleep(nanoseconds: UInt64(delay * _APIClientRetryDelayTimeIntervalToNanoseconds.wrappedValue))
             } else {
                 delay = interval
             }

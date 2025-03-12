@@ -57,6 +57,7 @@ commands:
             fi
             echo "export DESTINATION=\"$DESTINATION\"" >> "$BASH_ENV"
             source "$BASH_ENV"
+            echo "Running on $DESTINATION"
       - run:
           name: "Build <<parameters.scheme>>"
           environment:

@@ -21,27 +21,19 @@ public actor JWTAuthorizationFlow: AuthenticationFlow {
     public let client: OAuth2Client
     
     /// The context that stores the state for the current authentication session.
-    public private(set) var context: Context?
+    nonisolated public var context: Context? {
+        withIsolationSync { await self._context }
+    }
 
     /// Any additional query string parameters you would like to supply to the authorization server for all requests from this flow.
-    public let additionalParameters: [String: APIRequestArgument]?
+    public let additionalParameters: [String: any APIRequestArgument]?
 
     /// Indicates whether or not this flow is currently in the process of authenticating a user.
     /// ``JWTAuthorizationFlow/init(issuerURL:clientId:scope:additionalParameters:)``
-    public private(set) var isAuthenticating: Bool = false {
-        didSet {
-            guard oldValue != isAuthenticating else {
-                return
-            }
-            
-            if isAuthenticating {
-                delegateCollection.invoke { $0.authenticationStarted(flow: self) }
-            } else {
-                delegateCollection.invoke { $0.authenticationFinished(flow: self) }
-            }
-        }
+    nonisolated public var isAuthenticating: Bool {
+        withIsolationSync { await self._isAuthenticating } ?? false
     }
-    
+
     /// Convenience initializer to construct an authentication flow from variables.
     /// - Parameters:
     ///   - issuerURL: The issuer URL.
@@ -96,8 +88,8 @@ public actor JWTAuthorizationFlow: AuthenticationFlow {
     /// - Returns: The token resulting from signing in.
     public func start(with assertion: JWT, context: Context = .init()) async throws -> Token
     {
-        isAuthenticating = true
-        self.context = context
+        _isAuthenticating = true
+        _context = context
         
         return try await withExpression {
             let request = TokenRequest(openIdConfiguration: try await client.openIdConfiguration(),
@@ -107,9 +99,13 @@ public actor JWTAuthorizationFlow: AuthenticationFlow {
                                        assertion: assertion)
             return try await client.exchange(token: request).result
         } success: { result in
-            delegateCollection.invoke { $0.authentication(flow: self, received: result) }
+            Task { @MainActor in
+                delegateCollection.invoke { $0.authentication(flow: self, received: result) }
+            }
         } failure: { error in
-            delegateCollection.invoke { $0.authentication(flow: self, received: OAuth2Error(error)) }
+            Task { @MainActor in
+                delegateCollection.invoke { $0.authentication(flow: self, received: OAuth2Error(error)) }
+            }
         } finally: {
             finished()
         }
@@ -118,15 +114,33 @@ public actor JWTAuthorizationFlow: AuthenticationFlow {
     /// Resets the flow for later reuse.
     public func reset() {
         finished()
-        context = nil
+        _context = nil
     }
     
     func finished() {
-        isAuthenticating = false
+        _isAuthenticating = false
     }
 
     // MARK: Private properties / methods
-    nonisolated public let delegateCollection = DelegateCollection<AuthenticationDelegate>()
+    nonisolated public let delegateCollection = DelegateCollection<any AuthenticationDelegate>()
+
+    private var _context: Context?
+    private var _isAuthenticating: Bool = false {
+        didSet {
+            guard _isAuthenticating != oldValue else {
+                return
+            }
+
+            let flowStarted = _isAuthenticating
+            Task { @MainActor in
+                if flowStarted {
+                    delegateCollection.invoke { $0.authenticationStarted(flow: self) }
+                } else {
+                    delegateCollection.invoke { $0.authenticationFinished(flow: self) }
+                }
+            }
+        }
+    }
 }
 
 extension JWTAuthorizationFlow {

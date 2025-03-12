@@ -12,7 +12,6 @@
 
 import Foundation
 
-#if canImport(UIKit) || canImport(AppKit)
 #if !SWIFT_PACKAGE
 private let sharedLocalizationBundle: Bundle = {
     Bundle(for: WebAuthentication.self)
@@ -28,4 +27,3 @@ extension Bundle {
         #endif
     }
 }
-#endif

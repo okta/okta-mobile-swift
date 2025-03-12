@@ -13,7 +13,7 @@
 import Foundation
 
 extension Token {
-    public init(from decoder: Decoder) throws {
+    public init(from decoder: any Decoder) throws {
         // Initialize defaults supplied from the decoder's userInfo dictionary
         var id: String = decoder.userInfo[.tokenId] as? String ?? UUID().uuidString
         var issuedAt: Date = Date.nowCoordinated

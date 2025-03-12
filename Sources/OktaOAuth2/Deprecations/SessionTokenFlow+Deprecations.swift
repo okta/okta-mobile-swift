@@ -10,31 +10,32 @@
 // See the License for the specific language governing permissions and limitations under the License.
 //
 
+#if canImport(UIKit) || canImport(AppKit)
 import Foundation
 
-extension ResourceOwnerFlow {
+extension SessionTokenFlow {
     @_documentation(visibility: private)
     @available(*, deprecated, renamed: "init(issuerURL:clientId:scope:redirectUri:additionalParameters:)")
     public init(issuer: URL,
                 clientId: String,
                 scopes: String,
                 redirectUri: URL,
-                additionalParameters: [String: APIRequestArgument]? = nil)
+                additionalParameters: [String: any APIRequestArgument]? = nil) throws
     {
-        self.init(issuerURL: issuer, clientId: clientId, scope: scopes, additionalParameters: additionalParameters)
+        try self.init(issuerURL: issuer, clientId: clientId, scope: scopes, redirectUri: redirectUri, additionalParameters: additionalParameters)
     }
 
     @_documentation(visibility: private)
     @available(*, deprecated, renamed: "init(client:additionalParameters:)")
     public init(redirectUri: URL,
-                additionalParameters: [String: APIRequestArgument]? = nil,
-                client: OAuth2Client)
+                additionalParameters: [String: any APIRequestArgument]? = nil,
+                client: OAuth2Client) throws
     {
         var configuration = client.configuration
         configuration.redirectUri = redirectUri
 
-        self.init(client: OAuth2Client(configuration, session: client.session),
-                  additionalParameters: additionalParameters)
+        try self.init(client: OAuth2Client(configuration, session: client.session),
+                      additionalParameters: additionalParameters)
     }
 }
 
@@ -50,3 +51,4 @@ extension OAuth2Client {
                                     additionalParameters: additionalParameters)
     }
 }
+#endif

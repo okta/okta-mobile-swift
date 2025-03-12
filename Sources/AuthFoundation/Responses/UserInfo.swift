@@ -27,12 +27,12 @@ public struct UserInfo: Sendable, Codable, JSONClaimContainer {
     }
     
     @_documentation(visibility: internal)
-    public init(from decoder: Decoder) throws {
+    public init(from decoder: any Decoder) throws {
         self.init(try Self.decodePayload(from: decoder))
     }
 }
 
 extension UserInfo {
     @_documentation(visibility: internal)
-    public static var jsonDecoder = JSONDecoder()
+    public static let jsonDecoder = JSONDecoder()
 }
